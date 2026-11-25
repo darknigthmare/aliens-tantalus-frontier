@@ -1,0 +1,232 @@
+{
+  "suite": "chromium-v0.2-regression-on-v0.3",
+  "method": "set_content + explicit in-memory localStorage double",
+  "nativeBrowserNavigation": false,
+  "notes": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1",
+    "Intervalle médian sur 79 frames en contexte test : 16.7 ms"
+  ],
+  "tests": 35,
+  "passed": 35,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Menu chargé",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Déplacement clavier",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Déplacement profondeur",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Parler à Jordan par maintien réel",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Transcription récupérée par touche E",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Document physique affiché",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Carnet masque les transcriptions non trouvées",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Recherche sans résultat gérée",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Dérivation électrique ouverte par interaction",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Maintenance en pause sans pénalité",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Annuler ne valide pas la commande",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Réglage conservé après fermeture",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Commutateurs et contacteur valident un seul objectif",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vanne coupe physiquement la dérivation",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Purge utilise une jauge distincte",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Pression réglée et verrouillée",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Registre équipage distingue les contacts perdus",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Programme médical en quatre étapes",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Ripley portée après incident médical",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Flamme interdite pendant le portage",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Transmission possède un accord de porteuse",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Dernière transmission clôt la campagne",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Difficulté réglable",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Export schema 3 avec progression",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Import reprend le carnet",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Autres sauvegardes préservées",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Reprise au checkpoint conserve progression",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Plan en pause",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Mise en page 1280×720",
+      "ok": true,
+      "details": {
+        "scroll": 1280,
+        "w": 1280,
+        "h": 720,
+        "canvas": {
+          "x": 94.515625,
+          "y": 89,
+          "width": 1090.953125,
+          "height": 553.984375,
+          "top": 89,
+          "right": 1185.46875,
+          "bottom": 642.984375,
+          "left": 94.515625
+        }
+      }
+    },
+    {
+      "name": "Mise en page 800×600",
+      "ok": true,
+      "details": {
+        "scroll": 800,
+        "w": 800,
+        "h": 600,
+        "canvas": {
+          "x": 0,
+          "y": 85,
+          "width": 800,
+          "height": 406.25,
+          "top": 85,
+          "right": 800,
+          "bottom": 491.25,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Mise en page 390×844",
+      "ok": true,
+      "details": {
+        "scroll": 390,
+        "w": 390,
+        "h": 844,
+        "canvas": {
+          "x": 0,
+          "y": 115,
+          "width": 390,
+          "height": 627,
+          "top": 115,
+          "right": 390,
+          "bottom": 742,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Commandes tactiles visibles",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Commande pointer maintenue déplace le personnage",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Flamme et contact présents",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Aucune exception JavaScript",
+      "ok": true,
+      "details": []
+    }
+  ]
+}

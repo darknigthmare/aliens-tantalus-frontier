@@ -1,0 +1,39 @@
+{
+  "archive": "ALIEN_HORS_DES_OMBRES_V0_5_CE_QUI_ECOUTE_DANS_LE_NOIR.zip",
+  "archiveSHA256": "8c81c882e6cf38ca288fbb8f2fd4d3abc3e2ad0366d433cb37f092b45f6862ee",
+  "sourceSHA256": "d2758115ce050df6e8296e2d185295f2062e60d74abb2b3830a386c76e5d1ada",
+  "extractedSnapshots": [
+    {
+      "file": "legacy-schema-5-chapter-3.json",
+      "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_5/qa/playthrough-normal.json",
+      "snapshot": "chapter-3",
+      "schema": 5,
+      "completed": 9,
+      "sha256": "c9d0feea3b16b0302800a61423f2383299fa2caf779de462c51287d96c8a0e86"
+    },
+    {
+      "file": "legacy-schema-5-chapter-8.json",
+      "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_5/qa/playthrough-normal.json",
+      "snapshot": "chapter-8",
+      "schema": 5,
+      "completed": 24,
+      "sha256": "0f690470ba4cd21c39f642333d1a6af3ffc3acd796546d4b7d953d6a8d188a0c"
+    },
+    {
+      "file": "legacy-schema-5-chapter-11.json",
+      "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_5/qa/playthrough-normal.json",
+      "snapshot": "chapter-11",
+      "schema": 5,
+      "completed": 33,
+      "sha256": "660076a0e1c21c142218e3430702675160fda6d91413bd163b2a8c5dd2608f5a"
+    },
+    {
+      "file": "legacy-schema-5-final.json",
+      "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_5/qa/playthrough-normal.json",
+      "snapshot": "final",
+      "schema": 5,
+      "completed": 48,
+      "sha256": "080be3c795d34896bf29aa455b8f2ed6d262e488cd9f53507d4ea239979a5d90"
+    }
+  ]
+}

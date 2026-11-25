@@ -1,0 +1,5 @@
+ALIEN — HORS DES OMBRES · V0.10.0 — Le Marion, pièce par pièce
+Adaptation non officielle pour Aliens: Tantalus Frontier.
+Univers, marques et personnages Alien : droits de leurs titulaires respectifs. Œuvre de référence de Tim Lebbon ; dramatique créditée séparément dans le dossier de sources hérité.
+Code et textes de gameplay originaux, rendu vectoriel procédural et captures du prototype. Aucun scan du roman, film, piste de la dramatique, voix enregistrée ou fichier de police propriétaire n’est fourni. Cette livraison n’accorde aucune licence commerciale sur l’univers.
+DLC autonome en développement, pas adaptation intégrale 1:1, ni jeu commercial déclaré terminé. Aucun push GitHub, déploiement Vercel ou remplacement distant du jeu hôte.

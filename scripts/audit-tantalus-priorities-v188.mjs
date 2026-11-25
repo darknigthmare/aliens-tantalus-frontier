@@ -6,9 +6,11 @@
  * published bytes; historical predecessors and earlier endpoints stay intact.
  * The owner lifted the save/catalogue protection for this lot on 2026-11-12
  * (bible §56.1): each changed byte still needs an exact receipt here, and
- * migrations stay additive. This terminal module imports no audit and has no
- * receipt for itself. It makes no art, translation-coverage or playtest claim.
+ * migrations stay additive. The shared Hors des ombres terminal now continues
+ * the exact joined endpoints; historical receipt blocks still admit no self
+ * bytes. It makes no art, translation-coverage or playtest claim.
  */
+import { reviewedHorsDesOmbresDigestV010, verifyHorsDesOmbresContinuationV010 } from './audit-hors-des-ombres-continuation-v010.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -1806,12 +1808,14 @@ export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {
     assert.notEqual(lead.currentSha256, lead.previousSha256, 'A lead-continuation successor must identify changed bytes: ' + path);
     current = lead.currentSha256;
   }
-  if (!Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path)) return current;
   const join = TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path];
-  assert.equal(current, join.previousSha256, 'Broken 0d1d9950-to-xeno-trials-join source chain: ' + path);
-  assert.ok(validHash(join.currentSha256), 'Invalid xeno-trials-join source digest: ' + path);
-  assert.notEqual(join.currentSha256, join.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-  return join.currentSha256;
+  if (join) {
+    assert.equal(current, join.previousSha256, 'Broken 0d1d9950-to-xeno-trials-join source chain: ' + path);
+    assert.ok(validHash(join.currentSha256), 'Invalid xeno-trials-join source digest: ' + path);
+    assert.notEqual(join.currentSha256, join.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
+    current = join.currentSha256;
+  }
+  return reviewedHorsDesOmbresDigestV010(path, current, { owned: current !== endpoint });
 }
 
 export function verifyTantalusPrioritiesV188(readSource = readRepository) {
@@ -1967,7 +1971,7 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     // The lead endpoint is the reviewed 0d1d9950 predecessor of the Xeno Trials join.
     const joined = join.successors[path];
     if (joined) assert.equal(joined.previousSha256, receipt.currentSha256, 'Broken lead-to-xeno-trials-join endpoint: ' + path);
-    assert.equal(sha(readSource(path)), joined ? joined.currentSha256 : receipt.currentSha256,
+    assert.equal(sha(readSource(path)), reviewedHorsDesOmbresDigestV010(path, joined ? joined.currentSha256 : receipt.currentSha256),
       'Unreviewed lead-continuation source bytes: ' + path);
   }
   assert.match(join.baseline, /^[a-f0-9]{40}$/, 'The Xeno Trials join needs its exact 0d1d9950 baseline');
@@ -1975,8 +1979,9 @@ export function verifyTantalusPrioritiesV188(readSource = readRepository) {
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.ok(validHash(receipt.previousSha256) && validHash(receipt.currentSha256));
     assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'A xeno-trials-join successor must identify changed bytes: ' + path);
-    assert.equal(sha(readSource(path)), receipt.currentSha256, 'Unreviewed xeno-trials-join source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedHorsDesOmbresDigestV010(path, receipt.currentSha256), 'Unreviewed xeno-trials-join source bytes: ' + path);
   }
+  verifyHorsDesOmbresContinuationV010(readSource);
   return Object.freeze({ successors: successors.size, addedSources: addedSources.size });
 }
 

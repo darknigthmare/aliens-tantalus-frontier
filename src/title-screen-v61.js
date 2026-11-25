@@ -13,7 +13,7 @@ const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
 
 export class TitleScreenController {
-  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
+  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onHorsDesOmbres, onOptions }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
@@ -24,6 +24,7 @@ export class TitleScreenController {
     this.onContinue = onContinue;
     this.onNewTimeline = onNewTimeline;
     this.onForge = onForge;
+    this.onHorsDesOmbres = onHorsDesOmbres;
     this.onOptions = onOptions;
     this.state = 'idle';
     this.gamepadFrame = 0;
@@ -39,6 +40,8 @@ export class TitleScreenController {
     this.continueButton = root.querySelector('#title-continue');
     this.newButton = root.querySelector('#title-new');
     this.forgeButton = root.querySelector('#title-forge');
+    this.horsDesOmbresButton = root.querySelector('#title-hors-des-ombres');
+    if (this.horsDesOmbresButton) this.horsDesOmbresButton.hidden = typeof onHorsDesOmbres !== 'function';
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -61,7 +64,8 @@ export class TitleScreenController {
       this.listeners.push(() => target.removeEventListener(type, listener));
     };
     for (const [button, action] of [[this.startButton, 'openMenu'], [this.continueButton, 'continueGame'],
-      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge']]) {
+      [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge'], [this.horsDesOmbresButton, 'openHorsDesOmbres']]) {
+      if (!button) continue;
       listen(button, 'click', (event) => {
         // A double click is a single intention, never confirmation of an overwrite.
         if (event.detail > 1) return;
@@ -99,7 +103,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.forgeButton, this.optionsButton]
+    return [this.continueButton, this.newButton, this.forgeButton, this.horsDesOmbresButton, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 
@@ -208,6 +212,17 @@ export class TitleScreenController {
   }
 
   clearMenuReturnV89() { this.returnMenuOwnerV89 = null; }
+
+  openHorsDesOmbres() {
+    if (this.root.hidden || this.state !== 'menu') return;
+    this.cancelNewTimelineConfirmation();
+    if (this.getRecoveryStatus()) {
+      this.liveStatus.textContent = 'Récupérez votre profil dans Système avant de quitter le Tantalus.';
+      return;
+    }
+    // The host callback keeps this menu open when saving is refused or fails.
+    this.onHorsDesOmbres?.();
+  }
 
   openForge() {
     if (this.root.hidden || this.state !== 'menu') return;

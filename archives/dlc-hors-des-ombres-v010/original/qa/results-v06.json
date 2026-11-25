@@ -1,0 +1,432 @@
+{
+  "version": "0.10.0",
+  "suite": "v06-maintenance-shortcuts-salvage-local-map",
+  "tests": 66,
+  "passed": 66,
+  "failed": 0,
+  "method": "Prepared subsystem states, real step/interact holds; no human playtest claim",
+  "checks": [
+    {
+      "name": "Manifest V0.6 : 43 liaisons, 3 réparations, 8 casiers, 2 établis, 3 recettes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-01",
+      "ok": true,
+      "detail": {
+        "x": 350,
+        "y": 88,
+        "room": "engineering"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-02",
+      "ok": true,
+      "detail": {
+        "x": 400,
+        "y": 88,
+        "room": "maintenance"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-03",
+      "ok": true,
+      "detail": {
+        "x": 885,
+        "y": 88,
+        "room": "breach"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-04",
+      "ok": true,
+      "detail": {
+        "x": 355,
+        "y": 88,
+        "room": "rec"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-05",
+      "ok": true,
+      "detail": {
+        "x": 935,
+        "y": 88,
+        "room": "stores"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-06",
+      "ok": true,
+      "detail": {
+        "x": 300,
+        "y": 88,
+        "room": "control"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-07",
+      "ok": true,
+      "detail": {
+        "x": 280,
+        "y": 88,
+        "room": "refuge"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : salvage-08",
+      "ok": true,
+      "detail": {
+        "x": 1855,
+        "y": 88,
+        "room": "drain"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : fabricator-workshop",
+      "ok": true,
+      "detail": {
+        "x": 930,
+        "y": 88,
+        "room": "workshop"
+      }
+    },
+    {
+      "name": "Placement accessible et sélectionnable : fabricator-refuge",
+      "ok": true,
+      "detail": {
+        "x": 710,
+        "y": 88,
+        "room": "refuge"
+      }
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-01",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-02",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-03",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-04",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-05",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-06",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-07",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier unique par E et persistant : salvage-08",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le sac contient au total 24 pièces, sans doublon ni réapparition",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Collecte à distance et en portant Ripley refusées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-medical / a",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-medical / b",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Sauvegarde après pose des pièces : repair-medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-cargo / a",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-cargo / b",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Sauvegarde après pose des pièces : repair-cargo",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-mine / a",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Trois gestes puis aller-retour : repair-mine / b",
+      "ok": true,
+      "detail": {
+        "stages": 3,
+        "cost": 3,
+        "transitions": 2
+      }
+    },
+    {
+      "name": "Sauvegarde après pose des pièces : repair-mine",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le travail peut reprendre depuis la face opposée sans nouveau paiement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sans pièces : inspection possible, remplacement refusé, chemin principal conservé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement pendant le remplacement : aucune pièce dépensée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Flamme et portage interrompent le travail",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une attaque annule le geste et garde les ressources",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le geste émet un son mais ne suspend ni le temps ni les attaques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un chantier terminé ne recharge ni ne reconsomme les pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Chapitre trop précoce : desserte de fret fermée malgré un stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les ascenseurs narratifs restent bloqués après toutes les réparations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-workshop / decoy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-workshop / fuel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-workshop / kit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-refuge / decoy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-refuge / fuel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Assemblage local fabricator-refuge / kit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inventaire sans établi : fabrication distante refusée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recette refusée sans composants",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dépense si capacité dépassée : decoy",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dépense si capacité dépassée : fuel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dépense si capacité dépassée : kit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recette à capacité exacte et arme non débloquée prématurément",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau de fabrication suspend le monde et l’enquête",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Registre hostile : pièces arbitraires rejetées, inconnus et doublons filtrés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Capot validé sans financement ne devient pas une porte ouverte à l’import",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Progression du geste non rejouée après import",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Repère facultatif suit seulement un chantier observé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan de proximité sans ennemi ni commande éloignée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Casier observé puis vidé reste marqué utilisé sur le plan",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Traverse minière : fermée puis enquête réelle a",
+      "ok": true,
+      "detail": {
+        "identity": "mine-a",
+        "from": "vein",
+        "to": "drain"
+      }
+    },
+    {
+      "name": "Traverse minière : fermée puis enquête réelle b",
+      "ok": true,
+      "detail": {
+        "identity": "mine-b",
+        "from": "drain",
+        "to": "vein"
+      }
+    },
+    {
+      "name": "Vrai carnet V0.5 → V0.6 : chapter-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.5 → V0.6 : chapter-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.5 → V0.6 : chapter-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.5 → V0.6 : final",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Campagne réelle avec les trois chantiers : normal",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 35,
+        "transitions": 88,
+        "repairs": [
+          "repair-medical",
+          "repair-cargo",
+          "repair-mine"
+        ],
+        "method": "Déplacements, E et portes, routes et solutions connues, sans injection d’objectifs ni de composants"
+      }
+    },
+    {
+      "name": "Campagne réelle avec les trois chantiers : assisted",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 35,
+        "transitions": 88,
+        "repairs": [
+          "repair-medical",
+          "repair-cargo",
+          "repair-mine"
+        ],
+        "method": "Déplacements, E et portes, routes et solutions connues, sans injection d’objectifs ni de composants"
+      }
+    }
+  ]
+}

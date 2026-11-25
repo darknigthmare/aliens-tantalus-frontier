@@ -1,6 +1,15 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-20261123';
+const CACHE = 'atf-v143-oth-v010-20261125-tantalus-decisions-arsenal-franchise-collier-s1-debat-bioforge-reines-arcs-20261123';
 const SHELL = Object.freeze([
+  '/src/hors-des-ombres-launch-v010.js',
+  '/dlc/alien-hors-des-ombres/index.html',
+  '/src/oth-v1/oth-data.js',
+  '/src/oth-v1/oth-engine.js',
+  '/src/oth-v1/oth-render.js',
+  '/src/oth-v1/oth-ui.js',
+  '/src/oth-v1/oth-ui.css',
+  '/src/oth-v1/oth-bridge.js',
+
   '/src/xeno-trials-visual-assets-v205.js',
   '/src/xeno-trials-priority-air-data-v204.js',
   '/src/xeno-trials-priority-ground-data-v204.js',

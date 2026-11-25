@@ -1,0 +1,82 @@
+[
+  {
+    "file": "legacy-schema-1-chapter-3.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_1_PROTOTYPE_SOURCE.zip",
+    "sourceArchiveSHA256": "174ef47a9db0be6ab630fe75b2d8d25d382a24409a0c21c93c90f293e0a52012",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_1/qa/playthrough-normal.json",
+    "snapshot": "chapter-3",
+    "schema": 1,
+    "objectives": 9,
+    "sha256": "15c86ab3957ddf16c016d0b52c9e33726e4a6118e4ee71c9ce56f21f2df8dc5b"
+  },
+  {
+    "file": "legacy-schema-1-chapter-11.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_1_PROTOTYPE_SOURCE.zip",
+    "sourceArchiveSHA256": "174ef47a9db0be6ab630fe75b2d8d25d382a24409a0c21c93c90f293e0a52012",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_1/qa/playthrough-normal.json",
+    "snapshot": "chapter-11",
+    "schema": 1,
+    "objectives": 33,
+    "sha256": "65daf0c86efa6a2db9ee585132bd1c3eea43afd609b0d02ad168552e35a54df3"
+  },
+  {
+    "file": "legacy-schema-1-chapter-14.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_1_PROTOTYPE_SOURCE.zip",
+    "sourceArchiveSHA256": "174ef47a9db0be6ab630fe75b2d8d25d382a24409a0c21c93c90f293e0a52012",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_1/qa/playthrough-normal.json",
+    "snapshot": "chapter-14",
+    "schema": 1,
+    "objectives": 42,
+    "sha256": "11a23b7134a06b48b325b4287adfda0e5f11f1b4e1be023abd67a3aa8e6436cd"
+  },
+  {
+    "file": "legacy-schema-1-final.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_1_PROTOTYPE_SOURCE.zip",
+    "sourceArchiveSHA256": "174ef47a9db0be6ab630fe75b2d8d25d382a24409a0c21c93c90f293e0a52012",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_1/qa/playthrough-normal.json",
+    "snapshot": "final",
+    "schema": 1,
+    "objectives": 48,
+    "sha256": "e3278835065d661856a9b7f0158572895cd487274ff546332938acff47b5de48"
+  },
+  {
+    "file": "legacy-schema-2-chapter-3.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_2_LES_VOIX_DU_MARION.zip",
+    "sourceArchiveSHA256": "2f55af570cffd3edc3d2f595e1df42beed768c76ef46957e67bce1207227afb0",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_2/qa/playthrough-normal.json",
+    "snapshot": "chapter-3",
+    "schema": 2,
+    "objectives": 9,
+    "sha256": "586ced5e6908432973d3dc26208f93b26371964a2188bc23229e9f08dba598e6"
+  },
+  {
+    "file": "legacy-schema-2-chapter-11.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_2_LES_VOIX_DU_MARION.zip",
+    "sourceArchiveSHA256": "2f55af570cffd3edc3d2f595e1df42beed768c76ef46957e67bce1207227afb0",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_2/qa/playthrough-normal.json",
+    "snapshot": "chapter-11",
+    "schema": 2,
+    "objectives": 33,
+    "sha256": "41f53206d3ba230b335ea23274c2d923c1b17a3f60158f9c4b418c4ac0a1ad29"
+  },
+  {
+    "file": "legacy-schema-2-chapter-14.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_2_LES_VOIX_DU_MARION.zip",
+    "sourceArchiveSHA256": "2f55af570cffd3edc3d2f595e1df42beed768c76ef46957e67bce1207227afb0",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_2/qa/playthrough-normal.json",
+    "snapshot": "chapter-14",
+    "schema": 2,
+    "objectives": 42,
+    "sha256": "5ea8b740e0b1c0df72c1ebcd2d3e742e37b9b81cb11584507b3131bb035b1f6b"
+  },
+  {
+    "file": "legacy-schema-2-final.json",
+    "sourceArchive": "ALIEN_HORS_DES_OMBRES_V0_2_LES_VOIX_DU_MARION.zip",
+    "sourceArchiveSHA256": "2f55af570cffd3edc3d2f595e1df42beed768c76ef46957e67bce1207227afb0",
+    "archiveEntry": "ALIEN_HORS_DES_OMBRES_V0_2/qa/playthrough-normal.json",
+    "snapshot": "final",
+    "schema": 2,
+    "objectives": 48,
+    "sha256": "58837dc57a2c6a015e49ef4e4ec99268b08525fa099acb9ebe8d090d8d8f27bc"
+  }
+]

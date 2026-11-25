@@ -1,0 +1,454 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v04",
+  "tests": 75,
+  "passed": 75,
+  "failed": 0,
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "fallback": "document injected; explicit Map-backed localStorage test double",
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "errors": [],
+  "checks": [
+    {
+      "name": "Document V0.4 et menu chargés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancrage lumière bien chargé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E agit physiquement sur le coffret de lumière",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Éclairage réduit la portée de détection",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "K ouvre le relevé en lecture seule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État SECOURS SEUL reflété par le relevé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune télécommande dans les services",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "K met effectivement la simulation en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Appui B trop court ne ferme pas",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "B maintenu ferme le verrou",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le plan indique VERROU et n’expose pas la destination inconnue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecture du plan suspend le délai du verrou",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Libération E sans franchissement automatique immédiat",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Compresseur en cycle après E",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun leurre consommé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Services suspendent un cycle actif",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Machine ne redémarre pas pendant le refroidissement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sortie physique par E vers le pompage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un indice de sortie déclenche un transit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou accessible juste après une arrivée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Griffes locales signalées sans détecteur global",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pression et transit suspendus dans le panneau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Même identité transférée une seule fois après rupture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Verrou forcé marqué endommagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun verrou humain inventé sur les arches de l’épave",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export JSON schéma 4 avec état des rampes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import UI restaure la salle et le circuit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import malformé refusé sans écraser la partie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : bridge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : comms",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : junction",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : engineering",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : airlock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : hangar",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : breach",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : workshop",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : medical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : server",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : dock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : narcissus",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : samson",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : cockpit",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : landing",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : control",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : stores",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : lift_top",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : lift_bottom",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : haul",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : pump",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : refuge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : vein",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : fissure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : vestibule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : fossils",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : eggs",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : bypass",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : lift_east",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : hold",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : rec",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : maintenance",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : drain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : alcove",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : return_gallery",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : exchanger",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : survey",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : specimen_store",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : boarding",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : docking_airlock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rendu sans exception : docking_arm",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton tactile B visible dans le viewport",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Contrôle tactile B engage le verrou",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Panneau mobile sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pied d’écran accessible en paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript dans la suite",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "La sauvegarde des autres DLC reste intacte",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "captures": [
+    {
+      "file": "37_menu_v04.png",
+      "caption": "Menu de la V0.5, document chargé sans état de campagne injecté.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "38_coursive_eclairee.png",
+      "caption": "Coursive, rampes allumées. Point de départ préparé devant la commande d’éclairage.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "39_coursive_secours.png",
+      "caption": "Même position après interaction E : les rampes s’éteignent, le balisage reste visible.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "40_services.png",
+      "caption": "Relevé des services locaux ouvert par K. Aucune activation distante.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "41_verrou_coursive.png",
+      "caption": "Fermeture du verrou par maintien de B. Le délai apparaît sur la porte.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "42_compresseur.png",
+      "caption": "Compresseur déclenché par E. Rotation et état de cycle sont produits par la simulation, sur une scène préparée.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "43_pression_pompage.png",
+      "caption": "Rencontre préparée : E pour passer, B pour fermer. L’adulte rejoint réellement le seuil depuis la salle précédente, puis force la cloison.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "44_passage_creature.png",
+      "caption": "Même rencontre après rupture du verrou. L’adulte porte la même identité ; aucun clone n’a été ajouté pour la capture.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "45_seuil_epave.png",
+      "caption": "Seuil organique : absence de verrou industriel. Scène préparée dans l’épave.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "46_mobile_cloison.png",
+      "caption": "Affichage 390 × 844, contrôle B visible et verrou engagé via le contrôle de terrain.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "47_mobile_services.png",
+      "caption": "Relevé K en format mobile ; la simulation est suspendue.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    },
+    {
+      "file": "48_paysage_services.png",
+      "caption": "Format paysage 844 × 390. La machine et les commandes de terrain restent accessibles.",
+      "method": "Capture réelle Chromium de la V0.5 (scénario de non-régression V0.4) ; scène préparée puis commandes ou simulation indiquées dans la légende."
+    }
+  ]
+}

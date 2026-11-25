@@ -1,0 +1,565 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v08-memories",
+  "tests": 93,
+  "passed": 93,
+  "failed": 0,
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4188/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "fallback": "set_content + explicit in-memory localStorage test double",
+  "errors": [],
+  "checks": [
+    {
+      "name": "Document V0.8 et schéma 8 chargés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une vraie entrée créée au début du jeu, quinze non enregistrées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le premier instantané contient une vignette de rendu local",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les scènes futures restent anonymes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouverture du prologue depuis la galerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La simulation est gelée pendant la séquence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Entrée passe au contrechamp",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La touche gauche revient au tableau précédent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Espace avance sans agir sur le terrain",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échap retourne à la galerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La galerie ne donne ni objectifs, ni ressource, ni déplacement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échec de sauvegarde principale : pas de bascule ni perte de position",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export complet malgré quota : ressources actuelles, pas un ancien carnet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rejouer bascule dans une session indépendante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement de répétition sans écriture du carnet principal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Point de reprise principal inchangé en répétition",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le créneau de répétition reçoit son propre état",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export de répétition nommé et sérialisé séparément",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Importer un carnet dans la répétition ne remplace pas la campagne",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échec et reprise restent dans le point de contrôle de répétition",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour au carnet principal à sa vraie progression",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cinquième objectif validé par E puis séquence automatique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La scène automatique ne laisse pas tourner les menaces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Passer une scène ne termine pas l’objectif suivant",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Préférences de séquences, texte et mouvement accessibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Seize entrées issues du parcours moteur sont proposées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Douze séquences déverrouillées après la vraie fin du parcours moteur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Avertissement de quota effacé après une reprise réussie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "marion · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "marion · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "marion · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "marion · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "delilah · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "delilah · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "delilah · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "delilah · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ripley · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ripley · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ripley · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ripley · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "descent · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "descent · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "descent · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "descent · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "cage · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "cage · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "cage · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "cage · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "bones · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "bones · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "bones · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "bones · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "baxter · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "baxter · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "baxter · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "baxter · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "sneddon · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "sneddon · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "sneddon · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "sneddon · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "medical · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "medical · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "medical · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "medical · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ash · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ash · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ash · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "ash · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "release · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "release · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "release · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "release · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "signal · tableau 1 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "signal · tableau 2 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "signal · tableau 3 dessiné et texte lisible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "signal · retour correct après les trois tableaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecture automatique respecte le délai avant le second tableau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La fin de campagne ne réécrit pas le point de reprise à chaque image",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export portable avec les seize vrais instantanés et le carnet",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import portable attend une confirmation explicite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échec de stockage : import annulé et ancienne collection restaurée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un paquet invalide est refusé sans écran de confirmation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import confirmé restaure la campagne et ses mémoires",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bilan principal avec six métriques séparées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bibliothèque mobile sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Séquence mobile : texte et boutons accessibles par défilement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Séquence 844×390 ne déborde pas horizontalement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Séquence 800×600 ne déborde pas horizontalement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Séquence 1280×720 ne déborde pas horizontalement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune écriture dans la sauvegarde d’un autre DLC",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Copie de migration refusée : ancien carnet toujours chargé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échec de copie préalable signalé sans annoncer une sauvegarde réussie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "88_menu_memoires.png",
+      "caption": "Écran titre V0.8 sans préparation de progression. Le nouveau carnet des chapitres est accessible depuis le menu.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "89_premiere_entree.png",
+      "caption": "Début d’une nouvelle partie : seule la première entrée est enregistrée. Sa vignette provient du moteur ; aucun ancien chapitre n’est reconstruit.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "90_marion_orbite.png",
+      "caption": "Premier tableau du prologue, ouvert depuis la galerie. Vue extérieure mise en scène avec le code du jeu, pas une zone pilotable ni une image officielle.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "91_repetition_separee.png",
+      "caption": "Répétition réellement ouverte depuis l’entrée enregistrée du chapitre 1, puis déplacement au clavier. Le HUD nomme la session séparée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "92_impact_delilah.png",
+      "caption": "État préparé juste avant le cinquième objectif. E maintenu termine la cloison ; la scène de la Delilah s’ouvre ensuite automatiquement.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "93_bibliotheque_complete.png",
+      "caption": "Bibliothèque préparée avec les seize instantanés du parcours moteur complet. Ce n’est pas une progression effectuée manuellement dans cette fenêtre.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "94_ripley.png",
+      "caption": "Séquence ripley ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "95_cage.png",
+      "caption": "Séquence cage ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "96_unite_medicale.png",
+      "caption": "Séquence medical ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "97_purge.png",
+      "caption": "Séquence ash ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "98_narcissus.png",
+      "caption": "Séquence release ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "99_silence.png",
+      "caption": "Séquence signal ouverte depuis la galerie d’un carnet terminé. Tableau mis en scène avec une copie détachée ; aucune progression jouable n’est modifiée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "100_confirmation_memoires.png",
+      "caption": "Fichier des mémoires exporté par le navigateur puis sélectionné pour import. Aucune écriture du paquet avant la confirmation affichée.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "101_bilan.png",
+      "caption": "Bilan du carnet produit par le parcours moteur complet. Le temps affiché reste un temps de simulation, pas une mesure de durée humaine.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "102_memoires_mobile.png",
+      "caption": "Émulation 390 × 844 : bibliothèque scrollable et boutons de répétition. Pas une certification sur téléphone physique.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    },
+    {
+      "file": "103_sequence_mobile.png",
+      "caption": "Émulation mobile : séquence en lecture manuelle, sous-titres en DOM et commandes défilables.",
+      "method": "V0.8 Chromium actual rendering; source / preparation stated in caption."
+    }
+  ]
+}

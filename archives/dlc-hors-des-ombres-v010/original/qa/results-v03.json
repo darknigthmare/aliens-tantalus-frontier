@@ -1,0 +1,546 @@
+{
+  "suite": "new-features-v0.3",
+  "obstacleChecks": 110,
+  "tests": 81,
+  "passed": 81,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Contenu V0.3 : 34 salles, 40 liens, 48 objectifs, 144 fiches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "46 familles graphiques : identifiants uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import schéma 1 vers schéma 4 sans perte de progression",
+      "ok": true,
+      "detail": {
+        "genuineLegacySnapshots": 4,
+        "syntheticSanitizationCase": true
+      }
+    },
+    {
+      "name": "Import schéma 2 vers schéma 4 sans perte de progression",
+      "ok": true,
+      "detail": {
+        "genuineLegacySnapshots": 4,
+        "syntheticSanitizationCase": true
+      }
+    },
+    {
+      "name": "Import schéma 3 vers schéma 4 sans perte de progression",
+      "ok": true,
+      "detail": {
+        "genuineLegacySnapshots": 0,
+        "syntheticSanitizationCase": true
+      }
+    },
+    {
+      "name": "Compagnon : ancienne sauvegarde sans champ acceptée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Compagnon interdit hors de son intervalle narratif",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Baxter : recrutement physique dans sa salle, jamais depuis une autre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Baxter : suit puis attend, mouvement simulé et position persistante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Baxter : pas de clone statique et retrait à la fin de la séquence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hoop : recrutement physique dans sa salle, jamais depuis une autre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hoop : suit puis attend, mouvement simulé et position persistante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hoop : pas de clone statique et retrait à la fin de la séquence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ripley : recrutement physique dans sa salle, jamais depuis une autre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ripley : suit puis attend, mouvement simulé et position persistante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ripley : pas de clone statique et retrait à la fin de la séquence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Passage : attend le compagnon puis franchit la même liaison",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ordre attendre : le joueur passe sans téléporter le compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Compagnon : réduit sa silhouette et sa vitesse en furtivité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Navigation : le segment direct est rejeté à travers un meuble",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Navigation sans traversée de collision : Passerelle du Marion",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 249
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Relais des communications",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 191
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Coursive des équipages",
+      "ok": true,
+      "detail": {
+        "obstacles": 3,
+        "centerFrames": 286
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Distribution électrique",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 293
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Sas de confinement",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 194
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Hangar des navettes",
+      "ok": true,
+      "detail": {
+        "obstacles": 6,
+        "centerFrames": 334
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Brèche de la Delilah",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 259
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Atelier de bord",
+      "ok": true,
+      "detail": {
+        "obstacles": 6,
+        "centerFrames": 225
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Infirmerie",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 259
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Cœur informatique",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 225
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Amarrage du Narcissus",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 242
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Narcissus — cryostase",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 182
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Samson — soute",
+      "ok": true,
+      "detail": {
+        "obstacles": 3,
+        "centerFrames": 247
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Samson — cockpit",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 177
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : LV-178 — aire d’atterrissage",
+      "ok": true,
+      "detail": {
+        "obstacles": 2,
+        "centerFrames": 327
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Poste de la concession",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 242
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Réserve des cellules",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 274
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Puits principal — tête",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 194
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Puits principal — fond",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 232
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Galerie de roulage",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 332
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Station de pompage",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 281
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Abri des mineurs",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 206
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Front de trimonite",
+      "ok": true,
+      "detail": {
+        "obstacles": 3,
+        "centerFrames": 310
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Faille d’accès",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 245
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Épave enfouie — seuil",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 300
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Chambre des vestiges",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 279
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Chambre d’incubation",
+      "ok": true,
+      "detail": {
+        "obstacles": 3,
+        "centerFrames": 334
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Suture de la coque",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 254
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Puits secondaire — cage",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 225
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Soute de quarantaine",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 303
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : BeeBee’s — carré de repos",
+      "ok": true,
+      "detail": {
+        "obstacles": 3,
+        "centerFrames": 203
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Galerie des auxiliaires",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 211
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Canal de décantation",
+      "ok": true,
+      "detail": {
+        "obstacles": 1,
+        "centerFrames": 254
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Alcôve des vestiges",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 223
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Galerie de retour",
+      "ok": true,
+      "detail": {
+        "obstacles": 4,
+        "centerFrames": 228
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Salle des échangeurs",
+      "ok": true,
+      "detail": {
+        "obstacles": 6,
+        "centerFrames": 259
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Poste de relevé",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 207
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Réserve des prélèvements",
+      "ok": true,
+      "detail": {
+        "obstacles": 6,
+        "centerFrames": 229
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Vestibule d’embarquement",
+      "ok": true,
+      "detail": {
+        "obstacles": 5,
+        "centerFrames": 283
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Sas d’amarrage",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 167
+      }
+    },
+    {
+      "name": "Navigation sans traversée de collision : Bras d’amarrage du Samson",
+      "ok": true,
+      "detail": {
+        "obstacles": 0,
+        "centerFrames": 218
+      }
+    },
+    {
+      "name": "Navigation : objectif dans obstacle retourne une impasse, pas une traversée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lumière : 34 définitions locales et calcul borné",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Se cacher : neuf cachettes atteignables et réservées à leur salle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lampe et posture modifient réellement la distance de détection",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cachette hors du regard : furtivité ; mouvement : sortie immédiate",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dissimulation sous le regard direct du xénomorphe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cachette refusée en portant Ripley ou une cellule",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cachette : recherche insistante à proximité force la sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Adulte : avertissement avant la première blessure",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Esquive : reculer pendant l’appui évite réellement les dégâts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Flamme interrompt une attaque en préparation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Leurre : enquête sur sa position, pas sur une cible omnisciente",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import : conserve la mémoire de recherche, mais neutralise un coup instantané",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan : rien ne dévoile les salles jamais visitées au départ",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan : un seuil proche devient accès inconnu, sans nom de destination",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan : une traversée révèle ensuite le nom et le lien réciproque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan : observations persistantes et identifiants importés filtrés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Accessibilité : options conservées par export/import",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux profils physiques de campagne conservent leurs escortes dans le bilan",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réserves et cachettes séparées des seuils de plus de 150 unités",
+      "ok": true,
+      "detail": null
+    }
+  ]
+}

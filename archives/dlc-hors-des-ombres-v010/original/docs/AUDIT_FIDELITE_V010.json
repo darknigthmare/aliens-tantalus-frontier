@@ -1,0 +1,4376 @@
+{
+  "counts": {
+    "version": "0.10.0",
+    "chapters": 16,
+    "objectives": 48,
+    "rooms": 41,
+    "edges": 52,
+    "portals": 104,
+    "walls": 182,
+    "depthRooms": 26,
+    "profileRooms": 15,
+    "propTypes": 48,
+    "placements": 331,
+    "codex": 228,
+    "equipmentEntries": 18,
+    "appearanceProfiles": 10,
+    "crewPlacements": 28
+  },
+  "scope": "Extrait autorisé et sources éditoriales, pas relecture intégrale du roman ou de la dramatique. Aucune certification 1:1.",
+  "sources": [
+    {
+      "id": "F01",
+      "title": "Titan Books — présentation officielle",
+      "url": "https://titanbooks.com/7683-alien-out-of-the-shadows-book-1/",
+      "level": "primaire",
+      "supports": "Marion, LV-178, trimonite, Hoop et Ripley. Aucun plan coté."
+    },
+    {
+      "id": "F02",
+      "title": "Tim Lebbon — extrait autorisé publié par JoBlo",
+      "url": "https://www.joblo.com/exclusive-excerpt-from-alien-out-of-the-shadows/",
+      "level": "primaire",
+      "supports": "Vestibule, sas, bras d’amarrage et Samson ; torche, pic, filet métallique et charge thumper. Pas de plans ou de fiches de modèle."
+    },
+    {
+      "id": "F03",
+      "title": "AVPGalaxy — critique du roman",
+      "url": "https://www.avpgalaxy.net/literature/reviews/alien-out-of-the-shadows/",
+      "level": "secondaire",
+      "supports": "Confirmation secondaire du matériel minier, du projecteur d’acide et des explosifs. Vérification directe encore requise."
+    },
+    {
+      "id": "F04",
+      "title": "Audible France — édition dramatique",
+      "url": "https://www.audible.fr/series/Alien-La-sortie-des-profondeurs-Livres-Audio/B01MYA46WJ",
+      "level": "primaire éditoriale",
+      "supports": "Identité de la dramatique. Une distribution vocale n’est pas une référence de visage."
+    }
+  ],
+  "gaps": [
+    {
+      "area": "Carte complète",
+      "status": "à vérifier",
+      "detail": "Les plans sont des reconstructions. Les niveaux miniers non décrits dans les sources examinées, les quartiers de tout l’équipage et la totalité des systèmes de l’épave ne sont pas reconstitués."
+    },
+    {
+      "area": "Rencontre du vestibule",
+      "status": "partielle",
+      "detail": "Le lieu et les quatre familles d’armes sont corrigés. La chorégraphie de quatre adultes simultanés, les fenêtres rompues et la décompression intégrale restent à mettre en scène."
+    },
+    {
+      "area": "Armes et outils",
+      "status": "partielle",
+      "detail": "Cinq outils utilisables sont inventoriés, avec provenance. Les explosifs sont contextuels ; aucun inventaire exhaustif du roman complet n’est certifié."
+    },
+    {
+      "area": "Apparences de l’équipage",
+      "status": "provisoire",
+      "detail": "Rôles civils et identités séparées ; coupes, tailles, teints et couleurs non attestés sont des choix de production, pas des descriptions officielles. Pas de copie des visages des comédiens de doublage."
+    },
+    {
+      "area": "Xénobiologie de l’épave",
+      "status": "partielle",
+      "detail": "Vestiges non humains représentés ; morphologie précise et architecture extraterrestre non authentifiées. Ne pas confondre automatiquement les occupants avec les Ingénieurs."
+    },
+    {
+      "area": "Roman et dramatique",
+      "status": "à distinguer",
+      "detail": "Les variantes de mise en scène, de dialogues et d’Ash ne sont pas fusionnées sous une revendication de reproduction exacte."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "torch",
+      "name": "Torche à plasma",
+      "status": "utilisable",
+      "input": "F / 1",
+      "evidence": "primaire",
+      "source": "F02",
+      "note": "Repousse et brûle à courte portée. Préparation narrative à l’atelier conservée. Puissance et réserve : équilibrage original."
+    },
+    {
+      "id": "pick",
+      "name": "Pic à sable",
+      "status": "utilisable",
+      "input": "F / 2",
+      "evidence": "primaire",
+      "source": "F02",
+      "note": "Long outil de taille : frappe devant soi. Très près d’un adulte, le sang acide rend la riposte dangereuse."
+    },
+    {
+      "id": "thumper",
+      "name": "Charge thumper",
+      "status": "utilisable",
+      "input": "F / 3",
+      "evidence": "primaire",
+      "source": "F02",
+      "note": "Outil minier bruyant. Trois impacts peuvent abattre un adulte dans cet équilibrage ; ni cadence ni munitions ne sont des valeurs officielles."
+    },
+    {
+      "id": "net",
+      "name": "Filet à âme métallique",
+      "status": "utilisable",
+      "input": "F / 4",
+      "evidence": "primaire",
+      "source": "F02",
+      "note": "Enveloppe une cible proche pendant quatre secondes. Le lancer individuel est une adaptation du grand filet fixé dans le récit, pas sa reproduction 1:1."
+    },
+    {
+      "id": "acid",
+      "name": "Projecteur d’acide minier",
+      "status": "utilisable",
+      "input": "F / 5",
+      "evidence": "secondaire",
+      "source": "F03",
+      "note": "Jet de courte portée. Présence signalée par une critique ; mécanisme, portée et dommages restent originaux. Aucun mélange ou procédé réel décrit."
+    },
+    {
+      "id": "lamp",
+      "name": "Lampe portative",
+      "status": "utilisable",
+      "input": "L",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Éclairage et détection, visuel attaché au personnage. Modèle non authentifié."
+    },
+    {
+      "id": "decoy",
+      "name": "Leurre sonore portatif",
+      "status": "utilisable",
+      "input": "R",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Ajout de gameplay, non certifié comme matériel du roman."
+    },
+    {
+      "id": "kit",
+      "name": "Consommable de secours",
+      "status": "utilisable",
+      "input": "H",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Ressource de jeu abstraite ; aucun protocole médical réel."
+    },
+    {
+      "id": "components",
+      "name": "Composants électriques",
+      "status": "utilisable",
+      "input": "E / I",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Trois chantiers et deux établis ; économie originale au jeu."
+    },
+    {
+      "id": "return-cell",
+      "name": "Cellule de retour",
+      "status": "portage / installation",
+      "input": "E",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Objectifs physiques conservés, capacité et forme reconstruites."
+    },
+    {
+      "id": "recorder",
+      "name": "Enregistreur des échangeurs",
+      "status": "portage / dépôt",
+      "input": "E / T",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Annexe originale, pas nouvel objet canonique déclaré."
+    },
+    {
+      "id": "medical",
+      "name": "Unité médicale / stase",
+      "status": "interaction narrative",
+      "input": "E",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Procédure condensée de fiction ; appareil non reproduit 1:1."
+    },
+    {
+      "id": "radio",
+      "name": "Relais radio et terminaux",
+      "status": "interaction narrative",
+      "input": "E",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Transmissions au cours des objectifs ; pas de radio portable sélectionnable."
+    },
+    {
+      "id": "explosives",
+      "name": "Explosifs miniers",
+      "status": "contextuel",
+      "input": "Événement de campagne",
+      "evidence": "secondaire",
+      "source": "F03",
+      "note": "Mention secondaire F03 ; pas d’explosif portable utilisable dans cette livraison."
+    },
+    {
+      "id": "rigging",
+      "name": "Sangles, treuils et attaches",
+      "status": "décor / commandes",
+      "input": "E selon objectif",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Présents dans les navettes et quais ; pas de simulation de toutes les sangles."
+    },
+    {
+      "id": "cart",
+      "name": "Servantes et bennes",
+      "status": "utilisable",
+      "input": "X + directions",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Six objets physiques ; dispositifs et plans originaux."
+    },
+    {
+      "id": "suit",
+      "name": "Tenue de travail civile",
+      "status": "portée",
+      "input": "passif",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Rôles différenciés, couleurs et morphologies provisoires."
+    },
+    {
+      "id": "pressure-suit",
+      "name": "Combinaison pressurisée détaillée",
+      "status": "à vérifier / non simulée",
+      "input": "aucune",
+      "evidence": "reconstruction / à vérifier",
+      "source": null,
+      "note": "Les sources retenues ne permettent pas de certifier modèle et emploi exacts ; pas de simulation de réserve respirable annoncée."
+    }
+  ],
+  "appearance": {
+    "hoop": {
+      "suit": "#6d7b65",
+      "skin": "#b69679",
+      "hair": "#63554a",
+      "cut": "short",
+      "sx": 1.09,
+      "sy": 1.05,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "ripley": {
+      "suit": "#83969e",
+      "skin": "#c4a78c",
+      "hair": "#42362f",
+      "cut": "curly",
+      "sx": 1.02,
+      "sy": 1,
+      "status": "interprétation visuelle provisoire",
+      "note": "Cheveux foncés bouclés et tenue civile évoquent la continuité visuelle Alien ; costume exact de cette séquence du roman non authentifié."
+    },
+    "kasyanov": {
+      "suit": "#abbcb7",
+      "skin": "#cfb093",
+      "hair": "#655047",
+      "cut": "tied",
+      "sx": 0.96,
+      "sy": 1.01,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "garcia": {
+      "suit": "#d0c5b3",
+      "skin": "#a98468",
+      "hair": "#493930",
+      "cut": "short",
+      "sx": 0.92,
+      "sy": 0.96,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "baxter": {
+      "suit": "#918166",
+      "skin": "#b69b81",
+      "hair": "#9b8b72",
+      "cut": "balding",
+      "sx": 1.06,
+      "sy": 1.02,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "lachance": {
+      "suit": "#71818d",
+      "skin": "#aa886f",
+      "hair": "#3c332c",
+      "cut": "short",
+      "sx": 1.01,
+      "sy": 1.04,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "sneddon": {
+      "suit": "#8c9f91",
+      "skin": "#c4aa8b",
+      "hair": "#73564a",
+      "cut": "tied",
+      "sx": 0.95,
+      "sy": 1.01,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "jordan": {
+      "suit": "#758794",
+      "skin": "#bda28c",
+      "hair": "#4b433b",
+      "cut": "tied",
+      "sx": 1,
+      "sy": 1.04,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "welford": {
+      "suit": "#9a946d",
+      "skin": "#b99a7d",
+      "hair": "#716351",
+      "cut": "short",
+      "sx": 1.04,
+      "sy": 1,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    },
+    "powell": {
+      "suit": "#818c79",
+      "skin": "#a3846c",
+      "hair": "#403b36",
+      "cut": "short",
+      "sx": 1.02,
+      "sy": 1.04,
+      "status": "interprétation visuelle provisoire",
+      "note": "Identité civile ; coupe, morphologie et couleurs non certifiées par les extraits examinés. Aucun visage de comédien vocal employé."
+    }
+  },
+  "rooms": [
+    {
+      "id": "bridge",
+      "name": "Passerelle du Marion",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2160,
+      "portals": [
+        {
+          "id": "e01:bridge",
+          "edge": "e01",
+          "target": "comms",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e02:bridge",
+          "edge": "e02",
+          "target": "junction",
+          "kind": "door",
+          "x": 2070,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e01:bridge:return:-1",
+          "portal": "e01:bridge",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e01:bridge:return:1",
+          "portal": "e01:bridge",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e02:bridge:return:-1",
+          "portal": "e02:bridge",
+          "x": 2000,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e02:bridge:return:1",
+          "portal": "e02:bridge",
+          "x": 2128,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "comms",
+      "name": "Relais des communications",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1680,
+      "portals": [
+        {
+          "id": "e01:comms",
+          "edge": "e01",
+          "target": "bridge",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e01:comms:return:-1",
+          "portal": "e01:comms",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e01:comms:return:1",
+          "portal": "e01:comms",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "junction",
+      "name": "Coursive des équipages",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2460,
+      "portals": [
+        {
+          "id": "e02:junction",
+          "edge": "e02",
+          "target": "bridge",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e03:junction",
+          "edge": "e03",
+          "target": "engineering",
+          "kind": "door",
+          "x": 2370,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e04:junction",
+          "edge": "e04",
+          "target": "medical",
+          "kind": "door",
+          "x": 861,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e05:junction",
+          "edge": "e05",
+          "target": "airlock",
+          "kind": "door",
+          "x": 1304,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-rec-0:a",
+          "edge": "oth-annex-rec-0",
+          "target": "rec",
+          "x": 1697,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e02:junction:return:-1",
+          "portal": "e02:junction",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e02:junction:return:1",
+          "portal": "e02:junction",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e03:junction:return:-1",
+          "portal": "e03:junction",
+          "x": 2300,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e03:junction:return:1",
+          "portal": "e03:junction",
+          "x": 2428,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-0:a:return:-1",
+          "portal": "oth-annex-rec-0:a",
+          "x": 1627,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-0:a:return:1",
+          "portal": "oth-annex-rec-0:a",
+          "x": 1755,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "name": "Distribution électrique",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2520,
+      "portals": [
+        {
+          "id": "e03:engineering",
+          "edge": "e03",
+          "target": "junction",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e08:engineering",
+          "edge": "e08",
+          "target": "workshop",
+          "kind": "door",
+          "x": 2430,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e09:engineering",
+          "edge": "e09",
+          "target": "server",
+          "kind": "door",
+          "x": 882,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-maintenance-0:a",
+          "edge": "oth-annex-maintenance-0",
+          "target": "maintenance",
+          "x": 1738,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e03:engineering:return:-1",
+          "portal": "e03:engineering",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e03:engineering:return:1",
+          "portal": "e03:engineering",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e08:engineering:return:-1",
+          "portal": "e08:engineering",
+          "x": 2360,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e08:engineering:return:1",
+          "portal": "e08:engineering",
+          "x": 2488,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-0:a:return:-1",
+          "portal": "oth-annex-maintenance-0:a",
+          "x": 1668,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-0:a:return:1",
+          "portal": "oth-annex-maintenance-0:a",
+          "x": 1796,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "airlock",
+      "name": "Sas de confinement",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1700,
+      "portals": [
+        {
+          "id": "e05:airlock",
+          "edge": "e05",
+          "target": "junction",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e06:airlock",
+          "edge": "e06",
+          "target": "hangar",
+          "kind": "door",
+          "x": 1610,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e05:airlock:return:-1",
+          "portal": "e05:airlock",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e05:airlock:return:1",
+          "portal": "e05:airlock",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e06:airlock:return:-1",
+          "portal": "e06:airlock",
+          "x": 1540,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e06:airlock:return:1",
+          "portal": "e06:airlock",
+          "x": 1668,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "hangar",
+      "name": "Hangar des navettes",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2860,
+      "portals": [
+        {
+          "id": "e06:hangar",
+          "edge": "e06",
+          "target": "airlock",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e07:hangar",
+          "edge": "e07",
+          "target": "breach",
+          "kind": "door",
+          "x": 2770,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e10:hangar",
+          "edge": "e10",
+          "target": "dock",
+          "kind": "door",
+          "x": 1001,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e12:hangar",
+          "edge": "e12",
+          "target": "boarding",
+          "kind": "door",
+          "x": 1516,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e30:hangar",
+          "edge": "e30",
+          "target": "hold",
+          "kind": "door",
+          "x": 2031,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-cargo:hangar",
+          "edge": "service-cargo",
+          "target": "workshop",
+          "kind": "door",
+          "x": 390,
+          "y": 88,
+          "repair": "repair-cargo",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e06:hangar:return:-1",
+          "portal": "e06:hangar",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e06:hangar:return:1",
+          "portal": "e06:hangar",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e07:hangar:return:-1",
+          "portal": "e07:hangar",
+          "x": 2700,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e07:hangar:return:1",
+          "portal": "e07:hangar",
+          "x": 2828,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-cargo:hangar:return:-1",
+          "portal": "service-cargo:hangar",
+          "x": 320,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-cargo:hangar:return:1",
+          "portal": "service-cargo:hangar",
+          "x": 448,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "breach",
+      "name": "Brèche de la Delilah",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 2240,
+      "portals": [
+        {
+          "id": "e07:breach",
+          "edge": "e07",
+          "target": "hangar",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e07:breach:return:-1",
+          "portal": "e07:breach",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e07:breach:return:1",
+          "portal": "e07:breach",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Atelier de bord",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1960,
+      "portals": [
+        {
+          "id": "e08:workshop",
+          "edge": "e08",
+          "target": "engineering",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-rec-1:a",
+          "edge": "oth-annex-rec-1",
+          "target": "rec",
+          "x": 784,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-cargo:workshop",
+          "edge": "service-cargo",
+          "target": "hangar",
+          "kind": "door",
+          "x": 630,
+          "y": 88,
+          "repair": "repair-cargo",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e08:workshop:return:-1",
+          "portal": "e08:workshop",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e08:workshop:return:1",
+          "portal": "e08:workshop",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-1:a:return:-1",
+          "portal": "oth-annex-rec-1:a",
+          "x": 714,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-1:a:return:1",
+          "portal": "oth-annex-rec-1:a",
+          "x": 842,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-cargo:workshop:return:-1",
+          "portal": "service-cargo:workshop",
+          "x": 560,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-cargo:workshop:return:1",
+          "portal": "service-cargo:workshop",
+          "x": 688,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "medical",
+      "name": "Infirmerie",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2240,
+      "portals": [
+        {
+          "id": "e04:medical",
+          "edge": "e04",
+          "target": "junction",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e31:medical",
+          "edge": "e31",
+          "target": "hold",
+          "kind": "door",
+          "x": 2150,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-medical:medical",
+          "edge": "service-medical",
+          "target": "rec",
+          "kind": "door",
+          "x": 1530,
+          "y": 88,
+          "repair": "repair-medical",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e04:medical:return:-1",
+          "portal": "e04:medical",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e04:medical:return:1",
+          "portal": "e04:medical",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e31:medical:return:-1",
+          "portal": "e31:medical",
+          "x": 2080,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e31:medical:return:1",
+          "portal": "e31:medical",
+          "x": 2208,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-medical:medical:return:-1",
+          "portal": "service-medical:medical",
+          "x": 1460,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-medical:medical:return:1",
+          "portal": "service-medical:medical",
+          "x": 1588,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "server",
+      "name": "Cœur informatique",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1960,
+      "portals": [
+        {
+          "id": "e09:server",
+          "edge": "e09",
+          "target": "engineering",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-maintenance-1:a",
+          "edge": "oth-annex-maintenance-1",
+          "target": "maintenance",
+          "x": 784,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e09:server:return:-1",
+          "portal": "e09:server",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e09:server:return:1",
+          "portal": "e09:server",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-1:a:return:-1",
+          "portal": "oth-annex-maintenance-1:a",
+          "x": 714,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-1:a:return:1",
+          "portal": "oth-annex-maintenance-1:a",
+          "x": 842,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "dock",
+      "name": "Amarrage du Narcissus",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2100,
+      "portals": [
+        {
+          "id": "e10:dock",
+          "edge": "e10",
+          "target": "hangar",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e11:dock",
+          "edge": "e11",
+          "target": "narcissus",
+          "kind": "door",
+          "x": 2010,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e10:dock:return:-1",
+          "portal": "e10:dock",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e10:dock:return:1",
+          "portal": "e10:dock",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e11:dock:return:-1",
+          "portal": "e11:dock",
+          "x": 1940,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e11:dock:return:1",
+          "portal": "e11:dock",
+          "x": 2068,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "narcissus",
+      "name": "Narcissus — cryostase",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1600,
+      "portals": [
+        {
+          "id": "e11:narcissus",
+          "edge": "e11",
+          "target": "dock",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e11:narcissus:return:-1",
+          "portal": "e11:narcissus",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e11:narcissus:return:1",
+          "portal": "e11:narcissus",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "samson",
+      "name": "Samson — soute",
+      "fidelity": {
+        "existence": "fonction/lieu attesté dans un extrait",
+        "layout": "plan original non coté",
+        "source": "F02"
+      },
+      "mode": "depth",
+      "width": 2140,
+      "portals": [
+        {
+          "id": "e13:samson",
+          "edge": "e13",
+          "target": "cockpit",
+          "kind": "door",
+          "x": 2050,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v10-arm-samson:samson",
+          "edge": "v10-arm-samson",
+          "target": "docking_arm",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e13:samson:return:-1",
+          "portal": "e13:samson",
+          "x": 1980,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e13:samson:return:1",
+          "portal": "e13:samson",
+          "x": 2108,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-arm-samson:samson:return:-1",
+          "portal": "v10-arm-samson:samson",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-arm-samson:samson:return:1",
+          "portal": "v10-arm-samson:samson",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "cockpit",
+      "name": "Samson — cockpit",
+      "fidelity": {
+        "existence": "fonction/lieu attesté dans un extrait",
+        "layout": "plan original non coté",
+        "source": "F02"
+      },
+      "mode": "profile",
+      "width": 1560,
+      "portals": [
+        {
+          "id": "e13:cockpit",
+          "edge": "e13",
+          "target": "samson",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e14:cockpit",
+          "edge": "e14",
+          "target": "landing",
+          "kind": "shuttle",
+          "x": 1470,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e13:cockpit:return:-1",
+          "portal": "e13:cockpit",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e13:cockpit:return:1",
+          "portal": "e13:cockpit",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e14:cockpit:return:-1",
+          "portal": "e14:cockpit",
+          "x": 1400,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e14:cockpit:return:1",
+          "portal": "e14:cockpit",
+          "x": 1528,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "landing",
+      "name": "LV-178 — aire d’atterrissage",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2800,
+      "portals": [
+        {
+          "id": "e14:landing",
+          "edge": "e14",
+          "target": "cockpit",
+          "kind": "shuttle",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e15:landing",
+          "edge": "e15",
+          "target": "control",
+          "kind": "door",
+          "x": 2710,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e14:landing:return:-1",
+          "portal": "e14:landing",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e14:landing:return:1",
+          "portal": "e14:landing",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e15:landing:return:-1",
+          "portal": "e15:landing",
+          "x": 2640,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e15:landing:return:1",
+          "portal": "e15:landing",
+          "x": 2768,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Poste de la concession",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2100,
+      "portals": [
+        {
+          "id": "e15:control",
+          "edge": "e15",
+          "target": "landing",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e16:control",
+          "edge": "e16",
+          "target": "stores",
+          "kind": "door",
+          "x": 2010,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e17:control",
+          "edge": "e17",
+          "target": "lift_top",
+          "kind": "door",
+          "x": 735,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e15:control:return:-1",
+          "portal": "e15:control",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e15:control:return:1",
+          "portal": "e15:control",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e16:control:return:-1",
+          "portal": "e16:control",
+          "x": 1940,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e16:control:return:1",
+          "portal": "e16:control",
+          "x": 2068,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "stores",
+      "name": "Réserve des cellules",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2360,
+      "portals": [
+        {
+          "id": "e16:stores",
+          "edge": "e16",
+          "target": "control",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e29:stores",
+          "edge": "e29",
+          "target": "lift_east",
+          "kind": "lift",
+          "x": 2270,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e16:stores:return:-1",
+          "portal": "e16:stores",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e16:stores:return:1",
+          "portal": "e16:stores",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e29:stores:return:-1",
+          "portal": "e29:stores",
+          "x": 2200,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e29:stores:return:1",
+          "portal": "e29:stores",
+          "x": 2328,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "lift_top",
+      "name": "Puits principal — tête",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1700,
+      "portals": [
+        {
+          "id": "e17:lift_top",
+          "edge": "e17",
+          "target": "control",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e18:lift_top",
+          "edge": "e18",
+          "target": "lift_bottom",
+          "kind": "lift",
+          "x": 1610,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e17:lift_top:return:-1",
+          "portal": "e17:lift_top",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e17:lift_top:return:1",
+          "portal": "e17:lift_top",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e18:lift_top:return:-1",
+          "portal": "e18:lift_top",
+          "x": 1540,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e18:lift_top:return:1",
+          "portal": "e18:lift_top",
+          "x": 1668,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "lift_bottom",
+      "name": "Puits principal — fond",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 2020,
+      "portals": [
+        {
+          "id": "e18:lift_bottom",
+          "edge": "e18",
+          "target": "lift_top",
+          "kind": "lift",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e19:lift_bottom",
+          "edge": "e19",
+          "target": "haul",
+          "kind": "door",
+          "x": 1930,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e18:lift_bottom:return:-1",
+          "portal": "e18:lift_bottom",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e18:lift_bottom:return:1",
+          "portal": "e18:lift_bottom",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e19:lift_bottom:return:-1",
+          "portal": "e19:lift_bottom",
+          "x": 1860,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e19:lift_bottom:return:1",
+          "portal": "e19:lift_bottom",
+          "x": 1988,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "haul",
+      "name": "Galerie de roulage",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2840,
+      "portals": [
+        {
+          "id": "e19:haul",
+          "edge": "e19",
+          "target": "lift_bottom",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e20:haul",
+          "edge": "e20",
+          "target": "pump",
+          "kind": "door",
+          "x": 2750,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e21:haul",
+          "edge": "e21",
+          "target": "refuge",
+          "kind": "door",
+          "x": 994,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e22:haul",
+          "edge": "e22",
+          "target": "vein",
+          "kind": "door",
+          "x": 1505,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-drain-0:a",
+          "edge": "oth-annex-drain-0",
+          "target": "drain",
+          "x": 1136,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-haul-return:haul",
+          "edge": "v07-haul-return",
+          "target": "return_gallery",
+          "x": 1310,
+          "y": 5,
+          "kind": "door",
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e19:haul:return:-1",
+          "portal": "e19:haul",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e19:haul:return:1",
+          "portal": "e19:haul",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e20:haul:return:-1",
+          "portal": "e20:haul",
+          "x": 2680,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e20:haul:return:1",
+          "portal": "e20:haul",
+          "x": 2808,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-0:a:return:-1",
+          "portal": "oth-annex-drain-0:a",
+          "x": 1066,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-0:a:return:1",
+          "portal": "oth-annex-drain-0:a",
+          "x": 1194,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "pump",
+      "name": "Station de pompage",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2420,
+      "portals": [
+        {
+          "id": "e20:pump",
+          "edge": "e20",
+          "target": "haul",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e32:pump",
+          "edge": "e32",
+          "target": "vein",
+          "kind": "door",
+          "x": 2330,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-drain-1:a",
+          "edge": "oth-annex-drain-1",
+          "target": "drain",
+          "x": 968,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e20:pump:return:-1",
+          "portal": "e20:pump",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e20:pump:return:1",
+          "portal": "e20:pump",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e32:pump:return:-1",
+          "portal": "e32:pump",
+          "x": 2260,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e32:pump:return:1",
+          "portal": "e32:pump",
+          "x": 2388,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-1:a:return:-1",
+          "portal": "oth-annex-drain-1:a",
+          "x": 898,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-1:a:return:1",
+          "portal": "oth-annex-drain-1:a",
+          "x": 1026,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "refuge",
+      "name": "Abri des mineurs",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1800,
+      "portals": [
+        {
+          "id": "e21:refuge",
+          "edge": "e21",
+          "target": "haul",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e21:refuge:return:-1",
+          "portal": "e21:refuge",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e21:refuge:return:1",
+          "portal": "e21:refuge",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "vein",
+      "name": "Front de trimonite",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2660,
+      "portals": [
+        {
+          "id": "e22:vein",
+          "edge": "e22",
+          "target": "haul",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e23:vein",
+          "edge": "e23",
+          "target": "fissure",
+          "kind": "door",
+          "x": 2570,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e32:vein",
+          "edge": "e32",
+          "target": "pump",
+          "kind": "door",
+          "x": 931,
+          "y": 5,
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-mine:vein",
+          "edge": "service-mine",
+          "target": "drain",
+          "kind": "door",
+          "x": 370,
+          "y": 88,
+          "repair": "repair-mine",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-exchange-vein:vein",
+          "edge": "v07-exchange-vein",
+          "target": "exchanger",
+          "x": 2370,
+          "y": 5,
+          "kind": "door",
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e22:vein:return:-1",
+          "portal": "e22:vein",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e22:vein:return:1",
+          "portal": "e22:vein",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e23:vein:return:-1",
+          "portal": "e23:vein",
+          "x": 2500,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e23:vein:return:1",
+          "portal": "e23:vein",
+          "x": 2628,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-mine:vein:return:-1",
+          "portal": "service-mine:vein",
+          "x": 300,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-mine:vein:return:1",
+          "portal": "service-mine:vein",
+          "x": 428,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "fissure",
+      "name": "Faille d’accès",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 2120,
+      "portals": [
+        {
+          "id": "e23:fissure",
+          "edge": "e23",
+          "target": "vein",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e24:fissure",
+          "edge": "e24",
+          "target": "vestibule",
+          "kind": "door",
+          "x": 2030,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e23:fissure:return:-1",
+          "portal": "e23:fissure",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e23:fissure:return:1",
+          "portal": "e23:fissure",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e24:fissure:return:-1",
+          "portal": "e24:fissure",
+          "x": 1960,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e24:fissure:return:1",
+          "portal": "e24:fissure",
+          "x": 2088,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "vestibule",
+      "name": "Épave enfouie — seuil",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2580,
+      "portals": [
+        {
+          "id": "e24:vestibule",
+          "edge": "e24",
+          "target": "fissure",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e25:vestibule",
+          "edge": "e25",
+          "target": "fossils",
+          "kind": "door",
+          "x": 2490,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e24:vestibule:return:-1",
+          "portal": "e24:vestibule",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e24:vestibule:return:1",
+          "portal": "e24:vestibule",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e25:vestibule:return:-1",
+          "portal": "e25:vestibule",
+          "x": 2420,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e25:vestibule:return:1",
+          "portal": "e25:vestibule",
+          "x": 2548,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "fossils",
+      "name": "Chambre des vestiges",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2400,
+      "portals": [
+        {
+          "id": "e25:fossils",
+          "edge": "e25",
+          "target": "vestibule",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e26:fossils",
+          "edge": "e26",
+          "target": "eggs",
+          "kind": "door",
+          "x": 2310,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-alcove-0:a",
+          "edge": "oth-annex-alcove-0",
+          "target": "alcove",
+          "x": 960,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e25:fossils:return:-1",
+          "portal": "e25:fossils",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e25:fossils:return:1",
+          "portal": "e25:fossils",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e26:fossils:return:-1",
+          "portal": "e26:fossils",
+          "x": 2240,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e26:fossils:return:1",
+          "portal": "e26:fossils",
+          "x": 2368,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-0:a:return:-1",
+          "portal": "oth-annex-alcove-0:a",
+          "x": 890,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-0:a:return:1",
+          "portal": "oth-annex-alcove-0:a",
+          "x": 1018,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "eggs",
+      "name": "Chambre d’incubation",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2860,
+      "portals": [
+        {
+          "id": "e26:eggs",
+          "edge": "e26",
+          "target": "fossils",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e27:eggs",
+          "edge": "e27",
+          "target": "bypass",
+          "kind": "door",
+          "x": 2770,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e26:eggs:return:-1",
+          "portal": "e26:eggs",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e26:eggs:return:1",
+          "portal": "e26:eggs",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e27:eggs:return:-1",
+          "portal": "e27:eggs",
+          "x": 2700,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e27:eggs:return:1",
+          "portal": "e27:eggs",
+          "x": 2828,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "bypass",
+      "name": "Suture de la coque",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 2200,
+      "portals": [
+        {
+          "id": "e27:bypass",
+          "edge": "e27",
+          "target": "eggs",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e28:bypass",
+          "edge": "e28",
+          "target": "lift_east",
+          "kind": "door",
+          "x": 2110,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-alcove-1:a",
+          "edge": "oth-annex-alcove-1",
+          "target": "alcove",
+          "x": 880,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e27:bypass:return:-1",
+          "portal": "e27:bypass",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e27:bypass:return:1",
+          "portal": "e27:bypass",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e28:bypass:return:-1",
+          "portal": "e28:bypass",
+          "x": 2040,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e28:bypass:return:1",
+          "portal": "e28:bypass",
+          "x": 2168,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-1:a:return:-1",
+          "portal": "oth-annex-alcove-1:a",
+          "x": 810,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-1:a:return:1",
+          "portal": "oth-annex-alcove-1:a",
+          "x": 938,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "lift_east",
+      "name": "Puits secondaire — cage",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1960,
+      "portals": [
+        {
+          "id": "e28:lift_east",
+          "edge": "e28",
+          "target": "bypass",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e29:lift_east",
+          "edge": "e29",
+          "target": "stores",
+          "kind": "lift",
+          "x": 1870,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e28:lift_east:return:-1",
+          "portal": "e28:lift_east",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e28:lift_east:return:1",
+          "portal": "e28:lift_east",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e29:lift_east:return:-1",
+          "portal": "e29:lift_east",
+          "x": 1800,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e29:lift_east:return:1",
+          "portal": "e29:lift_east",
+          "x": 1928,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "hold",
+      "name": "Soute de quarantaine",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2600,
+      "portals": [
+        {
+          "id": "e30:hold",
+          "edge": "e30",
+          "target": "hangar",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "e31:hold",
+          "edge": "e31",
+          "target": "medical",
+          "kind": "door",
+          "x": 2510,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e30:hold:return:-1",
+          "portal": "e30:hold",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e30:hold:return:1",
+          "portal": "e30:hold",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e31:hold:return:-1",
+          "portal": "e31:hold",
+          "x": 2440,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e31:hold:return:1",
+          "portal": "e31:hold",
+          "x": 2568,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "rec",
+      "name": "BeeBee’s — carré de repos",
+      "fidelity": {
+        "existence": "fonction ou subdivision reconstruite ; attestation individuelle non établie par les extraits retenus",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1780,
+      "portals": [
+        {
+          "id": "oth-annex-rec-0:b",
+          "edge": "oth-annex-rec-0",
+          "target": "junction",
+          "x": 110,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-rec-1:b",
+          "edge": "oth-annex-rec-1",
+          "target": "workshop",
+          "x": 1670,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-medical:rec",
+          "edge": "service-medical",
+          "target": "medical",
+          "kind": "door",
+          "x": 925,
+          "y": 88,
+          "repair": "repair-medical",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "oth-annex-rec-0:b:return:-1",
+          "portal": "oth-annex-rec-0:b",
+          "x": 40,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-0:b:return:1",
+          "portal": "oth-annex-rec-0:b",
+          "x": 168,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-1:b:return:-1",
+          "portal": "oth-annex-rec-1:b",
+          "x": 1600,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-rec-1:b:return:1",
+          "portal": "oth-annex-rec-1:b",
+          "x": 1728,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-medical:rec:return:-1",
+          "portal": "service-medical:rec",
+          "x": 855,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-medical:rec:return:1",
+          "portal": "service-medical:rec",
+          "x": 983,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "name": "Galerie des auxiliaires",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1840,
+      "portals": [
+        {
+          "id": "oth-annex-maintenance-0:b",
+          "edge": "oth-annex-maintenance-0",
+          "target": "engineering",
+          "x": 110,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-maintenance-1:b",
+          "edge": "oth-annex-maintenance-1",
+          "target": "server",
+          "x": 1730,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "oth-annex-maintenance-0:b:return:-1",
+          "portal": "oth-annex-maintenance-0:b",
+          "x": 40,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-0:b:return:1",
+          "portal": "oth-annex-maintenance-0:b",
+          "x": 168,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-1:b:return:-1",
+          "portal": "oth-annex-maintenance-1:b",
+          "x": 1660,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-maintenance-1:b:return:1",
+          "portal": "oth-annex-maintenance-1:b",
+          "x": 1788,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "drain",
+      "name": "Canal de décantation",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2200,
+      "portals": [
+        {
+          "id": "oth-annex-drain-0:b",
+          "edge": "oth-annex-drain-0",
+          "target": "haul",
+          "x": 110,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-drain-1:b",
+          "edge": "oth-annex-drain-1",
+          "target": "pump",
+          "x": 2090,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "service-mine:drain",
+          "edge": "service-mine",
+          "target": "vein",
+          "kind": "door",
+          "x": 395,
+          "y": 88,
+          "repair": "repair-mine",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "oth-annex-drain-0:b:return:-1",
+          "portal": "oth-annex-drain-0:b",
+          "x": 40,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-0:b:return:1",
+          "portal": "oth-annex-drain-0:b",
+          "x": 168,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-1:b:return:-1",
+          "portal": "oth-annex-drain-1:b",
+          "x": 2020,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-drain-1:b:return:1",
+          "portal": "oth-annex-drain-1:b",
+          "x": 2148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-mine:drain:return:-1",
+          "portal": "service-mine:drain",
+          "x": 325,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "service-mine:drain:return:1",
+          "portal": "service-mine:drain",
+          "x": 453,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "alcove",
+      "name": "Alcôve des vestiges",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1940,
+      "portals": [
+        {
+          "id": "oth-annex-alcove-0:b",
+          "edge": "oth-annex-alcove-0",
+          "target": "fossils",
+          "x": 110,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "oth-annex-alcove-1:b",
+          "edge": "oth-annex-alcove-1",
+          "target": "bypass",
+          "x": 1830,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": true,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "oth-annex-alcove-0:b:return:-1",
+          "portal": "oth-annex-alcove-0:b",
+          "x": 40,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-0:b:return:1",
+          "portal": "oth-annex-alcove-0:b",
+          "x": 168,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-1:b:return:-1",
+          "portal": "oth-annex-alcove-1:b",
+          "x": 1760,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "oth-annex-alcove-1:b:return:1",
+          "portal": "oth-annex-alcove-1:b",
+          "x": 1888,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "return_gallery",
+      "name": "Galerie de retour",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1980,
+      "portals": [
+        {
+          "id": "v07-haul-return:return_gallery",
+          "edge": "v07-haul-return",
+          "target": "haul",
+          "x": 90,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-return-exchange:return_gallery",
+          "edge": "v07-return-exchange",
+          "target": "exchanger",
+          "x": 1890,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-return-survey:return_gallery",
+          "edge": "v07-return-survey",
+          "target": "survey",
+          "x": 1200,
+          "y": 5,
+          "kind": "door",
+          "mount": {
+            "type": "rear-wall",
+            "organic": false,
+            "depth": 0,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v07-haul-return:return_gallery:return:-1",
+          "portal": "v07-haul-return:return_gallery",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-haul-return:return_gallery:return:1",
+          "portal": "v07-haul-return:return_gallery",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-return-exchange:return_gallery:return:-1",
+          "portal": "v07-return-exchange:return_gallery",
+          "x": 1820,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-return-exchange:return_gallery:return:1",
+          "portal": "v07-return-exchange:return_gallery",
+          "x": 1948,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "exchanger",
+      "name": "Salle des échangeurs",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 2240,
+      "portals": [
+        {
+          "id": "v07-return-exchange:exchanger",
+          "edge": "v07-return-exchange",
+          "target": "return_gallery",
+          "x": 90,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-exchange-vein:exchanger",
+          "edge": "v07-exchange-vein",
+          "target": "vein",
+          "x": 2150,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-store-exchange:exchanger",
+          "edge": "v07-store-exchange",
+          "target": "specimen_store",
+          "x": 1820,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "service-vestibule",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v07-return-exchange:exchanger:return:-1",
+          "portal": "v07-return-exchange:exchanger",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-return-exchange:exchanger:return:1",
+          "portal": "v07-return-exchange:exchanger",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-exchange-vein:exchanger:return:-1",
+          "portal": "v07-exchange-vein:exchanger",
+          "x": 2080,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-exchange-vein:exchanger:return:1",
+          "portal": "v07-exchange-vein:exchanger",
+          "x": 2208,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-store-exchange:exchanger:return:-1",
+          "portal": "v07-store-exchange:exchanger",
+          "x": 1750,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-store-exchange:exchanger:return:1",
+          "portal": "v07-store-exchange:exchanger",
+          "x": 1878,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "name": "Poste de relevé",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "profile",
+      "width": 1810,
+      "portals": [
+        {
+          "id": "v07-return-survey:survey",
+          "edge": "v07-return-survey",
+          "target": "return_gallery",
+          "x": 90,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-survey-store:survey",
+          "edge": "v07-survey-store",
+          "target": "specimen_store",
+          "x": 1720,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v07-return-survey:survey:return:-1",
+          "portal": "v07-return-survey:survey",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-return-survey:survey:return:1",
+          "portal": "v07-return-survey:survey",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-survey-store:survey:return:-1",
+          "portal": "v07-survey-store:survey",
+          "x": 1650,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-survey-store:survey:return:1",
+          "portal": "v07-survey-store:survey",
+          "x": 1778,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "specimen_store",
+      "name": "Réserve des prélèvements",
+      "fidelity": {
+        "existence": "annexe originale du jeu, pas pièce canonique certifiée",
+        "layout": "plan original non coté",
+        "source": null
+      },
+      "mode": "depth",
+      "width": 1990,
+      "portals": [
+        {
+          "id": "v07-survey-store:specimen_store",
+          "edge": "v07-survey-store",
+          "target": "survey",
+          "x": 90,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v07-store-exchange:specimen_store",
+          "edge": "v07-store-exchange",
+          "target": "exchanger",
+          "x": 1900,
+          "y": 88,
+          "kind": "door",
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v07-survey-store:specimen_store:return:-1",
+          "portal": "v07-survey-store:specimen_store",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-survey-store:specimen_store:return:1",
+          "portal": "v07-survey-store:specimen_store",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-store-exchange:specimen_store:return:-1",
+          "portal": "v07-store-exchange:specimen_store",
+          "x": 1830,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v07-store-exchange:specimen_store:return:1",
+          "portal": "v07-store-exchange:specimen_store",
+          "x": 1958,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "boarding",
+      "name": "Vestibule d’embarquement",
+      "fidelity": {
+        "existence": "fonction/lieu attesté dans un extrait",
+        "layout": "plan original non coté",
+        "source": "F02"
+      },
+      "mode": "depth",
+      "width": 2440,
+      "portals": [
+        {
+          "id": "e12:boarding",
+          "edge": "e12",
+          "target": "hangar",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v10-boarding-airlock:boarding",
+          "edge": "v10-boarding-airlock",
+          "target": "docking_airlock",
+          "kind": "door",
+          "x": 2350,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "e12:boarding:return:-1",
+          "portal": "e12:boarding",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "e12:boarding:return:1",
+          "portal": "e12:boarding",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-boarding-airlock:boarding:return:-1",
+          "portal": "v10-boarding-airlock:boarding",
+          "x": 2280,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-boarding-airlock:boarding:return:1",
+          "portal": "v10-boarding-airlock:boarding",
+          "x": 2408,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "docking_airlock",
+      "name": "Sas d’amarrage",
+      "fidelity": {
+        "existence": "fonction/lieu attesté dans un extrait",
+        "layout": "plan original non coté",
+        "source": "F02"
+      },
+      "mode": "profile",
+      "width": 1480,
+      "portals": [
+        {
+          "id": "v10-boarding-airlock:docking_airlock",
+          "edge": "v10-boarding-airlock",
+          "target": "boarding",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v10-airlock-arm:docking_airlock",
+          "edge": "v10-airlock-arm",
+          "target": "docking_arm",
+          "kind": "door",
+          "x": 1390,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v10-boarding-airlock:docking_airlock:return:-1",
+          "portal": "v10-boarding-airlock:docking_airlock",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-boarding-airlock:docking_airlock:return:1",
+          "portal": "v10-boarding-airlock:docking_airlock",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-airlock-arm:docking_airlock:return:-1",
+          "portal": "v10-airlock-arm:docking_airlock",
+          "x": 1320,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-airlock-arm:docking_airlock:return:1",
+          "portal": "v10-airlock-arm:docking_airlock",
+          "x": 1448,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    },
+    {
+      "id": "docking_arm",
+      "name": "Bras d’amarrage du Samson",
+      "fidelity": {
+        "existence": "fonction/lieu attesté dans un extrait",
+        "layout": "plan original non coté",
+        "source": "F02"
+      },
+      "mode": "profile",
+      "width": 1900,
+      "portals": [
+        {
+          "id": "v10-airlock-arm:docking_arm",
+          "edge": "v10-airlock-arm",
+          "target": "docking_airlock",
+          "kind": "door",
+          "x": 90,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        },
+        {
+          "id": "v10-arm-samson:docking_arm",
+          "edge": "v10-arm-samson",
+          "target": "samson",
+          "kind": "door",
+          "x": 1810,
+          "y": 88,
+          "mount": {
+            "type": "terminal-alcove",
+            "organic": false,
+            "depth": 60,
+            "width": 116,
+            "source": "geometry-reconstruction"
+          }
+        }
+      ],
+      "walls": [
+        {
+          "id": "v10-airlock-arm:docking_arm:return:-1",
+          "portal": "v10-airlock-arm:docking_arm",
+          "x": 20,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-airlock-arm:docking_arm:return:1",
+          "portal": "v10-airlock-arm:docking_arm",
+          "x": 148,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-arm-samson:docking_arm:return:-1",
+          "portal": "v10-arm-samson:docking_arm",
+          "x": 1740,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        },
+        {
+          "id": "v10-arm-samson:docking_arm:return:1",
+          "portal": "v10-arm-samson:docking_arm",
+          "x": 1868,
+          "y": 0,
+          "w": 12,
+          "h": 60
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e01",
+      "a": "bridge",
+      "b": "comms",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e02",
+      "a": "bridge",
+      "b": "junction",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e03",
+      "a": "junction",
+      "b": "engineering",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e04",
+      "a": "junction",
+      "b": "medical",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e05",
+      "a": "junction",
+      "b": "airlock",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e06",
+      "a": "airlock",
+      "b": "hangar",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e07",
+      "a": "hangar",
+      "b": "breach",
+      "kind": "door",
+      "minChapter": 1
+    },
+    {
+      "id": "e08",
+      "a": "engineering",
+      "b": "workshop",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e09",
+      "a": "engineering",
+      "b": "server",
+      "kind": "door",
+      "minChapter": 0
+    },
+    {
+      "id": "e10",
+      "a": "hangar",
+      "b": "dock",
+      "kind": "door",
+      "minChapter": 2
+    },
+    {
+      "id": "e11",
+      "a": "dock",
+      "b": "narcissus",
+      "kind": "door",
+      "minChapter": 2
+    },
+    {
+      "id": "e12",
+      "a": "hangar",
+      "b": "boarding",
+      "kind": "door",
+      "minChapter": 3
+    },
+    {
+      "id": "e13",
+      "a": "samson",
+      "b": "cockpit",
+      "kind": "door",
+      "minChapter": 3
+    },
+    {
+      "id": "e14",
+      "a": "cockpit",
+      "b": "landing",
+      "kind": "shuttle",
+      "minChapter": 5,
+      "blockedChapters": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "e15",
+      "a": "landing",
+      "b": "control",
+      "kind": "door",
+      "minChapter": 5
+    },
+    {
+      "id": "e16",
+      "a": "control",
+      "b": "stores",
+      "kind": "door",
+      "minChapter": 5
+    },
+    {
+      "id": "e17",
+      "a": "control",
+      "b": "lift_top",
+      "kind": "door",
+      "minChapter": 5
+    },
+    {
+      "id": "e18",
+      "a": "lift_top",
+      "b": "lift_bottom",
+      "kind": "lift",
+      "minChapter": 6,
+      "blockedChapters": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "e19",
+      "a": "lift_bottom",
+      "b": "haul",
+      "kind": "door",
+      "minChapter": 6
+    },
+    {
+      "id": "e20",
+      "a": "haul",
+      "b": "pump",
+      "kind": "door",
+      "minChapter": 6
+    },
+    {
+      "id": "e21",
+      "a": "haul",
+      "b": "refuge",
+      "kind": "door",
+      "minChapter": 6
+    },
+    {
+      "id": "e22",
+      "a": "haul",
+      "b": "vein",
+      "kind": "door",
+      "minChapter": 6
+    },
+    {
+      "id": "e23",
+      "a": "vein",
+      "b": "fissure",
+      "kind": "door",
+      "minChapter": 7
+    },
+    {
+      "id": "e24",
+      "a": "fissure",
+      "b": "vestibule",
+      "kind": "door",
+      "minChapter": 8
+    },
+    {
+      "id": "e25",
+      "a": "vestibule",
+      "b": "fossils",
+      "kind": "door",
+      "minChapter": 8
+    },
+    {
+      "id": "e26",
+      "a": "fossils",
+      "b": "eggs",
+      "kind": "door",
+      "minChapter": 8
+    },
+    {
+      "id": "e27",
+      "a": "eggs",
+      "b": "bypass",
+      "kind": "door",
+      "minChapter": 9
+    },
+    {
+      "id": "e28",
+      "a": "bypass",
+      "b": "lift_east",
+      "kind": "door",
+      "minChapter": 9
+    },
+    {
+      "id": "e29",
+      "a": "lift_east",
+      "b": "stores",
+      "kind": "lift",
+      "minChapter": 10
+    },
+    {
+      "id": "e30",
+      "a": "hangar",
+      "b": "hold",
+      "kind": "door",
+      "minChapter": 12
+    },
+    {
+      "id": "e31",
+      "a": "hold",
+      "b": "medical",
+      "kind": "door",
+      "minChapter": 12
+    },
+    {
+      "id": "e32",
+      "a": "pump",
+      "b": "vein",
+      "kind": "door",
+      "minChapter": 7
+    },
+    {
+      "id": "oth-annex-rec-0",
+      "a": "junction",
+      "b": "rec",
+      "minChapter": 0,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-rec-1",
+      "a": "workshop",
+      "b": "rec",
+      "minChapter": 0,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-maintenance-0",
+      "a": "engineering",
+      "b": "maintenance",
+      "minChapter": 1,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-maintenance-1",
+      "a": "server",
+      "b": "maintenance",
+      "minChapter": 3,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-drain-0",
+      "a": "haul",
+      "b": "drain",
+      "minChapter": 7,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-drain-1",
+      "a": "pump",
+      "b": "drain",
+      "minChapter": 7,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-alcove-0",
+      "a": "fossils",
+      "b": "alcove",
+      "minChapter": 8,
+      "kind": "door"
+    },
+    {
+      "id": "oth-annex-alcove-1",
+      "a": "bypass",
+      "b": "alcove",
+      "minChapter": 9,
+      "kind": "door"
+    },
+    {
+      "id": "service-medical",
+      "a": "rec",
+      "b": "medical",
+      "kind": "door",
+      "minChapter": 0,
+      "requiresRepair": "repair-medical"
+    },
+    {
+      "id": "service-cargo",
+      "a": "workshop",
+      "b": "hangar",
+      "kind": "door",
+      "minChapter": 3,
+      "requiresRepair": "repair-cargo"
+    },
+    {
+      "id": "service-mine",
+      "a": "drain",
+      "b": "vein",
+      "kind": "door",
+      "minChapter": 7,
+      "requiresRepair": "repair-mine"
+    },
+    {
+      "id": "v07-haul-return",
+      "a": "haul",
+      "b": "return_gallery",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07"
+    },
+    {
+      "id": "v07-return-exchange",
+      "a": "return_gallery",
+      "b": "exchanger",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07"
+    },
+    {
+      "id": "v07-exchange-vein",
+      "a": "exchanger",
+      "b": "vein",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07",
+      "requiresDrain": true
+    },
+    {
+      "id": "v07-return-survey",
+      "a": "return_gallery",
+      "b": "survey",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07"
+    },
+    {
+      "id": "v07-survey-store",
+      "a": "survey",
+      "b": "specimen_store",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07"
+    },
+    {
+      "id": "v07-store-exchange",
+      "a": "specimen_store",
+      "b": "exchanger",
+      "minChapter": 7,
+      "kind": "door",
+      "sourceStatus": "original-layout-v07"
+    },
+    {
+      "id": "v10-boarding-airlock",
+      "a": "boarding",
+      "b": "docking_airlock",
+      "kind": "door",
+      "minChapter": 3
+    },
+    {
+      "id": "v10-airlock-arm",
+      "a": "docking_airlock",
+      "b": "docking_arm",
+      "kind": "door",
+      "minChapter": 3
+    },
+    {
+      "id": "v10-arm-samson",
+      "a": "docking_arm",
+      "b": "samson",
+      "kind": "door",
+      "minChapter": 3
+    }
+  ]
+}

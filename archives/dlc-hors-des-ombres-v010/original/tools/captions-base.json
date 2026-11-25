@@ -1,0 +1,107 @@
+[
+  [
+    "01_menu.png",
+    "Entrée dans la chronique",
+    "Écran titre de la V0.3. Capture du document exécuté, sans image conceptuelle ajoutée."
+  ],
+  [
+    "02_jordan_passerelle.png",
+    "Présence à la passerelle",
+    "Scène préparée au début de campagne ; les placements de personnages sont lus dans les données de scène."
+  ],
+  [
+    "03_dialogue.png",
+    "Échange de bord",
+    "Dialogue ouvert par maintien de E à proximité de Jordan. Répliques originales du prototype."
+  ],
+  [
+    "04_beebees.png",
+    "BeeBee’s",
+    "Annexe de repos conservée de la V0.2 ; ce plan est une création du jeu."
+  ],
+  [
+    "05_transcription.png",
+    "Document récupéré",
+    "Transcription affichée après maintien réel de E. Une fiche Traces est déverrouillée."
+  ],
+  [
+    "06_carnet.png",
+    "Carnet filtré",
+    "Le filtre Traces ne montre que le document collecté, pas les autres enregistrements."
+  ],
+  [
+    "07_derivation.png",
+    "Commande de dérivation",
+    "Panneau ouvert par interaction ; réglages partiels, erreur et validation testés par clics."
+  ],
+  [
+    "08_auxiliaires.png",
+    "Galerie des auxiliaires",
+    "Scène préparée dans un passage latéral. La vanne locale de cette fuite a son contrôle physique dédié."
+  ],
+  [
+    "09_pression.png",
+    "Régler le collecteur",
+    "Jauge de pression distincte des commutateurs. Le monde est en pause pendant la manipulation."
+  ],
+  [
+    "10_decantation.png",
+    "Canal de décantation",
+    "Annexe profonde conservée ; le plan de sol permet de changer de bande."
+  ],
+  [
+    "11_alcove.png",
+    "Alcôve des vestiges",
+    "Architecture organique de l’annexe. Silhouettes stylisées, pas assets définitifs ou identification officielle."
+  ],
+  [
+    "12_infirmerie.png",
+    "État de l’infirmerie",
+    "Scène tardive préparée ; blessure, pertes et présence de Ripley dépendent de la progression."
+  ],
+  [
+    "13_equipage.png",
+    "Tableau des contacts",
+    "Les contacts perdus sont distingués et ne sont pas traités comme une escouade disponible."
+  ],
+  [
+    "14_programme_medical.png",
+    "Commande médicale fictionnelle",
+    "Séquence d’interface à quatre étapes, sans procédure médicale réelle."
+  ],
+  [
+    "15_evacuation.png",
+    "Portage de Ripley",
+    "Scène préparée après l’événement médical ; pose allongée et interdiction de flamme pendant le portage."
+  ],
+  [
+    "16_quai_libere.png",
+    "Quai après largage",
+    "La silhouette du Narcissus est retirée lorsque le drapeau de largage est actif."
+  ],
+  [
+    "17_transmission.png",
+    "Accorder la porteuse",
+    "Dernière commande ouverte et résolue via l’interface sur une scène préparée."
+  ],
+  [
+    "18_conclusion.png",
+    "Dernière transmission",
+    "Conclusion obtenue en terminant la commande finale depuis la fixture de fin ; pas preuve d’un parcours humain complet."
+  ],
+  [
+    "19_plan.png",
+    "Relevé et pause",
+    "Le monde est arrêté pendant la consultation. Capture de non-régression de la nouvelle carte."
+  ],
+  [
+    "20_mobile.png",
+    "Exploration en portrait",
+    "Affichage 390 × 844 ; une commande de déplacement maintenue au pointeur a été testée."
+  ],
+  [
+    "21_contact.png",
+    "Flamme et recul",
+    "Rencontre préparée dans le Samson ; le feu est déclenché par la touche F et consomme du carburant."
+  ]
+]

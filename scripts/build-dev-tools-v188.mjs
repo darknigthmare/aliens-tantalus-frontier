@@ -100,7 +100,7 @@ export async function shipDevToolsV188(root, output, { env = process.env } = {})
 export async function findBuiltDevToolsPathV188(output) {
   const found = [];
   for (const entry of await readdir(output, { withFileTypes: true })) {
-    if (!entry.isDirectory() || ['src', 'assets'].includes(entry.name)) continue;
+    if (!entry.isDirectory() || ['src', 'assets', 'dlc'].includes(entry.name)) continue;
     found.push(entry.name);
   }
   if (found.length !== 1 || !isDevToolsPublicPathV188(found[0])) throw new Error(`Dev tools: exactly one hidden directory is expected in a build (found: ${found.join(', ') || 'none'}).`);

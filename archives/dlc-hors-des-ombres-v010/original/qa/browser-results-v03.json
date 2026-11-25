@@ -1,0 +1,406 @@
+{
+  "suite": "chromium-v0.3",
+  "nativeBrowserNavigation": false,
+  "method": "set_content + explicit in-memory localStorage double",
+  "tests": 41,
+  "passed": 41,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Baxter rejoint physiquement le joueur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "G laisse Baxter en attente",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Équipage affiche le statut du compagnon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton de rappel change le même ordre que G",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hoop accompagne Ripley sans doublon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ripley accompagnante distincte du portage médical",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maintenir E entre dans le renfoncement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Indicateur à couvert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marcher fait quitter la cachette",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Cachette refusée quand l’adulte regarde le joueur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Avertissement précède les dégâts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recul pendant l’appui évite la blessure",
+      "ok": true,
+      "detail": {
+        "hp": 100,
+        "metrics": {
+          "cartGrips": 0,
+          "dodged": 1,
+          "attacks": 0,
+          "companionPassages": 0,
+          "trailsStarted": 0,
+          "pursuitPassages": 0,
+          "bulkheadsClosed": 0,
+          "bulkheadsBreached": 0,
+          "machinesStarted": 0,
+          "soundInvestigations": 0,
+          "decoysInspected": 0,
+          "decoysIgnored": 0,
+          "companionAlerts": 0
+        },
+        "x": 1105.215799999999
+      }
+    },
+    {
+      "name": "Réserve récupérée par une interaction physique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le carburant récupéré est effectivement disponible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan initial : une seule pièce cartographiée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "BeeBee’s et ses connexions ne sont pas dévoilés au départ",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Seuil approché : accès non reconnu, sans destination dévoilée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Traversée : une deuxième pièce apparaît",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options de mouvement réduit et contraste activées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export contient les nouveaux réglages et le schéma 3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import restaure les réglages",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import invalide refusé sans perte de la partie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 1280×720 sans dépassement horizontal",
+      "ok": true,
+      "detail": {
+        "width": 1280,
+        "scroll": 1280,
+        "canvas": {
+          "x": 94.515625,
+          "y": 89,
+          "width": 1090.953125,
+          "height": 553.984375,
+          "top": 89,
+          "right": 1185.46875,
+          "bottom": 642.984375,
+          "left": 94.515625
+        },
+        "foot": {
+          "x": 0,
+          "y": 643,
+          "width": 1280,
+          "height": 77,
+          "top": 643,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Fenêtre 1280×720 : terrain présent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 1280×720 : pied entièrement visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 800×600 sans dépassement horizontal",
+      "ok": true,
+      "detail": {
+        "width": 800,
+        "scroll": 800,
+        "canvas": {
+          "x": 0,
+          "y": 85,
+          "width": 800,
+          "height": 406.25,
+          "top": 85,
+          "right": 800,
+          "bottom": 491.25,
+          "left": 0
+        },
+        "foot": {
+          "x": 0,
+          "y": 515,
+          "width": 800,
+          "height": 85,
+          "top": 515,
+          "right": 800,
+          "bottom": 600,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Fenêtre 800×600 : terrain présent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 800×600 : pied entièrement visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 390×844 sans dépassement horizontal",
+      "ok": true,
+      "detail": {
+        "width": 390,
+        "scroll": 390,
+        "canvas": {
+          "x": 0,
+          "y": 115,
+          "width": 390,
+          "height": 627,
+          "top": 115,
+          "right": 390,
+          "bottom": 742,
+          "left": 0
+        },
+        "foot": {
+          "x": 0,
+          "y": 742,
+          "width": 390,
+          "height": 102,
+          "top": 742,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Fenêtre 390×844 : terrain présent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 390×844 : pied entièrement visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commande G accessible sur mobile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ordre tactile effectif",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 844×390 sans dépassement horizontal",
+      "ok": true,
+      "detail": {
+        "width": 844,
+        "scroll": 844,
+        "canvas": {
+          "x": 164.03125,
+          "y": 70,
+          "width": 515.9375,
+          "height": 261.984375,
+          "top": 70,
+          "right": 679.96875,
+          "bottom": 331.984375,
+          "left": 164.03125
+        },
+        "foot": {
+          "x": 0,
+          "y": 332,
+          "width": 844,
+          "height": 58,
+          "top": 332,
+          "right": 844,
+          "bottom": 390,
+          "left": 0
+        }
+      }
+    },
+    {
+      "name": "Fenêtre 844×390 : terrain présent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fenêtre 844×390 : pied entièrement visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La touche L change la portée de détection",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Perte de focus met le jeu en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause fige aussi les accompagnants et les attaques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Autres données de sauvegarde préservées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript durant les contrôles V0.3",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "notes": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "captures": [
+    {
+      "file": "22_baxter_suit.png",
+      "caption": "Baxter se déplace dans le refuge. Scène préparée à 22 objectifs ; suivi simulé sans injection de sa position après le départ.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "23_baxter_attend.png",
+      "caption": "Ordre attendre donné par G : le joueur s’éloigne, Baxter conserve sa position.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "24_hoop_epave.png",
+      "caption": "Hoop accompagne Ripley dans le vestibule. Scène préparée ; déplacement du compagnon effectif.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "25_ripley_retour.png",
+      "caption": "Ripley suit Hoop au retour vers la surface ; sa pose blessée est conservée. Ce n’est pas encore le portage médical.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "26_cachette.png",
+      "caption": "Dissimulation activée par maintien réel de E. Le personnage n’est pas déplacé vers une autre salle.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "27_appui_adulte.png",
+      "caption": "Préparation d’attaque visible avant contact. Rencontre préparée ; le moteur déclenche et résout lui-même l’appui.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "28_reserve_fermee.png",
+      "caption": "Réserve de carburant avant collecte, au même emplacement que la capture suivante.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "29_reserve_ouverte.png",
+      "caption": "Après collecte : le couvercle reste ouvert, le contenu disparaît, le conteneur ne disparaît pas.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "30_plan_initial.png",
+      "caption": "Relevé initial : seule la passerelle est nommée ; les annexes et leurs sorties ne sont pas dévoilées.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "31_plan_explore.png",
+      "caption": "Plan depuis un état produit par le parcours moteur complet. Aucun ajout manuel de pièces visitées.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "32_niche_organique.png",
+      "caption": "Même mécanique de cachette, avec une alcôve de nervures dans l’épave et non un placard industriel.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "33_atelier_contraste.png",
+      "caption": "Atelier enrichi : touret, râtelier et trappe. La lisibilité renforcée n’ajoute aucune collision.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "34_mobile_escorte.png",
+      "caption": "Affichage portrait 390 × 844 ; commande tactile G et compagnon en attente.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "35_paysage.png",
+      "caption": "Affichage paysage 844 × 390 : le terrain et les commandes restent accessibles.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    },
+    {
+      "file": "36_lumieres_locales.png",
+      "caption": "Machinerie : éclairages localisés, touret et panneaux ; lampe du joueur éteinte.",
+      "method": "Real Chromium screenshot; prepared scenario unless caption says otherwise."
+    }
+  ]
+}

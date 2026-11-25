@@ -1,0 +1,366 @@
+{
+  "version": "0.9.0",
+  "suite": "engine-v08-memories",
+  "tests": 65,
+  "passed": 65,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "V0.8 conserve la géographie, ajoute douze séquences et quatorze fiches",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence marion : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence marion : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence delilah : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence delilah : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence ripley : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence ripley : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence descent : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence descent : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence cage : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence cage : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence bones : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence bones : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence baxter : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence baxter : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence sneddon : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence sneddon : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence medical : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence medical : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence ash : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence ash : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence release : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence release : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence signal : trois tableaux valides, non déverrouillables avant le récit",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Séquence signal : tableau détaché sans mutation de la partie",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Objectif de la Delilah : une séquence mise en attente, pas de récompense supplémentaire",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Présentation reportée face à un adulte proche, sans effacement du rendez-vous",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Lecture, mort, dissimulation ou présentation désactivée empêchent l’ouverture",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Une scène trop ancienne reste en galerie mais ne surgit pas plusieurs chapitres plus tard",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Réglages de lecture et liste vue persistent sans identifiants étrangers",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Taille de sous-titre invalide ramenée au réglage normal",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Un instantané ne peut être créé au milieu d’un chapitre, mort ou en fin",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 1 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-0"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 2 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-1"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 3 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-2"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 4 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-3"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 5 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-4"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 6 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-5"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 7 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-6"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 8 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-7"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 9 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-8"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 10 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-9"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 11 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-10"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 12 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-11"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 13 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-12"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 14 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-13"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 15 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-14"
+      }
+    },
+    {
+      "name": "Vrai parcours : entrée du chapitre 16 reprend progression, ressources et pièce",
+      "ok": true,
+      "details": {
+        "source": "playthrough-normal.json::captures.chapter-15"
+      }
+    },
+    {
+      "name": "Instantanés invalides ou incompatibles refusés",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Les vignettes externes ne sont jamais introduites dans le DOM",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vrai carnet V0.7 migre sans avalanche de séquences : chapter-3",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vrai carnet V0.7 migre sans avalanche de séquences : chapter-8",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vrai carnet V0.7 migre sans avalanche de séquences : chapter-11",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Vrai carnet V0.7 migre sans avalanche de séquences : final",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet portable valide conserve carnet, répétition et entrées",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : format",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : version",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : main",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : replay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : duplicate",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : futureChapter",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : badEntry",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Paquet malformé refusé intégralement : notAnArray",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "JSON brisé, paquet trop volumineux et schéma futur de sauvegarde refusés",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "Bilan distingue les vingt transcriptions physiques du relevé copié",
+      "ok": true,
+      "details": null
+    }
+  ]
+}

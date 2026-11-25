@@ -1,3 +1,4 @@
+import { reviewedXenoTrialsTantalusJoinV206 as joinedEnd } from './audit-xeno-production-assets-v206.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -64,7 +65,7 @@ test('V206 extends the published V205 commit while preserving its complete histo
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V205 endpoint for V206/, path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
-    assert.equal(publishedPaths.has(path), false, path); assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(publishedPaths.has(path), false, path); assert.equal(sha(read(path)), joinedEnd(path, receipt.sha256), path);
   }
   assert.equal(advance('constructor', 'untouched'), 'untouched');
 });
@@ -112,7 +113,8 @@ test('corrupt production bytes fail through the V205 relay without granting a ru
   assert.deepEqual(runtimeSources(runtime), runtime);
   assert.equal(Object.keys(runtime).some(path => path.includes('v206')), false);
   const audit = 'scripts/audit-xeno-production-assets-v206.mjs';
-  assert.doesNotMatch(read(audit).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.deepEqual([...read(audit).toString().matchAll(/from ['"](\.\/[^'"]+)['"]/g)].map(match => match[1]),
+    ['./audit-hors-des-ombres-continuation-v010.mjs'], 'Only the reviewed common continuation may follow the Xeno terminal.');
   assert.match(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.equal(Object.hasOwn(inputs, audit), false); assert.equal(Object.hasOwn(successors, audit), false);
   const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);

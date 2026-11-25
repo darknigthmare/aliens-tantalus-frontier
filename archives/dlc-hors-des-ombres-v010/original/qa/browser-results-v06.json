@@ -1,0 +1,260 @@
+{
+  "version": "0.10.0",
+  "suite": "chromium-v06-maintenance",
+  "tests": 36,
+  "passed": 36,
+  "failed": 0,
+  "htmlSHA256": "de70265dbe081191816fd7b2c1c7398f92351530336c60f16a39a58341b631bc",
+  "nativeNavigation": false,
+  "nativePersistenceCertified": false,
+  "fallback": "document injected; explicit in-memory localStorage test double",
+  "navigationAttempts": [
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:4173/?qa=1",
+    "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_HORS_DES_OMBRES_V0_10/JOUER_HORS_DES_OMBRES.html?qa=1"
+  ],
+  "errors": [],
+  "checks": [
+    {
+      "name": "HTML courant et schéma 8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "I ouvre le sac, sans accès de fabrication distante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le sac suspend réellement le monde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E récupère trois pièces une fois",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Appui prolongé sans duplication du casier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Premier geste validé, aucune pièce débitée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Remplacement : trois pièces débitées exactement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’étape 2/3 apparaît dans le sac",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Chantier observé suivi dans le HUD",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export physique schéma 8, étape 2 et paiement conservés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import restaure l’étape sans demander de nouvelles pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Troisième geste ouvre la liaison",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Franchissement par E vers l’infirmerie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le plan local contient les pieds et le passage visité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune balise ennemie dans le plan local",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "E à l’établi ouvre trois recettes locales",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recette decoy change réellement le stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recette fuel change réellement le stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recette kit change réellement le stock",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Coût total des trois recettes : neuf pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton de soin désactivé au plafond",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Capacité refusée sans débit supplémentaire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Même inventaire, pas de recette loin du panneau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Desserte du hangar refusée avant le chapitre requis",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un bruit traverse la liaison minière rétablie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Même adulte transféré une seule fois",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement coupe le geste sans consommer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sac accessible depuis la pause au format tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dépassement horizontal sur mobile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan local mobile à la largeur de sa fenêtre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dialogue maintenance 1280×720",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dialogue maintenance 800×600",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dialogue maintenance 844×390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import invalide laisse les nouveaux champs intacts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une autre sauvegarde reste intacte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript nouvelle",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "62_menu_v06.png",
+      "caption": "Menu au chargement initial. La marque V0.8 distingue cette archive des versions précédentes.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "63_casier_ouvert.png",
+      "caption": "Fixture au casier des machines ; collecte par E. Le casier reste ouvert, sans disparition de son support.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "64_traverse_fermee.png",
+      "caption": "Fixture au seuil sanitaire non réparé. Les trois étapes et les pièces ne sont pas prévalidées.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "65_connecteurs_poses.png",
+      "caption": "Deux étapes accomplies au clavier : le capot et les connecteurs changent visuellement. Le passage est encore fermé.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "66_sac_chantier.png",
+      "caption": "Le chantier découvert figure dans le sac ; repère facultatif activé par son bouton. La progression principale n’est pas remplacée.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "67_traverse_retablie.png",
+      "caption": "Trois gestes terminés par E après réimport du carnet intermédiaire. Le même mécanisme ouvre les deux faces.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "68_plan_proximite.png",
+      "caption": "Plan ouvert après le franchissement réel. Le relevé utilise les coordonnées de la pièce et ne place aucun ennemi.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "69_etabli_reassort.png",
+      "caption": "Établi ouvert par E. Stock de composants préparé par collectes de fixture ; les trois recettes sont exécutées par leurs boutons et débitent neuf pièces au total.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "70_desserte_manutention.png",
+      "caption": "Chapitre autorisé préparé ; les trois gestes ouvrent la desserte de l’atelier. Aucun changement des objectifs de campagne.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "71_contact_traverse.png",
+      "caption": "Traverse minière réparée au clavier. Un adulte préparé dans la pièce voisine entend F, puis franchit le seuil avec le même identifiant ; le joueur est placé plus loin pour observer.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "72_mobile_sac.png",
+      "caption": "390 × 844 : sac ouvert depuis le menu pause, sans raccourci clavier réservé au bureau. Le contenu reste défilable dans la fenêtre.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    },
+    {
+      "file": "73_mobile_plan.png",
+      "caption": "390 × 844 : relevé de proximité et connexions accessibles dans la même fenêtre. Aucun voyage rapide.",
+      "method": "Capture Chromium V0.8 ; états de scène préparés, puis commandes / simulation explicitement décrites."
+    }
+  ]
+}

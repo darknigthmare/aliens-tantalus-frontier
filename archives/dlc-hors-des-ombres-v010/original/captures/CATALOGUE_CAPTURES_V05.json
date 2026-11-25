@@ -1,0 +1,67 @@
+[
+  {
+    "file": "49_menu_v05.png",
+    "caption": "Menu de la V0.5 ; ouverture initiale, sans état de campagne injecté.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "50_ecoute.png",
+    "caption": "V tenu dans la passerelle. Le joueur s’arrête, mais la simulation continue ; aucun contact silencieux n’est inventé.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "51_ecoute_cloison.png",
+    "caption": "Scène préparée : un adulte dans la galerie. F émet le bruit, B ferme, puis V écoute sa pression depuis le pompage. Aucun changement de pièce du joueur.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "52_enquete_sonore.png",
+    "caption": "Même rencontre après simulation de la rupture et du passage. Le point du joueur a été préparé plus loin pour observer le transfert sans l’interrompre.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "53_masque_machine.png",
+    "caption": "Cycle de rinçage déclenché par E, écoute maintenue avec V. Le moteur masque les pas proches, sans désactiver la menace.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "54_leurre_actif.png",
+    "caption": "Un seul boîtier lancé malgré deux secondes de maintien de R. Le signal est actif à son point d’impact.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "55_traces_sol.png",
+    "caption": "Même secteur après expiration du leurre, puis une brève flamme. Boîtier et marque de chaleur restent au sol ; ils ne bloquent pas le passage.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "56_signal_reconnu.png",
+    "caption": "Trois lancers préparés au même endroit avec déplacements de fixture entre les essais. L’IA a effectué les deux inspections en simulation ; le troisième signal est ignoré.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "57_compagnon_prudence.png",
+    "caption": "Hoop auprès de Ripley : menace préparée dans sa ligne de vue. Son alerte et sa posture résultent des pas de simulation, pas d’un dialogue injecté.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "58_journal_terrain.png",
+    "caption": "Journal ouvert depuis la pause : sons émis et traces obtenues dans la séquence précédente. Il ne révèle pas les ennemis cachés.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "59_mobile_ecoute.png",
+    "caption": "390 × 844 : maintien réel du bouton tactile V avec un pointeur. Le relevé ne masque pas le personnage ni les directions.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "60_paysage_ecoute.png",
+    "caption": "844 × 390 : écoute active en paysage. La simulation n’est pas arrêtée ; les commandes et le pied d’écran restent dans le viewport.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  },
+  {
+    "file": "61_coffret_transparent.png",
+    "caption": "Correction trouvée à la revue des captures : même position devant le coffret du pompage. Le coffret au premier plan s’estompe pour laisser voir Ripley ; la collision n’est pas modifiée.",
+    "method": "Capture réelle Chromium du HTML V0.8 (scénario de non-régression V0.5). Scène préparée puis touches ou simulation décrites dans la légende."
+  }
+]

@@ -1,3 +1,4 @@
+import { reviewedHorsDesOmbresDigestV010 } from './audit-hors-des-ombres-continuation-v010.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -34,7 +35,7 @@ const leadEndV188 = (path, digest) => {
   const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
   const lead = r && r.previousSha256 === digest ? r.currentSha256 : digest;
   const j = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path) ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path] : null;
-  return j && j.previousSha256 === lead ? j.currentSha256 : lead;
+  return reviewedHorsDesOmbresDigestV010(path, j && j.previousSha256 === lead ? j.currentSha256 : lead);
 };
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
@@ -776,7 +777,8 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
+  assert.deepEqual([...terminal.matchAll(/from ['"](\.\/[^'"]+)['"]/g)].map(match => match[1]),
+    ['./audit-hors-des-ombres-continuation-v010.mjs'], 'Only the reviewed common continuation may follow the Tantalus terminal.');
 });
 
 test('Broodstorm terminal rejects a false H receipt or an added-source disguise for a successor', async () => {
@@ -808,7 +810,9 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
     // readSource supplies repository bytes; no temporary module or source edit.
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const executable = source.replace("'./audit-hors-des-ombres-continuation-v010.mjs'",
+      JSON.stringify(new URL('./audit-hors-des-ombres-continuation-v010.mjs', import.meta.url).href));
+    const mutant = await import('data:text/javascript;base64,' + Buffer.from(executable).toString('base64'));
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -834,7 +838,9 @@ test('Queen Mother terminal rejects a false B2 receipt or an added-source disgui
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const executable = source.replace("'./audit-hors-des-ombres-continuation-v010.mjs'",
+      JSON.stringify(new URL('./audit-hors-des-ombres-continuation-v010.mjs', import.meta.url).href));
+    const mutant = await import('data:text/javascript;base64,' + Buffer.from(executable).toString('base64'));
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -875,7 +881,9 @@ test('Queen Mother guard terminal rejects false Q links, invented births and any
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const executable = source.replace("'./audit-hors-des-ombres-continuation-v010.mjs'",
+      JSON.stringify(new URL('./audit-hors-des-ombres-continuation-v010.mjs', import.meta.url).href));
+    const mutant = await import('data:text/javascript;base64,' + Buffer.from(executable).toString('base64'));
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -939,7 +947,9 @@ test('Queen Mother choir terminal rejects false R links, a skipped Q birth and s
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const executable = source.replace("'./audit-hors-des-ombres-continuation-v010.mjs'",
+      JSON.stringify(new URL('./audit-hors-des-ombres-continuation-v010.mjs', import.meta.url).href));
+    const mutant = await import('data:text/javascript;base64,' + Buffer.from(executable).toString('base64'));
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });

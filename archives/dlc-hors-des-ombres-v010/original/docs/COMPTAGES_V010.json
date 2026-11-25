@@ -1,0 +1,17 @@
+{
+  "version": "0.10.0",
+  "chapters": 16,
+  "objectives": 48,
+  "rooms": 41,
+  "edges": 52,
+  "portals": 104,
+  "walls": 182,
+  "depthRooms": 26,
+  "profileRooms": 15,
+  "propTypes": 48,
+  "placements": 331,
+  "codex": 228,
+  "equipmentEntries": 18,
+  "appearanceProfiles": 10,
+  "crewPlacements": 28
+}

@@ -1,0 +1,16 @@
+{
+  "name": "atf-dlc-out-of-shadows",
+  "version": "0.10.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node qa/verify.mjs && node qa/verify-v02.mjs && node qa/verify-delivery.mjs && node qa/verify-v03.mjs && node qa/verify-v04.mjs && node qa/verify-v05.mjs && node qa/verify-v06.mjs && node qa/verify-v07.mjs && node qa/verify-v08.mjs && node qa/verify-v09.mjs && node qa/verify-v010.mjs",
+    "serve": "node tools/serve.mjs",
+    "build": "python3 tools/bundle-inline.py",
+    "docs": "python3 tools/build-docs-v010.py",
+    "check:browser": "python3 qa/run-browsers.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

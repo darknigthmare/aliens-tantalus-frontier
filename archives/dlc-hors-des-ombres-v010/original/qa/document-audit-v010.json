@@ -1,0 +1,158 @@
+{
+  "version": "0.10.0",
+  "scope": "documentation-only, not added to gameplay total",
+  "tests": 27,
+  "passed": 27,
+  "failed": 0,
+  "documentsSHA256": {
+    "RAPPORT_ILLUSTRE.html": "0736c07a0be24bec8dbaa8075dbd97e49f1768d5995575eee18f8492a4df9ae8",
+    "docs/CODEX_LEVEL_DESIGN.html": "e9eff1a15c47d19bef8ebef4e4be04b6a5c946a570e141b147ab6e2a03da254a",
+    "docs/AUDIT_FIDELITE_V010.json": "dfb2d633e57e2ca95996e6adf10af7aa9595614740c9957d0951ee787b23a6c4",
+    "LIRE_AVANT_DE_JOUER.md": "0337524a7def89f73f9188c8c04bcd2de23ec9c1fae08df23fd1346474a9140f",
+    "LIVRAISON.json": "eee79ef51d826581683f5906a3cd16ea21c5b5560b241d6cad7145f4f4ec0d9f",
+    "qa/RESULTATS_QA_V010.json": "c6d7087d714dcfc46676bedaca5f96ceb2dea32d47bd64d02097f6c36ebac3f5"
+  },
+  "checks": [
+    {
+      "name": "RAPPORT_ILLUSTRE.html : français et méta V0.10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : identifiants uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : tous les liens locaux aboutissent",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : images intégrées correspondent aux PNG réels",
+      "ok": true,
+      "detail": {
+        "images": 21,
+        "bad": []
+      }
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : français et méta V0.10",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : identifiants uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : tous les liens locaux aboutissent",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : images intégrées correspondent aux PNG réels",
+      "ok": true,
+      "detail": {
+        "images": 0,
+        "bad": []
+      }
+    },
+    {
+      "name": "41 plans et 41 fiches de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "182 retours de cloison dans les plans",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "104 approches réciproques dans le registre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "18 entrées de matériel sans total canonique inventé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "10 profils tous explicitement provisoires",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les six zones de manque sont publiées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le rapport utilise 21 scènes V0.10 vérifiées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Totaux courants sans échec",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Source secondaire du projecteur conservée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Schémas 1 à 10 et 36 vrais instantanés indiqués",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : document non vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : bureau sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : mobile sans largeur perdue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : document non vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : bureau sans dépassement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filtre de codex masque les autres salles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Registre des portes et plan affichés ensemble",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : mobile sans largeur perdue",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception JavaScript dans les documents",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

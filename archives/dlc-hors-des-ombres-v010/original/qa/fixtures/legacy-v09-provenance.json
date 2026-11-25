@@ -1,0 +1,34 @@
+[
+  {
+    "file": "legacy-schema-9-chapter-3.json",
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_9_A_BOUT_DE_BRAS.zip",
+    "archiveSHA256": "91ed29e2d4ab13b21f01313a2d15bb3e5cf31417ecbbc01809b86656e5bfbdb4",
+    "member": "ALIEN_HORS_DES_OMBRES_V0_9/qa/playthrough-normal.json",
+    "jsonPointer": "/captures/chapter-3",
+    "sha256": "6617fb5931f680ef509a21df35226479079bdb91bfcb211c5f55568757026527"
+  },
+  {
+    "file": "legacy-schema-9-chapter-8.json",
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_9_A_BOUT_DE_BRAS.zip",
+    "archiveSHA256": "91ed29e2d4ab13b21f01313a2d15bb3e5cf31417ecbbc01809b86656e5bfbdb4",
+    "member": "ALIEN_HORS_DES_OMBRES_V0_9/qa/playthrough-normal.json",
+    "jsonPointer": "/captures/chapter-8",
+    "sha256": "67dc45c961168b2dc9356a8277faf3ef45f242f8ca3924c50a5066564ee82a4a"
+  },
+  {
+    "file": "legacy-schema-9-chapter-11.json",
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_9_A_BOUT_DE_BRAS.zip",
+    "archiveSHA256": "91ed29e2d4ab13b21f01313a2d15bb3e5cf31417ecbbc01809b86656e5bfbdb4",
+    "member": "ALIEN_HORS_DES_OMBRES_V0_9/qa/playthrough-normal.json",
+    "jsonPointer": "/captures/chapter-11",
+    "sha256": "6b06c13e62b7e37ef3019a8d1a9d360860275e1d59a4ed11e6014a9a59bedf15"
+  },
+  {
+    "file": "legacy-schema-9-final.json",
+    "archive": "ALIEN_HORS_DES_OMBRES_V0_9_A_BOUT_DE_BRAS.zip",
+    "archiveSHA256": "91ed29e2d4ab13b21f01313a2d15bb3e5cf31417ecbbc01809b86656e5bfbdb4",
+    "member": "ALIEN_HORS_DES_OMBRES_V0_9/qa/playthrough-normal.json",
+    "jsonPointer": "/captures/final",
+    "sha256": "dced1f70ea6f976a4f79c853cd1ec27edcb153c5c6e740aa7dfb1ad230ac962d"
+  }
+]

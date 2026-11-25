@@ -1,0 +1,503 @@
+{
+  "version": "0.10.0",
+  "suite": "v05-acoustics-evidence-companions",
+  "tests": 73,
+  "passed": 73,
+  "failed": 0,
+  "method": "Prepared state fixtures for subsystem checks; no claim of human playthrough",
+  "checks": [
+    {
+      "name": "V0.5 : données, schéma et 160 fiches uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Écoute : arrêt du joueur mais temps et ennemi continuent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Écoute ne met pas en pause les dégâts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Relâcher V rend la marche immédiatement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un ennemi stationnaire ne devient pas un point radar",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Écoute renvoie une direction, aucun identifiant ennemi ni coordonnée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La machine masque les contacts à portée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le bruit ne peuple jamais les pièces inconnues",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le bruit engage un adulte voisin, sans sortie du joueur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une cloison fermée bloque le départ de l’enquête sonore",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une source trop éloignée du seuil ne porte pas dans la pièce voisine",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un bruit ne porte pas à travers deux liaisons",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Facehugger, adulte sonné et chapitre incompatible ne démarrent pas d’enquête",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le refuge reste acoustiquement protégé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plusieurs impulsions ne clonent pas le poursuivant et ne réinitialisent pas la mémoire",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le signal transite vers sa position enregistrée, pas le joueur caché",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un leurre reste cinq secondes dans sa pièce après la sortie",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "R maintenu ne consomme qu’une charge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le boîtier lancé s’arrête avant les obstacles solides",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de charge dépensée sans place pour lancer",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Leurre ne détourne pas une cible directement visible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux inspections réelles puis troisième signal ignoré dans la même zone",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une zone de diversion différente reste utilisable",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La mémoire des faux signaux expire sans dégrader la flamme",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection conservée à l’import : pas de deuxième validation du même boîtier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Flamme laisse une trace de chaleur persistante, sans changer les obstacles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marques bornées à douze par salle et genres invalides refusés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rupture de cloison marque ses deux faces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le compagnon alerte seulement à proximité et respecte attendre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un compagnon prudent continue de suivre la retraite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Menus suspendent enquête sonore, leurres et traces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Écoute et touches ne reprennent pas actives dans une sauvegarde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Journal sonore limité à ses propres sons sans divulgation des voisins",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import hostile : bornage des traces, du champ sonore et des souvenirs",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.4 : chapter-3 conservé en schéma 5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.4 : chapter-8 conservé en schéma 5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.4 : chapter-11 conservé en schéma 5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.4 : final conservé en schéma 5",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Enquête sonore physique : e19 / a",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "lift_bottom",
+        "identity": "hear-e19"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e19 / b",
+      "ok": true,
+      "detail": {
+        "from": "lift_bottom",
+        "to": "haul",
+        "identity": "hear-e19"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e20 / a",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "haul",
+        "identity": "hear-e20"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e20 / b",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "pump",
+        "identity": "hear-e20"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e22 / a",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "haul",
+        "identity": "hear-e22"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e22 / b",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "vein",
+        "identity": "hear-e22"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e23 / a",
+      "ok": true,
+      "detail": {
+        "from": "fissure",
+        "to": "vein",
+        "identity": "hear-e23"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e23 / b",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "fissure",
+        "identity": "hear-e23"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e24 / a",
+      "ok": true,
+      "detail": {
+        "from": "vestibule",
+        "to": "fissure",
+        "identity": "hear-e24"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e24 / b",
+      "ok": true,
+      "detail": {
+        "from": "fissure",
+        "to": "vestibule",
+        "identity": "hear-e24"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e25 / a",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "vestibule",
+        "identity": "hear-e25"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e25 / b",
+      "ok": true,
+      "detail": {
+        "from": "vestibule",
+        "to": "fossils",
+        "identity": "hear-e25"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e26 / a",
+      "ok": true,
+      "detail": {
+        "from": "eggs",
+        "to": "fossils",
+        "identity": "hear-e26"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e26 / b",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "eggs",
+        "identity": "hear-e26"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e27 / a",
+      "ok": true,
+      "detail": {
+        "from": "bypass",
+        "to": "eggs",
+        "identity": "hear-e27"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e27 / b",
+      "ok": true,
+      "detail": {
+        "from": "eggs",
+        "to": "bypass",
+        "identity": "hear-e27"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e32 / a",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "pump",
+        "identity": "hear-e32"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : e32 / b",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "vein",
+        "identity": "hear-e32"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-drain-0 / a",
+      "ok": true,
+      "detail": {
+        "from": "drain",
+        "to": "haul",
+        "identity": "hear-oth-annex-drain-0"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-drain-0 / b",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "drain",
+        "identity": "hear-oth-annex-drain-0"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-drain-1 / a",
+      "ok": true,
+      "detail": {
+        "from": "drain",
+        "to": "pump",
+        "identity": "hear-oth-annex-drain-1"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-drain-1 / b",
+      "ok": true,
+      "detail": {
+        "from": "pump",
+        "to": "drain",
+        "identity": "hear-oth-annex-drain-1"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-alcove-0 / a",
+      "ok": true,
+      "detail": {
+        "from": "alcove",
+        "to": "fossils",
+        "identity": "hear-oth-annex-alcove-0"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-alcove-0 / b",
+      "ok": true,
+      "detail": {
+        "from": "fossils",
+        "to": "alcove",
+        "identity": "hear-oth-annex-alcove-0"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-alcove-1 / a",
+      "ok": true,
+      "detail": {
+        "from": "alcove",
+        "to": "bypass",
+        "identity": "hear-oth-annex-alcove-1"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : oth-annex-alcove-1 / b",
+      "ok": true,
+      "detail": {
+        "from": "bypass",
+        "to": "alcove",
+        "identity": "hear-oth-annex-alcove-1"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-haul-return / a",
+      "ok": true,
+      "detail": {
+        "from": "return_gallery",
+        "to": "haul",
+        "identity": "hear-v07-haul-return"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-haul-return / b",
+      "ok": true,
+      "detail": {
+        "from": "haul",
+        "to": "return_gallery",
+        "identity": "hear-v07-haul-return"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-return-exchange / a",
+      "ok": true,
+      "detail": {
+        "from": "exchanger",
+        "to": "return_gallery",
+        "identity": "hear-v07-return-exchange"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-return-exchange / b",
+      "ok": true,
+      "detail": {
+        "from": "return_gallery",
+        "to": "exchanger",
+        "identity": "hear-v07-return-exchange"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-exchange-vein / a",
+      "ok": true,
+      "detail": {
+        "from": "vein",
+        "to": "exchanger",
+        "identity": "hear-v07-exchange-vein"
+      }
+    },
+    {
+      "name": "Enquête sonore physique : v07-exchange-vein / b",
+      "ok": true,
+      "detail": {
+        "from": "exchanger",
+        "to": "vein",
+        "identity": "hear-v07-exchange-vein"
+      }
+    },
+    {
+      "name": "Coffret au premier plan : transparence locale plutôt que personnage masqué",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une cachette occupée garde sa silhouette opaque",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Transparence ne change pas un meuble éloigné ni le joueur",
+      "ok": true,
+      "detail": null
+    }
+  ]
+}

@@ -1,0 +1,396 @@
+{
+  "version": "0.10.0",
+  "suite": "v07-flooded-archives",
+  "tests": 71,
+  "passed": 71,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "V0.7 : 38 pièces, 49 liens, 8 gestes, 188 fiches, 314 placements",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "return_gallery : deux accès minimum et axe libre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "return_gallery : commandes séparées des seuils et autres commandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger : deux accès minimum et axe libre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "exchanger : commandes séparées des seuils et autres commandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "survey : deux accès minimum et axe libre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "survey : commandes séparées des seuils et autres commandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "specimen_store : deux accès minimum et axe libre",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "specimen_store : commandes séparées des seuils et autres commandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Nouveaux accès inaccessibles avant chapitre 8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Faible temps E ne valide pas un geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par déplacement : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par écoute : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par flamme : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par leurre : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par verrou : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Interruption par soin : aucun geste validé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une attaque interrompt effectivement le travail",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commande distante / appel direct refusés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Préconditions : on ne démarre pas la pompe avant les vannes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Maintien long ne double pas une étape",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le portage de Ripley ou cellule refuse le chantier",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pompage de 18 secondes : vivant, progressif, sans consommation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pompage continue dans une autre pièce et s’arrête après 18 s",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecture reading suspend le pompage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecture puzzle suspend le pompage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Armoire indisponible tant que le niveau n’est pas bas",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Eau : ralentissement réel dans la bande basse, pas à l’arrière",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Après pompage : même allure sur les deux bandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de dégât de noyade ni de créature créée par l’eau",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un adulte propre aux échangeurs peut apparaître au chapitre autorisé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Poste de relevé et réserve hors du réseau de chasse",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le boîtier existe, réduit la marche et empêche le sprint",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Poser, changer de salle, revenir : même boîtier au sol",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Lecteur sans boîtier : aucune récupération à distance",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dépôt répété et reprise éloignée refusés sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit gestes E livrent un document unique, pas une fin alternative",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une copie achevée résiste à la réimportation, journal reconstitué",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 1 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 2 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 3 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 4 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 5 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 6 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 7 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sauvegarde au jalon facultatif 8 : reprise sans duplication",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import hostile : préfixe, horloge, identifiants et portage bornés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import d’un boîtier avec pièce inconnue : position de secours accessible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Schéma futur refusé même avec le reste d’un carnet valide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Découverte : pas de relevé au départ, noms de lieux non révélés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plan local : eau et propre boîtier, aucun ennemi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.6 migré : chapter-3",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.6 migré : chapter-8",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.6 migré : chapter-11",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Vrai carnet V0.6 migré : final",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-haul-return / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-haul-return / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-return-exchange / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-return-exchange / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-exchange-vein / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-exchange-vein / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-return-survey / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-return-survey / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-survey-store / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-survey-store / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-store-exchange / a",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Liaison facultative réciproque v07-store-exchange / b",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Campagne intégrée normal / relevé seul",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 37,
+        "transitions": 82,
+        "damage": 63,
+        "hp": 73,
+        "fuel": 10,
+        "method": "Inputs and doors only; routes and puzzle solutions known; AI active; no enemy removal or injected progression."
+      }
+    },
+    {
+      "name": "Campagne intégrée normal / tous les détours",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 41,
+        "transitions": 99,
+        "damage": 133,
+        "hp": 93,
+        "fuel": 1,
+        "method": "Inputs and doors only; routes and puzzle solutions known; AI active; no enemy removal or injected progression."
+      }
+    },
+    {
+      "name": "Campagne intégrée assisted / relevé seul",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 37,
+        "transitions": 82,
+        "damage": 32,
+        "hp": 100,
+        "fuel": 28,
+        "method": "Inputs and doors only; routes and puzzle solutions known; AI active; no enemy removal or injected progression."
+      }
+    },
+    {
+      "name": "Campagne intégrée assisted / tous les détours",
+      "ok": true,
+      "detail": {
+        "objectives": 48,
+        "rooms": 41,
+        "transitions": 99,
+        "damage": 28,
+        "hp": 72,
+        "fuel": 19,
+        "method": "Inputs and doors only; routes and puzzle solutions known; AI active; no enemy removal or injected progression."
+      }
+    }
+  ]
+}

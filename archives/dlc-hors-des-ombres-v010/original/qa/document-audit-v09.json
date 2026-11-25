@@ -1,0 +1,237 @@
+{
+  "version": "0.9.0",
+  "scope": "Document audit only; not gameplay checks",
+  "tests": 42,
+  "passed": 42,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Version de documentation, code et QA identique",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix suites Node et huit suites Chromium réussies",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le total de contrôles de jeu est calculé depuis les suites",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Empreinte du document jouable liée aux résultats",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Empreintes des six sources identiques à celles de QA",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les résultats individuels correspondent à leurs empreintes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "38 lieux, 49 liaisons, 48 objectifs et 216 fiches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "48 familles et 316 placements sans nouveaux lieux déclarés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un registre distinct pour chacune des 38 pièces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un plan SVG dans chaque registre de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Toutes les destinations du graphe appartiennent aux lieux livrés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Registre des douze séquences présent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les trente-six textes de tableaux sont présents sans modification",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "52 règles explicites dans le codex",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les coordonnées et empreintes des 316 placements sont documentées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les 32 instantanés historiques sont authentifiés dans le manifeste QA",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le schéma 9 documente les neuf schémas acceptés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les limites stockage et intégration restent explicites",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La documentation distingue les scènes mises en scène des niveaux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Six registres de manutention et aires SVG distinctes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les six identifiants de matériel sont présents dans leur pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les deux parcours complets comportent six manipulations chacun",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le rapport précise l’absence d’écrasement et de télécommande",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun script ou ressource distante nécessaire aux documents",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "118 captures avec une légende et une méthode",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Chaque légende référence un PNG unique et vérifié",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Quinze nouveaux scénarios V0.9 et 103 régressions photographiées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Toutes les images du rapport sont intégrées et décodables",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Les images du rapport possèdent un texte alternatif",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "RAPPORT_ILLUSTRE.html : liens et ancres internes valides",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "docs/CODEX_LEVEL_DESIGN.html : liens et ancres internes valides",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Rapport : identifiants uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport : langue française et titre explicites",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Codex : identifiants uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Codex : langue française et titre explicites",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "rapport : titre et contenu rendus",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "rapport : bureau sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "rapport : portrait 390 sans débordement de page",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "codex : titre et contenu rendus",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "codex : bureau sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "codex : portrait 390 sans débordement de page",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune exception dans les documents rendus",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "method": "BeautifulSoup + hashes + Pillow image decode + real Chromium set_content rendering",
+  "nativeNavigation": false,
+  "documentsSHA256": {
+    "RAPPORT_ILLUSTRE.html": "9713b4de71a34f941deb4f6086c19573c3fe793a8b0baf0849019362e671c74a",
+    "docs/CODEX_LEVEL_DESIGN.html": "7c5b41fd7067db047894fa7dc690c82bc7828d8c2c133bce2beb624146cbbf17",
+    "LIRE_AVANT_DE_JOUER.md": "8417c471f6583a049e2d56ecc329d09f8412ac8945ec18649966abcad5812e93",
+    "docs/SYSTEMES_ET_IA.md": "8f6a0a0d962533cbc6579f34d5a8d3733adeadd17ca4749ecff9f9c8b5378d2b",
+    "LIVRAISON.json": "38c862512da3bca0a2fcbc5d493ddbd4877b4d91219c05a7eca5c5195df9c754",
+    "qa/RESULTATS_QA_V09.json": "107a4120d0168d6d552c9be532b61b201d15f8fb2caf2a8d8350f052c43dc464"
+  },
+  "previewHashes": {
+    "rapport-mobile.png": "cb49f71c0578aec0a6164f6f0651c1b9be9a6c758fa8ff53e06d81f0a0327ab7",
+    "rapport-haut.png": "432e7816529dfd6f2b2beff9f5ab25c53e9bea04252b57e016359dd69a4bba88",
+    "codex-haut.png": "f8558db35a2aa456ea7c2722984e180f431d5e7d42ced4a0bbe64c0ec810434d",
+    "codex-mobile.png": "33770f9849774eba351a6f53df08516a06853247343452a386cfdcca530e00cd",
+    "rapport-repetition.png": "a228786b9494bc0f96af861611d8402785689d13849f73772e83d5190cfac2b7",
+    "codex-manutention.png": "f918a328e3aca9c744249c8afcff54c6edf53a518d58759aacf099b0b5787e2a"
+  }
+}

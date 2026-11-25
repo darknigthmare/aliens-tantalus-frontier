@@ -1,0 +1,1045 @@
+--- v0.7/src/oth-v1/oth-engine.js
++++ v0.8/src/oth-v1/oth-engine.js
+@@ -4,7 +4,7 @@
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,Number(v)||0));
+ const clone=v=>JSON.parse(JSON.stringify(v));
+ export function createState(difficulty='normal'){
+- return {schema:7,excursion:{done:[],pumpElapsed:0,recorder:null,discovered:false,tracked:true},excursionHold:0,excursionTarget:null,excursionPressDone:false,excursionNoise:0,maintenance:{parts:0,salvaged:[],repairs:{},observed:[],seen:[],crafted:{},tracked:null},maintenanceTarget:null,maintenanceHold:0,maintenanceNoise:0,maintenancePressDone:false,soundField:[],soundLog:[],soundSeq:0,acousticTimers:{},lures:[],residue:{},listening:false,listenHeld:0,decoyPressDone:false,doors:{},lightsOff:[],machines:{},doorHold:0,doorAction:null,doorPressDone:false,servicePressDone:false,companion:null,discoveredPortals:[],metrics:{dodged:0,attacks:0,companionPassages:0,trailsStarted:0,pursuitPassages:0,bulkheadsClosed:0,bulkheadsBreached:0,machinesStarted:0,soundInvestigations:0,decoysInspected:0,decoysIgnored:0,companionAlerts:0},reducedMotion:false,contrast:false,records:[],collected:[],disabledHazards:[],conversations:[],work:{},reading:null,story:null,hazardCooldown:0,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
++ return {schema:8,presentation:{enabled:true,autoAdvance:false,captionScale:1,seen:[],pending:[]},excursion:{done:[],pumpElapsed:0,recorder:null,discovered:false,tracked:true},excursionHold:0,excursionTarget:null,excursionPressDone:false,excursionNoise:0,maintenance:{parts:0,salvaged:[],repairs:{},observed:[],seen:[],crafted:{},tracked:null},maintenanceTarget:null,maintenanceHold:0,maintenanceNoise:0,maintenancePressDone:false,soundField:[],soundLog:[],soundSeq:0,acousticTimers:{},lures:[],residue:{},listening:false,listenHeld:0,decoyPressDone:false,doors:{},lightsOff:[],machines:{},doorHold:0,doorAction:null,doorPressDone:false,servicePressDone:false,companion:null,discoveredPortals:[],metrics:{dodged:0,attacks:0,companionPassages:0,trailsStarted:0,pursuitPassages:0,bulkheadsClosed:0,bulkheadsBreached:0,machinesStarted:0,soundInvestigations:0,decoysInspected:0,decoysIgnored:0,companionAlerts:0},reducedMotion:false,contrast:false,records:[],collected:[],disabledHazards:[],conversations:[],work:{},reading:null,story:null,hazardCooldown:0,chapter:0,goal:0,room:'bridge',player:{x:170,y:88,hp:100,fuel:65,decoys:8,kits:3,face:1,crouch:false},
+  difficulty:['normal','assisted'].includes(difficulty)?difficulty:'normal',visited:['bridge'],completed:[],world:{},flags:{},journal:[],elapsed:0,finished:false,dead:false,
+  flash:true,sound:false,hold:0,portalCooldown:0,invuln:0,flame:0,torchCooldown:0,decoyCooldown:0,healCooldown:0,noise:0,dirty:true,notice:'Le relais de la mine ne répond plus.',noticeTime:7,puzzle:null,shake:0};
+ }
+@@ -107,6 +107,7 @@
+  if(o.action==='release'){s.flags.narcissusReleased=true;}
+  s.hold=0;s.goal++;
+  if(s.goal===3){s.goal=0;s.chapter++;if(s.chapter===DATA.chapters.length){s.chapter=DATA.chapters.length-1;s.goal=2;s.finished=true;notice(s,'Transmission émise. Aucune réponse, pour l’instant.',20);}else{roomWorld(s);}}
++ const sequence=DATA.sequences.find(q=>q.at===s.completed.length);if(sequence&&!s.presentation.seen.includes(sequence.id)&&!s.presentation.pending.includes(sequence.id))s.presentation.pending.push(sequence.id);
+  syncCompanion(s);s.dirty=true;return true;
+ }
+ function useTorch(s){
+@@ -214,7 +215,7 @@
+ export function restore(raw){
+  if(typeof raw!=='string'||raw.length>180000)return null;
+  try{
+-  const v=JSON.parse(raw);if(!v||![1,2,3,4,5,6,7].includes(v.schema)||!ROOM[v.room]||!Array.isArray(v.completed))return null;
++  const v=JSON.parse(raw);if(!v||![1,2,3,4,5,6,7,8].includes(v.schema)||!ROOM[v.room]||!Array.isArray(v.completed))return null;
+   const s=createState(v.difficulty),ordered=DATA.chapters.flatMap(c=>c.objectives.map(o=>o.id));let n=0;while(n<ordered.length&&v.completed[n]===ordered[n])n++;
+   s.completed=ordered.slice(0,n);s.finished=n===ordered.length;s.chapter=s.finished?15:Math.floor(n/3);s.goal=s.finished?2:n%3;
+   s.room=v.room;s.visited=[...new Set((Array.isArray(v.visited)?v.visited:[]).filter(x=>ROOM[x]))];if(!s.visited.includes(s.room))s.visited.push(s.room);
+@@ -251,7 +252,7 @@
+    const c=v.companion,r=ROOM[c.room],x=clamp(c.x,28,r.width-28),y=r.mode==='profile'?88:clamp(c.y,0,180);
+    s.companion={...def,room:c.room,x:collision(r,x,y)?170:x,y:collision(r,x,y)?88:y,mode:c.mode==='wait'?'wait':'follow',state:'idle',path:[],pathTimer:0,face:c.face===-1?-1:1};
+   }
+-  restoreExcursion(s,v);restoreMaintenance(s,v);restoreServices(s,v);restoreAcoustics(s,v);discoverRoom(s);observeMaintenance(s);s.dirty=false;return s;
++  restorePresentation(s,v);restoreExcursion(s,v);restoreMaintenance(s,v);restoreServices(s,v);restoreAcoustics(s,v);discoverRoom(s);observeMaintenance(s);s.dirty=false;return s;
+  }catch{return null;}
+ }
+ export function validateData(){
+@@ -845,3 +846,59 @@
+  // Replay authored optional logs from the validated prefix; do not trust arbitrary text.
+  for(const op of DATA.excursion.ops.slice(0,n))s.journal.push({chapter:s.chapter,text:'Relevé facultatif — '+op.after});
+ }
++
++
++/** V0.8 narrative vignettes. They never complete gameplay goals or grant resources. */
++export function unlockedSequences(s){return DATA.sequences.filter(q=>q.at<=s.completed.length);}
++export function pendingSequence(s){
++ if(!s.presentation.enabled||s.dead||s.puzzle||s.reading||s.player.hidden)return null;
++ const candidate=s.presentation.pending.map(id=>DATA.sequences.find(q=>q.id===id)).find(q=>q&&q.at<=s.completed.length&&q.at>=s.completed.length-3);
++ if(!candidate)return null;
++ const enemies=s.world[s.room]?.enemies||[];
++ if(enemies.some(e=>!e.passage&&Math.hypot(e.x-s.player.x,(e.y-s.player.y)*1.5)<DATA.presentationRules.safeRadius)||incomingThreats(s).length||activeHazards(s).some(h=>h.active&&Math.abs(h.x-s.player.x)<h.width))return null;
++ return candidate;
++}
++export function acknowledgeSequence(s,id){
++ if(!unlockedSequences(s).some(q=>q.id===id))return false;
++ if(!s.presentation.seen.includes(id))s.presentation.seen.push(id);
++ s.presentation.pending=s.presentation.pending.filter(x=>x!==id);s.dirty=true;return true;
++}
++function restorePresentation(s,v){
++ const known=unlockedSequences(s).map(q=>q.id),p=v.presentation||{};
++ s.presentation={enabled:p.enabled!==false,autoAdvance:p.autoAdvance===true,captionScale:[1,1.2,1.4].includes(p.captionScale)?p.captionScale:1,seen:uniqueKnown(p.seen,known),pending:[]};
++ // Legacy imports do not replay all old scenes on load. Their gallery is still unlocked.
++ if(v.schema<8)s.presentation.seen=known;
++ else s.presentation.pending=uniqueKnown(p.pending,known).filter(id=>!s.presentation.seen.includes(id));
++}
++/** A scene is a staged copy: render mutations cannot affect the live campaign. */
++export function makeSequenceState(s,id,shot=0){
++ const q=DATA.sequences.find(q=>q.id===id);if(!q||q.at>s.completed.length)return null;
++ const raw=createState(s.difficulty);raw.completed=DATA.chapters.flatMap(c=>c.objectives).slice(0,q.at).map(o=>o.id);raw.room=q.room;
++ const stage=restore(serialize(raw));stage.player.x=Math.max(90,Math.min(ROOM[q.room].width-90,q.shots[shot]?.x||750));stage.player.y=88;stage.player.hp=100;stage.invuln=0;stage.flash=false;stage.reducedMotion=s.reducedMotion;
++ stage.world[q.room]={enemies:[],eggs:{},cleared:true,spawned:true,visitTime:0};stage.noticeTime=0;stage.presentation.enabled=false;return stage;
++}
++/** Stored chapter starts are genuine snapshots, not generated loadouts. */
++export function chapterEntry(s){
++ if(s.dead||s.finished||s.goal!==0||s.completed.length!==s.chapter*3)return null;
++ return {schema:1,chapter:s.chapter,completed:s.completed.length,room:s.room,elapsed:s.elapsed,snapshot:serialize(s)};
++}
++export function readChapterEntry(raw){
++ try{const e=typeof raw==='string'?JSON.parse(raw):raw;if(!e||e.schema!==1||!Number.isInteger(e.chapter)||e.chapter<0||e.chapter>=DATA.chapters.length||typeof e.snapshot!=='string')return null;
++ const s=restore(e.snapshot);if(!s||s.finished||s.goal!==0||s.chapter!==e.chapter||s.completed.length!==e.chapter*3||s.room!==e.room)return null;
++ return {schema:1,chapter:s.chapter,completed:s.completed.length,room:s.room,elapsed:s.elapsed,snapshot:serialize(s),thumbnail:typeof e.thumbnail==='string'&&e.thumbnail.length<150000&&/^data:image\/webp;base64,[a-zA-Z0-9+/=]+$/.test(e.thumbnail)?e.thumbnail:null};
++ }catch{return null;}
++}
++export function journeySummary(s){return {objectives:s.completed.length,rooms:s.visited.length,totalRooms:DATA.rooms.length,records:s.records.length,physicalRecords:DATA.interactables.filter(a=>a.kind==='archive'&&s.records.includes(a.id)).length,totalRecords:DATA.interactables.filter(a=>a.kind==='archive').length,repairs:DATA.maintenance.repairs.filter(j=>maintenanceStatus(s,j.id).done).length,totalRepairs:DATA.maintenance.repairs.length,excursion:excursionStatus(s).stage,totalExcursion:DATA.excursion.ops.length,companions:s.metrics.companionPassages,damageEvents:s.metrics.attacks,minutes:Math.floor(s.elapsed/60)};}
++
++
++export function validateMemoryBundle(raw){
++ try{
++  if(typeof raw!=='string'||raw.length>5000000)return null;
++  const b=JSON.parse(raw);if(b?.format!=='atf-marion-memories'||b.schema!==1||!Array.isArray(b.entries)||b.entries.length>16)return null;
++  const main=restore(b.campaign);if(!main)return null;
++  const replay=b.replay===null?null:restore(b.replay);if(b.replay!==null&&!replay)return null;
++  const seen=new Set(),entries=[];
++  for(const item of b.entries){const e=readChapterEntry(item);if(!e||seen.has(e.chapter)||e.completed>main.completed.length)return null;seen.add(e.chapter);entries.push(e);}
++  return {format:'atf-marion-memories',schema:1,campaign:serialize(main),replay:replay?serialize(replay):null,entries};
++ }catch{return null;}
++}
+--- v0.7/src/oth-v1/oth-ui.js
++++ v0.8/src/oth-v1/oth-ui.js
+@@ -1,23 +1,27 @@
+ import {DATA} from './oth-data.js';
+-import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle,crewInRoom,activeHazards,commandCompanion,syncCompanion,stealthStatus,chart,doorStatus,serviceStatus,incomingThreats,listenReport,soundHistory,maintenanceOverview,maintenanceStatus,maintenanceRoute,trackMaintenance,craftItem,craftPreview,localChart,excursionStatus,excursionOperation,dropRecorder} from './oth-engine.js';
+-import {draw,fitCanvas} from './oth-render.js';
++import {ROOM,createState,currentObjective,step,serialize,restore,nearby,route,activeEdges,roomWorld,resolvePuzzle,crewInRoom,activeHazards,commandCompanion,syncCompanion,stealthStatus,chart,doorStatus,serviceStatus,incomingThreats,listenReport,soundHistory,maintenanceOverview,maintenanceStatus,maintenanceRoute,trackMaintenance,craftItem,craftPreview,localChart,excursionStatus,excursionOperation,dropRecorder,unlockedSequences,pendingSequence,acknowledgeSequence,makeSequenceState,chapterEntry,readChapterEntry,journeySummary,validateMemoryBundle} from './oth-engine.js';
++import {draw,fitCanvas,drawSequence} from './oth-render.js';
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ export function mount(root){
+  let state=createState(),mode='title',keys=new Set(),last=0,frame=0,panel='',lastObjective='',saveWarning=false,audio=null,lastSound=0,saveClock=0,checkpoint=null,lastCue=0,lastListenCue=0,cuesPlayed=0;
+- const readSave=()=>{try{const raw=localStorage.getItem(DATA.saveKey);if(raw&&JSON.parse(raw).schema<7&&!localStorage.getItem(DATA.saveKey+':backup-before-v7'))localStorage.setItem(DATA.saveKey+':backup-before-v7',raw);return restore(raw);}catch{return null;}};
++ let session='campaign',replayOrigin=-1,archiveWarning='',scene=null,sceneClock=0,memoryImportCandidate=null;const attemptedEntries=new Set();
++ const saveSlot=()=>session==='replay'?DATA.saveKey+':replay-v8':DATA.saveKey;
++ const checkpointSlot=()=>session==='replay'?DATA.saveKey+':replay-checkpoint-v8':DATA.saveKey+':checkpoint-v2';
++ const chapterSlot=i=>DATA.saveKey+':chapter-v8:'+String(i).padStart(2,'0');
++ const readSave=()=>{let raw;try{raw=localStorage.getItem(DATA.saveKey);}catch{return null;}const restored=restore(raw);if(!restored)return null;try{if(JSON.parse(raw).schema<8&&!localStorage.getItem(DATA.saveKey+':backup-before-v8'))localStorage.setItem(DATA.saveKey+':backup-before-v8',raw);}catch{archiveWarning='Le carnet a été lu, mais sa copie préalable n’a pas pu être écrite. Exportez les mémoires avant de déplacer le fichier.';}return restored;};
+  const cached=readSave();if(cached)state=cached;
+- root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="crew" class="crew-nav">Équipage</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="excursion-ribbon" id="excursion-ribbon" hidden aria-live="off"></div><div class="oth-touch" aria-label="Commandes tactiles"><button class="listen-touch" data-touch="v" aria-label="Écouter sans bouger">Écouter [V]</button><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="b" aria-label="Verrou de cloison">B</button><button data-action="companion" aria-label="Suivre ou attendre">G</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin · G compagnon · B verrou · V écouter · I maintenance · K services</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS<br><span class="version-mark">V0.7 · LES ARCHIVES NOYÉES</span></p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
++ root.innerHTML=`<header class="oth-head"><div class="oth-location"><strong id="oth-ship">DSMO MARION</strong><span id="oth-roomcode">A-01 · PASSERELLE</span></div><div class="oth-objective"><small id="oth-chapter"></small><strong id="oth-goal"></strong></div><nav aria-label="Carnet de bord"><button data-panel="map">Plan [M]</button><button data-panel="codex">Carnet [J]</button><button data-panel="crew" class="crew-nav">Équipage</button><button data-panel="pause" aria-label="Mettre en pause">II</button></nav></header><main class="oth-stage"><canvas class="oth-canvas" width="1280" height="650" tabindex="0" aria-label="Exploration du Marion et de LV-178"></canvas><div class="excursion-ribbon" id="excursion-ribbon" hidden aria-live="off"></div><div class="oth-touch" aria-label="Commandes tactiles"><button class="listen-touch" data-touch="v" aria-label="Écouter sans bouger">Écouter [V]</button><div class="touch-dir"><button class="up" data-touch="z" aria-label="Aller au fond">↑</button><button class="left" data-touch="q" aria-label="Aller à gauche">←</button><button class="down" data-touch="s" aria-label="Aller au premier plan">↓</button><button class="right" data-touch="d" aria-label="Aller à droite">→</button></div><div><button data-touch="c">C</button><button data-touch="b" aria-label="Verrou de cloison">B</button><button data-action="companion" aria-label="Suivre ou attendre">G</button><button data-touch="f">Feu</button><button data-touch="r">Leurre</button><button data-touch="e">E</button></div></div></main><footer class="oth-foot"><div class="oth-meters"><span class="oth-meter">VITALITÉ<b id="oth-hp"></b></span><span class="oth-meter">RÉSERVOIR<b id="oth-fuel"></b></span><span class="oth-meter">LEURRES<b id="oth-decoys"></b></span></div><div class="oth-foot-msg"><div id="oth-message" aria-live="polite"></div><small id="oth-controls">ZQSD / WASD · Maj courir · C s’accroupir · E agir · F flamme · R leurre · L lampe · H soin · G compagnon · B verrou · V écouter · I maintenance · K services</small></div><div class="oth-presence" id="oth-presence">AUCUN CONTACT</div></footer><section class="oth-title" aria-label="Menu de la chronique"><div class="oth-title-content"><p class="oth-franchise">ALIEN</p><p class="eyebrow">CHRONIQUE DU MARION · LV-178</p><h1>HORS<br>DES OMBRES</h1><p class="subtitle">LA SORTIE DES PROFONDEURS<br><span class="version-mark">V0.8 · LES MÉMOIRES DU MARION</span></p><p class="tagline">Le secours est arrivé.<br>Ce n’est pas forcément une bonne nouvelle.</p><div class="oth-title-actions"><button class="primary" data-action="continue">${cached?'Reprendre la chronique':'Entrer dans le Marion'}</button><button data-panel="chronicle">Chapitres & séquences</button><button data-action="return-campaign" class="title-return-campaign" hidden>Revenir à la campagne</button><button data-panel="pause">Commandes & réglages</button>${cached?'<button data-action="new">Nouvelle chronique</button>':''}</div></div><div class="oth-title-location">DSMO MARION<br>ORBITE DE LV-178<br>RELAIS LOCAL SEULEMENT</div><div class="oth-title-footer"><span>TANTALUS FRONTIER / ARCHIVES</span><span>UNE ADAPTATION NON OFFICIELLE DE L’ŒUVRE DE TIM LEBBON</span></div></section><dialog class="oth-dialog" aria-labelledby="oth-dialog-title"></dialog>`;
+  const canvas=root.querySelector('canvas'),title=root.querySelector('.oth-title'),dialog=root.querySelector('dialog'),el=id=>root.querySelector('#'+id);
+  const setText=(id,value)=>{const node=el(id);if(node&&node.textContent!==String(value))node.textContent=value;};
+- function save(){if(state.dead)return;saveClock=0;try{localStorage.setItem(DATA.saveKey,serialize(state));state.dirty=false;saveWarning=false;}catch{saveWarning=true;state.dirty=false;}}
+- function close(){state.reading=null;state.listening=false;state.listenHeld=0;if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing'){canvas.focus({preventScroll:true});startAudio();}}
++ function save(){if(state.dead)return;saveClock=0;try{localStorage.setItem(saveSlot(),serialize(state));state.dirty=false;saveWarning=false;}catch{saveWarning=true;state.dirty=false;}}
++ function close(){if(scene){finishSequence();return;}state.reading=null;state.listening=false;state.listenHeld=0;if(dialog.open)dialog.close();panel='';keys.clear();if(mode==='playing'){canvas.focus({preventScroll:true});startAudio();}}
+  function show(type,body,eyebrow='CARNET DE BORD'){
+-  keys.clear();state.excursionHold=0;state.excursionTarget=null;state.maintenanceHold=0;state.maintenanceTarget=null;state.listening=false;state.listenHeld=0;audio?.suspend().catch(()=>{});panel=type;dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique',reading:'Document de bord',crew:'Équipage du Marion',services:'Services de la pièce',evidence:'Empreintes du passage',kit:'Le sac de maintenance',excursion:'Les archives noyées'})[type]||type)}</h2></div>${!['dead','end','puzzle'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
++  keys.clear();state.excursionHold=0;state.excursionTarget=null;state.maintenanceHold=0;state.maintenanceTarget=null;state.listening=false;state.listenHeld=0;audio?.suspend().catch(()=>{});panel=type;dialog.classList.toggle('sequence-dialog',type==='sequence');dialog.innerHTML=`<header><div><p class="eyebrow">${esc(eyebrow)}</p><h2 id="oth-dialog-title">${esc(({sequence:'Les mémoires du Marion',chronicle:'Chapitres & séquences',summary:'Le trajet enregistré',pause:'À l’abri, pour un instant',map:'Plan du site',codex:'Carnet du Marion',journal:'Dernières transmissions',puzzle:'Commande locale',dead:'Contact perdu',end:'Dernière transmission',new:'Recommencer la chronique',reading:'Document de bord',crew:'Équipage du Marion',services:'Services de la pièce',evidence:'Empreintes du passage',kit:'Le sac de maintenance',excursion:'Les archives noyées'})[type]||type)}</h2></div>${!['dead','end','puzzle','sequence'].includes(type)?'<button data-close aria-label="Fermer">×</button>':''}</header><div class="dialog-body">${body}</div>`;
+   if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+  }
+  function pause(){
+-  const controls=[['O','Relevé facultatif'],['T','Poser l’enregistreur'],['ZQSD / WASD / flèches','Marcher · profondeur'],['Maj / C','Courir / s’accroupir'],['E maintenu','Utiliser une commande'],['F / R','Flamme / leurre'],['L / H','Lampe / soin'],['G','Compagnon : suivre / attendre'],['B maintenu','Verrouiller / libérer une cloison'],['V maintenu','Écouter, sans arrêter la simulation'],['I','Sac de maintenance / travaux facultatifs'],['K','Services locaux (relevé)'],['M / J / Échap','Plan / carnet / pause']];
+-  show('pause',`<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><div class="field"><label for="oth-motion">Réduire les animations ambiantes</label><input id="oth-motion" type="checkbox" ${state.reducedMotion?'checked':''}></div><div class="field"><label for="oth-contrast">Renforcer la lisibilité des interactions</label><input id="oth-contrast" type="checkbox" ${state.contrast?'checked':''}></div><p class="hint">Les interventions de maintenance conservent leurs réglages lorsque vous fermez le panneau. Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="journal">Journal</button><button data-panel="kit">Sac de maintenance [I]</button><button data-panel="evidence">Traces & sons</button><button data-panel="services">Services locaux [K]</button><button data-panel="excursion">Relevé facultatif [O]</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
++  const controls=[['P','Chapitres, répétition et séquences'],['O','Relevé facultatif'],['T','Poser l’enregistreur'],['ZQSD / WASD / flèches','Marcher · profondeur'],['Maj / C','Courir / s’accroupir'],['E maintenu','Utiliser une commande'],['F / R','Flamme / leurre'],['L / H','Lampe / soin'],['G','Compagnon : suivre / attendre'],['B maintenu','Verrouiller / libérer une cloison'],['V maintenu','Écouter, sans arrêter la simulation'],['I','Sac de maintenance / travaux facultatifs'],['K','Services locaux (relevé)'],['M / J / Échap','Plan / carnet / pause']];
++  show('pause',`${session==='replay'?'<p class="replay-warning">RÉPÉTITION SÉPARÉE · La campagne principale ne sera pas écrasée.</p>':''}<p>La simulation est arrêtée pendant la lecture du carnet. Les travées se parcourent en profondeur ; les couloirs étroits gardent une vue latérale.</p><div class="controls-grid">${controls.map(([k,t])=>`<div class="control"><kbd>${k}</kbd><span>${t}</span></div>`).join('')}</div><div class="field"><label for="oth-difficulty">Conditions de survie</label><select id="oth-difficulty"><option value="normal" ${state.difficulty==='normal'?'selected':''}>Survie</option><option value="assisted" ${state.difficulty==='assisted'?'selected':''}>Exploration accompagnée</option></select></div><div class="field"><label for="oth-sound">Ambiance et signaux sonores</label><input id="oth-sound" type="checkbox" ${state.sound?'checked':''}></div><div class="field"><label for="oth-motion">Réduire les animations ambiantes</label><input id="oth-motion" type="checkbox" ${state.reducedMotion?'checked':''}></div><div class="field"><label for="oth-contrast">Renforcer la lisibilité des interactions</label><input id="oth-contrast" type="checkbox" ${state.contrast?'checked':''}></div><div class="field"><label for="oth-sequences">Ouvrir les séquences aux moments du récit</label><input id="oth-sequences" type="checkbox" ${state.presentation.enabled?'checked':''}></div><div class="field"><label for="oth-sequence-auto">Avancer automatiquement les tableaux</label><input id="oth-sequence-auto" type="checkbox" ${state.presentation.autoAdvance?'checked':''}></div><div class="field"><label for="oth-caption-scale">Taille des sous-titres</label><select id="oth-caption-scale">${[1,1.2,1.4].map(v=>`<option value="${v}" ${state.presentation.captionScale===v?'selected':''}>${Math.round(v*100)} %</option>`).join('')}</select></div><p class="hint">Les interventions de maintenance conservent leurs réglages lorsque vous fermez le panneau. Le son est facultatif. Aucun dialogue enregistré ni extrait sonore des films n’est utilisé. Soins restants : ${state.player.kits}.</p><div class="button-row"><button class="primary" data-action="resume">${mode==='title'?'Entrer dans le Marion':'Reprendre'}</button><button data-action="save">Sauvegarder</button><button data-action="export-save">Exporter le carnet</button><button data-action="import-save">Importer un carnet</button><input type="file" id="oth-import" accept=".json,application/json" hidden><button data-panel="chronicle">Chapitres & séquences [P]</button><button data-panel="summary">Bilan du trajet</button>${session==='replay'?'<button data-action="return-campaign">Revenir à la campagne</button>':''}<button data-panel="journal">Journal</button><button data-panel="kit">Sac de maintenance [I]</button><button data-panel="evidence">Traces & sons</button><button data-panel="services">Services locaux [K]</button><button data-panel="excursion">Relevé facultatif [O]</button><button data-action="title">Menu principal</button><button data-action="exit">Retour au Tantalus</button></div>`,'SYSTÈMES DE BORD');
+  }
+  function services(){
+   const r=ROOM[state.room],items=DATA.interactables.filter(a=>a.room===r.id&&['light','machine'].includes(a.kind));
+@@ -42,7 +46,7 @@
+  function codex(){
+   show('codex',`<p class="hint">${state.records.filter(id=>DATA.interactables.some(a=>a.id===id&&a.kind==='archive')).length} / ${DATA.interactables.filter(a=>a.kind==='archive').length} transcriptions retrouvées. Les documents se récupèrent sur place.${state.records.includes(DATA.excursion.rewardRecord)?' Le relevé des échangeurs a également été copié.':''}</p><div class="oth-codex-tools"><input id="oth-search" type="search" aria-label="Rechercher dans le carnet" placeholder="Un lieu, un équipement, une trace…"><select id="oth-category" aria-label="Catégorie"><option value="">Tout le carnet</option>${['Équipage','Lieux','Matériel','Survie','Traces'].map(c=>`<option>${c}</option>`).join('')}</select></div><div class="oth-codex-grid" id="oth-codex-list"></div>`,'ARCHIVES PERSONNELLES');renderCodex();
+  }
+- function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!e.unlockRecord||state.records.includes(e.unlockRecord))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card" data-codex-id="${esc(e.id)}"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
++ function renderCodex(){const search=el('oth-search')?.value.toLocaleLowerCase('fr')||'',cat=el('oth-category')?.value||'';const entries=DATA.codex.filter(e=>(!e.unlockRoom||state.visited.includes(e.unlockRoom))&&(!e.unlockCompleted||state.completed.length>=e.unlockCompleted)&&(!e.unlockRecord||state.records.includes(e.unlockRecord))&&(!cat||e.category===cat)&&(!search||[e.title,e.summary,e.text].join(' ').toLocaleLowerCase('fr').includes(search)));el('oth-codex-list').innerHTML=entries.length?entries.map(e=>`<article class="oth-codex-card" data-codex-id="${esc(e.id)}"><small>${esc(e.category.toUpperCase())}</small><h3>${esc(e.title)}</h3><p>${esc(e.summary)}</p><p class="detail">${esc(e.text)}</p></article>`).join(''):'<p>Aucune note ne correspond à cette recherche.</p>';}
+  function crew(){
+   const lost=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.lost||[])),hurt=new Set(DATA.storyEvents.filter(e=>e.at<=state.completed.length).flatMap(e=>e.injured||[]));
+   const names={jordan:'Lucy Jordan',hoop:'Chris « Hoop » Hooper',ripley:'Ellen Ripley',baxter:'Josh Baxter',kasyanov:'Kasyanov',sneddon:'Karen Sneddon',lachance:'Lachance',garcia:'Garcia',welford:'Welford',powell:'Powell'};
+@@ -84,39 +88,121 @@
+   const stages=DATA.excursion.ops.map((o,i)=>{const seen=state.visited.includes(o.room),done=i<x.stage,active=i===x.stage;return `<li class="${done?'done':active?'active':''}"><span>${done?'✓':String(i+1).padStart(2,'0')}</span><div><strong>${esc(o.title)}</strong><small>${seen?esc(ROOM[o.room].name):'Pièce non reconnue'}${active?' · '+esc(excursionOperation(state,o.id).label):''}</small></div></li>`;}).join('');
+   show('excursion',`<div class="excursion-summary"><span>EAU RÉSIDUELLE<strong>${Math.round(x.water*100)} %</strong></span><span>RELEVÉ<strong>${x.stage} / 8</strong></span><span>GROUPE<strong>${x.pumping?Math.ceil(x.remaining)+' s':x.drained?'NIVEAU BAS':'À L’ARRÊT'}</strong></span></div><p>Le circuit est local. Réparez la circulation, puis ramenez l’enregistreur au lecteur. Les commandes se manipulent sur place, avec E maintenu puis relâché.</p><ol class="excursion-steps">${stages}</ol>${rec?`<p class="note">${rec.carried?'Enregistreur sanglé au dos. Allure réduite, sprint indisponible. T permet de le poser.':'Enregistreur posé : '+esc(ROOM[rec.room].name)+'. Revenir à proximité et maintenir E pour le reprendre.'}</p>`:''}${x.complete?'<p class="completion-note">La copie rejoint le carnet. Aucun contact extérieur ni nouvelle conclusion du récit principal n’est confirmé.</p>':''}<div class="button-row"><button data-action="excursion-track">${state.excursion.tracked?'Masquer':'Afficher'} le repère facultatif</button>${rec?.carried?'<button data-action="recorder-drop">Reprendre et poser le boîtier</button>':''}<button data-panel="map">Plan local</button><button data-close class="primary">Retour au terrain</button></div><p class="hint">La lecture suspend les pompes. L’écoute V et les manipulations E ne suspendent pas les menaces.</p>`,'BOUCLE DES ÉCHANGEURS / LECTURE SEULE');
+  }
++
++
++ function exportMemories(){
++  save();try{
++   const campaign=session==='campaign'?serialize(state):localStorage.getItem(DATA.saveKey),replay=session==='replay'?serialize(state):localStorage.getItem(DATA.saveKey+':replay-v8');
++   const payload=validateMemoryBundle(JSON.stringify({format:'atf-marion-memories',schema:1,campaign,replay:restore(replay)?replay:null,entries:chapterEntries().filter(Boolean)}));
++   if(!payload)throw new Error('Le carnet principal n’est pas disponible.');
++   const blob=new Blob([JSON.stringify(payload)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='MEMOIRES_MARION_V08.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
++  }catch(e){archiveWarning='Export des mémoires indisponible : '+e.message;chronicle();}
++ }
++ async function prepareMemories(file){
++  if(!file)return;memoryImportCandidate=null;
++  try{if(file.size>5000000)throw new Error('Paquet trop volumineux.');const b=validateMemoryBundle(await file.text());if(!b)throw new Error('Le paquet ne respecte pas le format des mémoires.');memoryImportCandidate=b;
++   show('chronicle',`<p>Ce paquet contient une campagne, ${b.entries.length} entrées de chapitre et ${b.replay?'une répétition':'aucune répétition'}.</p><p class="replay-warning">La confirmation remplacera les mémoires locales de ce DLC. Les autres campagnes et DLC ne sont pas modifiés.</p><div class="button-row"><button data-panel="chronicle">Annuler</button><button class="primary" data-action="apply-memories">Remplacer les mémoires locales</button></div>`,'IMPORT À CONFIRMER');
++  }catch(e){archiveWarning='Import refusé : '+e.message;chronicle();}
++ }
++ function applyMemories(){
++  const b=memoryImportCandidate;if(!b)return false;
++  const writes=new Map([[DATA.saveKey,b.campaign],[DATA.saveKey+':replay-v8',b.replay],[DATA.saveKey+':checkpoint-v2',b.campaign],[DATA.saveKey+':replay-checkpoint-v8',b.replay]]);
++  for(let i=0;i<DATA.chapters.length;i++){const e=b.entries.find(q=>q.chapter===i);writes.set(chapterSlot(i),e?JSON.stringify(e):null);}
++  const prior=new Map();try{
++   for(const k of writes.keys())prior.set(k,localStorage.getItem(k));
++   for(const [k,v] of writes){if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}
++  }catch(e){
++   let rollback=true;for(const k of prior.keys()){try{localStorage.removeItem(k);}catch{rollback=false;}}
++   for(const [k,v] of prior){if(v!==null)try{localStorage.setItem(k,v);}catch{rollback=false;}}
++   archiveWarning='Écriture interrompue. '+(rollback?'Les anciennes mémoires ont été remises en place.':'La restauration locale a aussi échoué ; conservez votre export.');chronicle();return false;
++  }
++  session='campaign';replayOrigin=-1;attemptedEntries.clear();archiveWarning='';memoryImportCandidate=null;changeState(restore(b.campaign));save();begin();return true;
++ }
++
++ function clearChapterArchive(){
++  archiveWarning='';attemptedEntries.clear();for(let i=0;i<DATA.chapters.length;i++){try{localStorage.removeItem(chapterSlot(i));}catch{archiveWarning='Les anciennes entrées ne peuvent pas être effacées sur cette origine.';}}
++ }
++ function rememberChapter(){
++  if(session!=='campaign'||mode!=='playing')return;
++  const entry=chapterEntry(state);if(!entry||attemptedEntries.has(entry.chapter))return;attemptedEntries.add(entry.chapter);
++  try{const existing=readChapterEntry(localStorage.getItem(chapterSlot(entry.chapter)));if(existing)return;
++   const shot=document.createElement('canvas');shot.width=480;shot.height=244;const copy=restore(entry.snapshot);draw(shot,copy,{menu:true});entry.thumbnail=shot.toDataURL('image/webp',.58);
++   localStorage.setItem(chapterSlot(entry.chapter),JSON.stringify(entry));archiveWarning='';
++  }catch{archiveWarning='L’entrée de chapitre n’a pas pu être conservée. Exportez le carnet pour garder la progression.';}
++ }
++ function chapterEntries(){return DATA.chapters.map((_,i)=>{try{return readChapterEntry(localStorage.getItem(chapterSlot(i)));}catch{archiveWarning='Lecture des entrées locales indisponible.';return null;}});}
++ function chronicle(){
++  const entries=chapterEntries();let replay=null;try{replay=restore(localStorage.getItem(DATA.saveKey+':replay-v8'));}catch{}
++  show('chronicle',`<p class="chronicle-lead">Rejouer un trajet, sans effacer celui qui continue.</p><p>Chaque entrée conserve les ressources et le monde au début du chapitre. Les chapitres sans instantané ne sont pas reconstruits artificiellement.</p>${session==='replay'?'<p class="replay-warning">RÉPÉTITION ACTIVE · Vos sauvegardes et points de reprise restent séparés de la campagne.</p>':''}${archiveWarning?`<p class="save-alert" role="alert">${esc(archiveWarning)}</p>`:''}<div class="button-row">${session==='replay'?'<button data-action="return-campaign" class="primary">Revenir à la campagne</button>':''}${replay?'<button data-action="resume-replay">Reprendre la répétition sauvegardée</button>':''}<button data-panel="summary">Bilan de cette session</button><button data-action="export-memories">Exporter les mémoires</button><button data-action="import-memories">Importer les mémoires</button><input id="oth-import-memories" type="file" accept=".json,application/json" hidden></div><h3 class="chronicle-section">Entrées de chapitre <small>${entries.filter(Boolean).length} / ${DATA.chapters.length}</small></h3><div class="chapter-library">${DATA.chapters.map((c,i)=>{const e=entries[i];return `<button class="chapter-card ${e?'recorded':'unrecorded'}" data-chapter="${i}" ${e?'':'disabled'}>${e?.thumbnail?`<img alt="Vue enregistrée à l’entrée du chapitre ${i+1}" src="${e.thumbnail}">`:'<span class="chapter-empty" aria-hidden="true"></span>'}<span class="chapter-number">${String(i+1).padStart(2,'0')}</span><span class="chapter-copy"><strong>${e||state.completed.length>=i*3?esc(c.title):'Chapitre non atteint'}</strong><small>${e?'INSTANTANÉ · '+esc(ROOM[e.room].name):state.completed.length>=i*3?'ATTEINT · ENTRÉE NON ENREGISTRÉE':'ENTRÉE NON ENREGISTRÉE'}</small>${e?`<em>Rejouer dans un carnet séparé</em>`:''}</span></button>`;}).join('')}</div><h3 class="chronicle-section">Séquences du récit <small>${unlockedSequences(state).length} / ${DATA.sequences.length}</small></h3><div class="sequence-library">${DATA.sequences.map((q,i)=>{const unlocked=q.at<=state.completed.length;return `<button class="sequence-card" data-sequence="${q.id}" ${unlocked?'':'disabled'}><span>${String(i+1).padStart(2,'0')}</span><strong>${unlocked?esc(q.title):'Séquence non découverte'}</strong><small>${unlocked?'3 TABLEAUX · REVOIR':'VERROUILLÉE'}</small></button>`;}).join('')}</div><p class="hint">Les séquences sont des mises en scène originales avec le rendu du jeu. Elles n’attribuent ni ressources ni objectifs. Entrée / espace : tableau suivant. Échap : retour immédiat. Aucune voix officielle.</p><div class="button-row"><button data-close class="primary">Fermer le carnet</button></div>`,'MÉMOIRES LOCALES / SESSIONS SÉPARÉES');
++ }
++ function startChapter(i){
++  const e=chapterEntries()[i];if(!e)return false;
++  const restored=restore(e.snapshot);if(!restored)return false;
++  save();if(saveWarning){archiveWarning='Répétition non ouverte : le carnet principal ne peut pas être sauvegardé. Exportez-le avant de quitter.';chronicle();return false;}archiveWarning='';session='replay';replayOrigin=i;changeState(restored);state.presentation.pending=[];save();begin();state.notice='Répétition du chapitre '+(i+1)+' · La campagne est conservée dans son carnet.';state.noticeTime=9;return true;
++ }
++ function resumeReplay(){
++  let restored;try{restored=restore(localStorage.getItem(DATA.saveKey+':replay-v8'));}catch{}if(!restored)return false;
++  save();if(saveWarning){archiveWarning='Reprise refusée tant que le carnet principal ne peut pas être conservé.';chronicle();return false;}archiveWarning='';session='replay';replayOrigin=restored.chapter;changeState(restored);begin();return true;
++ }
++ function returnCampaign(){
++  if(session!=='replay'){close();return true;}save();if(saveWarning){archiveWarning='Le carnet de répétition ne peut pas être conservé. Exportez-le avant de changer de session.';chronicle();return false;}const main=readSave();if(!main){archiveWarning='Le carnet principal est indisponible. La répétition reste ouverte ; aucune nouvelle campagne n’a été créée.';chronicle();return false;}
++  archiveWarning='';session='campaign';replayOrigin=-1;changeState(main);begin();state.notice='La campagne reprend son trajet. La répétition reste dans son carnet séparé.';state.noticeTime=8;return true;
++ }
++ function summary(){
++  const j=journeySummary(state),items=[['Interventions principales',j.objectives+' / 48'],['Lieux parcourus',j.rooms+' / '+j.totalRooms],['Transcriptions physiques',j.physicalRecords+' / '+j.totalRecords],['Passages réparés',j.repairs+' / '+j.totalRepairs],['Archives noyées',j.excursion+' / '+j.totalExcursion],['Passages de compagnon',j.companions]];
++  show('summary',`<p>${session==='replay'?'Bilan de la répétition uniquement. La campagne conserve ses propres découvertes.':'Bilan du carnet actif, sans récompense ajoutée ni estimation de durée humaine.'}</p><div class="journey-metrics">${items.map(([label,value])=>`<article><small>${label}</small><strong>${value}</strong></article>`).join('')}</div><p class="hint">${j.minutes} minutes de simulation enregistrées. Les lectures sont exclues. Les transcriptions et la copie finale de l’annexe restent distinguées.</p><div class="button-row"><button data-panel="chronicle">Chapitres & séquences</button><button data-close class="primary">Retour</button></div>`,'BILAN / '+(session==='replay'?'RÉPÉTITION':'CAMPAGNE'));
++ }
++ function startSequence(id,fromGallery=false){
++  const def=unlockedSequences(state).find(q=>q.id===id);if(!def)return false;
++  scene={def,shot:0,fromGallery,stage:makeSequenceState(state,id,0)};sceneClock=0;renderSequencePanel();return true;
++ }
++ function renderSequencePanel(){
++  if(!scene)return;const q=scene.def.shots[scene.shot];scene.stage=makeSequenceState(state,scene.def.id,scene.shot);
++  show('sequence',`<div class="sequence-screen"><canvas class="sequence-canvas" width="1280" height="650" aria-label="Mise en scène : ${esc(scene.def.title)}"></canvas><div class="sequence-caption" style="--caption-scale:${state.presentation.captionScale}"><small>${esc(q.speaker)}</small><p>${esc(q.text)}</p></div><span class="sequence-shot">${esc(q.tag)} · ${scene.shot+1} / ${scene.def.shots.length}</span></div><div class="sequence-controls"><button data-action="sequence-prev" ${scene.shot===0?'disabled':''}>← Précédent</button><span>${state.presentation.autoAdvance?'Lecture automatique':'Lecture à votre rythme'} · MONDE EN PAUSE</span><button class="primary" data-action="sequence-next">${scene.shot===scene.def.shots.length-1?'Reprendre le terrain':'Suite →'}</button><button data-action="sequence-skip">Passer [Échap]</button></div>`,'CHRONIQUE / '+scene.def.title);
++  setText('oth-dialog-title',scene.def.title);
++ }
++ function nextSequence(){if(!scene)return;scene.shot++;sceneClock=0;if(scene.shot>=scene.def.shots.length){finishSequence();return;}renderSequencePanel();}
++ function previousSequence(){if(!scene||scene.shot===0)return;scene.shot--;sceneClock=0;renderSequencePanel();}
++ function finishSequence(){if(!scene)return;const last=scene;scene=null;acknowledgeSequence(state,last.def.id);close();save();if(last.fromGallery)chronicle();}
+  function journal(){show('journal',state.journal.length?state.journal.slice().reverse().map(j=>`<div class="oth-journal-entry"><small>${esc(DATA.chapters[j.chapter].title)}</small><p>${esc(j.text)}</p></div>`).join(''):'<p>Le carnet attend votre première intervention.</p>','TRANSMISSIONS');}
+- function openPanel(type){if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();if(type==='crew')crew();if(type==='services')services();if(type==='evidence')evidence();if(type==='kit')kit();if(type==='excursion')excursion();}
++ function openPanel(type){if(type==='chronicle')chronicle();if(type==='summary')summary();if(type==='pause')pause();if(type==='map')map();if(type==='codex')codex();if(type==='journal')journal();if(type==='crew')crew();if(type==='services')services();if(type==='evidence')evidence();if(type==='kit')kit();if(type==='excursion')excursion();}
+  function begin(){startAudio();mode='playing';title.hidden=true;close();state.noticeTime=6;canvas.focus({preventScroll:true});}
+- function changeState(s){state=s;lastCue=state.soundSeq;checkpoint=serialize(s);lastObjective='';state.dirty=true;try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}
+- function newGame(){if(state.completed.length){show('new','<p>La sauvegarde de cette chronique sera remplacée. Les données de Tantalus Frontier et des autres archives ne sont pas modifiées.</p><div class="button-row"><button data-close>Conserver la progression</button><button class="primary" data-action="confirm-new">Recommencer</button></div>');}else{changeState(createState(state.difficulty));begin();}}
++ function changeState(s){state=s;lastCue=state.soundSeq;checkpoint=serialize(s);lastObjective='';state.dirty=true;try{localStorage.setItem(checkpointSlot(),checkpoint);}catch{}}
++ function newGame(){if(state.completed.length){show('new','<p>La sauvegarde de cette chronique sera remplacée. Les données de Tantalus Frontier et des autres archives ne sont pas modifiées.</p><div class="button-row"><button data-close>Conserver la progression</button><button class="primary" data-action="confirm-new">Recommencer</button></div>');}else{session='campaign';clearChapterArchive();changeState(createState(state.difficulty));begin();}}
+  root.addEventListener('click',event=>{
+   const b=event.target.closest('button');if(!b)return;
+   if(b.hasAttribute('data-close')){close();return;}if(b.dataset.panel){openPanel(b.dataset.panel);return;}
+   if(b.dataset.craft){const station=state.reading?.station;craftItem(state,station,b.dataset.craft);kit(station);save();return;}
+   if(b.hasAttribute('data-track')){trackMaintenance(state,b.dataset.track||null);kit(state.reading?.station);save();return;}
+   if(b.dataset.choice){resolvePuzzle(state,b.dataset.choice);if(state.puzzle)workPanel();else close();save();return;}
++  if(b.hasAttribute('data-chapter')){startChapter(Number(b.dataset.chapter));return;}
++  if(b.dataset.sequence){startSequence(b.dataset.sequence,true);return;}
+   const a=b.dataset.action;
++  if(a==='export-memories'){exportMemories();return;}if(a==='import-memories'){el('oth-import-memories')?.click();return;}if(a==='apply-memories'){applyMemories();return;}
++  if(a==='sequence-next'){nextSequence();return;}if(a==='sequence-prev'){previousSequence();return;}if(a==='sequence-skip'){finishSequence();return;}
++  if(a==='return-campaign'){returnCampaign();return;}if(a==='resume-replay'){resumeReplay();return;}
++
+   if(a==='excursion-track'){state.excursion.tracked=!state.excursion.tracked;state.dirty=true;excursion();return;}
+   if(a==='recorder-drop'){close();dropRecorder(state);return;}
+   if(a==='companion'){commandCompanion(state);if(panel==='crew')crew();return;}
+-  if(a==='export-save'){const blob=new Blob([serialize(state)],{type:'application/json'});const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='CARNET_MARION.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
++  if(a==='export-save'){const blob=new Blob([serialize(state)],{type:'application/json'});const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=session==='replay'?'REPETITION_MARION.json':'CARNET_MARION.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+   if(a==='import-save')el('oth-import')?.click();
+   if(a==='continue'||a==='resume')begin();
+   if(a==='new')newGame();
+-  if(a==='confirm-new'){changeState(createState(state.difficulty));save();begin();}
++  if(a==='confirm-new'){session='campaign';clearChapterArchive();changeState(createState(state.difficulty));save();begin();}
+   if(a==='save'){save();const p=dialog.querySelector('.hint');if(p)p.textContent=saveWarning?'La sauvegarde locale est indisponible. Gardez cet onglet ouvert.':'Le carnet de bord a été sauvegardé.';}
+   if(a==='title'){save();mode='title';title.hidden=false;close();}
+-  if(a==='retry'){let next=checkpoint?restore(checkpoint):null;try{next=next||restore(localStorage.getItem(DATA.saveKey+':checkpoint-v2'));}catch{}next=next||readSave()||createState(state.difficulty);next.player.hp=Math.max(70,next.player.hp);next.dead=false;next.invuln=3;changeState(next);begin();}
+-  if(a==='exit'){save();const u=new URL(location.href);if(u.searchParams.get('from')==='tantalus')location.href='/index.html';else{mode='title';title.hidden=false;close();}}
++  if(a==='retry'){let next=checkpoint?restore(checkpoint):null;try{next=next||restore(localStorage.getItem(checkpointSlot()));}catch{}try{next=next||restore(localStorage.getItem(saveSlot()));}catch{}next=next||(session==='campaign'?readSave():null)||createState(state.difficulty);next.player.hp=Math.max(70,next.player.hp);next.dead=false;next.invuln=3;changeState(next);begin();}
++  if(a==='exit'){save();if(saveWarning){archiveWarning='Le carnet ne peut pas être conservé. Exportez-le avant de quitter.';chronicle();return;}const u=new URL(location.href);if(u.searchParams.get('from')==='tantalus')location.href='/index.html';else{mode='title';title.hidden=false;close();}}
+  });
+- root.addEventListener('change',async event=>{if(event.target.id==='oth-import'){const file=event.target.files?.[0];if(!file)return;const restored=file.size<=180000?restore(await file.text()):null;if(!restored){const hint=dialog.querySelector('.hint');if(hint)hint.textContent='Ce carnet est invalide. La progression actuelle est conservée.';return;}changeState(restored);save();begin();return;}if(event.target.id==='oth-difficulty'){state.difficulty=event.target.value;save();}if(event.target.id==='oth-sound'){state.sound=event.target.checked;if(state.sound)startAudio();else audio?.suspend().catch(()=>{});save();}if(event.target.id==='oth-motion'){state.reducedMotion=event.target.checked;save();}if(event.target.id==='oth-contrast'){state.contrast=event.target.checked;save();}if(event.target.id==='oth-category')renderCodex();});
++ root.addEventListener('change',async event=>{if(event.target.id==='oth-import-memories'){await prepareMemories(event.target.files?.[0]);return;}if(event.target.id==='oth-sequences'){state.presentation.enabled=event.target.checked;save();return;}if(event.target.id==='oth-sequence-auto'){state.presentation.autoAdvance=event.target.checked;save();return;}if(event.target.id==='oth-caption-scale'){state.presentation.captionScale=Number(event.target.value);save();return;}if(event.target.id==='oth-import'){const file=event.target.files?.[0];if(!file)return;const restored=file.size<=180000?restore(await file.text()):null;if(!restored){const hint=dialog.querySelector('.hint');if(hint)hint.textContent='Ce carnet est invalide. La progression actuelle est conservée.';return;}if(session==='campaign')clearChapterArchive();changeState(restored);save();begin();return;}if(event.target.id==='oth-difficulty'){state.difficulty=event.target.value;save();}if(event.target.id==='oth-sound'){state.sound=event.target.checked;if(state.sound)startAudio();else audio?.suspend().catch(()=>{});save();}if(event.target.id==='oth-motion'){state.reducedMotion=event.target.checked;save();}if(event.target.id==='oth-contrast'){state.contrast=event.target.checked;save();}if(event.target.id==='oth-category')renderCodex();});
+  root.addEventListener('input',event=>{if(event.target.id==='oth-search')renderCodex();});
+  dialog.addEventListener('cancel',e=>{e.preventDefault();if(panel==='puzzle'){state.puzzle=null;}if(panel==='dead'||panel==='end')return;close();});
+- const gameplayKeys=new Set(['z','w','q','a','s','d','arrowleft','arrowright','arrowup','arrowdown','shift','c','e','f','r','h','l','g','b','v','i','k','m','j','o','t','escape',' ']);
+- function keyDown(e){if(!root.isConnected)return;const k=e.key.toLowerCase();if(k==='escape'&&dialog.open){e.preventDefault();if(!e.repeat&&panel!=='dead'&&panel!=='end'){if(panel==='puzzle')state.puzzle=null;close();}return;}if(e.target.matches('input,select,textarea'))return;if(!gameplayKeys.has(k))return;
++ const gameplayKeys=new Set(['z','w','q','a','s','d','arrowleft','arrowright','arrowup','arrowdown','shift','c','e','f','r','h','l','g','b','v','i','k','m','j','o','t','p','enter','escape',' ']);
++ function keyDown(e){if(!root.isConnected)return;const k=e.key.toLowerCase();if(scene){if(['escape','enter',' ','arrowright','arrowleft'].includes(k)){e.preventDefault();if(!e.repeat){if(k==='escape')finishSequence();else if(k==='arrowleft')previousSequence();else nextSequence();}}return;}if(k==='escape'&&dialog.open){e.preventDefault();if(!e.repeat&&panel!=='dead'&&panel!=='end'){if(panel==='puzzle')state.puzzle=null;close();}return;}if(e.target.matches('input,select,textarea'))return;if(!gameplayKeys.has(k))return;
+   if(dialog.open){if(k==='escape'&&panel==='puzzle'){state.puzzle=null;close();e.preventDefault();}return;}
+   if(mode!=='playing')return;e.preventDefault();
+-  if(!e.repeat&&k==='escape'){pause();return;}if(!e.repeat&&k==='m'){map();return;}if(!e.repeat&&k==='j'){codex();return;}if(!e.repeat&&k==='o'){excursion();return;}if(!e.repeat&&k==='t'){dropRecorder(state);return;}if(!e.repeat&&k==='i'){kit();return;}if(!e.repeat&&k==='k'){services();return;}if(!e.repeat&&k==='g'){commandCompanion(state);return;}if(!e.repeat&&k==='l'){state.flash=!state.flash;state.dirty=true;return;}keys.add(k);
++  if(!e.repeat&&k==='escape'){pause();return;}if(!e.repeat&&k==='p'){chronicle();return;}if(!e.repeat&&k==='m'){map();return;}if(!e.repeat&&k==='j'){codex();return;}if(!e.repeat&&k==='o'){excursion();return;}if(!e.repeat&&k==='t'){dropRecorder(state);return;}if(!e.repeat&&k==='i'){kit();return;}if(!e.repeat&&k==='k'){services();return;}if(!e.repeat&&k==='g'){commandCompanion(state);return;}if(!e.repeat&&k==='l'){state.flash=!state.flash;state.dirty=true;return;}keys.add(k);
+  }
+  function keyUp(e){keys.delete(e.key.toLowerCase());}
+  window.addEventListener('keydown',keyDown);window.addEventListener('keyup',keyUp);
+@@ -142,26 +228,27 @@
+   if(state.listening&&audio.currentTime-lastListenCue>1){const report=listenReport(state),cue=report.signals[0];if(cue&&!report.masked){lastListenCue=audio.currentTime;playCue('contact',cue.strength,cue.direction==='gauche'?-.6:cue.direction==='droite'?.6:0);}}
+  }
+  function soundTick(danger){if(!state.sound||mode!=='playing'||dialog.open||!audio)return;const now=audio.currentTime;if(now-lastSound<(danger?.75:4))return;lastSound=now;const oscillator=audio.createOscillator(),gain=audio.createGain();oscillator.type='sine';oscillator.frequency.value=danger?390:62;gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(danger?.014:.012,now+.04);gain.gain.exponentialRampToValueAtTime(.0001,now+(danger?.18:.9));oscillator.connect(gain);gain.connect(audio.destination);oscillator.start(now);oscillator.stop(now+1);}
+- function readout(){const r=ROOM[state.room],o=currentObjective(state),c=DATA.chapters[state.chapter];setText('oth-ship',({marion:'DSMO MARION',narcissus:'NARCISSUS',samson:'SAMSON',surface:'LV-178',mine:'LV-178',derelict:'ÉPAVE ENFOUIE'})[r.zone]);setText('oth-roomcode',r.deck+' · '+r.name.toUpperCase());setText('oth-chapter',`${String(state.chapter+1).padStart(2,'0')} / ${String(DATA.chapters.length).padStart(2,'0')}  —  ${c.title.toUpperCase()}  ·  ${c.actor==='ripley'?'RIPLEY':'HOOP'}`);setText('oth-goal',o?.label||'Transmission émise');setText('oth-hp',Math.ceil(state.player.hp));setText('oth-fuel',Math.floor(state.player.fuel));setText('oth-decoys',String(state.player.decoys).padStart(2,'0'));
++ function readout(){const r=ROOM[state.room],o=currentObjective(state),c=DATA.chapters[state.chapter];setText('oth-ship',({marion:'DSMO MARION',narcissus:'NARCISSUS',samson:'SAMSON',surface:'LV-178',mine:'LV-178',derelict:'ÉPAVE ENFOUIE'})[r.zone]);setText('oth-roomcode',r.deck+' · '+r.name.toUpperCase());setText('oth-chapter',`${session==='replay'?'RÉPÉTITION · ':''}${String(state.chapter+1).padStart(2,'0')} / ${String(DATA.chapters.length).padStart(2,'0')}  —  ${c.title.toUpperCase()}  ·  ${c.actor==='ripley'?'RIPLEY':'HOOP'}`);setText('oth-goal',o?.label||'Transmission émise');setText('oth-hp',Math.ceil(state.player.hp));setText('oth-fuel',Math.floor(state.player.fuel));setText('oth-decoys',String(state.player.decoys).padStart(2,'0'));
+   let hint=state.noticeTime>0?state.notice:o?.hint||'';if(state.story){const ev=DATA.storyEvents.find(e=>e.id===state.story.id);if(ev)hint=ev.speaker+' — '+ev.text;}if(state.flags.carryRipley)hint='Ripley portée · pas de sprint ni de flamme. '+hint;if(state.flags.cellCarried&&state.noticeTime<=0)hint='Cellule portée · sprint indisponible. '+hint;if(state.listening)hint='ÉCOUTE · '+listenReport(state).label+' — relâchez V pour bouger.';const task=maintenanceRoute(state);if(task&&state.noticeTime<=0&&!state.listening)hint='FACULTATIF · '+task.title+' · '+(task.room===state.room?task.status.label:'Prochain accès : '+ROOM[task.path[0].room].name);if(saveWarning)hint='Sauvegarde locale indisponible. '+hint;setText('oth-message',hint);
+   const es=roomWorld(state).enemies;const danger=es.some(e=>['hunt','windup'].includes(e.state)&&e.stun<=0);const n=es.reduce((m,e)=>Math.min(m,Math.abs(e.x-state.player.x)),Infinity);
+   const stealth=stealthStatus(state),comp=state.companion;
+   const accompany=comp?(' · '+comp.name.toUpperCase()+' '+(comp.room!==state.room?'EN ATTENTE':comp.mode==='wait'?'ATTEND':comp.state==='hazard'?'ATTEND LA DÉTENTE':comp.state==='watching'?'PRUDENCE':'SUIT')):'';
+   const incoming=incomingThreats(state);
+   setText('oth-presence',(incoming.length?(incoming.some(a=>a.stage==='pressure')?'CLOISON SOUS PRESSION':'GRIFFES AU SEUIL'):danger?'CONTACT PROCHE':n<650?'BRUIT DANS LA SALLE':stealth.label)+accompany);el('oth-presence').classList.toggle('danger',danger||incoming.length>0);soundTick(danger||incoming.length>0);acousticAudio();
+-  if(o?.id!==lastObjective){lastObjective=o?.id||'';root.dataset.objective=lastObjective;keys.delete('e');if(!state.dead){checkpoint=serialize(state);try{localStorage.setItem(DATA.saveKey+':checkpoint-v2',checkpoint);}catch{}}}
++  rememberChapter();root.dataset.session=session;const titleReturn=title.querySelector('.title-return-campaign');if(titleReturn)titleReturn.hidden=session!=='replay';if(mode==='title'){title.querySelector('[data-action=continue]').textContent=session==='replay'?'Reprendre la répétition':state.completed.length?'Reprendre la chronique':'Entrer dans le Marion';}if((o?.id||'')!==lastObjective){lastObjective=o?.id||'';root.dataset.objective=lastObjective;keys.delete('e');if(!state.dead){checkpoint=serialize(state);try{localStorage.setItem(checkpointSlot(),checkpoint);}catch{}}}
+   const side=excursionStatus(state),ribbon=el('excursion-ribbon');const showSide=mode==='playing'&&side.discovered&&state.excursion.tracked&&!side.complete&&(DATA.excursion.rooms.includes(state.room)||side.carried);ribbon.hidden=!showSide;if(showSide){const text=side.pumping?'Pompage · '+Math.ceil(side.remaining)+' s':side.carried?'Enregistreur sanglé · T pour poser':side.current?.id==='dock'&&!side.carried?'Enregistreur posé · revenir le chercher':side.current?.title||'';if(ribbon.textContent!==text)ribbon.textContent=text;}root.dataset.excursion=String(side.stage);
+   root.dataset.listening=String(state.listening);root.dataset.room=state.room;root.dataset.chapter=String(state.chapter);root.dataset.completed=String(state.completed.length);
+  }
+  function tick(now){frame=requestAnimationFrame(tick);const dt=last?Math.min(.06,(now-last)/1000):0;last=now;const controls=input();
+-  if(mode==='playing'&&!dialog.open){step(state,controls,dt);if(state.puzzle)workPanel();if(state.reading){const note=state.reading;if(note.kind==='fabricator'){kit(note.station);}else{show('reading',note.lines?note.lines.map(([who,line])=>`<div class="oth-dialogue-line"><small>${esc(who)}</small><p>${esc(line)}</p></div>`).join(''):`<p class="record-body">${esc(note.body)}</p>`,note.title.toUpperCase());setText('oth-dialog-title',note.title);}}
++  if(mode==='playing'&&!dialog.open){const pending=pendingSequence(state);if(pending)startSequence(pending.id,false);if(!dialog.open)step(state,controls,dt);if(state.puzzle)workPanel();if(state.reading){const note=state.reading;if(note.kind==='fabricator'){kit(note.station);}else{show('reading',note.lines?note.lines.map(([who,line])=>`<div class="oth-dialogue-line"><small>${esc(who)}</small><p>${esc(line)}</p></div>`).join(''):`<p class="record-body">${esc(note.body)}</p>`,note.title.toUpperCase());setText('oth-dialog-title',note.title);}}
+    if(state.dead&&panel!=='dead'){show('dead','<p>La liaison a été interrompue. Reprenez au dernier point enregistré.</p><div class="button-row"><button class="primary" data-action="retry">Reprendre au point de sauvegarde</button></div>','SIGNAL INTERROMPU');}
+-   if(state.finished&&panel!=='end'){save();show('end',`<p>Le Narcissus s’éloigne. À bord du Samson, Hoop émet son appel de détresse.</p><p>Aucune réponse ne vient clore cette transmission.</p><div class="oth-map-summary">${state.completed.length} interventions enregistrées<br>${state.visited.length} lieux parcourus<br>${Math.floor(state.elapsed/60)} minutes dans la chronique</div><p class="hint">Le carnet conserve les derniers échanges. Aucun relais ne confirme encore la réception de l’appel.</p><div class="button-row"><button data-panel="journal">Relire le journal</button><button class="primary" data-action="title">Menu principal</button></div>`,'FIN DE LA CHRONIQUE');}
++   if(state.finished&&panel!=='end'&&!pendingSequence(state)){save();show('end',`<p>Le Narcissus s’éloigne. À bord du Samson, Hoop émet son appel de détresse.</p><p>Aucune réponse ne vient clore cette transmission.</p><div class="oth-map-summary">${state.completed.length} interventions enregistrées<br>${state.visited.length} lieux parcourus<br>${Math.floor(state.elapsed/60)} minutes dans la chronique</div><p class="hint">Le carnet conserve les derniers échanges. Aucun relais ne confirme encore la réception de l’appel.</p><div class="button-row"><button data-panel="journal">Relire le journal</button><button class="primary" data-action="title">Menu principal</button></div>`,'FIN DE LA CHRONIQUE');}
+   }
++  if(scene){sceneClock+=dt;if(state.presentation.autoAdvance&&sceneClock>=scene.def.shots[scene.shot].duration)nextSequence();if(scene){const sc=dialog.querySelector('.sequence-canvas');if(sc){fitCanvas(sc);drawSequence(sc,scene.stage,scene.def,scene.shot,state.reducedMotion?0:sceneClock);}}}
+   saveClock+=dt;if((state.dirty||saveClock>=5)&&!state.dead&&mode==='playing')save();fitCanvas(canvas);draw(canvas,state,{menu:mode==='title',moving:mode==='playing'&&!dialog.open&&!state.listening&&(controls.x||controls.y)});readout();
+  }
+  save();readout();frame=requestAnimationFrame(tick);const observer=new ResizeObserver(()=>fitCanvas(canvas));observer.observe(canvas);const onVisibility=()=>{if(document.hidden)onBlur();};document.addEventListener('visibilitychange',onVisibility);
+  window.addEventListener('beforeunload',save);
+- if(new URL(location.href).searchParams.get('qa')==='1'||window.__OTH_TEST_CONTEXT===true)window.__OTH_QA={get state(){return state;},replace(s){changeState(s);close();begin();},step(i,dt){return step(state,i,dt);},pause(){pause();},close,begin,save,get mode(){return mode;},get audioStatus(){return {state:audio?.state||'none',cuesPlayed};}};
++ if(new URL(location.href).searchParams.get('qa')==='1'||window.__OTH_TEST_CONTEXT===true)window.__OTH_QA={get state(){return state;},replace(s){changeState(s);close();begin();},step(i,dt){return step(state,i,dt);},pause(){pause();},close,begin,save,get mode(){return mode;},get session(){return session;},get scene(){return scene?.def.id||null;},rememberChapter,startChapter,returnCampaign,get audioStatus(){return {state:audio?.state||'none',cuesPlayed};}};
+  return {getState:()=>serialize(state),destroy(){cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('beforeunload',save);window.removeEventListener('blur',onBlur);document.removeEventListener('visibilitychange',onVisibility);window.removeEventListener('keydown',keyDown);window.removeEventListener('keyup',keyUp);audio?.close();root.innerHTML='';}};
+ }
+--- v0.7/src/oth-v1/oth-ui.css
++++ v0.8/src/oth-v1/oth-ui.css
+@@ -36,3 +36,8 @@
+ 
+ /* V0.7 secondary objective strip stays above the canvas; actions remain physical. */
+ .excursion-ribbon{position:absolute;top:14px;right:18px;max-width:min(460px,70%);padding:10px 15px;background:#0a2027e8;border-left:2px solid #b7c8a0;color:#d5dec6;font:12px/1.4 'Courier New',monospace;pointer-events:none;z-index:1}.excursion-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;border:1px solid #4b7367;background:#0b2429;padding:22px}.excursion-summary span{font:10px monospace;letter-spacing:.06em;color:#a9c3b2}.excursion-summary strong{display:block;font:24px/1.7 monospace;color:#dbc590}.excursion-steps{list-style:none;padding:0;margin:24px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}.excursion-steps li{display:flex;gap:14px;border:1px solid #3d5b5255;background:#14282c;padding:16px;color:#9eaea1}.excursion-steps li>span{color:#cbb98b;font:19px monospace}.excursion-steps strong{display:block;font-size:13px;font-weight:400;line-height:1.5}.excursion-steps small{display:block;font-size:11px;line-height:1.6;color:#94aa9c;margin-top:6px}.excursion-steps .active{border-color:#cbb787;background:#233b36}.excursion-steps .done{border-color:#61997e}.completion-note{border-left:3px solid #a0c298;padding:16px;background:#263c32}@media(max-width:600px){.excursion-steps{grid-template-columns:1fr}.excursion-summary{padding:14px;gap:8px}.excursion-summary strong{font-size:17px}.excursion-ribbon{top:8px;right:10px;font-size:10px;max-width:84%;padding:7px 10px}}
++
++/* V0.8 — Memories and isolated rehearsal. */
++.chronicle-lead{font-size:22px!important;color:#e4d7b2!important;max-width:620px}.chronicle-section{display:flex;justify-content:space-between;align-items:center;margin:30px 0 16px;font-weight:400}.chronicle-section small{font:11px monospace;color:#a5bcae}.chapter-library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.oth-dialog .chapter-card{position:relative;display:block;min-height:198px;padding:0;text-align:left;overflow:hidden;border-color:#62807880;background:#11232a}.chapter-card img,.chapter-empty{width:100%;height:124px;display:block;object-fit:cover}.chapter-empty{background:repeating-linear-gradient(135deg,#102027,#102027 15px,#15282d 16px,#15282d 17px)}.chapter-card .chapter-number{position:absolute;left:15px;top:13px;font:25px monospace;color:#e5d3a6;text-shadow:0 2px 10px #000}.chapter-copy{display:block;padding:16px}.chapter-copy strong{display:block;font-size:16px;font-weight:400}.chapter-copy small{display:block;font:9px monospace;letter-spacing:.04em;margin-top:10px;color:#a3bcad}.chapter-copy em{display:block;font:11px Arial;color:#d0bf92;margin-top:12px}.chapter-card.unrecorded{opacity:.6!important}.sequence-library{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.oth-dialog .sequence-card{text-align:left;min-height:128px;padding:18px;background:linear-gradient(135deg,#233c3b,#101f27)}.sequence-card span{display:block;font:20px monospace;color:#c9b27d}.sequence-card strong{display:block;font-weight:400;font-size:14px;margin:13px 0}.sequence-card small{font:9px monospace;color:#9ab7a8}.replay-warning,.save-alert{border-left:3px solid #d1b77c;padding:16px!important;background:#3b3427!important;color:#eddbb3!important}.journey-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:22px 0}.journey-metrics article{border:1px solid #607e704b;padding:24px;background:#102329}.journey-metrics small{display:block;font:11px monospace;color:#9eb7a9}.journey-metrics strong{display:block;font:32px monospace;margin-top:14px;color:#ded3aa}#oth-root[data-session=replay] .oth-head{box-shadow:inset 0 3px #bc9c65}.sequence-dialog{width:min(1200px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:#071219}.sequence-dialog header{padding:15px 24px 12px}.sequence-dialog header h2{font-size:21px}.sequence-dialog header .eyebrow{margin-bottom:6px}.sequence-dialog .dialog-body{padding:0;max-height:calc(100dvh - 118px)}.sequence-screen{position:relative;background:#02090d;overflow:hidden}.sequence-canvas{display:block;width:100%;aspect-ratio:1280/650;max-height:calc(100dvh - 240px);min-height:200px;object-fit:cover}.sequence-caption{position:relative;padding:19px 30px 21px;background:#09171c;border-top:1px solid #3c585a55;min-height:132px}.sequence-caption small{display:block;font:11px monospace;color:#d5bf87;letter-spacing:.13em;margin-bottom:10px}.sequence-caption p{margin:0;color:#e2e6da;font-size:calc(18px * var(--caption-scale,1));line-height:1.55;max-width:920px}.sequence-shot{position:absolute;top:38px;left:24px;font:10px monospace;letter-spacing:.12em;color:#b9cabf}.sequence-controls{padding:13px 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid #304c4666;background:#101f25}.sequence-controls span{flex:1;font:10px monospace;color:#a8bbb0}.sequence-controls button{font-size:12px}.sequence-controls button:disabled{opacity:.35}.sequence-controls .primary{color:#172a2b;background:#d6c291}
++@media(max-width:700px){.chapter-library{grid-template-columns:1fr}.sequence-library{grid-template-columns:repeat(2,minmax(0,1fr))}.sequence-dialog header{padding:13px 16px}.sequence-dialog header h2{font-size:18px}.sequence-caption{padding:17px 18px;min-height:140px}.sequence-caption p{font-size:calc(15px * var(--caption-scale,1))}.sequence-controls{padding:12px;gap:8px}.sequence-controls span{flex-basis:100%;order:-1}.sequence-controls button{flex:1;padding:10px 8px}.sequence-canvas{min-height:180px}.journey-metrics article{padding:16px}.sequence-dialog .dialog-body{padding:0;max-height:calc(100dvh - 110px)}}
++@media(max-height:520px) and (min-width:701px){.sequence-canvas{max-height:210px;min-height:130px}.sequence-caption{min-height:96px;padding:12px 24px}.sequence-caption p{font-size:calc(14px * var(--caption-scale,1))}.sequence-dialog header h2{font-size:16px}}
+--- v0.7/src/oth-v1/oth-render.js
++++ v0.8/src/oth-v1/oth-render.js
+@@ -185,7 +185,7 @@
+  W=Math.max(360,Math.min(1280,Math.round(canvas.width/canvas.height*H)));
+  const c=canvas.getContext('2d',{alpha:false}),r=ROOM[s.room],p=s.player;
+  c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);
+- const cam=Math.max(0,Math.min(r.width-W/Z,p.x-W/(2*Z))),t=s.elapsed,ambientTime=s.reducedMotion?0:t;
++ const cam=Math.max(0,Math.min(r.width-W/Z,(options.cameraX??p.x)-W/(2*Z))),t=s.elapsed,ambientTime=s.reducedMotion?0:t;
+  backdrop(c,r,cam,ambientTime,s);architecture(c,r,cam,ambientTime,s);excursionArchitecture(c,r,cam,ambientTime,s);if(s.lightsOff.includes(r.id))rect(c,0,0,W,H,'#01070b86');localDetails(c,r,cam,ambientTime,s);
+  const o=currentObjective(s),path=o?route(s,o.room):[],allowed=activeEdges(s);
+  for(const po of r.portals)door(c,po,r,cam,allowed.some(e=>e.id===po.edge),ROOM[po.target],path?.[0]?.edge===po.edge,s);
+@@ -194,7 +194,7 @@
+  for(const npc of crewInRoom(s))objs.push({kind:'npc',y:npc.y,obj:npc});
+  for(const a of DATA.interactables){if(a.room!==r.id||s.records.includes(a.id)||a.kind==='valve'&&s.disabledHazards.includes(a.hazard))continue;objs.push({kind:'activity',y:a.y-46,obj:{...a,y:a.y-46,empty:s.collected.includes(a.id)||s.maintenance.salvaged.includes(a.id)}});}
+ 
+- if(o?.room===r.id){const node=r.nodes.find(n=>n.id===o.node);objs.push({kind:'goal',y:node.y-48,obj:{...node,y:node.y-48}});}
++ if(o?.room===r.id&&!options.cinematic){const node=r.nodes.find(n=>n.id===o.node);objs.push({kind:'goal',y:node.y-48,obj:{...node,y:node.y-48}});}
+  const recorder=s.excursion.recorder;if(recorder&&!recorder.carried&&recorder.room===r.id)objs.push({kind:'recorder',y:recorder.y,obj:recorder});
+  const world=roomWorld(s);for(const e of world.enemies)objs.push({kind:'enemy',y:e.y,obj:e});
+  objs.push({kind:'player',y:p.y,obj:p});
+@@ -454,3 +454,68 @@
+  else{rect(c,-28,-53,56,52,'#3a594e','#a9b99b');rect(c,-21,-46,42,24,'#0b272c','#779c82');if(op.visual==='reader'&&st.stage>=6){c.save();c.translate(0,-51);c.scale(.65,.65);recorderShape(c,false,t);c.restore();}else{text(c,op.visual==='pump'?(st.drained?'SEC':st.pumping?Math.ceil(st.remaining)+' s':'STOP'):done?'OK':'LOCAL',0,-30,10,'#b6cba3','center');}rect(c,13,-13,6,5,done?'#aacc9c':'#c6a46d');}
+  if(status.ok){text(c,'◇',0,-91,13,'#d9c389','center');}else if(done)text(c,'✓',0,-81,12,'#adccb1','center');
+ }
++
++
++/** V0.8: original staged vignettes, using a detached state and the game renderer. */
++export function drawSequence(canvas,stage,sequence,index,seconds){
++ const shot=sequence.shots[index],t=Math.min(16,Math.max(0,seconds));stage.elapsed=t;
++ const pan=stage.reducedMotion?0:Math.sin(t*.12)*42;
++ draw(canvas,stage,{menu:true,cinematic:true,cameraX:shot.x+pan});
++ const c=canvas.getContext('2d'),w=W,h=H,fx=sequence.effect;
++ c.save();c.setTransform(canvas.width/w,0,0,canvas.height/h,0,0);
++ if(['establish','flight','release','signal'].includes(fx)&&index!==1){
++  gradient(c,0,0,w,h,'#040a10','#182c34');
++  for(let i=0;i<95;i++){const x=rand(i+82)*w,y=rand(i+351)*h;rect(c,x,y,i%9?1:2,1,'#bacfc06b');}
++  planet(c,w*.76,h*.43,230);
++  if(fx==='flight'){ship(c,w*.42+pan,h*.51,1.05);for(let i=0;i<8;i++){const y=90+i*50;line(c,[[0,y],[w,y+90]],'#a5bcb416',22);}}
++  else if(fx==='release'){
++   const away=stage.reducedMotion?35:Math.min(130,t*9),sx=w*.63+away;
++   rect(c,-10,h*.3,w*.37,h*.24,'#172d34','#718a8d');rect(c,w*.34,h*.38,52,40,'#55706c','#b4b8a2');
++   c.save();c.translate(sx,h*.48-away*.28);c.scale(.6-away*.001,.6-away*.001);
++   poly(c,[[-177,-11],[-136,-88],[-73,-126],[49,-130],[158,-94],[196,-22],[180,2],[-178,2]],'#415052','#b1bba6');
++   poly(c,[[-72,-116],[-50,-92],[82,-89],[48,-123]],'#0c1a22','#778e8e');text(c,'NARCISSUS',0,-34,17,'#d5d0b4','center');c.restore();
++  }else{
++   const x=w*.43,y=h*.49;marionHull(c,x+pan,y,.92);
++  }
++ }
++ // Instruments and damage cues are restrained: no flashing white frames.
++ if(fx==='impact'||fx==='blast'){
++  gradient(c,0,0,w,h,'#240c051c','#22120969');
++  for(let i=0;i<22;i++){const a=rand(i+19),x=a*w,y=(rand(i+11)*330+t*(8+i%6))%430;poly(c,[[x,y],[x+7,y+3],[x+2,y+10]],'#bc8b604a');}
++  line(c,[[w*.12,90],[w*.19,170],[w*.17,275],[w*.32,354]],'#03090ac7',18);
++ }
++ if(fx==='lift'||fx==='loss'){
++  for(let i=0;i<9;i++){const x=70+i*w/9;line(c,[[x,65],[x,h-100]],'#152a2ec4',12);}
++  const sy=stage.reducedMotion?180:140+(t*22)%210;line(c,[[0,sy],[w,sy]],'#a0a69148',9);
++ }
++ if(fx==='purge'||fx==='signal'){
++  const xx=w*.51,yy=150;rect(c,xx,yy,w*.35,193,'#031216e6','#6b958b');
++  text(c,fx==='purge'?'ISOLATION / COMMANDE LOCALE':'ÉMISSION / PORTEUSE LOCALE',xx+18,yy+27,12,'#b3cbb6');
++  for(let i=0;i<5;i++){const count=fx==='purge'?Math.max(0,12-Math.floor(t*.8)-i):3+i;rect(c,xx+19,yy+49+i*23,count*12,4,i%2?'#8bad97':'#d0bb80');}
++  text(c,fx==='purge'?'COPIE DISTANTE : AUCUNE':'RÉPONSE CONFIRMÉE : AUCUNE',xx+18,yy+171,10,'#c9c4a2');
++ }
++ if(fx==='medical'){rect(c,w*.04,86,5,300,'#b89a7266');text(c,'ALIMENTATION LOCALE',w*.08,168,12,'#c2c7b2');text(c,'COMMANDE LOCALE PERDUE',w*.08,192,10,'#adad96');}
++ // Letterbox and compositional markers. The caption is accessible DOM text below.
++ gradient(c,0,0,w,110,'#02080de8','#02080d00');gradient(c,0,h-150,w,150,'#02080d00','#02080df0');
++ rect(c,0,0,w,48,'#030a0ee6');rect(c,0,h-40,w,40,'#030a0ee6');
++ text(c,'ARCHIVES DU MARION',30,29,10,'#b5c1b3');text(c,'MISE EN SCÈNE · '+String(index+1).padStart(2,'0'),w-30,29,10,'#caba95','right');
++ c.restore();
++}
++
++
++function marionHull(c,x,y,scale){
++ c.save();c.translate(x,y);c.scale(scale,scale);
++ const box=(x,y,w,h,d=16)=>{poly(c,[[x,y],[x+d,y-d],[x+w+d,y-d],[x+w,y]],'#81918b','#b7b7a277');rect(c,x,y,w,h,'#3f535c','#869b97');poly(c,[[x+w,y],[x+w+d,y-d],[x+w+d,y+h-d],[x+w,y+h]],'#233b47','#6d8585');};
++ // Broad transport spine, modular holds, radiators and a stepped command block.
++ poly(c,[[-349,-14],[-292,-54],[244,-54],[352,-11],[288,57],[-309,57]],'#243b49','#7d9899');
++ poly(c,[[-349,-14],[-290,-41],[287,-39],[352,-11],[300,5],[-313,5]],'#687e7e','#b7beb277');
++ rect(c,-291,1,592,24,'#1b303d','#607c7d');
++ for(let i=0;i<6;i++){const xx=-257+i*86;box(xx,-72,69,105,17);rect(c,xx+8,-56,53,54,'#263d47','#78948d77');for(let k=0;k<4;k++)line(c,[[xx+12,-45+k*11],[xx+56,-45+k*11]],'#64807866',2);rect(c,xx+8,8,54,6,'#a5aa81');line(c,[[xx+35,-66],[xx+35,29]],'#112833',3);for(const py of [-64,23])for(const px of [xx+4,xx+62])rect(c,px,py,3,3,'#b7b99c');}
++ box(-75,-114,152,24,20);box(-41,-159,85,46,18);poly(c,[[-32,-145],[34,-145],[42,-128],[-36,-128]],'#0c2735','#9aafa8');for(let i=0;i<6;i++)line(c,[[-28+i*12,-142],[-30+i*12,-129]],'#738f8e',1);
++ line(c,[[-4,-160],[-4,-213]],'#819794',3);line(c,[[-45,-177],[30,-177]],'#859c96',2);ellipse(c,-3,-205,9,3,'#a4b2a0');
++ for(const yy of [38,77]){box(185,yy,95,25,8);for(let i=0;i<8;i++)line(c,[[193+i*10,yy+4],[193+i*10,yy+20]],'#132c3b',3);}
++ box(-339,-27,58,47,9);for(const xx of [-333,-316,-299]){ellipse(c,xx,22,7,5,'#192e3c','#829a98');ellipse(c,xx,23,4,2,'#a6c9c254');}
++ poly(c,[[298,-24],[377,-2],[373,12],[300,37]],'#506977','#abc0b1');rect(c,311,2,39,4,'#b7c6a052');
++ for(let i=0;i<11;i++)line(c,[[-282+i*54,48],[-261+i*54,71],[-235+i*54,48]],'#628088',3);
++ text(c,'DSMO / MARION',-140,98,15,'#c1c9b4');text(c,'ORE TRANSPORT · INDUSTRIAL SYSTEMS',-140,116,9,'#8ca99f');c.restore();
++}
+--- v0.7/src/oth-v1/oth-data.js
++++ v0.8/src/oth-v1/oth-data.js
+@@ -1,6 +1,6 @@
+ export const DATA = {
+   "id": "mire-out-of-shadows",
+-  "version": "0.7.0",
++  "version": "0.8.0",
+   "title": "ALIEN — HORS DES OMBRES",
+   "subtitle": "LA SORTIE DES PROFONDEURS",
+   "saveKey": "atf:mire:out-of-shadows:v1",
+@@ -10287,6 +10287,116 @@
+       "title": "Cartographie du caniveau",
+       "summary": "Le plan de la salle courante indique la zone humide et son niveau. Il ne révèle pas les adultes hors de vue ni les pièces non visitées.",
+       "text": "Règle de jeu originale introduite dans la V0.7."
++    },
++    {
++      "id": "sequence-marion",
++      "category": "Chronique",
++      "title": "Avant le silence",
++      "summary": "Séquence du carnet, disponible après 0 interventions principales.",
++      "text": "CARNET DU MARION — La mine ne répond plus. Le travail commence par une liaison à rétablir, pas par une arme à charger. HOOP — On vérifie les lignes une par une. Personne ne descend seul. REPRISE — Rejoignez la console de transmission. Les commandes du terrain restent celles de la chronique.",
++      "unlockCompleted": 0
++    },
++    {
++      "id": "sequence-delilah",
++      "category": "Chronique",
++      "title": "La Delilah",
++      "summary": "Séquence du carnet, disponible après 5 interventions principales.",
++      "text": "HOOP — La Delilah a frappé. La passerelle ne répond plus. Jordan ne répond plus. CARNET — Derrière les tôles disjointes, les voyants de secours remplacent les appels de la passerelle. HOOP — Il reste une voie dans les conduites. Ne touchez pas les bords de la brèche.",
++      "unlockCompleted": 5
++    },
++    {
++      "id": "sequence-ripley",
++      "category": "Chronique",
++      "title": "Une survivante",
++      "summary": "Séquence du carnet, disponible après 9 interventions principales.",
++      "text": "CARNET — L’écoutille du Narcissus est ouverte. Le silence de sa cabine ne ressemble pas à celui du Marion. RIPLEY — Avant de repartir, montrez-moi tous les accès de cette navette. HOOP — Nous commençons par l’atelier. Le matériel doit fonctionner sans le réseau.",
++      "unlockCompleted": 9
++    },
++    {
++      "id": "sequence-descent",
++      "category": "Chronique",
++      "title": "La route sous les nuages",
++      "summary": "Séquence du carnet, disponible après 16 interventions principales.",
++      "text": "CARNET — La commande de descente répond. Les balises de la concession deviennent les seuls repères. HOOP — Gardez cette fréquence. Nous en aurons besoin pour retrouver le retour. CARNET — Le transfert reste à effectuer par le passage de la navette. Cette séquence ne déplace pas le joueur.",
++      "unlockCompleted": 16
++    },
++    {
++      "id": "sequence-cage",
++      "category": "Chronique",
++      "title": "Le puits ne répond plus",
++      "summary": "Séquence du carnet, disponible après 20 interventions principales.",
++      "text": "CARNET — La cage termine sa course dans un bruit de métal. Le câble se tend, puis ne répond plus. HOOP — Cette cage ne remontera pas. Le second puits est notre seule sortie. CARNET — Le parcours de retour change. Le balisage minier reste à remettre en service.",
++      "unlockCompleted": 20
++    },
++    {
++      "id": "sequence-bones",
++      "category": "Chronique",
++      "title": "Ce qui était là avant",
++      "summary": "Séquence du carnet, disponible après 27 interventions principales.",
++      "text": "CARNET — Les faisceaux quittent la roche pour suivre des formes que la concession n’a pas construites. RIPLEY — Ces restes n’étaient pas humains. Nous devons quitter cette chambre. HOOP — Gardez la route de la mine derrière vous. Ne vous dispersez pas entre les nervures.",
++      "unlockCompleted": 27
++    },
++    {
++      "id": "sequence-baxter",
++      "category": "Chronique",
++      "title": "La seconde cage",
++      "summary": "Séquence du carnet, disponible après 31 interventions principales.",
++      "text": "HOOP — Baxter ! ... La cage continue de monter. Il n’est plus avec nous. CARNET — Le nom reste dans le registre. L’emplacement près de la grille reste vide. HOOP — Il faut encore la cellule de retour. Elle est dans le magasin.",
++      "unlockCompleted": 31
++    },
++    {
++      "id": "sequence-sneddon",
++      "category": "Chronique",
++      "title": "La dernière cloison",
++      "summary": "Séquence du carnet, disponible après 39 interventions principales.",
++      "text": "HOOP — Sneddon a condamné la soute de l’intérieur. Après l’éclair, plus aucun mouvement. CARNET — La quarantaine reste fermée. Les silhouettes cessent de se découper derrière le métal. HOOP — L’infirmerie est encore accessible. On continue par là.",
++      "unlockCompleted": 39
++    },
++    {
++      "id": "sequence-medical",
++      "category": "Chronique",
++      "title": "La commande détournée",
++      "summary": "Séquence du carnet, disponible après 42 interventions principales.",
++      "text": "CARNET — Le programme de l’unité est terminé. Ripley ne se réveille pas. HOOP — La commande vient de changer toute seule. Kasyanov ne répond plus. Je ramène Ripley au Narcissus. CARNET — Ripley doit être portée jusqu’à la navette. Cette évacuation se joue sur le terrain.",
++      "unlockCompleted": 42
++    },
++    {
++      "id": "sequence-ash",
++      "category": "Chronique",
++      "title": "La copie effacée",
++      "summary": "Séquence du carnet, disponible après 44 interventions principales.",
++      "text": "CARNET — La liaison extérieure est isolée. La purge locale ne reçoit plus de nouvelle copie. HOOP — La copie a disparu. Mais les attaches automatiques sont mortes avec elle. Je dois revenir au quai. CARNET — Le terminal ne répond plus aux ordres distants. Les verrous mécaniques attendent encore une main.",
++      "unlockCompleted": 44
++    },
++    {
++      "id": "sequence-release",
++      "category": "Chronique",
++      "title": "Le collier s’ouvre",
++      "summary": "Séquence du carnet, disponible après 46 interventions principales.",
++      "text": "HOOP — Le collier est ouvert. Le Narcissus s’éloigne. CARNET — Ripley et Jones restent à bord de la navette libérée. Le quai ne retient plus que ses attaches. HOOP — Le Samson. Il faut rejoindre sa radio.",
++      "unlockCompleted": 46
++    },
++    {
++      "id": "sequence-signal",
++      "category": "Chronique",
++      "title": "Aucune réponse",
++      "summary": "Séquence du carnet, disponible après 48 interventions principales.",
++      "text": "CARNET — L’appel de détresse a été émis. Le journal conserve la transmission. HOOP — Je répète le message sur la fréquence de secours. CARNET — Aucune réponse n’est confirmée. Le récit s’arrête ici ; le silence n’est pas une preuve de sauvetage.",
++      "unlockCompleted": 48
++    },
++    {
++      "id": "replay-v8",
++      "category": "Survie",
++      "title": "Une répétition n’efface pas la route",
++      "summary": "Les chapitres enregistrés se rejouent dans un emplacement séparé.",
++      "text": "Le carnet principal, ses points de reprise et ses entrées de chapitre ne sont pas écrasés en répétition. Les ressources et l’état du monde viennent du véritable instantané. Aucun ancien chapitre manquant n’est reconstruit automatiquement."
++    },
++    {
++      "id": "sequences-v8",
++      "category": "Survie",
++      "title": "Reprendre le fil",
++      "summary": "Les séquences sont facultatives et suspendent la simulation.",
++      "text": "Entrée ou espace passe au tableau suivant ; Échap termine la séquence. Les textes sont originaux à cette adaptation. Désactiver leur ouverture automatique ne supprime ni objectifs, ni événements, ni accès à la galerie."
+     }
+   ],
+   "sources": [
+@@ -10358,8 +10468,8 @@
+       "Carte à découverte locale et éclairages de gameplay, non plans ni comportement officiels du roman."
+     ]
+   },
+-  "edition": "Les archives noyées",
+-  "stateSchema": 7,
++  "edition": "Les mémoires du Marion",
++  "stateSchema": 8,
+   "interactables": [
+     {
+       "id": "marion-note-01",
+@@ -11079,7 +11189,7 @@
+       "room": "specimen_store",
+       "x": 870,
+       "y": 88,
+-      "hold": 1.0,
++      "hold": 1,
+       "title": "Sangler l’enregistreur",
+       "purpose": "Intervention physique facultative, sans pause. Le boîtier est sanglé au dos. Le lecteur du poste de relevé permettra de l’ouvrir.",
+       "sourceStatus": "original-gameplay-v07"
+@@ -11091,7 +11201,7 @@
+       "room": "survey",
+       "x": 570,
+       "y": 88,
+-      "hold": 1.0,
++      "hold": 1,
+       "title": "Brancher l’enregistreur au lecteur",
+       "purpose": "Intervention physique facultative, sans pause. Le lecteur reconnaît le boîtier. Réglez le déphasage sur la console suivante.",
+       "sourceStatus": "original-gameplay-v07"
+@@ -11103,7 +11213,7 @@
+       "room": "survey",
+       "x": 1080,
+       "y": 88,
+-      "hold": 2.0,
++      "hold": 2,
+       "title": "Rétablir la synchronisation",
+       "purpose": "Intervention physique facultative, sans pause. La chronologie tient. Il reste à copier le relevé dans le carnet.",
+       "sourceStatus": "original-gameplay-v07"
+@@ -11847,7 +11957,7 @@
+       "hint": "Accordez la porteuse sur le repère 65, puis transmettez. Aucune réception n’est garantie."
+     }
+   },
+-  "releaseName": "Les archives noyées",
++  "releaseName": "Les mémoires du Marion",
+   "companions": [
+     {
+       "id": "baxter-refuge",
+@@ -12193,7 +12303,7 @@
+         "room": "specimen_store",
+         "x": 870,
+         "y": 88,
+-        "hold": 1.0,
++        "hold": 1,
+         "title": "Sangler l’enregistreur",
+         "visual": "recorder",
+         "after": "Le boîtier est sanglé au dos. Le lecteur du poste de relevé permettra de l’ouvrir."
+@@ -12203,7 +12313,7 @@
+         "room": "survey",
+         "x": 570,
+         "y": 88,
+-        "hold": 1.0,
++        "hold": 1,
+         "title": "Brancher l’enregistreur au lecteur",
+         "visual": "reader",
+         "after": "Le lecteur reconnaît le boîtier. Réglez le déphasage sur la console suivante."
+@@ -12213,7 +12323,7 @@
+         "room": "survey",
+         "x": 1080,
+         "y": 88,
+-        "hold": 2.0,
++        "hold": 2,
+         "title": "Rétablir la synchronisation",
+         "visual": "console",
+         "after": "La chronologie tient. Il reste à copier le relevé dans le carnet."
+@@ -12244,5 +12354,374 @@
+       }
+     ],
+     "rewardRecord": "v07-pump-record"
++  },
++  "sequences": [
++    {
++      "id": "marion",
++      "at": 0,
++      "title": "Avant le silence",
++      "room": "bridge",
++      "effect": "establish",
++      "shots": [
++        {
++          "speaker": "CARNET DU MARION",
++          "text": "La mine ne répond plus. Le travail commence par une liaison à rétablir, pas par une arme à charger.",
++          "x": 750,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "On vérifie les lignes une par une. Personne ne descend seul.",
++          "x": 1100,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "REPRISE",
++          "text": "Rejoignez la console de transmission. Les commandes du terrain restent celles de la chronique.",
++          "x": 500,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "delilah",
++      "at": 5,
++      "title": "La Delilah",
++      "room": "breach",
++      "effect": "impact",
++      "shots": [
++        {
++          "speaker": "HOOP",
++          "text": "La Delilah a frappé. La passerelle ne répond plus. Jordan ne répond plus.",
++          "x": 850,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Derrière les tôles disjointes, les voyants de secours remplacent les appels de la passerelle.",
++          "x": 1200,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Il reste une voie dans les conduites. Ne touchez pas les bords de la brèche.",
++          "x": 520,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "ripley",
++      "at": 9,
++      "title": "Une survivante",
++      "room": "narcissus",
++      "effect": "arrival",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "L’écoutille du Narcissus est ouverte. Le silence de sa cabine ne ressemble pas à celui du Marion.",
++          "x": 650,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "RIPLEY",
++          "text": "Avant de repartir, montrez-moi tous les accès de cette navette.",
++          "x": 1050,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Nous commençons par l’atelier. Le matériel doit fonctionner sans le réseau.",
++          "x": 1350,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "descent",
++      "at": 16,
++      "title": "La route sous les nuages",
++      "room": "cockpit",
++      "effect": "flight",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "La commande de descente répond. Les balises de la concession deviennent les seuls repères.",
++          "x": 800,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Gardez cette fréquence. Nous en aurons besoin pour retrouver le retour.",
++          "x": 1200,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Le transfert reste à effectuer par le passage de la navette. Cette séquence ne déplace pas le joueur.",
++          "x": 600,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "cage",
++      "at": 20,
++      "title": "Le puits ne répond plus",
++      "room": "lift_bottom",
++      "effect": "lift",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "La cage termine sa course dans un bruit de métal. Le câble se tend, puis ne répond plus.",
++          "x": 950,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Cette cage ne remontera pas. Le second puits est notre seule sortie.",
++          "x": 1200,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Le parcours de retour change. Le balisage minier reste à remettre en service.",
++          "x": 450,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "bones",
++      "at": 27,
++      "title": "Ce qui était là avant",
++      "room": "fossils",
++      "effect": "fossils",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "Les faisceaux quittent la roche pour suivre des formes que la concession n’a pas construites.",
++          "x": 950,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "RIPLEY",
++          "text": "Ces restes n’étaient pas humains. Nous devons quitter cette chambre.",
++          "x": 1420,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Gardez la route de la mine derrière vous. Ne vous dispersez pas entre les nervures.",
++          "x": 500,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "baxter",
++      "at": 31,
++      "title": "La seconde cage",
++      "room": "lift_east",
++      "effect": "loss",
++      "shots": [
++        {
++          "speaker": "HOOP",
++          "text": "Baxter ! ... La cage continue de monter. Il n’est plus avec nous.",
++          "x": 1050,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Le nom reste dans le registre. L’emplacement près de la grille reste vide.",
++          "x": 720,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Il faut encore la cellule de retour. Elle est dans le magasin.",
++          "x": 450,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "sneddon",
++      "at": 39,
++      "title": "La dernière cloison",
++      "room": "hold",
++      "effect": "blast",
++      "shots": [
++        {
++          "speaker": "HOOP",
++          "text": "Sneddon a condamné la soute de l’intérieur. Après l’éclair, plus aucun mouvement.",
++          "x": 1000,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "La quarantaine reste fermée. Les silhouettes cessent de se découper derrière le métal.",
++          "x": 650,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "L’infirmerie est encore accessible. On continue par là.",
++          "x": 1350,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "medical",
++      "at": 42,
++      "title": "La commande détournée",
++      "room": "medical",
++      "effect": "medical",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "Le programme de l’unité est terminé. Ripley ne se réveille pas.",
++          "x": 1150,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "La commande vient de changer toute seule. Kasyanov ne répond plus. Je ramène Ripley au Narcissus.",
++          "x": 700,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Ripley doit être portée jusqu’à la navette. Cette évacuation se joue sur le terrain.",
++          "x": 1400,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "ash",
++      "at": 44,
++      "title": "La copie effacée",
++      "room": "narcissus",
++      "effect": "purge",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "La liaison extérieure est isolée. La purge locale ne reçoit plus de nouvelle copie.",
++          "x": 1000,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "La copie a disparu. Mais les attaches automatiques sont mortes avec elle. Je dois revenir au quai.",
++          "x": 550,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Le terminal ne répond plus aux ordres distants. Les verrous mécaniques attendent encore une main.",
++          "x": 1350,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "release",
++      "at": 46,
++      "title": "Le collier s’ouvre",
++      "room": "dock",
++      "effect": "release",
++      "shots": [
++        {
++          "speaker": "HOOP",
++          "text": "Le collier est ouvert. Le Narcissus s’éloigne.",
++          "x": 1100,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Ripley et Jones restent à bord de la navette libérée. Le quai ne retient plus que ses attaches.",
++          "x": 700,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Le Samson. Il faut rejoindre sa radio.",
++          "x": 450,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    },
++    {
++      "id": "signal",
++      "at": 48,
++      "title": "Aucune réponse",
++      "room": "cockpit",
++      "effect": "signal",
++      "shots": [
++        {
++          "speaker": "CARNET",
++          "text": "L’appel de détresse a été émis. Le journal conserve la transmission.",
++          "x": 850,
++          "duration": 7,
++          "tag": "ÉTABLISSEMENT"
++        },
++        {
++          "speaker": "HOOP",
++          "text": "Je répète le message sur la fréquence de secours.",
++          "x": 1200,
++          "duration": 8,
++          "tag": "CONTRECHAMP"
++        },
++        {
++          "speaker": "CARNET",
++          "text": "Aucune réponse n’est confirmée. Le récit s’arrête ici ; le silence n’est pas une preuve de sauvetage.",
++          "x": 550,
++          "duration": 9,
++          "tag": "REPRISE"
++        }
++      ]
++    }
++  ],
++  "presentationRules": {
++    "automatic": true,
++    "autoAdvance": false,
++    "captionScale": 1,
++    "scope": "staged-in-engine-original-vignettes-not-official-film",
++    "safeRadius": 620
+   }
+ };
+--- v0.7/tools/install.mjs
++++ v0.8/tools/install.mjs
+@@ -22,16 +22,16 @@
+   for(const p of payload){const file=await safe(root,p);if(!(await exists(file))||sha(await fs.readFile(file))!==journal.files[p])throw new Error('Un fichier du DLC a changé : '+p);}
+   if(upgrade&&!remove){
+    const updates=new Map(),prior=new Map();for(const p of payload){const bytes=await fs.readFile(path.join(source,p));updates.set(p,bytes);prior.set(p,await fs.readFile(await safe(root,p)));}
+-   if([...updates].every(([p,b])=>sha(b)===journal.files[p]))return {ok:true,alreadyCurrent:true,version:'0.7.0'};
+-   if(check)return {ok:true,upgradeAvailable:true,version:'0.7.0',files:payload.length};
+-   const backup=await safe(root,backupDir+'/before-v07');if(await exists(backup))throw new Error('Une sauvegarde before-v07 existe déjà. Aucune écriture.');
++   if([...updates].every(([p,b])=>sha(b)===journal.files[p]))return {ok:true,alreadyCurrent:true,version:'0.8.0'};
++   if(check)return {ok:true,upgradeAvailable:true,version:'0.8.0',files:payload.length};
++   const backup=await safe(root,backupDir+'/before-v08');if(await exists(backup))throw new Error('Une sauvegarde before-v08 existe déjà. Aucune écriture.');
+    await fs.mkdir(backup,{recursive:true});
+    try{
+     for(const [p,b] of prior){const dest=path.join(backup,p);await fs.mkdir(path.dirname(dest),{recursive:true});await fs.writeFile(dest,b,{flag:'wx'});}
+     await fs.writeFile(path.join(backup,'installation.json'),JSON.stringify(journal,null,2),{flag:'wx'});
+     for(const [p,b] of updates)await fs.writeFile(await safe(root,p),b);
+-    await fs.writeFile(journalPath,JSON.stringify({...journal,version:'0.7.0',files:Object.fromEntries([...updates].map(([p,b])=>[p,sha(b)])),upgradeBackup:backupDir+'/before-v07'},null,2));
+-    return {ok:true,upgraded:true,version:'0.7.0',files:payload.length};
++    await fs.writeFile(journalPath,JSON.stringify({...journal,version:'0.8.0',files:Object.fromEntries([...updates].map(([p,b])=>[p,sha(b)])),upgradeBackup:backupDir+'/before-v08'},null,2));
++    return {ok:true,upgraded:true,version:'0.8.0',files:payload.length};
+    }catch(e){for(const [p,b] of prior)await fs.writeFile(await safe(root,p),b);await fs.writeFile(journalPath,JSON.stringify(journal,null,2));await fs.rm(backup,{recursive:true,force:true});throw e;}
+   }
+   if(!remove)return {ok:true,alreadyInstalled:true,files:payload.length,hostVersion:pkg.version,version:journal.version||'0.1.0',upgradeCommand:'--upgrade'};
+@@ -51,7 +51,7 @@
+   await fs.writeFile(path.join(backup,'index.before.html'),index,{flag:'wx'});
+   for(const [relative,data]of bytes){const target=await safe(root,relative);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,data,{flag:'wx'});written.push(relative);}
+   await fs.writeFile(indexPath,patched);indexWritten=true;
+-  const journal={schema:1,version:'0.7.0',hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
++  const journal={schema:1,version:'0.8.0',hostVersion:pkg.version,indexBefore:sha(index),indexAfter:sha(patched),files:Object.fromEntries([...bytes].map(([k,v])=>[k,sha(v)])),scope:'isolated-runtime-launcher-not-native-engine-merge'};
+   await fs.writeFile(journalPath,JSON.stringify(journal,null,2),{flag:'wx'});
+   return {ok:true,installed:true,files:payload.length,hostVersion:pkg.version,fullGameIntegrationCertified:false};
+  }catch(e){if(indexWritten&&sha(await fs.readFile(indexPath))===sha(patched))await fs.writeFile(indexPath,index);for(const p of written)await fs.unlink(path.join(root,p));throw e;}
+--- v0.7/package.json
++++ v0.8/package.json
+@@ -1,13 +1,14 @@
+ {
+   "name": "atf-dlc-out-of-shadows",
+-  "version": "0.7.0",
++  "version": "0.8.0",
+   "private": true,
+   "type": "module",
+   "scripts": {
+-    "check": "node qa/verify.mjs && node qa/verify-v02.mjs && node qa/verify-delivery.mjs && node qa/verify-v03.mjs && node qa/verify-v04.mjs && node qa/verify-v05.mjs && node qa/verify-v06.mjs && node qa/verify-v07.mjs",
++    "check": "node qa/verify.mjs && node qa/verify-v02.mjs && node qa/verify-delivery.mjs && node qa/verify-v03.mjs && node qa/verify-v04.mjs && node qa/verify-v05.mjs && node qa/verify-v06.mjs && node qa/verify-v07.mjs && node qa/verify-v08.mjs",
+     "serve": "node tools/serve.mjs",
+     "build": "python3 tools/bundle-inline.py",
+-    "docs": "python3 tools/build-docs.py"
++    "docs": "python3 tools/build-docs.py",
++    "check:browser": "python3 qa/run-browsers.py"
+   },
+   "engines": {
+     "node": ">=20"
+--- v0.7/dlc/alien-hors-des-ombres/index.html
++++ v0.8/dlc/alien-hors-des-ombres/index.html
+@@ -1 +1 @@
+-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b191e"><meta name="application-version" content="0.7.0"><title>Alien — Hors des ombres · Les archives noyées</title><link rel="stylesheet" href="../../src/oth-v1/oth-ui.css"></head><body><div id="oth-root"></div><script type="module">import {mount} from '../../src/oth-v1/oth-ui.js';mount(document.getElementById('oth-root'));</script></body></html>
++<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b191e"><meta name="application-version" content="0.8.0"><title>Alien — Hors des ombres · Les mémoires du Marion</title><link rel="stylesheet" href="../../src/oth-v1/oth-ui.css"></head><body><div id="oth-root"></div><script type="module">import {mount} from '../../src/oth-v1/oth-ui.js';mount(document.getElementById('oth-root'));</script></body></html>

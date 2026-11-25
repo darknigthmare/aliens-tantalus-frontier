@@ -1,0 +1,35 @@
+{
+  "baseArchive": "ALIEN_HORS_DES_OMBRES_V0_8_LES_MEMOIRES_DU_MARION.zip",
+  "baseBytes": 61934135,
+  "baseSHA256": "03eee85918c0c55d8e9977c8834b81f7bdaf3723a5d8a12ef5260c939c575886",
+  "baseVersion": "0.8.0",
+  "newVersion": "0.9.0",
+  "modifiedSources": [
+    {
+      "path": "src/oth-v1/oth-ui.css",
+      "beforeSHA256": "575252b50b8746cce932eb16302fbf86450b11feb90401330ed4a7f57e6ddf8b",
+      "afterSHA256": "04550cff458f173ae8fab29dbd234d408bdd3d057793d686662ce09140d0c13c"
+    },
+    {
+      "path": "src/oth-v1/oth-data.js",
+      "beforeSHA256": "41cbb998c711eceb3691741f5db36af7188168ceb34c276d8b5f5886399d4449",
+      "afterSHA256": "6737afc798be09352f6c3e6ec415a88615d0d6b2d5a22b891e3ae68ceb79adbb"
+    },
+    {
+      "path": "src/oth-v1/oth-engine.js",
+      "beforeSHA256": "3af035384bb77e21e518d0e7678c06a69c4756e4d40e825f93ce973fb5109864",
+      "afterSHA256": "dc1e71ad8b2c998a60abf6b57b1bb0465a639278475a8c8010d5b47aa21e0f72"
+    },
+    {
+      "path": "src/oth-v1/oth-ui.js",
+      "beforeSHA256": "9cf747727cd3635f43d5812b6cf4ad79af6b4b92a4bdee41b0d474f01d3ffc7b",
+      "afterSHA256": "9e20a9a5d299a12f5e3c0d3e8663110c9dbaf54d3ad0fcb331afeb5e710c5bcb"
+    },
+    {
+      "path": "src/oth-v1/oth-render.js",
+      "beforeSHA256": "36dcc899d0defd29ce89003489a9ffd4e2a2d3b45bc11c5e4ef9466a7d49d95c",
+      "afterSHA256": "cf932a486860848dceb43d9f800867fba96d7acbe83dc2da52fcbe072d54d618"
+    }
+  ],
+  "patchFile": "docs/DIFF_SOURCES_V08_V09.patch"
+}

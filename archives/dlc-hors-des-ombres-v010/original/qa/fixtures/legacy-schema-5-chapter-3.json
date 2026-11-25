@@ -1,0 +1,366 @@
+{
+  "schema": 5,
+  "soundField": [
+    {
+      "id": 73,
+      "kind": "steps",
+      "room": "medical",
+      "x": 1165.8000000000043,
+      "y": 88,
+      "volume": 0.72,
+      "ttl": 1.1499999999999997
+    }
+  ],
+  "soundLog": [
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 58.999999999998785
+    },
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 63.79999999999851
+    },
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 68.59999999999825
+    },
+    {
+      "kind": "steps",
+      "room": "breach",
+      "at": 70.19999999999816
+    },
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 75.24999999999787
+    },
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 80.0499999999976
+    },
+    {
+      "kind": "steps",
+      "room": "dock",
+      "at": 83.24999999999741
+    },
+    {
+      "kind": "steps",
+      "room": "dock",
+      "at": 87.49999999999717
+    },
+    {
+      "kind": "steps",
+      "room": "narcissus",
+      "at": 92.69999999999688
+    },
+    {
+      "kind": "steps",
+      "room": "dock",
+      "at": 94.29999999999679
+    },
+    {
+      "kind": "steps",
+      "room": "dock",
+      "at": 99.09999999999651
+    },
+    {
+      "kind": "steps",
+      "room": "hangar",
+      "at": 102.29999999999633
+    },
+    {
+      "kind": "steps",
+      "room": "airlock",
+      "at": 107.09999999999606
+    },
+    {
+      "kind": "steps",
+      "room": "airlock",
+      "at": 111.89999999999579
+    },
+    {
+      "kind": "steps",
+      "room": "junction",
+      "at": 113.4999999999957
+    },
+    {
+      "kind": "steps",
+      "room": "medical",
+      "at": 115.0999999999956
+    }
+  ],
+  "soundSeq": 73,
+  "acousticTimers": {
+    "steps": 0.6499999999999992
+  },
+  "lures": [],
+  "residue": {},
+  "listening": false,
+  "listenHeld": 0,
+  "decoyPressDone": false,
+  "doors": {},
+  "lightsOff": [],
+  "machines": {},
+  "doorHold": 0,
+  "doorAction": null,
+  "doorPressDone": false,
+  "servicePressDone": false,
+  "companion": null,
+  "discoveredPortals": [
+    "e01:bridge",
+    "e01:comms",
+    "e02:bridge",
+    "e02:junction",
+    "e04:junction",
+    "e05:junction",
+    "oth-annex-rec-0:a",
+    "e03:junction",
+    "e03:engineering",
+    "e09:engineering",
+    "oth-annex-maintenance-0:a",
+    "e05:airlock",
+    "e06:airlock",
+    "e06:hangar",
+    "e10:hangar",
+    "e12:hangar",
+    "e30:hangar",
+    "e07:hangar",
+    "e07:breach",
+    "e10:dock",
+    "e11:dock",
+    "e11:narcissus",
+    "e04:medical"
+  ],
+  "metrics": {
+    "dodged": 0,
+    "attacks": 0,
+    "companionPassages": 0,
+    "trailsStarted": 0,
+    "pursuitPassages": 0,
+    "bulkheadsClosed": 0,
+    "bulkheadsBreached": 0,
+    "machinesStarted": 0,
+    "soundInvestigations": 0,
+    "decoysInspected": 0,
+    "decoysIgnored": 0,
+    "companionAlerts": 0
+  },
+  "reducedMotion": false,
+  "contrast": false,
+  "records": [],
+  "collected": [],
+  "disabledHazards": [],
+  "conversations": [],
+  "work": {
+    "oth-c01-o2": {
+      "values": [
+        1,
+        2,
+        1
+      ]
+    },
+    "oth-c01-o3": {
+      "index": 4
+    },
+    "oth-c02-o1": {
+      "value": 40
+    },
+    "oth-c03-o1": {
+      "values": [
+        2,
+        1,
+        0
+      ]
+    }
+  },
+  "reading": null,
+  "story": {
+    "id": "wake",
+    "time": 8
+  },
+  "hazardCooldown": 0,
+  "chapter": 3,
+  "goal": 0,
+  "room": "medical",
+  "player": {
+    "x": 1228.9491350000008,
+    "y": 88,
+    "hp": 100,
+    "fuel": 65,
+    "decoys": 11,
+    "kits": 4,
+    "face": 1,
+    "crouch": false,
+    "hidden": null
+  },
+  "difficulty": "normal",
+  "visited": [
+    "bridge",
+    "comms",
+    "junction",
+    "engineering",
+    "airlock",
+    "hangar",
+    "breach",
+    "dock",
+    "narcissus",
+    "medical"
+  ],
+  "completed": [
+    "oth-c01-o1",
+    "oth-c01-o2",
+    "oth-c01-o3",
+    "oth-c02-o1",
+    "oth-c02-o2",
+    "oth-c02-o3",
+    "oth-c03-o1",
+    "oth-c03-o2",
+    "oth-c03-o3"
+  ],
+  "world": {
+    "bridge": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 0,
+      "spawned": false
+    },
+    "comms": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 3.949999999999994,
+      "spawned": false
+    },
+    "junction": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 19.800000000000146,
+      "spawned": false
+    },
+    "engineering": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 29.000000000000277,
+      "spawned": false
+    },
+    "airlock": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 51.099999999999234,
+      "spawned": false
+    },
+    "hangar": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 58.39999999999882,
+      "spawned": false
+    },
+    "breach": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 69.2999999999982,
+      "spawned": false
+    },
+    "dock": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 82.14999999999748,
+      "spawned": false
+    },
+    "narcissus": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 91.14999999999696,
+      "spawned": false
+    },
+    "medical": {
+      "enemies": [],
+      "eggs": {},
+      "cleared": false,
+      "visitTime": 114.19999999999565,
+      "spawned": false
+    }
+  },
+  "flags": {},
+  "journal": [
+    {
+      "chapter": 0,
+      "text": "Le Marion ne reçoit plus les équipes au sol."
+    },
+    {
+      "chapter": 0,
+      "text": "La portée est courte. Quelqu’un doit encore pouvoir nous entendre."
+    },
+    {
+      "chapter": 0,
+      "text": "L’alimentation tient. Pour l’instant."
+    },
+    {
+      "chapter": 0,
+      "text": "Baxter — Le relais tient. Il n’y a toujours personne au bout de la ligne."
+    },
+    {
+      "chapter": 1,
+      "text": "La conduite du quai est isolée."
+    },
+    {
+      "chapter": 1,
+      "text": "La brèche est derrière la cloison."
+    },
+    {
+      "chapter": 1,
+      "text": "Hoop — La Delilah a frappé. La passerelle ne répond plus. Jordan ne répond plus."
+    },
+    {
+      "chapter": 1,
+      "text": "Le Samson tient encore au quai. Son intérieur n’est pas sûr."
+    },
+    {
+      "chapter": 2,
+      "text": "Le passage est alimenté."
+    },
+    {
+      "chapter": 2,
+      "text": "Jones reste ici, à l’abri."
+    },
+    {
+      "chapter": 2,
+      "text": "Nous descendrons équipés, pas armés comme une escouade."
+    },
+    {
+      "chapter": 2,
+      "text": "Ripley — Avant de repartir, montrez-moi tous les accès de cette navette."
+    }
+  ],
+  "elapsed": 119.24999999999537,
+  "finished": false,
+  "dead": false,
+  "flash": true,
+  "sound": false,
+  "hold": 0,
+  "portalCooldown": 0.8,
+  "invuln": 0,
+  "flame": 0,
+  "torchCooldown": 0,
+  "decoyCooldown": 0,
+  "healCooldown": 0,
+  "noise": 0.055000000000000215,
+  "dirty": true,
+  "notice": "Nous descendrons équipés, pas armés comme une escouade.",
+  "noticeTime": 6,
+  "puzzle": null,
+  "shake": 0,
+  "decoy": null
+}

@@ -1,0 +1,208 @@
+{
+  "suite": "engine-and-installer-v0.3-regression",
+  "tests": 47,
+  "passed": 47,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Graphe et objectifs physiques valides",
+      "ok": true
+    },
+    {
+      "name": "Identifiants des 48 objectifs uniques",
+      "ok": true
+    },
+    {
+      "name": "52 liens réciproques, 104 extrémités",
+      "ok": true
+    },
+    {
+      "name": "331 placements utilisent des types dessinés",
+      "ok": true
+    },
+    {
+      "name": "Deux modes spatiaux présents",
+      "ok": true
+    },
+    {
+      "name": "Sauvegarde propre au DLC",
+      "ok": true
+    },
+    {
+      "name": "JSON invalide refusé",
+      "ok": true
+    },
+    {
+      "name": "Sauvegarde trop grande refusée",
+      "ok": true
+    },
+    {
+      "name": "Mauvais schéma refusé",
+      "ok": true
+    },
+    {
+      "name": "Salle inconnue refusée",
+      "ok": true
+    },
+    {
+      "name": "Reprise sans changement de progression",
+      "ok": true
+    },
+    {
+      "name": "Préfixe séquentiel : pas de saut de chapitre",
+      "ok": true
+    },
+    {
+      "name": "Bornage de vitalité, ressources et position",
+      "ok": true
+    },
+    {
+      "name": "Drapeaux de progression reconstruits",
+      "ok": true
+    },
+    {
+      "name": "Puits principal indisponible après sabotage",
+      "ok": true
+    },
+    {
+      "name": "Remontée secondaire ouverte au chapitre 11",
+      "ok": true
+    },
+    {
+      "name": "Narcissus inaccessible après largage",
+      "ok": true
+    },
+    {
+      "name": "Passage verrouillé ne téléporte pas",
+      "ok": true
+    },
+    {
+      "name": "Interaction éloignée ne valide rien",
+      "ok": true
+    },
+    {
+      "name": "Maintien réel à proximité valide un objectif",
+      "ok": true
+    },
+    {
+      "name": "Déplacement annule le maintien",
+      "ok": true
+    },
+    {
+      "name": "Mauvaise ligne électrique ne progresse pas",
+      "ok": true
+    },
+    {
+      "name": "Bonne ligne électrique progresse",
+      "ok": true
+    },
+    {
+      "name": "Pause de la simulation pendant un choix",
+      "ok": true
+    },
+    {
+      "name": "Vue latérale verrouille la profondeur",
+      "ok": true
+    },
+    {
+      "name": "Vue en profondeur autorise un contournement",
+      "ok": true
+    },
+    {
+      "name": "Sprint plus rapide que marche et portage",
+      "ok": true
+    },
+    {
+      "name": "Les obstacles solides bloquent le déplacement",
+      "ok": true
+    },
+    {
+      "name": "Occlusion de ligne de vue par mobilier",
+      "ok": true
+    },
+    {
+      "name": "Flamme indisponible avant l’atelier",
+      "ok": true
+    },
+    {
+      "name": "Flamme consomme neuf unités et repousse",
+      "ok": true
+    },
+    {
+      "name": "Pas de flamme à réservoir vide",
+      "ok": true
+    },
+    {
+      "name": "Leurre consomme une seule charge, puis délai",
+      "ok": true
+    },
+    {
+      "name": "Leurre expire après cinq secondes",
+      "ok": true
+    },
+    {
+      "name": "Soin limité par les trousses",
+      "ok": true
+    },
+    {
+      "name": "Apparition éloignée du joueur après changement de chapitre",
+      "ok": true
+    },
+    {
+      "name": "Œuf : avertissement, puis une seule éclosion",
+      "ok": true
+    },
+    {
+      "name": "Reprise conserve une éclosion déjà produite",
+      "ok": true
+    },
+    {
+      "name": "Installateur : vérification sans écriture",
+      "ok": true
+    },
+    {
+      "name": "Installateur : ajout de sept fichiers et une balise",
+      "ok": true
+    },
+    {
+      "name": "Installateur : relance idempotente",
+      "ok": true
+    },
+    {
+      "name": "Installateur : protège un index modifié",
+      "ok": true
+    },
+    {
+      "name": "Installateur : protège un fichier DLC modifié",
+      "ok": true
+    },
+    {
+      "name": "Installateur : retrait restitue exactement l’index",
+      "ok": true
+    },
+    {
+      "name": "Installateur : refuse d’écraser un chemin existant",
+      "ok": true
+    },
+    {
+      "name": "Parcours physique complet : assisted",
+      "ok": true
+    },
+    {
+      "name": "Parcours physique complet : normal",
+      "ok": true
+    }
+  ],
+  "data": {
+    "ok": true,
+    "failures": [],
+    "counts": {
+      "rooms": 41,
+      "edges": 52,
+      "objectives": 48,
+      "codex": 228,
+      "propTypes": 48,
+      "propInstances": 331
+    }
+  }
+}
