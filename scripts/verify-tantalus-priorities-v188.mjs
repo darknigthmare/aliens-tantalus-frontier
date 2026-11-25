@@ -19,22 +19,32 @@ import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mj
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { SPECIAL_OPERATIONS_V131 as operations, SPECIAL_OPERATION_COUNTS_V131 as operationCounts } from '../src/special-operations-v131.js';
+import { AVP_HOST_SUCCESSORS_20261125, reviewedAvpHostDigest20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+const avpAuditPath = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+const avpAuditSpecifier = './audit-dlc-avp-2004-20261125.mjs';
+const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+const importMutatedTerminalV188 = async source => {
+  assert.deepEqual(relativeImports(source), [avpAuditSpecifier], 'Only the reviewed AVP terminal may be resolved in a mutation fixture.');
+  // data: modules need an absolute URL for this single, independently admitted dependency.
+  const resolved = source.replace(/(['"])\.\/audit-dlc-avp-2004-20261125\.mjs\1/,
+    (_, quote) => quote + new URL(avpAuditSpecifier, import.meta.url).href + quote);
+  return import('data:text/javascript;base64,' + Buffer.from(resolved).toString('base64'));
+};
 
 // Historical verifiers keep their own inputs: restore Q to the exact B2
 // declarations first; only the Cargo test then restores Broodstorm to H.
 const bOperations = operations.map(operation => ({ ...operation, remainingMechanics: operation.id === 'queen-mother-song'
   ? ['dedicated-queen-mother-animation', 'complete-royal-cast'] : [...operation.remainingMechanics] }));
 
-// The lead continuation (after b6e01ef1) and then the Xeno Trials join (after 0d1d9950) are the last
-// links: an endpoint they review maps to the current merged bytes.
+// Preserve the lead and Xeno Trials receipts, then apply the exact AVP successor.
 const leadEndV188 = (path, digest) => {
   const r = TANTALUS_PRIORITIES_LEAD_CONTINUATION_V188.successors[path];
   const lead = r && r.previousSha256 === digest ? r.currentSha256 : digest;
   const j = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, path) ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[path] : null;
-  return j && j.previousSha256 === lead ? j.currentSha256 : lead;
+  return reviewedAvpHostDigest20261125(path, j && j.previousSha256 === lead ? j.currentSha256 : lead);
 };
 
 test('V188 registry continuation closes only the Cargo art debt and rejects neighboring promotions', () => {
@@ -776,7 +786,9 @@ test('V188 rejects mutated bytes and arbitrary predecessor endpoints', () => {
   assert.equal(reviewedTantalusPrioritiesDigestV188('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.equal(Object.hasOwn(TANTALUS_PRIORITIES_SUCCESSORS_V188, 'scripts/audit-tantalus-priorities-v188.mjs'), false);
   const terminal = read('scripts/audit-tantalus-priorities-v188.mjs').toString();
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false, 'The terminal audit must not import another audit.');
+  assert.deepEqual(relativeImports(terminal), [avpAuditSpecifier], 'The historical chain may import only the reviewed AVP terminal.');
+  assert.deepEqual(relativeImports(read(avpAuditPath).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAuditPath), false, 'The AVP terminal cannot admit its own bytes.');
 });
 
 test('Broodstorm terminal rejects a false H receipt or an added-source disguise for a successor', async () => {
@@ -808,7 +820,7 @@ test('Broodstorm terminal rejects a false H receipt or an added-source disguise 
     // readSource supplies repository bytes; no temporary module or source edit.
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_BROODSTORM_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -834,7 +846,7 @@ test('Queen Mother terminal rejects a false B2 receipt or an added-source disgui
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -875,7 +887,7 @@ test('Queen Mother guard terminal rejects false Q links, invented births and any
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });
@@ -939,7 +951,7 @@ test('Queen Mother choir terminal rejects false R links, a skipped Q birth and s
     mutate(receipt);
     const source = terminal.slice(0, start) + 'export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_V188 = freeze('
       + JSON.stringify(receipt) + ');' + terminal.slice(end);
-    const mutant = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+    const mutant = await importMutatedTerminalV188(source);
     assert.throws(() => mutant.verifyTantalusPrioritiesV188(read), error, reason);
   }
 });

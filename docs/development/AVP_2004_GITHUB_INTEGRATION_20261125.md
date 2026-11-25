@@ -33,6 +33,8 @@ Le bundle intégré mesure **1 115 546 octets** et porte le SHA-256 :
 
 Le build vérifie la reproduction du bundle avant de copier `src/`. Les sources de fabrication et les archives ne sont jamais admises dans la distribution. Les chemins et empreintes sont explicites ; une modification volontaire des sources exige de reconstruire le bundle, de réviser le manifeste et d'actualiser son empreinte revue dans l'admission.
 
+Le raccord conserve les reçus historiques de l'audit du Tantalus. Un successeur explicite dans `scripts/audit-dlc-avp-2004-20261125.mjs` relie uniquement les empreintes antérieures connues aux fichiers modifiés pour AVP. Les contrôles rejettent toujours un prédécesseur inconnu ou des octets différents ; aucune preuve de validation ancienne n'est attribuée au nouveau raccord.
+
 Le module de menu est ajouté au cache statique de l'hôte. Le premier chargement de l'expédition hébergée utilise le réseau ; le fichier HTML autonome reste utilisable localement. Le contrôle strict du service worker sur les requêtes privées et les paramètres d'URL n'est pas élargi.
 
 ## Contenu conservé

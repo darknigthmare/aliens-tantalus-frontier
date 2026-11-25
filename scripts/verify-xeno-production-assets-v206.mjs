@@ -12,6 +12,7 @@ import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV2
 import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+import { AVP_HOST_SUCCESSORS_20261125, reviewedAvpHostDigest20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -64,7 +65,8 @@ test('V206 extends the published V205 commit while preserving its complete histo
     assert.throws(() => advance(path, receipt.currentSha256), /Incorrect V205 endpoint for V206/, path);
   }
   for (const [path, receipt] of Object.entries(inputs)) {
-    assert.equal(publishedPaths.has(path), false, path); assert.equal(sha(read(path)), receipt.sha256, path);
+    assert.equal(publishedPaths.has(path), false, path);
+    assert.equal(sha(read(path)), reviewedAvpHostDigest20261125(path, receipt.sha256), path);
   }
   assert.equal(advance('constructor', 'untouched'), 'untouched');
 });
@@ -112,7 +114,11 @@ test('corrupt production bytes fail through the V205 relay without granting a ru
   assert.deepEqual(runtimeSources(runtime), runtime);
   assert.equal(Object.keys(runtime).some(path => path.includes('v206')), false);
   const audit = 'scripts/audit-xeno-production-assets-v206.mjs';
-  assert.doesNotMatch(read(audit).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+  assert.deepEqual(relativeImports(read(audit).toString()), ['./audit-dlc-avp-2004-20261125.mjs']);
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   assert.match(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.equal(Object.hasOwn(inputs, audit), false); assert.equal(Object.hasOwn(successors, audit), false);
   const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);

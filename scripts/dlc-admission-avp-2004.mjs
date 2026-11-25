@@ -13,6 +13,7 @@ export const AVP_PUBLIC_DIRECTORIES = new Set(['src/dlc', 'src/dlc/avp-2004']);
 const SOURCE_EXTRAS = new Set([
   'scripts/build-dlc-avp-2004.mjs', 'scripts/dlc-admission-avp-2004.mjs',
   'scripts/verify-dlc-avp-2004.mjs', 'scripts/verify-dlc-menu.mjs',
+  'scripts/audit-dlc-avp-2004-20261125.mjs', 'scripts/verify-dlc-audit-succession.mjs',
   'scripts/qa-dlc-avp-2004.mjs',
   '.github/workflows/dlc-avp-2004.yml',
   'scripts/dlc/avp-2004/README.md',
