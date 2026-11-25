@@ -2,23 +2,23 @@
 
 Cette branche `archive/local-recovery-20261125` conserve les fichiers complets qui étaient restés dans l'environnement de travail. Elle contient uniquement les archives et leurs outils de récupération.
 
-**État de cet instantané : 2 archives enregistrées sur 16, 82 599 736 octets.** Le transfert des autres archives est encore en cours.
+**État de cet instantané : 10 archives enregistrées sur 16, 710 038 466 octets.** Le transfert des autres archives est encore en cours.
 
 ## Contenu
 
 | Module | Version | Fichier d'origine | État |
 | --- | --- | --- | --- |
-| Alien : La Résurrection | 125 | `ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip` | À transférer |
+| Alien : La Résurrection | 125 | `ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip` | Enregistrée |
 | AVP (2004) | 0.11.0 | `ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip` | Enregistrée |
 | MIRE / Nostromo | 119 | `ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip` | À transférer |
-| Alien: Covenant | 0.10.0 | `ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip` | À transférer |
+| Alien: Covenant | 0.10.0 | `ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip` | Enregistrée |
 | Alien: Earth | 11 | `ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip` | Enregistrée |
-| Alien : Hors des Ombres | 0.10 | `ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.1.0 | `ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.10.0 | `ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.2.0 | `ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.3.0 | `ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip` | À transférer |
-| Alien : Mer des Chagrins | 0.4.0 | `ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip` | À transférer |
+| Alien : Hors des Ombres | 0.10 | `ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.1.0 | `ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.10.0 | `ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.2.0 | `ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.3.0 | `ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip` | Enregistrée |
+| Alien : Mer des Chagrins | 0.4.0 | `ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip` | Enregistrée |
 | Alien : Mer des Chagrins | 0.5.0 | `ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip` | À transférer |
 | Alien : Mer des Chagrins | 0.6.0 | `ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip` | À transférer |
 | Alien : Mer des Chagrins | 0.7.0 | `ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip` | À transférer |
