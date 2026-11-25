@@ -1,0 +1,145 @@
+{
+  "complete": true,
+  "passed": true,
+  "hashes": {
+    "src/river-of-pain/fidelity-ui.js": "63e40414c9a8090adcd57a01e62134e388d5fd4ee874c6bffc29b89d14b2199f",
+    "src/river-of-pain/defense-ui.js": "3e13a8436f46a8e2b019051bab94aecc4d22461b6625e418d820bedaa418bba4",
+    "src/river-of-pain/ducts-visuals.js": "af40fd72608ecdec7f37595fa0695aff40bb4d276d4e6ae6a343d146807b814a",
+    "src/river-of-pain/render.js": "3c1aa81f368d4aacbaae427ec447750dff0ae112f59b0b0cee460758d577793a",
+    "src/river-of-pain/architecture.js": "a34089d2053893c9ca67cab4ad7bad5db878097c348388f090109dafb0e0d72d",
+    "src/river-of-pain/exploration.js": "c0da4b60e00e5b051ba1f6f16ca76f189a4ee7c53f793d85da949989ac727a5d",
+    "src/river-of-pain/style.css": "40e2aa7fe46d5348754e0330c08152adbee9ebaaf56c45c2c5ecc1aed7a7920a",
+    "src/river-of-pain/ducts.js": "f6439f32c270bbd157964a86224e8b155a65e4d7e441292028acb02b33b23ed6",
+    "src/river-of-pain/core.js": "f73edafd516fb3ea2b82aff9138469f0259ddab041f8258c48a9e24dbd8f70b8",
+    "src/river-of-pain/passage-visuals.js": "6236d65250667269acce26cf876578baa2d31eb9937efc8b0a9ebc6f0a4c02be",
+    "src/river-of-pain/launcher.js": "920945f02f8ec5a572788a069d2ce4a3232994adfc1645973ead212059b7d2b2",
+    "src/river-of-pain/life-visuals.js": "8c976bbe7c00ddf386c4223c678ffa044591835af87b9e12b012ee5f8f946b20",
+    "src/river-of-pain/ui.js": "84fb382c20dd87792964c2b7c9aa786a10fb197e512773e48190e980e81523a4",
+    "src/river-of-pain/armory.js": "509bf5b4370c989f7a838ae0063240df258cb5f00bb4e1ff39fe4ea9340feb74",
+    "src/river-of-pain/ducts-ui.js": "63bcc9f53fbd292034c5611bfedd75549da52b2ca52b8b28e71351c77cfc9a55",
+    "src/river-of-pain/mobility.js": "24f4013c366b0ec03890be06deb26f2bcce9b96e3c099d3542ad0b59753c9e67",
+    "src/river-of-pain/life.js": "d9bf7442a61e60458cb2f332df34c134d4f8c5088858c57fe1dc9ef8ca0172c5",
+    "src/river-of-pain/colony.js": "75031354405465bdde36b1723d37aef82e97e7e775f651187b4970eed0c6598a",
+    "src/river-of-pain/persistence.js": "5d0bff78d68cb15ec558c7c9b1a96a41fcf8e5dd69351fdd5e99bb6cc453d470",
+    "src/river-of-pain/mobility-ui.js": "b18f974ef1f6c5696b1e4ae4a1c9e08424c2be1735b435003f9b9698b4a3fe06",
+    "src/river-of-pain/fidelity-visuals.js": "b13e0efc8bcdae65e3618fab8f20cd5f38fca1e882824ded5f537d7e0b34afef",
+    "src/river-of-pain/mobility-visuals.js": "801e174e5a537742eb0ba07133575f3f4fa89afb55fdea0e73124d5da6335510",
+    "src/river-of-pain/defense.js": "7c5de88daeb50265086b276a4594a8be5d6c5adf88f801e8402afa787a92e832",
+    "src/river-of-pain/defense-visuals.js": "cc3644399b9157d98aa0c67dc592428e64d71e18a3ccc76c637d403f7dfe156f",
+    "src/river-of-pain/data.js": "e03175aa1db2a83aa10fbb4e3574f84a13815c3b6a9d2498aa6e5566e9b8fde8",
+    "src/river-of-pain/field-visuals.js": "655cd7eb6629aa8aed7b0aa18322a7e43bdb6671c8b1669a25ffc12e9e4b61b6",
+    "src/river-of-pain/passages.js": "c20b476af155d42b6320e8639af1acb4e9feeb04a972ad092e409cf084ef0e0c",
+    "src/river-of-pain/life-ui.js": "d3196e7abe19d5863a6d372ff130723a85a89a6a03cc6e463c61e3d19277f93d",
+    "src/river-of-pain/index.html": "a050d7e43aca5a66620346b270f58be49bc508b9c0664960b0a083d898a48334"
+  },
+  "results": [
+    {
+      "suite": "core.cjs",
+      "returncode": 0,
+      "seconds": 0.159,
+      "tail": "101/101 core test groups passed\n\n"
+    },
+    {
+      "suite": "colony.cjs",
+      "returncode": 0,
+      "seconds": 0.163,
+      "tail": "75/75 colony test groups passed\n\n"
+    },
+    {
+      "suite": "exploration.cjs",
+      "returncode": 0,
+      "seconds": 0.489,
+      "tail": "159/159 exploration cases passed\n\n"
+    },
+    {
+      "suite": "passages.cjs",
+      "returncode": 0,
+      "seconds": 0.245,
+      "tail": "122/122 passage cases passed\n\n"
+    },
+    {
+      "suite": "persistence.cjs",
+      "returncode": 0,
+      "seconds": 0.145,
+      "tail": "18/18 persistence cases passed\n\n"
+    },
+    {
+      "suite": "life.cjs",
+      "returncode": 0,
+      "seconds": 0.278,
+      "tail": "141/141 life tests\n\n"
+    },
+    {
+      "suite": "defense.cjs",
+      "returncode": 0,
+      "seconds": 0.274,
+      "tail": "121/121 defense tests\n\n"
+    },
+    {
+      "suite": "ducts.cjs",
+      "returncode": 0,
+      "seconds": 0.301,
+      "tail": "112/112 duct test groups\n\n"
+    },
+    {
+      "suite": "mobility.cjs",
+      "returncode": 0,
+      "seconds": 0.295,
+      "tail": "91/91 mobility test groups\n\n"
+    },
+    {
+      "suite": "fidelity.cjs",
+      "returncode": 0,
+      "seconds": 0.597,
+      "tail": "306/306 fidelity and armament tests\n\n"
+    },
+    {
+      "suite": "traversal.cjs",
+      "returncode": 0,
+      "seconds": 0.859,
+      "tail": "  hits: \u001b[33m3\u001b[39m,\n  deaths: \u001b[33m0\u001b[39m,\n  temporaryShelters: \u001b[33m1\u001b[39m,\n  escorts: \u001b[33m2\u001b[39m,\n  chapters: [\n     \u001b[33m0\u001b[39m,  \u001b[33m1\u001b[39m,  \u001b[33m2\u001b[39m,  \u001b[33m3\u001b[39m,  \u001b[33m4\u001b[39m,  \u001b[33m5\u001b[39m,\n     \u001b[33m6\u001b[39m,  \u001b[33m7\u001b[39m,  \u001b[33m8\u001b[39m,  \u001b[33m9\u001b[39m, \u001b[33m10\u001b[39m, \u001b[33m11\u001b[39m,\n    \u001b[33m12\u001b[39m, \u001b[33m13\u001b[39m, \u001b[33m14\u001b[39m, \u001b[33m15\u001b[39m\n  ]\n}\nclassic standard PASS \u001b[33m461.50000000007066\u001b[39m {\n  shots: \u001b[33m16\u001b[39m,\n  shotsHit: \u001b[33m12\u001b[39m,\n  kills: \u001b[33m4\u001b[39m,\n  hits: \u001b[33m3\u001b[39m,\n  deaths: \u001b[33m0\u001b[39m,\n  temporaryShelters: \u001b[33m1\u001b[39m,\n  escorts: \u001b[33m2\u001b[39m,\n  chapters: [\n     \u001b[33m0\u001b[39m,  \u001b[33m1\u001b[39m,  \u001b[33m2\u001b[39m,  \u001b[33m3\u001b[39m,  \u001b[33m4\u001b[39m,  \u001b[33m5\u001b[39m,\n     \u001b[33m6\u001b[39m,  \u001b[33m7\u001b[39m,  \u001b[33m8\u001b[39m,  \u001b[33m9\u001b[39m, \u001b[33m10\u001b[39m, \u001b[33m11\u001b[39m,\n    \u001b[33m12\u001b[39m, \u001b[33m13\u001b[39m, \u001b[33m14\u001b[39m, \u001b[33m15\u001b[39m\n  ]\n}\nhybrid nightmare PASS \u001b[33m467.9500000000721\u001b[39m {\n  shots: \u001b[33m11\u001b[39m,\n  shotsHit: \u001b[33m9\u001b[39m,\n  kills: \u001b[33m3\u001b[39m,\n  hits: \u001b[33m3\u001b[39m,\n  deaths: \u001b[33m0\u001b[39m,\n  temporaryShelters: \u001b[33m1\u001b[39m,\n  escorts: \u001b[33m2\u001b[39m,\n  chapters: [\n     \u001b[33m0\u001b[39m,  \u001b[33m1\u001b[39m,  \u001b[33m2\u001b[39m,  \u001b[33m3\u001b[39m,  \u001b[33m4\u001b[39m,  \u001b[33m5\u001b[39m,\n     \u001b[33m6\u001b[39m,  \u001b[33m7\u001b[39m,  \u001b[33m8\u001b[39m,  \u001b[33m9\u001b[39m, \u001b[33m10\u001b[39m, \u001b[33m11\u001b[39m,\n    \u001b[33m12\u001b[39m, \u001b[33m13\u001b[39m, \u001b[33m14\u001b[39m, \u001b[33m15\u001b[39m\n  ]\n}\nclassic nightmare PASS \u001b[33m461.45000000007065\u001b[39m {\n  shots: \u001b[33m14\u001b[39m,\n  shotsHit: \u001b[33m12\u001b[39m,\n  kills: \u001b[33m4\u001b[39m,\n  hits: \u001b[33m5\u001b[39m,\n  deaths: \u001b[33m0\u001b[39m,\n  temporaryShelters: \u001b[33m1\u001b[39m,\n  escorts: \u001b[33m2\u001b[39m,\n  chapters: [\n     \u001b[33m0\u001b[39m,  \u001b[33m1\u001b[39m,  \u001b[33m2\u001b[39m,  \u001b[33m3\u001b[39m,  \u001b[33m4\u001b[39m,  \u001b[33m5\u001b[39m,\n     \u001b[33m6\u001b[39m,  \u001b[33m7\u001b[39m,  \u001b[33m8\u001b[39m,  \u001b[33m9\u001b[39m, \u001b[33m10\u001b[39m, \u001b[33m11\u001b[39m,\n    \u001b[33m12\u001b[39m, \u001b[33m13\u001b[39m, \u001b[33m14\u001b[39m, \u001b[33m15\u001b[39m\n  ]\n}\n\n"
+    },
+    {
+      "suite": "traversal-exploration.cjs",
+      "returncode": 0,
+      "seconds": 1.083,
+      "tail": "hybrid story PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m815.599999999806\u001b[39m\nhybrid standard PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m815.499999999806\u001b[39m\nhybrid nightmare PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m815.549999999806\u001b[39m\nclassic story PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m807.4499999998134\u001b[39m\nclassic standard PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m807.3499999998135\u001b[39m\nclassic nightmare PASS \u001b[33m42\u001b[39m rooms \u001b[33m6\u001b[39m detours \u001b[33m807.2999999998135\u001b[39m\n\n"
+    },
+    {
+      "suite": "traversal-life.cjs",
+      "returncode": 0,
+      "seconds": 1.739,
+      "tail": "tacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m12\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  }\n]\nPASS hybrid standard [\n  {\n    child: \u001b[33mfalse\u001b[39m,\n    seconds: \u001b[33m781\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m11\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  },\n  {\n    child: \u001b[33mtrue\u001b[39m,\n    seconds: \u001b[33m24\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m12\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  }\n]\nPASS classic standard [\n  {\n    child: \u001b[33mfalse\u001b[39m,\n    seconds: \u001b[33m773\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m11\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  },\n  {\n    child: \u001b[33mtrue\u001b[39m,\n    seconds: \u001b[33m24\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m12\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  }\n]\nPASS hybrid nightmare [\n  {\n    child: \u001b[33mfalse\u001b[39m,\n    seconds: \u001b[33m781\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m11\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  },\n  {\n    child: \u001b[33mtrue\u001b[39m,\n    seconds: \u001b[33m24\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m12\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  }\n]\nPASS classic nightmare [\n  {\n    child: \u001b[33mfalse\u001b[39m,\n    seconds: \u001b[33m773\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m11\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  },\n  {\n    child: \u001b[33mtrue\u001b[39m,\n    seconds: \u001b[33m24\u001b[39m,\n    contacts: \u001b[33m12\u001b[39m,\n    topics: \u001b[33m24\u001b[39m,\n    opened: \u001b[33m12\u001b[39m,\n    crafted: \u001b[33m3\u001b[39m,\n    deployed: \u001b[33m3\u001b[39m\n  }\n]\n\n"
+    },
+    {
+      "suite": "traversal-defense.cjs",
+      "returncode": 0,
+      "seconds": 1.971,
+      "tail": "PASS hybrid story \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic story \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS hybrid standard \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic standard \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS hybrid nightmare \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic nightmare \u001b[33m11\u001b[39m {\n  closed: \u001b[33m14\u001b[39m,\n  opened: \u001b[33m14\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  strikes: \u001b[33m0\u001b[39m,\n  alarms: \u001b[33m4\u001b[39m,\n  alarmBroken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\n\n"
+    },
+    {
+      "suite": "traversal-ducts.cjs",
+      "returncode": 0,
+      "seconds": 2.093,
+      "tail": "PASS hybrid story {\n  entries: \u001b[33m1\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS hybrid standard {\n  entries: \u001b[33m2\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS hybrid nightmare {\n  entries: \u001b[33m2\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic story {\n  entries: \u001b[33m1\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic standard {\n  entries: \u001b[33m1\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\nPASS classic nightmare {\n  entries: \u001b[33m2\u001b[39m,\n  arrivals: \u001b[33m1\u001b[39m,\n  closed: \u001b[33m10\u001b[39m,\n  opened: \u001b[33m10\u001b[39m,\n  listened: \u001b[33m10\u001b[39m,\n  broken: \u001b[33m0\u001b[39m,\n  cancelled: \u001b[33m0\u001b[39m\n}\n\n"
+    },
+    {
+      "suite": "traversal-mobility.cjs",
+      "returncode": 0,
+      "seconds": 2.251,
+      "tail": "PASS hybrid story {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\nPASS classic story {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\nPASS hybrid standard {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\nPASS classic standard {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\nPASS hybrid nightmare {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\nPASS classic nightmare {\n  boarded: \u001b[33m2\u001b[39m,\n  exits: \u001b[33m2\u001b[39m,\n  crossings: \u001b[33m3\u001b[39m,\n  collisions: \u001b[33m0\u001b[39m,\n  repairs: \u001b[33m0\u001b[39m,\n  charges: \u001b[33m1\u001b[39m,\n  horns: \u001b[33m0\u001b[39m,\n  distance: \u001b[33m12321.749999999949\u001b[39m\n}\n\n"
+    },
+    {
+      "suite": "traversal-fidelity.cjs",
+      "returncode": 0,
+      "seconds": 2.374,
+      "tail": "hybrid story PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\nclassic story PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\nhybrid standard PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\nclassic standard PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\nhybrid nightmare PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\nclassic nightmare PASS \u001b[33m47\u001b[39m [ \u001b[32m'colonie'\u001b[39m, \u001b[32m'\u00e9pave'\u001b[39m ]\n\n"
+    },
+    {
+      "suite": "installer.mjs",
+      "returncode": 0,
+      "seconds": 1.147,
+      "tail": "28/28 installer cases passed\n\n"
+    }
+  ]
+}

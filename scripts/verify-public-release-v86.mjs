@@ -1,3 +1,4 @@
+import { riverOfPainPathAdmission, verifyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
@@ -558,6 +559,8 @@ const PRIVATE_TEXT = [
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  const riverAdmission = riverOfPainPathAdmission(path, { directory, built });
+  if (riverAdmission !== null) return riverAdmission;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
@@ -622,6 +625,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  if (built) await verifyRiverOfPainRuntime(root);
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');

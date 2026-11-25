@@ -1,0 +1,93 @@
+{
+  "version": "0.9.0-candidate.1",
+  "reportSHA256": "111a29d05de9bf58ecdb02578fbfdb4aa4e8119013db56bbbc7eeb65da3379e6",
+  "checks": [
+    {
+      "name": "14 figures",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 1",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 2",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 3",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 4",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 5",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 6",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 7",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 8",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 9",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 10",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 11",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 12",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 13",
+      "passed": true
+    },
+    {
+      "name": "Image décodée 14",
+      "passed": true
+    },
+    {
+      "name": "Pas de débordement desktop",
+      "passed": true
+    },
+    {
+      "name": "Comptes actuels du modèle",
+      "passed": true
+    },
+    {
+      "name": "Comptes actuels du navigateur",
+      "passed": true
+    },
+    {
+      "name": "Limites 1:1 visibles",
+      "passed": true
+    },
+    {
+      "name": "Pas de débordement portrait",
+      "passed": true
+    },
+    {
+      "name": "Pas d’erreur JavaScript",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "scope": "Document only, not gameplay checks.",
+  "passed": true
+}

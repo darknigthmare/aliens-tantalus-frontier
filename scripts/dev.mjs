@@ -1,3 +1,4 @@
+import { RIVER_OF_PAIN_RUNTIME, RIVER_OF_PAIN_ROOT } from './river-of-pain-distribution.mjs';
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
@@ -22,6 +23,8 @@ function safePath(url) {
   catch { return null; }
   const relative = normalize(requested === '/' ? 'index.html' : requested.replace(/^\/+/, ''));
   if (relative.startsWith('..')) return null;
+  if (relative === 'archives' || relative.startsWith('archives/')) return null;
+  if (relative.startsWith('dlc/') && relative !== RIVER_OF_PAIN_ROOT && relative !== RIVER_OF_PAIN_ROOT + '/' && !RIVER_OF_PAIN_RUNTIME.includes(relative)) return null;
   if (relative.split(/[\\/]/).some(segment => /^(?:docs?|tests?|scripts|references?|exports?|captures?|screenshots?|\.git|\.env.*|\.qa.*|\.vercel)$/i.test(segment))) return null;
   return join(root, relative);
 }
@@ -50,7 +53,7 @@ createServer(async (request, response) => {
       } catch { /* Continue to the existing missing-asset or app-shell fallback. */ }
     }
     // Missing sprite/module requests must not look like successful HTML pages.
-    if (extname(file) || request.url?.startsWith('/assets/')) {
+    if (extname(file) || request.url?.startsWith('/assets/') || request.url?.startsWith('/dlc/')) {
       response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found');
       return;
     }

@@ -1,0 +1,496 @@
+{
+  "version": "0.9.0-candidate.1",
+  "scope": "Deterministic model fixtures; 88 directed connector/mode cases plus state, perception and migration checks",
+  "cases": 122,
+  "passed": true,
+  "results": [
+    {
+      "name": "22 connecteurs animés, dont deux monte-charges ; graphe étendu",
+      "passed": true
+    },
+    {
+      "name": "airlock → pad / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "airlock → pad / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pad → airlock / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pad → airlock / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "concourse → ops / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "concourse → ops / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "ops → concourse / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "ops → concourse / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "concourse → hab / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "concourse → hab / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → concourse / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → concourse / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → recreation / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → recreation / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "recreation → hab / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "recreation → hab / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → wash / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → wash / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "wash → hab / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "wash → hab / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → pantry / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hab → pantry / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pantry → hab / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pantry → hab / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "med → science / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "med → science / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → med / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → med / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → service / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → service / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "service → science / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "service → science / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "records → science / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "records → science / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → records / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → records / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "garage → service / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "garage → service / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "service → garage / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "service → garage / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "garage → road / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "garage → road / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "road → garage / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "road → garage / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "power → stores / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "power → stores / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "stores → power / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "stores → power / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "approach → pump / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "approach → pump / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pump → approach / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pump → approach / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "approach → lift / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "approach → lift / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "lift → approach / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "lift → approach / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hive → lift / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hive → lift / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "lift → hive / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "lift → hive / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "coolant → power / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "coolant → power / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "power → coolant / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "power → coolant / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "coolant → drain / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "coolant → drain / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "drain → coolant / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "drain → coolant / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hangar → science / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "hangar → science / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → hangar / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "science → hangar / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "aerial → relay / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "aerial → relay / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "relay → aerial / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "relay → aerial / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "aerial → ops / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "aerial → ops / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "ops → aerial / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "ops → aerial / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "drain → pump / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "drain → pump / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pump → drain / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pump → drain / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "egg_vault → pilot_chamber / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "egg_vault → pilot_chamber / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pilot_chamber → egg_vault / hybrid : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "pilot_chamber → egg_vault / classic : seuil → trajet → arrivée sûre",
+      "passed": true
+    },
+    {
+      "name": "Mouvement avant engagement : annulation, aucune arrivée ni ressource perdue",
+      "passed": true
+    },
+    {
+      "name": "Attaque pendant embarquement : annulation et dégâts réels",
+      "passed": true
+    },
+    {
+      "name": "Compagnon blessé à l’embarquement : pas de départ en laissant la victime",
+      "passed": true
+    },
+    {
+      "name": "Compagnon en attente : refus avant déplacement",
+      "passed": true
+    },
+    {
+      "name": "Compagnon embarqué : position, santé et ordre conservés à destination",
+      "passed": true
+    },
+    {
+      "name": "Secours du monte-charge : plus lent, sans verrouillage définitif par panne",
+      "passed": true
+    },
+    {
+      "name": "Transit engagé : mouvement, tirs, soins, soudures et mode ne dévient pas le trajet",
+      "passed": true
+    },
+    {
+      "name": "Export/import en boarding : reprise exacte et une seule arrivée",
+      "passed": true
+    },
+    {
+      "name": "Export/import en travel : reprise exacte et une seule arrivée",
+      "passed": true
+    },
+    {
+      "name": "Ancien point de contrôle restauré : pas de connecteur fantôme",
+      "passed": true
+    },
+    {
+      "name": "Porte soudée : pas de franchissement contournant la soudure",
+      "passed": true
+    },
+    {
+      "name": "Faux portail : refus de la destination non reliée",
+      "passed": true
+    },
+    {
+      "name": "Objets de transit importés : destination et minuterie invalides refusées",
+      "passed": true
+    },
+    {
+      "name": "Écoute au seuil : exposée pendant 1,6 s, puis observation horodatée",
+      "passed": true
+    },
+    {
+      "name": "Marcher interrompt une écoute sans fournir de renseignement",
+      "passed": true
+    },
+    {
+      "name": "Une attaque interrompt l’écoute",
+      "passed": true
+    },
+    {
+      "name": "Tirer interrompt l’écoute, sans réponse gratuite",
+      "passed": true
+    },
+    {
+      "name": "Lancer une fusée interrompt l’écoute",
+      "passed": true
+    },
+    {
+      "name": "Cachette : aucune écoute de porte à distance",
+      "passed": true
+    },
+    {
+      "name": "Newt peut écouter une grille mais pas activer le détecteur",
+      "passed": true
+    },
+    {
+      "name": "Hors portée : pas d’écoute d’une pièce distante",
+      "passed": true
+    },
+    {
+      "name": "Frottements : contact proche dans une seule pièce voisine",
+      "passed": true
+    },
+    {
+      "name": "Une poursuite de seuil est signalée comme danger, même cloison soudée",
+      "passed": true
+    },
+    {
+      "name": "Silence ne certifie jamais une pièce vide",
+      "passed": true
+    },
+    {
+      "name": "Historique limité aux douze dernières écoutes",
+      "passed": true
+    },
+    {
+      "name": "Rapports importés : chemin inexistant et date future refusés",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : contacts proches locaux et échos au seuil distingués",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : cloison soudée masque un contact distant",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : pièce à deux connexions ignorée",
+      "passed": true
+    },
+    {
+      "name": "Détecteur : ne marque pas les voisins comme visités",
+      "passed": true
+    },
+    {
+      "name": "Migration du vrai fichier real-v01-save.json",
+      "passed": true
+    },
+    {
+      "name": "Migration du vrai fichier real-v02-save.json",
+      "passed": true
+    },
+    {
+      "name": "Migration du vrai fichier real-v03-save.json",
+      "passed": true
+    }
+  ]
+}

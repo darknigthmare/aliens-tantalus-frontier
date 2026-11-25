@@ -1,0 +1,307 @@
+{
+  "version": "0.8.0-candidate.1",
+  "part": "C",
+  "htmlSHA256": "53cafebbf4a43b9c2cf6d406452a7b491ac818c7f47bc5d40b21eef13dde83b7",
+  "cases": [
+    {
+      "name": "Current HTML and new module load without external assets",
+      "passed": true
+    },
+    {
+      "name": "Real timed roadside repair consumes one finite kit and grants at most 55",
+      "passed": true
+    },
+    {
+      "name": "Real timed recharge consumes one finite accumulator and grants at most 65",
+      "passed": true
+    },
+    {
+      "name": "Actual serviced export/import preserves damage and empty stores",
+      "passed": true
+    },
+    {
+      "name": "Interrupted repair does not consume finite supply",
+      "passed": true
+    },
+    {
+      "name": "An existing adult can reach and damage the occupied hull while driver HP initially stays intact",
+      "passed": true
+    },
+    {
+      "name": "Actual hull-damage export/import does not repair the rover",
+      "passed": true
+    },
+    {
+      "name": "Newt boarding blocked through ordinary UI",
+      "passed": true
+    },
+    {
+      "name": "Cabin panel at 130% on portrait is scrollable without horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Short landscape cabin layout remains reachable at 130%",
+      "passed": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "captures/08-finite-service-v08.png",
+      "description": "Borne de service après réparation, recharge et véritable export/import",
+      "setup": "Actual exported JSON: browser-v08-serviced.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 6.049999999999984,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 900,
+            "z": 0.79,
+            "hp": 93,
+            "battery": 90,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 0,
+              "charges": 0
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 1,
+            "charges": 1,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": "rover"
+      }
+    },
+    {
+      "file": "captures/09-hull-under-attack-v08.png",
+      "description": "Scène de menace préparée : un adulte attaque le châssis plutôt que de traverser sa collision",
+      "setup": "Localized prepared fixture: threat.json",
+      "state": {
+        "room": "road",
+        "chapter": 7,
+        "character": "brackett",
+        "mode": "hybrid",
+        "elapsed": 1.5999999999999992,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 750,
+            "z": 0.79,
+            "hp": 91,
+            "battery": 99.96000000000004,
+            "speed": 0,
+            "heading": 1,
+            "driver": "brackett",
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0.48333333333333184,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 1,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": null
+      }
+    },
+    {
+      "file": "captures/10-cabin-portrait-v08.png",
+      "description": "Dossier cabine à 130 % de texte sur écran portrait émulé",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 0.05,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 100,
+            "speed": 0,
+            "heading": 1,
+            "driver": null,
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 0,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": "rover"
+      }
+    },
+    {
+      "file": "captures/11-driving-portrait-v08.png",
+      "description": "Conduite en portrait émulé ; HUD de cabine et châssis visibles",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 1.8499999999999983,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 99.99291666666667,
+            "speed": 0,
+            "heading": 1,
+            "driver": "anne",
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": null
+      }
+    },
+    {
+      "file": "captures/12-cabin-landscape-v08.png",
+      "description": "Dossier cabine en paysage court, texte à 130 %",
+      "setup": "Localized prepared fixture: parked.json",
+      "state": {
+        "room": "road",
+        "chapter": 3,
+        "character": "anne",
+        "mode": "hybrid",
+        "elapsed": 1.866666666666665,
+        "mobility": {
+          "revision": 8,
+          "rover": {
+            "room": "road",
+            "x": 660,
+            "z": 0.79,
+            "hp": 100,
+            "battery": 99.9925,
+            "speed": 0,
+            "heading": 1,
+            "driver": "anne",
+            "lights": false,
+            "wheels": 0,
+            "hurt": 0,
+            "horn": 0,
+            "hornCooldown": 0
+          },
+          "stations": {
+            "service-road": {
+              "repairs": 1,
+              "charges": 1
+            },
+            "service-plateau": {
+              "repairs": 1,
+              "charges": 1
+            }
+          },
+          "stats": {
+            "boarded": 1,
+            "exits": 0,
+            "crossings": 0,
+            "collisions": 0,
+            "repairs": 0,
+            "charges": 0,
+            "horns": 0,
+            "distance": 0
+          }
+        },
+        "modal": "rover"
+      }
+    }
+  ],
+  "errors": [],
+  "method": "Exact standalone via set_content after HTTP was blocked (SMOKE_V08.json). Public keyboard/buttons, ordinary file import, real downloads. No live state/health/objective/clock writes. Localized prepared fixtures are labelled.",
+  "passed": true
+}

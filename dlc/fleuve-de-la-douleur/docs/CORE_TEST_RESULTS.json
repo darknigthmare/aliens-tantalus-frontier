@@ -1,0 +1,410 @@
+{
+  "passed": true,
+  "cases": 101,
+  "results": [
+    {
+      "name": "Identifiants et nombres dérivés",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · pad",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · airlock",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · concourse",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · ops",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · briefing",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · hab",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · jorden",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · mess",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · recreation",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · med",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · isolation",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · science",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · records",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · garage",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · survey",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · stores",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · power",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · pump",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · service",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · road",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · plateau",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · derelict",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · processor6",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · approach",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · lift",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · hive",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · coolant",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · vent_hab",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · vent_med",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · vent_survey",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · refuge",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · hangar",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · shuttle",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · wash",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · relay",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · clinic_store",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · pantry",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · biomed",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · aerial",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · workshop",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · drain",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · nest",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · greenhouse",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · armory",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · derelict_gallery",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · pilot_chamber",
+      "passed": true
+    },
+    {
+      "name": "Géométrie et passages · egg_vault",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-01",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-02",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-03",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-04",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-05",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-06",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-07",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-08",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-09",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-10",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-11",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-12",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-13",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-14",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-15",
+      "passed": true
+    },
+    {
+      "name": "Chaîne d’objectifs · rop-16",
+      "passed": true
+    },
+    {
+      "name": "Enfant / conduits : autorisation et refus adultes",
+      "passed": true
+    },
+    {
+      "name": "Hangar réservé : drapeau scientifique requis",
+      "passed": true
+    },
+    {
+      "name": "Déplacement profondeur réellement borné",
+      "passed": true
+    },
+    {
+      "name": "Vue latérale ne change pas de profondeur",
+      "passed": true
+    },
+    {
+      "name": "Un couvert bloque les corps, pas l’allée avant",
+      "passed": true
+    },
+    {
+      "name": "Visibilité occultée par couvert",
+      "passed": true
+    },
+    {
+      "name": "Newt et Anne ne peuvent pas tirer",
+      "passed": true
+    },
+    {
+      "name": "Recharge consomme seulement la réserve nécessaire",
+      "passed": true
+    },
+    {
+      "name": "Tir même profondeur : collision réelle et impact",
+      "passed": true
+    },
+    {
+      "name": "Tir autre profondeur : pas de dommage",
+      "passed": true
+    },
+    {
+      "name": "Acide après mort : dommage et durée limitée",
+      "passed": true
+    },
+    {
+      "name": "Fusée : quantité, persistance et répulsion",
+      "passed": true
+    },
+    {
+      "name": "Soin limité sans dépassement",
+      "passed": true
+    },
+    {
+      "name": "Action physique interrompue en s’éloignant",
+      "passed": true
+    },
+    {
+      "name": "Objectif validé une fois seulement",
+      "passed": true
+    },
+    {
+      "name": "Collecte non réapparue après sauvegarde",
+      "passed": true
+    },
+    {
+      "name": "Conservation des portes dans les deux sens",
+      "passed": true
+    },
+    {
+      "name": "Poursuite inter-pièces retenue par une porte soudée",
+      "passed": true
+    },
+    {
+      "name": "Pas de poursuite adulte dans un conduit",
+      "passed": true
+    },
+    {
+      "name": "Escorte éloignée refuse le passage",
+      "passed": true
+    },
+    {
+      "name": "État mort : aucun avancement de simulation",
+      "passed": true
+    },
+    {
+      "name": "Sauvegarde indépendante : enveloppe et checkpoint",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · room",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · hp",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · character",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · chapter",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · phase",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · noise",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · archive",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · collected",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · world",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · door",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · stats",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · power",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · escort",
+      "passed": true
+    },
+    {
+      "name": "Rejet import invalide · pursuit",
+      "passed": true
+    },
+    {
+      "name": "Rejet fichier trop grand et autre campagne",
+      "passed": true
+    }
+  ]
+}

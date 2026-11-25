@@ -21,6 +21,6 @@
   ],
   "rewrites": [
     { "source": "/depth-lab-v97", "destination": "/depth-lab-v97.html" },
-    { "source": "/((?!assets/|src/|docs?(?:/|$)|tests?(?:/|$)|scripts(?:/|$)|references?(?:/|$)|exports?(?:/|$)|captures?(?:/|$)|screenshots?(?:/|$)|\\.git(?:/|$)|\\.env[^/]*(?:/|$)|\\.qa[^/]*(?:/|$)|\\.vercel(?:/|$)|depth-lab-v97(?:\\.html)?(?:/|$)|.*\\.css$|manifest\\.webmanifest$|sw\\.js$|build-info\\.json$|LICENSE_NOTICE\\.md$).*)", "destination": "/index.html" }
+    { "source": "/((?!assets/|src/|dlc(?:/|$)|archives(?:/|$)|docs?(?:/|$)|tests?(?:/|$)|scripts(?:/|$)|references?(?:/|$)|exports?(?:/|$)|captures?(?:/|$)|screenshots?(?:/|$)|\\.git(?:/|$)|\\.env[^/]*(?:/|$)|\\.qa[^/]*(?:/|$)|\\.vercel(?:/|$)|depth-lab-v97(?:\\.html)?(?:/|$)|.*\\.css$|manifest\\.webmanifest$|sw\\.js$|build-info\\.json$|LICENSE_NOTICE\\.md$).*)", "destination": "/index.html" }
   ]
 }

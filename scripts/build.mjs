@@ -1,3 +1,4 @@
+import { copyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
 import { verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -61,6 +62,7 @@ const assertBuildExclusion = async (...segments) => {
 for (const excludedPath of EXCLUDED_BUILD_ASSET_PATHS) {
   await assertBuildExclusion(...excludedPath.split('/'));
 }
+await copyRiverOfPainRuntime(root, output);
 const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas') || !index.includes('bioforge-canvas-v80')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({

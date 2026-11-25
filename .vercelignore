@@ -179,3 +179,7 @@ tests/browser-drive-v123.mjs
 # Source-only franchise arsenal workbook, references and QA metadata
 docs/arsenal
 docs/arsenal/**
+
+# Original DLC ZIP history is retained in Git, not sent to the web builder.
+archives/river-of-pain
+archives/river-of-pain/**

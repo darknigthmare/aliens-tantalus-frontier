@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07100f">
+  <title>Fleuve de la Douleur — Aliens: Tantalus Frontier</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/dlc/fleuve-de-la-douleur/integration.css">
+  <script type="module" src="/dlc/fleuve-de-la-douleur/integration.js"></script>
+</head>
+<body data-river-shell>
+  <header class="dlc-bar">
+    <a id="river-return-tantalus" class="dlc-control" href="/" aria-label="Retour au menu principal de Tantalus">
+      <span aria-hidden="true">←</span> <span class="return-prefix">REVENIR À </span>TANTALUS
+    </a>
+    <h1><span class="dlc-series">ALIEN</span> Fleuve de la Douleur</h1>
+    <button id="river-focus-game" class="dlc-control" type="button" aria-controls="river-of-pain-game">Aller au jeu</button>
+  </header>
+  <main>
+    <p id="river-controls" class="visually-hidden">F6 ramène le clavier au bouton de retour. Échap ouvre la pause du jeu. Cette campagne conserve sa propre sauvegarde.</p>
+    <p id="river-loading" class="loading-notice" role="status">Chargement de la colonie… <a href="/dlc/fleuve-de-la-douleur/JOUER.html">Ouvrir le jeu directement</a></p>
+    <iframe id="river-of-pain-game" src="/dlc/fleuve-de-la-douleur/JOUER.html" title="Alien : Fleuve de la Douleur — jeu" aria-describedby="river-controls" allow="fullscreen" allowfullscreen></iframe>
+  </main>
+  <noscript><p class="script-notice">Ce jeu nécessite JavaScript. <a href="/">Retour au Tantalus</a></p></noscript>
+</body>
+</html>

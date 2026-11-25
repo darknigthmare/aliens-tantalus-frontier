@@ -1,0 +1,1184 @@
+{
+  "schema": 1,
+  "id": "river-of-pain",
+  "version": "0.9.0-candidate.1",
+  "recoveredOn": "2026-11-25",
+  "sourceFiles": [
+    {
+      "path": "dlc/fleuve-de-la-douleur/CHECKSUMS.sha256",
+      "bytes": 20907,
+      "sha256": "aae1a0a55c924ac6c24f6d68d5b9d9ac8440f4fdf1c742a6c2448f73ac43d4c6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/DELIVERY_MANIFEST.json",
+      "bytes": 35901,
+      "sha256": "d123625f0d2ba0c0e5f6dd7d627df295d242eafe3f099e4c96b83c5a9d28de41"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/JOUER.html",
+      "bytes": 862381,
+      "sha256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/LANCER_WINDOWS.bat",
+      "bytes": 50,
+      "sha256": "509c2a914ce23037ad0d60d1fea8f2a16e85ed6c61cfcd821ab41d0e1dc8231c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md",
+      "bytes": 857,
+      "sha256": "c93476e2a72eaa1d33899478196a9a4a16f5e0ceca8f90e24c581591c171c019"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/RAPPORT_ILLUSTRE.html",
+      "bytes": 9964227,
+      "sha256": "111a29d05de9bf58ecdb02578fbfdb4aa4e8119013db56bbbc7eeb65da3379e6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/README.md",
+      "bytes": 7321,
+      "sha256": "67aee4876f8e80bb546f1214993f3cfca0d859b50778d634023f81dcdf5c4404"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/01-menu.png",
+      "bytes": 874422,
+      "sha256": "765934d16d49b7cb18eba8d00f101f3c21fec5a4f4e5c821880c6a363e82241e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/02-seuil-armurerie.png",
+      "bytes": 674674,
+      "sha256": "ed72526a3e7a270347f37f4f1e521086ac0ed15261ea18047c663f668c87db6f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/03-armement.png",
+      "bytes": 234599,
+      "sha256": "097e359f148d5f3db5dc32c4208960c2bf016fb52d650e7c08c232bb9983cfba"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/04-m240.png",
+      "bytes": 696187,
+      "sha256": "29dd308259771f308f2c44961109e7803c7ae918982bd10af07e2b18dbe8fcf1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/05-jorden.png",
+      "bytes": 668311,
+      "sha256": "d986ed0174bb37581c8a872fabc817f29517724acbdf35f9230bc3a5cc3dfa63"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/06-medical.png",
+      "bytes": 754854,
+      "sha256": "3f8979eb236b3c7eb6639501030813f0e80ef88ac00f5fb85e5b2d5dd04308f5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/07-unite-medicale.png",
+      "bytes": 279913,
+      "sha256": "7299c8da893287a99d04b1fb982a0a9e770b0166546037b23a2211dfcb1d1149"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/08-serre.png",
+      "bytes": 722965,
+      "sha256": "e7ac26de0250ddc1fa5ecbf43ea7f1b74f6821c0557bae8dd8cfdc2c32ede30e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/09-pilote.png",
+      "bytes": 788096,
+      "sha256": "380ef08ecc27cdc6ad97069117ddc5e367e6545511f5f2f7a3ffbab4954f9f86"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/10-corde.png",
+      "bytes": 192493,
+      "sha256": "f80fd735c1aff8690ded40cc12f46d18b3817f61413db463390c422cf19d52a5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/11-cale.png",
+      "bytes": 798852,
+      "sha256": "1e17ae6ba482639b3c8139c4ee4f5d38cd36533df7e3752762dbc959de53a32d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/12-piste.png",
+      "bytes": 669604,
+      "sha256": "1c37597c61bd49839dcf8a872b687196d1955d3edc52d860197424d84e968d0b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/13-escalier.png",
+      "bytes": 728937,
+      "sha256": "8d55df5b97522c4c6cd8d9e5cde52ae11d4130939ace03a10faf044fa3fe41de"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/14-simpson.png",
+      "bytes": 272619,
+      "sha256": "11d66258c1f7692c97a9b0653bc6da565aaa9d262eda0248074f2902b7a7a161"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/15-newt.png",
+      "bytes": 634507,
+      "sha256": "41bcc647400ab9d867159f82a5375b68606234ae5e19d40da645a0a8ad0b6e24"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/16-personnages.png",
+      "bytes": 378548,
+      "sha256": "524a6a2a324239d50b30bcb6d50fddd443ee6c7efda40e2e21c42b1b5c23818d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/17-manques.png",
+      "bytes": 369926,
+      "sha256": "8f26f29a007bd25772f7ce6adcb9468786932b31d1e63cff7e4f75ea28428afe"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/18-plan.png",
+      "bytes": 405801,
+      "sha256": "410e6b4642b34182af782065a90ede622be96d9d748102b1e70e3ec588f00e53"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/19-portrait.png",
+      "bytes": 48596,
+      "sha256": "416113ec900f4eaf1e0290f183eabfe0c33b7835825b1598ab7b8e0890e9170d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/20-paysage-court.png",
+      "bytes": 34725,
+      "sha256": "434901ab133698b45280cddb790b9094799a2ef5c14fb7791676e91e6091edf9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/export-armement-v09.json",
+      "bytes": 7663,
+      "sha256": "647a38fca9c8ab136fc56e695ac12769a0168501432c635d70fa5bca324b9e46"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/captures-v09/export-grenade-v09.json",
+      "bytes": 7995,
+      "sha256": "5e3472a0b12a7c15fb2405a44adddedfe5ad1753b0c5474893f2aff1972a675c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/AUDIT_SEUILS_V09.json",
+      "bytes": 40910,
+      "sha256": "35aac907ff337bc4ccc8b2493980e752d12fcbf60f6a498e4bbab828ef30c171"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/BASE_V08.json",
+      "bytes": 144,
+      "sha256": "8924b5fd6de48f5e1b8f896c908bf421b7ccddacf09acfe70f17cf052fb30440"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/BROWSER_V09.json",
+      "bytes": 7303,
+      "sha256": "19b72332021edf61f2e22d9950ff961e511e8bef0ed560cdc1c73256251a37c5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/CHANGELOG_0_9.md",
+      "bytes": 1472,
+      "sha256": "9a96bbf27fb1c768e94fc522a527e431cb5ae8ee198bc3c743b7d785fd3a28e9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/CODEX_LEVEL_DESIGN.md",
+      "bytes": 195041,
+      "sha256": "7ce21ee06d35dfe13995e1cef10fe758f2fd2ed576a79ff49ad0938e20c1f885"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/COLONY_TEST_RESULTS.json",
+      "bytes": 8154,
+      "sha256": "ead20e845397ae7e57552bcddf794aeee7b85913c4f0f5eb1c3b144f3d2f184f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/CONTENT_MANIFEST.json",
+      "bytes": 513036,
+      "sha256": "d7c6a8620f6487b1ea5ed34ac67fd8b91c98065d63267b026fe9c0b35dadf383"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/CORE_TEST_RESULTS.json",
+      "bytes": 8834,
+      "sha256": "550a922fe20a6595e5728f7f8e6851fe9d2a8e2c4db9908ee2dfde5a5fbfb17d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/DEFENSE_TEST_RESULTS.json",
+      "bytes": 14829,
+      "sha256": "6e8e474120573c4917889de6d1b507e4ece5f6139b9ac1fb5f6529442d8f54b0"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/DELIVERY_VALIDATION_V09.json",
+      "bytes": 21732,
+      "sha256": "a6d74f227953f67f373a0ef2bf3cd407039e6d842888a2ea4f4fe0d75a71dfe9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/DOCUMENTATION_BUILD.json",
+      "bytes": 324,
+      "sha256": "7453b2a4f6b24126e92343c3a91a7ad5fb2d23fdca8ac7fd300c3985d775ec75"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/DUCT_TEST_RESULTS.json",
+      "bytes": 14005,
+      "sha256": "3653dc4a89fcf90ef8410abecff70e152240ef8d5c019549432bace4da501510"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/EXPLORATION_TEST_RESULTS.json",
+      "bytes": 17881,
+      "sha256": "61629aad7bb0cc7bec484b5320511f4f13353524d8ff955131ad9f0344889546"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/FIDELITY_TEST_RESULTS.json",
+      "bytes": 31925,
+      "sha256": "a5d26e18c0de81e2e1e2534301cb909daf1095f2aae67291dec97a9e3e10ea07"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/FULL_CAMPAIGN_FINAL_STATE.json",
+      "bytes": 35070,
+      "sha256": "d80ff8a08b2432235fa3a93ec8b0182dfc43370d9ec93a299d62745302b91130"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/HTTP_PREVIEW_V09.json",
+      "bytes": 1184,
+      "sha256": "7e60839bef5a479cbd5cf2e0168922b08863d4528e117c00ef71b887600874aa"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/INSTALLER_TEST_RESULTS.json",
+      "bytes": 2903,
+      "sha256": "8fb819e16971bd3b117e8ea72fcd0ac582aac40d1ff9fa572bde2223a7718d67"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/LIFE_TEST_RESULTS.json",
+      "bytes": 17201,
+      "sha256": "e666c33476dec878c9ea5ecfbac42a08f6875f85a4d2447f340f5e1bd3186e56"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/MOBILITY_TEST_RESULTS.json",
+      "bytes": 9049,
+      "sha256": "b280dd33a5e9ec0334695dcc5bfb02f616ec3a0cdebcccdd78e92ba774a2b2da"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/PASSAGES_TEST_RESULTS.json",
+      "bytes": 14175,
+      "sha256": "0501861ad401f01635d2c296d9c5a299298d239c6c495116189c176b5d56f13e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/PERSISTENCE_TEST_RESULTS.json",
+      "bytes": 2273,
+      "sha256": "b1aea6d7103485d9425f014922cabd74f6c17ee0c1b2d5f390c0f1abebdf9b14"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/QA_REPORT.md",
+      "bytes": 4456,
+      "sha256": "aa27b9f01abaa67fea895810dbd4cc7eee8147986f4c4569cfe7342b9595a74a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/QUALIFICATION_MODEL.json",
+      "bytes": 17546,
+      "sha256": "d3ed1e628a8aa4420e98b25c318c1bf8226468190ae5d22c57e89024544ae5cd"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/REAL_UPGRADE_TEST_RESULTS.json",
+      "bytes": 702,
+      "sha256": "22739fc180091fe73c3dcae7510238910af2719cec5fa8fb6c52112d5bcba3ea"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/REAL_V08_PROVENANCE.json",
+      "bytes": 221,
+      "sha256": "e20160eb0b7c3bfd8cb1bafb4617ec4eb7598995f8394adf8c673c8fa2196d83"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/REGISTRE_FIDELITE.md",
+      "bytes": 16376,
+      "sha256": "736383b32e097ffb5edc35882563ff5ae94b1ed46d4ecb9a0ede439008f39265"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/REPORT_VISUAL_V09.json",
+      "bytes": 1724,
+      "sha256": "4d745a02d3287d06f5befd28b2dfa85a0acc0b45c0ce8e35cdd81b45749b5042"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/SOURCES_ET_CONTINUITE.md",
+      "bytes": 2519,
+      "sha256": "b0a9bce6d5b25a5d9cc8d6b76e84b7ad2d1ddf0da9dc4cc14b0c3764e9c253c9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/SOURCE_V08.json",
+      "bytes": 831,
+      "sha256": "9c9e6a08a816726977da10f198ace6e51c4d0be6597b69842f15a7a6257e88ca"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_DEFENSE_RESULTS.json",
+      "bytes": 42680,
+      "sha256": "07d39c2df83abe019f16a0393adf6cdb83e374fef084733443d5d7316a3a76d6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_DUCT_RESULTS.json",
+      "bytes": 53284,
+      "sha256": "3c23943d6160ceebab4cafe0ecafc5d995d40c0c8aa359a98bc573e7b453ae2e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_EXPLORATION_RESULTS.json",
+      "bytes": 28094,
+      "sha256": "9988304caea6bdb6edd626d1f03d1f7652a90d3f7a54a68a1516e352013dc712"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_FIDELITY_RESULTS.json",
+      "bytes": 60387,
+      "sha256": "fe87afe72435d409fa2ca288c06e25252bc795875aa46d5a739616e0de309cc8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_LIFE_RESULTS.json",
+      "bytes": 33137,
+      "sha256": "3ec14e5c1f87c1f6c4ae8fbb8c8368b837e977701cf07ebc13d9a701c1c52c8e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_MOBILITY_RESULTS.json",
+      "bytes": 54071,
+      "sha256": "046af63bdfd9b112422dfe12fa3fbb5ad3ae241ff10e9027774a6f5d57060ec5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/TRAVERSAL_RESULTS.json",
+      "bytes": 20612,
+      "sha256": "bf397b5b3236a4417654a5a4e79d338c8c774015fd441adb7c05eacf8c514bea"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/report-evidence-v09/01-ouverture.png",
+      "bytes": 108502,
+      "sha256": "0ed5c4f7b95d3b342c286dbc846d35422054838503684b633cda0d0c4764726d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/report-evidence-v09/02-serre.png",
+      "bytes": 487365,
+      "sha256": "82c15625f425f95b1ad17faf65581eccb1510afd3e5eeecf75add334b817c1ff"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/docs/report-evidence-v09/03-portrait.png",
+      "bytes": 51429,
+      "sha256": "df132e759f5cd5b57486d615108641482175e1b9b9502ffe61183fd5f1dddc07"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v0.7.0/CODEX_LEVEL_DESIGN.md",
+      "bytes": 243289,
+      "sha256": "0c4a5c7e4602ea556b4c12a9d056f48f661adb9cfaf61b0156d5723125ff6680"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v0.7.0/QA_REPORT.md",
+      "bytes": 6889,
+      "sha256": "ba2eb834aaea5e2a0848cd7eae4a7b8f30551364ae6e37b571c92c45a564ebe8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v0.7.0/SOURCES_ET_CONTINUITE.md",
+      "bytes": 6600,
+      "sha256": "a231fc2cbb2bf2197e0001b5977302046e2ea45a674900ee0d478176a0e626ca"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-documents/CODEX_LEVEL_DESIGN.md",
+      "bytes": 249289,
+      "sha256": "7b77f106dcd44726aa877db937e8a512d5ea1e32a776d9ab0f38ef955b510e1b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-documents/QA_REPORT.md",
+      "bytes": 8608,
+      "sha256": "dcb317d13b42ec8dff6b4ab9d9c6e86c90c3d4b17bf18140582a49df8e00fc37"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-documents/README.md",
+      "bytes": 5423,
+      "sha256": "597795155cd911ea5b6c021aa80fa51c61e6ea583a50428d2cb1e3cf7a9a940d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-documents/SOURCES_ET_CONTINUITE.md",
+      "bytes": 7018,
+      "sha256": "b729943826597441aaa3ecadb01d5e1f9734d27c74808f0d2035ac18fa05e2c4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/BROWSER_V08A.json",
+      "bytes": 6966,
+      "sha256": "90f099e6c9b8a38625112ece867a12ce8281b1996ba347afae782df9b0f2e9fa"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/BROWSER_V08B.json",
+      "bytes": 5944,
+      "sha256": "078648002649da8efcf95dc91c196aa1d72c87319998a4369dfb024aa0a77525"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/BROWSER_V08C.json",
+      "bytes": 8210,
+      "sha256": "ac382abacdf245c1f1efa246ce72ab5ab984f65cc5d80a4fc214af91e5b264d0"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/CHANGELOG_0_8.md",
+      "bytes": 1302,
+      "sha256": "74f4306bbec8638de1c68df07990eb6fbe7b09817cf21f83bc0593c854022e14"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/DELIVERY_VALIDATION.json",
+      "bytes": 13083,
+      "sha256": "6d191b629be54f5fea6436aa2bebf07714867d0f40a9fd024c57107cf5baa8bc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/DOCTRINE_V08.md",
+      "bytes": 13957,
+      "sha256": "cd7c27eb8a23d0ebe4b347eb9acc90f7d35ac322850ae2668591d9700b576d9b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/REPORT_VISUAL_RESULTS.json",
+      "bytes": 2871,
+      "sha256": "7c99267c4ac416c0ac60914e14270971194310865186f3e578dd87bdafe2e1ed"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-reports/SMOKE_V08.json",
+      "bytes": 1131,
+      "sha256": "de5f57c69cb7d556aa630d93be4bccaf7f08b7004d42ac64494d2090ade6e427"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-test-core.cjs",
+      "bytes": 9952,
+      "sha256": "273cf7fef0da373cd486a6087d4f32755e9bae6b7248ca58051713c0de2ef5c1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-test-exploration.cjs",
+      "bytes": 12564,
+      "sha256": "7ee1cc6aa81ffa162674887f22bf2b0e2e50b0b973d1e5edd7f7263a6b314348"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-test-passages.cjs",
+      "bytes": 12773,
+      "sha256": "b95840b8afbd7ebc37e3b7b27fa0821f4a1d13aeca0c717fdd60e0eed67a0dde"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-tools/build-docs.py",
+      "bytes": 39950,
+      "sha256": "51f903b50c0f9cba978d871fa109b7a2a1c3e6db4b3bc85385b2435baee211e8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-tools/package-release.py",
+      "bytes": 4038,
+      "sha256": "64ef653f96745f57683a2acd02073476467cb8bc447472db17b9650ec99a7261"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-tools/qualify-model.py",
+      "bytes": 1947,
+      "sha256": "dec79670fefaec0783885dab6a11a1723ce1bc98e72365d6f13ff8e7dafab9ee"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/history/v08-tools/verify-delivery.py",
+      "bytes": 7704,
+      "sha256": "6dbbcf23541f051f0d78a4b04271058d738fcccb9d93db6ad20bda3d042d51f9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/package.json",
+      "bytes": 1584,
+      "sha256": "ae64e5662fd67a1be6c3a6e8e03dfa2fae68698430931aa51307a7a6bd5fc353"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/architecture.js",
+      "bytes": 18233,
+      "sha256": "a34089d2053893c9ca67cab4ad7bad5db878097c348388f090109dafb0e0d72d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/armory.js",
+      "bytes": 7713,
+      "sha256": "509bf5b4370c989f7a838ae0063240df258cb5f00bb4e1ff39fe4ea9340feb74"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/colony.js",
+      "bytes": 4983,
+      "sha256": "75031354405465bdde36b1723d37aef82e97e7e775f651187b4970eed0c6598a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/core.js",
+      "bytes": 48804,
+      "sha256": "f73edafd516fb3ea2b82aff9138469f0259ddab041f8258c48a9e24dbd8f70b8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/data.js",
+      "bytes": 513289,
+      "sha256": "e03175aa1db2a83aa10fbb4e3574f84a13815c3b6a9d2498aa6e5566e9b8fde8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/defense-ui.js",
+      "bytes": 3408,
+      "sha256": "3e13a8436f46a8e2b019051bab94aecc4d22461b6625e418d820bedaa418bba4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/defense-visuals.js",
+      "bytes": 5847,
+      "sha256": "cc3644399b9157d98aa0c67dc592428e64d71e18a3ccc76c637d403f7dfe156f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/defense.js",
+      "bytes": 11754,
+      "sha256": "7c5de88daeb50265086b276a4594a8be5d6c5adf88f801e8402afa787a92e832"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/ducts-ui.js",
+      "bytes": 2801,
+      "sha256": "63bcc9f53fbd292034c5611bfedd75549da52b2ca52b8b28e71351c77cfc9a55"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/ducts-visuals.js",
+      "bytes": 3396,
+      "sha256": "af40fd72608ecdec7f37595fa0695aff40bb4d276d4e6ae6a343d146807b814a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/ducts.js",
+      "bytes": 13114,
+      "sha256": "f6439f32c270bbd157964a86224e8b155a65e4d7e441292028acb02b33b23ed6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/exploration.js",
+      "bytes": 3605,
+      "sha256": "c0da4b60e00e5b051ba1f6f16ca76f189a4ee7c53f793d85da949989ac727a5d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/fidelity-ui.js",
+      "bytes": 6793,
+      "sha256": "63e40414c9a8090adcd57a01e62134e388d5fd4ee874c6bffc29b89d14b2199f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/fidelity-visuals.js",
+      "bytes": 22540,
+      "sha256": "b13e0efc8bcdae65e3618fab8f20cd5f38fca1e882824ded5f537d7e0b34afef"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/field-visuals.js",
+      "bytes": 4511,
+      "sha256": "655cd7eb6629aa8aed7b0aa18322a7e43bdb6671c8b1669a25ffc12e9e4b61b6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/index.html",
+      "bytes": 6816,
+      "sha256": "a050d7e43aca5a66620346b270f58be49bc508b9c0664960b0a083d898a48334"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/launcher.js",
+      "bytes": 1537,
+      "sha256": "920945f02f8ec5a572788a069d2ce4a3232994adfc1645973ead212059b7d2b2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/life-ui.js",
+      "bytes": 9045,
+      "sha256": "d3196e7abe19d5863a6d372ff130723a85a89a6a03cc6e463c61e3d19277f93d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/life-visuals.js",
+      "bytes": 5570,
+      "sha256": "8c976bbe7c00ddf386c4223c678ffa044591835af87b9e12b012ee5f8f946b20"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/life.js",
+      "bytes": 15311,
+      "sha256": "d9bf7442a61e60458cb2f332df34c134d4f8c5088858c57fe1dc9ef8ca0172c5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/mobility-ui.js",
+      "bytes": 4208,
+      "sha256": "b18f974ef1f6c5696b1e4ae4a1c9e08424c2be1735b435003f9b9698b4a3fe06"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/mobility-visuals.js",
+      "bytes": 5297,
+      "sha256": "801e174e5a537742eb0ba07133575f3f4fa89afb55fdea0e73124d5da6335510"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/mobility.js",
+      "bytes": 17587,
+      "sha256": "24f4013c366b0ec03890be06deb26f2bcce9b96e3c099d3542ad0b59753c9e67"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/passage-visuals.js",
+      "bytes": 6963,
+      "sha256": "6236d65250667269acce26cf876578baa2d31eb9937efc8b0a9ebc6f0a4c02be"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/passages.js",
+      "bytes": 4240,
+      "sha256": "c20b476af155d42b6320e8639af1acb4e9feeb04a972ad092e409cf084ef0e0c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/persistence.js",
+      "bytes": 3284,
+      "sha256": "5d0bff78d68cb15ec558c7c9b1a96a41fcf8e5dd69351fdd5e99bb6cc453d470"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/render.js",
+      "bytes": 29579,
+      "sha256": "3c1aa81f368d4aacbaae427ec447750dff0ae112f59b0b0cee460758d577793a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/style.css",
+      "bytes": 34830,
+      "sha256": "40e2aa7fe46d5348754e0330c08152adbee9ebaaf56c45c2c5ecc1aed7a7920a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/src/river-of-pain/ui.js",
+      "bytes": 49334,
+      "sha256": "84fb382c20dd87792964c2b7c9aa786a10fb197e512773e48190e980e81523a4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v02.py",
+      "bytes": 10214,
+      "sha256": "d6a682e08f5cf9b14db494a519c9384312768c8472a36c03eac4f2f881f49c61"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v03.py",
+      "bytes": 15056,
+      "sha256": "a9c110dba90777e3007110bb80e304dcac2ef332587373012583ec2cdb8b8ea4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v04.py",
+      "bytes": 13313,
+      "sha256": "97a4860c6703eb5509dda364ab57b4f4e8bba7b3dcc580eda99fc041dd75b5b4"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v05.py",
+      "bytes": 16466,
+      "sha256": "819a7ce1f7d65afafcd08c81590042a6ebc0ba0396f6c0f67adc85ec5a0341cb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v06-a.py",
+      "bytes": 9137,
+      "sha256": "c61ad35aa1727e52b59826491491b95681e25f240eb93dc50e23956945a506a7"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v06-b.py",
+      "bytes": 8898,
+      "sha256": "5edefac68a1dab4e35138dae36539fa8062307ba1b2d8ed826fab03c1c6f6aa1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v06.py",
+      "bytes": 1039,
+      "sha256": "f861c9414f4f36ec5a9c81e1b8b4014cb64989c0f9eb4d9151ca8fef28f938bf"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v07.py",
+      "bytes": 16222,
+      "sha256": "e5d1834c736d69edf1f932bd797a0cb9fb5e3718c3131ed2af28aab53aff94f5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v08.py",
+      "bytes": 14951,
+      "sha256": "84ca9c25703134b49562dd7f2b621dbdb3e972ab39e7dc4956d36ad8118c2793"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser-v09.py",
+      "bytes": 11482,
+      "sha256": "0edf94d28f8af38c6c9e1348376a346998477bcd1788614c69c65a43dc6fda80"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/browser.py",
+      "bytes": 10352,
+      "sha256": "07c482f1a6269545a0b85f822459fa70386b2f38a7811ebbbda9d5be75e655ca"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/colony.cjs",
+      "bytes": 14794,
+      "sha256": "4304b568413bfc8163456d3e42d7384177b1a32d7a62228950f75204f7a488d1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/core.cjs",
+      "bytes": 9952,
+      "sha256": "2e0098386db7b11b9fdd49165de1f45a1c3372574e1b5799caa43d235fb9a34f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/defense.cjs",
+      "bytes": 13483,
+      "sha256": "aee0133aca56944be648b1b68084495ab948439177995402910c44cc3c56e5cd"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/ducts.cjs",
+      "bytes": 14929,
+      "sha256": "a98528aae09be71cb95b4e2df7dc1c15e9f04d7a97926dd80dcf87f55f808841"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/exploration.cjs",
+      "bytes": 12564,
+      "sha256": "08746bdbb9ad9f95a9f53a9246dcf3a8e304c855e9c0309ea902546b4fd3d971"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fidelity.cjs",
+      "bytes": 11546,
+      "sha256": "c932ab296a57f8173facfd01cdeed77dcf79cbf37435babe2bc3372cde6074db"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v01-save.json",
+      "bytes": 1551,
+      "sha256": "3df1eebff039e3d4d5fa8498c16599030600e956e627341812fe369b599cb335"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v02-save.json",
+      "bytes": 2101,
+      "sha256": "f476438e6030a2ea57331fb08978e7f25d38aa898d2a00dccf57bec7f0fd5cea"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v03-save.json",
+      "bytes": 2283,
+      "sha256": "bbc8925a7d8b48956e6a68b7b570239dd296ca7744164b702b142c55f993a97d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v04-save.json",
+      "bytes": 3413,
+      "sha256": "0257640899f6ce3a887f7c57ee6ffda27f0ce4adf1c397932834e02f140478c6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v05-save.json",
+      "bytes": 3695,
+      "sha256": "dfda4d05133b9e9bd19b5ae9e05cfc0a36fcf0d1616799b78dbc68f499045845"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v06-save.json",
+      "bytes": 5253,
+      "sha256": "561e03a09729458e43fd12736badffda8675db34e35cf760d9506c3da0574e27"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v07-save.json",
+      "bytes": 11888,
+      "sha256": "21842cd370ef7a8127b250b66aafc50446e91fca0ba5a32800678c312ec35e74"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/real-v08-save.json",
+      "bytes": 7329,
+      "sha256": "d120b429473e51ed80423fbc807877e105e9bed6a0d1a5aaf6483b0eed41567a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/README.txt",
+      "bytes": 329,
+      "sha256": "65feced0e65fccc346f34ffcbbd001e27f03543542d078ed06e1e7e1e1aa4a8a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/damaged-grille.json",
+      "bytes": 11368,
+      "sha256": "cb78444c7261eff465ae82f76b3b6215abc04e755bc9dac84f2d4f0b8920b38b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/entry-observation.json",
+      "bytes": 11596,
+      "sha256": "34ff14c19827fa87e099eda6a1c04c03c6e724a690800d748a8a7270e2414b1f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/incoming-near.json",
+      "bytes": 11885,
+      "sha256": "39e8b1ff75cebbb7e555f369d3fe59beb6cda5ac1f24c3982ab0581266c0bff7"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/newt-listening.json",
+      "bytes": 11357,
+      "sha256": "722bd4ba990c5a901984d452b0f27b673602cf0ff58ca8d20b8bfc8a3ff5c953"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/open-grille.json",
+      "bytes": 11367,
+      "sha256": "eba00c2d7f32e4fbc8b0ccb14300ab0613f6a89c448198c0d1ccd5f70a2fcb08"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/pressure-closed.json",
+      "bytes": 11870,
+      "sha256": "81c211e9833c8e2123d968c1663e22e1137dcbdf7715a7bac0fcec2144a22dcc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/regression-briefing.json",
+      "bytes": 11382,
+      "sha256": "b36853e0063932e486028b0b334981a30a284da1968eca22423c24604019b93a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v07/warning-tracker.json",
+      "bytes": 11870,
+      "sha256": "0e09a33188a36df314a12dba90fc8bc9cc9590a4e71b9ba6439cbea430007713"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/classic.json",
+      "bytes": 7117,
+      "sha256": "9b6a8824d31ad5e118277bc12ed0f4b5d5da8962c337d43c054b0e6039da69b3"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/damaged.json",
+      "bytes": 7109,
+      "sha256": "769c858806a75ed310e5283a2a53e37ac58ff2be9f8dd7fbbdbfef12ff4710cb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/driving.json",
+      "bytes": 7125,
+      "sha256": "d2fe52d71c06482bb939d8db252034674d00700bedf92b71e40e29edf3b638b2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/newt.json",
+      "bytes": 7117,
+      "sha256": "b2f360808785a6b80dc1a9d1689e366c3daa428ac5f9af9a6c52d666080fef1b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/parked.json",
+      "bytes": 7117,
+      "sha256": "5c087cccb6f83301e22e1690f3411387b724ce8dee702063bb771c5e389b1b2b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/station.json",
+      "bytes": 7113,
+      "sha256": "896c492c8295ee04ce3b46eb8538a92829881cc9385fef78d75b46685defec4a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v08/threat.json",
+      "bytes": 7673,
+      "sha256": "2e9316c7f7cced2159f02e0c88157ebae5429c326d243b44ad6758adfe2c97cf"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/anne-arsenal.json",
+      "bytes": 7543,
+      "sha256": "fea8200dabeb173b453b2e3f2744ca3acfc5f1c6c94f6476d0964495f0574646"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/armory-door.json",
+      "bytes": 7563,
+      "sha256": "3a1f704f6ffe6473c1adf9f6b44eff1ef0994895a5156c10f5c7a9e6c8345337"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/armory.json",
+      "bytes": 7555,
+      "sha256": "840a64fe1d070300bb23a0d19edb8f29365d06772d5bed9626a11333cb053c1b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/colony.json",
+      "bytes": 7536,
+      "sha256": "9de278dad0c01ec1a15ba1013a1ca5d5c63c2de79ab2e83a46bb8e40fe25c1c0"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/family.json",
+      "bytes": 7541,
+      "sha256": "aae208dcc7779050cdf5599fe04c19efe3d68b2090f3f3c620afd28a9e36b4bc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/flame.json",
+      "bytes": 7736,
+      "sha256": "45dd6bdf0d7a8f5fd70984b5be96879619ec81c8143a280ce55ede24d4ead29c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/greenhouse-door.json",
+      "bytes": 7545,
+      "sha256": "bc642729a41394c9f3588824efb96f12ec8351cee05ff33ae202b754c3fc02a2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/greenhouse.json",
+      "bytes": 7575,
+      "sha256": "62b1cc769d8ded2f8dd709c5b924070e448b5aaaf89b324ca89b6fed27c2207a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/grenade.json",
+      "bytes": 7744,
+      "sha256": "556f11fc20fc1207ae89f4613ad6ff77d78bb04278d3a23cbc001d4892adeb35"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/medical-unit.json",
+      "bytes": 7540,
+      "sha256": "c7ccb68fb45654fe9c078ebec613704cb9e3a9fe1a574cdb55ea576abdee033a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/medical.json",
+      "bytes": 7540,
+      "sha256": "8f398cab09ebbbba6813c285533f62b3608ab04d923fe8564623074dccc2c98b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/newt.json",
+      "bytes": 7549,
+      "sha256": "cb6a71521aa909996f28ab712ba5b8413adc20c59114eb11acb008ea927e3601"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/pilot.json",
+      "bytes": 7578,
+      "sha256": "501014bb9c1cdf582db578f953f0fa41c2f90056a8dad359648a261c7609c7b0"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/road.json",
+      "bytes": 7531,
+      "sha256": "c4812180f9240553a5453b9df96fe60484d1d1242e6464778c27885c9b8f3200"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/rope.json",
+      "bytes": 7578,
+      "sha256": "6de08974a7dd5bd6f76606f8226df0d646f780f55478ed2c0bf74986b310d0aa"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/stairs.json",
+      "bytes": 7558,
+      "sha256": "0c7e3bc65ddb4d7ca607c09611eac2f7ac4caae7b196a7f54efd48a8ebcf2124"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures/v09/vault.json",
+      "bytes": 7558,
+      "sha256": "14ef5d4d360c2e8ba3e0f3af575b203206c2e5b89dfad3b68b10aa5ab64963a8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures-v07.cjs",
+      "bytes": 2406,
+      "sha256": "79e65a40fffe57eb8c362bd43c803139906f1521b2c768eb465e2f292691e8dd"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures-v08.cjs",
+      "bytes": 1562,
+      "sha256": "ec8bd2989c568a517b8ec011b377b9bfc51537ff5a7f5cf04a9d6e1848a86c69"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/fixtures-v09.cjs",
+      "bytes": 2031,
+      "sha256": "6198d350d6f56ef680d8452437c40a014a13d4c4201f6f28b922f9014d9982fd"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/installer.mjs",
+      "bytes": 13305,
+      "sha256": "0af1808bd38a094bf4630d9ef30828b6120ead39ec8990a5f2efc59ee36693cb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/life.cjs",
+      "bytes": 16366,
+      "sha256": "04c79a31311c2d81e1d3f75ed37558746096464ccc68546cef6d6af6f454d5a8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/mobility.cjs",
+      "bytes": 13371,
+      "sha256": "3919a05075dc2c5d968016749c5d1004427b7f0eecd39246e22f0f7fcb194bc1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/passages.cjs",
+      "bytes": 12771,
+      "sha256": "3468a20e1729e5c95d0a493669c9cdd96ba2c855e0a3ab83882ffb31a1b7c77a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/persistence.cjs",
+      "bytes": 6887,
+      "sha256": "a6fadcb935d1abf84c5ac9d462fbd9eb6b742ec9d26a52abed3296973c3f6bc6"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/preview-v09.py",
+      "bytes": 2345,
+      "sha256": "07f4dd7d56f739887083e67bba53026d15e2a79cb62551886aaf915dd4a6d040"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v04.py",
+      "bytes": 2705,
+      "sha256": "15c0fcde8c11c17c7fb6c18214e1ea77d0157901dda30de0d14480a924fdbb44"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v05.py",
+      "bytes": 2714,
+      "sha256": "f30a6563fd819c6802fc5bace1baa4ec17a5fd2da8cf00033b1ec8ac6f7f231c"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v06.py",
+      "bytes": 2888,
+      "sha256": "f475309dcdf05e60f75f51ae1070fc45f9c4198a80b56669bcd00759169fd45f"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v07.py",
+      "bytes": 3178,
+      "sha256": "f827cd75dd9433550ed60326be78dcfdc1a956256ae2f2a4f92a980e82fb59e7"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v08.py",
+      "bytes": 3644,
+      "sha256": "a7412b6ceb83b038852b99cd3c74b3a0072cbedce4f64e1bfff7e1e1d7e9cdb1"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/report-v09.py",
+      "bytes": 2256,
+      "sha256": "e049b7e02252bee79013634405ee44486b2da6c8063e97893104fc78005b0508"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/smoke-v08.py",
+      "bytes": 1941,
+      "sha256": "37ccbf164a912e0902691ee4c840e88d656e7a67f535c070ded3be572e4362fb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-defense.cjs",
+      "bytes": 1444,
+      "sha256": "8f4e294594048fec71517c3e2d22f026217f3d91e7f686aa463adaab53fbaa47"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-ducts.cjs",
+      "bytes": 1379,
+      "sha256": "240c059a20d115f3ac294b4ac6aecdc364e2d0d006966269c3cedefb77436542"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-exploration.cjs",
+      "bytes": 1156,
+      "sha256": "5c9a6a4b5fb7b52076fc4f6ae808a04587f101c7ab82e2ca06e810f74d028673"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-fidelity.cjs",
+      "bytes": 807,
+      "sha256": "d6f9cc58b7fd5ccc7c1afd39df8cf3755da96c6a7e886e68c79b352d82402341"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-life.cjs",
+      "bytes": 1362,
+      "sha256": "3485ac0801b20abd39dea5e53a9e473205297106698826ed8e4c4dd6b67f4f99"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal-mobility.cjs",
+      "bytes": 786,
+      "sha256": "3db53c0c18ef8caea8811ceceeb4d19b529d317a95fa5c2b7c2c122b7dbe55be"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/traversal.cjs",
+      "bytes": 14903,
+      "sha256": "f4b3ada57eab5becd6dc2cd0a0a1bbfaf20f415224f458b0ee75608211c74048"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tests/upgrade-real.mjs",
+      "bytes": 3200,
+      "sha256": "8eff65c47076cdfae680839f79dae604e34620c20d090d33354fde03ae419703"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/build-content.py",
+      "bytes": 32898,
+      "sha256": "302b1ef7cd69bda188a6d6394b49dac1ee45f0166743d0a9161e4616c0a64c69"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/build-docs-v09.py",
+      "bytes": 28244,
+      "sha256": "be6dab125750e9221fa2eae00ef5fbd1e585f4b8beb4eef407df6253c371d05d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/build-docs.py",
+      "bytes": 209,
+      "sha256": "9711210438ae8b9873b81753155abb43c29d3444749249ce92773126c1b56e1d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/build-standalone.py",
+      "bytes": 1118,
+      "sha256": "257fb2d3a43b2162787a925565b62e853d4d4a8bca22d837228a15df76fa37e9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v02.py",
+      "bytes": 10932,
+      "sha256": "64580b47354a1fdabc62b00f4fa5ca5a3f048bba79ef71d0fef672d30332c726"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v03.py",
+      "bytes": 17056,
+      "sha256": "4c7a62dfa53c468b73a1b01bf66ecb0f6c4b40583d07ee0427c1d48f553abd3b"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v04.py",
+      "bytes": 974,
+      "sha256": "577ddb351a89b332fb0f810dab302300cd955ee60c837ae7a86d0bce4ac9d084"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v05.py",
+      "bytes": 11676,
+      "sha256": "b5781a2f3df48c0dd828668937509c65a3f7caddaf1559b349039b86cad6ee8e"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v06.py",
+      "bytes": 3141,
+      "sha256": "24828d292ad5c6fb5e59fc50c39fcded91b0c70db04e0ade4bb35e7f47b981c0"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v07.py",
+      "bytes": 2381,
+      "sha256": "d9478fc81bfb1872d151160ce8ed2df3cb302b84c3dfa712f4261dd36d2a01fd"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v08.py",
+      "bytes": 2162,
+      "sha256": "503d5398285c162eb3d08c18d306fb05ab84cc264e0a3ef5df97d0bbd9edfbc8"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/enrich-content-v09.py",
+      "bytes": 21326,
+      "sha256": "7a9053e25e31954fb20c60cef7dbfef226ab76be371d5cffdd3b69bfaab1d9d2"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/install.mjs",
+      "bytes": 8778,
+      "sha256": "126e5d85118a79b5875d768b5f7e78e6154af203be01b264add706634d7d7a73"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/package-release.py",
+      "bytes": 206,
+      "sha256": "e7853a56d9b4e2cfa2966a404d62326ae1d1b710efbbb36b1831b0216e59ed39"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/package-v09.py",
+      "bytes": 3117,
+      "sha256": "e32821f20cec1a4ae201319199e75e57d24845e8dd0c73dac6f81ce0d11461dc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/qualify-model.py",
+      "bytes": 206,
+      "sha256": "1d8c14363939fa0984894303a810293c8d0efe0e391b594e0994755284cdb2bc"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/qualify-v09.py",
+      "bytes": 1324,
+      "sha256": "b1d95b77b7d597ab5d6e7d428d7a2b74583d3b51f4f415f081ae8854b435fa94"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/serve.py",
+      "bytes": 797,
+      "sha256": "c0d6d4be208b2cf82e018b05c4e8e7a474c57daf9513313eefa2acb282c633a9"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/verify-delivery.py",
+      "bytes": 205,
+      "sha256": "c4c7254cff3d67fbab482ce07545c2e9ac9ecdaccd6850624440211809036beb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/tools/verify-v09.py",
+      "bytes": 7226,
+      "sha256": "5df607476fae458842e3323f555c55bb94f134d1641c034f80df11d59b3d7741"
+    }
+  ],
+  "archives": [
+    {
+      "version": "0.1.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.1.0.zip",
+      "bytes": 8329372,
+      "sha256": "706eeb6b49456e4c3a4d5505380da7a17f1ddb97e1fe015a2d66371bf5f2d01c"
+    },
+    {
+      "version": "0.2.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.2.0.zip",
+      "bytes": 12655098,
+      "sha256": "4d66d6086c8a6243f70bde753704baca422fd1abb830df0469f22142f89ef404"
+    },
+    {
+      "version": "0.3.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.3.0.zip",
+      "bytes": 21376938,
+      "sha256": "9260cce77c3203a4b55838e2d68cb1cdfc8eab197881f376625fe5eff1634271"
+    },
+    {
+      "version": "0.4.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.4.0.zip",
+      "bytes": 23187032,
+      "sha256": "79856346cade99fd4eb25abd4b03337e11bf539d649bf78486ad979332889bcf"
+    },
+    {
+      "version": "0.5.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.5.0.zip",
+      "bytes": 29818613,
+      "sha256": "6190237bf6f089e5a952533e35ce9242728ce0e29e8f5fcfd1e078aa1e8e98d8"
+    },
+    {
+      "version": "0.6.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.6.0.zip",
+      "bytes": 65259430,
+      "sha256": "f6aca082c4f1712d2a5abbe67eba00c49b947ad92a0aa905287f6adbc965045f"
+    },
+    {
+      "version": "0.7.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.7.0.zip",
+      "bytes": 15391325,
+      "sha256": "3a9f88c5c8405b8dac6661a6c5e9662a4edd047aa990e193ed85eda61ebd5470"
+    },
+    {
+      "version": "0.8.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.8.0.zip",
+      "bytes": 13073188,
+      "sha256": "f82081a28540e0bce877b0513f434f95a976d7abf5a38e7ca4a22975479cb94f"
+    },
+    {
+      "version": "0.9.0",
+      "path": "archives/river-of-pain/ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.9.0.zip",
+      "bytes": 19292972,
+      "sha256": "4122a3b3f86314fdb44659ad7621632b7d9f77f1855fbd28c0bb5da05c7aa48b"
+    }
+  ],
+  "runtimeFiles": [
+    "dlc/fleuve-de-la-douleur/index.html",
+    "dlc/fleuve-de-la-douleur/integration.css",
+    "dlc/fleuve-de-la-douleur/integration.js",
+    "dlc/fleuve-de-la-douleur/JOUER.html",
+    "dlc/fleuve-de-la-douleur/LICENSE_NOTICE.md"
+  ],
+  "unrecovered": [
+    "Version 0.10 locale mentionnée dans le suivi ; aucun fichier source ni paquet sauvegardé retrouvé."
+  ]
+}

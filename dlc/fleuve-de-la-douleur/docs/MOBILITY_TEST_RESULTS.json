@@ -1,0 +1,370 @@
+{
+  "version": "0.9.0-candidate.1",
+  "passed": true,
+  "results": [
+    {
+      "name": "hybrid · progression unlock only",
+      "passed": true
+    },
+    {
+      "name": "hybrid · boarding physical delay, position sync, no fake objective",
+      "passed": true
+    },
+    {
+      "name": "hybrid · interrupted boarding",
+      "passed": true
+    },
+    {
+      "name": "hybrid · damaged during boarding",
+      "passed": true
+    },
+    {
+      "name": "hybrid · acceleration, rolling deceleration and brakes",
+      "passed": true
+    },
+    {
+      "name": "hybrid · speed ceiling, battery drain and distance",
+      "passed": true
+    },
+    {
+      "name": "hybrid · cannot descend at speed",
+      "passed": true
+    },
+    {
+      "name": "hybrid · full stop, safe exit, reboard",
+      "passed": true
+    },
+    {
+      "name": "hybrid · parked position stays when walking away",
+      "passed": true
+    },
+    {
+      "name": "hybrid · no remote boarding",
+      "passed": true
+    },
+    {
+      "name": "hybrid · ordinary door and objective blocked while seated",
+      "passed": true
+    },
+    {
+      "name": "hybrid · no weapons or foot equipment while seated",
+      "passed": true
+    },
+    {
+      "name": "hybrid · F produces horn, not bullets",
+      "passed": true
+    },
+    {
+      "name": "hybrid · headlamps and restricted projection",
+      "passed": true
+    },
+    {
+      "name": "hybrid · U-turn changes heading at rest",
+      "passed": true
+    },
+    {
+      "name": "hybrid · terrain changes speed limit",
+      "passed": true
+    },
+    {
+      "name": "hybrid · forward boundary stops entire body, no tunnelling",
+      "passed": true
+    },
+    {
+      "name": "hybrid · low speed nudge has no collision damage",
+      "passed": true
+    },
+    {
+      "name": "hybrid · enemies are not crushed by impact",
+      "passed": true
+    },
+    {
+      "name": "hybrid · disabled drive and emergency exit",
+      "passed": true
+    },
+    {
+      "name": "hybrid · no safe exit does not relocate player",
+      "passed": true
+    },
+    {
+      "name": "hybrid · finite service repair and charge",
+      "passed": true
+    },
+    {
+      "name": "hybrid · repair interruption keeps finite resource",
+      "passed": true
+    },
+    {
+      "name": "hybrid · both orientations of road connection",
+      "passed": true
+    },
+    {
+      "name": "hybrid · occupied arrival blocks transfer",
+      "passed": true
+    },
+    {
+      "name": "hybrid · save/import moving, no extra driver or resource",
+      "passed": true
+    },
+    {
+      "name": "hybrid · manual work cancels on import without resource cost",
+      "passed": true
+    },
+    {
+      "name": "hybrid · chapter point of view parks rover, no auto recall",
+      "passed": true
+    },
+    {
+      "name": "hybrid · Newt cannot board",
+      "passed": true
+    },
+    {
+      "name": "hybrid · companion not silently abandoned or cloned",
+      "passed": true
+    },
+    {
+      "name": "classic · progression unlock only",
+      "passed": true
+    },
+    {
+      "name": "classic · boarding physical delay, position sync, no fake objective",
+      "passed": true
+    },
+    {
+      "name": "classic · interrupted boarding",
+      "passed": true
+    },
+    {
+      "name": "classic · damaged during boarding",
+      "passed": true
+    },
+    {
+      "name": "classic · acceleration, rolling deceleration and brakes",
+      "passed": true
+    },
+    {
+      "name": "classic · speed ceiling, battery drain and distance",
+      "passed": true
+    },
+    {
+      "name": "classic · cannot descend at speed",
+      "passed": true
+    },
+    {
+      "name": "classic · full stop, safe exit, reboard",
+      "passed": true
+    },
+    {
+      "name": "classic · parked position stays when walking away",
+      "passed": true
+    },
+    {
+      "name": "classic · no remote boarding",
+      "passed": true
+    },
+    {
+      "name": "classic · ordinary door and objective blocked while seated",
+      "passed": true
+    },
+    {
+      "name": "classic · no weapons or foot equipment while seated",
+      "passed": true
+    },
+    {
+      "name": "classic · F produces horn, not bullets",
+      "passed": true
+    },
+    {
+      "name": "classic · headlamps and restricted projection",
+      "passed": true
+    },
+    {
+      "name": "classic · U-turn changes heading at rest",
+      "passed": true
+    },
+    {
+      "name": "classic · terrain changes speed limit",
+      "passed": true
+    },
+    {
+      "name": "classic · forward boundary stops entire body, no tunnelling",
+      "passed": true
+    },
+    {
+      "name": "classic · low speed nudge has no collision damage",
+      "passed": true
+    },
+    {
+      "name": "classic · enemies are not crushed by impact",
+      "passed": true
+    },
+    {
+      "name": "classic · disabled drive and emergency exit",
+      "passed": true
+    },
+    {
+      "name": "classic · no safe exit does not relocate player",
+      "passed": true
+    },
+    {
+      "name": "classic · finite service repair and charge",
+      "passed": true
+    },
+    {
+      "name": "classic · repair interruption keeps finite resource",
+      "passed": true
+    },
+    {
+      "name": "classic · both orientations of road connection",
+      "passed": true
+    },
+    {
+      "name": "classic · occupied arrival blocks transfer",
+      "passed": true
+    },
+    {
+      "name": "classic · save/import moving, no extra driver or resource",
+      "passed": true
+    },
+    {
+      "name": "classic · manual work cancels on import without resource cost",
+      "passed": true
+    },
+    {
+      "name": "classic · chapter point of view parks rover, no auto recall",
+      "passed": true
+    },
+    {
+      "name": "classic · Newt cannot board",
+      "passed": true
+    },
+    {
+      "name": "classic · companion not silently abandoned or cloned",
+      "passed": true
+    },
+    {
+      "name": "Hybrid full-body collision against cover, no center-only pass",
+      "passed": true
+    },
+    {
+      "name": "Steering operates only while moving",
+      "passed": true
+    },
+    {
+      "name": "Adult strikes hull first then harms exposed disabled driver",
+      "passed": true
+    },
+    {
+      "name": "Legacy profile in future rover position preserves player, places rover away",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.1 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.2 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.3 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.4 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.5 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.6 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Actual historical export 0.7 imports without fictional driving",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · revision",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · unknown room",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · nonfinite x",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · outside room",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · health",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · negative battery",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · impossible speed",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · unknown driver",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · wrong driver",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · empty cabin moving",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · driver position",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · dead moving",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · lights without charge",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · unknown station",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · station charge",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · station missing",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · stats negative",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · stats missing",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · in solid",
+      "passed": true
+    },
+    {
+      "name": "Reject incoherent import · horn time",
+      "passed": true
+    }
+  ]
+}

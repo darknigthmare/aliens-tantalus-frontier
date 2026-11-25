@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09171b"><title>ALIEN — Fleuve de la Douleur</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="game" aria-label="Hadley’s Hope">
+  <canvas id="scene" tabindex="0" aria-label="Terrain de jeu : Q D pour marcher, Z S pour la profondeur, E pour interagir"></canvas>
+  <header id="top" hidden><div class="site-mark"><span class="tiny">LV-426 / HADLEY’S HOPE</span><strong id="room-name"></strong><span id="room-detail"></span></div><div class="top-right"><span id="chapter-label"></span><button id="map-button" title="Plan · Tab">PLAN</button><button id="threshold-button" title="Seuils · O">SEUILS</button><button id="kit-button" title="Équipement · I">ÉQUIPEMENT</button><button id="detours-button" title="Détours · U">DÉTOURS</button><button id="contacts-button" title="Registre des habitants · Y">COLONIE</button><button id="journal-button" title="Carnet · J">CARNET</button><button id="pause-button" title="Pause · Échap">II</button></div></header>
+  <section id="hud" aria-label="État du personnage" hidden>
+    <div class="identity"><span class="tiny" id="role"></span><strong id="name"></strong><div class="bar"><i id="health"></i></div><div class="readings"><span id="hp-text"></span><span id="stamina-text"></span></div></div>
+    <div class="mission"><span class="tiny" id="mission-step"></span><strong id="objective"></strong><span id="route-hint"></span></div>
+    <div class="equipment"><strong id="ammo"></strong><span id="reserves"></span><div class="equipment-actions"><button id="heal-button" title="Soigner · H">SOINS</button><button id="flare-button" title="Fusée · X">FUSÉE</button><button id="reload-button" title="Recharger · R">RECHARGER</button></div></div>
+  </section>
+  <aside id="systems-hud" hidden><span id="service-readout"></span><span id="lamp-readout"></span><span id="detour-readout" hidden></span><span id="escort-readout" hidden></span><span id="concealment" hidden></span></aside><aside id="tracker-readout" hidden aria-label="Détecteur de mouvement"><span>MOUVEMENT</span><small id="tracker-scope">PIÈCE COURANTE</small><div class="tracker-screen"><i></i><b id="tracker-distance">—</b></div><small>T · METTRE EN VEILLE</small></aside>
+  <div id="interact" hidden><span class="key">E</span><span id="interact-text"></span><progress id="work" max="1" value="0" hidden></progress></div>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <div id="noise" hidden><span id="noise-label">DISCRET</span><i></i></div>
+  <footer id="controls" hidden>Q D / ← → Marcher <span>·</span> Z S / ↑ ↓ Profondeur <span>·</span> C Se baisser <span>·</span> MAJ Courir <span>·</span> F Tirer · ESPACE + directions Viser <span>·</span> E Utiliser <span>·</span> B Souder <span>·</span> I Équipement <span>·</span> L Lampe <span>·</span> G Cachette <span>·</span> ENTRÉE Dispositifs locaux · 4 Gaines · 5 Tracteur</footer>
+  <div id="touch" hidden aria-label="Commandes tactiles"><div class="dpad"><button data-held="up" aria-label="Profondeur arrière">↑</button><button data-held="left" aria-label="Gauche">←</button><button data-held="down" aria-label="Profondeur avant">↓</button><button data-held="right" aria-label="Droite">→</button></div><div class="touch-actions"><button data-held="crouch">BAS</button><button data-held="fire">TIR</button><button id="touch-interact">UTILISER</button></div></div>
+</main>
+<section id="menu" class="screen">
+  <div class="menu-frame">
+    <p class="overline">TANTALUS FRONTIER <span>/</span> ARCHIVES MIRE</p><div class="franchise">ALIEN</div><h1>FLEUVE<br>DE LA DOULEUR</h1><p class="tagline">Avant le silence, il y avait une ville.</p>
+    <div class="menu-rule"></div><p class="summary">Hadley’s Hope. Quatre regards sur les dernières lumières d’une colonie. Explorez les blocs habités, gardez les voies de repli ouvertes et trouvez refuge dans les conduits.</p>
+    <div class="options-inline"><label>VUE<select id="view-select"><option value="hybrid">2D avec profondeur</option><option value="classic">2D latérale</option></select></label><label>DIFFICULTÉ<select id="difficulty"><option value="story">Récit</option><option value="standard" selected>Survie</option><option value="nightmare">Cauchemar</option></select></label></div>
+    <div class="menu-actions"><button id="continue" class="primary" hidden>REPRENDRE</button><button id="start" class="primary">ENTRER DANS HADLEY’S HOPE <span>→</span></button><button id="import-menu">CHARGER UN FICHIER</button><button id="about">À PROPOS DE CETTE RECONSTITUTION</button></div><p id="save-status" role="status"></p>
+    <div class="release">VERSION JOUABLE 0.9 <span>·</span> PROJET DE FAN NON OFFICIEL <span>·</span> DÉCORS PROVISOIRES DESSINÉS PAR CODE</div>
+  </div>
+  <div class="menu-stamp" aria-hidden="true"><span>HADLEY’S</span><b>HOPE</b><small>COLONY SYSTEMS<br>ENVIRONMENT / A-2179</small><div class="signal"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+</section>
+<aside id="rover-hud" hidden aria-label="Conduite du tracteur"></aside><div id="passage-readout" hidden></div><button id="listen-button" hidden>N · ÉCOUTER</button><div id="threshold-feedback" hidden role="status"></div>
+<div id="modal-layer" hidden><section id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header><span class="overline" id="dialog-kicker"></span><button id="close-dialog" aria-label="Fermer">✕</button></header><h2 id="dialog-title"></h2><div id="dialog-content"></div><div id="dialog-actions"></div></section></div>
+<input type="file" accept="application/json,.json" id="import-file" hidden>
+<script src="data.js"></script><script src="colony.js"></script><script src="exploration.js"></script><script src="passages.js"></script><script src="life.js"></script><script src="defense.js"></script><script src="ducts.js"></script><script src="mobility.js"></script><script src="armory.js"></script><script src="core.js"></script><script src="persistence.js"></script><script src="render.js"></script><script src="architecture.js"></script><script src="field-visuals.js"></script><script src="passage-visuals.js"></script><script src="life-visuals.js"></script><script src="life-ui.js"></script><script src="defense-visuals.js"></script><script src="defense-ui.js"></script><script src="ducts-visuals.js"></script><script src="ducts-ui.js"></script><script src="mobility-visuals.js"></script><script src="mobility-ui.js"></script><script src="fidelity-visuals.js"></script><script src="fidelity-ui.js"></script><script src="ui.js"></script>
+</body></html>
