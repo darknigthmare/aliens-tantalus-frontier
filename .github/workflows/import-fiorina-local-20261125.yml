@@ -16,7 +16,8 @@ concurrency:
 
 jobs:
   import:
-    if: github.ref == 'refs/heads/integrate/fiorina-v114-local-recovery' && startsWith(github.event.head_commit.message, 'chore(fiorina): bootstrap reviewed archive transfer')
+    if: >-
+      github.ref == 'refs/heads/integrate/fiorina-v114-local-recovery' && startsWith(github.event.head_commit.message, 'chore(fiorina): bootstrap reviewed archive transfer')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
