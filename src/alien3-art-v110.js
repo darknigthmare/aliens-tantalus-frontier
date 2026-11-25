@@ -1,0 +1,9 @@
+/** Small in-world cues; no version names or progress counters in ordinary HUD. */
+import {closestSteamV109,steamCircuitV109,STEAM_RULES_V109} from './alien3-steam-v109.js';
+import {TRAFFIC_RULES_V110} from './alien3-traffic-v110.js';
+export function steamHintTextV110(text,e){if(text!=='La conduite se vide…')return text;const site=closestSteamV109(e);if(!site)return text;const s=e.alien3TrafficV110,c=steamCircuitV109(e.alien3SteamV109,site.id);if(s?.closing)return e.alien3OperationsV107?.inputMode==='hold'?'Maintenez V · Refermer la purge':'V · Lâcher la commande';return c.remaining>STEAM_RULES_V109.tailSeconds?'V  Refermer la purge':'Le nuage se dissipe…';}
+export function contextHintsV110(c,e){return new Proxy(c,{get(t,k){if(k==='fillText')return (text,...args)=>t.fillText(steamHintTextV110(text,e),...args);if(k==='measureText')return text=>t.measureText(steamHintTextV110(text,e));const v=Reflect.get(t,k,t);return typeof v==='function'?v.bind(t):v;},set(t,k,v){Reflect.set(t,k,v,t);return true;}});}
+export function drawTrafficV110(c,e){const s=e.alien3TrafficV110;if(!s||!e.alien3EncounterV105)return;const camera=e.camera||{x:0,y:0};c.save();
+ const w=s.closing,site=w&&e.alien3SteamGeometryV109.sites.find(site=>site.id===w.id);if(site){c.fillStyle='#0c1a14';c.fillRect(site.controlX-23,site.controlY-50,46,6);c.fillStyle='#b8c5a2';c.fillRect(site.controlX-22,site.controlY-49,44*Math.min(1,w.elapsed/TRAFFIC_RULES_V110.closeSeconds),4);}
+ for(const p of e.alien3EncounterV105.participants){if(!s.waiting[p.id]||!p.alive||e.alien3SensesV106?.holds[p.id]||p.x<camera.x-40||p.x>camera.x+1300)continue;const text='Attend le jet.';c.font='11px sans-serif';const width=c.measureText(text).width+16;c.fillStyle='rgba(9,21,15,.88)';c.fillRect(p.x-15,p.y-32,width,22);c.fillStyle='#d0c7a0';c.fillText(text,p.x-7,p.y-17);}
+ c.restore();}

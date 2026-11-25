@@ -114,7 +114,9 @@
     "test:dlc": "node --test scripts/verify-dlc-menu.mjs scripts/verify-dlc-avp-2004.mjs scripts/verify-dlc-audit-succession.mjs",
     "build:dlc:avp": "node scripts/build-dlc-avp-2004.mjs",
     "check:dlc:avp": "node scripts/build-dlc-avp-2004.mjs --check",
-    "qa:dlc:avp": "node scripts/qa-dlc-avp-2004.mjs"
+    "qa:dlc:avp": "node scripts/qa-dlc-avp-2004.mjs",
+    "test:fiorina": "node --test scripts/verify-fiorina-production-v114.mjs",
+    "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -1,0 +1,53 @@
+{
+  "schema": 114,
+  "title": "Alien 3 — Fiorina 161 V114 · Atlas de continuité",
+  "archive": {
+    "path": "ALIEN3_FIORINA_V114_ATLAS_CONTINUITE_SUR_V113.zip",
+    "bytes": 10077153,
+    "sha256": "9e466319875f269c6a94993e803f386de209bdae5576117469dbdbd89afb6695",
+    "manifestFiles": 34
+  },
+  "validation": {
+    "unitV114": 14,
+    "installerScenarios": 14,
+    "browserControls": 14,
+    "browserCaptures": 9,
+    "codexControls": 18,
+    "codexCards": 847,
+    "regressionV113Unit": 32,
+    "standaloneSmoke": true,
+    "standaloneExternalRequests": 0,
+    "pdfPages": 11,
+    "pdfOpenable": true,
+    "cleanExtractManifestErrors": 0,
+    "installerDryRun": true,
+    "installerInstallRestore": true
+  },
+  "world": {
+    "graphNodes": 72,
+    "graphEdges": 119,
+    "theatrical": {
+      "activeSpaces": 25,
+      "linkedSpaces": 20,
+      "inspectionShells": 3,
+      "provisional": [
+        "morgue"
+      ]
+    },
+    "assembly": {
+      "activeSpaces": 28,
+      "linkedSpaces": 21,
+      "inspectionShells": 5,
+      "provisional": [
+        "morgue"
+      ]
+    }
+  },
+  "limits": [
+    "No full native Tantalus build",
+    "No GitHub push or Vercel deployment",
+    "Inspection shells are not campaign traversal rooms",
+    "Morgue vertical connection remains provisional",
+    "Vector characters are not photorealistic actor likenesses"
+  ]
+}

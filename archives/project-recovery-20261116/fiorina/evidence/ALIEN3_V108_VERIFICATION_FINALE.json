@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "archive": "ALIEN3_FIORINA_V108_ECHOS_DE_METAL_SUR_V107.zip",
+  "bytes": 23812381,
+  "sha256": "749332c1b47f15a55578d2cc37e84bc08b4821981222ea424fb54871f41c9991",
+  "manifestFilesVerifiedBeforeReplay": 328,
+  "missingFiles": 0,
+  "extraFiles": 0,
+  "hashErrors": 0,
+  "newUnitCases": 59,
+  "installScenarios": 19,
+  "previousReplayed": {
+    "V107unit": 56,
+    "V107installation": 19
+  },
+  "browserPhasesReplayed": [
+    {
+      "phase": "diversion-route",
+      "controls": 10,
+      "sha256": "30b930cdeee6b6707a3c169bf6007bba511dce6158546f956ff43d3b7f501044"
+    },
+    {
+      "phase": "diversion-recovery",
+      "controls": 8,
+      "sha256": "421be49bd17eabb04d251e993c871eec4157752f7319eefbf031bc56a7164d09"
+    },
+    {
+      "phase": "diversion-resume",
+      "controls": 9,
+      "sha256": "b8e523e16f87856010b723cbe7158d38b9df1081ad5b43f42dcdb3699ecea9a1"
+    },
+    {
+      "phase": "trap",
+      "controls": 12,
+      "sha256": "136886238b5890f6a76e6a51d9bfee53dcef5e0cb8cc3852ac50ab1b661aa638"
+    }
+  ],
+  "deliveredChecks": 10,
+  "codexChecks": 37,
+  "reproducedScreenshots": 14,
+  "totalReportScreenshots": 20,
+  "identicalScreenshots": [
+    {
+      "file": "qa-v108/captures/18_lancer_dans_bloc.png",
+      "sha256": "dcb959d2a535bb01e8a76952e7b45153e3243b04f599b8ff139e58405c0bdd49",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/19_enquete_au_bruit.png",
+      "sha256": "f512810c472bbb0ee4475a279f773663b3e036cf22aa41f61d7a608f63400cbf",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/20_retour_apres_diversion.png",
+      "sha256": "52e6c825447679799bd8bda25cdbf3e5236f200be7b9a7fb1b3208229a6d2392",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/21_arc_fonderie.png",
+      "sha256": "88de8cea0860d001cd3ed79b6c09bd0b6eeefeb51f908403a04a380ace4fdaef",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/22_boulon_au_sol.png",
+      "sha256": "4050317d2260992c97628ba1f7da9b1876ddb1c3400f551b5ca2f56b0b34b0b2",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/23_impact_porte.png",
+      "sha256": "05d087a16cecb84d1acf9363837fbb82e8e16327852352b8742db683daac5fdc",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/24_reprise_recuperee.png",
+      "sha256": "4163f3fab82b26a1769e37e6a3f2cbacb9f8a95b0dea062c30da88dbabbdb098",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/06_attente_postes.png",
+      "sha256": "c027befbd68397d71bd4feaecedc1e0a3c79a4dafa48b4fe44d6133ee24deaf2",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/06b_verrouillage.png",
+      "sha256": "3523f19d1b2a1c523cbc3d6eef0087f8e531ddf8a6327d54fee040a3bfb19404",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/07_postes_tenus.png",
+      "sha256": "c494ca19e3b337b10fe77a6743a727f5dae3a26d764bf7f2ca0a37d685583ce5",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/08_attaque_annoncee.png",
+      "sha256": "a9770bfdfd548d8e9af81b1ee5d10982bd528b1dbdbe801ef720735bd4398ea5",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/09_coulee.png",
+      "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/10_refroidissement.png",
+      "sha256": "ec957b19476293dc01fd1c6635f6e319c183b5a57c4cdcff71aed6ba16da4619",
+      "identical": true
+    },
+    {
+      "file": "qa-v108/captures/11_retour_morse.png",
+      "sha256": "1f4a0e889bfe4665ecee54a7a054fe54527be271cb16c9024dce617510c71951",
+      "identical": true
+    }
+  ],
+  "nativeBuildExecuted": false,
+  "pushOrDeployment": false,
+  "scope": "Fresh extraction, native Chromium captures of the same simplified local host. No full game or film campaign qualification."
+}

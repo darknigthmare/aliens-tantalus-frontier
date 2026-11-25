@@ -7,13 +7,16 @@ import { ARBITER_DEVICE_V190, ARBITER_CAMPAIGNS_V190, ARBITER_MISSIONS_V190,
   createArbiterReceiptV190, createArbiterMissionStateV190, validateArbiterMissionStateV190,
   validateArbiterCompletionV190, recordArbiterCampaignReturnV190 } from '../src/xeno-arbiter-campaign-v190.js';
 import { buildArbiterMissionV190 } from '../src/xeno-arbiter-runtime-v190.js';
+import { FIORINA_CAMPAIGN_V114 } from '../src/fiorina-campaign-v114.js';
 
 import { previousProgress, fixture, tick, walk, hold, finish } from './xeno-arbiter-test-helpers-v190.mjs';
 
 // These are six distinct original investigative operations. No ancient IDs,
 // 1:1 art proof, physical corporate trial or live captive is invented here.
 test('six authored ARBITER chapters extend the real campaign catalog and have connected physical alternatives', () => {
-  assert.equal(CONTENT_COUNTS.campaigns, 526);
+  assert.equal(CONTENT_COUNTS.campaigns, 527);
+  assert.deepEqual(CAMPAIGNS.filter(c => c.id === FIORINA_CAMPAIGN_V114.id), [FIORINA_CAMPAIGN_V114]);
+  assert.equal(CAMPAIGNS.filter(c => c.id !== FIORINA_CAMPAIGN_V114.id).length, 526);
   assert.equal(CAMPAIGNS.filter(c => c.id.startsWith('special-arbiter-')).length, 6);
   assert.equal(ARBITER_DEVICE_V190.canonExact, false);
   const signatures = new Set();

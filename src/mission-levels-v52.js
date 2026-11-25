@@ -1,5 +1,6 @@
 import { validateMissionTopologyV58 } from './topology-coherence-v58.js';
 import { buildCetoHabitatsV75, cetoHabitatHazardsV75 } from './enemy-ceto-v75.js';
+import { ALIEN3_FIORINA_TEMPLATE_V102, ALIEN3_FIORINA_PALETTE_V102 } from './alien3-dlc-v102.js';
 
 const WORLD_WIDTH = 5200;
 const FLOOR_Y = 510;
@@ -18,8 +19,11 @@ export const HAZARD_KINDS_V52 = Object.freeze([
 export const MISSION_TEMPLATE_IDS_V52 = Object.freeze([
   'ship-interior-vertical',
   'colony-multiroute',
-  'planet-exterior'
+  'planet-exterior',
+  ALIEN3_FIORINA_TEMPLATE_V102.id
 ]);
+// A dedicated archive must not reshuffle procedural campaigns or their saves.
+const GENERIC_MISSION_TEMPLATE_IDS_V52 = Object.freeze(MISSION_TEMPLATE_IDS_V52.slice(0, 3));
 
 const HAZARD_CONTRACTS = Object.freeze({
   acid: Object.freeze({ effect: 'corrosion', damage: 14, armorDrain: 8 }),
@@ -33,6 +37,7 @@ const HAZARD_CONTRACTS = Object.freeze({
 });
 
 const TEMPLATE_PALETTES = Object.freeze({
+  [ALIEN3_FIORINA_TEMPLATE_V102.id]: ALIEN3_FIORINA_PALETTE_V102,
   'ship-interior-vertical': Object.freeze({
     id: 'derelict-interior', sky: '#02060b', haze: '#162c3d', accent: '#80b6c9', light: 0.38, prop: 'pressure-hull'
   }),
@@ -353,6 +358,7 @@ const PLANET_TEMPLATE = Object.freeze({
 });
 
 export const MISSION_LEVEL_TEMPLATES_V52 = Object.freeze({
+  [ALIEN3_FIORINA_TEMPLATE_V102.id]: ALIEN3_FIORINA_TEMPLATE_V102,
   [SHIP_TEMPLATE.id]: SHIP_TEMPLATE,
   [COLONY_TEMPLATE.id]: COLONY_TEMPLATE,
   [PLANET_TEMPLATE.id]: PLANET_TEMPLATE
@@ -415,7 +421,7 @@ export function selectMissionTemplateV52({ campaign = {}, world = {}, templateId
   if (/board|black[- ]box|vessel|ship|orbital|vacuum|derelict/.test(text)) return SHIP_TEMPLATE.id;
   if (/colony|colon|rescue|survivor|convoy|atmospher|habitation|defend/.test(text)) return COLONY_TEMPLATE.id;
   if (/badlands|jungle|oceanic|cavern|ruin|storm|toxic|corrosive|apex|track/.test(text)) return PLANET_TEMPLATE.id;
-  return MISSION_TEMPLATE_IDS_V52[stableMissionHashV52(`${campaign.id || ''}:${world.id || campaign.worldId || ''}`) % MISSION_TEMPLATE_IDS_V52.length];
+  return GENERIC_MISSION_TEMPLATE_IDS_V52[stableMissionHashV52(`${campaign.id || ''}:${world.id || campaign.worldId || ''}`) % GENERIC_MISSION_TEMPLATE_IDS_V52.length];
 }
 
 function resolveBiome(role, world) {
@@ -427,7 +433,8 @@ function resolveBiome(role, world) {
 
 function compileNodes(template, random) {
   return Object.freeze(template.nodes.map((entry) => {
-    const fixed = entry.anchor === 'spawn' || entry.anchor === 'extraction';
+    const fixed = template.id === ALIEN3_FIORINA_TEMPLATE_V102.id
+      || entry.anchor === 'spawn' || entry.anchor === 'extraction';
     const jitterX = fixed ? 0 : Math.round((random() - 0.5) * 24);
     const jitterY = fixed ? 0 : Math.round((random() - 0.5) * 10);
     // Artificial ship/colony decks share their authored elevation. Random

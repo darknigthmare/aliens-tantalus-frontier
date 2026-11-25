@@ -1173,9 +1173,17 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
+const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
+  'scripts/verify-fiorina-production-v114.mjs',
+  'scripts/qa-fiorina-native-v114.mjs',
+  'docs/development/FIORINA_GITHUB_INTEGRATION_V114.md',
+  '.github/workflows/fiorina-native-v114.yml'
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   const avpAdmission = avpPathAdmission(path, { directory, built });
   if (avpAdmission !== null) return avpAdmission;
+  if (FIORINA_INTEGRATION_SOURCE_ONLY_V114.has(path)) return !built;
   const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
   if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;

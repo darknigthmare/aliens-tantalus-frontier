@@ -852,6 +852,7 @@ export const TANTALUS_PRIORITIES_CARGO_REGISTRY_V188 = freeze({
 });
 
 export function verifyCargoRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Registry counters must describe its exact current rows'));
   const transition = TANTALUS_PRIORITIES_CARGO_REGISTRY_V188;
   const bytes = readSource(transition.historicalSnapshot.path);
   assert.equal(sha(bytes), transition.historicalSnapshot.sha256, 'Changed historical V158 operations snapshot');
@@ -909,6 +910,7 @@ export const TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188 = freeze({
 });
 
 export function verifyBroodstormRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Broodstorm art does not promote a whole operation'));
   const transition = TANTALUS_PRIORITIES_BROODSTORM_REGISTRY_V188;
   const matches = operations.filter(operation => operation.id === transition.operationId);
   assert.equal(matches.length, 1, 'Exactly one Broodstorm registry declaration is required');
@@ -1018,6 +1020,7 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Queen Mother art does not promote a whole operation'));
   const transition = TANTALUS_PRIORITIES_QUEEN_MOTHER_REGISTRY_V188;
   const matches = operations.filter(operation => operation.id === transition.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1129,8 +1132,9 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherGuardRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Guard presentation does not change registry counts'));
   const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_GUARD_REGISTRY_V188;
-  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), reviewedAvpHostDigest20261125(continuation.baselineRegistry.path, continuation.baselineRegistry.sha256),
     'Guard presentation must retain the exact Q registry source bytes');
   const matches = operations.filter(operation => operation.id === continuation.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1707,8 +1711,9 @@ export const TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188 = freeze({
 });
 
 export function verifyQueenMotherChoirRegistryContinuationV188(operations, counts, readSource = readRepository) {
+  ({ operations, counts } = projectFiorinaRegistryV114(operations, counts, 'Choir presentation does not change registry counts'));
   const continuation = TANTALUS_PRIORITIES_QUEEN_MOTHER_CHOIR_REGISTRY_V188;
-  assert.equal(sha(readSource(continuation.baselineRegistry.path)), continuation.baselineRegistry.sha256,
+  assert.equal(sha(readSource(continuation.baselineRegistry.path)), reviewedAvpHostDigest20261125(continuation.baselineRegistry.path, continuation.baselineRegistry.sha256),
     'Choir presentation must retain the exact R registry source bytes');
   const matches = operations.filter(operation => operation.id === continuation.operationId);
   assert.equal(matches.length, 1, 'Exactly one Queen Mother registry declaration is required');
@@ -1729,6 +1734,38 @@ export function verifyQueenMotherChoirRegistryContinuationV188(operations, count
   assert.equal(new Set(historical.changedIds).size, historical.changedIds.length);
   assert.equal(historical.unchangedOperations, 18);
   return historical;
+}
+
+// Fiorina is the sole post-V188 registry addition. Pin its full declaration,
+// including its campaign, before projecting the 21 immutable historical rows.
+// Historical callers may still supply those exact 21 rows and their counters.
+export function projectFiorinaRegistryV114(operations, counts, countMessage = 'Fiorina registry counters must match the exact current rows') {
+  assert.ok(Array.isArray(operations), 'Registry declarations must be an array');
+  const matches = operations.filter(operation => operation?.id === 'alien3-fiorina-161');
+  if (!matches.length) {
+    assert.equal(operations.length, 21, 'Only the historical registry or its exact Fiorina addition is admitted');
+    assert.deepEqual(counts, { total: 21, effective: 2, partial: 19, missing: 0, playable: 21 }, countMessage);
+    return { operations, counts };
+  }
+  assert.equal(matches.length, 1, 'Exactly one Fiorina registry declaration is required');
+  assert.equal(operations.length, 22, 'Fiorina is the only additional registry declaration');
+  assert.equal(operations[0], matches[0], 'Fiorina retains its reviewed registry position');
+  const canonical = value => Array.isArray(value) ? '[' + value.map(canonical).join(',') + ']'
+    : value && typeof value === 'object' ? '{' + Object.keys(value).sort()
+      .map(key => JSON.stringify(key) + ':' + canonical(value[key])).join(',') + '}' : JSON.stringify(value);
+  assert.equal(sha(canonical(matches[0])), 'c0f9fc29d54926db6f12d1766f25632dba473ab951f95f7524e142597e68af18',
+    'Unreviewed Fiorina registry declaration or campaign');
+  const derive = rows => ({
+    total: rows.length, effective: rows.filter(row => row.implementationStatus === 'effective').length,
+    partial: rows.filter(row => row.implementationStatus === 'partial').length,
+    missing: rows.filter(row => row.implementationStatus === 'missing').length,
+    playable: rows.filter(row => row.playable).length
+  });
+  const derived = derive(operations);
+  assert.deepEqual(derived, { total: 22, effective: 2, partial: 20, missing: 0, playable: 22 }, countMessage);
+  assert.deepEqual(counts, derived, countMessage);
+  const historical = operations.slice(1);
+  return { operations: historical, counts: derive(historical) };
 }
 
 export function reviewedTantalusPrioritiesDigestV188(path, endpoint) {

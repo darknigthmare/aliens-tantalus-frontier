@@ -90,3 +90,5 @@ L'environnement local était devenu indisponible après saturation, puis a répo
 ## Base d'intégration
 
 Base examinée : `001a20bdc0f9f1a3c835e84d8f3c9434bc159330`, branche cumulative `claude/nifty-shannon-qpy1hl`. Les anciens travaux de la PR49 ont déjà été fusionnés dans cette branche. Cette PR n'effectue pas de fusion globale de la cumulative vers `main` et ne déclare pas la production Vercel mise à jour.
+
+Pendant la préparation, la PR56 a intégré Fiorina V114 dans la cumulative, au commit `38a4a2272ec48a9cd5011f8a0055caaca6ab0774`. Le raccord AVP conserve cette intégration : les commandes, admissions et entrées de cache des deux DLC sont réunies. Fiorina reste une campagne du moteur natif ; AVP utilise le menu Extensions et ses carnets distincts. Une seconde jonction d'empreintes documente les octets combinés sans réécrire les reçus AVP déjà publiés. Les contrôles du catalogue reconnaissent explicitement la campagne Fiorina supplémentaire et conservent la projection exacte des témoins historiques.
