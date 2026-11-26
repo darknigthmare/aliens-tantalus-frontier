@@ -1,0 +1,57 @@
+[
+  {
+    "room": "concourse",
+    "prop": "concourse-p00",
+    "fromZ": 0.32,
+    "toZ": 0.88,
+    "doors": [
+      "e01-concourse"
+    ]
+  },
+  {
+    "room": "concourse",
+    "prop": "concourse-p01",
+    "fromZ": 0.25,
+    "toZ": 0.88,
+    "doors": [
+      "v11-concourse-mess-concourse"
+    ]
+  },
+  {
+    "room": "concourse",
+    "prop": "concourse-p03",
+    "fromZ": 0.3,
+    "toZ": 0.88,
+    "doors": [
+      "e03-concourse",
+      "v3-concourse-lift-concourse"
+    ]
+  },
+  {
+    "room": "concourse",
+    "prop": "concourse-v2-09",
+    "fromZ": 0.28,
+    "toZ": 0.88,
+    "doors": [
+      "v3-concourse-lift-concourse"
+    ]
+  },
+  {
+    "room": "concourse",
+    "prop": "concourse-v3-10",
+    "fromZ": 0.25,
+    "toZ": 0.88,
+    "doors": [
+      "v3-concourse-lift-concourse"
+    ]
+  },
+  {
+    "room": "executive",
+    "prop": "executive-p03",
+    "fromZ": 0.26,
+    "toZ": 0.88,
+    "doors": [
+      "e07-executive"
+    ]
+  }
+]

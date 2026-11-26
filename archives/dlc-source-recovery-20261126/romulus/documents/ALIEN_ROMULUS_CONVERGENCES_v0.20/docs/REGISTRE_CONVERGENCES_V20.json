@@ -1,0 +1,2230 @@
+{
+  "version": "0.20.0-alpha",
+  "audit": {
+    "version": "0.20.0-alpha",
+    "ok": true,
+    "errors": [],
+    "counts": {
+      "spaces": 26,
+      "scenes": 53,
+      "narrativeLinks": 57,
+      "thresholds": 30,
+      "arrivalMarkers": 13,
+      "equipment": 30,
+      "physicalLinks": 41,
+      "temporalLocations": 2,
+      "codex": 90
+    },
+    "scope": "Connectivité et références du module. Pas un relevé métrique ni un certificat de fidélité au montage.",
+    "v20": {
+      "temporalLocations": [
+        {
+          "id": "TP-ECHO-PROBE",
+          "title": "Épave / récupération automatisée",
+          "status": "sequence_temporelle",
+          "source": "ASC-OPENING",
+          "limit": "Pas un niveau libre; trajectoire et dimensions interprétées."
+        },
+        {
+          "id": "TP-RECOVERY-LAB",
+          "title": "Laboratoire de récupération du prologue",
+          "status": "sequence_temporelle",
+          "source": "ASC-OPENING",
+          "limit": "Poste analogique évoqué; plan global du laboratoire non obtenu."
+        }
+      ],
+      "scope": "Topologie du module et supports d’ouverture; pas certificat métrique 1:1."
+    }
+  },
+  "topology": {
+    "version": "0.20.0",
+    "temporalLocations": [
+      {
+        "id": "TP-ECHO-PROBE",
+        "title": "Épave / récupération automatisée",
+        "status": "sequence_temporelle",
+        "source": "ASC-OPENING",
+        "limit": "Pas un niveau libre; trajectoire et dimensions interprétées."
+      },
+      {
+        "id": "TP-RECOVERY-LAB",
+        "title": "Laboratoire de récupération du prologue",
+        "status": "sequence_temporelle",
+        "source": "ASC-OPENING",
+        "limit": "Poste analogique évoqué; plan global du laboratoire non obtenu."
+      }
+    ],
+    "fidelityRules": [
+      "Une porte physique doit pointer vers un lieu existant et posséder un support architectural déclaré.",
+      "Une arrivée intérieure doit être justifiée par un support de type paroi, sas, rampe, trémie ou passage bas; une coupe éditoriale ne dessine pas de porte.",
+      "Les changements de point de vue, ellipses et phases d’un même lieu restent distincts des seuils physiques.",
+      "Un équipement apparaît chez son détenteur ou sur son support selon les flags; aucune copie future ne reste visible.",
+      "Un concept coupé ou non confirmé reste exclu ou marqué comme tel."
+    ],
+    "coverage": {
+      "physicalSpaces": 26,
+      "temporalLocations": 2,
+      "roomStates": 53
+    },
+    "notes": [
+      "Audit v20 centré sur connectivité, supports de seuil, manutention, monte-charge et couches vestimentaires.",
+      "Objectif 1:1 poursuivi sans transformer les incertitudes en faits."
+    ]
+  },
+  "locations": [
+    {
+      "id": "JS-HOME",
+      "title": "Logement de Rain et Andy",
+      "mode": "SIDE",
+      "width": 1040,
+      "depth": 280,
+      "scenes": [
+        "S01"
+      ],
+      "sources": [
+        "COLONY"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "JS-STREET",
+      "title": "Rue des équipes de nuit",
+      "mode": "DEPTH",
+      "width": 2920,
+      "depth": 280,
+      "scenes": [
+        "S02"
+      ],
+      "sources": [
+        "COLONY"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan. L’agression d’Andy n’est pas jouée ; ordre exact guichet/agression à recouper."
+    },
+    {
+      "id": "JS-OFFICE",
+      "title": "Bureau des transferts",
+      "mode": "DEPTH",
+      "width": 1170,
+      "depth": 280,
+      "scenes": [
+        "S03"
+      ],
+      "sources": [
+        "COLONY"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "JS-TRAILER",
+      "title": "Le logement de Tyler et Kay",
+      "mode": "DEPTH",
+      "width": 1260,
+      "depth": 280,
+      "scenes": [
+        "S04"
+      ],
+      "sources": [
+        "COLONY"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "JS-PAD",
+      "title": "Plateforme du Corbelan IV",
+      "mode": "DEPTH",
+      "width": 2380,
+      "depth": 280,
+      "scenes": [
+        "S05"
+      ],
+      "sources": [
+        "COLONY"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "CB-COCKPIT",
+      "title": "Cabine du Corbelan IV",
+      "mode": "DEPTH",
+      "width": 1060,
+      "depth": 280,
+      "scenes": [
+        "S07",
+        "S14",
+        "S26K",
+        "S32",
+        "S40"
+      ],
+      "sources": [
+        "ARRI",
+        "SHIP"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan. S26K : lieu de l’injection de Kay non certifié."
+    },
+    {
+      "id": "CB-CORRIDOR",
+      "title": "Coursive du Corbelan IV",
+      "mode": "SIDE",
+      "width": 1580,
+      "depth": 280,
+      "scenes": [
+        "S06",
+        "S15",
+        "S16",
+        "S31C",
+        "S32C",
+        "S36",
+        "S39C",
+        "S40C"
+      ],
+      "sources": [
+        "ARRI",
+        "SHIP"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "CB-CRYO",
+      "title": "Fret et capsules de cryostase",
+      "mode": "DEPTH",
+      "width": 1550,
+      "depth": 280,
+      "scenes": [
+        "S06C",
+        "S09K",
+        "S33",
+        "S34",
+        "S35",
+        "S35R",
+        "S41"
+      ],
+      "sources": [
+        "ARRI",
+        "SHIP"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "CB-SUIT",
+      "title": "Local des combinaisons",
+      "mode": "SIDE",
+      "width": 1240,
+      "depth": 280,
+      "scenes": [
+        "S06S",
+        "S37",
+        "S39"
+      ],
+      "sources": [
+        "ARRI",
+        "SHIP"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "CB-CARGO",
+      "title": "Module de fret inférieur",
+      "mode": "DEPTH",
+      "width": 2150,
+      "depth": 280,
+      "scenes": [
+        "S06F",
+        "S35B",
+        "S38",
+        "S38E"
+      ],
+      "sources": [
+        "ARRI",
+        "SHIP"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RM-AIRLOCK",
+      "title": "Sas d’amarrage de Remus",
+      "mode": "SIDE",
+      "width": 1140,
+      "depth": 280,
+      "scenes": [
+        "S08"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RM-BAY",
+      "title": "Baie des capsules",
+      "mode": "DEPTH",
+      "width": 1910,
+      "depth": 280,
+      "scenes": [
+        "S09"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RM-CRYO",
+      "title": "Chambre cryogénique",
+      "mode": "DEPTH",
+      "width": 2110,
+      "depth": 280,
+      "scenes": [
+        "S10"
+      ],
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RM-DOOR",
+      "title": "Seuil de quarantaine",
+      "mode": "SIDE",
+      "width": 1110,
+      "depth": 280,
+      "scenes": [
+        "S12"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RM-LAB",
+      "title": "Laboratoire endommagé de Remus",
+      "mode": "DEPTH",
+      "width": 2120,
+      "depth": 280,
+      "scenes": [
+        "S11",
+        "S13"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "LN-PASSAGE",
+      "title": "Liaison entre les modules",
+      "mode": "SIDE",
+      "width": 2600,
+      "depth": 280,
+      "scenes": [
+        "S18"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "LN-STAIRS",
+      "title": "Escalier de liaison",
+      "mode": "SIDE",
+      "width": 1680,
+      "depth": 280,
+      "scenes": [
+        "S19"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-THERMAL",
+      "title": "Galerie de refroidissement",
+      "mode": "DEPTH",
+      "width": 2850,
+      "depth": 280,
+      "scenes": [
+        "S20"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-HANGAR",
+      "title": "Hangar de Romulus",
+      "mode": "DEPTH",
+      "width": 2900,
+      "depth": 280,
+      "scenes": [
+        "S17",
+        "S31"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-GATE",
+      "title": "Cloison du hangar",
+      "mode": "SIDE",
+      "width": 1360,
+      "depth": 280,
+      "scenes": [
+        "S21"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-LAB",
+      "title": "Laboratoire de Romulus",
+      "mode": "DEPTH",
+      "width": 2300,
+      "depth": 280,
+      "scenes": [
+        "S22",
+        "S23"
+      ],
+      "sources": [
+        "LAB",
+        "TANKS",
+        "LOCKER"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-CONVEYOR",
+      "title": "Entrée du convoyeur",
+      "mode": "SIDE",
+      "width": 1850,
+      "depth": 280,
+      "scenes": [
+        "S24"
+      ],
+      "sources": [
+        "CONVEYOR"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-HIVE",
+      "title": "Galerie du convoyeur infestée",
+      "mode": "DEPTH",
+      "width": 3020,
+      "depth": 280,
+      "scenes": [
+        "S25",
+        "S28"
+      ],
+      "sources": [
+        "HIVE",
+        "LIFT"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-LOBBY",
+      "title": "Vestibule du monte-charge",
+      "mode": "SIDE",
+      "width": 1560,
+      "depth": 280,
+      "scenes": [
+        "S26",
+        "S27"
+      ],
+      "sources": [
+        "HIVE",
+        "LIFT"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    },
+    {
+      "id": "RO-SHAFT",
+      "title": "Cage du monte-charge",
+      "mode": "SIDE",
+      "width": 1210,
+      "depth": 280,
+      "scenes": [
+        "S29"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan. Trois paliers de gameplay, pas un compte officiel des étages."
+    },
+    {
+      "id": "RO-UPPER",
+      "title": "Palier du hangar",
+      "mode": "SIDE",
+      "width": 1810,
+      "depth": 280,
+      "scenes": [
+        "S30"
+      ],
+      "sources": [
+        "FILM"
+      ],
+      "status": "jouable_interprete",
+      "reserve": "Plan 2D et dimensions interprétés. Montage non annoté plan par plan."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "rifle",
+      "title": "F44AA / fusil à impulsion",
+      "owner": "Rain, puis Andy dans son intervention",
+      "places": [
+        "RO-LAB",
+        "RO-HIVE",
+        "RO-SHAFT"
+      ],
+      "scenes": [
+        "S23",
+        "S28",
+        "S29"
+      ],
+      "mode": "commande_joueur",
+      "sources": [
+        "WETA-CRYO",
+        "FILM"
+      ],
+      "description": "Tir assisté ou libre, chargeur réellement consommé, arme transférée pendant la cage.",
+      "flags": [
+        "rifle"
+      ],
+      "limit": "Le fusil commandé est suivi avec ses munitions ; le second de Tyler reste un accessoire suivi.",
+      "changed": false,
+      "sourceReserve": "La source Wētā documente la fabrication du F44AA, pas le nombre d’armes possédées par les personnages ni leurs chargeurs de jeu."
+    },
+    {
+      "id": "tyler-rifle",
+      "title": "Second F44AA de Tyler",
+      "owner": "Tyler",
+      "places": [
+        "RO-LAB",
+        "RO-HIVE",
+        "RO-LOBBY"
+      ],
+      "scenes": [
+        "S23",
+        "S24",
+        "S25",
+        "S26"
+      ],
+      "mode": "accessoire_suivi",
+      "sources": [
+        "WETA-CRYO",
+        "FILM"
+      ],
+      "description": "Un identifiant F44-T distinct de celui de Rain. Porté puis resté au vestibule après la perte de Tyler.",
+      "flags": [
+        "rifle"
+      ],
+      "limit": "Pas de chargeur consommable séparé ni de tir autonome du PNJ ; non récupérable.",
+      "changed": true,
+      "sourceReserve": "La source Wētā documente la fabrication du F44AA, pas le nombre d’armes possédées par les personnages ni leurs chargeurs de jeu."
+    },
+    {
+      "id": "prod",
+      "title": "Bâton électrique de Bjorn",
+      "owner": "Bjorn",
+      "places": [
+        "RM-CRYO",
+        "CB-CORRIDOR"
+      ],
+      "scenes": [
+        "S08",
+        "S09",
+        "S10",
+        "S12",
+        "S13",
+        "S14",
+        "S16"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "PROPS-PIX",
+        "PROD-PLOT"
+      ],
+      "description": "Bâton porté, orienté vers la membrane puis arc bref lié à la séquence ; reste au sol après la perte de Bjorn.",
+      "flags": [],
+      "limit": "Pas de nouvelle arme équipable par Rain, pas d’attaque libre du PNJ. Modèle interprété.",
+      "changed": true
+    },
+    {
+      "id": "thermal",
+      "title": "Scanner thermique",
+      "owner": "Tyler",
+      "places": [
+        "RM-AIRLOCK",
+        "RM-CRYO",
+        "RO-THERMAL"
+      ],
+      "scenes": [
+        "S08",
+        "S09",
+        "S10",
+        "S12",
+        "S13",
+        "S18",
+        "S19",
+        "S20"
+      ],
+      "mode": "lecture_locale",
+      "sources": [
+        "TEMP-PIX",
+        "PROPS-PIX"
+      ],
+      "description": "Appareil distinct de la torche radiographique. B consulte la température locale connue quand Tyler est présent et disponible.",
+      "flags": [],
+      "limit": "Valeurs du moteur. Aucun radar, corps caché, nom ou distance d’ennemi.",
+      "changed": true
+    },
+    {
+      "id": "xray",
+      "title": "Torche radiographique",
+      "owner": "Navarro",
+      "places": [
+        "CB-COCKPIT"
+      ],
+      "scenes": [
+        "S14"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "XRAY-PIX",
+        "ILM-HUGGER"
+      ],
+      "description": "Navarro applique l’appareil sur sa poitrine ; Kay observe.",
+      "flags": [],
+      "limit": "Uniquement pendant le geste ; pas un scanner libre ni un remède.",
+      "changed": false
+    },
+    {
+      "id": "body-meter",
+      "title": "Thermomètre corporel de référence",
+      "owner": "Accessoire de conception",
+      "places": [],
+      "scenes": [],
+      "mode": "concept_non_integre",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Concept distinct du scanner thermique dans le portfolio.",
+      "flags": [],
+      "limit": "Emplacement et modèle final non identifiés : non ajouté arbitrairement.",
+      "changed": false
+    },
+    {
+      "id": "cryo-canister",
+      "title": "Réserve et réservoir cryogénique",
+      "owner": "Bjorn / groupe, manipulation dirigée",
+      "places": [
+        "RM-CRYO",
+        "RM-LAB"
+      ],
+      "scenes": [
+        "S10",
+        "S13"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "WETA-CRYO",
+        "PROPS-PIX"
+      ],
+      "description": "Déconnexion et application du froid au parasite. Départ du dégel enregistré.",
+      "flags": [],
+      "limit": "Le réservoir n’est pas une arme illimitée et le retrait ne soigne pas la contamination.",
+      "changed": false
+    },
+    {
+      "id": "xeno-frames",
+      "title": "Cryocadres de conservation",
+      "owner": "Infrastructure Remus",
+      "places": [
+        "RM-CRYO"
+      ],
+      "scenes": [
+        "S10"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "WETA-CRYO"
+      ],
+      "description": "Six logements couplés à leurs organismes ; dégivrage et ouverture persistent.",
+      "flags": [],
+      "limit": "Le nombre six appartient au niveau, pas à un inventaire authentifié du film.",
+      "changed": false
+    },
+    {
+      "id": "pods",
+      "title": "Capsules de cryostase",
+      "owner": "Équipage du Corbelan",
+      "places": [
+        "RM-BAY",
+        "CB-CRYO"
+      ],
+      "scenes": [
+        "S09",
+        "S33",
+        "S34",
+        "S41"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Prélèvement, installation, occupants et alarmes persistants.",
+      "flags": [
+        "pods"
+      ],
+      "limit": "Trois identifiants dans le module ; trajet de manutention condensé.",
+      "changed": false
+    },
+    {
+      "id": "rook-module",
+      "title": "Module d’autorisation de Rook",
+      "owner": "Rook → Rain → Andy",
+      "places": [
+        "RM-LAB",
+        "RM-DOOR",
+        "RO-LOBBY"
+      ],
+      "scenes": [
+        "S11",
+        "S12",
+        "S27"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Récupéré, transféré puis retiré ; associé aux états d’Andy.",
+      "flags": [
+        "module"
+      ],
+      "limit": "Ne débloque pas toutes les portes du jeu hors conditions narratives.",
+      "changed": false
+    },
+    {
+      "id": "rook-power",
+      "title": "Alimentation du poste de Rook",
+      "owner": "Rain / poste",
+      "places": [
+        "RM-LAB"
+      ],
+      "scenes": [
+        "S13"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Le branchement précède la parole de Rook.",
+      "flags": [],
+      "limit": "Le câblage est chorégraphié, pas un puzzle électrique libre.",
+      "changed": false
+    },
+    {
+      "id": "z01",
+      "title": "Échantillons Z-01",
+      "owner": "Groupe puis Kay",
+      "places": [
+        "RO-LAB",
+        "RO-HIVE",
+        "RO-LOBBY",
+        "CB-COCKPIT"
+      ],
+      "scenes": [
+        "S22",
+        "S25",
+        "S26K"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "LAB",
+        "FILM"
+      ],
+      "description": "Prélèvement, refus d’injection, puis utilisation par Kay selon le récit.",
+      "flags": [
+        "z01"
+      ],
+      "limit": "Le jeu ne donne pas un objet de soin rechargeable.",
+      "changed": false
+    },
+    {
+      "id": "injector",
+      "title": "Injecteur / administration Z-01",
+      "owner": "Kay",
+      "places": [
+        "CB-COCKPIT"
+      ],
+      "scenes": [
+        "S26K"
+      ],
+      "mode": "geste_dirige",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Geste d’injection dirigé et conséquences enregistrées.",
+      "flags": [
+        "kayInjected"
+      ],
+      "limit": "Pièce précise non confirmée. Aucun changement de localisation sans preuve.",
+      "changed": false
+    },
+    {
+      "id": "sample-case",
+      "title": "Transport des échantillons",
+      "owner": "Groupe",
+      "places": [
+        "RO-LAB",
+        "RO-LOBBY"
+      ],
+      "scenes": [
+        "S22",
+        "S26"
+      ],
+      "mode": "representation_partielle",
+      "sources": [
+        "LAB"
+      ],
+      "description": "Acquisition et transfert narratifs présents.",
+      "flags": [],
+      "limit": "Mallette suivie de main en main et quantité par flacon non simulées.",
+      "changed": false
+    },
+    {
+      "id": "flashlight",
+      "title": "Lampe portative",
+      "owner": "Personnage actif",
+      "places": [],
+      "scenes": [],
+      "mode": "commande_joueur",
+      "sources": [
+        "FILM"
+      ],
+      "description": "L : faisceau arrêté par les volumes, rangé lorsque les mains sont occupées.",
+      "flags": [],
+      "limit": "Accessoire de lisibilité ; modèle et disponibilité non certifiés plan par plan.",
+      "changed": false
+    },
+    {
+      "id": "radio",
+      "title": "Liaison radio et microphones",
+      "owner": "Équipage / Rook",
+      "places": [
+        "CB-COCKPIT",
+        "RM-LAB",
+        "RO-LAB"
+      ],
+      "scenes": [],
+      "mode": "representation_partielle",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Canaux local, radio et écran identifiés dans les échanges.",
+      "flags": [],
+      "limit": "Pas de fréquence réglable ni de talkie indépendant à inventaire.",
+      "changed": false
+    },
+    {
+      "id": "eva",
+      "title": "Combinaison EVA et casque",
+      "owner": "Rain",
+      "places": [
+        "CB-SUIT"
+      ],
+      "scenes": [
+        "S37"
+      ],
+      "mode": "commande_joueur",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Enfilage, vérification, casque et tenue retirée du support.",
+      "flags": [
+        "suit"
+      ],
+      "limit": "Modèle illustré, pas reproduction textile exacte.",
+      "changed": false
+    },
+    {
+      "id": "tether",
+      "title": "Harnais, longe et ancrage",
+      "owner": "Rain",
+      "places": [
+        "CB-CARGO"
+      ],
+      "scenes": [
+        "S38",
+        "S38E"
+      ],
+      "mode": "commande_joueur",
+      "sources": [
+        "FILM"
+      ],
+      "description": "R reprend la ligne ; détour par les arêtes et contrainte du corps.",
+      "flags": [
+        "tethered"
+      ],
+      "limit": "Coupe x/y simplifiée, pas de simulation universelle de corde.",
+      "changed": false
+    },
+    {
+      "id": "cargo-release",
+      "title": "Quatre attaches de fret",
+      "owner": "Rain",
+      "places": [
+        "CB-CARGO"
+      ],
+      "scenes": [
+        "S38",
+        "S38E"
+      ],
+      "mode": "commande_joueur",
+      "sources": [
+        "CARGO"
+      ],
+      "description": "Quatre gestes distincts, poignée et état du tableau liés aux actions.",
+      "flags": [],
+      "limit": "Géométrie et temps adaptés, destruction préparée.",
+      "changed": false
+    },
+    {
+      "id": "fixed-winch",
+      "title": "Treuil fixe / rouleau transportable",
+      "owner": "Infrastructure Corbelan",
+      "places": [
+        "CB-CARGO",
+        "CB-SUIT"
+      ],
+      "scenes": [
+        "S37",
+        "S38"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Le prélèvement du rouleau ne supprime pas le treuil fixe.",
+      "flags": [],
+      "limit": "Le rappel est une adaptation de contrôle, pas un treuil motorisé du film certifié.",
+      "changed": false
+    },
+    {
+      "id": "flight-panel",
+      "title": "Commandes du Corbelan",
+      "owner": "Navarro puis Rain",
+      "places": [
+        "CB-COCKPIT"
+      ],
+      "scenes": [
+        "S07",
+        "S32",
+        "S40"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "ARRI"
+      ],
+      "description": "Décollage, dommages, désamarrage et cap utilisent la même cabine.",
+      "flags": [],
+      "limit": "Pas de pilotage orbital libre.",
+      "changed": false
+    },
+    {
+      "id": "airlock-panel",
+      "title": "Commande de sas",
+      "owner": "Tyler / Andy",
+      "places": [
+        "RM-AIRLOCK"
+      ],
+      "scenes": [
+        "S08"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Équilibrage et ouverture réelle du vantail intérieur.",
+      "flags": [],
+      "limit": "Ne reproduit pas les mécanismes de tous les ouvre-portes du portfolio.",
+      "changed": false
+    },
+    {
+      "id": "gravity-panel",
+      "title": "Commande de gravité",
+      "owner": "Rain / infrastructure",
+      "places": [
+        "RO-HIVE",
+        "RO-SHAFT"
+      ],
+      "scenes": [
+        "S28",
+        "S29"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "GRAVITY"
+      ],
+      "description": "Gravité active localement, acide sur supports ; afficheur synchronisé.",
+      "flags": [],
+      "limit": "Cycle et géométrie du jeu, pas modèle orbital.",
+      "changed": false
+    },
+    {
+      "id": "laser",
+      "title": "Laser d’analyse du prologue",
+      "owner": "Laboratoire de récupération",
+      "places": [],
+      "scenes": [],
+      "mode": "representation_partielle",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Découpe évoquée pendant l’ouverture de l’objet organique.",
+      "flags": [],
+      "limit": "Pas d’outil récupérable par les protagonistes, prop final non modélisé séparément.",
+      "changed": false
+    },
+    {
+      "id": "holder",
+      "title": "Support de l’objet organique",
+      "owner": "Laboratoire de récupération",
+      "places": [],
+      "scenes": [],
+      "mode": "representation_partielle",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Poste visible pendant le prologue.",
+      "flags": [],
+      "limit": "Support simplifié ; aucun niveau libre du laboratoire historique.",
+      "changed": false
+    },
+    {
+      "id": "door-opener",
+      "title": "Ouvre-portes portatifs de conception",
+      "owner": "Accessoires de conception",
+      "places": [],
+      "scenes": [],
+      "mode": "concept_non_integre",
+      "sources": [
+        "PROPS-PIX"
+      ],
+      "description": "Deux recherches d’appareils documentées par Pixoloid.",
+      "flags": [],
+      "limit": "Présence et emplois exacts au montage non certifiés. Ne pas créer un passe-partout artificiel.",
+      "changed": false
+    },
+    {
+      "id": "other-weapons",
+      "title": "Autres armes de la franchise",
+      "owner": "Hors inventaire établi",
+      "places": [],
+      "scenes": [],
+      "mode": "exclu",
+      "sources": [
+        "FILM"
+      ],
+      "description": "Aucun M41A, lance-flammes, lance-grenades ou détecteur de mouvement d’un autre film ajouté par défaut.",
+      "flags": [],
+      "limit": "Le catalogue n’affirme pas que toutes les pièces de prop visibles ont été recensées.",
+      "changed": false
+    },
+    {
+      "id": "capsule-dolly",
+      "title": "Berceau / chariot de manutention des capsules",
+      "owner": "Infrastructure Remus",
+      "places": [
+        "RM-BAY"
+      ],
+      "scenes": [
+        "S09"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "STATION",
+        "PROPS-PIX"
+      ],
+      "description": "Supports visibles pendant le désarrimage et le déplacement local des capsules.",
+      "flags": [
+        "pods"
+      ],
+      "limit": "Le trajet complet jusqu’au Corbelan reste une ellipse; géométrie originale de l’adaptation."
+    },
+    {
+      "id": "lift-cabin",
+      "title": "Cabine du monte-charge de Romulus",
+      "owner": "Infrastructure Romulus",
+      "places": [
+        "RO-LOBBY",
+        "RO-SHAFT"
+      ],
+      "scenes": [
+        "S26",
+        "S29"
+      ],
+      "mode": "appareil_fixe",
+      "sources": [
+        "HIVE-LIFT"
+      ],
+      "description": "Grille, cabine et départ vertical partagent le même état narratif.",
+      "flags": [
+        "kaySent"
+      ],
+      "limit": "La course entre tous les ponts n’est pas librement simulée."
+    },
+    {
+      "id": "recovery-hazmat",
+      "title": "Équipement de récupération du prologue",
+      "owner": "Équipe de récupération",
+      "places": [],
+      "scenes": [],
+      "mode": "representation_partielle",
+      "sources": [
+        "ASC-OPENING"
+      ],
+      "description": "Silhouettes de protection et poste d’analyse dans la séquence temporelle.",
+      "flags": [],
+      "limit": "Pas d’inventaire libre; détails et modèles exacts à confirmer."
+    }
+  ],
+  "wardrobe": [
+    {
+      "name": "Rain",
+      "reference": "Parka rouge ample ; tee-shirt vert Weyland ; baskets claires, accents rouges ; EVA en finale.",
+      "implemented": "Nouvelle parka en trois pièces transparentes. Couche visible jusqu’au départ ; tenue légère ensuite ; combinaison sur flag suit.",
+      "missing": "Transition exacte du retrait à confronter au montage, visages stylisés et tenue de cryostase simplifiée.",
+      "sources": [
+        "WARDROBE-NFS",
+        "WARDROBE-MPA"
+      ]
+    },
+    {
+      "name": "Andy",
+      "reference": "Combinaison différente, capuche fixée, fermetures et banane. Pas de parka.",
+      "implemented": "Tenue distincte conservée, états ami/corporate/restauré/endommagé ; jamais la couche de Rain.",
+      "missing": "Tissu, proportions et performances du visage non reproduits 1:1.",
+      "sources": [
+        "WARDROBE-NFS"
+      ]
+    },
+    {
+      "name": "Navarro",
+      "reference": "Chemise à palmiers et cuir, cheveux courts.",
+      "implemented": "Chemise et gilet distincts; sur Jackson’s Star, couche extérieure sombre ajoutée par le rendu v20.",
+      "missing": "Motif et coupe exacte à confronter plan par plan; usure progressive non reproduite.",
+      "sources": [
+        "WARDROBE-NFS",
+        "WARDROBE-MPA"
+      ]
+    },
+    {
+      "name": "Kay",
+      "reference": "Vêtement de travail, salopette ; évolution liée aux blessures et à la capsule.",
+      "implemented": "Salopette distincte; couche pluie extérieure claire dans les scènes coloniales, puis tenue intérieure.",
+      "missing": "Coupe exacte et succession des couches à confronter au montage.",
+      "sources": [
+        "WARDROBE-NFS"
+      ]
+    },
+    {
+      "name": "Bjorn",
+      "reference": "Vêtement de mineur, bâton électrique.",
+      "implemented": "Combinaison industrielle, bâton électrique et surcouche de pluie sombre sur la colonie.",
+      "missing": "Détails textiles, accessoires personnels et dégradation exacte non reproduits.",
+      "sources": [
+        "WARDROBE-NFS",
+        "PROPS-PIX"
+      ]
+    },
+    {
+      "name": "Tyler",
+      "reference": "Vêtement de travail superposé, matériel de récupération puis fusil.",
+      "implemented": "Superpositions de travail, scanner, second F44 et manteau de pluie rendu dans les scènes extérieures.",
+      "missing": "Coupe exacte et état de salissure plan par plan à compléter.",
+      "sources": [
+        "WARDROBE-NFS",
+        "PROPS-PIX"
+      ]
+    },
+    {
+      "name": "Rook",
+      "reference": "Synthétique endommagé au poste scientifique.",
+      "implemented": "Corps brisé, alimentation et canaux écran/radio ; ne suit pas le groupe.",
+      "missing": "Likeness et prothèses exactes non reproduites.",
+      "sources": [
+        "FILM"
+      ]
+    },
+    {
+      "name": "Agent",
+      "reference": "Personnel au guichet de la compagnie.",
+      "implemented": "Agent derrière son comptoir et échange dirigé.",
+      "missing": "Silhouette interprétée ; figurants de la colonie et agression complète absents.",
+      "sources": [
+        "FILM"
+      ]
+    }
+  ],
+  "coverageGaps": [
+    {
+      "id": "opening-lab",
+      "title": "Laboratoire du prologue et récupération",
+      "status": "sequence_temporelle_referencee",
+      "detail": "Deux emplacements temporels désormais recensés : récupération automatisée et laboratoire. Toujours pas des niveaux libres."
+    },
+    {
+      "id": "sun-dream",
+      "title": "Rêve de lumière / monde d’arrivée",
+      "status": "non_reconstitue",
+      "detail": "Aucune région Yvaga jouable ajoutée : destination du récit, non atteinte à l’écran dans cette adaptation."
+    },
+    {
+      "id": "colony-crowd",
+      "title": "Foule, agression et extensions de la colonie",
+      "status": "partiel_renforce",
+      "detail": "Rue, guichet, foule de travail et altercation autour d’Andy représentés; mines intérieures et foule complète restent absentes."
+    },
+    {
+      "id": "transfer-route",
+      "title": "Manutention et première entrée Rain/Navarro",
+      "status": "partiel_renforce",
+      "detail": "Désarrimage et déplacement sur berceau sont visibles dans la baie; transfert jusqu’au Corbelan reste une coupe éditoriale."
+    },
+    {
+      "id": "shaft-car",
+      "title": "Course du monte-charge",
+      "status": "partiel_renforce",
+      "detail": "Cabine, fermeture et départ vertical visibles; course continue entre tous les ponts non simulée."
+    },
+    {
+      "id": "injection-location",
+      "title": "Lieu exact de l’injection de Kay",
+      "status": "a_verifier",
+      "detail": "Raccord au cockpit hérité. Aucune source primaire obtenue ne certifie sa pièce précise."
+    },
+    {
+      "id": "physical-blueprint",
+      "title": "Plan coté de Renaissance et du Corbelan",
+      "status": "non_obtenu",
+      "detail": "Pas de plan global final suffisamment renseigné. Le réseau vérifie les données du jeu, pas les mesures du plateau."
+    },
+    {
+      "id": "cut-security",
+      "title": "Couloir de sécurité séparé",
+      "status": "ecarte_documente",
+      "detail": "Le concepteur indique qu’il a été coupé et que le casier blanc a été déplacé au laboratoire."
+    },
+    {
+      "id": "full-wardrobe",
+      "title": "Toutes les couches et dégradations des tenues",
+      "status": "partiel_renforce",
+      "detail": "Parka Rain et couches pluie des quatre jeunes colonistes renforcées. Textile, usure et transitions restent à vérifier plan par plan."
+    },
+    {
+      "id": "tyler-rifle",
+      "title": "Second fusil de Tyler",
+      "status": "partiel",
+      "detail": "Second fusil désormais identifié F44-T, porté et posé après la perte de Tyler. Pas de chargeur autonome, de tir de PNJ ou de récupération libre."
+    }
+  ],
+  "thresholds": [
+    {
+      "id": "js-home__js-street",
+      "place": "JS-HOME",
+      "to": "JS-STREET",
+      "x": 925,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S01"
+      ],
+      "doors": [
+        "S01-TO-S02"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "js-street__js-office",
+      "place": "JS-STREET",
+      "to": "JS-OFFICE",
+      "x": 920,
+      "z": 40,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S02"
+      ],
+      "doors": [
+        "S02-TO-S03"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "alcove_de_paroi",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "js-street__js-trailer",
+      "place": "JS-STREET",
+      "to": "JS-TRAILER",
+      "x": 2780,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S02"
+      ],
+      "doors": [
+        "S02-TO-S04"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "js-office__js-street",
+      "place": "JS-OFFICE",
+      "to": "JS-STREET",
+      "x": 105,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S03"
+      ],
+      "doors": [
+        "S03-TO-S02"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "js-trailer__js-pad",
+      "place": "JS-TRAILER",
+      "to": "JS-PAD",
+      "x": 1145,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S04"
+      ],
+      "doors": [
+        "S04-TO-S05"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "js-pad__cb-corridor",
+      "place": "JS-PAD",
+      "to": "CB-CORRIDOR",
+      "x": 1850,
+      "z": 170,
+      "y": 0,
+      "kind": "ramp",
+      "scenes": [
+        "S05"
+      ],
+      "doors": [
+        "S05-TO-S06"
+      ],
+      "art": "ramp",
+      "appearance": null,
+      "mount": {
+        "type": "rampe_sur_support",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-corridor__cb-cryo",
+      "place": "CB-CORRIDOR",
+      "to": "CB-CRYO",
+      "x": 430,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06",
+        "S32C",
+        "S40C"
+      ],
+      "doors": [
+        "S06-TO-S06C",
+        "S32C-TO-S33",
+        "S40C-TO-S41"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "alcove_de_paroi",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-corridor__cb-suit",
+      "place": "CB-CORRIDOR",
+      "to": "CB-SUIT",
+      "x": 1090,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06",
+        "S36"
+      ],
+      "doors": [
+        "S06-TO-S06S",
+        "S36-TO-S37"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "alcove_de_paroi",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-corridor__cb-cockpit",
+      "place": "CB-CORRIDOR",
+      "to": "CB-COCKPIT",
+      "x": 1470,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06",
+        "S31C",
+        "S39C"
+      ],
+      "doors": [
+        "S06-TO-S07",
+        "S31C-TO-S32",
+        "S39C-TO-S40"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-cryo__cb-corridor",
+      "place": "CB-CRYO",
+      "to": "CB-CORRIDOR",
+      "x": 105,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06C",
+        "S35R"
+      ],
+      "doors": [
+        "S06C-TO-S06",
+        "S35R-TO-S36"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-suit__cb-corridor",
+      "place": "CB-SUIT",
+      "to": "CB-CORRIDOR",
+      "x": 105,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06S",
+        "S39"
+      ],
+      "doors": [
+        "S06S-TO-S06",
+        "S39-TO-S40"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-suit__cb-cargo",
+      "place": "CB-SUIT",
+      "to": "CB-CARGO",
+      "x": 760,
+      "z": 154,
+      "y": 0,
+      "kind": "stairs",
+      "scenes": [
+        "S06S",
+        "S37"
+      ],
+      "doors": [
+        "S06S-TO-S06F",
+        "S37-TO-S38"
+      ],
+      "art": "stairwell",
+      "appearance": null,
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-cargo__cb-suit",
+      "place": "CB-CARGO",
+      "to": "CB-SUIT",
+      "x": 105,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S06F"
+      ],
+      "doors": [
+        "S06F-TO-S06S"
+      ],
+      "art": "stairwell",
+      "appearance": null,
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-cockpit__cb-corridor",
+      "place": "CB-COCKPIT",
+      "to": "CB-CORRIDOR",
+      "x": 105,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S07",
+        "S14",
+        "S32",
+        "S40"
+      ],
+      "doors": [
+        "S07-TO-S06",
+        "S14-TO-S15",
+        "S32-TO-S33",
+        "S40-TO-S41"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "rm-airlock__rm-bay",
+      "place": "RM-AIRLOCK",
+      "to": "RM-BAY",
+      "x": 1025,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S08"
+      ],
+      "doors": [
+        "S08-TO-S09"
+      ],
+      "art": "existing-airlock",
+      "appearance": null,
+      "mount": {
+        "type": "sas_existant",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "rm-lab__rm-door",
+      "place": "RM-LAB",
+      "to": "RM-DOOR",
+      "x": 2005,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S11"
+      ],
+      "doors": [
+        "S11-TO-S12"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-corridor__ro-hangar",
+      "place": "CB-CORRIDOR",
+      "to": "RO-HANGAR",
+      "x": 1390,
+      "z": 154,
+      "y": 0,
+      "kind": "ramp",
+      "scenes": [
+        "S16"
+      ],
+      "doors": [
+        "S16-TO-S17"
+      ],
+      "art": "ramp",
+      "appearance": "crashed",
+      "mount": {
+        "type": "rampe_sur_support",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ln-passage__ln-stairs",
+      "place": "LN-PASSAGE",
+      "to": "LN-STAIRS",
+      "x": 2485,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S18"
+      ],
+      "doors": [
+        "S18-TO-S19"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ln-stairs__ro-thermal",
+      "place": "LN-STAIRS",
+      "to": "RO-THERMAL",
+      "x": 1490,
+      "z": 154,
+      "y": 201,
+      "kind": "stairs",
+      "scenes": [
+        "S19"
+      ],
+      "doors": [
+        "S19-TO-S20"
+      ],
+      "art": "stairwell",
+      "appearance": null,
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-thermal__ro-gate",
+      "place": "RO-THERMAL",
+      "to": "RO-GATE",
+      "x": 2735,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S20"
+      ],
+      "doors": [
+        "S20-TO-S21"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-gate__ro-lab",
+      "place": "RO-GATE",
+      "to": "RO-LAB",
+      "x": 300,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S21"
+      ],
+      "doors": [
+        "S21-TO-S22"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "alcove_de_paroi",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-lab__ro-conveyor",
+      "place": "RO-LAB",
+      "to": "RO-CONVEYOR",
+      "x": 2210,
+      "z": 154,
+      "y": 0,
+      "kind": "crouch",
+      "scenes": [
+        "S23"
+      ],
+      "doors": [
+        "S23-TO-S24"
+      ],
+      "art": "curtain",
+      "appearance": null,
+      "mount": {
+        "type": "capot_de_convoyeur",
+        "wallDepth": 22,
+        "frameHeight": 100,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-conveyor__ro-hive",
+      "place": "RO-CONVEYOR",
+      "to": "RO-HIVE",
+      "x": 1735,
+      "z": 154,
+      "y": 0,
+      "kind": "crouch",
+      "scenes": [
+        "S24"
+      ],
+      "doors": [
+        "S24-TO-S25"
+      ],
+      "art": "curtain",
+      "appearance": null,
+      "mount": {
+        "type": "capot_de_convoyeur",
+        "wallDepth": 22,
+        "frameHeight": 100,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-hive__ro-lobby",
+      "place": "RO-HIVE",
+      "to": "RO-LOBBY",
+      "x": 2905,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S25"
+      ],
+      "doors": [
+        "S25-TO-S26"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_droit",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-lobby__ro-hive",
+      "place": "RO-LOBBY",
+      "to": "RO-HIVE",
+      "x": 155,
+      "z": 154,
+      "y": 0,
+      "kind": "walk",
+      "scenes": [
+        "S27"
+      ],
+      "doors": [
+        "S27-TO-S28"
+      ],
+      "art": "hatch",
+      "appearance": null,
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-shaft__ro-upper",
+      "place": "RO-SHAFT",
+      "to": "RO-UPPER",
+      "x": 1100,
+      "z": 154,
+      "y": 330,
+      "kind": "stairs",
+      "scenes": [
+        "S29"
+      ],
+      "doors": [
+        "S29-TO-S30"
+      ],
+      "art": "stairwell",
+      "appearance": null,
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-upper__ro-hangar",
+      "place": "RO-UPPER",
+      "to": "RO-HANGAR",
+      "x": 1695,
+      "z": 154,
+      "y": 0,
+      "kind": "stairs",
+      "scenes": [
+        "S30"
+      ],
+      "doors": [
+        "S30-TO-S31"
+      ],
+      "art": "stairwell",
+      "appearance": null,
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-cryo__cb-cargo",
+      "place": "CB-CRYO",
+      "to": "CB-CARGO",
+      "x": 740,
+      "z": 218,
+      "y": 0,
+      "kind": "stairs",
+      "scenes": [
+        "S35"
+      ],
+      "doors": [
+        "S35-TO-S35B"
+      ],
+      "art": "breach",
+      "appearance": "birthPodBelow",
+      "mount": {
+        "type": "breche_de_plancher",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "cb-cargo__cb-cryo",
+      "place": "CB-CARGO",
+      "to": "CB-CRYO",
+      "x": 1450,
+      "z": 210,
+      "y": 0,
+      "kind": "stairs",
+      "scenes": [
+        "S35B"
+      ],
+      "doors": [
+        "S35B-TO-S35R"
+      ],
+      "art": "breach",
+      "appearance": "birthPodBelow",
+      "mount": {
+        "type": "breche_de_plancher",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    },
+    {
+      "id": "ro-hangar__cb-corridor",
+      "place": "RO-HANGAR",
+      "to": "CB-CORRIDOR",
+      "x": 1510,
+      "z": 170,
+      "y": 0,
+      "kind": "ramp",
+      "scenes": [
+        "S31"
+      ],
+      "doors": [
+        "S31-TO-S32"
+      ],
+      "art": "ramp",
+      "appearance": "crashed",
+      "mount": {
+        "type": "rampe_sur_support",
+        "wallDepth": 22,
+        "frameHeight": 173,
+        "source": "Implantation interprétée ; support de dessin non collision supplémentaire"
+      }
+    }
+  ],
+  "arrivalMarkers": [
+    {
+      "id": "entry_JS-STREET_JS-HOME",
+      "place": "JS-STREET",
+      "to": "JS-HOME",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S02"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_JS-TRAILER_JS-STREET",
+      "place": "JS-TRAILER",
+      "to": "JS-STREET",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S04"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_JS-PAD_JS-TRAILER",
+      "place": "JS-PAD",
+      "to": "JS-TRAILER",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S05"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_RM-BAY_RM-AIRLOCK",
+      "place": "RM-BAY",
+      "to": "RM-AIRLOCK",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S09"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_RM-DOOR_RM-LAB",
+      "place": "RM-DOOR",
+      "to": "RM-LAB",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S12"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_LN-STAIRS_LN-PASSAGE",
+      "place": "LN-STAIRS",
+      "to": "LN-PASSAGE",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S19"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_RO-THERMAL_LN-STAIRS",
+      "place": "RO-THERMAL",
+      "to": "LN-STAIRS",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "stairwell",
+      "entryOnly": true,
+      "scenes": [
+        "S20"
+      ],
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22
+      },
+      "label": "PALIER D’ARRIVÉE / RETOUR NON JOUÉ",
+      "sourceKind": "stairs"
+    },
+    {
+      "id": "entry_RO-GATE_RO-THERMAL",
+      "place": "RO-GATE",
+      "to": "RO-THERMAL",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S21"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_RO-LAB_RO-GATE",
+      "place": "RO-LAB",
+      "to": "RO-GATE",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "hatch",
+      "entryOnly": true,
+      "scenes": [
+        "S22"
+      ],
+      "mount": {
+        "type": "retour_mural_gauche",
+        "wallDepth": 22
+      },
+      "label": "ACCÈS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "walk"
+    },
+    {
+      "id": "entry_RO-CONVEYOR_RO-LAB",
+      "place": "RO-CONVEYOR",
+      "to": "RO-LAB",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "curtain",
+      "entryOnly": true,
+      "scenes": [
+        "S24"
+      ],
+      "mount": {
+        "type": "capot_de_convoyeur",
+        "wallDepth": 22,
+        "frameHeight": 100
+      },
+      "label": "PASSAGE BAS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "crouch"
+    },
+    {
+      "id": "entry_RO-HIVE_RO-CONVEYOR",
+      "place": "RO-HIVE",
+      "to": "RO-CONVEYOR",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "curtain",
+      "entryOnly": true,
+      "scenes": [
+        "S25"
+      ],
+      "mount": {
+        "type": "capot_de_convoyeur",
+        "wallDepth": 22,
+        "frameHeight": 100
+      },
+      "label": "PASSAGE BAS EMPRUNTÉ / RETOUR FERMÉ",
+      "sourceKind": "crouch"
+    },
+    {
+      "id": "entry_RO-UPPER_RO-SHAFT",
+      "place": "RO-UPPER",
+      "to": "RO-SHAFT",
+      "x": 62,
+      "z": 22,
+      "y": 0,
+      "art": "stairwell",
+      "entryOnly": true,
+      "scenes": [
+        "S30"
+      ],
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22
+      },
+      "label": "PALIER D’ARRIVÉE / RETOUR NON JOUÉ",
+      "sourceKind": "stairs"
+    },
+    {
+      "id": "entry_RO-HANGAR_RO-UPPER",
+      "place": "RO-HANGAR",
+      "to": "RO-UPPER",
+      "x": 2838,
+      "z": 22,
+      "y": 0,
+      "art": "stairwell",
+      "entryOnly": true,
+      "scenes": [
+        "S31"
+      ],
+      "mount": {
+        "type": "tremie_et_garde_corps",
+        "wallDepth": 22
+      },
+      "label": "PALIER D’ARRIVÉE / RETOUR NON JOUÉ",
+      "sourceKind": "stairs"
+    }
+  ]
+}

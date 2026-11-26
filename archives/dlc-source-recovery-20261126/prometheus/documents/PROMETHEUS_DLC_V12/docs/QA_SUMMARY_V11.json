@@ -1,0 +1,85 @@
+{
+  "version": "11.0.0-candidate.1",
+  "htmlSha256": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+  "counts": {
+    "rooms": 43,
+    "links": 53,
+    "endpoints": 106,
+    "chapters": 20,
+    "objectives": 41,
+    "archives": 48,
+    "placements": 458,
+    "families": 112
+  },
+  "unit": {
+    "passed": 1268,
+    "total": 1268
+  },
+  "campaigns": {
+    "passed": 36,
+    "total": 36
+  },
+  "browser": {
+    "passed": 513,
+    "total": 513
+  },
+  "installer": {
+    "passed": 11,
+    "total": 11
+  },
+  "spatial": {
+    "passed": 1107,
+    "total": 1107
+  },
+  "files": {
+    "unit": [
+      "unit-results.json",
+      "expedition-results.json",
+      "habitat-results.json",
+      "tension-results.json",
+      "science-results.json",
+      "finale-results.json",
+      "signals-results.json",
+      "crew-results.json",
+      "recon-results.json",
+      "wayfinder-results.json",
+      "fidelity-results.json"
+    ],
+    "campaigns": [
+      "walkthrough-results.json",
+      "field-campaign-results.json",
+      "tension-campaign-results.json",
+      "science-campaign-results.json",
+      "finale-campaign-results.json",
+      "signals-campaign-results.json",
+      "crew-campaign-results.json",
+      "recon-campaign-results.json",
+      "wayfinder-campaign-results.json",
+      "fidelity-campaign-results.json"
+    ],
+    "browser": [
+      "browser-results.json",
+      "browser-habitat-results.json",
+      "browser-tension-results.json",
+      "browser-science-results.json",
+      "browser-finale-results.json",
+      "browser-signals-results.json",
+      "browser-crew-results.json",
+      "browser-recon-results.json",
+      "browser-wayfinder-results.json",
+      "browser-fidelity-results.json"
+    ]
+  },
+  "browserHashes": {
+    "browser-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-habitat-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-tension-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-science-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-finale-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-signals-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-crew-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-recon-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-wayfinder-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12",
+    "browser-fidelity-results.json": "bc33bf1838f67b53a537810fdaf21b6d2b1c436ecd4e5963c1ee240681763b12"
+  }
+}

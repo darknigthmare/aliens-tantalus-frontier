@@ -1,0 +1,2092 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+  "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+  "files": [
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/qualify-browser-v11.py",
+      "crc32": "1b381d27",
+      "size": 1549,
+      "sha256": "1aecbb64e577c1f25b3d431ddd7ddba2465aa7cfb2f7ccbcade7f87732c516ea",
+      "gitBlobSha": "2a57ba9bb940317e9c4009e2deb4d2db16535bac"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/package.py",
+      "crc32": "bf1d5eae",
+      "size": 9138,
+      "sha256": "16089397fbb17bfef663d27526e99005e920d1e86fc1d03052d1b6c7683ae3e5",
+      "gitBlobSha": "7332a3f3d7acaa500f59bd9a95d0b79362961287"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/install.mjs",
+      "crc32": "e11bd9e9",
+      "size": 6942,
+      "sha256": "f78b4d7140d8202ae914ea7906abed7a00ed596da14791172e03cf9af6b222a3",
+      "gitBlobSha": "2e4c06cacc6348b34101231cb8132108a9aef751"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/bundle.py",
+      "crc32": "9781b968",
+      "size": 1405,
+      "sha256": "dedbef083bcf57bfc9462cbd5b12beb27b93e96de7b31d49bada5d26834a8e65",
+      "gitBlobSha": "219f9076b45282572b724c3e1e01d0ea272aadab"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/build-docs-v11.py",
+      "crc32": "8bb203b6",
+      "size": 23567,
+      "sha256": "895a54a5b3bfd238f0effb0893866e1364f23896e4a2b2a01d93fbf559ea53f9",
+      "gitBlobSha": "b3f79e284d78247b9d4a5264617ee615bb809cb0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/build-docs.py",
+      "crc32": "356441ef",
+      "size": 125,
+      "sha256": "cbf2098dc951f3e3f4939e16bfa3fa69db44a103b1003ab691654352885d39c3",
+      "gitBlobSha": "9ac92b2f93b0edf5b882400e76d08805b68e7b98"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/run-qualification-v11.py",
+      "crc32": "0d377bf5",
+      "size": 1482,
+      "sha256": "983e2e08f8470c44b0387d0fc6b51b795a7c62cce0d43488c3cb92dff7010f6a",
+      "gitBlobSha": "9b5c791494eaa20ad7e3573dfcd307d8fdd12fb1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/scripts/build-docs-v12.py",
+      "crc32": "86f5894b",
+      "size": 18977,
+      "sha256": "d326f5b788278ae094d32a3e635037e96b2265cf17a5a62cfc725ec011f80381",
+      "gitBlobSha": "864568e911fdc5f379264491c99cf9aa042e0b40"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/package.json",
+      "crc32": "abd9b131",
+      "size": 1541,
+      "sha256": "e5c48aebf7c121bd2f07f3c8e58d8b551cc8ce6acfb6ab229d5d2a07efcde3c7",
+      "gitBlobSha": "7353d93a8177d81fae9ac60fc25309c6cca9e61a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/README_V12.md",
+      "crc32": "2d25cdfd",
+      "size": 989,
+      "sha256": "06df53524a7ba010964866e4b1951b49b0e60ea01817be631a1988938826c2bc",
+      "gitBlobSha": "35fed7645a89aa76839c62d0ca7df2e1b51f6bf6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/finale-render.mjs",
+      "crc32": "ad55b143",
+      "size": 6720,
+      "sha256": "fa0f0d281cdeb9a2888e0023f93ef8bb653543ec92f442d5dc87c67006fb2e65",
+      "gitBlobSha": "42c8108d720783463f9fdf3b9c7219229818b630"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/recon.mjs",
+      "crc32": "5455dd09",
+      "size": 15317,
+      "sha256": "7b2552ea29ebeeece389f206adadce87d694d63c56e085d5fad879c2901aebb8",
+      "gitBlobSha": "58bd8e1e38273373ec765ad59815a0ef345066b0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/finale.mjs",
+      "crc32": "53fcf2a6",
+      "size": 12798,
+      "sha256": "03b01188dcb97b81646e6b6f6856cc84c49841a042dd764bf42e9f6cd6b80258",
+      "gitBlobSha": "be2c5ac0978a70de070e4545ae2d65e0fc93436e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/crew-data.mjs",
+      "crc32": "e13df75a",
+      "size": 11253,
+      "sha256": "fdf3806f31dba70e9ccedbc33e78447b10d0fe881cd98c712e91d142bfa26640",
+      "gitBlobSha": "f302f1910b5110a005c333d4d745a8e7e5114162"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/index.html",
+      "crc32": "afe02939",
+      "size": 4376,
+      "sha256": "c11c88f0f5a60067dfa0a4d753b3805c6b10456ebf094cdbf0cc1855443ff4de",
+      "gitBlobSha": "515380eeafb8e805197a514deb073f9da31d4015"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/science.mjs",
+      "crc32": "ed616a89",
+      "size": 15909,
+      "sha256": "a30108204100a6ee00600895a68d5b0236153f3c17a94c4e46b6f3d97ae9ea47",
+      "gitBlobSha": "1f5de554028c52f36d2efa3ee184627b167c194f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/signals.mjs",
+      "crc32": "8626b576",
+      "size": 8129,
+      "sha256": "a7c969bd205b7e7a0b0730a68e6246e1d047c772357260dac7530f3131c314ef",
+      "gitBlobSha": "f8f14855652b617a068439f82a0ae5f30dcbfec6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/bundle.js",
+      "crc32": "c5582243",
+      "size": 568702,
+      "sha256": "8c2c363ef1353872af87cc15eea672ad8892b2af152c2711ccb63d550966148e",
+      "gitBlobSha": "42bea612f85bfc4cf946e1c7d8f65b6febc4b992"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/habitat-render.mjs",
+      "crc32": "a78a5e13",
+      "size": 10252,
+      "sha256": "513891f23c1601360b08a94da16b87bdaed1b5270de9554cd0c141047913a9eb",
+      "gitBlobSha": "6f8fb2b78d3a08b1ed979c63d22160676a07e031"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/bridge.mjs",
+      "crc32": "f01753f6",
+      "size": 1613,
+      "sha256": "9537bb3f23dba9f923d45c5dacd0fd31526a218091c82905cc337f7937151a7a",
+      "gitBlobSha": "1e969aa2b52cc8ea42880ae09ec194b751708651"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/signals-render.mjs",
+      "crc32": "71464878",
+      "size": 1272,
+      "sha256": "bdd9135a9fa048662fb96034e87519473ed587ae493bd974a920af611b3b21ed",
+      "gitBlobSha": "411cd379b0d1692d1b6d93a140611de624baab7d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/fidelity-ui.mjs",
+      "crc32": "176a14ba",
+      "size": 2094,
+      "sha256": "12cf962f6a934075b67347b048eb06cc5897dcf3221aeb81a215aba45ee57b82",
+      "gitBlobSha": "93c0a13c9fb1dd7ef7b4aa35ca10b90893fa1ce1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/recon-render.mjs",
+      "crc32": "964022c0",
+      "size": 2976,
+      "sha256": "1fb4afe0817dc0bd3520b771b40d5e539a996f84e3496293cfd256633d25b77a",
+      "gitBlobSha": "93dc7ec1a0d8a6084b6e4301ddd303f7f7a0208f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/tension-render.mjs",
+      "crc32": "bc45f83b",
+      "size": 8638,
+      "sha256": "0cbf319fbc4b15c33d34812dc9ea6c054468f118786656647dc1251d381bda74",
+      "gitBlobSha": "406e51487fee7dd2a1b304468b79cb58ee6ccf27"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/habitat.mjs",
+      "crc32": "ec4f642b",
+      "size": 13079,
+      "sha256": "c073885edc85be5d37425275e96317759fde8bb4ff27e70516cc06fd882934e8",
+      "gitBlobSha": "cffa005820e0cbb5bddf496c3409bc0ce415d2e3"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/expedition.mjs",
+      "crc32": "cf6c5531",
+      "size": 15457,
+      "sha256": "d35f85635aaa265e4c23e708100c87e81311ca8618413867fd03608789547d3d",
+      "gitBlobSha": "6ee37f464c8951b867710dde65fef0076c2a36d2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/wayfinder.mjs",
+      "crc32": "77b17fa3",
+      "size": 14652,
+      "sha256": "7ba965b58a1d89ca62413265b745d4abcbac2d8c66e847ad66f3c6d7bf992c50",
+      "gitBlobSha": "53644ea8066a8f280d27456cf5c0b49a88a24fac"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/content.json",
+      "crc32": "16df7eb6",
+      "size": 272928,
+      "sha256": "ff12e36d3c9cc347724dbfdd4a56dd76f998780077b651d4156ff6c5060e41c3",
+      "gitBlobSha": "aa183925615e9070fc600a350fb4b880074e8a19"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/crew.mjs",
+      "crc32": "25d5d7d9",
+      "size": 11272,
+      "sha256": "86147bbfa3c58ec69e80706a0d01ed65c3f1dcc32bfc03832a6f4d5140194482",
+      "gitBlobSha": "067e31c4f7c4b027cd04c233069db1baaee19323"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/recon-ui.mjs",
+      "crc32": "fd04455f",
+      "size": 3422,
+      "sha256": "765d97a7231631200672764cfee4398e09b157177261c89a61a86c1d1b998ac3",
+      "gitBlobSha": "73888bf000e7edd2f7b8a217b97e6e51651d64ce"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/render.mjs",
+      "crc32": "11797a9c",
+      "size": 36047,
+      "sha256": "e2a81bb60a205626c1787ec58c4e3365204148bf7013262963ee77c84707acb2",
+      "gitBlobSha": "0e1d2ed0d14ab80c8967e2caac82233102c3c7e8"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/content.mjs",
+      "crc32": "5856c1ae",
+      "size": 167077,
+      "sha256": "6476b4956d74cf307f2cfe8ececff741ea56ab0d4b5eb44aa585bc438721b398",
+      "gitBlobSha": "675b08d551068c53dcf90d7ea91df0e72f3c84c4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/science-render.mjs",
+      "crc32": "708e610e",
+      "size": 7091,
+      "sha256": "fa3036ad28c6aa4efbb5784dad6b3eebcf3eb9da201c1199ad087e209e7f1e36",
+      "gitBlobSha": "476b046ef623addfc32f1c7e28a80e072482bee9"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/app.mjs",
+      "crc32": "6af94f91",
+      "size": 66440,
+      "sha256": "a6e07cc7746e9084acbcaefc438c3135e679998e0e2bafb67381df3843b77e8a",
+      "gitBlobSha": "b94458ea624d2a4446f2c2d53ce48b50edaf788e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/signals-ui.mjs",
+      "crc32": "5181760c",
+      "size": 8027,
+      "sha256": "cd1cb50d22d43e447fc567d21af24261285478c8a014122977732e20780925aa",
+      "gitBlobSha": "f79594c32d2f804d81da0c4149fdb878c52f40a3"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/style.css",
+      "crc32": "de724fed",
+      "size": 30844,
+      "sha256": "e191bca50c8030ace13246393f755cdcfa2ae0db1b2c0c5a331a8b81456305e2",
+      "gitBlobSha": "e06a87a8ca8e016387a4a2cb08b98a6ba5a60684"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/expedition-render.mjs",
+      "crc32": "18b157bc",
+      "size": 14546,
+      "sha256": "fc8534fbc4b89c283be5c8713a6ecbacec67e993215edd9cc814813e0c3aed66",
+      "gitBlobSha": "02da28aa557032d90bdf45cee1c8a4ce8bf2c96f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/fidelity.mjs",
+      "crc32": "82dc15cb",
+      "size": 8513,
+      "sha256": "6051b88f3e64896254fe079d176ba354a304a6e12d374012960d3743a3ca8b9c",
+      "gitBlobSha": "70ad865592d1742d5ac61a236e6d8ab485eed606"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/wayfinder-render.mjs",
+      "crc32": "9478a8a1",
+      "size": 1740,
+      "sha256": "e0e143b32f9afa5a82a235b8b01e1ab54ef7172dbe4edc0103c91bd0f1010ed7",
+      "gitBlobSha": "c9d3682261d6f255777ba1bdf490f566b0ea7db3"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/interactions.mjs",
+      "crc32": "a4489b65",
+      "size": 3035,
+      "sha256": "0d36d6eeffcbf0a371df4c56e1d917d87d24e7668bc70582efb70bde36707b81",
+      "gitBlobSha": "29e27796f1b01bdb5e235c895745f8a946278b61"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/crew-render.mjs",
+      "crc32": "a322e468",
+      "size": 5241,
+      "sha256": "a42b33d578627e7a6056af62519d76c2e30187103cad4272206157147e237cae",
+      "gitBlobSha": "83f46a64b7c7d774fecedfe5b5735205f33ffc74"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/engine.mjs",
+      "crc32": "bf5566f4",
+      "size": 31883,
+      "sha256": "7e8150ba6c39816ce97e078b5bfef842e216c5d71e7619e4b40ab75f0417f52f",
+      "gitBlobSha": "9060e928cec8b349c6912f5cc03f57e60fdb647a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/navigation.mjs",
+      "crc32": "50dcf681",
+      "size": 3631,
+      "sha256": "363c01782a67f6bb08e928443c098006a81ce369e5cfa6d82ec257524e5a753b",
+      "gitBlobSha": "c3d6d076b4bc96f3c7fd36e24062d80c395761c6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/wayfinder-ui.mjs",
+      "crc32": "2f118d33",
+      "size": 11578,
+      "sha256": "103f977ea0d18bd9c8cf8426913571f6b14b4cc833b78a0c075b257e2e6e028a",
+      "gitBlobSha": "1f69caeda0e6291f41fe4772ebe45e1872cc06cd"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/tension.mjs",
+      "crc32": "5cea3e59",
+      "size": 15923,
+      "sha256": "199717d7f9411102f4f2a057a2528e3a9d3deab6bdcbb4eb52d39f03a0478af9",
+      "gitBlobSha": "1f553680dee5592524ea0f8a7aeed74375e510f1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/crew-ui.mjs",
+      "crc32": "bb8803a2",
+      "size": 7274,
+      "sha256": "ca6c8ceb7726a6773962c21a187d1475bb173c3329990e389fa96567d461ea33",
+      "gitBlobSha": "5c14df88772c60c42def03d7d487932e4581c613"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/src/dlc-prometheus/fidelity-render.mjs",
+      "crc32": "025f454d",
+      "size": 24753,
+      "sha256": "7be02e62a3226cb5c26168f2ac1540e01045aabb714c71eeb6f71d2e47060c9c",
+      "gitBlobSha": "b8347ce0f625f9d4afaf4573ffcc47f0c93ef7f7"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/MANIFEST_SHA256.json",
+      "crc32": "d4c0fb91",
+      "size": 49046,
+      "sha256": "27f23464d271fab0fe916282522ff50373ecfe1d464d5b5064587db1a1a1a44a",
+      "gitBlobSha": "bbfc6c80a69398b9bcf5613a1ff6705c5467954b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/LICENSE_NOTICE.md",
+      "crc32": "4238139f",
+      "size": 619,
+      "sha256": "03b3c02d5f1f6777dbd3faed36932b36b67b5091d025f574f962b6f205b83706",
+      "gitBlobSha": "06bd26f6d296c079c160223562f5e4f28d992e48"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/CODEX_PROMETHEUS_V12.md",
+      "crc32": "90de701d",
+      "size": 12598,
+      "sha256": "a44a6f704ad2204d0c5aca6213c8674f847c6166c8448c15886ada57a86b3d09",
+      "gitBlobSha": "97c3f8a6f00f85aa41bd703cb993ac688409d67a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-signals-results.json",
+      "crc32": "1a1f8a86",
+      "size": 9439,
+      "sha256": "c58e37dc86203ac7dc4307490e64ec4b9ef4f78856756ee5735b794b472e939d",
+      "gitBlobSha": "e41ccf23ace3d789b10568a3cae9d0cb149c2e0a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/finale-campaign-results.json",
+      "crc32": "c7297b0a",
+      "size": 16942,
+      "sha256": "ebc8e35c3046faa1ea1ae5fdda893a0e407f3ca4d6744299bb09a23f02b2e4de",
+      "gitBlobSha": "575761db964c8134a037b7a8dd0e2900254621ba"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v8-crew-invalid.json",
+      "crc32": "3f88e014",
+      "size": 8702,
+      "sha256": "64e8c25b1fa16199f998370037d46d809bf184d38f601480239199f87f97695c",
+      "gitBlobSha": "9cc89cbd86d1ca670b61d65531d7b78adedd418c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-tension-results.json",
+      "crc32": "912395b3",
+      "size": 9060,
+      "sha256": "62b508cbb28adeab6b4f51a45cb6833dcad150ee260a04b1d4170cf3d75ba499",
+      "gitBlobSha": "63a585d4cacee88a7336bc8aa1bc7fd3bdd10ef6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/wayfinder-results.json",
+      "crc32": "00342324",
+      "size": 13491,
+      "sha256": "18f6f45f734f3e52d8cbe86f5858ac637b4de5e9f6be01b0d487fc8e3672f067",
+      "gitBlobSha": "71d317c83806d9b00d26e2fbbf0e09f0e8ac930b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/crew-classic-snapshots.json",
+      "crc32": "fcb39245",
+      "size": 2852091,
+      "sha256": "bc31b6c523222ba40cb99063e6d4d3d5499b41d88c1cfcc74a08f02df837250e",
+      "gitBlobSha": "b4099a0325b131f3de0ff10316457c580167b691"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/finale-results.json",
+      "crc32": "c043f089",
+      "size": 13211,
+      "sha256": "127b945d343352681978385fad710e3be0d877c441472735ef4657cc9e8960a4",
+      "gitBlobSha": "7c95cff8b19826774dd2ad3463095892fb936349"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v11-security-export.json",
+      "crc32": "1505efea",
+      "size": 27066,
+      "sha256": "fe94dbe45353671fb73339efbaef4cc0ad17cbb47b78879c788de637d7d014ff",
+      "gitBlobSha": "5ab5a15d07a441bba7fbe205ba99e017e5b532f6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v8-dialogue-reprise.json",
+      "crc32": "ddaa5339",
+      "size": 12393,
+      "sha256": "ce5d157b8b86e9967c0f6f27ec027a376b7269af0e324640e297680ce6cc71d9",
+      "gitBlobSha": "cd1cae319c79f7ac140af79cd69f5b0d285fc3cf"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/tension-results.json",
+      "crc32": "66facfe3",
+      "size": 9280,
+      "sha256": "a43bdcc617e59853330dff5824dc68e6169ed5d37035049de2395ee087937018",
+      "gitBlobSha": "677c2d728c1a7cbcfc71d67201d30c68097a3f5a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-room-views.json",
+      "crc32": "c75034e3",
+      "size": 1330402,
+      "sha256": "53fb23766cf39409027bc01f6e151b8dc96d22c9c63c1673053ef2bee86b5f0d",
+      "gitBlobSha": "3faad08105b5a80a7970bf05befe58270e4a7ece"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-uplink-export.json",
+      "crc32": "a2cbcaeb",
+      "size": 27314,
+      "sha256": "2269402eb02c93363049d44282f5e49af518a6b69fe104af10f13424c548248f",
+      "gitBlobSha": "43e0a11564a03aec3bf6ab06ae8705db31ac4d78"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/tension-prepared-scenes.json",
+      "crc32": "38bcbd08",
+      "size": 207740,
+      "sha256": "77ac49e0573626913c850d4a1ba56c41ae5b74245741cdbb62de01b395ff645b",
+      "gitBlobSha": "2c43cf38535adebfdc07116ac728b1c60540af85"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v10-carnet-consultatif.json",
+      "crc32": "43cb7339",
+      "size": 6369,
+      "sha256": "bbcc3677ac12e8dcefdc04db5056a6e8858ef4ee16b29d2af697d871a8e3a8dd",
+      "gitBlobSha": "7cb64cb17834f207af8a5757622fa10e6c46490b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/recon-campaign-results.json",
+      "crc32": "0be5fddb",
+      "size": 34507,
+      "sha256": "42318b560a65e0acfc20fc7c9dbce36fcf795657ae70168813437c4ba12e706b",
+      "gitBlobSha": "82075293e44898a291e090ec079c4274ac5a5468"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v9-invalid-import.json",
+      "crc32": "3c443073",
+      "size": 12094,
+      "sha256": "900257a5e648d4d7557a078780a4e5c48b771d401fcf4352307bc9d150a29c8b",
+      "gitBlobSha": "b4a953b169a84668c4a1d78a3d8be102308c5320"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-fidelity-v12-results.json",
+      "crc32": "c5c2c3c1",
+      "size": 5843,
+      "sha256": "1033dc7b45c7f006c7d5f6d09eccd7148bb2ed4efba072fcc4ccf3974aa52cfd",
+      "gitBlobSha": "732b6260c5feb3d3d17a7b21b695da73d2cc916c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/recon-results.json",
+      "crc32": "b90ad700",
+      "size": 17061,
+      "sha256": "05fdfa520149dbfcada00030bc536bd13835d9e789b406b6b037f54aced9e6a9",
+      "gitBlobSha": "82111ec0fb7db48d1fe2e5990bb235a8ab135733"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-10-escalier-passerelle.png",
+      "crc32": "6e863f5a",
+      "size": 161145,
+      "sha256": "0839cdf8086aa9879f5e36966f0fb1df261f97e907951cdef72aa262a835e4b1",
+      "gitBlobSha": "cef3e228a696dda905d5b3839ef5a26659ba0e91"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/finale-hybrid-snapshots.json",
+      "crc32": "4e564a79",
+      "size": 1326808,
+      "sha256": "b9f46b6aed180dedc4cbdf58beb5cad9330803903b00f7154bf2266110eceb9f",
+      "gitBlobSha": "df415c15de8c1198b7a97308ac5435df07843b5d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v4-import-v3.json",
+      "crc32": "96e127d3",
+      "size": 1914,
+      "sha256": "e8fc21b6cb4d3ddb404fa3cab6585f08c90b2481eba07c2a73a5bd665bfbab26",
+      "gitBlobSha": "b9d49dac83bd85c7e4c74be058f5c3172fe52f53"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/expedition-results.json",
+      "crc32": "56bc68ae",
+      "size": 8875,
+      "sha256": "87e8113ab99532779833b6ceffc9c56651f9e1e4f26dca3e0cbcbf3da28b0e43",
+      "gitBlobSha": "5f02dd08c745327ed2ccac8506c01e74dfbf2db6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-stair-save.json",
+      "crc32": "9602763a",
+      "size": 21634,
+      "sha256": "8488b0086974529dbabd4cc3e29694286bd361ffc99a8765d00719046b17c8e5",
+      "gitBlobSha": "8924a0c30c078f4b733dfe29a0b3b6491c811ae4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/spatial-audit-v11.json",
+      "crc32": "04068b98",
+      "size": 171224,
+      "sha256": "75c16d1c494f511e0fcf088b859d3a6a908b600b00d693f7bfe697fd4d4f07b9",
+      "gitBlobSha": "f3b215a39899b4764ff8a88095074b53802c9f7f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v9-retour-reprise.json",
+      "crc32": "09d7bf82",
+      "size": 18070,
+      "sha256": "2945af62cbb91eae039ea1bc2ccee4759d61cee220449a03afc6718e641a8979",
+      "gitBlobSha": "27410412e2e87c8d3de5444b3934329dfb2928be"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-science-results.json",
+      "crc32": "06ac384e",
+      "size": 10500,
+      "sha256": "1fcefdeaf48061358b00abf78c8af15f32764aee6800cf20b5bec3c6506d1b8c",
+      "gitBlobSha": "b6b3de8ff12baf137d56b16d9c568a7bec3f446e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-docs-v11-results.json",
+      "crc32": "1fc48685",
+      "size": 3021,
+      "sha256": "97de228481d5600f3c7e127f96b5bf3c6b6fa12aa6e57b586b096ffd26c498b7",
+      "gitBlobSha": "95a4a72b1bd6493136a8e3b54779f48cba02862e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/vehicle-campaign-snapshots.json",
+      "crc32": "1450f264",
+      "size": 1284707,
+      "sha256": "3611973a59d5b3131084fdd6db5ac74c1753627391b4848219b5a8b2817f27a6",
+      "gitBlobSha": "34ac354576bda32a3f34404cfe8adeb56aa654ed"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/unit-results.json",
+      "crc32": "0f6201d3",
+      "size": 8293,
+      "sha256": "580f5007181f31defb918300d5e39d51a795634f3e73a1bdd1d6621b21ceb8f9",
+      "gitBlobSha": "6995de1fa94844b48c4cbe604e4da13cb21665ed"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/crew-campaign-results.json",
+      "crc32": "21aa78a2",
+      "size": 33810,
+      "sha256": "dcfefcc0139c3321d0c1dafcf22c24da75a22d7dbff8e66ddeac976eb38befa4",
+      "gitBlobSha": "63c05a239f5f8bf54690c4e774b7086592974e2c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/signals-campaign-results.json",
+      "crc32": "acd806ed",
+      "size": 33705,
+      "sha256": "a168c1cf1b616819272d1b9fe241087e86e23ae6cedb7cd15c0da29fac98c1f5",
+      "gitBlobSha": "13b2b165093531157386d6ab5e0720aa921e0568"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-wayfinder-results.json",
+      "crc32": "0475cbc6",
+      "size": 9618,
+      "sha256": "dcffc80406641d1317c8186a8f20d58679bd8a094f101a111a2950daf4bc60e5",
+      "gitBlobSha": "de35cd51f7f3735f1df132128d7d468d493b50e6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/report-v12-overview.png",
+      "crc32": "9b6cdfae",
+      "size": 101181,
+      "sha256": "b9b61c0cc6345a83249759e48fe9a2c4ee908b994ecc833a9fdf5ee1c3162d3f",
+      "gitBlobSha": "745f8ea63cdc2471c335c9b4769f40f8a951a39c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-03-console-basse.png",
+      "crc32": "9260688e",
+      "size": 191880,
+      "sha256": "f429a86a4c8a0c0d3b064e73e9755ddbf09466976edc9b61b4eacf58ed75993e",
+      "gitBlobSha": "01f7c76e230e1112304ed9734ce174ef97705d2e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-browser-main.log",
+      "crc32": "941a0dac",
+      "size": 2186,
+      "sha256": "27741e1fdfd55091378fe52840dc71dfb0d22f539d945269b7bb48c3959190e8",
+      "gitBlobSha": "30a42a114cc462383cae89bc377b73e9dde97e18"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/wayfinder-campaign-results.json",
+      "crc32": "32296eed",
+      "size": 34151,
+      "sha256": "9a9834ee2391629272d3c3761e5380c9bf092c427dd1372a0b798b719f4895c8",
+      "gitBlobSha": "ae0680eae13f656b158a9b8560fb3bfdc1be4d34"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/run-browser-tension.log",
+      "crc32": "3fdc13ac",
+      "size": 2210,
+      "sha256": "8726f67a4bff796350ca637ee6737491c3f3c1f9b2caa67533aa845138d62e7f",
+      "gitBlobSha": "c4ba2448e4a2ff4fec14c0cc4bb69655b1b796d5"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-export-v3.json",
+      "crc32": "68c950a2",
+      "size": 18699,
+      "sha256": "cd86b9b23113a34f51155fdce80e785270d3168fae0f0e3d7c9cec996564d691",
+      "gitBlobSha": "ef63d70f74cc53db5f9829729bb81cf24c9f543e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/run-browser-habitat.log",
+      "crc32": "8efd2f83",
+      "size": 1675,
+      "sha256": "df79e8ad828537ba369485b4eef98da25559685166f8a9999b6e5db5587c87f9",
+      "gitBlobSha": "1f220a9532e5201d33c1f8d0d252a5bc5603ed14"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/signals-classic-snapshots.json",
+      "crc32": "6fd52320",
+      "size": 1702230,
+      "sha256": "de559a1d438cace12bf5ba676b514c56318b8abb146a2bb7470da1323870bbdf",
+      "gitBlobSha": "f951b2ea84af9eca24d92486d9d8dd6138e806cf"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v11-stairs-export.json",
+      "crc32": "bd3fb0c4",
+      "size": 19242,
+      "sha256": "92d90b5d4670c6011301a9a271d9175b048ec8211fd961aa7140d451161ec48d",
+      "gitBlobSha": "f8ae1384eb227039dbfd67d44d7976f662dc894a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-navigation.json",
+      "crc32": "07b0e720",
+      "size": 250,
+      "sha256": "0c58a0edcccc7acd878f0621b422e30dda7a88d2ac8b8af8f536ad2961357cd8",
+      "gitBlobSha": "1a6a74c8401b67e2def4db09e2d41a396aac09f0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-classic-foot-snapshots.json",
+      "crc32": "6464e150",
+      "size": 2552053,
+      "sha256": "bafec6137a054b17e8a044dcb05be32cd60b0f05323d1cc5c9f0dc6c82595b98",
+      "gitBlobSha": "4c9dbaf77caddde2e27bd5396d4c62bcd4dac60b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v7-tuning-export.json",
+      "crc32": "ffc6d9f5",
+      "size": 12673,
+      "sha256": "352af6909914972640c449ff8872ef0e203084e47e981a78dfe68eee93670a8d",
+      "gitBlobSha": "3b9045934a1d0fc2541316cd2244c83d8da444a8"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v4-shutter-save.json",
+      "crc32": "967e69cd",
+      "size": 17546,
+      "sha256": "a574a350d34516bf8270b68a358644dd3c0d8700ec7b11a1378b8dc23c014ee8",
+      "gitBlobSha": "92130cb42d3d34516bca319e795f9c48bee15526"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/spatial-audit-v12.json",
+      "crc32": "2f511b2f",
+      "size": 175169,
+      "sha256": "c586060cda0fe5888ec3e076e589a8ff171cdfc89f5a57c13bc7860fe93730a9",
+      "gitBlobSha": "389d75793d594a69eb6349bec3962e0bb434b6f4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-classic-cargo-snapshots.json",
+      "crc32": "37d2af18",
+      "size": 2730739,
+      "sha256": "6eca52083808695b359b7b42e757f7a908734db796ce934b169fd1fc77d69727",
+      "gitBlobSha": "49956bafb6af39ab66443ef7e753f8768bc8a289"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-grapple-export.json",
+      "crc32": "a853c4ba",
+      "size": 27566,
+      "sha256": "6d81c4710d3b0f0dc3659da9ada110c3368b133b95852992746f15a67e3ecc9e",
+      "gitBlobSha": "17ea46fac277da9ff5fd22927e7342ee3bdfb20e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v9-pilotage-reprise.json",
+      "crc32": "b954fc5b",
+      "size": 13833,
+      "sha256": "7d9506bc8f3ce2fade961fa5716acc1f41edad4d6901903b951ef79f8e8e3aa7",
+      "gitBlobSha": "d0bc40aed1bc5b67abd4223e8779c97890900d6e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v8-trajet-reprise.json",
+      "crc32": "4ca1a4fb",
+      "size": 12104,
+      "sha256": "e7ed7eda93a64f72d8632b055f29281134dbba05d9a5d66667a784c80abdddf5",
+      "gitBlobSha": "fe50128e32727eab42ad2f08db3955302fdf8811"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/wayfinder-classic-snapshots.json",
+      "crc32": "52ed09c2",
+      "size": 1349995,
+      "sha256": "1383613d55452217d5d46f0c203625b49802829ad7768e1f701109748d3553da",
+      "gitBlobSha": "d7f057e1c93062f365b86e211345866474cb30cd"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-campaign-results.json",
+      "crc32": "0da1a300",
+      "size": 35885,
+      "sha256": "a0bef48a1ad6a715cad8cee3ef303971c636bfbec4c99fc55ea54b8de8b97fa2",
+      "gitBlobSha": "950550ed7e68e79d269dc884a38f44a2b992c4ae"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-hybrid-foot-snapshots.json",
+      "crc32": "1703f189",
+      "size": 2575189,
+      "sha256": "4d2ea0e3833a74d71e79f62cae26a3b94d12049179a76b97e928ccdb3adb23ee",
+      "gitBlobSha": "de22cbe7cd2039bfca11bbf1baf1188a4a1514fa"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/recon-classic-snapshots.json",
+      "crc32": "49425ba6",
+      "size": 1456183,
+      "sha256": "9bb57ed2f868cca9e1a0265366d453de1757eb0a4a20afc5c8b0371e87a770e2",
+      "gitBlobSha": "484709fa3f81c34a7d60e7270c2a77c72c8d53da"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/finale-classic-snapshots.json",
+      "crc32": "0e24dcfa",
+      "size": 1315496,
+      "sha256": "1824f54236e8ded85b8892617df0d7d96a70c5504ccf30460efc68b00de37ea1",
+      "gitBlobSha": "3f3ed8e18939337ddb629a0ba406ea89521027aa"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-habitat-results.json",
+      "crc32": "ff878345",
+      "size": 7301,
+      "sha256": "5d663a7c17a518eebe2f5a4daf4cbf97ccdc726e3d51ac871be145dfe44083fc",
+      "gitBlobSha": "79b1764fead3b972c59984f9d334f47264384205"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-hybrid-snapshots.json",
+      "crc32": "accf9e4c",
+      "size": 3279237,
+      "sha256": "2825f8fd74096de29d46d6708e8bb275606a9ec4c421469d60cdad7695835772",
+      "gitBlobSha": "0138a9ad6ea11baa6a07b9f88949d917357b056d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-wreck-export.json",
+      "crc32": "23d837b5",
+      "size": 26977,
+      "sha256": "54f284c0d406b0e8843fd047d4e67db7fdb6131bb6ebd9c6a98ed139853c02b2",
+      "gitBlobSha": "e80826bf86cba6af20f5e3665b55d17e2be2bfea"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-results.json",
+      "crc32": "6aa4f016",
+      "size": 16455,
+      "sha256": "7cdce4e493a55621c924bb1665a36fe8438380bd2ce2278f59684d4685f7aa7d",
+      "gitBlobSha": "cdd59eb2fe3156449db297de26938a68c7b98664"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/recon-hybrid-snapshots.json",
+      "crc32": "f89177c1",
+      "size": 1469024,
+      "sha256": "c1b8238da2a03ec9357da0f21eca4a6ce7c04850411e280c29e282711b8748e5",
+      "gitBlobSha": "63a1e17a102032f778e4351f60c1d4d3723a08e6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-v12-campaign-results.json",
+      "crc32": "90467412",
+      "size": 35920,
+      "sha256": "6aeb4b3d4c64c6d051c647f28aa744789b70e29ca6e32f02606036779f288e69",
+      "gitBlobSha": "07e0c96f41ee0e71da0d059e33cd4069460d8360"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v4-to-v5.json",
+      "crc32": "57cf5924",
+      "size": 3502,
+      "sha256": "9a1f82970fbeab91f64fd2aee56baecefed11b9124433832e8bb1528926ca16f",
+      "gitBlobSha": "548827c50b3dae6645e27d78f6df21330c60630c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/run-browser.log",
+      "crc32": "fd167fc9",
+      "size": 1750,
+      "sha256": "5761d6dcfad9b50effb8395a69d75b21495dc8b3c15e2dc39b366704eaeb09af",
+      "gitBlobSha": "7cbf76f17dfa89bc897432571692f2e63f58aa3a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v8-journal-export.json",
+      "crc32": "3bc27f8e",
+      "size": 801,
+      "sha256": "da1fa29d6404cff43827efeedabbba95d34480180bc808a9f9b79cd5cae80e63",
+      "gitBlobSha": "3dc29a9504fc575ea9ee8bad6ac6ead73b9be5b1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-12-matrice.png",
+      "crc32": "38fb7534",
+      "size": 326059,
+      "sha256": "250c4b523b326a35267840a4369c6911e8aa8c84108552bb426713f0c70232b1",
+      "gitBlobSha": "67b3f0a69ec7c5565cc9ff57e78a851ab8087989"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/invalid-science-save.json",
+      "crc32": "88d86a9d",
+      "size": 7698,
+      "sha256": "08057013cec797aa9112e5217f35a4831d6629df7ac0078d654b8e20748be778",
+      "gitBlobSha": "7f7c15ebfa84ca53c314284803a0317298217d2f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/crew-hybrid-snapshots.json",
+      "crc32": "5e67cfa5",
+      "size": 2877641,
+      "sha256": "b1ffd20c132f29a5f7bf0081dd572bf3ef3e8476589075972ab9eb842d4d1d29",
+      "gitBlobSha": "e2f92fdda9ca58bd491713c20dcfdcfcb9d23120"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-access-v8.json",
+      "crc32": "3a47616c",
+      "size": 272,
+      "sha256": "b69b0be6ad6df67ef5c6242ae922610c89e97960bcfe3ccf6984a8ccf8533b9f",
+      "gitBlobSha": "4ed4f4ebfd27bf5b924781b30005ccf95cf5ebfc"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v5-hatch-save.json",
+      "crc32": "bd770467",
+      "size": 26897,
+      "sha256": "040e8c2b0594997e92891046d59f820d8cb7ee5275a2091f2ae9f50568648494",
+      "gitBlobSha": "cd0b75d6991d11a6419dd4fb65afb90cff1a51ae"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-regression-run.json",
+      "crc32": "fdfc9328",
+      "size": 550,
+      "sha256": "e2e067be1ffe413f250e1aa2b94df20d000368c6e49430a8923a6be9a989f668",
+      "gitBlobSha": "3b634ea83240d667e5c2027b19cc65468f59762d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/installer-results.json",
+      "crc32": "d29af120",
+      "size": 1056,
+      "sha256": "f2ce9e0dcd485b538587db3c5af7894d3e6e3b133a29a78a4eec32ab520cdc69",
+      "gitBlobSha": "d6cef4d36d014113431217cb84cbaf70843c58c2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v7-invalid-future.json",
+      "crc32": "cd9386f0",
+      "size": 8372,
+      "sha256": "9628f04144fb5f40280c1179b4f71f01fa66bbd6eff80808234e206d7712c262",
+      "gitBlobSha": "12c30e427723208576822f5e9a4a63bf489231d8"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-cabin-v3.json",
+      "crc32": "04de6fd7",
+      "size": 26340,
+      "sha256": "237ff992651f9aacb92ba2457ffacce995bc0ae352afc7966e1e0068ec669c54",
+      "gitBlobSha": "f250a6600ff37662b628bb29b32f622fda277b98"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/signals-results.json",
+      "crc32": "59c09f66",
+      "size": 9632,
+      "sha256": "c4202ba9ec7540949e1c9bfb12309e1d2738b15acae839ee8bdfd515b30cd5c1",
+      "gitBlobSha": "bc980ac766c1b04fee04d59df9d37e633ddd622e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-recon-results.json",
+      "crc32": "2d62c2b9",
+      "size": 9267,
+      "sha256": "51a128590a82540b540493e3de8236e243e7c041744cd9385eb0cfe93fddb0e7",
+      "gitBlobSha": "6317493805d5e9c5a5b8f13f1081b2f87ac65b70"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-bilan-export.json",
+      "crc32": "f36981dd",
+      "size": 1765,
+      "sha256": "56e8715d8ff5df0d500d3c06cb1c81cccf80a8459682e9b3c4df24a036f1bdc4",
+      "gitBlobSha": "f78ca080a21a458344ebef1d9b2616d1c9f0d227"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/walkthrough-results.json",
+      "crc32": "d9228663",
+      "size": 49997,
+      "sha256": "312fd7ffa2e2bf69e6372e4775317ba52afb51474ef99e51b67e141f5211111e",
+      "gitBlobSha": "64aa97137a7de2330724a63e3b028c5f2c5e5ee5"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-david-export.json",
+      "crc32": "090f8f13",
+      "size": 27484,
+      "sha256": "e5eaf1b68d35e309bef3e9ebb8f513b67dbd65857709740d3dfb86f7fa450086",
+      "gitBlobSha": "3191517176739152154cd2217f64a05ce97f730e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/recon-prepared-scenes.json",
+      "crc32": "367bf18c",
+      "size": 109190,
+      "sha256": "693170627c4deef12c19ab8eec9f7044e5b40c43b5f3cbf5c3b447b1d56c9cdb",
+      "gitBlobSha": "9a6d8bf20cceea835908ce18fc1031522e3d2908"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/tension-campaign-snapshots.json",
+      "crc32": "561c89ea",
+      "size": 1514779,
+      "sha256": "8f72a4e50d16bafd087689a12e4ab18e63b6a8bc70b3b9fd21e878f67f4382ec",
+      "gitBlobSha": "b7e6b626e8322b500ae43fac9376773b34b263c1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/habitat-results.json",
+      "crc32": "2b36bae6",
+      "size": 6975,
+      "sha256": "cdd6c15a069b45a7b19e524f633e028d1771ff3ca255d455793d196a556e709c",
+      "gitBlobSha": "60263f75b3578d5669c93bcc14a20f41f91d1e69"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-suite-v11.json",
+      "crc32": "b1944903",
+      "size": 2786,
+      "sha256": "33baca06f325cf7495e271373327790fb54e660306f2987efcad4bff01404470",
+      "gitBlobSha": "ff481a10dbb20f0bb31d4fc25b7edd2db9e8c514"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/signals-hybrid-snapshots.json",
+      "crc32": "0d763e0e",
+      "size": 1716847,
+      "sha256": "1a0c75d1af163e59294b8af8690d4aaad468c81ee28288e8f7dbaca206c0eb1e",
+      "gitBlobSha": "e5d82dd7609d21c59fb0bac61604a85e032e8d07"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-11-securite-jackson.png",
+      "crc32": "2093977d",
+      "size": 1278555,
+      "sha256": "e1afccb0a822f38f7c99b4c804a30ce57b8d0ab4ebd0c3039e7a528293b5203a",
+      "gitBlobSha": "d8946b4050071a8b75d7d36617a2e4b94f9ca235"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/wayfinder-hybrid-snapshots.json",
+      "crc32": "6c174eb0",
+      "size": 1361748,
+      "sha256": "397a9304ac2e64cabb3d8d0f26a7e61af0049da0465eea3cf2f92938d7a483a5",
+      "gitBlobSha": "c3eefcf5a1b2ef776520a3b1fbb38e9290505b05"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-v12-results.json",
+      "crc32": "a4152d87",
+      "size": 18163,
+      "sha256": "42fe14de646b5a01d0dac23aae108395c506411f40d22562caeb4581f1e34246",
+      "gitBlobSha": "827f2ee123d691097ce15a84f4498bbed9b01e5f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/tension-campaign-results.json",
+      "crc32": "a71d1c54",
+      "size": 17323,
+      "sha256": "ad89cc7f78af051fe58bcea9a36a6403215e9dc0623de4ba4ad8ded9f509e7d4",
+      "gitBlobSha": "20bc44ad09cbdc91ee52308d50a5e699135df884"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-classic-snapshots.json",
+      "crc32": "9c7cfed2",
+      "size": 3252102,
+      "sha256": "5f942d1ff0f11bfd3c5c0c1e690afdf13bcf8e4ddd7ea1b53b8919edaf4890ad",
+      "gitBlobSha": "4cf5b7dfee120e0a78197d001f50529f8d8f9d8f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-crew-results.json",
+      "crc32": "7555edc4",
+      "size": 11005,
+      "sha256": "df4a9eedfde73956f68c7b65dd8e87186215667e9ae859244dc2444cb52e4518",
+      "gitBlobSha": "759c0b9e3d1670c84a3810a7d8e8f89f622b3e20"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v7-acquisition-export.json",
+      "crc32": "5db51d63",
+      "size": 12999,
+      "sha256": "da647c5499b793f4e191b53b8b58409c77e5db34a26c45426c92c77cf3f0f246",
+      "gitBlobSha": "64d9f04cc96f16c68383628bb53622eee94f3ec6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/fidelity-results.json",
+      "crc32": "377e2951",
+      "size": 15369,
+      "sha256": "79d3fda4132ef578414b4ae1d9a4cc7309f13c2c1ae93c40ccbcc26648748d2e",
+      "gitBlobSha": "d8782e4cd5cbf8c936f0a596bf07d9c6dbcd3601"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-finale-results.json",
+      "crc32": "c5e4c46f",
+      "size": 9915,
+      "sha256": "b214475f65b81fd0128d30e7203ec667f5623f041898814158abfbaed2f2c683",
+      "gitBlobSha": "819b54ff76ed02edd728e0b24e355718e8245bea"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-fidelity-results.json",
+      "crc32": "318d81ae",
+      "size": 27785,
+      "sha256": "c8c1581cf95dc8c1510976ff9ede1d8c9a2b4a9f5eb7e18612d4ff6f12814e24",
+      "gitBlobSha": "b32768995862334b165cc9945b6432965847f9b7"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-docs-v12-results.json",
+      "crc32": "0b7bed1f",
+      "size": 2041,
+      "sha256": "1859ec1ff2731a5074c91bd9e049ed59e80e8200344c4542f7995596e6de8120",
+      "gitBlobSha": "44e171414a2b891f484fa1b6e5943c95f883a849"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-campaign-results.json",
+      "crc32": "6f6d2a6c",
+      "size": 34918,
+      "sha256": "5ce2916299fb142bf68e21628e3d913ef862e5ae1538f87be453a8935ae35557",
+      "gitBlobSha": "cee8e6e2f56605ae7e46269f7ec30736c0d85541"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/wayfinder-prepared-scenes.json",
+      "crc32": "e8ae083b",
+      "size": 126586,
+      "sha256": "f952f9c6494c59ff66d376871645b4949f61e712941af32fc6b29643a85af363",
+      "gitBlobSha": "5b469a70eaad3a9e614a2105e067860825e26f2c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/campaign-snapshots.json",
+      "crc32": "d17804e9",
+      "size": 1236375,
+      "sha256": "71305ddf26c3d341211db523cc5c3fd1fe4311a6ce7f2bfb28a44587a27b54a4",
+      "gitBlobSha": "f3e3a882403f5538d114f09f99bd01d953d76309"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v9-releve-partiel.json",
+      "crc32": "03451064",
+      "size": 17835,
+      "sha256": "444f9af830068f642700f219c45d21a05b4ab4564b4ee74a6f0dd9f97cf35732",
+      "gitBlobSha": "02f8db9394bdeb4bc747958246e8d71265647810"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v5-analysis-save.json",
+      "crc32": "befb85b6",
+      "size": 26444,
+      "sha256": "3f3fa02f5174851aed9694db510e76bec1d41ae4069474e1094a7ff22dcaedb3",
+      "gitBlobSha": "68fc01709732105e01194292afd6b9205fed3094"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-import-v1.json",
+      "crc32": "3164d626",
+      "size": 858,
+      "sha256": "9b66e98ab38ec3d24210c576254509ace4adc200242c4b4781640127ffefd726",
+      "gitBlobSha": "786822286bc5ffba828e6b0c7c7fed40aef220d8"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-results.json",
+      "crc32": "2d482528",
+      "size": 9162,
+      "sha256": "a7787753a42e84d1d249829ec846f9da7bb75c9b7847c91a1e57ab238c44f6fa",
+      "gitBlobSha": "451a9179ac19f7755ed81121db82900fc1b09f8d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v10-reperes-reprise.json",
+      "crc32": "84a05411",
+      "size": 11123,
+      "sha256": "7e0fc5aefcf956b1189d34c7ed0eb0c35dd4b54e40151bd24370699062764b03",
+      "gitBlobSha": "1050eb3c0f3d74c00233621d24fafa138cc5f095"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-v4-invalid-integrity.json",
+      "crc32": "2395c8eb",
+      "size": 7019,
+      "sha256": "b903a09aed5b0a72f384c61d14e2c6479d0d13bab3d68a7a7435087b803ea201",
+      "gitBlobSha": "cd1c2105317b1cc8dc44d21f401bd5296a6a5257"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v7-orbit-export.json",
+      "crc32": "bdc1892d",
+      "size": 26928,
+      "sha256": "edae3738673bf8910385b63f0aed8bb22d18e1402fe0a12cfa6b1033e5be3a3d",
+      "gitBlobSha": "20882824e9a7ffa89ce852f592113e5c99d2f09f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v10-trajet-reprise.json",
+      "crc32": "45c75d66",
+      "size": 18050,
+      "sha256": "c650708d30e23e815ccb6cccc8db7663cb7b55165a289dd17e0bde308aad21b7",
+      "gitBlobSha": "ea29440db3e665a3262e35b8400c7b9f2f0b3f5b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-02-passerelle-basse.png",
+      "crc32": "c04dc26c",
+      "size": 1255699,
+      "sha256": "9534747789eb1d131997f40fc7774eddcef23035f039d2482b5d58f647c3302e",
+      "gitBlobSha": "8a358a4524ea9d65df0dcc6f1c6f5871480405de"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/habitat-prepared-scenes.json",
+      "crc32": "d36a5c01",
+      "size": 50673,
+      "sha256": "bc5ed75d48490ecc519b8271a6cd00d9b9303ba19836d2d14c92edffc035b7ef",
+      "gitBlobSha": "aacb35731d7d5b2cd2cc2744a154a0a0bd2fb14f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v11-axe-export.json",
+      "crc32": "c4f43fbb",
+      "size": 28640,
+      "sha256": "5728cdc97de86b8202cad094bb6350faf3f625167d6841f8d41c904ab8f983c2",
+      "gitBlobSha": "e438dd5fb24cdfaa7cfaecf8e204b4470743afb2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/prepared-scenes-v2.json",
+      "crc32": "c6cb21d5",
+      "size": 94908,
+      "sha256": "7fcbd70908cd9438524011356ece1ad5fb8cdf9c8c2a71d960ee891ebd8cb657",
+      "gitBlobSha": "8d1ea79938ba34a4cdadb7df5971b3f48a1177d3"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/science-hybrid-cargo-snapshots.json",
+      "crc32": "cd0e233e",
+      "size": 2757991,
+      "sha256": "80d6cbf6f209e961e5de9012dcb36ea6f9bf981dfba5d7e3dad1a8ad3949e91f",
+      "gitBlobSha": "6438c4326b4c81c8d8845ea9a8d3fb413b0479b9"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/field-campaign-results.json",
+      "crc32": "c9d5e5a2",
+      "size": 17252,
+      "sha256": "e7a7a2f1c6246ffd7073e69b0594e58f7c4ed69a4a2f5b382025a447219cd4ec",
+      "gitBlobSha": "ee538bf4f388865d69fc8e3ce4d565b1a79c901d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/crew-results.json",
+      "crc32": "1be94952",
+      "size": 12400,
+      "sha256": "c219474ff498c914dcb63ea60df21f4ac89f0e9091e4f14bd6f1466cb881c925",
+      "gitBlobSha": "d8e2b0c8b0f9c2670b5b4dc82d35a66a3d869645"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v6-medpod-export.json",
+      "crc32": "5e790b17",
+      "size": 25085,
+      "sha256": "26ae18c421c8e8c8cca567522471134be739f1666c5f44eb54314ff73261cee6",
+      "gitBlobSha": "294b45994159b6ae93292657fa38eac82ea3a337"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/browser-import-v2.json",
+      "crc32": "7522b7a3",
+      "size": 1543,
+      "sha256": "e7d7b0b3140de9c09fc591f1cfb2e4035b5f8fc42259d1f76ac20b02369c19cb",
+      "gitBlobSha": "f5fdb0d700d98f3e32cdad8e9e8c4583d6208930"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/invalid-save.json",
+      "crc32": "a89b33ad",
+      "size": 14,
+      "sha256": "2a1faee63ad9692f19d8da6f6a7f2a4a06756ddb790ce1dff601713b392a4adf",
+      "gitBlobSha": "4b689648923b795e051951564f1dfea692536bd3"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/field-campaign-snapshots.json",
+      "crc32": "eb9da7da",
+      "size": 1633730,
+      "sha256": "991adab65c9d0ad9bcee56b8c5be56aa5e793c8a17731b9685be1f94319baa67",
+      "gitBlobSha": "1cb87e47f57761d6dee6b29e00ca80dd7c8182b0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v10/campaign-snapshots.json",
+      "crc32": "c9c1b2b7",
+      "size": 1189915,
+      "sha256": "419bb5816e94e1d5f3960e47871eaa43f6db75ce2efce116bdd7a2986d7c7d88",
+      "gitBlobSha": "59047519ba582f66e159c03dc1c56126b1a8a04d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v8/README_V8.md",
+      "crc32": "6dbedcbc",
+      "size": 5035,
+      "sha256": "c86167f6075e355899a736d1efe68841365f103a8bed1f3f164ce34034f62f12",
+      "gitBlobSha": "f235074276e1672e5b050e998d1a5bfab0b9a6e6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v8/campaign-snapshots.json",
+      "crc32": "328c11e0",
+      "size": 673800,
+      "sha256": "384719ea06b0a7ddebd8d78c6b06b181658f5cd7bcf47079e8b080bac4a586c6",
+      "gitBlobSha": "af4fa6a51fbf3561f6f18796fab0a9eba8960883"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v8/MANIFEST_V8.json",
+      "crc32": "8a76e3d3",
+      "size": 50565,
+      "sha256": "79308e43447b344cd33d1806968150fb0b05ca874190a6a5c638a41a869a23bc",
+      "gitBlobSha": "495d0e3006825689d78146f8da5095238177610b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v7/campaign-snapshots.json",
+      "crc32": "3046a7a6",
+      "size": 459449,
+      "sha256": "8fef7b387f358e6f60f0b65f17a155875f5a4901e4fc28df0b610483ecf1cf66",
+      "gitBlobSha": "b73a864113b042aaec19d97d07767c4afbf289e0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v4/README.md",
+      "crc32": "e17001ce",
+      "size": 8027,
+      "sha256": "7d2bfd757ab119ca1db3539f29ade637c9fd1b69d483db6850946611b459f665",
+      "gitBlobSha": "33f2b20c87376760bc8ecc64e28c36111257e539"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v4/CODEX_PROMETHEUS_V4.md",
+      "crc32": "36c8a718",
+      "size": 128357,
+      "sha256": "3ca54ca793fb50546f11763cae9bad159ef6d25dc65a5953d057e3bacb909fe3",
+      "gitBlobSha": "a291c5586b716267c26c2d9dc7bc1876f0cfe88a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v4/campaign-snapshots.json",
+      "crc32": "6d762f0b",
+      "size": 246335,
+      "sha256": "5a537b8882e950c95775e876046aa666d6e7c7f09faa372a5434d8327ffd5c1e",
+      "gitBlobSha": "a5d06d247dae13b454132799fbbaea483948fd5c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/verification-v10.txt",
+      "crc32": "992de84a",
+      "size": 3114,
+      "sha256": "fbe15f72a42dd5785030bfb1a02bb24d9e191495233a00a3d96872c4aaf9eadc",
+      "gitBlobSha": "d7ac7ab1fb9190589ce859c5411268a3f6cdaf35"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/manifest-v10-source.json",
+      "crc32": "814aa48c",
+      "size": 65057,
+      "sha256": "70b35233c5b670414dc4a470d4272549423023ee305c7410337433ab1b2c6ebb",
+      "gitBlobSha": "75bd62d689f0a8384a80c5c5e5d6129469bcee47"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v5/package-v5.py",
+      "crc32": "6b45ea8b",
+      "size": 6101,
+      "sha256": "e482059bc428a6f64e7eec9730a68cd65d930e8e04d42a924b4d10d0d8ee5167",
+      "gitBlobSha": "a7a97b48efd332d9ef9a9275f89a1f15d349ea7a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v5/campaign-snapshots.json",
+      "crc32": "2711c47e",
+      "size": 292015,
+      "sha256": "09650f8bb85ec3dcdbe1b394229071b2eed4531ebd0026d7e22f2b4f89b9e122",
+      "gitBlobSha": "2a96764b3df5b2596db8119969662694feaa9875"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v5/build-docs-v5.py",
+      "crc32": "b5e26430",
+      "size": 27414,
+      "sha256": "329ab80f469ba7222460bc2637c41e0697b68d81623cdf2ab95454a61c3d302e",
+      "gitBlobSha": "64d19bea983da5ebf0ddf0637d6449751bf572b6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v5/README_V5.md",
+      "crc32": "cd2ea1dc",
+      "size": 6937,
+      "sha256": "4c294d23041a22f969410e274dbc012b14c95bfd54b8b8fbcfde13c2fb5dd4fb",
+      "gitBlobSha": "618290a91a9a59b2bb32ee720828b367f69ee50f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v11/fidelity-hybrid-snapshots.json",
+      "crc32": "14eb0d73",
+      "size": 2864779,
+      "sha256": "905866f6ea136dbac61d1ddca48110d6e65d2978e0821c0e0ba4a0a88c4ba69b",
+      "gitBlobSha": "32024367415b57460b7f9fa1b8d3bbee72aec4aa"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v11/VERIFICATION.txt",
+      "crc32": "b6e1a577",
+      "size": 2888,
+      "sha256": "02854e06ede9732e4e1b3e82235a8fe0dd5548b1f1dc759756e0359285ee3704",
+      "gitBlobSha": "2b4e670d9b120470303073396effa5c02549b598"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v11/campaign-snapshots.json",
+      "crc32": "7d6e17ec",
+      "size": 1236375,
+      "sha256": "0557929768da180806735d068d1790551b94779a0c9563fb44cc01da35a6d925",
+      "gitBlobSha": "191f80b82c937565df3d3c4f5eff006bdce6a866"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/patch-app-v3.py",
+      "crc32": "b77bca80",
+      "size": 10813,
+      "sha256": "ed5020e0a86a965c17bb0edf540317d9e5841fffea2de2e76d55574b4913321c",
+      "gitBlobSha": "f02f35f2682a5a34f57a6fb5929d8fa9f6fddda2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/patch-ui-v4.py",
+      "crc32": "1cdc7adb",
+      "size": 6872,
+      "sha256": "22994fa3fb38b0ff97ff1432f62dd4b02971c432315d5e6c79e1feaf8dc8119f",
+      "gitBlobSha": "a3f1c604a8900f64cdc0fb789dc930a5783f2f1a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/extend-content-v2.py",
+      "crc32": "605a20ff",
+      "size": 10735,
+      "sha256": "8a234957c00dfaa26a43167f50b62f60aadd2b610e80e69fa79ab26b1d131dfe",
+      "gitBlobSha": "53a58f446ef4c8e88ad0dd49af9633ac217893d2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/extend-content-v3.py",
+      "crc32": "2b6e3bd4",
+      "size": 8753,
+      "sha256": "af4d287033b005888e633cf5be1ce9b7faf9a823aea7bc7d5f84675c28907054",
+      "gitBlobSha": "5cd9d0332a958f79a09e116bd8ce1c1d16a79b98"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/patch-engine-v3.py",
+      "crc32": "f004d35a",
+      "size": 6083,
+      "sha256": "bf76266a258fa218caeca3a9c88539f649c1a329b3cea70049eb35de46382567",
+      "gitBlobSha": "4b484c48a2f845664d68ac408e88eaae501f3b8b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/patch-v4.py",
+      "crc32": "dabc45a1",
+      "size": 6401,
+      "sha256": "037585d3837db449194c6ccc8595785fdd968e483430ffbdecb89f67d156b4dc",
+      "gitBlobSha": "9c282edd965fb9185848fb5883b0afc3018bbf0a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/README.md",
+      "crc32": "ee352f08",
+      "size": 168,
+      "sha256": "38682fa2277683e76b5ecf62ff1e401231f0401c2752d9c99271949f9799ef26",
+      "gitBlobSha": "19730b9e83c70977e9f5a25ac871feea3228d6f0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/author-v4.py",
+      "crc32": "1608dc9f",
+      "size": 6899,
+      "sha256": "5e7576056a4ff4a0b48f922317e127630695b4cc4e536216b2dd7fb59cb9f196",
+      "gitBlobSha": "8d862a28d3d8fccdfdae518b6167d4b962c0f851"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/README.md",
+      "crc32": "53a4818d",
+      "size": 317,
+      "sha256": "f0d8557b95cb0ca645a1ddca5d0681f5ea5e49fb9fa8c99dd29044ee18f087a0",
+      "gitBlobSha": "8168ba5c18fc547f283b2e8688f3fcb3c94aa763"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-docked.png",
+      "crc32": "dd7db1f0",
+      "size": 1247507,
+      "sha256": "382b2cd9d6721fd86de0a7b4d932aa37cbc5cc3fc0b9e9499d41dff3891009c1",
+      "gitBlobSha": "efc94f8d6c9990427bf7068b60379d20fd00cb80"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-trap.png",
+      "crc32": "459f4299",
+      "size": 1270213,
+      "sha256": "d10e50fc357658ba685dd9132c237944d5377ad4df112dd875a934317ef367c5",
+      "gitBlobSha": "6c1dfe791c8e57cfe47841372d945e6d40fd288b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-report.json",
+      "crc32": "537fbbdf",
+      "size": 846,
+      "sha256": "506414f47f1845342868ff58add19202a383c2375bb76205e109d238c876dc8d",
+      "gitBlobSha": "68d048b79f8c8ef60a3444f4a95d5bc3bd2edabf"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-medpod.png",
+      "crc32": "d0157114",
+      "size": 1247669,
+      "sha256": "2aebed39f72e13ab46c76e16face9fed8ad4a9fc3816985577cab9e656eee77b",
+      "gitBlobSha": "35917939e49213b9d849386dfe572fed9c04dba5"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-wreck.png",
+      "crc32": "54bd4799",
+      "size": 1264282,
+      "sha256": "3ac1f88b663423d2e11b4eefdda229c14e5e5ba4422b9b6fbfc4930f80ee1172",
+      "gitBlobSha": "1a723be2e16f9c65288c58524f7f3106b1f0121f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v9/unit-results.json",
+      "crc32": "b392a6f4",
+      "size": 7758,
+      "sha256": "aabbccf3be0c97ee4cfdfdee17a0e84a3e7f0e5189353ea1a830f3d7199b66bd",
+      "gitBlobSha": "00a0df9b005736794323c4b6f155e2061af6afcc"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v9/recon-hybrid-snapshots.json",
+      "crc32": "29f993e4",
+      "size": 860566,
+      "sha256": "2a5e2ab64c97fe1915fdab6123eb7806e7d4bc2dff9365f6aa52a11cb5d49067",
+      "gitBlobSha": "c78f3ca9cc5fc332b24a256ad78bffe1a2c48818"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v9/walkthrough-results.json",
+      "crc32": "b7d96ee5",
+      "size": 49684,
+      "sha256": "239f1bec9cfaa6322c277a35e68046f1f86c1fd95ae12b20a2578644d6f9fa76",
+      "gitBlobSha": "ac24f64510204674d64eda80e0df2d70adf2bb56"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v9/campaign-snapshots.json",
+      "crc32": "2055a234",
+      "size": 693023,
+      "sha256": "e7ed9a85a88e1331e991e5e0cd1f7fe49dfbd45de938ca77934113517360aec5",
+      "gitBlobSha": "d2baa1652d09fd44677d5c832164140ca81e85bb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/unit-results.json",
+      "crc32": "e83b0f9d",
+      "size": 6967,
+      "sha256": "737c6b799ce6682e8148805ac68f6dd95852592e3e7f1bc122b4271964fd7431",
+      "gitBlobSha": "f24e4769651959319d99432fd2919319226496c2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/content.json",
+      "crc32": "4d4a8d26",
+      "size": 88163,
+      "sha256": "1d715b1b0cf77f96a193b17d6576cb919c07e21208f7490562b64462a3c25c89",
+      "gitBlobSha": "0102f36ca903770bdea193683d22bff6a653a4a5"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/installer-results.json",
+      "crc32": "d29af120",
+      "size": 1056,
+      "sha256": "f2ce9e0dcd485b538587db3c5af7894d3e6e3b133a29a78a4eec32ab520cdc69",
+      "gitBlobSha": "d6cef4d36d014113431217cb84cbaf70843c58c2"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/README.md",
+      "crc32": "0747413a",
+      "size": 4398,
+      "sha256": "1948445911c228645bba449a8077b8d2eaa761d075756fe52a1fe84430363927",
+      "gitBlobSha": "e49bb130a39aa551b6bba519d632b7570d18cb2e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/walkthrough-results.json",
+      "crc32": "2c308402",
+      "size": 32314,
+      "sha256": "f43daafbf4a1ae4f66f28f559a529f1badea9488a6510c503aed5230919e3482",
+      "gitBlobSha": "0552704566abf5d1582b7f4000e6e2f9448a567a"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/campaign-snapshots.json",
+      "crc32": "7980d161",
+      "size": 70047,
+      "sha256": "c4169b30fe7c3e389c5bc208761f04b8adbabfe260af370e59ff353d5eb5fa9c",
+      "gitBlobSha": "557233699f95f72e2b583c9510269f603485bc3e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/browser-results.json",
+      "crc32": "06068b0c",
+      "size": 6299,
+      "sha256": "9ec2fafeb5950c76172ae9b43a6841fa02d8efa0fe202e298ab70d20c0542d02",
+      "gitBlobSha": "7f7bd385c68e200aa6497a5658904e659e13332e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v1/create-content.py",
+      "crc32": "f144c729",
+      "size": 28325,
+      "sha256": "8ec65daeeae3a19528182d63ce00fe51c221c60ab2d4585837b79f8aab137105",
+      "gitBlobSha": "8aca2c2035ad9f2336abdd7c193e8adf13888bca"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v6/campaign-snapshots.json",
+      "crc32": "61a2adf0",
+      "size": 371579,
+      "sha256": "9b1f3ac389e9cb952009121e9aee16a9836c2f780a2ad5b9159a30781be6b82d",
+      "gitBlobSha": "82c72ec3fbc1a228c27f859353f167bd1f3d9a95"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v3/README.md",
+      "crc32": "99c9a394",
+      "size": 8542,
+      "sha256": "eadad6501572b8465536fc223cc62287afa32f20c4dd257cc6ea436151135a8c",
+      "gitBlobSha": "9cf27bfae738725e16df7ee98e9af230726a843e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v3/campaign-snapshots.json",
+      "crc32": "b29b3345",
+      "size": 139209,
+      "sha256": "94e67bfb628c3b1aafcfd775c32d4431960aa195c1b2734d2020ca5fcf57e5b7",
+      "gitBlobSha": "00a18c0d0deda93bf0b416273b60fce9af96c655"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v3/CODEX_PROMETHEUS_V3.md",
+      "crc32": "26ed39b6",
+      "size": 111097,
+      "sha256": "8308d5faf9b3d430ff3cc6b122b236233b5a0108ce11de24c5ac4b5dac4bd854",
+      "gitBlobSha": "bb4e493b609b229e2481d6becc5bf1925ecbb8d1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v3/habitat-prepared-scenes.json",
+      "crc32": "17961770",
+      "size": 8188,
+      "sha256": "7d3c73e9cb8b0cf05b1c746400331db369e7be936b4d9b72bec276848e6981b9",
+      "gitBlobSha": "74f8acacae92a0540eeedc9a0ec7aa6079f2f6f4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v2/README.md",
+      "crc32": "a56be743",
+      "size": 5936,
+      "sha256": "c97e91bda492d8d6fd8264b3b7b446496b2aa10ec72f77f0d83053ed96faf835",
+      "gitBlobSha": "1206e7cac62be1218a9723b11fe9b65f76e69d52"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v2/campaign-snapshots.json",
+      "crc32": "535f9acb",
+      "size": 108366,
+      "sha256": "157ebbf515c01286ee95ca3150c3725bb5c5aaf2f557b9cbc73a5226344e9443",
+      "gitBlobSha": "864b27ddac95972e34aaa8870061d1d36e3b5580"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/v2/CODEX_PROMETHEUS_V2.md",
+      "crc32": "dbdbfce0",
+      "size": 79559,
+      "sha256": "1d520d8e98f06a3cba769c5a3a9996478f0c88658fd336b100ddcca83e37b8e6",
+      "gitBlobSha": "df91c640f8d800a90a51f2dbe7dbe0f2e74aeb14"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/RULES_V12.json",
+      "crc32": "565cfa68",
+      "size": 51039,
+      "sha256": "3904ab798b6cd3c15edf582bf2d956e9e20f9f3874afa39e4909d3621b8ac369",
+      "gitBlobSha": "786556b32f728e9a17aaad4d082e2eb685c77132"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/PORTAL_CLEARANCE_CHANGES.json",
+      "crc32": "d4ef01d8",
+      "size": 937,
+      "sha256": "682dacd63901579aba1053beb0fb97c0f52cca133b07a664a28358fd6bd4d83f",
+      "gitBlobSha": "968e0cb6fb77ed381d350d2430897c002a81a637"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/REFERENCE_MATRIX_V11.json",
+      "crc32": "f4a2497e",
+      "size": 78015,
+      "sha256": "ceeda78894fbc1e3306fff2351a309dcf3ea5ea189e8659085447dce3633175e",
+      "gitBlobSha": "40c0e58461275a01b213742cad6d4791a2f94ee0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/RULES_V11.json",
+      "crc32": "d5c845ac",
+      "size": 47835,
+      "sha256": "8360b79cb6db00f7a049f60d428b85ee3eed4c2dc987145b8fc9a1e97992e848",
+      "gitBlobSha": "fa9864b4e72023b28ea08d43431a5863173a7929"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/QA_SUMMARY_V12.json",
+      "crc32": "59824868",
+      "size": 1097,
+      "sha256": "6ae0948b98542765e923be34a1ad069bfbf1d697c9945fc953cfa26fc5142e5a",
+      "gitBlobSha": "3a2c1021ddafc7afd3bc9f0687f920eeb9fad372"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/rules-v10.json",
+      "crc32": "4350759f",
+      "size": 44237,
+      "sha256": "618924016a252946a454784b8220cf4cdb565a8d079f9310c8addc7bce11fb05",
+      "gitBlobSha": "2f977a62f3129eca2dc4996f4fd6d644e7860fe1"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/docs/QA_SUMMARY_V11.json",
+      "crc32": "08232058",
+      "size": 2797,
+      "sha256": "5e55e26f5f1a7848f1d165330142319200d7852551256c1adbbb0a73b246bae3",
+      "gitBlobSha": "1737e909d25c1f9162a4504d63f7688b4dda4c47"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/RAPPORT_PROMETHEUS_V12.html",
+      "crc32": "6075b39b",
+      "size": 4297512,
+      "sha256": "cdb51577f5dc199e406ae1922458a9701c9086a8f66804d6e066e87119e0a656",
+      "gitBlobSha": "b4cfe3188782f14a1110d4d86017ab7895080716"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/holloway.svg",
+      "crc32": "54275a74",
+      "size": 1867,
+      "sha256": "5fab19d6038a8142a1c4c65e7a8ca5dac3a0be80f24c014ff44d70f2c6824ebd",
+      "gitBlobSha": "ea855aa841644ea58efdfd6fe583c664db3fc5aa"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/fifield.svg",
+      "crc32": "39a48c0d",
+      "size": 1741,
+      "sha256": "eddedaaf96b04d81714adf2c1d63640325bffd464606406f6eaa239c777dbc02",
+      "gitBlobSha": "1a010b73b7c3dcef760337dc4436119b5dd17926"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/vickers.svg",
+      "crc32": "edbfeef6",
+      "size": 1795,
+      "sha256": "fd1b74381a17e7cfd6f1f3ca8d06a8485f1651b9c030e940b4d4e6d4cf18d1e1",
+      "gitBlobSha": "7e3b669f86bcc366f651d372b2cc7ca29e5bed05"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/david.svg",
+      "crc32": "41723447",
+      "size": 1774,
+      "sha256": "34b37bbe8a1c6aab7be6bfff4c6fe823036e5adc614e054afaaf433129555ee4",
+      "gitBlobSha": "18bc43c773268ec135e8ce7538d9a11685114c2d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/janek.svg",
+      "crc32": "8a879614",
+      "size": 1941,
+      "sha256": "4d02fb02d827e2b39c1567df4e0ce748d3ed27b3b06c10a1fb5cb761d038a17f",
+      "gitBlobSha": "3d1a0ec6e58f3c25c8b4595391747953c6597f9c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/ravel.svg",
+      "crc32": "086f589f",
+      "size": 1840,
+      "sha256": "c999fed009875369f587953bc6d18d477ec197ebce564edfcbb54ee33bcaca37",
+      "gitBlobSha": "fb3366f7e899819cb2f52357fa764c4cc3e84611"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/ford.svg",
+      "crc32": "4930d5e0",
+      "size": 1757,
+      "sha256": "481e22e35ea1be47c9a32d18e6169e33a0efb13da016d180f99b17f61f7c4fe4",
+      "gitBlobSha": "8c64e5d046f052281c30cdd6bbed5446cd959068"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/chance.svg",
+      "crc32": "9b04b9a1",
+      "size": 1845,
+      "sha256": "87aa0ea999ba22e8197d2fc2c2a01fd5356ee8e7b8ce7aaee6cd36b746061653",
+      "gitBlobSha": "65b0adc56087c78d290ac0d062bf5486b4b33530"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/millburn.svg",
+      "crc32": "f396a08b",
+      "size": 1972,
+      "sha256": "8c62ec9dea488248d1d90adcf69c024ba94ddfbc23b7768702883084b30f6678",
+      "gitBlobSha": "612576c634788d24e7f41663ce608f29ea373913"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/holloway.svg",
+      "crc32": "42c3d987",
+      "size": 1907,
+      "sha256": "fb5cde08dc4893481e7ea9374f4521f4471859fe664e9c2460a05ac12af6deb2",
+      "gitBlobSha": "949644171dbbe382879e00181ce6b62c92b35dec"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/fifield.svg",
+      "crc32": "e9299593",
+      "size": 1781,
+      "sha256": "d69c09af0b99ce90f4e5c60c703e7f18aaef926c613b843190e334eb87eaeb2b",
+      "gitBlobSha": "a7334ab4a1bc14eb93de93aa1e2343d07d2886e0"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/vickers.svg",
+      "crc32": "b5db4728",
+      "size": 1812,
+      "sha256": "607c597c1c9dea7a8f15710b1af4bccab53140d67ba5f7b1f21578c819af49b2",
+      "gitBlobSha": "d3dd2bd0841bdab8cf6bb75204ba07b2f12ba961"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/david.svg",
+      "crc32": "a1ac58c9",
+      "size": 1791,
+      "sha256": "b9ea0d6405bf3036d779ce36eb28f9daa19d972a729740f9ac8c44ca291db034",
+      "gitBlobSha": "cc13b84dc7bb9852d2357e48f731935342062478"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/janek.svg",
+      "crc32": "caa945a2",
+      "size": 1892,
+      "sha256": "4150df9e6267cd3d735fb0bc740ee201173e85b57227b33d3ed7e62effeba121",
+      "gitBlobSha": "56907adb13db8404a7ec726483fbf54c473674ae"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/ravel.svg",
+      "crc32": "bbc181e1",
+      "size": 1791,
+      "sha256": "f6dc40130ce5f72acc698227a45f9e0ffcda7bacfe724267e5698259e108e26e",
+      "gitBlobSha": "4e1d151f92e47fdb486e18bbe34c8aaf99f6721e"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/ford.svg",
+      "crc32": "2d6115d7",
+      "size": 1797,
+      "sha256": "4d1beb3305e7764e910d9edd919051d86f8a2936395451833e318eb62ac38432",
+      "gitBlobSha": "b35ec683aabfb67d52205b26c84f907ee09e228f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/chance.svg",
+      "crc32": "a0225c59",
+      "size": 1796,
+      "sha256": "03ca6d079536382065cbb83eece5a58d7b21d8b38dd114992ce5874ac2b8d2ed",
+      "gitBlobSha": "9f1d23dc04aeffa092cccf13f4128c682e778713"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/millburn.svg",
+      "crc32": "e8991f23",
+      "size": 1982,
+      "sha256": "ed24a2578e29f93ca348dd3f85551945451aade4a3e1f3b8c395fe5eef0d460b",
+      "gitBlobSha": "b62a207309e22b8806d1919fdf6244aebc1330eb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/JOUER_PROMETHEUS_V12.html",
+      "crc32": "cdc0b1ce",
+      "size": 603869,
+      "sha256": "036afcd73b1e1d2089d9e73f1f136b70a7cd9ffb5b42fc43fa779d1f181a4cde",
+      "gitBlobSha": "d0768d9801e67ad72211cd2ee6b21fd505add964"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/CODEX_PROMETHEUS_V12.html",
+      "crc32": "d9e8aa8e",
+      "size": 126709,
+      "sha256": "d3738185864c12d1a91a8ff17d9eb2cb892ab72990e022ed43efc584892282df",
+      "gitBlobSha": "ba48214c44651a49896bbd684654a3acd6882cfb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/recon.mjs",
+      "crc32": "4c719495",
+      "size": 16649,
+      "sha256": "40da6be68df6d930644e5d307b298aad5f2532131a76a1a2dbf04f3ad28cb32f",
+      "gitBlobSha": "cbaacc646198f6d19574804dc091cc6c29c93447"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/finale.mjs",
+      "crc32": "2cb75e2f",
+      "size": 15134,
+      "sha256": "37f8100a58fb2fc5b155e02d1b6ebc9900b99527858c040ce3676713dc2876a3",
+      "gitBlobSha": "2d2d2a7ccfb4940753b178115421276a97cd1da7"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-docs-v11.py",
+      "crc32": "cdc97409",
+      "size": 3516,
+      "sha256": "f42a7d88dde5714715ad258c368e396e9e1db57bd11949e2f37c4c813a6f0864",
+      "gitBlobSha": "362daf1749f1d47dd5054839eee55d4e316cefbe"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/unit.mjs",
+      "crc32": "c3ef956c",
+      "size": 9906,
+      "sha256": "d1edb26225e1d725f16242e00273d8435abebd4363b38a81099858c5a68b276a",
+      "gitBlobSha": "50e5a8f278a86ecf9d8a16b749790af30aa91c9b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/science-route.mjs",
+      "crc32": "e9504776",
+      "size": 5912,
+      "sha256": "5dcd16f29b79bb857ca044f816d6ee243d38e1179860117e87f8489655ae6826",
+      "gitBlobSha": "9b360901fbaf84f21e8cac978da4b09f49fbdfc9"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/wayfinder-campaign.mjs",
+      "crc32": "71ea17f9",
+      "size": 1183,
+      "sha256": "935e909f562b198f0f80353604c1164e2497957718c98146fd6aeae2d7819375",
+      "gitBlobSha": "ab7fe3538fc4bd24eae31df1a8c1c7f03c3e5db8"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-science.py",
+      "crc32": "7baa200a",
+      "size": 13609,
+      "sha256": "7c8cdca8f6fe773608a0dda0225977fff45eacb55df7c447f24b6705a453a820",
+      "gitBlobSha": "12e82612d8154a4d2c2cf7280b57132f11b81a3b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/tension-campaign.mjs",
+      "crc32": "627e4755",
+      "size": 964,
+      "sha256": "cb752820ee8664c0d19917d6abdf01c17d5ca2846c303f40093a68fd52415b25",
+      "gitBlobSha": "fbe670e8984cc2ff66e002b5080ad27bf10611df"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/science.mjs",
+      "crc32": "48c3582f",
+      "size": 17773,
+      "sha256": "5b94b227bd44de3ded9bc426714dd85b656cefc91c60264b8c20be783a468565",
+      "gitBlobSha": "0b1ac50070c41ecf6a0e7a3643252e9251fd2a0c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/crew-route.mjs",
+      "crc32": "892ce073",
+      "size": 1187,
+      "sha256": "e20e6db7be1c66d65164c90f48ba0da542733ae8cbeeddc0426f810ed776100b",
+      "gitBlobSha": "a1e053df31f1ca759e2ad048027311bb13d57e0d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/signals.mjs",
+      "crc32": "4c4b3f60",
+      "size": 8918,
+      "sha256": "1d9fa7c01cc0e95b79b400fc80d71cddd3ccc05cdc25a16df6d9b79a95bd3fdf",
+      "gitBlobSha": "c9d313f4bb3de9cbcf5b979ee694aedcc9736e54"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/field-route.mjs",
+      "crc32": "f1438d7b",
+      "size": 3593,
+      "sha256": "96b03fdb438d5cbac8bbe6f2c8a632b8fe347dc254083547e0b0f3fd76dc2d35",
+      "gitBlobSha": "e244fd1387e9aee35daa3222f98a65391802a161"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/wayfinder-route.mjs",
+      "crc32": "646dea51",
+      "size": 2623,
+      "sha256": "348c79df11eaa0def745d2ce08686a364957175570c9dd9bd00c7e9845547b79",
+      "gitBlobSha": "71bdd2f92c616ed32732f7bb639942b5cfb7ff27"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/habitat.mjs",
+      "crc32": "4398637f",
+      "size": 14264,
+      "sha256": "66851936d2de5b5eb026b37e8e967e575d803c221f7b12739a089d222bc8a4db",
+      "gitBlobSha": "b42030c4926f19263b9377e619dbeb38b8e0368b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/expedition.mjs",
+      "crc32": "d83d3245",
+      "size": 12528,
+      "sha256": "20698cc183e625ad830c4c8fb43b06037462dba33ae6dc69346f690e725af92a",
+      "gitBlobSha": "1c434cc638215f028faf1b10a4db2cd87796e222"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/wayfinder.mjs",
+      "crc32": "fb2bc4f7",
+      "size": 19099,
+      "sha256": "8aed3f4f77ae79b3df7db53139f7c80f5cbd410c573f4d2298609a6d8879488c",
+      "gitBlobSha": "ac58dcd9b4655c5e767e2d78b780ec2b4198f1a6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/walkthrough.mjs",
+      "crc32": "0129b1a6",
+      "size": 10966,
+      "sha256": "ba6cdf9632251d663e51eda48173a934c44b5d3c71e8866a5d00f9158de13f80",
+      "gitBlobSha": "78bf338942caee481e6341b2ba97f3b0b6e17573"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-docs.py",
+      "crc32": "7aeee8f7",
+      "size": 2291,
+      "sha256": "9b6f6c5583c8e627a4201705eb46e9bfad279f90fafe3ec76438d45e64bb4108",
+      "gitBlobSha": "a5f08e1b79902da44a4f18a6ecc247b7b8eaa0d4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/spatial-audit-v12.mjs",
+      "crc32": "94a42dc8",
+      "size": 3812,
+      "sha256": "81df65e9b437df1fc3351570d8ce05b0331eb7643c41b1f53cbd9449430f5feb",
+      "gitBlobSha": "496cc9bd83ff45e4c4efd8fa31a283dc5c114e24"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-tension.py",
+      "crc32": "c917bd92",
+      "size": 12994,
+      "sha256": "e757b99cbaa51ef1b6e63d06a3affc2c9161ffbcbe2c6a8df0f33e400d9e9e45",
+      "gitBlobSha": "399ff640e5dba2e98569ea6fd5c19f23323cfc16"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/spatial-audit-v11.mjs",
+      "crc32": "bf65291d",
+      "size": 3808,
+      "sha256": "1a736599c9d75d97afffdbbec3081612e8197eb17264528ded00592c1eb65fa3",
+      "gitBlobSha": "4cab61f06731ad1910541c679bd0c0b6a98b6f28"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/recon-campaign.mjs",
+      "crc32": "4ec294ed",
+      "size": 1091,
+      "sha256": "c78e4639aff783a7e491286c94c1204b0d861728fb14c2f9ff6e2bf6831f7c54",
+      "gitBlobSha": "ea2ae53ac7485c0a5f1db20d9cedf6b776f64587"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/crew.mjs",
+      "crc32": "2e8471e8",
+      "size": 10146,
+      "sha256": "153b751709493c020e2585d384be074986f382a388d24221a2e62a1b7d1b9a08",
+      "gitBlobSha": "09a776915fe9b307365b461c72d6594d0fad6488"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-fidelity.py",
+      "crc32": "1ef1082b",
+      "size": 9729,
+      "sha256": "dd209922bd9237d77e2b53613d0e50b3eb61e8d73efba6f0c018050b49556b35",
+      "gitBlobSha": "6a9beaa4161ea14740aff8c511b8e71dfc0cf128"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-crew.py",
+      "crc32": "637e8fa6",
+      "size": 11934,
+      "sha256": "25596b642d6857647349fa227a2e70f362a65fae000ed9fb92c7a570c92fbafd",
+      "gitBlobSha": "8cff05f7b6149e0ceedaf539e9b5294a02f35dcd"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity-route.mjs",
+      "crc32": "4ca3f929",
+      "size": 3230,
+      "sha256": "b72dd85c7e52300cede84b14e8897b6c4f1c3ce0f30f69ff8f2fffec3f689649",
+      "gitBlobSha": "de7af7fa8fd20cfa1dc9deec0a877930676310f4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity-v12.mjs",
+      "crc32": "035d6222",
+      "size": 11836,
+      "sha256": "97db3e4e129301daaec186bc59ae4f8677abdd14830eca39bb0de4943f8bc5a0",
+      "gitBlobSha": "441f04f467dde1f729c67c8de4d58639d35bbddb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/wayfinder-prepared.mjs",
+      "crc32": "9e155453",
+      "size": 1717,
+      "sha256": "220cc7312f2a8df22d373a04980f60fe6ddc9df1804a5b47293b880d9b825665",
+      "gitBlobSha": "6a83e17104bc58d9cbc3c0fd2cd922a909dc8223"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity-campaign.mjs",
+      "crc32": "31bb1e62",
+      "size": 1635,
+      "sha256": "b6d76a19b22cc35715b9650a6083b74a0d72c508b6a5b4551e820cb83e8b5980",
+      "gitBlobSha": "e951cf5ad833f444186988e9d661248cc07ebb43"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/crew-campaign.mjs",
+      "crc32": "9a1420ca",
+      "size": 1505,
+      "sha256": "380336959e7b255a3b99e178b99bf6f2239a7af0cde98ed9aec1cf6a8607f0c0",
+      "gitBlobSha": "7d9ee5f2057ea3a20f87272b76c14f906182525b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/installer.mjs",
+      "crc32": "afea7595",
+      "size": 3652,
+      "sha256": "72c6d444ccb060b28856149c91b8509c06851a377c13739fc70dca49da7e6a8a",
+      "gitBlobSha": "fd701a29b0f66c7c6934cb9e941342019b3986c6"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/finale-campaign.mjs",
+      "crc32": "fb3dc707",
+      "size": 1260,
+      "sha256": "5b1ed9d84281c269b4d8d90402d59234ebedb162eff7df1a15fcae670c076f25",
+      "gitBlobSha": "c953978a76fcf1e14cc5d4f7ae53a8e5f7bef931"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity-v12-campaign.mjs",
+      "crc32": "c3b137ac",
+      "size": 1671,
+      "sha256": "141c0198e24e70a6f4f01711607820f824a98c4de861e8dd2e47971f5ed3aaa7",
+      "gitBlobSha": "630e12fbc25da66738dc43264fef8994f68d6787"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-fidelity-v12.py",
+      "crc32": "cef8acab",
+      "size": 7149,
+      "sha256": "0f7deb52398585631b65ab00c3b778b241870eafdf648d9190fd8c54f9d26d7d",
+      "gitBlobSha": "c582b811e8e6705b34c92733e3f7741c6b222b5b"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/science-campaign.mjs",
+      "crc32": "b1507317",
+      "size": 1146,
+      "sha256": "1c68b75159bcf3ea3058f575087ced575d70f9f44fb1a1eba571ca58290a16d6",
+      "gitBlobSha": "f2cbf7607bb81976ba1fded9449db3ace138df69"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/smoke-v6.py",
+      "crc32": "7f4f006a",
+      "size": 1478,
+      "sha256": "ca0ca77f1f9ab0b9d313b8f7680f006bd7357245995e68e3ce539b15f7855f1b",
+      "gitBlobSha": "f9ed2c971374d8aa57c6653364651568b0ca4e70"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-finale.py",
+      "crc32": "37fbd09e",
+      "size": 13574,
+      "sha256": "07534e1b2333d2a623b9e7fc67cf091bab9cbbb3a7846bf1d3a7c5d4e269a355",
+      "gitBlobSha": "8cc76370023aa715f8b5eca9ea01dadd118f922f"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity.mjs",
+      "crc32": "dfd286e9",
+      "size": 10704,
+      "sha256": "4f694e473c1f3a818fa343106b81e2fafdd932f188ba2ac71bc255dcdcf5fc8b",
+      "gitBlobSha": "e44f1503c3c8a59bd23ae393c17d5e2b527c845c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser.py",
+      "crc32": "0e3be33b",
+      "size": 13427,
+      "sha256": "91a86785b94fb8f8f71fb73e3b33fca463af8a483c06e0697f17362e1b164470",
+      "gitBlobSha": "70a6ec225ebe217f31d674a5a210b34a751c1375"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/field-campaign.mjs",
+      "crc32": "6cdb0f5c",
+      "size": 1017,
+      "sha256": "a60e8ad49351625a5aa8f16eeeb2cb8033770294391a0d6567f4b5338d5ad5f2",
+      "gitBlobSha": "57e08ff66d0afeb2bd45454f951b1ae259d3ab31"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-recon.py",
+      "crc32": "bc690273",
+      "size": 13671,
+      "sha256": "0e0578ab29b3906ea0b4fe5a8114975fee7ce7ef149cacca09ee702ed38c94c5",
+      "gitBlobSha": "4e76cc2da870e54c58abb786988ccce5a0171b6d"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/recon-prepared.mjs",
+      "crc32": "11487017",
+      "size": 1376,
+      "sha256": "f1715f7b23ca91972dd567bbafa8163e36a56504af0e005b4d3535320d07e9dc",
+      "gitBlobSha": "0928df130e8d194b697813b3e2372c121b09604c"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/fidelity-prepared.mjs",
+      "crc32": "77f41b4d",
+      "size": 1990,
+      "sha256": "da11bd5b4e6690a993754b832273ca06dd70e88533f717e1d72573b19a9ee7c4",
+      "gitBlobSha": "18544088bc9b9b2e690adeb22c25c8bc94efcfb7"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-docs-v12.py",
+      "crc32": "f4ce692b",
+      "size": 2102,
+      "sha256": "91909ab46489f9ad99d52ea0f1ad2cbc5cef563d21429033337bf5b3a45f9817",
+      "gitBlobSha": "0f909baeef5e1676556ee359b3ac966824a0c9fb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-wayfinder.py",
+      "crc32": "a3d8b193",
+      "size": 14805,
+      "sha256": "82f6fea76bddb42b02e26ef1efcf7a93d387ae62025e95109b9f7ff834baa13a",
+      "gitBlobSha": "a393f0de195fb7df09407e81a84944a46c1629ae"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-habitat.py",
+      "crc32": "2019749a",
+      "size": 10666,
+      "sha256": "93cda22454142fe901a1b7fd67eaec7d465f3bb07076d4e582639dc7b0f067b7",
+      "gitBlobSha": "25cdf85655a01c17418108f872f7f5f556ddeab4"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/tension.mjs",
+      "crc32": "266be8b1",
+      "size": 22281,
+      "sha256": "2e8b0c11c10f836cba42e847174cebe9c619eb63072a95894708ff53f97eaea9",
+      "gitBlobSha": "6a2819bb89b9aa5298d2cc5c59844cc4770f0154"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-signals.py",
+      "crc32": "8272f6e9",
+      "size": 10977,
+      "sha256": "e1702bf113d7c9b97fa14df7feaaba40395b709dea500894682ae35e98ce6719",
+      "gitBlobSha": "dad610d04dbbc8d92371841326e122b34138ebcb"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/signals-campaign.mjs",
+      "crc32": "6b58de5a",
+      "size": 1535,
+      "sha256": "36e172579ba91562fc51f100d85e0a34aaf449163d0994f215e8288372421188",
+      "gitBlobSha": "7f9e0524425f6afd0d4d530d689e55817c256438"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/recon-route.mjs",
+      "crc32": "52de11f6",
+      "size": 3337,
+      "sha256": "5f08ee12733955704a70cc1e457a4f871a6d2f79f449b3a5aed3bc3d3a9aa759",
+      "gitBlobSha": "65d299f6160ae0c23651df315f1338556e18e911"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/browser-docs-v10.py",
+      "crc32": "3238dab8",
+      "size": 2963,
+      "sha256": "3a37c0388e2fa6924a0699c20e5ae9201420fcf93eda8bf42825fd7b967591e1",
+      "gitBlobSha": "62d79d7cbe324d3bec62e9ee5e3bdf7f71b4e810"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/tests/tension-route.mjs",
+      "crc32": "edc327dc",
+      "size": 3345,
+      "sha256": "6cc92865b286cfbb5fde8635201f67249b6122f060596418eecbabf104a1f2fa",
+      "gitBlobSha": "4f59ec28c55c5f53cf813dd310ee69be50548a37"
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/AUDIT_FIDELITE_PROMETHEUS_V12.html",
+      "crc32": "a00234e4",
+      "size": 35478,
+      "sha256": "66749cc53dd6b6a49e648886f6955e147b8be81d0c69e08bfd5847c25115f7d5",
+      "gitBlobSha": "de86023ce40dcff27614ce2d290af1bc4d1b3dad"
+    }
+  ]
+}

@@ -1,0 +1,846 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/01_accueil.png",
+      "bytes": 698644
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/02_sulaco.png",
+      "bytes": 535716
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/03_pompes.png",
+      "bytes": 516668
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/04_poursuite.png",
+      "bytes": 527508
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/05_chargeur.png",
+      "bytes": 551838
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/06_toit.png",
+      "bytes": 439452
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/07_portique_avant.png",
+      "bytes": 442650
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/08_portique_apres.png",
+      "bytes": 433601
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/09_observation.png",
+      "bytes": 521537
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/10_sauvetage.png",
+      "bytes": 439461
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/11_reine.png",
+      "bytes": 579589
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/12_plan.png",
+      "bytes": 171200
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/13_dossiers.png",
+      "bytes": 159269
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/14_mobile.png",
+      "bytes": 87154
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/15_legato.png",
+      "bytes": 546869
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/16_alcove.png",
+      "bytes": 500806
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/17_escorte.png",
+      "bytes": 508915
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/18_transmission.png",
+      "bytes": 503894
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/19_relais_exterieur.png",
+      "bytes": 406094
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/20_depart.png",
+      "bytes": 423430
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/21_tablette.png",
+      "bytes": 263372
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/22_oneal_a_terre.png",
+      "bytes": 536166
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/23_cible_designee.png",
+      "bytes": 547192
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/24_sentinelle.png",
+      "bytes": 196161
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/25_bilan.png",
+      "bytes": 143927
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/26_hunt_accueil.png",
+      "bytes": 698644
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/27_hunt_arenes.png",
+      "bytes": 269868
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/28_hunt_ravitaillement.png",
+      "bytes": 231901
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/29_hunt_contact.png",
+      "bytes": 581464
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/30_hunt_plan.png",
+      "bytes": 142096
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/31_hunt_balise.png",
+      "bytes": 595929
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/32_hunt_fret.png",
+      "bytes": 546461
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/33_hunt_laboratoire.png",
+      "bytes": 537384
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/34_hunt_colonie.png",
+      "bytes": 475137
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/35_hunt_bilan.png",
+      "bytes": 137052
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/36_hunt_mobile.png",
+      "bytes": 95027
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/37_briefing_maintenance.png",
+      "bytes": 178096
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/38_diagnostic_sentinelle.png",
+      "bytes": 205195
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/39_sentinelle_hors_service.png",
+      "bytes": 587011
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/40_surchauffe.png",
+      "bytes": 597946
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/41_brule_persistante.png",
+      "bytes": 583285
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/42_maintenance_mobile.png",
+      "bytes": 47005
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/43_equipement_tactique.png",
+      "bytes": 260469
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/44_leurre_sulaco.png",
+      "bytes": 541393
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/45_diversion.png",
+      "bytes": 529438
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/46_mine_declenchee.png",
+      "bytes": 496886
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/47_apres_detonation.png",
+      "bytes": 503057
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/48_detecteur_mesure.png",
+      "bytes": 536904
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/49_equipement_mobile.png",
+      "bytes": 131297
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/50_ravitaillement_tactique.png",
+      "bytes": 173008
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/51_repli_tablette.png",
+      "bytes": 199731
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/52_repli_maintien.png",
+      "bytes": 551698
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/53_transport_terrain.png",
+      "bytes": 552569
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/54_transport_tablette.png",
+      "bytes": 274776
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/55_poste_redeploye.png",
+      "bytes": 551072
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/56_position_oneal.png",
+      "bytes": 552476
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/57_tablette_etroite.png",
+      "bytes": 91097
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/58_couverture_intacte.png",
+      "bytes": 526173
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/59_couverture_fissuree.png",
+      "bytes": 533026
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/60_passage_degage.png",
+      "bytes": 492456
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/61_griffe_annoncee.png",
+      "bytes": 515346
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/62_corrosion_active.png",
+      "bytes": 528896
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/63_inspection_couvertures.png",
+      "bytes": 159390
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/64_inspection_etroite.png",
+      "bytes": 58376
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/codex-hunt-review.png",
+      "bytes": 200062
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/codex-review.png",
+      "bytes": 229617
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rapport-review.png",
+      "bytes": 128516
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-01.jpg",
+      "bytes": 75911
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-02.jpg",
+      "bytes": 93241
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-03.jpg",
+      "bytes": 84068
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-04.jpg",
+      "bytes": 76209
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-05.jpg",
+      "bytes": 86790
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-ref-casevac.jpg",
+      "bytes": 77057
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-01.jpg",
+      "bytes": 75875
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-02.jpg",
+      "bytes": 88979
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-03.jpg",
+      "bytes": 80190
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-04.jpg",
+      "bytes": 74901
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-05.jpg",
+      "bytes": 87394
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-ref-engineering.jpg",
+      "bytes": 78026
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-01.jpg",
+      "bytes": 79758
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-02.jpg",
+      "bytes": 91905
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-03.jpg",
+      "bytes": 80286
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-04.jpg",
+      "bytes": 65548
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-05.jpg",
+      "bytes": 89901
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-ref-crane.jpg",
+      "bytes": 74819
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-01.jpg",
+      "bytes": 78483
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-02.jpg",
+      "bytes": 93083
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-03.jpg",
+      "bytes": 83794
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-04.jpg",
+      "bytes": 79310
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-05.jpg",
+      "bytes": 85986
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-06.jpg",
+      "bytes": 90912
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-07.jpg",
+      "bytes": 69406
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-ref-morgue.jpg",
+      "bytes": 85680
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-ref-operations.jpg",
+      "bytes": 80471
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-01.jpg",
+      "bytes": 93340
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-02.jpg",
+      "bytes": 100387
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-03.jpg",
+      "bytes": 79400
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-04.jpg",
+      "bytes": 79048
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-05.jpg",
+      "bytes": 80639
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-06.jpg",
+      "bytes": 93741
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-07.jpg",
+      "bytes": 94300
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-08.jpg",
+      "bytes": 97082
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-ref-reid.jpg",
+      "bytes": 66710
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-ref-tower.jpg",
+      "bytes": 73825
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-01.jpg",
+      "bytes": 73434
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-02.jpg",
+      "bytes": 88163
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-03.jpg",
+      "bytes": 80220
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-04.jpg",
+      "bytes": 73799
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-05.jpg",
+      "bytes": 87888
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-ref-warehouse.jpg",
+      "bytes": 73922
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-01.jpg",
+      "bytes": 85796
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-02.jpg",
+      "bytes": 96788
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-03.jpg",
+      "bytes": 87355
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-04.jpg",
+      "bytes": 81298
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-05.jpg",
+      "bytes": 92063
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-06.jpg",
+      "bytes": 72777
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-07.jpg",
+      "bytes": 91403
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-ref-specimens.jpg",
+      "bytes": 79878
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-01.jpg",
+      "bytes": 81253
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-02.jpg",
+      "bytes": 95042
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-03.jpg",
+      "bytes": 82842
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-04.jpg",
+      "bytes": 86825
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-05.jpg",
+      "bytes": 86139
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-06.jpg",
+      "bytes": 93384
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-ref-pilot.jpg",
+      "bytes": 71851
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-01.jpg",
+      "bytes": 83794
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-02.jpg",
+      "bytes": 86488
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-03.jpg",
+      "bytes": 82050
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-04.jpg",
+      "bytes": 70099
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-05.jpg",
+      "bytes": 82267
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-ref-operations.jpg",
+      "bytes": 82583
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-01.jpg",
+      "bytes": 75407
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-02.jpg",
+      "bytes": 87825
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-03.jpg",
+      "bytes": 74856
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-04.jpg",
+      "bytes": 66807
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-05.jpg",
+      "bytes": 85751
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-06.jpg",
+      "bytes": 63810
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-07.jpg",
+      "bytes": 94953
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-ref-aa-cache.jpg",
+      "bytes": 80060
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-01.jpg",
+      "bytes": 85034
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-02.jpg",
+      "bytes": 79732
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-03.jpg",
+      "bytes": 71004
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-04.jpg",
+      "bytes": 78117
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-05.jpg",
+      "bytes": 83010
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-ref-bridge.jpg",
+      "bytes": 74415
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-0.png",
+      "bytes": 430225
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-1.png",
+      "bytes": 430950
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-2.png",
+      "bytes": 425598
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-0.png",
+      "bytes": 499013
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-1.png",
+      "bytes": 510013
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-2.png",
+      "bytes": 503832
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-0.png",
+      "bytes": 492223
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-1.png",
+      "bytes": 484713
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-2.png",
+      "bytes": 485384
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-01.jpg",
+      "bytes": 85399
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-02.jpg",
+      "bytes": 82989
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-03.jpg",
+      "bytes": 86023
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-04.jpg",
+      "bytes": 79458
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-05.jpg",
+      "bytes": 74798
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-ref-parents.jpg",
+      "bytes": 70184
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-ref-reactor.jpg",
+      "bytes": 83176
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-01.jpg",
+      "bytes": 81288
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-02.jpg",
+      "bytes": 78459
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-03.jpg",
+      "bytes": 89000
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-04.jpg",
+      "bytes": 81028
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-05.jpg",
+      "bytes": 73997
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-cryo.jpg",
+      "bytes": 73609
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-fiorina.jpg",
+      "bytes": 70204
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-skiff.jpg",
+      "bytes": 72304
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-01.jpg",
+      "bytes": 83636
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-02.jpg",
+      "bytes": 85763
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-03.jpg",
+      "bytes": 78330
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-04.jpg",
+      "bytes": 93743
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-05.jpg",
+      "bytes": 79457
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-ref-resolute.jpg",
+      "bytes": 78567
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-01.jpg",
+      "bytes": 71393
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-02.jpg",
+      "bytes": 70907
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-03.jpg",
+      "bytes": 65105
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-04.jpg",
+      "bytes": 86305
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-05.jpg",
+      "bytes": 64386
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-ref-gas.jpg",
+      "bytes": 77050
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/01_title.png",
+      "bytes": 698644
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/02_ledger.png",
+      "bytes": 170992
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/03_start.png",
+      "bytes": 540409
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/04_armory.png",
+      "bytes": 170867
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/05_ops.png",
+      "bytes": 506460
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/65_accueil.png",
+      "bytes": 698644
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/66_identites.png",
+      "bytes": 158166
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/67_arsenal.png",
+      "bytes": 171291
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/68_variantes.png",
+      "bytes": 161664
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/69_operations.png",
+      "bytes": 525233
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/70_morgue.png",
+      "bytes": 518524
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/71_pilote.png",
+      "bytes": 535287
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/72_passage_grue.png",
+      "bytes": 555544
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/73_skiff.png",
+      "bytes": 530609
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/74_ventilation.png",
+      "bytes": 525265
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/75_armurerie_etroite.png",
+      "bytes": 69497
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-bella.png",
+      "bytes": 5386
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-bishop.png",
+      "bytes": 5460
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-cruz.png",
+      "bytes": 5758
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-hicks.png",
+      "bytes": 5580
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-levy.png",
+      "bytes": 5712
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-lisbeth.png",
+      "bytes": 4967
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-oneal.png",
+      "bytes": 6484
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-reid.png",
+      "bytes": 5694
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-stone.png",
+      "bytes": 5410
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-weyland.png",
+      "bytes": 5258
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-winter.png",
+      "bytes": 5808
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/codex-review.png",
+      "bytes": 268562
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/rapport-review.png",
+      "bytes": 340921
+    }
+  ]
+}

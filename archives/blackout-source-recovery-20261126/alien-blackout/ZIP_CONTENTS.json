@@ -1,0 +1,2806 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+  "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+  "files": [
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/CODEX_ALIEN_BLACKOUT_v0.7.0.html",
+      "crc32": "1d4afbf3",
+      "size": 10536965,
+      "sha256": "6e490c78048377fd112f26729123466631a17298cb1c3ed12d338c545e59de30",
+      "gitBlobSha": "3133879593601338ac87f8c8fe4c68083f7f7ffd"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/JOUER_ALIEN_BLACKOUT_v0.7.0.html",
+      "crc32": "d7777ec2",
+      "size": 603801,
+      "sha256": "4fe4dc1a1c99803e77867f8b1956208b33dda1e149df09499d4c280a69831b16",
+      "gitBlobSha": "d725cdfd644b81d4e8d9df12d92a6a6091537262"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/LANCER_BLACKOUT.cmd",
+      "crc32": "30a0c08f",
+      "size": 71,
+      "sha256": "dbc1c1ba139a034b5dc76243bf5e5e483c4afe3bc34dbaf76a1ae99b236126f0",
+      "gitBlobSha": "af77b68c9abbc271570de5f643b831305755b78a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/MANIFEST_V7.json",
+      "crc32": "5256d00d",
+      "size": 64562,
+      "sha256": "e00d29137efaafdd163b0cd53a7e3eb585a2b7c6eeaeeea99919fd1b141a8cd9",
+      "gitBlobSha": "4b06643491fe9e97480daf8f2a0334d1765a244d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/RAPPORT_VISUEL_ALIEN_BLACKOUT_v0.7.0.html",
+      "crc32": "a91ab797",
+      "size": 18146902,
+      "sha256": "d42776e59b91491521e1e401362f99b09d7ac0272d0bc2d95c886dccc5a0fbed",
+      "gitBlobSha": "3a7d874eb3a6056e89807cd8d7bf60216e65d8ab"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/README.md",
+      "crc32": "11c32aee",
+      "size": 5999,
+      "sha256": "46435eb5353954bc0c0066e126d288b6ea50025a7b4f2f3249215f954397a634",
+      "gitBlobSha": "ebe74ffa35952f99cc537e53a0ce5835b8c9eff5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/batterycell.svg",
+      "crc32": "960a0108",
+      "size": 1455,
+      "sha256": "a32c527cb5ddc000c94fd3228c0e5a3b489e6f910ea33c05c8ceacc08f8fcd82",
+      "gitBlobSha": "5d4f4002eec1fa6fbfb0cac7fd6e199eb6aad60e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/bench.svg",
+      "crc32": "fa7c2c68",
+      "size": 703,
+      "sha256": "36b83d9861622dd17a79655dcaf23425e6c50f06a2c80690c360525f4b4a4fd8",
+      "gitBlobSha": "ae676237e5d53e4bb3eb60845036ae390c1081f2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/bunks.svg",
+      "crc32": "bd39da95",
+      "size": 746,
+      "sha256": "abdf6772042216614339ae1737661dfa6284a77e4b0e2c345c27a655b1bf31f6",
+      "gitBlobSha": "a6a429d659ca330f81b999d28333ab178e0ab703"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cabinet.svg",
+      "crc32": "5f6759af",
+      "size": 818,
+      "sha256": "40064eb142b8dad8392900799c71a9fd6733e53f574ebe3c86a94311c2152deb",
+      "gitBlobSha": "1f07781e74a2d660fd017eda3b793b23c488c38e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cabletray.svg",
+      "crc32": "e1afc5a8",
+      "size": 969,
+      "sha256": "7130716256cf83b34f5f7d0191c6b32d7e9fab205a44f291ee0337ba27b11a64",
+      "gitBlobSha": "1910d388acca335914250533058ace2dba07bd1a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cart.svg",
+      "crc32": "ad0b744c",
+      "size": 829,
+      "sha256": "66d3ec54267201a7e6c62c3d6db7608cf5e64f2a230820913a8d7374cb6a3b53",
+      "gitBlobSha": "dbebbceea1f997f221b528d494e3fc32642b3162"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/console.svg",
+      "crc32": "6ec33ebe",
+      "size": 1362,
+      "sha256": "0a2ee117d56f810eb3fb01b5b406a4df238b34e7577624d88736cf4aa28258b2",
+      "gitBlobSha": "99f0f44c63f819bd0230f23dff2f6cd3a2bf9ee8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/core.svg",
+      "crc32": "941ce9bf",
+      "size": 1372,
+      "sha256": "d528eff7dc1048d68cd6206c0d6005dd4aadce16604c692dd75dae3a7287d2fc",
+      "gitBlobSha": "fde5867a5df5457cf99de700c9a195a947120f2a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/crate.svg",
+      "crc32": "07b1bf7e",
+      "size": 741,
+      "sha256": "49b882ca0012e1a5ba189e6469a2b8c56d3468f2563a613b9920ae0467fe2289",
+      "gitBlobSha": "8b842dca18ee450a03ba8e8196a654ef4d94c796"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/culturetray.svg",
+      "crc32": "5e276226",
+      "size": 2076,
+      "sha256": "4057c12a05048284bb82cf8c9c36878fda591ce8b7e89baadcd40978aee0deae",
+      "gitBlobSha": "87980d213d427b6e474065237fb8ddbdf930339d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/culturewindow.svg",
+      "crc32": "417de511",
+      "size": 674,
+      "sha256": "6e5eb01d5bec29b4370473648e425b7c47272dc680a5dd2745d4a2fabb98b8f4",
+      "gitBlobSha": "55e1b103f91458376390a77f4cf14be4252630a2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/desk.svg",
+      "crc32": "05811d3e",
+      "size": 786,
+      "sha256": "8ccc8b6df8554a7ad8d933a2d67ada6558e6b6326afcd3d8c7fff2faaadfba39",
+      "gitBlobSha": "389f2cb806203e37db283e8d1d56350a01c7a4d1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/extinguisher.svg",
+      "crc32": "67a1c778",
+      "size": 851,
+      "sha256": "542cd0c6e4cdf17a4ad27b4a37e331b730843746d988f90bf5dab9fe2096b5ce",
+      "gitBlobSha": "43cd7f00e619da3746e7ef3c034830078d7caa4a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/filter.svg",
+      "crc32": "4e709631",
+      "size": 969,
+      "sha256": "486605ab34304781b7c8337e7793665607e1fc1ec16fc8f2c62abea72b487c67",
+      "gitBlobSha": "6e515da0d284e03a975bbe9c1b06b92488066361"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/firstaid.svg",
+      "crc32": "995e6dee",
+      "size": 704,
+      "sha256": "fb3ee5a344903c7651f9dafc0bee0c70e832cde9ba803cd93d789dc4cec121a7",
+      "gitBlobSha": "67af28c1fe587d341695bf7491c44ef4c3387040"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/fridge.svg",
+      "crc32": "dfc06172",
+      "size": 743,
+      "sha256": "49b43b2e394d353113d8d87330300bf8a214e8163d24778e4cd9d16c103d18b7",
+      "gitBlobSha": "b538674ab60f868426f70f70ff4e8fdf5480f870"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/hose.svg",
+      "crc32": "97dcfbcd",
+      "size": 904,
+      "sha256": "34dcdb12054223ee266dd3077c46f8ad788398046c0b4963dd1f8c507086e4e3",
+      "gitBlobSha": "fd13e2844086a30e1b2cee5c66f77cfe018d2cd0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/labtable.svg",
+      "crc32": "708bdf85",
+      "size": 797,
+      "sha256": "2d50e3b04e682001d029e74561bd4ad8d3e5fa66a49ba71e45f25671b112238c",
+      "gitBlobSha": "e21f914cf75d22b7da938a92791ee6377157b177"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/light.svg",
+      "crc32": "058f7845",
+      "size": 576,
+      "sha256": "9dd6003f360d509502f0f03c455139ee8fc63997afa8409ff749e1461140f4c2",
+      "gitBlobSha": "a9660d680f6d5c79ca1751352d0c2b4e8fbd4a80"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/locker.svg",
+      "crc32": "d44d3353",
+      "size": 1562,
+      "sha256": "c4a989d1d12acee8c1ce26a7c267ce6ddfbd35446efabeb96c245c38709e1a0e",
+      "gitBlobSha": "e0efd91a2e3cc95f742bcecd7fc5e2250721ff49"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/monitor.svg",
+      "crc32": "52972b59",
+      "size": 739,
+      "sha256": "69cea34213f23e7a2ef4bedd3a6230db43c50dea55cfe225985dd267029a80f0",
+      "gitBlobSha": "fae128e764dd182c94882dbeed5890226a1c6e6a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/mug.svg",
+      "crc32": "3dbb35a1",
+      "size": 631,
+      "sha256": "a9e0a8e9a82cafd9684c8d04308184ee0ac8e5accee20e4e77e88d03f821b8b0",
+      "gitBlobSha": "20adf55af2a913c55beee282369d18765a070017"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/mycelium.svg",
+      "crc32": "a906f857",
+      "size": 2096,
+      "sha256": "16360d657848e5fba47201f1d38406152287929f765c46454eb8db5ed2b5d58f",
+      "gitBlobSha": "9778a32061334c39d061fe0c1fce26bc1bcdc1af"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/oxygen.svg",
+      "crc32": "442bcb0e",
+      "size": 847,
+      "sha256": "96eadc26df7cf6b41efe160305be1f815e1a8a88425db2da8cd6138a58f086f8",
+      "gitBlobSha": "7a428976d89fc12ef9f6e7a02be3bd2a57fb89ff"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/palletjack.svg",
+      "crc32": "92be0882",
+      "size": 722,
+      "sha256": "fedcf4383bec19716a7b275ab8cc1805a7e65d67a0b3327a8f1812115dcbccf8",
+      "gitBlobSha": "8c7f0f9112658f44f54d1ba25b4f048b82eb7d63"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/pipe.svg",
+      "crc32": "4f7cff90",
+      "size": 685,
+      "sha256": "12ae07d135b0ba24d8fdaae277712227b105e9ca0dd14027235290114d63c545",
+      "gitBlobSha": "c272b575005b5d7f49fefc302bee847b79cb38f7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/rack.svg",
+      "crc32": "9d54a8e5",
+      "size": 1126,
+      "sha256": "fdd3be96eb4784bd80debbbec40a9e1142941144f514e2c4e0c00472adb71df0",
+      "gitBlobSha": "e685fde718becc182a62a51455e619564536a494"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/resin.svg",
+      "crc32": "de1c1536",
+      "size": 704,
+      "sha256": "a518bd8a46ceb2e3f55be286e9aa24bb4bf07543484a9ca9977904ec83e82eba",
+      "gitBlobSha": "037adcc0b25447f8d11e5d56bd24d0d0745bdd10"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/screenwide.svg",
+      "crc32": "978e36ff",
+      "size": 965,
+      "sha256": "61f94927b7bc482a73cad841193e60aeeb07d4e0e4b4fc92b60371734ffd5ab5",
+      "gitBlobSha": "47b2e2b0ddf967786699eed4e8fa52f27c56d038"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/scrubber.svg",
+      "crc32": "53cd9cea",
+      "size": 729,
+      "sha256": "116d9c9e3d5f537059d8c7c0a2f66c88ca4dd1d593292131c0a3a5bff523d997",
+      "gitBlobSha": "1870bf4aa51aec97ea202e66385da76065ca37f6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/seatrow.svg",
+      "crc32": "057c2aff",
+      "size": 867,
+      "sha256": "5d262e8a8028ae7665989246ac660c36a281238f67633ebc64479eb0a6d3a022",
+      "gitBlobSha": "de8e715455905d36587df7e144699ba1e9894a24"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/server.svg",
+      "crc32": "837e3e35",
+      "size": 1556,
+      "sha256": "a327229ae4f05f87bce7f73beba0fa69bcad99ce8a0738249201dd9ad7a2d3ea",
+      "gitBlobSha": "70d8cb7343ec6dfb3e1fe293662c705eb58bce2b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/sign.svg",
+      "crc32": "198ac96c",
+      "size": 678,
+      "sha256": "96b9967ceaebe86357c01c36cb138b620044b0506ece6758dc289d492a0660f3",
+      "gitBlobSha": "ec0c383b0c28c19f43016cc819f936dc683ac26b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/specimen.svg",
+      "crc32": "487b998e",
+      "size": 839,
+      "sha256": "a846f286fb4e67186160e30aa59329496677689869ccafad50f884d27b3c97c2",
+      "gitBlobSha": "d6ba00e4fe7223071c5049990f727de637270df1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/straps.svg",
+      "crc32": "cd7e89b5",
+      "size": 601,
+      "sha256": "daded46864a219584d282f118abdb7f6277bd8a348bb1e32677f52f7b4a2859e",
+      "gitBlobSha": "dd15ff26e614fab8fc9e8739a4e6d3e2cee255a3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/toolpanel.svg",
+      "crc32": "489f152c",
+      "size": 3990,
+      "sha256": "a42b8031756204549738fe005dde43b3aae502cbd3bb6389c9f1e944ca555d85",
+      "gitBlobSha": "22fdb2efc0e84589e10810af99df3f68adf0bd2b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/trash.svg",
+      "crc32": "5a450fb5",
+      "size": 666,
+      "sha256": "6b08d8af4f346db074f3531382c8c8f0b5ba8b8c294fcb911c4afc7ec5b686e5",
+      "gitBlobSha": "26e0f059080f4ba93c5ca8d1e52895252873fc0b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/valve.svg",
+      "crc32": "91453aee",
+      "size": 1153,
+      "sha256": "1bea3c6bc418297e5970f1af871478826fce9206f272cc575c56e911d5bbe1bd",
+      "gitBlobSha": "ce8a8bbdd0157856e07caa58acfb1e71e30991de"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/vent.svg",
+      "crc32": "49d40844",
+      "size": 930,
+      "sha256": "04f2151317ef835ff50dceb0ade416609b7e1d583e4073ef7394cbe88b45cf9e",
+      "gitBlobSha": "c4876983a797f127225418c197cc7d5e95351713"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/washer.svg",
+      "crc32": "9a449f8a",
+      "size": 836,
+      "sha256": "52cb7c7490596535941778e66a1f0b3b2809333659403221bab05324eec44419",
+      "gitBlobSha": "592676c282e70d6b0590e318503e82632a36672a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/workbench.svg",
+      "crc32": "b0338088",
+      "size": 770,
+      "sha256": "35b981c97427e620dfaf2a61a9e5b84a858fc614f3eff1b8f0586ca1a0903b0f",
+      "gitBlobSha": "8abdeca67ca3c85d07af5ac02208b7ad14d2fb4e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/active-save-v2.json",
+      "crc32": "5721b299",
+      "size": 7268,
+      "sha256": "4d9f22decbc12495ea2aa9d4c4129dbfbf547ae26c40b3acc85f0afa3b335979",
+      "gitBlobSha": "7b71bce1d9790b923b2c95572b538d9d6c5c1585"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/active-save-v3.json",
+      "crc32": "37021286",
+      "size": 8796,
+      "sha256": "fc28862bdb2dedd7a7c44c99d7c9807332547a48704fcf15ddf8cb77f41dc643",
+      "gitBlobSha": "e67c1f3b6be99800c96fd089e9e0aa03e72f7ec0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/active-save-v4.json",
+      "crc32": "09eafc1a",
+      "size": 10664,
+      "sha256": "2f5e28e399a4a9b1be953e00f62092216d5f9b4635c6da1b838d82cc6cb09cd6",
+      "gitBlobSha": "385e18f8c5f3e25518decc3465a1ca1de861baaa"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/active-save-v6.json",
+      "crc32": "c2b4e4dc",
+      "size": 12648,
+      "sha256": "d70056bfdf5ce292c1fe14bf847aaaa7f530103320acc2ef15c70754b43576d0",
+      "gitBlobSha": "7d21f5e2e5319df5cac432433a32e3399c5fa329"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/completed-save-v1.json",
+      "crc32": "057254ee",
+      "size": 21429,
+      "sha256": "433621352a44664bbd12f9ce7f56e2b21c86c8073404af0e067f74f6de1e4165",
+      "gitBlobSha": "1845a1d791eb8b87887aa1fc9c60e66fb846d1c6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/completed-save-v2.json",
+      "crc32": "25329c79",
+      "size": 23122,
+      "sha256": "cb887d48d5386c556afcf3e9391c7654ef4c929134fca0147ee6281878519b9f",
+      "gitBlobSha": "0298a2d094c59b7ca82e53ff1da03ce1b541fe7b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/completed-save-v3.json",
+      "crc32": "f3b31072",
+      "size": 22854,
+      "sha256": "bb9671d9a06465228ca0c13370dc5fa69ceb7bbb9903818eb11bdaaf6f165c29",
+      "gitBlobSha": "2fb7eff9d13cffbd5703179838a20578032db635"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/completed-save-v4.json",
+      "crc32": "102391ea",
+      "size": 25489,
+      "sha256": "a65efda4398bedc878f7bdaaaa833a46dd02ec8fdbc0119690e7c9208b574001",
+      "gitBlobSha": "e8d8b451225d0e976d023bcd08833955d142edfa"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/content-v1.json",
+      "crc32": "f6991011",
+      "size": 125516,
+      "sha256": "186806faaf49e2578374b76efd11dbd4fd4993c7dcdb379361c91a8ca21affa3",
+      "gitBlobSha": "f1f43e881268ecea4d1576797d0049d5a123028a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/install-v4.mjs",
+      "crc32": "7c793589",
+      "size": 8490,
+      "sha256": "2c4b4af03e6fd80f0342c2ceeb4301c9e6406372c9f71c740d1b888b4e5ce513",
+      "gitBlobSha": "e1e42990f5a9fba425b75ccef4e24ec8cad9ed2e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/install-v5.mjs",
+      "crc32": "bae9cc52",
+      "size": 8752,
+      "sha256": "5673129c309dcb59d4aa55f4f4bebd38df6dedf9274b90d3a1ffc1516f9b0a18",
+      "gitBlobSha": "96cee7a90b7bcccf6808136adfeb854ae87d75d9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/install-v6.mjs",
+      "crc32": "ff973dff",
+      "size": 8763,
+      "sha256": "fa52439e85eace3cdbf34aa9eb0457faf553d8e60726338f8dd0b1d893e62656",
+      "gitBlobSha": "29a75a023f04e4e234fcab179b304ab05fe6ed71"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v1.html",
+      "crc32": "3d299a99",
+      "size": 167499,
+      "sha256": "a66c473570ac3f0c66d673472e518aa8f0a11e1b4f9b9f4da0735238111a8812",
+      "gitBlobSha": "05ff17ae4302f1a0c15afc3fc6f83f1d7ce004fa"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v2.html",
+      "crc32": "08df75cd",
+      "size": 359181,
+      "sha256": "5396154048b6417ba0577181c30e24d438fa5b383aebfea90b5b766553c9e964",
+      "gitBlobSha": "28a4e0c29d3bbdf248445c1761627a7c66ad4296"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v3.html",
+      "crc32": "fc268a2e",
+      "size": 423396,
+      "sha256": "57a99d28b45c031b91f5e7623181f464072dfff02fb4bea156a873dcfdb76882",
+      "gitBlobSha": "a9a86941483166e1d4c9c9711e3ea61b8cad4b08"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v4.html",
+      "crc32": "c2e1d3e4",
+      "size": 472852,
+      "sha256": "1948fee5cde03cabbf026e9fb112cd093aaf91de8aacc74966f8c8936fa03cb0",
+      "gitBlobSha": "1d4668c08b765eb101f5a2b007ef24415ca074ed"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v5.html",
+      "crc32": "6adc9caa",
+      "size": 506176,
+      "sha256": "4a0473747582ceaa3a7927e4e5c4e4b0752160feb3a40c293cb4b4281a80d666",
+      "gitBlobSha": "ae0ca668852851bbd1ab04665f2b8f78249ec76f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/compat/playable-v6.html",
+      "crc32": "33ef1805",
+      "size": 538938,
+      "sha256": "08a013c5f409ba53f4335cf82d9514784061cc3b1b0615ba898673c142fbd19d",
+      "gitBlobSha": "d05edc4e8ae70bd4584334b9e381aafd68ae4c8f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/CHANGELOG.md",
+      "crc32": "381896ee",
+      "size": 1516,
+      "sha256": "bc9084789e8722fa6a9097e490f2f8acd64442f184b359c29be04aa23081edad",
+      "gitBlobSha": "a6f2062fb66f2ed6a0fe3b10d6a3818654ba90f5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/CODEX_COMPLET_v0.6.0.md",
+      "crc32": "d469111d",
+      "size": 143192,
+      "sha256": "d0019c7016710f3b5a59d22c87395b268d5dfb6923817f8627ad98b4448cfe9b",
+      "gitBlobSha": "7508165931da5ca941c17c81e3dad11f082c22f8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/CODEX_COMPLET_v0.7.0.md",
+      "crc32": "242c824b",
+      "size": 242145,
+      "sha256": "b8e937041f210c4d123e103d3ba7168a180089901b09761cd7540add54447688",
+      "gitBlobSha": "98fd842c0b6db80e102737bb8579f5513b64c3fb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/CONTENT_MANIFEST.json",
+      "crc32": "eaa17327",
+      "size": 290,
+      "sha256": "6959d3732d5f33b364f7d8f8649d3a635beecbe3149c9dabbec8d0f464843bb3",
+      "gitBlobSha": "186b9c77ba7619fac9866c4864cf6660e034839b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/INTEGRATION.md",
+      "crc32": "49da2965",
+      "size": 1737,
+      "sha256": "2c40e6d5bb48c0cc51107e067e7f7b7e537dd4928cf9b568b3a858f9c8ec0699",
+      "gitBlobSha": "89796b4789e180ee8fcab6862254fe2397eb400c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
+      "crc32": "71bf044c",
+      "size": 1979,
+      "sha256": "8d49e9a1079b87f05a9e0533923522e659f727b4832163dda1d33b15fda33be0",
+      "gitBlobSha": "660c1dddba1280a20400c3d5dae41674695343a8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/REGISTRE_FIDELITE_V7.json",
+      "crc32": "0ff225f6",
+      "size": 26793,
+      "sha256": "530801b24d12c0ab88929144a13545099519d67d84ef34a4dd254ac9e9106b6a",
+      "gitBlobSha": "cdbd72e87d4b175df84a58b9f7e12dcef8117843"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SMOKE_TEST_MANUEL.md",
+      "crc32": "0517897a",
+      "size": 1734,
+      "sha256": "9dbfe860d35cc772f209c2f234c3a10fa9440194fe7704721fafc3e8a52ee68b",
+      "gitBlobSha": "957750456c236506c8102bd652f84ea3f2c88275"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SOURCES_ET_FIDELITE.md",
+      "crc32": "2cf389db",
+      "size": 4025,
+      "sha256": "7558183813796e38b0504d92d27d43b4b4365a399aca8f7fb54c31d48ab5b73d",
+      "gitBlobSha": "1f204be0055e7d4635cc6ab99100b4430e9ea2d9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_PROVENANCE_V3_INHERITED.json",
+      "crc32": "ad3d1ddc",
+      "size": 1265,
+      "sha256": "06977385d03830ff8847735ab88630d15786fb57fa70a3cd3bb326730a4a78f0",
+      "gitBlobSha": "d3990d2db29862c750ac017653b5eac0879b1abd"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V4.json",
+      "crc32": "82f32913",
+      "size": 232,
+      "sha256": "66f982f29135db2946c628fe2fdd303cb431a4c6942808b52c85518528c911a4",
+      "gitBlobSha": "481421d108f0100490d5839f4ae02e3f0a8f6d8c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V5.json",
+      "crc32": "2a405d90",
+      "size": 297,
+      "sha256": "a93bc8c7ead46b3858354cfe54bf5df82da3a895e624f3bf3c7e248bdc278dbb",
+      "gitBlobSha": "43c2d7959700820481fa831609da305ced149412"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V7.json",
+      "crc32": "d5bef454",
+      "size": 3129,
+      "sha256": "bacf6572236dc91fd15596f27c4b7804c1ee6f2dc4efe182ef4e7a324da817d1",
+      "gitBlobSha": "7c8a8ed110f190d7969195e9716c0c14e7d85f4e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/content-v7.json",
+      "crc32": "76aeb6e5",
+      "size": 513161,
+      "sha256": "355b896cae3db50aa2bbe027a777b3c6b8031d3956a3bbb60562132b5a5a8ea8",
+      "gitBlobSha": "fbffc0359d78daf4751c8be0230893a1bd8970a0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/docs/document.css",
+      "crc32": "cd780772",
+      "size": 3699,
+      "sha256": "b38b4ee261ac70f9114633b6fb83f36b612acda465975c9b0277bcf560924d1c",
+      "gitBlobSha": "1e6702bc96b76af32a986c4ccfce2ce4ac13452c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/index.html",
+      "crc32": "b90e0cae",
+      "size": 11902,
+      "sha256": "967a7b46241042b44c752d5a7fdd6e8df15059fde342b986bf3d3fef9a0b8bf6",
+      "gitBlobSha": "14b78f5cdbc42213ea41a9d8c972df547d6dc875"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/integration/module.json",
+      "crc32": "fb39ac1b",
+      "size": 994,
+      "sha256": "75be6485da1c138912d1108e0a461987015fc8197c4b1ae88866f1081eae450c",
+      "gitBlobSha": "54372254e505b40a5f1faa2409565c835053ab0a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/package.json",
+      "crc32": "9af49c95",
+      "size": 820,
+      "sha256": "5dfa0eb58c480bd63595c082f0cb1533f0669f554ed7dc11b2e1aca1b548c75d",
+      "gitBlobSha": "349d0fcfa761a2874e0c3bfca55299306b1a6e8c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/REPRODUCIBILITE.md",
+      "crc32": "5cb1883d",
+      "size": 1772,
+      "sha256": "d4405eeb24639fa28ca042b32606dae576a569cfd4bf1f18924951b5672f584a",
+      "gitBlobSha": "54852f539dbb3d2923d30828a9e747a8ca6ce6f9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/SUMMARY_V7.json",
+      "crc32": "452ec7cc",
+      "size": 1333,
+      "sha256": "c6aca6f49d61beeb78f7958c5683c453cdb32c6e02c980805f3268925ca50f8c",
+      "gitBlobSha": "e7c16ac2bd7f7b38cbdb4c54cf8c53a8366ab6bb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/atlas-v7-results.json",
+      "crc32": "0d88f1ac",
+      "size": 55718,
+      "sha256": "57b0e18e7bef1a2189361f80ea532b08da2de24a1d745c3d0fd269de0e94d43d",
+      "gitBlobSha": "d8f37c6eae1d31965aceb7851c0abf50778b75c7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/atlas-v7.exit",
+      "crc32": "7e4acd12",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/atlas-v7.log",
+      "crc32": "8f138ef5",
+      "size": 7785,
+      "sha256": "5dbdb0057615020f661a00a8de4ff4bc8f8bbde914caafd5dc33d5234799e1f3",
+      "gitBlobSha": "27dd9a431500d8e234e4f9613e9a501916871152"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/browser-v7-results.json",
+      "crc32": "3d399968",
+      "size": 31788,
+      "sha256": "a7503b493238f3eda107dbcaffd2306fd7a01059c662360c8cc1623d8bf2a047",
+      "gitBlobSha": "5ee4aa68816691b98e89ae582224333ec82fa9f8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/browser-v7.exit",
+      "crc32": "7e4acd12",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "gitBlobSha": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/browser-v7.log",
+      "crc32": "d41c0c9d",
+      "size": 11099,
+      "sha256": "c5f348b61f3bf9ca2b6a2017ed94236bfe5758e4e25c3d24f71a98f3da96da4a",
+      "gitBlobSha": "062e0b4ea6c5ec702c538986a95a193a516a7830"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-browser-v7.json",
+      "crc32": "4e8f8feb",
+      "size": 13895,
+      "sha256": "1630f011243e71f61b315bea20a2747d4730cf8f15e54e601210c3f3aeae86fc",
+      "gitBlobSha": "4cbcdc0776c88c75c57f15c1f4b83654efe758de"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-cauchemar-0-field.json",
+      "crc32": "58f50bcc",
+      "size": 15682,
+      "sha256": "9e9563b7813a6c4b3afc0a073df426bdb2a2ae767e7e239befcb8645a2e31218",
+      "gitBlobSha": "2374d776ae2d452e5589b4171dc3743d57ab8062"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-cauchemar-1979-field.json",
+      "crc32": "aaaa2504",
+      "size": 15574,
+      "sha256": "6c8855645c2c03903a30ea31365203463620aa5d3fec06f8d20f3514f40c7925",
+      "gitBlobSha": "947e9725ca6c9bb4ccb0209354078c5b09fe2a71"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-cauchemar-26319-field.json",
+      "crc32": "3d00dd45",
+      "size": 10643,
+      "sha256": "d150468ea8e8f39b20601737e1972bb5a89f1185ad082045c5a834c1f17ce902",
+      "gitBlobSha": "9076e25e46c065e783f706f4e0b5d2b1827c5b04"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-cauchemar-26319.json",
+      "crc32": "7b087144",
+      "size": 10624,
+      "sha256": "667460f20dc7a576469b990227bdbb9f1c5c05d6d8570874d28f6a98fc75532c",
+      "gitBlobSha": "78884836e863f5d4bac4316a0c2d1311aea56265"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-cauchemar-8675309-field.json",
+      "crc32": "d1799e1d",
+      "size": 17132,
+      "sha256": "7c07e301a822127250c271006971a61a0055c609f7d76b08d9f11ec1c29d83e6",
+      "gitBlobSha": "70488095dfcf276100fd133aa317ecd67be13ade"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-recit-0-field.json",
+      "crc32": "95b2494f",
+      "size": 14655,
+      "sha256": "8bf44f6058fe79a409fe69d06ac6c3006c181c3bfb84285956ead3e11496d295",
+      "gitBlobSha": "d524080ec4b6df81a44077260a48ef193d725f18"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-recit-1979-field.json",
+      "crc32": "42644282",
+      "size": 20151,
+      "sha256": "964323dcfb0deb6e9537eb39efa9acd0b330053700db16b7fe36200bfad73fa9",
+      "gitBlobSha": "d94d53a4649871598adc6daf07875cf17e0b55c8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-recit-26319-field.json",
+      "crc32": "3a20fae9",
+      "size": 19582,
+      "sha256": "47c4b3821f1de303a920fcb11c4e51bdab31ec6cffd832461212af0c9d3b5c1c",
+      "gitBlobSha": "68863d0a5ac2c8ba7dbafbde69e02a4a705c99de"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-recit-26319.json",
+      "crc32": "8ed9c133",
+      "size": 18394,
+      "sha256": "494c0d3728326d3dad6f6a8c78e25749589afe898b63eadbfdcf2b32932283fe",
+      "gitBlobSha": "85b7cf6c88ebc11a71d13f8adf212a84bbf01dfb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-recit-8675309-field.json",
+      "crc32": "b13158df",
+      "size": 15493,
+      "sha256": "0b477184d45db0120a8b22bcceb82de8d16ace9d769cd85090bb6c85db90cb31",
+      "gitBlobSha": "5925f7c77ec5d398694c9da7842c6aa47071a48c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-0-field.json",
+      "crc32": "9c540d2e",
+      "size": 15865,
+      "sha256": "7ef893c5ee1d8e072667ed5688f7c57b777502d2b4f0984d52996b486bf89f05",
+      "gitBlobSha": "fe2e8eafcfd89dc450a2829151454d72e2fe9618"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-0.json",
+      "crc32": "5cf596cb",
+      "size": 17580,
+      "sha256": "4f2fa56ff8451af38b9beefb9222ff012314831efbbf8a4bd50eb9c8ac7825cd",
+      "gitBlobSha": "54bde6b283ffe292597eaea0b175c47fc499dc49"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-1979-field.json",
+      "crc32": "e3aecc32",
+      "size": 16536,
+      "sha256": "6dcfd10f69ae1e7f0a5448a21bfe59743cb3f60d9b8dc1a91c6b2083b8e40f70",
+      "gitBlobSha": "56b910bc39b26c29debcdc699935f04887940b4c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-26319-field.json",
+      "crc32": "1881bbfe",
+      "size": 16051,
+      "sha256": "e3df4c9386ccb1eb33d69dfaaa59e5cead68a004c10301ed74c60136d3ea575e",
+      "gitBlobSha": "017cd6cd8948cfcf7f762fd84074aebf44b84c94"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-26319.json",
+      "crc32": "9bdba943",
+      "size": 16580,
+      "sha256": "e69bbb20f86fe5059cf87f04a5d03d073670ccfc8ec23b2851954ed920459c60",
+      "gitBlobSha": "c36ba480ae68a0eb21b238c1f9868fde82fc5791"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7-survie-8675309-field.json",
+      "crc32": "787997b0",
+      "size": 15843,
+      "sha256": "bc750f9963c7e46d728aebe4e0f9233783da3adaae9481fb1f343c6e3c1d9fdf",
+      "gitBlobSha": "4cd80f8a155f07a29dd235ee1d453842d5e5ddb0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/campaign-v7.mjs",
+      "crc32": "ef25fb69",
+      "size": 1989,
+      "sha256": "1a06c60bbd1635a6ef61b7fed939aa516dd11c793feb8069192c96b6b770a5e0",
+      "gitBlobSha": "ce98d9da258c60b93dfc028da3d8ec5a55253164"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/01-menu.jpg",
+      "crc32": "07c51192",
+      "size": 107446,
+      "sha256": "9a848e7485be88cba1bdcf70c5856553ecc197aaffbdee63b14aa2732680a2a7",
+      "gitBlobSha": "2575833dc803f11b3a8bc07b5c28321cf186b592"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/02-poste.jpg",
+      "crc32": "8b895a52",
+      "size": 198659,
+      "sha256": "0d611de3eafd8ef6403a17f52d55ced7d0a41c5b3847adceb563a5edb47e4306",
+      "gitBlobSha": "9f09ef75c1bd25f2a44b607d4f1e85e7e213de37"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/03-guide.jpg",
+      "crc32": "adc895e7",
+      "size": 134836,
+      "sha256": "29847e7f96ef159bfb1a32e3d531a926a032cd08f336b817a59b9017aef36b76",
+      "gitBlobSha": "6a343ebf3f0fe6dd17658657a885880391794c97"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-power.jpg",
+      "crc32": "ad4648f1",
+      "size": 204611,
+      "sha256": "45201ed1e46e6b1214aaf92802cbc7b05ddec5e83c9a5f7fdf7a91085a40897b",
+      "gitBlobSha": "022817b8e6bc33854cee3235576bc3b580f1b719"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-pressure.jpg",
+      "crc32": "bf8fe7a9",
+      "size": 208485,
+      "sha256": "f2b4b36789110be02c63fbaa657d952cc7b2b2fa330887ae3de4641ceed0c772",
+      "gitBlobSha": "95acbd1fb1f0596aef2af58e8befff6f1736fb6f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-signal.jpg",
+      "crc32": "adfa7f75",
+      "size": 206034,
+      "sha256": "126efce46d3f519ce571adce77ae919571b19e4101fb759178e6e53d313aa4e8",
+      "gitBlobSha": "fbdd2eb36efc8616aee80f3ea66a6863b419b609"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/05-soins.jpg",
+      "crc32": "bcf7511f",
+      "size": 195270,
+      "sha256": "080a5628581429e000965015a0578bed6c311c22b79418c0b3eb48ce7ed12523",
+      "gitBlobSha": "5ad3a35324c7ffc3851f295acf941ade87f0cace"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/06-binome.jpg",
+      "crc32": "8a83cb52",
+      "size": 194532,
+      "sha256": "53965c790c70392965b644ecf8c26c9956266aff4ffdbae67f598b292f007a82",
+      "gitBlobSha": "dc0adfb05c09e25c6651d2a471655edc26d24546"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/07-sauvegarde.jpg",
+      "crc32": "4681163e",
+      "size": 101508,
+      "sha256": "8a65f664b7421df72b26e67d1edadf1e0f96e8bd5ffe989d138ed1192bbf0591",
+      "gitBlobSha": "e6b1000504cc25da0d0b1f878ae2886174ac89ae"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/08-journal.jpg",
+      "crc32": "07d69ce7",
+      "size": 87800,
+      "sha256": "6b1fa306f01598b323077a3bdd3872a746a56985fe301b53ecf4ee1e17e80577",
+      "gitBlobSha": "9be4a82ea0f4504a044133898da7ec81371badf8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/09-codex.jpg",
+      "crc32": "ce8f6989",
+      "size": 97702,
+      "sha256": "8097d0d2e2cf639dbcf5403245b95a546282979cd2e17a57e25747a68ac3ce75",
+      "gitBlobSha": "a7eb99321b5ff241d4d178379c8eb1e2bf4fe646"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-1280.jpg",
+      "crc32": "d9beb4f7",
+      "size": 156514,
+      "sha256": "a63c8e11ab4f89654529e6a0cd9e5e18e4e83df1c5bead300c2ca3785f414e29",
+      "gitBlobSha": "60ae1f24c74fe4dadc6865dfb619b9ebce1fdf76"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-390.jpg",
+      "crc32": "611c290e",
+      "size": 61846,
+      "sha256": "7621a9dd41a6e60fa73819d8a090a486a2d07edaad2935938a4003166218a266",
+      "gitBlobSha": "9fd69ca86722ca4d2564d5f14583a51432d68f8d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-850.jpg",
+      "crc32": "7557db26",
+      "size": 102798,
+      "sha256": "7f969dc44f9ec4831ee3e2fe3aa5c74ffd2335a4622487fd608fb5fcef6d3e9b",
+      "gitBlobSha": "e3aa90f8d2577326dc624984f46a95dbd0b990c2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/15-itineraire.jpg",
+      "crc32": "51e328df",
+      "size": 81653,
+      "sha256": "6d31e98f0f046309688a961775303646b4046feb1689b1506c09901a52e1f29c",
+      "gitBlobSha": "dc017bac8283db9d103cfe8dad7bcf46cd3b9b7d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/16-echos.jpg",
+      "crc32": "fe3178c4",
+      "size": 182379,
+      "sha256": "819ef786b43f3b3865e40c2dea3e5274124eaaa53ced84f8cb5d9fde1ff380e0",
+      "gitBlobSha": "ef3e0c0bc3d3fd152ecb751488579288a99744b1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/17-accord.jpg",
+      "crc32": "dceda5d5",
+      "size": 10360,
+      "sha256": "a45d754c4eef186dd2ed4d9c7fa33b02b440778bd7968387b2048d29ed0ea354",
+      "gitBlobSha": "33071fa13f0132195bfea9b717d4d8e10c7d40ad"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/18-direct.jpg",
+      "crc32": "675cd292",
+      "size": 19931,
+      "sha256": "4148469b4ce2c4dcc48e7943ffd21ee66865970963f8cf7103c97154ed8b83d8",
+      "gitBlobSha": "756bec62954073075a2ed075e74c612cb887b1a4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-power.jpg",
+      "crc32": "51c79d1b",
+      "size": 197699,
+      "sha256": "e87ce9964200af1cba2bd71b3a958e3cfd7004103c57ce2402f0901e3ac953a8",
+      "gitBlobSha": "39b3ced3503c2ecabc814101e00da77cc9fc8120"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-signal.jpg",
+      "crc32": "ff7a341e",
+      "size": 185920,
+      "sha256": "e1b2f3cdb5e265fdea472edd9e7bee1e968671463e8eafbb0a03ee41f8f90647",
+      "gitBlobSha": "50c1f98c3365b84d56e89e9ef12da25620cd4e9b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-steam.jpg",
+      "crc32": "002ffb8f",
+      "size": 213279,
+      "sha256": "f16e2d13872331029115f7750f8ef2c8b7e10313efc6b40225caa6b141bf5b2f",
+      "gitBlobSha": "a3914711a5723ba452c2d294c730b77ea13d161d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/20-plan-1280.jpg",
+      "crc32": "891e4dec",
+      "size": 64295,
+      "sha256": "0830b0bdffd75a1d91832ba429aa047bdaf8e306528c9c11bef18b50aa95409d",
+      "gitBlobSha": "9be02b6ac4c7df369a4a5e24491de7d16648b694"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/20-plan-390.jpg",
+      "crc32": "01dea7bd",
+      "size": 46236,
+      "sha256": "877b7a4f819ef7cbf27ddac3cc92e492c9307164c02033b2ea845da6da21d864",
+      "gitBlobSha": "998fa74d7598c79464f0545f82098daca675de13"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-1.jpg",
+      "crc32": "dadeae65",
+      "size": 223254,
+      "sha256": "63f88ecad42909848e846b7fd639da5ec433fbcee68586dd876e4dffa70884ef",
+      "gitBlobSha": "5ea241445920bf5a642b3a0622dc3cdad3fd6fa7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-3.jpg",
+      "crc32": "c7a2e45e",
+      "size": 228588,
+      "sha256": "a698bdee543b210bb83632c6d4b3201831ca86ee1bed96885138533604813790",
+      "gitBlobSha": "0bbbcfc025db34db2d93f528f5703eaeb3954127"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-5.jpg",
+      "crc32": "50183a66",
+      "size": 226844,
+      "sha256": "8ac56f1f093da792ebc0a0dfbed2181213dcd6d7f4a0491ed7606f27fc6278f2",
+      "gitBlobSha": "b69fdb0e388cc078b4579aa2f485f07a5b8d7809"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-7.jpg",
+      "crc32": "6a21da08",
+      "size": 230785,
+      "sha256": "27143f75c104cbe7de9ce44a9408c7b370e8280a23ae925e152cdeeaf6188f20",
+      "gitBlobSha": "8fbe64410293d2389929a4f1c9e750e555194f48"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-0.jpg",
+      "crc32": "f2fd0707",
+      "size": 149724,
+      "sha256": "f75edbe4050f9181d96cb549bdadce2d92e7b1ad6a15665074a6e43e581872f7",
+      "gitBlobSha": "75f975fd0731b3da586f05f0dc3acc201c386b29"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-1.jpg",
+      "crc32": "ce76c6b7",
+      "size": 153369,
+      "sha256": "b1a7478287b2d66c50cc8c88fe3f5458b20eecdca7a1387d77a4b94f2e2beeb2",
+      "gitBlobSha": "28c58f0709a5a0922bf86a8c2e0ef269774000b0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-2.jpg",
+      "crc32": "34cce88d",
+      "size": 153651,
+      "sha256": "61f63066b109ade94d7014c567e5b74500d02b789191a2ad73876bcce4d85d20",
+      "gitBlobSha": "a859b1bad0cd3f99f606df10194e1773888c94ab"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-3.jpg",
+      "crc32": "de5f5f95",
+      "size": 151865,
+      "sha256": "7296155e8ed52104bd30beaca2adbe754229fc672b1b8f51db38cf95da5ab69d",
+      "gitBlobSha": "bfbf11c27de6164e9309ceed96a6ff5b71a2f7f3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/23-amarrage.jpg",
+      "crc32": "869ed6da",
+      "size": 228023,
+      "sha256": "212c40d554c477f40a9930103ad7219359977516b70406a151e17eaef16b2f15",
+      "gitBlobSha": "63ea20240775e22884ebf6cd912b675cffb0c90e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/24-fin.jpg",
+      "crc32": "25494561",
+      "size": 68560,
+      "sha256": "ee293533fe713b43308293e76cba43aeaeffeee0d719020b55367e5137cb3827",
+      "gitBlobSha": "593d9cc5d5803189827831e9bad9020e1fd97ed4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/25-fuite-mobile.jpg",
+      "crc32": "30acb348",
+      "size": 66533,
+      "sha256": "11714f0e3a5baa748ff5c985d87847dc514aa30ed186ebd9697c4d8f973d8147",
+      "gitBlobSha": "059f5eb9a6af918a803b03d619630714c89d6a62"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/26-reanimation.jpg",
+      "crc32": "f321ef44",
+      "size": 220269,
+      "sha256": "f758bdae8d545e5e7805360607870532f425c46f92c4a6e05df63cfecc2ded14",
+      "gitBlobSha": "ca13548f7195a888f14b2fefcf67a54d3525e64e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/27-portage.jpg",
+      "crc32": "8075f881",
+      "size": 221436,
+      "sha256": "f5c47de8662b293e68c57499800580b5fe14d4b97987700a3d2dc3ae827149cb",
+      "gitBlobSha": "23f283545b402f1b542ca2e1973faa618442dc61"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/28-fouille.jpg",
+      "crc32": "e1313249",
+      "size": 220756,
+      "sha256": "a50ab27ec0916b87662819c9713b7e934b62dd6f3b1dbfa319991b52a9e97ae0",
+      "gitBlobSha": "baf643d96384d3dd3addd05b7e78291e5b219020"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/29-secours-mobile.jpg",
+      "crc32": "d661f715",
+      "size": 57701,
+      "sha256": "185f67eaa27ac11c1c319c73130b729c24857c3066a0384b84d8911d670a000f",
+      "gitBlobSha": "517b1c6416b0102dea74968121155d9c1463fa22"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/30-protocole.jpg",
+      "crc32": "4c00f408",
+      "size": 107231,
+      "sha256": "568d7f44f715c65e91f73c7e4903a1acbd92bc7489da4b6ce9a07db5b45810ca",
+      "gitBlobSha": "47d55f1dc55932d7a966df16045cf5102a68620f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/31-portage.jpg",
+      "crc32": "4b68a47e",
+      "size": 217058,
+      "sha256": "351b03aee9e0de4085a98cbf43a6863111759a1f733367ec70804d74f373817a",
+      "gitBlobSha": "5703ed43baaf757b93caeae9517a840874eafa7a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/32-balise-armee.jpg",
+      "crc32": "1774203c",
+      "size": 219767,
+      "sha256": "a78afee3ea94964fe0dc0a7e55c4ac975d2a73b73905c3fa1a6937f8b5ad6d00",
+      "gitBlobSha": "49b33f2b60141462fd0c07efe2551bbd6aefe3d3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/33-balise-active.jpg",
+      "crc32": "80024c54",
+      "size": 220209,
+      "sha256": "d73705c03b9fcbaae9cd087d7af073e7c9e2585b8d8c0338eb218c79206f99e0",
+      "gitBlobSha": "243fc63fc2b348281c1341dcc0f595360a86ca21"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/34-plan-390.jpg",
+      "crc32": "d670ba1c",
+      "size": 48681,
+      "sha256": "48a4d6f8cb9a92812c2e5793cbf6ce7c3fa92d13ef0a745e160e4beb31c45662",
+      "gitBlobSha": "360ec38899f3656eb438d9a0794d589dc9097d34"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/40-atlas-live.jpg",
+      "crc32": "a1ad9415",
+      "size": 132947,
+      "sha256": "ccd2f8045191a84ac771bb0b5ef3e0f2d148872dea6307c710456332e19a3c0b",
+      "gitBlobSha": "ba2ea4e5f76c36b756956ddff325f9f7d53176c5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/41-atlas-research.jpg",
+      "crc32": "9b866e6c",
+      "size": 131617,
+      "sha256": "b187c63d654f41e28f75b3f6e06badaf7cf94158bdd6d31500307dba1db42a34",
+      "gitBlobSha": "eb7a83aac412d29bc67856f2e02ac5777deec07d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/42-equipment.jpg",
+      "crc32": "33ea5235",
+      "size": 156165,
+      "sha256": "f4caebcef8134102085c87ae7c996954f8fee448828e8a054988af6fcf87327d",
+      "gitBlobSha": "68fd8e064545b730ffe066a8ba6ff6f234e5d734"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/43-personnel.jpg",
+      "crc32": "5a5b3b21",
+      "size": 107004,
+      "sha256": "c8d6aa25cfc6766c0ffed800bdb64cbc0c46119f1d214c3d2b45a796b2ecc7e4",
+      "gitBlobSha": "554eff7400b9054fa2119cd764719cf7f4e89951"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/44-references.jpg",
+      "crc32": "955c5210",
+      "size": 153373,
+      "sha256": "6a0bece1c4bb3a942335104342f5808cfe12c55159925fe774262a51fc3cbbd8",
+      "gitBlobSha": "720bd9ba6ef945d9728f9a21b9157247a59e97de"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/45-atlas-390.jpg",
+      "crc32": "62789f74",
+      "size": 51457,
+      "sha256": "98d4df94510269b2aa6ad290a4b43090d69f3f9cb6e695ff911d054eb99f1179",
+      "gitBlobSha": "84d10500f8e25ac32820b9d33f6e565f453b9346"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/46-camera-off.jpg",
+      "crc32": "7dd405ab",
+      "size": 45214,
+      "sha256": "72651b6f5d57d554ccf278c2f319589dc5d541db7809095aea68e51695b06923",
+      "gitBlobSha": "540590691c2b0b37a1397877eaf9d1926f92d736"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/47-pharmalab.jpg",
+      "crc32": "20549341",
+      "size": 258975,
+      "sha256": "66cf77a713008f367eece0b99d5b3148667e4c84da4138b4e737bd60d82fe138",
+      "gitBlobSha": "5ada5c275adc6a286edf058bc9321a34c83b4a3a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-01.jpg",
+      "crc32": "471bd87d",
+      "size": 26976,
+      "sha256": "58b7768aa862b641acfb3991ca13bb69a50b3ef6562b2292fd7701069fb2f31e",
+      "gitBlobSha": "d099f456a3549ad8e5be7ca73f472bd9048eaac8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-02.jpg",
+      "crc32": "641bf730",
+      "size": 26920,
+      "sha256": "df11532e089ca3f81ee467a49ecf3bc69cfd3c3925ad9e23c7b163aad5b4d2e4",
+      "gitBlobSha": "787b901dc4515bf13ca4467d0d50497f3d11b92f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-03.jpg",
+      "crc32": "f9e1043f",
+      "size": 27381,
+      "sha256": "d05bcdfdf8601fc9aa1f01d9a782fe2ebc7ce12aebdc32db255409ea775270cc",
+      "gitBlobSha": "ad688802cc343b3199e1c198f3ad62c5f75c87b1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-04.jpg",
+      "crc32": "9ea83128",
+      "size": 27825,
+      "sha256": "deb1ef92158d6199c5001e62132cb3fc00375a9002af331ab1b80da282c89a90",
+      "gitBlobSha": "b672d1802db280b1b3d64d555c5fa53c02faa216"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-05.jpg",
+      "crc32": "78c9f22d",
+      "size": 27481,
+      "sha256": "2e52ab5e4efd0e5b0d56fa4c7f338d3dcb5a100522f04774f1f5c7b3c1942c5a",
+      "gitBlobSha": "c67f1f7029b2f7da629bbc2b35c0842f1e7fa6a2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-06.jpg",
+      "crc32": "b83ba7d0",
+      "size": 26990,
+      "sha256": "5518b1fb95b951012bd3a6fffcf9841256b13000953a63a1cf89900dcc153268",
+      "gitBlobSha": "cb0dc340c5cc79a4ad41327d672087e178407349"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-07.jpg",
+      "crc32": "49e57e15",
+      "size": 27663,
+      "sha256": "b989fa8161207c5cbb1d38f31e26a16b1b7453e168a4cd2e4d305d811bd81c0c",
+      "gitBlobSha": "b59684af4bc46248ed772c6c01b4bf8c3b20f9f2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-08.jpg",
+      "crc32": "29e7bebf",
+      "size": 26717,
+      "sha256": "732b33748adbb75ecf97668e889b69dba6002703e68cedba5631acf45a0d9a35",
+      "gitBlobSha": "9a47c19f3da89cab3fa5f662bcf868d87f28b0df"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-01.jpg",
+      "crc32": "ff8e9fde",
+      "size": 27533,
+      "sha256": "00485bd9d12dfa41154f4b22080d8a713e11bdff74523faa4e17772a365532b4",
+      "gitBlobSha": "7c35392138e562ee5435b234fe3e6c620ebdb963"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-02.jpg",
+      "crc32": "26feffb8",
+      "size": 27072,
+      "sha256": "3c8776cee7f0db3c25db500921cc1677f981c76f61c02c98cc809a7c52450a93",
+      "gitBlobSha": "482bf1386922d1729ae5b191215b848239cee94b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-03.jpg",
+      "crc32": "edaea039",
+      "size": 27456,
+      "sha256": "b948580e89459f78e530203b61a7ffee17ea0d888c42e6dcbabb5e4c9c62bd40",
+      "gitBlobSha": "314325e7117de387e73cafc6486b0760c317a57e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-04.jpg",
+      "crc32": "628ceec9",
+      "size": 27376,
+      "sha256": "3e87a8be67659523fbc573bf5978d592b3fa5458a8ecd51a698b645e61c49487",
+      "gitBlobSha": "282a4620441addb300d07763361055aa6355ff7c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-05.jpg",
+      "crc32": "b72a629b",
+      "size": 27986,
+      "sha256": "935b813109e9b61a461e34fae3cab31907a8a4f8841e24d3400fd0c902670b1e",
+      "gitBlobSha": "9dfae00b488fa5979dc160fcceafb4eb5dce82a4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-06.jpg",
+      "crc32": "92bd8403",
+      "size": 33007,
+      "sha256": "31c75c95a712464feca89036386279363245bc02a054ddda037a0526d339d0c0",
+      "gitBlobSha": "0cc788c11280eef1a91b7e820d6855a214f303df"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-07.jpg",
+      "crc32": "7908085b",
+      "size": 27455,
+      "sha256": "1ebcd106abf9e0b0ed1199de8c14290e612e549c915fca71db744f4eac252fc8",
+      "gitBlobSha": "ec5a03c957ccf947dfd2a4ae6221dbaaca97bf21"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-08.jpg",
+      "crc32": "a47924cb",
+      "size": 26829,
+      "sha256": "8d0e7a4aefcbe187aaa4220450672c652bf442455a57b8a5865011a09971e17b",
+      "gitBlobSha": "db8091bb4937a4e175b42eb4adf9d3889434ef26"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-01.jpg",
+      "crc32": "355e2bfc",
+      "size": 26742,
+      "sha256": "946111503e2dcbeafd60eb94dedce1616c5a54e3d39dcd11014fdc2db882f439",
+      "gitBlobSha": "06688a95c5f42c2537f6f7c384e4965cc6bcf267"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-02.jpg",
+      "crc32": "b2a403b5",
+      "size": 27441,
+      "sha256": "911e798f342b678ebf1aad5ea0708f499f764fc4f5ee1c12e4f7212139e0afc4",
+      "gitBlobSha": "bbfb2e34ee6e51a33533b7683ac0b0aa71c2a305"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-03.jpg",
+      "crc32": "70399a00",
+      "size": 27565,
+      "sha256": "6c1a716d738c0c93dad6e3127e242e169804f519cde140b86ae7e40d9da42ec3",
+      "gitBlobSha": "3584ef6e6115bf98babe87a96e04f0c85057d35b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-04.jpg",
+      "crc32": "4c227134",
+      "size": 27112,
+      "sha256": "e2c67290fe8afc96e34371b394706ad0e0f4014833d73d8ce156d9988f2a5a7d",
+      "gitBlobSha": "495565fcf5f662f087387bef20ccde02f97af781"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-05.jpg",
+      "crc32": "593e5ce2",
+      "size": 27764,
+      "sha256": "167be006b589781cfe89b3fe78f712c9e231c3fc212e4532d4454f8d3129175a",
+      "gitBlobSha": "bee7d046bdd1ebd3a78124818891bcc22c624d33"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-06.jpg",
+      "crc32": "cd1ecf99",
+      "size": 26681,
+      "sha256": "fd8ef52ea977d46818ac3f2769a1ddaaf49f3c391d397f66fe3792a6add29de5",
+      "gitBlobSha": "1fbafb2c457240e873477cec323fe60b6ccf6ce7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-07.jpg",
+      "crc32": "06587939",
+      "size": 27734,
+      "sha256": "38dfa89e54a954b14e1e7816225c131519c386d8b34c140cc752ec6d79b50cb9",
+      "gitBlobSha": "7d7ef697f380056b582a40a44c3fdb45dd6bdfbb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-08.jpg",
+      "crc32": "ca956678",
+      "size": 26929,
+      "sha256": "77226fcdfb0d7ebe244ff2b52712d9f27e0cce73fdaf1775e10fd98d35c8f6ac",
+      "gitBlobSha": "ecc56ec6b068309ccd4b38752782053d9565fe33"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-01.jpg",
+      "crc32": "c8cb5686",
+      "size": 26946,
+      "sha256": "5bc953db38278c92c7882c8ea3b31bed928fff22570da9829dedc2e8047ed763",
+      "gitBlobSha": "b519d0eaea0a643f77fa6c3336d45a88999135f5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-02.jpg",
+      "crc32": "c131f733",
+      "size": 27365,
+      "sha256": "5e8af237f17b4af3984897bc4e63aa7406f274997332ebb49099132b3431b3da",
+      "gitBlobSha": "49a8a834e1a3b8ad08aa78efaaab1960d28182db"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-03.jpg",
+      "crc32": "f00835f8",
+      "size": 28081,
+      "sha256": "8e12e9c64498c6de2637c721e6407dbc36530f7a2a75a8e327214117f447523d",
+      "gitBlobSha": "81b76786001a9d945e786d5fd87f2151f6a9afcd"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-04.jpg",
+      "crc32": "99fc5aac",
+      "size": 27134,
+      "sha256": "d7165df173673c9adbd058e1c90d6a168c09e8594d02dac0f3d2d3dc82d273d3",
+      "gitBlobSha": "468262ebe21af4c4d4daf4069031e4174362d304"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-05.jpg",
+      "crc32": "8769e523",
+      "size": 28186,
+      "sha256": "f81ab062b5ee5fa9fa572b0418ee85f8826f834fc98b8d6cd5e66b96494dce86",
+      "gitBlobSha": "9b0ba6a9832c4e71507127e85a9567179366c1d6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-06.jpg",
+      "crc32": "92bd8403",
+      "size": 33007,
+      "sha256": "31c75c95a712464feca89036386279363245bc02a054ddda037a0526d339d0c0",
+      "gitBlobSha": "0cc788c11280eef1a91b7e820d6855a214f303df"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-07.jpg",
+      "crc32": "7908085b",
+      "size": 27455,
+      "sha256": "1ebcd106abf9e0b0ed1199de8c14290e612e549c915fca71db744f4eac252fc8",
+      "gitBlobSha": "ec5a03c957ccf947dfd2a4ae6221dbaaca97bf21"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-08.jpg",
+      "crc32": "1cd1654e",
+      "size": 27040,
+      "sha256": "8268f37708bf16f2bd2c1989080656eeaa60acb969e642c02191047a78e7c988",
+      "gitBlobSha": "895b2fdecc1b314d5c589c9ad537e914a944470a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-01.jpg",
+      "crc32": "d2ea1e58",
+      "size": 33058,
+      "sha256": "a11f16e8adf53a886d6cc868920759bf606875cecc5608a75c0f52fb2d657bf3",
+      "gitBlobSha": "615097d45c474522ad0f9ee00b6ecbab469f7080"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-02.jpg",
+      "crc32": "4d77ddf5",
+      "size": 27347,
+      "sha256": "1b6015756a64cb115e310546a548ca2163c61a8c41d3b5ec0d291e183c25468b",
+      "gitBlobSha": "429fd0471096e2f815a6009ed434237f2f62f63e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-03.jpg",
+      "crc32": "b029953b",
+      "size": 27066,
+      "sha256": "0b99e7487ec827ef95f9a7f08807057b80af536b7ed124428d09539eccd68d40",
+      "gitBlobSha": "3b7d96d287892dabdf1abdf33325e4e8f6e9317c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-04.jpg",
+      "crc32": "f94467a0",
+      "size": 27655,
+      "sha256": "c91ecc3f092d0437aaf1462d785a11dd4e4d8afcbe34c35987e39dcae0cd5324",
+      "gitBlobSha": "312d553ad40128faab6ffa7ead499ad23000d411"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-05.jpg",
+      "crc32": "06ee634b",
+      "size": 27556,
+      "sha256": "0d0930fa7edd210dcd69ec90c42ae7476591cc2baa7ae35d1e55a1f1c0ed59e6",
+      "gitBlobSha": "fa4518a7c626a0267044ac4a20c69fec0cb04b31"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-06.jpg",
+      "crc32": "70e3c52c",
+      "size": 26702,
+      "sha256": "64417d92208de84b5796bc43ffe3aa46d56c6eb1bceb9c5dd67977f2e95bf6fe",
+      "gitBlobSha": "d6c21e9bf1cb8e7016e0c8de4907a8619622f4d2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-07.jpg",
+      "crc32": "2a28d298",
+      "size": 27472,
+      "sha256": "8bc8eb73c9b39b1139f5775dfe5b7350590c26b968996d2928c8bc532de248e8",
+      "gitBlobSha": "e845207e84806f73b37760565d4a956c08c33350"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-08.jpg",
+      "crc32": "b6e00c1d",
+      "size": 26844,
+      "sha256": "32b671622e4803aabc8081c5ef5267a857a5c396a65e16c627e481221df17b13",
+      "gitBlobSha": "7cfd38716a6a4cd5bb4fc26164b77a8e9645980f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-01.jpg",
+      "crc32": "9f6939a7",
+      "size": 26796,
+      "sha256": "438ae948a74b39b71ee3e139972deae8979bf4b61c2e87d69650d3c1c46c9619",
+      "gitBlobSha": "3d59197ca90b5e8e76ef7e01ade2651acfa95dba"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-02.jpg",
+      "crc32": "d41c2996",
+      "size": 27230,
+      "sha256": "606e4adaff8ebf8eb82d1dd8852472dd313ae46fa762b251bfc3ba4706fe1841",
+      "gitBlobSha": "e8def958b6a33eb850409cdd8b1f1719966f990a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-03.jpg",
+      "crc32": "15b00ffa",
+      "size": 28171,
+      "sha256": "6a79faad1b5f136e2daaaa9c67217e89862fd8b9d72cd9ba7ec524e35bd4a0a9",
+      "gitBlobSha": "a8207917b191a92e10204a06e1638c6402a94c36"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-04.jpg",
+      "crc32": "1e6c88f4",
+      "size": 27305,
+      "sha256": "edc27c80e09d160fe389def7a2ab2ad660048befd4be783125b6a7bd3af04102",
+      "gitBlobSha": "bf926e5f619bb6e1b9203a8781e143d8e81d39cc"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-05.jpg",
+      "crc32": "23eeec30",
+      "size": 27689,
+      "sha256": "a8810d562ae8e96ff6d11813fc4d5a11a76de8171d50451d717328a8e48b35a2",
+      "gitBlobSha": "c2b3aaf712e3e0a742d906522c5955e2ee2bf53e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-06.jpg",
+      "crc32": "f9043929",
+      "size": 33029,
+      "sha256": "aa4c45a6d049d61a6ee3d2bd958309f0fa9b68739032c25ab3c26e47b2d05ea5",
+      "gitBlobSha": "db5a065e1c0a46b689b07422fcb338c56c4adbbb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-07.jpg",
+      "crc32": "bc099ae2",
+      "size": 27464,
+      "sha256": "d0ee75d5de5981a974c9ef5125d2fc5af8beb682b649adfd6d1208de8fd2f2f5",
+      "gitBlobSha": "f928e41f576dcd2a656335e5b7b206276a261b36"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-08.jpg",
+      "crc32": "eabcb59b",
+      "size": 26681,
+      "sha256": "aff61c0aa4b277cc33ce9f4b5cbc64284cc96f92eadd066600beafac3a7d9e4c",
+      "gitBlobSha": "a0c5eff1f696a36fa953d42952f01656ce504bbc"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-01.jpg",
+      "crc32": "c3991ea8",
+      "size": 27351,
+      "sha256": "f3697bb477e6629f3112b1f21d4987a0b1c80f2859b66d9ceacf35ff19756354",
+      "gitBlobSha": "9272432a3cc4aabd27591ebd0c2a3f41119da881"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-02.jpg",
+      "crc32": "26feffb8",
+      "size": 27072,
+      "sha256": "3c8776cee7f0db3c25db500921cc1677f981c76f61c02c98cc809a7c52450a93",
+      "gitBlobSha": "482bf1386922d1729ae5b191215b848239cee94b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-03.jpg",
+      "crc32": "f00835f8",
+      "size": 28081,
+      "sha256": "8e12e9c64498c6de2637c721e6407dbc36530f7a2a75a8e327214117f447523d",
+      "gitBlobSha": "81b76786001a9d945e786d5fd87f2151f6a9afcd"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-04.jpg",
+      "crc32": "d4088905",
+      "size": 27958,
+      "sha256": "f05f624998aadf3479afbb5efdc518f78c03be44fc4b201f3bec3584b9837865",
+      "gitBlobSha": "cc72591ad670bb9a5cb61ebcc6911429f1e9e1ba"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-05.jpg",
+      "crc32": "4fd58ed6",
+      "size": 28148,
+      "sha256": "2e1430905e21ffecdcd49334ff51aa4bde396284849d8cadab4408ed8c789dcb",
+      "gitBlobSha": "9471f3d463eca1f9a28bdc7619ec68a82eedceb2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-06.jpg",
+      "crc32": "8a048693",
+      "size": 27039,
+      "sha256": "9cb46d83e624d1d6c04093779253b4b24c8f464700fed34f5d3316eb203ff642",
+      "gitBlobSha": "978ae70db5805c45a10bc53b2078664b2d04ba71"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-07.jpg",
+      "crc32": "7908085b",
+      "size": 27455,
+      "sha256": "1ebcd106abf9e0b0ed1199de8c14290e612e549c915fca71db744f4eac252fc8",
+      "gitBlobSha": "ec5a03c957ccf947dfd2a4ae6221dbaaca97bf21"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-08.jpg",
+      "crc32": "30c3b7e8",
+      "size": 26869,
+      "sha256": "f150bf22ff5c358557fe1292fbd1d83a4c29d585214e8162399e67e3bfcdfd06",
+      "gitBlobSha": "8c7dd997934525045c6940a04a9793bda66440f9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-01.jpg",
+      "crc32": "7f8c1145",
+      "size": 55027,
+      "sha256": "0c654575310b34c2795acdcf1c3e2096267df35f1902e7c465e42c4c600906c0",
+      "gitBlobSha": "232ae9301e0c0a6ad7c2e0fe772f65fb2b65d390"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-02.jpg",
+      "crc32": "6fdd09b2",
+      "size": 54187,
+      "sha256": "dcd6d2a4db58afa73a2d7153c955e38eb6c480cd34342afc1ddbc0723b0a0549",
+      "gitBlobSha": "9eb623bd5cf7091b0a8bdba2d006d8847dc03dd9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-03.jpg",
+      "crc32": "8ae5a18d",
+      "size": 54607,
+      "sha256": "2f2867d8ddc92c581bea26fa838f1797a4d9759c5f32d2104920fd44f069440a",
+      "gitBlobSha": "c66d1642a0a18b36d5dd46dfff13c9611fd4add5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-04.jpg",
+      "crc32": "749d360c",
+      "size": 56395,
+      "sha256": "2c34343e2de72e272120404b06d57a076595bc6f20f6c2521f3cbe4fd24d6a98",
+      "gitBlobSha": "3799fbad9087db3ba54ce39a5d944a33fa0b054a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-05.jpg",
+      "crc32": "fb9200d1",
+      "size": 53387,
+      "sha256": "8b4193dd8a94cb4d16132f9b6283c7a35ccca6943f3dcbff3f7c2bcc14699518",
+      "gitBlobSha": "828cec3ec63fb8bf480b55f5fa2c4325804015b3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-06.jpg",
+      "crc32": "38d14553",
+      "size": 56775,
+      "sha256": "df88313d4ae721c64ec31c110615e38a4e00bb0dcbd115d3582bf320858b3969",
+      "gitBlobSha": "d0ba756230bdb8d389a34a8e26cfd79ab260c767"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-07.jpg",
+      "crc32": "c3215f2e",
+      "size": 58441,
+      "sha256": "2e3c3a56194b9ebbf884ebef28a76b418bd5890f191b0a00af45ee66b6b4d4ae",
+      "gitBlobSha": "5bfe23bdf2f1f68501d31cd2c5a213eaca299c75"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-01.jpg",
+      "crc32": "90c7df44",
+      "size": 96521,
+      "sha256": "1e0c05309619cba9fad31ac04865afbc43b05d8f7c94252391d6f42f3912a891",
+      "gitBlobSha": "bbcd869e0148808883031f78538f271cb7606988"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-02.jpg",
+      "crc32": "28517c80",
+      "size": 94841,
+      "sha256": "a23f596c0f02f59aee2013557475d32f6b7171bd30cc5f26ab71d60ca1829eff",
+      "gitBlobSha": "31f2bdb9ff40f073836e596c1e80c321669017b5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-03.jpg",
+      "crc32": "5aeef36d",
+      "size": 102297,
+      "sha256": "51d8e1cac65664cd01fb5d271936f307d8cb1d1c1fb57907e165893b5fc83c2f",
+      "gitBlobSha": "f6e570ff04abbd6487cf11d779f9056ff814b8af"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-04.jpg",
+      "crc32": "63ec9332",
+      "size": 101500,
+      "sha256": "2e33d3a5b32e844b9320b9e064dd6e5728eb3d08c16506451b87c1f33abb4ad4",
+      "gitBlobSha": "87209eebec3d9088913dbff33a9128223d03f2e8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-05.jpg",
+      "crc32": "4653195c",
+      "size": 101703,
+      "sha256": "82a7a692113878b7b12d30ea253a17fdae108e61f251e3175cc35320cbdc5132",
+      "gitBlobSha": "8ea650143af240e6ca940db61bc9b62c84e91962"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-06.jpg",
+      "crc32": "5ba777d3",
+      "size": 96011,
+      "sha256": "2447d8ff27df6edd95a3177a13670e7c5039f149f2771fb243056a82bfd5488c",
+      "gitBlobSha": "890435f7e2288a55799ee7a02a79e3cc5971d3d6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-07.jpg",
+      "crc32": "5720a068",
+      "size": 100114,
+      "sha256": "b94a0fc4d0c0aa2975f0858e047a448042dfd0dafcd28d0e06e4d46f6147df80",
+      "gitBlobSha": "58596b12f17a0c95849ad9a0b05db8e1db9874cf"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-08.jpg",
+      "crc32": "d9ae91f4",
+      "size": 98442,
+      "sha256": "85d75860fc867e0da2d3aea471daaec27b09270494676f0a8c0ea8168b64f958",
+      "gitBlobSha": "d17cfeeb363aeefbd9a9e816e786bb535fcb6d3d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-01.jpg",
+      "crc32": "30204130",
+      "size": 96594,
+      "sha256": "f489cc2759cd212ba3ced5d932ed8792da61f0a388e0eb5df52b4db7b1b7eda5",
+      "gitBlobSha": "b97a4ea316431d1dfe96334fcd8a67d32eba037e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-02.jpg",
+      "crc32": "118989a7",
+      "size": 96964,
+      "sha256": "72b317dd85ee97fe809a553035d5d2ac07e543438cef316cc2a1253f19c39a04",
+      "gitBlobSha": "0c7b8aec6648e796f53fb90d5bb8ffae5365f1cf"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-03.jpg",
+      "crc32": "9c6b1ac0",
+      "size": 99735,
+      "sha256": "cd939bc5c48267c5361013dbe35f56bfaa76c0f2af8bd1d32d0e203270acaf29",
+      "gitBlobSha": "8817dfaa96312de2563158228211aa1fb9097bb9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-04.jpg",
+      "crc32": "b01493e3",
+      "size": 98784,
+      "sha256": "44e19cedc76a1ce3eca2099ce00b7f51cb961ff07951f8466d78823b435f541c",
+      "gitBlobSha": "2dd88861a2a67a2a26cdb4dfc0bd9c167356e946"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-05.jpg",
+      "crc32": "0cd6cb8f",
+      "size": 100975,
+      "sha256": "bdbbc0e855af0bce9ac6967315665622747e188e42b5fb7f80a13cf3f3630838",
+      "gitBlobSha": "fb8696b2c38e8452d8a5a6228a88e10037a19df5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-06.jpg",
+      "crc32": "4f91be3b",
+      "size": 94640,
+      "sha256": "3b45bd3b9a2c68d3d247a96f7d7c7ff5389abf006775b4e7186aba9264fcc644",
+      "gitBlobSha": "b2bec8a6f87680921f9d21a03c67d23e274485df"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-07.jpg",
+      "crc32": "723c5ab4",
+      "size": 100462,
+      "sha256": "da7db5279fca5e1ddb9fadede38bb5d953696a0264d1210c1279efdd12f5aa21",
+      "gitBlobSha": "f638ca79c097f8034b07704b28ce8dade0b28da6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-08.jpg",
+      "crc32": "d1504bec",
+      "size": 94608,
+      "sha256": "8419ad3e44b909c3b867cfb4a365ad86b743c14bc224a9f9c0d3707bbbc59f3c",
+      "gitBlobSha": "b800e4aa2e6ca8622260e3bae72d7e7e6dd747b3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-01.jpg",
+      "crc32": "3d6c6530",
+      "size": 99346,
+      "sha256": "791d58c1eb3a967c93adef2077d1ac47e55d8fd11bce694ca42ef8993d9d632a",
+      "gitBlobSha": "4445fbbbdba72447aec1b2d0bef04fe3aa1a8190"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-02.jpg",
+      "crc32": "82c5c772",
+      "size": 103015,
+      "sha256": "dc5fd7f39cd0dc2bd857d3fcfc032b5582222e7c5e453b6ab8276f5eab6d2a22",
+      "gitBlobSha": "56615c45d51e4c143f322f70385bf17ae1b981b9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-03.jpg",
+      "crc32": "ce7ab691",
+      "size": 102523,
+      "sha256": "06f4007f8326cbdd747e6c187737c603431c62720b0200e31f7de42bfacbf7ca",
+      "gitBlobSha": "c393f203ff62e5e7c517290c2f8ec8429fcf2968"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-04.jpg",
+      "crc32": "1e6dfdad",
+      "size": 100649,
+      "sha256": "b1407a38b12627d04ec88fce21f0ed30b1d422e459679dc76bbcda3a3d9068d8",
+      "gitBlobSha": "b2b1935678184562bc53f35b303794480fc0b2a0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-05.jpg",
+      "crc32": "9c9f7f55",
+      "size": 102874,
+      "sha256": "15016a9c31dc04afb9a6503bfd649b200bace9c686ae6881c5f5355cb8a9a3b4",
+      "gitBlobSha": "5f00005fbeb27e6fa747ac0a7422b425a1080714"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-06.jpg",
+      "crc32": "89e01fea",
+      "size": 98583,
+      "sha256": "83193fabfe62240a02df1262c58f1b540d1dc41deeaadc24dfeb621773d910fa",
+      "gitBlobSha": "3bc3b93317bc00e474326a313145cffdbb9857f6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-07.jpg",
+      "crc32": "abcde555",
+      "size": 100953,
+      "sha256": "eb9104e8ff22cd777fca7ca843bae25b5178d9167ea44a342eb8cf122bd80132",
+      "gitBlobSha": "829e0fb75d9646b6741179eecbe5b1d4279dcdb9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-08.jpg",
+      "crc32": "f857cf47",
+      "size": 97970,
+      "sha256": "24697531f7a64a4a5aa68a42e7d3c5cb5120b6aafee35a771049418b8f911531",
+      "gitBlobSha": "40a0db749c32253cae8c5493f2063edb98fbe4e1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-01.jpg",
+      "crc32": "8c739965",
+      "size": 106449,
+      "sha256": "c71e4dd966debdde22d7d07ff359ba1a2881510d288843e50a2aab8146e46704",
+      "gitBlobSha": "7e03239d41f6582ed324f255c994372998862194"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-02.jpg",
+      "crc32": "1d053d50",
+      "size": 107947,
+      "sha256": "80bf1c5c9dba0fc858b89d6b52e4214ed830df4e762fc8316b0cfa16c17ba7d0",
+      "gitBlobSha": "4943cec9a11dc0bc507ec31a86ca74c64a6f6965"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-03.jpg",
+      "crc32": "d97ac1c4",
+      "size": 114533,
+      "sha256": "4d8053522680aa28ce1527b3ea05bb96672eb48f3739d8f77d51253e4c8c4186",
+      "gitBlobSha": "0b43e7a2d817a228bec24d518cf6b47f08c7f30a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-04.jpg",
+      "crc32": "6f4261aa",
+      "size": 110754,
+      "sha256": "be19fa9412e4ca4b5da3e6f4a23dce8cb30789da3abb6046dff44b95da09377d",
+      "gitBlobSha": "7037beaaa7acd0cbd73cadfbcc833bca30b5b85b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-05.jpg",
+      "crc32": "200bf6fb",
+      "size": 111160,
+      "sha256": "cbd4194163c53c6440175a882adde85ccfabe8e13b7e58f99db40f3022f1ba05",
+      "gitBlobSha": "7780152b3c53b03abfbbd4bb5f66c4c81930c5ab"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-06.jpg",
+      "crc32": "4eb47046",
+      "size": 112108,
+      "sha256": "daa3b34ed6d87104d062d0da0637401c12b50995fed48f9e5d17fae48db2dd8a",
+      "gitBlobSha": "425fe65d30750952002a3b80a1b4f02f57a3a319"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-07.jpg",
+      "crc32": "28fb6503",
+      "size": 107893,
+      "sha256": "d07461f64d3e086864bf0f6626685175fdf33c5a4cda01fdfb461bdec192a9ac",
+      "gitBlobSha": "ee5718b7a203542c96c78ffeeec407234c095085"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-08.jpg",
+      "crc32": "d2fba7ac",
+      "size": 103481,
+      "sha256": "035b31c22f35d4d9cb08db40fcc60c94e5bea0cff31d338e9f23ae04f24e1f2c",
+      "gitBlobSha": "59f8b52368f0b8b4ada09bedf20709255b7626da"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-01.jpg",
+      "crc32": "475f2018",
+      "size": 97174,
+      "sha256": "4f7e0784dbcfe0a6ce0403bbb47926236def64399517a40b1e28b74c316ac835",
+      "gitBlobSha": "f6b9e2ad144ccd6aa45336482c1f5dacf6042ec8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-02.jpg",
+      "crc32": "2db54529",
+      "size": 98739,
+      "sha256": "a80e6525a0505aa1869fc7fc962daacde4e4034bfb0b3ca98e3b508fa00d900b",
+      "gitBlobSha": "0ae95a8b4871224a53f5f1d26462caedd878e6ad"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-03.jpg",
+      "crc32": "fbcee16e",
+      "size": 95348,
+      "sha256": "9e6e4dd94beded7cb6f9ed97c890760239741f99b85ec9393c6249cdd13608cd",
+      "gitBlobSha": "950ac59ac7759cec8adbfd04fc454323d76c0e5e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-04.jpg",
+      "crc32": "c619face",
+      "size": 98973,
+      "sha256": "56da3ca0271c86ef8f2768da0d2887fd5227d26fe6c21aa34b6e9865786c9d95",
+      "gitBlobSha": "c22a025106880bf893926e2826252e919ea6850e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-05.jpg",
+      "crc32": "f849535e",
+      "size": 97569,
+      "sha256": "cb434774bd25f6641eeae0edb60459451a0883e69bb6b34704099ee62e28ade2",
+      "gitBlobSha": "be1b49339f852fc70335dda13dfe93d40b1a70b5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-06.jpg",
+      "crc32": "90e30b3d",
+      "size": 98675,
+      "sha256": "9d95ba53bc7b476013d1545c1ca2d73a40609406c42bf7b661bec9b07988021d",
+      "gitBlobSha": "d5e0e69cbaef3e2bd1106060dfeef6b5579e968f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-07.jpg",
+      "crc32": "87a2d030",
+      "size": 101763,
+      "sha256": "55c5ac68af724b641457d0eef66a0459c970739afdeb6b85436c29d8ce22b387",
+      "gitBlobSha": "0eadf9b8165ddd1e9fdf964d425266249eae05ec"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-08.jpg",
+      "crc32": "552216be",
+      "size": 94821,
+      "sha256": "6aad4f8974a56a53820f1d827573a04bf8036f3a99138c62642553e94632bcfa",
+      "gitBlobSha": "ae48838c5bb22c6c9b39b262cd55bc37f5138517"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-01.jpg",
+      "crc32": "2e10f368",
+      "size": 98638,
+      "sha256": "0fecd138c8cccf2aee2ac69048ea547b0304a05c0ddc4b0da6456fdc2375484e",
+      "gitBlobSha": "f3130c0cbe3698660a148433b13fe2efe095c144"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-02.jpg",
+      "crc32": "902da8c4",
+      "size": 101693,
+      "sha256": "8367a1b1f8acad8a96c5d41ec5cf59d7ee58f7e734ea8b31cf4793798bf08d03",
+      "gitBlobSha": "6c603ade264354e772db9efd63a78063b5ad3ffc"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-03.jpg",
+      "crc32": "6436059f",
+      "size": 105386,
+      "sha256": "fa4702548d3f6c3dcc0261759320c96a4d29390185ac72ceb06589bb368e8965",
+      "gitBlobSha": "fb9930417d97a70b679959dc4d2232dd210c69b5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-04.jpg",
+      "crc32": "262669f5",
+      "size": 104380,
+      "sha256": "d8d3ec42d859c9f14936db4e37689a3e2293a5b44fe5689af6476d87c4455def",
+      "gitBlobSha": "58e6952e18233b578310e02f9d297ba465103d06"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-05.jpg",
+      "crc32": "f056bbdc",
+      "size": 104940,
+      "sha256": "a5640bedc24b8009d3b04fb1d946acb7624c948971881ee88e1c3e3b37e84851",
+      "gitBlobSha": "74e3582ffb31454b1b6ed4e90ec511cc355b1f6a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-06.jpg",
+      "crc32": "bf187b6b",
+      "size": 103036,
+      "sha256": "5e1ff418b85fa6a2fd0bb10bcdad82c4534ae97b618f70ae33a7683319b4f95e",
+      "gitBlobSha": "c012bb18124c9b2e5863613d9ff8ebb8e6c200f8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-07.jpg",
+      "crc32": "260687ce",
+      "size": 101772,
+      "sha256": "7484a1af3711b142e4cee9ee44f34f5902e702e580a408e83a536f2e565bf769",
+      "gitBlobSha": "a92b3a914aa1de38d6c553d28c4d6331066ee319"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-08.jpg",
+      "crc32": "3dc704e3",
+      "size": 99887,
+      "sha256": "af6b0f0a958e388939d21c0332995215ed35a69d6588b3bcb6f0670c42ca1214",
+      "gitBlobSha": "be7195ef3bfd2d88271be4b21f365370408c19ef"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-01.jpg",
+      "crc32": "d7889ef4",
+      "size": 97559,
+      "sha256": "988270514fa6c05d11e56d2d266054078ff2ced446f74ad1da82ec8400cae650",
+      "gitBlobSha": "8ee05dcdfe2256ff4af3fc57d1bc5a8caae2907c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-02.jpg",
+      "crc32": "cd527ff1",
+      "size": 98260,
+      "sha256": "fa0843b8d2816c5067979cb277274727bec5a5542e7a69e44fd9dcf15d228849",
+      "gitBlobSha": "6df817f63546506eba78e81f5a246d18e703e9db"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-03.jpg",
+      "crc32": "62096064",
+      "size": 100816,
+      "sha256": "da69a2a9da2937f25093fa957b01ba738470d579083156a03bc6072a53dbbf69",
+      "gitBlobSha": "eed9c97718934eebf15dc982bb1ae509af565b66"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-04.jpg",
+      "crc32": "9438f931",
+      "size": 102367,
+      "sha256": "5f57a544b2085aff0cf29bcefd6daade57ae35eb4925c838355f4c27d87c8fb9",
+      "gitBlobSha": "364cca3397beee9b6af6a89345663ba66897be65"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-05.jpg",
+      "crc32": "8eb5d0d8",
+      "size": 100723,
+      "sha256": "1ecda50c0f78548d244d2f2cea86b3a83c55920f796e355245c29fe48062a3eb",
+      "gitBlobSha": "75f1520d236db9fd8f6c815738c1c30ac2e4e93a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-06.jpg",
+      "crc32": "b3fd1762",
+      "size": 97034,
+      "sha256": "f370854324d547958ebc30eba3abc3ce550f8e55f493098cc7882c83567a2d12",
+      "gitBlobSha": "04c0587d5e9dbc769b892e783ee7db278d93d494"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-07.jpg",
+      "crc32": "3c1edb55",
+      "size": 100532,
+      "sha256": "702c67d11c1cf8a0988534f1331e75b914a867d0d1b0fdd07d7024aa12a3f934",
+      "gitBlobSha": "53cfd84cf169bc24a422f93e34e1b0676b7d2c2a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-08.jpg",
+      "crc32": "63a83564",
+      "size": 98851,
+      "sha256": "5280f05f75a05454c5d721f1f29f4fba2846e6b854e6f8ee58dfe348bb1a33f3",
+      "gitBlobSha": "8c5a36067831093894f53d59c824d5d8460691ca"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-cauchemar-0-field.json",
+      "crc32": "1efbb639",
+      "size": 212747,
+      "sha256": "683d7d6bd88f0dd2faac6c61b160fbf8dd343576a453757148234dca32f3ce90",
+      "gitBlobSha": "ac1d91844bfeabd3f4b23fdbd10143f0d6df816b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-cauchemar-1979-field.json",
+      "crc32": "fa165e54",
+      "size": 208557,
+      "sha256": "2667b3cd291ee9a5e9fb79b9f243f385f29176d8ced4f1f02822d613403ec2d1",
+      "gitBlobSha": "e670c43585cca8e0593243f3e8b1142b94c25fe6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-cauchemar-26319-field.json",
+      "crc32": "d1009721",
+      "size": 149466,
+      "sha256": "89d5d09ba69aaffc105aac18f808f5db20da79733176b31bdb10cca40ffaf368",
+      "gitBlobSha": "bc5d6dab686d943c04c6b1618a760aa640dc2a49"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-cauchemar-26319.json",
+      "crc32": "74c5c308",
+      "size": 148718,
+      "sha256": "f023950ce218f334a040bc2e7d83cf18bd931e2b406644b4fe709fcbeb8ab86d",
+      "gitBlobSha": "a4440b88b2b8cbaa75ae0e59f1f15b9cb11770e9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-cauchemar-8675309-field.json",
+      "crc32": "d88b1205",
+      "size": 212275,
+      "sha256": "754d91b8dfa15ee631a12733010051f7d93acc2493e93f8e8611dbaf9056b152",
+      "gitBlobSha": "97c4b1f9fd5a1766a4379c24d15c582fe62c598e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-recit-0-field.json",
+      "crc32": "25b3e346",
+      "size": 215357,
+      "sha256": "c92e4f900d65e49a2e70c0fa374f2f6e9e4b8c6b6cdd74c3528b79416d7f2efb",
+      "gitBlobSha": "e38a248db4f2aa71ec28f5065ef073252ad8f4b3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-recit-1979-field.json",
+      "crc32": "4ed81324",
+      "size": 214140,
+      "sha256": "8b3e8a8098c63e5e6b93ec46712c9d4db12d844546481e79b6c8b2bbb2f9e153",
+      "gitBlobSha": "3d0f5202f1f78243d431df206e0b6f573e022af3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-recit-26319-field.json",
+      "crc32": "d1faa3ce",
+      "size": 151719,
+      "sha256": "ba259a89591b534f20374e381e351a5d19078662bbb6978f0a77c2071485f07d",
+      "gitBlobSha": "509db72a0beaac606b4920158e71513e01875fe8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-recit-26319.json",
+      "crc32": "6a455094",
+      "size": 210616,
+      "sha256": "208527bc562928fd5b988120a38dbdecf2e4da6d820bf6232c2272b4c36d8733",
+      "gitBlobSha": "d56abf108f918274084c0aedd3bc8e8acc9abe11"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-recit-8675309-field.json",
+      "crc32": "20459943",
+      "size": 213450,
+      "sha256": "e2bc9635e60526a2d7d445441c733d70f22e46a4c152430383b95de27bb88941",
+      "gitBlobSha": "19e7b6ecfd87cf3d27ece56d9e02c03a81860702"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-0-field.json",
+      "crc32": "65f0a99d",
+      "size": 150085,
+      "sha256": "c42629d85cc12518d38f75f3e119504da032509bece900f3d5ffd8340614e7a3",
+      "gitBlobSha": "b2263c3e1c83a45db87da362b6fe6fc09b6c4543"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-0.json",
+      "crc32": "0bb88342",
+      "size": 212930,
+      "sha256": "f397f57565ee0262442f3f274c45bbffe9defbdd67ce1c4c2ee6f01c9d71e678",
+      "gitBlobSha": "504ba7f4ec7f335c3fad721f22b0a2ae1b5afdcb"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-1979-field.json",
+      "crc32": "21d8eb57",
+      "size": 149896,
+      "sha256": "19979f3a1ec1ab6b2209628598b58bb62952eb0bca9b4c9402bf0c03e410fcfb",
+      "gitBlobSha": "93b52da5bba33e4f4ee50b697038574ce2ba3fca"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-26319-field.json",
+      "crc32": "fdd525d9",
+      "size": 150225,
+      "sha256": "bd2dda731b7252b515621e94e8aae1b0b965bfdd085686a9fb84f047628891fc",
+      "gitBlobSha": "25402685df213b1da5dd7138a8e09d402f1ebf1b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-26319.json",
+      "crc32": "d474a798",
+      "size": 151605,
+      "sha256": "b8dd7a575a6fd4a38cefee00c397b06b16a777a26d2238d9806ffd363a014bc2",
+      "gitBlobSha": "063de2bd65b3257b595aea1a3dd861d6616ed703"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/checkpoints-v7-survie-8675309-field.json",
+      "crc32": "e46829ad",
+      "size": 210605,
+      "sha256": "8f0dc44161d0e203ef9921761d1ca06f36d666a7ea9288b3de992eac192e4dab",
+      "gitBlobSha": "dc5c8db240c327d90e2551e8d80dab8f12fcdca8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/codex-document-mobile-v7.jpg",
+      "crc32": "17c316a3",
+      "size": 52925,
+      "sha256": "f010674fe68479a37112700101aa8ba4e8b7c0565bfe5853c4aa9d706f17fe95",
+      "gitBlobSha": "640b9f15a18d5d869e85ea59c989ecd2d693bd50"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/codex-document-v7.jpg",
+      "crc32": "1e9a7c0a",
+      "size": 118927,
+      "sha256": "895d5dadb314d1979e517892954e4e1ba7ab577d5974436f4b403a7c2170e805",
+      "gitBlobSha": "10e492b3120cec4db60094acd7d0fde6922baada"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/construction-v7-results.json",
+      "crc32": "c0a266d7",
+      "size": 361892,
+      "sha256": "6497e64e9992e5aa2147db241f71fd14040c004f00628bf1a99256a1e9371b91",
+      "gitBlobSha": "5ff99adb5ab3e3c564d628d8913e29278a3149d1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/documents-v7-results.json",
+      "crc32": "5b72ce87",
+      "size": 2005,
+      "sha256": "c9b03148bc571d128d3350e487a7f390b2682ba340f81351e43302e5feb43022",
+      "gitBlobSha": "251e6f236e6f60243c934a4f87b27872ab062a34"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/escape-v7-browser.json",
+      "crc32": "f14d23f8",
+      "size": 26779,
+      "sha256": "e8d286ad2bc7dc3c75a50a15f33a55c842032631dbff13ca1eae8e30bf26fd04",
+      "gitBlobSha": "73e63a324958445032aa073373c04619caf6d019"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-base-browser.json",
+      "crc32": "13b77d74",
+      "size": 13503,
+      "sha256": "9d92549a8da8bf662865dbb365130e53c4c4ad63576b3cac2717fe28acae9716",
+      "gitBlobSha": "0d18570bbf78de9d2d044d2532a13bc2b1b31899"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-beacon-browser.json",
+      "crc32": "908640d1",
+      "size": 14358,
+      "sha256": "f3f46f2c755f1a1ee6c888b7644aa6ea93eb697d0ffbc859eff5bbdc009ad349",
+      "gitBlobSha": "087e60d495666cb6a6417b64fc6d46dac5c602b0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-browser.json",
+      "crc32": "1d38dc69",
+      "size": 13621,
+      "sha256": "107fc093af4f435a79f2eb6d33c91e93bcd01b1a4013af8b8ee238d29614439d",
+      "gitBlobSha": "f00563855b53e146e1f108a964a0b1d37fc84a73"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-carry-browser.json",
+      "crc32": "3003f4b4",
+      "size": 13973,
+      "sha256": "f3af60261ee9c79e9a115263893dc4bbb8fc51263f5eeaeb0474566365aacda2",
+      "gitBlobSha": "f0440df844846aa6ac50126fed997a3e5d432ea9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-field-browser.json",
+      "crc32": "b2efa48f",
+      "size": 14679,
+      "sha256": "ee33849577cd99b7b8faafd372309ae1c706f9d87f0026b5958f348b749d4d70",
+      "gitBlobSha": "fd4c77a67f7daf299d18ba9c3f39773bf4f2f230"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/export-v7-rescue-browser.json",
+      "crc32": "cb5ec287",
+      "size": 13915,
+      "sha256": "bd4e3b8e0e29cdb63e16f0bfe149749837c4bc862fc34fc3238aab59c8e93681",
+      "gitBlobSha": "b7951fec05b6762b7bd73e51392690d7d83600c7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/field-v7-results.json",
+      "crc32": "a6263de2",
+      "size": 6484,
+      "sha256": "28f9ede4ab534c2bb59bb0fef77e0b04112aa2c578ce9497f2dc0bc8f7718838",
+      "gitBlobSha": "ac8abeb609ca5c84d5ca1439f5df0b3eb384a6c0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/field-v7.log",
+      "crc32": "f7a5c259",
+      "size": 3800,
+      "sha256": "0684a28a88e61c98f1747f7fde50e08fad86392fb5519654756bf0898de19781",
+      "gitBlobSha": "3ad98b68c083b916060251bc5db6e88b0cce9676"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-cauchemar-0-field.json",
+      "crc32": "40b9c655",
+      "size": 28639,
+      "sha256": "1922e3727c98da249a2908f7f6578159fb65e662ad4e3d22420dde64f1168465",
+      "gitBlobSha": "bdbe5e53f124d36b85dc3c2f30eb1e05d296012b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-cauchemar-1979-field.json",
+      "crc32": "162c11c9",
+      "size": 28184,
+      "sha256": "8d95008ec1f5705df5654b854e03060379463c259603cb4858aa7152e4c37a1b",
+      "gitBlobSha": "b958a4e60f33db8d5d5c5818ad5e7357a3bdb764"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-cauchemar-26319-field.json",
+      "crc32": "257c4359",
+      "size": 28167,
+      "sha256": "7531b4adcde307e797bd13de393930a48452415278211e548e762c503010787a",
+      "gitBlobSha": "8cb7774c234ea966aef13c06f5c38cb899fa8d3a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-cauchemar-26319.json",
+      "crc32": "04deac59",
+      "size": 28167,
+      "sha256": "8d042ad26dbb1b9e1fa237582d389634fbd28f0f826d284978197e7b5fbc5bb2",
+      "gitBlobSha": "8a3110e612370e465206e9751052c6ca1d9afc0b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-cauchemar-8675309-field.json",
+      "crc32": "f32f5f04",
+      "size": 27902,
+      "sha256": "415686cb41a430bf62574454c8eee3350b029ec72446ec76387c0ddeda488483",
+      "gitBlobSha": "4b3609aef3e20540e76c795c910dadefe9c36b6b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-recit-0-field.json",
+      "crc32": "a6524157",
+      "size": 27864,
+      "sha256": "71f378f4ff9c088154148a05e6b10737e618d8f8988f40151da21e59588f1f9f",
+      "gitBlobSha": "a0ee8e8b4b0c237a2fa45e17e002489d45512887"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-recit-1979-field.json",
+      "crc32": "1b3c859c",
+      "size": 27280,
+      "sha256": "e76921bdded60d98253aa36573d2db733d8a74c9dcd197e502107d3c026d4b9d",
+      "gitBlobSha": "a7cd05215807680f6aaf2079fb434771517b23d4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-recit-26319-field.json",
+      "crc32": "20f7edb2",
+      "size": 24686,
+      "sha256": "5862d76a28d628fa969e4e04c804f7a870d8dd250f08b1693788214df93262de",
+      "gitBlobSha": "67606c9a1dcad9cfba749cb455a7f120bf077cc7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-recit-26319.json",
+      "crc32": "bbffb68f",
+      "size": 27960,
+      "sha256": "b8f27d71a8ce63d323f9d975ffd7a42c420e0830a1ea0523dd170f211f9d83c8",
+      "gitBlobSha": "12d4c01d783a2c9f0076ae9dfc40085fa39a66ca"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-recit-8675309-field.json",
+      "crc32": "558e286f",
+      "size": 27270,
+      "sha256": "a65fa3e337f101c655278f2e5b0cc3d5110ce906a0f15d115f527052df4fe172",
+      "gitBlobSha": "2a231bb41b7a1f7d646f84fbbba515e734400757"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-0-field.json",
+      "crc32": "ba75820b",
+      "size": 25855,
+      "sha256": "b5a44306f4b8a448f3731931765d415b09e1fcb203e800520268e91e03434dd1",
+      "gitBlobSha": "7878eff9e2eea676fb8128494e68595175e85a6a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-0.json",
+      "crc32": "002c7081",
+      "size": 27517,
+      "sha256": "d39afb4304e0b2504198285416335b5a8c3af50733cc22962eb5fcb5a8240f24",
+      "gitBlobSha": "824593392ab052b69a02ab049e616e46bb3ee96a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-1979-field.json",
+      "crc32": "ebc1af9d",
+      "size": 27636,
+      "sha256": "fdc6117f0fcb03a7fcdadf1a897051ed2817f546bf03fcc6d0c22b945522310e",
+      "gitBlobSha": "66baebc997c29179bd161a8008593c3b34577643"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-26319-field.json",
+      "crc32": "f120253c",
+      "size": 26766,
+      "sha256": "045cb25ab3e50c33b4210913f4059a0852e30a85a4b02b62f7eb0b344e2ca35a",
+      "gitBlobSha": "dbdd79e121308c796ca2960f3ccd883fb8dc83a3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-26319.json",
+      "crc32": "edce1988",
+      "size": 27817,
+      "sha256": "337abceaa1035d5e06a2240cc8a780f7edb608ac71e8286892d9eff0770a853f",
+      "gitBlobSha": "2431abf0ce82ef6002bac62fa36f062e6f5ba4ac"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/final-v7-survie-8675309-field.json",
+      "crc32": "9c7c82cf",
+      "size": 27082,
+      "sha256": "49b164d1454e8cc9f3d3770ff3ad5034f1132b3a35b77d767d0e567120933f91",
+      "gitBlobSha": "64ad40192810089099dba8bd94053dd501dae734"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/helpers-v7.mjs",
+      "crc32": "4c813a28",
+      "size": 1659,
+      "sha256": "7ee1be79a4eacf65620318bb0b16ff07f4bc211072317e8b12137b48badfdfdc",
+      "gitBlobSha": "300a26b3e87ea23bcd255830566861125ed45a96"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/inherited-on-v7-results.json",
+      "crc32": "4d4cd719",
+      "size": 8863,
+      "sha256": "fb6c0635cdca4552d76491fc924f94211d891315b8eb5dfd937e0695b1623967",
+      "gitBlobSha": "5458f4bcc579dd15b3242dc98cb4950e98b8cae9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/inherited-on-v7.log",
+      "crc32": "a2cc6644",
+      "size": 19,
+      "sha256": "11c3f86672e782beed475c9a36bc3465f0478788d4ffdec11ecd44375bf8cd12",
+      "gitBlobSha": "9f7f603581bff461eeb16b6f9c0bed413066ec31"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/installer-v7-results.json",
+      "crc32": "7daf125a",
+      "size": 2919,
+      "sha256": "5608295da074fa0678ead9c2540fddcb1198b62776cebf5449cecd2782f9c1d9",
+      "gitBlobSha": "ac4af9a44860bc613ed55abd39e24ee6713bbb0b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/installer-v7.log",
+      "crc32": "3b231cd7",
+      "size": 19,
+      "sha256": "90b2769e2710ad145652e546484306e9d19ef8c495aa41dc231f1b31e59997e8",
+      "gitBlobSha": "9d83c2d512e2408b1dcb352da3228103105cbcc5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/matrix-v7-results.json",
+      "crc32": "ae0740ed",
+      "size": 5435,
+      "sha256": "f43d23682435232c046150f181104a27d998ed8aaed75610aad7b5986faa57ae",
+      "gitBlobSha": "70b2ac6e3c4a246b489f643511291b994ba9edb8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/matrix-v7.log",
+      "crc32": "dbca9912",
+      "size": 3226,
+      "sha256": "b1365a38f24bfb1044f66dea345e38a94e362930655ef05d27260524cd8c8826",
+      "gitBlobSha": "6441731f325e7e3b8693cecafa8c683829ed1021"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/matrix-v7.mjs",
+      "crc32": "91f6adf0",
+      "size": 1203,
+      "sha256": "2b75dacbe9f8e4af3bf93f414ae5104575708905fe08daaedf6ee5c86b58356b",
+      "gitBlobSha": "1b3445743fae1739abee3feaa2ff8e8267a3ceb5"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/mendel-v7-results.json",
+      "crc32": "81ed867b",
+      "size": 34820,
+      "sha256": "2d0e5f1640bca04afe45f52c975127e91cb08193be54df322918e890b3b8d15f",
+      "gitBlobSha": "c2b3371d36e276c039cdca830c7456a0371f8e31"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/mendel-v7.log",
+      "crc32": "37133633",
+      "size": 46,
+      "sha256": "b9ce60ffe9a8b43090fdfe8143ba5f3dcd8cfaa49d2034d05eb3dd1797f46b66",
+      "gitBlobSha": "cec0628c905a9b99b8a3ab532f230219daf7d067"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/package-verification-v7.json",
+      "crc32": "4a13370b",
+      "size": 45548,
+      "sha256": "2e3376051be09d4788d3c9f68bc9fbb64a31eb0ce7485a3537ce3f49cae57ea8",
+      "gitBlobSha": "3be11a0de26c1b7a254a30e6d1851dd62b2dd9b1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/pilot-v6.js",
+      "crc32": "2dbc199f",
+      "size": 10192,
+      "sha256": "b8c7674e4f54254839575b4878d48f5ce33cba092916927dd832ad1fd966fae0",
+      "gitBlobSha": "3b028d87496ec3764f03d80c9407d6e902d4fce0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/planche-v7-1.jpg",
+      "crc32": "5960e4f3",
+      "size": 491563,
+      "sha256": "dbee1dc984119b6c08ba7d7380343644c73b69b0abbcfe6048d6f62a3a4b60a5",
+      "gitBlobSha": "75dc85bf2fff081db335f4d482411c890e709887"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/planche-v7-2.jpg",
+      "crc32": "9314f473",
+      "size": 494716,
+      "sha256": "37935d1e8354b0884227b1132d7cf36fe6dcdae990484d4c348bb63dc37875ec",
+      "gitBlobSha": "6268f9239abf93f8bbfa4ac2e1bac3d25eb1c09a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/report-document-mobile-v7.jpg",
+      "crc32": "99fe471f",
+      "size": 54921,
+      "sha256": "815da769dc7c06f17ac629ea13df0d05136b921408cf22cca0ed234f213276d7",
+      "gitBlobSha": "3cb1212364da7bff500f4d67ad0e2b5a9b54beaa"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/report-document-v7.jpg",
+      "crc32": "96833db3",
+      "size": 112881,
+      "sha256": "2cff47e136eae3ffb74aad23b2540f7d172cdcd3a7f1c26ae7ca9a8de928afdd",
+      "gitBlobSha": "e179b547ec782c485260e438f1d8622b33196c4e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/rescue-on-v7-results.json",
+      "crc32": "15a44e6d",
+      "size": 6737,
+      "sha256": "ce802386e95c52597dab6c5c7d9351dffac788296988bf4b818f9cc75b5f8a1b",
+      "gitBlobSha": "66e04d71b985ab5f6030af03608ade5edf500e00"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/rescue-on-v7.log",
+      "crc32": "30dabdd6",
+      "size": 3674,
+      "sha256": "645d140cd0c3033a5b1b2a412f0d6928df9bee7ef52fcf805300e77d0529f021",
+      "gitBlobSha": "cdf96885cfdbd1e9226a6c6d64bcf3d12fbc88a9"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-cauchemar-0-field.json",
+      "crc32": "a074e414",
+      "size": 664539,
+      "sha256": "10221b8b445efc186ce127845d6412110ba90512807c8e4a5072f6e066aacfce",
+      "gitBlobSha": "62ba9704354c5c43c3e492a48ee02bb1cdc8afa0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-cauchemar-1979-field.json",
+      "crc32": "5cde1840",
+      "size": 627143,
+      "sha256": "961ea2038b1f8dc94ded6fe4caf9b0af31188aaf0bf8f03154c30ed76bc81a1a",
+      "gitBlobSha": "bc6b552e21b4ea86063ccc4e2ab9bda04e31a97a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-cauchemar-26319-field.json",
+      "crc32": "aca0d680",
+      "size": 415337,
+      "sha256": "8eeea64b60034bfa2eb8c642b5721557d21811c0900803d214c674152ac5f09f",
+      "gitBlobSha": "07313a1c865f41e6386a257daf6378affc8e847c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-cauchemar-26319.json",
+      "crc32": "dedf6043",
+      "size": 414621,
+      "sha256": "9ad4be04ef62628358e3118993a89594fb835d110e39e20a12d391a695488f93",
+      "gitBlobSha": "13eb97541477598d2fb6333b74c0cb6cbf6a3108"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-cauchemar-8675309-field.json",
+      "crc32": "6176a581",
+      "size": 650270,
+      "sha256": "b4e5118920e7b1bf0bd64f34a5eb8e411950030bfd3471562b8cee946ee600d2",
+      "gitBlobSha": "820f6414820ed153202ce0491cc75b75a5fde32c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-recit-0-field.json",
+      "crc32": "d82bf95f",
+      "size": 650419,
+      "sha256": "3c7d1439696241a692c98bb269004fef616fe0fbe0d9cd7255102fbb15e7e65e",
+      "gitBlobSha": "ca925fa4644f2e4d837bfde205042812fa8c5cb1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-recit-1979-field.json",
+      "crc32": "5c82bebd",
+      "size": 648910,
+      "sha256": "32cd4ef2641a470126809f1aa069981278c42ebc4fae0e0e88c9a95239a0f744",
+      "gitBlobSha": "eeb0ab21318d1382bc964eadc4c697869c655f11"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-recit-26319-field.json",
+      "crc32": "675dc8ff",
+      "size": 490352,
+      "sha256": "7bb4fc83a7fc94f3c843f73f6ec12342de01f9e8a35fe409b5e96daa53a78005",
+      "gitBlobSha": "9f75f044a0aa10ecebc367cfa56b8decea0564ce"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-recit-26319.json",
+      "crc32": "284570d0",
+      "size": 637279,
+      "sha256": "7085a381397a95839973327f135c55b4dd8294d88506b1bcc39b255e7f6e069e",
+      "gitBlobSha": "bda33800492a309472315264b5547ac854bfc4c0"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-recit-8675309-field.json",
+      "crc32": "7b4c825f",
+      "size": 650501,
+      "sha256": "1d69892a8642cde2bc6ecd6805c19546f3d88da749b1dc2e7615d687036afd0a",
+      "gitBlobSha": "61969ef4a1602e92abd2b8b375305a35c4e64902"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-0-field.json",
+      "crc32": "f1cc6847",
+      "size": 479553,
+      "sha256": "f87afcfea1f6d45d14e90ccecbda5366a8b8175219d4fc17f8475a6af08fb02d",
+      "gitBlobSha": "7e8429fdeb5730279b4fb7828a45fb2828677aa2"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-0.json",
+      "crc32": "8c12d484",
+      "size": 644332,
+      "sha256": "09249d604621e6cbb3b00a36afbecd78d0f3b726d16ff46ec76e36373fc93dc8",
+      "gitBlobSha": "4502aa90edeab3f87e320a40bdc22ab450faba6b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-1979-field.json",
+      "crc32": "daebe5f3",
+      "size": 485277,
+      "sha256": "a9f60aaca5d85d4933318e9cd03a845adead27774d10b1d0c002496bdb282be0",
+      "gitBlobSha": "7644c3439735628f7aac139668464a5b3ae966e4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-26319-field.json",
+      "crc32": "c4848d0c",
+      "size": 475156,
+      "sha256": "d6f43de151873e8b417d1e10fa4adbf8c4fa42bb907279ccdfce669b3fb6e6d9",
+      "gitBlobSha": "6ad5f4c92dc56e2fffe4d772f8dbf803d299bb74"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-26319.json",
+      "crc32": "f9869576",
+      "size": 482065,
+      "sha256": "4c5514655ee030ed48402abd2cb0682ba98b1b9cacd8b57197013c29ffb19710",
+      "gitBlobSha": "020727c0179a4709905f9cc23aab05e701b35151"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/states-v7-survie-8675309-field.json",
+      "crc32": "7c70b0a8",
+      "size": 635174,
+      "sha256": "ccf1aa603cbaf6a5c29591d65e49559104a2ff2cb75218eda09d20c92f3e1254",
+      "gitBlobSha": "a98c66033c55a7c0d98196bb1254a1c358f14e04"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-atlas-v7.py",
+      "crc32": "a964edc3",
+      "size": 11680,
+      "sha256": "ba89a71033c196e0e5c68fa04a36416069c6e02bf0958b5a7beb62ac933ea1b4",
+      "gitBlobSha": "8b356b06e08fb45f66d29b4b6318c4b38bf3854b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-browser-v7.py",
+      "crc32": "828ac5bc",
+      "size": 46324,
+      "sha256": "82e2e99ea2823e8d05a2a7f75fe0ae8122f15792a8c17daec75f4d2d6c0b7e36",
+      "gitBlobSha": "8fccc5345360c861143146fa6e189131f0c4b1e7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-construction-v7.mjs",
+      "crc32": "cf71305e",
+      "size": 7194,
+      "sha256": "cf5822aaa063b2a8a89a0a3987bdf19bb741339efc99b06d9e5972d913e1901f",
+      "gitBlobSha": "c15b7b153ad4bc8a688bc35d3cb336544a9f1e9a"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-documents-v7.py",
+      "crc32": "eba00d3f",
+      "size": 3618,
+      "sha256": "1f0d753f1075348eb27beae2cb6947e66b370c17edcdf5e2e41c23b0d99fe9e1",
+      "gitBlobSha": "dcc8a4d63142499980d3d6f4ea8db31816ab1361"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-field-v7.mjs",
+      "crc32": "cb94a8b2",
+      "size": 12820,
+      "sha256": "9d25a720c9c7e57e729ace970889ce4d5d7bf8a4642e79729c2312c241daa962",
+      "gitBlobSha": "c83c7f711327eb8422b8b3e1b060cd7664c22d00"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-inherited-on-v7.mjs",
+      "crc32": "4bb10574",
+      "size": 13793,
+      "sha256": "7b3963f0ea8329b1c9a76734c6cacaf8b57bdfdd46bc0df749c393794699a171",
+      "gitBlobSha": "3e8920cb05ed547fc0967a80ebb8c48227774ca7"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-installer-v7.mjs",
+      "crc32": "85395d19",
+      "size": 10398,
+      "sha256": "f8c0d1ecf50db24c0a4ac9b2306339458e7aab734ac0c865aae4e6dbb574dd72",
+      "gitBlobSha": "00caf6f995b343e955c3555ee9c2366b62c483f8"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/test-rescue-on-v7.mjs",
+      "crc32": "15e63ed3",
+      "size": 12479,
+      "sha256": "ec394ce32d77f078ec73aef9b61efba6c6a60dfd563ecac764ebe9be651bc594",
+      "gitBlobSha": "819a124b3c89c479d9eacec171749dbeec42cc98"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/verify-v7.py",
+      "crc32": "a567ff83",
+      "size": 6816,
+      "sha256": "8e808839f18e9b40839974f18b2c78e819bc914e4cf05d989c366f47949e0dec",
+      "gitBlobSha": "7bdd9351ad13a7bd8030a59b19d29dbea8f6d5c4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/app.js",
+      "crc32": "9b1d5798",
+      "size": 24274,
+      "sha256": "4d5eb3c54eff49beee2d11dc30598bac03c865f83d0bcb84b89ebaceae05a301",
+      "gitBlobSha": "96087f4e8b10ba48c26bf08fffc1c6afb625435e"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/architecture-v7.js",
+      "crc32": "acc579a8",
+      "size": 7629,
+      "sha256": "d964be641944b96cf5d173a28d533942986975b89358ec306ce585e71651314d",
+      "gitBlobSha": "514b44c4b3c73d38d01066d6694a261e81aad8c1"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/assets-v7.js",
+      "crc32": "d0bb849f",
+      "size": 6236,
+      "sha256": "1711015ace9b1da8c80dc58a5a7ce2e0ce5d8f5c09cd2fc99cbd73044422cbcf",
+      "gitBlobSha": "f8c64a0967fe6a28e54f940d85d9a0bad55b7a1f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/assets.js",
+      "crc32": "3d865409",
+      "size": 40755,
+      "sha256": "07073057cbf2480c4a6ac7a6e54aecd62b1eb0d0733d0ea3f8bd66c650b18701",
+      "gitBlobSha": "ca6e270f1c69a4dd6ef183ff3965a1345e8577f3"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/content-v3.js",
+      "crc32": "9ac564dd",
+      "size": 6781,
+      "sha256": "d24015f76e58738ccbe14f477c184f991a27ed9210481598410a1cb7d7bdc02d",
+      "gitBlobSha": "179ef6b585c668be60517d8b294be9661ba328cf"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/content-v4.js",
+      "crc32": "7f2cac14",
+      "size": 6942,
+      "sha256": "a1ebc73ee198c76b1255042931945f3ce163a73ca0df25e0112acd5f875fb598",
+      "gitBlobSha": "032a1d042c29555e7ff7a0bb3932b1d169a5c40d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/content-v5.js",
+      "crc32": "cd81dafc",
+      "size": 5404,
+      "sha256": "9d1d43ca725cf623462341e99d4a5272df8f88cf3ae06dbe10a82a373cbd6433",
+      "gitBlobSha": "f3dc1ea9ee06d2278596ba1fce052a14db0d087c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/content-v6.js",
+      "crc32": "fdaa8466",
+      "size": 4742,
+      "sha256": "fd357f6c5cbb9eee1cabcdb2a4c8e9682c2722c46e82b1e404b6643f77282ba1",
+      "gitBlobSha": "ce0bc508a475797087eb45a23ca73a4f4aaed8af"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/content-v7.js",
+      "crc32": "03bb0351",
+      "size": 18514,
+      "sha256": "9ec80b2b164ad44a22a2cbba684da9c64ce1dab5900545044a9a3bf6a99b7d3c",
+      "gitBlobSha": "79ffeca237f98117701ce7e41f942e7ded2cc035"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/data.js",
+      "crc32": "c6cacdaf",
+      "size": 203985,
+      "sha256": "7860676ee577aa11d13c85c84c58016dfba5bf71b5fb9ec4986091a17400e039",
+      "gitBlobSha": "2479f2236854e3b8178c6b10ed010c95ca9a48ee"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/engine.js",
+      "crc32": "3536cd08",
+      "size": 23339,
+      "sha256": "614b5b2cf9d5287ba9daa11d6b8de16ee29d33776b71e3f3ac75b10da532425d",
+      "gitBlobSha": "71f1758e88aea7d34bd8c9fb0c405162f7e99bff"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/field-v6.js",
+      "crc32": "497761f4",
+      "size": 14048,
+      "sha256": "9c6cf2ed26b4ffc16b1d8dda7e85990dfe386fd0f3efd6184a92d1175f221da0",
+      "gitBlobSha": "e02166739ce846c4cfc8b68a16e511abdf644114"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/interface-v3.js",
+      "crc32": "1ce00790",
+      "size": 20575,
+      "sha256": "ba63d3d54ff46dc0be2b79de52a91125e747099bcea3159fb6b5eef08efd060e",
+      "gitBlobSha": "70a96d7d026889a3bcf46f6a854e9f882bbf4077"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/interface-v4.js",
+      "crc32": "74bf0a20",
+      "size": 12178,
+      "sha256": "730bf9c179c56cc986bf96acb9fe4c8ab82e2a5243a59b452fc71764cac106a7",
+      "gitBlobSha": "d2db8d41f35310c8b7db9e0e869c561f3474656d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/interface-v5.js",
+      "crc32": "6f46ecc5",
+      "size": 6718,
+      "sha256": "5c4f66c1af7a1eb0d42054850b2954fa3ec47542f73bc82bb8840471d17d9b17",
+      "gitBlobSha": "c14c975d7a5a6e5d8aa40a74268c0dc6530d4a7b"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/interface-v6.js",
+      "crc32": "60931dfe",
+      "size": 8822,
+      "sha256": "62f050163274f29d82de7d91a0d4a76583bbf60ffaf9bddf0f051836fd0fdd4d",
+      "gitBlobSha": "93d4313c9ed2c1f5349fd74e84ac318a02e7aa49"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/interface-v7.js",
+      "crc32": "6db213cc",
+      "size": 13490,
+      "sha256": "6a59e265614a14910e18e9497107345d0d12c95a7e32c1f4e7c104ff27ea3f87",
+      "gitBlobSha": "f820a15aadb451abbc677d6ef120e98c7c2a63d6"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/liaison-v4.js",
+      "crc32": "9f169950",
+      "size": 19103,
+      "sha256": "3f748e1d1f94b8f2dac0cc09df0e4c58a37985ca2a7c7d0dd9c9a212540d248f",
+      "gitBlobSha": "d8b3542d68844d15831f1db9bf4944ccec325226"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/protocol.js",
+      "crc32": "0ba9ad00",
+      "size": 22939,
+      "sha256": "c927bd8533225c40d5a6c7aca4baff11d65755ead0be9793c58fb7e6ef5ef497",
+      "gitBlobSha": "bda181bbc6d76ee675e577f4f6d8b91e693d4707"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/render-v4.js",
+      "crc32": "a01d30aa",
+      "size": 5054,
+      "sha256": "49da676cc75f25f0f51bdff56d51312147890f9984afc73c94f810a36904c822",
+      "gitBlobSha": "075e6154d36c7a137dce9efbbddc54e752f8f993"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/render-v5.js",
+      "crc32": "8dd83d7e",
+      "size": 1266,
+      "sha256": "d9754238456b3ebb2bd04e0cbdcf311b7219e149e5bc8482d2c4bbd045bd9ed8",
+      "gitBlobSha": "45a039d15eeafa49d0ede572844f3ad6132301e4"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/render-v6.js",
+      "crc32": "c290100e",
+      "size": 2222,
+      "sha256": "0562198a34029c28ef6006bea6f253b9cd2a97dd481c83488aaed02e385f1a3b",
+      "gitBlobSha": "065504bd9de8c055f392bfccadb5ea18a24c6d0f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/render.js",
+      "crc32": "6b07cd31",
+      "size": 22497,
+      "sha256": "3665871a23c64a4d9b423d57adbf334106fb55f7c12426605463c3767a5bdfd5",
+      "gitBlobSha": "095a31ead4759a166355a0e47fa5b240cd9e6e7f"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/rescue-v5.js",
+      "crc32": "4e1cffc9",
+      "size": 18089,
+      "sha256": "060d1920ce2470f4b57eb067482faf7e3438ae7d814eee22133aa529e86791d1",
+      "gitBlobSha": "16216f77d1af6f8992d4b5253f43fbf6315e1b5d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/scene-v7.js",
+      "crc32": "96b42d94",
+      "size": 12762,
+      "sha256": "e24bd1565a8f61366b711fdf2ca9ec2a49c668244c987d6a3a5f4cda4a5ce471",
+      "gitBlobSha": "24d3b807acceb15c8ee5aec054c63c5017795f02"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/src/survival-v3.js",
+      "crc32": "bdf21897",
+      "size": 23815,
+      "sha256": "2cc1cb050617bd208adeddd365513b4400bcd168ca0cb8de15f7391a56f443a7",
+      "gitBlobSha": "2a0e230f2c7ebece238f2bd6aaa3158cdca84d25"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/styles.css",
+      "crc32": "e128968f",
+      "size": 40296,
+      "sha256": "c4518f1556338ad67dbeeba27a6bca2c4a18c5aa67cc540e2b1324e251b3aaaf",
+      "gitBlobSha": "4af170b2c3f57e51857dfed8e4c94f7650940d70"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/assets-v7.py",
+      "crc32": "6501019b",
+      "size": 2229,
+      "sha256": "fc12bd7d97e2b802ba15a07f73b091b3ffbd50ed8c7926526fda4bbc906a34d3",
+      "gitBlobSha": "232d477617fe7ffefee1f3761bc9183b9106d562"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/build.py",
+      "crc32": "29def691",
+      "size": 1085,
+      "sha256": "3ea55db988715843760a689efc04c2d94e29778fedd627067097dfb2bb841b7d",
+      "gitBlobSha": "70be4229a83cf7b19a10087b4cd570b4f019320d"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/docs-v7.py",
+      "crc32": "e33b88ca",
+      "size": 28409,
+      "sha256": "256e55395057637f165852e15acdb22cfc869e839eab05aaf6fa2aae9d7b7126",
+      "gitBlobSha": "6c0d3809687e7583cecafb492c507f6ee1aa378c"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/embed_assets.py",
+      "crc32": "e0799244",
+      "size": 601,
+      "sha256": "6fa41eaf438b484ec6a07e86e4731c095d2a0ca7cdcc23262763e60ddea2f966",
+      "gitBlobSha": "b564363afd7f2f074ced9f79f4aee0aaedda0d65"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/install.mjs",
+      "crc32": "bc2a75f3",
+      "size": 8783,
+      "sha256": "2ffaff11c57ca2ddb950825cda5dd28446da8294681f6f83c8f2787d49c94811",
+      "gitBlobSha": "4c0ebf79e0f286fbaf3cacb94fd3f9dbd0c163dd"
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/tools/manifest-v7.py",
+      "crc32": "9f1deb9d",
+      "size": 732,
+      "sha256": "ffc6350a9b423bede37396111f6f9015ff7dd460d532965acebbc2e532ee1c64",
+      "gitBlobSha": "a65f6f291d9f3873c242f9f08fa49c892014cb52"
+    }
+  ]
+}

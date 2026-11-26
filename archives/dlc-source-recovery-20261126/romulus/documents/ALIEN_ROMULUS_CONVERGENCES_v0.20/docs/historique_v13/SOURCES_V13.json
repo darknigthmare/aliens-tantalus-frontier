@@ -1,0 +1,416 @@
+{
+  "reviewed": [
+    {
+      "id": "COSTUME-NFS",
+      "title": "Carlos Rosario — entretien No Film School (21 août 2024)",
+      "url": "https://nofilmschool.com/carlos-rosario-alien-romulus",
+      "use": "Andy : combinaison, zips, capuche fixée et sac à la taille. Navarro : chemise à motif de palmiers et éléments en cuir. La veste rouge de Rain reste hors de cette passe.",
+      "status": "Relu pour v0.13 ; référence de costume, pas patron ou texture à recopier."
+    },
+    {
+      "id": "COSTUME-MPA",
+      "title": "Carlos Rosario — entretien The Credits / MPA (16 septembre 2024)",
+      "url": "https://www.motionpictures.org/2024/09/alien-romulus-costume-designer-carlos-rosarios-retro-vision-vintage-style-blends-part-one/",
+      "use": "Rain a déjà quitté sa tenue de travail pour une silhouette plus décontractée ; Andy porte une combinaison avec des fermetures industrielles.",
+      "status": "Relu pour v0.13 ; pas chronologie certifiée de chaque changement de vêtement."
+    },
+    {
+      "id": "COSTUME-DAZED",
+      "title": "Carlos Rosario — entretien Dazed",
+      "url": "https://www.dazeddigital.com/fashion/article/64405/1/alien-romulus-costume-designer-carlos-rosario-fede-alvarez-cailee-spaeny",
+      "use": "Bjorn : combinaison de mineur à zips. Kay : salopette liée au travail agricole. Les chaussures de Rain associent un dessus clair à des lacets et une semelle rouges.",
+      "status": "Relu pour v0.13 ; coupes 2D et motif imprimé du jeu originaux, sans marque copiée."
+    },
+    {
+      "id": "ARRI",
+      "title": "Galo Olivares — ARRI Rental, Alien: Romulus",
+      "url": "https://www.arrirental.com/en/about/overview/news/galo-olivares-shoots-alien-romulus",
+      "use": "Cabine volontairement resserrée et utilitaire ; éclairages intégrés aux éléments du décor.",
+      "status": "Relu pour v0.13 ; aucune certification du plan ou de la photométrie du module."
+    }
+  ],
+  "inherited": [
+    {
+      "id": "FILM",
+      "title": "Film et extraits officiels",
+      "url": "https://www.20thcenturystudios.com/movies/alien-romulus",
+      "status": "primaire",
+      "use": "Cadre et personnages ; ne fournit pas un plan coté.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "LAB",
+      "title": "Nick Stath, Romulus Lab",
+      "url": "https://nick_stath.artstation.com/projects/Bk3dwm",
+      "status": "primaire-conception",
+      "use": "Salle ovale, plafond central abaissé, poste central. Les dessins ne prouvent pas seuls le montage final.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-29",
+      "lastReviewedVersion": "0.12",
+      "reviewedInV13": false
+    },
+    {
+      "id": "TANKS",
+      "title": "Nick Stath, Lab Tanks",
+      "url": "https://nick_stath.artstation.com/projects/JrBOA0",
+      "status": "primaire-conception",
+      "use": "Cuves horizontales et unité de prélèvement reliée.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-29",
+      "lastReviewedVersion": "0.12",
+      "reviewedInV13": false
+    },
+    {
+      "id": "CONVEYOR",
+      "title": "Nick Stath, Conveyor Hall & Hive 4",
+      "url": "https://nick_stath.artstation.com/projects/DL9nNE",
+      "status": "primaire-conception",
+      "use": "Sortie par convoyeur, rideaux de caoutchouc, petit poste opérateur.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-29",
+      "lastReviewedVersion": "0.12",
+      "reviewedInV13": false
+    },
+    {
+      "id": "HIVE",
+      "title": "Nick Stath, Conveyor Hall & Hive 5",
+      "url": "https://nick_stath.artstation.com/projects/kN2Aad",
+      "status": "primaire-conception",
+      "use": "Charpente inclinée, convoyeur de service, conduit au-dessus de l’accès au lift.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "LIFT",
+      "title": "Joshua Viers, Elevator Vestibule",
+      "url": "https://dvsdesigner.artstation.com/projects/lGEZA5",
+      "status": "primaire-conception",
+      "use": "Vestibule du monte-charge.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "HANGAR",
+      "title": "Alex Nice, Space Station Hangar",
+      "url": "https://alexnice.artstation.com/projects/gR8gk8",
+      "status": "primaire-conception",
+      "use": "Hangar et ajout d’un second niveau ; concepts préliminaires.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "STATION",
+      "title": "Alex Nice, Renaissance II",
+      "url": "https://alexnice.artstation.com/projects/EzaNze",
+      "status": "primaire-conception",
+      "use": "Raccord des volumes extérieurs aux lieux de l’action.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "COLONY",
+      "title": "Col Price, Jackson Star",
+      "url": "https://coldesign.artstation.com/projects/lGxA5J",
+      "status": "primaire-conception",
+      "use": "Colonie minière, rues industrielles, logements en remorques.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "DESIGN",
+      "title": "Naaman Marshall, entretien de production",
+      "url": "https://www.immersivemediaco.com/alien-romulus-production-designer-naaman-marshall-builds-a-bridge-between-alien-and-aliens/",
+      "status": "primaire",
+      "use": "Remus plus ancien et Romulus plus récent ; réemploi des sets de tournage ne signifie pas identité diégétique.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "SHIP",
+      "title": "Matthew Savage, Corbelan IV — Concept Art Association",
+      "url": "https://www.conceptartassociation.com/2024-caa-finalists/corbelan-iv-alien-romulus",
+      "status": "primaire-conception",
+      "use": "Attribution du design du transporteur.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "PLOT",
+      "title": "Résumé croisé de l’intrigue",
+      "url": "https://en.wikipedia.org/wiki/Alien%3A_Romulus",
+      "status": "secondaire",
+      "use": "Ordre des scènes et états des personnages ; pas source de métrés.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "PLOT2",
+      "title": "Xenopedia — résumé du film",
+      "url": "https://avp.fandom.com/wiki/Alien%3A_Romulus",
+      "status": "secondaire",
+      "use": "Contrôle croisé du convoyeur, de l’injection et du final.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "F44",
+      "title": "F44AA — répliques référencées, sans reproduction",
+      "url": "https://www.imdb.com/title/tt18412256/characters/nm9657438/",
+      "status": "secondaire",
+      "use": "Désignation, aide à la visée et un seul chargeur de 450 coups.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "CARGO",
+      "title": "Extrait de la commande cargo — référence de contrôle",
+      "url": "https://clip.cafe/alien-romulus-2024/manual-cargo-release-pull-the-four-levers-s1/",
+      "status": "secondaire-extrait",
+      "use": "Quatre leviers de largage ; aucune transcription livrée.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "BURSTER",
+      "title": "Fede Álvarez, scène du chestburster",
+      "url": "https://ew.com/how-alien-romulus-put-own-spin-chestburster-scene-8694302",
+      "status": "primaire-entretien",
+      "use": "Éruption et premiers déplacements ; pas un ennemi de mêlée générique.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "TIMER",
+      "title": "Première annonce après le choc : 47 minutes",
+      "url": "https://clip.cafe/alien-romulus-2024/bjorn-s5/",
+      "type": "extrait référencé, aucune réplique copiée",
+      "use": "Distinguer le premier avis à 47 min des avis ultérieurs à 45 min.",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "GRAVITY",
+      "title": "Eric Barba, superviseur VFX — retour de gravité dans la cage",
+      "url": "https://www.artofvfx.com/alien-romulus-eric-barba-production-vfx-supervisor/",
+      "type": "entretien de production",
+      "use": "Départ en apesanteur puis chute gravitationnelle.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "ENDING",
+      "title": "Caution Spoilers — relevé du final",
+      "url": "https://www.cautionspoilers.com/re-caps-spoiler-warning/alien-romulus-what-happens-and-where-are-we/",
+      "type": "relevé secondaire, recoupé",
+      "use": "Trois attaches, acide au sol, dernière attache par la ligne. Ne pas reprendre ses dialogues.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "DRAFTS",
+      "title": "AvP Galaxy — écarts scénario / montage",
+      "url": "https://www.avpgalaxy.net/alien-movies/alien-romulus/from-script-to-screen/",
+      "type": "comparaison des versions",
+      "use": "Exclure mutations supplémentaires et régénérations des membres de l’Offspring.",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "ROOK",
+      "title": "Rook et l’extraction du parasite — ordre des événements",
+      "url": "https://avp.fandom.com/wiki/Alien%3A_Romulus",
+      "type": "synthèse secondaire recoupée",
+      "use": "Rook activé avant le retrait de la queue ; reproduction littérale exclue.",
+      "reviewedThisRelease": false,
+      "reviewedInV13": false
+    },
+    {
+      "id": "LOCKER",
+      "title": "Nick Stath — Security Room, concept abandonné et armoire déplacée",
+      "url": "https://nick_stath.artstation.com/projects/5WBmLA",
+      "status": "primaire-conception / correction explicite du montage",
+      "use": "Suppression de la salle séparée. Armoire blanche intégrée dans le laboratoire, pas reproduction du concept sombre.",
+      "consulted": "2026-09-28",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-29",
+      "lastReviewedVersion": "0.12",
+      "reviewedInV13": false
+    },
+    {
+      "id": "HIVE-LIFT",
+      "url": "https://nick_stath.artstation.com/projects/rlJrL2",
+      "title": "Nick Stath — Hive and Lift Entry",
+      "type": "primary production design",
+      "use": "Proportions horizontales du monte-charge, contreventement et maille; géométrie 2D interprétée.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "WETA-CRYO",
+      "title": "Wētā Workshop — Facehuggers et cryoframes",
+      "url": "https://www.wetaworkshop.com/projects/alien-romulus",
+      "type": "primaire / fabricant des accessoires et créatures",
+      "use": "Boîtiers en deux parties; membranes givrées, respirantes et rongées. Gestes des pattes, poches respiratoires, progression aquatique puis bond. Ni implantations officielles ni durées de gameplay.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "ILM-HUGGER",
+      "title": "ILM — Nelson Sepulveda-Fauser sur Alien: Romulus",
+      "url": "https://www.ilm.com/alien-romulus-sepulveda-fauser-ilm/",
+      "type": "primaire / studio des effets visuels",
+      "use": "Appendices tactiles avant accélération; continuité des créatures. Navarro passe elle-même l’appareil à rayons X sur sa poitrine: Kay observe dans l’adaptation. Pas un relevé des salles.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "NECA-CRYO",
+      "title": "NECA — Alien: Romulus Accessory Set",
+      "url": "https://store.necaonline.com/products/alien-romulus-accessory-set",
+      "type": "fabricant de produits sous licence / référence secondaire du film",
+      "use": "Référence de forme seulement: boîtier, membrane intacte et partie endommagée. Aucun accessoire téléchargé ni prix cité.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "WETA-FINALE",
+      "title": "Dan Macarin et Ludovic Chailloleau — Wētā FX, entretien du 16 décembre 2024",
+      "url": "https://www.artofvfx.com/alien-romulus-dan-macarin-vfx-supervisor-ludovic-chailloleau-animation-supervisor-weta-fx/",
+      "status": "primaire-entretien",
+      "use": "Mouvement retenu de l’Offspring, évolution de la queue et des mains; fret granuleux et anneaux. Ne donne pas les positions 2D, les temps de réaction ni un modèle jouable.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "reviewedInV13": false
+    },
+    {
+      "id": "COLONY-PRICE",
+      "title": "Col Price — Jackson star",
+      "url": "https://coldesign.artstation.com/projects/lGxA5J",
+      "type": "primaire / témoignage ou auteur",
+      "use": "Recherche de colonie, rues, atmosphère et habitat arqué. Vues préliminaires, pas relevé du décor final.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "lastReviewedVersion": "0.8",
+      "reviewedInV13": false
+    },
+    {
+      "id": "COLONY-INTERVIEW",
+      "title": "Col Price et Matt Savage — entretien",
+      "url": "https://www.avpgalaxy.net/website/interviews/col-price-matt-savage/",
+      "type": "primaire / témoignage ou auteur",
+      "use": "Entretien direct sur la colonie et le transporteur, intérieur/extérieur utilitaires. Aucun plan dimensionné.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "lastReviewedVersion": "0.8",
+      "reviewedInV13": false
+    },
+    {
+      "id": "ASC-OPENING",
+      "title": "ASC — Clubhouse Conversations, Alien: Romulus",
+      "url": "https://theasc.com/video/clubhouse-conversations-alien-romulus/",
+      "type": "primaire / témoignage ou auteur",
+      "use": "Récupération d’un objet organique dans les débris du Nostromo, puis ouverture. La présente animation est une évocation originale.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "lastReviewedVersion": "0.8",
+      "reviewedInV13": false
+    },
+    {
+      "id": "NAVARRO-LIGHT",
+      "title": "Aileen Wu — entretien CinemaBlend",
+      "url": "https://www.cinemablend.com/interviews/aileen-wu-emotional-story-alien-romulus-character-navarro-whole-new-light",
+      "type": "primaire / témoignage ou auteur",
+      "use": "Moment de lumière sur Navarro auprès des capsules; utilisé comme direction de calme lumineux, pas comme certification de caméra du cockpit.",
+      "reviewedThisRelease": false,
+      "reviewDate": "2026-09-28",
+      "lastReviewedVersion": "0.8",
+      "reviewedInV13": false
+    },
+    {
+      "id": "ILM-MOTION",
+      "title": "ILM — entretien de Nelson Sepulveda-Fauser : mouvements, parois, parasites et acide",
+      "url": "https://www.ilm.com/alien-romulus-sepulveda-fauser-ilm/",
+      "type": "production-primary",
+      "note": "Mouvements retenus des adultes, déplacement sur paroi, cycles des parasites et courants dans la séquence acide. Ne fournit pas les valeurs de jeu.",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.9",
+      "reviewedInV13": false
+    },
+    {
+      "id": "WETA-HUGGER-MOTION",
+      "title": "Wētā Workshop — Alien: Romulus, facehuggers et marionnettes",
+      "url": "https://www.wetaworkshop.com/projects/alien-romulus",
+      "type": "production-primary",
+      "note": "Course, saut final et marionnettes ; pas de chiffres de dégâts ou vitesses biologiques.",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.9",
+      "reviewedInV13": false
+    },
+    {
+      "id": "MDN-RAF",
+      "title": "MDN — Window.requestAnimationFrame",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame",
+      "use": "Horodatage des images et indépendance de la cadence de simulation.",
+      "type": "technical-primary",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.11",
+      "reviewedInV13": false
+    },
+    {
+      "id": "MDN-POINTER",
+      "title": "MDN — Element.setPointerCapture",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture",
+      "use": "Identité et cycle de vie de chaque contact tactile.",
+      "type": "technical-primary",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.11",
+      "reviewedInV13": false
+    },
+    {
+      "id": "MDN-POINTER-EVENTS",
+      "title": "MDN — Pointer events",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events",
+      "use": "Traitement de pointercancel et lostpointercapture.",
+      "type": "technical-primary",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.11",
+      "reviewedInV13": false
+    },
+    {
+      "id": "MDN-GAMEPAD",
+      "title": "MDN — Gamepad.axes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Gamepad/axes",
+      "use": "Axes analogiques continus, bornés et zone morte du module.",
+      "type": "technical-primary",
+      "reviewedThisRelease": false,
+      "lastReviewedVersion": "0.11",
+      "reviewedInV13": false
+    }
+  ],
+  "rule": "Une intention documentée ne certifie ni chaque angle, ni chaque dimension, ni le montage complet."
+}

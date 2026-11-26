@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+  "archive": {
+    "size": 85001778,
+    "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+    "gitBlobSha": "53bc96ff4fd598506e04154c72f962905851a4b7"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-000",
+      "size": 10485760,
+      "sha256": "56991c33f3c3946b73be7e1afe6331fcb1d1dc279238d768093965881271681a",
+      "gitBlobSha": "92b2f4cad0b89be4cdfa02db3a92894f0fbdecde"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-001",
+      "size": 10485760,
+      "sha256": "54f1fa7f92dea91fd33dd9a79a60c6ad8f103d1d97eb72dc70838ae9429dec92",
+      "gitBlobSha": "58b97c38bddab98daf04f8b64eca69b382ef666e"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-002",
+      "size": 10485760,
+      "sha256": "442e3de45c3e19aad0bf498ad301f43058247ffce3ff96481571bdfa5c22bcc3",
+      "gitBlobSha": "6e5c2a12ac6c74897630d56cb9136590ab670c5f"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-003",
+      "size": 10485760,
+      "sha256": "60a651893ed8fc53c9270c77964f59c107114bd24418e73633db0939727ff767",
+      "gitBlobSha": "49a2e105d9446294dad495d3f05132d79d180f48"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-004",
+      "size": 10485760,
+      "sha256": "4e873884d76c5241ae0415c7bb3281d983cbb5a4551dec912311b21321c20c5a",
+      "gitBlobSha": "63ca7f2991d528c82fea8f7839410872701c7e52"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-005",
+      "size": 10485760,
+      "sha256": "1c2c19c8476bbea850a097fab7693e914f819f797307a3f4d566d9c0fd315b9b",
+      "gitBlobSha": "78bfbcb11c6b10072da125d10e7f33776d2ae706"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-006",
+      "size": 10485760,
+      "sha256": "89dc34ef4d9dc564ffc217ba9072dbbfa6e53e4a23494089080c5209de4dda67",
+      "gitBlobSha": "20c7e1d79bccc63ce904cb018208e8e2d371c5ab"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-007",
+      "size": 10485760,
+      "sha256": "34d6752b53f2bead21fd46139428b1c9c212ce2b5b1d03844c3a47539ee3f8fc",
+      "gitBlobSha": "32e53556db3ed830769e4a11ea095441b260c1a0"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-008",
+      "size": 1115698,
+      "sha256": "52f7231014445b36848153c72202484e27fdafa1608d68240cbb6f98178434b6",
+      "gitBlobSha": "3d637f7497941db43473aae00bb52c846696a94c"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 646,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/CHANGELOG.md",
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/README_FR.md",
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/docs/CODEX_ISOLATION.md",
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/docs/METRIQUES.json",
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/docs/QA_RESUME.md",
+    "archives/dlc-source-recovery-20261126/alien-isolation/documents/ALIEN_ISOLATION_DLC_V0_8/src/content.json"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

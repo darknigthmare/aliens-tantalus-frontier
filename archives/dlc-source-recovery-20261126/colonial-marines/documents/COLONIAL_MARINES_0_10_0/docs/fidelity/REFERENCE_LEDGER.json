@@ -1,0 +1,2389 @@
+{
+  "version": 1,
+  "date": "2026-09-29",
+  "target": "Aliens: Colonial Marines (2013), campagne et contenus additionnels",
+  "metric1to1": false,
+  "sources": [
+    {
+      "id": "official-game",
+      "title": "SEGA / Steam — Aliens: Colonial Marines Collection",
+      "url": "https://store.steampowered.com/app/49540/",
+      "scope": "Official campaign premise and feature scope"
+    },
+    {
+      "id": "official-stasis",
+      "title": "SEGA / Steam — Stasis Interrupted",
+      "url": "https://store.steampowered.com/app/219443/Aliens_Colonial_Marines_Stasis_Interrupted/",
+      "scope": "Official extension and Hicks framing"
+    },
+    {
+      "id": "weapons-screen",
+      "title": "IMFDB — observed weapons and in-game screenshots",
+      "url": "https://www.imfdb.org/wiki/Aliens:_Colonial_Marines",
+      "scope": "Names, weapon families, secondary mechanisms; not numerical balancing"
+    },
+    {
+      "id": "weapons-index",
+      "title": "StrategyWiki — Weapons",
+      "url": "https://strategywiki.org/wiki/Aliens:_Colonial_Marines/Weapons",
+      "scope": "Cross-check weapons and equipment inventory"
+    },
+    {
+      "id": "legendary",
+      "title": "Gamepressure — Legendary weapons, first-hand guide",
+      "url": "https://www.gamepressure.com/alienscolonialmarines/legendary-weapons/z54872",
+      "scope": "Six legendary items and their mission association"
+    },
+    {
+      "id": "campaign-guide",
+      "title": "Gamepressure — chapter guide and objective index",
+      "url": "https://www.gamepressure.com/alienscolonialmarines/game-guide/z68ce6",
+      "scope": "Named landmarks and order of major objectives, not map measurements"
+    },
+    {
+      "id": "stasis-story",
+      "title": "Xenopedia — Stasis Interrupted",
+      "url": "https://avp.fandom.com/wiki/Stasis_Interrupted",
+      "scope": "Cross-check chronology, protagonists and locations"
+    },
+    {
+      "id": "stasis-chapters",
+      "title": "Weyland Archives — Stasis Interrupted",
+      "url": "https://weyland.fandom.com/wiki/Stasis_Interrupted",
+      "scope": "Chapter names and objective chains, secondary source"
+    },
+    {
+      "id": "character-sheets",
+      "title": "SEGA character sheets reproduced by Yell! Magazine, 11 December 2012",
+      "url": "https://www.yellmagazine.com/aliens-colonial-marines-badass-character-details-revealed/45663/",
+      "scope": "Winter, O’Neal, Bella and Cruz costume reference"
+    },
+    {
+      "id": "reid-profile",
+      "title": "Xenopedia — Lisa Reid",
+      "url": "https://avp.fandom.com/wiki/Lisa_Reid",
+      "scope": "Flight equipment and role; facial likeness not authenticated"
+    },
+    {
+      "id": "collector",
+      "title": "Collector’s Edition Pack — publisher description reproduced by MobyGames",
+      "url": "https://www.mobygames.com/game/94753/aliens-colonial-marines-collectors-edition-pack/",
+      "scope": "XM99A and electroshock bonus; Academy remains outside this build"
+    }
+  ],
+  "changes": [],
+  "gaps": [
+    {
+      "domain": "Plans",
+      "status": "partiel",
+      "detail": "Tous les secteurs du jeu commercial ne sont pas encore relevés. Les salles de référence ajoutées ont des proportions originales. Aucun pourcentage de fidélité métrique annoncé."
+    },
+    {
+      "domain": "Topologie globale",
+      "status": "partiel",
+      "detail": "Liaisons locales réciproques et approches contrôlées ; superposition géographique entre missions et dimensions réelles non certifiées."
+    },
+    {
+      "domain": "Narration Stasis",
+      "status": "partiel",
+      "detail": "Noms Asylum/Awakening/Deliverance/Redemption et escorte de Hicks corrigés. Mort de Lisbeth/Stone, vol du skiff et capture : dossiers ou raccords, pas cinématiques 1:1."
+    },
+    {
+      "domain": "Personnages",
+      "status": "partiel",
+      "detail": "Costumes différenciés. Visages, mensurations, animations, voix et l’ensemble des personnages secondaires non restitués 1:1."
+    },
+    {
+      "domain": "Arsenal",
+      "status": "partiel",
+      "detail": "Les 21 profils sont utilisables, avec leur comportement de famille. La progression par XP/commendations, les pistolets à munitions infinies et l’abandon automatique des armes lourdes du jeu commercial ne sont pas encore reproduits ; la dotation tactique héritée est conservée."
+    },
+    {
+      "domain": "Multijoueur et cartes DLC",
+      "status": "absent",
+      "detail": "Pas de coopération réseau, Versus, cartes Reconnaissance/Movie Map fidèles ni terrain Academy. Bug Hunt conserve trois arènes originales et ne prétend pas être Broadside/Mercenary/Tribute."
+    },
+    {
+      "domain": "Archives originales",
+      "status": "partiel",
+      "detail": "Documents et dialogues originaux conservés ; pas transcription intégrale des audio logs, plaques et cinématiques du jeu."
+    },
+    {
+      "domain": "Moteur Tantalus parent",
+      "status": "non intégré",
+      "detail": "Ce paquet reste autonome. Aucun push ou déploiement."
+    }
+  ],
+  "equipment": [
+    {
+      "name": "M314 — détecteur de mouvements",
+      "status": "adapté",
+      "runtime": "tracker",
+      "gap": "Relevés discrets, pas écran et équilibrage exacts"
+    },
+    {
+      "name": "M40 HEDP — grenade",
+      "status": "adapté",
+      "runtime": "grenade",
+      "gap": "Balistique et dégâts de transposition"
+    },
+    {
+      "name": "UA571-C — sentinelle",
+      "status": "adapté",
+      "runtime": "sentry",
+      "gap": "Transport et maintenance originaux"
+    },
+    {
+      "name": "M20 — mine Claymore",
+      "status": "partiel",
+      "runtime": "mine",
+      "gap": "Mine de proximité existante ; cône directionnel authentique non reproduit"
+    },
+    {
+      "name": "Chalumeau / soudeur",
+      "status": "partiel",
+      "runtime": "cut",
+      "gap": "Interactions maintenues ; outil et soudure libre non réalisés"
+    },
+    {
+      "name": "P-5000 — Power Loader",
+      "status": "adapté",
+      "runtime": "loader",
+      "gap": "Combat Raven, pas animation intégrale des manipulations"
+    },
+    {
+      "name": "Lance-grenades sous canon",
+      "status": "adapté",
+      "runtime": "attachment-grenade",
+      "gap": "5 pour tir secondaire, stock partagé dédié"
+    },
+    {
+      "name": "Fusil sous canon U7",
+      "status": "adapté",
+      "runtime": "attachment-shotgun",
+      "gap": "Gerbe réelle, valeurs originales"
+    },
+    {
+      "name": "ID23 — incinérateur sous canon",
+      "status": "adapté",
+      "runtime": "attachment-incinerator",
+      "gap": "Projectile incendiaire réel, pas modèle exact"
+    },
+    {
+      "name": "G2 — grenade électrochoc",
+      "status": "absent",
+      "runtime": null,
+      "gap": "Non implémenté : ne pas confondre avec la mine ou le leurre"
+    },
+    {
+      "name": "Tourelle téléopérée WY",
+      "status": "absent",
+      "runtime": null,
+      "gap": "Pas de poste pilotable manuellement"
+    },
+    {
+      "name": "Lunettes, peintures, toutes modifications",
+      "status": "partiel",
+      "runtime": "armory",
+      "gap": "Catalogue des mécanismes principaux seulement, pas arbre complet"
+    },
+    {
+      "name": "Leurre, kit de réparation, soins",
+      "status": "original",
+      "runtime": "tactics/field",
+      "gap": "Conservés comme ajouts Tantalus, pas revendiqués comme équipement officiel identique"
+    }
+  ],
+  "portalPolicy": "Chaque accès possède une paroi porteuse ou une ouverture extérieure, un identifiant de liaison réciproque et une zone d’approche. Les transits spatiaux sont explicitement des transferts, pas des portes contiguës.",
+  "doorChanges": [
+    {
+      "room": "acm-01-02",
+      "door": "link-0-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-01-03",
+      "door": "link-0-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-01-03",
+      "door": "acm-01-03-to-acm-01-ref-casevac",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-01-04",
+      "door": "acm-01-04-to-acm-01-ref-casevac",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-01-05",
+      "door": "link-0-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-01-05",
+      "door": "link-0-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-02-02",
+      "door": "link-1-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-02-03",
+      "door": "link-1-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-02-03",
+      "door": "acm-02-03-to-acm-02-ref-engineering",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-02-04",
+      "door": "acm-02-04-to-acm-02-ref-engineering",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-02-05",
+      "door": "link-1-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-02-05",
+      "door": "link-1-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-03-02",
+      "door": "link-2-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-03-02",
+      "door": "acm-03-02-to-acm-03-ref-crane",
+      "before": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-03-03",
+      "door": "link-2-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-03-03",
+      "door": "acm-03-03-to-acm-03-ref-crane",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-03-05",
+      "door": "link-2-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-03-05",
+      "door": "link-2-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-02",
+      "door": "link-3-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-02",
+      "door": "acm-04-02-to-acm-04-06",
+      "before": {
+        "x": 550,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 550,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "acm-04-02",
+      "door": "acm-04-02-to-acm-04-ref-operations",
+      "before": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-03",
+      "door": "link-3-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-03",
+      "door": "acm-04-03-to-acm-04-07",
+      "before": {
+        "x": 480,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 480,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "acm-04-03",
+      "door": "acm-04-03-to-acm-04-ref-morgue",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-04-05",
+      "door": "link-3-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-05",
+      "door": "link-3-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-02",
+      "door": "link-4-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-03",
+      "door": "link-4-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-03",
+      "door": "acm-05-03-to-acm-05-ref-reid",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-05-04",
+      "door": "acm-05-04-to-acm-05-ref-tower",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-05",
+      "door": "link-4-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-05",
+      "door": "link-4-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-06-02",
+      "door": "link-5-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-06-03",
+      "door": "link-5-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-06-03",
+      "door": "acm-06-03-to-acm-06-ref-warehouse",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-06-04",
+      "door": "acm-06-04-to-acm-06-ref-warehouse",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-06-05",
+      "door": "link-5-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-06-05",
+      "door": "link-5-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-01",
+      "door": "acm-07-01-to-acm-07-ref-specimens",
+      "before": {
+        "x": 1134,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1134,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-02",
+      "door": "link-6-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-03",
+      "door": "link-6-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-05",
+      "door": "link-6-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-05",
+      "door": "link-6-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-02",
+      "door": "link-7-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-03",
+      "door": "link-7-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-03",
+      "door": "acm-08-03-to-acm-08-06",
+      "before": {
+        "x": 600,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 600,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-03",
+      "door": "acm-08-03-to-acm-08-ref-pilot",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-08-04",
+      "door": "acm-08-04-to-acm-08-06",
+      "before": {
+        "x": 900,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 900,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-04",
+      "door": "acm-08-04-to-acm-08-ref-pilot",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-08-05",
+      "door": "link-7-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-05",
+      "door": "link-7-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-02",
+      "door": "link-8-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-02",
+      "door": "acm-09-02-to-acm-09-ref-operations",
+      "before": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-03",
+      "door": "link-8-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-03",
+      "door": "acm-09-03-to-acm-09-ref-operations",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-05",
+      "door": "link-8-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-05",
+      "door": "link-8-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-10-02",
+      "door": "link-9-3-1",
+      "before": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 780,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-10-03",
+      "door": "link-9-4-2",
+      "before": {
+        "x": 1092,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-10-03",
+      "door": "acm-10-03-to-acm-10-ref-aa-cache",
+      "before": {
+        "x": 1323,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1323,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-10-05",
+      "door": "link-9-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-10-05",
+      "door": "link-9-4-4",
+      "before": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1092,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-11-01",
+      "door": "link-10-1-0",
+      "before": {
+        "x": 820,
+        "z": 0.08,
+        "visualZ": 0.08,
+        "kind": "door"
+      },
+      "after": {
+        "x": 820,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-11-01",
+      "door": "link-10-2-0",
+      "before": {
+        "x": 1880,
+        "z": 0.08,
+        "visualZ": 0.08,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1880,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-11-02",
+      "door": "link-10-3-1",
+      "before": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 1412,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-11-04",
+      "door": "acm-11-04-to-acm-11-ref-bridge",
+      "before": {
+        "x": 1134,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1134,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-11-05",
+      "door": "link-10-3-4",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-06",
+      "door": "acm-07-06-to-acm-07-07",
+      "before": {
+        "x": 730,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 730,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-07-07",
+      "door": "acm-07-07-to-acm-07-06",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-06",
+      "door": "acm-04-06-to-acm-04-02",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "acm-04-06",
+      "door": "acm-04-06-to-acm-04-07",
+      "before": {
+        "x": 1332,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 1332,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-01-02",
+      "door": "stasis-01-02-to-stasis-01-03",
+      "before": {
+        "x": 1170,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1170,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-01-02",
+      "door": "stasis-01-02-to-stasis-01-04",
+      "before": {
+        "x": 520,
+        "z": 0.87,
+        "visualZ": 0.87,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 520,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "stasis-01-03",
+      "door": "stasis-01-03-to-stasis-01-04",
+      "before": {
+        "x": 760,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 760,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "stasis-01-05",
+      "door": "stasis-01-05-to-stasis-01-ref-parents",
+      "before": {
+        "x": 1216,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1216,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-02-01",
+      "door": "stasis-02-01-to-stasis-02-ref-cryo",
+      "before": {
+        "x": 1096,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1096,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-02-02",
+      "door": "stasis-02-02-to-stasis-02-04",
+      "before": {
+        "x": 910,
+        "z": 0.62,
+        "visualZ": 0.12,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 910,
+        "z": 0.62,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "stasis-02-03",
+      "door": "stasis-02-03-to-stasis-02-04",
+      "before": {
+        "x": 670,
+        "z": 0.85,
+        "visualZ": 0.85,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 670,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "stairs"
+      }
+    },
+    {
+      "room": "stasis-02-05",
+      "door": "stasis-02-05-to-stasis-02-ref-skiff",
+      "before": {
+        "x": 1323,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1323,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-03-01",
+      "door": "stasis-03-01-to-stasis-03-ref-resolute",
+      "before": {
+        "x": 1153,
+        "z": 0.12,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1153,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-03-02",
+      "door": "stasis-03-02-to-stasis-03-04",
+      "before": {
+        "x": 870,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 870,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "stasis-03-04",
+      "door": "stasis-03-04-to-stasis-03-02",
+      "before": {
+        "x": 820,
+        "z": 0.84,
+        "visualZ": 0.84,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 820,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "stasis-04-02",
+      "door": "stasis-04-02-to-stasis-04-04",
+      "before": {
+        "x": 880,
+        "z": 0.12,
+        "visualZ": 0.12,
+        "kind": "door"
+      },
+      "after": {
+        "x": 880,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-04-02",
+      "door": "stasis-04-02-to-stasis-04-ref-gas",
+      "before": {
+        "x": 2122,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "stairs"
+      },
+      "after": {
+        "x": 2122,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-04-03",
+      "door": "stasis-04-03-to-stasis-04-ref-gas",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "stasis-04-05",
+      "door": "stasis-04-05-to-stasis-04-04",
+      "before": {
+        "x": 830,
+        "z": 0.13,
+        "visualZ": 0.13,
+        "kind": "door"
+      },
+      "after": {
+        "x": 830,
+        "z": 0.16,
+        "visualZ": 0.16,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-01-ref-casevac",
+      "door": "acm-01-ref-casevac-to-acm-01-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-01-ref-casevac",
+      "door": "acm-01-ref-casevac-to-acm-01-04",
+      "before": {
+        "x": 1692,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1692,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-02-ref-engineering",
+      "door": "acm-02-ref-engineering-to-acm-02-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-02-ref-engineering",
+      "door": "acm-02-ref-engineering-to-acm-02-04",
+      "before": {
+        "x": 2032,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2032,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-03-ref-crane",
+      "door": "acm-03-ref-crane-to-acm-03-02",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-03-ref-crane",
+      "door": "acm-03-ref-crane-to-acm-03-03",
+      "before": {
+        "x": 1872,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1872,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-04-ref-operations",
+      "door": "acm-04-ref-operations-to-acm-04-02",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-ref-operations",
+      "door": "acm-04-ref-operations-to-acm-04-ref-morgue",
+      "before": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2012,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-ref-morgue",
+      "door": "acm-04-ref-morgue-to-acm-04-ref-operations",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-04-ref-morgue",
+      "door": "acm-04-ref-morgue-to-acm-04-03",
+      "before": {
+        "x": 1752,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1752,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-05-ref-reid",
+      "door": "acm-05-ref-reid-to-acm-05-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-05-ref-reid",
+      "door": "acm-05-ref-reid-to-acm-05-ref-tower",
+      "before": {
+        "x": 1752,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1752,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-ref-tower",
+      "door": "acm-05-ref-tower-to-acm-05-ref-reid",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-05-ref-tower",
+      "door": "acm-05-ref-tower-to-acm-05-04",
+      "before": {
+        "x": 2112,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 2112,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-06-ref-warehouse",
+      "door": "acm-06-ref-warehouse-to-acm-06-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-06-ref-warehouse",
+      "door": "acm-06-ref-warehouse-to-acm-06-04",
+      "before": {
+        "x": 2052,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2052,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-07-ref-specimens",
+      "door": "acm-07-ref-specimens-to-acm-07-01",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-08-ref-pilot",
+      "door": "acm-08-ref-pilot-to-acm-08-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-08-ref-pilot",
+      "door": "acm-08-ref-pilot-to-acm-08-04",
+      "before": {
+        "x": 2432,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 2432,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-09-ref-operations",
+      "door": "acm-09-ref-operations-to-acm-09-02",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-09-ref-operations",
+      "door": "acm-09-ref-operations-to-acm-09-03",
+      "before": {
+        "x": 2032,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 2032,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "acm-10-ref-aa-cache",
+      "door": "acm-10-ref-aa-cache-to-acm-10-03",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "acm-11-ref-bridge",
+      "door": "acm-11-ref-bridge-to-acm-11-04",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    },
+    {
+      "room": "stasis-01-ref-parents",
+      "door": "stasis-01-ref-parents-to-stasis-01-05",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-01-ref-parents",
+      "door": "stasis-01-ref-parents-to-stasis-01-ref-reactor",
+      "before": {
+        "x": 1892,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 1892,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-01-ref-reactor",
+      "door": "stasis-01-ref-reactor-to-stasis-01-ref-parents",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-02-ref-cryo",
+      "door": "stasis-02-ref-cryo-to-stasis-02-01",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-02-ref-skiff",
+      "door": "stasis-02-ref-skiff-to-stasis-02-05",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-02-ref-skiff",
+      "door": "stasis-02-ref-skiff-to-stasis-02-ref-fiorina",
+      "before": {
+        "x": 1952,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "transit"
+      },
+      "after": {
+        "x": 1952,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "transit"
+      }
+    },
+    {
+      "room": "stasis-02-ref-fiorina",
+      "door": "stasis-02-ref-fiorina-to-stasis-02-ref-skiff",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "transit"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "transit"
+      }
+    },
+    {
+      "room": "stasis-03-ref-resolute",
+      "door": "stasis-03-ref-resolute-to-stasis-03-01",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-04-ref-gas",
+      "door": "stasis-04-ref-gas-to-stasis-04-02",
+      "before": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "door"
+      },
+      "after": {
+        "x": 88,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "door"
+      }
+    },
+    {
+      "room": "stasis-04-ref-gas",
+      "door": "stasis-04-ref-gas-to-stasis-04-03",
+      "before": {
+        "x": 2232,
+        "z": 0.62,
+        "visualZ": null,
+        "kind": "lift"
+      },
+      "after": {
+        "x": 2232,
+        "z": 0.62,
+        "visualZ": 0.62,
+        "kind": "lift"
+      }
+    }
+  ],
+  "furnitureMoves": [
+    {
+      "room": "acm-01-03",
+      "prop": "acm-01-03-p3",
+      "from": [
+        1218,
+        0.14
+      ],
+      "to": [
+        1280,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-04-03",
+      "prop": "acm-04-03-p2",
+      "from": [
+        1218,
+        0.25
+      ],
+      "to": [
+        1280,
+        0.24
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-05-02",
+      "prop": "acm-05-02-p1",
+      "from": [
+        630,
+        0.13
+      ],
+      "to": [
+        560,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-07-03",
+      "prop": "acm-07-03-p2",
+      "from": [
+        1113,
+        0.88
+      ],
+      "to": [
+        1190,
+        0.86
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-07-04",
+      "prop": "acm-07-04-p3",
+      "from": [
+        1476,
+        0.12
+      ],
+      "to": [
+        1550,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-08-04",
+      "prop": "acm-08-04-p1",
+      "from": [
+        756,
+        0.14
+      ],
+      "to": [
+        650,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-08-04",
+      "prop": "acm-08-04-p2",
+      "from": [
+        1080,
+        0.12
+      ],
+      "to": [
+        1100,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-09-04",
+      "prop": "acm-09-04-p2",
+      "from": [
+        810,
+        0.22
+      ],
+      "to": [
+        920,
+        0.24
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-11-04",
+      "prop": "acm-11-04-p3",
+      "from": [
+        1224,
+        0.14
+      ],
+      "to": [
+        1370,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "acm-08-06",
+      "prop": "acm-08-06-p3",
+      "from": [
+        1033,
+        0.14
+      ],
+      "to": [
+        1100,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-01-02",
+      "prop": "stasis-01-02-p0",
+      "from": [
+        410,
+        0.12
+      ],
+      "to": [
+        290,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-01-02",
+      "prop": "stasis-01-02-p3",
+      "from": [
+        1578,
+        0.85
+      ],
+      "to": [
+        1640,
+        0.86
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-01-05",
+      "prop": "stasis-01-05-p2",
+      "from": [
+        1254,
+        0.12
+      ],
+      "to": [
+        1370,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-02-01",
+      "prop": "stasis-02-01-p2",
+      "from": [
+        1218,
+        0.13
+      ],
+      "to": [
+        1280,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-02-05",
+      "prop": "stasis-02-05-p2",
+      "from": [
+        1365,
+        0.12
+      ],
+      "to": [
+        1550,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-03-02",
+      "prop": "stasis-03-02-p1",
+      "from": [
+        752,
+        0.12
+      ],
+      "to": [
+        650,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-03-02",
+      "prop": "stasis-03-02-p7",
+      "from": [
+        1733,
+        0.84
+      ],
+      "to": [
+        1820,
+        0.86
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-03-04",
+      "prop": "stasis-03-04-p1",
+      "from": [
+        790,
+        0.14
+      ],
+      "to": [
+        1010,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-04-02",
+      "prop": "stasis-04-02-p1",
+      "from": [
+        884,
+        0.12
+      ],
+      "to": [
+        1100,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    },
+    {
+      "room": "stasis-04-02",
+      "prop": "stasis-04-02-p5",
+      "from": [
+        774,
+        0.14
+      ],
+      "to": [
+        650,
+        0.13
+      ],
+      "reason": "Dégagement réel du seuil ou de l’interaction"
+    }
+  ],
+  "newRooms": [
+    "acm-01-ref-casevac",
+    "acm-02-ref-engineering",
+    "acm-03-ref-crane",
+    "acm-04-ref-operations",
+    "acm-04-ref-morgue",
+    "acm-05-ref-reid",
+    "acm-05-ref-tower",
+    "acm-06-ref-warehouse",
+    "acm-07-ref-specimens",
+    "acm-08-ref-pilot",
+    "acm-09-ref-operations",
+    "acm-10-ref-aa-cache",
+    "acm-11-ref-bridge",
+    "stasis-01-ref-parents",
+    "stasis-01-ref-reactor",
+    "stasis-02-ref-cryo",
+    "stasis-02-ref-skiff",
+    "stasis-02-ref-fiorina",
+    "stasis-03-ref-resolute",
+    "stasis-04-ref-gas"
+  ],
+  "weaponRuleGap": "Les 21 profils sont utilisables, avec leur comportement de famille. La progression par XP/commendations, les pistolets à munitions infinies et l’abandon automatique des armes lourdes du jeu commercial ne sont pas encore reproduits ; la dotation tactique héritée est conservée."
+}

@@ -1,0 +1,4 @@
+# Only needed to rebuild documents or run browser QA, never to play the standalone.
+Pillow
+beautifulsoup4
+playwright

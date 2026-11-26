@@ -1,0 +1,27 @@
+{
+  "version": "0.18.0-alpha",
+  "reviewDate": "2026-09-29",
+  "reviewed": [
+    {
+      "id": "MDN-STORAGE",
+      "title": "MDN — Storage.setItem et disponibilité de Web Storage",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem",
+      "use": "Les données sont sérialisées en chaînes ; les écritures peuvent échouer, notamment par dépassement de quota. Les erreurs sont traitées sans effacement de la copie principale valide.",
+      "status": "Documentation technique primaire ; n’atteste pas un essai de persistance sur l’appareil du joueur."
+    },
+    {
+      "id": "MDN-AVAILABILITY",
+      "title": "MDN — Using the Web Storage API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API",
+      "use": "L’existence de localStorage ne garantit pas sa disponibilité. Les accès sont protégés ; l’export JSON reste une option de transfert.",
+      "status": "Référence technique ; stockage attaché à l’origine, pas une sauvegarde cloud."
+    }
+  ],
+  "interpretation": "La galerie thermique reçoit un dessin original sur les équipements déjà implantés. Aucune nouvelle implantation ni température n’est attribuée au film. Les jalons sont une option d’interface, pas des terminaux fictionnels ajoutés au récit.",
+  "inheritedReferences": "Les références de production des versions précédentes restent dans le manifeste et les dossiers historiques. Elles ne sont pas toutes annoncées comme relues.",
+  "unresolved": [
+    "Emplacement exact de l’injection de Kay.",
+    "Plans du film non annotés image par image.",
+    "Dimensions et raccords exacts non certifiés."
+  ]
+}

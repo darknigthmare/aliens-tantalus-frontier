@@ -1,0 +1,6 @@
+ALIENS: COLONIAL MARINES — adaptation non officielle 0.10.0.
+Aliens, personnages, noms et concepts appartiennent à leurs ayants droit. Ce prototype ne revendique aucune approbation officielle.
+Plans, silhouettes vectorielles, dialogues et bruitages de ce module sont originaux/provisoires, pas des fichiers commerciaux extraits.
+La fidélité 1:1 n’est pas atteinte ; consulter l’audit explicite des écarts.
+Livraison autonome locale, sans push, déploiement ni fusion native Tantalus.
+Conserver les exports JSON : aucune certification de persistance native sur le navigateur de l’utilisateur.

@@ -1,0 +1,44 @@
+{
+  "version": "12.0.0-candidate.1",
+  "htmlSha256": "036afcd73b1e1d2089d9e73f1f136b70a7cd9ffb5b42fc43fa779d1f181a4cde",
+  "counts": {
+    "rooms": 44,
+    "edges": 54,
+    "doors": 108,
+    "objectives": 41,
+    "archives": 48,
+    "gear": 37,
+    "exhibits": 16,
+    "props": 474,
+    "families": 121
+  },
+  "systemChecks": {
+    "passed": 1297,
+    "total": 1297
+  },
+  "campaigns": {
+    "passed": 36,
+    "total": 36
+  },
+  "spatial": {
+    "rooms": 44,
+    "edges": 54,
+    "endpoints": 108,
+    "checks": 1131,
+    "passed": 1131
+  },
+  "browserCurrentHtml": {
+    "passed": 70,
+    "total": 70
+  },
+  "installer": {
+    "passed": 11,
+    "total": 11
+  },
+  "documents": {
+    "RAPPORT_PROMETHEUS_V12.html": "cdb51577f5dc199e406ae1922458a9701c9086a8f66804d6e066e87119e0a656",
+    "CODEX_PROMETHEUS_V12.html": "d3738185864c12d1a91a8ff17d9eb2cb892ab72990e022ed43efc584892282df",
+    "AUDIT_FIDELITE_PROMETHEUS_V12.html": "66749cc53dd6b6a49e648886f6955e147b8be81d0c69e08bfd5847c25115f7d5",
+    "CODEX_PROMETHEUS_V12.md": "a44a6f704ad2204d0c5aca6213c8674f847c6166c8448c15886ada57a86b3d09"
+  }
+}

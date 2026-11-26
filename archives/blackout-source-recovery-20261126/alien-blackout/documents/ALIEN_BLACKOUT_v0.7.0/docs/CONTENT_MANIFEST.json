@@ -1,0 +1,19 @@
+{
+  "version": "0.7.0",
+  "rooms": 56,
+  "side": 4,
+  "depth": 52,
+  "doors": 66,
+  "doorFaces": 132,
+  "vents": 21,
+  "props": 41,
+  "placements": 703,
+  "mainTasks": 21,
+  "services": 21,
+  "rules": 163,
+  "codex": 271,
+  "equipment": 16,
+  "personnel": 5,
+  "sources": 10,
+  "gaps": 11
+}

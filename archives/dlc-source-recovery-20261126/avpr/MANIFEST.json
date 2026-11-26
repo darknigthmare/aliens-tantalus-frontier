@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+  "archive": {
+    "size": 32506386,
+    "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+    "gitBlobSha": "40c677cba3e62dcc30b46860057255bdc7914800"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-000",
+      "size": 10485760,
+      "sha256": "7c7a3ce0b8aff559174ae6d532f88ed61cbe1038cea0131262c47778b39306db",
+      "gitBlobSha": "1655bdf732da78f81e7fd77461b7118bfcdf9ecf"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-001",
+      "size": 10485760,
+      "sha256": "60e054fda5109b54aa36233d43232b35ce9b7e4085d2b9b75d316b3ccbc5b933",
+      "gitBlobSha": "076159d872ddbaf39f64daeef0ce7275ac2634ee"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-002",
+      "size": 10485760,
+      "sha256": "188d89043fe8d7d97fc2f66a164cc384d59d2b21dd7cf4344cf3df496d981694",
+      "gitBlobSha": "730c94722f4bd6f4360937469114b5b26921be0e"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-003",
+      "size": 1049106,
+      "sha256": "e147119e77a477f32d4dfc7dad84a9f2e50b888faf55de2cde1059601fa118f8",
+      "gitBlobSha": "b6104f2f63856b68dd51dfcb93c41182aff60704"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 352,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/LIRE_DABORD.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/NOTICE.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/SHA256SUMS.txt",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/AUDIT_FIDELITE_V0_10.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_10.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_2.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_3.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_4.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_5.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_6.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_7.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_8.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_9.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CODEX_AVPR.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CODEX_V0_10.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/CONTENT_MANIFEST.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/FIDELITY_CHANGES.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/FIDELITY_MANIFEST.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/STATUT_ET_SOURCES.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v03/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v04/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v05/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v06/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v07/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v08/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/baseline-v09/content.json",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/docs/tests-v09-original/README.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/rapport/ENVIRONNEMENT.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/rapport/HISTORIQUE_VALIDATION_0_10.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/rapport/QA.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/tests/fixtures/previous-v07/PROVENANCE.md",
+    "archives/dlc-source-recovery-20261126/avpr/documents/AVPR_REQUIEM_V010/tests/fixtures/previous-v09/PROVENANCE.md"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

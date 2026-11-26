@@ -1,0 +1,4528 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+  "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+  "files": [
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/CHANGELOG.md",
+      "crc32": "84d46f57",
+      "size": 9173,
+      "sha256": "a3a87c3db941362b6ad9f862f4c4b4390a018130f604ba84fe58f417d8fdaca1",
+      "gitBlobSha": "825cbb74eaf7d4095fd54fb987f8f3f0bc0f0720"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/DEMARRER_MAC_LINUX.sh",
+      "crc32": "1142debb",
+      "size": 259,
+      "sha256": "8699318e4f3a9b41cc53bb9bc436bd16cb455755783f34ee4f5b20ec6dd357c3",
+      "gitBlobSha": "52e8f6b884136cbf2cd5170ac2a8764dce4a68e7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/DEMARRER_WINDOWS.cmd",
+      "crc32": "792592ee",
+      "size": 267,
+      "sha256": "193007ecd05095a56812935f5c190f0fd1b886b1c231f3e7a1efecf77043fff7",
+      "gitBlobSha": "e315f72ef0a489c87c500e53d9b009c8fb125318"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/JOUER_ISOLATION.html",
+      "crc32": "3030cd99",
+      "size": 1107027,
+      "sha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "gitBlobSha": "224754407a364badf0b38cb884742d19704ab43d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/README_FR.md",
+      "crc32": "53f39060",
+      "size": 9204,
+      "sha256": "2d5f06c8d8dc12dcce4827d77dfffe59e64a2c61c3bbc5518eed08d8cebcc3b4",
+      "gitBlobSha": "0d5971391980095c574893a3209a8510b7e43ee6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_0.svg",
+      "crc32": "fedb1d22",
+      "size": 4216,
+      "sha256": "de48b2e4badd76252095cbc683889954018e698a83b8c807bab1a5324cb21033",
+      "gitBlobSha": "44617ac50e4de18423a7922c1f7433c3795e90ab"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_1.svg",
+      "crc32": "d11b17d4",
+      "size": 4565,
+      "sha256": "a6f9431060142ea63505343a522ed465cc5b42c52402d67b9fce62226640c7ec",
+      "gitBlobSha": "c3232aa4648392e71907a698c65e5a4649a6a87e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_2.svg",
+      "crc32": "4f715263",
+      "size": 4215,
+      "sha256": "1aeb103200f18e08f84cceda8eac39db9667517752f39d89ef987c28d7e2bf08",
+      "gitBlobSha": "9eda28257fc77f2104608e5bd40247b82cc61d8c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_3.svg",
+      "crc32": "d11b17d4",
+      "size": 4565,
+      "sha256": "a6f9431060142ea63505343a522ed465cc5b42c52402d67b9fce62226640c7ec",
+      "gitBlobSha": "c3232aa4648392e71907a698c65e5a4649a6a87e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_4.svg",
+      "crc32": "fedb1d22",
+      "size": 4216,
+      "sha256": "de48b2e4badd76252095cbc683889954018e698a83b8c807bab1a5324cb21033",
+      "gitBlobSha": "44617ac50e4de18423a7922c1f7433c3795e90ab"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_5.svg",
+      "crc32": "2a32a439",
+      "size": 4568,
+      "sha256": "d82548bf10d14835c8a99311dc1ee5e85f51ac502cfe97e0f14e59c3cec2e054",
+      "gitBlobSha": "0c0a8ffe829dd72be21332740bd002f3a28a31dd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_6.svg",
+      "crc32": "6a4c0b27",
+      "size": 4218,
+      "sha256": "61c96c3bd4730811aa19c08937bb82de09361dbbef33d7bed13e36af103f96d3",
+      "gitBlobSha": "6f043e16df5c1a0ac57fc40e2ecc3667aac7c93c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_7.svg",
+      "crc32": "2a32a439",
+      "size": 4568,
+      "sha256": "d82548bf10d14835c8a99311dc1ee5e85f51ac502cfe97e0f14e59c3cec2e054",
+      "gitBlobSha": "0c0a8ffe829dd72be21332740bd002f3a28a31dd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_0.svg",
+      "crc32": "bc73311a",
+      "size": 2956,
+      "sha256": "09cd18f28de408aedf6316da676746284acc31900ba918275dbcad7f2585638f",
+      "gitBlobSha": "0352c603bd5217c7ee5806f4e07f30e6f9fd5e08"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_1.svg",
+      "crc32": "c92a52ee",
+      "size": 3223,
+      "sha256": "5b6fc65662f33516e15c78f01f1cb45fe63298529cfe99be61a5782911cf8db8",
+      "gitBlobSha": "5528aadbd3d2773dd15d7ca790778bbed1cd0434"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_2.svg",
+      "crc32": "93610985",
+      "size": 2951,
+      "sha256": "e5761bec02a22fbf69476b91a5a6cb23f939555fe1f4283de79cc15577ddbfeb",
+      "gitBlobSha": "2088f3370ecce6d0f88ce139506477213f7be620"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_3.svg",
+      "crc32": "c92a52ee",
+      "size": 3223,
+      "sha256": "5b6fc65662f33516e15c78f01f1cb45fe63298529cfe99be61a5782911cf8db8",
+      "gitBlobSha": "5528aadbd3d2773dd15d7ca790778bbed1cd0434"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_4.svg",
+      "crc32": "bc73311a",
+      "size": 2956,
+      "sha256": "09cd18f28de408aedf6316da676746284acc31900ba918275dbcad7f2585638f",
+      "gitBlobSha": "0352c603bd5217c7ee5806f4e07f30e6f9fd5e08"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_5.svg",
+      "crc32": "dbe5200e",
+      "size": 3229,
+      "sha256": "569a29522a8da10e5e3d2c1a09cecf755bb4555c96bf21b411862a84f0b4413e",
+      "gitBlobSha": "c0f20d035e3d94f159f9d5cb499be4096479ff66"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_6.svg",
+      "crc32": "171098f0",
+      "size": 2958,
+      "sha256": "9d483c05b2861f89bba36f5fc6c81ce09c7603cbc5583a5f9e8d93c728e32be1",
+      "gitBlobSha": "d51cdeb5dc965a2b86467f047eb4d7b35d7ecf66"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_7.svg",
+      "crc32": "d87a7aaf",
+      "size": 3227,
+      "sha256": "6f9f863f56156be8bd7a11e6106667a5fdc6a48240aad207ec1aed0ae93bcf29",
+      "gitBlobSha": "df57aca6ad4a618cfc0c0c48d973c9d175724d39"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_0.svg",
+      "crc32": "d6af15e8",
+      "size": 2937,
+      "sha256": "da3ba6b44994f7b40c8e8b7f8c0c3230d795492d74bb6e624c2e47017eae5ff6",
+      "gitBlobSha": "6eab613b2d283d1c891f8d6c820434c3aeddfe9b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_1.svg",
+      "crc32": "1e55c8d5",
+      "size": 3204,
+      "sha256": "df8c5df76cd1d628afcc82d09b887ced578dce531f78b859ce3fb5af9908b740",
+      "gitBlobSha": "d3a608322ec7a26977917b0e99e52ecb8ec4ee58"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_2.svg",
+      "crc32": "7e0938d7",
+      "size": 2932,
+      "sha256": "66617b9c7ebcec40cf5d67df0d52d1c17e90a092bb080ae304e2aade2e825ba9",
+      "gitBlobSha": "b28ca8d002ad856b688c991a3bf0f8c82d507f64"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_3.svg",
+      "crc32": "1e55c8d5",
+      "size": 3204,
+      "sha256": "df8c5df76cd1d628afcc82d09b887ced578dce531f78b859ce3fb5af9908b740",
+      "gitBlobSha": "d3a608322ec7a26977917b0e99e52ecb8ec4ee58"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_4.svg",
+      "crc32": "d6af15e8",
+      "size": 2937,
+      "sha256": "da3ba6b44994f7b40c8e8b7f8c0c3230d795492d74bb6e624c2e47017eae5ff6",
+      "gitBlobSha": "6eab613b2d283d1c891f8d6c820434c3aeddfe9b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_5.svg",
+      "crc32": "2a4a2071",
+      "size": 3210,
+      "sha256": "cd9b24dc2f9a466ce7a3c453e5465a4b1810364eaeb8bb8e9ca1a2f0a364810a",
+      "gitBlobSha": "a657062b5912bfecc3c16e4617c1730692b57476"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_6.svg",
+      "crc32": "0189835c",
+      "size": 2939,
+      "sha256": "c3ce76c9ed8f8656c1f146016856a4b0cfb94d55f567e0d4b9913903afc37803",
+      "gitBlobSha": "5a158e2d99d5273566250d57aa1ef2ce7f252346"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_7.svg",
+      "crc32": "42211ef0",
+      "size": 3208,
+      "sha256": "b93705db1cad7d2bd21dc4f42568c2cbffe301dc864f82b38c006aa80adccd0c",
+      "gitBlobSha": "c1e26f0caf48ec1c7c2ce258c75e9483f12e9077"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_0.svg",
+      "crc32": "14d5e159",
+      "size": 3535,
+      "sha256": "066a6d5747f980390e8c4a0160c29be55a28063ed9ac0803a84032933f72f17e",
+      "gitBlobSha": "bbe3da99f723cd18f9284ee87001113bb0710b29"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_1.svg",
+      "crc32": "acd14b63",
+      "size": 3802,
+      "sha256": "9e3cfa7410dc7a0fb779915bcc664affe2d8a338bb802e306e15522801f1cad6",
+      "gitBlobSha": "d39cfce01601841d626fb4a2c2f805eded2f6bf0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_2.svg",
+      "crc32": "2203dc43",
+      "size": 3530,
+      "sha256": "99ebc4fa579ae7eeae5062185dcc930518d1f1b73ed47f9f253c7d031c8642b1",
+      "gitBlobSha": "dc5147f3ee3d2b5e0a569e3298b63a53b4a93600"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_3.svg",
+      "crc32": "acd14b63",
+      "size": 3802,
+      "sha256": "9e3cfa7410dc7a0fb779915bcc664affe2d8a338bb802e306e15522801f1cad6",
+      "gitBlobSha": "d39cfce01601841d626fb4a2c2f805eded2f6bf0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_4.svg",
+      "crc32": "14d5e159",
+      "size": 3535,
+      "sha256": "066a6d5747f980390e8c4a0160c29be55a28063ed9ac0803a84032933f72f17e",
+      "gitBlobSha": "bbe3da99f723cd18f9284ee87001113bb0710b29"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_5.svg",
+      "crc32": "c9b2016f",
+      "size": 3808,
+      "sha256": "a978a3e6f06b3fdb65da6ad414f9dfaa27bec8423e99629e2545a3cde421402e",
+      "gitBlobSha": "0cf6ea6455a78df3b2e98be3b7e794d0bb3399f1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_6.svg",
+      "crc32": "9b6a4028",
+      "size": 3537,
+      "sha256": "a7baa14aa934acc4345760051a8266f3db023c0b214c6f4bad787f63fece0058",
+      "gitBlobSha": "c776c3d1cd2daa72c19a06c8fe45284ebbcffdf4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_7.svg",
+      "crc32": "ed19e84c",
+      "size": 3806,
+      "sha256": "741400db390dc51be3ac2d700e38bfd8a4fb8c951af83604c9604b743a7f548c",
+      "gitBlobSha": "229fdee77fa3dbf32cf61b15b0290a4607b1835e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_portrait.svg",
+      "crc32": "781d1cd3",
+      "size": 1476,
+      "sha256": "0d83804905a23fc40a846b2c089fcde8319e5083d0622d4810cd8c5eae6c0eb8",
+      "gitBlobSha": "fb0c7fc46f9ed3771497e92bc174dbc6440e6e16"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_0.svg",
+      "crc32": "f62dcc0d",
+      "size": 3513,
+      "sha256": "55d3f1ebcf998f611de223e8446eb5224f0d864131f2ac4c9d9f48419e461650",
+      "gitBlobSha": "ac4e4a2f1d08ef6e4cbe0ec06b22802f9a476d38"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_1.svg",
+      "crc32": "06080cea",
+      "size": 3780,
+      "sha256": "b62ddaa2babea6dbde4a3e68727042d5cecce502c119d40596c446668ce42291",
+      "gitBlobSha": "ddd557ff95bc6d8409d63814b7899b042138c8a2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_2.svg",
+      "crc32": "f67d5488",
+      "size": 3508,
+      "sha256": "b5c5ff8ce22518d75d39651602fb5bcace337f0cb3f15cf3546370151bec3765",
+      "gitBlobSha": "5c1c12b79b3ec89bcfe5c62b74c26d67777f5720"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_3.svg",
+      "crc32": "06080cea",
+      "size": 3780,
+      "sha256": "b62ddaa2babea6dbde4a3e68727042d5cecce502c119d40596c446668ce42291",
+      "gitBlobSha": "ddd557ff95bc6d8409d63814b7899b042138c8a2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_4.svg",
+      "crc32": "f62dcc0d",
+      "size": 3513,
+      "sha256": "55d3f1ebcf998f611de223e8446eb5224f0d864131f2ac4c9d9f48419e461650",
+      "gitBlobSha": "ac4e4a2f1d08ef6e4cbe0ec06b22802f9a476d38"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_5.svg",
+      "crc32": "54a1fc3a",
+      "size": 3786,
+      "sha256": "72e1aa55b08def37ec718bf36e868ad761c83471d5db7b81f7372dfe4d65d350",
+      "gitBlobSha": "5dcca76289f37567ac3614d1df743c97c338e445"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_6.svg",
+      "crc32": "7abbee2e",
+      "size": 3515,
+      "sha256": "39bc642077def68dd72c2d76356fec3ae0f6830515d8b136c1d8ebb85abe8875",
+      "gitBlobSha": "6d06c117ac865886064de0c465e4fdc49d8cbd0e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_7.svg",
+      "crc32": "21f74c6c",
+      "size": 3784,
+      "sha256": "2f9aae1e539acf4caa6abed5b23bd25498b9f28a7c0e4fa4e80d2dcc484c662c",
+      "gitBlobSha": "ab71facdbe05661dc6c1a2285d5c4ea1406804db"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_0.svg",
+      "crc32": "8c83ef2b",
+      "size": 3870,
+      "sha256": "9120b786538718184233df7c06ce1bbeaea90d8d8a07af0aad4121d0d4e50675",
+      "gitBlobSha": "6bfad89c5f1bc770e68f7d4e7e4fa1dfd5cd3fd9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_1.svg",
+      "crc32": "3f6dd806",
+      "size": 4137,
+      "sha256": "54ed9b0a6cb00bef1299bb2d0928dc4fd206c93019076720894fe1e8f9b298a1",
+      "gitBlobSha": "d598981ef565d5d74abc381f92a5962c6838bfd9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_2.svg",
+      "crc32": "cc168cfc",
+      "size": 3865,
+      "sha256": "aaa0c3a0a1d60c26ad71ffeba038fb2b0acc08bf649409e4868e30c031ce4372",
+      "gitBlobSha": "a56539f9ede1f93b957ce54a4df4ff0395a5e759"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_3.svg",
+      "crc32": "3f6dd806",
+      "size": 4137,
+      "sha256": "54ed9b0a6cb00bef1299bb2d0928dc4fd206c93019076720894fe1e8f9b298a1",
+      "gitBlobSha": "d598981ef565d5d74abc381f92a5962c6838bfd9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_4.svg",
+      "crc32": "8c83ef2b",
+      "size": 3870,
+      "sha256": "9120b786538718184233df7c06ce1bbeaea90d8d8a07af0aad4121d0d4e50675",
+      "gitBlobSha": "6bfad89c5f1bc770e68f7d4e7e4fa1dfd5cd3fd9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_5.svg",
+      "crc32": "862f1cd1",
+      "size": 4143,
+      "sha256": "d6d758b34a1463f90038565140ee39e0ac5c8bec6d65a01ae9eb10c5eb9420c7",
+      "gitBlobSha": "bb21230b174a943140e2e608bd2403390a396ad6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_6.svg",
+      "crc32": "da6b9389",
+      "size": 3872,
+      "sha256": "fe41c97f102a2a0840c7ba125d51e4c1a57aa4291b5a3cae077164ecf10ba8f6",
+      "gitBlobSha": "23ad721ddf6cef907e4c029a972c54c91c9d3c3b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_7.svg",
+      "crc32": "c18df6c5",
+      "size": 4141,
+      "sha256": "91177875365632305eb204136a259b41bee81010ad4fbef70c5592282459f6f1",
+      "gitBlobSha": "209f0f90495a5bef323826396bd5b1b462c569a7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_0.svg",
+      "crc32": "69a36a5f",
+      "size": 3846,
+      "sha256": "d96d1e9844f27dfa04357a0e58ad0b38f7ec7cf77116c014e6f1983e68e7830d",
+      "gitBlobSha": "9a9f28dc036962ed710f9e75c6c09b148314b530"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_1.svg",
+      "crc32": "6fb33f9c",
+      "size": 4113,
+      "sha256": "f2cad5a53ccf5ade13303719169daa5cd43c8f396aa57fc8c9828f12ef62e537",
+      "gitBlobSha": "ad3df92854c242038eca3251680091293af07999"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_2.svg",
+      "crc32": "c341c1d6",
+      "size": 3841,
+      "sha256": "5dd19cf202ed843399b7f26f467b063432382ab566b7a4765a93ca670cd4fff4",
+      "gitBlobSha": "055eb24a7c1c1fe426aec6fc86b532699dd18103"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_3.svg",
+      "crc32": "6fb33f9c",
+      "size": 4113,
+      "sha256": "f2cad5a53ccf5ade13303719169daa5cd43c8f396aa57fc8c9828f12ef62e537",
+      "gitBlobSha": "ad3df92854c242038eca3251680091293af07999"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_4.svg",
+      "crc32": "69a36a5f",
+      "size": 3846,
+      "sha256": "d96d1e9844f27dfa04357a0e58ad0b38f7ec7cf77116c014e6f1983e68e7830d",
+      "gitBlobSha": "9a9f28dc036962ed710f9e75c6c09b148314b530"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_5.svg",
+      "crc32": "0c92aca1",
+      "size": 4119,
+      "sha256": "62ed7e429418890a566e76af333af4300ba9aca7538eb3c0bdba21c4f8d08fbd",
+      "gitBlobSha": "cb77752a3af3ac32754ae4d99a3512d286ae9bf9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_6.svg",
+      "crc32": "cf68c343",
+      "size": 3848,
+      "sha256": "2174d106ee61075ddc6443af198f794766ff4ebfd2cf084cb58236262206fd1b",
+      "gitBlobSha": "467e0dad2402007692dceca78d4da7ac35952a31"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_7.svg",
+      "crc32": "78c9d445",
+      "size": 4117,
+      "sha256": "3e591bf080620d025bdd21f4b4dc21eac2818ad3c1e4b5325de73f6174b22fac",
+      "gitBlobSha": "e0b21f4f666852ac38bf2830db7f5aacfe90a6b1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/facehugger.svg",
+      "crc32": "156eca5c",
+      "size": 1232,
+      "sha256": "d25790a48a33e7c1a65828791baffed05595fb9a782aace8dc88b04eb1f36bd3",
+      "gitBlobSha": "9735c0702f2e28e9d1269ba870e73f90065d74b5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_0.svg",
+      "crc32": "6b85f49b",
+      "size": 2809,
+      "sha256": "a0f76bdff03f1dced44bf6de340e4fcce793a3f17b1449f49abbfd61e8ed5c02",
+      "gitBlobSha": "0d82173cc2c706e70103dafb351bc656114be919"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_1.svg",
+      "crc32": "ecb65553",
+      "size": 3076,
+      "sha256": "21d4d9add00f4ef3c812004035cf67c6e122d63f85d39cc824cf11a8e0c6c0cd",
+      "gitBlobSha": "f4f20b4b6bb50876480ed43a717b1916cc18670b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_2.svg",
+      "crc32": "e48ed2ea",
+      "size": 2804,
+      "sha256": "ee745576e2461eb55d9d309b86ad04f4ba91a853cc11dd631ad404fe69d21826",
+      "gitBlobSha": "4bde9d85e31e4b90ec16c0375eeae1ff0515891d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_3.svg",
+      "crc32": "ecb65553",
+      "size": 3076,
+      "sha256": "21d4d9add00f4ef3c812004035cf67c6e122d63f85d39cc824cf11a8e0c6c0cd",
+      "gitBlobSha": "f4f20b4b6bb50876480ed43a717b1916cc18670b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_4.svg",
+      "crc32": "6b85f49b",
+      "size": 2809,
+      "sha256": "a0f76bdff03f1dced44bf6de340e4fcce793a3f17b1449f49abbfd61e8ed5c02",
+      "gitBlobSha": "0d82173cc2c706e70103dafb351bc656114be919"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_5.svg",
+      "crc32": "9ce2f35c",
+      "size": 3082,
+      "sha256": "e93abde0feefc5a8b8b256bfcb55914140dd526477c65793c84b61359d327787",
+      "gitBlobSha": "fccd13dcc0dfbca95111186df65045ba67083194"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_6.svg",
+      "crc32": "95d3b291",
+      "size": 2811,
+      "sha256": "c74edc89440427f2bc88f4a8f72af07d2bd60b09166dacb1ba7bd8d6bc8b2790",
+      "gitBlobSha": "84770a1328f640ebe860a64124b1e22b2fac16a5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_7.svg",
+      "crc32": "878fd999",
+      "size": 3080,
+      "sha256": "f4d612511ac0f9bb91f11d745da01c72c285e99ebadca48cd21cc18b0b3d18de",
+      "gitBlobSha": "3c6cc223253c1f04d4868aa770fc8a5b52385432"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_0.svg",
+      "crc32": "065bb3c5",
+      "size": 2665,
+      "sha256": "72dae85e4222aa62a36839c40407c417a6b9f92b9aa3b0664e13ccca9bda4506",
+      "gitBlobSha": "6bb54b13eac4d9806c9d53c4d948626a02f4d17e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_1.svg",
+      "crc32": "b8f840dc",
+      "size": 2932,
+      "sha256": "e1782aeb80048aaef1c21696c5078a3f4f7a4623ff33c0d41366a82476027eb7",
+      "gitBlobSha": "4efbbf3a3c1f9ffa5d0560742aa63db2a026cfe2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_2.svg",
+      "crc32": "9117af24",
+      "size": 2660,
+      "sha256": "439cfaa31c68dc86c60ec7be372e5f266820aad10dceadbda4dc0f9403eb8329",
+      "gitBlobSha": "e72d008c4509aabe4b8f5131dfe3ca097e9931ff"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_3.svg",
+      "crc32": "b8f840dc",
+      "size": 2932,
+      "sha256": "e1782aeb80048aaef1c21696c5078a3f4f7a4623ff33c0d41366a82476027eb7",
+      "gitBlobSha": "4efbbf3a3c1f9ffa5d0560742aa63db2a026cfe2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_4.svg",
+      "crc32": "065bb3c5",
+      "size": 2665,
+      "sha256": "72dae85e4222aa62a36839c40407c417a6b9f92b9aa3b0664e13ccca9bda4506",
+      "gitBlobSha": "6bb54b13eac4d9806c9d53c4d948626a02f4d17e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_5.svg",
+      "crc32": "a87480ba",
+      "size": 2938,
+      "sha256": "7efce1db0722fa4b7c96a6b2b265d0601d74293b46411db2d4483791e642bb0c",
+      "gitBlobSha": "89955ea5d44c79f3102a120b8a2e6cf8bd137c0d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_6.svg",
+      "crc32": "7c7cfac0",
+      "size": 2667,
+      "sha256": "247facf043fa8ad362b9ff14458785fd6b495a9a28f5545baf640db1aa781be2",
+      "gitBlobSha": "8ae78782ce6d645e157c4cef79cde6c07c312ccf"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_7.svg",
+      "crc32": "f99da2af",
+      "size": 2936,
+      "sha256": "2af343be67c80b37b7f52e238b6e63c58091c2d0a042435d336b6e8e9f96e7b6",
+      "gitBlobSha": "8ab2831dc1abc5451de11d1a6c0e9cfb4c15f550"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_0.svg",
+      "crc32": "b2812997",
+      "size": 2809,
+      "sha256": "864aee3961395788cd2072ad281af0ab928dd281e0ddfa454dfa32522f740228",
+      "gitBlobSha": "487779e7f0b64460458363246e2e1b1c01928994"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_1.svg",
+      "crc32": "9e5d13c7",
+      "size": 3076,
+      "sha256": "9ee5b73838bf326eeaa3fb69b326f91c37a6918a08ed015a3481aef34438fd7f",
+      "gitBlobSha": "b69953aa2c4a8cdff4339f5ed03f02e859115c59"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_2.svg",
+      "crc32": "3d673893",
+      "size": 2804,
+      "sha256": "3bac01dd2f721b70d0c7ecf4e00d67e11e012d8fef078813f780d3595d8b2a53",
+      "gitBlobSha": "7b25222e6ca795b4dfbdeaa486fb68c40813f222"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_3.svg",
+      "crc32": "9e5d13c7",
+      "size": 3076,
+      "sha256": "9ee5b73838bf326eeaa3fb69b326f91c37a6918a08ed015a3481aef34438fd7f",
+      "gitBlobSha": "b69953aa2c4a8cdff4339f5ed03f02e859115c59"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_4.svg",
+      "crc32": "b2812997",
+      "size": 2809,
+      "sha256": "864aee3961395788cd2072ad281af0ab928dd281e0ddfa454dfa32522f740228",
+      "gitBlobSha": "487779e7f0b64460458363246e2e1b1c01928994"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_5.svg",
+      "crc32": "d2938e30",
+      "size": 3082,
+      "sha256": "7b7fdb140b21eaadfbf79d6a2cf347f267cc7825d52ffd52acc3eb8f13df8084",
+      "gitBlobSha": "72bdb75f160b3140f08d57b4278cc4b81b9ec5fb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_6.svg",
+      "crc32": "108e0a8a",
+      "size": 2811,
+      "sha256": "1f496de0535dcb52d5dc3db3b78cd38c671c0c2e012d9689009281d8c4743bf3",
+      "gitBlobSha": "a04d174e89daf33f57f049504fe241534694bca8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_7.svg",
+      "crc32": "5364e068",
+      "size": 3080,
+      "sha256": "a88ca4d60a15699f27c4fe7220aedcf9809ad34a62d33e11d03bd51310760775",
+      "gitBlobSha": "8ddc9e0f65d210a754faf7c477e79ce08f82328b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_0.svg",
+      "crc32": "843e52f6",
+      "size": 3496,
+      "sha256": "4dba85141d9b58f3e654cbbf93c9497e382375b673561ed8a8f555a0fd3549c6",
+      "gitBlobSha": "288b3a71d1d234ea13261ad9efe2197c4055e248"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_1.svg",
+      "crc32": "25b62e86",
+      "size": 3763,
+      "sha256": "34e97bf29b9b49e8a9344ca1dcfcdd5a26eaf1cfed2da65fc880321427753347",
+      "gitBlobSha": "06d651fc78702aa0e5a5998485c8ae3ab6d48d98"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_2.svg",
+      "crc32": "66e3a25a",
+      "size": 3491,
+      "sha256": "2ce8c93fcff6da91492904c792356e5aee03df7cf69cd3265a78df2cc83b2c5b",
+      "gitBlobSha": "ce26345d773a88c870de9941d83e733748b6cb97"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_3.svg",
+      "crc32": "25b62e86",
+      "size": 3763,
+      "sha256": "34e97bf29b9b49e8a9344ca1dcfcdd5a26eaf1cfed2da65fc880321427753347",
+      "gitBlobSha": "06d651fc78702aa0e5a5998485c8ae3ab6d48d98"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_4.svg",
+      "crc32": "843e52f6",
+      "size": 3496,
+      "sha256": "4dba85141d9b58f3e654cbbf93c9497e382375b673561ed8a8f555a0fd3549c6",
+      "gitBlobSha": "288b3a71d1d234ea13261ad9efe2197c4055e248"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_5.svg",
+      "crc32": "63bb06a7",
+      "size": 3769,
+      "sha256": "5bd378fe2813854b792d1096d633a687086726341dc71f0e54a43fb2d7681812",
+      "gitBlobSha": "be532de382af1ba63d24689f7c7d2e373e37a716"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_6.svg",
+      "crc32": "0c35f3cd",
+      "size": 3498,
+      "sha256": "cbcf38d3ba205b4dc5341ea6e362504aa01d2f82600000460e07036089879d3a",
+      "gitBlobSha": "2db63877e8a0884e8f3c4f2e37d67b7a7e37fb6c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_7.svg",
+      "crc32": "c0d81a8b",
+      "size": 3767,
+      "sha256": "a7976753e83f982e46098214794c9407e28242a99646a32005f9b98a4acd9ac1",
+      "gitBlobSha": "73ed044abc57052f4b5d70698aa020cb50763ec0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_portrait.svg",
+      "crc32": "ecedbc06",
+      "size": 1565,
+      "sha256": "5217c86db2da703a2e08acaf4452a3778a3e7f62050090fc253714a45be1da57",
+      "gitBlobSha": "2677e1ca3c4c8ba902a5639ff801e4a4caa46516"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_0.svg",
+      "crc32": "001a0173",
+      "size": 3477,
+      "sha256": "fe65a7dd9654cf7bfb1184477dc1c3a2926051bb83117b0a3c266f74ee334372",
+      "gitBlobSha": "ba01d9a88885d61082ecb06c9d26d4c1cadac71c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_1.svg",
+      "crc32": "bcfcaeeb",
+      "size": 3744,
+      "sha256": "66d549d3916f342dcd239180aff124693cca5b00ae8e4d69b7f88aafb2d09cad",
+      "gitBlobSha": "8d6440de3d658107d41f1af0596cb4dcca2664f6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_2.svg",
+      "crc32": "de4e61a4",
+      "size": 3472,
+      "sha256": "7015959392397582d43802a084633891aedbfc36e6280aca30a8345827b81518",
+      "gitBlobSha": "6d54d4883b8de2ab12984d61355fb9970b3f914d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_3.svg",
+      "crc32": "bcfcaeeb",
+      "size": 3744,
+      "sha256": "66d549d3916f342dcd239180aff124693cca5b00ae8e4d69b7f88aafb2d09cad",
+      "gitBlobSha": "8d6440de3d658107d41f1af0596cb4dcca2664f6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_4.svg",
+      "crc32": "001a0173",
+      "size": 3477,
+      "sha256": "fe65a7dd9654cf7bfb1184477dc1c3a2926051bb83117b0a3c266f74ee334372",
+      "gitBlobSha": "ba01d9a88885d61082ecb06c9d26d4c1cadac71c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_5.svg",
+      "crc32": "bb88e9dd",
+      "size": 3750,
+      "sha256": "3e4b0668a466d839fd994527b767171d4a9f147474f5534ac06e43c590095620",
+      "gitBlobSha": "b43c97fdc6a1ef22d43a3b8f81be10d47b91a875"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_6.svg",
+      "crc32": "dcc31e23",
+      "size": 3479,
+      "sha256": "fa9536e4b81af34fafddbf0744b9157546bf2a3f5bdc491dc7766e4a5e07110c",
+      "gitBlobSha": "fb1077f8c5f8e29353bf24eaf6a4d9e67bc2b42d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_7.svg",
+      "crc32": "eef68ac1",
+      "size": 3748,
+      "sha256": "d21089df244f186f61a5acb49d4b8d4274703781c0472d05bb276f2fdbc3c826",
+      "gitBlobSha": "d5787fa3234d35018efc7fed12acb329a13314a0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/androidrack.svg",
+      "crc32": "c04e2b91",
+      "size": 1597,
+      "sha256": "0f7d71b04404d7a50fd5a36939638f54b8628a8b8479bbc0b09d91494cc05354",
+      "gitBlobSha": "ea4021a0a7c918545ce36f494983d50bc007da19"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/antenna.svg",
+      "crc32": "235b941e",
+      "size": 1405,
+      "sha256": "fef289a915f008661fae55d1689db8e6e375f379e5870f92fe743533e5c66f67",
+      "gitBlobSha": "343f909cc42c3563eb76e1a1c6d325c0dbdfc88e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/barrier.svg",
+      "crc32": "eb025f38",
+      "size": 1866,
+      "sha256": "9e12e9490dfb1f80e662814e0f2a84cbb26fd17062710f4a79c96c7ad8b84109",
+      "gitBlobSha": "2593ca618949366eda125026482f6d0c039fab89"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bars.svg",
+      "crc32": "2b1e8678",
+      "size": 1657,
+      "sha256": "d7e962acb9179caf5228cb41c83ede8c34672ba9be827e4d7f66131eda267841",
+      "gitBlobSha": "8a10af2137daf43723d90ea57b4c6feab11aafc6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bed.svg",
+      "crc32": "7a002e4a",
+      "size": 2132,
+      "sha256": "da839ec9e7f3f644f744ac960d391afa6e62548356f46d3e1df840c7ce6af82b",
+      "gitBlobSha": "b997749b37b0d897f616e690a8339d8a5666db68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bench.svg",
+      "crc32": "ed50dae3",
+      "size": 1875,
+      "sha256": "0d5ba66ea8856acd865da85421466c2b9589b51b329c0fe27477799ae6fcdac9",
+      "gitBlobSha": "fd65177d2ff42b06e3ce9d2de5c9c90b6b9136c1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cabinet.svg",
+      "crc32": "58ef787d",
+      "size": 2431,
+      "sha256": "a24aecf5b2f5598599c418d9d59af5d2932f07e9c2abfb4c8e8bba7adfb922e4",
+      "gitBlobSha": "e949f9d5979409aebb4c9b868a842ea260bce888"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cart.svg",
+      "crc32": "4c43fa3a",
+      "size": 1595,
+      "sha256": "ce3619a0a4d28779ad941222e8fbaf167d225b99b26a4a2c7df19fdd80064ff0",
+      "gitBlobSha": "a394c8a978ca35f99c9daaa674a1601d5cce55c8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/case.svg",
+      "crc32": "a4db9783",
+      "size": 1902,
+      "sha256": "27ee273170de6fd87a3bdd1a81d518c70e13aaf48c362ae3a204f1712da102cc",
+      "gitBlobSha": "b825c04e97aa4f6d11c7af4001a891a892c2fc58"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/chair.svg",
+      "crc32": "4168d3eb",
+      "size": 1350,
+      "sha256": "b790612d3a4d3218d13239677705832c156ae4e0835369f1f801e01dddec88db",
+      "gitBlobSha": "0d87a55b46e5c860d0189cda2215e7f735b61d54"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/clinic_console.svg",
+      "crc32": "f7657e8b",
+      "size": 867,
+      "sha256": "e28479af1a71665be2e6f3b424e32c77669b5bdf5de2d7894c36ea036b11f2c0",
+      "gitBlobSha": "fe05b3b4498348310a130a4a2148c5bd91cd8b92"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/container.svg",
+      "crc32": "195e8312",
+      "size": 1892,
+      "sha256": "854fb595f5d399be76fab455e800516637fef2472610f31dca49e0c0c17525fe",
+      "gitBlobSha": "8121bdc0874fdef347ff3deceb1f74dcf7bcd143"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/core.svg",
+      "crc32": "d793500e",
+      "size": 1852,
+      "sha256": "4c98e38d64ab6b5f3d5e30e15e5aad150a25680789716dd22e3703fa1b00a658",
+      "gitBlobSha": "c709107c1aa9568102d16452c0aeb2ef644ab529"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/counter.svg",
+      "crc32": "f8876e5d",
+      "size": 1522,
+      "sha256": "6cd3a08ffe4b710661c7738c162ea9627a54f3c3e9b6183c4dfcd58f64e4712a",
+      "gitBlobSha": "55526133d149414bfb0ea5f89e4af1e8ef41f033"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/crate.svg",
+      "crc32": "5a03644b",
+      "size": 1902,
+      "sha256": "b65edfbf5fe381215fdc4db560557f956c30e93784985138ebc085d4217d27f6",
+      "gitBlobSha": "567bca4f89355b3f6ada36ebd6e672b870e9ad65"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cryopod.svg",
+      "crc32": "0b0cd76f",
+      "size": 2123,
+      "sha256": "aaa58b9031bd20db76384925be519a5dac0c86ca216f3517742da3b023e55b82",
+      "gitBlobSha": "3385672537862ceed5273abb1815884b9baa7cad"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/desk.svg",
+      "crc32": "5dc431e8",
+      "size": 2200,
+      "sha256": "011949c3cb8b76fac051b4478fb683672afffffa92b2633d5fe15578d6b9ed33",
+      "gitBlobSha": "505c910a61d25f4671b5718c93fae152101da663"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/egg.svg",
+      "crc32": "dab0162d",
+      "size": 1393,
+      "sha256": "604ba43aac693bbf18be29167b5071679a83906d85282e306df6ab0aa1237f34",
+      "gitBlobSha": "dec9d206db26efb7d26ceedac65d0f9086f65681"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/engineering_console.svg",
+      "crc32": "5c685c24",
+      "size": 824,
+      "sha256": "24aeb8fdcae9e1b1ee77a557bea0a9765092037854d806f95f67a3eb2e1b1f54",
+      "gitBlobSha": "475e9b441422cda71a82ff210340b326e7ad4525"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/engineering_pack.svg",
+      "crc32": "cc009d48",
+      "size": 1034,
+      "sha256": "184ef14bdd3303d89fa795d27832d10d2f85978886a775ce92792a3cd00b3056",
+      "gitBlobSha": "e9679cb96aabbde0d0c473c83625330da128a71a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/fan.svg",
+      "crc32": "0fe9e894",
+      "size": 2153,
+      "sha256": "5dbee3871ddca4b62ba892c24941cad7c0506d2d52f4fd44edfa1ef1076f9ff7",
+      "gitBlobSha": "6dc51fe8221529ab83596069d9a4ec4e217f7de9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/forklift.svg",
+      "crc32": "23f86513",
+      "size": 1741,
+      "sha256": "3755064f554fef4e9185e858e41eef07b594ec0437e1444102ae5e82430b68fa",
+      "gitBlobSha": "ef616b661d821e6998ed9cc694c12294666106c4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/gantry.svg",
+      "crc32": "f4b7fab8",
+      "size": 1140,
+      "sha256": "d04194a55853dc969da624e528fc8da04b190bad419a6e2ab23c8d81cce8307c",
+      "gitBlobSha": "cc81bd524425ecf9b21d3cb4a6ce6428c5fe3b10"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/gurney.svg",
+      "crc32": "7a002e4a",
+      "size": 2132,
+      "sha256": "da839ec9e7f3f644f744ac960d391afa6e62548356f46d3e1df840c7ce6af82b",
+      "gitBlobSha": "b997749b37b0d897f616e690a8339d8a5666db68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/iv.svg",
+      "crc32": "0cec4215",
+      "size": 1413,
+      "sha256": "0aec14ae90fbd4ac457dd724c6f78dcc753a1ca9a6ea4d6fa94443daccf6ecf5",
+      "gitBlobSha": "116c419088c5a978ea1c903331d877f7e2879a40"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/kiosk.svg",
+      "crc32": "18543009",
+      "size": 2292,
+      "sha256": "e3179ef1e92376ad910f297e088d5c7f489f38f90901dad783f444c7b5f52901",
+      "gitBlobSha": "c88ae49c31e63d22e2080e4da3aedf74c044a072"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/light.svg",
+      "crc32": "07410056",
+      "size": 1382,
+      "sha256": "891401cfb9720c8d811fdb5785b277a9b5cfc84c158fd9a383ffbce9514c488d",
+      "gitBlobSha": "3825cfd71a7bd6a0caea1d974474b8f35caaafa2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/locker.svg",
+      "crc32": "b94429c0",
+      "size": 2516,
+      "sha256": "ac2e92761fb83d7032d18ad8e105c30b99234c57e0b09471fc7e6703596dd43d",
+      "gitBlobSha": "3cb6a8e988db18523ec39453641051dcabae9cb3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/medical_pack.svg",
+      "crc32": "797a285d",
+      "size": 1034,
+      "sha256": "16914f391c23f080362150ccfc68aa660aee9411c818d82333c181625725f30f",
+      "gitBlobSha": "8cd89b53b0eda4bf56a49e4d18be9884cc1e8bbb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pilot.svg",
+      "crc32": "9c6281aa",
+      "size": 2478,
+      "sha256": "f59698b7e0be729c428588b2509eba84b775cd1fba81b78d769bc7426d4af5ea",
+      "gitBlobSha": "420de8e5f388ea03b0965e4e1570de599a6383a0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pipe.svg",
+      "crc32": "24e2b1b5",
+      "size": 1700,
+      "sha256": "e4ddb4cfdbcaff47cbcc39ee5cf0ea0459eef171b730e1f9b0aa5a6ac9ca5768",
+      "gitBlobSha": "1bd38b0a1ab7c5b58c5ba069ec85dd2aee71b02f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/planter.svg",
+      "crc32": "4739479d",
+      "size": 1725,
+      "sha256": "d7aa5054099ca5aa955c84db1063901ee00302b5ebbd7a536e10eeaf2069892f",
+      "gitBlobSha": "e81a22c469aba759a92840979f82f5d0c4333c90"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/poster.svg",
+      "crc32": "605b571c",
+      "size": 1460,
+      "sha256": "6906a6e99fed7c72dc7128400528ae5d589a60772f79114322ec8ce90ce2a45f",
+      "gitBlobSha": "41214d7eba34029dbe17152e4d83aeabad178291"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pump.svg",
+      "crc32": "02884e6a",
+      "size": 2118,
+      "sha256": "17e25915729dbcee3d42c8890622608c38288377ceda62b3b6be8b7cc4ebb040",
+      "gitBlobSha": "ea57e27349990083710ef80b46f06338509c889c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/radio.svg",
+      "crc32": "40f5a739",
+      "size": 1869,
+      "sha256": "bb125f4ab920e572b17955a645e7ce25de83f4738f955f40d00de91bba32b99b",
+      "gitBlobSha": "fe1312846011497036f50a52d5efe46a63aade55"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/relay.svg",
+      "crc32": "043d157b",
+      "size": 2190,
+      "sha256": "a032e97008e91956097be08145bed555861f3c5942054bfc7d902d1d1e641d26",
+      "gitBlobSha": "99426c9c5dee3e9d74d8165aef067590a68f9303"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/resin.svg",
+      "crc32": "e9e2cf83",
+      "size": 2261,
+      "sha256": "8eac577920a086c259e6751519b2acc7601911667609bc325475ddcfdbdd7d26",
+      "gitBlobSha": "4c238728dbd1731d7636e02d722ed28271fea27e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/rib.svg",
+      "crc32": "e9e2cf83",
+      "size": 2261,
+      "sha256": "8eac577920a086c259e6751519b2acc7601911667609bc325475ddcfdbdd7d26",
+      "gitBlobSha": "4c238728dbd1731d7636e02d722ed28271fea27e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/rock.svg",
+      "crc32": "dcd66b5f",
+      "size": 1269,
+      "sha256": "6629002696323a36b27521e5f86ae38ad8031c0d71138f81a9894af1c34a368d",
+      "gitBlobSha": "33b439b64199ae0ef0bf409f6fbe0e23e51d64e4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/save.svg",
+      "crc32": "a4719caa",
+      "size": 1662,
+      "sha256": "9ee8a65f3fb69c1042562fc00ad67cdbf9adb4815216b3f550b2c95853a270b9",
+      "gitBlobSha": "2571cefd116b68d298fd5ca112526582463cf54a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/server.svg",
+      "crc32": "64895c75",
+      "size": 3171,
+      "sha256": "8b6e8efcf2e0167ba68b4131ef8185371138005ad1569b1294da93fccbd1040b",
+      "gitBlobSha": "981852f0b91dcff1cab787a01d7fa6bcb687c48b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/shelf.svg",
+      "crc32": "e81a2c9d",
+      "size": 4634,
+      "sha256": "29cc652db5480f000060cdeed1a4b324a5c399a616500242f13203b0690abd9a",
+      "gitBlobSha": "2013e8f0529335c1b380bbce06f93a05d3189d86"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/spool.svg",
+      "crc32": "d5f8b1fe",
+      "size": 2198,
+      "sha256": "3055f4bd1ad507894f4543e385d982ec8daeacb3bfe4f701082741362067000b",
+      "gitBlobSha": "fb5486c7a3243449bb923923b1a834bad684419e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/suit.svg",
+      "crc32": "4b01a5f9",
+      "size": 1522,
+      "sha256": "f2f9bb2e9950bc4c77001098b1e0c9bf5d57825020a08fcfb97b0c636d3ac91f",
+      "gitBlobSha": "9edb345d797ef79ae8bdeecbd83848a4f97d9314"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/table.svg",
+      "crc32": "f8876e5d",
+      "size": 1522,
+      "sha256": "6cd3a08ffe4b710661c7738c162ea9627a54f3c3e9b6183c4dfcd58f64e4712a",
+      "gitBlobSha": "55526133d149414bfb0ea5f89e4af1e8ef41f033"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/tank.svg",
+      "crc32": "45c1d369",
+      "size": 1855,
+      "sha256": "e9d3b4b7798ec304cf6acb48044551af3c90079d36757359ca91de850651be9c",
+      "gitBlobSha": "ae6018370c02d26ae8b40e0a2044b34e68137e44"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/terminal.svg",
+      "crc32": "5dc431e8",
+      "size": 2200,
+      "sha256": "011949c3cb8b76fac051b4478fb683672afffffa92b2633d5fe15578d6b9ed33",
+      "gitBlobSha": "505c910a61d25f4671b5718c93fae152101da663"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/trolley.svg",
+      "crc32": "4c43fa3a",
+      "size": 1595,
+      "sha256": "ce3619a0a4d28779ad941222e8fbaf167d225b99b26a4a2c7df19fdd80064ff0",
+      "gitBlobSha": "a394c8a978ca35f99c9daaa674a1601d5cce55c8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/turbine.svg",
+      "crc32": "02884e6a",
+      "size": 2118,
+      "sha256": "17e25915729dbcee3d42c8890622608c38288377ceda62b3b6be8b7cc4ebb040",
+      "gitBlobSha": "ea57e27349990083710ef80b46f06338509c889c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/vending.svg",
+      "crc32": "e81a2c9d",
+      "size": 4634,
+      "sha256": "29cc652db5480f000060cdeed1a4b324a5c399a616500242f13203b0690abd9a",
+      "gitBlobSha": "2013e8f0529335c1b380bbce06f93a05d3189d86"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/water.svg",
+      "crc32": "993bae49",
+      "size": 5377,
+      "sha256": "dcaca2397aefa0e0797808be6e913bf4c7990acfad19808086bc591cb80365e4",
+      "gitBlobSha": "7e9486a03816bc72dbaf3dbd8315c7756dd7e9c0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/workbench.svg",
+      "crc32": "948b7c95",
+      "size": 2566,
+      "sha256": "514c0e839f7dbeb9dbb6d1b000d76ab3be5bdcd51f14c4d5298f74ddaf1548b5",
+      "gitBlobSha": "6872b42e3f960203e1fef4692a8f7c7b7e34324a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/emp.svg",
+      "crc32": "d55886ef",
+      "size": 1323,
+      "sha256": "79f1bc6cee49cf5a8b45ba4ece143bcbe60f71e15f2c595252c772ef6a139e8b",
+      "gitBlobSha": "13300ca549a017a307bb3a3f52947e09bce439f8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/flare.svg",
+      "crc32": "502d6d3d",
+      "size": 1176,
+      "sha256": "f5cdf953c0844621aebbd981ff02f34d0c9259a971494d470f2fee23f9579a09",
+      "gitBlobSha": "c60e5d5d618f9463a6a36147a42b54f915fc2250"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/medkit.svg",
+      "crc32": "42fdd4c5",
+      "size": 1283,
+      "sha256": "882a594c5a532e6268e0fb49295f325052596d1dd42312563dbd93e42ffea0bc",
+      "gitBlobSha": "3381b761f350c303893d124800a6ed2776728d91"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/noise.svg",
+      "crc32": "52f5de05",
+      "size": 1432,
+      "sha256": "432cf3be7a1fb15d45d6665b143221ef7978c6ad5bb4a59ee0c748c5a11fb4a2",
+      "gitBlobSha": "9217793b4d3b765dfd78c02f6843ac4dd0e306f8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/AUDIT_SPATIAL_ISOLATION.html",
+      "crc32": "4baa1597",
+      "size": 7725480,
+      "sha256": "a6b5b46fab9480b2baa061a0ec7293738aa379e1cfcb75482a0d3dfc85ed1bd9",
+      "gitBlobSha": "4117c128405d641359936eddc3facb0276464d3e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/CODEX_ISOLATION.html",
+      "crc32": "ecb0cf68",
+      "size": 667324,
+      "sha256": "b881df5d9dd76840bef56b85e9ac402d1adb8788207ae8cb7a63713056c0c525",
+      "gitBlobSha": "7e86522e37a8aa134a484294d71ebe7a3d5134ea"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/CODEX_ISOLATION.md",
+      "crc32": "9f293baa",
+      "size": 281,
+      "sha256": "4302a8d97fd2eeb9adfd88e03c8be2c8be3b311f77b631acfe2740d5c5fafda5",
+      "gitBlobSha": "45a6d57a656de6cdf82b86dc0f1c19784bdbd4c9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/METRIQUES.json",
+      "crc32": "cb3e2f45",
+      "size": 499,
+      "sha256": "b7bc3f53673b7fc25aa7e3d25c1f0dc8bf557fdcc6c38505f9755a3396e66436",
+      "gitBlobSha": "0ad8d4eb769105090e141c41b9bc958ac9b3b16c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/QA_RESUME.md",
+      "crc32": "457e5934",
+      "size": 670,
+      "sha256": "f9f6d45a79962c4d4cb2269cbf7d4bc15db396d6b3f280454e671d7d646f24d1",
+      "gitBlobSha": "2b45d9a220e9e3e8e31746a3d9a1e91635425ad2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/docs/RAPPORT_VISUEL_ISOLATION.html",
+      "crc32": "e820ccfe",
+      "size": 12787965,
+      "sha256": "7bd033da1cf6906b2843ee2c9e4d34bb633bdf16ef721daf3565a55abc0708b7",
+      "gitBlobSha": "4ffbe2038558ec0cde5cbd8d91e34ad4c3576122"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/integration/dlc-manifest.json",
+      "crc32": "3eed1db6",
+      "size": 217,
+      "sha256": "dd058922c035497b9d480e85f1012871f31121b4e4e2d608fdd96ee4bf6ca577",
+      "gitBlobSha": "5961e7ad0c2e9c4c046e37ca9221e05c682eeeeb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/integration/launch-isolation.js",
+      "crc32": "2876befa",
+      "size": 815,
+      "sha256": "9ac9241df30e022cd5b9a9e4ca4b4be70944ddb896837b313266cd2b5ba782a2",
+      "gitBlobSha": "bb73aac2d6b99348851cb1c5cd15fd745249ec22"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/package.json",
+      "crc32": "82b95cdf",
+      "size": 785,
+      "sha256": "d15b2264866a8526f3c3070a3d3264316e2729a3afa22b0125be32c291b60c6b",
+      "gitBlobSha": "4a15937f53537b7e6170bf60acad362e2795470f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/agent-browser-probe.txt",
+      "crc32": "0d5cc870",
+      "size": 52,
+      "sha256": "3f07279cced5df34948ec344140df4a541b8dccd3068525b3294a46e53a77d50",
+      "gitBlobSha": "7d1fa304d1e2e9bf11496cb5e9f1affeb466d0a1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_CLASSIC.jpg",
+      "crc32": "e5fec213",
+      "size": 93960,
+      "sha256": "d7b6c91c68fadb0c331ff4170890ac4a4084758a2edb25d63c3ee702d368636f",
+      "gitBlobSha": "e588df24cb1a19b1f62121b3b9fb3a76fbc3ec76"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_L.jpg",
+      "crc32": "4ecc5f54",
+      "size": 97194,
+      "sha256": "6b4e4c636130c788faff40c6e3dc59ec9ddf933e98ad512dfcc283064047d5b0",
+      "gitBlobSha": "df76711a8374c556123e459e786f994ce0de4795"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_R.jpg",
+      "crc32": "d007aa71",
+      "size": 95702,
+      "sha256": "a13abcb946bf1240fd45cf031f5b3a48f0c5baacfcfdb837a8ce61b6ab4dc24b",
+      "gitBlobSha": "0eec0f9d220462eeaf05ec66323189ea00e77b9d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_CLASSIC.jpg",
+      "crc32": "b836fea0",
+      "size": 89612,
+      "sha256": "78a9cf2f09b412f8da938fd33a37fde2a459470bab060e5ad9607cea11d4fa48",
+      "gitBlobSha": "ec0eedf2e50274142de117165d6c5f40fcb61c0a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_L.jpg",
+      "crc32": "34ad53ac",
+      "size": 92029,
+      "sha256": "05d82f3b47a2a87f0810273a50d6db81bc516b26945fec6593d71a48ce1f1870",
+      "gitBlobSha": "7fc9eda137796ffeeb0c76015cd5e99a5fe007ce"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_R.jpg",
+      "crc32": "230361bd",
+      "size": 90266,
+      "sha256": "7cb0a16f50d0b768cc0647b290b49dca0bd0d1a318564394a107085118bfb292",
+      "gitBlobSha": "9c131b7f4df7c4a8f3e06c3e84a4f969c0e099f3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_CLASSIC.jpg",
+      "crc32": "fb420543",
+      "size": 84457,
+      "sha256": "afbb50aa4d7eb804a8255a324d7e7b8fc77555ca23113fd2b9010f6723a39351",
+      "gitBlobSha": "ea3c519424ad43e76a760e7d48340315a30d3d78"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_L.jpg",
+      "crc32": "46b39a6f",
+      "size": 85291,
+      "sha256": "219752712942d65aa15426cfe21de11ebb198663bd4681fa67726ae993956bef",
+      "gitBlobSha": "7bd0f07166c3c02704ba092fade63706339b2353"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_R.jpg",
+      "crc32": "77acd821",
+      "size": 83994,
+      "sha256": "155760ab6fe32cef83eb68d298d54035d1ad9ed1cc1d3f0595b8574aa798f9a9",
+      "gitBlobSha": "3eb9b3423429e8751091f913c5fd8ce4a7f177f2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_CLASSIC.jpg",
+      "crc32": "2694fbfa",
+      "size": 85396,
+      "sha256": "2322bf6352a05ee3c56caa940ef1253ac1e56a0a676c6170d3f16b109ce57aca",
+      "gitBlobSha": "524060fc2658d590ac37946bdf0ef57b5f32ea77"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_L.jpg",
+      "crc32": "e0d34aad",
+      "size": 86460,
+      "sha256": "819d58e77891a683d96cadc1f5e6bc2eca0b5ed4a982b945f020ac31c585e0d5",
+      "gitBlobSha": "7374843254b3c43a920cce0f5439f1f9afd271e6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_R.jpg",
+      "crc32": "49caccc2",
+      "size": 85177,
+      "sha256": "e518a68e8600c6208853b3c6c692042c329279c0cc451535625aef1d12ad600c",
+      "gitBlobSha": "65284dceecc0c2a464a63e35e5dc4452c4c844af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_CLASSIC.jpg",
+      "crc32": "6a7fa443",
+      "size": 93912,
+      "sha256": "a0841cb153538fa256bef297890d623eefb8b9399b7639e5d14b2d1703948c07",
+      "gitBlobSha": "6635cb62ef07d38808c6b035d680cd23cf6af12b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_L.jpg",
+      "crc32": "ef8cb27a",
+      "size": 94761,
+      "sha256": "2171ee5917bbaa573dfb5df91f708a9aad3ac7758192a96e8565e09c001fdc10",
+      "gitBlobSha": "9f3c7a3e1dee515ef459c84a8815a392d7f626b6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_R.jpg",
+      "crc32": "d4d4d62c",
+      "size": 94943,
+      "sha256": "992810d751f8235eaa09e85cafb8ea9461b61ac95cc6b54302a3d5a65dd7546b",
+      "gitBlobSha": "fc6f9556936ce30ffe92ce3a14dcc72bfef69a68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_CLASSIC.jpg",
+      "crc32": "25c836a7",
+      "size": 88195,
+      "sha256": "a8d5f86d21851083ac2af8e2183b2cd4622f3ee9c37e33ff6ca5b26753d1fadd",
+      "gitBlobSha": "f4f6f6156fb5512b437a1465f8d325d74208b82c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_L.jpg",
+      "crc32": "4ed9212d",
+      "size": 90735,
+      "sha256": "e7a7fc1c6547dfd3f3075f868108d64bfec8ac401682d3b3d2245ec5b9fccd50",
+      "gitBlobSha": "ab0d5aec062480c346f01d60a09c727c5fc5023b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_R.jpg",
+      "crc32": "a567afff",
+      "size": 90375,
+      "sha256": "a095923b18234737f3b169b32a95a3ff5f07c9fc076f5793ac6ff0b4eb22ac5d",
+      "gitBlobSha": "f0b7cb71af72e9a18c0e4642a7195676323a1ecb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_CLASSIC.jpg",
+      "crc32": "6dd4337e",
+      "size": 90086,
+      "sha256": "db04a397ca449a7b5a6074aa0d39137e98e75f6ee19e376ed987e90c7802d3e0",
+      "gitBlobSha": "5940113dac8e0b556ffb80a50d57ab7a8d850395"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_L.jpg",
+      "crc32": "c87f1118",
+      "size": 93588,
+      "sha256": "c7ab497f21ba722c11525567e21383531035a3521ea66cce2b21e0f9b7090ae7",
+      "gitBlobSha": "358dbbf5d1903a6b2523d1aab41fb5508a53945d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_R.jpg",
+      "crc32": "b1d8b653",
+      "size": 91373,
+      "sha256": "2b21efa66a768b67cb00266763a31d91ab35d04730cde167f78f12801ee2dd18",
+      "gitBlobSha": "ed62274fb880c6638b84fbc323655f12e5c90e8c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_CLASSIC.jpg",
+      "crc32": "3cc0e59a",
+      "size": 89272,
+      "sha256": "07bf75d6de4665d6b7106b94edc7715cc18699cba1eec8c77e4282652a7ff420",
+      "gitBlobSha": "774a66e955250aece600d434680d542860daa859"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_L.jpg",
+      "crc32": "ea42a00f",
+      "size": 90687,
+      "sha256": "44204d83e9a494d34f5cc54dad0e60ebdff32d749a4b571cd46da7120aae8ab3",
+      "gitBlobSha": "15f7366eb726360c38791959338c8437fde4f13d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_R.jpg",
+      "crc32": "b773bec8",
+      "size": 89157,
+      "sha256": "61ebcbf9044609102a3a39262d351e3a1eae8e8f0a316388452736a53fb06219",
+      "gitBlobSha": "06f0743663c126b82b1d51c5ca67c8117695e629"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_CLASSIC.jpg",
+      "crc32": "d3e96659",
+      "size": 94322,
+      "sha256": "3214795ebe7595f742ad667b029ac2b60b669f3ed4e64fc24cd42341084d6593",
+      "gitBlobSha": "9a88bcc165d1eba62cad28c477ab525e9bab8e02"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_L.jpg",
+      "crc32": "23148036",
+      "size": 95322,
+      "sha256": "c6c116a9cd9eb434a40d4a47f096135e6ec2e0ca140687b3557730e4d2f36000",
+      "gitBlobSha": "9e8baa2c6d9eab27f645d991976ae552f62c293f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_R.jpg",
+      "crc32": "73c76b7d",
+      "size": 94261,
+      "sha256": "b837c7508455f924d3b62481c982e5482dba2faf821c9b0aef8dc531596360d8",
+      "gitBlobSha": "80a59d1eda4ce9d6c8cf4b0f9f400f658c49515b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_CLASSIC.jpg",
+      "crc32": "e17570be",
+      "size": 92145,
+      "sha256": "71bc3c3b71037fc94f392cfbb16056578f17cd310c59d03e538b0708a0825203",
+      "gitBlobSha": "fbf5b7adde03793250071daa6abaf48e51f34e19"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_L.jpg",
+      "crc32": "3b04e34f",
+      "size": 92742,
+      "sha256": "36285c96dfdb0f7ed4e6e3c9707c795fbffe490ba7ace472f9ba9a0d16ec5f39",
+      "gitBlobSha": "e824767347a12d8f24250da3254d49850485e997"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_R.jpg",
+      "crc32": "0c431915",
+      "size": 93688,
+      "sha256": "bd4a6b1a2ab4516bcc686bbd5eb47601b258770097af124bf5c8e45ad2df93a5",
+      "gitBlobSha": "72c98d942566989f4637e4601aad5a14670f7448"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_CLASSIC.jpg",
+      "crc32": "75ed3347",
+      "size": 84445,
+      "sha256": "83a8da7dd699b845178845f4ab3a07ab3e0eb4601bcce42355e45029b3d5f61d",
+      "gitBlobSha": "5c74bb84880c97ae9cef744aff17520e068f39fc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_L.jpg",
+      "crc32": "79adaea7",
+      "size": 87365,
+      "sha256": "8a21a2a08c55f259dbe34abcdeb09185d7af6d01d634d5c1078b90dc97d59b53",
+      "gitBlobSha": "9f59b0e4a44dd47ef042e4cce932d5895b4f91af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_R.jpg",
+      "crc32": "64cabfda",
+      "size": 85486,
+      "sha256": "4fc8918d3b4d0ed28557383903d6da12e7fd0df0e18fd8c84fdc2c695673ad03",
+      "gitBlobSha": "0f21579aa9bd6d89a9bc3042094f23036db9c9af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_CLASSIC.jpg",
+      "crc32": "6849e6c1",
+      "size": 87256,
+      "sha256": "102c2a155de88f5d8f6587a5b60b7baac739a984f2b08594ebaf8e836d38c5dd",
+      "gitBlobSha": "cf1e9073ee6e002075cd64d71ff4a84217d2167c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_L.jpg",
+      "crc32": "573416f4",
+      "size": 89473,
+      "sha256": "3471b4661a133f4141ef56a5b634bf366e8eb811d33d7843050b3cde500722bd",
+      "gitBlobSha": "5db5d11103196b8abe718673f591367a7c04974e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_R.jpg",
+      "crc32": "48892259",
+      "size": 87114,
+      "sha256": "e6b14e36c7889de86d78a23fcd6f2b55049f39775ea00cff2e48918683f4cd23",
+      "gitBlobSha": "fdd5117c00608f42dcf416ab166373550cefee32"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_CLASSIC.jpg",
+      "crc32": "61be60f3",
+      "size": 79402,
+      "sha256": "f38e765d0906d66e1a962a8ceba59c6c45a0b81311cee7209671eb85d44fb165",
+      "gitBlobSha": "250b21b39b716d04b48cca9f9915d425b2212642"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_L.jpg",
+      "crc32": "d1459259",
+      "size": 79070,
+      "sha256": "71e4424c79ce7f35056055ffa2e6649213839c0f5598c2e65c1f536a82d976a8",
+      "gitBlobSha": "c5052654eaba5a3abc9e07c926d6ea8c0fb834c0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_R.jpg",
+      "crc32": "c582d6fd",
+      "size": 79023,
+      "sha256": "e1e50c4daee4916e19042ab3dbe778b80bcce256f29c3f724fd38d54068d08fd",
+      "gitBlobSha": "363c8c5174f8ad73496d4a7c1cadbcc0a455c8e6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_CLASSIC.jpg",
+      "crc32": "f32aabb0",
+      "size": 84450,
+      "sha256": "f7822a20de378982c4bec37845a72ecec9d44d475c1bc8f81793b536a0141f4b",
+      "gitBlobSha": "bbfeac0b73ad2e1ae8ed8aba80a858b8d680fdc8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_L.jpg",
+      "crc32": "0cf89713",
+      "size": 87682,
+      "sha256": "f9e5712eee5c0521b6256781f050bc079dc1147610dcdd1513821b5f25e89d61",
+      "gitBlobSha": "08c191cecef18bee56802efce00d618ac8a7c52f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_R.jpg",
+      "crc32": "62858bc7",
+      "size": 86012,
+      "sha256": "896f2c9699640a72cf84ee5ea93551ae094bf6730bc2790b2e5c5bc130b38a53",
+      "gitBlobSha": "710a3036ca5abd35fea67a0dd72c5c0462321bcb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_CLASSIC.jpg",
+      "crc32": "6a1790f2",
+      "size": 83871,
+      "sha256": "a53f0b1659e45ff043906ec5bc33397bbc5673cd645b3e8ffc564dc399f23677",
+      "gitBlobSha": "d8fc66ab5ba8d8266f0451d1d6b9bcdbe758e716"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_L.jpg",
+      "crc32": "13e4dd4a",
+      "size": 89624,
+      "sha256": "7309ca27ff9bc656e59cd475ec887ef21ca500ace53427a43cd64bd4921f1a9f",
+      "gitBlobSha": "57706dba3f715ef74858a91ccf836f317d406098"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_R.jpg",
+      "crc32": "5d9343d5",
+      "size": 85613,
+      "sha256": "711158c52f3eba50a9e91f2a2ff2084cda692e32e1cdbb05c7eb201bdc931400",
+      "gitBlobSha": "ef995f7d686405aa3ef7eaecd1010995127ecb68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_CLASSIC.jpg",
+      "crc32": "add2b1e9",
+      "size": 99174,
+      "sha256": "6df3ca794726340427f759e2662e3bd00ea871bb1b0154c0d2a07ac6bf8acd88",
+      "gitBlobSha": "dc6343461d18b21a3207e2d1b952df2b7808f35f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_L.jpg",
+      "crc32": "cb4225cf",
+      "size": 96783,
+      "sha256": "8b7f5bd8b3422c2001fbb9df09dc7cd5814200190cb4b007da989b82e90ef88b",
+      "gitBlobSha": "82454ff3b0b613e85d614abf1ed42b07dc8f2fdd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_R.jpg",
+      "crc32": "a3e0c53e",
+      "size": 96573,
+      "sha256": "d985e3899b23bfa5f977d77c81f9d3000b5d12cab7386f4d39aff66ed993342c",
+      "gitBlobSha": "3ef80e0f408775d3611755883aa53b2ff78171f7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_CLASSIC.jpg",
+      "crc32": "0f7b1514",
+      "size": 89229,
+      "sha256": "56853f4b832a6521bafc552e1763efaebfc5bb7e3cf838c5e737d06dc9fad85c",
+      "gitBlobSha": "9a77628897693aea1ced6d1688252476e2fe27ea"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_L.jpg",
+      "crc32": "b1e76ae1",
+      "size": 92648,
+      "sha256": "0a640325bb2a519ed104fd22abc0fa10368ae5aaa00313afcd2fac6815027b66",
+      "gitBlobSha": "fa30c49e6d7893deea179eab63bd64ef5765083d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_R.jpg",
+      "crc32": "12ccd0f0",
+      "size": 90701,
+      "sha256": "dc736e777ab6192a75054f5f4394ef24fce99946982f570b67231c00b50bb90c",
+      "gitBlobSha": "a80043f86c62ff4a93a251612a57d4efc3ade0af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_CLASSIC.jpg",
+      "crc32": "fed3e598",
+      "size": 88513,
+      "sha256": "09c01bb7593dad53818c2b98acfde0e98418c83a2014b0c7976df9e66fa2a683",
+      "gitBlobSha": "542911331145345688849d5d1ca1d656d2aeaa6f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_L.jpg",
+      "crc32": "bb806967",
+      "size": 88370,
+      "sha256": "356ba0d962efb1b1c22e3a04fc0133b26cc2e65213ce18f926198a507f2f5522",
+      "gitBlobSha": "c4953121161b89a07761870822169203b5b11cae"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_R.jpg",
+      "crc32": "95d4c78c",
+      "size": 85679,
+      "sha256": "a8eb51502313173ad3be649b5e12bb7812f2bf52592cf87c39004c321cbafd69",
+      "gitBlobSha": "aa9c8cc9034a6669c3e5c85b42addb0239e67255"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_CLASSIC.jpg",
+      "crc32": "4f6f8622",
+      "size": 85863,
+      "sha256": "fe21fc24c51c425cc4a0ce9dcfe9634a394e7ccad317bc92c42a66b202af29f1",
+      "gitBlobSha": "d79aca5527c548ace0cab14bb5560385d446d2ee"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_L.jpg",
+      "crc32": "b828d98f",
+      "size": 88967,
+      "sha256": "1b9c8afd6a8630ffe936fad15f50a8f53e955c00c6b25e6c4b78a5904196e75a",
+      "gitBlobSha": "8ca37cad3c7159af6cfcf21a7a06c0de6103253b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_R.jpg",
+      "crc32": "e3484356",
+      "size": 87522,
+      "sha256": "afaa5ade46870b239479a7005bf6c66a03b1b4ec7982ab53371eff5fcd58cca2",
+      "gitBlobSha": "6f4be59e832a67f48cf060b2f5f80da73f433fdc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_CLASSIC.jpg",
+      "crc32": "5e6e9b4d",
+      "size": 91401,
+      "sha256": "6556859cff8aaf0aa4833e68f68adeaab6a5f2210637a6dc55cb8d5642390087",
+      "gitBlobSha": "ffe6d6e5c280a1ef52d0fed65b040045c8ff8f2d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_L.jpg",
+      "crc32": "f3592ed9",
+      "size": 94194,
+      "sha256": "8f7a32356b3ce068f13a46537c043593734a2cfad3be6274e1360b7360554194",
+      "gitBlobSha": "c793517d26356a6275629162acb098d90abbcbc8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_R.jpg",
+      "crc32": "6284b434",
+      "size": 92747,
+      "sha256": "8d643343e1bbe4dde6e607fa450f3f20bac718529375e7e75d6bffeb1192224b",
+      "gitBlobSha": "32f5ee7a154b793d9bd796d3b95bcf93ba9e3faa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_CLASSIC.jpg",
+      "crc32": "77c58d46",
+      "size": 89050,
+      "sha256": "4d189eb74a7c1a5b7098c8e03d95ed5eca7795485175fac88a6ff420138d3527",
+      "gitBlobSha": "e48014a8c6f647089599b4b21d8b39d3231c48c5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_L.jpg",
+      "crc32": "ac0eb3d4",
+      "size": 92715,
+      "sha256": "c044afd9a66ecdd2211a1a8a3f13473e384cb41532acc133bc3971f73493cf52",
+      "gitBlobSha": "a2ace6c7ef7aeb55444677569060798b5ccbdef5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_R.jpg",
+      "crc32": "999e0662",
+      "size": 90664,
+      "sha256": "ee99694ade75a4feab9dccb349f9c0e8ed226dff8e70806cbb4f00ca5c38f6fb",
+      "gitBlobSha": "efeff9f195e010d79064ee4b9cbbddfa548288a7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_CLASSIC.jpg",
+      "crc32": "f8e3a757",
+      "size": 93963,
+      "sha256": "d123b2c49e1a9e035d0882b546cca92bd83bccde59b72c47f2ea199a4cfd2854",
+      "gitBlobSha": "29c7bc0a4f110607ec95b4a78ab1848d5c9a7a61"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_L.jpg",
+      "crc32": "e82a5844",
+      "size": 92696,
+      "sha256": "e4c367969f603a35a5f85e1968ce432963b352226be8d162d4e590c6c191592e",
+      "gitBlobSha": "f16e269e3d734d9f8efdada6333d0556f63a1a3a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_R.jpg",
+      "crc32": "f6b5785e",
+      "size": 93036,
+      "sha256": "1ae5afb67a6846768a8828e694ca41680951c1022def1d4c885bd9ea827610b8",
+      "gitBlobSha": "14961f3bff89681aa3239d8dae060d09ce707e29"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_CLASSIC.jpg",
+      "crc32": "6ab20bf0",
+      "size": 95658,
+      "sha256": "c56e373590cee195b95b81d06c9c3b4515f206f443a22a9db1d0d62352c6a194",
+      "gitBlobSha": "679a9d7a30356c548221f9b40a9cb863a1f4176e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_L.jpg",
+      "crc32": "2af40038",
+      "size": 93365,
+      "sha256": "a929894a9f0f3f6d16b59fad6e33a6097d0df72dbf856bbcdb06cb28d260b788",
+      "gitBlobSha": "ce1253f8d94352743d85affbae116cfc1bb17e19"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_R.jpg",
+      "crc32": "a6a37870",
+      "size": 91898,
+      "sha256": "a3d678f586aaa4ebf7bd1a8b62b5aa468a1105ec03872236fc2d2b8309222ab9",
+      "gitBlobSha": "b322d58c02a84452420b30d56db92f4d1681e36c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_CLASSIC.jpg",
+      "crc32": "8d364d96",
+      "size": 85313,
+      "sha256": "c663639720fa093015455dc7ce32b45d3934f6c908c83226ae5ef7143775d234",
+      "gitBlobSha": "0a0f7169be737485140452fec1ef5cd243963ac3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_L.jpg",
+      "crc32": "0d6a2929",
+      "size": 88883,
+      "sha256": "d7da07c1f837e304d9f0be925f04718ca68b781a2a8a4de43bfd8014436282fb",
+      "gitBlobSha": "6652e758bee24a7d059f3df2acb266553254ea56"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_R.jpg",
+      "crc32": "259f3694",
+      "size": 86523,
+      "sha256": "0bae673e19c168cfbef38bb8e8296b12171ce60193f160dab9f5e3608de26a2b",
+      "gitBlobSha": "e945a21f7b9a106fc3b0187ca048b8ce15234c86"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_CLASSIC.jpg",
+      "crc32": "87853c83",
+      "size": 85893,
+      "sha256": "de16f919add22230d099c38d49c30e013264b5f19bd8b4605a408a0953ee4fc2",
+      "gitBlobSha": "30b51ace08f6bba1a2805946d4f476e8f9536fe1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_L.jpg",
+      "crc32": "8e33f161",
+      "size": 87415,
+      "sha256": "621f3de1b65480ff5c9161149b39641ce485dc5bac2b74cdd3691155918a021c",
+      "gitBlobSha": "c15d1d1ddda3e3527bf6638c2cf09073f50dd7fa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_R.jpg",
+      "crc32": "f3482d99",
+      "size": 85803,
+      "sha256": "7ae2a3e42b31573f30b0987a33dbcf0518d0dcbfca7b203c13144d7054b958b8",
+      "gitBlobSha": "60109eb708b7618448742737c5d64b28d4e0ed98"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_CLASSIC.jpg",
+      "crc32": "edf4987d",
+      "size": 54479,
+      "sha256": "dd1e22796b5fe6a42f0d4b9d4aaf5fbb9edba260c4dc62dfdc01147da21dbc6c",
+      "gitBlobSha": "8d15fa87772967099d064dc6a4cae8a666edc486"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_L.jpg",
+      "crc32": "fbb91ab7",
+      "size": 51399,
+      "sha256": "5f617dac092a0d21c6b9d4fb034f81828a50e753c338698314039eca517f5f5a",
+      "gitBlobSha": "d94bea06a0faf54b5201f7a33fe3c83ad57174f0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_R.jpg",
+      "crc32": "4be92be0",
+      "size": 52752,
+      "sha256": "5622c09d2189bbaef068d9470507cdcce9e8e0e6e7d148c087bc6f1d52c5366b",
+      "gitBlobSha": "0fdea8224062a9b317be316849deb6f53ee929b9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_CLASSIC.jpg",
+      "crc32": "7d784494",
+      "size": 59582,
+      "sha256": "993247feed20ebad232391dee4c1cb4b39f5473a72892a17b5c905c5d91a27d3",
+      "gitBlobSha": "68c5ef45b79d759159c8d452a58e0d8556e1b14a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_L.jpg",
+      "crc32": "673dae43",
+      "size": 61516,
+      "sha256": "0383290632eaffbac397a48988ef36c8e3b80173784400d67c6d6105f7ee06ba",
+      "gitBlobSha": "c9564fed3f8a84c36467e7d0090a241d207fe474"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_R.jpg",
+      "crc32": "8ed1d9fd",
+      "size": 61194,
+      "sha256": "0386813bb4097f64b1f16cb32d548d584c13163cd3b6fb366e8ea315f812ebde",
+      "gitBlobSha": "0a6c499ad6b5043f3072a25fcefe0187e4e1f832"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_CLASSIC.jpg",
+      "crc32": "d17370f5",
+      "size": 89508,
+      "sha256": "5d85f93a80e3e3c18f2f34da84a964ea44f52c2897055bcf554e2455b2d9ff87",
+      "gitBlobSha": "b92684c0e1f0cf1f87cf5fdcdde5c587c3fe94e8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_L.jpg",
+      "crc32": "16b1dfc2",
+      "size": 93140,
+      "sha256": "778b02395d148e008c189b18bc0dabe5ac30f203fff9b57340e9ad690c64e111",
+      "gitBlobSha": "ca7155112230c81399b0bc570062e1ce737f313f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_R.jpg",
+      "crc32": "45e6b6ed",
+      "size": 90524,
+      "sha256": "6fd537a7d12786b9df17a50acbcf714cf2fbdb88fad9a64fb7fdb8c36d4557eb",
+      "gitBlobSha": "7f1fc99a83c742b2bef699580a7e482310c4dd63"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_CLASSIC.jpg",
+      "crc32": "36753a83",
+      "size": 87853,
+      "sha256": "62717e1c04f0b100cc86bb6060a543036a9a0d517823fb675b450a1c7929fa0c",
+      "gitBlobSha": "30a773be753a74828f6a91828c9ebbd4d0df90ad"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_L.jpg",
+      "crc32": "0c8ca630",
+      "size": 92132,
+      "sha256": "adac9738fd3d4ac14e44e286036134293857cac3588298a26bac99d6f79873f2",
+      "gitBlobSha": "77de7962c46d533107af3f0d9da16a90ff26f920"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_R.jpg",
+      "crc32": "7c9af1de",
+      "size": 89593,
+      "sha256": "4ba6c714906286e6db69e7d435a6498edc35826cdf6af94cea583f526e5281b9",
+      "gitBlobSha": "7fefee8cea799c1883de5ae1f4b409e8aae98b36"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_CLASSIC.jpg",
+      "crc32": "74e0c05e",
+      "size": 81897,
+      "sha256": "4f56f306964d092598daae8cb4998d7658a664ee20c71f9886d98ea3e92df5c1",
+      "gitBlobSha": "71a70e72160135aa927a8fb6515492216c7fd2b0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_L.jpg",
+      "crc32": "805e0523",
+      "size": 84318,
+      "sha256": "fa66e21830f140d6f05d47209682ddfbfc3d9abd8f37c326e870760384434d02",
+      "gitBlobSha": "e20c3f77cf3a89e9db3e384a7fdc3b2daf7c4155"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_R.jpg",
+      "crc32": "befb3a2f",
+      "size": 83482,
+      "sha256": "05bdfe487dbde7880bdf92cfdacbef6f93ee293cec3803123d3306f11f5993d7",
+      "gitBlobSha": "3e6afa49a41c86d14e31d37ad44452b50e7ff9ed"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_CLASSIC.jpg",
+      "crc32": "9abd1d78",
+      "size": 98118,
+      "sha256": "90912b0612b028d052de50d7b8c5879be2b74651dff2a259127026382158f659",
+      "gitBlobSha": "dae79d2ec75a5e2b928dafdb3f2a87825efed989"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_L.jpg",
+      "crc32": "93b26b6b",
+      "size": 96426,
+      "sha256": "b904d710ae8e27c6d52919bd243c4aad56d7efd9e73e89374ec11119c500ede6",
+      "gitBlobSha": "4a8ab537465770b8d130dc1704f7bbb57959e6a2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_R.jpg",
+      "crc32": "cd4d9b0e",
+      "size": 96507,
+      "sha256": "707693a019e6c694d4a0b6d85fd1ee4c8f547cc13e6c87688569e485bcf966e9",
+      "gitBlobSha": "3023fe98dff546186c2bde4d711843c21a38a884"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_CLASSIC.jpg",
+      "crc32": "256dc101",
+      "size": 90510,
+      "sha256": "0a08a4550d86acce2abcdadb2056e57b11d8328a38ad8898ae0d4cbd12d2104b",
+      "gitBlobSha": "356e3bc32085d1e6fbd29de65fe31bf3834c59af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_L.jpg",
+      "crc32": "800ff92d",
+      "size": 94293,
+      "sha256": "8dda87e78ba31b5a0d1e971e1c12c73a8afddf6fa3413751e59f4e693af1ee3e",
+      "gitBlobSha": "d66eba28c597ee93fd6ed30330f36c1fc4ebfed9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_R.jpg",
+      "crc32": "4f5def4a",
+      "size": 90870,
+      "sha256": "e114dfd2ccb25ba74d65df74cdc2781e24dff7a866852cd2a60d824c92d171f2",
+      "gitBlobSha": "4fec687763d6638c43b6a13d96ed0de0675b7b3b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_CLASSIC.jpg",
+      "crc32": "5b1c8378",
+      "size": 94921,
+      "sha256": "5aff1a951134dff8a9c8d3ae14804b33efe9ad7ddf9ec9b5e2a4bd9897ec5306",
+      "gitBlobSha": "2b118a5b105bb80e52a7b4c0f809cbafced700c7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_L.jpg",
+      "crc32": "57e997f3",
+      "size": 98376,
+      "sha256": "6a2a5ef74a03a3a64601c91200b845d6d9fe4b7090414f28210287220cd85876",
+      "gitBlobSha": "2d4f2a7dbfc14e2cb8189aacc01b2088cbc5fab2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_R.jpg",
+      "crc32": "848f1fb3",
+      "size": 97028,
+      "sha256": "faeec399d149140fbad4d4bc7851117b13263de2fba9c5b5af2b79f4620a6b46",
+      "gitBlobSha": "fc8e4dd5663385130c2f8bc790c006da27448f44"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_CLASSIC.jpg",
+      "crc32": "af2d8c18",
+      "size": 92414,
+      "sha256": "a675c7d45241a8bd55944f89811ead8cd5c06e8f9042431967823e93283d1787",
+      "gitBlobSha": "39035b00ed1f5f3df9a5a9362c1fba7dbc51547e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_L.jpg",
+      "crc32": "0ac39f24",
+      "size": 95016,
+      "sha256": "8caff00b8322a98b64c84029183e8f3bf6bd0562833812caa4cdf3047f7252d0",
+      "gitBlobSha": "2ab093009966d6530fcf23384d89b9d9764ead8a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_R.jpg",
+      "crc32": "7df29b7e",
+      "size": 92862,
+      "sha256": "309935fa6d689dd93be1fefd87931d53bbc544718b7a49322d2cea78ffd467aa",
+      "gitBlobSha": "ec0bb0de49325f79cf07c41325ae79f3f389c7a0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_CLASSIC.jpg",
+      "crc32": "e6d7c2ff",
+      "size": 89684,
+      "sha256": "c56a18b6ef1279939e7f229b778a148a49419245333b78b89dd720bea0ef54d1",
+      "gitBlobSha": "b0e38d1f1b4ac994635b95dbc2512dfa98b9cdf7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_L.jpg",
+      "crc32": "cff0c3fd",
+      "size": 92037,
+      "sha256": "5e565b6f2c7787d67f3102c88d507b8c0a4649f85135e28789512c4ae5e7f078",
+      "gitBlobSha": "91d61b29e44623e59dc99acfbec3d9d463b299ea"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_R.jpg",
+      "crc32": "0e74850f",
+      "size": 89183,
+      "sha256": "278579e4a81b6d277bde7b44cff4920af39bbccd5d849f5717db4bea771eadde",
+      "gitBlobSha": "8072f7ca4c588e23f42de8da323de835ce8ef448"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_CLASSIC.jpg",
+      "crc32": "1030bb53",
+      "size": 89041,
+      "sha256": "a25b4ebee9a13251b014d11b39162ad1c24c7be9dfbd425c21d3014b7da8e4be",
+      "gitBlobSha": "39aee05944ee907d149e8a1cdde8b219080ff9b9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_L.jpg",
+      "crc32": "dea775e9",
+      "size": 92317,
+      "sha256": "4a626207ead1a84906393b022615d11c8f4f2a4a2aed98160bbc2e232b369fd1",
+      "gitBlobSha": "20bd4c339cda2235413754edff44298f52faff7a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_R.jpg",
+      "crc32": "a342b967",
+      "size": 91162,
+      "sha256": "3324083a13d3d2a8b0dc33b5227e6654d121c6a93c22f414bbdd30ffa6d14980",
+      "gitBlobSha": "13e65b66f774f436cc5aa40fa86b72e032339ce2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_CLASSIC.jpg",
+      "crc32": "f78ffeb0",
+      "size": 80692,
+      "sha256": "0feb74ecca304ebc31d464e2e429dc049b3746a02b0c6d00e2e1294b034052b9",
+      "gitBlobSha": "ba7412d61a8257ee2604625cc7162a18f8732a3f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_L.jpg",
+      "crc32": "4d7a4bf0",
+      "size": 86077,
+      "sha256": "e1d18a11b08835ffc464b4baf7eee354c25165d18bea428882050c1813f236e8",
+      "gitBlobSha": "2521c9e6900e106233887a38f4a6d706119f8496"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_R.jpg",
+      "crc32": "667ef301",
+      "size": 83340,
+      "sha256": "dfae7f20bab4c05212fb6d1082949336401eba358f48a7e99b6a65986f75c6f8",
+      "gitBlobSha": "7f368f6f72c10f001a714e7c68bf4da1463c5f68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_CLASSIC.jpg",
+      "crc32": "994695ca",
+      "size": 87920,
+      "sha256": "0ce3535e3f199cc59e348eaa415f75ca48297bb26557c8a3fb8e9046548690c4",
+      "gitBlobSha": "f094446d3e323aec83b37b0ee2f2a9aea9fe7b6a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_L.jpg",
+      "crc32": "64d1bef3",
+      "size": 91369,
+      "sha256": "f7629ffb59d5b46113505b1f6f68fc369b36258767077c9593eeaf9b85d9d972",
+      "gitBlobSha": "14e05d8ca4ce5d81b0b3ddf5753827b6275881b8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_R.jpg",
+      "crc32": "7bc37d1c",
+      "size": 88379,
+      "sha256": "b9c3e93ad6a97d1276eb209b974b96657c9bac4010188a0b0bf3643c4fa30f0d",
+      "gitBlobSha": "630e739cb45e8112a7348bbceec7d7edd6e534d5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_CLASSIC.jpg",
+      "crc32": "bd57a2d8",
+      "size": 90893,
+      "sha256": "d8d69e993a6c16f96a854b00b8820737d67ccad633802ccc86a581c38dc9456f",
+      "gitBlobSha": "8ba9b5004d69c8277007e18586d074b54e048073"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_L.jpg",
+      "crc32": "ad04386b",
+      "size": 89556,
+      "sha256": "195f80a214dcab6c0a4c8a699fe98af512a0b395fc23fe39bae4c96a7e0ea64f",
+      "gitBlobSha": "29e883068d6c8d6847a3f712f60cae5e71ab7179"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_R.jpg",
+      "crc32": "72140679",
+      "size": 89487,
+      "sha256": "80f6549340506852ae07679a094a18e013746c2d029a473032af5db7f5715d33",
+      "gitBlobSha": "01505a4ce5db4ebeb99337499008262cca381e6e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_CLASSIC.jpg",
+      "crc32": "579c3e18",
+      "size": 93060,
+      "sha256": "2d85eb8f1a0aaed75e069b9cdeec759811dcd70b005b98913a52de285ba20868",
+      "gitBlobSha": "e4a441f353dbff0f3109921603d9b58aee73fe37"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_L.jpg",
+      "crc32": "abdf9e86",
+      "size": 94953,
+      "sha256": "6706d33afd5dbe498b5b293193dfd4e5d14ad878169cab8365785dd6b6cfe8b7",
+      "gitBlobSha": "4f14d170d1f14d4eb9d26325740e88334ebed01a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_R.jpg",
+      "crc32": "2366aab3",
+      "size": 94228,
+      "sha256": "e089c809f445080d19424376c7b89a3b32ae9ae53e15cf17de0c571ab44c0fb1",
+      "gitBlobSha": "d2caffecccc4e347fd09ab90be3480d7c4e9aff1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_CLASSIC.jpg",
+      "crc32": "1a166020",
+      "size": 91205,
+      "sha256": "bdba64e8f9a0f030d1fc15ab2c0ef5a086bc60925e64f953c2ced11aa09f2f93",
+      "gitBlobSha": "3ca663f5c9eface4286b27aecd05d7b1fb5fa945"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_L.jpg",
+      "crc32": "069d4f65",
+      "size": 96807,
+      "sha256": "843c5707aeb65c182ba08edc58c311d5a58fd4951edfa2c6c708ebfcc54d3ba2",
+      "gitBlobSha": "469524ee2eacfac1133aaa9934e38ae29df766a2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_R.jpg",
+      "crc32": "0196ead1",
+      "size": 93659,
+      "sha256": "8062082fa974f9dcbb2f748ac2de827df6309c3f31daa459d82ed4167b6e8e4b",
+      "gitBlobSha": "61cfda4db80d119e639024ae5c12534fc1631651"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_CLASSIC.jpg",
+      "crc32": "bfca41ce",
+      "size": 87547,
+      "sha256": "f4a58577bf4b005f3b65b7bc520e7a26466e0df3c280ca611cab4828e71c9f88",
+      "gitBlobSha": "7683d7df5d668a98ac824f0d0fef6f30b854103e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_L.jpg",
+      "crc32": "eb7469aa",
+      "size": 88258,
+      "sha256": "a99fb103275c0d3b7b5e708e55fa2be29a03a0cacc6d9f3e2b35e1eea1109a8d",
+      "gitBlobSha": "1511061598b4cc965eb620142bc5f18aeb65866e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_R.jpg",
+      "crc32": "e4a513b4",
+      "size": 88217,
+      "sha256": "96988f6e104375e55bcc99788e880ad38fdb8dafc299ea98783b2d4d567e9127",
+      "gitBlobSha": "2020bb8043d975a2f7f51a4f5cb0bd87b0af4907"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_CLASSIC.jpg",
+      "crc32": "f337dc4b",
+      "size": 86450,
+      "sha256": "bd1ac39c3509dfffca14eaf4f16fdb797c2db1d46d2873478d48736f2ac27445",
+      "gitBlobSha": "d8ab13d3b66976e309ac2ace6cf279319e501662"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_L.jpg",
+      "crc32": "8b58f6a9",
+      "size": 86698,
+      "sha256": "76b08ca84921c7dfa7f5845540fe6f7975722f333a8af50f04d3fb0129d9355a",
+      "gitBlobSha": "b95fcee53abf6baa6f8aa4c6216d7ad78c8a9f9c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_R.jpg",
+      "crc32": "ca9bcc7d",
+      "size": 80753,
+      "sha256": "542478fc0e5c793f53a6fdbb04d3f2c5b09d2049c8eebfa6b55a06d46a28d31e",
+      "gitBlobSha": "fb3239466be2bd1a3e91e7ddcaf2a86f5e16e988"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_CLASSIC.jpg",
+      "crc32": "e9ab170f",
+      "size": 77947,
+      "sha256": "8006d815dd5430f35bbad6774a8dc68d085509e7a2350dcd62093bb1a122bca0",
+      "gitBlobSha": "85417b6268321e38139ebd8e975f97ceb86417f2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_L.jpg",
+      "crc32": "5bc23cae",
+      "size": 77955,
+      "sha256": "e1951057c2a6ba9164021fe6d6103fbee2788e18e55535a778564606bc16e8b5",
+      "gitBlobSha": "3a804423cbd3b12eca995aa38c5ec4922feed5c8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_R.jpg",
+      "crc32": "a1b6a431",
+      "size": 77970,
+      "sha256": "3debffe898e8f1a6e910578d9c581185ba0978289e06414f5b50546ad19ba8f3",
+      "gitBlobSha": "6a31d2d1934864bc51128cb21d1615c717d26656"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_CLASSIC.jpg",
+      "crc32": "d70202a8",
+      "size": 79805,
+      "sha256": "8f35db40493bb1397861652779f994836806d7abb878b14f35ff02635d187612",
+      "gitBlobSha": "f19f9b62fa3cf17318a6682e4be419c3909ca508"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_L.jpg",
+      "crc32": "41a66305",
+      "size": 83466,
+      "sha256": "33ee8440971e8de58d6cb299c74c26002a11352dbe8024f247269bea0958119c",
+      "gitBlobSha": "14237a68ebc56c2def4452b759f7c601f80afa41"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_R.jpg",
+      "crc32": "effcae7e",
+      "size": 80408,
+      "sha256": "57f6c58d82a4a973cb6335c38be6786adc97a3048c723fb5d39da2412e2359a9",
+      "gitBlobSha": "f6f55610bea21084bdc97b26431ef576e34bf600"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_CLASSIC.jpg",
+      "crc32": "e77823e1",
+      "size": 91356,
+      "sha256": "d64b1831b379eb4e2cd2ec2fb5670a3f6a46b36b9f5ed149687c1ac5c7e976aa",
+      "gitBlobSha": "ecc5385b122ded39e01a57b905a1e72f42cbacb9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_L.jpg",
+      "crc32": "93456a4f",
+      "size": 94799,
+      "sha256": "07051ec31de95324dcb48ef9007964d3f9a84f76edf4917b4dbab0cccebd24d6",
+      "gitBlobSha": "321bc1e4fcba74d666bdf92f416a00244dfb4e66"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_R.jpg",
+      "crc32": "10ad48fa",
+      "size": 93365,
+      "sha256": "b1593177adee70454963563f0e25fd8f3d9fcb82cf132f50538e076ed46d65e6",
+      "gitBlobSha": "a349a58d7b5b74140849bded988ce4635581c121"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_CLASSIC.jpg",
+      "crc32": "e61081f9",
+      "size": 90897,
+      "sha256": "0c158192e1a081503556e4a28e98646f322e848b24bf0a8ce7536fc2a4cfca0d",
+      "gitBlobSha": "1aef292ac9de2b4819b762910ea0bd62d1ebc41b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_L.jpg",
+      "crc32": "e3d19452",
+      "size": 91390,
+      "sha256": "c92bdd546e452d600564d414fdd64fbb949bcca68da37389084842bd55dc755d",
+      "gitBlobSha": "a40d60b1b2a71e50b046c8fc5cbd90421b695ad5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_R.jpg",
+      "crc32": "4711cbd4",
+      "size": 91487,
+      "sha256": "7b6b16fc357eadc9d7beca53f78819c183798fe8f9e1a5ab74f76a85f292628f",
+      "gitBlobSha": "61e4c7d51a2bf0053eaa3dc31ae04b581a749de1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_CLASSIC.jpg",
+      "crc32": "9d8a1d02",
+      "size": 94777,
+      "sha256": "4b2f55a0864338fa0cbfa1cdef939b5fde061b398be0c067133184c3cf2cd8ca",
+      "gitBlobSha": "cd3954b00ecc2d0912d29bc9e283e31e89f03aa8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_L.jpg",
+      "crc32": "bd509250",
+      "size": 96697,
+      "sha256": "d7b6d609dc316263626f2d79c290e2093d4efa30f050d3f02824ae29c37ecdfe",
+      "gitBlobSha": "3a61e9c77fb2f52f1a74182e90191bf33981ee31"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_R.jpg",
+      "crc32": "a400777a",
+      "size": 95986,
+      "sha256": "d9cf0e539b7f37575254c9e403154326dc99d44f4b6f542540f8a2af8e05e7ca",
+      "gitBlobSha": "3e94f5a1aa7fe2fe224e09a9942ca55d9e562b39"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_CLASSIC.jpg",
+      "crc32": "b259e869",
+      "size": 93097,
+      "sha256": "38a3d4ba73f04a8e8297085c34b170f187c6915b8f41616e78974cdb9484272f",
+      "gitBlobSha": "85fade69e370752401a4363b8491f30cc083f7c1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_L.jpg",
+      "crc32": "d830b5c0",
+      "size": 92602,
+      "sha256": "bed6beef85e133586b1f006322d8ea0b66921b70d6e6ad78664159cdb7e4d539",
+      "gitBlobSha": "03c675f00c020857cc209aa107f801203e0e5b42"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_R.jpg",
+      "crc32": "df32f0df",
+      "size": 92317,
+      "sha256": "a66f97d1fd0232e0129da49aa88a5dfbca14bb2861e9d184078e82043d9b8c8d",
+      "gitBlobSha": "a0547ead83b4b55d022714bfec9fad2f826edb8a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_CLASSIC.jpg",
+      "crc32": "6342d5b5",
+      "size": 91308,
+      "sha256": "a3a3d32137d07b635715750c2679cdfe3103fccc285f8a905b42a425258a0035",
+      "gitBlobSha": "8bc72a1f909b61ab1b2b0ba8d8cfb0da74dc0bbd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_L.jpg",
+      "crc32": "14889303",
+      "size": 93844,
+      "sha256": "d130d387dc72027538bb9df0cd4d669f3da4957b110298f5609de6315f1bc514",
+      "gitBlobSha": "f5766e6f6fe941f2d10b901689f17aa8103f2142"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_R.jpg",
+      "crc32": "99db330a",
+      "size": 93450,
+      "sha256": "f4b17ca906841d766e20e222e9d239403d0670231a39b02e5614596115c62902",
+      "gitBlobSha": "e108e3dd9bc4e0c3d817f8a31e75a9119565302b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_CLASSIC.jpg",
+      "crc32": "fca79c9d",
+      "size": 86488,
+      "sha256": "964a505f9b72ef58377f551d3b97fa8f041a1cecf00c428265d9b82d7bfaca37",
+      "gitBlobSha": "cf61bb1b5983b4666dbb4ee21da0d521edb66da8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_L.jpg",
+      "crc32": "14879377",
+      "size": 89897,
+      "sha256": "e060cb674cdc6b6fb9d179c1a663b6c75965650aef2f017b6dce0ec1b57d7b2c",
+      "gitBlobSha": "0dd35de647faa180e21d5eff5469e944b9e2e1cd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_R.jpg",
+      "crc32": "533fa9ad",
+      "size": 89092,
+      "sha256": "428e507447613349240916ba8fe4012f1a2a16c651d76f1bbaf79d3c22df97eb",
+      "gitBlobSha": "6cdc3d96c82bff76d5ca768108d68df617ae263f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_CLASSIC.jpg",
+      "crc32": "b5bdd128",
+      "size": 90694,
+      "sha256": "c10d1517b2b05798cb60d0a9e5dfd5277ca27bfb1a607c7a6c58fc63b64dcdeb",
+      "gitBlobSha": "450a1cf407e4c5bee374f96513170cbea5dbf82c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_L.jpg",
+      "crc32": "047de11f",
+      "size": 92197,
+      "sha256": "ba411bec2a8134798f8cbc68fa2eb0a7af404018fb84b14c8381af56b1dff1d8",
+      "gitBlobSha": "045b51ad4cdc1739289162ac52c03edc81c080fc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_R.jpg",
+      "crc32": "b45fb8b6",
+      "size": 91383,
+      "sha256": "5c19b5a1dd0fd8b7a4bfc49041ce4f56b579a8d302efb7bfe2942e19a41ea8c0",
+      "gitBlobSha": "3ad1fec4d908ab9bcde32cc1f42b2bd087e2e260"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_CLASSIC.jpg",
+      "crc32": "1004643c",
+      "size": 96413,
+      "sha256": "499f4f6ebecc6c56b714322591b03938228abc68b2969df1749b2e93c23993dc",
+      "gitBlobSha": "59a2f3712329053fea95af02e8100a813a71d037"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_L.jpg",
+      "crc32": "236bd21f",
+      "size": 94098,
+      "sha256": "d58d5cc278bc2b6755234a7ed827a9e4c83d03f8fec13d970ea384e814ce2914",
+      "gitBlobSha": "e20ed44850f94a1f5c7f3bf6e054dfcdcfc121e0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_R.jpg",
+      "crc32": "34f1ae32",
+      "size": 93641,
+      "sha256": "3af84aa79ae645834bdf03e76795d415d67e99abe3143259c55ad47c7bdd489d",
+      "gitBlobSha": "a5352c65ae43fb266ac6892ab667a27c2f09a9d5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_CLASSIC.jpg",
+      "crc32": "6be00982",
+      "size": 88885,
+      "sha256": "9c6068ac7321473bfd7151233f3ce752ed7ed268fafe3767393c4b20fa8b6abd",
+      "gitBlobSha": "7dccd1c58c58c3cde317e600939d7030f5664b75"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_L.jpg",
+      "crc32": "da712b6b",
+      "size": 88949,
+      "sha256": "035457ce4bdce91362c573b6d1cd6b621578c0a1da3388d9f87f53fa13c559ca",
+      "gitBlobSha": "e75086045f54487aa7277bde5329e069b1145f14"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_R.jpg",
+      "crc32": "518730f1",
+      "size": 84687,
+      "sha256": "513d4537384ae077b843babe46d4922ba128933eab640dbd294694f52253f19b",
+      "gitBlobSha": "890935256394f8f4295ae7d774793dad03509152"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_CLASSIC.jpg",
+      "crc32": "4021f813",
+      "size": 96193,
+      "sha256": "45f32fb48122e06979b59961c645a2a368962200a58b316e033b05c165c8351f",
+      "gitBlobSha": "905982f9bde430256a750e3fe205fa8f1d1e54d7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_L.jpg",
+      "crc32": "56b12b4d",
+      "size": 98800,
+      "sha256": "11be1be764eb4cbc66de30910d0a9d09f8a7cf8b8c6255e491970acd7cbdbb95",
+      "gitBlobSha": "d82e5ac3ec349cc59a08b8fe638e59897c181930"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_R.jpg",
+      "crc32": "bdc1756c",
+      "size": 98863,
+      "sha256": "9b74d5c25970e3a945c6ef635554d8618d0b28b823b7f80c0e6172f3556775a3",
+      "gitBlobSha": "340e3b121424409abb8d5780423a7c1acd9985d5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_CLASSIC.jpg",
+      "crc32": "be89dbf4",
+      "size": 93208,
+      "sha256": "449708934c31d0c7fcf89e8765e6f32225fbdfaf6079945ab86ba9810e73af38",
+      "gitBlobSha": "d3f4adb050fefd5c30143abe51160b99a27f14ff"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_L.jpg",
+      "crc32": "02cb4850",
+      "size": 92184,
+      "sha256": "648d81fdb3123589d58e20f02d727a1d0162673a7450788c7324a7136690b3e6",
+      "gitBlobSha": "97e77216f52a3f7c6f147be0707a3f80bd94155d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_R.jpg",
+      "crc32": "9e48a16d",
+      "size": 91398,
+      "sha256": "c1e1732decd9a134dd01ff6e098b63b324fab131c06472e0bbfc28a6b2e82079",
+      "gitBlobSha": "6d3c2c591349ff674e36668c77a901135a8080e9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_CLASSIC.jpg",
+      "crc32": "295fe2aa",
+      "size": 89504,
+      "sha256": "9ed5599f5f7fd0d5afbcab1008f8b7cc4567125055152a11a37eee081d38b395",
+      "gitBlobSha": "05c4c376af7556da7c89fc2ed681f3091e2665b8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_L.jpg",
+      "crc32": "32d08325",
+      "size": 93220,
+      "sha256": "9ce7a1e3b4bf1b85d4b772cd589d59056281becd2fa729e244de4660d423f5b6",
+      "gitBlobSha": "8f4ad547ae6cbe99d07ff0d0f10d89ffbd10970e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_R.jpg",
+      "crc32": "cdde89df",
+      "size": 92702,
+      "sha256": "c49b4c20b9ff9d29ccccebf9c7371a4c8aac8635b1cb36a4364a2a9de9ffb094",
+      "gitBlobSha": "981cdcc8f9a6f5c4a6eaa613b4a3764fd0431b73"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_CLASSIC.jpg",
+      "crc32": "e2f70bc4",
+      "size": 88902,
+      "sha256": "74b2364bbc0816c6ce336703545f263213e83781c959a3a29fd59e64ea4f1d29",
+      "gitBlobSha": "0915e5dac2c78f49297b462f0b87ad6503a3514b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_L.jpg",
+      "crc32": "6d94aa1c",
+      "size": 91743,
+      "sha256": "18ae2aec383f56b6dcd9ab3c3b094bcd50a98727c70e9d420892ae0a53fce659",
+      "gitBlobSha": "b41deb13ded8c3b2541574f4c76746a0747ff4f7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_R.jpg",
+      "crc32": "aaf17508",
+      "size": 93140,
+      "sha256": "2395d6168a982c2a189c694c3bc5fc7cc0bd07be71885a2eb12ed0235c8c9845",
+      "gitBlobSha": "d77630ace527c9de064ed0932849eb0aa15d1d20"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_CLASSIC.jpg",
+      "crc32": "781ab8f1",
+      "size": 88626,
+      "sha256": "46f2c3288e9f3ced841d394490c35e054099428e8edee5539bd19bfeaac75f9a",
+      "gitBlobSha": "474a0751dd3dc90ec660b0185ade88b70516f600"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_L.jpg",
+      "crc32": "f01bf5df",
+      "size": 90977,
+      "sha256": "175bb9aa3f36d1890f98a620114d937ae45d2d6a82a2c14b9f05d2ac514df28f",
+      "gitBlobSha": "293d9ebf13ae7a8b72797407e3e08139355aec4a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_R.jpg",
+      "crc32": "3923752a",
+      "size": 90237,
+      "sha256": "e3a0da10c75a73931cc0a51460be8125f7b71c201fc98e7491930bb870e048bc",
+      "gitBlobSha": "aab8dd0688e23229845ec09535741debda8631fe"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_CLASSIC.jpg",
+      "crc32": "6acc3917",
+      "size": 88335,
+      "sha256": "1fedf83eede23b981aebd260374d3c3eacf1c1afc0f81749a938fd53d6cf27bc",
+      "gitBlobSha": "6ac7827d93684ce0724ec2ce94b03e6f47d929b4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_L.jpg",
+      "crc32": "21c5c723",
+      "size": 89886,
+      "sha256": "64c1e929d7351d31b840060d5ea4574919694a9961368bd689887e76a82cb290",
+      "gitBlobSha": "8c4163782af49908bee95f212552529677a836e8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_R.jpg",
+      "crc32": "150f4519",
+      "size": 87623,
+      "sha256": "7b0160a0146c9e468648656f20962c68f74a0bac175c56be46febb29c3ad9f75",
+      "gitBlobSha": "87c3b239113204c6301d56e27ccbe697661d111b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_CLASSIC.jpg",
+      "crc32": "5f45db95",
+      "size": 92005,
+      "sha256": "ea1293514c54ea59de72220113ab1d2e4340870105ff2cee6526339c24e8dd61",
+      "gitBlobSha": "01049ef4e9351e99bf8cb4dc5f41d1818ab05612"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_L.jpg",
+      "crc32": "32e94e14",
+      "size": 95161,
+      "sha256": "15ebc142068f04d90f353d72e51aec0d58df3f2ef1637522959eaf60ca2f0457",
+      "gitBlobSha": "9829095874529ccef702c907ac45e33413a70fba"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_R.jpg",
+      "crc32": "4dfae61c",
+      "size": 95146,
+      "sha256": "52d5e8f17733a67eacd2e745f4cca43232b44f1022107f6303c97dba9f00eebe",
+      "gitBlobSha": "2c84b5fe6c2503560f33953b67e5539f04acea42"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_CLASSIC.jpg",
+      "crc32": "9c1f89c0",
+      "size": 94548,
+      "sha256": "68667abe527960b2dcfd47809f9f1350eb545451c80c8342b3fb4db7fd5520a9",
+      "gitBlobSha": "9e55e10c343c03832ecb847945df20b06576c624"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_L.jpg",
+      "crc32": "82511c01",
+      "size": 98168,
+      "sha256": "d687ddfe17a011ac5957c047f871c6cf4a9f7b86b195b7c886962c0d3026f2cf",
+      "gitBlobSha": "ded0d0c0597d62c5bdacf85768c856dfb731c98c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_R.jpg",
+      "crc32": "df17c55d",
+      "size": 97518,
+      "sha256": "bbf2b6f4521c4f54ff1f66ffd7178a08bf020e52880b56976c16bc305a1ef6cd",
+      "gitBlobSha": "a17c577e5dbfc480aa6e86824f08a0c73dc3ae34"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_CLASSIC.jpg",
+      "crc32": "5fbeb81f",
+      "size": 91917,
+      "sha256": "10db4465849132c6084a0a2d1e91e42b0639d9f1bc4752e9c242ee8477f15cde",
+      "gitBlobSha": "9a864fd61f9be19383305b6268cc08babe456f37"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_L.jpg",
+      "crc32": "b508da7f",
+      "size": 95041,
+      "sha256": "c1d009e2f33f2ec1b3070b6bce7632975fc7fb926a45b4609fc64c530e5ea10c",
+      "gitBlobSha": "a9670a61bef33a21cbdb2797bcd5cecc7c93883a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_R.jpg",
+      "crc32": "15825806",
+      "size": 94884,
+      "sha256": "001e7b337cece8e463a3b784464f20c0af72cf74897a7a1d558d340705d3e314",
+      "gitBlobSha": "ef1376f51f9ad4ca8a4c266fbed0fa2d3b8edde8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_CLASSIC.jpg",
+      "crc32": "034b4f15",
+      "size": 94228,
+      "sha256": "4bed0d833b7ea7610ae9f46b39d3d670ca6f6cb87cf2e8a28417b3dc4b0195d8",
+      "gitBlobSha": "286b4b009f0a92c688315f2d65c08807443a4816"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_L.jpg",
+      "crc32": "61b97e18",
+      "size": 97525,
+      "sha256": "cf2b420db5bff5dd963d1d63dc6ce8e87168a1e97b44b18f0b637f8df70f0180",
+      "gitBlobSha": "ecc6ee183eceb74911f04a0c47ebef17205d005f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_R.jpg",
+      "crc32": "a0950bc8",
+      "size": 97025,
+      "sha256": "6fe1a1dfadbbf533a1a7066d905182887e5404e9f694798768096f0082a936dc",
+      "gitBlobSha": "b6e56b093324bcb5bc7b94cc9851d5e7e94717de"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_CLASSIC.jpg",
+      "crc32": "859121f3",
+      "size": 93393,
+      "sha256": "70df7e47f3c76ae169d0dd3a41aea876c5f893bb55e9d9768fcf25c5bf68f57f",
+      "gitBlobSha": "18ad6c902e567dadecf78a76725449fbe817f283"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_L.jpg",
+      "crc32": "bd7678d1",
+      "size": 92481,
+      "sha256": "d0bf660047706ea10b7ad45f9de26fa9888e4a548eb1f253eb8b80c54ae97951",
+      "gitBlobSha": "fa66cb066cfb89de5edafd6a4a360aab2f1fd111"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_R.jpg",
+      "crc32": "7ca39c21",
+      "size": 92025,
+      "sha256": "9a19acd0f99738bfaaabf194dbd226fa333f11c876e19b32e5f1baf5443b350d",
+      "gitBlobSha": "07930cc021d715dc6aa01f266ae9502c5fa748c3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_CLASSIC.jpg",
+      "crc32": "36e049d1",
+      "size": 88427,
+      "sha256": "dc101a48bd41b5c93f6150a5778fd44f6a857a4edad9831afd61be7f2bf7e606",
+      "gitBlobSha": "33e66638043e8071ee69444b5e472011d155bed5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_L.jpg",
+      "crc32": "7b3ca906",
+      "size": 88106,
+      "sha256": "5c5b13276e73de0759c1101eac80dc5db6f726e643deb8e52df59b7ab2db61a4",
+      "gitBlobSha": "243c7c44f526bb5b3d18c2437434e1dfb78501bf"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_R.jpg",
+      "crc32": "33c3331f",
+      "size": 86906,
+      "sha256": "b28d79291a11ab448c33ed358cec9483eba12a598b6fd2c0a750464ebfc95163",
+      "gitBlobSha": "ba21ff4832817de65cb2b4fbeaae52a0097e968f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_CLASSIC.jpg",
+      "crc32": "829a48fb",
+      "size": 94268,
+      "sha256": "2bac0d6a92e3d42764de8cf8492684cb30c272a24966d002b458f3799b7c423f",
+      "gitBlobSha": "74011e31a343636ed9ca3ebe5d135d6ffd0abe2c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_L.jpg",
+      "crc32": "f2ee3ae2",
+      "size": 93901,
+      "sha256": "1ec5741204683f1f00e8401d97bf42580a83e7d2d576f4791b96cda4dad6c4a9",
+      "gitBlobSha": "6c18df8d41386b56bbbedd897554565e3933ce25"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_R.jpg",
+      "crc32": "c5067a4a",
+      "size": 93075,
+      "sha256": "0df960478075b7688580ff65af371529157bbecd5c20116c2ffaa740563c047a",
+      "gitBlobSha": "d7519bb23c74c75d92211b23348737df976899cc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_CLASSIC.jpg",
+      "crc32": "c2d108ac",
+      "size": 94285,
+      "sha256": "7e039a92cc782ef095d990ab106193a425f0a309e0f1464330a8b1de7d1c2c84",
+      "gitBlobSha": "d4bcc5e0c3599410afa124c09155f7c4964eadcc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_L.jpg",
+      "crc32": "7c833cd9",
+      "size": 93378,
+      "sha256": "eed387d431d6fc2f6bfc22eed61a3a4f4a8c91bf42d43ac7ec0b86053629e566",
+      "gitBlobSha": "8caa47b62fa387f3e3e776749ac51aa29796470f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_R.jpg",
+      "crc32": "7c28ab5a",
+      "size": 92792,
+      "sha256": "f0400c52eadecf91baba8eab591c35aa3540c199b70f184a128bda130ffe5c0e",
+      "gitBlobSha": "95bc7a5255b288e7550d2498392af2f1ae63e770"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_CLASSIC.jpg",
+      "crc32": "ae5a3c14",
+      "size": 93698,
+      "sha256": "c8e8e21018c22983130719bb9baca934b70c1d1aca89fea8038a428d36de66e6",
+      "gitBlobSha": "f32d42b34f0cc96a517ea8bea84b0ab111b3bff5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_L.jpg",
+      "crc32": "e18fbb64",
+      "size": 93143,
+      "sha256": "7d538c96eb69f17cc4f0ecd4d382913404e44432be0aaef39d839275773a7799",
+      "gitBlobSha": "7ae2b90338d71a56978b6eb5d76921b237f29c47"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_R.jpg",
+      "crc32": "4ff827b8",
+      "size": 93180,
+      "sha256": "8fb912f757645d60da8d5174290c03665f75887bcdb53278b3e7320a3475e21f",
+      "gitBlobSha": "716b4014da8095d712210620a9c7c0d6a1e896dd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_CLASSIC.jpg",
+      "crc32": "8126790f",
+      "size": 92170,
+      "sha256": "f3e58a5a1a7c4be25fd5878a4b53c41273e9abcfb81fb1be386c30433cea8cf8",
+      "gitBlobSha": "157fb7d67d344e1ad465012b3a54390d90f03b9c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_L.jpg",
+      "crc32": "88adf208",
+      "size": 90867,
+      "sha256": "b8e7ff9c62227469be2be31cf6f99e221733c9e477c80038d4a9e178c9917958",
+      "gitBlobSha": "44caeedc652bc7211ecab307cfbc608777cdc444"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_R.jpg",
+      "crc32": "8279aace",
+      "size": 90936,
+      "sha256": "2d045e86ffab11c6292c553eba161885f43409cf1865406f7ecf12a765f0e286",
+      "gitBlobSha": "e0e489b6195aeb27581f518fc079dfca76d6008f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_CLASSIC.jpg",
+      "crc32": "e3cc8cc6",
+      "size": 91287,
+      "sha256": "c3ac9ce2a8b50fddb22a8b568774f82a659b5f4fe0454dab8a9795ea5d167ebf",
+      "gitBlobSha": "2b6ebed3104c49d0a3ac3b90ccf6a490b68ac480"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_L.jpg",
+      "crc32": "5b3bdf4d",
+      "size": 90960,
+      "sha256": "3f9a3a01b193731b04e95cfeba3751d2d02f001a6ef1b1573c622a14f3258f2a",
+      "gitBlobSha": "2215ea91f19dcfad4475f0a369e723d784c58982"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_R.jpg",
+      "crc32": "a8f85155",
+      "size": 89334,
+      "sha256": "c35ddb36995aaf270c8679b2011693d15aba7af7bb69fb534859ec0b57e38c29",
+      "gitBlobSha": "9f56f2de930f5addb58ded747d5366b996229adb"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_CLASSIC.jpg",
+      "crc32": "d5b53118",
+      "size": 92370,
+      "sha256": "f548b9eb0de92eec0cd6045f1ad8c34205401959dd29b1b6815712f7763547e7",
+      "gitBlobSha": "21a1eb0813489a94d23527b41f0f55478da5316a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_L.jpg",
+      "crc32": "d96bee58",
+      "size": 91118,
+      "sha256": "83530edcfa988b3cfe17b83fbe28fd3ccf651f72a7c0ee6fabd7a5334b7d29a5",
+      "gitBlobSha": "67c5b9014cb958e101224b918b09b8a7ad26fa44"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_R.jpg",
+      "crc32": "add925e8",
+      "size": 90365,
+      "sha256": "463e38d55f8618e7fa6a49a2c40ed5cc47c24230dbc6cf651e45460d7b5c6f68",
+      "gitBlobSha": "08c2d0b7d5efb1ddf3e58bf4d819be667b800455"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_CLASSIC.jpg",
+      "crc32": "e227bb61",
+      "size": 90462,
+      "sha256": "acc3d1e3f32ac2eff153e4982e23a9cf7b6c7dca7b5046c7f56c4cd1283eec28",
+      "gitBlobSha": "e4a5b2a146103d1018ba7cdc0705516b11330204"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_L.jpg",
+      "crc32": "e551077f",
+      "size": 90327,
+      "sha256": "760e2961ac05e235ae8075c7dc649e0881581a622052dc1d0c322c908942683a",
+      "gitBlobSha": "b03a80e63abd5aa8ec9659dd2579d3ac9f02a987"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_R.jpg",
+      "crc32": "6a4f7310",
+      "size": 88246,
+      "sha256": "2fa648cdbc3e880ec2765aff816bf6aab245ecb813ba1bccea4269752443db40",
+      "gitBlobSha": "aa3e4dfa598c948b2e979652e28d6d285e6fccd6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_CLASSIC.jpg",
+      "crc32": "03c05601",
+      "size": 90866,
+      "sha256": "c34afa1dcffb2d14ca864d97abdb5e63766a0d9eb90814d125c8b044e9159af5",
+      "gitBlobSha": "0578a574edf758feb699baa1f689016a727cce73"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_L.jpg",
+      "crc32": "ba41bf43",
+      "size": 90157,
+      "sha256": "23cff0abc4f178bf047dbb17251d9aa24036474c568de1d37fcd2081be3932bf",
+      "gitBlobSha": "981668cf40c49f50d470dcbd5a8bc52686b6222d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_R.jpg",
+      "crc32": "0e3c136c",
+      "size": 89498,
+      "sha256": "742a18f7b8b91cccc793a08c2f9ff0757f0e804596df754f75c919b035c2c846",
+      "gitBlobSha": "39c59c930ccff8b87cc91b680856138df2fc640f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_CLASSIC.jpg",
+      "crc32": "86a9a70a",
+      "size": 91110,
+      "sha256": "d0392bd31533a09a4f0e0b559e654286bf8c2b0f845b33d189a87eb20041a485",
+      "gitBlobSha": "24e0125f537fb078fd5f5babbd2b869bb979c996"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_L.jpg",
+      "crc32": "e809ca94",
+      "size": 90968,
+      "sha256": "c15fa0a4aeb26e5a90d093716618e50c138a5da64adc8865299ecf69f124e611",
+      "gitBlobSha": "8d61ffbd2b8bfea933f1a3fb658a583f59630661"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_R.jpg",
+      "crc32": "9e664738",
+      "size": 90317,
+      "sha256": "8c6b48149b9cbff67e1ae7dac29819a146b8d562218bdd228f419ea1061ae132",
+      "gitBlobSha": "4e4b8c91aeb25b845794044fee846b2640befb88"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_CLASSIC.jpg",
+      "crc32": "66ce555b",
+      "size": 59691,
+      "sha256": "33187c47e2f81b6463449a18c250958484895e1385c0b11139c7d30d59b95ff6",
+      "gitBlobSha": "e8b1034dbcbea7c24e6bbfc29cb9000b61561288"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_L.jpg",
+      "crc32": "3b9f8dc2",
+      "size": 63413,
+      "sha256": "0040f669a1c2c42025d936c16429b637c9e8542f091f9a4d15ad1ef7ab87a0f9",
+      "gitBlobSha": "7ff3e5fff12c95c348357de5209bd109376a7344"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_R.jpg",
+      "crc32": "a30623f3",
+      "size": 63556,
+      "sha256": "5cc876a0445ea914f57c3812c0d1547d958a0ed7ecdcce9b02ae54fa52b82fea",
+      "gitBlobSha": "65ec4ce9d2c0993f0ecf036e7e2b4f59dfa38da9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/audit-document-preview.png",
+      "crc32": "fc1d98e8",
+      "size": 348547,
+      "sha256": "c674b4ce5aebfa4b133ae50f9668961044bc5d9e4902f10e1cbebac0edc90561",
+      "gitBlobSha": "bc3c2a6e40eaf1fa3efe4e4cb496d0025eb53539"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-combined-results.json",
+      "crc32": "18e78424",
+      "size": 412,
+      "sha256": "892526e52df86700c4cd6843dbc2016786ff099f6d9e93c44cbe86a9e409a70d",
+      "gitBlobSha": "4514ad7526a932ffa2a291f199516324e5128a7c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-export.json",
+      "crc32": "f8dacbe3",
+      "size": 3748,
+      "sha256": "9f89f5cf833a05ca224373553d73de3bdaca1055ad3c835f92b8cda2de2a4cde",
+      "gitBlobSha": "8bde76d38aab9696e6dbef3550b26cfcdebfef23"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-results.json",
+      "crc32": "f22e4b1f",
+      "size": 23622,
+      "sha256": "5aa25271547500230c42697425b1253620fd141557d302b6eee4baebe6e82984",
+      "gitBlobSha": "352e2246c2511c0e1b173a1f29c8b994f2192807"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-suites-v08.json",
+      "crc32": "b6d12fe5",
+      "size": 352,
+      "sha256": "31b760ac334f0884c2a8d9762d9a461af4269897a159d54677b03515171ddcd0",
+      "gitBlobSha": "c918164ade5401650dc5ee89754fba8196ebb58a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v04-results.json",
+      "crc32": "c4bb3142",
+      "size": 6688,
+      "sha256": "ab96f51534bc489f1313e273f3bf314fcb4cb52c7622cda28e9da9d5f5f46444",
+      "gitBlobSha": "6c91f15532dab244f4e2e0ee06f38a1fbaec85b3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v05-results.json",
+      "crc32": "c081364b",
+      "size": 8774,
+      "sha256": "d27073e61a8e96d765fd802e77b119c993d98b37466d8c7c480f50fa21744bc8",
+      "gitBlobSha": "9487cfcad1e18e084ba47fa1d1e4718512ab02cd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v06-export.json",
+      "crc32": "f89a2c57",
+      "size": 6130,
+      "sha256": "4f28580732cdccd09f9d578938466f06d73ecbc672fc7fd46b96dcb59596fae8",
+      "gitBlobSha": "1d371e55a2b0b87f220be83b58119e91abf7a848"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v06-results.json",
+      "crc32": "3ce33aff",
+      "size": 11309,
+      "sha256": "cd685f215c19326c0fac31a828605b5e8398faaf01841ab79c37cbf847f4d0f2",
+      "gitBlobSha": "a59cb04e499e207681289a776d3fb79623fbd5ec"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v07-export.json",
+      "crc32": "c62b052f",
+      "size": 3256,
+      "sha256": "1e15cdf2c58458c0f4df35289bc206b3d50a5827b1d4dfdf71e28fef335affa4",
+      "gitBlobSha": "08775e75d0967e6ca230c325dde4755df67ccc0a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v07-results.json",
+      "crc32": "d4f98f15",
+      "size": 10526,
+      "sha256": "48066b6f0d462bae7423fdf2f6ac9cbf8927d319f447ce4d6e11b99bc13dc0af",
+      "gitBlobSha": "b7c478dcf5603f57817b8d17b526b422c638f5e8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser-v08-results.json",
+      "crc32": "8f10de7a",
+      "size": 79398,
+      "sha256": "4034d1b825831b5bb6e8589f07426333a8a60ff18f93f95405ec2caa3181dbfd",
+      "gitBlobSha": "8cbd62b3cc89e74d96655d0b0279ea06d0b5440e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser.py.v08.log",
+      "crc32": "07d227e2",
+      "size": 5738,
+      "sha256": "128355911ba172533641a339f4d421e7b2a23370375a3160ca9049e99dde2de4",
+      "gitBlobSha": "ee623a4bb73de17cd9835e01989858e8bf5e62f9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser_v04.py.v08.log",
+      "crc32": "e68978d8",
+      "size": 1831,
+      "sha256": "0765ca927df7fa4d8c81aaa974d5fae64039a0898b6c2fcd47cdc78232b40c08",
+      "gitBlobSha": "649c9106de4bba115ae8fd6642016c40cfdb917a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser_v05.py.v08.log",
+      "crc32": "c73f8c9e",
+      "size": 2210,
+      "sha256": "ed55236f59597769efdb7be894ad0dec2ead947a93cc476d490ae213e9ed12a0",
+      "gitBlobSha": "a36a54486a1430f317afbcb8c7207f6531b78d20"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser_v06.py.v08.log",
+      "crc32": "e02f17ff",
+      "size": 2670,
+      "sha256": "b0fdfb358f49cabbf63eccdf3fecc6c25f26295b177c5f094df49074ab45af18",
+      "gitBlobSha": "48a76ead4e7b119a7bd6b5e44d80d497cec1dc2b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser_v07.py.v08.log",
+      "crc32": "b7829b48",
+      "size": 3118,
+      "sha256": "47b3fd84ec0f58bcb3b6b55a0f080975457fbfae250781603bcf6669146e6f4d",
+      "gitBlobSha": "ad285f8088d01627efc843a73b48e36be485719a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/browser_v08.py.v08.log",
+      "crc32": "426d2bde",
+      "size": 4006,
+      "sha256": "30a4e22618f3c598554a48043ab2bec1e1136eb6845cea02689d3b64c49c2bb6",
+      "gitBlobSha": "98e87dc0461c93eee57a9dcc5a407dda6eb62177"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-cauchemar-20141007.json",
+      "crc32": "e0ca86f7",
+      "size": 286997,
+      "sha256": "9765de0b0597601802dd91992bd286ed0a863b5b4a6aa9d32c2c1e5539d34069",
+      "gitBlobSha": "59b7085e77448009a6c8abf9751b3674afab0008"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-cauchemar-29102026.json",
+      "crc32": "8e81d44a",
+      "size": 283235,
+      "sha256": "dff75b336db77a0c8aa5c4555fbb280f060faa26556e63909aa379dbb437abb1",
+      "gitBlobSha": "d03d6c5edcbb38ac26834303f64902fdd852e940"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-cauchemar-42.json",
+      "crc32": "5913c577",
+      "size": 285025,
+      "sha256": "ae18daa227952a32aa9809ec9607b4ea27af3e2fbd89315581e04c640837e4c1",
+      "gitBlobSha": "a836209c6eab562b8aaa6de3dbd594aac5beb913"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-recit-20141007.json",
+      "crc32": "e9b09dad",
+      "size": 279076,
+      "sha256": "4b41ceec2ddf988666752dc758de41c891978c9648c7120e071baa1f4bc31746",
+      "gitBlobSha": "175554b38cbc0e88b162a573a636a1b893893b89"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-recit-29102026.json",
+      "crc32": "22d39fab",
+      "size": 284228,
+      "sha256": "6d4397379fb78bfbd8295dffa4db86c4fa06ebf39a5efe576fffc67f36ab7674",
+      "gitBlobSha": "62259bf2ec14837e93d62e233562c326387d76aa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-recit-42.json",
+      "crc32": "76213c6e",
+      "size": 281260,
+      "sha256": "8feab4fe871203e10d81e551477e4e6ebff9745d8e066100a51299dcf2f2aaf9",
+      "gitBlobSha": "cc78ac94efb186c2a35e6b5afd7f0f11ba6ffac7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-routing-classic.json",
+      "crc32": "0f9a58c0",
+      "size": 245451,
+      "sha256": "4f6ab085f96f57ed1c997e69f43e43f2894afed0377b011ea164d276e5adf233",
+      "gitBlobSha": "ff57b8f4332c309e5a2bca96cd508a1a70548bbc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-routing.json",
+      "crc32": "1eb630a4",
+      "size": 245483,
+      "sha256": "9705f42e58e1882ea24dcce7572d809e84ed1901d474942b21517f2bd8c6a921",
+      "gitBlobSha": "154f0fb3b6a6269d5da0417ef88960590126d96b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-survie-20141007.json",
+      "crc32": "563b2a2a",
+      "size": 282348,
+      "sha256": "179f0fea743ad0c448f3733961a80ecf399473ce416559cc036b40910344d077",
+      "gitBlobSha": "c20658e0c747b04e485f6ba57e2fd9592f9a7647"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-survie-29102026.json",
+      "crc32": "afac7f66",
+      "size": 281532,
+      "sha256": "c598051aed966ea346c61d2cca69b874617ae2e31d2493b6d69c0d3efb3b9812",
+      "gitBlobSha": "67bba8d7cf8d4670899b5927ba4cbc7cfd855bac"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/campaign-survie-42.json",
+      "crc32": "ca7b2388",
+      "size": 281657,
+      "sha256": "5fb1bddadcb8464840944f623a0991d39f12edaabcaeb6a0cf2916fc08de721e",
+      "gitBlobSha": "c4bb45da5fc35af895cd92dfd5e37b11a294480d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/01_menu.png",
+      "crc32": "ca89e590",
+      "size": 802619,
+      "sha256": "0914cef5c33c8c5eefb11e3b3b3e1ea5de5304fbcec529292363d99f25d8fee4",
+      "gitBlobSha": "8795fca70756e48ba443c9919ff138640c56ccaa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/02_debut.png",
+      "crc32": "0ba566f6",
+      "size": 647540,
+      "sha256": "f40b71588fc5eb135d8071c4d8d8683916702db8d262a09bf773438c30004d27",
+      "gitBlobSha": "0c07c370f1205063207f6ce742b1c84dba1ed85b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/03_carte.png",
+      "crc32": "524388d5",
+      "size": 221331,
+      "sha256": "2311ef3fcfb7d2b044513cc8e59d4128c82f443680c90fbbadeea3700e37012c",
+      "gitBlobSha": "9947326ea1a05c9dbe406bf4bd2ddf6abb120a88"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/04_equipement.png",
+      "crc32": "4e099dce",
+      "size": 310890,
+      "sha256": "9c10b7f560c4434fbc1351d0f933c8f37b5b3bade8f3b29eac3dde84386a4148",
+      "gitBlobSha": "cb35d14bdc01563cc1df4317db0152601e68185b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/05_codex.png",
+      "crc32": "8e7e1a5f",
+      "size": 330437,
+      "sha256": "a62f95ccd67f90c9be43373046f7268a28741652a00482736711dbe0c0dcc0fb",
+      "gitBlobSha": "6a2e9e03f55456a427c12bc5376fdf4de307b220"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/06_terminal.png",
+      "crc32": "04a45954",
+      "size": 560987,
+      "sha256": "2a2b5a5ad151dc4b4614303af39c1db122fb2f0333f5c695e41f2525c7e75f11",
+      "gitBlobSha": "3adf4424fa1148651481f42b8daf21a0aab63835"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/07_san_cristobal.png",
+      "crc32": "833d05c3",
+      "size": 516862,
+      "sha256": "7e3f094a090a6c46b3f1a1e7d90a2127e0dc16775aa8b5b0905a7b9bd36f2f17",
+      "gitBlobSha": "d0e1b91a877d42a9bbd06d2e2e36b2cf2e21e0b0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/08_gemini.png",
+      "crc32": "0ffabeef",
+      "size": 512953,
+      "sha256": "cdd7e661370f74517235e916aa1c1b714adfbc1deff8cd2da70f1d01e757a951",
+      "gitBlobSha": "25b76229cfc757c8eeea2f77ef1f6d0c05f07e8c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/09_samuels.png",
+      "crc32": "2e655ad4",
+      "size": 537884,
+      "sha256": "b9d619e93c66f4cdcf73e8ce0a9c24dded13456d88f818604ff07c1a2b875173",
+      "gitBlobSha": "8031d6bc3bd59a0781619497e5bea8396d2f6577"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/10_nid.png",
+      "crc32": "66bbfa2b",
+      "size": 579921,
+      "sha256": "55b8dcbbcf437337af423f81d94cf2d8a654d6ba6b9ea301dc4a0a134f5ee444",
+      "gitBlobSha": "5407b91d621703ebb65a7b907bea8fb95fce3c60"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/11_anesidora.png",
+      "crc32": "7796ffe9",
+      "size": 606840,
+      "sha256": "4f91f775b0e09d25c2f242173b8f5f5abf302e8e303c95fe481b7586c7aba077",
+      "gitBlobSha": "05627d3c23866bf8e2d1a8b9037876dba56b500a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/12_eva.png",
+      "crc32": "842acfdc",
+      "size": 518794,
+      "sha256": "aae84863329a34ef93cce959f9956c83dbf703f0de28b25bed0fb53169d29b60",
+      "gitBlobSha": "2357825ffc852440433f1d70abff64ec5870bef5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/13_traque.png",
+      "crc32": "58444ac3",
+      "size": 540237,
+      "sha256": "55f27376d55dba3f11f5f3a1b695f95b02baf6ea727ac4748ab6d47f2f75df6b",
+      "gitBlobSha": "5c938dba666c67fddeecad70cfd36f9d59a6ebde"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/14_flamme.png",
+      "crc32": "9e369716",
+      "size": 543761,
+      "sha256": "f8abdba10d0cb8598b3e4cf9132d3cac59f57299f62818c8bf05afe5309e97f3",
+      "gitBlobSha": "0bd4b6b36c6404619bf2829367d691d6125ad868"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/15_epilogue.png",
+      "crc32": "f50688a0",
+      "size": 222330,
+      "sha256": "6a7e9eba743c9563e7211a6128a402770182fa82aae942e8a3191c73557260a1",
+      "gitBlobSha": "8bb72ad2efe4dddf456ad5ac94e257b2c58f9724"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/16_garde.png",
+      "crc32": "2b24ea8c",
+      "size": 525880,
+      "sha256": "1e558779606ab94953f984331d7a6b657d0102a54e102cf1ea2c49341d1b926b",
+      "gitBlobSha": "d705393a044a7b4d540a0f1a9900afe358abcde9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/17_sterilisation.png",
+      "crc32": "5d44e28c",
+      "size": 516111,
+      "sha256": "7368801e7d9ab51f87d7bc25d8fc15ec7a7ea1398123a944ea12b505ddfce187",
+      "gitBlobSha": "e93cc05f5b9759cc9e05e7bc7ab3a070a5c63141"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/18_relais.png",
+      "crc32": "ea08c9a1",
+      "size": 508258,
+      "sha256": "02db32ca2f3e3d70fe8bc097739d28bb23c28ff6e2e8ee8114d56b7533d76f4d",
+      "gitBlobSha": "7051dd078c6d238acd61e92bc68a1ce1d854ee0c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/19_passerelle.png",
+      "crc32": "0956e64a",
+      "size": 505226,
+      "sha256": "59c49d449b8db3e036d1b07db32f502774b2b23ba3999a4e2ea77a8b61b184b3",
+      "gitBlobSha": "20975395854961773ed023bd3ffd856c20215ee6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/20_diagnostic.png",
+      "crc32": "b0f9269e",
+      "size": 527948,
+      "sha256": "365bf5dad09492561bb143db0efa857658f3c06cf42a3faab3bc7cc7679acc82",
+      "gitBlobSha": "c43f9402936341b242480e47273d90fdf341e375"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/21_observation.png",
+      "crc32": "8ea59262",
+      "size": 518787,
+      "sha256": "f79f19a10169ef5cc1188db11cafe3782b4219c88ac146fc48348f9c8bf23e50",
+      "gitBlobSha": "3bc16478cf1cc105307b134554c07d08090494ec"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/22_etages.png",
+      "crc32": "82df98b0",
+      "size": 228962,
+      "sha256": "f4fed0aca651c4bff0442893fde9bdfa7e2a3fe785bc22343dca6d7b8f4a01d4",
+      "gitBlobSha": "a1b05972c8be572ec08b81ebb167c8de207a82ba"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/23_obscurite.png",
+      "crc32": "0186da9d",
+      "size": 366342,
+      "sha256": "297b04c876929a77f5faab1683519e954cf111e7bfd994948ce34cf107dd4e2b",
+      "gitBlobSha": "25c484c2ccd61b64f03e741ca691d7c1fe61ae82"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/24_derivation.png",
+      "crc32": "c355f358",
+      "size": 528768,
+      "sha256": "6a656f5dede5bddfdafbc2cfe0061b1bea1ced881c63a8e840b4359e59015f9e",
+      "gitBlobSha": "ec9096f477e4fa5bdabe9d1cddd1dffb6d8ab830"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/25_verrou.png",
+      "crc32": "d900d49b",
+      "size": 532731,
+      "sha256": "2507500231b16ee5d2e8b3147a4c443da7bba7c58a705b53fb2bcb70ee1366b3",
+      "gitBlobSha": "f69cde250e3940274a7e8f2eb707e80b6d5498b0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/26_galerie.png",
+      "crc32": "e724b97e",
+      "size": 502948,
+      "sha256": "8d7ee3dfc6861f99669bd73b27524fdcff0eb76f730dacdd7b066c0c789cae96",
+      "gitBlobSha": "26d2b381972840f6f55aed2f2b3f32a046cc0d35"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/27_plenum.png",
+      "crc32": "10b3a336",
+      "size": 504681,
+      "sha256": "ba158f1b259da38cf58570256fa61a91425da3a4886554cee6f8e31ca8d57de4",
+      "gitBlobSha": "1384fd30c8b8695a59348e6ed06705a0bbd097da"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/28_refroidissement.png",
+      "crc32": "41a23c18",
+      "size": 546109,
+      "sha256": "369027cf0ed6b0a4a6253b6009f38481f0ec762c0359c6cd388b1021ac19488c",
+      "gitBlobSha": "318e3a9023c3a996739fc96fe8f574926370d0ff"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/29_service.png",
+      "crc32": "e5898c74",
+      "size": 524808,
+      "sha256": "25cda26e972b71abdc3404ab81f7900f0226d87d8c903be3a0851a1aea6571be",
+      "gitBlobSha": "df7d6b35d022b30554bd28362e0569b279e9fab7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/30_coque.png",
+      "crc32": "41554e3f",
+      "size": 547435,
+      "sha256": "283eca1efd7ac7b6370976c04143e1c6397f611582ebe927e6262e8182d3e0a3",
+      "gitBlobSha": "84a394cad09640e2e8abe0b9824bc8f39fbaf869"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/31_confinement.png",
+      "crc32": "c630f9aa",
+      "size": 508229,
+      "sha256": "3414df7b5602dae0c197f9efbca36f76341d102bf3c13dfda0097311f2bbdf0d",
+      "gitBlobSha": "3a26f9b44c2d15bb73b4ec1af579c81a2e773337"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/32_confirme.png",
+      "crc32": "f9d4ecf3",
+      "size": 509035,
+      "sha256": "9bd4f3c203e2a2f69d6ef01c32a2ba1321b7e00d731a0eea667b5b269ee4a8ef",
+      "gitBlobSha": "3c5ffebff33d04dd5bb0bd8fdbf3323aa3f0bc22"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/33_vapeur.png",
+      "crc32": "82a26f31",
+      "size": 544800,
+      "sha256": "e533e73490625728f8b4ce09fbe040650e94f954bfea7d23f53753eac8ac09b9",
+      "gitBlobSha": "ba8116bf1ac01a8b9c1436184185e3a198571753"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/34_visee.png",
+      "crc32": "443f97cc",
+      "size": 511099,
+      "sha256": "eb42a5d74c0ea4ddc8984036825450fa1f3c91b04e3297179ca8112f6e05d88a",
+      "gitBlobSha": "1e89c1b19272f41e1bc6bcdf255245cc0558e47a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/35_reglages.png",
+      "crc32": "0118428f",
+      "size": 294768,
+      "sha256": "90b878a33241153993c0247a271cdf7708a143d3fc82230a9f931d85ece6d6ba",
+      "gitBlobSha": "b3eae4aff61e27cbb7b5c316df8fe715ac6b42fa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/36_protocoles.png",
+      "crc32": "81a91930",
+      "size": 335821,
+      "sha256": "3c9599d7038045a870da07380078efa76ebbe17881cc77b8b971a12c1da7f848",
+      "gitBlobSha": "82dbc3fd0b74a89816dd160e0318fa4cc395ef7f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/37_reprises.png",
+      "crc32": "96e2974e",
+      "size": 297078,
+      "sha256": "731f186b1a383f695ddec8f7ec5c35a65917d73df1d28efbcd3d714654f5107d",
+      "gitBlobSha": "c34b0ef9becd0a1e2c62fdebec4a2dba49c5d073"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/38_fenetre.png",
+      "crc32": "d5a5013a",
+      "size": 512499,
+      "sha256": "942e74c4fbcaceb647bcc998e5bc6507e3e189368bdd0fc72c88b669be743b01",
+      "gitBlobSha": "4fca95ad615c3d8fd1b2b5c5cfd4225ba2d688ce"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/39_O13.png",
+      "crc32": "31d1aa3a",
+      "size": 532618,
+      "sha256": "ca5be9b9eb37d76904b77ee3ea4d4bf9a3cd10c8e7b4b717ba5faa1eac771932",
+      "gitBlobSha": "b7a483c92b3bc7f4195e3511d0add802e29f08f5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/40_O14.png",
+      "crc32": "622d183e",
+      "size": 540620,
+      "sha256": "7d4184d14fed4489c692fbb313953fa2cdbf6413f61b44885d96652ce5e6c60b",
+      "gitBlobSha": "e1e25647e288c1ddd91bc8c3f86599346586b282"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/41_O15.png",
+      "crc32": "976f3a44",
+      "size": 542836,
+      "sha256": "0968c61f16587a4d3712d8ca48af96433cfd07d8069f9b1cb1e5c557d87fbec0",
+      "gitBlobSha": "34326d79af5dd99760d5f20184f48c1db2fd94bc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/42_O16.png",
+      "crc32": "522dfcbf",
+      "size": 551020,
+      "sha256": "fff8d13cea6f4e99c71519020169d691cceb4a3ac4fd0841e1d8a0e1cf9fab42",
+      "gitBlobSha": "a006095c471813026a0d9408e3267a7350185a8c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/43_oxygen_low.png",
+      "crc32": "afaea792",
+      "size": 560032,
+      "sha256": "f45eae7aea3921c42caf2c1bf1653827c897529c9f673c889b40dc66421f2c2f",
+      "gitBlobSha": "97b2895e59734ff1de6ddce00778554c3ea4f3e5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/44_bottle_empty.png",
+      "crc32": "0828f422",
+      "size": 557246,
+      "sha256": "f27b3759012ef1164b17204186fe43c89a525046de7e25daab891d17f7c9c6fd",
+      "gitBlobSha": "fc67e2599f61fbc36d4ba36d9649fa8fc81250e4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/45_airlock_cycle.png",
+      "crc32": "105f08bf",
+      "size": 544697,
+      "sha256": "c070579192bcda7b7ed5f25b75c5878555313764fb5a325f68aa85915b143ac3",
+      "gitBlobSha": "be043f1e1ac7e793438c2c97664539fe0d7700d4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/46_storage_status.png",
+      "crc32": "11375ab7",
+      "size": 298105,
+      "sha256": "71e56ca481080fe24b7938c22bdcb43531b6717508e59340ff8e685647bf5dde",
+      "gitBlobSha": "1305851e6e66ce7e5d6fee77d72628a87a057cc3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/47_projectile_flight.png",
+      "crc32": "2fb347ce",
+      "size": 512091,
+      "sha256": "3b79e88d1456e4fec533d527eccbcf8c405885cf3774e8eedd34f0c1de9aaf02",
+      "gitBlobSha": "19e2cfa3477fbf9ee2d69c7b91ae370367509bc7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/48_O17.png",
+      "crc32": "6c0f92c8",
+      "size": 533957,
+      "sha256": "98c1e71e112b74a6d45a8db515175195a35e0665bb797a20a74cabf6aef23973",
+      "gitBlobSha": "6850fc3c00d44f4b4064762e6a6d47000b290438"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/49_O18.png",
+      "crc32": "1d661d32",
+      "size": 531924,
+      "sha256": "3c3e29472660a50855a54856209f59ac635db86929d50c5720225450ac7554a0",
+      "gitBlobSha": "8a7e32ab87fc3b9654796be5a69abbceef0d2c6d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/50_O19.png",
+      "crc32": "7ffb4814",
+      "size": 522912,
+      "sha256": "5375302e2ef56a895bf04b7f21c0643a7119450c7934b714bb132a5ca2989b97",
+      "gitBlobSha": "9a1084ec7c30450b849277c36cf10cd18afe84da"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/51_O20.png",
+      "crc32": "7fbd4f34",
+      "size": 529792,
+      "sha256": "33dc906090d07471629afe143febe406637a3faf0c2d929987439f3932322c72",
+      "gitBlobSha": "2ba8d6d8e7b4b4a9f27cfa76dcea2f9640cedfad"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/52_nora_refuge.png",
+      "crc32": "481a9ceb",
+      "size": 544685,
+      "sha256": "589ab9d75723c3b5597f37baf2d97c8d52c5bf9906d147759bf3504c1c4b4d4b",
+      "gitBlobSha": "5d8468879936ccc5748521bbe7c5dcb62eb1b0ab"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/53_liaisons.png",
+      "crc32": "e588d90c",
+      "size": 384631,
+      "sha256": "85195a016e6c30153fd88f3330946d76f522620ef4702a5a47119b72d97cb83c",
+      "gitBlobSha": "7678c0455202f6972ea3ed5871e43ff87f3018aa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/54_casier_nora.png",
+      "crc32": "4a4862ef",
+      "size": 545321,
+      "sha256": "a4f8ffc0cbf1b9c23c69076d1d3c80a2733f46a9cd9c3617870f8558072419d7",
+      "gitBlobSha": "3b2bf39213a88e6104db84f77531d9716487fa8f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/55_blessure.png",
+      "crc32": "4f109261",
+      "size": 381727,
+      "sha256": "29e34971107c247275b2a0c718c369b434a648aa3b6940155479e34faac0585c",
+      "gitBlobSha": "e946fd66945544569d6f10e28d034130055dc6fc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/56_stabilisation.png",
+      "crc32": "46bab61e",
+      "size": 551419,
+      "sha256": "0d87656b88b2d215d1c5d181f66b4b595b566398db6e2a25486ae0a6e91eac93",
+      "gitBlobSha": "43b230cc560b5ec4dc5d79f0f6cce9e3ed428ff8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/57_sirene.png",
+      "crc32": "8590c984",
+      "size": 540926,
+      "sha256": "2573a19f7ffdbb9b4f6630a654bf3af4053c3a1e366f3f00e7c675e6c8472cd3",
+      "gitBlobSha": "0162ab111caf0c63a2ef8efe016b0d389d414572"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/58_avertissement.png",
+      "crc32": "f624c6ea",
+      "size": 547032,
+      "sha256": "648346fb6e128debd0895d44622e37a71d792be11fadfda98e3fc4eb84cf9320",
+      "gitBlobSha": "1103695900c1061c32c671d39e529d45ccc81851"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/59_predation.png",
+      "crc32": "5217c35f",
+      "size": 563040,
+      "sha256": "a2d6c5bbcde3063862ff779514223baec57685bcf6075a684503b4d2f7a1a645",
+      "gitBlobSha": "028df7477365a99224c97f873e6db0acb506acb3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/60_projet_medical.png",
+      "crc32": "e3f7e54e",
+      "size": 542569,
+      "sha256": "b17185221c4a94dfc5dc95c00f0f3327781ea0c9659d571180b983f658dc9714",
+      "gitBlobSha": "9a0edd5d38c2fbdc7ea0dc46956245aa8d3bc110"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/61_journal_medical.png",
+      "crc32": "88a5822a",
+      "size": 378325,
+      "sha256": "b39daa4a7831c7a8fbe72b4a8e4a58dbc21308dadbb016a98725c5b468100138",
+      "gitBlobSha": "6a494e42beca17d906f695979ad7fc7932749e97"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/62_projet_technical.png",
+      "crc32": "160a5a22",
+      "size": 539269,
+      "sha256": "b1328a45e7f5ae5db1511f3ade3d884f2faebfba231bdbda64ec90a503c3f4c7",
+      "gitBlobSha": "ae7df1e4cb6ebbe9358bd5d9d95c659da095d951"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/63_journal_technical.png",
+      "crc32": "1f54d1ec",
+      "size": 384643,
+      "sha256": "b90edcf7682233b6c3297fb42957caebcb7eb5424fc3997a776e5d1142f78eab",
+      "gitBlobSha": "cb8f79b5c47edc656bbfe4b5305b74fdbbb66237"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/64_colis_med_protocol.png",
+      "crc32": "c32160fc",
+      "size": 538544,
+      "sha256": "9f2c5a255727db9ca7221e6e22b41e1f0a4dac169eb10bc06321bae03e476e37",
+      "gitBlobSha": "bcc7c55c2619c2e65e2c9f2d78531c393404410f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/65_colis_eva_filter.png",
+      "crc32": "fae9091c",
+      "size": 510190,
+      "sha256": "abcac16ccbae5d000ce1e3425e0c9997bf717b11e93608ac35509698d0412e18",
+      "gitBlobSha": "f3ff29f1a2d7032a55f6dab7578ede38d47f8768"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/66_soins_nora.png",
+      "crc32": "7ed2ba21",
+      "size": 547129,
+      "sha256": "05b40555f2bbd21f6707c8312d220f0cabee966ef8de98e7898c0881a73a490b",
+      "gitBlobSha": "a284602c9557767354e8987a55d0b9036143cee2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/67_installation.png",
+      "crc32": "54fe3243",
+      "size": 552809,
+      "sha256": "3bc88bc8dcec9c933e3afbfd9d88acb43a48fd1ad5330e0ef6702dcbc9837cf9",
+      "gitBlobSha": "6c54343718022a2b83e6865bb23b823d7f11ddb1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/68_nora_prudente.png",
+      "crc32": "14b1c3ca",
+      "size": 543535,
+      "sha256": "01a8e0b9f6668218dfb8eece0be6f8e3def048357200c64d294cd49be5b9e983",
+      "gitBlobSha": "4dd0bc15c7575f39ead180b8aad25da1184bead0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/69_liaisons_prudentes.png",
+      "crc32": "f886e659",
+      "size": 380229,
+      "sha256": "7c6c9d0084f6befd1d44c00f583dc57c9187cecbc5021963476db2d3050ff18c",
+      "gitBlobSha": "5746984e40f27bd53b7f27cccf14c582ff841a16"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/70_journal_800.png",
+      "crc32": "42bc2069",
+      "size": 172449,
+      "sha256": "0468676391088e9dd189c49446254ef906af0352890de7bcf69fbe25a06f5a61",
+      "gitBlobSha": "f85e26eaaa582bbc0140e8ca12c7b11f698de685"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/71_protocole_secours.png",
+      "crc32": "bf39a0f2",
+      "size": 382996,
+      "sha256": "956a53662a7de59152ab596799ec451cace86ddaecf8321faaf46636ed76a442",
+      "gitBlobSha": "34a7f0abd85016fc351cfe3a1647b0e0a6299d79"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/72_epilogue.png",
+      "crc32": "973c41ba",
+      "size": 221886,
+      "sha256": "99dc99f6eb8f0f92a1bcca72f0059cf38549e8ffa934e2225dc7edaba2d7a6d9",
+      "gitBlobSha": "adf0548cca876cf795b56fb87388fbdbfe8f1189"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/73_services_et_colis.png",
+      "crc32": "ebbf99a3",
+      "size": 265310,
+      "sha256": "6866c801d88a3c3e127edc8df0b4d7ec2d2d40823b262e20548dbd75270f72bf",
+      "gitBlobSha": "654102dfa98dbce7fd713314fffbeb9e146046ec"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/74_roue.png",
+      "crc32": "b53cbd8e",
+      "size": 303622,
+      "sha256": "dcb75a185b6ac71d174516881f0fb68e40d16ead662627267203c5348393349a",
+      "gitBlobSha": "4b3de01c907286babd498a0d66def7ddad1a2fac"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/75_equipement.png",
+      "crc32": "1deeb048",
+      "size": 305071,
+      "sha256": "9d66ddc6ae0e55478c5af5d66b79b6c5cb523fe9845a976cf9de01fc064af7c4",
+      "gitBlobSha": "fb4150d3383f974bab0223183ef0e33bde34e79d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/76_detecteur.png",
+      "crc32": "91f43896",
+      "size": 511901,
+      "sha256": "f2b95a5b70920d6608fd86ca6bd97c8ba4609cc8513141273b171074680594d4",
+      "gitBlobSha": "b1ba928ce17d41a8b4a5c43e2a548d6fad322e32"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/77_remplacement.png",
+      "crc32": "6cc59917",
+      "size": 501040,
+      "sha256": "2b6aabe50400f0e726ca55ca47bcf9add41fefedb880a65b0ecb1f5f0f554d6c",
+      "gitBlobSha": "eba9641715d14816884f744d0abc13a1f588f7f9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/78_pile_vide.png",
+      "crc32": "2dacd300",
+      "size": 504356,
+      "sha256": "a629d708842f370f530f17951d0a533afa5704cdcc72026e999f45a41c335578",
+      "gitBlobSha": "9bf3c38a80c939c50e9cbcfa0c2d008ca80ca79b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/79_banc_medical.png",
+      "crc32": "450280d2",
+      "size": 529644,
+      "sha256": "583bfe440a6a532c09615476e030ceb94b4a3e281aaec87d5ec0273ca6eab756",
+      "gitBlobSha": "ea531832ca81c1e7c5862af9a755834212925474"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/80_sons_percus.png",
+      "crc32": "ca83fe48",
+      "size": 501496,
+      "sha256": "517ac4665ea10909471a89ed259a6066b45e39735650f4515a85b1ad0e31c47e",
+      "gitBlobSha": "002b5354778a0585abf0b86aa41de221cc306408"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/81_interferences.png",
+      "crc32": "be4fc010",
+      "size": 561191,
+      "sha256": "a1584a78d3e4b86076cfd442d1dbe6b2eeee14b38dfded3bc1f58b779038ecfa",
+      "gitBlobSha": "7b99f04af7e1f68a746bbcd485852f83ed953de6"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/82_parcours_signal.png",
+      "crc32": "dd5956d0",
+      "size": 489541,
+      "sha256": "39f10b27373db3199e51eab2e4e72639b0b3205ccdae966c32a1ccc055c2ca45",
+      "gitBlobSha": "4344a7522f09070bb71bda60671f202d60a9fe10"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/83_menu_spatial.png",
+      "crc32": "ca89e590",
+      "size": 802619,
+      "sha256": "0914cef5c33c8c5eefb11e3b3b3e1ea5de5304fbcec529292363d99f25d8fee4",
+      "gitBlobSha": "8795fca70756e48ba443c9919ff138640c56ccaa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/84_plan_morgue.png",
+      "crc32": "13f8fbc8",
+      "size": 221798,
+      "sha256": "d0584e03b56ea5c58d4a55903cc614ed6493281dadab966ef5b58a9069165683",
+      "gitBlobSha": "68828a2b8f3bac4ec6e1623ac300594ff43adcd0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/85_O21_local.png",
+      "crc32": "536ada6b",
+      "size": 581957,
+      "sha256": "287498a00f667ddfc2e59f49f178aafb7b5694d36e47b3429a433e4521bc88ad",
+      "gitBlobSha": "49b5d88036e599565b0b83c934a971b45d47421b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/86_O22_local.png",
+      "crc32": "fca93dd0",
+      "size": 527275,
+      "sha256": "af979fc2f95bfa559839c5fdd6769f71ced82f7e316c0168250e20b0d2f07965",
+      "gitBlobSha": "03ca7b275f7343e74321ec0c96b10d2b063a3385"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/87_O23_local.png",
+      "crc32": "4fbb49dd",
+      "size": 597126,
+      "sha256": "f930c48cbfda7d77764f32bb99200c8cea4027d92b7dd7d5e87f7e995fb37828",
+      "gitBlobSha": "8587eddc8557bcb763ec5f5bdf367da4c9ea42c0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/88_O24_local.png",
+      "crc32": "e31ae196",
+      "size": 621823,
+      "sha256": "4d194e363f83c2d3acb03109aa35d04cb14d6a71db9453e3c713e8d0fec28e08",
+      "gitBlobSha": "14ad8b2ff7800551cd5b7e8eec63dc7c217ab670"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/89_O25_local.png",
+      "crc32": "85e3a5cd",
+      "size": 579540,
+      "sha256": "ea9ba030196c4ba8f99dd206dd0d3ffc08f2853bdbbbdde77acc3d47d762a5f2",
+      "gitBlobSha": "fec471e38000300706d22b32b2d67e0c8b611f80"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/90_O26_local.png",
+      "crc32": "ce837f4f",
+      "size": 554445,
+      "sha256": "ea8664bc015bc70d4f9fb8936c17748a36dee7a1d34e2266abbb9dd6de7f9511",
+      "gitBlobSha": "ecb92268204aef4acaa26474a70889ee00a6abef"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/91_O27_local.png",
+      "crc32": "21a1aebc",
+      "size": 550464,
+      "sha256": "ba4594f314ae5f5032ca09963d39b9d01d1adca393d628b4c8192e7543b737a5",
+      "gitBlobSha": "39c7c980cb414f2e8066f81e4af5a8549ac09402"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/92_O28_local.png",
+      "crc32": "6c2b6870",
+      "size": 529848,
+      "sha256": "0f4edaf3a7f2d61046c808ab1c155cb03685bb4e44181de1a94f9035585143da",
+      "gitBlobSha": "f842ca6eff1b86311c762ab3d7656825caa79ca0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/93_O29_local.png",
+      "crc32": "31758a10",
+      "size": 537228,
+      "sha256": "f597bca439181ebab811fcc5656d3d3177400f201f66e784c8b9133a41c9f608",
+      "gitBlobSha": "f4381eca52f01743ed2768d0db07b693a4cc466c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/94_O30_local.png",
+      "crc32": "c0960a35",
+      "size": 531090,
+      "sha256": "454f2595779114e0ae09ed14d354169b386f3a1fd335c09ee840c620feff8a2b",
+      "gitBlobSha": "c3b421e9fb8aaa6680347893e97875ce888a334b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/95_O31_local.png",
+      "crc32": "86531b8b",
+      "size": 585912,
+      "sha256": "76186dce7f816860d378682a8e935c0e5731f776c7704f28c2020fef11cc065a",
+      "gitBlobSha": "f988823424dd65304f4dd3fce354a2da8c9c8db5"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/96_O32_local.png",
+      "crc32": "2e807e3d",
+      "size": 470954,
+      "sha256": "0bfea086e4bb173953ae9b0b90bb61da79f01d1af9f1a3cf53ad339174e9dac6",
+      "gitBlobSha": "ab8c774ec5dd0126b3fba31a25e2b6d51e549003"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/codex-document-preview.png",
+      "crc32": "775cc126",
+      "size": 326415,
+      "sha256": "27f13a6f099784efa4b496ac13663a3193275765b19205c3924f2b5e1845a07f",
+      "gitBlobSha": "f74227b639f0c6fdf305988e4cf4d5a374e046d0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-01.jpg",
+      "crc32": "9e5dd819",
+      "size": 586304,
+      "sha256": "c5ccb0168f467c073f28428e7e38c9966a3dcaa675c8aafba64a72913b729fbf",
+      "gitBlobSha": "32900b0d1bd6caebf9b010e69ba0ebc1bba6f8b1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-02.jpg",
+      "crc32": "ff99eb8f",
+      "size": 574963,
+      "sha256": "467f3f8e437457f899fa4c7484becdca84755c20956de015018dd4886b72e959",
+      "gitBlobSha": "1056b0f94de96ed7260f577196927d3d71ba2338"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-03.jpg",
+      "crc32": "6158cfb8",
+      "size": 585599,
+      "sha256": "fda404c49879a073cb11a61db26914703d56d88159e035251df0bdfb129371aa",
+      "gitBlobSha": "d63a6942224ae666e8dbd708790b262830c0d523"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-04.jpg",
+      "crc32": "760f5679",
+      "size": 533121,
+      "sha256": "1fdab2cf14353a8612bffedd8d579d1fbea337a9300c81170218501950a08dee",
+      "gitBlobSha": "4db70674b51d99952700927bdce191a494da5570"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-05.jpg",
+      "crc32": "3bcf4613",
+      "size": 586721,
+      "sha256": "c5c75c4a726b7419fa7879c04a3b8cb8d889b45e50db95662b96a3df9f52fc2d",
+      "gitBlobSha": "e1566e3fbb265d8544fd45781fd985640adc6fbd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-06.jpg",
+      "crc32": "dc99aebb",
+      "size": 575042,
+      "sha256": "ef034629b57fc5e1295f2575ddb5241f0eec8b153c2d9f4e8d22241e37751c0c",
+      "gitBlobSha": "afbbe76b1e775411aa25c5400c97ee6349671017"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-07.jpg",
+      "crc32": "af40a202",
+      "size": 595630,
+      "sha256": "2f948c495bdc39ce26c1aa9e486240484834b60b9edd6d0fc6081d894b0e8ba2",
+      "gitBlobSha": "34afeecadba3534d7655a25473726db845d3a064"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-08.jpg",
+      "crc32": "5ca3afd4",
+      "size": 600377,
+      "sha256": "df531a494a072114251e9e0d2067112dc899c1df8e2d783f00b9afe61d4f4808",
+      "gitBlobSha": "4cf8c4268ea4096aaaedf4e1fd085cdb50a9db42"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-09.jpg",
+      "crc32": "f5c9976f",
+      "size": 591868,
+      "sha256": "081d9c87f3e91cc549d7f4a79c03f19cc85947c783400c56808902887ab76167",
+      "gitBlobSha": "dcfe0c5b040a52122ef67e48ce400d3ff8832a68"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-10.jpg",
+      "crc32": "f7a6cc22",
+      "size": 273356,
+      "sha256": "e27142ca11e88439a56ba97a5a2bf7ac6796fca0914fe61bff42088c03168c99",
+      "gitBlobSha": "4ffa98a7cfbc27c1e73fdb639c566153fb91e62a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/doc-build-v08.txt",
+      "crc32": "cb3e2f45",
+      "size": 499,
+      "sha256": "b7bc3f53673b7fc25aa7e3d25c1f0dc8bf557fdcc6c38505f9755a3396e66436",
+      "gitBlobSha": "0ad8d4eb769105090e141c41b9bc958ac9b3b16c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/document-checks.json",
+      "crc32": "d23890fc",
+      "size": 3847,
+      "sha256": "37426517fc7a97a0deafd09b80f7b04f2791e087336e8ed4780f2a75fc63832a",
+      "gitBlobSha": "9db6efa0764af59813f048bcb6a968778891947b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/documents-v08.log",
+      "crc32": "2fd94ac3",
+      "size": 4491,
+      "sha256": "5dca9885a1b1595e241d56ba3c65ab5a93676816c47ccea29d57e46aebaf88de",
+      "gitBlobSha": "9cefd8e0030244ddef27f6a45f4f57fda882d673"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/final-browser-inputs.json",
+      "crc32": "2c2f81e3",
+      "size": 1343,
+      "sha256": "29faedec957645a2a74c2b1c6ce6b1778f36cf3294f6e6041e636533ff5bde2f",
+      "gitBlobSha": "b81e4afe0b6ea17e5a47233c240486647256b1f8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/loading-probe.json",
+      "crc32": "31504fc5",
+      "size": 738,
+      "sha256": "298bea6fac1ab5429d0dba42bc98cf4b9f0cf4094ec0fb20925715db6eeafa4f",
+      "gitBlobSha": "b8de8b766d4baba3cc5b6f330b4a82f5138a1db0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/node-tests-v08.txt",
+      "crc32": "660cae3e",
+      "size": 98078,
+      "sha256": "ee7f583822ceef50d1df3f3e73cea54824f81277da5975195b69ba46f4efb228",
+      "gitBlobSha": "1c0b32e095b464aa4793ff0a5461fc965f936e2c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/rebuild-checks-log.txt",
+      "crc32": "a1406a1b",
+      "size": 3079,
+      "sha256": "edf39005a149e62c8b3c1c356bf41f05192d95f2864916fee949bc89487f288a",
+      "gitBlobSha": "4da4bc362e529910faa574645bf9eadbdb0fb88b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/rebuild-checks.json",
+      "crc32": "274bafe8",
+      "size": 16095,
+      "sha256": "c3bbb319549b7b58df2701e064281ffbcd23f06073f35ac1eb18e8cd21665ad4",
+      "gitBlobSha": "87f9f53cf50c1d65b62e834916e7a4bcd0d97ce2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/rebuild-final.log",
+      "crc32": "a9b5c335",
+      "size": 712,
+      "sha256": "45794b86cba786f84c54845bcf9987844d855a8e5f93b1202ffc4e6f9e8a1214",
+      "gitBlobSha": "d61851a6ba90cd19458c0601a2c52b3c94bf1e17"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/report-document-preview.png",
+      "crc32": "9c1e392f",
+      "size": 336535,
+      "sha256": "1452ace124b2dff1b01fd3cdedb28473acedda60e0df4353a3247c8b7451a82f",
+      "gitBlobSha": "db6d856e15d278131785ee5b4eecf9b89e33473a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/room-render-checks.json",
+      "crc32": "a049b9cc",
+      "size": 4983,
+      "sha256": "15b12eeb5ecd93b2f471b5b0583a5fc97c2b333d4defc762bfa43020f415b46a",
+      "gitBlobSha": "525ebdb945f9cb542520911350e51fd96fb5941e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/routing-classic-log-v08.txt",
+      "crc32": "2daf904f",
+      "size": 3812,
+      "sha256": "67244a639d14603c2d70af04f8cd86ea758f4780683602654c069805aa01fd87",
+      "gitBlobSha": "1422172838d8f059ec4ebe836554e65de2818bb4"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/routing-log-v08.txt",
+      "crc32": "6e64a11f",
+      "size": 3813,
+      "sha256": "83be7b77757d022c5a7c77166d78a5351545228320dd3d1d05044a67345a866d",
+      "gitBlobSha": "95fee3222cf38c6a5b8359c8aa60a1318a0c6176"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-audible-20141007.json",
+      "crc32": "45bf5b81",
+      "size": 316717,
+      "sha256": "f6f47f522025d789861162c2d7fe38ee5621f816f7e1d92610350a6535f357d6",
+      "gitBlobSha": "9533ccb088b45f72c780ebe6e4ebdc010ab9eb7c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-audible-29102026.json",
+      "crc32": "86590167",
+      "size": 317771,
+      "sha256": "e334258dc86cbfc0d1d2724d1a9f526b505c8263c8c87b2371e6e12f3e5c50c7",
+      "gitBlobSha": "ec74a054379b9be5d493d02e451d5e67f06baa7b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-audible-42.json",
+      "crc32": "c0c422d2",
+      "size": 316023,
+      "sha256": "0eb7fe1e4fd95f0ee7288903b6889a09158cce0bbb71b7b066ba3ceb487d2d1c",
+      "gitBlobSha": "922a954510a45dee1e470eaf46c27def8ceb978c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-silent-20141007.json",
+      "crc32": "d6781d5c",
+      "size": 289776,
+      "sha256": "2716cd904406246a8ad23d33fe889e8f575351079c9878ad08b99a0d108d1fa1",
+      "gitBlobSha": "ac544a4904565384ea37ba7287d405844a3fdd7b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-silent-29102026.json",
+      "crc32": "aa8aebf6",
+      "size": 291414,
+      "sha256": "46adf007c3939bb4558607847ad8d669d63a793731e1789702282acb207a275d",
+      "gitBlobSha": "0d9a13b30928abe5857a35c0cc8404f43a3e9f20"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-silent-42.json",
+      "crc32": "084a8eb2",
+      "size": 289248,
+      "sha256": "fbe0a10b0b2913d23d611a6051e6cc698805ed18f9898d27959cc1354fe8d273",
+      "gitBlobSha": "308c36c17b80f968d71edeb7e2a2fe065396e7d3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-sweep-v08.txt",
+      "crc32": "c5497aac",
+      "size": 3293,
+      "sha256": "9a1d77b09dc713cb60519602e5bf4f7910bef4fbeed15990d3b1e68b0aeab437",
+      "gitBlobSha": "f6817f766258c075ebf95cd0389338e44e231e61"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/signals-sweep.json",
+      "crc32": "6f50f0d4",
+      "size": 5966,
+      "sha256": "896dd351abd3a78f2332221594d671b020fc9bf43f9a8d375636fdca941b3122",
+      "gitBlobSha": "a01a796a0add9192502d563500ec0b3bbf1e102f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-audit-log.txt",
+      "crc32": "7a2268a8",
+      "size": 308,
+      "sha256": "b9f1170b3f07c914e6837cdeb1a84f654c3e5af1f8343a470b25bb8b7bcbd0d9",
+      "gitBlobSha": "e53e91d99f3605fba696773ef3e3f154b507f9f0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-audit.json",
+      "crc32": "6aed053b",
+      "size": 15978,
+      "sha256": "ba33f461ba212275ea66f118af3375da62f5aed469b79e4acac27431d29aa1c1",
+      "gitBlobSha": "a0d6ba11ba543f91a8e8fc4a829a7be5802ad8c1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-campaign-geometry-20141007.json",
+      "crc32": "cfcf9e39",
+      "size": 621706,
+      "sha256": "f9915a6ff0f67c576c29232d89961affff17705e0bb0b7a163d268161c22e1e1",
+      "gitBlobSha": "ceff4f3bd01c42128fce7dae2e659b7ece28f5ea"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-campaign-geometry-classic-20141007.json",
+      "crc32": "dca709fc",
+      "size": 621623,
+      "sha256": "e0540f06e1dc7e1b4b770206049e7a9e61e85c8e2d7505c7d79b79b2774fa7d2",
+      "gitBlobSha": "75ca7395aa43b678748a118bc8ddd98f9cefce1f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-campaign-live-20141007.json",
+      "crc32": "4e98b1cd",
+      "size": 80398,
+      "sha256": "4495f0332dc50839f1c73378dfa8d5bbe9b0fa8d48c931db2c7160508d4a2437",
+      "gitBlobSha": "1fca7905f94ecc5e61ada2336260059939891a4d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-campaign-live-29102026.json",
+      "crc32": "e7c7bd17",
+      "size": 700854,
+      "sha256": "d352aea8c6a0481f2c25ee5d44153985bf24b86cb495a31214305ffd7ba6958d",
+      "gitBlobSha": "616d9eafcf58e76f40e604c44ff7776e334f88e2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-campaign-live-42.json",
+      "crc32": "3efad5d0",
+      "size": 695535,
+      "sha256": "23a019632458a91947deda9d92e6ac8eb0bbf41a39c1ff3015bb4a74e1d667e6",
+      "gitBlobSha": "8354293e9c9a069b11ca172d6188bad704bad355"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-plans.json",
+      "crc32": "cc781cf5",
+      "size": 323328,
+      "sha256": "176bfcf197ef862ccceab000841158c441bed85d37693f6c0f1e2e2e2e5618d2",
+      "gitBlobSha": "2275d6e634d44a4f9639a0f97b4cff753d18b900"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-sweep-v08.log",
+      "crc32": "39504ed8",
+      "size": 2215,
+      "sha256": "d463d265ca8f13210439d2730b351a4418091b5fbdaf2c27bd875b0004296922",
+      "gitBlobSha": "1aa8f6c247007538682598687e7ee82a66d2a553"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/spatial-sweep.json",
+      "crc32": "7c9523fd",
+      "size": 3655,
+      "sha256": "1bb993cdfffa9ebaa28f5f2f60727a97f31bae43d060a2212abb885f9126df90",
+      "gitBlobSha": "9298ecf32c6081aab2dba0c9227cc0ce7e398711"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/sweep-v08.log",
+      "crc32": "055dc33e",
+      "size": 2013,
+      "sha256": "31e0218a339297f68a45a71e3eae02573b1b56ec464aa58ff7a095a92c7d9233",
+      "gitBlobSha": "35fb01f229438f3151b2ad02af6ee6db8ad95a93"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/sweep.json",
+      "crc32": "bec0fdec",
+      "size": 2771,
+      "sha256": "72963dd8b5ca850a8eb382ebae63b22e71d951e352d9232e5364e921ac1a1a5b",
+      "gitBlobSha": "00f71262a167f87552292a27771b1ea02e6e2e20"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/upgrade-real-v07.json",
+      "crc32": "6a146564",
+      "size": 1076,
+      "sha256": "8debf1b7150f34dbce400f12b6355d824c6c944680cea218532b89138ea1323f",
+      "gitBlobSha": "c6e58c055604d510a8a6021e5990d067bf16bcf3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/upgrade-real-v07.log",
+      "crc32": "6a146564",
+      "size": 1076,
+      "sha256": "8debf1b7150f34dbce400f12b6355d824c6c944680cea218532b89138ea1323f",
+      "gitBlobSha": "c6e58c055604d510a8a6021e5990d067bf16bcf3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/visual-review-v08.json",
+      "crc32": "a44000b0",
+      "size": 866,
+      "sha256": "ac5b54d09b3d7cbfebceef2831dfee8b5fb4ae2d5355c34d4c25a6960f157d4c",
+      "gitBlobSha": "048f0d2c04b8f8481a606258693a94e41e51cee2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/app.js",
+      "crc32": "8c633fa0",
+      "size": 42906,
+      "sha256": "e4f5407b63135b8cdcdcaa0dfc3260bfe96210f7cd367ba9555b12c3f6e87aff",
+      "gitBlobSha": "5de904a820bb734af7db9bd9903e931ec1189189"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/assets.js",
+      "crc32": "93cea7ac",
+      "size": 497173,
+      "sha256": "00725a7a113ab0cca88bd4bc120a4c8dda846bfbc728ead5cea5e9d92f3ae34c",
+      "gitBlobSha": "c49b21070a9310f319ba821c4f4403b947bc53dd"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/audio.js",
+      "crc32": "d436ca29",
+      "size": 3274,
+      "sha256": "d11d137daf2968cc5c7142c3b268b3533acacc6d2541070fae58543e5eb13314",
+      "gitBlobSha": "8230c4c565376f70930514bcbe40280747e797ba"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/content.js",
+      "crc32": "f1942462",
+      "size": 389954,
+      "sha256": "eb7537f5ab192de64e7eadf0b8e8231364e0b522e20c343a4bb826e8d4b8a57a",
+      "gitBlobSha": "10893313019667541a23f1b86aa47d266137f106"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/content.json",
+      "crc32": "8d2d9cdc",
+      "size": 640411,
+      "sha256": "8014f745999f55aff9ae129a6d63f33f15b9f9b1ff7426c0438cb59584ad3d9d",
+      "gitBlobSha": "013d51b3c1b8d1536f8e8afc3e0582610039a9b1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/encounters.js",
+      "crc32": "7071c5da",
+      "size": 18646,
+      "sha256": "4f061194f6cd030d401a2572aaef5ce001441b491d4ece27957b609571f28e84",
+      "gitBlobSha": "9fbf1009e3dccee0f355f06aadd2d127d4633a18"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/engine.js",
+      "crc32": "7753da6d",
+      "size": 43568,
+      "sha256": "018716d28cf165b32567be67def47ad316994db7a00811dea6f4e59766338d46",
+      "gitBlobSha": "865d777ed7fd4f02bb04264f1a68e55bbfd10843"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/index.html",
+      "crc32": "7023b84b",
+      "size": 5522,
+      "sha256": "b972ee7827f5906d61e91c2bb4a266dd4dd82a7aee4f4c53b621cdff1e254530",
+      "gitBlobSha": "df9595bad8fd299d69e73a20deddf28300ae4d81"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/life-support.js",
+      "crc32": "7e859793",
+      "size": 5492,
+      "sha256": "1e21a680978f3bd21c5a36ba2bcb1cfcd339e24751ef6daefe7cb9e9d05d01ef",
+      "gitBlobSha": "d8892db7a576aa1f40e40e6ed9ee8313bdce6228"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/protocols.js",
+      "crc32": "00051ab2",
+      "size": 12743,
+      "sha256": "445bf8d9aaa3f84e12e97356422c57f1331b664941bf274a37aa761e35aac998",
+      "gitBlobSha": "fd1409c4699a3bfca2ff7715eb7118d6e3436ee7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/quick-controls.js",
+      "crc32": "72e9f6d3",
+      "size": 6329,
+      "sha256": "bb6447f2c99c7613d7ad631fc99568fb3ad29eb12d8ef7cc69d309b1bdd68722",
+      "gitBlobSha": "f02f98d8c74bffa3850314a4997ce37083b6807d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/refuges.js",
+      "crc32": "8f2c0d47",
+      "size": 6903,
+      "sha256": "ad2a6ec31e07a31cb3ed3e3cacf378d9fdaa681b65e6a37eb5f2017dff660ad2",
+      "gitBlobSha": "4a7afce572cd2a61297aef0442a02f8d3f33e7d1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/renderer.js",
+      "crc32": "79d1dfeb",
+      "size": 32345,
+      "sha256": "3c8ef3e9331dbac5ab6e1105488cfcde632463a8b51f93f9921cca186d1492a2",
+      "gitBlobSha": "194f4576824fbb8b4881ec6610b2e1902a5c5713"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/signals.js",
+      "crc32": "6fbaa093",
+      "size": 9525,
+      "sha256": "7fa19fb83572211b82dfdd248492c621f570ea941d3682db812d233c94039cfc",
+      "gitBlobSha": "5632fab7ed0111b26549228099ce39df41f1ab4f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/spatial-renderer.js",
+      "crc32": "1397fb8f",
+      "size": 6205,
+      "sha256": "481eb2e24fde214965f8f62875fa937a07059886979d36db59c1a7ba24eb7911",
+      "gitBlobSha": "9aff000518b3bad62b670eadefd78e1d041189fc"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/spatial.js",
+      "crc32": "4029c485",
+      "size": 4811,
+      "sha256": "0626158c6b72f133bff36689b3f9bcabb364780fe98afe313505bf2224b04bfb",
+      "gitBlobSha": "2d268f8626e4307536b9c03836da24a8f8644478"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/style.css",
+      "crc32": "7349c16b",
+      "size": 21190,
+      "sha256": "ff2ae7546ba3e8fc8445bc2c3fd55c40b125d0bf996ddc5383bc37121fa3f274",
+      "gitBlobSha": "15f4956f0c92fa13d6f4c203534eafd4d53c3e5b"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/src/vault.js",
+      "crc32": "527dcdd6",
+      "size": 2391,
+      "sha256": "e6aa48afcb52648713aa92f30562ce3cad66a6536db8dd5fcae5e435dc65330c",
+      "gitBlobSha": "6720e7b3f558a6f7abad2c1c594348c0e7922049"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser.py",
+      "crc32": "b8be2bf2",
+      "size": 28832,
+      "sha256": "c819293213b8f64d53894ca5dfa81ffc2435c9b9818e63a493b486a817601cee",
+      "gitBlobSha": "74e4fe86b099f75b28432dbc7aee0054f3e41894"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser_v04.py",
+      "crc32": "19c74854",
+      "size": 8700,
+      "sha256": "6e5c8c95f2f8f2efe3a8178d69fb9af6b10e7965b9cf7977d4b8d2cc74b832dd",
+      "gitBlobSha": "e581831cee1d760315ffae782d8c250332ba8735"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser_v05.py",
+      "crc32": "b0f9e03b",
+      "size": 12092,
+      "sha256": "7de4c019f87e1788e94f932ed95ee46be8dde6d8ac43ddfa633440cae387ed0b",
+      "gitBlobSha": "02b50143ae78586a922cf94ee2f636b135732704"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser_v06.py",
+      "crc32": "84dd9223",
+      "size": 13292,
+      "sha256": "13d6eb954abcf2136cbd4ee144c390284dc574f73585bfc4bf3df56bd935a4c6",
+      "gitBlobSha": "634820c86d6cf1306c6340a61fcd80bd24db3032"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser_v07.py",
+      "crc32": "e9737633",
+      "size": 17172,
+      "sha256": "fd928adfa6f8540e6ef958b08e245dcd69470c344d886e45741a3f93fa6c8d91",
+      "gitBlobSha": "b176bdf1d907aadd6ba0a0d08061a3e1b4b075d8"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/browser_v08.py",
+      "crc32": "8da170cb",
+      "size": 7953,
+      "sha256": "579a87b7ea2d8f55f1c65e7a0a2e31c0cebb4f5a10cdce0865766cbaf4e1be60",
+      "gitBlobSha": "b8d06d9bb24f73c7330cad0c4abfa53089830513"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/campaign.mjs",
+      "crc32": "adb30d2e",
+      "size": 13874,
+      "sha256": "8746ac33066c452ecfc081e9c9ee5b446a44feadafb9aeaed93cbfcf7d89d9eb",
+      "gitBlobSha": "f31e307547b538937c06c4e726caeedfa51c5a1c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/documents.py",
+      "crc32": "e260bb48",
+      "size": 6343,
+      "sha256": "5762eff9543202265ad247f8c018e1bf15f5a6991a2f58a538e13b2db4be27bc",
+      "gitBlobSha": "d521767062741d36f523074fd75d28f1f63e8804"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/engine.test.mjs",
+      "crc32": "dc3d02bd",
+      "size": 14474,
+      "sha256": "88f8801c990c25b1a36647d4bbb980060dc11181dfcfeae10c58f5e3038a28b9",
+      "gitBlobSha": "a3b9f0b11e71c1d55b4e9be3d914f36910224205"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/exploration-sweep.mjs",
+      "crc32": "7a3e3032",
+      "size": 841,
+      "sha256": "b6fbd3c00a272d2174a1e162b267e7d0aeaa355d6c77ce296ccef45175e2276b",
+      "gitBlobSha": "6afccfefd438093db22ed762ab914d76a7949d95"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v01-save.json",
+      "crc32": "0c99572b",
+      "size": 2685,
+      "sha256": "298966347e584ba8ef07a234feaf12fc3413668bf6ee4a9601676ad3dc7cdd92",
+      "gitBlobSha": "85d133c2836aa886b75c61c6ae845018505743e1"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v02-save.json",
+      "crc32": "b5232656",
+      "size": 2143,
+      "sha256": "093f8e3d9e2f45fa32ea6c4f368b1532e9736e91a984c54c241e2144dd2918cc",
+      "gitBlobSha": "0544a5e13fca58a077a8dbe3b4b123dc188a8477"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v03-save.json",
+      "crc32": "dfcda82f",
+      "size": 2449,
+      "sha256": "8d3952ef5723124c64f7d34205209c32dc92e8e0e7071c68f66f8aee988e8639",
+      "gitBlobSha": "e5c0eabb193d34faa9d4c871a31ebb8aaeadbbf0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v04-save.json",
+      "crc32": "1587566d",
+      "size": 3903,
+      "sha256": "091776f315de965d9dbce81057d3c20fa54ad7501caad8d73950ad413d58e192",
+      "gitBlobSha": "36065df22ce52aa6233e6c2c53424f300571c0db"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v05-save.json",
+      "crc32": "ab4c6248",
+      "size": 4484,
+      "sha256": "5c3d79fa294c4f15e50af87e8ae02728de276fed824966be165e64a17f00db04",
+      "gitBlobSha": "18c1e8ed16b36e305f7560379ce05b6fc1d01529"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v06-save.json",
+      "crc32": "b50aee08",
+      "size": 5883,
+      "sha256": "c6f8969d0d2fd039423f8c80a4a78e5a8d8b2f5da935b249a47c74620cd8e202",
+      "gitBlobSha": "a2b2587b6d00a26250c83b1602d3b079ac0648af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/fixtures/legacy-v07-save.json",
+      "crc32": "aa022aee",
+      "size": 3194,
+      "sha256": "b342b24d856c36679a50c2426dcc039329897d280883cbff73e2166efbeee285",
+      "gitBlobSha": "119cdcb8b619818ccae5025d3e54049de412ed3a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/install.test.mjs",
+      "crc32": "70c825fa",
+      "size": 6172,
+      "sha256": "e83350ce521ebce65ef9bf760a21c605cac81279f525957d3e0401a8d2bd23cd",
+      "gitBlobSha": "a60d75816e250ac4968d397528df4e02f855c29d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/loading_probe.py",
+      "crc32": "aeb2264a",
+      "size": 1191,
+      "sha256": "bda8cc8852c42b3f3f5ed2fd226a239213619c3fd4ddb7ec2912d3d335138248",
+      "gitBlobSha": "f1b8dce3d7f45ef75809fdc4031ee4d7e2531c07"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/project-sweep.mjs",
+      "crc32": "23c78448",
+      "size": 932,
+      "sha256": "86656e28b10037b46c3530a31fc154ccb093bf7d65abc9fb3f6bfa034bd505f8",
+      "gitBlobSha": "d085dc9e85c952d02ae181834e8d503f6ba22f54"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/rescue-sweep.mjs",
+      "crc32": "095290f1",
+      "size": 849,
+      "sha256": "1ca9f364aea5d2a6f6f6aca6707785674ecef4af9a2eaf4b7c2fd7c97e6f5b6c",
+      "gitBlobSha": "4d0739dfcf6f378f642f786f5fc82a87513f1e39"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/retained-v07.mjs",
+      "crc32": "aa36717c",
+      "size": 583,
+      "sha256": "7b4272d7aa245c90f838cf1b389b103b0304dbcba4c44ac269e025b5aebedb00",
+      "gitBlobSha": "171924bc7847234a1da90edb7ce97d40d633287d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v02.test.mjs",
+      "crc32": "aa3007d5",
+      "size": 12995,
+      "sha256": "509af856869274fc9b771ab474b1bada97836e1e8c8949fb17bf86224cd56e17",
+      "gitBlobSha": "92d5af9814f8047a1ed335fbef23616e695fc5b3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v03.test.mjs",
+      "crc32": "1d9c5238",
+      "size": 17716,
+      "sha256": "0713ee8a7618781f8f38db16701cf2719d1769f2df64bb04ccea21c4dd913c54",
+      "gitBlobSha": "3f32f80506d7c73b5d56f60c1bb6b89e3f2cb649"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v04.test.mjs",
+      "crc32": "1c3b4c59",
+      "size": 15246,
+      "sha256": "acd4790edf2980c39778c2a23d19430982d3f110e3f87c747c82b6f359c70057",
+      "gitBlobSha": "ffe64fbc7491df3dbad11dd2ec617b1816e8f6f7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v05.test.mjs",
+      "crc32": "53dffcd6",
+      "size": 15869,
+      "sha256": "e2d379704f1c931fd95b11c158a3bcabfc42fa2f24d8399c6a58a9dd0f58a557",
+      "gitBlobSha": "8df29d0bff0bf44282832d3582fe7cb029ce3495"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v06.test.mjs",
+      "crc32": "b1e7ea9e",
+      "size": 14760,
+      "sha256": "afff968054bc98228d9feaef91bb9f82cc940ff4dea03e3cee66957a333b2e0e",
+      "gitBlobSha": "31548a940639bd8bf6a29f2a234d929195c60f10"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v07.test.mjs",
+      "crc32": "f9bb4e34",
+      "size": 17738,
+      "sha256": "006bf594318193c2fb53707f1fbb9821a38d7b189f136035bdb99781df9eeaf9",
+      "gitBlobSha": "bc0f2879383f8220c1ac70ccc38bbc1ff00f7b0e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/revision-v08.test.mjs",
+      "crc32": "a748292e",
+      "size": 7726,
+      "sha256": "07f483b58fe5d16b82cd9a369add1936df175bd9e6408972f579510e60958261",
+      "gitBlobSha": "986fe1ac48f59047c4cc4eb260d6578a4b00d714"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/run_browser_suite.py",
+      "crc32": "5423bd56",
+      "size": 543,
+      "sha256": "1054ce3cfdbcd32faa5de8aa5e0c0775297f8199bfb61485b9ba0833658996c3",
+      "gitBlobSha": "172b9cad91d56f91d58236b5a6e633996ed8d4af"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/server.test.mjs",
+      "crc32": "b82bfc3f",
+      "size": 3177,
+      "sha256": "df3e7d4aa0ea18db8c94b9aadad87be53631172191dbc807ec67ec9d21a33a83",
+      "gitBlobSha": "807cd29a0aa2f19fe81747d0f5f61312c19ac04f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/signals-sweep.mjs",
+      "crc32": "d066cb17",
+      "size": 897,
+      "sha256": "25163d5ee10733a2904cc69d46891d316c451c411b5be5a99771369b3b6c1a61",
+      "gitBlobSha": "e06ea701d76b631472c436d867845bfba74266a2"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/spatial-audit.mjs",
+      "crc32": "3f1d83bc",
+      "size": 3225,
+      "sha256": "4fcd6f5c59e721f958fc52cfddf61a4718cd2e07e9bc310c3bccbe9a281d72e7",
+      "gitBlobSha": "0a0f261b5a60630ae633626a1c12143af466588e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/spatial-sweep.mjs",
+      "crc32": "82fe6ce0",
+      "size": 955,
+      "sha256": "112ec522469f9c9caf5f55c02f1f986b5d05e2d0941be68b7e9ed953da5cf3b2",
+      "gitBlobSha": "7a4943ff666db48199059180cbb8a4570dfa49f9"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tests/sweep.mjs",
+      "crc32": "48a9920a",
+      "size": 755,
+      "sha256": "9dd7ffa6b130b23036003c856c3e6ab1967a53340a44c2a7bfa1e1688e356ebc",
+      "gitBlobSha": "c534b0e155f722d7441177444a00340e72e37208"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/build.py",
+      "crc32": "dac0905b",
+      "size": 874,
+      "sha256": "044e635fba2c1800309a66a2ae6f41b29d8e56057cab67cfd36345c0540f3beb",
+      "gitBlobSha": "f118b50dbd44bfa98e79e63ea3e2e5b90c3dbdaa"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v02.py",
+      "crc32": "bd660b6a",
+      "size": 15840,
+      "sha256": "bc845942d89870c7ef6aa94c10f4cfd994d4df98bb461a6a56fd33780244b34b",
+      "gitBlobSha": "bebfb7b758e1c9769e15cf8710edc804b34e32ef"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v03.py",
+      "crc32": "957d667f",
+      "size": 18001,
+      "sha256": "351487ea743b37a4b353672c27d6a1207df15efb4426a88d0773d5eecc4df00f",
+      "gitBlobSha": "dd7ab05a81a441903916eec027c53b62ee6a0cd7"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v04.py",
+      "crc32": "9214505e",
+      "size": 13824,
+      "sha256": "300705da665491e535abd65ebbdba1494c97a493cc924ff9eef0d04e185f126a",
+      "gitBlobSha": "9dac6bb98d855e64b99088e7e4de7622d0468c9d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v05.py",
+      "crc32": "3abce323",
+      "size": 11331,
+      "sha256": "033bc05f476668740d59a21bb1481099f938cfd6c7b4a34c98199bc25ba1fb5a",
+      "gitBlobSha": "76ad543f98b1897e039ab467b412a9c7d6927b7c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v06.py",
+      "crc32": "3d7d694f",
+      "size": 7569,
+      "sha256": "28e2ec0f07ebfe2ec74283e79e9310c8cc88ef19bbbdc305ab25ce432efc65c1",
+      "gitBlobSha": "777bed9f7d9c2aab970818c538c75d15d63949ea"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v07.py",
+      "crc32": "71ba689b",
+      "size": 6323,
+      "sha256": "abf131d8d06a090e648da89c04e7a04c00e65d09bd8928048132d3839778fc8c",
+      "gitBlobSha": "15c3d389218e177643dbf792f2e8c40e2db16e99"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/extend_content_v08.py",
+      "crc32": "509eb6a0",
+      "size": 26350,
+      "sha256": "014db804ba147dbd3eb3628b67581db986622defe89c8223cbb12f311a3d8c12",
+      "gitBlobSha": "192e4e97aa1163a63dc05f535d628a39f084451d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/install.mjs",
+      "crc32": "15b2d3d8",
+      "size": 5402,
+      "sha256": "99e8e735eec87d8ec9f27b02fc35bc08bc843bfcec5feff9328b0db553768765",
+      "gitBlobSha": "f126a0b51435147b3ffdf61d0537a82f73cb836a"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_assets.py",
+      "crc32": "e9115fc8",
+      "size": 17014,
+      "sha256": "b27949873ce3b8cf12cc3b5d0c715b9c067b3ae132d6cf5807e0d20128b49fe0",
+      "gitBlobSha": "0ff8337f5865ecb44515cbd8d41b443824a2a554"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_assets_v06.py",
+      "crc32": "e375cd31",
+      "size": 4181,
+      "sha256": "196ff5d658d88520ca297a09a201d182a37026cbd0bd8adc1e4bcc51ae387f34",
+      "gitBlobSha": "5555983c21905d173ee17a80fb2ff7ea4078658f"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_contact_sheets_v08.py",
+      "crc32": "47dc8316",
+      "size": 959,
+      "sha256": "8d7bb30c8fdd9578d136d8794054ca289572cec2db9223f781687fafb1ee5e56",
+      "gitBlobSha": "ddf3358916f365fe34c938a69bec5135485526a3"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_content.py",
+      "crc32": "0f2b23bb",
+      "size": 44093,
+      "sha256": "d8063668c3d922dc7f7a79edbadddfbddd6188a213a9fd595297dec5d44ad5e5",
+      "gitBlobSha": "47e9ce6a88366cde5f30ee1f32dbd3f03d16614c"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_docs.py",
+      "crc32": "d7552985",
+      "size": 28303,
+      "sha256": "288c412440dabae8cecd3efbe0b095900946586d7edec4d655ac18289789b2b4",
+      "gitBlobSha": "b16387e0bbb56c11d58f057a21c74cde819a3d0e"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_manifest.py",
+      "crc32": "423c95ea",
+      "size": 995,
+      "sha256": "3d252a1cc108c953a797c96d948dba5ce999ea78ea217d352dfbaa2e037159a5",
+      "gitBlobSha": "b9f4d7c86a7150950694438f68cea8f6d284ccc0"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/make_ui_assets_v07.py",
+      "crc32": "2fb3307e",
+      "size": 4131,
+      "sha256": "124641a05c945d6dc6f91be122c94c5f014c63da19918484e1db521c329a0cef",
+      "gitBlobSha": "e9c24902757fc2a092e7a31a90a80eaf8dfd1305"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/rebuild_content.py",
+      "crc32": "49a6259b",
+      "size": 531,
+      "sha256": "15fa328ff8fe4fadbfe17e3d8b112e9260a002514743c9bf9d94794281b5d3bc",
+      "gitBlobSha": "460f99ef0d16880970e5866f88c24fd72d060733"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/release_verify.py",
+      "crc32": "4d9ce331",
+      "size": 6305,
+      "sha256": "1adc5a77f0fbff5003f5bc6b50c5087f18508f7cdcd93ea4faf9d8825de5723d",
+      "gitBlobSha": "9203ba57c67f2bce58ed1e9262b55184ed53ab94"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/serve.mjs",
+      "crc32": "f44a0a89",
+      "size": 3707,
+      "sha256": "412d39f77f375a1ecbabd0744d702e71ef37d5dfafa5897f494e494f53986adf",
+      "gitBlobSha": "e73a77501607944de2bab976c50bc38a4ec1514d"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/verify_delivery.py",
+      "crc32": "c81a9ab0",
+      "size": 688,
+      "sha256": "b6c4f4629fe0f284def07d881824fd731d875b6e94ba58893c594668508efbe8",
+      "gitBlobSha": "c7fd8037ae44e48784e9eb750f6b6e2d5d3e2179"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/verify_rebuild.py",
+      "crc32": "cc9650ed",
+      "size": 2500,
+      "sha256": "193412b055d87325a57a7438954181010259bab7d5e0467262d9ffce04bb75d4",
+      "gitBlobSha": "10f4cbd03bea1bbbc962d9a6e3f907cf42322e63"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/tools/verify_upgrade_v07.py",
+      "crc32": "cd4f7caa",
+      "size": 3803,
+      "sha256": "3e10db2f6050e70f3110a7da1c9f692732dbc2598d687d7eb79a1f26a799ea63",
+      "gitBlobSha": "60118d06bbccf233b92fd9fc8c8b94282884f345"
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/DELIVERY_MANIFEST.json",
+      "crc32": "8eb10f49",
+      "size": 98369,
+      "sha256": "cdfc1b799d00d9ee2820f7a5d0ae25d3b3edf8f0cc3d4e4f158d55e562fd0192",
+      "gitBlobSha": "9c5fbc8964131c94acb4a27b5cce4b8e18ca9f70"
+    }
+  ]
+}

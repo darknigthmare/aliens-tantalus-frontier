@@ -1,0 +1,49 @@
+{
+  "version": "0.7.0",
+  "input": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip",
+  "sha256": "8102117a0d1e16b9f121a403659bde35ccfc82c93f747b15d40bef7dce748663",
+  "baseIdentity": "Actual supplied 0.6.0 archive; local continuation, no repository write.",
+  "retainedRuntimeSha256": {
+    "src/assets.js": "07073057cbf2480c4a6ac7a6e54aecd62b1eb0d0733d0ea3f8bd66c650b18701",
+    "src/content-v3.js": "d24015f76e58738ccbe14f477c184f991a27ed9210481598410a1cb7d7bdc02d",
+    "src/content-v4.js": "a1ebc73ee198c76b1255042931945f3ce163a73ca0df25e0112acd5f875fb598",
+    "src/content-v5.js": "9d1d43ca725cf623462341e99d4a5272df8f88cf3ae06dbe10a82a373cbd6433",
+    "src/content-v6.js": "fd357f6c5cbb9eee1cabcdb2a4c8e9682c2722c46e82b1e404b6643f77282ba1",
+    "src/data.js": "7860676ee577aa11d13c85c84c58016dfba5bf71b5fb9ec4986091a17400e039",
+    "src/engine.js": "614b5b2cf9d5287ba9daa11d6b8de16ee29d33776b71e3f3ac75b10da532425d",
+    "src/field-v6.js": "9c6cf2ed26b4ffc16b1d8dda7e85990dfe386fd0f3efd6184a92d1175f221da0",
+    "src/interface-v3.js": "ba63d3d54ff46dc0be2b79de52a91125e747099bcea3159fb6b5eef08efd060e",
+    "src/interface-v4.js": "730bf9c179c56cc986bf96acb9fe4c8ab82e2a5243a59b452fc71764cac106a7",
+    "src/interface-v5.js": "5c4f66c1af7a1eb0d42054850b2954fa3ec47542f73bc82bb8840471d17d9b17",
+    "src/liaison-v4.js": "3f748e1d1f94b8f2dac0cc09df0e4c58a37985ca2a7c7d0dd9c9a212540d248f",
+    "src/protocol.js": "c927bd8533225c40d5a6c7aca4baff11d65755ead0be9793c58fb7e6ef5ef497",
+    "src/render-v4.js": "49da676cc75f25f0f51bdff56d51312147890f9984afc73c94f810a36904c822",
+    "src/render-v5.js": "d9754238456b3ebb2bd04e0cbdcf311b7219e149e5bc8482d2c4bbd045bd9ed8",
+    "src/render-v6.js": "0562198a34029c28ef6006bea6f253b9cd2a97dd481c83488aaed02e385f1a3b",
+    "src/rescue-v5.js": "060d1920ce2470f4b57eb067482faf7e3438ae7d814eee22133aa529e86791d1",
+    "src/survival-v3.js": "2cc1cb050617bd208adeddd365513b4400bcd168ca0cb8de15f7391a56f443a7"
+  },
+  "modifiedRuntime": {
+    "src/app.js": {
+      "base": "0afe6d09df73f2db0365ce3c6465c58c8b6f7e88b793cc5e42b1b3592fc800c8",
+      "current": "4d5eb3c54eff49beee2d11dc30598bac03c865f83d0bcb84b89ebaceae05a301"
+    },
+    "src/interface-v6.js": {
+      "base": "bf5a91ecebb9d6ef7a052bf346422ba85c50125dbd7bfe5f1731f209e33bb277",
+      "current": "62f050163274f29d82de7d91a0d4a76583bbf60ffaf9bddf0f051836fd0fdd4d"
+    },
+    "src/render.js": {
+      "base": "62ba33a0af4d56e35a6b899a92763eefad7c7e234e70ba67f55acd15d15e64ea",
+      "current": "3665871a23c64a4d9b423d57adbf334106fb55f7c12426605463c3767a5bdfd5"
+    }
+  },
+  "newRuntimeSha256": {
+    "src/architecture-v7.js": "d964be641944b96cf5d173a28d533942986975b89358ec306ce585e71651314d",
+    "src/assets-v7.js": "1711015ace9b1da8c80dc58a5a7ce2e0ce5d8f5c09cd2fc99cbd73044422cbcf",
+    "src/content-v7.js": "9ec80b2b164ad44a22a2cbba684da9c64ce1dab5900545044a9a3bf6a99b7d3c",
+    "src/interface-v7.js": "6a59e265614a14910e18e9497107345d0d12c95a7e32c1f4e7c104ff27ea3f87",
+    "src/scene-v7.js": "e24bd1565a8f61366b711fdf2ca9ec2a49c668244c987d6a3a5f4cda4a5ce471"
+  },
+  "nativeIntegration": false,
+  "officialAssetsBundled": false
+}

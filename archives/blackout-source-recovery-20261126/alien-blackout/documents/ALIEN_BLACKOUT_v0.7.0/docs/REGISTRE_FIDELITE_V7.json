@@ -1,0 +1,872 @@
+{
+  "revision": 1,
+  "checkedOn": "2026-09-29",
+  "sources": [
+    {
+      "id": "publisher",
+      "name": "Description éditeur — iTunes, conservée par MobyGames",
+      "url": "https://www.mobygames.com/game/121221/alien-blackout/",
+      "scope": "Sept niveaux, surveillance, carte, détecteur, systèmes de secours. Description consultée.",
+      "kind": "Texte éditeur"
+    },
+    {
+      "id": "writer",
+      "name": "JD Sorvari — entretien du scénariste principal",
+      "url": "https://www.avpgalaxy.net/website/interviews/jd-sorvari-alien-blackout-lead-writer/",
+      "scope": "Pharmalabs : champignons à usage médical ; développement et personnages. Texte consulté.",
+      "kind": "Témoignage développeur"
+    },
+    {
+      "id": "artist",
+      "name": "Markus Tervola — concept art Blackout",
+      "url": "https://mtervola.artstation.com/projects/gJYRLL",
+      "scope": "Auteur et existence des dessins finaux confirmés. Feuille haute définition non récupérée ; détails des tenues NON authentifiés.",
+      "kind": "Portfolio du concepteur"
+    },
+    {
+      "id": "credits",
+      "name": "Crédits du jeu — distribution et conception",
+      "url": "https://www.mobygames.com/game/121221/alien-blackout/credits/iphone/?autoplatform=true",
+      "scope": "Identité des cinq humains. Ne documente pas leurs vêtements.",
+      "kind": "Crédits transcrits"
+    },
+    {
+      "id": "screen-eng",
+      "name": "Capture du jeu — baie et habitation",
+      "url": "https://www.shacknews.com/article/109340/alien-blackout-hands-on-preview-xeno-on-the-go",
+      "scope": "F.E.M.S 23.34.7, cinq canaux, AIRLOCK E2B, caméras Control Room / Entrance / Corridor 1 / Engineering Bay / Corridor 2. Capture consultée.",
+      "kind": "Capture originale publiée"
+    },
+    {
+      "id": "screen-research",
+      "name": "Capture du jeu — recherche",
+      "url": "https://www.pocketgamer.com/alien-blackout/review/",
+      "scope": "Research Lab 2, Lab 1 et trois coursives, dialogue de mélange volatil. Capture consultée, géométrie complète non relevée.",
+      "kind": "Capture originale publiée"
+    },
+    {
+      "id": "screen-transit",
+      "name": "Capture du jeu — transit",
+      "url": "https://www.androidauthority.com/alien-blackout-review-946655/",
+      "scope": "Hall, Station, Corridor 1 et 2 ; réparation de caméra. Capture consultée.",
+      "kind": "Capture originale publiée"
+    },
+    {
+      "id": "guide",
+      "name": "AppUnwrapper — parcours et captures des quatre premiers niveaux",
+      "url": "https://www.appunwrapper.com/2019/01/24/alien-blackout-walkthrough-guide/",
+      "scope": "Engineering Bay, Administration Hub, Transit Station, Pharmalab 3 ; Farm 3A et épurateurs. Texte consulté, plans complets non extraits.",
+      "kind": "Parcours de joueur"
+    },
+    {
+      "id": "crew-roles",
+      "name": "Xenopedia — équipage et passagers du Haldin",
+      "url": "https://avp.fandom.com/wiki/USCSS_Haldin",
+      "scope": "Source secondaire pour les fonctions : Saito capitaine, Studwick ingénieur, Thorncroft scientifique, Yutani direction.",
+      "kind": "Référence secondaire"
+    },
+    {
+      "id": "survive",
+      "name": "D3 Go! — aide officielle Survive Mode",
+      "url": "https://d3go.helpshift.com/hc/en/5-alien-blackout/faq/453-what-is-survive-mode-in-alien-blackout/",
+      "scope": "Trois canaux, pas de sauvegarde entre niveaux ni de reprise. Nos difficultés ne reproduisent pas ce mode.",
+      "kind": "Aide éditeur"
+    }
+  ],
+  "personnel": [
+    {
+      "id": "amanda",
+      "fullName": "Amanda Ripley",
+      "role": "Opératrice de surveillance",
+      "jacket": "#9c9d7e",
+      "pants": "#53554d",
+      "hair": "#5a402b",
+      "cut": "tied",
+      "collar": "utility",
+      "build": 0.9,
+      "skin": "#c6aa90",
+      "verified": "Identité et poste de surveillance.",
+      "pending": "Visage, vêtements et animation Blackout précis : non authentifiés."
+    },
+    {
+      "id": "saito",
+      "fullName": "Miwa Saito",
+      "role": "Capitaine / navigation",
+      "jacket": "#889a94",
+      "pants": "#394745",
+      "hair": "#202622",
+      "cut": "short",
+      "collar": "utility",
+      "build": 0.94,
+      "skin": "#bba187",
+      "verified": "Identité ; fonction de capitaine selon la référence secondaire.",
+      "pending": "Silhouette de travail provisoire : coupe, couleurs, coiffure et visage non authentifiés."
+    },
+    {
+      "id": "studwick",
+      "fullName": "Dougal Studwick",
+      "role": "Ingénieur du Haldin",
+      "jacket": "#637b6e",
+      "pants": "#48554e",
+      "hair": "#68584b",
+      "cut": "short",
+      "collar": "utility",
+      "build": 1.09,
+      "skin": "#c1a58c",
+      "verified": "Identité ; métier d’ingénieur. Les spécialités mécaniques lui sont attribuées.",
+      "pending": "Combinaison de travail interprétée ; portrait exact non vérifié."
+    },
+    {
+      "id": "thorncroft",
+      "fullName": "Andrew Thorncroft",
+      "role": "Scientifique / passager",
+      "jacket": "#b3b5a6",
+      "pants": "#666456",
+      "hair": "#716655",
+      "cut": "short",
+      "collar": "civilian",
+      "build": 0.96,
+      "skin": "#c8b399",
+      "verified": "Identité ; scientifique, et non mécanicien du Haldin.",
+      "pending": "Veste civile claire provisoire, pas un modèle officiel ni une blouse certifiée."
+    },
+    {
+      "id": "yutani",
+      "fullName": "Naoko Yutani",
+      "role": "Direction / passagère",
+      "jacket": "#3f5456",
+      "pants": "#343f43",
+      "hair": "#282b2c",
+      "cut": "bob",
+      "collar": "civilian",
+      "build": 0.88,
+      "skin": "#c0a58f",
+      "verified": "Identité ; fonction de direction. Aucun pouvoir surnaturel sur les portes.",
+      "pending": "Veste et chevelure distinctes pour la lisibilité ; apparence exacte non authentifiée."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "fems",
+      "name": "F.E.M.S / poste d’Amanda",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "screen-eng",
+      "action": "monitor",
+      "detail": "Gestion des canaux et de la liaison ; interfaces et coûts Tantalus."
+    },
+    {
+      "id": "camera",
+      "name": "Caméras de surveillance",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "monitor",
+      "detail": "Flux actif, changement de caméra et réparation par un équipier."
+    },
+    {
+      "id": "motion",
+      "name": "Détecteur de mouvement",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "sensor",
+      "detail": "Échos datés ; cadence et durée propres au module."
+    },
+    {
+      "id": "map",
+      "name": "Carte de la station",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "atlas",
+      "detail": "Plan interactif construit sur le graphe exécuté, pas sur les plans originaux."
+    },
+    {
+      "id": "doors",
+      "name": "Cloisons télécommandées",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "doors",
+      "detail": "Soixante-six identifiants partagés ; forçage et recharge sont des choix du module."
+    },
+    {
+      "id": "refuge",
+      "name": "Volet du refuge",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "seal",
+      "detail": "Protection d’Amanda et coupure des ordres. Notre refuge reste simplifié."
+    },
+    {
+      "id": "radio",
+      "name": "Liaison avec le Haldin",
+      "kind": "Système station",
+      "status": "Référence documentée",
+      "source": "publisher",
+      "action": "crew",
+      "detail": "Consignes de déplacement et cachette. Les files complexes sont un ajout Tantalus."
+    },
+    {
+      "id": "scrubbers",
+      "name": "Épurateurs de Pharmalab",
+      "kind": "Installation fixe",
+      "status": "Référence partielle",
+      "source": "guide",
+      "action": "task",
+      "detail": "Fonction présente via les terminaux ; puzzle et emplacement non 1:1."
+    },
+    {
+      "id": "reagents",
+      "name": "Mélange volatil de recherche",
+      "kind": "Installation fixe",
+      "status": "Référence partielle",
+      "source": "screen-research",
+      "action": "task",
+      "detail": "Mélange/purge représentés par les interventions ; aucune arme portative ni explosion 1:1 certifiée."
+    },
+    {
+      "id": "medical",
+      "name": "Trousses de soins",
+      "kind": "Équipement porté",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "treat-v3",
+      "detail": "Quatre trousses partagées, soins et secours ; pas un inventaire officiel Blackout."
+    },
+    {
+      "id": "beacon",
+      "name": "Balise acoustique",
+      "kind": "Équipement déployable",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "beacon-deploy-v6",
+      "detail": "Trois balises ; pose physique, retard et impulsions."
+    },
+    {
+      "id": "interphone",
+      "name": "Interphone de diversion",
+      "kind": "Système station",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "lure",
+      "detail": "Stimulus sonore et habituation, sans garantie de détourner une proie visible."
+    },
+    {
+      "id": "capacitor",
+      "name": "Accumulateur de secours",
+      "kind": "Installation fixe",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "service",
+      "detail": "Recharge facultative dans sept annexes."
+    },
+    {
+      "id": "vent-isolation",
+      "name": "Isolation des gaines",
+      "kind": "Installation fixe",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "service",
+      "detail": "Clapets temporaires dans les annexes."
+    },
+    {
+      "id": "rescue",
+      "name": "Protocole de portage",
+      "kind": "Procédure",
+      "status": "Extension Tantalus",
+      "source": "module",
+      "action": "evac-open-v6",
+      "detail": "Approche, transport, dépose et réanimation, avec ressources réelles."
+    },
+    {
+      "id": "firearms",
+      "name": "Armes à feu portatives",
+      "kind": "Non ajouté",
+      "status": "Non documenté",
+      "source": "publisher",
+      "action": null,
+      "detail": "Aucun arsenal portatif confirmé dans les références consultées. Aucun fusil à impulsion ou équipement d’Isolation inventé comme élément de Blackout."
+    }
+  ],
+  "markers": [
+    {
+      "sector": 0,
+      "labels": [
+        "Control Room",
+        "Entrance",
+        "Corridor 1",
+        "Engineering Bay",
+        "Corridor 2",
+        "AIRLOCK E2B"
+      ],
+      "source": "screen-eng"
+    },
+    {
+      "sector": 1,
+      "labels": [
+        "Administration Hub"
+      ],
+      "source": "guide"
+    },
+    {
+      "sector": 2,
+      "labels": [
+        "Hall",
+        "Station",
+        "Corridor 1",
+        "Corridor 2"
+      ],
+      "source": "screen-transit"
+    },
+    {
+      "sector": 3,
+      "labels": [
+        "Pharmalab 3",
+        "Farm 3A",
+        "Épurateurs"
+      ],
+      "source": "guide"
+    },
+    {
+      "sector": 4,
+      "labels": [
+        "Habitation"
+      ],
+      "source": "screen-eng"
+    },
+    {
+      "sector": 5,
+      "labels": [
+        "A.I. Core"
+      ],
+      "source": "publisher",
+      "verification": "Libellé de secteur repris ; plan complet non authentifié"
+    },
+    {
+      "sector": 6,
+      "labels": [
+        "Lab 1",
+        "Research Lab 2",
+        "Corridor 1",
+        "Corridor 2",
+        "Corridor 3"
+      ],
+      "source": "screen-research"
+    }
+  ],
+  "transfers": [
+    {
+      "id": "transfer-0",
+      "from": "engineering-6",
+      "to": "administration-1",
+      "label": "Baie d’ingénierie → Administration",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    },
+    {
+      "id": "transfer-1",
+      "from": "administration-6",
+      "to": "transit-1",
+      "label": "Administration → Station de transit",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    },
+    {
+      "id": "transfer-2",
+      "from": "transit-6",
+      "to": "pharmalab-1",
+      "label": "Station de transit → Pharmalab 3",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    },
+    {
+      "id": "transfer-3",
+      "from": "pharmalab-6",
+      "to": "habitation-1",
+      "label": "Pharmalab 3 → Zone d’habitation",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    },
+    {
+      "id": "transfer-4",
+      "from": "habitation-6",
+      "to": "core-1",
+      "label": "Zone d’habitation → Noyau d’intelligence artificielle",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    },
+    {
+      "id": "transfer-5",
+      "from": "core-6",
+      "to": "research-1",
+      "label": "Noyau d’intelligence artificielle → Laboratoire de recherche",
+      "type": "transfert de secteur",
+      "continuous": false,
+      "rule": "Déverrouillé après objectifs et regroupement. Le raccord entre secteurs est une transition, pas un couloir continu modélisé."
+    }
+  ],
+  "converted": [
+    "engineering-1",
+    "engineering-2",
+    "engineering-6",
+    "engineering-8",
+    "administration-2",
+    "administration-8",
+    "transit-1",
+    "transit-4",
+    "transit-6",
+    "transit-8",
+    "pharmalab-1",
+    "pharmalab-2",
+    "pharmalab-8",
+    "habitation-2",
+    "habitation-6",
+    "habitation-8",
+    "core-1",
+    "core-2",
+    "core-8",
+    "research-1",
+    "research-2",
+    "research-6",
+    "research-8"
+  ],
+  "dressingChanges": [
+    {
+      "room": "engineering-1",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "engineering-1",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "engineering-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-6",
+      "type": "cabinet",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "engineering-6",
+      "type": "sign",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "engineering-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "engineering-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "engineering-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "administration-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "administration-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-1",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "transit-1",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "transit-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-6",
+      "type": "cabinet",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "transit-6",
+      "type": "sign",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "transit-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "transit-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "transit-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-1",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "pharmalab-1",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "pharmalab-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "pharmalab-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "pharmalab-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-6",
+      "type": "cabinet",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "habitation-6",
+      "type": "sign",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "habitation-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "habitation-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "habitation-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-1",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "core-1",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "core-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "core-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "core-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-1",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-1",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-1",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-2",
+      "type": "specimen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-2",
+      "type": "resin",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-2",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-3",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-4",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-5",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-6",
+      "type": "oxygen",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-6",
+      "type": "straps",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-6",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-7",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    },
+    {
+      "room": "research-8",
+      "type": "filter",
+      "change": "Recul vers la paroi arrière après ouverture de la profondeur"
+    },
+    {
+      "room": "research-8",
+      "type": "extinguisher",
+      "change": "Dégagement du jambage droit"
+    }
+  ],
+  "missing": [
+    "Plans complets des sept niveaux, dimensions et nombre exact de volumes non relevés : 56 pièces ne signifie pas tous les lieux officiels.",
+    "Feuille de personnages du concepteur repérée, détails des tenues et visages non récupérés : les cinq silhouettes restent des interprétations.",
+    "Haldin : sas d’entrée et de retour présents, intérieur complet et vol de départ non modélisés.",
+    "Refuge original à plusieurs accès selon le niveau : notre refuge unique et sa fuite latérale restent une adaptation.",
+    "Ordre exact des objectifs, interventions simultanées, arrivée différée des personnages et timings non reproduits intégralement.",
+    "Les noms de caméras relevés sont conservés dans le registre ; leur correspondance avec toutes nos pièces n’est pas affirmée.",
+    "Aucun dialogue doublé original, animation officielle, texture extraite ou musique officielle livré.",
+    "Notre difficulté Survie n’est pas le Survive Mode officiel à trois canaux sans reprises.",
+    "Les deux côtés de la galerie basse de recherche sont au sud : raccord en U identifié, pas une porte posée entre deux pièces superposées.",
+    "Les deux Aliens des derniers secteurs, soins, balises et secours sont des extensions Tantalus, pas une restitution du jeu original.",
+    "Sauvegardes et moteur autonomes ; aucun raccord natif MIRE ni déploiement."
+  ],
+  "claim": "Objectif de fidélité ; version non 1:1. Les validations de construction ne prouvent pas une conformité au plan officiel."
+}

@@ -1,0 +1,3805 @@
+{
+  "meta": {
+    "id": "mire-prometheus-2012",
+    "version": "1.0.0-candidate.1",
+    "title": "PROMETHEUS — Les questions qui restent",
+    "baseCommit": "496996f5ea557d970ec625aa346876f3eaed1c5f",
+    "status": "Module jouable autonome candidat ; raccordement Opérations additionnel, pas remplacement du runtime Tantalus.",
+    "art": "Rendu vectoriel procédural original, non photoréaliste, non 1:1."
+  },
+  "rooms": [
+    {
+      "id": "cryo",
+      "name": "Salle de cryostase",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "SIDE",
+      "theme": "cryo",
+      "width": 1380,
+      "map": [
+        1,
+        1
+      ],
+      "focus": "Les caissons composent une ligne lisible ; l’allée centrale ne traverse jamais un lit.",
+      "props": [
+        {
+          "id": "cryo-p00",
+          "kind": "pod",
+          "x": 240,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p01",
+          "kind": "pod",
+          "x": 470,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p02",
+          "kind": "pod",
+          "x": 710,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p03",
+          "kind": "pod",
+          "x": 950,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p04",
+          "kind": "console",
+          "x": 1120,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p05",
+          "kind": "cabinet",
+          "x": 130,
+          "z": 0.9,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "cryo-p06",
+          "kind": "pipe",
+          "x": 1250,
+          "z": 0.25,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e00-cryo",
+          "edge": "e00",
+          "to": "concourse",
+          "x": 1320,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "concourse",
+      "name": "Coursive des équipages",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "HYBRID",
+      "theme": "human",
+      "width": 1640,
+      "map": [
+        2,
+        1
+      ],
+      "focus": "Un carrefour lisible relie habitat, laboratoire et préparation. Les portes sont séparées des vitrines.",
+      "props": [
+        {
+          "id": "concourse-p00",
+          "kind": "bench",
+          "x": 360,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "concourse-p01",
+          "kind": "locker",
+          "x": 610,
+          "z": 0.25,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "concourse-p02",
+          "kind": "plant",
+          "x": 900,
+          "z": 0.28,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "concourse-p03",
+          "kind": "bench",
+          "x": 1170,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "concourse-p04",
+          "kind": "cabinet",
+          "x": 1390,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "concourse-p05",
+          "kind": "pipe",
+          "x": 1490,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e00-concourse",
+          "edge": "e00",
+          "to": "cryo",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1230,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e01-concourse",
+          "edge": "e01",
+          "to": "briefing",
+          "x": 430,
+          "z": 0.3,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e03-concourse",
+          "edge": "e03",
+          "to": "lab",
+          "x": 1060,
+          "z": 0.3,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e08-concourse",
+          "edge": "e08",
+          "to": "equipment",
+          "x": 1560,
+          "z": 0.65,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "briefing",
+      "name": "Salle de briefing",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "DEPTH",
+      "theme": "briefing",
+      "width": 1260,
+      "map": [
+        2,
+        0
+      ],
+      "focus": "La table holographique garde un passage libre sur ses deux côtés.",
+      "props": [
+        {
+          "id": "briefing-p00",
+          "kind": "chair",
+          "x": 290,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "briefing-p01",
+          "kind": "chair",
+          "x": 420,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "briefing-p02",
+          "kind": "chair",
+          "x": 830,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "briefing-p03",
+          "kind": "chair",
+          "x": 940,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "briefing-p04",
+          "kind": "hologram",
+          "x": 620,
+          "z": 0.46,
+          "scale": 1.6,
+          "solid": false
+        },
+        {
+          "id": "briefing-p05",
+          "kind": "table",
+          "x": 600,
+          "z": 0.76,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "briefing-p06",
+          "kind": "console",
+          "x": 1070,
+          "z": 0.28,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e01-briefing",
+          "edge": "e01",
+          "to": "concourse",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 340,
+          "spawnZ": 0.3,
+          "label": null
+        },
+        {
+          "id": "e02-briefing",
+          "edge": "e02",
+          "to": "bridge",
+          "x": 1180,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "bridge",
+      "name": "Passerelle",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "DEPTH",
+      "theme": "bridge",
+      "width": 1450,
+      "map": [
+        3,
+        0
+      ],
+      "focus": "Grande baie panoramique, consoles en couronne et axes de circulation extérieurs.",
+      "props": [
+        {
+          "id": "bridge-p00",
+          "kind": "chair",
+          "x": 360,
+          "z": 0.42,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p01",
+          "kind": "chair",
+          "x": 710,
+          "z": 0.4,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p02",
+          "kind": "chair",
+          "x": 1020,
+          "z": 0.42,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p03",
+          "kind": "console",
+          "x": 270,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p04",
+          "kind": "console",
+          "x": 570,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p05",
+          "kind": "console",
+          "x": 910,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p06",
+          "kind": "console",
+          "x": 1200,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "bridge-p07",
+          "kind": "table",
+          "x": 690,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e02-bridge",
+          "edge": "e02",
+          "to": "briefing",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1090,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e06-bridge",
+          "edge": "e06",
+          "to": "executive",
+          "x": 1370,
+          "z": 0.6,
+          "spawnX": 1360,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": [
+        {
+          "x0": 570,
+          "x1": 800,
+          "z0": 0.79,
+          "z1": 0.92
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "name": "Laboratoire",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "HYBRID",
+      "theme": "lab",
+      "width": 1360,
+      "map": [
+        3,
+        1
+      ],
+      "focus": "La tête est confinée sur une table d’analyse ; elle ne sert pas de décoration dans les couloirs.",
+      "props": [
+        {
+          "id": "lab-p00",
+          "kind": "table",
+          "x": 520,
+          "z": 0.38,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lab-p01",
+          "kind": "specimen",
+          "x": 520,
+          "z": 0.38,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lab-p02",
+          "kind": "console",
+          "x": 850,
+          "z": 0.28,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lab-p03",
+          "kind": "cabinet",
+          "x": 1080,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lab-p04",
+          "kind": "canister",
+          "x": 950,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lab-p05",
+          "kind": "pipe",
+          "x": 1200,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e03-lab",
+          "edge": "e03",
+          "to": "concourse",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 970,
+          "spawnZ": 0.3,
+          "label": null
+        },
+        {
+          "id": "e04-lab",
+          "edge": "e04",
+          "to": "medbay",
+          "x": 1290,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "medbay",
+      "name": "Infirmerie",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "SIDE",
+      "theme": "medical",
+      "width": 1400,
+      "map": [
+        4,
+        1
+      ],
+      "focus": "Lits et consoles contre le mur ; la zone d’examen reste identifiable.",
+      "props": [
+        {
+          "id": "medbay-p00",
+          "kind": "bed",
+          "x": 380,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medbay-p01",
+          "kind": "bed",
+          "x": 820,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medbay-p02",
+          "kind": "console",
+          "x": 600,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medbay-p03",
+          "kind": "cabinet",
+          "x": 1070,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medbay-p04",
+          "kind": "oxygen",
+          "x": 1230,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medbay-p05",
+          "kind": "medical",
+          "x": 150,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e04-medbay",
+          "edge": "e04",
+          "to": "lab",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 1200,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e05-medbay",
+          "edge": "e05",
+          "to": "executive",
+          "x": 1310,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "executive",
+      "name": "Module de Vickers",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "HYBRID",
+      "theme": "executive",
+      "width": 1540,
+      "map": [
+        4,
+        0
+      ],
+      "focus": "Le module autonome conserve son identité après son éjection. Aucun nouveau MédPod n’est créé.",
+      "props": [
+        {
+          "id": "executive-p00",
+          "kind": "sofa",
+          "x": 380,
+          "z": 0.37,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "executive-p01",
+          "kind": "table",
+          "x": 660,
+          "z": 0.36,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "executive-p02",
+          "kind": "cabinet",
+          "x": 1000,
+          "z": 0.28,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "executive-p03",
+          "kind": "plant",
+          "x": 1150,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "executive-p04",
+          "kind": "oxygen",
+          "x": 1300,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "executive-p05",
+          "kind": "console",
+          "x": 1360,
+          "z": 0.8,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e05-executive",
+          "edge": "e05",
+          "to": "medbay",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 1220,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e06-executive",
+          "edge": "e06",
+          "to": "bridge",
+          "x": 1450,
+          "z": 0.6,
+          "spawnX": 1280,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e07-executive",
+          "edge": "e07",
+          "to": "medpod",
+          "x": 760,
+          "z": 0.3,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e28-executive",
+          "edge": "e28",
+          "to": "lifeboat",
+          "x": 1450,
+          "z": 0.6,
+          "spawnX": 1350,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "medpod",
+      "name": "MédPod",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "SIDE",
+      "theme": "medpod",
+      "width": 1160,
+      "map": [
+        5,
+        0
+      ],
+      "focus": "Un seul appareil, une porte de confinement et un sas latéral. Le futur piège réutilise cet endroit.",
+      "props": [
+        {
+          "id": "medpod-p00",
+          "kind": "medpod",
+          "x": 630,
+          "z": 0.4,
+          "scale": 1.45,
+          "solid": false
+        },
+        {
+          "id": "medpod-p01",
+          "kind": "console",
+          "x": 260,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medpod-p02",
+          "kind": "cabinet",
+          "x": 990,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "medpod-p03",
+          "kind": "medical",
+          "x": 130,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e07-medpod",
+          "edge": "e07",
+          "to": "executive",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 670,
+          "spawnZ": 0.3,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "equipment",
+      "name": "Vestiaire d’expédition",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "HYBRID",
+      "theme": "equipment",
+      "width": 1450,
+      "map": [
+        2,
+        2
+      ],
+      "focus": "Les équipements et bonbonnes sont rangés dans des alcôves, hors de l’axe de sortie.",
+      "props": [
+        {
+          "id": "equipment-p00",
+          "kind": "suit",
+          "x": 290,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p01",
+          "kind": "suit",
+          "x": 430,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p02",
+          "kind": "suit",
+          "x": 580,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p03",
+          "kind": "locker",
+          "x": 810,
+          "z": 0.25,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p04",
+          "kind": "oxygen",
+          "x": 1100,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p05",
+          "kind": "case",
+          "x": 970,
+          "z": 0.83,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "equipment-p06",
+          "kind": "console",
+          "x": 1280,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e08-equipment",
+          "edge": "e08",
+          "to": "concourse",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1470,
+          "spawnZ": 0.65,
+          "label": null
+        },
+        {
+          "id": "e09-equipment",
+          "edge": "e09",
+          "to": "garage",
+          "x": 1370,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "garage",
+      "name": "Hangar des véhicules",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "DEPTH",
+      "theme": "hangar",
+      "width": 1900,
+      "map": [
+        3,
+        2
+      ],
+      "focus": "Le RT01 est à quai ; la circulation le contourne. L’incursion de Fifield reste dans le hangar.",
+      "props": [
+        {
+          "id": "garage-p00",
+          "kind": "rover",
+          "x": 730,
+          "z": 0.43,
+          "scale": 1.4,
+          "solid": false
+        },
+        {
+          "id": "garage-p01",
+          "kind": "case",
+          "x": 290,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p02",
+          "kind": "case",
+          "x": 1450,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p03",
+          "kind": "rack",
+          "x": 1160,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p04",
+          "kind": "oxygen",
+          "x": 1620,
+          "z": 0.29,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p05",
+          "kind": "console",
+          "x": 1760,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p06",
+          "kind": "reel",
+          "x": 250,
+          "z": 0.82,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "garage-p07",
+          "kind": "barrel",
+          "x": 1560,
+          "z": 0.84,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e09-garage",
+          "edge": "e09",
+          "to": "equipment",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1280,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e10-garage",
+          "edge": "e10",
+          "to": "airlock",
+          "x": 1820,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": [
+        {
+          "x0": 610,
+          "x1": 840,
+          "z0": 0.26,
+          "z1": 0.48
+        }
+      ]
+    },
+    {
+      "id": "airlock",
+      "name": "Sas d’expédition",
+      "zone": "Prometheus",
+      "deck": 1,
+      "mode": "SIDE",
+      "theme": "airlock",
+      "width": 1150,
+      "map": [
+        4,
+        2
+      ],
+      "focus": "Deux portes étanches et un enrouleur ancré. Le cycle de pression ne téléporte pas vers le temple.",
+      "props": [
+        {
+          "id": "airlock-p00",
+          "kind": "reel",
+          "x": 330,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "airlock-p01",
+          "kind": "console",
+          "x": 620,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "airlock-p02",
+          "kind": "oxygen",
+          "x": 850,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "airlock-p03",
+          "kind": "suit",
+          "x": 990,
+          "z": 0.25,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e10-airlock",
+          "edge": "e10",
+          "to": "garage",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1730,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e11-airlock",
+          "edge": "e11",
+          "to": "plain",
+          "x": 1080,
+          "z": 0.6,
+          "spawnX": 190,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "plain",
+      "name": "Plaine d’atterrissage",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "DEPTH",
+      "theme": "surface",
+      "width": 2300,
+      "map": [
+        5,
+        2
+      ],
+      "focus": "Le vaisseau est un volume au fond ; le chemin mène au relief et à l’entrée sans traverser ses moteurs.",
+      "props": [
+        {
+          "id": "plain-p00",
+          "kind": "rock",
+          "x": 350,
+          "z": 0.25,
+          "scale": 1.5,
+          "solid": false
+        },
+        {
+          "id": "plain-p01",
+          "kind": "beacon",
+          "x": 660,
+          "z": 0.42,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "plain-p02",
+          "kind": "rock",
+          "x": 1100,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "plain-p03",
+          "kind": "track",
+          "x": 1420,
+          "z": 0.45,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "plain-p04",
+          "kind": "rock",
+          "x": 1800,
+          "z": 0.3,
+          "scale": 1.7,
+          "solid": false
+        },
+        {
+          "id": "plain-p05",
+          "kind": "beacon",
+          "x": 2070,
+          "z": 0.75,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e11-plain",
+          "edge": "e11",
+          "to": "airlock",
+          "x": 100,
+          "z": 0.6,
+          "spawnX": 990,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e12-plain",
+          "edge": "e12",
+          "to": "ridge",
+          "x": 2200,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": [
+        {
+          "x0": 1010,
+          "x1": 1170,
+          "z0": 0.79,
+          "z1": 0.92
+        }
+      ]
+    },
+    {
+      "id": "ridge",
+      "name": "Crête basaltique",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "DEPTH",
+      "theme": "surface",
+      "width": 1960,
+      "map": [
+        6,
+        2
+      ],
+      "focus": "Couloir de terrain ouvert avec un abri rocheux en avant-plan. Un décalage en profondeur permet l’esquive finale.",
+      "props": [
+        {
+          "id": "ridge-p00",
+          "kind": "rock",
+          "x": 300,
+          "z": 0.26,
+          "scale": 2,
+          "solid": false
+        },
+        {
+          "id": "ridge-p01",
+          "kind": "rock",
+          "x": 880,
+          "z": 0.28,
+          "scale": 1.3,
+          "solid": false
+        },
+        {
+          "id": "ridge-p02",
+          "kind": "beacon",
+          "x": 1140,
+          "z": 0.74,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ridge-p03",
+          "kind": "rock",
+          "x": 1460,
+          "z": 0.9,
+          "scale": 1.4,
+          "solid": false
+        },
+        {
+          "id": "ridge-p04",
+          "kind": "rock",
+          "x": 1790,
+          "z": 0.26,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e12-ridge",
+          "edge": "e12",
+          "to": "plain",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 2110,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e13-ridge",
+          "edge": "e13",
+          "to": "shelter",
+          "x": 1200,
+          "z": 0.84,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e14-ridge",
+          "edge": "e14",
+          "to": "entrance",
+          "x": 1870,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e26-ridge",
+          "edge": "e26",
+          "to": "wreck",
+          "x": 540,
+          "z": 0.83,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "shelter",
+      "name": "Faille abritée",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "SIDE",
+      "theme": "surface",
+      "width": 1140,
+      "map": [
+        6,
+        3
+      ],
+      "focus": "Détour ajouté pour le jeu : la paroi protège du vent, sans devenir un laboratoire ou une base humaine.",
+      "props": [
+        {
+          "id": "shelter-p00",
+          "kind": "rock",
+          "x": 280,
+          "z": 0.3,
+          "scale": 1.8,
+          "solid": false
+        },
+        {
+          "id": "shelter-p01",
+          "kind": "rock",
+          "x": 580,
+          "z": 0.27,
+          "scale": 2.2,
+          "solid": false
+        },
+        {
+          "id": "shelter-p02",
+          "kind": "rock",
+          "x": 840,
+          "z": 0.84,
+          "scale": 1.2,
+          "solid": false
+        },
+        {
+          "id": "shelter-p03",
+          "kind": "beacon",
+          "x": 970,
+          "z": 0.33,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e13-shelter",
+          "edge": "e13",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1110,
+          "spawnZ": 0.84,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "entrance",
+      "name": "Entrée du complexe",
+      "zone": "Temple",
+      "deck": 0,
+      "mode": "HYBRID",
+      "theme": "entrance",
+      "width": 1680,
+      "map": [
+        7,
+        2
+      ],
+      "focus": "Le relief s’ouvre sur une gorge monumentale. Transition de sol minéral vers la structure nervurée.",
+      "props": [
+        {
+          "id": "entrance-p00",
+          "kind": "rock",
+          "x": 270,
+          "z": 0.28,
+          "scale": 1.6,
+          "solid": false
+        },
+        {
+          "id": "entrance-p01",
+          "kind": "rib",
+          "x": 680,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "entrance-p02",
+          "kind": "rib",
+          "x": 1130,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "entrance-p03",
+          "kind": "urn",
+          "x": 1420,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "entrance-p04",
+          "kind": "marker",
+          "x": 980,
+          "z": 0.8,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e14-entrance",
+          "edge": "e14",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1780,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e15-entrance",
+          "edge": "e15",
+          "to": "vestibule",
+          "x": 1590,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "vestibule",
+      "name": "Vestibule",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "SIDE",
+      "theme": "temple",
+      "width": 1510,
+      "map": [
+        7,
+        1
+      ],
+      "focus": "Une pente physique suggérée par le décor conduit à l’enfilade ; les passages fonctionnels sont au sol.",
+      "props": [
+        {
+          "id": "vestibule-p00",
+          "kind": "rib",
+          "x": 320,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "vestibule-p01",
+          "kind": "rib",
+          "x": 680,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "vestibule-p02",
+          "kind": "rib",
+          "x": 1050,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "vestibule-p03",
+          "kind": "urn",
+          "x": 1230,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "vestibule-p04",
+          "kind": "marker",
+          "x": 490,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e15-vestibule",
+          "edge": "e15",
+          "to": "entrance",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1500,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e16-vestibule",
+          "edge": "e16",
+          "to": "holograms",
+          "x": 1420,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "holograms",
+      "name": "Couloir des hologrammes",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "SIDE",
+      "theme": "holograms",
+      "width": 1850,
+      "map": [
+        8,
+        1
+      ],
+      "focus": "Les silhouettes enregistrées ne sont ni des ennemis ni des personnages vivants.",
+      "props": [
+        {
+          "id": "holograms-p00",
+          "kind": "rib",
+          "x": 290,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p01",
+          "kind": "rib",
+          "x": 740,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p02",
+          "kind": "rib",
+          "x": 1240,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p03",
+          "kind": "rib",
+          "x": 1660,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p04",
+          "kind": "holoengineer",
+          "x": 540,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p05",
+          "kind": "holoengineer",
+          "x": 1020,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "holograms-p06",
+          "kind": "helmet",
+          "x": 1510,
+          "z": 0.83,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e16-holograms",
+          "edge": "e16",
+          "to": "vestibule",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1330,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e17-holograms",
+          "edge": "e17",
+          "to": "head",
+          "x": 1760,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "head",
+      "name": "Chambre de la tête",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "DEPTH",
+      "theme": "head",
+      "width": 1780,
+      "map": [
+        9,
+        1
+      ],
+      "focus": "Tête monumentale au fond, urnes ordonnées par rangées, allée sacrée centrale et contournements sur les côtés.",
+      "props": [
+        {
+          "id": "head-p00",
+          "kind": "urn",
+          "x": 300,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p01",
+          "kind": "urn",
+          "x": 460,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p02",
+          "kind": "urn",
+          "x": 620,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p03",
+          "kind": "urn",
+          "x": 1170,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p04",
+          "kind": "urn",
+          "x": 1330,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p05",
+          "kind": "urn",
+          "x": 1490,
+          "z": 0.35,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p06",
+          "kind": "urn",
+          "x": 500,
+          "z": 0.83,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p07",
+          "kind": "urn",
+          "x": 1280,
+          "z": 0.83,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "head-p08",
+          "kind": "helmet",
+          "x": 900,
+          "z": 0.68,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e17-head",
+          "edge": "e17",
+          "to": "holograms",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1670,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e18-head",
+          "edge": "e18",
+          "to": "ampoules",
+          "x": 1690,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": [
+        {
+          "x0": 455,
+          "x1": 535,
+          "z0": 0.77,
+          "z1": 0.92
+        },
+        {
+          "x0": 1240,
+          "x1": 1320,
+          "z0": 0.77,
+          "z1": 0.92
+        }
+      ]
+    },
+    {
+      "id": "ampoules",
+      "name": "Galerie des ampoules",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "DEPTH",
+      "theme": "ampoules",
+      "width": 1600,
+      "map": [
+        10,
+        1
+      ],
+      "focus": "Les ampoules suivent le rythme des nervures ; les écoulements restent localisés au sol.",
+      "props": [
+        {
+          "id": "ampoules-p00",
+          "kind": "urn",
+          "x": 300,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p01",
+          "kind": "urn",
+          "x": 460,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p02",
+          "kind": "urn",
+          "x": 620,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p03",
+          "kind": "urn",
+          "x": 1040,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p04",
+          "kind": "urn",
+          "x": 1200,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p05",
+          "kind": "urn",
+          "x": 1360,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p06",
+          "kind": "urn",
+          "x": 490,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p07",
+          "kind": "urn",
+          "x": 1130,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "ampoules-p08",
+          "kind": "spill",
+          "x": 880,
+          "z": 0.44,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e18-ampoules",
+          "edge": "e18",
+          "to": "head",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1600,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e19-ampoules",
+          "edge": "e19",
+          "to": "drain",
+          "x": 910,
+          "z": 0.8,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e20-ampoules",
+          "edge": "e20",
+          "to": "antechamber",
+          "x": 1510,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": [
+        {
+          "x0": 450,
+          "x1": 530,
+          "z0": 0.78,
+          "z1": 0.92
+        },
+        {
+          "x0": 1090,
+          "x1": 1170,
+          "z0": 0.78,
+          "z1": 0.92
+        }
+      ]
+    },
+    {
+      "id": "drain",
+      "name": "Galerie basse",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "HYBRID",
+      "theme": "drain",
+      "width": 1490,
+      "map": [
+        10,
+        2
+      ],
+      "focus": "Galerie optionnelle adaptée : trace du retour de Millburn et Fifield ; aucun serpent ne naît des murs.",
+      "props": [
+        {
+          "id": "drain-p00",
+          "kind": "rib",
+          "x": 360,
+          "z": 0.23,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "drain-p01",
+          "kind": "urn",
+          "x": 590,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "drain-p02",
+          "kind": "spill",
+          "x": 760,
+          "z": 0.5,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "drain-p03",
+          "kind": "helmet",
+          "x": 1000,
+          "z": 0.7,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "drain-p04",
+          "kind": "rib",
+          "x": 1190,
+          "z": 0.22,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "drain-p05",
+          "kind": "urn",
+          "x": 1300,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e19-drain",
+          "edge": "e19",
+          "to": "ampoules",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 820,
+          "spawnZ": 0.8,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "antechamber",
+      "name": "Antichambre",
+      "zone": "Temple",
+      "deck": -1,
+      "mode": "SIDE",
+      "theme": "temple",
+      "width": 1440,
+      "map": [
+        11,
+        1
+      ],
+      "focus": "Le changement de matériau annonce le passage vers la partie vaisseau du complexe.",
+      "props": [
+        {
+          "id": "antechamber-p00",
+          "kind": "rib",
+          "x": 340,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "antechamber-p01",
+          "kind": "rib",
+          "x": 800,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "antechamber-p02",
+          "kind": "urn",
+          "x": 570,
+          "z": 0.31,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "antechamber-p03",
+          "kind": "consoleAlien",
+          "x": 1120,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "antechamber-p04",
+          "kind": "rib",
+          "x": 1280,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e20-antechamber",
+          "edge": "e20",
+          "to": "ampoules",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1420,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e21-antechamber",
+          "edge": "e21",
+          "to": "hold",
+          "x": 1350,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "hold",
+      "name": "Soute du Juggernaut",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "mode": "DEPTH",
+      "theme": "hold",
+      "width": 1950,
+      "map": [
+        12,
+        1
+      ],
+      "focus": "Stockage régulier des ampoules. La voie centrale ne coupe aucune rangée solide.",
+      "props": [
+        {
+          "id": "hold-p00",
+          "kind": "urn",
+          "x": 280,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p01",
+          "kind": "urn",
+          "x": 420,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p02",
+          "kind": "urn",
+          "x": 560,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p03",
+          "kind": "urn",
+          "x": 700,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p04",
+          "kind": "urn",
+          "x": 1240,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p05",
+          "kind": "urn",
+          "x": 1380,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p06",
+          "kind": "urn",
+          "x": 1520,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p07",
+          "kind": "urn",
+          "x": 1660,
+          "z": 0.27,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p08",
+          "kind": "urn",
+          "x": 400,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p09",
+          "kind": "urn",
+          "x": 1540,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "hold-p10",
+          "kind": "rib",
+          "x": 960,
+          "z": 0.17,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e21-hold",
+          "edge": "e21",
+          "to": "antechamber",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1260,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e22-hold",
+          "edge": "e22",
+          "to": "orrery",
+          "x": 1850,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e25-hold",
+          "edge": "e25",
+          "to": "gallery",
+          "x": 1000,
+          "z": 0.86,
+          "spawnX": 1000,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "orrery",
+      "name": "Salle de navigation",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "mode": "DEPTH",
+      "theme": "orrery",
+      "width": 1820,
+      "map": [
+        13,
+        1
+      ],
+      "focus": "Le fauteuil et l’orrery dominent un espace annulaire, pas une ruche. Un accès mène aux caissons.",
+      "props": [
+        {
+          "id": "orrery-p00",
+          "kind": "consoleAlien",
+          "x": 410,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "orrery-p01",
+          "kind": "consoleAlien",
+          "x": 1420,
+          "z": 0.3,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "orrery-p02",
+          "kind": "pilot",
+          "x": 940,
+          "z": 0.46,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "orrery-p03",
+          "kind": "urn",
+          "x": 310,
+          "z": 0.84,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "orrery-p04",
+          "kind": "urn",
+          "x": 1500,
+          "z": 0.84,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "orrery-p05",
+          "kind": "rib",
+          "x": 620,
+          "z": 0.18,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "orrery-p06",
+          "kind": "rib",
+          "x": 1250,
+          "z": 0.18,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e22-orrery",
+          "edge": "e22",
+          "to": "hold",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1760,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e23-orrery",
+          "edge": "e23",
+          "to": "hypersleep",
+          "x": 1150,
+          "z": 0.3,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e30-orrery",
+          "edge": "e30",
+          "to": "breach",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1290,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "hypersleep",
+      "name": "Hypersommeil des Ingénieurs",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "mode": "HYBRID",
+      "theme": "hypersleep",
+      "width": 1640,
+      "map": [
+        13,
+        0
+      ],
+      "focus": "Quatre sarcophages, un seul survivant. Ils sont des supports scénaristiques, pas des générateurs de soldats.",
+      "props": [
+        {
+          "id": "hypersleep-p00",
+          "kind": "engineerPod",
+          "x": 390,
+          "z": 0.32,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "hypersleep-p01",
+          "kind": "engineerPod",
+          "x": 720,
+          "z": 0.32,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "hypersleep-p02",
+          "kind": "engineerPod",
+          "x": 1060,
+          "z": 0.32,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "hypersleep-p03",
+          "kind": "engineerPod",
+          "x": 1370,
+          "z": 0.32,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "hypersleep-p04",
+          "kind": "consoleAlien",
+          "x": 860,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e23-hypersleep",
+          "edge": "e23",
+          "to": "orrery",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1060,
+          "spawnZ": 0.3,
+          "label": null
+        },
+        {
+          "id": "e24-hypersleep",
+          "edge": "e24",
+          "to": "gallery",
+          "x": 1550,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "gallery",
+      "name": "Coursive de contrôle",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "mode": "SIDE",
+      "theme": "temple",
+      "width": 1180,
+      "map": [
+        12,
+        0
+      ],
+      "focus": "Liaison additionnelle de gameplay ; aucun ascenseur invisible. Sa porte crée un raccourci après activation.",
+      "props": [
+        {
+          "id": "gallery-p00",
+          "kind": "rib",
+          "x": 310,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "gallery-p01",
+          "kind": "consoleAlien",
+          "x": 570,
+          "z": 0.31,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "gallery-p02",
+          "kind": "rib",
+          "x": 890,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "gallery-p03",
+          "kind": "urn",
+          "x": 1020,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e24-gallery",
+          "edge": "e24",
+          "to": "hypersleep",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1460,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e25-gallery",
+          "edge": "e25",
+          "to": "hold",
+          "x": 1090,
+          "z": 0.6,
+          "spawnX": 910,
+          "spawnZ": 0.86,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "wreck",
+      "name": "Champ de débris",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "DEPTH",
+      "theme": "wreck",
+      "width": 2130,
+      "map": [
+        7,
+        3
+      ],
+      "focus": "Après l’impact, les structures détruites ne sont plus des passages du Prometheus. Les débris encadrent la route.",
+      "props": [
+        {
+          "id": "wreck-p00",
+          "kind": "wreckage",
+          "x": 350,
+          "z": 0.3,
+          "scale": 1.5,
+          "solid": false
+        },
+        {
+          "id": "wreck-p01",
+          "kind": "wreckage",
+          "x": 700,
+          "z": 0.85,
+          "scale": 1.5,
+          "solid": false
+        },
+        {
+          "id": "wreck-p02",
+          "kind": "rock",
+          "x": 1080,
+          "z": 0.25,
+          "scale": 1.5,
+          "solid": false
+        },
+        {
+          "id": "wreck-p03",
+          "kind": "wreckage",
+          "x": 1430,
+          "z": 0.3,
+          "scale": 1.8,
+          "solid": false
+        },
+        {
+          "id": "wreck-p04",
+          "kind": "oxygen",
+          "x": 1720,
+          "z": 0.74,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "wreck-p05",
+          "kind": "beacon",
+          "x": 1930,
+          "z": 0.4,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e26-wreck",
+          "edge": "e26",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 450,
+          "spawnZ": 0.83,
+          "label": null
+        },
+        {
+          "id": "e27-wreck",
+          "edge": "e27",
+          "to": "lifeboat",
+          "x": 2020,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e29-wreck",
+          "edge": "e29",
+          "to": "breach",
+          "x": 1250,
+          "z": 0.82,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "lifeboat",
+      "name": "Extérieur du module de survie",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "HYBRID",
+      "theme": "lifeboat",
+      "width": 1540,
+      "map": [
+        8,
+        3
+      ],
+      "focus": "Le module de Vickers détaché est maintenant accessible depuis la surface ; son intérieur est le même.",
+      "props": [
+        {
+          "id": "lifeboat-p00",
+          "kind": "wreckage",
+          "x": 320,
+          "z": 0.28,
+          "scale": 1.4,
+          "solid": false
+        },
+        {
+          "id": "lifeboat-p01",
+          "kind": "beacon",
+          "x": 700,
+          "z": 0.7,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lifeboat-p02",
+          "kind": "oxygen",
+          "x": 1030,
+          "z": 0.28,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "lifeboat-p03",
+          "kind": "rock",
+          "x": 1290,
+          "z": 0.86,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e27-lifeboat",
+          "edge": "e27",
+          "to": "wreck",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1930,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e28-lifeboat",
+          "edge": "e28",
+          "to": "executive",
+          "x": 1440,
+          "z": 0.6,
+          "spawnX": 1360,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "breach",
+      "name": "Brèche du Juggernaut",
+      "zone": "Juggernaut",
+      "deck": 0,
+      "mode": "SIDE",
+      "theme": "wreck",
+      "width": 1470,
+      "map": [
+        11,
+        3
+      ],
+      "focus": "La brèche, créée par l’impact, remplace l’entrée ensevelie et mène aux mêmes coordonnées du cockpit.",
+      "props": [
+        {
+          "id": "breach-p00",
+          "kind": "wreckage",
+          "x": 350,
+          "z": 0.3,
+          "scale": 1.7,
+          "solid": false
+        },
+        {
+          "id": "breach-p01",
+          "kind": "rib",
+          "x": 730,
+          "z": 0.2,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "breach-p02",
+          "kind": "wreckage",
+          "x": 1050,
+          "z": 0.85,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "breach-p03",
+          "kind": "consoleAlien",
+          "x": 1250,
+          "z": 0.31,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e29-breach",
+          "edge": "e29",
+          "to": "wreck",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1160,
+          "spawnZ": 0.82,
+          "label": null
+        },
+        {
+          "id": "e30-breach",
+          "edge": "e30",
+          "to": "orrery",
+          "x": 1380,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        },
+        {
+          "id": "e31-breach",
+          "edge": "e31",
+          "to": "second",
+          "x": 650,
+          "z": 0.8,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    },
+    {
+      "id": "second",
+      "name": "Second vaisseau",
+      "zone": "LV-223",
+      "deck": 0,
+      "mode": "DEPTH",
+      "theme": "second",
+      "width": 1650,
+      "map": [
+        12,
+        3
+      ],
+      "focus": "Un autre vaisseau, distinct de l’épave. Le trajet extérieur est condensé et annoncé comme une ellipse de marche.",
+      "props": [
+        {
+          "id": "second-p00",
+          "kind": "pilot",
+          "x": 830,
+          "z": 0.44,
+          "scale": 1.25,
+          "solid": false
+        },
+        {
+          "id": "second-p01",
+          "kind": "consoleAlien",
+          "x": 430,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "second-p02",
+          "kind": "consoleAlien",
+          "x": 1240,
+          "z": 0.32,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "second-p03",
+          "kind": "rib",
+          "x": 290,
+          "z": 0.19,
+          "scale": 1,
+          "solid": false
+        },
+        {
+          "id": "second-p04",
+          "kind": "rib",
+          "x": 1400,
+          "z": 0.19,
+          "scale": 1,
+          "solid": false
+        }
+      ],
+      "doors": [
+        {
+          "id": "e31-second",
+          "edge": "e31",
+          "to": "breach",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 560,
+          "spawnZ": 0.8,
+          "label": null
+        }
+      ],
+      "obstacles": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e00",
+      "a": "cryo",
+      "b": "concourse",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e01",
+      "a": "concourse",
+      "b": "briefing",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e02",
+      "a": "briefing",
+      "b": "bridge",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e03",
+      "a": "concourse",
+      "b": "lab",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e04",
+      "a": "lab",
+      "b": "medbay",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e05",
+      "a": "medbay",
+      "b": "executive",
+      "minStage": 10,
+      "flag": null,
+      "until": "impact",
+      "kind": "door"
+    },
+    {
+      "id": "e06",
+      "a": "bridge",
+      "b": "executive",
+      "minStage": 10,
+      "flag": null,
+      "until": "impact",
+      "kind": "door"
+    },
+    {
+      "id": "e07",
+      "a": "executive",
+      "b": "medpod",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e08",
+      "a": "concourse",
+      "b": "equipment",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e09",
+      "a": "equipment",
+      "b": "garage",
+      "minStage": 2,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e10",
+      "a": "garage",
+      "b": "airlock",
+      "minStage": 2,
+      "flag": null,
+      "until": "impact",
+      "kind": "door"
+    },
+    {
+      "id": "e11",
+      "a": "airlock",
+      "b": "plain",
+      "minStage": 2,
+      "flag": "suit",
+      "until": "impact",
+      "kind": "door"
+    },
+    {
+      "id": "e12",
+      "a": "plain",
+      "b": "ridge",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e13",
+      "a": "ridge",
+      "b": "shelter",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e14",
+      "a": "ridge",
+      "b": "entrance",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e15",
+      "a": "entrance",
+      "b": "vestibule",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e16",
+      "a": "vestibule",
+      "b": "holograms",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e17",
+      "a": "holograms",
+      "b": "head",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e18",
+      "a": "head",
+      "b": "ampoules",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e19",
+      "a": "ampoules",
+      "b": "drain",
+      "minStage": 7,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e20",
+      "a": "ampoules",
+      "b": "antechamber",
+      "minStage": 12,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e21",
+      "a": "antechamber",
+      "b": "hold",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e22",
+      "a": "hold",
+      "b": "orrery",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e23",
+      "a": "orrery",
+      "b": "hypersleep",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e24",
+      "a": "hypersleep",
+      "b": "gallery",
+      "minStage": 0,
+      "flag": "navigation",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e25",
+      "a": "gallery",
+      "b": "hold",
+      "minStage": 0,
+      "flag": "navigation",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e26",
+      "a": "ridge",
+      "b": "wreck",
+      "minStage": 0,
+      "flag": "impact",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e27",
+      "a": "wreck",
+      "b": "lifeboat",
+      "minStage": 0,
+      "flag": null,
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e28",
+      "a": "lifeboat",
+      "b": "executive",
+      "minStage": 0,
+      "flag": "impact",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e29",
+      "a": "wreck",
+      "b": "breach",
+      "minStage": 0,
+      "flag": "trapped",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e30",
+      "a": "breach",
+      "b": "orrery",
+      "minStage": 0,
+      "flag": "impact",
+      "until": null,
+      "kind": "door"
+    },
+    {
+      "id": "e31",
+      "a": "breach",
+      "b": "second",
+      "minStage": 0,
+      "flag": "davidRecovered",
+      "until": null,
+      "kind": "traverse"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "p01",
+      "title": "Le réveil",
+      "subtitle": "Prometheus · 2093",
+      "radio": "David — Prenez votre temps. Vos muscles n’ont pas encore compris que le voyage est terminé.",
+      "tasks": [
+        {
+          "id": "vitals",
+          "room": "cryo",
+          "x": 540,
+          "z": 0.6,
+          "title": "Vérifier les constantes",
+          "kind": "hold",
+          "flag": null,
+          "detail": "Le caisson relève vos constantes. Maintenez E pour terminer le contrôle.",
+          "seconds": 1.8
+        },
+        {
+          "id": "meetDavid",
+          "room": "concourse",
+          "x": 780,
+          "z": 0.55,
+          "title": "Rejoindre David",
+          "kind": "interact",
+          "flag": null,
+          "detail": "David vous attend au carrefour. Le briefing peut commencer."
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "title": "L’invitation",
+      "subtitle": "L’origine du voyage",
+      "radio": "Shaw — Des peuples séparés par des millénaires. Pourtant, ils regardaient tous le même ciel.",
+      "tasks": [
+        {
+          "id": "brief",
+          "room": "briefing",
+          "x": 620,
+          "z": 0.57,
+          "title": "Examiner la carte stellaire",
+          "kind": "puzzle",
+          "flag": null,
+          "detail": "Accorder les trois relevés au motif affiché.",
+          "solution": [
+            2,
+            4,
+            1
+          ]
+        },
+        {
+          "id": "landing",
+          "room": "bridge",
+          "x": 1010,
+          "z": 0.56,
+          "title": "Confirmer la zone d’atterrissage",
+          "kind": "hold",
+          "flag": "landed",
+          "detail": "Janek — Le terrain est dur, mais on peut poser le vaisseau.",
+          "seconds": 1.8
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "title": "Première sortie",
+      "subtitle": "Préparation de l’expédition",
+      "radio": "Vickers — Gardez le contact avec la passerelle. Je ne veux perdre personne avant d’avoir une carte.",
+      "tasks": [
+        {
+          "id": "takeSuit",
+          "room": "equipment",
+          "x": 570,
+          "z": 0.56,
+          "title": "Enfiler la combinaison",
+          "kind": "hold",
+          "flag": "suit",
+          "detail": "Étanchéité contrôlée. Réserve d’oxygène prête.",
+          "seconds": 1.8
+        },
+        {
+          "id": "prepareRover",
+          "room": "garage",
+          "x": 900,
+          "z": 0.64,
+          "title": "Vérifier le matériel du RT01",
+          "kind": "interact",
+          "flag": "scanner",
+          "detail": "L’expédition dispose du scanner, des balises et d’une liaison au vaisseau."
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "title": "Le seuil",
+      "subtitle": "LV-223 · complexe inconnu",
+      "radio": "Holloway — Cette ligne dans la roche… ce n’est pas de l’érosion.",
+      "tasks": [
+        {
+          "id": "surfaceMark",
+          "room": "plain",
+          "x": 660,
+          "z": 0.55,
+          "title": "Relever l’axe du complexe",
+          "kind": "scan",
+          "flag": null,
+          "detail": "Une ligne de terrain relie les structures. Le scanner enregistre le repère."
+        },
+        {
+          "id": "airCheck",
+          "room": "vestibule",
+          "x": 720,
+          "z": 0.6,
+          "title": "Analyser l’atmosphère intérieure",
+          "kind": "scan",
+          "flag": null,
+          "detail": "L’air est différent ici. Gardez le casque fermé tant que les relevés ne sont pas confirmés."
+        },
+        {
+          "id": "holoRecord",
+          "room": "holograms",
+          "x": 1000,
+          "z": 0.6,
+          "title": "Enregistrer les hologrammes",
+          "kind": "scan",
+          "flag": "holograms",
+          "detail": "Des Ingénieurs fuyaient quelque chose. Il ne reste que leur enregistrement."
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "title": "La chambre de la tête",
+      "subtitle": "Premier contact avec les vestiges",
+      "radio": "Shaw — Ce visage… Pourquoi nous ressemble-t-il autant ?",
+      "tasks": [
+        {
+          "id": "headScan",
+          "room": "head",
+          "x": 900,
+          "z": 0.6,
+          "title": "Documenter la tête monumentale",
+          "kind": "scan",
+          "flag": null,
+          "detail": "La statue et les rangées d’ampoules appartiennent au même espace cérémoniel."
+        },
+        {
+          "id": "urnScan",
+          "room": "ampoules",
+          "x": 740,
+          "z": 0.6,
+          "title": "Prélever un relevé des ampoules",
+          "kind": "scan",
+          "flag": "disturbed",
+          "detail": "Les ampoules réagissent à l’ouverture de la chambre. David a isolé un échantillon."
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "title": "La tempête",
+      "subtitle": "Rupture de visibilité",
+      "radio": "Janek — Le front arrive. Laissez les belles découvertes et rentrez maintenant.",
+      "tasks": [
+        {
+          "id": "weatherAlert",
+          "room": "entrance",
+          "x": 1150,
+          "z": 0.6,
+          "title": "Recevoir l’alerte météo",
+          "kind": "interact",
+          "flag": "storm",
+          "detail": "Le vent se lève. La balise du vaisseau reste visible au scanner."
+        },
+        {
+          "id": "tether",
+          "room": "airlock",
+          "x": 330,
+          "z": 0.6,
+          "title": "Récupérer la capsule avec l’enrouleur",
+          "kind": "hold",
+          "flag": "headRecovered",
+          "detail": "Tenez l’enrouleur jusqu’à ce que la capsule franchisse le seuil.",
+          "seconds": 3
+        },
+        {
+          "id": "seal",
+          "room": "airlock",
+          "x": 620,
+          "z": 0.6,
+          "title": "Refermer le sas",
+          "kind": "hold",
+          "flag": "stormEnded",
+          "detail": "Pression stabilisée. La tempête reste à l’extérieur.",
+          "seconds": 1.6
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "title": "Quarantaine",
+      "subtitle": "Le laboratoire",
+      "radio": "Ford — Je lance l’analyse. Personne ne touche au confinement.",
+      "tasks": [
+        {
+          "id": "analyzeHead",
+          "room": "lab",
+          "x": 520,
+          "z": 0.6,
+          "title": "Comparer les signatures biologiques",
+          "kind": "puzzle",
+          "flag": null,
+          "detail": "Caler chaque canal sur sa valeur de référence.",
+          "solution": [
+            3,
+            1,
+            4
+          ]
+        },
+        {
+          "id": "medicalReport",
+          "room": "medbay",
+          "x": 570,
+          "z": 0.6,
+          "title": "Consigner les premiers symptômes",
+          "kind": "interact",
+          "flag": null,
+          "detail": "Le résultat ne suffit pas à expliquer ce qui se passe à bord."
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "title": "Les voix perdues",
+      "subtitle": "Enregistrement de la passerelle",
+      "radio": "Janek — Deux balises dans le complexe. Elles bougent, mais pas vers la sortie.",
+      "tasks": [
+        {
+          "id": "locateLost",
+          "room": "bridge",
+          "x": 610,
+          "z": 0.56,
+          "title": "Recouper les dernières positions",
+          "kind": "puzzle",
+          "flag": null,
+          "detail": "La liaison contient plusieurs retards. Recouper les trois horloges.",
+          "solution": [
+            1,
+            3,
+            2
+          ]
+        },
+        {
+          "id": "lastSignal",
+          "room": "bridge",
+          "x": 1090,
+          "z": 0.55,
+          "title": "Écouter la dernière transmission",
+          "kind": "interact",
+          "flag": "lostCrew",
+          "detail": "Le dernier signal de Millburn et Fifield est interrompu. Le casque transmet encore quelques secondes, puis la liaison se coupe."
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "title": "Le prix de la découverte",
+      "subtitle": "Seconde expédition",
+      "radio": "Holloway — Ce n’est rien. Je peux encore marcher.",
+      "tasks": [
+        {
+          "id": "secondExpedition",
+          "room": "entrance",
+          "x": 590,
+          "z": 0.6,
+          "title": "Vérifier l’état de l’expédition",
+          "kind": "interact",
+          "flag": null,
+          "detail": "Holloway ne peut plus continuer. Retour au sas, sans détour."
+        },
+        {
+          "id": "hollowayReturn",
+          "room": "airlock",
+          "x": 870,
+          "z": 0.6,
+          "title": "Accompagner Holloway au seuil",
+          "kind": "interact",
+          "flag": "hollowayLost",
+          "detail": "Vickers refuse l’entrée. Holloway s’effondre devant le seuil."
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "title": "L’intrusion",
+      "subtitle": "Janek · défense du hangar",
+      "radio": "Janek — Quelque chose est devant le sas. Ce n’est plus l’homme qui est sorti ce matin.",
+      "tasks": [
+        {
+          "id": "burnFifield",
+          "room": "garage",
+          "x": 1200,
+          "z": 0.64,
+          "title": "Repousser Fifield avec le lance-flammes",
+          "kind": "combat",
+          "flag": "fifieldDown",
+          "detail": "F : lance-flammes. Alignez-vous dans sa profondeur, gardez vos distances et laissez refroidir la buse."
+        },
+        {
+          "id": "closeHangar",
+          "room": "garage",
+          "x": 1690,
+          "z": 0.62,
+          "title": "Sécuriser le hangar",
+          "kind": "hold",
+          "flag": null,
+          "detail": "Le sas tient. L’incursion est terminée.",
+          "seconds": 2
+        }
+      ],
+      "handoff": {
+        "actor": "Janek",
+        "room": "garage",
+        "x": 520,
+        "z": 0.65
+      }
+    },
+    {
+      "id": "p11",
+      "title": "Ce qui grandit",
+      "subtitle": "Shaw · module médical",
+      "radio": "Shaw — Je veux voir le relevé. Maintenant.",
+      "tasks": [
+        {
+          "id": "diagnosis",
+          "room": "medbay",
+          "x": 820,
+          "z": 0.6,
+          "title": "Consulter le diagnostic",
+          "kind": "scan",
+          "flag": null,
+          "detail": "Le scanner détecte une présence anormale. Il faut rejoindre le module autonome."
+        },
+        {
+          "id": "medpodCycle",
+          "room": "medpod",
+          "x": 590,
+          "z": 0.6,
+          "title": "Activer le MédPod",
+          "kind": "medpod",
+          "flag": "surgery",
+          "detail": "Rétablir les commandes, verrouiller le capot puis lancer le cycle autonome."
+        }
+      ],
+      "handoff": {
+        "actor": "Shaw",
+        "room": "medbay",
+        "x": 430,
+        "z": 0.6
+      }
+    },
+    {
+      "id": "p12",
+      "title": "Le passager caché",
+      "subtitle": "Une mission dans la mission",
+      "radio": "David — Certaines réponses n’étaient pas destinées à tout l’équipage.",
+      "tasks": [
+        {
+          "id": "weylandReveal",
+          "room": "executive",
+          "x": 1030,
+          "z": 0.55,
+          "title": "Rejoindre Weyland",
+          "kind": "interact",
+          "flag": "weyland",
+          "detail": "Weyland n’a pas confié ce voyage à une équipe. Il est venu lui-même."
+        },
+        {
+          "id": "leaveOrder",
+          "room": "equipment",
+          "x": 1000,
+          "z": 0.6,
+          "title": "Préparer la dernière sortie",
+          "kind": "interact",
+          "flag": null,
+          "detail": "La même route conduit au complexe. La soute est désormais accessible."
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "title": "Le vaisseau",
+      "subtitle": "Sous le complexe",
+      "radio": "Janek — Ce n’est pas un sanctuaire. Regardez ce qu’ils entreposent ici.",
+      "tasks": [
+        {
+          "id": "holdScan",
+          "room": "hold",
+          "x": 920,
+          "z": 0.61,
+          "title": "Identifier la cargaison",
+          "kind": "scan",
+          "flag": null,
+          "detail": "Les ampoules sont un chargement, pas de simples offrandes."
+        },
+        {
+          "id": "navigation",
+          "room": "orrery",
+          "x": 940,
+          "z": 0.63,
+          "title": "Lire l’orrery",
+          "kind": "puzzle",
+          "flag": "navigation",
+          "detail": "Reconstituer l’alignement des trois anneaux.",
+          "solution": [
+            4,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "title": "La rencontre",
+      "subtitle": "Le dernier dormeur",
+      "radio": "Shaw — Attendez. Il faut lui demander pourquoi.",
+      "tasks": [
+        {
+          "id": "wakeEngineer",
+          "room": "hypersleep",
+          "x": 1050,
+          "z": 0.59,
+          "title": "Approcher le caisson actif",
+          "kind": "hold",
+          "flag": "engineerAwake",
+          "detail": "Un seul Ingénieur est encore vivant. David se prépare à traduire.",
+          "seconds": 2.4
+        },
+        {
+          "id": "translate",
+          "room": "orrery",
+          "x": 610,
+          "z": 0.6,
+          "title": "Assister à la rencontre",
+          "kind": "interact",
+          "flag": "meeting",
+          "detail": "La rencontre tourne au désastre. La tête de David est arrachée de son corps. Quittez le vaisseau."
+        }
+      ]
+    },
+    {
+      "id": "p15",
+      "title": "Destination Terre",
+      "subtitle": "La vérité du chargement",
+      "radio": "Shaw — Janek, ce vaisseau ne doit pas partir.",
+      "tasks": [
+        {
+          "id": "escapeTemple",
+          "room": "entrance",
+          "x": 630,
+          "z": 0.62,
+          "title": "Sortir du complexe",
+          "kind": "interact",
+          "flag": null,
+          "detail": "L’Ingénieur prépare le départ. Son objectif n’est pas LV-223."
+        },
+        {
+          "id": "warnJanek",
+          "room": "plain",
+          "x": 1570,
+          "z": 0.6,
+          "title": "Transmettre l’avertissement",
+          "kind": "hold",
+          "flag": "collision",
+          "detail": "Janek, Chance et Ravel maintiennent le Prometheus sur sa trajectoire.",
+          "seconds": 2.2
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "title": "La chute",
+      "subtitle": "Éviter l’épave",
+      "radio": "Janek — Éloignez-vous. Tout ce qui tient encore va retomber.",
+      "tasks": [
+        {
+          "id": "evadeWreck",
+          "room": "ridge",
+          "x": 1190,
+          "z": 0.88,
+          "title": "Quitter l’axe de chute",
+          "kind": "escape",
+          "flag": "impact",
+          "detail": "Gagnez le premier plan et abritez-vous derrière le relief. Ne restez pas sous sa trajectoire."
+        },
+        {
+          "id": "reachWreck",
+          "room": "wreck",
+          "x": 910,
+          "z": 0.6,
+          "title": "Rejoindre le champ de débris",
+          "kind": "interact",
+          "flag": null,
+          "detail": "Le Prometheus est détruit. Le module autonome est votre seul abri."
+        }
+      ]
+    },
+    {
+      "id": "p17",
+      "title": "Le dernier abri",
+      "subtitle": "Le module de survie",
+      "radio": "Shaw — Il reste de l’air. Il faut qu’il en reste.",
+      "tasks": [
+        {
+          "id": "enterLifeboat",
+          "room": "lifeboat",
+          "x": 1090,
+          "z": 0.6,
+          "title": "Localiser l’entrée du module",
+          "kind": "scan",
+          "flag": null,
+          "detail": "Le module de Vickers a survécu à l’éjection. Son sas est accessible."
+        },
+        {
+          "id": "oxygenSupply",
+          "room": "executive",
+          "x": 1290,
+          "z": 0.58,
+          "title": "Rétablir l’alimentation du module",
+          "kind": "hold",
+          "flag": "lifeboatAir",
+          "detail": "Pression suffisante. Quelque chose frappe contre la cloison.",
+          "seconds": 2.1
+        }
+      ]
+    },
+    {
+      "id": "p18",
+      "title": "Le visiteur",
+      "subtitle": "La dernière porte",
+      "radio": "David — Shaw… il vient vers vous.",
+      "tasks": [
+        {
+          "id": "releaseTrilobite",
+          "room": "medpod",
+          "x": 310,
+          "z": 0.6,
+          "title": "Libérer le Trilobite",
+          "kind": "trap",
+          "flag": "trapped",
+          "detail": "Attirez l’Ingénieur jusque dans le module puis ouvrez le confinement. Il n’y a plus de temps pour une autre tentative."
+        },
+        {
+          "id": "leaveLifeboat",
+          "room": "lifeboat",
+          "x": 650,
+          "z": 0.61,
+          "title": "Quitter le module",
+          "kind": "interact",
+          "flag": null,
+          "detail": "Le passage est libre. N’attendez pas la fin du combat."
+        }
+      ]
+    },
+    {
+      "id": "p19",
+      "title": "Une autre route",
+      "subtitle": "Retour à l’épave",
+      "radio": "David — Je connais un autre vaisseau. Mais j’aurai besoin de vous.",
+      "tasks": [
+        {
+          "id": "recoverDavid",
+          "room": "orrery",
+          "x": 760,
+          "z": 0.62,
+          "title": "Récupérer David",
+          "kind": "interact",
+          "flag": "davidRecovered",
+          "detail": "La brèche mène au cockpit endommagé. Shaw emporte David et son savoir."
+        },
+        {
+          "id": "newShip",
+          "room": "second",
+          "x": 830,
+          "z": 0.62,
+          "title": "Préparer l’autre vaisseau",
+          "kind": "puzzle",
+          "flag": null,
+          "detail": "Ce cockpit appartient à un second vaisseau. Les coordonnées restent à déterminer.",
+          "solution": [
+            2,
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p20",
+      "title": "Les questions qui restent",
+      "subtitle": "Dernière transmission",
+      "radio": "Shaw — Nous avons trouvé une route. Pas une réponse.",
+      "tasks": [
+        {
+          "id": "lastMessage",
+          "room": "second",
+          "x": 1240,
+          "z": 0.57,
+          "title": "Enregistrer la dernière transmission",
+          "kind": "hold",
+          "flag": "departed",
+          "detail": "Shaw quitte LV-223 avec David. Dans le module abandonné, une autre vie commence.",
+          "seconds": 2.2
+        }
+      ]
+    }
+  ],
+  "archives": [
+    {
+      "id": "a01",
+      "room": "cryo",
+      "x": 1110,
+      "z": 0.6,
+      "title": "Le long sommeil",
+      "text": "Les constantes reviennent lentement. Les caissons ont maintenu l’équipage pendant la traversée."
+    },
+    {
+      "id": "a02",
+      "room": "briefing",
+      "x": 1030,
+      "z": 0.6,
+      "title": "Motifs convergents",
+      "text": "Plusieurs relevés anciens partagent un même arrangement d’astres. Des peuples qui ne se connaissaient pas regardaient dans la même direction."
+    },
+    {
+      "id": "a03",
+      "room": "bridge",
+      "x": 310,
+      "z": 0.6,
+      "title": "Équipe de vol",
+      "text": "Janek commande le vaisseau. Chance et Ravel assurent la navigation et le pilotage."
+    },
+    {
+      "id": "a04",
+      "room": "lab",
+      "x": 1080,
+      "z": 0.6,
+      "title": "Confinement",
+      "text": "Les outils de recherche ne transforment pas une substance inconnue en remède utilisable."
+    },
+    {
+      "id": "a05",
+      "room": "equipment",
+      "x": 310,
+      "z": 0.6,
+      "title": "Combinaison",
+      "text": "Joint du casque vérifié. Réserve nominale. Recharger les bouteilles uniquement dans un espace pressurisé."
+    },
+    {
+      "id": "a06",
+      "room": "garage",
+      "x": 330,
+      "z": 0.65,
+      "title": "RT01",
+      "text": "RT01 arrimé. Les caisses de relevé sont chargées et les instruments de terrain attendent leur contrôle."
+    },
+    {
+      "id": "a07",
+      "room": "shelter",
+      "x": 740,
+      "z": 0.6,
+      "title": "Relief basaltique",
+      "text": "La paroi coupe le vent. Au-delà des marques laissées par notre équipe, aucune trace d’une présence humaine."
+    },
+    {
+      "id": "a08",
+      "room": "holograms",
+      "x": 1450,
+      "z": 0.6,
+      "title": "Échos",
+      "text": "Les silhouettes traversent le couloir sans nous regarder. Le même mouvement recommence. Un enregistrement, pas une présence."
+    },
+    {
+      "id": "a09",
+      "room": "head",
+      "x": 460,
+      "z": 0.62,
+      "title": "La tête",
+      "text": "Le visage domine la chambre. Les récipients sont disposés face à lui. Pourquoi donner un visage à cet endroit ?"
+    },
+    {
+      "id": "a10",
+      "room": "ampoules",
+      "x": 1200,
+      "z": 0.63,
+      "title": "Les ampoules",
+      "text": "La substance réagit au contact de son environnement. Les prélèvements ne permettent pas encore d’en comprendre tous les effets."
+    },
+    {
+      "id": "a11",
+      "room": "drain",
+      "x": 990,
+      "z": 0.7,
+      "title": "Dernier équipement",
+      "text": "Un casque, des empreintes, une transmission coupée. Millburn et Fifield sont passés par cette galerie."
+    },
+    {
+      "id": "a12",
+      "room": "gallery",
+      "x": 560,
+      "z": 0.6,
+      "title": "Commande de maintenance",
+      "text": "Le conduit rejoint les caissons depuis la soute. La commande de maintenance répond à nouveau."
+    },
+    {
+      "id": "a13",
+      "room": "hypersleep",
+      "x": 1380,
+      "z": 0.6,
+      "title": "Le dernier dormeur",
+      "text": "Un seul des caissons renvoie une activité. Quelqu’un est resté ici pendant tout ce temps."
+    },
+    {
+      "id": "a14",
+      "room": "hold",
+      "x": 1520,
+      "z": 0.62,
+      "title": "Chargement",
+      "text": "Les ampoules sont alignées en rangées régulières. Le complexe n’était pas seulement un lieu de culte : ce vaisseau transportait quelque chose."
+    },
+    {
+      "id": "a15",
+      "room": "executive",
+      "x": 370,
+      "z": 0.6,
+      "title": "Module autonome",
+      "text": "Réserves indépendantes, alimentation de secours, confinement médical. Ce module a été conçu pour survivre au reste du vaisseau."
+    },
+    {
+      "id": "a16",
+      "room": "breach",
+      "x": 1070,
+      "z": 0.6,
+      "title": "Après l’impact",
+      "text": "Le métal a cédé sous l’impact. La brèche offre un accès, mais aucune des cloisons qui l’entourent ne paraît stable."
+    },
+    {
+      "id": "a17",
+      "room": "second",
+      "x": 470,
+      "z": 0.6,
+      "title": "Au-delà de LV-223",
+      "text": "Il existe d’autres routes. David pense pouvoir les lire. Je n’ai plus que lui pour les suivre."
+    },
+    {
+      "id": "a18",
+      "room": "medpod",
+      "x": 980,
+      "z": 0.6,
+      "title": "Confinement médical",
+      "text": "L’organisme extrait est enfermé derrière cette cloison. Les capteurs signalent une croissance anormale."
+    }
+  ],
+  "characters": [
+    {
+      "id": "shaw",
+      "name": "Elizabeth Shaw",
+      "role": "Jouable principal",
+      "behavior": "Chercheuse ; scanner, relevés, outils. Pas de dotation Colonial Marine."
+    },
+    {
+      "id": "david",
+      "name": "David 8",
+      "role": "Présence / récit",
+      "behavior": "Au carrefour avant les analyses, puis lié aux événements. Récupéré après impact ; pas de double vivant dans le cockpit."
+    },
+    {
+      "id": "janek",
+      "name": "Janek",
+      "role": "Jouable au hangar",
+      "behavior": "Séquence distincte de défense contre Fifield. Le transfert de point de vue est annoncé et n’est pas une porte physique."
+    },
+    {
+      "id": "holloway",
+      "name": "Charlie Holloway",
+      "role": "Récit",
+      "behavior": "Contamination et retour au sas ; aucun soin ne réécrit sa disparition."
+    },
+    {
+      "id": "vickers",
+      "name": "Meredith Vickers",
+      "role": "Récit",
+      "behavior": "Contrôle du sas et module autonome ; pas de réapparition après l’impact."
+    },
+    {
+      "id": "ford",
+      "name": "Ford",
+      "role": "Récit",
+      "behavior": "Interventions médicales uniquement dans le contexte approprié."
+    },
+    {
+      "id": "fifield",
+      "name": "Fifield",
+      "role": "Rencontre unique",
+      "behavior": "Mutation cinéma. Télégraphie la charge, vise un point mémorisé, récupère après la charge. Reste dans le hangar."
+    },
+    {
+      "id": "millburn",
+      "name": "Millburn",
+      "role": "Transmission",
+      "behavior": "Disparition montrée par liaison ; pas de compagnon ressuscité."
+    },
+    {
+      "id": "weyland",
+      "name": "Peter Weyland",
+      "role": "Récit",
+      "behavior": "Révélé après la chirurgie ; rencontre terminale avec l’Ingénieur."
+    },
+    {
+      "id": "chance",
+      "name": "Chance",
+      "role": "Transmission",
+      "behavior": "Reste associé à la passerelle et à l’impact."
+    },
+    {
+      "id": "ravel",
+      "name": "Ravel",
+      "role": "Transmission",
+      "behavior": "Reste associé à la passerelle et à l’impact."
+    },
+    {
+      "id": "engineer",
+      "name": "Ingénieur survivant",
+      "role": "Menace unique",
+      "behavior": "Non tuable par une arme ordinaire. Se déplace par les portes du même graphe ; déclenche des attaques seulement dans sa pièce."
+    },
+    {
+      "id": "hammerpede",
+      "name": "Hammerpede",
+      "role": "Menace optionnelle",
+      "behavior": "Un seul individu dans la galerie basse après la transmission. Se dresse avant de frapper ; le recul hors de sa portée interrompt le contact."
+    },
+    {
+      "id": "trilobite",
+      "name": "Trilobite",
+      "role": "Piège final",
+      "behavior": "Stade extrait confiné au MédPod puis adulte. Seul le confinement ouvert dans la rencontre finale déclenche l’emprise."
+    },
+    {
+      "id": "deacon",
+      "name": "Deacon",
+      "role": "Épilogue",
+      "behavior": "Apparition après le départ ; aucun duel, aucune horde et aucune transformation en boss récurrent."
+    }
+  ]
+}

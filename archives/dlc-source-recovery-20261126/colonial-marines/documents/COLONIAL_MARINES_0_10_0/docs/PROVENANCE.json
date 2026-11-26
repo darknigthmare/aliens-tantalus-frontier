@@ -1,0 +1,77 @@
+{
+  "version": "0.10.0",
+  "baseArchive": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_9_0.zip",
+  "baseSHA256": "9635c53c52c842ec5b05f883da96ee8fd01395d6efc16c4f1567bcd43cf11ba1",
+  "baseContentSHA256": "b511c81d41adc988efc48270a81f42b6ca6e45c6ccda8f5809c0e3830bb92fec",
+  "referenceSources": [
+    {
+      "id": "official-game",
+      "title": "SEGA / Steam — Aliens: Colonial Marines Collection",
+      "url": "https://store.steampowered.com/app/49540/",
+      "scope": "Official campaign premise and feature scope"
+    },
+    {
+      "id": "official-stasis",
+      "title": "SEGA / Steam — Stasis Interrupted",
+      "url": "https://store.steampowered.com/app/219443/Aliens_Colonial_Marines_Stasis_Interrupted/",
+      "scope": "Official extension and Hicks framing"
+    },
+    {
+      "id": "weapons-screen",
+      "title": "IMFDB — observed weapons and in-game screenshots",
+      "url": "https://www.imfdb.org/wiki/Aliens:_Colonial_Marines",
+      "scope": "Names, weapon families, secondary mechanisms; not numerical balancing"
+    },
+    {
+      "id": "weapons-index",
+      "title": "StrategyWiki — Weapons",
+      "url": "https://strategywiki.org/wiki/Aliens:_Colonial_Marines/Weapons",
+      "scope": "Cross-check weapons and equipment inventory"
+    },
+    {
+      "id": "legendary",
+      "title": "Gamepressure — Legendary weapons, first-hand guide",
+      "url": "https://www.gamepressure.com/alienscolonialmarines/legendary-weapons/z54872",
+      "scope": "Six legendary items and their mission association"
+    },
+    {
+      "id": "campaign-guide",
+      "title": "Gamepressure — chapter guide and objective index",
+      "url": "https://www.gamepressure.com/alienscolonialmarines/game-guide/z68ce6",
+      "scope": "Named landmarks and order of major objectives, not map measurements"
+    },
+    {
+      "id": "stasis-story",
+      "title": "Xenopedia — Stasis Interrupted",
+      "url": "https://avp.fandom.com/wiki/Stasis_Interrupted",
+      "scope": "Cross-check chronology, protagonists and locations"
+    },
+    {
+      "id": "stasis-chapters",
+      "title": "Weyland Archives — Stasis Interrupted",
+      "url": "https://weyland.fandom.com/wiki/Stasis_Interrupted",
+      "scope": "Chapter names and objective chains, secondary source"
+    },
+    {
+      "id": "character-sheets",
+      "title": "SEGA character sheets reproduced by Yell! Magazine, 11 December 2012",
+      "url": "https://www.yellmagazine.com/aliens-colonial-marines-badass-character-details-revealed/45663/",
+      "scope": "Winter, O’Neal, Bella and Cruz costume reference"
+    },
+    {
+      "id": "reid-profile",
+      "title": "Xenopedia — Lisa Reid",
+      "url": "https://avp.fandom.com/wiki/Lisa_Reid",
+      "scope": "Flight equipment and role; facial likeness not authenticated"
+    },
+    {
+      "id": "collector",
+      "title": "Collector’s Edition Pack — publisher description reproduced by MobyGames",
+      "url": "https://www.mobygames.com/game/94753/aliens-colonial-marines-collectors-edition-pack/",
+      "scope": "XM99A and electroshock bonus; Academy remains outside this build"
+    }
+  ],
+  "graphics": "Dessins vectoriels originaux et silhouettes de remplacement ; aucun asset commercial extrait.",
+  "scope": "Évolution locale autonome de l’archive 0.9. Pas de fusion native, push ou déploiement.",
+  "metric1to1": false
+}

@@ -1,0 +1,13 @@
+{
+  "version": "0.10.0",
+  "rules": 40,
+  "roomSheets": 105,
+  "arenaSheets": 3,
+  "plans": 108,
+  "roomCaptures": 105,
+  "arenaCaptures": 9,
+  "currentReportCaptures": 12,
+  "characterPreviews": 11,
+  "weapons": 21,
+  "metric1to1": false
+}

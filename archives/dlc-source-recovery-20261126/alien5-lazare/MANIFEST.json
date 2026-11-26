@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+  "archive": {
+    "size": 7330460,
+    "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+    "gitBlobSha": "be095b065356868d71db959af056caacc589ed0c"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/alien5-lazare/parts/DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip.part-000",
+      "size": 7330460,
+      "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+      "gitBlobSha": "be095b065356868d71db959af056caacc589ed0c"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 177,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/CHANGELOG_V11.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/LICENSE_NOTICE.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/README.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/AUDIT_FIDELITE_V11.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/CODEX_REGLES_V11.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/ROOMS_V11.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/base-v10-data.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/reference-corpus-v10.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/reference-corpus-v11.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/rules-v10.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/docs/rules-v11.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/game/data.json",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/integration/README.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/qa/README.md",
+    "archives/dlc-source-recovery-20261126/alien5-lazare/documents/ALIEN5_PROJET_LAZARE_V11/requirements-qa.txt"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

@@ -1,0 +1,118 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-10-escalier-passerelle.png",
+      "bytes": 161145
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/report-v12-overview.png",
+      "bytes": 101181
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-03-console-basse.png",
+      "bytes": 191880
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-12-matrice.png",
+      "bytes": 326059
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-11-securite-jackson.png",
+      "bytes": 1278555
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/evidence/v12-02-passerelle-basse.png",
+      "bytes": 1255699
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-docked.png",
+      "bytes": 1247507
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-trap.png",
+      "bytes": 1270213
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-medpod.png",
+      "bytes": 1247669
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/history/development/v6/v6-smoke-wreck.png",
+      "bytes": 1264282
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/holloway.svg",
+      "bytes": 1867
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/fifield.svg",
+      "bytes": 1741
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/vickers.svg",
+      "bytes": 1795
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/david.svg",
+      "bytes": 1774
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/janek.svg",
+      "bytes": 1941
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/ravel.svg",
+      "bytes": 1840
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/ford.svg",
+      "bytes": 1757
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/chance.svg",
+      "bytes": 1845
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/portraits/millburn.svg",
+      "bytes": 1972
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/holloway.svg",
+      "bytes": 1907
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/fifield.svg",
+      "bytes": 1781
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/vickers.svg",
+      "bytes": 1812
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/david.svg",
+      "bytes": 1791
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/janek.svg",
+      "bytes": 1892
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/ravel.svg",
+      "bytes": 1791
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/ford.svg",
+      "bytes": 1797
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/chance.svg",
+      "bytes": 1796
+    },
+    {
+      "path": "PROMETHEUS_DLC_V12/assets/crew/millburn.svg",
+      "bytes": 1982
+    }
+  ]
+}
