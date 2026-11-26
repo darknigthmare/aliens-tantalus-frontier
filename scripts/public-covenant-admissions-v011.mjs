@@ -11,6 +11,7 @@ const SOURCE_FILES = new Set([
   'scripts/build-covenant-v011.mjs', 'scripts/public-covenant-admissions-v011.mjs',
   'scripts/sync-covenant-sprites-v011.py', 'scripts/verify-covenant-integration-v011.mjs',
   'scripts/package-covenant-sprites-v011.py',
+  'scripts/verify-covenant-sprites-v011.mjs',
   'scripts/qa-covenant-v011.py',
   'docs/covenant/INVENTORY_V011.json', 'docs/covenant/PROVENANCE_V011.json',
   'docs/covenant/SPRITE_PROVENANCE_V011.json', 'docs/covenant/README.md',

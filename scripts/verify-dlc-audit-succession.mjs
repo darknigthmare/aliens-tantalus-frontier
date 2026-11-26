@@ -17,6 +17,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
+  AVP_COVENANT_BASELINE_20261126 as covenantBaseline,
+  AVP_COVENANT_SUCCESSORS_20261126 as covenantSuccessors,
+  reviewedCovenantHostDigest20261126 as advanceCovenant,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
@@ -117,11 +120,20 @@ const expectedSpritePaths = [
 ];
 const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
   'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
+const expectedCovenantPaths = [
+  "index.html",
+  "package.json",
+  "scripts/build-asset-filter.mjs",
+  "scripts/build.mjs",
+  "scripts/verify-public-release-v86.mjs",
+  "src/title-screen-v61.js"
+];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedCovenantPaths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116) source chain/;
+const preCovenantEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const finalEndpoint = path => covenantSuccessors[path]?.currentSha256 || preCovenantEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|published-host-to-Covenant) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -278,6 +290,7 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+  assert.equal(Object.hasOwn(covenantSuccessors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -331,4 +344,128 @@ test('V116 advances exactly four reviewed hosts after the merged V115 receipts',
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceV116(path, 'unchanged'), 'unchanged', path);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+});
+
+test('Covenant advances only six exact reviewed host endpoints after the published V116 parent', () => {
+  assert.equal(covenantBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(covenantSuccessors).sort(), [...expectedCovenantPaths].sort());
+  assert.equal(sha(JSON.stringify(covenantSuccessors)), 'baa661ba0b58d60fa0278d83c0b6b353cbe70c3b03ddc2ffb39e5a965ef65524');
+  assert.ok(Object.isFrozen(covenantSuccessors));
+  for (const [path, receipt] of Object.entries(covenantSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, preCovenantEndpoint(path), path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advanceCovenant(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    if (Object.hasOwn(aliensIncoming, path))
+      assert.equal(advanceAliens(path, aliensIncoming[path]), receipt.currentSha256, path);
+    for (const invalid of [receipt.currentSha256, firstEndpoint(path), '0'.repeat(64), undefined])
+      assert.throws(() => advanceCovenant(path, invalid), /Broken published-host-to-Covenant source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+  }
+  for (const path of ['src/unreviewed.js', 'index.html/extra', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenant(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantSuccessors, audit), false);
+});
+
+test('all pre-Covenant receipt declarations retain their published bytes', () => {
+  const source = read(audit).toString();
+  const end = source.indexOf('// BEGIN COVENANT V011 HOST RECEIPTS');
+  assert.ok(end > 0);
+  assert.equal(sha(source.slice(0, end)), 'ed20ec02354311aaa7639697bdc05e01b652671ea3291c14ae69f478115b26c0');
+});
+
+// Only these reviewed Covenant edits reconstruct the exact immutable parent.
+// This is a proof over source bytes, not a runtime admission exception.
+const covenantSourceEdits = {
+  "index.html": [
+    [
+      "        <button id=\"title-covenant\" type=\"button\">ALIEN: COVENANT</button>\n",
+      ""
+    ]
+  ],
+  "package.json": [
+    [
+      "    \"qa:fiorina:native-sprites\": \"node scripts/qa-fiorina-native-sprites-v115.mjs\",\n    \"test:covenant\": \"node --test scripts/verify-covenant-sprites-v011.mjs scripts/verify-covenant-integration-v011.mjs\",\n    \"build:covenant\": \"node scripts/build-covenant-v011.mjs\",\n    \"check:covenant\": \"node scripts/build-covenant-v011.mjs --check\",\n    \"qa:covenant\": \"python scripts/qa-covenant-v011.py\",\n    \"qa:covenant:playthrough\": \"node modules/covenant/qa/release-playthrough-v10.cjs\"\n",
+      "    \"qa:fiorina:native-sprites\": \"node scripts/qa-fiorina-native-sprites-v115.mjs\"\n"
+    ]
+  ],
+  "scripts/build-asset-filter.mjs": [
+    [
+      "import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';\n",
+      ""
+    ],
+    [
+      "    const covenantAdmission = publicCovenantPathAdmissionV011(sourcePath, { directory: sourcePath === 'assets/openai/sprites/alien-covenant-v011', built: true });\n    if (covenantAdmission !== null) return covenantAdmission;\n",
+      ""
+    ]
+  ],
+  "scripts/build.mjs": [
+    [
+      "import { buildCovenantDlcV011 } from './build-covenant-v011.mjs';\n",
+      ""
+    ],
+    [
+      "await buildCovenantDlcV011(root, output);\n",
+      ""
+    ]
+  ],
+  "scripts/verify-public-release-v86.mjs": [
+    [
+      "import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';\nimport { verifyCovenantBundleV011, verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,\n  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';\n",
+      ""
+    ],
+    [
+      "  const covenantAdmission = publicCovenantPathAdmissionV011(path, { directory, built });\n  if (covenantAdmission !== null) return covenantAdmission;\n",
+      ""
+    ],
+    [
+      "      if (!built && path === COVENANT_PROVENANCE_V011) {\n        // Exact reviewed source metadata, including sprite prompts and public URLs.\n        // The path gate above rejects this file from every built distribution.\n        const bytes = await readFile(join(directory, entry.name));\n        assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built }), true,\n          'Unreviewed Covenant source metadata bytes: ' + path);\n        continue;\n      }\n",
+      ""
+    ],
+    [
+      "  if (built) await verifyCovenantAssetsV011(root);\n  else await verifyCovenantBundleV011(root);\n",
+      ""
+    ]
+  ],
+  "src/title-screen-v61.js": [
+    [
+      "  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986, onCovenant }) {\n",
+      "  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986 }) {\n"
+    ],
+    [
+      "    this.onCovenant = onCovenant;\n",
+      ""
+    ],
+    [
+      "    this.covenantButton = root.querySelector('#title-covenant');\n",
+      ""
+    ],
+    [
+      "    if (this.covenantButton) listen(this.covenantButton, 'click', (event) => {\n      if (event.detail <= 1) this.openCovenant();\n    });\n",
+      ""
+    ],
+    [
+      "    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.covenantButton, this.optionsButton]\n",
+      "    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.optionsButton]\n"
+    ],
+    [
+      "  openCovenant() {\n    if (this.root.hidden || this.state !== 'menu') return;\n    this.cancelNewTimelineConfirmation();\n    this.suspendInput();\n    if (this.onCovenant) return this.onCovenant();\n    globalThis.location.assign('/dlc/covenant/?from=tantalus');\n  }\n\n",
+      ""
+    ]
+  ]
+};
+test('removing only the reviewed Covenant host edits recovers all six exact parent sources', () => {
+  assert.deepEqual(Object.keys(covenantSourceEdits).sort(), [...expectedCovenantPaths].sort());
+  for (const [path, edits] of Object.entries(covenantSourceEdits)) {
+    let source = read(path).toString();
+    for (const [current, previous] of edits) {
+      assert.notEqual(current, '', path);
+      assert.equal(source.split(current).length, 2, 'Missing or repeated Covenant source edit: ' + path);
+      source = source.replace(current, previous);
+    }
+    assert.equal(sha(source), covenantSuccessors[path].previousSha256, 'Unrelated host change: ' + path);
+  }
 });

@@ -2934,10 +2934,10 @@
       "originalBytesPreserved": true
     },
     "contracts": {
-      "passed": 26,
+      "passed": 28,
       "failed": 0,
       "rendererAndRegistryTests": 19,
-      "integrationTests": 7,
+      "integrationTests": 9,
       "imageAndCanvasDoublesDeclared": true
     },
     "historicalPilots": {
@@ -2983,11 +2983,33 @@
     "gallery": {
       "pythonSyntaxPassed": true,
       "sourceReviewPassed": true,
-      "browserReviewPending": true
+      "browserReviewPending": false,
+      "passed": 8,
+      "failed": 0,
+      "offline": true,
+      "sourcePNGsDecoded": 49,
+      "checks": [
+        "49 cards rendered offline",
+        "49 original PNGs decoded offline",
+        "Daniels search returns three variants",
+        "Creature filter returns four poses",
+        "Runtime and catalogue filters return 29 and 20",
+        "Preview dialog opens and closes with references",
+        "Dark, light and checkerboard backgrounds switch",
+        "No JavaScript page errors"
+      ]
     },
     "scopeNotes": [
       "A prior PNG QA attempt stopped because of an arbitrary 95% opaque-pixel threshold on facehugger (94.9895%). The artistic threshold was removed; the numeric opacity measure remains recorded. No pixels were changed.",
       "The full Tantalus build and real host-menu browser journey are gates in the dedicated GitHub Actions workflow. Their result is attached to the PR and, when available, the downloadable pack."
-    ]
+    ],
+    "releaseTestCollection": {
+      "declaredEntries": 398,
+      "uniqueFiles": 392,
+      "duplicatesInOutput": 0,
+      "covenantTestFilesEachCollectedExactlyOnce": true,
+      "sharedCollectorUnchanged": true,
+      "fullSuiteExecutionClaimed": false
+    }
   }
 }

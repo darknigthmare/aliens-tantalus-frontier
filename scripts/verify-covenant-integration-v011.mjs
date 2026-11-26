@@ -1,14 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir, mkdtemp, rm } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TitleScreenController } from '../src/title-screen-v61.js';
 import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admissions-v011.mjs';
 import { buildCovenantDlcV011, verifyCovenantBundleV011, covenantManifestV011,
-  COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011 } from './build-covenant-v011.mjs';
+  COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011,
+  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -98,6 +99,8 @@ test('only declared PNG files and the two public module files enter distribution
   assert.equal(admit('dlc/covenant/hidden.html', { built: true }), false);
   assert.equal(admit('modules/covenant/dlc/covenant/core.js', { built: false }), true);
   assert.equal(admit('modules/covenant/dlc/covenant/core.js', { built: true }), false);
+  assert.equal(admit('scripts/verify-covenant-sprites-v011.mjs', { built: false }), true);
+  assert.equal(admit('scripts/verify-covenant-sprites-v011.mjs', { built: true }), false);
   assert.equal(admit('docs/covenant/INVENTORY_V011.json', { built: true }), false);
   assert.equal(admit('docs/covenant/private-extra.txt', { built: false }), false);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v011/../outside.png'), false);
@@ -118,5 +121,38 @@ test('standalone build contains only the admitted page, runtime manifest and ori
     assert.equal((await readdir(out)).includes('scripts'), false);
   } finally {
     await rm(out, { recursive: true, force: true });
+  }
+});
+
+test('reviewed provenance is pinned to exact source bytes and never admitted in dist', async () => {
+  const bytes = await readFile(join(root, COVENANT_PROVENANCE_V011));
+  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, bytes), true);
+  const changed = Buffer.from(bytes.toString('utf8').replace('"schemaVersion": 1', '"schemaVersion": 2'));
+  assert.notDeepEqual(changed, bytes, 'The mutation must change valid JSON content');
+  assert.doesNotThrow(() => JSON.parse(changed.toString('utf8')));
+  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, changed), false);
+  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011,
+    Buffer.concat([bytes, Buffer.from('\n')])), false, 'Even whitespace changes require a new review');
+  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, bytes, { built: true }), false);
+  assert.equal(reviewedCovenantSourceMetadataV011('docs/covenant/other.json', bytes), false);
+  assert.equal(admit(COVENANT_PROVENANCE_V011, { built: true }), false, 'The path gate rejects metadata before text scanning');
+});
+
+test('Covenant build helpers can be imported without recovered sources in a sparse checkout', async () => {
+  const sparse = await mkdtemp(join(tmpdir(), 'covenant-v011-sparse-test-'));
+  try {
+    const scripts = join(sparse, 'scripts');
+    await mkdir(scripts, { recursive: true });
+    const helper = join(scripts, 'build-covenant-v011.mjs');
+    await writeFile(helper, await readFile(join(root, 'scripts/build-covenant-v011.mjs')));
+    const isolated = await import(pathToFileURL(helper).href);
+    assert.equal(typeof isolated.covenantManifestV011, 'function');
+    await mkdir(join(sparse, 'dlc/covenant'), { recursive: true });
+    await writeFile(join(sparse, 'dlc/covenant/sprites-v011.json'),
+      await readFile(join(root, 'dlc/covenant/sprites-v011.json')));
+    await assert.rejects(isolated.covenantManifestV011(sparse), error =>
+      error.code === 'MODULE_NOT_FOUND' && error.message.includes('sprite-registry-v011.js'));
+  } finally {
+    await rm(sparse, { recursive: true, force: true });
   }
 });

@@ -489,6 +489,46 @@ export const AVP_FIORINA_V116_SUCCESSORS_20261125 = Object.freeze(Object.fromEnt
 ));
 // END FIORINA V116 HOST RECEIPTS
 
+// BEGIN COVENANT V011 HOST RECEIPTS
+// The published AVP, Aliens and Fiorina receipts above remain byte-identical.
+// This final stage admits only six reviewed host edits after the exact V116
+// branch parent. No prior CI, browser, gameplay or fidelity evidence transfers.
+export const AVP_COVENANT_BASELINE_20261126 = 'b0df1877a058f0818f96437fdfdea3f21ba7f415';
+export const AVP_COVENANT_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "index.html": {
+    "previousSha256": "8e6ef33ebd2e2ef5e7ce57e617d73c7de602ae4bb911fa81e328d4b2adac27a0",
+    "currentSha256": "dd4f1fb7e5f749a566c816f50074aeb39c73b5dc10813da3276dacb40e0d61f7"
+  },
+  "package.json": {
+    "previousSha256": "f1255982d1e7527ee751e54bc84da66cc34c3633e43a17f9cde5b99ad64eda76",
+    "currentSha256": "ee46a793dcfed996d8177bf2141bf33e145fbfc22855d6776cf99e3c561439dc"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "c49bbc4bf3598a633f78c98febff0309e54b367e5643e4a98daf0371d9b91a56",
+    "currentSha256": "fb395cdf164bd61a553b6d65470b2a3336330c8cb8fec7d575c0f982cee03cdf"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "83cf0a94b7001c2f4e3408ecf4432095564ac95d1321d4dbaf9e0cbd898f178b",
+    "currentSha256": "893e645ce5ff0501463827596d8ee7203bc68df9aee4aa372126dcd9228f6054"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "6c42dac3d674ebbfb07a3bb5953faa76d5d246f10b889b793d9d916031efcf3f",
+    "currentSha256": "3533161ff393be0f7cee28dc281af70866ac9524a68016c6aac9fb83a8fe119a"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "c74ff44944d88cc95fb7fa1fabb39de24a309066097448688557e7ddb53b390c",
+    "currentSha256": "e42c89ca57f24e74366a06ee9c458c2c563b783d3533c7f92e9f710a0434807c"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END COVENANT V011 HOST RECEIPTS
+
+export function reviewedCovenantHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_COVENANT_SUCCESSORS_20261126,
+    'Broken published-host-to-Covenant source chain: ');
+}
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -514,8 +554,9 @@ export function reviewedFiorinaSpriteHostDigest20261125(path, endpoint) {
 }
 
 export function reviewedFiorinaV116HostDigest20261125(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_FIORINA_V116_SUCCESSORS_20261125,
+  const published = advanceReceipt(path, endpoint, AVP_FIORINA_V116_SUCCESSORS_20261125,
     'Broken Fiorina-V115-to-V116 source chain: ');
+  return reviewedCovenantHostDigest20261126(path, published);
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -535,7 +576,7 @@ export function reviewedAliensIncomingDigest20261125(path, endpoint) {
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125)])];
+  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_COVENANT_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -545,7 +586,8 @@ export function avpHostRuntimeSources20261125(view) {
     if (!Object.hasOwn(result, path)) continue;
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
-      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path]].filter(Boolean);
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
+      AVP_COVENANT_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -562,6 +604,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'Fiorina sprites require the exact published continuation base');
   assert.equal(AVP_FIORINA_V116_BASELINE_20261125, 'ae4e49bef5fea639d0c381466aefea85f8a57300',
     'Fiorina V116 requires the exact merged V115 continuation base');
+  assert.equal(AVP_COVENANT_BASELINE_20261126, 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    'Covenant requires the exact published V116 branch parent');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -572,7 +616,7 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   });
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
-    AVP_FIORINA_V116_SUCCESSORS_20261125]) {
+    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_COVENANT_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -625,6 +669,14 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
       'A V116 host successor requires an exact published V115 receipt: ' + path);
     assert.equal(receipt.previousSha256, AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path].currentSha256,
       'Fiorina V116 must follow its exact merged V115 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(AVP_COVENANT_SUCCESSORS_20261126)) {
+    const prior = AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(prior, 'A Covenant host successor requires an exact published predecessor: ' + path);
+    assert.equal(receipt.previousSha256, prior.currentSha256,
+      'Covenant must follow the exact published host endpoint: ' + path);
   }
   const paths = hostPaths();
   for (const path of paths) {

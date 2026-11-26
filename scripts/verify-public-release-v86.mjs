@@ -1,5 +1,6 @@
 import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';
-import { verifyCovenantBundleV011, verifyCovenantAssetsV011 } from './build-covenant-v011.mjs';
+import { verifyCovenantBundleV011, verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,
+  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
@@ -1328,6 +1329,14 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
         assert.equal(bytes.length, recoveredAliens1986.bytes, 'Changed Aliens 1986 recovery size: ' + path);
         assert.equal(createHash('sha256').update(bytes).digest('hex'), recoveredAliens1986.sha256,
           'Changed Aliens 1986 recovery bytes: ' + path);
+        continue;
+      }
+      if (!built && path === COVENANT_PROVENANCE_V011) {
+        // Exact reviewed source metadata, including sprite prompts and public URLs.
+        // The path gate above rejects this file from every built distribution.
+        const bytes = await readFile(join(directory, entry.name));
+        assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built }), true,
+          'Unreviewed Covenant source metadata bytes: ' + path);
         continue;
       }
       if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {

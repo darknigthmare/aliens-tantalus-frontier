@@ -17,11 +17,21 @@ export const COVENANT_RUNTIME_FILES_V011 = Object.freeze([
   'freight-art.js', 'fidelity-art.js', 'sprite-registry-v011.js', 'sprite-art-v011.js', 'app.js'
 ]);
 const require = createRequire(import.meta.url);
-const { compileManifest } = require('../modules/covenant/dlc/covenant/sprite-registry-v011.js');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+
+export const COVENANT_PROVENANCE_V011 = COVENANT_ASSETS_V011 + '/manifest.json';
+const REVIEWED_COVENANT_PROVENANCE_SHA256_V011 = '3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923';
+
+// Reviewed sprite-generation prompts and public reference URLs are source-only.
+// A different path, a changed byte or any built distribution is never exempt.
+export function reviewedCovenantSourceMetadataV011(path, bytes, { built = false } = {}) {
+  return !built && path === COVENANT_PROVENANCE_V011
+    && bytes instanceof Uint8Array && sha(bytes) === REVIEWED_COVENANT_PROVENANCE_SHA256_V011;
+}
 
 export async function covenantManifestV011(root) {
   const manifest = JSON.parse(await readFile(join(root, COVENANT_MANIFEST_V011), 'utf8'));
+  const { compileManifest } = require('../modules/covenant/dlc/covenant/sprite-registry-v011.js');
   return { manifest, compiled: compileManifest(manifest) };
 }
 
