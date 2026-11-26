@@ -176,7 +176,28 @@ try {
       });
     }
   }
-  Object.assign(engine.player, { moving: false, vx: 0, vy: 0, grounded: true });
+  for (const [pose, changes] of [
+    ['crouch', { crouching: true }],
+    ['crouch-walk', { moving: true, vx: 90, crouching: true }],
+    ['jump', { grounded: false, vy: 0 }],
+    ['climb', { grounded: false, climbing: true }]
+  ]) {
+    const sprite = 'ripley-crash-' + pose;
+    if (!hasAsset(sprite)) continue;
+    Object.assign(engine.player, { moving: false, vx: 0, vy: 0, grounded: true,
+      climbing: false, crouching: false, v52HurtClock: 0, shockClock: 0,
+      interactionClock: 0 }, changes);
+    const frameCount = ['crouch-walk', 'climb'].includes(pose) ? 2 : 1;
+    if (frameCount > 1) assert.equal(manifest.assets[sprite].frames?.length, frameCount);
+    for (let frame = 0; frame < frameCount; frame++) {
+      setFixtureArtTime((frame + .1) / (manifest.assets[sprite].fps || 1));
+      await sample(sprite + '-frame-' + frame, ctx => engine.drawActor(ctx, engine.player), {
+        focus: playerFocus(), expected: sprite, expectedFrame: frame,
+        fixture: 'Native wreckage costume; reachable control state sampled explicitly for ' + pose + '. This is not a traversed browser sequence.'
+      });
+    }
+  }
+  Object.assign(engine.player, { moving: false, vx: 0, vy: 0, grounded: true, climbing: false, crouching: false });
   engine.alien3V88.phase = 'infirmary';
   for (const id of ['dillon','clemens','andrews','aaron','morse','golic','junior',
     'david','arthur','kevin','gregor','william','jude','troy','frank','eric']) {
@@ -232,6 +253,19 @@ try {
       }
     }
   }
+  if (hasAsset('ripley-prison-downed')) {
+    const previous = Object.fromEntries(['alive', 'downed', 'moving', 'vx', 'vy', 'grounded',
+      'climbing', 'crouching', 'v52HurtClock', 'shockClock', 'interactionClock']
+      .map(key => [key, engine.player[key]]));
+    Object.assign(engine.player, { alive: false, downed: true, moving: false, vx: 0,
+      vy: 0, grounded: true, climbing: false, crouching: false, v52HurtClock: .42,
+      shockClock: 0, interactionClock: 0 });
+    await sample('player-downed', ctx => engine.drawActor(ctx, engine.player), {
+      focus: playerFocus(), expected: 'ripley-prison-downed', expectedFrame: 0,
+      fixture: 'Native player hook with declared incapacity and residual fatal-hit hurt timer; drawing must preserve the dead/downed state and saved progression.'
+    });
+    Object.assign(engine.player, previous);
+  }
   if (hasAsset('ripley-prison-interact')) {
     const placeAt = (key) => {
       const station = stationV105(engine.alien3NavV105, key);
@@ -260,6 +294,51 @@ try {
     await sample('runner-walk', (ctx) => engine.drawEnemy(ctx, engine.alien3RunnerV88), {
       focus: { x: engine.alien3RunnerV88.x + engine.alien3RunnerV88.w / 2, y: engine.alien3RunnerV88.y + engine.alien3RunnerV88.h },
       scale: 1.6, expected: 'runner-walk', fixture: 'Authored traque encounter; moving Runner render pose.' });
+  }
+
+  // V117 uses the existing pursuit owner and enemy hook. Each retained frame
+  // is drawn separately in both directions; no simulation time is advanced.
+  const runnerFocus = () => ({ x: engine.alien3RunnerV88.x + engine.alien3RunnerV88.w / 2,
+    y: engine.alien3RunnerV88.y + engine.alien3RunnerV88.h });
+  if (hasAsset('runner-run')) {
+    const running = manifest.assets['runner-run'];
+    assert.equal(running.frames?.length, 4, 'Runner run requires four retained key poses');
+    assert.equal(new Set(running.frames.map(frame => frame.src || running.src)).size, 4,
+      'Runner run must not count repeated images as new phases');
+    engine.alien3EncounterV105.pursuit.mode = 'chase';
+    engine.alien3V104.settings.reducedMotion = false;
+    for (const facing of [1, -1]) {
+      Object.assign(engine.alien3RunnerV88, { vx: 270 * facing, moving: true, facing });
+      for (const frame of [0, 1, 2, 3]) {
+        setFixtureArtTime((frame + .1) / running.fps);
+        await sample('runner-run-' + (facing > 0 ? 'right' : 'left') + '-frame-' + frame,
+          ctx => engine.drawEnemy(ctx, engine.alien3RunnerV88), {
+            focus: runnerFocus(), scale: 1.35, expected: 'runner-run', expectedFrame: frame,
+            fixture: 'Native traque pursuit owner in chase; injected velocity, facing and render time for one retained running frame.'
+          });
+      }
+    }
+    setFixtureArtTime(3.1 / running.fps);
+    engine.alien3V104.settings.reducedMotion = true;
+    assert.equal(engine.alien3ArtTimeV102(), 0, 'The native reduced-motion owner freezes the exposed art clock');
+    await sample('runner-run-reduced-motion', ctx => engine.drawEnemy(ctx, engine.alien3RunnerV88), {
+      focus: runnerFocus(), scale: 1.35, expected: 'runner-run', expectedFrame: 0,
+      fixture: 'Native reduced-motion setting freezes the four-image run at its first frame.'
+    });
+    engine.alien3V104.settings.reducedMotion = false;
+  }
+  for (const pose of ['windup', 'recover']) {
+    const sprite = 'runner-' + pose;
+    if (!hasAsset(sprite)) continue;
+    engine.alien3EncounterV105.pursuit.mode = pose;
+    for (const facing of [1, -1]) {
+      Object.assign(engine.alien3RunnerV88, { vx: 270 * facing, moving: true, facing });
+      await sample(sprite + '-' + (facing > 0 ? 'right' : 'left'),
+        ctx => engine.drawEnemy(ctx, engine.alien3RunnerV88), {
+          focus: runnerFocus(), scale: 1.35, expected: sprite, expectedFrame: 0,
+          fixture: 'Existing pursuit mode ' + pose + ' takes precedence over the injected movement; no new attack or timing.'
+        });
+    }
   }
 
   // Use the authored encounter that actually contains these two participants;

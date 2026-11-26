@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 import { FIORINA_SPRITE_DIRECTORY_V115, FIORINA_SPRITE_MANIFEST_V115,
   FIORINA_SPRITE_CURRENT, FIORINA_SPRITE_FILES_V115, FIORINA_SPRITE_MANIFEST_SHA256_V115, FIORINA_SPRITE_SOURCE_ONLY_V115,
+  FIORINA_SPRITE_ADDITIONS_V116, FIORINA_SPRITE_MANIFEST_SHA256_V116,
   publicFiorinaSpritePathAdmissionV115, verifyFiorinaSpriteAdmissionsV115,
   reviewedFiorinaSpritePackFilesV115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
@@ -16,12 +17,16 @@ import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './veri
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const FIORINA_SPRITE_FILES_CURRENT = FIORINA_SPRITE_CURRENT.files;
 
-test('the cumulative pack retains all 39 original PNG pins and the historical V115 manifest fingerprint', () => {
+test('the cumulative pack retains all 61 V115/V116 PNG pins and both historical manifest fingerprints', () => {
   assert.equal(FIORINA_SPRITE_MANIFEST_SHA256_V115, '7a13489288e96be84958a159844c5d550d0e4bfa285a8748b49ac19e5b7a72a7');
   assert.equal(FIORINA_SPRITE_FILES_V115.length, 39);
   assert.equal(createHash('sha256').update(JSON.stringify(FIORINA_SPRITE_FILES_V115)).digest('hex'),
     '441f088698d28244d017c762d58fd76ac29af6fb337cacc81405bcb4adf50c46');
-  for (const original of FIORINA_SPRITE_FILES_V115)
+  assert.equal(FIORINA_SPRITE_MANIFEST_SHA256_V116, 'db64e2b36aa8a0fa424adf112a1669a0e325c4497067fc38ddbfe140af418e6a');
+  assert.equal(FIORINA_SPRITE_ADDITIONS_V116.length, 22);
+  assert.equal(createHash('sha256').update(JSON.stringify(FIORINA_SPRITE_ADDITIONS_V116)).digest('hex'),
+    'edb35dc67f0c7e6eefffe61cfe483060b82c14c8448cd90583d8770731c09904');
+  for (const original of [...FIORINA_SPRITE_FILES_V115, ...FIORINA_SPRITE_ADDITIONS_V116])
     assert.deepEqual(FIORINA_SPRITE_FILES_CURRENT.filter(file => file.path === original.path), [original], original.path);
 });
 

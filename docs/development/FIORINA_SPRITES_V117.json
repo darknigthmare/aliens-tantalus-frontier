@@ -1,0 +1,2142 @@
+{
+  "schemaVersion": 1,
+  "revision": "fiorina-sprites-v117",
+  "baseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+  "date": "2026-11-26",
+  "previousRevision": {
+    "manifestSha256": "db64e2b36aa8a0fa424adf112a1669a0e325c4497067fc38ddbfe140af418e6a",
+    "provenance": "docs/development/FIORINA_SPRITES_V116.json",
+    "pngCount": 61,
+    "historicalProvenanceUnmodified": true
+  },
+  "manifestSha256": "3f6f6f08152bd06fa1f6e84c139b18115cebb9b400e8011997c247c78e06320e",
+  "counts": {
+    "newPng": 16,
+    "cumulativePng": 77,
+    "manifestEntries": 91,
+    "frameOccurrences": 107,
+    "newLoops": 3,
+    "totalLoops": 14,
+    "newBytes": 21328953,
+    "cumulativeBytes": 108754508
+  },
+  "exactOneToOneCertified": false,
+  "oneSpritePerImage": true,
+  "postGenerationPixelEditingPerformed": false,
+  "assets": [
+    {
+      "id": "abattoir-lamp",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/abattoir-lamp.png",
+      "sha256": "7fca263efb29275a01d3003dad7b1fb8ffc161e407ccbd6123b46fdbc8f72799",
+      "bytes": 1703409,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        108,
+        59,
+        914,
+        1502
+      ],
+      "visibleBBoxAlpha128": [
+        109,
+        60,
+        914,
+        1500
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 512,
+        "y": 60
+      },
+      "world": {
+        "w": 66.6667,
+        "h": 100
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1024,
+          "h": 1536
+        },
+        "pivot": {
+          "x": 512,
+          "y": 60
+        },
+        "world": {
+          "w": 66.6667,
+          "h": 100
+        },
+        "scaleMethod": "Uniform documentary display size, not a physical measurement of the prop.",
+        "worldUnitsPerPixel": 0.06510416666666667,
+        "pivotMethod": "Hanging attachment at top centre, alpha>=128 upper ring, not a floor base. No native socket is introduced.",
+        "confidence": "exact raster dimensions; geometry adapted from low-resolution blueprint",
+        "limitations": [
+          "Dimensions physiques, peinture et matériaux cachés non certifiés ; gabarit world réservé au catalogue."
+        ]
+      },
+      "catalogue": {
+        "context": "assembly",
+        "label": "abattoir-lamp",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: stylized-concept. Asset: a SINGLE isolated static environment sprite for Alien 3 / Fiorina's abattoir. Reconstruct the hanging industrial lamp in the supplied original production drawing. The SMALL LEFT ELEVATION is the entire lamp; the enlarged right drawing is a detail of the LOWER HALF, not a second lamp. Preserve the geometry visible in the left full elevation: at the very top a small hanging attachment/finial; beneath it a narrow tall cylindrical cage-like upper housing with vertical bars and small circular cap/base rims; from its lower base descends a LONG THIN straight vertical ribbed suspension stem; at the bottom a much WIDER shallow domed/bell-shaped metal shade with several concentric stepped shoulders on top, a broad thick rounded rim; beneath the shade a simple tapering angular wire safety cage around one centered light bulb, as detailed at right. Total height about three times the wide lower shade diameter. Front elevation, near orthographic, vertical object centered. Do not turn it into a modern portable work lamp, handheld torch, chandelier, street lamp or a generic bare bulb. The blueprint has no reliable colour data: use a restrained plausible aged dark iron/brown-gray metal finish with small worn steel edges; keep colour and tiny unseen fasteners understated as reconstruction. Bulb off with translucent glass, no lighting bloom or beam. Exactly one complete lamp, no paper blueprint, dimensions, text, annotations, wall, hanging chain extending off-frame, other props or floor. Entire top and bottom cage in the frame with generous clear margins. High-resolution realistic painted 2D game prop, true transparent RGBA background including gaps in the upper housing and lower wire cage. No ground or cast shadow.",
+      "generationSteps": [
+        {
+          "id": "abattoir-lamp-correction",
+          "prompt": "Edit the generated lamp in IMAGE 1 to correct only its SILHOUETTE PROPORTIONS against the original production drawing in IMAGE 2. The small LEFT elevation of image2 shows the complete fixture. Its upper cylindrical cage, narrow naked stem, lower stepped shade and angular guard must stay the same identifiable components; retain the aged iron material, centered frontal view, inactive bulb and true transparent gaps. The current naked stem is MUCH too long: shorten it to around ONE THIRD of its current length, so the bare connecting stem occupies only about 22–27 percent of the total lamp height instead of about 48 percent. Bring the upper housing closer to the lower shade accordingly. The upper cylindrical cage should also be somewhat WIDER relative to the lower shade: its diameter about 55 percent of the lower shade diameter, instead of 40 percent now. Use the complete left drawing to balance the result; do not mistake the enlarged right-hand detail for the full lamp. Keep the wide shallow stepped lower shade and wire guard recognizable, no extra stage, handle, base or lamp. Exactly ONE complete hanging fixture, comfortable transparent margins at every edge, no text, blueprint, paper, dimensions, ground, shadow or background. Preserve genuine transparent RGBA and empty gaps between bars.",
+          "status": "rejected",
+          "reason": "Tige trop courte (environ12% au lieu22–27%).",
+          "references": [
+            {
+              "referenceName": "abattoir-lamp-initial.png",
+              "sha256": "36005e3ceb0a4232d89836c374e874c33e995b293a36037ea1e9ab511ed16adc",
+              "bytes": 785926,
+              "role": "imagegen-edit-target"
+            },
+            {
+              "referenceName": "lamp-blueprint-image_default.jpg",
+              "sha256": "c0527d903bb97c41dd0deb7f4a1972d62205b60942d7ff09fc32d600754826d1",
+              "bytes": 21575,
+              "role": "visual-reference"
+            }
+          ],
+          "outputSha256": "752ba4d2b3cc50e75017075e6f06c93f4f68da337cc7d36fd446d7793918c1c8"
+        },
+        {
+          "id": "abattoir-lamp-correction-2",
+          "prompt": "Precisely correct the PROPORTIONS of the isolated industrial lamp in image 1 to the complete small LEFT elevation in production blueprint image 2. The right-hand large drawing is only a detail, do not combine its scale with the left. Keep existing worn dark metal material, construction, rings, cage bars, bulb, facing direction and transparent background. The previous edit shortened the central stalk too far and made the upper cylindrical housing too tall. Keeping the overall top-to-bottom fixture height the same, make the upper ring plus cylindrical housing occupy about 39 percent of the complete fixture height, the narrow bare central ribbed stalk about 23 percent, and the stepped lower shade plus lower bulb cage about 38 percent. In image 1 pixels, the current upper housing bottom is near y800; move that boundary up to about y640 while keeping the top near y65 and the lower shade assembly top near y980. Extend the narrow stalk from y640 to y980. The lower assembly and bottom near y1500 stay the same. Widen the upper cylinder modestly to 55-58 percent of the maximum lower shade width. This yields a shorter, wider upper housing and a clearly longer narrow central stem than image 1. Preserve complete outer geometry and negative-space holes as true alpha, no backdrop or glow, no blueprint paper, no text. One whole lamp only, full object within transparent margins, unlit bulb.",
+          "status": "accepted",
+          "reason": "Tige de suspension et largeur des cages acceptées après comparaison au plan.",
+          "references": [
+            {
+              "referenceName": "abattoir-lamp-correction.png",
+              "sha256": "752ba4d2b3cc50e75017075e6f06c93f4f68da337cc7d36fd446d7793918c1c8",
+              "bytes": 1805905,
+              "role": "imagegen-edit-target"
+            },
+            {
+              "referenceName": "lamp-blueprint-image_default.jpg",
+              "sha256": "c0527d903bb97c41dd0deb7f4a1972d62205b60942d7ff09fc32d600754826d1",
+              "bytes": 21575,
+              "role": "visual-reference"
+            }
+          ],
+          "outputSha256": "7fca263efb29275a01d3003dad7b1fb8ffc161e407ccbd6123b46fdbc8f72799"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "lamp-blueprint-image_default.jpg",
+          "sha256": "c0527d903bb97c41dd0deb7f4a1972d62205b60942d7ff09fc32d600754826d1",
+          "bytes": 21575,
+          "role": "generation-reference"
+        }
+      ],
+      "sourcePageUrls": [
+        "https://www.yourprops.com/Abattoir-Lamp-Detail-Blueprint-original-production-material-Alien-3-1992-YP5142.html",
+        "https://alienexplorations.blogspot.com/2018/01/alien-3-blueprints.html"
+      ],
+      "sourceImageUrls": [
+        "https://nbg1.your-objectstorage.com/yourprops/uploads/images/202502/43b6923537292.jpg"
+      ],
+      "referenceKind": "original-production-blueprint-scan",
+      "referenceLimitations": [
+        "Géométrie guidée par plan original 600×451 ; cotes illisibles.",
+        "Couleur, patine, matériaux fins et revers non documentés : reconstruction explicite.",
+        "Luminaire fixe suspendu, pas une torche portative."
+      ],
+      "limitations": [
+        "Géométrie guidée par plan original 600×451 ; cotes illisibles.",
+        "Couleur, patine, matériaux fins et revers non documentés : reconstruction explicite.",
+        "Luminaire fixe suspendu, pas une torche portative.",
+        "Dimensions physiques, peinture et matériaux cachés non certifiés ; gabarit world réservé au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "initialGenerationOutcome": {
+        "sha256": "36005e3ceb0a4232d89836c374e874c33e995b293a36037ea1e9ab511ed16adc",
+        "status": "rejected",
+        "reason": "Tige nettement trop longue (environ47% de la hauteur)."
+      },
+      "iterationSummary": "Première tige trop longue ; deuxième résultat trop court ; troisième génération acceptée."
+    },
+    {
+      "id": "clemens-medicine-vial",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/clemens-medicine-vial.png",
+      "sha256": "f16cf35f03fdfceea79bcf0dbf7bf9ff20fff6581a95d1038384d44ab4c88ad3",
+      "bytes": 1504896,
+      "width": 1106,
+      "height": 1422,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        203,
+        86,
+        903,
+        1343
+      ],
+      "visibleBBoxAlpha128": [
+        206,
+        87,
+        900,
+        1341
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 553,
+        "y": 1341
+      },
+      "world": {
+        "w": 6.2222,
+        "h": 8.0
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1106,
+          "h": 1422
+        },
+        "pivot": {
+          "x": 553,
+          "y": 1341
+        },
+        "world": {
+          "w": 6.2222,
+          "h": 8.0
+        },
+        "scaleMethod": "Uniform catalogue display size; physical dimensions are not established by the source photograph.",
+        "worldUnitsPerPixel": 0.005625879043600563,
+        "pivotMethod": "Bottom contact of the visible prop, with centered display X. Documentary display only; no native socket is introduced.",
+        "confidence": "exact raster dimensions; interpretive display scale, not a physical-film-size certification",
+        "limitations": [
+          "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue."
+        ]
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "clemens-medicine-vial",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: stylized-concept. Create ONE isolated 2D game accessory for Alien 3 / Fiorina, based on the supplied close-up film image on the trading card. Recreate ONLY the small transparent glass medical vial seen in the right hand: squat clear cylindrical glass body with gently rounded shoulders, narrow neck, dark black rubber stopper surrounded by a short dull silver metal collar. Keep its simple genuine glass-and-metal design and the modest amount of colourless liquid visible inside. Upright front-three-quarter view, cap on top. Retain plausible physical proportions from the visible source, clean glass with fine natural highlights and slight wear, no colored futuristic lighting. The source has no readable medical label: keep the vial plain, no invented brand, substance name, dosage scale, syringes or warnings. Omit the syringe, needle, hands, person, film scene, trading card border, ALL titles/logos/watermarks and all other objects. Exactly one complete vial, comfortably inside transparent margins. Realistic high-resolution illustrated cinematic game prop, genuine transparent RGBA background, mostly transparent glass so a game backdrop is visible through it, no solid white silhouette, no floor or cast shadow.",
+      "generationSteps": [
+        {
+          "id": "clemens-medicine-vial",
+          "prompt": "Precise optical correction of the attached single vial sprite. Preserve EXACTLY its shape, size, position, black stopper, silver collar, rounded shoulder, bottle outline and small clear-liquid level. Change ONLY the white-gray opaque fill inside the glass bottle: it must become genuinely clear and colorless TRANSPARENCY IN THE ALPHA CHANNEL so that an underlying game scene is easily seen THROUGH the broad middle of the bottle. Most of the glass area should have very low opacity; retain subtle thin edge reflections, glass thickness at the lower rim, the delicate liquid meniscus and a few small specular highlights. The black stopper and metal collar stay fully opaque and unchanged. No milky white fill, gray background, opaque silhouette, fog, checkerboard graphic or colored glass. True transparent RGBA background and translucent glass interior, one exact bottle only, no label, words, new object, floor or shadow.",
+          "status": "accepted",
+          "reason": "Correction de transmission réelle du verre en alpha ; métal conservé opaque.",
+          "references": [
+            {
+              "referenceName": "clemens-medicine-vial-initial.png",
+              "sha256": "76ce6955076512dceb7c399b1e6d4d30418dc578de2b367b45a6e64734268a32",
+              "bytes": 1492396,
+              "role": "imagegen-edit-target"
+            }
+          ],
+          "outputSha256": "f16cf35f03fdfceea79bcf0dbf7bf9ff20fff6581a95d1038384d44ab4c88ad3"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "clemens-syringe-closeup-card.webp",
+          "sha256": "a4760efbd7f5387fe7eabe8793b5a4b2abc389606f53b4045c2a1015c6faadd1",
+          "bytes": 42420,
+          "role": "generation-reference"
+        }
+      ],
+      "sourcePageUrls": [
+        "https://www.ebay.com/itm/336850170602"
+      ],
+      "sourceImageUrls": [
+        "https://i.ebayimg.com/images/g/aD0AAeSwHIpq1FmG/s-l1600.webp"
+      ],
+      "referenceKind": "licensed-trading-card-film-closeup",
+      "referenceLimitations": [
+        "Flacon partiellement caché par les doigts dans le plan ; base, face cachée et remplissage interprétés.",
+        "Ne prouve aucune mallette ou disposition de kit complet."
+      ],
+      "limitations": [
+        "Flacon partiellement caché par les doigts dans le plan ; base, face cachée et remplissage interprétés.",
+        "Ne prouve aucune mallette ou disposition de kit complet.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "initialGenerationOutcome": {
+        "sha256": "76ce6955076512dceb7c399b1e6d4d30418dc578de2b367b45a6e64734268a32",
+        "status": "rejected",
+        "reason": "Verre trop opaque dans le premier résultat."
+      },
+      "opticalReview": {
+        "review": "accepted-glass-transmission",
+        "glassAlphaMeans": [
+          9.14,
+          11.84
+        ],
+        "metalAlphaMean": 252.27
+      }
+    },
+    {
+      "id": "clemens-syringe",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/clemens-syringe.png",
+      "sha256": "c619dc711b00eea6fa8b3ddf598fa45b284bcdb9293376ba26efb15a360de70e",
+      "bytes": 613218,
+      "width": 724,
+      "height": 2172,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        235,
+        41,
+        489,
+        2098
+      ],
+      "visibleBBoxAlpha128": [
+        236,
+        42,
+        488,
+        2097
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 362,
+        "y": 2097
+      },
+      "world": {
+        "w": 6.0,
+        "h": 18.0
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 724,
+          "h": 2172
+        },
+        "pivot": {
+          "x": 362,
+          "y": 2097
+        },
+        "world": {
+          "w": 6.0,
+          "h": 18.0
+        },
+        "scaleMethod": "Uniform catalogue display size; physical dimensions are not established by the source photograph.",
+        "worldUnitsPerPixel": 0.008287292817679558,
+        "pivotMethod": "Bottom contact of the visible prop, with centered display X. Documentary display only; no native socket is introduced.",
+        "confidence": "exact raster dimensions; interpretive display scale, not a physical-film-size certification",
+        "limitations": [
+          "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue."
+        ]
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "clemens-syringe",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated 2D cinematic game accessory for Alien 3 / Fiorina. The provided film still is a visual reference. Recreate only the reusable GLASS AND CHROME METAL medical syringe held upright by Dr Clemens; omit both people and the whole scene. Follow the observable silhouette and materials: long very fine straight steel needle, small stepped polished metal needle hub, wide circular metal collar above a slender transparent glass barrel, narrow external longitudinal metal supporting struts, compact bright metal lower plunger mechanism. Keep the object slim and utilitarian, realistic early-1990s prop styling, no plastic disposable barrel, colored cap, fantasy pistol grip or Weyland-Yutani logo. Render the complete syringe alone upright, near orthographic side view with needle at top and plunger at bottom, matching the scale relationships seen in the source. The hand obscures the lowermost plunger in the reference, so reconstruct that hidden portion minimally as a plain short metal shaft and small flat thumb plate; do not add complex undocumented mechanisms or large rings. Faint clear liquid and only subtle reflections in transparent glass; metal and glass must be clean and precisely legible. No person, hand, skin, injection, blood, fluid spray, medicine bottle, dosing instructions or technical annotations. One complete isolated object in generous margins, true transparent RGBA background, no floor shadow or gradient, high-resolution realistic illustrated game sprite, no text or watermark.",
+      "generationSteps": [
+        {
+          "id": "clemens-syringe",
+          "prompt": "Precise edit of this exact single syringe game sprite. Preserve its entire existing geometry, placement, proportions, needle, bright metal hub, collars, supporting metal struts, lower metal plunger and thumb plate EXACTLY. Change ONLY the optical transparency of the GLASS BARREL and its clear fluid: the current whitish barrel centre is nearly opaque; make the broad clear glass interior genuinely TRANSPARENT IN THE ALPHA CHANNEL so that an underlying dark or coloured game background will remain plainly visible through it. Most of that barrel interior should have very low alpha, with only narrow faint edge reflections, a delicate fluid meniscus and a few modest highlights. Do not make any metal or needle transparent; keep all metal solid, detailed and unchanged. No white glass fill, frosted plastic, white backdrop, gray grid or checkerboard painted into the image. Keep exactly one complete syringe on a true transparent RGBA background. No added words, new objects, shadow or design change.",
+          "status": "accepted",
+          "reason": "Correction de transmission réelle du verre en alpha ; métal conservé opaque.",
+          "references": [
+            {
+              "referenceName": "clemens-syringe-initial.png",
+              "sha256": "45b29f00cb0b64ac023ea85b6976017ba20f2752e10468daead15abf684c2824",
+              "bytes": 628516,
+              "role": "imagegen-edit-target"
+            }
+          ],
+          "outputSha256": "c619dc711b00eea6fa8b3ddf598fa45b284bcdb9293376ba26efb15a360de70e"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "clemens-syringe.jpg",
+          "sha256": "d3a9590981baa9cda726e81f9946f10d8f4060229b13c9422a3e70b28ff382da",
+          "bytes": 168277,
+          "role": "generation-reference"
+        }
+      ],
+      "sourcePageUrls": [
+        "https://naptownnerd.blogspot.com/2014/08/david-fincher-retrospective-alien-3-1992.html",
+        "https://www.ebay.com/itm/336850170602"
+      ],
+      "sourceImageUrls": [
+        "https://4.bp.blogspot.com/-KOoDVWEP0BU/VACh4AJXBpI/AAAAAAAAET8/PIRgkUOfKEA/s1600/alien3cast.jpg",
+        "https://i.ebayimg.com/images/g/aD0AAeSwHIpq1FmG/s-l1600.webp"
+      ],
+      "referenceKind": "film-still-and-licensed-trading-card",
+      "referenceLimitations": [
+        "Piston inférieur masqué dans la référence principale : terminaison reconstruite sobrement.",
+        "Photo close-up de carte consultée après lancement ; micro-inscriptions non reproduites.",
+        "Un accessoire seul, pas un kit médical complet."
+      ],
+      "limitations": [
+        "Piston inférieur masqué dans la référence principale : terminaison reconstruite sobrement.",
+        "Photo close-up de carte consultée après lancement ; micro-inscriptions non reproduites.",
+        "Un accessoire seul, pas un kit médical complet.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "initialGenerationOutcome": {
+        "sha256": "45b29f00cb0b64ac023ea85b6976017ba20f2752e10468daead15abf684c2824",
+        "status": "rejected",
+        "reason": "Verre trop opaque dans le premier résultat."
+      },
+      "opticalReview": {
+        "review": "accepted-glass-transmission",
+        "glassAlphaMeans": [
+          15.29,
+          18.53
+        ],
+        "metalAlphaMean": 253.01
+      }
+    },
+    {
+      "id": "mining-flare-case",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/mining-flare-case.png",
+      "sha256": "87c37e0f6f409f02ee5e0a2f67d0485797a162004af4c1b52b8b4e785fb12f3a",
+      "bytes": 2979275,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        23,
+        49,
+        1513,
+        990
+      ],
+      "visibleBBoxAlpha128": [
+        24,
+        50,
+        1512,
+        988
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 768,
+        "y": 988
+      },
+      "world": {
+        "w": 36.0,
+        "h": 24.0
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "pivot": {
+          "x": 768,
+          "y": 988
+        },
+        "world": {
+          "w": 36.0,
+          "h": 24.0
+        },
+        "scaleMethod": "Uniform catalogue display size; physical dimensions are not established by the source photograph.",
+        "worldUnitsPerPixel": 0.0234375,
+        "pivotMethod": "Bottom contact of the visible prop, with centered display X. Documentary display only; no native socket is introduced.",
+        "confidence": "exact raster dimensions; interpretive display scale, not a physical-film-size certification",
+        "limitations": [
+          "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue."
+        ]
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "mining-flare-case",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: stylized-concept. Generate one separate game prop sprite for Alien 3 / Fiorina, visually faithful to the supplied photograph of the screen-used mining flare refill case. Recreate ONLY the single closed rectangular shallow dark-brown/black moulded plastic case. Preserve its precise shape: long box with gently beveled corners, integral rectangular carry-handle opening centered along the lower edge, two small lower edge latches, large orange rounded rectangle label occupying upper centre and right, small orange square icon of two hands holding a cube at upper left, yellow triangular flammable icon at lower left. Copy the visible label arrangement and exact large text: 'MINING FLARES' then 'REFILL', black '37 F', black '9512', and 'WEYLAND YUTANI CORP'. Small white flammable label with red flame on the orange label's right side, words 'HIGHLY FLAMMABLE'. Keep original proportions and realistic grime, scuffed edges, dark red-brown plastic. Show full prop alone in the same frontal very slightly top-down view, with small visible depth along bottom. Remove the dangling paper sale tag, cord, table and background completely. Do not open the case or invent contents. High-resolution realistic hand-painted 2D prop with sharp silhouette, no dramatic bloom. Exactly ONE object, complete handle and all corners visible with transparent margins. True transparent RGBA background. No cast shadow, floor, border, watermark, extra labels or second case.",
+      "generationSteps": [
+        {
+          "id": "mining-flare-case-correction",
+          "prompt": "Precisely edit this exact existing mining flare case sprite. Change ONLY the tiny stray circular symbol immediately to the RIGHT of the word WEYLAND, around x1073–1103/y480–512 on the 1536×1024 source. Erase that tiny unwanted mark and restore the surrounding orange scuffed label texture seamlessly. Keep the word WEYLAND and every other letter, label, icon, code, line, dark case shape, handle hole, latches, angle, dimensions, wear and placement exactly unchanged. Do not remove the larger round Weyland-Yutani emblem LEFT of the brand. Do not add any other text or mark. Preserve the original true transparent RGBA background, including the clear handle opening; no floor, shadow or backdrop. One unchanged complete case with only that small erroneous symbol removed.",
+          "status": "rejected",
+          "reason": "Petit cercle parasite toujours présent après WEYLAND ; sortie non retenue.",
+          "references": [
+            {
+              "referenceName": "mining-flare-case-initial.png",
+              "sha256": "87c37e0f6f409f02ee5e0a2f67d0485797a162004af4c1b52b8b4e785fb12f3a",
+              "bytes": 2979275,
+              "role": "imagegen-edit-target"
+            }
+          ],
+          "outputSha256": "02b7a96d5d2ada37b3f324c28acf8e360165a6cceab1c30097ffb5e630e17914"
+        },
+        {
+          "id": "mining-flare-case-correction-2",
+          "prompt": "Perform a tiny precise cleanup on image 1, the isolated Alien 3 mining flare case game sprite. Image 2 is the actual prop photograph only for verification. Keep ALL of image 1 unchanged except REMOVE the small black circular symbol immediately to the RIGHT of the word WEYLAND in the bottom orange label strip. In image 1 this tiny unwanted ring is centered at pixel approximately (1087,495) in a 1536x1024 canvas, just after the final D of WEYLAND. Completely erase this small circled character and fill that tiny patch with the surrounding plain orange weathered label texture. The line must read only WEYLAND followed by blank orange, with NO registered symbol, copyright symbol, circled letter, black ring, or extra mark. Keep the LARGE orange/red round WY emblem to the LEFT of WEYLAND intact. Keep all other lettering, marks, handle opening, latches, patina, dimensions and composition identical. One whole isolated case, transparent RGBA background and handle hole, no shadows, no scene. Do not remove the actual word WEYLAND.",
+          "status": "rejected",
+          "reason": "Petit cercle parasite toujours présent après WEYLAND ; sortie non retenue.",
+          "references": [
+            {
+              "referenceName": "mining-flare-case-correction.png",
+              "sha256": "02b7a96d5d2ada37b3f324c28acf8e360165a6cceab1c30097ffb5e630e17914",
+              "bytes": 2585071,
+              "role": "imagegen-edit-target"
+            },
+            {
+              "referenceName": "mining-flare-case-DSC08561.jpg",
+              "sha256": "20ab65335899933561f103865bb668e6c1bfceb6887a68e9e2663b083b26f1a4",
+              "bytes": 616469,
+              "role": "visual-reference"
+            }
+          ],
+          "outputSha256": "491fdddbe6896d1651cc3a7df05dc5d28e602aef8616b3dbc1cea367676aa719"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "mining-flare-case-alienscollection.jpg",
+          "sha256": "74be3ba91d65da24c2da564b021a6f05d4c0398ac5f8df9d2fa063c0ebd23b8c",
+          "bytes": 120172,
+          "role": "generation-reference"
+        }
+      ],
+      "sourcePageUrls": [
+        "http://www.alienscollection.com/props.html",
+        "http://hollywoodrelics.com/?product=alien-3-flare-box-screen-used"
+      ],
+      "sourceImageUrls": [
+        "http://www.alienscollection.com/flarebox.jpg",
+        "http://hollywoodrelics.com/wp-content/uploads/2014/07/DSC08561.jpg",
+        "http://hollywoodrelics.com/wp-content/uploads/2014/07/PDVD_014.jpg"
+      ],
+      "referenceKind": "screen-prop-photograph-and-film-frame",
+      "referenceLimitations": [
+        "Premier prompt guidé par photo collection basse résolution ; photos HD et film consultés après génération.",
+        "Lettres, proportions, patine et petits détails reproduits visuellement, non mesurés sur accessoire réel.",
+        "Petit cercle parasite après WEYLAND absent de la photo DSC08561.jpg ; deux tentatives génératives non concluantes, différence visuelle conservée explicitement."
+      ],
+      "limitations": [
+        "Premier prompt guidé par photo collection basse résolution ; photos HD et film consultés après génération.",
+        "Lettres, proportions, patine et petits détails reproduits visuellement, non mesurés sur accessoire réel.",
+        "Petit cercle parasite après WEYLAND absent de la photo DSC08561.jpg ; deux tentatives génératives non concluantes, différence visuelle conservée explicitement.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "iterationSummary": "Deux corrections du petit cercle après WEYLAND ont échoué ; résultat initial conservé.",
+      "reviewReferences": [
+        {
+          "referenceName": "mining-flare-case-DSC08561.jpg",
+          "sha256": "20ab65335899933561f103865bb668e6c1bfceb6887a68e9e2663b083b26f1a4",
+          "bytes": 616469,
+          "role": "additional-visual-comparison"
+        }
+      ]
+    },
+    {
+      "id": "murphy-welding-goggles",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/murphy-welding-goggles.png",
+      "sha256": "88c8e560562bab6996543b31ef82e6eb32445d9ae17f90841f360b6898252d9d",
+      "bytes": 2415607,
+      "width": 1543,
+      "height": 1019,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        27,
+        13,
+        1531,
+        1007
+      ],
+      "visibleBBoxAlpha128": [
+        28,
+        14,
+        1530,
+        1006
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 770,
+        "y": 1006
+      },
+      "world": {
+        "w": 24.0,
+        "h": 15.8496
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1543,
+          "h": 1019
+        },
+        "pivot": {
+          "x": 770,
+          "y": 1006
+        },
+        "world": {
+          "w": 24.0,
+          "h": 15.8496
+        },
+        "scaleMethod": "Uniform catalogue display size; physical dimensions are not established by the source photograph.",
+        "worldUnitsPerPixel": 0.015554115359688918,
+        "pivotMethod": "Bottom contact of the visible prop, with centered display X. Documentary display only; no native socket is introduced.",
+        "confidence": "exact raster dimensions; interpretive display scale, not a physical-film-size certification",
+        "limitations": [
+          "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue."
+        ]
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "murphy-welding-goggles",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: stylized-concept. Create one isolated high-resolution 2D game accessory faithful to Murphy's actual metal welding goggles from Alien 3, shown in the supplied reference photographs. Reproduce the distinctive complete object, not generic goggles: TWO deep cylindrical metal eyecups with ROUND clear darkish lenses, broad pale metallic circular rims, heavily scratched silver metal with blackened tarnish, and the LONG FLARED METAL NOSE GUARD descending between the eyecups. The nose guard has a pronounced central ridge and broad rounded lower end; two round metal rivets secure its bridge above. Include the single attached dark brown weathered leather head strap with side rivets, curving behind in a compact loop. Faithfully keep the exact proportions and three-quarter front orientation of image1, with both round lenses and full long nose guard visible. Image2 confirms the face design. Important: turquoise in the glass and metal comes from the photographic cyan backdrop, NOT from the prop; render neutral transparent glass with restrained gray reflections, clear dark metal interiors and no cyan spill. It must read as metal workshop eye-and-nose protection, no full-face gas mask, no added respirator filters, no steampunk gears. One complete prop only, no hands or head, full strap and nose guard inside generous clear margins. Realistic cinematic illustrated texture, no typography, maker mark or watermark copied from the source. TRUE TRANSPARENT RGBA background including space within the leather loop and transparent lens areas; no table, background, floor or cast shadow.",
+      "generationSteps": [
+        {
+          "id": "murphy-welding-goggles",
+          "prompt": "Correct the optical transparency and edge spacing of this exact Murphy Alien 3 welding goggles sprite. Preserve the precise metal frame, cylindrical eyecups, scratches, long flared nose guard, rivets, leather strap, angle and proportions. The two broad ROUND LENSES currently contain nearly opaque gray fills: remove those flat opaque fills so the glass is genuinely CLEAR TRANSLUCENT IN THE ALPHA CHANNEL, with the underlying game background visible through most of each lens. Retain only faint small glass reflections and the genuine dark structural inner edges of the metal eyecups; do not erase metal walls, strap or nose guard. No cyan tint and no white or gray lens disks. Provide a little more transparent space to the RIGHT of the leather strap so the complete strap and buckle have comfortable clear margins, preserving the entire object. Exactly one pair of goggles, no new details or text. True transparent RGBA outside the object, inside the strap loop, and across optically clear lens interiors; no floor, shadow, fake checkerboard or backdrop.",
+          "status": "accepted",
+          "reason": "Correction de transmission réelle du verre en alpha ; métal conservé opaque.",
+          "references": [
+            {
+              "referenceName": "murphy-welding-goggles-initial.png",
+              "sha256": "e56fb32e92949a233de847a577bc6572137169ee66d90d0052cabba7537865aa",
+              "bytes": 2551496,
+              "role": "imagegen-edit-target"
+            }
+          ],
+          "outputSha256": "88c8e560562bab6996543b31ef82e6eb32445d9ae17f90841f360b6898252d9d"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "murphy-goggles-DSC08662.jpg",
+          "sha256": "aca59fc2fabfdd7335551ecb46860438464cdf5635da7c1fc06e1e8b37fead3a",
+          "bytes": 343771,
+          "role": "generation-reference"
+        },
+        {
+          "referenceName": "murphy-goggles-DSC08665.jpg",
+          "sha256": "4c25f63753c1dfaaf8bb58a378b66557bfa409f8534f974e7fe82f98e25ae106",
+          "bytes": 409323,
+          "role": "generation-reference"
+        }
+      ],
+      "sourcePageUrls": [
+        "http://hollywoodrelics.com/?product=alien-3-metal-welding-goggles-by-terry-english-character-murphy"
+      ],
+      "sourceImageUrls": [
+        "http://hollywoodrelics.com/wp-content/uploads/2014/07/DSC08662.jpg",
+        "http://hollywoodrelics.com/wp-content/uploads/2014/07/DSC08665.jpg"
+      ],
+      "referenceKind": "screen-prop-collection-photograph",
+      "referenceLimitations": [
+        "Patine, matériau et silhouette fondés sur photos ; échelle physique à confirmer.",
+        "Neutralisation du reflet cyan photographique et transparence des lentilles constituent une adaptation optique.",
+        "Marge droite faible mais bord opaque non tronqué ; pas de certification géométrique 1:1."
+      ],
+      "limitations": [
+        "Patine, matériau et silhouette fondés sur photos ; échelle physique à confirmer.",
+        "Neutralisation du reflet cyan photographique et transparence des lentilles constituent une adaptation optique.",
+        "Marge droite faible mais bord opaque non tronqué ; pas de certification géométrique 1:1.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "initialGenerationOutcome": {
+        "sha256": "e56fb32e92949a233de847a577bc6572137169ee66d90d0052cabba7537865aa",
+        "status": "rejected",
+        "reason": "Verre trop opaque dans le premier résultat."
+      },
+      "opticalReview": {
+        "review": "accepted-glass-transmission-small-right-margin",
+        "glassAlphaMeans": [
+          1.988039,
+          0.37321
+        ],
+        "limitations": [
+          "Marge droite faible mais bord opaque non tronqué ; pas de certification géométrique 1:1."
+        ]
+      }
+    },
+    {
+      "id": "ripley-crash-climb-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png",
+      "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775",
+      "bytes": 860460,
+      "width": 987,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        216,
+        16,
+        822,
+        1572
+      ],
+      "visibleBBoxAlpha128": [
+        219,
+        17,
+        821,
+        1571
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 370,
+        "y": 1570
+      },
+      "world": {
+        "w": 62.4835,
+        "h": 100.9105
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594
+        },
+        "pivot": {
+          "x": 370,
+          "y": 1570
+        },
+        "world": {
+          "w": 62.4835,
+          "h": 100.9105
+        },
+        "scaleReference": "ripley-crash-idle",
+        "scaleMethod": "Reference worldUnitsPerPixel × estimated hair-crown-to-chin height 248 / estimated pose head height; preserve the real crouch/stride silhouette height.",
+        "headLandmarksEstimatedPixels": {
+          "top": 39,
+          "chin": 284,
+          "height": 245
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "worldUnitsPerPixel": 0.0633064734859461,
+        "pivotMethod": "Estimated pelvis X projected to its support; Y at alpha>=128 contact, except the jump keeps a virtual lower foot baseline so tucked feet stay airborne.",
+        "confidence": "visual estimate; approximately 5–10% art-registration uncertainty",
+        "limitations": [
+          "Hand and foot contact with individual ladder rungs is not a certified film measurement."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-climb-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for a 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, minor existing dirt, restrained colors and detailed realistic illustrated style. Keep the same practical film costume unchanged, no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one complete person, all hands, feet and head inside generous transparent margins. No added accessories or scenery, no text or sprite sheet. True transparent RGBA background, no floor or shadow. POSE: ladder climb PHASE A. She climbs an invisible vertical ladder on her right; NEAR hand raised above the head at the higher rung position, FAR hand bent at upper chest height; NEAR foot raised to a high rung with knee strongly flexed, FAR foot lower with leg straighter. Both arms reaching forward to the right at different heights, palms curled as if gripping rungs. Anatomically plausible, torso close to the invisible ladder. Do not draw the ladder, only the entire figure. Keep all extremities separated and visible.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Hand and foot contact with individual ladder rungs is not a certified film measurement.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "ripley-crash-climb-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-b.png",
+      "sha256": "9e7a3b3fbe163f33bc3126d1bd44c9faca5f349544b8c1ad4f8e44a09aa5f067",
+      "bytes": 787624,
+      "width": 987,
+      "height": 1593,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        204,
+        11,
+        833,
+        1552
+      ],
+      "visibleBBoxAlpha128": [
+        206,
+        12,
+        832,
+        1550
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 370,
+        "y": 1549
+      },
+      "world": {
+        "w": 62.4835,
+        "h": 100.8472
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1593
+        },
+        "pivot": {
+          "x": 370,
+          "y": 1549
+        },
+        "world": {
+          "w": 62.4835,
+          "h": 100.8472
+        },
+        "scaleReference": "ripley-crash-climb-a",
+        "worldUnitsPerPixel": 0.0633064734859461,
+        "scaleMethod": "Exact pixel scale from climb A; corrected B uses the same figure and approximately equal crown-to-chin size.",
+        "pivotMethod": "Same pelvis X as A; foot contact Y measured independently at alpha>=128.",
+        "confidence": "visual anatomical estimate; approximately 5–10% registration uncertainty",
+        "limitations": [
+          "Contact avec chaque barreau non certifié ; deux poses de jeu alternées."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-climb-b",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for the same 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, existing dirt, restrained palette and realistic detailed illustrated style. Preserve this practical film costume unchanged with no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one full person, all hands, feet and head inside generous transparent margins, no object or scene, no text or sheet. True transparent RGBA background, no floor or shadow. POSE: ladder climbing PHASE B, opposite limb phase to an upper-near-hand keyframe. She climbs an invisible vertical ladder just to her RIGHT. FAR hand reaches to the HIGH rung above her head, NEAR hand rests on the LOWER rung in front of upper chest. FAR knee is bent and FAR foot raised to a HIGH rung, while NEAR leg extends down with NEAR foot on a LOWER rung. Both hands reach forward right at clearly different heights; preserve two arms and two legs distinctly. Torso held close to the unseen ladder, plausible upward climb, exact head and limb proportions. Do NOT draw ladder, platform, ropes or any equipment.",
+      "generationSteps": [
+        {
+          "id": "ripley-crash-climb-b-correction",
+          "prompt": "Create the OPPOSITE phase of the climbing animation of the adult Ripley character in image 1; use image 2 only for exact face, hair, body proportions and clothing. Practical nonsexual full-body game animation, unchanged gray-brown ribbed tank top and plain matching briefs, bare feet. Keep her facing RIGHT, same realistic 2D style and lighting, true alpha background, no scenery or ladder, no shadow. The pose MUST clearly change: the FOREGROUND arm (her LEFT arm, whose shoulder and elbow are fully visible closest to the viewer) is now raised HIGH above her forehead, with the entire upper arm in front of her torso and its fist reaching an invisible high ladder rung. The BACKGROUND right arm is now bent LOWER with fist at chest height, partly hidden behind the torso. The FOREGROUND LEFT thigh, attached to the large visible left hip, is now lifted FORWARD and UP nearly horizontal, knee bent 90 degrees, bare foot forward near waist level. The BACKGROUND right leg is extended DOWN with its foot below and behind. Thus the foreground elbow and foreground knee are HIGH, opposite image 1 where they are LOW. Show correct overlap of the nearer limbs in front; do not repeat the supplied limb arrangement. Preserve her identity and exact practical costume, no new objects, no text. One complete adult woman only, all hands and feet entirely visible with transparent margins.",
+          "status": "accepted",
+          "reason": "Bras et jambe opposés à climb A ; deux poses distinctes.",
+          "references": [
+            {
+              "referenceName": "ripley-crash-climb-a.png",
+              "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775",
+              "bytes": 860460,
+              "role": "imagegen-edit-target",
+              "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png"
+            },
+            {
+              "referenceName": "ripley-crash-idle.png",
+              "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+              "bytes": 760366,
+              "role": "visual-reference",
+              "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+            }
+          ],
+          "outputSha256": "9e7a3b3fbe163f33bc3126d1bd44c9faca5f349544b8c1ad4f8e44a09aa5f067"
+        }
+      ],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Contact avec chaque barreau non certifié ; deux poses de jeu alternées.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "initialGenerationOutcome": {
+        "sha256": "fda793afeec28724a9ae92ef28a2f651e71d37dc24205e63e2ab9c7a3b4750c7",
+        "status": "rejected",
+        "reason": "Même phase bras/jambes que climb A."
+      }
+    },
+    {
+      "id": "ripley-crash-crouch",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch.png",
+      "sha256": "0d64554d731669ed07b657b92d5cd70ecef34647876e74cecda7da3700dbecb3",
+      "bytes": 1228182,
+      "width": 1130,
+      "height": 1392,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        122,
+        65,
+        1003,
+        1340
+      ],
+      "visibleBBoxAlpha128": [
+        123,
+        66,
+        1002,
+        1339
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 375,
+        "y": 1338
+      },
+      "world": {
+        "w": 50.5083,
+        "h": 62.2191
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1130,
+          "h": 1392
+        },
+        "pivot": {
+          "x": 375,
+          "y": 1338
+        },
+        "world": {
+          "w": 50.5083,
+          "h": 62.2191
+        },
+        "scaleReference": "ripley-crash-idle",
+        "scaleMethod": "Reference worldUnitsPerPixel × estimated hair-crown-to-chin height 248 / estimated pose head height; preserve the real crouch/stride silhouette height.",
+        "headLandmarksEstimatedPixels": {
+          "top": 66,
+          "chin": 413,
+          "height": 347
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "worldUnitsPerPixel": 0.04469765419036541,
+        "pivotMethod": "Estimated pelvis X projected to its support; Y at alpha>=128 contact, except the jump keeps a virtual lower foot baseline so tucked feet stay airborne.",
+        "confidence": "visual estimate; approximately 5–10% art-registration uncertainty",
+        "limitations": []
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for a 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, minor existing dirt, restrained colors and detailed realistic illustrated style. Keep the same practical film costume unchanged, no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one complete person, all hands, feet and head inside generous transparent margins. No added accessories or scenery, no text or sprite sheet. True transparent RGBA background, no floor or shadow. POSE: stationary low balanced crouch. Both knees deeply bent, torso inclining slightly forward for balance, both bare feet planted on the same implied ground line, one hand just in front of a knee and the other near the torso. No crawling, kneeling on the ground, pin-up arch or perspective foreshortening. Natural functional crouching motion to pass under an obstacle.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "ripley-crash-crouch-walk-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-a.png",
+      "sha256": "af9250a1b61ffa2af3583ae48cbb9f25cf78f2b7911a5af5f1b3fd56b9270e98",
+      "bytes": 1625072,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        273,
+        25,
+        1320,
+        999
+      ],
+      "visibleBBoxAlpha128": [
+        274,
+        29,
+        1319,
+        998
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 600,
+        "y": 997
+      },
+      "world": {
+        "w": 87.5864,
+        "h": 58.3909
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "pivot": {
+          "x": 600,
+          "y": 997
+        },
+        "world": {
+          "w": 87.5864,
+          "h": 58.3909
+        },
+        "scaleReference": "ripley-crash-idle",
+        "scaleMethod": "Reference worldUnitsPerPixel × estimated hair-crown-to-chin height 248 / estimated pose head height; preserve the real crouch/stride silhouette height.",
+        "headLandmarksEstimatedPixels": {
+          "top": 29,
+          "chin": 301,
+          "height": 272
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "worldUnitsPerPixel": 0.057022375014914695,
+        "pivotMethod": "Estimated pelvis X projected to its support; Y at alpha>=128 contact, except the jump keeps a virtual lower foot baseline so tucked feet stay airborne.",
+        "confidence": "visual estimate; approximately 5–10% art-registration uncertainty",
+        "limitations": []
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch-walk-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for the same 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, existing dirt, restrained palette and realistic detailed illustrated style. Preserve this practical film costume unchanged with no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one full person, all hands, feet and head inside generous transparent margins, no object or scene, no text or sheet. True transparent RGBA background, no floor or shadow. POSE: functional LOW CROUCH-WALK phase A while moving right through a low passage. Both knees bent so the head is much lower than standing. NEAR leg reaches forward to plant the near foot ahead, FAR leg folded underneath/back and lifting at the heel; torso leans forward only enough for balance, near arm bent near body and far hand reaching modestly forward. Keep the pelvis low between the feet and shoulders above knees. This is a moving crouched step, not a motionless squat, crawling or a dance. Maintain realistic anatomical lengths and neutral gameplay presentation.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "ripley-crash-crouch-walk-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-b.png",
+      "sha256": "0dbeda44229c001de96cdedf24ad18f8942b110ef47f5d0dda752707ad3d6c2c",
+      "bytes": 1040416,
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        144,
+        23,
+        1141,
+        1179
+      ],
+      "visibleBBoxAlpha128": [
+        145,
+        26,
+        1140,
+        1177
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 450,
+        "y": 1176
+      },
+      "world": {
+        "w": 71.1512,
+        "h": 65.0231
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199
+        },
+        "pivot": {
+          "x": 450,
+          "y": 1176
+        },
+        "world": {
+          "w": 71.1512,
+          "h": 65.0231
+        },
+        "scaleReference": "ripley-crash-idle",
+        "scaleMethod": "Reference worldUnitsPerPixel × estimated hair-crown-to-chin height 248 / estimated pose head height; preserve the real crouch/stride silhouette height.",
+        "headLandmarksEstimatedPixels": {
+          "top": 26,
+          "chin": 312,
+          "height": 286
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "worldUnitsPerPixel": 0.054231069944254535,
+        "pivotMethod": "Estimated pelvis X projected to its support; Y at alpha>=128 contact, except the jump keeps a virtual lower foot baseline so tucked feet stay airborne.",
+        "confidence": "visual estimate; approximately 5–10% art-registration uncertainty",
+        "limitations": []
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch-walk-b",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for the same 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, existing dirt, restrained palette and realistic detailed illustrated style. Preserve this practical film costume unchanged with no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one full person, all hands, feet and head inside generous transparent margins, no object or scene, no text or sheet. True transparent RGBA background, no floor or shadow. POSE: functional LOW CROUCH-WALK phase B, a clearly distinct passing step. Remain low with deeply flexed knees. NEAR foot planted underneath hips bearing weight, FAR knee raised and moved forward with FAR foot passing just ahead above the implied floor. The torso is compact but naturally balanced, near arm bends forward and far arm bends back as counterbalance. Do not draw the same extended forward near leg as phase A; the near leg is the SUPPORT under the body and the far leg is passing forward. Ordinary careful low-obstacle traversal, no posing or sexualized posture.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "ripley-crash-jump",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-jump.png",
+      "sha256": "9c27c3986b891d3852e71361e7c3af4dd587d54e87ba25c294aaa19aebf5ebd0",
+      "bytes": 880381,
+      "width": 987,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        59,
+        71,
+        929,
+        1367
+      ],
+      "visibleBBoxAlpha128": [
+        60,
+        74,
+        928,
+        1367
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 430,
+        "y": 1558
+      },
+      "world": {
+        "w": 60.7478,
+        "h": 98.1074
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594
+        },
+        "pivot": {
+          "x": 430,
+          "y": 1558
+        },
+        "world": {
+          "w": 60.7478,
+          "h": 98.1074
+        },
+        "scaleReference": "ripley-crash-idle",
+        "scaleMethod": "Reference worldUnitsPerPixel × estimated hair-crown-to-chin height 248 / estimated pose head height; preserve the real crouch/stride silhouette height.",
+        "headLandmarksEstimatedPixels": {
+          "top": 74,
+          "chin": 326,
+          "height": 252
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "worldUnitsPerPixel": 0.06154796033355872,
+        "pivotMethod": "Estimated pelvis X projected to its support; Y at alpha>=128 contact, except the jump keeps a virtual lower foot baseline so tucked feet stay airborne.",
+        "confidence": "visual estimate; approximately 5–10% art-registration uncertainty",
+        "limitations": []
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-jump",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley arrival/crash sprite from Alien 3 for a 2D survival game. Preserve her recognizable adult face, short curly dark-brown hair, same realistic body proportions, muted gray-brown ribbed tank top and matching plain briefs, bare feet, minor existing dirt, restrained colors and detailed realistic illustrated style. Keep the same practical film costume unchanged, no nudity or sexual emphasis. Side-on/very slight three-quarter view facing RIGHT. Exactly one complete person, all hands, feet and head inside generous transparent margins. No added accessories or scenery, no text or sprite sheet. True transparent RGBA background, no floor or shadow. POSE: one airborne jump keyframe. Torso upright with slight forward lean, both feet clearly lifted off an implied ground line, leading knee flexed forward and trailing leg bent back, hands lifted naturally for balance. This must read as a short practical jump to traverse an obstacle, not a dancing or posing gesture. Maintain limb lengths and face identity; no speed lines, dust, platform or prop.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-crash-idle.png",
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "bytes": 760366,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image."
+      ],
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "ripley-prison-downed",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-downed.png",
+      "sha256": "b5ba76ef9d8297373526027859bae305331a3abafc0d71aa0b5aefd425e790f2",
+      "bytes": 1579728,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        67,
+        120,
+        2103,
+        665
+      ],
+      "visibleBBoxAlpha128": [
+        68,
+        121,
+        2101,
+        664
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1060,
+        "y": 663
+      },
+      "world": {
+        "w": 89.1038,
+        "h": 29.7013
+      },
+      "geometryReview": {
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 2172,
+          "h": 724
+        },
+        "pivot": {
+          "x": 1060,
+          "y": 663
+        },
+        "world": {
+          "w": 89.1038,
+          "h": 29.7013
+        },
+        "scaleReference": "ripley-prison-idle",
+        "scaleMethod": "Historical idle worldUnitsPerPixel multiplied by reference head length 194 pixels and divided by estimated tilted crown-to-chin distance in this pose.",
+        "headLandmarksEstimatedPixels": {
+          "crown": [
+            1966,
+            154
+          ],
+          "chin": [
+            1818,
+            435
+          ],
+          "distance": 317.593
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "worldUnitsPerPixel": 0.04102386087947683,
+        "pivotMethod": "Estimated pelvis projected to ground; Y is the lower boot contact at alpha>=128. The static pose is not expanded to standing height.",
+        "confidence": "visual anatomical estimate; approximately 5–10% registration uncertainty"
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-downed",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Ripley Alien 3 prison-outfit game sprite into one non-graphic DOWNED / KNOCKED-DOWN gameplay pose. Preserve the same recognizable face, very short shaved hair, adult body proportions and all clothing exactly: battered brown sleeveless prison shirt, loose brown work trousers with knee patches, worn brown lace-up boots. She remains fully clothed, unarmed. Side-scrolling near-orthographic view, head at the RIGHT and boots to the LEFT. Pose is lying on her side with torso low and slightly turned toward camera, knees softly bent, one forearm placed under/near her head and the other relaxed near the torso. Show simple exhaustion after a fall, closed or half-closed eyes, with no blood, wounds, gore or visible violence, no monster or attacker. Preserve realistic anatomy, exact outfit texture/palette, believable fabric folds and consistent head-to-body scale. Whole figure including both boots, hands and shaved head fully inside generous transparent margins. Exactly one pose and one character. High-resolution realistic cinematic 2D game sprite. True transparent RGBA background; no bed, mattress, floor, cast shadow, extra objects, text or sprite sheet. This is a gameplay keyframe, not a claim to reproduce a particular film frame.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "ripley-prison-idle.png",
+          "sha256": "6693f849c8706de1c042206d951cf74ab8bf415664a8f07308b45afd3fcd6488",
+          "bytes": 844848,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer."
+      ],
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "runner-run-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-a.png",
+      "sha256": "9406ad3536d9e9d6478bdd880f88668e89d4dfd893155de9f85d86597c11ca34",
+      "bytes": 973222,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        55,
+        99,
+        2160,
+        590
+      ],
+      "visibleBBoxAlpha128": [
+        57,
+        101,
+        2159,
+        589
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1195,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "geometryReview": {
+        "pivot": {
+          "x": 1195,
+          "y": 662
+        },
+        "world": {
+          "w": 320.514,
+          "h": 106.8379
+        },
+        "scaleReference": "runner-run-b",
+        "scaleMethod": "Exact historical runner-run-b pixel scale; approximately equal skull lengths, without fitting the compressed silhouette to full standing height.",
+        "pivotMethod": "X registers skull center to historical running B (about 580 pixels ahead of pivot); Y keeps historical run ground line, leaving the flight pose above it.",
+        "estimatedSkullBoundsX": [
+          1525,
+          2030
+        ],
+        "referenceSkullBoundsX": [
+          1570,
+          2090
+        ],
+        "groundClearancePixels": 73,
+        "confidence": "visual estimate; to review alongside complete four-phase cycle"
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Alien 3 quadrupedal Runner sprite to create one new distinct running EXTENSION phase A, for a 2D side-scrolling game. Use image 1 as character design reference and image 2 as the already existing compressed phase B. Preserve the exact bronze-brown glossy biomechanical skin, smooth elongated dome with no eyes, long segmented tail, thin ribbed torso, four limbs and no tall Aliens warrior dorsal tubes. Face RIGHT in an orthographic side view. Change only the pose: body stretched forward in mid-air, near foreleg reaching clearly forward, far foreleg slightly flexed; hind legs driving well back behind the hips. It must differ clearly from both walking image1 and compressed image2. Maintain head length and all body-part proportions; torso almost horizontal. Tail trails to the LEFT with a gentle lifted curl, and must be fully included. Exactly ONE complete creature, four limbs, no extra limbs, both forehands and hindfeet readable, no injury or gore, no victim, no other objects. Full silhouette inside the frame with transparent safety margins, realistic detailed painted game art matching the supplied sprites. True transparent RGBA background, no ground, no shadow, no colored backdrop, no effect, no label, no sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "runner-prowl.png",
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+          "bytes": 1057406,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png"
+        },
+        {
+          "referenceName": "runner-run-b.png",
+          "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+          "bytes": 959156,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer."
+      ],
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "runner-run-c",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-c.png",
+      "sha256": "4f55ed5ba8f0b6699bd84433520676cd688649e6ca4fd067c1c7ef54c586ab41",
+      "bytes": 1018912,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        46,
+        110,
+        2124,
+        664
+      ],
+      "visibleBBoxAlpha128": [
+        47,
+        111,
+        2123,
+        663
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1230,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "geometryReview": {
+        "pivot": {
+          "x": 1230,
+          "y": 662
+        },
+        "world": {
+          "w": 320.514,
+          "h": 106.8379
+        },
+        "scaleReference": "runner-run-b",
+        "scaleMethod": "Exact historical runner-run-b pixel scale; approximately equal skull lengths, without fitting each silhouette to equal full height.",
+        "pivotMethod": "Estimated skull-center X registered against B; Y at visible alpha>=128 claw contact for this grounded phase.",
+        "estimatedSkullBoundsX": [
+          1550,
+          2065
+        ],
+        "referenceSkullBoundsX": [
+          1570,
+          2090
+        ],
+        "confidence": "visual estimate, approximately five percent; four key poses are not motion capture or film-exact biomechanics"
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-c",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Alien 3 Runner into running phase C: FRONT CONTACT. Use image1 for its precise creature design and image2 to show the existing compressed phase which must not be repeated. A single quadrupedal Runner facing RIGHT in pure side view. Preserve same bronze-brown glossy biomechanical ribs, long smooth dark eyeless head, four slender limbs, long segmented tail, no tall dorsal chimneys. New pose: front limbs reaching diagonally FORWARD AND DOWN with one near forehand contacting the implied ground plane, shoulders low; hindquarters raised slightly, both rear knees folding FORWARD below belly as rear feet begin to swing beneath the body. Mouth only slightly parted. The spine is horizontal with mild natural flexion. Distinct from straight extension or compressed crouch. Keep head length, body anatomy and materials identical to reference. Entire tail trails LEFT and all four extremities completely included in generous transparent margins. One complete creature only, no environment, no ground mark, no shadow, no gore, no victim, no motion blur or text. True transparent RGBA background, same highly detailed realistic painted 2D sprite style.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "runner-prowl.png",
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+          "bytes": 1057406,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png"
+        },
+        {
+          "referenceName": "runner-run-b.png",
+          "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+          "bytes": 959156,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer."
+      ],
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "runner-run-d",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-d.png",
+      "sha256": "4d9adac004335be2450260d1f08203981ead07aa82751261efb215f4c35f74c9",
+      "bytes": 1085099,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        27,
+        23,
+        2151,
+        710
+      ],
+      "visibleBBoxAlpha128": [
+        28,
+        24,
+        2150,
+        709
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1302,
+        "y": 708
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "geometryReview": {
+        "pivot": {
+          "x": 1302,
+          "y": 708
+        },
+        "world": {
+          "w": 320.514,
+          "h": 106.8379
+        },
+        "scaleReference": "runner-run-b",
+        "scaleMethod": "Exact historical runner-run-b pixel scale; approximately equal skull lengths, without fitting each silhouette to equal full height.",
+        "pivotMethod": "Estimated skull-center X registered against B; Y at visible alpha>=128 claw contact for this grounded phase.",
+        "estimatedSkullBoundsX": [
+          1605,
+          2150
+        ],
+        "referenceSkullBoundsX": [
+          1570,
+          2090
+        ],
+        "confidence": "visual estimate, approximately five percent; four key poses are not motion capture or film-exact biomechanics"
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-d",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the attached exact bronze-brown Alien 3 Runner into a different running phase D: HIND PUSH-OFF. Image1 is identity reference; image2 is the existing compact phase B, not the requested pose. One complete quadrupedal creature facing RIGHT in an orthographic side view. Preserve the exact sleek smooth elongated eyeless dome, biomechanical ribcage and bronze glossy skin, slender four-limb anatomy, long articulated segmented tail; no dorsal chimneys or redesign. New pose: hind feet bearing weight behind hips with one hind ankle/toe contacting the implied baseline, hind legs extending to push the body forward; front arms lifting and bending backward beneath the chest with forehands just off the implied floor; shoulders slightly rising, trunk leaning forward. This must clearly read as rear push-off, not all limbs splayed flat or the compact airborne crouch. Head size and limb lengths must match the original. Tail trails LEFT and has a low gentle curl, all tip and claws fully visible with transparent margins. One creature only. Realistic detailed hand-painted game sprite. True transparent RGBA background with no floor, cast shadow, dust, effects, text, blood or second pose.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "runner-prowl.png",
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+          "bytes": 1057406,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png"
+        },
+        {
+          "referenceName": "runner-run-b.png",
+          "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+          "bytes": 959156,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer."
+      ],
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    },
+    {
+      "id": "runner-windup",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-windup.png",
+      "sha256": "170906d55a65a59c77a5874130899a4a677fea1ce2a2e86138c74858ade862f8",
+      "bytes": 1033452,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        51,
+        155,
+        2084,
+        646
+      ],
+      "visibleBBoxAlpha128": [
+        53,
+        156,
+        2084,
+        645
+      ],
+      "cornersAlpha": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1240,
+        "y": 644
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "geometryReview": {
+        "pivot": {
+          "x": 1240,
+          "y": 644
+        },
+        "world": {
+          "w": 320.514,
+          "h": 106.8379
+        },
+        "scaleReference": "runner-run-b",
+        "scaleMethod": "Exact historical runner-run-b pixel scale; skull length within estimated five percent.",
+        "pivotMethod": "X registers skull center to historical running B; Y at visible lower claw contact in the compact stance.",
+        "estimatedSkullBoundsX": [
+          1560,
+          2080
+        ],
+        "referenceSkullBoundsX": [
+          1570,
+          2090
+        ],
+        "confidence": "visual estimate; no motion capture or cinematic exactness claimed"
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "runner-windup",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Create a single new pose of the attached exact Alien 3 Runner game sprite: a STILL LOW PREPARATION CROUCH before moving. Edit only its posture and preserve creature identity, same bronze-brown glossy ribbed biomechanical anatomy, smooth long dark dome with no eyes, slender four limbs, very long segmented tail. Side view facing RIGHT. Both forehands spread on the implied floor slightly ahead of the shoulders; elbows flexed, torso very low; rear legs folded strongly under hips, weight drawn back ready to spring, head held level and mouth CLOSED. Tail remains fully visible behind to the LEFT with its tip gently raised. Distinguish from a running phase by all four limbs planted and a deliberate balanced crouch. No other subject, target, impact or injury. Preserve exact body-part sizes, no warrior dorsal tubes, no invented armor, no extra claws or limbs. One complete high-resolution realistic 2D game sprite with entire body and tail inside clear transparent margins. True transparent RGBA background, no ground or shadow, no background color, no effects, no text or sprite sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "referenceName": "runner-prowl.png",
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+          "bytes": 1057406,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png"
+        },
+        {
+          "referenceName": "runner-run-b.png",
+          "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+          "bytes": 959156,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png"
+        }
+      ],
+      "sourcePageUrls": [],
+      "sourceImageUrls": [],
+      "referenceKind": "existing-generated-v115-v116-sprite",
+      "referenceLimitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer."
+      ],
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "id": "runner-run",
+      "frames": [
+        "runner-run-a",
+        "runner-run-c",
+        "runner-run-b",
+        "runner-run-d"
+      ],
+      "fps": 8,
+      "exact": false,
+      "nativeSelectorUnmodified": true
+    },
+    {
+      "id": "ripley-crash-crouch-walk",
+      "frames": [
+        "ripley-crash-crouch-walk-a",
+        "ripley-crash-crouch-walk-b"
+      ],
+      "fps": 5,
+      "exact": false,
+      "nativeSelectorUnmodified": true
+    },
+    {
+      "id": "ripley-crash-climb",
+      "frames": [
+        "ripley-crash-climb-a",
+        "ripley-crash-climb-b"
+      ],
+      "fps": 5,
+      "exact": false,
+      "nativeSelectorUnmodified": true
+    }
+  ],
+  "currentMetadataChanges": [
+    {
+      "id": "runner-run-b",
+      "field": "limitations",
+      "previous": [
+        "Pose de course isolée disponible au catalogue ; cycle incomplet, rendu animé procédural conservé en course."
+      ],
+      "current": [
+        "Phase historique de compression désormais utilisée par le cycle à quatre poses runner-run V117 ; PNG et géométrie inchangés.",
+        "Cycle de jeu interprété, non certifié comme reproduction image par image du film."
+      ],
+      "reason": "La pose V115 est maintenant reliée à trois nouvelles phases ; pixels et géométrie conservés."
+    }
+  ],
+  "blockedGenerationAttempts": [
+    {
+      "id": "m41a-black",
+      "status": "blocked-by-image-service",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated high-resolution 2D game prop for the Alien 3 / Fiorina DLC. The attached image is the reference photograph of the screen-used Alien 3 M41A pulse rifle, not an edit target. Recreate the complete gun alone as a clean realistic cinematic game sprite, facing RIGHT in a near-orthographic horizontal side view. Preserve the documented black vacuum-formed shroud, long open integrated carry handle, brownish ribbed pistol grip, flat metal shoulder stock, perforated lower launcher cage and ribbed black pump, compact upper muzzle, worn black material and restrained edge scuffs. Alien 3 version: NO LED ammunition counter, NO glowing red digits, NO olive-green repaint, no tactical modern attachments. The current auction prop is missing a magazine base; do not reproduce a conspicuous broken hole—keep the screen silhouette with a plain flush dark magazine bottom, with any unseen detail restrained. Include the single attached brown woven sling, hanging close beneath the gun as seen in the reference. Exactly one complete object, all muzzle, stock and sling inside generous clear margins. True transparent RGBA background. No hands, people, floor, cast shadow, pedestal, text, labels, smoke, muzzle flash, poster or sprite sheet. This is a visual game illustration, not a mechanical or construction diagram.",
+      "references": [
+        {
+          "referenceName": "m41a-propstore.jpg",
+          "sha256": "83212c9b81d82790154dc642dc8caf5c9f9c566ee1955fe06c22e65a74286fbd",
+          "bytes": 54488,
+          "role": "generation-reference"
+        }
+      ],
+      "pngProduced": false,
+      "includedInCounts": false
+    },
+    {
+      "id": "runner-recover",
+      "status": "blocked-by-image-service",
+      "prompt": "Edit the attached exact Alien 3 quadrupedal Runner into one RECOVERY pose after landing, for the same 2D game. Preserve its identity 1:1 with the supplied game sprite: bronze-brown wet biomechanical surface, smooth long dark dome with no eyes, slender ribcage, four limbs and long segmented tail. View is side-on, facing RIGHT. Pose: low settling four-point stance, both long front arms planted below and slightly ahead of the shoulders with elbows distinctly bent, hind legs deeply flexed beneath the hips, body settling low, dome slightly lowered and angled toward the ground. Mouth closed or only slightly parted. This must read as decelerating and recovering balance, without any victim or attack impact. Do not copy the open walking stride; make the limbs compact and weight-bearing. Tail flows fully to the LEFT with a soft upward tip, not cropped. Keep exact anatomy/proportions/material palette, do not add dorsal chimneys, horns, wings or armor. Exactly one complete figure and all extremities inside generous transparent margins. High-resolution realistic illustrated sprite, true transparent RGBA background, no ground, cast shadow, effects, blood, text, extra objects or sprite sheet.",
+      "references": [
+        {
+          "referenceName": "runner-prowl.png",
+          "sha256": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+          "bytes": 1057406,
+          "role": "generation-reference",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png"
+        }
+      ],
+      "pngProduced": false,
+      "includedInCounts": false
+    }
+  ],
+  "deferred": [
+    {
+      "id": "flight-recorder",
+      "reason": "Aucune géométrie film suffisamment vérifiée ; la maquette orange était explicitement non canonique."
+    },
+    {
+      "id": "medical-kit",
+      "reason": "Kit complet non documenté ; seringue et flacon existent séparément, mallette V117 antérieure non retrouvée."
+    }
+  ],
+  "historicalIntegrity": {
+    "pngsUnmodified": 61,
+    "provenanceDocumentsUnmodified": 4,
+    "sha256": {
+      "assets/openai/sprites/alien3-fiorina-v115/aaron-idle.png": "eac18238c6df8bf7b9cb408049ac570130f7ecc24f26f3ed04b50e7efee365d1",
+      "assets/openai/sprites/alien3-fiorina-v115/andrews-idle.png": "c7566fca89c76968de355bb25a748ab8c1a37102871b7a9e70c175cbb1f71423",
+      "assets/openai/sprites/alien3-fiorina-v115/arthur-idle.png": "007e097b18420e4b58785b56bd4134301f2a7c7482921241898195eadafe281c",
+      "assets/openai/sprites/alien3-fiorina-v115/bishop-damaged.png": "d9ac762365f330db4439ce4f148a88b82ec92f0943e5464257827522fd5196f5",
+      "assets/openai/sprites/alien3-fiorina-v115/bishop-representative-idle.png": "5df1ea8946a901a92b0e5597e0846699ee2ca35a53dfc80863ce87aae2dc7845",
+      "assets/openai/sprites/alien3-fiorina-v115/boggs-idle.png": "8318c9dfae6299095250f33a755f40696061d1fdcaa409cfd0cd5d01999652b4",
+      "assets/openai/sprites/alien3-fiorina-v115/clemens-idle.png": "8afc420f8af2598dd2917545c93c200ab9475cb950ecb33bff0b4b9515a25d9c",
+      "assets/openai/sprites/alien3-fiorina-v115/company-commando-idle.png": "d01dd988cc783cc529b51eaea9a580ffe869bedc48d92447e98d2d949067c552",
+      "assets/openai/sprites/alien3-fiorina-v115/company-scientist-goggles.png": "3e06b1250b00f5c9a674b76230818b062d55f7d1eda3b3c17b3334661141f2fc",
+      "assets/openai/sprites/alien3-fiorina-v115/company-scientist-idle.png": "ec9728de46d913c791f1aadeac39fe2419f32a5eb0a0983151977ed7466458ea",
+      "assets/openai/sprites/alien3-fiorina-v115/david-idle.png": "6a647498795044e25dfc9e1ed2bec74b5cbd1ab1522e9c9a5911ebff2f97d518",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-fire-axe.png": "96f5e1358fd83d0a80349ae5147cb4c2de079a38bbf57bbf4ff2198cecaa2188",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-glasses.png": "fadc0da30854c40b00e8131a083f92f23487b4410ff2f66010edb26b25176f70",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-run-b.png": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-a.png": "dde10467a0ad1fb3c3805764c6e39e264269bcbbbfb06adecc8d23c3898b270b",
+      "assets/openai/sprites/alien3-fiorina-v115/dillon-walk-b.png": "ad07c2b8451526028e7813478196f44ed7db4877cfc0a44ec7e4e7a6e1adf981",
+      "assets/openai/sprites/alien3-fiorina-v115/eric-idle.png": "50555f9bcc5c811f036ef8e09930ef26f6d464c5e411611ca3f7ad4ebd041ab6",
+      "assets/openai/sprites/alien3-fiorina-v115/fire-flare.png": "111952b339cd5c6ef566a7337dd8de208b14e46f0440ee93cca13b5773666bc0",
+      "assets/openai/sprites/alien3-fiorina-v115/frank-idle.png": "ca8d63fbd3ee31b9225a10f880f4c003b19bed6b79fff0ddc9f07b43f9baaf9b",
+      "assets/openai/sprites/alien3-fiorina-v115/golic-idle.png": "198f7ceb34872bb43bda50898360a18a25ebca0739cbe837f5d64b325f8d961c",
+      "assets/openai/sprites/alien3-fiorina-v115/gregor-idle.png": "d2e116aa9eade2c1df548dbb3898f2ee9a49c99d9f1091a306fb5453be6080c1",
+      "assets/openai/sprites/alien3-fiorina-v115/jude-idle.png": "e4e5e4a9c1093d585efb03b1b5e5b953e8ac933c81d774928b1a4aec88367dd1",
+      "assets/openai/sprites/alien3-fiorina-v115/junior-idle.png": "8b34ef6ce5f54786103b28337a6152b17f03c8aaf56b975ae250d2bd3ef9046e",
+      "assets/openai/sprites/alien3-fiorina-v115/kevin-idle.png": "d728905173a943d95bf1359415674d6fc0ff80f7ee43a8f7dd1cac0986abb10e",
+      "assets/openai/sprites/alien3-fiorina-v115/morse-idle.png": "39bd0eb7db35164155d78a37c2dfceadd31d5b7ad3ba0782a7275d5ea18503c4",
+      "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+      "assets/openai/sprites/alien3-fiorina-v115/morse-run-b.png": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a",
+      "assets/openai/sprites/alien3-fiorina-v115/morse-walk-a.png": "9ac48ffb730e76ffb3ee23baf9187fa61bfc759959eaeff7db063bb7ea7938ad",
+      "assets/openai/sprites/alien3-fiorina-v115/morse-walk-b.png": "f1d84d58c9cd8bade16e9f9cfe982a6cea93693d966e9f52686f986972de1062",
+      "assets/openai/sprites/alien3-fiorina-v115/murphy-idle.png": "518aaf21595c0724b808b324b0d1f2c043b2d8918b4db388fb8834a6e2727329",
+      "assets/openai/sprites/alien3-fiorina-v115/ox-assembly-idle.png": "421a8ef4fc9b3a0afbdb86c5306e1909dbef5fccdde096147f92ef22e2508a51",
+      "assets/openai/sprites/alien3-fiorina-v115/rains-idle.png": "2347c1f64ddc568c3c296fcb05e57466142eb1b52fea27979e0d3e88e551475c",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-coat-idle.png": "f308e1234869175fd8100bf06e5e4d811060afd7a720c21fb600d759ff109d79",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-b.png": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-b.png": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-a.png": "af6533431a7e98c837651271dcef8711db5e3a4d2735b34a25a59f426f57c9e0",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-b.png": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-b.png": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch.png": "89ecdf43bbdba52d8eaa648808f679bfcf3171e99a34753f5851773eb2b7791a",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-hurt.png": "4943fec35630d7342d399303d815d08935e522388f2911dc9c749b3b16d8099a",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png": "6693f849c8706de1c042206d951cf74ab8bf415664a8f07308b45afd3fcd6488",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-interact.png": "c31ab78f727000fdf88db5e83694d337e80a2b998af8045fda36652b27cb4558",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-jump.png": "71119e557be0a9eb10662590b935449ab67e75b612eda53b8e30f88c8dcd6b66",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-a.png": "8f0cc7d188896981c92876b4c95e78adcad9fce470189c1095921f6387effd7e",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-run-b.png": "a3b64ebabe95b429baea41b2be0f88ff61232f7cc9106b224b65991b650390f5",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-a.png": "c08f45541bd3cc732fe018f5b0ae01b68573c1da8bd651e6c17c0203dd84edbc",
+      "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-walk-b.png": "8cf1f89af25b1918a86dc24e997d2d2f7f49118261e12c4d9b193f09145c2cb9",
+      "assets/openai/sprites/alien3-fiorina-v115/royal-facehugger-assembly.png": "7d3ef42dba897af75eea1f9814bf96a1f15388dba13e7b4e018d03d0d3559e8d",
+      "assets/openai/sprites/alien3-fiorina-v115/runner-prowl.png": "18f91c0958876a06c00a5ee613bfd8cec3f6d3bed5c645b15e420adffa60cb57",
+      "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047",
+      "assets/openai/sprites/alien3-fiorina-v115/runner-walk-b.png": "964e5eb301082fc1361b651a1a48811159f61f4ddb5542323569677193af11b9",
+      "assets/openai/sprites/alien3-fiorina-v115/spike-idle.png": "64f3f063548ab8f9ac57c4802332d54f9e259e6a5c677578915bb3b43133ad8e",
+      "assets/openai/sprites/alien3-fiorina-v115/troy-idle.png": "5ccb678feb2ab3bf683bfda7067467c6d31f64d4384f7b28c13627276a1dd4f4",
+      "assets/openai/sprites/alien3-fiorina-v115/weyland-yutani-matchbox.png": "ce8967b10b7d623c6720a4633b0b9559c6b7f261b0bbb0c4272016375481be45",
+      "assets/openai/sprites/alien3-fiorina-v115/william-idle.png": "f6ac9a573d24959390e05c67608daae4067edcc6fd83b2dea0aef5acf34942db",
+      "docs/development/FIORINA_SPRITES_V115.md": "94bebfb6290dbf8c1df2690f194241f154230ddf7396435435f4478ae028109f",
+      "docs/development/FIORINA_SPRITES_V115.json": "7fd64a692383eb0fc481967ed31921023db6427e0c4113d56839bb04fd125970",
+      "docs/development/FIORINA_SPRITES_V116.md": "473c3d78b38c69934aae887bae6c5a073e78b50e724c568e9bbd201418865aea",
+      "docs/development/FIORINA_SPRITES_V116.json": "852da4c124e2e79a3e802ec56bbacf0a4de3970d66f7890f90c982d2cbd18a94"
+    }
+  },
+  "nativeIntegration": {
+    "newPngUsed": 11,
+    "newCatalogueOnlyPng": 5,
+    "playerDownedPresentationGuard": "Only the real player object with id ripley and downed === true may bypass the not-alive render guard. No gameplay state changes.",
+    "crashReachability": "Input-owner simulation with real collisions reaches jump, side-sector crouch/crouch-walk and authored ladder f161-e89 without teleport or EEV progression; host DOM/RAF remain explicit test doubles.",
+    "catalogueOnly": [
+      "abattoir-lamp",
+      "clemens-medicine-vial",
+      "clemens-syringe",
+      "mining-flare-case",
+      "murphy-welding-goggles"
+    ],
+    "absentSocketsKeepFallback": [
+      "flight-recorder",
+      "medical-kit"
+    ],
+    "absentRunnerStateKeepsFallback": "runner-recover",
+    "noGameplayChanges": true,
+    "downedPosePriority": "Explicit downed precedes v52HurtClock/shockClock so a fatal hit does not leave a standing hurt pose while mission clocks are frozen."
+  },
+  "validation": {
+    "manifestSha256": "3f6f6f08152bd06fa1f6e84c139b18115cebb9b400e8011997c247c78e06320e",
+    "nodeVersion": "v24.22.3",
+    "sourceDigests": {
+      "src/alien3-sprites-v115.js": "9a6a245b06725053fa3987f2440152805297e554b7dd28c352626926a9952f1d",
+      "src/alien3-production-v115.js": "14e3ba9f4422d3dd3f0a4b3a86fe28bba9a51a0bb25ea37a6208338e62a29e76",
+      "scripts/qa-fiorina-sprites-v115.mjs": "fc62425be0d785aaae82cec39b4ddb0c58504bd65943bc161d8df3a2c14f288e",
+      "scripts/qa-fiorina-native-sprites-v115.mjs": "0a74495408ea8518ff9eb3bf6fd2a95baf95b9cbc1185e3a52ac8e57747979bc",
+      "scripts/public-fiorina-sprite-admissions-v115.mjs": "022f74ba4655b714e2a7abf9a001ae1923ca6fd62fc78f7c76da1b231be54689"
+    },
+    "contractTests": {
+      "passed": 49,
+      "failed": 0,
+      "skipped": 0,
+      "command": "node --test --test-reporter=spec scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs scripts/verify-fiorina-production-v114.mjs scripts/verify-dlc-audit-succession.mjs",
+      "suites": {
+        "rendererAndNativeHooks": 21,
+        "admissions": 7,
+        "nativeFiorinaProduction": 7,
+        "auditSuccession": 14
+      },
+      "logSha256": "0c2f914b6401096f44d26c5c172dd71e0993d554d91a6b4c0d9b9bd8a2f6719d"
+    },
+    "cacheTests": {
+      "passed": 6,
+      "failed": 0,
+      "scope": [
+        "active-cache offline fallback",
+        "public image caching",
+        "complete shell installation with lazy artwork",
+        "activation purge",
+        "failed-install rollback",
+        "bounded runtime cache"
+      ],
+      "logSha256": "d7a06062cff877a455e516edfe17c5183bdf1a661ca4de9e96b8b3c694eb5b6f"
+    },
+    "pixels": {
+      "passed": true,
+      "entries": 91,
+      "distinctSources": 77,
+      "checks": 535,
+      "partitions": 16,
+      "contactSheets": 40,
+      "reportSha256": "680efc9bbf591ed0280899a19d0c85c73245efb6b838637e9da490d98be29d4f",
+      "originalPixelsModified": false,
+      "scope": "Real offscreen Canvas/Skia rendering of the delivered PNGs through drawAlien3SpriteV115. Not a browser journey or a film-likeness certification. 6 entries per independent process; target coverage is every entry and PNG."
+    },
+    "nativeComponents": {
+      "passed": true,
+      "checks": 322,
+      "samples": 64,
+      "drawnManifestEntries": 44,
+      "reportSha256": "cc8f3bd5ae28512d74e8c53a29be31a709d3bc6ba7aebf544139458163d4d2c4",
+      "sourcePixelsModified": false,
+      "scope": "Native GameEngine component rendering with actual delivered PNGs on Canvas/Skia; explicit DOM/RAF/image host doubles. Not a browser journey.",
+      "notBrowserJourney": true
+    },
+    "resolvedQaFindings": [
+      {
+        "finding": "At native world size the syringe occupies only 2×11 pixels at depth 1 and 2×1 at depth 0.6; its fine needle can fall between sampling columns.",
+        "resolution": "Keep original-size evidence, then measure the same renderer at a larger observation scale when an axis is under 8 pixels. The 3-pixel tolerance and original PNG/world geometry remain unchanged.",
+        "observed": {
+          "observationScale": 21.333333333333332,
+          "referencePixels": [
+            45,
+            363
+          ],
+          "depth06Pixels": [
+            27,
+            217
+          ],
+          "maximumAllowedErrorPixels": 3,
+          "heightErrorPixels": 0.8
+        }
+      },
+      {
+        "finding": "The first reduced-motion fixture asserted that the exposed native art clock remained nonzero after enabling reduced motion.",
+        "resolution": "Inject time before enabling the existing setting, assert that its exposed clock becomes 0, then require frame 0. Production clock behavior unchanged."
+      }
+    ],
+    "historicalIntegrity": {
+      "pngsUnmodified": 61,
+      "provenanceDocumentsUnmodified": 4,
+      "newGitBlobsVerified": 16
+    },
+    "globalGates": {
+      "publicRelease": {
+        "command": "npm run check",
+        "status": "blocked",
+        "reason": "Stopped at the first missing dependency: ENOENT for the archives directory omitted by the focused sparse checkout. Other global prerequisites were not fully evaluated; no success claimed."
+      },
+      "build": {
+        "command": "npm run build",
+        "status": "not-run",
+        "reason": "Global archive/media dependencies omitted from this focused checkout; retained as CI gate."
+      },
+      "builtArtifact": {
+        "command": "npm run check:built",
+        "status": "not-run"
+      },
+      "chromiumJourney": {
+        "status": "not-run-locally",
+        "reason": "No complete built distribution exists locally; CI retains the distinct historical journey."
+      }
+    },
+    "independentCodeReview": {
+      "status": "passed-after-fix",
+      "findingFixed": "The old not-alive presentation guard excluded the new downed player. Strict player identity and explicit downed guard now admit it without admitting dead NPCs.",
+      "scope": [
+        "reviewed successor hash chain",
+        "cache version and workflow",
+        "native QA fixtures",
+        "dead NPC exclusion",
+        "existing input reachability"
+      ]
+    }
+  },
+  "visualReview": {
+    "reviewers": [
+      "integration-review",
+      "independent-reference-review",
+      "root-final-review"
+    ],
+    "accepted": true,
+    "scope": [
+      "new props on light and dark composites",
+      "Ripley crash idle and all six new poses at constant world zoom",
+      "Runner prowl, A/C/B/D and windup at constant world zoom",
+      "corrected alternating crash climb B",
+      "corrected abattoir lamp blueprint proportions"
+    ],
+    "limitations": [
+      "Runner dome proportions remain slightly different from the historical prowl pose; new run phases preserve the calibrated historical run-B scale.",
+      "World pivots and anatomical landmarks are visual estimates, not film-exact skeletal tracking.",
+      "The mining-flare case retains a small extra circle after WEYLAND, absent from DSC08561.jpg."
+    ]
+  }
+}

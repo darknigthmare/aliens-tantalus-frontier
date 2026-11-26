@@ -188,6 +188,7 @@ test('movement selects dedicated poses and unknown inmates never borrow a Ripley
   assert.equal(at({ grounded: false, vy: .1, crouching: true }, {}), 'ripley-prison-jump');
   assert.equal(at({ grounded: true, vy: 0, vx: 100 }, {}), 'ripley-prison-walk');
   assert.equal(at({ v52HurtClock: .2 }, {}), 'ripley-prison-hurt');
+  assert.equal(at({ downed: true, v52HurtClock: .42, shockClock: .2 }, {}), 'ripley-prison-downed');
   assert.equal(at({ interactionClock: .2 }, {}), 'ripley-prison-interact');
   assert.equal(selectAlien3HumanSpriteV115('david', {}, {}).id, 'david-idle');
   assert.equal(selectAlien3RunnerSpriteV115({ moving: true }, null).id, 'runner-walk');
@@ -232,6 +233,49 @@ function native() {
   engine.start(options);
   return { engine, context: host.canvas.getContext('2d'), options };
 }
+
+test('wreckage controls reach crash jump, crouch, crouch-walk and the authored ladder without advancing the story', () => {
+  const selection = engine => selectAlien3HumanSpriteV115('ripley', engine.player,
+    { phase: engine.alien3V88.phase, encounter: engine.alien3EncounterV105 }).id;
+  const held = (engine, code, pressed) => engine.setHeldGameplayKeyV77(code, pressed, 'sprite-reachability-fixture');
+  const reach = (engine, x) => {
+    let airborne = false;
+    held(engine, 'KeyD', true);
+    for (let frame = 0; frame < 400 && engine.player.x < x; frame++) {
+      // The coast cover is a low physical obstacle, not a story gate. Use
+      // the existing jump input owner; never relocate or pose the actor.
+      held(engine, 'Space', engine.player.x > 500 && engine.player.grounded);
+      engine.update(1 / 60);
+      airborne ||= selection(engine) === 'ripley-crash-jump';
+    }
+    engine.clearGameplayInput();
+    assert.ok(engine.player.x >= x, 'Native movement must reach the requested authored location');
+    assert.equal(engine.alien3V88.phase, 'wreckage');
+    assert.equal(engine.alien3V88.crashRecorderRead, false);
+    assert.equal(airborne, true, 'An actual input-driven jump selects the arrival outfit');
+  };
+  const first = native().engine;
+  try {
+    reach(first, 800);
+    for (let frame = 0; frame < 55; frame++) first.update(1 / 60);
+    assert.equal(first.alien3V97.hybrid.mode, 'side');
+    held(first, 'KeyZ', true); first.update(1 / 60);
+    assert.equal(selection(first), 'ripley-crash-crouch');
+    held(first, 'KeyD', true);
+    for (let frame = 0; frame < 15; frame++) first.update(1 / 60);
+    assert.equal(selection(first), 'ripley-crash-crouch-walk');
+    assert.equal(first.alien3V88.phase, 'wreckage');
+  } finally { first.stop(); }
+  const second = native().engine;
+  try {
+    reach(second, 675);
+    held(second, 'KeyW', true);
+    for (let frame = 0; frame < 30 && !second.player.climbing; frame++) second.update(1 / 60);
+    assert.equal(second.player.ladderId, 'f161-e89');
+    assert.equal(selection(second), 'ripley-crash-climb');
+    assert.equal(second.alien3V88.phase, 'wreckage');
+  } finally { second.stop(); }
+});
 
 test('the native player renders a real sustained operation and returns to idle when its owner cancels', async () => {
   const { engine, context: c } = native();
@@ -312,6 +356,32 @@ test('new catalogue images cannot revive deceased prisoners or turn inspection s
     assert.equal(engine.setAlien3InspectionRoomV114('ox-approach'), false);
     assert.equal(requests.length, 0, 'Catalogue-only actors are not requested by the native render loop');
     assert.equal(bank.report().cachedImages, 0);
+  } finally { engine.stop(); }
+});
+
+test('the downed player pose draws without admitting dead NPCs or altering incapacity', async () => {
+  const { engine, context: c } = native();
+  try {
+    const bank = engine.registerAlien3SpriteManifestV115(manifest({
+      'ripley-prison-downed': asset({ state: 'downed' }),
+      'dillon-downed': asset({ state: 'downed' })
+    }), { imageFactory: factory(), preloadAll: true });
+    await bank.ready;
+    engine.alien3V88.phase = 'infirmary';
+    engine.damagePlayer(engine.player, 10000, { source: 'incapacity-render-fixture' });
+    assert.equal(engine.player.alive, false);
+    assert.equal(engine.player.downed, true);
+    assert.ok(engine.player.v52HurtClock > 0, 'The fatal hit retains its real hurt timer');
+    const before = JSON.stringify({ actor: engine.player, saved: engine.captureResumeState() });
+    engine.drawActor(c, engine.player);
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley?.id, 'ripley-prison-downed');
+    assert.equal(engine.getAlien3SpriteReportV115().receipts.ripley?.drawn, true);
+    assert.equal(JSON.stringify({ actor: engine.player, saved: engine.captureResumeState() }), before);
+    const dead = { ...engine.player, id: 'dillon' };
+    assert.equal(engine.tryAlien3HumanSpriteV115(c, dead, 'dillon'), false);
+    assert.equal(engine.tryAlien3HumanSpriteV115(c, dead, 'ripley'), false, 'An identity label cannot impersonate the player object');
+    engine.player.downed = false;
+    assert.equal(engine.tryAlien3HumanSpriteV115(c, engine.player, 'ripley'), false, 'Only explicit incapacity gets the exception');
   } finally { engine.stop(); }
 });
 

@@ -72,7 +72,10 @@ export function withAlien3ProductionV115(Base) {
     }
 
     tryAlien3HumanSpriteV115(context, actor, id = actor.id, time = this.alien3ArtTimeV102?.() || 0) {
-      if (!this.isAlien3ProductionV114() || !actor?.alive || !this.alien3SpriteBankV115) return false;
+      // Incapacity has a dedicated player pose. This presentation exception
+      // never admits deceased roster actors or changes their gameplay state.
+      const downedPlayer = actor === this.player && id === 'ripley' && actor?.downed === true;
+      if (!this.isAlien3ProductionV114() || (!actor?.alive && !downedPlayer) || !this.alien3SpriteBankV115) return false;
       if (!inView(this, actor)) return false;
       const costume = this.alien3CostumeContextV113();
       const selected = selectAlien3HumanSpriteV115(id, actor, {

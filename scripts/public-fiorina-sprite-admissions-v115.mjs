@@ -448,10 +448,128 @@ export const FIORINA_SPRITE_ADDITIONS_V116 = Object.freeze([
 ].map(Object.freeze));
 // END REVIEWED V116 ADDITIONS
 
+// BEGIN REVIEWED V117 ADDITIONS — exact measured outputs, historical pins unchanged.
+export const FIORINA_SPRITE_MANIFEST_SHA256_V117 = '3f6f6f08152bd06fa1f6e84c139b18115cebb9b400e8011997c247c78e06320e';
+export const FIORINA_SPRITE_ADDITIONS_V117 = Object.freeze([
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/abattoir-lamp.png",
+    "sha256": "7fca263efb29275a01d3003dad7b1fb8ffc161e407ccbd6123b46fdbc8f72799",
+    "bytes": 1703409,
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/clemens-medicine-vial.png",
+    "sha256": "f16cf35f03fdfceea79bcf0dbf7bf9ff20fff6581a95d1038384d44ab4c88ad3",
+    "bytes": 1504896,
+    "width": 1106,
+    "height": 1422
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/clemens-syringe.png",
+    "sha256": "c619dc711b00eea6fa8b3ddf598fa45b284bcdb9293376ba26efb15a360de70e",
+    "bytes": 613218,
+    "width": 724,
+    "height": 2172
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/mining-flare-case.png",
+    "sha256": "87c37e0f6f409f02ee5e0a2f67d0485797a162004af4c1b52b8b4e785fb12f3a",
+    "bytes": 2979275,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/murphy-welding-goggles.png",
+    "sha256": "88c8e560562bab6996543b31ef82e6eb32445d9ae17f90841f360b6898252d9d",
+    "bytes": 2415607,
+    "width": 1543,
+    "height": 1019
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png",
+    "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775",
+    "bytes": 860460,
+    "width": 987,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-b.png",
+    "sha256": "9e7a3b3fbe163f33bc3126d1bd44c9faca5f349544b8c1ad4f8e44a09aa5f067",
+    "bytes": 787624,
+    "width": 987,
+    "height": 1593
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch.png",
+    "sha256": "0d64554d731669ed07b657b92d5cd70ecef34647876e74cecda7da3700dbecb3",
+    "bytes": 1228182,
+    "width": 1130,
+    "height": 1392
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-a.png",
+    "sha256": "af9250a1b61ffa2af3583ae48cbb9f25cf78f2b7911a5af5f1b3fd56b9270e98",
+    "bytes": 1625072,
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-b.png",
+    "sha256": "0dbeda44229c001de96cdedf24ad18f8942b110ef47f5d0dda752707ad3d6c2c",
+    "bytes": 1040416,
+    "width": 1312,
+    "height": 1199
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-jump.png",
+    "sha256": "9c27c3986b891d3852e71361e7c3af4dd587d54e87ba25c294aaa19aebf5ebd0",
+    "bytes": 880381,
+    "width": 987,
+    "height": 1594
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-downed.png",
+    "sha256": "b5ba76ef9d8297373526027859bae305331a3abafc0d71aa0b5aefd425e790f2",
+    "bytes": 1579728,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/runner-run-a.png",
+    "sha256": "9406ad3536d9e9d6478bdd880f88668e89d4dfd893155de9f85d86597c11ca34",
+    "bytes": 973222,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/runner-run-c.png",
+    "sha256": "4f55ed5ba8f0b6699bd84433520676cd688649e6ca4fd067c1c7ef54c586ab41",
+    "bytes": 1018912,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/runner-run-d.png",
+    "sha256": "4d9adac004335be2450260d1f08203981ead07aa82751261efb215f4c35f74c9",
+    "bytes": 1085099,
+    "width": 2172,
+    "height": 724
+  },
+  {
+    "path": "assets/openai/sprites/alien3-fiorina-v115/runner-windup.png",
+    "sha256": "170906d55a65a59c77a5874130899a4a677fea1ce2a2e86138c74858ade862f8",
+    "bytes": 1033452,
+    "width": 2172,
+    "height": 724
+  }
+].map(Object.freeze));
+// END REVIEWED V117 ADDITIONS
+
 export const FIORINA_SPRITE_CURRENT = Object.freeze({
-  revision: 'fiorina-sprites-v116',
-  manifestSha256: FIORINA_SPRITE_MANIFEST_SHA256_V116,
-  files: Object.freeze([...FIORINA_SPRITE_FILES_V115, ...FIORINA_SPRITE_ADDITIONS_V116]
+  revision: 'fiorina-sprites-v117',
+  manifestSha256: FIORINA_SPRITE_MANIFEST_SHA256_V117,
+  files: Object.freeze([...FIORINA_SPRITE_FILES_V115, ...FIORINA_SPRITE_ADDITIONS_V116, ...FIORINA_SPRITE_ADDITIONS_V117]
     .sort((a, b) => a.path.localeCompare(b.path))),
 });
 
@@ -465,6 +583,8 @@ export const FIORINA_SPRITE_SOURCE_ONLY_V115 = new Set([
   'docs/development/FIORINA_SPRITES_V115.json',
   'docs/development/FIORINA_SPRITES_V116.md',
   'docs/development/FIORINA_SPRITES_V116.json',
+  'docs/development/FIORINA_SPRITES_V117.md',
+  'docs/development/FIORINA_SPRITES_V117.json',
 ]);
 const admitted = new Set([FIORINA_SPRITE_MANIFEST_V115, ...FIORINA_SPRITE_CURRENT.files.map(file => file.path)]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
