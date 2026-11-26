@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 
 export const MER_RECOVERY_ROOT_20261126 = 'archives/sea-sprites-recovery-20261126';
 export const MER_RECOVERY_MANIFEST_20261126 = MER_RECOVERY_ROOT_20261126 + '/ADMISSION_MANIFEST.json';
-export const MER_RECOVERY_MANIFEST_SHA256_20261126 = '6f583a70d181783abacfc4e661eb39624309b7d8e71b2ca1b54e3d84111d9622';
+export const MER_RECOVERY_MANIFEST_SHA256_20261126 = '784430ec58f314a196d138d773b2bbf2eb59e1121da9247f208d3d00d6eb324f';
 export const MER_RECOVERY_SOURCE_FILES_20261126 = Object.freeze([
   'scripts/mer-des-chagrins-recovery-admission-20261126.mjs',
   'scripts/verify-mer-des-chagrins-recovery-admission-20261126.mjs',

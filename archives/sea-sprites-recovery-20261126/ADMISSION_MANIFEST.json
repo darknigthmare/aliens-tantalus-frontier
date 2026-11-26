@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "root": "archives/sea-sprites-recovery-20261126",
   "sourceCommit": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
-  "fileCount": 151,
-  "totalBytes": 274780120,
+  "fileCount": 184,
+  "totalBytes": 305804963,
   "files": [
     {
       "path": "archives/sea-sprites-recovery-20261126/COMPLETE_SPRITES.json",
@@ -910,6 +910,204 @@
       "mode": "100644",
       "sizeBytes": 1309194,
       "gitBlobSha": "f4d94c7318acf54669d6c6463ab1df419aeae25f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/MANIFEST.json",
+      "mode": "100644",
+      "sizeBytes": 21223,
+      "gitBlobSha": "a900284b748526fa5c8f826f36feda584340407a"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/README.md",
+      "mode": "100644",
+      "sizeBytes": 2683,
+      "gitBlobSha": "e904653fb1527c699161b617c402041be61158ee"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-hands-iteration.png",
+      "mode": "100644",
+      "sizeBytes": 1811372,
+      "gitBlobSha": "cd616fefe734b83dd72cde63e482c6768f60d0ef"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-idle-iteration.png",
+      "mode": "100644",
+      "sizeBytes": 1624336,
+      "gitBlobSha": "85bb3c6688461dc8e5224780a0b9f7a1f7c3c772"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-ready-iteration.png",
+      "mode": "100644",
+      "sizeBytes": 1834661,
+      "gitBlobSha": "c5bc278b1c72b75140b9dd03a388aa6c13946048"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/doorframe-iteration.png",
+      "mode": "100644",
+      "sizeBytes": 1895458,
+      "gitBlobSha": "a38cc047622a09b257ff5ffaa9664ef0b1c0046e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/parasite-iteration-a.png",
+      "mode": "100644",
+      "sizeBytes": 1632292,
+      "gitBlobSha": "e5217e4a9d3d2e2022dd848608a5c9ece65f1ce0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/parasite-iteration-b.png",
+      "mode": "100644",
+      "sizeBytes": 1650683,
+      "gitBlobSha": "f4b4a9bdf9a613600d995c978fbe92ab50fd0bef"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/stairs-iteration.png",
+      "mode": "100644",
+      "sizeBytes": 2171532,
+      "gitBlobSha": "4744b3368e6d82d6c5460b125a7eab6c51abfc11"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json",
+      "mode": "100644",
+      "sizeBytes": 30854,
+      "gitBlobSha": "1d6e6b5ac09e1907acacc648fed16007a5b76845"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
+      "mode": "100644",
+      "sizeBytes": 278513,
+      "gitBlobSha": "c112aada19373a2e9ba0fe8d2cfd06ab2ff32daa"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/index.html",
+      "mode": "100644",
+      "sizeBytes": 7217,
+      "gitBlobSha": "5d24f98a6bf04702a4a8bb0fb7fd84bd5724d459"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "mode": "100644",
+      "sizeBytes": 1688012,
+      "gitBlobSha": "b031d81c77836fa5713d15dfbb9e0d51ed0a8178"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "mode": "100644",
+      "sizeBytes": 1678695,
+      "gitBlobSha": "2b6c202cead70c953084bdc58b267b1c5cf43faa"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/art-pack.js",
+      "mode": "100644",
+      "sizeBytes": 47541,
+      "gitBlobSha": "edad89372e58454e16638457043644fc410da0fe"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/gallery.js",
+      "mode": "100644",
+      "sizeBytes": 6630,
+      "gitBlobSha": "22497d9527c4c031c3b608e2bff5e5b1aa71c71e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/png-renderer.js",
+      "mode": "100644",
+      "sizeBytes": 34355,
+      "gitBlobSha": "85e5b0189be824a96150879c6808c45a06c6c559"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.html",
+      "mode": "100644",
+      "sizeBytes": 2690291,
+      "gitBlobSha": "68877e5fe7dbf99853a0978123ef605953f47a8c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.json",
+      "mode": "100644",
+      "sizeBytes": 1305889,
+      "gitBlobSha": "6039c9901afd76ed68e22a445e4cbbb9bd381c3b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.md",
+      "mode": "100644",
+      "sizeBytes": 1284545,
+      "gitBlobSha": "5caf1e06b319f69333a3026f93482d693775e3d4"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE_ART_PROMPTS.json",
+      "mode": "100644",
+      "sizeBytes": 25504,
+      "gitBlobSha": "268d29ca1d85323ac1a690b452c9e80807c2d6d4"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/locomotion.png",
+      "mode": "100644",
+      "sizeBytes": 533319,
+      "gitBlobSha": "1169977c9fb42257035cd5874d2a6bb020968aa3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s01.png",
+      "mode": "100644",
+      "sizeBytes": 1511145,
+      "gitBlobSha": "059b39c1f10f6b7113e74f60091c08b919e82866"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s02.png",
+      "mode": "100644",
+      "sizeBytes": 1540994,
+      "gitBlobSha": "1e5aa2a02e5bca0ff09c95b6118cdc201a65ca75"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s03.png",
+      "mode": "100644",
+      "sizeBytes": 1323169,
+      "gitBlobSha": "91a81b29554c884568ab963ff9a4b421ae66c120"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s10.png",
+      "mode": "100644",
+      "sizeBytes": 1362800,
+      "gitBlobSha": "8c3ed66f7cc201c4a0a6fb59bada828aaa63b13e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s17.png",
+      "mode": "100644",
+      "sizeBytes": 1515206,
+      "gitBlobSha": "31a095d32a752568ff775e88fc459ae60e79e795"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s22.png",
+      "mode": "100644",
+      "sizeBytes": 1360368,
+      "gitBlobSha": "62b1c0ded9df02f359929e0db3055532526c60e3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/generate-mer-bible-20261126.mjs",
+      "mode": "100644",
+      "sizeBytes": 39118,
+      "gitBlobSha": "2c58f6e0abd78a93a3ce97a7eeb75556be117272"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/mer-des-chagrins-visual-admission-20261126.mjs",
+      "mode": "100644",
+      "sizeBytes": 9088,
+      "gitBlobSha": "4feb5b13035d13c3bb691019f2e84b390fa4d550"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/qa-mer-visual-canvas-20261126.mjs",
+      "mode": "100644",
+      "sizeBytes": 37160,
+      "gitBlobSha": "997099078e4e6eaa37e899a8187b50b34c48b47e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/verify-mer-png-renderer-20261126.mjs",
+      "mode": "100644",
+      "sizeBytes": 53407,
+      "gitBlobSha": "39c60c6d4cf3098d343b897db737bdadf97fe2d8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/verify-mer-sprite-metadata-20261126.py",
+      "mode": "100644",
+      "sizeBytes": 16783,
+      "gitBlobSha": "4ea4a6cc63fd6bfacd60d733211e1e2a3ffc4dc6"
     }
   ]
 }

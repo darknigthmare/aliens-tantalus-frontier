@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, writeFile, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile, rm, symlink } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { test } from 'node:test';
@@ -33,11 +33,25 @@ async function fixture(t) {
   }
   return { root, manifest, contents, inventory: compile(manifest) };
 }
-test('the independent recovery pin preserves every source path and excludes all of them from builds', () => {
+test('the independent recovery pin preserves every source path and excludes all of them from builds', async () => {
   const inventory = reviewedMerRecovery20261126();
-  assert.equal(inventory.files.size, 151);
-  assert.equal(inventory.manifest.totalBytes, 274780120);
+  assert.equal(inventory.files.size, 184);
+  assert.equal(inventory.manifest.totalBytes, 305804963);
   assert.equal(inventory.manifest.sourceCommit, 'e716f75318f243a981fdf6e64728cd6f039ad6dd');
+  // Preserve the complete original archive inventory, including record order and metadata.
+  const additionRoot = recoveryRoot + '/local-recovery-20261126/';
+  const previousFiles = inventory.manifest.files.filter(entry => !entry.path.startsWith(additionRoot));
+  assert.equal(previousFiles.length, 151);
+  const previousManifest = { ...inventory.manifest, fileCount: 151, totalBytes: 274780120, files: previousFiles };
+  assert.equal(sha(encode(previousManifest)), '6f583a70d181783abacfc4e661eb39624309b7d8e71b2ca1b54e3d84111d9622');
+  assert.equal(inventory.manifest.files.filter(entry => entry.path.startsWith(additionRoot)).length, 33);
+  // This archive-only change cannot alter any of the 160 original runtime entries
+  // or the 12 source-only files already published with the ten identified PNGs.
+  const runtimeBytes = await readFile(new URL('../dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json', import.meta.url));
+  assert.equal(sha(runtimeBytes), '49e4f088df6e7a4ca8a6a2d7ee693bb02ef92af2ac3fe2f6993346189252b070');
+  const runtime = JSON.parse(runtimeBytes);
+  assert.equal(runtime.files.length, 172);
+  assert.equal(runtime.files.filter(entry => !entry.path.startsWith('dlc/sea-of-sorrows-visual/recovered-sprites-20261126/')).length, 160);
   const filter = createBuildAssetFilter(process.cwd());
   for (const path of [...inventory.files.keys(), manifestPath, ...sourceFiles]) {
     assert.equal(merRecoveryPathAdmission20261126(path), true, path);
