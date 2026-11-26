@@ -1,0 +1,1170 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.12-sprites",
+  "date": "2026-11-26",
+  "status": "partial-reference-guided-continuation",
+  "fidelityPolicy": "Reference-guided reconstruction, not a pixel-identical 1:1 certification. Generated poses, inferred hidden geometry and game placement remain explicit adaptations.",
+  "previousManifest": {
+    "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+    "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923",
+    "originalPngs": 49,
+    "unchanged": true
+  },
+  "assets": [
+    {
+      "id": "daniels-work-walk-01",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1743872,
+      "gitBlobSha": "cb85913b7660a8e0771919179bdb9417d04343df",
+      "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1743872,
+        "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1171434,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          121,
+          32,
+          879,
+          1510
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        476,
+        1510
+      ],
+      "logicalHeight": 119.020462046,
+      "cyclePhase": 0,
+      "phaseName": "contact-near",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE transparent PNG sprite, frame 01 of an eight-frame unarmed walking cycle for Katherine Daniels in the Alien: Covenant DLC.\nInput image 1 is the exact identity, clothing, materials, proportions and rendering reference. Preserve her same face, short dark pixie haircut, mature natural features, grey ribbed sleeveless scoop-neck tank with the same tiny chest insignia, olive cargo trousers, belt, dark lace-up work boots and skin marks. Do not redesign or beautify her.\nChange only the body pose into a natural WALK to the RIGHT. Keep the same three-quarter camera angle, with face and torso oriented toward screen-right. Frame 01 is the FIRST CONTACT pose: the near leg reaches forward toward screen-right, its heel touching the ground and toe slightly raised; the far leg trails toward screen-left, its toe touching the ground with the heel raised. Both knees remain naturally relaxed. The near arm swings modestly backward and the far arm modestly forward, opposite their legs. Both hands are empty and fully formed. This is a measured walking stride, not running, kicking or lunging. Torso upright and calm.\nKeep the entire person, both boots and all hair within the canvas, with generous clear transparent padding. Use a vertical 1024 by 1536 canvas if possible, the body approximately 1350 pixels tall, top of head near y=100 and ground contact near y=1450; maintain this camera and scale for a sequence. Preserve realistic human anatomy, photographic materials and the same soft neutral lighting.\nTrue RGBA transparency: all pixels outside the physical human silhouette must have alpha 0. No background, no grey/brown halo, haze, spotlight, gradient, floor, platform or cast shadow. Opaque physical surfaces should have alpha 255, with only a narrow antialiased edge. No weapons, additional people, text, labels, borders or duplicate figures. Output exactly one full-body character in this single requested pose.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-02",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1713389,
+      "gitBlobSha": "027197ea1f056072a040d86222b07f3490485f8c",
+      "sha256": "447b30478fc095636781df1e5a84b28e47b8e77d08502bb14e364e7e1399f8b5",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1713389,
+        "sha256": "447b30478fc095636781df1e5a84b28e47b8e77d08502bb14e364e7e1399f8b5",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1179299,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          117,
+          37,
+          824,
+          1492
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        486,
+        1492
+      ],
+      "logicalHeight": 117.168316832,
+      "cyclePhase": 0.125,
+      "phaseName": "down-near",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 02 / 08 — down-near.\nWeight has just transferred onto the NEAR leg ahead of the hip toward screen-right: its sole is planted flat and knee gently flexed. The FAR trailing foot is pushing off on its toe behind, heel high, preparing to leave the ground. Body lowered slightly by the natural knee bend. NEAR arm back, FAR arm forward, both starting to return inward.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-03",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-03.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1629614,
+      "gitBlobSha": "abb925e3ccf626a5fa2ea179c4ae6adf13798ff7",
+      "sha256": "d0b83890bb9914de1643f2eefcf065a1c147307f1ccbda4d92c9c6f55b9c7493",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1629614,
+        "sha256": "d0b83890bb9914de1643f2eefcf065a1c147307f1ccbda4d92c9c6f55b9c7493",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1204631,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          231,
+          17,
+          806,
+          1510
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        478,
+        1510
+      ],
+      "logicalHeight": 120.228382838,
+      "cyclePhase": 0.25,
+      "phaseName": "passing-near",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 03 / 08 — passing-near.\nThe NEAR leg is the grounded support under the hip, knee almost straight. The FAR leg swings forward past it with a bent knee; the FAR boot is lifted just above the ground under the pelvis. Legs close together but visibly separate. Arms pass near their neutral positions alongside the torso.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-04",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-04.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1645209,
+      "gitBlobSha": "28c5b595f0f4e1749e4010a062c689d18b009179",
+      "sha256": "2d632a59899ae37323d42be276ec8d77384131152545f239d9249d4f5685b9a7",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1645209,
+        "sha256": "2d632a59899ae37323d42be276ec8d77384131152545f239d9249d4f5685b9a7",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1198146,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          140,
+          20,
+          917,
+          1492
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        491,
+        1492
+      ],
+      "logicalHeight": 118.537293729,
+      "cyclePhase": 0.375,
+      "phaseName": "up-near",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 04 / 08 — up-near.\nThe NEAR support leg has moved slightly behind the hip toward screen-left; its heel lifts onto the toe. The FAR swinging thigh is ahead toward screen-right, knee mildly bent and lower leg beginning to extend forward, boot off the ground. Torso rises slightly. NEAR arm starts swinging forward; FAR arm starts swinging backward.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-05",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1713655,
+      "gitBlobSha": "d31d5883bf3a1736dcd61d6ff56048e6bee1ef54",
+      "sha256": "8c3d6c0e566b3eba6cdd2b6c3e674a6f05310b9c69130c98f4994632179e4da3",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1713655,
+        "sha256": "8c3d6c0e566b3eba6cdd2b6c3e674a6f05310b9c69130c98f4994632179e4da3",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1171501,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          87,
+          18,
+          912,
+          1503
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        474,
+        1503
+      ],
+      "logicalHeight": 119.584158416,
+      "cyclePhase": 0.5,
+      "phaseName": "contact-far",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 05 / 08 — contact-far.\nThe FAR leg now reaches forward toward screen-right, heel meeting the ground and toe slightly raised. The NEAR leg trails toward screen-left, toe on the ground and heel lifted. The NEAR arm swings forward; FAR arm backward. This is the opposite-foot contact from image 2. Keep the face pointing RIGHT; do NOT mirror the canvas or duplicate the first contact.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-06",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1677529,
+      "gitBlobSha": "0ee0e7d418e97df8efe70995f7a1614992290db6",
+      "sha256": "6717eda789a87d1845373db28d2a46dc7d819a1047941c988391286d645d2894",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1677529,
+        "sha256": "6717eda789a87d1845373db28d2a46dc7d819a1047941c988391286d645d2894",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182252,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          108,
+          33,
+          845,
+          1471
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 2,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        500,
+        1471
+      ],
+      "logicalHeight": 115.799339934,
+      "cyclePhase": 0.625,
+      "phaseName": "down-far",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 06 / 08 — down-far.\nWeight has just transferred onto the FAR leg ahead of the hip toward screen-right: its sole is flat and knee gently flexed. The NEAR trailing foot pushes off on its toe toward screen-left, heel high, preparing to lift. Torso lowers slightly. NEAR arm forward, FAR arm back, both starting to return inward.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.\n\nPOSE CORRECTION, with Image 3 as an additional visual pose reference: Image 3 is frame 04 and already has the correct NEAR/FAR limb ordering for this half of the gait. Keep that ordering. The foreground arm attached to the nearer shoulder with the visible abrasion must swing FORWARD toward screen-right (its hand ahead of the waist), while the farther arm trails toward screen-left. The foreground/NEAR leg with the prominent large cargo pocket must trail BEHIND toward screen-left; bend its knee slightly and raise the heel so only its toe contacts the ground line. The background/FAR leg must be the FORWARD weight-bearing leg toward screen-right: bend this knee slightly and lower its whole boot sole to the same ground line, flat under its forward knee. This is the landing DOWN after far-leg contact, NOT the near-leg-forward pose in Image 2. Preserve the same right-facing head and torso; do not mirror the image. Never repeat Image 2's foreground-leg-forward arrangement. Compared with Image 3, lower the torso a little and plant the forward boot flat. All other exact identity/costume/camera/transparency instructions above remain unchanged.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-04.png",
+          "role": "additional-correct-limb-order-reference",
+          "sha256": "2d632a59899ae37323d42be276ec8d77384131152545f239d9249d4f5685b9a7"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ],
+      "rejectedAttempts": [
+        {
+          "attempt": 1,
+          "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 06 / 08 — down-far.\nWeight has just transferred onto the FAR leg ahead of the hip toward screen-right: its sole is flat and knee gently flexed. The NEAR trailing foot pushes off on its toe toward screen-left, heel high, preparing to lift. Torso lowers slightly. NEAR arm forward, FAR arm back, both starting to return inward.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+          "reason": "Wrong near-leg-forward limb ordering repeated the first half of the walk.",
+          "sha256": "3611bd52678e86e0ec8c9c08b2d22f0223afc894a32347348e2220170532197c",
+          "includedInProduction": false
+        }
+      ]
+    },
+    {
+      "id": "daniels-work-walk-07",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1648195,
+      "gitBlobSha": "6e2768c6261a4b165feab88481ea406552fc07e9",
+      "sha256": "b288688702942f608003cb399315eeef81dc66d5bc444080e0ef43bcfba34997",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1648195,
+        "sha256": "b288688702942f608003cb399315eeef81dc66d5bc444080e0ef43bcfba34997",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182682,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          222,
+          25,
+          795,
+          1507
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        469,
+        1507
+      ],
+      "logicalHeight": 119.342574257,
+      "cyclePhase": 0.75,
+      "phaseName": "passing-far",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 07 / 08 — passing-far.\nThe FAR leg is the grounded support under the hip, knee almost straight. The NEAR leg swings forward past it with a bent knee; the NEAR boot is lifted just above the ground under the pelvis. Legs close together but separate. Arms pass near their neutral positions beside the torso. Opposite-leg passing pose from frame 03.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "daniels-work-walk-08",
+      "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-08.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1740563,
+      "gitBlobSha": "d68f3cd832c0d957e162d441cb679dd40ca60af2",
+      "sha256": "4de54f842fdf692c2acaa42b67e680a0f114da42d3d19a3b34fcfd0ad55b1996",
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1740563,
+        "sha256": "4de54f842fdf692c2acaa42b67e680a0f114da42d3d19a3b34fcfd0ad55b1996",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176127,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          121,
+          13,
+          917,
+          1489
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "category": "character-animation",
+      "kind": "human",
+      "rendererKey": "daniels-work",
+      "state": "walk",
+      "availableStates": [
+        "walk"
+      ],
+      "runtimeAdmission": "cycle-frame",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ],
+      "sourceFacing": 1,
+      "anchor": [
+        474,
+        1489
+      ],
+      "logicalHeight": 118.859405941,
+      "cyclePhase": 0.875,
+      "phaseName": "up-far",
+      "generationPrompt": "Use case: identity-preserve.\nAsset type: ONE original transparent PNG frame in an eight-frame unarmed walking cycle for Katherine Daniels, Alien: Covenant DLC.\nImage 1 is the original selected V011 sprite: exact identity, face, short dark pixie hair, grey ribbed sleeveless tank with tiny chest badge, olive cargo trousers, belt, weathered dark work boots, physical build and skin marks. Image 2 is frame 01 of this walking cycle: lock its photographic rendering, facial expression, costume geometry, scale, viewpoint and lighting. Preserve both references' character; change only limb placement and small natural walking body motion. The same person must appear in every frame.\nUse the SAME vertical 1024×1536 canvas, camera framing, head size, body scale and ground line as image 2. Keep full hair, fingertips and both complete boots inside the frame with clear transparent margin. Keep head and torso aimed to screen-RIGHT in the same three-quarter side view. Torso mostly upright, measured natural walk, no running, kicking or lunging. Both hands empty, arms swing gently opposite the legs. Do not mirror the face/canvas or swap costume details.\nRequested phase: 08 / 08 — up-far.\nThe FAR support leg has moved slightly behind the hip toward screen-left; its heel lifts onto its toe. The NEAR swinging thigh is ahead toward screen-right, knee mildly bent and lower leg beginning to extend forward, boot above the ground. Torso rises slightly. NEAR arm starts swinging backward; FAR arm forward. This must lead naturally back into the NEAR-leg-forward first contact.\nTrue RGBA alpha cutout. Outside the physical body silhouette must be entirely alpha 0: no grey/brown halo, haze, background, gradient, spotlight, floor, cast shadow or stage. Clothing/skin opaque except narrow antialias boundary. No weapons, added objects, labels, text, borders, other figures or multiple poses. Exactly ONE complete human sprite.",
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+          "role": "generated-identity-and-costume-reference",
+          "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+          "filmEvidenceManifest": "assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "path": "assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+          "role": "generated-camera-scale-and-cycle-reference",
+          "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc"
+        }
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "visualReview": "Complete single silhouette and empty hands; costume and right-facing identity retained. Eight-frame alpha-composited review checks opposite limb order. Phase 06 was regenerated to correct its first attempt.",
+      "limitations": [
+        "This walking pose is generated from the selected V011 sprite, not an observed frame or motion capture from the film.",
+        "Unseen garments and boots inherit the reconstruction limits of the V011 source.",
+        "Separately generated poses retain small shape and facial variations; foot contact and arm trajectories are approximate.",
+        "Only ordinary unarmed player walking in the seven declared rooms is admitted; no running, armed or special-state animation is supplied.",
+        "Pixel-identical 1:1 film fidelity is not certified."
+      ]
+    },
+    {
+      "id": "prop-lander-tank-rack",
+      "gitBlobSha": "915afdb7a5d7825639c653724a40bb2c24071115",
+      "sha256": "dd82da68c4903b088a679b727683776cffa8d2c4f7f8a9934703c4b5afcc0470",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "catalogOnly": true,
+      "rooms": [],
+      "limitations": [
+        "Primary production design render; screen-used construction/material variation not independently verified.",
+        "The three-cylinder rack is documented; the portable fuelcase in the DLC has not been identified with it, so this asset stays catalogue-only.",
+        "Hidden rear geometry and unreadable small marks cannot be certified 1:1."
+      ],
+      "generationPrompt": "Use case: product-mockup. Asset type: one realistic transparent game prop cutout for Alien: Covenant (2017). Reference image role: primary set designer Tony Drew's documented production design for Covenant Lander Tanks & Racks, Loading Bay. Reproduce ONLY the ORANGE THREE-CYLINDER RACK ON THE RIGHT of the source, as ONE complete assembled prop. Preserve its EXACT visible architecture and proportions: three horizontally oriented orange cylindrical pressure tanks stacked vertically, rounded orange end caps, two parallel muted olive retaining straps around each tank, black-and-yellow diagonal warning bands near the endcaps, narrow grey metal vertical support frame and floor feet with triangular openings in the two grey side base plates. Same front three-quarter view as the orange rack in the reference, so the left rounded end caps and main long cylinder faces are readable. Keep the visible frame bars, tank spacing, relative width and height, brackets and source colors. No other tank rack; do NOT use the blue cylinders on the left. Remove the grey scale human figures completely. Interpret only the observed design as realistic practical painted metal with very subtle material texture; do not add machinery, valves, pipes, decals, lettering or imaginary new features. Isolate the complete assembled rack, all base feet included, centered with generous 8% empty transparent margins around ALL sides. True PNG CUTOUT with alpha exactly zero for the entire background and every canvas edge; prop fully opaque, only a narrow antialiased silhouette edge partial alpha. No ground plane, no shadow, no white/grey matte or haze, no drawn checkerboard. One assembled object only, no people, no text labels, no border, no scene.",
+      "inputReferences": [
+        {
+          "file": "lander-tanks-full.webp",
+          "url": "https://m1.22slides.com/tonydrew/intlanderpayloadbaytankrack160217screengrab-copy-2115646.jpg?f=webp&w=954&s=2690a071ef1e34c9188e587d60ce94e3",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew, Alien: Covenant set designer; Covenant Lander – Tanks & Racks – Loading Bay"
+        }
+      ],
+      "visualReview": "Complete single assembly, original perspective, no person or weapon; exterior alpha zero and entire silhouette inside canvas.",
+      "version": 1,
+      "path": "assets/openai/sprites/alien-covenant-v012/prop-lander-tank-rack.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2125662,
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2125662,
+        "sha256": "dd82da68c4903b088a679b727683776cffa8d2c4f7f8a9934703c4b5afcc0470",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 730895,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          150,
+          100,
+          878,
+          1507
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "category": "prop",
+      "kind": "prop",
+      "state": "idle",
+      "availableStates": [
+        "idle"
+      ],
+      "runtimeAdmission": "catalogue-only"
+    },
+    {
+      "id": "prop-covenant-sail-winch",
+      "gitBlobSha": "fdbeb20531a398a2e43bcb4e6cb5ddc5926306d2",
+      "sha256": "7bc649a3c08ec49c0e4fef3f9c167046882ad76c0d4b2ffee530e10efb448a6b",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "catalogOnly": true,
+      "rooms": [],
+      "limitations": [
+        "Primary final production design render, with associated sail-section working drawing; exact screen-used appearance not independently verified.",
+        "Complete machinery retained as its documented assembly; not substituted for the DLC's portable tether prop.",
+        "Hidden rear geometry and tiny panel writing cannot be certified 1:1."
+      ],
+      "generationPrompt": "Use case: product-mockup. Asset type: ONE isolated transparent film prop sprite for Alien: Covenant (2017). Reference image role: Tony Drew's final production design for USCSS Covenant Ship Exterior Winch. Faithfully reproduce this EXACT assembled winch machinery, same FRONT-LEFT THREE-QUARTER perspective and visible construction, as a realistic practical prop cutout. Preserve its broad flat pale grey grated mounting plate, the enormous left cylindrical drum housing with circular perforated dark end plate, horizontal dark grey central drum, the boxy off-white equipment enclosure at front right, its rectangular grey vent and small panels, all four black circular handwheels: the two at the drum ends and the two on vertical operator stems, yellow grab handles and tiny yellow accents, black/grey rail members, small machinery brackets and the exact mounting-foot positions. Keep all the source silhouette and proportion relationships, including the entire large base plate and all upper wheels. Do not alter the design, add parts, add a cable coil or invent new labels. Render the observed surfaces as restrained metal and painted hardware, natural neutral light, no dramatic cinematic effects. Output ONE complete assembly only, no surroundings, human, spacecraft, extra props or explanatory words. Center on a landscape canvas with at least 8% EMPTY transparent margin past the entire silhouette on every side. Genuine clean transparent RGBA PNG: background pixels and all canvas corners alpha EXACTLY ZERO; object opaque; only the narrow silhouette antialiasing may be translucent. No ground, no shadow, no halo, no black/white/grey background or painted checkerboard, no border, no title. Preserve the complete source design; no crop. Image 1 is the finished design and governs appearance, material and colors. Image 2 is the primary working drawing explicitly titled EXT. COVENANT SAIL SECTION – WINCH ARRANGEMENT; it confirms the structure and proportions only. Blue technical areas in the drawing designate VFX construction, NOT blue paint; retain the final-render colors of Image 1. Exclude external suspension wires that leave the source frame; output the complete self-contained machinery and its mounting plate. Do not reproduce the yellow suited scale figure or any blueprint dimension/text.",
+      "inputReferences": [
+        {
+          "file": "exterior-winch-final-full.webp",
+          "url": "https://m1.22slides.com/tonydrew/newwinch160627-2115666.jpg?f=webp&w=1294&s=77e9a3a52576aba072e47fb7db55810c",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew, Alien: Covenant set designer; USCSS Covenant Ship Exterior Winch – Finished Design"
+        },
+        {
+          "file": "exterior-winch-working-drawing.webp",
+          "url": "https://m1.22slides.com/tonydrew/img24ext-covenent-sail-sectionsht002awinch-arrangement110a0reltd160628-copy-2115665.jpg?f=webp&w=953&s=1fcb3ee54fdfa3fc7fe69eacab8bf931",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew; EXT. COVENANT SAIL SECTION – WINCH ARRANGEMENT, scale 1:10, sheet 002A, 2016-06-28"
+        }
+      ],
+      "visualReview": "Complete single assembly, original perspective, no person or weapon; exterior alpha zero and entire silhouette inside canvas.",
+      "version": 2,
+      "framingEditPrompt": "Use case: precise-object-edit. This is a FRAMING REPAIR of Image 1, an already approved Alien: Covenant sail winch prop. Preserve its exact machinery, colors, surfaces, proportions, orientation, all four handwheels, the drum, the two boot clamp pairs, the front control enclosure and the grated mounting plate. Do NOT redesign anything or add new components. The lower mounting plate is accidentally cut off at the bottom image border. Use Image 2, the original final production design, ONLY to complete that small missing lower edge/corner of the base plate exactly. Place the ENTIRE completed assembly substantially smaller and centered inside a fresh wide landscape transparent canvas, with at least 8% EMPTY TRANSPARENT PADDING on all four sides; especially ensure the lowest base corner is clearly INSIDE the canvas with a broad transparent strip below it. The highest handwheel and both side extremities must also have visible empty space beyond them. No part of the physical object may touch a canvas edge. Keep the same three-quarter perspective, no recamera or new lighting. Genuine transparent PNG cutout: every background pixel alpha ZERO; object opaque, only thin antialiased edges. No cast shadow, no grey backdrop, no haze, no matte, no floor, no text. Change only completeness of the clipped base edge and canvas framing, keeping the source prop design intact.",
+      "path": "assets/openai/sprites/alien-covenant-v012/prop-covenant-sail-winch.png",
+      "width": 1736,
+      "height": 906,
+      "bytes": 1250042,
+      "alphaQA": {
+        "width": 1736,
+        "height": 906,
+        "bytes": 1250042,
+        "sha256": "7bc649a3c08ec49c0e4fef3f9c167046882ad76c0d4b2ffee530e10efb448a6b",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1055262,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          246,
+          129,
+          1521,
+          821
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "category": "prop",
+      "kind": "prop",
+      "state": "idle",
+      "availableStates": [
+        "idle"
+      ],
+      "runtimeAdmission": "catalogue-only"
+    },
+    {
+      "id": "prop-identification",
+      "path": "assets/openai/sprites/alien-covenant-v012/prop-identification.png",
+      "width": 887,
+      "height": 1774,
+      "bytes": 684210,
+      "gitBlobSha": "91e87a54c8b2868868d16650a778d3708feac697",
+      "sha256": "13a018d850b41de815b002605385dd5206a9330e7a2c6c2ea0b459e3c60d3130",
+      "alphaQA": {
+        "width": 887,
+        "height": 1774,
+        "bytes": 684210,
+        "sha256": "13a018d850b41de815b002605385dd5206a9330e7a2c6c2ea0b459e3c60d3130",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1292971,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          272,
+          49,
+          616,
+          1630
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "category": "prop",
+      "kind": "prop",
+      "state": "idle",
+      "availableStates": [
+        "idle"
+      ],
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 2,
+      "runtimeAdmission": "instance-scoped",
+      "instance": "shaw-f10-identification",
+      "rooms": [
+        "shaw"
+      ],
+      "anchor": [
+        444.0,
+        1630
+      ],
+      "logicalHeight": 100,
+      "generationPrompt": "Use case: precise-object-edit.\nAsset type: transparent game prop sprite, prop-identification.\nEdit target: Image 1 is the generated isolated Shaw identification plaque. Image 2 is the actual film reference and is authoritative for proportions. Correct only the oversized bead chain in Image 1: the ball chain must be a fine identification-tag ball chain, with beads about one-thirtieth of the plaque's width, as in the film, instead of large necklace beads. Reduce the thickness of the metal joining link proportionately. Keep the complete simple hanging loop, plaque size and shape, perimeter, dark face, text \"DR. E. SHAW\", placement and perspective otherwise unchanged. Keep one plaque only. Do not add extra inscriptions, objects, a hand, scenery or a floor.\nBackground: a truly transparent PNG with alpha 0 across every empty background area and between the thin chain segments. The plaque and chain must be opaque apart from exact-edge antialiasing. No haze, shadow, glow or painted checkerboard. No clipping; retain margins.",
+      "generationIterations": [
+        {
+          "version": 1,
+          "prompt": "Use case: product-mockup.\nAsset type: one transparent-background isolated game prop sprite for the Alien: Covenant DLC, prop-identification.\nPrimary request: Carefully reproduce ONLY Dr. Elizabeth Shaw's physical identification plaque and its bead chain as visible in the supplied actual Alien: Covenant film reference. Image 1 is the closer film still and is the primary reference for the plaque's face and outline. Image 2 is another trailer frame and is supporting evidence for the ball chain and overall scale. This is a faithful reconstruction of this specific movie prop, not a redesigned generic military dog tag.\nSubject and materials: a single small elongated rectangular identification plaque, rounded corners, thin silver metallic perimeter, dark charcoal face with the narrow pale lettered bands running in the direction shown in Image 1, small circular attachment at the top, fine silver ball chain. Preserve the proportions, border width, visible attachment, dark face and worn wet metal appearance of the reference. On the principal identity line render only the attested name \"DR. E. SHAW\"; the smaller inscriptions are unresolved in the reference, so retain their small indistinct physical marks without inventing numbers, slogans or a new readable title. Do not add a second plaque if it is not visibly distinct in Image 1.\nPose/framing: show one complete plaque face toward the camera, very slight three-quarter depth, suspended vertically in the same orientation as the close movie still, with its single fine ball chain gathered in a compact simple loop above it. Center this one prop and leave an empty margin on every side. The reconstructed hidden chain portion must be simple and unobtrusive. No person, no hand, no sleeve, no lamp, no water splash, no environment, no display stand.\nStyle: realistic high-detail movie-prop cutout suitable to downscale into the existing game, crisp coherent silhouette, modest neutral illumination to make the original dark and silver materials readable. Keep the subject opaque.\nBackground/alpha: actual transparent PNG. Every background pixel, including holes between chain beads and the loop interior, must have alpha 0. Subject alpha 255 except antialiasing only on exact edges. No white, grey or checkerboard painted backdrop, no atmospheric haze, no glow, no floor plane and no cast shadow. One object assembly only, no alternate views, no labels or decorative text outside the prop.",
+          "referenceCount": 2,
+          "status": "superseded",
+          "reason": "Ball-chain beads too thick relative to the film reference."
+        },
+        {
+          "version": 2,
+          "prompt": "Use case: precise-object-edit.\nAsset type: transparent game prop sprite, prop-identification.\nEdit target: Image 1 is the generated isolated Shaw identification plaque. Image 2 is the actual film reference and is authoritative for proportions. Correct only the oversized bead chain in Image 1: the ball chain must be a fine identification-tag ball chain, with beads about one-thirtieth of the plaque's width, as in the film, instead of large necklace beads. Reduce the thickness of the metal joining link proportionately. Keep the complete simple hanging loop, plaque size and shape, perimeter, dark face, text \"DR. E. SHAW\", placement and perspective otherwise unchanged. Keep one plaque only. Do not add extra inscriptions, objects, a hand, scenery or a floor.\nBackground: a truly transparent PNG with alpha 0 across every empty background area and between the thin chain segments. The plaque and chain must be opaque apart from exact-edge antialiasing. No haze, shadow, glow or painted checkerboard. No clipping; retain margins.",
+          "referenceCount": 2,
+          "status": "selected",
+          "change": "Reduced bead chain and joining link thickness to better match observed proportions."
+        }
+      ],
+      "inputReferences": [
+        {
+          "id": "shaw-tags-avpcentral",
+          "role": "primary-visual-reference",
+          "kind": "film-still-on-secondary-host",
+          "pageUrl": "https://www.avpcentral.com/katherine-daniels",
+          "imageUrl": "https://www.avpcentral.com/images/daniels/daniels-shaw-tags.webp",
+          "visualObserved": "Daniels holding a dark elongated rectangular identification plaque with metallic rim, attachment hole and fine ball chain; small pale longitudinal inscription bands.",
+          "dimensions": [
+            1350,
+            900
+          ]
+        },
+        {
+          "id": "shaw-tags-slashfilm",
+          "role": "scene-and-chain-corroboration",
+          "kind": "official-trailer-frame-on-press-host",
+          "pageUrl": "https://www.slashfilm.com/549543/alien-covenant-trailer-breakdown-2/",
+          "imageUrl": "https://www.slashfilm.com/wp/wp-content/images/Alien-Covenant-Trailer-Breakdown-21.jpg",
+          "visualObserved": "Same discovery scene and silver bead chain; plaque mostly obscured by hand.",
+          "dimensions": [
+            2560,
+            1080
+          ]
+        }
+      ],
+      "limitations": [
+        "Small reference inscription bands are not sufficiently resolved to certify exact typography; only the identity DR. E. SHAW was explicitly requested.",
+        "Back face, hardware hidden by the hand and total chain length are not established by the available views.",
+        "Complete hanging loop is a game presentation reconstruction.",
+        "Dimensions in game remain an adaptation; final runtime admission and scaling require root/inventory integration review.",
+        "No 1:1 certification."
+      ],
+      "visualReview": "Original selected PNG inspected for complete silhouette and actual alpha compositing. Exact existing prop instance admission only."
+    },
+    {
+      "id": "prop-microscope",
+      "path": "assets/openai/sprites/alien-covenant-v012/prop-microscope.png",
+      "width": 1305,
+      "height": 1206,
+      "bytes": 885619,
+      "gitBlobSha": "b1d52cde7e574a26ce3b9146d33ddacd6075ba06",
+      "sha256": "d3b4084ca728ceeba4e5b2c67313a30506e448acfa7948e0b8749fb385a800e1",
+      "alphaQA": {
+        "width": 1305,
+        "height": 1206,
+        "bytes": 885619,
+        "sha256": "d3b4084ca728ceeba4e5b2c67313a30506e448acfa7948e0b8749fb385a800e1",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1147858,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          250,
+          31,
+          1084,
+          1187
+        ],
+        "alphaThreshold": 32,
+        "pass": true
+      },
+      "category": "prop",
+      "kind": "prop",
+      "state": "idle",
+      "availableStates": [
+        "idle"
+      ],
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "version": 1,
+      "runtimeAdmission": "instance-scoped",
+      "instance": "workshop-f10-12",
+      "rooms": [
+        "workshop"
+      ],
+      "anchor": [
+        667.0,
+        1187
+      ],
+      "logicalHeight": 100,
+      "generationPrompt": "Use case: reference-grounded prop cutout.\nAsset: prop-microscope, one standalone transparent PNG sprite for the Alien: Covenant DLC.\nReproduce only the physical microscope which David is looking into in the supplied actual film frame. The target instrument is immediately under his face at the center-left of the reference. Preserve the specific proportions and arrangement of this handmade antique-looking brass instrument. Use the film photograph as the visual authority, not a modern laboratory microscope or a generic Victorian microscope.\n\nVisible structure to preserve: the tall straight brass support column on the right; the small dark eyepiece and suspended tapering optical body to its left; the thin articulated brackets and small adjustment hardware around the column; the tilted round reflector on a slender upright at the far left; the low narrow horizontal frame members and the broad shallow oval lower support visible at the bottom. Retain the exact relative spacing, heights, angles and silhouette visible in the photograph. Use aged dark brass, restrained warm metallic highlights and dark optical surfaces. Render only surfaces belonging to the microscope; leave out the adjacent amber spheres, their separate specimen stands, the bone exhibit, David, his hands, the glowing wall lamp, the table and the whole room. Do not add a modern rotary objective turret, electronics, cables, a new maker logo or decorative engraving. Where the bottom edge of the instrument is cut by the film framing, complete only that small hidden contour conservatively without inventing a new large pedestal.\n\nPose and view: same three-quarter orientation as the supplied film frame, upright and standing stationary, complete single object, centered with generous empty margins and every part fully inside the image. The column remains to the viewer's right and round reflector to the viewer's left. Neutral modest illumination should reveal the observed dark brass surfaces while keeping the shapes and physical construction as close to the reference as possible. Realistic coherent movie-prop sprite, fine readable edges at small game scale. No additional views, no contact sheet, no captions.\n\nTransparency: true transparent PNG, alpha 0 in every empty background region and all openings between the thin struts, alpha 255 over opaque brass and optical housing except exact-edge antialiasing. No white veil, painted checkerboard, grey background, haze, glow, floor plane or cast shadow. One connected instrument assembly only.",
+      "generationIterations": [
+        {
+          "version": 1,
+          "prompt": "Use case: reference-grounded prop cutout.\nAsset: prop-microscope, one standalone transparent PNG sprite for the Alien: Covenant DLC.\nReproduce only the physical microscope which David is looking into in the supplied actual film frame. The target instrument is immediately under his face at the center-left of the reference. Preserve the specific proportions and arrangement of this handmade antique-looking brass instrument. Use the film photograph as the visual authority, not a modern laboratory microscope or a generic Victorian microscope.\n\nVisible structure to preserve: the tall straight brass support column on the right; the small dark eyepiece and suspended tapering optical body to its left; the thin articulated brackets and small adjustment hardware around the column; the tilted round reflector on a slender upright at the far left; the low narrow horizontal frame members and the broad shallow oval lower support visible at the bottom. Retain the exact relative spacing, heights, angles and silhouette visible in the photograph. Use aged dark brass, restrained warm metallic highlights and dark optical surfaces. Render only surfaces belonging to the microscope; leave out the adjacent amber spheres, their separate specimen stands, the bone exhibit, David, his hands, the glowing wall lamp, the table and the whole room. Do not add a modern rotary objective turret, electronics, cables, a new maker logo or decorative engraving. Where the bottom edge of the instrument is cut by the film framing, complete only that small hidden contour conservatively without inventing a new large pedestal.\n\nPose and view: same three-quarter orientation as the supplied film frame, upright and standing stationary, complete single object, centered with generous empty margins and every part fully inside the image. The column remains to the viewer's right and round reflector to the viewer's left. Neutral modest illumination should reveal the observed dark brass surfaces while keeping the shapes and physical construction as close to the reference as possible. Realistic coherent movie-prop sprite, fine readable edges at small game scale. No additional views, no contact sheet, no captions.\n\nTransparency: true transparent PNG, alpha 0 in every empty background region and all openings between the thin struts, alpha 255 over opaque brass and optical housing except exact-edge antialiasing. No white veil, painted checkerboard, grey background, haze, glow, floor plane or cast shadow. One connected instrument assembly only.",
+          "referenceCount": 1,
+          "status": "selected",
+          "tool": "image_gen.imagegen"
+        }
+      ],
+      "inputReferences": [
+        {
+          "id": "david-microscope-bluscreens-43",
+          "role": "primary-visual-reference",
+          "kind": "film-frame-on-secondary-host",
+          "pageUrl": "https://www.bluscreens.net/alien-covenant.html",
+          "imageUrl": "https://www.bluscreens.net/uploads/1/4/8/9/14897402/aliencovenant43_orig.jpg",
+          "sha256": "9a18522ffc2678a19e4f8cee1bb6d3374cba064de4bf27cb4ba0724c89c76477",
+          "dimensions": [
+            1100,
+            619
+          ],
+          "inspected": true,
+          "visualObserved": "David looks into a dark brass instrument with a tall right column, left tilted circular reflector, suspended optical body and fine frame members. The lower edge of the broad shallow base is partly hidden by the film framing."
+        }
+      ],
+      "limitations": [
+        "The lower contour of the base is partly hidden by the film frame and was conservatively reconstructed.",
+        "The available screenshot does not resolve every adjustment fastener, optical detail, hidden rear surface or manufacturer marking.",
+        "Neutral prop illumination replaces the dramatic film lighting; dark brass and observed arrangement are retained.",
+        "This is an isolated game presentation; scene placement and scale remain adaptations.",
+        "The unrelated field-biology microscope documented by Human Media as unseen in the final film was not used.",
+        "No 1:1 certification."
+      ],
+      "visualReview": "Original selected PNG inspected for complete silhouette and actual alpha compositing. Exact existing prop instance admission only."
+    }
+  ],
+  "cycles": [
+    {
+      "id": "daniels-work-walk",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "angularFrequency": 11,
+      "frames": [
+        "daniels-work-walk-01",
+        "daniels-work-walk-02",
+        "daniels-work-walk-03",
+        "daniels-work-walk-04",
+        "daniels-work-walk-05",
+        "daniels-work-walk-06",
+        "daniels-work-walk-07",
+        "daniels-work-walk-08"
+      ]
+    }
+  ],
+  "geometryReview": {
+    "commonSourcePixelScale": 0.08052805280528053,
+    "basis": "V011 Daniels idle logicalHeight 122 divided by its 1515-pixel visible height.",
+    "ground": "Per-frame visible bottom at alpha threshold 32.",
+    "horizontalOrigin": "Reviewed pelvis/waist centre in each original frame; no PNG pixel changes.",
+    "logicalHeight": "visibleHeight * commonSourcePixelScale; per-frame height differences preserve natural rise/fall."
+  },
+  "blockedCarriedForward": [
+    {
+      "id": "weapon-f90",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-beretta",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-ar15",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-eaa",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-shotgun",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "xenomorph",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "other"
+    },
+    {
+      "id": "weapon-sl40",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-f90",
+      "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+    },
+    {
+      "id": "weapon-inox",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-beretta",
+      "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+    },
+    {
+      "id": "xenomorph-attack",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "xenomorph",
+      "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
+    },
+    {
+      "id": "prop-classicalstatue",
+      "status": "blocked-generation",
+      "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
+    }
+  ],
+  "integrationStatus": "Reviewed source admissions; final validation evidence is recorded separately in docs/covenant/PROVENANCE_V012.json."
+}

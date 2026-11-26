@@ -5,6 +5,7 @@ on:
       - 'modules/covenant/**'
       - 'dlc/covenant/**'
       - 'assets/openai/sprites/alien-covenant-v011/**'
+      - 'assets/openai/sprites/alien-covenant-v012/**'
       - 'docs/covenant/**'
       - 'src/title-screen-v61.js'
       - 'index.html'
@@ -20,6 +21,7 @@ on:
       - 'modules/covenant/**'
       - 'dlc/covenant/**'
       - 'assets/openai/sprites/alien-covenant-v011/**'
+      - 'assets/openai/sprites/alien-covenant-v012/**'
       - 'docs/covenant/**'
       - 'src/title-screen-v61.js'
       - 'index.html'
@@ -81,6 +83,12 @@ jobs:
           PYTHONDONTWRITEBYTECODE: '1'
         run: |
           "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-v011.py --root dist --source-root . --output "$RUNNER_TEMP/covenant-v011-evidence/browser"
+      - name: Cumulative original PNG pack and offline animation catalogue
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/package-covenant-sprites-v012.py --output "$RUNNER_TEMP/covenant-v012-pack" 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/package-v012.log"
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-catalogue-v012.py --catalogue "$RUNNER_TEMP/covenant-v012-pack/ALIEN_COVENANT_SPRITES_V0.12/index.html" --output "$RUNNER_TEMP/covenant-v011-evidence/catalogue"
       - name: Preserve logs, reached-scene screenshots and declared fixture captures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -73,7 +73,8 @@ def observation(page):
         actions:e.state.actions.slice(),visited:e.state.visited.slice(),
         paused:e.paused,dead:e.dead,grounded:e.grounded(),work:!!e.work,
         solids:e.solidProps().filter(p=>p.solid).map(p=>({x:p.x,z:p.z,w:p.w,h:p.h})),
-        spriteDraws:{...q.renderer.spriteDrawsV011}};
+        spriteDraws:{...q.renderer.spriteDrawsV011},
+        cycleFrameDraws:{...q.renderer.spriteFrameDrawsV012}};
     }""")
 
 
@@ -110,7 +111,7 @@ def main():
         },
         "tests": [], "reachedRooms": [], "controls": {"keyTransitions": 0, "jumps": 0},
         "captures": [], "pageErrors": [], "httpErrors": [], "assetDecoding": [],
-        "preparedCreaturePoses": [], "sourceHashes": {}
+        "preparedCreaturePoses": [], "preparedPropPoses": [], "walkCycles": [], "sourceHashes": {}
     }
     for relative in ("dlc/covenant/index.html", "dlc/covenant/sprites-v011.json", "index.html",
                      "src/title-screen-v61.js", "docs/covenant/RUNTIME_SOURCE_V011.json"):
@@ -219,7 +220,8 @@ def main():
             page.on("response", lambda response: receipt["httpErrors"].append({
                 "url": response.url, "status": response.status
             }) if response.status >= 400 and (
-                "/dlc/covenant/" in response.url or "/alien-covenant-v011/" in response.url) else None)
+                "/dlc/covenant/" in response.url or "/alien-covenant-v011/" in response.url
+                or "/alien-covenant-v012/" in response.url) else None)
             response = page.goto(base + "/dlc/covenant/?qa=1&from=tantalus", wait_until="load")
             check("Served Covenant route returns HTTP 200", response is not None and response.status == 200)
             page.wait_for_function("!!window.__COVENANT_QA__ && !!window.CovenantSpritesV011")
@@ -237,6 +239,40 @@ def main():
             check("A fresh live frame draws the neutral human PNG", observation(page)["spriteDraws"]["human"] > before_draws)
             capture(page, "01-reached-cryo", "Fresh campaign reached by clicking Commencer; real PNG and room render")
             receipt["reachedRooms"].append("cryo")
+
+            walk_cycles = page.evaluate("CovenantSpritesV011.inspect().cycles || []")
+            if walk_cycles:
+                before_walk = observation(page)
+                page.keyboard.down("ArrowRight")
+                try:
+                    page.wait_for_function("""(ids) => ids.every(id =>
+                        (__COVENANT_QA__.renderer.spriteFrameDrawsV012[id] || 0) > 0)""",
+                        arg=walk_cycles[0]["frames"])
+                    pause = page.evaluate("""() => {
+                      const q=__COVENANT_QA__, e=q.engine;q.freeze();
+                      return {time:e.state.time, moving:e.motion.moving, before:JSON.stringify(q.snapshot()),
+                        frame:CovenantSpritesV011.entry('human','daniels-work','walk',e.room.id,e.state.time).id};
+                    }""")
+                finally:
+                    page.keyboard.up("ArrowRight")
+                check("Actual unarmed keyboard walking draws all eight supplied phases",
+                      observation(page)["player"]["x"] > before_walk["player"]["x"] + 10
+                      and pause["moving"], observation(page)["cycleFrameDraws"])
+                page.wait_for_timeout(180)
+                paused = page.evaluate("""() => {
+                  const q=__COVENANT_QA__, e=q.engine;q.renderer.frame(0,{});
+                  return {time:e.state.time, after:JSON.stringify(q.snapshot()),
+                    frame:CovenantSpritesV011.entry('human','daniels-work','walk',e.room.id,e.state.time).id};
+                }""")
+                check("Pausing a real walk freezes its phase without changing simulation",
+                      pause["time"] == paused["time"] and pause["frame"] == paused["frame"]
+                      and pause["before"] == paused["after"])
+                receipt["walkCycles"] = [{"id": walk_cycles[0]["id"], "room": "cryo",
+                    "observedFrameDraws": observation(page)["cycleFrameDraws"],
+                    "pausedFrame": pause["frame"], "time": pause["time"],
+                    "gameplayStateInjected": False}]
+                capture(page, "01a-paused-real-walk", "Real keyboard walking paused for phase and renderer-purity inspection")
+                page.evaluate("__COVENANT_QA__.resume()")
 
             for room_id, destination in (("cryo", "service"), ("service", "bridge"), ("bridge", "comms")):
                 check("Actual room before traversal: " + room_id, observation(page)["room"] == room_id)
@@ -377,13 +413,70 @@ def main():
                 check("Prepared pose draws without editing simulation: " + entry["id"], result["pure"] and result["drawn"])
                 receipt["preparedCreaturePoses"].append({**entry, **prepared})
                 capture(fixture_page, "fixture-" + entry["id"], "Prepared creature pose; not a gameplay-reached combat state")
+            props = fixture_page.evaluate("""CovenantSpritesV011.entries().filter(e=>
+                e.kind==='prop'&&e.path.startsWith('/assets/openai/sprites/alien-covenant-v012/'))
+                .map(e=>({id:e.id,key:e.key,rooms:e.rooms}))""")
+            for entry in props:
+                prepared = fixture_page.evaluate("""(entry) => {
+                  const q=__COVENANT_QA__, room=CovenantData.rooms.find(r=>
+                    entry.rooms.includes(r.id)&&r.props.some(o=>o.id===entry.key));
+                  if(!room)return null;
+                  q.go(room.id,true);q.freeze();
+                  const object=q.engine.room.props.find(o=>o.id===entry.key);
+                  q.engine.state.player.x=40;
+                  q.renderer.camera=Math.max(0,Math.min(room.width-q.renderer.W,object.x-q.renderer.W*.58));
+                  q.renderer.frame(0,{});
+                  return {room:room.id,instance:object.id,kind:object.kind,fixture:true};
+                }""", entry)
+                check("Prop fixture uses the exact existing instance: " + entry["id"], prepared is not None)
+                fixture_page.wait_for_function(
+                    "(id)=>CovenantSpritesV011.inspect().images.some(v=>v.id===id&&v.status==='ready')", arg=entry["id"])
+                rendered = fixture_page.evaluate("""(key) => {
+                  const q=__COVENANT_QA__, before=JSON.stringify(q.snapshot()),count=q.renderer.spriteDrawsV011.prop;
+                  q.renderer.prop(q.engine.room.props.find(o=>o.id===key));
+                  return {pure:before===JSON.stringify(q.snapshot()),drawn:q.renderer.spriteDrawsV011.prop>count};
+                }""", entry["key"])
+                check("Prepared prop draws without editing simulation: " + entry["id"],
+                      rendered["pure"] and rendered["drawn"])
+                receipt["preparedPropPoses"].append({**entry, **prepared})
+                capture(fixture_page, "fixture-" + entry["id"], "Prepared exact prop instance; not a gameplay-reached room")
             fixture_context.close()
+
+            if walk_cycles:
+                partial_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
+                partial_page = partial_context.new_page()
+                partial_errors = []
+                partial_page.on("pageerror", lambda error: partial_errors.append(str(error)))
+                missing_phase = walk_cycles[0]["frames"][-1]
+                partial_page.route("**/alien-covenant-v012/" + missing_phase + ".png",
+                                   lambda route: route.abort("failed"))
+                partial_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
+                partial_page.locator("#begin").click()
+                before = observation(partial_page)
+                partial_page.keyboard.down("ArrowRight")
+                try:
+                    partial_page.wait_for_function("""(id)=>CovenantSpritesV011.inspect().images
+                        .some(v=>v.id===id&&v.status==='unavailable')""", arg=missing_phase)
+                    partial_page.wait_for_timeout(750)
+                finally:
+                    partial_page.keyboard.up("ArrowRight")
+                after = observation(partial_page)
+                partial_status = partial_page.evaluate("CovenantSpritesV011.inspect()")
+                check("One unavailable phase keeps the entire walk cycle procedural and playable",
+                      after["player"]["x"] > before["player"]["x"] + 10
+                      and not after["cycleFrameDraws"] and not partial_errors
+                      and not partial_status["cycles"][0]["ready"],
+                      {"blockedPhase": missing_phase, "expectedPNGFailure": True, "pageErrors": partial_errors})
+                capture(partial_page, "fixture-incomplete-walk-cycle", "One PNG deliberately blocked; no partial cycle is drawn")
+                partial_context.close()
 
             missing_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
             missing_page = missing_context.new_page()
             fallback_errors = []
             missing_page.on("pageerror", lambda error: fallback_errors.append(str(error)))
-            missing_page.route("**/assets/openai/sprites/alien-covenant-v011/*.png", lambda route: route.abort("failed"))
+            for version in ("v011", "v012"):
+                missing_page.route("**/assets/openai/sprites/alien-covenant-" + version + "/*.png",
+                                   lambda route: route.abort("failed"))
             missing_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
             missing_page.locator("#begin").click()
             missing_page.wait_for_function(
@@ -421,6 +514,8 @@ def main():
     print(json.dumps({"ok": receipt["ok"], "tests": len(receipt["tests"]),
                       "reachedRooms": receipt["reachedRooms"], "decodedSprites": len(receipt["assetDecoding"]),
                       "preparedCreaturePoses": len(receipt["preparedCreaturePoses"]),
+                      "preparedPropPoses": len(receipt["preparedPropPoses"]),
+                      "walkCycles": len(receipt["walkCycles"]),
                       "hostMenuValidated": not args.skip_title}), flush=True)
 
 

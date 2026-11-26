@@ -1,5 +1,5 @@
 import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';
-import { verifyCovenantBundleV011, verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,
+import { verifyCovenantBundleV011, verifyCovenantAssetsV011, covenantSourceMetadataPathV011,
   reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
@@ -1331,7 +1331,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
           'Changed Aliens 1986 recovery bytes: ' + path);
         continue;
       }
-      if (!built && path === COVENANT_PROVENANCE_V011) {
+      if (!built && covenantSourceMetadataPathV011(path)) {
         // Exact reviewed source metadata, including sprite prompts and public URLs.
         // The path gate above rejects this file from every built distribution.
         const bytes = await readFile(join(directory, entry.name));

@@ -8,8 +8,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { TitleScreenController } from '../src/title-screen-v61.js';
 import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admissions-v011.mjs';
 import { buildCovenantDlcV011, verifyCovenantBundleV011, covenantManifestV011,
-  COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011,
-  reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
+  COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012,
+  COVENANT_ASSET_ROOTS, covenantSourceMetadataPathV011, reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -34,7 +34,7 @@ test('original recovered runtime remains byte-identical except the declared page
       const added = '<script src="fidelity-art.js"></script><script src="sprite-registry-v011.js"></script><script src="sprite-art-v011.js"></script><script src="app.js"></script>';
       assert.equal(text.split(added).length, 2, 'One final renderer insertion is required');
       text = text.replace(added, '<script src="fidelity-art.js"></script><script src="app.js"></script>');
-      text = text.replace('version 0.11.0', 'version 0.10.0');
+      text = text.replace(/version 0\.(?:11|12)\.0/, 'version 0.10.0');
       bytes = Buffer.from(text);
     }
     assert.equal(bytes.length, row.bytes, 'Changed recovered source size: ' + row.name);
@@ -94,6 +94,13 @@ test('only declared PNG files and the two public module files enter distribution
   assert.equal(admit('assets/openai/sprites/alien-covenant-v011/unknown.png', { built: true }), false);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v011/manifest.json', { built: false }), true);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v011/manifest.json', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v012/manifest.json', { built: false }), true);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v012/manifest.json', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v012/unknown.png', { built: true }), false);
+  assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: false }), true);
+  assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: true }), false);
+  assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: false }), true);
+  assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: true }), false);
   assert.equal(admit('dlc/covenant/index.html', { built: true }), true);
   assert.equal(admit('dlc/covenant/sprites-v011.json', { built: true }), true);
   assert.equal(admit('dlc/covenant/hidden.html', { built: true }), false);
@@ -101,6 +108,10 @@ test('only declared PNG files and the two public module files enter distribution
   assert.equal(admit('modules/covenant/dlc/covenant/core.js', { built: true }), false);
   assert.equal(admit('scripts/verify-covenant-sprites-v011.mjs', { built: false }), true);
   assert.equal(admit('scripts/verify-covenant-sprites-v011.mjs', { built: true }), false);
+  assert.equal(admit('scripts/package-covenant-sprites-v012.py', { built: false }), true);
+  assert.equal(admit('scripts/package-covenant-sprites-v012.py', { built: true }), false);
+  assert.equal(admit('scripts/qa-covenant-catalogue-v012.py', { built: false }), true);
+  assert.equal(admit('scripts/qa-covenant-catalogue-v012.py', { built: true }), false);
   assert.equal(admit('docs/covenant/INVENTORY_V011.json', { built: true }), false);
   assert.equal(admit('docs/covenant/private-extra.txt', { built: false }), false);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v011/../outside.png'), false);
@@ -114,8 +125,12 @@ test('standalone build contains only the admitted page, runtime manifest and ori
     const { compiled } = await covenantManifestV011(root);
     assert.equal(result.sprites, compiled.entries.length);
     assert.deepEqual((await readdir(join(out, 'dlc/covenant'))).sort(), ['index.html', 'sprites-v011.json']);
-    assert.deepEqual((await readdir(join(out, 'assets/openai/sprites/alien-covenant-v011'))).sort(),
-      compiled.entries.map(row => row.id + '.png').sort());
+    for (const base of COVENANT_ASSET_ROOTS) {
+      const entries = compiled.entries.filter(row => row.path.startsWith('/' + base + '/'));
+      if (entries.length) assert.deepEqual((await readdir(join(out, base))).sort(),
+        entries.map(row => row.id + '.png').sort());
+      else await assert.rejects(readdir(join(out, base)), error => error.code === 'ENOENT');
+    }
     assert.equal((await readdir(out)).includes('modules'), false);
     assert.equal((await readdir(out)).includes('docs'), false);
     assert.equal((await readdir(out)).includes('scripts'), false);
@@ -124,18 +139,48 @@ test('standalone build contains only the admitted page, runtime manifest and ori
   }
 });
 
-test('reviewed provenance is pinned to exact source bytes and never admitted in dist', async () => {
-  const bytes = await readFile(join(root, COVENANT_PROVENANCE_V011));
-  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, bytes), true);
-  const changed = Buffer.from(bytes.toString('utf8').replace('"schemaVersion": 1', '"schemaVersion": 2'));
-  assert.notDeepEqual(changed, bytes, 'The mutation must change valid JSON content');
-  assert.doesNotThrow(() => JSON.parse(changed.toString('utf8')));
-  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, changed), false);
-  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011,
-    Buffer.concat([bytes, Buffer.from('\n')])), false, 'Even whitespace changes require a new review');
-  assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V011, bytes, { built: true }), false);
-  assert.equal(reviewedCovenantSourceMetadataV011('docs/covenant/other.json', bytes), false);
-  assert.equal(admit(COVENANT_PROVENANCE_V011, { built: true }), false, 'The path gate rejects metadata before text scanning');
+test('reviewed provenance is pinned to each exact source path and bytes, never admitted in dist', async () => {
+  assert.equal(covenantSourceMetadataPathV011('docs/covenant/other.json'), false);
+  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012]) {
+    assert.equal(covenantSourceMetadataPathV011(path), true);
+    assert.equal(admit(path, { built: true }), false, 'The path gate rejects metadata before text scanning');
+    let bytes;
+    try { bytes = await readFile(join(root, path)); }
+    catch (error) {
+      if (path === COVENANT_PROVENANCE_V012 && error.code === 'ENOENT') continue;
+      throw error;
+    }
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true,
+      'Every present production manifest requires its final reviewed digest');
+    const changed = Buffer.from(bytes.toString('utf8').replace('"schemaVersion": 1', '"schemaVersion": 2'));
+    assert.notDeepEqual(changed, bytes, 'The mutation must change valid JSON content');
+    assert.doesNotThrow(() => JSON.parse(changed.toString('utf8')));
+    assert.equal(reviewedCovenantSourceMetadataV011(path, changed), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from('\n')])),
+      false, 'Even whitespace changes require a new review');
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
+    assert.equal(reviewedCovenantSourceMetadataV011('docs/covenant/other.json', bytes), false);
+    const other = path === COVENANT_PROVENANCE_V011 ? COVENANT_PROVENANCE_V012 : COVENANT_PROVENANCE_V011;
+    assert.equal(reviewedCovenantSourceMetadataV011(other, bytes), false, 'Pins cannot be exchanged between versions');
+  }
+});
+
+test('cumulative runtime preserves all 29 V011 bindings and scopes every new prop to a real instance', async () => {
+  const { manifest, compiled } = await covenantManifestV011(root);
+  const legacy = manifest.assets.filter(row => row.path.startsWith('/assets/openai/sprites/alien-covenant-v011/'));
+  assert.equal(legacy.length, 29);
+  assert.equal(digest(Buffer.from(JSON.stringify(legacy))),
+    '800d3c2ed5d8c14160855d08753d2e21a45e95948a52343876356eb87b5d8c5f');
+  const text = await readFile(join(root, COVENANT_SOURCE_V011, 'content.js'), 'utf8');
+  const data = JSON.parse(text.slice('(function(root){const data='.length, text.lastIndexOf(';if(typeof module')));
+  for (const entry of compiled.entries.filter(row => row.kind === 'prop'
+    && row.path.startsWith('/assets/openai/sprites/alien-covenant-v012/'))) {
+    const matches = data.rooms.filter(room => room.props.some(prop => prop.id === entry.key));
+    assert.equal(matches.length, 1, 'New prop must bind an exact existing instance: ' + entry.id);
+    assert.deepEqual(entry.rooms, [matches[0].id]);
+    assert.equal(entry.state, 'idle');
+    assert.equal(admit(entry.path.slice(1), { built: true }), true);
+  }
 });
 
 test('Covenant build helpers can be imported without recovered sources in a sparse checkout', async () => {

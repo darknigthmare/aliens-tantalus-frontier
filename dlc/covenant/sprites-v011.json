@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "0.11.0",
+  "release": "0.12.0",
   "sourceModuleVersion": "0.10.0",
   "verified1to1": false,
   "assets": [
@@ -775,6 +775,363 @@
       "sourceFacing": 1,
       "verified1to1": false,
       "note": "Generated pose; only the declared state is available. Film fidelity is not certified."
+    },
+    {
+      "id": "daniels-work-walk-01",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1743872,
+      "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc",
+      "alphaBounds": [
+        121,
+        32,
+        879,
+        1510
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        476,
+        1510
+      ],
+      "logicalHeight": 119.020462046,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-02",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1713389,
+      "sha256": "447b30478fc095636781df1e5a84b28e47b8e77d08502bb14e364e7e1399f8b5",
+      "alphaBounds": [
+        117,
+        37,
+        824,
+        1492
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        486,
+        1492
+      ],
+      "logicalHeight": 117.168316832,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-03",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-03.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1629614,
+      "sha256": "d0b83890bb9914de1643f2eefcf065a1c147307f1ccbda4d92c9c6f55b9c7493",
+      "alphaBounds": [
+        231,
+        17,
+        806,
+        1510
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        478,
+        1510
+      ],
+      "logicalHeight": 120.228382838,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-04",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-04.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1645209,
+      "sha256": "2d632a59899ae37323d42be276ec8d77384131152545f239d9249d4f5685b9a7",
+      "alphaBounds": [
+        140,
+        20,
+        917,
+        1492
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        491,
+        1492
+      ],
+      "logicalHeight": 118.537293729,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-05",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1713655,
+      "sha256": "8c3d6c0e566b3eba6cdd2b6c3e674a6f05310b9c69130c98f4994632179e4da3",
+      "alphaBounds": [
+        87,
+        18,
+        912,
+        1503
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        474,
+        1503
+      ],
+      "logicalHeight": 119.584158416,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-06",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1677529,
+      "sha256": "6717eda789a87d1845373db28d2a46dc7d819a1047941c988391286d645d2894",
+      "alphaBounds": [
+        108,
+        33,
+        845,
+        1471
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        500,
+        1471
+      ],
+      "logicalHeight": 115.799339934,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-07",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1648195,
+      "sha256": "b288688702942f608003cb399315eeef81dc66d5bc444080e0ef43bcfba34997",
+      "alphaBounds": [
+        222,
+        25,
+        795,
+        1507
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        469,
+        1507
+      ],
+      "logicalHeight": 119.342574257,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "daniels-work-walk-08",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v012/daniels-work-walk-08.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1740563,
+      "sha256": "4de54f842fdf692c2acaa42b67e680a0f114da42d3d19a3b34fcfd0ad55b1996",
+      "alphaBounds": [
+        121,
+        13,
+        917,
+        1489
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        474,
+        1489
+      ],
+      "logicalHeight": 118.859405941,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo",
+        "service",
+        "cabin",
+        "funeralairlock",
+        "evaprep",
+        "bridge",
+        "comms"
+      ]
+    },
+    {
+      "id": "prop-identification",
+      "kind": "prop",
+      "key": "shaw-f10-identification",
+      "state": "idle",
+      "path": "/assets/openai/sprites/alien-covenant-v012/prop-identification.png",
+      "width": 887,
+      "height": 1774,
+      "bytes": 684210,
+      "sha256": "13a018d850b41de815b002605385dd5206a9330e7a2c6c2ea0b459e3c60d3130",
+      "alphaBounds": [
+        272,
+        49,
+        616,
+        1630
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        444.0,
+        1630
+      ],
+      "logicalHeight": 100,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "shaw"
+      ]
+    },
+    {
+      "id": "prop-microscope",
+      "kind": "prop",
+      "key": "workshop-f10-12",
+      "state": "idle",
+      "path": "/assets/openai/sprites/alien-covenant-v012/prop-microscope.png",
+      "width": 1305,
+      "height": 1206,
+      "bytes": 885619,
+      "sha256": "d3b4084ca728ceeba4e5b2c67313a30506e448acfa7948e0b8749fb385a800e1",
+      "alphaBounds": [
+        250,
+        31,
+        1084,
+        1187
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        667.0,
+        1187
+      ],
+      "logicalHeight": 100,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "workshop"
+      ]
+    }
+  ],
+  "cycles": [
+    {
+      "id": "daniels-work-walk",
+      "kind": "human",
+      "key": "daniels-work",
+      "state": "walk",
+      "angularFrequency": 11,
+      "frames": [
+        "daniels-work-walk-01",
+        "daniels-work-walk-02",
+        "daniels-work-walk-03",
+        "daniels-work-walk-04",
+        "daniels-work-walk-05",
+        "daniels-work-walk-06",
+        "daniels-work-walk-07",
+        "daniels-work-walk-08"
+      ]
     }
   ]
 }

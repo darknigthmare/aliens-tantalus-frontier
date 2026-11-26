@@ -20,6 +20,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_COVENANT_BASELINE_20261126 as covenantBaseline,
   AVP_COVENANT_SUCCESSORS_20261126 as covenantSuccessors,
   reviewedCovenantHostDigest20261126 as advanceCovenant,
+  AVP_COVENANT_V012_BASELINE_20261126 as covenantV012Baseline,
+  AVP_COVENANT_V012_SUCCESSORS_20261126 as covenantV012Successors,
+  reviewedCovenantV012HostDigest20261126 as advanceCovenantV012,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
@@ -128,12 +131,14 @@ const expectedCovenantPaths = [
   "scripts/verify-public-release-v86.mjs",
   "src/title-screen-v61.js"
 ];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedCovenantPaths])];
+const expectedCovenantV012Paths = ['scripts/qa-title-compositions-v163.py', 'scripts/verify-public-release-v86.mjs'];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedCovenantPaths, ...expectedCovenantV012Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
 const preCovenantEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const finalEndpoint = path => covenantSuccessors[path]?.currentSha256 || preCovenantEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|published-host-to-Covenant) source chain/;
+const preCovenantV012Endpoint = path => covenantSuccessors[path]?.currentSha256 || preCovenantEndpoint(path);
+const finalEndpoint = path => covenantV012Successors[path]?.currentSha256 || preCovenantV012Endpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|published-host-to-Covenant|Covenant-V011-to-V012 host) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -150,7 +155,7 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
     spriteSuccessors: expectedSpritePaths.length, spriteV116Successors: expectedSpriteV116Paths.length,
-    historicalEvidenceTransferred: false });
+    covenantV012Successors: expectedCovenantV012Paths.length, historicalEvidenceTransferred: false });
 });
 
 test('the Aliens merge joins both exact published parents and refuses any unrecorded incoming endpoint', () => {
@@ -291,6 +296,7 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
   assert.equal(Object.hasOwn(covenantSuccessors, audit), false);
+  assert.equal(Object.hasOwn(covenantV012Successors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -355,15 +361,15 @@ test('Covenant advances only six exact reviewed host endpoints after the publish
     assert.ok(Object.isFrozen(receipt));
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.equal(receipt.previousSha256, preCovenantEndpoint(path), path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceCovenant(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceCovenant(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     if (Object.hasOwn(aliensIncoming, path))
-      assert.equal(advanceAliens(path, aliensIncoming[path]), receipt.currentSha256, path);
+      assert.equal(advanceAliens(path, aliensIncoming[path]), finalEndpoint(path), path);
     for (const invalid of [receipt.currentSha256, firstEndpoint(path), '0'.repeat(64), undefined])
       assert.throws(() => advanceCovenant(path, invalid), /Broken published-host-to-Covenant source chain/, path);
-    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
-    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: finalEndpoint(path) });
   }
   for (const path of ['src/unreviewed.js', 'index.html/extra', '__proto__', 'constructor', audit])
     assert.equal(advanceCovenant(path, 'unchanged'), 'unchanged', path);
@@ -460,12 +466,77 @@ const covenantSourceEdits = {
 test('removing only the reviewed Covenant host edits recovers all six exact parent sources', () => {
   assert.deepEqual(Object.keys(covenantSourceEdits).sort(), [...expectedCovenantPaths].sort());
   for (const [path, edits] of Object.entries(covenantSourceEdits)) {
-    let source = read(path).toString();
+    let source = withoutCovenantV012HostEdits(path, read(path).toString());
     for (const [current, previous] of edits) {
       assert.notEqual(current, '', path);
       assert.equal(source.split(current).length, 2, 'Missing or repeated Covenant source edit: ' + path);
-      source = source.replace(current, previous);
+      source = source.replace(current, () => previous);
     }
     assert.equal(sha(source), covenantSuccessors[path].previousSha256, 'Unrelated host change: ' + path);
+  }
+});
+
+// These two inverse edits prove the exact aa6e3cc parent, without accepting other source changes.
+const covenantV012SourceEdits = {
+  "scripts/qa-title-compositions-v163.py": [
+    [
+      "                    expected_focus = ['title-continue', 'title-new', 'title-dlc', 'title-forge',\n                                      'title-aliens1986', 'title-covenant', 'title-options']\n                    focus_order = []\n                    for _ in range(len(expected_focus)):\n                        focus_order.append(observed(page)['focus'])\n                        page.keyboard.press('ArrowDown')\n                    check(label + ': native keyboard reaches each existing menu action once', focus_order == expected_focus)",
+      "                    focus_order = []\n                    for _ in range(5):\n                        focus_order.append(observed(page)['focus'])\n                        page.keyboard.press('ArrowDown')\n                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-dlc', 'title-forge', 'title-options'])"
+    ]
+  ],
+  "scripts/verify-public-release-v86.mjs": [
+    [
+      "verifyCovenantAssetsV011, covenantSourceMetadataPathV011,",
+      "verifyCovenantAssetsV011, COVENANT_PROVENANCE_V011,"
+    ],
+    [
+      "if (!built && covenantSourceMetadataPathV011(path)) {",
+      "if (!built && path === COVENANT_PROVENANCE_V011) {"
+    ]
+  ]
+};
+function withoutCovenantV012HostEdits(path, text) {
+  for (const [current, previous] of covenantV012SourceEdits[path] || []) {
+    assert.equal(text.split(current).length, 2, 'Missing or repeated Covenant V012 source edit: ' + path);
+    text = text.replace(current, () => previous);
+  }
+  return text;
+}
+
+test('Covenant V012 advances only two exact sources from the published V011 head', () => {
+  assert.equal(covenantV012Baseline, 'aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9');
+  assert.deepEqual(Object.keys(covenantV012Successors).sort(), [...expectedCovenantV012Paths].sort());
+  assert.equal(sha(JSON.stringify(covenantV012Successors)), 'ae421a28f1097236bdd7acc6e4db4fcb98ed09a7a595b99b762fb2954822f946');
+  assert.ok(Object.isFrozen(covenantV012Successors));
+  for (const [path, receipt] of Object.entries(covenantV012Successors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.equal(receipt.previousSha256, preCovenantV012Endpoint(path), path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advanceCovenantV012(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    if (Object.hasOwn(aliensIncoming, path))
+      assert.equal(advanceAliens(path, aliensIncoming[path]), receipt.currentSha256, path);
+    for (const invalid of [receipt.currentSha256, firstEndpoint(path), '0'.repeat(64), undefined])
+      assert.throws(() => advanceCovenantV012(path, invalid), /Broken Covenant-V011-to-V012 host source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: receipt.currentSha256 });
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenantV012(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantV012Successors, audit), false);
+});
+
+test('all published receipt declarations including Covenant V011 remain byte-identical', () => {
+  const source = read(audit).toString(), end = source.indexOf('// BEGIN COVENANT V012 HOST RECEIPTS');
+  assert.ok(end > 0);
+  assert.equal(sha(source.slice(0, end)), '58ebb68d615843dda9113ba88d69534b1cb1394a9262cf638e7ad173ef1ca731');
+  assert.equal(sha(JSON.stringify(covenantSuccessors)), 'baa661ba0b58d60fa0278d83c0b6b353cbe70c3b03ddc2ffb39e5a965ef65524');
+});
+
+test('removing only the reviewed V012 source edits recovers both exact V011 parent sources', () => {
+  assert.deepEqual(Object.keys(covenantV012SourceEdits).sort(), [...expectedCovenantV012Paths].sort());
+  for (const [path, receipt] of Object.entries(covenantV012Successors)) {
+    const previous = withoutCovenantV012HostEdits(path, read(path).toString());
+    assert.equal(sha(previous), receipt.previousSha256, 'Unrelated V012 host change: ' + path);
   }
 });

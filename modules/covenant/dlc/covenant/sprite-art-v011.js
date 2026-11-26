@@ -1,4 +1,4 @@
-/* Static poses and separately supplied attack poses, never invented animation.
+/* Supplied static poses, attack poses and an explicit eight-frame walk cycle.
  * All decisions read the existing engine; this renderer writes no game state.
  */
 (function (root) {
@@ -17,9 +17,10 @@
       super(canvas, engine);
       this.spriteRegistry = root.CovenantSpritesV011;
       this.spriteDrawsV011 = { human: 0, creature: 0, weapon: 0, prop: 0 };
+      this.spriteFrameDrawsV012 = Object.create(null);
     }
     visual(kind, key, state = 'idle') {
-      return this.spriteRegistry?.sprite(kind, key, state, this.engine.room.id) || null;
+      return this.spriteRegistry?.sprite(kind, key, state, this.engine.room.id, this.engine.state.time || 0) || null;
     }
     drawPose(sprite, height, anchor = null) {
       const { image, entry } = sprite, [left, top, right, bottom] = entry.alphaBounds;
@@ -41,6 +42,9 @@
       const sprite = !special && this.visual('human', profile.id, state);
       // Free hands in the neutral source do not imply a validated armed pose.
       if (!sprite || gun && !sprite.entry.heldGrip) return super.human(actor, role, moving);
+      // The supplied cycle is ordinary unarmed player walking, not input intent.
+      if (sprite.cycle && (!player || !E.motion?.moving || E.motion?.run || gun))
+        return super.human(actor, role, moving);
       // Mirroring would move Walter's left-hand injury to the wrong anatomical side.
       if (profile.id === 'walter-injured' && (actor.facing || 1) !== sprite.entry.sourceFacing)
         return super.human(actor, role, moving);
@@ -58,6 +62,7 @@
         this.c.rotate(sprite.entry.heldAngle); this.gun(gun, 0, 0); this.c.restore();
       }
       this.c.restore(); this.spriteDrawsV011.human++;
+      if (sprite.cycle) this.spriteFrameDrawsV012[sprite.entry.id] = (this.spriteFrameDrawsV012[sprite.entry.id] || 0) + 1;
     }
     creature(enemy) {
       const E = this.engine, sequence = E.state.sequence;

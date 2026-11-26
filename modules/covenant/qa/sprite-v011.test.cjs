@@ -125,11 +125,12 @@ function harness(rows = [], options = {}) {
     appearance: () => profile, currentWeapon: () => ({ id: 'beretta' }),
     done: () => false, ...options.engine
   };
-  const compiled = compileManifest(manifest(rows));
+  const compiled = compileManifest(options.manifest || manifest(rows));
   const registry = {
-    sprite(kind, key, state = 'idle', room = null) {
-      const entry = compiled.resolve(kind, key, state, room);
-      return entry ? { entry, image: { id: entry.id } } : null;
+    sprite(kind, key, state = 'idle', room = null, time = 0) {
+      const entry = compiled.resolve(kind, key, state, room, time);
+      const cycle = compiled.cycle(kind, key, state, room);
+      return entry ? { entry, image: { id: entry.id }, ...(cycle ? { cycle: cycle.id } : {}) } : null;
     }
   };
   const context2d = new Proxy({}, {
@@ -299,4 +300,144 @@ test('console PNGs cannot mask functional panels or navigation displays', () => 
   }
   assert.equal(h.inherited.filter(row => row[0] === 'prop').length, 2);
   assert.equal(h.renderer.spriteDrawsV011.prop, 0);
+});
+
+
+function walkingManifest() {
+  const frames = Array.from({ length: 8 }, (_, index) => {
+    const id = 'daniels-work-walk-' + String(index + 1).padStart(2, '0');
+    return asset({ id, key: 'daniels-work', state: 'walk',
+      path: '/assets/openai/sprites/alien-covenant-v012/' + id + '.png',
+      rooms: ['cryo', 'service', 'cabin', 'funeralairlock', 'evaprep', 'bridge', 'comms'] });
+  });
+  return { schemaVersion: 1, release: '0.12.0', verified1to1: false,
+    assets: [asset(), ...frames], cycles: [{
+      id: 'daniels-work-walk', kind: 'human', key: 'daniels-work', state: 'walk',
+      angularFrequency: 11, frames: frames.map(frame => frame.id)
+    }] };
+}
+
+test('explicit walk cycle keeps the legacy idle binding and selects supplied phases by simulation time', () => {
+  const raw = walkingManifest(), compiled = compileManifest(raw), period = 2 * Math.PI / 11;
+  assert.equal(compiled.resolve('human', 'daniels-work', 'idle', 'cryo').id, 'daniels-work');
+  assert.equal(compiled.cycles.length, 1);
+  assert.equal(compiled.entries.length, 9);
+  for (let index = 0; index < 8; index++) {
+    const time = period * (index + .25) / 8;
+    const current = compiled.resolve('human', 'daniels-work', 'walk', 'cryo', time);
+    assert.equal(current.id, raw.cycles[0].frames[index]);
+    assert.equal(compiled.resolve('human', 'daniels-work', 'walk', 'cryo', time + period).id, current.id);
+  }
+  assert.equal(compiled.resolve('human', 'daniels-work', 'walk', 'landing', 0), null);
+  assert.equal(compiled.resolve('human', 'daniels-work', 'run', 'cryo', 0), null);
+  assert.equal(compiled.resolve('human', 'daniels-work', 'walk', 'cryo', NaN), null);
+  assert.throws(() => { compiled.cycles[0].frames.pop(); }, TypeError);
+});
+
+test('missing, shared, incompatible and implicit cycle phases cannot replace an admitted set', () => {
+  const variants = [
+    raw => raw.assets.pop(),
+    raw => raw.cycles[0].frames.pop(),
+    raw => { raw.cycles[0].frames[1] = raw.cycles[0].frames[0]; },
+    raw => { raw.cycles[0].angularFrequency = 12; },
+    raw => { raw.assets[1].heldGrip = [30, 50]; },
+    raw => { raw.assets[1].sourceFacing = -1; },
+    raw => { raw.assets[1].rooms = ['landing']; },
+    raw => { raw.assets[1].key = 'walter'; },
+    raw => raw.assets.push(asset({ id: 'extra-walk', state: 'walk',
+      path: '/assets/openai/sprites/alien-covenant-v012/extra-walk.png' })),
+    raw => raw.cycles.push({ ...raw.cycles[0], id: 'another-cycle' })
+  ];
+  const registry = createRegistry({ manifest: manifest(), ImageClass: null });
+  for (const change of variants) {
+    const raw = walkingManifest(); change(raw);
+    assert.throws(() => registry.useManifest(raw));
+    assert.equal(registry.entries().length, 1);
+    assert.equal(registry.entry('human', 'daniels-work').id, 'daniels-work');
+  }
+  const raw = walkingManifest(); delete raw.cycles;
+  assert.throws(() => compileManifest(raw), /complete declared cycle/);
+  assert.throws(() => compileManifest({ ...walkingManifest(), release: '0.11.0' }), /cycles/);
+});
+
+test('all eight frames must decode before any cycle frame can draw', () => {
+  const created = [];
+  class ImageDouble { constructor() { created.push(this); } }
+  const registry = createRegistry({ manifest: walkingManifest(), ImageClass: ImageDouble });
+  assert.equal(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1), null);
+  assert.equal(created.length, 8);
+  for (const image of created.slice(0, 7)) {
+    image.naturalWidth = 140; image.naturalHeight = 240; image.onload();
+  }
+  assert.equal(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1), null);
+  assert.equal(registry.inspect().cycles[0].ready, false);
+  created[7].naturalWidth = 140; created[7].naturalHeight = 240; created[7].onload();
+  const ready = registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1);
+  assert.equal(ready.cycle, 'daniels-work-walk');
+  assert.equal(registry.inspect().cycles[0].ready, true);
+  assert.equal(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1).image, ready.image);
+  created[7].onerror();
+  assert.equal(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1), null);
+});
+
+test('cycle rendering reads a frozen simulation clock and preserves the engine and source geometry', () => {
+  const raw = walkingManifest(), h = harness([], {
+    manifest: raw, motion: { moving: true }, state: { time: .2 }, engine: { paused: true }
+  });
+  const before = JSON.stringify(h.engine), person = freeze(actor());
+  h.renderer.human(person, 'daniels', true);
+  h.renderer.human(person, 'daniels', true);
+  const calls = h.commands.filter(row => row[0] === 'drawImage');
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0][1].id, calls[1][1].id, 'Paused redraws keep the same supplied frame');
+  assert.deepEqual(calls[0].slice(2), [10, 20, 100, 200, -30.5, -122, 61, 122]);
+  assert.equal(h.inherited.length, 0);
+  assert.equal(JSON.stringify(h.engine), before);
+  assert.equal(h.renderer.spriteFrameDrawsV012[calls[0][1].id], 2);
+});
+
+test('walk cycle cannot cover blocked input, sprinting, weapons or special interactions', () => {
+  const variants = [
+    { motion: { moving: false } },
+    { motion: { moving: true, run: true } },
+    { state: { weapon: true } },
+    { room: { crawl: true } },
+    { engine: { grip: {} } },
+    { engine: { work: {} } },
+    { engine: { scanning: {} } },
+    { engine: { healing: 1 } },
+    { engine: { rotating: {} } },
+    { engine: { detector: true } },
+    { engine: { reloadTime: 1 } },
+    { engine: { shoveCooldown: 2 } },
+    { motion: { moving: true, crouch: true } },
+    { engine: { dead: true } }
+  ];
+  for (const options of variants) {
+    const h = harness([], { ...options, manifest: walkingManifest(),
+      motion: { moving: true, ...options.motion } });
+    h.renderer.human(actor(), 'daniels', true);
+    assert.equal(h.commands.filter(row => row[0] === 'drawImage').length, 0);
+    assert.equal(h.inherited[0][0], 'human');
+  }
+  const airborne = harness([], { manifest: walkingManifest(), motion: { moving: true } });
+  airborne.renderer.human({ ...actor(), y: 3 }, 'daniels', true);
+  assert.equal(airborne.inherited[0][0], 'human');
+});
+
+test('a V012 prop binds to the reviewed instance and room, without replacing its whole family', () => {
+  const row = propAsset('identification', {
+    key: 'shaw-f10-identification', rooms: ['shaw'],
+    path: '/assets/openai/sprites/alien-covenant-v012/prop-identification.png'
+  });
+  const raw = { schemaVersion: 1, release: '0.12.0', assets: [row] };
+  const approved = harness([], { manifest: raw, room: { id: 'shaw' } });
+  approved.renderer.prop({ id: 'shaw-f10-identification', kind: 'identification', x: 100, w: 70, h: 80 });
+  assert.equal(approved.commands.filter(command => command[0] === 'drawImage').length, 1);
+  const other = harness([], { manifest: raw, room: { id: 'shaw' } });
+  other.renderer.prop({ id: 'another-identification', kind: 'identification', x: 100, w: 70, h: 80 });
+  assert.equal(other.inherited[0][0], 'prop');
+  const wrongRoom = harness([], { manifest: raw, room: { id: 'cryo' } });
+  wrongRoom.renderer.prop({ id: 'shaw-f10-identification', kind: 'identification', x: 100, w: 70, h: 80 });
+  assert.equal(wrongRoom.inherited[0][0], 'prop');
 });
