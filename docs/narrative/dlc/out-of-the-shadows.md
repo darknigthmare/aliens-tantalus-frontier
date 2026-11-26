@@ -12,7 +12,7 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-PR59 ouverte ; comparer les modifications locales aux octets de cette branche avant nettoyage.
+PR #59 ouverte ; comparer les modifications locales aux octets de cette branche avant nettoyage.
 
 [PR #59](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/59)
 
@@ -20,7 +20,7 @@ Chemins repérés : `dlc/alien-hors-des-ombres/`, `archives/dlc-hors-des-ombres-
 
 ## Décisions à préserver
 
-Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
+Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13`, `D18`, `D19`, `D20`, `D21`, `D22` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
 
 ## Déjà documenté dans la source
 
@@ -36,10 +36,14 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 
 ## Reprise artistique et intégration
 
-1. Comparer les packs déjà générés et PR59 avant génération.
+1. Comparer les packs déjà générés et PR #59 avant génération.
 2. La morphologie non décrite par les sources doit rester interprétation de production, même si le PNG est détaillé.
 
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.
+
+## Production commune précisée par les discussions
+
+Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant par asset ou pose, profil latéral 2D et direction artistique Tantalus ; identité, tenue et variante conservées ; galerie et archive vérifiables. Associer une référence visuelle contextualisée lorsque disponible. Un résultat de recherche non ouvert reste une piste. Chaque continuité et chaque version gardent leur provenance ; les états d’IA propres aux castes restent à relier à des comportements réellement présents. Ces exigences ne certifient ni la couverture, ni un raccord encore absent.
 
 ## Documents examinés
 

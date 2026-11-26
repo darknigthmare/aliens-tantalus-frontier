@@ -4,7 +4,7 @@
 
 ## Périmètre et version
 
-**Source examinée : 0.9.0-candidate.1 + packs visuels.** Module autonome récupéré ; raccord et 42 sprites fusionnés dans main selon snapshot,28 props sur branche distincte.
+**Source examinée : 0.9.0-candidate.1 + packs visuels.** Module autonome récupéré ; raccord et 42 sprites fusionnés dans main selon snapshot, 28 props sur branche distincte.
 
 47 lieux ; 64 connexions /128 seuils ; 16 chapitres ; 49 objectifs +6 détours ; 14 profils ; 93 entrées documentaires.
 
@@ -12,7 +12,7 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-Module et 42 sprites fusionnés dans main ; 28 props supplémentaires en PR66, soit 70 PNG sur cette branche.
+Module et 42 sprites fusionnés dans main ; 28 props supplémentaires en PR #66, soit 70 PNG sur cette branche.
 
 [PR #60](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/60) · [PR #62](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/62) · [PR #66](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/66)
 
@@ -20,11 +20,11 @@ Chemins repérés : `dlc/fleuve-de-la-douleur/`, `archives/river-of-pain/`.
 
 ## Décisions à préserver
 
-Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
+Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13`, `D18`, `D19`, `D20`, `D21`, `D22` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
 
 ## Déjà documenté dans la source
 
-- Types de seuil/support ; pistes sans portes isolées ;44 props gênants déplacés.
+- Types de seuil/support ; pistes sans portes isolées ; 44 props gênants déplacés.
 - Corrections Russ/Brackett, Luisa/Newt et transmission Hidalgo.
 - Anne/Newt désarmées ; M240/grenades facultatifs = adaptation.
 - Plans reconstruits ; texte intégral non confronté.
@@ -37,10 +37,14 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 
 ## Reprise artistique et intégration
 
-1. Intégrer/comparer les28 props déjà produits avant génération ; conserver42 sprites déjà fusionnés.
+1. Intégrer/comparer les 28 props déjà produits avant génération ; conserver 42 sprites déjà fusionnés.
 2. Raccorder les assets à leur scène, pas globalement à chaque type de prop.
 
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.
+
+## Production commune précisée par les discussions
+
+Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant par asset ou pose, profil latéral 2D et direction artistique Tantalus ; identité, tenue et variante conservées ; galerie et archive vérifiables. Associer une référence visuelle contextualisée lorsque disponible. Un résultat de recherche non ouvert reste une piste. Chaque continuité et chaque version gardent leur provenance ; les états d’IA propres aux castes restent à relier à des comportements réellement présents. Ces exigences ne certifient ni la couverture, ni un raccord encore absent.
 
 ## Documents examinés
 

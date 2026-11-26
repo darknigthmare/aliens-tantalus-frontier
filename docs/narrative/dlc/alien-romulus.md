@@ -20,7 +20,7 @@ Chemin de publication prévu : `archives/dlc-source-recovery-20261126/alien-romu
 
 ## Décisions à préserver
 
-Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
+Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13`, `D17`, `D18`, `D19`, `D20`, `D21`, `D22` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
 
 ## Déjà documenté dans la source
 
@@ -44,6 +44,18 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 3. Garder les ellipses déclarées tant qu'une référence ne justifie pas le trajet physique.
 
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.
+
+## Production commune précisée par les discussions
+
+Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant par asset ou pose, profil latéral 2D et direction artistique Tantalus ; identité, tenue et variante conservées ; galerie et archive vérifiables. Associer une référence visuelle contextualisée lorsque disponible. Un résultat de recherche non ouvert reste une piste. Chaque continuité et chaque version gardent leur provenance ; les états d’IA propres aux castes restent à relier à des comportements réellement présents. Ces exigences ne certifient ni la couverture, ni un raccord encore absent.
+
+## Priorités acceptées dans les discussions
+
+Le 28 septembre 2026 à 23:20:31 UTC, quatre axes sont expressément acceptés (`D17`, preuve `CTX-R2-03`) : **laboratoire de référence, parcours complets sans diagnostic, raccords continus du Corbelan, performances et sons**. Chacun doit avoir un état de réalisation distinct ; un outil de diagnostic ne remplace pas le trajet joueur, un graphe ne prouve pas le passage physique et un son ajouté ne prouve pas un gain de performance.
+
+La demande de 02:56:55 UTC du même jour vise les niveaux et connexions quasi exacts, les dialogues de référence disponibles et de nouveaux dialogues compatibles avec le lore. Les répliques nouvelles du projet demeurent identifiées comme originales ; aucun dialogue absent n’est prétendu cité. Les ellipses capsules/Corbelan et du monte-charge restent ouvertes tant que le trajet complet n’est pas démontré.
+
+Le codex des castes demandé le 27 septembre 2026 inclut tadpole et cocon (`D21`, preuve `CTX-R2-07`). Le rapport de spécification distingue tadpole en récipient/laboratoire, cocon de maturation d’un individu et enveloppe de survie adulte de Big Chap ; il ne déclare pas ce système intégré. Préserver identité et provenance lors d’une transformation, perception limitée, attaques pouvant échouer et arrivées justifiées ; ne pas imposer une progression Drone→Warrior→Praetorian→Reine à chaque individu.
 
 ## Documents examinés
 

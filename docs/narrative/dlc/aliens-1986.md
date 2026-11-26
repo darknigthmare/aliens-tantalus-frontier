@@ -4,7 +4,7 @@
 
 ## Périmètre et version
 
-**Source examinée : V114 RC1 + branche sprites V115.** Opération autonome et inspections ; raccord hôte documenté dans le dépôt, distinct d'une conversion native.
+**Sources examinées : V114 RC1, V115 et présentation V116 publiée.** Opération autonome et inspections ; raccord hôte documenté dans le dépôt, distinct d'une conversion native.
 
 25 lieux inspectables ; 11 lieux d'opération ; 20 raccords réciproques ; 5 objectifs locaux ; 80 règles ; 8 repères absents.
 
@@ -12,7 +12,7 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-V114 fusionnée dans la cumulative ; 70 PNG V115 en PR65 brouillon, qualification/raccord à achever.
+PR #70 fusionnée dans main au commit 5f38b7bad2c6401424b23fda11aeb86068f0f354 ; 123 PNG dans le manifeste V116. La branche V115/PR #65 reste une provenance historique distincte.
 
 [PR #57](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/57) · [PR #65](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/65)
 
@@ -20,7 +20,7 @@ Chemins repérés : `modules/aliens-1986/v114/`, `dlc/aliens-1986/`, `assets/dlc
 
 ## Décisions à préserver
 
-Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D10`, `D13` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
+Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D10`, `D13`, `D18`, `D19`, `D20`, `D21`, `D22` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.
 
 ## Déjà documenté dans la source
 
@@ -36,10 +36,24 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 
 ## Reprise artistique et intégration
 
-1. Préserver et qualifier les 70 PNG de la branche V115 avant de régénérer les mêmes identités.
+1. Comparer les 123 PNG du manifeste V116 avant de produire les variantes encore manquantes ; préserver la provenance des 70 V115, 11 réemplois et 42 nouveaux.
 2. Raccorder chaque tenue/arme à son propriétaire ; une Reine d'inspection ou un loader de décor ne clôture pas le final.
 
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.
+
+## Production commune précisée par les discussions
+
+Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant par asset ou pose, profil latéral 2D et direction artistique Tantalus ; identité, tenue et variante conservées ; galerie et archive vérifiables. Associer une référence visuelle contextualisée lorsque disponible. Un résultat de recherche non ouvert reste une piste. Chaque continuité et chaque version gardent leur provenance ; les états d’IA propres aux castes restent à relier à des comportements réellement présents. Ces exigences ne certifient ni la couverture, ni un raccord encore absent.
+
+## Reprise V116 vérifiée dans la PR #70
+
+[PR #70 fusionnée](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/70) dans `main` à `5f38b7bad2c6401424b23fda11aeb86068f0f354` ; dernier head testé `1c20e87e8656dc0996523fd27319917b6215cdf7`. Le [manifeste V116](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/1c20e87e8656dc0996523fd27319917b6215cdf7/docs/development/aliens-1986-sprites-v116/manifest.json) compte **123 PNG : 70 V115, 11 réutilisés et 42 nouveaux**. Les 16 personnages possèdent chacun `idle`, `walk` et `interact`, sous forme d’images clés. Cela ne fournit pas les cycles complets.
+
+Quatre poses restent absentes après refus : `hicks-wounded`, `warrior-walk-right`, `facehugger-attack-right`, `facehugger-death-right`. La Reine et les véhicules du catalogue ne créent pas un combat final ni une conduite de véhicule. Le montage M41A/M240 de Ripley reste à comparer.
+
+La PR #70 signale **20 PNG anciens (40 024 719 octets) et 53 documents (1 759 979 octets) non envoyés**, ainsi que 19 sources de poses déjà absentes. Les sept variantes identifiées sont `door-leaf-damaged`, `door-leaf-reinforced`, `door-leaf-breached`, `meal-tray-food`, `supply-case-medical-empty`, `supply-case-ammo-closed` et `supply-case-ammo-empty`. Une planche d’orientations de sentinelle et douze révisions complètent les 20 PNG. Une nouvelle génération ne constitue pas la récupération des octets perdus.
+
+Le [workflow Aliens du head testé](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45753007668) documente 665/665 contrôles V114, 20/20 d’intégration, 24/24 Chromium et 18 cas de menu/146 assertions. Ce sont les résultats de cette PR, pas des tests rejoués pour la présente bible ; la fidélité exacte au film reste non certifiée. Voir le [README V116](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/1c20e87e8656dc0996523fd27319917b6215cdf7/docs/development/aliens-1986-sprites-v116/README.md).
 
 ## Documents examinés
 
