@@ -23,14 +23,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1650766,
-        "mode": "RGBA",
+        "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1176697,
-        "alphaZeroPercent": 74.81238047281902,
-        "alphaAbove245": 366575,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           281,
@@ -38,12 +36,7 @@
           735,
           1527
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -84,14 +77,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1729773,
-        "mode": "RGBA",
+        "sha256": "5612335b92ae4c4db10b1ebacba9732aafcaa1deb949cba0bd14400774307375",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1120077,
-        "alphaZeroPercent": 71.21257781982422,
-        "alphaAbove245": 429828,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -99,12 +90,7 @@
           747,
           1519
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -146,14 +132,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1775928,
-        "mode": "RGBA",
+        "sha256": "e202663c2a0d4f6465619f0874bb460591e8a7db5b6d1aefa5f077616e046185",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1099909,
-        "alphaZeroPercent": 69.93033091227214,
-        "alphaAbove245": 447096,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           243,
@@ -161,12 +145,7 @@
           755,
           1519
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -207,27 +186,20 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1678369,
-        "mode": "RGBA",
+        "sha256": "eac65f04e3e4e6c8cc764bd54ba94a2c96271e4f323863a9d9f3dba01d368d86",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084209,
-        "alphaZeroPercent": 68.9321517944336,
-        "alphaAbove245": 454712,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           204,
-          36,
+          35,
           758,
-          1521
+          1522
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -286,14 +258,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1633599,
-        "mode": "RGBA",
+        "sha256": "63ff8da8b39f4645a2a65f8b790fdd7240c92a6e9e6f93b340b75a0a2e1b7246",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084330,
-        "alphaZeroPercent": 68.93984476725261,
-        "alphaAbove245": 464983,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           261,
@@ -301,12 +271,7 @@
           760,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -360,14 +325,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1476134,
-        "mode": "RGBA",
+        "sha256": "02fb4529e6616100201bc86df1f200e19b34e2df4481bc879c12a2a927026958",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1146950,
-        "alphaZeroPercent": 72.92111714680989,
-        "alphaAbove245": 396467,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -375,12 +338,7 @@
           735,
           1509
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -436,7 +394,8 @@
           305,
           2112,
           447
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -485,7 +444,8 @@
           23,
           1644,
           906
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -544,7 +504,8 @@
           75,
           1754,
           834
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -603,18 +564,23 @@
         "Produce ONE transparent-background game sprite of the exact LANDER ONE shuttle from Alien: Covenant (2017) shown in these two FINAL FILM VFX stills. Reconstruct the ship as faithfully as possible, preserving its very broad rectangular landing-craft proportions, low blunt wedge cockpit with the exact dark window shape, industrial grey plating with worn muted yellow-green lateral panels, square dorsal equipment bays and round canisters, the paired huge aft engine drums and the four separately mounted downward VTOL thrusters. Use the three-quarter left-facing side view of the FIRST reference: nose on the left, aft engines on the right, low camera, enough dorsal detail to read shape. Second image is geometry/detail reference only, not the desired overhead view. Isolate the entire shuttle, with all thrusters and engines visible within the frame. Engines idle, no flame, no exhaust, no water, no landscape, no sky, no people, no ground, no cast shadow, no labels or caption, no extra ship. High-detail photorealistic cinematic 2D asset for side-on gameplay, neutral light revealing reference details, no redesign, no extra wings, no sci-fi fighter features. Exactly one complete object with transparent alpha and generous margin on all sides. Keep the film silhouette, proportions, windows, panel placements and worn material finishes."
       ],
       "alphaQA": {
+        "width": 1895,
+        "height": 830,
+        "bytes": 1481857,
+        "sha256": "e7573812135eb31f2404a151217288a254bc35b653bdc7f2bf848ea25a2858c8",
         "alphaExtrema": [
           0,
           255
         ],
+        "alphaZero": 972174,
+        "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           49,
           148,
           1837,
           705
         ],
-        "alphaZero": 972174,
-        "alpha240plus": 575516
+        "pass": true
       }
     },
     {
@@ -643,18 +609,23 @@
         "Reconstruction guidée par les références ; détails des parties non visibles non certifiés."
       ],
       "alphaQA": {
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1293783,
+        "sha256": "fa04129644e2020b10b4189a76bf17c3d059df4707bf7bb5e565048d7d6e0057",
         "alphaExtrema": [
           0,
           255
         ],
+        "alphaZero": 1085987,
+        "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           57,
           131,
           1198,
           1122
         ],
-        "alphaZero": 1085987,
-        "alpha240plus": 456633
+        "pass": true
       }
     },
     {
@@ -684,7 +655,23 @@
         "Cryopod ouvert ; usage prévu dans la chambre de réveil uniquement."
       ],
       "alphaQA": {
-        "status": "pending-numeric-check"
+        "width": 1926,
+        "height": 817,
+        "bytes": 1707461,
+        "sha256": "f30424189ce5397a7f0e8f7dc5e2ba7cd80bec29ce6e8d3b68b88f8177cdd6b7",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 758587,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          65,
+          36,
+          1907,
+          803
+        ],
+        "pass": true
       }
     },
     {
@@ -716,7 +703,8 @@
           17,
           732,
           1521
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -766,7 +754,8 @@
           16,
           729,
           1520
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -813,7 +802,8 @@
           18,
           731,
           1526
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -866,7 +856,8 @@
           117,
           748,
           1469
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -931,7 +922,8 @@
           31,
           834,
           1490
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1002,7 +994,8 @@
           21,
           829,
           1515
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1073,7 +1066,8 @@
           13,
           1183,
           1015
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1139,7 +1133,8 @@
           16,
           716,
           1500
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1201,7 +1196,8 @@
           16,
           725,
           1511
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1262,7 +1258,8 @@
           24,
           1089,
           1174
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1334,7 +1331,8 @@
           42,
           1324,
           993
-        ]
+        ],
+        "pass": true
       },
       "animationsVerified": false,
       "runtimeAdmission": "catalogue-only"
@@ -1381,7 +1379,8 @@
           48,
           1637,
           913
-        ]
+        ],
+        "pass": true
       },
       "animationsVerified": false
     },
@@ -1430,7 +1429,8 @@
           43,
           857,
           1266
-        ]
+        ],
+        "pass": true
       },
       "animationsVerified": false
     },
@@ -1466,7 +1466,8 @@
           241,
           2150,
           590
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1533,7 +1534,8 @@
           11,
           1881,
           664
-        ]
+        ],
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1591,7 +1593,25 @@
           "prompt": "Edit the second attached image, the isolated P15 movie-prop cylinder, using the FIRST attached photograph as the authoritative appearance reference. This is a fidelity correction to the exterior printed graphic only. Keep the physical silver cylinder, its scale, full visible ends, same diagonal pose and clean transparent background unchanged. Correct the printed layout to match the photographed actual Alien: Covenant prop. The LONG dark-red stripe extends along almost the FULL printable cylinder length, parallel to its axis, with the negative pale P15 lettering AT THE START of that long red stripe, not contained in a small separate red box. The black words PHOSPHORUS FLARE form a SEPARATE PARALLEL ROW on the bare silver alongside the long red stripe, exactly like the first photo. The original design has thin parallel red/white lines along that stripe and a pointed/slanted termination at its far end. It does NOT have a short red P15 block followed immediately inline by PHOSPHORUS FLARE as in the second image. Match the exact two parallel rows of the first reference, preserving its relative font weight, spacing, long stripe shape and red tone. Keep only the inert closed exterior prop; do not add fire, hands, parts or instructional callouts. No auction watermark, backdrop, halo or shadow. Keep all outside pixels alpha zero, with natural narrow antialiasing only, one complete transparent PNG sprite."
         }
       ],
-      "alphaQA": null,
+      "alphaQA": {
+        "width": 1536,
+        "height": 1024,
+        "bytes": 1619883,
+        "sha256": "9fcc223ba31e32acf005e607ed6993564507da9e516f33370f03d7c5458ea4ba",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1233163,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          72,
+          37,
+          1404,
+          1011
+        ],
+        "pass": true
+      },
       "animationsVerified": false
     },
     {
@@ -1638,7 +1658,8 @@
           90,
           1264,
           1035
-        ]
+        ],
+        "pass": true
       },
       "animationsVerified": false
     },
@@ -1686,7 +1707,8 @@
           141,
           1395,
           892
-        ]
+        ],
+        "pass": true
       },
       "animationsVerified": false
     },
@@ -1705,10 +1727,514 @@
       "reusedFrom": "assets/openai/equipment/v122-vehicles/covenant-terraforming-truck-reference-native-v122.png",
       "visualReview": "Existing Covenant truck asset inspected; original pixels retained.",
       "limitations": [
-        "Previously generated native project asset reused; exact source-image provenance is being recovered.",
-        "No pixel-perfect film comparison established."
+        "Adaptation of Tony Drew's orange six-wheel production-design concept, reused byte-for-byte from v122.",
+        "Final filmed geometry is unattested; existing v122 asset was explicitly catalog-inspection-only. Kept catalogue-only in v0.11 as well."
       ],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "alphaQA": {
+        "width": 1717,
+        "height": 916,
+        "bytes": 1701068,
+        "sha256": "5e70e3d9721fcf056ecc3db84a557b25acd0a48d8074acc20ccd2579c729cbd2",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 890195,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          34,
+          9,
+          1667,
+          898
+        ],
+        "pass": true
+      },
+      "runtimeAdmission": "catalogue-only",
+      "sourceFacing": -1,
+      "inputReferences": [
+        {
+          "source": "https://www.tonydrew.com.au/film",
+          "url": "https://m1.22slides.com/tonydrew/truckfront-2115632.jpg?f=webp&w=1265&s=3e0b794a181e8feb59583205beb65a60",
+          "sha256": "675422278b645336b9fa0ee8edf5f46ae8844ef953bcb2720f014b749b457a5c",
+          "credit": "Tony Drew, production design"
+        },
+        {
+          "source": "https://www.tonydrew.com.au/film",
+          "url": "https://m1.22slides.com/tonydrew/truckrear-2115631.jpg?f=webp&w=1265&s=bf745431babae60119c8885d73b38022",
+          "sha256": "2a34abde92ad3dce84e0ae9d6cfcf97971398b9c45674e883ce86ab3022ef58c",
+          "credit": "Tony Drew, production design"
+        }
+      ]
+    },
+    {
+      "id": "lope",
+      "path": "assets/openai/sprites/alien-covenant-v011/lope.png",
+      "gitBlobSha": "fb4105fa8ac9780eaf6f0421ea95fb609beb55e2",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Lower trousers, boots and rear gear are partly reconstructed from cropped field reference.",
+        "Pose changed from holding wheat to empty-handed idle."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1699088,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1100670,
+        "alphaZeroPercent": 69.97871398925781,
+        "alphaAbove245": 446100,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          271,
+          32,
+          759,
+          1518
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "lope-field-looper.jpg",
+          "url": "https://www.looper.com/img/gallery/why-chava-from-netflixs-chupa-looks-so-familiar/his-next-franchise-project-was-alien-covenant-1681150671.jpg",
+          "source": "https://www.looper.com/1253544/why-chava-netflixs-chupa-looks-familiar/",
+          "credit": "Alien: Covenant film frame / 20th Century Fox republished Looper"
+        },
+        {
+          "file": "lope-crewmessage.jpg",
+          "url": "https://img.youtube.com/vi/4QB2az9Gpe8/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=4QB2az9Gpe8",
+          "credit": "Official Alien: Covenant crew-message promotion"
+        },
+        {
+          "file": "karine-faris-ledward-medbay.jpg",
+          "url": "https://images8.alphacoders.com/869/thumb-1920-869204.jpg",
+          "source": "https://wall.alphacoders.com/big.php?i=869204",
+          "credit": "Alien: Covenant production still / 20th Century Fox, redistributed AlphaCoders"
+        },
+        {
+          "file": "branson-last-supper.jpg",
+          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
+          "source": "https://www.independent.co.uk",
+          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
+        },
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Five references: 1 Lope handling wheat; 2 Lope crew-message face; 3 unrelated medbay; 4 unrelated Branson; 5 group crew. Subject Sergeant DAN LOPE, Demián Bichir, face from images1/2. Reproduce his exact mature narrow face with short salt-and-pepper beard/moustache, dark brimmed expedition cap and long ear/neck flaps, grey-black mottled field jacket, tan/olive tactical webbing vest with rows of compact rectangular pouches, shoulder radio, Covenant unit sleeve patch, dark gloves, olive cargo trousers and heavy expedition boots. Reference1 is the authoritative costume, not image2's navy onboard shirt. His expression is focused, both hands empty; remove wheat and rifle. Do not make a blond young man, and do not give him Walter's white cap. Gear must be practical woven straps/pouches, no hard armor.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "faris",
+      "path": "assets/openai/sprites/alien-covenant-v011/faris.png",
+      "gitBlobSha": "a454fc318af6ccbffe817746cec80289a3080306",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Reference is medical-bay scene in her pilot coverall; medical gloves omitted for cockpit idle profile.",
+        "Legs and boots partly reconstructed; right-facing idle adapted.",
+        "Lower trousers/boots and changed neutral pose reconstructed beyond the torso-focused film reference.",
+        "Faris v1 secondary group position was misidentified; v2 explicitly anchors facial likeness in Ben Rigby's individually captioned Amy Seimetz photograph and the medbay still."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1641718,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1133180,
+        "alphaZeroPercent": 72.04564412434895,
+        "alphaAbove245": 408416,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          294,
+          20,
+          729,
+          1520
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "karine-faris-ledward-medbay.jpg",
+          "url": "https://images8.alphacoders.com/869/thumb-1920-869204.jpg",
+          "source": "https://wall.alphacoders.com/big.php?i=869204",
+          "credit": "Alien: Covenant production still / 20th Century Fox, redistributed AlphaCoders"
+        },
+        {
+          "file": "branson-last-supper.jpg",
+          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
+          "source": "https://www.independent.co.uk",
+          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
+        },
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "faris-rigby.jpg",
+          "url": "https://images.squarespace-cdn.com/content/v1/60dde3137485ff6c95853f9e/9a2c6407-6bed-4875-b34b-0ea5fcdc9c9c/Photo%2B24-04-2016%2C%2B3%2B42%2B17%2BPM.jpg",
+          "source": "https://www.benjaminrigby.com/",
+          "credit": "Benjamin Rigby, actor and set photographer; individually captioned Amy Seimetz – Alien: Covenant"
+        },
+        {
+          "file": "generated:faris-v1"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Three references: 1 medbay with three crew; 2 Branson close-up; 3 group crew. Subject MAGGIE FARIS, Amy Seimetz, the WOMAN ON THE FAR LEFT in image1. Her exact light-skinned natural face, dark brown hair loosely tied back with face strands; image3 woman leaning forward at table near image-left in olive jacket confirms identity. Reproduce image1's olive green practical zip-front one-piece pilot coverall, flat simple collar open over a light crew T-shirt, chest utility pocket and small understated mission insignia, black utilitarian belt with metal buckle and small clips/pouch, sleeves down. Continue matching olive trousers and dark work boots. Remove white disposable medical gloves, make both bare hands empty at sides for cockpit idle. No tactical armor, no gun, no cap or helmet, no blood.",
+      "backgroundEditPrompt": "Edit the LAST of the three attached images, a full-body Covenant pilot sprite. References1 and2 are photographs of the SAME character, Maggie Faris (Amy Seimetz) in Alien: Covenant (2017): in image1 she is the woman on the FAR LEFT of the medical scene, and image2 is Benjamin Rigby's location portrait of Amy Seimetz. Correct ONLY the generated sprite's facial likeness and hair to match Amy's distinctive natural facial proportions in these two actual photos, with her dark blonde/light-brown hair loosely tied back and wisps at the sides. Do not use Tess Haubrich/Rosenthal's face. Preserve the third image's exact olive green pilot coverall, plain collar, white undershirt, pocket positions, belt and utility clips, trousers, boots, body proportions, empty hands, stable full-body three-quarter pose facing screen RIGHT. No outer weather jacket from image2; her interior pilot coverall from image1 is the target. Ensure her expression is neutral and attentive. Keep complete head and both boot soles comfortably inside frame with transparent margin. Output original full-body clean PNG CUTOUT with truly transparent alpha-zero exterior and corners. Subject visibly opaque with thin antialiased contour only; no background, haze, floor, shadows, checkerboard, text or additional objects.",
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "karine",
+      "path": "assets/openai/sprites/alien-covenant-v011/karine.png",
+      "gitBlobSha": "574b9bc9383146f9ac02f6570fc4548dc8f13550",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Film medical-bay shirt variant used for the adapted lander-hold profile; tied-hair procedural parameter superseded by actual chin-length bob reference.",
+        "Lower legs and boots not shown; conservatively reconstructed."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1447878,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1166997,
+        "alphaZeroPercent": 74.19567108154297,
+        "alphaAbove245": 378696,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          312,
+          20,
+          736,
+          1523
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "karine-faris-ledward-medbay.jpg",
+          "url": "https://images8.alphacoders.com/869/thumb-1920-869204.jpg",
+          "source": "https://wall.alphacoders.com/big.php?i=869204",
+          "credit": "Alien: Covenant production still / 20th Century Fox, redistributed AlphaCoders"
+        },
+        {
+          "file": "branson-last-supper.jpg",
+          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
+          "source": "https://www.independent.co.uk",
+          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
+        },
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Three references: 1 medbay; 2 unrelated Branson; 3 group. Subject KARINE ORAM, Carmen Ejogo, the WOMAN ON THE RIGHT in image1, leaning toward the patient. Reproduce her exact face, medium-brown skin, slim adult build and straight softly highlighted warm-brown CHIN-LENGTH BOB haircut (not Daniels' dark pixie and not long ponytail). Her garment is the plain LIGHT GREY close-fitting short-sleeve crew-neck T-shirt seen in image1, tucked into dark charcoal/olive practical work trousers, plain black belt and rugged dark work boots. No jacket or tactical vest for this medical/lander interior variant, no cap, no necklace invented. Both bare hands empty in neutral idle, calm attentive expression, no patient or medical equipment.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "branson-record",
+      "path": "assets/openai/sprites/alien-covenant-v011/branson-record.png",
+      "gitBlobSha": "6b4a2a930a902926c04568255dc42a7f8dce81f3",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Face anchored to Branson's Last Supper appearance, not a full-body cabin-video frame.",
+        "Pale-grey shirt and neutral work trousers reconstruct the archive runtime profile; full-body result remains unused by current campaign renderer."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1501192,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1136045,
+        "alphaZeroPercent": 72.22779591878255,
+        "alphaAbove245": 408152,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          282,
+          25,
+          735,
+          1525
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "branson-last-supper.jpg",
+          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
+          "source": "https://www.independent.co.uk",
+          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
+        },
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Two references: 1 James Franco as Jacob Branson close-up from Last Supper; 2 full crew photo with the SAME man near center wrapped in olive blanket. Subject CAPTAIN JACOB BRANSON from Alien: Covenant, James Franco. Exact recognizable mature narrow face, short wavy dark brown hair, short scruffy beard/moustache. Archive/cabin profile wearing the light-grey round-neck crew T-shirt with restrained small blue USCSS Covenant emblem visible under the blanket in image2; remove the blanket completely for neutral full-body archival sprite. Simple dark olive crew work trousers and plain dark work boots, conservative continuation without armor or decorative gadgets. No hat, no uniform rank epaulettes, no hologram effects, no screen frame, no microphone or mug; both bare hands relaxed empty. Natural neutral expression.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ],
+      "runtimeAdmission": "catalogue-only"
+    },
+    {
+      "id": "hallett",
+      "path": "assets/openai/sprites/alien-covenant-v011/hallett.png",
+      "gitBlobSha": "49da215e421fb87c1fe84b60de8c7029b3e78961",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Full-body standing pose and occluded lower legs reconstructed; group field reference identifies Hallett by his ginger beard, matched to captioned full-crew photo.",
+        "Weapon removed for runtime separate weapon layer."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1648023,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1115036,
+        "alphaZeroPercent": 70.89207967122395,
+        "alphaAbove245": 434321,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          267,
+          25,
+          754,
+          1512
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "crew-ramp-gq.jpg"
+        },
+        {
+          "file": "ricks-latintimes.jpg",
+          "url": "https://d.latintimes.com/en/full/418003/jussie-smollett.jpg",
+          "source": "https://www.latintimes.com/jussie-smollett-talks-alien-covenant-experience-empire-actor-reveals-scariest-417988",
+          "credit": "20th Century Fox production still, republished alongside direct Jussie Smollett interview in Latin Times"
+        }
+      ],
+      "generationPrompt": "Create ONE complete realistic full-body human game sprite from Alien: Covenant (2017), photographic materials, correct recognizable actor likeness, normal adult proportions. Stable standing idle pose, three-quarter SIDE view facing screen RIGHT, both hands relaxed and EMPTY for separate weapons. Complete hair/cap and soles of both boots visible, feet apart. At least 7% transparent padding around the entire silhouette, particularly below soles. Genuine clean PNG CUTOUT, alpha exactly zero outside person and in all corners; subject visibly opaque, antialias contour only. No environment, floor, cast shadow, haze, painted checkerboard, weapon, props, text captions or extra people. Faithfully reproduce supplied film costume rather than generic space armor. References1 crew at dinner,2 crew disembarking on ramp,3 unrelated Ricks at bridge (IGNORE3). Subject SERGEANT HALLETT, Nathaniel Dean. In image1 he is the ginger-bearded man in black shirt/dogtags immediately LEFT of the older man wearing navy buttoned shirt; in image2 he is the ginger/light-brown BEARDED MAN at REAR CENTER, behind white-cap Walter. Match his light skin, medium ginger beard/moustache, strong natural face. Wear his exact GREEN field hood/cap with long ear-neck flaps, olive green long-sleeve field jacket, BLACK/dark-charcoal tactical vest with horizontal pouch rows, tan utility belt/webbing, shoulder straps/compact gear, dark gloves and muted khaki/olive work trousers, dark reinforced expedition boots. The image2 rear-center subject is authoritative, do not copy the front-right clean-shaven man's face or the front-left civilian tan anorak. Remove rifle, don't add armor plates. Both empty hands neutral at sides.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "cole",
+      "path": "assets/openai/sprites/alien-covenant-v011/cole.png",
+      "gitBlobSha": "3caa0db7a635f083afe082d70faf56065528028b",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Lower trousers/boots and hidden rear gear reconstructed from cohort costume; supplied field photo partly occludes Cole behind another crew member.",
+        "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1768587,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1077309,
+        "alphaZeroPercent": 68.49346160888672,
+        "alphaAbove245": 469017,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          244,
+          11,
+          766,
+          1517
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "crew-ramp-gq.jpg"
+        },
+        {
+          "file": "ricks-latintimes.jpg",
+          "url": "https://d.latintimes.com/en/full/418003/jussie-smollett.jpg",
+          "source": "https://www.latintimes.com/jussie-smollett-talks-alien-covenant-experience-empire-actor-reveals-scariest-417988",
+          "credit": "20th Century Fox production still, republished alongside direct Jussie Smollett interview in Latin Times"
+        }
+      ],
+      "generationPrompt": "Create ONE complete realistic full-body human game sprite from Alien: Covenant (2017), photographic materials, correct recognizable actor likeness, normal adult proportions. Stable standing idle pose, three-quarter SIDE view facing screen RIGHT, both hands relaxed and EMPTY for separate weapons. Complete hair/cap and soles of both boots visible, feet apart. At least 7% transparent padding around the entire silhouette, particularly below soles. Genuine clean PNG CUTOUT, alpha exactly zero outside person and in all corners; subject visibly opaque, antialias contour only. No environment, floor, cast shadow, haze, painted checkerboard, weapon, props, text captions or extra people. Faithfully reproduce supplied film costume rather than generic space armor. References1 crew at dinner,2 expedition on ramp,3 unrelated Ricks portrait IGNORE3. Subject COLE, Uli Latukefu. In image1 he is the tallest large dark-bearded man at the BACK, immediately behind/right of Tennessee and behind the man in fitted white shirt. In image2 he is the very tall broad dark-bearded man at BACK RIGHT behind the front-right clean-shaven man. Use THIS Polynesian adult male face, warm tan/brown complexion, thick short black beard/moustache, large solid athletic build, roughly 10% broader than average crew. Wear the image2 BACK-RIGHT outfit: dark/navy field jacket, dark brimmed cap with ear/neck flaps, black fabric around neck, tan/olive webbing harness and tactical vest with practical rectangular pouches, white/silver shoulder radio module, Covenant patch on upper arm, dark gloves, muted olive cargo trousers and heavy dark expedition boots. No futuristic hard armor. Do not copy the fair front-right man's face. Remove all guns; hands empty and slightly off torso.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "ricks",
+      "path": "assets/openai/sprites/alien-covenant-v011/ricks.png",
+      "gitBlobSha": "30bdc8e2c5e7df8ee2e6a9c06fca189dd1e6a1a3",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Reference seated waist-up bridge still; lower trousers and boots conservatively reconstructed in matching crew suit.",
+        "Pose adapted to full-body empty-handed idle; lit blue bridge colors translated to neutral fabric tone."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1508795,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1132843,
+        "alphaZeroPercent": 72.0242182413737,
+        "alphaAbove245": 411380,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          276,
+          25,
+          736,
+          1521
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "ricks-latintimes.jpg",
+          "url": "https://d.latintimes.com/en/full/418003/jussie-smollett.jpg",
+          "source": "https://www.latintimes.com/jussie-smollett-talks-alien-covenant-experience-empire-actor-reveals-scariest-417988",
+          "credit": "20th Century Fox production still, republished alongside direct Jussie Smollett interview in Latin Times"
+        }
+      ],
+      "generationPrompt": "Create ONE complete realistic full-body human game sprite from Alien: Covenant (2017), photographic materials, correct recognizable actor likeness, normal adult proportions. Stable standing idle pose, three-quarter SIDE view facing screen RIGHT, both hands relaxed and EMPTY for separate weapons. Complete hair/cap and soles of both boots visible, feet apart. At least 7% transparent padding around the entire silhouette, particularly below soles. Genuine clean PNG CUTOUT, alpha exactly zero outside person and in all corners; subject visibly opaque, antialias contour only. No environment, floor, cast shadow, haze, painted checkerboard, weapon, props, text captions or extra people. Faithfully reproduce supplied film costume rather than generic space armor. The single reference is RICKS, Jussie Smollett, seated at the Covenant bridge. Reproduce his exact short tightly-curled dark hair, compact short beard, warm medium-brown skin, natural focused face and lean medium build. His costume is the image's olive-grey / charcoal practical one-piece flight suit with a zip front open slightly at neck, rounded/simple collar, subtle padded horizontal shoulder/upper-arm sections, chest seam and utility zip pocket, and the small red 25/stencil marking visible on his upper sleeve. Muted grey crew undershirt underneath. Continue the same matching grey/olive fabric into straight work trousers with modest utility pockets and plain black work boots. No tactical vest, no holster, no helmet, no cap, no pilot sunglasses. Keep sleeves down, hands empty. Neutral soft illumination without blue computer screen reflections so costume colors stay readable. No chair or console.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
     }
   ],
   "blocked": [
