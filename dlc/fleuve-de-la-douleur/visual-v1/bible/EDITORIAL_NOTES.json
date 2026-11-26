@@ -1,0 +1,1255 @@
+{
+  "schema": 1,
+  "scope": "River of Pain uniquement. Les compléments proviennent des extraits autorisés ; les détails de production et dimensions du modèle restent des choix du projet.",
+  "sources": [
+    {
+      "id": "R5",
+      "title": "Titan Books / Dread Central — extrait autorisé, chapitre 7, pages 64–75",
+      "url": "https://www.dreadcentral.com/wp-content/uploads/2014/11/RiverOfPainExcerpt.pdf",
+      "type": "texte_primaire_extrait_autorise",
+      "use": "Garnison, personnages secondaires, administration, recherche et récupération. Ni plan coté ni référence visuelle complète."
+    },
+    {
+      "id": "R6",
+      "title": "Propstore — concept Ron Cobb du tracteur Daihotai",
+      "url": "https://propstore.com/product/aliens-1986/hand-illustrated-ron-cobb-daihotai-tractor-concept-sketch/",
+      "type": "dessin_de_conception_de_production",
+      "use": "Forme d’un véhicule terrestre conçu pour Aliens. Distinguer concept, modèle final et attribution dans River of Pain."
+    },
+    {
+      "id": "R7",
+      "title": "Titan Books — Alien: The Blueprints",
+      "url": "https://titanbooks.com/9152-alien-the-blueprints/",
+      "type": "editeur_ouvrage_sous_licence",
+      "use": "Existence d’un ouvrage de plans. Ne fournit pas les plans non consultés ni des dimensions à inventer."
+    },
+    {
+      "id": "R8",
+      "title": "Propstore — M41A Pulse Rifle, Aliens (1986)",
+      "url": "https://propstore.com/product/aliens-1986/m41a-pulse-rifle/",
+      "type": "accessoire_de_production",
+      "use": "Forme de l’accessoire du film ; ne prouve pas sa dotation individuelle dans le roman."
+    },
+    {
+      "id": "R9",
+      "title": "Propstore — fusil de Hicks, Aliens (1986)",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/318/lot/94872/Lot-19-ALIENS-1986-Corporal-Dwayne-Hicks-Michael-Biehn-Hero-Shotgun",
+      "type": "accessoire_de_production",
+      "use": "Référence du shotgun de Hicks ; sa présence dans River of Pain reste à établir."
+    },
+    {
+      "id": "R10",
+      "title": "Propstore — concept Ron Cobb du Medlab",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/",
+      "type": "dessin_de_conception_de_production",
+      "use": "Distinguer concept du laboratoire, décor final et aménagement original du jeu."
+    },
+    {
+      "id": "R11",
+      "title": "Propstore — concept Ron Cobb, Atmospheric Processor Control and Operations",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-a-pcontrol-and-operations-concept-sketch/",
+      "type": "dessin_de_conception_de_production",
+      "use": "Direction architecturale des espaces de contrôle, sans graphe complet du DLC."
+    },
+    {
+      "id": "R12",
+      "title": "Propstore — maquette de bâtiment Hadley’s Hope",
+      "url": "https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/",
+      "type": "maquette_de_production",
+      "use": "Volumes et matériaux extérieurs de la colonie ; les dimensions logiques du jeu ne deviennent pas officielles."
+    }
+  ],
+  "chronology": [
+    {
+      "date": "15 mars 2173",
+      "description": "Naissance de Newt ; cette variante se distingue de l’enfant de la campagne 2179.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "date": "2 avril 2173",
+      "description": "Scène collective après la naissance au centre de loisirs ; les tenues de cette époque ne valident pas automatiquement celles de 2179.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "date": "16 mai 2179",
+      "description": "Séquence de récupération spatiale de la navette de Ripley, distincte de la carte coloniale.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "date": "10 juin 2179",
+      "description": "Arrivée de Brackett ; Newt a six ans à cette date.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "date": "Campagne adaptée 2179",
+      "description": "Seize chapitres originaux dans le DLC récupéré. Dialogues, itinéraires et raccourcis ne constituent pas une reproduction scène par scène.",
+      "sourceIds": [
+        "S1",
+        "R1",
+        "R5"
+      ]
+    }
+  ],
+  "exclusions": [
+    "Ne pas mélanger River of Pain avec La Mer des Chagrins : Decker et LV-178 sont hors de ce lot.",
+    "Les mondes Covenant, Origae-6, Planet 4, Auriga et Betty ne sont pas des ajouts à cette campagne.",
+    "Le Daihotai est un tracteur terrestre ; ce nom ne désigne pas la navette de la Compagnie.",
+    "Une référence d’arsenal du film ne prouve pas l’attribution de cet objet à un personnage du roman.",
+    "Les décomptes de population varient selon support et scène ; citer le décompte du roman et le panneau du film séparément.",
+    "L’identité attestée d’un personnage ne certifie ni son visage généré ni une tenue peu décrite."
+  ],
+  "characters": {
+    "brackett": {
+      "description": "Capitaine de la garnison, personnage jouable.",
+      "sourceIds": [
+        "R5"
+      ],
+      "appearance": "Grade attesté ; traits du visage et uniforme précis restent à recouper."
+    },
+    "paris": {
+      "description": "Lieutenant Paris, personnage jouable.",
+      "sourceIds": [
+        "R5"
+      ],
+      "appearance": "Conserver grade et identité propres ; un visage de comédienne audio ne constitue pas une preuve."
+    },
+    "anne": {
+      "description": "Prospectrice, mère de Newt.",
+      "sourceIds": [
+        "R1"
+      ],
+      "appearance": "Cheveux bouclés documentés ; équipement et tenue de campagne à préciser."
+    },
+    "newt": {
+      "description": "Rebecca Jorden, enfant jouable dans les conduits.",
+      "sourceIds": [
+        "S1",
+        "R1",
+        "R3"
+      ],
+      "chronology": "Six ans en juin 2179. Distinguer cette variante du nouveau-né de 2173.",
+      "appearance": "Tenue et salissures selon phase. Le casque de Hicks appartient à une scène ultérieure, exclue de cette variante."
+    },
+    "russ": {
+      "description": "Russell « Russ » Jorden, prospecteur.",
+      "sourceIds": [
+        "S1",
+        "R1"
+      ],
+      "missing": [
+        "Variantes intacte et retour médical à établir sans confondre leurs événements."
+      ]
+    },
+    "komiskey": {
+      "description": "Médecin de la colonie.",
+      "sourceIds": [
+        "R1"
+      ],
+      "appearance": "Silhouette petite et trapue, boucles brunes et yeux bleus à conserver."
+    },
+    "mori": {
+      "description": "Scientifique de la recherche de la Compagnie.",
+      "sourceIds": [
+        "R5"
+      ],
+      "missing": [
+        "Préserver son rôle spécifique ; ne pas fusionner avec Komiskey."
+      ]
+    },
+    "joel": {
+      "description": "Infirmier de la scène médicale.",
+      "sourceIds": [
+        "R1"
+      ],
+      "appearance": "Mince et à peau sombre dans l’extrait ; la palette historique #be9f85 ne valide pas cette caractéristique.",
+      "missing": [
+        "Revoir modèle et PNG sur ce point. Cette fiche ne retouche pas les octets historiques."
+      ]
+    },
+    "simpson": {
+      "description": "Administrateur de la colonie.",
+      "sourceIds": [
+        "R5"
+      ],
+      "missing": [
+        "Comparer la scène administrative à l’extrait de 2179."
+      ]
+    },
+    "hansard": {
+      "description": "Ingénieur en chef cité dans l’extrait.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    "bronagh": {
+      "description": "Cuisinière de la colonie citée dans l’extrait.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    "tim": {
+      "description": "Frère de Newt, famille Jorden.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    "luisa": {
+      "description": "Enfant distincte de Newt, suivie avec une synthèse secondaire.",
+      "sourceIds": [
+        "S4"
+      ],
+      "missing": [
+        "Recouper apparence et scènes sur une source primaire du roman."
+      ]
+    }
+  },
+  "missingCharacters": [
+    {
+      "id": "otto-finch",
+      "name": "Otto Finch",
+      "description": "Prospecteur, l’un des frères Finch.",
+      "sourceIds": [
+        "R5"
+      ],
+      "group": "finch"
+    },
+    {
+      "id": "curtis-finch",
+      "name": "Curtis Finch",
+      "description": "Prospecteur distinct d’Otto.",
+      "sourceIds": [
+        "R5"
+      ],
+      "group": "finch"
+    },
+    {
+      "id": "coughlin",
+      "name": "Sergent Coughlin",
+      "description": "Marine de la garnison.",
+      "appearance": "Petit et corpulent ; traits fins et tenue à préciser.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "stamovich",
+      "name": "Soldat Stamovich",
+      "description": "Marine de la garnison.",
+      "appearance": "Mince, pâle, nez aquilin ; tenue détaillée à documenter.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "marvin-draper",
+      "name": "Sergent Marvin Draper",
+      "description": "Marine identifié dans le chapitre 7.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "yousseff",
+      "name": "Yousseff",
+      "description": "Membre de la garnison cité dans l’extrait.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "reese",
+      "name": "Dr Reese",
+      "description": "Chercheur de la Compagnie.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "hidalgo",
+      "name": "Dr Hidalgo",
+      "description": "Chercheur distinct de Mori et Reese.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "monet",
+      "name": "Samantha Monet",
+      "description": "Identité du registre historique, sans profil individuel.",
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "ripley",
+      "name": "Ellen Ripley",
+      "description": "Personnage de la récupération et de Gateway.",
+      "locations": [
+        "salvage_shuttle",
+        "orbital_medical"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "burke",
+      "name": "Carter Burke",
+      "description": "Personnage lié à Gateway.",
+      "locations": [
+        "orbital_medical"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "jonesy",
+      "name": "Jonesy",
+      "description": "Chat de Ripley ; acteur animal distinct des créatures hostiles.",
+      "locations": [
+        "salvage_shuttle"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "tressa",
+      "name": "Tressa",
+      "description": "Pilote du véhicule de descente de Brackett.",
+      "locations": [
+        "dropship_arrival"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "jernigan",
+      "name": "Jernigan",
+      "description": "Membre de la récupération spatiale.",
+      "group": "jernigan",
+      "locations": [
+        "salvage_bay"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "landers",
+      "name": "Landers",
+      "description": "Membre de la récupération à individualiser.",
+      "group": "jernigan",
+      "locations": [
+        "salvage_bay"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "fleet",
+      "name": "Fleet",
+      "description": "Membre de la récupération à individualiser.",
+      "group": "jernigan",
+      "locations": [
+        "salvage_bay"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "moore",
+      "name": "Moore",
+      "description": "Reste au poste de pilotage pendant que les trois autres récupérateurs descendent.",
+      "group": "jernigan",
+      "locations": [
+        "salvage_flight_deck"
+      ],
+      "sourceIds": [
+        "R1"
+      ],
+      "chronology": "Récupération spatiale, 16 mai 2179."
+    }
+  ],
+  "props": {
+    "antenna": [
+      "Antenne technique",
+      "Communication ou mesure, raccordée au poste."
+    ],
+    "arcade": [
+      "Borne de loisirs",
+      "Machine du centre de loisirs avec état d’alimentation cohérent."
+    ],
+    "barrier": [
+      "Barrière de périmètre",
+      "Guide la circulation d’un espace industriel ou extérieur."
+    ],
+    "beacon": [
+      "Balise d’approche",
+      "Repère lumineux de la zone d’arrivée."
+    ],
+    "bed": [
+      "Lit",
+      "Distinguer mobilier médical et domestique selon la salle."
+    ],
+    "bed-lamp": [
+      "Lampe de chevet",
+      "Éclairage associé au lit et à son support."
+    ],
+    "bench": [
+      "Banc",
+      "Assise collective ; certaines instances sont physiques."
+    ],
+    "blanket": [
+      "Couverture",
+      "Textile domestique ou médical lié à son support."
+    ],
+    "bolt-panel": [
+      "Panneau boulonné",
+      "Plaque technique fixée dans sa paroi."
+    ],
+    "cable": [
+      "Câble de service",
+      "Liaison à raccorder à un appareil ou cheminement."
+    ],
+    "cable-spool": [
+      "Touret de câble",
+      "Réserve de câble sur bobine."
+    ],
+    "cable-tray": [
+      "Chemin de câbles",
+      "Support mural ou suspendu pour réseaux."
+    ],
+    "cart": [
+      "Chariot de manutention",
+      "Roues et plateau doivent garder une ligne de sol cohérente."
+    ],
+    "case": [
+      "Mallette rigide",
+      "Conteneur de service, distinct des conteneurs interactifs."
+    ],
+    "ceiling-light": [
+      "Éclairage de plafond",
+      "Luminaire relié visuellement à un support supérieur."
+    ],
+    "chain-hoist": [
+      "Palan à chaîne",
+      "Levage nécessitant support et charge cohérents."
+    ],
+    "chair": [
+      "Chaise",
+      "Assise des postes ou des espaces civils."
+    ],
+    "cocoon": [
+      "Cocon de ruche",
+      "Volume organique lié à la phase d’envahissement."
+    ],
+    "coil": [
+      "Bobine industrielle",
+      "Stockage ou réseau selon la fonction de la salle."
+    ],
+    "console": [
+      "Console technique",
+      "Pupitre et affichage associés à une fonction réelle."
+    ],
+    "crate": [
+      "Caisse de fret",
+      "Conteneur souvent utilisé comme couverture physique."
+    ],
+    "cupboard": [
+      "Placard",
+      "Rangement posé ou fixé à une structure."
+    ],
+    "door-plaque": [
+      "Plaque de porte",
+      "Signalétique liée à une porte précise."
+    ],
+    "drawing": [
+      "Dessin personnel",
+      "Détail de vie coloniale attaché à un support."
+    ],
+    "duct-junction": [
+      "Jonction de conduit",
+      "Raccord aligné sur les volumes de ventilation."
+    ],
+    "egg": [
+      "Œuf xénomorphe",
+      "Œuf individuel, silhouette et échelle propres à la scène."
+    ],
+    "egg-bed": [
+      "Lit d’œufs",
+      "Zone organique large ; un œuf seul ne la remplace pas."
+    ],
+    "fan": [
+      "Ventilateur",
+      "Organe d’air fixé à une ouverture technique."
+    ],
+    "fire-cabinet": [
+      "Armoire incendie",
+      "Coffret mural de secours, légende conservée."
+    ],
+    "floodlight": [
+      "Projecteur",
+      "Éclairage industriel, pied et câble raccordés."
+    ],
+    "fridge": [
+      "Réfrigérateur",
+      "Stockage de cuisine ou du réfectoire."
+    ],
+    "fuel": [
+      "Réserve de carburant",
+      "Conteneur en zone extérieure ou de maintenance."
+    ],
+    "gantry": [
+      "Portique",
+      "Structure porteuse avec base et passage visibles."
+    ],
+    "gauge": [
+      "Manomètre",
+      "Instrument relié à un circuit de pression."
+    ],
+    "glass": [
+      "Vitre d’isolement",
+      "Fenêtre murale ; jamais une porte debout au milieu du sol."
+    ],
+    "glass-cabinet": [
+      "Armoire vitrée",
+      "Rangement au vitrage réellement transparent."
+    ],
+    "grille": [
+      "Grille technique",
+      "Protection de conduit ou de sol dans la bonne orientation."
+    ],
+    "gurney": [
+      "Civière roulante",
+      "Passage libre pour patient et roues."
+    ],
+    "hab-door": [
+      "Porte de logement décorative",
+      "Façade à distinguer d’un portail interactif."
+    ],
+    "hand-truck": [
+      "Diable",
+      "Outil à roues et bavette de manutention."
+    ],
+    "hanging-coat": [
+      "Manteau suspendu",
+      "Vêtement accroché à hauteur cohérente."
+    ],
+    "hatch": [
+      "Trappe",
+      "Ouverture technique distincte d’un conduit traversable."
+    ],
+    "hose-reel": [
+      "Enrouleur de flexible",
+      "Flexible sur support de service."
+    ],
+    "kitchen-hood": [
+      "Hotte de cuisine",
+      "Extraction au-dessus de la cuisson."
+    ],
+    "lab-bench": [
+      "Paillasse",
+      "Plan de travail scientifique ; certaines instances sont physiques."
+    ],
+    "lamp": [
+      "Luminaire de service",
+      "Éclairage ponctuel fixé à l’architecture."
+    ],
+    "linen": [
+      "Linge",
+      "Textile de réserve ou en transport."
+    ],
+    "locker": [
+      "Casier",
+      "Rangement vertical à la hauteur et légende natives."
+    ],
+    "map": [
+      "Plan mural",
+      "Orientation ; contenu du plan à documenter séparément."
+    ],
+    "medical-cross": [
+      "Signal médical",
+      "Repère mural au-dessus du poste ou passage."
+    ],
+    "medicine": [
+      "Médicaments",
+      "Fournitures sur rangement médical identifiable."
+    ],
+    "microscope": [
+      "Microscope",
+      "Optique d’observation et socle."
+    ],
+    "monitor": [
+      "Moniteur",
+      "Appareil de contrôle sur son support."
+    ],
+    "mug": [
+      "Gobelet",
+      "Objet d’usage quotidien des postes civils."
+    ],
+    "named-doctor": [
+      "Présence médicale signalée",
+      "Repère de scène qui ne remplace pas un humain individualisé."
+    ],
+    "natal-unit": [
+      "Unité obstétricale",
+      "Nacelle médicale volumineuse à capot transparent."
+    ],
+    "noticeboard": [
+      "Panneau d’affichage",
+      "Informations murales de la colonie."
+    ],
+    "oxygen": [
+      "Bouteille d’oxygène",
+      "Réservoir, régulateur et support stable."
+    ],
+    "pallet": [
+      "Palette",
+      "Support de fret avec emprise lisible."
+    ],
+    "panel": [
+      "Panneau de commande",
+      "Interface fixée à la cloison ou à l’appareil."
+    ],
+    "photo": [
+      "Photographie personnelle",
+      "Détail domestique ; ne pas inventer une identité canonique."
+    ],
+    "pilot-seat": [
+      "Siège du pilote de l’épave",
+      "Structure biomécanique monumentale liée à sa chambre."
+    ],
+    "pipe": [
+      "Conduite",
+      "Réseau technique continu avec fixations."
+    ],
+    "pipe-elbow": [
+      "Coude de conduite",
+      "Changement de direction raccordé aux tronçons."
+    ],
+    "plant": [
+      "Plante cultivée",
+      "Culture entretenue dans un contenant."
+    ],
+    "planter": [
+      "Bac de culture",
+      "Culture intérieure, drainage et support."
+    ],
+    "privacy-screen": [
+      "Paravent médical",
+      "Séparation mobile autour des soins."
+    ],
+    "pump-motor": [
+      "Moteur de pompe",
+      "Machine reliée au réseau, parfois physique."
+    ],
+    "rack": [
+      "Rayonnage",
+      "Rangement de pièces sur plusieurs niveaux."
+    ],
+    "radio": [
+      "Poste radio",
+      "Communications, antenne et support."
+    ],
+    "radio-mast": [
+      "Mât radio",
+      "Structure extérieure raccordée au site."
+    ],
+    "ration": [
+      "Rations exposées",
+      "Réserve visible distincte de l’objet d’inventaire."
+    ],
+    "resin": [
+      "Résine organique",
+      "Habillage de ruche selon phase et surface."
+    ],
+    "rib": [
+      "Nervure biomécanique",
+      "Structure de l’épave ou de la ruche."
+    ],
+    "rifle-case": [
+      "Coffret de fusil",
+      "Conteneur dédié, contenu à référencer."
+    ],
+    "rifle-rack": [
+      "Râtelier à fusils",
+      "Support qui ne crée pas une dotation supplémentaire."
+    ],
+    "rock": [
+      "Bloc rocheux",
+      "Relief extérieur parfois utilisé comme couverture."
+    ],
+    "rock-fragment": [
+      "Fragment rocheux",
+      "Détail du sol dans la palette de la zone."
+    ],
+    "screen": [
+      "Écran mural",
+      "Affichage lié au contrôle local."
+    ],
+    "sealed-egg": [
+      "Œuf fermé",
+      "État fermé sans animation d’ouverture implicite."
+    ],
+    "seat": [
+      "Assise intégrée",
+      "Siège associé à la salle ou au véhicule."
+    ],
+    "server": [
+      "Baie informatique",
+      "Meuble technique ventilé et alimenté."
+    ],
+    "shelf": [
+      "Étagère",
+      "Rangement ouvert, posé ou fixé."
+    ],
+    "shower": [
+      "Douche de décontamination",
+      "Arrivée et évacuation dans le sas."
+    ],
+    "shuttle": [
+      "Navette de la Compagnie — décor",
+      "Modèle et nom exacts non établis."
+    ],
+    "sign": [
+      "Signalétique",
+      "Panneau cohérent avec la direction réelle du secteur."
+    ],
+    "sink": [
+      "Évier",
+      "Cuve, robinet et raccords."
+    ],
+    "specimen": [
+      "Bocal de spécimen",
+      "Contenant scientifique ; préserver sa version physique."
+    ],
+    "stove": [
+      "Appareil de cuisson",
+      "Cuisine et extraction reliées au plan de travail."
+    ],
+    "survey-stake": [
+      "Piquet de relevé",
+      "Repère de prospection implanté au sol."
+    ],
+    "table": [
+      "Table",
+      "Surface de travail ou mobilier civil selon la pièce."
+    ],
+    "tank": [
+      "Cuve",
+      "Réservoir avec base et conduites cohérentes."
+    ],
+    "tape-reel": [
+      "Bobines d’enregistrement",
+      "Appareil à bandes fixé au poste."
+    ],
+    "tool-board": [
+      "Panneau d’outillage",
+      "Rangement mural d’outils."
+    ],
+    "tools": [
+      "Outillage",
+      "Outils sur support ou suspendus."
+    ],
+    "tower": [
+      "Tour industrielle",
+      "Volume du périmètre raccordé à l’horizon."
+    ],
+    "toy": [
+      "Jouet",
+      "Objet personnel de l’habitat familial."
+    ],
+    "trace-mark": [
+      "Marque de piste",
+      "Indice au sol associé au passage et à la phase."
+    ],
+    "tractor": [
+      "Tracteur statique — décor",
+      "Distinct du tracteur pilotable natif."
+    ],
+    "transformer": [
+      "Transformateur",
+      "Appareil associé au circuit et à ses sécurités."
+    ],
+    "tray": [
+      "Plateau",
+      "Support de nourriture ou d’instruments selon la salle."
+    ],
+    "turbine": [
+      "Turbine",
+      "Machine rotative dans son volume industriel."
+    ],
+    "valve": [
+      "Vanne",
+      "Commande montée sur son réseau de fluides."
+    ],
+    "vending": [
+      "Distributeur",
+      "Mobilier de service ; certaines instances restent physiques."
+    ],
+    "vent-cover": [
+      "Capot de ventilation",
+      "Grille fixée à une bouche ou un conduit."
+    ],
+    "wall-clock": [
+      "Horloge murale",
+      "Repère horaire accroché au mur."
+    ],
+    "warning-board": [
+      "Panneau d’avertissement",
+      "Signal lié au risque local."
+    ],
+    "washer": [
+      "Machine de buanderie",
+      "Appareil de lavage et raccordements."
+    ],
+    "weapon-rack": [
+      "Râtelier d’armurerie",
+      "Support lié aux règles d’équipement."
+    ],
+    "wheel": [
+      "Roue de réserve",
+      "Pièce stockée au garage."
+    ],
+    "white-monitor": [
+      "Moniteur médical blanc",
+      "Châssis blanc, témoins verts et bleus."
+    ],
+    "window": [
+      "Fenêtre",
+      "Vitrage intégré à un mur."
+    ],
+    "wreck": [
+      "Épave extraterrestre — silhouette",
+      "Vaisseau en fer à cheval associé à son seuil."
+    ],
+    "broken-light": [
+      "Éclairage défaillant",
+      "Variante de phase de l’installation existante."
+    ],
+    "emergency-arrow": [
+      "Flèche d’urgence",
+      "Doit indiquer un trajet accessible."
+    ],
+    "paper-trail": [
+      "Papiers dispersés",
+      "Désordre sans collision ajoutée."
+    ],
+    "scorch": [
+      "Trace de brûlure",
+      "Détail de surface sans trou traversable implicite."
+    ]
+  },
+  "propNotes": {
+    "ceiling-light": {
+      "missing": [
+        "Les données historiques indiquent parfois mount=floor malgré le nom ceiling-light. Vérifier le vrai dessin avant de déplacer l’ancre ; ne pas corriger par simple renommage."
+      ]
+    },
+    "glass": {
+      "appearance": "Fenêtre murale d’isolement : bas visible à 53 unités au-dessus du sol. Transparence réelle requise."
+    },
+    "egg-bed": {
+      "appearance": "Tapis organique large ancré dans son empreinte de sol.",
+      "missing": [
+        "Texture large spécifique absente ; un œuf vertical ne remplace pas cette emprise."
+      ]
+    },
+    "natal-unit": {
+      "sourceIds": [
+        "R1"
+      ],
+      "appearance": "Capot principalement transparent, corps volumineux. Châssis détaillé et raccords adaptés."
+    },
+    "white-monitor": {
+      "sourceIds": [
+        "R1"
+      ],
+      "appearance": "Châssis blanc, témoins verts/bleus ; pied et tracé d’écran interprétés."
+    },
+    "microscope": {
+      "appearance": "L’optique du PNG précise une forme native générique ; cette précision reste une adaptation."
+    },
+    "lab-bench": {
+      "sourceIds": [
+        "R10"
+      ],
+      "missing": [
+        "Comparer au concept Medlab puis au décor final sans confondre les deux."
+      ]
+    },
+    "pilot-seat": {
+      "sourceIds": [
+        "R2"
+      ],
+      "missing": [
+        "Référence du pilote/Space Jockey, proportions du siège et raccord à sa chambre à établir."
+      ]
+    },
+    "named-doctor": {
+      "missing": [
+        "Distinguer repère de décor et véritable profil médical individualisé."
+      ]
+    },
+    "shuttle": {
+      "missing": [
+        "Nom et classe non confirmés ; ne pas nommer Onager ou Daihotai par défaut."
+      ]
+    },
+    "wreck": {
+      "sourceIds": [
+        "S1",
+        "R2"
+      ],
+      "appearance": "Silhouette générale en fer à cheval ; échelle, accès et raccord intérieur à vérifier."
+    },
+    "tractor": {
+      "sourceIds": [
+        "R6"
+      ],
+      "missing": [
+        "Établir si cette instance correspond au Daihotai ou à un autre modèle ; ne pas assimiler au heavy-crawler du roman."
+      ]
+    },
+    "console": {
+      "sourceIds": [
+        "R11"
+      ],
+      "missing": [
+        "Pupitre et instrumentation propres à chaque salle ; un concept A.P. ne valide pas tous les contrôles."
+      ]
+    },
+    "plant": {
+      "appearance": "Plante cultivée en pot ; une serre ne prouve pas une flore sauvage de LV-426."
+    },
+    "planter": {
+      "appearance": "Bac de culture intérieur avec drainage et support cohérents."
+    }
+  },
+  "equipment": {
+    "pulse": {
+      "sourceIds": [
+        "R8"
+      ],
+      "description": "M41A utilisable dans le modèle récupéré.",
+      "appearance": "Silhouette, poignée supérieure, canon, lance-grenades et compteur à contrôler. Chargeur de 30 = règle du jeu."
+    },
+    "flame": {
+      "sourceIds": [
+        "R4"
+      ],
+      "description": "M240 facultatif du râtelier.",
+      "appearance": "Référence d’accessoire du film ; dotation exacte dans le roman à confirmer."
+    },
+    "grenade": {
+      "description": "Mode sous-canon du M41A, projectile et explosion natifs.",
+      "appearance": "Reste attaché au bon fusil ; pas une arme autonome ajoutée."
+    },
+    "tracker": {
+      "description": "Détecteur de mouvements et interface natifs.",
+      "appearance": "Forme documentée dans le registre d’images ; portée et détection simplifiées pour le jeu."
+    },
+    "light": {
+      "description": "Lampe de service à batterie.",
+      "appearance": "Lentille, prise, faisceau et attachage alignés sur l’action."
+    },
+    "weld": {
+      "description": "Outil de soudure des passages.",
+      "appearance": "Prise, câble, porte ciblée et point d’effet alignés."
+    },
+    "marker": {
+      "description": "Balise de repli du gameplay.",
+      "provenance": "creation_originale_du_projet"
+    },
+    "cutter": {
+      "description": "Robot de découpe de récupération spatiale.",
+      "appearance": "Réserver à la séquence de récupération ; aucune attribution marine sans source."
+    },
+    "scanner": {
+      "description": "Scanner de récupération spatiale.",
+      "appearance": "Capteur distinct du détecteur de mouvements colonial."
+    },
+    "suit": {
+      "description": "Scaphandre de récupération spatiale.",
+      "appearance": "Casque, combinaison, gants et joints à documenter pour cette scène."
+    },
+    "grappler": {
+      "name": "Pistolet-grappin de la navette",
+      "description": "Déposé sur les commandes de la navette de Ripley ; distinct du réseau de bras de capture de la baie.",
+      "appearance": "Arme/outil et emplacement à référencer séparément des bras qui retiennent le vaisseau.",
+      "locations": [
+        "salvage_shuttle"
+      ]
+    },
+    "shotgun": {
+      "name": "Fusil à pompe — présence à vérifier",
+      "sourceIds": [
+        "R9"
+      ],
+      "description": "Référence du fusil de Hicks dans Aliens ; aucun porteur ou scène de River of Pain confirmé.",
+      "appearance": "Forme filmique documentée ; pas d’ajout automatique à la dotation de Brackett."
+    }
+  },
+  "additionalEquipmentIds": [
+    "shotgun"
+  ],
+  "accessoryNames": {
+    "tools": "Outils portés des résidents",
+    "tablet": "Tablette de service des résidents",
+    "mug": "Gobelet porté du résident",
+    "linen": "Linge porté du résident"
+  },
+  "vehicles": [
+    {
+      "id": "daihotai-reference",
+      "name": "Daihotai — référence terrestre",
+      "description": "Concept de tracteur conçu pour Aliens.",
+      "appearance": "Comparer vues de conception et version finale avant d’y identifier le véhicule du jeu.",
+      "sourceIds": [
+        "R6"
+      ],
+      "chronology": "Référence filmique ; attribution à la scène du roman à vérifier."
+    },
+    {
+      "id": "heavy-crawler-reference",
+      "name": "Heavy-crawler — récupération",
+      "description": "Véhicule de récupération évoqué au chapitre 7.",
+      "appearance": "Modèle précis non établi ; ne pas l’assimiler au Daihotai.",
+      "sourceIds": [
+        "R5"
+      ]
+    },
+    {
+      "id": "p5000",
+      "name": "Power Loader P-5000 — présence à vérifier",
+      "description": "Piste historique du registre, sans présence authentifiée dans ce récit.",
+      "appearance": "Ne pas ajouter l’exosquelette sur la seule base d’autres scènes Aliens.",
+      "sourceIds": [],
+      "provenance": "presence_dans_ce_recit_a_verifier"
+    }
+  ],
+  "ships": [
+    {
+      "id": "brackett-dropship",
+      "name": "Véhicule de descente de Brackett",
+      "description": "Appareil piloté par Tressa à l’arrivée.",
+      "appearance": "Cabine et extérieur à documenter ; classe UD-4 non supposée.",
+      "locations": [
+        "dropship_arrival",
+        "pad"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "salvage-ship",
+      "name": "Vaisseau récupérateur",
+      "description": "Cadre spatial de récupération, distinct de la colonie.",
+      "appearance": "Baie, sas et pont de pilotage à documenter ; nom exact non établi ici.",
+      "locations": [
+        "salvage_bay",
+        "salvage_flight_deck"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    },
+    {
+      "id": "ripley-shuttle",
+      "name": "Navette retrouvée de Ripley",
+      "description": "Navette et couchette de la scène de récupération.",
+      "appearance": "Référence du modèle précis à relier à la scène avant reconstruction détaillée.",
+      "locations": [
+        "salvage_shuttle"
+      ],
+      "sourceIds": [
+        "R1"
+      ]
+    }
+  ],
+  "materials": {
+    "archive": [
+      "Matériaux des archives",
+      "Stockage, cloisons et circulation administrative."
+    ],
+    "barracks": [
+      "Matériaux de la garnison",
+      "Aménagement militaire local et dotation."
+    ],
+    "canteen": [
+      "Matériaux de restauration",
+      "Sols, surfaces lavables et service civil."
+    ],
+    "command": [
+      "Matériaux du contrôle",
+      "Pupitres et structures du poste colonial."
+    ],
+    "concourse": [
+      "Matériaux des coursives centrales",
+      "Assemblages répétables entre les secteurs."
+    ],
+    "decontamination": [
+      "Matériaux du sas",
+      "Joints, drainage et surfaces de décontamination."
+    ],
+    "derelict": [
+      "Matériaux de l’épave",
+      "Parois et nervures biomécaniques monumentales."
+    ],
+    "domestic": [
+      "Matériaux domestiques",
+      "Logements, textiles et vie quotidienne."
+    ],
+    "exterior": [
+      "Terrain extérieur colonial",
+      "Roche, poussière et structures exposées."
+    ],
+    "garrison": [
+      "Matériaux de l’armurerie",
+      "Supports, cloisons sécurisées et sol dégagé."
+    ],
+    "greenhouse": [
+      "Matériaux de la serre",
+      "Vitrage, ossature, culture et drainage."
+    ],
+    "hangar": [
+      "Matériaux du hangar",
+      "Manutention, sol porteur et ouvertures."
+    ],
+    "hive": [
+      "Matériaux de ruche",
+      "Résine superposée au bâti industriel."
+    ],
+    "industrial": [
+      "Matériaux des processeurs",
+      "Métal, machines, tuyaux et passerelles."
+    ],
+    "laboratory": [
+      "Matériaux de laboratoire",
+      "Surfaces techniques, vitrages et mobilier."
+    ],
+    "leisure": [
+      "Matériaux des loisirs",
+      "Mobilier civil et détente."
+    ],
+    "maintenance": [
+      "Matériaux de maintenance",
+      "Trappes, outillage et réseaux."
+    ],
+    "medical": [
+      "Matériaux médicaux",
+      "Surfaces nettoyables et circulation de soins."
+    ],
+    "refuge": [
+      "Matériaux des cachettes",
+      "Volumes abrités, câbles et accès enfant."
+    ],
+    "residential": [
+      "Matériaux résidentiels",
+      "Coursives, plaques et façades de logements."
+    ],
+    "shaft": [
+      "Matériaux des puits",
+      "Guides, parois, plateformes et niveaux."
+    ],
+    "shuttle": [
+      "Matériaux de la navette",
+      "Cabine, sièges et seuils du vaisseau."
+    ],
+    "utility": [
+      "Matériaux des services",
+      "Buanderie, réserves et conduites."
+    ],
+    "vent": [
+      "Matériaux des conduits",
+      "Sections étroites, raccords et grilles."
+    ],
+    "warehouse": [
+      "Matériaux du fret",
+      "Stockage, marquages et manutention."
+    ]
+  },
+  "extraRecords": [
+    {
+      "category": "lieux",
+      "id": "salvage_flight_deck",
+      "name": "Pont de pilotage du récupérateur",
+      "description": "Poste où Moore reste pendant la descente des autres récupérateurs.",
+      "sourceIds": [
+        "R1"
+      ],
+      "provenance": "lieu_atteste_extrait_roman",
+      "chronology": "16 mai 2179 — récupération spatiale.",
+      "appearance": "Consoles, sièges, affichages et volumes à documenter.",
+      "gameplay": "Scène hors carte coloniale ; aucun ajout de porte locale.",
+      "locations": [
+        "salvage_flight_deck"
+      ],
+      "missing": [
+        "Scène, décor, profil de Moore et raccord vers la baie à produire."
+      ],
+      "acceptance": [
+        "Conserver Moore au poste de pilotage dans cette scène ; pas dans le groupe qui descend."
+      ]
+    },
+    {
+      "category": "props",
+      "id": "salvage-capture-arms",
+      "name": "Bras de capture du récupérateur",
+      "description": "Réseau de bras maintenant la navette dans la baie ; distinct du pistolet-grappin posé sur ses commandes.",
+      "sourceIds": [
+        "R1"
+      ],
+      "provenance": "equipement_de_scene_atteste",
+      "chronology": "16 mai 2179 — récupération spatiale.",
+      "appearance": "Articulations, prises, points d’attache et silhouette à documenter.",
+      "gameplay": "Équipement de la baie, sans nouvelle arme jouable.",
+      "locations": [
+        "salvage_bay"
+      ],
+      "missing": [
+        "Sprites, articulations, ancrages et états de capture/libération à produire."
+      ],
+      "acceptance": [
+        "Séparer cet équipement de manutention et le pistolet-grappin de Ripley."
+      ]
+    },
+    {
+      "category": "planetes",
+      "id": "earth",
+      "name": "Terre — cadre orbital de Gateway",
+      "description": "La Terre est visible depuis Gateway dans l’extrait ; fiche de cadre orbital distincte du terrain de LV-426.",
+      "sourceIds": [
+        "R1"
+      ],
+      "provenance": "cadre_orbital_atteste_extrait_roman",
+      "chronology": "Séquence de Gateway en 2179 ; ne pas la fusionner avec le prologue colonial de 2173.",
+      "appearance": "Vue orbitale à documenter depuis la station ; aucun diamètre ou plan de surface inventé.",
+      "gameplay": "Cadre documentaire ; pas de surface terrestre jouable créée.",
+      "locations": [
+        "orbital_medical"
+      ],
+      "missing": [
+        "Vue depuis Gateway et transition spatiale à référencer puis produire."
+      ],
+      "acceptance": [
+        "La Terre n’ajoute aucune porte sur la carte coloniale de LV-426.",
+        "Ne pas inventer une nouvelle planète ou un itinéraire terrestre."
+      ]
+    }
+  ]
+}

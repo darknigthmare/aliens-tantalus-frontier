@@ -4,7 +4,7 @@
   "sourceCommit": "cd5a58a6fea3084dfbbbb5516be9d0f6972d2320",
   "originalStandaloneSha256": "91ae538879b939018cea5dc3ba2eb9e45faea7693fdd952efbe8531b33cdfced",
   "referenceRegister": "../../../docs/development/RIVER_OF_PAIN_SPRITE_REFERENCES.md",
-  "coverage": "70 PNG individuels : 42 images du lot 1 et 28 décors statiques du lot 2. Les nouveaux décors correspondent à 122 instances décoratives ; 8 instances physiques des mêmes types restent natives. Poses fixes et interprétations ne certifient pas une reproduction 1:1 ni toutes les animations.",
+  "coverage": "78 PNG individuels : 42 images du lot 1, 28 décors du lot 2 et 8 décors du lot 3. Les 36 types de décors supplémentaires couvrent 148 instances décoratives ; 17 instances physiques des mêmes types conservent leur dessin natif. Poses fixes et interprétations ne certifient pas une reproduction 1:1 ni toutes les animations.",
   "assets": [
     {
       "id": "newt-idle-right",
@@ -1538,6 +1538,134 @@
       "nativeSource": "src/river-of-pain/render.js",
       "eligibleDecorativeInstances": 2,
       "protectedPhysicalInstances": 1
+    },
+    {
+      "id": "prop-rack",
+      "file": "assets/prop-rack.png",
+      "sha256": "a14774048d4ec0fddb76bf130042c2a55054a528d92d97932ddf1a8c269e36ab",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one single isolated highly detailed 2D game prop sprite for Alien: River of Pain / Hadley's Hope (2179), consistent with Aliens (1986) industrial colony production design and the project's existing muted teal-gray and olive retrofuturistic furniture. Subject: one tall freestanding industrial supply RACK, open steel shelving, rectangular height-to-width ratio 170:124, four distinct horizontal shelf levels carrying tightly arranged squat olive storage bins, dull aluminum edging and steel corner uprights. Front view with only a very slight view of the right side and top, almost orthographic, no dramatic perspective. Functional rectangular construction, worn painted steel with restrained scratches, excellent readable silhouette. Every shelf, every container and both feet form ONE coherent furniture unit, nothing scattered outside it. This is an adaptation for the game, not a branded specific movie prop. Realistic cinematic painted texture matching detailed existing sprites, neutral soft top-left illumination. Complete furniture from top to feet inside frame with 5 percent transparent margin. True transparent background including empty openings between shelves, no background, no floor, no ground shadow, no glow, no caption, no labels, no text or logos. ONE object, one image, not a sprite sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « rack » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-shelf",
+      "file": "assets/prop-shelf.png",
+      "sha256": "b53368c55c0f2fcc9f6613f9a6679df15baefa34425bc316233b886ce641e80d",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated highly detailed 2D game sprite: a tall open domestic STORAGE SHELF belonging to a 2179 Hadley's Hope colonist apartment in the Aliens / River of Pain retro-industrial universe. Rectangular silhouette ratio 170 tall to 124 wide, four horizontal shelves, dull off-white and muted gray-green metal frame, orderly compact food cartons and reused sealed containers in worn olive, tan and gray colors. Clearly distinct from a military weapons rack. All contents are part of this one shelf, no loose objects outside it. Nearly straight-on orthographic camera with a slight view of right edge and upper surfaces, feet level. Realistic hand-painted cinematic detail, not flat vector art, no cartoon outline, softened industrial scuffs, simple readable shape at game scale, neutral light from upper left. Whole object uncropped with transparent margins, true alpha transparency outside silhouette and in open gaps, no wall, no scene, no floor, no cast shadow, no writing, no modern brand logos, no display board, no multiple versions. This is a documented game adaptation matching muted teal-gray Hadley's Hope furniture. Exactly one prop per image.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « shelf » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-medicine",
+      "file": "assets/prop-medicine.png",
+      "sha256": "377e80dd44db13efee4c73ea33c60f4c67679e2371242f1d3b0b9bb7902a12ab",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one isolated full-height 2D game prop sprite of a MEDICAL SUPPLY SHELVING UNIT for Hadley's Hope infirmary, Aliens (1986) / Alien: River of Pain 2179. A tall rectangular utilitarian open steel cabinet, height-to-width 170:124, four horizontal shelves neatly stocked with small opaque pharmaceutical boxes, amber and pale green sealed bottles, rolled bandages, all firmly on the shelves. Dull pale gray-green metal edging, muted teal backing, subtle worn hospital surfaces, tiny authentic mechanical latches, no touchscreen. No glass panes, no doors, no readable writing, no big cross icon, no syringes outside the unit. One complete coherent furniture object only. Nearly orthographic frontal game camera, slight right edge/top depth, no strong perspective. Realistic painted cinematic texture and natural neutral overhead lighting matching industrial Aliens game sprites; not 3D toy or vector. Complete outer silhouette inside image with generous transparent margin, true transparent alpha background and any visible gaps. No room, no floor, no shadow, no frame, no typography, no spritesheet. This is a game adaptation of a medical storage unit, not a claim of an exact screen prop.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « medicine » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-cupboard",
+      "file": "assets/prop-cupboard.png",
+      "sha256": "27356311a6ea52f623d65d7b1d4f5c2618cf648574324ed1b609745fa5944ef5",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated 2D realistic game sprite of a tall closed two-door STORAGE CUPBOARD from the 2179 Hadley's Hope colony in the Alien: River of Pain / Aliens (1986) industrial world. Match established muted teal-gray metal furniture: tall rectangular body ratio 158 high to 90 wide, dark desaturated green-gray steel body, narrow olive-gray rim, TWO vertical closed front doors separated by a clear central seam, small paired dull metal handles around mid-height, discreet horizontal ventilation slots near upper quarter, rivets at corners and restrained surface wear. Blank quiet horizontal label strip around the upper-middle area for a game-rendered caption, absolutely NO drawn letters. Keep normal usable rectangular cabinet, not spaceship doorway. Almost frontal orthographic view with subtle right side and top thickness. Realistic painted metal microtexture, soft neutral top-left light, sharp functional silhouette at small scale. Whole cupboard and bottom plinth inside canvas with 5 percent clear margin on all sides. One object only, true transparent PNG background, no ground or wall, no cast shadow or glow, no labels, no logos, no multiple views, not a sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « cupboard » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-fridge",
+      "file": "assets/prop-fridge.png",
+      "sha256": "8e04cc73a7fa6bad3149eeae8d9391be3b0aaeb397d202ecde04afa36e3dff91",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated detailed 2D game sprite of a closed industrial REFRIGERATOR for a 2179 Hadley's Hope colony canteen, in the Aliens (1986) / River of Pain retrofuturistic world. Tall narrow rectangular cabinet ratio 158 tall to 90 wide. Practical two vertical closed insulated doors separated by a central seam, robust narrow stainless steel handles, pale desaturated sage/off-white enamel with dark muted teal-gray frame, recessed ventilation slots near top, bottom compressor grille, subtle scratches and scuffed edges. Keep distinctive utilitarian refrigerated-cabinet appearance without modern branding. Reserve a blank narrow upper-middle panel for an overlay label, NO text painted on it. Front orthographic-like camera with just a slight right-edge/top view, feet level, no dramatic angle. Detailed realistic cinematic painted style, neutral overhead light and restrained highlights, readable small-size game prop. Complete entire unit including base, generous transparent margin. True alpha-transparent background, no room, floor, cast shadow, glow, logos, letters, border or second object. One individual sprite, not a spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « fridge » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-table",
+      "file": "assets/prop-table.png",
+      "sha256": "259f7e5286402339b59fa0a6799116b7fc57a66e33d0566456255e05e490253a",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create one isolated realistic painted 2D game prop sprite of a simple utilitarian CANTEEN TABLE in the Hadley's Hope colony, Alien: River of Pain / Aliens (1986), 2179. Low broad rectangular metal tabletop, overall visible width 177 to height 57, with four functional square legs and one simple lower support bar. Muted gray-green steel and dull olive tabletop, thin pale rim, subtly scratched corners. On the top only one small squat dull gray-green mug near the left and one thin tan closed booklet near the right, part of the single table set. Side/front game elevation with only a modest view down on tabletop and slight right-side depth, not top-down and not dramatic perspective. Table feet all on same invisible horizontal ground line, no floating legs. Realistic cinematic painted metal material, finely detailed but readable at small game size, neutral soft top-left light. Entire table, mug and all legs clearly contained with transparent border. True transparent background, open space between legs fully transparent. No floor, no cast shadow, no room, no person, no logos or readable text. ONE table prop image only, no variants or sheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « table » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-stove",
+      "file": "assets/prop-stove.png",
+      "sha256": "0ce9dc90a9946e9560b7cf58230976f165b1b5e93f84602013075d1c538e51eb",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated high-detail 2D game sprite: a compact freestanding industrial electric COOKING STOVE from the canteen of Hadley's Hope, 2179, Aliens (1986) / Alien River of Pain. Low sturdy rectangular body ratio width 110 to height 87, three black circular hotplates clearly visible on a dull stainless top, three simple physical knobs on a narrow front control band, single rectangular closed oven door with a small dark viewing window and horizontal handle, bottom air grille, four short feet. Muted gray-green painted steel, weathered olive frame, no orange heat glow, stove switched off. Nearly frontal game elevation with a small visible top plane and right face, restrained orthographic projection. Detailed cinematic hand-painted realistic materials, soft neutral overhead lighting, matching utilitarian retro-industrial Aliens sprites. Exactly one complete stove, full body and feet uncropped with 5 percent transparent padding. True transparent alpha outside silhouette and under feet, no background, no floor, no cast shadow, no room, no pan, no food, no smoke, no text, no logo, no multiple views or spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « stove » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
+    },
+    {
+      "id": "prop-linen",
+      "file": "assets/prop-linen.png",
+      "sha256": "9a86cd2a3c66a192532850688fdeab2a3ab81f4728aa4c8da75cb44765b798aa",
+      "tool": "built-in image generation",
+      "transparentBackgroundRequested": true,
+      "oneSubjectPerPng": true,
+      "pixelEditing": "none",
+      "prompt": "Create ONE isolated highly detailed 2D prop sprite of a LINEN STORAGE CHEST for the infirmary of Hadley's Hope, Alien: River of Pain / Aliens 1986, 2179. A low broad utilitarian gray-green metal storage box with rectangular width-to-height ratio 93:98 including contents, square reinforced corners and simple inset front panel, holding a tidy visible stack of exactly four folded thick off-white/sage hospital blankets on top. Cloth layers have natural folds and clean hem edges, not pillows and not paper. Blank box label area, no letters. A single coherent linen chest and its stack, no loose items outside. Almost orthographic frontal view, slight right face and top planes, neutral soft top-left lighting, realistic painted cinematic steel and cotton texture, restrained wear, no cartoon or glossy toy appearance. Whole unit and all cloth inside frame with transparent padding. True transparent PNG background, no wall, room, floor, cast shadow, writing, logo or frame. One single prop per image, not a spritesheet.",
+      "fidelity": {
+        "status": "project-adaptation",
+        "note": "Adaptation du type « linen » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
+      },
+      "batch": "props-v3-20261126",
+      "alphaBoundsThresholdInclusive": 16
     }
   ],
   "notSelected": [

@@ -66,6 +66,7 @@ const tooling = new Set([
   'scripts/verify-river-of-pain-succession.mjs',
   'scripts/inspect-river-of-pain-sprites.py', 'scripts/build-river-of-pain-visuals.mjs',
   'scripts/build-river-of-pain-sprite-gallery.mjs',
+  'scripts/build-river-of-pain-bible.mjs',
   'scripts/verify-river-of-pain-sprites.mjs', 'scripts/verify-river-of-pain-sprites-browser.py',
   '.github/workflows/river-of-pain.yml',
   'docs/development/RIVER_OF_PAIN_INTEGRATION.md',

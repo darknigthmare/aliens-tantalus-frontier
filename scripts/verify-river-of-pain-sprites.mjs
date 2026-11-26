@@ -198,6 +198,116 @@ test('failed decoding and dimension mismatch select no image and remain safe fal
   assert.equal(oversized.select(query), null);
 });
 
+test('large manifests bound image requests and decodes, and a failed image does not stall the queue', async () => {
+  const images = [], announcements = [];
+  let inFlight = 0, peak = 0;
+  class DeferredImage extends FakeImage {
+    set src(value) {
+      this.url = value;
+      inFlight++;
+      peak = Math.max(peak, inFlight);
+      images.push(this);
+      queueMicrotask(() => this.onload());
+    }
+    get src() { return this.url; }
+    decode() {
+      return new Promise((resolve, reject) => {
+        this.completeDecode = error => {
+          assert.equal(this.finished, undefined, 'Each synthetic decode completes once.');
+          this.finished = true;
+          inFlight--;
+          if (error) reject(error); else resolve();
+        };
+      });
+    }
+  }
+  const assets = Array.from({ length: 11 }, (_, index) => asset({
+    id: 'queued-' + index, file: 'assets/queued-' + index + '.png', targetIds: ['queued-' + index]
+  }));
+  const registry = createRegistry({ ...empty(), assets },
+    { Image: DeferredImage, baseURL: 'https://example.test/visual-v1/JOUER.html' });
+  registry.subscribe(entry => announcements.push(entry.asset.id));
+  await new Promise(setImmediate);
+  assert.equal(images.length, 4, 'Only the first four sources are requested before a decode finishes.');
+  assert.equal(registry.entries.filter(entry => entry.image === null).length, 7);
+  while (announcements.length < assets.length) {
+    const pending = images.filter(image => !image.finished);
+    assert.ok(pending.length > 0 && pending.length <= 4);
+    for (const image of pending) image.completeDecode(image.src.endsWith('queued-1.png')
+      ? new Error('Synthetic decode failure') : null);
+    await new Promise(setImmediate);
+  }
+  const result = await registry.settled;
+  assert.equal(result, registry.entries, 'Settled retains the original ordered registry result.');
+  assert.equal(peak, 4);
+  assert.equal(inFlight, 0);
+  assert.deepEqual(images.map(image => image.src.split('/').at(-1)), assets.map(entry => entry.file.split('/').at(-1)));
+  assert.deepEqual(announcements.toSorted(), assets.map(entry => entry.id).toSorted(),
+    'Every entry is announced once; asynchronous completion order is not constrained.');
+  assert.equal(registry.entries[1].status, 'error');
+  assert.match(registry.entries[1].error, /Synthetic decode failure/);
+  assert.equal(registry.entries.filter(entry => entry.status === 'ready').length, 10);
+  assert.deepEqual(await createRegistry(empty()).settled, []);
+});
+
+test('bounded render textures preserve the complete source proportions, URL and authored anchor', async () => {
+  let source, request, bitmapClosed = false;
+  class FullResolutionImage extends FakeImage {
+    constructor() { super(); this.naturalWidth = 1600; this.naturalHeight = 800; source = this; }
+    removeAttribute(name) { assert.equal(name, 'src'); this.released = true; this.url = ''; }
+  }
+  const bitmap = { width: 1024, height: 512, close() { bitmapClosed = true; } };
+  const media = asset({ bounds: { x: 100, y: 100, w: 1200, h: 600 }, anchor: { x: 700, y: 700 } });
+  const registry = createRegistry({ ...empty(), assets: [media] }, {
+    Image: FullResolutionImage, baseURL: 'https://example.test/visual-v1/JOUER.html',
+    async createImageBitmap(image, options) { assert.equal(image, source); request = options; return bitmap; }
+  });
+  await registry.settled;
+  const entry = registry.entries[0];
+  assert.equal(entry.status, 'ready');
+  assert.equal(entry.image, bitmap);
+  assert.deepEqual(request, { resizeWidth: 1024, resizeHeight: 512, resizeQuality: 'high' });
+  assert.deepEqual(entry.texture, { width: 1024, height: 512, sourceWidth: 1600, sourceHeight: 800 });
+  assert.equal(entry.image.src, 'https://example.test/visual-v1/assets/brackett-idle.png');
+  assert.deepEqual([entry.image.naturalWidth, entry.image.naturalHeight], [1600, 800]);
+  assert.equal(source.released, true, 'The full decoded source is released after its bounded texture is retained.');
+  assert.equal(source.onload, null); assert.equal(source.onerror, null);
+  const surface = canvas();
+  assert.equal(registry.draw(surface.context, entry, { x: 400, y: 600, scale: 2, facing: 1 }), true);
+  assert.deepEqual(pngs(surface.calls)[0].args, [bitmap, -105, -105, 240, 120]);
+  assert.equal(bitmapClosed, false);
+  surface.context.drawImage = () => { throw new Error('Synthetic texture draw failure'); };
+  assert.equal(registry.draw(surface.context, entry, { x: 0, y: 0, scale: 1, facing: 1 }), false);
+  assert.equal(bitmapClosed, true);
+  assert.equal(entry.status, 'error');
+});
+
+test('texture preparation refuses invalid source bounds and bad bitmap dimensions without hiding failures', async () => {
+  let bitmapCalls = 0, closed = false;
+  const oversized = createRegistry({ ...empty(), assets: [asset({ bounds: { x: 0, y: 0, w: 200, h: 200 } })] }, {
+    Image: FakeImage, baseURL: 'https://example.test/',
+    async createImageBitmap() { bitmapCalls++; throw new Error('Must not resize invalid source bounds.'); }
+  });
+  await oversized.settled;
+  assert.equal(bitmapCalls, 0);
+  assert.equal(oversized.entries[0].status, 'error');
+  const invalid = createRegistry({ ...empty(), assets: [asset()] }, {
+    Image: FakeImage, baseURL: 'https://example.test/',
+    async createImageBitmap() { return { width: 99, height: 200, close() { closed = true; } }; }
+  });
+  await invalid.settled;
+  assert.equal(invalid.entries[0].status, 'error');
+  assert.match(invalid.entries[0].error, /texture dimensions differ/);
+  assert.equal(closed, true);
+  const rejected = createRegistry({ ...empty(), assets: [asset()] }, {
+    Image: FakeImage, baseURL: 'https://example.test/',
+    async createImageBitmap() { throw new Error('Synthetic bitmap rejection'); }
+  });
+  await rejected.settled;
+  assert.equal(rejected.entries[0].status, 'error');
+  assert.match(rejected.entries[0].error, /Synthetic bitmap rejection/);
+});
+
 test('a Canvas PNG exception restores the complete native person once and leaves the context balanced', async () => {
   const baseline = await runtime(), body = person();
   baseline.calls.length = 0;
@@ -484,7 +594,7 @@ test('only static noncollidable props change; physical cover, portal and object 
 
 test('decorative prop contracts match real native body bounds, including wall mounts and wheel bottoms', async () => {
   const fixture = await runtime(), candidates = roomProps(fixture.context);
-  assert.equal(Object.keys(propLayouts).length, 28);
+  assert.equal(Object.keys(propLayouts).length, 36);
   for (const [kind, layout] of Object.entries(propLayouts)) {
     const candidate = candidates.find(row => row.prop.kind === kind && decorative(row.prop));
     assert.ok(candidate, kind + ' exists as decorative content in the frozen map.');
@@ -510,7 +620,7 @@ test('decorative prop contracts match real native body bounds, including wall mo
   }
 });
 
-test('all 122 admitted map instances use PNGs; all eight physical instances retain their exact native rendering', async () => {
+test('all 148 admitted map instances use PNGs; all 17 physical instances retain their exact native rendering', async () => {
   const native = await runtime(), covered = await runtime(Object.keys(propLayouts).map(kind => propAsset(kind)));
   const beforeMap = JSON.stringify(covered.context.ROP_DATA.rooms), beforeState = JSON.stringify(covered.sim.s);
   let admitted = 0, physical = 0;
@@ -528,7 +638,7 @@ test('all 122 admitted map instances use PNGs; all eight physical instances reta
       assert.equal(JSON.stringify(covered.calls), JSON.stringify(native.calls), prop.id + ': complete native body.');
     }
   }
-  assert.equal(admitted, 122); assert.equal(physical, 8);
+  assert.equal(admitted, 148); assert.equal(physical, 17);
   assert.equal(JSON.stringify(covered.context.ROP_DATA.rooms), beforeMap, 'Positions, routes and footprints stay native.');
   assert.equal(JSON.stringify(covered.sim.s), beforeState, 'Rendering does not mutate simulation or saves.');
 });

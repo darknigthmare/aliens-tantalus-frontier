@@ -602,3 +602,35 @@ ni le tracteur pilotable. Les IDs de type sont conservés tels quels.
 | `wreck` | 1 |
 
 Total : **113 types / 547 instances**.
+
+
+## Reprise du 26 novembre 2026 — lot 3 et bible
+
+La [bible détaillée courante](../../dlc/fleuve-de-la-douleur/visual-v1/bible/README.md)
+complète cet inventaire sans réécrire les documents historiques v0.9.
+Elle couvre les huit domaines demandés, les connexions, les emprises et les
+manquants attestés par les références.
+
+Le manifeste actif compte 78 PNG. Les huit nouveaux meubles sont
+`rack`, `shelf`, `medicine`, `cupboard`, `fridge`, `table`, `stove` et
+`linen`. Les 113 types de props de la carte comprennent désormais 41 types
+ciblés par au moins un PNG de prop ; 72 n’ont pas encore de PNG de prop dédié.
+Ce comptage ne transforme pas une pose fixe en cycle d’animation et ne signifie
+pas que toutes les instances physiques sont remplacées.
+
+| Type ajouté | Instances décoratives | Instances physiques conservées |
+| --- | ---: | ---: |
+| rack | 5 | 0 |
+| shelf | 4 | 0 |
+| medicine | 4 | 0 |
+| cupboard | 2 | 1 |
+| fridge | 2 | 1 |
+| table | 6 | 6 |
+| stove | 2 | 0 |
+| linen | 1 | 1 |
+| Total | 26 | 9 |
+
+Les étagères occupent l’enveloppe native y=-170 à y=+1. Les tables et le
+mobilier bas utilisent leurs propres dimensions. Chaque PNG reste entier,
+avec un redimensionnement uniforme, et seules les instances décoratives
+réellement définies dans la salle utilisent cette présentation.

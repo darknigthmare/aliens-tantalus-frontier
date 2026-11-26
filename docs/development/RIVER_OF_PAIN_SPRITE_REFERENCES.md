@@ -245,3 +245,32 @@ guider une génération.
 | S22 | Propstore, concepts originaux de Ron Cobb de salle d’opération et de sas, stock 103966 ; attribution des dessins seulement | [Notice](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/) |
 | S23 | Propstore, concept original de Ron Cobb A.P. Control and Operations, stock 103965 ; contexte de salle technique, pas modèle individuel de moniteur ou de pompe | [Notice](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-a-pcontrol-and-operations-concept-sketch/) |
 | S24 | Propstore, habillage original d’Atmosphere Processor, Harry Harris Collection, lot 655 / stock 144354 ; dos de téléviseur réemployé, état actuel avec usure | [Notice](https://propstore.com/product/aliens-1986/lot-655-harry-harris-collection-atmosphere-processor-set-dressing/) |
+
+
+## Lot 3 — huit meubles supplémentaires, 26 novembre 2026
+
+| PNG | Référence de forme réellement disponible | Limite |
+| --- | --- | --- |
+| `prop-rack.png` | Renderer v0.9, famille `rack`, quatre niveaux de rangement | Bacs et châssis interprétés |
+| `prop-shelf.png` | Renderer v0.9, famille `shelf` | Contenants domestiques adaptés |
+| `prop-medicine.png` | Renderer v0.9, famille `medicine` ; contexte médical des extraits du roman | Conditionnements pharmaceutiques interprétés |
+| `prop-cupboard.png` | Renderer v0.9, famille `cupboard`, enveloppe de 158 unités | Deux portes et détails industriels adaptés |
+| `prop-fridge.png` | Renderer v0.9, famille `fridge` | Armoire réfrigérée interprétée, modèle précis non établi |
+| `prop-table.png` | Renderer v0.9, famille `table`, plateau, tasse et carnet natifs | Piétement et texture adaptés |
+| `prop-stove.png` | Renderer v0.9, famille `stove`, trois plaques | Four et commandes adaptés |
+| `prop-linen.png` | Renderer v0.9, famille `linen`, coffre et linge empilé | Matière et plis interprétés |
+
+Les huit sources sont des PNG complets produits individuellement. Les tests
+de géométrie confrontent leurs enveloppes au véritable rendu natif ; ils ne
+certifient pas que chaque meuble ait existé à l’identique dans un plan du film.
+Les détails provenant uniquement de la génération ne deviennent pas des faits
+canoniques.
+
+La [bible éditoriale](../../dlc/fleuve-de-la-douleur/visual-v1/bible/README.md)
+réunit les sources supplémentaires consultées, dont l’extrait autorisé du
+[chapitre 7](https://www.dreadcentral.com/wp-content/uploads/2014/11/RiverOfPainExcerpt.pdf)
+et l’[extrait Titan publié par Daily Dead](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/).
+Elle distingue les lieux de 2173/2179, la carte coloniale et les scènes
+documentaires hors de cette carte. Les plans conceptuels de Ron Cobb et les
+accessoires de production restent des références de design, sans plan métrique
+du DLC ni attribution automatique aux personnages du roman.

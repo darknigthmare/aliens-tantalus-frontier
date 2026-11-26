@@ -4,6 +4,48 @@ Cette présentation dérive de la version récupérée `0.9.0-candidate.1`. Elle
 des sprites PNG individuels au jeu existant. Ce travail ne constitue pas une
 récupération de la version 0.10 autrefois restée locale.
 
+## Lot 3 — huit meubles et bible de production
+
+Le 26 novembre 2026, huit PNG individuels complètent les familles `rack`,
+`shelf`, `medicine`, `cupboard`, `fridge`, `table`, `stove` et `linen`.
+Les nouveaux fichiers totalisent **18 171 047 octets**. Le corpus actif contient
+**78 PNG**, soit **137 932 789 octets**, sans modification des pixels des lots antérieurs.
+
+Ces huit familles concernent 35 placements existants : 26 décors sont admissibles
+à la présentation PNG et neuf obstacles gardent leur dessin natif. Avec le lot 2,
+les 36 familles de décor supplémentaires couvrent **148 décors admissibles** et
+**17 instances physiques conservées**. L’enveloppe des étagères descend à +1
+unité : leur hauteur logique est 171, mesurée dans le renderer d’origine.
+
+Les ancrages du lot 3 utilisent les bornes alpha ≥ 16. Le PNG entier est dessiné
+sans découpe ni retouche de pixels. Aucun des huit nouveaux fichiers ne touche
+un bord à ce seuil ; de faibles pixels alpha 1–15 peuvent subsister autour du
+détourage. Les meubles reprennent les types du projet : leur modèle individuel
+n’est pas authentifié comme accessoire précis du film.
+
+### Bible détaillée
+
+La [bible de production](bible/README.md) regroupe personnages, lieux,
+armes et équipements, props, véhicules, vaisseaux, terrains et mondes.
+Elle conserve les identifiants, les placements, les connexions et les sources,
+et distingue production d’une image, intégration au jeu et validation de fidélité.
+Elle inclut des fiches manquantes attestées dans les extraits du roman.
+
+### Chargement et validation
+
+Le chargement est limité à quatre PNG simultanés. Les navigateurs disposant de
+`createImageBitmap` préparent des textures de rendu dont le plus grand côté est
+limité à 1 024 pixels, tout en conservant les PNG sources, leurs dimensions et
+les coordonnées des ancrages. Le navigateur conserve le chemin de chargement
+classique si cette API n’est pas disponible.
+
+Le contrôle local de 29 contrats sprites a réussi avant le dernier complément
+ImageBitmap. Les 78 PNG ont été inspectés et les 222 fichiers historiques v0.9
+comparés à leurs empreintes. Le parcours final avec les textures bornées a été
+interrompu par la perte de l’environnement local ; sa validation dépend du
+workflow distant associé au commit publié. La bible et la galerie ne prouvent
+ni la jouabilité des fiches absentes, ni une fidélité 1:1 complète.
+
 ## Jouer et examiner les images
 
 - Ouvrir le DLC depuis le menu de Tantalus Frontier : le wrapper lance cette présentation.
@@ -37,7 +79,7 @@ sélectives. Les objets illustrent les poches, les réserves et les commandes ex
 
 Le deuxième lot ajoute **28 PNG admis**, un par type, pour le mobilier médical,
 l’atelier, la manutention, les appareils de contrôle et l’habitat. Le manifeste
-validé par le builder contient désormais **70 PNG individuels**, avec les
+validé par le builder contenait alors **70 PNG individuels**, avec les
 42 images du premier lot. Le dossier conserve le nom `visual-v1` pour
 accueillir les deux lots.
 
@@ -112,7 +154,7 @@ avec une transparence réelle dans le canal alpha. Les PNG admis restent les
 fichiers complets produits par le générateur, sans modification de leurs pixels
 par les scripts de contrôle ou d’intégration.
 
-La construction a validé le manifeste de 70 images et reconstruit le standalone
+La construction historique du lot 2 a validé le manifeste de 70 images et reconstruit le standalone
 dérivé. La recette du lot 2 porte sur les proportions, les légendes et la
 composition dans les scènes réelles ; le bilan historique du lot 1 reste
 identifié séparément.

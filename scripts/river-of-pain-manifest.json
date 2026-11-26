@@ -1187,12 +1187,17 @@
     "dlc/fleuve-de-la-douleur/visual-v1/actors-props-png.js",
     "dlc/fleuve-de-la-douleur/visual-v1/sprite-manifest.json",
     "dlc/fleuve-de-la-douleur/visual-v1/GENERATION_LOG.json",
-    "dlc/fleuve-de-la-douleur/visual-v1/README.md"
+    "dlc/fleuve-de-la-douleur/visual-v1/README.md",
+    "dlc/fleuve-de-la-douleur/visual-v1/bible/EDITORIAL_NOTES.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/bible/README.md",
+    "dlc/fleuve-de-la-douleur/visual-v1/bible/BIBLE_FLEUVE_DOULEUR.json",
+    "dlc/fleuve-de-la-douleur/visual-v1/bible/BIBLE_FLEUVE_DOULEUR.md",
+    "dlc/fleuve-de-la-douleur/visual-v1/bible/BIBLE_FLEUVE_DOULEUR.html"
   ],
   "unrecovered": [
     "Version 0.10 locale mentionnée dans le suivi ; aucun fichier source ni paquet sauvegardé retrouvé."
   ],
-  "visualManifestSha256": "21d9717d8f3956bb0131e1e9809fec67deaa50307314054169d5c2d11f71194d",
+  "visualManifestSha256": "afa580a38a45c066e4bb4cc51aa0f5116410def6fd161ffbfb46927931dffa5c",
   "visualAssets": [
     {
       "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/newt-idle-right.png",
@@ -1473,6 +1478,38 @@
     {
       "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-vending.png",
       "sha256": "26ac63de868e4ab6abcf96906db5af03a649ee3f51c852583cb914798f5dacfa"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-rack.png",
+      "sha256": "a14774048d4ec0fddb76bf130042c2a55054a528d92d97932ddf1a8c269e36ab"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-shelf.png",
+      "sha256": "b53368c55c0f2fcc9f6613f9a6679df15baefa34425bc316233b886ce641e80d"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-medicine.png",
+      "sha256": "377e80dd44db13efee4c73ea33c60f4c67679e2371242f1d3b0b9bb7902a12ab"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-cupboard.png",
+      "sha256": "27356311a6ea52f623d65d7b1d4f5c2618cf648574324ed1b609745fa5944ef5"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-fridge.png",
+      "sha256": "8e04cc73a7fa6bad3149eeae8d9391be3b0aaeb397d202ecde04afa36e3dff91"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-table.png",
+      "sha256": "259f7e5286402339b59fa0a6799116b7fc57a66e33d0566456255e05e490253a"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-stove.png",
+      "sha256": "0ce9dc90a9946e9560b7cf58230976f165b1b5e93f84602013075d1c538e51eb"
+    },
+    {
+      "path": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-linen.png",
+      "sha256": "9a86cd2a3c66a192532850688fdeab2a3ab81f4728aa4c8da75cb44765b798aa"
     }
   ]
 }

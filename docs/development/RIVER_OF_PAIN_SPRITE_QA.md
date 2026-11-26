@@ -1,5 +1,70 @@
 # Fleuve de la Douleur — qualification du rendu PNG
 
+## Lot 3 — 78 PNG et bible de production, 26 novembre 2026
+
+### Fichiers et rendu
+
+Huit images ont été produites séparément avec un fond transparent :
+`prop-rack`, `prop-shelf`, `prop-medicine`, `prop-cupboard`,
+`prop-fridge`, `prop-table`, `prop-stove` et `prop-linen`.
+Elles représentent 18 171 047 octets. Les huit empreintes SHA-256 et Git
+calculées sur les octets récupérés correspondent aux blobs GitHub créés.
+Les 70 PNG antérieurs restent inchangés.
+
+Les contrats couvrent 36 familles de décor supplémentaires :
+148 instances admissibles dessinent un PNG et 17 instances physiques gardent
+leur dessin natif. Les huit nouveaux types ajoutent respectivement 26 et neuf
+instances à ces ensembles. Les collisions, sauvegardes, portes et objectifs
+synthétiques conservent le comportement du modèle d’origine.
+
+### Vérifications obtenues avant l’interruption locale
+
+- 29/29 tests de `verify-river-of-pain-sprites.mjs` ont réussi sur l’état
+  file de quatre chargements, avant le dernier ajout de textures ImageBitmap.
+- 78/78 PNG inspectés, sans erreur de décodage, avec canal alpha et pixels
+  transparents. Aucun nouveau PNG ne touche le bord à alpha ≥16 ou ≥200.
+  L’unique avertissement du corpus concerne l’image historique de Bronagh,
+  à alpha ≥16 ; aucune image ne touche un bord à alpha ≥200.
+- Les 222 fichiers historiques v0.9 ont été comparés en taille et SHA-256,
+  sans différence. Cette passe n’a pas relu les neuf ZIP historiques.
+- Les enveloppes natives, légendes, profondeurs et cas de repli ont été testés.
+- Le nouveau journal de génération conserve chaque prompt et les originaux
+  complets, sans recadrage ni modification des pixels.
+- La construction initiale de la bible a vérifié l’unicité des fiches,
+  les références, les 547 placements, les 118 détails de phase et les liens
+  vers les 78 sprites. Trois corrections éditoriales issues d’une seconde
+  revue distinguent Moore au pont, pistolet-grappin/bras de capture et Terre.
+
+### Échec navigateur reproduit et reprise
+
+Le workflow antérieur de PR66 échoue sur « All declared PNGs decode in Chromium ».
+Le rapport a été corrigé pour conserver le détail des entrées avant l’assertion.
+Une fixture locale avec Chromium143 et les 70 vrais PNG plante avec le chargement
+historique et charge 70/70 images avec une file de quatre. Le parcours entier
+reste insuffisamment validé : la file seule ne supprimait pas tous les crashes
+dans l’environnement alors proche de la saturation.
+
+Le complément ImageBitmap prépare une texture de rendu bornée à 1 024 pixels
+sur son côté le plus long, puis libère la référence HTMLImage utilisée au
+décodage. Le PNG source et ses dimensions logiques sont conservés.
+Les tests de proportions, de rejet et de repli ont été préparés ; le dernier
+test de notifications asynchrones a été corrigé pour comparer les identités
+sans imposer l’ordre d’achèvement.
+
+L’environnement est devenu indisponible avant la recette finale. Les sources,
+les images et la bible ont donc été reconstruits à partir des données encore
+accessibles et du dépôt distant. Les résultats du workflow exécuté sur le commit
+publié sont nécessaires pour conclure sur le parcours final. La recette visuelle
+du HTML de bible n’a pas abouti localement.
+
+### Portée artistique
+
+Les huit meubles sont des adaptations documentées du projet. Le texte du roman
+et l’art de production servent de références générales ; aucun modèle individuel
+de ce lot n’est présenté comme une reproduction authentifiée 1:1.
+Les fiches sans PNG, les états animés, les personnages supplémentaires et les
+véhicules/vaisseaux non raccordés restent explicitement à produire.
+
 ## Lot 2 — 70 PNG admis
 
 Le deuxième lot ajoute **28 PNG individuels** au lot de 42 intégré par la PR 62.

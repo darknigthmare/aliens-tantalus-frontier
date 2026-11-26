@@ -10,6 +10,8 @@
     'natal-unit': ['UNITÉ OBSTÉTRICALE', 0, -123, 9, '#d4dfc8'],
     'fire-cabinet': ['FIRE', 0, -112, 8, '#c0cbaa'],
     locker: ['STOCK', 0, -98, 9, '#c3c4a2'],
+    cupboard: ['STOCK', 0, -98, 9, '#c3c4a2'],
+    fridge: ['STOCK', 0, -98, 9, '#c3c4a2'],
     'warning-board': ['!', 0, -115, 17, '#daca8c']
   });
   P.person = function (body, id, player, multiplier) {
