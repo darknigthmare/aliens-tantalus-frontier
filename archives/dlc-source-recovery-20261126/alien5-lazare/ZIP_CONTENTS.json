@@ -1,0 +1,1245 @@
+{
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+  "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+  "files": [
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/ALIEN5_PROJET_LAZARE_JOUER.html",
+      "crc32": "99a4480d",
+      "size": 804990,
+      "sha256": "9da61caf70bf6885f389433eb1ce7f714db597983432822dcde97e27405a17d9",
+      "gitBlobSha": "9dc72c9ee5d67b93457f9071f74ee146466b2841"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/AUDIT_FIDELITE.html",
+      "crc32": "fed60422",
+      "size": 29579,
+      "sha256": "49232065a43b20286e42456701b56be260ee32c65416f7295077c3cfe512450e",
+      "gitBlobSha": "ad222e60d6c5cff2690590bee5916ec8e49bdca3"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/CHANGELOG_V11.md",
+      "crc32": "db610d15",
+      "size": 942,
+      "sha256": "c4fa41947b92af109fc3917cec08472cb1e3341164c3bf61c9ccf8be21a49c60",
+      "gitBlobSha": "56e0601c1e3881f9184ce9d2d4b952e0cce9b3f5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/CODEX_ALIEN5.html",
+      "crc32": "7f20ce83",
+      "size": 192381,
+      "sha256": "f9d20404407a9570be785a4d5d10ab3a46e8615f32d6981d18774ce9fbbba545",
+      "gitBlobSha": "1ca5f6e323da38e3a0c3f903a0f80fac2ace1e19"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/JOUER_WINDOWS.bat",
+      "crc32": "b529f63d",
+      "size": 58,
+      "sha256": "37f0a4ea68370b56b096f6e2f61bf6492319d5e55418ec4e135745d48d175932",
+      "gitBlobSha": "905fddb938aa3157d8f4d18a8f29263a82aa2134"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/LICENSE_NOTICE.md",
+      "crc32": "44975c7c",
+      "size": 667,
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "gitBlobSha": "015f0078a32ab032ab2f0f885dde9a6053b7a78b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/MANIFEST_SHA256.json",
+      "crc32": "952edfcc",
+      "size": 16958,
+      "sha256": "3847a369d985d2b43a090533ec888e3a3af0f410dc4c5a44a60e4adacfa23d54",
+      "gitBlobSha": "b03b63609135f55eebf9ad72525e94f903a09c6d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/RAPPORT_VISUEL.html",
+      "crc32": "310112d5",
+      "size": 598258,
+      "sha256": "b3cf91f5ead1adca402e23f4a6818a4b1c3aff6de9a02e270f2b5c84aae2b7e2",
+      "gitBlobSha": "7b1d3143efa47d44773e5e9960377c84587f266c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/README.md",
+      "crc32": "cc619179",
+      "size": 2329,
+      "sha256": "1e7fd0587c3374f04fa16adcc1de0c63f4d16ee2c35bc70bf078dcb16eff09af",
+      "gitBlobSha": "d83aacbe2010de5b3e8fde2cd94587e172273406"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/RELEASE_V11.json",
+      "crc32": "ad508e02",
+      "size": 897,
+      "sha256": "898793022682026a21899a6a8267a9968c54f69f333c2bc12b7aad6264647a3e",
+      "gitBlobSha": "d1be2287a64f732929f6dcc5abcf62a3139124e1"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/AUDIT_FIDELITE_V11.json",
+      "crc32": "0589b818",
+      "size": 31501,
+      "sha256": "8860542fa8788b7f71b12d964b94e897b954861cb3087639af707c24d047c3ca",
+      "gitBlobSha": "0b33b047dd62997347a762310e7658eaff64c85d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/CODEX_REGLES_V11.md",
+      "crc32": "89d945c0",
+      "size": 63351,
+      "sha256": "ef2030b79f318bbf7574f05a61f7b0ed4264642a4f0342f0f94c49e1a3b476f8",
+      "gitBlobSha": "b65951f82adaac3a9892e99b400f800001e29541"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/ROOMS_V11.json",
+      "crc32": "4c5c1a57",
+      "size": 491758,
+      "sha256": "cfd6298ccc40599f29b8e4d157837730ef2a5dd4cb7d3bda391a7f6820838419",
+      "gitBlobSha": "fd4d7627eca2a4ac1c9fe85c06845f9a27e4d79c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/base-v10-data.json",
+      "crc32": "65564710",
+      "size": 525822,
+      "sha256": "3963bb8a2696ebba1cb92be843dceb5a00313a8ecb427b468fcc2fe6f0073bf6",
+      "gitBlobSha": "c615f699f6dd997fe2f305ea3c659a7d27ec032c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/doc-style.css",
+      "crc32": "c1d493de",
+      "size": 3024,
+      "sha256": "eccc317d84f3aeb2a4c9405eadbb6ef831058b5129e640c591b720f64ebe266a",
+      "gitBlobSha": "d8b42de9f07635a107cf8d26730602b7ef8cffe5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/reference-corpus-v10.json",
+      "crc32": "deb2fbf7",
+      "size": 17310,
+      "sha256": "275374176b830ff1f49bc93cce7bb1bee90924caaa82887121e38d4b62794a43",
+      "gitBlobSha": "fc16f4d9703e8c6864b0ecd6299809cd6f77814b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/reference-corpus-v11.json",
+      "crc32": "15fcd6bc",
+      "size": 19808,
+      "sha256": "91da303d57e0a2a773d455b01fa08e9b8895ecf88a5fb93628e9d7443e02f2de",
+      "gitBlobSha": "b799a7987cd649687cd9daf81ad1d736efe2a24f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/rules-v10.json",
+      "crc32": "08196c5d",
+      "size": 60983,
+      "sha256": "6203ab7ff4a6cfffb0bab5e7a02b421fe34d028e094ea4c12c8b2980bb29b130",
+      "gitBlobSha": "14a37436844c388df06bfab85b768f6492015d86"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/docs/rules-v11.json",
+      "crc32": "587e5f7f",
+      "size": 65249,
+      "sha256": "e9b1c47320a07b5f66f5b662140f6ea46e992ebb8be49d5b46bb228411de5a66",
+      "gitBlobSha": "bdea1351de687200007b72d418b2d6e31aef1ea5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/audio-v4.js",
+      "crc32": "b462f182",
+      "size": 5091,
+      "sha256": "5f45ecb82f6ec5a4312bd9b6354516f223548aa66a2900de4f112fccd1ec6940",
+      "gitBlobSha": "f6aff92deb65ecaa20d6caad13b01cfad2a40513"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/core.js",
+      "crc32": "785636c9",
+      "size": 15990,
+      "sha256": "88c21eae59fdef36c1a9925ab7507cb221353622ed5648a2814fb3286b748e95",
+      "gitBlobSha": "2ca6375220f6b4c136f0834669f959d51b4a16eb"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/data.js",
+      "crc32": "0650929d",
+      "size": 367487,
+      "sha256": "27f8504d21c346846f34477a540c27597d24c5692e4f27bfe4fd46d0a46c5d6c",
+      "gitBlobSha": "814fb4977cad432784460f60f6d76fb3c9c3e872"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/data.json",
+      "crc32": "b8fad822",
+      "size": 595355,
+      "sha256": "253c6f195c01c304bd4afbde45dc1f3a803f41fe0a0ddd33bce123f26d3fc793",
+      "gitBlobSha": "237626a08978c2550fda87decdd82f12c831b051"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/index.html",
+      "crc32": "1301f1c1",
+      "size": 8661,
+      "sha256": "a07feacf2197c6df733817c3d1d6325de0817088e4f153274191702db18a552d",
+      "gitBlobSha": "29af89d3b5278a8142d201d69cea32971e3262dd"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/render.js",
+      "crc32": "f6f1e1f4",
+      "size": 23193,
+      "sha256": "a15325d22b70563efbd10126b5c03e9b241a4a689298fe79d0b84efbd03fb7d3",
+      "gitBlobSha": "2b7c8bf773c8e096f7615d2474f1ac3bc670fd6e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/save-vault-v8.js",
+      "crc32": "3ca50fe4",
+      "size": 2808,
+      "sha256": "63627b64b53ecea84c234609d7ede5a50579e4c68579009b32dce63970252772",
+      "gitBlobSha": "50c4fde7667df4a6e8d155f82c05bfca1424e4ca"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v10.js",
+      "crc32": "d474acae",
+      "size": 8012,
+      "sha256": "ac88b713be73af4cf082c143be28d9067aa77ff7a4234c3c037556d13464b8fb",
+      "gitBlobSha": "463a931d20c8647335b18e17ec1abbd7f97bf8b5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v11.js",
+      "crc32": "4e332592",
+      "size": 7799,
+      "sha256": "03b4a05077e26398d424baefa66d2a8a4c91d85cf328ebbf0d4b120f4175da2f",
+      "gitBlobSha": "165072d88ee4b8e83d76d48f034afaa921a7c9b9"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v2.js",
+      "crc32": "93631d24",
+      "size": 29812,
+      "sha256": "f8b2b17f8c5aa4adb98c6aaa8716d431d2bea57687c6991a2d87b270e61ba2bf",
+      "gitBlobSha": "5fb3103a6a1380fea51c767227245460bb78469a"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v3.js",
+      "crc32": "73911b85",
+      "size": 7443,
+      "sha256": "2eec4ad94270864d47110418c30ee902f300265b6a138ea516cb86a60b8122c1",
+      "gitBlobSha": "1a5d285edfa11f5eb4c4d63ebc1add0218dbd936"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v4.js",
+      "crc32": "81e613ad",
+      "size": 5413,
+      "sha256": "53b468db9656acfeac035dc5d5958827527e1237264a402939f08e650eca50b1",
+      "gitBlobSha": "765dfef26dcf008744fa27156a04db33dff952d9"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v5.js",
+      "crc32": "2a6f6666",
+      "size": 7022,
+      "sha256": "6fb5446b14368a1ee87464b8aff191e26bf7cad11e595b51bb8b4509f0743f52",
+      "gitBlobSha": "e8d271d6e1253df15772a447a31cdec88b745f04"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v6.js",
+      "crc32": "74b81343",
+      "size": 6919,
+      "sha256": "c40698d96670e919159a84d5972104cd1c7cf11b3b9ce0d5713cc34ddf9c6c26",
+      "gitBlobSha": "8c26eabe15dd3dfd8187726ace849d8eec845d12"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v7.js",
+      "crc32": "e4587683",
+      "size": 9194,
+      "sha256": "6e4d15a21467c09b8ef20ad18e2be9e8251db13378c5a359ccbfcbdf189dda50",
+      "gitBlobSha": "ce7c7f8588a8a20b434332a02b9f455c3dd759d6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v8.js",
+      "crc32": "f769ff68",
+      "size": 8337,
+      "sha256": "7a811283f731756f025fbeb11768932ba076712896be13c4f776d2282807bfaf",
+      "gitBlobSha": "926d205a69d31bf4d62de86b31541f1bfabbcdf6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/scenes-v9.js",
+      "crc32": "dc8e5b31",
+      "size": 4746,
+      "sha256": "21dbcb3d5358d5957398b45da0c5a41300a5f3d2e0ad0d1d0f6f71dcec571d7d",
+      "gitBlobSha": "180be37f8ca8d486a322cef1d9782f6521132c4f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/style.css",
+      "crc32": "1def8b8a",
+      "size": 26047,
+      "sha256": "eac796df110ff426ee5d3c073239df32f283e22d1cf065345d00d4d190d27ad4",
+      "gitBlobSha": "98e2b8832367795d7849d24dcee24dfa2c36b9c7"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v10.js",
+      "crc32": "bd01539f",
+      "size": 12155,
+      "sha256": "3eacfc0a992eef40ce46648c17df805da94b87918a2fc4e5ca74028d76fb97c2",
+      "gitBlobSha": "6526dc34c824061f0c2d92008f12edff407eec3c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v11.js",
+      "crc32": "be09978f",
+      "size": 8611,
+      "sha256": "da3ab90e41e97acfc448b81861cfacc7f9f268667ccc903bf203542bd3d029aa",
+      "gitBlobSha": "3d30282e1d1cf1bd1a8ccb639debdfd6b06e4270"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v2.js",
+      "crc32": "81d916ca",
+      "size": 19767,
+      "sha256": "c57a1eaf9bb34ad9c8facb6d30ef34b0643d3e2e5f697db79aaf784a1582d7f1",
+      "gitBlobSha": "ec361e455fd97b3369643dcf5b50cf87fec53a46"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v3.js",
+      "crc32": "4426b9f6",
+      "size": 18118,
+      "sha256": "8e624c485fd9b0b4f8daf6cdf0413bb10c01c876f7a30e3d7bcd9e74fc54a39e",
+      "gitBlobSha": "37bffdfb755d95f63b672c8bdd512caeee739392"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v4.js",
+      "crc32": "f0830bfc",
+      "size": 19848,
+      "sha256": "fc78d1ef52564e25cdb0c2665308a96d7afc2f1ad5af6fb9e1fa9264eeb62808",
+      "gitBlobSha": "6774658044394bd33570aa36f52f4449e4a9517e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v5.js",
+      "crc32": "21557eac",
+      "size": 21243,
+      "sha256": "ff7a8ccd7e6c1bb47842e78db662846e6ab73fb97a085a31fe6a7907ad6fcfa6",
+      "gitBlobSha": "18daf054cb719f1c1841aa171cc17b6df1b9893c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v6.js",
+      "crc32": "9c06631c",
+      "size": 19498,
+      "sha256": "758b1415ae5b8b3e7e120837287021a4fd5571eef8f1d82d1f40c5e39bb96a92",
+      "gitBlobSha": "196a574425ae1308e74f4fb1a4a01a719aafb05e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v7.js",
+      "crc32": "a6bee1ff",
+      "size": 17123,
+      "sha256": "b6467b88c3a4d74915830cb791565278fcf3d3196b7117220c0c6908a88d8de8",
+      "gitBlobSha": "a560da95d4a583920bd143415e875f5b8920ba5b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v8.js",
+      "crc32": "a43b098d",
+      "size": 12033,
+      "sha256": "710b42049dba954e0090b00f864c8899ea93355aa6797d185e8750ed7bff268b",
+      "gitBlobSha": "8e71a94b650d5d79b0b4cc39c5c5c02013296b11"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/systems-v9.js",
+      "crc32": "302b905c",
+      "size": 23896,
+      "sha256": "824a214bb1a13e0bb36d15e6fed493dce31ee2a286b1bcb1e1fee4f5c52464ad",
+      "gitBlobSha": "ac95b230083a368bd78a11b1960fc3491858323f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/game/ui.js",
+      "crc32": "e984dd8a",
+      "size": 89186,
+      "sha256": "eb897575a3fa4ba089bf2d2d13e31ea6bc9305c761190cc7de900e64b055cf6f",
+      "gitBlobSha": "36295973eb66f433f7302392e22bba2643dad734"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/integration/README.md",
+      "crc32": "9ede1fa0",
+      "size": 1225,
+      "sha256": "2220784c0fc2ad147749bad18a1f8876ec58200e1c143016f4cc5bd3647d6e2d",
+      "gitBlobSha": "0ee39ce3e06ef87d68644a5aef5340facaacd4ec"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/integration/install.mjs",
+      "crc32": "9d860eb3",
+      "size": 7995,
+      "sha256": "460de6d3038fc349c8b74adfea942250fb117c82be83708086251d90d53926c4",
+      "gitBlobSha": "4549feea595282f1dae06576151170218a87e734"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/package.json",
+      "crc32": "5025a490",
+      "size": 588,
+      "sha256": "f8eb0c8841bf0794fe8d07f2dd3266cc5f8040e9505f4ed617e1bcc8ca077653",
+      "gitBlobSha": "5ab2a5529dc3f76303e55e392b6b529c22b4f402"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/README.md",
+      "crc32": "a9a967ea",
+      "size": 1383,
+      "sha256": "9b2b21867e96db6698d661c5f4a90930b4c99b3c5b598c4ff8d4ea80d70478f0",
+      "gitBlobSha": "2c01d7ebf2f977985c774f139aeec7e5a6464418"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/architecture-v11.json",
+      "crc32": "4f22646e",
+      "size": 116461,
+      "sha256": "5fa35978e90365a2a37f03f67b1c3ffa8155d2220e28e853db240fca84602293",
+      "gitBlobSha": "8c68a59b09249acf245a082aae30f4acbc520519"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/architecture-v11.log",
+      "crc32": "822b9bed",
+      "size": 52,
+      "sha256": "4742bf47f3162af650c85265e0aa5c0e54570b45b602e127ab16a663850aafd6",
+      "gitBlobSha": "01a2475c8ef2a5c6e82584ad78db4d29eb63be4f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/browser-v11.json",
+      "crc32": "69eb8b30",
+      "size": 1188,
+      "sha256": "f6d7a9e5ce800637982749e45f9332706ccce001bf927d52f424cbed3abe5ea2",
+      "gitBlobSha": "7a15424aa8c4afa43c89422a505636a24f5945ab"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/browser-v11.log",
+      "crc32": "1467ddb4",
+      "size": 1189,
+      "sha256": "c77b5e5e5398e2d36b0f16abeaa8506095e621a404bd3cfa25d92598a823bd21",
+      "gitBlobSha": "e36d5ace99f190c69686efc4c224191bc07df371"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11-normal-r0.log",
+      "crc32": "ed2a8639",
+      "size": 9455,
+      "sha256": "57e600ebc429b50a7c0228117f13f6507897f1851dd933b3430ec5e068df1ed2",
+      "gitBlobSha": "b3c8454d1bd36902cc7c1733f71ea071cda59daa"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11-normal-r1.log",
+      "crc32": "05c053c6",
+      "size": 9426,
+      "sha256": "5569d10ab34fbf2bb2c784e8edfb10db41037dafdc638fcae96daa04876b8331",
+      "gitBlobSha": "4447118d551eed3cab3d3c45be3b6bcb843b98a3"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11-story-r0.log",
+      "crc32": "6ea6a6c6",
+      "size": 9498,
+      "sha256": "e04639153c8f24df4efb5c4c62abc99db7fc1e3c70b0e3387af332aa5c76d0ff",
+      "gitBlobSha": "cf90025c3a8cf2277acf22750c1314ba62969346"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11-story-r1.log",
+      "crc32": "fedb92cf",
+      "size": 9469,
+      "sha256": "c2382e1eafacdaf3ddfb62d8debc4311b38f79eb6019b65abdbcec3752d6b15d",
+      "gitBlobSha": "07e9da0be5b120c812d7f37eebb691c9c288115b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11-story.log",
+      "crc32": "6ea6a6c6",
+      "size": 9498,
+      "sha256": "e04639153c8f24df4efb5c4c62abc99db7fc1e3c70b0e3387af332aa5c76d0ff",
+      "gitBlobSha": "cf90025c3a8cf2277acf22750c1314ba62969346"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11full-normal-results.json",
+      "crc32": "042a8332",
+      "size": 3425,
+      "sha256": "e7c37b92572823e31118e42c2fa26634ed1819ad34a7da585194c5713967c763",
+      "gitBlobSha": "efd13376ec0d8db1256c698abf4084709f09fa4c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11full-story-results.json",
+      "crc32": "624d1fe9",
+      "size": 3468,
+      "sha256": "bd70f404b092b2a838406b1317a25a97747687256dab7cc2d333f26704985aa4",
+      "gitBlobSha": "2b5d739d59f1d2ee8fcbe74f62600e575cea597e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11rationed-normal-results.json",
+      "crc32": "00ac4ef0",
+      "size": 3424,
+      "sha256": "320d4106cd6c459eb85fe76860d3da5a5b8ea0d1e5d0aab90e78efcf45c6d728",
+      "gitBlobSha": "e3c0c3acba57d267f37a66914f861fcb40174c59"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaign-v11rationed-story-results.json",
+      "crc32": "80ac2e43",
+      "size": 3467,
+      "sha256": "2268a351e80295d6d892aeee321a01fd91793349c2797af5fdd61a308f8ab54b",
+      "gitBlobSha": "f1fa8cc517c597acdd1bcc389360f5fbbce50237"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/campaigns-v11.json",
+      "crc32": "6ce2c960",
+      "size": 798,
+      "sha256": "e763468f2e2588a2280f9b0cb08637c8011b03c2bf74ab600d0d6a8137cd4d6f",
+      "gitBlobSha": "0222d030e2dc59632efc7027e0b81f2937426b2d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/captures-v11.json",
+      "crc32": "8fd6625d",
+      "size": 1407,
+      "sha256": "062397c99d0c2cb1703e8ed0dfc958ec44620fb6a4b49b559889bc9abc59cc46",
+      "gitBlobSha": "236171f2de229b76fc6d2bbf7a28efc949b995cc"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/docs-build-v11.log",
+      "crc32": "dc743731",
+      "size": 898,
+      "sha256": "13ebbf265b79d94f7ad470a34d454a4b9580a31342d6c0e5b63c70ee42c6055c",
+      "gitBlobSha": "b0f17b60be03f5cdfa5c51eb31ebcb4ad1562776"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/docs-v11.json",
+      "crc32": "d1fa38d2",
+      "size": 3530,
+      "sha256": "c7c6dd2f306f7f44d70ca7f880a78d98b5ead0756f011f5466755a41c77903f1",
+      "gitBlobSha": "c8e50316ec7f909476c0ec5746e3aca8f532b519"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/docs-v11.log",
+      "crc32": "8c6fdf43",
+      "size": 1706,
+      "sha256": "a39cebc9bd0b6aae03252c4dad2cc5588bbc789c948d678efa685719109000e8",
+      "gitBlobSha": "30edc347710ce08e4febfd2636d998f4ffd45874"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/installer-results.json",
+      "crc32": "3e1bd4ad",
+      "size": 826,
+      "sha256": "528326e4a948133f4f7ef99336d22c0e28292fb84ec2fc8141d41d20845ff43c",
+      "gitBlobSha": "3d9b4829082d51961f9d106cbea3aecf8ef646a7"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/installer-v11.log",
+      "crc32": "4dcb6284",
+      "size": 930,
+      "sha256": "163b9acc80397f723e83cc2aee1871bc00c69c26ba634e43c54bf3fea0d8747b",
+      "gitBlobSha": "029a119363cb040144400518faf61642d6ce1a96"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/installer-v2-results.json",
+      "crc32": "10f241f6",
+      "size": 1259,
+      "sha256": "f451ae1e4f27b39d75c369488b98e60b488acb7d728513b7e75d5b68a6d8be79",
+      "gitBlobSha": "b90c0229d59bf01d1d3b012664f33253ff2ae366"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/tests-v11.json",
+      "crc32": "89cda1e8",
+      "size": 2067,
+      "sha256": "1dd2366a9ca5c828de3f265bc17eed996d31855ab4c96b917cb4b1bebce72e6c",
+      "gitBlobSha": "ab2ad7ce97aaed89717a5a2b1c46f6e865ec3137"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_00.jpg",
+      "crc32": "53896dbc",
+      "size": 74663,
+      "sha256": "7a846e911e7e7f261ebabf1cde784659fd77b44ff58d5d9a825b30df6ced10bb",
+      "gitBlobSha": "d6d1a5b2d8996250706e58cc9714bf0feaed6b5b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_01.jpg",
+      "crc32": "65ad6fec",
+      "size": 88001,
+      "sha256": "f3dca2fcc28f7426a5a94881d7f9c53c1a7b3842b45c4c51dea86fa6eb98085e",
+      "gitBlobSha": "43298adc5caa27730abf741a69545e01310387da"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_02.jpg",
+      "crc32": "042eb19d",
+      "size": 74358,
+      "sha256": "15c36b4bd72908847854e646ccf2663033aa5fc8eea729d9831ee3684c72c0e2",
+      "gitBlobSha": "6bb087930f21e73b2abe3272764f8eaf93ac6973"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_03.jpg",
+      "crc32": "6f866d0e",
+      "size": 85072,
+      "sha256": "9c22c2b1b0c45bcf3723ab7800d8a8599e3c03d14509cc2f114d8775fc31c6e0",
+      "gitBlobSha": "f519a0069144dbfc0890bc5ed77114e924bf4412"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_04.jpg",
+      "crc32": "e39d6493",
+      "size": 72152,
+      "sha256": "b0d45540f30ea38c3cf723bf2c5d7fa942286ebc0ef066aa2fcaefe5462bbcd7",
+      "gitBlobSha": "e47089c7a081427e7cdf2be12f7b13f28166c1ce"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_05.jpg",
+      "crc32": "531289f7",
+      "size": 80792,
+      "sha256": "c53d00935236b6abc92ad13c762dddd6fce6b476b6897f070a732deb2b5a9d9d",
+      "gitBlobSha": "50d16a7c3862e280df05a00bdd07baa546688786"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_06.jpg",
+      "crc32": "28e681e9",
+      "size": 84487,
+      "sha256": "3eb381bb7ef17851e8b2fcdcc7f29180ebfa3b8079db9f398cb0d2387f2354e7",
+      "gitBlobSha": "1d266ef267020b7b18ac8cbac0021db11916aa86"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_07.jpg",
+      "crc32": "71d161ea",
+      "size": 73553,
+      "sha256": "046407b1c1502fab5e9307f65903841093774202f48c8b786490e4fb6bb920bc",
+      "gitBlobSha": "0e73ce9700565bc1b4c958bba32f5b0312b178c7"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_08.jpg",
+      "crc32": "32b6e9f3",
+      "size": 82331,
+      "sha256": "b5d7adaf8c8db99be5742e91b58474c670e421e3768c28e315c2411723e2a5ab",
+      "gitBlobSha": "f370392aa01c0ef298b14fb2171b820ce191598e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_09.jpg",
+      "crc32": "d883238f",
+      "size": 74950,
+      "sha256": "e05cc8b82a1acf8bab6c450651a99fba16b191e8edfc4886c8cafd27b8823c33",
+      "gitBlobSha": "8ec928bcea45fab524ddf1cbfd22f07832841083"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_10.jpg",
+      "crc32": "86b7ef82",
+      "size": 81341,
+      "sha256": "512296ee273572b9af2117b8edcaf6237e688be9113a4985af7ecb889ee38ad7",
+      "gitBlobSha": "2364c2f5125ee18a6e77d403d1d555daea358b0e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_11.jpg",
+      "crc32": "ea844db1",
+      "size": 84749,
+      "sha256": "18df14dc21030494037dc2e2ff8f42866ccd06bef6948907a63b9f750bfafa90",
+      "gitBlobSha": "aedff60766a6263a96dec6406950f32367cf1408"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_12.jpg",
+      "crc32": "0f054502",
+      "size": 81039,
+      "sha256": "13f5cd70896d25b39768b401b36ea07b6406beacdf1cdfb1fcf8445068199643",
+      "gitBlobSha": "79b4754014f14a6c07a4b488ccfa88cf45f89336"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_13.jpg",
+      "crc32": "6850d026",
+      "size": 90207,
+      "sha256": "9d485351929371157bd5c0a919f5fb7a8595d4f62120a4587a7f7866625be4ae",
+      "gitBlobSha": "b6fd34afc2e74cea5afd14d80872e3fa4522e8c6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_14.jpg",
+      "crc32": "78b0597b",
+      "size": 85809,
+      "sha256": "e7b4aae74c3d03022694bb3a10a723814d9573180dcb14c15d336fe71778274d",
+      "gitBlobSha": "576cefc7cf441e14c22fd3e33c73e40acadbd7ee"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_15.jpg",
+      "crc32": "610c45cd",
+      "size": 84876,
+      "sha256": "a444518dc0753c4f1d10a8f50872466249fd4f94a837b00433a6583e91d433d2",
+      "gitBlobSha": "793596f6c22c188710d8a90da701cf3198070327"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_16.jpg",
+      "crc32": "8341aa50",
+      "size": 80618,
+      "sha256": "47f55ae2042ee45f35f9dbde26d2d7d4cb0d8d878b8152ad6e76b8fb76e41e54",
+      "gitBlobSha": "766dad1512e451d50af36f8d24d26af9874fda37"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_17.jpg",
+      "crc32": "d5bfe28f",
+      "size": 85966,
+      "sha256": "258ae703bad6d89e2c0003346e66113094bb7b3405b89bf029c3dcf5a37c6a8a",
+      "gitBlobSha": "c58c1fa73d91c37f96b93230cebeb8e5ef53e0a6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_18.jpg",
+      "crc32": "aa967759",
+      "size": 83463,
+      "sha256": "9ceaea27c5e9eb7d55a73a24bbcd57c2ee8eceb2ed8b49b01a3b028c45f66314",
+      "gitBlobSha": "1d43808ff472fa50a88ba7b5c397592ffdf3025d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_19.jpg",
+      "crc32": "578fb95a",
+      "size": 84214,
+      "sha256": "2196a7f408c6d958f7a5b08da8378ceb408607584e200ba6ff7fe0e97794294f",
+      "gitBlobSha": "c67f36133f3f5939fcfa3b58e5ac5ae1b0cc2e9b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_20.jpg",
+      "crc32": "4d1ea7b2",
+      "size": 87251,
+      "sha256": "5885144c9d292d00527d3e54d15101c4474519378fde312ef5e8e8ba9e86bf18",
+      "gitBlobSha": "90d775049468aaf91af5c77df5d707872952e8a9"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_21.jpg",
+      "crc32": "a2f1ab67",
+      "size": 86476,
+      "sha256": "7c5866c5689f3584714b883ef957b329c8f3a080055f4ef564496142450c7c8f",
+      "gitBlobSha": "2b56cc8413b9e0b3a1a3a27ec09b7c9a634034e6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_22.jpg",
+      "crc32": "7be322fc",
+      "size": 87679,
+      "sha256": "54746a7232c18b5c9489dacccca6e29be4099ad041839071bf4c3186d4d4f13c",
+      "gitBlobSha": "d2664d7ed75017d58937c2fea53007caca2ec74a"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_23.jpg",
+      "crc32": "f43eb83b",
+      "size": 89644,
+      "sha256": "5abc6a574feb1d9c704e77a356f185534857d5568195cfcf328b58ab47948c1b",
+      "gitBlobSha": "3ed7d43342e0def6f03294d076c9474704e8e9fd"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_24.jpg",
+      "crc32": "208987a3",
+      "size": 94192,
+      "sha256": "e9c32754d76ebfcadc1632f43afae17fd3a03903bacf0d670c8eca9a872fb9b6",
+      "gitBlobSha": "e71cf2c77aee2b86e15113d8b19cff1fa3ba9a06"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_25.jpg",
+      "crc32": "198d4d99",
+      "size": 83555,
+      "sha256": "712a2ab1eb1c8d3ea66d3a50b257b53810bff3a97b6a0437b6bd64a408496934",
+      "gitBlobSha": "f08d59bf3407b4b080a34440f549f5252af08c86"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_26.jpg",
+      "crc32": "274be59f",
+      "size": 81490,
+      "sha256": "04fe144edb354c9cc1ceab88b53fe42afc8ec185902f157b3077c57835891403",
+      "gitBlobSha": "efd10efaa2ca654f9f0449c6868783c7cfdfd67d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_27.jpg",
+      "crc32": "03817d04",
+      "size": 80980,
+      "sha256": "378eb175ce5ba5c0c00b74a3e7db63e6e669c9e59d9304cfb10afdca76a95591",
+      "gitBlobSha": "2e1f8e53474f6a4282f74d0f31b7e8f571e9ed45"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_28.jpg",
+      "crc32": "8ec37556",
+      "size": 77005,
+      "sha256": "f19d75f10bc4d500f45bc1cfd1470849812e9e35e5e78cff1d290f7a44b3fcf0",
+      "gitBlobSha": "581f7f23778f711c5297cfb0379c7c810d03ea8d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_29.jpg",
+      "crc32": "0396a07c",
+      "size": 89240,
+      "sha256": "cec49cba5e95bd6359099c9216431f62c3889d68d341e765e06c76ab61ff6776",
+      "gitBlobSha": "9e494ea0e7e1350017cee69c2ae0fab73693a76d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_30.jpg",
+      "crc32": "a9dc96ef",
+      "size": 82149,
+      "sha256": "2b21c88806afcf69fb9e09d15328eab89b077a9d85bff9155921daba54a3ba73",
+      "gitBlobSha": "c5e6c4b6d826134c32a83c94f614451555976bf4"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_31.jpg",
+      "crc32": "e6137869",
+      "size": 72914,
+      "sha256": "ee80373442d0275bcedb1ea1d66f94b1809cffe26b9c50c1ac27bb2ab1cccd4e",
+      "gitBlobSha": "257a2192195b2549934229d388c613d8b2b5a3d1"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_32.jpg",
+      "crc32": "8fbdc834",
+      "size": 88332,
+      "sha256": "bde0a9d8672d6ad7b0008234563baaf9f038e24c6545c748dc89a3e32f130e50",
+      "gitBlobSha": "15b1db757a786b34e2a9f73f8a268de214485d2d"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_33.jpg",
+      "crc32": "1da8a0ee",
+      "size": 70538,
+      "sha256": "e36dd93fb1f893a61379f3d516e843e84d67c45084cf9a8035c224d5c3041734",
+      "gitBlobSha": "831f684d27466253fb9562155db7ceff4a70e5f2"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_34.jpg",
+      "crc32": "6a678630",
+      "size": 68128,
+      "sha256": "bf2e95088078591de1b67b2c959082e97af6266860149cdfc9ac2609e1d5e907",
+      "gitBlobSha": "a44538d8efec240fea01668268b54a91f36e0cfa"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_35.jpg",
+      "crc32": "4f8eb576",
+      "size": 78279,
+      "sha256": "892731833b9c7032ad9d063d41d10c538016dfb34ad374d7e50a2cae7079af4f",
+      "gitBlobSha": "a457ac80072fa81acc218eb40efc2f8b46b568bb"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_36.jpg",
+      "crc32": "1a33bdea",
+      "size": 81475,
+      "sha256": "3131481893a7943efa739261148498c27e953f41fe901c83273845ce247896d8",
+      "gitBlobSha": "3d63c8b8a49b59d9bc9a8fa3f7fa543a6dd42e94"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_37.jpg",
+      "crc32": "c7b86700",
+      "size": 76972,
+      "sha256": "7e59580257269ce58ec55ee8238a1a25183a4c67b0f54f3ecd39e99db52654b6",
+      "gitBlobSha": "22153db83ba6366e2a522eda4a16fa05a1f515eb"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_38.jpg",
+      "crc32": "035e06fc",
+      "size": 78719,
+      "sha256": "b95155d36642f6e248b1fdb64258e33468275398fbea14015f5cdca2d82314f9",
+      "gitBlobSha": "aacadb1025a3330b8f9e5a23a03a5d654d7a0a8c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_39.jpg",
+      "crc32": "a146f10c",
+      "size": 79242,
+      "sha256": "4ea4ee5e033a225adf67ab89c918ff7c820402b0ca25e7fcf607a4879ce5cbcc",
+      "gitBlobSha": "7478ffc9f2ec71194a3c71e0ac5f02bc070fd34c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_40.jpg",
+      "crc32": "66bb8b96",
+      "size": 84835,
+      "sha256": "11ee7f1e51e8568b0a0dc4bae05b1124534a57879bdb2feee2d72a46fd44a211",
+      "gitBlobSha": "9cc91bdaa33114a99a7b73c21994fd73840f065f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_41.jpg",
+      "crc32": "675816c0",
+      "size": 70230,
+      "sha256": "8139628ebfd613bfa6ae9b2a59a49e7c26211bdd58746428f6f452fbaeea3282",
+      "gitBlobSha": "e276c8458b412f37ab3383966a4c0425de1c4f16"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_42.jpg",
+      "crc32": "4a012e5e",
+      "size": 71085,
+      "sha256": "34132b2671ec21f4cd4c5b499f3ce332d60bb169e45e4f376c446eee84f8b628",
+      "gitBlobSha": "137fd5cd9045fbbe8e110a96ebe12dd1d3eba3ee"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_43.jpg",
+      "crc32": "2763029c",
+      "size": 81670,
+      "sha256": "e5e0fc6838d85106ea01c3ef4e9afa9083ba8c0863ff2a67a52d27149b3e4dcc",
+      "gitBlobSha": "03dc4d69bd0c29cbba241867e98c64e80abb575b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_44.jpg",
+      "crc32": "e4be2f4b",
+      "size": 78419,
+      "sha256": "10770ea09090577a2ef994b0b04edbddf18e7124a0c5a33cc5caad1444745450",
+      "gitBlobSha": "8b4efbd22562e8e5b1b80758bae9095b9652a47b"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_45.jpg",
+      "crc32": "9eff4eac",
+      "size": 84147,
+      "sha256": "083f05c6105cdcc118fb251aafab0eacb77e7d43748d544ac4fdb6938702b5ac",
+      "gitBlobSha": "937368451dfd1ae4f5385e0214fc75ede891bb20"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_46.jpg",
+      "crc32": "ed189cee",
+      "size": 73352,
+      "sha256": "8d2685ccd0f74cb94c55bfd0bf3665d67cc0c5fe8396cc943089f8cafcca093c",
+      "gitBlobSha": "7d0a38048a262636c0f40dcb3fddefb662d03508"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_47.jpg",
+      "crc32": "602236c6",
+      "size": 69804,
+      "sha256": "6ef0d149ae2373d7f3dee3430372987bc51d9e08254e4911992b6520a74330fa",
+      "gitBlobSha": "d426145703d8d79e834c9e2e6101d768e51b8477"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_48.jpg",
+      "crc32": "36a05c6a",
+      "size": 72086,
+      "sha256": "a2820629d003b9f059cb3b53c653e8afd76c9d532473b1f9869abf46be4f240b",
+      "gitBlobSha": "5e592717ae26496c2f52f7230f3e50d2c433026e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_49.jpg",
+      "crc32": "63692e08",
+      "size": 73012,
+      "sha256": "a20d2e9182b6de7943b89b05ab4172d8fd1c54776a6a0d48697aa1dbdcb01c52",
+      "gitBlobSha": "c8b32928fe44dd8e4e583528e3b8a5ec4a269035"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_50.jpg",
+      "crc32": "a698296c",
+      "size": 70326,
+      "sha256": "f23dedac00a52cdd6fabc389f1052060ee38fcf185bd695e98621a2d7bc8766b",
+      "gitBlobSha": "802ab51f46f7f87793b2d03c2f8d662dcaddbc18"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_51.jpg",
+      "crc32": "619da032",
+      "size": 88414,
+      "sha256": "83e0eff7c8ea967798f140afe740b714ecee9159e740286d6ca4aa3a1eaea26d",
+      "gitBlobSha": "4282d258b0218a11cf097fea14fd5bff507dcae6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_52.jpg",
+      "crc32": "e1a9983e",
+      "size": 74772,
+      "sha256": "f84732cb9b5f51f36aaeba8f5995b6e6e33b9e5de258aa96543d227d71f0ecf1",
+      "gitBlobSha": "17f843382e816ae68706adeebefd2e0fe59a64dc"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_53.jpg",
+      "crc32": "3f3d713b",
+      "size": 84922,
+      "sha256": "b5e7df43e140dbbec05cf04b946be5f10bff44a0f21aba4ee019d12936bc6b3b",
+      "gitBlobSha": "f8b9f87fb01abf67af2d3088faa0ba092777c220"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_54.jpg",
+      "crc32": "e1099326",
+      "size": 74820,
+      "sha256": "fee583efadc3cfdb052687a3dc2afa0deefecb0f908fe6cac87e93d1d661780d",
+      "gitBlobSha": "34d62139a7572f9982c09197cda8c725853eb6bd"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_55.jpg",
+      "crc32": "f393b63a",
+      "size": 87470,
+      "sha256": "20b4fdbcd6d89badcbc6c0ce26392becb9723b70592e6faf35e477bf61586fbf",
+      "gitBlobSha": "71807a013a321d2ff1caca8539a4c5004ecd732f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_56.jpg",
+      "crc32": "d793ae16",
+      "size": 71509,
+      "sha256": "17baa334c680493f833fb1c48fcdbf6e605242d37c555d74ff448442f85998d3",
+      "gitBlobSha": "c0d2338ded98e65230ff2f3e25f0428a6920a60a"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_57.jpg",
+      "crc32": "bb15b807",
+      "size": 76592,
+      "sha256": "bd0f70a42513b7249624d01666a73c8d3bb8c165748e8fdcda62c5e4d1772249",
+      "gitBlobSha": "12aa0139053872903a8a3f36dcc52297f0356597"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_58.jpg",
+      "crc32": "f281f64f",
+      "size": 68017,
+      "sha256": "96f15ddbf128f4489b3dd03acbd6c845c3b41029204a1d3c07f04babd1b92de4",
+      "gitBlobSha": "2b8e5bbfc7d5cee938a5c23895c789ab26631a01"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_59.jpg",
+      "crc32": "8a984017",
+      "size": 69782,
+      "sha256": "0e290bf5d704a4df0771edd0f1197427dbea30b67b417b7f3a9a341ef78a0450",
+      "gitBlobSha": "12a8bdd05e5deecdec81832d280444e1f12ceaa6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_60.jpg",
+      "crc32": "f76b9a2d",
+      "size": 79447,
+      "sha256": "83768070c03b2c88c11947f01fcb41ba20922e1b18edb5061943cd36820b50ee",
+      "gitBlobSha": "66c2519f96f5798c8fe089f17634bbb251585077"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_61.jpg",
+      "crc32": "026614df",
+      "size": 78737,
+      "sha256": "1e1113868a7495b415b82f3644f19106d7965238157e9fbb36d23b8dbd66cf22",
+      "gitBlobSha": "f12f6f167a279bf82d788804026b8e3d3423981c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_62.jpg",
+      "crc32": "462285eb",
+      "size": 78515,
+      "sha256": "fe18797bfa94b4a8cb9edb18b8808e3685225b7d12e16817a3fb2691a142b627",
+      "gitBlobSha": "2800cb09bc5ab125b74a7820828d6499e59dece5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_63.jpg",
+      "crc32": "a6205ae3",
+      "size": 60103,
+      "sha256": "2bc3f887da742ca3f157f8512c2c3add93d2643a0f70369e415597c4615832cd",
+      "gitBlobSha": "3d28ef27bf0b57386d973bea3eabfc47cd4d6d7e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_64.jpg",
+      "crc32": "6aab9886",
+      "size": 69685,
+      "sha256": "324c6f09f2633ab684e4bcbe1ac71985d86a32d7a813f3871478d9167bbbd32e",
+      "gitBlobSha": "a4ae58f27c5ad87390062d53b213174700cc3c31"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_65.jpg",
+      "crc32": "086bd1b9",
+      "size": 67035,
+      "sha256": "5603c995a46ab373603566b202dc3bc989bb3cb4d9e032e34848968351aeb50a",
+      "gitBlobSha": "a05c5882c0b21185240a16c0d621522976796675"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_66.jpg",
+      "crc32": "e9f45957",
+      "size": 72760,
+      "sha256": "32e3f6f961828c5d3e369ad4849d1278d505df9f6d785dc435648867205bb201",
+      "gitBlobSha": "5e72fea81ed10c41e7ae028f8756a3a9de98d886"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_67.jpg",
+      "crc32": "d3052179",
+      "size": 72274,
+      "sha256": "f4bc3c86122c5ee06076c340306d9dfc9850443b8169f028dc1f7d8164815dc5",
+      "gitBlobSha": "491beadc30fec1940c92d4472f154be12b78d5c5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/01_quai_v11.jpg",
+      "crc32": "e9ddd46f",
+      "size": 160671,
+      "sha256": "d3b580cd9758f0b63b48fdd530b11f231911c303a73273b89d68657de0f914e9",
+      "gitBlobSha": "2c30f26e6524dfd4864719a7c10b5dc6191c54ec"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/02_identites_v11.jpg",
+      "crc32": "697f29f9",
+      "size": 140605,
+      "sha256": "5508025dfbb877553394f3448b6156743be66d3bb0654c2f6c2648adbe77a91b",
+      "gitBlobSha": "f1ce3a92267a020f4a7073db320b1c2ee74d6705"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/03_sources_v11.jpg",
+      "crc32": "bf042e33",
+      "size": 178548,
+      "sha256": "fc02de2e9fb4fcb63ae0a6c940e3ca10462e0d6de134ef680224e71a24437c4f",
+      "gitBlobSha": "5fbd1cc73f7766e769d74232fdc99ff87c829732"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/04_jax_killson.jpg",
+      "crc32": "55cceac1",
+      "size": 92327,
+      "sha256": "ecafd2ddf4ba2396d6d1558fe836e005232899e6913a9393e511832b5c1457da",
+      "gitBlobSha": "350bdea6797e0f28df8e73f38b2904b036079409"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/05_biorifle.jpg",
+      "crc32": "c24aa162",
+      "size": 93947,
+      "sha256": "f68fd2a8112bc8c71c8b323f09295ae94b79a2dc9de8bc55597aeee90dfbb361",
+      "gitBlobSha": "3afeecbfcc775c8ff02b3785c0dbf2a2b7f5f5f7"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/06_gland.jpg",
+      "crc32": "9a6a960f",
+      "size": 86585,
+      "sha256": "1c67b3506c02b7ac360b55119c0766eccff313d3b6ebc48b77b1e48543d20a34",
+      "gitBlobSha": "a561748930d57db01e72d3ba3cf510fbbd79b47c"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/07_montero_charges.jpg",
+      "crc32": "63e433f9",
+      "size": 90800,
+      "sha256": "56265f5748c62178dfb07cfd0ce3527b50abf36fb131b9a2e7bd945fc3667292",
+      "gitBlobSha": "f000456a1d9921e03a47eb251950afb8f84c86f4"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/08_mobile_identites.jpg",
+      "crc32": "95c03230",
+      "size": 47414,
+      "sha256": "746484afb7e07d55fc617cf877dc89f18f8baae72b440f0683a4eba4091c1c75",
+      "gitBlobSha": "157a95dcd92744fa55e47e4f81ab98e391a93f7a"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/09_nouveaux_lieux_contact.jpg",
+      "crc32": "1e4edc3d",
+      "size": 285437,
+      "sha256": "65f3ee0a61354060366c7849f94f6fa08608ccf6139613f5592274caa7ccb151",
+      "gitBlobSha": "1de1d029321436fe8cbe0baebba3911355c3c1c7"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/requirements-qa.txt",
+      "crc32": "2eaca9a4",
+      "size": 117,
+      "sha256": "c8af901bb16a938cfb79aec752b5ea3dee7921c38807b5a02e51f3f698f6733f",
+      "gitBlobSha": "2273d2e9c1c0bccae39d28d86f1200024c67f303"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/architecture-v11.test.cjs",
+      "crc32": "02c11709",
+      "size": 4100,
+      "sha256": "04dbd8017fa5a1c194a99a93a6d03b20c6bed91528dd46777b286fb6a55f3673",
+      "gitBlobSha": "c7df1f45c461c61c9d8303b8ce4edab27241ea4f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/campaign-v11full.test.cjs",
+      "crc32": "10969335",
+      "size": 15217,
+      "sha256": "841d56d9e47d8aabb3aab3be8b3fe8e611e6f59a2321ca027a8ca3a8634ee61c",
+      "gitBlobSha": "addb7b1082edffe923bc5eecffa61ede48075167"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-fire-control-v9.test.cjs",
+      "crc32": "e7752b9c",
+      "size": 19244,
+      "sha256": "1f648489c3892562bf7b00faaef64f06baf40d6da3b96a12ce7dfd40088c7ac7",
+      "gitBlobSha": "103a32284a6df225482cd316a0f14a8a238daafe"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-flight-v8.test.cjs",
+      "crc32": "8aa675cf",
+      "size": 16453,
+      "sha256": "798a8b6eb6b6e20645adfd8fae65cfd59c9acbb8da340009d9c98a524004cd22",
+      "gitBlobSha": "ab9e9ef9e1c6f7d60b9a94454ddefe4eaf9c1d66"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-regression-v4-on-v8.test.cjs",
+      "crc32": "21d4c932",
+      "size": 18709,
+      "sha256": "a6bf8654d276499497b422c4260390bc3bad2fac309ccafea0e26de0b942c114",
+      "gitBlobSha": "f49793d3c11a3afbd101caa01e8ae5e7cbdfdea4"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-systems-v5-on-v8.test.cjs",
+      "crc32": "c9fb1529",
+      "size": 23059,
+      "sha256": "648026a43bd6db8547c4b8b0a20070477639b5a62b8b3e9a47ceed57dc204baa",
+      "gitBlobSha": "b3c49833e54f0caec77d4aa77b05bcdd7d4bcc91"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-systems-v6-on-v8.test.cjs",
+      "crc32": "a49427a9",
+      "size": 17179,
+      "sha256": "34777bcf75ad4b5691bb3fde5b238a253edc3941208d7c9bcdc3f51c7acb1a35",
+      "gitBlobSha": "b4ff335999098d5638eeb92c7c4ef4e1d307ebc5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/current-systems-v7-on-v8.test.cjs",
+      "crc32": "0f1be0be",
+      "size": 15777,
+      "sha256": "f8ee290b108fd81be3da06db54c0e4c7583790779b17d74d703665249ca34766",
+      "gitBlobSha": "4586edf3fa04af6c688e1c219e925f8e140f62a0"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/fixtures/data-v4.json",
+      "crc32": "ef4a7c20",
+      "size": 301733,
+      "sha256": "4bb9735e1a04e4b807e2b469400fe1e3c6819d86d2e823787ef4a78e2b44d490",
+      "gitBlobSha": "6d4e7fc22b69ea234f6d2ec95b40debbd973fd0e"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/fixtures/data-v5.json",
+      "crc32": "67a56e8e",
+      "size": 337299,
+      "sha256": "58edd7c3c8661ce09597799344a8c0a5a55998f291f9132eab7dbc3617a04701",
+      "gitBlobSha": "47004a82698f5b0998fe43fce26732153c6f9f13"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/fixtures/data-v6.json",
+      "crc32": "e7920f0a",
+      "size": 362046,
+      "sha256": "70ff70e28006878f0aeb8bdf6587f7589626dfa613883713562c518f1de91f68",
+      "gitBlobSha": "22f4fd00835d2cd6a3ab127315d4fa0ae2894b65"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/installer-v2.test.mjs",
+      "crc32": "e508cb60",
+      "size": 5804,
+      "sha256": "8422fa5bfa10b902a35601fc7cac0a396d056da31637c6a3668c9b7e3fb7e4c7",
+      "gitBlobSha": "364d6108c7e5e612de328aa6d32e638c04caa320"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/installer.test.mjs",
+      "crc32": "648796ca",
+      "size": 3628,
+      "sha256": "c65e1271243a6f3165c7a4a3109f5fa97c713b410d30b82ea39f2328a637079c",
+      "gitBlobSha": "a344d4c6effbf8aa29c76ec3f2c591935fe1f81a"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/load-v10.cjs",
+      "crc32": "bd515990",
+      "size": 461,
+      "sha256": "bed8fc10f907be6628d3af7e3cfbd9a6300c473cc8b2ead8ee937de3721c2b86",
+      "gitBlobSha": "5835da4e1c7b47942620486ae9342507e681ab05"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/load-v11.cjs",
+      "crc32": "e49e7a31",
+      "size": 427,
+      "sha256": "de9fb3b107f4ccae4d77a706d594c54c4ea3174ec78dad370517c45a2294d5f5",
+      "gitBlobSha": "fcbad7810906a080d5e6fc9491eb21e87d505755"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/reference-v11.test.cjs",
+      "crc32": "74d408f2",
+      "size": 1644,
+      "sha256": "aec20da0a90416aa8f3898c15401b123ec4a519091897ff81de8a5b191bbdf96",
+      "gitBlobSha": "0b6f6e61541903c6082affbb3374b7eb5d2e3ee5"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tests/systems-v11.test.cjs",
+      "crc32": "fd7488a5",
+      "size": 1561,
+      "sha256": "07098904aec48640ae62c7c9e9c9c9bcd60ba589c751ae225e4467c97a7f8284",
+      "gitBlobSha": "8992d711418e7b7b802b893b1e7f247a8cb9f988"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/build_docs_v11.py",
+      "crc32": "7dafa610",
+      "size": 17838,
+      "sha256": "939ca2316ef5160bd96694543a21359d9f474fafffc2116809f6ae7dafeb833e",
+      "gitBlobSha": "c32d27d04cd3854db6e71f4e7830451c9ee37d2f"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/build_standalone.py",
+      "crc32": "5d3a2ce3",
+      "size": 910,
+      "sha256": "83b69e6dc021f9092f05c1a1722b88302d1fb92746176c788b46b3a578e72b20",
+      "gitBlobSha": "b477d57bda204368b949d444f6f26b257ab9dd53"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/package_v11.py",
+      "crc32": "b5325e7d",
+      "size": 6218,
+      "sha256": "7603f02f49c4babd746dbd257019eb1124b8e6a88e59c6b589a7e8b0443ea987",
+      "gitBlobSha": "5d2439b134308afbc9bb06093579ffca45a12bb6"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/run_browser_v11.py",
+      "crc32": "2e7ce795",
+      "size": 6007,
+      "sha256": "e54bb10a70e27d75522d0a73b581236013524b0fbdaa5c2c1e71ad70608353e9",
+      "gitBlobSha": "d67675c67696db1c2811d499b0e6f2f206d41005"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/run_campaigns_v11.py",
+      "crc32": "ecc56a04",
+      "size": 1227,
+      "sha256": "1fdedaa4d7c31900c8a56ae99b4e4293c20e6ac3dfb4b2579e90f4664fcc841c",
+      "gitBlobSha": "a82fc2a8dbe1f126f71f207bdbe27b139fd0f461"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/run_tests_v11.py",
+      "crc32": "90fe1c9d",
+      "size": 877,
+      "sha256": "b64633db95036e9a075084ebffb0cbe6fad7036f04640f3b97b98ebc8bb5bd21",
+      "gitBlobSha": "1947fc0dcf8aa353bb361d61bdcce483adbe8ca8"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/upgrade_v11.py",
+      "crc32": "ded6e453",
+      "size": 17707,
+      "sha256": "df46de353dc6f0d7562f2d1c54e069bd0d08b058c7d1625238a5ce8912840476",
+      "gitBlobSha": "176427a0d69808f494d3944d9c89c9e355895746"
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/tools/verify_docs_v11.py",
+      "crc32": "c2e2edbd",
+      "size": 2339,
+      "sha256": "0e8c14cecce9b624977846765efef56d4f337b0111eb4a383659533201e45e44",
+      "gitBlobSha": "b4d360a6d2f8be0b3e8af14bcfffa3b8f0d05f05"
+    }
+  ]
+}

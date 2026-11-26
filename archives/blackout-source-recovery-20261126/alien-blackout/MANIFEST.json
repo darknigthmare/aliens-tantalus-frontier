@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+  "archive": {
+    "size": 33103752,
+    "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+    "gitBlobSha": "ba68c7bc3633e769ccbd67f11137bb34c77773f0"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-000",
+      "size": 10485760,
+      "sha256": "53899e34f00eeaba4ae00a377450f2b807bfa365b2a2f0b4d6e1dc3ec4ddd16e",
+      "gitBlobSha": "9abbde1e06deba4a03efeb08fe5452658f9df676"
+    },
+    {
+      "path": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-001",
+      "size": 10485760,
+      "sha256": "9802aea249acda73c64b6b0c1b5350f8a9f10cbdce2eaa195b2e99776cd088f7",
+      "gitBlobSha": "f766878c8b1cd98734d4c2c9a45d3b36f6443e3b"
+    },
+    {
+      "path": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-002",
+      "size": 10485760,
+      "sha256": "10a9fc00c08d993bd8959971b9b0413902a5c9af74435816d54d9b5ba1ec9783",
+      "gitBlobSha": "4325e6ab837b0d49f0a5f685b08a1809f12e858d"
+    },
+    {
+      "path": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-003",
+      "size": 1646472,
+      "sha256": "709340dd800a1658fda66fa10c38b501fab89dc4436e838df5d973400ff030f3",
+      "gitBlobSha": "02d1e45d3f2b274b1292ca5cbf5f18764f80fe37"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 400,
+  "extractedDocumentPaths": [
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/README.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/CHANGELOG.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/CODEX_COMPLET_v0.6.0.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/CODEX_COMPLET_v0.7.0.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/CONTENT_MANIFEST.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/INTEGRATION.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/REGISTRE_FIDELITE_V7.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SMOKE_TEST_MANUEL.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SOURCES_ET_FIDELITE.md",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_PROVENANCE_V3_INHERITED.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V4.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V5.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/SOURCE_V7.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/docs/content-v7.json",
+    "archives/blackout-source-recovery-20261126/alien-blackout/documents/ALIEN_BLACKOUT_v0.7.0/qa/REPRODUCIBILITE.md"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

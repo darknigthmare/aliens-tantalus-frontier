@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+  "archive": {
+    "size": 47349199,
+    "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+    "gitBlobSha": "0d49b2f1fee32757c2fc2790b942a7f8594c170f"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-000",
+      "size": 10485760,
+      "sha256": "2b6293abcbbddba97c0ac5c885ccf42604e61fdd25e67c32dcb5e19859f50685",
+      "gitBlobSha": "4766c2b90824d1f20624bda7ad6af4ee7721acfb"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-001",
+      "size": 10485760,
+      "sha256": "e523bae96cc211de9ce20cd800c632d8dd335c22137ebee1230d59c98edd3639",
+      "gitBlobSha": "a6c0f75ddcb78108de98f6101c5c78192094b0b8"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-002",
+      "size": 10485760,
+      "sha256": "bc0c4a85087db25d86d837e0d437326a40083a5a45e929898a612c7ba506836b",
+      "gitBlobSha": "77c9f64b0712fa113c5530f57d28f41918369b84"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-003",
+      "size": 10485760,
+      "sha256": "bf4932363772ce077d7b4e41d45d9cf99e95be9695bb98c7177b0952e85e7f7b",
+      "gitBlobSha": "78f321441edacc6bdf8b6bbb36d233d157f809e8"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-004",
+      "size": 5406159,
+      "sha256": "6e04525c92f8b66b200cc9eaa9d2835c3f26b383b9f9421044eb0ecd07b18519",
+      "gitBlobSha": "d17f4cddb61b61d97896d2d07cae308ce1e927fd"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 416,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/NOTICE_ASSETS.md",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/README.md",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/assets/audio-incarnation/manifest.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/assets/concordance/manifest.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/assets/incarnation/manifest.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/BASE_PROVENANCE.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/BASE_PROVENANCE_V18.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/BASE_PROVENANCE_V19.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/CAMPAGNE_ET_DIALOGUES_V20.md",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/REGISTRE_CONCORDANCE_V19.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/REGISTRE_CONVERGENCES_V20.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V14.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V15.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V17.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V18.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V19.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/ROMULUS_MANIFEST_V20.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/SOURCES_V14.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/SOURCES_V18.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v13/ROMULUS_MANIFEST_V13.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v13/SOURCES_V13.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v15/SOURCES_V15.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/ROMULUS_MANIFEST_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/SOURCES_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/qa/ASSET_CONTINUITY_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/qa/CAPTURES_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/qa/PDF_LAYOUT_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v16/qa/TEST_SCHEMA_CHANGES_V16.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v17/BASE_PROVENANCE_V17.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/docs/historique_v17/SOURCES_V17.json",
+    "archives/dlc-source-recovery-20261126/romulus/documents/ALIEN_ROMULUS_CONVERGENCES_v0.20/qa/fixtures/v13/manifest.json"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

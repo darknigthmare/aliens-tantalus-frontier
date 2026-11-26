@@ -1,0 +1,3148 @@
+{
+  "htmlSha256": "10a88bc3e562dcc3f08037cbc3cb78cadd4218edb325464a64f1c02aac009e00",
+  "captures": [
+    {
+      "file": "v15_01_soute_reference.png",
+      "caption": "La soute, le cadre et les quatre attaches sur leurs ancrages existants.",
+      "method": "Jalon S38 issu du nouveau parcours prudent, importé puis suspendu. Ennemis et positions inchangés.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_02_temoin_v14.png",
+      "caption": "AVANT : le même jalon avec le HTML authentique 0.14.",
+      "method": "TÉMOIN HISTORIQUE 0.14 : mêmes personnages, coordonnées et cadrage. Non compté comme rendu du moteur courant.",
+      "sourceSuite": "amarres-browser",
+      "historical": true
+    },
+    {
+      "file": "v15_03_trois_attaches.png",
+      "caption": "Trois poignées libérées ; la quatrième reste bloquée.",
+      "method": "Jalon after:latch3 du parcours intégral. Aucun flag créé pour l’image.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_04_local_eva.png",
+      "caption": "Local EVA : les deux rangements et l’accès au pont inférieur.",
+      "method": "Jalon S37 issu du parcours prudent. Les volumes et les seuils restent ceux du manifeste.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_05_tenue_prelevee.png",
+      "caption": "Rain équipée ; le premier emplacement est vide, le second reste occupé.",
+      "method": "Jalon after:suit du parcours intégral. L’absence de la tenue dépend du flag effectivement obtenu.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_06_breche.png",
+      "caption": "La même soute après rupture : ouverture préparée, cadre et palier conservés.",
+      "method": "Jalon S38E du nouveau parcours. Créature active conservée mais simulation suspendue pour la capture.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_07_ligne_sur_arete.png",
+      "caption": "La ligne contourne les deux coins de la lèvre intacte.",
+      "method": "FIXTURE : Rain placée sous la lèvre à x850/y−245 ; ennemis retirés. Géométrie de la soute inchangée. Contacts calculés, pas peints à la main.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_08_reprise_cable.png",
+      "caption": "Après maintien réel de R : reprise de la ligne, corps retenu par le rebord.",
+      "method": "Suite de la fixture précédente : aucun nouveau placement. R maintenu au clavier, puis relâché ; pas de modification de longueur pendant la commande.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_09_carte_cable.png",
+      "caption": "La coupe locale affiche le même câble et les lèvres intactes.",
+      "method": "Carte ouverte depuis la fixture de traction sauvegardée. Aucun ennemi affiché, même graphe de contacts que la simulation.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_10_poignee_en_cours.png",
+      "caption": "Poignée pendant son maintien, avant libération.",
+      "method": "FIXTURE : Rain placée près de la première attache, menaces retirées. E maintenu réellement au clavier ; aucune validation d’objectif injectée.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_11_apres_largage.png",
+      "caption": "Après largage : structure restante et quatrième poignée libérée.",
+      "method": "Jalon final de tâche issu du parcours intégral, chargé en pause. L’Offspring unique a réellement été résolu par la séquence.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "v15_12_mobile_exterieur.png",
+      "caption": "Commandes tactiles en extérieur, avec rappel contextuel.",
+      "method": "Émulation Chromium 900×550, jalon S38E rechargé. Pas un test sur téléphone physique.",
+      "sourceSuite": "amarres-browser",
+      "historical": false
+    },
+    {
+      "file": "100_convoyeur_appui.png",
+      "caption": "Rain rampe sur le tablier du convoyeur, le fusil rangé sur le dos.",
+      "method": "État S24 canonique, ennemis et compagnons retirés. Déplacement clavier réel depuis x365 ; C relâché sous le capot. Aucun nouveau tapis roulant motorisé.",
+      "state": "S24",
+      "player": {
+        "x": 540.2000000000023,
+        "z": 154,
+        "y": 28,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 16.644000000000187,
+        "gait": "crawl"
+      },
+      "motion": {
+        "stance": "crawl",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "101_echelle_prise.png",
+      "caption": "Relâcher la direction garde Rain accrochée ; les mains restent sur des barreaux présents.",
+      "method": "S29 préparé après le retour de gravité, ennemis et compagnons retirés. Montée au clavier puis 0,65 s sans commande ; pas de pose collée par image.",
+      "state": "S29",
+      "player": {
+        "x": 410,
+        "z": 154,
+        "y": 94.29999999999993,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 8.958499999999997,
+        "gait": "climb"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": "410",
+        "land": 0,
+        "grounded": false,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "102_reprise_echelle.png",
+      "caption": "Reprise de la prise à l’échelle par import du JSON.",
+      "method": "Deuxième page avec adaptateur mémoire explicite ; pas une preuve de conservation du stockage natif après fermeture.",
+      "state": "S29",
+      "player": {
+        "x": 410,
+        "z": 154,
+        "y": 94.29999999999993,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "climb"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": "410",
+        "land": 0,
+        "grounded": false,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "103_palier_sortie.png",
+      "caption": "La sortie de l’échelle se fait au niveau du palier, sans flotter à son sommet décoratif.",
+      "method": "Même salle et même mouvement clavier que la capture précédente ; gravité active, organismes retirés.",
+      "state": "S29",
+      "player": {
+        "x": 410,
+        "z": 154,
+        "y": 165,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 15.513500000000015,
+        "gait": "idle"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": null,
+        "exit": -1
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "104_recul_visee.png",
+      "caption": "Rain recule en conservant le fusil vers l’avant.",
+      "method": "S23 canonique avant acquisition : drapeau du fusil et chargeur de 20 cartouches explicitement préparés pour le test. V et gauche réels ; ennemis retirés.",
+      "state": "S23",
+      "player": {
+        "x": 1471.8999999999987,
+        "z": 225,
+        "y": 0,
+        "vy": 0,
+        "vx": -124.5,
+        "hp": 100,
+        "face": 1,
+        "ammo": 20,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 5.519500000000119,
+        "gait": "aim"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": 1
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "105_tir_obstrue.png",
+      "caption": "La prévisualisation de tir rencontre l’îlot au lieu de le traverser.",
+      "method": "Implantation d’origine du laboratoire. Joueur placé avant l’îlot, V au clavier, fusil préparé pour diagnostic. Aucun mur fictif ajouté.",
+      "state": "S23",
+      "player": {
+        "x": 810,
+        "z": 125,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 20,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "aim"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": 1
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "106_appui_tabouret.png",
+      "caption": "Rain prend appui sur le dessus du tabouret après un saut.",
+      "method": "Petit meuble existant de S23, à x950/z212/h50. Saut et translation au clavier ; ennemis/compagnons retirés pour tester le support, sans ajout de géométrie.",
+      "state": "S23",
+      "player": {
+        "x": 953.2333333333329,
+        "z": 212,
+        "y": 50,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "107_cadrage_altitude.png",
+      "caption": "Le cadrage suit une altitude élevée sans couper la tête du personnage.",
+      "method": "Position x1000/y480 préparée dans la cage, gravité coupée et pause diagnostique ; ce n’est pas une arrivée de scénario ni une preuve de trajectoire complète.",
+      "state": "S29",
+      "player": {
+        "x": 1000,
+        "z": 154,
+        "y": 480,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "float"
+      },
+      "motion": {
+        "stance": "stand",
+        "ladder": null,
+        "land": 0,
+        "grounded": false,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "108_convoyeur_mobile.png",
+      "caption": "Passage bas en affichage tactile : seules les actions pertinentes restent visibles.",
+      "method": "Émulation Chromium 960×540 tactile ; position dans le convoyeur préparée, jeu exécuté, pas de téléphone physique.",
+      "state": "S24",
+      "player": {
+        "x": 600,
+        "z": 154,
+        "y": 28,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "crawl"
+      },
+      "motion": {
+        "stance": "crawl",
+        "ladder": null,
+        "land": 0,
+        "grounded": true,
+        "aimFace": null
+      },
+      "sourceSuite": "appuis-browser",
+      "historical": false
+    },
+    {
+      "file": "01_menu.png",
+      "caption": "Menu réel Amarres v0.15 ; décor de station original procédural.",
+      "state": "title",
+      "method": "Menu du module lancé dans Chromium.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "02_prologue.png",
+      "caption": "Prologue chronométré : récupération évoquée par une animation originale, temps avancé par diagnostic, sans image du film.",
+      "state": "S01",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "03_laboratoire.png",
+      "caption": "Laboratoire de Romulus : plafond central abaissé, îlot, cuves horizontales et armoire Z-01. Géométrie 2D interprétée.",
+      "state": "S22",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "04_carte.png",
+      "caption": "Carte consultable des lieux déjà parcourus ; les retours au Corbelan n’ajoutent pas un faux nouveau navire.",
+      "state": "S22",
+      "method": "Panneau ouvert sur sauvegarde de parcours structurel.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "05_rook_navarro.png",
+      "caption": "Rook est réactivé avant le retrait contextuel du parasite ; les rôles du groupe sont présents dans la salle.",
+      "state": "S13",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "06_chaleur.png",
+      "caption": "Galerie thermique avec groupes de parasites limités et une voie de passage lisible. Chauffage activé pour ce diagnostic.",
+      "state": "S20",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "07_convoyeur.png",
+      "caption": "Accès technique du convoyeur : rideaux bas, rouleaux, établi et téléphone. Aucun trajet en tapis roulant inventé comme scène du film.",
+      "state": "S24",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "08_ruche.png",
+      "caption": "Kay localisée dans la résine ; éléments industriels encore visibles sous l’infestation.",
+      "state": "S25",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "09_apesanteur.png",
+      "caption": "Retour dans la même ruche, gravité coupée. Deux nappes acides préparées pour visualiser les hauteurs ; état de diagnostic.",
+      "state": "S28",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "10_cage.png",
+      "caption": "Cage verticale après la remise en gravité : paliers et échelles fonctionnels ; séquence dramatique encore schématique.",
+      "state": "S29",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "11_cockpit_depart.png",
+      "caption": "Corbelan au départ : implantation de référence du cockpit.",
+      "state": "S07",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "12_cockpit_retour.png",
+      "caption": "Retour au même cockpit : mêmes proportions et commandes, état après le choc.",
+      "state": "S32",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "13_fret_attaches.png",
+      "caption": "Soute inférieure : attaches réparties sur deux hauteurs et accès par l’échelle ; aucun largage sur simple bouton unique.",
+      "state": "S38",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "14_breche.png",
+      "caption": "Après la brèche : déplacement sous le plancher, ligne de sécurité et dernière attache. Décompression condensée, non simulation 3D.",
+      "state": "S38E",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "16_casier_blanc.png",
+      "caption": "Casier blanc intégré au laboratoire : continuité physique après Z-01, sans salle de sécurité inventée.",
+      "state": "S23",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "17_soutien_kay.png",
+      "caption": "Soutien de Kay en déplacement. Ennemis retirés dans ce diagnostic pour vérifier le couple et ses collisions.",
+      "state": "S26",
+      "method": "État canonique chargé par identifiant, placement caméra/joueur de diagnostic ; pas de parcours manuel complet.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "15_mobile.png",
+      "caption": "Émulation tactile 844 × 390 : commandes et interface en paysage. Aucun appareil physique testé.",
+      "state": "S23",
+      "method": "Émulation Chromium avec pointeur tactile.",
+      "sourceSuite": "browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_S22.png",
+      "method": "Rejeu intégral depuis Nouvelle partie, commandes enregistrées, pas de placement diagnostique. Pause pour capture.",
+      "profile": "prudent",
+      "room": "S22",
+      "hp": 87,
+      "done": 24,
+      "complete": false,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_S23.png",
+      "method": "Rejeu intégral depuis Nouvelle partie, commandes enregistrées, pas de placement diagnostique. Pause pour capture.",
+      "profile": "prudent",
+      "room": "S23",
+      "hp": 87,
+      "done": 25,
+      "complete": false,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_S32C.png",
+      "method": "Rejeu intégral depuis Nouvelle partie, commandes enregistrées, pas de placement diagnostique. Pause pour capture.",
+      "profile": "prudent",
+      "room": "S32C",
+      "hp": 87,
+      "done": 41,
+      "complete": false,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_S40C.png",
+      "method": "Rejeu intégral depuis Nouvelle partie, commandes enregistrées, pas de placement diagnostique. Pause pour capture.",
+      "profile": "prudent",
+      "room": "S40C",
+      "hp": 26,
+      "done": 58,
+      "complete": false,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_S41.png",
+      "method": "Rejeu intégral depuis Nouvelle partie, commandes enregistrées, pas de placement diagnostique. Pause pour capture.",
+      "profile": "prudent",
+      "room": "S41",
+      "hp": 13,
+      "done": 58,
+      "complete": false,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "parcours_fin.png",
+      "method": "Écran final du parcours complet rejoué. Aucun drapeau de fin injecté.",
+      "profile": "prudent",
+      "complete": true,
+      "sourceSuite": "campaign-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_01_remus_cryo.png",
+      "caption": "Chambre de conservation : six cadres de la simulation, supports et alimentation.",
+      "method": "Jalon S10 issu du parcours prudent, importé puis suspendu. Aucun acteur replacé ; les organismes congelés sont les vrais ennemis du niveau.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_02_temoin_v13.png",
+      "caption": "AVANT : même jalon, renderer historique v0.13.",
+      "method": "TÉMOIN HISTORIQUE : authentique HTML v0.13 sur les mêmes positions. Ne compte pas comme un rendu v0.14.",
+      "sourceSuite": "empreintes-browser",
+      "historical": true
+    },
+    {
+      "file": "v14_03_membranes_apres.png",
+      "caption": "Membranes après le prélèvement : état persistant de dégel.",
+      "method": "Jalon after:thaw du parcours intégral. Les états des parasites et les ouvertures proviennent de la simulation, pas de l’illustration.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_04_rook_avant.png",
+      "caption": "Poste de Remus avant la remise sous tension de Rook.",
+      "method": "Jalon S11 du parcours prudent. La lampe articulée, la table et les instruments gardent leurs ancrages ; dimensions 2D interprétées.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_05_rook_alimente.png",
+      "caption": "Le même poste après la remise sous tension.",
+      "method": "Jalon réel after:rookAwake. Aucune création d’un second laboratoire ni déplacement de meuble entre les deux états.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_06_quarantaine.png",
+      "caption": "Le seuil de quarantaine conserve sa géométrie dans le nouveau décor.",
+      "method": "Jalon S12 issu du parcours complet, importé en pause. La grille garde son ancien système de collision et d’ouverture.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_07_sortie_eau.png",
+      "caption": "Semelles humides sur la bande sèche, après marche au clavier.",
+      "method": "FIXTURE : Tyler initialement posé dans la nappe ; ennemis et compagnons retirés. Sortie puis marche réelles par touches. Les empreintes ne guident pas l’IA.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_08_sol_seche.png",
+      "caption": "Même sol après dissipation des traces humides.",
+      "method": "Suite de la fixture précédente : temps avancé par Engine.step, aucun effacement direct des empreintes.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_09_lampe_volume.png",
+      "caption": "Faisceau local face aux volumes du laboratoire.",
+      "method": "FIXTURE de position : Rain placée devant les équipements existants, ennemis et compagnons retirés. Pas de mur ajouté pour cette image. Seule la tranche de profondeur de la lampe est calculée.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_10_journal_incidents.png",
+      "caption": "Cinq blessures réelles du parcours prudent : quatre contacts acides, une frappe.",
+      "method": "Sauvegarde finale du nouveau parcours importée, panneau H ouvert. Aucun dégât ou texte de blessure injecté dans cette capture.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_11_options.png",
+      "caption": "Option de lecture des indices sonores, désactivée par défaut.",
+      "method": "Véritable panneau Pause ; option cochée via le contrôle DOM. Aucun son du film inclus.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_12_indices_sonores.png",
+      "caption": "Deux indices locaux : mécanisme et frottement, sans radar d’ennemi.",
+      "method": "DIAGNOSTIC sonore explicite : événements locaux émis pour contrôler la mise en page. Ce n’est pas la capture d’une attaque du parcours.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "v14_13_mobile_reperes.png",
+      "caption": "Lecture locale sur écran 960 × 540.",
+      "method": "Tactile émulé, bouton réel Repères ; pas de validation sur un téléphone physique.",
+      "sourceSuite": "empreintes-browser",
+      "historical": false
+    },
+    {
+      "file": "47_desamarrage.png",
+      "caption": "Désamarrage vu depuis le cockpit existant. Géométrie, éloignement de la station et durée sont interprétés.",
+      "state": "S32",
+      "stage": "undock",
+      "time": 4.8,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "48_capsule_kay.png",
+      "caption": "Kay dans sa capsule, couvercle refermé. Rain et Andy restent près du même équipement.",
+      "state": "S33",
+      "stage": "kayPod",
+      "time": 6,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "49_repos_andy.png",
+      "caption": "Andy assis à proximité des capsules. Le geste n’a plus lieu dans le cockpit et ne le répare pas magiquement.",
+      "state": "S34",
+      "stage": "together",
+      "time": 4.9,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "50_alerte_capsule.png",
+      "caption": "Alerte située sur le poste de cryostase. Kay reste dans la capsule pendant la consultation.",
+      "state": "S34",
+      "stage": "alarm",
+      "time": 2.199999999999996,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "51_enveloppe_transportee.png",
+      "caption": "Rain transporte l’enveloppe opaque vers la grille. Représentation abstraite et dirigée de l’événement, sans détails graphiques.",
+      "state": "S35",
+      "stage": "birth",
+      "time": 6.5,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "52_grille_ouverte.png",
+      "caption": "Grille corrodée et recul vers une zone hors du cercle acide. L’étage inférieur est rejoint par un raccord condensé.",
+      "state": "S35",
+      "stage": "birth",
+      "time": 10.1,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "53_enveloppe_vide.png",
+      "caption": "Inspection de l’enveloppe vide dans la soute connue. Le fret est granuleux; les traces sont un habillage interprété.",
+      "state": "S35B",
+      "stage": "emptyEnvelope",
+      "time": 2.799999999999994,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "54_offspring_observe.png",
+      "caption": "Première apparition sur quatre appuis, face à Andy. Proxy de séquence; le spécimen autonome reste dormant.",
+      "state": "S35R",
+      "stage": "offspringAttack",
+      "time": 1.8999999999999972,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "55_offspring_releve.png",
+      "caption": "Après la perte de Kay : silhouette redressée et queue développée. Positions et proportions du dessin sont interprétées.",
+      "state": "S35R",
+      "stage": "offspringAttack",
+      "time": 7.4,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "56_controle_combinaison.png",
+      "caption": "Vérification de la combinaison pendant le maintien. Le vêtement n’est plus simultanément laissé sur son support.",
+      "state": "S37",
+      "stage": "suit",
+      "time": 3.4999999999999916,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "57_cap_yvaga.png",
+      "caption": "Reprise du cap à la console du cockpit. Pas de saut à un menu abstrait ni de second cockpit.",
+      "state": "S40",
+      "stage": "course",
+      "time": 5.1,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "58_capsule_andy.png",
+      "caption": "Andy transféré du sol dans la seconde capsule. Sa silhouette au sol disparaît au moment du transfert.",
+      "state": "S41",
+      "stage": "andyPod",
+      "time": 6.9,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "59_deux_capsules.png",
+      "caption": "Dernière action : Rain dans sa capsule et Andy dans la sienne. Le tableau final n’est pas encore validé à cet instant.",
+      "state": "S41",
+      "stage": "ending",
+      "time": 7.9,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "60_fuite_active.png",
+      "caption": "Fuite avec l’Offspring autonome et les collisions du niveau conservés. Trajet automatisé par commandes, sans téléportation après le début de la séquence.",
+      "state": "S35R",
+      "stage": null,
+      "time": 0,
+      "method": "État de début de révélation chargé; vrai spécimen et dégâts actifs; séquences exécutées puis mouvement obtenu par entrées moteur déterministes. Pas de partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "61_offspring_preparation.png",
+      "caption": "Préparation d’attaque de l’IA : silhouette ramassée et cible déjà verrouillée. Positions de départ placées par diagnostic; aucune cible de debug peinte dans le jeu.",
+      "state": "S36",
+      "stage": null,
+      "time": 0,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "62_verification_mobile.png",
+      "caption": "Contrôle de la combinaison sur écran tactile émulé 844 × 390. Appui réel du pointeur; pas de validation sur appareil physique.",
+      "state": "S37",
+      "stage": "suit",
+      "time": 1.8999999999999972,
+      "method": "État canonique chargé puis avance contrôlée de la simulation; ennemis libres retirés sauf mention contraire. Capture du module actuel, pas photogramme ni partie humaine.",
+      "sourceSuite": "finale-browser",
+      "historical": false
+    },
+    {
+      "file": "63_sonde_debris.png",
+      "caption": "Prologue : sonde et débris. Géométrie et cadrage originaux, phase exécutée dans le moteur.",
+      "state": "S01",
+      "time": 4.91666666666667,
+      "method": "Nouvelle partie, avance de simulation de 4,8 s, puis pause de diagnostic ; aucun objectif gagné.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "64_analyse_recuperation.png",
+      "caption": "Ouverture évoquée au poste d’analyse : animation originale dirigée, pas reprise d’un plan du film.",
+      "state": "S01",
+      "time": 16.400000000000134,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "65_colonie_industrielle.png",
+      "caption": "Jackson’s Star : volumes industriels, passerelles et habitat arqué dans les plans lointains. Implantation originale 2D, pas carte officielle.",
+      "state": "S02",
+      "time": null,
+      "method": "Scène de rue chargée avant le refus, personnage placé à x=1330 pour examiner les plans de décor ; pas un trajet manuel.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "66_guichet_refus.png",
+      "caption": "Guichet : le dossier est traité avant le refus ; comptoir, trappe et affichage partagent la même implantation.",
+      "state": "S03",
+      "time": 4.299999999999994,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "67_andy_rue.png",
+      "caption": "Rain aide Andy à se relever dans la rue. Le geste finit par rendre le suivi disponible, sans saut vers le logement.",
+      "state": "S02",
+      "time": 4.4999999999999964,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "68_plan_remorque.png",
+      "caption": "Tyler utilise l’écran du logement. Coque intérieure arquée et écran de route original ; pas un nouveau salon sans rapport avec la colonie.",
+      "state": "S04",
+      "time": 4.399999999999995,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "69_rampe_depart.png",
+      "caption": "Le groupe rejoint la rampe. L’entrée à bord reste ensuite une transition condensée.",
+      "state": "S05",
+      "time": 3.4999999999999916,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "70_montee_nuages.png",
+      "caption": "Montée vue depuis le même cockpit : nuages devant le vitrage, sièges et commandes conservés.",
+      "state": "S07",
+      "time": 5.400000000000009,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "71_premiere_lumiere.png",
+      "caption": "Lumière au-dessus des nuages : intervalle borné de la séquence, pas soleil permanent dans le cockpit.",
+      "state": "S07",
+      "time": 9.70000000000007,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "72_signal_renaissance.png",
+      "caption": "Après le lancement, signal de Renaissance et vue orbitale ; le disque lumineux n’est plus dessiné en permanence.",
+      "state": "S07",
+      "time": null,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "73_sas_verrouille.png",
+      "caption": "Avant équilibrage, le vantail visible interdit le passage vers la baie. La tentative a utilisé une commande clavier.",
+      "state": "S08",
+      "time": null,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "74_sas_equilibre.png",
+      "caption": "Après verrouillage extérieur et équilibrage, la même porte ouvre son volume de passage. Manomètre et grille dérivent de l’état validé.",
+      "state": "S08",
+      "time": 6.800000000000029,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "75_arrimages_vides.png",
+      "caption": "Première visite du Corbelan : points d’arrimage vides, avant la récupération des capsules. Aucun occupant et aucune capsule prête à l’emploi.",
+      "state": "S06C",
+      "time": null,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "76_capsules_translation.png",
+      "caption": "Déconnexion et translation locale des trois capsules sur deux supports. Leur transport complet jusqu’au Corbelan reste une ellipse, pas une simulation de manutention.",
+      "state": "S09",
+      "time": 6.000000000000018,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "77_supports_decharges.png",
+      "caption": "Supports vidés après récupération : seuls les bâtis restent dans la baie. Les corps des capsules ne sont pas dupliqués dans les deux lieux.",
+      "state": "S09",
+      "time": null,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "78_kay_echantillon.png",
+      "caption": "Kay utilise l’échantillon, seule. Le cockpit reste une localisation interprétée non certifiée par le montage ; le geste ne restaure pas sa santé.",
+      "state": "S26K",
+      "time": 5.100000000000005,
+      "method": "État canonique et séquence exécutée jusqu’au temps choisi, pause de diagnostic ; ennemis libres retirés. Capture du moteur courant, pas parcours humain.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "79_lumiere_mobile.png",
+      "caption": "Vue du décollage en 1024 × 576, pointeur tactile émulé. Le menu Pause reste accessible pendant le geste dirigé.",
+      "state": "S07",
+      "time": 9.70000000000007,
+      "method": "Émulation Chromium mobile paysage ; pas validation d’un appareil physique ni de Safari/iOS.",
+      "sourceSuite": "horizons-browser",
+      "historical": false
+    },
+    {
+      "file": "109_laboratoire_reference.png",
+      "caption": "Le laboratoire et son équipe après Z-01.",
+      "method": "Rechargement du jalon réel after:z01 du parcours prudent ; positions non modifiées, pause pour inspection. Géométrie et aspect interprétés.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "110_laboratoire_arme.png",
+      "caption": "L’équipe et le casier blanc après la démonstration de visée.",
+      "method": "Jalon réel after:aimLesson, sauvegarde chargée sans déplacement diagnostique ; cadrage courant de la version.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "111_reference_avant_v11.png",
+      "caption": "État témoin v0.11, avant la refonte du laboratoire.",
+      "method": "EXCEPTION HISTORIQUE : renderer v0.11 sur le même jalon de campagne que 109, mêmes positions et fenêtre. Ce n’est pas une capture du moteur courant.",
+      "sourceSuite": "incarnation-browser",
+      "historical": true
+    },
+    {
+      "file": "112_andy_releve.png",
+      "caption": "Andy après le retrait du module, dans le vestibule.",
+      "method": "Jalon conservé par le parcours prudent complet ; acteurs et dangers non retirés. Pause diagnostique après import, pas une nouvelle traversée intégrale.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "113_soutien_kay.png",
+      "caption": "Le groupe après la décision de rejoindre le monte-charge.",
+      "method": "Jalon conservé par le parcours prudent complet ; acteurs et dangers non retirés. Pause diagnostique après import, pas une nouvelle traversée intégrale.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "114_coursive_retour.png",
+      "caption": "Retour à travers la coursive après le désamarrage.",
+      "method": "Jalon conservé par le parcours prudent complet ; acteurs et dangers non retirés. Pause diagnostique après import, pas une nouvelle traversée intégrale.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "115_coursive_finale.png",
+      "caption": "Dernier retour par la coursive vers les capsules.",
+      "method": "Jalon conservé par le parcours prudent complet ; acteurs et dangers non retirés. Pause diagnostique après import, pas une nouvelle traversée intégrale.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "116_mixage.png",
+      "caption": "Mixage séparé des ambiances et des gestes.",
+      "method": "Interface réelle ; WAV décodés et contexte contrôlé. Aucune écoute humaine ou calibration matérielle revendiquée.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "117_atelier_personnages.png",
+      "caption": "Six personnages et leurs pièces séparées.",
+      "method": "Atelier diagnostique : mêmes ROMULUS_ART.actor et PNG que le jeu, disposition de présentation, pas une scène de campagne.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "118_laboratoire_mobile.png",
+      "caption": "Laboratoire en affichage tactile émulé.",
+      "method": "Même jalon réel after:z01, rendu 960×540. Aucun appareil physique testé.",
+      "sourceSuite": "incarnation-browser",
+      "historical": false
+    },
+    {
+      "file": "25_porte_kay.png",
+      "caption": "S21 : Kay derrière la cloison pendant la prise. Rain reste libre de reculer; issue dirigée.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S21",
+      "sequence": {
+        "task": "denial",
+        "time": 4.95,
+        "marks": [
+          "grab"
+        ],
+        "origins": {
+          "player": {
+            "x": 670,
+            "z": 154,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 695,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            },
+            "Tyler": {
+              "x": 490,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            },
+            "Kay": {
+              "x": 1100,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 670,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle",
+        "gesture": null
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "26_liberation_kay.png",
+      "caption": "S25 : retrait des liens et accompagnement de Kay vers la voie de marche. Les trois personnes restent dans la même galerie.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S25",
+      "sequence": {
+        "task": "kayFreed",
+        "time": 3.816666666666657,
+        "marks": [
+          "resin"
+        ],
+        "origins": {
+          "player": {
+            "x": 1610,
+            "z": 150,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 1820,
+              "z": 180,
+              "y": 0,
+              "face": 1
+            },
+            "Tyler": {
+              "x": 1430,
+              "z": 170,
+              "y": 0,
+              "face": 1
+            },
+            "Kay": {
+              "x": 1610,
+              "z": 54,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 1576,
+        "z": 147,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 3.2425491515164437,
+        "gait": "idle",
+        "gesture": "reach",
+        "moving": false
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "27_vent_tyler.png",
+      "caption": "S26 : Tyler rejoint la bouche haute; Andy tombe dans le vestibule où Rain reviendra. Scène originale stylisée.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S26",
+      "sequence": {
+        "task": "lossTyler",
+        "time": 5.616666666666676,
+        "marks": [
+          "vent",
+          "grab"
+        ],
+        "origins": {
+          "player": {
+            "x": 930,
+            "z": 154,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Kay": {
+              "x": 903,
+              "z": 164,
+              "y": 0,
+              "face": 1
+            },
+            "Tyler": {
+              "x": 680,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            },
+            "Andy": {
+              "x": 520,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 930,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle",
+        "gesture": null
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "28_monte_charge.png",
+      "caption": "S26 : Kay entre dans le monte-charge horizontal; fermeture en treillis. Implantation du jeu interprétée.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S26",
+      "sequence": {
+        "task": "sendKay",
+        "time": 4.649999999999993,
+        "marks": [
+          "lift"
+        ],
+        "origins": {
+          "player": {
+            "x": 1120,
+            "z": 154,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Kay": {
+              "x": 1093,
+              "z": 164,
+              "y": 0,
+              "face": 1
+            },
+            "Andy": {
+              "x": 520,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 1028,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 8.739999999999998,
+        "gait": "idle",
+        "gesture": "reach",
+        "moving": false
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "29_module_andy.png",
+      "caption": "S27 : Rain retire le module pendant qu’Andy reste au sol, au même endroit que sa chute.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S27",
+      "sequence": {
+        "task": "andyRestored",
+        "time": 2.9833333333333267,
+        "marks": [
+          "module"
+        ],
+        "origins": {
+          "player": {
+            "x": 480,
+            "z": 154,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 520,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 474,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0.57,
+        "gait": "idle",
+        "gesture": "kneel",
+        "moving": false
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "30_gravite.png",
+      "caption": "S29 : chute retenue par la queue après le retour du poids; point de récupération sur le palier inférieur.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S29",
+      "sequence": {
+        "task": "shaftGravity",
+        "time": 4.666666666666662,
+        "marks": [
+          "gravity-return"
+        ],
+        "origins": {
+          "player": {
+            "x": 805,
+            "z": 154,
+            "y": 245,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 975,
+              "z": 154,
+              "y": 330,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 795,
+        "z": 154,
+        "y": 182,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "float",
+        "gesture": "struggle",
+        "noShadow": true
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "31_intervention_andy.png",
+      "caption": "S29 : intervention d’Andy et tir débité du chargeur partagé; pas de projectile créé si le chargeur est vide.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S29",
+      "sequence": {
+        "task": "shaftClimb",
+        "time": 3.124999999999993,
+        "marks": [
+          "rail-shot-0",
+          "rail-fired-0",
+          "rail-shot-1",
+          "rail-fired-1"
+        ],
+        "origins": {
+          "player": {
+            "x": 1000,
+            "z": 154,
+            "y": 330,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 975,
+              "z": 154,
+              "y": 330,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 1020,
+        "z": 154,
+        "y": 330,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 448,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 1.899999999999999,
+        "gait": "float",
+        "gesture": "reach",
+        "moving": false
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "32_regroupement.png",
+      "caption": "S24 : le passage attend le groupe. Les équipiers rejoignent la sortie par la navigation locale; pas de rattrapage instantané pendant la marche.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S24",
+      "sequence": null,
+      "player": {
+        "x": 1735,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "crouch"
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "33_chauffage.png",
+      "caption": "S20 : pupitre au seuil en amont. Chauffage en cours; le pourcentage et le temps de montée sont des réglages du jeu.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S20",
+      "sequence": null,
+      "player": {
+        "x": 190,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "34_mobile_andy.png",
+      "caption": "Émulation 844 × 390 : geste d’Andy dans le niveau, commandes de déplacement retirées pendant le geste, Pause toujours accessible.",
+      "method": "État canonique sélectionné; ennemis retirés, grâce prolongée et interactions déclenchées par diagnostic. Le temps de simulation et les poses sont ceux du moteur livré; image arrêtée pour inspection.",
+      "state": "S27",
+      "sequence": {
+        "task": "andyRestored",
+        "time": 2.316666666666663,
+        "marks": [
+          "module"
+        ],
+        "origins": {
+          "player": {
+            "x": 480,
+            "z": 154,
+            "y": 0,
+            "face": 1
+          },
+          "actors": {
+            "Andy": {
+              "x": 520,
+              "z": 154,
+              "y": 0,
+              "face": 1
+            }
+          }
+        }
+      },
+      "player": {
+        "x": 474,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0.5699999999999998,
+        "gait": "idle",
+        "gesture": "kneel",
+        "moving": false
+      },
+      "sourceSuite": "liaisons-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_01_ruche_liberee.png",
+      "caption": "La ruche après libération : infrastructure et membrane rompue conservées.",
+      "method": "Jalon after:kayFreed du parcours prudent v0.16, rechargé puis suspendu. Ennemis, santé et positions inchangés.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_02_temoin_v15.png",
+      "caption": "AVANT : le même état avec le renderer authentique v0.15.",
+      "method": "TÉMOIN HISTORIQUE : v0.15, sauvegarde et fenêtre identiques. Pas un rendu courant.",
+      "sourceSuite": "nervures-browser",
+      "historical": true
+    },
+    {
+      "file": "v16_03_convoyeur.png",
+      "caption": "L’accès de service garde les rouleaux, rideaux et structure inclinée.",
+      "method": "Jalon S24 du nouveau parcours prudent, aucune téléportation pour la capture.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_04_hangar.png",
+      "caption": "Baie de service : volumes fermés, rails et ligne de guidage existante de Scorched.",
+      "method": "Jalon S17 issu du parcours intégral. Ennemis conservés, simulation suspendue.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_05_cloison.png",
+      "caption": "La cloison refuse l’accès au même endroit que son obstacle physique.",
+      "method": "Jalon S21 issu du parcours. Aucun nouveau mur ou ennemi ajouté pour l’image.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_06_liens_progressifs.png",
+      "caption": "Liens en cours de rupture, pas de seconde Kay peinte dans la membrane.",
+      "method": "FIXTURE de geste : S25 importée, tâche lancée et avancée à 1,8 s ; ennemis et acide retirés pour isoler les poses.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_07_conduit_ouvert.png",
+      "caption": "Conduit ouvert pendant la prise ; décor et trajectoire partagent leur ancrage.",
+      "method": "FIXTURE : tâche lossTyler avancée à 3,9 s depuis le jalon S26, menaces libres retirées. Mise en scène dirigée, pas jeu libre.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_08_monte_charge_parti.png",
+      "caption": "Cabine hors palier, structure et grille conservées dans leur volume.",
+      "method": "Jalon after:sendKay issu du nouveau parcours. Les acteurs conservent leur place.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_09_retour_andy.png",
+      "caption": "Retour vers Andy : même vestibule et conduit toujours arraché.",
+      "method": "Jalon S27 issu du nouveau parcours prudent, rechargé sans changement de position.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_10_commande_gravite.png",
+      "caption": "Le pupitre indique ZERO G lorsque le moteur coupe la gravité locale.",
+      "method": "Jalon after:gravity du parcours intégral. Nappes et ennemis conservés ; aucune zone acide ajoutée.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "v16_11_mobile_ruche.png",
+      "caption": "Lecture de la galerie sur une fenêtre tactile réduite.",
+      "method": "Émulation Chromium 900×550 avec un vrai jalon. Pas un téléphone physique.",
+      "sourceSuite": "nervures-browser",
+      "historical": false
+    },
+    {
+      "file": "91_coursive_seuils.png",
+      "caption": "Coursive : seuils persistants, encadrements muraux et mobilier dégagé des ouvertures.",
+      "state": "S06",
+      "time": 26.009999999999593,
+      "method": "S06 chargé depuis la progression structurelle ; personnages secondaires, ennemis et acide retirés pour contrôle des volumes. Joueur placé à x900. Pas de trajet complet.",
+      "player": {
+        "x": 900,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor"
+        ],
+        "knownTasks": [],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "92_ouverture.png",
+      "caption": "Les vantaux se retirent pendant la préparation ; le changement de pièce reste condensé au terme du geste.",
+      "state": "S06",
+      "time": 26.309999999999576,
+      "method": "Vraie touche E ; environ 0,22 s avant arrêt diagnostique. Ennemis retirés. Ce cliché ne revendique pas une traversée corporelle continue entre les pièces.",
+      "player": {
+        "x": 1060,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle",
+        "gesture": "threshold"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor"
+        ],
+        "knownTasks": [],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06"
+        ],
+        "crossing": {
+          "door": "S06-TO-S06S",
+          "scene": "S06",
+          "time": 0.26666666666666666,
+          "phase": "handle",
+          "approachTime": 0.016666666666666666,
+          "stall": 0.016666666666666666,
+          "last": {
+            "x": 1060,
+            "z": 154,
+            "y": 0
+          }
+        }
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "93_retour_cockpit.png",
+      "caption": "Retour de Kay : arrivée près du même seuil du cockpit, orientée vers l’intérieur de la coursive.",
+      "state": "S15",
+      "time": 108.0416666666737,
+      "method": "Actions narratives S14 déjà acquises dans la fixture ; touche E réelle pour sortir. La scène cible charge son état normal ; pause aussitôt après la transition.",
+      "player": {
+        "x": 1365,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle",
+        "gesture": null
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor",
+          "cb-corridor__cb-cockpit",
+          "cb-cockpit__cb-corridor",
+          "rm-airlock__rm-bay",
+          "rm-lab__rm-door",
+          "cb-corridor__ro-hangar"
+        ],
+        "knownTasks": [
+          "detach"
+        ],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06",
+          "S06-TO-S07",
+          "S07-TO-S08",
+          "S08-TO-S09",
+          "S09-TO-S09K",
+          "S09K-TO-S10",
+          "S10-TO-S11",
+          "S11-TO-S12",
+          "S12-TO-S13",
+          "S13-TO-S14",
+          "S14-TO-S15"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "94_carte_locale.png",
+      "caption": "Laboratoire : vue du sol, volumes solides, joueur et commandes réellement repérées.",
+      "state": "S22",
+      "time": 141.78500000001512,
+      "method": "Carte ouverte après placement et observation locale ; progression structurelle utilisée. Le plan est tiré des données du jeu, pas du plan officiel du film.",
+      "player": {
+        "x": 1820,
+        "z": 218,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor",
+          "cb-corridor__cb-cockpit",
+          "cb-cockpit__cb-corridor",
+          "rm-airlock__rm-bay",
+          "rm-lab__rm-door",
+          "cb-corridor__ro-hangar",
+          "ln-passage__ln-stairs",
+          "ln-stairs__ro-thermal",
+          "ro-thermal__ro-gate",
+          "ro-gate__ro-lab"
+        ],
+        "knownTasks": [
+          "detach",
+          "crash",
+          "z01"
+        ],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06",
+          "S06-TO-S07",
+          "S07-TO-S08",
+          "S08-TO-S09",
+          "S09-TO-S09K",
+          "S09K-TO-S10",
+          "S10-TO-S11",
+          "S11-TO-S12",
+          "S12-TO-S13",
+          "S13-TO-S14",
+          "S14-TO-S15",
+          "S15-TO-S16",
+          "S16-TO-S17",
+          "S17-TO-S18",
+          "S18-TO-S19",
+          "S19-TO-S20",
+          "S20-TO-S21",
+          "S21-TO-S22"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "95_carte_cage.png",
+      "caption": "Cage : coupe verticale et paliers plutôt qu’une fausse carte au sol.",
+      "state": "S29",
+      "time": 177.3850000000232,
+      "method": "Joueur placé au palier intermédiaire pour lire la coupe. Le plan n’ajoute aucun ennemi ; plateformes et échelles proviennent du niveau.",
+      "player": {
+        "x": 600,
+        "z": 154,
+        "y": 165,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "float"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor",
+          "cb-corridor__cb-cockpit",
+          "cb-cockpit__cb-corridor",
+          "rm-airlock__rm-bay",
+          "rm-lab__rm-door",
+          "cb-corridor__ro-hangar",
+          "ln-passage__ln-stairs",
+          "ln-stairs__ro-thermal",
+          "ro-thermal__ro-gate",
+          "ro-gate__ro-lab",
+          "ro-lab__ro-conveyor",
+          "ro-conveyor__ro-hive",
+          "ro-hive__ro-lobby",
+          "ro-lobby__ro-hive"
+        ],
+        "knownTasks": [
+          "detach",
+          "crash",
+          "noInjection",
+          "sendKay",
+          "shaftGravity"
+        ],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06",
+          "S06-TO-S07",
+          "S07-TO-S08",
+          "S08-TO-S09",
+          "S09-TO-S09K",
+          "S09K-TO-S10",
+          "S10-TO-S11",
+          "S11-TO-S12",
+          "S12-TO-S13",
+          "S13-TO-S14",
+          "S14-TO-S15",
+          "S15-TO-S16",
+          "S16-TO-S17",
+          "S17-TO-S18",
+          "S18-TO-S19",
+          "S19-TO-S20",
+          "S20-TO-S21",
+          "S21-TO-S22",
+          "S22-TO-S23",
+          "S23-TO-S24",
+          "S24-TO-S25",
+          "S25-TO-S26",
+          "S26-TO-S26K",
+          "S26K-TO-S27",
+          "S27-TO-S28",
+          "S28-TO-S29"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "96_carte_reseau.png",
+      "caption": "Réseau schématique : lieux visités et liaisons réellement enregistrées ; pas de téléportation.",
+      "state": "S06S",
+      "time": 27.299999999999518,
+      "method": "Un passage au clavier exécuté ; antécédents de la fixture issus du parcours structurel. Les anciennes visites sans trajet précis ne reçoivent pas un ordre inventé.",
+      "player": {
+        "x": 145,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle",
+        "gesture": null
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor"
+        ],
+        "knownTasks": [],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "97_passage_bas.png",
+      "caption": "Entrée basse : rideaux, encadrement et posture accroupie pendant le franchissement.",
+      "state": "S24",
+      "time": 142.22500000001548,
+      "method": "Personnage placé près du seuil, autres acteurs retirés. Entrées clavier C + E ; temps arrêté au milieu de la préparation. Raccord suivant condensé.",
+      "player": {
+        "x": 1713,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "crouch",
+        "gesture": "threshold"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor",
+          "cb-corridor__cb-cockpit",
+          "cb-cockpit__cb-corridor",
+          "rm-airlock__rm-bay",
+          "rm-lab__rm-door",
+          "cb-corridor__ro-hangar",
+          "ln-passage__ln-stairs",
+          "ln-stairs__ro-thermal",
+          "ro-thermal__ro-gate",
+          "ro-gate__ro-lab",
+          "ro-lab__ro-conveyor",
+          "ro-conveyor__ro-hive"
+        ],
+        "knownTasks": [
+          "detach",
+          "crash",
+          "conveyorExit"
+        ],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06",
+          "S06-TO-S07",
+          "S07-TO-S08",
+          "S08-TO-S09",
+          "S09-TO-S09K",
+          "S09K-TO-S10",
+          "S10-TO-S11",
+          "S11-TO-S12",
+          "S12-TO-S13",
+          "S13-TO-S14",
+          "S14-TO-S15",
+          "S15-TO-S16",
+          "S16-TO-S17",
+          "S17-TO-S18",
+          "S18-TO-S19",
+          "S19-TO-S20",
+          "S20-TO-S21",
+          "S21-TO-S22",
+          "S22-TO-S23",
+          "S23-TO-S24"
+        ],
+        "crossing": {
+          "door": "S24-TO-S25",
+          "scene": "S24",
+          "time": 0.21666666666666665,
+          "phase": "handle",
+          "approachTime": 0,
+          "stall": 0,
+          "last": {
+            "x": 1713,
+            "z": 154,
+            "y": 0
+          }
+        }
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "98_reprise_seuil.png",
+      "caption": "Reprise au même seuil avant la fin de l’ouverture ; les effets ne sont pas déjà appliqués.",
+      "state": "S06",
+      "time": 26.299999999999574,
+      "method": "JSON sérialisé transféré explicitement à une deuxième page avec stockage mémoire de test. Pas une preuve de persistance native après fermeture du navigateur.",
+      "player": {
+        "x": 1060,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor"
+        ],
+        "knownTasks": [],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06"
+        ],
+        "crossing": {
+          "door": "S06-TO-S06S",
+          "scene": "S06",
+          "time": 0.2333333333333333,
+          "phase": "handle",
+          "approachTime": 0.016666666666666666,
+          "stall": 0,
+          "last": {
+            "x": 1060,
+            "z": 154,
+            "y": 0
+          }
+        }
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "99_carte_mobile.png",
+      "caption": "Carte locale en paysage tactile émulé : plan séparé de la liste des accès et des onglets.",
+      "state": "S22",
+      "time": 141.75166666668176,
+      "method": "Chromium 1024×576 avec pointeur tactile ; aucune validation Safari/iPhone physique. Même code et mêmes données que la version bureau.",
+      "player": {
+        "x": 1820,
+        "z": 218,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "passages": {
+        "knownPorts": [
+          "js-home__js-street",
+          "js-street__js-office",
+          "js-office__js-street",
+          "js-street__js-trailer",
+          "js-trailer__js-pad",
+          "js-pad__cb-corridor",
+          "cb-corridor__cb-cryo",
+          "cb-cryo__cb-corridor",
+          "cb-corridor__cb-suit",
+          "cb-suit__cb-cargo",
+          "cb-cargo__cb-suit",
+          "cb-suit__cb-corridor",
+          "cb-corridor__cb-cockpit",
+          "cb-cockpit__cb-corridor",
+          "rm-airlock__rm-bay",
+          "rm-lab__rm-door",
+          "cb-corridor__ro-hangar",
+          "ln-passage__ln-stairs",
+          "ln-stairs__ro-thermal",
+          "ro-thermal__ro-gate",
+          "ro-gate__ro-lab"
+        ],
+        "knownTasks": [
+          "detach",
+          "crash",
+          "z01"
+        ],
+        "crossed": [
+          "S01-TO-S02",
+          "S02-TO-S03",
+          "S03-TO-S02",
+          "S02-TO-S04",
+          "S04-TO-S05",
+          "S05-TO-S06",
+          "S06-TO-S06C",
+          "S06C-TO-S06",
+          "S06-TO-S06S",
+          "S06S-TO-S06F",
+          "S06F-TO-S06S",
+          "S06S-TO-S06",
+          "S06-TO-S07",
+          "S07-TO-S08",
+          "S08-TO-S09",
+          "S09-TO-S09K",
+          "S09K-TO-S10",
+          "S10-TO-S11",
+          "S11-TO-S12",
+          "S12-TO-S13",
+          "S13-TO-S14",
+          "S14-TO-S15",
+          "S15-TO-S16",
+          "S16-TO-S17",
+          "S17-TO-S18",
+          "S18-TO-S19",
+          "S19-TO-S20",
+          "S20-TO-S21",
+          "S21-TO-S22"
+        ],
+        "crossing": null
+      },
+      "sourceSuite": "passages-browser",
+      "historical": false
+    },
+    {
+      "file": "18_membrane_approche.png",
+      "caption": "S16 : la membrane est attachée aux conduites du même couloir. Bjorn s’approche pendant que Kay reste contrôlable. Positions et durée interprétées pour le jeu.",
+      "state": "S16",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "19_membrane_ouverte.png",
+      "caption": "S16 : ouverture, trajectoire de queue et projection acide unique. Pas de tableau plein écran ni de branche permettant de changer le sort de Bjorn.",
+      "state": "S16",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "20_fuite_cryo.png",
+      "caption": "S35R : fuite localisée, nappe froide et jauge d’exposition du jeu. Le joueur et les éléments du compartiment restent visibles; aucun modèle thermodynamique revendiqué.",
+      "state": "S35R",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "21_acide_plancher.png",
+      "caption": "S38 : ouverture progressive préparée sous l’enveloppe acide. La chute vers S38E reste un raccord condensé, pas une destruction libre de tout le niveau.",
+      "state": "S38",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "22_ligne_tendue.png",
+      "caption": "S38E : reprise réelle du câble avec R; la position de Rain dépend de la longueur restante. Les obstacles bloquent le corps, mais la corde ne se réenroule pas autour de leurs arêtes.",
+      "state": "S38E",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "23_largage.png",
+      "caption": "S38E : rupture de la dernière attache, mouvement de l’Offspring et débris. Issue fixée par la progression; animation encore stylisée. Ennemis de cette scène rétablis pour la capture.",
+      "state": "S38E",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "24_tactile_contextuel.png",
+      "caption": "Commandes contextuelles sur une émulation Chromium 844 × 390; Rappel remplace les actions inapplicables en apesanteur. Aucun appareil iOS physique testé.",
+      "state": "S38E",
+      "method": "Scène canonique chargée par diagnostic, ennemis retirés pour isoler la mécanique; temps de simulation choisi et figé pour cette capture. Rendu du code livré.",
+      "sourceSuite": "pressure-browser",
+      "historical": false
+    },
+    {
+      "file": "35_cryocadres_froids.png",
+      "caption": "Six parasites dans trois supports à deux cryocadres; les emplacements correspondent aux identités de la simulation. Ennemis conservés mais encore congelés.",
+      "state": "S10",
+      "stage": null,
+      "time": 0,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "36_membranes_reveil.png",
+      "caption": "Déconnexion effectuée, une membrane libère son parasite tandis que les autres sont encore intactes. Les six ennemis sont ceux du niveau, grâce de diagnostic active.",
+      "state": "S10",
+      "stage": "thaw",
+      "time": 7.3,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "37_module_rook.png",
+      "caption": "Rain récupère le module de Rook; pose dirigée originale dans le laboratoire endommagé.",
+      "state": "S11",
+      "stage": "module",
+      "time": 2.799999999999994,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "38_quarantaine_ouverte.png",
+      "caption": "Porte de quarantaine en position ouverte pendant le regroupement; le volume de collision est retiré uniquement pendant cette ouverture.",
+      "state": "S12",
+      "stage": "upgrade",
+      "time": 8.8,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "39_navarrro_attache.png",
+      "caption": "Le parasite a bondi et s’est fixé; la porte n’a pas encore fini de se refermer. Positions dirigées, pas de possibilité de sauver arbitrairement Navarro.",
+      "state": "S12",
+      "stage": "upgrade",
+      "time": 10.600000000000026,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "40_rook_alimente.png",
+      "caption": "Poste de service alimenté après le branchement. La parole de Rook suit la remise sous tension.",
+      "state": "S13",
+      "stage": "rookAwake",
+      "time": 4.399999999999995,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "41_retrait_froid.png",
+      "caption": "Tyler tient le réservoir, Rain soutient Navarro. La progression a été engagée par E au clavier; le bref jet de capture correspond au maintien actif.",
+      "state": "S13",
+      "stage": "detach",
+      "time": 2.8133333333333272,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "42_parasite_retire.png",
+      "caption": "Le parasite est retiré au sol après la procédure; Navarro reste blessée et n’est pas marquée guérie.",
+      "state": "S13",
+      "stage": null,
+      "time": 0,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "43_depart_bjorn.png",
+      "caption": "Bjorn entraîne Navarro vers la sortie du laboratoire; leur transfert au transporteur reste une ellipse.",
+      "state": "S13",
+      "stage": "flightBjorn",
+      "time": 4.599999999999998,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "44_scanner.png",
+      "caption": "Navarro tient le scanner contre sa poitrine, Kay observe. L’image est dessinée dans un petit appareil à proximité, sans panneau plein écran.",
+      "state": "S14",
+      "stage": "scan",
+      "time": 3.149999999999993,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "45_cockpit_rupture.png",
+      "caption": "La rupture est représentée par une animation stylisée dans la cabine. La petite forme visible est un élément de séquence, pas encore un ennemi juvénile autonome.",
+      "state": "S14",
+      "stage": "crash",
+      "time": 4.099999999999991,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "46_scanner_mobile.png",
+      "caption": "Commandes en paysage 844×390, pointeur grossier émulé. Maintien par événements de pointeur; ce n’est pas une validation sur un iPhone physique.",
+      "state": "S14",
+      "stage": "scan",
+      "time": 2.0666666666666633,
+      "method": "État canonique sélectionné; avance de simulation contrôlée puis arrêt pour la capture. Ennemis retirés sauf indication cryocadres; pas de partie humaine complète.",
+      "sourceSuite": "quarantine-browser",
+      "historical": false
+    },
+    {
+      "file": "80_parasite_preparation.png",
+      "caption": "Préparation du bond : doigts ramassés, queue repliée, cible fixée avant le départ.",
+      "state": "S20",
+      "time": 134.67500000001317,
+      "method": "Parasite THERMAL-0 d’origine, autres organismes retirés pour isoler le comportement. Rain placée à 135 unités ; 0,30 s de moteur sans entrée ; dégâts actifs.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 929.1000000000001,
+          "z": 50,
+          "y": 0,
+          "ai": "windup",
+          "timer": 0.5299999999999997,
+          "surface": null,
+          "attack": {
+            "kind": "hugger",
+            "origin": {
+              "x": 929.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "target": {
+              "x": 1064.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "end": {
+              "x": 1112.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "duration": 0.58,
+            "elapsed": 0,
+            "arc": 92,
+            "hit": false
+          }
+        }
+      ],
+      "player": {
+        "x": 1064.1000000000001,
+        "z": 50,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "81_parasite_bond.png",
+      "caption": "Bond en altitude : la pose suit la trajectoire calculée, pas une image glissant sur le sol.",
+      "state": "S20",
+      "time": 135.4150000000125,
+      "method": "Même fixture à 1,04 s ; caméra arrêtée au milieu du bond. Aucun déplacement du personnage dans cette image.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 995.3586206896554,
+          "z": 50,
+          "y": 84.99881093935794,
+          "ai": "lunge",
+          "timer": 0,
+          "surface": null,
+          "attack": {
+            "kind": "hugger",
+            "origin": {
+              "x": 929.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "target": {
+              "x": 1064.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "end": {
+              "x": 1112.1000000000001,
+              "z": 50,
+              "y": 0
+            },
+            "duration": 0.58,
+            "elapsed": 0.2100000000000001,
+            "arc": 92,
+            "hit": false
+          }
+        }
+      ],
+      "player": {
+        "x": 1064.1000000000001,
+        "z": 50,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "82_bond_evite.png",
+      "caption": "Rain a changé de profondeur ; le parasite poursuit la trajectoire engagée vers son ancienne position.",
+      "state": "S20",
+      "time": 135.54500000001434,
+      "method": "Un parasite actif, blessures activées. Vraie touche Flèche bas maintenue 1,12 s ; pause de diagnostic ensuite. Pas de déplacement imposé après la préparation.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 1045.389655172414,
+          "z": 50,
+          "y": 85.57008851895885,
+          "ai": "lunge",
+          "timer": 0,
+          "surface": null,
+          "attack": {
+            "kind": "hugger",
+            "origin": {
+              "x": 929.7,
+              "z": 50,
+              "y": 0
+            },
+            "target": {
+              "x": 1064.7,
+              "z": 50,
+              "y": 0
+            },
+            "end": {
+              "x": 1112.7,
+              "z": 50,
+              "y": 0
+            },
+            "duration": 0.58,
+            "elapsed": 0.366666666666667,
+            "arc": 92,
+            "hit": false
+          }
+        }
+      ],
+      "player": {
+        "x": 1064.7,
+        "z": 240.90000000000052,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 18.13550000000004,
+        "gait": "walk"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "83_galerie_ecoute.png",
+      "caption": "Après chauffe, petites patrouilles et pauses d’écoute près des côtés ; la voie centrale n’est pas transformée en combat obligatoire.",
+      "state": "S20",
+      "time": 137.32500000001068,
+      "method": "Sept parasites actifs, chauffe stabilisée pour diagnostic. Trois secondes de patrouille exécutées, personnage ensuite placé pour la capture seulement ; pas un trajet de traversée.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 895.9800000000095,
+          "z": 50,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-1",
+          "hp": 2,
+          "x": 1155.979999999988,
+          "z": 236,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-2",
+          "hp": 2,
+          "x": 1415.979999999988,
+          "z": 50,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-3",
+          "hp": 2,
+          "x": 1675.979999999988,
+          "z": 236,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-4",
+          "hp": 2,
+          "x": 1935.979999999988,
+          "z": 50,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-5",
+          "hp": 2,
+          "x": 2195.980000000031,
+          "z": 236,
+          "y": 0,
+          "ai": "listen",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        },
+        {
+          "id": "THERMAL-6",
+          "hp": 2,
+          "x": 2490,
+          "z": 50,
+          "y": 0,
+          "ai": "patrol",
+          "timer": 0,
+          "surface": null,
+          "attack": null
+        }
+      ],
+      "player": {
+        "x": 1380,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "84_scorched_suspendu.png",
+      "caption": "Scorched suspendu au chemin technique du hangar ; le support reste visible derrière ses appuis.",
+      "state": "S17",
+      "time": 134.6416666666798,
+      "method": "Route locale écrite dans le manifeste, pas navigation universelle aux plafonds. Kay placée à 2050 ; 0,3 s de moteur, dégâts actifs.",
+      "enemyStates": [
+        {
+          "id": "SCORCHED",
+          "hp": 999,
+          "x": 2083.9333333333348,
+          "z": 54,
+          "y": 345,
+          "ai": "surface",
+          "timer": 0,
+          "surface": {
+            "id": "hangar-wall",
+            "index": 0,
+            "done": false,
+            "engaged": true
+          },
+          "attack": null
+        }
+      ],
+      "player": {
+        "x": 2050,
+        "z": 178,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "85_scorched_descente.png",
+      "caption": "Le même organisme descend le long de la structure avant de reprendre une poursuite au sol.",
+      "state": "S17",
+      "time": 141.54166666667354,
+      "method": "Même route après 7,2 secondes de simulation. Aucun déplacement direct du xénomorphe pour fabriquer la position intermédiaire.",
+      "enemyStates": [
+        {
+          "id": "SCORCHED",
+          "hp": 999,
+          "x": 2338.920327951191,
+          "z": 68.46872679104925,
+          "y": 246.34959006102684,
+          "ai": "surface",
+          "timer": 0,
+          "surface": {
+            "id": "hangar-wall",
+            "index": 1,
+            "done": false,
+            "engaged": true
+          },
+          "attack": null
+        }
+      ],
+      "player": {
+        "x": 2050,
+        "z": 178,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "86_acide_courants.png",
+      "caption": "Nappes visqueuses suspendues et dérive locale dans la galerie infestée.",
+      "state": "S28",
+      "time": 181.37500000001958,
+      "method": "Trois nappes de diagnostic ajoutées, ennemis retirés. Quatre secondes du solveur de dangers exécutées. Illustration fonctionnelle du courant, pas résultat d’un combat complet.",
+      "enemyStates": [],
+      "player": {
+        "x": 1630,
+        "z": 154,
+        "y": 60,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "float"
+      },
+      "acid": [
+        {
+          "x": 1411.3273693723745,
+          "z": 154,
+          "y": 200.11048576422647,
+          "r": 30,
+          "vx": 4.872441511445364,
+          "vy": 9.020541911894005,
+          "airborne": true,
+          "surface": null
+        },
+        {
+          "x": 1533.5849908472862,
+          "z": 154,
+          "y": 306.9715525438205,
+          "r": 24,
+          "vx": 5.424628868163583,
+          "vy": 10.308281752441314,
+          "airborne": true,
+          "surface": null
+        },
+        {
+          "x": 1806.031724608459,
+          "z": 154,
+          "y": 235.5147465476057,
+          "r": 32,
+          "vx": 9.853853809954177,
+          "vy": 5.679211308262936,
+          "airborne": true,
+          "surface": null
+        }
+      ],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "87_acide_retombe.png",
+      "caption": "Après retour de gravité, les nappes deviennent des flaques au sol et ne restent pas dessinées en sphères.",
+      "state": "S28",
+      "time": 183.37500000001776,
+      "method": "Même fixture et mêmes particules après deux secondes de gravité. Aucun remplacement par une seconde liste décorative.",
+      "enemyStates": [],
+      "player": {
+        "x": 1630,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [
+        {
+          "x": 1411.3273693723745,
+          "z": 154,
+          "y": 0,
+          "r": 30,
+          "vx": 0.0016345220337307372,
+          "vy": 0,
+          "airborne": false,
+          "surface": "deck"
+        },
+        {
+          "x": 1533.5849908472862,
+          "z": 154,
+          "y": 0,
+          "r": 24,
+          "vx": 0.0018197602555099725,
+          "vy": 0,
+          "airborne": false,
+          "surface": "deck"
+        },
+        {
+          "x": 1806.031724608459,
+          "z": 154,
+          "y": 0,
+          "r": 32,
+          "vx": 0.003305599694054388,
+          "vy": 0,
+          "airborne": false,
+          "surface": "deck"
+        }
+      ],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "88_acide_palier.png",
+      "caption": "Une flaque reste sur le palier de la cage au lieu de traverser toutes les plateformes vers le pont inférieur.",
+      "state": "S29",
+      "time": 178.4916666666889,
+      "method": "Une nappe de diagnostic placée au-dessus d’un palier réellement présent dans le niveau ; 1,1 seconde de chute. Ce danger n’est pas ajouté au déroulement canonique de la cage.",
+      "enemyStates": [],
+      "player": {
+        "x": 480,
+        "z": 154,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": 1,
+        "ammo": 450,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [
+        {
+          "x": 650,
+          "z": 154,
+          "y": 165,
+          "r": 28,
+          "vx": 0,
+          "vy": 0,
+          "airborne": false,
+          "surface": "platform-1"
+        }
+      ],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "89_alerte_contraste.png",
+      "caption": "Option de contraste : un arc discret souligne la préparation visible du parasite, sans le révéler derrière un mur.",
+      "state": "S20",
+      "time": 134.56166666667988,
+      "method": "Même organisme et même règle d’attaque, état placé pour présentation. Le contraste ne change ni les dégâts ni la trajectoire.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 929.7,
+          "z": 50,
+          "y": 0,
+          "ai": "windup",
+          "timer": 0.6099999999999998,
+          "surface": null,
+          "attack": {
+            "kind": "hugger",
+            "origin": {
+              "x": 929.7,
+              "z": 50,
+              "y": 0
+            },
+            "target": {
+              "x": 1064.7,
+              "z": 50,
+              "y": 0
+            },
+            "end": {
+              "x": 1112.7,
+              "z": 50,
+              "y": 0
+            },
+            "duration": 0.58,
+            "elapsed": 0,
+            "arc": 92,
+            "hit": false
+          }
+        }
+      ],
+      "player": {
+        "x": 1064.7,
+        "z": 50,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "90_parasite_mobile.png",
+      "caption": "Préparation et commandes en 1024 × 576 avec pointeur tactile émulé.",
+      "state": "S20",
+      "time": 134.36166666668007,
+      "method": "Émulation Chromium paysage ; pas essai Safari/iPhone physique. Parasite isolé, position initiale préparée comme sur ordinateur.",
+      "enemyStates": [
+        {
+          "id": "THERMAL-0",
+          "hp": 2,
+          "x": 929.7,
+          "z": 50,
+          "y": 0,
+          "ai": "windup",
+          "timer": 0.8099999999999999,
+          "surface": null,
+          "attack": {
+            "kind": "hugger",
+            "origin": {
+              "x": 929.7,
+              "z": 50,
+              "y": 0
+            },
+            "target": {
+              "x": 1064.7,
+              "z": 50,
+              "y": 0
+            },
+            "end": {
+              "x": 1112.7,
+              "z": 50,
+              "y": 0
+            },
+            "duration": 0.58,
+            "elapsed": 0,
+            "arc": 92,
+            "hit": false
+          }
+        }
+      ],
+      "player": {
+        "x": 1064.7,
+        "z": 50,
+        "y": 0,
+        "vy": 0,
+        "vx": 0,
+        "hp": 100,
+        "face": -1,
+        "ammo": 0,
+        "reserve": 0,
+        "cryo": 0,
+        "stride": 0,
+        "gait": "idle"
+      },
+      "acid": [],
+      "sourceSuite": "traques-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_01_cockpit_equipage.png",
+      "caption": "Le cockpit et les six tenues différenciées.",
+      "method": "Jalon S07 du nouveau parcours prudent ; positions et acteurs inchangés après import, pause pour inspection.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_02_temoin_v12.png",
+      "caption": "Témoin historique : cockpit et costumes en v0.12.",
+      "method": "EXCEPTION HISTORIQUE : code v0.12 sur le même jalon S07, même taille de fenêtre et mêmes positions. Pas une capture de la v0.13.",
+      "sourceSuite": "traversees-browser",
+      "historical": true
+    },
+    {
+      "file": "v13_03_arrimages_vides.png",
+      "caption": "Première visite : les arrimages sont encore vides.",
+      "method": "Jalon réel S06C ; aucun drapeau de récupération injecté.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_04_capsule_occupee.png",
+      "caption": "Une capsule occupée, deux encore disponibles.",
+      "method": "Jalon after:kayPod du parcours intégral ; Rain et Andy restent à leur position enregistrée.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_05_cockpit_endommage.png",
+      "caption": "Cabine après le choc : dégâts et instruments concordent.",
+      "method": "Jalon after:crash du parcours, sans déplacement d’acteur ; les dommages viennent de l’événement terminé.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_06_cap_conserve.png",
+      "caption": "Le cap a changé, pas l’architecture de la cabine.",
+      "method": "Jalon after:course ; les dégâts ne sont pas effacés par la validation du cap.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_07_coursive_retour.png",
+      "caption": "La même coursive réutilisée après le départ.",
+      "method": "Jalon S32C issu du parcours réel, dangers et placements conservés ; pause diagnostique après import.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_08_approche_seuil.png",
+      "caption": "Approche locale avant la poignée.",
+      "method": "Fixture explicite : Rain placée à 80 unités de l’accès EVA, compagnons retirés. La suite utilise E au clavier et le contrôleur réel ; ce n’est pas un parcours intégral.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_09_main_sur_vantail.png",
+      "caption": "Une main accompagne l’ouverture avant le changement de pièce.",
+      "method": "Suite de la fixture d’approche ; temps réel jusqu’au geste. Arme/lampe rangées pendant la poignée, cible du bras bornée.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_10_reperes.png",
+      "caption": "Aide facultative sur les éléments déjà observés.",
+      "method": "Interface H sur un jalon réel, pause du jeu ; aucun accès futur révélé volontairement.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_11_laboratoire_costumes.png",
+      "caption": "Le laboratoire conserve son implantation avec les costumes repris.",
+      "method": "Jalon after:z01 ; rendu du laboratoire v0.12 préservé, seuls les éléments de vêtement ont été retravaillés.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_12_atelier_tenues.png",
+      "caption": "Les six personnages et les parties PNG utilisées par le moteur.",
+      "method": "ATELIER DIAGNOSTIQUE, pas gameplay : placement libre des figures pour comparer les vêtements ; sprites et fonction actor du HTML courant.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    },
+    {
+      "file": "v13_13_cockpit_mobile.png",
+      "caption": "Cockpit en affichage tactile émulé.",
+      "method": "Jalon S07, fenêtre 960×540, sans appareil physique. Équipements inchangés, commandes surimposées par le jeu.",
+      "sourceSuite": "traversees-browser",
+      "historical": false
+    }
+  ],
+  "excludedUnreferencedInherited": []
+}

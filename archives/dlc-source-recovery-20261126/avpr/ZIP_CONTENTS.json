@@ -1,0 +1,2470 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+  "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+  "files": [
+    {
+      "path": "AVPR_REQUIEM_V010/INSTALLER_DANS_TANTALUS.cmd",
+      "crc32": "a800cf02",
+      "size": 157,
+      "sha256": "b3821b92538a7d97058a385c33ff8d890491c188e5b041e5cd0c2f6e564a0ec4",
+      "gitBlobSha": "ec2745ee12661b5bb410f0f65719f70c7ff3f5d3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/JOUER_AVPR.html",
+      "crc32": "65e0a70d",
+      "size": 1006631,
+      "sha256": "763ea5e2bbcbc96af648824e1dd87b0262eab64fd0298d1cc623ed0bbb46a4ec",
+      "gitBlobSha": "fbef0a26dc20a924edd0a9f048b505ccb6b5762d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/JOUER_WINDOWS.cmd",
+      "crc32": "155316c0",
+      "size": 56,
+      "sha256": "ed0157c92b9df79081e9c9d62f73ca1e137219c1ffbbc0c912890f3d5f87b64d",
+      "gitBlobSha": "f3a9c60b5820a9667f7d1c867a85caac07ed2057"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/LIRE_DABORD.md",
+      "crc32": "d12288ba",
+      "size": 4431,
+      "sha256": "a37ea0303872a311d8fb12872b28aa7db55a0b0e99ef928424a3d1cfa56b4847",
+      "gitBlobSha": "538429c0d89c407241ea50c6da872ed3d9cd62c8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/NOTICE.md",
+      "crc32": "04d7acb4",
+      "size": 593,
+      "sha256": "ce7cdabffe7976acea8506d10510ab55e19a3a16a456f9bad4d28b8e6c3ed0d2",
+      "gitBlobSha": "6f1ea342992d967078356f8f9d235ee36da208ea"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/RAPPORT_ILLUSTRE.html",
+      "crc32": "f07d70c7",
+      "size": 7647643,
+      "sha256": "f1bd897bd4117a932e7c530630ad5953072d3a3d5f9aeb80764d0738cc92d58d",
+      "gitBlobSha": "25f52c3053cca36f85170720750f956b37b010cf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/SHA256SUMS.txt",
+      "crc32": "28371df0",
+      "size": 33169,
+      "sha256": "eca1ca064f26bf44f015d9ca1db60394627374f1b7d26a2840c65fb9286fb26a",
+      "gitBlobSha": "97498b684d9109625818b5915fa96a668aee8a6d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/airroute.jpg",
+      "crc32": "540aad51",
+      "size": 71125,
+      "sha256": "2acde27ab97f8ba45aa8af48e9f58fca886ad9b454e98b07456b06a94903e6da",
+      "gitBlobSha": "3505e0d596d4b1a56fff25be798920f6efe9279f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/alley.jpg",
+      "crc32": "b91a8b39",
+      "size": 81159,
+      "sha256": "af3f8a86fd7443bda9bad4e7f407776f851cae40742d1d0eebfcf3e93d5e82f3",
+      "gitBlobSha": "220effef2605867966e3e21535253637ac3d1633"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/arrival.jpg",
+      "crc32": "288d0f06",
+      "size": 49833,
+      "sha256": "98fc4d36567fd46acb748b433414013febe8a4788976c0fbaba2efeb62ad6d61",
+      "gitBlobSha": "d6714113885bc70bccda642500981b7912ce4cc3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/backyard.jpg",
+      "crc32": "9b405cb6",
+      "size": 49005,
+      "sha256": "1d92d330574c1575b07d0a9ee9764ed1eb88ee5a48dc158dcc4b03ed1741eb7e",
+      "gitBlobSha": "97367a90c746798227a816b38dfd1581243d8737"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/bedroom.jpg",
+      "crc32": "1ef22852",
+      "size": 72846,
+      "sha256": "45084150578da8e2b218d8db2b65468a39d834d59cac6ea47954b268a2746e78",
+      "gitBlobSha": "d909554b8a6c41f0544111c04108f13d23615ba0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/cellar.jpg",
+      "crc32": "fa234525",
+      "size": 81011,
+      "sha256": "41c2c62843cd30a53eb48b71b78f3467defd9fa2c75dce4b4b5c52a2ad2886dd",
+      "gitBlobSha": "b5eb3dfe3c9db0d21f14f0996a707ab6bbfd8458"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/cemetery.jpg",
+      "crc32": "30cd2074",
+      "size": 45948,
+      "sha256": "3fdc004773872d0de4c9a535c6b28e61cd55576c24d237d9ab2ce6933f1d281f",
+      "gitBlobSha": "766fff13fbe40391d38a49ade87bfde5e1c829ad"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/changing.jpg",
+      "crc32": "edab9769",
+      "size": 72349,
+      "sha256": "b9093f78e41ca0d32d2ee8f90bb9ec3dbdf57d2eb1472f26dd9fa5b91110d7d4",
+      "gitBlobSha": "54024dacd4efa6ebdb2b71add8b220ebbc01f529"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/clearing.jpg",
+      "crc32": "46e36171",
+      "size": 56278,
+      "sha256": "f4ef5ed0ef8900e60af7a4a76ba0601bee9bbbe56e0d7b3cdb278b47610f5ca0",
+      "gitBlobSha": "81965627acc6fdc558150eb92c10dccf508d6993"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/control.jpg",
+      "crc32": "f0595dad",
+      "size": 73382,
+      "sha256": "45d7044cf53f3a51c4c3bd6d1c4dff90a7fdcbf16f2c8eac7e9eec9f5de79cb3",
+      "gitBlobSha": "a2dceb88a9ccad623d403b445fc7a46dcf48c857"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/corridor.jpg",
+      "crc32": "f066a554",
+      "size": 71258,
+      "sha256": "a04a15ed795eb9d39b5f8aa08ede0634dd37c310c8d70c6a4360d66df1ca1577",
+      "gitBlobSha": "a64ef58e709e036d135ab95683cf9319c853818b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/crash.jpg",
+      "crc32": "da2032ea",
+      "size": 61522,
+      "sha256": "7041e6bed5d4945f8b102147f999b6ac07d66865e53826aaf750f60a89a55443",
+      "gitBlobSha": "59cec0853caa3f6ae191c30da690b15c75d230d9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/creek.jpg",
+      "crc32": "52ab3da6",
+      "size": 48953,
+      "sha256": "06f02dc66d245ec8923ce10992e7264f19a86bb78282e6e18957f6739188121a",
+      "gitBlobSha": "6e478d3650316536e7aabbe7f1a5c4e7d64269b9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/diner.jpg",
+      "crc32": "7dc2f2fb",
+      "size": 76077,
+      "sha256": "57a8f5deccad878eea98f9656b47384d1997f4693722baae04d60adac6c4d357",
+      "gitBlobSha": "bc918c51b63c9910e4a8249be48a4d6d04267c03"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/emergency.jpg",
+      "crc32": "aa2c7601",
+      "size": 71611,
+      "sha256": "999fdc3914f84d0191edf2d0bab15f49b8d848008248b29e670e8c10942b09ef",
+      "gitBlobSha": "54b8a5077bb4b55a1a4b56bad2275e6fb34a8b10"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/helipad.jpg",
+      "crc32": "8ffa7ef0",
+      "size": 62729,
+      "sha256": "3be3d650eab6f6fd9ef10a02f72f2bba12cb539cedc0b36dd305ffb70e619747",
+      "gitBlobSha": "adc11a6a45d257d58d0054c9b91a87c2fc471a7e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/home_street.jpg",
+      "crc32": "83dcc6f3",
+      "size": 75570,
+      "sha256": "fb2ae3f0edd2447602e2ab7bd18c9f9b59d4dbfec7f0f9f0e409919c47f88069",
+      "gitBlobSha": "a6da2e56c51859a8ae178ec0691c8bb6d1ab7f1f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/homeless_camp.jpg",
+      "crc32": "d91fc8cf",
+      "size": 69904,
+      "sha256": "b6612d1d2797b93313ce68854e66e037c962869bbddd92492163d1d23922a884",
+      "gitBlobSha": "c270e86592bb0104bfba6574cd53403e9d921519"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/hunters_glade.jpg",
+      "crc32": "7e1fc804",
+      "size": 48878,
+      "sha256": "127e8cd5ea13bd5568c6a5e29223889a4df961b2a09323a07e48c8ca390f6145",
+      "gitBlobSha": "88d919f689f9763a328fd0487b20379d41198198"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/intersection.jpg",
+      "crc32": "f493144b",
+      "size": 80650,
+      "sha256": "1a5ef3e63302d1094522267e7515e69a187d37d6db794da772ab2b2ab5190c95",
+      "gitBlobSha": "cd7563c9028fe33d5b0c40795fe519502b0895b2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/kitchen.jpg",
+      "crc32": "d9402658",
+      "size": 76414,
+      "sha256": "34caba2a1198a57db4f45fce8fa1d9de9f42ba262400fa88c97834a6ce034381",
+      "gitBlobSha": "fd9a13fd9e8895952de35b54847ca2d2645cc6a4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/laundry.jpg",
+      "crc32": "b919835c",
+      "size": 79291,
+      "sha256": "2c5307a63c489726b863fc4c728317d8eb8b99de4c087c7966f490da38dc9d03",
+      "gitBlobSha": "42af55e2c8599aa463156a5e7d22ae2f837e3703"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/living.jpg",
+      "crc32": "6ae72ad2",
+      "size": 76252,
+      "sha256": "a7b9c75b370bf307cbfafbcb9da20b121b01d89bd39252b45b98be8050c25091",
+      "gitBlobSha": "f12f658b451b0005518d50f2495c3e343b5d9c37"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/main_street.jpg",
+      "crc32": "4f6403b7",
+      "size": 79711,
+      "sha256": "0e034d9ad646bdad797d8f7f78b00a1e5ad13ebb8a733f2df44d25906d3774ef",
+      "gitBlobSha": "fd8bffd15bd8c02f19a59f602a82bf0cce3377d5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/maintenance.jpg",
+      "crc32": "2538df54",
+      "size": 83557,
+      "sha256": "ee0260cad5d4f3db1269f78735788f8aab8717cb088f50aae4b8fcf5a83fbf87",
+      "gitBlobSha": "594a1d8c92f5f8ebe95742bfbf60ff94d892a2e6"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/maternity.jpg",
+      "crc32": "c97d936f",
+      "size": 67294,
+      "sha256": "5ca07a5523bb0131064f9481715466c0115c8a9544f1bedddc6f4ab9d1d76cd2",
+      "gitBlobSha": "bc7bef31aa0a019520ad4c9aa9d5713897f5290d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/nursery.jpg",
+      "crc32": "4f113c75",
+      "size": 67719,
+      "sha256": "cb1c40eebe044b9dc20e49718ccf7e9e04576f2a1bc500647f97203f3f40924c",
+      "gitBlobSha": "c9426cb5984dfa6f0bfd2ec478b5ef3d602bc7fc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/parking.jpg",
+      "crc32": "0d22eab9",
+      "size": 84213,
+      "sha256": "94bd0742dac1142351bf842fc07e4a2e62665f8e07e5fdf51ee643806036404e",
+      "gitBlobSha": "717991f2ffebbd1a426e8416d74ee4200f6347f5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pharmacy.jpg",
+      "crc32": "3024daa7",
+      "size": 77278,
+      "sha256": "e4d18ac5e1a98c987c0ef5fb881bc7820acbe9ea4cc3f769aaabae27a551359f",
+      "gitBlobSha": "9d557b785a06e244a6a79c4db7564c12835e9952"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pizzeria.jpg",
+      "crc32": "ba96eb6a",
+      "size": 75162,
+      "sha256": "19f23d2a6d5f0d9e5e3fd1a0388cb4aab303071846b4df95fb2bfb5bb0c51af6",
+      "gitBlobSha": "7f927187f3caf8cd79a5864d9f22aef2c4811ed5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-01.jpg",
+      "crc32": "7d369e7d",
+      "size": 264000,
+      "sha256": "f22f9eabff92f7f01c087a62a60b519c91c8f03dce383f46b1ea3657cb60695f",
+      "gitBlobSha": "15ec2665393c819d6c3129b3fc223a228be5e1bc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-02.jpg",
+      "crc32": "ef03f4e4",
+      "size": 283195,
+      "sha256": "c7f819768d90477576e97a5ed3648d7d0b4a94cd2a52cf1935742fa1e81d9d65",
+      "gitBlobSha": "c2e4f4d62fee9c9f5d2da662e960600a645cc037"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-03.jpg",
+      "crc32": "ced58258",
+      "size": 277680,
+      "sha256": "41eb6ac200e57e67cd4830170b92073f084a4ada16e4f3928045ab26aaed3aaa",
+      "gitBlobSha": "3e4766ff80bcbd7b8140568ec36b005b9bb15aa5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-04.jpg",
+      "crc32": "f90fc676",
+      "size": 298520,
+      "sha256": "f8bf8b8cabbde0a6c799ce7d1f640452a0b5c6c7370c666411c4aacb4396783c",
+      "gitBlobSha": "8fe7e173ac42af0c9302935770342b406e780331"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-05.jpg",
+      "crc32": "7939237a",
+      "size": 280248,
+      "sha256": "761b3e922bfa6a4a02b2d14ab9608c1cb256191b5e347bd1d209d01e1a3db9d2",
+      "gitBlobSha": "7fe965022ffd531e004664b109bf5a3270e5ccdc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-06.jpg",
+      "crc32": "8c8f9fe3",
+      "size": 263408,
+      "sha256": "27c67f616eda88cff0a81415a44e5c29efe7428e9545f02528b9117c68d3470b",
+      "gitBlobSha": "bf576ab9141538297dac7c14c1b118633cbbaba3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-07.jpg",
+      "crc32": "c6552bc6",
+      "size": 56385,
+      "sha256": "1786204c3bc55e7c906e57ad64b4bf174980b1d8b2aabb14972cd464364ebd31",
+      "gitBlobSha": "84315f76e57ed9bb27ea6b52a7119987339feba8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pool.jpg",
+      "crc32": "dcde17d5",
+      "size": 74460,
+      "sha256": "8968852aa1c8da305571cabb4ed31c61061d8918d18b11726e2b89def95946d0",
+      "gitBlobSha": "6aa64cf1edcbd23dd2d636e272149373642303a9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/power_hall.jpg",
+      "crc32": "8c378588",
+      "size": 70261,
+      "sha256": "ba513bc27f291b9e2d14ab5a918f2689c3414f8fa680059eb47101ccbd1027fd",
+      "gitBlobSha": "43cf0c6e559048bc2b5185a48fbcb95d92795be0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/power_yard.jpg",
+      "crc32": "78efab06",
+      "size": 83292,
+      "sha256": "04bdf067752f4fa34e17a9e819b0d90bb41d254b2b46ed8ae0f7cd7c4f29a6d9",
+      "gitBlobSha": "34ebe8eeebfeaa2e23411d5751e5d7ac9ce447ce"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pump_annex.jpg",
+      "crc32": "6cdfea47",
+      "size": 75292,
+      "sha256": "3d6676a4e904490e163241c28610a50b0fd0722c93f4d80885ad417f82593332",
+      "gitBlobSha": "52560e7750cfeea035b315aba481745be251d6ef"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/rally.jpg",
+      "crc32": "5287242e",
+      "size": 78701,
+      "sha256": "a83d48d70c139b750988eb34fc6e5a3199fba9f271271e00e3944146277dfcf3",
+      "gitBlobSha": "df469a135d6f57f52a49c2a8264c7a0ebedb5ce3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/roadblock.jpg",
+      "crc32": "0326af35",
+      "size": 79168,
+      "sha256": "43aaef5bc9e0a1b3fc1586c94433c8add85f5858eaf32a2b6df881b371e4bebd",
+      "gitBlobSha": "578820da22a10c3a6ebad7c34690c3b9a6ddd752"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/roof.jpg",
+      "crc32": "2a6e06c5",
+      "size": 57699,
+      "sha256": "66e3b2177abddf9268e716a020dcfcc679711db5db252fab9d09c16fe2229bed",
+      "gitBlobSha": "44cad9488e4d98c3acdfe50800abcd5a84cc3ed8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_entry.jpg",
+      "crc32": "16569b96",
+      "size": 80428,
+      "sha256": "e4b8cff19eedf626950a761e53040909c763d38bd50c3c24f5da6620caeff09a",
+      "gitBlobSha": "2e7b50a5a52841c4423a55b96256674e6f98b95c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_junction.jpg",
+      "crc32": "1850f0f8",
+      "size": 75475,
+      "sha256": "7577eaaa031b04847e4a483119241caf8766f399a5f00719ab6223a1c591549f",
+      "gitBlobSha": "aa1725c2ebd5e9a59144cddca6266e24d21e2aea"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_nest.jpg",
+      "crc32": "c43e3a5b",
+      "size": 79051,
+      "sha256": "a7eebe3c95da73e6d0359470b6cfcfd93c09db3c27c561cf81feafed6023a619",
+      "gitBlobSha": "1e1554428bd7bb7ad322353ee0b97afd5a49d407"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_service.jpg",
+      "crc32": "3e392356",
+      "size": 76374,
+      "sha256": "9194d036bad448eff53e313ae50f2644f8088b026a9404437335b6a2a4465da2",
+      "gitBlobSha": "02376b61de586e65c4297af7862cf63d5cc2fd55"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/shaft.jpg",
+      "crc32": "c1c62455",
+      "size": 76169,
+      "sha256": "0e5f954d2125c7f0195a460ec2e397592b19f656739d131f759617e41ede207c",
+      "gitBlobSha": "fbc9ce70c1e0c71f629c9515a4ea333854d5c522"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sheriff.jpg",
+      "crc32": "16e62d5c",
+      "size": 68813,
+      "sha256": "b47f4a73532b8fa4753b85f2f7ac9ac499ac768e7253a62b5f2f6f7175d5addf",
+      "gitBlobSha": "6743a29192b5c87623973fd3025f4394489fef85"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stairs.jpg",
+      "crc32": "fa953893",
+      "size": 81449,
+      "sha256": "f0a99873c12f4f296cc69f8d3d6cede37dcc1f453223eb92107dd53e6c35def4",
+      "gitBlobSha": "890e127511a2af6c79cda4984b6f3d4990a98eab"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stockroom.jpg",
+      "crc32": "ca1b34f7",
+      "size": 74207,
+      "sha256": "dec6b8307ad6e8801fff3285fe01b2bd376adfd21912d4409a6b63c041e75a9b",
+      "gitBlobSha": "56c42c72f8e66014658fdec374b86a50184e350c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/store.jpg",
+      "crc32": "9a92a789",
+      "size": 78524,
+      "sha256": "273647fc3d34c2611c4de5c04551079ad8a1b2a66eafdead9aa3ea47eae36134",
+      "gitBlobSha": "3c2a4167572a9cb7dbaa0f044c81b8034b59f5d8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stryker.jpg",
+      "crc32": "76b5270d",
+      "size": 62609,
+      "sha256": "47cc0d7575da9c65d230765d961c1bc518e42bec47dc296707cb2d2b4747e735",
+      "gitBlobSha": "93d7db73a53b0f639a77f88de8483ad48479b603"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/triage.jpg",
+      "crc32": "4cf2b13c",
+      "size": 75912,
+      "sha256": "0ed4cc3214a20fff2aad6e1fe38038fe0abaa1a4326a1674e25c14daae64f682",
+      "gitBlobSha": "260d3f4a11391fc475cbfe369ec8939e8383aa68"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/workshop.jpg",
+      "crc32": "82e530fe",
+      "size": 78020,
+      "sha256": "511b156b2d620ffc5fcfd741720a7eeb551fea56e10f76eaa4a6145103a14477",
+      "gitBlobSha": "cdcbf4862e00d6e2aa971fd2ce6d30e31b193ed2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_01_titre.jpg",
+      "crc32": "550a0170",
+      "size": 97615,
+      "sha256": "28a1f35ac3c392ce882fa43f86aacabbd7c4d76adb6ac6207c9ac0c1f532a169",
+      "gitBlobSha": "7288fd62071e771ca559fa0472606c4d29b4766d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_02_atlas.jpg",
+      "crc32": "3f0a8fd0",
+      "size": 97336,
+      "sha256": "5b0ee59f678963e3f09bc0c32a089a8d36d43f80acc99746623803728c63c722",
+      "gitBlobSha": "2d7106975904641e3275e05294270ed8bb3f3c68"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_03_silhouettes.jpg",
+      "crc32": "99c2c687",
+      "size": 100502,
+      "sha256": "9c6039a0d1d5e8787907fc6bcb4a90ccf695e5021b94cb3134990aef40511a68",
+      "gitBlobSha": "b0fbfa110d797b83a45be1d53f45511f0e32ed41"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_04_arsenal.jpg",
+      "crc32": "526bcee9",
+      "size": 133046,
+      "sha256": "63831a1af0d1bd106ade3b4ab2704728fc05c182a669fd3665ae7c1aea78ee4d",
+      "gitBlobSha": "cc6961a607f92f6e28e8747653cdb1f7c80b2fe9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_05_tableaux.jpg",
+      "crc32": "1a7c2cb6",
+      "size": 99933,
+      "sha256": "b9c7827526f6348b1f827612bbe54fdf0129a1b6f1085596a34847dae5a9202d",
+      "gitBlobSha": "0a226550d4e1d5a38955ef241a507edbb8e31fa0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_06_armes_wolf.jpg",
+      "crc32": "d2799a22",
+      "size": 65929,
+      "sha256": "dabf5bc9631980296b9f2bed7eba9a27ca33fd240d1aabcf4025b94498c04d3f",
+      "gitBlobSha": "7da22edf508c698e9425741850783571218a3dee"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_14_facades.jpg",
+      "crc32": "9b7c6ef4",
+      "size": 141915,
+      "sha256": "f6590bfe97a6c31e12f6d8b122e368a5d5aaa5a8b57c4acb4fa2d62c8a168854",
+      "gitBlobSha": "6d9d388aa4f94d49d799872f8f71a722ef4f19dc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_15_couloir.jpg",
+      "crc32": "c2b280d0",
+      "size": 133805,
+      "sha256": "d2ac9da8c0e50f45661497ae7845673a00a53e0541a7139015366631c23cf7ad",
+      "gitBlobSha": "802c2861bb10ca04fc37510daa49c93671afad7f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_16_rampe.jpg",
+      "crc32": "45d178aa",
+      "size": 139387,
+      "sha256": "857bfce320c1cdd375ac88af2a3bfe3fc82db33a67009f81f577f22b750e0948",
+      "gitBlobSha": "4d7823ca0a1f299cfe637e6700d7e7acc1d25497"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_17_dotation.jpg",
+      "crc32": "dc3ef66a",
+      "size": 122287,
+      "sha256": "af296c7428064251acb409d93869a2c095f139581dedb42381db6196f40f0582",
+      "gitBlobSha": "6527a730fe94a28e610e9eb20686761f3933b119"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_18_shuriken.jpg",
+      "crc32": "ce382868",
+      "size": 101518,
+      "sha256": "2bc3664499af340a1372e00c7e25e43ff56b18a2aa40436bb2ed3e2fe2ddc80f",
+      "gitBlobSha": "82fe7ba083a72c9f00ebddd724c47dae4e4837f3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_19_atlas_mobile.jpg",
+      "crc32": "c705c474",
+      "size": 56324,
+      "sha256": "f1d114fd8652aaaaa65ec10457c01acb8b7276a6f78f4a6dfeebb24d82d847b5",
+      "gitBlobSha": "082df43d6759067c1988849f91e1c34edf58067d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_20_armes_mobile.jpg",
+      "crc32": "53774735",
+      "size": 38365,
+      "sha256": "d94ddfdc740ab92f12117a8322eee9cae1431ba1451142909e061ecc2b9f8ab7",
+      "gitBlobSha": "7c03aea55e271983177fee24117a5d5adc2e0c58"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_cemetery.jpg",
+      "crc32": "1f27e534",
+      "size": 97550,
+      "sha256": "f82e9e959881f53e259cef6764dfaa0ca55aef175d09a091b3041b548d97ad69",
+      "gitBlobSha": "595a78df8d8c634e65f681e44f7f9f38509ddff5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_homeless_camp.jpg",
+      "crc32": "9e47dde9",
+      "size": 136382,
+      "sha256": "105d17f7704b0388b9b4c2c8b806dceebcf5666a9f2e1305096a687fcd9d5549",
+      "gitBlobSha": "35ff22e5add3d23fbc89bd0a1122add42dfdb579"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_hunters_glade.jpg",
+      "crc32": "e1d82ea9",
+      "size": 101940,
+      "sha256": "3d695d4d52c968bfab948b785e046cdd6e988f24b47d449bb47dc73af771b784",
+      "gitBlobSha": "43cf4fe94651d70d14b45626438126cc5e94cf66"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_maternity.jpg",
+      "crc32": "bc4f38b7",
+      "size": 132426,
+      "sha256": "8ce9e9d0e398000be99dabbcdbb990a37f1f03a77e9cea50bceccba62cb5d702",
+      "gitBlobSha": "582efa7614ba4ac23491ed0a25947725e2112e33"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_nursery.jpg",
+      "crc32": "86cab546",
+      "size": 133024,
+      "sha256": "63aa3152bd770c0414d78918cc39de5016adea92e3be73d58a035ba387374c26",
+      "gitBlobSha": "c6067e2e0c9c8d8d80b98e2518761e99440bff51"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_pizzeria.jpg",
+      "crc32": "8ec991f4",
+      "size": 144713,
+      "sha256": "19acd703f59fd6dc8de31fc087fc53752b0de613c94d86f76d1dfe8db6ff01bc",
+      "gitBlobSha": "d4a834af1d5e8ee9b20365ebd17f9f5741936b0e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_stryker.jpg",
+      "crc32": "ec411db4",
+      "size": 119243,
+      "sha256": "c81e445dbbab824529afdcad6c325b4bc05d61f7a72bce86a1a573ce4a1299bd",
+      "gitBlobSha": "02a41e964c0676c5e94f7821445b1e8968f82dd1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_01_titre.png",
+      "crc32": "a02473aa",
+      "size": 1079249,
+      "sha256": "0ecd075ac815a39b06c76c6006b30ea9a90198302048c0b1d75b97e939984de8",
+      "gitBlobSha": "89c566ce503b1429c4adb25afacc3b56204526fc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_02_atlas.png",
+      "crc32": "0939a581",
+      "size": 489126,
+      "sha256": "1d5010549a79a3f9e343f8a0a6f25f639a7b844150d79e0f7d0fd2b83dcdd411",
+      "gitBlobSha": "8e157ae8f7df5d7aa56a6ca79517dd2ef1db57b8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_03_silhouettes.png",
+      "crc32": "198f1ed4",
+      "size": 200575,
+      "sha256": "5ac193ebdae888ad6ff45a6e4a73ca082070b1ac9378205a0646ef588c2816ba",
+      "gitBlobSha": "4ab14af9720469ff12737dd878f27e426116534d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_04_arsenal.png",
+      "crc32": "d12da57f",
+      "size": 224694,
+      "sha256": "25de623dbf4eab4ea5e58bec0f58d5821a2d3851e829bac52d6206dbca357030",
+      "gitBlobSha": "073d4399e9ccf1cc291017c60796042afa6a4f4f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_05_tableaux.png",
+      "crc32": "f21a007d",
+      "size": 204661,
+      "sha256": "d1e02dfd45bec00a93e2f307164ff900fce3965b81ce0081d3bfa4f6e4b74971",
+      "gitBlobSha": "0c87c4eca08ae16bf2674ddc452d329428669043"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_06_armes_wolf.png",
+      "crc32": "db5102c5",
+      "size": 375275,
+      "sha256": "7b696df29c2403122c8fd6adfc4da193f616242560ff5865c6770b263ea72648",
+      "gitBlobSha": "0f7f0631d2c7b2fe6f45f63d533c50addc189d02"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_14_facades.png",
+      "crc32": "2f0d99eb",
+      "size": 849395,
+      "sha256": "0229fd4247774f627b2f6bbc7f64787906fa44f1c8dc60666725a6b9b1baf718",
+      "gitBlobSha": "d15d0266e861f4a9cc6468122d8ff8d1b52807b5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_15_couloir.png",
+      "crc32": "fe5b448c",
+      "size": 996809,
+      "sha256": "f14e2c548ec71bc77ee0668c9dae5e27e1f7e8eadccc82f231ad74d6dd4c81c8",
+      "gitBlobSha": "cef962a09f64fc3237aa49369901b7a2d23e4620"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_16_rampe.png",
+      "crc32": "1cbdb809",
+      "size": 960042,
+      "sha256": "85ab3411d0b49f4e9515af4bb24e63c1db80ff22bda400161452d916c284f6db",
+      "gitBlobSha": "799ae051d223a61db0c13cf855b3d78fbb99515e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_17_dotation.png",
+      "crc32": "3e2a5437",
+      "size": 888386,
+      "sha256": "8c4ed95e64b24315dd28d3a2385b00f1f9587beef72f73bce7bd61efd39a3857",
+      "gitBlobSha": "438affca2e461c99c00346bdf48972f2efd398cf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_18_shuriken.png",
+      "crc32": "9d0714d0",
+      "size": 1061990,
+      "sha256": "241e11d30b2dd22fa2e04e3c8d8ecf749b54da324b2a3eafab5a162bb2cf40de",
+      "gitBlobSha": "b4272a515dde94f95f94049e0a73354d3bc5665f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_19_atlas_mobile.png",
+      "crc32": "df68b7a7",
+      "size": 56683,
+      "sha256": "f2d91bafe048d97416b14cbcd0ecea46ffa31be84847a00e615d8470be7ca6cd",
+      "gitBlobSha": "ca82693beb905218b3121e84406baf76922d5715"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_20_armes_mobile.png",
+      "crc32": "7d7de968",
+      "size": 136242,
+      "sha256": "f209519b25a046a34931d82c5dfecd66ada94c27136bcf311a343747eb5d3eb8",
+      "gitBlobSha": "4b44d04f9d5dd4bdeb960e90dbaa52a303998933"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_cemetery.png",
+      "crc32": "4e1d5f75",
+      "size": 961148,
+      "sha256": "ecdef0bc96d2607b13633cd1dc3b9b93e9a7709bb84bc234e2841c30dce332f2",
+      "gitBlobSha": "174bb566062fcbd98f5d5593128d1edd87366e2d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_homeless_camp.png",
+      "crc32": "e72a7d85",
+      "size": 1089387,
+      "sha256": "788c7c91e63a4ad737042c86f72875f0371ad4ff91eeb0b6c599c42009d65d8d",
+      "gitBlobSha": "e866618f4659a9400fff8aee7929b1b8872972d7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_hunters_glade.png",
+      "crc32": "8b56f7a0",
+      "size": 1063280,
+      "sha256": "846044711b5030facb51dbf288bc17980caa6fe865fabd5f69a75e18ef9c2bba",
+      "gitBlobSha": "7ae0468858377271ce59b45b11cf1f7de8e88706"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_maternity.png",
+      "crc32": "eeb0a5f1",
+      "size": 1074303,
+      "sha256": "06bdd29001e26314c840388d6b030f45bd84c44a574f5b40f935ba62b856c8e9",
+      "gitBlobSha": "9dce20a4700321254df163fedd6d58f10e2ef030"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_nursery.png",
+      "crc32": "8216412f",
+      "size": 1083114,
+      "sha256": "b0383c61cb7ff1926e11ece5545ba5e2f3be27eed1a90a2a743725fce95e562c",
+      "gitBlobSha": "2e90a2986ddf627ee62d788efcfd244b23b9b0ba"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_pizzeria.png",
+      "crc32": "53f366ef",
+      "size": 1007945,
+      "sha256": "0db39f1dc534a759c4c0a0240e266f6d5336ae972f3a29cf742bdfb4634b1969",
+      "gitBlobSha": "25d063f39be0a2497741681ed54070eca5700710"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_stryker.png",
+      "crc32": "4aa473b4",
+      "size": 887424,
+      "sha256": "45d529cbb4294ac0ab5c20d8b7b3fd479484318ac02b83fbb767ce225a80703c",
+      "gitBlobSha": "92199078aad0e3f43cbccbd5c0cf2cbe5836c8dd"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/AUDIT_FIDELITE_V0_10.md",
+      "crc32": "f84585bc",
+      "size": 32016,
+      "sha256": "13e9a2ca4bf2fab4157f99586b255d8ee8f9cc320c0f8f39a08f0f2e71181444",
+      "gitBlobSha": "e58cbbabca0bee199c7df7a83eea48e5371890cb"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_10.md",
+      "crc32": "cfccc5b6",
+      "size": 12471,
+      "sha256": "3e63e96a7257466077535cc3257a0703408832fd011029fb4614424ab77e1832",
+      "gitBlobSha": "e82de06aea8ba351886beef57670c3a6c7d61e8f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_2.md",
+      "crc32": "504f0819",
+      "size": 1813,
+      "sha256": "29dadfb71c640c890d7deaa9df0e9277f388e51e35e49addd4cd8c53599d2d76",
+      "gitBlobSha": "132c850c0c98528fccff09cbc42b7aedceb8a7e0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_3.md",
+      "crc32": "976add0f",
+      "size": 8051,
+      "sha256": "6417574557c35bf4f1db50d8451a6d60d1538f9d5915603b2f57e8b5f08c9b50",
+      "gitBlobSha": "1e8f55a91d4538d5ad8d27e3e889f6842a50d8fc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_4.md",
+      "crc32": "affc726d",
+      "size": 11048,
+      "sha256": "36c069d3fb28194e5fb3007ff5b221280c9118ed6748f4416f82475d37312dbc",
+      "gitBlobSha": "6b010d6a22bbc8c751dc8abb004cf1a2c15ace77"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_5.md",
+      "crc32": "19afcfc7",
+      "size": 17585,
+      "sha256": "ea29b5dd0205f096ac711c20fa5813aca1dcb390d911b23fd033f813b6bbee4a",
+      "gitBlobSha": "c4f10141c63e266102c20a44c09296fc9b0a2edc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_6.md",
+      "crc32": "346d2948",
+      "size": 13172,
+      "sha256": "d296708f9948690f5e4a567e3aa1355ad2a1eff7e8ccae04d9ad657bb453008a",
+      "gitBlobSha": "721ed3e732896296672fd853fea64e6456fee1f7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_7.md",
+      "crc32": "7e64d959",
+      "size": 11562,
+      "sha256": "daa43ca3431bfc92a67fb1d27c8a3d69fde3e248f64ee027f6eaa23e0bcbf2b2",
+      "gitBlobSha": "894d82d4f9c0e85e913b54a03dd904f106be4e0b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_8.md",
+      "crc32": "4d5bc34f",
+      "size": 14177,
+      "sha256": "d75e2e5744600cfc72b01a75e12cebf46c62a4f633003be3ae85f1cbf00ab515",
+      "gitBlobSha": "36b0b0462e4f606c367d3229c1132d9fd3e9c4ed"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CHANGEMENTS_0_9.md",
+      "crc32": "f02cbfeb",
+      "size": 12598,
+      "sha256": "3c17a346b2374ac5f81c9ed9ab3a738494cee77f3688b5817e29dfd7ce42cf51",
+      "gitBlobSha": "8c10295f962bfc492af1e9d7b9f6a73e63c15dd3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CODEX_AVPR.md",
+      "crc32": "4ba4c6a6",
+      "size": 207,
+      "sha256": "d1f611d26f87ea64d089e79ad1f8594cb61d7b4593b70b21ec1082708b9e4ac3",
+      "gitBlobSha": "4962669ae6ecf981827e94402a604d202a47ad56"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CODEX_V0_10.md",
+      "crc32": "42471d3f",
+      "size": 154461,
+      "sha256": "5c5101e562df38bab2049668396d697a44c8ee0586d3002fd5e1ff40af006e0a",
+      "gitBlobSha": "c59b9b9032ff6aaba6b6c8125c01a579efcc54aa"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/CONTENT_MANIFEST.json",
+      "crc32": "611a78a4",
+      "size": 564096,
+      "sha256": "5e155bab97685a7a36ed4eab43474b6f819b2021c01865a3c54cb9be66236737",
+      "gitBlobSha": "ae20ec80278458b79a3a1480a376984e097e0907"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/FIDELITY_CHANGES.json",
+      "crc32": "ea67656c",
+      "size": 317904,
+      "sha256": "0a3528763332ace1e210bbfc46efe00a5bdd0853e715760c275c690e9933e127",
+      "gitBlobSha": "961a1bc71c429020eb44ae06e396fefa439ff9ee"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/FIDELITY_MANIFEST.json",
+      "crc32": "4f3f0fe0",
+      "size": 88201,
+      "sha256": "ad9435dff269cfe39d4e63795e4dee858bcf14112cce2833f8fde7d1b5182df2",
+      "gitBlobSha": "bd124c54ff6e8f3344a052fd1917e880a046b010"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/STATUT_ET_SOURCES.md",
+      "crc32": "71c27be7",
+      "size": 278,
+      "sha256": "d2cae5600daf8ee240744bce8ba1ce68c94f8beaaea39bd20d963f1a6464b107",
+      "gitBlobSha": "c08c3b7384b812569aa2c6af0a1fa3f4a662ae3b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v03/content.json",
+      "crc32": "0e6b73f6",
+      "size": 309797,
+      "sha256": "221126463f5d572164c5c5c80b441937224cee9f32890af167e9b679a5346853",
+      "gitBlobSha": "3d34c58de7b6de608f20f48e5d8efa3bf5dc32db"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v04/content.json",
+      "crc32": "105b1301",
+      "size": 363948,
+      "sha256": "8ae2ca76824e95dc7545766a11e13ca0c2017a089c013eec09572da5c977fa73",
+      "gitBlobSha": "b137e7536e8d23fb776313c1a4eecfa7f573fc15"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v05/content.json",
+      "crc32": "b81dfde2",
+      "size": 246605,
+      "sha256": "e74cd9b16e31f1efe3677d26000c7cd5bf468e547a6b7f22150488ce7b528534",
+      "gitBlobSha": "4e55db113151cb6c22676e623b4edee997f22f95"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v06/content.json",
+      "crc32": "07c4f9eb",
+      "size": 387664,
+      "sha256": "462de3a5337f6cefc81fbb93c2b565e0752ed0816f69ff88a409d81b4a7ec330",
+      "gitBlobSha": "9bcaae2abe7ffea34adf30d4bdc0bb9158ddf6b2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v07/content.json",
+      "crc32": "3c4e500c",
+      "size": 400017,
+      "sha256": "c545d4bc1a0e8aa506a32aa8d89387f332a605b437bd63ba1fc95b4bacb4c027",
+      "gitBlobSha": "d51e40839c52a73935ef63f1699e3063cf13b442"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v08/content.json",
+      "crc32": "8d23c041",
+      "size": 410479,
+      "sha256": "3bb844edce3565796d00c63df819923fba6f33ddbb06c50d1e7467982a46b8d9",
+      "gitBlobSha": "cdad939902f9c8466668c0b6370537ad52da62e4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/baseline-v09/content.json",
+      "crc32": "38e28e2d",
+      "size": 417984,
+      "sha256": "bdb6b4fd19d71a7c93ca470680dd8f951cfaabb831538a45a96f7ab94832d089",
+      "gitBlobSha": "afa341ef59d5728b70f3da2bff6cf40da5ea9fb2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/README.md",
+      "crc32": "d5f9dd10",
+      "size": 498,
+      "sha256": "291757f909ed8b37ded49c7f0fc3d591e4d8461b728af267bf60a75e4031e93b",
+      "gitBlobSha": "e35b042b79e7c2312f79ec2f83e730e758c2dd2d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/controls-v09.test.mjs",
+      "crc32": "ec9d4593",
+      "size": 6191,
+      "sha256": "5b66e31242e86dc659ca8454815fadee7ab7688f6f8da06d65d103b4530ab16c",
+      "gitBlobSha": "485b1697d10289ea464af8f2d5dbb3079f487180"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/core.test.mjs",
+      "crc32": "e9e14990",
+      "size": 12883,
+      "sha256": "c1b57fca8e9083ea7a6c486a19799e83f31feb61375fa1a8db58e7511d1093dd",
+      "gitBlobSha": "a8b8e507f555f656fc86849f2280507b51b0bc69"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/depth-v02.test.mjs",
+      "crc32": "d298b42c",
+      "size": 12900,
+      "sha256": "8031ffc9f430fdd87c724b1c960fec73debe6c3bcab7ca8fda5f96b6d2367b77",
+      "gitBlobSha": "27ee125b5a074f73054bbd37eff4a881043e5449"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/ducts-v08.test.mjs",
+      "crc32": "bfc2b867",
+      "size": 16348,
+      "sha256": "d8f5d53e672ebc5ecb60739a623b1279d2a716ef2ca4e5ebcb4ae40a4c660893",
+      "gitBlobSha": "5be9423f0bf665c674b264ecfcad6f22ba25e2fb"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/expansion-v03.test.mjs",
+      "crc32": "a397a39e",
+      "size": 15107,
+      "sha256": "33b0a19c9e34d100def68322912bbd40c213458cef4887202cbd7e5df328d402",
+      "gitBlobSha": "592cd7121714b609bae6828ad430d6ca70a07b23"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/exploration-v04.test.mjs",
+      "crc32": "52c9dc0a",
+      "size": 18218,
+      "sha256": "dded25670d7a7d921421b52c78da5e837bbe022dbc33da74bcaa30bf22dea7f4",
+      "gitBlobSha": "a3a116c49f9871a922b9fa82ed0add12d69e7bd4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/install.test.mjs",
+      "crc32": "231a18db",
+      "size": 6868,
+      "sha256": "f3249dbdd51309f6996a3631869375ebb9bc549ac35093ebc5750bd61308a97d",
+      "gitBlobSha": "dd288e7e3bdbc7a33bffa99b381a453b614d7271"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/legacy-v08-v09.test.mjs",
+      "crc32": "3498c1b8",
+      "size": 1288,
+      "sha256": "24b75f0767f12c55dc046060bc061e9b30267ddc42ad1ad15b0d49386c3656e7",
+      "gitBlobSha": "0be0a1529bbaa44e419a116fa8cf7accc73ea0f6"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/rescue-v06.test.mjs",
+      "crc32": "14a6b6b4",
+      "size": 16572,
+      "sha256": "dff1726c49fe593ae3753b7a161e170b0c2f6fe2e2b49ba11c1d6ad695eef3fc",
+      "gitBlobSha": "6b8b58654949d89af8564d0ee8beeaf844333b74"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/sessions-v09.test.mjs",
+      "crc32": "62e22d28",
+      "size": 6944,
+      "sha256": "6213deef63a1f01c235e327aab49c9888f2e680f11feda8c416e667f3ab9453f",
+      "gitBlobSha": "6952f459d594c43c20d0a8701dcc4b3589d33aa2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/tactics-v05.test.mjs",
+      "crc32": "71eb5934",
+      "size": 19404,
+      "sha256": "53c14505edf52d20b2524ee5d2a7000f36ef630d3cb7f0e87f2f89d96b83ea5c",
+      "gitBlobSha": "06f90c6cfe402e909c55b00e7c5591949cbaa323"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/docs/tests-v09-original/traversal-v07.test.mjs",
+      "crc32": "36aa45cb",
+      "size": 14420,
+      "sha256": "b9ed300accb63fe562ea3acc0a1d9fc4153a1b52addb872b4045455358779683",
+      "gitBlobSha": "148421ad6afe53e014a36b80666210f049af07d9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/package.json",
+      "crc32": "fa319a4e",
+      "size": 1867,
+      "sha256": "4a22e3ab39e4710ac0092f2b49729e92b07ab70b013b7a892c8a671e48ef939e",
+      "gitBlobSha": "5dcc49c0616959818379a4ba1fc46824da7457fe"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/CAPTURES_V010.json",
+      "crc32": "c37625ed",
+      "size": 10936,
+      "sha256": "a3e8f63e0b2182e940d58f8432daa9e220e2f76575f32c83a3421a4dc78f7932",
+      "gitBlobSha": "23817894fae5b537ab638e75166bec8e7f700daa"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/DELIVERY.json",
+      "crc32": "fa1db964",
+      "size": 704,
+      "sha256": "9518cb26c7d91b70d529163fc0e0e62a7ae3e127c939715dfdcb3fe290d658bc",
+      "gitBlobSha": "d07710e0edd49d9a61e1fdeb80c66f4cc6a54aee"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/ENVIRONNEMENT.md",
+      "crc32": "20487260",
+      "size": 3846,
+      "sha256": "52e3e5a2675b13292f890f1dc1880e1809482bb7cf02313f47fcb8da0a80033c",
+      "gitBlobSha": "ee2f80481087fb2a4ce7c7374a81b2b2bfc4f579"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/HISTORIQUE_VALIDATION_0_10.md",
+      "crc32": "d233ed00",
+      "size": 1345,
+      "sha256": "c74f61eaa75dab2c0c1a5c748622097da3036cab6ef099e4c2ecf0c6987e9c02",
+      "gitBlobSha": "dc3faa17c0ee9379464816536e33995da0e53c69"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/QA.md",
+      "crc32": "4a921ab6",
+      "size": 1200,
+      "sha256": "a4d6b275c7185ecf160cb64ef7e1e4d866903e86a107d43024ed57f27961938e",
+      "gitBlobSha": "0b621d5f9927623ef312b522dbb80029d526ebe1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/QA_V010_SUMMARY.json",
+      "crc32": "d95dd779",
+      "size": 7144,
+      "sha256": "a9122901f7d08e970f1694da9fdf87af004037decc268fba142f64ab743eada0",
+      "gitBlobSha": "659725e7662221c4a9ee891246484a900ee63168"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/REGRESSION_CONTENU.json",
+      "crc32": "5d526350",
+      "size": 446,
+      "sha256": "f11bc60ef7075c7981ea11012e30b4b108e8cd405202250b18765ddb13c4ebee",
+      "gitBlobSha": "4adee71fa483738c0a808f739ecf58f2e7bb920b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/annex-tours.json",
+      "crc32": "38630eb7",
+      "size": 1149123,
+      "sha256": "3ff662d68d59b309cdd92cd0adf1d16424618fa91b2929972a2c369135c9e679",
+      "gitBlobSha": "be809d716a5b6fac8dd3d0bc1a28e5220523804d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-fixture-updates.json",
+      "crc32": "8da3edf6",
+      "size": 638,
+      "sha256": "062aa0643d85c2e4a3aaf1f333393755536f565c7a1054c48d7b3f2941b0a4a1",
+      "gitBlobSha": "a4f47a30c8035cea32c17b709141957a6cfbe180"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-flight-export.json",
+      "crc32": "bbe230d5",
+      "size": 80348,
+      "sha256": "882ce932db417e158ba0fdf661f0fe71a60aaddab3ffb3c5a051a084631578d1",
+      "gitBlobSha": "776e05b23beac4ca91bbae1ad12b151d7c88b3a7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v03.json",
+      "crc32": "bd580578",
+      "size": 4363,
+      "sha256": "8a73f0fbeab6ada5a49ec6f508401482c0fd6b22010d137c61f1a3d753cda051",
+      "gitBlobSha": "fbe3cec8a145d277dabed6fabf7f11a48dd08298"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v04-export.json",
+      "crc32": "b4f2c8a0",
+      "size": 12675,
+      "sha256": "a00b7d04a57c7afae940b70c0cc1d5a4377734de49403f12ac48963f62f1ceca",
+      "gitBlobSha": "4164a2515e777a0c290bbacafc75761ea8619291"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v04.json",
+      "crc32": "82ad49bb",
+      "size": 8327,
+      "sha256": "df7a90fbfac0185a88360a89ef3cb834b933ac7ceab02edb53598d0ed173d49e",
+      "gitBlobSha": "c41305375849b5b70bcdfcaff5996edac4602416"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-boss.json",
+      "crc32": "e058d60d",
+      "size": 1948,
+      "sha256": "d78d93a8c7fc3d8673f0b1126a1465897d7454101857371d954e20bac2f13371",
+      "gitBlobSha": "82e187795ab49a72eeab0444048afb666a196eb7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-hazards.json",
+      "crc32": "739b7be3",
+      "size": 1893,
+      "sha256": "2c60bfe4ae46bd1bdd338f5ed07fffb98c2bb272561c1e540c23c6c0eb9e74bc",
+      "gitBlobSha": "870eedbd97fbf872b5dd87bc34432866a2cb1022"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-mobile.json",
+      "crc32": "a904436f",
+      "size": 2003,
+      "sha256": "c1c28ace447d6f93d38c15f391c36b1cce372a798a45407b6a5ae75b744c87cc",
+      "gitBlobSha": "c9db779ed0d826af4d823291812aba875901c80b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-readings.json",
+      "crc32": "5b2da44f",
+      "size": 2736,
+      "sha256": "5dc779fb4aaeaf10d9ea472c8eb355287e73c9c2abc81ba3f947ee993b8ef6a6",
+      "gitBlobSha": "371f6149c266a38ba16252d424eec67e488822d8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-save.json",
+      "crc32": "d7b37331",
+      "size": 11065,
+      "sha256": "9ac89167cf6fefeb4539ce637020a2eb25f52d13d933993609ac8879ead36804",
+      "gitBlobSha": "9149fb2e01aaeeb9f7e93a836a50abe8033af11b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v05-tools.json",
+      "crc32": "1abfdbc3",
+      "size": 2850,
+      "sha256": "b019c9c79e5b5f03e4eef9eee698511807f78c04b031a9934e6cb144511019e6",
+      "gitBlobSha": "7ab649409e74fcb37f6fd2fc86afbbfd0cd8c22e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-campaign.json",
+      "crc32": "dd43ea26",
+      "size": 1512,
+      "sha256": "26e98a7ebcf2a0b5dccc5c56f15c1137c39c5fa4e7c096d04d939896f53a5032",
+      "gitBlobSha": "677af860edf7d0e658d2240c9e5b6b3b3d6a9d64"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-combat.json",
+      "crc32": "47ac115d",
+      "size": 1919,
+      "sha256": "f3ad3bc4ed10c311c80c2d8dbc4eed23e1cd038430bb542557e6b62bac714886",
+      "gitBlobSha": "1b7c706d9ce7a72dec2bbd4db1747b6e1dc70977"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-cover.json",
+      "crc32": "2b1a7953",
+      "size": 1532,
+      "sha256": "8697f3655ea8c267ddbcf129e843375eeef83a265636b04b3d5d3687b1e9d2ec",
+      "gitBlobSha": "6d6b5c12fd2d2f32e5927f0cb28b0cfee8115eda"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-human.json",
+      "crc32": "bdc802c2",
+      "size": 2990,
+      "sha256": "761319de2203198479166645c20a55f7f74ed27cfbfcf7def5284d0d618bef89",
+      "gitBlobSha": "d83ab5c5b5e70811a28c2508d2317114515ca3b7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-mobile.json",
+      "crc32": "3888403e",
+      "size": 2034,
+      "sha256": "99fb4f34825d870ca76c9d4d2554723e200734bd4cf463d3620ee0c382c1db0e",
+      "gitBlobSha": "dd1ba6ceafcf7d898326e1284325d0015d1b06b4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v06-portraits.json",
+      "crc32": "dac83972",
+      "size": 1904,
+      "sha256": "6fd01f0efc748536fc9785ef1b745a67ae3a444e0dbeea3034dd0cde16dc625e",
+      "gitBlobSha": "c561bf64f808489176500ea3e61e1c04ccb70ece"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-campaign.json",
+      "crc32": "ca3e0e66",
+      "size": 1922,
+      "sha256": "30058f294552b5208d52e3127e90f6b036df821e9ffa7e7bc505f9d0bfd6036c",
+      "gitBlobSha": "8164cf27c4dd8fecc6774ed4a5dda189106e90a2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-carry.json",
+      "crc32": "7f9a8dbc",
+      "size": 2899,
+      "sha256": "f310a6edf54baee87f6301a5b9cbf1133f455f75c735a517977f0de47c1edad2",
+      "gitBlobSha": "2b82b74c0f1d6c4e0a57362e2ead1c7ef15d4374"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-crossings.json",
+      "crc32": "65906c67",
+      "size": 2626,
+      "sha256": "d1db8b3d78678ae880a8f03bf2b1ec217718c775ee7b990df91d120e9cc23554",
+      "gitBlobSha": "f0ac8e41c04f6e41a9647e9264aedbfcf4509ffd"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-gallery.json",
+      "crc32": "5a436a03",
+      "size": 4324,
+      "sha256": "3dc6f04b2fc4da05d9ad88bafa743fa481828307bd0acd69bcd2c418d4c9a12c",
+      "gitBlobSha": "6b0fab638691cc9ba6e8a7703c98e7e050831458"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-ladders.json",
+      "crc32": "59221195",
+      "size": 2144,
+      "sha256": "496a5e2f28d63fa7ce9adc51c291da048100a44f1cc60b43a510057c06ea679c",
+      "gitBlobSha": "010fe754ff6d9e2d9b2d7a1599d59c4ce9f0485e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v07-mobile.json",
+      "crc32": "782e7aad",
+      "size": 2272,
+      "sha256": "9fcf5c17311f2d35b6b2f1ef3d5fcc318ee223fa81a6b28afe5f71b2a668e264",
+      "gitBlobSha": "99ced2cd4e3fa7a9b08ace942d681e3c43040a82"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-access.json",
+      "crc32": "fef1c925",
+      "size": 1838,
+      "sha256": "92181e7b145ec94a5ae06ea9e342ffec3d36e3a26c0577b0572c6466856aa6b8",
+      "gitBlobSha": "646b64dfd384028a3c80e40f3981d19607268c36"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-breach.json",
+      "crc32": "220c745c",
+      "size": 1705,
+      "sha256": "c650f72730607526aa38a67309621ffe7bd2073243bd1f9dd93c44f6131d507e",
+      "gitBlobSha": "a3f953773147abaa96de19e2f404c3fb75f29230"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-gallery.json",
+      "crc32": "5ffb582e",
+      "size": 3028,
+      "sha256": "dfa087f315dd99fb58c83ddb9fa61ee44b1ea14d18657e1355be8ce4ea663582",
+      "gitBlobSha": "c26f2541df5d3513b3f1186015e23cbe7464ddc4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-grilles.json",
+      "crc32": "e8283c92",
+      "size": 3189,
+      "sha256": "84977873867f9ce7ddb8fa068ed1fad41594df62521725f2a9878a3d828c25a0",
+      "gitBlobSha": "535fb614d85968d5d52b67f2905d8a9511c1cf24"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-mobile.json",
+      "crc32": "a93deb74",
+      "size": 1977,
+      "sha256": "ef994949b49ce4d6e33f75a601f7e1f5249aa3a729a4b5d16c14f7339a7323b5",
+      "gitBlobSha": "456ce537051d137bbf0b615caf3c84c7fa3a5617"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v08-movement.json",
+      "crc32": "2d7f5f6e",
+      "size": 2595,
+      "sha256": "ea10f949ca51fad37f2709d95684d0044e2a407663cb8c02935a38a0d5a1e347",
+      "gitBlobSha": "55b0d68eef249079d73af1af81db8467fa047e1a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-gamepad.json",
+      "crc32": "41ed9d69",
+      "size": 3576,
+      "sha256": "844193f0e6abcb4ba6eaf2c22b8eb73d1a1383f6a289847adb982e9fc5430589",
+      "gitBlobSha": "f437c3525e431ebff03dbcf99ffb4d2e76bd98d2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-mobile.json",
+      "crc32": "3ab0a371",
+      "size": 3209,
+      "sha256": "725fadc1a8697b7bac135694ca98cc4fee393943a8b6ba98b1389f3f39bdf896",
+      "gitBlobSha": "280d419a17733fd95c5c8efa91c57e1cffc6671f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-persistence.json",
+      "crc32": "2cb9730a",
+      "size": 2468,
+      "sha256": "e41baf59e68034043b30ea90822050d8cf03ae73ec750df8d72badf534a85108",
+      "gitBlobSha": "4011f4c0347281c211dc6903ec61946f9724d37e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-replay.json",
+      "crc32": "013fbb66",
+      "size": 4166,
+      "sha256": "bbb3153630919f5348e02c38b2ee2ec322c4b689aecf63a3919f0c8aaaae95ae",
+      "gitBlobSha": "76b02bedd8a45a2532d90d60e4f3137f73289233"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-safety.json",
+      "crc32": "d9a73845",
+      "size": 2914,
+      "sha256": "9f1fb28e749badb1de65349862004c5071c0cb66cb3c806362697bdb64d15625",
+      "gitBlobSha": "07780b1f4f7ede90d2a021e61293a5d24c26450e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v09-wheels.json",
+      "crc32": "587531c9",
+      "size": 4534,
+      "sha256": "0548367cece81484a309e0ac0cf585257d13aaa288c463e02b5a8d30bc5bfc69",
+      "gitBlobSha": "d41c3d1de8a760b0b146c3092ce9e916b27c75a3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v10.json",
+      "crc32": "8489cd5a",
+      "size": 25523,
+      "sha256": "6c976697e5271e4297b08a64162e04a21e171e88dabcd320c0ff8d81c56a6dc7",
+      "gitBlobSha": "40457ada97784c2e1316ec4f892ba46b3ffd25a3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser-v10.log",
+      "crc32": "d671ac84",
+      "size": 406,
+      "sha256": "3a1b53c4f7ec3a6c2ede702ed62f007c3280c26cc5534f3043a10c86222e9728",
+      "gitBlobSha": "ea447f09eb06a2e5c9edff016326a6e563673621"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser_qa.json",
+      "crc32": "17cd27c6",
+      "size": 5564,
+      "sha256": "12a23cd07ef3bf10231e273ce4f211b318e15bf1783bdd7695443c3225b89204",
+      "gitBlobSha": "053196c95151e979f90022349b60a99865bd41dd"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/browser_save_export.json",
+      "crc32": "ef818cee",
+      "size": 11424,
+      "sha256": "c6b095a914c33051b030941eef1d5b4c8ee50975f791084064283a9acfbe7f69",
+      "gitBlobSha": "2dcad873e40b9e45481fdf8c551befaf1afa407b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/campaign-histoire.json",
+      "crc32": "87aef445",
+      "size": 2221651,
+      "sha256": "fb760c257c84946ed5e4a31a9b69b24eab364a2f3c2241b1bcb6ba88d10edb7c",
+      "gitBlobSha": "3d3169cb17e22c927a87592777e3ddf6403779de"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/campaign-standard.json",
+      "crc32": "9031dde6",
+      "size": 2221168,
+      "sha256": "49bcdf11abb65e685cc0f524c6d5c6af87f95c69d54c1bbf681fd8c8086f0abe",
+      "gitBlobSha": "63290669e3ff9507c42170140eda31cc57a55e39"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/campaign-survie.json",
+      "crc32": "90803a01",
+      "size": 2217088,
+      "sha256": "db5bdaa18a57d76220c928ee8e35b199ca8b98667458223db1af9901dc52101f",
+      "gitBlobSha": "6b28b69fff7c3913988c82f74aa3b3819c0dd45b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/conduit-campaign-histoire.json",
+      "crc32": "ae02081e",
+      "size": 2536949,
+      "sha256": "badd59a4eb083c73db2186d6136aa98dc749ff6543a385dcc8f3f625d8203bcb",
+      "gitBlobSha": "565b3210c9888cca8a2b151baac44c8c5979271f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/conduit-campaign-standard.json",
+      "crc32": "02c24fde",
+      "size": 2519521,
+      "sha256": "5875d24755d2a33a67d9ee7066fb84af4fea88baa550b6f584e2b143f4dd9fe1",
+      "gitBlobSha": "7d9e1f7db3b0a232db296c3ecf9c04637af10c0e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/conduit-campaign-survie.json",
+      "crc32": "34199cc2",
+      "size": 2535443,
+      "sha256": "9344771f7226027058f8f59a842af9ce2d6d1958eb4c282bc2b0e0c0b2434070",
+      "gitBlobSha": "e20cb59ebdabc8658ea86979768bb11bd128c3c2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/content-v10.json",
+      "crc32": "7eed07f2",
+      "size": 564095,
+      "sha256": "d8649d8ea2c0b4f1a098d850c5518dc7ed6e0490345f39758c1ae69e8cfe697a",
+      "gitBlobSha": "e176e71a57b56e41080261d23891745b272c20cf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/fidelity-audit.json",
+      "crc32": "b5be8836",
+      "size": 189364,
+      "sha256": "787010395b652f6cec903b4fa82588f8adcdd441dcf2fe8ec9d22461184449c3",
+      "gitBlobSha": "890528dce1cc95950da4e924c769eb1c7e895359"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/fidelity-tours-v10.json",
+      "crc32": "f87393b8",
+      "size": 2468,
+      "sha256": "a65e3db2b818399c8abd4997be084974dc2c15dd5b82f37ea7cab3744c6112d5",
+      "gitBlobSha": "d51381c6fea18ed1eeb46d5d473cca78f4a13648"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/fidelity-tours-v10.log",
+      "crc32": "7ad24180",
+      "size": 1580,
+      "sha256": "31f79b07118604ff696637550442b7bfe819ff68ebba023457496e8b27d06000",
+      "gitBlobSha": "88a9deedc0b989064c969839614e4ac25d0f93b6"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/hunt-tour.json",
+      "crc32": "f73f33f8",
+      "size": 2243148,
+      "sha256": "f0f3a9fd974def78a66a1fa55ed24afdf905aa35725549d74e66d033d8de3de7",
+      "gitBlobSha": "b3cae7e7502a3b6771588c01383379c8a1322834"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-00.log",
+      "crc32": "f64fc88e",
+      "size": 7169,
+      "sha256": "6291a55eb32486c4192aaedb7ed7b999b5ff1e66e5280383d81ce37cae08f051",
+      "gitBlobSha": "8ec3d489c0fcb9870053094b11d96937fb8e3201"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-01.log",
+      "crc32": "b580250f",
+      "size": 17699,
+      "sha256": "60d49367600b685e102928f31003e10eb25fbc20167477480a8a19b305f87c24",
+      "gitBlobSha": "f45562470fadb7d2615235ff9c2c9de6616428f9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-02.log",
+      "crc32": "4043dabe",
+      "size": 7272,
+      "sha256": "fae217436493c9f2f61db59b010b0e41efdbfa8272df225d88e3477afc03637c",
+      "gitBlobSha": "6ee5d5c248ad1e7a7aecee3b926680384f3db869"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-03.log",
+      "crc32": "5f8f98ea",
+      "size": 969,
+      "sha256": "9a24bd21d91d0d5e15005a827dcabb082b57abe9ca5aa1fba0bdc9ebd2ffd61f",
+      "gitBlobSha": "a8282cdfa8d90f2f273debb1e1ad96e3b266b5d4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-04.log",
+      "crc32": "28cb1ad3",
+      "size": 7100,
+      "sha256": "bb064f1149bfa87d255f054a44db9de528a2f8e1761243ee5eefbcab36bf8017",
+      "gitBlobSha": "66904e9eca61083597149abfcdef4db416ed6018"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-05.log",
+      "crc32": "ba79cb8c",
+      "size": 1216,
+      "sha256": "7f7ec5645fbf0a8c875fc90b85a0fb0cd5ad183d41b5a861617bca4a3ef97c22",
+      "gitBlobSha": "29b9158e6bdc896c5dd21696da8031461ce20f1c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-06.log",
+      "crc32": "57ce4f38",
+      "size": 2503,
+      "sha256": "df2c6ff8f8aa12b35f326550bc6e8d83178ff34f7c1f3168daf7355e59b66d02",
+      "gitBlobSha": "d34590228884b756063031eb5369f08393f8c56e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-07.log",
+      "crc32": "380c3bf8",
+      "size": 478,
+      "sha256": "ae76833821415d13beae3c0851900a76d9ad11253653ee0615bb3222fd6b4f58",
+      "gitBlobSha": "2e5caab360db92997677face3e79b2858c644207"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-08.log",
+      "crc32": "2763a2a4",
+      "size": 2399,
+      "sha256": "f49b5abd2b223f3d3109040ebf6014d5a18ad6fc556190e13c191edd70394bbf",
+      "gitBlobSha": "7a3580b18740ec465a8fb7b41b56b57a635a09bf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-09.log",
+      "crc32": "c4c86cfa",
+      "size": 1725,
+      "sha256": "c941b3419415d12bd62ef0de6becf2aab9f02d6cbebf7aa12927e4bbd5416e4d",
+      "gitBlobSha": "423b5daeb47322877a0d5763c3dc4d56e9c711fa"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-10.log",
+      "crc32": "5aff8489",
+      "size": 2575,
+      "sha256": "254aaa707aef6d922a55b346549e17855014730a14acb526d1dff7620ad68edd",
+      "gitBlobSha": "424608fd6534edefa61d4b20f8a7d792e593ab02"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-11.log",
+      "crc32": "f73abf46",
+      "size": 668,
+      "sha256": "643e9d3c3aedbf4bb13f2ada21e3d71d6431147e2454b9d524617fb869b38620",
+      "gitBlobSha": "eee231a12e9f14bed134435e253128dbc1a09153"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-12.log",
+      "crc32": "76fa2408",
+      "size": 756,
+      "sha256": "aa26ffa0545dadb5b98bd8b6508fbd3a6f5406740b0bdabe08f7eadbcbf973e1",
+      "gitBlobSha": "5a2721c8f545955892cb4545ac8d144e43adb4df"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-13.log",
+      "crc32": "e744eb6c",
+      "size": 495,
+      "sha256": "570629ba2af187e57d49a748dfde6a4f25d742292cf871f16563dc54709cbe9c",
+      "gitBlobSha": "b8c154c85043bea8955597614d3d128e98e06c25"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-14.log",
+      "crc32": "6ae14cb8",
+      "size": 403,
+      "sha256": "279a7ffd41be26a53b72e660f62ee67dd04c0f1803f6fc3738cd42127e03caee",
+      "gitBlobSha": "2dcef4e05dd830e6173e80f539e34626216e504e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-15.log",
+      "crc32": "12fac41f",
+      "size": 446,
+      "sha256": "91ac1a9d059803af84e876b90b910fa8e842297a0d53a61e4f561c6918ca7cd5",
+      "gitBlobSha": "441289576d631fc1e54070033d7d53738eb189c8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-16.log",
+      "crc32": "a52517f5",
+      "size": 863,
+      "sha256": "9afd04fce2f34165b404b916408084835f13fd4670a34edcf65e34361bf2e19e",
+      "gitBlobSha": "105f45dc7164ac4c8f931dac3b840a9686b26c74"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-17.log",
+      "crc32": "924603c5",
+      "size": 427,
+      "sha256": "d4a7ae1abcec7eef97639001f56f57708843c227a6b25281dca901a9577ae556",
+      "gitBlobSha": "4c49b34a1969608d630f27f2ef3b7f8343f2765b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-18.log",
+      "crc32": "1ba10c8c",
+      "size": 407,
+      "sha256": "2af8b84ddb9bd034fd29c745eeeb04b43d0d49b6e38edceec8ad2328166ff440",
+      "gitBlobSha": "9fe0b6f4d9f5dc7beb5eee0f709731cf849a7dad"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-19.log",
+      "crc32": "fd3d0cb6",
+      "size": 509,
+      "sha256": "0af3278c0bed420eb7bf90240db3ef49e6bb389709b0e6b1dc3c20ee3a1fec2e",
+      "gitBlobSha": "2798906e57f18e7ad2a8b9e29c9d781886e83d95"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-20.log",
+      "crc32": "a4af0a3d",
+      "size": 365,
+      "sha256": "b94d0c7e83f75f0628308e128cde39a6aac5c6646621645ddb530d66e1086340",
+      "gitBlobSha": "f8d905ce136b59f21887871e5288c0fb4fcb1b8c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-21.log",
+      "crc32": "8d687f05",
+      "size": 356,
+      "sha256": "4731a1701ac8b02dec4df2ac86149abb3cc11d04bbc237c882f8d4c53b2a4856",
+      "gitBlobSha": "0452e0c5517295fb0411329e621e552dfd010ca7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-22.log",
+      "crc32": "f544cbe3",
+      "size": 664,
+      "sha256": "3a471ac855fbcfd030e9d12b0e99c2a175e9efd1392e783a0a7e95b059be97df",
+      "gitBlobSha": "eba90cbf51f05ded61be0612f0aaca7777609d45"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-23.log",
+      "crc32": "0e5cbb70",
+      "size": 355,
+      "sha256": "076f7b672dfff2d634af6e55b176bafd0f1d8fa69d2f8bd09765136ebbca6252",
+      "gitBlobSha": "df7aaaa8bc30b9cc1649fca0bead3ed844821171"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-24.log",
+      "crc32": "bdec7050",
+      "size": 659,
+      "sha256": "3a129df2688cf682b86ec8add5f951520b4382a86bf769b3570b2766e35fc1b9",
+      "gitBlobSha": "abb8222f17da347239eab2cf17f099a677509a08"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-25.log",
+      "crc32": "8e0af70d",
+      "size": 409,
+      "sha256": "3d879b91da2e19cbbf6b819c672f87027ac14c6d49e381208010cea6fe43ea53",
+      "gitBlobSha": "eb6285a4fb8ad72d56d7d8d81d544fbcdbd9b730"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-26.log",
+      "crc32": "1c7e31ac",
+      "size": 938,
+      "sha256": "f4a2649eaebf61c26618cac4d1547f7c1adce54b7d4925dd09a2ebd9b9127ded",
+      "gitBlobSha": "1f2736dd301e8c94c8989a7aa1e90232191ac514"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-27.log",
+      "crc32": "1e374750",
+      "size": 332,
+      "sha256": "af0a6c1020053a3b425467704ad0b31196ff412b1671b170c23851997ab9d3eb",
+      "gitBlobSha": "2ae5959885be59c4589f482440df5885507f0472"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-28.log",
+      "crc32": "afb29900",
+      "size": 738,
+      "sha256": "9729a0c435553d95cea1b2b349a04d0758036c9e21fd02cc3b5f9c424e0b1d38",
+      "gitBlobSha": "125a6c4b80351cf94b327a14ba2cc7e12d241f5f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-29.log",
+      "crc32": "20a7d6b6",
+      "size": 549,
+      "sha256": "fb8a956bbe46b444f3aa2a99280abee4161c790ec99d0d3a0d24fe40e73502a8",
+      "gitBlobSha": "83db78ec1fc92de8c87d52bc08138280d07f80c6"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-30.log",
+      "crc32": "4b71849a",
+      "size": 301,
+      "sha256": "70820cf346fb03deab343144f6bd7c106b477f07e2737b15f27b7cac2cdc668e",
+      "gitBlobSha": "404ba5eb68cd9e4caef83a7598396afa3a7c8842"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-31.log",
+      "crc32": "0c8ff923",
+      "size": 363,
+      "sha256": "da0ec49bb461076d14da6ef036771387efc1a5f82e1c7a6a247e5175c5b818ed",
+      "gitBlobSha": "a03a5d0121a24341c5b7cf92d091aade7e12606e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-32.log",
+      "crc32": "907a61a4",
+      "size": 354,
+      "sha256": "66cb9c9d68f45b5b9ed4f512cd7816ea8c99d8de9fba1bd9dc26ec0c6f1d383e",
+      "gitBlobSha": "3191b79783edc100b55794bf8c48cb66fb85d43f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-33.log",
+      "crc32": "5b27c0e9",
+      "size": 478,
+      "sha256": "79fd7e10e276eba0c403fe95661c15af31058516d90f42f05b333569387a5e56",
+      "gitBlobSha": "d9aea165ef1f6cf40c66f48cc6ffdd7c658e127d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-34.log",
+      "crc32": "2033ea55",
+      "size": 1152,
+      "sha256": "3e69cb8c258ca91d33ce51fbc29eb4376d426691fd2d3d658dc79fa76fdc6711",
+      "gitBlobSha": "b7f1139d59359171a017efdd5c299577546060b4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-35.log",
+      "crc32": "b290738b",
+      "size": 1162,
+      "sha256": "17d868a99b9eff77a42a155138dde8a5c018f61832e3b245d0e02d93ce8cdbdd",
+      "gitBlobSha": "c2ec58142988b36d0d0d17a162f4016ac8347296"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-36.log",
+      "crc32": "3c192dd1",
+      "size": 933,
+      "sha256": "112570a9d569aa8a9ac43b81f789b436bd27629df4ff5f81b70c8a5d49bd134e",
+      "gitBlobSha": "757b3e4039b04f361f7ffc35a79a60713e05b07f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-37.log",
+      "crc32": "d01b1227",
+      "size": 688,
+      "sha256": "7bd4378683aed89563d9fd87440b6160d9105778500c0a24579520e33c343f15",
+      "gitBlobSha": "1234cc942e7f2b8b8d238e655aa1f858929494cf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-38.log",
+      "crc32": "5fb52fc5",
+      "size": 587,
+      "sha256": "e951b1e4f2eb862f6aedf815fb5b4c7de4c1b7f96323ee82f3b41566a4286ea3",
+      "gitBlobSha": "153bb11f33ef0ff54cb3a9eb0cdcc4af9d3b9d1f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-39.log",
+      "crc32": "c96aaf1e",
+      "size": 763,
+      "sha256": "505bc8f00471136df13fe546436ef9ff9c090844b467a9682438763f959b40cd",
+      "gitBlobSha": "3ceaedf69837225d3ef11efac010b510dcc7c580"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/matrix-v10.json",
+      "crc32": "0c8ef419",
+      "size": 7261,
+      "sha256": "f2038da1082b1b65f61c186dc491035ea14d5fde3d3a5ca70472eff4e9282de8",
+      "gitBlobSha": "5946e9f5b609ecddf0dbd5950fa6a66128279c1d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/metadata-test-updates.json",
+      "crc32": "c1538ea7",
+      "size": 371,
+      "sha256": "fc0b648df658b0d058f5549e3266906118b89251ec241cd3e92608815e18f6ac",
+      "gitBlobSha": "130c8eba54439b5ca4705d6e874fc19f25cd3991"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/node-v10-final.tap",
+      "crc32": "28b37d34",
+      "size": 118193,
+      "sha256": "039876bdb147e78617035a6dd04535c737f3c9bc735bf6a0341d8260f2713b41",
+      "gitBlobSha": "4a3ffd51ddfec155b3fdea7857089f5cf23e0865"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-aftermath-v09.json",
+      "crc32": "5d562354",
+      "size": 12898,
+      "sha256": "f0d09cff3239df68c9a3bbd0ade7da5a6cb903be2d950025917c09b1fd516e8b",
+      "gitBlobSha": "f2cc2d6022bcb8a9b87d1b9c2b064e8c1dc7b9f9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-airlift-v09.json",
+      "crc32": "4ad90ffb",
+      "size": 13304,
+      "sha256": "54480526e1f464d9e771f8b5179fab401e468aa4edd440daa8d3328b5000316b",
+      "gitBlobSha": "d002a5e5a3d966aa2902cba8c5da05fdc023992e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-bait-v09.json",
+      "crc32": "38bac892",
+      "size": 15173,
+      "sha256": "6cd5f5d3aa5c357118091f295806dc013551b6d4730ae8155d6e76005d773386",
+      "gitBlobSha": "4db66e3a0167741106b5ae9f0ab9adc46c9e07b7"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-blackout-v09.json",
+      "crc32": "1897208d",
+      "size": 13356,
+      "sha256": "bfca458174fc8896b1ee94647981039c9dd260770086b3a8f598f31a0859d01b",
+      "gitBlobSha": "3b8238d80bc3e333d6f59fe207dc0d53b8a01e31"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-cleanup-v09.json",
+      "crc32": "d8ee683b",
+      "size": 12597,
+      "sha256": "fd62ca7712e1cb185440ba2bbf403df2663a1657c07fd3cca1a73fdba74e488e",
+      "gitBlobSha": "b2b878e305df9493d6347e95d9da1df764256984"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-climb-v09.json",
+      "crc32": "b78c7fa2",
+      "size": 14086,
+      "sha256": "3d9dd3bff11587c8157735b8c3cca28e4e3ff3350e1a33ff64b245526ab47b7e",
+      "gitBlobSha": "fd3c2c66d748edb94f0bc34d94a955fcb358e2c1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-duel-v09.json",
+      "crc32": "1334460e",
+      "size": 12870,
+      "sha256": "12850e3ddb66d68fd3131e2ccc82009be9f0292e90b8362dfd99568504f606fe",
+      "gitBlobSha": "7f813930797ca907af0c99c96abda7d70f9a4c99"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-falsehope-v09.json",
+      "crc32": "18d3e373",
+      "size": 14592,
+      "sha256": "27e9789f6dddb369f33ccedba56f31e10bd99da0e204a9885a8525b7a9b1dfb2",
+      "gitBlobSha": "81ed4ffdaf7e4333ea7c28eff2f2df95657d9b06"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-flight-v09.json",
+      "crc32": "54561ea6",
+      "size": 15025,
+      "sha256": "924e54f6b525da513a4aaeef5431098a45ab3d28167bf5e8a27875ad9f1845ca",
+      "gitBlobSha": "aa1c1f501542acbdfcd8b78e129b8d4d02271bb8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-home-v09.json",
+      "crc32": "14078afb",
+      "size": 12559,
+      "sha256": "bb4e27b75f89b62c01546ca999ad8ddec11458ac8a9021d119dbd8772c3400ee",
+      "gitBlobSha": "667b26538c97ca129e0efda747d716d932579da1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-hospitalhunt-v09.json",
+      "crc32": "0bd41612",
+      "size": 14568,
+      "sha256": "45ff312c17a762e20d988fd47cb5acd25752eefb407be6c9eb06affc495fcc5e",
+      "gitBlobSha": "39d39613226dc0cd2dd2843b0d0ae37feba0ff53"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-poolnight-v09.json",
+      "crc32": "b601d586",
+      "size": 12727,
+      "sha256": "af5a454607f810344d1b994e7e4c54321838fa1c3131fb67a5ae621c7ca5518b",
+      "gitBlobSha": "fb45382088605345b43d8339fb69982f2bca9471"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-signal-v09.json",
+      "crc32": "649775b2",
+      "size": 10522,
+      "sha256": "94adef3eee7e8a3959d948d38c8b737f3a411d8f24f1759103fa239e3836d68b",
+      "gitBlobSha": "39112fa35a0c050b6467fd4eec3c2b7d67437f41"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-under-v09.json",
+      "crc32": "b5cc81e7",
+      "size": 14135,
+      "sha256": "19445cca73827ed5af7e950585641d8cee07fe91bae60306cc97fe6d24da6b97",
+      "gitBlobSha": "ef77dea825297bb3a67e77baaab1ac6e18f35501"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-final-weapons-v09.json",
+      "crc32": "11715de4",
+      "size": 11701,
+      "sha256": "a56db2524489e0cfd307a3743769d6716abd32853e5225d7e70e2fe9322ea063",
+      "gitBlobSha": "92bf918ab0ad0c928d3136ceae83d33d9b367da6"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/replay-tours-v09.json",
+      "crc32": "cdce9851",
+      "size": 10970,
+      "sha256": "e7f7edbed1c0036ad995b524fb58b563c2aae3f95c25919f6e489866bd259ea3",
+      "gitBlobSha": "28a92b6ccc2c199d033cb89598742f25002973c3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/report-desktop-preview.png",
+      "crc32": "b544bf44",
+      "size": 117540,
+      "sha256": "554a430e72c5b68da703e048d14410563a60af2c985b73544c7723a485d71a76",
+      "gitBlobSha": "148a912db4f1acc6e964f5d76209c8a1ab064a12"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/report-mobile-preview.png",
+      "crc32": "dda1de0c",
+      "size": 63674,
+      "sha256": "80b260d9a3467a6ad84f3dde5a6855dab5ed4800cb2fc1d521b333402ee9f25e",
+      "gitBlobSha": "9b9de1b8cf9ead224b5a74e1b31e06b59e88f5df"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/report-validation-v10.json",
+      "crc32": "2c574014",
+      "size": 304,
+      "sha256": "5fa77edc53458793f1b882cd40d96ea2762fbc6383ef3a919afaa3f2b7e4ad66",
+      "gitBlobSha": "99fdfdba52cfe88d52340950ac9f4bb3c385fa5b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/rescue-campaign-histoire.json",
+      "crc32": "65654506",
+      "size": 2542719,
+      "sha256": "23c39534cce6824b47db79a1525aba231d688325d516528e5da20c2782e12c56",
+      "gitBlobSha": "71749fd56753d5a6f6dd3a6b90351f263b1a826e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/rescue-campaign-standard.json",
+      "crc32": "a5f63350",
+      "size": 2525501,
+      "sha256": "1d6ec6053a05c43e3487f4bd7e59b3483d6df752c4886c7e726f18eb285b277d",
+      "gitBlobSha": "2bad96608762a52580f43c15e2ed264c19d172a5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/rescue-campaign-survie.json",
+      "crc32": "550c2e7d",
+      "size": 2541407,
+      "sha256": "721f4e37a91aea17e511176450c6cd982bf949323c6ce95b16543abdee8c4ee5",
+      "gitBlobSha": "1849c0b4b5b6186961908a75e3360ff33e1a0ddc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/transport-campaign-histoire.json",
+      "crc32": "fdda080e",
+      "size": 2535510,
+      "sha256": "46bc3ab6322769f499204dd187183bf47b39b498b7f2443bf4d4f9d0fc4e08bf",
+      "gitBlobSha": "9a37a4ba2f9be66cf3be24b1c8527f4b30537166"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/transport-campaign-standard.json",
+      "crc32": "476dbaa8",
+      "size": 2518489,
+      "sha256": "3a36c1c82bf2f601db66744952ca6a5ba11096197b61d3bfefbfd49ac59772d4",
+      "gitBlobSha": "a98f23b57f9f65792880c3ce3cd7017dc8767018"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/transport-campaign-survie.json",
+      "crc32": "80de2b10",
+      "size": 2534073,
+      "sha256": "d6dc8abf418298b396fcdccc4c49ca7d4ee305df486b363b4a4e34eace9123b3",
+      "gitBlobSha": "aa49a9344ff6db7275717e36a5e181260f5a6566"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/upgrade-v09.json",
+      "crc32": "491f2454",
+      "size": 519,
+      "sha256": "ed6bfd85d54b130147518de30d18ae919a46a9a7eb237f67b6b92314d4bca95d",
+      "gitBlobSha": "2eda23a7af7665ed053253274fc750fba03bc53a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/visual-atlas-v10.json",
+      "crc32": "0351aa3e",
+      "size": 7622,
+      "sha256": "38062da14b800533a7e602c9e6b79f41ece713b5b037ff9e0ff2c3db01e39ce5",
+      "gitBlobSha": "fed6b03f27d19d18fdfc62d7e8aca5bce583555a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/visual-atlas-v10.log",
+      "crc32": "aff40df3",
+      "size": 443,
+      "sha256": "d0ab56f1897f4f183bb52aafa2d70991de29b06b3baa1302f39ab1d4017967ba",
+      "gitBlobSha": "c598d17bd72a9a069260740905aa635869c5f0fb"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/app.js",
+      "crc32": "e38cecb6",
+      "size": 79872,
+      "sha256": "e99b52759e5b2d1779e839e2c2a68060cf0f5489b32f8bce947384ce3bd57f5a",
+      "gitBlobSha": "d4c7cfdd99714f87dc4ab61836325595af33bee0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/audio-v4.js",
+      "crc32": "4d63398a",
+      "size": 8298,
+      "sha256": "dc2bb862e80c813ccff6c99c950e41e3fa3dd7f4e5c2817638a0284164251b6c",
+      "gitBlobSha": "fccdaae55884119db865f246bf4af8ffbbdf9f2c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/conduits-v8.js",
+      "crc32": "267d814b",
+      "size": 15522,
+      "sha256": "3399572aad624e2baae5d689c71c712b41dbf1973abaa2b29caa57c1b72325ba",
+      "gitBlobSha": "020894a3451a3153e5b65bd307091801cf9320ff"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/content.js",
+      "crc32": "11509a59",
+      "size": 564379,
+      "sha256": "7c59800fb8358602ffb231d0d0d7f4c1c2a11bef4bb54f3276ee3bdf0decf2a2",
+      "gitBlobSha": "6814fb25f13019211c30ce1db80d2a368ab64e69"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/controls-v9.js",
+      "crc32": "1b8de85c",
+      "size": 7364,
+      "sha256": "e60ab1da81538b3f899a89514b28854c76f81fdcc15905acc52477159a7c3787",
+      "gitBlobSha": "849afe8108ca6ea3313e7ac401c88da5d9637848"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/core.js",
+      "crc32": "210370c6",
+      "size": 38936,
+      "sha256": "6c52d16dca4a55df78299180073c4a59ab1da42a8dc6476eec5aea2b50090558",
+      "gitBlobSha": "75230b7705861c07015356009bd1bbe76c8365ea"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/expansion-v3.js",
+      "crc32": "53da6150",
+      "size": 17506,
+      "sha256": "2a062650af095b8957b6fbc1ec1c558b4828f340c2648353bbedf9d4240c971a",
+      "gitBlobSha": "2baec94b6b078cbbefa0b013fa960f9d792f8b62"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/expansion-v4.js",
+      "crc32": "1b14ca01",
+      "size": 14417,
+      "sha256": "7fd376f03f3e01e385b93fd42926ce078c54af9ba198bd3fb0420f097db39fcb",
+      "gitBlobSha": "6bd96ba540e6426c0cd315955593969fc9aaf18c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/fidelity-v10.js",
+      "crc32": "14bd2e91",
+      "size": 7524,
+      "sha256": "d530c57ed802ac989b04503dde8ea681c92f1629a8cd146c2cb0c572727f7981",
+      "gitBlobSha": "9ce845d62cc41a3006fc702ccb010ddd501ee8a8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/flight.js",
+      "crc32": "d3d10fdb",
+      "size": 5311,
+      "sha256": "240e5a154c97cab834ee522572c7ee364f096bb0cf51571262f7a55f45f12a95",
+      "gitBlobSha": "26ec66a618211684e647449cff74daf86d2472d0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/interface-v9.css",
+      "crc32": "0b485491",
+      "size": 12583,
+      "sha256": "125dff418079f627203421a248cbad577fde6329c8403fcb0ffe5afdf49b6a73",
+      "gitBlobSha": "2c104609fdf2acfd45d159b96947f2bef19dc4e5"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/navigation.js",
+      "crc32": "9a8cdf53",
+      "size": 4442,
+      "sha256": "ac9c1ca419517e407050eecb3283e54cfcf27fae20815c934325d6766df47b47",
+      "gitBlobSha": "2d9076eb345ff8ed7080b8b162fc778d99308dde"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v10.js",
+      "crc32": "bc8f889b",
+      "size": 23880,
+      "sha256": "2d1edf25a06cb07e92550da9344113ab160ecaab818a6043bee9bd872fb77c48",
+      "gitBlobSha": "f65653ed9625c9d521ceaaefdf8300249071e782"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v2.js",
+      "crc32": "1ba34383",
+      "size": 27755,
+      "sha256": "c575961c4b6916f3bbe85373504fda33a77a23a67cb48485e272c1fa105defdc",
+      "gitBlobSha": "c0dcbe5a3ab9e8ab09f50a14c958826fb8b606f1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v3.js",
+      "crc32": "c6156eb5",
+      "size": 13541,
+      "sha256": "db2e77e958d7ff911d44230387225e8acd9546569fa45d631ee19b9ad98c9062",
+      "gitBlobSha": "9c86689c9586cec6c93b1ceda646b7aca8e08b14"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v4.js",
+      "crc32": "9b4dc5f2",
+      "size": 17788,
+      "sha256": "f97ef60e1ab0e43bcb0f11fce7a6be6cff1cb80c175eb668e6829e2909e1d919",
+      "gitBlobSha": "ab9449b195a7b1f69209edcc0e163c8dc4b54286"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v5.js",
+      "crc32": "8d9e6d4f",
+      "size": 5516,
+      "sha256": "932ea52766f9f6395364048eb6266216ea0726ac570ad57b8c2f16d810cb2936",
+      "gitBlobSha": "9cfce37b631d3df7dce43c0b5821c786bd789fd1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v6.js",
+      "crc32": "7a35e866",
+      "size": 6729,
+      "sha256": "f744c787accc166a3800d33cc97ff1c15ada68580554f24ddd2a07e9677bd161",
+      "gitBlobSha": "e93929ffa718f7c0ff62e15ef1fab996750a08a3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v7.js",
+      "crc32": "97f1abb7",
+      "size": 13780,
+      "sha256": "6da4f28170786cdebcb46bce9969f58bf9f337c72d69eabf4d221f1ea00c0dd7",
+      "gitBlobSha": "bb0150f1d39b682a384d20f00edced65dbd5ddf8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render-v8.js",
+      "crc32": "44951300",
+      "size": 4412,
+      "sha256": "b4fa3c9e25ed024fee83145b0af262254237dfbd514f89cfea312faa597c8238",
+      "gitBlobSha": "34da5cd3ac948b8047014ca2ae1ca6f2cafa7999"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/render.js",
+      "crc32": "2a7ac5d6",
+      "size": 35581,
+      "sha256": "2ea8eb86b26996f5b0d424b65be2a5b70aa5aafcd817ffe862d434851c3de995",
+      "gitBlobSha": "985e8828f1b5f271c2b303789e26b19512cd35bf"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/rescue-v6.js",
+      "crc32": "80565160",
+      "size": 19096,
+      "sha256": "2c5f1b7c28ffac3065c4a15a9b003152123155290494c3c894ae7c0e2d228a04",
+      "gitBlobSha": "93dc52d82ed1fd8ec88deba18327789711e6cf4f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/sessions-v9.js",
+      "crc32": "bba912f5",
+      "size": 6202,
+      "sha256": "416fbe23ee61476a5eba038edfe854a98ab9eec4accc8889140e279a197515f4",
+      "gitBlobSha": "d42703f323744bb074201d7eb2509a28a8867e83"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/shell.html",
+      "crc32": "b3bfb2c5",
+      "size": 6359,
+      "sha256": "af42ac6282f6c97636c59ac46f18308178ef30bb4f2b9aeb83f745cd67828eae",
+      "gitBlobSha": "57e72cbb37c5b17fb71cc6c12dec21beea80cfb0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/style.css",
+      "crc32": "b92c870a",
+      "size": 16626,
+      "sha256": "b18e835fefe664a4b13cc93bb8bf3acdf408388deab5a067869eeee10cd84711",
+      "gitBlobSha": "e0f6fcf1ad0fcd71a1963caef8fb679182d2f8c2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/tactics-v5.js",
+      "crc32": "16375801",
+      "size": 16297,
+      "sha256": "60501ae78e2a577754061c7e8df2e25b1d807eff03d36619c2ed60dc6ca1e49f",
+      "gitBlobSha": "c7b3530b693d93dcf732bd620ffaa33c06ffcc26"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/src/traversal-v7.js",
+      "crc32": "9b1f4351",
+      "size": 17201,
+      "sha256": "aa25c6a7ffafc8df8f018287b09253d9c053dfee44d6950726bfd8a238b2988d",
+      "gitBlobSha": "2a1eee368cc9256a809351a78da0002c5d3ac928"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/annex-tour.mjs",
+      "crc32": "d088ca92",
+      "size": 4003,
+      "sha256": "5337ee7b9408baeae75bcb8922399ae86b50922adc6469c1d5d158235425783c",
+      "gitBlobSha": "231af683d60edef33207dd53b22b5d8c85446337"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_qa.py",
+      "crc32": "d69154bd",
+      "size": 16859,
+      "sha256": "7e1411dd416cc5bb4027d49aff1cfcbfaf43df1a4a0029ced420603adeacb0f9",
+      "gitBlobSha": "c3cd2553adf46b54fe4d1c6192278906ab0219c1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v03.py",
+      "crc32": "0c614c67",
+      "size": 13723,
+      "sha256": "b4f3549e6380dbca2a54b404fd618729f4c2e1ffef894d022773eff83cce1be9",
+      "gitBlobSha": "5a79dcdf9754891a2936ed4087c83f44f6e5c174"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v04.py",
+      "crc32": "3e5014df",
+      "size": 14361,
+      "sha256": "83a6dfc7beb8ea73278a0f20dfe73fdb12e5233cf8fc73565396c1646a286c50",
+      "gitBlobSha": "a697708e75c7dd7fbc71ff0f363d7c09a0298c1b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v05.py",
+      "crc32": "817da926",
+      "size": 16677,
+      "sha256": "9ed332c65c094d4caf5265a83dbfb7398ee793606aaa22f93e468773303668d3",
+      "gitBlobSha": "b855458b86aca645f44edf22275b187c1d12747d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v06.py",
+      "crc32": "8302deda",
+      "size": 15781,
+      "sha256": "99954c7aea7ade27613a250dce245260abcb3a43fd0a194940d88730eb8234d1",
+      "gitBlobSha": "12a2da80c422f3fb963eba783a145b120e8f68f4"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v07.py",
+      "crc32": "932cdb46",
+      "size": 18025,
+      "sha256": "8ea87b1525959ef50bf9576eed5a0b8cca990df401ca3af6cdffd6211068ed29",
+      "gitBlobSha": "da4eb4cfc1e34f3af73cd15fa50b3593e77e57e9"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v08.py",
+      "crc32": "4f29e81c",
+      "size": 17086,
+      "sha256": "39a362c1aab354685fbd415df1989b6658a4254c830e70561a6e44dcccefbba4",
+      "gitBlobSha": "caacc59b5a7f853ec6d8ec5e6fa29039a5766a0a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v09.py",
+      "crc32": "02165620",
+      "size": 30022,
+      "sha256": "214be292f9511f384768967a46bb38ace810607f90e2e8f37d6c08d78dd7383f",
+      "gitBlobSha": "ae53a28129abd6940784f1e119d3fff08ac179f3"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/browser_v10.py",
+      "crc32": "3aa47719",
+      "size": 10371,
+      "sha256": "0b966f68deafc0d21bf001e97bb7f672e5ab14ea17b783ceb95536270a3938e0",
+      "gitBlobSha": "a7cab24a946f7632b24a62a4a1b77202bfa31590"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/campaign-walk.mjs",
+      "crc32": "341b1aaa",
+      "size": 9084,
+      "sha256": "30d46b43411bd60bde406f7f912510737531852f441d1150053b1e22b9621c76",
+      "gitBlobSha": "c01502a9483e0eab730359c6bec3e445630e1b62"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/conduit-campaign.mjs",
+      "crc32": "f689687f",
+      "size": 752,
+      "sha256": "cb6085ce921c17d1e7dff9caf55bc35cf3828a9e42c06a243b6d5b5287b39329",
+      "gitBlobSha": "e8d39469d8e0fc882e0711f11f7724c398cd2593"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/controls-v09.test.mjs",
+      "crc32": "f6746850",
+      "size": 6217,
+      "sha256": "353df07d4dc5f2d2d5e82f39083c931b031022452fd1d320a7106ba18ae5e8e1",
+      "gitBlobSha": "ec25ce599255043c4d9a1065416b78b6b726a484"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/core.test.mjs",
+      "crc32": "089c411b",
+      "size": 12883,
+      "sha256": "a08f459a71e8351e63f3a1037418696d6c6256cd81763262e8ff34e8f0709e98",
+      "gitBlobSha": "31f2a04e6f4aad106a7a5fd25ef2f1406c609362"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/depth-v02.test.mjs",
+      "crc32": "a2c72f7f",
+      "size": 12952,
+      "sha256": "8924bb8baf4196042ec25ac285e0c2d979cb4488f9accee8a420b72701f5d537",
+      "gitBlobSha": "64f3e4ddc1901338b141a1536ac2837109c2f2df"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/ducts-v08.test.mjs",
+      "crc32": "9adff726",
+      "size": 16381,
+      "sha256": "e674e4e1e6d64a28e594870a7e69501d35fd4b5aa79aae449ba4b2cd6277d5fb",
+      "gitBlobSha": "506febd53ce226a3380e2143a5c0294b47cf957f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/expansion-v03.test.mjs",
+      "crc32": "4a2f7460",
+      "size": 15107,
+      "sha256": "7a937eb9d9cdcea11c55c5f195fff3cc147a3130469ac78757a445de10b0e63a",
+      "gitBlobSha": "23e6b640f652d92a309a1af36af6799bc19b4d78"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/exploration-v04.test.mjs",
+      "crc32": "fbd5e6e8",
+      "size": 18307,
+      "sha256": "c31d10b8a973fc3e3c7ca8a0306880df17cb89553ef877e0fb8a076b026819ef",
+      "gitBlobSha": "03567e9fe0d26c65abf20d98dc10dd13e05fcb55"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fidelity-baseline.mjs",
+      "crc32": "924061a4",
+      "size": 537,
+      "sha256": "96294d1094f6a04ccdbf7fb7dd6f39056b31996d57152702d17ac07692077f61",
+      "gitBlobSha": "28843413639fec5ad0e52ffe90267bb0753ee034"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fidelity-tours-v10.mjs",
+      "crc32": "5d5c0e80",
+      "size": 2363,
+      "sha256": "00607eabe92372b09ff03327c33ce653b79bb928c1aee9609db207164bddda6f",
+      "gitBlobSha": "f565df1c9d956c83b7640bee04862452cd6c6a03"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fidelity-v10.test.mjs",
+      "crc32": "5b7e827e",
+      "size": 11220,
+      "sha256": "e97a19e8107d59181ca69e33afeec259674f1acf6c962b2f96c52d1a0891de98",
+      "gitBlobSha": "5a1c25efd63238b096f8465a13c6c072573a4ed2"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v07/JOUER_AVPR.html",
+      "crc32": "4f6f24be",
+      "size": 727792,
+      "sha256": "03a5c5aae1ae489638afff2374e040b2021fea173357daede68e2a1dccb0058a",
+      "gitBlobSha": "4c70111a9473c6818da062e86fff7c7b5888ee1b"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v07/PROVENANCE.md",
+      "crc32": "9b2484c6",
+      "size": 379,
+      "sha256": "f02f976a230bbb371ea29345f3784b319821a1defa4347a4800bfe4cb120d5c2",
+      "gitBlobSha": "b22bff2cb247a7b6cbe37e85d4688c33bd4a3f9e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v07/package.json",
+      "crc32": "9dc3cc9c",
+      "size": 1148,
+      "sha256": "f27d6427ee939d50a340ebede3b972aa8433d888b1191bec3f0af6707fa075ac",
+      "gitBlobSha": "d138457923759cd126a81e4e088478c8847b7e00"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v07/tools/install.mjs",
+      "crc32": "1a22ee27",
+      "size": 7047,
+      "sha256": "9dab17876c17a3b04406e344566df44aa0051a97e07eea800087dc6f209d3238",
+      "gitBlobSha": "063db504de30485717b68a41de1886c65070367d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v08/JOUER_AVPR.html",
+      "crc32": "c34e3c94",
+      "size": 761940,
+      "sha256": "f4b11bccdafd95cf7bdaf90a84de781bb29a419d41aacae4702539c55bc5bc02",
+      "gitBlobSha": "66ad0658641de60c329b10317a5d567151ca660e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v08/tools/install.mjs",
+      "crc32": "0cabb459",
+      "size": 7047,
+      "sha256": "b1b5fbccaa87aa6ee2fca937ffc63bd02382de089c42b0552336a9a465558cdf",
+      "gitBlobSha": "e4089e9564db9a608542cbc9228e532ac86d0d14"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v09/JOUER_AVPR.html",
+      "crc32": "841c5626",
+      "size": 820755,
+      "sha256": "b5743b2021533cfad9ac2f52f647679c8ae7c7d90a15ca3c7f80e70fcae1c0cf",
+      "gitBlobSha": "448eda2bb9be5a9fe0b9ecf331c7a9d3125768c8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v09/PROVENANCE.md",
+      "crc32": "b6b50fff",
+      "size": 338,
+      "sha256": "641e240ca98835acec276f1507ae2c268d4cbe126ab3473e4b611bc7f8cc0b25",
+      "gitBlobSha": "4bd8d3936c679bbf403e951f2f52471bbc2a36b0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/fixtures/previous-v09/tools/install.mjs",
+      "crc32": "0f2a10fb",
+      "size": 7047,
+      "sha256": "f1a946590aae19238ace56f338fc746311f8932f78d4458f2df55e20945976f8",
+      "gitBlobSha": "3b51a8757d01a2ba8e52f904f3d04e7d315157d0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/hunt-tour.mjs",
+      "crc32": "b39e3a8c",
+      "size": 909,
+      "sha256": "f7a2b990f80d722f82265a5d52b790be42d462a21b4b7be7223a47520a16a37e",
+      "gitBlobSha": "9dfdf22a208198ebaf2c4333be834f29eaecf8db"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/install.test.mjs",
+      "crc32": "fb20f80a",
+      "size": 6907,
+      "sha256": "fc4cc0c56798404b91451fc237784f0423c26dc925db2d78da1a298d6dc92f8c",
+      "gitBlobSha": "33bba83f94f97d489fbb4e7ec75c396ed692f25a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/legacy-v08-v09.test.mjs",
+      "crc32": "3793e502",
+      "size": 1478,
+      "sha256": "aabc40b3dfe8bafe7f85a29125142cae7fa12438118c119bc980e09c1690df03",
+      "gitBlobSha": "1b0db5e990bbc4981e6ebf69a83217b58a848835"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/load-v09.mjs",
+      "crc32": "3a1e293f",
+      "size": 458,
+      "sha256": "f3933a56f8e38dc9ff14455f35928f9adeb705caafd279cebc3a2856861cc6f3",
+      "gitBlobSha": "2b9d74e0e15cc4c662cbe40376be79ce9343ed82"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/replay-tours-v09.mjs",
+      "crc32": "d41eed14",
+      "size": 1325,
+      "sha256": "ede130a205fbff91ff64cc95bb500f0bdb60f2c741c9eeef4a4f232576bc25ea",
+      "gitBlobSha": "422f6af2ba95ec8fcc30289034c8002f28653e6d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/report-v10.py",
+      "crc32": "3116aae3",
+      "size": 1707,
+      "sha256": "fce5e2f8be2f3c481a71ca1a784d333f44d2bb882d5986875312084714dbafcd",
+      "gitBlobSha": "6da2c6a5b21af656e6cc2169a5286b7ec0b7ce54"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/report_v08.py",
+      "crc32": "e1869646",
+      "size": 1986,
+      "sha256": "73e575ceef48a2615361fd83a270f66fca5008945bbec7ecda2fafb2b025c9dd",
+      "gitBlobSha": "c236944376f117987817880eb0203ce7bb7cf3d8"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/rescue-campaign.mjs",
+      "crc32": "6978891e",
+      "size": 741,
+      "sha256": "fa88b1d5dfbeb238d517ae49ed8cc4f5003101ee9e5bc6af0fe0f6b165b77d55",
+      "gitBlobSha": "b8bea2bf26bb27853012cc316b851604d3d96647"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/rescue-v06.test.mjs",
+      "crc32": "282d5521",
+      "size": 16630,
+      "sha256": "deaeb7d5a6a1518e495ae983405da6c46e21dc4dc1948293f01e7d521c50ae93",
+      "gitBlobSha": "9374ee8a171b9b3140d143d7063d88ed58cc448c"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/run-browser.py",
+      "crc32": "9e44bb3f",
+      "size": 1113,
+      "sha256": "0bd88824601be892469fd638b424c2a32441d52eb3d90b3a8d9117784c284e8b",
+      "gitBlobSha": "e74354f3f7024615f5a37be6ff06e6f6bc120cd0"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/run-interface-v09.py",
+      "crc32": "b5a90b3f",
+      "size": 468,
+      "sha256": "a745f5e7e902e93dce0de0ab173e73f58e93ed9e1bc95907fbf3c66d977e3eb2",
+      "gitBlobSha": "c0ba1e44ae8e6d33c5658215d7382015555a3d9d"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/run-matrix-v10.py",
+      "crc32": "12af0a25",
+      "size": 2074,
+      "sha256": "912d241f1ff0efd26dd9cd2ee8573c74fe6c66d92e5020457a0c74c653be15d1",
+      "gitBlobSha": "7e31be620641e2d2178bef6cad45e299e8b0fdcc"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/sessions-v09.test.mjs",
+      "crc32": "f69c0866",
+      "size": 6993,
+      "sha256": "3c3f3a79a46d99424cce8f256243bd1abe022a4b27f3efa3b07eeee0fc69662f",
+      "gitBlobSha": "b1d02a51d504b95b2af372d774ae7132fdb92404"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/tactics-v05.test.mjs",
+      "crc32": "a9cd19e0",
+      "size": 19463,
+      "sha256": "dd187f4df171b9d9864cce2e3b0e63331ea0084c75087a8175a907cd93ea4c2b",
+      "gitBlobSha": "9d93f9ae2058e4f96327408f30c7bb0dfc70d992"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/transport-campaign.mjs",
+      "crc32": "1519a548",
+      "size": 864,
+      "sha256": "242a3d3488dab290ac2150a12f56bfe1b1c86595a46d86b2a20861862d49e001",
+      "gitBlobSha": "e335d33afd58ac3cc6f5823ecb7f4d05e50101ab"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/traversal-v07.test.mjs",
+      "crc32": "127b2425",
+      "size": 14493,
+      "sha256": "7ef114592a3cf263f9f68047dfb75778ebf9ab755afdc6cf2d42e2207896d25c",
+      "gitBlobSha": "43cab7bd406f7c9490d789e3bb3fdf8208aa2335"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/upgrade-from-previous.mjs",
+      "crc32": "5d13daab",
+      "size": 2582,
+      "sha256": "fd8874d38b619cc7569eb28c3fe09dbf0f8fe038709fb47f9df0a9c8dc3f0e7a",
+      "gitBlobSha": "357e597d221d58ef0f1c6b70d7d157512f12f25a"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tests/visual-atlas-v10.py",
+      "crc32": "72bac7c7",
+      "size": 2478,
+      "sha256": "2af461ee28b2ec486673e4718c905d09189e07f66d5eee0c32ffa1e02fedacea",
+      "gitBlobSha": "66ea366f9f92b48ecc842ec14d8d63bb2ffa52e1"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/audit-fidelity.mjs",
+      "crc32": "651a8ce9",
+      "size": 3082,
+      "sha256": "caa0c34670fa1576496edde6e12e665b60c1b44b105ea52a98ebf909278edf5b",
+      "gitBlobSha": "e16e0345d07c7f16a69055a73c9f0a011781d654"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/build.mjs",
+      "crc32": "ef31915b",
+      "size": 2431,
+      "sha256": "250bf064646418d8c8e517d3248050673ab0b3ba26708b019fd4f09fa11de778",
+      "gitBlobSha": "06af9b9b3cf325508da657f6f19171dc2706bc89"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/install.mjs",
+      "crc32": "982e5921",
+      "size": 7060,
+      "sha256": "0f1594f14239ee283d1d45c7860a37c9d2bfadcb844ee6e6161ee04239d53634",
+      "gitBlobSha": "0a9b9e3bad4e0362e598a833a660d73c289ab756"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/serve.mjs",
+      "crc32": "d2c4c26e",
+      "size": 950,
+      "sha256": "a490b9fe1cfb1df022b59e0fd24b9a26a0d4ccf38d44d0a4a14090fb17d26e65",
+      "gitBlobSha": "9503fb8551d82e6251a41cb4d324878b0a102285"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/sync-content.mjs",
+      "crc32": "05853283",
+      "size": 413,
+      "sha256": "5402e5db119f71305c7e9c219aacf57ff0731af3f310c961493a6be731480912",
+      "gitBlobSha": "de5a900f9066510008cff8e656c4e918d3370c35"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/upgrade-fidelity-v10.py",
+      "crc32": "eb3bd76d",
+      "size": 28731,
+      "sha256": "55d802f7aa46ed3d218bfa3f78ba4c78ac1732da9b015091e6e7bf6ceb4969da",
+      "gitBlobSha": "b315b17399fcd1d9dd564487704115646edb445e"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/verify-integrity.mjs",
+      "crc32": "6e331486",
+      "size": 862,
+      "sha256": "73241e9c3a715531effe7f93ee2214db87759073907f09a9e37bd80c4704a6c9",
+      "gitBlobSha": "00f0d461a65f736d36bbb6a0fb15bf866ce5605f"
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/tools/write-docs-v10.py",
+      "crc32": "1c58c4b7",
+      "size": 37731,
+      "sha256": "78c41179c25729263eea9c8e3a113c44087c9bbaf1e240d9716d7c627d73a47f",
+      "gitBlobSha": "27ca1642db6422cde0d06f45601ee4c2eefc5a5f"
+    }
+  ]
+}

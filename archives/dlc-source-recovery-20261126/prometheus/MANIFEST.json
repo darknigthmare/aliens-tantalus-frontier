@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+  "archive": {
+    "size": 14678996,
+    "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+    "gitBlobSha": "23105bc3753dcd746305a253f7de81595e93262b"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/prometheus/parts/ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-000",
+      "size": 10485760,
+      "sha256": "bc7e9b94ae4bb2473153b686f16cc3525d1088f60c1b847fa7d7233f6ce5058f",
+      "gitBlobSha": "8227bebef9a29ba35a26cf96df4d0287b96be870"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/prometheus/parts/ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-001",
+      "size": 4193236,
+      "sha256": "96b9844af6a686ff87fcf4b2e079acc72fad5df4db586f9e1e9ef79e62eb7837",
+      "gitBlobSha": "1d482e3bcaf4cd73563eb5ef4f69ef972117d9ca"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 298,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/README_V12.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/src/dlc-prometheus/content.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/LICENSE_NOTICE.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/CODEX_PROMETHEUS_V12.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v8/README_V8.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v4/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v4/CODEX_PROMETHEUS_V4.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v5/README_V5.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/development/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/development/v6/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v1/content.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v1/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v3/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v3/CODEX_PROMETHEUS_V3.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v2/README.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/history/v2/CODEX_PROMETHEUS_V2.md",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/RULES_V12.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/PORTAL_CLEARANCE_CHANGES.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/REFERENCE_MATRIX_V11.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/RULES_V11.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/QA_SUMMARY_V12.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/rules-v10.json",
+    "archives/dlc-source-recovery-20261126/prometheus/documents/PROMETHEUS_DLC_V12/docs/QA_SUMMARY_V11.json"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

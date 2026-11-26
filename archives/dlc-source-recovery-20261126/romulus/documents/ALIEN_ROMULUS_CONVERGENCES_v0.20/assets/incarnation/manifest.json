@@ -1,0 +1,678 @@
+{
+  "version": 2,
+  "style": "illustration originale en pièces articulées ; non photoréaliste",
+  "parts": [
+    {
+      "id": "Rain.head",
+      "png": "assets/incarnation/rain_head.png",
+      "source": "assets/incarnation/rain_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.torso",
+      "png": "assets/incarnation/rain_torso.png",
+      "source": "assets/incarnation/rain_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.upperarm",
+      "png": "assets/incarnation/rain_upperarm.png",
+      "source": "assets/incarnation/rain_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.forearm",
+      "png": "assets/incarnation/rain_forearm.png",
+      "source": "assets/incarnation/rain_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.thigh",
+      "png": "assets/incarnation/rain_thigh.png",
+      "source": "assets/incarnation/rain_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.shin",
+      "png": "assets/incarnation/rain_shin.png",
+      "source": "assets/incarnation/rain_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.boot",
+      "png": "assets/incarnation/rain_boot.png",
+      "source": "assets/incarnation/rain_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Rain.hand",
+      "png": "assets/incarnation/rain_hand.png",
+      "source": "assets/incarnation/rain_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.head",
+      "png": "assets/incarnation/andy_head.png",
+      "source": "assets/incarnation/andy_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.torso",
+      "png": "assets/incarnation/andy_torso.png",
+      "source": "assets/incarnation/andy_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.upperarm",
+      "png": "assets/incarnation/andy_upperarm.png",
+      "source": "assets/incarnation/andy_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.forearm",
+      "png": "assets/incarnation/andy_forearm.png",
+      "source": "assets/incarnation/andy_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.thigh",
+      "png": "assets/incarnation/andy_thigh.png",
+      "source": "assets/incarnation/andy_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.shin",
+      "png": "assets/incarnation/andy_shin.png",
+      "source": "assets/incarnation/andy_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.boot",
+      "png": "assets/incarnation/andy_boot.png",
+      "source": "assets/incarnation/andy_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Andy.hand",
+      "png": "assets/incarnation/andy_hand.png",
+      "source": "assets/incarnation/andy_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.head",
+      "png": "assets/incarnation/tyler_head.png",
+      "source": "assets/incarnation/tyler_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.torso",
+      "png": "assets/incarnation/tyler_torso.png",
+      "source": "assets/incarnation/tyler_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.upperarm",
+      "png": "assets/incarnation/tyler_upperarm.png",
+      "source": "assets/incarnation/tyler_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.forearm",
+      "png": "assets/incarnation/tyler_forearm.png",
+      "source": "assets/incarnation/tyler_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.thigh",
+      "png": "assets/incarnation/tyler_thigh.png",
+      "source": "assets/incarnation/tyler_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.shin",
+      "png": "assets/incarnation/tyler_shin.png",
+      "source": "assets/incarnation/tyler_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.boot",
+      "png": "assets/incarnation/tyler_boot.png",
+      "source": "assets/incarnation/tyler_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Tyler.hand",
+      "png": "assets/incarnation/tyler_hand.png",
+      "source": "assets/incarnation/tyler_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.head",
+      "png": "assets/incarnation/kay_head.png",
+      "source": "assets/incarnation/kay_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.torso",
+      "png": "assets/incarnation/kay_torso.png",
+      "source": "assets/incarnation/kay_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.upperarm",
+      "png": "assets/incarnation/kay_upperarm.png",
+      "source": "assets/incarnation/kay_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.forearm",
+      "png": "assets/incarnation/kay_forearm.png",
+      "source": "assets/incarnation/kay_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.thigh",
+      "png": "assets/incarnation/kay_thigh.png",
+      "source": "assets/incarnation/kay_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.shin",
+      "png": "assets/incarnation/kay_shin.png",
+      "source": "assets/incarnation/kay_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.boot",
+      "png": "assets/incarnation/kay_boot.png",
+      "source": "assets/incarnation/kay_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Kay.hand",
+      "png": "assets/incarnation/kay_hand.png",
+      "source": "assets/incarnation/kay_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.head",
+      "png": "assets/incarnation/bjorn_head.png",
+      "source": "assets/incarnation/bjorn_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.torso",
+      "png": "assets/incarnation/bjorn_torso.png",
+      "source": "assets/incarnation/bjorn_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.upperarm",
+      "png": "assets/incarnation/bjorn_upperarm.png",
+      "source": "assets/incarnation/bjorn_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.forearm",
+      "png": "assets/incarnation/bjorn_forearm.png",
+      "source": "assets/incarnation/bjorn_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.thigh",
+      "png": "assets/incarnation/bjorn_thigh.png",
+      "source": "assets/incarnation/bjorn_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.shin",
+      "png": "assets/incarnation/bjorn_shin.png",
+      "source": "assets/incarnation/bjorn_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.boot",
+      "png": "assets/incarnation/bjorn_boot.png",
+      "source": "assets/incarnation/bjorn_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Bjorn.hand",
+      "png": "assets/incarnation/bjorn_hand.png",
+      "source": "assets/incarnation/bjorn_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.head",
+      "png": "assets/incarnation/navarro_head.png",
+      "source": "assets/incarnation/navarro_head.svg",
+      "logicalSize": [
+        56,
+        60
+      ],
+      "rasterSize": [
+        224,
+        240
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.torso",
+      "png": "assets/incarnation/navarro_torso.png",
+      "source": "assets/incarnation/navarro_torso.svg",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "rasterSize": [
+        256,
+        384
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.upperarm",
+      "png": "assets/incarnation/navarro_upperarm.png",
+      "source": "assets/incarnation/navarro_upperarm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.forearm",
+      "png": "assets/incarnation/navarro_forearm.png",
+      "source": "assets/incarnation/navarro_forearm.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.thigh",
+      "png": "assets/incarnation/navarro_thigh.png",
+      "source": "assets/incarnation/navarro_thigh.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.shin",
+      "png": "assets/incarnation/navarro_shin.png",
+      "source": "assets/incarnation/navarro_shin.svg",
+      "logicalSize": [
+        48,
+        80
+      ],
+      "rasterSize": [
+        192,
+        320
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.boot",
+      "png": "assets/incarnation/navarro_boot.png",
+      "source": "assets/incarnation/navarro_boot.svg",
+      "logicalSize": [
+        56,
+        28
+      ],
+      "rasterSize": [
+        224,
+        112
+      ],
+      "status": "original stylized articulated part"
+    },
+    {
+      "id": "Navarro.hand",
+      "png": "assets/incarnation/navarro_hand.png",
+      "source": "assets/incarnation/navarro_hand.svg",
+      "logicalSize": [
+        32,
+        40
+      ],
+      "rasterSize": [
+        128,
+        160
+      ],
+      "status": "original stylized articulated part"
+    }
+  ]
+}

@@ -1,0 +1,1974 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_0.svg",
+      "bytes": 4216
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_1.svg",
+      "bytes": 4565
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_2.svg",
+      "bytes": 4215
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_3.svg",
+      "bytes": 4565
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_4.svg",
+      "bytes": 4216
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_5.svg",
+      "bytes": 4568
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_6.svg",
+      "bytes": 4218
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/alien_walk_7.svg",
+      "bytes": 4568
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_0.svg",
+      "bytes": 2956
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_1.svg",
+      "bytes": 3223
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_2.svg",
+      "bytes": 2951
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_3.svg",
+      "bytes": 3223
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_4.svg",
+      "bytes": 2956
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_5.svg",
+      "bytes": 3229
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_6.svg",
+      "bytes": 2958
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_crouch_7.svg",
+      "bytes": 3227
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_0.svg",
+      "bytes": 2937
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_1.svg",
+      "bytes": 3204
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_2.svg",
+      "bytes": 2932
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_3.svg",
+      "bytes": 3204
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_4.svg",
+      "bytes": 2937
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_5.svg",
+      "bytes": 3210
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_6.svg",
+      "bytes": 2939
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/amanda_walk_7.svg",
+      "bytes": 3208
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_0.svg",
+      "bytes": 3535
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_1.svg",
+      "bytes": 3802
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_2.svg",
+      "bytes": 3530
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_3.svg",
+      "bytes": 3802
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_4.svg",
+      "bytes": 3535
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_5.svg",
+      "bytes": 3808
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_6.svg",
+      "bytes": 3537
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_crouch_7.svg",
+      "bytes": 3806
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_portrait.svg",
+      "bytes": 1476
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_0.svg",
+      "bytes": 3513
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_1.svg",
+      "bytes": 3780
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_2.svg",
+      "bytes": 3508
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_3.svg",
+      "bytes": 3780
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_4.svg",
+      "bytes": 3513
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_5.svg",
+      "bytes": 3786
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_6.svg",
+      "bytes": 3515
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/elias_walk_7.svg",
+      "bytes": 3784
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_0.svg",
+      "bytes": 3870
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_1.svg",
+      "bytes": 4137
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_2.svg",
+      "bytes": 3865
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_3.svg",
+      "bytes": 4137
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_4.svg",
+      "bytes": 3870
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_5.svg",
+      "bytes": 4143
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_6.svg",
+      "bytes": 3872
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_crouch_7.svg",
+      "bytes": 4141
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_0.svg",
+      "bytes": 3846
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_1.svg",
+      "bytes": 4113
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_2.svg",
+      "bytes": 3841
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_3.svg",
+      "bytes": 4113
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_4.svg",
+      "bytes": 3846
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_5.svg",
+      "bytes": 4119
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_6.svg",
+      "bytes": 3848
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/eva_walk_7.svg",
+      "bytes": 4117
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/facehugger.svg",
+      "bytes": 1232
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_0.svg",
+      "bytes": 2809
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_1.svg",
+      "bytes": 3076
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_2.svg",
+      "bytes": 2804
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_3.svg",
+      "bytes": 3076
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_4.svg",
+      "bytes": 2809
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_5.svg",
+      "bytes": 3082
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_6.svg",
+      "bytes": 2811
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/human_walk_7.svg",
+      "bytes": 3080
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_0.svg",
+      "bytes": 2665
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_1.svg",
+      "bytes": 2932
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_2.svg",
+      "bytes": 2660
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_3.svg",
+      "bytes": 2932
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_4.svg",
+      "bytes": 2665
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_5.svg",
+      "bytes": 2938
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_6.svg",
+      "bytes": 2667
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/joe_walk_7.svg",
+      "bytes": 2936
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_0.svg",
+      "bytes": 2809
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_1.svg",
+      "bytes": 3076
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_2.svg",
+      "bytes": 2804
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_3.svg",
+      "bytes": 3076
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_4.svg",
+      "bytes": 2809
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_5.svg",
+      "bytes": 3082
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_6.svg",
+      "bytes": 2811
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/marlow_walk_7.svg",
+      "bytes": 3080
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_0.svg",
+      "bytes": 3496
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_1.svg",
+      "bytes": 3763
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_2.svg",
+      "bytes": 3491
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_3.svg",
+      "bytes": 3763
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_4.svg",
+      "bytes": 3496
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_5.svg",
+      "bytes": 3769
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_6.svg",
+      "bytes": 3498
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_crouch_7.svg",
+      "bytes": 3767
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_portrait.svg",
+      "bytes": 1565
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_0.svg",
+      "bytes": 3477
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_1.svg",
+      "bytes": 3744
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_2.svg",
+      "bytes": 3472
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_3.svg",
+      "bytes": 3744
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_4.svg",
+      "bytes": 3477
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_5.svg",
+      "bytes": 3750
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_6.svg",
+      "bytes": 3479
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/characters/nora_walk_7.svg",
+      "bytes": 3748
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/androidrack.svg",
+      "bytes": 1597
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/antenna.svg",
+      "bytes": 1405
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/barrier.svg",
+      "bytes": 1866
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bars.svg",
+      "bytes": 1657
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bed.svg",
+      "bytes": 2132
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/bench.svg",
+      "bytes": 1875
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cabinet.svg",
+      "bytes": 2431
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cart.svg",
+      "bytes": 1595
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/case.svg",
+      "bytes": 1902
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/chair.svg",
+      "bytes": 1350
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/clinic_console.svg",
+      "bytes": 867
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/container.svg",
+      "bytes": 1892
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/core.svg",
+      "bytes": 1852
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/counter.svg",
+      "bytes": 1522
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/crate.svg",
+      "bytes": 1902
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/cryopod.svg",
+      "bytes": 2123
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/desk.svg",
+      "bytes": 2200
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/egg.svg",
+      "bytes": 1393
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/engineering_console.svg",
+      "bytes": 824
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/engineering_pack.svg",
+      "bytes": 1034
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/fan.svg",
+      "bytes": 2153
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/forklift.svg",
+      "bytes": 1741
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/gantry.svg",
+      "bytes": 1140
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/gurney.svg",
+      "bytes": 2132
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/iv.svg",
+      "bytes": 1413
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/kiosk.svg",
+      "bytes": 2292
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/light.svg",
+      "bytes": 1382
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/locker.svg",
+      "bytes": 2516
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/medical_pack.svg",
+      "bytes": 1034
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pilot.svg",
+      "bytes": 2478
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pipe.svg",
+      "bytes": 1700
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/planter.svg",
+      "bytes": 1725
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/poster.svg",
+      "bytes": 1460
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/pump.svg",
+      "bytes": 2118
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/radio.svg",
+      "bytes": 1869
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/relay.svg",
+      "bytes": 2190
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/resin.svg",
+      "bytes": 2261
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/rib.svg",
+      "bytes": 2261
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/rock.svg",
+      "bytes": 1269
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/save.svg",
+      "bytes": 1662
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/server.svg",
+      "bytes": 3171
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/shelf.svg",
+      "bytes": 4634
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/spool.svg",
+      "bytes": 2198
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/suit.svg",
+      "bytes": 1522
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/table.svg",
+      "bytes": 1522
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/tank.svg",
+      "bytes": 1855
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/terminal.svg",
+      "bytes": 2200
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/trolley.svg",
+      "bytes": 1595
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/turbine.svg",
+      "bytes": 2118
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/vending.svg",
+      "bytes": 4634
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/water.svg",
+      "bytes": 5377
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/props/workbench.svg",
+      "bytes": 2566
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/emp.svg",
+      "bytes": 1323
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/flare.svg",
+      "bytes": 1176
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/medkit.svg",
+      "bytes": 1283
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/assets/ui/noise.svg",
+      "bytes": 1432
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_CLASSIC.jpg",
+      "bytes": 93960
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_L.jpg",
+      "bytes": 97194
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/00_t_cryo_R.jpg",
+      "bytes": 95702
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_CLASSIC.jpg",
+      "bytes": 89612
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_L.jpg",
+      "bytes": 92029
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/01_t_bridge_R.jpg",
+      "bytes": 90266
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_CLASSIC.jpg",
+      "bytes": 84457
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_L.jpg",
+      "bytes": 85291
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/02_t_sas_R.jpg",
+      "bytes": 83994
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_CLASSIC.jpg",
+      "bytes": 85396
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_L.jpg",
+      "bytes": 86460
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/03_s_airlock_R.jpg",
+      "bytes": 85177
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_CLASSIC.jpg",
+      "bytes": 93912
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_L.jpg",
+      "bytes": 94761
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/04_s_terminal_R.jpg",
+      "bytes": 94943
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_CLASSIC.jpg",
+      "bytes": 88195
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_L.jpg",
+      "bytes": 90735
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/05_s_shop_R.jpg",
+      "bytes": 90375
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_CLASSIC.jpg",
+      "bytes": 90086
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_L.jpg",
+      "bytes": 93588
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/06_s_baggage_R.jpg",
+      "bytes": 91373
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_CLASSIC.jpg",
+      "bytes": 89272
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_L.jpg",
+      "bytes": 90687
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/07_s_axel_R.jpg",
+      "bytes": 89157
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_CLASSIC.jpg",
+      "bytes": 94322
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_L.jpg",
+      "bytes": 95322
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/08_s_transit_R.jpg",
+      "bytes": 94261
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_CLASSIC.jpg",
+      "bytes": 92145
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_L.jpg",
+      "bytes": 92742
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/09_y_lobby_R.jpg",
+      "bytes": 93688
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_CLASSIC.jpg",
+      "bytes": 84445
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_L.jpg",
+      "bytes": 87365
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/10_y_archive_R.jpg",
+      "bytes": 85486
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_CLASSIC.jpg",
+      "bytes": 87256
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_L.jpg",
+      "bytes": 89473
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/11_y_workshop_R.jpg",
+      "bytes": 87114
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_CLASSIC.jpg",
+      "bytes": 79402
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_L.jpg",
+      "bytes": 79070
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/12_y_duct_R.jpg",
+      "bytes": 79023
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_CLASSIC.jpg",
+      "bytes": 84450
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_L.jpg",
+      "bytes": 87682
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/13_c_reception_R.jpg",
+      "bytes": 86012
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_CLASSIC.jpg",
+      "bytes": 83871
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_L.jpg",
+      "bytes": 89624
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/14_c_control_R.jpg",
+      "bytes": 85613
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_CLASSIC.jpg",
+      "bytes": 99174
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_L.jpg",
+      "bytes": 96783
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/15_c_server_R.jpg",
+      "bytes": 96573
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_CLASSIC.jpg",
+      "bytes": 89229
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_L.jpg",
+      "bytes": 92648
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/16_m_reception_R.jpg",
+      "bytes": 90701
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_CLASSIC.jpg",
+      "bytes": 88513
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_L.jpg",
+      "bytes": 88370
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/17_m_corridor_R.jpg",
+      "bytes": 85679
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_CLASSIC.jpg",
+      "bytes": 85863
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_L.jpg",
+      "bytes": 88967
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/18_m_morley_R.jpg",
+      "bytes": 87522
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_CLASSIC.jpg",
+      "bytes": 91401
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_L.jpg",
+      "bytes": 94194
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/19_m_pharmacy_R.jpg",
+      "bytes": 92747
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_CLASSIC.jpg",
+      "bytes": 89050
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_L.jpg",
+      "bytes": 92715
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/20_m_coolant_R.jpg",
+      "bytes": 90664
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_CLASSIC.jpg",
+      "bytes": 93963
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_L.jpg",
+      "bytes": 92696
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/21_d_warehouse_R.jpg",
+      "bytes": 93036
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_CLASSIC.jpg",
+      "bytes": 95658
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_L.jpg",
+      "bytes": 93365
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/22_d_lift_R.jpg",
+      "bytes": 91898
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_CLASSIC.jpg",
+      "bytes": 85313
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_L.jpg",
+      "bytes": 88883
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/23_w_bureau_R.jpg",
+      "bytes": 86523
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_CLASSIC.jpg",
+      "bytes": 85893
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_L.jpg",
+      "bytes": 87415
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/24_w_cells_R.jpg",
+      "bytes": 85803
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_CLASSIC.jpg",
+      "bytes": 54479
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_L.jpg",
+      "bytes": 51399
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/25_f_surface_R.jpg",
+      "bytes": 52752
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_CLASSIC.jpg",
+      "bytes": 59582
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_L.jpg",
+      "bytes": 61516
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/26_f_derelict_R.jpg",
+      "bytes": 61194
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_CLASSIC.jpg",
+      "bytes": 89508
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_L.jpg",
+      "bytes": 93140
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/27_g_control_R.jpg",
+      "bytes": 90524
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_CLASSIC.jpg",
+      "bytes": 87853
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_L.jpg",
+      "bytes": 92132
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/28_g_lab_R.jpg",
+      "bytes": 89593
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_CLASSIC.jpg",
+      "bytes": 81897
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_L.jpg",
+      "bytes": 84318
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/29_g_airlock_R.jpg",
+      "bytes": 83482
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_CLASSIC.jpg",
+      "bytes": 98118
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_L.jpg",
+      "bytes": 96426
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/30_a_access_R.jpg",
+      "bytes": 96507
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_CLASSIC.jpg",
+      "bytes": 90510
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_L.jpg",
+      "bytes": 94293
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/31_a_labo_R.jpg",
+      "bytes": 90870
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_CLASSIC.jpg",
+      "bytes": 94921
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_L.jpg",
+      "bytes": 98376
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/32_a_samuels_R.jpg",
+      "bytes": 97028
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_CLASSIC.jpg",
+      "bytes": 92414
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_L.jpg",
+      "bytes": 95016
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/33_a_core_R.jpg",
+      "bytes": 92862
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_CLASSIC.jpg",
+      "bytes": 89684
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_L.jpg",
+      "bytes": 92037
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/34_r_entry_R.jpg",
+      "bytes": 89183
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_CLASSIC.jpg",
+      "bytes": 89041
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_L.jpg",
+      "bytes": 92317
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/35_r_alpha_R.jpg",
+      "bytes": 91162
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_CLASSIC.jpg",
+      "bytes": 80692
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_L.jpg",
+      "bytes": 86077
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/36_r_hive_R.jpg",
+      "bytes": 83340
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_CLASSIC.jpg",
+      "bytes": 87920
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_L.jpg",
+      "bytes": 91369
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/37_r_beta_R.jpg",
+      "bytes": 88379
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_CLASSIC.jpg",
+      "bytes": 90893
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_L.jpg",
+      "bytes": 89556
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/38_n_dock_R.jpg",
+      "bytes": 89487
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_CLASSIC.jpg",
+      "bytes": 93060
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_L.jpg",
+      "bytes": 94953
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/39_n_bridge_R.jpg",
+      "bytes": 94228
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_CLASSIC.jpg",
+      "bytes": 91205
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_L.jpg",
+      "bytes": 96807
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/40_n_engine_R.jpg",
+      "bytes": 93659
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_CLASSIC.jpg",
+      "bytes": 87547
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_L.jpg",
+      "bytes": 88258
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/41_e_sas_R.jpg",
+      "bytes": 88217
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_CLASSIC.jpg",
+      "bytes": 86450
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_L.jpg",
+      "bytes": 86698
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/42_e_antenna_R.jpg",
+      "bytes": 80753
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_CLASSIC.jpg",
+      "bytes": 77947
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_L.jpg",
+      "bytes": 77955
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/43_e_clamps_R.jpg",
+      "bytes": 77970
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_CLASSIC.jpg",
+      "bytes": 79805
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_L.jpg",
+      "bytes": 83466
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/44_t_return_R.jpg",
+      "bytes": 80408
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_CLASSIC.jpg",
+      "bytes": 91356
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_L.jpg",
+      "bytes": 94799
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/45_m_staff_R.jpg",
+      "bytes": 93365
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_CLASSIC.jpg",
+      "bytes": 90897
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_L.jpg",
+      "bytes": 91390
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/46_m_sterile_R.jpg",
+      "bytes": 91487
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_CLASSIC.jpg",
+      "bytes": 94777
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_L.jpg",
+      "bytes": 96697
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/47_d_relay_R.jpg",
+      "bytes": 95986
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_CLASSIC.jpg",
+      "bytes": 93097
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_L.jpg",
+      "bytes": 92602
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/48_d_gantry_R.jpg",
+      "bytes": 92317
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_CLASSIC.jpg",
+      "bytes": 91308
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_L.jpg",
+      "bytes": 93844
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/49_a_service_R.jpg",
+      "bytes": 93450
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_CLASSIC.jpg",
+      "bytes": 86488
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_L.jpg",
+      "bytes": 89897
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/50_r_observation_R.jpg",
+      "bytes": 89092
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_CLASSIC.jpg",
+      "bytes": 90694
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_L.jpg",
+      "bytes": 92197
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/51_g_observation_R.jpg",
+      "bytes": 91383
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_CLASSIC.jpg",
+      "bytes": 96413
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_L.jpg",
+      "bytes": 94098
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/52_g_plenum_R.jpg",
+      "bytes": 93641
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_CLASSIC.jpg",
+      "bytes": 88885
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_L.jpg",
+      "bytes": 88949
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/53_g_hull_R.jpg",
+      "bytes": 84687
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_CLASSIC.jpg",
+      "bytes": 96193
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_L.jpg",
+      "bytes": 98800
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/54_n_coolant_R.jpg",
+      "bytes": 98863
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_CLASSIC.jpg",
+      "bytes": 93208
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_L.jpg",
+      "bytes": 92184
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/55_n_service_R.jpg",
+      "bytes": 91398
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_CLASSIC.jpg",
+      "bytes": 89504
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_L.jpg",
+      "bytes": 93220
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/56_m_records_R.jpg",
+      "bytes": 92702
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_CLASSIC.jpg",
+      "bytes": 88902
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_L.jpg",
+      "bytes": 91743
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/57_m_isolation_R.jpg",
+      "bytes": 93140
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_CLASSIC.jpg",
+      "bytes": 88626
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_L.jpg",
+      "bytes": 90977
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/58_e_lockers_R.jpg",
+      "bytes": 90237
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_CLASSIC.jpg",
+      "bytes": 88335
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_L.jpg",
+      "bytes": 89886
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/59_e_catwalk_R.jpg",
+      "bytes": 87623
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_CLASSIC.jpg",
+      "bytes": 92005
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_L.jpg",
+      "bytes": 95161
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/60_m_triage_R.jpg",
+      "bytes": 95146
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_CLASSIC.jpg",
+      "bytes": 94548
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_L.jpg",
+      "bytes": 98168
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/61_m_refuge_R.jpg",
+      "bytes": 97518
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_CLASSIC.jpg",
+      "bytes": 91917
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_L.jpg",
+      "bytes": 95041
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/62_d_changing_R.jpg",
+      "bytes": 94884
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_CLASSIC.jpg",
+      "bytes": 94228
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_L.jpg",
+      "bytes": 97525
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/63_d_refuge_R.jpg",
+      "bytes": 97025
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_CLASSIC.jpg",
+      "bytes": 93393
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_L.jpg",
+      "bytes": 92481
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/64_sc_station_R.jpg",
+      "bytes": 92025
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_CLASSIC.jpg",
+      "bytes": 88427
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_L.jpg",
+      "bytes": 88106
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/65_h_galleria_low_R.jpg",
+      "bytes": 86906
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_CLASSIC.jpg",
+      "bytes": 94268
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_L.jpg",
+      "bytes": 93901
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/66_h_galleria_high_R.jpg",
+      "bytes": 93075
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_CLASSIC.jpg",
+      "bytes": 94285
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_L.jpg",
+      "bytes": 93378
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/67_h_habitation_R.jpg",
+      "bytes": 92792
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_CLASSIC.jpg",
+      "bytes": 93698
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_L.jpg",
+      "bytes": 93143
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/68_h_upper_R.jpg",
+      "bytes": 93180
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_CLASSIC.jpg",
+      "bytes": 92170
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_L.jpg",
+      "bytes": 90867
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/69_m_morgue_R.jpg",
+      "bytes": 90936
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_CLASSIC.jpg",
+      "bytes": 91287
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_L.jpg",
+      "bytes": 90960
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/70_d_fluid_R.jpg",
+      "bytes": 89334
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_CLASSIC.jpg",
+      "bytes": 92370
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_L.jpg",
+      "bytes": 91118
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/71_d_orientation_R.jpg",
+      "bytes": 90365
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_CLASSIC.jpg",
+      "bytes": 90462
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_L.jpg",
+      "bytes": 90327
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/72_r_maintenance_R.jpg",
+      "bytes": 88246
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_CLASSIC.jpg",
+      "bytes": 90866
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_L.jpg",
+      "bytes": 90157
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/73_g_hazard_R.jpg",
+      "bytes": 89498
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_CLASSIC.jpg",
+      "bytes": 91110
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_L.jpg",
+      "bytes": 90968
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/74_t_galley_R.jpg",
+      "bytes": 90317
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_CLASSIC.jpg",
+      "bytes": 59691
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_L.jpg",
+      "bytes": 63413
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/architecture/75_f_pilot_R.jpg",
+      "bytes": 63556
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/audit-document-preview.png",
+      "bytes": 348547
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/01_menu.png",
+      "bytes": 802619
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/02_debut.png",
+      "bytes": 647540
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/03_carte.png",
+      "bytes": 221331
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/04_equipement.png",
+      "bytes": 310890
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/05_codex.png",
+      "bytes": 330437
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/06_terminal.png",
+      "bytes": 560987
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/07_san_cristobal.png",
+      "bytes": 516862
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/08_gemini.png",
+      "bytes": 512953
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/09_samuels.png",
+      "bytes": 537884
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/10_nid.png",
+      "bytes": 579921
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/11_anesidora.png",
+      "bytes": 606840
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/12_eva.png",
+      "bytes": 518794
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/13_traque.png",
+      "bytes": 540237
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/14_flamme.png",
+      "bytes": 543761
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/15_epilogue.png",
+      "bytes": 222330
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/16_garde.png",
+      "bytes": 525880
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/17_sterilisation.png",
+      "bytes": 516111
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/18_relais.png",
+      "bytes": 508258
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/19_passerelle.png",
+      "bytes": 505226
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/20_diagnostic.png",
+      "bytes": 527948
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/21_observation.png",
+      "bytes": 518787
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/22_etages.png",
+      "bytes": 228962
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/23_obscurite.png",
+      "bytes": 366342
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/24_derivation.png",
+      "bytes": 528768
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/25_verrou.png",
+      "bytes": 532731
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/26_galerie.png",
+      "bytes": 502948
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/27_plenum.png",
+      "bytes": 504681
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/28_refroidissement.png",
+      "bytes": 546109
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/29_service.png",
+      "bytes": 524808
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/30_coque.png",
+      "bytes": 547435
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/31_confinement.png",
+      "bytes": 508229
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/32_confirme.png",
+      "bytes": 509035
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/33_vapeur.png",
+      "bytes": 544800
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/34_visee.png",
+      "bytes": 511099
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/35_reglages.png",
+      "bytes": 294768
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/36_protocoles.png",
+      "bytes": 335821
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/37_reprises.png",
+      "bytes": 297078
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/38_fenetre.png",
+      "bytes": 512499
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/39_O13.png",
+      "bytes": 532618
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/40_O14.png",
+      "bytes": 540620
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/41_O15.png",
+      "bytes": 542836
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/42_O16.png",
+      "bytes": 551020
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/43_oxygen_low.png",
+      "bytes": 560032
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/44_bottle_empty.png",
+      "bytes": 557246
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/45_airlock_cycle.png",
+      "bytes": 544697
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/46_storage_status.png",
+      "bytes": 298105
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/47_projectile_flight.png",
+      "bytes": 512091
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/48_O17.png",
+      "bytes": 533957
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/49_O18.png",
+      "bytes": 531924
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/50_O19.png",
+      "bytes": 522912
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/51_O20.png",
+      "bytes": 529792
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/52_nora_refuge.png",
+      "bytes": 544685
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/53_liaisons.png",
+      "bytes": 384631
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/54_casier_nora.png",
+      "bytes": 545321
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/55_blessure.png",
+      "bytes": 381727
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/56_stabilisation.png",
+      "bytes": 551419
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/57_sirene.png",
+      "bytes": 540926
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/58_avertissement.png",
+      "bytes": 547032
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/59_predation.png",
+      "bytes": 563040
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/60_projet_medical.png",
+      "bytes": 542569
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/61_journal_medical.png",
+      "bytes": 378325
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/62_projet_technical.png",
+      "bytes": 539269
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/63_journal_technical.png",
+      "bytes": 384643
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/64_colis_med_protocol.png",
+      "bytes": 538544
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/65_colis_eva_filter.png",
+      "bytes": 510190
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/66_soins_nora.png",
+      "bytes": 547129
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/67_installation.png",
+      "bytes": 552809
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/68_nora_prudente.png",
+      "bytes": 543535
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/69_liaisons_prudentes.png",
+      "bytes": 380229
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/70_journal_800.png",
+      "bytes": 172449
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/71_protocole_secours.png",
+      "bytes": 382996
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/72_epilogue.png",
+      "bytes": 221886
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/73_services_et_colis.png",
+      "bytes": 265310
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/74_roue.png",
+      "bytes": 303622
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/75_equipement.png",
+      "bytes": 305071
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/76_detecteur.png",
+      "bytes": 511901
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/77_remplacement.png",
+      "bytes": 501040
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/78_pile_vide.png",
+      "bytes": 504356
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/79_banc_medical.png",
+      "bytes": 529644
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/80_sons_percus.png",
+      "bytes": 501496
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/81_interferences.png",
+      "bytes": 561191
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/82_parcours_signal.png",
+      "bytes": 489541
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/83_menu_spatial.png",
+      "bytes": 802619
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/84_plan_morgue.png",
+      "bytes": 221798
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/85_O21_local.png",
+      "bytes": 581957
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/86_O22_local.png",
+      "bytes": 527275
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/87_O23_local.png",
+      "bytes": 597126
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/88_O24_local.png",
+      "bytes": 621823
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/89_O25_local.png",
+      "bytes": 579540
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/90_O26_local.png",
+      "bytes": 554445
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/91_O27_local.png",
+      "bytes": 550464
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/92_O28_local.png",
+      "bytes": 529848
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/93_O29_local.png",
+      "bytes": 537228
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/94_O30_local.png",
+      "bytes": 531090
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/95_O31_local.png",
+      "bytes": 585912
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/captures/96_O32_local.png",
+      "bytes": 470954
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/codex-document-preview.png",
+      "bytes": 326415
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-01.jpg",
+      "bytes": 586304
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-02.jpg",
+      "bytes": 574963
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-03.jpg",
+      "bytes": 585599
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-04.jpg",
+      "bytes": 533121
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-05.jpg",
+      "bytes": 586721
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-06.jpg",
+      "bytes": 575042
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-07.jpg",
+      "bytes": 595630
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-08.jpg",
+      "bytes": 600377
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-09.jpg",
+      "bytes": 591868
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/contact-sheets/architecture-10.jpg",
+      "bytes": 273356
+    },
+    {
+      "path": "ALIEN_ISOLATION_DLC_V0_8/qa/report-document-preview.png",
+      "bytes": 336535
+    }
+  ]
+}

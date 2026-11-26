@@ -1,0 +1,874 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/batterycell.svg",
+      "bytes": 1455
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/bench.svg",
+      "bytes": 703
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/bunks.svg",
+      "bytes": 746
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cabinet.svg",
+      "bytes": 818
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cabletray.svg",
+      "bytes": 969
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/cart.svg",
+      "bytes": 829
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/console.svg",
+      "bytes": 1362
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/core.svg",
+      "bytes": 1372
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/crate.svg",
+      "bytes": 741
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/culturetray.svg",
+      "bytes": 2076
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/culturewindow.svg",
+      "bytes": 674
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/desk.svg",
+      "bytes": 786
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/extinguisher.svg",
+      "bytes": 851
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/filter.svg",
+      "bytes": 969
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/firstaid.svg",
+      "bytes": 704
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/fridge.svg",
+      "bytes": 743
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/hose.svg",
+      "bytes": 904
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/labtable.svg",
+      "bytes": 797
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/light.svg",
+      "bytes": 576
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/locker.svg",
+      "bytes": 1562
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/monitor.svg",
+      "bytes": 739
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/mug.svg",
+      "bytes": 631
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/mycelium.svg",
+      "bytes": 2096
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/oxygen.svg",
+      "bytes": 847
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/palletjack.svg",
+      "bytes": 722
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/pipe.svg",
+      "bytes": 685
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/rack.svg",
+      "bytes": 1126
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/resin.svg",
+      "bytes": 704
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/screenwide.svg",
+      "bytes": 965
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/scrubber.svg",
+      "bytes": 729
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/seatrow.svg",
+      "bytes": 867
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/server.svg",
+      "bytes": 1556
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/sign.svg",
+      "bytes": 678
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/specimen.svg",
+      "bytes": 839
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/straps.svg",
+      "bytes": 601
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/toolpanel.svg",
+      "bytes": 3990
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/trash.svg",
+      "bytes": 666
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/valve.svg",
+      "bytes": 1153
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/vent.svg",
+      "bytes": 930
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/washer.svg",
+      "bytes": 836
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/assets/workbench.svg",
+      "bytes": 770
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/01-menu.jpg",
+      "bytes": 107446
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/02-poste.jpg",
+      "bytes": 198659
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/03-guide.jpg",
+      "bytes": 134836
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-power.jpg",
+      "bytes": 204611
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-pressure.jpg",
+      "bytes": 208485
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/04-signal.jpg",
+      "bytes": 206034
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/05-soins.jpg",
+      "bytes": 195270
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/06-binome.jpg",
+      "bytes": 194532
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/07-sauvegarde.jpg",
+      "bytes": 101508
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/08-journal.jpg",
+      "bytes": 87800
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/09-codex.jpg",
+      "bytes": 97702
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-1280.jpg",
+      "bytes": 156514
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-390.jpg",
+      "bytes": 61846
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/10-responsive-850.jpg",
+      "bytes": 102798
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/15-itineraire.jpg",
+      "bytes": 81653
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/16-echos.jpg",
+      "bytes": 182379
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/17-accord.jpg",
+      "bytes": 10360
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/18-direct.jpg",
+      "bytes": 19931
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-power.jpg",
+      "bytes": 197699
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-signal.jpg",
+      "bytes": 185920
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/19-incident-steam.jpg",
+      "bytes": 213279
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/20-plan-1280.jpg",
+      "bytes": 64295
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/20-plan-390.jpg",
+      "bytes": 46236
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-1.jpg",
+      "bytes": 223254
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-3.jpg",
+      "bytes": 228588
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-5.jpg",
+      "bytes": 226844
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/21-parcours-7.jpg",
+      "bytes": 230785
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-0.jpg",
+      "bytes": 149724
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-1.jpg",
+      "bytes": 153369
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-2.jpg",
+      "bytes": 153651
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/22-fuite-3.jpg",
+      "bytes": 151865
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/23-amarrage.jpg",
+      "bytes": 228023
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/24-fin.jpg",
+      "bytes": 68560
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/25-fuite-mobile.jpg",
+      "bytes": 66533
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/26-reanimation.jpg",
+      "bytes": 220269
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/27-portage.jpg",
+      "bytes": 221436
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/28-fouille.jpg",
+      "bytes": 220756
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/29-secours-mobile.jpg",
+      "bytes": 57701
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/30-protocole.jpg",
+      "bytes": 107231
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/31-portage.jpg",
+      "bytes": 217058
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/32-balise-armee.jpg",
+      "bytes": 219767
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/33-balise-active.jpg",
+      "bytes": 220209
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/34-plan-390.jpg",
+      "bytes": 48681
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/40-atlas-live.jpg",
+      "bytes": 132947
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/41-atlas-research.jpg",
+      "bytes": 131617
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/42-equipment.jpg",
+      "bytes": 156165
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/43-personnel.jpg",
+      "bytes": 107004
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/44-references.jpg",
+      "bytes": 153373
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/45-atlas-390.jpg",
+      "bytes": 51457
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/46-camera-off.jpg",
+      "bytes": 45214
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/47-pharmalab.jpg",
+      "bytes": 258975
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-01.jpg",
+      "bytes": 26976
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-02.jpg",
+      "bytes": 26920
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-03.jpg",
+      "bytes": 27381
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-04.jpg",
+      "bytes": 27825
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-05.jpg",
+      "bytes": 27481
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-06.jpg",
+      "bytes": 26990
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-07.jpg",
+      "bytes": 27663
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-01-08.jpg",
+      "bytes": 26717
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-01.jpg",
+      "bytes": 27533
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-02.jpg",
+      "bytes": 27072
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-03.jpg",
+      "bytes": 27456
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-04.jpg",
+      "bytes": 27376
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-05.jpg",
+      "bytes": 27986
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-06.jpg",
+      "bytes": 33007
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-07.jpg",
+      "bytes": 27455
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-02-08.jpg",
+      "bytes": 26829
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-01.jpg",
+      "bytes": 26742
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-02.jpg",
+      "bytes": 27441
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-03.jpg",
+      "bytes": 27565
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-04.jpg",
+      "bytes": 27112
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-05.jpg",
+      "bytes": 27764
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-06.jpg",
+      "bytes": 26681
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-07.jpg",
+      "bytes": 27734
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-03-08.jpg",
+      "bytes": 26929
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-01.jpg",
+      "bytes": 26946
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-02.jpg",
+      "bytes": 27365
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-03.jpg",
+      "bytes": 28081
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-04.jpg",
+      "bytes": 27134
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-05.jpg",
+      "bytes": 28186
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-06.jpg",
+      "bytes": 33007
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-07.jpg",
+      "bytes": 27455
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-04-08.jpg",
+      "bytes": 27040
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-01.jpg",
+      "bytes": 33058
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-02.jpg",
+      "bytes": 27347
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-03.jpg",
+      "bytes": 27066
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-04.jpg",
+      "bytes": 27655
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-05.jpg",
+      "bytes": 27556
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-06.jpg",
+      "bytes": 26702
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-07.jpg",
+      "bytes": 27472
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-05-08.jpg",
+      "bytes": 26844
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-01.jpg",
+      "bytes": 26796
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-02.jpg",
+      "bytes": 27230
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-03.jpg",
+      "bytes": 28171
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-04.jpg",
+      "bytes": 27305
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-05.jpg",
+      "bytes": 27689
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-06.jpg",
+      "bytes": 33029
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-07.jpg",
+      "bytes": 27464
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-06-08.jpg",
+      "bytes": 26681
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-01.jpg",
+      "bytes": 27351
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-02.jpg",
+      "bytes": 27072
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-03.jpg",
+      "bytes": 28081
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-04.jpg",
+      "bytes": 27958
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-05.jpg",
+      "bytes": 28148
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-06.jpg",
+      "bytes": 27039
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-07.jpg",
+      "bytes": 27455
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/plan-07-08.jpg",
+      "bytes": 26869
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-01.jpg",
+      "bytes": 55027
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-02.jpg",
+      "bytes": 54187
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-03.jpg",
+      "bytes": 54607
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-04.jpg",
+      "bytes": 56395
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-05.jpg",
+      "bytes": 53387
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-06.jpg",
+      "bytes": 56775
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/reseau-07.jpg",
+      "bytes": 58441
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-01.jpg",
+      "bytes": 96521
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-02.jpg",
+      "bytes": 94841
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-03.jpg",
+      "bytes": 102297
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-04.jpg",
+      "bytes": 101500
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-05.jpg",
+      "bytes": 101703
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-06.jpg",
+      "bytes": 96011
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-07.jpg",
+      "bytes": 100114
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-01-08.jpg",
+      "bytes": 98442
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-01.jpg",
+      "bytes": 96594
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-02.jpg",
+      "bytes": 96964
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-03.jpg",
+      "bytes": 99735
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-04.jpg",
+      "bytes": 98784
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-05.jpg",
+      "bytes": 100975
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-06.jpg",
+      "bytes": 94640
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-07.jpg",
+      "bytes": 100462
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-02-08.jpg",
+      "bytes": 94608
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-01.jpg",
+      "bytes": 99346
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-02.jpg",
+      "bytes": 103015
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-03.jpg",
+      "bytes": 102523
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-04.jpg",
+      "bytes": 100649
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-05.jpg",
+      "bytes": 102874
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-06.jpg",
+      "bytes": 98583
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-07.jpg",
+      "bytes": 100953
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-03-08.jpg",
+      "bytes": 97970
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-01.jpg",
+      "bytes": 106449
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-02.jpg",
+      "bytes": 107947
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-03.jpg",
+      "bytes": 114533
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-04.jpg",
+      "bytes": 110754
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-05.jpg",
+      "bytes": 111160
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-06.jpg",
+      "bytes": 112108
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-07.jpg",
+      "bytes": 107893
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-04-08.jpg",
+      "bytes": 103481
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-01.jpg",
+      "bytes": 97174
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-02.jpg",
+      "bytes": 98739
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-03.jpg",
+      "bytes": 95348
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-04.jpg",
+      "bytes": 98973
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-05.jpg",
+      "bytes": 97569
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-06.jpg",
+      "bytes": 98675
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-07.jpg",
+      "bytes": 101763
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-05-08.jpg",
+      "bytes": 94821
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-01.jpg",
+      "bytes": 98638
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-02.jpg",
+      "bytes": 101693
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-03.jpg",
+      "bytes": 105386
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-04.jpg",
+      "bytes": 104380
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-05.jpg",
+      "bytes": 104940
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-06.jpg",
+      "bytes": 103036
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-07.jpg",
+      "bytes": 101772
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-06-08.jpg",
+      "bytes": 99887
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-01.jpg",
+      "bytes": 97559
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-02.jpg",
+      "bytes": 98260
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-03.jpg",
+      "bytes": 100816
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-04.jpg",
+      "bytes": 102367
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-05.jpg",
+      "bytes": 100723
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-06.jpg",
+      "bytes": 97034
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-07.jpg",
+      "bytes": 100532
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/captures-v7/salle-07-08.jpg",
+      "bytes": 98851
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/codex-document-mobile-v7.jpg",
+      "bytes": 52925
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/codex-document-v7.jpg",
+      "bytes": 118927
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/planche-v7-1.jpg",
+      "bytes": 491563
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/planche-v7-2.jpg",
+      "bytes": 494716
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/report-document-mobile-v7.jpg",
+      "bytes": 54921
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.7.0/qa/report-document-v7.jpg",
+      "bytes": 112881
+    }
+  ]
+}

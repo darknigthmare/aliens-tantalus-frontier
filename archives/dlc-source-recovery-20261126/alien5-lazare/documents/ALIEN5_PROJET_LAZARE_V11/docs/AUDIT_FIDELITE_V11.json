@@ -1,0 +1,878 @@
+{
+  "corpus": [
+    {
+      "id": "TH01",
+      "title": "Alien Queen",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_31"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH02",
+      "title": "Factory",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_07",
+        "A5_09",
+        "A5_48",
+        "A5_49",
+        "A5_50",
+        "A5_51"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH03",
+      "title": "Melting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH04",
+      "title": "Hicks",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_00",
+        "A5_35"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH05",
+      "title": "Mercenaries",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_60"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH06",
+      "title": "Mercs",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_60"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH07",
+      "title": "Jax",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_61",
+        "A5_62",
+        "A5_66"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH08",
+      "title": "Killson",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_61"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH09",
+      "title": "City",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_00",
+        "A5_02",
+        "A5_04"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH10",
+      "title": "Building",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_15"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH11",
+      "title": "Weyland",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_12",
+        "A5_13",
+        "A5_14",
+        "A5_15"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH12",
+      "title": "Hunting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH13",
+      "title": "Elevator",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_11",
+        "A5_17",
+        "A5_24",
+        "A5_30"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH14",
+      "title": "Fire Area",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_27",
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH15",
+      "title": "Science",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_20",
+        "A5_52",
+        "A5_53",
+        "A5_54",
+        "A5_55"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH16",
+      "title": "Firesuit",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_57"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH17",
+      "title": "Incinerator",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_09",
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH18",
+      "title": "Pipe",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_22",
+        "A5_39"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH19",
+      "title": "Miller pinned",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_26"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH20",
+      "title": "Trematode sniffing",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH21",
+      "title": "Trematode cutting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH22",
+      "title": "Hicks attack",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH23",
+      "title": "Trematode on Hicks",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH24",
+      "title": "Facehuggers birthing",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_54",
+        "A5_55"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH25",
+      "title": "Jet arriving",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_35"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH26",
+      "title": "Anchor",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_31"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH27",
+      "title": "Ripley arms up in dropship",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_59"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH28",
+      "title": "Planning",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_14"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH29",
+      "title": "Jax arming Comanche",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_62"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH30",
+      "title": "Montero",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_63"
+      ],
+      "limit": "Montero est interprétée comme infrastructure orbitale/ascenseur d’après les sources secondaires ; le terminal jouable et ses raccords sont originaux."
+    },
+    {
+      "id": "TH31",
+      "title": "Acid eating bombs",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_64"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH32",
+      "title": "Gland removal",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_65"
+      ],
+      "limit": "Le protocole et le sujet synthétique sont une reconstitution de jeu. L’identité exacte du sujet du concept n’est pas attribuée."
+    },
+    {
+      "id": "TH33",
+      "title": "Johnson knocks Jax",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_66"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "TH34",
+      "title": "Trematode",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19",
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH35",
+      "title": "Lab",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19",
+        "A5_20",
+        "A5_52",
+        "A5_53"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH36",
+      "title": "Ventilation Shaft",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_22",
+        "A5_39"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH37",
+      "title": "Poster",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_67"
+      ],
+      "limit": "La légende est restituée par une scène, un acteur ou un dispositif jouable, mais le raccord, les dialogues et les dimensions restent originaux."
+    },
+    {
+      "id": "ARCH_DERELICT",
+      "title": "Derelict dans un hangar",
+      "url": "https://www.avpgalaxy.net/alien-movies/alien-5/gallery/concept-art/",
+      "author": "Concept attribué à Geoffroy Thoorens, archive secondaire",
+      "evidence": "Motif de coque monumentale examiné visuellement.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_57",
+        "A5_58"
+      ],
+      "limit": "Un quai visitable, aucun intérieur reconstitué."
+    },
+    {
+      "id": "ARCH_GARDEN",
+      "title": "Garden",
+      "url": "https://www.avpgalaxy.net/alien-movies/alien-5/gallery/concept-art/",
+      "author": "Archive de concepts",
+      "evidence": "Légende repérée ; composition originale non examinée à pleine résolution.",
+      "status": "REFERENCE_A_APPROFONDIR",
+      "rooms": [
+        "A5_56"
+      ],
+      "limit": "Jardin inventé, aucune fidélité visuelle mesurée."
+    },
+    {
+      "id": "ARCH_NEWT",
+      "title": "Newt adulte",
+      "url": "https://www.avpgalaxy.net/2016/04/26/blomkamp-shares-alien-5-concept-art/",
+      "author": "Publication attribuée à Neill Blomkamp",
+      "evidence": "Bob blond, foulard et tenue verte examinés dans la reproduction.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_01",
+        "A5_42",
+        "A5_43",
+        "A5_44",
+        "A5_45",
+        "A5_46",
+        "A5_47"
+      ],
+      "limit": "Silhouette stylisée, non portrait 1:1."
+    },
+    {
+      "id": "ARCH_JAX_ANDROID",
+      "title": "Jax — android reporting",
+      "url": "https://theronin.org/2021/06/01/concept-art-from-neill-blomkamps-unmade-alien-5-features-a-new-android-character/",
+      "author": "The Ronin / reporting on Geoffroy Thoorens concepts",
+      "evidence": "Une couverture secondaire identifie Jax comme un nouvel androïde ; le portfolio primaire ne fournit pas de biographie textuelle.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_61",
+        "A5_62",
+        "A5_66"
+      ],
+      "limit": "Nature synthétique retenue comme hypothèse fortement rapportée, pas comme scénario intégral authentifié."
+    },
+    {
+      "id": "ARCH_MONTERO",
+      "title": "Montero — station / ascenseur spatial possible",
+      "url": "https://www.avpgalaxy.net/2021/06/11/geoffroy-thoorens-shares-more-alien-5-concept-art/",
+      "author": "Alien vs. Predator Galaxy",
+      "evidence": "Le commentaire décrit Montero comme une structure orbitale avec un prolongement pouvant être un ascenseur spatial.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_63",
+        "A5_64"
+      ],
+      "limit": "Le terminal et le trajet jouables sont des inventions de niveau."
+    },
+    {
+      "id": "ARCH_BIORIFLE",
+      "title": "Arme biomécanique vue avec Hicks",
+      "url": "https://www.avpgalaxy.net/2021/06/15/the-alien-5-concept-art-dump-continues/",
+      "author": "Alien vs. Predator Galaxy",
+      "evidence": "Le compte rendu décrit Hicks tenant une arme à aspect biomécanique face à un Trematode.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_62"
+      ],
+      "limit": "Nom, capacité, dégâts et fonctionnement sont des mécaniques originales du jeu."
+    }
+  ],
+  "characters": [
+    {
+      "id": "ripley",
+      "name": "Ellen Ripley",
+      "source": "TH27",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Cheveux bruns, visage dégagé, tenue grise et plastron sombre, pantalon kaki. Armes différenciées. Visage non photoréaliste."
+    },
+    {
+      "id": "hicks",
+      "name": "Dwayne Hicks",
+      "source": "TH04",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Cheveux courts, visage marqué du côté gauche anatomique, écharpe et armure olive. Le côté de la marque n’est pas inversé avec le sens de marche."
+    },
+    {
+      "id": "newt",
+      "name": "Rebecca « Newt » Jorden adulte",
+      "source": "ARCH_NEWT",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Carré blond, foulard anthracite, veste verte et insignes ronds ; relais civil sans arme."
+    },
+    {
+      "id": "miller",
+      "name": "Miller — technicienne de Calder",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Blouse claire et cheveux auburn. Le nom rappelle une légende de concept ; identité et apparence de cette technicienne originales, pas celles d’un personnage du film certifiées."
+    },
+    {
+      "id": "lena",
+      "name": "Lena Vos",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Technicienne de filtration ; costume original différencié."
+    },
+    {
+      "id": "sana",
+      "name": "Sana Kessler",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Agente de transit ; costume original différencié."
+    },
+    {
+      "id": "ivo",
+      "name": "Ivo Delmas",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Docker blessé ; costume original différencié."
+    },
+    {
+      "id": "jax",
+      "name": "Jax",
+      "source": "TH07 / ARCH_JAX_ANDROID",
+      "status": "SILHOUETTE_SYNTHETIQUE_INTERPRETEE",
+      "details": "Android au visage pâle et tenue technique sombre. Nature synthétique issue de sources secondaires ; proportions et détails restent stylisés."
+    },
+    {
+      "id": "killson",
+      "name": "Killson",
+      "source": "TH08",
+      "status": "SILHOUETTE_INTERPRETEE_STATUT_INCERTAIN",
+      "details": "Figure conceptuelle distincte de Jax. Les sources publiques ne suffisent pas à certifier ici son rôle ou sa nature ; aucune ressemblance à un acteur réel n’est revendiquée."
+    },
+    {
+      "id": "johnson",
+      "name": "Johnson",
+      "source": "TH33",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Figure associée à la légende « Johnson knocks Jax ». Costume de sécurité original ; rôle exact non extrapolé."
+    },
+    {
+      "id": "merc_a",
+      "name": "Mercenaire A",
+      "source": "TH05 / TH06",
+      "status": "GROUPE_INTERPRETE",
+      "details": "Armure lourde et équipement de combat inspirés du groupe de mercenaires des concepts ; identité originale du jeu."
+    },
+    {
+      "id": "merc_b",
+      "name": "Mercenaire B",
+      "source": "TH05 / TH06",
+      "status": "GROUPE_INTERPRETE",
+      "details": "Deuxième variante d’armure du groupe ; palette et plaques différenciées."
+    },
+    {
+      "id": "merc_c",
+      "name": "Mercenaire C",
+      "source": "TH05 / TH06",
+      "status": "GROUPE_INTERPRETE",
+      "details": "Troisième variante d’armure ; comportement hostile dans ce niveau est un choix de gameplay."
+    },
+    {
+      "id": "synthetic_subject",
+      "name": "Sujet synthétique du laboratoire",
+      "source": "TH32",
+      "status": "SUJET_INTERPRETE_NON_IDENTIFIE",
+      "details": "Sujet de table chirurgicale sans identité canonique attribuée ; utilisé pour restituer le motif « Gland removal »."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "rifle",
+      "name": "Fusil à impulsion",
+      "room": "A5_00",
+      "acquisition": "Départ · Ripley et Hicks",
+      "source": "SOCLE_ALIENS_INTERPRETE",
+      "behavior": "Tir, rechargement, munitions finies. Calibre et capacité de jeu ne sont pas une fiche technique du film."
+    },
+    {
+      "id": "flame",
+      "name": "Incinérateur portatif",
+      "room": "A5_00",
+      "acquisition": "Départ · Ripley",
+      "source": "SOCLE_ALIENS_INTERPRETE",
+      "behavior": "Flamme courte, recul de créature, carburant fini."
+    },
+    {
+      "id": "smartgun",
+      "name": "Arme lourde sur harnais",
+      "room": "A5_59",
+      "acquisition": "REF_SMARTGUN",
+      "source": "TH27",
+      "behavior": "120 cartouches indépendantes, bande de 40 ; pas de verrouillage automatique."
+    },
+    {
+      "id": "firesuit",
+      "name": "Combinaison thermique",
+      "room": "A5_57",
+      "acquisition": "REF_FIRESUIT",
+      "source": "TH16",
+      "behavior": "Réduit les jets thermiques explicites, pas les attaques, l’acide ni le compte à rebours."
+    },
+    {
+      "id": "light",
+      "name": "Torche",
+      "room": "A5_00",
+      "acquisition": "Départ",
+      "source": "SOCLE_INTERPRETE",
+      "behavior": "Visibilité et détection des gardes."
+    },
+    {
+      "id": "scanner",
+      "name": "Détecteur de mouvement",
+      "room": "A5_36",
+      "acquisition": "TOOLS",
+      "source": "SOCLE_INTERPRETE",
+      "behavior": "Contacts mobiles locaux, batterie, aucune identification."
+    },
+    {
+      "id": "cutter",
+      "name": "Découpeur et soudeur",
+      "room": "A5_36",
+      "acquisition": "TOOLS",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Ouvrir D2, souder une fois chaque joint de cloison."
+    },
+    {
+      "id": "medkit",
+      "name": "Soins humains",
+      "room": "A5_00",
+      "acquisition": "Départ et caches finies",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Soin personnel ou à un compagnon à portée."
+    },
+    {
+      "id": "decoy",
+      "name": "Leurre acoustique",
+      "room": "A5_00",
+      "acquisition": "Départ",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Ripley consomme du carburant ; Newt quatre charges distinctes."
+    },
+    {
+      "id": "waterkit",
+      "name": "Kit étanche",
+      "room": "A5_16",
+      "acquisition": "medical",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Réduction des dommages du bassin, pas la combinaison thermique."
+    },
+    {
+      "id": "sentry",
+      "name": "Sentinelle S-12",
+      "room": "A5_36",
+      "acquisition": "S12",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Un châssis, 48 cartouches, déploiement et récupération, chaleur persistante."
+    },
+    {
+      "id": "loader",
+      "name": "Chargeur P-17",
+      "room": "A5_48",
+      "acquisition": "M_LICENSE",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Manutention physique limitée au secteur industriel."
+    },
+    {
+      "id": "hydraulic",
+      "name": "Kits hydrauliques",
+      "room": "A5_48",
+      "acquisition": "M_SPARES",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Trois kits finis pour le chargeur ; distincts des soins."
+    },
+    {
+      "id": "cargo_pf",
+      "name": "Palette PF-09",
+      "room": "A5_49",
+      "acquisition": "PF09",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet physique à porter puis sécuriser."
+    },
+    {
+      "id": "cargo_cp",
+      "name": "Contrepoids CP-2",
+      "room": "A5_50",
+      "acquisition": "CP2",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet physique à placer sur la balance."
+    },
+    {
+      "id": "membrane",
+      "name": "Enveloppe mimétique M-4",
+      "room": "A5_53",
+      "acquisition": "BIO_ACQUIRE",
+      "source": "CONCEPT_ET_MECANIQUES_ORIGINALES",
+      "behavior": "Calibrage, signature limitée, réservoir et instabilité."
+    },
+    {
+      "id": "filter",
+      "name": "Filtre de ventilation",
+      "room": "A5_44",
+      "acquisition": "CIV_FILTER",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet de quête du relais civil, installation unique."
+    },
+    {
+      "id": "charges",
+      "name": "Charges d’arrimage",
+      "room": "A5_32",
+      "acquisition": "charges",
+      "source": "TH26",
+      "behavior": "Pose obligatoire sur trois attaches ; dispositifs de jeu originaux."
+    },
+    {
+      "id": "sample",
+      "name": "Prélèvement expérimental",
+      "room": "A5_21",
+      "acquisition": "sample",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Choix au vivarium puis traitement en quarantaine avant départ."
+    },
+    {
+      "id": "blackbox",
+      "name": "Boîte noire de la navette",
+      "room": "A5_35",
+      "acquisition": "FL_RECORDER",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Copie finale facultative des preuves ; dispositif fixe."
+    },
+    {
+      "id": "tram",
+      "name": "Convoi civil",
+      "room": "A5_47",
+      "acquisition": "CIV_DEPARTURE",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Évacuation des personnes réellement présentes, non pilotable librement."
+    },
+    {
+      "id": "dropship",
+      "name": "Navette d’extraction",
+      "room": "A5_35",
+      "acquisition": "extract",
+      "source": "TH25",
+      "behavior": "Préparation jouable et départ animé, pas pilotage spatial."
+    },
+    {
+      "id": "biorifle",
+      "name": "Prototype biomécanique",
+      "room": "A5_62",
+      "acquisition": "V11_BIORIFLE",
+      "source": "ARCH_BIORIFLE",
+      "behavior": "Arme limitée à 6 charges engagées + 18 réserves. Aucun réapprovisionnement standard. Nom et statistiques originaux au jeu."
+    },
+    {
+      "id": "comanche",
+      "name": "Baie Comanche",
+      "room": "A5_62",
+      "acquisition": "V11_COMANCHE",
+      "source": "TH29",
+      "behavior": "Installation fixe à armer localement. La nature exacte de « Comanche » n’étant pas authentifiée publiquement, le jeu ne la présente pas comme une fiche canonique."
+    },
+    {
+      "id": "acidbombs",
+      "name": "Charges corrodées",
+      "room": "A5_64",
+      "acquisition": "V11_BOMBS",
+      "source": "TH31",
+      "behavior": "Racks fixes à isoler ; la corrosion inspire le danger local sans prétendre reproduire la scène exacte."
+    },
+    {
+      "id": "synthlab",
+      "name": "Poste chirurgical synthétique",
+      "room": "A5_65",
+      "acquisition": "V11_GLAND",
+      "source": "TH32",
+      "behavior": "Installation fixe donnant accès au protocole de retrait ; pas un objet portable."
+    }
+  ],
+  "fullScriptAuthenticated": false,
+  "full1to1FidelityAchieved": false,
+  "counts": {
+    "rooms": 68,
+    "edges": 95,
+    "portalEnds": 190,
+    "fixtures": 478,
+    "props": 122
+  }
+}

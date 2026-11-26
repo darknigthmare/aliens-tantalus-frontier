@@ -1,0 +1,2813 @@
+{
+  "version": "11.0.0-candidate.1",
+  "principle": "Références de production recoupées, couverture documentée ; ni exhaustivité ni correspondance 1:1 certifiées.",
+  "rooms": [
+    {
+      "id": "cryo",
+      "name": "Salle de cryostase",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e00-cryo",
+          "edge": "e00",
+          "to": "concourse",
+          "x": 1320,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e00",
+            "thresholdX": 1320,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "concourse",
+      "name": "Coursive des équipages",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e00-concourse",
+          "edge": "e00",
+          "to": "cryo",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1230,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e00",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e01-concourse",
+          "edge": "e01",
+          "to": "briefing",
+          "x": 430,
+          "z": 0.3,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "e01",
+            "thresholdX": 430,
+            "thresholdZ": 0.3,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e03-concourse",
+          "edge": "e03",
+          "to": "lab",
+          "x": 1060,
+          "z": 0.3,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "e03",
+            "thresholdX": 1060,
+            "thresholdZ": 0.3,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e08-concourse",
+          "edge": "e08",
+          "to": "equipment",
+          "x": 1560,
+          "z": 0.65,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e08",
+            "thresholdX": 1560,
+            "thresholdZ": 0.65,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-concourse-lift-concourse",
+          "edge": "v3-concourse-lift",
+          "to": "liftshaft",
+          "x": 1300,
+          "z": 0.3,
+          "spawnX": 200,
+          "spawnZ": 0.6,
+          "label": null,
+          "arrivalHeight": 170,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-concourse-lift",
+            "thresholdX": 1300,
+            "thresholdZ": 0.3,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-concourse-mess-concourse",
+          "edge": "v11-concourse-mess",
+          "to": "mess",
+          "x": 730,
+          "z": 0.31,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "v11-concourse-mess",
+            "thresholdX": 730,
+            "thresholdZ": 0.31,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-concourse-quarters-concourse",
+          "edge": "v11-concourse-quarters",
+          "to": "shawquarters",
+          "x": 230,
+          "z": 0.83,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "v11-concourse-quarters",
+            "thresholdX": 230,
+            "thresholdZ": 0.83,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "briefing",
+      "name": "Salle de briefing",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e01-briefing",
+          "edge": "e01",
+          "to": "concourse",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 340,
+          "spawnZ": 0.3,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e01",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e02-briefing",
+          "edge": "e02",
+          "to": "bridge",
+          "x": 1180,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e02",
+            "thresholdX": 1180,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-mess-briefing-briefing",
+          "edge": "v11-mess-briefing",
+          "to": "mess",
+          "x": 930,
+          "z": 0.82,
+          "spawnX": 1590,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "v11-mess-briefing",
+            "thresholdX": 930,
+            "thresholdZ": 0.82,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "name": "Passerelle",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e02-bridge",
+          "edge": "e02",
+          "to": "briefing",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1090,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e02",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e06-bridge",
+          "edge": "e06",
+          "to": "executive",
+          "x": 1370,
+          "z": 0.6,
+          "spawnX": 1360,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e06",
+            "thresholdX": 1370,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "v3-observation-bridge-bridge",
+          "edge": "v3-observation-bridge",
+          "to": "observation",
+          "x": 1030,
+          "z": 0.81,
+          "spawnX": 1450,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "v3-observation-bridge",
+            "thresholdX": 1030,
+            "thresholdZ": 0.81,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab",
+      "name": "Laboratoire",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e03-lab",
+          "edge": "e03",
+          "to": "concourse",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 970,
+          "spawnZ": 0.3,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e03",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e04-lab",
+          "edge": "e04",
+          "to": "medbay",
+          "x": 1290,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e04",
+            "thresholdX": 1290,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-lab-filter-lab",
+          "edge": "v4-lab-filter",
+          "to": "filtration",
+          "x": 1030,
+          "z": 0.81,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "v4-lab-filter",
+            "thresholdX": 1030,
+            "thresholdZ": 0.81,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v5-lab-analysis-lab",
+          "edge": "v5-lab-analysis",
+          "to": "analysis",
+          "x": 310,
+          "z": 0.81,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "v5-lab-analysis",
+            "thresholdX": 310,
+            "thresholdZ": 0.81,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "medbay",
+      "name": "Infirmerie",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e04-medbay",
+          "edge": "e04",
+          "to": "lab",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 1200,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e04",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e05-medbay",
+          "edge": "e05",
+          "to": "executive",
+          "x": 1310,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e05",
+            "thresholdX": 1310,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "executive",
+      "name": "Module de Vickers",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e05-executive",
+          "edge": "e05",
+          "to": "medbay",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 1220,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e05",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e06-executive",
+          "edge": "e06",
+          "to": "bridge",
+          "x": 1450,
+          "z": 0.6,
+          "spawnX": 1280,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e06",
+            "thresholdX": 1450,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "e07-executive",
+          "edge": "e07",
+          "to": "medpod",
+          "x": 760,
+          "z": 0.3,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "e07",
+            "thresholdX": 760,
+            "thresholdZ": 0.3,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e28-executive",
+          "edge": "e28",
+          "to": "lifeboat",
+          "x": 1450,
+          "z": 0.6,
+          "spawnX": 1350,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "hull-hatch",
+            "edge": "e28",
+            "thresholdX": 1450,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "v11-executive-weyland-executive",
+          "edge": "v11-executive-weyland",
+          "to": "weylandsuite",
+          "x": 210,
+          "z": 0.31,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "v11-executive-weyland",
+            "thresholdX": 210,
+            "thresholdZ": 0.31,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "medpod",
+      "name": "MédPod",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e07-medpod",
+          "edge": "e07",
+          "to": "executive",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 670,
+          "spawnZ": 0.3,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e07",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "equipment",
+      "name": "Vestiaire d’expédition",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e08-equipment",
+          "edge": "e08",
+          "to": "concourse",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1470,
+          "spawnZ": 0.65,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e08",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e09-equipment",
+          "edge": "e09",
+          "to": "garage",
+          "x": 1370,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "e09",
+            "thresholdX": 1370,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v5-analysis-equipment-equipment",
+          "edge": "v5-analysis-equipment",
+          "to": "analysis",
+          "x": 430,
+          "z": 0.83,
+          "spawnX": 1560,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "v5-analysis-equipment",
+            "thresholdX": 430,
+            "thresholdZ": 0.83,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "garage",
+      "name": "Hangar des véhicules",
+      "zone": "Prometheus",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e09-garage",
+          "edge": "e09",
+          "to": "equipment",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1280,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "e09",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e10-garage",
+          "edge": "e10",
+          "to": "airlock",
+          "x": 1820,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e10",
+            "thresholdX": 1820,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e32-garage",
+          "edge": "e32",
+          "to": "apron",
+          "x": 1630,
+          "z": 0.73,
+          "spawnX": 260,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "vehicle-bay",
+            "edge": "e32",
+            "thresholdX": 1630,
+            "thresholdZ": 0.73,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-garage-lift-garage",
+          "edge": "v3-garage-lift",
+          "to": "liftshaft",
+          "x": 360,
+          "z": 0.81,
+          "spawnX": 200,
+          "spawnZ": 0.6,
+          "label": null,
+          "arrivalHeight": 0,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-garage-lift",
+            "thresholdX": 360,
+            "thresholdZ": 0.81,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "airlock",
+      "name": "Sas d’expédition",
+      "zone": "Prometheus",
+      "deck": 0,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e10-airlock",
+          "edge": "e10",
+          "to": "garage",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1730,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e10",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e11-airlock",
+          "edge": "e11",
+          "to": "plain",
+          "x": 1080,
+          "z": 0.6,
+          "spawnX": 190,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "hull-hatch",
+            "edge": "e11",
+            "thresholdX": 1080,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-filter-airlock-airlock",
+          "edge": "v4-filter-airlock",
+          "to": "filtration",
+          "x": 930,
+          "z": 0.6,
+          "spawnX": 1590,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "v4-filter-airlock",
+            "thresholdX": 930,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plain",
+      "name": "Plaine d’atterrissage",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e11-plain",
+          "edge": "e11",
+          "to": "airlock",
+          "x": 100,
+          "z": 0.6,
+          "spawnX": 990,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "hull-hatch",
+            "edge": "e11",
+            "thresholdX": 100,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e12-plain",
+          "edge": "e12",
+          "to": "ridge",
+          "x": 2200,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e12",
+            "thresholdX": 2200,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e33-plain",
+          "edge": "e33",
+          "to": "apron",
+          "x": 480,
+          "z": 0.73,
+          "spawnX": 1700,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e33",
+            "thresholdX": 480,
+            "thresholdZ": 0.73,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ridge",
+      "name": "Crête basaltique",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e12-ridge",
+          "edge": "e12",
+          "to": "plain",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 2110,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e12",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e13-ridge",
+          "edge": "e13",
+          "to": "shelter",
+          "x": 1200,
+          "z": 0.84,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e13",
+            "thresholdX": 1200,
+            "thresholdZ": 0.84,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e14-ridge",
+          "edge": "e14",
+          "to": "entrance",
+          "x": 1870,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e14",
+            "thresholdX": 1870,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e26-ridge",
+          "edge": "e26",
+          "to": "wreck",
+          "x": 540,
+          "z": 0.83,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e26",
+            "thresholdX": 540,
+            "thresholdZ": 0.83,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shelter",
+      "name": "Faille abritée",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "SIDE",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "e13-shelter",
+          "edge": "e13",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1110,
+          "spawnZ": 0.84,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e13",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "entrance",
+      "name": "Entrée du complexe",
+      "zone": "Temple",
+      "deck": 0,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e14-entrance",
+          "edge": "e14",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1780,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e14",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e15-entrance",
+          "edge": "e15",
+          "to": "vestibule",
+          "x": 1590,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "graded-passage",
+            "edge": "e15",
+            "thresholdX": 1590,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e34-entrance",
+          "edge": "e34",
+          "to": "survey",
+          "x": 420,
+          "z": 0.83,
+          "spawnX": 190,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e34",
+            "thresholdX": 420,
+            "thresholdZ": 0.83,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vestibule",
+      "name": "Vestibule",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e15-vestibule",
+          "edge": "e15",
+          "to": "entrance",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1500,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "graded-passage",
+            "edge": "e15",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e16-vestibule",
+          "edge": "e16",
+          "to": "holograms",
+          "x": 1420,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e16",
+            "thresholdX": 1420,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "holograms",
+      "name": "Couloir des hologrammes",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e16-holograms",
+          "edge": "e16",
+          "to": "vestibule",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1330,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e16",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e17-holograms",
+          "edge": "e17",
+          "to": "head",
+          "x": 1760,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e17",
+            "thresholdX": 1760,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e35-holograms",
+          "edge": "e35",
+          "to": "annexe",
+          "x": 1210,
+          "z": 0.6,
+          "spawnX": 190,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e35",
+            "thresholdX": 1210,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "name": "Chambre monumentale · tête",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e17-head",
+          "edge": "e17",
+          "to": "holograms",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1670,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e17",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e18-head",
+          "edge": "e18",
+          "to": "ampoules",
+          "x": 1690,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-volume",
+            "edge": "e18",
+            "thresholdX": 1690,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-resonance-head-head",
+          "edge": "v4-resonance-head",
+          "to": "resonance",
+          "x": 1100,
+          "z": 0.32,
+          "spawnX": 1550,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "v4-resonance-head",
+            "thresholdX": 1100,
+            "thresholdZ": 0.32,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ampoules",
+      "name": "Chambre monumentale · rangées d’ampoules",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e18-ampoules",
+          "edge": "e18",
+          "to": "head",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1600,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-volume",
+            "edge": "e18",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e19-ampoules",
+          "edge": "e19",
+          "to": "drain",
+          "x": 910,
+          "z": 0.8,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "e19",
+            "thresholdX": 910,
+            "thresholdZ": 0.8,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e20-ampoules",
+          "edge": "e20",
+          "to": "antechamber",
+          "x": 1510,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e20",
+            "thresholdX": 1510,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "drain",
+      "name": "Galerie basse",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "HYBRID",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "e19-drain",
+          "edge": "e19",
+          "to": "ampoules",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 820,
+          "spawnZ": 0.8,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e19",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "antechamber",
+      "name": "Antichambre",
+      "zone": "Temple",
+      "deck": -1,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e20-antechamber",
+          "edge": "e20",
+          "to": "ampoules",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1420,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e20",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e21-antechamber",
+          "edge": "e21",
+          "to": "hold",
+          "x": 1350,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e21",
+            "thresholdX": 1350,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hold",
+      "name": "Soute du Juggernaut",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e21-hold",
+          "edge": "e21",
+          "to": "antechamber",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1260,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e21",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e22-hold",
+          "edge": "e22",
+          "to": "orrery",
+          "x": 1850,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e22",
+            "thresholdX": 1850,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "e25-hold",
+          "edge": "e25",
+          "to": "gallery",
+          "x": 1000,
+          "z": 0.86,
+          "spawnX": 1000,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "foreground-cutaway",
+            "edge": "e25",
+            "thresholdX": 1000,
+            "thresholdZ": 0.86,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "orrery",
+      "name": "Salle de navigation",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e22-orrery",
+          "edge": "e22",
+          "to": "hold",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1760,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e22",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "e23-orrery",
+          "edge": "e23",
+          "to": "hypersleep",
+          "x": 1150,
+          "z": 0.3,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "e23",
+            "thresholdX": 1150,
+            "thresholdZ": 0.3,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e30-orrery",
+          "edge": "e30",
+          "to": "breach",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1290,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "graded-passage",
+            "edge": "e30",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hypersleep",
+      "name": "Hypersommeil des Ingénieurs",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e23-hypersleep",
+          "edge": "e23",
+          "to": "orrery",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1060,
+          "spawnZ": 0.3,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e23",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e24-hypersleep",
+          "edge": "e24",
+          "to": "gallery",
+          "x": 1550,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e24",
+            "thresholdX": 1550,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gallery",
+      "name": "Coursive de contrôle",
+      "zone": "Juggernaut",
+      "deck": -1,
+      "view": "SIDE",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "e24-gallery",
+          "edge": "e24",
+          "to": "hypersleep",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1460,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "e24",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e25-gallery",
+          "edge": "e25",
+          "to": "hold",
+          "x": 1090,
+          "z": 0.6,
+          "spawnX": 910,
+          "spawnZ": 0.86,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "e25",
+            "thresholdX": 1090,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wreck",
+      "name": "Champ de débris",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e26-wreck",
+          "edge": "e26",
+          "to": "ridge",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 450,
+          "spawnZ": 0.83,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e26",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e27-wreck",
+          "edge": "e27",
+          "to": "lifeboat",
+          "x": 2020,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e27",
+            "thresholdX": 2020,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e29-wreck",
+          "edge": "e29",
+          "to": "breach",
+          "x": 1250,
+          "z": 0.82,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e29",
+            "thresholdX": 1250,
+            "thresholdZ": 0.82,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lifeboat",
+      "name": "Extérieur du module de survie",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "HYBRID",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e27-lifeboat",
+          "edge": "e27",
+          "to": "wreck",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1930,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e27",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e28-lifeboat",
+          "edge": "e28",
+          "to": "executive",
+          "x": 1440,
+          "z": 0.6,
+          "spawnX": 1360,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "hull-hatch",
+            "edge": "e28",
+            "thresholdX": 1440,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        }
+      ]
+    },
+    {
+      "id": "breach",
+      "name": "Brèche du Juggernaut",
+      "zone": "Juggernaut",
+      "deck": 0,
+      "view": "SIDE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e29-breach",
+          "edge": "e29",
+          "to": "wreck",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1160,
+          "spawnZ": 0.82,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e29",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e30-breach",
+          "edge": "e30",
+          "to": "orrery",
+          "x": 1380,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "graded-passage",
+            "edge": "e30",
+            "thresholdX": 1380,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "alternatif"
+          }
+        },
+        {
+          "id": "e31-breach",
+          "edge": "e31",
+          "to": "second",
+          "x": 650,
+          "z": 0.8,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "ellipse",
+            "edge": "e31",
+            "thresholdX": 650,
+            "thresholdZ": 0.8,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "second",
+      "name": "Second vaisseau",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "second vaisseau : cockpit condensé, extérieur non construit",
+      "doors": [
+        {
+          "id": "e31-second",
+          "edge": "e31",
+          "to": "breach",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 560,
+          "spawnZ": 0.8,
+          "label": null,
+          "architecture": {
+            "mount": "ellipse",
+            "edge": "e31",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "apron",
+      "name": "Rampe des véhicules",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "SETPIECE",
+      "status": "lieu ou secteur inspiré du film / plan adapté",
+      "doors": [
+        {
+          "id": "e32-apron",
+          "edge": "e32",
+          "to": "garage",
+          "x": 170,
+          "z": 0.6,
+          "spawnX": 1540,
+          "spawnZ": 0.73,
+          "label": null,
+          "architecture": {
+            "mount": "vehicle-bay",
+            "edge": "e32",
+            "thresholdX": 170,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "e33-apron",
+          "edge": "e33",
+          "to": "plain",
+          "x": 1790,
+          "z": 0.6,
+          "spawnX": 570,
+          "spawnZ": 0.73,
+          "label": null,
+          "architecture": {
+            "mount": "open-route",
+            "edge": "e33",
+            "thresholdX": 1790,
+            "thresholdZ": 0.6,
+            "support": "continuité du sol",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "name": "Alcôve basaltique",
+      "zone": "LV-223",
+      "deck": 0,
+      "view": "SIDE",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "e34-survey",
+          "edge": "e34",
+          "to": "entrance",
+          "x": 100,
+          "z": 0.6,
+          "spawnX": 510,
+          "spawnZ": 0.83,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e34",
+            "thresholdX": 100,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "annexe",
+      "name": "Galerie latérale",
+      "zone": "Complexe",
+      "deck": -1,
+      "view": "HYBRID",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "e35-annexe",
+          "edge": "e35",
+          "to": "holograms",
+          "x": 100,
+          "z": 0.6,
+          "spawnX": 1120,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "e35",
+            "thresholdX": 100,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-annexe-resonance-annexe",
+          "edge": "v4-annexe-resonance",
+          "to": "resonance",
+          "x": 1430,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "v4-annexe-resonance",
+            "thresholdX": 1430,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "liftshaft",
+      "name": "Puits de service",
+      "zone": "Prometheus",
+      "deck": "0 / 1 / 2",
+      "view": "SIDE",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v3-garage-lift-liftshaft",
+          "edge": "v3-garage-lift",
+          "to": "garage",
+          "x": 110,
+          "z": 0.6,
+          "spawnX": 450,
+          "spawnZ": 0.81,
+          "label": null,
+          "height": 0,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-garage-lift",
+            "thresholdX": 110,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-concourse-lift-liftshaft",
+          "edge": "v3-concourse-lift",
+          "to": "concourse",
+          "x": 110,
+          "z": 0.6,
+          "spawnX": 1210,
+          "spawnZ": 0.3,
+          "label": null,
+          "height": 170,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-concourse-lift",
+            "thresholdX": 110,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-lift-workshop-liftshaft",
+          "edge": "v3-lift-workshop",
+          "to": "workshop",
+          "x": 355,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "height": 0,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-lift-workshop",
+            "thresholdX": 355,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-lift-observation-liftshaft",
+          "edge": "v3-lift-observation",
+          "to": "observation",
+          "x": 110,
+          "z": 0.6,
+          "spawnX": 170,
+          "spawnZ": 0.6,
+          "label": null,
+          "height": 340,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-lift-observation",
+            "thresholdX": 110,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Atelier des systèmes",
+      "zone": "Prometheus",
+      "deck": 0,
+      "view": "HYBRID",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v3-lift-workshop-workshop",
+          "edge": "v3-lift-workshop",
+          "to": "liftshaft",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 445,
+          "spawnZ": 0.6,
+          "label": null,
+          "arrivalHeight": 0,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-lift-workshop",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "observation",
+      "name": "Galerie d’observation",
+      "zone": "Prometheus",
+      "deck": 2,
+      "view": "HYBRID",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v3-lift-observation-observation",
+          "edge": "v3-lift-observation",
+          "to": "liftshaft",
+          "x": 80,
+          "z": 0.6,
+          "spawnX": 200,
+          "spawnZ": 0.6,
+          "label": null,
+          "arrivalHeight": 340,
+          "architecture": {
+            "mount": "landing-wall",
+            "edge": "v3-lift-observation",
+            "thresholdX": 80,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v3-observation-bridge-observation",
+          "edge": "v3-observation-bridge",
+          "to": "bridge",
+          "x": 1540,
+          "z": 0.6,
+          "spawnX": 940,
+          "spawnZ": 0.81,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "v3-observation-bridge",
+            "thresholdX": 1540,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "filtration",
+      "name": "Local des filtres",
+      "zone": "Prometheus",
+      "deck": 0,
+      "view": "DEPTH",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v4-lab-filter-filtration",
+          "edge": "v4-lab-filter",
+          "to": "lab",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 940,
+          "spawnZ": 0.81,
+          "label": null,
+          "architecture": {
+            "mount": "stair-head",
+            "edge": "v4-lab-filter",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-filter-airlock-filtration",
+          "edge": "v4-filter-airlock",
+          "to": "airlock",
+          "x": 1680,
+          "z": 0.6,
+          "spawnX": 840,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "v4-filter-airlock",
+            "thresholdX": 1680,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "resonance",
+      "name": "Chambre des résonances",
+      "zone": "Complexe",
+      "deck": -1,
+      "view": "DEPTH",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v4-annexe-resonance-resonance",
+          "edge": "v4-annexe-resonance",
+          "to": "annexe",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1340,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "v4-annexe-resonance",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v4-resonance-head-resonance",
+          "edge": "v4-resonance-head",
+          "to": "head",
+          "x": 1640,
+          "z": 0.6,
+          "spawnX": 1010,
+          "spawnZ": 0.32,
+          "label": null,
+          "architecture": {
+            "mount": "rock-vault",
+            "edge": "v4-resonance-head",
+            "thresholdX": 1640,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "analysis",
+      "name": "Salle de caractérisation",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "aménagement du jeu",
+      "doors": [
+        {
+          "id": "v5-lab-analysis-analysis",
+          "edge": "v5-lab-analysis",
+          "to": "lab",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 220,
+          "spawnZ": 0.81,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v5-lab-analysis",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v5-analysis-equipment-analysis",
+          "edge": "v5-analysis-equipment",
+          "to": "equipment",
+          "x": 1650,
+          "z": 0.6,
+          "spawnX": 340,
+          "spawnZ": 0.83,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "v5-analysis-equipment",
+            "thresholdX": 1650,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mess",
+      "name": "Mess et espace commun",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "volume-film / géométrie adaptée",
+      "doors": [
+        {
+          "id": "v11-concourse-mess-mess",
+          "edge": "v11-concourse-mess",
+          "to": "concourse",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 820,
+          "spawnZ": 0.31,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v11-concourse-mess",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-mess-briefing-mess",
+          "edge": "v11-mess-briefing",
+          "to": "briefing",
+          "x": 1680,
+          "z": 0.6,
+          "spawnX": 840,
+          "spawnZ": 0.82,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "v11-mess-briefing",
+            "thresholdX": 1680,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-mess-exercise-mess",
+          "edge": "v11-mess-exercise",
+          "to": "exercise",
+          "x": 1100,
+          "z": 0.31,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "recessed-bulkhead",
+            "edge": "v11-mess-exercise",
+            "thresholdX": 1100,
+            "thresholdZ": 0.31,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "exercise",
+      "name": "Salle d’exercice",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "volume-film / géométrie adaptée",
+      "doors": [
+        {
+          "id": "v11-mess-exercise-exercise",
+          "edge": "v11-mess-exercise",
+          "to": "mess",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1010,
+          "spawnZ": 0.31,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v11-mess-exercise",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shawquarters",
+      "name": "Cabine de Shaw et Holloway",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "volume-film / géométrie adaptée",
+      "doors": [
+        {
+          "id": "v11-concourse-quarters-shawquarters",
+          "edge": "v11-concourse-quarters",
+          "to": "concourse",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 320,
+          "spawnZ": 0.83,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v11-concourse-quarters",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        },
+        {
+          "id": "v11-quarters-wash-shawquarters",
+          "edge": "v11-quarters-wash",
+          "to": "washroom",
+          "x": 1360,
+          "z": 0.6,
+          "spawnX": 180,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "right-wall",
+            "edge": "v11-quarters-wash",
+            "thresholdX": 1360,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "washroom",
+      "name": "Salle d’eau des quartiers",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "volume-film / géométrie adaptée",
+      "doors": [
+        {
+          "id": "v11-quarters-wash-washroom",
+          "edge": "v11-quarters-wash",
+          "to": "shawquarters",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 1270,
+          "spawnZ": 0.6,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v11-quarters-wash",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "weylandsuite",
+      "name": "Quartiers privés de Weyland",
+      "zone": "Prometheus",
+      "deck": 1,
+      "view": "DEPTH",
+      "status": "volume-film / géométrie adaptée",
+      "doors": [
+        {
+          "id": "v11-executive-weyland-weylandsuite",
+          "edge": "v11-executive-weyland",
+          "to": "executive",
+          "x": 90,
+          "z": 0.6,
+          "spawnX": 300,
+          "spawnZ": 0.31,
+          "label": null,
+          "architecture": {
+            "mount": "left-wall",
+            "edge": "v11-executive-weyland",
+            "thresholdX": 90,
+            "thresholdZ": 0.6,
+            "support": "paroi / cadre structurel en coupe",
+            "chronology": "normal"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "costumes",
+      "title": "Entretien de Janty Yates, costumes",
+      "url": "https://clothesonfilm.net/2013/01/13/prometheus-exclusive-interview-with-costume-designer-janty-yates/",
+      "type": "entretien primaire",
+      "scope": "Tenues civiles individualisées ; combinaison extérieure et sous-combinaison ; silhouettes de David, Vickers et Millburn."
+    },
+    {
+      "id": "sets",
+      "title": "Arthur Max, décors du Prometheus",
+      "url": "https://www.wearemoviegeeks.com/2012/05/production-designer-arthur-max-talks-prometheus/",
+      "type": "déclarations du chef décorateur",
+      "scope": "Passerelle à deux niveaux, suite de Vickers, piano et lustre ; aucune cotation globale."
+    },
+    {
+      "id": "shotgun",
+      "title": "Fusil de sécurité utilisé pour le tournage",
+      "url": "https://propstore.com/product/prometheus-2012/security-team-stunt-shotgun/",
+      "type": "accessoire de production authentifié",
+      "scope": "Silhouette noire et crosse orange ; emploi par Chance et la sécurité."
+    },
+    {
+      "id": "flame",
+      "title": "Lance-flammes de tournage",
+      "url": "https://propstore.com/product/prometheus-2012/lot-301-hero-flamethrower/",
+      "type": "accessoire de production",
+      "scope": "Arme visible dans le film, réservoirs et cadre."
+    },
+    {
+      "id": "weyland",
+      "title": "Cadre d’assistance de Peter Weyland",
+      "url": "https://propstore.com/product/prometheus-2012/peter-weyland-light-up-stunt-leg-rig/",
+      "type": "accessoire de production",
+      "scope": "Appareillage externe du personnage, pas une armure de combat."
+    },
+    {
+      "id": "vfx",
+      "title": "Entretiens avec les équipes des effets visuels",
+      "url": "https://www.fxguide.com/fxfeatured/prometheus-rebuilding-hallowed-vfx-space/",
+      "type": "entretiens primaires",
+      "scope": "PUP, relevés holographiques, orrery, MédPod, Trilobite. La mise en scène ne constitue pas un plan architectural global."
+    },
+    {
+      "id": "legacy",
+      "title": "Inventaire Prometheus v35 du projet",
+      "url": "",
+      "type": "document interne non probant pour le film",
+      "scope": "Liste de candidats : ne confirme ni les armes Engineer, ni les véhicules étendus, ni les créatures ajoutées."
+    },
+    {
+      "id": "axe",
+      "title": "Propstore — haches de Shaw, distinction scène supprimée",
+      "url": "https://propstore.com/product/prometheus-2012/lot-1207-dr-elizabeth-shaws-noomi-rapace-stunt-and-hero-axes/",
+      "type": "accessoire de production"
+    },
+    {
+      "id": "pistol",
+      "title": "Xenopedia — galerie et références du pistolet (source secondaire)",
+      "url": "https://avp.fandom.com/wiki/ES-4_Electrostatic_Pistol",
+      "type": "secondaire, détail balistique non importé"
+    }
+  ],
+  "gear": [
+    {
+      "id": "suit",
+      "name": "Combinaison d’exploration",
+      "category": "Équipement",
+      "room": "equipment",
+      "status": "fonctionnel adapté",
+      "source": "costumes",
+      "detail": "Équipement au vestiaire ; silhouette gris-bleu, casque ovoïde, plastron et sac dorsal."
+    },
+    {
+      "id": "under",
+      "name": "Sous-combinaison de Shaw",
+      "category": "Tenue",
+      "room": "medpod",
+      "status": "apparence conditionnelle",
+      "source": "costumes",
+      "detail": "Après la chirurgie, tenue ajustée bleue à passepoils orange. Les gestes et les dommages ne reproduisent pas chaque plan du film."
+    },
+    {
+      "id": "helmet",
+      "name": "Casque et caméras",
+      "category": "Équipement",
+      "room": "equipment",
+      "status": "visuel + HUD adapté",
+      "source": "costumes",
+      "detail": "Casque dessiné sur la combinaison extérieure ; caméras latérales et col lumineux stylisés, pas un enregistrement vidéo personnel."
+    },
+    {
+      "id": "torch",
+      "name": "Éclairage d’expédition",
+      "category": "Équipement",
+      "room": "equipment",
+      "status": "fonctionnel adapté",
+      "source": "costumes",
+      "detail": "Torche, batterie et masques limités ; pas une reconstruction électrique des casques."
+    },
+    {
+      "id": "pup",
+      "name": "PUP cartographique",
+      "category": "Équipement",
+      "room": "garage",
+      "status": "fonctionnel adapté",
+      "source": "vfx",
+      "detail": "Automatique et télépiloté, batterie et radio fictives de gameplay ; un seul appareil dans cette version."
+    },
+    {
+      "id": "holotable",
+      "name": "Table holographique",
+      "category": "Équipement",
+      "room": "bridge",
+      "status": "fonctionnel adapté",
+      "source": "vfx",
+      "detail": "Carte et corrélation de balises ; affichage condensé."
+    },
+    {
+      "id": "medpod",
+      "name": "MédPod",
+      "category": "Équipement",
+      "room": "medpod",
+      "status": "fonctionnel adapté",
+      "source": "vfx",
+      "detail": "Capot, lit, cycle et reprise ; pas une procédure médicale réelle."
+    },
+    {
+      "id": "orrery",
+      "name": "Orrery et siège pilote",
+      "category": "Équipement",
+      "room": "orrery",
+      "status": "fonctionnel adapté",
+      "source": "vfx",
+      "detail": "Console avec acquisition et rendu orbital. La flûte est un accessoire visible, pas un instrument jouable."
+    },
+    {
+      "id": "flute",
+      "name": "Interface-flûte",
+      "category": "Équipement",
+      "room": "hypersleep",
+      "status": "décor inspectable",
+      "source": "vfx",
+      "detail": "Accessoire du pupitre dans cette adaptation ; action instrumentale détaillée encore absente."
+    },
+    {
+      "id": "pods",
+      "name": "Caissons de stase",
+      "category": "Équipement",
+      "room": "cryo",
+      "status": "scénographie + objectif",
+      "source": "sets",
+      "detail": "Humains et Ingénieurs possèdent leurs caissons ; réveils condensés."
+    },
+    {
+      "id": "ampoule",
+      "name": "Ampoules et confinement",
+      "category": "Équipement",
+      "room": "ampoules",
+      "status": "décor + relevé",
+      "source": "vfx",
+      "detail": "Ampoules et supports présents ; chimie et mutations non simulées comme recettes universelles."
+    },
+    {
+      "id": "shotgun",
+      "name": "Fusil de sécurité à crosse orange",
+      "category": "Arme",
+      "room": "garage",
+      "status": "appui allié limité",
+      "source": "shotgun",
+      "detail": "Chance dispose de six tirs de soutien lors de Fifield. Pas une arme libre accordée à Shaw."
+    },
+    {
+      "id": "flamethrower",
+      "name": "Lance-flammes",
+      "category": "Arme",
+      "room": "garage",
+      "status": "jouable avec Janek",
+      "source": "flame",
+      "detail": "Arme portée à deux mains, deux réservoirs dans un cadre ; tir de Janek conservé. La scène de Vickers reste condensée."
+    },
+    {
+      "id": "rt01",
+      "name": "RT01",
+      "category": "Véhicule",
+      "room": "garage",
+      "status": "pilotable adapté",
+      "source": "legacy",
+      "detail": "Conduite et deux berceaux de prélèvements. Forme, cabine et suspension restent stylisées ; spécification de tournage à compléter."
+    },
+    {
+      "id": "atv",
+      "name": "Quad d’expédition",
+      "category": "Véhicule",
+      "room": "garage",
+      "status": "décor inspectable",
+      "source": "legacy",
+      "detail": "Présent au hangar, non pilotable. Désignation NR-9 héritée non certifiée par cette passe."
+    },
+    {
+      "id": "exoframe",
+      "name": "Cadre d’assistance de Weyland",
+      "category": "Équipement",
+      "room": "weylandsuite",
+      "status": "décor + apparition scénarisée",
+      "source": "weyland",
+      "detail": "Cadre externe dessiné et silhouette âgée. Pas de marche avec assistance simulée."
+    },
+    {
+      "id": "piano",
+      "name": "Piano de la suite",
+      "category": "Décor",
+      "room": "executive",
+      "status": "décor inspectable",
+      "source": "sets",
+      "detail": "Silhouette de piano à queue, non instrument jouable."
+    },
+    {
+      "id": "chandelier",
+      "name": "Lustre de la suite",
+      "category": "Décor",
+      "room": "executive",
+      "status": "décor",
+      "source": "sets",
+      "detail": "Lustre suspendu, pas un objet posé au sol."
+    },
+    {
+      "id": "screen",
+      "name": "Écran panoramique de la suite",
+      "category": "Décor",
+      "room": "executive",
+      "status": "décor mural",
+      "source": "sets",
+      "detail": "Panneau mural de nature stylisé, non une photo du décor de tournage."
+    },
+    {
+      "id": "science",
+      "name": "Scanner et analyses",
+      "category": "Équipement",
+      "room": "lab",
+      "status": "fonctionnel adapté",
+      "source": "vfx",
+      "detail": "Relevés et interfaces ; courbes fictives de jeu, pas des conclusions scientifiques canoniques."
+    },
+    {
+      "id": "capsules",
+      "name": "Trois capsules de prélèvement",
+      "category": "Équipement",
+      "room": "analysis",
+      "status": "création du jeu fonctionnelle",
+      "source": "legacy",
+      "detail": "B01, G02 et R03 sont inventées. Ne pas les compter comme accessoires exacts du film."
+    },
+    {
+      "id": "beacons",
+      "name": "Balises acoustiques",
+      "category": "Équipement",
+      "room": "equipment",
+      "status": "création du jeu fonctionnelle",
+      "source": "legacy",
+      "detail": "Diversion de gameplay ; pas une attribution certaine à un accessoire du film."
+    },
+    {
+      "id": "safetypistol",
+      "name": "Pistolet de sécurité",
+      "category": "Arme",
+      "room": "garage",
+      "status": "décor inspectable ; tir absent",
+      "source": "pistol",
+      "detail": "Silhouette de pistolet à insert orange ajoutée au râtelier. La dénomination ES-4 et les règles du JDR ne sont pas transformées en mesures canoniques du film. Tir non implémenté."
+    },
+    {
+      "id": "axe",
+      "name": "Hache de secours",
+      "category": "Arme",
+      "room": "executive",
+      "status": "récupérable + défense adaptée",
+      "source": "axe",
+      "detail": "Hache de Shaw confirmée comme accessoire. Prise locale après impact ; F donne un répit de 0,65 s à proximité, sans tuer l’Ingénieur. Cette défense est une règle de jeu, pas une reproduction du combat supprimé."
+    },
+    {
+      "id": "engineerrifle",
+      "name": "Arme énergétique Engineer",
+      "category": "Arme",
+      "room": null,
+      "status": "extension non retenue",
+      "source": "legacy",
+      "detail": "Ne pas ajouter un fusil extraterrestre à ce récit sans preuve de présence dans le film."
+    },
+    {
+      "id": "charge",
+      "name": "Charge d’interception",
+      "category": "Équipement",
+      "room": null,
+      "status": "extension non retenue",
+      "source": "legacy",
+      "detail": "L’interception par le Prometheus ne devient pas une mission de pose d’explosif inventée."
+    },
+    {
+      "id": "vtol",
+      "name": "Aerodyne VTOL",
+      "category": "Véhicule",
+      "room": null,
+      "status": "extension non retenue",
+      "source": "legacy",
+      "detail": "Véhicule de l’ancien inventaire, pas un ajout confirmé au montage cinéma."
+    },
+    {
+      "id": "lifeboat",
+      "name": "Module de survie de Vickers",
+      "category": "Véhicule",
+      "room": "lifeboat",
+      "status": "visitable + événement",
+      "source": "sets",
+      "detail": "Conserve les mêmes quartiers et MédPod après séparation. Pas de vol libre."
+    },
+    {
+      "id": "prometheus",
+      "name": "USCSS Prometheus",
+      "category": "Véhicule",
+      "room": "bridge",
+      "status": "intérieurs + événements",
+      "source": "sets",
+      "detail": "Atterrissage et interception condensés, extérieur non navigable en vol libre."
+    },
+    {
+      "id": "juggernaut",
+      "name": "Juggernaut",
+      "category": "Véhicule",
+      "room": "orrery",
+      "status": "intérieurs + événements",
+      "source": "vfx",
+      "detail": "Soute, contrôle et stase ; trajectoire et échelles cinématiques non reconstruites 1:1."
+    }
+  ],
+  "exhibits": [
+    {
+      "id": "inspect-shotgun",
+      "gear": "shotgun",
+      "title": "Fusil de sécurité à crosse orange",
+      "room": "garage",
+      "x": 420,
+      "z": 0.52
+    },
+    {
+      "id": "inspect-atv",
+      "gear": "atv",
+      "title": "Quad d’expédition",
+      "room": "garage",
+      "x": 1450,
+      "z": 0.54
+    },
+    {
+      "id": "inspect-flamethrower",
+      "gear": "flamethrower",
+      "title": "Lance-flammes",
+      "room": "garage",
+      "x": 1740,
+      "z": 0.72
+    },
+    {
+      "id": "inspect-suit",
+      "gear": "suit",
+      "title": "Combinaison d’exploration",
+      "room": "equipment",
+      "x": 650,
+      "z": 0.54
+    },
+    {
+      "id": "inspect-helmet",
+      "gear": "helmet",
+      "title": "Casque et caméras",
+      "room": "equipment",
+      "x": 1110,
+      "z": 0.54
+    },
+    {
+      "id": "inspect-flute",
+      "gear": "flute",
+      "title": "Interface-flûte",
+      "room": "hypersleep",
+      "x": 1150,
+      "z": 0.53
+    },
+    {
+      "id": "inspect-exoframe",
+      "gear": "exoframe",
+      "title": "Cadre d’assistance de Weyland",
+      "room": "weylandsuite",
+      "x": 1010,
+      "z": 0.55
+    },
+    {
+      "id": "inspect-piano",
+      "gear": "piano",
+      "title": "Piano de la suite",
+      "room": "executive",
+      "x": 1100,
+      "z": 0.55
+    },
+    {
+      "id": "inspect-pistol",
+      "gear": "safetypistol",
+      "title": "Pistolet de sécurité · accessoire",
+      "room": "garage",
+      "x": 500,
+      "z": 0.53
+    }
+  ],
+  "coverageGaps": [
+    {
+      "name": "Prologue : sacrifice de l’Ingénieur",
+      "status": "absent comme lieu jouable",
+      "reason": "Aucune planète ou époque raccordée au Prometheus par une fausse porte."
+    },
+    {
+      "name": "Découverte archéologique terrestre",
+      "status": "évoquée au briefing, lieu absent",
+      "reason": "La grotte et son approche ne sont pas construites."
+    },
+    {
+      "name": "Souvenir d’enfance / rêve de Shaw",
+      "status": "absent",
+      "reason": "Ne pas présenter une chambre générique de bord comme ce lieu."
+    },
+    {
+      "name": "Passerelle à deux niveaux",
+      "status": "volume présent, second niveau incomplet",
+      "reason": "L’escalier galerie-passerelle ne remplace pas les deux niveaux du véritable décor de passerelle."
+    },
+    {
+      "name": "Gymnase / zone d’exercice",
+      "status": "aménagement de jeu visitable",
+      "reason": "Appareils présents, implantation exacte non relevée."
+    },
+    {
+      "name": "Cabine Shaw/Holloway et salle d’eau",
+      "status": "volumes reconstitués",
+      "reason": "Mobilier et raccords adaptés, pas une mesure de chaque plan."
+    },
+    {
+      "name": "Quartiers privés de Weyland",
+      "status": "volume reconstruit, apparition partielle",
+      "reason": "Révélation condensée ; espaces secrets et déplacements hors champ incomplets."
+    },
+    {
+      "name": "Tunnels du complexe hors parcours",
+      "status": "partiels",
+      "reason": "Le graphe du jeu n’est pas un relevé exhaustif de toutes les branches visibles."
+    },
+    {
+      "name": "Extérieur et approches du second vaisseau",
+      "status": "ellipse + cockpit",
+      "reason": "Trajet complet et embarquement pas reconstruits."
+    },
+    {
+      "name": "Cockpit RT01 et quad",
+      "status": "extérieur dessiné / quad décor",
+      "reason": "Pas de cabine détaillée ni de conduite du quad."
+    }
+  ]
+}

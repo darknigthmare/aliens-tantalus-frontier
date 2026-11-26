@@ -1,0 +1,110 @@
+{
+  "lab_air": {
+    "file": "assets/audio-incarnation/lab_air.wav",
+    "seconds": 4.0,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.2044,
+    "description": "Ventilation et vibration de structure ; boucle originale",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "ship_air": {
+    "file": "assets/audio-incarnation/ship_air.wav",
+    "seconds": 4.0,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.2297,
+    "description": "Ventilation et vibration de structure ; boucle originale",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "cold_air": {
+    "file": "assets/audio-incarnation/cold_air.wav",
+    "seconds": 4.0,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.1629,
+    "description": "Ventilation et vibration de structure ; boucle originale",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "metal_step": {
+    "file": "assets/audio-incarnation/metal_step.wav",
+    "seconds": 0.23,
+    "sampleRate": 22050,
+    "peak": 0.5842,
+    "rms": 0.1418,
+    "description": "Bruit de metal step ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "wet_step": {
+    "file": "assets/audio-incarnation/wet_step.wav",
+    "seconds": 0.24,
+    "sampleRate": 22050,
+    "peak": 0.6011,
+    "rms": 0.1097,
+    "description": "Bruit de wet step ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "relay": {
+    "file": "assets/audio-incarnation/relay.wav",
+    "seconds": 0.14,
+    "sampleRate": 22050,
+    "peak": 0.6165,
+    "rms": 0.1993,
+    "description": "Bruit de relay ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "seal": {
+    "file": "assets/audio-incarnation/seal.wav",
+    "seconds": 0.7,
+    "sampleRate": 22050,
+    "peak": 0.5259,
+    "rms": 0.1144,
+    "description": "Bruit de seal ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "valve": {
+    "file": "assets/audio-incarnation/valve.wav",
+    "seconds": 0.65,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.1162,
+    "description": "Bruit de valve ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "door": {
+    "file": "assets/audio-incarnation/door.wav",
+    "seconds": 0.95,
+    "sampleRate": 22050,
+    "peak": 0.5273,
+    "rms": 0.0954,
+    "description": "Bruit de door ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "motor": {
+    "file": "assets/audio-incarnation/motor.wav",
+    "seconds": 1.6,
+    "sampleRate": 22050,
+    "peak": 0.6176,
+    "rms": 0.0903,
+    "description": "Bruit de motor ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "cloth": {
+    "file": "assets/audio-incarnation/cloth.wav",
+    "seconds": 0.45,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.1141,
+    "description": "Bruit de cloth ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  },
+  "breath": {
+    "file": "assets/audio-incarnation/breath.wav",
+    "seconds": 1.4,
+    "sampleRate": 22050,
+    "peak": 0.64,
+    "rms": 0.1097,
+    "description": "Bruit de breath ; enveloppe, partiels et bruit filtré originaux",
+    "authorship": "synthèse originale, pas de voix ni piste du film"
+  }
+}

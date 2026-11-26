@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "originalFilename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+  "archive": {
+    "size": 62621653,
+    "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+    "gitBlobSha": "d264a06a008b20f6c57ca3b4eb8c5f9807a64d62"
+  },
+  "fragmentBytes": 10485760,
+  "parts": [
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-000",
+      "size": 10485760,
+      "sha256": "5a1a309d28bcfbda5c1f3f8b368cc9a3d5295ed48f95b920e190243bd0827455",
+      "gitBlobSha": "db957d92253c2744609a0025a8c04de4869023b2"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-001",
+      "size": 10485760,
+      "sha256": "e9d10de8ae90fdbab6109446fb44815cc1c03a5778ba6d8a3662265443ba8f4a",
+      "gitBlobSha": "dcbc9ca874f675eac36140196ea8d344416aa336"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-002",
+      "size": 10485760,
+      "sha256": "12a0cc381b3605d379d1e94745b842a61e639995525e35650e9757ef04a44622",
+      "gitBlobSha": "ec2e092ffc708c30f19c1ca4a63785f75b402b97"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-003",
+      "size": 10485760,
+      "sha256": "373df459d4c5a98f930e9fcb2c226945c9af9ea566e9494a029495b34f57a110",
+      "gitBlobSha": "5081beed958b8f2502890de73a4b689fb4b6f8c2"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-004",
+      "size": 10485760,
+      "sha256": "0006d1040815b6053c6bc9d0ab68e7f3cb75a3cdcaeb42fee67cfa846186fe8d",
+      "gitBlobSha": "80ad798c8dbebc31533bda703341b4eb2b61dfb7"
+    },
+    {
+      "path": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-005",
+      "size": 10192853,
+      "sha256": "7c68594515ba28d87fb887bc78415b987e9cb51c879a913bbf5006918d81c684",
+      "gitBlobSha": "8d7cfbb04a313a9759aa9fb276f61950f97c3837"
+    }
+  ],
+  "zipIntegrity": {
+    "crcAllMembersValid": true,
+    "safePaths": true,
+    "noSymlinks": true,
+    "uniqueMemberNames": true
+  },
+  "memberCount": 457,
+  "extractedDocumentPaths": [
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_10_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_2_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_3_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_4_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_5_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_6_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_7_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_8_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/CHANGELOG_0_9_0.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/NOTICE.txt",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/README.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/ADAPTATION.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/ASSETS_STATUS.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/CODEX_LEVEL_DESIGN.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/COUNTS.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/COUNTS_010.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/DOCUMENT_COUNTS.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/FIDELITY_RULES_010.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/INTEGRATION_CODEX.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/PROVENANCE.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/SOURCES.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/content-manifest.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/fidelity/REFERENCE_LEDGER.json",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/docs/history-v09/CODEX_LEVEL_DESIGN_0_9.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/legacy/README.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/reports/DIAGNOSTIC_HISTORY.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/reports/QA_REPORT.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/reports/history06/README.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/reports/history08/DIAGNOSTIC_HISTORY_08.md",
+    "archives/dlc-source-recovery-20261126/colonial-marines/documents/COLONIAL_MARINES_0_10_0/reports/history08/README.md"
+  ],
+  "runtimeIntegrated": false,
+  "fidelity1to1Validated": false
+}

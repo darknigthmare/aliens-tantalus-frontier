@@ -1,0 +1,398 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/airroute.jpg",
+      "bytes": 71125
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/alley.jpg",
+      "bytes": 81159
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/arrival.jpg",
+      "bytes": 49833
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/backyard.jpg",
+      "bytes": 49005
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/bedroom.jpg",
+      "bytes": 72846
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/cellar.jpg",
+      "bytes": 81011
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/cemetery.jpg",
+      "bytes": 45948
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/changing.jpg",
+      "bytes": 72349
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/clearing.jpg",
+      "bytes": 56278
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/control.jpg",
+      "bytes": 73382
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/corridor.jpg",
+      "bytes": 71258
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/crash.jpg",
+      "bytes": 61522
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/creek.jpg",
+      "bytes": 48953
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/diner.jpg",
+      "bytes": 76077
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/emergency.jpg",
+      "bytes": 71611
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/helipad.jpg",
+      "bytes": 62729
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/home_street.jpg",
+      "bytes": 75570
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/homeless_camp.jpg",
+      "bytes": 69904
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/hunters_glade.jpg",
+      "bytes": 48878
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/intersection.jpg",
+      "bytes": 80650
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/kitchen.jpg",
+      "bytes": 76414
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/laundry.jpg",
+      "bytes": 79291
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/living.jpg",
+      "bytes": 76252
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/main_street.jpg",
+      "bytes": 79711
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/maintenance.jpg",
+      "bytes": 83557
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/maternity.jpg",
+      "bytes": 67294
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/nursery.jpg",
+      "bytes": 67719
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/parking.jpg",
+      "bytes": 84213
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pharmacy.jpg",
+      "bytes": 77278
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pizzeria.jpg",
+      "bytes": 75162
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-01.jpg",
+      "bytes": 264000
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-02.jpg",
+      "bytes": 283195
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-03.jpg",
+      "bytes": 277680
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-04.jpg",
+      "bytes": 298520
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-05.jpg",
+      "bytes": 280248
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-06.jpg",
+      "bytes": 263408
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/planche-07.jpg",
+      "bytes": 56385
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pool.jpg",
+      "bytes": 74460
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/power_hall.jpg",
+      "bytes": 70261
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/power_yard.jpg",
+      "bytes": 83292
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/pump_annex.jpg",
+      "bytes": 75292
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/rally.jpg",
+      "bytes": 78701
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/roadblock.jpg",
+      "bytes": 79168
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/roof.jpg",
+      "bytes": 57699
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_entry.jpg",
+      "bytes": 80428
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_junction.jpg",
+      "bytes": 75475
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_nest.jpg",
+      "bytes": 79051
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sewer_service.jpg",
+      "bytes": 76374
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/shaft.jpg",
+      "bytes": 76169
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/sheriff.jpg",
+      "bytes": 68813
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stairs.jpg",
+      "bytes": 81449
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stockroom.jpg",
+      "bytes": 74207
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/store.jpg",
+      "bytes": 78524
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/stryker.jpg",
+      "bytes": 62609
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/triage.jpg",
+      "bytes": 75912
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/atlas/workshop.jpg",
+      "bytes": 78020
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_01_titre.jpg",
+      "bytes": 97615
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_02_atlas.jpg",
+      "bytes": 97336
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_03_silhouettes.jpg",
+      "bytes": 100502
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_04_arsenal.jpg",
+      "bytes": 133046
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_05_tableaux.jpg",
+      "bytes": 99933
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_06_armes_wolf.jpg",
+      "bytes": 65929
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_14_facades.jpg",
+      "bytes": 141915
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_15_couloir.jpg",
+      "bytes": 133805
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_16_rampe.jpg",
+      "bytes": 139387
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_17_dotation.jpg",
+      "bytes": 122287
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_18_shuriken.jpg",
+      "bytes": 101518
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_19_atlas_mobile.jpg",
+      "bytes": 56324
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_20_armes_mobile.jpg",
+      "bytes": 38365
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_cemetery.jpg",
+      "bytes": 97550
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_homeless_camp.jpg",
+      "bytes": 136382
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_hunters_glade.jpg",
+      "bytes": 101940
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_maternity.jpg",
+      "bytes": 132426
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_nursery.jpg",
+      "bytes": 133024
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_pizzeria.jpg",
+      "bytes": 144713
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/report/v10_lieu_stryker.jpg",
+      "bytes": 119243
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_01_titre.png",
+      "bytes": 1079249
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_02_atlas.png",
+      "bytes": 489126
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_03_silhouettes.png",
+      "bytes": 200575
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_04_arsenal.png",
+      "bytes": 224694
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_05_tableaux.png",
+      "bytes": 204661
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_06_armes_wolf.png",
+      "bytes": 375275
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_14_facades.png",
+      "bytes": 849395
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_15_couloir.png",
+      "bytes": 996809
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_16_rampe.png",
+      "bytes": 960042
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_17_dotation.png",
+      "bytes": 888386
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_18_shuriken.png",
+      "bytes": 1061990
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_19_atlas_mobile.png",
+      "bytes": 56683
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_20_armes_mobile.png",
+      "bytes": 136242
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_cemetery.png",
+      "bytes": 961148
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_homeless_camp.png",
+      "bytes": 1089387
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_hunters_glade.png",
+      "bytes": 1063280
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_maternity.png",
+      "bytes": 1074303
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_nursery.png",
+      "bytes": 1083114
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_pizzeria.png",
+      "bytes": 1007945
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/captures/v10_lieu_stryker.png",
+      "bytes": 887424
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/report-desktop-preview.png",
+      "bytes": 117540
+    },
+    {
+      "path": "AVPR_REQUIEM_V010/rapport/report-mobile-preview.png",
+      "bytes": 63674
+    }
+  ]
+}

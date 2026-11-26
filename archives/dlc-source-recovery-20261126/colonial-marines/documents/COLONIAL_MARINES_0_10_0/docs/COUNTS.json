@@ -1,0 +1,14 @@
+{
+  "version": "0.10.0",
+  "missions": 15,
+  "rooms": 105,
+  "newRooms": 20,
+  "doors": 214,
+  "links": 107,
+  "weapons": 21,
+  "characters": 11,
+  "props": 677,
+  "actions": 182,
+  "portalChanges": 119,
+  "furnitureMoves": 20
+}

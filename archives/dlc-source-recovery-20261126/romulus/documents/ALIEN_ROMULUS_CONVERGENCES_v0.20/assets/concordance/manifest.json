@@ -1,0 +1,33 @@
+{
+  "version": "0.19",
+  "pieces": [
+    {
+      "key": "RainParka.torso",
+      "svg": "assets/concordance/rain_parka_torso.svg",
+      "png": "assets/concordance/rain_parka_torso.png",
+      "width": 64,
+      "height": 96,
+      "sha256": "9d574741228a069fdccc9ef9f42ad25cf36e24e7227d9dc3a8c0e2dcf3f57417",
+      "status": "original illustrated piece; red waxed-cotton direction; not a screen costume scan"
+    },
+    {
+      "key": "RainParka.upperarm",
+      "svg": "assets/concordance/rain_parka_upperarm.svg",
+      "png": "assets/concordance/rain_parka_upperarm.png",
+      "width": 32,
+      "height": 80,
+      "sha256": "610b0f4cb52fdbf87d8d295c72630522df199cb6b79b49c4a3898cf754404aab",
+      "status": "original illustrated piece; red waxed-cotton direction; not a screen costume scan"
+    },
+    {
+      "key": "RainParka.forearm",
+      "svg": "assets/concordance/rain_parka_forearm.svg",
+      "png": "assets/concordance/rain_parka_forearm.png",
+      "width": 28,
+      "height": 80,
+      "sha256": "059699986f93ffad55803fc8e927e25b1d26d174fc4710239d10afd12da9baff",
+      "status": "original illustrated piece; red waxed-cotton direction; not a screen costume scan"
+    }
+  ],
+  "note": "Only three additional clothing pieces. No complete new character or frame-by-frame animation set."
+}

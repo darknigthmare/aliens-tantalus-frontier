@@ -1,0 +1,3205 @@
+{
+  "originalFilename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+  "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+  "files": [
+    {
+      "path": "COLONIAL_MARINES_0_10_0/MANIFEST_SHA256.json",
+      "crc32": "62d39063",
+      "size": 76117,
+      "sha256": "c96a223b166d36f06c9cc7bd5e8203edd0ecf28d7c4fe76287b363b13728b1d9",
+      "gitBlobSha": "db8962922e14ccf5c4a2d3a3ab66fb078947e097"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/AUDIT_FIDELITE_COLONIAL_MARINES_0_10_0.html",
+      "crc32": "7f94afd3",
+      "size": 100301,
+      "sha256": "fd86eda8e2d02b41950c2bef34347266ae9083ed6dc6c7fb318d4c7c5fd43bac",
+      "gitBlobSha": "b1a3f6115c82b45f4997c06500434d4b985639db"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_10_0.md",
+      "crc32": "0c10df17",
+      "size": 1806,
+      "sha256": "b1b3a47c5a0068abc8afa9b2478cc3bba6725e378277125fcee4401b3386cec0",
+      "gitBlobSha": "357d6dd2103fece9bc6c042a03e5477d8dade857"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_2_0.md",
+      "crc32": "6fc17823",
+      "size": 1705,
+      "sha256": "8e0c5a0d2058e776775e80afafd2d22b7a9410075051429e6f387af3ffb38fd9",
+      "gitBlobSha": "398f69cce8adb5132b21aa64649e55170a0fcc5b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_3_0.md",
+      "crc32": "d4698b46",
+      "size": 1800,
+      "sha256": "b03b4478e4c67d6610d51fcac46753e413f3dabaa452dbb49ef4df73c59fc618",
+      "gitBlobSha": "61d9d478e158fcaa08c84d6c224e874780ad8469"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_4_0.md",
+      "crc32": "ec6e171b",
+      "size": 1699,
+      "sha256": "62e777d98260ce0b89ebeb8587b359eb374d4841fd82e9c2aa2d6d3d31cd4e3d",
+      "gitBlobSha": "f982103518953149a0b8bc94b7e6edc2972499d6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_5_0.md",
+      "crc32": "a7f17ee6",
+      "size": 2056,
+      "sha256": "3509506b446477e7256d2227c0a7c6c9ca30575a4a1b6c69a21131b3759e1594",
+      "gitBlobSha": "b746ef41c02bb614db9934a03548d7f9aae494c4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_6_0.md",
+      "crc32": "7f24af6a",
+      "size": 1849,
+      "sha256": "0f3e6174ef716543b80957b6b0f534f8371975e08faa60cd1f17c3e39518eab4",
+      "gitBlobSha": "49658e8e8813c2febca1ce8ede5e340a29bde0ae"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_7_0.md",
+      "crc32": "ed1088d6",
+      "size": 1631,
+      "sha256": "bbc4676d445e20ff389735b40a54baf4620ef707bb79d2e2449ad8c2694416cd",
+      "gitBlobSha": "edf7a20add16bea9d7d029226887bacc34646cef"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_8_0.md",
+      "crc32": "34faab47",
+      "size": 1324,
+      "sha256": "ad88110f4f0191ec936480a875ee0e96b5ac14a64d18051ab9df78ade716adfc",
+      "gitBlobSha": "a55bce23042e874f31fe3c6450f199e6fe612ad3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CHANGELOG_0_9_0.md",
+      "crc32": "00e1a076",
+      "size": 1833,
+      "sha256": "3227ef4e65ffc93bf111f1f57fad3133b4689f9ca95f6ececb27fd27a70537ad",
+      "gitBlobSha": "116b4a92981b1dd67aa37b0455fe1e342a0f30af"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/CODEX_COLONIAL_MARINES_0_10_0.html",
+      "crc32": "ecc08d9b",
+      "size": 17769444,
+      "sha256": "f8c00138461c6427c8313a9431771da528259b9b2d007fa80af0e207f7049f45",
+      "gitBlobSha": "41bfb97773bad39f7f08d65a10b0b8cb5f454d94"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/JOUER_COLONIAL_MARINES_0_10_0.html",
+      "crc32": "086b61cc",
+      "size": 912113,
+      "sha256": "a1b0c34bbeb47610455b01cb06fa63300a31c073fa4836c490e5383d9c5d9b6c",
+      "gitBlobSha": "d76c34d313876dc6214b860e4d63f8cde6279c2c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/LANCER_WINDOWS.cmd",
+      "crc32": "77925e1f",
+      "size": 304,
+      "sha256": "49fe54c30f51173f9a2d0401aeeefb977adcfaab8d4545b54d3231d0b95145c2",
+      "gitBlobSha": "655cbd7cc9e9c33bc6816a3e300af97cfd458afb"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/NOTICE.txt",
+      "crc32": "33d471d4",
+      "size": 604,
+      "sha256": "a155fe30d6463229e3c3c52b469b82debfa00a9fdaaede31b8ffc99c4fb77ed5",
+      "gitBlobSha": "aee0aa384e4aed243dc06ccb7d08a11c6826a6b3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/RAPPORT_ILLUSTRE_COLONIAL_MARINES_0_10_0.html",
+      "crc32": "d2a6ff07",
+      "size": 6756763,
+      "sha256": "0d0c1fbfcc652719ad146fade84e84a39044813407fcbcd28ab8031568d4a728",
+      "gitBlobSha": "ae0f3e6ff0edc9ef263bc8f02489506a5e7950b7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/README.md",
+      "crc32": "15a2aadd",
+      "size": 8236,
+      "sha256": "6de956e38d0981ebf58ff546a4e5ceb3b9744e5ef338eacf8cdd7253aa2faef7",
+      "gitBlobSha": "20829fb6fbcb456a4f795f6367f575e7f2618abc"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/ADAPTATION.md",
+      "crc32": "5d355f30",
+      "size": 1054,
+      "sha256": "397c9577dfd7956be3e7bb418813b791bba04376d51d2f5404111b44e83c2927",
+      "gitBlobSha": "f1c120638264c51d9a9db289b1b24a1131507fb8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/ASSETS_STATUS.md",
+      "crc32": "17b924d6",
+      "size": 405,
+      "sha256": "0cd0f74190c51610d1a59e829edc2714b950c538e8bcb567d6b2855c1391b350",
+      "gitBlobSha": "01138b4226238f9c1a375d56c24e8288d5b2bce9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/CODEX_LEVEL_DESIGN.md",
+      "crc32": "a87cddcb",
+      "size": 153863,
+      "sha256": "6a4325ce5371eae05fa2cabd22d8ac19c863e553c5e26105307cd8d875ff2e18",
+      "gitBlobSha": "13c6ee7f1d0cad85981d78218fdcd78f87ac8278"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/COUNTS.json",
+      "crc32": "9720814c",
+      "size": 228,
+      "sha256": "c11327975569af6220bf93134f75addd1163df5fb7c0fc32df091062e3c19756",
+      "gitBlobSha": "d924380ef3cfc3c7b7953f26716304dfbd20d3d5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/COUNTS_010.json",
+      "crc32": "9720814c",
+      "size": 228,
+      "sha256": "c11327975569af6220bf93134f75addd1163df5fb7c0fc32df091062e3c19756",
+      "gitBlobSha": "d924380ef3cfc3c7b7953f26716304dfbd20d3d5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/DOCUMENT_COUNTS.json",
+      "crc32": "0d6e8e6b",
+      "size": 241,
+      "sha256": "545a591028883d01e270939ec419b62925e58abbf25c609f5a35106630ec3d28",
+      "gitBlobSha": "badb346818897f3ab2943f86119e969434f7279c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/FIDELITY_RULES_010.json",
+      "crc32": "1a8a2413",
+      "size": 8125,
+      "sha256": "2d13892b7938eaf0fbe52e715343862c0c422d4cd169f1df59e6572385f9c27a",
+      "gitBlobSha": "30401756c39558be71384b336a696629dbdf60bc"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/INTEGRATION_CODEX.md",
+      "crc32": "c8dbb014",
+      "size": 2756,
+      "sha256": "b59c73c264eb5ca631f86843fc0ba08d48d70c08c6f0435d912d46a519f14c55",
+      "gitBlobSha": "3d4b7d45c9ca884fdd043d393328b4245f11e5bb"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/PROVENANCE.json",
+      "crc32": "c5669686",
+      "size": 3367,
+      "sha256": "b691c196c0c39a800d81d98038cbf8e7014be4baffc61b7d6415dce5ea870b0f",
+      "gitBlobSha": "feb4b9fe6ffd6d61aada6130835fe4a308e40f73"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/SOURCES.md",
+      "crc32": "a51741c2",
+      "size": 2002,
+      "sha256": "9535b3f8ef3b76f0a77712334cccbdc731ab4df44c3fb3eb589eb30e1ac87ce3",
+      "gitBlobSha": "8cd7ff457d4723e4cebff876d05d25428a4837f2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/content-manifest.json",
+      "crc32": "829f63c1",
+      "size": 647563,
+      "sha256": "410d7a9762225b0e4ac359978acc3fce15ccff2c17a196819dd28b7c3d2dd7ae",
+      "gitBlobSha": "e3b4c1447720ddb3a5ceac3cdcbe9c78394a7e7f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/fidelity/REFERENCE_LEDGER.json",
+      "crc32": "8e13ddb6",
+      "size": 50016,
+      "sha256": "405192c51976e936da3d8f887883e80ae21cac0ef7136ae59e79a3f760bfc293",
+      "gitBlobSha": "264c211e2d6ecaafc14706d13289c5290356f42e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/docs/history-v09/CODEX_LEVEL_DESIGN_0_9.md",
+      "crc32": "a5782fa0",
+      "size": 214362,
+      "sha256": "e2369507ad732df03c7cd065bb6dbeb448b078aff81908ebc1bbf21eb5f89e3b",
+      "gitBlobSha": "c4ef623d483e7612dfba2b60e75b5e6f2dcefd24"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/audio.js",
+      "crc32": "be09e194",
+      "size": 1676,
+      "sha256": "545f59d672a490e4b21ecbd5dc7bd35bd1184c2710b357c8f6a1ca4397320e75",
+      "gitBlobSha": "a2e44f7740b15d1a40688cc29ee8e29ac316aea7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/core.js",
+      "crc32": "23722922",
+      "size": 64207,
+      "sha256": "3046142700e2ddb018a014f0a9dfeefd2db823f25b4ef54d6199a1b97e32e2b9",
+      "gitBlobSha": "cd098e061986ba645987900a839328c903c93a8d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/data.js",
+      "crc32": "7055fc34",
+      "size": 647657,
+      "sha256": "e3a7475f2d36c02261759a2c54c83a532d79c7de7c1766833273a978c938b7ad",
+      "gitBlobSha": "27bf8aedfe29dfa641bd792f58e96efb943dfa49"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/environment.js",
+      "crc32": "02a93d96",
+      "size": 6606,
+      "sha256": "f35c407399c331222984b130573a18c4f2e85cec9a4a565513f538fab83c340b",
+      "gitBlobSha": "c2fbb49b293a5555b59f0610d654994f9193ca80"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/field.js",
+      "crc32": "448aa957",
+      "size": 6587,
+      "sha256": "bedcfc271ff434edd4217a8e3ba1d47525cdfdc8fc47d8696cc66c7ddf3a2c2b",
+      "gitBlobSha": "e47dd02b59ffbd4ff2c796df8cff07c6fbb8e9b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/host-entry.js",
+      "crc32": "f91a57ee",
+      "size": 613,
+      "sha256": "efcbb5f8a76811ca472cdee7613f8ef4e03bfc8db459a080198d8689eab8cbbf",
+      "gitBlobSha": "ffaa2ddd6e09fd9d7d6474e047f36a3fe3bf5fae"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/hunt.js",
+      "crc32": "9c127ad3",
+      "size": 18178,
+      "sha256": "6ebf9873622cd366500cc6009e5cf6296aa12732ef833d2c6870282641e5dd2a",
+      "gitBlobSha": "b5b1baa52abdb8acec8a9fa8f0a7dff999468f15"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/index.html",
+      "crc32": "4cb4a49a",
+      "size": 5760,
+      "sha256": "dab2c5a3d74a88e8e0d77958fb91aed845095f41bf7e657705b5c9b4a24e097e",
+      "gitBlobSha": "5eba5b01716fdfafede0c02cb348b60238c96ccf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/logistics.js",
+      "crc32": "0b4a9078",
+      "size": 9919,
+      "sha256": "c182e5aecece568786f76a42d0fec044faa70d8c9120db25d666e0cba095d22d",
+      "gitBlobSha": "a5f0301ab292300289b1f72fa02c44a9fc2fa44a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/render.js",
+      "crc32": "b82e395a",
+      "size": 63925,
+      "sha256": "5c9a9cf04d8f4b538a6872631b39f32d3366f0f98623c067ec8f40e15aa669df",
+      "gitBlobSha": "0b30545fdd9e6b79bef7243dfc5e84bd27910172"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/style.css",
+      "crc32": "e79c6b3c",
+      "size": 20898,
+      "sha256": "525e45756e57777328f3739c2e4e6ba3dd7bb3cbffcc052a1d01ee13f89efa44",
+      "gitBlobSha": "033e1b1e3e8b4e38fd3510da3942907b914a3014"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/tactics.js",
+      "crc32": "b8c74eb2",
+      "size": 10241,
+      "sha256": "e1ef35e2d39c2c8ee630e6ea88f755cface61f7dcc468413b9115214795428ca",
+      "gitBlobSha": "6ccdfbac99b46f58b712c36eeff056b6b7e0fafe"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/game/ui.js",
+      "crc32": "c5401b9b",
+      "size": 56840,
+      "sha256": "725417f7f22e3e241f9f2b1e7f54d9950988cceee245e86b6fdf8b1dd7c18295",
+      "gitBlobSha": "8d39c40b27fd63ef7fef8e94f6c41cfe56d3bd13"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/legacy/COUNTS.json",
+      "crc32": "c0f2a2b2",
+      "size": 167,
+      "sha256": "ab588e44352238a055991b2b3af69eeebd128c5ad3586f5a8f9896c4c5ee8812",
+      "gitBlobSha": "f4eb472f833c32d3de3258682abbeb27e263ed23"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/legacy/README.md",
+      "crc32": "3ae122ad",
+      "size": 543,
+      "sha256": "f59f6a84a99669b75db9bdca8c2ecf97e30e3e9cc998055bb906485ff9bcde18",
+      "gitBlobSha": "ef8fce05940e6987cdaf33280c99ac0aa059cbf1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/legacy/VARIANTE_STASIS_v0_1_NON_FUSIONNEE.html",
+      "crc32": "e758aa3b",
+      "size": 257743,
+      "sha256": "aef94faf28b596597ddba5be3d10a4e23b2676340e88f5d322a9dcb30e9544fc",
+      "gitBlobSha": "9bea63080a442426dae49a98e9477aa0c1f9c7ab"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/package.json",
+      "crc32": "04d9d4de",
+      "size": 368,
+      "sha256": "1bbe44a47e0c5ad1f812d336de0b29b01a4e30d6ea29ddf3d5d5b5bfe7307f10",
+      "gitBlobSha": "5a9688532c5fefe702626c37496d7bd89475bbec"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/DIAGNOSTIC_HISTORY.md",
+      "crc32": "dd0a6bba",
+      "size": 3555,
+      "sha256": "4b07fd41a9aa3815dfba55b807b7471cb53aee9cfc7c75b69124e42b94b9e479",
+      "gitBlobSha": "b239bb972554dd0b63df9662ae364f3855ea0b2b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/QA_REPORT.md",
+      "crc32": "88e298bd",
+      "size": 726,
+      "sha256": "659c59d88dcb9a4400b111b938a2e5616686d1d725ad3e0cef98f2a99429a14f",
+      "gitBlobSha": "7bbf83a9965923f53442735776c114c176c47ed8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/agent-marine-direct.json",
+      "crc32": "5a27def2",
+      "size": 6292,
+      "sha256": "7a343267779d4eee0a89962a2741d34a5e451f6f989254ddd0b8e1c25f5b483d",
+      "gitBlobSha": "b10285263f9bc36aab9e24b080036bdb3b59110f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/agent-marine.json",
+      "crc32": "a83f033f",
+      "size": 6560,
+      "sha256": "427b16632c576ea5eb6edb7ec1e2535ad8590edf05456e9986628e8aa76a5fa0",
+      "gitBlobSha": "3313b527d75743e2dd3933cf340811ac9efc0b9b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/agent-recruit.json",
+      "crc32": "96389ac0",
+      "size": 6543,
+      "sha256": "c78a16731872d54be13a333f0ae68ac1247bfde24ec2d3312197bf056d4f8164",
+      "gitBlobSha": "a5822e21942951ea759ceb4babf333837cc0661b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/agent-veteran.json",
+      "crc32": "35fbaecc",
+      "size": 6585,
+      "sha256": "78cad1739ffd9b54125c844d88beda811f2e26bfcec94391907dc38e5f04cdbd",
+      "gitBlobSha": "c146a2413d38b3a16b434d82e4d3956c9fa87569"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/browser-progress.txt",
+      "crc32": "e59f4717",
+      "size": 4107,
+      "sha256": "a2f4cd5f154e1e519a58c4657cea3149ef2450f2cb0693182c258005c7dbafa8",
+      "gitBlobSha": "896548674d6475efc68623e02fc608c1ed5c1c24"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/browser-source010.json",
+      "crc32": "5776a797",
+      "size": 2057,
+      "sha256": "24502c16d398f7a93ca0e252601970c05409f1d7e1a3d2e910d49df406ddbe31",
+      "gitBlobSha": "20375e389835aa933ff46afcf0630e37db619a8b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/browser.json",
+      "crc32": "c50a126a",
+      "size": 17759,
+      "sha256": "0e8a038dc11ce590a5260e56fcf2726ecec90afd93188a44712c3e6026c514e7",
+      "gitBlobSha": "1ca614b7a9b11751f5ffb2f39f7370873db877e9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/browser09-run.log",
+      "crc32": "959a34df",
+      "size": 95,
+      "sha256": "905431f8664fd38b80fee73b3a89b31d8a556a20abacdd313c65b21527935948",
+      "gitBlobSha": "50b5d44da8628237f195291d1ec8a40bf77cfd96"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/build09.txt",
+      "crc32": "7b90d93d",
+      "size": 953,
+      "sha256": "b9d3958a4b57c646827eb1258a56cba33367032ba2788938f91fffe28971de04",
+      "gitBlobSha": "7433717314dcece8a00c82bc3e4d9ec28f9b0690"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/01_accueil.png",
+      "crc32": "a5481eea",
+      "size": 698644,
+      "sha256": "b40d54675590e134631689ff9ac0633cfcb6999bf1a9faf460a0dbc66851fb25",
+      "gitBlobSha": "b586d5cdf4f2002070439d2553e6bba12847e837"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/02_sulaco.png",
+      "crc32": "859a9969",
+      "size": 535716,
+      "sha256": "cf35110454aefa89e6cde86e6059f7ebd5caa620ea44afe9b3b2a001e0c166a6",
+      "gitBlobSha": "3167d630cdb772782ec8800017e026c2d40f91c3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/03_pompes.png",
+      "crc32": "34506350",
+      "size": 516668,
+      "sha256": "03c1d096d7e1a8f280e0968df0828c31205e4e43a310564bb531937d2ae18c47",
+      "gitBlobSha": "1f737d308215728e12f361832a1758cc4b80d6b7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/04_poursuite.png",
+      "crc32": "56c7b426",
+      "size": 527508,
+      "sha256": "12a1552b1ecfef0197d07bba19d8298cc58cb31e5276386bfaf71f78a7a2cc81",
+      "gitBlobSha": "059df0522dd33a38f4339ee918c6fcd0c5f64cd0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/05_chargeur.png",
+      "crc32": "62edcf03",
+      "size": 551838,
+      "sha256": "912e29f0ae6433b3f62cb71717a09d5c5e30fe50cf3412ee66786a56c33a0973",
+      "gitBlobSha": "165207d48a7b1e90c9e835b8c3a788ed829e93a1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/06_toit.png",
+      "crc32": "ed636eed",
+      "size": 439452,
+      "sha256": "0903a9aece0e556d01d7abdc666e9ae05b9f36d1462d7e753a593849863f9ec7",
+      "gitBlobSha": "82cf78206861d5b18d94d1b8ac525ea72e9f4642"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/07_portique_avant.png",
+      "crc32": "645647f4",
+      "size": 442650,
+      "sha256": "fed40e3b51948d3474e7ddf9263f6dcfdb8ba9c97f6929855ae79036f9975ebd",
+      "gitBlobSha": "387098c53aa55794e9fa11cde759574abf5cc4b3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/08_portique_apres.png",
+      "crc32": "a18be9e0",
+      "size": 433601,
+      "sha256": "a7ef425dcd0bffb78dbdbfdf56b547d5068108b81cc1215d6ad0aac92dd04c42",
+      "gitBlobSha": "e01bf9de984a3a016b9eaae4d344afb1029a4d43"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/09_observation.png",
+      "crc32": "c9b2bf5d",
+      "size": 521537,
+      "sha256": "0a3d1557a4d5ef7ecfb5c5d63ec71f761635055fc3dfe0d241be3b442e0286a2",
+      "gitBlobSha": "1e66f9920fdd798a2985d52ebc962df2b31dc24f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/10_sauvetage.png",
+      "crc32": "ac16189c",
+      "size": 439461,
+      "sha256": "76811ca70ff74c9cc7854e9d3a44f08ac488a803734c1bbcacc97226fbf9877d",
+      "gitBlobSha": "25ea63a1c600fc5bb7906c23d07de3b5c127c697"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/11_reine.png",
+      "crc32": "6ffba9c7",
+      "size": 579589,
+      "sha256": "9040a9a4209e5933a9f198dc6912d28907feee0245a724fb55de36b7f2c8c72c",
+      "gitBlobSha": "f006c490fd0885385530b5e090740289a14780c8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/12_plan.png",
+      "crc32": "201d7805",
+      "size": 171200,
+      "sha256": "dcf0162cbddf45e7baacce19e36bff9587d307e0cb9d6c20a01fc56ba290e4ad",
+      "gitBlobSha": "ac93621b59a1ca91bcfba0a146b79dc45c9444d3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/13_dossiers.png",
+      "crc32": "fa0929b6",
+      "size": 159269,
+      "sha256": "f0003e884a8312db7dbe761d0eb5a03f2b01cd12dd340fe4afe6da09a418260f",
+      "gitBlobSha": "7428c207b067511a869aff677bbf1349f4fac4b2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/14_mobile.png",
+      "crc32": "6ec1208c",
+      "size": 87154,
+      "sha256": "33c88382b3de02f7a7113440dfa3a1d0cbe4f84723c2674ddefb3edba87732bd",
+      "gitBlobSha": "2f202b8e34a8a94697d328e3a0f1c1b1afd5c4c2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/15_legato.png",
+      "crc32": "68773f31",
+      "size": 546869,
+      "sha256": "38305ca26fc74564065f4e1204f7ab4dd1965efe3bf3357e01acea1946b5d38e",
+      "gitBlobSha": "6316ef6738de383f54421899ccf085abd5da6e32"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/16_alcove.png",
+      "crc32": "df435a03",
+      "size": 500806,
+      "sha256": "f2f7745f1a4065c5852a4f93bcb926813c933c8d2e26f1abb4cc1905aa1db921",
+      "gitBlobSha": "0921e10b3a64a17998fe74bf55f873fd00e403be"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/17_escorte.png",
+      "crc32": "ea4fd32b",
+      "size": 508915,
+      "sha256": "ed4763277b151acca31b452ffa5f82bfa96fa89ae0caef616ba38bfc4c6ee8ac",
+      "gitBlobSha": "4d94659dca343119229a52274a754867e870e0db"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/18_transmission.png",
+      "crc32": "fd125fd0",
+      "size": 503894,
+      "sha256": "f110a1923c9c070e0f115fe1f70984e0994aa0155d0c049593a1a6ba4c0bdcf4",
+      "gitBlobSha": "11a1687c069ad5038969995cf7c5ed78602d0cd8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/19_relais_exterieur.png",
+      "crc32": "c001143b",
+      "size": 406094,
+      "sha256": "663daa1769bb4ee7af2905923093988470cf7c73fb42044fb846ee3d321b711a",
+      "gitBlobSha": "622bd876be9f0bc303bbda642fd78c55c40b62d6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/20_depart.png",
+      "crc32": "aaac28a2",
+      "size": 423430,
+      "sha256": "c214487011026edac62866179e67b4b168ab198f50b245c0ed47e98f0ebb64ea",
+      "gitBlobSha": "ee63a7d11f60c4a01664f43439b9a6cc39c61c4c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/21_tablette.png",
+      "crc32": "86737701",
+      "size": 263372,
+      "sha256": "daffc60466d8660c67e2449280fcb20dbfc4431658c5b2e94e0d921d943ef73c",
+      "gitBlobSha": "de9d1c46a4f229dfd7a982f1ac4094a05a604bfe"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/22_oneal_a_terre.png",
+      "crc32": "cff590d4",
+      "size": 536166,
+      "sha256": "9d5a4dd6dfd66ca9ac4bdae2861fd0b8ce01544b88b9ad0695477a74f1d0cc6a",
+      "gitBlobSha": "ffa6b8c9881b1c7307bd4f7454601ee3174d6e39"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/23_cible_designee.png",
+      "crc32": "3241d4c2",
+      "size": 547192,
+      "sha256": "5c52400ca39826fc606c4e6f1831110f54622d75f7b82e54e86b8eddf357fbde",
+      "gitBlobSha": "87d0cbe5cf7226aafc3b2e9c3a7e7ecf6d12307f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/24_sentinelle.png",
+      "crc32": "959154ae",
+      "size": 196161,
+      "sha256": "2f28064409d6c550d6ee17d102b44f06a4175771705026ebc6ed2c2572ab7219",
+      "gitBlobSha": "47ff8c74a4fe9384bc82f5103f499caeb2942633"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/25_bilan.png",
+      "crc32": "3ae93d06",
+      "size": 143927,
+      "sha256": "6147cb5bfcf4ea85aded44e34394b35970ef62fead1e8328fa7bd644d2ceef94",
+      "gitBlobSha": "2314da1c7c76c34fb73b38a697551bd0d6dc29d2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/26_hunt_accueil.png",
+      "crc32": "a5481eea",
+      "size": 698644,
+      "sha256": "b40d54675590e134631689ff9ac0633cfcb6999bf1a9faf460a0dbc66851fb25",
+      "gitBlobSha": "b586d5cdf4f2002070439d2553e6bba12847e837"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/27_hunt_arenes.png",
+      "crc32": "151036a9",
+      "size": 269868,
+      "sha256": "edeae99c6acb787613c8acd439605c20289ac092e16985ef73c30a087e5979d6",
+      "gitBlobSha": "bc9cc8c482eaab7a6805bf108c1b985d911a2aa9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/28_hunt_ravitaillement.png",
+      "crc32": "d663987b",
+      "size": 231901,
+      "sha256": "2f496035c506611dfddc4cdac453c706d63c3bdb05ab0eccc14fb1d2600a7df2",
+      "gitBlobSha": "e99a4cc68560711158382df472a4f01804b791d3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/29_hunt_contact.png",
+      "crc32": "d133001b",
+      "size": 581464,
+      "sha256": "a3a48bbb6156bb361866f34c8ae131d4c1ae1c0f15c53a57918d4af13ca5ef0e",
+      "gitBlobSha": "ccf1d6e16b32fa588472f6233dbd02b1a2425c27"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/30_hunt_plan.png",
+      "crc32": "6df92304",
+      "size": 142096,
+      "sha256": "278a90cd58c2eb7bed8bf9d0b752133d5abfe549d042692f2d236b4deb089936",
+      "gitBlobSha": "6cea2629b3fb4b9e1ca144dfa4fd76b2acf48e57"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/31_hunt_balise.png",
+      "crc32": "c960f6c2",
+      "size": 595929,
+      "sha256": "f17e4cde820c1bea8fe4178a7dc84cf4f82b87772b1332627fc4cc82186e1797",
+      "gitBlobSha": "e5eef78ea78f3ce456c3a04703e8c0f6a8bbbed7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/32_hunt_fret.png",
+      "crc32": "b9f4b9c8",
+      "size": 546461,
+      "sha256": "edae167e897c799211d1aa344c831798feada1e0d71e679d3e7fd1e9dd3cacaa",
+      "gitBlobSha": "8bff15c938bbec550a1fb206c379084fe0d8ef0a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/33_hunt_laboratoire.png",
+      "crc32": "04e64ab7",
+      "size": 537384,
+      "sha256": "3bcced9d714afcb27b1881fcf04c526b253fc9d4eb0c4511c848a92d719566c6",
+      "gitBlobSha": "ee9e624f3442226a1a900729e8c6e8ee0564e44e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/34_hunt_colonie.png",
+      "crc32": "4e40b850",
+      "size": 475137,
+      "sha256": "58304133bbe1279538fd94df92818c278302cc158ec7cb8770ccdaf6a0877f26",
+      "gitBlobSha": "f3cfb7333c00993f7ebbdeab00b6bb7be8786b91"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/35_hunt_bilan.png",
+      "crc32": "e95caed5",
+      "size": 137052,
+      "sha256": "a128cc66ceefb9927b5549f16913cc556287f1d8a98497a2718175efc09d4354",
+      "gitBlobSha": "a17ed8c9e0950e313835a46b2040c68f6e134c01"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/36_hunt_mobile.png",
+      "crc32": "b4bfc809",
+      "size": 95027,
+      "sha256": "10447e0ef28f366eea040f81890d3bb667ebf9ede4caccb146258d25a21e3be4",
+      "gitBlobSha": "3ac6a18ce8dbc03735bef1a9486c4ebb37c62d5a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/37_briefing_maintenance.png",
+      "crc32": "9d16126e",
+      "size": 178096,
+      "sha256": "3399df53e77f3687554c01941a8c904216e559b7c5c4b8fa8f99b6327c9da16e",
+      "gitBlobSha": "29bc4cbe09118f4b1f7ef1c6ac813b2d913dec00"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/38_diagnostic_sentinelle.png",
+      "crc32": "f4c2666d",
+      "size": 205195,
+      "sha256": "01f97788251a5e6646d3cc74e5bf37063b7d084f19bc8ecafc864c934086d739",
+      "gitBlobSha": "4c7e92a4c075f88b8fa13a1cfbb67c40ecf4c6a6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/39_sentinelle_hors_service.png",
+      "crc32": "7cdf1d12",
+      "size": 587011,
+      "sha256": "e56fbdb874bc956932c587947f3ff9f96f9d6f12f86fc450724388dd707d95e8",
+      "gitBlobSha": "1f0796308ec6fbf47a8355b374eccc60e6ecdced"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/40_surchauffe.png",
+      "crc32": "2fdd9b45",
+      "size": 597946,
+      "sha256": "1c0f5a2ebe937651ca21964abe886f83a39b16c959b0267ed6196662c254c03e",
+      "gitBlobSha": "2e3edbfa0f30556bbdaa378288a10b729296d147"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/41_brule_persistante.png",
+      "crc32": "13f41d37",
+      "size": 583285,
+      "sha256": "5954b8bcae4c4fb8c0657b4356bfd880a4a2ce2f08237b2ce0d6f539ddd46fcf",
+      "gitBlobSha": "999374c9767e7db9f9fd90177118d6176a4c41cf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/42_maintenance_mobile.png",
+      "crc32": "3c9bbbed",
+      "size": 47005,
+      "sha256": "aace814936c67a6d6b3642a27f79f45a6cef1dba0afde81812cb4552bb89f5ce",
+      "gitBlobSha": "735bde302bd7b6d29f3a66f87df048ca61bd45bd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/43_equipement_tactique.png",
+      "crc32": "a4abb54e",
+      "size": 260469,
+      "sha256": "cddbcce06f288dd263e3edd7dd707dc258d84b56a9a7b396e8cf037107615ab9",
+      "gitBlobSha": "cd8908e6ba2dfa525cd67a50901db53e54c1d706"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/44_leurre_sulaco.png",
+      "crc32": "428ee19c",
+      "size": 541393,
+      "sha256": "154b359d8dce77ad9f95ea330f12fabb1dbc014960228132a444f5f15462c537",
+      "gitBlobSha": "57535fad63e059c704e90d7669a1314926348fa6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/45_diversion.png",
+      "crc32": "1d6e772b",
+      "size": 529438,
+      "sha256": "7d254f332ac928a7fc2427affb85658abfee64fbfd01eeab7d46e443ee4a96b7",
+      "gitBlobSha": "ded3bd2530ef0d02e3e128502b0fb4abe55468ec"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/46_mine_declenchee.png",
+      "crc32": "0a1eea10",
+      "size": 496886,
+      "sha256": "5d8e695587531ffcd6564644fa6efa9f9ff1f0732c1575fc366b44b84139a753",
+      "gitBlobSha": "45125092548e7c5cb814c427d63f465af462ff53"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/47_apres_detonation.png",
+      "crc32": "873f4adb",
+      "size": 503057,
+      "sha256": "0b3ddfe7d16bfedb390abf2a213eefa21b6c3f5777bcced56bc7ff0cbde52d1c",
+      "gitBlobSha": "4b1d49af7f1bd2f57140fc6f15a60849b50469e8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/48_detecteur_mesure.png",
+      "crc32": "bcf68939",
+      "size": 536904,
+      "sha256": "7f38d6e14c0f6a0c33e781f3a4182a8d98a090838b07b4f865214bdc5272bc71",
+      "gitBlobSha": "a04961555ddcd253dfaf904b0406bac4e46dbd7c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/49_equipement_mobile.png",
+      "crc32": "43d8a869",
+      "size": 131297,
+      "sha256": "5e112eaa1a797fab076c28ecbdc794e989eb025e69be713216099023afe0f6f3",
+      "gitBlobSha": "4bebc9863256c91f58b2cddeba737ecdfa58888b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/50_ravitaillement_tactique.png",
+      "crc32": "756be959",
+      "size": 173008,
+      "sha256": "582ccf2bd8fe9cee756ccf35535c8b56c6d84589b0a587e6890e79146b699abb",
+      "gitBlobSha": "2225083388ecc4ee3401fa59595f4b1fe42bc500"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/51_repli_tablette.png",
+      "crc32": "deb62757",
+      "size": 199731,
+      "sha256": "e7541295d1464ed7eaeda04b69261161feec42258addcc1348ba6c26fed459d0",
+      "gitBlobSha": "2077a05bfa3c31cc093a76790d8114e6f33e3873"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/52_repli_maintien.png",
+      "crc32": "7ffc3404",
+      "size": 551698,
+      "sha256": "a846368e762c29b0daaa0e1bd5fc978e9813a78d364909bd5f33db567e72c6df",
+      "gitBlobSha": "1715a53e6dfb48a9e9d376fb5fe5b18754372efe"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/53_transport_terrain.png",
+      "crc32": "3b04e8f6",
+      "size": 552569,
+      "sha256": "fc680feda306a82546bc61f5119156a30e7eea03549a2a49b4fc24fd770ba868",
+      "gitBlobSha": "d15107253a285266d984652cda5dba77764204d1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/54_transport_tablette.png",
+      "crc32": "d89a6c96",
+      "size": 274776,
+      "sha256": "230bef4c6bc1054ff4d4c37870fa87c12f0d077e64c98c6f028baeb3e1b5a80c",
+      "gitBlobSha": "cd2cc2e561568b2ae00104e2e1a37049955617ab"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/55_poste_redeploye.png",
+      "crc32": "79e5404c",
+      "size": 551072,
+      "sha256": "b7fa84f1c881192c06a718b5f82b2eaca68d9708216a90e85549ef83c0c7c3ba",
+      "gitBlobSha": "cf0fbe513c7a7b944fdfca386fe6900ae8d02087"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/56_position_oneal.png",
+      "crc32": "487ec49e",
+      "size": 552476,
+      "sha256": "b8aca67c253dff96b3a2570204ce997c1cc294ef5190e54d2010acb55e0075e8",
+      "gitBlobSha": "82846403fae39a941f4017cc6424d2ece285c138"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/57_tablette_etroite.png",
+      "crc32": "e1da8606",
+      "size": 91097,
+      "sha256": "e9ddf548bcb730f287409f5eae095d331ae39e49322a468d377dab7d0b04b66f",
+      "gitBlobSha": "c653af2e78281896cc7d30a2ec18cc0e6649726d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/58_couverture_intacte.png",
+      "crc32": "a0ac3dc3",
+      "size": 526173,
+      "sha256": "0e1c8e9200433ce048b2726504cc5b7a0eae5bd07950de441d8746c25aa88f8b",
+      "gitBlobSha": "6133a605e585e5672f8b7b3f447fe625ad3e69e0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/59_couverture_fissuree.png",
+      "crc32": "7040c06d",
+      "size": 533026,
+      "sha256": "014f5fa986dae068a93461709f911c58bd8cb398d89696581539a3c6f2ccebe3",
+      "gitBlobSha": "4c10c6884d61e984a95d079a93cab20c27bc97a3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/60_passage_degage.png",
+      "crc32": "83d1bce7",
+      "size": 492456,
+      "sha256": "ab4ea531f744cdaf88c7ae14fbeb567c0d4e8d7d62032b28445459d4b93dc51e",
+      "gitBlobSha": "5ceda40902d121ca08301b808bb33a4ac527f7dd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/61_griffe_annoncee.png",
+      "crc32": "90d938e8",
+      "size": 515346,
+      "sha256": "055f15995cefaa4cfe3970fd862f1dc3ba99658162438ce5c9d6730bcbe62ca0",
+      "gitBlobSha": "153a6d95633e3aac644ea5974f44304bffef482c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/62_corrosion_active.png",
+      "crc32": "45695ba7",
+      "size": 528896,
+      "sha256": "4e81795b141f5445cbfb934a09da3bd1580a40ad2e557b4d280149ffc6c72ddd",
+      "gitBlobSha": "763b43b1927e7c1e2064fe9c464cc3bd42c8408a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/63_inspection_couvertures.png",
+      "crc32": "389fd9b5",
+      "size": 159390,
+      "sha256": "0282641a4e72e6b935f94a537278568f8c9a25b460d19373ca1e349071871005",
+      "gitBlobSha": "81e539cde0aeed922c686d87faebfb6150c988e5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/captures/64_inspection_etroite.png",
+      "crc32": "1bdd3522",
+      "size": 58376,
+      "sha256": "c0e85350ed191c335b95f82020da52c488f474f157b925a3f3e4effe2e087d7a",
+      "gitBlobSha": "5757b286bc40985c11ffdc4c91000ec76be15aba"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/codex-hunt-review.png",
+      "crc32": "e648919b",
+      "size": 200062,
+      "sha256": "00c48b8eb377bbe77b72e093150f5637c4e3b8b0b6fbcceff19cbabd7c7d3745",
+      "gitBlobSha": "145f9d8a3581992abe67036452a633a8dac6d310"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/codex-review.png",
+      "crc32": "71508b03",
+      "size": 229617,
+      "sha256": "4cf4bc7a50392b48b3ba000cd09aca75462d4f4410762e3db10871f7e68aa92b",
+      "gitBlobSha": "235b011585dd0cf3a21127a23af187263f5e669f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/content-build.txt",
+      "crc32": "98bce66d",
+      "size": 822,
+      "sha256": "c644a46febb8ea16bc16e739e6e1db2b04546a6e9f79497192e129c631c8280e",
+      "gitBlobSha": "d9f4e98c1bd3fff8c7ad314fb883d1173e9c4912"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/README.txt",
+      "crc32": "98f4969a",
+      "size": 265,
+      "sha256": "8d6bd8dbc16b6846a9953a89790b720fe0c799ca9e1ecdcef4e05e436cae29ec",
+      "gitBlobSha": "e19a7f819f490fb6fd3f550655777f77e86e02a2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/agent-recruit-failure.json",
+      "crc32": "5b9d7a35",
+      "size": 12413,
+      "sha256": "5cb76e3a0175fed7a83561bf842a6600f478a84458002d8fbde61d93997acb7b",
+      "gitBlobSha": "2d59cea0b1aa23b4a46e4a601c850f3c6b974a74"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/agents-first.log",
+      "crc32": "f6cb1665",
+      "size": 1613,
+      "sha256": "4b1a70f2c6d5c877c3ea01c69c248c53d82af12779e556cea3ca43c9a7bc7bac",
+      "gitBlobSha": "8f3634586348ae8138952bfa2b379f73496cd45a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/agents-second.log",
+      "crc32": "cf45c4e2",
+      "size": 1414,
+      "sha256": "d11e0f2a1e4dfcf7d3a963cc0310c26dfe2b6170794c53f24468a7294ec6213f",
+      "gitBlobSha": "3baf4ac4b759f0b4c55371c13b08793161beac4a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/agents-third.log",
+      "crc32": "d34c7282",
+      "size": 3596,
+      "sha256": "2a2e52b1bfa99676e674026c80a0ae344f12a0a7bc920793872694ec164eb7d7",
+      "gitBlobSha": "5fa63320a058fed00703838d792726674bbbbec5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/node-first.log",
+      "crc32": "f7ccff63",
+      "size": 1085829,
+      "sha256": "95fe5caea5566388fc61c5bbd5b02c7791d5b16b59f9718d107baee4f25c8a46",
+      "gitBlobSha": "16e9caa61e2f9ab4ef26442386831a5a2c037fc9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/node-fourth.log",
+      "crc32": "c519b598",
+      "size": 83637,
+      "sha256": "636a7a92862b25c01f3626e53f11d08ba8475cd07941219facc32a166e0e5be0",
+      "gitBlobSha": "8fe28d69394c346b84d08ed1be0ba5a9048931bd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/node-reference.log",
+      "crc32": "e3d79a25",
+      "size": 96879,
+      "sha256": "6296c1783902e330396a6dfc2823cb9c2819167fdddbff017a0cd033d50210e8",
+      "gitBlobSha": "b0c27c1efcf1cd9da7d0f6b08af1383a5b3466a6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/node-second.log",
+      "crc32": "5a4a0dc3",
+      "size": 1054543,
+      "sha256": "46efdd591b33163e8bbe9cb084f81873d19b3ecfc820db85fe42583992d03c6c",
+      "gitBlobSha": "5dea48c08a4cc4e8226e62a585658c7d6a40e232"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/development-history/node-third.log",
+      "crc32": "e283ae40",
+      "size": 85011,
+      "sha256": "a12554704787e080b83c3d269f3e5bfeb29c8029f84a90fb1166e3c1ff95589f",
+      "gitBlobSha": "14c3980e0b174c98d70cb4556c677a432cb497ee"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/docs09-build.log",
+      "crc32": "e22234d2",
+      "size": 447,
+      "sha256": "66f774f2be64c4d3cb034f48069f06b6472489f5da2b2c8cb94b41494db7b7d7",
+      "gitBlobSha": "2f1b5ddeb7406022729643957f5a03e360b5736b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/documents-progress.txt",
+      "crc32": "84a1affc",
+      "size": 1744,
+      "sha256": "853fe9904c67b9709dc8ac66f967e509834cf972d28361bace36b90e6bb63bd5",
+      "gitBlobSha": "4f2144ba1430ba08d65b26491d5165bd5cd773d8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/documents.json",
+      "crc32": "c6b52c24",
+      "size": 4326,
+      "sha256": "71ddad37491585f075ebec884148863799a9246f7f2b7c0bc190a9063b56d781",
+      "gitBlobSha": "e1a8132bd0d8c98ad007e48fe204678ab50fb7b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/documents09-run.log",
+      "crc32": "4c33810c",
+      "size": 2990,
+      "sha256": "37d21764f92792962ee745ce54e08745467e247cf809ace3503e45ae8e95791b",
+      "gitBlobSha": "75d2c0d8a555f2d3b5c5fc78d6b7c64ad8783c4e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-agent-run.log",
+      "crc32": "2bde7641",
+      "size": 6290,
+      "sha256": "828ec4873d3e72009eb0ee29b7e05dfb9626214de25c459de3757d525d5387d1",
+      "gitBlobSha": "aa6734f6d0e44dc0f33b5482a870023c6484c355"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-agent.json",
+      "crc32": "3ad44567",
+      "size": 5903,
+      "sha256": "dfdc5bb5aa54df35da13a42541dfa4a3a42a901cd512d22d355a3306c2735d02",
+      "gitBlobSha": "f46f417c1bc1b735c103d95c6e80212c21afb7bd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-browser-progress.txt",
+      "crc32": "cfb80069",
+      "size": 1361,
+      "sha256": "ef9d575e43ac23adee009da885eeae4c421505178a20a488f085963abd7ff6aa",
+      "gitBlobSha": "264d9a090ac2d65dfa05afbaf158581e6f1c3b62"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-browser-run.log",
+      "crc32": "cfb80069",
+      "size": 1361,
+      "sha256": "ef9d575e43ac23adee009da885eeae4c421505178a20a488f085963abd7ff6aa",
+      "gitBlobSha": "264d9a090ac2d65dfa05afbaf158581e6f1c3b62"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-browser.json",
+      "crc32": "8e80ec06",
+      "size": 5302,
+      "sha256": "f3ecdf03f4d123f62fa203e40ea2a157a01dc2b3fb725db943d7c5246455efb4",
+      "gitBlobSha": "88e3e488152f6742c3c79f86afe17da697037eee"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/environment-export.json",
+      "crc32": "f11b599d",
+      "size": 6308,
+      "sha256": "65ddca5034bced239df1686fcf63a0e20ffdd9637b37b59c698ca05acf1712d8",
+      "gitBlobSha": "7a20adab3f35fc848cf55b4298d4c2bdaf06a5c8"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/fidelity-browser.json",
+      "crc32": "3b2d8c67",
+      "size": 7841,
+      "sha256": "e7abed51e1b7ab2dfc3a8200204316cf2761fe079518f962ceb7ce624f6fe8fc",
+      "gitBlobSha": "7b5f772fdef56a2b84fc6deb3f4a69a82b5cf625"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/field-browser-progress.txt",
+      "crc32": "ff2af99e",
+      "size": 1693,
+      "sha256": "3c7271da8ef822758e847ef0b112e4807fd844dfefdf2d2d8a3bb2ab641cee42",
+      "gitBlobSha": "41708abf82f1c1fdcaf1da9d3c0dc1e8cf4e8abf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/field-browser.json",
+      "crc32": "3cddca09",
+      "size": 5687,
+      "sha256": "7a80a85593b25e098b0a8379e5e3bbe30e967c42a164b0f19d0e5f55c84e886d",
+      "gitBlobSha": "ab449c08a52d278aafa3ee6311f696cccd5728f3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/historique/hunt-early-veteran-loss.json",
+      "crc32": "7d4f3f9c",
+      "size": 3874,
+      "sha256": "322a064810d4207610f6eeef51f214a25226a565ac5fcd165254bc640ea50614",
+      "gitBlobSha": "d57d99304a4e99c4bc8a38d428d484ac85cf666e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/historique/native-probe.json",
+      "crc32": "e8ca2c33",
+      "size": 403,
+      "sha256": "e4b3cdce5d21f80929a8948662a0ec099be8775518b1c2eef9232309c71465ed",
+      "gitBlobSha": "8ad1f9fa5a2d5207c682a8455836ed13d9985de5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/browser-source09.json",
+      "crc32": "a60e23ff",
+      "size": 1828,
+      "sha256": "f0660cf1e8e522f17d63c67f4b413197c8dad9c8c57562721ae78879720607fa",
+      "gitBlobSha": "6398460d74c7b124bf5345729d363d39b9032d24"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/conservation09.json",
+      "crc32": "3a7c7245",
+      "size": 1185,
+      "sha256": "beaf85a315e9a75bdd05e1b841d3f16204f0296c5e28d5b615923e6a8291278a",
+      "gitBlobSha": "5c62d67f741e4c8b529c70abd124377be0c9ed97"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/native-probe.json",
+      "crc32": "39b50468",
+      "size": 551,
+      "sha256": "a5c97963ee5fd4a2f403691cc2fc27f7a8e3940059a64710176bb8dbfcad8a2c",
+      "gitBlobSha": "cd14fe3aae576454314961029c3c1f405b435c04"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/nine-agents09.json",
+      "crc32": "87557b0b",
+      "size": 1765,
+      "sha256": "33512b687677b8f998378c4a680211ceaa5acb44b4ade87a4d06f36fd1a53074",
+      "gitBlobSha": "31cd350eb10ad7a47967eb41c0a3069085c2f1d3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/node-source09.json",
+      "crc32": "22603f5a",
+      "size": 4474,
+      "sha256": "663b5d961d8a74f905425876ff0fb4b004b8296472a9f35f7ffb7cc2a9dd85be",
+      "gitBlobSha": "327f63e5c3ef1ec1a40b451e61f2fb0192eddf15"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history-v09/tactical-agents09.json",
+      "crc32": "3c7cf9b5",
+      "size": 1085,
+      "sha256": "0a49dd8a9a41ada42172468f8592b6078402e515074b3efec792c54eb703e823",
+      "gitBlobSha": "92803c8d3bc1518f5f30e70768292f6dce29da4c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history06/README.md",
+      "crc32": "c494b11f",
+      "size": 216,
+      "sha256": "dc6e06d399393c42e7938073aed07a15bb6657f74aa7f040ec509e436c6926ff",
+      "gitBlobSha": "6029cc82e4c280a10d66b18df61c5f9a74b26813"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history06/agents-progress06.txt",
+      "crc32": "33c8a1c6",
+      "size": 226,
+      "sha256": "1d271af4c86f332cf70d53e9ab6cb37c151ff84b640fb644f9b3b6002dad1bc3",
+      "gitBlobSha": "35825ae770af9d34373ea8bbdab4d16b0777772e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history06/conservation06.json",
+      "crc32": "6fbf26e3",
+      "size": 752,
+      "sha256": "e68123d3f880c9ce8bbf8f0b758de8be277f07ec4412b6d9f8ef7f81c34d6d58",
+      "gitBlobSha": "a67a5be8b564111808942709ef5b82ee7f356801"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history06/native-probe06.json",
+      "crc32": "4b9342b5",
+      "size": 294,
+      "sha256": "95ca701de6914abcacf5c7f82664ab2cadfb2c7b79a893496c0a88e31ee9c25b",
+      "gitBlobSha": "7fe6cb96f1beacea7a32601eb4d67843dde0476f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history06/nine-agents06.json",
+      "crc32": "4b4dee4b",
+      "size": 1057,
+      "sha256": "61fabc4dcb5f1b8ab905a3d4c43bd4071f9dad9a9121c3c91dcee6d17ae99b9a",
+      "gitBlobSha": "0d1f1e94ed1dffa5975271ccd1828519f9acb2f4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/agents-progress07.txt",
+      "crc32": "33c8a1c6",
+      "size": 226,
+      "sha256": "1d271af4c86f332cf70d53e9ab6cb37c151ff84b640fb644f9b3b6002dad1bc3",
+      "gitBlobSha": "35825ae770af9d34373ea8bbdab4d16b0777772e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/browser-all-progress07.txt",
+      "crc32": "959a34df",
+      "size": 95,
+      "sha256": "905431f8664fd38b80fee73b3a89b31d8a556a20abacdd313c65b21527935948",
+      "gitBlobSha": "50b5d44da8628237f195291d1ec8a40bf77cfd96"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/browser-source07.json",
+      "crc32": "c563497d",
+      "size": 1640,
+      "sha256": "20e2be4d2c6acf74f1ca42d3f9afdd40cd6aed5c56433219db43b199f0e777a2",
+      "gitBlobSha": "716c3258c70ad004f7c1e81815e10122f16bb38e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/conservation07.json",
+      "crc32": "611a13fd",
+      "size": 710,
+      "sha256": "7a99fdc18efe4b686e16b04066c703ff5dc85dac2ae74438aeadf868313a820f",
+      "gitBlobSha": "cdb80e728c1fdbfddf33e60a0981810f702ff661"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/nine-agents07.json",
+      "crc32": "ec70e174",
+      "size": 1587,
+      "sha256": "0a4c31c04f42dd01bfacbfd0ffc0c878c5d3028cbeb7399bee18621b1168a374",
+      "gitBlobSha": "c1f0ba91ba21794d1b34fe51be06e0bb5c6463cc"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/tactical-agents-progress07.txt",
+      "crc32": "f76c208d",
+      "size": 19,
+      "sha256": "17a166b3d15ce2d41713b4b3c5b02bac7f8f6095c6cb1ee1dd4de55136b360f8",
+      "gitBlobSha": "3b6b162cf3bac8ba9d8f70d322e66901035546b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history07/tactical-agents07.json",
+      "crc32": "62453f03",
+      "size": 907,
+      "sha256": "e2d204d1a0620aa54069dce7f464725679d0147f150f4d99334c386a4f68e823",
+      "gitBlobSha": "3e3debac9a93f5dcefdfb421e798dd31e7d37491"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/DIAGNOSTIC_HISTORY_08.md",
+      "crc32": "f6c7cbb6",
+      "size": 948,
+      "sha256": "9d5f4985ad0d58b88a350ac10a96d79c02c8e2d11ff35626f6558819e396e512",
+      "gitBlobSha": "d825afa964bfe515d8fa5a875363c770cbcd4bf7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/README.md",
+      "crc32": "c2e8ba58",
+      "size": 102,
+      "sha256": "fa6ee936363c330c200d09a047a895b19a059fef292acfa050ed4322e234988f",
+      "gitBlobSha": "045a8e906a84cc2b615214fe19ddcc4d33ee3c7d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/agents08-run.log",
+      "crc32": "78dce725",
+      "size": 245,
+      "sha256": "000cea0d891bf0326981f7f11ed3fa87608649b65ffb0254418120b8d88dc61e",
+      "gitBlobSha": "609932ff220fb270033e36a24ce5ddc1b79d5651"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/browser-source08.json",
+      "crc32": "90cc1a15",
+      "size": 1733,
+      "sha256": "522a568c57f5d55ec07c9dd9563947d7667158721a3e8a04f4bf972b39410ab4",
+      "gitBlobSha": "a33f285f2e6d2825e9f0fede4f0ebd83ea7da420"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/browser08-run.log",
+      "crc32": "959a34df",
+      "size": 95,
+      "sha256": "905431f8664fd38b80fee73b3a89b31d8a556a20abacdd313c65b21527935948",
+      "gitBlobSha": "50b5d44da8628237f195291d1ec8a40bf77cfd96"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/build08.txt",
+      "crc32": "ee53f5a3",
+      "size": 953,
+      "sha256": "aaa6263645aa4445bcd423ecc5d7f72892ddff07a85b59956502db68eda34475",
+      "gitBlobSha": "151fb203d362bd39a668083361a3e3847a86fab3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/conservation08.json",
+      "crc32": "c047ff18",
+      "size": 553,
+      "sha256": "4cbfc53fb4b6f4b2fb7de9f3aaaed7f06f7555c2ea66760e7d7a75a4721aa837",
+      "gitBlobSha": "582cd161eb028e43ff377a353902454e1da88730"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/documents-progress08.txt",
+      "crc32": "a261f656",
+      "size": 2097,
+      "sha256": "834fba55e6fcb8ed340522f53e4e7ebdbef62c34ab8a5acd3c54def8183f29a1",
+      "gitBlobSha": "1f76c41d61da58e6c659c8a50409b9fca3c85505"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/http08-run.log",
+      "crc32": "8bd2f8ea",
+      "size": 1863,
+      "sha256": "3c9fdd6af133f3c13a7e0f486b3f95a1b1da02debc061bae795646fc86f13b47",
+      "gitBlobSha": "6037e42983d2e8b2349ab031e837c5b991f6803c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/nine-agents08.json",
+      "crc32": "43e75abb",
+      "size": 1675,
+      "sha256": "28677082e31b2c852381465cf87daa18cd56df46fc4530a6a892435dff8befa7",
+      "gitBlobSha": "e2482684206237ede130d44c32773df34bec74e0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/history08/tactical-agents08.json",
+      "crc32": "52cc34c7",
+      "size": 995,
+      "sha256": "7f1e845180d03c8a26daba61653f5f381f8ef25a8adc33ef0914e509d443c640",
+      "gitBlobSha": "96353152276e0759c2ba0f78faa5a3580ca78742"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/http-progress.txt",
+      "crc32": "0e6f10f3",
+      "size": 1725,
+      "sha256": "2019236e6543080754d11dff198cac25d491254ef65d50c96e74edf996d39dd1",
+      "gitBlobSha": "bb2486a4665169499569f9b919a92243a2893c7f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/http-static.json",
+      "crc32": "09eeadbd",
+      "size": 2740,
+      "sha256": "8e22d09dc01304327228e47fbb339cc37a27bf50d2e2fe1518047d9194f4eda7",
+      "gitBlobSha": "22aaa39a5e526750594e622130a0b909244def30"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/http09-run.log",
+      "crc32": "57039390",
+      "size": 2003,
+      "sha256": "75081446f300865d0064fd3fad41065cafd572d98042df72f5a3f13c3dc5a804",
+      "gitBlobSha": "086069f0a2a27651571e67c05557d795a9e8b5ab"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-agent-colony-marine.json",
+      "crc32": "62815644",
+      "size": 5088,
+      "sha256": "db7627b4fab6786ec83ade5b1d5d10d7adebe1d6779e16c584c4d4433cda7760",
+      "gitBlobSha": "fd01f145d7330dcc6f99542989b2bd9d4dea596e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-agent-colony-veteran.json",
+      "crc32": "54906214",
+      "size": 5109,
+      "sha256": "28311b15af613ec334a91bc2d0639b300017e333201950bbae523cb8c59c66b6",
+      "gitBlobSha": "97e5570c93eee18845279cb0de7706762d87c546"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-agent-dock-marine.json",
+      "crc32": "d95833d3",
+      "size": 5099,
+      "sha256": "e6b574871c55f44be6aeb421b287e4cee3b6b40be6bf7f7b80d3e517f2ec84df",
+      "gitBlobSha": "f4b4f7daaa43ad813b64d02282ad7b5791d4a359"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-agent-dock-recruit.json",
+      "crc32": "bcb05ac1",
+      "size": 5095,
+      "sha256": "b0439bdd091d4e09a258d12fdfc18b98e9f69e5783ca1cc3027a5d270a489c34",
+      "gitBlobSha": "fd0935291f0003aab91b21c7458f105a2327ba51"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-agent-lab-marine.json",
+      "crc32": "a93b75c1",
+      "size": 5082,
+      "sha256": "a0bc7a0b87343fe1df130aa60d47035c68404ed0c4781b6d7009da3ff8f6a560",
+      "gitBlobSha": "a12a08f03e7297f5ee02a1e7bffefabaf4b799ef"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-browser-progress.txt",
+      "crc32": "f79d0833",
+      "size": 2009,
+      "sha256": "a1b8028ea93ee484c61302f4eec21a6cb9046d1a889c48bdb469c07855b3fdb0",
+      "gitBlobSha": "8b047fbc1b3801c00425d9ad9e60757b026f671c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-browser.json",
+      "crc32": "e82914a0",
+      "size": 7344,
+      "sha256": "16ac2b328aa231c466f1f26734721a29c7a55b454e21abeb78792d89d7263585",
+      "gitBlobSha": "4b4685b0b3b96f03c2dfa3ef2dc6c6dd23373562"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-colony-marine-progress.txt",
+      "crc32": "1a43e1db",
+      "size": 2551,
+      "sha256": "f16755fbac50f37f3291881405d774d016c3fdd5b038890a0cf4f847d89ad856",
+      "gitBlobSha": "af4fdd2e89eb013a4c4c20072f862bf7a55ba6fb"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-colony-veteran-progress.txt",
+      "crc32": "4e5e0581",
+      "size": 2571,
+      "sha256": "57d3b43edf2d59c8203c7782ba28b46e3d648fa99ba0486577e0424173d28fac",
+      "gitBlobSha": "ba422d4d10d813fec2060aae201c2c6adf90553c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-dock-marine-progress.txt",
+      "crc32": "3e51a131",
+      "size": 2564,
+      "sha256": "f72c39cc613fa7b079b185c5af46a1fd8fef32c6e7a65074d7f4bf717de81aee",
+      "gitBlobSha": "4a5c8a2175cbbc5976ebcb3f0c4f3620afffbe25"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-dock-recruit-progress.txt",
+      "crc32": "b8004159",
+      "size": 2559,
+      "sha256": "fd31647461b9baa635b3b2b1765a3e491067974dea7d2e4816382c3ff010f28f",
+      "gitBlobSha": "fe65695f3e6833dc0bc30bebd9279e900a7b1271"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-final-colony-marine.json",
+      "crc32": "0f50d61f",
+      "size": 25884,
+      "sha256": "7139872a500c66e738b1192e2d5f25f9baa67080b303156c8b8c58c945e5e6c7",
+      "gitBlobSha": "70aa544d0d87033f265f303474b69a441e03d19c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-final-colony-veteran.json",
+      "crc32": "95dd749d",
+      "size": 25763,
+      "sha256": "7785507eace3202882b4d495d04648d3a6e906d34ff020ea58c7040d3e4b76e4",
+      "gitBlobSha": "334a4d4403374a40b6f615177da34c4838017d99"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-final-dock-marine.json",
+      "crc32": "04ca4725",
+      "size": 24883,
+      "sha256": "efa377716632c668f8e58cbb0e13a803958ce20c8a7309388baaed82cbbf2259",
+      "gitBlobSha": "cf8342d1e855541f733f1b189cf07969ec5038e1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-final-dock-recruit.json",
+      "crc32": "d356d51c",
+      "size": 25247,
+      "sha256": "9be452a652ce1e92adeabe85f259ab0123c4b54d7d67902676e74c22c9d8d6ef",
+      "gitBlobSha": "d7da5744c11bf125be5f711c63391f8854f28048"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-final-lab-marine.json",
+      "crc32": "98236035",
+      "size": 25984,
+      "sha256": "8363236fec7e5286c309d2731c8f8c14d944350415a01625e2931507bd43bdd1",
+      "gitBlobSha": "d041806353500bfab8b33fb8648825aabc56a43c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/hunt-lab-marine-progress.txt",
+      "crc32": "6dfa31ff",
+      "size": 2548,
+      "sha256": "1d8e68f48f371a8d9dbda73b78f36ac937e4a83b0de6bb36898caea9e1fb50cb",
+      "gitBlobSha": "30332c63e8b89ea9d8b089104d68db185c176ef6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics-agent-progress.txt",
+      "crc32": "f056190d",
+      "size": 6149,
+      "sha256": "5e3f10bb138a3a1da9050a3cb9f06bc6106170e109e6f513438416c7f48171ff",
+      "gitBlobSha": "a7cba8f6bab9f62ff8f84af08e044e0d1231dec3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics-agent.json",
+      "crc32": "18722a3d",
+      "size": 5867,
+      "sha256": "bb37a96eb31fd7e840ada22340ea78fb555707eff4d9a8477eb9a100693cb5d4",
+      "gitBlobSha": "4cff083c6649e63e1f2e4ee057c2a805d235a3b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics-browser-progress.txt",
+      "crc32": "33ea5862",
+      "size": 1735,
+      "sha256": "fa797329cf542054fe175303115880292227197b3422f9312f9a62a8ea246d02",
+      "gitBlobSha": "2b8455ce2d147178c8014bfe9dd57cb540ffe8bd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics-browser.json",
+      "crc32": "3a98e82c",
+      "size": 6049,
+      "sha256": "cfc57d45c0c7ecde06e833c2741924e8267da93c66a862a1ef992c60590cf05a",
+      "gitBlobSha": "6973b8a1e278239d7f749985bf6976815b76b7e7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics-export.json",
+      "crc32": "385a4ee7",
+      "size": 4685,
+      "sha256": "578e1bf97907055ce8fda1ff15e464ef730244b15677d7b1c90ae01331156263",
+      "gitBlobSha": "5e42b157471bd2651013be0fec4c329235cb1df1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/logistics09-run.log",
+      "crc32": "9ca782ea",
+      "size": 1606,
+      "sha256": "499cdb4051ff09290aa15d949fac454c545b3068737ded01cfc8f108f9e7638d",
+      "gitBlobSha": "fdd0b8169c96205483c1ae6356fcacb78fca933b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/marine-direct-progress.txt",
+      "crc32": "3f18378a",
+      "size": 3482,
+      "sha256": "50f53dacafa3fda946fccb27879bff7a69640745506cb88fef1b3c567a166b83",
+      "gitBlobSha": "b16d914c17024e365a167429ad5d8257ad4ff6d9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/marine-progress.txt",
+      "crc32": "7296f373",
+      "size": 3615,
+      "sha256": "4edd9fac47bf92a43d5d80cb6054876657d8cff645defc8b0e80ed5af2c46421",
+      "gitBlobSha": "822a094555ca328be3740cd26ab191450b8249b0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/mobility09-run.log",
+      "crc32": "57571033",
+      "size": 6233,
+      "sha256": "230571da881ed5d731374852460aaf926d042beeb4a4ffcc3c071d2598d8053c",
+      "gitBlobSha": "ed86894f99f6d3817ef3e73a242d8a96c6d51e69"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/nine-agents010.json",
+      "crc32": "f985c184",
+      "size": 1766,
+      "sha256": "a4978d4ab3b7432191cacd660ef9316643a9d67d812d9de25f42e5e9e75cce61",
+      "gitBlobSha": "dadedee7e4aca428b411e43ba5b2506f233a1191"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/node-source010.json",
+      "crc32": "4507b6bd",
+      "size": 5023,
+      "sha256": "1d147337c59260e32bace3aaeac416c51ae745ba95fd298ecec80182b6bcac16",
+      "gitBlobSha": "5742dde5c2e6d11fc64d2d2aeceff28777c28202"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/node-tests.tap",
+      "crc32": "d036b3b9",
+      "size": 97933,
+      "sha256": "fb081077af41823b24b81c75b74bbd9a936500dafbffe2d0f44e1aab693904ad",
+      "gitBlobSha": "732f1bd56a6d6226b2f79906d2771e89a291ac78"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/played-first-mission.json",
+      "crc32": "a3280dcd",
+      "size": 10489,
+      "sha256": "fb39285eed63863631ab7bbd230b6cc976a44260407178732d794089bdea96df",
+      "gitBlobSha": "a345a96e8a9044874e6d9900fd2e97f1781503f1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rapport-review.png",
+      "crc32": "c0f722f6",
+      "size": 128516,
+      "sha256": "288599258a2c1622be8aaaeb0f1c5953963e94acfdc218b1686592ee44f10607",
+      "gitBlobSha": "54ba0194b3c2f03229266d91520f0e3cbae08316"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/recruit-progress.txt",
+      "crc32": "d34c7282",
+      "size": 3596,
+      "sha256": "2a2e52b1bfa99676e674026c80a0ae344f12a0a7bc920793872694ec164eb7d7",
+      "gitBlobSha": "5fa63320a058fed00703838d792726674bbbbec5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-01.jpg",
+      "crc32": "98203c43",
+      "size": 75911,
+      "sha256": "628ea6ed2d0d13051aa3908309549785a23f6acfea020298d2f9c6842d13096a",
+      "gitBlobSha": "771b560fd08e654e2142df5c31e302a35f25bfff"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-02.jpg",
+      "crc32": "d88276f9",
+      "size": 93241,
+      "sha256": "078db12eb9d9ae7138ab82959734f48f74ae64ea79da63e2d29ab25aef9f0de5",
+      "gitBlobSha": "51d3bc0b5220a9e4e774204507689713369ffd41"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-03.jpg",
+      "crc32": "73fa04ed",
+      "size": 84068,
+      "sha256": "428c59b71b0827378f4e5f3b40975eb909b7367c023e8750e2ebe01296d3785c",
+      "gitBlobSha": "d08b9b1f49cec408f9861611b335e070ca402883"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-04.jpg",
+      "crc32": "972fd237",
+      "size": 76209,
+      "sha256": "69d6ecae7e71f48a57cd010bb4256c29df8f521d785c361f22136c8310deb080",
+      "gitBlobSha": "3cb77166a077329e79e6fabe214f681dd2b501c4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-05.jpg",
+      "crc32": "c44fb75f",
+      "size": 86790,
+      "sha256": "8b49bd3fb1e054bb83678e49b648998c9d6837d3c5050b19a71e29c72b2d7047",
+      "gitBlobSha": "0ca52ebc389629ed7c14963721fbdd7ce37c1898"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-01-ref-casevac.jpg",
+      "crc32": "20f48c99",
+      "size": 77057,
+      "sha256": "d6926f937da8529a55e9cc363c45eb24d646a3044019a667fe8985578270ff97",
+      "gitBlobSha": "10a07c9781f576c9c7180f7372f555702261e88a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-01.jpg",
+      "crc32": "2c0340e5",
+      "size": 75875,
+      "sha256": "2bf77da5b75899e9a6c054fc86c4789a8bc1689b452da21978a7680be8e720fc",
+      "gitBlobSha": "8e12b9a71088672c5965dcef4600224fe23e07f3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-02.jpg",
+      "crc32": "382d3367",
+      "size": 88979,
+      "sha256": "93f2aa1553533e34f6cb7d1539c478cc76cd9f4889f4b75667b7f9d0078b69f5",
+      "gitBlobSha": "1962d77b60c229d19cb570e460249a9b8eaa0512"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-03.jpg",
+      "crc32": "bd47d990",
+      "size": 80190,
+      "sha256": "17d938dc2dc2abac95b41bcd8cdc307c6ae0837e488f35a74017882aadf3dbe7",
+      "gitBlobSha": "7ee298a6c8ebaa9d3d7762e858ff983835c20ce4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-04.jpg",
+      "crc32": "add8eaab",
+      "size": 74901,
+      "sha256": "051f18d96d5b25da18ed5002049fb184ed5c45174eca6823848ef5398249b24a",
+      "gitBlobSha": "5b35c90c828afe38bdc237490364ecbcd2ad9413"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-05.jpg",
+      "crc32": "085733aa",
+      "size": 87394,
+      "sha256": "007a31fba7251f73222f0886fc9bb64333ebb77fdb5d8768dc69b449bd5fce25",
+      "gitBlobSha": "487b1665600edb30a20b81f1b22d34488816140e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-02-ref-engineering.jpg",
+      "crc32": "2d218c2a",
+      "size": 78026,
+      "sha256": "208c9ce322ed287807b67bed9a8c941ce006f9bcd5266e46c4d7fd712444ea29",
+      "gitBlobSha": "db0944559c646c20ed932a607aa54e1b60290c3f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-01.jpg",
+      "crc32": "58486fad",
+      "size": 79758,
+      "sha256": "0dd30cfd96e6fb8ebc684f77374ee4917fb62ff894f9e18c0ac1fd4fdc9d646a",
+      "gitBlobSha": "4a0cc46a320d4e959e8afecb7897962e6c956716"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-02.jpg",
+      "crc32": "956f2565",
+      "size": 91905,
+      "sha256": "f7719fbf6fe5e50e5d828593a077ef32e09e1e0ef2b981e908412f354d5de2f4",
+      "gitBlobSha": "5b26e1a76cc5b8894553360ccd88084f452cbb80"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-03.jpg",
+      "crc32": "1b91d238",
+      "size": 80286,
+      "sha256": "d3fca5ae65c9093838fc17d03412257a2bd8049e94a1438039c0f4f96739509c",
+      "gitBlobSha": "127eee6d4d5e2e9c0bb992242b7182eca0e144ec"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-04.jpg",
+      "crc32": "a734cb8d",
+      "size": 65548,
+      "sha256": "c260545e7f7055509fa35167c8a2d69d10afc8c36f07f791377269dbf14fc8fd",
+      "gitBlobSha": "e424db6827391c4291aae940c37d2c9060bbaa8a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-05.jpg",
+      "crc32": "e9d25f32",
+      "size": 89901,
+      "sha256": "854794584032ec11d368599b9703470658d801d004b5cac90a06900c4fa28c85",
+      "gitBlobSha": "92e408bf8f50104c4ebe05c1633f70b92dd0701a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-03-ref-crane.jpg",
+      "crc32": "fc5ea407",
+      "size": 74819,
+      "sha256": "4940fa10aff5baf83161b762f1fd27bbbe39280169831097df342a395355c3d7",
+      "gitBlobSha": "159de3387c356cb30dd3705c303b91ee4e32843a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-01.jpg",
+      "crc32": "6063e8da",
+      "size": 78483,
+      "sha256": "bdd1e8aaf1a504e8bbbf13dacbac922d2de725c7fd58dc9aabd115b92335b3b7",
+      "gitBlobSha": "60c0c2880ce427fbfc6a03b0120614ac2b718be6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-02.jpg",
+      "crc32": "3ce0399a",
+      "size": 93083,
+      "sha256": "456f9876f85e15e9265401b680c702bdc1e823a389370c0474341c2053b5b6e0",
+      "gitBlobSha": "76b890725c729d3e9764b58267b7a9bc7eb46559"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-03.jpg",
+      "crc32": "33ecf400",
+      "size": 83794,
+      "sha256": "67fdcbe10df6f2ea8526196562eb1a457882c14d348ab56ddedf6fef57c33e36",
+      "gitBlobSha": "382c7c0283d6865a00daad42d62124bd2214d335"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-04.jpg",
+      "crc32": "a9f88beb",
+      "size": 79310,
+      "sha256": "176b59e5e186d15ab8807eac42b1c9b8a06e3dd75669f9b0c6607b731364d57a",
+      "gitBlobSha": "d9932752db47e02ccfd3dfae57052cd1dd8bda36"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-05.jpg",
+      "crc32": "bcbad3c4",
+      "size": 85986,
+      "sha256": "73d38561bb80bd3b99083a91a74202b03b8213fac29c23aa2cb57696946e531c",
+      "gitBlobSha": "2879fd33d932b1306cc0166d53ee94bec8bbbc57"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-06.jpg",
+      "crc32": "4fd94ff4",
+      "size": 90912,
+      "sha256": "800db45aff0b54256a0383aee736568229b59c571a912e069b32dc6eaf321ec2",
+      "gitBlobSha": "5ab7f3ea162b9555ddd502fac15ded5eb20a0709"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-07.jpg",
+      "crc32": "99aab5ad",
+      "size": 69406,
+      "sha256": "b9975caddea1e32b612991d7aa28558130705b742d7f29dc86b161ec3d9a9fdb",
+      "gitBlobSha": "40beaeb1478b262d91c19707c89c872f351e26c1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-ref-morgue.jpg",
+      "crc32": "04cb5ccd",
+      "size": 85680,
+      "sha256": "aea6a5667a3fd5e6a4d729adc880776468a76aa7d6961d6369291f2583e53138",
+      "gitBlobSha": "ca26ea9585c2666cae087083142cf780144b0625"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-04-ref-operations.jpg",
+      "crc32": "4b98ea1e",
+      "size": 80471,
+      "sha256": "d586fbfd4e584b5e8c45b88337783843f9c41bb628d499a68e391e0a86cb48fb",
+      "gitBlobSha": "f703345745bcf433fedeff238bb91fbd0cd13546"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-01.jpg",
+      "crc32": "9527d014",
+      "size": 93340,
+      "sha256": "15b861949fcd93fc6788c05ce9babbcbce835349cb284cc574c1299da65f73e1",
+      "gitBlobSha": "738d0806478a12f9d8c99e492dbb82cac4e84f03"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-02.jpg",
+      "crc32": "56542272",
+      "size": 100387,
+      "sha256": "070cfdfd57a601a794427af6c1eeae4705df71654399bdf153e98d08b93e576c",
+      "gitBlobSha": "f9ff2807b2ab3afd216ad5ecb0095f618754b913"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-03.jpg",
+      "crc32": "be6c68f8",
+      "size": 79400,
+      "sha256": "d446f3394df44d4fc45746f57d7340c6b46cf623b695de45c7d3d23e8d645f43",
+      "gitBlobSha": "0c32d23ebab4adfa9104131667266f73e796c2cf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-04.jpg",
+      "crc32": "c84341be",
+      "size": 79048,
+      "sha256": "ce448b3ffd6dd3efd4344dd6374d86ab6348e547b4b00026ea4d9624543011b1",
+      "gitBlobSha": "9dc1a1e7e3069beeb82a7478d3c5db8bbbb017ad"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-05.jpg",
+      "crc32": "71e06246",
+      "size": 80639,
+      "sha256": "e424afd27fe1a372271441f7f351b69fa5bacff7939143f15d8ac8158293f5ba",
+      "gitBlobSha": "e0bfbe44aae1eacd4ad2d11c136a40c9ce389499"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-06.jpg",
+      "crc32": "21b951e1",
+      "size": 93741,
+      "sha256": "b26579fce13236cae63dcab6effdbbc38886af81b11f4499b420ba01dd10ea01",
+      "gitBlobSha": "8fd2826ffd72d48919f562dc6748c426cc65d0ee"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-07.jpg",
+      "crc32": "214501c2",
+      "size": 94300,
+      "sha256": "a9c21d490f38931c29e8822c8a442d4f97078da6f3a922517591f132b2b45f5a",
+      "gitBlobSha": "462da483dd51998ab645934e358a6fb0aff3d8d9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-08.jpg",
+      "crc32": "42f91e12",
+      "size": 97082,
+      "sha256": "18b4f12271aa782547cdf7c766695690f6e72e67d65958ae2a73a4b9e98f9fdd",
+      "gitBlobSha": "abd1aa3e3d5eb19c5d2eccd449ed9e11ce26970c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-ref-reid.jpg",
+      "crc32": "b7d3566f",
+      "size": 66710,
+      "sha256": "ec67ccd0ebfe0c3c4e6ed1b78357cc9fcde570912432c90339380078ea209359",
+      "gitBlobSha": "920c8a1dce228b90fe2228ba76d0891be9d2fb7b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-05-ref-tower.jpg",
+      "crc32": "ff317338",
+      "size": 73825,
+      "sha256": "c9c804faf862334b1d97b4d234174639246b43012e27cc50c1a18255db4900b3",
+      "gitBlobSha": "5459410299c225b3f1f1019c2df8400130ea238d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-01.jpg",
+      "crc32": "feba730d",
+      "size": 73434,
+      "sha256": "b5837384c8073e4d388f7723d3c50a7469234c8cf3638aec86074c92100d84c3",
+      "gitBlobSha": "877028900769e20c15aca0dbf2d4dda05fa6bf45"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-02.jpg",
+      "crc32": "de3952d2",
+      "size": 88163,
+      "sha256": "7fd4c90bb1cfb968d0a967e672bd4a632f14662670371cf7df69792cd9721154",
+      "gitBlobSha": "9af654d0924986a9d0a1baac41af983d137ba021"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-03.jpg",
+      "crc32": "8774d8b7",
+      "size": 80220,
+      "sha256": "4efe31b919699a7126b1a87e55bab0102a5978ef060f0efce489e8c74bd79032",
+      "gitBlobSha": "0b66323b954ce92507d1969703069b6ddc6b42ee"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-04.jpg",
+      "crc32": "84e9d988",
+      "size": 73799,
+      "sha256": "47c8bfd17da1e073bf9825040a8a16746fd8a2e45fc1f3cb17fa76a1e1087195",
+      "gitBlobSha": "7978d1972e1c67ac1a31abb41bafb233d62db3a2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-05.jpg",
+      "crc32": "1bbf6453",
+      "size": 87888,
+      "sha256": "26b0466b759156f7509742857de202226fc497839846692d942e256e99c4c939",
+      "gitBlobSha": "bd269d77cac08c94edde73cbfcf7d1a283c65179"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-06-ref-warehouse.jpg",
+      "crc32": "d934c567",
+      "size": 73922,
+      "sha256": "959dbd2c3eca00eefac0d715a9474a1a7eb430fb7b254b9a45df43ef82ba58e1",
+      "gitBlobSha": "a1217c5919c035b31de80593198d781fc8639fe0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-01.jpg",
+      "crc32": "4ae51ea6",
+      "size": 85796,
+      "sha256": "6ebfc2be0190aff218641f196012c1db0aa94305a1d745a54d68fe3941fa8702",
+      "gitBlobSha": "8ed5baf65cfd2a800913efdb38beff2f3f9c7edd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-02.jpg",
+      "crc32": "f128516b",
+      "size": 96788,
+      "sha256": "b9eca32907d5e4d2da5e83970a207e3d5b4e3bcce7354d35cefd726b0aff593d",
+      "gitBlobSha": "11d08ed7550e070be161be054d25b7ab518454cd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-03.jpg",
+      "crc32": "2808ca63",
+      "size": 87355,
+      "sha256": "114e9542d2726bb24f86bed822f7fbc29dc3e018481e49aa89012c78de757846",
+      "gitBlobSha": "a4171ccafe796c0ead3670278eeb3c527a888352"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-04.jpg",
+      "crc32": "4b94fb8f",
+      "size": 81298,
+      "sha256": "50f05a002ab6c501c6453bca55c562a0a9862dc882aba61c48c40b2e718dca7f",
+      "gitBlobSha": "9beaaa689d4c114492f1ac41c631741b0864483f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-05.jpg",
+      "crc32": "f4ef45fb",
+      "size": 92063,
+      "sha256": "eb44f05794aa6906668707d679231611d4d259013df6434295e91169aa74ec82",
+      "gitBlobSha": "284dbf46e717f3e95cdb5ce846e10a536c4e7005"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-06.jpg",
+      "crc32": "d238a311",
+      "size": 72777,
+      "sha256": "7186d343cb30ca1ce7d0d1bf03be52d36e415727d9d18ba6c98b9bbf899bafa1",
+      "gitBlobSha": "80c81357895b292849d4877ad8c451152d00b1d5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-07.jpg",
+      "crc32": "d7db16dd",
+      "size": 91403,
+      "sha256": "877a500c327afd26356a8f2ab26f4a70aa4a83e492526532132120469ae631ff",
+      "gitBlobSha": "a994808468a22a871c30babb699add03eea6b7dd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-07-ref-specimens.jpg",
+      "crc32": "83e32c11",
+      "size": 79878,
+      "sha256": "606f24e03dcdce09ee5a877ce9b005c784d4f112192f5e98e8d2c2a90224e199",
+      "gitBlobSha": "3efeb29d6a18c0dc08ae781484cfd1d1ed895261"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-01.jpg",
+      "crc32": "dd883a34",
+      "size": 81253,
+      "sha256": "87234516954274b5ae63fb51a96b8f127bd38b29a0022ff6c0307d4c73f1314e",
+      "gitBlobSha": "4c844775df0826859b75a83c9a9995309d65b9ae"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-02.jpg",
+      "crc32": "ff0d2703",
+      "size": 95042,
+      "sha256": "b39fc8452330f362c26fe4d8663a8af993eb6035d70261c937da4931ed5ab4f7",
+      "gitBlobSha": "d77ef3089ee03fe6d98bd767bd4a4fd68c9a7d45"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-03.jpg",
+      "crc32": "dd6fc6b5",
+      "size": 82842,
+      "sha256": "b2528f9b9c6e2bb9297964c2e136411a791a1b2803766abf898b2580aa77807e",
+      "gitBlobSha": "482037cd52a9bdbe7f54668530ae1d4dfc5d341b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-04.jpg",
+      "crc32": "9949d84f",
+      "size": 86825,
+      "sha256": "64c47c57cb4e6ee3aa726b4a73eefe4be854be0866b93ab8ecab6c8abe55fd09",
+      "gitBlobSha": "6177a20e8ae2f0cf0b011a083a5fce24df355eb4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-05.jpg",
+      "crc32": "a293ae8a",
+      "size": 86139,
+      "sha256": "8cd51a51792d1a4e2c1275589f40be8d2e26293f337b28b54fecfa6c6bccc05c",
+      "gitBlobSha": "5cfe4f84ec57a35d6397550876c6e4e1b006fe62"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-06.jpg",
+      "crc32": "d7fb81a1",
+      "size": 93384,
+      "sha256": "d32f665d95261b85ce8579166b10dcd8ab68e64111a0c65bda7fc51434a00c49",
+      "gitBlobSha": "0915174c7e0f2ee1e3391d2962bbad7be8309387"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-08-ref-pilot.jpg",
+      "crc32": "0b583b5d",
+      "size": 71851,
+      "sha256": "bcdbc3eb78a91634426bba2cff94f05f8e8da93863203a913e85d14a9e04ef89",
+      "gitBlobSha": "4fab2f1de7a52e2f2f37f61ba9c779a18786d33b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-01.jpg",
+      "crc32": "1653b55f",
+      "size": 83794,
+      "sha256": "ae1e50b7d082142e536f7a8566481b936a929acfb3b7499c7b2c5c1063b98299",
+      "gitBlobSha": "fd879e3af7f473cb97b985a0579785c35bb5bf41"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-02.jpg",
+      "crc32": "12ab831a",
+      "size": 86488,
+      "sha256": "3a26360489bc95df1ddf24304124313b458aba5230b0662c6641d6d8d76045ad",
+      "gitBlobSha": "b80e87cf0d1649f3f88cb5ea7ef926f8ea2ab1bc"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-03.jpg",
+      "crc32": "a98a9831",
+      "size": 82050,
+      "sha256": "0a8fc7285abcd38a8870e36b339f3232aaa616b5c26dc05a0afce4fc2c0489b1",
+      "gitBlobSha": "d81d62f90aa5281af3adfd359b2a8c33fed0588c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-04.jpg",
+      "crc32": "5d968f53",
+      "size": 70099,
+      "sha256": "745caf5828e1c92c7f26eb68be19e912a2e20f162118cd2c5a7ed756425e9c60",
+      "gitBlobSha": "7f2251ed95e260282d9a47659792f4f0542fc6cd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-05.jpg",
+      "crc32": "055a8f11",
+      "size": 82267,
+      "sha256": "01485120a8044745733f5909b137605f9d4d6a1c167ec99dc4c6646d250f0ebc",
+      "gitBlobSha": "65d7d0d94b81b06a3b7da0fd17121389606d461d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-09-ref-operations.jpg",
+      "crc32": "82882bd5",
+      "size": 82583,
+      "sha256": "a8cc35241572f30b29b856ce2dc5dacf39a30387e94494ddac292eabf5b2ce74",
+      "gitBlobSha": "2bc744926277a118b0a070581a19a047fb0ee946"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-01.jpg",
+      "crc32": "f4b4fd6d",
+      "size": 75407,
+      "sha256": "a55146dc2d5a35c7934082f283a182acb29a06b0e478b0896c605959508f5ef7",
+      "gitBlobSha": "00dfd8abbf93a74c5c488333a530a059c9955023"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-02.jpg",
+      "crc32": "64165fe9",
+      "size": 87825,
+      "sha256": "53489a381682277e13f5346419edf420de44613ac18760f47006b8d833634a97",
+      "gitBlobSha": "59415f8f409e23cc8e0e58a3a5ee311993c6df23"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-03.jpg",
+      "crc32": "78b76567",
+      "size": 74856,
+      "sha256": "b66afe1c4cf1033fca6cd1842c8b7210d84f8007d8f7449799e18079a3ce5947",
+      "gitBlobSha": "175d3d5bb64c8737e3560c75bb59b0f47f88df23"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-04.jpg",
+      "crc32": "4127c167",
+      "size": 66807,
+      "sha256": "96f680a5f93271c4e71c79a263480cab9645bc5c87feae87ea2d94f1e5e15f75",
+      "gitBlobSha": "e3e77c62b73757ea0b7ec2637bb45ef6baae06d5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-05.jpg",
+      "crc32": "d79c2b43",
+      "size": 85751,
+      "sha256": "02434a7b17b77e268e8262c29fb3fde49856070145fb8d53829b0c2baa35e235",
+      "gitBlobSha": "d83e75b012c5bb11974660aaeb08d65c5e1e5ad2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-06.jpg",
+      "crc32": "7f1034cd",
+      "size": 63810,
+      "sha256": "74c4204cea24924d9a0ec6f259d49f967aff5b86f2698a3d835ad0ae971a3873",
+      "gitBlobSha": "af9dd8b3fe9cbcadc26a4cba91ef1c6c346d7627"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-07.jpg",
+      "crc32": "b65d05d3",
+      "size": 94953,
+      "sha256": "47834830982c5fe91935ab1831ec491dfbf692e7bbdb64bc775f7593a86c849a",
+      "gitBlobSha": "ab94802032ce479e28a20a7497214da40f50e8ee"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-10-ref-aa-cache.jpg",
+      "crc32": "dd62bf02",
+      "size": 80060,
+      "sha256": "20c19b074f206248d97d2551e24166610a607e69588d50cc7e66a13987578f82",
+      "gitBlobSha": "1e5e87e043e446a0d2f1fa6c39c772540c2ba28c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-01.jpg",
+      "crc32": "c65c605d",
+      "size": 85034,
+      "sha256": "50ad2885f8764366510659cd5a3e0be4c5bb0141af47a319dbd73bbf2f2f36bb",
+      "gitBlobSha": "f57166453444fff1cc9a1f9f59b6510d6789aa5a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-02.jpg",
+      "crc32": "69871d04",
+      "size": 79732,
+      "sha256": "623f68d498dcabbde665f68ab5a1fc07fb23b55d146a24e5568ab7086ee497d0",
+      "gitBlobSha": "87d33fc2afdd44deb78c976a2bbeeae793e1c44b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-03.jpg",
+      "crc32": "d2d5b5df",
+      "size": 71004,
+      "sha256": "2d41cc52532ad7a0e543eb440de24e91096fb15bd75648367abb077142455805",
+      "gitBlobSha": "87d6c3a9f0cf97d266261efc3722c964d92f132c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-04.jpg",
+      "crc32": "b858b69b",
+      "size": 78117,
+      "sha256": "b6059f4d54ff66bf0e91566740ce4aec667a6c5eb053c56f23c6a8b780e9b12e",
+      "gitBlobSha": "67a138999ac97b3a2720d64fc71f73958f1f88fd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-05.jpg",
+      "crc32": "30a7ad60",
+      "size": 83010,
+      "sha256": "7ee4621df92520eee7b02fc9f0d29b567fefbb80b79fef47a3a077d6d57efb49",
+      "gitBlobSha": "56f44f6c3e1786ee64a83ea4a135cb1452465020"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/acm-11-ref-bridge.jpg",
+      "crc32": "1a707ead",
+      "size": 74415,
+      "sha256": "186b77aa457b6d4c84b5630d661158410b1503b69d84694f883778973a99c7d5",
+      "gitBlobSha": "b59d4ffb7e7b269d9a561b4a9663378f06ecccd6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-0.png",
+      "crc32": "89fb9e91",
+      "size": 430225,
+      "sha256": "bc3290a567b17139a634fc284483010e083a58b905effce5bb0f48a3f136178d",
+      "gitBlobSha": "52f6152c1a4fabecb2b519c22f9494d3f9dc4480"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-1.png",
+      "crc32": "2cc0288a",
+      "size": 430950,
+      "sha256": "325ae7497a1ea263c16877fcae4297ec08b6c1006fe2a5a49acde5d78fa70437",
+      "gitBlobSha": "a4b641a8a780054c43d1b5d17664e48adb117513"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-colony-2.png",
+      "crc32": "1312fe2b",
+      "size": 425598,
+      "sha256": "232f878fc28f06d81a1cd93fcd1fc6abdea1661c57384d85a4df42f4d51b7d19",
+      "gitBlobSha": "887783e000d7fa3e5cfec2da60e14a877312f10d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-0.png",
+      "crc32": "69a671fb",
+      "size": 499013,
+      "sha256": "0d6b30aad0f901617c862e1e127c2b90397ca3248b30fe23f30750eb93ed8c2f",
+      "gitBlobSha": "f6ef8c192d859bc29612f18f6cb6d76f5ae5cc02"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-1.png",
+      "crc32": "80e2d82f",
+      "size": 510013,
+      "sha256": "9095fb2651d9537cdd693203aef6018afccac74ff47627cf0334db088cdacd24",
+      "gitBlobSha": "528f9ff09d3eb6a67dd3000addaebbbc6382aa7b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-dock-2.png",
+      "crc32": "d18fa868",
+      "size": 503832,
+      "sha256": "f8fddc39f16640dfdf0e8a449d070dcc4a07a2f01662fc4ca0102cb582079ae5",
+      "gitBlobSha": "7a6486ab5d742d60f7e451f6f69ee7d78f52a67f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-0.png",
+      "crc32": "d9b00245",
+      "size": 492223,
+      "sha256": "43826606fef3c42b2767e91fe4528fdf7ddcb92d843e0be2cb2b9f8341a76f08",
+      "gitBlobSha": "61de06a9ba59d21031b0cfd0746a432216548822"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-1.png",
+      "crc32": "e618e807",
+      "size": 484713,
+      "sha256": "38a21f737054cca367dd7cf636fa546a6fe792ed2b97e73f2d05429ad08560cb",
+      "gitBlobSha": "d4544e47ca8158de5d7821a7d6eaab37fe714a58"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/hunt-lab-2.png",
+      "crc32": "c56d84b3",
+      "size": 485384,
+      "sha256": "128d2a5a13bac16e42d08370cf19a19a69bb245dee3448c0c1aaca6981c73a2d",
+      "gitBlobSha": "ad6a5f8bacd8a422d3fe457bdd846754cc84eb02"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-01.jpg",
+      "crc32": "b5570ad0",
+      "size": 85399,
+      "sha256": "d08ff2accbf82d10901dcda5983e5cdbf7f85ac302df2d285642bd519bf7c32f",
+      "gitBlobSha": "e7ace5b7cd43779441aeaa75ccd5f9756731fbb9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-02.jpg",
+      "crc32": "3483b2ef",
+      "size": 82989,
+      "sha256": "79ea16d2b8979ffb004e3b3595ce67d1adf44a5b378339976d5b61d3edc3c6d7",
+      "gitBlobSha": "b9c3c405fd90a719c113a099f4bbd1273452409c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-03.jpg",
+      "crc32": "e2d676f3",
+      "size": 86023,
+      "sha256": "82a7afe87653f7e74729c1b1156d11f7ac1db59894a6f2b8022d52a80972ee1d",
+      "gitBlobSha": "7b18f17204dee07acf495d7d32b17175e0fedbdd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-04.jpg",
+      "crc32": "93d2f6cc",
+      "size": 79458,
+      "sha256": "fe345e74375aab71bb7394cadc8f5520c9e3be68f8a4b69ab8f765c48fa03d65",
+      "gitBlobSha": "a4909cd217cf637fa9b6ecdb66b9db065a6e95a2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-05.jpg",
+      "crc32": "4d7eb896",
+      "size": 74798,
+      "sha256": "73a854e738a8da729101b3494e1db6c6e52bfb05c2de8e974cc2bf73128ef91f",
+      "gitBlobSha": "3f5fbb095cbc6b622cfe584ec925a6db911554de"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-ref-parents.jpg",
+      "crc32": "ab4faaf5",
+      "size": 70184,
+      "sha256": "b0b5e6932b54aa6fa447f00f6ba70f6b479b4b38057b0de1109011f1f4e3d809",
+      "gitBlobSha": "b3d754af55eb25eade58f5fecd9c5413d9ff9559"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-01-ref-reactor.jpg",
+      "crc32": "466138ba",
+      "size": 83176,
+      "sha256": "7bbb2a19ad50587624f946941c508d1c32cf2c1b1fe1c7e2b7ade01537a5a064",
+      "gitBlobSha": "25b5efd6e2b30661eef696da31ce557addfe7a1d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-01.jpg",
+      "crc32": "5f979f26",
+      "size": 81288,
+      "sha256": "2bedd92efb00183fb1f5d917cbd250364c28ff6ac11f58ee01eda6adfd95f6b0",
+      "gitBlobSha": "3fb38508275c2f814fc5228f1192f604b4e486ca"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-02.jpg",
+      "crc32": "64303cdf",
+      "size": 78459,
+      "sha256": "a6d4e77c9a22d2fa344ed2d24d2322344792b46726c9033c48ce69dbb9cca27d",
+      "gitBlobSha": "b5dff22790df532ddec42833ecba90f49113e24c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-03.jpg",
+      "crc32": "b8461644",
+      "size": 89000,
+      "sha256": "0e9594432ef72c7a5095dc150f8d7c238afbbb9677ea8d0e93260a70a57051cd",
+      "gitBlobSha": "a16d48382bb0ed2c509bbb60f8a59ccfc6996b22"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-04.jpg",
+      "crc32": "23d2d2d9",
+      "size": 81028,
+      "sha256": "5309ae0151d97e8447538e2f41fa7b05e0f979110308a5f7d1e2cc289e424ec7",
+      "gitBlobSha": "eb78d6032591b551f7273492f069eb6880903f61"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-05.jpg",
+      "crc32": "8d5a878d",
+      "size": 73997,
+      "sha256": "5cf55e6de78b835ec0652b073f728e93ddbb70ca4e2973b576913e0928aa0951",
+      "gitBlobSha": "49cb907de10a31c7e2b0822e8c136a2f2ecc9fc7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-cryo.jpg",
+      "crc32": "988d7bc9",
+      "size": 73609,
+      "sha256": "8730ce4c0670a37123ed525d0692af93a009093e91154f3ced3c75c5cf71f9b7",
+      "gitBlobSha": "b6797c0b0e0ce0b6c815a58a301122ccaeff717c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-fiorina.jpg",
+      "crc32": "32de94a1",
+      "size": 70204,
+      "sha256": "326422b0efe2ac3f3d967b1d2df31ac6572683b2f6a41a27e1ad66343fc72782",
+      "gitBlobSha": "56ac712336e015da5e930b6639160e9006471725"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-02-ref-skiff.jpg",
+      "crc32": "7bdc098f",
+      "size": 72304,
+      "sha256": "4d84a2753dcf45da5843f5955bbd55cc95e7aeed29b92fd74e636fc40a7e5b67",
+      "gitBlobSha": "9eed658c19f01dcce112a264f9623ebe7af65ad5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-01.jpg",
+      "crc32": "efc23dd1",
+      "size": 83636,
+      "sha256": "97a677767ba44f467a669c8972b5f75b66153e08b3235439c8f909b5361f2bab",
+      "gitBlobSha": "cd69d57cf586df1014b71a4e963078775cc01a15"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-02.jpg",
+      "crc32": "e7b6998e",
+      "size": 85763,
+      "sha256": "ea559e1b46c44550031735d4ebc2f9e1baff1ec17e628cb10215e05b62130c8c",
+      "gitBlobSha": "8ed251ea5861884b65734d2555c1f9200067fb18"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-03.jpg",
+      "crc32": "28812c40",
+      "size": 78330,
+      "sha256": "8b17f55f05b2c41317cc72b52145c325e229236f9b35cab0ce0c0a0c0e97f131",
+      "gitBlobSha": "a838f853c8bf9ce75c39c5bfe9dc48321dcc9472"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-04.jpg",
+      "crc32": "6bc59984",
+      "size": 93743,
+      "sha256": "cef6720a9173383b4dc295dee87cfd8c3985554f677964df6de8d0453eb18615",
+      "gitBlobSha": "71cc828ea36b805bc460af308fefb9154aa658d0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-05.jpg",
+      "crc32": "f39eaeaf",
+      "size": 79457,
+      "sha256": "a30d412b94514c8045f887e08bf2b1cb1ee10bc0201bb3d2c4decc73f6f25db3",
+      "gitBlobSha": "55aebbbe58a90f3ddbee2144322316640270c25e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-03-ref-resolute.jpg",
+      "crc32": "60b52d8a",
+      "size": 78567,
+      "sha256": "9d533b3b65cf4696a672187e7212d267934cc6a9566d3c520a25a3fdc78eab10",
+      "gitBlobSha": "90d8e184fb0239e6e9a95b2626bf38bddd14078f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-01.jpg",
+      "crc32": "eedc0fb9",
+      "size": 71393,
+      "sha256": "c176bce40061eaefcc23c8fb0006767ae4a6d7cff5022638518f714069ea1568",
+      "gitBlobSha": "56173a809431888c33a2641560cd1702ac9f350d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-02.jpg",
+      "crc32": "983523f2",
+      "size": 70907,
+      "sha256": "22d21aef5bd35b5724515d736201f1fbf5fc7fc183bcbe61fd65148d1421615b",
+      "gitBlobSha": "17053acf8ecf02b354d2d08e7e677b00146d206d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-03.jpg",
+      "crc32": "d30aee3b",
+      "size": 65105,
+      "sha256": "20d83a049d90139b3e3d8ce69dee1bc0455ad236a0780d7e6de4fd6fd8fbb7c4",
+      "gitBlobSha": "58bbc98df8014505f9636ba8d3b4c7434700dcc7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-04.jpg",
+      "crc32": "8f4213a0",
+      "size": 86305,
+      "sha256": "6ee3357af7d07bd48332f828246646bb0c58340434548205c91bb074e418d8e0",
+      "gitBlobSha": "1552fc6b3b84eaa8fd29ece5d746603d8d2e86ba"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-05.jpg",
+      "crc32": "92c2df5d",
+      "size": 64386,
+      "sha256": "ed4ebecf1e7c79f8a566d6d7c3a30ce3f927bae3424c851a1b3ca932d9dda0ed",
+      "gitBlobSha": "f6eb5738e34634359070dec75b44068fe52ae602"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/rooms/stasis-04-ref-gas.jpg",
+      "crc32": "6e51155c",
+      "size": 77050,
+      "sha256": "fac56c906a5f2541781ec5ca8888608f49f86df13d13bb8e5c7d0e52b99d50ef",
+      "gitBlobSha": "adebeba2f8ce0a4f6d47e1ad39cf5cab5feb4b17"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/spatial-reference010.json",
+      "crc32": "907ae854",
+      "size": 230260,
+      "sha256": "e0851101eb6235b675b2c22f79fa0e28eadd818b01b6ad5f5c20db15e1bba7b7",
+      "gitBlobSha": "b4fc180a08eec98c879a32844e7c4f1702d118c4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactical-agents010.json",
+      "crc32": "fcf1b317",
+      "size": 1086,
+      "sha256": "0e6906ede7af6fa23739eb9c06b004be6f62302f4c617cbda9aee3e05bf7ab37",
+      "gitBlobSha": "ba0f91710dc898e95cf67fbb3956778c13e05017"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-agent-dock-marine.json",
+      "crc32": "0c0f5eb5",
+      "size": 5136,
+      "sha256": "25daf09c35f20c15982f4a87ad6f348688d44b6c233a6a4a8bb205c3db2b7a08",
+      "gitBlobSha": "65d6a9324fd803d952221e8a906bdd5fb158028c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-agent-dock.log",
+      "crc32": "2154d72a",
+      "size": 5642,
+      "sha256": "b28ef1221dde4cc719a3230c09688135c116c1ca1fab8c10579b3e02dbdc5e7d",
+      "gitBlobSha": "c9aa2ae016f6f58238dfb02cfd2baf188ad3381a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-agent-lab-marine.json",
+      "crc32": "d993ae44",
+      "size": 5144,
+      "sha256": "6d7549b4358b00bb4a3ada33abbcca0f84550974cd8726b8a208132eaf0778c4",
+      "gitBlobSha": "8ea6a8ca5f84eba286166bb46a94d566ad26a344"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-agent-lab.log",
+      "crc32": "57a1f1f9",
+      "size": 5657,
+      "sha256": "0949355fa0c8326f231b1cd52d2560d30cf34868e44b4395204ec47ae7c1e9e6",
+      "gitBlobSha": "f3071c4dd9b5421715011ecb720bb240999fe860"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-browser-progress.txt",
+      "crc32": "10e9ae78",
+      "size": 1927,
+      "sha256": "73dd68825bc8987c46244579f09ab2137c3949a58af08765026ea193d1a904fa",
+      "gitBlobSha": "da2ccc90dfb57b3d5b60af72070547fb662adbb9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics-browser.json",
+      "crc32": "502d255e",
+      "size": 6827,
+      "sha256": "d3c68f23115ebfb298cc8012fdaf8b0f9ac40ed629eb4f3af232b699c328b0d8",
+      "gitBlobSha": "affae9ed637e5a03fb570e75f26910b06552b78a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/tactics09-run.log",
+      "crc32": "f76c208d",
+      "size": 19,
+      "sha256": "17a166b3d15ce2d41713b4b3c5b02bac7f8f6095c6cb1ee1dd4de55136b360f8",
+      "gitBlobSha": "3b6b162cf3bac8ba9d8f70d322e66901035546b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/01_title.png",
+      "crc32": "a5481eea",
+      "size": 698644,
+      "sha256": "b40d54675590e134631689ff9ac0633cfcb6999bf1a9faf460a0dbc66851fb25",
+      "gitBlobSha": "b586d5cdf4f2002070439d2553e6bba12847e837"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/02_ledger.png",
+      "crc32": "7f1077f3",
+      "size": 170992,
+      "sha256": "fbf36f8cd46672f0e2eed512ae4ade3b2ec1edebdc05144b22c575db4fdb92c4",
+      "gitBlobSha": "cef682f7c2b79fdc069f165c3fa319b3180c9b03"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/03_start.png",
+      "crc32": "175ec24d",
+      "size": 540409,
+      "sha256": "c242bc8447670e3a8d5ff2281e71d7cc91ad9deb886b8379a07d571cf5ea94b7",
+      "gitBlobSha": "dbbaaf609dc09dac6b7a2b7d8a74058093d8ede5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/04_armory.png",
+      "crc32": "e6502e97",
+      "size": 170867,
+      "sha256": "5e4ad882d6c05c4ad57beabc22c4ab24c7a32abb893dd93d769a03e9fb6949c8",
+      "gitBlobSha": "ed83c4eec67f6b87a2c2d8adef6cdcb8118d1074"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/05_ops.png",
+      "crc32": "d5a649d5",
+      "size": 506460,
+      "sha256": "057615bc97ad7914bbdeaa2425992348f820e949ee078e864054d33e988c4427",
+      "gitBlobSha": "fafff5e357206214dfd4b8b23e25ab616c4930b6"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/baseline-node.log",
+      "crc32": "54ef200f",
+      "size": 83546,
+      "sha256": "0b53a13995847021010d180be0d132568e7a2afaf94f9ff4622d2113345adbe1",
+      "gitBlobSha": "0e0939d36f8cd0125bb4f151578be04f0c85501e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/build-final.log",
+      "crc32": "4d87422e",
+      "size": 1157,
+      "sha256": "4aa634e1a698ce22e7113b6593aa33f582be98eb8644ada49358e4844506a4ba",
+      "gitBlobSha": "99c058abc75946015cddb07b42f764094c97d282"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/65_accueil.png",
+      "crc32": "a5481eea",
+      "size": 698644,
+      "sha256": "b40d54675590e134631689ff9ac0633cfcb6999bf1a9faf460a0dbc66851fb25",
+      "gitBlobSha": "b586d5cdf4f2002070439d2553e6bba12847e837"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/66_identites.png",
+      "crc32": "ac9af199",
+      "size": 158166,
+      "sha256": "2460702af3212a4614d0a1705f759809135f9b72f686ab5c3b91d5242064fb13",
+      "gitBlobSha": "932cc7d46ac8d79003e211073c47b2b9652498d4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/67_arsenal.png",
+      "crc32": "c5281631",
+      "size": 171291,
+      "sha256": "a803440ea9e1fd05d2f6bb2ec02dda419cacdd9f6ffb5d9026c3b65a100b368b",
+      "gitBlobSha": "4bd215a37bc132ac78cf180ae66131fbedcab02b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/68_variantes.png",
+      "crc32": "4cbed90c",
+      "size": 161664,
+      "sha256": "75a31a7f5b9b7c2136cc63ef7061fcc392cd209c12aa02f3e61c2acb7061a6da",
+      "gitBlobSha": "ece703cb2faea49e1a40a5b6dbe2f750bf5755f5"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/69_operations.png",
+      "crc32": "e34283f5",
+      "size": 525233,
+      "sha256": "d401590535f340dab83bb1a1f80ab896b25cac471c50ed6efd369f8d79360fdf",
+      "gitBlobSha": "60638191e9f99a22983401a3ea83a673dfb3c595"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/70_morgue.png",
+      "crc32": "5d39ac0b",
+      "size": 518524,
+      "sha256": "e422022826e26e7e04ac79f35b5ff85f2752968ca6d36735cd81ae63b86b7c53",
+      "gitBlobSha": "c71ad01b024c1327e3c8964ec0435209e98c273b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/71_pilote.png",
+      "crc32": "fe49cb1c",
+      "size": 535287,
+      "sha256": "9282f69b716edf6c0ff4e485ee6a0d75ec99bcacd91796a840098999b2f1b4f2",
+      "gitBlobSha": "c4547e7793fd6ae2519cf07ea2598886c9f1472c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/72_passage_grue.png",
+      "crc32": "8495914d",
+      "size": 555544,
+      "sha256": "051b7b645ebb3857c78a8634c647cc0fbf37c566669566d025ecd1496e6ce4c4",
+      "gitBlobSha": "eaf9afaa5199d15b1198a16312c677fdb9f8e7a9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/73_skiff.png",
+      "crc32": "34a94313",
+      "size": 530609,
+      "sha256": "f92071b69fd0af301364df3ab92130e33f8509082915b83357b456399618014b",
+      "gitBlobSha": "0fce56701f5b7eff880285b4402a9734c7c2a440"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/74_ventilation.png",
+      "crc32": "7a7c9634",
+      "size": 525265,
+      "sha256": "1b6a5a4ac17669beb0fdf34facc0a1ab1baa3571682611ae986103ce451ef648",
+      "gitBlobSha": "39b5a0afaf9c51e6d832efca4a866653ce774274"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/75_armurerie_etroite.png",
+      "crc32": "545c26f5",
+      "size": 69497,
+      "sha256": "2f7cc60bcc008cd57ad3e62d458c5459fc46170a2c3fb5f5e7b4f80514e2f81f",
+      "gitBlobSha": "822e002dc7a471219f3e4974efa096ec6285caa4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-bella.png",
+      "crc32": "682f75f7",
+      "size": 5386,
+      "sha256": "b0351a1f1856b939e049df73c84ffa4002fe9475f0af0392b7ded41699d53262",
+      "gitBlobSha": "a79377392c8512cf7a6910cb5421d039c937fb14"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-bishop.png",
+      "crc32": "97725fc7",
+      "size": 5460,
+      "sha256": "ac92db0eb89b4d42ce1158e4fc45117b713a3dbfcb8513cad243cee06efcc3fc",
+      "gitBlobSha": "b9822c8e33c16aa1b95af0d2a553189e07735e26"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-cruz.png",
+      "crc32": "d7bb4249",
+      "size": 5758,
+      "sha256": "6d6aede316e3555df6e5c63db54c2a05f8a42ed8b729d0c34431d0be0f5706e7",
+      "gitBlobSha": "67cf36f4b6be7da4cdd008e5927fd5ea485a9802"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-hicks.png",
+      "crc32": "7dfdbaa9",
+      "size": 5580,
+      "sha256": "73861463a2ed9eb07d9881b5b0e333275ad633e44dda3fdd18513fcb973bc015",
+      "gitBlobSha": "f09b1124b8061d68820db844f9562389727ae0ea"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-levy.png",
+      "crc32": "47dd6489",
+      "size": 5712,
+      "sha256": "5aa1ff8f5379800a53616b2d0da3e53996cc1d968c18e6b3fbd768b05d06653e",
+      "gitBlobSha": "ac40256152e5076f110c45cafba5a207a5bd8c09"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-lisbeth.png",
+      "crc32": "896e54d1",
+      "size": 4967,
+      "sha256": "94571c58d8da65a60d419cb6c120d43d63755e40b20f16b0d0b69f7b88ae5119",
+      "gitBlobSha": "024a625df47486e25b8990fd51d45cd996b1efe7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-oneal.png",
+      "crc32": "dc90db6a",
+      "size": 6484,
+      "sha256": "c568257c2e34119b0e0aa91f41ea5f9a6b74efeba7f30de5724ca863b3311e6e",
+      "gitBlobSha": "fc9877aa74ceec6e21c3af6e8190d04bbccb4014"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-reid.png",
+      "crc32": "bc88f33e",
+      "size": 5694,
+      "sha256": "c8e71773dc7ba0672483410816ea193ea66fa4e9ef95560afcf952bc764a7b64",
+      "gitBlobSha": "9ef91461e45b2a4d84f26a3e8fce97b0da80b7b3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-stone.png",
+      "crc32": "d7c0fe46",
+      "size": 5410,
+      "sha256": "798e0efe8106a0a26042d7fe24f2eb59a971574c4de144544687ae49fddd96ca",
+      "gitBlobSha": "62a242476574e217fae742f56a808a6c58462d5c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-weyland.png",
+      "crc32": "8906c71d",
+      "size": 5258,
+      "sha256": "2e48987608220358f703f5e430f1a79e3f69d2f8e74ce2a133343b10f8d95131",
+      "gitBlobSha": "87ff5a8bfc633afc03d519c9876b13e86d328150"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/captures/portrait-winter.png",
+      "crc32": "2cd6726f",
+      "size": 5808,
+      "sha256": "0fbc2ed3080165713a702951a29de7e26e244c9104964d16fb4d7284a135aa0c",
+      "gitBlobSha": "857b45b76b3b3b9e164c812deeceacf2da66745d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/codex-review.png",
+      "crc32": "5ccb4cb5",
+      "size": 268562,
+      "sha256": "905f3e7051dc33219fdc61b32beb65aa521c001fe18ae236ff9a0e6035049f0a",
+      "gitBlobSha": "a5529145e0f3eaf074b7e23dec3bbe512db84c94"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/documents-progress.txt",
+      "crc32": "b439f818",
+      "size": 2184,
+      "sha256": "2220ba82cf6532cadfbbda65bac2df4f0abee15b4319bb1aa399cec06004686d",
+      "gitBlobSha": "858238bf5ce6a7037ecf95ba4becb1394a350889"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/environment-run.log",
+      "crc32": "90d1bda4",
+      "size": 6290,
+      "sha256": "7fc88d210d9f6aec2fa1cb9c5dba21b99fe71ef9b91b1f2a09c0e873d7465b15",
+      "gitBlobSha": "c16508545fdf34e4429f07a649396a224e889c1e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/http-output.log",
+      "crc32": "90e430c2",
+      "size": 2003,
+      "sha256": "478fe622dfe87d9f38ef097dafb81bf595d64c8077d99d01374c38c72072a583",
+      "gitBlobSha": "542dd2c840e86899175f6661a015c638c5220fb4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/logistics-run.log",
+      "crc32": "ec58dbd6",
+      "size": 6233,
+      "sha256": "5a162c928fc6dc72bc2533d472735b388a8d68b6b587803f4aabb4556ede87e0",
+      "gitBlobSha": "604b4a9eca239d70c26bda1df4a23cefeb1d7fb4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/probe.json",
+      "crc32": "ac9aa235",
+      "size": 454,
+      "sha256": "ba1b670c9753d33249012ef1ff0bad46c41f102414185d2c75044cc515db062f",
+      "gitBlobSha": "e82b861d63d00be41577a6f7a88862a043c840c4"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/v010/rapport-review.png",
+      "crc32": "c0d16c2c",
+      "size": 340921,
+      "sha256": "7019664aad001793314787a3afc3360fdcd7312dbe001ec17045f1514ceeb9ae",
+      "gitBlobSha": "6f72d86b0919168dd5580eedc9f161eebeddd7bf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/reports/veteran-progress.txt",
+      "crc32": "1e09c6c8",
+      "size": 3637,
+      "sha256": "21bf983d48c4c71c2ce2f62534b989964cc05b808e8c9256b754858c40aeae57",
+      "gitBlobSha": "5c8db152821796c911d17a99d5bc37775a900548"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/browser.py",
+      "crc32": "208bdaa6",
+      "size": 32441,
+      "sha256": "9cd120806743b034e85234e043eefc8034a932dcb3ef4cfacb5c2ef9fbb8e1d2",
+      "gitBlobSha": "4a3772369eaafb25d3e9befad6d68be005e0e332"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/campaign-agent.mjs",
+      "crc32": "a0ad20aa",
+      "size": 10340,
+      "sha256": "34c745fb6c085ec287fbbf0ac5c3a5723be006870bd07e4d1bae6be373d60eac",
+      "gitBlobSha": "9538178d78faf684562ee78ea06e8196554b0d8d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/continuity.test.mjs",
+      "crc32": "d995fb4b",
+      "size": 12929,
+      "sha256": "00bec4d9e38c05f92c94e0fce08f39d117ed7d101490e4964cd9ff60eda44d78",
+      "gitBlobSha": "a2bacf021326027c5659b403e568fe5e2d2a163b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/core.test.mjs",
+      "crc32": "8eecb261",
+      "size": 9458,
+      "sha256": "9d10b20d21de799deabaa36b0cefb230315633b90e93b788ecc9345567df2466",
+      "gitBlobSha": "46d42d4f13e45a34a554b727ed9355c341afa371"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/documents.py",
+      "crc32": "5c7840fa",
+      "size": 3844,
+      "sha256": "c3b6d74d671a7ee279be18be1f7b32c63edbfda5cb48c023c971583e11f4e94f",
+      "gitBlobSha": "cfa7914bd153cbe2c5d28979f2f953ff2833940c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/environment-agent.mjs",
+      "crc32": "786bdb59",
+      "size": 6365,
+      "sha256": "8ed06b3142443f17e5cceee19cdf296a9f931353102033a0623a76b35278ab36",
+      "gitBlobSha": "c8cd55f0949656b54afd619ab65db1929a901e2e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/environment-browser.py",
+      "crc32": "c823f71b",
+      "size": 11050,
+      "sha256": "c75aff5a93d87ae7cd6cd67ef3c71ebe9815d5d48dd25ce674ba2a74d7dfeb0d",
+      "gitBlobSha": "b06bc833d12410661f1687153b9946f5dd92dcd7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/environment09.test.mjs",
+      "crc32": "5b30a4cc",
+      "size": 12546,
+      "sha256": "9557cd882a34830b73ae324ef81f822b2ccf8bcfeeac8eb20038691f64841a95",
+      "gitBlobSha": "4c36bf863ba0d5c32a515d94fd58c5bdbb8d03b0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fidelity-browser.py",
+      "crc32": "b9c6fb00",
+      "size": 11087,
+      "sha256": "4025a12d43711ad5f867abf214b9951b2c439bcdad6abe8c99a943438e7fe8e9",
+      "gitBlobSha": "679bddfef25739b782c6de1129d4e447a986d56c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fidelity010.test.mjs",
+      "crc32": "83a48b13",
+      "size": 13986,
+      "sha256": "2b44cefa1862c1d64f336475c1a389231d2d36078220f4765aef67f680a596ac",
+      "gitBlobSha": "36127296ef2973a61cc2b61e61d23f6846e64bfa"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/field-browser.py",
+      "crc32": "b78e5174",
+      "size": 12205,
+      "sha256": "6acb0e1eda2b86e0f710515c467f2b076108284b92347dd0d05eb9536c210f60",
+      "gitBlobSha": "1b9926381921c4c7fc3f4f4806ecfae20509d8c0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/field06.test.mjs",
+      "crc32": "794a610c",
+      "size": 15197,
+      "sha256": "e889d302c59574ec26a14f31d03956b9582b5b5a0d2857178fb9b98abfaf9012",
+      "gitBlobSha": "55f4908c1064f24f701f270bc5bfd75b3b495ad9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/campaign04-contract.json",
+      "crc32": "9de93b25",
+      "size": 310115,
+      "sha256": "7d7bb3b2a021dc4baca2b1df33073c9b79cbe3b5455a14921b5831f946a819b3",
+      "gitBlobSha": "82b51415a0a69579ca2ccd4988ef1a29d9b1a1e0"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/content-v080.json",
+      "crc32": "75ece4a1",
+      "size": 383345,
+      "sha256": "4f83bcda0016fa37dd59e4345db6db1fbc24677793c5f490737341cc87207880",
+      "gitBlobSha": "5a6c56402e2ecca525a20187f97386ad253fcd65"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/content-v090.json",
+      "crc32": "31975cd9",
+      "size": 386857,
+      "sha256": "b511c81d41adc988efc48270a81f42b6ca6e45c6ccda8f5809c0e3830bb92fec",
+      "gitBlobSha": "b8a39d838edc9c3a8a910b2b154f8b6f20b7b4fd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v010.json",
+      "crc32": "37d8af4c",
+      "size": 2601,
+      "sha256": "b2a59a54dc93b2f66307f22afb664c39a5496885e1cf05f114a75b8478fe5e22",
+      "gitBlobSha": "5b1ddd18e824ff4c79a22135bfb6d3d04a230f0d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v020-m0.json",
+      "crc32": "03aff689",
+      "size": 1415,
+      "sha256": "d48d58bf88a3aa5565be16218916184332f035f26b14cf58431a99d8de0bbc07",
+      "gitBlobSha": "5067391e1f5ea72474ab794cb4e9ca83476a6781"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v020-m6.json",
+      "crc32": "e26b9422",
+      "size": 1860,
+      "sha256": "a60b2369a789b2ada3991101551d8f93a62214714bea8920cf333cc77aaa753d",
+      "gitBlobSha": "d7260a6cceec8fb3cb749316db516240e49441bf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v020-m9.json",
+      "crc32": "8b69aa38",
+      "size": 2312,
+      "sha256": "7c982ba661e5f125474471e98664917eefd4e889ef0a3ea66e3eac0cd2831aef",
+      "gitBlobSha": "5e325124c7fe44331d891c454caaf6b7f7691bae"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v030-m0.json",
+      "crc32": "114d9b9e",
+      "size": 1456,
+      "sha256": "969a00d65bd41bc25404f7a78462813bce0d89521474be785cf794d062b340d9",
+      "gitBlobSha": "bc3bc0b7d8746d22e68dd6aaf5e2251af6b081cf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v030-m13.json",
+      "crc32": "1c9d31ff",
+      "size": 2406,
+      "sha256": "7db8cd31697d23461c601abe0439754a3f13e985080290690c333c871b9da113",
+      "gitBlobSha": "d414b08a46a4a1137cb0a1e263e216d2c5f24d7d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v050-three-states.json",
+      "crc32": "c935f7c4",
+      "size": 7499,
+      "sha256": "c2e46e019e2ed6a9046b64ba7bb54f66a45344cc3a30e2774606ff0c10241d4a",
+      "gitBlobSha": "bc897a9fab76d6b63f29e75b51ce53fc2957015a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v060-hunt.json",
+      "crc32": "6a1660dd",
+      "size": 2367,
+      "sha256": "f04039bc378af968d2a2cf7bf8c51b33c90596397363e0b5b8f41df8a75fdaba",
+      "gitBlobSha": "af0138a7274e654595dc7c82107be10fa44dda4f"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v060-main.json",
+      "crc32": "471cf9e5",
+      "size": 2096,
+      "sha256": "0ab847f2090e2e4d8a2b6555a29fdded4905ec95cb8289306463937a16316255",
+      "gitBlobSha": "1dc636fbb6495950b58daea4b4b9bc8564754377"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v060-stasis.json",
+      "crc32": "e5885739",
+      "size": 2106,
+      "sha256": "d1bc0167bfdeaded5da975076534fe61fb73e256b4edf53bb553cd1d2d63dc61",
+      "gitBlobSha": "36bcda5d3cc099395d0f7630a400af06bb6e1ba1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v070-hunt.json",
+      "crc32": "12e0fe97",
+      "size": 2487,
+      "sha256": "338a8b50205b507e66da7e18a5efafc911700fc45381ba6c9bb6bcc5a472ffb2",
+      "gitBlobSha": "b93371abb5e0e3bd50d9f8656eab121989c43e4d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v070-main.json",
+      "crc32": "66fcf66c",
+      "size": 1909,
+      "sha256": "231e8193477a90bdaa6d95dd2e73c368c0478a333655acbfa194ee1cad33a870",
+      "gitBlobSha": "161629532326e1a13d6239279a84adfc3f9dd5d2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v070-provenance.json",
+      "crc32": "24d2950c",
+      "size": 562,
+      "sha256": "511891477251e6ae6b73b6484e5f8be7e8ba200dd41399ffd578a25c3693133f",
+      "gitBlobSha": "c2a8fc93d5f96633ed02c58f558af2b34ef8ff91"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v070-stasis.json",
+      "crc32": "998a9523",
+      "size": 1937,
+      "sha256": "b3b3d0484e23a0621589e5b6da874911b2e908c671db10eb677313798092fe1b",
+      "gitBlobSha": "dddbaecb15aced29ace90c25f0ca47d1165f99d3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v080-hunt.json",
+      "crc32": "b1591821",
+      "size": 2552,
+      "sha256": "a6cdfc88cfa1fa1f18956eda88fd40ce02313efaf586f542f284948a3b051ad6",
+      "gitBlobSha": "6902739a917641ce8bfac57a0687b285be47e79c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v080-main.json",
+      "crc32": "e8d5a62f",
+      "size": 3536,
+      "sha256": "cc0c297bac564fa35ed8be0e32e19b8eece0dd90ad7dd7f60b9b068c27c5bb34",
+      "gitBlobSha": "b41ebf808db3efe7ab707bd64614f1856437bd6d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v080-stasis.json",
+      "crc32": "f9c029ce",
+      "size": 2005,
+      "sha256": "eae955c261a32ba528679083458b9a008fea8b351ab5caeec377c423e434b894",
+      "gitBlobSha": "e5f10dcd9ac8874c19c59799d7588efe36d41770"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v090-hunt.json",
+      "crc32": "606235d7",
+      "size": 2785,
+      "sha256": "5e8c4d7b82b55a984fbec84a624a055e3c582dd1039bf8009803d91b8c8a2e76",
+      "gitBlobSha": "1f414f9752307a47a9c86bba79a5748360eead9e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v090-main.json",
+      "crc32": "aeb94b6d",
+      "size": 2049,
+      "sha256": "93df3e97a38719dec17a51ec283ec8f0ab5d9be9d94e48757b977f611f2b6b0d",
+      "gitBlobSha": "a48008d7a3aae5d86d0af65c87ecc292cf5e8cdd"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/fixtures/legacy-v090-stasis.json",
+      "crc32": "89227c8f",
+      "size": 2185,
+      "sha256": "ce620c458dcdea3d3baead8175f4a99b6fc9cc192969cfeb52653ace48889401",
+      "gitBlobSha": "774dc6dd3f5f9e5d0bdc363f2e57012962ce5cac"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/continuity.test.mjs",
+      "crc32": "c837e2b2",
+      "size": 12820,
+      "sha256": "9561c60750187069fe77c7bf08fb1822acfa3942c64bef37172934f8588c5f56",
+      "gitBlobSha": "cdf3e57de774664b30a32d87b5e8ff589b950054"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/core.test.mjs",
+      "crc32": "9fe298bc",
+      "size": 9320,
+      "sha256": "91a4b2fa7ca10f1553cd380c4a674cc14f91a5063f8b43fb486a9f5d7ed4cbd2",
+      "gitBlobSha": "c4003ac391745c7d6c1ade00b2034e8151fa6a47"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/environment09.test.mjs",
+      "crc32": "b8fb86e3",
+      "size": 12487,
+      "sha256": "c933e8dff8949309ea2fc8cc415d5b221037503210c34cd58ef4a0c74bc4affc",
+      "gitBlobSha": "c6d9d6f5d3f6176272b9781b3a9dbab3bd2c7872"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/field06.test.mjs",
+      "crc32": "a970ffd3",
+      "size": 15107,
+      "sha256": "d4cab462c0b4ee3a5d9c53e83a1946751bf6b92175218c3e704bfc49d8b132ac",
+      "gitBlobSha": "369b9e958330ccb58235571acea7732830d87ed1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/hunt05.test.mjs",
+      "crc32": "59b62a0a",
+      "size": 13211,
+      "sha256": "5131ac50c97b910ce06789a032b17ef52ef811e8b5bd5a42043faba1c14bad98",
+      "gitBlobSha": "85938d2a6fd180ee5ccbb050817ed44d5ef49ddf"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/install.test.mjs",
+      "crc32": "080cd853",
+      "size": 4345,
+      "sha256": "4fbb060b6f1ce2cf3eb0e0541617bb162f2305a1e722c00d33fb0965f15ea24b",
+      "gitBlobSha": "02c79c5b4c59236dcc781808d76787eb3b649bec"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/logistics08.test.mjs",
+      "crc32": "6a3861d6",
+      "size": 15145,
+      "sha256": "cda05f6c9a3b658125f09c1ed8b95c1e3831c34cc19f462468215e177c1c507d",
+      "gitBlobSha": "4a84db9d771139c19625822aa7d510e7fb9b3b34"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/setpieces.test.mjs",
+      "crc32": "13493d3e",
+      "size": 12544,
+      "sha256": "9be72a2d0181266d555e3e0ff1c40b45e92d3b70445df48cbe817325d1c635d3",
+      "gitBlobSha": "e3b42db13077cdb5b15399a90c538c0ebcf3df96"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/squad04.test.mjs",
+      "crc32": "512be5f5",
+      "size": 13263,
+      "sha256": "4f18f9fbe4b30961e9b3804a498dda6831301f641a9ec0cd60082a05cef4fca4",
+      "gitBlobSha": "6b2bfe9e96c59a7947804e1a8ace52f8af9dc156"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/history-v09/tactics07.test.mjs",
+      "crc32": "c0b834cd",
+      "size": 15790,
+      "sha256": "9d69479afedc6222963dcaa8aefe84a7283dd959f43f806e8d99bba7b10b7cb3",
+      "gitBlobSha": "fbf39ebf9410c479584118b50dfa347729be434e"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/http-static.mjs",
+      "crc32": "655ca132",
+      "size": 1846,
+      "sha256": "d04c124c95d415e0dcfc4aadc75e8274ce8069d603cc797d9ddd29f63d6452ab",
+      "gitBlobSha": "1a78ef835296360ab1851fe8d28ab582f79be8b2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/hunt-agent.mjs",
+      "crc32": "a7f36329",
+      "size": 5078,
+      "sha256": "271de7cfa3ba0e74ea86d0f99c980ab15a3064ee18b376c943e4c4769141927f",
+      "gitBlobSha": "fdb9d24b4d6945d25e7c01e184efea6ad7490fe2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/hunt-browser.py",
+      "crc32": "b7e46b19",
+      "size": 13130,
+      "sha256": "160fa0bbc71f2ef7f43c63ebddbfdfd66aa35745bbc7c662a6ec1b9f27ccf335",
+      "gitBlobSha": "c58530d75ad27eb2f9a18b7557c6a2d9d59fd2f1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/hunt05.test.mjs",
+      "crc32": "eec141ac",
+      "size": 13183,
+      "sha256": "9d131f58e9fce6b40402b66b655507983fa692f8d81822bb2b85053f89cc43de",
+      "gitBlobSha": "b7f17faf35fafe03f4c24a8f26ddf16761aef804"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/install.test.mjs",
+      "crc32": "309f3692",
+      "size": 4435,
+      "sha256": "770986475123ad37ded7e207b0f65c0f478b10c53dce6d59d2dbf8e377cf7485",
+      "gitBlobSha": "e1e05af66a9d9ab16dcfdab9dbbcfea567408140"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/logistics-agent.mjs",
+      "crc32": "78183f62",
+      "size": 7703,
+      "sha256": "33724a3965739ce124eebdb14b36e8ff0e5f2e8d5c95a447110ffe96995b24ed",
+      "gitBlobSha": "5cff4b7c1d7e5ee3ece180754c3bf2587ba55389"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/logistics-browser.py",
+      "crc32": "4bd5f792",
+      "size": 11869,
+      "sha256": "e4d54b86a9662ba8b15b1a1f7435e6de0ef5380e2bdca47b85888c2aa6d1d874",
+      "gitBlobSha": "3738dc011295737b35be58bf53e8c4127b753898"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/logistics08.test.mjs",
+      "crc32": "180b0c09",
+      "size": 15249,
+      "sha256": "7bb4dbcaf996d31a0913196e13014c24546eab408b4f3e7b263a5ddeef2b2b24",
+      "gitBlobSha": "a7ac3981cb6cf5a3d5fda3bfff44d8c7ab05929a"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/reference-test-helpers.mjs",
+      "crc32": "d0e47608",
+      "size": 1213,
+      "sha256": "11f725529a7452fa5422e393541c20e9165dd98247ed8dfb7b5831b154557708",
+      "gitBlobSha": "5809796234c75d37f24543cee86bf08815080f10"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/resume_browser_checks.py",
+      "crc32": "db6e30b9",
+      "size": 1296,
+      "sha256": "4422bfa29ab8ed9cba0819d80fc5ef47fcd949847d211f137fb7d5d607b189d0",
+      "gitBlobSha": "d2330e21711a1ebcc4dd6894ff0e434d15372623"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/run_agents.py",
+      "crc32": "a993ac31",
+      "size": 1773,
+      "sha256": "b95ab9f93b15a2cfb8f5f10f9c35da4a9fd340a295b0835a4b34cb5ea1a42616",
+      "gitBlobSha": "1e568a7c5d38d7cfd29d8169431f1dc581664376"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/run_browser_checks.py",
+      "crc32": "eecc3ac9",
+      "size": 1934,
+      "sha256": "f6042458b3dde020ffeeb828cd5ba66247df8d1057251442035ac5d84904aa7d",
+      "gitBlobSha": "f34ef5e3b33d5d4289474306d48f91f9b4ab09ab"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/run_tactical_agents.py",
+      "crc32": "41272dab",
+      "size": 1357,
+      "sha256": "463f9d537e6fd0057b466440a68211f6742ea8ee7d0f433455a3a11141641a6b",
+      "gitBlobSha": "738372019e9f8933c439ec4ff96472514d9413a3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/setpieces.test.mjs",
+      "crc32": "c989fcea",
+      "size": 12634,
+      "sha256": "0d54377b9a7a2d5ca512c64036c065a16937922b25eb6554a7d46e6881986ac1",
+      "gitBlobSha": "8930835317c01046e1a916a2da66fa8cd6694dd1"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/squad04.test.mjs",
+      "crc32": "7158265d",
+      "size": 13366,
+      "sha256": "2ab12196af4b11785974a8f15ba0fede809e76fc55419a1b9b3cc524f658a2f2",
+      "gitBlobSha": "b6c4c86dac3c887a10947ea09812d8f825bd29a3"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/tactics-agent.mjs",
+      "crc32": "78b0becd",
+      "size": 6484,
+      "sha256": "71ef01657c476cee852431b80d05c67f1bf89c676dbb492dc4b1b9d56de1fd8a",
+      "gitBlobSha": "733730da35c12471636ce7a218dbfc2b904f9431"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/tactics-browser.py",
+      "crc32": "cbf62297",
+      "size": 13781,
+      "sha256": "00b6d642d527d348d719550d0ea12aa51dedcd029b55b8cb29801c08787fed4d",
+      "gitBlobSha": "d99dc7b4e9f3acc3600008b4d8dbd3622656cd98"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tests/tactics07.test.mjs",
+      "crc32": "6b3f351a",
+      "size": 15894,
+      "sha256": "e96ba06c324d5c48a8b17f22785247f1ebdb814a0993e647d28873b5581387bc",
+      "gitBlobSha": "5a70b43bbeb01febd5a45a64b1aac0f748db96f2"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/audit_reference.py",
+      "crc32": "af8579eb",
+      "size": 4407,
+      "sha256": "6c6dfb50627831003f9df5700c7d517b0b2f19723ad65fc5517a9cb6e8023b73",
+      "gitBlobSha": "0044d09617bb1ca7639d32aa33aeb042252b7e2c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/base-v010.json",
+      "crc32": "3b9fcb43",
+      "size": 134628,
+      "sha256": "ebf98416dcb55dda10c20a3e1c00abb3a8256cbc1cb82a9ca8a90c636d49d472",
+      "gitBlobSha": "234905b680824e5a00f17b16e65e574676d14eba"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_content.py",
+      "crc32": "0d62b4cf",
+      "size": 1297,
+      "sha256": "7b30db7d5c3d334aa7866221e45856e7db76f2bf921e362a1a6d32f0eec25f8d",
+      "gitBlobSha": "71f46d52c6d47830f5c661fa2f641ad3915b9428"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_content_v02.py",
+      "crc32": "eb293a0d",
+      "size": 18479,
+      "sha256": "ea12c9a2581f2666a042b2df45008123ff8b9316633e5d0599943d44021380f2",
+      "gitBlobSha": "50615ea5342c6c9ef6c2be5f72e98c543f2dd29c"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_content_v03.py",
+      "crc32": "a1b4b515",
+      "size": 17854,
+      "sha256": "ae259026651a7a69fec5a144093ee133e82b63b8bf73aebb267aecc24c12a828",
+      "gitBlobSha": "f9755293693f93d15995edf07037c646048ae6a7"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_content_v04.py",
+      "crc32": "f72fbbc3",
+      "size": 1738,
+      "sha256": "2cbcdb1bdff03e10a0571d08f54dacbe2a1e5b760d38b33aa9bb03efeb166771",
+      "gitBlobSha": "ad329a73bf8194fa647709fbd0cb8ed3ad64a357"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_content_v09.py",
+      "crc32": "0cd9e3c9",
+      "size": 5084,
+      "sha256": "ca6904e3e9f5ef4e76815af091247e35a36fb2a25525e41f179ce69bd1c3d415",
+      "gitBlobSha": "0082ab51ab41aac63cbfb3f1a94746893c4592fa"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_docs.py",
+      "crc32": "6806510b",
+      "size": 28184,
+      "sha256": "bb468623f706d58948924255dd2c547a0a7584ac5a17b93586601e169303e1f9",
+      "gitBlobSha": "50db2217b4f83d2f73b0f5a4ed2bd515280a5084"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/build_hunt.py",
+      "crc32": "6100dbd2",
+      "size": 6470,
+      "sha256": "93745a70a7d51592db414e47a793e6eb42d0509ad72ec02911be1e994468b561",
+      "gitBlobSha": "27316444a9a284d66d2126171144b762a661ddfa"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/bundle.py",
+      "crc32": "b7f471a7",
+      "size": 894,
+      "sha256": "1f5c40dedb24b4bac094761bdc79fede36a5c86bb5bc298b86b294720baf0265",
+      "gitBlobSha": "eb5e0f3ed7129dddd12697f711480182f3dab68d"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/doc_components.py",
+      "crc32": "56905461",
+      "size": 62698,
+      "sha256": "efedb058fcfeed197fbebaf272122d79563ecc11b0a72fc3c95ac6b2c6af97c1",
+      "gitBlobSha": "1ded5421e36ae2419b55728862b6539645d9d983"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/fidelity_content.py",
+      "crc32": "31536d1a",
+      "size": 31055,
+      "sha256": "41b8de7e579a77d1a2e592d83a917d378e464a058920bedf9d4ccd92c1857260",
+      "gitBlobSha": "980f5d7702c97ecca5f18f945a49cd9c5ea2b652"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/install.mjs",
+      "crc32": "78b6bb0e",
+      "size": 6835,
+      "sha256": "6b63bf991cfe7f5a495f2fbe518de0fb097784ad73cf119b3ee69e1e44e4a771",
+      "gitBlobSha": "b5481ddc2a0d776d097bbfcc1a02c7c8f9e993db"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/legacy_rules_v02.json",
+      "crc32": "d48dab0b",
+      "size": 9483,
+      "sha256": "df4dc1b9011f93fdf1859bc9f1fc817dce8c508ecf68dc371a47ddfb67fd0ce2",
+      "gitBlobSha": "fac91697e57a5cd7716f221d63929a1741808efc"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/package_release.py",
+      "crc32": "e7a23e0a",
+      "size": 7725,
+      "sha256": "166c897e470eda34b104a4e4765c275da5f7ad5e687e1849ae7ca9eb1e5f01ad",
+      "gitBlobSha": "29d8419e1d5c62093b3bdf881811a2a688424acb"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/preview.mjs",
+      "crc32": "b6a0cac9",
+      "size": 1261,
+      "sha256": "13475a3403fda5a35009db3efb53e64edb1a43c2001ffb396dde23fa35cb9e90",
+      "gitBlobSha": "73df3e760ddb86129d91eebdc2f27a928a0ef754"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/run_node010.py",
+      "crc32": "c5165324",
+      "size": 977,
+      "sha256": "bcd5e312e34e9d580530fc7c085737afe14c6a61e247da8ca16206b7d5f68ed0",
+      "gitBlobSha": "9cf3dbbad3c40c54d0aaf89b36621cb89fdb1449"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/run_node09.py",
+      "crc32": "d36266f5",
+      "size": 975,
+      "sha256": "e1704a8d2415561dc4a53ce83b77118a16fd098abfdd4040e807d882ba71940c",
+      "gitBlobSha": "994e14ebb52580aedddba5055b2b8eae9df7637b"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/verify_conservation09.py",
+      "crc32": "6533e163",
+      "size": 2041,
+      "sha256": "1ff27bc4a573d4651fdffb697bd2220da88df03bfdce2bcb7a814650805ccddd",
+      "gitBlobSha": "6dc2d87c10789ee009525cc599b3bb3c644f1ac9"
+    },
+    {
+      "path": "COLONIAL_MARINES_0_10_0/tools/verify_release.py",
+      "crc32": "95d7cefa",
+      "size": 1790,
+      "sha256": "30fcf7798c0205f16c236e947b4fca160032399468a3558ea24fb5803f67b122",
+      "gitBlobSha": "2c92bf918972945a2e1bf02d2800fae2675fe618"
+    }
+  ]
+}

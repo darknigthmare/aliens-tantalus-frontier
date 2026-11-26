@@ -1,0 +1,41 @@
+{
+  "reviewed": [
+    {
+      "id": "HIVE-FINAL",
+      "title": "Nick Stath — Conveyor Hall & Hive 5",
+      "url": "https://nick_stath.artstation.com/projects/kN2Aad",
+      "use": "Architecture inclinée, plafond effilé, fonction de service et proposition de conduit pour la prise de Tyler.",
+      "status": "Description primaire consultée le 29 septembre 2026 ; page avec éléments légendés Final Set. Pas de relevé du plateau."
+    },
+    {
+      "id": "HIVE-LIFT",
+      "title": "Nick Stath — Conveyor Hall & Hive 2",
+      "url": "https://nick_stath.artstation.com/projects/rlJrL2",
+      "use": "Proportions horizontales du monte-charge, croisillons, treillis, courbure et éclairage diagonal.",
+      "status": "Description du concepteur, concepts approuvés et variantes légendées ; topologie 2D interprétée."
+    },
+    {
+      "id": "CONVEYOR",
+      "title": "Nick Stath — Conveyor Hall & Hive 4",
+      "url": "https://nick_stath.artstation.com/projects/DL9nNE",
+      "use": "Passage rampant dans les rideaux, poste opérateur et ossature diagonale. Le convoyeur tenu en zéro G est une exploration ancienne.",
+      "status": "Description primaire ; l’exploration Early Zero-G ne devient pas une scène ajoutée à la campagne."
+    },
+    {
+      "id": "HIVE-EARLY-EXCLUDED",
+      "title": "Nick Stath — Conveyor Hall & Hive 1",
+      "url": "https://nick_stath.artstation.com/projects/mAzYzy",
+      "use": "Variante précoce avec inclinaison opposée et ouvertures basses. Ne sert pas à certifier le décor final.",
+      "status": "Recherche préparatoire explicitement non employée comme relevé définitif."
+    },
+    {
+      "id": "ILM-MOTION",
+      "title": "ILM — entretien Nelson Sepulveda-Fauser",
+      "url": "https://www.ilm.com/alien-romulus-sepulveda-fauser-ilm/",
+      "use": "Mouvements retenus sur les murs et air influençant l’acide. Les règles héritées ne sont pas remplacées par une grimpe universelle.",
+      "status": "Entretien primaire consulté ; aucun extrait sonore ni image embarqué."
+    }
+  ],
+  "historical": "Références des dossiers précédents conservées séparément. Aucune annotation plan par plan du film.",
+  "filmExactness": "Non certifiée."
+}

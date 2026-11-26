@@ -1,0 +1,9 @@
+{
+  "source": "ALIEN_ROMULUS_JALONS_v0.18.zip",
+  "bytes": 138678733,
+  "sha256": "a3d737aeb3131ed0ef9e944c6001edd30c431e3ed8f8b8db6d1fdec921b612b1",
+  "target": "0.19.0-alpha",
+  "date": "2026-09-29",
+  "scope": "Module Romulus autonome fourni dans cette conversation ; aucun dépôt distant modifié.",
+  "changes": "game/romulus-concordance.js, art local, renderer, UI, registre, cinq PNG/SVG neufs, torse Rain modifié ; apparition et compteur du second fusil scéniques, pas combat PNJ."
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "file": "docs/DOSSIER_COMPLET_V16.pdf",
+    "pages": 65,
+    "outOfPageTextBlocks": [],
+    "sha256": "c198113abcf38e9a634532009407f2da8fc16a3c3f02f1baa7057fa44b67dcfc",
+    "visualReview": "Tous les rendus de la version précédente du même dossier inspectés en planches, puis pages modifiées 9/7 et finales revues après ajout de la correction de présence."
+  },
+  {
+    "file": "docs/RAPPORT_VISUEL_QA_V16.pdf",
+    "pages": 9,
+    "outOfPageTextBlocks": [],
+    "sha256": "90ce1324eb571c289cfb8cc4f60b85baf77f24bb154b706c881df9264c597d9a",
+    "visualReview": "Tous les rendus de la version précédente du même dossier inspectés en planches, puis pages modifiées 9/7 et finales revues après ajout de la correction de présence."
+  }
+]

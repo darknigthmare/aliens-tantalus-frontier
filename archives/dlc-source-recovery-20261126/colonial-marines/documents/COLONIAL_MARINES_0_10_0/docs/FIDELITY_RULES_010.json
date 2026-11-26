@@ -1,0 +1,162 @@
+[
+  [
+    "État de fidélité",
+    "Le statut transposé signifie une présence fonctionnelle, pas une copie du plan. Aucun pourcentage de ressemblance globale ni métrique n’est calculé."
+  ],
+  [
+    "Graphe local",
+    "Chaque seuil doit pointer vers une salle existante de la mission et nommer un retour correspondant. Les 107 liens sont appariés explicitement."
+  ],
+  [
+    "Mur ou cage porteuse",
+    "Un accès latéral rejoint un bord de salle ; un accès de fond reçoit une cloison, cage ou passage architectural continu. Un simple rectangle de porte isolé n’est pas un raccord valide."
+  ],
+  [
+    "Approche et visuel",
+    "Dans un passage latéral, le point d’interaction reste sur la ligne de marche ; le cadre peut appartenir au fond. Leur liaison est indiquée, pas confondue avec une profondeur libre."
+  ],
+  [
+    "Dénivelé",
+    "Une différence de niveau est déclarée dans les deux sens. Escalier et ascenseur sont des transitions appariées, pas une cabine physique continue ou une montée animée de toutes les marches."
+  ],
+  [
+    "Voyage extérieur",
+    "Le raccord skiff/Fiorina est marqué transit et embarquement. Il ne doit jamais être présenté comme deux pièces adjacentes ou comme une simulation de vol."
+  ],
+  [
+    "Objets et dégagement",
+    "Les 20 déplacements de mobilier sont consignés. Les supports d’action, zones d’arrivée et axes de portes doivent rester utilisables avec leur collision réelle."
+  ],
+  [
+    "Verrous",
+    "L’audit de graphe ignore les verrous ; les parcours automatisés les réalisent. Ces preuves ne doivent pas être confondues."
+  ],
+  [
+    "Changements de scène",
+    "La position d’arrivée est contrôlée hors des meubles solides. Le groupe doit se regrouper avant les seuils imposant sa présence."
+  ],
+  [
+    "Dimensions",
+    "Les unités et la profondeur sont des coordonnées du moteur. Aucune conversion vers des mètres du jeu de 2013 n’est revendiquée."
+  ],
+  [
+    "Armes trouvées",
+    "Les dix-sept nouveaux profils possèdent une action physique de ramassage. Ouvrir l’armurerie ne donne aucune arme gratuitement."
+  ],
+  [
+    "Légendaires",
+    "Les six variantes sont associées aux missions de référence 1, 4, 5, 6, 9 et 10. Leurs coordonnées locales sont originales."
+  ],
+  [
+    "Semi-automatique",
+    "Le maintien du tir d’un pistolet ne doit pas devenir une rafale automatique. Il faut une nouvelle pression après relâchement."
+  ],
+  [
+    "Double canon",
+    "Le profil scié produit plusieurs trajectoires et dépense deux cartouches. La gerbe est simulée, pas un dégât instantané derrière les murs."
+  ],
+  [
+    "Plasma",
+    "Le XM99A consomme après la charge de 0,85 seconde. Relâcher avant terme l’annule. La charge est originale à cette transposition."
+  ],
+  [
+    "Explosifs portatifs",
+    "Le M5 explose à l’impact ; le P9 accroché à un obstacle détonne après temporisation. Les collisions et protections s’appliquent au premier contact."
+  ],
+  [
+    "Sous-canon",
+    "Grenade, cartouches et combustible disposent de réserves dédiées. La touche 5 tire ; 6 change uniquement parmi les modules compatibles."
+  ],
+  [
+    "Sous-canon en défense",
+    "Trois achats reconstituent ces réserves dans Bug Hunt, sous plafond et contre crédits, auprès d’un poste accessible. Un refus ne débite rien."
+  ],
+  [
+    "Économie non identique",
+    "Pistolets à munitions infinies, abandon des armes lourdes et progression XP du jeu commercial ne sont pas reproduits. Les règles tactiques antérieures sont conservées."
+  ],
+  [
+    "Stasis séparé",
+    "Les objets débloqués dans la campagne principale ne donnent pas automatiquement l’ensemble de l’arsenal aux personnages de Stasis."
+  ],
+  [
+    "Apparence",
+    "Chaque profil de personnage a ses signes visuels et son statut documentaire. Une silhouette différenciée ne certifie ni visage, mensurations, animations ou voix 1:1."
+  ],
+  [
+    "O’Neal",
+    "Ses blessures, munitions, ordres et déplacements restent simulés. Sa tenue a un bandana, une barbe et des bras tatoués, pas seulement un autre nom sur Winter."
+  ],
+  [
+    "Cruz",
+    "La silhouette inclut une prothèse de jambe et des cheveux courts. La gestuelle mécanique détaillée et le visage ne sont pas finalisés."
+  ],
+  [
+    "PNJ de scène",
+    "Les personnages narratifs ajoutés aux pièces sont des silhouettes statiques contextuelles. Ils ne sont pas présentés comme une nouvelle IA complète."
+  ],
+  [
+    "Escorte de Reid",
+    "Reid doit être rassemblée puis accompagnée jusqu’au relais. Le maintien de transmission et les renforts sont actifs ; la sortie exige l’arrivée du personnage."
+  ],
+  [
+    "Chronologie Stasis",
+    "Asylum, Awakening, Deliverance et Redemption remplacent les titres inventés dans la présentation. Awakening accompagne Hicks, tout en conservant les anciens identifiants techniques de sauvegarde."
+  ],
+  [
+    "Limites narratives",
+    "Le pont final, les parents du Legato, la capture ou le voyage vers Fiorina sont des dossiers ou séquences condensées. Le pont final n’est pas une cinématique de conclusion fidèle."
+  ],
+  [
+    "Objets fragiles",
+    "Les 82 couvertures destructibles de la version précédente restent présentes. Le tir qui détruit une protection ne traverse pas aussi cette protection pour toucher ce qui est derrière."
+  ],
+  [
+    "Sentinelle conservée",
+    "Structure, surchauffe, réserve, veille, transport, réparation et redéploiement partagent le même châssis. Aucun changement de version ne doit soigner ou recharger un poste par défaut."
+  ],
+  [
+    "Mines et leurres",
+    "Les outils tactiques des versions précédentes sont conservés et identifiés comme adaptations. Leur fonctionnement ne suffit pas à déclarer la Claymore directionnelle authentique."
+  ],
+  [
+    "Reprises V9",
+    "Les anciennes clés sont lues sans écriture. Les nouvelles armes sont initialisées vides, l’arsenal retrouvé est vide et les réserves secondaires sont à zéro."
+  ],
+  [
+    "Réparation spatiale de reprise",
+    "Un acteur enregistré à l’intérieur d’un meuble déplacé est replacé sur un point libre voisin, sans modifier sa santé. Il s’agit d’une correction de compatibilité, pas d’un retour arbitraire au début."
+  ],
+  [
+    "Exports par chronique",
+    "Campagne principale, Stasis et Bug Hunt restent indépendants ; un export retrouve aussi les anciens points V9 non actifs. Une chronique absente n’est pas créée."
+  ],
+  [
+    "Version courante stricte",
+    "Un fichier 0.10 dépourvu du registre d’armes ou des réserves nécessaires est refusé. La migration ne doit pas cacher la corruption d’un fichier courant."
+  ],
+  [
+    "Méthode de capture",
+    "Un cadrage préparé du moteur illustre l’apparence. Il n’est ni une partie humaine ni une preuve de fidélité au jeu original."
+  ],
+  [
+    "Méthode d’agent",
+    "Les agents connaissent la carte et visent idéalement. Ils utilisent toutefois les déplacements, tirs, achats et interactions normaux ; leur réussite ne mesure pas la difficulté humaine."
+  ],
+  [
+    "Persistance",
+    "Les contrôles Chromium utilisent un Storage Map explicite, car les navigations locales sont bloquées. Les exports sont testés ; la persistance native de l’utilisateur n’est pas certifiée."
+  ],
+  [
+    "Moteur parent",
+    "L’installateur local ajoute un point d’entrée selon son contrat v86 et refuse les hôtes différents. Aucun succès d’intégration native à Tantalus n’est déduit de cet installateur."
+  ],
+  [
+    "Équipements encore absents",
+    "La grenade G2, la tourelle WY téléopérée, l’armement de véhicule GAU-113/B et le catalogue complet de modifications ne sont pas tous jouables ; l’armement personnel 21 profils n’est pas l’ensemble de ces systèmes."
+  ],
+  [
+    "Multijoueur",
+    "Les arènes Bug Hunt sont originales. Les cartes commerciales de coopération, Versus, Movie/Reconnaissance et Academy ne sont pas reproduites par ces trois arènes."
+  ]
+]

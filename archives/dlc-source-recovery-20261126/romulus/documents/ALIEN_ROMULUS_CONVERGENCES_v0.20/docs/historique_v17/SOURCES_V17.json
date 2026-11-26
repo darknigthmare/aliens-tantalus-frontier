@@ -1,0 +1,27 @@
+{
+  "version": "0.17.0-alpha",
+  "reviewDate": "2026-09-29",
+  "reviewed": [
+    {
+      "id": "F44-PRACTICAL",
+      "title": "Wētā Workshop — Alien: Romulus / F44AA Pulse Rifles",
+      "url": "https://www.wetaworkshop.com/projects/alien-romulus",
+      "use": "Recul mécanique, canon lumineux, fumée et afficheur de munitions sur les accessoires de tournage : direction pour les effets visuels du fusil du jeu.",
+      "status": "Source primaire du fabricant. Aucun minutage, calibre réel ou mécanique de surchauffe du jeu n’en est déduit."
+    },
+    {
+      "id": "SHAFT-VFX",
+      "title": "Eric Barba — entretien de production, The Art of VFX",
+      "url": "https://www.artofvfx.com/alien-romulus-eric-barba-production-vfx-supervisor/",
+      "use": "Rain monte dans la cage en zéro gravité puis est entraînée par son retour. Le mélange de décors verticaux et horizontaux et de prolongements numériques indique que les distances du module ne doivent pas être présentées comme des mesures officielles.",
+      "status": "Témoignage primaire. Le dessin actuel utilise trois paliers du moteur, sans inventaire certifié des étages du film."
+    }
+  ],
+  "interpretation": "La visée libre est une option de contrôle originale, désactivée par défaut. L’assistance héritée demeure. Les angles, valeurs de chauffe et 48 traces sont des choix du jeu.",
+  "inheritedReferences": "Les références citées par les versions précédentes restent dans le manifeste et les dossiers historiques ; elles ne sont pas toutes revendiquées comme relues dans cette passe.",
+  "unresolved": [
+    "Localisation précise de la brève injection de Kay.",
+    "Annotation plan par plan du montage.",
+    "Dimensions et raccords exacts des plateaux."
+  ]
+}

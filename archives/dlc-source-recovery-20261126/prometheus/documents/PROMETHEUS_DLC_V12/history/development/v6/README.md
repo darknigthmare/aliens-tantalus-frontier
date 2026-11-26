@@ -1,0 +1,1 @@
+Diagnostics intermédiaires de la passe V6. Les échecs ou captures ici ont précédé les corrections et ne font pas partie des chiffres de qualification. Voir evidence/*-results.json et check-v6-final.log pour les recettes du HTML livré. Les captures smoke précèdent notamment le placement final du lit/berceau.

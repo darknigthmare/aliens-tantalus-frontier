@@ -1,0 +1,41 @@
+{
+  "version": "0.3.0",
+  "sourceBase": "Supplied v0.2 archive; copied and extended, not recreated",
+  "files": [
+    {
+      "name": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.2.0.zip",
+      "size": 19015524,
+      "sha256": "285aeffe826cd122b3fe8c2da90cb54f8cdb346709ae91493099c75b8d201794"
+    },
+    {
+      "name": "compat/active-save-v2.json",
+      "size": 7268,
+      "sha256": "4d9f22decbc12495ea2aa9d4c4129dbfbf547ae26c40b3acc85f0afa3b335979"
+    },
+    {
+      "name": "compat/completed-save-v1.json",
+      "size": 21429,
+      "sha256": "433621352a44664bbd12f9ce7f56e2b21c86c8073404af0e067f74f6de1e4165"
+    },
+    {
+      "name": "compat/completed-save-v2.json",
+      "size": 23122,
+      "sha256": "cb887d48d5386c556afcf3e9391c7654ef4c929134fca0147ee6281878519b9f"
+    },
+    {
+      "name": "compat/content-v1.json",
+      "size": 125516,
+      "sha256": "186806faaf49e2578374b76efd11dbd4fd4993c7dcdb379361c91a8ca21affa3"
+    },
+    {
+      "name": "compat/playable-v1.html",
+      "size": 167499,
+      "sha256": "a66c473570ac3f0c66d673472e518aa8f0a11e1b4f9b9f4da0735238111a8812"
+    },
+    {
+      "name": "compat/playable-v2.html",
+      "size": 359181,
+      "sha256": "5396154048b6417ba0577181c30e24d438fa5b383aebfea90b5b766553c9e964"
+    }
+  ]
+}

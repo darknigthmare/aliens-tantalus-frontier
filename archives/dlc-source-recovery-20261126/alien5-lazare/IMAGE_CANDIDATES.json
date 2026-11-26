@@ -1,0 +1,314 @@
+{
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+  "note": "Inventaire par extension uniquement : ni une validation visuelle, ni une preuve de sprite jouable ou de fidélité 1:1.",
+  "images": [
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_00.jpg",
+      "bytes": 74663
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_01.jpg",
+      "bytes": 88001
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_02.jpg",
+      "bytes": 74358
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_03.jpg",
+      "bytes": 85072
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_04.jpg",
+      "bytes": 72152
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_05.jpg",
+      "bytes": 80792
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_06.jpg",
+      "bytes": 84487
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_07.jpg",
+      "bytes": 73553
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_08.jpg",
+      "bytes": 82331
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_09.jpg",
+      "bytes": 74950
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_10.jpg",
+      "bytes": 81341
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_11.jpg",
+      "bytes": 84749
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_12.jpg",
+      "bytes": 81039
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_13.jpg",
+      "bytes": 90207
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_14.jpg",
+      "bytes": 85809
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_15.jpg",
+      "bytes": 84876
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_16.jpg",
+      "bytes": 80618
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_17.jpg",
+      "bytes": 85966
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_18.jpg",
+      "bytes": 83463
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_19.jpg",
+      "bytes": 84214
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_20.jpg",
+      "bytes": 87251
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_21.jpg",
+      "bytes": 86476
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_22.jpg",
+      "bytes": 87679
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_23.jpg",
+      "bytes": 89644
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_24.jpg",
+      "bytes": 94192
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_25.jpg",
+      "bytes": 83555
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_26.jpg",
+      "bytes": 81490
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_27.jpg",
+      "bytes": 80980
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_28.jpg",
+      "bytes": 77005
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_29.jpg",
+      "bytes": 89240
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_30.jpg",
+      "bytes": 82149
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_31.jpg",
+      "bytes": 72914
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_32.jpg",
+      "bytes": 88332
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_33.jpg",
+      "bytes": 70538
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_34.jpg",
+      "bytes": 68128
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_35.jpg",
+      "bytes": 78279
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_36.jpg",
+      "bytes": 81475
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_37.jpg",
+      "bytes": 76972
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_38.jpg",
+      "bytes": 78719
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_39.jpg",
+      "bytes": 79242
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_40.jpg",
+      "bytes": 84835
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_41.jpg",
+      "bytes": 70230
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_42.jpg",
+      "bytes": 71085
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_43.jpg",
+      "bytes": 81670
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_44.jpg",
+      "bytes": 78419
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_45.jpg",
+      "bytes": 84147
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_46.jpg",
+      "bytes": 73352
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_47.jpg",
+      "bytes": 69804
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_48.jpg",
+      "bytes": 72086
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_49.jpg",
+      "bytes": 73012
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_50.jpg",
+      "bytes": 70326
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_51.jpg",
+      "bytes": 88414
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_52.jpg",
+      "bytes": 74772
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_53.jpg",
+      "bytes": 84922
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_54.jpg",
+      "bytes": 74820
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_55.jpg",
+      "bytes": 87470
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_56.jpg",
+      "bytes": 71509
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_57.jpg",
+      "bytes": 76592
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_58.jpg",
+      "bytes": 68017
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_59.jpg",
+      "bytes": 69782
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_60.jpg",
+      "bytes": 79447
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_61.jpg",
+      "bytes": 78737
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_62.jpg",
+      "bytes": 78515
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_63.jpg",
+      "bytes": 60103
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_64.jpg",
+      "bytes": 69685
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_65.jpg",
+      "bytes": 67035
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_66.jpg",
+      "bytes": 72760
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11rooms/A5_67.jpg",
+      "bytes": 72274
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/01_quai_v11.jpg",
+      "bytes": 160671
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/02_identites_v11.jpg",
+      "bytes": 140605
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/03_sources_v11.jpg",
+      "bytes": 178548
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/04_jax_killson.jpg",
+      "bytes": 92327
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/05_biorifle.jpg",
+      "bytes": 93947
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/06_gland.jpg",
+      "bytes": 86585
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/07_montero_charges.jpg",
+      "bytes": 90800
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/08_mobile_identites.jpg",
+      "bytes": 47414
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V11/qa/v11screens/09_nouveaux_lieux_contact.jpg",
+      "bytes": 285437
+    }
+  ]
+}
