@@ -118,7 +118,7 @@ test('concurrent manifest loads share one request and valid inline data avoids f
 function harness(rows = [], options = {}) {
   const commands = [], inherited = [];
   const profile = { id: 'daniels-work', build: 1, gun: null, ...options.profile };
-  const engine = {
+  const engine = options.realEngine || {
     room: { id: 'cryo', exits: [], props: [], ...options.room },
     state: { weapon: false, hidden: false, sequence: null, ...options.state },
     motion: { moving: false, run: false, crouch: false, ...options.motion },
@@ -127,10 +127,11 @@ function harness(rows = [], options = {}) {
   };
   const compiled = compileManifest(options.manifest || manifest(rows));
   const registry = {
-    sprite(kind, key, state = 'idle', room = null, time = 0) {
-      const entry = compiled.resolve(kind, key, state, room, time);
-      const cycle = compiled.cycle(kind, key, state, room);
-      return entry ? { entry, image: { id: entry.id }, ...(cycle ? { cycle: cycle.id } : {}) } : null;
+    sprite(kind, key, state = 'idle', room = null, time = 0, actorId = null) {
+      const entry = compiled.resolve(kind, key, state, room, time, actorId);
+      const cycle = compiled.cycle(kind, key, state, room, actorId);
+      return entry ? { entry, image: { id: entry.id },
+        ...(cycle ? { cycle: cycle.id, consumer: cycle.consumer || 'player' } : {}) } : null;
     }
   };
   const context2d = new Proxy({}, {
@@ -148,10 +149,12 @@ function harness(rows = [], options = {}) {
     creature(...args) { inherited.push(['creature', ...args]); }
     gun(...args) { inherited.push(['gun', ...args]); }
     prop(...args) { inherited.push(['prop', ...args]); }
+    sky(...args) { inherited.push(['sky', ...args]); }
   }
   const context = { CovenantRenderer: Parent, CovenantSpritesV011: registry };
   vm.runInNewContext(rendererSource, context, { filename: 'sprite-art-v011.js' });
-  freeze(engine); freeze(profile);
+  if (!options.realEngine) freeze(engine);
+  freeze(profile);
   return { renderer: new context.CovenantRenderer({}, engine), engine, commands, inherited };
 }
 const actor = () => ({ x: 100, z: 0.5, y: 0, facing: 1, phase: 'idle' });
@@ -543,6 +546,218 @@ test('new costume cycles reject foreign rooms, unsupplied order and cross-versio
       const raw = walkingManifest(profile.key, [profile.room]); change(raw);
       assert.throws(() => compileManifest(raw));
     }
+  }
+});
+
+function npcWalkingManifest(frequency = 2.1) {
+  const frames = Array.from({ length: 8 }, (_, index) => {
+    const id = 'walter-walk-' + String(index + 1).padStart(2, '0');
+    return asset({ id, key: 'walter', state: 'walk', rooms: ['cryo'], actors: ['walter-cryo'],
+      path: '/assets/openai/sprites/alien-covenant-v014/' + id + '.png' });
+  });
+  return { schemaVersion: 1, release: '0.14.0', assets: frames, cycles: [{
+    id: 'walter-walk', kind: 'human', key: 'walter', state: 'walk', consumer: 'npc',
+    actors: ['walter-cryo'], angularFrequency: frequency, frames: frames.map(row => row.id)
+  }] };
+}
+
+function npcHarness() {
+  // Accessors let the test advance an external observation timeline while the
+  // actual objects read by the renderer remain deeply frozen.
+  const timeline = { time: 0, x: 450, z: .5, y: 0, facing: 1, phase: 'walk',
+    room: 'cryo', profile: 'walter', gun: null };
+  const person = freeze({ id: 'walter-cryo', room: 'cryo',
+    get x() { return timeline.x; }, get z() { return timeline.z; }, get y() { return timeline.y; },
+    get facing() { return timeline.facing; }, get phase() { return timeline.phase; } });
+  const h = harness([], { manifest: npcWalkingManifest(), engine: {
+    state: { get time() { return timeline.time; }, weapon: false },
+    room: { get id() { return timeline.room; } },
+    appearance: () => freeze({ id: timeline.profile, gun: timeline.gun }), paused: false
+  } });
+  return { ...h, person, timeline,
+    draw: () => h.renderer.human(person, 'walter', true),
+    step: (dx = 26 / 60, dt = 1 / 60) => { timeline.time += dt; timeline.x += dx; },
+    pngs: () => h.commands.filter(row => row[0] === 'drawImage') };
+}
+
+test('Walter cycle has a configurable simulation cadence and requires the exact NPC actor and room', () => {
+  const raw = npcWalkingManifest(), compiled = compileManifest(raw), period = 2 * Math.PI / 2.1;
+  for (let phase = 0; phase < 8; phase++) {
+    const time = period * (phase + .25) / 8;
+    const current = compiled.resolve('human', 'walter', 'walk', 'cryo', time, 'walter-cryo');
+    assert.equal(current.id, raw.cycles[0].frames[phase]);
+    assert.equal(compiled.resolve('human', 'walter', 'walk', 'cryo', time + period, 'walter-cryo').id, current.id);
+  }
+  for (const id of [null, 'walter-nave', 'synthetic-return', 'another-walter']) {
+    assert.equal(compiled.resolve('human', 'walter', 'walk', 'cryo', .1, id), null);
+  }
+  for (const room of ['nave', 'returncryo', 'landing', 'whiteroom']) {
+    assert.equal(compiled.resolve('human', 'walter', 'walk', room, .1, 'walter-cryo'), null);
+  }
+  for (const frequency of [.7, 2.1, 4]) assert.equal(compileManifest(npcWalkingManifest(frequency)).cycles[0].angularFrequency, frequency);
+  for (const frequency of [0, -1, NaN, Infinity, 12]) assert.throws(() => compileManifest(npcWalkingManifest(frequency)));
+  for (const change of [
+    raw => { raw.release = '0.13.0'; }, raw => { delete raw.cycles[0].consumer; },
+    raw => { raw.cycles[0].actors = ['walter-nave']; },
+    raw => { delete raw.assets[0].actors; }, raw => { raw.assets[0].actors = ['walter-cryo', 'walter-nave']; },
+    raw => { for (const row of raw.assets) row.rooms = ['cryo', 'nave']; },
+    raw => { raw.assets[0].path = raw.assets[0].path.replace('v014', 'v013'); }
+  ]) {
+    const invalid = npcWalkingManifest(); change(invalid); assert.throws(() => compileManifest(invalid));
+  }
+});
+
+test('Walter renders all eight supplied phases in both directions and keeps repeated paused draws stable', () => {
+  const period = 2 * Math.PI / 2.1;
+  for (const facing of [-1, 1]) for (let phase = 0; phase < 8; phase++) {
+    const h = npcHarness(); h.timeline.time = period * (phase + .25) / 8 - 1 / 60;
+    h.timeline.facing = facing; h.draw();
+    assert.equal(h.pngs().length, 0, 'The first observation cannot prove movement');
+    h.step(facing * 26 / 60);
+    const before = JSON.stringify({ engine: h.engine, person: h.person });
+    h.draw(); h.draw();
+    const calls = h.pngs();
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0][1].id, 'walter-walk-' + String(phase + 1).padStart(2, '0'));
+    assert.equal(calls[1][1].id, calls[0][1].id);
+    assert.ok(h.commands.some(row => row[0] === 'scale' && row[1] === facing && row[2] === 1));
+    assert.equal(JSON.stringify({ engine: h.engine, person: h.person }), before);
+  }
+});
+
+test('Walter walk intent alone, a blocked step and a nonwalking state never draw a walk PNG', () => {
+  const h = npcHarness(); h.draw(); h.step(0); h.draw();
+  assert.equal(h.pngs().length, 0);
+  h.step(); h.draw(); assert.equal(h.pngs().length, 1);
+  h.step(0); h.draw(); h.draw(); assert.equal(h.pngs().length, 1);
+  for (const phase of ['idle', 'caution']) {
+    h.timeline.phase = phase; h.step(); h.draw();
+    assert.equal(h.pngs().length, 1);
+  }
+  assert.equal(h.inherited.length, 6, 'Unsupported observations return to the native renderer');
+});
+
+test('Walter observation is invalidated by room, state, actor, clock and visibility gaps', () => {
+  for (const invalidate of [
+    h => { h.timeline.room = 'service'; h.draw(); h.timeline.room = 'cryo'; },
+    h => { h.renderer.engine = freeze({ ...h.engine, state: { time: h.timeline.time } }); },
+    h => { h.renderer.human(freeze({ ...h.person }), 'walter', true); },
+    h => { h.timeline.time -= 2; },
+    h => { h.timeline.time += .2; }
+  ]) {
+    const h = npcHarness(); h.timeline.time = 3; h.draw(); h.step(); h.draw();
+    assert.equal(h.pngs().length, 1);
+    invalidate(h); h.step(); h.draw();
+    assert.equal(h.pngs().length, 1);
+  }
+});
+
+test('Walter cycle excludes arms, jumps, injured profiles, disguise and other identities', () => {
+  for (const change of [
+    h => { h.timeline.gun = 'f90'; }, h => { h.timeline.y = 3; },
+    h => { h.timeline.profile = 'walter-injured'; }, h => { h.timeline.profile = 'walter-field'; },
+    h => { h.timeline.room = 'nave'; }
+  ]) {
+    const h = npcHarness(); h.draw(); change(h); h.step(); h.draw();
+    assert.equal(h.pngs().length, 0);
+  }
+  for (const id of ['walter-nave', 'synthetic-return', 'another-walter']) {
+    const h = npcHarness(); h.draw(); h.step();
+    h.renderer.human(freeze({ ...h.person, id }), 'walter', true);
+    assert.equal(h.pngs().length, 0);
+  }
+});
+
+test('one unavailable Walter frame disables only his complete cycle, not a ready player cycle', () => {
+  const work = walkingManifest(), npc = npcWalkingManifest();
+  const raw = { ...npc, assets: [...work.assets, ...npc.assets], cycles: [...work.cycles, ...npc.cycles] };
+  const created = [];
+  class ImageDouble { constructor() { created.push(this); } }
+  const registry = createRegistry({ manifest: raw, ImageClass: ImageDouble });
+  registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1);
+  for (const image of created) { image.naturalWidth = 140; image.naturalHeight = 240; image.onload(); }
+  registry.sprite('human', 'walter', 'walk', 'cryo', .1, 'walter-cryo');
+  assert.equal(created.length, 16);
+  for (const image of created.slice(8, 15)) { image.naturalWidth = 140; image.naturalHeight = 240; image.onload(); }
+  created[15].onerror();
+  for (let phase = 0; phase < 8; phase++) {
+    assert.equal(registry.sprite('human', 'walter', 'walk', 'cryo', (phase + .1) / 8 * 2 * Math.PI / 2.1, 'walter-cryo'), null);
+  }
+  assert.ok(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1));
+  assert.equal(registry.inspect().cycles.find(row => row.key === 'walter').ready, false);
+});
+
+test('the untouched native Walter patrol supplies all phases in both directions without renderer state writes', () => {
+  const { CovenantEngine } = require('../dlc/covenant/core.js');
+  const data = require('../dlc/covenant/content.js');
+  const engine = new CovenantEngine(data), h = harness([], { manifest: npcWalkingManifest(), realEngine: engine });
+  const observed = { '-1': new Set(), '1': new Set() };
+  for (let tick = 0; tick < 2400; tick++) {
+    engine.tick(1 / 60, {});
+    const person = engine.crew().find(row => row.id === 'walter-cryo');
+    const before = JSON.stringify(engine.state), count = h.commands.length;
+    h.renderer.human(person, engine.crewRole(person), person.phase === 'walk');
+    assert.equal(JSON.stringify(engine.state), before);
+    for (const row of h.commands.slice(count)) if (row[0] === 'drawImage') observed[person.facing].add(row[1].id);
+  }
+  assert.equal(observed['1'].size, 8); assert.equal(observed['-1'].size, 8);
+  assert.equal(engine.state.room, 'cryo'); assert.equal(engine.state.player.x, 160);
+  assert.equal(engine.state.player.z, .5);
+});
+
+function lakeManifest() {
+  return { schemaVersion: 1, release: '0.14.0', assets: [asset({
+    id: 'background-planet4-lake', kind: 'background', key: 'landing', rooms: ['landing'],
+    path: '/assets/openai/sprites/alien-covenant-v014/background-planet4-lake.png',
+    width: 1914, height: 822, alphaBounds: [0, 0, 1914, 822], alphaThreshold: 0,
+    anchor: [957, 822], logicalHeight: 555, imagePolicy: 'opaque-background',
+    renderLayer: 'sky', backgroundFit: 'cover-bottom'
+  })] };
+}
+
+test('opaque scenery has a separate closed admission and cannot weaken sprite alpha contracts', () => {
+  assert.equal(compileManifest(lakeManifest()).resolve('background', 'landing', 'idle', 'landing').id, 'background-planet4-lake');
+  for (const change of [
+    { key: 'necropolis' }, { rooms: ['landing', 'wheat'] }, { imagePolicy: undefined },
+    { renderLayer: 'foreground' }, { backgroundFit: 'stretch' }, { alphaThreshold: 32 },
+    { alphaBounds: [1, 0, 1914, 822] }, { logicalHeight: 760 }, { anchor: [950, 822] },
+    { kind: 'prop' }, { sourceFacing: -1 }
+  ]) {
+    const raw = lakeManifest(); Object.assign(raw.assets[0], change); assert.throws(() => compileManifest(raw));
+  }
+  assert.throws(() => compileManifest(manifest([asset({ imagePolicy: 'opaque-background' })])));
+});
+
+test('lake sky preserves aspect ratio, clips only the native sky band, and remains behind native geometry', () => {
+  for (const width of [800, 1440, 2400]) {
+    const h = harness([], { manifest: lakeManifest(), room: { id: 'landing' } });
+    h.renderer.W = width;
+    const before = JSON.stringify(h.engine); h.renderer.sky({}, false);
+    const draw = h.commands.find(row => row[0] === 'drawImage');
+    assert.ok(draw); assert.equal(draw.length, 6);
+    const [, , x, y, w, height] = draw;
+    assert.ok(Math.abs(w / height - 1914 / 822) < 1e-12);
+    assert.ok(Math.abs(x - (width - w) / 2) < 1e-12);
+    assert.ok(Math.abs(y + height - 555) < 1e-12);
+    assert.ok(w >= width && height >= 555);
+    assert.ok(h.commands.some(row => row[0] === 'rect' && row.slice(1).join(',') === [0, 0, width, 555].join(',')));
+    assert.ok(h.commands.findIndex(row => row[0] === 'clip') < h.commands.indexOf(draw));
+    assert.equal(h.commands.at(-1)[0], 'restore');
+    assert.equal(h.inherited.length, 0); assert.equal(h.renderer.spriteDrawsV011.background, 1);
+    assert.equal(JSON.stringify(h.engine), before);
+  }
+});
+
+test('unavailable lake, every other room and a night request retain their native sky', () => {
+  for (const options of [
+    { manifest: lakeManifest(), room: { id: 'wheat' } },
+    { manifest: lakeManifest(), room: { id: 'necropolis' } },
+    { manifest: lakeManifest(), room: { id: 'landing' }, night: true },
+    { manifest: { schemaVersion: 1, release: '0.14.0', assets: [] }, room: { id: 'landing' } }
+  ]) {
+    const h = harness([], options); h.renderer.sky({}, !!options.night);
+    assert.equal(h.commands.filter(row => row[0] === 'drawImage').length, 0);
+    assert.equal(h.inherited[0][0], 'sky');
   }
 });
 

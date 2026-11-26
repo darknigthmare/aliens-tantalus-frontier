@@ -10,7 +10,8 @@ export const COVENANT_PUBLIC_V011 = 'dlc/covenant';
 export const COVENANT_ASSETS_V011 = 'assets/openai/sprites/alien-covenant-v011';
 export const COVENANT_ASSETS_V012 = 'assets/openai/sprites/alien-covenant-v012';
 export const COVENANT_ASSETS_V013 = 'assets/openai/sprites/alien-covenant-v013';
-export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013]);
+export const COVENANT_ASSETS_V014 = 'assets/openai/sprites/alien-covenant-v014';
+export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013, COVENANT_ASSETS_V014]);
 export const COVENANT_MANIFEST_V011 = COVENANT_PUBLIC_V011 + '/sprites-v011.json';
 export const COVENANT_RUNTIME_FILES_V011 = Object.freeze([
   'index.html', 'style.css', 'content.js', 'ship-systems.js', 'maintenance.js',
@@ -25,13 +26,24 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export const COVENANT_PROVENANCE_V011 = COVENANT_ASSETS_V011 + '/manifest.json';
 export const COVENANT_PROVENANCE_V012 = COVENANT_ASSETS_V012 + '/manifest.json';
 export const COVENANT_PROVENANCE_V013 = COVENANT_ASSETS_V013 + '/manifest.json';
+export const COVENANT_PROVENANCE_V014 = COVENANT_ASSETS_V014 + '/manifest.json';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V011 = '3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V012 = 'd29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V013 = '5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788';
+const REVIEWED_COVENANT_PROVENANCE_SHA256_V014 = '1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482';
 const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
   [COVENANT_PROVENANCE_V011, REVIEWED_COVENANT_PROVENANCE_SHA256_V011],
   [COVENANT_PROVENANCE_V012, REVIEWED_COVENANT_PROVENANCE_SHA256_V012],
-  [COVENANT_PROVENANCE_V013, REVIEWED_COVENANT_PROVENANCE_SHA256_V013]
+  [COVENANT_PROVENANCE_V013, REVIEWED_COVENANT_PROVENANCE_SHA256_V013],
+  [COVENANT_PROVENANCE_V014, REVIEWED_COVENANT_PROVENANCE_SHA256_V014],
+  // These source-only bible documents retain public reference URL segments and
+  // reviewed generation provenance. The Python sanitizer contains a generic
+  // local-path prefix literal. Each exact reviewed file is pinned independently;
+  // no general text or distribution rule is relaxed.
+  ['docs/covenant/BIBLE_COVENANT_V014.json', 'e455aa686746396597a8810fa505efe88337df141dacd110ee35aba9af146528'],
+  ['docs/covenant/BIBLE_COVENANT_V014.md', '506f5e235c450341eb1060d02535f4c343e07fdd10acc3c7f564e3677093b49a'],
+  ['docs/covenant/BIBLE_COVENANT_V014.html', '484822bcfb34a56f7dcda45f567af0da26944894d37d641cab47b74c1c22fbd2'],
+  ['scripts/build-covenant-bible-v014.py', '2b6b3c6853c646f9895243f34752235d6cda678ae32994d06d0d0bfaee64578b']
 ]);
 
 export function covenantSourceMetadataPathV011(path) {

@@ -5238,3 +5238,12 @@ Les effets de neutralisation restent ceux du chapitre : un seul indice est coch�
 Le nom et la barre restent dans leur passage natif. Un éventuel avertissement résiduel conserve l'ellipse target inclinée à +0,18 radian, sans pointes royales ; cet état de compatibilité n'ajoute aucune attaque. Le corps neutralisé garde l'alpha natif 0,3 et la durée de 1,2 seconde, avec sa faible hauteur et les occultations possibles du monde. Les bornes de visibilité sont conservatrices et ne modifient ni collision, ni portée, ni ordre des acteurs.
 
 L'adulte, les gardes et les trois cibles locales disposent ainsi d'un habillage illustré. Cela ne définit pas les « trois castes reliées » de l'arc proposé, ne produit ni les ondes, ni la vibration collective CQ-05, ni les lieux ou rencontres étendus de TR-0. `complete-royal-cast` demeure ouverte, avec 21 opérations jouables, 19 partielles et deux effectives ; aucune déclaration canonique n'est promue. Les [sources et choix de création](../development/QUEEN_MOTHER_CHOIR_ART_PROVENANCE_20261117.json), la [planche intégrée](../development/QUEEN_MOTHER_CHOIR_ART_OVERVIEW_20261117.png) et la [QA](../development/QUEEN_MOTHER_CHOIR_ART_QA_20261117.md) distinguent les prototypes de placement, les événements natifs, les rendus observés et leurs limites.
+
+---
+
+## Annexe de production — DLC Alien: Covenant V0.14
+
+Le suivi détaillé du DLC est regroupé dans la [bible Covenant V0.14](../covenant/BIBLE_COVENANT_V014.md) et son [inventaire structuré](../covenant/BIBLE_COVENANT_V014.json) : personnages et variantes, lieux, armes, accessoires, véhicules, vaisseaux, terrains et planète. Chaque entrée distingue la source retrouvée, la présence dans le moteur, l’image disponible, son admission et les manques encore ouverts. Ces adaptations du film gardent leur provenance propre, distincte des campagnes originales décrites ci-dessus.
+
+La consolidation parallèle de PR68 reste consultable dans son [index des DLC épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md) et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md). Ses comptes datés conservent leur version ; l’annexe V0.14 les rapproche des sources effectivement récupérées et du suivi courant, sans modifier cette branche. La production d’une image et les résultats techniques ne certifient pas la fidélité 1:1.
+

@@ -12,14 +12,21 @@ const SOURCE_FILES = new Set([
   'scripts/sync-covenant-sprites-v011.py', 'scripts/verify-covenant-integration-v011.mjs',
   'scripts/package-covenant-sprites-v011.py', 'scripts/package-covenant-sprites-v012.py',
   'scripts/package-covenant-sprites-v013.py',
+  'scripts/package-covenant-sprites-v014.py',
+  'scripts/build-covenant-bible-v014.py',
+  'scripts/build-covenant-bible-v014.mjs',
   'scripts/verify-covenant-sprites-v011.mjs',
   'scripts/qa-covenant-v011.py', 'scripts/qa-covenant-catalogue-v012.py',
   'scripts/qa-covenant-catalogue-v013.py',
+  'scripts/qa-covenant-catalogue-v014.py',
   'docs/covenant/INVENTORY_V011.json', 'docs/covenant/PROVENANCE_V011.json',
   'docs/covenant/SPRITE_PROVENANCE_V011.json', 'docs/covenant/README.md',
   'docs/covenant/SPRITES_V011_STATUS.md', 'docs/covenant/RUNTIME_SOURCE_V011.json',
   'docs/covenant/PROVENANCE_V012.json', 'docs/covenant/SPRITES_V012_STATUS.md',
   'docs/covenant/PROVENANCE_V013.json', 'docs/covenant/SPRITES_V013_STATUS.md',
+  'docs/covenant/PROVENANCE_V014.json', 'docs/covenant/SPRITES_V014_STATUS.md',
+  'docs/covenant/BIBLE_COVENANT_V014.md', 'docs/covenant/BIBLE_COVENANT_V014.json',
+  'docs/covenant/BIBLE_COVENANT_V014.html', 'docs/covenant/BIBLE_COVENANT_V014.xlsx',
   '.github/workflows/covenant-v011.yml'
 ]);
 const SOURCE_DIRS = new Set([...SOURCE_FILES].flatMap(file => {

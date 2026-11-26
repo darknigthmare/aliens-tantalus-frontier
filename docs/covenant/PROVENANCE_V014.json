@@ -1,0 +1,2985 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.14.0",
+  "date": "2026-11-26",
+  "recordType": "Reviewed source metadata and executed local verification before current-commit CI",
+  "parentCommit": "91db26589399405c4896130b469920cb2abc8fcb",
+  "verified1to1": false,
+  "coverage": {
+    "schemaVersion": 1,
+    "title": "Alien: Covenant V014 coverage and detailed missing-content bible",
+    "scope": "Complete for the recovered 315-entry register, 23 appearance profiles, 126 prop families, 630 prop instances and 57 spatial records. Not an exhaustive shot-by-shot certification of the film.",
+    "summary": {
+      "referenceEntries": 315,
+      "characterProfiles": 23,
+      "humanIdentitiesInProfiles": 17,
+      "namedIdentitiesIncludingSeparateShawPortrait": 18,
+      "sourceCharacterEntries": 38,
+      "biologyReferenceEntries": 49,
+      "weaponFamilies": 7,
+      "playableWeapons": 4,
+      "propFamilies": 126,
+      "propInstances": 630,
+      "filmCandidatePropFamilies": 50,
+      "spatialRecords": 57,
+      "campaignRecords": 56,
+      "independentTableaux": 1,
+      "distinctPhysicalSiteKeysIncludingTableau": 55,
+      "connections": 67,
+      "thresholds": 134,
+      "terrainFamilies": 16,
+      "planetEntries": 3,
+      "transportRecordsIncludingComponentsAndUnresolvedGroups": 12,
+      "pngs": 103,
+      "newPngs": 18,
+      "runtimePngs": 72,
+      "catalogueOnlyPngs": 31,
+      "playerWalkCycles": 4,
+      "npcWalkCycles": 1,
+      "animationPhases": 40,
+      "movingNpcProfilesWithoutWalkPng": 15,
+      "unconsumedProfilesWithoutWalk": 3,
+      "playerProfilesWithoutRunPng": 4,
+      "certified1to1Images": 0,
+      "worldWorkItemsNotPngCount": 154
+    },
+    "completeSourceData": "docs/covenant/BIBLE_COVENANT_V014.json",
+    "completePackData": "bible/BIBLE_COVENANT_V014.json",
+    "allPossibleAnimationFramesEnumerated": false,
+    "reasonAnimationTotalNotGiven": "The source does not define a finite frame budget for each action, costume, direction, creature state and movement type. Missing states and consumers are detailed without inventing a total PNG count.",
+    "runtimeMeaning": "A source admission is conditional on its exact consumer, visibility, permitted state and decoded images. It is distinct from visual fidelity and from full-campaign browser coverage.",
+    "domainViewsOverlap": true,
+    "namedHumanIdentitiesInProfiles": 17,
+    "newPortraitOutsideProfileInventory": "Elizabeth Shaw — official The Crossing bonus",
+    "characterProfiles": [
+      {
+        "id": "daniels",
+        "identity": "Daniels Branson",
+        "currentConsumer": true,
+        "movingActorIds": [],
+        "missingStates": [
+          {
+            "state": "run",
+            "reason": "Cycle PNG absent dans le registre V013 ; application conditionnée aux commandes autorisées par la scène."
+          },
+          {
+            "state": "actions-contextuelles",
+            "reason": "Les actions de travail, soins, prises, sauts et armes restent procédurales selon la scène ; définir chaque pose autorisée avant production."
+          },
+          {
+            "state": "crawl",
+            "reason": "Trois conduits du profil expédition exigent une animation différente de la marche debout."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "daniels-work",
+        "identity": "Daniels Branson",
+        "currentConsumer": true,
+        "movingActorIds": [],
+        "missingStates": [
+          {
+            "state": "run",
+            "reason": "Cycle PNG absent dans le registre V013 ; application conditionnée aux commandes autorisées par la scène."
+          },
+          {
+            "state": "actions-contextuelles",
+            "reason": "Les actions de travail, soins, prises, sauts et armes restent procédurales selon la scène ; définir chaque pose autorisée avant production."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "daniels-eva",
+        "identity": "Daniels Branson",
+        "currentConsumer": true,
+        "movingActorIds": [],
+        "missingStates": [
+          {
+            "state": "run",
+            "reason": "Cycle PNG absent dans le registre V013 ; application conditionnée aux commandes autorisées par la scène."
+          },
+          {
+            "state": "actions-contextuelles",
+            "reason": "Les actions de travail, soins, prises, sauts et armes restent procédurales selon la scène ; définir chaque pose autorisée avant production."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "walter",
+        "identity": "Walter One",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "walter-cryo"
+        ],
+        "missingStates": [],
+        "currentV014Update": {
+          "assetIds": [
+            "walter-walk-01",
+            "walter-walk-02",
+            "walter-walk-03",
+            "walter-walk-04",
+            "walter-walk-05",
+            "walter-walk-06",
+            "walter-walk-07",
+            "walter-walk-08"
+          ],
+          "consumer": "walter-cryo",
+          "room": "cryo",
+          "state": "walk",
+          "admission": "Mouvement effectif observé par le rendu, huit images décodées, mains libres, au sol.",
+          "notCovered": [
+            "walter-injured",
+            "walter-field",
+            "autres présences",
+            "course",
+            "poses armées"
+          ],
+          "angularFrequency": 2.1,
+          "animationFidelity1to1": false
+        }
+      },
+      {
+        "id": "walter-field",
+        "identity": "Walter One",
+        "currentConsumer": false,
+        "movingActorIds": [],
+        "missingStates": [],
+        "currentV014Update": null
+      },
+      {
+        "id": "walter-injured",
+        "identity": "Walter One / David selon la scène",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "walter-nave",
+          "synthetic-return"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "david",
+        "identity": "David 8",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "david-necropolis",
+          "david-court"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "david-young",
+        "identity": "David 8",
+        "currentConsumer": true,
+        "movingActorIds": [],
+        "missingStates": [
+          {
+            "state": "run",
+            "reason": "Cycle PNG absent dans le registre V013 ; application conditionnée aux commandes autorisées par la scène."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "oram",
+        "identity": "Christopher Oram",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "oram-bridge"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "lope",
+        "identity": "Dan Lope",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "lope-landing"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "tennessee",
+        "identity": "Tennessee Faris",
+        "currentConsumer": false,
+        "movingActorIds": [],
+        "missingStates": [
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "tennessee-eva",
+        "identity": "Tennessee Faris",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "tennessee-eva"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "faris",
+        "identity": "Margaret Faris",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "faris-cockpit"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "karine",
+        "identity": "Karine Oram",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "karine-hold"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "ricks",
+        "identity": "Ricks",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "ricks-bridge"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "upworth",
+        "identity": "Upworth",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "upworth-comms"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "rosenthal",
+        "identity": "Sarah Rosenthal",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "rosenthal-expedition"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "hallett",
+        "identity": "Tom Hallett",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "hallett-expedition"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "ledward",
+        "identity": "Ledward",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "ledward-expedition"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "ankor",
+        "identity": "Ankor",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "ankor-expedition"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "cole",
+        "identity": "Cole",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "cole-expedition"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          },
+          {
+            "state": "armed-idle-and-move",
+            "reason": "Le PNG existant a les mains vides ; il ne satisfait pas la pose armée du consommateur. Génération des sujets reliés aux armes non relancée."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "weyland",
+        "identity": "Peter Weyland",
+        "currentConsumer": true,
+        "movingActorIds": [
+          "weyland-opening"
+        ],
+        "missingStates": [
+          {
+            "state": "walk",
+            "reason": "Route PNJ à au moins deux positions et vitesse positive dans le contenu actuel ; déplacement rendu procédural."
+          }
+        ],
+        "currentV014Update": null
+      },
+      {
+        "id": "branson-record",
+        "identity": "Jacob Branson",
+        "currentConsumer": false,
+        "movingActorIds": [],
+        "missingStates": [],
+        "currentV014Update": null
+      }
+    ],
+    "propCandidateCoverage": {
+      "filmCandidateFamilies": 50,
+      "filmCandidateInstances": 137,
+      "familiesWithDirectPng": 14,
+      "familiesWithDirectOrRelatedPng": 15,
+      "runtimeAdmittedFamilies": 13,
+      "runtimeAdmittedInstances": 23,
+      "suppressedInstancesWithoutPng": 2,
+      "otherNonSuppressedInstancesWithoutAdmissiblePng": 112,
+      "newProductionPropsCloseNoNativeFamily": true,
+      "instanceCountIsNotPngCount": true
+    },
+    "transportCountPolicy": "The twelve transport records include ships, craft, a rover, components, cargo machinery, a docking location and unresolved groups. They are not twelve canonical or playable vehicles.",
+    "spatialCountPolicy": "57 spatial records = 56 campaign records and one independent tableau. 55 distinct physical-site keys include the tableau; revisited or state-varied rooms are not new film sets.",
+    "pendingGenerationSubjects": [
+      {
+        "id": "weapon-f90",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-beretta",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-ar15",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-eaa",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "weapon-shotgun",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "illicit"
+      },
+      {
+        "id": "xenomorph",
+        "status": "blocked-generation",
+        "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+        "category": "other"
+      },
+      {
+        "id": "weapon-sl40",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "weapon-f90",
+        "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+      },
+      {
+        "id": "weapon-inox",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "weapon-beretta",
+        "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+      },
+      {
+        "id": "xenomorph-attack",
+        "status": "not_attempted_after_related_subject_rejection",
+        "relatedId": "xenomorph",
+        "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
+      },
+      {
+        "id": "prop-classicalstatue",
+        "status": "blocked-generation",
+        "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
+      }
+    ],
+    "priorAnnouncementNotRecovered": [
+      {
+        "id": "HISTORY-V10-COUNTS",
+        "claim": "Une ancienne annonce mentionnait 58 lieux + 2 tableaux / 70 liaisons après V10.",
+        "evidence": "Mémoire de conversation signalée par le parent ; aucun source correspondant récupéré dans cette reprise.",
+        "observedSource": "56 enregistrements de campagne + 1 tableau / 67 liaisons / 134 sorties.",
+        "decision": "Ne pas inventer les éléments de différence ; conserver l’annonce comme écart non récupéré."
+      }
+    ]
+  },
+  "sourceSnapshots": [
+    {
+      "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+      "bytes": 212497,
+      "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v012/manifest.json",
+      "bytes": 78199,
+      "sha256": "d29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v013/manifest.json",
+      "bytes": 265179,
+      "sha256": "5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+      "bytes": 142223,
+      "sha256": "1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/content.js",
+      "bytes": 678677,
+      "sha256": "bb75178f8beaa504e393251c44a2aceec851318175642082cf4b5b6d90c4e680"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/fidelity.js",
+      "bytes": 3596,
+      "sha256": "6daaa693b3be6d86c1fc9c167b6f631d209961990beca82c8eba4e5afde16fce"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-registry-v011.js",
+      "bytes": 14807,
+      "sha256": "cdcb30cf1a608ce709115f34dff6af27f60168ec24939adac5471816f1b55b3e"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-art-v011.js",
+      "bytes": 10396,
+      "sha256": "27f307916bbf7d0bc47a57bc5299e96b5df3da77aacf90211750a6cfee60aca0"
+    },
+    {
+      "path": "dlc/covenant/index.html",
+      "bytes": 1059292,
+      "sha256": "269c27339ad3ba4c643eb451b5d6d03590d1ec302bbbb9a5e9b5a5519fc443d7"
+    },
+    {
+      "path": "dlc/covenant/sprites-v011.json",
+      "bytes": 64367,
+      "sha256": "a557783867c4a15c7fc758a241c0b983778cdaabd3f940c83951d407ed7b3538"
+    }
+  ],
+  "bibleDocuments": [
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V014.json",
+      "bytes": 3923618,
+      "sha256": "e455aa686746396597a8810fa505efe88337df141dacd110ee35aba9af146528"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V014.md",
+      "bytes": 1248990,
+      "sha256": "506f5e235c450341eb1060d02535f4c343e07fdd10acc3c7f564e3677093b49a"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V014.html",
+      "bytes": 3623413,
+      "sha256": "484822bcfb34a56f7dcda45f567af0da26944894d37d641cab47b74c1c22fbd2"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V014.xlsx",
+      "bytes": 274865,
+      "sha256": "65d046fc10004fa680b36b0c477548efba44aab150d55bbec9ca8058e977abc3"
+    }
+  ],
+  "pngVerification": {
+    "actualValidPngs": 103,
+    "newPngs": 18,
+    "frozenPriorPngs": 85,
+    "runtimeAdmittedPngs": 72,
+    "catalogueOnlyPngs": 31,
+    "transparentPngs": 99,
+    "explicitOpaquePngs": 4,
+    "originalPngBytes": 168824471,
+    "allChecksPassed": true,
+    "originalBytesPreserved": true,
+    "checks": [
+      {
+        "id": "daniels-work",
+        "gitBlobSha": "86ccf5d49e96d9a77284c3a7f5808746e9240831",
+        "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+        "bytes": 1650766,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176697,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          281,
+          12,
+          735,
+          1527
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-field",
+        "gitBlobSha": "43414428c1a96581440827c878f5a36aa7ae7261",
+        "sha256": "5612335b92ae4c4db10b1ebacba9732aafcaa1deb949cba0bd14400774307375",
+        "bytes": 1729773,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1120077,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          259,
+          17,
+          747,
+          1519
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "oram",
+        "gitBlobSha": "4d720e2a639f358b03c53c489abbffc56bc712f3",
+        "sha256": "3de234d19b5c01b4af8183c9eb2cd3e18ed8bd98b5c2fa8d6cab22dbb78a2cc2",
+        "bytes": 1404696,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1139626,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          298,
+          24,
+          744,
+          1523
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels",
+        "gitBlobSha": "0bd04e263a5f2b5dbd52c7a7e3eb7faf2ba1f752",
+        "sha256": "eac65f04e3e4e6c8cc764bd54ba94a2c96271e4f323863a9d9f3dba01d368d86",
+        "bytes": 1678369,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1084209,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          204,
+          35,
+          758,
+          1522
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "tennessee",
+        "gitBlobSha": "e6f999df6a4306c8beb332df701edb566c96df33",
+        "sha256": "63ff8da8b39f4645a2a65f8b790fdd7240c92a6e9e6f93b340b75a0a2e1b7246",
+        "bytes": 1633599,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1084330,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          261,
+          23,
+          760,
+          1521
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter",
+        "gitBlobSha": "a7dc6afce9fa8168e26f4fdea43e8e2aef53d527",
+        "sha256": "02fb4529e6616100201bc86df1f200e19b34e2df4481bc879c12a2a927026958",
+        "bytes": 1476134,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1146950,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          259,
+          41,
+          735,
+          1509
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-flute",
+        "gitBlobSha": "85e9a74d1b929a53a0400bbc821a02bc74f9e18a",
+        "sha256": "4db32ab4739d1c713172bd1a631fa8d1afb9c4046cc911d1455d22e4db330a9d",
+        "bytes": 585902,
+        "width": 2172,
+        "height": 724,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1310723,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          60,
+          305,
+          2112,
+          447
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "neomorph",
+        "gitBlobSha": "f9d9792e0731e633a749fe7b70ed6961dc8b5b6e",
+        "sha256": "ea7701c09629c22d42538baa4756551956ef2b23e2cccede8799b7aba5ebe091",
+        "bytes": 735200,
+        "width": 1699,
+        "height": 926,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1252964,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          11,
+          23,
+          1644,
+          906
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "neomorph-attack",
+        "gitBlobSha": "8165650f279b6355c32d2baa957d1a0147b1e520",
+        "sha256": "f1aa5f8fc2a4c47a7c3a9c219c36fe17f171aa4a3c105e22192237882581c6ba",
+        "bytes": 1639176,
+        "width": 1774,
+        "height": 887,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 482318,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          24,
+          75,
+          1754,
+          834
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-lander",
+        "gitBlobSha": "f613cfbe2bd32a4f3b55d7891339331b1c844581",
+        "sha256": "e7573812135eb31f2404a151217288a254bc35b653bdc7f2bf848ea25a2858c8",
+        "bytes": 1481857,
+        "width": 1895,
+        "height": 830,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 972174,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          49,
+          148,
+          1837,
+          705
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-egg",
+        "gitBlobSha": "68299fdfefa9da4d6b59d403f724d104b6ccbbcf",
+        "sha256": "fa04129644e2020b10b4189a76bf17c3d059df4707bf7bb5e565048d7d6e0057",
+        "bytes": 1293783,
+        "width": 1254,
+        "height": 1254,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1085987,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          57,
+          131,
+          1198,
+          1122
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-cryopod",
+        "gitBlobSha": "692c1c2323733dc06b4d060e202690600e594679",
+        "sha256": "f30424189ce5397a7f0e8f7dc5e2ba7cd80bec29ce6e8d3b68b88f8177cdd6b7",
+        "bytes": 1707461,
+        "width": 1926,
+        "height": 817,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 758587,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          65,
+          36,
+          1907,
+          803
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-injured",
+        "gitBlobSha": "2eec0e90597870dbb174b7099b95c1d2a6aadbb9",
+        "sha256": "b8e247a76d09613f8dcedc18f312e33546e1c8ab607aaf921515b34d15e39395",
+        "bytes": 1858103,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1106388,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          256,
+          17,
+          732,
+          1521
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young",
+        "gitBlobSha": "7f115d1b2e3166833e4f82f96de7bd5a22c48ebe",
+        "sha256": "50d058bf675eadf6632f664efa97321ab68a71814e83319156318c6d48b8b552",
+        "bytes": 1410108,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1181287,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          282,
+          16,
+          729,
+          1520
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "weyland",
+        "gitBlobSha": "444388ddf8a3bb84ad662a5e6d8a6254f528bc18",
+        "sha256": "37c2998af59c694276e0f70ea90b9808f7f277fee1bc1d67b056425ab4f152c0",
+        "bytes": 1320137,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1132959,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          275,
+          18,
+          731,
+          1526
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david",
+        "gitBlobSha": "cb003bcc8cb5b48e9c548b3cf2457026d28aa78a",
+        "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd",
+        "bytes": 1764036,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1064258,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          213,
+          117,
+          748,
+          1469
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "tennessee-eva",
+        "gitBlobSha": "f7f9aa3242638e46a84c7f710bcbb37bc7b35750",
+        "sha256": "89f32778b7568347fe8f78f90631de93a0297b627fa5cd4f6d59a119402f8967",
+        "bytes": 2074465,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 986998,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          197,
+          31,
+          834,
+          1490
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-evasuit-heavy",
+        "gitBlobSha": "20cbd4c185e00dc065d5145a1fddeea93f339e72",
+        "sha256": "31e9e5899925e3369f5b6b603a7a002bd07a461d6f3dab7a8ded965c288433ca",
+        "bytes": 2029535,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 991061,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          203,
+          21,
+          829,
+          1515
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-evahelmet-heavy",
+        "gitBlobSha": "4d2e22ad0f81f4eadfac0552621e7b09c7aeb7b3",
+        "sha256": "b85c448ea05a39a071febfb3e09b8c9786c76c082c957b44abc5ac9d4f224250",
+        "bytes": 2015661,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 952808,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          331,
+          13,
+          1183,
+          1015
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva",
+        "gitBlobSha": "00a10d9b06c19510930355a31b07fe690765d07f",
+        "sha256": "22e7bb3b400cc38f4278717745fd0ecbe01f141e7a2caa6c17d70f7dfbe2c904",
+        "bytes": 1829019,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1155821,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          293,
+          16,
+          716,
+          1500
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-evasuit",
+        "gitBlobSha": "2844041409b2d36a27bda1cde3622470368e73b2",
+        "sha256": "7f23b3db805c3afd68fc50760c84edeba55afada825c9bad1175f2c033d048e6",
+        "bytes": 1832546,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1141977,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          318,
+          16,
+          725,
+          1511
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-evahelmet",
+        "gitBlobSha": "a81f5cc5fa1fd68313048b9913b52c2b8d225c69",
+        "sha256": "4fba306b22d426979eaf45ad8baea1fc7e971f4f5f6f8692d981f0b0888b68d5",
+        "bytes": 1707857,
+        "width": 1312,
+        "height": 1199,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 800333,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          220,
+          24,
+          1089,
+          1174
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "bio-facehugger-embryo",
+        "gitBlobSha": "e3300ab6bb83b4daa62fac96becf1d4ba2549815",
+        "sha256": "174825e968142f66d493b3af9c876198c4f09c5a469b0115ac5fe3a013f0658d",
+        "bytes": 2178656,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 707487,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          203,
+          42,
+          1324,
+          993
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-cargoLifter",
+        "gitBlobSha": "3b01208c2ea0f84b69a0294ab9204e8fb49c0511",
+        "sha256": "6b49ca99928df00f9d95ee933b2dd27ab95026ec9a26d1aacf6abd73e9f51ffc",
+        "bytes": 2284252,
+        "width": 1672,
+        "height": 941,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 748966,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          29,
+          48,
+          1637,
+          913
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-urn",
+        "gitBlobSha": "399a087ed2bd4c3fbbf82da7fd7755b1db028ee5",
+        "sha256": "d65dff2b821f18f2f01ea767d7e6452c7915bfc71ce8c4962536854be559cdc5",
+        "bytes": 1362064,
+        "width": 1199,
+        "height": 1312,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1043584,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          336,
+          43,
+          857,
+          1266
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "facehugger",
+        "gitBlobSha": "806180d23d46492f3282fb5d38f7f178a868449e",
+        "sha256": "de72f31ae6dd591bb7a6ff33ce86ee2ec09a3647faad46cb14c6190a25f6ad8c",
+        "bytes": 772276,
+        "width": 2172,
+        "height": 724,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1287431,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          34,
+          241,
+          2150,
+          590
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "facehugger-attack",
+        "gitBlobSha": "9b4ae74c901d57b3c51091d24240dbb23519ce17",
+        "sha256": "ce38e9cede7f4226bd48123d05c82aa74387a56bb8ca96ed4ea7ac274f7266b6",
+        "bytes": 927076,
+        "width": 1913,
+        "height": 822,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1221029,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          24,
+          11,
+          1881,
+          664
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-flare",
+        "gitBlobSha": "475891c3f7730a5a850bc99cca7989477d07edc5",
+        "sha256": "9fcc223ba31e32acf005e607ed6993564507da9e516f33370f03d7c5458ea4ba",
+        "bytes": 1619883,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1233163,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          72,
+          37,
+          1404,
+          1011
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-drawing-ammonite",
+        "gitBlobSha": "ece1e0efcac3573a02952ebf3e1597de1a510e0c",
+        "sha256": "19a318d20d675dccd044befb1a38355a567d756b69082b9dc43353c784e59699",
+        "bytes": 2769690,
+        "width": 1409,
+        "height": 1116,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 496462,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          135,
+          90,
+          1264,
+          1035
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-drawing-arthropod",
+        "gitBlobSha": "e0769611310b3cf473c9bbda0485fc0e59b6bee2",
+        "sha256": "3b7c672178c469db90e6c3dcec22e162886d1ec844e441f645cf28cd3d5b7a49",
+        "bytes": 2508077,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 604327,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          131,
+          141,
+          1395,
+          892
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-terraformer",
+        "gitBlobSha": "8bd75d3dae7d36f10c6d08266e9012c0b734b12c",
+        "sha256": "5e70e3d9721fcf056ecc3db84a557b25acd0a48d8074acc20ccd2579c729cbd2",
+        "bytes": 1701068,
+        "width": 1717,
+        "height": 916,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 890195,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          34,
+          9,
+          1667,
+          898
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "lope",
+        "gitBlobSha": "fb4105fa8ac9780eaf6f0421ea95fb609beb55e2",
+        "sha256": "0abd03ce52373e1fd8aa008243fe7a8706b94b077751b59964abc02480e8cd9a",
+        "bytes": 1699088,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1100670,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          271,
+          31,
+          759,
+          1518
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "faris",
+        "gitBlobSha": "a454fc318af6ccbffe817746cec80289a3080306",
+        "sha256": "bd3485f6aafa2b89b4827ed044d9d1265447853384290207e89962e030202ad3",
+        "bytes": 1641718,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1133180,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          294,
+          20,
+          729,
+          1520
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "karine",
+        "gitBlobSha": "04704c87e567a6936222d6a68ea6ce76b4396e26",
+        "sha256": "e61c5790bc0281d9b3ba93061a3867b7437c1f496da537515151d17aa0b964ba",
+        "bytes": 1828831,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1014601,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          171,
+          17,
+          765,
+          1528
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "branson-record",
+        "gitBlobSha": "6b4a2a930a902926c04568255dc42a7f8dce81f3",
+        "sha256": "f3c531c51d54ab332dd1c97970bb4414eaa59c1443a5fceaa5cdafed1da885fe",
+        "bytes": 1501192,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1136045,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          282,
+          25,
+          735,
+          1525
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "hallett",
+        "gitBlobSha": "49da215e421fb87c1fe84b60de8c7029b3e78961",
+        "sha256": "925a129b06b191c14c16104f6c6690340b6dd6eff092d1ef7c5108589addec34",
+        "bytes": 1648023,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1115036,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          267,
+          25,
+          754,
+          1512
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "cole",
+        "gitBlobSha": "3caa0db7a635f083afe082d70faf56065528028b",
+        "sha256": "d480556468ad43211af110dd9fa72f5e722f2cc1b1cb43851dee517e67e934ba",
+        "bytes": 1768587,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1077309,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          244,
+          11,
+          766,
+          1517
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "ricks",
+        "gitBlobSha": "30bdc8e2c5e7df8ee2e6a9c06fca189dd1e6a1a3",
+        "sha256": "4b0fe18190970fe0ce3d77334ee98d9e59a6fa5d27a2bb7e20c7f0ec8693886c",
+        "bytes": 1508795,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1132843,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          276,
+          25,
+          736,
+          1521
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-cryopod-closed-crew",
+        "gitBlobSha": "456b1ff71864edeef2fab43c27093459d5004377",
+        "sha256": "2a139e006207126776597d84803629aef3a2751af79511a665ffda02c112c73d",
+        "bytes": 2218006,
+        "width": 2025,
+        "height": 776,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 509430,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          41,
+          34,
+          2001,
+          742
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-table-e1027",
+        "gitBlobSha": "3cfde579cf400ea162b846a00b2432f9a3d3e70d",
+        "sha256": "0bd08b5ef7522404038f55207486013ceaeb0307a773c970e505a205e5b103af",
+        "bytes": 579445,
+        "width": 1245,
+        "height": 1263,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1277370,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          243,
+          48,
+          1055,
+          1225
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-chair-bugatti",
+        "gitBlobSha": "a053601cfea8fa9cd9e27097a25b21f56edbbe5e",
+        "sha256": "875cb28c8f6f20a814a1c096a6a4eadbabf1cfd24bc50aa7f88c64cfd5470a7b",
+        "bytes": 1270741,
+        "width": 1086,
+        "height": 1448,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1081879,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          108,
+          11,
+          918,
+          1440
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-piano",
+        "gitBlobSha": "74dd2707fc37bfd221840528e9990dd7f22ca126",
+        "sha256": "f55f6d48965ec5fffc27c962dc070c468501215e11bb372b6528660820e0f80e",
+        "bytes": 1402646,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 978175,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          159,
+          28,
+          1390,
+          1012
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "rosenthal",
+        "gitBlobSha": "8bd6601bd1d0c5ff2ee7f76df77ab3fd04ba2e00",
+        "sha256": "c5968863303be61ad9cfaba51d0f3a717547dab8b09ab6bc21326a743e4f8901",
+        "bytes": 1654111,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1110571,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          278,
+          15,
+          738,
+          1521
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "upworth",
+        "gitBlobSha": "ab6be90253f9e34ab476355089bcca9804aa570c",
+        "sha256": "8dbd842fa67d55b880795390691cd2901a786fdd97990a5c35e07da6ea87517d",
+        "bytes": 1316910,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1194008,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          305,
+          17,
+          720,
+          1521
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "ankor",
+        "gitBlobSha": "cf3eb259da67329ea43751481746abba5c3c40f1",
+        "sha256": "accb60303b6c78e8bc47624c8396c273ea0b4e7c8a3e57d006078f54e06b2caa",
+        "bytes": 1164377,
+        "width": 960,
+        "height": 1639,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1002512,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          211,
+          6,
+          763,
+          1632
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "ledward",
+        "gitBlobSha": "1adb46c2b0bd2681b7470d4eb60f24a47e0ed440",
+        "sha256": "1fee22ec40b39e1da4f5d275e3503484494df465bc82c015a4fbe99938aaf161",
+        "bytes": 1679775,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1077289,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          220,
+          14,
+          734,
+          1522
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-teaset",
+        "gitBlobSha": "0ce99a1307328dedfb74ac38c6e718ca47159a59",
+        "sha256": "8587046f8fda0bd742ecba6d880eb5435229e95cc80ae54bef774fcb67d2cd28",
+        "bytes": 1090022,
+        "width": 1774,
+        "height": 887,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 874601,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          25,
+          42,
+          1732,
+          830
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "oram-field",
+        "gitBlobSha": "5274c88c95dff68bc80534e9c3ad363f715b014e",
+        "sha256": "e202663c2a0d4f6465619f0874bb460591e8a7db5b6d1aefa5f077616e046185",
+        "bytes": 1775928,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1099909,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          243,
+          22,
+          755,
+          1519
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "karine-medical",
+        "gitBlobSha": "574b9bc9383146f9ac02f6570fc4548dc8f13550",
+        "sha256": "9a2931e8941ac6bfa6411df06d34a54f92b5aa428b8e9cc7309e9146ac0c9a5d",
+        "bytes": 1447878,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1166997,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          312,
+          20,
+          736,
+          1523
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-01",
+        "gitBlobSha": "cb85913b7660a8e0771919179bdb9417d04343df",
+        "sha256": "b676873b8fab18a0926fbfea29ee85e62c16ad2a7aa101e26baca27503ef3ccc",
+        "bytes": 1743872,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1171434,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          121,
+          32,
+          879,
+          1510
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-02",
+        "gitBlobSha": "027197ea1f056072a040d86222b07f3490485f8c",
+        "sha256": "447b30478fc095636781df1e5a84b28e47b8e77d08502bb14e364e7e1399f8b5",
+        "bytes": 1713389,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1179299,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          117,
+          37,
+          824,
+          1492
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-03",
+        "gitBlobSha": "abb925e3ccf626a5fa2ea179c4ae6adf13798ff7",
+        "sha256": "d0b83890bb9914de1643f2eefcf065a1c147307f1ccbda4d92c9c6f55b9c7493",
+        "bytes": 1629614,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1204631,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          231,
+          17,
+          806,
+          1510
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-04",
+        "gitBlobSha": "28c5b595f0f4e1749e4010a062c689d18b009179",
+        "sha256": "2d632a59899ae37323d42be276ec8d77384131152545f239d9249d4f5685b9a7",
+        "bytes": 1645209,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1198146,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          140,
+          20,
+          917,
+          1492
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-05",
+        "gitBlobSha": "d31d5883bf3a1736dcd61d6ff56048e6bee1ef54",
+        "sha256": "8c3d6c0e566b3eba6cdd2b6c3e674a6f05310b9c69130c98f4994632179e4da3",
+        "bytes": 1713655,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1171501,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          87,
+          18,
+          912,
+          1503
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-06",
+        "gitBlobSha": "0ee0e7d418e97df8efe70995f7a1614992290db6",
+        "sha256": "6717eda789a87d1845373db28d2a46dc7d819a1047941c988391286d645d2894",
+        "bytes": 1677529,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182252,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          108,
+          33,
+          845,
+          1471
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-07",
+        "gitBlobSha": "6e2768c6261a4b165feab88481ea406552fc07e9",
+        "sha256": "b288688702942f608003cb399315eeef81dc66d5bc444080e0ef43bcfba34997",
+        "bytes": 1648195,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182682,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          222,
+          25,
+          795,
+          1507
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-work-walk-08",
+        "gitBlobSha": "d68f3cd832c0d957e162d441cb679dd40ca60af2",
+        "sha256": "4de54f842fdf692c2acaa42b67e680a0f114da42d3d19a3b34fcfd0ad55b1996",
+        "bytes": 1740563,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176127,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          121,
+          13,
+          917,
+          1489
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-lander-tank-rack",
+        "gitBlobSha": "915afdb7a5d7825639c653724a40bb2c24071115",
+        "sha256": "dd82da68c4903b088a679b727683776cffa8d2c4f7f8a9934703c4b5afcc0470",
+        "bytes": 2125662,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 730895,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          150,
+          100,
+          878,
+          1507
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-covenant-sail-winch",
+        "gitBlobSha": "fdbeb20531a398a2e43bcb4e6cb5ddc5926306d2",
+        "sha256": "7bc649a3c08ec49c0e4fef3f9c167046882ad76c0d4b2ffee530e10efb448a6b",
+        "bytes": 1250042,
+        "width": 1736,
+        "height": 906,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1055262,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          246,
+          129,
+          1521,
+          821
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-identification",
+        "gitBlobSha": "91e87a54c8b2868868d16650a778d3708feac697",
+        "sha256": "13a018d850b41de815b002605385dd5206a9330e7a2c6c2ea0b459e3c60d3130",
+        "bytes": 684210,
+        "width": 887,
+        "height": 1774,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1292971,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          272,
+          49,
+          616,
+          1630
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-microscope",
+        "gitBlobSha": "b1d52cde7e574a26ce3b9146d33ddacd6075ba06",
+        "sha256": "d3b4084ca728ceeba4e5b2c67313a30506e448acfa7948e0b8749fb385a800e1",
+        "bytes": 885619,
+        "width": 1305,
+        "height": 1206,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1147858,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          250,
+          31,
+          1084,
+          1187
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-01",
+        "gitBlobSha": "bbf77eabd1e59c2f6805b36a5e6c18f777aceb6a",
+        "sha256": "b181daf2cd5ffd7b8aacf96192f6a72e476a3de63dbd9593c3515ecce61b382f",
+        "bytes": 1887022,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1047107,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          178,
+          31,
+          879,
+          1519
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-02",
+        "gitBlobSha": "b4a019ee5f6768ec7882b6cc9d2efaf4abda1c16",
+        "sha256": "3c7cf74f95ad8bf0a774fb24ff5bec566a306fe15006fe74d281507659f6b52a",
+        "bytes": 1829731,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1070698,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          188,
+          34,
+          859,
+          1503
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-03",
+        "gitBlobSha": "79d14f7823628942982db4f1c8be098e43852d5c",
+        "sha256": "b4447791bb2ac98bdabe0121964721a33b817e32fc64de8aa35f1cb20cfdd958",
+        "bytes": 1816988,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1065651,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          186,
+          32,
+          807,
+          1506
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-04",
+        "gitBlobSha": "a16b04fb2f396aa148aa9eb9ee3469f7a4695535",
+        "sha256": "0844f99acd99e371c6ad064da7f4194dd75096060504290064560e81ae96447f",
+        "bytes": 1793571,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1089756,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          114,
+          36,
+          936,
+          1478
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-05",
+        "gitBlobSha": "eec2ee120f2d9fa17217a0587be7c10e1813f08d",
+        "sha256": "ec29e58adec51ce5b1cac6cd8c9887f506a23ac5bf061acfd9fb7114cd2ac245",
+        "bytes": 1871054,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1058196,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          72,
+          36,
+          936,
+          1492
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-06",
+        "gitBlobSha": "45b5d20f04c7730cf5440dfe160b6852a5e49ec0",
+        "sha256": "e03a18bba6db78cc685d1cde059581a89bf1416e7d53a1276ec67c26c0f52283",
+        "bytes": 1810993,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1080151,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          128,
+          38,
+          854,
+          1478
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-07",
+        "gitBlobSha": "e4cc5271dc3468f2434cbea7cea6ed5240671bd7",
+        "sha256": "cb1317302726e4ad6433347f34fe6601d4992f8185bf13165b18490422657806",
+        "bytes": 1788274,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1072553,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          186,
+          35,
+          821,
+          1498
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-walk-08",
+        "gitBlobSha": "7205e461f8f6193ada81c7726afb094009a0dd6b",
+        "sha256": "d0311853e32f941bfa2b6986fc8806f8d47ca27ff2d9762e5c7ca73d39a0b387",
+        "bytes": 1914881,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1042643,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          100,
+          31,
+          936,
+          1500
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-01",
+        "gitBlobSha": "94133e25df6c6dc8762421b147de75e5b4373508",
+        "sha256": "c8e3aaa5160c37f1dfee068ed3bc5e88eabcda896c46b27d39da990bc2240261",
+        "bytes": 1919624,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1142758,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          156,
+          47,
+          865,
+          1473
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-02",
+        "gitBlobSha": "2ae0aee9625d1887897be824317f45156bca1e79",
+        "sha256": "ee48688ce7f5ace2edecbc274fb3e9a03a940f037b902f486a58230aadcb5338",
+        "bytes": 1862077,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1156316,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          160,
+          46,
+          804,
+          1473
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-03",
+        "gitBlobSha": "0fe243c4674a0b87907e74864323d5da96b13b89",
+        "sha256": "f66cfb4c997e8991ff6569da0724cbfce19df97e20b06dd0fd06a20e93e6f14a",
+        "bytes": 1777154,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1168962,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          305,
+          29,
+          713,
+          1510
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-04",
+        "gitBlobSha": "1569693b2ab1721483d166518b9b112aa935ee87",
+        "sha256": "4732663fe3ea32cb5bd8b3a2bad589e5db006e0c13b6c63f6d3b09621e92517b",
+        "bytes": 1841527,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182884,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          159,
+          36,
+          873,
+          1462
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-05",
+        "gitBlobSha": "f363bdacec1f2b366fe6d59af9b575539c21556c",
+        "sha256": "94dd1d2488a1dd32600ddc4cbced8ebb1a8f5927e489c244007c56d2cf691e07",
+        "bytes": 1839035,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1171154,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          114,
+          43,
+          874,
+          1462
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-06",
+        "gitBlobSha": "6ab9c0a4f65b1b2c1020353159246643fb23844d",
+        "sha256": "5f259e897ca25f92b7ee484e86c099ef28156c7b7f59da4a219f6a0ce9a1d57e",
+        "bytes": 1808223,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1156676,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          141,
+          43,
+          751,
+          1481
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-07",
+        "gitBlobSha": "cdb6d32d2df229282e4fa4d240732ccdf86818cd",
+        "sha256": "3a0e34c14dcc2ea9d7ee61c034ae1965f7f7984b60adbeb9ac8b969e37bdc703",
+        "bytes": 1748262,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1187014,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          304,
+          29,
+          728,
+          1505
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "daniels-eva-walk-08",
+        "gitBlobSha": "6d097ca2d3af33d507b9a71d7e6c745a895729d6",
+        "sha256": "9ecbfe40337dd9a8a202a4da5ad2e93cb700a293ee053bf406d0fba17c9dd874",
+        "bytes": 1919680,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1146411,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          135,
+          31,
+          895,
+          1477
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-01",
+        "gitBlobSha": "3c0d0479b497b3f49cbe93a4c26b8e85177b0ca3",
+        "sha256": "fd117e885dd70b687f2bb2d3d351ea93a674ac451fb45f52db30ce70d72c4511",
+        "bytes": 1550025,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1175374,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          151,
+          43,
+          860,
+          1499
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-02",
+        "gitBlobSha": "bc88e88d0d42fe63ec57dafc7f1ae1c339bbfe00",
+        "sha256": "9e701f48177eb666869707c18380d8b2dd871d2ac3e1c89ca646a8c54cf5a0e3",
+        "bytes": 1595982,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1164065,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          144,
+          44,
+          859,
+          1501
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-03",
+        "gitBlobSha": "f3396895e3aa3c53e15e9a9118652c8d3e022db7",
+        "sha256": "1fff52bfa743d0036fd58c720338141e561f30c9037da251982c869cce2fd2fe",
+        "bytes": 1554817,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1191330,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          170,
+          39,
+          857,
+          1504
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-04",
+        "gitBlobSha": "eb14cd5ba2aec32e6168f4a001e216ca13261f14",
+        "sha256": "d1f2802de8a2b65e1523591a7daea92bc77b5d43ff2bd0fabf647394952bdb20",
+        "bytes": 1543245,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176581,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          132,
+          38,
+          897,
+          1501
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-05",
+        "gitBlobSha": "c5d1ffd4509f9c2a1385ff0b76601cf11b4ea44d",
+        "sha256": "1675fe9f07a9ab115508018bc35eef8c3064ab1ef0f2edae7033672bc73f74e7",
+        "bytes": 1555750,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1168006,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          114,
+          41,
+          923,
+          1482
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-06",
+        "gitBlobSha": "02b3073c4015109d0b20385989bc47ada410acbe",
+        "sha256": "631d50a6ef1d95ef7d6c43c9fc2c16a67275fce0c4f9363649545521740cfe2e",
+        "bytes": 1541903,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1183400,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          100,
+          44,
+          917,
+          1470
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-07",
+        "gitBlobSha": "7764420c0d52dab90d27917b9fd1a4064136441a",
+        "sha256": "ff229f8db64c632dbdcccf03f9a186b5d3de7ad80e93f7578da065bccb6257c4",
+        "bytes": 1518321,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1209954,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          145,
+          39,
+          827,
+          1496
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "david-young-walk-08",
+        "gitBlobSha": "865434e176fbab74a9989b52bf26f09ac41f9415",
+        "sha256": "c58385d551e2c16521b7b1e53d9dc0190464874f493838371aa9e82e582bb4ab",
+        "bytes": 1590397,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176033,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          94,
+          39,
+          885,
+          1481
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-01",
+        "gitBlobSha": "882b9a0507bd3a30dabaff1bdadf3354904eb305",
+        "sha256": "041afc1c15181d0594fd4388048dc06cc6b1dadab06d2861a1d7d14f7e5a6b9c",
+        "bytes": 1609450,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1139925,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          164,
+          41,
+          834,
+          1504
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-02",
+        "gitBlobSha": "f1d38f2ed814c49b11dc5f3faf9f664471fb6398",
+        "sha256": "5310d3d6985729ff12f895aa0a77e176f9a609fc213776b3a08ecb8abc152629",
+        "bytes": 1574291,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1151297,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          164,
+          41,
+          855,
+          1496
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-03",
+        "gitBlobSha": "5b33b511c1a6f44742215b102cd1aa932813da38",
+        "sha256": "1fb34467c5b60abd79c8f142e05c9fbb67e202eb3a1929338639a22d4f29b86a",
+        "bytes": 1442997,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1193467,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          278,
+          42,
+          753,
+          1495
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-04",
+        "gitBlobSha": "c4dc6fb1bd695c9248ef0e5324231f69c8329989",
+        "sha256": "11bd6fd106a6391b8a8b500a03a2f636cdda1f837da39fe5012d9a0e0dd177cd",
+        "bytes": 1490498,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1194449,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          148,
+          40,
+          931,
+          1477
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-05",
+        "gitBlobSha": "87cb197f3729e4761bae12e857408c4c2bd30a67",
+        "sha256": "ec49235e7e663bd5815ae18bf070cbba51a38ceb97effc9914d752ac3ce66251",
+        "bytes": 1475608,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1186951,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          141,
+          40,
+          900,
+          1473
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-06",
+        "gitBlobSha": "f9ab53436b210050344cdc7f101037f986dc7333",
+        "sha256": "78a5d853ce50efa27f7c2a52df76b975aac3f64007a4a46be68cdb0a8e7dab60",
+        "bytes": 1537610,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1166753,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          111,
+          40,
+          820,
+          1488
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-07",
+        "gitBlobSha": "cfb188d9db41d14e13b6981fd495269c7c5eec51",
+        "sha256": "b8c901f142b53429a7fb48dfff25fcdf5fef24c8f8fe59f508f0e24f713aaec8",
+        "bytes": 1484382,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1173070,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          231,
+          38,
+          804,
+          1496
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "walter-walk-08",
+        "gitBlobSha": "4a83ea1629bc16bde041424eacb524dc65ae1c2f",
+        "sha256": "42615904a13cb2d234614545dae3083c804cf56f438e4455507edb8a0f4d4ffb",
+        "bytes": 1601365,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1138682,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          191,
+          40,
+          840,
+          1491
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "background-engineer-city",
+        "gitBlobSha": "3ad5f6d5e035d4938e1ccb2e3058158ff8ac056b",
+        "sha256": "f7f3606964439d5d78692a9cdc0b59cd3350a4cef080a9b39e730be33dce98bc",
+        "bytes": 2173374,
+        "width": 1914,
+        "height": 822,
+        "alphaExtrema": [
+          255,
+          255
+        ],
+        "alphaZero": 0,
+        "edgeAlphaAbove16": 5472,
+        "bboxAbove32": [
+          0,
+          0,
+          1914,
+          822
+        ],
+        "imagePolicy": "opaque-background",
+        "pass": true
+      },
+      {
+        "id": "background-juggernaut-deadforest",
+        "gitBlobSha": "f11b076cb9ffef3ac095f090494f7fbc6c331733",
+        "sha256": "10fd1f29fc6be529d874efc286da9e94eb2a54c91f5ea1d4702cd3d9f8453632",
+        "bytes": 2326445,
+        "width": 1914,
+        "height": 822,
+        "alphaExtrema": [
+          255,
+          255
+        ],
+        "alphaZero": 0,
+        "edgeAlphaAbove16": 5472,
+        "bboxAbove32": [
+          0,
+          0,
+          1914,
+          822
+        ],
+        "imagePolicy": "opaque-background",
+        "pass": true
+      },
+      {
+        "id": "background-planet4-lake",
+        "gitBlobSha": "a6b6beb8b40ca7ef29d0e7bc347c84df46f30572",
+        "sha256": "79fb0e8da801d76356b856775d8441fe225da7a832295ef9a8e53882e9d62919",
+        "bytes": 2147841,
+        "width": 1914,
+        "height": 822,
+        "alphaExtrema": [
+          255,
+          255
+        ],
+        "alphaZero": 0,
+        "edgeAlphaAbove16": 5472,
+        "bboxAbove32": [
+          0,
+          0,
+          1914,
+          822
+        ],
+        "imagePolicy": "opaque-background",
+        "pass": true
+      },
+      {
+        "id": "planet4-orbit",
+        "gitBlobSha": "cf06ac34ee2cce2d1cf9bde7874d6a20fe1f8798",
+        "sha256": "3a69aabd261d5501b4faf080d91de2acae6c9dc97622dbaa2b77e011c5907d3e",
+        "bytes": 947697,
+        "width": 1254,
+        "height": 1254,
+        "alphaExtrema": [
+          255,
+          255
+        ],
+        "alphaZero": 0,
+        "edgeAlphaAbove16": 5016,
+        "bboxAbove32": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "imagePolicy": "opaque-background",
+        "pass": true
+      },
+      {
+        "id": "portrait-shaw-the-crossing",
+        "gitBlobSha": "192a9cb977c34d19edf09263c59d8ca197cf0a63",
+        "sha256": "cd30ad7fc75ce96ece2e0d3f5b29cc8491bf3e95433a174a1efa392413ebfcf6",
+        "bytes": 1601504,
+        "width": 1351,
+        "height": 1164,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 645449,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          128,
+          11,
+          1326,
+          1149
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-covenant-shock-absorber",
+        "gitBlobSha": "4f0f9abb27ef7cb3da248d119fd0abcdf9eef637",
+        "sha256": "f47cf4c0daa55f6d7a997e519027c29b9409593d0ea7fd3a604b5c4b888ce051",
+        "bytes": 2234399,
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 806636,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          236,
+          23,
+          819,
+          1514
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-cryopod-escape-tool",
+        "gitBlobSha": "d599e949512ba91dba671a4962005ad248665799",
+        "sha256": "18f435b1532c0c87c4b3ff4871a6acfa0db48884221da061ca27296f3c20921d",
+        "bytes": 643417,
+        "width": 1736,
+        "height": 906,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1303144,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          80,
+          162,
+          1649,
+          810
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "prop-lander-landing-gear",
+        "gitBlobSha": "395e41d6666d94bb05ef64c3cd8d46c82ead3167",
+        "sha256": "1910315d9d9409ccfc79c43e81679f84b65ac6bf3a9138c73b27473a1d733bd7",
+        "bytes": 1587619,
+        "width": 1492,
+        "height": 1054,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 951082,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          21,
+          46,
+          1473,
+          1018
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "ship-covenant-sails-deployed",
+        "gitBlobSha": "9bdec13e310712b81261ca075fe62ed2fa2791e4",
+        "sha256": "9c5c7256408e422e3a808b58999fd4fbc6df0fcd510d2451c0ab16abc79c0e6a",
+        "bytes": 2256295,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 696277,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          130,
+          14,
+          1406,
+          1001
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      },
+      {
+        "id": "ship-covenant-sails-folded",
+        "gitBlobSha": "1fa86759de035e49144218ca5eb7721b09c2f3fc",
+        "sha256": "734333059776fd15b81f79cf3daf719bdbb4490c5f46184f34274550dc90545c",
+        "bytes": 2176286,
+        "width": 1536,
+        "height": 1024,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 888691,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          232,
+          52,
+          1447,
+          990
+        ],
+        "pass": true,
+        "imagePolicy": "transparent-sprite"
+      }
+    ]
+  },
+  "integration": {
+    "newImages": 18,
+    "newNpcWalkCycles": 1,
+    "newRoomBackgrounds": 1,
+    "newCatalogueOnlyImages": 9,
+    "cumulativeImages": 103,
+    "runtimeImages": 72,
+    "catalogueOnlyImages": 31,
+    "cumulativePlayerWalkCycles": 4,
+    "cumulativeNpcWalkCycles": 1,
+    "cumulativeAnimationPhases": 40,
+    "unchangedPlayerCycles": [
+      "daniels-work-walk",
+      "daniels-walk",
+      "daniels-eva-walk",
+      "david-young-walk"
+    ],
+    "npcConditions": "Exact uninjured walter-cryo actor in cryo only, actual observed displacement, grounded and empty hands, all eight frames decoded. Rendering cache never mutates simulation state.",
+    "backgroundConditions": "Opaque lake panorama in landing sky pass before original native foreground and gameplay geometry. Other new views remain catalogue only.",
+    "biblePath": "docs/covenant/BIBLE_COVENANT_V014.json"
+  },
+  "imageGeneration": {
+    "tool": "image_gen.imagegen",
+    "originalPngPixelsModified": false,
+    "sourceManifest": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+    "exactPromptsAndRejectedAttempts": "source manifest generationPrompt and generationIterations",
+    "phaseReassignment": "The first phase03 attempt is used as07 after visual review of the actual support leg. The original prompt, rejection for03 and reassignment are retained.",
+    "visualReview": "Eight final Walter poses reviewed independently, including opposite contacts and passes, pelvis anchors, whole bodies and complete shoes. World and prop references reviewed before generation.",
+    "fidelityLimits": [
+      "Native generated pixels and detailed references do not establish pixel-identical film fidelity.",
+      "Walter poses are generated adaptations using the preserved V011 identity/costume sprite, not film motion capture.",
+      "Phase04 stride is relatively broad; face, folds and contact trajectories vary slightly.",
+      "Small official storyboards constrain Shaw portrait evidence; full costume and cinema appearances remain open.",
+      "Production designs are kept distinct from final-film proof and runtime placement."
+    ],
+    "independentWorldPropReview": "Six world images, three props and the separate Shaw portrait reviewed independently against declared local references. Whole isolated ship/prop silhouettes fit. The Juggernaut panorama intentionally inherits the source crop of the wreck; it is not a whole-craft sprite. Fine hardware and terrain geometry remain reconstructed."
+  },
+  "executedLocalValidation": {
+    "covenantContracts": {
+      "passed": 59,
+      "total": 59,
+      "unitTests": 45,
+      "integrationChecks": 14,
+      "command": "npm run test:covenant",
+      "scope": "Renderer and registry contracts use declared Image/Canvas doubles; native NPC patrol test advances actual engine states and observes drawing without injecting pose or movement flags."
+    },
+    "auditSuccession": {
+      "passed": 19,
+      "total": 19,
+      "scope": "Existing host audit succession sources and historical evidence remain unchanged."
+    },
+    "sourceSync": "Passed; 72 admitted PNGs and five cycles. Existing 63 bindings and four player cycles reproduced unchanged.",
+    "pngPreflight": "103 of 103 PNGs verified by the V014 packager; exact original hashes and dimensions, transparent sprites and four explicitly opaque images.",
+    "localBrowser": "Not executed locally; no local Chromium success claimed.",
+    "currentCommitCi": "Pending until publication; previous-version CI results are not transferred to this source tree.",
+    "bibleWorkbook": {
+      "authoringEngine": "@oai/artifact-tool",
+      "recalculated": true,
+      "sheets": 16,
+      "tables": 15,
+      "cellsCompared": 16885,
+      "allCellsMatchPayload": true,
+      "formulaErrors": [],
+      "visualReview": {
+        "status": "passed",
+        "previewCount": 18,
+        "scope": "16 sheet previews plus Biologie and Références dense detail ranges",
+        "observation": "Readable wrapped text, consistent headers, no overlap or visible clipping in the reviewed ranges."
+      },
+      "xlsxSha256": "65d046fc10004fa680b36b0c477548efba44aab150d55bbec9ca8058e977abc3"
+    },
+    "bibleDataReview": {
+      "referenceEntriesWithVisibleAppearanceAndMissingAction": 315,
+      "characterRowsReviewed": 38,
+      "weaponFamiliesReviewed": 7,
+      "scope": "Source data review, not browser execution."
+    }
+  },
+  "ciReceiptPolicy": {
+    "packPath": "validation/CI_V014.json",
+    "requiredVersion": "0.14.0",
+    "requiredMatch": [
+      "servedCovenantSourceSha256",
+      "bibleDocumentSha256"
+    ],
+    "note": "The final pack can include a current-commit receipt after CI. It must match the served runtime and all four bible documents; a source-only local record is not substituted for browser execution."
+  },
+  "bibleConnections": {
+    "main": "docs/narrative/CAMPAGNE_PRINCIPALE.md",
+    "existingConsolidationPullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/68",
+    "existingConsolidationCommit": "16686e8681cc0370db3fa3df2967704ef1862155",
+    "existingCovenantNote": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md",
+    "currentPullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71",
+    "policy": "Annexe liée depuis la bible principale ; la branche de consolidation PR68 n’est pas écrasée."
+  },
+  "publication": {
+    "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71",
+    "draft": true,
+    "mergedByThisWork": false,
+    "productionDeploymentByThisWork": false
+  },
+  "limits": [
+    "Global sprite coverage remains incomplete.",
+    "All new assets keep verified1to1 false.",
+    "No previously refused generation subject or related blocked variant was retried.",
+    "Only the Covenant-specific current workflow can supply current browser evidence; other repository workflows are not certified by this record."
+  ]
+}

@@ -17,8 +17,10 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 ASSETS = ROOT / 'assets/openai/sprites/alien-covenant-v011'
 ASSETS_V012 = ROOT / 'assets/openai/sprites/alien-covenant-v012'
 ASSETS_V013 = ROOT / 'assets/openai/sprites/alien-covenant-v013'
+ASSETS_V014 = ROOT / 'assets/openai/sprites/alien-covenant-v014'
 LEGACY_BINDINGS_SHA256 = '883270a99e8da81eced7bbd848d46133dd6647ac9fb3f46bb14ace4f2b3b8bc0'
 CUMULATIVE_BINDINGS_SHA256_V012 = '57ac46b9d02623da13d0064792af862189fac9da1698be5c6229ba2e4922383f'
+CUMULATIVE_BINDINGS_SHA256_V013 = '92e49e5dfb5b7ff435272af996d479d8482179ea27c94db7850ae386805061bf'
 INVENTORY = ROOT / 'docs/covenant/INVENTORY_V011.json'
 PROVENANCE = ASSETS / 'manifest.json'
 OVERRIDES = ROOT / 'docs/covenant/SPRITE_PROVENANCE_V011.json'
@@ -31,11 +33,14 @@ def measured_continuation(source, file, kind, key, state):
     if not expected or hashlib.sha256(raw).hexdigest() != expected:
         raise ValueError('Continuation image differs from its reviewed provenance: ' + file.stem)
     with Image.open(file) as original:
-        if 'A' not in original.getbands() and 'transparency' not in original.info:
+        background = kind == 'background'
+        if not background and 'A' not in original.getbands() and 'transparency' not in original.info:
             raise ValueError('Missing continuation transparency: ' + file.stem)
         image = original.convert('RGBA')
         alpha = image.getchannel('A')
-        if alpha.getextrema()[0] != 0:
+        if background and alpha.getextrema() != (255, 255):
+            raise ValueError('Distant background must be fully opaque: ' + file.stem)
+        if not background and alpha.getextrema()[0] != 0:
             raise ValueError('No transparent continuation background: ' + file.stem)
         bounds = alpha.point(lambda value: 255 if value >= 32 else 0).getbbox()
         if bounds is None:
@@ -43,17 +48,23 @@ def measured_continuation(source, file, kind, key, state):
         left, top, right, bottom = bounds
         if kind == 'human' and ('anchor' not in source or 'logicalHeight' not in source):
             raise ValueError('Walk frames require reviewed pivots and scale: ' + file.stem)
-        return {
+        entry = {
             'id': file.stem, 'kind': kind, 'key': key, 'state': state,
             'path': '/assets/openai/sprites/' + file.parent.name + '/' + file.name,
             'width': image.width, 'height': image.height, 'bytes': len(raw),
-            'sha256': expected, 'alphaBounds': list(bounds), 'alphaThreshold': 32,
+            'sha256': expected, 'alphaBounds': list(bounds), 'alphaThreshold': 0 if background else 32,
             'anchor': source.get('anchor', [(left + right) / 2, bottom]),
             'logicalHeight': source.get('logicalHeight', 100),
             'sourceFacing': source.get('sourceFacing', 1), 'verified1to1': False,
             'note': 'Generated pose; only the declared state and consumer are available. Film fidelity is not certified.',
             'rooms': source['rooms']
         }
+        for name in ('actors', 'imagePolicy', 'renderLayer', 'backgroundFit'):
+            if name in source:
+                entry[name] = source[name]
+        if background:
+            entry['note'] = 'Generated distant scenery, limited to the sky layer; native playable geometry is unchanged. Film fidelity is not certified.'
+        return entry
 
 
 def continuation_assets(folder, version):
@@ -76,7 +87,18 @@ def continuation_assets(folder, version):
         "const key=appearance({room,data,actorDefs:new Map()},{},'daniels').id;"
         "(rooms[key]??=[]).push(room.id);}process.stdout.write(JSON.stringify(rooms));"],
         text=True, capture_output=True, cwd=ROOT, check=True).stdout)
-    admitted_profiles = {'daniels-work'} if version == '0.12.0' else {'daniels', 'daniels-eva', 'david-young'}
+    admitted_profiles = ({'daniels-work'} if version == '0.12.0' else
+                         {'daniels', 'daniels-eva', 'david-young'} if version == '0.13.0' else set())
+    npc_consumers = {}
+    if version == '0.14.0':
+        npc_consumers = json.loads(subprocess.run(['node', '-e',
+            "const data=require('./modules/covenant/dlc/covenant/content.js');"
+            "const {appearance}=require('./modules/covenant/dlc/covenant/fidelity.js');"
+            "const actorDefs=new Map(data.actors.map(a=>[a.id,a]));"
+            "process.stdout.write(JSON.stringify(Object.fromEntries(data.actors.map(actor=>"
+            "[actor.id,{room:actor.room,role:actor.role,speed:actor.speed,route:actor.route,"
+            "profile:appearance({data,actorDefs,room:data.rooms.find(r=>r.id===actor.room)},actor,actor.role)}]))));"],
+            text=True, capture_output=True, cwd=ROOT, check=True).stdout)
     entries, identities = [], set()
     for row in sorted(source['assets'], key=lambda item: item['id']):
         identity = row['id']
@@ -102,6 +124,23 @@ def continuation_assets(folder, version):
             if (kind != 'human' or key not in admitted_profiles or state != 'walk'
                     or set(rooms) != set(consumers.get(key, []))):
                 raise ValueError('Walk frame does not match the exact existing player consumer: ' + identity)
+        elif admission == 'npc-cycle-frame':
+            key, kind, state = row.get('rendererKey'), row.get('kind'), row.get('state')
+            native = npc_consumers.get('walter-cryo', {})
+            if (version != '0.14.0' or kind != 'human' or key != 'walter' or state != 'walk'
+                    or rooms != ['cryo'] or row.get('actors') != ['walter-cryo']
+                    or native.get('room') != 'cryo' or native.get('role') != 'walter'
+                    or native.get('speed') != 26
+                    or native.get('profile', {}).get('id') != key or native.get('profile', {}).get('gun')
+                    or native.get('route') != [{'x': 450, 'z': .5}, {'x': 535, 'z': .5}]):
+                raise ValueError('NPC walk frame does not match its exact existing actor: ' + identity)
+        elif admission == 'room-background':
+            key, kind, state = row.get('rendererKey'), row.get('kind'), row.get('state')
+            if (version != '0.14.0' or identity != 'background-planet4-lake'
+                    or kind != 'background' or key != 'landing' or state != 'idle' or rooms != ['landing']
+                    or row.get('imagePolicy') != 'opaque-background' or row.get('renderLayer') != 'sky'
+                    or row.get('backgroundFit') != 'cover-bottom' or row.get('logicalHeight') != 555):
+                raise ValueError('Background does not match the reviewed sky layer: ' + identity)
         else:
             raise ValueError('Unreviewed continuation runtime admission: ' + identity)
         entries.append(measured_continuation(row, folder / (identity + '.png'), kind, key, state))
@@ -195,13 +234,17 @@ def main():
     if hashlib.sha256(legacy).hexdigest() != LEGACY_BINDINGS_SHA256:
         raise ValueError('The 29 reviewed V011 bindings must remain byte-identical')
     cycles = []
-    for folder, version in [(ASSETS_V012, '0.12.0'), (ASSETS_V013, '0.13.0')]:
+    for folder, version in [(ASSETS_V012, '0.12.0'), (ASSETS_V013, '0.13.0'), (ASSETS_V014, '0.14.0')]:
         additions, new_cycles, continuation = continuation_assets(folder, version)
         if continuation:
             if version == '0.13.0':
                 previous = json.dumps(manifest['assets'], ensure_ascii=False, separators=(',', ':')).encode()
                 if hashlib.sha256(previous).hexdigest() != CUMULATIVE_BINDINGS_SHA256_V012:
                     raise ValueError('The 39 reviewed V012 bindings must remain byte-identical')
+            if version == '0.14.0':
+                previous = json.dumps(manifest['assets'], ensure_ascii=False, separators=(',', ':')).encode()
+                if hashlib.sha256(previous).hexdigest() != CUMULATIVE_BINDINGS_SHA256_V013:
+                    raise ValueError('The 63 reviewed V013 bindings must remain byte-identical')
             manifest['release'] = version
             manifest['assets'] = manifest['assets'] + additions
             cycles += new_cycles

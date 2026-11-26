@@ -105,14 +105,18 @@ def main():
             "nativeStorage": "Opaque sentinel values" if args.skip_title else "createDefaultSave(1..3), QA names, selected profile 1",
             "creatureCaptures": "Separate browser context; existing go(room,true), explicit enemy pose and camera placement; not a playthrough",
             "walkCostumes": "Daniels field at landing and EVA at sailaccess use separate prepared rooms and empty hands; movement then uses real keyboard/RAF. David uses the public isolated prologue button, without campaign injection.",
+            "npcWalking": "Walter is observed on his original opening cryo patrol before any player movement; no actor, route, speed, phase or clock injection.",
+            "background": "The prepared landing room checks a sky-only PNG before native world geometry; it does not claim campaign traversal to the planet.",
             "missingImages": "Separate browser context; PNG requests deliberately aborted",
             "clock": "Real requestAnimationFrame and wall clock",
-            "alphaPolicy": {"supportThreshold": 32, "opaqueThresholdReported": 240, "opacityRatioInformational": True},
+            "alphaPolicy": {"supportThreshold": 32, "opaqueThresholdReported": 240, "opacityRatioInformational": True,
+                            "opaqueBackground": "Explicit background kind only; every pixel alpha must equal 255"},
             "serviceWorkers": "Blocked in isolated QA contexts"
         },
         "tests": [], "reachedRooms": [], "controls": {"keyTransitions": 0, "jumps": 0},
         "captures": [], "pageErrors": [], "httpErrors": [], "assetDecoding": [],
-        "preparedCreaturePoses": [], "preparedPropPoses": [], "walkCycles": [],
+        "preparedCreaturePoses": [], "preparedPropPoses": [], "walkCycles": [], "npcWalkCycles": [],
+        "preparedBackgrounds": [],
         "incompleteWalkCycles": [], "sourceHashes": {}
     }
     for relative in ("dlc/covenant/index.html", "dlc/covenant/sprites-v011.json", "index.html",
@@ -286,6 +290,78 @@ def main():
               q.renderer.drawPose=q.renderer.walkOriginalV013;
               delete q.renderer.walkOriginalV013;delete q.renderer.walkObservedV013;q.resume();}""")
 
+    def observe_native_walter(page, cycle):
+        """Wait for the existing opening patrol and record real sprite transforms."""
+        initial = observation(page)
+        page.evaluate("""() => {
+          const q=__COVENANT_QA__,e=q.engine;
+          q.renderer.npcObservedV014=[];q.renderer.npcOriginalDrawV014=q.renderer.drawPose;
+          q.renderer.drawPose=function(sprite,height,anchor){
+            if(sprite.cycle==='walter-walk'){
+              const actor=e.state.crew['walter-cryo'],m=this.c.getTransform();
+              this.npcObservedV014.push({id:sprite.entry.id,actor:actor.id,room:e.room.id,
+                profile:e.appearance(actor,e.crewRole(actor)).id,x:actor.x,z:actor.z,
+                phase:actor.phase,facing:actor.facing,time:e.state.time,a:m.a,d:m.d,
+                moved:!!this.npcWalkObservationV014?.moving});
+            }return this.npcOriginalDrawV014(sprite,height,anchor);
+          };
+        }""")
+        draws_by_direction = {}
+        try:
+            for facing, label in ((1, "right"), (-1, "left")):
+                page.wait_for_function("""({ids,facing})=>{
+                  const q=__COVENANT_QA__,a=q.engine.state.crew['walter-cryo'];
+                  const complete=a.phase==='walk'&&a.facing===facing&&ids.every(id=>q.renderer.npcObservedV014
+                    .some(row=>row.id===id&&row.facing===facing&&row.a*facing>0&&row.d>0&&row.moved));
+                  if(complete)q.freeze();return complete;
+                }""", arg={"ids": cycle["frames"], "facing": facing}, timeout=90000)
+                paused = page.evaluate("""()=>{
+                  const q=__COVENANT_QA__,e=q.engine;q.freeze();q.renderer.frame(0,{});
+                  return {time:e.state.time,before:JSON.stringify(q.snapshot()),
+                    actor:{phase:e.state.crew['walter-cryo'].phase,facing:e.state.crew['walter-cryo'].facing},
+                    last:q.renderer.npcObservedV014.at(-1)};
+                }""")
+                rows = page.evaluate("__COVENANT_QA__.renderer.npcObservedV014.slice()")
+                selected = [row for row in rows if row["facing"] == facing]
+                check("Native Walter patrol draws eight " + label + "-facing phases without actor edits",
+                      all(any(row["id"] == identity and row["moved"] and row["a"] * facing > 0
+                              and row["profile"] == "walter" and row["actor"] == "walter-cryo"
+                              and row["room"] == "cryo" and row["phase"] == "walk" for row in selected)
+                          for identity in cycle["frames"]),
+                      {"frames": cycle["frames"], "nativeSpeed": 26, "angularFrequency": cycle["angularFrequency"]})
+                page.wait_for_timeout(160)
+                repeated = page.evaluate("""()=>{
+                  const q=__COVENANT_QA__;q.renderer.frame(0,{});
+                  return {time:q.engine.state.time,after:JSON.stringify(q.snapshot()),last:q.renderer.npcObservedV014.at(-1)};
+                }""")
+                check("Paused Walter keeps the observed frame and exact simulation: " + label,
+                      paused["time"] == repeated["time"] and paused["before"] == repeated["after"]
+                      and paused["actor"] == {"phase": "walk", "facing": facing}
+                      and repeated["last"]["time"] == paused["time"]
+                      and paused["last"]["id"] == repeated["last"]["id"]
+                      and repeated["last"]["facing"] == facing and repeated["last"]["moved"])
+                capture(page, "walk-walter-" + label,
+                        "Natural opening cryo patrol; no route, actor, position or clock injection")
+                draws_by_direction[label] = selected
+                page.evaluate("__COVENANT_QA__.resume()")
+            after = observation(page)
+            check("Observing Walter leaves the player and opening progression untouched",
+                  after["room"] == initial["room"] == "cryo"
+                  and after["player"]["x"] == initial["player"]["x"]
+                  and after["player"]["z"] == initial["player"]["z"]
+                  and after["actions"] == initial["actions"] == [])
+            receipt["npcWalkCycles"].append({"id": cycle["id"], "key": "walter", "actor": "walter-cryo",
+                "room": "cryo", "gameplayStateInjected": False, "clockInjected": False,
+                "nativeSpeed": 26, "angularFrequency": cycle["angularFrequency"],
+                "observedRightFrames": sorted({row["id"] for row in draws_by_direction["right"]}),
+                "observedLeftFrames": sorted({row["id"] for row in draws_by_direction["left"]}),
+                "rightDraws": draws_by_direction["right"], "leftDraws": draws_by_direction["left"]})
+            flush()
+        finally:
+            page.evaluate("""()=>{const q=__COVENANT_QA__;
+              q.renderer.drawPose=q.renderer.npcOriginalDrawV014;
+              delete q.renderer.npcOriginalDrawV014;delete q.renderer.npcObservedV014;q.resume();}""")
+
     page = None
     try:
         with static_site(root, args.base) as base, sync_playwright() as pw:
@@ -310,7 +386,8 @@ def main():
                 "url": response.url, "status": response.status
             }) if response.status >= 400 and (
                 "/dlc/covenant/" in response.url or "/alien-covenant-v011/" in response.url
-                or "/alien-covenant-v012/" in response.url or "/alien-covenant-v013/" in response.url) else None)
+                or "/alien-covenant-v012/" in response.url or "/alien-covenant-v013/" in response.url
+                or "/alien-covenant-v014/" in response.url) else None)
             response = page.goto(base + "/dlc/covenant/?qa=1&from=tantalus", wait_until="load")
             check("Served Covenant route returns HTTP 200", response is not None and response.status == 200)
             page.wait_for_function("!!window.__COVENANT_QA__ && !!window.CovenantSpritesV011")
@@ -330,11 +407,17 @@ def main():
             receipt["reachedRooms"].append("cryo")
 
             walk_cycles = page.evaluate("CovenantSpritesV011.inspect().cycles || []")
+            player_cycles = [cycle for cycle in walk_cycles if cycle.get("consumer") == "player"]
             check("Four complete player walk cycles are declared with distinct costume scopes",
-                  len(walk_cycles) == 4
-                  and {cycle.get("key") for cycle in walk_cycles} == {"daniels-work", "daniels", "daniels-eva", "david-young"}
-                  and all(len(cycle["frames"]) == 8 and cycle["rooms"] for cycle in walk_cycles),
-                  [{"id": cycle["id"], "key": cycle.get("key"), "rooms": cycle.get("rooms")} for cycle in walk_cycles])
+                  len(player_cycles) == 4
+                  and {cycle.get("key") for cycle in player_cycles} == {"daniels-work", "daniels", "daniels-eva", "david-young"}
+                  and all(len(cycle["frames"]) == 8 and cycle["rooms"] for cycle in player_cycles),
+                  [{"id": cycle["id"], "key": cycle.get("key"), "rooms": cycle.get("rooms")} for cycle in player_cycles])
+            npc_cycles = [cycle for cycle in walk_cycles if cycle.get("consumer") == "npc"]
+            check("Only the existing uninjured cryo Walter receives an NPC cycle",
+                  len(npc_cycles) == 1 and npc_cycles[0]["id"] == "walter-walk"
+                  and npc_cycles[0]["actors"] == ["walter-cryo"] and npc_cycles[0]["rooms"] == ["cryo"], npc_cycles)
+            observe_native_walter(page, npc_cycles[0])
             opening_cycle = next(cycle for cycle in walk_cycles if cycle["key"] == "daniels-work")
             if walk_cycles:
                 before_walk = observation(page)
@@ -363,7 +446,8 @@ def main():
                       pause["time"] == paused["time"] and pause["frame"] == paused["frame"]
                       and pause["before"] == paused["after"])
                 receipt["walkCycles"] = [{"id": opening_cycle["id"], "key": "daniels-work", "room": "cryo",
-                    "observedFrameDraws": observation(page)["cycleFrameDraws"],
+                    "observedFrameDraws": {identity: observation(page)["cycleFrameDraws"].get(identity, 0)
+                                           for identity in opening_cycle["frames"]},
                     "pausedFrame": pause["frame"], "time": pause["time"],
                     "gameplayStateInjected": False}]
                 capture(page, "01a-paused-real-walk", "Real keyboard walking paused for phase and renderer-purity inspection")
@@ -429,26 +513,29 @@ def main():
                   const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
                   const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(image,0,0);
                   const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
-                  let left=canvas.width,top=canvas.height,right=0,bottom=0,visible=0,opaque=0,zeros=0,edgeAbove16=0;
+                  let left=canvas.width,top=canvas.height,right=0,bottom=0,visible=0,opaque=0,zeros=0,edgeAbove16=0,nonOpaque=0;
                   for(let y=0;y<canvas.height;y++)for(let x=0;x<canvas.width;x++){
                     const alpha=data[(y*canvas.width+x)*4+3];
                     if(alpha===0)zeros++;
+                    if(alpha!==255)nonOpaque++;
                     if((x===0||y===0||x===canvas.width-1||y===canvas.height-1)&&alpha>16)edgeAbove16++;
                     if(alpha>=32){visible++;if(alpha>=240)opaque++;left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x+1);bottom=Math.max(bottom,y+1);}
                   }
                   const bounds=[left,top,right,bottom];
+                  const background=entry.kind==='background'&&entry.imagePolicy==='opaque-background';
                   rows.push({id:entry.id,width:canvas.width,height:canvas.height,sha256,
                     bytes:bytes.byteLength,alphaBounds:bounds,zeroAlphaPixels:zeros,
-                    visiblePixels:visible,opaqueFraction:visible?opaque/visible:0,edgeAbove16,
+                    visiblePixels:visible,opaqueFraction:visible?opaque/visible:0,edgeAbove16,nonOpaquePixels:nonOpaque,
+                    imagePolicy:background?'opaque-background':'transparent-sprite',
                     ok:sha256===entry.sha256 && bytes.byteLength===entry.bytes
                       && canvas.width===entry.width && canvas.height===entry.height
                       && JSON.stringify(bounds)===JSON.stringify(entry.alphaBounds)
-                      && zeros>0 && visible>0 && edgeAbove16===0});
+                      && visible>0 && (background?nonOpaque===0:zeros>0&&edgeAbove16===0)});
                   canvas.width=1;canvas.height=1;
                 } finally {URL.revokeObjectURL(url);}
               }return rows;
             }""")
-            check("Every admitted PNG is decoded from served original bytes with valid alpha and bounds",
+            check("Every admitted PNG is decoded from served original bytes with its explicit alpha policy and bounds",
                   bool(receipt["assetDecoding"]) and all(row["ok"] for row in receipt["assetDecoding"]),
                   {"images": len(receipt["assetDecoding"]),
                    "failures": [row["id"] for row in receipt["assetDecoding"] if not row["ok"]]})
@@ -496,6 +583,40 @@ def main():
                   q.resume();
                 }""", room)
                 observe_walk_cycle(fixture_page, cycle, prepared=True)
+                if room == "landing":
+                    fixture_page.wait_for_function("CovenantSpritesV011.inspect().images.some(row=>row.id==='background-planet4-lake'&&row.status==='ready')")
+                    background = fixture_page.evaluate("""()=>{
+                      const q=__COVENANT_QA__,r=q.renderer,c=r.c;q.freeze();
+                      const before=JSON.stringify(q.snapshot()),events=[];
+                      const draw=c.drawImage,fillRect=c.fillRect,portal=r.portal,prop=r.prop;
+                      c.drawImage=function(image,...args){
+                        if(image.src?.endsWith('/background-planet4-lake.png'))events.push({kind:'lake',rect:args});
+                        return draw.call(this,image,...args);
+                      };
+                      c.fillRect=function(x,y,w,h){
+                        if(x===0&&y===514&&h>=200)events.push({kind:'floor'});
+                        return fillRect.call(this,x,y,w,h);
+                      };
+                      r.portal=function(exit){events.push({kind:'portal',id:exit.id});return portal.call(this,exit)};
+                      r.prop=function(object){events.push({kind:'prop',id:object.id});return prop.call(this,object)};
+                      try{r.frame(0,{})}finally{c.drawImage=draw;c.fillRect=fillRect;r.portal=portal;r.prop=prop}
+                      return {room:q.engine.room.id,pure:before===JSON.stringify(q.snapshot()),events,
+                        expectedPortals:q.engine.room.exits.map(exit=>exit.id),
+                        sourceSize:[1914,822],logicalSkyHeight:555,gameplayStateInjected:true};
+                    }""")
+                    events = background["events"]
+                    lake_index = next((index for index, event in enumerate(events) if event["kind"] == "lake"), -1)
+                    floor_index = next((index for index, event in enumerate(events) if event["kind"] == "floor"), -1)
+                    portals = {event["id"] for event in events if event["kind"] == "portal"}
+                    check("Prepared landing draws the lake before its original floor, portals and independent props",
+                          background["pure"] and background["room"] == "landing"
+                          and 0 <= lake_index < floor_index
+                          and portals == set(background["expectedPortals"])
+                          and all(index > floor_index for index, event in enumerate(events)
+                                  if event["kind"] in ("portal", "prop")), background)
+                    receipt["preparedBackgrounds"].append(background)
+                    capture(fixture_page, "fixture-landing-lake", "Prepared landing room; distant lake PNG precedes unchanged native playable geometry")
+                    fixture_page.evaluate("__COVENANT_QA__.resume()")
             available = fixture_page.evaluate("CovenantSpritesV011.entries().filter(e=>e.kind==='creature').map(e=>({id:e.id,key:e.key,state:e.state}))")
             for entry in available:
                 prepared = fixture_page.evaluate("""(entry) => {
@@ -564,7 +685,8 @@ def main():
                 partial_page.wait_for_function("!!window.__COVENANT_QA__")
                 key = cycle.get("key", "daniels-work")
                 prepared = key in ("daniels", "daniels-eva")
-                if key == "daniels-work":
+                npc = key == "walter"
+                if key in ("daniels-work", "walter"):
                     partial_page.locator("#begin").click()
                 elif key == "david-young":
                     partial_page.locator("#prologueFront").click()
@@ -573,33 +695,63 @@ def main():
                     partial_page.evaluate("""room=>{const q=__COVENANT_QA__;
                         q.go(room,true);q.engine.state.weapon=false;q.resume();}""", room)
                 before = observation(partial_page)
-                partial_page.keyboard.down("ArrowRight")
+                before_npc = partial_page.evaluate("__COVENANT_QA__.engine.state.crew['walter-cryo'].x") if npc else None
+                if not npc:
+                    partial_page.keyboard.down("ArrowRight")
                 try:
                     partial_page.wait_for_function("""(id)=>CovenantSpritesV011.inspect().images
                         .some(v=>v.id===id&&v.status==='unavailable')""", arg=missing_phase)
                     partial_page.wait_for_timeout(750)
                 finally:
-                    partial_page.keyboard.up("ArrowRight")
+                    if not npc:
+                        partial_page.keyboard.up("ArrowRight")
                 after = observation(partial_page)
+                after_npc = partial_page.evaluate("__COVENANT_QA__.engine.state.crew['walter-cryo'].x") if npc else None
                 partial_status = partial_page.evaluate("CovenantSpritesV011.inspect()")
                 status = next(row for row in partial_status["cycles"] if row["id"] == cycle["id"])
-                complete_fallback = (after["player"]["x"] > before["player"]["x"] + 10
+                movement = after_npc > before_npc + 10 if npc else after["player"]["x"] > before["player"]["x"] + 10
+                complete_fallback = (movement
                     and all(not after["cycleFrameDraws"].get(identity, 0) for identity in cycle["frames"])
                     and not partial_errors and not status["ready"])
-                check("One unavailable phase keeps the entire costume cycle procedural and playable: " + key,
+                check("One unavailable phase keeps the entire cycle procedural during real movement: " + key,
                       complete_fallback, {"blockedPhase": missing_phase, "expectedPNGFailure": True,
-                      "gameplayStateInjected": prepared, "pageErrors": partial_errors})
+                      "gameplayStateInjected": prepared, "nativeNpcPatrol": npc, "pageErrors": partial_errors})
                 receipt["incompleteWalkCycles"].append({"id": cycle["id"], "blockedPhase": missing_phase,
-                    "room": before["room"], "gameplayStateInjected": prepared, "passed": complete_fallback})
+                    "room": before["room"], "gameplayStateInjected": prepared, "nativeNpcPatrol": npc, "passed": complete_fallback})
                 capture(partial_page, "fixture-incomplete-" + cycle["id"],
                         "One PNG deliberately blocked; no phase of that cycle is drawn")
                 partial_context.close()
+
+            lake_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
+            lake_page = lake_context.new_page()
+            lake_errors = []
+            lake_page.on("pageerror", lambda error: lake_errors.append(str(error)))
+            lake_page.route("**/assets/openai/sprites/alien-covenant-v014/background-planet4-lake.png",
+                            lambda route: route.abort("failed"))
+            lake_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
+            lake_page.wait_for_function("!!window.__COVENANT_QA__")
+            lake_page.evaluate("""()=>{const q=__COVENANT_QA__;
+                q.go('landing',true);q.engine.state.weapon=false;q.resume();}""")
+            lake_page.wait_for_function("CovenantSpritesV011.inspect().images.some(row=>row.id==='background-planet4-lake'&&row.status==='unavailable')")
+            before_lake = observation(lake_page)
+            lake_page.keyboard.down("ArrowRight")
+            try:
+                lake_page.wait_for_timeout(300)
+            finally:
+                lake_page.keyboard.up("ArrowRight")
+            after_lake = observation(lake_page)
+            check("An unavailable lake PNG retains the native landing background and real movement",
+                  after_lake["player"]["x"] > before_lake["player"]["x"] + 10
+                  and after_lake["spriteDraws"]["background"] == 0 and not lake_errors,
+                  {"expectedPNGFailure": True, "gameplayStateInjected": True, "pageErrors": lake_errors})
+            capture(lake_page, "fixture-missing-lake", "Prepared landing with only its lake PNG blocked; native sky fallback")
+            lake_context.close()
 
             missing_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
             missing_page = missing_context.new_page()
             fallback_errors = []
             missing_page.on("pageerror", lambda error: fallback_errors.append(str(error)))
-            for version in ("v011", "v012", "v013"):
+            for version in ("v011", "v012", "v013", "v014"):
                 missing_page.route("**/assets/openai/sprites/alien-covenant-" + version + "/*.png",
                                    lambda route: route.abort("failed"))
             missing_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
@@ -641,6 +793,8 @@ def main():
                       "preparedCreaturePoses": len(receipt["preparedCreaturePoses"]),
                       "preparedPropPoses": len(receipt["preparedPropPoses"]),
                       "walkCycles": len(receipt["walkCycles"]),
+                      "npcWalkCycles": len(receipt["npcWalkCycles"]),
+                      "preparedBackgrounds": len(receipt["preparedBackgrounds"]),
                       "hostMenuValidated": not args.skip_title}), flush=True)
 
 

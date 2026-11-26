@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "0.13.0",
+  "release": "0.14.0",
   "sourceModuleVersion": "0.10.0",
   "verified1to1": false,
   "assets": [
@@ -2161,6 +2161,302 @@
       "rooms": [
         "whiteroom"
       ]
+    },
+    {
+      "id": "background-planet4-lake",
+      "kind": "background",
+      "key": "landing",
+      "state": "idle",
+      "path": "/assets/openai/sprites/alien-covenant-v014/background-planet4-lake.png",
+      "width": 1914,
+      "height": 822,
+      "bytes": 2147841,
+      "sha256": "79fb0e8da801d76356b856775d8441fe225da7a832295ef9a8e53882e9d62919",
+      "alphaBounds": [
+        0,
+        0,
+        1914,
+        822
+      ],
+      "alphaThreshold": 0,
+      "anchor": [
+        957,
+        822
+      ],
+      "logicalHeight": 555,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated distant scenery, limited to the sky layer; native playable geometry is unchanged. Film fidelity is not certified.",
+      "rooms": [
+        "landing"
+      ],
+      "imagePolicy": "opaque-background",
+      "renderLayer": "sky",
+      "backgroundFit": "cover-bottom"
+    },
+    {
+      "id": "walter-walk-01",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1609450,
+      "sha256": "041afc1c15181d0594fd4388048dc06cc6b1dadab06d2861a1d7d14f7e5a6b9c",
+      "alphaBounds": [
+        164,
+        41,
+        834,
+        1504
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        490,
+        1504
+      ],
+      "logicalHeight": 121.58446866485015,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-02",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1574291,
+      "sha256": "5310d3d6985729ff12f895aa0a77e176f9a609fc213776b3a08ecb8abc152629",
+      "alphaBounds": [
+        164,
+        41,
+        855,
+        1496
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        495,
+        1496
+      ],
+      "logicalHeight": 120.91961852861036,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-03",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-03.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1442997,
+      "sha256": "1fb34467c5b60abd79c8f142e05c9fbb67e202eb3a1929338639a22d4f29b86a",
+      "alphaBounds": [
+        278,
+        42,
+        753,
+        1495
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        495,
+        1495
+      ],
+      "logicalHeight": 120.75340599455042,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-04",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-04.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1490498,
+      "sha256": "11bd6fd106a6391b8a8b500a03a2f636cdda1f837da39fe5012d9a0e0dd177cd",
+      "alphaBounds": [
+        148,
+        40,
+        931,
+        1477
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        500,
+        1477
+      ],
+      "logicalHeight": 119.42370572207085,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-05",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1475608,
+      "sha256": "ec49235e7e663bd5815ae18bf070cbba51a38ceb97effc9914d752ac3ce66251",
+      "alphaBounds": [
+        141,
+        40,
+        900,
+        1473
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        500,
+        1473
+      ],
+      "logicalHeight": 119.09128065395096,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-06",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1537610,
+      "sha256": "78a5d853ce50efa27f7c2a52df76b975aac3f64007a4a46be68cdb0a8e7dab60",
+      "alphaBounds": [
+        111,
+        40,
+        820,
+        1488
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        505,
+        1488
+      ],
+      "logicalHeight": 120.33787465940055,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-07",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1484382,
+      "sha256": "b8c901f142b53429a7fb48dfff25fcdf5fef24c8f8fe59f508f0e24f713aaec8",
+      "alphaBounds": [
+        231,
+        38,
+        804,
+        1496
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        490,
+        1496
+      ],
+      "logicalHeight": 121.16893732970028,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "walter-walk-08",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v014/walter-walk-08.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1601365,
+      "sha256": "42615904a13cb2d234614545dae3083c804cf56f438e4455507edb8a0f4d4ffb",
+      "alphaBounds": [
+        191,
+        40,
+        840,
+        1491
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        495,
+        1491
+      ],
+      "logicalHeight": 120.58719346049047,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "cryo"
+      ],
+      "actors": [
+        "walter-cryo"
+      ],
+      "imagePolicy": "transparent-sprite"
     }
   ],
   "cycles": [
@@ -2230,6 +2526,27 @@
         "david-young-walk-06",
         "david-young-walk-07",
         "david-young-walk-08"
+      ]
+    },
+    {
+      "id": "walter-walk",
+      "kind": "human",
+      "key": "walter",
+      "state": "walk",
+      "consumer": "npc",
+      "actors": [
+        "walter-cryo"
+      ],
+      "angularFrequency": 2.1,
+      "frames": [
+        "walter-walk-01",
+        "walter-walk-02",
+        "walter-walk-03",
+        "walter-walk-04",
+        "walter-walk-05",
+        "walter-walk-06",
+        "walter-walk-07",
+        "walter-walk-08"
       ]
     }
   ]

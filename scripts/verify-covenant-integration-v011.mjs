@@ -10,7 +10,7 @@ import { TitleScreenController } from '../src/title-screen-v61.js';
 import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admissions-v011.mjs';
 import { buildCovenantDlcV011, verifyCovenantBundleV011, covenantManifestV011,
   COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012,
-  COVENANT_PROVENANCE_V013,
+  COVENANT_PROVENANCE_V013, COVENANT_PROVENANCE_V014,
   COVENANT_ASSET_ROOTS, covenantSourceMetadataPathV011, reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -37,7 +37,7 @@ test('original recovered runtime remains byte-identical except the declared page
       const added = '<script src="fidelity-art.js"></script><script src="sprite-registry-v011.js"></script><script src="sprite-art-v011.js"></script><script src="app.js"></script>';
       assert.equal(text.split(added).length, 2, 'One final renderer insertion is required');
       text = text.replace(added, '<script src="fidelity-art.js"></script><script src="app.js"></script>');
-      text = text.replace(/version 0\.(?:11|12|13)\.0/, 'version 0.10.0');
+      text = text.replace(/version 0\.(?:11|12|13|14)\.0/, 'version 0.10.0');
       bytes = Buffer.from(text);
     }
     assert.equal(bytes.length, row.bytes, 'Changed recovered source size: ' + row.name);
@@ -103,12 +103,20 @@ test('only declared PNG files and the two public module files enter distribution
   assert.equal(admit('assets/openai/sprites/alien-covenant-v013/manifest.json', { built: false }), true);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v013/manifest.json', { built: true }), false);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v013/unknown.png', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v014/manifest.json', { built: false }), true);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v014/manifest.json', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v014/unknown.png', { built: true }), false);
   assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: false }), true);
   assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: true }), false);
   assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: false }), true);
   assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: true }), false);
   for (const path of ['docs/covenant/PROVENANCE_V013.json', 'docs/covenant/SPRITES_V013_STATUS.md',
-    'scripts/package-covenant-sprites-v013.py', 'scripts/qa-covenant-catalogue-v013.py']) {
+    'scripts/package-covenant-sprites-v013.py', 'scripts/qa-covenant-catalogue-v013.py',
+    'docs/covenant/PROVENANCE_V014.json', 'docs/covenant/SPRITES_V014_STATUS.md',
+    'docs/covenant/BIBLE_COVENANT_V014.md', 'docs/covenant/BIBLE_COVENANT_V014.json',
+    'docs/covenant/BIBLE_COVENANT_V014.html', 'docs/covenant/BIBLE_COVENANT_V014.xlsx',
+    'scripts/package-covenant-sprites-v014.py', 'scripts/qa-covenant-catalogue-v014.py',
+    'scripts/build-covenant-bible-v014.py', 'scripts/build-covenant-bible-v014.mjs']) {
     assert.equal(admit(path, { built: false }), true);
     assert.equal(admit(path, { built: true }), false);
   }
@@ -150,9 +158,11 @@ test('standalone build contains only the admitted page, runtime manifest and ori
   }
 });
 
-test('reviewed provenance is pinned to each exact source path and bytes, never admitted in dist', async () => {
+test('reviewed provenance and bible text are pinned to exact source paths and bytes, never admitted in dist', async () => {
   assert.equal(covenantSourceMetadataPathV011('docs/covenant/other.json'), false);
-  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012, COVENANT_PROVENANCE_V013]) {
+  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012, COVENANT_PROVENANCE_V013, COVENANT_PROVENANCE_V014,
+    'docs/covenant/BIBLE_COVENANT_V014.json', 'docs/covenant/BIBLE_COVENANT_V014.md', 'docs/covenant/BIBLE_COVENANT_V014.html',
+    'scripts/build-covenant-bible-v014.py']) {
     assert.equal(covenantSourceMetadataPathV011(path), true);
     assert.equal(admit(path, { built: true }), false, 'The path gate rejects metadata before text scanning');
     let bytes;
@@ -162,11 +172,13 @@ test('reviewed provenance is pinned to each exact source path and bytes, never a
       throw error;
     }
     assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true,
-      'Every present production manifest requires its final reviewed digest');
-    const changed = Buffer.from(bytes.toString('utf8').replace('"schemaVersion": 1', '"schemaVersion": 2'));
-    assert.notDeepEqual(changed, bytes, 'The mutation must change valid JSON content');
-    assert.doesNotThrow(() => JSON.parse(changed.toString('utf8')));
-    assert.equal(reviewedCovenantSourceMetadataV011(path, changed), false);
+      'Every present reviewed source requires its final digest');
+    if (path.endsWith('.json')) {
+      const changed = Buffer.from(bytes.toString('utf8').replace('"schemaVersion": 1', '"schemaVersion": 2'));
+      assert.notDeepEqual(changed, bytes, 'The mutation must change valid JSON content');
+      assert.doesNotThrow(() => JSON.parse(changed.toString('utf8')));
+      assert.equal(reviewedCovenantSourceMetadataV011(path, changed), false);
+    }
     assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from('\n')])),
       false, 'Even whitespace changes require a new review');
     assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
@@ -215,7 +227,7 @@ test('Covenant build helpers can be imported without recovered sources in a spar
 
 test('V013 preserves every V012 runtime binding and all 61 earlier original PNGs', async () => {
   const { manifest } = await covenantManifestV011(root);
-  const previous = manifest.assets.filter(row => !row.path.startsWith('/assets/openai/sprites/alien-covenant-v013/'));
+  const previous = manifest.assets.filter(row => /\/alien-covenant-v01[12]\//.test(row.path));
   assert.equal(previous.length, 39);
   // Captured from the frozen V012 runtime using JSON.stringify (Python's
   // serializer preserves integral floats differently and has a separate pin).
@@ -235,15 +247,15 @@ test('V013 preserves every V012 runtime binding and all 61 earlier original PNGs
   assert.equal(originals.size, 61);
 });
 
-test('four complete walk cycles follow every real player costume scope without including crawling or NPCs', async () => {
+test('four unchanged player walk cycles follow the real costume scopes without including crawling or NPCs', async () => {
   const { manifest, compiled } = await covenantManifestV011(root);
   const data = require('../modules/covenant/dlc/covenant/content.js');
   const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
-  assert.equal(manifest.release, '0.13.0');
-  assert.equal(compiled.entries.length, 63);
-  assert.deepEqual(compiled.cycles.map(row => row.key).sort(),
+  assert.equal(manifest.release, '0.14.0');
+  const playerCycles = compiled.cycles.filter(row => row.consumer !== 'npc');
+  assert.deepEqual(playerCycles.map(row => row.key).sort(),
     ['daniels', 'daniels-eva', 'daniels-work', 'david-young']);
-  for (const cycle of compiled.cycles) {
+  for (const cycle of playerCycles) {
     const expected = data.rooms.filter(room => !room.crawl && appearance({room, data, actorDefs: new Map()}, {}, 'daniels').id === cycle.key)
       .map(room => room.id).sort();
     assert.deepEqual(cycle.rooms.slice().sort(), expected, cycle.key);
@@ -259,9 +271,70 @@ test('four complete walk cycles follow every real player costume scope without i
       assert.equal(!!resolved, expected.includes(room.id), cycle.key + ' in ' + room.id);
     }
   }
-  assert.equal(compiled.cycles.reduce((sum, cycle) => sum + cycle.rooms.length, 0), 54);
+  assert.equal(playerCycles.reduce((sum, cycle) => sum + cycle.rooms.length, 0), 54);
   assert.deepEqual(compiled.cycles.find(row => row.key === 'david-young').rooms, ['whiteroom']);
   for (const room of data.rooms.filter(room => room.crawl)) {
     assert.equal(compiled.resolve('human', 'daniels', 'walk', room.id, .2), null);
+  }
+});
+
+test('V014 preserves every V013 binding, all four cycle definitions and all 85 earlier original PNGs', async () => {
+  const { manifest } = await covenantManifestV011(root);
+  const previous = manifest.assets.filter(row => /\/alien-covenant-v01[123]\//.test(row.path));
+  assert.equal(previous.length, 63);
+  assert.equal(digest(Buffer.from(JSON.stringify(previous))),
+    'decaecb86b188ab40f117eecd91906cabe6095791e7dc8129d467e200050578e');
+  const cycles = manifest.cycles.filter(row => row.key !== 'walter');
+  assert.equal(cycles.length, 4);
+  assert.equal(digest(Buffer.from(JSON.stringify(cycles))),
+    'd16982f1ab4858f97f86dc1a6377e689ae6d21dac5e26c7a4eb52c30338d972a');
+  const originals = new Set();
+  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012, COVENANT_PROVENANCE_V013]) {
+    const source = JSON.parse(await readFile(join(root, path), 'utf8'));
+    for (const row of source.assets) {
+      assert.equal(originals.has(row.path), false); originals.add(row.path);
+      const bytes = await readFile(join(root, row.path));
+      assert.equal(digest(bytes), row.sha256 || row.alphaQA?.sha256, 'Changed original PNG: ' + row.id);
+      assert.equal(bytes.length, row.bytes, 'Changed original size: ' + row.id);
+    }
+  }
+  assert.equal(originals.size, 85);
+});
+
+test('V014 extends rendering with only the actual unarmed cryo Walter and the landing sky', async () => {
+  const { compiled } = await covenantManifestV011(root);
+  const data = require('../modules/covenant/dlc/covenant/content.js');
+  const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
+  const actorDefs = new Map(data.actors.map(actor => [actor.id, actor]));
+  const npc = compiled.cycles.filter(cycle => cycle.consumer === 'npc');
+  assert.equal(compiled.entries.length, 72); assert.equal(compiled.cycles.length, 5);
+  assert.equal(npc.length, 1); assert.equal(npc[0].id, 'walter-walk');
+  assert.deepEqual(npc[0].rooms, ['cryo']); assert.deepEqual(npc[0].actors, ['walter-cryo']);
+  assert.equal(npc[0].frames.length, 8);
+  const scales = npc[0].frames.map(frame => frame.logicalHeight / (frame.alphaBounds[3] - frame.alphaBounds[1]));
+  for (const frame of npc[0].frames) {
+    assert.equal(frame.anchor[1], frame.alphaBounds[3]);
+    assert.ok(Math.abs(frame.logicalHeight / (frame.alphaBounds[3] - frame.alphaBounds[1]) - scales[0]) < 1e-10);
+  }
+  for (const actor of data.actors) {
+    const room = data.rooms.find(row => row.id === actor.room);
+    const profile = appearance({ data, room, actorDefs }, actor, actor.role);
+    const resolved = compiled.resolve('human', profile.id, 'walk', room.id, .1, actor.id);
+    assert.equal(!!resolved, actor.id === 'walter-cryo', actor.id);
+    if (resolved) {
+      assert.equal(profile.id, 'walter'); assert.equal(profile.gun, undefined);
+      assert.equal(actor.speed, 26);
+      assert.deepEqual(actor.route, [{ x: 450, z: .5 }, { x: 535, z: .5 }]);
+    }
+  }
+  const backgrounds = compiled.entries.filter(row => row.kind === 'background');
+  assert.equal(backgrounds.length, 1);
+  const background = backgrounds[0];
+  assert.equal(background.id, 'background-planet4-lake');
+  assert.equal(background.imagePolicy, 'opaque-background'); assert.equal(background.renderLayer, 'sky');
+  assert.equal(background.backgroundFit, 'cover-bottom');
+  assert.equal(background.logicalHeight, 555);
+  for (const room of data.rooms) {
+    assert.equal(!!compiled.resolve('background', 'landing', 'idle', room.id), room.id === 'landing');
   }
 });

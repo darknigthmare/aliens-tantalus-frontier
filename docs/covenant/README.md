@@ -1,4 +1,55 @@
-# Alien: Covenant — sprites V0.11
+# Alien: Covenant — bible et production V0.14
+
+## Suivi courant
+
+La [bible détaillée V0.14](BIBLE_COVENANT_V014.md) et son
+[inventaire structuré](BIBLE_COVENANT_V014.json) réunissent les manques en
+personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et
+planète. Les références et les consommateurs réels du moteur déterminent
+la portée de chaque entrée. Les archives non récupérées et les éléments
+encore sans comparaison visuelle restent signalés.
+
+La même bible est disponible en [lecture HTML](BIBLE_COVENANT_V014.html)
+et en [classeur Excel](BIBLE_COVENANT_V014.xlsx).
+
+La production V0.14 cumule **103 PNG originaux : 72 admis au rendu et
+31 au catalogue**, avec cinq cycles de huit phases. Le
+[manifeste V0.14](../../assets/openai/sprites/alien-covenant-v014/manifest.json)
+ajoute 18 images aux 85 originaux conservés. Le
+[suivi de cette passe](SPRITES_V014_STATUS.md) et sa
+[provenance](PROVENANCE_V014.json) précisent les sources et limites.
+
+Les nouveaux raccords de jeu sont la marche de Walter, limitée à sa
+présence `walter-cryo` dans `cryo` lorsque son déplacement est réellement
+observé, et le lac comme ciel distant de `landing`, avant les géométries
+natives. Les neuf autres images V0.14 restent au catalogue. La politique
+opaque concerne quatre images du monde ; les 99 autres PNG conservent
+un fond transparent.
+
+Le point de reprise publié est V0.13 : **85 PNG originaux, 63 admis au rendu,
+22 au catalogue et quatre cycles de marche jouables**. Le
+[suivi V0.13](SPRITES_V013_STATUS.md) et le
+[manifeste de ce lot](../../assets/openai/sprites/alien-covenant-v013/manifest.json)
+conservent les résultats et limites de cette version. Les 85 originaux
+restent immuables. Les images V0.14 disposent de leur propre provenance
+et de leur admission explicite ; leur présence dans la
+bible ne prouve pas un affichage en jeu.
+
+La [bible principale des campagnes](../narrative/CAMPAGNE_PRINCIPALE.md)
+renvoie à cette annexe. La consolidation parallèle de PR68 conserve son
+[index épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md)
+et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md).
+Leurs comptes datés gardent leur périmètre d’origine.
+
+La version source du moteur reste V0.10.0. Les règles, les collisions,
+les liaisons, les identités de scène et le format de sauvegarde sont
+conservés. Les rendus procéduraux restent disponibles pour les états
+sans images validées. La fidélité 1:1 demeure un objectif de comparaison,
+pas une certification déduite de la génération ou des tests.
+
+---
+
+## Historique conservé — passe sprites V0.11
 
 Cette passe poursuit le module Covenant récupéré depuis
 `ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip`. Les 22 fichiers d’origine représentent

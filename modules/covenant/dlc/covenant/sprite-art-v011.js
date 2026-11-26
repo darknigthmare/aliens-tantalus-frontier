@@ -1,4 +1,4 @@
-/* Supplied static poses, attack poses and an explicit eight-frame walk cycle.
+/* Supplied static poses, attack poses and explicitly admitted walk cycles.
  * All decisions read the existing engine; this renderer writes no game state.
  */
 (function (root) {
@@ -16,11 +16,38 @@
     constructor(canvas, engine) {
       super(canvas, engine);
       this.spriteRegistry = root.CovenantSpritesV011;
-      this.spriteDrawsV011 = { human: 0, creature: 0, weapon: 0, prop: 0 };
+      this.spriteDrawsV011 = { human: 0, creature: 0, weapon: 0, prop: 0, background: 0 };
       this.spriteFrameDrawsV012 = Object.create(null);
+      this.npcWalkObservationV014 = null;
     }
-    visual(kind, key, state = 'idle') {
-      return this.spriteRegistry?.sprite(kind, key, state, this.engine.room.id, this.engine.state.time || 0) || null;
+    visual(kind, key, state = 'idle', actorId = null) {
+      return this.spriteRegistry?.sprite(kind, key, state, this.engine.room.id,
+        this.engine.state.time || 0, actorId) || null;
+    }
+    observedNpcWalk(actor, profile, gun, role) {
+      const E = this.engine, time = E.state.time;
+      let previous = this.npcWalkObservationV014;
+      // The native phase is an intent set before collision handling. Only a
+      // consecutive observed displacement can admit the one supplied NPC cycle.
+      // These observations belong to this renderer, never to an actor or save.
+      if (previous && (previous.state !== E.state || previous.room !== E.room.id
+        || !Number.isFinite(time) || time < previous.time || time - previous.time > .1)) {
+        previous = null; this.npcWalkObservationV014 = null;
+      }
+      if (actor.id !== 'walter-cryo' || actor.room !== 'cryo' || E.room.id !== 'cryo'
+        || role !== 'walter' || profile.id !== 'walter' || gun || !Number.isFinite(time)
+        || !Number.isFinite(actor.x) || !Number.isFinite(actor.z) || (actor.y || 0) !== 0) {
+        if (actor.id === 'walter-cryo') this.npcWalkObservationV014 = null;
+        return false;
+      }
+      const sameActor = previous?.actor === actor;
+      if (sameActor && time === previous.time && actor.x === previous.x && actor.z === previous.z
+        && actor.phase === previous.phase) return previous.moving;
+      const moving = actor.phase === 'walk' && sameActor && time > previous.time
+        && Math.hypot(actor.x - previous.x, (actor.z - previous.z) * 510) > .01;
+      this.npcWalkObservationV014 = { state: E.state, room: E.room.id, actor, time,
+        x: actor.x, z: actor.z, phase: actor.phase, moving: !!moving };
+      return !!moving;
     }
     drawPose(sprite, height, anchor = null) {
       const { image, entry } = sprite, [left, top, right, bottom] = entry.alphaBounds;
@@ -28,6 +55,19 @@
       this.c.drawImage(image, left, top, right - left, bottom - top,
         (left - origin[0]) * scale, (top - origin[1]) * scale,
         (right - left) * scale, (bottom - top) * scale);
+    }
+    sky(data, night = false) {
+      const sprite = !night && this.engine.room.id === 'landing'
+        && this.visual('background', 'landing');
+      if (!sprite) return super.sky(data, night);
+      const { image, entry } = sprite, height = entry.logicalHeight;
+      const scale = Math.max(this.W / entry.width, height / entry.height);
+      const width = entry.width * scale, drawnHeight = entry.height * scale;
+      // Replace only the distant sky pass. Native trees, shore, floor, doors
+      // and independent props still draw afterwards, with their own geometry.
+      this.c.save(); this.c.beginPath(); this.c.rect(0, 0, this.W, height); this.c.clip();
+      this.c.drawImage(image, (this.W - width) / 2, height - drawnHeight, width, drawnHeight);
+      this.c.restore(); this.spriteDrawsV011.background++;
     }
     human(actor, role = 'daniels', moving = false) {
       const E = this.engine, player = role === 'daniels' && !actor.id;
@@ -38,12 +78,15 @@
         || E.rotating || E.detector || E.reloadTime > 0 || E.shoveCooldown > 1.08
         || E.motion?.crouch || E.dead || (actor.y || 0) !== 0);
       const gun = player ? (E.state.weapon && !E.room.safePresentation ? E.currentWeapon().id : null) : profile.gun;
+      const npcMoving = this.observedNpcWalk(actor, profile, gun, role);
       const state = walking ? (player && E.motion?.run ? 'run' : 'walk') : gun ? 'armed' : 'idle';
-      const sprite = !special && this.visual('human', profile.id, state);
+      const sprite = !special && this.visual('human', profile.id, state, actor.id || null);
       // Free hands in the neutral source do not imply a validated armed pose.
       if (!sprite || gun && !sprite.entry.heldGrip) return super.human(actor, role, moving);
-      // The supplied cycle is ordinary unarmed player walking, not input intent.
-      if (sprite.cycle && (!player || !E.motion?.moving || E.motion?.run || gun))
+      // Player cycles retain their native moved flag. The NPC cycle additionally
+      // requires its exact actor/room/profile and an observed simulation step.
+      if (sprite.cycle && (player ? !E.motion?.moving || E.motion?.run || gun
+        : sprite.consumer !== 'npc' || !npcMoving || gun))
         return super.human(actor, role, moving);
       // Mirroring would move Walter's left-hand injury to the wrong anatomical side.
       if (profile.id === 'walter-injured' && (actor.facing || 1) !== sprite.entry.sourceFacing)
