@@ -1,0 +1,1397 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.16-catalogue-recovery",
+  "date": "2026-11-26",
+  "parentCommit": "806a9c387477b5d972846df92016ac3537b3f402",
+  "status": "source-catalogue-continuation-after-executor-disconnection",
+  "fidelityPolicy": "Original generated PNGs preserved; film, official promotion, production concepts and game adaptation are distinguished. No image is certified 1:1.",
+  "assets": [
+    {
+      "id": "prop-generator-cover-left-concept",
+      "title": "Capot de générateur — concept gauche, rails jaunes",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v016/prop-generator-cover-left-concept.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1911212,
+      "sha256": "186d18dc15b3ca9dfa0bbd275a53632258f4f392fca459d406e972690adea77d",
+      "gitBlobSha": "9d76c1bd6b479fd7f21ccb2616e2c2c946ed5e32",
+      "bibleRecordIds": [
+        "prop-terraforming-generator-cover-concept"
+      ],
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        {
+          "url": "https://m1.22slides.com/tonydrew/boxcovers-2115662.jpg?f=webp&w=954&s=1b651430b27060c54b8861aa92f6d305",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew — Alien: Covenant production design"
+        }
+      ],
+      "scope": "production-design-concept",
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: stylized-concept. Asset type: ONE isolated transparent prop sprite for Alien: Covenant, reproducing a documented production concept for the game bible. Use the reference image as the only shape evidence. Reproduce ONLY the LEFT generator-cover unit from Tony Drew's Terraforming Bay Generator Covers concept sheet, in exactly its pictured three-quarter camera: the tall grey upper structural braces, pale grey box, large red front panel labelled UNIT No and 03, yellow horizontal guard rails attached to the box, black/yellow hazard band, dark perforated lower grille, and narrow plinth. Preserve the silhouette, proportions, panel geometry, restrained production colours, all shown structural members and readable 03. Do NOT combine it with the right-hand unit. Remove both human silhouettes, the independent yellow bollards, the white page, floor and every cast shadow. ONE assembly, no extra components, no alternate views, no scene, no border. Clean physically plausible high-detail raster game prop, not a line diagram. Completely transparent RGBA background including every canvas edge; solid object interiors and clean antialiased silhouette. Show the entire object with comfortable clear padding on all sides. No invented rear machinery or film certification. All text confined to markings already visible on this unit.",
+      "selectedEditPrompt": "Use case: background-extraction. Edit exactly this existing isolated generator prop. Change ONLY alpha/background, preserving the entire object's shape, perspective, proportions, geometry, all markings and surface colours. Remove ALL surrounding grey haze and yellow glow, all floor shadows and all background pixels. Outside the true physical object silhouette the alpha must be exactly 0, including open gaps between upper support bars and the spaces around guard rails; the actual object remains solid opaque, with only a very narrow antialias edge. No grey/black rectangle, no gradient, no halo, no spotlight, no new objects. Keep full silhouette and existing padding. Output a clean transparent RGBA PNG cutout. Preserve all object pixels and dimensions as closely as possible.",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "isolated-static"
+      ],
+      "imagePolicy": "transparent-sprite",
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          141,
+          68,
+          881,
+          1501
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "pass": true
+      },
+      "recoveryValidation": {
+        "sha256RecomputedInMemory": true,
+        "gitBlobShaMatchesMeasuredOriginal": true
+      },
+      "limitations": [
+        "Conception de production : détails exacts de la version filmée non certifiés.",
+        "Aucune dimension physique certifiée ; aucun nouveau consommateur runtime publié.",
+        "Deux concepts distincts sans fusion ; petits marquages interprétés."
+      ]
+    },
+    {
+      "id": "prop-generator-cover-right-concept",
+      "title": "Capot de générateur — concept droit, panneaux zébrés",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v016/prop-generator-cover-right-concept.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1869909,
+      "sha256": "1a5613f53301d5032eb29caf583201bdb43bec00198b10efbb3c3f39e9afbb7e",
+      "gitBlobSha": "b3e046af0825f837883b6395de6b701b0549897e",
+      "bibleRecordIds": [
+        "prop-terraforming-generator-cover-concept"
+      ],
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        {
+          "url": "https://m1.22slides.com/tonydrew/boxcovers-2115662.jpg?f=webp&w=954&s=1b651430b27060c54b8861aa92f6d305",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew — Alien: Covenant production design"
+        }
+      ],
+      "scope": "production-design-concept",
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: stylized-concept. Asset type: ONE isolated transparent prop sprite for Alien: Covenant, reproducing a documented production concept for the game bible. Use the reference image as the only shape evidence. Reproduce ONLY the RIGHT generator-cover unit from Tony Drew's Terraforming Bay Generator Covers concept sheet, in exactly its pictured three-quarter camera: grey rectangular box, tall open structural frame above, broad pale-grey front flange with black/yellow diagonal striped vertical side edges, recessed darker-grey shaped central service panel, small red/white striped recess at top and bottom, tiny white diagram decals and white 03 low on front, black vented side housing. Preserve exact visible silhouette, proportions and details. No rails from the left version, no red square from left version, no mixing variants. Remove both human silhouettes, independent yellow bollards, the white page, floor and every cast shadow. ONE assembly, no extra components, no alternate views, no scene, no border. Clean physically plausible high-detail raster game prop, not a line diagram. Completely transparent RGBA background including every canvas edge; solid object interiors and clean antialiased silhouette. Show the entire object with comfortable clear padding on all sides. No invented rear machinery or film certification. All text confined to markings already visible on this unit.",
+      "selectedEditPrompt": "Use case: background-extraction. Edit exactly this existing isolated generator prop. Change ONLY alpha/background, preserving the entire object's shape, perspective, proportions, geometry, all markings and surface colours. Remove ALL surrounding grey haze and yellow glow, all floor shadows and all background pixels. Outside the true physical object silhouette the alpha must be exactly 0, including open gaps between upper support bars and the spaces around guard rails; the actual object remains solid opaque, with only a very narrow antialias edge. No grey/black rectangle, no gradient, no halo, no spotlight, no new objects. Keep full silhouette and existing padding. Output a clean transparent RGBA PNG cutout. Preserve all object pixels and dimensions as closely as possible.",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "isolated-static"
+      ],
+      "imagePolicy": "transparent-sprite",
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          157,
+          33,
+          869,
+          1475
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "pass": true
+      },
+      "recoveryValidation": {
+        "sha256RecomputedInMemory": true,
+        "gitBlobShaMatchesMeasuredOriginal": true
+      },
+      "limitations": [
+        "Conception de production : détails exacts de la version filmée non certifiés.",
+        "Aucune dimension physique certifiée ; aucun nouveau consommateur runtime publié.",
+        "Deux concepts distincts sans fusion ; petits marquages interprétés."
+      ]
+    },
+    {
+      "id": "prop-terraforming-capstan-final",
+      "title": "Cabestan de la baie de terraformation — conception finale",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v016/prop-terraforming-capstan-final.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1785070,
+      "sha256": "6c9adcf7bdd6f5737df40cb84dac1cf0919bba70491c32c526bea318b5041d72",
+      "gitBlobSha": "2d1149b01c112bfb6dcff6bcc2dabc09d5ddecfe",
+      "bibleRecordIds": [
+        "prop-terraforming-capstan-final"
+      ],
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        {
+          "url": "https://m1.22slides.com/tonydrew/img2winch-2115661.jpg?f=webp&w=954&s=2839b5d6da8f38d3ecc52261921a5549",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew — Alien: Covenant production design"
+        }
+      ],
+      "scope": "production-design",
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: production-reference sprite extraction. From the attached Alien: Covenant production design by Tony Drew, generate exactly ONE isolated cargo-bay CAPSTAN assembly corresponding to the large UPPER reference view only. Reproduce its visible structure closely: two pale warm-grey triangular arched metal support cheeks, their row of small deep circular recesses along the slanted base, dark central chain wheel and shaft, mustard-yellow top edges, vertical black-and-yellow hazard panels on the inner forward edges. Preserve the source three-quarter viewing angle and proportions. Include only the short chain segment crossing the top sprocket and hanging close to the assembly; no long cable extending outside the canvas, no independent floor console from the lower panel, no human silhouettes. Retain the construction-detail style and subdued lighting of the reference, clean readable edges suitable for a 2.5D game. This is a final production design-derived catalogue prop, not a claim of an exact filmed view. No invented extra compartments, labels, logos, weapons, scenery, title, multiple views, grid or border. Whole selected assembly contained with generous transparent padding. The exterior background and every opening must have true alpha zero, no floor, shadow, grey haze or glow. Output one PNG.",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "isolated-static"
+      ],
+      "imagePolicy": "transparent-sprite",
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          273,
+          47,
+          1317,
+          1022
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "pass": true
+      },
+      "recoveryValidation": {
+        "sha256RecomputedInMemory": true,
+        "gitBlobShaMatchesMeasuredOriginal": true
+      },
+      "limitations": [
+        "Conception de production : détails exacts de la version filmée non certifiés.",
+        "Aucune dimension physique certifiée ; aucun nouveau consommateur runtime publié.",
+        "Chaîne raccourcie pour isoler le sujet ; marge inférieure étroite de 2 pixels au seuil alpha32."
+      ]
+    },
+    {
+      "id": "prop-covenant-exterior-mast",
+      "title": "Mât extérieur du USCSS Covenant — composant",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v016/prop-covenant-exterior-mast.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1725997,
+      "sha256": "6d00b36af110c4ed13b8d7d2df7c7492dffc4be4a893ef977dd5fac70030a480",
+      "gitBlobSha": "7df5d0b097b514f8720c761248222400faa41afd",
+      "bibleRecordIds": [
+        "prop-covenant-exterior-mast",
+        "VEH-COVENANT"
+      ],
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        {
+          "url": "https://m1.22slides.com/tonydrew/mast-2116291.jpg?f=webp&w=376&s=678f7dc61a9813447204acacbf1b8509",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew — Alien: Covenant production design"
+        }
+      ],
+      "scope": "production-design",
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: production-reference sprite extraction. Create exactly ONE isolated Alien: Covenant USCSS Covenant exterior mast module from the attached Tony Drew production reference. Match this exact three-quarter elevated perspective and the complete visible silhouette: tall pale-grey rectangular equipment body with rounded corners, the large open cylindrical tube at the nearer upper left, the round turbine-like capped housing at the rear upper left, the inset stepped horizontal louvres, the rectangular raised equipment boxes on the broad side, small dark vents and slender vertical antenna rods. Preserve the relative placement, scale, direction, panel divisions and subdued warm grey material. This is a single exterior ship component, NOT the complete ship. No additional machinery or guessed reverse view, no labels, no people, no background, no perspective change, no painted ground shadow, no title or comparison sheet. Keep the entire mast and antenna tips in canvas with transparent margin. True transparent RGBA background, alpha zero everywhere outside the object and in clear gaps. One production-reference-derived PNG catalogue asset.",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "isolated-static"
+      ],
+      "imagePolicy": "transparent-sprite",
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          101,
+          85,
+          968,
+          1327
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "pass": true
+      },
+      "recoveryValidation": {
+        "sha256RecomputedInMemory": true,
+        "gitBlobShaMatchesMeasuredOriginal": true
+      },
+      "limitations": [
+        "Conception de production : détails exacts de la version filmée non certifiés.",
+        "Aucune dimension physique certifiée ; aucun nouveau consommateur runtime publié.",
+        "Vue de référence basse définition, fins panneaux et conduits interprétés."
+      ]
+    },
+    {
+      "id": "prop-engineer-cryopod-reference",
+      "title": "Cryopod des Ingénieurs — modèle de production",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v016/prop-engineer-cryopod-reference.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 744377,
+      "sha256": "2b0200d754f3e33894935bea186f096be7edfcaf2f92dfdacf4dd23e5ca2e4a7",
+      "gitBlobSha": "a0d8f1b11066013d1b225b6c0a845351fddbe05e",
+      "bibleRecordIds": [
+        "prop-engineer-cryopod-reference",
+        "ACOV-177",
+        "VEH-JUGGERNAUT"
+      ],
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        {
+          "url": "https://m1.22slides.com/tonydrew/sideiso1-2115658.jpg?f=webp&w=1200&s=3b7daa08b30a9a4d44365d497b763ade",
+          "source": "https://www.tonydrew.com.au/film",
+          "credit": "Tony Drew — Alien: Covenant production design"
+        }
+      ],
+      "scope": "production-design",
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: production-reference sprite extraction. Generate exactly ONE isolated empty Engineer cryopod exterior from the attached Tony Drew Alien: Covenant / reused Prometheus production model reference. Preserve the exact shown horizontal three-quarter side angle, low elongated silhouette, long ribbed lid with paired slender cross bars, darker biomechanical grey shell, shallow linear reliefs, the rounded elevated right end with closely stacked curved piping and the single visible cylindrical support leg underneath the right end. Reproduce only clearly visible surfaces; do not add an occupant, open lid, liquids, damage, creatures, weapons, labels or new ornamental details. Keep the restrained monochrome graphite-grey material of this production model; no invented film colour scheme. This is a production-reference catalogue prop, with its inherited film reuse recorded separately. Isolate the complete pictured structure on a true transparent RGBA background, including under the low base and around the leg. Whole object with generous padding. No ground, cast shadow, smoke, haze, scene, grid, border, annotations or multiple objects. One PNG.",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "isolated-static"
+      ],
+      "imagePolicy": "transparent-sprite",
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          99,
+          223,
+          1690,
+          777
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "pass": true
+      },
+      "recoveryValidation": {
+        "sha256RecomputedInMemory": true,
+        "gitBlobShaMatchesMeasuredOriginal": true
+      },
+      "limitations": [
+        "Conception de production : détails exacts de la version filmée non certifiés.",
+        "Aucune dimension physique certifiée ; aucun nouveau consommateur runtime publié.",
+        "Modèle de décor réutilisé de Prometheus dans Covenant, matière monochrome de la référence conservée ; aucune capsule humaine ni occupant."
+      ]
+    },
+    {
+      "id": "world-juggernaut-broken-stump",
+      "path": "assets/openai/sprites/alien-covenant-v016/world-juggernaut-broken-stump.png",
+      "category": "terrain",
+      "bibleRecordIds": [
+        "TERR-WRECK"
+      ],
+      "width": 1145,
+      "height": 1374,
+      "bytes": 1301641,
+      "sha256": "f1d498121f0df0c6f3812be6ebbd1b1410ab24d1372cf756fdf4bf8a20b64474",
+      "gitBlobSha": "fbf74a8117ffa0907f827aca713f1a4323e44eb4",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "terrain",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "title": "Souche brisée de la forêt du Juggernaut",
+      "sourceIds": [
+        "SRC-MPC-FXGUIDE"
+      ],
+      "sourceReferenceIds": [
+        "SRC-MPC"
+      ],
+      "referenceLocalNames": [
+        "mpc-juggernaut-crash-marketing.jpg"
+      ],
+      "scope": "film-environment-reference; isolated-game-reconstruction",
+      "limitations": [
+        "Isolated stump reconstructed from the visible crashed-ship forest environment; no measured individual prop match.",
+        "Silhouette and hidden surfaces remain interpretive.",
+        "No existing stump instance in the current Juggernaut room was confidently matched."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": "Use case: stylized-concept. Asset type: one isolated high-detail painted 2D game terrain sprite for Aliens: Tantalus Frontier, Alien: Covenant. Supporting image is an actual production still of the crashed Juggernaut. Extract and reconstruct ONLY ONE broken dark tree stump from the lower foreground of this supplied scene. Preserve the film's cold muted gray-brown bark, torn pointed top, coarse vertical bark grooves, damp texture and small exposed root flare. Show the entire single stump, straight side elevation at ground level for a side-scrolling game; approximately a little taller than wide, no exaggerated fantasy shape. UHD-quality naturalistic painted detail, crisp game-readable silhouette, restrained diffuse overcast light, not a stylized cartoon or vector. Transparent background with true alpha, transparent gaps between roots; object fully inside the canvas with safe padding. No ship, no characters, no bodies, no scenery, no ground horizon, no shadow disc, no text, no watermark, no sprite sheet. One subject in one image. The surrounding source landscape is reference only, not to be reproduced.",
+      "exactGenerationPromptRecoveryStatus": "recovered-from-prior-root-tool-output",
+      "exactPromptNote": "The exact prompt was printed from the original detailed report before the environment disconnected.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg"
+      ],
+      "sourcePages": [
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-MPC-FXGUIDE",
+          "type": "specialist-publication-with-primary-vfx-interview",
+          "title": "Alien: Covenant — by land and air",
+          "pageUrl": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+          "imageUrl": "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg",
+          "attribution": "MPC marketing still reproduced by fxguide; crashed Juggernaut forest reference",
+          "referenceStatus": "Image visually inspected before disconnection."
+        }
+      ],
+      "generationPrompt": "Use case: stylized-concept. Asset type: one isolated high-detail painted 2D game terrain sprite for Aliens: Tantalus Frontier, Alien: Covenant. Supporting image is an actual production still of the crashed Juggernaut. Extract and reconstruct ONLY ONE broken dark tree stump from the lower foreground of this supplied scene. Preserve the film's cold muted gray-brown bark, torn pointed top, coarse vertical bark grooves, damp texture and small exposed root flare. Show the entire single stump, straight side elevation at ground level for a side-scrolling game; approximately a little taller than wide, no exaggerated fantasy shape. UHD-quality naturalistic painted detail, crisp game-readable silhouette, restrained diffuse overcast light, not a stylized cartoon or vector. Transparent background with true alpha, transparent gaps between roots; object fully inside the canvas with safe padding. No ship, no characters, no bodies, no scenery, no ground horizon, no shadow disc, no text, no watermark, no sprite sheet. One subject in one image. The surrounding source landscape is reference only, not to be reproduced."
+    },
+    {
+      "id": "world-juggernaut-rock-ledge",
+      "path": "assets/openai/sprites/alien-covenant-v016/world-juggernaut-rock-ledge.png",
+      "category": "terrain",
+      "bibleRecordIds": [
+        "TERR-WRECK"
+      ],
+      "width": 2172,
+      "height": 724,
+      "bytes": 1226596,
+      "sha256": "454a707eaef722107b5c6711927f7c78f27b105ad4309398ac956724b7e07dfa",
+      "gitBlobSha": "40065a6aeae99066bf75f592e6bcab6504d4aad1",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "terrain",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "title": "Affleurement rocheux du site du Juggernaut",
+      "sourceIds": [
+        "SRC-MPC-FXGUIDE"
+      ],
+      "sourceReferenceIds": [
+        "SRC-MPC"
+      ],
+      "referenceLocalNames": [
+        "mpc-juggernaut-crash-marketing.jpg"
+      ],
+      "scope": "film-environment-reference; isolated-game-reconstruction",
+      "limitations": [
+        "Exterior natural-rock material reference; isolated ledge geometry is a game reconstruction.",
+        "No dimensions or metric 1:1 identity are established.",
+        "The existing interior rubble instance juggernaut-detail-3 was not admitted as an equivalent natural rock."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": "Use case: stylized-concept. Asset type: one isolated high-detail 2D game terrain sprite for Aliens: Tantalus Frontier, Alien: Covenant. Supporting production still shows the crashed Juggernaut forest. Reconstruct ONLY ONE low elongated weathered rock ledge based on the rough layered rock shelf in the lower-right foreground beneath the ship. Preserve cool charcoal-gray sediment-like layering, irregular fractured strata, damp rough stone, very sparse dark desaturated green moss, and a mostly walkable broken horizontal upper edge. Side elevation with a very slight view onto top, matching a 2D side-scrolling level; about 3 times wider than high, one connected ledge, realistic organic silhouette. High-resolution naturalistic hand-painted game art, no chunky cartoon outlines, no artificial bevels. True transparent background, isolated fully within canvas with generous border. No ship, tree, figure, body, sky, mountain, scenic background, floor plane, pedestal, text or collage. One terrain object per image. The camera and exact rock outline are a gameplay adaptation while materials follow the reference.",
+      "exactGenerationPromptRecoveryStatus": "recovered-from-prior-root-tool-output",
+      "exactPromptNote": "The exact prompt was printed from the original detailed report before the environment disconnected.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg"
+      ],
+      "sourcePages": [
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-MPC-FXGUIDE",
+          "type": "specialist-publication-with-primary-vfx-interview",
+          "title": "Alien: Covenant — by land and air",
+          "pageUrl": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+          "imageUrl": "https://www.fxguide.com/wp-content/uploads/2017/05/O_071_drd_0067_Marketing_Stills_v1.1193.jpg",
+          "attribution": "MPC marketing still reproduced by fxguide; crashed Juggernaut forest reference",
+          "referenceStatus": "Image visually inspected before disconnection."
+        }
+      ],
+      "generationPrompt": "Use case: stylized-concept. Asset type: one isolated high-detail 2D game terrain sprite for Aliens: Tantalus Frontier, Alien: Covenant. Supporting production still shows the crashed Juggernaut forest. Reconstruct ONLY ONE low elongated weathered rock ledge based on the rough layered rock shelf in the lower-right foreground beneath the ship. Preserve cool charcoal-gray sediment-like layering, irregular fractured strata, damp rough stone, very sparse dark desaturated green moss, and a mostly walkable broken horizontal upper edge. Side elevation with a very slight view onto top, matching a 2D side-scrolling level; about 3 times wider than high, one connected ledge, realistic organic silhouette. High-resolution naturalistic hand-painted game art, no chunky cartoon outlines, no artificial bevels. True transparent background, isolated fully within canvas with generous border. No ship, tree, figure, body, sky, mountain, scenic background, floor plane, pedestal, text or collage. One terrain object per image. The camera and exact rock outline are a gameplay adaptation while materials follow the reference."
+    },
+    {
+      "id": "world-planet4-shore-rock",
+      "path": "assets/openai/sprites/alien-covenant-v016/world-planet4-shore-rock.png",
+      "category": "terrain",
+      "bibleRecordIds": [
+        "TERR-LAKE"
+      ],
+      "width": 1774,
+      "height": 887,
+      "bytes": 2136154,
+      "sha256": "644ec53216086a3fc2d977c2fa2506dca24779490955c7d17e5e7834e9947eff",
+      "gitBlobSha": "6437b3336c15468e78b312716b9280cefb0eddad",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "terrain",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "bibleOccurrenceIds": [
+        "landing-light2"
+      ],
+      "title": "Roche de berge de Planet 4",
+      "sourceIds": [
+        "SRC-SCREENSHOT-1354",
+        "SRC-AUDI-2302"
+      ],
+      "sourceReferenceIds": [
+        "SRC-LEVI"
+      ],
+      "referenceLocalNames": [
+        "levi-landing-return-1354.jpg",
+        "audi-fr-rover-2302.webp"
+      ],
+      "scope": "film-environment-reference with official-promotion material support; isolated-game-reconstruction",
+      "limitations": [
+        "A separate rock derived from shoreline context and supplementary stone material references; no exact film rock identity certified.",
+        "The candidate existing instance landing-light2 was identified before disconnection, but its runtime integration is not part of this recovery delivery.",
+        "Preserve original PNG aspect and alpha if a future verified integration is performed."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": null,
+      "exactGenerationPromptRecoveryStatus": "not-recovered",
+      "exactPromptNote": "The exact prompt was recorded in local prompt JSON/report files before the environment disconnected. It was not retained in the recovered image result object, whose only key is image_url. No prompt has been reconstructed or invented.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384430822-PKL9FJA4KKKR1ZCD7MQ3/Alient_Covenant_2017_Screenshot_1354.jpg",
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/dd8b6859424492cd4a4e77b458490ced-2000x1333.jpg"
+      ],
+      "sourcePages": [
+        "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384430822-PKL9FJA4KKKR1ZCD7MQ3/Alient_Covenant_2017_Screenshot_1354.jpg",
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/dd8b6859424492cd4a4e77b458490ced-2000x1333.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-SCREENSHOT-1354",
+          "type": "film-screenshot-hosted-in-production-reference-gallery",
+          "title": "Alien: Covenant screenshot 1354 — landing shoreline through lander window",
+          "imageUrl": "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384430822-PKL9FJA4KKKR1ZCD7MQ3/Alient_Covenant_2017_Screenshot_1354.jpg",
+          "attribution": "Alien: Covenant film screenshot; gallery attribution and page URL not recovered in this receipt.",
+          "referenceStatus": "Image visually inspected before disconnection; not treated as a measured plan."
+        },
+        {
+          "id": "SRC-AUDI-2302",
+          "type": "official-promotion-material-reference",
+          "title": "Audi lunar quattro outdoors — gravel and stone material reference",
+          "pageUrl": "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+          "imageUrl": "https://media.audifrance.fr/wp-content/uploads/2019/11/dd8b6859424492cd4a4e77b458490ced-2000x1333.jpg",
+          "attribution": "Audi France official media",
+          "referenceStatus": "Visually inspected; supplementary stone/material evidence only, not proof of an exact Planet 4 rock silhouette."
+        }
+      ]
+    },
+    {
+      "id": "world-planet4-scorched-grass",
+      "path": "assets/openai/sprites/alien-covenant-v016/world-planet4-scorched-grass.png",
+      "category": "terrain",
+      "bibleRecordIds": [
+        "TERR-BURN"
+      ],
+      "width": 1774,
+      "height": 887,
+      "bytes": 1784927,
+      "sha256": "78b0ce71f25224822308e868a8159416a8d6b4a2186b2a2200582c9f2f52784c",
+      "gitBlobSha": "5c0ecee42cbf63b5cfd79a13f266c5e1fd072861",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "terrain",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "title": "Herbe brûlée du site de Lander One",
+      "sourceIds": [
+        "SRC-SCREENSHOT-1578"
+      ],
+      "sourceReferenceIds": [
+        "SRC-LEVI"
+      ],
+      "referenceLocalNames": [
+        "levi-deadforest-1578.jpg"
+      ],
+      "scope": "film-environment-reference; isolated-game-reconstruction",
+      "limitations": [
+        "The reference depicts the destroyed lander site, despite its inherited deadforest filename.",
+        "Individual blades and isolated patch arrangement are reconstructed, not copied from a measured terrain tile.",
+        "No suitable existing grass instance was found in room burning; keep in catalogue."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": null,
+      "exactGenerationPromptRecoveryStatus": "not-recovered",
+      "exactPromptNote": "The exact prompt was recorded in local prompt JSON/report files before the environment disconnected. It was not retained in the recovered image result object, whose only key is image_url. No prompt has been reconstructed or invented.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384782705-BOYIVE493XBCARXZ6XME/Alient_Covenant_2017_Screenshot_1578.jpg"
+      ],
+      "sourcePages": [
+        "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384782705-BOYIVE493XBCARXZ6XME/Alient_Covenant_2017_Screenshot_1578.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-SCREENSHOT-1578",
+          "type": "film-screenshot-hosted-in-production-reference-gallery",
+          "title": "Alien: Covenant screenshot 1578 — destroyed lander and burning terrain",
+          "imageUrl": "https://images.squarespace-cdn.com/content/v1/55a4cb4be4b093eb2b501698/1541384782705-BOYIVE493XBCARXZ6XME/Alient_Covenant_2017_Screenshot_1578.jpg",
+          "attribution": "Alien: Covenant film screenshot; gallery attribution and page URL not recovered in this receipt.",
+          "referenceStatus": "Image visually inspected before disconnection. Local filename levi-deadforest-1578.jpg was misleading: the image depicts the destroyed lander site, not the Juggernaut forest."
+        }
+      ]
+    },
+    {
+      "id": "vehicle-audi-lunar-quattro-front",
+      "path": "assets/openai/sprites/alien-covenant-v016/vehicle-audi-lunar-quattro-front.png",
+      "category": "vehicle",
+      "bibleRecordIds": [
+        "VEH-AUDI"
+      ],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2086696,
+      "sha256": "295b513dbf9caf23884ca05b5ad0df63b3ba8c4990e1dff06413eb2938959f05",
+      "gitBlobSha": "a6717c0224a76b0710810f33acfb839460da78f8",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "vehicle",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "title": "Audi lunar quattro — vue avant de référence",
+      "sourceIds": [
+        "SRC-AUDI-1209"
+      ],
+      "sourceReferenceIds": [
+        "ACOV-124"
+      ],
+      "referenceLocalNames": [
+        "audi-fr-rover-1209-full.jpg"
+      ],
+      "scope": "official-promotion; isolated-vehicle-reconstruction",
+      "limitations": [
+        "Near-front promotional view; not a profile or full multi-angle model.",
+        "Small mechanical detail and hidden faces remain interpreted.",
+        "No runtime vehicle behavior, animation, physical dimensions or film-frame 1:1 certification."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": null,
+      "exactGenerationPromptRecoveryStatus": "not-recovered",
+      "exactPromptNote": "The exact prompt was recorded in local prompt JSON/report files before the environment disconnected. It was not retained in the recovered image result object, whose only key is image_url. No prompt has been reconstructed or invented.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/28047f21167ba7665461d4bb5e85a695-2000x1333.jpg"
+      ],
+      "sourcePages": [
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/28047f21167ba7665461d4bb5e85a695-2000x1333.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-AUDI-1209",
+          "type": "official-promotion",
+          "title": "Audi lunar quattro — daylight near-front view",
+          "pageUrl": "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+          "imageUrl": "https://media.audifrance.fr/wp-content/uploads/2019/11/28047f21167ba7665461d4bb5e85a695-2000x1333.jpg",
+          "attribution": "Audi France official media",
+          "referenceStatus": "Official promotional image visually inspected before generation; promotion is distinguished from the film's final edit."
+        }
+      ]
+    },
+    {
+      "id": "vehicle-audi-lunar-quattro-patrol",
+      "path": "assets/openai/sprites/alien-covenant-v016/vehicle-audi-lunar-quattro-patrol.png",
+      "category": "vehicle",
+      "bibleRecordIds": [
+        "VEH-AUDI"
+      ],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1752437,
+      "sha256": "75311dc0019ccf8adbb02245f4a179cb25f691dd5f5a55f58cbe93b08c3cb1da",
+      "gitBlobSha": "b948daeb27594abce2916b4356487fbfe3ddcd56",
+      "originalGeneratedBytesPreserved": true,
+      "sha256ReverifiedInMemory": true,
+      "verified1to1": false,
+      "runtimeAdmission": "catalogue-only",
+      "kind": "vehicle",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "imagePolicy": "transparent-sprite",
+      "title": "Audi lunar quattro — vue avant éclairée",
+      "sourceIds": [
+        "SRC-AUDI-691"
+      ],
+      "sourceReferenceIds": [
+        "ACOV-124"
+      ],
+      "referenceLocalNames": [
+        "audi-fr-rover-691-full.jpg"
+      ],
+      "scope": "official-promotion; isolated-vehicle-reconstruction",
+      "limitations": [
+        "Illuminated near-front promotional variant; not an additional profile.",
+        "Preserved front-view visual intent; wheel and mechanism detail is not measurement-certified.",
+        "No runtime vehicle behavior or animation included."
+      ],
+      "generationTool": "image_gen.imagegen",
+      "exactGenerationPrompt": null,
+      "exactGenerationPromptRecoveryStatus": "not-recovered",
+      "exactPromptNote": "The exact prompt was recorded in local prompt JSON/report files before the environment disconnected. It was not retained in the recovered image result object, whose only key is image_url. No prompt has been reconstructed or invented.",
+      "alphaStatus": "checked-before-disconnection",
+      "alphaCheckSummary": {
+        "rgba": true,
+        "transparentBackground": true,
+        "edgeAlphaAtOrAbove16": 0,
+        "recheckedAfterDisconnection": false,
+        "qaCompositeViewedBeforeDisconnection": true
+      },
+      "verified": false,
+      "animationsVerified": false,
+      "runtime": false,
+      "sourceUrls": [
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/b4d7822793904c5d068d59f239bcc50a.jpg"
+      ],
+      "sourcePages": [
+        "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+        "https://media.audifrance.fr/wp-content/uploads/2019/11/b4d7822793904c5d068d59f239bcc50a.jpg"
+      ],
+      "inputReferences": [
+        {
+          "id": "SRC-AUDI-691",
+          "type": "official-promotion",
+          "title": "Audi lunar quattro — illuminated near-front patrol view",
+          "pageUrl": "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/",
+          "imageUrl": "https://media.audifrance.fr/wp-content/uploads/2019/11/b4d7822793904c5d068d59f239bcc50a.jpg",
+          "attribution": "Audi France official media",
+          "referenceStatus": "Official promotional image visually inspected before generation; no unsupported profile was generated."
+        }
+      ]
+    },
+    {
+      "id": "david-walk-01",
+      "title": "David hôte — pose contact-near",
+      "category": "character-animation",
+      "kind": "human",
+      "path": "assets/openai/sprites/alien-covenant-v016/david-walk-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1849202,
+      "sha256": "5dc8ead7086d18feb87efeb3710bb4bf4cec84075d9ce9ce378b619c62007df8",
+      "gitBlobSha": "65c489d2695b20c11838dc2a5494a29b6a66b0d4",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE transparent full-body animation sprite for the Alien: Covenant (2017) game DLC. Edit the supplied established sprite of DAVID, Michael Fassbender, long-haired Planet 4 host, into one phase of a restrained walking cycle. Preserve his exact mature angular clean-shaven face, shoulder-length dirty-blond damp lank hair, lean adult proportions, coarse thick weathered charcoal-olive hooded cloak with hood down, heavy woven folds reaching lower calves/ankles, sparse visible dark blue-grey flight-suit neckline/sleeves/trousers, both BARE feet, and both intact empty ungloved hands. No footwear or added equipment. Keep same three-quarter SIDE camera facing screen RIGHT, face and torso toward right. Natural upright posture, small calm unhurried stride, slight opposing arm swing beneath cloak, realistic fabric weight and modest hem movement. No running or dramatic movement. Exactly ONE person, full silhouette, complete hair and all fingers and toes, portrait 1024x1536, head near y115, planted foot line near y1430, at least 5% empty margin at every edge. Same camera distance and neutral soft lighting. IMPORTANT: REMOVE ALL BACKGROUND/HALO/HAZE from the reference. Proper RGBA with alpha exactly zero everywhere outside the physical person and in limb gaps; opaque actual person and cloth with narrow antialias edge. No floor, ground shadow, glow, grey/brown mist, gradient, scenery, labels, numbers or multiple frames. Alter only the walking pose and necessary cloth folds; do not redesign identity or costume. PHASE 01, near-leg initial contact. The leg closest to the camera extends a short step FORWARD to screen-right, bare heel gently contacting the foot line, toes slightly lifted. The far leg extends BACK toward screen-left, heel raised with only toes supporting. Near arm is slightly back, far arm slightly forward. The two bare feet are separated clearly and connected naturally to their respective trouser legs.",
+      "sourcePages": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "sourceUrls": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/david.png",
+          "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd"
+        }
+      ],
+      "limitations": [
+        "Lower cloak hem, lower under-suit and feet are reconstructed from cropped source; bare feet supported by secondary scene discussion, not visible in these stills.",
+        "Face and long hair verified from actual Covenant frame; whole-body idle pose adapted.",
+        "Five generated images do not constitute the required complete eight-phase walking cycle.",
+        "Phase03 was rejected by the image tool safety system (other); no retry or alternate generation, and phases04/08 were not attempted afterward.",
+        "Low-alpha residual pixels remain at some canvas edges, all alpha<=16; no claim of perfectly zero-alpha exterior.",
+        "Cloth folds, leg ordering and foot contacts are reconstructed; film movement and 1:1 fidelity are not certified.",
+        "Candidate geometry has not been validated at runtime.",
+        "Do not reconstruct missing alpha bounds or anchors from estimates. No new alpha mask measurements or runtime geometry validation were possible after the execution environment became unavailable."
+      ],
+      "scope": "Pose adaptée au jeu ; cycle incomplet de catalogue",
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "rendererKey": "david",
+      "state": "walk",
+      "phaseName": "contact-near",
+      "imagePolicy": "transparent-sprite",
+      "bibleRecordIds": [
+        "david",
+        "necropolis",
+        "court"
+      ],
+      "incompleteCycle": {
+        "id": "david-walk",
+        "expectedFrames": 8,
+        "suppliedFrames": 5,
+        "runtimeEnabled": false,
+        "reason": "phase03-generation-rejected"
+      },
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "pass": true,
+        "limitations": [
+          "Low-alpha residual edge pixels remain. Full measured local report not recoverable after executor loss."
+        ]
+      }
+    },
+    {
+      "id": "david-walk-02",
+      "title": "David hôte — pose down-near",
+      "category": "character-animation",
+      "kind": "human",
+      "path": "assets/openai/sprites/alien-covenant-v016/david-walk-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1881673,
+      "sha256": "e241930ba8c439c398f31a27a023e0780b5fc1831f680c1e30674934eda3803c",
+      "gitBlobSha": "cc9123799cc23ed303527e97f95602d715f25722",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE transparent full-body animation sprite for the Alien: Covenant (2017) game DLC. Edit the supplied established sprite of DAVID, Michael Fassbender, long-haired Planet 4 host, into one phase of a restrained walking cycle. Preserve his exact mature angular clean-shaven face, shoulder-length dirty-blond damp lank hair, lean adult proportions, coarse thick weathered charcoal-olive hooded cloak with hood down, heavy woven folds reaching lower calves/ankles, sparse visible dark blue-grey flight-suit neckline/sleeves/trousers, both BARE feet, and both intact empty ungloved hands. No footwear or added equipment. Keep same three-quarter SIDE camera facing screen RIGHT, face and torso toward right. Natural upright posture, small calm unhurried stride, slight opposing arm swing beneath cloak, realistic fabric weight and modest hem movement. No running or dramatic movement. Exactly ONE person, full silhouette, complete hair and all fingers and toes, portrait 1024x1536, head near y115, planted foot line near y1430, at least 5% empty margin at every edge. Same camera distance and neutral soft lighting. IMPORTANT: REMOVE ALL BACKGROUND/HALO/HAZE from the reference. Proper RGBA with alpha exactly zero everywhere outside the physical person and in limb gaps; opaque actual person and cloth with narrow antialias edge. No floor, ground shadow, glow, grey/brown mist, gradient, scenery, labels, numbers or multiple frames. Alter only the walking pose and necessary cloth folds; do not redesign identity or costume. PHASE 02, near-leg weight acceptance. The leg closest to the camera is in FRONT toward screen-right with its entire bare sole planted and knee gently bent; weight settles slightly lower. The far leg is BEHIND toward screen-left, knee beginning to bend and heel lifting as toes leave the ground. Near arm begins to return from back toward neutral. A calm short walking step, not an exaggerated stride.",
+      "sourcePages": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "sourceUrls": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/david.png",
+          "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd"
+        }
+      ],
+      "limitations": [
+        "Lower cloak hem, lower under-suit and feet are reconstructed from cropped source; bare feet supported by secondary scene discussion, not visible in these stills.",
+        "Face and long hair verified from actual Covenant frame; whole-body idle pose adapted.",
+        "Five generated images do not constitute the required complete eight-phase walking cycle.",
+        "Phase03 was rejected by the image tool safety system (other); no retry or alternate generation, and phases04/08 were not attempted afterward.",
+        "Low-alpha residual pixels remain at some canvas edges, all alpha<=16; no claim of perfectly zero-alpha exterior.",
+        "Cloth folds, leg ordering and foot contacts are reconstructed; film movement and 1:1 fidelity are not certified.",
+        "Candidate geometry has not been validated at runtime.",
+        "Do not reconstruct missing alpha bounds or anchors from estimates. No new alpha mask measurements or runtime geometry validation were possible after the execution environment became unavailable."
+      ],
+      "scope": "Pose adaptée au jeu ; cycle incomplet de catalogue",
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "rendererKey": "david",
+      "state": "walk",
+      "phaseName": "down-near",
+      "imagePolicy": "transparent-sprite",
+      "bibleRecordIds": [
+        "david",
+        "necropolis",
+        "court"
+      ],
+      "incompleteCycle": {
+        "id": "david-walk",
+        "expectedFrames": 8,
+        "suppliedFrames": 5,
+        "runtimeEnabled": false,
+        "reason": "phase03-generation-rejected"
+      },
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "pass": true,
+        "limitations": [
+          "Low-alpha residual edge pixels remain. Full measured local report not recoverable after executor loss."
+        ]
+      }
+    },
+    {
+      "id": "david-walk-05",
+      "title": "David hôte — pose contact-far",
+      "category": "character-animation",
+      "kind": "human",
+      "path": "assets/openai/sprites/alien-covenant-v016/david-walk-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1920520,
+      "sha256": "82955310d66539dd3cab8c10d52f078add0c9d4af924d428688a41ea0d128ed7",
+      "gitBlobSha": "41911f749bab8ac95fd915a0bc26a15d22a6f89b",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE transparent full-body animation sprite for the Alien: Covenant (2017) game DLC. Edit the supplied established sprite of DAVID, Michael Fassbender, long-haired Planet 4 host, into one phase of a restrained walking cycle. Preserve his exact mature angular clean-shaven face, shoulder-length dirty-blond damp lank hair, lean adult proportions, coarse thick weathered charcoal-olive hooded cloak with hood down, heavy woven folds reaching lower calves/ankles, sparse visible dark blue-grey flight-suit neckline/sleeves/trousers, both BARE feet, and both intact empty ungloved hands. No footwear or added equipment. Keep same three-quarter SIDE camera facing screen RIGHT, face and torso toward right. Natural upright posture, small calm unhurried stride, slight opposing arm swing beneath cloak, realistic fabric weight and modest hem movement. No running or dramatic movement. Exactly ONE person, full silhouette, complete hair and all fingers and toes, portrait 1024x1536, head near y115, planted foot line near y1430, at least 5% empty margin at every edge. Same camera distance and neutral soft lighting. IMPORTANT: REMOVE ALL BACKGROUND/HALO/HAZE from the reference. Proper RGBA with alpha exactly zero everywhere outside the physical person and in limb gaps; opaque actual person and cloth with narrow antialias edge. No floor, ground shadow, glow, grey/brown mist, gradient, scenery, labels, numbers or multiple frames. Alter only the walking pose and necessary cloth folds; do not redesign identity or costume. PHASE 05, far-leg initial contact, opposite to frame 01. The FAR leg, further from camera, extends a short step FORWARD to screen-right, bare heel gently contacting the foot line, toes slightly lifted. The NEAR leg extends BACKWARD to screen-left, heel raised with only toes supporting. Near arm slightly forward, far arm slightly back. The front bare foot is clearly connected to the far trouser leg, while the camera-near leg lies back.",
+      "sourcePages": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "sourceUrls": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/david.png",
+          "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd"
+        }
+      ],
+      "limitations": [
+        "Lower cloak hem, lower under-suit and feet are reconstructed from cropped source; bare feet supported by secondary scene discussion, not visible in these stills.",
+        "Face and long hair verified from actual Covenant frame; whole-body idle pose adapted.",
+        "Five generated images do not constitute the required complete eight-phase walking cycle.",
+        "Phase03 was rejected by the image tool safety system (other); no retry or alternate generation, and phases04/08 were not attempted afterward.",
+        "Low-alpha residual pixels remain at some canvas edges, all alpha<=16; no claim of perfectly zero-alpha exterior.",
+        "Cloth folds, leg ordering and foot contacts are reconstructed; film movement and 1:1 fidelity are not certified.",
+        "Candidate geometry has not been validated at runtime.",
+        "Do not reconstruct missing alpha bounds or anchors from estimates. No new alpha mask measurements or runtime geometry validation were possible after the execution environment became unavailable."
+      ],
+      "scope": "Pose adaptée au jeu ; cycle incomplet de catalogue",
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "rendererKey": "david",
+      "state": "walk",
+      "phaseName": "contact-far",
+      "imagePolicy": "transparent-sprite",
+      "bibleRecordIds": [
+        "david",
+        "necropolis",
+        "court"
+      ],
+      "incompleteCycle": {
+        "id": "david-walk",
+        "expectedFrames": 8,
+        "suppliedFrames": 5,
+        "runtimeEnabled": false,
+        "reason": "phase03-generation-rejected"
+      },
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "pass": true,
+        "limitations": [
+          "Low-alpha residual edge pixels remain. Full measured local report not recoverable after executor loss."
+        ]
+      }
+    },
+    {
+      "id": "david-walk-06",
+      "title": "David hôte — pose down-far",
+      "category": "character-animation",
+      "kind": "human",
+      "path": "assets/openai/sprites/alien-covenant-v016/david-walk-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1943926,
+      "sha256": "212f818dd0401c1ed963db2530408aa23db003c5c471ac284cfc38436144ce9a",
+      "gitBlobSha": "9e4a782eac6a4126de62d13ace68c596cfcb21d0",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE transparent full-body animation sprite for the Alien: Covenant (2017) game DLC. Edit the supplied established sprite of DAVID, Michael Fassbender, long-haired Planet 4 host, into one phase of a restrained walking cycle. Preserve his exact mature angular clean-shaven face, shoulder-length dirty-blond damp lank hair, lean adult proportions, coarse thick weathered charcoal-olive hooded cloak with hood down, heavy woven folds reaching lower calves/ankles, sparse visible dark blue-grey flight-suit neckline/sleeves/trousers, both BARE feet, and both intact empty ungloved hands. No footwear or added equipment. Keep same three-quarter SIDE camera facing screen RIGHT, face and torso toward right. Natural upright posture, small calm unhurried stride, slight opposing arm swing beneath cloak, realistic fabric weight and modest hem movement. No running or dramatic movement. Exactly ONE person, full silhouette, complete hair and all fingers and toes, portrait 1024x1536, head near y115, planted foot line near y1430, at least 5% empty margin at every edge. Same camera distance and neutral soft lighting. IMPORTANT: REMOVE ALL BACKGROUND/HALO/HAZE from the reference. Proper RGBA with alpha exactly zero everywhere outside the physical person and in limb gaps; opaque actual person and cloth with narrow antialias edge. No floor, ground shadow, glow, grey/brown mist, gradient, scenery, labels, numbers or multiple frames. Alter only the walking pose and necessary cloth folds; do not redesign identity or costume. PHASE 06, far-leg weight acceptance. The FAR leg is in FRONT toward screen-right with entire bare sole planted and knee gently bent; weight settles slightly lower. The NEAR leg is BEHIND toward screen-left, knee beginning to bend, heel lifted and toes about to leave ground. Near arm begins to return from forward to neutral. Keep a modest calm stride and clear correct leg ordering.",
+      "sourcePages": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "sourceUrls": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/david.png",
+          "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd"
+        }
+      ],
+      "limitations": [
+        "Lower cloak hem, lower under-suit and feet are reconstructed from cropped source; bare feet supported by secondary scene discussion, not visible in these stills.",
+        "Face and long hair verified from actual Covenant frame; whole-body idle pose adapted.",
+        "Five generated images do not constitute the required complete eight-phase walking cycle.",
+        "Phase03 was rejected by the image tool safety system (other); no retry or alternate generation, and phases04/08 were not attempted afterward.",
+        "Low-alpha residual pixels remain at some canvas edges, all alpha<=16; no claim of perfectly zero-alpha exterior.",
+        "Cloth folds, leg ordering and foot contacts are reconstructed; film movement and 1:1 fidelity are not certified.",
+        "Candidate geometry has not been validated at runtime.",
+        "Do not reconstruct missing alpha bounds or anchors from estimates. No new alpha mask measurements or runtime geometry validation were possible after the execution environment became unavailable."
+      ],
+      "scope": "Pose adaptée au jeu ; cycle incomplet de catalogue",
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "rendererKey": "david",
+      "state": "walk",
+      "phaseName": "down-far",
+      "imagePolicy": "transparent-sprite",
+      "bibleRecordIds": [
+        "david",
+        "necropolis",
+        "court"
+      ],
+      "incompleteCycle": {
+        "id": "david-walk",
+        "expectedFrames": 8,
+        "suppliedFrames": 5,
+        "runtimeEnabled": false,
+        "reason": "phase03-generation-rejected"
+      },
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "pass": true,
+        "limitations": [
+          "Low-alpha residual edge pixels remain. Full measured local report not recoverable after executor loss."
+        ]
+      }
+    },
+    {
+      "id": "david-walk-07",
+      "title": "David hôte — pose passing-far",
+      "category": "character-animation",
+      "kind": "human",
+      "path": "assets/openai/sprites/alien-covenant-v016/david-walk-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1826138,
+      "sha256": "393474021382359f35da75b8cc5d2ae33ef388383abd4edfe4bd067d2720a5a4",
+      "gitBlobSha": "7bc742c3ff69631e7ab72cc4ac973226d16432a5",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE transparent full-body animation sprite for the Alien: Covenant (2017) game DLC. Edit the supplied established sprite of DAVID, Michael Fassbender, long-haired Planet 4 host, into one phase of a restrained walking cycle. Preserve his exact mature angular clean-shaven face, shoulder-length dirty-blond damp lank hair, lean adult proportions, coarse thick weathered charcoal-olive hooded cloak with hood down, heavy woven folds reaching lower calves/ankles, sparse visible dark blue-grey flight-suit neckline/sleeves/trousers, both BARE feet, and both intact empty ungloved hands. No footwear or added equipment. Keep same three-quarter SIDE camera facing screen RIGHT, face and torso toward right. Natural upright posture, small calm unhurried stride, slight opposing arm swing beneath cloak, realistic fabric weight and modest hem movement. No running or dramatic movement. Exactly ONE person, full silhouette, complete hair and all fingers and toes, portrait 1024x1536, head near y115, planted foot line near y1430, at least 5% empty margin at every edge. Same camera distance and neutral soft lighting. IMPORTANT: REMOVE ALL BACKGROUND/HALO/HAZE from the reference. Proper RGBA with alpha exactly zero everywhere outside the physical person and in limb gaps; opaque actual person and cloth with narrow antialias edge. No floor, ground shadow, glow, grey/brown mist, gradient, scenery, labels, numbers or multiple frames. Alter only the walking pose and necessary cloth folds; do not redesign identity or costume. PHASE 07, far-leg stance and near-leg passing. The FAR leg is nearly vertical beneath the pelvis, bare sole flat on foot line, supporting body. The NEAR leg bends at knee and passes forward beside stance leg, bare foot raised slightly above ground near opposite ankle, toes angled down. The lifted near leg is clearly visible in front of the farther trouser leg from the camera. Both arms nearly neutral.",
+      "sourcePages": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "sourceUrls": [
+        "https://www.framestore.com/alien-covenant",
+        "https://www.avpcentral.com/david"
+      ],
+      "inputReferences": [
+        {
+          "path": "assets/openai/sprites/alien-covenant-v011/david.png",
+          "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd"
+        }
+      ],
+      "limitations": [
+        "Lower cloak hem, lower under-suit and feet are reconstructed from cropped source; bare feet supported by secondary scene discussion, not visible in these stills.",
+        "Face and long hair verified from actual Covenant frame; whole-body idle pose adapted.",
+        "Five generated images do not constitute the required complete eight-phase walking cycle.",
+        "Phase03 was rejected by the image tool safety system (other); no retry or alternate generation, and phases04/08 were not attempted afterward.",
+        "Low-alpha residual pixels remain at some canvas edges, all alpha<=16; no claim of perfectly zero-alpha exterior.",
+        "Cloth folds, leg ordering and foot contacts are reconstructed; film movement and 1:1 fidelity are not certified.",
+        "Candidate geometry has not been validated at runtime.",
+        "Do not reconstruct missing alpha bounds or anchors from estimates. No new alpha mask measurements or runtime geometry validation were possible after the execution environment became unavailable."
+      ],
+      "scope": "Pose adaptée au jeu ; cycle incomplet de catalogue",
+      "runtimeAdmission": "catalogue-only",
+      "verified1to1": false,
+      "animationsVerified": false,
+      "rendererKey": "david",
+      "state": "walk",
+      "phaseName": "passing-far",
+      "imagePolicy": "transparent-sprite",
+      "bibleRecordIds": [
+        "david",
+        "necropolis",
+        "court"
+      ],
+      "incompleteCycle": {
+        "id": "david-walk",
+        "expectedFrames": 8,
+        "suppliedFrames": 5,
+        "runtimeEnabled": false,
+        "reason": "phase03-generation-rejected"
+      },
+      "alphaQA": {
+        "status": "measured-before-environment-disconnection",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "edgeAlphaAbove16": 0,
+        "pass": true,
+        "limitations": [
+          "Low-alpha residual edge pixels remain. Full measured local report not recoverable after executor loss."
+        ]
+      }
+    }
+  ],
+  "cycles": [],
+  "supplementalCandidates": [
+    {
+      "id": "prop-terraforming-capstan-final",
+      "name": "Cabestan de la baie de terraformation — conception finale",
+      "scope": "production-design",
+      "source": "https://www.tonydrew.com.au/film",
+      "sourceType": "primary-production-designer",
+      "sourceDescription": "Deux joues triangulaires gris clair, tambour et chaîne noirs, sommets jaunes et bandes de danger. Variante finale distincte du treuil de voile.",
+      "appearanceAndVariants": "Vue de trois-quarts isolée ; chaîne raccourcie pour le PNG.",
+      "neededStates": [
+        "isolated-static-catalogue"
+      ],
+      "limits": [
+        "Présence et détail de chaque plan cinéma non certifiés.",
+        "Aucune dimension physique certifiée."
+      ],
+      "referenceIds": [],
+      "verified1to1": false,
+      "currentConsumer": null
+    },
+    {
+      "id": "prop-covenant-exterior-mast",
+      "name": "Mât extérieur du USCSS Covenant — composant",
+      "scope": "production-design",
+      "source": "https://www.tonydrew.com.au/film",
+      "sourceType": "primary-production-designer",
+      "sourceDescription": "Boîtier vertical à tubes ouverts, coiffe circulaire, persiennes, antennes et panneaux latéraux. Un composant extérieur du Covenant.",
+      "appearanceAndVariants": "Trois-quarts plongeant issu d’une référence de conception réduite.",
+      "neededStates": [
+        "isolated-static-catalogue"
+      ],
+      "limits": [
+        "Fins détails interprétés depuis la vue de production.",
+        "Ne couvre pas une vue complète du Covenant."
+      ],
+      "referenceIds": [],
+      "verified1to1": false,
+      "currentConsumer": null
+    },
+    {
+      "id": "prop-engineer-cryopod-reference",
+      "name": "Cryopod des Ingénieurs — modèle de production",
+      "scope": "production-design",
+      "source": "https://www.tonydrew.com.au/film",
+      "sourceType": "primary-production-designer",
+      "sourceDescription": "Capsule biomécanique horizontale, couvercle nervuré, conduites à droite et support visible. Modèle monochrome de décor réutilisé de Prometheus pour le Juggernaut.",
+      "appearanceAndVariants": "Capsule fermée et vide, vue de production. Matière et coloration filmées restent à vérifier.",
+      "neededStates": [
+        "isolated-static-catalogue"
+      ],
+      "limits": [
+        "Aucune confusion avec les capsules humaines du Covenant.",
+        "Usage exact de cette vue et dimensions non certifiés."
+      ],
+      "referenceIds": [
+        "ACOV-177"
+      ],
+      "verified1to1": false,
+      "currentConsumer": null
+    }
+  ],
+  "previousManifests": [
+    {
+      "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+      "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923",
+      "originalPngs": 49,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v012/manifest.json",
+      "sha256": "d29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3",
+      "originalPngs": 12,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v013/manifest.json",
+      "sha256": "5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788",
+      "originalPngs": 24,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+      "sha256": "1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482",
+      "originalPngs": 18,
+      "unchanged": true
+    }
+  ],
+  "blockedCarriedForward": [
+    {
+      "id": "weapon-f90",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-beretta",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-ar15",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-eaa",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-shotgun",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "xenomorph",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "other"
+    },
+    {
+      "id": "weapon-sl40",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-f90",
+      "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+    },
+    {
+      "id": "weapon-inox",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-beretta",
+      "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+    },
+    {
+      "id": "xenomorph-attack",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "xenomorph",
+      "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
+    },
+    {
+      "id": "prop-classicalstatue",
+      "status": "blocked-generation",
+      "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
+    },
+    {
+      "id": "david-walk-03",
+      "status": "blocked-generation",
+      "reason": "Output rejected by the image generation service; no retry or alternative engine.",
+      "category": "other"
+    }
+  ],
+  "notAttemptedAfterRelatedOutputRejection": [
+    {
+      "id": "david-walk-04",
+      "status": "not_attempted_after_related_output_rejection",
+      "relatedId": "david-walk-03"
+    },
+    {
+      "id": "david-walk-08",
+      "status": "not_attempted_after_related_output_rejection",
+      "relatedId": "david-walk-03"
+    }
+  ],
+  "referenceCorrections": [
+    {
+      "id": "CORR-V016-AUDI-A173663",
+      "finding": "La photo A173663 montre Ridley Scott et un élément EVA, sans rover ; écartée comme preuve visuelle du véhicule.",
+      "source": "https://media.audifrance.fr/le-rover-lunaire-audi-lunar-quattro-a-lecran-dans-le-film-alien-covenant/"
+    },
+    {
+      "id": "CORR-V016-1578-CONFIRMED",
+      "finding": "levi-deadforest-1578 représente le site du Lander One détruit ; référence de TERR-BURN uniquement, non de la forêt du Juggernaut."
+    }
+  ],
+  "plannedRuntimeCandidate": {
+    "assetId": "world-planet4-shore-rock",
+    "instance": "landing-light2",
+    "room": "landing",
+    "position": {
+      "x": 1750,
+      "z": 0.02
+    },
+    "nativeFootprint": [
+      110,
+      65
+    ],
+    "solid": false,
+    "status": "Not published; local integration was interrupted before final validation."
+  },
+  "summary": {
+    "newPngs": 16,
+    "newRuntimePngs": 0,
+    "newCataloguePngs": 16,
+    "cumulativePngs": 119,
+    "runtimePngs": 72,
+    "cataloguePngs": 47,
+    "completeCycles": 5,
+    "completeCyclePhases": 40,
+    "incompleteDavidPoses": 5,
+    "certified1to1Images": 0
+  },
+  "deferred": [
+    {
+      "id": "VEH-AUDI-PROFILE",
+      "reason": "No inspected true-profile source."
+    },
+    {
+      "id": "VEH-JUGGERNAUT-INTACT",
+      "reason": "Inspected local image shows a partly obscured crash, insufficient for an intact isolated silhouette."
+    },
+    {
+      "id": "VEH-MOTHER-TUG",
+      "reason": "No sufficiently clear inspected structural view."
+    },
+    {
+      "id": "TERR-WHEAT-ISOLATED",
+      "reason": "No inspected cereal close-up in this pass."
+    }
+  ],
+  "recovery": {
+    "source": "Tool-memory PNGs and recorded outputs; original detailed local report inaccessible after executor disconnection.",
+    "exactPromptsRecovered": 12,
+    "exactPromptsNotRecovered": [
+      "world-planet4-shore-rock",
+      "world-planet4-scorched-grass",
+      "vehicle-audi-lunar-quattro-front",
+      "vehicle-audi-lunar-quattro-patrol"
+    ],
+    "finalRuntimeChangesPublished": false,
+    "finalExcelProduced": false
+  }
+}

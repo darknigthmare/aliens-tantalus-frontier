@@ -1,6 +1,12 @@
 # Alien: Covenant — bible et production V0.14
 
-## Suivi courant
+## Continuation V016 en cours
+
+Le lot complémentaire conserve **16 nouvelles images originales**. Tant que la reprise de validation n’est pas terminée, elles restent au catalogue : **119 images cumulées, 72 admissions runtime conservées et 47 images de catalogue**. Le raccord local prévu pour le rocher de berge n’est pas publié dans cette branche.
+
+Le [point de reprise V016](CONTINUATION_V016.md), le [manifeste](../../assets/openai/sprites/alien-covenant-v016/manifest.json) et les reçus de récupération décrivent les fichiers réellement sauvegardés. Le générateur de bible V016 enrichit les huit catégories demandées ; ses sorties doivent être vérifiées avant de remplacer les documents courants ci-dessous.
+
+## Suivi courant V014
 
 La [bible détaillée V0.14](BIBLE_COVENANT_V014.md) et son
 [inventaire structuré](BIBLE_COVENANT_V014.json) réunissent les manques en

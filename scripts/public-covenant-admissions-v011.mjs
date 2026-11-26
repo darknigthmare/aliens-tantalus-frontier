@@ -3,6 +3,14 @@ import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
+  'scripts/build-covenant-bible-v016.py',
+  'scripts/build-covenant-bible-v016.mjs',
+  'scripts/verify-covenant-v016-recovery.mjs',
+  'docs/covenant/CONTINUATION_V016.md',
+  '.github/workflows/covenant-v016-bible.yml',
+  'docs/covenant/BIBLE_COVENANT_V016.json',
+  'docs/covenant/BIBLE_COVENANT_V016.md',
+  'docs/covenant/BIBLE_COVENANT_V016.html',
   ...COVENANT_RUNTIME_FILES_V011.map(name => COVENANT_SOURCE_V011 + '/' + name),
   COVENANT_SOURCE_V011 + '/bridge.js',
   'modules/covenant/AGENTS.md', 'modules/covenant/package.json', 'modules/covenant/.gitignore',

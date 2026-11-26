@@ -1,0 +1,77 @@
+name: Covenant V016 reference bible
+on:
+  pull_request:
+    paths:
+      - 'assets/openai/sprites/alien-covenant-v016/**'
+      - 'docs/covenant/**'
+      - 'scripts/*covenant*'
+      - '.github/workflows/covenant-v016-bible.yml'
+permissions:
+  contents: read
+concurrency:
+  group: covenant-v016-bible-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  bible:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            docs/covenant
+            scripts
+            dlc/covenant
+            modules/covenant
+            assets/openai/sprites/alien-covenant-v011
+            assets/openai/sprites/alien-covenant-v012
+            assets/openai/sprites/alien-covenant-v013
+            assets/openai/sprites/alien-covenant-v014
+            assets/openai/sprites/alien-covenant-v016
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify originals and unchanged runtime
+        run: node --test scripts/verify-covenant-v016-recovery.mjs
+      - name: Generate the detailed reference bible
+        run: python3 scripts/build-covenant-bible-v016.py --baseline docs/covenant/BIBLE_COVENANT_V014.json --tables-out "${RUNNER_TEMP}/covenant-v016-tables.json"
+      - name: Validate generated documents and emit recoverable text
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json
+          from pathlib import Path
+          root=Path('docs/covenant')
+          d=json.loads((root/'BIBLE_COVENANT_V016.json').read_text())
+          assert d['summary']['pngs']==119
+          assert d['summary']['runtimePngs']==72
+          assert d['summary']['catalogueOnlyPngs']==47
+          assert d['summary']['referenceEntries']==315
+          assert d['summary']['animationPhases']==40
+          assert d['summary']['certified1to1Images']==0
+          assert len(d['continuationV016']['incompleteCharacterSequences'])==1
+          assert d['continuationV016']['productionBriefCount']>=257
+          for ext in ('json','md','html'):
+              path=root/('BIBLE_COVENANT_V016.'+ext)
+              raw=path.read_bytes()
+              print('DOCUMENT_SHA256 '+path.name+' '+hashlib.sha256(raw).hexdigest()+' '+str(len(raw)))
+              encoded=base64.b64encode(raw).decode()
+              for index in range(0,len(encoded),40000):
+                  print('BIBLE_BYTES '+path.name+' '+str(index//40000)+' '+encoded[index:index+40000])
+          print('BIBLE_VALIDATED '+json.dumps(d['summary']))
+          PY
+      - name: Preserve generated bible and original image paths
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: covenant-v016-bible-and-originals
+          path: |
+            docs/covenant/BIBLE_COVENANT_V016.json
+            docs/covenant/BIBLE_COVENANT_V016.md
+            docs/covenant/BIBLE_COVENANT_V016.html
+            assets/openai/sprites/alien-covenant-v011
+            assets/openai/sprites/alien-covenant-v012
+            assets/openai/sprites/alien-covenant-v013
+            assets/openai/sprites/alien-covenant-v014
+            assets/openai/sprites/alien-covenant-v016
+          retention-days: 30
+          if-no-files-found: error
