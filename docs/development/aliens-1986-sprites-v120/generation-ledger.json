@@ -42,7 +42,7 @@
       "pixelMode": "RGBA",
       "selectedAttempt": 2,
       "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent medical storage counter sprite.\nPerform only this cleanup: preserve exactly the counter design, width-to-height proportions, elevated frontal camera, bare flat tabletop, two shallow drawers and two closed cabinet doors, colors, grey metal materials and worn texture. Add a generous clean TRANSPARENT margin of about5percent on ALL FOUR sides so both left and right countertop corners are fully visible and the object does not touch the canvas edge. Complete any edge that was previously cropped without changing the cabinet design.\nRemove every bright red, yellow or white fringe, stray pixel, speck and halo around the silhouette, especially along the upper countertop edge and the side edges. The object's outline should consist only of its own subdued grey/olive metal edge against genuine transparent RGBA pixels. No colored contamination, no colored outline, no opaque backdrop. Preserve the transparent region under the counter.\nKeep the same broad deep empty tabletop and low front body. One counter only, zero screens or terminals or tools on the top, no floor, no shadow outside the object, no text, no logo, no characters, no other props. Keep the front horizontal and vertical edges aligned as in the input. Full isolated object with clean alpha, realistic textured raster rendering.",
-      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7cb5b517-8690-400b-8e10-1a3dc992da3e.png",
+      "nativeOutputAttemptId": "reserve-medical-counter-attempt-2",
       "alpha": {
         "extrema": [
           0,
@@ -137,7 +137,7 @@
       "pixelMode": "RGBA",
       "selectedAttempt": 1,
       "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one closed medium-height UTILITY STORAGE CABINET used in a colony reserve room and optics workshop. A thick steel outer frame surrounds THREE broad horizontal closed compartments stacked vertically, each compartment has one shallow recessed horizontal pull handle and subtle rectangular panel seams. The cabinet is nearly as wide as it is tall but visibly a little taller. No glass, no visible contents, no open doors, no electronic screen, no tabletop props. Restrained horizontal ventilation slots near the plinth, four short square feet (rear feet hidden if necessary), substantial flat top visibly extending upwards. Muted military grey/olive steel, slightly brighter handles, moderate realistic wear.\nGeometric target: overall visible silhouette width:height about0.886:1. The front width157 and front body height119 with depth projecting57.6 upward; thus the bare top contributes roughlyone-third of full silhouette height. Keep the closed cabinet front square-on; absolutely no side face.",
-      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-f72d54a4-0199-4696-8cb9-2146cd0baa18.png",
+      "nativeOutputAttemptId": "utility-storage-cabinet-attempt-1",
       "alpha": {
         "extrema": [
           0,
@@ -225,7 +225,7 @@
       "pixelMode": "RGBA",
       "selectedAttempt": 2,
       "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent optics workbench sprite.\nChange only its PROPORTIONS AND CAMERA DEPTH so it fits a tall, deep elevated-frontal game projection. Keep the same worn grey steel, olive inset mat, small center drawer, square legs, low horizontal crossbar, empty tabletop, single-object design and transparent background.\nRequired silhouette: total visible WIDTH / total visible HEIGHT = approximately1.35. The object should look nearly square with a modest landscape aspect, much taller in image-space than the input. The visible tabletop must extend FAR UPWARD and occupy about53 percent of the object's total height. The front fascia and leg area below occupy the remaining47 percent. For a visible width1350, the entire silhouette is about1000 high, with the bare tabletop about530 high. Do not just enlarge the front legs; make the top deep in the image.\nUse an exact ELEVATED FRONT PARALLEL orthographic view, camera centered: zero yaw, no visible left or right side face. Front and back tabletop edges equal width, horizontal and parallel. Tabletop side edges run straight upward, parallel to the screen's vertical axis, so its top is rectangular, not a trapezoid. Vertical legs stay exactly vertical. Both feet end on one horizontal baseline.\nRetain one completely empty flat tabletop with its olive mat flush into the surface. No terminal, monitor, machine, tool, lamp, chair, scenery, floor or extra objects. No text or logo. Preserve real transparent RGBA, including the gaps beneath the table. Leave at least3percent transparent padding around all four sides. Full object uncropped. Sharp photorealistic raster material detail, subdued practical1980s industrial prop, matching the input.",
-      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7472c08b-d3e0-49f6-9d59-c643f5e8792b.png",
+      "nativeOutputAttemptId": "optics-workbench-attempt-2",
       "alpha": {
         "extrema": [
           0,
@@ -319,7 +319,7 @@
       "pixelMode": "RGBA",
       "selectedAttempt": 1,
       "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one free-standing OPERATIONS DISPLAY BANK, a broad almost-square bank of modular 1980s analog electronics, not a desk or a handheld terminal. A robust low upright industrial enclosure with TWO medium unlit dark green-grey CRT screens side by side across the upper front, each set into a thick recessed metal bezel. Below them a horizontal strip of tactile square pushbuttons, rotary switches and small dim green/amber indicators without any letters or numerals. Lower front closed service panels with modest cooling grilles and metal fasteners. Bare flat thick top, short plinth and tiny feet. No keyboard or controls projecting toward the viewer; no large slanted control desk, no operator, no separate objects. The electronics look practical, mechanical and used, with grey/olive enamel on the body and warm-grey modular panels.\nGeometric target: overall visible silhouette width:height about1.06:1. In game width174, front body height103, upper depth projected61.06, so the top visibly contributes just over one-third of the total silhouette height. Front face perfectly upright and face-on; absolutely no side face. Screens blank and dark, no readable text or graphs.",
-      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-a8d97031-2435-40c4-876f-2863da164021.png",
+      "nativeOutputAttemptId": "operations-display-bank-attempt-1",
       "alpha": {
         "extrema": [
           0,
@@ -380,6 +380,7 @@
   ],
   "attempts": [
     {
+      "id": "reserve-medical-counter-attempt-1",
       "assetId": "reserve-medical-counter",
       "attempt": 1,
       "mode": "generate",
@@ -388,7 +389,7 @@
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-2060d425-fae4-4447-8440-31182e70b021.png",
+        "artifactId": "reserve-medical-counter-attempt-1-output",
         "sha256": "69743be0765cf15fb787ac391ad4447357c53ca41414ebb99971af069901266e",
         "bytes": 2535664,
         "width": 1430,
@@ -451,6 +452,7 @@
       "reason": "Premier essai non retenu : silhouette coupée aux bords latéraux et franges colorées visibles."
     },
     {
+      "id": "reserve-medical-counter-attempt-2",
       "assetId": "reserve-medical-counter",
       "attempt": 2,
       "mode": "edit",
@@ -458,14 +460,14 @@
       "inputImages": [
         {
           "role": "edit-target",
-          "path": "/workspace/scratch/6f1f5260be36/generated_images/exec-2060d425-fae4-4447-8440-31182e70b021.png",
+          "sourceAttemptId": "reserve-medical-counter-attempt-1",
           "sha256": "69743be0765cf15fb787ac391ad4447357c53ca41414ebb99971af069901266e"
         }
       ],
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7cb5b517-8690-400b-8e10-1a3dc992da3e.png",
+        "artifactId": "reserve-medical-counter-attempt-2-output",
         "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
         "bytes": 2189660,
         "width": 1430,
@@ -528,6 +530,7 @@
       "reason": "Retouche ciblée du défaut observé ; octets de sortie natifs conservés."
     },
     {
+      "id": "utility-storage-cabinet-attempt-1",
       "assetId": "utility-storage-cabinet",
       "attempt": 1,
       "mode": "generate",
@@ -536,7 +539,7 @@
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-f72d54a4-0199-4696-8cb9-2146cd0baa18.png",
+        "artifactId": "utility-storage-cabinet-attempt-1-output",
         "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
         "bytes": 2601946,
         "width": 1181,
@@ -599,6 +602,7 @@
       "reason": "Sélection retenue après inspection de l’objet individuel."
     },
     {
+      "id": "optics-workbench-attempt-1",
       "assetId": "optics-workbench",
       "attempt": 1,
       "mode": "generate",
@@ -607,7 +611,7 @@
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-9935b535-b820-48fe-bfa0-730128e31e94.png",
+        "artifactId": "optics-workbench-attempt-1-output",
         "sha256": "1392c40fbc7119506793fcc3d0ae516dbd6897b84f90714de7d923ee9b2a4f0f",
         "bytes": 1774101,
         "width": 1807,
@@ -670,6 +674,7 @@
       "reason": "Premier essai non retenu : silhouette trop basse et trop large ; à largeur184 la hauteur ne permettait pas le raccord des contacts du terminal."
     },
     {
+      "id": "optics-workbench-attempt-2",
       "assetId": "optics-workbench",
       "attempt": 2,
       "mode": "edit",
@@ -677,14 +682,14 @@
       "inputImages": [
         {
           "role": "edit-target",
-          "path": "/workspace/scratch/6f1f5260be36/generated_images/exec-9935b535-b820-48fe-bfa0-730128e31e94.png",
+          "sourceAttemptId": "optics-workbench-attempt-1",
           "sha256": "1392c40fbc7119506793fcc3d0ae516dbd6897b84f90714de7d923ee9b2a4f0f"
         }
       ],
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7472c08b-d3e0-49f6-9d59-c643f5e8792b.png",
+        "artifactId": "optics-workbench-attempt-2-output",
         "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
         "bytes": 1963841,
         "width": 1457,
@@ -747,6 +752,7 @@
       "reason": "Retouche ciblée du défaut observé ; octets de sortie natifs conservés."
     },
     {
+      "id": "operations-display-bank-attempt-1",
       "assetId": "operations-display-bank",
       "attempt": 1,
       "mode": "generate",
@@ -755,7 +761,7 @@
       "tool": "built-in-imagegen",
       "transparentBackgroundRequested": true,
       "output": {
-        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-a8d97031-2435-40c4-876f-2863da164021.png",
+        "artifactId": "operations-display-bank-attempt-1-output",
         "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
         "bytes": 2728175,
         "width": 1274,
