@@ -1,17 +1,17 @@
 {
   "schema": 1,
   "version": "0.11.0",
-  "integrationRevision": 1,
+  "integrationRevision": 2,
   "upstreamArchive": {
     "name": "ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip",
     "bytes": 58704014,
     "sha256": "0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155",
-    "transferStatus": "pending_transfer"
+    "transferStatus": "preserved_on_github"
   },
   "runtime": {
     "path": "src/dlc/avp-2004/index.html",
-    "bytes": 1115546,
-    "sha256": "d8cd3141fb8e1468d5b108f20975ec359b74bec9f860c48359af7c559d3a455c"
+    "bytes": 6086145,
+    "sha256": "c757ea479d5f44e56ee9ec02553ef18652f8627a19eb2aa712db959512eb262b"
   },
   "sources": [
     {
@@ -20,19 +20,24 @@
       "sha256": "69536281a6d2ff031a2dcd86bf5e844f1a80dac4bfb8c5d6fcdb8589e43fee95"
     },
     {
+      "path": "scripts/dlc/avp-2004/RASTERS.json",
+      "bytes": 1365,
+      "sha256": "beced1c3dec08dbf59a6c53b22f1b4abc05e4e4f1da45b03c58d6fb7f65378de"
+    },
+    {
       "path": "scripts/dlc/avp-2004/template.html",
       "bytes": 8436,
       "sha256": "01b3d5dbf80e237fcd67d8cd32c0f922b48c9243edd4437cc819e14d608865d6"
     },
     {
       "path": "scripts/dlc/avp-2004/web/app.js",
-      "bytes": 70024,
-      "sha256": "71620aef2c155c5abd89be73ebc8483177266e73225d7df307278fc639efd8ca"
+      "bytes": 70067,
+      "sha256": "9fe935c558c3208de4782357818110341bb623ee87b11a1b898df530904897ba"
     },
     {
       "path": "scripts/dlc/avp-2004/web/assets.js",
-      "bytes": 296390,
-      "sha256": "dc52c0cb6f401a174770053b3b4293d3658ac65851faa9e6e013152efff8485f"
+      "bytes": 296532,
+      "sha256": "15a883ef3dc5628f37a2f131eac9859a0c8b0b4bc127da8ffef8cfff116e1cac"
     },
     {
       "path": "scripts/dlc/avp-2004/web/assets/altar.svg",
@@ -871,8 +876,8 @@
     },
     {
       "path": "scripts/dlc/avp-2004/web/render.js",
-      "bytes": 19680,
-      "sha256": "3df2eeaf2b6e4cb37e31ef0e707bc65c3e43ad34904ceba46b90da532b938972"
+      "bytes": 21111,
+      "sha256": "0df9af6d1d2d76a9ce73b6765abf8d2ba3d1e49370f55a6451bc1e529af4b8c9"
     },
     {
       "path": "scripts/dlc/avp-2004/web/rescue-data.js",

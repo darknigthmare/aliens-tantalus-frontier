@@ -536,6 +536,25 @@ export const AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.fro
 ));
 // END AVP PRODUCTION BIBLE HOST RECEIPTS 20261126
 
+// BEGIN AVP REFERENCE V002 HOST RECEIPTS
+// Exact reference sources follow the merged V001 inventory. Their standalone
+// files stay excluded from the build; embedded runtime pixels have their own
+// reviewed registry. Historical receipts confer no new fidelity certification.
+export const AVP_REFERENCE_BASELINE_V002 = '2e8309081d206b86d9f234ebfc33c13ea74970f4';
+export const AVP_REFERENCE_SUCCESSORS_V002 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b",
+    "currentSha256": "0c4f344434c1f3b3dade6fc4f1601d554b2052f66f66cc7f7d191985d7f9a57a"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "5735cc0a8110342349313df1c70cba220308238ee756674a357f45aa98a4f8bd",
+    "currentSha256": "c1ccfc8d8db8a42f86fe40e5e3a3dbaba1560ceb4f40549066e7f4b71b267020"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END AVP REFERENCE V002 HOST RECEIPTS
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -579,8 +598,14 @@ export function reviewedDlcBibleBridgeHostDigest20261126(path, endpoint) {
 }
 
 export function reviewedAvpProductionBibleHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
+  const published = advanceReceipt(path, endpoint, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
     'Broken DLC-bible-to-AVP-production source chain: ');
+  return reviewedAvpReferenceHostDigestV002(path, published);
+}
+
+export function reviewedAvpReferenceHostDigestV002(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_REFERENCE_SUCCESSORS_V002,
+    'Broken AVP-production-to-reference-V002 source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -601,7 +626,8 @@ const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126),
-  ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ...Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ...Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126),
+  ...Object.keys(AVP_REFERENCE_SUCCESSORS_V002)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -612,7 +638,8 @@ export function avpHostRuntimeSources20261125(view) {
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
-      AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path], AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path], AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path]].filter(Boolean);
+      AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path], AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path],
+      AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path], AVP_REFERENCE_SUCCESSORS_V002[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -635,6 +662,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'DLC bible bridge requires the exact published PR 68 document head');
   assert.equal(AVP_PRODUCTION_BIBLE_BASELINE_20261126, '268b1a517c60338899578a165e9784c5b7313dba',
     'AVP production documents require the exact corrected bible continuation base');
+  assert.equal(AVP_REFERENCE_BASELINE_V002, '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    'AVP reference V002 requires the exact merged V001 production baseline');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -646,7 +675,7 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
     AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
-    AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126]) {
+    AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126, AVP_REFERENCE_SUCCESSORS_V002]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -724,6 +753,13 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.ok(prior, 'AVP production requires an exact published host predecessor: ' + path);
     assert.equal(receipt.previousSha256, prior.currentSha256,
       'AVP production must follow the exact corrected bible endpoint: ' + path);
+  }
+  assert.deepEqual(Object.keys(AVP_REFERENCE_SUCCESSORS_V002),
+    ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs'],
+    'AVP reference V002 advances only its exact source-admission and build-filter hosts');
+  for (const [path, receipt] of Object.entries(AVP_REFERENCE_SUCCESSORS_V002)) {
+    assert.equal(receipt.previousSha256, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path].currentSha256,
+      'AVP reference V002 must follow its exact merged V001 source endpoint: ' + path);
   }
   const paths = hostPaths();
   for (const path of paths) {

@@ -5,8 +5,19 @@ const D=G.AVP_DATA,C=G.AVP_CORE,TAU=Math.PI*2;
 const palettes={ship:['#142833','#385463','#50666a','#c38d59'],snow:['#142b3a','#5c8291','#9bb8be','#cfb58b'],timber:['#1d282d','#4e524c','#696d61','#cd955d'],ice:['#153547','#406c80','#7299a4','#a8d7dd'],pyramid:['#112933','#375762','#607b7e','#c6a879'],temple:['#12282d','#3e5557','#63716b','#c6995b'],maze:['#12282e','#31464c','#566767','#d8a56b'],hive:['#0d2128','#223e44','#365158','#b6c795'],dock:['#112c3c','#3a667a','#8facb6','#dfbc8b'],alienShip:['#121e29','#304659','#536a79','#beaa7d']};
 const ctxPath=(ctx,pts,fill,stroke=null,width=1)=>{ctx.beginPath();ctx.moveTo(...pts[0]);for(const p of pts.slice(1))ctx.lineTo(...p);ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}};
 class Renderer{
- constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:false});this.images={};this.frame=0;this.reduced=false;
-  this.ready=Promise.all(Object.entries(G.AVP_ASSETS).map(([id,svg])=>new Promise(resolve=>{const img=new Image();img.onload=()=>{this.images[id]=img;resolve();};img.onerror=resolve;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);})));}
+ constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:false});this.images={};this.rasterFrames={};this.frame=0;this.reduced=false;
+  const vectors=Promise.all(Object.entries(G.AVP_ASSETS).map(([id,svg])=>new Promise(resolve=>{const img=new Image();img.onload=()=>{this.images[id]=img;resolve();};img.onerror=resolve;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);})));
+  // Install raster overrides only after SVG fallbacks settle. A failed PNG must
+  // leave its previous image available, without an asynchronous load race.
+  this.ready=vectors.then(()=>Promise.all(Object.entries(G.AVP_RASTER_ASSETS||{}).map(([id,asset])=>this.loadRaster(id,asset))));}
+ loadRaster(id,asset){return new Promise(resolve=>{
+  if(!G.AVP_ASSETS[id]||!asset||!/^data:image\/png;base64,/.test(asset.src)||!Array.isArray(asset.frame)||asset.frame.length!==4||!Array.isArray(asset.pivot)||asset.pivot.length!==2||!Array.isArray(asset.fit)||asset.fit.length!==2)return resolve();
+  const [x,y,w,h]=asset.frame,[px,py]=asset.pivot;
+  if(!asset.frame.every(Number.isInteger)||x<0||y<0||w<=0||h<=0||x+w>asset.width||y+h>asset.height||!asset.pivot.every(Number.isFinite)||px<x||px>x+w||py<y||py>y+h||!asset.fit.every(v=>Number.isFinite(v)&&v>0))return resolve();
+  const img=new Image();img.onerror=()=>resolve();img.onload=()=>{
+   if(img.naturalWidth===asset.width&&img.naturalHeight===asset.height){this.images[id]=img;this.rasterFrames[id]={frame:asset.frame,pivot:asset.pivot,fit:asset.fit};}resolve();
+  };img.src=asset.src;
+ });}
  resize(){const box=this.canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,1.6);const w=Math.max(1,Math.round(box.width*dpr)),h=Math.max(1,Math.round(box.height*dpr));if(w!==this.canvas.width||h!==this.canvas.height){this.canvas.width=w;this.canvas.height=h;}this.w=box.width;this.h=box.height;this.dpr=dpr;}
  point(x,y){return {x:(x-this.cam)*this.zoom,y:this.h*.60+(y-40)*this.h*.0013};}
  depth(y){return .84+(y-40)/210*.27;}
@@ -110,7 +121,9 @@ class Renderer{
   }
   this.line(0,horizon,w,horizon,'#abb6a144',1);
  }
- sprite(asset,x,y,height,face=1,alpha=1,rotate=0){const img=this.images[asset];if(!img)return;const c=this.ctx,p=this.point(x,y),s=this.depth(y)*this.zoom,hh=height*s,ww=hh*img.width/img.height;c.save();c.globalAlpha=alpha;c.translate(p.x,p.y);c.scale(face,1);c.rotate(rotate);c.drawImage(img,-ww/2,-hh,ww,hh);c.restore();}
+ sprite(asset,x,y,height,face=1,alpha=1,rotate=0){const img=this.images[asset];if(!img)return;const c=this.ctx,p=this.point(x,y),s=this.depth(y)*this.zoom,raster=this.rasterFrames[asset];c.save();c.globalAlpha=alpha;c.translate(p.x,p.y);c.scale(face,1);c.rotate(rotate);
+  if(raster){const [sx,sy,sw,sh]=raster.frame,[px,py]=raster.pivot,ratio=sw/sh,hh=height*s*Math.min(1,(raster.fit[0]/raster.fit[1])/ratio),ww=hh*ratio;c.drawImage(img,sx,sy,sw,sh,-(px-sx)*ww/sw,-(py-sy)*hh/sh,ww,hh);}
+  else {const hh=height*s,ww=hh*img.width/img.height;c.drawImage(img,-ww/2,-hh,ww,hh);}c.restore();}
  actor(asset,a,height,game,animate=false,alpha=1){
   const p=this.point(a.x,a.y),s=this.depth(a.y)*this.zoom;cAlpha(this.ctx,.25*alpha,()=>this.ellipse(p.x,p.y+2,31*s,7*s,'#07141e'));
   const moving=animate&&game.moving&&!this.reduced,bob=moving?Math.sin(game.s.worldTime*15)*2.2:Math.sin(game.s.worldTime*2.1)*.55;

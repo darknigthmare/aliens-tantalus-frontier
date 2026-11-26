@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "id": "film-snowcat",
+      "path": "assets/openai/sprites/avp2004-reference-v002/snowcat-avp2004-v002.png",
+      "sha256": "b52a3a30a70c8a43fdc9b6390025a71804c8cde979eb9e309d0c70e2de579b98",
+      "bytes": 1963290,
+      "width": 2172,
+      "height": 724,
+      "frame": [
+        38,
+        5,
+        2098,
+        710
+      ],
+      "pivot": [
+        1087.0,
+        715
+      ],
+      "fit": [
+        380,
+        185
+      ],
+      "layoutNote": "Boîte de rendu en unités de mise en scène, pas une mesure du film. Coordonnées et collisions historiques conservées. Pivot sur le contact inférieur mesuré du cadrage alpha >= 128."
+    },
+    {
+      "id": "whalebone",
+      "path": "assets/openai/sprites/avp2004-reference-v002/whalebone-avp2004-v002.png",
+      "sha256": "b3a6b036ff5328ec698635bd89ea0f8c589c22d7b97f0294a1d9fd5d68667c2c",
+      "bytes": 1763267,
+      "width": 1774,
+      "height": 887,
+      "frame": [
+        67,
+        38,
+        1669,
+        822
+      ],
+      "pivot": [
+        901.5,
+        860
+      ],
+      "fit": [
+        360,
+        168
+      ],
+      "layoutNote": "Boîte de rendu en unités de mise en scène, pas une mesure du film. Coordonnées et collisions historiques conservées. Pivot sur le contact inférieur mesuré du cadrage alpha >= 128."
+    }
+  ]
+}

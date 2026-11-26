@@ -26,7 +26,7 @@ Le fichier distribué est `src/dlc/avp-2004/index.html`. Le build le copie avec 
 - 145 illustrations SVG originales et le registre des 250 références de fidélité.
 - Namespace de sauvegarde inchangé : `atf.dlc.avp2004.v1`, trois carnets et leurs backups.
 
-L'archive ZIP complète de 58 704 014 octets (rapports, captures, anciens tests et références compris) reste à transférer. Son SHA-256 est `0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155`. Le HTML autonome original est conservé dans `archives/local-recovery-20261125/avp-2004/original-standalone-v0.11.0.html`. Le statut des 16 archives recensées figure dans `archives/local-recovery-20261125/PENDING_TRANSFER.json`.
+D'après le [reçu historique de conservation](../../../archives/local-recovery-20261125/PENDING_TRANSFER.json), l'archive ZIP complète de 58 704 014 octets (rapports, captures, anciens tests et références compris) est conservée sur GitHub en six fragments, au [commit d'archive `6ed9b921`](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6ed9b9210a097bbdf90ec3a22043a3fe5845e541/archives/local-recovery-20261125). Son SHA-256 est `0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155`. Le HTML autonome original reste dans `archives/local-recovery-20261125/avp-2004/original-standalone-v0.11.0.html`. La [procédure de reconstruction](../../../docs/development/AVP_2004_GITHUB_INTEGRATION_20261125.md) décrit l'archive ; la validation de cette passe porte sur le reçu historique inchangé, sans nouveau réassemblage du ZIP.
 
 ## Validation et fidélité
 

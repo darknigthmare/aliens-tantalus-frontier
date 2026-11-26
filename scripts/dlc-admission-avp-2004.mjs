@@ -5,7 +5,7 @@ import { readFile, lstat } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const MANIFEST = 'scripts/dlc/avp-2004/MANIFEST.json';
-const REVIEWED_SHA256 = 'e1d8f5d1669db991687294bc2bfd621bc6476675f86bb296fc98f00d0e024548';
+const REVIEWED_SHA256 = 'f0e9001f450dab9ede06c3823130b84665dbc3d7218c26a65823fd40b7fe6adf';
 const SOURCE_ROOT = 'scripts/dlc/avp-2004';
 const ARCHIVE_ROOT = 'archives/local-recovery-20261125';
 export const AVP_RUNTIME_PATH = 'src/dlc/avp-2004/index.html';

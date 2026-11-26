@@ -1,0 +1,1579 @@
+{
+  "schema": 1,
+  "title": "AVP 2004 — cinq visuels V002 guidés par références, deux décors intégrés",
+  "date": "2026-11-26",
+  "baseCommit": "2e8309081d206b86d9f234ebfc33c13ea74970f4",
+  "scope": "Continuation de la bible et du runtime AVP 0.11.0. Deux PNG remplacent le dessin de props déjà présents ; trois études demeurent source uniquement.",
+  "exact": false,
+  "canonExact": false,
+  "counts": {
+    "generatedFiles": 5,
+    "generatedBytes": 9917937,
+    "imageConditioned": 5,
+    "textOnly": 0,
+    "sourceFileDistributed": 0,
+    "runtimeIntegrated": 2,
+    "sourceOnlyCandidates": 3,
+    "fidelityCertified": 0,
+    "blockedGenerations": 0,
+    "referenceFilesInspected": 8,
+    "referenceFilesProvidedToGenerator": 7,
+    "evidenceScreenshots": 6
+  },
+  "references": [
+    {
+      "id": "johnlee",
+      "url": "https://www.johnleemodelmaker.me/avp.aspx",
+      "kind": "praticien de production, photographies de maquettes et plateau",
+      "note": "La page identifie la maquette du satellite, la machine Reine au tiers et le levage de la Reine. Les images originales publiées sont petites."
+    },
+    {
+      "id": "propstore_celtic",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/449/lot/156867/13-Celtic-s-Ian-Whyte-Screen-Matched-Predator-Costume-Display-AVP-ALIEN-VS-PREDATOR-2004",
+      "kind": "lot de costume de production avec photographie",
+      "note": "La notice rattache le masque et les dommages thoraciques à des plans du film. La fragilité et l’usure actuelles du costume ne définissent pas son état original. Les dimensions publiées concernent le costume exposé."
+    },
+    {
+      "id": "propstore_snowcat",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/496/lot/192510/460-Light-Up-Weyland-Antarctic-Snowcat-Model-Miniature-AVP-ALIEN-VS-PREDATOR-2004",
+      "kind": "notice de miniature de production ; photographie non récupérée",
+      "note": "Miniature PistenBully issue de l’équipe de Prague. La notice donne WI-PBOO3-A et AJ-2 ; plusieurs éléments se sont détachés après la production. Son état en vitrine et ses mesures ne décrivent pas un véhicule grandeur nature."
+    },
+    {
+      "id": "clipcafe_snowcat",
+      "url": "https://clip.cafe/alien-vs-predator-2004/seven-seasons-on-the-ice-and-ive-never-seen-a-gun-save-someones-life/",
+      "kind": "extrait du film réhébergé ; image décodée localement",
+      "note": "Plan de la soute observé à 27 secondes dans cet extrait. Ce repère est relatif au clip et ne remplace pas un timecode du master."
+    },
+    {
+      "id": "clipcafe_whalebones",
+      "url": "https://clip.cafe/alien-vs-predator-2004/what-are-these-whale-bones/",
+      "kind": "capture du film réhébergée",
+      "note": "Image attribuée à la scène des ossements de la station baleinière ; montage exact et cadrage du master à vérifier."
+    },
+    {
+      "id": "imcdb",
+      "url": "https://www.imcdb.org/vehicle_100380-PistenBully-300.html",
+      "kind": "capture du film réhébergée et identification communautaire",
+      "note": "La capture nocturne aide à vérifier la silhouette. Le numéro commercial 300 reste une attribution communautaire."
+    },
+    {
+      "id": "avpcentral",
+      "url": "https://www.avpcentral.com/alexa-woods",
+      "kind": "image attribuée au film, réhébergement secondaire",
+      "note": "Vue plongeante du final, utile pour l’implantation. Recadrage et traitement de l’image non certifiés ; source auxiliaire."
+    },
+    {
+      "id": "project_v001",
+      "kind": "project source and historical candidate inventory",
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2e8309081d206b86d9f234ebfc33c13ea74970f4/docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+      "note": "Les huit candidats V001 et leur manifeste historique restent inchangés."
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/openai/sprites/avp2004-reference-v002/snowcat-avp2004-v002.png",
+      "bytes": 1963290,
+      "sha256": "b52a3a30a70c8a43fdc9b6390025a71804c8cde979eb9e309d0c70e2de579b98",
+      "gitBlobSha": "47953727d5ff5f89105257b4b74bab42ec521362",
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "alpha": {
+        "method": "Pillow RGBA alpha inspection only; original image bytes copied unchanged",
+        "alphaZero": 712420,
+        "alphaNonzero": 860108,
+        "alphaFull": 632,
+        "medianNonzero": 253,
+        "bboxAlpha128": [
+          38,
+          5,
+          2136,
+          715
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 45.304
+      },
+      "label": "Snowcat Weyland — cabine rouge",
+      "category": "véhicules",
+      "catalogIds": [
+        "AVP2004-115"
+      ],
+      "canonIds": [
+        "vehicle_snowcat"
+      ],
+      "promptKey": "snowcatPrompt",
+      "sourceRefs": [
+        "clipcafe_snowcat",
+        "imcdb",
+        "propstore_snowcat",
+        "project_v001"
+      ],
+      "referenceMode": "image-conditioned",
+      "inputPixelsProvided": true,
+      "inputImages": [
+        {
+          "role": "prior generated candidate, style and orientation only; geometry being corrected",
+          "path": "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+          "sha256": "6c7b3b7840660de29c8a71c7324d71b116964cceadc704719cdd37fd949bad94",
+          "sourceId": "project_v001"
+        },
+        {
+          "role": "visual reference pixels",
+          "file": "clipcafe-snowcat-hold-27s.jpg",
+          "sourceId": "clipcafe_snowcat",
+          "url": "https://clip.cafe/videos/seven-seasons-on-the-ice-and-ive-never-seen-a-gun-save-someones-life.mp4",
+          "sha256": "e700e06889dbc8cbc2c5daf0b34abfceb5990d2eb78a9158206103f2d62eed60",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "role": "visual reference pixels",
+          "file": "imcdb-snowcat-film.jpg",
+          "sourceId": "imcdb",
+          "url": "https://www.imcdb.org/i100380.jpg",
+          "sha256": "ee644ebe9447520cbb704bf6a179a5a32f8356b8bf5fca0e6776e15ae67ddc2f",
+          "width": 716,
+          "height": 306
+        }
+      ],
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "sourceFileAdmitted": true,
+      "sourceFileDistributed": false,
+      "pixelsEmbedded": true,
+      "runtimeIntegrated": true,
+      "runtimeAssetId": "film-snowcat",
+      "runtimePlacements": [
+        {
+          "room": "landing",
+          "x": 520,
+          "y": 77,
+          "requestedHeight": 185,
+          "role": "décor fixe de véhicule, déjà présent",
+          "positionChanged": false,
+          "collisionChanged": false
+        }
+      ],
+      "review": "Cabine rouge corrigée d’après le plan de soute ; plateau gris, lame attachée et chenilles lisibles. Géométrie frontale, marquages et nombre de galets ne sont pas certifiés. La silhouette alpha128 ne touche pas le bord, mais les marges haute/basse sont petites. Intégré comme décor existant ; aucune conduite ajoutée. Échelle de scène adaptée, sans mesure du film.",
+      "remainingWork": [
+        "Marquages des engins à relever séparément",
+        "Vue frontale et dessous non documentés",
+        "Nombre de galets et petits feux reconstruits",
+        "Animation de conduite et collision de véhicule non livrées"
+      ],
+      "postprocessing": "none; original PNG bytes copied unchanged",
+      "runtimeFraming": {
+        "frame": [
+          38,
+          5,
+          2098,
+          710
+        ],
+        "pivot": [
+          1087.0,
+          715
+        ],
+        "fit": [
+          380,
+          185
+        ],
+        "layoutNote": "Boîte de rendu en unités de mise en scène, pas une mesure du film. Coordonnées et collisions historiques conservées. Pivot sur le contact inférieur mesuré du cadrage alpha >= 128."
+      }
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-reference-v002/whalebone-avp2004-v002.png",
+      "bytes": 1763267,
+      "sha256": "b3a6b036ff5328ec698635bd89ea0f8c589c22d7b97f0294a1d9fd5d68667c2c",
+      "gitBlobSha": "44fe32da2a245bf510723f926b6d4ac72476eb1e",
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "alpha": {
+        "method": "Pillow RGBA alpha inspection only; original image bytes copied unchanged",
+        "alphaZero": 921663,
+        "alphaNonzero": 651875,
+        "alphaFull": 3369,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          67,
+          38,
+          1736,
+          860
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 58.573
+      },
+      "label": "Station baleinière — côtes irrégulières",
+      "category": "props",
+      "catalogIds": [],
+      "canonIds": [
+        "prop_whaling_equipment"
+      ],
+      "promptKey": "whalebonePrompt",
+      "sourceRefs": [
+        "clipcafe_whalebones",
+        "project_v001"
+      ],
+      "referenceMode": "image-conditioned",
+      "inputPixelsProvided": true,
+      "inputImages": [
+        {
+          "role": "prior generated candidate, style and orientation only; geometry being corrected",
+          "path": "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+          "sha256": "92507c5ceb5f8d947d57b7486bc271e37d59b7f09314960b58af9c4a0340c976",
+          "sourceId": "project_v001"
+        },
+        {
+          "role": "visual reference pixels",
+          "file": "clipcafe-whalebones-film.jpg",
+          "sourceId": "clipcafe_whalebones",
+          "url": "https://clip.cafe/img800/what-are-these-whale-bones.jpg",
+          "sha256": "568f11da7a2edd56c081f25d84f11c4f7afbfa4dff13468db1a3cb0aa5708157",
+          "width": 800,
+          "height": 450
+        }
+      ],
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "sourceFileAdmitted": true,
+      "sourceFileDistributed": false,
+      "pixelsEmbedded": true,
+      "runtimeIntegrated": true,
+      "runtimeAssetId": "whalebone",
+      "runtimePlacements": [
+        {
+          "room": "station",
+          "x": 350,
+          "y": 225,
+          "scale": 1.4,
+          "requestedHeight": 168,
+          "role": "ossements au premier plan, déjà présents",
+          "positionChanged": false,
+          "collisionChanged": false
+        }
+      ],
+      "review": "Les côtes séparées, inégales et partiellement enfouies remplacent l’ancienne arche régulière avec colonne supérieure. La projection reste une adaptation à la scène. Nombre total, espacements et taille ne sont pas mesurés. Appui inférieur vérifié, passage vers le bureau dégagé ; occlusion des jambes de Lex cohérente avec le premier plan.",
+      "remainingWork": [
+        "Nombre et position exacte des côtes hors champ inconnus",
+        "Aucune longueur métrique établie",
+        "Pas de reconstitution du squelette entier",
+        "Échelle et projection latérale adaptées au jeu"
+      ],
+      "postprocessing": "none; original PNG bytes copied unchanged",
+      "runtimeFraming": {
+        "frame": [
+          67,
+          38,
+          1669,
+          822
+        ],
+        "pivot": [
+          901.5,
+          860
+        ],
+        "fit": [
+          360,
+          168
+        ],
+        "layoutNote": "Boîte de rendu en unités de mise en scène, pas une mesure du film. Coordonnées et collisions historiques conservées. Pivot sur le contact inférieur mesuré du cadrage alpha >= 128."
+      }
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-reference-v002/weyland-satellite-avp2004-v002.png",
+      "bytes": 1741951,
+      "sha256": "6e6c218bc11d364089727a575b0077a6474c74180159297ee6880e1e0cdcc97e",
+      "gitBlobSha": "46ed111da3682638bc7525de626106c25a469c45",
+      "width": 1536,
+      "height": 1024,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "alpha": {
+        "method": "Pillow RGBA alpha inspection only; original image bytes copied unchanged",
+        "alphaZero": 1234344,
+        "alphaNonzero": 338520,
+        "alphaFull": 0,
+        "medianNonzero": 253,
+        "bboxAlpha128": [
+          166,
+          32,
+          1445,
+          1002
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 78.477
+      },
+      "label": "Satellite Weyland — étude de la maquette",
+      "category": "props",
+      "catalogIds": [],
+      "canonIds": [
+        "prop_satellite",
+        "loc_earth_orbit"
+      ],
+      "promptKey": "satellitePrompt",
+      "sourceRefs": [
+        "johnlee",
+        "project_v001"
+      ],
+      "referenceMode": "image-conditioned",
+      "inputPixelsProvided": true,
+      "inputImages": [
+        {
+          "role": "prior generated candidate, style and orientation only; geometry being corrected",
+          "path": "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png",
+          "sha256": "8283a5cdd918c5e92d78f97d511e0336201a67817598494cb654ef4130fac3db",
+          "sourceId": "project_v001"
+        },
+        {
+          "role": "visual reference pixels",
+          "file": "johnlee-satellite-maquette.jpg",
+          "sourceId": "johnlee",
+          "url": "https://www.johnleemodelmaker.me/images/avp/AVP_0018_S72.JPG",
+          "sha256": "4af96bb02f17b7a0f9bd3ed4c6c69c2757d437cfe6181e8509e0926a06efaa44",
+          "width": 333,
+          "height": 167
+        }
+      ],
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "sourceFileAdmitted": true,
+      "sourceFileDistributed": false,
+      "pixelsEmbedded": false,
+      "runtimeIntegrated": false,
+      "runtimeAssetId": null,
+      "runtimePlacements": [],
+      "review": "Corps axial allongé blanc/doré et plusieurs panneaux radiaux d’après la maquette John Lee, à la place du cube à deux ailes V001. Candidat source uniquement ; aucun satellite physique placé sur la passerelle. La photographie de 333×167 pixels ne valide ni le nombre exact de petits éléments, ni les faces cachées, ni la conformité au modèle final.",
+      "remainingWork": [
+        "Maquette de travail à comparer au modèle et au plan final",
+        "Faces cachées et microdétails inconnus",
+        "Marges faibles à certaines pointes",
+        "Aucun écran orbital, balayage ou raccord de scène intégré"
+      ],
+      "postprocessing": "none; original PNG bytes copied unchanged"
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-reference-v002/celtic-damaged-avp2004-v001.png",
+      "bytes": 2238279,
+      "sha256": "7a63b003195d3bc92b5aee3b4b79a1b2160495b61dc437e738afb2a2ad819d61",
+      "gitBlobSha": "3863e561ba14cf8eb6df8be815bf9d3fbc520460",
+      "width": 1024,
+      "height": 1536,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "alpha": {
+        "method": "Pillow RGBA alpha inspection only; original image bytes copied unchanged",
+        "alphaZero": 985122,
+        "alphaNonzero": 587742,
+        "alphaFull": 0,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          166,
+          18,
+          830,
+          1507
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 62.632
+      },
+      "label": "Celtic — costume endommagé masqué",
+      "category": "personnages",
+      "catalogIds": [
+        "AVP2004-028",
+        "AVP2004-073"
+      ],
+      "canonIds": [
+        "char_celtic"
+      ],
+      "promptKey": "celticPrompt",
+      "sourceRefs": [
+        "propstore_celtic",
+        "project_v001"
+      ],
+      "referenceMode": "image-conditioned",
+      "inputPixelsProvided": true,
+      "inputImages": [
+        {
+          "role": "visual reference pixels",
+          "file": "propstore-celtic-costume.jpg",
+          "sourceId": "propstore_celtic",
+          "url": "https://propstoreauction.com/images/lot/7165/716572_xl.jpg?ts=1746206591",
+          "sha256": "97763a424e09f792007bbff5eea617152020a24af1d4e01eb6dba37f53854cac",
+          "width": 734,
+          "height": 734
+        }
+      ],
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "sourceFileAdmitted": true,
+      "sourceFileDistributed": false,
+      "pixelsEmbedded": false,
+      "runtimeIntegrated": false,
+      "runtimeAssetId": null,
+      "runtimePlacements": [],
+      "review": "Masque, résille, peau marbrée, armure asymétrique, pagne et jambières reprennent la famille visuelle du costume exposé. Le résultat reste surtout de trois quarts frontal, malgré la demande de vue latérale ; pose non admise à la locomotion. Aucun canon d’épaule ajouté. Le costume endommagé n’est pas une variante intacte et l’usure de collection ne prouve pas l’état précis dans le film.",
+      "remainingWork": [
+        "Profil latéral strict et vue arrière à produire",
+        "Dommages à attribuer à un instant précis du duel",
+        "Animations et points de contact des armes absents",
+        "Ne valide pas la fiche Celtic démasqué AVP2004-037"
+      ],
+      "postprocessing": "none; original PNG bytes copied unchanged"
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-reference-v002/queen-machine-avp2004-v001.png",
+      "bytes": 2211150,
+      "sha256": "6699b2e272cc387e20a3b59c20f7d87e76c009588174c1b403b950acc7baea83",
+      "gitBlobSha": "7e93e85599ce4a9f50e87441bc0a208fb9e37c82",
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "alpha": {
+        "method": "Pillow RGBA alpha inspection only; original image bytes copied unchanged",
+        "alphaZero": 684791,
+        "alphaNonzero": 888747,
+        "alphaFull": 664,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          39,
+          0,
+          1742,
+          871
+        ],
+        "edgePixelsAlpha128": 64,
+        "percentTransparent": 43.519
+      },
+      "label": "Reine — étude de machine de ponte",
+      "category": "props",
+      "catalogIds": [],
+      "canonIds": [
+        "creature_queen",
+        "prop_queen_restraints",
+        "loc_queen_chamber"
+      ],
+      "promptKey": "queenMachinePrompt",
+      "sourceRefs": [
+        "johnlee",
+        "project_v001"
+      ],
+      "referenceMode": "image-conditioned",
+      "inputPixelsProvided": true,
+      "inputImages": [
+        {
+          "role": "visual reference pixels",
+          "file": "johnlee-queen-machine-side.jpg",
+          "sourceId": "johnlee",
+          "url": "https://www.johnleemodelmaker.me/images/avp/P1010084_S72.JPG",
+          "sha256": "306797bfb4a9dba9b238c8c289cc69ea1669f2d0331afface1c7b552c3c1ddc6",
+          "width": 333,
+          "height": 167
+        },
+        {
+          "role": "visual reference pixels",
+          "file": "johnlee-queen-hoist.jpg",
+          "sourceId": "johnlee",
+          "url": "https://www.johnleemodelmaker.me/images/avp/P1010017_S72.JPG",
+          "sha256": "58172b2776547b32a419abbbcc883e57a8228b218c0d5c180f0aa26698fa225a",
+          "width": 333,
+          "height": 167
+        }
+      ],
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "sourceFileAdmitted": true,
+      "sourceFileDistributed": false,
+      "pixelsEmbedded": false,
+      "runtimeIntegrated": false,
+      "runtimeAssetId": null,
+      "runtimePlacements": [],
+      "review": "Étude du grand arc nervuré, des brides et de la masse organique lobée, sans la caméra de tournage visible dans une référence. L’anatomie et les petits mécanismes sont reconstruits à partir de deux photos de 333×167. Les chaînes sont tronquées en haut du cadre : 64 pixels alpha≥128 touchent le bord. Candidat documentaire incomplet ; aucune admission runtime, aucun plafond ou ancrage fictif ajouté à la salle.",
+      "remainingWork": [
+        "Attaches supérieures tronquées, à compléter par références",
+        "Mécanismes et anatomie fine reconstruits",
+        "Pas d’échelle réelle déduite de la maquette au tiers",
+        "États cryostase, ponte, rupture et trajet des œufs à construire ensemble",
+        "Ne remplace ni la Reine ni son palan dans la campagne"
+      ],
+      "postprocessing": "none; original PNG bytes copied unchanged"
+    }
+  ],
+  "prompts": {
+    "snowcatPrompt": "Use case: precise-object-edit\nAsset type: one transparent lateral 2D vehicle sprite for the landing area of the AVP (2004) DLC.\nInput 1: the previous generated Snowcat. Edit target for 2D rendering style and left-facing orientation only. Its all-grey cab, excessively elongated proportions, cargo bags and tall rear box must not be treated as references.\nInput 2: actual film frame in the Piper Maru hold. This is the main authority for cabin colour, cab shape, metallic rear loading platform, lights and industrial details. The cabin is RED, not grey or white.\nInput 3: actual film frame of the Snowcats at night outdoors, auxiliary reference for tracks, layout and field use.\nPrimary request: make one corrected Weyland expedition PistenBully Snowcat matching these film references as closely as they allow. A compact angular red enclosed cab with broad dark windows, black continuous tracks under the vehicle, simple metallic grey rear loading deck, restrained steel handrails, and amber warning lamps. The front faces LEFT. Include the simple front snow-plow blade documented for the production miniature, connected by a believable short lifting linkage. The rear must remain an open industrial loading platform, not a tall enclosed truck body or a pile of invented luggage.\nKeep the cabin-to-deck proportions close to the film. Do not add a turret, weapon, personnel, duplicate vehicle, oversized wheels or fantasy machinery. Do not invent registration numbers or illegible lettering: leave small ambiguous markings unobtrusive rather than assigning one vehicle's number to the whole fleet.\nComposition: entire vehicle in clean readable side elevation, approximately eye-level camera, modest shallow depth only if needed for legibility. All blade, tracks, lamps and antenna within the frame, minimum 6 percent transparent margin. Wheels/track contact line horizontal.\nStyle: detailed hand-painted 2D game asset, cold restrained lighting, red paint clearly visible with slight weathering, realistic steel and rubber. No dramatic bloom, no detached pieces, no snowfield, no cast ground shadow, no sky, no opaque background, no text label or watermark.\nExactly ONE independent vehicle sprite on true transparent background.",
+    "whalebonePrompt": "Use case: precise-object-edit\nAsset type: single transparent 2D scenery prop for the whaling station in AVP (2004).\nImage 1 is the previous generated whalebone candidate, provided only as an edit target and surface-detail reference. Its museum-like complete rib cage, top vertebral column and regular arched tunnel are incorrect for this film scene.\nImage 2 is the actual film frame of the protagonists at the whaling station. Use the exposed ribs in the left foreground as the authoritative shape and placement reference.\nRebuild image 1 as ONE isolated group of the exposed whale ribs seen in image 2: tall separate weathered pale bone curves, uneven spacing and heights, larger ribs to the left and progressively shorter ribs to the right, curving inward. Their lower ends disappear into the same ground-contact level. Preserve a shallow two-row depth from the film reference so the gaps remain visible. Do not connect the ribs with a top spine, a skull, a complete animal skeleton or a perfectly regular architectural arch.\nComposition: readable lateral 2D scenery sprite, entire rib group within the canvas with generous empty margins. Do not copy the people, industrial tank, platforms, snowfield, sky or film-frame black bars. No base slab, cast ground shadow, labels, background glow, border or watermark.\nMaterial: worn ivory-grey bone with restrained frost and small irregularities matching the frame, detailed painted Tantalus game style. Neutral cool diffuse lighting suitable for the existing nighttime scene. Do not add gore.\nOne independent asset only. Background truly transparent, including every opening between ribs. Preserve a clean ground-contact line at the rib ends without a large snow mound.",
+    "satellitePrompt": "Use case: precise-object-edit\nAsset type: one independent transparent PNG orbital satellite sprite for the AVP (2004) game bible.\nInput image 1: previous generated satellite candidate. Edit target and painting-material style only; its generic two-wing geometry is wrong.\nInput image 2: John Lee's actual Weyland satellite production maquette photograph. This is the authoritative reference for overall silhouette, arrangement, proportions and viewpoint, although fine detail is limited by its small resolution.\nPrimary request: rebuild the satellite in image 1 to closely follow image 2. Use the long narrow pale white/grey and gold cylindrical axial body, long thin axial antenna, separate small forward hub, and the several blue solar panel assemblies distributed radially on white structural arms. Reproduce the visible arrangement in the reference; do not keep the two large symmetrical rectangular wings, cube-shaped central camera bus, dish or mast from image 1.\nComposition: one complete isolated satellite, same approximate oblique side view as the maquette, with every panel and antenna inside the canvas and at least 7 percent empty transparent margin around the entire silhouette. No pedestal, stand, room, planet, extra object, labels, border or watermark.\nStyle: detailed hand-painted 2D game asset with believable metal and solar-cell materials, restrained cool lighting and fine clean edge definition. Keep the reference topology more important than invented detail. Small unseen details must remain simple and unobtrusive. No terrestrial grime or snow.\nOutput: one satellite only, genuinely transparent background. This is a reference-informed candidate, not a certified exact reconstruction.",
+    "celticPrompt": "Use case: style-transfer\nAsset type: one independent full-body 2D character sprite for the AVP (2004) production bible.\nInput: the photograph of the screen-matched Celtic Predator production costume. It is the identity, costume, material and damage reference. Preserve Celtic's specific helmet and armour; this is not Scar, Chopper or a generic Predator.\nPrimary request: translate this photographed costume into a detailed hand-painted lateral game-facing idle stance, facing RIGHT, with a slight torso turn only to keep the distinctive mask and chest damage readable. Whole body, both feet, entire helmet and dreadlocks inside the canvas with clear margins. Weight balanced, arms naturally lowered, hands empty.\nPreserve the broad metallic Celtic mask with its strong ridged lower face and angular crown, long dark separate dreadlocks, ochre mottled skin under black mesh, asymmetric damaged chest armour, heavy shoulder plates, brown diagonal strap and leather belt/pouches, long central loincloth, broad wrist guards, layered metal greaves and clawed armoured feet. Keep the damage visible on this reference rather than silently restoring an intact variant.\nDo not copy the mannequin's display base or white photography background. Omit the display-mounted shoulder cannon because its availability in the targeted scene is not established; do not invent other weapons or props. No bare human face, no extra arms, no action scene, no gore, no blood effects, no text, no watermark.\nStyle: crisp high-detail 2D game painting suitable for Aliens Tantalus, restrained neutral cool illumination, believable worn metal and skin, consistent proportions from the reference. The result is a specific damaged-costume candidate for review, not a certified exact or animated character.\nOne character only on truly transparent background; no cast ground shadow or background glow.",
+    "queenMachinePrompt": "Use case: style-transfer\nAsset type: one isolated detailed 2D production-study image for the AVP (2004) game bible.\n\nThe two attached low-resolution photographs are model-maker John Lee's practical Queen suspension/egg-laying machinery for AVP (2004). Image 1 is the main shape and attachment reference; image 2 clarifies the suspended circular assembly. Their low resolution does not establish unseen engineering or fine surface detail.\n\nRecreate ONE coherent suspended Queen-and-ovipositor machine assembly in a readable shallow three-quarter SIDE view, with the Queen's recognisable ridged head at the LEFT, the pale ochre lobed organic egg sac extending to the right beneath a dark metallic circular/ribbed support framework. Retain the visible heavy ring structure, closely repeated radial slots and ribbed bands, metal clasps and restraint links actually connected around the organic mass. Keep the machine continuous and weight-bearing: supports touch what they support. The large organic lobes hang BELOW the upper circular structure, with the dark biomechanical Queen head and short visible upper torso emerging from the left end. Include only visible Queen anatomy needed to read the photographed suspended assembly; do not add an unrelated standing full-body Queen beside it.\n\nThe primary silhouette must be driven by the supplied photographs: a broad low horizontal grouping of rounded lobes and the heavy circular arc above/behind them. NOT a rectangular prison cage, not a rectangular computer rack, not an upright human-sized throne, not a generic spaceship engine. Maintain the photographed warm cream/ochre membranes and near-black metal/alien exoskeleton, with restrained cool neutral highlights; no blood or gore.\n\nStyle: finely painted realistic 2D game-production art, strong material separation and clear silhouette, no exaggerated glowing tech. Show the entire coherent assembly in the frame with generous transparent breathing room. Background completely transparent, including spaces through the mechanism. No set wall, no floor, no pedestal, no stars, no production camera or filming equipment (the black object at right of image 2 is not part of the fictional prop), no humans, no extra monsters, no text, logos, arrows or labels. This is a visual candidate based on low-resolution production references, not a dimensional reconstruction or a 1:1 certification."
+  },
+  "generationAttempts": [
+    {
+      "promptKey": "snowcatPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-reference-v002/snowcat-avp2004-v002.png",
+      "tool": "built-in imagegen",
+      "inputPixelsProvided": true,
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "whalebonePrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-reference-v002/whalebone-avp2004-v002.png",
+      "tool": "built-in imagegen",
+      "inputPixelsProvided": true,
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "satellitePrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-reference-v002/weyland-satellite-avp2004-v002.png",
+      "tool": "built-in imagegen",
+      "inputPixelsProvided": true,
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "celticPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-reference-v002/celtic-damaged-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "inputPixelsProvided": true,
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "queenMachinePrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-reference-v002/queen-machine-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "inputPixelsProvided": true,
+      "postprocessing": "none"
+    }
+  ],
+  "evidenceScreenshots": [
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/before-desktop-landing.png",
+      "bytes": 430639,
+      "sha256": "394891f6a7be8e85fe9f740d60de64e8998542f944fc0998f1181a5de9319294",
+      "width": 1365,
+      "height": 900,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    },
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/before-desktop-station.png",
+      "bytes": 363968,
+      "sha256": "dd6e6b197c6dfd03626132e16e2603479636aba2a3b8b12d6cd345c09077a035",
+      "width": 1365,
+      "height": 900,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    },
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/desktop-landing.png",
+      "bytes": 472862,
+      "sha256": "ec559ebecba3902bdef97969c40376c9d328a7c6f88a18268a836f5707ee5ec6",
+      "width": 1365,
+      "height": 900,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    },
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/desktop-station.png",
+      "bytes": 435928,
+      "sha256": "0b7112f1a68fccfd0dca28c584b710f5d1c1a12416bd4f08f7925109216cd308",
+      "width": 1365,
+      "height": 900,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    },
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/mobile-landing.png",
+      "bytes": 218008,
+      "sha256": "e41d67b8e4030a592e303066b925f9df2aad0e1d0ed52c25f56cb102e32c0616",
+      "width": 390,
+      "height": 844,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    },
+    {
+      "path": "docs/narrative/dlc/avp-2004-reference-v002/evidence/mobile-station.png",
+      "bytes": 156006,
+      "sha256": "492d6981317ac47e66667d27f376edbb8f2609f03ff6df6ea5e757ea239a051f",
+      "width": 390,
+      "height": 844,
+      "kind": "unaltered Chromium screenshot",
+      "sourceFileDistributed": false
+    }
+  ],
+  "historicalBatch": {
+    "manifest": "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+    "sha256AtBaseline": "73e29401bd2e8b95bb34b3cd2b607d52dff1859d8fd360c504453fd6315577af",
+    "files": 8,
+    "bytes": 17031468,
+    "newRuntimeActivations": 0,
+    "modifiedByThisPass": false
+  },
+  "verification": {
+    "originalImageBytesPreserved": true,
+    "alphaScope": "Alpha128 containment is a framing measurement, not a fidelity score. Queen chain ends touch the upper border and remain source only.",
+    "runtime": {
+      "path": "src/dlc/avp-2004/index.html",
+      "bytes": 6086145,
+      "sha256": "c757ea479d5f44e56ee9ec02553ef18652f8627a19eb2aa712db959512eb262b",
+      "version": "0.11.0",
+      "integrationRevision": 2,
+      "saveSchema": 10,
+      "moduleCount": 30,
+      "svgFallbackCount": 145,
+      "dataAndSvgComparedToBaseline": true,
+      "catalogStatusesChanged": false
+    },
+    "nodeContract": {
+      "suite": "avp-host-bundle-contract",
+      "source": "src/dlc/avp-2004/index.html",
+      "sha256": "c757ea479d5f44e56ee9ec02553ef18652f8627a19eb2aa712db959512eb262b",
+      "method": "Node VM: actual bundled simulation; host exit with explicit DOM/navigation/storage doubles. Not browser or full native-host verification.",
+      "passed": 20,
+      "failed": 0,
+      "results": [
+        {
+          "name": "All 30 inline scripts compile without remote dependencies",
+          "ok": true
+        },
+        {
+          "name": "Shipped identity remains AVP 0.11 and its dedicated storage namespace",
+          "ok": true
+        },
+        {
+          "name": "Content counts preserve the recovered campaign rather than announcing v0.12",
+          "ok": true
+        },
+        {
+          "name": "Only two existing scene props receive self-contained PNG overrides",
+          "ok": true
+        },
+        {
+          "name": "All 104 door faces have reciprocal destinations",
+          "ok": true
+        },
+        {
+          "name": "All 43 navigable rooms are topologically reachable; epilogue is separate",
+          "ok": true
+        },
+        {
+          "name": "Actual simulation movement survives serialization: hybrid/expedition",
+          "ok": true
+        },
+        {
+          "name": "Actual simulation movement survives serialization: hybrid/survival",
+          "ok": true
+        },
+        {
+          "name": "Actual simulation movement survives serialization: classic/expedition",
+          "ok": true
+        },
+        {
+          "name": "Actual simulation movement survives serialization: classic/survival",
+          "ok": true
+        },
+        {
+          "name": "Native Tantalus saves, unknown schemas and cinematic-room states are refused",
+          "ok": true
+        },
+        {
+          "name": "Host mode uses only three exact installation paths plus legacy explicit host query",
+          "ok": true
+        },
+        {
+          "name": "Relative host-return URL resolves to the same-origin root",
+          "ok": true
+        },
+        {
+          "name": "Successful host exit saves once, pauses inputs/audio and navigates locally",
+          "ok": true
+        },
+        {
+          "name": "Standalone host action is inert",
+          "ok": true
+        },
+        {
+          "name": "Leaving a failed expedition retains its last playable checkpoint",
+          "ok": true
+        },
+        {
+          "name": "Quota failure offers export and stay before an explicit unsaved exit",
+          "ok": true
+        },
+        {
+          "name": "Concurrent notebook conflict offers export without claiming a successful save",
+          "ok": true
+        },
+        {
+          "name": "Ordinary pagehide retains autosave; browser cache restoration retains pause access",
+          "ok": true
+        },
+        {
+          "name": "Both title and pause use the same save-aware host return",
+          "ok": true
+        }
+      ]
+    },
+    "browserBefore": {
+      "phase": "before",
+      "browser": "143.0.7499.4",
+      "fixture": "Fresh schema-10 states advanced to chapter 2 and imported through the native notebook file input. No enemies, doors, actions, positions or game loop are overridden after import. Real keyboard/pointer input follows; canvas drawImage is observed without changing its output.",
+      "ok": true,
+      "profiles": [
+        {
+          "name": "desktop-http",
+          "viewport": [
+            1365,
+            900
+          ],
+          "scenes": [
+            {
+              "room": "landing",
+              "mode": "hybrid",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "svg",
+                "count": 8,
+                "naturalWidth": 320,
+                "naturalHeight": 190,
+                "args": [
+                  -151.68895522388058,
+                  -180.13063432835818,
+                  303.37791044776117,
+                  180.13063432835818
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "hybrid",
+              "draw": {
+                "id": "whalebone",
+                "kind": "svg",
+                "count": 9,
+                "naturalWidth": 240,
+                "naturalHeight": 240,
+                "args": [
+                  -99.32373134328358,
+                  -198.64746268656717,
+                  198.64746268656717,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "landing",
+              "mode": "classic",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "svg",
+                "count": 37,
+                "naturalWidth": 320,
+                "naturalHeight": 190,
+                "args": [
+                  -151.68895522388058,
+                  -180.13063432835818,
+                  303.37791044776117,
+                  180.13063432835818
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "classic",
+              "draw": {
+                "id": "whalebone",
+                "kind": "svg",
+                "count": 33,
+                "naturalWidth": 240,
+                "naturalHeight": 240,
+                "args": [
+                  -99.32373134328358,
+                  -198.64746268656717,
+                  198.64746268656717,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            }
+          ],
+          "journeys": [
+            {
+              "route": "landing → station → landing → reload",
+              "arrival": {
+                "room": "station",
+                "player": {
+                  "x": 155,
+                  "y": 172,
+                  "face": 1,
+                  "hp": 100,
+                  "stamina": 100
+                },
+                "steps": 114.08949999999936
+              },
+              "returned": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              },
+              "resumed": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              }
+            },
+            {
+              "route": "station façade → office → station",
+              "inside": {
+                "x": 155,
+                "y": 144,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              },
+              "outside": {
+                "x": 565,
+                "y": 93,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              }
+            }
+          ],
+          "pageErrors": [],
+          "remoteRequests": [],
+          "initialStateSummary": {
+            "dlc": "avp-2004-rite-under-ice",
+            "version": "0.11.0",
+            "schema": 10,
+            "room": "maru",
+            "chapter": 0,
+            "mode": "hybrid",
+            "difficulty": "expedition"
+          }
+        }
+      ]
+    },
+    "browserAfter": {
+      "phase": "after",
+      "browser": "143.0.7499.4",
+      "fixture": "Fresh schema-10 states advanced to chapter 2 and imported through the native notebook file input. No enemies, doors, actions, positions or game loop are overridden after import. Real keyboard/pointer input follows; canvas drawImage is observed without changing its output.",
+      "ok": true,
+      "profiles": [
+        {
+          "name": "desktop-http",
+          "viewport": [
+            1365,
+            900
+          ],
+          "scenes": [
+            {
+              "room": "landing",
+              "mode": "hybrid",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 7,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -184.99902985074624,
+                  -125.21383335941832,
+                  369.9980597014925,
+                  125.21383335941833
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "hybrid",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 8,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -201.6682574354505,
+                  -198.64746268656717,
+                  403.336514870901,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "landing",
+              "mode": "classic",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 35,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -184.99902985074624,
+                  -125.21383335941832,
+                  369.9980597014925,
+                  125.21383335941833
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "classic",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 31,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -201.6682574354505,
+                  -198.64746268656717,
+                  403.336514870901,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            }
+          ],
+          "journeys": [
+            {
+              "route": "landing → station → landing → reload",
+              "arrival": {
+                "room": "station",
+                "player": {
+                  "x": 155,
+                  "y": 172,
+                  "face": 1,
+                  "hp": 100,
+                  "stamina": 100
+                },
+                "steps": 120.23149999999964
+              },
+              "returned": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              },
+              "resumed": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              }
+            },
+            {
+              "route": "station façade → office → station",
+              "inside": {
+                "x": 155,
+                "y": 144,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              },
+              "outside": {
+                "x": 565,
+                "y": 93,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              }
+            }
+          ],
+          "pageErrors": [],
+          "remoteRequests": [],
+          "initialStateSummary": {
+            "dlc": "avp-2004-rite-under-ice",
+            "version": "0.11.0",
+            "schema": 10,
+            "room": "maru",
+            "chapter": 0,
+            "mode": "hybrid",
+            "difficulty": "expedition"
+          }
+        },
+        {
+          "name": "mobile-http",
+          "viewport": [
+            390,
+            844
+          ],
+          "scenes": [
+            {
+              "room": "landing",
+              "mode": "hybrid",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 9,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -171.65896375266524,
+                  -116.1848086409841,
+                  343.3179275053305,
+                  116.1848086409841
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "hybrid",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 9,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -187.12619261357446,
+                  -184.323223880597,
+                  374.2523852271489,
+                  184.323223880597
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "landing",
+              "mode": "classic",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 23,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -171.65896375266524,
+                  -116.1848086409841,
+                  343.3179275053305,
+                  116.1848086409841
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "classic",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 23,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -187.12619261357446,
+                  -184.323223880597,
+                  374.2523852271489,
+                  184.323223880597
+                ]
+              },
+              "horizontalOverflow": 0
+            }
+          ],
+          "journeys": [
+            {
+              "route": "landing → station → landing → reload",
+              "arrival": {
+                "room": "station",
+                "player": {
+                  "x": 155,
+                  "y": 172,
+                  "face": 1,
+                  "hp": 100,
+                  "stamina": 100
+                },
+                "steps": 120.24999999999977
+              },
+              "returned": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              },
+              "resumed": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              }
+            },
+            {
+              "route": "station façade → office → station",
+              "inside": {
+                "x": 155,
+                "y": 144,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              },
+              "outside": {
+                "x": 565,
+                "y": 93,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              }
+            }
+          ],
+          "pageErrors": [],
+          "remoteRequests": [],
+          "initialStateSummary": {
+            "dlc": "avp-2004-rite-under-ice",
+            "version": "0.11.0",
+            "schema": 10,
+            "room": "maru",
+            "chapter": 0,
+            "mode": "hybrid",
+            "difficulty": "expedition"
+          }
+        },
+        {
+          "name": "desktop-file",
+          "viewport": [
+            1365,
+            900
+          ],
+          "scenes": [
+            {
+              "room": "landing",
+              "mode": "hybrid",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 8,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -184.99902985074624,
+                  -125.21383335941832,
+                  369.9980597014925,
+                  125.21383335941833
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "hybrid",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 9,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -201.6682574354505,
+                  -198.64746268656717,
+                  403.336514870901,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "landing",
+              "mode": "classic",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "png",
+                "count": 28,
+                "naturalWidth": 2172,
+                "naturalHeight": 724,
+                "args": [
+                  38,
+                  5,
+                  2098,
+                  710,
+                  -184.99902985074624,
+                  -125.21383335941832,
+                  369.9980597014925,
+                  125.21383335941833
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "classic",
+              "draw": {
+                "id": "whalebone",
+                "kind": "png",
+                "count": 33,
+                "naturalWidth": 1774,
+                "naturalHeight": 887,
+                "args": [
+                  67,
+                  38,
+                  1669,
+                  822,
+                  -201.6682574354505,
+                  -198.64746268656717,
+                  403.336514870901,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            }
+          ],
+          "journeys": [
+            {
+              "route": "landing → station → landing → reload",
+              "arrival": {
+                "room": "station",
+                "player": {
+                  "x": 155,
+                  "y": 172,
+                  "face": 1,
+                  "hp": 100,
+                  "stamina": 100
+                },
+                "steps": 120.23150000000032
+              },
+              "returned": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              },
+              "resumed": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              }
+            },
+            {
+              "route": "station façade → office → station",
+              "inside": {
+                "x": 155,
+                "y": 144,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              },
+              "outside": {
+                "x": 565,
+                "y": 93,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              }
+            }
+          ],
+          "pageErrors": [],
+          "remoteRequests": [],
+          "initialStateSummary": {
+            "dlc": "avp-2004-rite-under-ice",
+            "version": "0.11.0",
+            "schema": 10,
+            "room": "maru",
+            "chapter": 0,
+            "mode": "hybrid",
+            "difficulty": "expedition"
+          }
+        },
+        {
+          "name": "fallback-http",
+          "viewport": [
+            1365,
+            900
+          ],
+          "scenes": [
+            {
+              "room": "landing",
+              "mode": "hybrid",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "svg",
+                "count": 9,
+                "naturalWidth": 320,
+                "naturalHeight": 190,
+                "args": [
+                  -151.68895522388058,
+                  -180.13063432835818,
+                  303.37791044776117,
+                  180.13063432835818
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "hybrid",
+              "draw": {
+                "id": "whalebone",
+                "kind": "svg",
+                "count": 7,
+                "naturalWidth": 240,
+                "naturalHeight": 240,
+                "args": [
+                  -99.32373134328358,
+                  -198.64746268656717,
+                  198.64746268656717,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "landing",
+              "mode": "classic",
+              "draw": {
+                "id": "film-snowcat",
+                "kind": "svg",
+                "count": 20,
+                "naturalWidth": 320,
+                "naturalHeight": 190,
+                "args": [
+                  -151.68895522388058,
+                  -180.13063432835818,
+                  303.37791044776117,
+                  180.13063432835818
+                ]
+              },
+              "horizontalOverflow": 0
+            },
+            {
+              "room": "station",
+              "mode": "classic",
+              "draw": {
+                "id": "whalebone",
+                "kind": "svg",
+                "count": 23,
+                "naturalWidth": 240,
+                "naturalHeight": 240,
+                "args": [
+                  -99.32373134328358,
+                  -198.64746268656717,
+                  198.64746268656717,
+                  198.64746268656717
+                ]
+              },
+              "horizontalOverflow": 0
+            }
+          ],
+          "journeys": [
+            {
+              "route": "landing → station → landing → reload",
+              "arrival": {
+                "room": "station",
+                "player": {
+                  "x": 155,
+                  "y": 172,
+                  "face": 1,
+                  "hp": 100,
+                  "stamina": 100
+                },
+                "steps": 120.23149999999919
+              },
+              "returned": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              },
+              "resumed": {
+                "room": "landing",
+                "player": {
+                  "x": 1745,
+                  "y": 172,
+                  "face": -1,
+                  "hp": 100,
+                  "stamina": 100
+                }
+              }
+            },
+            {
+              "route": "station façade → office → station",
+              "inside": {
+                "x": 155,
+                "y": 144,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              },
+              "outside": {
+                "x": 565,
+                "y": 93,
+                "face": 1,
+                "hp": 100,
+                "stamina": 100
+              }
+            }
+          ],
+          "pageErrors": [],
+          "remoteRequests": [],
+          "initialStateSummary": {
+            "dlc": "avp-2004-rite-under-ice",
+            "version": "0.11.0",
+            "schema": 10,
+            "room": "maru",
+            "chapter": 0,
+            "mode": "hybrid",
+            "difficulty": "expedition"
+          }
+        }
+      ]
+    },
+    "browserReceiptTreatment": "Initial states abbreviated to identity fields. Scene draw calls, journeys, errors, remote requests and viewport results retained from executed Chromium receipts.",
+    "browserOriginalReceipts": [
+      {
+        "file": "before-browser-report.json",
+        "bytes": 10618,
+        "sha256": "2049d0bd714fd1a63d2a61694c7254b8895ed2651c73f7349d17e3f682a3ff14"
+      },
+      {
+        "file": "after-browser-report.json",
+        "bytes": 42208,
+        "sha256": "4f3047a05db07fcebd58d52c8d1860062cd909eae83a87ca4effad5f54e3d138"
+      },
+      {
+        "file": "runtime-contract.json",
+        "bytes": 2706,
+        "sha256": "cfcfa122a50489d43d0c4696c4769949684c0af2ddb08ae03741b260642694fb"
+      },
+      {
+        "file": "browser-check.mjs",
+        "bytes": 10039,
+        "sha256": "51de863c2683eedc82f467023424588e6fe5558e3ed357c7d0f22bce11978369"
+      }
+    ],
+    "scopeLimit": "Two scene graphics and two connections per browser profile; not an end-to-end completion of all 52 campaign links or native host campaign.",
+    "repositoryGateStatus": "Passed locally after all new files existed; remote CI results are not included in this receipt.",
+    "repositoryGates": {
+      "nodeDlcTests": {
+        "passed": 39,
+        "failed": 0,
+        "includesInternalAvpContractCount": 20,
+        "countsOverlap": true
+      },
+      "bundleRebuildMatches": true,
+      "admissionFilesVerified": 182,
+      "changedPathsSourceAdmitted": 33,
+      "changedPathRejections": 0,
+      "markdownLinksAtValidation": 70,
+      "brokenMarkdownLinks": 0,
+      "otherDlcEntriesPreserved": 17,
+      "sharedDecisionsPreserved": 22,
+      "gitDiffCheck": true,
+      "runtimeManifestSha256": "f0e9001f450dab9ede06c3823130b84665dbc3d7218c26a65823fd40b7fe6adf"
+    }
+  },
+  "licensingNote": "URLs identify research sources. External production photographs and film clips are not copied into this repository pass. The five PNGs are generated interpretations, not scans, and are not certified 1:1."
+}

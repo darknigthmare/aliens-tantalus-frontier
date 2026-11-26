@@ -27,6 +27,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
   AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
   reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  AVP_REFERENCE_BASELINE_V002 as referenceBaseline,
+  AVP_REFERENCE_SUCCESSORS_V002 as referenceSuccessors,
+  reviewedAvpReferenceHostDigestV002 as advanceReference,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
@@ -133,8 +136,8 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors)])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production) source chain/;
+const finalEndpoint = path => referenceSuccessors[path]?.currentSha256 || productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production|AVP-production-to-reference-V002) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -444,7 +447,7 @@ test('the complete Tantalus join accepts the reviewed campaign link and rejects 
 });
 
 
-// Source documents and individual PNG candidates; none are admitted to gameplay.
+// The immutable V001 source inventory remains separate from V002 pixel activation.
 const avpProductionDocumentDirectory = 'docs/narrative/dlc/avp-2004-production-20261126';
 const avpProductionAssetDirectory = 'assets/openai/sprites/avp2004-production-v001';
 const avpProductionDocumentPaths = [
@@ -478,13 +481,13 @@ test('AVP production advances only its two exact source admission hosts after th
     assert.ok(Object.isFrozen(receipt));
     const prior = bibleDocumentsSuccessors[path] || spriteSuccessors[path];
     assert.equal(receipt.previousSha256, prior.currentSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceProductionBible(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceProductionBible(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceProductionBible(path, value), /Broken DLC-bible-to-AVP-production source chain/);
     for (const value of [receipt.previousSha256, receipt.currentSha256])
-      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
   }
   const terminal = read(audit).toString();
   assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126'))),
@@ -559,4 +562,153 @@ test('the AVP production manifest pins each original PNG and keeps generated, in
     for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
     assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
   }
+});
+
+
+// BEGIN AVP REFERENCE V002 TESTS
+const avpReferenceDocumentDirectory = 'docs/narrative/dlc/avp-2004-reference-v002';
+const avpReferenceAssetDirectory = 'assets/openai/sprites/avp2004-reference-v002';
+const avpReferenceEvidenceDirectory = avpReferenceDocumentDirectory + '/evidence';
+const avpReferenceDocumentPaths = [
+  'README.md', 'GALLERY.md', 'manifest.json', 'reference-sources.json', 'VALIDATION.md'
+].map(name => avpReferenceDocumentDirectory + '/' + name);
+const avpReferenceEvidencePaths = [
+  'before-desktop-landing.png', 'before-desktop-station.png',
+  'desktop-landing.png', 'desktop-station.png', 'mobile-landing.png', 'mobile-station.png'
+].map(name => avpReferenceEvidenceDirectory + '/' + name);
+const avpReferencePngPaths = [
+  'snowcat-avp2004-v002.png', 'whalebone-avp2004-v002.png',
+  'weyland-satellite-avp2004-v002.png', 'celtic-damaged-avp2004-v001.png',
+  'queen-machine-avp2004-v001.png'
+].map(name => avpReferenceAssetDirectory + '/' + name);
+
+test('AVP reference V002 advances only the two reviewed V001 source hosts without rewriting receipts', () => {
+  assert.equal(referenceBaseline, '2e8309081d206b86d9f234ebfc33c13ea74970f4');
+  assert.deepEqual(Object.keys(referenceSuccessors), ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs']);
+  assert.equal(sha(JSON.stringify(referenceSuccessors)), '2a2b5822f457017a6ff21f27d06534a6c1fc300a8d782b36993eba26b4b6e422');
+  assert.ok(Object.isFrozen(referenceSuccessors));
+  for (const [path, receipt] of Object.entries(referenceSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.equal(receipt.previousSha256, productionBibleSuccessors[path].currentSha256, path);
+    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(advanceReference(path, receipt.previousSha256), receipt.currentSha256, path);
+    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceReference(path, value), /Broken AVP-production-to-reference-V002 source chain/);
+    for (const value of [receipt.previousSha256, receipt.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+  }
+  const terminal = read(audit).toString();
+  assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN AVP REFERENCE V002 HOST RECEIPTS'))),
+    '4903c76855ef2212b75d6c632454a9a95981d7cc6074feb519f24c3823dce6ab', 'All historical receipt declarations, including V001, remain exact');
+  assert.equal(Object.hasOwn(referenceSuccessors, audit), false);
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceReference(path, 'unchanged'), 'unchanged');
+});
+
+test('AVP V002 originals and review documents have exact source admission and no standalone build admission', () => {
+  const projectRoot = fileURLToPath(new URL('../', import.meta.url));
+  const filter = createBuildAssetFilter(projectRoot);
+  for (const directory of [avpReferenceDocumentDirectory, avpReferenceEvidenceDirectory, avpReferenceAssetDirectory]) {
+    assert.equal(isPublicDistributionPathV86(directory, { directory: true }), true, directory);
+    assert.equal(isPublicDistributionPathV86(directory, { directory: true, built: true }), false, directory);
+    assert.equal(isPublicDistributionPathV86(directory), false, directory);
+    assert.ok(EXCLUDED_BUILD_ASSET_PATHS.some(root => directory === root || directory.startsWith(root + '/')));
+    assert.equal(filter(join(projectRoot, directory)), false, directory);
+    for (const suffix of ['unreviewed.md', 'extra.png', 'nested/file.png', '../unreviewed.md', 'MANIFEST.JSON']) {
+      const path = directory + '/' + suffix;
+      for (const options of [{}, { directory: true }, { built: true }])
+        assert.equal(isPublicDistributionPathV86(path, options), false, path);
+      assert.equal(filter(join(projectRoot, directory, 'nested/unreviewed.png')), false);
+    }
+  }
+  for (const path of [...avpReferenceDocumentPaths, ...avpReferenceEvidencePaths, ...avpReferencePngPaths]) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+    assert.equal(filter(join(projectRoot, path)), false, path);
+    assert.ok(lstatSync(join(projectRoot, path)).isFile(), path);
+    assert.equal(lstatSync(join(projectRoot, path)).isSymbolicLink(), false, path);
+  }
+  assert.deepEqual(readdirSync(join(projectRoot, avpReferenceAssetDirectory)).sort(),
+    avpReferencePngPaths.map(path => path.slice(avpReferenceAssetDirectory.length + 1)).sort());
+  assert.deepEqual(readdirSync(join(projectRoot, avpReferenceEvidenceDirectory)).sort(),
+    avpReferenceEvidencePaths.map(path => path.slice(avpReferenceEvidenceDirectory.length + 1)).sort());
+  for (const path of avpReferenceEvidencePaths) {
+    const bytes = read(path);
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', path);
+    assert.ok(bytes.readUInt32BE(16) > 0 && bytes.readUInt32BE(20) > 0, path);
+  }
+  for (const path of avpReferenceDocumentPaths.filter(path => path.endsWith('.json')))
+    assert.doesNotThrow(() => JSON.parse(read(path).toString()), path);
+});
+
+
+test('AVP V002 manifest preserves original bytes and separates source files from two activated pixel payloads', () => {
+  const manifest = JSON.parse(read(avpReferenceDocumentDirectory + '/manifest.json').toString());
+  const registry = JSON.parse(read('scripts/dlc/avp-2004/RASTERS.json').toString());
+  assert.ok(Array.isArray(manifest.files) && Array.isArray(manifest.references) && Array.isArray(manifest.generationAttempts));
+  assert.deepEqual(manifest.files.map(entry => entry.path).sort(), [...avpReferencePngPaths].sort());
+  assert.equal(new Set(manifest.files.map(entry => entry.path)).size, 5);
+  const references = new Set(manifest.references.map(entry => entry.id));
+  assert.equal(references.size, manifest.references.length);
+  for (const reference of manifest.references) {
+    assert.ok(typeof reference.id === 'string' && reference.id.length > 0);
+    assert.match(reference.url, /^https:\/\//);
+    assert.ok(typeof reference.kind === 'string' && reference.kind.length > 0);
+  }
+  const activated = new Map([
+    [avpReferenceAssetDirectory + '/snowcat-avp2004-v002.png', { id: 'film-snowcat', room: 'landing' }],
+    [avpReferenceAssetDirectory + '/whalebone-avp2004-v002.png', { id: 'whalebone', room: 'station' }]
+  ]);
+  assert.deepEqual(registry.assets.map(entry => entry.path).sort(), [...activated.keys()].sort());
+  assert.equal(registry.assets.length, 2);
+  for (const entry of manifest.files) {
+    const bytes = read(entry.path);
+    assert.equal(bytes.length, entry.bytes, entry.path);
+    assert.match(entry.sha256, /^[a-f0-9]{64}$/);
+    assert.equal(sha(bytes), entry.sha256, entry.path);
+    if (entry.gitBlobSha !== undefined) {
+      assert.match(entry.gitBlobSha, /^[a-f0-9]{40}$/);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length).update(Buffer.from([0])).update(bytes).digest('hex'), entry.gitBlobSha, entry.path);
+    }
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', entry.path);
+    assert.equal(bytes.subarray(12, 16).toString('ascii'), 'IHDR', entry.path);
+    assert.equal(bytes.readUInt32BE(16), entry.width, entry.path);
+    assert.equal(bytes.readUInt32BE(20), entry.height, entry.path);
+    assert.ok(entry.width > 0 && entry.height > 0, entry.path);
+    assert.equal(bytes[24], 8, entry.path);
+    assert.equal(bytes[25], 6, 'RGBA original: ' + entry.path);
+    assert.equal(entry.generated, true);
+    assert.equal(entry.status, 'candidate');
+    assert.equal(entry.exact, false);
+    assert.equal(entry.canonExact, false);
+    assert.equal(entry.sourceFileAdmitted, true);
+    assert.equal(entry.sourceFileDistributed, false);
+    const expected = activated.get(entry.path);
+    assert.equal(entry.pixelsEmbedded, !!expected, entry.path);
+    assert.equal(entry.runtimeIntegrated, !!expected, entry.path);
+    assert.ok(Array.isArray(entry.runtimePlacements), entry.path);
+    if (expected) {
+      assert.equal(entry.runtimeAssetId, expected.id);
+      assert.deepEqual([...new Set(entry.runtimePlacements.map(placement => typeof placement === 'string' ? placement : placement.room))], [expected.room]);
+      const raster = registry.assets.find(asset => asset.path === entry.path);
+      for (const field of ['path', 'sha256', 'bytes', 'width', 'height'])
+        assert.equal(raster[field], entry[field], entry.path + ': ' + field);
+      assert.equal(raster.id, expected.id);
+    } else {
+      assert.ok(entry.runtimeAssetId === null || entry.runtimeAssetId === undefined);
+      assert.deepEqual(entry.runtimePlacements, []);
+    }
+    assert.ok(typeof entry.promptKey === 'string' && entry.promptKey.length > 0);
+    assert.ok(Array.isArray(entry.sourceRefs) && entry.sourceRefs.length > 0);
+    for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
+    assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
+  }
+  const inventory = JSON.parse(read('scripts/dlc/avp-2004/MANIFEST.json').toString());
+  assert.equal(inventory.integrationRevision, 2);
+  const record = inventory.sources.find(entry => entry.path === 'scripts/dlc/avp-2004/RASTERS.json');
+  assert.ok(record, 'The exact raster registry is part of the reviewed source manifest');
+  assert.equal(record.sha256, sha(read(record.path)));
+  assert.equal(record.bytes, read(record.path).length);
 });
