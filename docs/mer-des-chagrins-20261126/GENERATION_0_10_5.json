@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "edition": "0.10.5",
+  "date": "2026-11-26",
+  "sourceCommit": "7d90c5f81d046c9c8840c48dfed4051c809714e8",
+  "tool": "image_gen",
+  "mode": "built-in",
+  "requestedAssetIds": [
+    "characters/decker-walk-a-ready",
+    "characters/decker-walk-b-ready",
+    "characters/manning-walk-a-ready",
+    "characters/manning-walk-b-ready",
+    "characters/manning-walk-pass-a-ready",
+    "characters/manning-walk-pass-b-ready",
+    "devices/console-complete",
+    "devices/isolation-closed",
+    "doors/boarding-ramp",
+    "doors/rock-breach",
+    "equipment/sensor-off",
+    "equipment/weakpoint-destroyed",
+    "terrain/hive"
+  ],
+  "producedAssetCount": 13,
+  "pngBytes": 19505614,
+  "refusedAssetCount": 0,
+  "totalToolCalls": 16,
+  "supersededCandidateCount": 3,
+  "qualification": "Thirteen selected individual PNGs from sixteen successful calls. Two isolation candidates and one Decker contact candidate were superseded after visual review. Prior refused adult/plasma/compact-flamethrower requests were not retried. Exact prompts and project references retained; no canon certification.",
+  "requests": [
+    {
+      "id": "characters/manning-walk-a-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: CONTACT A: the near/camera-side leg steps forward toward image-right, the forward heel just touches an imaginary common floor, toe subtly raised. The far leg extends behind toward image-left, its toe still on that same floor. Use a restrained stride and a nearly level hip height.",
+      "status": "selected",
+      "iteration": 1,
+      "selectedSha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+      "referenceSha256": "786272996f5059f19b6661283986c7cd3ed812f67c884db4f031cfb9b3824995",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png",
+        "sha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+        "gitBlobSha": "1a5a9ea71d3e6fce9514507263df2e8396d5e66d",
+        "sizeBytes": 1853882,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "characters/decker-walk-a-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: CONTACT A: the near/camera-side leg steps forward toward image-right, the forward heel just touches an imaginary common floor, toe subtly raised. The far leg extends behind toward image-left, its toe still on that same floor. Use a restrained stride and a nearly level hip height. Preserve Decker's brown field jacket and hanging side bag, with no added holster or lamp.",
+      "status": "selected",
+      "iteration": 1,
+      "selectedSha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+      "referenceSha256": "15c1f6c41359cd2adefd63add625cf552c49d27c806f47f80729e8ef5df55cc8",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png",
+        "sha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+        "gitBlobSha": "1af10db794cc504743f43a0f76b71b922d1af5ff",
+        "sizeBytes": 1764629,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "characters/manning-walk-b-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: CONTACT B, the opposite leg phase to contact A: the far leg steps forward toward image-right, its heel just touches an imaginary common floor, toe subtly raised. The near/camera-side leg extends behind toward image-left, its toe still on the same floor. A modest counter-step, not a mirror image: face and torso still face right and near/far clothing details stay on the same side.",
+      "status": "selected",
+      "iteration": 1,
+      "selectedSha256": "2ea4fee779b7216efe38f557d1efc07fa0e99be3289febd091fcfb4cb565111e",
+      "referenceSha256": "786272996f5059f19b6661283986c7cd3ed812f67c884db4f031cfb9b3824995",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-b-ready.png",
+        "sha256": "2ea4fee779b7216efe38f557d1efc07fa0e99be3289febd091fcfb4cb565111e",
+        "gitBlobSha": "9d811fc2e83dc862f785e0469a311f19a69edb04",
+        "sizeBytes": 1816517,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "characters/manning-walk-pass-a-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: PASSING A: keep the head, torso, close empty hands, arms and costume as in the source. The near/camera-side leg is the supporting leg, almost vertical with its boot flat on an imaginary floor. The far leg is swinging forward underneath the pelvis, its knee only gently bent and its boot a few centimetres above the floor. Feet pass close beneath the body, not a high stepping or running pose. Keep the hips at almost the contact-frame height.",
+      "status": "selected",
+      "iteration": 1,
+      "selectedSha256": "2bad7edbaeb6737c6237220bb825e976126ee09b44440b60dcc5128b1bca2aff",
+      "referenceSha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-a-ready.png",
+        "sha256": "2bad7edbaeb6737c6237220bb825e976126ee09b44440b60dcc5128b1bca2aff",
+        "gitBlobSha": "ab9cdb93b3296ba4340b7a53f895bbe81e367689",
+        "sizeBytes": 1713000,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "characters/manning-walk-pass-b-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: PASSING B, opposite supporting leg: keep the head, torso, close empty hands, arms and costume as in the source. The far leg is supporting the body, almost vertical with its boot flat on an imaginary floor. The near/camera-side leg swings forward underneath the pelvis, its knee only gently bent and boot a few centimetres above the floor. Feet pass close beneath the body; no high knee. Keep the hips at almost the contact-frame height. This is not a horizontally mirrored pose: he still faces image-right and equipment stays on its original side.",
+      "status": "selected",
+      "iteration": 1,
+      "selectedSha256": "3d947888368c21c4ef77880335650d7023ff293727c8fdc33994e83243559481",
+      "referenceSha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-b-ready.png",
+        "sha256": "3d947888368c21c4ef77880335650d7023ff293727c8fdc33994e83243559481",
+        "gitBlobSha": "c645dcf8260a295d9cb99743e9448bca08f6c333",
+        "sizeBytes": 1679099,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "characters/decker-walk-b-ready",
+      "prompt": "Use case: identity-preserve.\nAsset type: one individual full-body character PNG for the side-view Canvas game Aliens: Tantalus Frontier — La Mer des Chagrins.\nInput image 1 is the edit target and exact identity, costume, palette and rendering reference.\nPreserve the same adult man, face, hairstyle, age, body build, clothing layers, belt, pouches, trousers, boots, weathering, realistic painted detail and right-facing three-quarter side camera.\nChange only the walking leg phase and the compact empty-handed pistol-ready arm pose. Keep the torso upright, head level, eyes looking right, and both hands close together in front of the lower chest: the right hand forms the primary grip and the left hand cups immediately underneath and around it, with a small empty gap for the separately rendered grip. Do not spread the support hand far forward like a rifle pose. Arms remain steady while walking.\nThere must be NO weapon, gun, magazine, prop or extra equipment painted into this character image. The game's existing pistol is composited separately at the hands.\nFraming: exactly one man, complete head to soles, centered, with a clear margin around both boots and hands. Portrait canvas approximately 1024×1536. Moderate natural walking stride, knees low, no running or marching exaggeration. Same character scale as the reference.\nBackground: genuine transparent alpha, including gaps between limbs and around hands; no floor, shadow, opaque backdrop, vignette or glow. No text, labels, collage or additional figure. Preserve coherent anatomy and five fingers per hand.\nSpecific pose: CONTACT B, opposite leg phase to the source contact A. Keep Decker's head, torso, close empty hands, arms, jacket, side bag, face and exact proportions as in the source. The far leg steps forward toward image-right, its heel just touches an imaginary common floor, toe subtly raised. The near/camera-side leg extends behind toward image-left, its toe still on that same floor. Modest stride. This is not a horizontal mirror; the face still looks image-right and side bag stays on its existing side.",
+      "status": "superseded",
+      "iteration": 1,
+      "candidateSha256": "6042cad804e810130c5adf41de7b5539eeb673f90e22bdc3612220ef86986996",
+      "candidateSizeBytes": 1759629,
+      "reasonSuperseded": "Opposite near/far leg phase was not sufficiently clear; one targeted leg-phase correction selected.",
+      "referenceSha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+      "transparent_background": true,
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png"
+      ]
+    },
+    {
+      "id": "characters/decker-walk-b-ready",
+      "iteration": 2,
+      "prompt": "Use case: identity-preserve.\nAsset type: a single full-body walking contact pose for an existing 2D game character.\nInput image 1 is the edit target.\nPreserve the entire upper body exactly in its existing visual design: Decker's face and curly brown hair, brown jacket, dark shirt, side bag, both closely joined empty hands, torso, right-facing camera, painted materials and all colors.\nChange ONLY the leg phase below the pelvis. Reverse which leg is forward. The leg nearest the camera, on the same side as his hanging brown satchel, must extend BACKWARD toward image-left, with its knee slightly bent and its rear boot touching by the toe while the heel is raised. Its outer thigh cargo pocket must travel back with that near leg. The far leg, partly behind the near thigh at the pelvis, must extend FORWARD toward image-right and touch down on its heel with a slightly raised toe. Make this a visibly different opposite-foot contact, not the same leg position with a longer stride.\nKeep a moderate ordinary walking stride, anatomically coherent hip-to-knee-to-ankle connections, low knees, and the same almost-level torso height. He is neither running nor marching. Do not mirror the image or move the satchel to the other side.\nExactly one complete man, head and both entire boots inside a 1024×1536 portrait frame with clear margins. His hands remain empty for a separately composed game object. No gun, weapon, extra prop, text, sheet or duplicate figure.\nKeep a genuinely transparent alpha background with no floor, shadow, glow or vignette.",
+      "referenceCandidate": "decker-walk-b-ready-first",
+      "status": "selected",
+      "referenceCandidateSha256": "6042cad804e810130c5adf41de7b5539eeb673f90e22bdc3612220ef86986996",
+      "selectedSha256": "5e2053595a8a3c8ad2be198b0f673f2f0223a4fbc0635f9ca2714564b667b1a5",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b-ready.png",
+        "sha256": "5e2053595a8a3c8ad2be198b0f673f2f0223a4fbc0635f9ca2714564b667b1a5",
+        "gitBlobSha": "36f8614de3df6797b3010b96526c49e27014913b",
+        "sizeBytes": 1764986,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "devices/isolation-closed",
+      "prompt": "Use case: precise-object-edit. Asset type: one isolated completed-state 2D game sprite for Alien: Sea of Sorrows. Input image 1 is the exact edit target and identity reference: the existing olive industrial isolation-valve assembly. Change ONLY the state of its existing black rectangular display: show one small solid muted green horizontal status light centered on the display, with the rest of the screen remaining black, no text or symbol. This represents isolation completed/valve closed. Preserve the complete body, bare central actuator shaft, four pipe flanges, every screw, conduit, wear mark, material, lighting, camera angle, scale, silhouette and placement from the source. Do not add a wheel, handle, lever, antenna, extra button, pipe, lettering, floor or shadow. Preserve the original 1199 by 1312 portrait canvas and original object alignment as closely as possible. Detailed realistic painted/prerendered industrial game art matching the reference exactly. Genuine transparent alpha outside the unchanged object, all original transparent holes retained, no background, no checkerboard, no glow halo, no watermark. One complete object only.",
+      "rejectionReason": "Generated canvas was too narrow and right flange touched edge. No production admission.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png"
+      ],
+      "referencedImageSha256": [
+        "f5bcc21a3c573fbb34f857aac4debe799e83229fa2456d95653a1a65122aa877"
+      ],
+      "transparent_background": true,
+      "iteration": 1,
+      "status": "superseded",
+      "candidateSha256": "0faa5a1b1f50b11fd98aeff466230b9884272912f0e463221b5ece9b9b17c4a1",
+      "candidateSizeBytes": 1456264
+    },
+    {
+      "id": "devices/console-complete",
+      "prompt": "Use case: precise-object-edit. Asset type: one isolated completed-state 2D game sprite for Alien: Sea of Sorrows. Input image 1 is the exact edit target and identity reference: the existing olive industrial console cabinet with two side handles, a black CRT screen, four square buttons and one central rotary dial. Change ONLY the black display and the existing upper-right green square button: place a single small muted green horizontal status bar centered in the black display and softly light the green square button to indicate completion. The screen remains predominantly black; no text, digits or symbols. Preserve every other pixel-level design feature as closely as possible: unchanged cabinet geometry and base, face angle, handles, red and yellow and grey buttons, rotary dial angle, hinges, screws, worn paint, lighting, silhouette, scale and placement. Preserve original 1312 by 1199 canvas and object alignment. No new controls, no redesign, no floor, no cast shadow, no scenery. Detailed realistic painted/prerendered industrial game art identical to the reference. Genuine transparent alpha outside the object and through existing gaps, no opaque backdrop, no checkerboard, no glow halo, no watermark. One whole cabinet only.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/devices/console.png"
+      ],
+      "referencedImageSha256": [
+        "90e7154ac78f5b9382b25d1a1c87d88ef8f83b976c99b21246691c34fc59ac25"
+      ],
+      "transparent_background": true,
+      "iteration": 1,
+      "status": "selected",
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/console-complete.png",
+        "sha256": "9cdfa8e39afde7165180591af5432165fd9b073226fe4954a612fd079d33922e",
+        "gitBlobSha": "ab0cb6eae71c186deff9a98969382f9bebfebea5",
+        "sizeBytes": 1874678,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "equipment/sensor-off",
+      "prompt": "Use case: precise-object-edit. Asset type: one isolated powered-off-state 2D game sprite for Alien: Sea of Sorrows. Input image 1 is the exact edit target and identity reference: the existing olive portable tripod motion sensor with tall deployed antenna, dark front optical display and small red circular indicator on its right front. Change ONLY the red indicator lens to an unlit near-black smoked glass lens; remove all red illumination and keep the existing display fully dark. It must read as the same deployed device with power off, not a folded or broken device. Preserve the antenna height and angle, tripod leg positions, body, front opening, all screws and cables, scratches, materials, lighting, silhouette, canvas alignment and scale exactly as closely as possible. Preserve the original 1425 by 1104 canvas. No new markings, controls, wires, holes, sparks, rust, shadows, floor, scenery or text. Detailed realistic painted/prerendered game art matching the source. Genuine transparent alpha outside the device and in all tripod gaps, no opaque background, no checkerboard, no watermark. One complete unchanged deployed sensor with its indicator off.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png"
+      ],
+      "referencedImageSha256": [
+        "2b5db634e981ffb5eab299313366ad01a170c9725bf32680918170ab713c5d12"
+      ],
+      "transparent_background": true,
+      "iteration": 1,
+      "status": "selected",
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor-off.png",
+        "sha256": "1ac6df767ac033e86123e917d401505c2b4093ab10879b7ef83602f83facf54b",
+        "gitBlobSha": "9f29d095c0ad2bb8bcc7c2f36eb0729db3556f71",
+        "sizeBytes": 1660847,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "equipment/weakpoint-destroyed",
+      "prompt": "Use case: precise-object-edit. Asset type: one isolated destroyed-state environmental attachment sprite for the Alien: Sea of Sorrows 2D game. Input image 1 is the exact edit target: one tall narrow biomechanical resin tether with forked attachment tips and a central oval resin node, an inanimate structure. Keep the same vertical length, fork endpoints, position, narrow silhouette, orientation, camera, source scale and original 887 by 1774 canvas. Change only its damaged state: the glossy olive resin has become dry matte charcoal, scorched and fissured; the central oval node is an inert crushed charred shell inside the existing outline, with a few subtle cracks. Preserve the long upper and lower strands and existing fork shapes. No living creature, character or body part; no blood, exposed flesh, detached pieces, flames, smoke, sparks, glow or new object. The top and bottom anchors remain exactly aligned with the original. Detailed realistic painted/prerendered game art matching the source geometry and neutral diffuse lighting. Genuine transparent alpha background and existing holes, no floor, no cast shadow, no scenery, no text, no watermark. One whole inanimate damaged resin attachment only.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint.png"
+      ],
+      "referencedImageSha256": [
+        "dcfed487dbfb0113b13bcb4c29d4e32fe1bf19ac9307b70e945f28a7a4ed7a00"
+      ],
+      "transparent_background": true,
+      "iteration": 1,
+      "status": "selected",
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint-destroyed.png",
+        "sha256": "28fd32af2e78a8b716bfeb4381606c43493864ef9b310ab4a956b6d7f702efef",
+        "gitBlobSha": "a20edef915bce4efbe05ceedbc40ce76572861f7",
+        "sizeBytes": 570761,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "doors/rock-breach",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated frontal rock-breach doorway frame sprite for an existing 2D side-view Alien: Sea of Sorrows game. Input image 1 is the material/style reference for weathered dark grey fractured rock; input image 2 is a secondary reference for restrained smoky mineral facets. Create only a thin irregular broken-rock rim surrounding a completely transparent tall walk-through opening, seen straight on in neutral orthographic front elevation. The opening has six broad uneven edges: a flat ground threshold open to the bottom, a left lower edge, a wider left shoulder halfway up, a sloping upper-left edge to a slightly off-center high top, a sloping upper-right edge, and a right shoulder. The aperture is about 0.9 times as wide as its height. Keep the rocky border narrow, about one tenth of the aperture width, with rough angular stone facets; restrained grey-green palette matching image 1, only tiny mineral veins matching image 2. The bottom opening must remain completely open and transparent between the two grounded jambs; no floor slab spanning it. Whole frame fully contained with clear margins, stable shared bottom contact line. No tunnel, interior, background wall, floor, door panel, bars, rails, lamp, cable, human, creature, egg, logo or writing. Both exterior background and entire central opening are genuinely transparent alpha, not black-painted and not a checkerboard. No cast shadow or glow. Detailed realistic painted/prerendered game art, one single connected broken-rock frame only, no second view, no sprite sheet. Portrait-ish canvas, object aspect ratio about 0.95, leaving room around the outer frame.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/decor/ravine.png",
+        "dlc/sea-of-sorrows-visual/sprites/decor/silica.png"
+      ],
+      "referencedImageSha256": [
+        "47872f4fec8be23bf1aa5c0fa6393dcb7486f99dc1f0189b626d50f5a5a9e76a",
+        "83288e32c604bfb09adf42ec22fa425270bfb3d916c6d8edeb4a68addd81cff9"
+      ],
+      "transparent_background": true,
+      "iteration": 1,
+      "status": "selected",
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/rock-breach.png",
+        "sha256": "148bd0426393027befd6399f8f55267a03cfeaa2c41f11d775b5ce7ef923da3b",
+        "gitBlobSha": "f9f3425102cceac572b70a4d76c5c4c275853b9b",
+        "sizeBytes": 777778,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "devices/isolation-closed",
+      "iteration": 2,
+      "prompt": "Use case: precise-object-edit. Edit this exact source sprite, preserving its full original 1199-by-1312 canvas, its original near-square aspect ratio and its original transparent margins. This is a minimal localized screen edit, not a redraw or reinterpretation. The source is an industrial olive cross-shaped valve: horizontal pipe/flange width is 1188 source pixels and total vertical pipe/flange height is 1300 pixels. Those proportions, silhouette and all placements must stay exactly the same. Keep the full left and right flanges wholly inside the frame, with the original clear transparent edge margins. Change ONLY a small region at the center of the existing black screen: add one small solid muted green horizontal status indicator, with the rest of the display remaining black. Preserve the bare central actuator shaft, every flange and bolt, conduit, paint texture, highlight, camera angle, object width, object height and base location unchanged. Do not add handles, levers, wheels, controls, text, symbols, floor, shadow, extra objects or any background. Return one complete identical valve sprite with its status now green. Genuine transparent alpha outside the object and in its original gaps. No cropping, no vertical stretch, no narrower body, no recomposition, no glow halo.",
+      "rejectionReason": "Object proportions too narrow; insufficient lateral transparent margin (5px left, 2px right at alpha >= 8). No production admission.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png"
+      ],
+      "referencedImageSha256": [
+        "f5bcc21a3c573fbb34f857aac4debe799e83229fa2456d95653a1a65122aa877"
+      ],
+      "transparent_background": true,
+      "status": "superseded",
+      "candidateSha256": "df0a4ac77d3c9c8732756a376ff34526364cb027484af12948f194f410929677",
+      "candidateSizeBytes": 1294079
+    },
+    {
+      "id": "devices/isolation-closed",
+      "iteration": 3,
+      "prompt": "Use case: precise-object-edit. Create the completed-state variant of the exact valve sprite in the reference. This is a minor edit, preserving the original object identity. The valve must be FULLY CONTAINED inside a square canvas with a generous 12 percent fully transparent margin on EACH of the four sides. Absolutely no part, including the outer flange bolts, may touch any canvas edge. Treat the entire existing valve assembly as one locked object: do not reshape any component, do not change its relative width and height, do not reposition parts. Its original total object width is 91 percent of its total object height. Center that unchanged whole object on the larger square transparent canvas. Change only the black rectangular screen by adding one small muted green horizontal status bar at its center. The rest of the screen stays black. Preserve the original bare actuator shaft, existing flanges, bolts, hose, metal texture, surface scratches, camera angle and lighting. No new wheel, lever, text, symbols, extra pipe or buttons. No floor, shadows, scene, vignette or glow. Genuine transparent alpha outside the whole object and through its gaps. One single complete existing olive industrial valve with its display indicating completion; same sprite geometry, extra clear margins only.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png"
+      ],
+      "referencedImageSha256": [
+        "f5bcc21a3c573fbb34f857aac4debe799e83229fa2456d95653a1a65122aa877"
+      ],
+      "transparent_background": true,
+      "status": "selected",
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/isolation-closed.png",
+        "sha256": "19df65f100687ad47fac328a4fe3273de189ca5209fc0c2a77065e730e8f38c6",
+        "gitBlobSha": "95273f53bf82ad08678b29d95589f05e15ae2bbf",
+        "sizeBytes": 903057,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "doors/boarding-ramp",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE standalone transparent PNG module for the existing 2D game La Mer des Chagrins. Input image 1 is the existing project shuttle, used as the construction and material reference. Produce only its lowered boarding ramp, as a separate reusable object viewed straight on from the boarding side. Preserve the shuttle's worn dull blue-grey steel, olive edge panels, heavy mechanical ribs and restrained amber details. Composition: a very wide shallow trapezoidal ramp seen from a low elevated frontal camera, near/front edge horizontal and widest, far/upper hinge edge horizontal at about 62.5 percent of the near width. Surface depth on the image about 30 percent of the near width. The two edges and low curbs must be symmetrical, with transverse anti-slip ridges; unobstructed flat walking surface. Keep the whole ramp inside the image with transparent margin. No ship hull, doorway, wall, floor surround, person, tall railing, tall piston, lettering, logo, interface, collage or second object. One ramp, realistic hand-painted industrial game sprite matching the input. Real transparent alpha background, no checkerboard. This is a modular interpretation of this existing game asset, not an assertion of a canon ship blueprint.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/decor/dropship.png"
+      ],
+      "referencedImageSha256": [
+        "0e3b67a555bb79d7a10fc5a85f68866d428e72f9c565502cf965520f62b049a0"
+      ],
+      "transparent_background": true,
+      "status": "selected",
+      "iteration": 1,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/boarding-ramp.png",
+        "sha256": "bb223fc2a0963d0d9707805e92f1fdc2dbf0f419bf123e8205264436def36d44",
+        "gitBlobSha": "0d42980d4df847c9e00afb46ab3fac75e318a9f7",
+        "sizeBytes": 1669244,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    },
+    {
+      "id": "terrain/hive",
+      "prompt": "Use case: stylized-concept. Asset type: ONE transparent floor surface sprite for the hive rooms of the existing 2D game La Mer des Chagrins. Input image 1 is the project's resin membrane, used for material/color continuity; input image 2 is the existing silica floor patch, used for the wide low ground-plane composition only. Create a broad low patch of dark olive-black and aged brown glossy biomechanical resin spread across a flat walkable floor. Low braided veins, flattened ridges, worn resin plates and very shallow slick folds, with restrained amber-grey highlights matching the membrane. Use the same shallow oblique ground-plane camera and long horizontal footprint as the silica patch. Low relief only, no obstacles or tall forms. Ragged soft alpha perimeter all around and transparent breathing room; no opaque rectangular backing. One isolated floor patch, seamless-looking internal pattern without obvious focal ornament, detailed painterly industrial science-fiction game art. No creatures, eggs, bones, skulls, characters, gore, buildings, doorway, weapons, text, icons, fog, cast shadow or extra objects. No horizon or whole scene. True transparent alpha background. The patch is a project material interpretation for existing room.kind=hive, not a canonical location map.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
+        "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png"
+      ],
+      "referencedImageSha256": [
+        "023e1cf43dfc3434ad541d88ec8588e5c1e423bd7c57e9b1428fb72c8a24bb45",
+        "1bc859b5800d8db432aa9848ebef16f45ce026309aa16845607a66b2d50e87ac"
+      ],
+      "transparent_background": true,
+      "status": "selected",
+      "iteration": 1,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/terrain/hive.png",
+        "sha256": "63d4d08fc5963c8d7d71d01c0e75e17f1b63da70bb19db39656e150ba51c0179",
+        "gitBlobSha": "f003dea145e78d3c03f2a1fe75b45c18513956ae",
+        "sizeBytes": 1457136,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      }
+    }
+  ],
+  "canonicalOneToOneCertified": false,
+  "completeAnimationCycles": false,
+  "sourcePngBytesModified": false
+}

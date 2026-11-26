@@ -107,7 +107,62 @@ STATE_PNGS = {
         "sizeBytes": 1597263
     }
 }
-NEW_PNGS = {**WALK_PNGS, **COMPLETION_PNGS, **STATE_PNGS}
+CONTINUATION_PNGS = {
+    "characters/decker-walk-a-ready": {
+        "sha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+        "sizeBytes": 1764629
+    },
+    "characters/decker-walk-b-ready": {
+        "sha256": "5e2053595a8a3c8ad2be198b0f673f2f0223a4fbc0635f9ca2714564b667b1a5",
+        "sizeBytes": 1764986
+    },
+    "characters/manning-walk-a-ready": {
+        "sha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+        "sizeBytes": 1853882
+    },
+    "characters/manning-walk-b-ready": {
+        "sha256": "2ea4fee779b7216efe38f557d1efc07fa0e99be3289febd091fcfb4cb565111e",
+        "sizeBytes": 1816517
+    },
+    "characters/manning-walk-pass-a-ready": {
+        "sha256": "2bad7edbaeb6737c6237220bb825e976126ee09b44440b60dcc5128b1bca2aff",
+        "sizeBytes": 1713000
+    },
+    "characters/manning-walk-pass-b-ready": {
+        "sha256": "3d947888368c21c4ef77880335650d7023ff293727c8fdc33994e83243559481",
+        "sizeBytes": 1679099
+    },
+    "devices/console-complete": {
+        "sha256": "9cdfa8e39afde7165180591af5432165fd9b073226fe4954a612fd079d33922e",
+        "sizeBytes": 1874678
+    },
+    "devices/isolation-closed": {
+        "sha256": "19df65f100687ad47fac328a4fe3273de189ca5209fc0c2a77065e730e8f38c6",
+        "sizeBytes": 903057
+    },
+    "doors/boarding-ramp": {
+        "sha256": "bb223fc2a0963d0d9707805e92f1fdc2dbf0f419bf123e8205264436def36d44",
+        "sizeBytes": 1669244
+    },
+    "doors/rock-breach": {
+        "sha256": "148bd0426393027befd6399f8f55267a03cfeaa2c41f11d775b5ce7ef923da3b",
+        "sizeBytes": 777778
+    },
+    "equipment/sensor-off": {
+        "sha256": "1ac6df767ac033e86123e917d401505c2b4093ab10879b7ef83602f83facf54b",
+        "sizeBytes": 1660847
+    },
+    "equipment/weakpoint-destroyed": {
+        "sha256": "28fd32af2e78a8b716bfeb4381606c43493864ef9b310ab4a956b6d7f702efef",
+        "sizeBytes": 570761
+    },
+    "terrain/hive": {
+        "sha256": "63d4d08fc5963c8d7d71d01c0e75e17f1b63da70bb19db39656e150ba51c0179",
+        "sizeBytes": 1457136
+    }
+}
+NEW_PNGS = {**WALK_PNGS, **COMPLETION_PNGS, **STATE_PNGS, **CONTINUATION_PNGS}
+PUBLISHED_0_10_4_ROWS_SHA256 = '2335f0c8d687753d567479510b5208180b1f1724aa22070a3649a825b7d66f43'
 PREVIOUS_ASSET_ROWS_SHA256 = 'b7458b3d7667db1e2acd819ca18a83267e637ab3351b31b4e3818a3bcd86be34'
 
 
@@ -127,8 +182,8 @@ def verify(repo):
     entries = {f'{category}/{ident}': entry for category, group in pack['assets'].items() for ident, entry in group.items()}
     rows = manifest['assets']
     require(pack['version'] == 1, 'Unexpected coordinate contract')
-    require(len(rows) == len(entries) == len(actual) == 139, 'Expected 139 individual PNG assets')
-    require(pack['spriteCount'] == manifest['counts']['pngFiles'] == 139, 'Declared PNG counts differ')
+    require(len(rows) == len(entries) == len(actual) == 152, 'Expected 152 individual PNG assets')
+    require(pack['spriteCount'] == manifest['counts']['pngFiles'] == 152, 'Declared PNG counts differ')
     require(len({r['id'] for r in rows}) == len(rows), 'Duplicate asset identifiers')
     require({r['metadata']['src'] for r in rows} == set(actual), 'PNG inventory is not exact')
     require(manifest['canonicalOneToOneCertified'] is False, 'Unsupported canon certification')
@@ -141,11 +196,16 @@ def verify(repo):
     require(sum(row['sizeBytes'] for row in historical) == HISTORICAL_BYTES, 'Historical PNG byte total changed')
     require(sha256(records).hexdigest() == HISTORICAL_DIGEST, 'Historical PNG hashes or identifiers changed')
     require(manifest['historicalIntegrity']['sha256'] == HISTORICAL_DIGEST, 'Historical digest declaration differs')
-    previous_rows = sorted([row for row in rows if row['id'] not in STATE_PNGS], key=lambda row: row['id'])
+    previous_rows = sorted([row for row in rows if row['id'] not in STATE_PNGS and row['id'] not in CONTINUATION_PNGS], key=lambda row: row['id'])
     require(len(previous_rows) == 126, 'Published 0.10.3 inventory changed')
     previous_bytes = json.dumps(previous_rows, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
     require(sha256(previous_bytes).hexdigest() == PREVIOUS_ASSET_ROWS_SHA256, 'A published 0.10.3 asset row or metadata changed')
     require(manifest['priorEdition0_10_3Integrity']['assetRowsSha256'] == PREVIOUS_ASSET_ROWS_SHA256, '0.10.3 metadata preservation pin differs')
+    published_rows = sorted([row for row in rows if row['id'] not in CONTINUATION_PNGS], key=lambda row: row['id'])
+    require(len(published_rows) == 139, 'Published 0.10.4 inventory changed')
+    published_bytes = json.dumps(published_rows, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
+    require(sha256(published_bytes).hexdigest() == PUBLISHED_0_10_4_ROWS_SHA256, 'A published 0.10.4 asset row or metadata changed')
+    require(manifest['priorEdition0_10_4Integrity']['assetRowsSha256'] == PUBLISHED_0_10_4_ROWS_SHA256, '0.10.4 metadata preservation pin differs')
     by_id = {row['id']: row for row in rows}
     for key, expected in NEW_PNGS.items():
         require(key in by_id and all(by_id[key][field] == value for field, value in expected.items()),
@@ -204,6 +264,10 @@ def verify(repo):
                         provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json' and
                         provenance.get('referenceSourcePath') == 'dlc/sea-of-sorrows-visual/sprites/characters/decker.png',
                         f'{key}: walking prompt/reference provenance missing')
+            elif key in CONTINUATION_PNGS:
+                require(provenance.get('promptId') == key and
+                        provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json',
+                        f'{key}: armed gait/state/portal prompt provenance missing')
             elif key in STATE_PNGS:
                 require(provenance.get('promptId') == key and
                         provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json',
@@ -215,10 +279,10 @@ def verify(repo):
         require(source_path and (repo / source_path).is_file(), f'{key}: original source file missing')
         require((repo / source_path).read_bytes() == data, f'{key}: original PNG bytes were changed')
 
-    require(len(hashes) == 139, 'Duplicate PNG content assigned to different assets')
-    require(total == manifest['counts']['bytes'] == 270594463, 'Unexpected PNG byte total')
+    require(len(hashes) == 152, 'Duplicate PNG content assigned to different assets')
+    require(total == manifest['counts']['bytes'] == 290100077, 'Unexpected PNG byte total')
     require(manifest['counts']['recoveredOriginalPng'] == 110 and manifest['counts']['preservedNewPng'] == 9 and
-            manifest['counts']['newContinuationPng'] == 20 and manifest['counts']['newThisPassPng'] == 13, 'Recovery and new-generation counts are conflated')
+            manifest['counts']['newContinuationPng'] == 33 and manifest['counts']['newThisPassPng'] == 13, 'Recovery and new-generation counts are conflated')
     require(dict(sorted(Counter(key.split('/')[0] for key in entries).items())) == manifest['counts']['categories'], 'Category inventory differs')
     for key in ['characters/decker-ready', 'characters/decker-crouch-ready', 'characters/decker-dodge-ready', 'characters/manning-ready']:
         require('handAnchor' in entries[key], f'{key}: primary grip attachment missing')
@@ -245,9 +309,39 @@ def verify(repo):
         require(entries[key].get('sceneScope') == ['s03'], f'{key}: new medical scene scope differs')
     report = entries['characters/decker-medical-report']
     require(report.get('heldProp') == 'objectives/icc-handheld' and report.get('actionScope') == ['o02-01'] and report.get('unarmedOnly') is True, 'Medical report reader/action contract differs')
-    for kind in ['sand', 'silica']:
+    for kind in ['sand', 'silica', 'hive']:
         require(entries['terrain/' + kind].get('terrainScope') == [kind], f'{kind}: terrain scope differs')
     require(entries['planets/lv178-orbital'].get('sceneScope') == ['s39'], 'Orbital globe scene scope differs')
+    for key in [key for key in CONTINUATION_PNGS if key.startswith('characters/')]:
+        entry = entries[key]
+        role = 'decker' if '/decker-' in key else 'manning'
+        require(entry.get('armedOnly') is True and entry.get('weaponScope') == ['pistol'] and
+                entry.get('roleScope') == [role] and entry.get('motionScope') == ['walk'], f'{key}: armed gait scope differs')
+        require(entry['worldHeight'] == 110 and entry['facing'] == 'right' and
+                'handAnchor' in entry and 'supportHandAnchor' in entry, f'{key}: scale/orientation/grips missing')
+        if role == 'decker':
+            require('lampAnchor' in entry, f'{key}: lamp attachment missing')
+        require(entry['pivot'][1] == by_id[key]['visibleBoundsAlpha8'][3], f'{key}: sole not grounded')
+    for key, kind in [('doors/rock-breach', 'apertureBounds'), ('doors/boarding-ramp', 'rampBounds')]:
+        entry = entries[key]
+        a = entry.get(kind, [])
+        require(len(a) == 4 and all(isinstance(n, (int, float)) and math.isfinite(n) for n in a), f'{key}: projection bounds missing')
+        x, y, w, h = a
+        require(0 <= x < entry['width'] and 0 <= y < entry['height'] and
+                0 < w <= entry['width'] - x and 0 < h <= entry['height'] - y, f'{key}: projection outside source')
+        require(entry.get('portalScope') == [key.split('/')[1]] and
+                set(entry.get('mountScope', [])) == {'front', 'back'} and entry['facing'] == 'none', f'{key}: portal scope differs')
+    rock = entries['doors/rock-breach']
+    x, y, w, h = rock['apertureBounds']
+    polygon = rock.get('aperturePolygon', [])
+    require(len(polygon) >= 3 and all(isinstance(p, list) and len(p) == 2 and
+            all(isinstance(v, (int, float)) and math.isfinite(v) for v in p) and
+            x <= p[0] <= x+w and y <= p[1] <= y+h for p in polygon), 'Rock aperture polygon differs')
+    require(entries['doors/boarding-ramp'].get('sceneScope') == ['s11', 's37'], 'Boarding ramp scene scope differs')
+    for key, source in {'devices/isolation-closed': 'devices/isolation', 'devices/console-complete': 'devices/console',
+                        'equipment/sensor-off': 'equipment/sensor', 'equipment/weakpoint-destroyed': 'equipment/weakpoint'}.items():
+        require(entries[key].get('stateSource') == source and entries[key]['worldHeight'] == entries[source]['worldHeight'],
+                f'{key}: source state/height differs')
     lift = entries['doors/lift-cage']
     aperture = lift.get('apertureBounds', [])
     require(len(aperture) == 4 and all(isinstance(n, (int, float)) and math.isfinite(n) for n in aperture), 'Lift aperture missing')
@@ -287,7 +381,7 @@ def verify(repo):
             (frame['width'], frame['height']) == (panel['width'], panel['height']), 'Door panel/frame source canvases differ')
     return {'verifiedPngFiles': len(rows), 'verifiedBytes': total, 'uniquePngHashes': len(hashes),
             'historicalPngFilesUnchanged': HISTORICAL_COUNT, 'historicalInventorySha256': HISTORICAL_DIGEST,
-            'previousEditionPngAndMetadataUnchanged': 126, 'newThisEditionPngFiles': len(STATE_PNGS), 'newSourcePngFiles': len(NEW_PNGS), 'categories': manifest['counts']['categories'], 'browserGameplayCertified': False}
+            'previousEditionPngAndMetadataUnchanged': 139, 'previousEditionAssetRowsSha256': PUBLISHED_0_10_4_ROWS_SHA256, 'newThisEditionPngFiles': len(CONTINUATION_PNGS), 'newSourcePngFiles': len(NEW_PNGS), 'categories': manifest['counts']['categories'], 'browserGameplayCertified': False}
 
 
 if __name__ == '__main__':

@@ -59,13 +59,15 @@ test('source utilities are admitted only by exact source paths', () => {
   assert.equal(isMerVisualSourceOnly20261126(path), false, 'Unpinned tools retain the ordinary private-text guard.');
   assert.equal(merVisualPathAdmission20261126('unrelated/file.js'), null);
   assert.equal(merVisualPathAdmission20261126('docs/mer-des-chagrins-20261126/canvas/secret.txt'), false);
-  for (const member of ['BIBLE_COMPLETION_20261126.md', 'BIBLE_COMPLETION_20261126.json', 'GENERATION_0_10_3.json', 'VALIDATION_0_10_3.json', 'canvas-0.10.3/medical-queen.png', 'GENERATION_0_10_4.json', 'VALIDATION_0_10_4.json', 'canvas-0.10.4/states-and-world.png']) {
+  for (const member of ['BIBLE_COMPLETION_20261126.md', 'BIBLE_COMPLETION_20261126.json', 'GENERATION_0_10_3.json', 'VALIDATION_0_10_3.json', 'canvas-0.10.3/medical-queen.png', 'GENERATION_0_10_4.json', 'VALIDATION_0_10_4.json', 'canvas-0.10.4/states-and-world.png', 'GENERATION_0_10_5.json', 'VALIDATION_0_10_5.json', 'canvas-0.10.5/armed-gaits.png', 'canvas-0.10.5/states-portals.png']) {
     const source = 'docs/mer-des-chagrins-20261126/' + member;
     assert.equal(merVisualPathAdmission20261126(source), true);
     assert.equal(merVisualPathAdmission20261126(source, { built: true }), false);
   }
   assert.equal(merVisualPathAdmission20261126('docs/mer-des-chagrins-20261126/canvas-0.10.3/secret.txt'), false);
   assert.equal(merVisualPathAdmission20261126('docs/mer-des-chagrins-20261126/canvas-0.10.4/secret.txt'), false);
+  assert.equal(merVisualPathAdmission20261126('docs/mer-des-chagrins-20261126/canvas-0.10.5/secret.txt'), false);
+  assert.equal(merVisualPathAdmission20261126('docs/mer-des-chagrins-20261126/canvas-0.10.5/extra.png'), false);
 });
 
 test('copy publishes only reviewed runtime, excluding both manifests', async t => {

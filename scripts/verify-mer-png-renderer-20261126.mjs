@@ -1002,3 +1002,392 @@ test('chapter-four paper and cups stay on their existing medical dressing withou
   f.game.enter('s03'); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.decor('terminal', 0));
   assert.deepEqual(drawn(f).map(a => a.src), ['sprites/decor/terminal.png']);
 });
+
+// Edition 0.10.5 adds scoped movement and exhausted/completed states. Keep the
+// earlier fixtures unchanged so compatibility with an older pack stays tested.
+const armedGaits = {
+  decker: ['decker-walk-a-ready', 'decker-walk-b-ready'],
+  manning: ['manning-walk-a-ready', 'manning-walk-pass-a-ready', 'manning-walk-b-ready', 'manning-walk-pass-b-ready'],
+};
+function edition105Assets() {
+  const assets = continuationAssets();
+  for (const [role, ids] of Object.entries(armedGaits)) ids.forEach((id, phase) => {
+    assets.characters[id] = entry('characters', id, {
+      armedOnly: true, weaponScope: ['pistol'], roleScope: [role], motionScope: ['walk'],
+      handAnchor: [170 + phase * 3, 135 + phase], supportHandAnchor: [175 + phase * 3, 142 + phase],
+      ...(role === 'decker' ? { lampAnchor: [155 + phase * 2, 105] } : {}),
+    });
+  });
+  assets.weapons.pistol.bodyLayer = 'front';
+  for (const id of ['sensor-off', 'weakpoint-destroyed']) assets.equipment[id] = entry('equipment', id, { facing: 'none' });
+  for (const id of ['console-complete', 'isolation-closed']) assets.devices[id] = entry('devices', id, { facing: 'none' });
+  assets.terrain.hive = entry('terrain', 'hive', {
+    width: 900, height: 300, crop: [20, 20, 860, 260], pivot: [450, 150],
+    worldHeight: 90, facing: 'none', terrainScope: ['hive'],
+  });
+  assets.doors['rock-breach'] = entry('doors', 'rock-breach', {
+    facing: 'none', portalScope: ['rock-breach'], mountScope: ['back', 'front'],
+    apertureBounds: [50, 55, 140, 230], aperturePolygon: [[50, 285], [55, 130], [95, 55], [165, 60], [190, 180], [185, 285]],
+  });
+  assets.doors['boarding-ramp'] = entry('doors', 'boarding-ramp', {
+    facing: 'none', portalScope: ['boarding-ramp'], mountScope: ['back', 'front'],
+    sceneScope: ['s11', 's37'], rampBounds: [40, 70, 160, 230],
+  });
+  return assets;
+}
+function prepareArmedActors(f) {
+  f.game.enter('s17');
+  f.game.state.flags.equipped = true; f.game.state.inventory.pistol = true;
+  f.game.state.objectiveIndex = f.context.SoSCore.objectiveOrder.indexOf('o16-01');
+  Object.assign(f.game.p, { weapon: 'pistol', moving: true, crouch: false, dodgeTime: 0, reload: 0, lamp: true });
+  Object.assign(f.game.state.companion, { moving: true, facing: 1 });
+  f.game.activeWork = null; f.renderer.reduced = false;
+  return { decker: f.game.p, manning: f.game.state.companion };
+}
+const poseSources = f => [...new Set(characterSources(f))];
+function geometryRecorder(f) {
+  const geometry = [];
+  for (const name of ['rect', 'line', 'path', 'ellipse', 'text']) {
+    const original = f.renderer[name];
+    f.renderer[name] = function (...args) {
+      geometry.push({ name, args, alpha: this.ctx.globalAlpha });
+      return original.apply(this, args);
+    };
+  }
+  return geometry;
+}
+function assertNativeParity(f, method, args) {
+  const geometry = geometryRecorder(f);
+  f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer[method](...args));
+  assert.equal(drawn(f).length, 0);
+  const actual = JSON.stringify({ calls: f.calls, geometry });
+  f.calls.length = 0; geometry.length = 0;
+  assertNoSimulationChange(f, () => f.baseMethods[method].apply(f.renderer, args));
+  assert.equal(JSON.stringify({ calls: f.calls, geometry }), actual, method + ' preserves the complete native presentation');
+}
+
+for (const role of ['decker', 'manning']) for (const facing of [-1, 1]) test(`armed ${role} gait preserves grounded feet, both hands and equipment facing ${facing}`, async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload();
+  const actor = prepareArmedActors(f)[role]; actor.facing = facing;
+  const times = role === 'decker' ? [0, .25, .5, .5] : [0, .125, .25, .375, .5, .5];
+  for (const [i, time] of times.entries()) {
+    f.game.time = time; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(actor, undefined, role));
+    const id = armedGaits[role][i % armedGaits[role].length];
+    const expected = i === times.length - 1 ? armedGaits[role][0] : id;
+    const a = f.assets.characters[expected], body = drawn(f).find(a => a.src.startsWith('sprites/characters/'));
+    assert.deepEqual(poseSources(f), [a.src]); assert.equal(Math.sign(body.matrix[0]), facing);
+    const q = f.renderer.pos(actor.x, f.game.zFor(actor)), ground = sourcePoint(body, a.pivot);
+    close(ground[0], q.x); close(ground[1], q.y);
+    const weapon = drawn(f).find(a => a.src === f.assets.weapons.pistol.src);
+    const grip = sourcePoint(weapon, f.assets.weapons.pistol.gripAnchor), hand = sourcePoint(body, a.handAnchor);
+    close(grip[0], hand[0]); close(grip[1], hand[1]);
+    assert.equal(characterSources(f).length, 3, 'both verified hands cover the foreground pistol');
+    const muzzle = sourcePoint(weapon, f.assets.weapons.pistol.muzzleAnchor), cached = f.renderer._pngMuzzles[role];
+    close(cached.x + q.x, muzzle[0]); close(cached.y + q.y, muzzle[1]);
+    assert.equal(cached.weapon, role === 'manning' ? 'ally' : 'pistol');
+    if (role === 'decker') {
+      const lamp = drawn(f).find(a => a.src === f.assets.equipment.lamp.src);
+      const mount = sourcePoint(lamp, f.assets.equipment.lamp.mountAnchor), attachment = sourcePoint(body, a.lampAnchor);
+      close(mount[0], attachment[0]); close(mount[1], attachment[1]);
+    } else assert.ok(!drawn(f).some(a => a.src === f.assets.equipment.lamp.src));
+  }
+});
+test('armed Decker contacts exclude rest, posture, reload, work, other weapons and actor copies', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload();
+  for (const [label, change, expected] of [
+    ['rest', () => { f.game.p.moving = false; }, 'decker-ready'],
+    ['reduced motion', () => { f.renderer.reduced = true; }, 'decker-ready'],
+    ['crouch', () => { f.game.p.crouch = true; }, 'decker-crouch-ready'],
+    ['dodge', () => { f.game.p.dodgeTime = .2; }, 'decker-dodge-ready'],
+    ['reload', () => { f.game.p.reload = .2; }, 'decker-ready'],
+    ['work', () => { f.game.activeWork = { id: 'parts-workshop', progress: .3 }; }, 'decker-ready'],
+    ['pulse weapon', () => { f.game.p.weapon = 'pulse'; }, 'decker-ready'],
+    ['foam weapon', () => { f.game.p.weapon = 'foam'; }, 'decker-ready'],
+    ['not equipped', () => { f.game.state.flags.equipped = false; }, 'decker-ready'],
+    ['without pistol inventory', () => { f.game.state.inventory.pistol = false; }, 'decker-walk-b'],
+  ]) {
+    prepareArmedActors(f); change(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(f.game.p, .25, 'decker'));
+    assert.deepEqual(poseSources(f), [`sprites/characters/${expected}.png`], label);
+  }
+  prepareArmedActors(f); f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer.human({ ...f.game.p }, .25, 'decker'));
+  assert.deepEqual(poseSources(f), ['sprites/characters/decker.png'], 'a copied player has no gameplay movement or equipment');
+});
+test('Manning follows his own movement during player reload or work and stops at the authored chapter boundary', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload();
+  for (const playerChange of [
+    () => { f.game.p.moving = false; f.game.p.reload = .8; },
+    () => { f.game.p.crouch = true; f.game.p.dodgeTime = .2; f.game.activeWork = { id: 'parts-workshop', progress: .4 }; },
+    () => { f.game.p.weapon = 'plasma'; f.game.state.inventory.pistol = false; },
+  ]) {
+    const a = prepareArmedActors(f).manning; playerChange(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(a, .125, 'manning'));
+    assert.deepEqual(poseSources(f), ['sprites/characters/manning-walk-pass-a-ready.png']);
+  }
+  for (const [label, change] of [
+    ['Manning stopped', a => { a.moving = false; }],
+    ['reduced motion', () => { f.renderer.reduced = true; }],
+    ['unequipped', () => { f.game.state.flags.equipped = false; }],
+    ['chapter 17', () => { f.game.state.objectiveIndex = f.context.SoSCore.objectiveOrder.indexOf('o17-01'); }],
+  ]) {
+    const a = prepareArmedActors(f).manning; change(a); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(a, .125, 'manning'));
+    assert.deepEqual(poseSources(f), ['sprites/characters/manning-ready.png'], label);
+  }
+  const a = prepareArmedActors(f).manning; f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer.human({ ...a }, .125, 'manning'));
+  assert.deepEqual(poseSources(f), ['sprites/characters/manning-ready.png'], 'a cast copy does not borrow the companion gait');
+});
+test('portraits ignore all armed gait and equipment states for both identities', async () => {
+  const f = boot({ assets: edition105Assets(), portrait: true }); await f.api.preload();
+  const actors = prepareArmedActors(f);
+  for (const role of ['decker', 'manning']) {
+    f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.human(actors[role], .25, role));
+    assert.deepEqual(drawn(f).map(a => a.src), [`sprites/characters/${role}.png`]);
+  }
+});
+test('armed gait metadata requires pistol, role, motion and two usable hand anchors', async () => {
+  for (const role of ['decker', 'manning']) for (const [label, change] of [
+    ['armed flag', a => { a.armedOnly = false; }],
+    ['weapon scope', a => { a.weaponScope = ['pulse']; }],
+    ['role scope', a => { a.roleScope = ['medic']; }],
+    ['motion scope', a => { a.motionScope = ['idle']; }],
+    ['hand anchor', a => { delete a.handAnchor; }],
+    ['support anchor', a => { a.supportHandAnchor = [Infinity, 20]; }],
+    ['hidden firearm', a => { a.weaponHidden = true; }],
+    ...(role === 'decker' ? [['lamp anchor', a => { delete a.lampAnchor; }]] : []),
+  ]) {
+    const assets = edition105Assets(); change(assets.characters[armedGaits[role][0]]);
+    const f = boot({ assets }); await f.api.preload(); const actor = prepareArmedActors(f)[role];
+    assertNoSimulationChange(f, () => f.renderer.human(actor, 0, role));
+    assert.deepEqual(poseSources(f), [`sprites/characters/${role}-ready.png`], `${role}: ${label}`);
+    assert.ok(drawn(f).some(a => a.src === assets.weapons.pistol.src), 'the ready fallback keeps its weapon');
+  }
+});
+test('pending, failed and wrong-sized armed contacts retain a ready body and never invent another phase', async () => {
+  for (const role of ['decker', 'manning']) for (const mode of ['pending', 'failed', 'wrong-size']) {
+    const assets = edition105Assets(), id = armedGaits[role][0], selected = assets.characters[id];
+    const f = boot({ assets, behavior: { [selected.src]: mode } });
+    delete assets.characters[id]; await f.api.preload(); assets.characters[id] = selected;
+    const actor = prepareArmedActors(f)[role]; f.renderer.human(actor, 0, role); await flush(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(actor, 0, role));
+    assert.deepEqual(poseSources(f), [`sprites/characters/${role}-ready.png`], `${role}: ${mode}`);
+    assert.equal(f.api.status().assets['characters/' + id], mode === 'pending' ? 'loading' : mode);
+  }
+});
+
+for (const [kind, room, id, completed, label, distance] of [
+  ['isolation', 's19', 'isolate-hull', 'isolation-closed', 'CONSIGNÉ', 145],
+  ['console', 's41', 'device-filters', 'console-complete', 'TERMINÉ', 125],
+]) test(`${kind} completion follows the native operation and retains its precise interaction cue`, async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); f.game.enter(room);
+  const d = f.game.room.devices.find(d => d.id === id); Object.assign(f.game.p, { x: d.x, z: d.z });
+  assertNoSimulationChange(f, () => f.renderer.device(d, 0));
+  assert.deepEqual(drawn(f).map(a => a.src), [`sprites/devices/${kind}.png`]);
+  assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === 'MAINTENIR E'));
+  f.game.rs.work[d.id] = d.duration;
+  assert.equal(f.game.finishDevice({ ...d, action: 'device' }), true);
+  for (const offset of [0, distance - .01, distance]) {
+    f.game.p.x = d.x + offset; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.device(d, 0));
+    assert.deepEqual(drawn(f).map(a => a.src), [`sprites/devices/${completed}.png`]);
+    assert.equal(f.calls.some(a => a.op === 'fillText' && a.args[0] === label), offset < distance);
+    assert.ok(!f.calls.some(a => a.op === 'fillText' && a.args[0] === 'MAINTENIR E'));
+  }
+  f.game.p.x = d.x; f.calls.length = 0;
+  const uncompleted = { ...d, id: 'separate-device' };
+  assertNoSimulationChange(f, () => f.renderer.device(uncompleted, 0));
+  assert.deepEqual(drawn(f).map(a => a.src), [`sprites/devices/${kind}.png`], 'completion belongs to the actual device ID');
+});
+test('unavailable completed devices preserve the native completed state without reopening a loaded active image', async () => {
+  for (const [room, kind, id] of [['s19', 'isolation', 'isolation-closed'], ['s41', 'filters', 'console-complete']]) for (const mode of ['pending', 'failed']) {
+    const assets = edition105Assets(), selected = assets.devices[id];
+    const f = boot({ assets, behavior: { [selected.src]: mode } });
+    delete assets.devices[id]; await f.api.preload(); assets.devices[id] = selected;
+    f.game.enter(room); const d = f.game.room.devices.find(d => d.kind === kind);
+    Object.assign(f.game.p, { x: d.x, z: d.z }); f.game.state.optional[d.id] = true;
+    f.renderer.device(d, 0); await flush(); assertNativeParity(f, 'device', [d, 0]);
+  }
+});
+test('sensor-off covers power loss and exhausted batteries without a false pulse or charge refill', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); f.game.state.stats.time = 100;
+  const b = f.game.state.sensors[0]; Object.assign(b, { room: f.game.room.id, x: f.game.p.x, z: f.game.p.z, lastPulse: 99 });
+  for (const [powered, charge, expected] of [[true, 20, 'sensor'], [false, 20, 'sensor-off'], [true, 0, 'sensor-off'], [false, 0, 'sensor-off'], [true, -1, 'sensor-off']]) {
+    Object.assign(b, { powered, charge }); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.sensor(b, 0));
+    assert.deepEqual(drawn(f).map(a => a.src), [`sprites/equipment/${expected}.png`]);
+    const active = expected === 'sensor';
+    assert.equal(f.calls.some(a => a.op === 'ellipse' && a.fill === '#efd28a'), active);
+    assert.equal(f.calls.some(a => a.op === 'ellipse' && a.args[3] === 12), active, 'only a live powered pulse has an expanding ring');
+    assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === 'P · RÉCUPÉRER'));
+    assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0].includes(Math.ceil(charge) + ' s')));
+  }
+});
+test('sensor indicators align with the historical lens or new status anchor while pulses stay on the ground', async () => {
+  for (const calibrated of [true, false]) {
+    const assets = edition105Assets();
+    if (calibrated) {
+      Object.assign(assets.equipment.sensor, {
+        width: 1425, height: 1104, crop: [178, 9, 1060, 1081], pivot: [708, 1088], worldHeight: 38, facing: 'none',
+      });
+      Object.assign(assets.equipment['sensor-off'], {
+        width: 1424, height: 1104, crop: [178, 5, 1062, 1085], pivot: [709, 1090], worldHeight: 38,
+        facing: 'none', statusAnchor: [924, 571],
+      });
+    }
+    const unchangedHistoricalRow = JSON.stringify(assets.equipment.sensor);
+    const f = boot({ assets }); await f.api.preload(); f.game.state.stats.time = 100; f.renderer.camera = 47;
+    const b = f.game.state.sensors[0];
+    Object.assign(b, { room: f.game.room.id, x: f.game.p.x, z: f.game.p.z });
+    for (const unit of [1, 1.7]) for (const [powered, charge, lastPulse, color] of [
+      [true, 19.2, 99, '#efd28a'], [true, 19.2, 97, '#8bc9b3'],
+      [false, 19.2, 99, '#665e4e'], [true, 0, 99, '#665e4e'],
+    ]) {
+      f.renderer.unit = unit; Object.assign(b, { powered, charge, lastPulse }); f.calls.length = 0;
+      assertNoSimulationChange(f, () => f.renderer.sensor(b, .3));
+      const active = powered && charge > 0, a = assets.equipment[active ? 'sensor' : 'sensor-off'];
+      const body = drawn(f)[0]; assert.equal(body.src, a.src);
+      const q = f.renderer.pos(b.x, f.game.zFor(b));
+      const expected = calibrated ? sourcePoint(body, active ? [924, 571] : a.statusAnchor) : [q.x + 9 * unit, q.y - 8 * unit];
+      const led = f.calls.find(c => c.op === 'ellipse' && c.fill === color);
+      assert.ok(led); const center = canvasPoint(led, led.args[0], led.args[1]);
+      close(center[0], expected[0]); close(center[1], expected[1]);
+      close(led.args[2], (calibrated ? .8 : 3) * unit); close(led.args[3], (calibrated ? .8 : 3) * unit);
+      const pulses = f.calls.filter(c => c.op === 'ellipse' && c.args[3] === 12 * unit);
+      assert.equal(pulses.length, color === '#efd28a' ? 1 : 0);
+      for (const pulse of pulses) { close(pulse.args[0], q.x); close(pulse.args[1], q.y); }
+      assert.ok(f.calls.some(c => c.op === 'fillText' && c.args[0] === 'CAPTEUR ' + b.id.slice(-1) + ' · ' + Math.ceil(charge) + ' s'));
+      assert.ok(f.calls.some(c => c.op === 'fillText' && c.args[0] === 'P · RÉCUPÉRER'));
+    }
+    assert.equal(JSON.stringify(assets.equipment.sensor), unchangedHistoricalRow, 'the historical row is never amended at render time');
+    assert.equal(assets.equipment.sensor.statusAnchor, undefined);
+  }
+});
+test('the three real queen attachments switch at zero HP without respawning or changing boss state', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); f.game.enter('s33');
+  assert.equal(f.game.rs.weakpoints.length, 3);
+  for (const w of f.game.rs.weakpoints) for (const hp of [24, .01, 0]) {
+    w.hp = hp; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.weakpoint(w));
+    assert.deepEqual(drawn(f).map(a => a.src), [`sprites/equipment/${hp > 0 ? 'weakpoint' : 'weakpoint-destroyed'}.png`]);
+  }
+});
+test('unavailable off sensors and destroyed attachments fall back to their native state instead of the live PNG', async () => {
+  for (const id of ['sensor-off', 'weakpoint-destroyed']) for (const mode of ['pending', 'failed', 'wrong-size']) {
+    const assets = edition105Assets(), selected = assets.equipment[id];
+    const f = boot({ assets, behavior: { [selected.src]: mode } });
+    delete assets.equipment[id]; await f.api.preload(); assets.equipment[id] = selected;
+    f.game.enter('s33');
+    const method = id === 'sensor-off' ? 'sensor' : 'weakpoint';
+    const target = method === 'sensor' ? f.game.state.sensors[0] : f.game.rs.weakpoints[0];
+    if (method === 'sensor') Object.assign(target, { room: 's33', x: f.game.p.x, z: f.game.p.z, powered: false, charge: 0, lastPulse: -1 });
+    else target.hp = 0;
+    f.renderer[method](target, 0); await flush(); assertNativeParity(f, method, [target, 0]);
+  }
+});
+test('hive floor imagery stays in the two hive rooms with fixed world placement and readable contrast', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); const visited = [];
+  for (const room of f.context.SoSData.rooms) {
+    f.game.enter(room.id); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.floor(0));
+    const patches = drawn(f).filter(a => a.src === f.assets.terrain.hive.src);
+    if (room.kind !== 'hive') { assert.equal(patches.length, 0, room.id); continue; }
+    visited.push(room.id); assert.ok(patches.length > 0);
+    const fixed = JSON.stringify(patches); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.floor(90));
+    assert.equal(JSON.stringify(drawn(f)), fixed, 'the resin does not crawl with rendering time');
+    f.renderer.highContrast = true; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.floor(90));
+    assert.ok(drawn(f).every(a => a.alpha === .2)); f.renderer.highContrast = false;
+  }
+  assert.deepEqual(visited, ['s28', 's32']);
+});
+test('a hive decal with another terrain scope or missing image leaves the native floor intact', async () => {
+  for (const [scope, mode] of [[['silica'], undefined], [['hive'], 'failed']]) {
+    const assets = edition105Assets(); assets.terrain.hive.terrainScope = scope;
+    const f = boot({ assets, behavior: { [assets.terrain.hive.src]: mode } }); await f.api.preload(); f.game.enter('s28');
+    assertNativeParity(f, 'floor', [0]);
+  }
+});
+
+for (const type of ['rock-breach', 'boarding-ramp']) test(`${type} fits the authored frontal thresholds and preserves walls, gates, approach markers and labels`, async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); const geometry = geometryRecorder(f), seen = [];
+  for (const room of f.context.SoSData.rooms) for (const d of room.doors.filter(d => d.portal.type === type && ['front', 'back'].includes(d.portal.mount))) {
+    f.game.enter(room.id); seen.push([room.id, d.portal.mount]);
+    Object.assign(f.game.p, { x: d.x, z: d.z });
+    for (const gateOpen of d.gate ? [false, true] : [true]) {
+      if (d.gate) f.game.state.flags[d.gate] = gateOpen;
+      f.calls.length = 0; geometry.length = 0; const status = f.game.doorStatus(d);
+      assert.equal(status.open, gateOpen);
+      assertNoSimulationChange(f, () => f.renderer.door(d));
+      assert.deepEqual(drawn(f).map(a => a.src), [`sprites/doors/${type}.png`]);
+      const frame = drawn(f)[0], a = f.assets.doors[type], q = f.renderer.pos(d.x, d.portal.apertureZ);
+      const rock = type === 'rock-breach', [x, y, w, h] = a[rock ? 'apertureBounds' : 'rampBounds'];
+      const first = sourcePoint(frame, [x, y]), last = sourcePoint(frame, [x + w, y + h]);
+      close(first[0], q.x - d.portal.width * (rock ? .732 : .8));
+      close(last[0], q.x + d.portal.width * (rock ? .66 : .8));
+      close(first[1], q.y - 152 * (rock ? 1.1 : .47)); close(last[1], q.y);
+      assert.equal(frame.alpha, d.portal.mount === 'front' ? .42 : 1);
+      const surroundings = geometry.filter(a => a.name !== 'path' && !(a.name === 'line' && a.args[4] === '#9bafa766'));
+      const labels = f.calls.filter(a => a.op === 'fillText');
+      assert.ok(labels.some(a => a.args[0] === d.label));
+      if (rock) {
+        assert.equal(geometry.filter(a => a.name === 'line' && a.args[4] === '#7c8269').length, status.open ? 0 : 5);
+        const opening = geometry.find(a => a.name === 'path' && a.args[1] === '#0c1b20');
+        assert.equal(opening.args[0].length, a.aperturePolygon.length);
+        for (const [i, p] of a.aperturePolygon.entries()) {
+          const projected = sourcePoint(frame, p);
+          close(opening.args[0][i][0], projected[0]); close(opening.args[0][i][1], projected[1]);
+        }
+      }
+      const markerIndex = f.calls.findIndex(a => a.op === 'ellipse' && a.args[2] === 23 && a.alpha === 1);
+      assert.ok(markerIndex > f.calls.indexOf(frame), 'the approach marker is painted above the ramp or rim');
+      f.calls.length = 0; geometry.length = 0; f.baseMethods.door.call(f.renderer, d);
+      assert.deepEqual(f.calls.filter(a => a.op === 'fillText'), labels);
+      assert.deepEqual(geometry.filter(a => a.name !== 'path' && !(a.name === 'line' && a.args[4] === '#9bafa766')), surroundings);
+    }
+  }
+  if (type === 'boarding-ramp') assert.deepEqual(seen, [['s11', 'back'], ['s37', 'front']]);
+  else { assert.equal(seen.length, 9); assert.deepEqual(new Set(seen.map(a => a[1])), new Set(['front', 'back'])); }
+});
+test('lateral rock openings, air-travel boarding and ramps outside s11/s37 keep the complete native threshold', async () => {
+  const f = boot({ assets: edition105Assets() }); await f.api.preload(); let count = 0;
+  for (const room of f.context.SoSData.rooms) for (const d of room.doors) if (
+    d.portal.type === 'boarding' || d.portal.type === 'rock-breach' && ['left', 'right'].includes(d.portal.mount)
+  ) {
+    f.game.enter(room.id); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.door(d)); assert.equal(drawn(f).length, 0); count++;
+  }
+  assert.ok(count > 15);
+  const d = f.context.SoSData.rooms.find(r => r.id === 's11').doors.find(d => d.portal.type === 'boarding-ramp');
+  f.game.enter('s10'); assertNativeParity(f, 'door', [d]);
+});
+test('invalid frontal portal calibration or scope returns the entire native threshold', async () => {
+  for (const type of ['rock-breach', 'boarding-ramp']) for (const change of [
+    a => { a.facing = 'right'; },
+    a => { a.mountScope = ['left', 'right']; },
+    a => { a.portalScope = ['bulkhead']; },
+    a => { a[type === 'rock-breach' ? 'apertureBounds' : 'rampBounds'][2] = a.width; },
+    ...(type === 'rock-breach' ? [a => { a.aperturePolygon[0] = [-1, 20]; }, a => { a.aperturePolygon = [[1, 2], [3, 4]]; }] : [a => { a.sceneScope = ['s10']; }]),
+  ]) {
+    const assets = edition105Assets(); change(assets.doors[type]);
+    const f = boot({ assets }); await f.api.preload(); f.game.enter(type === 'rock-breach' ? 's19' : 's11');
+    const d = f.game.room.doors.find(d => d.portal.type === type && ['front', 'back'].includes(d.portal.mount));
+    Object.assign(f.game.p, { x: d.x, z: d.z }); assertNativeParity(f, 'door', [d]);
+  }
+});
+test('loading and failed frontal portal images retain closed gates and never discard the native wall', async () => {
+  for (const type of ['rock-breach', 'boarding-ramp']) for (const mode of ['pending', 'failed', 'wrong-size']) {
+    const assets = edition105Assets(), selected = assets.doors[type];
+    const f = boot({ assets, behavior: { [selected.src]: mode } });
+    delete assets.doors[type]; await f.api.preload(); assets.doors[type] = selected;
+    f.game.enter(type === 'rock-breach' ? 's19' : 's11');
+    const d = f.game.room.doors.find(d => d.portal.type === type && ['front', 'back'].includes(d.portal.mount));
+    Object.assign(f.game.p, { x: d.x, z: d.z }); assert.equal(f.game.doorStatus(d).open, false);
+    f.renderer.door(d); await flush(); assertNativeParity(f, 'door', [d]);
+    assert.equal(f.game.doorStatus(d).open, false);
+  }
+});

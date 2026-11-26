@@ -18,9 +18,9 @@ const visualRoot = resolve(repo, 'dlc/sea-of-sorrows-visual');
 const args = process.argv.slice(2);
 const option = (name, fallback) => args.includes(name) ? args[args.indexOf(name) + 1] : fallback;
 const output = resolve(option('--output', resolve(tmpdir(), 'atf-mer-canvas-20261126')));
-const captures = resolve(option('--captures', resolve(repo, 'docs/mer-des-chagrins-20261126/canvas-0.10.4')));
-assert.ok(!['canvas', 'canvas-0.10.3'].some(name => captures === resolve(repo, 'docs/mer-des-chagrins-20261126', name)),
-  'historical edition captures are immutable; select the 0.10.4 directory or a temporary output');
+const captures = resolve(option('--captures', resolve(repo, 'docs/mer-des-chagrins-20261126/canvas-0.10.5')));
+assert.ok(!['canvas', 'canvas-0.10.3', 'canvas-0.10.4'].some(name => captures === resolve(repo, 'docs/mer-des-chagrins-20261126', name)),
+  'historical edition captures are immutable; select the 0.10.5 directory or a temporary output');
 mkdirSync(output, { recursive: true }); mkdirSync(captures, { recursive: true });
 const require = createRequire(import.meta.url);
 let native, canvasVersion;
@@ -691,10 +691,13 @@ function doorFixture(roomId, id, open) {
   const options = { unit: 1.45, focusX: door.x, focusZ: door.portal?.apertureZ ?? g.zFor(door) };
   return { g, door, options };
 }
-const compatible = [], nativeCases = new Map(), liftCases = [];
+const compatible = [], nativeCases = new Map(), liftCases = [], frontalCases = [];
 for (const room of context.SoSData.rooms) for (const door of room.doors) {
   const type = door.portal?.type || 'bulkhead', mount = door.portal?.mount || 'back';
   if (type === 'lift-cage') liftCases.push({ room: room.id, id: door.id, mount });
+  else if (['rock-breach', 'boarding-ramp'].includes(type) && ['front', 'back'].includes(mount)) {
+    frontalCases.push({ room: room.id, id: door.id, type, mount });
+  }
   else if (type === 'bulkhead' && ['front', 'back'].includes(mount)) {
     if (!compatible.some(c => c.mount === mount)) compatible.push({ room: room.id, id: door.id, mount });
   } else if (!nativeCases.has(type + '/' + mount)) nativeCases.set(type + '/' + mount, { room: room.id, id: door.id, type, mount });
@@ -718,7 +721,7 @@ for (const item of liftCases) {
   assert.equal(pair.length, 2);
   assert.notEqual(pair[0].pixelSha256, pair[1].pixelSha256, item.id + ': gate state produces visibly distinct pixels');
 }
-const capturedNativeTypes = new Set(['bulkhead/left', 'rock-breach/front', 'stairwell/back']);
+const capturedNativeTypes = new Set(['bulkhead/left', 'rock-breach/left', 'stairwell/back', 'boarding/right']);
 for (const [key, item] of nativeCases) {
   const { g, door, options } = doorFixture(item.room, item.id, true), r = stage(g, options), reference = stage(g, options);
   const nativeResult = await observe(g, reference, 'native-door/' + key, () => originalDoor.call(reference, door));
@@ -733,6 +736,250 @@ await flushDecodeFinalizers();
 const editionCapture = contactSheet('states-and-world', editionCells, 4, 600, 465,
   'Édition 0.10.4 — états, actions, mine et monde ; fixtures explicites');
 
+// Edition 0.10.5 follows real actor identities, native power/completion/HP
+// states and the existing frontal thresholds. It does not synthesize gameplay.
+const extensionResults = [], armedCells = [], extensionCells = [];
+async function extensionCase(id, group, title, g, r, draw, expected = [], absent = [], extra = {}, capture = true) {
+  const result = { id, group, expected, absent, ...extra, ...await observe(g, r, id, draw) };
+  for (const key of expected) assert.ok(result.drawn.includes(key), id + ': expected actual source ' + key);
+  for (const key of absent) assert.ok(!result.drawn.includes(key), id + ': source must remain absent ' + key);
+  extensionResults.push(result);
+  if (capture) (group === 'armed-gait' ? armedCells : extensionCells).push({ id, title, canvas: r.canvas });
+  return result;
+}
+const armedGaitIds = [
+  'characters/decker-walk-a-ready', 'characters/decker-walk-b-ready',
+  'characters/manning-walk-a-ready', 'characters/manning-walk-pass-a-ready',
+  'characters/manning-walk-b-ready', 'characters/manning-walk-pass-b-ready',
+];
+for (const role of ['decker', 'manning']) for (const facing of [1, -1]) {
+  const phases = role === 'decker' ? [walkPhases[0], walkPhases[2]] : walkPhases;
+  const phaseResults = [];
+  for (const phase of phases) {
+    const g = fixtureGame('s14'); equip(g);
+    const actor = role === 'decker' ? g.p : g.state.companion;
+    Object.assign(actor, { x: 700, z: .55, facing, moving: true });
+    const r = stage(g, { width: 450, height: 365, unit: 2.4, focusX: actor.x, focusZ: actor.z });
+    const expected = 'characters/' + role + '-walk-' + phase.pose + '-ready';
+    const result = await extensionCase('armed-gait/' + role + '/' + facing + '/' + phase.pose, 'armed-gait',
+      role + ' · ' + phase.label + ' · ' + (facing > 0 ? 'droite' : 'gauche'), g, r,
+      () => r.human(actor, phase.time, role), [expected, 'weapons/pistol'], [],
+      { role, facing, time: phase.time, pose: phase.pose, actualActor: true, moving: true });
+    assert.equal(result.drawn.filter(key => key.startsWith('characters/')).length, 1, 'one authored body per moving actor');
+    assert.ok(r._pngMuzzles?.[role], 'held pistol retains a real emission anchor for ' + role);
+    phaseResults.push(result);
+  }
+  assert.equal(new Set(phaseResults.map(r => r.pixelSha256)).size, phases.length, role + ': walking phases have distinct real pixels');
+}
+for (const role of ['decker', 'manning']) for (const mode of ['rest', 'reduced-motion']) {
+  const pair = [];
+  for (const time of [.05, .30]) {
+    const g = fixtureGame('s14'); equip(g);
+    const actor = role === 'decker' ? g.p : g.state.companion;
+    Object.assign(actor, { x: 700, z: .55, facing: 1, moving: mode !== 'rest' });
+    const r = stage(g, { width: 450, height: 365, unit: 2.4, focusX: actor.x, focusZ: actor.z });
+    r.reduced = mode === 'reduced-motion';
+    pair.push(await extensionCase('armed-guard/' + role + '/' + mode + '/' + time, 'armed-gait', role + ' · ' + mode,
+      g, r, () => r.human(actor, time, role), ['characters/' + role + '-ready', 'weapons/pistol'], armedGaitIds,
+      { role, mode, time, moving: actor.moving, reducedMotion: r.reduced }, time === .05));
+  }
+  assert.equal(pair[0].pixelSha256, pair[1].pixelSha256, role + ': rest/reduced-motion retain time-stable pixels');
+}
+for (const role of ['decker', 'manning']) for (const mode of ['portrait', 'actor-copy', 'unequipped']) {
+  const g = fixtureGame('s14'); equip(g);
+  let actor = role === 'decker' ? g.p : g.state.companion;
+  Object.assign(actor, { x: 700, z: .55, facing: 1, moving: true });
+  if (mode === 'actor-copy') actor = { ...actor };
+  if (mode === 'unequipped') { g.state.flags.equipped = false; g.state.inventory.pistol = false; }
+  const r = stage(g, { focusX: actor.x, focusZ: actor.z });
+  if (mode === 'portrait') r.canvas.classList = { contains: name => name === 'castPortrait' };
+  await extensionCase('armed-guard/' + role + '/' + mode, 'armed-gait', role + ' · ' + mode, g, r,
+    () => r.human(actor, .18, role), [], armedGaitIds, { role, mode, actualActor: mode !== 'actor-copy' }, false);
+}
+for (const mode of ['pulse', 'foam', 'flame', 'reload', 'operation', 'crouch', 'dodge']) {
+  const g = fixtureGame('s14'); equip(g, ['pulse', 'foam', 'flame'].includes(mode) ? mode : 'pistol');
+  Object.assign(g.p, { x: 700, z: .55, moving: true, reload: mode === 'reload' ? .5 : 0,
+    crouch: mode === 'crouch', dodgeTime: mode === 'dodge' ? .2 : 0 });
+  if (mode === 'operation') g.activeWork = { id: 'diagnostic-existing-operation', progress: .5 };
+  const r = stage(g);
+  await extensionCase('armed-guard/decker/' + mode, 'armed-gait', 'Decker · ' + mode, g, r,
+    () => r.human(g.p, .18, 'decker'), [], armedGaitIds, { mode, weapon: g.p.weapon }, false);
+}
+for (const mode of ['player-reloading', 'player-working', 'chapter-17']) {
+  const g = fixtureGame('s14'); equip(g);
+  const actor = g.state.companion; Object.assign(actor, { x: 700, z: .55, moving: true, facing: 1 });
+  if (mode === 'player-reloading') g.p.reload = .5;
+  if (mode === 'player-working') g.activeWork = { id: 'diagnostic-existing-operation', progress: .5 };
+  if (mode === 'chapter-17') g.state.objectiveIndex = objectives.indexOf(context.SoSData.chapters.find(c => c.number === 17).objectives[0]);
+  const r = stage(g, { focusX: actor.x, focusZ: actor.z }), expected = 'characters/manning-walk-pass-a-ready';
+  await extensionCase('armed-guard/manning/' + mode, 'armed-gait', 'Manning · ' + mode, g, r,
+    () => r.human(actor, .18, 'manning'), mode === 'chapter-17' ? [] : [expected, 'weapons/pistol'],
+    mode === 'chapter-17' ? armedGaitIds : [], { mode, chapter: g.chapter.number, actualCompanion: true }, false);
+}
+const armedGaitsCapture = contactSheet('armed-gaits', armedCells, 4, 450, 410,
+  'Édition 0.10.5 — marches armées, arrêts et mouvement réduit ; fixtures explicites');
+await flushDecodeFinalizers();
+
+const deviceDefs = context.SoSData.rooms.flatMap(room => room.devices.filter(d => d.kind !== 'parts').map(d => ({ room: room.id, device: d })));
+assert.equal(deviceDefs.filter(d => d.device.kind === 'isolation').length, 4);
+assert.equal(deviceDefs.filter(d => d.device.kind !== 'isolation').length, 7);
+for (const def of deviceDefs) {
+  const pair = [];
+  for (const completed of [false, true]) {
+    const g = fixtureGame(def.room), device = g.room.devices.find(d => d.id === def.device.id), isolation = device.kind === 'isolation';
+    Object.assign(g.p, { x: device.x - 60, z: device.z });
+    if (completed && device.kind !== 'embark') {
+      g.rs.work[device.id] = device.duration;
+      assert.equal(g.finishDevice({ ...device, action: 'device' }), true, device.id + ': native completion accepts prepared work');
+    } else if (completed) {
+      // Embark has convoy preconditions outside this isolated rendering test.
+      g.rs.devices[device.id] = true; g.state.optional[device.id] = true;
+    }
+    const r = stage(g, { height: 440, groundY: 390, unit: isolation ? 2.3 : 3.2, focusX: device.x, focusZ: device.z });
+    const labels = [], text = r.text.bind(r); r.text = (...args) => { labels.push(args[0]); return text(...args); };
+    const source = 'devices/' + (isolation ? 'isolation' : 'console'), expected = source + (completed ? isolation ? '-closed' : '-complete' : '');
+    const result = await extensionCase('device-state/' + device.id + '/' + completed, 'device-state',
+      (isolation ? 'Vanne' : 'Console') + ' · ' + (completed ? isolation ? 'consignée' : 'terminée' : 'active'), g, r,
+      () => r.device(device, 0), [expected], [completed ? source : source + (isolation ? '-closed' : '-complete')],
+      { room: g.room.id, deviceId: device.id, deviceKind: device.kind, completed,
+        completionSetup: !completed ? 'initial native state' : device.kind === 'embark' ? 'explicit completed-state fixture' : 'native finishDevice after prepared work' },
+      ['isolate-hull', 'device-filters'].includes(device.id));
+    assert.ok(labels.includes(completed ? isolation ? 'CONSIGNÉ' : 'TERMINÉ' : 'MAINTENIR E'), device.id + ': native interaction label retained');
+    if (completed && isolation) {
+      const hazards = g.room.hazards.filter(h => h.disableDevice === device.id);
+      assert.ok(hazards.length > 0, device.id + ': authored isolation controls a hazard');
+      assert.ok(hazards.every(h => g.hazardStatus(h).phase === 'stopped'), 'completion retains native hazard isolation');
+      result.nativeHazardsStopped = hazards.map(h => h.id);
+    }
+    pair.push(result);
+  }
+  assert.notEqual(pair[0].pixelSha256, pair[1].pixelSha256, def.device.id + ': completion is visible in actual pixels');
+}
+for (const mode of ['active', 'pulse', 'manual-off', 'depleted']) {
+  const g = fixtureGame('s14'); equip(g);
+  let place = null;
+  for (let x = 120; x < g.room.width - 120; x += 80) {
+    Object.assign(g.p, { x, z: .55 });
+    const candidate = g.sensorPlacement(); if (candidate.ok && candidate.unit) { place = candidate; break; }
+  }
+  assert.ok(place, 'authored room has a native valid sensor placement');
+  assert.equal(g.sensorAction(), true, 'native sensor deployment');
+  const sensor = g.state.sensors.find(b => b.room === g.room.id);
+  if (mode === 'manual-off') assert.equal(g.toggleSensor(sensor.id), true, 'native remote shutdown');
+  if (mode === 'depleted') g.stepSensors(sensor.charge);
+  if (mode === 'pulse') { sensor.lastPulse = g.state.stats.time; sensor.count = 1; }
+  const active = sensor.powered && sensor.charge > 0;
+  const r = stage(g, { unit: 5.5, height: 480, groundY: 400, focusX: sensor.x, focusZ: sensor.z });
+  const circles = [], ellipse = r.ellipse.bind(r);
+  r.ellipse = (...args) => { circles.push(args); return ellipse(...args); };
+  const result = await extensionCase('sensor-state/' + mode, 'sensor-state', 'Capteur · ' + mode, g, r,
+    () => r.sensor(sensor, .25), ['equipment/' + (active ? 'sensor' : 'sensor-off')],
+    ['equipment/' + (active ? 'sensor-off' : 'sensor')],
+    { room: g.room.id, mode, powered: sensor.powered, charge: sensor.charge,
+      nativeActions: ['sensorAction', ...(mode === 'manual-off' ? ['toggleSensor'] : mode === 'depleted' ? ['stepSensors'] : [])] });
+  // [924,571] is the independently inspected glass-lens center in both PNG
+  // sources. The old native offset put a large status disk beside a tripod leg.
+  const indicator = circles.findLast(a => ['#efd28a', '#8bc9b3', '#665e4e'].includes(a[4]));
+  const source = context.SoSArtPack.assets.equipment[active ? 'sensor' : 'sensor-off'];
+  const anchor = r.pos(sensor.x, sensor.z), sourceScale = source.worldHeight / source.crop[3] * r.unit;
+  assert.ok(indicator && Math.abs(indicator[0] - anchor.x - (924 - source.pivot[0]) * sourceScale) < .001 &&
+    Math.abs(indicator[1] - anchor.y - (571 - source.pivot[1]) * sourceScale) < .001, 'sensor indicator is registered to the inspected physical lens');
+  assert.ok(indicator[2] > 0 && indicator[2] <= r.unit && indicator[3] <= r.unit, 'sensor indicator fits the physical lens instead of floating below the body');
+  result.statusIndicatorSourcePixel = [924, 571]; result.statusIndicatorRegisteredToLens = true;
+  if (mode === 'manual-off') {
+    const charge = sensor.charge; g.cooldowns.sensor = 0;
+    assert.equal(g.sensorAction(), true, 'native recovery remains possible while sensor is off');
+    assert.equal(sensor.room, null); assert.equal(sensor.charge, charge, 'recovery does not recharge the sensor');
+    const rr = stage(g);
+    await extensionCase('sensor-state/recovered', 'sensor-state', 'Capteur récupéré', g, rr,
+      () => rr.draw(0, 0), [], ['equipment/sensor', 'equipment/sensor-off'],
+      { room: g.room.id, nativeAction: 'sensorAction recovery', charge }, false);
+  }
+}
+for (const index of [0, 1, 2]) {
+  const g = fixtureGame('s33'); equip(g, 'flame');
+  const weakpoint = g.rs.weakpoints[index], ray = clearRay(g, weakpoint); Object.assign(g.p, ray.from);
+  const options = { height: 450, groundY: 405, unit: 2.2, focusX: weakpoint.x, focusZ: weakpoint.z };
+  const r = stage(g, options);
+  await extensionCase('weakpoint/' + index + '/alive', 'weakpoint-state', 'Attache · active', g, r,
+    () => r.weakpoint(weakpoint), ['equipment/weakpoint'], ['equipment/weakpoint-destroyed'],
+    { room: g.room.id, index, hp: weakpoint.hp }, index === 0);
+  for (let shot = 0; weakpoint.hp > 0 && shot < 3; shot++) {
+    g.cooldowns.fire = 0; assert.equal(g.shoot(ray.to), true, 'native flame shot reaches an existing attachment');
+  }
+  assert.equal(weakpoint.hp, 0, 'native flame damage destroys the existing attachment');
+  const after = stage(g, options);
+  await extensionCase('weakpoint/' + index + '/destroyed', 'weakpoint-state', 'Attache · détruite', g, after,
+    () => after.weakpoint(weakpoint), ['equipment/weakpoint-destroyed'], ['equipment/weakpoint'],
+    { room: g.room.id, index, hp: weakpoint.hp, nativeAction: 'shoot existing weakpoint with flame' }, index === 0);
+}
+await flushDecodeFinalizers();
+
+assert.equal(frontalCases.filter(d => d.type === 'rock-breach').length, 9, 'exact existing frontal/back rock thresholds');
+assert.equal(frontalCases.filter(d => d.type === 'boarding-ramp').length, 2, 'exact existing shuttle boarding ramps');
+const capturedFrontalTypes = new Set();
+for (const item of frontalCases) {
+  const pair = [], captureKey = item.type + '/' + item.mount;
+  const capture = !capturedFrontalTypes.has(captureKey); capturedFrontalTypes.add(captureKey);
+  for (const open of [true, false]) {
+    const { g, door, options } = doorFixture(item.room, item.id, open), r = stage(g, options), reference = stage(g, options);
+    const labels = [], nativeLabels = [], text = r.text.bind(r), nativeText = reference.text.bind(reference);
+    const paintOrder = [], drawImage = r.ctx.drawImage.bind(r.ctx), ellipse = r.ellipse.bind(r);
+    r.ctx.drawImage = (...args) => { paintOrder.push('png'); return drawImage(...args); };
+    r.ellipse = (...args) => { paintOrder.push({ ellipse: args }); return ellipse(...args); };
+    r.text = (...args) => { labels.push(args); return text(...args); };
+    reference.text = (...args) => { nativeLabels.push(args); return nativeText(...args); };
+    await observe(g, reference, 'frontal-native/' + item.id + '/' + open, () => originalDoor.call(reference, door));
+    const result = await extensionCase('frontal-portal/' + item.id + '/' + open, 'frontal-portal',
+      (item.type === 'rock-breach' ? 'Brèche' : 'Rampe') + ' · ' + item.mount + ' · ' + (open ? 'ouverte' : 'fermée'),
+      g, r, () => r.door(door), ['doors/' + item.type], [],
+      { room: item.room, doorId: item.id, type: item.type, mount: item.mount, open, nativeStatus: { ...g.doorStatus(door) } }, capture);
+    assert.deepEqual(labels, nativeLabels, item.id + ': native labels, positions and colors retained');
+    result.nativeLabelCommandsIdentical = true;
+    const q = r.pos(door.x, door.portal?.apertureZ ?? g.zFor(door)), u = r.unit;
+    const nativePixels = reference.ctx.getImageData(0, 0, r.W, r.H).data, actualPixels = r.ctx.getImageData(0, 0, r.W, r.H).data;
+    let protectedPixels = 0;
+    for (let y = 0; y < r.H; y++) for (let x = 0; x < r.W; x++) {
+      if (Math.abs(x - q.x) < 155 * u || y > q.y + 6 * u) continue;
+      const p = (y * r.W + x) * 4;
+      assert.ok(nativePixels[p] === actualPixels[p] && nativePixels[p + 1] === actualPixels[p + 1] &&
+        nativePixels[p + 2] === actualPixels[p + 2] && nativePixels[p + 3] === actualPixels[p + 3], item.id + ': surrounding native wall pixels remain intact');
+      protectedPixels++;
+    }
+    result.protectedWallPixels = protectedPixels;
+    // The approach marker must remain the final visible ground cue, including
+    // the front ramp whose surface intersects the approach position.
+    const approach = r.pos(door.x, g.zFor(door));
+    const markerIndex = paintOrder.findLastIndex(command => command?.ellipse?.[0] === approach.x && command.ellipse[1] === approach.y);
+    assert.ok(markerIndex > paintOrder.lastIndexOf('png'), item.id + ': approach marker is painted after the PNG surface');
+    result.nativeApproachMarkerAfterPng = true;
+    pair.push(result);
+  }
+  assert.notEqual(pair[0].pixelSha256, pair[1].pixelSha256, item.id + ': open/closed native status remains visible');
+}
+for (const roomId of ['s28', 's32']) for (const highContrast of [false, true]) {
+  const g = fixtureGame(roomId), options = { width: 600, height: 380, unit: 1.1, focusX: 800 }, r = stage(g, options), reference = stage(g, options);
+  r.highContrast = reference.highContrast = highContrast;
+  const result = await extensionCase('terrain/hive/' + roomId + '/' + highContrast, 'hive-terrain',
+    'Sol de ruche · ' + roomId + ' · ' + (highContrast ? 'contraste élevé' : 'normal'), g, r,
+    () => r.floor(0), ['terrain/hive'], ['terrain/sand', 'terrain/silica'], { room: roomId, kind: g.room.kind, highContrast });
+  originalFloor.call(reference, 0);
+  const bounds = changedBounds(reference.ctx.getImageData(0, 0, 600, 380).data, r.ctx.getImageData(0, 0, 600, 380).data, 600, 380);
+  assert.ok(bounds && bounds[1] >= Math.floor(380 * .605), 'hive material stays in the clipped ground band');
+  result.changedBoundsAgainstNative = bounds; result.upperScenePixelsUnchanged = true;
+}
+{
+  const g = fixtureGame('s33'), r = stage(g), reference = stage(g);
+  const result = await extensionCase('terrain/hive/queen-excluded', 'hive-terrain', 'Chambre royale native', g, r,
+    () => r.floor(0), [], ['terrain/hive'], { room: g.room.id, kind: g.room.kind }, false);
+  originalFloor.call(reference, 0);
+  assert.equal(result.pixelSha256, pixelsHash(reference.canvas), 'queen terrain is not silently included in the hive scope');
+  result.nativePixelsIdentical = true;
+}
+const statesPortalsCapture = contactSheet('states-portals', extensionCells, 4, 600, 465,
+  'Édition 0.10.5 — états natifs, brèches, rampes et sols de ruche ; fixtures explicites');
+await flushDecodeFinalizers();
+
 for (const [path, record] of inputChecks) assert.equal(sha256(readFileSync(path)), record.sha256, record.path + ': source PNG unchanged');
 for (const [path, hash] of immutableInputs) assert.equal(sha256(readFileSync(path)), hash, relative(repo, path) + ': original module unchanged');
 assert.deepEqual(Object.getOwnPropertyNames(context.SoSCore.Game.prototype), Object.keys(simulationDescriptors), 'no simulation prototype methods added/removed');
@@ -740,33 +987,36 @@ for (const [name, descriptor] of Object.entries(simulationDescriptors)) assert.d
 for (const [name, method] of Object.entries(unmodifiedMethods)) assert.equal(context.SoSRenderer.prototype[name], method, name + ': native method unchanged after all fixtures');
 const adapterStatus = api.status();
 const status = { ...adapterStatus, drawn: drawnStatus(), methodMetricsIncludeSelectionPass: true };
-const previousEditionAssetIds = ['characters/carlyle-physician', 'characters/decker-medical-gown', 'objectives/icc-handheld', 'creatures/queen', 'weapons/flame'];
-const newAssetIds = ['characters/decker-walk-pass-a', 'characters/decker-walk-pass-b', 'characters/decker-focus', 'characters/decker-medical-report',
+const previousEditionAssetIds = ['characters/carlyle-physician', 'characters/decker-medical-gown', 'objectives/icc-handheld', 'creatures/queen', 'weapons/flame',
+  'characters/decker-walk-pass-a', 'characters/decker-walk-pass-b', 'characters/decker-focus', 'characters/decker-medical-report',
   'equipment/locker-stocked', 'equipment/supply-empty', 'devices/parts-empty', 'doors/lift-cage',
   'decor/medical-chart', 'decor/medical-cups', 'terrain/sand', 'terrain/silica', 'planets/lv178-orbital'];
+const newAssetIds = [...armedGaitIds, 'devices/isolation-closed', 'devices/console-complete',
+  'equipment/sensor-off', 'equipment/weakpoint-destroyed', 'doors/rock-breach', 'doors/boarding-ramp', 'terrain/hive'];
 for (const id of previousEditionAssetIds) assert.ok(status.drawn[id] > 0, 'previous edition source remains observable: ' + id);
 for (const id of newAssetIds) assert.ok(status.drawn[id] > 0, 'new source actually reached drawImage: ' + id);
 const detailCounts = Object.fromEntries([...new Set(detailResults.map(r => r.kind))].map(kind => [kind, detailResults.filter(r => r.kind === kind).length]));
+const extensionCounts = Object.fromEntries([...new Set(extensionResults.map(r => r.group))].map(group => [group, extensionResults.filter(r => r.group === group).length]));
 const report = {
-  schemaVersion: 4,
-  edition: '0.10.4',
+  schemaVersion: 5,
+  edition: '0.10.5',
   engine: '@napi-rs/canvas', engineVersion: canvasVersion,
   browserJourney: false,
-  explanation: 'Real Canvas pixels rendered from the original simulation and PNG adapter. Rooms, equipment, actor positions and diagnostic camera magnification are explicit fixtures. Six effects originate from native shoot/hurtEnemy actions and their real events/states. This is neither a keyboard journey nor a full campaign completion.',
+  explanation: 'Real Canvas pixels rendered from the original simulation and PNG adapter. Rooms, equipment, actor positions and diagnostic camera magnification are explicit fixtures. Six effects originate from native shoot/hurtEnemy actions. Device completion (apart from the explicit embark fixture), sensor deployment/shutdown/depletion/recovery and attachment destruction use the original native actions after stated setup. This is neither a keyboard journey nor a full campaign completion.',
   decoder: {
     preloadScheduling: 'Sequential categories through the production preload API; optional explicit garbage collection between categories when Node exposes it.',
     nativeImageCache: { ...imageCacheMetrics, uniqueFullResolutionSourcesDecoded: decodedImagePaths.size,
       scope: 'QA harness only: a discarded image-selection pass records the exact paths for each frame, restoring Canvas pixels and all renderer properties. Native onload is awaited for those full-resolution images before the retained render; actual drawImage counts exclude selection passes. The production renderer and its normal browser image loading are unchanged.',
-      reason: 'An initial all-resident preload was killed with exit 137 after 136 images and an observed 1165 MiB RSS. No assertion result or capture was claimed for that interrupted attempt.',
+      reason: 'Historical 0.10.4 run: an initial all-resident preload was killed with exit 137 after 136 images and an observed 1165 MiB RSS. No assertion result or capture was claimed for that interrupted 0.10.4 attempt. This explains the retained bounded cache; it is not an incident from the present 0.10.5 run.',
       nativeReadiness: 'Native complete/dimensions can precede pixel readiness; every retained image draw waits for the actual native onload callback.',
       peakMeasurement: 'Maximum RSS sampled after each native PNG decode and isolated render; not a continuous process peak and not a performance comparison.' },
     sourcePngFilesChanged: false,
     ancillaryMetadataExcludedInMemory: 'caBX provenance chunks only; the installed Skia decoder rejects these chunks. All source files and all IDAT compressed pixel chunks are retained byte-for-byte.',
     imagesWithCaBX: [...inputChecks.values()].filter(a => a.omittedAncillaryCaBX > 0).length,
   },
-  counts: { declared: loaded.total, loaded: loaded.ready, rooms: roomResults.length, savedRoomCaptures: captureResults.length, poseAndWeaponCases: poseResults.length, locomotionCases: locomotionResults.length, walkingCases: locomotionResults.filter(r => r.mode === 'walking').length, restCases: locomotionResults.filter(r => r.mode === 'rest').length, reducedMotionCases: locomotionResults.filter(r => r.mode === 'reduced-motion').length, detailCases: detailResults.length, detailGroups: detailCounts, savedDiagnosticCaptures: 4, capturedDetailCases: detailCells.length, continuationCases: continuationResults.length, editionCases: editionResults.length, capturedEditionCases: editionCells.length, newAssetKindsDrawn: newAssetIds.length, pngKindsDrawn: Object.keys(status.drawn).length },
-  checks: { allImageDimensionsMatch: true, allImageSourcesUnchanged: true, immutableCampaignModulesUnchanged: true, simulationPrototypeUnchanged: true, targetingArchitectureAndEventAdmissionUnchanged: true, unmodifiedNativeMethods: Object.keys(unmodifiedMethods), allRoomStatesUnchangedByRendering: true, allFixtureSavesUnchangedByRendering: true, restAndReducedMotionPixelsStable: true, nativeDoorFallbackPixelsIdentical: true, sixEffectsUseNativeActionsAndState: true },
-  captures: captureResults, contactSheet: relative(repo, posesPath), diagnosticCaptures: { locomotion: locomotionCapture, details: detailsCapture, continuation: continuationCapture, edition: editionCapture }, rooms: roomResults, poses: poseResults, locomotion: locomotionResults, details: detailResults, continuation: continuationResults, editionResults, newAssetIds, previousEditionAssetIds, status,
+  counts: { declared: loaded.total, loaded: loaded.ready, rooms: roomResults.length, savedRoomCaptures: captureResults.length, poseAndWeaponCases: poseResults.length, locomotionCases: locomotionResults.length, walkingCases: locomotionResults.filter(r => r.mode === 'walking').length, restCases: locomotionResults.filter(r => r.mode === 'rest').length, reducedMotionCases: locomotionResults.filter(r => r.mode === 'reduced-motion').length, detailCases: detailResults.length, detailGroups: detailCounts, savedDiagnosticCaptures: 6, capturedDetailCases: detailCells.length, continuationCases: continuationResults.length, editionCases: editionResults.length, capturedEditionCases: editionCells.length, extensionCases: extensionResults.length, extensionGroups: extensionCounts, capturedExtensionCases: armedCells.length + extensionCells.length, newAssetKindsDrawn: newAssetIds.length, pngKindsDrawn: Object.keys(status.drawn).length },
+  checks: { allImageDimensionsMatch: true, allImageSourcesUnchanged: true, immutableCampaignModulesUnchanged: true, simulationPrototypeUnchanged: true, targetingArchitectureAndEventAdmissionUnchanged: true, unmodifiedNativeMethods: Object.keys(unmodifiedMethods), allRoomStatesUnchangedByRendering: true, allFixtureSavesUnchangedByRendering: true, restAndReducedMotionPixelsStable: true, nativeDoorFallbackPixelsIdentical: true, sixEffectsUseNativeActionsAndState: true, armedGaitsRespectActorAndActionScope: true, completedDeviceNativeLabelsRetained: true, sensorStatesUseNativeActions: true, weakpointDestructionUsesNativeDamage: true, frontalPortalNativeWallsAndLabelsRetained: true, nativeApproachMarkersFollowPngSurfaces: true, hiveGroundLimitedToTwoExistingRooms: true },
+  captures: captureResults, contactSheet: relative(repo, posesPath), diagnosticCaptures: { locomotion: locomotionCapture, details: detailsCapture, continuation: continuationCapture, edition: editionCapture, armedGaits: armedGaitsCapture, statesPortals: statesPortalsCapture }, rooms: roomResults, poses: poseResults, locomotion: locomotionResults, details: detailResults, continuation: continuationResults, editionResults, extensionResults, newAssetIds, previousEditionAssetIds, status,
   images: [...inputChecks.values()],
 };
 const reportPath = resolve(output, 'canvas-report.json');

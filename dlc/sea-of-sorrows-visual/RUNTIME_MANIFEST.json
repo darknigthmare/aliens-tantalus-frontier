@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
   "root": "dlc/sea-of-sorrows-visual",
-  "revision": "0.10.4",
+  "revision": "0.10.5",
   "upstreamRuntime": "dlc/sea-of-sorrows",
   "originalRuntimeTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
   "files": [
     {
       "path": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
-      "sizeBytes": 290427,
-      "sha256": "1c7aa577388caec67fe3b42e6c641853abfeb6ba48e00716ff0842ed52291091",
+      "sizeBytes": 340843,
+      "sha256": "bdb5718911626106cdf99fefe8bdc5c7981d7d55003b2d76103a18f92144cd04",
       "public": false
     },
     {
       "path": "dlc/sea-of-sorrows-visual/galerie.html",
       "sizeBytes": 7876,
-      "sha256": "e8c0bc4a5827abeebb6d7fe28752b37745f54b9b077f203e7d7d386be1d87c2d",
+      "sha256": "3a4efd13b00b2d05046747913efd7b11859caeb9afe03ab7c88c0bab47406aea",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/index.html",
       "sizeBytes": 7217,
-      "sha256": "d1ca3cc1bb7c1808e98d351b90fa05268554ce2b47bf2426808ef2da7a5fe641",
+      "sha256": "7de409ede92d055593366e906fb8582711ec1989874bd857a4d996d83ee72bf9",
       "public": true
     },
     {
@@ -114,9 +114,21 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png",
+      "sizeBytes": 1764629,
+      "sha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png",
       "sizeBytes": 1867661,
       "sha256": "5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b-ready.png",
+      "sizeBytes": 1764986,
+      "sha256": "5e2053595a8a3c8ad2be198b0f673f2f0223a4fbc0635f9ca2714564b667b1a5",
       "public": true
     },
     {
@@ -159,6 +171,30 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png",
       "sizeBytes": 1947258,
       "sha256": "786272996f5059f19b6661283986c7cd3ed812f67c884db4f031cfb9b3824995",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png",
+      "sizeBytes": 1853882,
+      "sha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-b-ready.png",
+      "sizeBytes": 1816517,
+      "sha256": "2ea4fee779b7216efe38f557d1efc07fa0e99be3289febd091fcfb4cb565111e",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-a-ready.png",
+      "sizeBytes": 1713000,
+      "sha256": "2bad7edbaeb6737c6237220bb825e976126ee09b44440b60dcc5128b1bca2aff",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-b-ready.png",
+      "sizeBytes": 1679099,
+      "sha256": "3d947888368c21c4ef77880335650d7023ff293727c8fdc33994e83243559481",
       "public": true
     },
     {
@@ -534,9 +570,21 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/console-complete.png",
+      "sizeBytes": 1874678,
+      "sha256": "9cdfa8e39afde7165180591af5432165fd9b073226fe4954a612fd079d33922e",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/devices/console.png",
       "sizeBytes": 2091998,
       "sha256": "90e7154ac78f5b9382b25d1a1c87d88ef8f83b976c99b21246691c34fc59ac25",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/isolation-closed.png",
+      "sizeBytes": 903057,
+      "sha256": "19df65f100687ad47fac328a4fe3273de189ca5209fc0c2a77065e730e8f38c6",
       "public": true
     },
     {
@@ -558,6 +606,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/boarding-ramp.png",
+      "sizeBytes": 1669244,
+      "sha256": "bb223fc2a0963d0d9707805e92f1fdc2dbf0f419bf123e8205264436def36d44",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-frame.png",
       "sizeBytes": 1620849,
       "sha256": "e03d27bc739fde15de5fce5f96ac48582cc374bd0155cb14c79fa23ffaa9772c",
@@ -573,6 +627,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
       "sizeBytes": 1344816,
       "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/rock-breach.png",
+      "sizeBytes": 777778,
+      "sha256": "148bd0426393027befd6399f8f55267a03cfeaa2c41f11d775b5ce7ef923da3b",
       "public": true
     },
     {
@@ -678,6 +738,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor-off.png",
+      "sizeBytes": 1660847,
+      "sha256": "1ac6df767ac033e86123e917d401505c2b4093ab10879b7ef83602f83facf54b",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png",
       "sizeBytes": 1073705,
       "sha256": "2b5db634e981ffb5eab299313366ad01a170c9725bf32680918170ab713c5d12",
@@ -711,6 +777,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/tracker.png",
       "sizeBytes": 1774314,
       "sha256": "941fe7967be24b45d50c2bfd9f9b0cefed5edf0e828b49fcdcf65e0a4b27bf1c",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint-destroyed.png",
+      "sizeBytes": 570761,
+      "sha256": "28fd32af2e78a8b716bfeb4381606c43493864ef9b310ab4a956b6d7f702efef",
       "public": true
     },
     {
@@ -822,6 +894,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/hive.png",
+      "sizeBytes": 1457136,
+      "sha256": "63d4d08fc5963c8d7d71d01c0e75e17f1b63da70bb19db39656e150ba51c0179",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
       "sizeBytes": 1722927,
       "sha256": "abb35029ec62424e8c9f13b4f2f05ff4e3ade0a3ff15750e2e3168324bedd276",
@@ -859,8 +937,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
-      "sizeBytes": 51046,
-      "sha256": "e833170b55f8adf6c0256d28f8b3e972a47889d5e310a6b5f65052f824ab31db",
+      "sizeBytes": 62073,
+      "sha256": "0cd5dfb5f5cc36199a21e9c2d44f7491fad99e458d1e75ec26452c2713e76ed8",
       "public": true
     },
     {
@@ -883,8 +961,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
-      "sizeBytes": 41271,
-      "sha256": "fa32338e1575f40734cb4ecca4525c965844c6da9bf8f0febf9caf07d5779976",
+      "sizeBytes": 47345,
+      "sha256": "935b94faa9c3a3fef7333253e7695425f0251c7c850632addf96f3d0a508c39b",
       "public": true
     }
   ]

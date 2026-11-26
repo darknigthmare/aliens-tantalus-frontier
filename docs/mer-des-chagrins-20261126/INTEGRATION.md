@@ -1,3 +1,94 @@
+# La Mer des Chagrins — édition visuelle 0.10.5
+
+## Résultat du 26 novembre 2026
+
+**152 PNG individuels, 290 100 077 octets.** Cette continuation ajoute **13 images** aux 139 de l’édition 0.10.4. Les 139 sources antérieures et leurs lignes complètes de métadonnées sont conservées. La simulation 0.10.0 garde l’arbre Git `1024a04d3615e135a0a9de7cbff6819e107a2492`, ses identifiants, ses règles et ses sauvegardes.
+
+La [bible détaillée](BIBLE_COMPLETION_20261126.md), sa [version structurée](BIBLE_COMPLETION_20261126.json) et la [bible centrale du DLC](../narrative/dlc/sea-of-sorrows.md) couvrent **239 fiches et 239 contrats de production**. Chaque contrat précise les références, la silhouette, les matières, l’échelle, le cadrage, les états, le raccordement au jeu, les vérifications et les critères de clôture. Les **576 descriptions de travaux historiques** sont conservées intégralement ; le registre courant en indique l’avancement.
+
+| Famille de fiches | Nombre |
+| --- | ---: |
+| Personnages, créatures et variantes | 29 |
+| Lieux | 50 |
+| Armes | 7 |
+| Props, équipements, effets et types de passages | 119 |
+| Véhicules | 5 |
+| Vaisseaux | 5 |
+| Terrains | 22 |
+| Planètes | 2 |
+
+Ces comptes décrivent le périmètre de production. Une fiche détaillée n’atteste pas à elle seule l’existence d’une image ni l’achèvement d’un lieu ou d’un véhicule.
+
+## Les treize images ajoutées
+
+| Ajout | PNG | Usage livré et limite |
+| --- | ---: | --- |
+| Decker, marche avec pistolet | 2 | Deux contacts alternés à 4 Hz pour le vrai joueur équipé, debout et en mouvement. Les autres armes, la recharge, le travail, les postures et les mouvements réduits conservent les présentations existantes. |
+| Manning, marche avec pistolet | 4 | Deux contacts et deux passages à 8 Hz pour le vrai compagnon en mouvement, avant le chapitre 17. Sa marche suit son propre état même si Decker recharge ou travaille. |
+| Vanne consignée | 1 | Les quatre dispositifs d’isolation gardent leur silhouette PNG après leur vraie complétion ; libellé « CONSIGNÉ » et arrêt des dangers natifs conservés. |
+| Console terminée | 1 | Les sept dispositifs concernés suivent leur propre état optional. Les consoles d’objectifs restent un autre chemin de rendu. |
+| Capteur arrêté ou épuisé | 1 | Présent si le capteur n’est plus alimenté ou si sa charge est nulle. Déploiement, extinction, épuisement et récupération restent natifs. L’indicateur est replacé sur la lentille, source [924, 571], rayon 0,8 unité. |
+| Attache détruite | 1 | Les trois attaches existantes de s33 changent d’image à zéro point de vie ; dégâts et progression du boss inchangés. |
+| Brèche rocheuse | 1 | Encadrement réutilisé aux neuf seuils de fond ou de premier plan. Les vingt et un montages latéraux gardent leur dessin natif. |
+| Rampe d’embarquement | 1 | Surface ajustée aux deux seuils boarding-ramp s11/s37. Murs, baie, indicateurs d’accès et repère d’approche restent présents ; le type boarding est distinct. |
+| Sol de ruche | 1 | Surface basse limitée aux salles hive s28/s32, avec ancrage fixe et contraste adapté. Elle ne change ni les obstacles ni le terrain physique. |
+
+Le pistolet est composé à partir de sa source existante ; aucune arme n’est peinte dans les six nouveaux corps. Les mains et la lampe de Decker utilisent leurs attaches mesurées. Les six poses sont des étapes de présentation, sans certification d’un cycle anatomique complet.
+
+**148 PNG ont un raccordement déclaré au monde, quatre à l’interface ; les 152 figurent dans la galerie.** Le rendu réel de cette édition a observé **140 types de PNG**, dont les **13 nouveaux**. Les images chargées, les images effectivement dessinées et les fiches de production sont comptées séparément.
+
+Les [prompts exacts et résultats](GENERATION_0_10_5.json) retracent **16 appels réussis pour 13 fichiers retenus**. Deux candidats de vanne et un contact de Decker ont été remplacés après inspection. Aucun nouveau refus n’est survenu et les anciennes demandes refusées d’adulte, de plasma et de lance-flammes compact n’ont pas été relancées. Les pixels source des PNG sont conservés sans réencodage par script.
+
+## Accès et preuves
+
+- [Édition visuelle — point d’entrée](../../dlc/sea-of-sorrows-visual/index.html).
+- [Galerie des 152 images](../../dlc/sea-of-sorrows-visual/galerie.html).
+- [Manifeste des images et placements](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
+- [Inventaire de distribution](../../dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json).
+- [Reçu de validation 0.10.5](VALIDATION_0_10_5.json).
+- [Marche armée dans les deux directions](canvas-0.10.5/armed-gaits.png).
+- [États des objets, brèches, rampes et ruche](canvas-0.10.5/states-portals.png).
+- [Salle s26 avec sa brèche de premier plan](canvas-0.10.5/s26.png).
+- [PR GitHub #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58).
+
+## Vérifications exécutées
+
+| Vérification | Résultat | Portée |
+| --- | --- | --- |
+| Suite visuelle | **128/128 réussis**, 0 échec, 0 ignoré | 107 tests renderer, dont 23 nouveaux ; galerie, équipement et admission. Simulation réelle avec doublures Canvas/Image/DOM. |
+| Catalogue DLC et succession des audits | **46/46 réussis** | Menus, intégration et protections des autres DLC. |
+| Admissions import / récupération / visuel | **33/33 réussis** | Conservation des admissions précises ; aucun assouplissement de garde. |
+| Sources et métadonnées | **152 PNG vérifiés** | Octets, empreintes, alpha, dimensions, découpes, pivots, attaches et portées ; 139 anciennes lignes préservées intégralement. |
+| Canvas avec les sources originales | **152 décodés, 270 cas structurés** | 50 salles, 24 cas posture/arme, 16 locomotions non armées, 38 diagnostics, 11 cas de 0.10.3, 35 de 0.10.4 et 96 nouveaux cas. |
+| Nouveaux états et placements | **96 cas** | 36 marches et exclusions, 22 états de dispositifs, 5 états de capteurs, 6 états d’attaches, 22 passages, 5 sols. |
+| Portes conservées | **19 comparaisons de repli au pixel** | Les nouveaux cadres vérifient aussi murs, libellés, états d’accès et repères au sol. |
+| Nouveaux visuels observés | **13/13** | Appels de dessin réels, hors passe préparatoire de sélection des images. |
+| Captures finales | **15 PNG, 13 417 720 octets** | Deux nouvelles planches et les vues de contrôle ; les 32 captures antérieures restent inchangées. |
+| Distribution de l’overlay | **159 fichiers publics**, 290 238 264 octets | Inventaire explicite ; métadonnées, documents, prompts et QA restent hors runtime public. |
+
+Le manifeste source comporte **160 membres**, dont le manifeste des sprites. Le manifeste de distribution lui-même reste source uniquement, hors de ces 160 membres. Son empreinte SHA-256 est `7adbba0595ede8b655f9bbad5ccb1fc5018f6a083e495c4f34a4227f06abeb26`.
+
+La QA utilise `@napi-rs/canvas 0.1.100`, avec 24 images natives maximum en cache et 21 sources au maximum pour un rendu. Le pic RSS échantillonné du dernier passage est 924 MiB ; cette mesure n’est pas un benchmark ni un pic continu. La capture retenue attend le chargement natif effectif ; les dessins de sélection sont exclus des observations. Le contournement de décodage caBX reste confiné aux buffers de QA, sans modification des fichiers ni des données de pixels IDAT.
+
+Les dispositifs terminent leur travail par finishDevice natif dans dix cas ; l’état terminé d’embarquement est une fixture explicite car ses prérequis de convoi dépassent ce test isolé. Les capteurs emploient les actions natives de déploiement, arrêt, épuisement et récupération ; les attaches sont détruites par de vrais dégâts du lance-flammes du jeu. Ces rendus conservent les états sérialisés, les sauvegardes, le prototype de simulation et les méthodes natives protégées.
+
+Les totaux des suites se recoupent et ne s’additionnent pas en un nombre de tests uniques. Aucun parcours complet au clavier, navigateur, écran tactile ou manette physique n’est certifié par ces fixtures. Les résultats distants de GitHub sont relevés séparément sur le commit publié.
+
+## Fidélité et travail restant
+
+**La fidélité canonique globale 1:1 reste non certifiée.** Les références éditoriales et extraits autorisés de la bible étayent le cadre et certaines scènes ; ils ne fournissent pas tous les portraits, plans, dimensions ou dessins industriels. Le roman intégral n’a pas été confronté. Les silhouettes, textures et détails de conception non attestés restent des interprétations signalées. Les continuités du roman et de la dramatique audio restent distinctes.
+
+Le registre courant contient **542 travaux ouverts, 26 partiels et 8 résolus sur un périmètre précis**. Dix travaux passent d’ouvert à partiel ; la marche de Decker conserve son état partiel avec une preuve supplémentaire. Aucune animation complète, aucun vaisseau, aucune planète et aucun contrôle canonique global n’est clôturé par ces images. Les 239 contrats et les 576 descriptions historiques restent identiques.
+
+Les points encore ouverts comprennent les transitions entre poses, le tir et la recharge animés, les mains des anciennes poses statiques, la crosse et la prise secondaire du lance-flammes, les visages exacts, les montages rocheux latéraux, les intérieurs/extérieurs complets de véhicules et vaisseaux, les plans des lieux et la géographie planétaire. La rampe n’achève pas la navette ; la surface de ruche n’ajoute pas une salle.
+
+En cas d’image absente, en chargement ou de calibration inutilisable, les états concernés conservent leur présentation native. Une exception Canvas synchrone pendant le dessin d’un nouveau seuil peut repeindre sa façade translucide sur cette seule frame avant que l’image passe en erreur ; ce cas distinct du chargement normal reste consigné dans le reçu.
+
+Les fichiers README.md, MANIFEST.json et RECOVERY.md de ce dossier décrivent toujours le checkpoint historique de 27 images. Les éditions précédentes restent documentées ci-dessous avec leurs preuves propres.
+
+<details>
+<summary>Guide historique 0.10.4 et éditions précédentes — preuves propres à leurs versions</summary>
+
 # La Mer des Chagrins — édition visuelle 0.10.4
 
 ## Résultat du 26 novembre 2026
@@ -272,5 +363,7 @@ La dépendance Canvas de QA est fournie par l’environnement de travail et ne d
 
 </details>
 
+
+</details>
 
 </details>

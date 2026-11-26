@@ -5,7 +5,7 @@
 root.SoSArtPack = {
   "version": 1,
   "coordinateSpace": "source-image-pixels",
-  "spriteCount": 139,
+  "spriteCount": 152,
   "assets": {
     "characters": {
       "adams": {
@@ -619,6 +619,248 @@ root.SoSArtPack = {
           324
         ],
         "label": "Decker · passage B"
+      },
+      "manning-walk-a-ready": {
+        "src": "sprites/characters/manning-walk-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          51,
+          11,
+          871,
+          1467
+        ],
+        "pivot": [
+          512,
+          1476
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          633,
+          449
+        ],
+        "supportHandAnchor": [
+          627,
+          484
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "contact-a",
+        "label": "Manning · marche armée · contact A",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "manning-walk-pass-a-ready": {
+        "src": "sprites/characters/manning-walk-pass-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          163,
+          13,
+          580,
+          1452
+        ],
+        "pivot": [
+          512,
+          1463
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          632,
+          455
+        ],
+        "supportHandAnchor": [
+          625,
+          491
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "passing-a",
+        "label": "Manning · marche armée · passage A",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "manning-walk-b-ready": {
+        "src": "sprites/characters/manning-walk-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          62,
+          13,
+          833,
+          1473
+        ],
+        "pivot": [
+          512,
+          1484
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          633,
+          454
+        ],
+        "supportHandAnchor": [
+          620,
+          491
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "contact-b",
+        "label": "Manning · marche armée · contact B",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "manning-walk-pass-b-ready": {
+        "src": "sprites/characters/manning-walk-pass-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          264,
+          12,
+          560,
+          1449
+        ],
+        "pivot": [
+          512,
+          1459
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          631,
+          447
+        ],
+        "supportHandAnchor": [
+          620,
+          484
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "passing-b",
+        "label": "Manning · marche armée · passage B",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "decker-walk-a-ready": {
+        "src": "sprites/characters/decker-walk-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          68,
+          25,
+          793,
+          1470
+        ],
+        "pivot": [
+          455,
+          1493
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          608,
+          508
+        ],
+        "supportHandAnchor": [
+          595,
+          540
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "player",
+        "poseState": "walking",
+        "gaitPhase": "contact-a",
+        "label": "Decker · marche au pistolet · contact A",
+        "lampAnchor": [
+          550,
+          310
+        ],
+        "roleScope": [
+          "decker"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "decker-walk-b-ready": {
+        "src": "sprites/characters/decker-walk-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          18,
+          24,
+          894,
+          1438
+        ],
+        "pivot": [
+          455,
+          1460
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          606,
+          507
+        ],
+        "supportHandAnchor": [
+          593,
+          539
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "player",
+        "poseState": "walking",
+        "gaitPhase": "contact-b",
+        "label": "Decker · marche au pistolet · contact B",
+        "lampAnchor": [
+          550,
+          310
+        ],
+        "roleScope": [
+          "decker"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
       }
     },
     "corpses": {
@@ -1640,6 +1882,42 @@ root.SoSArtPack = {
         "worldHeight": 84,
         "facing": "none",
         "label": "Bac de renforts vide"
+      },
+      "isolation-closed": {
+        "src": "sprites/devices/isolation-closed.png",
+        "width": 1254,
+        "height": 1254,
+        "crop": [
+          133,
+          83,
+          976,
+          1059
+        ],
+        "pivot": [
+          621.0,
+          1142
+        ],
+        "worldHeight": 117,
+        "facing": "none",
+        "stateSource": "devices/isolation"
+      },
+      "console-complete": {
+        "src": "sprites/devices/console-complete.png",
+        "width": 1312,
+        "height": 1199,
+        "crop": [
+          159,
+          25,
+          997,
+          1160
+        ],
+        "pivot": [
+          657.5,
+          1185
+        ],
+        "worldHeight": 61,
+        "facing": "none",
+        "stateSource": "devices/console"
       }
     },
     "doors": {
@@ -1732,6 +2010,256 @@ root.SoSArtPack = {
           285,
           885,
           775
+        ]
+      },
+      "rock-breach": {
+        "src": "sprites/doors/rock-breach.png",
+        "width": 1222,
+        "height": 1287,
+        "crop": [
+          71,
+          20,
+          1067,
+          1243
+        ],
+        "pivot": [
+          604.5,
+          1263
+        ],
+        "worldHeight": 180,
+        "facing": "none",
+        "portalScope": [
+          "rock-breach"
+        ],
+        "mountScope": [
+          "front",
+          "back"
+        ],
+        "apertureBounds": [
+          192,
+          132,
+          806,
+          1131
+        ],
+        "aperturePolygon": [
+          [
+            675,
+            134
+          ],
+          [
+            707,
+            135
+          ],
+          [
+            729,
+            160
+          ],
+          [
+            752,
+            200
+          ],
+          [
+            774,
+            230
+          ],
+          [
+            831,
+            260
+          ],
+          [
+            876,
+            300
+          ],
+          [
+            925,
+            350
+          ],
+          [
+            936,
+            400
+          ],
+          [
+            979,
+            450
+          ],
+          [
+            994,
+            500
+          ],
+          [
+            987,
+            550
+          ],
+          [
+            972,
+            600
+          ],
+          [
+            959,
+            650
+          ],
+          [
+            975,
+            700
+          ],
+          [
+            978,
+            750
+          ],
+          [
+            976,
+            800
+          ],
+          [
+            989,
+            900
+          ],
+          [
+            967,
+            1000
+          ],
+          [
+            979,
+            1100
+          ],
+          [
+            972,
+            1200
+          ],
+          [
+            954,
+            1263
+          ],
+          [
+            241,
+            1263
+          ],
+          [
+            232,
+            1240
+          ],
+          [
+            222,
+            1200
+          ],
+          [
+            206,
+            1100
+          ],
+          [
+            227,
+            1000
+          ],
+          [
+            222,
+            900
+          ],
+          [
+            231,
+            800
+          ],
+          [
+            245,
+            750
+          ],
+          [
+            246,
+            700
+          ],
+          [
+            245,
+            650
+          ],
+          [
+            207,
+            600
+          ],
+          [
+            193,
+            550
+          ],
+          [
+            216,
+            500
+          ],
+          [
+            236,
+            450
+          ],
+          [
+            278,
+            400
+          ],
+          [
+            339,
+            350
+          ],
+          [
+            400,
+            300
+          ],
+          [
+            469,
+            260
+          ],
+          [
+            510,
+            230
+          ],
+          [
+            581,
+            200
+          ],
+          [
+            620,
+            180
+          ],
+          [
+            641,
+            160
+          ],
+          [
+            648,
+            150
+          ],
+          [
+            658,
+            140
+          ]
+        ]
+      },
+      "boarding-ramp": {
+        "src": "sprites/doors/boarding-ramp.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          282,
+          113,
+          1607,
+          558
+        ],
+        "pivot": [
+          1085.5,
+          669
+        ],
+        "worldHeight": 78,
+        "facing": "none",
+        "rampBounds": [
+          284,
+          115,
+          1603,
+          554
+        ],
+        "portalScope": [
+          "boarding-ramp"
+        ],
+        "mountScope": [
+          "back",
+          "front"
+        ],
+        "sceneScope": [
+          "s11",
+          "s37"
         ]
       }
     },
@@ -2191,6 +2719,46 @@ root.SoSArtPack = {
         "worldHeight": 61,
         "facing": "none",
         "label": "Coffre de ravitaillement épuisé"
+      },
+      "sensor-off": {
+        "src": "sprites/equipment/sensor-off.png",
+        "width": 1424,
+        "height": 1104,
+        "crop": [
+          178,
+          5,
+          1062,
+          1085
+        ],
+        "pivot": [
+          709.0,
+          1090
+        ],
+        "worldHeight": 38,
+        "facing": "none",
+        "stateSource": "equipment/sensor",
+        "statusAnchor": [
+          924,
+          571
+        ]
+      },
+      "weakpoint-destroyed": {
+        "src": "sprites/equipment/weakpoint-destroyed.png",
+        "width": 887,
+        "height": 1774,
+        "crop": [
+          238,
+          11,
+          417,
+          1741
+        ],
+        "pivot": [
+          446.5,
+          1752
+        ],
+        "worldHeight": 160,
+        "facing": "none",
+        "stateSource": "equipment/weakpoint"
       }
     },
     "objectives": {
@@ -2672,6 +3240,26 @@ root.SoSArtPack = {
           "silica"
         ],
         "label": "Silice fracturée · surface"
+      },
+      "hive": {
+        "src": "sprites/terrain/hive.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          17,
+          141,
+          2144,
+          438
+        ],
+        "pivot": [
+          1089,
+          360
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "hive"
+        ]
       }
     }
   }

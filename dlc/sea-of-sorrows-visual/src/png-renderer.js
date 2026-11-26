@@ -166,17 +166,29 @@
     const clock = Math.max(0, finite(time) ? time : finite(g.time) ? g.time : 0);
     const phase = Math.floor(clock * 8) % 4;
     const walk = ['decker-walk-a', 'decker-walk-pass-a', 'decker-walk-b', 'decker-walk-pass-b'];
+    // These poses only follow movement already owned by the real actors. A
+    // portrait/copy, another weapon or a player's work/reload is not a gait.
+    const armedWalking = !portrait && armed && g.state.flags.equipped && actor.moving && !renderer.reduced &&
+      (actualPlayer ? !posture && g.p.weapon === 'pistol' && g.p.reload <= 0 && !g.activeWork :
+        role === 'manning' && actor === g.state.companion && g.chapter.number < 17);
+    const armedWalk = armedWalking ? actualPlayer ?
+      'decker-walk-' + (Math.floor(clock * 4) % 2 ? 'b' : 'a') + '-ready' :
+      ['manning-walk-a-ready', 'manning-walk-pass-a-ready', 'manning-walk-b-ready', 'manning-walk-pass-b-ready'][phase] : null;
     const candidates = portrait ? [role] : [...new Set([
       ...(report ? ['decker-medical-report'] : []),
       ...(medicalPose ? [medicalPose] : []),
       ...(focus ? ['decker-focus'] : []),
       ...(walking ? [walk[phase], 'decker-walk-' + (phase >= 2 ? 'b' : 'a')] : []),
+      ...(armedWalk ? [armedWalk] : []),
       ...(armed ? [role + posture + '-ready'] : []), role + posture,
       ...(armed ? [role + '-ready'] : []), role,
     ])];
     for (const id of candidates) {
       const png = asset('characters', id, actor.facing || 1);
       if (!png || armed && png.entry.weaponHidden !== true && !point(png.entry, 'handAnchor')) continue;
+      if (id === armedWalk && (png.entry.armedOnly !== true || !png.entry.weaponScope?.includes('pistol') ||
+          !png.entry.roleScope?.includes(role) || !png.entry.motionScope?.includes('walk') ||
+          png.entry.weaponHidden === true || !point(png.entry, 'handAnchor') || !point(png.entry, 'supportHandAnchor'))) continue;
       if (!portrait && actualPlayer && g.state.flags.equipped && g.p.lamp && !point(png.entry, 'lampAnchor')) continue;
       png.pose = id;
       png.armed = armed;
@@ -351,7 +363,7 @@
   R.floor = function (t) {
     fallback('floor', this, arguments);
     const kind = this.game.room.kind;
-    if (!['sand', 'silica'].includes(kind)) return;
+    if (!['sand', 'silica', 'hive'].includes(kind)) return;
     const png = asset('terrain', kind);
     if (!png || !png.entry.terrainScope?.includes(kind)) return;
     const c = this.ctx, spacing = 440;
@@ -461,6 +473,61 @@
     }
     c.restore(); return true;
   }
+  function frontalPortal(renderer, d, type, mount) {
+    const g = renderer.game, c = renderer.ctx, u = renderer.unit, p = d.portal || {};
+    const png = asset('doors', type), rock = type === 'rock-breach';
+    if (!png || !['back', 'front'].includes(mount) || png.entry.facing !== 'none' ||
+        !png.entry.portalScope?.includes(type) || !png.entry.mountScope?.includes(mount) ||
+        !rock && !png.entry.sceneScope?.includes(g.room.id)) return false;
+    const bounds = box(png.entry, rock ? 'apertureBounds' : 'rampBounds'), polygon = png.entry.aperturePolygon;
+    if (!bounds || rock && (!Array.isArray(polygon) || polygon.length < 3 ||
+        !polygon.every(a => pair(a) && a[0] >= 0 && a[0] <= png.entry.width && a[1] >= 0 && a[1] <= png.entry.height))) return false;
+    const approach = renderer.pos(d.x, g.zFor(d)), q = renderer.pos(d.x, p.apertureZ ?? g.zFor(d));
+    const h = 152 * u, w = (p.width || 110) * u, front = mount === 'front', status = g.doorStatus(d);
+    const left = renderer.pos(0, front ? .95 : .10), right = renderer.pos(g.room.width, front ? .95 : .10);
+    const sx = w * (rock ? 1.392 : 1.6) / bounds[2], sy = h * (rock ? 1.10 : .47) / bounds[3];
+    const origin = { x: q.x - w * (rock ? .732 : .8) - bounds[0] * sx,
+      y: q.y - h * (rock ? 1.10 : .47) - bounds[1] * sy };
+    c.save();
+    if (front && Math.abs(g.p.x - d.x) < 170) c.globalAlpha = .42;
+    // Keep the authored enclosing facade and bay. Only the frontal rocky rim
+    // or the ramp surface is replaced; lateral portals retain their own art.
+    const keep = c.globalAlpha, wallH = h * 1.13;
+    if (front) c.globalAlpha = .48;
+    const fill = rock ? '#273d38' : '#243e49';
+    renderer.rect(left.x, q.y - wallH, Math.max(0, q.x - w * .61 - left.x), wallH + renderer.H * .12, fill);
+    renderer.rect(q.x + w * .61, q.y - wallH, Math.max(0, right.x - q.x - w * .61), wallH + renderer.H * .12, fill);
+    for (let x = left.x + 25 * u; x < right.x; x += 140 * u) {
+      if (Math.abs(x - q.x) < w * .8) continue;
+      renderer.line(x, q.y - wallH + 5 * u, x, q.y + renderer.H * .11, rock ? '#5d796e' : '#718a91', 4 * u);
+      renderer.line(x + 7 * u, q.y - wallH + 5 * u, x + 7 * u, q.y + renderer.H * .11, '#0c2028', 2 * u);
+    }
+    renderer.line(left.x, q.y, right.x, q.y, '#9bafa7', 4 * u); c.globalAlpha = keep;
+    renderer.line(left.x, q.y - h * 1.13, right.x, q.y - h * 1.13, '#758c93', 3 * u);
+    if (!rock) {
+      renderer.rect(q.x - w * .60, q.y - h * 1.08, w * 1.2, h * 1.08, '#52666a', '#adc0b9');
+      renderer.rect(q.x - w * .5, q.y - h, w, h, '#081a23', '#8fa8a7');
+    }
+    renderer.line(approach.x - 28 * u, approach.y, q.x - 28 * u, q.y, '#e6c48c99', 2 * u);
+    renderer.line(approach.x + 28 * u, approach.y, q.x + 28 * u, q.y, '#e6c48c99', 2 * u);
+    if (rock) renderer.path(polygon.map(a => [origin.x + a[0] * sx, origin.y + a[1] * sy]), '#0c1b20');
+    if (!atSource(renderer, png, origin, sx, sy)) { c.restore(); return false; }
+    if (rock && !status.open) for (let j = 0; j < 5; j++) renderer.line(
+      q.x - w * .6, q.y - h * .12 - j * h * .15, q.x + w * .6, q.y - h * .86 + j * h * .16, '#7c8269', 3 * u);
+    // Paint the native approach marker last: at the front boarding threshold
+    // its ground position lies inside the ramp image's projected footprint.
+    c.globalAlpha = 1;
+    const color = status.open ? '#abc9bb' : '#d39474';
+    renderer.ellipse(approach.x, approach.y, 23 * u, 5 * u, color + '66');
+    if (near(renderer, d, 175)) {
+      const tx = Math.max(renderer.camera + 155, Math.min(g.room.width - 150, d.x)) - renderer.camera;
+      renderer.rect(tx - 148, q.y - h - 49 * u, 296, 39 * u, '#071923eb');
+      renderer.text(d.label, tx, q.y - h - 32 * u, 11 * u, color, 'center');
+      renderer.text((front ? 'PREMIER PLAN' : 'PAROI DE FOND') + (rock ? ' · BRÈCHE' : ' · RAMPE'),
+        tx, q.y - h - 17 * u, 9 * u, '#a7bfbc', 'center');
+    }
+    c.restore(); return true;
+  }
   R.door = function (d) {
     const g = this.game, c = this.ctx, u = this.unit, p = d.portal || {};
     const mount = p.mount || 'back', type = p.type || 'bulkhead';
@@ -468,7 +535,11 @@
       if (!liftDoor(this, d)) return fallback('door', this, arguments);
       return;
     }
-    // Oblique walls, travel, rock, lifts and stairs keep their authored native
+    if (type === 'rock-breach' || type === 'boarding-ramp') {
+      if (!frontalPortal(this, d, type, mount)) return fallback('door', this, arguments);
+      return;
+    }
+    // Oblique walls, travel and stairs keep their authored native
     // geometry. This front-facing pair only fits actual industrial bays.
     if (type !== 'bulkhead' || !['back', 'front'].includes(mount)) return fallback('door', this, arguments);
     const status = g.doorStatus(d), frame = asset('doors', 'bulkhead-frame');
@@ -592,13 +663,21 @@
     this.line(q.x, q.y, at.x, at.y, '#acb99555', 1.5); this.ellipse(at.x, at.y, 24, 5, '#c3a86f55');
   };
   R.sensor = function (b, t) {
-    const png = asset('equipment', 'sensor');
+    const powered = b.powered && b.charge > 0;
+    const png = asset('equipment', powered ? 'sensor' : 'sensor-off');
     if (!png) return fallback('sensor', this, arguments);
     const g = this.game, q = this.pos(b.x, g.zFor(b)), u = this.unit, c = this.ctx;
     this.shadow(q, 21 * u);
     if (!atWorld(this, png, q)) return fallback('sensor', this, arguments);
-    const signal = b.powered && b.lastPulse >= 0 && g.state.stats.time - b.lastPulse < 2;
-    this.ellipse(q.x + 9 * u, q.y - 8 * u, 3 * u, 3 * u, signal ? '#efd28a' : b.powered ? '#8bc9b3' : '#665e4e');
+    const signal = powered && b.lastPulse >= 0 && g.state.stats.time - b.lastPulse < 2;
+    // The historical source row stays byte-for-byte intact. Its inspected
+    // 1425x1104 lens calibration is kept here; new variants carry an anchor.
+    const statusPoint = point(png.entry, 'statusAnchor') ||
+      (png.state.key === 'equipment/sensor' && png.entry.width === 1425 && png.entry.height === 1104 ? [924, 571] : null);
+    const status = statusPoint ? { x: (statusPoint[0] - png.entry.pivot[0]) * png.scale * png.flip,
+      y: (statusPoint[1] - png.entry.pivot[1]) * png.scale } : { x: 9, y: -8 };
+    const radius = (statusPoint ? .8 : 3) * u;
+    this.ellipse(q.x + status.x * u, q.y + status.y * u, radius, radius, signal ? '#efd28a' : powered ? '#8bc9b3' : '#665e4e');
     if (signal) {
       c.save(); c.strokeStyle = '#e5cb91'; c.lineWidth = 1.4; c.beginPath();
       c.ellipse(q.x, q.y, (this.reduced ? 37 : 30 + Math.sin(t * 4) * 8) * u, 12 * u, 0, 0, Math.PI * 2); c.stroke(); c.restore();
@@ -648,16 +727,19 @@
   R.device = function (d, t) {
     const id = ['isolation', 'parts'].includes(d.kind) ? d.kind : 'console';
     const complete = this.game.state.optional[d.id];
-    const png = complete ? id === 'parts' && asset('devices', 'parts-empty') : asset('devices', id);
+    const completeId = { parts: 'parts-empty', isolation: 'isolation-closed', console: 'console-complete' }[id];
+    const png = asset('devices', complete ? completeId : id);
     if (!png) return fallback('device', this, arguments);
     const q = this.pos(d.x, this.game.zFor(d)), u = this.unit;
     this.shadow(q, 37);
     if (!atWorld(this, png, q)) return fallback('device', this, arguments);
-    if (complete && id === 'parts' && near(this, d, 145)) this.text('VIDE', q.x, q.y - 95 * u, 10, '#a8c8b2', 'center');
+    if (complete && near(this, d, id === 'console' ? 125 : 145)) this.text(
+      { parts: 'VIDE', isolation: 'CONSIGNÉ', console: 'TERMINÉ' }[id],
+      q.x, q.y - (id === 'parts' ? 95 : id === 'isolation' ? 133 : 77) * u, 10, '#a8c8b2', 'center');
     if (!complete && near(this, d, 145)) this.text('MAINTENIR E', q.x, q.y - (id === 'parts' ? 95 : id === 'isolation' ? 133 : 77) * u, 10, '#e4c690', 'center');
   };
   R.weakpoint = function (w) {
-    const png = w.hp > 0 && asset('equipment', 'weakpoint');
+    const png = asset('equipment', w.hp > 0 ? 'weakpoint' : 'weakpoint-destroyed');
     if (!png || !atWorld(this, png, this.pos(w.x, this.game.zFor(w)))) return fallback('weakpoint', this, arguments);
   };
 

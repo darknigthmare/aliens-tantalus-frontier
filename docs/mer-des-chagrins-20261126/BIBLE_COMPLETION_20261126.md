@@ -1,6 +1,6 @@
 # La Mer des Chagrins — bible de complétion des huit domaines
 
-**Édition courante 0.10.4 : 139 PNG et 239 fiches détaillées.** Le registre courant suit 576 travaux distincts. Les checkpoints 0.10.2 et 0.10.3 conservent leurs chiffres et leurs preuves propres.
+**Édition 0.10.5 : 152 PNG, dont 13 nouveaux, et 239 fiches détaillées.** Les 239 fiches et leurs contrats suivent toujours 576 travaux distincts. Chaque édition conserve ses chiffres, ses images et sa portée de preuve.
 
 **Référence : édition visuelle 0.10.2, PR #58, commit `ff6d538b32f9eb8946f2d296df1b790bf479eef9`.** Ce complément recense les définitions et les images réellement présentes à ce checkpoint, puis détaille le travail restant pour personnages, lieux, armes, props, véhicules, vaisseaux, terrain et planètes. Le roman intégral n’a pas été confronté : le recensement de toutes ses omissions et la fidélité globale 1:1 restent ouverts.
 
@@ -24,9 +24,64 @@ La [version structurée](BIBLE_COMPLETION_20261126.json) conserve les placements
 
 Le manifeste de référence déclare 117 raccordements de monde et quatre images d’interface. Cela ne signifie pas 117 sprites observés dans chaque parcours : Silas, Muller, Dave et Pritchett ont un portrait mais aucun placement `room.cast` dans les 50 salles. Les mesures de rendu restent celles du reçu qui les a réellement observées.
 
-## Édition 0.10.4 — registre courant et production par état
+## Édition 0.10.5 — production, raccords et vérification
 
-**13 nouveaux PNG, 139 fichiers uniques dans le lot courant.** Le relevé de référence reste à 121 images ; les cinq ajouts 0.10.3 restent leur propre checkpoint. Les 13 sources de cette passe représentent 24 115 511 octets. Les [prompts exacts](GENERATION_0_10_4.json), le [manifeste](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json) et le [reçu de validation](VALIDATION_0_10_4.json) distinguent production, raccordement et vérification.
+Cette continuation part du commit publié `7d90c5f81d046c9c8840c48dfed4051c809714e8`. **Treize nouveaux PNG représentent 19 505 614 octets ; le lot atteint 152 fichiers uniques et 290 100 077 octets.** Une seule brèche est réutilisée sur les montages avant et arrière. Les 139 sources et leurs lignes de métadonnées antérieures sont préservées. Le manifeste déclare 148 raccordements de monde et quatre images d’interface ; les 13 nouveaux PNG sont observés dans le rendu Canvas de cette édition. Les [prompts exacts](GENERATION_0_10_5.json) enregistrent 16 appels réussis, 13 images retenues et trois candidats remplacés : deux isolations et un contact de Decker. Aucun refus nouveau, aucune relance des demandes refusées historiquement.
+
+| Source PNG livrée en 0.10.5 | Raccord vérifié et limite |
+| --- | --- |
+| Manning : quatre poses `manning-walk-…-ready` | Vrai compagnon équipé, chapitre avant 17, déplacement réel et mouvement réduit désactivé. Le pistolet existant est composé dans les mains ; arrêt et tir gardent leurs règles. Quatre poses clés ne certifient pas un cycle complet. |
+| Decker : deux contacts `decker-walk-a-ready` et `decker-walk-b-ready` | Vrai joueur au pistolet, debout, en déplacement, hors recharge et travail actif ; les autres armes gardent leur présentation. Arme et lampe restent des compositions attachées. |
+| `devices/isolation-closed` | Les quatre dispositifs s19, s25, s31 et s36 après validation de leur propre état `optional`. Aucune conduite ou ressource créée. |
+| `devices/console-complete` | Sept dispositifs achevés : s37, s41 à s46. Cette présentation ne remplace ni les consoles d’objectif ni l’appareil ICC. |
+| `equipment/sensor-off` | Balise réellement éteinte, après arrêt manuel ou charge nulle ; une balise allumée sans écho reste allumée. |
+| `equipment/weakpoint-destroyed` | Les trois attaches de s33 quand leurs points de vie sont nuls. Le mécanisme reste une création de jeu, sans nouveau fait canonique. |
+| `doors/rock-breach` | Un seul PNG pour neuf occurrences avant/arrière de sept salles ; les montages gauche/droite conservent leur rendu natif. |
+| `doors/boarding-ramp` | Accès réciproque s11 arrière ↔ s37 avant, liaisons `link-42-a` et `link-42-b`. L’image ne crée ni un extérieur de vaisseau ni une animation de vol. |
+| `terrain/hive` | Sol de s28 et s32, seules salles de kind `hive` ; parois, œufs, collisions et salle de reine restent distincts. |
+
+### Historique, preuve et statut
+
+Les **239 contrats de production et les 576 descriptions de travaux sont conservés**. Le JSON archive intégralement l’édition 0.10.4 dans `editionHistory[0]` et l’état de chaque fiche dans `productionHistory`. Le registre courant comporte **542 travaux ouverts, 26 réalisés en partie et huit résolus dans leur périmètre déclaré**. Dix travaux passent d’ouvert à partiel sur la preuve 0.10.5 ; la tâche de locomotion de Decker reste partielle avec une preuve supplémentaire. Les huit résolutions historiques — cinq de 0.10.3 et trois de 0.10.4 — sont conservées sans en ajouter. Un PNG produit, un raccord de code, une fixture Canvas et une campagne réellement parcourue restent des preuves de portée différente.
+
+La rampe concerne deux seuils existants. Elle ne complète pas les vues extérieures, la propulsion, la soute ou le départ de la navette. Les cages livrées en 0.10.4 concernent s14/droite et s15/gauche ; elles restent fixes, sans course verticale animée. Les brèches nouvelles concernent s19/avant, s20/arrière, s22/arrière, s26/avant, s27/arrière, s29/avant et arrière, s44/avant et arrière. Les ouvertures, labels, conditions de passage, positions d’arrivée et replis natifs demeurent des obligations de raccord, pas des faits déduits de l’image.
+
+### Vérifications de cette édition
+
+Suite visuelle 0.10.5 : 128/128 tests réussis, zéro échec et zéro ignoré, dont 107 tests de renderer. La QA Canvas décode 152 PNG et observe 140 types d’images, dont les 13 ajouts. Elle comporte 270 cas structurés : 50 salles, 24 cas posture/arme, 16 cas de locomotion historiques, 38 diagnostics dont 19 comparaisons de repli natif, 11 cas médicaux/reine de 0.10.3, 35 cas de 0.10.4 et 96 nouveaux cas. Quinze captures totalisent 13 417 720 octets. Les 139 sources et métadonnées précédentes, la simulation et les sauvegardes des fixtures restent préservées. Ces fixtures ne sont pas une campagne parcourue dans un navigateur ; aucun cycle complet ni fidélité globale 1:1 n’est certifié.
+
+Les 96 cas nouveaux couvrent 36 présentations de marche armée, 22 états de dispositifs, cinq états de capteur, six états d’attaches, 22 états de portes et cinq cas de sol. Les 22 états de portes représentent neuf brèches et deux rampes, chacune ouverte et fermée. Les 22 états de dispositifs représentent quatre isolations et sept consoles avant/après ; dix dispositifs passent par `finishDevice` natif après préparation du travail, tandis que l’embarquement est un état explicitement préparé. Les points d’attache des armes et de la lampe, l’indicateur réel du capteur, les parois, labels, marqueurs d’approche et replis des montages incompatibles ont leur portée de contrôle propre.
+
+Le [reçu final 0.10.5](VALIDATION_0_10_5.json) consigne ces résultats. Les [poses armées](canvas-0.10.5/armed-gaits.png) et les [états, portes et sols](canvas-0.10.5/states-portals.png) sont des planches de diagnostic de fixtures déclarées. Aucun nouveau parcours navigateur, test global `test:all` ou build global n’est déclaré par cette preuve.
+
+**Limite technique de QA.** Une exception `drawImage` injectée après la peinture des pans de façade peut les faire repeindre par le repli natif sur cette seule frame ; le PNG passe ensuite à l’état `failed`. Cette injection conserve l’état de simulation et une pile Canvas équilibrée ; elle ne décrit pas une panne du rendu normal. Le repli préalable d’une image absente, en chargement ou invalide demeure distinct.
+
+### Manques qui restent ouverts dans les huit domaines
+
+| Domaine | Travail encore nécessaire après cette production limitée |
+| --- | --- |
+| Personnages | Transitions réelles de Decker et Manning, tir, recharge et interactions ; anatomie et seconde main des armes longues ; interventions des portraits sans placement ; référence primaire des apparences et de la capture. |
+| Lieux | Parcours des seuils avec verrouillage, retour, groupe et reprise ; plans, arrivées, parois et couches des 50 salles. Une image de sol ou d’ouverture ne constitue pas un stage complet. |
+| Armes | Contrôle des prises et occlusions, de la crosse du lance-flammes et des cycles réellement disponibles. Les refus historiques adulte/plasma/flame-compact ne sont pas relancés. |
+| Props | États intermédiaires et actions réellement jouées des dispositifs ; extinction, récupération et batterie des balises ; contrôles séparés des trois attaches détruites. Aucun état d’œuf ouvert n’est inventé. |
+| Véhicules | Référence des modèles, dimensions et marquages ; cabine, suspension et course des cages seulement si un trajet animé est réellement implémenté. Aucun véhicule complet nouveau dans cette passe. |
+| Vaisseaux | Vues extérieures cohérentes et accès documentés ; maintien de la distinction Carlyle, transport contractuel, navette, appareil enfoui et variante audio. La rampe couvre un accès, pas l’ensemble du vaisseau. |
+| Terrain | Parois, plafonds, profondeur et raccord des deux projections sur les chemins réels ; le sol de ruche ne couvre que s28/s32. Matières et palettes restent interprétées. |
+| Planètes | Données primaires et usages précis avant de produire d’autres vues. Le globe LV-178 de 0.10.4 ne certifie aucune géographie ; la Terre n’a pas de nouveau raccord orbital. |
+
+### Références relues le 26 novembre 2026
+
+La [notice officielle Titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/) étaye le cadre de Decker, LV-178/New Galveston et la mission. Le [chapitre 4 autorisé chez JoBlo](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/) étaye la scène médicale du Carlyle. Le [chapitre 5 chez Gizmodo](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409) situe Chicago et le bureau de Harriman. Ces références ne fournissent pas les dessins cotés des nouveaux états industriels, des brèches ou de la rampe. Les silhouettes héritées du projet restent des interprétations.
+
+Le script audio demeure une référence historique de continuité distincte ; il n’a pas été relu pour cette édition. Le roman intégral n’a pas été confronté. **Ni l’exhaustivité de ses manquants, ni des cycles complets, ni une fidélité globale 1:1 ne sont certifiés.** Les refus de génération des éditions précédentes sont conservés sans relance.
+
+### CI du checkpoint parent — observation séparée
+
+La lecture du 26 novembre 2026 concerne uniquement le commit parent `7d90c5f81d046c9c8840c48dfed4051c809714e8`. Les workflows Full release et V162 étaient encore en cours. Deux jobs V163 étaient en échec : [rigs-v165](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45831807427/job/139950408573) et [trials](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45831807427/job/139950408644). Leurs symptômes relèvent de parcours Xeno Trials — attente d’introduction, capture Prowler et déploiement Broodstorm — sans import du DLC Mer dans ces parcours. Les causes n’ont pas été reproduites lors de cet audit. Cette observation ne certifie ni une indépendance causale absolue, ni la CI de 0.10.5, ni un succès global du dépôt.
+
+## Édition 0.10.4 — checkpoint historique et production par état
+
+**13 nouveaux PNG, 139 fichiers uniques dans le lot courant.** Le relevé de référence reste à 121 images ; les cinq ajouts 0.10.3 restent leur propre checkpoint. Les 13 sources de cette passe représentent 24 115 511 octets. Les [prompts exacts](GENERATION_0_10_4.json), le [manifeste 0.10.4 épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/7d90c5f81d046c9c8840c48dfed4051c809714e8/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json) et le [reçu de validation](VALIDATION_0_10_4.json) distinguent production, raccordement et vérification.
 
 | Asset de cette passe | État ou usage couvert |
 | --- | --- |
@@ -134,11 +189,13 @@ Le cadre et le panneau PNG conviennent seulement aux baies industrielles compati
 
 ### MER-PERS-decker — Alan Decker
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `characters/decker-walk-a-ready`, `characters/decker-walk-b-ready`. Contact de marche au pistolet du vrai joueur debout ; mains vides rapprochées, arme existante composée et lampe attachée si équipée. Deux contacts ne certifient pas un cycle complet.
+
 **Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Alan Decker entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
 
-**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-focus`, `characters/decker-medical-report`, `characters/decker-walk-pass-a`, `characters/decker-walk-pass-b`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-focus`, `characters/decker-medical-report`, `characters/decker-walk-pass-a`, `characters/decker-walk-pass-b`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
-**Avancement des travaux du checkpoint :** `MER-PERS-decker-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-PERS-decker-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 
 Inspecteur ICC, civil
@@ -162,6 +219,10 @@ Inspecteur ICC, civil
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-manning — Manning
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `characters/manning-walk-a-ready`, `characters/manning-walk-pass-a-ready`, `characters/manning-walk-b-ready`, `characters/manning-walk-pass-b-ready`. Pose clé du déplacement armé de Manning ; le pistolet existant est composé dans les mains. Le portrait et les copies de présentation restent distincts du vrai compagnon.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-manning-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Manning entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
 
@@ -578,6 +639,8 @@ Population native, dimensions et statistiques de gameplay.
 
 ### MER-PERS-queen — Reine
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `equipment/weakpoint-destroyed`. Résidu des trois attaches après hp <= 0. Les attaches sont une mécanique du projet ; cette image ne constitue pas une description canonique de la reine.
+
 **Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
 
 **Avancement des travaux du checkpoint :** `MER-PERS-queen-W01` — Résolu dans le périmètre déclaré (0.10.3). Les autres travaux de cette fiche restent ouverts.
@@ -629,7 +692,7 @@ Population native, dimensions et statistiques de gameplay.
 
 **Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
 
-**Avancement des travaux du checkpoint :** `MER-PERS-captureAdult-W01` — Réalisé en partie (0.10.3) ; `MER-PERS-captureAdult-W05` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-PERS-captureAdult-W01` — Réalisé en partie (0.10.3); `MER-PERS-captureAdult-W05` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
 
 Population native, dimensions et statistiques de gameplay.
@@ -716,7 +779,7 @@ Superposition au visage du patient ; distinct du facehugger libre.
 
 **Contrat de production courant.** La variante du médecin anonyme habille le cast medic existant de s03, sans renommer le profil composite ailleurs ni remplacer ses portraits. Conserver les traits explicitement décrits dans la source et l’identité graphique du projet ; le visage exact reste interprété. Consultation assise, geste vers le dossier et retour à la pose demeurent des besoins d’animation séparés du sprite debout.
 
-**Avancement des travaux du checkpoint :** `MER-PERS-carlyle-physician-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PERS-carlyle-physician-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-PERS-carlyle-physician-W01` — Résolu dans le périmètre déclaré (0.10.3); `MER-PERS-carlyle-physician-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
 
 Identité non nommée du chapitre 4 ; distincte du composite médical.
@@ -741,9 +804,9 @@ Identité non nommée du chapitre 4 ; distincte du composite médical.
 
 **Contrat de production courant.** Variante médicale du joueur limitée à s03 et à son état non armé ; les poses normales ou armées restent distinctes. Pendant la transmission native o02-01, utiliser la pose de rapport seulement si les conditions de travail sont satisfaites ; un seul appareil ICC visible. La consultation debout produite ne représente pas les positions assise/allongée ni le lever de la couchette ; ces actions restent ouvertes.
 
-**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
-**Avancement des travaux du checkpoint :** `MER-PERS-decker-medical-gown-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PERS-decker-medical-gown-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-PERS-decker-medical-gown-W01` — Résolu dans le périmètre déclaré (0.10.3); `MER-PERS-decker-medical-gown-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
 
 Variante de Decker ; aucune nouvelle identité.
@@ -887,7 +950,7 @@ Les cinquante salles existent déjà. Les travaux portent sur leur représentati
 
 **Contrat de production courant.** Stage de Poste de contrôle : conserver la largeur de jeu 1960 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Portique de surveillance ; bornes météo ; clôture ouverte ; câbles enterrés ; traces de chenilles. Seuils à garder sur leur support : exterior-path ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la voie de service.
@@ -914,7 +977,7 @@ Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la
 
 **Contrat de production courant.** Stage de Le carottier : conserver la largeur de jeu 2240 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Carottier ancré ; vérins ; caisse de prélèvement ; manche à air ; balises de périmètre. Seuils à garder sur leur support : exterior-path, transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice. Une passerelle permet de contourner la machine.
@@ -943,7 +1006,7 @@ Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice
 
 **Contrat de production courant.** Stage de Transport sanitaire : conserver la largeur de jeu 1580 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Couchette ; moniteur ; écran de télémétrie ; rangement mural ; hublot oblong. Seuils à garder sur leur support : transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-LIEU-s03-W01` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
@@ -1114,7 +1177,7 @@ Deux sièges se font face, séparés par une console. Le vitrage laisse voir les
 
 **Contrat de production courant.** Stage de Réserve d’équipement : conserver la largeur de jeu 2080 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Racks ancrés ; combinaisons ; chargeurs ; malle de filtres ; casiers numérotés. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Trois travées stockent l’équipement de l’expédition. Les passages entre les racks permettent de changer de profondeur. Implantation v0.3 : magasins en vis-à-vis. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1166,9 +1229,11 @@ Une rampe et un couloir de sécurité conduisent à la navette. Les volumes au f
 
 ### MER-LIEU-s11 — Aire d’atterrissage
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/boarding-ramp`. Un PNG de rampe pour le couple réel s11/link-42-a arrière vers s37 et s37/link-42-b avant vers s11. Support, approche, verrouillage, traversée et arrivée restent natifs ; ni extérieur complet de navette ni vol animé.
+
 **Contrat de production courant.** Stage de Aire d’atterrissage : conserver la largeur de jeu 2560 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Dalles prises dans le sable ; balises ; réservoir ; abri radio ; traces de moteurs. Seuils à garder sur leur support : boarding-ramp, building-entrance, exterior-path ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d’accès au nord. Implantation v0.3 : aire ouverte et ligne de fret. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1199,7 +1264,7 @@ La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d�
 
 **Contrat de production courant.** Stage de Abri d’expédition · Quonset : conserver la largeur de jeu 1940 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table de mission ; bancs ; cartes ; thermos ; casiers ; filtre d’air. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 L’abri possède une entrée, une zone de briefing et un passage vers la décontamination.
@@ -1255,7 +1320,7 @@ Deux portes encadrent les buses de nettoyage. Les équipements humides restent d
 
 **Contrat de production courant.** Stage de Tête de puits : conserver la largeur de jeu 2240 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage ; poulies ; commandes ; garde-corps ; câble principal ; barrières de bord. Seuils à garder sur leur support : bulkhead, lift-cage ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse seulement deux passages balisés. Implantation v0.3 : contour de la cage. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1284,7 +1349,7 @@ Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse s
 
 **Contrat de production courant.** Stage de Recette de l’ancienne mine : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage ; rails ; butoir ; boulonnage ; tuyauteries ; éclairage de secours. Seuils à garder sur leur support : bulkhead, lift-cage ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La cage arrive dans une recette protégée. Les rails sortent vers le relais, loin du bord du puits.
@@ -1311,7 +1376,7 @@ La cage arrive dans une recette protégée. Les rails sortent vers le relais, lo
 
 **Contrat de production courant.** Stage de Relais de Cho : conserver la largeur de jeu 2280 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table radio ; touret ; casiers ; antenne filaire ; lampe ; repères de secteur. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans bloquer les circulations. Implantation v0.3 : baie de relais décalée. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1340,7 +1405,7 @@ Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans
 
 **Contrat de production courant.** Stage de Atelier de maintenance : conserver la largeur de jeu 1960 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Établi ; outils ; bouteilles ; chariot ; caisses ; crochets ; établi secondaire. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/locker-stocked`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/locker-stocked`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Un établi, un passage central libre et une remise arrière. Le matériel lourd reste appuyé au sol.
@@ -1392,6 +1457,8 @@ Les câbles longent le plafond. Le chemin de service évite les armoires haute t
 
 ### MER-LIEU-s19 — La carène enfouie
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/isolation-closed`, `doors/rock-breach`. État consigné des quatre dispositifs d’isolation ; conduite, danger, interaction, sauvegarde et drapeau restent ceux de la simulation. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de La carène enfouie : conserver la largeur de jeu 2880 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Coque courbe ; échafaudage ; passerelle ; roche fracturée ; balises humaines. Seuils à garder sur leur support : rock-breach, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -1416,6 +1483,8 @@ La coque apparaît dans une caverne bien plus vaste que le champ de déplacement
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s20 — Brèche de coque
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
 
 **Contrat de production courant.** Stage de Brèche de coque : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Arches non humaines ; peau nervurée ; jauges de relevé ; câbles humains temporaires. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -1471,6 +1540,8 @@ La fouille descend vers la ville ruinée. Les cordes, grilles et repères racont
 
 ### MER-LIEU-s22 — Esplanade ensevelie
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de Esplanade ensevelie : conserver la largeur de jeu 2860 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Contreforts ; arches effondrées ; pierres ; éclairages sur trépied ; instruments. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -1525,7 +1596,7 @@ Les restes sont des témoins archéologiques, pas des ennemis ressuscités. Le j
 
 **Contrat de production courant.** Stage de Poste de relevés : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Console portable ; caisses de capteurs ; panneaux ; fil guide ; bouteilles d’air. Seuils à garder sur leur support : bulkhead, crawl-opening ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Une implantation humaine fragile occupe un seuil de la cité. La radio et le matériel restent visibles depuis l’entrée. Implantation v0.3 : baie de relevé protégée. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1552,6 +1623,8 @@ Une implantation humaine fragile occupe un seuil de la cité. La radio et le mat
 
 ### MER-LIEU-s25 — Passerelle suspendue
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/isolation-closed`. État consigné des quatre dispositifs d’isolation ; conduite, danger, interaction, sauvegarde et drapeau restent ceux de la simulation.
+
 **Contrat de production courant.** Stage de Passerelle suspendue : conserver la largeur de jeu 2680 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Platelage ; ancrages ; câble latéral ; contreventement ; balises cassées. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -1577,9 +1650,11 @@ Une passerelle suit la paroi ; des volumes descendent sous le plan jouable. Le v
 
 ### MER-LIEU-s26 — Entrée des tubes
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de Entrée des tubes : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Silice ; roche ; repères arrachés ; lampe tombée ; peau translucide ; résine. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La mine humaine rejoint des tubes de silice. La transition architecturale est visible avant le changement de salle. Implantation v0.3 : gorge à bifurcation. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1606,9 +1681,11 @@ La mine humaine rejoint des tubes de silice. La transition architecturale est vi
 
 ### MER-LIEU-s27 — Le nœud ambré
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de Le nœud ambré : conserver la largeur de jeu 2680 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Piliers ; gouttes minérales ; membranes ; débris d’équipement ; trace de traînée. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Trois passages composent une boucle. Les piliers de silice délimitent les bandes sans former un mur infranchissable. Implantation v0.3 : nœud à pilier central. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1634,6 +1711,8 @@ Trois passages composent une boucle. Les piliers de silice délimitent les bande
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s28 — Alcôve des disparus
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `terrain/hive`. Surface du sol des deux salles de kind hive. Les parois, volumes, ouvertures, œufs et collisions restent distincts ; la salle de reine s33 n’est pas incluse par déduction.
 
 **Contrat de production courant.** Stage de Alcôve des disparus : conserver la largeur de jeu 1960 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cocons ; casque ; balise ; arme vide ; résine ; réseaux organiques. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -1662,9 +1741,11 @@ Une alcôve accessible par un boyau étroit. Les cocons occupent le fond, le pas
 
 ### MER-LIEU-s29 — Le retour fermé
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de Le retour fermé : conserver la largeur de jeu 2220 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Membrane de fermeture ; ancien repère ; fissure latérale ; tube de ventilation. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Le retour se bouche après le relevé. Une dérivation identifiée existe avant le changement d’état. Implantation v0.3 : dérivation derrière la membrane. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1693,7 +1774,7 @@ Le retour se bouche après le relevé. Une dérivation identifiée existe avant 
 
 **Contrat de production courant.** Stage de Ascenseur secondaire : conserver la largeur de jeu 2300 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage inclinée ; câbles rompus ; supports tordus ; panneau défaut ; rambardes. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La seconde installation ne garantit plus de sortie. Les commandes restent accessibles malgré les dommages.
@@ -1719,6 +1800,8 @@ La seconde installation ne garantit plus de sortie. Les commandes restent access
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s31 — Pied de l’escalier
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/isolation-closed`. État consigné des quatre dispositifs d’isolation ; conduite, danger, interaction, sauvegarde et drapeau restent ceux de la simulation.
 
 **Contrat de production courant.** Stage de Pied de l’escalier : conserver la largeur de jeu 2420 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Volées ; paliers ; échelle de secours ; numérotation ; main courante ; conduites. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -1747,6 +1830,8 @@ La cage d’escalier possède des paliers lisibles et un itinéraire de maintena
 
 ### MER-LIEU-s32 — Chambre des œufs
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `terrain/hive`. Surface du sol des deux salles de kind hive. Les parois, volumes, ouvertures, œufs et collisions restent distincts ; la salle de reine s33 n’est pas incluse par déduction.
+
 **Contrat de production courant.** Stage de Chambre des œufs : conserver la largeur de jeu 2820 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Œufs ; résine ; condensation ; carcasses minérales ; creux sombres ; gaines. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -1773,6 +1858,8 @@ Les œufs forment des îlots, jamais une grille décorative. Deux passages conti
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s33 — La pondeuse
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `equipment/weakpoint-destroyed`. Résidu des trois attaches après hp <= 0. Les attaches sont une mécanique du projet ; cette image ne constitue pas une description canonique de la reine.
 
 **Contrat de production courant.** Stage de La pondeuse : conserver la largeur de jeu 3040 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Reine ; attaches ; ovipositeur stylisé ; œufs périphériques ; arches ; sol corrodé. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -1804,7 +1891,7 @@ Une grande chambre distribue trois ancrages de résine autour d’un axe d’év
 
 **Contrat de production courant.** Stage de Dérivation de secours : conserver la largeur de jeu 2140 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Civière ; couvertures ; éclairage mobile ; caisses ; conduites ; fermeture coupe-feu. Seuils à garder sur leur support : bulkhead, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Le retour vers l’escalier passe par une galerie industrielle partiellement envahie. Une zone de soins improvisée ne promet aucune guérison. Les deux brancards doivent être préparés séparément puis escortés jusqu’à la navette. Implantation v0.3 : baie de stabilisation à deux brancards. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1858,9 +1945,11 @@ Une succession de paliers comprimée pour le jeu, reliée explicitement au bas d
 
 ### MER-LIEU-s36 — Ravin de service
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/isolation-closed`. État consigné des quatre dispositifs d’isolation ; conduite, danger, interaction, sauvegarde et drapeau restent ceux de la simulation.
+
 **Contrat de production courant.** Stage de Ravin de service : conserver la largeur de jeu 2700 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Talus ; antenne ; câble enterré ; talweg sec ; route de service ; sable en mouvement. Seuils à garder sur leur support : exterior-path, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises permettent de reconnaître le lieu. Implantation v0.3 : ravin et drainage latéral. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1887,9 +1976,11 @@ Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises perme
 
 ### MER-LIEU-s37 — Soute de la navette
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`, `doors/boarding-ramp`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC. Un PNG de rampe pour le couple réel s11/link-42-a arrière vers s37 et s37/link-42-b avant vers s11. Support, approche, verrouillage, traversée et arrivée restent natifs ; ni extérieur complet de navette ni vol animé.
+
 **Contrat de production courant.** Stage de Soute de la navette : conserver la largeur de jeu 2400 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Caisson ; moussoir ; treuil ; sangles ; rampes ; rails de chargement ; banquettes. Seuils à garder sur leur support : boarding, boarding-ramp ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La rampe débouche sur une soute assez large pour l’opération de capture. Le caisson est ancré, et non posé devant une porte. Implantation v0.3 : berceaux et cage séparés. Les emprises sont distinctes du décor et des zones dangereuses.
@@ -1948,7 +2039,7 @@ Une vitre sépare le personnel des spécimens. Les hôtes ne sont pas soignés p
 
 **Contrat de production courant.** Stage de Poste d’observation : conserver la largeur de jeu 2080 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Baie ; console ; écran de mission ; sièges fixés ; éclairage de veille. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 La baie montre la planète, pas une ville terrestre. La frappe est une séquence orbitale non jouable comme arme.
@@ -2002,6 +2093,8 @@ La dernière salle referme le récit. Des couchettes et des moniteurs encadrent 
 
 ### MER-LIEU-s41 — Local des filtres
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
+
 **Contrat de production courant.** Stage de Local des filtres : conserver la largeur de jeu 1480 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cartouches scellées ; banc de contrôle ; tuyaux de retour ; panneau de débit. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -2026,6 +2119,8 @@ Un local fermé derrière le sas conserve les cartouches hors de la poussière.
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s42 — Pompes de desserte
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
 
 **Contrat de production courant.** Stage de Pompes de desserte : conserver la largeur de jeu 2200 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Deux volutes de pompe ; soupapes ; câble de commande ; jauges ; drain. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -2052,6 +2147,8 @@ Un circuit secondaire rejoint la galerie d’alimentation sans repasser par le r
 
 ### MER-LIEU-s43 — Belvédère de fouille
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
+
 **Contrat de production courant.** Stage de Belvédère de fouille : conserver la largeur de jeu 1840 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table de relevés ; mât de visée ; balustrade ; sondes ; sacs. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
 
@@ -2077,9 +2174,11 @@ Une passerelle d’observation domine la tranchée, mais ne descend pas directem
 
 ### MER-LIEU-s44 — Conduit de retour
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`, `doors/rock-breach`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
 **Contrat de production courant.** Stage de Conduit de retour : conserver la largeur de jeu 2050 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Tubes gainés ; membrures fendues ; vanne de purge humaine posée à l’entrée. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Une desserte étroite contourne la membrane refermée et rejoint le pied de l’escalier.
@@ -2104,9 +2203,11 @@ Une desserte étroite contourne la membrane refermée et rejoint le pied de l’
 
 ### MER-LIEU-s45 — Infirmerie de secours
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
+
 **Contrat de production courant.** Stage de Infirmerie de secours : conserver la largeur de jeu 1860 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Deux stations de brancards ; armoire de soins ; couvertures ; ventilation. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Un renfoncement de soins permet de reprendre souffle sans bloquer le palier du treuil.
@@ -2130,6 +2231,8 @@ Un renfoncement de soins permet de reprendre souffle sans bloquer le palier du t
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s46 — Poste de guidage
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
 
 **Contrat de production courant.** Stage de Poste de guidage : conserver la largeur de jeu 2080 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Antenne de guidage ; pupitre ; jalons ; vitrage blindé ; batteries. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
@@ -2158,7 +2261,7 @@ Le poste donne une ligne dégagée vers l’aire d’atterrissage. La balise pri
 
 **Contrat de production courant.** Stage de Vestiaire des équipes : conserver la largeur de jeu 2160 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Les scellés protègent du matériel oublié, pas une réserve inépuisable. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Des armoires de quart longent le mur des équipes. La réserve de quart donne sur une cour technique qui rejoint la galerie d’alimentation.
@@ -2185,7 +2288,7 @@ Des armoires de quart longent le mur des équipes. La réserve de quart donne su
 
 **Contrat de production courant.** Stage de Cour des échangeurs : conserver la largeur de jeu 2580 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Regarder entre les machines avant de fouiller les casiers : le cliquetis de leur fermeture porte loin. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Des échangeurs longent la cour encaissée. Une coursive latérale ramène vers l’alimentation sans repasser par l’atelier.
@@ -2212,7 +2315,7 @@ Des échangeurs longent la cour encaissée. Une coursive latérale ramène vers 
 
 **Contrat de production courant.** Stage de Transit des blessés : conserver la largeur de jeu 2240 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cette boucle accepte les deux brancards. Elle ne remplace pas le treuil, la balise ou l’arrimage. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Deux rails de guidage conduisent les châssis jusqu’au poste de transit. Un retour par le magasin rejoint l’infirmerie.
@@ -2239,7 +2342,7 @@ Deux rails de guidage conduisent les châssis jusqu’au poste de transit. Un re
 
 **Contrat de production courant.** Stage de Magasin de la remontée : conserver la largeur de jeu 2420 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Le détour offre un endroit où déposer un surplus pour le reprendre plus tard. Un bruit remue à l’arrière du magasin. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Les établis ont été abandonnés en plein inventaire. Des renforts et des consommables subsistent derrière les portes des armoires.
@@ -2369,7 +2472,7 @@ Outil de capture employé par Manning
 
 **Contrat de production courant.** Conserver weaponId=flame, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
 
-**Avancement des travaux du checkpoint :** `MER-ARME-flame-W02` — Réalisé en partie (0.10.3) ; `MER-ARME-flame-W04` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-ARME-flame-W02` — Réalisé en partie (0.10.3); `MER-ARME-flame-W04` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
 
 Non certifié comme arme distincte dans le passage de référence
@@ -2623,6 +2726,10 @@ Soins simplifiés, réserve finie.
 
 ### MER-EQUIP-sensors — Trois balises réutilisables
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `equipment/sensor-off`. Balise réellement éteinte, après arrêt manuel ou batterie épuisée. Absence de signal et extinction restent deux conditions différentes ; charge, récupération et impulsions restent natives.
+
+**Avancement des travaux du checkpoint :** `MER-EQUIP-sensors-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
+
 **Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Trois balises réutilisables. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
 
 
@@ -2665,7 +2772,7 @@ Création de gameplay.
 
 **Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Renforts de châssis. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
 
-**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Réparation et économie originales.
@@ -3547,7 +3654,7 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 **Contrat de production courant.** Module fixe decor/viewport : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
 
-**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
@@ -3647,6 +3754,10 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-devices-console — devices / console
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/console-complete`. Console du dispositif achevé pour les sept usages hors pièces et isolation ; ce raccord ne remplace pas les consoles d’objectif ni l’appareil ICC.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-devices-console-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
+
 **Contrat de production courant.** Module devices/console : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
 
@@ -3666,6 +3777,10 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 **Sources du projet :** [dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [dlc/sea-of-sorrows-visual/src/art-pack.js](../../dlc/sea-of-sorrows-visual/src/art-pack.js), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js).
 
 ### MER-PROP-devices-isolation — devices / isolation
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `devices/isolation-closed`. État consigné des quatre dispositifs d’isolation ; conduite, danger, interaction, sauvegarde et drapeau restent ceux de la simulation.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-devices-isolation-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Module devices/isolation : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
@@ -3689,7 +3804,7 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 **Contrat de production courant.** Module devices/parts : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
-**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-devices-parts-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -3993,7 +4108,7 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 **Contrat de production courant.** Module equipment/locker-open : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-equipment-locker-open-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4017,7 +4132,7 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 **Contrat de production courant.** Module equipment/locker : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-equipment-locker-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4078,6 +4193,10 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 **Sources du projet :** [dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [dlc/sea-of-sorrows-visual/src/art-pack.js](../../dlc/sea-of-sorrows-visual/src/art-pack.js), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js).
 
 ### MER-PROP-equipment-sensor — equipment / sensor
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `equipment/sensor-off`. Balise réellement éteinte, après arrêt manuel ou batterie épuisée. Absence de signal et extinction restent deux conditions différentes ; charge, récupération et impulsions restent natives.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-equipment-sensor-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Module equipment/sensor : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
@@ -4141,7 +4260,7 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 **Contrat de production courant.** Module equipment/supply : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
-**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-equipment-supply-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4182,6 +4301,10 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 **Sources du projet :** [dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [dlc/sea-of-sorrows-visual/src/art-pack.js](../../dlc/sea-of-sorrows-visual/src/art-pack.js), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js).
 
 ### MER-PROP-equipment-weakpoint — equipment / weakpoint
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `equipment/weakpoint-destroyed`. Résidu des trois attaches après hp <= 0. Les attaches sont une mécanique du projet ; cette image ne constitue pas une description canonique de la reine.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-equipment-weakpoint-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Module equipment/weakpoint : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
 
@@ -4423,6 +4546,10 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-boarding-ramp — Seuil : boarding-ramp
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/boarding-ramp`. Un PNG de rampe pour le couple réel s11/link-42-a arrière vers s37 et s37/link-42-b avant vers s11. Support, approche, verrouillage, traversée et arrivée restent natifs ; ni extérieur complet de navette ni vol animé.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-portal-boarding-ramp-W01` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
+
 **Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : boarding-ramp. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
 
 
@@ -4545,7 +4672,7 @@ Type de passage natif et raison structurelle conservés.
 
 **Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : lift-cage. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
 
-**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-portal-lift-cage-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4566,6 +4693,10 @@ Type de passage natif et raison structurelle conservés.
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-PROP-portal-rock-breach — Seuil : rock-breach
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/rock-breach`. Un PNG frontal réutilisé aux neuf montages front/back : s19 avant, s20 arrière, s22 arrière, s26 avant, s27 arrière, s29 avant/arrière et s44 avant/arrière. Les montages latéraux gardent leur présentation native.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-portal-rock-breach-W01` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : rock-breach. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
 
@@ -4706,7 +4837,7 @@ Danger cyclique original ; ne pas le traiter comme décor passif.
 
 **Contrat de production courant.** Conserver un seul appareil visible pour le rapport électronique de s03 : posé hors consultation ou tenu dans la pose dédiée quand le raccord la sélectionne. La transmission conserve objectif o02-01, durée, marqueur et drapeau report_sent ; pas de nouvelle fonction du dispositif. La silhouette, les boutons et la dimension de présentation restent des choix du projet, distincts du dossier papier.
 
-**Avancement des travaux du checkpoint :** `MER-PROP-icc-handheld-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PROP-icc-handheld-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+**Avancement des travaux du checkpoint :** `MER-PROP-icc-handheld-W01` — Résolu dans le périmètre déclaré (0.10.3); `MER-PROP-icc-handheld-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
 
 Présentation distincte de la console générique de o02-01.
@@ -4730,7 +4861,7 @@ Présentation distincte de la console générique de o02-01.
 
 **Contrat de production courant.** Dossier papier et porte-documents sont décrits ; le modèle représenté reste une adaptation. Support physique lisible en s03, feuilles sans données personnelles lisibles ; pas de nouvelle mécanique médicale. Ne pas confondre cet objet avec le rapport ICC électronique ou compter le médecin et son dossier comme une seule identité.
 
-**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-medical-chart-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4753,7 +4884,7 @@ Accessoire du contexte médical, sans PNG individuel identifié.
 
 **Contrat de production courant.** Un gobelet d’eau et un récipient plus petit avec deux comprimés blancs ; silhouette et matière fine restent interprétées. Poser les deux contenants sur un même support en s03, à une échelle lisible, sans consommation inventée. Un ensemble de deux objets dans un seul PNG ne compte ni comme deux fichiers ni comme une nouvelle action de soin.
 
-**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PROP-medical-cups-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -4898,7 +5029,7 @@ Images de machine de chantier déjà présentes ; elles ne donnent pas un véhic
 
 **Contrat de production courant.** Séparer cage, palier, porte, guides, câble et entraînement ; ne pas assimiler le treuil à un véhicule entier. La pièce lift-cage habille uniquement un seuil compatible ; le rendu des verrous et les destinations restent natifs. Course, suspension, arrêts et cabine occupée restent à réaliser si une ellipse est remplacée ; s30 doit être vérifiée indépendamment.
 
-**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Passages verticaux et treuils, distincts d'un véhicule routier.
@@ -4962,7 +5093,7 @@ Véhicule de transport audio ; non couvert par une image d'excavateur.
 
 **Contrat de production courant.** Conserver le nom Carlyle dans le contexte médical de s03 ; distinguer le transport contractuel ultérieur. La consultation et ses props documentent un intérieur ; aucune silhouette, propulsion ou dimension extérieure n’en découle. Tout extérieur futur doit être qualifié d’adaptation et garder des accès cohérents avec la cabine produite.
 
-**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-SHIP-carlyle-W01` — Résolu dans le périmètre déclaré (0.10.3). Les autres travaux de cette fiche restent ouverts.
 
@@ -4987,7 +5118,7 @@ Transport nommé au chapitre 4 ; s03 en condense le contexte.
 
 **Contrat de production courant.** Relier coursive, briefing, armurerie, hangar, quarantaine, observatoire et dernière salle comme lieux d’un même transport. Établir les accès et volumes utiles avant extérieur ; conserver les noms et silhouettes distincts du Carlyle. Aucune classe de vaisseau, propulsion, tonnage ou mesure canonique n’est déduite du graphe des salles.
 
-**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Intérieurs présents ; nom et extérieur non établis par les preuves romanesques examinées.
@@ -5006,6 +5137,10 @@ Intérieurs présents ; nom et extérieur non établis par les preuves romanesqu
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-SHIP-shuttle — Navette d'expédition
+
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `doors/boarding-ramp`. Un PNG de rampe pour le couple réel s11/link-42-a arrière vers s37 et s37/link-42-b avant vers s11. Support, approche, verrouillage, traversée et arrivée restent natifs ; ni extérieur complet de navette ni vol animé.
+
+**Avancement des travaux du checkpoint :** `MER-SHIP-shuttle-W02` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
 
 **Contrat de production courant.** Conserver une silhouette cohérente entre vue extérieure, aire de posé, rampe et soute. Présenter état au sol, ouverture de rampe, capture et embarquement selon les drapeaux existants. Approche, décollage, vol et pilote restent des besoins séparés ; l’image dropship ne prouve pas une animation de vol.
 
@@ -5218,6 +5353,10 @@ Famille hangar : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-hive — Ruche et résine
 
+**Continuation 0.10.5 — raccord observé dans les fixtures Canvas.** `terrain/hive`. Surface du sol des deux salles de kind hive. Les parois, volumes, ouvertures, œufs et collisions restent distincts ; la salle de reine s33 n’est pas incluse par déduction.
+
+**Avancement des travaux du checkpoint :** `MER-TERRAIN-hive-W01` — Réalisé en partie (0.10.5). Les autres travaux de cette fiche restent ouverts.
+
 **Contrat de production courant.** Sol : résine au niveau du sol et surfaces de passage. Parois et profondeur : nervures, poches et couches organiques. Contrôle de cohérence : aucun élément décoratif ne remplace une population ou un œuf actif.
 
 
@@ -5262,7 +5401,7 @@ Famille home : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Contrat de production courant.** Sol : palier, seuil de cage et bord du puits. Parois et profondeur : guides, suspension et parois du puits. Contrôle de cohérence : une cage de seuil fixe ne prétend pas simuler une course verticale.
 
-**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Famille lift : fond, sol et architecture procéduraux, modules PNG réutilisés.
@@ -5285,7 +5424,7 @@ Famille lift : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Contrat de production courant.** Sol : sol lavable, socles de couchette et circulation. Parois et profondeur : parois de cabine, équipements et surfaces sanitaires. Contrôle de cohérence : Carlyle, clinique terrestre, quarantaine et secours gardent leurs contextes propres.
 
-**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Famille medical : fond, sol et architecture procéduraux, modules PNG réutilisés.
@@ -5434,7 +5573,7 @@ Famille ruins : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 **Contrat de production courant.** Sol : surface granuleuse sombre et petites ondulations. Parois et profondeur : coupes de dune, lointains minéraux et brume de surface. Contrôle de cohérence : la texture du sol ne porte ni lune, ni route, ni coordonnée géographique inventée.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-TERRAIN-sand-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -5459,7 +5598,7 @@ Famille sand : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Contrat de production courant.** Sol : coursive pressurisée et seuils de cloison. Parois et profondeur : parois, conduits et baie d’observation. Contrôle de cohérence : le panorama orbital reste derrière la baie de s39 et hors de la marche.
 
-**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 
 Famille ship : fond, sol et architecture procéduraux, modules PNG réutilisés.
@@ -5482,7 +5621,7 @@ Famille ship : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Contrat de production courant.** Sol : grain minéral et facettes de silice au sol. Parois et profondeur : parois tubulaires, joints et éclats de bord. Contrôle de cohérence : distinguer brillance décorative, gravats physiques et résine.
 
-**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-TERRAIN-silica-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
 
@@ -5551,7 +5690,7 @@ Famille workshop : fond, sol et architecture procéduraux, modules PNG réutilis
 
 **Contrat de production courant.** Conserver LV-178 et New Galveston comme alias d’une seule planète. La vue orbitale de s39 est une illustration pour l’observation ; elle ne constitue ni carte ni vue métrique certifiée. Continents, atmosphère, distances, satellites et échelle globale restent non authentifiés ; ne pas les déduire des salles.
 
-**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions de cette édition historique figurent dans `editionHistory[0].currentEdition.bindings` du JSON.
 
 **Avancement des travaux du checkpoint :** `MER-PLANETE-lv178-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
 

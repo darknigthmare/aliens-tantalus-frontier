@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "title": "La Mer des Chagrins — édition visuelle 0.10.4, états, mouvements et environnements",
+  "title": "La Mer des Chagrins — édition visuelle 0.10.5, marche armée et états du terrain",
   "date": "2026-11-26",
   "scope": "Presentation metadata for the immutable Sea of Sorrows 0.10.0 simulation",
   "counts": {
-    "pngFiles": 139,
+    "pngFiles": 152,
     "recoveredOriginalPng": 110,
     "preservedNewPng": 9,
-    "bytes": 270594463,
+    "bytes": 290100077,
     "categories": {
-      "characters": 30,
+      "characters": 36,
       "corpses": 1,
       "creatures": 2,
       "decor": 52,
-      "devices": 4,
-      "doors": 3,
+      "devices": 6,
+      "doors": 5,
       "effects": 6,
-      "equipment": 18,
+      "equipment": 20,
       "objectives": 5,
       "obstacles": 6,
       "organic": 1,
       "parasites": 2,
       "planets": 1,
       "stretchers": 2,
-      "terrain": 2,
+      "terrain": 3,
       "weapons": 4
     },
-    "newContinuationPng": 20,
+    "newContinuationPng": 33,
     "newThisPassPng": 13
   },
   "coordinateContract": {
@@ -47,16 +47,16 @@
   },
   "coverage": {
     "characterIdentities": 17,
-    "additionalCharacterPoses": 13,
+    "additionalCharacterPoses": 19,
     "decorKinds": 50,
     "obstacleKinds": 6,
     "baseCampaignRooms": 50,
     "baseCampaignObstaclePlacements": 120,
-    "runtimeWorldMappings": 135,
+    "runtimeWorldMappings": 148,
     "interfaceOnlyAssets": 4,
-    "galleryAssets": 139,
+    "galleryAssets": 152,
     "decorSprites": 52,
-    "terrainKindsWithPngSurface": 2,
+    "terrainKindsWithPngSurface": 3,
     "planetSprites": 1
   },
   "canonicalOneToOneCertified": false,
@@ -64,27 +64,27 @@
   "imageBytesModified": false,
   "sourceCodeReconstructed": true,
   "validation": {
-    "edition": "0.10.4",
-    "pngDecodeAndAlpha": "139 unique RGBA PNGs verified with Pillow; full-resolution native Canvas decode verified separately.",
-    "sha256AndGitBlobSha": "126 previous PNGs and their complete asset rows are preserved exactly; thirteen new source PNG hashes, lengths and Git blobs verified.",
-    "manualAnchorInspection": "Thirteen new individual source images and their scoped real Canvas placements inspected. Locker labels raised above their PNG after visual review.",
-    "logicTests": "Executed commands, results and source hashes are recorded in docs/mer-des-chagrins-20261126/VALIDATION_0_10_4.json.",
-    "renderedPlacement": "50 rooms, 24 posture/weapon cases, 16 locomotion cases, 42 established diagnostics, 11 prior-edition diagnostics and 35 new state/environment cases. All thirteen additions are drawn; 125 PNG kinds observed. Explicit fixtures and bounded native-image cache are described in the validation receipt.",
+    "edition": "0.10.5",
+    "pngDecodeAndAlpha": "152 unique RGBA PNGs verified with Pillow and decoded at full resolution by native Canvas.",
+    "sha256AndGitBlobSha": "139 previous PNGs and complete asset rows preserved exactly; thirteen new source hashes, lengths and Git blobs verified.",
+    "manualAnchorInspection": "Thirteen new sources and scoped real Canvas placements inspected. Sensor lens overlay corrected to source pixel [924,571] at radius 0.8 world unit; prior metadata rows untouched.",
+    "logicTests": "128/128 visual-suite tests passed, including 107 renderer tests. Final commands and hashes are recorded in VALIDATION_0_10_5.json.",
+    "renderedPlacement": "270 structured cases: 50 rooms, 24 posture/weapon cases, 16 unarmed locomotion cases, 38 established diagnostics (19 native-door pixel comparisons), 11 prior 0.10.3 cases, 35 prior 0.10.4 cases and 96 new state/gait/portal/terrain cases. 140 PNG kinds observed, including all thirteen additions. Fifteen final captures.",
     "browserGameplay": "not certified by this manifest"
   },
   "remainingWork": [
-    "creatures/adult and weapons/plasma remain absent after prior image-tool refusals; native presentation retained.",
-    "The compact-flamethrower image request was refused in this pass. Existing weapons/flame and its stock/secondary-hand issues are retained.",
-    "Four unarmed gait poses and two contextual action holds are coarse presentation states, not full walking, firing, reloading, sitting, rising or interaction animation cycles.",
+    "Prior refused adult, plasma and compact-flamethrower generation requests were not retried in this edition; native adult/plasma presentation and existing flame PNG remain.",
+    "Four unarmed Decker poses, two armed Decker contacts and four armed Manning poses are coarse presentation states, not complete anatomical walk, firing, reload or interaction cycles.",
     "Global 1:1 fidelity is not certified: complete novel comparison, exact faces, geography, ship exteriors and undocumented dimensions remain open in the bible.",
-    "Stocked lockers show generic closed reserve packages; their count and packaging are not an exact item-by-item inventory depiction.",
-    "The orbital globe is an interpretive s39 viewport layer, not a canonical map, coordinate set, ocean/atmosphere specification or additional playable planet.",
-    "Sand and silica are decorative low-relief floor patches with stable world anchors; physical terrain, hazards and collision remain native.",
-    "The mine cage keeps the native two-stop transitions and gate state. Its static frame does not implement vertical vehicle travel animation.",
-    "Medical props decorate the existing s03 cot/cabinet; they do not add medication, sitting or medical dialogue actions.",
-    "Support-hand anatomy, grip occlusion and consistent full-body proportions across poses still require dedicated art review.",
-    "All 139 images have a declared presentation use (135 world mappings, four interface illustrations); counts do not attest a full campaign playthrough.",
-    "Walking passage B raises the knee prominently; four poses do not certify a natural continuous gait. The high-step phase and arm timing remain art refinement items."
+    "Completed console and isolation images follow optional-device flags only; the screen indicators do not certify a mechanically animated valve or a canonical industrial design.",
+    "The off sensor remains deployed; folding, packing and damage poses are not implemented. Destroyed tethers remain an adaptation of native boss attachments.",
+    "The rock frame covers nine front/back apertures; twenty-one lateral rock portals retain native art. A frontal module is not a completed cave or location.",
+    "The boarding ramp covers the two existing s11/s37 boarding-ramp thresholds; ship hulls, boarding portals of another type, flight and full vehicle interiors remain separate work.",
+    "Sand, silica and hive are decorative low-relief patches with stable world anchors; physical terrain, hazards and collision remain native.",
+    "The orbital globe remains an interpretive s39 viewport layer, not a canonical map, coordinates or new playable planet.",
+    "Stocked lockers depict generic packages. The mine cage, medical props and orbital globe retain the scoped limitations documented in edition 0.10.4.",
+    "Support-hand anatomy, grip occlusion and continuous timing across poses still require dedicated art refinement.",
+    "All 152 images have a declared presentation use (148 world mappings, four interface illustrations); this is not a full-campaign playthrough certification."
   ],
   "assets": [
     {
@@ -1319,6 +1319,138 @@
       ]
     },
     {
+      "id": "characters/decker-walk-a-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1764629,
+      "sha256": "3fbbea74e01378c3da240aa9f6c3443d6c24313fa52724a6486e18161e264f52",
+      "gitBlobSha": "1af10db794cc504743f43a0f76b71b922d1af5ff",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        17,
+        1012,
+        1516
+      ],
+      "visibleBoundsAlpha8": [
+        70,
+        27,
+        859,
+        1493
+      ],
+      "transparentPixelCount": 1132182,
+      "visiblePixelCountAlpha8": 420966,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          68,
+          25,
+          793,
+          1470
+        ],
+        "pivot": [
+          455,
+          1493
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          608,
+          508
+        ],
+        "supportHandAnchor": [
+          595,
+          540
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "player",
+        "poseState": "walking",
+        "gaitPhase": "contact-a",
+        "label": "Decker · marche au pistolet · contact A",
+        "lampAnchor": [
+          550,
+          310
+        ],
+        "roleScope": [
+          "decker"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            455,
+            1493
+          ],
+          "handAnchor": [
+            608,
+            508
+          ],
+          "supportHandAnchor": [
+            595,
+            540
+          ],
+          "lampAnchor": [
+            550,
+            310
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/decker/1/a",
+          "armed-gait/decker/-1/a"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "1af10db794cc504743f43a0f76b71b922d1af5ff",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/decker-walk-a-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving player with pistol, standing, outside reduced motion/reload/active work; other weapons keep established poses.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
+    },
+    {
       "id": "characters/decker-walk-b",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
       "sizeBytes": 1766518,
@@ -1394,6 +1526,139 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "characters/decker-walk-b-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1764986,
+      "sha256": "5e2053595a8a3c8ad2be198b0f673f2f0223a4fbc0635f9ca2714564b667b1a5",
+      "gitBlobSha": "36f8614de3df6797b3010b96526c49e27014913b",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        15,
+        21,
+        1000,
+        1492
+      ],
+      "visibleBoundsAlpha8": [
+        20,
+        26,
+        910,
+        1460
+      ],
+      "transparentPixelCount": 1147463,
+      "visiblePixelCountAlpha8": 408571,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          18,
+          24,
+          894,
+          1438
+        ],
+        "pivot": [
+          455,
+          1460
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          606,
+          507
+        ],
+        "supportHandAnchor": [
+          593,
+          539
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "player",
+        "poseState": "walking",
+        "gaitPhase": "contact-b",
+        "label": "Decker · marche au pistolet · contact B",
+        "lampAnchor": [
+          550,
+          310
+        ],
+        "roleScope": [
+          "decker"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            455,
+            1460
+          ],
+          "handAnchor": [
+            606,
+            507
+          ],
+          "supportHandAnchor": [
+            593,
+            539
+          ],
+          "lampAnchor": [
+            550,
+            310
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/decker/1/b",
+          "armed-gait/decker/-1/b"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "36f8614de3df6797b3010b96526c49e27014913b",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/decker-walk-b-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
+        "intermediateReferenceSha256": "6042cad804e810130c5adf41de7b5539eeb673f90e22bdc3612220ef86986996"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving player with pistol, standing, outside reduced motion/reload/active work; other weapons keep established poses.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
     },
     {
       "id": "characters/decker-walk-pass-a",
@@ -1837,6 +2102,504 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "characters/manning-walk-a-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1853882,
+      "sha256": "2a596789d0447a4d9207872c9e727b882cbc5fed22a6be523608d1c993f1faf1",
+      "gitBlobSha": "1a5a9ea71d3e6fce9514507263df2e8396d5e66d",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        11,
+        1000,
+        1497
+      ],
+      "visibleBoundsAlpha8": [
+        53,
+        13,
+        920,
+        1476
+      ],
+      "transparentPixelCount": 1099399,
+      "visiblePixelCountAlpha8": 457987,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/manning-walk-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          51,
+          11,
+          871,
+          1467
+        ],
+        "pivot": [
+          512,
+          1476
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          633,
+          449
+        ],
+        "supportHandAnchor": [
+          627,
+          484
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "contact-a",
+        "label": "Manning · marche armée · contact A",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1476
+          ],
+          "handAnchor": [
+            633,
+            449
+          ],
+          "supportHandAnchor": [
+            627,
+            484
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/manning/1/a",
+          "armed-gait/manning/-1/a"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "1a5a9ea71d3e6fce9514507263df2e8396d5e66d",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/manning-walk-a-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving equipped companion before chapter 17, except reduced motion; no portraits or actor copies.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
+    },
+    {
+      "id": "characters/manning-walk-b-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-b-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1816517,
+      "sha256": "2ea4fee779b7216efe38f557d1efc07fa0e99be3289febd091fcfb4cb565111e",
+      "gitBlobSha": "9d811fc2e83dc862f785e0469a311f19a69edb04",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        13,
+        1010,
+        1536
+      ],
+      "visibleBoundsAlpha8": [
+        64,
+        15,
+        893,
+        1484
+      ],
+      "transparentPixelCount": 1103400,
+      "visiblePixelCountAlpha8": 452544,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/manning-walk-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          62,
+          13,
+          833,
+          1473
+        ],
+        "pivot": [
+          512,
+          1484
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          633,
+          454
+        ],
+        "supportHandAnchor": [
+          620,
+          491
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "contact-b",
+        "label": "Manning · marche armée · contact B",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1484
+          ],
+          "handAnchor": [
+            633,
+            454
+          ],
+          "supportHandAnchor": [
+            620,
+            491
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/manning/1/b",
+          "armed-gait/manning/-1/b"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "9d811fc2e83dc862f785e0469a311f19a69edb04",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-b-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/manning-walk-b-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving equipped companion before chapter 17, except reduced motion; no portraits or actor copies.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
+    },
+    {
+      "id": "characters/manning-walk-pass-a-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-a-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1713000,
+      "sha256": "2bad7edbaeb6737c6237220bb825e976126ee09b44440b60dcc5128b1bca2aff",
+      "gitBlobSha": "ab9cdb93b3296ba4340b7a53f895bbe81e367689",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        51,
+        10,
+        988,
+        1510
+      ],
+      "visibleBoundsAlpha8": [
+        165,
+        15,
+        741,
+        1463
+      ],
+      "transparentPixelCount": 1146783,
+      "visiblePixelCountAlpha8": 413237,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/manning-walk-pass-a-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          163,
+          13,
+          580,
+          1452
+        ],
+        "pivot": [
+          512,
+          1463
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          632,
+          455
+        ],
+        "supportHandAnchor": [
+          625,
+          491
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "passing-a",
+        "label": "Manning · marche armée · passage A",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1463
+          ],
+          "handAnchor": [
+            632,
+            455
+          ],
+          "supportHandAnchor": [
+            625,
+            491
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/manning/1/pass-a",
+          "armed-gait/manning/-1/pass-a",
+          "armed-guard/manning/player-reloading",
+          "armed-guard/manning/player-working"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "ab9cdb93b3296ba4340b7a53f895bbe81e367689",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-a-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/manning-walk-pass-a-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving equipped companion before chapter 17, except reduced motion; no portraits or actor copies.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
+    },
+    {
+      "id": "characters/manning-walk-pass-b-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-b-ready.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1679099,
+      "sha256": "3d947888368c21c4ef77880335650d7023ff293727c8fdc33994e83243559481",
+      "gitBlobSha": "c645dcf8260a295d9cb99743e9448bca08f6c333",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        27,
+        12,
+        988,
+        1482
+      ],
+      "visibleBoundsAlpha8": [
+        266,
+        14,
+        822,
+        1459
+      ],
+      "transparentPixelCount": 1163550,
+      "visiblePixelCountAlpha8": 397801,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/manning-walk-pass-b-ready.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          264,
+          12,
+          560,
+          1449
+        ],
+        "pivot": [
+          512,
+          1459
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "handAnchor": [
+          631,
+          447
+        ],
+        "supportHandAnchor": [
+          620,
+          484
+        ],
+        "weaponScope": [
+          "pistol"
+        ],
+        "actorScope": "companion",
+        "poseState": "walking",
+        "gaitPhase": "passing-b",
+        "label": "Manning · marche armée · passage B",
+        "roleScope": [
+          "manning"
+        ],
+        "motionScope": [
+          "walk"
+        ],
+        "armedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source inspected under pelvis; pivot X fixed within each character family, baseline at lowest alpha>=8 sole.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1459
+          ],
+          "handAnchor": [
+            631,
+            447
+          ],
+          "supportHandAnchor": [
+            620,
+            484
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "armed-gait/manning/1/pass-b",
+          "armed-gait/manning/-1/pass-b"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "c645dcf8260a295d9cb99743e9448bca08f6c333",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-pass-b-ready.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "promptId": "characters/manning-walk-pass-b-ready",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/manning-walk-a-ready.png"
+        ],
+        "identityReferencePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual moving equipped companion before chapter 17, except reduced motion; no portraits or actor copies.",
+      "completeAnimationCycle": false,
+      "sourceInspection": {
+        "fullBodyAndBootsVisible": true,
+        "emptyHandsForComposedPistol": true,
+        "compactSupportHand": true,
+        "identityAndCostumePreservedFromProjectSprite": true,
+        "limits": [
+          "Key poses only; interpolated full gait and anatomical timing are not certified.",
+          "Source art remains a project interpretation, not a canon-authenticated face."
+        ]
+      }
     },
     {
       "id": "characters/medic",
@@ -5667,6 +6430,88 @@
       ]
     },
     {
+      "id": "devices/console-complete",
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/console-complete.png",
+      "sizeBytes": 1874678,
+      "gitBlobSha": "ab0cb6eae71c186deff9a98969382f9bebfebea5",
+      "sha256": "9cdfa8e39afde7165180591af5432165fd9b073226fe4954a612fd079d33922e",
+      "width": 1312,
+      "height": 1199,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        19,
+        1244,
+        1187
+      ],
+      "visibleBoundsAlpha8": [
+        159,
+        25,
+        1156,
+        1185
+      ],
+      "transparentPixelCount": 525277,
+      "visiblePixelCountAlpha8": 1036822,
+      "metadata": {
+        "src": "sprites/devices/console-complete.png",
+        "width": 1312,
+        "height": 1199,
+        "crop": [
+          159,
+          25,
+          997,
+          1160
+        ],
+        "pivot": [
+          657.5,
+          1185
+        ],
+        "worldHeight": 61,
+        "facing": "none",
+        "stateSource": "devices/console"
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            657.5,
+            1185
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "device-state/device-embark/true",
+          "device-state/device-filters/true",
+          "device-state/device-pumps/true",
+          "device-state/device-survey/true",
+          "device-state/device-vent/true",
+          "device-state/device-medical/true",
+          "device-state/device-guidance/true"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/console-complete.png",
+        "gitBlobSha": "ab0cb6eae71c186deff9a98969382f9bebfebea5",
+        "promptId": "devices/console-complete",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/devices/console.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "devices/isolation",
       "path": "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png",
       "sizeBytes": 1382835,
@@ -5720,6 +6565,85 @@
         "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/isolation.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "devices/isolation-closed",
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/isolation-closed.png",
+      "sizeBytes": 903057,
+      "gitBlobSha": "95273f53bf82ad08678b29d95589f05e15ae2bbf",
+      "sha256": "19df65f100687ad47fac328a4fe3273de189ca5209fc0c2a77065e730e8f38c6",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        87,
+        45,
+        1210,
+        1214
+      ],
+      "visibleBoundsAlpha8": [
+        133,
+        83,
+        1109,
+        1142
+      ],
+      "transparentPixelCount": 1131999,
+      "visiblePixelCountAlpha8": 427229,
+      "metadata": {
+        "src": "sprites/devices/isolation-closed.png",
+        "width": 1254,
+        "height": 1254,
+        "crop": [
+          133,
+          83,
+          976,
+          1059
+        ],
+        "pivot": [
+          621.0,
+          1142
+        ],
+        "worldHeight": 117,
+        "facing": "none",
+        "stateSource": "devices/isolation"
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            621.0,
+            1142
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "device-state/isolate-hull/true",
+          "device-state/isolate-bridge/true",
+          "device-state/isolate-stairs/true",
+          "device-state/isolate-ravine/true"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/isolation-closed.png",
+        "gitBlobSha": "95273f53bf82ad08678b29d95589f05e15ae2bbf",
+        "promptId": "devices/isolation-closed",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png"
+        ]
       },
       "canonicalOneToOneCertified": false,
       "runtimeSurfaces": [
@@ -5860,6 +6784,107 @@
         "world-renderer"
       ],
       "completeAnimationCycle": false
+    },
+    {
+      "id": "doors/boarding-ramp",
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/boarding-ramp.png",
+      "sizeBytes": 1669244,
+      "gitBlobSha": "0d42980d4df847c9e00afb46ab3fac75e318a9f7",
+      "sha256": "bb223fc2a0963d0d9707805e92f1fdc2dbf0f419bf123e8205264436def36d44",
+      "width": 2172,
+      "height": 724,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        31,
+        2142,
+        724
+      ],
+      "visibleBoundsAlpha8": [
+        284,
+        115,
+        1887,
+        669
+      ],
+      "transparentPixelCount": 835181,
+      "visiblePixelCountAlpha8": 718633,
+      "metadata": {
+        "src": "sprites/doors/boarding-ramp.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          282,
+          113,
+          1607,
+          558
+        ],
+        "pivot": [
+          1085.5,
+          669
+        ],
+        "worldHeight": 78,
+        "facing": "none",
+        "rampBounds": [
+          284,
+          115,
+          1603,
+          554
+        ],
+        "portalScope": [
+          "boarding-ramp"
+        ],
+        "mountScope": [
+          "back",
+          "front"
+        ],
+        "sceneScope": [
+          "s11",
+          "s37"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            1085.5,
+            669
+          ],
+          "rampBounds": [
+            284,
+            115,
+            1603,
+            554
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "frontal-portal/link-42-a/true",
+          "frontal-portal/link-42-a/false",
+          "frontal-portal/link-42-b/true",
+          "frontal-portal/link-42-b/false"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/doors/boarding-ramp.png",
+        "gitBlobSha": "0d42980d4df847c9e00afb46ab3fac75e318a9f7",
+        "promptId": "doors/boarding-ramp",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/decor/dropship.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "doors/bulkhead-frame",
@@ -6117,6 +7142,490 @@
         "world-renderer"
       ],
       "completeAnimationCycle": false
+    },
+    {
+      "id": "doors/rock-breach",
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/rock-breach.png",
+      "sizeBytes": 777778,
+      "gitBlobSha": "f9f3425102cceac572b70a4d76c5c4c275853b9b",
+      "sha256": "148bd0426393027befd6399f8f55267a03cfeaa2c41f11d775b5ce7ef923da3b",
+      "width": 1222,
+      "height": 1287,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        29,
+        18,
+        1148,
+        1271
+      ],
+      "visibleBoundsAlpha8": [
+        71,
+        20,
+        1138,
+        1263
+      ],
+      "transparentPixelCount": 1306066,
+      "visiblePixelCountAlpha8": 249690,
+      "metadata": {
+        "src": "sprites/doors/rock-breach.png",
+        "width": 1222,
+        "height": 1287,
+        "crop": [
+          71,
+          20,
+          1067,
+          1243
+        ],
+        "pivot": [
+          604.5,
+          1263
+        ],
+        "worldHeight": 180,
+        "facing": "none",
+        "portalScope": [
+          "rock-breach"
+        ],
+        "mountScope": [
+          "front",
+          "back"
+        ],
+        "apertureBounds": [
+          192,
+          132,
+          806,
+          1131
+        ],
+        "aperturePolygon": [
+          [
+            675,
+            134
+          ],
+          [
+            707,
+            135
+          ],
+          [
+            729,
+            160
+          ],
+          [
+            752,
+            200
+          ],
+          [
+            774,
+            230
+          ],
+          [
+            831,
+            260
+          ],
+          [
+            876,
+            300
+          ],
+          [
+            925,
+            350
+          ],
+          [
+            936,
+            400
+          ],
+          [
+            979,
+            450
+          ],
+          [
+            994,
+            500
+          ],
+          [
+            987,
+            550
+          ],
+          [
+            972,
+            600
+          ],
+          [
+            959,
+            650
+          ],
+          [
+            975,
+            700
+          ],
+          [
+            978,
+            750
+          ],
+          [
+            976,
+            800
+          ],
+          [
+            989,
+            900
+          ],
+          [
+            967,
+            1000
+          ],
+          [
+            979,
+            1100
+          ],
+          [
+            972,
+            1200
+          ],
+          [
+            954,
+            1263
+          ],
+          [
+            241,
+            1263
+          ],
+          [
+            232,
+            1240
+          ],
+          [
+            222,
+            1200
+          ],
+          [
+            206,
+            1100
+          ],
+          [
+            227,
+            1000
+          ],
+          [
+            222,
+            900
+          ],
+          [
+            231,
+            800
+          ],
+          [
+            245,
+            750
+          ],
+          [
+            246,
+            700
+          ],
+          [
+            245,
+            650
+          ],
+          [
+            207,
+            600
+          ],
+          [
+            193,
+            550
+          ],
+          [
+            216,
+            500
+          ],
+          [
+            236,
+            450
+          ],
+          [
+            278,
+            400
+          ],
+          [
+            339,
+            350
+          ],
+          [
+            400,
+            300
+          ],
+          [
+            469,
+            260
+          ],
+          [
+            510,
+            230
+          ],
+          [
+            581,
+            200
+          ],
+          [
+            620,
+            180
+          ],
+          [
+            641,
+            160
+          ],
+          [
+            648,
+            150
+          ],
+          [
+            658,
+            140
+          ]
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            604.5,
+            1263
+          ],
+          "apertureBounds": [
+            192,
+            132,
+            806,
+            1131
+          ],
+          "aperturePolygon": [
+            [
+              675,
+              134
+            ],
+            [
+              707,
+              135
+            ],
+            [
+              729,
+              160
+            ],
+            [
+              752,
+              200
+            ],
+            [
+              774,
+              230
+            ],
+            [
+              831,
+              260
+            ],
+            [
+              876,
+              300
+            ],
+            [
+              925,
+              350
+            ],
+            [
+              936,
+              400
+            ],
+            [
+              979,
+              450
+            ],
+            [
+              994,
+              500
+            ],
+            [
+              987,
+              550
+            ],
+            [
+              972,
+              600
+            ],
+            [
+              959,
+              650
+            ],
+            [
+              975,
+              700
+            ],
+            [
+              978,
+              750
+            ],
+            [
+              976,
+              800
+            ],
+            [
+              989,
+              900
+            ],
+            [
+              967,
+              1000
+            ],
+            [
+              979,
+              1100
+            ],
+            [
+              972,
+              1200
+            ],
+            [
+              954,
+              1263
+            ],
+            [
+              241,
+              1263
+            ],
+            [
+              232,
+              1240
+            ],
+            [
+              222,
+              1200
+            ],
+            [
+              206,
+              1100
+            ],
+            [
+              227,
+              1000
+            ],
+            [
+              222,
+              900
+            ],
+            [
+              231,
+              800
+            ],
+            [
+              245,
+              750
+            ],
+            [
+              246,
+              700
+            ],
+            [
+              245,
+              650
+            ],
+            [
+              207,
+              600
+            ],
+            [
+              193,
+              550
+            ],
+            [
+              216,
+              500
+            ],
+            [
+              236,
+              450
+            ],
+            [
+              278,
+              400
+            ],
+            [
+              339,
+              350
+            ],
+            [
+              400,
+              300
+            ],
+            [
+              469,
+              260
+            ],
+            [
+              510,
+              230
+            ],
+            [
+              581,
+              200
+            ],
+            [
+              620,
+              180
+            ],
+            [
+              641,
+              160
+            ],
+            [
+              648,
+              150
+            ],
+            [
+              658,
+              140
+            ]
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "frontal-portal/link-19-b/true",
+          "frontal-portal/link-19-b/false",
+          "frontal-portal/link-28-a/true",
+          "frontal-portal/link-28-a/false",
+          "frontal-portal/link-24-a/true",
+          "frontal-portal/link-24-a/false",
+          "frontal-portal/link-28-b/true",
+          "frontal-portal/link-28-b/false",
+          "frontal-portal/link-32-a/true",
+          "frontal-portal/link-32-a/false",
+          "frontal-portal/link-32-b/true",
+          "frontal-portal/link-32-b/false",
+          "frontal-portal/link-49-a/true",
+          "frontal-portal/link-49-a/false",
+          "frontal-portal/link-49-b/true",
+          "frontal-portal/link-49-b/false",
+          "frontal-portal/link-53-a/true",
+          "frontal-portal/link-53-a/false"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/doors/rock-breach.png",
+        "gitBlobSha": "f9f3425102cceac572b70a4d76c5c4c275853b9b",
+        "promptId": "doors/rock-breach",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/decor/ravine.png",
+          "dlc/sea-of-sorrows-visual/sprites/decor/silica.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/acid",
@@ -7342,6 +8851,91 @@
       ]
     },
     {
+      "id": "equipment/sensor-off",
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor-off.png",
+      "sizeBytes": 1660847,
+      "gitBlobSha": "9f29d095c0ad2bb8bcc7c2f36eb0729db3556f71",
+      "sha256": "1ac6df767ac033e86123e917d401505c2b4093ab10879b7ef83602f83facf54b",
+      "width": 1424,
+      "height": 1104,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        0,
+        1340,
+        1091
+      ],
+      "visibleBoundsAlpha8": [
+        178,
+        5,
+        1240,
+        1090
+      ],
+      "transparentPixelCount": 1075159,
+      "visiblePixelCountAlpha8": 472218,
+      "metadata": {
+        "src": "sprites/equipment/sensor-off.png",
+        "width": 1424,
+        "height": 1104,
+        "crop": [
+          178,
+          5,
+          1062,
+          1085
+        ],
+        "pivot": [
+          709.0,
+          1090
+        ],
+        "worldHeight": 38,
+        "facing": "none",
+        "stateSource": "equipment/sensor",
+        "statusAnchor": [
+          924,
+          571
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            709.0,
+            1090
+          ],
+          "statusAnchor": [
+            924,
+            571
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "sensor-state/manual-off",
+          "sensor-state/depleted"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor-off.png",
+        "gitBlobSha": "9f29d095c0ad2bb8bcc7c2f36eb0729db3556f71",
+        "promptId": "equipment/sensor-off",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "equipment/shutter-control",
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/shutter-control.png",
       "sizeBytes": 2285487,
@@ -7725,6 +9319,84 @@
         "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/weakpoint.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "equipment/weakpoint-destroyed",
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint-destroyed.png",
+      "sizeBytes": 570761,
+      "gitBlobSha": "a20edef915bce4efbe05ceedbc40ce76572861f7",
+      "sha256": "28fd32af2e78a8b716bfeb4381606c43493864ef9b310ab4a956b6d7f702efef",
+      "width": 887,
+      "height": 1774,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        65,
+        0,
+        776,
+        1754
+      ],
+      "visibleBoundsAlpha8": [
+        238,
+        11,
+        655,
+        1752
+      ],
+      "transparentPixelCount": 1371208,
+      "visiblePixelCountAlpha8": 190008,
+      "metadata": {
+        "src": "sprites/equipment/weakpoint-destroyed.png",
+        "width": 887,
+        "height": 1774,
+        "crop": [
+          238,
+          11,
+          417,
+          1741
+        ],
+        "pivot": [
+          446.5,
+          1752
+        ],
+        "worldHeight": 160,
+        "facing": "none",
+        "stateSource": "equipment/weakpoint"
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            446.5,
+            1752
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "weakpoint/0/destroyed",
+          "weakpoint/1/destroyed",
+          "weakpoint/2/destroyed"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint-destroyed.png",
+        "gitBlobSha": "a20edef915bce4efbe05ceedbc40ce76572861f7",
+        "promptId": "equipment/weakpoint-destroyed",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint.png"
+        ]
       },
       "canonicalOneToOneCertified": false,
       "runtimeSurfaces": [
@@ -8819,6 +10491,88 @@
       ]
     },
     {
+      "id": "terrain/hive",
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/hive.png",
+      "sizeBytes": 1457136,
+      "gitBlobSha": "f003dea145e78d3c03f2a1fe75b45c18513956ae",
+      "sha256": "63d4d08fc5963c8d7d71d01c0e75e17f1b63da70bb19db39656e150ba51c0179",
+      "width": 2172,
+      "height": 724,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        0,
+        2162,
+        724
+      ],
+      "visibleBoundsAlpha8": [
+        19,
+        143,
+        2159,
+        577
+      ],
+      "transparentPixelCount": 901972,
+      "visiblePixelCountAlpha8": 627221,
+      "metadata": {
+        "src": "sprites/terrain/hive.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          17,
+          141,
+          2144,
+          438
+        ],
+        "pivot": [
+          1089,
+          360
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "hive"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Source alpha >= 8 bounds retained; root modules include two pixels of margin. PNG bytes unchanged.",
+        "pivotMethod": "Inspected floor contact for objects and portals; ground-patch centre for hive.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            1089,
+            360
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Inspected real Canvas 0.10.5 fixtures, including both actor facings or native state/portal/terrain scope. Not a complete campaign or canon certification.",
+        "renderedCaseIds": [
+          "terrain/hive/s28/false",
+          "terrain/hive/s28/true",
+          "terrain/hive/s32/false",
+          "terrain/hive/s32/true"
+        ]
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/terrain/hive.png",
+        "gitBlobSha": "f003dea145e78d3c03f2a1fe75b45c18513956ae",
+        "promptId": "terrain/hive",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_5.json",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
+          "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "terrain/sand",
       "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
       "sizeBytes": 1722927,
@@ -9361,6 +11115,23 @@
     "logicTests": "87/87 visual-suite tests passed after executor recovery on the 126-asset candidate. Canvas/Image/DOM doubles are distinct from the separate real Canvas QA.",
     "historicalRenderedPlacement": "Edition 0.10.2 observed 103 distinct PNG kinds in prepared real Canvas fixtures; historical evidence remains in docs/mer-des-chagrins-20261126/VALIDATION.json.",
     "renderedPlacement": "Edition 0.10.3 loaded 126 PNGs, rendered 50 rooms, 24 weapon/posture/direction cases, 12 locomotion cases and 55 other diagnostic cases. All five additions were drawn and visually reviewed in scoped fixtures. No browser journey or universal state coverage certified.",
+    "browserGameplay": "not certified by this manifest"
+  },
+  "priorEdition0_10_4Integrity": {
+    "sourceCommit": "7d90c5f81d046c9c8840c48dfed4051c809714e8",
+    "assetCount": 139,
+    "bytes": 270594463,
+    "sha256": "7a41f8710a83b49f3adf4fe05774b00f9d0232d3229144070e9468141b404037",
+    "assetRowsSha256": "2335f0c8d687753d567479510b5208180b1f1724aa22070a3649a825b7d66f43",
+    "assetRowsFormat": "UTF-8 JSON of rows sorted by id, sort_keys=True, ensure_ascii=False, compact separators"
+  },
+  "priorEdition0_10_4Validation": {
+    "edition": "0.10.4",
+    "pngDecodeAndAlpha": "139 unique RGBA PNGs verified with Pillow; full-resolution native Canvas decode verified separately.",
+    "sha256AndGitBlobSha": "126 previous PNGs and their complete asset rows are preserved exactly; thirteen new source PNG hashes, lengths and Git blobs verified.",
+    "manualAnchorInspection": "Thirteen new individual source images and their scoped real Canvas placements inspected. Locker labels raised above their PNG after visual review.",
+    "logicTests": "Executed commands, results and source hashes are recorded in docs/mer-des-chagrins-20261126/VALIDATION_0_10_4.json.",
+    "renderedPlacement": "50 rooms, 24 posture/weapon cases, 16 locomotion cases, 42 established diagnostics, 11 prior-edition diagnostics and 35 new state/environment cases. All thirteen additions are drawn; 125 PNG kinds observed. Explicit fixtures and bounded native-image cache are described in the validation receipt.",
     "browserGameplay": "not certified by this manifest"
   }
 }

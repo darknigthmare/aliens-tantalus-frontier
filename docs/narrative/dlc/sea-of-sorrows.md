@@ -2,7 +2,25 @@
 
 [Retour à l'index des DLC](../DLC_INDEX_20261126.md)
 
-## Continuation 0.10.4 — état courant
+## Continuation 0.10.5 — état courant
+
+Cette passe prolonge la [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) depuis le commit publié `7d90c5f81d046c9c8840c48dfed4051c809714e8`. **Treize nouveaux PNG sont produits** : quatre poses armées de Manning, deux contacts de Decker au pistolet, quatre états de dispositifs ou d’équipement, une brèche frontale réutilisée avant/arrière, une rampe d’embarquement et un sol de ruche. Le lot contient 152 PNG, soit 290 100 077 octets ; les 13 ajouts représentent 19 505 614 octets. Les 139 images et leurs métadonnées historiques sont préservées. Les 13 ajouts sont observés dans les fixtures Canvas de cette édition.
+
+La [bible détaillée](../../mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.md) et son [registre structuré](../../mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.json) conservent les **239 fiches, 239 contrats et 576 descriptions de travaux**, ainsi que l’historique complet de 0.10.4. Le registre courant distingue 542 travaux ouverts, 26 partiels et huit résolutions historiques conservées. Dix travaux avancent en partie ; aucun nouveau cycle complet, parcours ou travail de référence canonique n’est déclaré résolu. Les résultats de l’ancienne tête ne sont pas transférés à la nouvelle.
+
+**Portée des raccords observés.** Les poses concernent les vrais acteurs et leurs états natifs. Les dispositifs terminés suivent leur drapeau propre ; la balise éteinte suit `powered` et la charge restante, les attaches détruites leurs points de vie. La brèche ne couvre que neuf montages avant/arrière ; les autres gardent leur rendu natif. La rampe couvre le couple s11 ↔ s37 et le sol de ruche les seules salles s28/s32. Aucun extérieur complet de navette, trajet animé de cage ou état d’œuf supplémentaire n’est déduit de ces images.
+
+**Preuve 0.10.5.** Suite visuelle : **128/128 tests réussis**, dont 107 contrôles du renderer, zéro échec et zéro ignoré. La QA Canvas charge 152 images, en dessine 140 types dont les 13 ajouts et vérifie 270 cas structurés, dont 50 salles et 96 cas nouveaux. Ces 96 cas comprennent 36 présentations armées, 22 états de dispositifs, cinq capteurs, six attaches, 22 états de portes et cinq sols. Quinze captures totalisent 13 417 720 octets. Dix dispositifs sont terminés via une fonction native après préparation ; l’embarquement reste une fixture d’état explicite. Simulation, sources et sauvegardes des fixtures sont préservées. Il ne s’agit pas d’une campagne parcourue dans un navigateur ni d’un build global.
+
+Références de cette édition : [manifeste des PNG](../../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [prompts exacts 0.10.5](../../mer-des-chagrins-20261126/GENERATION_0_10_5.json), [validation 0.10.5](../../mer-des-chagrins-20261126/VALIDATION_0_10_5.json), [poses armées](../../mer-des-chagrins-20261126/canvas-0.10.5/armed-gaits.png) et [états et passages](../../mer-des-chagrins-20261126/canvas-0.10.5/states-portals.png).
+
+**Travail restant.** Transitions et anatomie des personnages, cycles de combat et recharge, parcours avec sauvegarde, scènes et plans complets, variantes utiles de props, références des véhicules et vaisseaux, parois et plafonds des terrains, géographie planétaire et confrontation intégrale du roman restent ouverts. Les cages de 0.10.4 sont des présentations fixes des seuils s14/s15 ; la rampe nouvelle est un accès, pas un vaisseau complet. Les refus adulte/plasma/flame-compact ne sont pas relancés. Aucun cycle complet ni fidélité globale 1:1 n’est certifié.
+
+Les références primaires du cadre et des scènes médicales/terrestres ont été relues le 26 novembre 2026 ; elles ne documentent pas les formes exactes des nouveaux états industriels. Les variantes du script audio restent séparées du roman.
+
+**CI du parent, observée séparément.** Au commit `7d90c5f81d046c9c8840c48dfed4051c809714e8`, la lecture du 26 novembre 2026 relevait les jobs V163 [rigs-v165](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45831807427/job/139950408573) et [trials](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45831807427/job/139950408644) en échec sur des parcours Xeno Trials ; les causes n’ont pas été reproduites. Les workflows Full release et V162 étaient encore en cours. Ce relevé du parent ne certifie pas la CI de la nouvelle édition.
+
+## Checkpoint publié 0.10.4
 
 **139 PNG, dont 13 nouveaux, et 239 fiches de production.** Cette passe prolonge la [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) depuis `a26188a1e63cd39daaee5167d8e940e48120794d`. La simulation originale 0.10.0 reste distincte de son édition visuelle.
 
@@ -14,7 +32,7 @@ Les nouveaux états comprennent les passages intermédiaires de marche et les po
 
 La variante compacte du lance-flammes a été refusée : aucun nouveau fichier ni relance ; la crosse et la seconde main historiques restent à corriger. Le passage B de marche garde un genou haut et les transitions restent sommaires. La vue orbitale ne certifie aucune géographie canonique. Le revêtement de sol ne constitue pas un stage complet, la cage fixe ne constitue pas une animation d’ascenseur et les poses supplémentaires ne certifient pas les cycles de combat, de recharge ou de consultation. Les huit domaines conservent des travaux ouverts. Adulte et plasma restent sans PNG après refus ; les demandes refusées ne sont pas relancées dans cette passe.
 
-Références courantes : [manifeste des PNG](../../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [prompts 0.10.4](../../mer-des-chagrins-20261126/GENERATION_0_10_4.json), [validation 0.10.4](../../mer-des-chagrins-20261126/VALIDATION_0_10_4.json).
+Références courantes : [manifeste 0.10.4 épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/7d90c5f81d046c9c8840c48dfed4051c809714e8/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [prompts 0.10.4](../../mer-des-chagrins-20261126/GENERATION_0_10_4.json), [validation 0.10.4](../../mer-des-chagrins-20261126/VALIDATION_0_10_4.json).
 
 ## Checkpoint publié 0.10.3
 
