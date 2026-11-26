@@ -10,6 +10,7 @@ const SOURCE_FILES = new Set([
   'modules/covenant/qa/sprite-v011.test.cjs',
   'scripts/build-covenant-v011.mjs', 'scripts/public-covenant-admissions-v011.mjs',
   'scripts/sync-covenant-sprites-v011.py', 'scripts/verify-covenant-integration-v011.mjs',
+  'scripts/package-covenant-sprites-v011.py',
   'scripts/qa-covenant-v011.py',
   'docs/covenant/INVENTORY_V011.json', 'docs/covenant/PROVENANCE_V011.json',
   'docs/covenant/SPRITE_PROVENANCE_V011.json', 'docs/covenant/README.md',
@@ -17,21 +18,30 @@ const SOURCE_FILES = new Set([
   '.github/workflows/covenant-v011.yml'
 ]);
 const SOURCE_DIRS = new Set([...SOURCE_FILES].flatMap(file => {
-  const parts = file.split('/'); return parts.slice(0, -1).map((_, i) => parts.slice(0, i + 1).join('/'));
+  const parts = file.split('/');
+  return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'));
 }));
-let cachedManifest = null, cachedAssets = null;
-function admittedAssets() {
-  const raw = readFileSync(new URL('../' + COVENANT_MANIFEST_V011, import.meta.url), 'utf8');
-  if (raw !== cachedManifest) {
-    const value = JSON.parse(raw);
-    if (value.schemaVersion !== 1 || !Array.isArray(value.assets)) throw new Error('Invalid Covenant admissions manifest');
-    const paths = value.assets.map(row => row.path);
-    if (paths.some(p => typeof p !== 'string' || !new RegExp('^/' + COVENANT_ASSETS_V011 + '/[a-z][a-zA-Z0-9-]{0,79}\\.png$').test(p))) {
-      throw new Error('Unsafe Covenant image path');
-    }
-    cachedAssets = new Set(paths.map(p => p.slice(1))); cachedManifest = raw;
+const cache = new Map();
+
+function admittedAssets(built) {
+  const manifestPath = built ? COVENANT_MANIFEST_V011 : COVENANT_ASSETS_V011 + '/manifest.json';
+  const raw = readFileSync(new URL('../' + manifestPath, import.meta.url), 'utf8');
+  const previous = cache.get(manifestPath);
+  if (previous?.raw === raw) return previous.assets;
+  const value = JSON.parse(raw);
+  if (value.schemaVersion !== 1 || !Array.isArray(value.assets)) {
+    throw new Error('Invalid Covenant admissions manifest');
   }
-  return cachedAssets;
+  const paths = value.assets.map(row => {
+    if (typeof row.path !== 'string') throw new Error('Missing Covenant image path');
+    return row.path.startsWith('/') ? row.path.slice(1) : row.path;
+  });
+  const pattern = new RegExp('^' + COVENANT_ASSETS_V011 + '/[a-z][a-zA-Z0-9-]{0,79}\\.png$');
+  if (paths.some(path => !pattern.test(path))) throw new Error('Unsafe Covenant image path');
+  if (new Set(paths).size !== paths.length) throw new Error('Duplicate Covenant image admission');
+  const assets = new Set(paths);
+  cache.set(manifestPath, { raw, assets });
+  return assets;
 }
 
 export function publicCovenantPathAdmissionV011(path, { directory = false, built = false } = {}) {
@@ -42,7 +52,7 @@ export function publicCovenantPathAdmissionV011(path, { directory = false, built
     return !directory && [COVENANT_PUBLIC_V011 + '/index.html', COVENANT_MANIFEST_V011].includes(path);
   }
   if (path === COVENANT_ASSETS_V011 + '/manifest.json') return !directory && !built;
-  if (path.startsWith(COVENANT_ASSETS_V011 + '/')) return !directory && admittedAssets().has(path);
+  if (path.startsWith(COVENANT_ASSETS_V011 + '/')) return !directory && admittedAssets(built).has(path);
   if (SOURCE_FILES.has(path)) return !directory && !built;
   if (path === 'modules/covenant' || path.startsWith('modules/covenant/')
     || path === 'docs/covenant' || path.startsWith('docs/covenant/')) {

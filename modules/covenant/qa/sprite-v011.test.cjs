@@ -269,3 +269,12 @@ test('suppressed props and burning lander do not reappear through sprite overrid
   burning.renderer.prop({ id: 'lander-prop', kind: 'lander', x: 100, w: 120, h: 100 });
   assert.equal(burning.inherited[0][0], 'prop');
 });
+
+test('console PNGs cannot mask functional panels or navigation displays', () => {
+  const h = harness([propAsset('console'), propAsset('navigationdisplay')]);
+  for (const kind of ['console', 'navigationdisplay']) {
+    h.renderer.prop({ id: kind + '-bridge', kind, x: 100, w: 120, h: 100 });
+  }
+  assert.equal(h.inherited.filter(row => row[0] === 'prop').length, 2);
+  assert.equal(h.renderer.spriteDrawsV011.prop, 0);
+});

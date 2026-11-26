@@ -5,7 +5,7 @@
   'use strict';
   const Parent = root.CovenantRenderer;
   const TABLETOP = new Set(['flute', 'notebook', 'necklace', 'teaset', 'medtray', 'surgicaltray']);
-  const LIVE_PROPS = new Set(['crane', 'freight-cart', 'freight-rail', 'freight-dock',
+  const LIVE_PROPS = new Set(['console', 'navigationdisplay', 'crane', 'freight-cart', 'freight-rail', 'freight-dock',
     'maintenance-fan', 'stone-crown', 'hydraulic-lever', 'counterweight', 'sluice-gauge']);
   const WEAPON_BOX = {
     f90: [-9, -19, 75, 21], sl40: [-9, -19, 75, 26],

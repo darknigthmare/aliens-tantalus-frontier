@@ -38,6 +38,8 @@ def main():
         if not re.fullmatch(r'[a-z][a-zA-Z0-9-]{0,79}', identity):
             raise ValueError('Invalid sprite ID: ' + identity)
         source = references.get(identity, {})
+        if source.get('runtimeAdmission') == 'catalogue-only':
+            continue
         state = 'idle'
         key = identity
         if identity in profiles:

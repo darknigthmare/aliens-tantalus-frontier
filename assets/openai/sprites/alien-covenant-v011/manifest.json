@@ -23,12 +23,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1650766,
-        "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1176697,
+        "alphaZeroPercent": 74.81238047281902,
+        "alphaAbove245": 366575,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           281,
@@ -36,7 +38,12 @@
           735,
           1527
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -77,12 +84,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1729773,
-        "sha256": "5612335b92ae4c4db10b1ebacba9732aafcaa1deb949cba0bd14400774307375",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1120077,
+        "alphaZeroPercent": 71.21257781982422,
+        "alphaAbove245": 429828,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -90,7 +99,12 @@
           747,
           1519
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -132,12 +146,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1775928,
-        "sha256": "e202663c2a0d4f6465619f0874bb460591e8a7db5b6d1aefa5f077616e046185",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1099909,
+        "alphaZeroPercent": 69.93033091227214,
+        "alphaAbove245": 447096,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           243,
@@ -145,7 +161,12 @@
           755,
           1519
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -186,20 +207,27 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1678369,
-        "sha256": "eac65f04e3e4e6c8cc764bd54ba94a2c96271e4f323863a9d9f3dba01d368d86",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084209,
+        "alphaZeroPercent": 68.9321517944336,
+        "alphaAbove245": 454712,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           204,
-          35,
+          36,
           758,
-          1522
+          1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -258,12 +286,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1633599,
-        "sha256": "63ff8da8b39f4645a2a65f8b790fdd7240c92a6e9e6f93b340b75a0a2e1b7246",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084330,
+        "alphaZeroPercent": 68.93984476725261,
+        "alphaAbove245": 464983,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           261,
@@ -271,7 +301,12 @@
           760,
           1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -325,12 +360,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1476134,
-        "sha256": "02fb4529e6616100201bc86df1f200e19b34e2df4481bc879c12a2a927026958",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1146950,
+        "alphaZeroPercent": 72.92111714680989,
+        "alphaAbove245": 396467,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -338,7 +375,12 @@
           735,
           1509
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -691,12 +733,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1858103,
-        "sha256": "b8e247a76d09613f8dcedc18f312e33546e1c8ab607aaf921515b34d15e39395",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1106388,
+        "alphaZeroPercent": 70.34225463867188,
+        "alphaAbove245": 432701,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           256,
@@ -704,7 +748,12 @@
           732,
           1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -742,12 +791,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1410108,
-        "sha256": "50d058bf675eadf6632f664efa97321ab68a71814e83319156318c6d48b8b552",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1181287,
+        "alphaZeroPercent": 75.10420481363933,
+        "alphaAbove245": 360699,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
@@ -755,7 +806,12 @@
           729,
           1520
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -790,12 +846,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1320137,
-        "sha256": "37c2998af59c694276e0f70ea90b9808f7f277fee1bc1d67b056425ab4f152c0",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132959,
+        "alphaZeroPercent": 72.0315933227539,
+        "alphaAbove245": 411602,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           275,
@@ -803,7 +861,12 @@
           731,
           1526
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -844,12 +907,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1764036,
-        "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1064258,
+        "alphaZeroPercent": 67.66370137532552,
+        "alphaAbove245": 486404,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           213,
@@ -857,7 +922,12 @@
           748,
           1469
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -910,12 +980,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2074465,
-        "sha256": "89f32778b7568347fe8f78f90631de93a0297b627fa5cd4f6d59a119402f8967",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 986998,
+        "alphaZeroPercent": 62.75164286295573,
+        "alphaAbove245": 555200,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           197,
@@ -923,7 +995,12 @@
           834,
           1490
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -982,12 +1059,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2029535,
-        "sha256": "31e9e5899925e3369f5b6b603a7a002bd07a461d6f3dab7a8ded965c288433ca",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 991061,
+        "alphaZeroPercent": 63.009961446126304,
+        "alphaAbove245": 542268,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           203,
@@ -995,7 +1074,12 @@
           829,
           1515
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1054,12 +1138,14 @@
         "width": 1536,
         "height": 1024,
         "bytes": 2015661,
-        "sha256": "b85c448ea05a39a071febfb3e09b8c9786c76c082c957b44abc5ac9d4f224250",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 952808,
+        "alphaZeroPercent": 60.577901204427086,
+        "alphaAbove245": 600217,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           331,
@@ -1067,7 +1153,12 @@
           1183,
           1015
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1121,12 +1212,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1829019,
-        "sha256": "22e7bb3b400cc38f4278717745fd0ecbe01f141e7a2caa6c17d70f7dfbe2c904",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1155821,
+        "alphaZeroPercent": 73.48512013753255,
+        "alphaAbove245": 387039,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           293,
@@ -1134,7 +1227,12 @@
           716,
           1500
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1184,12 +1282,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1832546,
-        "sha256": "7f23b3db805c3afd68fc50760c84edeba55afada825c9bad1175f2c033d048e6",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1141977,
+        "alphaZeroPercent": 72.60494232177734,
+        "alphaAbove245": 395782,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           318,
@@ -1197,7 +1297,12 @@
           725,
           1511
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1246,12 +1351,14 @@
         "width": 1312,
         "height": 1199,
         "bytes": 1707857,
-        "sha256": "4fba306b22d426979eaf45ad8baea1fc7e971f4f5f6f8692d981f0b0888b68d5",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 800333,
+        "alphaZeroPercent": 50.876556174861165,
+        "alphaAbove245": 755904,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
@@ -1259,7 +1366,12 @@
           1089,
           1174
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1784,20 +1896,27 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1699088,
-        "sha256": "0abd03ce52373e1fd8aa008243fe7a8706b94b077751b59964abc02480e8cd9a",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1100670,
+        "alphaZeroPercent": 69.97871398925781,
+        "alphaAbove245": 446100,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           271,
-          31,
+          32,
           759,
           1518
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1858,12 +1977,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1641718,
-        "sha256": "bd3485f6aafa2b89b4827ed044d9d1265447853384290207e89962e030202ad3",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1133180,
+        "alphaZeroPercent": 72.04564412434895,
+        "alphaAbove245": 408416,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           294,
@@ -1871,7 +1992,12 @@
           729,
           1520
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1927,12 +2053,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1447878,
-        "sha256": "9a2931e8941ac6bfa6411df06d34a54f92b5aa428b8e9cc7309e9146ac0c9a5d",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1166997,
+        "alphaZeroPercent": 74.19567108154297,
+        "alphaAbove245": 378696,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           312,
@@ -1940,7 +2068,12 @@
           736,
           1523
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -1987,12 +2120,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1501192,
-        "sha256": "f3c531c51d54ab332dd1c97970bb4414eaa59c1443a5fceaa5cdafed1da885fe",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1136045,
+        "alphaZeroPercent": 72.22779591878255,
+        "alphaAbove245": 408152,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
@@ -2000,7 +2135,12 @@
           735,
           1525
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2042,12 +2182,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1648023,
-        "sha256": "925a129b06b191c14c16104f6c6690340b6dd6eff092d1ef7c5108589addec34",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1115036,
+        "alphaZeroPercent": 70.89207967122395,
+        "alphaAbove245": 434321,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           267,
@@ -2055,7 +2197,12 @@
           754,
           1512
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2065,7 +2212,10 @@
           "credit": "Mark Rogers / 20th Century Fox"
         },
         {
-          "file": "crew-ramp-gq.jpg"
+          "file": "crew-ramp-gq.jpg",
+          "url": "https://media.gq.com/photos/591f56c9e26e0c4044f5b6e4/master/w_1600%2Cc_limit/DF-08664.jpg",
+          "source": "https://www.gq.com/story/alien-franchise-has-a-badass-new-look",
+          "credit": "Mark Rogers / 20th Century Fox production still, published in GQ interview with costume designer Craig Green"
         },
         {
           "file": "ricks-latintimes.jpg",
@@ -2099,12 +2249,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1768587,
-        "sha256": "d480556468ad43211af110dd9fa72f5e722f2cc1b1cb43851dee517e67e934ba",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077309,
+        "alphaZeroPercent": 68.49346160888672,
+        "alphaAbove245": 469017,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           244,
@@ -2112,7 +2264,12 @@
           766,
           1517
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2122,7 +2279,10 @@
           "credit": "Mark Rogers / 20th Century Fox"
         },
         {
-          "file": "crew-ramp-gq.jpg"
+          "file": "crew-ramp-gq.jpg",
+          "url": "https://media.gq.com/photos/591f56c9e26e0c4044f5b6e4/master/w_1600%2Cc_limit/DF-08664.jpg",
+          "source": "https://www.gq.com/story/alien-franchise-has-a-badass-new-look",
+          "credit": "Mark Rogers / 20th Century Fox production still, published in GQ interview with costume designer Craig Green"
         },
         {
           "file": "ricks-latintimes.jpg",
@@ -2156,12 +2316,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1508795,
-        "sha256": "4b0fe18190970fe0ce3d77334ee98d9e59a6fa5d27a2bb7e20c7f0ec8693886c",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132843,
+        "alphaZeroPercent": 72.0242182413737,
+        "alphaAbove245": 411380,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           276,
@@ -2169,7 +2331,12 @@
           736,
           1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2361,6 +2528,265 @@
       },
       "rooms": [
         "whiteroom"
+      ]
+    },
+    {
+      "id": "rosenthal",
+      "path": "assets/openai/sprites/alien-covenant-v011/rosenthal.png",
+      "gitBlobSha": "8bd6601bd1d0c5ff2ee7f76df77ab3fd04ba2e00",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Face from official Rosenthal crew-message clip; expedition upper clothing from Rosenthal at far right of wheat-field film still.",
+        "Most lower garment and rear equipment hidden or cropped, continued conservatively from shared security clothing visible in ramp still; not certified 1:1.",
+        "Field cap follows film reference even though procedural code describes tied hair; weapons omitted."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1654111,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1110571,
+        "alphaZeroPercent": 70.6082026163737,
+        "alphaAbove245": 435348,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          278,
+          15,
+          738,
+          1521
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "rosenthal-crewmessage.jpg",
+          "url": "https://i.ytimg.com/vi/YEC188LMcDw/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=YEC188LMcDw",
+          "credit": "Official 20th Century Fox Alien: Covenant Crew Messages: Rosenthal video thumbnail; linked by 20th Century Studios official movie page"
+        },
+        {
+          "file": "wheat-hyperreal.jpg",
+          "url": "https://images.squarespace-cdn.com/content/v1/58a13eba20099eb147e68d26/e8b598d0-4872-4a2b-ab50-7079d4b83b90/covenant3.png",
+          "source": "https://hyperrealfilm.club/reviews/alien-covenant",
+          "credit": "Alien: Covenant (2017) film still, 20th Century Fox; republished Hyperreal Film Club. Rosenthal at far right in olive patterned expedition outfit."
+        },
+        {
+          "file": "crew-ramp-gq.jpg",
+          "url": "https://media.gq.com/photos/591f56c9e26e0c4044f5b6e4/master/w_1600%2Cc_limit/DF-08664.jpg",
+          "source": "https://www.gq.com/story/alien-franchise-has-a-badass-new-look",
+          "credit": "Mark Rogers / 20th Century Fox production still, published in GQ interview with costume designer Craig Green"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair and black top reference only"
+        }
+      ],
+      "generationPrompt": "ONE photorealistic full-body human sprite for Alien: Covenant (2017). Reproduce actual supplied actor likeness and practical film clothing, natural adult anatomy, no stylization or beautification. Standing stable idle, 3/4 SIDE view facing screen RIGHT, hands relaxed EMPTY, feet apart. Entire head and soles of both boots in frame; WIDE transparent margin above hair and below boots. Genuine transparent PNG cutout, alpha exactly zero in background and corners, person opaque, only thin antialiased edge. No background, ground, cast shadow, halo, grey matte, checkerboard, weapons, extra people or text labels. References:1 Tess Haubrich as Rosenthal crew-message face,2 wheat-field scene with Rosenthal at FAR RIGHT,3 male expedition crew clothing for lower-boot construction only,4 unrelated Upworth interview IGNORE4. Subject SARAH ROSENTHAL, Tess Haubrich. Match image1's exact fair face, strong brows, narrow straight nose, natural cheek moles, slim athletic build and dark brown hair with tight braided sections tied back. Her target is the EXPEDITION outfit on the WOMAN AT FAR RIGHT of image2: muted olive/khaki field jacket with irregular dark earth-green mottled fabric pattern, green soft quilted expedition cap/hood with small pale forehead patch and folded-back ear flaps, olive tactical webbing vest with flat utilitarian pouches, shoulder strap with rectangular light/radio module and small camera mount. Keep the design soft practical woven fabric, no armor plates. Hair mostly tucked under soft cap but tied/braided behind. Muted olive cargo trousers and heavy worn dark security expedition boots as film image3 construction. Small Star of David pendant from image1 may peek only at open collar, otherwise concealed by field gear. No navy onboard bomber in place of expedition jacket. No wheat in hands, no weapon.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "upworth",
+      "path": "assets/openai/sprites/alien-covenant-v011/upworth.png",
+      "gitBlobSha": "ab6be90253f9e34ab476355089bcca9804aa570c",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Source is on-set Callie Hernandez interview in black top and tan utility belt; lower trousers/boots and rear are not visible and are conservatively reconstructed.",
+        "Neutral standing pose adapted from seated interview; no assertion of pixel-exact full-body bridge costume."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1316910,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1194008,
+        "alphaZeroPercent": 75.91298421223958,
+        "alphaAbove245": 346683,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          305,
+          17,
+          720,
+          1521
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair and black top reference only"
+        }
+      ],
+      "generationPrompt": "ONE photorealistic full-body human sprite for Alien: Covenant (2017). Reproduce actual supplied actor likeness and practical film clothing, natural adult anatomy, no stylization or beautification. Standing stable idle, 3/4 SIDE view facing screen RIGHT, hands relaxed EMPTY, feet apart. Entire head and soles of both boots in frame; WIDE transparent margin above hair and below boots. Genuine transparent PNG cutout, alpha exactly zero in background and corners, person opaque, only thin antialiased edge. No background, ground, cast shadow, halo, grey matte, checkerboard, weapons, extra people or text labels. The single reference is the on-set interview of CALLIE HERNANDEZ as UPWORTH. Reproduce her exact recognizable natural face and dark brown eyes, light warm skin, dark brown hair in a loose HIGH MESSY BUN with loose framing strands at the cheeks. Young adult slim build. Her costume is the supplied image's plain BLACK close-fitting crew top with soft draped MOCK/TURTLE NECK, sleeves reaching just above elbows, tucked into dark charcoal/olive practical crew trousers. Match the simple TAN BROWN utility/webbing BELT with dark rectangular metal buckle seen at her waist. Conservative straight work trousers, minimal pockets and plain dark work boots, no tactical vest or armor, no extra chest insignia, no invented jewellery, no jacket, no cap/helmet. Both hands empty down at sides and calm attentive expression. Full body rendered in neutral even illumination; do not include the interview chair or hangar set.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "ankor",
+      "path": "assets/openai/sprites/alien-covenant-v011/ankor.png",
+      "gitBlobSha": "cf3eb259da67329ea43751481746abba5c3c40f1",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Face taken from primary Framestore suit close-up; yellow suit explicitly excluded for normal expedition runtime profile.",
+        "Ramp front-right identity cross-checked against IMFDB caption for Ankor's distinctive AR-15, and cast photo.",
+        "Neutral pose and hidden rear gear reconstructed; weapon removed."
+      ],
+      "alphaQA": {
+        "width": 960,
+        "height": 1639,
+        "bytes": 1164377,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1002512,
+        "alphaZeroPercent": 63.71466341264999,
+        "alphaAbove245": 537891,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          212,
+          6,
+          763,
+          1632
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "ankor-eva-face.jpg",
+          "url": "https://www.framestore.com/sites/default/files/2025-12/Alien-Covenant-Case-Study-Header-1980x820.jpg",
+          "source": "https://framestore.com/work/alien-covenant",
+          "credit": "Framestore official Alien: Covenant VFX portfolio production image; face of Alexander England as Ankor, yellow suit excluded from expedition output"
+        },
+        {
+          "file": "crew-ramp-gq.jpg",
+          "url": "https://media.gq.com/photos/591f56c9e26e0c4044f5b6e4/master/w_1600%2Cc_limit/DF-08664.jpg",
+          "source": "https://www.gq.com/story/alien-franchise-has-a-badass-new-look",
+          "credit": "Mark Rogers / 20th Century Fox production still, published in GQ interview with costume designer Craig Green"
+        }
+      ],
+      "generationPrompt": "Create ONE realistic full-body sprite of ANKOR (Alexander England) from Alien: Covenant (2017), in his ordinary PLANET EXPEDITION clothes. Three references:1 full crew photo (Ankor is the very tall fair man behind the leaning woman at left, in white shirt);2 close-up of Ankor's FACE in a yellow spacesuit, use ONLY exact facial likeness;3 expedition ramp, where Ankor is the CLEAN-SHAVEN/FAINT STUBBLE MAN at FRONT RIGHT, holding the rifle with long pale metal barrel shroud. Image3 is the authoritative costume. Reproduce his exact fair face, pale short hair mostly under cap, faint fair moustache/stubble, tall solid adult build. Wear image3 front-right black/dark charcoal brimmed expedition cap with long ear-neck flaps, small forehead mission patch/red marker, muted charcoal-grey mottled field jacket with angled front opening over olive hood/neck layer, olive/tan backpack webbing straps with rectangular white/silver shoulder devices, small pale blue Covenant chest patch, tan utilitarian belt and compact pouches, large soft light canvas hip pouch, dark gloves, dark olive trousers tucked into tall reinforced black/grey security boots with padded segmented gaiter panels. Keep exact practical woven construction, no futuristic hard armor. NO yellow spacesuit, NO helmet. Remove the rifle completely; both hands empty at sides. Stable standing neutral idle, three-quarter SIDE view facing screen RIGHT, whole head and both boot soles visible, feet apart, normal anatomy. Photographic film-costume materials and natural face, no cartoon or glamour. At least7% wide transparent margin around whole silhouette, especially below feet. Genuine PNG CUTOUT with alpha zero on every background pixel and all corners; person visibly opaque, thin antialiased contour only. No scenery, floor, shadow, halo, matte, checkerboard, labels, weapons or additional people.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "ledward",
+      "path": "assets/openai/sprites/alien-covenant-v011/ledward.png",
+      "gitBlobSha": "1adb46c2b0bd2681b7470d4eb60f24a47e0ed440",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Actual forest reference shows no cap; bareheaded styling supersedes the procedural cap parameter.",
+        "Legs, boots and rear equipment are partly outside the supplied frame, reconstructed conservatively in matching security costume.",
+        "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1679775,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1077289,
+        "alphaZeroPercent": 68.49219004313152,
+        "alphaAbove245": 467428,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          220,
+          14,
+          734,
+          1522
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "ledward-forest.webp",
+          "url": "https://www.avpcentral.com/images/planet-4/ledward-in-forest.webp",
+          "source": "https://www.avpcentral.com/planet-4",
+          "credit": "Alien: Covenant (2017) film still, 20th Century Fox; republished by AVP Central, caption Ledward in the forest on Planet 4"
+        },
+        {
+          "file": "ledward-interview.jpg",
+          "url": "https://images.squarespace-cdn.com/content/v1/598b5f49d482e97953d22893/922c6fc2-ed1b-42f5-8cbc-55ad6513eb39/aliencovenant155.jpg",
+          "source": "https://www.perfectorganism.com/home/2021/11/9/176-interviewing-alien-covenants-benjamin-rigby-anatomy-of-a-scene-the-medbay-exquisite-corpse-dissecting-alien-covenant-part-four",
+          "credit": "Film still accompanying direct Benjamin Rigby interview on Perfect Organism podcast, 2021-11-09"
+        }
+      ],
+      "generationPrompt": "Create ONE full-body photorealistic idle human sprite of PRIVATE BEN LEDWARD (Benjamin Rigby) from Alien: Covenant (2017), using these TWO film photos. Image1 in forest smoking shows his HEALTHY expedition face and actual FIELD COSTUME. Image2, where Karine leans over him, confirms collar, jacket and actor likeness, but do NOT reproduce illness or anguish. Match his exact pale angular adult face, short dark brown hair tightly cut at sides and swept slightly up at top, nearly clean-shaven face with faint dark stubble, slim-to-average military build. He is BAREHEADED: NO cap or helmet. Target outfit from image1: muted dark OLIVE GREEN lightly quilted field jacket with ribbed cuffs, worn textured silver circuit-pattern/reflective patches on upper and outer sleeves, a dark BLUE-GREY soft hood/cowl folded around back of neck, olive webbing harness and flat security chest pouches, a rectangular white ribbed shoulder module with orange border, small pale blue Covenant chest patch, dark olive backpack with a tall small black camera on the pale articulated shoulder mast and compact attached cylinder. Matching dark olive/charcoal work trousers, dark heavy security expedition boots. Keep practical fabric and straps, no generic sci-fi hard armor. Remove cigarette, smoke and rifle completely. BOTH hands empty and relaxed at sides; bare hands are visible in image1. Show stable standing idle with feet separated, three-quarter SIDE view facing screen RIGHT, whole head and both boot soles clearly within image. Natural adult proportions and realistic costume stitching. Minimum7% wide transparent margin all round, especially above head/below feet. Real clean PNG CUTOUT with alpha exactly zero on every background pixel and all four corners, subject opaque, only thin antialiased contour. No trees, ground, shadows, haze, backdrop, checkerboard, text labels, other humans or loose objects. Healthy calm attentive expression, no blood, injury or parasites.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
       ]
     }
   ],
