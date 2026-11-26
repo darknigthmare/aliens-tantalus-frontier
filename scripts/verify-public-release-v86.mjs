@@ -1206,7 +1206,36 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
   '.github/workflows/fiorina-native-v114.yml'
 ]);
 
+// Exact AVP production sources remain outside the playable distribution.
+// A generated candidate is not a runtime asset or a fidelity certification.
+const AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126 = new Set([
+  "docs/narrative/dlc/avp-2004-production-20261126",
+  "assets/openai/sprites/avp2004-production-v001"
+]);
+const AVP_PRODUCTION_SOURCE_FILES_20261126 = new Set([
+  "docs/narrative/dlc/avp-2004-production-20261126/README.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/SOURCES.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/INVENTORY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/runtime-inventory.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/PRODUCTION_SPECIFICATIONS.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/production-specs.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/canon-research.json",
+  "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png"
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;
+  if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))
+    return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
