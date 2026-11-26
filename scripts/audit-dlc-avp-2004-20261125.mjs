@@ -587,6 +587,88 @@ export const AVP_MER_EQUIPMENT_SUCCESSORS_20261126 = Object.freeze(Object.fromEn
 ));
 // END MER EQUIPMENT HOST RECEIPTS
 
+// BEGIN DLC BIBLE DOCUMENT HOST RECEIPTS 20261126
+// Source-only paths follow the exact V116 baseline. Historical receipts and
+// earlier QA remain unchanged; this stage grants no artistic or runtime approval.
+export const AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 = 'b0df1877a058f0818f96437fdfdea3f21ba7f415';
+export const AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "6c42dac3d674ebbfb07a3bb5953faa76d5d246f10b889b793d9d916031efcf3f",
+    "currentSha256": "699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END DLC BIBLE DOCUMENT HOST RECEIPTS 20261126
+
+// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126
+// PR 68 added the campaign-to-DLC index link without its source successor.
+// Record that exact document change after the published document-admission stage.
+// This source-only receipt changes no campaign content, game state or art status.
+export const AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 = '16686e8681cc0370db3fa3df2967704ef1862155';
+export const AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+    "previousSha256": "aa4681a3a1eec25fb8bb2ef4502fd0a0dbcffd10bb57a8092b3fbc559bfc51b2",
+    "currentSha256": "0828b50f85fb83f3e10a831ceb0f8d5aa489e20a289007057758d03b836bfcf2"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END DLC BIBLE BRIDGE HOST RECEIPTS 20261126
+
+// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126
+// A closed source-only production inventory follows the exact corrected bible head.
+// Earlier receipts remain immutable; this stage grants no gameplay or art approval.
+export const AVP_PRODUCTION_BIBLE_BASELINE_20261126 = '268b1a517c60338899578a165e9784c5b7313dba';
+export const AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558",
+    "currentSha256": "ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "c49bbc4bf3598a633f78c98febff0309e54b367e5643e4a98daf0371d9b91a56",
+    "currentSha256": "5735cc0a8110342349313df1c70cba220308238ee756674a357f45aa98a4f8bd"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END AVP PRODUCTION BIBLE HOST RECEIPTS 20261126
+
+// BEGIN MER BIBLE PARALLEL JOIN HOST RECEIPTS 20261126
+// Both published branches started at b0df and changed the same two admission
+// hosts. Preserve each independent lineage and join only its exact endpoints.
+// No document, candidate PNG or historical QA result becomes gameplay-approved.
+export const AVP_MER_BIBLE_JOIN_BASELINES_20261126 = Object.freeze({
+  "merCommit": "fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474",
+  "bibleCommit": "2e8309081d206b86d9f234ebfc33c13ea74970f4",
+  "commonCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415"
+});
+export const AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "1ffc15fa1331829b99ed6748501a709b9984e626966f37e9427ba76760829e4e",
+    "currentSha256": "2390895f1ac26b58d0360e56190f15847cae7ff72ad0ba33821dbb9ec065e7a9"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "4a4bef923dbc2afc53d691e500d197c2844a5d345fa327ff8384ac647a4d5b8a",
+    "currentSha256": "96736647ff2bfa4fc34e607915692cf46640b2458c37747c43317726ca998694"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+export const BIBLE_MER_JOIN_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b",
+    "currentSha256": "2390895f1ac26b58d0360e56190f15847cae7ff72ad0ba33821dbb9ec065e7a9"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "5735cc0a8110342349313df1c70cba220308238ee756674a357f45aa98a4f8bd",
+    "currentSha256": "96736647ff2bfa4fc34e607915692cf46640b2458c37747c43317726ca998694"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END MER BIBLE PARALLEL JOIN HOST RECEIPTS 20261126
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -614,7 +696,11 @@ export function reviewedFiorinaSpriteHostDigest20261125(path, endpoint) {
 export function reviewedFiorinaV116HostDigest20261125(path, endpoint) {
   const published = advanceReceipt(path, endpoint, AVP_FIORINA_V116_SUCCESSORS_20261125,
     'Broken Fiorina-V115-to-V116 source chain: ');
-  return reviewedMerJoinHostDigest20261126(path, published);
+  // The campaign bridge changed only on the bible branch; all shared hosts
+  // follow the Mer lineage and its explicit two-parent join below.
+  return Object.hasOwn(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, path)
+    ? reviewedDlcBibleBridgeHostDigest20261126(path, published)
+    : reviewedMerJoinHostDigest20261126(path, published);
 }
 
 export function reviewedMerJoinHostDigest20261126(path, endpoint) {
@@ -637,8 +723,37 @@ export function reviewedMerHostCompletionDigest20261126(path, endpoint) {
 
 // Further host continuations follow this terminal with their own exact receipts.
 export function reviewedMerEquipmentHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_MER_EQUIPMENT_SUCCESSORS_20261126,
+  const published = advanceReceipt(path, endpoint, AVP_MER_EQUIPMENT_SUCCESSORS_20261126,
     'Broken Mer-host-completion-to-equipment source chain: ');
+  return reviewedMerBibleJoinHostDigest20261126(path, published);
+}
+
+export function reviewedDlcBibleDocumentsHostDigest20261126(path, endpoint) {
+  const published = advanceReceipt(path, endpoint, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
+    'Broken V116-to-DLC-bible-documents source chain: ');
+  return reviewedDlcBibleBridgeHostDigest20261126(path, published);
+}
+
+export function reviewedDlcBibleBridgeHostDigest20261126(path, endpoint) {
+  const published = advanceReceipt(path, endpoint, AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126,
+    'Broken DLC-bible-document-bridge source chain: ');
+  return reviewedAvpProductionBibleHostDigest20261126(path, published);
+}
+
+export function reviewedAvpProductionBibleHostDigest20261126(path, endpoint) {
+  const published = advanceReceipt(path, endpoint, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
+    'Broken DLC-bible-to-AVP-production source chain: ');
+  return reviewedBibleMerJoinHostDigest20261126(path, published);
+}
+
+export function reviewedMerBibleJoinHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126,
+    'Broken Mer-to-bible-merge source chain: ');
+}
+
+export function reviewedBibleMerJoinHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, BIBLE_MER_JOIN_SUCCESSORS_20261126,
+    'Broken bible-to-Mer-merge source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -659,7 +774,10 @@ const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_MER_JOIN_SUCCESSORS_20261126), ...Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126),
-  ...Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126), ...Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126), ...Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126),
+  ...Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126), ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126),
+  ...Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126), ...Object.keys(AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126),
+  ...Object.keys(BIBLE_MER_JOIN_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -667,16 +785,29 @@ export function avpHostRuntimeSources20261125(view) {
   const result = { ...view };
   for (const path of hostPaths()) {
     if (!Object.hasOwn(result, path)) continue;
-    const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
+    const common = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
-      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path], AVP_MER_JOIN_SUCCESSORS_20261126[path], AVP_MER_VISUAL_SUCCESSORS_20261126[path],
-      AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path], AVP_MER_EQUIPMENT_SUCCESSORS_20261126[path]].filter(Boolean);
-    for (let i = 1; i < receipts.length; i++)
-      assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
-        'Broken recorded host runtime view chain: ' + path);
-    const endpoints = [receipts[0].previousSha256, ...receipts.map(receipt => receipt.currentSha256)];
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path]].filter(Boolean);
+    const mer = [AVP_MER_JOIN_SUCCESSORS_20261126[path], AVP_MER_VISUAL_SUCCESSORS_20261126[path],
+      AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path], AVP_MER_EQUIPMENT_SUCCESSORS_20261126[path],
+      AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126[path]].filter(Boolean);
+    const bible = [AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path], AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path],
+      AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path], BIBLE_MER_JOIN_SUCCESSORS_20261126[path]].filter(Boolean);
+    // These are two independently continuous histories, not a fabricated linear
+    // succession. Every recorded endpoint must converge to the same exact bytes.
+    const chains = [mer, bible].filter(branch => branch.length).map(branch => [...common, ...branch]);
+    if (!chains.length) chains.push(common);
+    const endpoints = [];
+    const current = chains[0].at(-1).currentSha256;
+    for (const receipts of chains) {
+      for (let i = 1; i < receipts.length; i++)
+        assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
+          'Broken recorded host runtime view chain: ' + path);
+      assert.equal(receipts.at(-1).currentSha256, current, 'Divergent recorded host runtime view branches: ' + path);
+      endpoints.push(receipts[0].previousSha256, ...receipts.map(receipt => receipt.currentSha256));
+    }
     assert.ok(endpoints.includes(result[path]), 'Incorrect AVP host runtime view predecessor: ' + path);
-    result[path] = receipts.at(-1).currentSha256;
+    result[path] = current;
   }
   return Object.freeze(result);
 }
@@ -687,6 +818,12 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'Fiorina sprites require the exact published continuation base');
   assert.equal(AVP_FIORINA_V116_BASELINE_20261125, 'ae4e49bef5fea639d0c381466aefea85f8a57300',
     'Fiorina V116 requires the exact merged V115 continuation base');
+  assert.equal(AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126, 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    'DLC bible documents requires the exact merged V116 continuation base');
+  assert.equal(AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126, '16686e8681cc0370db3fa3df2967704ef1862155',
+    'DLC bible bridge requires the exact published PR 68 document head');
+  assert.equal(AVP_PRODUCTION_BIBLE_BASELINE_20261126, '268b1a517c60338899578a165e9784c5b7313dba',
+    'AVP production documents require the exact corrected bible continuation base');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -698,7 +835,10 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
     AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_MER_JOIN_SUCCESSORS_20261126, AVP_MER_VISUAL_SUCCESSORS_20261126,
-    AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126, AVP_MER_EQUIPMENT_SUCCESSORS_20261126]) {
+    AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126, AVP_MER_EQUIPMENT_SUCCESSORS_20261126,
+    AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126, AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126,
+    AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126, AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126,
+    BIBLE_MER_JOIN_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -793,12 +933,56 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   assert.equal(AVP_MER_EQUIPMENT_SUCCESSORS_20261126['package.json'].previousSha256,
     AVP_MER_VISUAL_SUCCESSORS_20261126['package.json'].currentSha256,
     'The Mer equipment test registration must follow the exact visual package endpoint.');
+  for (const [path, receipt] of Object.entries(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126)) {
+    const prior = AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(prior, 'DLC bible documents requires an exact published host predecessor: ' + path);
+    assert.equal(receipt.previousSha256, prior.currentSha256,
+      'DLC bible documents must follow the exact V116 endpoint: ' + path);
+  }
+  assert.deepEqual(Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ['docs/narrative/CAMPAGNE_PRINCIPALE.md'],
+    'The bible bridge can advance only the exact reviewed campaign document');
+  for (const path of Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126))
+    for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125,
+      AVP_FIORINA_QA_SUCCESSORS_20261125, AVP_ALIENS_JOIN_SUCCESSORS_20261125,
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125, AVP_FIORINA_V116_SUCCESSORS_20261125,
+      AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126])
+      assert.equal(Object.hasOwn(receipts, path), false, 'The bible bridge must preserve every existing host receipt: ' + path);
+  for (const [path, receipt] of Object.entries(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126)) {
+    const prior = AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path] || AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path]
+      || AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(prior, 'AVP production requires an exact published host predecessor: ' + path);
+    assert.equal(receipt.previousSha256, prior.currentSha256,
+      'AVP production must follow the exact corrected bible endpoint: ' + path);
+  }
+  assert.deepEqual(AVP_MER_BIBLE_JOIN_BASELINES_20261126, {
+    merCommit: 'fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474',
+    bibleCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    commonCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+  }, 'The parallel join requires both exact published parents and their common baseline.');
+  const joinPaths = ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs'];
+  assert.deepEqual(Object.keys(AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126), joinPaths);
+  assert.deepEqual(Object.keys(BIBLE_MER_JOIN_SUCCESSORS_20261126), joinPaths);
+  for (const path of joinPaths) {
+    const mer = AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126[path];
+    const bible = BIBLE_MER_JOIN_SUCCESSORS_20261126[path];
+    assert.equal(mer.previousSha256, AVP_MER_VISUAL_SUCCESSORS_20261126[path].currentSha256,
+      'The Mer parent must retain its exact visual admission endpoint: ' + path);
+    assert.equal(bible.previousSha256, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path].currentSha256,
+      'The bible parent must retain its exact AVP production admission endpoint: ' + path);
+    assert.equal(mer.currentSha256, bible.currentSha256, 'Both admission parents must converge exactly: ' + path);
+    assert.equal(reviewedMerBibleJoinHostDigest20261126(path, mer.previousSha256),
+      reviewedBibleMerJoinHostDigest20261126(path, bible.previousSha256), 'Both reviewed parent readers must converge: ' + path);
+  }
   const paths = hostPaths();
   for (const path of paths) {
     const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path]
       || AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]
       || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path] || AVP_MER_JOIN_SUCCESSORS_20261126[path]
-      || AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path]).previousSha256;
+      || AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path] || AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path]).previousSha256;
     assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, seed), 'Unreviewed AVP host source bytes: ' + path);
   }
   return Object.freeze({ baselineCommit: AVP_HOST_BASELINE_20261125, successors: paths.length,
@@ -812,5 +996,10 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     merVisualSuccessors: Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126).length,
     merHostCompletionSuccessors: Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126).length,
     merEquipmentSuccessors: Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126).length,
+    bibleDocumentsSuccessors: Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126).length,
+    bibleBridgeSuccessors: Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126).length,
+    avpProductionBibleSuccessors: Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126).length,
+    merBibleJoinSuccessors: Object.keys(AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126).length,
+    bibleMerJoinSuccessors: Object.keys(BIBLE_MER_JOIN_SUCCESSORS_20261126).length,
     historicalEvidenceTransferred: false });
 }

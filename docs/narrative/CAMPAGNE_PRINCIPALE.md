@@ -4,6 +4,10 @@
 > **Intrigue, lieux et personnages originaux du projet** (`provenance: tantalus-project-original`, `canonExact: false`). Aucune scène, aucun lieu et aucun personnage d'un film ou d'un jeu existant n'est repris. Les noms hérités d'un jeu existant dans le catalogue sont remplacés par des noms originaux (§1.5) ; les identifiants techniques restent inchangés pour préserver les sauvegardes.
 > L'intrigue respecte les règles de l'univers *Alien* (§1.3). Les noms de la franchise restent la propriété de leurs ayants droit (`LICENSE_NOTICE.md`).
 
+## DLC issus des œuvres — reprise du 26 novembre 2026
+
+La [bible et l'index des DLC](DLC_INDEX_20261126.md) regroupent les 18 familles retrouvées, les décisions des discussions disponibles, leurs versions, PR et manques documentés. La provenance originale annoncée ci-dessus concerne les campagnes Cocyte et leurs annexes ; les adaptations des œuvres et la branche originale Projet Lazare gardent leurs sources et leurs limites dans cet index. La fidélité 1:1 reste une cible suivie élément par élément.
+
 ## Sommaire
 
 - **Partie I — Campagne principale (Cocyte)** : §0 lecture · §1 cadre et prémisse · §2 personnages · §3 chronologie · §4 prologue · §5 enquête · §6 colonie Port-Méridien · §7 station Asphodèle · §8 quêtes du Tantalus · §9 opérations secondaires · §10 cinématiques · §11 raccordement · §12 points ouverts

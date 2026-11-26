@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, lstatSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as successors,
   AVP_FIORINA_JOIN_BASELINES_20261125 as joinBaselines,
   AVP_FIORINA_INCOMING_SOURCES_20261125 as incomingSources,
@@ -28,14 +30,30 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_MER_EQUIPMENT_BASELINE_20261126 as merEquipmentBaseline,
   AVP_MER_EQUIPMENT_SUCCESSORS_20261126 as merEquipmentSuccessors,
   reviewedMerEquipmentHostDigest20261126 as advanceMerEquipment,
+  AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 as bibleDocumentsBaseline,
+  AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 as bibleDocumentsSuccessors,
+  reviewedDlcBibleDocumentsHostDigest20261126 as advanceBibleDocuments,
+  AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 as bibleBridgeBaseline,
+  AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 as bibleBridgeSuccessors,
+  reviewedDlcBibleBridgeHostDigest20261126 as advanceBibleBridge,
+  AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
+  AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
+  reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  AVP_MER_BIBLE_JOIN_BASELINES_20261126 as merBibleBaselines,
+  AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126 as merBibleSuccessors,
+  BIBLE_MER_JOIN_SUCCESSORS_20261126 as bibleMerSuccessors,
+  reviewedMerBibleJoinHostDigest20261126 as advanceMerBible,
+  reviewedBibleMerJoinHostDigest20261126 as advanceBibleMer,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
+import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
-  reviewedXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
+  reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -133,11 +151,11 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const expectedMerPaths = ['index.html', 'package.json', 'scripts/build-asset-filter.mjs',
   'scripts/build-dev-tools-v188.mjs', 'scripts/build.mjs', 'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js'];
 const expectedMerHostCompletionPaths = ['.gitattributes', '.vercelignore', 'title-screen-v61.css'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedMerPaths, ...expectedMerHostCompletionPaths])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || merSuccessors[path] || merHostCompletionSuccessors[path]).previousSha256;
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedMerPaths, ...expectedMerHostCompletionPaths, ...Object.keys(bibleBridgeSuccessors)])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || merSuccessors[path] || merHostCompletionSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => merEquipmentSuccessors[path]?.currentSha256 || merHostCompletionSuccessors[path]?.currentSha256 || merVisualSuccessors[path]?.currentSha256 || merSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|Fiorina-to-Mer-join|Mer-join-to-visual|Mer-visual-to-host-completion|Mer-host-completion-to-equipment) source chain/;
+const finalEndpoint = path => merBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || merEquipmentSuccessors[path]?.currentSha256 || merHostCompletionSuccessors[path]?.currentSha256 || merVisualSuccessors[path]?.currentSha256 || merSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|Fiorina-to-Mer-join|Mer-join-to-visual|Mer-visual-to-host-completion|Mer-host-completion-to-equipment|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production|Mer-to-bible-merge|bible-to-Mer-merge) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -158,6 +176,8 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
     merVisualSuccessors: 3,
     merHostCompletionSuccessors: expectedMerHostCompletionPaths.length,
     merEquipmentSuccessors: 1,
+    bibleDocumentsSuccessors: 1, bibleBridgeSuccessors: 1, avpProductionBibleSuccessors: 2,
+    merBibleJoinSuccessors: 2, bibleMerJoinSuccessors: 2,
     historicalEvidenceTransferred: false });
 });
 
@@ -302,6 +322,8 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(merVisualSuccessors, audit), false);
   assert.equal(Object.hasOwn(merHostCompletionSuccessors, audit), false);
   assert.equal(Object.hasOwn(merEquipmentSuccessors, audit), false);
+  for (const receipts of [bibleDocumentsSuccessors, bibleBridgeSuccessors, productionBibleSuccessors, merBibleSuccessors, bibleMerSuccessors])
+    assert.equal(Object.hasOwn(receipts, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -497,4 +519,284 @@ test('test:all collects the new Mer equipment contract exactly once through its 
   assert.equal(files.filter(entry => entry === path).length, 1);
   assert.equal(new Set(files).size, files.length);
   read(path);
+});
+
+// The two branches appended declarations at the same common marker. Recover
+// the bible parent's declaration ordering for its unchanged published hash pins;
+// the Mer declaration prefix is checked separately by its original tests above.
+function historicalBibleDeclarationPrefix(source, marker) {
+  const merMarker = '// BEGIN MER DES CHAGRINS JOIN RECEIPTS';
+  const bibleMarker = '// BEGIN DLC BIBLE DOCUMENT HOST RECEIPTS 20261126';
+  for (const token of [merMarker, bibleMarker, marker])
+    assert.equal(source.split(token).length, 2, 'Exactly one historical declaration marker: ' + token);
+  const mer = source.indexOf(merMarker), bible = source.indexOf(bibleMarker), end = source.indexOf(marker);
+  assert.ok(mer < bible && bible < end);
+  return source.slice(0, mer) + source.slice(bible, end);
+}
+
+test('DLC bible documents advance only the exact public path verifier from the V116 baseline', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  assert.equal(bibleDocumentsBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(bibleDocumentsSuccessors), [path]);
+  assert.equal(sha(JSON.stringify(bibleDocumentsSuccessors)), '880cbccbca1045dca2e6603597bb6706f704811a30053ec5b2cb18ef392572f2');
+  assert.ok(Object.isFrozen(bibleDocumentsSuccessors));
+  const receipt = bibleDocumentsSuccessors[path];
+  assert.ok(Object.isFrozen(receipt));
+  assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+  assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256);
+  assert.equal(sha(read(path)), finalEndpoint(path));
+  assert.equal(advanceBibleDocuments(path, receipt.previousSha256), finalEndpoint(path));
+  for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceBibleDocuments(path, value), /Broken V116-to-DLC-bible-documents source chain/);
+  for (const value of [receipt.previousSha256, receipt.currentSha256])
+    assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceBibleDocuments(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(bibleDocumentsSuccessors, audit), false);
+});
+
+
+test('DLC bible admission is limited to the exact documents and excludes them from built distributions', () => {
+  const files = [
+    "docs/narrative/DLC_DISCUSSIONS_20261126.json",
+    "docs/narrative/DLC_INDEX_20261126.md",
+    "docs/narrative/dlc/40th-anniversary.md",
+    "docs/narrative/dlc/RECUPERATION_20261126.json",
+    "docs/narrative/dlc/RECUPERATION_20261126.md",
+    "docs/narrative/dlc/alien-1979-nostromo.md",
+    "docs/narrative/dlc/alien-blackout.md",
+    "docs/narrative/dlc/alien-covenant.md",
+    "docs/narrative/dlc/alien-earth.md",
+    "docs/narrative/dlc/alien-isolation.md",
+    "docs/narrative/dlc/alien-resurrection.md",
+    "docs/narrative/dlc/alien-romulus.md",
+    "docs/narrative/dlc/alien3-fiorina.md",
+    "docs/narrative/dlc/alien5-projet-lazare.md",
+    "docs/narrative/dlc/aliens-1986.md",
+    "docs/narrative/dlc/avp-2004.md",
+    "docs/narrative/dlc/avp-requiem.md",
+    "docs/narrative/dlc/colonial-marines.md",
+    "docs/narrative/dlc/out-of-the-shadows.md",
+    "docs/narrative/dlc/prometheus.md",
+    "docs/narrative/dlc/river-of-pain.md",
+    "docs/narrative/dlc/sea-of-sorrows.md"
+  ];
+  assert.equal(files.length, 22);
+  for (const path of files) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
+  assert.equal(isPublicDistributionPathV86('docs/narrative/dlc', { directory: true }), true);
+  assert.equal(isPublicDistributionPathV86('docs/narrative/dlc', { directory: true, built: true }), false);
+  for (const path of ['docs/narrative/dlc/unreviewed.md', 'docs/narrative/dlc/extra.png',
+    'docs/narrative/dlc/nested/file.md', 'docs/narrative/dlc/../unreviewed.md',
+    'docs/narrative/dlc/RECUPERATION_20261126.JSON']) {
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+  }
+});
+
+
+test('the campaign-to-DLC bible link advances its exact historical document and preserves all published receipts', () => {
+  const path = 'docs/narrative/CAMPAGNE_PRINCIPALE.md';
+  assert.equal(bibleBridgeBaseline, '16686e8681cc0370db3fa3df2967704ef1862155');
+  assert.deepEqual(Object.keys(bibleBridgeSuccessors), [path]);
+  assert.equal(sha(JSON.stringify(bibleBridgeSuccessors)), '9144fec80c7f058a58d9c027af8addcb61e4bb5f5abd8503d9ef4967d2b70edc');
+  assert.ok(Object.isFrozen(bibleBridgeSuccessors) && Object.isFrozen(bibleBridgeSuccessors[path]));
+  const receipt = bibleBridgeSuccessors[path];
+  assert.equal(receipt.previousSha256, xenoJoin.successors[path].currentSha256);
+  const document = read(path).toString();
+  const addition = "## DLC issus des œuvres — reprise du 26 novembre 2026\n\nLa [bible et l'index des DLC](DLC_INDEX_20261126.md) regroupent les 18 familles retrouvées, les décisions des discussions disponibles, leurs versions, PR et manques documentés. La provenance originale annoncée ci-dessus concerne les campagnes Cocyte et leurs annexes ; les adaptations des œuvres et la branche originale Projet Lazare gardent leurs sources et leurs limites dans cet index. La fidélité 1:1 reste une cible suivie élément par élément.\n\n";
+  assert.equal(document.split(addition).length, 2, 'Exactly one index bridge is added');
+  assert.equal(sha(document.replace(addition, '')), receipt.previousSha256,
+    'The original campaign bible remains byte-identical after removing its explicit DLC index link');
+  assert.equal(sha(document), receipt.currentSha256);
+  assert.equal(advanceBibleBridge(path, receipt.previousSha256), receipt.currentSha256);
+  assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), receipt.currentSha256);
+  for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceBibleBridge(path, value), /Broken DLC-bible-document-bridge source chain/);
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceBibleBridge(path, 'unchanged'), 'unchanged');
+  const terminal = read(audit).toString();
+  assert.equal(sha(historicalBibleDeclarationPrefix(terminal, '// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126')),
+    '6dec230cc7c3e1da4d06fc7e72bcb2af42359732218d711402d1b35ed42ee159', 'All preceding AVP, Aliens, Fiorina and DLC document receipts are preserved');
+  assert.equal(Object.hasOwn(bibleBridgeSuccessors, audit), false);
+});
+
+test('the complete Tantalus join accepts the reviewed campaign link and rejects one changed document byte', () => {
+  assert.ok(verifyXenoTrialsTantalusJoinV206().successors > 0);
+  const path = 'docs/narrative/CAMPAGNE_PRINCIPALE.md';
+  const altered = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n')]) : read(candidate);
+  assert.throws(() => verifyXenoTrialsTantalusJoinV206(altered), /Unreviewed tantalus-join source bytes: docs\/narrative\/CAMPAGNE_PRINCIPALE\.md/);
+});
+
+
+// Source documents and individual PNG candidates; none are admitted to gameplay.
+const avpProductionDocumentDirectory = 'docs/narrative/dlc/avp-2004-production-20261126';
+const avpProductionAssetDirectory = 'assets/openai/sprites/avp2004-production-v001';
+const avpProductionDocumentPaths = [
+  "docs/narrative/dlc/avp-2004-production-20261126/README.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/SOURCES.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/INVENTORY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/runtime-inventory.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/PRODUCTION_SPECIFICATIONS.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/production-specs.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/canon-research.json"
+];
+const avpProductionPngPaths = [
+  "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png"
+];
+
+test('AVP production advances only its two exact source admission hosts after the corrected bible head', () => {
+  assert.equal(productionBibleBaseline, '268b1a517c60338899578a165e9784c5b7313dba');
+  assert.deepEqual(Object.keys(productionBibleSuccessors), ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs']);
+  assert.equal(sha(JSON.stringify(productionBibleSuccessors)), '06bf85ba4eff298ce3a1f19fc7e706e7f636760a9ea3343cffce72eb43d6a973');
+  assert.ok(Object.isFrozen(productionBibleSuccessors));
+  for (const [path, receipt] of Object.entries(productionBibleSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    const prior = bibleDocumentsSuccessors[path] || spriteSuccessors[path];
+    assert.equal(receipt.previousSha256, prior.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceProductionBible(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
+    for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceProductionBible(path, value), /Broken DLC-bible-to-AVP-production source chain/);
+    for (const value of [receipt.previousSha256, receipt.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
+  }
+  const terminal = read(audit).toString();
+  assert.equal(sha(historicalBibleDeclarationPrefix(terminal, '// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126')),
+    '35a14e4f36ab0f8ab0bc119f248d66ecf965e4be24af7d2c77382d9948d8160d', 'All published receipt declarations, including the campaign bridge, remain exact');
+  assert.equal(Object.hasOwn(productionBibleSuccessors, audit), false);
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceProductionBible(path, 'unchanged'), 'unchanged');
+});
+
+test('AVP production documents and PNG candidates have closed source admission and are excluded from the build', () => {
+  const projectRoot = fileURLToPath(new URL('../', import.meta.url));
+  const filter = createBuildAssetFilter(projectRoot);
+  for (const directory of [avpProductionDocumentDirectory, avpProductionAssetDirectory]) {
+    assert.equal(isPublicDistributionPathV86(directory, { directory: true }), true, directory);
+    assert.equal(isPublicDistributionPathV86(directory, { directory: true, built: true }), false, directory);
+    assert.equal(isPublicDistributionPathV86(directory), false, directory);
+    assert.ok(EXCLUDED_BUILD_ASSET_PATHS.includes(directory));
+    assert.equal(filter(join(projectRoot, directory)), false, directory);
+    for (const suffix of ['unreviewed.md', 'extra.png', 'nested/file.png', '../unreviewed.md', 'MANIFEST.JSON']) {
+      const path = directory + '/' + suffix;
+      assert.equal(isPublicDistributionPathV86(path), false, path);
+      assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+      assert.equal(filter(join(projectRoot, directory, 'nested/unreviewed.png')), false);
+    }
+  }
+  for (const path of [...avpProductionDocumentPaths, ...avpProductionPngPaths]) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+    assert.equal(filter(join(projectRoot, path)), false, path);
+    assert.ok(lstatSync(join(projectRoot, path)).isFile(), path);
+    assert.equal(lstatSync(join(projectRoot, path)).isSymbolicLink(), false, path);
+  }
+  assert.deepEqual(readdirSync(join(projectRoot, avpProductionAssetDirectory)).sort(),
+    avpProductionPngPaths.map(path => path.slice(avpProductionAssetDirectory.length + 1)).sort());
+  for (const path of avpProductionDocumentPaths.filter(path => path.endsWith('.json')))
+    assert.doesNotThrow(() => JSON.parse(read(path).toString()), path);
+});
+
+test('the AVP production manifest pins each original PNG and keeps generated, integrated and exact states separate', () => {
+  const manifest = JSON.parse(read(avpProductionDocumentDirectory + '/manifest.json').toString());
+  assert.ok(Array.isArray(manifest.files) && Array.isArray(manifest.references) && Array.isArray(manifest.generationAttempts));
+  assert.deepEqual(manifest.files.map(entry => entry.path).sort(), [...avpProductionPngPaths].sort());
+  assert.equal(new Set(manifest.files.map(entry => entry.path)).size, manifest.files.length);
+  const references = new Set(manifest.references.map(entry => entry.id));
+  assert.equal(references.size, manifest.references.length);
+  for (const reference of manifest.references) {
+    assert.ok(typeof reference.id === 'string' && reference.id.length > 0);
+    assert.match(reference.url, /^https:\/\//);
+    assert.ok(typeof reference.kind === 'string' && reference.kind.length > 0);
+  }
+  for (const entry of manifest.files) {
+    const bytes = read(entry.path);
+    assert.equal(bytes.length, entry.bytes, entry.path);
+    assert.match(entry.sha256, /^[a-f0-9]{64}$/);
+    assert.equal(sha(bytes), entry.sha256, entry.path);
+    if (entry.gitBlobSha !== undefined) {
+      assert.match(entry.gitBlobSha, /^[a-f0-9]{40}$/);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length).update(Buffer.from([0])).update(bytes).digest('hex'), entry.gitBlobSha, entry.path);
+    }
+    assert.deepEqual([...bytes.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], entry.path);
+    assert.equal(bytes.subarray(12, 16).toString(), 'IHDR', entry.path);
+    assert.equal(bytes.readUInt32BE(16), entry.width, entry.path);
+    assert.equal(bytes.readUInt32BE(20), entry.height, entry.path);
+    assert.ok(entry.width > 0 && entry.height > 0);
+    assert.equal(entry.generated, true);
+    assert.equal(entry.status, 'candidate');
+    assert.equal(entry.runtimeIntegrated, false);
+    assert.equal(entry.exact, false);
+    assert.ok(typeof entry.promptKey === 'string' && entry.promptKey.length > 0);
+    assert.ok(Array.isArray(entry.sourceRefs) && entry.sourceRefs.length > 0);
+    for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
+    assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
+  }
+});
+
+
+test('the Mer and bible merge keeps both exact admission lineages and joins only their two host endpoints', () => {
+  assert.deepEqual(merBibleBaselines, {
+    merCommit: 'fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474',
+    bibleCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    commonCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+  });
+  const paths = ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs'];
+  assert.deepEqual(Object.keys(merBibleSuccessors), paths);
+  assert.deepEqual(Object.keys(bibleMerSuccessors), paths);
+  assert.equal(sha(JSON.stringify(merBibleSuccessors)), '4e2c5e82f177f84d56cc0b684f30e44ef8eba8918c5f5f063c77efcf7871da82');
+  assert.equal(sha(JSON.stringify(bibleMerSuccessors)), '968d09656d6924dfaa10bade48a15451bfbac5f40c139759292fb5b7afd824e1');
+  assert.ok(Object.isFrozen(merBibleBaselines));
+  for (const receipts of [merBibleSuccessors, bibleMerSuccessors]) {
+    assert.ok(Object.isFrozen(receipts));
+    assert.equal(Object.hasOwn(receipts, audit), false);
+    for (const receipt of Object.values(receipts)) {
+      assert.ok(Object.isFrozen(receipt));
+      assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    }
+  }
+  for (const path of paths) {
+    const mer = merBibleSuccessors[path], bible = bibleMerSuccessors[path];
+    assert.equal(mer.previousSha256, merVisualSuccessors[path].currentSha256);
+    assert.equal(bible.previousSha256, productionBibleSuccessors[path].currentSha256);
+    assert.equal(mer.currentSha256, bible.currentSha256);
+    assert.equal(sha(read(path)), mer.currentSha256);
+    assert.equal(advanceMerBible(path, mer.previousSha256), mer.currentSha256);
+    assert.equal(advanceBibleMer(path, bible.previousSha256), bible.currentSha256);
+    assert.equal(advanceMerVisual(path, merVisualSuccessors[path].previousSha256), mer.currentSha256);
+    assert.equal(advanceProductionBible(path, productionBibleSuccessors[path].previousSha256), bible.currentSha256);
+    for (const endpoint of [mer.previousSha256, bible.previousSha256, mer.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: mer.currentSha256 });
+  }
+});
+
+test('the two-parent admission join rejects switched parents, rollback, repeated endpoints and one changed byte', () => {
+  for (const path of Object.keys(merBibleSuccessors)) {
+    const mer = merBibleSuccessors[path], bible = bibleMerSuccessors[path];
+    for (const endpoint of [bible.previousSha256, merVisualSuccessors[path].previousSha256, mer.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceMerBible(path, endpoint), /Broken Mer-to-bible-merge source chain/, path);
+    for (const endpoint of [mer.previousSha256, productionBibleSuccessors[path].previousSha256, bible.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceBibleMer(path, endpoint), /Broken bible-to-Mer-merge source chain/, path);
+    const changed = Buffer.from(read(path)); changed[0] ^= 1;
+    assert.throws(() => verify(candidate => candidate === path ? changed : read(candidate)), /Unreviewed AVP host source bytes/, path);
+    assert.throws(() => runtimeView({ [path]: sha(changed) }), /Incorrect AVP host runtime view predecessor/, path);
+  }
+  for (const path of ['scripts/verify-public-release-v86.mjs/extra', 'scripts/build-asset-filter.mjs/extra', 'src/unreviewed.js', '__proto__', 'constructor', audit]) {
+    assert.equal(advanceMerBible(path, 'unchanged'), 'unchanged', path);
+    assert.equal(advanceBibleMer(path, 'unchanged'), 'unchanged', path);
+  }
 });
