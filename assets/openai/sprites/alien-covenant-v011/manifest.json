@@ -2235,6 +2235,43 @@
       "availableStates": [
         "idle"
       ]
+    },
+    {
+      "id": "prop-cryopod-closed-crew",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-cryopod-closed-crew.png",
+      "gitBlobSha": "456b1ff71864edeef2fab43c27093459d5004377",
+      "label": "Caisson fermé de l’équipage — dessin de fabrication",
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "static"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "inputReferences": [
+        [
+          "crew-cryopod-design",
+          "https://m1.22slides.com/tonydrew/sleeppod3-2115677.jpg?f=webp&s=6bed263c155094afc75d7c53e4ec5ba9&w=1264"
+        ],
+        [
+          "cryo-escape-tool-design",
+          "https://m1.22slides.com/tonydrew/sleeppod1-2115675.jpg?f=webp&s=3ed3932703d4221a5657ed152ce8cb20&w=1264"
+        ]
+      ],
+      "generationPrompt": "Create ONE isolated photorealistic game equipment sprite of the CLOSED CREW SLEEP POD from Alien: Covenant, precisely guided by the two attached fabrication drawings from film prop designer Tony Drew. Both references show the SAME class of long rectilinear crew capsule, not a smooth generic spaceship sarcophagus. Copy the long horizontal hard-shell rectangular body, its broad graphite-gray ribbed closed lid with longitudinal grooves and small recessed rectangular clamps, the white/off-white angular head end and recessed dark smoked head window, the off-white ribbed lower chassis with exposed structural rails, handles, ventilation and mechanical details. Use the SECOND drawing for the complete silhouette and construction and the first for the head-window framing and long lid groove geometry. The POD IS CLOSED AND EMPTY, no human visible. Present the full capsule in a shallow nearly side-on three-quarter view, head end to screen RIGHT and foot end to LEFT, long horizontal orientation, perfectly complete entire chassis. Remove the drawing's overhead yellow mechanical rescue frame, all human silhouette and environment. The external rescue tool is not part of this sprite. Faithfully convert the construction drawings into realistic metal, graphite composite and restrained smoked window material, neutral controlled soft lighting and natural readable wear, no invented logos or typography. ONE object only with generous transparent padding on all four sides. True transparent RGBA cutout, background alpha zero, the physical opaque surfaces solid, no drawn checkerboard, no scene, no floor or cast shadow, no glow, fog or halo. No additional objects, no diagrams or alternative views.",
+      "limitations": [
+        "Production-design reconstruction based on Tony Drew's crew sleep-pod drawings; final filmed detail and closed-view appearance not certified 1:1.",
+        "Not a substitute for the distinct closed colonist capsules or the wake-up room's open pod.",
+        "The external rescue tool is intentionally not included."
+      ],
+      "alphaQA": {
+        "status": "pending-numeric-check"
+      }
     }
   ],
   "blocked": [
