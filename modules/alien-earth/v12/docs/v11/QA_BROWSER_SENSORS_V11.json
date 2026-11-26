@@ -1,0 +1,19 @@
+{
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "execution": "Exact delivered HTML, with opt-in QA attribute, via set_content on a fresh about:blank.",
+  "scope": "Initial player positions and scene selection are fixtures. New controls execute actual gameplay. No fake persistence.",
+  "checks": [
+    {
+      "name": "V8 title and subtitle are visible",
+      "pass": false,
+      "detail": ""
+    }
+  ],
+  "captures": [],
+  "pageErrors": [],
+  "requests": [],
+  "browser": "144.0.7559.96",
+  "error": "V8 title and subtitle are visible ",
+  "passed": 0,
+  "total": 1
+}

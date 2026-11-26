@@ -1,0 +1,10 @@
+FAIL V8 title identifies the delivered edition
+RESULT 0 1
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_investigations_regression_v11.py", line 23, in <module>
+    check('V8 title identifies the delivered edition','10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_investigations_regression_v11.py", line 11, in check
+    if not ok:raise AssertionError(name+' '+detail)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: V8 title identifies the delivered edition 

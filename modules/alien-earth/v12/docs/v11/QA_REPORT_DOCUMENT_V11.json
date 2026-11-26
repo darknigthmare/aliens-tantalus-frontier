@@ -1,0 +1,58 @@
+{
+  "version": "11.0.0",
+  "method": "Chromium page.set_content / opaque origin",
+  "checks": [
+    {
+      "name": "QA report identifies V11",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "QA report exposes exact counts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "QA report embeds real screenshots",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "QA report states fidelity boundary",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Audit lists all seventy locations",
+      "pass": true,
+      "detail": "70"
+    },
+    {
+      "name": "Audit lists twenty-five silhouettes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Audit makes remaining gaps visible",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Audit reports zero structural threshold anomalies",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "No report browser errors",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "pageErrors": [],
+  "browser": "144.0.7559.96",
+  "passed": 9,
+  "total": 9,
+  "reportSha256": "de4e529764058b72413adbd996ddbad6171e1909fa8d287c35e883bb5667d9b8",
+  "auditSha256": "684d16354dbe37cb5cad7350e892c44e1be96858e3c82b7d4b5ee8251137bdc0",
+  "ok": true
+}

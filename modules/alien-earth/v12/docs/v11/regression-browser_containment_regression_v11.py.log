@@ -1,0 +1,9 @@
+FAIL Title identifies delivered V8
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_containment_regression_v11.py", line 34, in <module>
+    check('Title identifies delivered V8', '10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_containment_regression_v11.py", line 12, in check
+    if not ok:raise AssertionError(name)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Title identifies delivered V8

@@ -1,0 +1,70 @@
+[
+  {
+    "case": "story",
+    "exitCode": 0
+  },
+  {
+    "case": "normal",
+    "exitCode": 0
+  },
+  {
+    "case": "main",
+    "exitCode": 0
+  },
+  {
+    "case": "services",
+    "exitCode": 0
+  },
+  {
+    "case": "services-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "containment",
+    "exitCode": 0
+  },
+  {
+    "case": "containment-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "sensors",
+    "exitCode": 0
+  },
+  {
+    "case": "sensors-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "ducts",
+    "exitCode": 0
+  },
+  {
+    "case": "ducts-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "investigations",
+    "exitCode": 0
+  },
+  {
+    "case": "investigations-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "security",
+    "exitCode": 0
+  },
+  {
+    "case": "security-normal",
+    "exitCode": 0
+  },
+  {
+    "case": "fidelity",
+    "exitCode": 0
+  },
+  {
+    "case": "fidelity-normal",
+    "exitCode": 0
+  }
+]

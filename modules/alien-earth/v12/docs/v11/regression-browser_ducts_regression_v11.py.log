@@ -1,0 +1,9 @@
+FAIL Title is V8 Par les dessous
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_ducts_regression_v11.py", line 27, in <module>
+    check('Title is V8 Par les dessous','10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_ducts_regression_v11.py", line 12, in check
+    if not v:raise AssertionError(n)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Title is V8 Par les dessous

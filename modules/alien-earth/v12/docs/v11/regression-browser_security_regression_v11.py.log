@@ -1,0 +1,10 @@
+FAIL Actual title identifies V9
+RESULT 0 1
+Traceback (most recent call last):
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_security_regression_v11.py", line 31, in <module>
+    check('Actual title identifies V9','10.0.0' in page.inner_text('#panel') and 'Retrouver les lieux' in page.inner_text('#panel'))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/ALIEN_EARTH_DLC_V11/tests/browser_security_regression_v11.py", line 12, in check
+    if not ok:raise AssertionError(name+' '+detail)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Actual title identifies V9 

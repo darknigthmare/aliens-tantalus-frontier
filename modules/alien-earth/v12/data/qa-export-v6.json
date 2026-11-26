@@ -1,0 +1,1032 @@
+{
+  "parts": 0,
+  "salvaged": [],
+  "circuits": {
+    "C01": "work",
+    "C02": "work",
+    "C03": "work",
+    "C04": "work",
+    "C05": "work",
+    "C06": "work",
+    "C07": "work",
+    "C08": "work"
+  },
+  "repairedDoors": [],
+  "cameraFrames": {},
+  "carryId": null,
+  "serviceStats": {
+    "switches": 0,
+    "crafts": 0,
+    "repairs": 0,
+    "captures": 0,
+    "lifts": 1,
+    "medicalEvacs": 1
+  },
+  "dlc": "alien-earth-s1",
+  "schema": 6,
+  "sensors": {
+    "units": {
+      "S-01": {
+        "id": "S-01",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      },
+      "S-02": {
+        "id": "S-02",
+        "status": "carried",
+        "room": null,
+        "x": 0,
+        "z": 125,
+        "battery": 180,
+        "pulseUntil": 0,
+        "cooldownUntil": 0,
+        "lastFrame": null,
+        "received": null
+      }
+    },
+    "history": [],
+    "stats": {
+      "deployed": 0,
+      "recovered": 0,
+      "recharged": 0,
+      "pulses": 0,
+      "alerts": 0
+    }
+  },
+  "containment": {
+    "pads": {},
+    "records": {},
+    "calibrated": [],
+    "stats": {
+      "armed": 0,
+      "captures": 0,
+      "studies": 0,
+      "released": 0,
+      "broken": 0,
+      "recovered": 0
+    }
+  },
+  "version": "6.0.0",
+  "chapter": 2,
+  "room": "R12",
+  "completed": [
+    "AE-01",
+    "AE-02",
+    "AE-03",
+    "AE-04",
+    "AE-05",
+    "AE-06",
+    "AE-07",
+    "AE-08",
+    "AE-38",
+    "AE-11"
+  ],
+  "archives": [],
+  "visited": [
+    "R11",
+    "R12"
+  ],
+  "player": {
+    "x": 300,
+    "z": 125,
+    "hp": 120,
+    "energy": 100,
+    "ammo": 12,
+    "reserve": 24,
+    "facing": 1
+  },
+  "world": {
+    "R01": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R02": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R03": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R04": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R05": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-05",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R06": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-06",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R07": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-07",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R08": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-08",
+          "x": 1570,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1570,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R09": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-09",
+          "x": 1810,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1810,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R10": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-10",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R11": {
+      "enemies": [],
+      "hazards": [],
+      "lures": []
+    },
+    "R12": {
+      "enemies": [
+        {
+          "id": "EN-12",
+          "x": 1868.3306145184167,
+          "z": 173.3306145184166,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": -1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ],
+      "hazards": [],
+      "lures": []
+    },
+    "R13": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-13",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R14": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-14",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R15": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R16": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-16",
+          "x": 1800,
+          "z": 55,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1800,
+          "homeZ": 55
+        }
+      ]
+    },
+    "R17": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R18": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-18",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R19": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-19",
+          "x": 1870,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R20": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-20",
+          "x": 1530,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1530,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R21": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R22": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R23": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-23",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R24": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-24",
+          "x": 1770,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1770,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R25": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-25",
+          "x": 1690,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1690,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R26": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-26",
+          "x": 1890,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1890,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R27": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-27",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R28": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-28",
+          "x": 1850,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1850,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R29": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-29",
+          "x": 1570,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1570,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R30": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-30",
+          "x": 1870,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1870,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R31": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R32": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R33": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R34": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R35": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-35",
+          "x": 1460,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1460,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R36": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-36",
+          "x": 1490,
+          "z": 200,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1490,
+          "homeZ": 200
+        }
+      ]
+    },
+    "R37": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R38": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-38",
+          "x": 1420,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1420,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R39": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-39",
+          "x": 1520,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1520,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R40": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R41": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R42": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-42",
+          "x": 1610,
+          "z": 125,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1610,
+          "homeZ": 125
+        }
+      ]
+    },
+    "R43": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R44": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-44",
+          "x": 1540,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1540,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R45": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-45",
+          "x": 1250,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1250,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R46": {
+      "hazards": [],
+      "lures": [],
+      "enemies": [
+        {
+          "id": "EN-46",
+          "x": 1530,
+          "z": 175,
+          "stun": 0,
+          "alert": 0,
+          "memory": 0,
+          "lastSeen": null,
+          "facing": 1,
+          "mode": "patrol",
+          "timer": 0,
+          "cooldown": 0,
+          "patrol": 1,
+          "target": null,
+          "focusId": "player",
+          "arrivalGrace": 0,
+          "homeX": 1530,
+          "homeZ": 175
+        }
+      ]
+    },
+    "R47": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    },
+    "R48": {
+      "hazards": [],
+      "lures": [],
+      "enemies": []
+    }
+  },
+  "choices": {},
+  "inventory": {
+    "care": 2,
+    "decoys": 2,
+    "capsules": 2
+  },
+  "looted": [],
+  "gates": {
+    "R14-gate": false,
+    "R18-gate": false,
+    "R23-gate": false,
+    "R30-gate": false,
+    "R39-gate": false,
+    "R41-gate": false,
+    "R44-gate": false,
+    "R47-gate": false
+  },
+  "valves": [],
+  "research": [],
+  "survivors": {
+    "tao": {
+      "id": "tao",
+      "room": "R12",
+      "x": 300,
+      "z": 125,
+      "hp": 0,
+      "status": "rescued",
+      "stress": 15,
+      "quiet": false,
+      "steadyTime": 0,
+      "hitCooldown": 0,
+      "panicClock": 0,
+      "moving": false
+    }
+  },
+  "lightOn": false,
+  "fieldWork": {},
+  "enemyRooms": {
+    "EN-05": "R05",
+    "EN-06": "R06",
+    "EN-07": "R07",
+    "EN-08": "R08",
+    "EN-09": "R09",
+    "EN-10": "R10",
+    "EN-12": "R12",
+    "EN-13": "R13",
+    "EN-14": "R14",
+    "EN-16": "R16",
+    "EN-18": "R18",
+    "EN-19": "R19",
+    "EN-20": "R20",
+    "EN-23": "R23",
+    "EN-24": "R24",
+    "EN-25": "R25",
+    "EN-26": "R26",
+    "EN-27": "R27",
+    "EN-28": "R28",
+    "EN-29": "R29",
+    "EN-30": "R30",
+    "EN-35": "R35",
+    "EN-36": "R36",
+    "EN-38": "R38",
+    "EN-39": "R39",
+    "EN-42": "R42",
+    "EN-44": "R44",
+    "EN-45": "R45",
+    "EN-46": "R46"
+  },
+  "pursuits": [],
+  "seals": {},
+  "intel": {},
+  "journal": [
+    {
+      "text": "Tao pris en charge, évacuation médicale.",
+      "room": "R12",
+      "time": 2.233299999999997,
+      "type": "rescue"
+    }
+  ],
+  "trackedRoom": null,
+  "runtime": {
+    "iframe": 0.5833999999999943,
+    "toolCooldown": 0,
+    "resonanceCooldown": 0,
+    "fireCooldown": 0,
+    "reloadTime": 0,
+    "projectiles": [],
+    "noise": null
+  },
+  "stats": {
+    "decoysUsed": 0,
+    "kitsUsed": 0,
+    "rescues": 1,
+    "pursuits": 0,
+    "crossings": 0,
+    "breaches": 0,
+    "listens": 0,
+    "reassurances": 0
+  },
+  "presentation": "HYBRID",
+  "difficulty": "normal",
+  "resonance": false,
+  "escort": false,
+  "finished": false,
+  "playSeconds": 2.283300000000004
+}

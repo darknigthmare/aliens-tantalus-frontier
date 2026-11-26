@@ -1,0 +1,21 @@
+
+> tantalus-alien-earth-dlc@11.0.0 test:campaigns
+> python tests/run_campaigns_v11.py
+
+main 0
+story 0
+normal 0
+services 0
+containment 0
+services-normal 0
+containment-normal 0
+sensors 0
+sensors-normal 0
+ducts 0
+ducts-normal 0
+investigations 0
+investigations-normal 0
+security 0
+security-normal 0
+fidelity 0
+fidelity-normal 0

@@ -1,0 +1,18 @@
+{
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "transport": "set_content on about:blank after documented administrator navigation block",
+  "checks": [
+    {
+      "name": "V8 title identifies the delivered edition",
+      "pass": false,
+      "detail": ""
+    }
+  ],
+  "pageErrors": [],
+  "requests": [],
+  "captures": [],
+  "browser": "144.0.7559.96",
+  "error": "V8 title identifies the delivered edition ",
+  "total": 1,
+  "passed": 0
+}

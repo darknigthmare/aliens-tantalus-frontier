@@ -1,0 +1,174 @@
+{
+  "version": "11.0.0",
+  "bundleSha256": "024dec038dad391d54c76e2a6c0b2c3f70459f33d8b5e127a5cc48cafa604df3",
+  "counts": {
+    "rooms": 70,
+    "mainTasks": 32,
+    "optionalTasks": 38,
+    "archives": 70,
+    "bidirectionalConnections": 102,
+    "doorFaces": 204,
+    "props": 958,
+    "propTypes": 49,
+    "rules": 331,
+    "referenceProfiles": 25,
+    "playableRoles": 3,
+    "equipmentDefinitions": 21,
+    "fidelityEquipment": 13,
+    "sources": 33,
+    "doorAuditFailures": 0
+  },
+  "node": {
+    "pass": 1216,
+    "tests": 1216,
+    "fail": 0
+  },
+  "browser": {
+    "passed": 200,
+    "total": 200,
+    "suites": [
+      {
+        "file": "docs/v11/QA_BROWSER_SMOKE_V11.json",
+        "passed": 99,
+        "total": 99,
+        "pageErrors": [],
+        "ok": true
+      },
+      {
+        "file": "docs/v11/QA_BROWSER_FIDELITY_V11.json",
+        "passed": 101,
+        "total": 101,
+        "pageErrors": [],
+        "ok": true
+      }
+    ]
+  },
+  "campaigns": [
+    {
+      "file": "docs/QA_CAMPAIGN_V11.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_CONTAINMENT.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_CONTAINMENT_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_DUCTS.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_DUCTS_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_FIDELITY.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 70
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_FIDELITY_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 70
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_INVESTIGATIONS.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_INVESTIGATIONS_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_MAIN.json",
+      "mode": "Engine bot, AI active, story, mandatory route only",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 32
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SECURITY.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SECURITY_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 56
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SENSORS.json",
+      "mode": "Engine bot, AI active, story, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SENSORS_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SERVICES.json",
+      "mode": "Engine bot, AI active, story, service operations included, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    },
+    {
+      "file": "docs/QA_CAMPAIGN_V11_SERVICES_NORMAL.json",
+      "mode": "Engine bot, AI active, normal, service operations included, full exploration",
+      "success": true,
+      "errors": [],
+      "visitedRooms": 48
+    }
+  ],
+  "limitations": [
+    "Navigation locale Chromium par URL bloquée dans cet environnement ; les octets du bundle sont chargés avec page.set_content sur une page opaque.",
+    "Persistance après fermeture complète du navigateur non certifiée ; import/export via sélecteur réel vérifié.",
+    "Les campagnes automatiques connaissent les données du niveau : elles ne remplacent pas un playtest humain à l’aveugle.",
+    "La topologie V11 est une reconstitution jouable lorsqu’aucun blueprint métrique public n’est disponible.",
+    "Visages, animations, dialogues, chorégraphies et toutes les variantes d’armes/tenues ne sont pas encore 1:1."
+  ]
+}
