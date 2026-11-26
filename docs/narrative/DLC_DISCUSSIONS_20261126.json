@@ -1,0 +1,1161 @@
+{
+  "schemaVersion": 1,
+  "auditedOn": "2026-11-26",
+  "project": "Aliens: Tantalus Frontier",
+  "fullConversationAccess": false,
+  "contextRetrieval": {
+    "attempts": 3,
+    "error": "Personal context is unavailable for this conversation.",
+    "errorCode": "INVALID_ARGUMENT"
+  },
+  "baseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+  "verified1to1": false,
+  "decisions": [
+    {
+      "id": "D01",
+      "requirement": "Inventorier et publier tous les DLC et tous les fichiers locaux manquants",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Index des livraisons, branches et PR avec preuve d'intégrité par fichier.",
+      "domain": "archives",
+      "qualification": "À rapprocher des PR ; le nom d'un fichier ne prouve pas la sauvegarde de ses octets."
+    },
+    {
+      "id": "D02",
+      "requirement": "Libérer l'espace une fois les copies GitHub vérifiées",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Suppression limitée aux copies dont le contenu est récupérable depuis un commit vérifié.",
+      "domain": "archives",
+      "qualification": "Conserver tout élément différent, non transféré ou sans preuve distante."
+    },
+    {
+      "id": "D03",
+      "requirement": "Réintégrer dans les bibles les décisions des discussions",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Décision → périmètre → état réel → pièce de preuve → écart restant.",
+      "domain": "documentation",
+      "qualification": "L'accès complet aux conversations est indisponible ; seuls les extraits fournis et documents récupérés sont exploités."
+    },
+    {
+      "id": "D04",
+      "requirement": "Rendre tous les lieux requis présents, cohérents et interconnectés",
+      "source": "Extraits visibles Aliens, Alien 3, Résurrection, Covenant, Earth, Fleuve",
+      "acceptance": "Inventaire des lieux attestés, graphe praticable, correspondance avec la chronologie, liste explicite des absents.",
+      "domain": "world",
+      "qualification": "Un lieu seulement décrit, inspectable ou condensé ne vaut pas une séquence de campagne complète."
+    },
+    {
+      "id": "D05",
+      "requirement": "Placer les portes dans une architecture logique",
+      "source": "Mêmes extraits : « que les porte soit pas poser en plein milieux si pas logique »",
+      "acceptance": "Chaque seuil possède support visible, côté, point de contact, destination, arrivée dégagée et garde narrative.",
+      "domain": "world",
+      "qualification": "Déjà documenté dans plusieurs codex ; conserver la séparation entre support visuel et collision."
+    },
+    {
+      "id": "D06",
+      "requirement": "Respecter tous les équipements et armes de l'œuvre",
+      "source": "Mêmes extraits : « tout les armes ou equipement soit dans le jeux aussi »",
+      "acceptance": "Propriétaire, scène, disponibilité et état jouable/représenté/narratif/documentaire/absent de chaque objet.",
+      "domain": "equipment",
+      "qualification": "La demande de couverture n'autorise pas à attribuer toutes les armes à chaque personnage."
+    },
+    {
+      "id": "D07",
+      "requirement": "Faire correspondre personnages, apparences et variantes",
+      "source": "Mêmes extraits : « que les perso corresponde a l apparence correspondante »",
+      "acceptance": "Personnage × scène × tenue × état/blessure × équipement, références distinctes et apparences admises.",
+      "domain": "appearance",
+      "qualification": "Une silhouette générique réutilisée ne ferme pas plusieurs personnages nommés."
+    },
+    {
+      "id": "D08",
+      "requirement": "Viser la fidélité 1:1 sur l'ensemble",
+      "source": "Demandes répétées dans les extraits et demande courante",
+      "acceptance": "Référence par œuvre/version et comparaison visuelle documentée ; inconnues et adaptations explicites.",
+      "domain": "fidelity",
+      "qualification": "La cible reste ouverte. Ni les tests, ni la génération, ni un compteur ne certifient la fidélité."
+    },
+    {
+      "id": "D09",
+      "requirement": "Mettre tous les DLC au standard élaboré entre eux",
+      "source": "Extraits Aliens, Alien 3, Résurrection et « sur la même base » Covenant/Earth/Fleuve",
+      "acceptance": "Même exigence de lisibilité, intégration, preuves et qualité, sans effacer les règles propres à chaque œuvre.",
+      "domain": "quality",
+      "qualification": "Les moteurs autonomes et les campagnes natives restent identifiés séparément."
+    },
+    {
+      "id": "D10",
+      "requirement": "Développer le codex, la parallaxe et les graphismes",
+      "source": "2-DLC Aliens, fil commencé le 28 septembre 2026",
+      "acceptance": "Plans lisibles, vrais aperçus identifiés, couches de profondeur, matières/éclairage et props cohérents.",
+      "domain": "art",
+      "qualification": "Un schéma n'est pas une capture de gameplay ; un fond ne constitue pas une salle jouable."
+    },
+    {
+      "id": "D11",
+      "requirement": "Remplacer les placeholders et améliorer densité/cohérence des props",
+      "source": "2-DLC Alien 3, fil commencé le 29 septembre 2026",
+      "acceptance": "Prioriser les assets actifs, respecter les supports et garder dégagés les volumes praticables.",
+      "domain": "art",
+      "qualification": "Les références déjà produites ou sur une branche distincte sont comparées avant nouvelle génération."
+    },
+    {
+      "id": "D12",
+      "requirement": "Auditer le level design contre le film et les références visuelles",
+      "source": "Branche 2-DLC Alien résurrections, extrait visible du 25 novembre 2026",
+      "acceptance": "Audit des lieux, placements et séquences contre les références précises, puis correction vérifiée.",
+      "domain": "fidelity",
+      "qualification": "La liste historique des cinq conseils n'est pas visible : le message « pas le 1 » ne permet pas de reconstruire ce point exclu."
+    },
+    {
+      "id": "D13",
+      "requirement": "Continuer tous les sprites manquants après sauvegarde",
+      "source": "26 novembre 2026 et extraits Aliens/Alien3/Covenant/Fleuve",
+      "acceptance": "Backlog par ID stable : absent, candidat, admis, chargé, raccordé et vérifié dans un état de jeu réel.",
+      "domain": "art",
+      "qualification": "Le statut documentaire ancien doit être rapproché du manifeste et de la PR actuels."
+    },
+    {
+      "id": "D14",
+      "requirement": "Générer pour le bon DLC",
+      "source": "Correction explicite Covenant, 26 novembre 2026",
+      "acceptance": "Chaque génération indique DLC, scène/version, personnage/objet, référence et destination.",
+      "domain": "art",
+      "qualification": "Une production d'un autre DLC ne clôture pas la demande Covenant."
+    }
+  ],
+  "dlcs": [
+    {
+      "id": "alien-1979-nostromo",
+      "title": "Alien / MIRE Nostromo",
+      "version": "V119",
+      "scope": "Branche autonome cumulative ; pas de fusion native attestée par la livraison source.",
+      "counts": "62 états de scène ; 51 connexions / 102 faces ; 229 cibles physiques ; 20 catégories d'équipement ; 46 opérations narratives.",
+      "documented": [
+        "Ponts/corrosion structurés par fonctions et raccords de gameplay.",
+        "Dallas/Lambert/Kane EVA avec repères rouge/bleu/jaune ; tenue claire Narcissus distincte pour Ripley.",
+        "RXF-M5 visible sans transformation en arme libre."
+      ],
+      "gaps": [
+        "Relevé métrique complet des ponts et du Narcissus.",
+        "Visages, proportions, textures et chorégraphies à qualifier.",
+        "Raccord de lancement/retour/sauvegarde à établir depuis les sources réelles."
+      ],
+      "production": [
+        "Rapprocher les 20 catégories d'équipement et les variantes EVA des fichiers réellement produits avant génération.",
+        "Qualifier le Big Chap, les tenues par scène et le Narcissus contre leurs références ; garder les dimensions de jeu séparées des cotes de tournage."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive historique préservée ; aucun raccord natif dédié confirmé par ce snapshot.",
+        "archive": "archives/local-recovery-20261125/mire-nostromo/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN_V119.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "aliens-1986",
+      "title": "Aliens (1986)",
+      "version": "V114 RC1 + branche sprites V115",
+      "scope": "Opération autonome et inspections ; raccord hôte documenté dans le dépôt, distinct d'une conversion native.",
+      "counts": "25 lieux inspectables ; 11 lieux d'opération ; 20 raccords réciproques ; 5 objectifs locaux ; 80 règles ; 8 repères absents.",
+      "documented": [
+        "Ensembles Sulaco/planète séparés, sans porte magique.",
+        "Newt désarmée ; M240/grenades avec dotation finie ; shotgun propre à Hicks.",
+        "Inspections, objectifs locaux et campagne film distincts."
+      ],
+      "gaps": [
+        "Boss Reine, duel P-5000 et expulsion finale non joués dans cette branche.",
+        "Narcissus/récupération et appartement Gateway seulement références.",
+        "Façades/extérieurs, transports et ascenseurs partiels."
+      ],
+      "production": [
+        "Préserver et qualifier les 70 PNG de la branche V115 avant de régénérer les mêmes identités.",
+        "Raccorder chaque tenue/arme à son propriétaire ; une Reine d'inspection ou un loader de décor ne clôture pas le final."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          57,
+          65
+        ],
+        "state": "V114 fusionnée dans la cumulative ; 70 PNG V115 en PR65 brouillon, qualification/raccord à achever.",
+        "paths": [
+          "modules/aliens-1986/v114/",
+          "dlc/aliens-1986/",
+          "assets/dlc/aliens-1986/v115/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "member": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/README.md",
+          "archiveName": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip"
+        },
+        {
+          "read": true,
+          "member": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/CODEX_LEVEL_DESIGN_V114.md",
+          "archiveName": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien3-fiorina",
+      "title": "Alien 3 / Fiorina 161",
+      "version": "V114 natif, V116 fusionné, V117 en PR",
+      "scope": "Campagne native ; audit de préparation V117 historique à rapprocher de la PR64.",
+      "counts": "V117 : 77 PNG distincts ; 91 entrées ; 107 occurrences de frames ; 14 animations. Seize PNG nouveaux dont onze employés par les raccords natifs et cinq documentaires.",
+      "documented": [
+        "Appui/pivot, propriétaire de collision et garde narrative conservés par raccord.",
+        "Spike/montage cinéma et bovin/Assembly séparés ; scènes de inspection ≠ route de campagne.",
+        "Pas d'arsenal Marines pour Ripley ; fusil Compagnie représenté à l'arrivée, non ramassable.",
+        "V117 livre course Runner à quatre phases, windup, six poses d'arrivée Ripley et downed prison ; 61 PNG historiques conservés."
+      ],
+      "gaps": [
+        "Runner recover et M41A noir autonome non produits, service image ayant refusé les tentatives de V117.",
+        "Enregistreur de vol et kit médical complet sans géométrie de référence suffisante ; seringue/flacon séparés ne ferment pas le kit.",
+        "EEV et autres props demandent un raccord natif identifié et une image admissible ; pas de substitution globale inventée.",
+        "Toutes les nouvelles entrées gardent exact:false ; les écarts de dôme, marquages et parties cachées restent déclarés."
+      ],
+      "production": [
+        "Lire le manifeste V117 et ses raccords avant de générer ; préserver les anciens reçus V115/V116.",
+        "Ne pas réintroduire Murphy/Boggs/Rains vivants pour afficher leurs poses.",
+        "Ne pas confondre une lampe de catalogue avec les lampes fixes actives."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          56,
+          61,
+          63,
+          64
+        ],
+        "state": "V114 native et V115/V116 fusionnées dans la cumulative ; V117 en PR64 ouverte.",
+        "paths": [
+          "src/alien3-*.js",
+          "assets/openai/sprites/alien3-fiorina-v115/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "AUDIT_RACCORDS_V117.md"
+        },
+        {
+          "read": true,
+          "name": "AUDIT_SPRITES_FIORINA_V114.md"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/906d514fdae2a110ab1a5b0c9598c36068d6425e/docs/development/FIORINA_SPRITES_V117.md",
+          "name": "fiorina-v117-current.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D11",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien-resurrection",
+      "title": "Alien Résurrection",
+      "version": "125.0.0-references-architecture-candidate.1",
+      "scope": "Correctif V124 et aperçu ValidationHost ; une préservation de sources n'établit pas la fusion native.",
+      "counts": "60 états de salles ; 40 frontières locales dont 20 sas et 20 ouvertures ; 19 transferts narratifs ; 503 objets ; 15 nouveaux atlas / 167 clips / 697 images de frames.",
+      "documented": [
+        "États de salle et pièces physiques distingués ; ouvertures permanentes non artificiellement fermables.",
+        "Armes propriétaire et modes joueur distingués ; Draco à acquisition physique.",
+        "Provenance de costumes Call/Christie/Wren ; chestburster séparé du facehugger."
+      ],
+      "gaps": [
+        "Quartiers Perez absents comme lieu visitable distinct.",
+        "Confrontation Purvis/Wren à déplacer réellement dans le Betty.",
+        "Portage Christie/Vriess manquant ; fauteuil autonome non équivalent.",
+        "Réservoirs/extérieurs/épilogue condensés ; visages illustrés non 1:1."
+      ],
+      "production": [
+        "Reprendre la matrice de référence avant toute création d'armes/tenues.",
+        "Traiter le portage comme poses + propriétaire de mouvement + passage, pas seulement image.",
+        "Garder inconnue la consigne historique « pas le 1 » dont la liste de conseils manque."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive historique préservée ; sources/essais locaux distincts de leur publication et d'une intégration native.",
+        "archive": "archives/local-recovery-20261125/alien-resurrection/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_V125.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_REFERENCES_FIDELITE_V125.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D12",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien-covenant",
+      "title": "Alien: Covenant",
+      "version": "0.10.0",
+      "scope": "Module autonome avec registre d'adaptation ; aucune ligne verified1to1=true annoncée.",
+      "counts": "56 espaces physiques + tableau séparé ; 67 liaisons / 134 seuils ; 42 objectifs / 12 chapitres ; 315 fiches dont 224 cinéma : 150 correspondances partielles et 74 sans correspondance.",
+      "documented": [
+        "Support/matière/contact par seuil ; embarquement de berge distinct d'une porte.",
+        "Pièce blanche séparée ; Origae-6 non inventée comme lieu visité ; lander condamné selon chronologie.",
+        "Walter intact/amputé, David sanctuaire et David sous apparence Walter distincts.",
+        "Quatre armes manipulables ; SL40 représenté sans projectile inventé."
+      ],
+      "gaps": [
+        "74 références cinéma sans correspondance dans le registre source.",
+        "Cabine cargo lifter, volumes de lancement/amarrage, états biologiques et équipements particuliers partiels.",
+        "Visages, plans cotés et chorégraphies non certifiés."
+      ],
+      "production": [
+        "Toute génération doit indiquer Covenant explicitement, conformément à la correction utilisateur du 26 novembre.",
+        "Prioriser les profils actifs distincts et les équipements déjà raccordés ; conserver apparence Walter après révélation.",
+        "Les données de jeu (munitions/dégâts) ne deviennent pas des spécifications canoniques."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive historique préservée ; intégration locale à préserver séparément, pas de PR runtime dédiée confirmée.",
+        "archive": "archives/local-recovery-20261125/alien-covenant/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN_COVENANT.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D14"
+      ]
+    },
+    {
+      "id": "alien-earth",
+      "title": "Alien: Earth",
+      "version": "V11.0.0",
+      "scope": "Saison 1 condensée, moteur autonome ; audit historique d'intégration distinct du contenu.",
+      "counts": "70 lieux ; 32 tâches principales + 38 facultatives ; 102 liaisons / 204 seuils ; 958 placements / 49 types ; 331 règles ; 25 silhouettes ; 3 points de vue jouables.",
+      "documented": [
+        "Noms/fonctions attestés distingués d'adjacences reconstruites.",
+        "Transferts géographiques/temporels explicites ; seuils ancrés.",
+        "MCS-X/Maxim9 Joe, pistolet Maginot Morrow ; KRISS documenté non jouable.",
+        "Outils originaux marqués adaptation."
+      ],
+      "gaps": [
+        "Blueprints et inventaire image par image des huit épisodes non complets.",
+        "Armes/accessoires de fond, tenues/blessures, visages et animations.",
+        "Extérieurs New Siam/Neverland et chorégraphies non complets.",
+        "Audit historique : sauvegarde depuis le titre via visibilitychange à vérifier/corriger dans l'intégration actuelle."
+      ],
+      "production": [
+        "Comparer les 25 silhouettes et les packs récents avant de produire de nouveaux doublons.",
+        "Qualifier chaque personnage et chaque organisme contre les références de la saison 1 ; séparer invention de gameplay et espèce attestée."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive V11 préservée ; raccord natif non confirmé.",
+        "archive": "archives/local-recovery-20261125/alien-earth/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_ALIEN_EARTH_V11.md"
+        },
+        {
+          "read": true,
+          "name": "ALIEN_EARTH_V11_INTEGRATION_AUDIT.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "river-of-pain",
+      "title": "Alien : Fleuve de la Douleur",
+      "version": "0.9.0-candidate.1 + packs visuels",
+      "scope": "Module autonome récupéré ; raccord et 42 sprites fusionnés dans main selon snapshot,28 props sur branche distincte.",
+      "counts": "47 lieux ; 64 connexions /128 seuils ; 16 chapitres ; 49 objectifs +6 détours ; 14 profils ; 93 entrées documentaires.",
+      "documented": [
+        "Types de seuil/support ; pistes sans portes isolées ;44 props gênants déplacés.",
+        "Corrections Russ/Brackett, Luisa/Newt et transmission Hidalgo.",
+        "Anne/Newt désarmées ; M240/grenades facultatifs = adaptation.",
+        "Plans reconstruits ; texte intégral non confronté."
+      ],
+      "gaps": [
+        "Séquences hors-colonie, certains personnages et équipements absents.",
+        "Unité médicale observable, sans chirurgie jouable.",
+        "Apparences source vectorielles : les packs plus récents doivent remplacer cette lecture historique."
+      ],
+      "production": [
+        "Intégrer/comparer les28 props déjà produits avant génération ; conserver42 sprites déjà fusionnés.",
+        "Raccorder les assets à leur scène, pas globalement à chaque type de prop."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          60,
+          62,
+          66
+        ],
+        "state": "Module et 42 sprites fusionnés dans main ; 28 props supplémentaires en PR66, soit 70 PNG sur cette branche.",
+        "paths": [
+          "dlc/fleuve-de-la-douleur/",
+          "archives/river-of-pain/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien-blackout",
+      "title": "Alien: Blackout",
+      "version": "0.7.0",
+      "scope": "Sept secteurs distincts, module autonome et extensions Tantalus signalées.",
+      "counts": "56 pièces (4 SIDE/52 DEPTH) ; 66 cloisons /132 faces ; 21 gaines ; 41 familles /703 placements ; 5 silhouettes ; 16 équipements ; 11 écarts ; 271 fiches.",
+      "documented": [
+        "Studwick ingénieur, Thorncroft scientifique ; armes portatives non confirmées non ajoutées.",
+        "Cartes/caméras ne téléportent personne ; gaines réservées aux Aliens.",
+        "Refuge unique, deux Aliens finaux, balises/soins/secours = adaptations."
+      ],
+      "gaps": [
+        "Feuille officielle de personnages non récupérée, silhouettes interprétées.",
+        "Haldin intérieur/vol, refuge multiaccès et déroulé des objectifs incomplets.",
+        "Plans métriques, correspondance caméras/pièces et timings non établis."
+      ],
+      "production": [
+        "Produire les personnages après références, pas à partir de rôles confondus.",
+        "Préserver explicitement les extensions Tantalus sans les attribuer au jeu original."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          54
+        ],
+        "state": "PR54 ouverte de récupération ; statut de publication distinct de la qualification du raccord hôte.",
+        "paths": [
+          "dlc/alien-blackout/",
+          "modules/alien-blackout/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "member": "ALIEN_BLACKOUT_v0.7.0/README.md",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip"
+        },
+        {
+          "read": true,
+          "member": "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "out-of-the-shadows",
+      "title": "Alien : Hors des Ombres",
+      "version": "0.10.0",
+      "scope": "Extrait autorisé et sources éditoriales ; roman/dramatique à distinguer.",
+      "counts": "41 pièces ; 52 liaisons /104 seuils ; 16 chapitres /48 objectifs ; 48 types /331 placements ; 228 notices ; 18 équipements ; 10 profils /28 présences.",
+      "documented": [
+        "Portes dans retours de cloison ; plans originaux non cotés.",
+        "Cinq outils utilisables distincts des références documentaires.",
+        "Rôles civils et apparences provisoires sans portraits des comédiens vocaux."
+      ],
+      "gaps": [
+        "Quatre adultes au vestibule, vitres rompues et décompression partiels.",
+        "Carte minière/quartiers/systèmes épave incomplets.",
+        "Xénobiologie épave non authentifiée ; ne pas identifier automatiquement les vestiges aux Ingénieurs."
+      ],
+      "production": [
+        "Comparer les packs déjà générés et PR59 avant génération.",
+        "La morphologie non décrite par les sources doit rester interprétation de production, même si le PNG est détaillé."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          59
+        ],
+        "state": "PR59 ouverte ; comparer les modifications locales aux octets de cette branche avant nettoyage.",
+        "paths": [
+          "dlc/alien-hors-des-ombres/",
+          "archives/dlc-hors-des-ombres-v010/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V010.json"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN.html"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "sea-of-sorrows",
+      "title": "Alien : La Mer des Chagrins",
+      "version": "0.10.0 + pack visuel local",
+      "scope": "Module autonome ; plans/mécanismes/impressions Decker = adaptation.",
+      "counts": "50 salles ; 59 liaisons dont54 réciproques et5 transferts narratifs ; 113 seuils ; 5 armes jouables/7 documentaires ; 16 fiches distribution.",
+      "documented": [
+        "Râteliers à dotation finie unique, acquisition physique, pas ressources gratuites.",
+        "Grenades Silas et charges orbitales narratives.",
+        "Adams/Elway gardent parasites au transport/stase ; trois attaches reine = règle originale."
+      ],
+      "gaps": [
+        "Roman intégral/variantes audio non confrontés.",
+        "Silas/Muller/Dave/Pritchett seulement fiches dans la source.",
+        "Capture Manning, dernières actions Decker, décès/interventions secondaires à reconstituer.",
+        "Visage Decker et majorité distribution non authentifiés ; boss à trois attaches à revoir."
+      ],
+      "production": [
+        "Publier et comparer le pack visuel déjà commité localement avant génération supplémentaire.",
+        "Ne pas confondre cinq armes jouables, sept références et seize fiches de distribution avec une reconstitution complète."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          58
+        ],
+        "state": "PR58 ouverte de récupération ; pack visuel local supplémentaire à publier/qualifier séparément.",
+        "paths": [
+          "dlc/sea-of-sorrows/",
+          "dlc/sea-of-sorrows-visual/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_DLC_MER_DES_CHAGRINS.md"
+        },
+        {
+          "read": true,
+          "name": "fidelity.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "avp-2004",
+      "title": "AVP (2004) — Sous la glace",
+      "version": "0.11.0",
+      "scope": "Lanceur/retour hôte intégrés sur cumulative ; moteur/sauvegarde AVP autonomes.",
+      "counts": "43 salles navigables +épilogue ; 52 liaisons /104 faces ; 145 SVG ; 188 notices ; 250 références ; 22 lignes armes/68 équipement.",
+      "documented": [
+        "Lex/Scar/Celtic/Chopper/Grid/Ancien distincts ; pas de biomask/canon offert à Lex.",
+        "Reine vaincue par chaîne/cuve ; Predalien limité à l'épilogue.",
+        "Continuité séparée de2204 / Prometheus ; attribution précise des armes."
+      ],
+      "gaps": [
+        "1904, flashback ancien, hors recrutement, secondaires et variantes incomplets.",
+        "Camouflage/visions Yautja/bodycam/rations seulement documentés.",
+        "Kit médical Yautja, masque Elder et certains engins à vérifier.",
+        "Art vectoriel et métrique non certifiés."
+      ],
+      "production": [
+        "Qualifier masques, silhouettes et équipement par propriétaire plutôt qu'une silhouette Yautja générique.",
+        "Préserver la mécanique de fin chaîne/cuve ; ne pas remplacer par un boss à PV arbitraire."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          55
+        ],
+        "state": "Lancement/retour hôte fusionnés dans la cumulative ; moteur et carnets autonomes.",
+        "paths": [
+          "src/dlc/avp-2004/"
+        ],
+        "archive": "archives/local-recovery-20261125/avp-2004/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_AVP_2004.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "40th-anniversary",
+      "title": "Alien — Anthologie40e anniversaire",
+      "version": "0.6.0",
+      "scope": "Six histoires indépendantes condensées ; édition autonome Canvas et intégration locale à publier.",
+      "counts": "6 histoires indépendantes ; 12 galeries de raccord originales.",
+      "documented": [
+        "Containment = sous-volumes de navette ; pas douze grandes salles.",
+        "Ore = transitions de palier, pas simulation d'ascenseur revendiquée.",
+        "Seuils sur cloison et raccords originaux étiquetés."
+      ],
+      "gaps": [
+        "Inventaire plan par plan des six courts non établi.",
+        "Graphismes vectoriels provisoires, fragments écrits et épilogues textuels.",
+        "Raccord natif non attesté par le README source ; intégration hôte distincte."
+      ],
+      "production": [
+        "Conserver une liste d'assets distincte pour chaque court ; ne pas fusionner leurs personnages/chronologies.",
+        "Comparer aux médias effectivement présents et au commit local d'intégration avant production."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Intégration locale documentée ; publication distincte à confirmer par reçu.",
+        "paths": [
+          "dlc/40th-anniversary/",
+          "archives/40th-anniversary/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_40TH_V0_6.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "prometheus",
+      "title": "Prometheus",
+      "version": "12.0.0-candidate.1",
+      "scope": "Module autonome cumulatif ; rendu vectoriel de travail et fusion native non attestée.",
+      "counts": "44 lieux ; 54 connexions / 108 seuils ; 41 objectifs principaux ; 37 entrées matériel.",
+      "documented": [
+        "Passerelle sur deux niveaux jouables reliés par escalier ; géométrie adaptée.",
+        "Prologue et époques lointaines séparés du graphe physique.",
+        "Pièces du film et aménagements de jeu distingués."
+      ],
+      "gaps": [
+        "Sacrifice de l'Ingénieur, découverte archéologique terrestre et rêve de Shaw absents comme lieux jouables.",
+        "Quartiers Weyland et tunnels du complexe partiels ; embarquement/extérieur du second vaisseau condensés.",
+        "RT01 sans cabine détaillée, quad de décor, équipe secondaire incomplète."
+      ],
+      "production": [
+        "Reprendre les 37 inspections matérielles avec statut exact ; la présence dans le codex ne prouve pas l'usage.",
+        "Qualifier les apparences de Shaw/David/Vickers et des techniciens contre la scène concernée ; ne pas remplacer un lieu absent par une chambre générique."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/prometheus/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_V12.md"
+        },
+        {
+          "read": true,
+          "name": "CODEX_PROMETHEUS_V12.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien-romulus",
+      "title": "Alien: Romulus",
+      "version": "0.20 — Convergences",
+      "scope": "Module autonome ; dialogues et chorégraphies d'adaptation originaux, séquences temporelles distinguées des niveaux libres.",
+      "counts": "20 chapitres ; 53 états de scène ; 26 lieux persistants + 2 lieux temporels ; 60 manipulations ; 38 séquences + prologue ; 41 franchissements physiques ; 30 seuils partagés ; 30 entrées matériel ; 8 profils ; 10 écarts.",
+      "documented": [
+        "Séquence Andy/Jackson's Star enrichie sans copier les dialogues du film.",
+        "Capsules guidées vers le sas ; bâtis fixes conservés ; transfert complet vers Corbelan encore ellipse.",
+        "Monte-charge Kay animé/sauvegardable ; course complète non prétendue.",
+        "Couches pluie Navarro/Kay/Bjorn/Tyler, parka rouge Rain et tenue Andy séparées."
+      ],
+      "gaps": [
+        "Prologue exploratoire, foule complète et extensions Jackson's Star incomplets.",
+        "Trajet intégral capsules/Corbelan et course inter-ponts du monte-charge.",
+        "Lieu exact de l'injection Kay non certifié ; plans Renaissance/Corbelan non métriques.",
+        "Second F44 Tyler partiellement simulé ; vêtements/dommages/visages stylisés.",
+        "Couloir de sécurité coupé volontairement exclu, à ne pas inventer dans le montage cinéma."
+      ],
+      "production": [
+        "Comparer les manifests incarnation/concordance avant de produire des doublons.",
+        "Distinguer infrastructure fixe (berceau, monte-charge) et matériel attribuable à Rain.",
+        "Garder les ellipses déclarées tant qu'une référence ne justifie pas le trajet physique."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/alien-romulus/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/REGISTRE_CONVERGENCES_V20.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien-isolation",
+      "title": "Alien: Isolation",
+      "version": "0.8.0 — Une station, des chemins",
+      "scope": "Adaptation autonome condensée ; pas toutes les pièces ni tous les DLC commerciaux d'Alien: Isolation.",
+      "counts": "76 lieux ; 112 liaisons / 224 seuils ; 840 placements ; 246 règles ; 19 chapitres ; 52 objectifs ; 32 tâches facultatives ; 57 archives ; 155 SVG.",
+      "documented": [
+        "Ouverture, approche et arrivée distinctes ; neuf changements de pont représentés en escaliers.",
+        "Morley requis à chaque entrée de pharmacie ; KG-348 verrouille ses annexes.",
+        "Chasseur non tuable ; roue/équipement sans pause ; Nora/Elias escortes originales.",
+        "Carte globale schématique et transports inter-salles condensés."
+      ],
+      "gaps": [
+        "Plan métrique complet, toutes les pièces et extensions commerciales non reproduits.",
+        "Rendu vectoriel provisoire, visages/animations et correspondance exacte des appareils à qualifier.",
+        "Persistance native et hôte Tantalus non qualifiés par les essais en mémoire du paquet."
+      ],
+      "production": [
+        "Inventorier Amanda, le chasseur, synthétiques et appareils depuis le vrai contenu, puis rapprocher les 155 SVG.",
+        "Conserver l'équilibre de furtivité et la non-mortalité du chasseur ; un nouvel asset ne justifie pas un arsenal létal contre lui."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/alien-isolation/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_ISOLATION.md"
+        },
+        {
+          "read": true,
+          "name": "docs/METRIQUES.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "alien5-projet-lazare",
+      "title": "Alien5 — Projet Lazare",
+      "version": "V11 / 2.0.0-candidate.1 — Red Harvest",
+      "scope": "Branche alternative originale après Aliens, inspirée de concepts de production. Aucun film réalisé ni scénario intégral authentifié à reproduire.",
+      "counts": "68 lieux ; 95 connexions / 190 seuils ; 12 chapitres ; 27 objectifs ; 26 entrées matériel/installations ; 14 identités ; 43 références, dont 42 interprétations partielles et une à approfondir.",
+      "documented": [
+        "Calder/Lazare, raccords, civils/dialogues/fins = créations du jeu ; Alien 3/Résurrection non effacés.",
+        "Relais Newt désarmée, positions/ressources séparées, recrutement différent d'évacuation.",
+        "Prototype biomécanique quatrième arme avec réserve finie ; valeurs = gameplay.",
+        "Décor monumental du Derelict ne promet pas un intérieur sans raccord."
+      ],
+      "gaps": [
+        "Authentification partielle des concepts et correspondances ; pas reconstitution de film 1:1 possible sur ces seules sources.",
+        "Rendu vectoriel, métrique et équilibres humains non qualifiés.",
+        "Le codex cumulatif conserve des comptes historiques V10 (60 lieux/83 liens) ; utiliser README/audit V11 pour 68/95."
+      ],
+      "production": [
+        "Étiqueter chaque asset comme concept attesté adapté ou création Lazare ; garder canonExact:false.",
+        "Préserver l'identité originale de Calder et des systèmes P-17/M-4/S-12 ; ne pas inventer leur présence dans une œuvre publiée."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/alien5-lazare/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_REGLES_V11.md"
+        },
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V11.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "colonial-marines",
+      "title": "Aliens: Colonial Marines",
+      "version": "0.10.0 — Retour aux références",
+      "scope": "Adaptation autonome campagne/Stasis/Bug Hunt ; pas reproduction exhaustive du jeu commercial.",
+      "counts": "105 salles campagne/Stasis ; 15 chapitres ; 3 arènes Bug Hunt ; 107 liaisons / 214 seuils ; 21 profils d'armes ; 11 profils de personnages.",
+      "documented": [
+        "Acquisition physique de 17 ajouts d'armes ; trois modules sous canon à réserves séparées ; six légendaires placées dans leur mission de référence.",
+        "Grue Sulaco Falls, escorte Reid/The Raven, trois valves Redemption.",
+        "Hicks corrige l'étiquette Lisbeth dans Awakening sans changer les IDs de sauvegarde.",
+        "Fiorina/Legato/Resolute et conclusion = scènes condensées/documentaires."
+      ],
+      "gaps": [
+        "G2 électrochoc, tourelle WY téléopérée, GAU-113/B, modifications/progression absents ou incomplets.",
+        "Mine non équivalente à une Claymore directionnelle ; économie/XP adaptées.",
+        "Sous-secteurs, verticalité, cinématiques/animations/dialogues non reconstitués intégralement.",
+        "Pas coop réseau/Versus ; Bug Hunt original, pas Broadside/Mercenary/Tribute ; Reconnaissance/Movie/Academy non reproduits."
+      ],
+      "production": [
+        "Commencer par les 21 profils réellement jouables et leurs utilisateurs ; ne pas compter les PNJ statiques comme scènes d'IA complètes.",
+        "Documenter armes/accessoires absents et leurs mécaniques propres avant de générer des images qui laisseraient croire au gameplay."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/colonial-marines/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/ASSETS_STATUS.md"
+        },
+        {
+          "read": true,
+          "name": "docs/ADAPTATION.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    },
+    {
+      "id": "avp-requiem",
+      "title": "AVP: Requiem",
+      "version": "0.10.0-candidate.1 — Les lieux et les visages",
+      "scope": "Module autonome ; montage cinéma/non censuré/scènes coupées encore distingués sans fusion sous un canon unique.",
+      "counts": "48 lieux au sol + 1 environnement aérien ; 65 liaisons / 130 seuils ; 15 séquences / 50 objectifs ; 373 props / 678 détails ; 30 entrées arsenal-équipement ; 11 profils / 8 présences secondaires ; 3 tableaux distants non jouables.",
+      "documented": [
+        "Routes/sentiers sans battant ; bâtiments ancrés ; descentes extérieures au sol ; Stryker avec rampe.",
+        "Gunnison et clairière finale séparés par séquence aérienne.",
+        "Armes film et jeu PSP non mélangées ; GUU-5P/Colt 723 reste incertain.",
+        "Wolf masque/armure/cicatrice différenciés, sculpture faciale approximative."
+      ],
+      "gaps": [
+        "Préparation Wolf/homeworld, intérieur/prologue du vaisseau éclaireur et détachement orbital non reconstitués.",
+        "Commandement Stevens/remise Yutani consultatifs ; morgue/intérieurs secondaires incomplets.",
+        "Cimetière variante sans scène Karl ; pizzeria intérieur inventé ; maternité/nurserie sans toutes actions du film.",
+        "Stryker immobile ; Colt Python/MP5SD3/K3/CM203 et variantes sans gameplay complet.",
+        "Montage exact, apparences, dimensions et manipulations restent partiels."
+      ],
+      "production": [
+        "Établir le montage de référence par séquence ; ne pas ajouter dépôt de bus/scènes supprimées au cinéma sans étiquette.",
+        "Qualifier Wolf/Predalien/humains et leurs armes séparément ; garder les trois tableaux au statut documentaire."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
+        "archive": "archives/dlc-source-recovery-20261126/avp-requiem/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "LIRE_DABORD.md"
+        },
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V0_10.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13"
+      ]
+    }
+  ],
+  "scopeNotes": [
+    "Documents et extraits visibles examinés ; aucune lecture exhaustive des conversations.",
+    "Les statistiques sont celles des versions documentaires, pas une nouvelle exécution de gameplay.",
+    "Les détails des PR proviennent du snapshot l'inventaire GitHub de la reprise du 26 novembre ; toute publication suivante doit être ajoutée comme nouvel état.",
+    "Les bibles historiques déjà conformes ne sont pas présentées comme des corrections de code réalisées ici.",
+    "Les six archives supplémentaires ont leurs documents effectivement lus dans cette passe. Leur préservation ne vaut pas lancement natif validé."
+  ],
+  "publicationSnapshot": {
+    "date": "2026-11-26",
+    "cumulativeBase": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+    "historicalArchiveCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+    "currentReadPRs": [
+      65,
+      66
+    ],
+    "note": "Les statuts décrivent l'instant de rapprochement. Les commits de publication/nettoyage postérieurs doivent être ajoutés avec leurs reçus."
+  }
+}
