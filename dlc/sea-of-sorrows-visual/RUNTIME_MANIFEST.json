@@ -24,6 +24,78 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/MANIFEST.json",
+      "sizeBytes": 27325,
+      "sha256": "a883e8f2ec2a92097a54c41eae98e839b95c8b2485a12b5cf3db8bb602c867fc",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/README.md",
+      "sizeBytes": 1192,
+      "sha256": "ab2719d7f2ecb1335a1477bb23975d6f5475194f4e85de76cbceaf9c448bd567",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/characters/carlyle-medic.png",
+      "sizeBytes": 1674214,
+      "sha256": "6ba5f9b1efcc16949778360c9ea7b880b7f64e2477bca1301b4fa55462c19b37",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/characters/worker.png",
+      "sizeBytes": 1631995,
+      "sha256": "605c8efe996e3f5dc24f741996bb65ce590606a96b74cd00a55daf29cc0f370d",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/medical-clipboard.png",
+      "sizeBytes": 2349154,
+      "sha256": "a8fc11da01f96bad34d4cc139ea388481295a4d17fedba99cf1d04db29f436f6",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/medicine-cup.png",
+      "sizeBytes": 600962,
+      "sha256": "0589a49ba2f96187d362377dd5403b961046d0bcedb759f89d5d01de7278faa6",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/service-cart.png",
+      "sizeBytes": 1846044,
+      "sha256": "0358ae69fc22a88660d76993b8d61af04f9e8531b83c20d5dd26fa9405aa683a",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/tripod-worklight.png",
+      "sizeBytes": 1469502,
+      "sha256": "32296e3e0cfb0d2446f1d0798954df918545050cf15e7598079be5827c143bd9",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/weather-station.png",
+      "sizeBytes": 1287257,
+      "sha256": "dccf7a7345ee51afd05661b5aa3a7a3249d3aacaba061cc1c0d4cecb91d17a27",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/props/windsock.png",
+      "sizeBytes": 1317966,
+      "sha256": "2e9ec89ff395fa1f6a75552c8895893135431028290bfd3429fa64d92b08a946",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/terrain/toxic-sand.png",
+      "sizeBytes": 973732,
+      "sha256": "2bf2c6eca006031cbd7b9476d009191e69360d6c3d84f30c3cb41fa75d8ebbf2",
+      "public": false
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/recovered-sprites-20261126/sprites/vehicles/chicago-tram.png",
+      "sizeBytes": 1717942,
+      "sha256": "321cde54dfcc9b5038f9ef22c2f9a04aca4410def59b29bb3083822e0435cd19",
+      "public": false
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/adams.png",
       "sizeBytes": 1772101,
       "sha256": "3fc67597bdf89b97cb018f20fddf2843dca86b70a0d9d09dc13cff7517c44778",

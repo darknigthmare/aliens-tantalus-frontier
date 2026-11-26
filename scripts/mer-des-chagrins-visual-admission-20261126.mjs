@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 
 export const MER_VISUAL_ROOT_20261126 = 'dlc/sea-of-sorrows-visual';
 export const MER_VISUAL_MANIFEST_20261126 = MER_VISUAL_ROOT_20261126 + '/RUNTIME_MANIFEST.json';
-export const MER_VISUAL_MANIFEST_SHA256_20261126 = '7adbba0595ede8b655f9bbad5ccb1fc5018f6a083e495c4f34a4227f06abeb26';
+export const MER_VISUAL_MANIFEST_SHA256_20261126 = '49e4f088df6e7a4ca8a6a2d7ee693bb02ef92af2ac3fe2f6993346189252b070';
 export const MER_VISUAL_SOURCE_FILES_20261126 = Object.freeze([
   'scripts/mer-des-chagrins-visual-admission-20261126.mjs',
   'scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs',
