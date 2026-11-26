@@ -3,7 +3,7 @@
   "dlc": "Alien: Covenant",
   "version": "0.11-sprites",
   "date": "2026-11-26",
-  "status": "in-production",
+  "status": "assets-in-review",
   "fidelityPolicy": "Film-reference-guided sprites. No pixel-identical 1:1 certification; unseen views and gameplay poses reconstructed. Generated images are distinct from runtime integration.",
   "assets": [
     {
@@ -126,7 +126,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "oram",
@@ -339,7 +340,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "walter",
@@ -406,72 +408,35 @@
       "id": "prop-flute",
       "path": "assets/openai/sprites/alien-covenant-v011/prop-flute.png",
       "gitBlobSha": "85e9a74d1b929a53a0400bbc821a02bc74f9e18a",
-      "category": "prop",
       "generationTool": "image_gen.imagegen",
       "originalBytesPreserved": true,
+      "version": "original",
       "verified1to1": false,
+      "category": "prop",
       "availableStates": [
         "static"
       ],
+      "visualReview": "Original retained; attempted alpha correction added no useful improvement. Source maker describes semitransparent bone. Body median alpha253. No image pixels edited outside imagegen.",
+      "limitations": [
+        "reference-guided, not certified1:1"
+      ],
       "alphaQA": {
-        "size": [
-          2172,
-          724
-        ],
+        "width": 2172,
+        "height": 724,
         "bytes": 585902,
         "sha256": "4db32ab4739d1c713172bd1a631fa8d1afb9c4046cc911d1455d22e4db330a9d",
-        "alpha_extrema": [
+        "alphaExtrema": [
           0,
           255
         ],
-        "alpha0_pixels": 1310723,
-        "alpha255_pixels": 839,
-        "alpha250plus": 232922,
-        "median_nonzero_alpha": 253,
-        "alpha_bbox": [
-          57,
-          70,
-          2116,
-          700
-        ],
-        "visible_alpha_bounds": {
-          "16": [
-            60,
-            305,
-            2112,
-            447
-          ],
-          "128": [
-            60,
-            305,
-            2112,
-            446
-          ],
-          "250": [
-            62,
-            306,
-            2111,
-            445
-          ]
-        },
-        "edge_alpha_extrema": {
-          "top": [
-            0,
-            0
-          ],
-          "bottom": [
-            0,
-            0
-          ],
-          "left": [
-            0,
-            0
-          ],
-          "right": [
-            0,
-            0
-          ]
-        }
+        "alphaZero": 1310723,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          60,
+          305,
+          2112,
+          447
+        ]
       },
       "inputReferences": [
         {
@@ -485,82 +450,42 @@
         }
       ],
       "generationPrompt": "Create ONE game prop sprite from the reference images already attached in this conversation. The target is ONLY DAVID'S FLUTE from Alien: Covenant (2017), shown in the Matt Boug maker photograph: the warm ivory/bone-colored semi-transparent flute lying on wood, with a second close-up view of its holes below. The other two reference images depict firearms; IGNORE THOSE COMPLETELY. Do not include any firearm or any part of a firearm.\n\nFaithfully reproduce the physical flute from that specific maker photograph as closely as the available photograph supports. This is an asset reproduction, not a redesign. Preserve its long, slender, gently irregular cylindrical bone silhouette, the small natural taper and rounded ends, the carved mouthpiece, the actual fingering holes and their spacing visible in the reference, the aged ivory/honey coloration, darker fine weathering and natural bone-like markings, and the subtle translucency described by its maker. No invented ornaments, buttons, metallic fittings, decorative rings, or instrument keys. Resolve only the parts visible in the photograph; keep unseen details restrained.\n\nOutput exactly one COMPLETE flute, isolated, horizontal left-to-right with the mouthpiece on the left, centered and comfortably inside the image with clear transparent padding at both ends. Use a slightly elevated three-quarter side angle so its round shaft and photographed holes can be read, keeping the object horizontal overall. Render its material and surface detail clearly with neutral soft light suitable for a production game sprite. No table, no background, no wood, no environment, no supporting prop, no second view, no duplicate, no hand, no separate detail insert, no contact or cast shadow, no border, no text, no labels, no watermark. True transparent alpha background, not a drawn checkerboard. One object only.",
-      "limitations": [
-        "Original retained; attempted alpha correction added no useful improvement. Source maker describes semitransparent bone. Body median alpha253. No image pixels edited outside imagegen.",
-        "reference-guided, not certified1:1"
-      ]
+      "revisionPrompts": [],
+      "animationsVerified": false
     },
     {
       "id": "neomorph",
       "path": "assets/openai/sprites/alien-covenant-v011/neomorph.png",
-      "gitBlobSha": "e006c1052b520b9a2101b61f54c61289eb72e4b2",
-      "category": "creature",
+      "gitBlobSha": "f9d9792e0731e633a749fe7b70ed6961dc8b5b6e",
       "generationTool": "image_gen.imagegen",
       "originalBytesPreserved": true,
+      "version": "neomorph-v2",
       "verified1to1": false,
+      "category": "creature",
       "availableStates": [
         "idle"
       ],
+      "visualReview": "Targeted anatomy correction from primary final-film still only: shorter rear cranial taper, much shorter dorsal spines and smoother organic skin. Original generated silhouette used for pose continuity.",
+      "limitations": [
+        "reference-guided, not certified 1:1"
+      ],
       "alphaQA": {
-        "size": [
-          1698,
-          926
-        ],
-        "bytes": 795914,
-        "sha256": "1d6a32765f527080c0ed64c5653fb87c8e07c36105b8e2da0c12dbcd2396d6ee",
-        "alpha_extrema": [
+        "width": 1699,
+        "height": 926,
+        "bytes": 735200,
+        "sha256": "ea7701c09629c22d42538baa4756551956ef2b23e2cccede8799b7aba5ebe091",
+        "alphaExtrema": [
           0,
           255
         ],
-        "alpha0_pixels": 1251986,
-        "alpha255_pixels": 2369,
-        "alpha250plus": 258796,
-        "alpha1to15": 33855,
-        "median_nonzero_alpha": 252,
-        "alpha_bbox": [
-          0,
-          0,
-          1676,
-          926
-        ],
-        "visible_alpha_bounds": {
-          "16": [
-            10,
-            7,
-            1643,
-            907
-          ],
-          "128": [
-            12,
-            8,
-            1642,
-            906
-          ],
-          "250": [
-            34,
-            9,
-            1641,
-            905
-          ]
-        },
-        "edge_alpha_extrema": {
-          "top": [
-            0,
-            1
-          ],
-          "bottom": [
-            0,
-            1
-          ],
-          "left": [
-            0,
-            1
-          ],
-          "right": [
-            0,
-            0
-          ]
-        }
+        "alphaZero": 1252964,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          11,
+          23,
+          1644,
+          906
+        ]
       },
       "inputReferences": [
         {
@@ -571,103 +496,55 @@
           "status": "downloaded",
           "bytes": 54613,
           "sha256": "92ecd9dbd17e56c0219294487a1897a4a2eb5f3ac10efaec60bf9d491a027dd0"
-        },
-        {
-          "file": "neomorph-final-mouth.jpg",
-          "url": "https://www.fxguide.com/wp-content/uploads/2017/05/O_133_rec_0540_Marketing_still_v4.1044-830x349.jpg",
-          "source_page": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
-          "kind": "VFX supervisor interview; credited MPC final film still",
-          "status": "downloaded",
-          "bytes": 13760,
-          "sha256": "4eb046b5a01e8e76dd746a9e96815cd5eadf28dda3c8b26f792af84223e0b2f5"
-        },
-        {
-          "file": "51659-Neomorph2.jpg",
-          "url": "https://necaonline.com/wp-content/uploads/2017/05/51659-Neomorph2.jpg",
-          "source_page": "https://store.necaonline.com/blogs/news/massive-photo-gallery-alien-covenant-products-revealed-1",
-          "kind": "Licensed secondary figure reference; final film anatomy takes priority; no toy joints",
-          "status": "downloaded",
-          "bytes": 241769,
-          "sha256": "0d5bd18d89628ca828f5fce610ca7fa9cc11e1416f91d62d28790084948325ca"
         }
       ],
-      "generationPrompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: neutral stalking/patrol idle, the adult is low and slightly forward-leaning, knees bent, both feet planted at the same implied ground level, arms relaxed and slightly reaching ahead without attacking, mouth closed. Head and hands point RIGHT; full tail sweeps far to the LEFT in one readable shallow curve. The tail-to-hands silhouette should be wider than the standing height, suitable for an approx330:180 logical game footprint. Show the entire body clearly. It must be a single coherent animal, not separated parts.",
-      "limitations": [
-        "Final film anatomy and material take precedence over licensed figure; unseen whole-body angle and pose reconstructed.",
-        "reference-guided, not certified 1:1"
-      ]
+      "generationPrompt": "Edit the SECOND attached image, the isolated right-facing Neomorph game sprite. The FIRST image is the authoritative final-film MPC still from Alien: Covenant (2017). Correct the sprite to match that FINAL adult Neomorph more closely. Keep the complete existing patrol pose, limb lengths, fingers, feet, tail, body proportions, orientation, framing and transparent background. Make only these targeted design corrections: (1) shorten the overly long blade-like rear projection of the head by about one third and give its tip a softer flesh-covered taper, retaining the film creature's elongated smooth eyeless bulbous head, with no separate horn; (2) reduce the exposed dorsal spikes to the small restrained ridge of short fleshy spines visible on the film creature, around one third their current height, not tall rigid horns; (3) smooth the excessive bumpy toy-like surface into taut subtly wrinkled pale grey-ivory skin with faint veins and believable soft tissue, following the film still. The film still controls anatomy; retain neutral soft lighting rather than its blue scene lighting. Preserve a lean organic body. Do not add a Deacon crest, tubes or Xenomorph armor. Do not include the human, injury, blood, environment or floor from the film still. One complete creature facing RIGHT, entire tail and feet visible. Keep all non-creature pixels genuinely empty alpha0 with no white fringe, haze, ground shadow or checkerboard; solid body effectively opaque with antialiasing only at its contour. No text.",
+      "revisionPrompts": [
+        {
+          "version": "neomorph",
+          "prompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: neutral stalking/patrol idle, the adult is low and slightly forward-leaning, knees bent, both feet planted at the same implied ground level, arms relaxed and slightly reaching ahead without attacking, mouth closed. Head and hands point RIGHT; full tail sweeps far to the LEFT in one readable shallow curve. The tail-to-hands silhouette should be wider than the standing height, suitable for an approx330:180 logical game footprint. Show the entire body clearly. It must be a single coherent animal, not separated parts."
+        },
+        {
+          "version": "neomorph-v2",
+          "prompt": "Edit the SECOND attached image, the isolated right-facing Neomorph game sprite. The FIRST image is the authoritative final-film MPC still from Alien: Covenant (2017). Correct the sprite to match that FINAL adult Neomorph more closely. Keep the complete existing patrol pose, limb lengths, fingers, feet, tail, body proportions, orientation, framing and transparent background. Make only these targeted design corrections: (1) shorten the overly long blade-like rear projection of the head by about one third and give its tip a softer flesh-covered taper, retaining the film creature's elongated smooth eyeless bulbous head, with no separate horn; (2) reduce the exposed dorsal spikes to the small restrained ridge of short fleshy spines visible on the film creature, around one third their current height, not tall rigid horns; (3) smooth the excessive bumpy toy-like surface into taut subtly wrinkled pale grey-ivory skin with faint veins and believable soft tissue, following the film still. The film still controls anatomy; retain neutral soft lighting rather than its blue scene lighting. Preserve a lean organic body. Do not add a Deacon crest, tubes or Xenomorph armor. Do not include the human, injury, blood, environment or floor from the film still. One complete creature facing RIGHT, entire tail and feet visible. Keep all non-creature pixels genuinely empty alpha0 with no white fringe, haze, ground shadow or checkerboard; solid body effectively opaque with antialiasing only at its contour. No text."
+        }
+      ],
+      "animationsVerified": false
     },
     {
       "id": "neomorph-attack",
       "path": "assets/openai/sprites/alien-covenant-v011/neomorph-attack.png",
-      "gitBlobSha": "c2bb89004e0209e0420d681d87a93eb05d121681",
-      "category": "creature",
+      "gitBlobSha": "8165650f279b6355c32d2baa957d1a0147b1e520",
       "generationTool": "image_gen.imagegen",
       "originalBytesPreserved": true,
+      "version": "neomorph-attack-v3",
       "verified1to1": false,
+      "category": "creature",
       "availableStates": [
         "lunge"
       ],
+      "visualReview": "Final pose consistency pass: restore rear cranial elongation to match corrected patrol v2 while retaining small dorsal spines and smoothed film-like skin.",
+      "limitations": [
+        "reference-guided, not certified 1:1",
+        "Extensive RGB fringe has only alpha1..15; edges max5. Parent inspected dark/light compositing and accepted. Preserve original bytes; do not threshold alpha."
+      ],
       "alphaQA": {
-        "size": [
-          1774,
-          887
-        ],
-        "bytes": 817199,
-        "sha256": "1211a75155612dc0bdd417156db4b3ef2e52966ba637d4bba11885a09de41cc1",
-        "alpha_extrema": [
+        "width": 1774,
+        "height": 887,
+        "bytes": 1639176,
+        "sha256": "f1aa5f8fc2a4c47a7c3a9c219c36fe17f171aa4a3c105e22192237882581c6ba",
+        "alphaExtrema": [
           0,
           255
         ],
-        "alpha0_pixels": 1216441,
-        "alpha255_pixels": 1336,
-        "alpha250plus": 269751,
-        "alpha1to15": 55056,
-        "median_nonzero_alpha": 252,
-        "alpha_bbox": [
-          0,
-          9,
-          1773,
-          887
-        ],
-        "visible_alpha_bounds": {
-          "16": [
-            28,
-            61,
-            1748,
-            830
-          ],
-          "128": [
-            29,
-            62,
-            1747,
-            829
-          ],
-          "250": [
-            56,
-            62,
-            1746,
-            828
-          ]
-        },
-        "edge_alpha_extrema": {
-          "top": [
-            0,
-            0
-          ],
-          "bottom": [
-            0,
-            1
-          ],
-          "left": [
-            0,
-            1
-          ],
-          "right": [
-            0,
-            0
-          ]
-        }
+        "alphaZero": 482318,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          24,
+          75,
+          1754,
+          834
+        ]
       },
       "inputReferences": [
         {
@@ -678,31 +555,24 @@
           "status": "downloaded",
           "bytes": 54613,
           "sha256": "92ecd9dbd17e56c0219294487a1897a4a2eb5f3ac10efaec60bf9d491a027dd0"
-        },
-        {
-          "file": "neomorph-final-mouth.jpg",
-          "url": "https://www.fxguide.com/wp-content/uploads/2017/05/O_133_rec_0540_Marketing_still_v4.1044-830x349.jpg",
-          "source_page": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
-          "kind": "VFX supervisor interview; credited MPC final film still",
-          "status": "downloaded",
-          "bytes": 13760,
-          "sha256": "4eb046b5a01e8e76dd746a9e96815cd5eadf28dda3c8b26f792af84223e0b2f5"
-        },
-        {
-          "file": "51659-Neomorph2.jpg",
-          "url": "https://necaonline.com/wp-content/uploads/2017/05/51659-Neomorph2.jpg",
-          "source_page": "https://store.necaonline.com/blogs/news/massive-photo-gallery-alien-covenant-products-revealed-1",
-          "kind": "Licensed secondary figure reference; final film anatomy takes priority; no toy joints",
-          "status": "downloaded",
-          "bytes": 241769,
-          "sha256": "0d5bd18d89628ca828f5fce610ca7fa9cc11e1416f91d62d28790084948325ca"
         }
       ],
-      "generationPrompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: one dynamic airborne forward pounce/attack facing RIGHT, full body stretched horizontally in mid-jump, torso leaning forward, both long arms reaching to the right with fingers spread, legs drawn back with bent knees and all feet fully visible, full tail streaming to the left. The eyeless head faces right with the extensible jaw opened like the final-film close-up, sharp teeth visible but no contact with a target, no injury, no blood. Show the entire creature comfortably inside the canvas with at least8percent empty padding on EVERY side. This image will be the attack animation pose; there is no prey or second creature. Maintain the same final-film pale Neomorph anatomy, finer smooth fleshy skin and short dorsal spines. Avoid the figure's coarse plastic wrinkles and articulated limbs.",
-      "limitations": [
-        "Final movie references determine creature design; dynamic side-view pose reconstructed for gameplay, not present identically in reference images.",
-        "reference-guided, not certified 1:1"
-      ]
+      "generationPrompt": "Edit the SECOND attached sprite, the airborne Neomorph. Use the FIRST attached corrected patrol sprite as exact character-design reference. Change ONLY the shape of the top/rear cranium of the airborne creature so it is clearly the SAME Neomorph head as the first image. Its smooth eyeless bulbous cranium must elongate backward toward the LEFT in the same softly rounded flesh-covered taper as the first image; the second image currently has a too-short round dome. Match the head length-to-dome-height proportion of the first image (about1.6:1), retaining the first image's soft blunt posterior taper rather than any sharp horn. Preserve the second image's open jaw and teeth, facial direction, exact airborne pose, tiny dorsal spines, full tail, hands, legs, feet, skin color, surface texture and framing. Keep all other pixels/parts visually unchanged. Only the skull silhouette is being harmonized between two animation poses. Do not add spikes, ears, visible eyes, crests, Xenomorph tubes or toy joints. One complete clean fictional creature facing RIGHT, no humans, blood, environment or props. Preserve genuine transparent alpha0 background with no shadow, fringe, haze, checkerboard or text. No clipping.",
+      "revisionPrompts": [
+        {
+          "version": "neomorph-attack",
+          "prompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: one dynamic airborne forward pounce/attack facing RIGHT, full body stretched horizontally in mid-jump, torso leaning forward, both long arms reaching to the right with fingers spread, legs drawn back with bent knees and all feet fully visible, full tail streaming to the left. The eyeless head faces right with the extensible jaw opened like the final-film close-up, sharp teeth visible but no contact with a target, no injury, no blood. Show the entire creature comfortably inside the canvas with at least8percent empty padding on EVERY side. This image will be the attack animation pose; there is no prey or second creature. Maintain the same final-film pale Neomorph anatomy, finer smooth fleshy skin and short dorsal spines. Avoid the figure's coarse plastic wrinkles and articulated limbs."
+        },
+        {
+          "version": "neomorph-attack-v2",
+          "prompt": "Edit ONLY the THIRD attached image, the isolated right-facing Neomorph airborne pounce sprite. The FIRST image is the authoritative final-movie MPC still from Alien: Covenant (2017). The SECOND image is the corrected patrol sprite of this same creature and must set matching anatomy and skin. Preserve the THIRD image's exact airborne pose, open mouth, full extended hands, bent legs, streaming long tail, right-facing orientation and complete single-creature framing. Apply the same design correction as the second image: a shorter and softer flesh-covered rear cranial taper, smooth bulbous eyeless head without a separate horn, only a restrained row of very short fleshy dorsal spines rather than the current tall spikes, and smoother taut subtly wrinkled ivory-grey organic skin with faint cool veins instead of coarse bumpy toy texture. Keep the mouth open with the final-film Neomorph teeth and jaw, clean with no gore. Do not alter limb lengths or merge fingers. No Deacon crest, Xenomorph tubes, extra limbs, separate objects, toys, stands or seams. The first image is creature reference only; do not reproduce its human, blood or environment. One full creature, all extremities safely inside frame. Outside the creature must be truly empty transparent alpha0, no fringe, haze, floor, shadow or checkerboard. Body effectively opaque; narrow contour antialiasing only. No text."
+        },
+        {
+          "version": "neomorph-attack-v3",
+          "prompt": "Edit the SECOND attached sprite, the airborne Neomorph. Use the FIRST attached corrected patrol sprite as exact character-design reference. Change ONLY the shape of the top/rear cranium of the airborne creature so it is clearly the SAME Neomorph head as the first image. Its smooth eyeless bulbous cranium must elongate backward toward the LEFT in the same softly rounded flesh-covered taper as the first image; the second image currently has a too-short round dome. Match the head length-to-dome-height proportion of the first image (about1.6:1), retaining the first image's soft blunt posterior taper rather than any sharp horn. Preserve the second image's open jaw and teeth, facial direction, exact airborne pose, tiny dorsal spines, full tail, hands, legs, feet, skin color, surface texture and framing. Keep all other pixels/parts visually unchanged. Only the skull silhouette is being harmonized between two animation poses. Do not add spikes, ears, visible eyes, crests, Xenomorph tubes or toy joints. One complete clean fictional creature facing RIGHT, no humans, blood, environment or props. Preserve genuine transparent alpha0 background with no shadow, fringe, haze, checkerboard or text. No clipping."
+        }
+      ],
+      "animationsVerified": false
     },
     {
       "id": "prop-lander",
@@ -834,26 +704,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1858103,
-        "mode": "RGBA",
+        "sha256": "b8e247a76d09613f8dcedc18f312e33546e1c8ab607aaf921515b34d15e39395",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1106388,
-        "alphaZeroPercent": 70.34225463867188,
-        "alphaAbove245": 432701,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           256,
           17,
           732,
           1521
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -892,26 +754,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1410108,
-        "mode": "RGBA",
+        "sha256": "50d058bf675eadf6632f664efa97321ab68a71814e83319156318c6d48b8b552",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1181287,
-        "alphaZeroPercent": 75.10420481363933,
-        "alphaAbove245": 360699,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
           16,
           729,
           1520
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -947,26 +801,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1320137,
-        "mode": "RGBA",
+        "sha256": "37c2998af59c694276e0f70ea90b9808f7f277fee1bc1d67b056425ab4f152c0",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132959,
-        "alphaZeroPercent": 72.0315933227539,
-        "alphaAbove245": 411602,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           275,
           18,
           731,
           1526
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1008,26 +854,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1764036,
-        "mode": "RGBA",
+        "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1064258,
-        "alphaZeroPercent": 67.66370137532552,
-        "alphaAbove245": 486404,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           213,
           117,
           748,
           1469
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1081,26 +919,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2074465,
-        "mode": "RGBA",
+        "sha256": "89f32778b7568347fe8f78f90631de93a0297b627fa5cd4f6d59a119402f8967",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 986998,
-        "alphaZeroPercent": 62.75164286295573,
-        "alphaAbove245": 555200,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           197,
           31,
           834,
           1490
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1160,26 +990,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2029535,
-        "mode": "RGBA",
+        "sha256": "31e9e5899925e3369f5b6b603a7a002bd07a461d6f3dab7a8ded965c288433ca",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 991061,
-        "alphaZeroPercent": 63.009961446126304,
-        "alphaAbove245": 542268,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           203,
           21,
           829,
           1515
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1220,7 +1042,8 @@
       "category": "prop",
       "availableStates": [
         "static"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "prop-evahelmet-heavy",
@@ -1238,26 +1061,18 @@
         "width": 1536,
         "height": 1024,
         "bytes": 2015661,
-        "mode": "RGBA",
+        "sha256": "b85c448ea05a39a071febfb3e09b8c9786c76c082c957b44abc5ac9d4f224250",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 952808,
-        "alphaZeroPercent": 60.577901204427086,
-        "alphaAbove245": 600217,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           331,
           13,
           1183,
           1015
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1292,7 +1107,8 @@
       "category": "prop",
       "availableStates": [
         "static"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "daniels-eva",
@@ -1311,26 +1127,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1829019,
-        "mode": "RGBA",
+        "sha256": "22e7bb3b400cc38f4278717745fd0ecbe01f141e7a2caa6c17d70f7dfbe2c904",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1155821,
-        "alphaZeroPercent": 73.48512013753255,
-        "alphaAbove245": 387039,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           293,
           16,
           716,
           1500
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1381,26 +1189,18 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1832546,
-        "mode": "RGBA",
+        "sha256": "7f23b3db805c3afd68fc50760c84edeba55afada825c9bad1175f2c033d048e6",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1141977,
-        "alphaZeroPercent": 72.60494232177734,
-        "alphaAbove245": 395782,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           318,
           16,
           725,
           1511
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1450,26 +1250,18 @@
         "width": 1312,
         "height": 1199,
         "bytes": 1707857,
-        "mode": "RGBA",
+        "sha256": "4fba306b22d426979eaf45ad8baea1fc7e971f4f5f6f8692d981f0b0888b68d5",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 800333,
-        "alphaZeroPercent": 50.876556174861165,
-        "alphaAbove245": 755904,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
           24,
           1089,
           1174
-        ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
         ]
       },
       "inputReferences": [
@@ -1544,7 +1336,8 @@
           993
         ]
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "prop-cargoLifter",
@@ -1621,18 +1414,357 @@
         }
       ],
       "generationPrompt": "Create one single isolated game prop sprite reproducing the CLOSED BRONZE ENGINEER AMPULE on the LEFT of the attached photograph. It is the familiar Engineer storage vessel shared by Prometheus and Alien: Covenant. Only reproduce the main bronze outer container, NOT either of the clear inner glass vials. Match the photographed container extremely closely: tall gently barrel-shaped metal cylinder, slightly wider above its middle and narrowing toward both the flat circular top and smaller flat bottom; flat slightly dark top disk; subtle horizontal lid seam about one third down from the top; three long slightly irregular vertical columns of incised alien glyphs on its facing surface; muted aged bronze-gold metallic patina with fine hammer texture, subtle scuffs and dim edges. No handles, no flared neck, no round lid knob, no extra black liquid, no human symbols or new ornamental pattern. Keep the nearly frontal slight three-quarter angle of this exact photo. Full object, clean readable silhouette with 8 percent clear space at every side. High detail realistic 2D production game sprite, faithful proportions and patina, neutral cinematic lighting. Transparent PNG, all outside pixels fully alpha zero, no backdrop, no floor or shadow, no stand, no caption, no watermark, no other objects.",
+      "alphaQA": {
+        "width": 1199,
+        "height": 1312,
+        "bytes": 1362064,
+        "sha256": "d65dff2b821f18f2f01ea767d7e6452c7915bfc71ce8c4962536854be559cdc5",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1043584,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          336,
+          43,
+          857,
+          1266
+        ]
+      },
+      "animationsVerified": false
+    },
+    {
+      "id": "facehugger",
+      "path": "assets/openai/sprites/alien-covenant-v011/facehugger.png",
+      "gitBlobSha": "806180d23d46492f3282fb5d38f7f178a868449e",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": "facehugger-v2",
+      "verified1to1": false,
+      "category": "creature",
+      "availableStates": [
+        "idle"
+      ],
+      "visualReview": "Anatomy orientation correction: dorsal surface upward for crawling; ventral mouth no longer exposed on the back. Dorsal surface reconstructed conservatively because film references chiefly show underside.",
+      "limitations": [
+        "reference-guided, not certified 1:1"
+      ],
+      "alphaQA": {
+        "width": 2172,
+        "height": 724,
+        "bytes": 772276,
+        "sha256": "de72f31ae6dd591bb7a6ff33ce86ee2ec09a3647faad46cb14c6190a25f6ad8c",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1287431,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          34,
+          241,
+          2150,
+          590
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "facehugger-final-wall.jpg",
+          "url": "https://www.framestore.com/sites/default/files/styles/image_gallery_mob_688x_387_/public/2022-07/alien%20covenant%20image%207.jpg?h=4ffac15b&itok=Qi-hhoSG",
+          "source_page": "https://www.framestore.com/work/alien-covenant",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 18483,
+          "sha256": "19b5fab5269de828fc207e8ac1fdfb2a0e4111af1331b9694a457fbbeead3013"
+        },
+        {
+          "file": "facehugger-final-underside.jpg",
+          "url": "https://www.framestore.com/sites/default/files/styles/image_gallery_mob_688x_387_/public/2022-07/alien%20covenant%20image%206.jpg?h=4ffac15b&itok=H_vIiJr2",
+          "source_page": "https://www.framestore.com/work/alien-covenant",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 22264,
+          "sha256": "0982bc1b0bb9d04dbfc87e36b5a40bf704da39607cb6aa815f706652fd628d70"
+        }
+      ],
+      "generationPrompt": "Correct the SECOND image, the isolated Facehugger game sprite, using the FIRST final-film still only as anatomy/material reference. The current sprite incorrectly places the ventral mouth on its upper back while posing as a walking animal. Fix that anatomical orientation: show the creature crawling naturally RIGHT with its DORSAL SIDE uppermost and its ventral mouth facing DOWN toward the implied ground, hidden beneath the body. The visible top of the flattened central body must be continuous pale wrinkled leathery flesh with restrained natural ridges, not an open mouth or pink ventral aperture. Paired breathing sacs belong low on the underside and can remain partially visible from the side. Preserve the reference's eight articulated finger-like legs, natural extra joint segments, small hooked tips, long full muscular tail extending to LEFT, coloration and realistic fine skin detail. Put all feet naturally below or beside the body; no upside-down torso. Use a low near-side profile with only a slight view of the top so this anatomical correction reads clearly. Preserve the complete overall silhouette size and one-object composition; keep all8leg tips and entire tail fully inside the image. This is the film's creature repositioned, not a new design or toy. No human, attachment, blood, egg, wall, floor, cobweb, stand, shadow, fog, vignette, text or checkerboard. True transparent alpha0 background, effectively opaque body, narrow silhouette antialias only. Clean cutout without a white fringe.",
+      "revisionPrompts": [
+        {
+          "version": "facehugger",
+          "prompt": "Create ONE complete isolated FACEHUGGER creature from Alien: Covenant (2017), using the TWO attached final-film Framestore stills as the sole design references. Match the film's pale beige-ivory leathery organic skin, subtle wrinkles and muted brown-grey detail, flattened central body with paired rounded breathing-sac forms, eight long finger-like articulated legs with the Covenant version's extra joints and small hooked tips, and one very long tapering muscular tail. Keep it organic and plausible, never a mechanical spider, crab shell, toy, generic insect or new redesign. Reconstruct the scarcely shown upper surface conservatively from the film shape, with restrained flesh folds only.\n\nPOSE: one stationary crawling/idle game sprite facing RIGHT, low to an implied ground line. Near side profile with a slight elevated three-quarter view so the body and all eight legs can be distinguished. Front leg tips point right, legs splay naturally to support the low body, and the entire long tail extends back toward LEFT with one gentle curve. Fit the complete tail, all leg tips and whole body safely inside the canvas. The overall tail-to-front span is much wider than the body height, suitable for an approx195:42 logical game footprint. Single coherent creature only, no egg, no second view.\n\nNeutral soft lighting, sharp realistic detail, clean dry anatomy. Do not show a person, human face, attachment to a host, wounds, blood, environment, wall, floor, cobwebs, stand, shadow, haze, white veil, checkerboard, text or watermark. Output a genuine transparent alpha background: all non-creature pixels alpha0, body effectively opaque, narrow contour antialiasing only. No background color or fringe."
+        },
+        {
+          "version": "facehugger-v2",
+          "prompt": "Correct the SECOND image, the isolated Facehugger game sprite, using the FIRST final-film still only as anatomy/material reference. The current sprite incorrectly places the ventral mouth on its upper back while posing as a walking animal. Fix that anatomical orientation: show the creature crawling naturally RIGHT with its DORSAL SIDE uppermost and its ventral mouth facing DOWN toward the implied ground, hidden beneath the body. The visible top of the flattened central body must be continuous pale wrinkled leathery flesh with restrained natural ridges, not an open mouth or pink ventral aperture. Paired breathing sacs belong low on the underside and can remain partially visible from the side. Preserve the reference's eight articulated finger-like legs, natural extra joint segments, small hooked tips, long full muscular tail extending to LEFT, coloration and realistic fine skin detail. Put all feet naturally below or beside the body; no upside-down torso. Use a low near-side profile with only a slight view of the top so this anatomical correction reads clearly. Preserve the complete overall silhouette size and one-object composition; keep all8leg tips and entire tail fully inside the image. This is the film's creature repositioned, not a new design or toy. No human, attachment, blood, egg, wall, floor, cobweb, stand, shadow, fog, vignette, text or checkerboard. True transparent alpha0 background, effectively opaque body, narrow silhouette antialias only. Clean cutout without a white fringe."
+        }
+      ],
+      "animationsVerified": false
+    },
+    {
+      "id": "facehugger-attack",
+      "path": "assets/openai/sprites/alien-covenant-v011/facehugger-attack.png",
+      "gitBlobSha": "9b4ae74c901d57b3c51091d24240dbb23519ce17",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": "original",
+      "verified1to1": false,
+      "category": "creature",
+      "availableStates": [
+        "lunge"
+      ],
+      "visualReview": "Primary Framestore wall/underside final stills plus corrected crawl sprite for consistency. Forward grasping airborne angle reconstructed; ventral surface faces forward rather than placed on dorsal back.",
+      "limitations": [
+        "reference-guided, not certified 1:1"
+      ],
+      "alphaQA": {
+        "width": 1913,
+        "height": 822,
+        "bytes": 927076,
+        "sha256": "ce38e9cede7f4226bd48123d05c82aa74387a56bb8ca96ed4ea7ac274f7266b6",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 1221029,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          24,
+          11,
+          1881,
+          664
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "facehugger-final-wall.jpg",
+          "url": "https://www.framestore.com/sites/default/files/styles/image_gallery_mob_688x_387_/public/2022-07/alien%20covenant%20image%207.jpg?h=4ffac15b&itok=Qi-hhoSG",
+          "source_page": "https://www.framestore.com/work/alien-covenant",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 18483,
+          "sha256": "19b5fab5269de828fc207e8ac1fdfb2a0e4111af1331b9694a457fbbeead3013"
+        },
+        {
+          "file": "facehugger-final-underside.jpg",
+          "url": "https://www.framestore.com/sites/default/files/styles/image_gallery_mob_688x_387_/public/2022-07/alien%20covenant%20image%206.jpg?h=4ffac15b&itok=H_vIiJr2",
+          "source_page": "https://www.framestore.com/work/alien-covenant",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 22264,
+          "sha256": "0982bc1b0bb9d04dbfc87e36b5a40bf704da39607cb6aa815f706652fd628d70"
+        }
+      ],
+      "generationPrompt": "Create ONE airborne attack-pose sprite of the SAME Alien: Covenant (2017) Facehugger. The FIRST TWO attached images are authoritative Framestore final-film stills; the THIRD image is the matching corrected crawling sprite and controls consistent body proportions, pale beige leathery material and tail. Keep the film creature's eight long finger-like articulated legs with additional joints and hooked tips, flattened organic central body, paired low breathing sacs and one complete long tapering muscular tail.\n\nPOSE: a forward leap toward the RIGHT, seen from a restrained side three-quarter view. The central body tilts nearly upright with the ventral surface aimed toward RIGHT and slightly toward the camera, as it prepares to grasp. All eight legs extend and curl forward toward the RIGHT, in a natural open grasping arc; their tips are individually readable. The ventral central anatomy matches the film close-up and belongs on the forward-facing underside, not the dorsal back. The full long tail streams behind toward LEFT in a shallow energetic curve. No target, no host, no contact, no detached parts. Show one full airborne animal with all eight leg tips and entire tail safely inside the canvas with transparent padding. No ground-touching idle stance. Neutral soft lighting and sharply readable realistic details. Keep the anatomy consistent with the third image, without toy joints, plastic construction or invented armor.\n\nNo human, face, wound, blood, egg, environment, wall, floor, cobweb, stand, shadow, motion blur, haze, vignette, white veil, checkerboard, labels or text. Genuine alpha0 transparent background, effectively opaque creature, narrow silhouette antialias only. Clean compositing-ready cutout.",
+      "revisionPrompts": [],
+      "animationsVerified": false
+    },
+    {
+      "id": "prop-flare",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-flare.png",
+      "gitBlobSha": "475891c3f7730a5a850bc99cca7989477d07edc5",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "category": "prop",
+      "availableStates": [
+        "static"
+      ],
+      "runtimeAdmission": "candidate",
+      "visualReview": "Full isolated prop. Printed graphics corrected against the photographed original.",
+      "limitations": [
+        "The prop's tiny printed legend may be approximated by generation; not verified 1:1."
+      ],
+      "inputReferences": [
+        {
+          "url": "https://dygtyjqp7pi0m.cloudfront.net/i/54376/44929150_1.jpg?v=8DA35CEABCC3B10"
+        },
+        {
+          "url": "https://www.icollector.com/Alien-Covenant-2017-P15-Phosphorus-Flare_i44929150"
+        }
+      ],
+      "generationPrompt": "Create ONE isolated realistic production game prop sprite with exact visible source shapes, materials and proportions. Use only the requested item in the reference. Full intact object centered with generous clean transparent padding on every side. True transparent PNG: alpha zero outside the physical object, no floor, no shadows, no framing, no environment, no added text, no unrelated objects, no sprite sheet. Subject: the inert closed cylindrical P15 PHOSPHORUS FLARE movie prop in the FIRST of the two references, used in Alien: Covenant. This is only an unlit exterior prop. Faithfully copy the smooth slim brushed pale-silver cylinder, rounded upper cap and thin metal bottom seam. Keep the photographed diagonal top-left to bottom-right angle and full object. Exact dark-red elongated rectangular label with the large white P15 at its upper end, thin red stripes along the length; black condensed PHOSPHORUS FLARE lettering on the silver surface aligned to its long axis. Preserve the small legible cap-release legend when possible. No flames, fire, smoke, exposed internal components, diagrams, hands, display stand or auction watermark. Pure photographic clean cutout, single object.",
+      "revisionPrompts": [
+        {
+          "version": 2,
+          "prompt": "Edit the second attached image, the isolated P15 movie-prop cylinder, using the FIRST attached photograph as the authoritative appearance reference. This is a fidelity correction to the exterior printed graphic only. Keep the physical silver cylinder, its scale, full visible ends, same diagonal pose and clean transparent background unchanged. Correct the printed layout to match the photographed actual Alien: Covenant prop. The LONG dark-red stripe extends along almost the FULL printable cylinder length, parallel to its axis, with the negative pale P15 lettering AT THE START of that long red stripe, not contained in a small separate red box. The black words PHOSPHORUS FLARE form a SEPARATE PARALLEL ROW on the bare silver alongside the long red stripe, exactly like the first photo. The original design has thin parallel red/white lines along that stripe and a pointed/slanted termination at its far end. It does NOT have a short red P15 block followed immediately inline by PHOSPHORUS FLARE as in the second image. Match the exact two parallel rows of the first reference, preserving its relative font weight, spacing, long stripe shape and red tone. Keep only the inert closed exterior prop; do not add fire, hands, parts or instructional callouts. No auction watermark, backdrop, halo or shadow. Keep all outside pixels alpha zero, with natural narrow antialiasing only, one complete transparent PNG sprite."
+        }
+      ],
       "alphaQA": null,
+      "animationsVerified": false
+    },
+    {
+      "id": "prop-drawing-ammonite",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-drawing-ammonite.png",
+      "gitBlobSha": "ece1e0efcac3573a02952ebf3e1597de1a510e0c",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "category": "prop",
+      "availableStates": [
+        "static"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "visualReview": "Full isolated prop. Prop drawing compared with original auction photo.",
+      "limitations": [
+        "Catalogue variant only until a specific drawing placement is matched.",
+        "Fine charcoal strokes are reconstructed rather than pixel-identical to the original prop."
+      ],
+      "inputReferences": [
+        {
+          "url": "https://images.propstore.com/4ea0324fcc17a46a08ae664f991ea8f9-1.jpeg"
+        },
+        {
+          "url": "https://propstoreauction.com/lot-details/index/catalog/399/lot/145722"
+        }
+      ],
+      "generationPrompt": "Create ONE isolated realistic production game prop sprite with exact visible source shapes, materials and proportions. Use only the requested item in the reference. Full intact object centered with generous clean transparent padding on every side. True transparent PNG: alpha zero outside the physical object, no floor, no shadows, no framing, no environment, no added text, no unrelated objects, no sprite sheet. Subject: ONLY the single landscape paper sheet at the UPPER RIGHT of the most recent reference photo of six original David cave drawings from Alien: Covenant. Reproduce that exact sheet: aged ivory parchment with slightly irregular fragile edges, a dense black charcoal/graphite circular AMMONITE / coiled spiral shell study with large dark broken rim, fine radiating ribs and central tight spiral. Keep the natural imperfections and dense crosshatched original aesthetic. Front-on view of the single paper rectangle, corners and paper texture intact. Do not reproduce any of the five other sheets, no anatomical human figures, no notebook binding, no pins, no collage, no caption, no extra handwriting. The paper itself is opaque and warm off-white; everything beyond its physical uneven edge is transparent. This is a faithful isolated flat game prop of the photographed artwork, not a newly invented illustration.",
+      "revisionPrompts": [],
+      "alphaQA": {
+        "width": 1409,
+        "height": 1116,
+        "bytes": 2769690,
+        "sha256": "19a318d20d675dccd044befb1a38355a567d756b69082b9dc43353c784e59699",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 496462,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          135,
+          90,
+          1264,
+          1035
+        ]
+      },
+      "animationsVerified": false
+    },
+    {
+      "id": "prop-drawing-arthropod",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-drawing-arthropod.png",
+      "gitBlobSha": "e0769611310b3cf473c9bbda0485fc0e59b6bee2",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "category": "prop",
+      "availableStates": [
+        "static"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "visualReview": "Full isolated prop. Prop drawing compared with original auction photo.",
+      "limitations": [
+        "Catalogue variant only until a specific drawing placement is matched.",
+        "Fine graphite strokes are reconstructed rather than pixel-identical to the original prop."
+      ],
+      "inputReferences": [
+        {
+          "url": "https://images.propstore.com/4ea0324fcc17a46a08ae664f991ea8f9-1.jpeg"
+        },
+        {
+          "url": "https://propstoreauction.com/lot-details/index/catalog/399/lot/145722"
+        }
+      ],
+      "generationPrompt": "Create ONE isolated realistic production game prop sprite with exact visible source shapes, materials and proportions. Use only the requested item in the reference. Full intact object centered with generous clean transparent padding on every side. True transparent PNG: alpha zero outside the physical object, no floor, no shadows, no framing, no environment, no added text, no unrelated objects, no sprite sheet. Subject: ONLY the single landscape paper sheet at the UPPER LEFT of the most recent photo of six original David cave drawings from Alien: Covenant, just below and left of the tiny handwritten sheet. Reproduce this exact isolated artwork: one dark finely drawn arched segmented caterpillar/centipede-like arthropod specimen with many narrow spines, short small legs and a long narrow trailing feeler extending toward lower right. Dense black graphite and thin ink hatching on aged warm ivory rectangular paper with slight uneven edges. Keep exactly one specimen at the same angle, lots of original empty paper around it. Front-on view of the entire single sheet. Do not include the five other drawings, no humans, no binder, no labels, no made-up paragraphs, no decorative composition. Physical paper is fully opaque, clean alpha-zero background beyond its edges.",
+      "revisionPrompts": [],
+      "alphaQA": {
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2508077,
+        "sha256": "3b7c672178c469db90e6c3dcec22e162886d1ec844e441f645cf28cd3d5b7a49",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 604327,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          131,
+          141,
+          1395,
+          892
+        ]
+      },
+      "animationsVerified": false
+    },
+    {
+      "id": "prop-terraformer",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-terraformer.png",
+      "gitBlobSha": "8bd75d3dae7d36f10c6d08266e9012c0b734b12c",
+      "generationTool": "existing-project-asset",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "category": "vehicle",
+      "availableStates": [
+        "static"
+      ],
+      "reusedFrom": "assets/openai/equipment/v122-vehicles/covenant-terraforming-truck-reference-native-v122.png",
+      "visualReview": "Existing Covenant truck asset inspected; original pixels retained.",
+      "limitations": [
+        "Previously generated native project asset reused; exact source-image provenance is being recovered.",
+        "No pixel-perfect film comparison established."
+      ],
       "animationsVerified": false
     }
   ],
   "blocked": [
     {
       "id": "weapon-f90",
-      "reason": "Image generation rejected by automatic output moderation; no PNG produced."
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-beretta",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-ar15",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-eaa",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-shotgun",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "xenomorph",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "other"
     },
     {
       "id": "weapon-sl40",
-      "reason": "F90-derived visual variant not attempted after F90 moderation rejection."
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-f90",
+      "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+    },
+    {
+      "id": "weapon-inox",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-beretta",
+      "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+    },
+    {
+      "id": "xenomorph-attack",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "xenomorph",
+      "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
     },
     {
       "id": "prop-classicalstatue",
@@ -1640,5 +1772,5 @@
       "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
     }
   ],
-  "integrationStatus": "Pending recovered-module verification; this checkpoint contains assets only."
+  "integrationStatus": "Original v0.10 runtime restored with rendering adapters; browser and full host verification pending."
 }

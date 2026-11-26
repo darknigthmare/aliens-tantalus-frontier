@@ -1,9 +1,11 @@
-# Alien: Covenant — production des sprites V0.11
+# Covenant v0.11 — production en cours
 
-Checkpoint de production : 12 PNG originaux sauvegardés. Le module Covenant est le seul périmètre de ce lot.
+31 PNG sélectionnés à ce checkpoint. La couverture n’est pas encore complète : personnages secondaires et mobilier en cours. Les PNG d’essai ont été retirés de l’arbre courant ; ils restent conservés dans l’historique Git.
 
-Les sprites sont guidés par des références du film, de ses créateurs et des objets de production. Les parties non visibles et les poses de jeu sont des reconstructions ; aucune certification 1:1 n’est revendiquée.
+Les sources visuelles, prompts exacts, empreintes et limites sont consignés dans `assets/openai/sprites/alien-covenant-v011/manifest.json`. Aucun asset n’est certifié pixel-identique au film. Les variantes sans placement validé sont signalées `catalogue-only`.
 
-Le catalogue `assets/openai/sprites/alien-covenant-v011/manifest.json` conserve les prompts, références, limites et contrôles réellement effectués. Ce checkpoint ne déclare pas d’intégration jouable ni de validation des animations.
+Le runtime original v0.10 est conservé : 22 fichiers d’origine, 992906 octets avant les seuls raccords de scripts et la version visible. Les empreintes sont dans `RUNTIME_SOURCE_V011.json`.
 
-Le F90 a été refusé par la modération de sortie de l’outil d’image, sans PNG. La variante F90/SL40 n’a pas été tentée. Les autres sujets restent en production.
+Les armes F90, Beretta, AR15, EAA et shotgun ainsi que le Xénomorphe ont subi un refus du générateur. Les variantes SL40, Inox et attaque du Xénomorphe n’ont pas été retentées après ces refus. La statue de David a également été refusée. Ces éléments ne sont pas comptés comme produits.
+
+Vérification actuelle : contrôles PNG et revue visuelle par lots ; 17 tests des adaptateurs réussis avec Image/Canvas simulés. Le parcours réel du DLC et les vérifications complètes du projet restent à exécuter.
