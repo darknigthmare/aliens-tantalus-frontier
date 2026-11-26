@@ -56,6 +56,43 @@ export const ALIENS1986_RASTER_SOURCE_SHA256_V116 = Object.freeze({
   'scripts/derive-aliens1986-raster-v116.mjs': '2dbd40d44678f028c865ea03bc99bfc020adce38b5f8465294949f745ad76434',
   'docs/development/aliens-1986-sprites-v116/manifest.json': 'b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6',
 });
+// V117 appends seven prop images without rewriting the four V116 receipts.
+// Only the derivation tool continues; loader, renderer and base manifest do not.
+export const ALIENS1986_RASTER_BASELINE_V117 = '5f38b7bad2c6401424b23fda11aeb86068f0f354';
+export const ALIENS1986_RASTER_SOURCE_SUCCESSORS_V117 = Object.freeze({
+  'scripts/derive-aliens1986-raster-v116.mjs': Object.freeze({
+    previousSha256: '2dbd40d44678f028c865ea03bc99bfc020adce38b5f8465294949f745ad76434',
+    currentSha256: '3b053e26bc98a62b9332554b31e28a7f40172e7e0337e94c45c9eab5551a328a',
+  }),
+});
+export const ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117 = Object.freeze([
+  'scripts/qa-aliens1986-props-v117.py',
+  'docs/development/aliens-1986-sprites-v117/manifest.json',
+  'docs/development/aliens-1986-sprites-v117/index.html',
+  'docs/development/aliens-1986-sprites-v117/README.md',
+  'docs/development/aliens-1986-sprites-v117/references.md',
+  'docs/development/aliens-1986-sprites-v117/generation-ledger.json',
+]);
+export const ALIENS1986_RASTER_SOURCE_SHA256_V117 = Object.freeze({
+  // The reviewed supplement is pinned independently of the V116 base manifest.
+  'docs/development/aliens-1986-sprites-v117/manifest.json': '09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62',
+});
+// Keep this supplement closed without loading its manifest in sparse checkouts.
+export const ALIENS1986_RASTER_ASSET_ROOT_V117 = 'assets/dlc/aliens-1986/v117';
+export const ALIENS1986_RASTER_ASSET_FILES_V117 = Object.freeze([
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/architecture/door-leaf-damaged.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/architecture/door-leaf-reinforced.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/architecture/door-leaf-breached.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/props/meal-tray-food.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/props/supply-case-medical-empty.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/props/supply-case-ammo-closed.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/props/supply-case-ammo-empty.png',
+]);
+export const ALIENS1986_RASTER_ASSET_DIRECTORIES_V117 = Object.freeze([
+  ALIENS1986_RASTER_ASSET_ROOT_V117,
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/architecture',
+  ALIENS1986_RASTER_ASSET_ROOT_V117 + '/props',
+]);
 const checkoutRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const validPath = path => typeof path === 'string' && path.length > 0
@@ -108,6 +145,12 @@ export function aliens1986RecoveryFile(path) {
 /** null delegates unrelated modules to the established release policy. */
 export function publicAliens1986DlcPathAdmission(path, { directory = false, built = false } = {}) {
   if (!validPath(path)) return false;
+  if (path === ALIENS1986_RASTER_ASSET_ROOT_V117 || path.startsWith(ALIENS1986_RASTER_ASSET_ROOT_V117 + '/')) {
+    return directory ? ALIENS1986_RASTER_ASSET_DIRECTORIES_V117.includes(path) : ALIENS1986_RASTER_ASSET_FILES_V117.includes(path);
+  }
+  if (ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117.includes(path)) return !built && !directory;
+  if (path === 'docs/development/aliens-1986-sprites-v117') return !built && directory;
+  if (path.startsWith('docs/development/aliens-1986-sprites-v117/')) return false;
   if (ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116.includes(path)) return !built && !directory;
   if (['modules/aliens-1986/v116', 'docs/development/aliens-1986-sprites-v116'].includes(path)) return !built && directory;
   if (path.startsWith('modules/aliens-1986/v116/') || path.startsWith('docs/development/aliens-1986-sprites-v116/')) return false;
@@ -145,13 +188,50 @@ async function checkedFile(root, relative) {
   return readFile(join(root, relative));
 }
 
+export function reviewedAliens1986RasterDigestV117(path, endpoint) {
+  const receipt = ALIENS1986_RASTER_SOURCE_SUCCESSORS_V117[path];
+  if (!receipt) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken Aliens 1986 presentation predecessor: ' + path);
+  assert.match(receipt.currentSha256, /^[a-f0-9]{64}$/, 'Unreviewed Aliens 1986 presentation successor: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens 1986 presentation successor must change bytes: ' + path);
+  return receipt.currentSha256;
+}
+
 export async function verifyAliens1986RasterSourcesV116(sourceRoot = checkoutRoot) {
   const base = resolve(sourceRoot);
-  for (const [path, expected] of Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V116)) {
+  const inputs = [
+    ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V116).map(([path, previous]) =>
+      [path, reviewedAliens1986RasterDigestV117(path, previous)]),
+    ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V117),
+  ];
+  for (const [path, expected] of inputs) {
     assert.match(expected, /^[a-f0-9]{64}$/, 'Unreviewed Aliens 1986 presentation source: ' + path);
     assert.equal(digest(await checkedFile(base, path)), expected, 'Changed Aliens 1986 presentation source: ' + path);
   }
-  return { presentationSources: Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V116).length };
+  return { presentationSources: inputs.length };
+}
+
+async function verifyAliens1986RasterTreeV117(root, assets) {
+  const prefix = ALIENS1986_RASTER_ASSET_ROOT_V117 + '/';
+  assert.deepEqual(assets.filter(asset => asset.path.startsWith(prefix)).map(asset => asset.path).sort(),
+    [...ALIENS1986_RASTER_ASSET_FILES_V117].sort(), 'Unapproved Aliens 1986 V117 raster inventory.');
+  const seen = new Set();
+  async function walk(directory) {
+    await assertDirectory(join(root, directory));
+    for (const entry of await readdir(join(root, directory), { withFileTypes: true })) {
+      const path = directory + '/' + entry.name;
+      assert.equal(entry.isSymbolicLink(), false, 'Aliens 1986 V117 raster symlink: ' + path);
+      assert.equal(publicAliens1986DlcPathAdmission(path, { directory: entry.isDirectory() }), true,
+        'Unapproved Aliens 1986 V117 raster member: ' + path);
+      if (entry.isDirectory()) { await walk(path); continue; }
+      assert.ok(entry.isFile(), 'Invalid Aliens 1986 V117 raster member: ' + path);
+      seen.add(path);
+    }
+  }
+  await walk(ALIENS1986_RASTER_ASSET_ROOT_V117);
+  for (const path of ALIENS1986_RASTER_ASSET_FILES_V117) {
+    assert.ok(seen.has(path), 'Missing Aliens 1986 V117 raster member: ' + path);
+  }
 }
 
 export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot, built = false } = {}) {
@@ -179,6 +259,7 @@ export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot,
     }
   }
   assert.ok(Array.isArray(derivative.assets) && derivative.assets.length > 0, 'Aliens 1986 derivative has no raster inventory.');
+  await verifyAliens1986RasterTreeV117(base, derivative.assets);
   const seen = new Set();
   // The pinned manifest is the closed asset list, including reviewed host PNGs.
   // Each path stays under assets and every byte is checked independently.
@@ -195,6 +276,7 @@ export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot,
     runtimeFiles: ALIENS1986_RUNTIME_FILES.length, runtimeBytes: totalBytes,
     gameSha256: expectedGameSha256, originalGameSha256: ALIENS1986_GAME_SHA256,
     rasterAssets: seen.size, rasterRevision: built ? 116 : null,
+    rasterAssetRevision: derivative.assetRevision,
   };
 }
 

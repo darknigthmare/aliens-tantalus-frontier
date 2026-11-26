@@ -1,0 +1,231 @@
+{
+  "schema": "aliens1986-raster-supplement-v117",
+  "version": 117,
+  "presentationVersion": 116,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "5f38b7bad2c6401424b23fda11aeb86068f0f354",
+  "baseManifest": {
+    "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+    "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+    "assetCount": 123
+  },
+  "counts": {
+    "base": 123,
+    "added": 7,
+    "total": 130
+  },
+  "addedBytes": 15682758,
+  "filmFidelityValidated": false,
+  "notes": [
+    "Seven newly generated functional prop states derived from three published V115 references; not recovered original files.",
+    "The V116 manifest and its 123 original asset records remain byte-identical. The presentation renderer remains V116.",
+    "Each PNG contains one static state. No animation cycle or exact film replica is certified.",
+    "The original 20 PNG and 53 documents previously inventoried locally were not recovered in this session."
+  ],
+  "assets": [
+    {
+      "id": "door-leaf-damaged",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-damaged.png",
+      "sha256": "a8f4c202b50eacc5fac67cdedbba47c283fcbeb33077450a03f1180dafedf5d5",
+      "bytes": 2269157,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        127,
+        38,
+        896,
+        1504
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        511.5,
+        1504
+      ],
+      "label": "Battant endommagé",
+      "category": "architecture",
+      "pose": "damaged",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "door-leaf-reinforced",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-reinforced.png",
+      "sha256": "44facf80cbef7bee784d6c925d40419670bbc0a37dae090b086909f41c374567",
+      "bytes": 2352553,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        126,
+        36,
+        896,
+        1504
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        511.0,
+        1504
+      ],
+      "label": "Battant renforcé",
+      "category": "architecture",
+      "pose": "reinforced",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "door-leaf-breached",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-breached.png",
+      "sha256": "055e68b4014d5040eaaef50649ecc9dc73d2310b5441fa331e313c3b49c41eb0",
+      "bytes": 2187687,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        124,
+        33,
+        898,
+        1503
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        511.0,
+        1503
+      ],
+      "label": "Battant éventré",
+      "category": "architecture",
+      "pose": "breached",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "meal-tray-food",
+      "path": "assets/dlc/aliens-1986/v117/props/meal-tray-food.png",
+      "sha256": "cd0f41e0fe33f279a0115308da46db2c036dba6e681176fe2ac5e6d05be20f26",
+      "bytes": 2160552,
+      "width": 1671,
+      "height": 941,
+      "bbox": [
+        23,
+        112,
+        1649,
+        848
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        836.0,
+        848
+      ],
+      "label": "Sulaco — plateau garni",
+      "category": "props",
+      "pose": "food",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "supply-case-medical-empty",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-medical-empty.png",
+      "sha256": "e5afb1bd9bf62b869af49b6bf9ebc7f2f854cc241b2f693695c6b6f7b9ffc49e",
+      "bytes": 2192057,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        24,
+        136,
+        1504,
+        963
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        764,
+        963
+      ],
+      "label": "Caisse médicale vide",
+      "category": "props",
+      "pose": "empty",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "supply-case-ammo-closed",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-closed.png",
+      "sha256": "fc6006bca4fe6129eea7a3c752f2c44b2fc4fc6c8e7a13fddbd577bac01ed497",
+      "bytes": 2345905,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        31,
+        83,
+        1505,
+        968
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        768,
+        968
+      ],
+      "label": "Caisse de munitions fermée",
+      "category": "props",
+      "pose": "closed",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "supply-case-ammo-empty",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-empty.png",
+      "sha256": "af91a6299d2579b75643df843f8f81348015f2d09089b4634f207ee60e68c000",
+      "bytes": 2174847,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        26,
+        111,
+        1503,
+        964
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        764.5,
+        964
+      ],
+      "label": "Caisse de munitions vide",
+      "category": "props",
+      "pose": "empty",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v117-reference-edit",
+      "pixelMode": "RGBA"
+    }
+  ]
+}

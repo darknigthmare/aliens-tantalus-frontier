@@ -6,7 +6,7 @@ import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {createSpriteStoreV116,validateSpriteEntriesV116} from '../modules/aliens-1986/v116/sprite-loader-v116.mjs';
 import {humanAssetIdV116,creatureAssetIdV116,propSelectionV116,installRasterRendererV116} from '../modules/aliens-1986/v116/raster-renderer-v116.mjs';
-import {renderAliens1986RasterV116,parseAliens1986RegistryV116,V114_HTML_PATH,V114_HTML_SHA256} from './derive-aliens1986-raster-v116.mjs';
+import {renderAliens1986RasterV116,parseAliens1986RegistryV116,V114_HTML_PATH,V114_HTML_SHA256,SUPPLEMENT_IDS_V117} from './derive-aliens1986-raster-v116.mjs';
 
 function entry(id,extra={}) {return {id,path:'assets/test/'+id+'.png',width:100,height:200,bbox:[10,20,90,190],pivot:[50,190],runtimeEligible:true,...extra};}
 function contextSpy() {
@@ -72,7 +72,7 @@ export function runPresentationUnitChecksV116() {
       prop(){this.fallbackProps++;}
       door(){this.originalDoors++;}
     }
-    const entries=['ripley-idle-right','ripley-walk-right','ripley-interact-right','ripley-gateway','newt-idle-right','m41a-pulse-rifle','door-leaf','door-leaf-breached','warrior-idle-right'].map(id=>entry(id));
+    const entries=['ripley-idle-right','ripley-walk-right','ripley-interact-right','ripley-gateway','newt-idle-right','m41a-pulse-rifle','door-leaf','warrior-idle-right',...SUPPLEMENT_IDS_V117].map(id=>entry(id));
     entries.push(entry('warrior-death-right',{bbox:[10,120,90,190]}),entry('hicks-idle-right',{heldWeapon:true}));
     installRasterRendererV116(TestRenderer,entries,{fallbackWeapon:(c,...args)=>c.calls.push(['fallbackWeapon',...args])});
     const renderer=new TestRenderer(),before=JSON.stringify({world,ripley,session:renderer.session});
@@ -119,6 +119,35 @@ export function runPresentationUnitChecksV116() {
     assert.equal(renderer.c.calls.filter(a=>a[0]==='clip').length,1);
     assert.equal(renderer.c.calls.filter(a=>a[0]==='rect').length,2);
     assert.ok(renderer.c.calls.filter(a=>a[0]==='rect').every(a=>a[3]===5));checks++;
+    // These are existing V114 state fields; the V117 supplement only supplies
+    // the PNG keys that the unchanged V116 renderer already selects.
+    for(const [id,structural] of [
+      ['door-leaf-damaged',{hp:70,brace:0,breached:false}],
+      ['door-leaf-reinforced',{hp:70,brace:1,breached:false}],
+      ['door-leaf-breached',{hp:0,brace:0,breached:true}]
+    ]) {
+      renderer.c.calls.length=0;
+      const state={linkOpen:false,structural},beforeState=JSON.stringify(state);
+      assert.equal(renderer.rasterHatchSurfaceV116(gate,state),true);
+      assert.equal(renderer.c.calls.filter(a=>a[0]==='drawImage').length,1);
+      assert.ok(renderer.c.calls.find(a=>a[0]==='drawImage')[1].src.endsWith('/'+id+'.png'));
+      assert.equal(JSON.stringify(state),beforeState);checks++;
+    }
+    for(const [id,prop,room,collected] of [
+      ['meal-tray-food',{type:'meal'},'v114-sulaco-mess',[]],
+      ['supply-case-medical-empty',{type:'supply',stockId:'medical-a'},'v106-hadley',['medical-a']],
+      ['supply-case-ammo-closed',{type:'supply',stockId:'ammo-a'},'v106-hadley',[]],
+      ['supply-case-ammo-empty',{type:'supply',stockId:'ammo-a'},'v106-hadley',['ammo-a']]
+    ]) {
+      renderer.c.calls.length=0;renderer.session.logistics={collected};
+      const sceneWorld={...world,scene:{id:room,solids:[]}},placed={...prop,x:240,z:60};
+      const beforeState=JSON.stringify({prop:placed,world:sceneWorld,session:renderer.session});
+      renderer.prop(placed,sceneWorld,{});
+      assert.equal(renderer.fallbackProps,0);
+      assert.equal(renderer.c.calls.filter(a=>a[0]==='drawImage').length,1);
+      assert.ok(renderer.c.calls.find(a=>a[0]==='drawImage')[1].src.endsWith('/'+id+'.png'));
+      assert.equal(JSON.stringify({prop:placed,world:sceneWorld,session:renderer.session}),beforeState);checks++;
+    }
     assert.equal(renderer.rasterStatusV116().failed,0);
   } finally {
     if(previousImage===undefined)delete globalThis.Image;else globalThis.Image=previousImage;
@@ -135,10 +164,13 @@ export async function runPresentationChecksV116({root=process.cwd()}={}) {
   const presentationOnly=new Set(['preview/renderer.mjs','preview/app.mjs','src/fidelity-v114.mjs']);
   for(const [key,entry] of Object.entries(before))if(!presentationOnly.has(key))assert.deepEqual(after[key],entry,'Unrelated V114 module changed: '+key);
   assert.match(first.html,/<meta name="aliens-raster-version" content="116">/);
+  assert.match(first.html,/<meta name="aliens-raster-asset-version" content="117">/);
+  assert.equal(first.assetRevision,117);
+  assert.equal(first.assets.length,130);
   assert.match(after['preview/app.mjs'].source,/aliens_1986_v114_fidelity_checkpoint/);
   assert.match(after['src/arsenal-v114.mjs'].source,/schema:114/);
   assert.ok(!after['v116/sprite-loader-v116.mjs'].source.includes('fetch('),'Runtime must not fetch a manifest.');
-  return {ok:true,unitChecks:checks,deterministic:true,immutableBase:true,saveSchema:114,rasterVersion:116,assets:first.assets.length,sha256:first.sha256};
+  return {ok:true,unitChecks:checks,deterministic:true,immutableBase:true,saveSchema:114,rasterVersion:116,assetRevision:first.assetRevision,assets:first.assets.length,sha256:first.sha256};
 }
 if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
   process.stdout.write(JSON.stringify(await runPresentationChecksV116())+'\n');

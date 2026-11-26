@@ -1,0 +1,637 @@
+{
+  "schema": "aliens1986-generation-ledger-v117",
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "requested": 7,
+  "generated": 7,
+  "selected": 7,
+  "provenance": "New image edits using three exact published V115 PNGs as references. These outputs replace missing functional states but are not a recovery of original missing bytes.",
+  "publicReview": "The seven source-resolution outputs were visually inspected. Alpha, dimensions, bounding boxes, sizes and hashes were measured without altering pixels. Browser and CI results are documented separately in README.md and the pull request.",
+  "adaptations": [
+    "Damage, reinforcement and breach are game states of the project door, not documented measurements of a film set.",
+    "The medical plaque moves to the front on the open empty crate so its function remains readable.",
+    "Food type references support the meal vocabulary; quantity, cornbread and arrangement remain project interpretation."
+  ],
+  "filmFidelityValidated": false,
+  "assets": [
+    {
+      "id": "door-leaf-damaged",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-damaged.png",
+      "sha256": "a8f4c202b50eacc5fac67cdedbba47c283fcbeb33077450a03f1180dafedf5d5",
+      "bytes": 2269157,
+      "referenceAsset": {
+        "id": "door-leaf",
+        "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+        "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+        "bytes": 2540215,
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          127,
+          38,
+          896,
+          1504
+        ],
+        "pivot": [
+          511.5,
+          1504
+        ]
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one individual RGBA PNG state sprite for the Aliens (1986) game project.\nInput image: the supplied door-leaf.png is the exact edit target and the reference for all geometry, proportions, paint, material and lighting.\nPreserve the straight-on FRONT ORTHOGRAPHIC camera, tall portrait 1024 x 1536 framing, original outer panel silhouette and scale, clipped upper corners, broad upper and lower recessed fields, all horizontal structural rails, the central bolted service plate with horizontal ventilation louvers and its small rectangular recesses, and the thin bottom recesses. Do not move, resize or redesign the service plate. Do not add a surrounding door frame. The bottom edge stays at the original baseline.\nStyle: detailed realistic matte painted 2D practical industrial set metal; cold medium-grey steel, aged subdued grime, fine scratches and rubbed edges; soft neutral lighting identical to the source.\nOutput constraints: ONE complete door leaf only, all outer edges visible; true transparent alpha outside the object, no dark gradient, baked background, halo, vignette, floor, cast shadow, text, figure, detached debris, fire, sparks, smoke or particles. This is a documented functional state variation of an existing project asset, not a metric replica certification of a film set.\nChange only the local DAMAGE state. Add several shallow impact depressions and two clear bent creases in the broad upper and lower recessed metal fields, with small fresh dull-steel scrapes along their ridges and restrained edge scuffing. Keep the outer silhouette intact and leave the central ventilation/service plate exactly in place and readable. The entire door remains solid, continuous and closed: NO holes, cutouts, gaps through the sheet metal or loose pieces. Damage must read at small sprite scale without turning the door into a different design.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Ron Cobb colony air lock and operating room concept sketches",
+          "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/",
+          "kind": "production-concept",
+          "scope": "Design vocabulary only; the generated door and its damage/reinforcement states are project adaptations, not measured replicas."
+        },
+        {
+          "title": "Propstore — Sulaco docking bay model miniature components",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/386/lot/126558/Lot-470-Set-of-Sulaco-Docking-Bay-Model-Miniature-Components-ALIENS-1986",
+          "kind": "production-prop",
+          "scope": "Industrial materials and practical construction reference; not the exact Hadley's Hope door."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "reviewed",
+        "visualMatch": "Same frontal door layout, perimeter, service plate and ventilation louvers retained; shallow dents and two raised creases in upper/lower fields.",
+        "closedBarrier": true,
+        "serviceInsetPreserved": true,
+        "outerSilhouettePreserved": true,
+        "noSeparateDebrisOrScene": true,
+        "notes": [
+          "A single static damage state, not an animation.",
+          "Real exterior alpha verified; no transparent through-hole in the central sample points."
+        ],
+        "filmFidelityValidated": false
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          127,
+          38,
+          896,
+          1504
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          511.5,
+          1504
+        ]
+      },
+      "alphaMeasurement": {
+        "min": 0,
+        "max": 254,
+        "fullyTransparentPixels": 440125,
+        "nearlyOpaquePixels": 1117745,
+        "nonzeroBelow128": 10813,
+        "samples": {
+          "(0, 0)": 0,
+          "(64, 768)": 0,
+          "(960, 768)": 0,
+          "(512, 300)": 253,
+          "(512, 400)": 253,
+          "(512, 730)": 253,
+          "(512, 1100)": 253
+        }
+      },
+      "bboxDeltaFromSource": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "door-leaf-reinforced",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-reinforced.png",
+      "sha256": "44facf80cbef7bee784d6c925d40419670bbc0a37dae090b086909f41c374567",
+      "bytes": 2352553,
+      "referenceAsset": {
+        "id": "door-leaf",
+        "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+        "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+        "bytes": 2540215,
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          127,
+          38,
+          896,
+          1504
+        ],
+        "pivot": [
+          511.5,
+          1504
+        ]
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one individual RGBA PNG state sprite for the Aliens (1986) game project.\nInput image: the supplied door-leaf.png is the exact edit target and the reference for all geometry, proportions, paint, material and lighting.\nPreserve the straight-on FRONT ORTHOGRAPHIC camera, tall portrait 1024 x 1536 framing, original outer panel silhouette and scale, clipped upper corners, broad upper and lower recessed fields, all horizontal structural rails, the central bolted service plate with horizontal ventilation louvers and its small rectangular recesses, and the thin bottom recesses. Do not move, resize or redesign the service plate. Do not add a surrounding door frame. The bottom edge stays at the original baseline.\nStyle: detailed realistic matte painted 2D practical industrial set metal; cold medium-grey steel, aged subdued grime, fine scratches and rubbed edges; soft neutral lighting identical to the source.\nOutput constraints: ONE complete door leaf only, all outer edges visible; true transparent alpha outside the object, no dark gradient, baked background, halo, vignette, floor, cast shadow, text, figure, detached debris, fire, sparks, smoke or particles. This is a documented functional state variation of an existing project asset, not a metric replica certification of a film set.\nChange only the REINFORCEMENT state. Add two sturdy flat steel reinforcement bars, one across the upper broad recessed field and one across the lower broad recessed field, anchored to existing side rails by small practical bolted end plates. Use worn steel in a slightly darker grey than the panel, with restrained weld discoloration and believable small bolt heads. All bars and fixing plates stay inside the original panel perimeter. Keep the central service plate and ventilation louvers fully uncovered, in the exact original location. Preserve the original panel fields underneath these attached parts; no new hinges, handles, frame, yellow hazard strips or futuristic mechanisms. The door remains fully closed and solid.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Ron Cobb colony air lock and operating room concept sketches",
+          "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/",
+          "kind": "production-concept",
+          "scope": "Design vocabulary only; the generated door and its damage/reinforcement states are project adaptations, not measured replicas."
+        },
+        {
+          "title": "Propstore — Sulaco docking bay model miniature components",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/386/lot/126558/Lot-470-Set-of-Sulaco-Docking-Bay-Model-Miniature-Components-ALIENS-1986",
+          "kind": "production-prop",
+          "scope": "Industrial materials and practical construction reference; not the exact Hadley's Hope door."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "reviewed",
+        "visualMatch": "Same frontal door with two practical horizontal bolted steel bars across upper and lower fields. Service plate and louvers remain fully exposed.",
+        "closedBarrier": true,
+        "serviceInsetPreserved": true,
+        "outerSilhouettePreserved": true,
+        "noSeparateDebrisOrScene": true,
+        "notes": [
+          "Reinforcement is a functional project adaptation, not a documented exact film detail.",
+          "Alpha128 bounds differ from base by one pixel left and two pixels top."
+        ],
+        "filmFidelityValidated": false
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          126,
+          36,
+          896,
+          1504
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          511.0,
+          1504
+        ]
+      },
+      "alphaMeasurement": {
+        "min": 0,
+        "max": 254,
+        "fullyTransparentPixels": 434882,
+        "nearlyOpaquePixels": 1120579,
+        "nonzeroBelow128": 14031,
+        "samples": {
+          "(0, 0)": 0,
+          "(64, 768)": 0,
+          "(960, 768)": 0,
+          "(512, 300)": 253,
+          "(512, 400)": 253,
+          "(512, 730)": 253,
+          "(512, 1100)": 253
+        }
+      },
+      "bboxDeltaFromSource": [
+        -1,
+        -2,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "door-leaf-breached",
+      "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-breached.png",
+      "sha256": "055e68b4014d5040eaaef50649ecc9dc73d2310b5441fa331e313c3b49c41eb0",
+      "bytes": 2187687,
+      "referenceAsset": {
+        "id": "door-leaf",
+        "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+        "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+        "bytes": 2540215,
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          127,
+          38,
+          896,
+          1504
+        ],
+        "pivot": [
+          511.5,
+          1504
+        ]
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one individual RGBA PNG state sprite for the Aliens (1986) game project.\nInput image: the supplied door-leaf.png is the exact edit target and the reference for all geometry, proportions, paint, material and lighting.\nPreserve the straight-on FRONT ORTHOGRAPHIC camera, tall portrait 1024 x 1536 framing, original outer panel silhouette and scale, clipped upper corners, broad upper and lower recessed fields, all horizontal structural rails, the central bolted service plate with horizontal ventilation louvers and its small rectangular recesses, and the thin bottom recesses. Do not move, resize or redesign the service plate. Do not add a surrounding door frame. The bottom edge stays at the original baseline.\nStyle: detailed realistic matte painted 2D practical industrial set metal; cold medium-grey steel, aged subdued grime, fine scratches and rubbed edges; soft neutral lighting identical to the source.\nOutput constraints: ONE complete door leaf only, all outer edges visible; true transparent alpha outside the object, no dark gradient, baked background, halo, vignette, floor, cast shadow, text, figure, detached debris, fire, sparks, smoke or particles. This is a documented functional state variation of an existing project asset, not a metric replica certification of a film set.\nChange only the BREACHED state. Tear a large irregular opening through most of the broad UPPER recessed metal field above the central service plate, with a clearly visible genuinely empty aperture. Bend a few attached jagged metal lips around the opening, revealing dull torn steel thickness. Keep the outer side rails, clipped top corners, lower panel fields and central service/vent plate in their original positions so this is unmistakably the same door leaf. Keep the original complete outer silhouette coherent; nothing detached. The aperture must be REAL TRANSPARENT ALPHA through the door, just like the exterior transparency: no black or grey fill, no dark cavity illustration, no corridor or surface behind it. The opening should be wide and substantial, immediately readable as a through-breach at sprite scale.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Ron Cobb colony air lock and operating room concept sketches",
+          "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/",
+          "kind": "production-concept",
+          "scope": "Design vocabulary only; the generated door and its damage/reinforcement states are project adaptations, not measured replicas."
+        },
+        {
+          "title": "Propstore — Sulaco docking bay model miniature components",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/386/lot/126558/Lot-470-Set-of-Sulaco-Docking-Bay-Model-Miniature-Components-ALIENS-1986",
+          "kind": "production-prop",
+          "scope": "Industrial materials and practical construction reference; not the exact Hadley's Hope door."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "reviewed",
+        "visualMatch": "Substantial torn aperture occupies upper recessed field; bent attached metal lips, complete outer rails and lower panel retained; central service inset remains in position.",
+        "closedBarrier": false,
+        "serviceInsetPreserved": true,
+        "outerSilhouettePreserved": true,
+        "noSeparateDebrisOrScene": true,
+        "notes": [
+          "Through-aperture alpha is genuinely transparent, confirmed numerically.",
+          "Original physical collision and traversable opening remain owned by runtime; this PNG is a visual state only.",
+          "The aperture stays above the service panel to preserve the reference identity.",
+          "Bounds and baseline differ by a few pixels; use measured bbox/pivot."
+        ],
+        "filmFidelityValidated": false
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1024,
+        "height": 1536,
+        "bbox": [
+          124,
+          33,
+          898,
+          1503
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          511.0,
+          1503
+        ]
+      },
+      "alphaMeasurement": {
+        "min": 0,
+        "max": 254,
+        "fullyTransparentPixels": 607740,
+        "nearlyOpaquePixels": 933238,
+        "nonzeroBelow128": 26372,
+        "samples": {
+          "(0, 0)": 0,
+          "(64, 768)": 0,
+          "(960, 768)": 0,
+          "(512, 300)": 0,
+          "(512, 400)": 0,
+          "(512, 730)": 253,
+          "(512, 1100)": 253
+        },
+        "transparentRegions": [
+          {
+            "alphaThreshold": 16,
+            "pixelCount": 441337,
+            "bbox": [
+              0,
+              0,
+              1024,
+              1536
+            ],
+            "touchesCanvasEdge": true
+          },
+          {
+            "alphaThreshold": 16,
+            "pixelCount": 187424,
+            "bbox": [
+              179,
+              148,
+              830,
+              532
+            ],
+            "touchesCanvasEdge": false
+          }
+        ]
+      },
+      "bboxDeltaFromSource": [
+        -3,
+        -5,
+        2,
+        -1
+      ]
+    },
+    {
+      "id": "meal-tray-food",
+      "path": "assets/dlc/aliens-1986/v117/props/meal-tray-food.png",
+      "sha256": "cd0f41e0fe33f279a0115308da46db2c036dba6e681176fe2ac5e6d05be20f26",
+      "bytes": 2160552,
+      "referenceAsset": {
+        "path": "assets/dlc/aliens-1986/v115/props/meal-tray.png",
+        "sha256": "3d64c7ffca83a35a44b42bbd7e083fdb86ab06f4d023e379ca7d886297c39679"
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit. Asset type: one isolated PNG game prop for the Aliens (1986) DLC.\nInput image 1 is the exact edit target: the published empty five-compartment stainless-steel meal tray. Preserve the tray's outer silhouette, all five pressed wells and their dividers, low frontal three-quarter camera, brushed metal scratches, neutral soft lighting, framing and contact line. Keep the entire tray visible at the same scale.\nChange only the contents: add a modest practical Sulaco canteen meal fully contained within the existing wells. Use two small pale translucent rice-paper dumplings with subdued filling, a restrained low golden cornbread portion, and a few muted amber or pale green jellied food pieces. These food types follow a cast member's account of dim sum and jellied sweets used for the Sulaco mess scene; this placement is a gameplay adaptation, not a verified exact plate from the film. Keep some well surfaces visible and all dividers legible. Food must stay low and never alter the outer tray outline.\nStyle: match the source's detailed realistic matte painted industrial 2D game asset, with restrained neutral reflections. Exactly ONE complete tray per image. Real transparent alpha outside the tray, preserving the existing transparency. No table, floor, cast shadow, halo, smoke, steam, cutlery, cups, hands, extra props, borders, labels, lettering or watermark. Do not turn this into a modern breakfast, a collage or a sprite sheet.",
+      "publicReferences": [
+        "https://www.avpgalaxy.net/website/interviews/cynthia-scott/",
+        "https://harryharris.com/pola05.htm"
+      ],
+      "sourceResolutionVisualReview": {
+        "accepted": true,
+        "completeSingleObject": true,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "sourceGeometryPreservedVisually": true,
+        "notes": "Five wells, rim, camera and outer silhouette retained; low dumplings, cornbread and jellied portions contained inside wells. Food types follow a cast testimony; exact arrangement is interpretive. No pixel retouching."
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1671,
+        "height": 941,
+        "bbox": [
+          23,
+          112,
+          1649,
+          848
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          836.0,
+          848
+        ]
+      }
+    },
+    {
+      "id": "supply-case-medical-empty",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-medical-empty.png",
+      "sha256": "e5afb1bd9bf62b869af49b6bf9ebc7f2f854cc241b2f693695c6b6f7b9ffc49e",
+      "bytes": 2192057,
+      "referenceAsset": {
+        "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+        "bytes": 2298763,
+        "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          30,
+          84,
+          1505,
+          968
+        ],
+        "unchanged": true
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent inventory/world-prop PNG sprite for the Aliens (1986) game adaptation.\nInput image 1 is the EDIT TARGET, the existing grey-green supply case. Preserve its exact recognizable case design, front-and-left three-quarter camera angle seen slightly from above, front black handle, two silver metal toggle latches, reinforced ribs, recessed panels, scuffed grey-green material, neutral lighting and matte realistic illustrated finish. Keep the same body proportions, base width and perspective. Show the whole single case with a small transparent margin on every side, on a 1536 by 1024 landscape canvas. Exactly ONE isolated case, no second view, no sheet, no extra object. This is a functional project adaptation, not a claimed screen-used film prop.\nBackground: genuine transparent alpha. Remove the source's diffuse background/halo entirely: no opaque background, no floor, no cast shadow outside the case, no fog, no glow, no vignette, no checkerboard painted into the image.\nAvoid: random text, numbers, logos, modern equipment, cartridges, tools, extra cargo, cropped corners or handles.\nPrimary edit: the SAME MEDICAL CASE, now OPEN and visibly completely EMPTY. Its original lid is folded fully backward and LOW/down behind the rear wall of the case, with no upright lid rising above it. The total silhouette must remain low and wide, comparable to the closed reference; the game fits the whole sprite within 76 by 44 units, so do not let a tall lid shrink the main body. Keep the original body and front handle at the same size. Show a clearly hollow empty dark grey-green interior with a visible bare bottom and side walls; no foam inserts, medicine, tools or supplies. Retain the two front metal latches, naturally unhooked for the open state. Preserve ONE clearly legible white cross on the original muted blue medical plaque: because the lid is folded out of view, place that same small plaque on the near outer front wall above the handle, without covering the handle or latches. Do not duplicate the symbol. No lettering or numbers. Keep the base and all lower body edges intact.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Weyland-Yutani case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/119456",
+          "scope": "Grey industrial case material and worn finish only; not proof of a medical case or this exact project design."
+        },
+        {
+          "title": "Propstore — USCM M40 grenade case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/462/lot/179442/17-USCM-M40-Grenade-Case-with-Grenade-ALIENS-1986",
+          "scope": "Dull olive material and practical wear only; these generic game supply crates do not claim to reproduce this specific M40 container."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "verdict": "accepted",
+        "notes": "Intérieur clairement vide et couvercle bas. Une seule croix blanche sur plaque bleue lisible sur la face avant au-dessus de la poignée ; déplacement explicite de la plaque pour conserver le repère médical lorsque le couvercle est abaissé. Adaptation fonctionnelle du projet."
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          24,
+          136,
+          1504,
+          963
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          764,
+          963
+        ]
+      },
+      "alphaMeasurement": {
+        "extrema": [
+          0,
+          254
+        ],
+        "fullyTransparentPixels": 602337,
+        "lowAlpha1to15Pixels": 15082,
+        "bboxAt16": [
+          23,
+          136,
+          1505,
+          963
+        ],
+        "outerSamplesAlphaZero": true
+      },
+      "fitWithin76x44": {
+        "width": 76,
+        "height": 42.4676,
+        "scale": 0.051351351351351354
+      }
+    },
+    {
+      "id": "supply-case-ammo-closed",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-closed.png",
+      "sha256": "fc6006bca4fe6129eea7a3c752f2c44b2fc4fc6c8e7a13fddbd577bac01ed497",
+      "bytes": 2345905,
+      "referenceAsset": {
+        "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+        "bytes": 2298763,
+        "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          30,
+          84,
+          1505,
+          968
+        ],
+        "unchanged": true
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent inventory/world-prop PNG sprite for the Aliens (1986) game adaptation.\nInput image 1 is the EDIT TARGET, the existing grey-green supply case. Preserve its exact recognizable case design, front-and-left three-quarter camera angle seen slightly from above, front black handle, two silver metal toggle latches, reinforced ribs, recessed panels, scuffed grey-green material, neutral lighting and matte realistic illustrated finish. Keep the same body proportions, base width and perspective. Show the whole single case with a small transparent margin on every side, on a 1536 by 1024 landscape canvas. Exactly ONE isolated case, no second view, no sheet, no extra object. This is a functional project adaptation, not a claimed screen-used film prop.\nBackground: genuine transparent alpha. Remove the source's diffuse background/halo entirely: no opaque background, no floor, no cast shadow outside the case, no fog, no glow, no vignette, no checkerboard painted into the image.\nAvoid: random text, numbers, logos, modern equipment, cartridges, tools, extra cargo, cropped corners or handles.\nPrimary edit: the SAME CASE, fully CLOSED as in the reference. Replace only the blue medical-cross plaque with a plain unlettered dull grey-green industrial plate of the same small footprint and fastening style. No cross, no blue medical marking, no lettering or number anywhere. Retain all other case geometry, lid ribs, handle, latches, wear and the closed seam. The result should be immediately recognizable as the neutral non-medical version of the source case.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Weyland-Yutani case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/119456",
+          "scope": "Grey industrial case material and worn finish only; not proof of a medical case or this exact project design."
+        },
+        {
+          "title": "Propstore — USCM M40 grenade case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/462/lot/179442/17-USCM-M40-Grenade-Case-with-Grenade-ALIENS-1986",
+          "scope": "Dull olive material and practical wear only; these generic game supply crates do not claim to reproduce this specific M40 container."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "verdict": "accepted",
+        "notes": "Même caisse fermée et même angle trois-quarts que la référence. Plaque médicale remplacée par une plaque industrielle neutre sans texte ; poignée, deux verrous, nervures et matière gris-vert usée conservés."
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          31,
+          83,
+          1505,
+          968
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          768,
+          968
+        ]
+      },
+      "alphaMeasurement": {
+        "extrema": [
+          0,
+          254
+        ],
+        "fullyTransparentPixels": 516760,
+        "lowAlpha1to15Pixels": 13848,
+        "bboxAt16": [
+          30,
+          82,
+          1505,
+          969
+        ],
+        "outerSamplesAlphaZero": true
+      },
+      "fitWithin76x44": {
+        "width": 73.2836,
+        "height": 44,
+        "scale": 0.04971751412429379
+      }
+    },
+    {
+      "id": "supply-case-ammo-empty",
+      "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-empty.png",
+      "sha256": "af91a6299d2579b75643df843f8f81348015f2d09089b4634f207ee60e68c000",
+      "bytes": 2174847,
+      "referenceAsset": {
+        "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+        "bytes": 2298763,
+        "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          30,
+          84,
+          1505,
+          968
+        ],
+        "unchanged": true
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent inventory/world-prop PNG sprite for the Aliens (1986) game adaptation.\nInput image 1 is the EDIT TARGET, the existing grey-green supply case. Preserve its exact recognizable case design, front-and-left three-quarter camera angle seen slightly from above, front black handle, two silver metal toggle latches, reinforced ribs, recessed panels, scuffed grey-green material, neutral lighting and matte realistic illustrated finish. Keep the same body proportions, base width and perspective. Show the whole single case with a small transparent margin on every side, on a 1536 by 1024 landscape canvas. Exactly ONE isolated case, no second view, no sheet, no extra object. This is a functional project adaptation, not a claimed screen-used film prop.\nBackground: genuine transparent alpha. Remove the source's diffuse background/halo entirely: no opaque background, no floor, no cast shadow outside the case, no fog, no glow, no vignette, no checkerboard painted into the image.\nAvoid: random text, numbers, logos, modern equipment, cartridges, tools, extra cargo, cropped corners or handles.\nPrimary edit: the SAME CASE, now OPEN and visibly completely EMPTY. Its original lid is folded fully backward and LOW/down behind the rear wall of the case, with no upright lid rising above it. The total silhouette must remain low and wide, comparable to the closed reference; the game fits the whole sprite within 76 by 44 units, so do not let a tall lid shrink the main body. Keep the original body and front handle at the same size. Show a clearly hollow empty dark grey-green interior with a visible bare bottom and side walls; no foam inserts, no cartridges, no supplies. Retain the two front metal latches, naturally unhooked for the open state. Remove the medical plaque/cross entirely; any visible plate is plain unmarked grey-green. No medical symbol anywhere. Keep the base and all lower body edges intact.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Weyland-Yutani case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/119456",
+          "scope": "Grey industrial case material and worn finish only; not proof of a medical case or this exact project design."
+        },
+        {
+          "title": "Propstore — USCM M40 grenade case",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/462/lot/179442/17-USCM-M40-Grenade-Case-with-Grenade-ALIENS-1986",
+          "scope": "Dull olive material and practical wear only; these generic game supply crates do not claim to reproduce this specific M40 container."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "verdict": "accepted",
+        "notes": "Intérieur creux clairement vide, sans munitions ni autre équipement. Couvercle rabattu bas derrière la caisse ; corps, base, poignée et deux verrous comparables à la version fermée. Aucun insigne médical."
+      },
+      "filmFidelityValidated": false,
+      "frameCount": 1,
+      "animated": false,
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          26,
+          111,
+          1503,
+          964
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          764.5,
+          964
+        ]
+      },
+      "alphaMeasurement": {
+        "extrema": [
+          0,
+          254
+        ],
+        "fullyTransparentPixels": 574414,
+        "lowAlpha1to15Pixels": 14139,
+        "bboxAt16": [
+          25,
+          110,
+          1504,
+          965
+        ],
+        "outerSamplesAlphaZero": true
+      },
+      "fitWithin76x44": {
+        "width": 76,
+        "height": 43.8917,
+        "scale": 0.05145565335138795
+      }
+    }
+  ]
+}
