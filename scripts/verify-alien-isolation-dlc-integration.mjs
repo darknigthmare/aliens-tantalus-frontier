@@ -20,7 +20,7 @@ import {
   verifyAlienIsolationDlcAdmissions, verifyAlienIsolationRuntime,
 } from './public-alien-isolation-dlc-admissions.mjs';
 import { buildAlienIsolationDlc } from './build-alien-isolation-dlc.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
 import { expeditionById } from '../src/dlc-menu.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -89,6 +89,11 @@ test('recovered sources and reports are admitted precisely and excluded from pub
   for (const path of ALIEN_ISOLATION_SOURCE_ONLY_FILES) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+    if (path.startsWith(ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT + '/')
+      && /\.(?:json|html|md)$/.test(path)) {
+      assert.equal(isPublicDistributionTextV86(readFileSync(join(root, path), 'utf8')), true,
+        'Admitted production documents must not retain private host metadata: ' + path);
+    }
   }
   for (const path of alienIsolationRuntimeFiles()) {
     assert.equal(isPublicDistributionPathV86(path), true, path);

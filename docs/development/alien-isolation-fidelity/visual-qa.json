@@ -224,7 +224,7 @@
       "sourceAssetsManifestSha256": "e905a54ad1da9ddb401ffdf8ecad8bd8ebd0945c46d775c4df2a96b9a2647753"
     },
     "browser": {
-      "command": "python -B scripts/qa-alien-isolation-fidelity.py --root /home/agent/isolation-rewire-build-20261126 --source-root /tmp/tantalus-isolation-publish-cb72f0bb8d63 --output /home/agent/isolation-rewire-qa-final-20261126",
+      "command": "python -B scripts/qa-alien-isolation-fidelity.py --root dist --source-root . --output .qa/alien-isolation-fidelity",
       "browserVersion": "143.0.7499.4",
       "reportSha256": "f1303197a865a5cf31a5b43db2d987c31785fed42cf4e125d3de4713e4935336",
       "scriptSha256": "114a2256c1a00f04c08767d11476099d50489227b10c766aaade6f797ad719f0",
@@ -1725,7 +1725,8 @@
           "imageEdited": false
         }
       ],
-      "scope": "Public UI and keyboard first-room journey; independent seeded renderer/engine fixture for 23 rewire placements. Does not certify a complete campaign traversal or commercial-game likeness."
+      "scope": "Public UI and keyboard first-room journey; independent seeded renderer/engine fixture for 23 rewire placements. Does not certify a complete campaign traversal or commercial-game likeness.",
+      "commandPurpose": "Commande reproductible depuis la racine du dépôt ; les chemins propres à la machine du contrôle local sont normalisés dans cette copie publique. Le rapport brut et son SHA restent conservés."
     },
     "gallery": {
       "checks": [
@@ -1744,10 +1745,26 @@
       ],
       "errors": [],
       "capture": {
-        "path": "/home/agent/isolation-rewire-qa-20261126/rewire-gallery.png",
-        "sha256": "519a1b6522191db71efe0288f554ed01b6bd5f62f98219c60500921974ad6a51"
+        "sha256": "519a1b6522191db71efe0288f554ed01b6bd5f62f98219c60500921974ad6a51",
+        "file": "rewire-gallery.png"
       },
       "ok": true
+    },
+    "publicMetadataNormalization": {
+      "baselineCommit": "094b245f58e26d9349fa53f638248a8e71cac0a8",
+      "reason": "La garde globale des textes a refusé les chemins de machine présents dans deux champs de la copie publique du rapport.",
+      "affectedRuns": [
+        45870223069,
+        45870223117,
+        45870223123
+      ],
+      "commandsUseRelativePaths": true,
+      "capturesIdentifiedByFilenameAndSha256": true,
+      "rawLocalReportsChanged": false,
+      "promptsAndImageHashesChanged": false,
+      "runtimeChanged": false,
+      "globalGuardChanged": false,
+      "regressionTest": "Le test existant des documents admis applique désormais aussi isPublicDistributionTextV86 ; il a reproduit le rejet avant normalisation."
     }
   },
   "latestValidation": "rewireValidation",
