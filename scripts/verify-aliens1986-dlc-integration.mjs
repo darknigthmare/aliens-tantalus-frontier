@@ -55,6 +55,7 @@ import {
   compileAliens1986RasterSupplementV123, SUPPLEMENT_SHA256_V122, SUPPLEMENT_PATH_V123, SUPPLEMENT_IDS_V123,
 } from './derive-aliens1986-raster-v116.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { publicReleasePathAdmissionV123, verifyPublicSourceTreeV123, PUBLIC_RUNTIME_MODULE_PATHS_V123 } from './public-release-admissions-v123.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -858,4 +859,46 @@ test('V123 continues only the derivative from the exact published V122 endpoint'
   assert.equal(reviewedAliens1986RasterDigestV123(path,ALIENS1986_RASTER_SOURCE_SUCCESSORS_V122[path].currentSha256),hash(await readFile(join(root,path))));
   assert.throws(()=>reviewedAliens1986RasterDigestV123(path,'0'.repeat(64)),/Broken Aliens 1986 V123 presentation predecessor/);
   assert.equal(reviewedAliens1986RasterDigestV123('unrelated','stable'),'stable');
+});
+
+test('the main V123 guard delegates only the exact Aliens V123 source paths and preserves build exclusion',()=>{
+  const directory='docs/development/aliens-1986-sprites-v123';
+  const docs=['README.md','bible.json','bible.md','index.html','manifest.json','references.md','generation-ledger.json','verification.json'].map(name=>directory+'/'+name);
+  assert.deepEqual(ALIENS1986_RASTER_SOURCE_ONLY_FILES_V123.filter(path=>path.startsWith('docs/')).sort(),docs.sort());
+  assert.equal(publicReleasePathAdmissionV123(directory,{directory:true}),true);
+  assert.equal(publicReleasePathAdmissionV123(directory),false);
+  assert.equal(publicReleasePathAdmissionV123(directory,{directory:true,built:true}),false);
+  for(const path of ALIENS1986_RASTER_SOURCE_ONLY_FILES_V123) {
+    assert.equal(publicReleasePathAdmissionV123(path),true,path);
+    assert.equal(publicReleasePathAdmissionV123(path,{directory:true}),false,path);
+    assert.equal(publicReleasePathAdmissionV123(path,{built:true}),false,path);
+    assert.equal(isPublicDistributionPathV86(path,{built:true}),false,path);
+  }
+  for(const path of [directory+'/private.json',directory+'/extra',directory+'/extra/manifest.json',directory+'-unreviewed/README.md',
+    'scripts/qa-aliens1986-unreviewed-v123.py','src/unreviewed-v123.js','docs/development/other-v123/manifest.json']) {
+    for(const built of [false,true])for(const directory of [false,true])assert.equal(publicReleasePathAdmissionV123(path,{built,directory}),false,path);
+  }
+  for(const path of PUBLIC_RUNTIME_MODULE_PATHS_V123) {
+    assert.equal(publicReleasePathAdmissionV123(path),true);
+    assert.equal(publicReleasePathAdmissionV123(path,{built:true}),true);
+  }
+  assert.equal(publicReleasePathAdmissionV123('src/unrelated.js'),null);
+});
+
+test('the strict V123 source-tree stage accepts the actual DLC documents without needing unrelated media',async()=>{
+  assert.deepEqual(await verifyPublicSourceTreeV123(root),{ok:true});
+});
+
+test('the strict V123 source-tree stage rejects built documents, intruders and symlinked evidence',async t=>{
+  const directory=await temp(t),docs='docs/development/aliens-1986-sprites-v123';
+  await mkdir(dirname(join(directory,docs)),{recursive:true});
+  await cp(join(root,docs),join(directory,docs),{recursive:true});
+  assert.deepEqual(await verifyPublicSourceTreeV123(directory),{ok:true});
+  await assert.rejects(verifyPublicSourceTreeV123(directory,{built:true}),/Unapproved V123 source: docs\/development\/aliens-1986-sprites-v123/);
+  const intruder=join(directory,docs,'private.json');await writeFile(intruder,'{}');
+  await assert.rejects(verifyPublicSourceTreeV123(directory),/Unapproved V123 source: .*private\.json/);await rm(intruder);
+  const subdirectory=join(directory,docs,'extra');await mkdir(subdirectory);
+  await assert.rejects(verifyPublicSourceTreeV123(directory),/Unapproved V123 source: .*\/extra/);await rm(subdirectory,{recursive:true});
+  const evidence=join(directory,docs,'README.md');await rm(evidence);await symlink(join(root,docs,'README.md'),evidence);
+  await assert.rejects(verifyPublicSourceTreeV123(directory),/README\.md/);
 });

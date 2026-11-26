@@ -36,3 +36,9 @@ Les états de test sont explicitement préparés dans des sessions natives. Ces 
 ## Manques maintenus
 
 Les nouvelles générations ne récupèrent pas les octets historiques signalés perdus. Les listes de 20 PNG, 53 documents et 19 sources de poses ne sont pas clôturées ; elles peuvent se recouper. Hicks blessé, les poses attaque/mort du Facehugger, les cycles complets, les familles de terrain et les parcours encore absents restent ouverts dans la bible.
+
+## Correctif du contrôle global V123
+
+La première publication V123 a révélé en CI une collision de noms : le contrôle des médias V123 du jeu principal refusait le dossier documentaire Aliens V123 lors de son second parcours des sources. Le correctif délègue précisément ce dossier, ses huit documents et les deux scripts déjà recensés à la liste fermée du DLC. Les chemins supplémentaires restent refusés, et les documents/scripts restent exclus des builds.
+
+**3/3 tests de régression ciblés passent**, dont le parcours strict des vrais dossiers `docs/src`, le refus d’un fichier ou sous-dossier intrus, le refus d’un lien symbolique et l’exclusion en build. Les 62 contrôles de médias historiques du garde principal restent présents ; ils ne sont pas déclarés exécutés dans cette copie partielle. Les 41 tests d’intégration initiaux et les 33 contrôles Chromium ne sont pas présentés comme une nouvelle exécution après ce correctif. Le HTML dérivé, les deux PNG, les manifestes et les sources de rendu conservent leurs empreintes. Le reçu initial et le correctif sont distingués dans `verification.json`.

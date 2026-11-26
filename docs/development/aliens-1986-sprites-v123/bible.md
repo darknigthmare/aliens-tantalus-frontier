@@ -42,3 +42,9 @@ Les nouvelles générations ne récupèrent pas les octets historiques signalés
 La bible JSON conserve les personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes du catalogue V122. Ses 164 enregistrements d’images restent identiques ; les deux entrées V123 sont ajoutées à la fin. Le Warrior passe de trois à quatre poses disponibles, avec une seule image par pose. Les huit orientations de sentinelle utilisent toujours le même sélecteur et ses miroirs. Les 25 salles, 20 liens, 40 seuils, 25 portes internes, 202 volumes et 135 placements de props ne sont pas augmentés par ce supplément.
 
 Les reçus de vérification antérieurs restent rattachés à leur version. Les compteurs de cycles complets validés et de sprites certifiés exacts au film restent tous deux à zéro.
+
+## Correctif du contrôle global V123
+
+La première publication V123 a révélé en CI une collision de noms : le contrôle des médias V123 du jeu principal refusait le dossier documentaire Aliens V123 lors de son second parcours des sources. Le correctif délègue précisément ce dossier, ses huit documents et les deux scripts déjà recensés à la liste fermée du DLC. Les chemins supplémentaires restent refusés, et les documents/scripts restent exclus des builds.
+
+**3/3 tests de régression ciblés passent**, dont le parcours strict des vrais dossiers `docs/src`, le refus d’un fichier ou sous-dossier intrus, le refus d’un lien symbolique et l’exclusion en build. Les 62 contrôles de médias historiques du garde principal restent présents ; ils ne sont pas déclarés exécutés dans cette copie partielle. Les 41 tests d’intégration initiaux et les 33 contrôles Chromium ne sont pas présentés comme une nouvelle exécution après ce correctif. Le HTML dérivé, les deux PNG, les manifestes et les sources de rendu conservent leurs empreintes. Le reçu initial et le correctif sont distingués dans `verification.json`.

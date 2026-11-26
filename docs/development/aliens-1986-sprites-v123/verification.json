@@ -3773,7 +3773,8 @@
         "all166PngSha256Checked": true,
         "all164PriorRecordsUnchanged": true,
         "allSevenHistoricalManifestsUnchanged": true,
-        "allSevenTestedCodeFileDigestsMatched": true
+        "allSevenTestedCodeFileDigestsMatched": true,
+        "scope": "Initial runtime implementation published in 097b48f8638897080ecf32962b3b6a9905078bc5; later source-boundary-only changes are identified in ciPathAdmissionFix."
       }
     }
   },
@@ -3787,7 +3788,8 @@
     "Fourteen explicit native actor states per browser context; this is not a complete campaign playthrough.",
     "The known partial checkout lacks all 105 required original JPG references outside this Aliens supplement, so the full repository check is blocked while the isolated DLC build passes.",
     "The 350 presentation assertions are included in the 41 integration tests and are not an additional independent suite.",
-    "The normal screenshot banner shows 17 checks; the Python driver adds the eighteenth network/browser-error check in the JSON report."
+    "The normal screenshot banner shows 17 checks; the Python driver adds the eighteenth network/browser-error check in the JSON report.",
+    "A real CI source-path collision in the initial V123 publication is corrected by the follow-up admission change. Three targeted regression tests passed; the full suite and browser run were not repeated for this source-boundary-only correction. Runtime bytes and image inputs are unchanged."
   ],
   "finishedAt": "2026-11-26T17:37:18.470053+00:00",
   "testedSourceState": "Uncommitted V123 working tree above the recorded baseline; exact runtime, manifest and verification source digests identify tested bytes.",
@@ -3816,6 +3818,13 @@
       "passed": 350,
       "newV123": 22,
       "includedInPrevious41": true
+    },
+    "followupSourceBoundaryRegression": {
+      "passed": 3,
+      "failed": 0,
+      "newTests": 3,
+      "fullSuiteRepeated": false,
+      "receipt": "ciPathAdmissionFix"
     }
   },
   "isolatedBuild": {
@@ -3831,36 +3840,6 @@
     "rasterAssetRevision": 123,
     "rasterExtensionRevision": 123
   },
-  "testedCodeFiles": [
-    {
-      "path": ".github/workflows/aliens1986-dlc.yml",
-      "sha256": "057af9dc5444765174b385b4b580bd0a8ebc62fb2ab65e9220984e0d5901bbc3"
-    },
-    {
-      "path": "scripts/derive-aliens1986-raster-v116.mjs",
-      "sha256": "487a1d3cf38d2128b15be96e6362e53496f62f7010e79906d51caa5536743eb3"
-    },
-    {
-      "path": "scripts/public-aliens1986-dlc-admissions.mjs",
-      "sha256": "c1bd5fa07e767573de50239255ab8eb4abca6c42c123fcb4d0046053cbba36fc"
-    },
-    {
-      "path": "scripts/verify-aliens1986-dlc-integration.mjs",
-      "sha256": "92133b25d0e377dea3794837ec28d1de1fd9dbc80c43d01766beced868a228a8"
-    },
-    {
-      "path": "scripts/verify-aliens1986-raster-presentation-v116.mjs",
-      "sha256": "a222001299699f6ecb2e3e0c6558d6f4a9a32fb0d4d142dd0b319f0ad62a2459"
-    },
-    {
-      "path": "scripts/verify-aliens1986-raster-directions-v123.mjs",
-      "sha256": "a4276d7541ad2beddbd822987618c7d29fc045c4fd700ff93fcc998db41da10c"
-    },
-    {
-      "path": "scripts/qa-aliens1986-directions-v123.py",
-      "sha256": "e7ec1158fb8c239af05aa3de59269d9941b7f1126a11a036ea23b767d8a6dc1d"
-    }
-  ],
   "publicReleaseCheck": {
     "ok": false,
     "reason": "Known partial checkout: zero of 105 required assets/user/pack-v100/*.jpg original references are present. Guard unchanged; full build was not run."
@@ -4893,5 +4872,90 @@
         "bytes": 1802161
       }
     ]
-  }
+  },
+  "ciPathAdmissionFix": {
+    "schema": 1,
+    "timestampUtc": "2026-11-26T17:48:32.116386+00:00",
+    "localBaseline": "d01810421d23dd24f62370aeae94df29c4a82d53",
+    "publishedBaseline": "097b48f8638897080ecf32962b3b6a9905078bc5",
+    "failure": "Gameplay V162 job 140082200617: Unapproved V123 source: docs/development/aliens-1986-sprites-v123",
+    "scope": "Delegate the exact Aliens V123 source namespace before the main-release V123 naming guard; preserve source/build distinction and closed lists.",
+    "publicationPerformed": false,
+    "files": [
+      {
+        "path": "scripts/public-release-admissions-v123.mjs",
+        "sha256": "06494c477aedacea8930b6af214c79445a5fde4351fe095591be68256aa83d79"
+      },
+      {
+        "path": "scripts/verify-aliens1986-dlc-integration.mjs",
+        "sha256": "cf70ef98aa7fa68f6f861bf583f224e1dc1eee07fc18ee6b005e5511b0380b90"
+      }
+    ],
+    "verification": {
+      "command": "node --test --test-name-pattern='main V123 guard|strict V123 source-tree stage' scripts/verify-aliens1986-dlc-integration.mjs",
+      "passed": 3,
+      "failed": 0,
+      "scope": [
+        "Direct path admission: exact folder, eight documents, two QA/test scripts; built exclusion and intruder rejection.",
+        "Actual checkout docs/src traversed through the same helper now invoked by verifyPublicAdmissionsV123(strict:true).",
+        "Copied document tree rejects built delivery, injected file, injected directory and symlink."
+      ],
+      "log": "aliens-v123-ci-path-fix-tests.log",
+      "logSha256": "4209d6144d4186ed84fe09a8f789fe9605df2cdc7429c1069b45865e245199d5",
+      "diffCheck": "passed"
+    },
+    "preserved": [
+      "Original 62-media verification loop, hashes and media bounds.",
+      "Main V123 runtime module whitelist and unrelated version-name rejections.",
+      "Global outer DLC delegation and all historical verifier succession hashes.",
+      "All PNGs, historical renderer modules and manifests."
+    ],
+    "limits": [
+      "The 62 original drive-v123 files are absent from this partial checkout; targeted strict-path tests use the exact extracted production traversal and do not claim a full media audit.",
+      "The full global suite, build and browser QA were not repeated for this path-only fix."
+    ],
+    "receiptSha256": "df3af475043fb4915cd695d3f7d27d9ff2d585ff69d4ba439a41e5d2aca51785",
+    "failedWorkflowUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45869873256/job/140082200617",
+    "sameRuntimeSha256": "9495439e9514f2d178eaa7b0e95bd22777587f82bfce94532d1caf2df6aa3f28"
+  },
+  "initialRuntimeTestedCodeFiles": [
+    {
+      "path": ".github/workflows/aliens1986-dlc.yml",
+      "sha256": "057af9dc5444765174b385b4b580bd0a8ebc62fb2ab65e9220984e0d5901bbc3"
+    },
+    {
+      "path": "scripts/derive-aliens1986-raster-v116.mjs",
+      "sha256": "487a1d3cf38d2128b15be96e6362e53496f62f7010e79906d51caa5536743eb3"
+    },
+    {
+      "path": "scripts/public-aliens1986-dlc-admissions.mjs",
+      "sha256": "c1bd5fa07e767573de50239255ab8eb4abca6c42c123fcb4d0046053cbba36fc"
+    },
+    {
+      "path": "scripts/verify-aliens1986-dlc-integration.mjs",
+      "sha256": "92133b25d0e377dea3794837ec28d1de1fd9dbc80c43d01766beced868a228a8"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-presentation-v116.mjs",
+      "sha256": "a222001299699f6ecb2e3e0c6558d6f4a9a32fb0d4d142dd0b319f0ad62a2459"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-directions-v123.mjs",
+      "sha256": "a4276d7541ad2beddbd822987618c7d29fc045c4fd700ff93fcc998db41da10c"
+    },
+    {
+      "path": "scripts/qa-aliens1986-directions-v123.py",
+      "sha256": "e7ec1158fb8c239af05aa3de59269d9941b7f1126a11a036ea23b767d8a6dc1d"
+    }
+  ],
+  "followupTestedCodeFiles": [
+    {
+      "path": "scripts/public-release-admissions-v123.mjs",
+      "sha256": "06494c477aedacea8930b6af214c79445a5fde4351fe095591be68256aa83d79"
+    },
+    {
+      "path": "scripts/verify-aliens1986-dlc-integration.mjs",
+      "sha256": "cf70ef98aa7fa68f6f861bf583f224e1dc1eee07fc18ee6b005e5511b0380b90"
+    }
+  ]
 }

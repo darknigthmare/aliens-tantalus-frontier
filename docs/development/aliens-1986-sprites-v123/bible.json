@@ -23097,8 +23097,8 @@
     },
     {
       "path": "scripts/verify-aliens1986-dlc-integration.mjs",
-      "sha256": "92133b25d0e377dea3794837ec28d1de1fd9dbc80c43d01766beced868a228a8",
-      "scope": "v123-integration-and-verification"
+      "sha256": "cf70ef98aa7fa68f6f861bf583f224e1dc1eee07fc18ee6b005e5511b0380b90",
+      "scope": "v123-source-boundary-correction"
     },
     {
       "path": "scripts/verify-aliens1986-raster-presentation-v116.mjs",
@@ -23114,6 +23114,11 @@
       "path": "scripts/qa-aliens1986-directions-v123.py",
       "sha256": "e7ec1158fb8c239af05aa3de59269d9941b7f1126a11a036ea23b767d8a6dc1d",
       "scope": "v123-integration-and-verification"
+    },
+    {
+      "path": "scripts/public-release-admissions-v123.mjs",
+      "sha256": "06494c477aedacea8930b6af214c79445a5fde4351fe095591be68256aa83d79",
+      "scope": "v123-source-boundary-correction"
     }
   ],
   "references": [
@@ -23392,7 +23397,9 @@
     "browserAssertionsTotal": 33,
     "browserFinishedAt": "2026-11-26T17:34:54.886027+00:00",
     "testedRuntimeSha256": "9495439e9514f2d178eaa7b0e95bd22777587f82bfce94532d1caf2df6aa3f28",
-    "scope": "Eight sentry directions and Warrior route-pose selection in explicit native fixtures; no complete campaign, full animation cycle or exact film fidelity certification."
+    "scope": "Eight sentry directions and Warrior route-pose selection in explicit native fixtures; no complete campaign, full animation cycle or exact film fidelity certification.",
+    "followupSourceBoundaryRegressionTests": 3,
+    "ciPathCollisionCorrectedLocally": true
   },
   "priorVerificationSnapshots": [
     {
