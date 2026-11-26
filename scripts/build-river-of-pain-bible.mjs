@@ -104,7 +104,7 @@ function buildBible(data,manifest,notes,options={}) {
   appearance:p.appearance||'Visage, costume précis et couleurs à documenter.',
   chronology:p.chronology||'Conserver scène, époque et rôle du roman ; aucune insertion automatique dans la colonie.',
   gameplay:'Fiche de production manquante ; ni profil ni spawn ajouté par la bible.',locations:p.locations||[],supersedesHistoricalGroup:p.group||null,
-  missing:['Profil, portrait individuel et états propres à la scène à produire.','Placement, interactions et séquence à intégrer après validation des sources.'],
+  missing:['Profil en jeu, PNG runtime et états propres à la scène à produire.','Placement, interactions et séquence à intégrer après validation des sources.'],
   acceptance:['Ne pas utiliser un comédien de doublage comme visage canonique sans preuve.','Préserver grade, métier, époque et localisation.'],
   status:{definition:'reference_documented',integration:'absent',automaticValidation:'source_reference_only'}
  });
@@ -162,7 +162,7 @@ function buildBible(data,manifest,notes,options={}) {
    dimensions:{nativeEnvelope:envelope,physicalFootprints:physical.map(p=>({id:p.id,room:p.room,footprint:p.footprint||null})),units:'coordonnees_logiques ; z = profondeur_normalisee'},
    placement:{nativeKind:kind,instances,phaseInstances:phases,allowedDecorativeIds:assets.length?eligible.map(p=>p.id):[],mounts:unique(instances.map(p=>p.mount||'renderer'))},
    assetIds:assets.map(a=>a.id),
-   missing:[...(assets.length?[]:['PNG individuel absent.']),...(physical.length?['Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.']:[]),...(phases.length?['Variantes et raccords de phase à contrôler.']:[]),...(custom.missing||[]),'Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.'],
+   missing:[...(assets.length?[]:['PNG runtime individuel absent.']),...(physical.length?['Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.']:[]),...(phases.length?['Variantes et raccords de phase à contrôler.']:[]),...(custom.missing||[]),'Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.'],
    acceptance:['Conserver chaque identifiant, coordonnée, couche et empreinte.','Objets muraux ou suspendus reliés à leur support ; aucune obstruction illogique.','Préserver légendes, témoins et retours d’interaction natifs.'],
    status:{integration:assets.length?'png_decoratif_selectif':'native_procedural'}
   });

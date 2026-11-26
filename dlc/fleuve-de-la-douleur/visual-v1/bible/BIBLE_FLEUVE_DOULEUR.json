@@ -3118,7 +3118,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3164,7 +3164,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3210,7 +3210,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3256,7 +3256,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3302,7 +3302,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3348,7 +3348,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3394,7 +3394,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3440,7 +3440,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3486,7 +3486,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3535,7 +3535,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3583,7 +3583,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3634,7 +3634,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3769,7 +3769,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3817,7 +3817,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3865,7 +3865,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3913,7 +3913,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -3961,7 +3961,7 @@
       "placement": null,
       "assetIds": [],
       "missing": [
-        "Profil, portrait individuel et états propres à la scène à produire.",
+        "Profil en jeu, PNG runtime et états propres à la scène à produire.",
         "Placement, interactions et séquence à intégrer après validation des sources."
       ],
       "acceptance": [
@@ -13095,7 +13095,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -13197,7 +13197,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -13316,7 +13316,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -13461,7 +13461,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -13628,7 +13628,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -13711,7 +13711,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -13999,7 +13999,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -14118,7 +14118,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -14277,7 +14277,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -14685,7 +14685,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -14812,7 +14812,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -15141,7 +15141,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Les données historiques indiquent parfois mount=floor malgré le nom ceiling-light. Vérifier le vrai dessin avant de déplacer l’ancre ; ne pas corriger par simple renommage.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -15248,7 +15248,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -15539,7 +15539,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -15632,7 +15632,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -15825,7 +15825,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Pupitre et instrumentation propres à chaque salle ; un concept A.P. ne valide pas tous les contrôles.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
@@ -16113,7 +16113,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -16337,7 +16337,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -16463,7 +16463,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -16569,7 +16569,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -16757,7 +16757,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Texture large spécifique absente ; un œuf vertical ne remplace pas cette emprise.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
@@ -16861,7 +16861,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -17211,7 +17211,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -17514,7 +17514,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -17641,7 +17641,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -17772,7 +17772,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -18128,7 +18128,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -18372,7 +18372,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -18738,7 +18738,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -18988,7 +18988,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -19235,7 +19235,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -19603,7 +19603,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -20296,7 +20296,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -20367,7 +20367,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Distinguer repère de décor et véritable profil médical individualisé.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -21020,7 +21020,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -21122,7 +21122,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -21216,7 +21216,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -21300,7 +21300,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Référence du pilote/Space Jockey, proportions du siège et raccord à sa chambre à établir.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
@@ -21471,7 +21471,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -21638,7 +21638,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -21945,7 +21945,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -22722,7 +22722,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -22804,7 +22804,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -22995,7 +22995,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -23506,7 +23506,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -23577,7 +23577,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -23646,7 +23646,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -23916,7 +23916,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -24035,7 +24035,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -24136,7 +24136,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -24398,7 +24398,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -24480,7 +24480,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -24699,7 +24699,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -24768,7 +24768,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Nom et classe non confirmés ; ne pas nommer Onager ou Daihotai par défaut.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -24838,7 +24838,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -25416,7 +25416,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -25938,7 +25938,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -26373,7 +26373,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -26453,7 +26453,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -26546,7 +26546,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -26665,7 +26665,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -26749,7 +26749,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Établir si cette instance correspond au Daihotai ou à un autre modèle ; ne pas assimiler au heavy-crawler du roman.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -26855,7 +26855,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -26926,7 +26926,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -27028,7 +27028,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -27132,7 +27132,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -27498,7 +27498,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -28128,7 +28128,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -28228,7 +28228,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -28355,7 +28355,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -28563,7 +28563,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -28636,7 +28636,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
       "acceptance": [
@@ -29071,7 +29071,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Variantes et raccords de phase à contrôler.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -29371,7 +29371,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Variantes et raccords de phase à contrôler.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -29716,7 +29716,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Variantes et raccords de phase à contrôler.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],
@@ -30016,7 +30016,7 @@
       },
       "assetIds": [],
       "missing": [
-        "PNG individuel absent.",
+        "PNG runtime individuel absent.",
         "Variantes et raccords de phase à contrôler.",
         "Comparer échelle et montage en contexte ; référence filmique exacte non certifiée."
       ],

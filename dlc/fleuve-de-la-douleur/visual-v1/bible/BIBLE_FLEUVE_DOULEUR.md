@@ -993,7 +993,7 @@ Prospecteur, l’un des frères Finch.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1027,7 +1027,7 @@ Prospecteur distinct d’Otto.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1061,7 +1061,7 @@ Marine de la garnison.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1095,7 +1095,7 @@ Marine de la garnison.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1129,7 +1129,7 @@ Marine identifié dans le chapitre 7.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1163,7 +1163,7 @@ Membre de la garnison cité dans l’extrait.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1197,7 +1197,7 @@ Chercheur de la Compagnie.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1231,7 +1231,7 @@ Chercheur distinct de Mori et Reese.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1265,7 +1265,7 @@ Identité du registre historique, sans profil individuel.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1299,7 +1299,7 @@ Personnage de la récupération et de Gateway.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1333,7 +1333,7 @@ Personnage lié à Gateway.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1393,7 +1393,7 @@ Chat de Ripley ; acteur animal distinct des créatures hostiles.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1427,7 +1427,7 @@ Pilote du véhicule de descente de Brackett.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1461,7 +1461,7 @@ Membre de la récupération spatiale.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1495,7 +1495,7 @@ Membre de la récupération à individualiser.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1529,7 +1529,7 @@ Membre de la récupération à individualiser.
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -1563,7 +1563,7 @@ Reste au poste de pilotage pendant que les trois autres récupérateurs descende
 
 **À compléter :**
 
-- Profil, portrait individuel et états propres à la scène à produire.
+- Profil en jeu, PNG runtime et états propres à la scène à produire.
 - Placement, interactions et séquence à intégrer après validation des sources.
 
 **Contrôles attendus :**
@@ -4863,7 +4863,7 @@ Communication ou mesure, raccordée au poste. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -4907,7 +4907,7 @@ Machine du centre de loisirs avec état d’alimentation cohérent. 3 placement(
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -4951,7 +4951,7 @@ Guide la circulation d’un espace industriel ou extérieur. 5 placement(s) de b
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -4996,7 +4996,7 @@ Repère lumineux de la zone d’arrivée. 8 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5044,7 +5044,7 @@ Distinguer mobilier médical et domestique selon la salle. 8 placement(s) de bas
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5093,7 +5093,7 @@ Identifiant : `rop:props:prop-bed-lamp`
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5181,7 +5181,7 @@ Textile domestique ou médical lié à son support. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5223,7 +5223,7 @@ Plaque technique fixée dans sa paroi. 5 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5268,7 +5268,7 @@ Liaison à raccorder à un appareil ou cheminement. 9 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5362,7 +5362,7 @@ Support mural ou suspendu pour réseaux. 14 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5416,7 +5416,7 @@ Roues et plateau doivent garder une ligne de sol cohérente. 3 placement(s) de b
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5504,7 +5504,7 @@ Luminaire relié visuellement à un support supérieur. 10 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Les données historiques indiquent parfois mount=floor malgré le nom ceiling-light. Vérifier le vrai dessin avant de déplacer l’ancre ; ne pas corriger par simple renommage.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5555,7 +5555,7 @@ Levage nécessitant support et charge cohérents. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5642,7 +5642,7 @@ Volume organique lié à la phase d’envahissement. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5689,7 +5689,7 @@ Stockage ou réseau selon la fonction de la salle. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5732,7 +5732,7 @@ Pupitre et affichage associés à une fonction réelle. 10 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Pupitre et instrumentation propres à chaque salle ; un concept A.P. ne valide pas tous les contrôles.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
@@ -5784,7 +5784,7 @@ Conteneur souvent utilisé comme couverture physique. 11 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -5879,7 +5879,7 @@ Signalétique liée à une porte précise. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5920,7 +5920,7 @@ Détail de vie coloniale attaché à un support. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -5966,7 +5966,7 @@ Raccord aligné sur les volumes de ventilation. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6050,7 +6050,7 @@ Zone organique large ; un œuf seul ne la remplace pas. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Texture large spécifique absente ; un œuf vertical ne remplace pas cette emprise.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
@@ -6093,7 +6093,7 @@ Organe d’air fixé à une ouverture technique. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6185,7 +6185,7 @@ Identifiant : `rop:props:prop-floodlight`
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6274,7 +6274,7 @@ Conteneur en zone extérieure ou de maintenance. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -6321,7 +6321,7 @@ Structure porteuse avec base et passage visibles. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6367,7 +6367,7 @@ Instrument relié à un circuit de pression. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6494,7 +6494,7 @@ Protection de conduit ou de sol dans la bonne orientation. 6 placement(s) de bas
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6583,7 +6583,7 @@ Façade à distinguer d’un portail interactif. 3 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6711,7 +6711,7 @@ Ouverture technique distincte d’un conduit traversable. 1 placement(s) de base
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6796,7 +6796,7 @@ Extraction au-dessus de la cuisson. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -6882,7 +6882,7 @@ Identifiant : `rop:props:prop-lamp`
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7009,7 +7009,7 @@ Orientation ; contenu du plan à documenter séparément. 2 placement(s) de base
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7219,7 +7219,7 @@ Objet d’usage quotidien des postes civils. 6 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7265,7 +7265,7 @@ Repère de scène qui ne remplace pas un humain individualisé. 1 placement(s) d
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Distinguer repère de décor et véritable profil médical individualisé.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -7439,7 +7439,7 @@ Support de fret avec emprise lisible. 5 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -7485,7 +7485,7 @@ Interface fixée à la cloison ou à l’appareil. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7529,7 +7529,7 @@ Détail domestique ; ne pas inventer une identité canonique. 3 placement(s) de 
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7572,7 +7572,7 @@ Structure biomécanique monumentale liée à sa chambre. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Référence du pilote/Space Jockey, proportions du siège et raccord à sa chambre à établir.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
@@ -7615,7 +7615,7 @@ Réseau technique continu avec fixations. 9 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -7665,7 +7665,7 @@ Changement de direction raccordé aux tronçons. 9 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -7754,7 +7754,7 @@ Culture intérieure, drainage et support. 8 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -7979,7 +7979,7 @@ Structure extérieure raccordée au site. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8023,7 +8023,7 @@ Réserve visible distincte de l’objet d’inventaire. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8065,7 +8065,7 @@ Conteneur dédié, contenu à référencer. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8106,7 +8106,7 @@ Support qui ne crée pas une dotation supplémentaire. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8147,7 +8147,7 @@ Affichage lié au contrôle local. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8238,7 +8238,7 @@ Siège associé à la salle ou au véhicule. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8280,7 +8280,7 @@ Meuble technique ventilé et alimenté. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8365,7 +8365,7 @@ Arrivée et évacuation dans le sas. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8406,7 +8406,7 @@ Panneau cohérent avec la direction réelle du secteur. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8578,7 +8578,7 @@ Repère de prospection implanté au sol. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8674,7 +8674,7 @@ Réservoir avec base et conduites cohérentes. 10 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -8810,7 +8810,7 @@ Outils sur support ou suspendus. 5 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -8856,7 +8856,7 @@ Volume du périmètre raccordé à l’horizon. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8898,7 +8898,7 @@ Objet personnel de l’habitat familial. 3 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8941,7 +8941,7 @@ Indice au sol associé au passage et à la phase. 5 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -8986,7 +8986,7 @@ Appareil associé au circuit et à ses sécurités. 3 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9030,7 +9030,7 @@ Support de nourriture ou d’instruments selon la salle. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -9071,7 +9071,7 @@ Machine rotative dans son volume industriel. 3 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9115,7 +9115,7 @@ Commande montée sur son réseau de fluides. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -9202,7 +9202,7 @@ Grille fixée à une bouche ou un conduit. 13 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -9357,7 +9357,7 @@ Appareil de lavage et raccordements. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9402,7 +9402,7 @@ Support lié aux règles d’équipement. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -9446,7 +9446,7 @@ Pièce stockée au garage. 4 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9531,7 +9531,7 @@ Vitrage intégré à un mur. 3 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -9574,7 +9574,7 @@ Variante de phase de l’installation existante. 0 placement(s) de base et 32 de
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Variantes et raccords de phase à contrôler.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9610,7 +9610,7 @@ Doit indiquer un trajet accessible. 0 placement(s) de base et 27 de phase.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Variantes et raccords de phase à contrôler.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9646,7 +9646,7 @@ Désordre sans collision ajoutée. 0 placement(s) de base et 32 de phase.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Variantes et raccords de phase à contrôler.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9682,7 +9682,7 @@ Détail de surface sans trou traversable implicite. 0 placement(s) de base et 27
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Variantes et raccords de phase à contrôler.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -9813,7 +9813,7 @@ Distinct du tracteur pilotable natif. 2 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Établir si cette instance correspond au Daihotai ou à un autre modèle ; ne pas assimiler au heavy-crawler du roman.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -10019,7 +10019,7 @@ Modèle et nom exacts non établis. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Nom et classe non confirmés ; ne pas nommer Onager ou Daihotai par défaut.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -10090,7 +10090,7 @@ Vaisseau en fer à cheval associé à son seuil. 1 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
@@ -10235,7 +10235,7 @@ Habillage de ruche selon phase et surface. 10 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -10286,7 +10286,7 @@ Structure de l’épave ou de la ruche. 38 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -10365,7 +10365,7 @@ Relief extérieur parfois utilisé comme couverture. 12 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Habillage des exemplaires physiques à concevoir sans réduire emprise ou interactions.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
@@ -10418,7 +10418,7 @@ Détail du sol dans la palette de la zone. 5 placement(s) de base.
 
 **À compléter :**
 
-- PNG individuel absent.
+- PNG runtime individuel absent.
 - Comparer échelle et montage en contexte ; référence filmique exacte non certifiée.
 
 **Contrôles attendus :**
