@@ -35,7 +35,11 @@ function validateProductionManifest(manifest,{recordIds,sourceIds}={}){
   require(Number.isSafeInteger(a.bytes)&&a.bytes>0,'measured byte count required: '+a.id);
   require(a.pixels&&['width','height'].every(k=>Number.isSafeInteger(a.pixels[k])&&a.pixels[k]>0&&a.pixels[k]<=16384),'measured PNG dimensions required: '+a.id);
   require(a.generation&&string(a.generation.tool)&&string(a.generation.prompt)&&/^\d{4}-\d{2}-\d{2}$/.test(a.generation.createdOn),'generation provenance required: '+a.id);
-  require(a.generation.referenceUrls===undefined||strings(a.generation.referenceUrls),'invalid generation references: '+a.id);
+  const transientFields=new Set(['outputSourcePath','referencePaths','referenceImagePaths']);
+  const checkPortableProvenance=value=>{if(value&&typeof value==='object')for(const [key,child] of Object.entries(value)){require(!transientFields.has(key),'transient generation field '+key+' is not portable: '+a.id);checkPortableProvenance(child);}};
+  checkPortableProvenance(a.generation);
+  require(a.generation.referenceUrls===undefined||(strings(a.generation.referenceUrls)&&a.generation.referenceUrls.every(url=>/^https:\/\//.test(url))),'generation references must be public HTTPS URLs: '+a.id);
+  if(a.generation.parentAttemptId!==undefined)require(typeof a.generation.parentAttemptId==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.generation.parentAttemptId)&&!a.generation.parentAttemptId.startsWith('exec-')&&Array.isArray(a.generation.history)&&a.generation.history.some(row=>row.id===a.generation.parentAttemptId),'parent attempt must name a stable history entry: '+a.id);
   require(a.scale===null||(a.scale&&typeof a.scale==='object'&&!Array.isArray(a.scale)&&a.scale.officialMeasurements===false),'scale must be null or explicitly authored: '+a.id);
   require(a.validation&&['pending','reviewed_with_limitations'].includes(a.validation.visual)&&a.validation.fidelity1to1==='not_certified'&&strings(a.validation.notes),'distinct visual review required: '+a.id);
  }

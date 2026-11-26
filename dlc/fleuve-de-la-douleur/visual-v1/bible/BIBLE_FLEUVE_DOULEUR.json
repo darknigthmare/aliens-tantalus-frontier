@@ -12,7 +12,7 @@
       "model": "e03175aa1db2a83aa10fbb4e3574f84a13815c3b6a9d2498aa6e5566e9b8fde8",
       "manifest": "afa580a38a45c066e4bb4cc51aa0f5116410def6fd161ffbfb46927931dffa5c",
       "notes": "db6ba7a1e1c76429cb00572fe5c39e3ebed244dc7c791e9e302af24f15b1c4e4",
-      "production": "74939ae75539e70a1612b86fe97107a1bb29e651015901ae393f6202ffce7f2e"
+      "production": "a10078b3ce8a9ce3d173cb1faf8e2325975967019d3a9aad3f5d79ce5a60f7a9"
     }
   },
   "scope": "Profils humains et créatures natifs, lieux, props et placements, équipements, mobilité, matériaux et mondes du DLC récupéré, avec les manquants identifiés dans les sources consultées.",
@@ -3704,10 +3704,6 @@
             "createdOn": "2026-11-26",
             "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
             "referenceUrls": [],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/generated_images/exec-f22d21a2-eda0-4785-8ff5-3ce56ca9f667.png"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-4446e72f-4439-420b-adf7-a761531f2346.png",
             "transparentBackgroundRequested": false,
             "attempt": "jonesy-study-v1-opaque",
             "history": [
@@ -3726,7 +3722,8 @@
                 "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
                 "selected": true
               }
-            ]
+            ],
+            "parentAttemptId": "jonesy-study-v1"
           },
           "validation": {
             "visual": "reviewed_with_limitations",
@@ -6199,10 +6196,6 @@
             "referenceUrls": [
               "https://images.propstore.com/f9a934af42ec346c322933253cea5576-1.jpg"
             ],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/fleuve-production-reference-images/medlab-concept.jpg"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-c4c428e1-f60c-4178-8d34-c9d1e152d98d.png",
             "transparentBackgroundRequested": false,
             "attempt": "medlab-study-v1",
             "history": []
@@ -11577,10 +11570,6 @@
             "referenceUrls": [
               "https://images.propstore.com/660940bd6ff9279bce0a991980fde734-1.jpg"
             ],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/fleuve-production-reference-images/uplink-miniature.jpg"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-ffac2493-c188-4f05-8d9f-b8f77651f4a6.png",
             "transparentBackgroundRequested": true,
             "attempt": "uplink-study-v1",
             "history": []
@@ -12249,8 +12238,6 @@
             "createdOn": "2026-11-26",
             "prompt": "Use case: stylized-concept. Create ONE detailed landscape production illustration of the hemispherical greenhouse at the Hadley's Hope colony, interpreted from Alien: River of Pain. A single practical HEMISPHERICAL glazed dome stands on a low sealed industrial foundation amid dark grey rocky ground and windblown dust. Through the dusty translucent plastiglass panels, show orderly green cultivated plant rows and a modest metal walkway under warm internal grow lights. The dome is supported by a legible metal rib structure. One small attached rectangular sealed entrance vestibule provides a real framed closed door at ground level, reached by a short solid service path; no floating or isolated doors. Exterior pipes and air-handling units connect physically to the dome foundation, with no invented giant machines. No people or creatures. Muted off-white and grey-green industrial metal, charcoal rocks, restrained green vegetation inside the enclosure, cold overcast exterior light. Polished realistic hand-painted 2D game-environment style matching the retro-industrial colony. FULLY OPAQUE coherent environment image, no transparent background, typography, labels, border, watermark, collage, modern glass office tower, tropical outdoor landscape, warfare, organic infestation or dramatic disaster. This is a concept study of a text-attested hemispherical greenhouse; exact glazing pattern, interior arrangement and dimensions are interpreted.",
             "referenceUrls": [],
-            "referencePaths": [],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-fb421dac-edde-44b0-9f19-25f0a1bff003.png",
             "transparentBackgroundRequested": false,
             "attempt": "greenhouse-study-v1",
             "history": []
@@ -28709,10 +28696,6 @@
             "referenceUrls": [
               "https://www.sideshow.com/storage/product-images/906247/derelict-ship_alien_gallery_5e91199774892.jpg"
             ],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/fleuve-production-reference-images/derelict-licensed.jpg"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-04a002a8-01b7-45a6-84fd-a3fdd41e72f8.png",
             "transparentBackgroundRequested": true,
             "attempt": "derelict-study-v1",
             "history": []
@@ -32370,10 +32353,6 @@
             "referenceUrls": [
               "https://images.propstore.com/18811284db7f2bb22b6652ebbbfad68c-1.jpg"
             ],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/fleuve-production-reference-images/daihotai-concept.jpg"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1509f9c3-86cd-4ec5-909b-ac59b9066d86.png",
             "transparentBackgroundRequested": true,
             "attempt": "daihotai-study-v1",
             "history": []
@@ -33628,8 +33607,6 @@
             "createdOn": "2026-11-26",
             "prompt": "Use case: stylized-concept. Create ONE detailed opaque square material-production study for the rocky surface of LV-426 in Alien: River of Pain. Close top-down view of a continuous field of black and charcoal-grey weathered volcanic stone, angular slate-like fragments, compact fine grey abrasive dust in crevices, occasional muted brown mineral edge wear. Dense but readable realistic hand-painted 2D-game material detail, broad flat surfaces mixed with smaller stones, subdued diffuse light without a strong directional cast shadow. No horizon or sky, no landscape panorama, no buildings, creatures, plants, footprints, equipment, lettering, grid, scale bar, labels, glowing lava or bright crystals. Avoid a single central focal object so this can guide a future terrain texture. One coherent material surface fills the entire frame. FULLY OPAQUE background. This is an interpreted material study based on the novel's black-grey dusty exterior, not a certified seamless tile or a measured planetary surface.",
             "referenceUrls": [],
-            "referencePaths": [],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-3fc5362d-0d43-4ccc-8e8e-7fa34d71e619.png",
             "transparentBackgroundRequested": false,
             "attempt": "exterior-terrain-study-v1",
             "history": []
@@ -33698,8 +33675,6 @@
             "createdOn": "2026-11-26",
             "prompt": "Use case: stylized-concept. Create ONE wide landscape production painting of the surface of LV-426 / Acheron around Hadley's Hope, for Alien: River of Pain. Ground-level view across black and charcoal-grey angular volcanic ridges and a dusty stony plain, under a low heavy overcast sky. Wind drives low streams of abrasive grey dust across the ground. A small distant cluster of low modular industrial colony blocks with restrained amber work lights occupies the middle distance; the larger angular mass of atmospheric-processing infrastructure is barely visible farther away through dust. The buildings are grounded, functional and connected by low service structures, not floating architecture. Bleak retro-industrial 1980s science-fiction mood, limited charcoal, grey, muted brown and cold slate-blue palette, realistic hand-painted 2D game background with readable foreground/middle/background layers. FULLY OPAQUE scene. No people, creatures, vehicles, plants, alien ruins, spacecraft, domed globe, starfield, giant sky planet, bright lava, explosions, text, map labels, UI or inset panels. This is an interpreted surface view grounded in the novel's dusty black-grey exterior, not an orbital map, exact colony floor plan or certified geography. One coherent view.",
             "referenceUrls": [],
-            "referencePaths": [],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1565e132-e03e-41a6-a269-965bc10b4df3.png",
             "transparentBackgroundRequested": false,
             "attempt": "lv426-surface-study-v1",
             "history": []
@@ -35512,8 +35487,6 @@
             "createdOn": "2026-11-26",
             "prompt": "Use case: stylized-concept. Create ONE wide landscape production painting of the surface of LV-426 / Acheron around Hadley's Hope, for Alien: River of Pain. Ground-level view across black and charcoal-grey angular volcanic ridges and a dusty stony plain, under a low heavy overcast sky. Wind drives low streams of abrasive grey dust across the ground. A small distant cluster of low modular industrial colony blocks with restrained amber work lights occupies the middle distance; the larger angular mass of atmospheric-processing infrastructure is barely visible farther away through dust. The buildings are grounded, functional and connected by low service structures, not floating architecture. Bleak retro-industrial 1980s science-fiction mood, limited charcoal, grey, muted brown and cold slate-blue palette, realistic hand-painted 2D game background with readable foreground/middle/background layers. FULLY OPAQUE scene. No people, creatures, vehicles, plants, alien ruins, spacecraft, domed globe, starfield, giant sky planet, bright lava, explosions, text, map labels, UI or inset panels. This is an interpreted surface view grounded in the novel's dusty black-grey exterior, not an orbital map, exact colony floor plan or certified geography. One coherent view.",
             "referenceUrls": [],
-            "referencePaths": [],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1565e132-e03e-41a6-a269-965bc10b4df3.png",
             "transparentBackgroundRequested": false,
             "attempt": "lv426-surface-study-v1",
             "history": []
@@ -35761,10 +35734,6 @@
             "referenceUrls": [
               "https://images.propstore.com/660940bd6ff9279bce0a991980fde734-1.jpg"
             ],
-            "referencePaths": [
-              "/workspace/scratch/375209caf28f/fleuve-production-reference-images/uplink-miniature.jpg"
-            ],
-            "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-ffac2493-c188-4f05-8d9f-b8f77651f4a6.png",
             "transparentBackgroundRequested": true,
             "attempt": "uplink-study-v1",
             "history": []
@@ -35860,10 +35829,6 @@
           "createdOn": "2026-11-26",
           "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
           "referenceUrls": [],
-          "referencePaths": [
-            "/workspace/scratch/375209caf28f/generated_images/exec-f22d21a2-eda0-4785-8ff5-3ce56ca9f667.png"
-          ],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-4446e72f-4439-420b-adf7-a761531f2346.png",
           "transparentBackgroundRequested": false,
           "attempt": "jonesy-study-v1-opaque",
           "history": [
@@ -35882,7 +35847,8 @@
               "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
               "selected": true
             }
-          ]
+          ],
+          "parentAttemptId": "jonesy-study-v1"
         },
         "validation": {
           "visual": "reviewed_with_limitations",
@@ -35940,10 +35906,6 @@
           "referenceUrls": [
             "https://images.propstore.com/f9a934af42ec346c322933253cea5576-1.jpg"
           ],
-          "referencePaths": [
-            "/workspace/scratch/375209caf28f/fleuve-production-reference-images/medlab-concept.jpg"
-          ],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-c4c428e1-f60c-4178-8d34-c9d1e152d98d.png",
           "transparentBackgroundRequested": false,
           "attempt": "medlab-study-v1",
           "history": []
@@ -36000,10 +35962,6 @@
           "referenceUrls": [
             "https://images.propstore.com/18811284db7f2bb22b6652ebbbfad68c-1.jpg"
           ],
-          "referencePaths": [
-            "/workspace/scratch/375209caf28f/fleuve-production-reference-images/daihotai-concept.jpg"
-          ],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1509f9c3-86cd-4ec5-909b-ac59b9066d86.png",
           "transparentBackgroundRequested": true,
           "attempt": "daihotai-study-v1",
           "history": []
@@ -36087,10 +36045,6 @@
           "referenceUrls": [
             "https://www.sideshow.com/storage/product-images/906247/derelict-ship_alien_gallery_5e91199774892.jpg"
           ],
-          "referencePaths": [
-            "/workspace/scratch/375209caf28f/fleuve-production-reference-images/derelict-licensed.jpg"
-          ],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-04a002a8-01b7-45a6-84fd-a3fdd41e72f8.png",
           "transparentBackgroundRequested": true,
           "attempt": "derelict-study-v1",
           "history": []
@@ -36166,8 +36120,6 @@
           "createdOn": "2026-11-26",
           "prompt": "Use case: stylized-concept. Create ONE detailed opaque square material-production study for the rocky surface of LV-426 in Alien: River of Pain. Close top-down view of a continuous field of black and charcoal-grey weathered volcanic stone, angular slate-like fragments, compact fine grey abrasive dust in crevices, occasional muted brown mineral edge wear. Dense but readable realistic hand-painted 2D-game material detail, broad flat surfaces mixed with smaller stones, subdued diffuse light without a strong directional cast shadow. No horizon or sky, no landscape panorama, no buildings, creatures, plants, footprints, equipment, lettering, grid, scale bar, labels, glowing lava or bright crystals. Avoid a single central focal object so this can guide a future terrain texture. One coherent material surface fills the entire frame. FULLY OPAQUE background. This is an interpreted material study based on the novel's black-grey dusty exterior, not a certified seamless tile or a measured planetary surface.",
           "referenceUrls": [],
-          "referencePaths": [],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-3fc5362d-0d43-4ccc-8e8e-7fa34d71e619.png",
           "transparentBackgroundRequested": false,
           "attempt": "exterior-terrain-study-v1",
           "history": []
@@ -36227,10 +36179,6 @@
           "referenceUrls": [
             "https://images.propstore.com/660940bd6ff9279bce0a991980fde734-1.jpg"
           ],
-          "referencePaths": [
-            "/workspace/scratch/375209caf28f/fleuve-production-reference-images/uplink-miniature.jpg"
-          ],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-ffac2493-c188-4f05-8d9f-b8f77651f4a6.png",
           "transparentBackgroundRequested": true,
           "attempt": "uplink-study-v1",
           "history": []
@@ -36314,8 +36262,6 @@
           "createdOn": "2026-11-26",
           "prompt": "Use case: stylized-concept. Create ONE wide landscape production painting of the surface of LV-426 / Acheron around Hadley's Hope, for Alien: River of Pain. Ground-level view across black and charcoal-grey angular volcanic ridges and a dusty stony plain, under a low heavy overcast sky. Wind drives low streams of abrasive grey dust across the ground. A small distant cluster of low modular industrial colony blocks with restrained amber work lights occupies the middle distance; the larger angular mass of atmospheric-processing infrastructure is barely visible farther away through dust. The buildings are grounded, functional and connected by low service structures, not floating architecture. Bleak retro-industrial 1980s science-fiction mood, limited charcoal, grey, muted brown and cold slate-blue palette, realistic hand-painted 2D game background with readable foreground/middle/background layers. FULLY OPAQUE scene. No people, creatures, vehicles, plants, alien ruins, spacecraft, domed globe, starfield, giant sky planet, bright lava, explosions, text, map labels, UI or inset panels. This is an interpreted surface view grounded in the novel's dusty black-grey exterior, not an orbital map, exact colony floor plan or certified geography. One coherent view.",
           "referenceUrls": [],
-          "referencePaths": [],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1565e132-e03e-41a6-a269-965bc10b4df3.png",
           "transparentBackgroundRequested": false,
           "attempt": "lv426-surface-study-v1",
           "history": []
@@ -36369,8 +36315,6 @@
           "createdOn": "2026-11-26",
           "prompt": "Use case: stylized-concept. Create ONE detailed landscape production illustration of the hemispherical greenhouse at the Hadley's Hope colony, interpreted from Alien: River of Pain. A single practical HEMISPHERICAL glazed dome stands on a low sealed industrial foundation amid dark grey rocky ground and windblown dust. Through the dusty translucent plastiglass panels, show orderly green cultivated plant rows and a modest metal walkway under warm internal grow lights. The dome is supported by a legible metal rib structure. One small attached rectangular sealed entrance vestibule provides a real framed closed door at ground level, reached by a short solid service path; no floating or isolated doors. Exterior pipes and air-handling units connect physically to the dome foundation, with no invented giant machines. No people or creatures. Muted off-white and grey-green industrial metal, charcoal rocks, restrained green vegetation inside the enclosure, cold overcast exterior light. Polished realistic hand-painted 2D game-environment style matching the retro-industrial colony. FULLY OPAQUE coherent environment image, no transparent background, typography, labels, border, watermark, collage, modern glass office tower, tropical outdoor landscape, warfare, organic infestation or dramatic disaster. This is a concept study of a text-attested hemispherical greenhouse; exact glazing pattern, interior arrangement and dimensions are interpreted.",
           "referenceUrls": [],
-          "referencePaths": [],
-          "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-fb421dac-edde-44b0-9f19-25f0a1bff003.png",
           "transparentBackgroundRequested": false,
           "attempt": "greenhouse-study-v1",
           "history": []

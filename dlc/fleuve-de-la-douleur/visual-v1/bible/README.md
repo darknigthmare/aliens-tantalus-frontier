@@ -60,6 +60,8 @@ Chaque entrée contient un identifiant `prod-…`, un chemin PNG concret, un tit
 
 Les champs `assets` et `status.integration` des fiches continuent à décrire le runtime. Les champs `productionAssets` et `productionStatus` décrivent les illustrations documentaires. Une image de contexte est identifiée comme telle ; elle ne clôt pas les besoins propres au sujet de la fiche.
 
+La provenance de génération conserve les prompts exacts, les références HTTPS publiques, les identifiants d’essais stables et leur historique. Un `parentAttemptId` renvoie à une entrée de cet historique. Les chemins locaux transitoires de sortie ou de références ne font pas partie du registre ; le validateur les refuse. Le fichier canonique et son SHA-256 identifient l’image effectivement livrée.
+
 Les filtres distinguent PNG runtime, illustrations de production, sujet illustré en production, absence de PNG runtime, absence d’image du sujet et absence de toute image. Le compteur « sans aucune image » inclut uniquement les fiches sans PNG runtime et sans illustration associée. Le compteur « sans image du sujet » inclut les fiches sans PNG runtime et sans illustration de production au rôle `subject` ; il conserve donc les fiches illustrées uniquement en contexte parmi les manquants dédiés.
 
 ## Validation et distribution
