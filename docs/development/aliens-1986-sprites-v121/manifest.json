@@ -1,0 +1,167 @@
+{
+  "schema": "aliens1986-raster-supplement-v121",
+  "version": 121,
+  "presentationVersion": 121,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "8454b22ad739a1fc2e97d0bae4ffb23cd48162d4",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v118/manifest.json",
+      "sha256": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+      "assetCount": 11
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/manifest.json",
+      "sha256": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0",
+      "assetCount": 6
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v120/manifest.json",
+      "sha256": "a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437",
+      "assetCount": 4
+    }
+  ],
+  "counts": {
+    "base": 151,
+    "added": 4,
+    "total": 155
+  },
+  "addedBytes": 9716659,
+  "filmFidelityValidated": false,
+  "notes": [
+    "Four native transparent PNGs cover five existing industrial bodies. The heat exchanger is shared by the west and east conduit bodies.",
+    "The valve plinth has an empty upper surface; its V118 indicator remains a separately drawn prop.",
+    "Measured alpha128 floor pivots and uniform fitting preserve source proportions. Native bytes, alpha and dimensions are unchanged after generation.",
+    "A first pump attempt was rejected for proportions and edge fringes. It is documented separately and is not an active catalogue image.",
+    "All four images are adaptations; no exact film-prop identity or geometry is certified."
+  ],
+  "assets": [
+    {
+      "id": "hadley-service-generator",
+      "path": "assets/dlc/aliens-1986/v121/furniture/hadley-service-generator.png",
+      "sha256": "8899ee95baf096ef06edc0fbb5f995f717fbbbe2958b90e3a1c856ff3b38066f",
+      "bytes": 2663142,
+      "width": 1071,
+      "height": 1469,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        52,
+        57,
+        1015,
+        1412
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        533.5,
+        1412
+      ],
+      "label": "Hadley — générateur de service",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation"
+    },
+    {
+      "id": "service-pump-unit",
+      "path": "assets/dlc/aliens-1986/v121/furniture/service-pump-unit.png",
+      "sha256": "1193a040c1305535d36ded3869361dc717a35ca836363a53f2ab5f415639cf10",
+      "bytes": 2293428,
+      "width": 1191,
+      "height": 1321,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        105,
+        80,
+        1086,
+        1246
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        595.5,
+        1246
+      ],
+      "label": "Maintenance — unité de pompage",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation"
+    },
+    {
+      "id": "conduit-heat-exchanger",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+      "sha256": "34c50e1c2644a65a40dbdad83f3b232e4ace14191e35f05bfbec6155682eb304",
+      "bytes": 2411055,
+      "width": 1210,
+      "height": 1300,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        57,
+        56,
+        1152,
+        1251
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        604.5,
+        1251
+      ],
+      "label": "Conduites — échangeur thermique",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation"
+    },
+    {
+      "id": "conduit-valve-plinth",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-valve-plinth.png",
+      "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+      "bytes": 2349034,
+      "width": 1275,
+      "height": 1234,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        68,
+        58,
+        1206,
+        1191
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        637.0,
+        1191
+      ],
+      "label": "Conduites — socle de commande des vannes",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation"
+    }
+  ]
+}
