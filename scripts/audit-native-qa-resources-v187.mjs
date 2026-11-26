@@ -18,7 +18,7 @@ const freeze = value => {
   return value;
 };
 
-// Earth V12 continues eight reviewed files from main, via the sprite recovery PR.
+// Earth V12 continues nine reviewed files from main, via the sprite recovery PR.
 // Earlier endpoints and historical execution evidence remain unchanged.
 export const EARTH_MAIN_BASELINE_V12 = '07ee99d56480780044c74d4f1eb11f31b07fef13';
 export const EARTH_MAIN_SUCCESSORS_V12 = freeze({
@@ -37,6 +37,10 @@ export const EARTH_MAIN_SUCCESSORS_V12 = freeze({
   "scripts/dev.mjs": {
     "previousSha256": "3c7047f833713dc570242d7e8319a8309522ade1efbf82dcc317c028042e1aad",
     "currentSha256": "9f394705ff311293317338aad5d8d6787bcbaab96719ec3081a82baa257b2320"
+  },
+  "scripts/verify-audit-v143.mjs": {
+    "previousSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
+    "currentSha256": "2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f"
   },
   "scripts/verify-public-release-v86.mjs": {
     "previousSha256": "83b843ecfaefb08770258331018d18837628b59f9d86b647b2185be75a01327e",

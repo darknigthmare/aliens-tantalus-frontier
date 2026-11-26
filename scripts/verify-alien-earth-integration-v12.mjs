@@ -273,11 +273,14 @@ test('builder refuses linked output before writing through it', async t => {
   await assert.rejects(buildAlienEarthDlc(root, output)); assert.deepEqual(await readdir(elsewhere), []);
 });
 test('Earth succession rejects fabricated predecessors and altered host bytes', async () => {
-  assert.deepEqual(verifyEarthMainSuccessionV12(), { successors: 8, historicalEvidenceTransferred: false });
+  assert.deepEqual(verifyEarthMainSuccessionV12(), { successors: 9, historicalEvidenceTransferred: false });
   for (const [path, receipt] of Object.entries(EARTH_MAIN_SUCCESSORS_V12)) {
     assert.equal(reviewedEarthMainDigestV12(path, receipt.previousSha256), receipt.currentSha256);
     assert.throws(() => reviewedEarthMainDigestV12(path, '0'.repeat(64)), /Broken Earth main predecessor/);
   }
   const sources = new Map(await Promise.all(Object.keys(EARTH_MAIN_SUCCESSORS_V12).map(async path => [path, await read(path)])));
-  assert.throws(() => verifyEarthMainSuccessionV12(path => sources.get(path) + '\n// unreviewed\n'), /Unreviewed Earth main source bytes/);
+  for (const altered of sources.keys()) {
+    assert.throws(() => verifyEarthMainSuccessionV12(path => sources.get(path) + (path === altered ? '\n// unreviewed\n' : '')),
+      error => error.code === 'ERR_ASSERTION' && error.message.split('\n')[0] === 'Unreviewed Earth main source bytes: ' + altered, altered);
+  }
 });

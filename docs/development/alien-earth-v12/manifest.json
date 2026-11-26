@@ -4,13 +4,13 @@
   "dlc": "Alien: Earth",
   "edition": "V12 — intégration et sprites",
   "date": "2026-11-26",
-  "status": "module-and-portable-validated-host-ci-pending",
+  "status": "module-portable-and-scoped-host-integration-validated",
   "completedImages": 15,
   "generatedBytesTotal": 22676032,
   "originalGenerationBytesPreserved": true,
   "runtimeSourceIncluded": true,
   "productionDeployment": false,
-  "finalBrowserValidation": false,
+  "finalBrowserValidation": true,
   "screenExactCertification": false,
   "baseCommit": "07ee99d56480780044c74d4f1eb11f31b07fef13",
   "recoveryCheckpointCommit": "c3fd0cdc72c58a9a4fd89684c00dc64125cee80d",
@@ -905,11 +905,15 @@
     },
     "final15Browser": {
       "dlcChecks": 11,
-      "dlcScope": "Raster and gameplay checks before navigation/audio-only correction; renderer and PNG bytes unchanged.",
-      "portable": "passed-current-build",
+      "combinedDlcPortableCIChecks": 12,
+      "portable": "passed-current-build-locally-and-in-CI",
       "portableSha256": "a46e362d845e646c6defd9920f0cff800faf5abfd29729495bb82d1350950511",
-      "localHost": "failed after second history return; GPU process exit9; cause unknown",
-      "hostCI": "pending on complete native distribution",
+      "localHost": "failed after second history return; GPU process exit9; cause unknown; retained in report",
+      "hostCI": "passed-two-consecutive-menu-roundtrips",
+      "ciRun": 45846386818,
+      "ciHostJob": 140001046781,
+      "backForwardCacheObservedInCI": true,
+      "ciConsoleFavicon404Messages": 3,
       "report": "qa/browser-report.json"
     },
     "historicalSuccession": {
@@ -917,7 +921,16 @@
     },
     "targetedCompatibility": {
       "passed": 105,
-      "includesOverlappingEarthIntegrationTests": true
+      "includesOverlappingEarthIntegrationTests": true,
+      "scope": "Navigation/audio revision before final verifier-only successor registration."
+    },
+    "postRegistration": {
+      "earthPassed": 1266,
+      "auditAndHistoricalSuccessionPassed": 79,
+      "realV165Passed": 8,
+      "rejectedWrongPredecessors": 9,
+      "rejectedIsolatedCorruptions": 9,
+      "runtimeChanged": false
     }
   },
   "history": [
@@ -931,7 +944,10 @@
       "checkpoint": "current continuation",
       "generatedImages": 15,
       "runtimeCodeIncluded": true,
-      "note": "V11 restored from verified archive; module,15 individual PNGs and portable validated. Local repeated host return retains a GPU/browser crash; a separate CI job tests the complete native distribution."
+      "note": "V11 restored; 15 individual PNGs, module and portable validated. Current CI passes 12 DLC/portable checks and 2 consecutive native menu round trips, including an observed cached return with audio running. Local GPU/browser failures remain recorded separately."
     }
-  ]
+  ],
+  "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+  "finalBrowserValidationScope": "12 combined DLC/portable checks plus two consecutive host-menu round trips in one browser context on the complete native distribution; not a full 70-room playthrough.",
+  "runtimeUnchangedSinceValidatedCommit": true
 }

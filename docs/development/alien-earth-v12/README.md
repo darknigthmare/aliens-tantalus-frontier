@@ -37,6 +37,12 @@ npm run test:dlc:earth
 node scripts/build-alien-earth-dlc.mjs --standalone --output=earth-export/JOUER_ALIEN_EARTH_V12.html
 ```
 
+## Validation de ce lot
+
+Le [workflow Earth du code final](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818) passe **1 266 tests Earth**, **7 tests de succession**, **12 contrôles navigateur DLC/portable** et **deux allers-retours hôte consécutifs** dans un même contexte. Le second retour conserve réellement le document en cache et reprend avec l’audio actif. Les sauvegardes de test restent intactes.
+
+Le rapport conserve les essais locaux qui avaient planté, ainsi que les trois messages console 404 du favicon relevés en CI. Les 70 salles n’ont pas été parcourues intégralement ; R18 est vérifiée depuis une fixture visuelle déclarée. Les détails et les empreintes sont dans les rapports ci-dessous.
+
 ## Documentation
 
 - [BIBLE.md](BIBLE.md) : 25 personnages, 70 salles, 49 types de props, 8 profils de créatures, armes, outils, véhicules, terrains et manquants connus.

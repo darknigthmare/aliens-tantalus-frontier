@@ -51,6 +51,29 @@ Les essais hôte antérieurs sont conservés dans le rapport navigateur. Une pas
 
 La validation navigateur du dernier correctif, les empreintes des fichiers jouables et la portée exacte des fixtures sont consignées dans [le rapport navigateur](qa/browser-report.json) et [le rapport de tests](qa/test-report.json). Une même clé d’historique ne prouve pas la conservation du même document : `performance.timeOrigin` et `pageshow.persisted` sont rapportés séparément.
 
+## Preuve CI de la révision finale
+
+Le [workflow Earth de la révision 6ac32413](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818) a réussi ses deux jobs. Le job `earth` passe 1 266 tests Earth, 7 tests de succession et 12 contrôles navigateur DLC/portable. Le job `host-roundtrips` utilise le vrai build natif complet, un contexte navigateur unique et deux allers-retours consécutifs par les menus.
+
+| Cycle | Retour effectué | Entrée et document natifs | Audio après retour |
+| --- | --- | --- | --- |
+| 1 | Bouton de retour du DLC | Même entrée d’historique, nouveau document | Directeur non détruit ; déverrouillage au vrai clic de menu suivant |
+| 2 | Retour historique réel du navigateur | Même entrée et même document ; `pageshow.persisted=true` | Directeur non détruit, contexte actif, scène du menu en lecture |
+
+Les sauvegardes Earth, les trois profils natifs de test et le profil sélectionné restent identiques avant/après les deux cycles. Les empreintes des fixtures correspondent à celles des essais locaux. Le rapport ne contient aucune exception JavaScript ni ressource applicative échouée. Trois messages console 404 correspondent précisément à `/favicon.ico` dans la trace ; cette icône était déjà exclue du filtre de ressources du harnais. Ce résultat ne constitue donc pas une absence totale de messages console.
+
+Le code de jeu validé est `6ac32413c6b0c00d3e4d9fe8a35561ac430804b0`. GitHub a testé son commit de fusion temporaire `abbe6ed8e3e1d5f73fa4493a1337f31fdc316a05` ; son arbre `d58e25af95c320811d91f4ae2bcad8bf7c264f51` est exactement celui du code publié. La finalisation des documents et du reçu de vérificateur décrit ci-dessous ne modifie aucun fichier du runtime. Le rapport brut CI est identifié par le blob `8454cd5c20a9bc68891d6a0830ee3c7d1fc76a23` ; sa représentation assainie, conservant les égalités d’identifiants, est incluse dans `qa/browser-report.json`.
+
+Le [workflow Gameplay V162 de cette révision](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386754) passe également 63 tests Node, les contrôles de distribution, le build natif de 2 200 fichiers et les parcours navigateur Harpoon/audio/medical/convoy. Les autres contrôles du dépôt restent consultables dans la PR ; ces résultats ne sont pas présentés comme une validation universelle de tous les scénarios.
+
+Le succès CI ne supprime pas le crash GPU observé localement et ne démontre pas sa cause. Aucun parcours intégral des 70 salles n’est revendiqué ; la scène R18 demeure une fixture visuelle explicitement déclarée.
+
+### Dernier reçu de vérificateur
+
+Le premier run global de cette révision, `45846387234`, a exécuté 5 394 tests : 5 391 réussites, deux échecs et un test optionnel ignoré. Les deux échecs V165 provenaient du même reçu manquant pour `scripts/verify-audit-v143.mjs`, déjà modifié pour admettre la suite Earth. Le registre terminal Earth ajoute maintenant ce neuvième chemin avec son prédécesseur exact `825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2` et son successeur exact `2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f`.
+
+Les huit reçus antérieurs et le code des résolveurs restent identiques. Les tests refusent neuf faux prédécesseurs et neuf corruptions isolées. La vraie suite V165 passe **8/8**, après restauration de ses 62 fichiers de référence depuis leurs blobs exacts, puis exécution sans hook ni lecture substituée. Earth repasse **1 266/1 266** et la compatibilité audit/successions **79/79**. Ces groupes se recouvrent et ne s’additionnent pas en un total de tests distincts. Le statut du nouveau run global reste celui des contrôles de PR ; le résultat historique à deux échecs n’est pas réécrit comme un succès.
+
 ## Périmètre de livraison
 
 Le moteur Earth reste autonome ; schéma 11, espace `atf.dlc.alien-earth.s1.profile-1`. L’intégration de navigation ne constitue pas une fusion dans le GameEngine natif. Le module source contient les 180 fichiers historiques, les sources V12 et les 15 PNG finaux. Les 30 journaux historiques V11 appartiennent à la provenance, sans être de nouveaux résultats QA.

@@ -10,15 +10,19 @@
     "appSha256": "8f859ac837d454311b5a2b5bfe9e18d7382f6b00a0a581df27eaaf4aa09b8eb4",
     "earthUiSha256": "5339547b2a992d71283dbf7707cf200635ed23cffad7140ba97d66091c5b72a5",
     "officialQaSha256": "32be52703a8482d33e7209a1cfbf08b8b4544e38e5ab71b3d4c90457de520e7e",
-    "rasterCount": 15
+    "rasterCount": 15,
+    "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+    "validatedSourceTree": "d58e25af95c320811d91f4ae2bcad8bf7c264f51",
+    "runtimeUnchangedByFinalVerifierRegistration": true
   },
   "result": {
-    "dlc": "11 scoped local checks and 12 combined DLC/portable CI checks passed before navigation/audio-only correction; raster code and bytes unchanged",
+    "dlc": "passed 12 combined DLC/portable browser checks on the current code in GitHub Actions",
     "portable": "passed on current product",
     "localHost": "failed during stabilization after the second history return",
-    "hostCI": "pending publication and execution on complete native distribution",
+    "hostCI": "passed two consecutive menu round trips on the complete native distribution",
     "fullCampaignPlaythrough": false,
-    "screenExactCertification": false
+    "screenExactCertification": false,
+    "backForwardCacheObservedInCI": true
   },
   "latestLocal": {
     "host": {
@@ -1159,6 +1163,387 @@
   ],
   "sanitizationNotes": [
     "Local workspace paths are replaced by descriptive placeholders.",
-    "Navigation API UUID values are replaced by stable symbolic identifiers: equal original values retain the same symbol. The original raw file blob IDs remain recorded."
-  ]
+    "Navigation API UUID values are replaced by stable symbolic identifiers: equal original values retain the same symbol. The original raw file blob IDs remain recorded.",
+    "CI Navigation identifiers use their own stable prefix; the local and CI runs are not equated by identifier labels."
+  ],
+  "currentCI": {
+    "validatedCodeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+    "workflowRun": 45846386818,
+    "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818",
+    "earth": {
+      "jobId": 140001046365,
+      "conclusion": "success",
+      "nodeTests": 1266,
+      "successionTests": 7,
+      "browserChecks": 12,
+      "evidenceArtifactId": 15132890172,
+      "playableArtifactId": 15131744185
+    },
+    "host": {
+      "jobId": 140001046781,
+      "conclusion": "success",
+      "rawFileBlob": "8454cd5c20a9bc68891d6a0830ee3c7d1fc76a23",
+      "artifactId": 15132248064,
+      "artifactUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45846386818/artifacts/15132248064",
+      "runner": "ubuntu-24.04",
+      "playwright": "1.62.0",
+      "browser": "151.0.7922.34",
+      "scope": "One browser context, two native-title/Earth-title/native-title cycles, UI return then real browser history back; fixtures installed only at context creation.",
+      "fixtureHashesMatchLocal": true,
+      "javascriptExceptions": 0,
+      "failedApplicationResources": 0,
+      "consoleMessages": 3,
+      "consoleMessageScope": "Three 404 console messages are attributed by the preserved trace to /favicon.ico, excluded from the pre-existing resource-error filter. This is not a zero-console-error claim.",
+      "backForwardCacheObserved": true,
+      "audioAfterCachedReturn": {
+        "disposed": false,
+        "unlockStatus": "running",
+        "contextState": "running",
+        "scene": "menu",
+        "musicStatus": "playing"
+      },
+      "report": {
+        "ok": true,
+        "browser": "151.0.7922.34",
+        "browserArguments": [
+          "--no-sandbox"
+        ],
+        "functionalIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage"
+        ],
+        "ordinaryRoundtripIgnoredDefaultArguments": [
+          "--disable-dev-shm-usage",
+          "--disable-back-forward-cache"
+        ],
+        "sharedMemory": "/dev/shm",
+        "functionalBackForwardCache": "Playwright default disabled; the separate ordinary roundtrip scenario removes that automation flag",
+        "scenario": "host-roundtrips",
+        "traceMode": "light",
+        "freshBrowserBetweenScenarios": true,
+        "expectedRasterCount": 15,
+        "root": "<ci-checkout>/dist",
+        "sourceRoot": "<ci-checkout>",
+        "skipHost": false,
+        "fixtureDeclaration": "Fresh valid native profiles 1–3; selected profile 2; fresh Earth R01 fixture with 12.5 elapsed seconds and no completed objective. A separate R18 visual fixture starts chapter 5 with AE-01..AE-16 marked complete solely to inspect the Zoo; it is not evidence of a campaign playthrough.",
+        "checks": [
+          {
+            "name": "two consecutive host/Earth/host round trips in one ordinary browser preserve all save bytes",
+            "ok": true,
+            "cycles": 2
+          }
+        ],
+        "walk": [],
+        "routes": [],
+        "pageErrors": [],
+        "resourceErrors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "Failed to load resource: the server responded with a status of 404 (File not found)"
+        ],
+        "urls": {
+          "host": "http://127.0.0.1:34003/",
+          "earth": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+        },
+        "hostDocumentObservations": [
+          {
+            "cycle": 1,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707168299.4,
+            "navigationType": "navigate",
+            "historyLength": 2,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 1,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:34003/",
+            "timeOrigin": 1795707171738.5,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-3",
+              "id": "ci-navigation-identifier-4",
+              "index": 1,
+              "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795707171738.5
+              }
+            ],
+            "audio": null
+          },
+          {
+            "cycle": 1,
+            "stage": "native-after-return",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "locked",
+              "scene": null,
+              "contextState": null,
+              "musicStatus": "silent"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "native-before-earth",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          },
+          {
+            "cycle": 2,
+            "stage": "earth-title",
+            "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+            "referrer": "http://127.0.0.1:34003/",
+            "timeOrigin": 1795707177196.1,
+            "navigationType": "navigate",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-5",
+              "id": "ci-navigation-identifier-6",
+              "index": 1,
+              "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/dlc/alien-earth/v12/index.html",
+                "timeOrigin": 1795707177196.1
+              }
+            ],
+            "audio": null
+          },
+          {
+            "cycle": 2,
+            "stage": "native-after-return",
+            "url": "http://127.0.0.1:34003/",
+            "referrer": "",
+            "timeOrigin": 1795707173196.7,
+            "navigationType": "back_forward",
+            "historyLength": 3,
+            "navigationEntry": {
+              "key": "ci-navigation-identifier-1",
+              "id": "ci-navigation-identifier-2",
+              "index": 0,
+              "url": "http://127.0.0.1:34003/"
+            },
+            "navigationEntryCount": 2,
+            "pageShowEvents": [
+              {
+                "persisted": false,
+                "url": "http://127.0.0.1:34003/",
+                "timeOrigin": 1795707173196.7
+              },
+              {
+                "persisted": true,
+                "url": "http://127.0.0.1:34003/",
+                "timeOrigin": 1795707173196.7
+              }
+            ],
+            "audio": {
+              "disposed": false,
+              "unlockStatus": "running",
+              "scene": "menu",
+              "contextState": "running",
+              "musicStatus": "playing"
+            }
+          }
+        ],
+        "sameBrowserRoundTrips": {
+          "cycles": [
+            {
+              "cycle": 1,
+              "url": "http://127.0.0.1:34003/",
+              "returnMethod": "UI host button",
+              "pageShowEvents": [],
+              "earthBytesPreserved": true,
+              "nativeBytesPreserved": true,
+              "nativeTimeOriginBefore": 1795707168299.4,
+              "nativeTimeOriginAfter": 1795707173196.7,
+              "sameNativeDocumentAfterReturn": false,
+              "nativeEntryKeyBefore": "ci-navigation-identifier-1",
+              "nativeEntryKeyAfter": "ci-navigation-identifier-1",
+              "sameNativeHistoryEntryAfterReturn": true
+            },
+            {
+              "cycle": 2,
+              "url": "http://127.0.0.1:34003/",
+              "returnMethod": "real browser history back",
+              "pageShowEvents": [
+                {
+                  "persisted": false,
+                  "url": "http://127.0.0.1:34003/",
+                  "timeOrigin": 1795707173196.7
+                },
+                {
+                  "persisted": true,
+                  "url": "http://127.0.0.1:34003/",
+                  "timeOrigin": 1795707173196.7
+                }
+              ],
+              "earthBytesPreserved": true,
+              "nativeBytesPreserved": true,
+              "nativeTimeOriginBefore": 1795707173196.7,
+              "nativeTimeOriginAfter": 1795707173196.7,
+              "sameNativeDocumentAfterReturn": true,
+              "nativeEntryKeyBefore": "ci-navigation-identifier-1",
+              "nativeEntryKeyAfter": "ci-navigation-identifier-1",
+              "sameNativeHistoryEntryAfterReturn": true
+            }
+          ],
+          "browserResetBetweenCycles": false,
+          "backForwardCacheDisableFlagRemoved": true,
+          "status": "complete",
+          "pageshowPersistedObserved": true
+        },
+        "fixtureHashes": {
+          "atf-v47-profile-1": "3c919e859763a5423c58b804f78a806cf917f93d37ef2e3f48467fbb3debd507",
+          "atf-v47-profile-2": "c33c4c50f8b3ae02a254d6f17bb41cf8557db42a15b9d3ca5304a6e597628354",
+          "atf-v47-profile-3": "6dfd4d7e2414e17d4a484dd27ce46cc5e1b57dead79e6b17faa9c70fcafc267d",
+          "atf-v78-selected-profile": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        }
+      },
+      "artifactSha256": "145f2477ca004a61311849c43bb8fb91b1c01a6f6aa65a55e4ed3b6e7e4bd17c",
+      "artifactBytes": 462124,
+      "faviconTraceRows": [
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 4934.934,
+          "pageId": "ci-page-1"
+        },
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 9735.221,
+          "pageId": "ci-page-1"
+        },
+        {
+          "type": "console",
+          "messageType": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "args": [],
+          "location": {
+            "url": "http://127.0.0.1:34003/favicon.ico",
+            "lineNumber": 0,
+            "columnNumber": 0
+          },
+          "time": 10904.809,
+          "pageId": "ci-page-1"
+        }
+      ],
+      "receiptBlob": "2c0f7e8b0a3433ceb26c5f049919dd2a5bb4a898",
+      "environmentDifference": "CI launches Playwright's full Chromium executable in headless mode; the local runner used Chrome Headless Shell. Both reported version151.0.7922.34. The successful CI run does not by itself establish a cause for prior local GPU crashes."
+    },
+    "nativeGameplay": {
+      "workflowRun": 45846386754,
+      "conclusion": "success",
+      "nodeTests": 63,
+      "distributionFiles": 2200,
+      "browserScenarios": [
+        "Harpoon",
+        "audio",
+        "medical route",
+        "convoy history"
+      ]
+    },
+    "otherWorkflows": "See PR checks for the current status of the wider full-release suite; these scoped successes are not a claim that every repository workflow is green.",
+    "checkedOutMergeCommit": "abbe6ed8e3e1d5f73fa4493a1337f31fdc316a05",
+    "checkedOutTree": "d58e25af95c320811d91f4ae2bcad8bf7c264f51",
+    "checkoutTreeMatchesValidatedHead": true,
+    "fullReleaseFirstAttempt": {
+      "runId": 45846387234,
+      "codeCommit": "6ac32413c6b0c00d3e4d9fe8a35561ac430804b0",
+      "conclusion": "failure",
+      "tests": 5394,
+      "passed": 5391,
+      "failed": 2,
+      "skipped": 1,
+      "failedTests": [
+        4185,
+        4191
+      ],
+      "testFile": "scripts/verify-parallel-completion-v165.mjs",
+      "cause": "The reviewed successor of scripts/verify-audit-v143.mjs was missing from the terminal Earth succession registry.",
+      "artifactId": 15132344392,
+      "disposition": "Corrected by registering one exact ninth verifier successor, preserving all eight earlier receipts and all resolver/guard code. The real V165 suite passes 8/8 after fixture restoration, without hooks; Earth passes 1266/1266 and compatibility/succession 79/79. No gameplay runtime or export changed."
+    },
+    "finalVerifierRegistration": {
+      "path": "scripts/verify-audit-v143.mjs",
+      "predecessorSha256": "825a8672e074c335568669ce8e5c496ed2fb70af9e11f3d834169da1a8d5a1c2",
+      "currentSha256": "2de1172c3c821113eec7fdac46b4fa27206f03e4fbb735da7f7dccd197e5517f",
+      "realV165TestsPassed": 8,
+      "falsePredecessorsRejected": 9,
+      "isolatedCorruptionsRejected": 9,
+      "runtimeChanged": false,
+      "receiptBlob": "4c546a07298fb8ad911f749fc41f304d04a06080"
+    }
+  }
 }
