@@ -1,0 +1,574 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v107-operations",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 11,
+    "loaded": 11,
+    "failed": 0,
+    "draws": 45,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 11,
+    "used": [
+      "cargo-crate",
+      "hicks-idle-right",
+      "industrial-pipe",
+      "m41a-pulse-rifle",
+      "operations-command-table",
+      "operations-console",
+      "operations-display-bank",
+      "operations-storage-rack",
+      "operations-table-terminal",
+      "ripley-idle-right",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        785,
+        280.4800109863281
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        380,
+        112.5
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1186,
+        114.22000122070312
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-display-bank",
+      "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+      "source": [
+        15,
+        15,
+        1245,
+        1207
+      ],
+      "destination": [
+        -84.61255178127585,
+        -164.05999999999995,
+        169.2251035625517,
+        164.05999999999995
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1141,
+        384.5400085449219
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-command-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+      "source": [
+        12,
+        129,
+        1682,
+        736
+      ],
+      "destination": [
+        -119.00000000000001,
+        -104.14268727705114,
+        238.00000000000003,
+        104.14268727705114
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        549,
+        430.9800109863281
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-table-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/operations-table-terminal.png",
+      "source": [
+        32,
+        70,
+        1633,
+        810
+      ],
+      "destination": [
+        -46.41273729332517,
+        -47.617881200244945,
+        96,
+        47.617881200244945
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        570,
+        338.1199951171875
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        140,
+        432.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        152,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        106,
+        481.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        118,
+        438.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        733,
+        529.02001953125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "cargo-crate",
+      "path": "assets/dlc/aliens-1986/v115/props/cargo-crate.png",
+      "source": [
+        72,
+        106,
+        1618,
+        730
+      ],
+      "destination": [
+        -56.49999999999999,
+        -50.98269468479604,
+        112.99999999999999,
+        50.98269468479604
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        346,
+        533.3200073242188
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-storage-rack",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "source": [
+        12,
+        9,
+        924,
+        1639
+      ],
+      "destination": [
+        -53.69798657718121,
+        -190.5,
+        107.39597315436242,
+        190.5
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        369.5,
+        565.1400146484375
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "ops-table",
+      "x": 430,
+      "z": 100,
+      "w": 238,
+      "d": 93,
+      "h": 49
+    },
+    {
+      "id": "ops-rack",
+      "x": 303,
+      "z": 274,
+      "w": 133,
+      "d": 75,
+      "h": 126
+    },
+    {
+      "id": "north-partition",
+      "x": 874,
+      "z": 0,
+      "w": 40,
+      "d": 114,
+      "h": 166
+    },
+    {
+      "id": "south-partition",
+      "x": 874,
+      "z": 255,
+      "w": 40,
+      "d": 125,
+      "h": 156
+    },
+    {
+      "id": "ops-display",
+      "x": 1054,
+      "z": 68,
+      "w": 174,
+      "d": 71,
+      "h": 103
+    },
+    {
+      "id": "vestibule:ops-to-hadley:0",
+      "x": 0,
+      "z": 146,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-hadley:1",
+      "x": 0,
+      "z": 232,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-service:0",
+      "x": 697,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-service:1",
+      "x": 783,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-medlab:0",
+      "x": 1071,
+      "z": 317,
+      "w": 12,
+      "d": 63,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-medlab:1",
+      "x": 1157,
+      "z": 317,
+      "w": 12,
+      "d": 63,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-sentry:0",
+      "x": 1348,
+      "z": 146,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-sentry:1",
+      "x": 1348,
+      "z": 232,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-logistics:0",
+      "x": 115,
+      "z": 314,
+      "w": 12,
+      "d": 66,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-logistics:1",
+      "x": 201,
+      "z": 314,
+      "w": 12,
+      "d": 66,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-optics:0",
+      "x": 237,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:ops-to-optics:1",
+      "x": 323,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "ops-screen",
+      "x": 570,
+      "z": 142,
+      "support": "table centrale",
+      "supportId": "ops-table",
+      "elevation": 49,
+      "type": "console"
+    },
+    {
+      "id": "ops-console",
+      "x": 733,
+      "z": 307,
+      "support": "sol de la coursive",
+      "type": "console"
+    },
+    {
+      "id": "ops-lamp-west",
+      "x": 380,
+      "z": 25,
+      "support": "rail nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "ops-lamp-east",
+      "x": 1186,
+      "z": 27,
+      "support": "rail nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "ops-pipe",
+      "x": 785,
+      "z": 18,
+      "support": "mur nord",
+      "type": "pipe"
+    },
+    {
+      "id": "ammo-bin",
+      "x": 346,
+      "z": 312,
+      "support": "étagère arrière",
+      "type": "crate"
+    }
+  ],
+  "sourceImageCount": 11
+}

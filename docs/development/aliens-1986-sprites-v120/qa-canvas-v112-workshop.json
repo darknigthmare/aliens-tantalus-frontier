@@ -1,0 +1,530 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v112-workshop",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 12,
+    "loaded": 12,
+    "failed": 0,
+    "draws": 37,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 12,
+    "used": [
+      "beacon-case-closed",
+      "door-leaf",
+      "hicks-idle-right",
+      "industrial-pipe",
+      "m41a-pulse-rifle",
+      "optics-calibration-terminal",
+      "optics-workbench",
+      "ripley-idle-right",
+      "service-control-pedestal",
+      "utility-storage-cabinet",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        500,
+        111.63999938964844
+      ],
+      "alpha": 0.4
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1130,
+        111.63999938964844
+      ],
+      "alpha": 0.4
+    },
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1080,
+        285.6400146484375
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "optics-workbench",
+      "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+      "source": [
+        78,
+        48,
+        1301,
+        992
+      ],
+      "destination": [
+        -89.43063508064516,
+        -136.38,
+        178.86127016129032,
+        136.38
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        400,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "optics-calibration-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/optics-calibration-terminal.png",
+      "source": [
+        77,
+        43,
+        1477,
+        885
+      ],
+      "destination": [
+        -37.93785310734463,
+        -50,
+        83.44632768361582,
+        50
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        398,
+        288.5799865722656
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        140,
+        432.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        152,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "beacon-case-closed",
+      "path": "assets/dlc/aliens-1986/v115/props/beacon-case-closed.png",
+      "source": [
+        178,
+        448,
+        1103,
+        570
+      ],
+      "destination": [
+        -41.00000000000001,
+        -42.37533998186764,
+        82.00000000000001,
+        42.37533998186764
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1156,
+        473.9800109863281
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        106,
+        481.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        118,
+        438.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "door-leaf",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "source": [
+        428.38164422395465,
+        38,
+        166.23671155209072,
+        1466
+      ],
+      "destination": [
+        684,
+        199.24,
+        32,
+        282.2
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "service-control-pedestal",
+      "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+      "source": [
+        192,
+        88,
+        572,
+        1477
+      ],
+      "destination": [
+        -13.577522004062288,
+        -74,
+        28.658090724441433,
+        74
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        542,
+        517.8400268554688
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "utility-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+      "source": [
+        12,
+        22,
+        1157,
+        1290
+      ],
+      "destination": [
+        -68,
+        -151.63353500432152,
+        136,
+        151.63353500432152
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1033,
+        568.5800170898438
+      ],
+      "alpha": 1
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "destination": [],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "optics-north",
+      "x": 682,
+      "z": 0,
+      "w": 36,
+      "d": 134,
+      "h": 188
+    },
+    {
+      "id": "optics-south",
+      "x": 682,
+      "z": 254,
+      "w": 36,
+      "d": 126,
+      "h": 158
+    },
+    {
+      "id": "optics-bench",
+      "x": 308,
+      "z": 62,
+      "w": 184,
+      "d": 83,
+      "h": 65
+    },
+    {
+      "id": "glass-rack",
+      "x": 328,
+      "z": 290,
+      "w": 164,
+      "d": 63,
+      "h": 124
+    },
+    {
+      "id": "calibration-bank",
+      "x": 990,
+      "z": 59,
+      "w": 178,
+      "d": 82,
+      "h": 112
+    },
+    {
+      "id": "optics-cabinet",
+      "x": 965,
+      "z": 288,
+      "w": 136,
+      "d": 65,
+      "h": 98
+    },
+    {
+      "id": "beacon-case-body",
+      "x": 1122,
+      "z": 207,
+      "w": 68,
+      "d": 36,
+      "h": 51,
+      "material": "metal",
+      "blocksSight": false,
+      "visual": "beacon-case"
+    },
+    {
+      "id": "vestibule:optics-to-ops:0",
+      "x": 0,
+      "z": 146,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:optics-to-ops:1",
+      "x": 0,
+      "z": 232,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:optics-to-conduit:0",
+      "x": 1354,
+      "z": 146,
+      "w": 86,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:optics-to-conduit:1",
+      "x": 1354,
+      "z": 232,
+      "w": 86,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "optics-console",
+      "x": 398,
+      "z": 103,
+      "support": "banc de calibration",
+      "supportId": "optics-bench",
+      "elevation": 65,
+      "type": "console"
+    },
+    {
+      "id": "optics-control",
+      "x": 542,
+      "z": 294,
+      "support": "potelet électrique au sol",
+      "type": "console"
+    },
+    {
+      "id": "optics-lamp-a",
+      "x": 500,
+      "z": 24,
+      "support": "rail optique nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "optics-lamp-b",
+      "x": 1130,
+      "z": 24,
+      "support": "rail optique nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "beacon-case",
+      "x": 1156,
+      "z": 225,
+      "support": "coffret de secours posé sur chariot",
+      "bodyId": "beacon-case-body",
+      "type": "beacon-case"
+    },
+    {
+      "id": "calibration-pipe",
+      "x": 1080,
+      "z": 24,
+      "support": "mur derrière le banc",
+      "type": "pipe"
+    }
+  ],
+  "sourceImageCount": 12
+}

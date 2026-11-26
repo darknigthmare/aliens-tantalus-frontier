@@ -181,6 +181,51 @@ export const ALIENS1986_RASTER_ASSET_DIRECTORIES_V119 = Object.freeze([
   ALIENS1986_RASTER_ASSET_ROOT_V119,
   ALIENS1986_RASTER_ASSET_ROOT_V119 + '/furniture',
 ]);
+// V120 preserves the V119 module and records, then adds four images and six
+// reviewed scene placements. Shared images do not create extra asset records.
+export const ALIENS1986_RASTER_BASELINE_V120 = '168b6b489af1469bde620c108c8abed06d469f88';
+export const ALIENS1986_RASTER_SOURCE_SUCCESSORS_V120 = Object.freeze({
+  'scripts/derive-aliens1986-raster-v116.mjs': Object.freeze({
+    previousSha256: '63175b7a507aa2409606da368b0f75935d107a06fe97c7f28f5d62b69463dddd',
+    currentSha256: 'f89c27738cdf6dca374bb2f1b4aee9734199324c6c7f1e0242eda49d5b2af189',
+  }),
+});
+export const ALIENS1986_RASTER_SOURCE_ONLY_FILES_V120 = Object.freeze([
+  'modules/aliens-1986/v120/raster-furniture-v120.mjs',
+  'scripts/verify-aliens1986-raster-furniture-v120.mjs',
+  'scripts/qa-aliens1986-furniture-v120.py',
+  'docs/development/aliens-1986-sprites-v120/manifest.json',
+  'docs/development/aliens-1986-sprites-v120/index.html',
+  'docs/development/aliens-1986-sprites-v120/README.md',
+  'docs/development/aliens-1986-sprites-v120/references.md',
+  'docs/development/aliens-1986-sprites-v120/generation-ledger.json',
+  'docs/development/aliens-1986-sprites-v120/bible.md',
+  'docs/development/aliens-1986-sprites-v120/bible.json',
+  'docs/development/aliens-1986-sprites-v120/verification.json',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v106-hadley.png',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v106-hadley.json',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v107-operations.png',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v107-operations.json',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v109-reserve.png',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v109-reserve.json',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v112-workshop.png',
+  'docs/development/aliens-1986-sprites-v120/qa-canvas-v112-workshop.json',
+]);
+export const ALIENS1986_RASTER_SOURCE_SHA256_V120 = Object.freeze({
+  'modules/aliens-1986/v120/raster-furniture-v120.mjs': 'c725d9f7e40ab4f1f86609d69ccacfd94a9b8e28d5e704db5f721668846aec4b',
+  'docs/development/aliens-1986-sprites-v120/manifest.json': 'a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437',
+});
+export const ALIENS1986_RASTER_ASSET_ROOT_V120 = 'assets/dlc/aliens-1986/v120';
+export const ALIENS1986_RASTER_ASSET_FILES_V120 = Object.freeze([
+  ALIENS1986_RASTER_ASSET_ROOT_V120 + '/furniture/reserve-medical-counter.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V120 + '/furniture/utility-storage-cabinet.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V120 + '/furniture/optics-workbench.png',
+  ALIENS1986_RASTER_ASSET_ROOT_V120 + '/furniture/operations-display-bank.png',
+]);
+export const ALIENS1986_RASTER_ASSET_DIRECTORIES_V120 = Object.freeze([
+  ALIENS1986_RASTER_ASSET_ROOT_V120,
+  ALIENS1986_RASTER_ASSET_ROOT_V120 + '/furniture',
+]);
 const checkoutRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const validPath = path => typeof path === 'string' && path.length > 0
@@ -233,6 +278,12 @@ export function aliens1986RecoveryFile(path) {
 /** null delegates unrelated modules to the established release policy. */
 export function publicAliens1986DlcPathAdmission(path, { directory = false, built = false } = {}) {
   if (!validPath(path)) return false;
+  if (path === ALIENS1986_RASTER_ASSET_ROOT_V120 || path.startsWith(ALIENS1986_RASTER_ASSET_ROOT_V120 + '/')) {
+    return directory ? ALIENS1986_RASTER_ASSET_DIRECTORIES_V120.includes(path) : ALIENS1986_RASTER_ASSET_FILES_V120.includes(path);
+  }
+  if (ALIENS1986_RASTER_SOURCE_ONLY_FILES_V120.includes(path)) return !built && !directory;
+  if (['modules/aliens-1986/v120', 'docs/development/aliens-1986-sprites-v120'].includes(path)) return !built && directory;
+  if (path.startsWith('modules/aliens-1986/v120/') || path.startsWith('docs/development/aliens-1986-sprites-v120/')) return false;
   if (path === ALIENS1986_RASTER_ASSET_ROOT_V119 || path.startsWith(ALIENS1986_RASTER_ASSET_ROOT_V119 + '/')) {
     return directory ? ALIENS1986_RASTER_ASSET_DIRECTORIES_V119.includes(path) : ALIENS1986_RASTER_ASSET_FILES_V119.includes(path);
   }
@@ -313,16 +364,25 @@ export function reviewedAliens1986RasterDigestV119(path, endpoint) {
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens 1986 V119 presentation successor must change bytes: ' + path);
   return receipt.currentSha256;
 }
+export function reviewedAliens1986RasterDigestV120(path, endpoint) {
+  const receipt = ALIENS1986_RASTER_SOURCE_SUCCESSORS_V120[path];
+  if (!receipt) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken Aliens 1986 V120 presentation predecessor: ' + path);
+  assert.match(receipt.currentSha256, /^[a-f0-9]{64}$/, 'Unreviewed Aliens 1986 V120 presentation successor: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens 1986 V120 presentation successor must change bytes: ' + path);
+  return receipt.currentSha256;
+}
 
 
 export async function verifyAliens1986RasterSourcesV116(sourceRoot = checkoutRoot) {
   const base = resolve(sourceRoot);
   const inputs = [
     ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V116).map(([path, previous]) =>
-      [path, reviewedAliens1986RasterDigestV119(path, reviewedAliens1986RasterDigestV118(path, reviewedAliens1986RasterDigestV117(path, previous)))]),
+      [path, reviewedAliens1986RasterDigestV120(path, reviewedAliens1986RasterDigestV119(path, reviewedAliens1986RasterDigestV118(path, reviewedAliens1986RasterDigestV117(path, previous))))]),
     ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V117),
     ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V118),
     ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V119),
+    ...Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V120),
   ];
   for (const [path, expected] of inputs) {
     assert.match(expected, /^[a-f0-9]{64}$/, 'Unreviewed Aliens 1986 presentation source: ' + path);
@@ -399,6 +459,29 @@ async function verifyAliens1986RasterTreeV119(root, assets) {
   }
 }
 
+async function verifyAliens1986RasterTreeV120(root, assets) {
+  const prefix = ALIENS1986_RASTER_ASSET_ROOT_V120 + '/';
+  assert.deepEqual(assets.filter(asset => asset.path.startsWith(prefix)).map(asset => asset.path).sort(),
+    [...ALIENS1986_RASTER_ASSET_FILES_V120].sort(), 'Unapproved Aliens 1986 V120 raster inventory.');
+  const seen = new Set();
+  async function walk(directory) {
+    await assertDirectory(join(root, directory));
+    for (const entry of await readdir(join(root, directory), { withFileTypes: true })) {
+      const path = directory + '/' + entry.name;
+      assert.equal(entry.isSymbolicLink(), false, 'Aliens 1986 V120 raster symlink: ' + path);
+      assert.equal(publicAliens1986DlcPathAdmission(path, { directory: entry.isDirectory() }), true,
+        'Unapproved Aliens 1986 V120 raster member: ' + path);
+      if (entry.isDirectory()) { await walk(path); continue; }
+      assert.ok(entry.isFile(), 'Invalid Aliens 1986 V120 raster member: ' + path);
+      seen.add(path);
+    }
+  }
+  await walk(ALIENS1986_RASTER_ASSET_ROOT_V120);
+  for (const path of ALIENS1986_RASTER_ASSET_FILES_V120) {
+    assert.ok(seen.has(path), 'Missing Aliens 1986 V120 raster member: ' + path);
+  }
+}
+
 
 export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot, built = false } = {}) {
   const base = resolve(root);
@@ -428,6 +511,7 @@ export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot,
   await verifyAliens1986RasterTreeV117(base, derivative.assets);
   await verifyAliens1986RasterTreeV118(base, derivative.assets);
   await verifyAliens1986RasterTreeV119(base, derivative.assets);
+  await verifyAliens1986RasterTreeV120(base, derivative.assets);
   const seen = new Set();
   // The pinned manifest is the closed asset list, including reviewed host PNGs.
   // Each path stays under assets and every byte is checked independently.

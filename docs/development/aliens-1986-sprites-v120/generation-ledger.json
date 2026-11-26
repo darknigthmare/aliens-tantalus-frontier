@@ -1,0 +1,954 @@
+{
+  "schema": "aliens1986-generation-ledger-v120",
+  "date": "2026-11-26",
+  "tool": "built-in-imagegen",
+  "oneObjectPerImage": true,
+  "nativeBytesPreserved": true,
+  "pixelEditingOutsideImagegen": false,
+  "externalResampling": false,
+  "alphaNormalization": false,
+  "filmFidelityValidated": false,
+  "newImageCount": 4,
+  "toolCallCount": 6,
+  "discardedAttemptCount": 2,
+  "assets": [
+    {
+      "id": "reserve-medical-counter",
+      "path": "assets/dlc/aliens-1986/v120/furniture/reserve-medical-counter.png",
+      "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+      "bytes": 2189660,
+      "width": 1430,
+      "height": 1100,
+      "bbox": [
+        26,
+        73,
+        1403,
+        1042
+      ],
+      "pivot": [
+        714.5,
+        1042
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Réserve — comptoir médical",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA",
+      "selectedAttempt": 2,
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent medical storage counter sprite.\nPerform only this cleanup: preserve exactly the counter design, width-to-height proportions, elevated frontal camera, bare flat tabletop, two shallow drawers and two closed cabinet doors, colors, grey metal materials and worn texture. Add a generous clean TRANSPARENT margin of about5percent on ALL FOUR sides so both left and right countertop corners are fully visible and the object does not touch the canvas edge. Complete any edge that was previously cropped without changing the cabinet design.\nRemove every bright red, yellow or white fringe, stray pixel, speck and halo around the silhouette, especially along the upper countertop edge and the side edges. The object's outline should consist only of its own subdued grey/olive metal edge against genuine transparent RGBA pixels. No colored contamination, no colored outline, no opaque backdrop. Preserve the transparent region under the counter.\nKeep the same broad deep empty tabletop and low front body. One counter only, zero screens or terminals or tools on the top, no floor, no shadow outside the object, no text, no logo, no characters, no other props. Keep the front horizontal and vertical edges aligned as in the input. Full isolated object with clean alpha, realistic textured raster rendering.",
+      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7cb5b517-8690-400b-8e10-1a3dc992da3e.png",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          20,
+          21,
+          1414,
+          1054
+        ],
+        "zeroPixels": 297609,
+        "pixelsAtLeast128": 1254461,
+        "mostCommon": [
+          [
+            253,
+            1175204
+          ],
+          [
+            0,
+            297609
+          ],
+          [
+            252,
+            55678
+          ],
+          [
+            1,
+            10005
+          ],
+          [
+            251,
+            7286
+          ],
+          [
+            250,
+            3197
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Premier essai non retenu : silhouette coupée aux bords latéraux et franges colorées visibles.",
+          "Retouche sélectionnée : silhouette complète avec marges alpha128 ; quelques pixels de bord clairs ou jaunes restent visibles à fort agrandissement.",
+          "Le dessus demeure légèrement trapézoïdal ; aucune projection géométriquement exacte 1:1 n’est certifiée."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent",
+        "terminalSupportContacts": {
+          "passed": 3,
+          "total": 3,
+          "sampledAlpha": 253,
+          "insideVisibleTabletopPolygon": true
+        }
+      }
+    },
+    {
+      "id": "utility-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+      "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
+      "bytes": 2601946,
+      "width": 1181,
+      "height": 1332,
+      "bbox": [
+        12,
+        22,
+        1169,
+        1312
+      ],
+      "pivot": [
+        590.5,
+        1312
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Réserve et atelier — armoire utilitaire",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA",
+      "selectedAttempt": 1,
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one closed medium-height UTILITY STORAGE CABINET used in a colony reserve room and optics workshop. A thick steel outer frame surrounds THREE broad horizontal closed compartments stacked vertically, each compartment has one shallow recessed horizontal pull handle and subtle rectangular panel seams. The cabinet is nearly as wide as it is tall but visibly a little taller. No glass, no visible contents, no open doors, no electronic screen, no tabletop props. Restrained horizontal ventilation slots near the plinth, four short square feet (rear feet hidden if necessary), substantial flat top visibly extending upwards. Muted military grey/olive steel, slightly brighter handles, moderate realistic wear.\nGeometric target: overall visible silhouette width:height about0.886:1. The front width157 and front body height119 with depth projecting57.6 upward; thus the bare top contributes roughlyone-third of full silhouette height. Keep the closed cabinet front square-on; absolutely no side face.",
+      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-f72d54a4-0199-4696-8cb9-2146cd0baa18.png",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          15,
+          1181,
+          1317
+        ],
+        "zeroPixels": 161639,
+        "pixelsAtLeast128": 1385106,
+        "mostCommon": [
+          [
+            253,
+            1193873
+          ],
+          [
+            252,
+            165117
+          ],
+          [
+            0,
+            161639
+          ],
+          [
+            1,
+            10999
+          ],
+          [
+            251,
+            8759
+          ],
+          [
+            2,
+            3747
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Petites franges de bord visibles à très fort agrandissement.",
+          "Le dessus demeure légèrement trapézoïdal et moins profond que la consigne initiale ; le corps reste frontal, sans face latérale."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent"
+      }
+    },
+    {
+      "id": "optics-workbench",
+      "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+      "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+      "bytes": 1963841,
+      "width": 1457,
+      "height": 1080,
+      "bbox": [
+        78,
+        48,
+        1379,
+        1040
+      ],
+      "pivot": [
+        728.5,
+        1040
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Atelier — établi optique",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA",
+      "selectedAttempt": 2,
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent optics workbench sprite.\nChange only its PROPORTIONS AND CAMERA DEPTH so it fits a tall, deep elevated-frontal game projection. Keep the same worn grey steel, olive inset mat, small center drawer, square legs, low horizontal crossbar, empty tabletop, single-object design and transparent background.\nRequired silhouette: total visible WIDTH / total visible HEIGHT = approximately1.35. The object should look nearly square with a modest landscape aspect, much taller in image-space than the input. The visible tabletop must extend FAR UPWARD and occupy about53 percent of the object's total height. The front fascia and leg area below occupy the remaining47 percent. For a visible width1350, the entire silhouette is about1000 high, with the bare tabletop about530 high. Do not just enlarge the front legs; make the top deep in the image.\nUse an exact ELEVATED FRONT PARALLEL orthographic view, camera centered: zero yaw, no visible left or right side face. Front and back tabletop edges equal width, horizontal and parallel. Tabletop side edges run straight upward, parallel to the screen's vertical axis, so its top is rectangular, not a trapezoid. Vertical legs stay exactly vertical. Both feet end on one horizontal baseline.\nRetain one completely empty flat tabletop with its olive mat flush into the surface. No terminal, monitor, machine, tool, lamp, chair, scenery, floor or extra objects. No text or logo. Preserve real transparent RGBA, including the gaps beneath the table. Leave at least3percent transparent padding around all four sides. Full object uncropped. Sharp photorealistic raster material detail, subdued practical1980s industrial prop, matching the input.",
+      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7472c08b-d3e0-49f6-9d59-c643f5e8792b.png",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          0,
+          1395,
+          1080
+        ],
+        "zeroPixels": 564634,
+        "pixelsAtLeast128": 976313,
+        "mostCommon": [
+          [
+            253,
+            920586
+          ],
+          [
+            0,
+            564634
+          ],
+          [
+            252,
+            24549
+          ],
+          [
+            1,
+            14095
+          ],
+          [
+            251,
+            7077
+          ],
+          [
+            254,
+            6627
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Premier essai non retenu : silhouette trop basse et trop large ; à largeur184 la hauteur ne permettait pas le raccord des contacts du terminal.",
+          "Retouche sélectionnée : dessus profondément visible, front aligné, pieds sur une ligne commune ; de petites franges de bord subsistent à fort agrandissement."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent",
+        "terminalSupportContacts": {
+          "passed": 3,
+          "total": 3,
+          "sampledAlpha": 253,
+          "insideVisibleTabletopPolygon": true
+        }
+      }
+    },
+    {
+      "id": "operations-display-bank",
+      "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+      "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
+      "bytes": 2728175,
+      "width": 1274,
+      "height": 1235,
+      "bbox": [
+        15,
+        15,
+        1260,
+        1222
+      ],
+      "pivot": [
+        637.5,
+        1222
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Operations — banque d’affichage",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA",
+      "selectedAttempt": 1,
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one free-standing OPERATIONS DISPLAY BANK, a broad almost-square bank of modular 1980s analog electronics, not a desk or a handheld terminal. A robust low upright industrial enclosure with TWO medium unlit dark green-grey CRT screens side by side across the upper front, each set into a thick recessed metal bezel. Below them a horizontal strip of tactile square pushbuttons, rotary switches and small dim green/amber indicators without any letters or numerals. Lower front closed service panels with modest cooling grilles and metal fasteners. Bare flat thick top, short plinth and tiny feet. No keyboard or controls projecting toward the viewer; no large slanted control desk, no operator, no separate objects. The electronics look practical, mechanical and used, with grey/olive enamel on the body and warm-grey modular panels.\nGeometric target: overall visible silhouette width:height about1.06:1. In game width174, front body height103, upper depth projected61.06, so the top visibly contributes just over one-third of the total silhouette height. Front face perfectly upright and face-on; absolutely no side face. Screens blank and dark, no readable text or graphs.",
+      "nativeOutputFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-a8d97031-2435-40c4-876f-2863da164021.png",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          0,
+          1264,
+          1235
+        ],
+        "zeroPixels": 103925,
+        "pixelsAtLeast128": 1451215,
+        "mostCommon": [
+          [
+            253,
+            1068710
+          ],
+          [
+            252,
+            357679
+          ],
+          [
+            0,
+            103925
+          ],
+          [
+            251,
+            11612
+          ],
+          [
+            1,
+            7642
+          ],
+          [
+            250,
+            2994
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Petites franges de bord visibles à très fort agrandissement.",
+          "Le dessus demeure légèrement trapézoïdal ; aucune projection géométriquement exacte 1:1 n’est certifiée."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent"
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "assetId": "reserve-medical-counter",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: a LOW MEDICAL STORAGE COUNTER, broad and deep, with a completely BARE FLAT RECTANGULAR countertop for a separate CRT terminal that will be added later in the game. NO integrated terminal, screen, electronics tower, sink, chair, bottles, tools or objects on the countertop. The top occupies just over half of the visible object's height because the camera looks down from an elevated frontal angle. Under the countertop, a short sturdy low cupboard body: two closed metal cabinet panels and a shallow drawer row, restrained recessed pull handles, a small recessed plinth. All storage is closed. Light warm-grey metal, slightly olive-grey edging, darker inset door seams. Industrial medical furniture, not domestic kitchen furniture.\nGeometric target: overall visible object silhouette width:height about 1.30:1; wide landscape composition. In game the front width is188, the front body height67, and the upward projected countertop depth77.4. Preserve these proportions: broad deep top and low front body. The rear tabletop edge remains horizontal and parallel to the front tabletop edge. No side face.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-2060d425-fae4-4447-8440-31182e70b021.png",
+        "sha256": "69743be0765cf15fb787ac391ad4447357c53ca41414ebb99971af069901266e",
+        "bytes": 2535664,
+        "width": 1430,
+        "height": 1100,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          0,
+          57,
+          1430,
+          1060
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          715.0,
+          1060
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1430,
+            1100
+          ],
+          "zeroPixels": 199279,
+          "pixelsAtLeast128": 1353735,
+          "mostCommon": [
+            [
+              253,
+              1178694
+            ],
+            [
+              0,
+              199279
+            ],
+            [
+              252,
+              145176
+            ],
+            [
+              251,
+              11703
+            ],
+            [
+              1,
+              7334
+            ],
+            [
+              250,
+              4417
+            ]
+          ]
+        }
+      },
+      "selected": false,
+      "reason": "Premier essai non retenu : silhouette coupée aux bords latéraux et franges colorées visibles."
+    },
+    {
+      "assetId": "reserve-medical-counter",
+      "attempt": 2,
+      "mode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent medical storage counter sprite.\nPerform only this cleanup: preserve exactly the counter design, width-to-height proportions, elevated frontal camera, bare flat tabletop, two shallow drawers and two closed cabinet doors, colors, grey metal materials and worn texture. Add a generous clean TRANSPARENT margin of about5percent on ALL FOUR sides so both left and right countertop corners are fully visible and the object does not touch the canvas edge. Complete any edge that was previously cropped without changing the cabinet design.\nRemove every bright red, yellow or white fringe, stray pixel, speck and halo around the silhouette, especially along the upper countertop edge and the side edges. The object's outline should consist only of its own subdued grey/olive metal edge against genuine transparent RGBA pixels. No colored contamination, no colored outline, no opaque backdrop. Preserve the transparent region under the counter.\nKeep the same broad deep empty tabletop and low front body. One counter only, zero screens or terminals or tools on the top, no floor, no shadow outside the object, no text, no logo, no characters, no other props. Keep the front horizontal and vertical edges aligned as in the input. Full isolated object with clean alpha, realistic textured raster rendering.",
+      "inputImages": [
+        {
+          "role": "edit-target",
+          "path": "/workspace/scratch/6f1f5260be36/generated_images/exec-2060d425-fae4-4447-8440-31182e70b021.png",
+          "sha256": "69743be0765cf15fb787ac391ad4447357c53ca41414ebb99971af069901266e"
+        }
+      ],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7cb5b517-8690-400b-8e10-1a3dc992da3e.png",
+        "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+        "bytes": 2189660,
+        "width": 1430,
+        "height": 1100,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          26,
+          73,
+          1403,
+          1042
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          714.5,
+          1042
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            20,
+            21,
+            1414,
+            1054
+          ],
+          "zeroPixels": 297609,
+          "pixelsAtLeast128": 1254461,
+          "mostCommon": [
+            [
+              253,
+              1175204
+            ],
+            [
+              0,
+              297609
+            ],
+            [
+              252,
+              55678
+            ],
+            [
+              1,
+              10005
+            ],
+            [
+              251,
+              7286
+            ],
+            [
+              250,
+              3197
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Retouche ciblée du défaut observé ; octets de sortie natifs conservés."
+    },
+    {
+      "assetId": "utility-storage-cabinet",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one closed medium-height UTILITY STORAGE CABINET used in a colony reserve room and optics workshop. A thick steel outer frame surrounds THREE broad horizontal closed compartments stacked vertically, each compartment has one shallow recessed horizontal pull handle and subtle rectangular panel seams. The cabinet is nearly as wide as it is tall but visibly a little taller. No glass, no visible contents, no open doors, no electronic screen, no tabletop props. Restrained horizontal ventilation slots near the plinth, four short square feet (rear feet hidden if necessary), substantial flat top visibly extending upwards. Muted military grey/olive steel, slightly brighter handles, moderate realistic wear.\nGeometric target: overall visible silhouette width:height about0.886:1. The front width157 and front body height119 with depth projecting57.6 upward; thus the bare top contributes roughlyone-third of full silhouette height. Keep the closed cabinet front square-on; absolutely no side face.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-f72d54a4-0199-4696-8cb9-2146cd0baa18.png",
+        "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
+        "bytes": 2601946,
+        "width": 1181,
+        "height": 1332,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          12,
+          22,
+          1169,
+          1312
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          590.5,
+          1312
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            15,
+            1181,
+            1317
+          ],
+          "zeroPixels": 161639,
+          "pixelsAtLeast128": 1385106,
+          "mostCommon": [
+            [
+              253,
+              1193873
+            ],
+            [
+              252,
+              165117
+            ],
+            [
+              0,
+              161639
+            ],
+            [
+              1,
+              10999
+            ],
+            [
+              251,
+              8759
+            ],
+            [
+              2,
+              3747
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Sélection retenue après inspection de l’objet individuel."
+    },
+    {
+      "assetId": "optics-workbench",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: a LOW, broad industrial OPTICS WORKBENCH with a completely BARE FLAT RECTANGULAR metal work surface for a separate calibration terminal that will be added later in the game. NO integrated monitor, terminal, optics device, microscope, magnifier, lamp, tool, container, bench vise or object on the tabletop. Thick slightly worn grey steel top with a subtle dark olive inset work mat that lies flush in the top; the whole surface remains flat and empty. Underneath: robust two-ended square steel support frame, modest shallow single drawer under the center of the front apron, one low horizontal crossbar; open transparent space under the desk. No seat. The legs finish on exactly one horizontal baseline.\nGeometric target: overall visible silhouette width:height about1.35:1; wide landscape composition. In game width184, front height65 and upward projected depth71.38, so the tabletop occupies just over half of total visible height. Flat rear and front tabletop edges perfectly horizontal and parallel, no left or right side face.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-9935b535-b820-48fe-bfa0-730128e31e94.png",
+        "sha256": "1392c40fbc7119506793fcc3d0ae516dbd6897b84f90714de7d923ee9b2a4f0f",
+        "bytes": 1774101,
+        "width": 1807,
+        "height": 870,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          14,
+          33,
+          1795,
+          838
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          904.5,
+          838
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1807,
+            870
+          ],
+          "zeroPixels": 649088,
+          "pixelsAtLeast128": 888200,
+          "mostCommon": [
+            [
+              253,
+              767546
+            ],
+            [
+              0,
+              649088
+            ],
+            [
+              252,
+              75536
+            ],
+            [
+              1,
+              13975
+            ],
+            [
+              251,
+              11524
+            ],
+            [
+              254,
+              10421
+            ]
+          ]
+        }
+      },
+      "selected": false,
+      "reason": "Premier essai non retenu : silhouette trop basse et trop large ; à largeur184 la hauteur ne permettait pas le raccord des contacts du terminal."
+    },
+    {
+      "assetId": "optics-workbench",
+      "attempt": 2,
+      "mode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent optics workbench sprite.\nChange only its PROPORTIONS AND CAMERA DEPTH so it fits a tall, deep elevated-frontal game projection. Keep the same worn grey steel, olive inset mat, small center drawer, square legs, low horizontal crossbar, empty tabletop, single-object design and transparent background.\nRequired silhouette: total visible WIDTH / total visible HEIGHT = approximately1.35. The object should look nearly square with a modest landscape aspect, much taller in image-space than the input. The visible tabletop must extend FAR UPWARD and occupy about53 percent of the object's total height. The front fascia and leg area below occupy the remaining47 percent. For a visible width1350, the entire silhouette is about1000 high, with the bare tabletop about530 high. Do not just enlarge the front legs; make the top deep in the image.\nUse an exact ELEVATED FRONT PARALLEL orthographic view, camera centered: zero yaw, no visible left or right side face. Front and back tabletop edges equal width, horizontal and parallel. Tabletop side edges run straight upward, parallel to the screen's vertical axis, so its top is rectangular, not a trapezoid. Vertical legs stay exactly vertical. Both feet end on one horizontal baseline.\nRetain one completely empty flat tabletop with its olive mat flush into the surface. No terminal, monitor, machine, tool, lamp, chair, scenery, floor or extra objects. No text or logo. Preserve real transparent RGBA, including the gaps beneath the table. Leave at least3percent transparent padding around all four sides. Full object uncropped. Sharp photorealistic raster material detail, subdued practical1980s industrial prop, matching the input.",
+      "inputImages": [
+        {
+          "role": "edit-target",
+          "path": "/workspace/scratch/6f1f5260be36/generated_images/exec-9935b535-b820-48fe-bfa0-730128e31e94.png",
+          "sha256": "1392c40fbc7119506793fcc3d0ae516dbd6897b84f90714de7d923ee9b2a4f0f"
+        }
+      ],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-7472c08b-d3e0-49f6-9d59-c643f5e8792b.png",
+        "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+        "bytes": 1963841,
+        "width": 1457,
+        "height": 1080,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          78,
+          48,
+          1379,
+          1040
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          728.5,
+          1040
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1395,
+            1080
+          ],
+          "zeroPixels": 564634,
+          "pixelsAtLeast128": 976313,
+          "mostCommon": [
+            [
+              253,
+              920586
+            ],
+            [
+              0,
+              564634
+            ],
+            [
+              252,
+              24549
+            ],
+            [
+              1,
+              14095
+            ],
+            [
+              251,
+              7077
+            ],
+            [
+              254,
+              6627
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Retouche ciblée du défaut observé ; octets de sortie natifs conservés."
+    },
+    {
+      "assetId": "operations-display-bank",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Asset type: ONE high-resolution raster game sprite for an industrial science-fiction colony inspired by the physical production design of Aliens (1986). This is a game adaptation, not a claim of a film-exact prop.\nStrict camera: elevated FRONT view with PARALLEL orthographic projection; zero yaw, zero three-quarter angle, no left or right side face at all. Front horizontal edges perfectly horizontal, all front vertical edges perfectly vertical and parallel. Depth is visible ONLY on the upper surface extending toward the top of the image, never sideways. All front feet finish on the same horizontal ground line. No perspective convergence or tilted horizon.\nFinish: photorealistic UHD bitmap, solid tangible steel construction, worn desaturated grey/olive enamel, modest edge scuffs and fine scratches, screws and recessed metal seams, realistic soft studio lighting. Match a practical 1980s science-fiction set prop, no sleek modern touchscreen, no cartoon, vector, diagram, sketch or outline.\nExactly one complete free-standing object, centered, fully visible with a small transparent margin. True transparent RGBA background, including open space between legs. No room, no walls, no floor, no pedestal, no cast shadow outside the object, no checkerboard painted into the image, no character, no loose companion props, no text, no logos, no labels, no watermark.\nSubject: one free-standing OPERATIONS DISPLAY BANK, a broad almost-square bank of modular 1980s analog electronics, not a desk or a handheld terminal. A robust low upright industrial enclosure with TWO medium unlit dark green-grey CRT screens side by side across the upper front, each set into a thick recessed metal bezel. Below them a horizontal strip of tactile square pushbuttons, rotary switches and small dim green/amber indicators without any letters or numerals. Lower front closed service panels with modest cooling grilles and metal fasteners. Bare flat thick top, short plinth and tiny feet. No keyboard or controls projecting toward the viewer; no large slanted control desk, no operator, no separate objects. The electronics look practical, mechanical and used, with grey/olive enamel on the body and warm-grey modular panels.\nGeometric target: overall visible silhouette width:height about1.06:1. In game width174, front body height103, upper depth projected61.06, so the top visibly contributes just over one-third of the total silhouette height. Front face perfectly upright and face-on; absolutely no side face. Screens blank and dark, no readable text or graphs.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "sourceFile": "/workspace/scratch/6f1f5260be36/generated_images/exec-a8d97031-2435-40c4-876f-2863da164021.png",
+        "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
+        "bytes": 2728175,
+        "width": 1274,
+        "height": 1235,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          15,
+          15,
+          1260,
+          1222
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          637.5,
+          1222
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1264,
+            1235
+          ],
+          "zeroPixels": 103925,
+          "pixelsAtLeast128": 1451215,
+          "mostCommon": [
+            [
+              253,
+              1068710
+            ],
+            [
+              252,
+              357679
+            ],
+            [
+              0,
+              103925
+            ],
+            [
+              251,
+              11612
+            ],
+            [
+              1,
+              7642
+            ],
+            [
+              250,
+              2994
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Sélection retenue après inspection de l’objet individuel."
+    }
+  ],
+  "referenceEvidence": [
+    {
+      "id": "medlab-concept",
+      "title": "Ron Cobb — concept du Medlab",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/",
+      "imageUrl": "https://images.propstore.com/f9a934af42ec346c322933253cea5576-1.jpg",
+      "kind": "production-concept-reproduction",
+      "reviewDate": "2026-11-26",
+      "visualInspected": true,
+      "observed": "Vue intérieure : boîtiers et consoles rectangulaires gris-vert, panneaux vissés, aérations, écrans CRT, câbles apparents et mobilier bas.",
+      "use": "Vocabulaire de matières et de construction des quatre adaptations V120.",
+      "limits": "Concept de production. Ni relevé coté des meubles ciblés ni preuve de leur présence exacte dans le montage final. Les dimensions de la fiche sont celles du dessin."
+    },
+    {
+      "id": "hadley-production-photos-80",
+      "title": "Hadley’s Hope — collection de 80 photographies de plateau",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56648/Lot-119-Alien-Aliens-Collection-Auction-Photos-of-the-Hadley-s-Hope-Set",
+      "imageUrl": "https://propstoreauction.com/images/lot/3180/318076_xl.jpg?ts=1746136970",
+      "kind": "production-photograph-collection-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": true,
+      "observed": "Image de vente montrant des piles de tirages et quatre photographies déployées : machinerie, loader, équipe de tournage, porte de décor ; panneaux clairs et renforts sombres visibles.",
+      "use": "Contexte industriel des décors de la colonie.",
+      "limits": "Seule l’image de présentation est inspectée ; les 80 vues ne sont pas toutes lisibles. Aucun des quatre nouveaux meubles n’est identifié avec certitude. Les dimensions annoncées concernent les tirages."
+    },
+    {
+      "id": "operations-ap-console-drawing22",
+      "title": "Operations — AP Main Console, dessin de production 22",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56657/Lot-128-Alien-Aliens-Collection-Auction-Operations-Room-Internal-Detail-AP-Main-Console-Production-Dyeline",
+      "kind": "production-drawing-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": false,
+      "observed": "Notice consultée : copie imprimée d’un dessin de production, avec plan et élévations annoncés ; titre Int. Operations Room, dessin 22, initiales M.A.B.",
+      "use": "Piste primaire pour une comparaison future de la banque d’affichage Operations.",
+      "limits": "Le dessin détaillé n’a pas été inspecté visuellement. Deux écrans et l’agencement des panneaux du sprite sont des choix d’adaptation, pas une transcription certifiée de ce document. Les dimensions 125 × 76,5 cm concernent le papier."
+    },
+    {
+      "id": "operations-layout-drawing34",
+      "title": "Operations — plan et coupes de production, dessin 34",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56655/Lot-126-Alien-Aliens-Collection-Auction-Operations-Room-Full-Layout-Original-Hand-Drawn-Production-Design-Artwork",
+      "kind": "production-drawing-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": false,
+      "observed": "Notice consultée : plan général et détails en coupe, Int. Operations Rm., dessin 34, initiales M.A.B.",
+      "use": "Piste de vérification spatiale pour Operations et son mobilier.",
+      "limits": "Le plan détaillé n’a pas été inspecté. Aucune géométrie de salle du jeu n’est recalée sur ce document dans V120 ; aucune mesure de meuble n’en est inférée."
+    },
+    {
+      "id": "uscm-hand-welder-original",
+      "title": "USCM Hand Welder — accessoire de production",
+      "url": "https://propstore.com/product/aliens-1986/uscm-hand-welder/",
+      "kind": "production-prop-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": false,
+      "observed": "Notice consultée : corps en résine, buse métallique, écran de protection acrylique, commandes, trou de tuyau au bas de la poignée et clip métallique ; l’objet de vente manque deux boutons.",
+      "use": "Référence documentaire prioritaire pour le futur raccord du PNG welder déjà présent aux gestes de génie.",
+      "limits": "Pas de nouvelle génération de soudeur en V120. L’état actuel de l’accessoire vendu peut différer de son état à l’écran ; les boutons manquants ne doivent pas devenir une consigne de reconstruction film."
+    },
+    {
+      "id": "airlock-operating-room-concepts",
+      "title": "Ron Cobb — concepts de sas colonial et salle d’opération",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-colony-air-lock-and-operating-room-concept-sketches/",
+      "kind": "production-concept-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": false,
+      "observed": "Notice consultée : dessins au graphite et à l’encre, dont un concept de sas signé Ron Cobb et daté de 1985.",
+      "use": "Pistes pour les montants et l’architecture médicale existants, à examiner avant de créer de nouveaux doublons.",
+      "limits": "Concepts de production, pas preuve du décor final ; aucun cadre de porte ni alarme supplémentaire n’est généré en V120."
+    }
+  ],
+  "localStyleReferences": [
+    {
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    },
+    {
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+      "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    },
+    {
+      "path": "assets/dlc/aliens-1986/v118/props/medical-counter-terminal.png",
+      "sha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    }
+  ],
+  "inspectionScope": "Source PNG inspection and alpha/hash measurements. Game-scale placement, support contacts, occlusion and fallback belong to verification.json. Discarded attempts remain outside the final asset pack; their native bytes are not modified.",
+  "integrationEvidence": {
+    "evidenceReport": "docs/development/aliens-1986-sprites-v120/verification.json",
+    "execution": "browser QA script under Node and native Canvas/Skia, with declared DOM/fetch doubles",
+    "chromiumExecutedAtThisInspection": false,
+    "nativeCanvasChecks": {
+      "passed": 16,
+      "total": 16
+    },
+    "runtimeUnitTestsPassed": 54,
+    "furniturePlacementsInspected": 6,
+    "terminalContactPoints": {
+      "passed": 6,
+      "total": 6,
+      "samplesPerTerminal": 3,
+      "sampleLocation": "lower terminal contour",
+      "insideVisibleTabletopPolygons": true,
+      "observedAlpha": 253
+    },
+    "reserveFallbackComparison": {
+      "baseline": "V119",
+      "differentChannels": 0
+    },
+    "nativeSceneCapturesInspected": [
+      "v109-reserve",
+      "v112-workshop",
+      "v106-hadley",
+      "v107-operations"
+    ],
+    "furnitureClippingObserved": false,
+    "workshopLighting": "native dark inspection state preserved; no artificial lighting added",
+    "apronHeightDiagnostics": {
+      "reserve-medical-counter": 7.95,
+      "optics-workbench": -17.16,
+      "meaning": "visible apron/rail/drawer edge offset against native solid front height; separate from validated terminal support contacts"
+    },
+    "limitations": [
+      "No V120 Chromium CI execution claimed at this inspection",
+      "No complete playthrough claimed",
+      "No film-exact fidelity certification"
+    ],
+    "resultsReportedBy": "root-agent-from-completed-native-QA"
+  }
+}
