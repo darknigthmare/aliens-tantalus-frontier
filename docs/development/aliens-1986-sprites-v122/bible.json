@@ -23195,13 +23195,18 @@
   },
   "verificationSnapshot": {
     "version": 122,
-    "status": "local-tests-and-isolated-build-passed-browser-unavailable",
+    "status": "local-tests-isolated-build-and-chromium-atlas-passed",
     "file": "verification.json",
     "historicalDlcTests": 665,
     "integrationRunnerTests": 38,
     "presentationAssertionsIncludedInRunner": 328,
     "isolatedBuildPassed": true,
-    "browserPassedLocally": false
+    "browserPassedLocally": true,
+    "browserAssertionsPassed": 28,
+    "browserAssertionsTotal": 28,
+    "browserTestedPublishedCommit": "48a9be00d6dff33461907ca7e41e8817652006df",
+    "browserFinishedAt": "2026-11-26T16:25:34.570127+00:00",
+    "scope": "Reference atlas on desktop/mobile; no full campaign or exact film fidelity certification."
   },
   "priorVerificationSnapshots": [
     {
@@ -23343,6 +23348,20 @@
           "assetRevision": 121,
           "presentationExtensionRevision": 121
         }
+      }
+    },
+    {
+      "version": 122,
+      "phase": "initial-prepublication",
+      "snapshot": {
+        "version": 122,
+        "status": "local-tests-and-isolated-build-passed-browser-unavailable",
+        "file": "verification.json",
+        "historicalDlcTests": 665,
+        "integrationRunnerTests": 38,
+        "presentationAssertionsIncludedInRunner": 328,
+        "isolatedBuildPassed": true,
+        "browserPassedLocally": false
       }
     }
   ],

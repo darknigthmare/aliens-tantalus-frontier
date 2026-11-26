@@ -2,7 +2,7 @@
   "schema": "aliens1986-v122-verification",
   "date": "2026-11-26",
   "baseline": "fe6ad985cfc5ed7ac30b71121d11d505a6cfe03f",
-  "status": "local-tests-and-isolated-build-passed-browser-unavailable",
+  "status": "local-tests-isolated-build-and-chromium-atlas-passed",
   "historicalDlcTests": {
     "passed": 665,
     "failed": 0
@@ -42,9 +42,281 @@
   "browser": {
     "status": "not-run-successfully",
     "reason": "System Chromium binary is missing. Playwright headless-shell download returned HTTP 403. Existing PR CI includes the desktop/mobile atlas harness; its results must be checked for the published commit.",
-    "assertionsPassedLocally": 0
+    "assertionsPassedLocally": 0,
+    "evidencePhase": "initial-prepublication-attempt-preserved"
   },
   "filmFidelityValidated": false,
   "completeFilmCampaignClaimed": false,
-  "fullRepositoryBuild": "not-run-in-sparse-checkout"
+  "fullRepositoryBuild": "not-run-in-sparse-checkout",
+  "initialStatus": "local-tests-and-isolated-build-passed-browser-unavailable",
+  "postPublicationBrowser": {
+    "testedPublishedCommit": "48a9be00d6dff33461907ca7e41e8817652006df",
+    "startedAt": "2026-11-26T16:25:27.057318+00:00",
+    "finishedAt": "2026-11-26T16:25:34.570127+00:00",
+    "status": "passed",
+    "execution": "Actual Chromium headless shell found in an existing QA checkout; local HTTP server and isolated DLC build.",
+    "reportSha256": "47ee34c516ad8574c6ee47962fc5a244f996571382c002daf443aa8c741708a0",
+    "runtimeSha256": "159bdb74aa62b8abb0c1ac55d670234f8e4d60d1d16bffb681c658e3ad0e0c52",
+    "manifestSha256": "6579c0f0bd346cb2849e7261b5edce061c495636e7119dd82352cbcfcf5ff780",
+    "scope": "Actual Chromium, served reference atlas and its failure fallback; no campaign completion claim",
+    "fixtures": "Public menu/search/tab actions; second fresh context aborts only the Narcissus PNG request",
+    "passed": 28,
+    "total": 28,
+    "viewports": {
+      "desktop": {
+        "width": 1440,
+        "height": 1000
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    "tests": [
+      {
+        "name": "desktop defers V122 requests until atlas is opened",
+        "ok": true
+      },
+      {
+        "name": "desktop loads every declared atlas placement",
+        "ok": true
+      },
+      {
+        "name": "desktop preserves all 28 location cards",
+        "ok": true
+      },
+      {
+        "name": "desktop does not invent a Narcissus inspection room",
+        "ok": true
+      },
+      {
+        "name": "desktop draws native dimensions with uniform scaling",
+        "ok": true
+      },
+      {
+        "name": "desktop shares image requests across repeated cards",
+        "ok": true
+      },
+      {
+        "name": "desktop atlas stays within viewport width",
+        "ok": true
+      },
+      {
+        "name": "desktop search keeps the matching illustration",
+        "ok": true
+      },
+      {
+        "name": "desktop equipment tab has no misplaced location images",
+        "ok": true
+      },
+      {
+        "name": "desktop tab round trip reuses decoded images",
+        "ok": true
+      },
+      {
+        "name": "desktop atlas leaves persistence unchanged",
+        "ok": true
+      },
+      {
+        "name": "desktop closed atlas stops drawing",
+        "ok": true
+      },
+      {
+        "name": "mobile defers V122 requests until atlas is opened",
+        "ok": true
+      },
+      {
+        "name": "mobile loads every declared atlas placement",
+        "ok": true
+      },
+      {
+        "name": "mobile preserves all 28 location cards",
+        "ok": true
+      },
+      {
+        "name": "mobile does not invent a Narcissus inspection room",
+        "ok": true
+      },
+      {
+        "name": "mobile draws native dimensions with uniform scaling",
+        "ok": true
+      },
+      {
+        "name": "mobile shares image requests across repeated cards",
+        "ok": true
+      },
+      {
+        "name": "mobile atlas stays within viewport width",
+        "ok": true
+      },
+      {
+        "name": "mobile search keeps the matching illustration",
+        "ok": true
+      },
+      {
+        "name": "mobile equipment tab has no misplaced location images",
+        "ok": true
+      },
+      {
+        "name": "mobile tab round trip reuses decoded images",
+        "ok": true
+      },
+      {
+        "name": "mobile atlas leaves persistence unchanged",
+        "ok": true
+      },
+      {
+        "name": "mobile closed atlas stops drawing",
+        "ok": true
+      },
+      {
+        "name": "every served PNG matches the pinned native bytes",
+        "ok": true
+      },
+      {
+        "name": "a failed PNG leaves a readable reference card",
+        "ok": true
+      },
+      {
+        "name": "one failed image does not block other atlas cards",
+        "ok": true
+      },
+      {
+        "name": "all browser contexts have no script errors",
+        "ok": true
+      }
+    ],
+    "assets": [
+      {
+        "id": "uss-sulaco",
+        "status": 200,
+        "bytes": 1508899,
+        "sha256": "edfca27af5b00ede4f5ea64da49b79f8a71e616a7eea3e26ee207f23d3d4bb3a"
+      },
+      {
+        "id": "jorden-survey-tractor",
+        "status": 200,
+        "bytes": 2059152,
+        "sha256": "b28f7064586172b81b44ef1c17d2f1a5bcf64d36b9300817decbcc6a01b54354"
+      },
+      {
+        "id": "sulaco-deck-tile",
+        "status": 200,
+        "bytes": 2820620,
+        "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789"
+      },
+      {
+        "id": "atmosphere-processor-facade",
+        "status": 200,
+        "bytes": 1142795,
+        "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87"
+      },
+      {
+        "id": "hadley-colony-building",
+        "status": 200,
+        "bytes": 2734194,
+        "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34"
+      },
+      {
+        "id": "gateway-orbital-backdrop",
+        "status": 200,
+        "bytes": 2177536,
+        "sha256": "a04a5520ea48fb1ed83fc2a9bafd42f6e921ed02d8ea9e62e2f316132381eefe"
+      },
+      {
+        "id": "narcissus-shuttle",
+        "status": 200,
+        "bytes": 1824812,
+        "sha256": "57cdcd7b7f2aeae3748cf95b11e94727f636b2cae738cb919a13b0aeb6479a74"
+      },
+      {
+        "id": "hadley-uplink-tower",
+        "status": 200,
+        "bytes": 1610267,
+        "sha256": "b36bcd109f6e01d772c1372847b2db5eba2020df2b48f6a70ff8fe1dd15621ca"
+      },
+      {
+        "id": "hadley-colony-wall-panel",
+        "status": 200,
+        "bytes": 3074209,
+        "sha256": "fae5bc149190e7c4014be252e3ec0e30caaf870aeb1a9632627a03e9c8bc89f5"
+      }
+    ],
+    "pageErrors": [],
+    "captures": [
+      {
+        "file": "atlas-uss-sulaco.png",
+        "sha256": "d140e7fe0edf80a27f0ea18b666fe2bc8e9224c935ba3a7d17a52020500fa920",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-jorden-survey-tractor.png",
+        "sha256": "24f19af3392b0f6ac0688df909ba590ce3dad146bdbff0e6bb8df0c2246ff51b",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-sulaco-deck-tile.png",
+        "sha256": "a7a47784129f3ef152413c7b04ed8ffc6ae491d77b3ba962f9be7476e064f825",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-atmosphere-processor-facade.png",
+        "sha256": "3ffd0a0bf500981fdf1e1dc8e9ed3470bc67fd8fd4aa085b0d6a2b4bfc97821a",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-hadley-colony-building.png",
+        "sha256": "edf7127cd8cff7f9b9b9459c38ead923633f443f8c51b46c761522231751afee",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-gateway-orbital-backdrop.png",
+        "sha256": "947b8ecd669bd55c7661ecf4a833c0a25fde16291ace0bf718b2e5c5f1962dae",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-narcissus-shuttle.png",
+        "sha256": "471f610d5017db257e44d5737a056eaa65406dc43a56e75b328ae3f20341284a",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-hadley-uplink-tower.png",
+        "sha256": "b72c3abd2ed418431827eb39b997b567cdf913e107e2dd91846c8b8e9a170b01",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-hadley-colony-wall-panel.png",
+        "sha256": "c71197462bcbdd68ca32b603f760eea2b647ef8df770fcb9fb9d0310571b0220",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-mobile-narcissus.png",
+        "sha256": "b6ffba5456a8a19c8afff569f1c55ae4f20094098b4bc5a7fc6470684f82eb3a",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-mobile-gateway.png",
+        "sha256": "8f2754bfa04dd427936e7af6e8575b5558f671f731919870d48dcc27c0d2eb5c",
+        "imageEdited": false
+      },
+      {
+        "file": "atlas-narcissus-fallback.png",
+        "sha256": "8f58e8670225fa49a6709ab8f489d9487c5ad0f8e48a623e44302d8db3602fba",
+        "imageEdited": false
+      }
+    ],
+    "visualReview": {
+      "reviewed": [
+        "atlas-hadley-uplink-tower.png",
+        "atlas-mobile-narcissus.png"
+      ],
+      "finding": "Both atlas cards show complete silhouettes at uniform scale, inside the canvas with readable captions.",
+      "imageEdited": false
+    },
+    "limitations": [
+      "Reference atlas only; no complete campaign playthrough claimed.",
+      "Film-exact fidelity remains unvalidated.",
+      "Full repository CI is separate from this isolated DLC browser run."
+    ]
+  }
 }
