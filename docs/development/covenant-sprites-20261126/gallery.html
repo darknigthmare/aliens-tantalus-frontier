@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Covenant — candidats graphiques du 26 novembre 2026</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #121719; color: #e8ece9; }
+    body { max-width: 1120px; margin: auto; padding: 30px 20px 50px; line-height: 1.6; }
+    h1 { line-height: 1.15; font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 16px; }
+    h2 { font-size: 1.1rem; margin: 0; }
+    a { color: #a7d7ce; text-underline-offset: 3px; }
+    .intro { max-width: 850px; color: #c4ceca; }
+    .status { border-left: 3px solid #c6ad72; padding: 12px 18px; background: #24251f; margin: 24px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px; margin-top: 28px; }
+    figure { margin: 0; border: 1px solid #364240; border-radius: 10px; overflow: hidden; background: #1a2223; }
+    .preview { display: flex; align-items: center; justify-content: center; height: 350px; padding: 20px; background-color: #747d7b; background-image: linear-gradient(45deg,#606966 25%,transparent 25%),linear-gradient(-45deg,#606966 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#606966 75%),linear-gradient(-45deg,transparent 75%,#606966 75%); background-size: 24px 24px; background-position: 0 0,0 12px,12px -12px,-12px 0; }
+    img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+    figcaption { padding: 18px 20px; }
+    .detail { color: #b6c3bd; margin: 8px 0; font-size: 0.94rem; }
+    .missing { margin-top: 34px; border-top: 1px solid #364240; padding-top: 24px; }
+    footer { margin-top: 32px; color: #a9b5b0; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>COVENANT · 26 NOVEMBRE 2026</p>
+    <h1>Trois candidats à comparer aux références</h1>
+    <p class="intro">Néomorphe adulte, Facehugger et œuf fermé : les trois images générées sont conservées ici dans leur fichier d'origine. Les aperçus montrent les silhouettes sur un damier ; les liens ouvrent chaque PNG à sa taille native.</p>
+    <p class="status">Revue artistique à poursuivre. Ces images ne sont pas intégrées au jeu ; la fidélité 1:1 et la qualité des contours restent à contrôler.</p>
+    <nav aria-label="Documents du lot"><a href="manifest.json">Manifeste et prompts</a> · <a href="README.md">Détail du lot</a> · <a href="https://github.com/darknigthmare/aliens-tantalus-frontier/pull/68">Bibles des DLC</a></nav>
+  </header>
+  <main>
+    <div class="grid">
+      <figure>
+        <a class="preview" href="neomorph-adult-citadel.png" aria-label="Ouvrir le PNG : Néomorphe adulte — citadelle"><img src="neomorph-adult-citadel.png" width="1774" height="887" alt="Néomorphe adulte — citadelle, silhouette générée à vérifier" loading="lazy"></a>
+        <figcaption><h2>Néomorphe adulte — citadelle</h2><p class="detail">1774 × 887 pixels · PNG source</p><a href="neomorph-adult-citadel.png">Ouvrir l'image originale</a></figcaption>
+      </figure>
+      <figure>
+        <a class="preview" href="facehugger-covenant.png" aria-label="Ouvrir le PNG : Facehugger — Covenant"><img src="facehugger-covenant.png" width="2172" height="724" alt="Facehugger — Covenant, silhouette générée à vérifier" loading="lazy"></a>
+        <figcaption><h2>Facehugger — Covenant</h2><p class="detail">2172 × 724 pixels · PNG source</p><a href="facehugger-covenant.png">Ouvrir l'image originale</a></figcaption>
+      </figure>
+      <figure>
+        <a class="preview" href="ovomorph-covenant.png" aria-label="Ouvrir le PNG : Ovomorphe — Covenant"><img src="ovomorph-covenant.png" width="1166" height="1349" alt="Ovomorphe — Covenant, silhouette générée à vérifier" loading="lazy"></a>
+        <figcaption><h2>Ovomorphe — Covenant</h2><p class="detail">1166 × 1349 pixels · PNG source</p><a href="ovomorph-covenant.png">Ouvrir l'image originale</a></figcaption>
+      </figure>
+    </div>
+    <section class="missing" aria-labelledby="missing-heading">
+      <h2 id="missing-heading">Deux images restent manquantes</h2>
+      <p>Le Néomorphe juvénile de Hallett et la pose d'attente du Xénomorphe Covenant n'ont pas été produits : les tentatives de génération ont été refusées et aucun fichier n'a été créé.</p>
+    </section>
+  </main>
+  <footer>La structure des PNG et leurs empreintes ont été contrôlées. La revue des pixels alpha, le décodage en jeu et les poses animées restent à faire.</footer>
+</body>
+</html>

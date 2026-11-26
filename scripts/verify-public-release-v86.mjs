@@ -1182,7 +1182,21 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
   '.github/workflows/fiorina-native-v114.yml'
 ]);
 
+// Generated Covenant art is source-only; admit this closed batch, never a folder wildcard.
+const COVENANT_SPRITES_SOURCE_DIRECTORY_20261126 = 'docs/development/covenant-sprites-20261126';
+const COVENANT_SPRITES_SOURCE_FILES_20261126 = new Set([
+  'docs/development/covenant-sprites-20261126/neomorph-adult-citadel.png',
+  'docs/development/covenant-sprites-20261126/facehugger-covenant.png',
+  'docs/development/covenant-sprites-20261126/ovomorph-covenant.png',
+  'docs/development/covenant-sprites-20261126/manifest.json',
+  'docs/development/covenant-sprites-20261126/README.md',
+  'docs/development/covenant-sprites-20261126/gallery.html',
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (path === COVENANT_SPRITES_SOURCE_DIRECTORY_20261126) return !built && directory;
+  if (typeof path === 'string' && path.startsWith(COVENANT_SPRITES_SOURCE_DIRECTORY_20261126 + '/'))
+    return !built && !directory && COVENANT_SPRITES_SOURCE_FILES_20261126.has(path);
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
