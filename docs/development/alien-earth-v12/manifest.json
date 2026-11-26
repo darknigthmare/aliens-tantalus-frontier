@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "project": "Aliens Tantalus",
+  "dlc": "Alien: Earth",
+  "checkpoint": "V12 — sprites et reprise technique",
+  "date": "2026-11-26",
+  "status": "draft-asset-recovery-runtime-incomplete",
+  "originalGenerationBytesPreserved": true,
+  "completedImages": 8,
+  "generatedBytesTotal": 12175758,
+  "runtimePublished": false,
+  "finalBrowserValidation": false,
+  "screenExactCertification": false,
+  "baseCommit": "07ee99d56480780044c74d4f1eb11f31b07fef13",
+  "assets": [
+    {
+      "id": "mcsx",
+      "path": "modules/alien-earth/v12/assets/raster-v12/mcsx.png",
+      "bytes": 1754363,
+      "width": 1774,
+      "height": 887,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "8ca53f6517300965c352588faa1cc167cf05b2e8620d477f32e7e5b48c685a5c",
+      "gitBlobSha": "858ce83a9a82a13cda8c9f39038dd13caa7852bd",
+      "label": "MCS-X",
+      "kind": "weapon",
+      "referenceKeys": [
+        "fx-armory-mcsx"
+      ],
+      "sourceClass": "official-screen-photograph",
+      "localHookState": "implemented-not-final-tested",
+      "alpha128XYWH": [
+        34,
+        51,
+        1713,
+        784
+      ],
+      "scope": "Fusil autonome, profil droit. Aucun autre armement remplacé.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          26,
+          43,
+          1729,
+          800
+        ],
+        "pivotXY": [
+          540,
+          390
+        ],
+        "maxVisibleSize": [
+          79,
+          40
+        ],
+        "state": "written-locally-unverified"
+      }
+    },
+    {
+      "id": "species19-adult",
+      "path": "modules/alien-earth/v12/assets/raster-v12/species19-adult.png",
+      "bytes": 1070480,
+      "width": 2172,
+      "height": 724,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "92fb77ae25d3c52cc80f38ba45e4758d3d74cf86e708bfbf1e7984fdd444334c",
+      "gitBlobSha": "b69014c59941e6513afea4c487b17cd9e72b4c2f",
+      "label": "Species 19 — adulte",
+      "kind": "creature",
+      "referenceKeys": [
+        "weta-species19"
+      ],
+      "sourceClass": "official-concept-art",
+      "localHookState": "implemented-not-final-tested",
+      "alpha128XYWH": [
+        73,
+        80,
+        2032,
+        559
+      ],
+      "scope": "Profil tick adulte uniquement. Une pose ; animation non générée.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          65,
+          72,
+          2048,
+          575
+        ],
+        "pivotXY": [
+          1086,
+          639
+        ],
+        "maxVisibleSize": [
+          78,
+          42
+        ],
+        "state": "written-locally-unverified"
+      }
+    },
+    {
+      "id": "joe-mcsx-idle",
+      "path": "modules/alien-earth/v12/assets/raster-v12/joe-mcsx-idle.png",
+      "bytes": 1761495,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "8bcc8594ebb297f779c0dc654be5224c56fe21e74b867a54fe50b211a4da0188",
+      "gitBlobSha": "8310c9e0845d64326b46e22c1f05c85fb1f180e0",
+      "label": "Joe / Hermit — MCS-X, attente",
+      "kind": "character",
+      "referenceKeys": [
+        "fx-hermit",
+        "fx-armory-mcsx"
+      ],
+      "sourceClass": "official-screen-photographs",
+      "localHookState": "implemented-not-final-tested",
+      "alpha128XYWH": [
+        198,
+        24,
+        650,
+        1495
+      ],
+      "scope": "Joe immobile, MCS-X, sans casque. Fusil inclus dans le PNG ; aucun doublon. Exclure déplacement, accroupissement, conduit bas, portage et costume de chapitre d’index 6.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          190,
+          16,
+          666,
+          1511
+        ],
+        "pivotXY": [
+          462,
+          1519
+        ],
+        "visibleHeight": 122,
+        "includesWeapon": "mcsx",
+        "state": "written-locally-unverified"
+      }
+    },
+    {
+      "id": "zoo-cylinder",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-cylinder.png",
+      "bytes": 1555500,
+      "width": 887,
+      "height": 1774,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "b7ad66e12c747cddc8c8bd72855b60f335aa09411f3c8c0a465d0f10c41ddb52",
+      "gitBlobSha": "4d2d8264d1dc1822b421bcee81833e8862001b57",
+      "label": "Zoo — cylindre de confinement",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "sourceClass": "official-production-set-photograph",
+      "localHookState": "implemented-not-final-tested",
+      "alpha128XYWH": [
+        186,
+        53,
+        511,
+        1640
+      ],
+      "scope": "R18-0 et R18-4 uniquement, trois cylindres sur support continu ; conserver l’emprise physique.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          178,
+          45,
+          527,
+          1656
+        ],
+        "pivotXY": [
+          441.5,
+          1693
+        ],
+        "state": "written-locally-unverified"
+      }
+    },
+    {
+      "id": "zoo-console",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-console.png",
+      "bytes": 1611274,
+      "width": 1536,
+      "height": 1024,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "671c9187d464848a7d42e9ac204083477d0ae0b6ec9f29fbd45a7a6ec2fdbb91",
+      "gitBlobSha": "c4002ff4a132590607eb4a65840d43bb38f07906",
+      "label": "Zoo — console murale",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "sourceClass": "official-production-set-photograph",
+      "localHookState": "implemented-not-final-tested",
+      "alpha128XYWH": [
+        407,
+        49,
+        762,
+        910
+      ],
+      "scope": "R18-wall1 et R18-wall3 uniquement. Support mural original y210–267 ; pas de substitution de R18-1 au premier plan.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          399,
+          41,
+          778,
+          926
+        ],
+        "pivotXY": [
+          788,
+          959
+        ],
+        "state": "written-locally-unverified"
+      }
+    },
+    {
+      "id": "zoo-lab-table",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-lab-table.png",
+      "bytes": 1095592,
+      "width": 1774,
+      "height": 887,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "610f20e2e9018eda8d0fcd24c2ab03ba6e746e89f1b05759f92f5aa08b5b295b",
+      "gitBlobSha": "9d4008a6eb0febe33696bb05f2b462213b93f135",
+      "label": "Zoo — table de laboratoire",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "sourceClass": "official-production-set-photograph-with-inferred-lower-structure",
+      "localHookState": "pending",
+      "alpha128XYWH": [
+        41,
+        146,
+        1691,
+        627
+      ],
+      "scope": "Prévu seulement pour R18-island, largeur195/profondeur52/hauteur75. Le bas de la table n’est pas intégralement visible dans la référence.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          33,
+          138,
+          1707,
+          643
+        ],
+        "pivotXY": [
+          886.5,
+          773
+        ],
+        "state": "proposed-not-applied"
+      }
+    },
+    {
+      "id": "zoo-cabinet",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-cabinet.png",
+      "bytes": 1792449,
+      "width": 1086,
+      "height": 1448,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "c4ca6d984472f85e6228074e19633042d4c83793391bf5f199cf91ca943225c9",
+      "gitBlobSha": "af4afc0df14bed7ab0addf444af6d0035d253e46",
+      "label": "Zoo — meuble à vitrages dépolis",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "sourceClass": "official-production-set-photograph",
+      "localHookState": "pending",
+      "alpha128XYWH": [
+        96,
+        82,
+        895,
+        1306
+      ],
+      "scope": "Prévu comme décor mural R18, hors panneau de nom, portes et volumes de collision. Placement à vérifier en jeu.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          88,
+          74,
+          911,
+          1322
+        ],
+        "pivotXY": [
+          543.5,
+          1388
+        ],
+        "state": "proposed-not-applied"
+      }
+    },
+    {
+      "id": "arthur-idle",
+      "path": "modules/alien-earth/v12/assets/raster-v12/arthur-idle.png",
+      "bytes": 1534605,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "b90f77357ede505b4421de752e3fccf2417eb7f84d3f33cdbae04c1523147bbc",
+      "gitBlobSha": "86ad67314489b58a60965ec483443cc6fe9313a1",
+      "label": "Arthur — état sain, attente",
+      "kind": "character",
+      "referenceKeys": [
+        "fx-arthur"
+      ],
+      "sourceClass": "official-character-portrait-with-inferred-lower-clothes",
+      "localHookState": "pending",
+      "alpha128XYWH": [
+        301,
+        11,
+        404,
+        1521
+      ],
+      "scope": "Arthur sain immobile uniquement. Le portrait ne documente pas entièrement le pantalon et les chaussures. Exclure explicitement eye_host.",
+      "screenExact": false,
+      "animationFrames": 1,
+      "githubRuntimeHookState": "not-in-this-checkpoint",
+      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
+      "localRendererParameters": {
+        "sourceXYWH": [
+          293,
+          3,
+          420,
+          1533
+        ],
+        "pivotXY": [
+          506,
+          1532
+        ],
+        "state": "proposed-not-applied"
+      }
+    }
+  ],
+  "rejectedGenerations": [
+    {
+      "id": "xenomorph-maginot",
+      "status": "tool-rejected-no-image",
+      "runtimeFallback": "existing Canvas renderer"
+    }
+  ],
+  "originalModule": {
+    "version": "11.0.0",
+    "saveSchema": 11,
+    "archive": "ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip",
+    "bytes": 23895722,
+    "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
+    "fileCount": 180,
+    "githubCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+    "githubDirectory": "archives/local-recovery-20261125/alien-earth"
+  },
+  "verification": {
+    "pngSignature": "passed-for-all-8-in-cloud-V8",
+    "pngIHDRDimensions": "passed-for-all-8-in-cloud-V8",
+    "pngFormat": "8-bit RGBA for all 8",
+    "sha256": "calculated-from-the-exact-generated-bytes",
+    "sha256ImplementationSelfTests": [
+      "empty input",
+      "abc"
+    ],
+    "localRasterTests": "not-run",
+    "finalBuild": "not-run",
+    "browserGameplay": "not-run"
+  },
+  "references": [
+    {
+      "id": "fx-armory-mcsx",
+      "label": "MCS-X",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
+      "image": "https://sdlc-cms-production.fxnetworks.com/2e3164d4-5563-4480-a3f4-d3beff559190.png?imwidth=1440",
+      "local": "fx_mcsx_screen.png",
+      "kind": "photographie officielle FX"
+    },
+    {
+      "id": "fx-hermit",
+      "label": "Hermit / équipe SAR",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
+      "image": "https://sdlc-cms-production.fxnetworks.com/23e5f1b0-035a-4f66-a890-99bd0f0cd24d.png?imwidth=1440",
+      "local": "fx_hermit_sar_screen.png",
+      "kind": "photographie officielle FX"
+    },
+    {
+      "id": "fx-zoo-set",
+      "label": "Zoo Lab",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+      "image": "https://sdlc-cms-production.fxnetworks.com/5fa7c790-72ee-403f-a14d-064c3ab6f343.png?imwidth=1440",
+      "local": "fx_zoo_lab_set.png",
+      "kind": "photographie officielle du décor"
+    },
+    {
+      "id": "fx-arthur",
+      "label": "Arthur Sylvia",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/characters/david-rysdahl-arthur-sylvia",
+      "image": "https://sdlc-cms-production.fxnetworks.com/b99fc099-fe86-4a1b-bb7a-4504ebaf9781.jpg?imwidth=1080",
+      "local": "fx_arthur_portrait.jpg",
+      "kind": "portrait officiel FX"
+    },
+    {
+      "id": "weta-species19",
+      "label": "Species 19 / cycle de la tique",
+      "page": "https://www.wetaworkshop.com/projects/alien-earth",
+      "image": "https://www.wetaworkshop.com/web/image/132221-65406052/695_MO_TICK_TickLifeCycle_01_VF,WW.webp",
+      "local": "weta_species19_lifecycle_concept.webp",
+      "kind": "concept officiel Wētā Workshop"
+    }
+  ]
+}

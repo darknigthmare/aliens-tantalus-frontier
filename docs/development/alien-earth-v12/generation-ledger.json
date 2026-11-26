@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "tool": "image_gen.imagegen",
+  "policy": "One individual asset per successful call; exact output bytes preserved; reference photos are not redistributed here.",
+  "entries": [
+    {
+      "id": "mcsx",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated high-resolution 2D side-view game weapon sprite for Alien: Earth (FX series), targeting the documented screen prop. Use the provided official FX photograph strictly as the visual reference for the MCS-X Modular Combat System Mark X; remove the person and environment and render ONLY THE SAME ONE WEAPON in a clean left-to-right side elevation, muzzle pointing right, stock at left. Preserve its olive drab battered angular bullpup housing, short thick compact proportions, large open triangular top carry-handle bridge, black grip/trigger opening, segmented side panels, heavy squared forward casing, two small blue-lit panels near the upper muzzle and small cylindrical underbarrel torch. Match the original prop's identity; no M41A pulse rifle substitution, no long AR barrel, no additional scope, no invented branding. Sharp hand-painted cinematic realistic game art, detailed metal/polymer wear, readable silhouette, moderate neutral lighting. Entire gun visible with 10 percent transparent margin, true transparent background, no floor, no shadow, no person, no hands, no magazine diagram, no words, no frames, no collage. Exactly one asset in the image.",
+      "refs": [
+        "fx_mcsx_screen.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "species19-adult",
+      "prompt": "Use case: stylized-concept. Asset: exactly ONE isolated full-body creature sprite based on the single largest ADULT specimen at the far RIGHT of the supplied Weta Workshop Alien: Earth Species 19 lifecycle concept. Preserve that adult's anatomy accurately: narrow gold-brown pointed armored anterior, dark brown chitin thorax, THREE PAIRS of jointed hooked limbs (SIX limbs total) around the anterior, and the extremely long tapered translucent smoke-brown abdominal sac with darker internal segmented contents. Do not use a round common Earth tick shape and do not add spider eyes or an extra pair of legs. Present this single adult in lateral three-quarter game view, armored head pointing RIGHT and long translucent abdomen trailing LEFT, limbs in low grounded crawling stance. Keep full sac and all limb tips visible, silhouette approx 3 times as long as high. Match reference colors and material contrast, premium detailed hand-painted 2D realistic sprite with neutral soft lighting. Transparent background, zero environment, no ground shadow, no gore, no victims, no eggs or other lifecycle stages, no labels/logos/text, no diagram. Only one specimen.",
+      "refs": [
+        "weta_species19_lifecycle_concept.webp"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "joe-mcsx-idle",
+      "prompt": "Use case: stylized-concept. Create exactly one isolated FULL-BODY 2D game character sprite of Hermit / Joe (Alex Lawther) from Alien: Earth. Identity and uniform reference: the young unhelmeted man IN THE CENTER of image 1, not the two helmeted men. Slim young adult male, pale face, short tousled brown hair, clean shaven; worn grey-blue search-and-rescue uniform, short sleeves rolled to elbows, small chest utility pockets, dark belt, grey cargo trousers, practical dark boots. Preserve his recognisable face and slim physique, no helmet or mask. Weapon reference image 2: the exact olive bullpup MCS-X with triangular carry-handle and compact blocky front. Full body three-quarter SIDE VIEW facing RIGHT; relaxed alert stationary ready pose holding that MCS-X at chest/waist level pointing horizontally right, index off trigger, feet grounded on same baseline. Only one man and his one held weapon; weapon is PART of this sprite, no separate floating gun. Premium detailed hand-painted realistic 2D character art, faithful restrained palette, clean silhouette, neutral consistent lighting; head hair feet muzzle all visible with generous transparent margins. True transparent background, no environment, floor, cast shadow, text, labels, logos, sheet, extra poses or companions. Do not include the flashlight cone from reference 1.",
+      "refs": [
+        "fx_hermit_sar_screen.png",
+        "fx-mcsx.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "zoo-cylinder",
+      "prompt": "Use case: stylized-concept. Create exactly ONE isolated environmental prop sprite for Alien: Earth: the narrow illuminated yellow specimen cylinder module visible in the rear wall of the supplied OFFICIAL Maginot Zoo laboratory set photograph. Reproduce the cylindrical clear glass vessel with warm amber-yellow fluid/light, dark grey industrial top and bottom clamps, off-white surrounding vertical mounting backplate, small black fittings and green indicator on its mount. Select one of the small narrow cylinders from the LEFT group, not the entire laboratory and not the wide opaque cabinet. No recognizable specimen inside; retain a subtle suspended material texture only. Render entire single cylinder with mounting backplate as a self-contained wall-mounted module, nearly straight-on slightly side-facing game elevation, base and top fully visible with transparent margin. Clean detailed hand-painted realistic 2D asset, off-white and grey retro-futurist industrial finish matching the photograph, no gratuitous hazard markings. True transparent background; no wall, floor, people, unrelated laboratory furniture, text, labels or multi-view sheet. One prop only.",
+      "refs": [
+        "fx_zoo_lab_set.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "zoo-console",
+      "prompt": "Use case: stylized-concept. Create exactly ONE isolated environmental prop sprite for Alien: Earth, matching the wall-mounted computer console on the RIGHT side of the supplied official Maginot Zoo laboratory set photograph. Reproduce that specific tall off-white/grey box with a recessed blue rectangular monitor above, dense square physical keys and tiny orange/white lights below and beside, an angled keyboard/control shelf at the bottom, lightly worn molded edges. Simplify illegible screen glyphs into nonverbal blue waveform bars and boxes; do not invent readable labels. Show the complete single monitor-and-keyboard wall console, near straight-on three-quarter angle with restrained depth, suitable for a 2D side-scrolling room. No floor stand, no added legs, no free-floating fragments. Premium hand-painted realistic 2D detail, neutral soft lighting and matching photograph palette. True transparent background, generous margin around silhouette, no wall or floor, no person, no other props, no text/logos/title, one asset, not a sheet.",
+      "refs": [
+        "fx_zoo_lab_set.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "zoo-lab-table",
+      "prompt": "Use case: stylized-concept. Create exactly ONE isolated environmental prop sprite: the stainless steel central worktable seen in the supplied official Alien: Earth Maginot Zoo laboratory set photograph, but EMPTY so separate microscope/instrument sprites can be placed later. Preserve the wide rectangular brushed steel worktop with rounded front corners, slim polished front rim and tubular metal support legs, technical lower crossbar/shelf, pale industrial detailing. Full table including all feet visible, near front elevation with a small amount of tabletop visible (2D side-view room perspective), width about twice height, stable grounded construction. Remove ALL tools/bottles/microscope/trays from tabletop, no medical person/body. High-detail hand-painted realistic 2D environmental asset matching source metal and off-white tones. Absolutely clean isolated silhouette: true transparent background with ALPHA ZERO outside the physical object; NO haze, glow, vignette, backdrop, ground plane or cast shadow. Leave clear generous margin on all sides. No text, logo, unrelated furniture, diagrams or extra views. Exactly one empty table.",
+      "refs": [
+        "fx_zoo_lab_set.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "zoo-cabinet",
+      "prompt": "Use case: stylized-concept. Create exactly ONE isolated wall cabinet prop sprite based on the wide tall closed frosted-glass specimen cabinet at rear center-right of the supplied Alien: Earth Maginot Zoo official set photograph, immediately beside the large yellow cylinder. Match its broad grey/off-white metal rectangular housing with thick rounded-corner edges, a single smoky frosted pale glass door, subtle indistinct red blue and yellow specimen silhouettes behind the translucent pane, restrained green status indicator and small perimeter latches. The cabinet is vertical, built INTO a wall; do not give it legs or a floor stand. Complete intact module, near straight-on view with slight depth, no additional cylinder or pipes outside its own housing. Premium detailed hand-painted realistic game asset, neutral lighting. Truly transparent background, ALPHA ZERO outside cabinet silhouette, no shadows, no aura/glow/vignette, no room, no person, no text/logo, no multiple variants, generous clear margins. One cabinet only.",
+      "refs": [
+        "fx_zoo_lab_set.png"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "arthur-idle",
+      "prompt": "Use case: stylized-concept. Create exactly ONE full-body 2D game character sprite of Arthur Sylvia from Alien: Earth, carefully retaining the specific actor likeness, hair, glasses, beard and upper costume in the supplied official FX portrait. Adult man with fair skin, medium brown side-swept hair, short full brown beard, large thin metallic softly square glasses; blue-grey work lab coat with orange piping/yoke detail visible across the upper chest and sleeves, dark small floral-pattern shirt underneath. Complete lower outfit conservatively with dark charcoal trousers and simple dark shoes; do not add invented patches, weapons or props. Upright relaxed standing talk/idle pose, arms naturally at sides, three-quarter side view facing RIGHT. Healthy normal character, ordinary eyes, no alien or transformed body. Entire body and both shoes visible with generous transparent margins. Cinematic high-detail hand-painted realistic 2D sprite, natural anatomy and readable silhouette. Absolutely true transparent background and ZERO alpha outside silhouette; no floor or cast shadow, no halo/haze/vignette, no text/logo, no other people, no panels or pose sheet. One character only.",
+      "refs": [
+        "fx_arthur_portrait.jpg"
+      ],
+      "status": "generated"
+    },
+    {
+      "id": "xenomorph-maginot",
+      "status": "generation_rejected",
+      "reason": "Image generation output rejected by safety system (category other); no PNG delivered; existing Canvas drawing retained.",
+      "reference": "weta_xenomorph_practical_suit.webp"
+    }
+  ]
+}

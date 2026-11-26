@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "provenance": "Counts inspected in the recovered V11 module before the executor outage; these are game data counts, not a complete census of the television production.",
+  "chapters": 8,
+  "rooms": 70,
+  "bidirectionalLogicalLinks": 102,
+  "thresholdFaces": 204,
+  "propPlacements": 958,
+  "logicalPropTypes": 49,
+  "rules": 331,
+  "referenceSilhouettes": 25,
+  "playable": [
+    "wendy",
+    "joe",
+    "morrow"
+  ],
+  "tasks": {
+    "main": 32,
+    "optional": 38
+  },
+  "archives": 70,
+  "roster": [
+    "wendy",
+    "joe",
+    "morrow",
+    "kirsh",
+    "sylvia",
+    "arthur",
+    "curly",
+    "boy",
+    "nibs",
+    "smee",
+    "slightly",
+    "tootles",
+    "siberian",
+    "rashidi",
+    "atom",
+    "yutani",
+    "zaveri",
+    "rahim",
+    "chibuzo",
+    "shmuel",
+    "malachite",
+    "clem",
+    "petrovich",
+    "teng",
+    "sullivan"
+  ],
+  "originalAdaptationSurvivors": [
+    "leila",
+    "tao",
+    "mara",
+    "ivo"
+  ],
+  "creatureProfiles": [
+    {
+      "id": "tick",
+      "placements": 11,
+      "newPNG": "species19-adult"
+    },
+    {
+      "id": "fly",
+      "placements": 8,
+      "newPNG": null
+    },
+    {
+      "id": "facehugger",
+      "placements": 8,
+      "newPNG": null
+    },
+    {
+      "id": "xeno_maginot",
+      "placements": 4,
+      "newPNG": null
+    },
+    {
+      "id": "xeno_neverland",
+      "placements": 1,
+      "newPNG": null
+    },
+    {
+      "id": "orchid",
+      "placements": 2,
+      "rooms": [
+        "R26",
+        "R45"
+      ],
+      "newPNG": null
+    },
+    {
+      "id": "eye_caged",
+      "placements": 1,
+      "rooms": [
+        "R16"
+      ],
+      "host": "sheep",
+      "newPNG": null
+    },
+    {
+      "id": "eye_host",
+      "placements": 1,
+      "rooms": [
+        "R27"
+      ],
+      "host": "infected Arthur",
+      "newPNG": null
+    }
+  ],
+  "propTypes": [
+    "bed",
+    "console",
+    "planter",
+    "cabinet",
+    "bench",
+    "sofa",
+    "tank",
+    "cryo",
+    "workbench",
+    "tool-rack",
+    "stretcher",
+    "medical-cart",
+    "counter",
+    "vending",
+    "washer",
+    "linen-cart",
+    "data-stack",
+    "wall-light",
+    "wall-panel",
+    "wreck",
+    "barrier",
+    "rib",
+    "cargo",
+    "pipe",
+    "tree",
+    "rock",
+    "wall-map",
+    "outboard",
+    "rope-reel",
+    "beacon",
+    "supply-case",
+    "valve-post",
+    "hide-niche",
+    "gate-control",
+    "water-pump",
+    "filter-bank",
+    "coolant-unit",
+    "service-light-v4",
+    "powercab-v4",
+    "security-camera-v4",
+    "cameraConsole-v4",
+    "scrap-v4",
+    "workbench-v4",
+    "containment-pad-v5",
+    "duct-hatch-v7",
+    "duct-rib-v7",
+    "duct-cable-v7",
+    "duct-motor-v7",
+    "duct-brake-v7"
+  ],
+  "equipmentReferenceRows": [
+    "mcsx",
+    "wy-pistol",
+    "ksg-al",
+    "cutter",
+    "hook",
+    "radio",
+    "torch",
+    "tablet",
+    "wy-smg",
+    "other-firearms",
+    "game-tools",
+    "maxim9",
+    "kriss"
+  ],
+  "generatedIndividualImages": [
+    {
+      "id": "mcsx",
+      "path": "modules/alien-earth/v12/assets/raster-v12/mcsx.png",
+      "category": "weapon"
+    },
+    {
+      "id": "species19-adult",
+      "path": "modules/alien-earth/v12/assets/raster-v12/species19-adult.png",
+      "category": "creature"
+    },
+    {
+      "id": "joe-mcsx-idle",
+      "path": "modules/alien-earth/v12/assets/raster-v12/joe-mcsx-idle.png",
+      "category": "character"
+    },
+    {
+      "id": "zoo-cylinder",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-cylinder.png",
+      "category": "prop"
+    },
+    {
+      "id": "zoo-console",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-console.png",
+      "category": "prop"
+    },
+    {
+      "id": "zoo-lab-table",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-lab-table.png",
+      "category": "prop"
+    },
+    {
+      "id": "zoo-cabinet",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-cabinet.png",
+      "category": "prop"
+    },
+    {
+      "id": "arthur-idle",
+      "path": "modules/alien-earth/v12/assets/raster-v12/arthur-idle.png",
+      "category": "character"
+    }
+  ],
+  "notRecovered": {
+    "previouslyReportedPNGs": 14,
+    "countedAsDelivered": 0
+  },
+  "visualCoverage": {
+    "humanStillPoses": 2,
+    "creatureStillPoses": 1,
+    "standaloneWeapons": 1,
+    "props": 4,
+    "animatedSets": 0,
+    "completeRoomPNGBackgrounds": 0,
+    "vehicleExteriorPNGs": 0,
+    "planetTexturePNGs": 0
+  }
+}
