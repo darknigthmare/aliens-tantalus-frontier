@@ -1,3 +1,4 @@
+import { publicHistoricalArchivePathAdmission20261126, historicalArchiveFile20261126, verifyHistoricalArchiveSources20261126 } from './historical-archive-admissions-20261126.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
@@ -2103,6 +2104,8 @@ const DLC_ARCHIVE_DIRECTORIES_20261126 = new Set([
 const DLC_ARCHIVE_ROOTS_20261126 = ["archives/dlc-source-recovery-20261126", "archives/blackout-source-recovery-20261126"];
 
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const historicalArchiveAdmission = publicHistoricalArchivePathAdmission20261126(path, { directory, built });
+  if (historicalArchiveAdmission !== null) return historicalArchiveAdmission;
   if (DLC_ARCHIVE_DIRECTORIES_20261126.has(path)) return !built && directory;
   if (typeof path === 'string' && DLC_ARCHIVE_ROOTS_20261126.some(root => path.startsWith(root + '/')))
     return !built && !directory && Object.hasOwn(DLC_ARCHIVE_FILES_20261126, path);
@@ -2239,6 +2242,14 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      const historicalArchive = !built && historicalArchiveFile20261126(path);
+      if (historicalArchive) {
+        const bytes = await readFile(join(directory, entry.name));
+        assert.equal(bytes.length, historicalArchive.bytes, 'Changed historical archive size: ' + path);
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), historicalArchive.sha256,
+          'Changed historical archive bytes: ' + path);
+        continue;
+      }
       if (!built && Object.hasOwn(DLC_ARCHIVE_FILES_20261126, path)) {
         const expected = DLC_ARCHIVE_FILES_20261126[path];
         const bytes = await readFile(join(directory, entry.name));
@@ -2271,6 +2282,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  await verifyHistoricalArchiveSources20261126(root, { built });
   // Scan admitted paths and private text first, including partial adversarial
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });

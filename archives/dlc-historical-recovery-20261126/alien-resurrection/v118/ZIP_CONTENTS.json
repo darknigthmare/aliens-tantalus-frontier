@@ -1,0 +1,3165 @@
+{
+  "archive": "ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip",
+  "archiveSha256": "345788c5e15b89272389fb983b2a30fbf76734c4cf508b04b7e6d95c8d470517",
+  "members": [
+    {
+      "path": "GALERIE_ASSETS_V118.html",
+      "bytes": 5739102,
+      "compressedBytes": 4136645,
+      "crc32": "e0c2490a",
+      "sha256": "e97359db65a6c129750ca0e4d23404286ad04ff0d396bbafd3f9026083d869a2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/README_ASSETS.md",
+      "bytes": 2029,
+      "compressedBytes": 1103,
+      "crc32": "3cbe5ecf",
+      "sha256": "e1a927d37d4d973ed70281881104ad2a2049cf1a8ada515420f9e52c9b390bae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/call.json",
+      "bytes": 10349,
+      "compressedBytes": 1615,
+      "crc32": "b97e6c36",
+      "sha256": "3492a9fd757eb63be15a0e6d09cc0e2b88ecba394882b4e1b80d3d47e15bcb2c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/call.png",
+      "bytes": 326685,
+      "compressedBytes": 308580,
+      "crc32": "ada7f00d",
+      "sha256": "c74501a8bf8bceca6d3f35e52ffabc0aca96f522c3dc147729c4f6a45fc7d8a7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/clone7.json",
+      "bytes": 1924,
+      "compressedBytes": 537,
+      "crc32": "0c43d1ed",
+      "sha256": "4b0f87ba0aabf4e77bd5d1f3c010f2fc47e242a616ad09f3225d88f44d6c229a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/clone7.png",
+      "bytes": 29516,
+      "compressedBytes": 22036,
+      "crc32": "7afbcb7a",
+      "sha256": "6f4e41e33d879da0dd374ae3d1a987171cbb418cb3b5dca5a5a67b763e54c595",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/cocoon.json",
+      "bytes": 1921,
+      "compressedBytes": 577,
+      "crc32": "357d1455",
+      "sha256": "d4f81c2e30be20dbd2f1d4b77d7d5515a4183bfa5456cc75cc92c21834e99b40",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/cocoon.png",
+      "bytes": 60356,
+      "compressedBytes": 54391,
+      "crc32": "701a6741",
+      "sha256": "9b5b84dea3c6acade453514c6cdb9f0b268994dfd1f26edc7b64ea9b8add4dfe",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/facehugger.json",
+      "bytes": 9796,
+      "compressedBytes": 1603,
+      "crc32": "f0abbda5",
+      "sha256": "172b2b45c913f83be9f42effea4328e974b088d09dd5fd19bc64ed15f24f5e5d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/facehugger.png",
+      "bytes": 288801,
+      "compressedBytes": 264924,
+      "crc32": "073ac5f1",
+      "sha256": "8f9e09675806d7127e9b71754fe1c5277b2517b75b03a2ac446d39e37ad9c17b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/johner.json",
+      "bytes": 8432,
+      "compressedBytes": 1390,
+      "crc32": "fb8bd6e2",
+      "sha256": "b298578303edd0f5644d4d38cf43e3aa41d0c7fb16d02a97cdef279a4f1350de",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/johner.png",
+      "bytes": 260031,
+      "compressedBytes": 248674,
+      "crc32": "d7b89896",
+      "sha256": "f4b7307998b7ddc4965af8d866cc52c001f92cdbb45cea10377ff46eada817a2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/newborn.json",
+      "bytes": 8926,
+      "compressedBytes": 1593,
+      "crc32": "94f92a9c",
+      "sha256": "4b1b5445fb49b5b25e0331dde27d0ef4acaf038e6b95a842250f47c2ac3eca21",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/newborn.png",
+      "bytes": 389717,
+      "compressedBytes": 379432,
+      "crc32": "da2ae6bd",
+      "sha256": "c45554190b5055c0b298c30f9b255de8ad97ed143fb46e95c38d1ab7fb741964",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/queen.json",
+      "bytes": 4278,
+      "compressedBytes": 755,
+      "crc32": "10d2be9a",
+      "sha256": "a1fbb2546c13c11abdee4db81c41270f5eccba8ac0cfde1727d2b9b87a75ef0a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/queen.png",
+      "bytes": 215411,
+      "compressedBytes": 202029,
+      "crc32": "9c4c26da",
+      "sha256": "a69478b87fb3ed94c295e8ee99814ee4e3380c88e5f74bccb8b0edeb730dd09a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/ripley.json",
+      "bytes": 12360,
+      "compressedBytes": 1966,
+      "crc32": "72d9063b",
+      "sha256": "fd673f94ad2fa0aa8f77aa83e35f171178d1af2e794dbcd6fb77b304860c02d4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/ripley.png",
+      "bytes": 463227,
+      "compressedBytes": 449718,
+      "crc32": "2e980fde",
+      "sha256": "a3ed653e035a619b8a2dc145728b07b5548b5247848b8e8f92f607bc432ebc8b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/scientist.json",
+      "bytes": 7346,
+      "compressedBytes": 1121,
+      "crc32": "caaf6a78",
+      "sha256": "4fee42f869dac251fb5c132d691cb785d99b1ddab958aae61a31f2f18d7c8e18",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/scientist.png",
+      "bytes": 220516,
+      "compressedBytes": 206476,
+      "crc32": "93241ad7",
+      "sha256": "9f83d9d0a023c9cce700d740e0a00ef5fb8e26d69d274b799eeadc2b28796782",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/soldier.json",
+      "bytes": 8455,
+      "compressedBytes": 1383,
+      "crc32": "719e3012",
+      "sha256": "d0184afd9bd574fc274f37e28a74d86e654bb47904cb40c2427b7c0c5e5d1de0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/soldier.png",
+      "bytes": 262799,
+      "compressedBytes": 251371,
+      "crc32": "c59d5b78",
+      "sha256": "d212bfc279713492d8059be17f1d341b78396a5bce468d4512217df152b4bc4f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/vriess.json",
+      "bytes": 6130,
+      "compressedBytes": 1176,
+      "crc32": "b3cc1587",
+      "sha256": "79fa60509d71e9c089fd526785131438d870f7bce118308dbb35e5bef80a2bd5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/vriess.png",
+      "bytes": 127673,
+      "compressedBytes": 117861,
+      "crc32": "2ea697e9",
+      "sha256": "4876f6ac822cca8c146982f8ea5efccfe3aa2b645668af3f567486386c4912ee",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/xeno.json",
+      "bytes": 10426,
+      "compressedBytes": 1646,
+      "crc32": "0a76aa34",
+      "sha256": "c4d779a6531e2768dfbf938e84adac6c194c21051b259d151a73cf96e820f4d7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/actors/xeno.png",
+      "bytes": 573218,
+      "compressedBytes": 556364,
+      "crc32": "bf050c5f",
+      "sha256": "10026269de8cc0e2994a39afe46c3a86251570f794c633473df1cc1bd10bd611",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/acid.wav",
+      "bytes": 21212,
+      "compressedBytes": 19589,
+      "crc32": "2b6f5a9c",
+      "sha256": "2da56538232fb872a013a86081d982b7ca386c0d0eb47d73aba603b2203d7626",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/betty-loop.wav",
+      "bytes": 132344,
+      "compressedBytes": 127273,
+      "crc32": "102acf46",
+      "sha256": "3cbab768b79217f3ee2275f58cc2f476ca39a62fc40ff9b7cc52ee3c825d11bf",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/confirm.wav",
+      "bytes": 11068,
+      "compressedBytes": 10657,
+      "crc32": "18ae585f",
+      "sha256": "1803a930b46e06f82b7bf4d5f5c085ec0fa09671b8833cfee4ab00c4b4aa2d05",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/door.wav",
+      "bytes": 30914,
+      "compressedBytes": 28550,
+      "crc32": "60eb4b5e",
+      "sha256": "3960d72a05eafcb790c4a8241797e6ae60974114e91721bd363124899406a49a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/engine-loop.wav",
+      "bytes": 132344,
+      "compressedBytes": 127484,
+      "crc32": "4df0d8bf",
+      "sha256": "70daa51bad766cafbd73a1fed159277f79dee09e107851c0569bd5ce7ae01175",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/flesh.wav",
+      "bytes": 7100,
+      "compressedBytes": 6333,
+      "crc32": "28f302b6",
+      "sha256": "b47a6e5a459de9d931898ea8fb323b10affbb65d53b3c8c3dda914eb0e5c68c0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/hive-loop.wav",
+      "bytes": 132344,
+      "compressedBytes": 127478,
+      "crc32": "4dfe1cc2",
+      "sha256": "6867048b363fbfc8ed1ecb90f1d6c989a74bdd8adb266461d19bc20046cd058a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/injury.wav",
+      "bytes": 7100,
+      "compressedBytes": 6400,
+      "crc32": "70a012ee",
+      "sha256": "9475e36cf55caacbc4d72c96f30671e3a7aea598e41819410a61fffa4d98905d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/manifest.json",
+      "bytes": 4141,
+      "compressedBytes": 1127,
+      "crc32": "1ca83824",
+      "sha256": "58f0c98fe83d8fb588a30f05f74ce75d164bdcb4fdc57d8621068a2325a33bd6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/metal.wav",
+      "bytes": 7100,
+      "compressedBytes": 6318,
+      "crc32": "5f1c68f5",
+      "sha256": "cd71a34ba1ade83e853152b30a7e647782b2ebaddc646ee2ee782191ae1ce93a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/oxygen.wav",
+      "bytes": 22094,
+      "compressedBytes": 12077,
+      "crc32": "c2e307e2",
+      "sha256": "ec04c1fcd7ea90348993a6c94747c34d913e2db9d9b4ee6b0ce78495c0d5e359",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/parasite.wav",
+      "bytes": 18566,
+      "compressedBytes": 17679,
+      "crc32": "4a64fb40",
+      "sha256": "49c7c4fa0f0fab4831c9e045840bee01173a5e74ee8d2247b44d99f8f923e455",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/pressure.wav",
+      "bytes": 27386,
+      "compressedBytes": 25131,
+      "crc32": "fa1c7f6c",
+      "sha256": "6b7301882a673094ad348f5d45651439550003a168661122994caeceb6bacb13",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/rifle.wav",
+      "bytes": 7982,
+      "compressedBytes": 6449,
+      "crc32": "3cd08a8a",
+      "sha256": "1173f2f289b88bcf571a7f83f4d42cd84fd3b2af7a5ee1d2e12e4b4581ff5b3e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/audio/step.wav",
+      "bytes": 5336,
+      "compressedBytes": 4732,
+      "crc32": "5bab2144",
+      "sha256": "538f7d2bef20d3d74006d01db806b07a5591abcbe3ad1165708dcdcf44be682e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_00.png",
+      "bytes": 20271,
+      "compressedBytes": 20182,
+      "crc32": "e7e27382",
+      "sha256": "3806182ae2f95d74dd4ebe407852a1082fec35731832faa9e2c8e8b4c7c131a2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_01.png",
+      "bytes": 20122,
+      "compressedBytes": 20044,
+      "crc32": "150fb960",
+      "sha256": "309a77fb08131eb4824eac55b51b10f5dc1d728461c2847b7d2331d5961d9aca",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_02.png",
+      "bytes": 20102,
+      "compressedBytes": 20019,
+      "crc32": "9c2194d3",
+      "sha256": "69bfdd0024dd281b9f7ace1a64f73a3ab8504402e86db0c161751608ab22dd5f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_03.png",
+      "bytes": 20203,
+      "compressedBytes": 20083,
+      "crc32": "18b33d96",
+      "sha256": "cdb7f47dd4054330f92c02687c947d2ec03da2201e23825436f1e699370235de",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_04.png",
+      "bytes": 20085,
+      "compressedBytes": 19987,
+      "crc32": "1b4bb2e6",
+      "sha256": "789916b2fc8da16f941342ccbd9cc8390e0122ff0b44b8d678824626e538fddb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/climb_05.png",
+      "bytes": 20122,
+      "compressedBytes": 20026,
+      "crc32": "c0ddafd4",
+      "sha256": "ae347d6974d3ccdc43f63861276927ca9f7232f35e5bc50d0f8d9ccbfb77284a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/hurt_00.png",
+      "bytes": 21648,
+      "compressedBytes": 21546,
+      "crc32": "865d9b04",
+      "sha256": "fc55a513307202d95012e7e15064f94321cd82ac9ddf52a0f068959c64e8677b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/hurt_01.png",
+      "bytes": 21474,
+      "compressedBytes": 21361,
+      "crc32": "14cf02ce",
+      "sha256": "63ec8f6a035e11d9cdecff75cf16b4671f0bfe832e3ebf8345d4b726a54ab832",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/idle_00.png",
+      "bytes": 20158,
+      "compressedBytes": 20066,
+      "crc32": "7fe1d2bf",
+      "sha256": "9297faf98c651e91d3b85c845c3cd0b933b7e0ef765591d2eae29b9ea49309a3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/idle_01.png",
+      "bytes": 19880,
+      "compressedBytes": 19796,
+      "crc32": "ced8927e",
+      "sha256": "9ea95746077cb4f0542df1cd87ce8a594faff3ea68570a3440d4cdaea24f2564",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/idle_02.png",
+      "bytes": 20158,
+      "compressedBytes": 20066,
+      "crc32": "7fe1d2bf",
+      "sha256": "9297faf98c651e91d3b85c845c3cd0b933b7e0ef765591d2eae29b9ea49309a3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/idle_03.png",
+      "bytes": 19881,
+      "compressedBytes": 19766,
+      "crc32": "c3f1b7c6",
+      "sha256": "b60b4c8d83ebb43482f54f9316403a003e397d4710529698133e40cfce6e914c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_00.png",
+      "bytes": 20620,
+      "compressedBytes": 20514,
+      "crc32": "93fa6a8e",
+      "sha256": "2ab07e60efa9a8a7520abb3cff852dd4e9846e068d01d208aa4c92ec68d19844",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_01.png",
+      "bytes": 20315,
+      "compressedBytes": 20217,
+      "crc32": "83861233",
+      "sha256": "bf9509e77349030a3acef711e5e9f0c3ea524cb573f37032d0cb806f187ac306",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_02.png",
+      "bytes": 20339,
+      "compressedBytes": 20225,
+      "crc32": "8e519b45",
+      "sha256": "15299616098aad96b76196319b228d6e31d674001f5c16fe2d1dc71216aab226",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_03.png",
+      "bytes": 20620,
+      "compressedBytes": 20514,
+      "crc32": "93fa6a8e",
+      "sha256": "2ab07e60efa9a8a7520abb3cff852dd4e9846e068d01d208aa4c92ec68d19844",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_04.png",
+      "bytes": 20489,
+      "compressedBytes": 20402,
+      "crc32": "b1f4b0b2",
+      "sha256": "8d9dbf9d25916420136d80395d48bed6e327d8ab599a5721276a8e71a2b42c16",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/interact_05.png",
+      "bytes": 20489,
+      "compressedBytes": 20402,
+      "crc32": "b1f4b0b2",
+      "sha256": "8d9dbf9d25916420136d80395d48bed6e327d8ab599a5721276a8e71a2b42c16",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_00.png",
+      "bytes": 20158,
+      "compressedBytes": 20066,
+      "crc32": "7fe1d2bf",
+      "sha256": "9297faf98c651e91d3b85c845c3cd0b933b7e0ef765591d2eae29b9ea49309a3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_01.png",
+      "bytes": 22007,
+      "compressedBytes": 21920,
+      "crc32": "0afde331",
+      "sha256": "bd62b79ae150f5cdb6f0ff7adc27803ed8810727536edcf27fe80c3f6a93dd97",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_02.png",
+      "bytes": 23304,
+      "compressedBytes": 23195,
+      "crc32": "e812fb5e",
+      "sha256": "a0203609374315ba0e1ed91dc4117131c062d217852923374cd05c05c44f09f7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_03.png",
+      "bytes": 22007,
+      "compressedBytes": 21920,
+      "crc32": "0afde331",
+      "sha256": "bd62b79ae150f5cdb6f0ff7adc27803ed8810727536edcf27fe80c3f6a93dd97",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_04.png",
+      "bytes": 20158,
+      "compressedBytes": 20066,
+      "crc32": "7fe1d2bf",
+      "sha256": "9297faf98c651e91d3b85c845c3cd0b933b7e0ef765591d2eae29b9ea49309a3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_05.png",
+      "bytes": 20808,
+      "compressedBytes": 20656,
+      "crc32": "1c517f66",
+      "sha256": "09dad84d2791dbb44df251c279bc7fea08bc7bdfea99eba9aed2ad7561b479eb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_06.png",
+      "bytes": 21477,
+      "compressedBytes": 21341,
+      "crc32": "7f6c4204",
+      "sha256": "978b64c94a9d73172b36878dd9380b911c0f92812a04670e48a3c5ff98bc2455",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/call/walk_07.png",
+      "bytes": 20808,
+      "compressedBytes": 20656,
+      "crc32": "1c517f66",
+      "sha256": "09dad84d2791dbb44df251c279bc7fea08bc7bdfea99eba9aed2ad7561b479eb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/clone7/idle_00.png",
+      "bytes": 8072,
+      "compressedBytes": 7824,
+      "crc32": "b73fca59",
+      "sha256": "9eaef8d85f5cb4744bf08b9c397dd7d2aede9d7f04831e60fe151c5e9d2d64e1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/clone7/idle_01.png",
+      "bytes": 8229,
+      "compressedBytes": 8042,
+      "crc32": "ef0c9312",
+      "sha256": "dc8b54a84b5772fe81beb19bd8a6c85da1ff791c36667f10675b407e7ea1df42",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/clone7/idle_02.png",
+      "bytes": 8072,
+      "compressedBytes": 7824,
+      "crc32": "b73fca59",
+      "sha256": "9eaef8d85f5cb4744bf08b9c397dd7d2aede9d7f04831e60fe151c5e9d2d64e1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/clone7/idle_03.png",
+      "bytes": 8090,
+      "compressedBytes": 7875,
+      "crc32": "05f7b460",
+      "sha256": "f8aafdf71dc1f2102d93e36b788d82f5b79a9e8804e112913bec88bedb163d59",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/cocoon/idle_00.png",
+      "bytes": 18502,
+      "compressedBytes": 18305,
+      "crc32": "bde9042f",
+      "sha256": "45ece14aac52a25e4904addc8c5dea0428818706a6d5a89d6d923634f8af2af1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/cocoon/idle_01.png",
+      "bytes": 18717,
+      "compressedBytes": 18575,
+      "crc32": "ca9876e4",
+      "sha256": "69840fd4c50e08f40c8d16a598256f07d04673fb02af863affe9f2aedb9a0ee5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/cocoon/idle_02.png",
+      "bytes": 18521,
+      "compressedBytes": 18325,
+      "crc32": "57be7d35",
+      "sha256": "af8c2145fcfe3f57c506b2b6647811f52f9b4479cc8a9f20c6faf4966f7a42ff",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/cocoon/idle_03.png",
+      "bytes": 18405,
+      "compressedBytes": 18212,
+      "crc32": "494ef3a3",
+      "sha256": "75d517657a5d596b9e6411e73c0da4f9fc615fd37ade1292dab908200e6f0751",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/attack_00.png",
+      "bytes": 16885,
+      "compressedBytes": 16435,
+      "crc32": "c923c845",
+      "sha256": "b0e821570b1c4057bc6227058a9c8872e4ce1affdbe2f06c1502b2ed887b77ee",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/attack_01.png",
+      "bytes": 17492,
+      "compressedBytes": 17067,
+      "crc32": "add3a130",
+      "sha256": "098c01d12ae40d5e6d811dffda9c173fc105ea7ce90d0c459c34b437b540d80b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/attack_02.png",
+      "bytes": 16860,
+      "compressedBytes": 16382,
+      "crc32": "ba9477a7",
+      "sha256": "538cb17fb4a85e220dcfd3c9cfa7a10ed22b9dfdefd2f37205817f8eed802533",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/attack_03.png",
+      "bytes": 17349,
+      "compressedBytes": 16927,
+      "crc32": "08159864",
+      "sha256": "dba1884b01a48b3008a597f776599ecc2b92bfb29d7110976aa3419c4de10b46",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/idle_00.png",
+      "bytes": 16902,
+      "compressedBytes": 16456,
+      "crc32": "10dd24f4",
+      "sha256": "e1c8b24ed68069e6d43acad0bd3201486c1e879a63e1ef36a33478e76aff134a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/idle_01.png",
+      "bytes": 17511,
+      "compressedBytes": 17060,
+      "crc32": "9775b68f",
+      "sha256": "155549a1ef2b3132035d0f69e41a7f39076938998235a658b18f02d698ec0167",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/idle_02.png",
+      "bytes": 16876,
+      "compressedBytes": 16414,
+      "crc32": "bd1d25b4",
+      "sha256": "4ff5eda48b1f415cfb2c7b09b58fccf963454693a4b2018afc3c053a051ec01a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/idle_03.png",
+      "bytes": 17339,
+      "compressedBytes": 16876,
+      "crc32": "46bd8b4c",
+      "sha256": "38f8086ce2fa93ced442b18473ca5441491de602063e2bd86e1c7a6c5769770b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/recover_00.png",
+      "bytes": 16902,
+      "compressedBytes": 16456,
+      "crc32": "10dd24f4",
+      "sha256": "e1c8b24ed68069e6d43acad0bd3201486c1e879a63e1ef36a33478e76aff134a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/recover_01.png",
+      "bytes": 17511,
+      "compressedBytes": 17060,
+      "crc32": "9775b68f",
+      "sha256": "155549a1ef2b3132035d0f69e41a7f39076938998235a658b18f02d698ec0167",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/recover_02.png",
+      "bytes": 16876,
+      "compressedBytes": 16414,
+      "crc32": "bd1d25b4",
+      "sha256": "4ff5eda48b1f415cfb2c7b09b58fccf963454693a4b2018afc3c053a051ec01a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/recover_03.png",
+      "bytes": 17339,
+      "compressedBytes": 16876,
+      "crc32": "46bd8b4c",
+      "sha256": "38f8086ce2fa93ced442b18473ca5441491de602063e2bd86e1c7a6c5769770b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_00.png",
+      "bytes": 17623,
+      "compressedBytes": 17205,
+      "crc32": "59c91eca",
+      "sha256": "54e893d440903ec515ff715e2723a9d8b2445d8ae32930d4aeca6ef82cfc21d4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_01.png",
+      "bytes": 18060,
+      "compressedBytes": 17794,
+      "crc32": "2642a3fc",
+      "sha256": "cea539c5d2a02d1741d0d5625520ac6206bf1220e4dd5ff2878cfc4a2ae61a4d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_02.png",
+      "bytes": 18033,
+      "compressedBytes": 17749,
+      "crc32": "d1cfa014",
+      "sha256": "466860ba27aece7dfb563cbbfe8083a3f8ba626e3ce0696ddbdbbd923c7a68b8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_03.png",
+      "bytes": 17917,
+      "compressedBytes": 17369,
+      "crc32": "0c77e809",
+      "sha256": "ea521393256abb6add543a995d7d068248594f334147e09feb0b0125d68d6a17",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_04.png",
+      "bytes": 17760,
+      "compressedBytes": 17511,
+      "crc32": "1978aca3",
+      "sha256": "f08a1e833259a6a1d255c97c50ea51f5ff74f8cb71c2941018f8d035c542ea8e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_05.png",
+      "bytes": 17967,
+      "compressedBytes": 17533,
+      "crc32": "f4b30e89",
+      "sha256": "296cbfc8ea23d418ad3ee20f3544df614ab034f217912d69a5041dad2bf0e5fa",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_06.png",
+      "bytes": 17463,
+      "compressedBytes": 17023,
+      "crc32": "5f773b28",
+      "sha256": "f5518521aa49532ebed2f8f0ecceba193dc19bed5cf1714197bafdd6569d051b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/walk_07.png",
+      "bytes": 17578,
+      "compressedBytes": 17144,
+      "crc32": "ae088c08",
+      "sha256": "d63ce181a3283c8d38487b9c22b2af24a57f90b2bbe101a9598b88d2734142db",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/windup_00.png",
+      "bytes": 16913,
+      "compressedBytes": 16644,
+      "crc32": "4278cdc7",
+      "sha256": "b824ade9ff53f6f2e0aaf5ee7ab152de86fe77bcc0563247188090e2bf1f0b52",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/windup_01.png",
+      "bytes": 17530,
+      "compressedBytes": 17104,
+      "crc32": "9bf795f4",
+      "sha256": "d9c63eeb7d0ea98417dbb486290f99be29e4ac90501dff6cbce2fda805d2945a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/windup_02.png",
+      "bytes": 16909,
+      "compressedBytes": 16652,
+      "crc32": "f5eabb25",
+      "sha256": "1ccdb4efb6a0f8dfc8bf6483041135f61549f2a35d90bad8781dafa731d24342",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/facehugger/windup_03.png",
+      "bytes": 17382,
+      "compressedBytes": 17139,
+      "crc32": "558b9d84",
+      "sha256": "4b1cb883c06f156b090b98e32e806784ce922e893923ffc75ba692066d5a0e86",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_00.png",
+      "bytes": 18688,
+      "compressedBytes": 18538,
+      "crc32": "b9f5b776",
+      "sha256": "2d4d4d802d2d412be6f2789a6bc1b212fe31d25201d281283643afd6911699ec",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_01.png",
+      "bytes": 18624,
+      "compressedBytes": 18577,
+      "crc32": "87a87c67",
+      "sha256": "9f01748d6f0ca116dd1645c82d9515884fdc45d56e7ed9685905dde2b6c98425",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_02.png",
+      "bytes": 18624,
+      "compressedBytes": 18568,
+      "crc32": "a8c1ba58",
+      "sha256": "99336688ddbc6a786e20f51615329fef3bec315e10b95c37fc569ddbc8e93dae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_03.png",
+      "bytes": 18615,
+      "compressedBytes": 18454,
+      "crc32": "0bcfbb64",
+      "sha256": "fcb076018a3ec55ce9fea28a1d740f21125f8918b630767ebd90969bb6bf59a7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_04.png",
+      "bytes": 18576,
+      "compressedBytes": 18473,
+      "crc32": "81b9b5aa",
+      "sha256": "8478bb834d9261ee08709d8f4f5288785922b68be6eae3548d35f62fefc74c24",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/climb_05.png",
+      "bytes": 18598,
+      "compressedBytes": 18506,
+      "crc32": "996ac45a",
+      "sha256": "0f607b0a165c15dd1dfb581ac04024e950baa3086f76c5c4fe932718e1fc9991",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/fire_00.png",
+      "bytes": 18880,
+      "compressedBytes": 18767,
+      "crc32": "11243fff",
+      "sha256": "81dcdb4c3c726dcf89e1b68586360a1a9ebcc5d523abd80bf8e8a15a9a2bfaf9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/fire_01.png",
+      "bytes": 18967,
+      "compressedBytes": 18873,
+      "crc32": "5b523bcd",
+      "sha256": "6d343ec0a3b6c5ceae85f7879f4a561eae3b72ed63a4b68688e06d3c72d6e0c0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/fire_02.png",
+      "bytes": 19023,
+      "compressedBytes": 18908,
+      "crc32": "b910918c",
+      "sha256": "8dc1df5b4410ac7bec84869dd1a6db7b3ceedb73fffb50ea15a3b7c223832390",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/idle_00.png",
+      "bytes": 19104,
+      "compressedBytes": 18996,
+      "crc32": "cd1a52d2",
+      "sha256": "07e75831689df843a7bb6f258f30926c09c54057e31372ec8d75ca004d55f205",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/idle_01.png",
+      "bytes": 19169,
+      "compressedBytes": 19066,
+      "crc32": "ada370e9",
+      "sha256": "1c58962ba667c61e3e3549ae259b7f8b7c2a437b9525068681f7aed6c00150c6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/idle_02.png",
+      "bytes": 19104,
+      "compressedBytes": 18996,
+      "crc32": "cd1a52d2",
+      "sha256": "07e75831689df843a7bb6f258f30926c09c54057e31372ec8d75ca004d55f205",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/idle_03.png",
+      "bytes": 19084,
+      "compressedBytes": 18924,
+      "crc32": "adfc335b",
+      "sha256": "ef2801124ed66f216f129be1cec4d5a6ad4e97b4e0ea26f4820c276081f08b51",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_00.png",
+      "bytes": 19104,
+      "compressedBytes": 18996,
+      "crc32": "cd1a52d2",
+      "sha256": "07e75831689df843a7bb6f258f30926c09c54057e31372ec8d75ca004d55f205",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_01.png",
+      "bytes": 21199,
+      "compressedBytes": 21122,
+      "crc32": "2d2d63e5",
+      "sha256": "dd38893d2de0e98547b4c7cc4bcd7624fafb487831ecd2023fcb8a21692e1ce9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_02.png",
+      "bytes": 21939,
+      "compressedBytes": 21842,
+      "crc32": "1ed0c92b",
+      "sha256": "359cd919a2fc720858a725c56a188a96805d7695d383198f6de5d44a0c649b71",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_03.png",
+      "bytes": 21199,
+      "compressedBytes": 21122,
+      "crc32": "2d2d63e5",
+      "sha256": "dd38893d2de0e98547b4c7cc4bcd7624fafb487831ecd2023fcb8a21692e1ce9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_04.png",
+      "bytes": 19104,
+      "compressedBytes": 18996,
+      "crc32": "cd1a52d2",
+      "sha256": "07e75831689df843a7bb6f258f30926c09c54057e31372ec8d75ca004d55f205",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_05.png",
+      "bytes": 20321,
+      "compressedBytes": 20215,
+      "crc32": "4737698f",
+      "sha256": "f53445b1c1798e77961a3f62066d6b63879ad46c4a197ee5f81fff8b6dad0844",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_06.png",
+      "bytes": 20711,
+      "compressedBytes": 20607,
+      "crc32": "b046187b",
+      "sha256": "5da50eff736424e90d1d5a0274bf5fd099161e685784a882b631d9648962839d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/johner/walk_07.png",
+      "bytes": 20321,
+      "compressedBytes": 20215,
+      "crc32": "4737698f",
+      "sha256": "f53445b1c1798e77961a3f62066d6b63879ad46c4a197ee5f81fff8b6dad0844",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/attack_00.png",
+      "bytes": 27790,
+      "compressedBytes": 27627,
+      "crc32": "4042befa",
+      "sha256": "4fd54b236016c7a9fd2558a7b0824a002fd6384221ddbb458240f28256851c9e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/attack_01.png",
+      "bytes": 28008,
+      "compressedBytes": 27913,
+      "crc32": "4df90c73",
+      "sha256": "9c18ba487a02ff006567973b50ddb76c066e7e081d321fe552dc1384675b7610",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/attack_02.png",
+      "bytes": 28181,
+      "compressedBytes": 28049,
+      "crc32": "7785e72c",
+      "sha256": "dbb249ffa7a495d97573e55bf4b93409284d3e9c6c197e8b1edd06e52f5055eb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/attack_03.png",
+      "bytes": 28900,
+      "compressedBytes": 28768,
+      "crc32": "559d1792",
+      "sha256": "fb5ad7b92ab30e1fb80af323bfd8571331137edcf6e8fa47a7c7f2575bfdc12d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/hurt_00.png",
+      "bytes": 27801,
+      "compressedBytes": 27666,
+      "crc32": "860f2e89",
+      "sha256": "bfb31abb8d233581782c9ab356a326ecbaaa5906402b1227f12d78a46725e13e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/hurt_01.png",
+      "bytes": 28378,
+      "compressedBytes": 28257,
+      "crc32": "21245daa",
+      "sha256": "55d45dd0d19aae0766c8a4129f62612099ec68f30edb077e5d44158491f81a2a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/idle_00.png",
+      "bytes": 27790,
+      "compressedBytes": 27627,
+      "crc32": "4042befa",
+      "sha256": "4fd54b236016c7a9fd2558a7b0824a002fd6384221ddbb458240f28256851c9e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/idle_01.png",
+      "bytes": 27759,
+      "compressedBytes": 27576,
+      "crc32": "d2f00958",
+      "sha256": "46221ad7a32b6fe22a423ac390ad7fcc95cbc155be80df913b7afd9baa5e3a05",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/idle_02.png",
+      "bytes": 27764,
+      "compressedBytes": 27597,
+      "crc32": "6994e94d",
+      "sha256": "18f03d0c2462ba9602f49aa8e06d46302d553cf3492d837dc181fb8f34995398",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/idle_03.png",
+      "bytes": 27758,
+      "compressedBytes": 27574,
+      "crc32": "9bd03619",
+      "sha256": "fa9c079b406791c952c1c49f566f9f732d9d7d8aeb490e33b2962f6348e19a6c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_00.png",
+      "bytes": 27790,
+      "compressedBytes": 27627,
+      "crc32": "4042befa",
+      "sha256": "4fd54b236016c7a9fd2558a7b0824a002fd6384221ddbb458240f28256851c9e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_01.png",
+      "bytes": 29336,
+      "compressedBytes": 29192,
+      "crc32": "0eafed9e",
+      "sha256": "258dee42f1fb165121897419416e036e21705ccb9cb663120e0253b3c6ae02bf",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_02.png",
+      "bytes": 29720,
+      "compressedBytes": 29509,
+      "crc32": "70326f2b",
+      "sha256": "fb66925c92e4ed5288386467b83341a882d4c6e3214a0314d8ac99d17b4b4808",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_03.png",
+      "bytes": 29328,
+      "compressedBytes": 29169,
+      "crc32": "c2f3b019",
+      "sha256": "e9217a5f43ac1e7eff06f7f5ad0fc0bb01a685aad8cdf995564e1a0091d569ab",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_04.png",
+      "bytes": 27842,
+      "compressedBytes": 27699,
+      "crc32": "abcbd635",
+      "sha256": "df325a27df77f052adc4d3c12910d33a02f7efb6c4a136e5c4078318ebb12877",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_05.png",
+      "bytes": 28540,
+      "compressedBytes": 28348,
+      "crc32": "ed38b649",
+      "sha256": "c612f7f03e4d8b7f777e191e57e57e851fa4310debe702286b86f33ac5338f28",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_06.png",
+      "bytes": 28577,
+      "compressedBytes": 28377,
+      "crc32": "5fd18434",
+      "sha256": "5f94abd2835308a6ad726a5be9f858f180cf8110c23847332fafcc9744bdd113",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/walk_07.png",
+      "bytes": 28620,
+      "compressedBytes": 28468,
+      "crc32": "57988cd6",
+      "sha256": "7c342aa9b4ac9f089db3b841fec09dccb6b4d49bc1b8ec8315fd17c268e91461",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/windup_00.png",
+      "bytes": 27081,
+      "compressedBytes": 26961,
+      "crc32": "262a96e6",
+      "sha256": "bb6ea5cd9a0552a4d66401738fae8ba6ec7851d20376e6f7464679fce33a0fc4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/windup_01.png",
+      "bytes": 27183,
+      "compressedBytes": 27067,
+      "crc32": "d69d6ec9",
+      "sha256": "a7b6ee3ec12aa8e48c7bdaaad15962564b5f32f260166d06fc2a9fc22d5afc0f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/windup_02.png",
+      "bytes": 27098,
+      "compressedBytes": 26997,
+      "crc32": "6e4a3f55",
+      "sha256": "dcf89b805fdcb6b748cf44fa68c77acb3c25bf0fb3d491ba9a569c74823b5a0b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/newborn/windup_03.png",
+      "bytes": 27198,
+      "compressedBytes": 27081,
+      "crc32": "95e46738",
+      "sha256": "f33125852de46cbe7a996d36e7dcfa24f5a1fdbb8bf1224244b4a8c1cf9504d1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-air-vent/idle_00.png",
+      "bytes": 19941,
+      "compressedBytes": 19791,
+      "crc32": "d78d38fa",
+      "sha256": "99cb64d4027a22826837597bc38ca9fb1c03c9852e321c86fffec169dde66901",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-air-vent/idle_01.png",
+      "bytes": 20241,
+      "compressedBytes": 20066,
+      "crc32": "de3f9419",
+      "sha256": "5a3f396b9589c43754008c05f2db6669988f65b4ff9c772aec54249a46f5d3ba",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-air-vent/idle_02.png",
+      "bytes": 20019,
+      "compressedBytes": 19884,
+      "crc32": "24d4c80d",
+      "sha256": "ced74752bbb13eae8f68b3213494bd389216946df003a8630f6113e076cbc62a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-air-vent/idle_03.png",
+      "bytes": 20271,
+      "compressedBytes": 20138,
+      "crc32": "c546c7b8",
+      "sha256": "5ff31bf702108d80ad57b2821964bd7eb34d2822958fa86e9ecb8de5a0b91f11",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-amber-beacon/idle_00.png",
+      "bytes": 7096,
+      "compressedBytes": 6913,
+      "crc32": "e0889fad",
+      "sha256": "da2eff85a016677d99f0f79dfcb7b1ffcf3508da8757611ed8c2cc48d4619a73",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-amber-beacon/idle_01.png",
+      "bytes": 7096,
+      "compressedBytes": 6913,
+      "crc32": "e0889fad",
+      "sha256": "da2eff85a016677d99f0f79dfcb7b1ffcf3508da8757611ed8c2cc48d4619a73",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-amber-beacon/idle_02.png",
+      "bytes": 7163,
+      "compressedBytes": 6961,
+      "crc32": "54a1bd6e",
+      "sha256": "33cdd5fc18435c37eac92dbd567e04fd9005cada809850269e896e2bbf51323f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-amber-beacon/idle_03.png",
+      "bytes": 7096,
+      "compressedBytes": 6913,
+      "crc32": "e0889fad",
+      "sha256": "da2eff85a016677d99f0f79dfcb7b1ffcf3508da8757611ed8c2cc48d4619a73",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-arc/idle_00.png",
+      "bytes": 5568,
+      "compressedBytes": 5476,
+      "crc32": "73afb69b",
+      "sha256": "e5856188d86fdf557862fa151c965952ff2e90c4283d9dfe30438677280adfa6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-arc/idle_01.png",
+      "bytes": 5639,
+      "compressedBytes": 5565,
+      "crc32": "3b89ee0e",
+      "sha256": "dd32b9a85bdd22c614fa5646245f0e4d5a9c22bfcd95d9329a406e400ab97564",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-arc/idle_02.png",
+      "bytes": 5389,
+      "compressedBytes": 5182,
+      "crc32": "f8dcaf0d",
+      "sha256": "dffcef4402785b5fe7a5b9c44500130c5dafbe69bc4fe2ecb3b1cc8c9709f644",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-arc/idle_03.png",
+      "bytes": 5091,
+      "compressedBytes": 4931,
+      "crc32": "ba38129a",
+      "sha256": "dd5f7a40ea7dae4439c269eda8f91c65653cfd4ddb2932d4784b00febd2d5885",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-bio-screen/idle_00.png",
+      "bytes": 13096,
+      "compressedBytes": 12877,
+      "crc32": "6f250dd4",
+      "sha256": "5b8937c6e03041d46b84c3ed7d927dfe841b2e70133805242f05b81f0c064913",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-bio-screen/idle_01.png",
+      "bytes": 13107,
+      "compressedBytes": 12774,
+      "crc32": "9c2e461e",
+      "sha256": "2c54b7cfa8f950d842ccee260e6b4d1c53de7c8ab1bc2a631a9a00734c2f52bb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-bio-screen/idle_02.png",
+      "bytes": 13084,
+      "compressedBytes": 12848,
+      "crc32": "2a1f7acf",
+      "sha256": "a23401334d7e4d60d0f38d1d5229ef4e53cd35716d9c027e9a86e0ccf63bdde7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-bio-screen/idle_03.png",
+      "bytes": 13101,
+      "compressedBytes": 12854,
+      "crc32": "13b875ce",
+      "sha256": "e241bd6ec701bc3bf75e086b7eb479b5cc395b779dc668135791fa8d8a6e8182",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-coolant-pump/idle_00.png",
+      "bytes": 14701,
+      "compressedBytes": 14581,
+      "crc32": "572ce1ae",
+      "sha256": "70cd46e8a303c6dd8c94df7b284edd51332aec2cb4c94870f8ea4e94bb11a437",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-coolant-pump/idle_01.png",
+      "bytes": 14701,
+      "compressedBytes": 14581,
+      "crc32": "572ce1ae",
+      "sha256": "70cd46e8a303c6dd8c94df7b284edd51332aec2cb4c94870f8ea4e94bb11a437",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-coolant-pump/idle_02.png",
+      "bytes": 14701,
+      "compressedBytes": 14581,
+      "crc32": "572ce1ae",
+      "sha256": "70cd46e8a303c6dd8c94df7b284edd51332aec2cb4c94870f8ea4e94bb11a437",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-coolant-pump/idle_03.png",
+      "bytes": 14711,
+      "compressedBytes": 14577,
+      "crc32": "e8c1f95f",
+      "sha256": "68df5aa173cffec1b381042f1ca55cce032efce70816b04902fdc5b102c9f006",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-egg/idle_00.png",
+      "bytes": 15446,
+      "compressedBytes": 15239,
+      "crc32": "99875e6a",
+      "sha256": "2349b4712e3d9f312dfb543f4ebf1d289e21f20d08392e3b07c89ff9ced79ec7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-egg/idle_01.png",
+      "bytes": 15397,
+      "compressedBytes": 15176,
+      "crc32": "55829abc",
+      "sha256": "b3df1edcdee762b6f58373e8097d92d2f7496185d4fe53c64f0983bffbda25c8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-egg/idle_02.png",
+      "bytes": 15429,
+      "compressedBytes": 15133,
+      "crc32": "1fd3f06f",
+      "sha256": "17edb0d0f8024273e8180c9e391acb00f58bd241fcf66320d14ba329b9af8a6c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-egg/idle_03.png",
+      "bytes": 15352,
+      "compressedBytes": 15141,
+      "crc32": "6bccee58",
+      "sha256": "f1b8ed6d87b2043a411cb6c1f42832669c21a8dd1da0279f790fb4858d750f15",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-medical-kit/idle_00.png",
+      "bytes": 15237,
+      "compressedBytes": 14795,
+      "crc32": "4ce12dfb",
+      "sha256": "7f5120e0b32bd6f2ee5574a385d1ae87cd5ab63a2adf8bfc958c26249e8d71be",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-medical-kit/idle_01.png",
+      "bytes": 15237,
+      "compressedBytes": 14795,
+      "crc32": "4ce12dfb",
+      "sha256": "7f5120e0b32bd6f2ee5574a385d1ae87cd5ab63a2adf8bfc958c26249e8d71be",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-medical-kit/idle_02.png",
+      "bytes": 15251,
+      "compressedBytes": 14763,
+      "crc32": "146a187f",
+      "sha256": "781890e8ae2ac8e49a373b556a4449cf624887b44af52b4827a2e11a33062998",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-medical-kit/idle_03.png",
+      "bytes": 15251,
+      "compressedBytes": 14763,
+      "crc32": "146a187f",
+      "sha256": "781890e8ae2ac8e49a373b556a4449cf624887b44af52b4827a2e11a33062998",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-rifle/idle_00.png",
+      "bytes": 3430,
+      "compressedBytes": 3364,
+      "crc32": "8017e295",
+      "sha256": "4e78988d043e23383f0c47d6248f97e5bf1b0aa54961feca09794dab90a8f5ea",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-rifle/idle_01.png",
+      "bytes": 3523,
+      "compressedBytes": 3425,
+      "crc32": "87534eaf",
+      "sha256": "c7fb37dd655a16eb22aac3166bdf2ec9d4871dd3f6f1d8eb15948e9072833431",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-rifle/idle_02.png",
+      "bytes": 3560,
+      "compressedBytes": 3456,
+      "crc32": "e19f8fee",
+      "sha256": "35b99be16e516fff7e556d5bf2577ccb84706880aae50787840a261b3e6c7b57",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/prop-rifle/idle_03.png",
+      "bytes": 3529,
+      "compressedBytes": 3452,
+      "crc32": "621c386b",
+      "sha256": "898aeb7a1f5efa65ae30af5d6ee0a37dc2630a90019042d0e7d9e4d6bb71caf2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/birth_00.png",
+      "bytes": 44798,
+      "compressedBytes": 44682,
+      "crc32": "1303d931",
+      "sha256": "36abc3e0f5615403fa9a1228b8c71d1db58bdd2f522373ed2c468a3f66fff039",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/birth_01.png",
+      "bytes": 44858,
+      "compressedBytes": 44811,
+      "crc32": "1626b308",
+      "sha256": "30cda513f14773276de0f4ad8a519d29381d8c9d0c5852feee139a5685ecabb3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/birth_02.png",
+      "bytes": 44798,
+      "compressedBytes": 44682,
+      "crc32": "1303d931",
+      "sha256": "36abc3e0f5615403fa9a1228b8c71d1db58bdd2f522373ed2c468a3f66fff039",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/birth_03.png",
+      "bytes": 44770,
+      "compressedBytes": 44654,
+      "crc32": "84fdf58d",
+      "sha256": "91243cd76ccf3c73b7b45ce670b9770f9bbe91d8748648dfffb36dea7d958b17",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/hurt_00.png",
+      "bytes": 45070,
+      "compressedBytes": 45001,
+      "crc32": "0d027889",
+      "sha256": "80047fdcc4bd513b19e0ef426d5494ac83504491cc4dccde2656d2e9ad97f5f3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/hurt_01.png",
+      "bytes": 45777,
+      "compressedBytes": 45701,
+      "crc32": "144fbbe7",
+      "sha256": "2f756ebe736d7d6bd12946c88b23c80139de6776f30f535251d9d9fcaccc5c56",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/idle_00.png",
+      "bytes": 44798,
+      "compressedBytes": 44682,
+      "crc32": "1303d931",
+      "sha256": "36abc3e0f5615403fa9a1228b8c71d1db58bdd2f522373ed2c468a3f66fff039",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/idle_01.png",
+      "bytes": 44858,
+      "compressedBytes": 44811,
+      "crc32": "1626b308",
+      "sha256": "30cda513f14773276de0f4ad8a519d29381d8c9d0c5852feee139a5685ecabb3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/idle_02.png",
+      "bytes": 44798,
+      "compressedBytes": 44682,
+      "crc32": "1303d931",
+      "sha256": "36abc3e0f5615403fa9a1228b8c71d1db58bdd2f522373ed2c468a3f66fff039",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/queen/idle_03.png",
+      "bytes": 44770,
+      "compressedBytes": 44654,
+      "crc32": "84fdf58d",
+      "sha256": "91243cd76ccf3c73b7b45ce670b9770f9bbe91d8748648dfffb36dea7d958b17",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_00.png",
+      "bytes": 20170,
+      "compressedBytes": 20090,
+      "crc32": "cdfecfee",
+      "sha256": "3b20d7a8dcc8dcd8dd19f0be65e2bac0374d68024074cfc715dbbdba12c51403",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_01.png",
+      "bytes": 20220,
+      "compressedBytes": 20173,
+      "crc32": "2af5d33c",
+      "sha256": "ed7f45d450eed8254c31d27555ee62993cbedc5235f9453958ec4e5359024f7e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_02.png",
+      "bytes": 20207,
+      "compressedBytes": 20115,
+      "crc32": "402a6844",
+      "sha256": "eaa06a7a67d6147258e9ad793a08563edf3bb0dc821c8ff1d3e41328d04cba8c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_03.png",
+      "bytes": 20166,
+      "compressedBytes": 20064,
+      "crc32": "14856df0",
+      "sha256": "c3d124d72d3ce6e90933dea2e521beab1e9df63134f8b5c19dac3364f464d35e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_04.png",
+      "bytes": 20165,
+      "compressedBytes": 20059,
+      "crc32": "e52b454c",
+      "sha256": "946c8a19cc18c2c1de0a6e2d484ebc52bc5aa9836fbbdff03d4320e7d85a6c1c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/climb_05.png",
+      "bytes": 20175,
+      "compressedBytes": 20050,
+      "crc32": "7b051b66",
+      "sha256": "ad8216448710dad502a6f236260e137e0914883424eef17e7750345885dfc77b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/fire_00.png",
+      "bytes": 20484,
+      "compressedBytes": 20400,
+      "crc32": "e9cc0e6e",
+      "sha256": "3baf617ef6d690866247c3570118425dee1bb27214ce460e980b06e3b4bf0feb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/fire_01.png",
+      "bytes": 20509,
+      "compressedBytes": 20399,
+      "crc32": "0bf1eb48",
+      "sha256": "26355442fe6e21702488103311a6040f9aed7b97f27803baae0d58c1c0ff0b1c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/fire_02.png",
+      "bytes": 20622,
+      "compressedBytes": 20540,
+      "crc32": "aea2ff92",
+      "sha256": "c695faa12fa9447acffa899081fab64bb09a14439ee2e7d2266e325c43461668",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/hurt_00.png",
+      "bytes": 24022,
+      "compressedBytes": 23927,
+      "crc32": "fa675ebd",
+      "sha256": "1b9bbd0ac36567246a832d8dd8f4320f9ed7bed0bcca85da09a800ef9d8adb4b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/hurt_01.png",
+      "bytes": 23720,
+      "compressedBytes": 23652,
+      "crc32": "16e28765",
+      "sha256": "326ce6fc87ad6e7f3c5dbb6667232b14d1abf6b8680781df2202ee968aee93a6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/idle_00.png",
+      "bytes": 20744,
+      "compressedBytes": 20655,
+      "crc32": "c397e81a",
+      "sha256": "803352484673410093e5afebbb0a8911b3802c77628a049a358e75cc8a2be91c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/idle_01.png",
+      "bytes": 20830,
+      "compressedBytes": 20746,
+      "crc32": "e307b856",
+      "sha256": "81a82df17ac9ad5d27d42263bfd12b10533b94d0bc8beeb275725b5c214a42be",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/idle_02.png",
+      "bytes": 20744,
+      "compressedBytes": 20655,
+      "crc32": "c397e81a",
+      "sha256": "803352484673410093e5afebbb0a8911b3802c77628a049a358e75cc8a2be91c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/idle_03.png",
+      "bytes": 20690,
+      "compressedBytes": 20593,
+      "crc32": "b20d8333",
+      "sha256": "36f0e6b85e8b7af93e041c26fc807a84ec33b9b1de1710f1a06b8a0aa5524ab7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/melee_00.png",
+      "bytes": 21554,
+      "compressedBytes": 21478,
+      "crc32": "2426e6ea",
+      "sha256": "8edc715be5fbdba2f4c8f0b1ada7c161c0248e6d539c15e03e61a446a2a5bd4f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/melee_01.png",
+      "bytes": 22157,
+      "compressedBytes": 22085,
+      "crc32": "ff14113f",
+      "sha256": "92454b2ba422f1a1b4ca335f326534c1014dca3e80d4ff835758b3c9c2710100",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/melee_02.png",
+      "bytes": 21983,
+      "compressedBytes": 21904,
+      "crc32": "31d1c5fd",
+      "sha256": "0be6d9afdd5769196ac45d9704c614a412f85ff419c31783071748385d91a52a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/melee_03.png",
+      "bytes": 22110,
+      "compressedBytes": 21991,
+      "crc32": "c8a365a4",
+      "sha256": "b66e6f6a4b5abee1a3a78608b79c5a777da760e10ee5165cb0e18440b8081313",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/swim_00.png",
+      "bytes": 23786,
+      "compressedBytes": 23688,
+      "crc32": "af0e0af6",
+      "sha256": "475a017313620b37ad08766b37c8c300c8fa57abea19e1e815031105814c8830",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/swim_01.png",
+      "bytes": 23893,
+      "compressedBytes": 23783,
+      "crc32": "b19ad48a",
+      "sha256": "fe373b97d5bfa88b777db13b91df71333c164df565d3207d5b90bfdef19dd8de",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/swim_02.png",
+      "bytes": 23786,
+      "compressedBytes": 23688,
+      "crc32": "af0e0af6",
+      "sha256": "475a017313620b37ad08766b37c8c300c8fa57abea19e1e815031105814c8830",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/swim_03.png",
+      "bytes": 23862,
+      "compressedBytes": 23770,
+      "crc32": "9900877d",
+      "sha256": "0c94172547b30916f21ad7b325783c179a7675c76299161a2fc67789ea5e2cea",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_00.png",
+      "bytes": 20744,
+      "compressedBytes": 20655,
+      "crc32": "c397e81a",
+      "sha256": "803352484673410093e5afebbb0a8911b3802c77628a049a358e75cc8a2be91c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_01.png",
+      "bytes": 22702,
+      "compressedBytes": 22595,
+      "crc32": "b546240c",
+      "sha256": "c38a3b6bdaaad74b8b70995bfaa0854f9970dcef89dbb62c7492b0c68e9fde25",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_02.png",
+      "bytes": 23547,
+      "compressedBytes": 23450,
+      "crc32": "bb01c19c",
+      "sha256": "a0b58585d8ddae927e2eb06982850da8b2af799f231fa41c5b7d21420b11a860",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_03.png",
+      "bytes": 22702,
+      "compressedBytes": 22595,
+      "crc32": "b546240c",
+      "sha256": "c38a3b6bdaaad74b8b70995bfaa0854f9970dcef89dbb62c7492b0c68e9fde25",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_04.png",
+      "bytes": 20744,
+      "compressedBytes": 20655,
+      "crc32": "c397e81a",
+      "sha256": "803352484673410093e5afebbb0a8911b3802c77628a049a358e75cc8a2be91c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_05.png",
+      "bytes": 21867,
+      "compressedBytes": 21766,
+      "crc32": "8bcb96da",
+      "sha256": "8d5014933db20549109a73c49926188dcc8194526b46bfed11427eb4148c073d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_06.png",
+      "bytes": 22244,
+      "compressedBytes": 22153,
+      "crc32": "03bd7e07",
+      "sha256": "706ee5e4c463af4e126d6dc52e1e29489ff383176bcc4abb4211633f2108217d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/ripley/walk_07.png",
+      "bytes": 21867,
+      "compressedBytes": 21766,
+      "crc32": "8bcb96da",
+      "sha256": "8d5014933db20549109a73c49926188dcc8194526b46bfed11427eb4148c073d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/idle_00.png",
+      "bytes": 20074,
+      "compressedBytes": 19971,
+      "crc32": "4b753e24",
+      "sha256": "ae4064f10bb37b75ccc0b68813bf5a924239d35096bc67dfc9bb25feb1f19230",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/idle_01.png",
+      "bytes": 19943,
+      "compressedBytes": 19818,
+      "crc32": "85b8285d",
+      "sha256": "8f7c83533f43be3f58ab2e54acda4f16dd70cfda88ccd781229f1aaa4fdf321e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/idle_02.png",
+      "bytes": 20074,
+      "compressedBytes": 19971,
+      "crc32": "4b753e24",
+      "sha256": "ae4064f10bb37b75ccc0b68813bf5a924239d35096bc67dfc9bb25feb1f19230",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/idle_03.png",
+      "bytes": 20015,
+      "compressedBytes": 19889,
+      "crc32": "12f15454",
+      "sha256": "15a7aae7a5fa731550a49a30cfd8cfbeffcb3a241a58bfbf30b3642539ef33e9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_00.png",
+      "bytes": 20661,
+      "compressedBytes": 20555,
+      "crc32": "2f2c9088",
+      "sha256": "826d12abd164ead63f5d39c263b0b6fa96c52a511d872751b8a5b3443c7b7ad9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_01.png",
+      "bytes": 20525,
+      "compressedBytes": 20411,
+      "crc32": "1b9531ef",
+      "sha256": "9a1961fd6e884a72760ad74fefeb291988ce87671ea1980b5a328cadc00bd520",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_02.png",
+      "bytes": 20537,
+      "compressedBytes": 20429,
+      "crc32": "21e68ea7",
+      "sha256": "dddd0a04a18558e1d47a0d03bfecd5bc153423b5fb3b0d8b1cf5bf9c07dc21fe",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_03.png",
+      "bytes": 20661,
+      "compressedBytes": 20555,
+      "crc32": "2f2c9088",
+      "sha256": "826d12abd164ead63f5d39c263b0b6fa96c52a511d872751b8a5b3443c7b7ad9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_04.png",
+      "bytes": 20622,
+      "compressedBytes": 20481,
+      "crc32": "706b0061",
+      "sha256": "2582a506342d7f87c2b20e06bbcb314fec8b346445d764c078cffb368ea6574f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/interact_05.png",
+      "bytes": 20622,
+      "compressedBytes": 20481,
+      "crc32": "706b0061",
+      "sha256": "2582a506342d7f87c2b20e06bbcb314fec8b346445d764c078cffb368ea6574f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_00.png",
+      "bytes": 20074,
+      "compressedBytes": 19971,
+      "crc32": "4b753e24",
+      "sha256": "ae4064f10bb37b75ccc0b68813bf5a924239d35096bc67dfc9bb25feb1f19230",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_01.png",
+      "bytes": 22091,
+      "compressedBytes": 21994,
+      "crc32": "37483f07",
+      "sha256": "77b8816cd29486d841d423ca134635da297f4d18f505466333d51f7cd47b9267",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_02.png",
+      "bytes": 23218,
+      "compressedBytes": 23071,
+      "crc32": "58c8a6fc",
+      "sha256": "4a17a315fcfaecf5924cb0c99e5290c0f303b1d650f953e176c9ccc64ea31030",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_03.png",
+      "bytes": 22091,
+      "compressedBytes": 21994,
+      "crc32": "37483f07",
+      "sha256": "77b8816cd29486d841d423ca134635da297f4d18f505466333d51f7cd47b9267",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_04.png",
+      "bytes": 20074,
+      "compressedBytes": 19971,
+      "crc32": "4b753e24",
+      "sha256": "ae4064f10bb37b75ccc0b68813bf5a924239d35096bc67dfc9bb25feb1f19230",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_05.png",
+      "bytes": 20884,
+      "compressedBytes": 20763,
+      "crc32": "a5178a18",
+      "sha256": "939cab123b341ff8acc99e67f69ddf5d05d214f5fc483b7d91ac6bc2b211599d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_06.png",
+      "bytes": 21405,
+      "compressedBytes": 21282,
+      "crc32": "eef872a3",
+      "sha256": "2a8e19dcfe4186c7eba2ed4cef30ea7cc623386d61cfd5a5f7d5c8e16952dccf",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/scientist/walk_07.png",
+      "bytes": 20884,
+      "compressedBytes": 20763,
+      "crc32": "a5178a18",
+      "sha256": "939cab123b341ff8acc99e67f69ddf5d05d214f5fc483b7d91ac6bc2b211599d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_00.png",
+      "bytes": 18950,
+      "compressedBytes": 18889,
+      "crc32": "85e8142e",
+      "sha256": "46806729bf3408d9408025511b3c39a51462ee6b61b747820a7ff093c8148953",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_01.png",
+      "bytes": 18865,
+      "compressedBytes": 18802,
+      "crc32": "21775b84",
+      "sha256": "410d431ac5cdb009870230f42fd4f8acacfa382aa0c46c30253e7d0313293066",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_02.png",
+      "bytes": 18905,
+      "compressedBytes": 18818,
+      "crc32": "77ba018f",
+      "sha256": "ce1ade23d04e532363d5785866e9b94b3e1cd1bdd6374f5e54c70e693c0dcde5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_03.png",
+      "bytes": 18949,
+      "compressedBytes": 18873,
+      "crc32": "48739b20",
+      "sha256": "6b780dfee3ee2a72e1cb0d0b46bf23aa9bc677f98e322e74f1632ba8c3352f41",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_04.png",
+      "bytes": 18928,
+      "compressedBytes": 18843,
+      "crc32": "46454704",
+      "sha256": "b09a88d3f0952ce32f64f4d98a38fcb0c4f23c80bfb1d4e56f819819075b0593",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/climb_05.png",
+      "bytes": 18919,
+      "compressedBytes": 18811,
+      "crc32": "b68dfd87",
+      "sha256": "fcd841c3016355d3f620fbd2b882a4f9c262e49b3beb3c35d594e5a2db0c4df7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/fire_00.png",
+      "bytes": 19423,
+      "compressedBytes": 19342,
+      "crc32": "25ed059d",
+      "sha256": "dffd426495459f7fad690c93ca0654a4f53bee346a7b888e3139d104c14766c4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/fire_01.png",
+      "bytes": 19366,
+      "compressedBytes": 19275,
+      "crc32": "42e090b6",
+      "sha256": "181e90b8aa05a7523266562ed0e92be54cf04a91aad9706065e1a0390449e9b2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/fire_02.png",
+      "bytes": 19526,
+      "compressedBytes": 19437,
+      "crc32": "bf7c4ef2",
+      "sha256": "15721214ca11fa2ec906abd6952e9a141f91c2f9054ad5614ebc99b70054e017",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/idle_00.png",
+      "bytes": 19651,
+      "compressedBytes": 19572,
+      "crc32": "40b0d735",
+      "sha256": "adc662bc261bdd62ba0d8c078be725a35d8f6d9baa2cdaebe96af2cea71f0f42",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/idle_01.png",
+      "bytes": 19556,
+      "compressedBytes": 19474,
+      "crc32": "0cf55510",
+      "sha256": "69318f6e3b8dc4ffce71837c55155bbb934a9cf035d8932a53c46f98cc5cd906",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/idle_02.png",
+      "bytes": 19651,
+      "compressedBytes": 19572,
+      "crc32": "40b0d735",
+      "sha256": "adc662bc261bdd62ba0d8c078be725a35d8f6d9baa2cdaebe96af2cea71f0f42",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/idle_03.png",
+      "bytes": 19574,
+      "compressedBytes": 19494,
+      "crc32": "60b696a0",
+      "sha256": "b28d8d06db657120f5bc15be261e1eb6e7b9903f70f36920fae24a41c4b2fd9d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_00.png",
+      "bytes": 19651,
+      "compressedBytes": 19572,
+      "crc32": "40b0d735",
+      "sha256": "adc662bc261bdd62ba0d8c078be725a35d8f6d9baa2cdaebe96af2cea71f0f42",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_01.png",
+      "bytes": 21563,
+      "compressedBytes": 21475,
+      "crc32": "515767f3",
+      "sha256": "aaea0f59588dcbd90fff2c956895ac7d7f14608211878b95cb8c4c0de822ca2d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_02.png",
+      "bytes": 22307,
+      "compressedBytes": 22207,
+      "crc32": "60c67f9b",
+      "sha256": "196553379e1140a880f1c9b374622abb79e744b1a10c8630a74c0b97bcf1fa77",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_03.png",
+      "bytes": 21563,
+      "compressedBytes": 21475,
+      "crc32": "515767f3",
+      "sha256": "aaea0f59588dcbd90fff2c956895ac7d7f14608211878b95cb8c4c0de822ca2d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_04.png",
+      "bytes": 19651,
+      "compressedBytes": 19572,
+      "crc32": "40b0d735",
+      "sha256": "adc662bc261bdd62ba0d8c078be725a35d8f6d9baa2cdaebe96af2cea71f0f42",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_05.png",
+      "bytes": 20718,
+      "compressedBytes": 20622,
+      "crc32": "04eb684b",
+      "sha256": "9a08e45081b3751ffd0d87d30a9ba62df23b39ebe4b4ad171c4cf7569cf9f124",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_06.png",
+      "bytes": 21189,
+      "compressedBytes": 21087,
+      "crc32": "a6bce6a3",
+      "sha256": "fa719b39c37d7945a256928f248461e2b9e1a6d0936b76a7f16c3405a293d168",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/soldier/walk_07.png",
+      "bytes": 20718,
+      "compressedBytes": 20622,
+      "crc32": "04eb684b",
+      "sha256": "9a08e45081b3751ffd0d87d30a9ba62df23b39ebe4b4ad171c4cf7569cf9f124",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/fire_00.png",
+      "bytes": 13780,
+      "compressedBytes": 13572,
+      "crc32": "a73b2225",
+      "sha256": "994917b96c0182e45fb21db7b3fde711fc3fa18974d5f072eb1af02d29e2ca8c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/fire_01.png",
+      "bytes": 13910,
+      "compressedBytes": 13691,
+      "crc32": "d663fd09",
+      "sha256": "909eead0cf0d7e9397d543b55473fdb54c09bfc2826db782122d8d079387a73b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/fire_02.png",
+      "bytes": 13809,
+      "compressedBytes": 13617,
+      "crc32": "dda23a74",
+      "sha256": "745a36a0e371636cdee5ae3619b19b51d8ed31b7a951c3ce5855d380e937d352",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/idle_00.png",
+      "bytes": 13827,
+      "compressedBytes": 13614,
+      "crc32": "1b8b88ec",
+      "sha256": "4d5b78e857a28a0313f6af077608b1384fcec8257ba60909de4d593e9645cdae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/idle_01.png",
+      "bytes": 14000,
+      "compressedBytes": 13781,
+      "crc32": "32142970",
+      "sha256": "24c0315ec8f01d9d5fae71f9514480a546fac0530c2b22e15d29ebf32fa91e62",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/idle_02.png",
+      "bytes": 13872,
+      "compressedBytes": 13673,
+      "crc32": "5a0b5ee3",
+      "sha256": "bf288c8067d22de51ac1f0e5422ba356553bd39e4ef5c344089d78029734dc41",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/idle_03.png",
+      "bytes": 13829,
+      "compressedBytes": 13622,
+      "crc32": "e486a9cf",
+      "sha256": "aae88bfd2d8f54b5eefb988fcbc9de78c3a04ceed2d1f8899d99ba6fda3256e4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_00.png",
+      "bytes": 13827,
+      "compressedBytes": 13614,
+      "crc32": "1b8b88ec",
+      "sha256": "4d5b78e857a28a0313f6af077608b1384fcec8257ba60909de4d593e9645cdae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_01.png",
+      "bytes": 13893,
+      "compressedBytes": 13681,
+      "crc32": "771d20d4",
+      "sha256": "3bb454383b3691b8e220a125e22eadfbe215dd934d97331b5a1acd4e31a444bb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_02.png",
+      "bytes": 14036,
+      "compressedBytes": 13788,
+      "crc32": "1fd33e2a",
+      "sha256": "906ce096f64c29a51e8c97eeee31459b99095479783252a150f622ae5e5e82cc",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_03.png",
+      "bytes": 13913,
+      "compressedBytes": 13700,
+      "crc32": "6ca115ca",
+      "sha256": "ec4b53312f604ba16fb956bff7f8195177c3701095cfd73deefb5603aa1217e0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_04.png",
+      "bytes": 13871,
+      "compressedBytes": 13658,
+      "crc32": "d768a0f2",
+      "sha256": "8426753e2f51682268ce3a176676306e4f544103918422e1ea04daf85c2aa66a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_05.png",
+      "bytes": 14037,
+      "compressedBytes": 13823,
+      "crc32": "59dd4e4d",
+      "sha256": "a9f3d2ba834dc963981b5719a50cfa972ac88991774064ad570b5c014a30cdab",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_06.png",
+      "bytes": 13884,
+      "compressedBytes": 13709,
+      "crc32": "98d7b4d4",
+      "sha256": "1183baf8a194a29d7839a97a55d18e0d9e946f6868d21372f500e2e530f8381c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/vriess/walk_07.png",
+      "bytes": 14033,
+      "compressedBytes": 13824,
+      "crc32": "10d2f2de",
+      "sha256": "35848c137cf8e92761da36d6bef8e1b20e0e9479b0528542745807d5f39fad8d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/attack_00.png",
+      "bytes": 36356,
+      "compressedBytes": 36261,
+      "crc32": "2bb9a097",
+      "sha256": "abd975f37d7c0b99e3720cbdf02844f890af283cca6e3309acb6266f87dc3519",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/attack_01.png",
+      "bytes": 36517,
+      "compressedBytes": 36423,
+      "crc32": "def31144",
+      "sha256": "829011d218c0f98bbff054a0709e6eae4c98a79672d9716d9ef1ccf30e51f7c0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/attack_02.png",
+      "bytes": 36671,
+      "compressedBytes": 36609,
+      "crc32": "71d75319",
+      "sha256": "0721d2a8299c3ca775a26198c462c4c7045c2a23aea39cb0a9d17c9aef1607a4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/attack_03.png",
+      "bytes": 37324,
+      "compressedBytes": 37211,
+      "crc32": "9637fc6e",
+      "sha256": "21075c5e2c3cd99692c484a1f82852438cd214625952f6352f69ea48545c18d7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/hurt_00.png",
+      "bytes": 36795,
+      "compressedBytes": 36718,
+      "crc32": "f49b8ae1",
+      "sha256": "972a7919f575e478af6648fc785aa1ea7b6b373f39c4ae6a924402cfd41a7647",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/hurt_01.png",
+      "bytes": 37288,
+      "compressedBytes": 37211,
+      "crc32": "30bc2b28",
+      "sha256": "0f19b05d30e31bba331fad97884688715c35c34cbe78a0e050d3fb41a0a1d925",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/idle_00.png",
+      "bytes": 36356,
+      "compressedBytes": 36261,
+      "crc32": "2bb9a097",
+      "sha256": "abd975f37d7c0b99e3720cbdf02844f890af283cca6e3309acb6266f87dc3519",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/idle_01.png",
+      "bytes": 36354,
+      "compressedBytes": 36253,
+      "crc32": "f3bf9478",
+      "sha256": "236643644d009febede0d7667562750e111457cd8bcf45a31247be58a03c9577",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/idle_02.png",
+      "bytes": 36348,
+      "compressedBytes": 36231,
+      "crc32": "860dd6a1",
+      "sha256": "b45daabae33154e951fbea422be370b90ae1c444480c907f8c007c70d5a23bc9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/idle_03.png",
+      "bytes": 36332,
+      "compressedBytes": 36240,
+      "crc32": "2d2ed3c2",
+      "sha256": "659ee5651a39fc69a32b4fe1123f9b34f0ae78b37f59a3eef49112372d471554",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/recover_00.png",
+      "bytes": 36356,
+      "compressedBytes": 36261,
+      "crc32": "2bb9a097",
+      "sha256": "abd975f37d7c0b99e3720cbdf02844f890af283cca6e3309acb6266f87dc3519",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/recover_01.png",
+      "bytes": 36354,
+      "compressedBytes": 36253,
+      "crc32": "f3bf9478",
+      "sha256": "236643644d009febede0d7667562750e111457cd8bcf45a31247be58a03c9577",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/recover_02.png",
+      "bytes": 36348,
+      "compressedBytes": 36231,
+      "crc32": "860dd6a1",
+      "sha256": "b45daabae33154e951fbea422be370b90ae1c444480c907f8c007c70d5a23bc9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/recover_03.png",
+      "bytes": 36332,
+      "compressedBytes": 36240,
+      "crc32": "2d2ed3c2",
+      "sha256": "659ee5651a39fc69a32b4fe1123f9b34f0ae78b37f59a3eef49112372d471554",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_00.png",
+      "bytes": 36356,
+      "compressedBytes": 36261,
+      "crc32": "2bb9a097",
+      "sha256": "abd975f37d7c0b99e3720cbdf02844f890af283cca6e3309acb6266f87dc3519",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_01.png",
+      "bytes": 37365,
+      "compressedBytes": 37257,
+      "crc32": "2bc0eca6",
+      "sha256": "ab9d3b0d9db0cfb3612bf11f1941fdbed00426e125f80c572bf54d88024f9104",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_02.png",
+      "bytes": 37893,
+      "compressedBytes": 37785,
+      "crc32": "28d30000",
+      "sha256": "576995b85f13d56fd512842e4def4d8aae840bb53b61b1cacc7975d6cd5ea018",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_03.png",
+      "bytes": 37349,
+      "compressedBytes": 37228,
+      "crc32": "8ed3d032",
+      "sha256": "cd85384ec4a4e9fe9b231432641b5286dabfd0ec01ec5f177e31e13626d72210",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_04.png",
+      "bytes": 36307,
+      "compressedBytes": 36173,
+      "crc32": "7fd6906a",
+      "sha256": "57800f1a24b15dcca3639e94507a2ebc0fb2796a216277b58417b870f30e8279",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_05.png",
+      "bytes": 37130,
+      "compressedBytes": 37011,
+      "crc32": "931045c2",
+      "sha256": "f4b5a877b0e8cf52fb133f06a36977847c92daa88ed23ba6e066689bacd7051e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_06.png",
+      "bytes": 37646,
+      "compressedBytes": 37516,
+      "crc32": "756767c6",
+      "sha256": "bff60b30e43bf61547c32ca1516a75ea4117b919c78c85401c92de30a72a99b5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/walk_07.png",
+      "bytes": 37182,
+      "compressedBytes": 37081,
+      "crc32": "fbfd35bd",
+      "sha256": "b3f5a0f8348aafe42a04ae8b72d2bac52cb188171ea96012b0055ed3cfe451ba",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/windup_00.png",
+      "bytes": 35988,
+      "compressedBytes": 35923,
+      "crc32": "1d9abb3c",
+      "sha256": "c163eba40b3b192b5bdd22ed65a4d2903fb3778a622ab9efb729e28ba3593296",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/windup_01.png",
+      "bytes": 36041,
+      "compressedBytes": 36001,
+      "crc32": "a82712ae",
+      "sha256": "27a9a2cab403e832455b597f3d451038e432aee7d9794ba09401760a65d29ace",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/windup_02.png",
+      "bytes": 35965,
+      "compressedBytes": 35919,
+      "crc32": "72bbbf91",
+      "sha256": "83f335a262d59f6ce871e3b67b0aecc6a2b04de503796ea95287380c154c57ed",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/frames/xeno/windup_03.png",
+      "bytes": 35974,
+      "compressedBytes": 35923,
+      "crc32": "3a044018",
+      "sha256": "0a412ad2bbe1e249cb727356eb560983d8c650cf869942d750d16ce9b4a63202",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/manifest.json",
+      "bytes": 127436,
+      "compressedBytes": 13413,
+      "crc32": "b329ef28",
+      "sha256": "ab9d5d36ef60acb6593ba1b5b116de159df1219603a2b955841cfeca7b3fd5c5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-air-vent.json",
+      "bytes": 1961,
+      "compressedBytes": 575,
+      "crc32": "fddfb173",
+      "sha256": "146b4bb23101ba6c280f0e4954ffc116545f75f7e8009c28e2d2f64e6348378d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-air-vent.png",
+      "bytes": 58916,
+      "compressedBytes": 55194,
+      "crc32": "e775e53b",
+      "sha256": "ecd5dcec68df742e0545cd1480b14fb5c6097ffecabec74b866e0753b9f17161",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-amber-beacon.json",
+      "bytes": 1989,
+      "compressedBytes": 495,
+      "crc32": "255cb70a",
+      "sha256": "770799c1fbf3615942ba47c5621380f866c69fcfa35d2cd2a7dd5d6180efb8fd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-amber-beacon.png",
+      "bytes": 19012,
+      "compressedBytes": 15478,
+      "crc32": "dfd877a3",
+      "sha256": "f7489c3e4ee623f462b3cfb1acace7b2a344b4457af6939d4665aa21584da9b5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-arc.json",
+      "bytes": 1931,
+      "compressedBytes": 579,
+      "crc32": "55637cab",
+      "sha256": "a1292a66d4556be3d24ec01cf089909c76fecc57fa8eb08293fa05ce5e8d9b4f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-arc.png",
+      "bytes": 23440,
+      "compressedBytes": 20118,
+      "crc32": "202f0810",
+      "sha256": "f4deb89ed74edec7b66f4cfa14f8a15179b1ddb8c34dc8afc8877f45505cd404",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-bio-screen.json",
+      "bytes": 1973,
+      "compressedBytes": 579,
+      "crc32": "3bb6e69e",
+      "sha256": "8d4d992f37b958921cf25c12c153e075363a5d4959ab6efea4454340595f8433",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-bio-screen.png",
+      "bytes": 32055,
+      "compressedBytes": 27958,
+      "crc32": "97408a7d",
+      "sha256": "47492983b9718f7e28c36c331810ef5264602b3cb09e4fb64bcaa41c07b98033",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-coolant-pump.json",
+      "bytes": 1985,
+      "compressedBytes": 494,
+      "crc32": "86231677",
+      "sha256": "a460023c40dc0a1a2a0c3c764d25fbcf26785eb15854fc44f70668ca72b9d449",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-coolant-pump.png",
+      "bytes": 26765,
+      "compressedBytes": 23557,
+      "crc32": "961c2fb7",
+      "sha256": "64c5e6b1464d8aff016e3c2e016c42e8368627401b89bc042472c3bde6b7260b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-egg.json",
+      "bytes": 1931,
+      "compressedBytes": 573,
+      "crc32": "07e69d6c",
+      "sha256": "2d8247040d0a2d5deaa09cd0a68f4be8b27cd6048401c6d972cd9b07e2ead672",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-egg.png",
+      "bytes": 38831,
+      "compressedBytes": 35519,
+      "crc32": "ed2a85ed",
+      "sha256": "8cc6fc83f8a451210bb8588f45b39ed7dc1d1524954e0955d43a0f60cedc05ff",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-medical-kit.json",
+      "bytes": 1979,
+      "compressedBytes": 492,
+      "crc32": "6119f447",
+      "sha256": "25025244516329a2b9c6b2fe68dc30a53a786778684c284a834ac5a04b0815d1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-medical-kit.png",
+      "bytes": 31774,
+      "compressedBytes": 27245,
+      "crc32": "cafddd79",
+      "sha256": "d331793559c8bf104f0c3bf7a0404f197f4101b94289fb5c1ae8bad418d78406",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-rifle.json",
+      "bytes": 1943,
+      "compressedBytes": 594,
+      "crc32": "ce81572f",
+      "sha256": "a32c02a62aa7520ca2bab5efa496f2a074dcf5ee5d7f29e0204b914cf5219676",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v117/props/prop-rifle.png",
+      "bytes": 14270,
+      "compressedBytes": 11228,
+      "crc32": "ebba5a27",
+      "sha256": "b1936119399b825e68e2f37c3cdd7f6435af990d875958bde26bb2e62693cbe9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/actors/ripley-actions.json",
+      "bytes": 6381,
+      "compressedBytes": 1317,
+      "crc32": "6f33753e",
+      "sha256": "5b0f01d57ac47705edc0ddc8af6882e57fdc13b64c1f462b7fc916da6b9c9c37",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/actors/ripley-actions.png",
+      "bytes": 197888,
+      "compressedBytes": 186270,
+      "crc32": "2bc13045",
+      "sha256": "aaeb8f799d8b72cb976ae77322fe487b6e6789abc1cf93d18b032a826fdada01",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/brace_00.png",
+      "bytes": 23224,
+      "compressedBytes": 23059,
+      "crc32": "4cff9a49",
+      "sha256": "c8134356f9699742a529f84c2f9d107a865a1485f348e813be7c49b5d6fb8170",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/brace_01.png",
+      "bytes": 23158,
+      "compressedBytes": 22997,
+      "crc32": "ae8cfbe1",
+      "sha256": "7646dbfd95fce97112a22dc84d09d928a6620f48b65650c2b0960830a6b659ba",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/brace_02.png",
+      "bytes": 23233,
+      "compressedBytes": 23045,
+      "crc32": "c925252c",
+      "sha256": "3185f7acc9c22149f600b2146df3c45bb9f30167e762604ed3f19c7264a7afed",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/brace_03.png",
+      "bytes": 23285,
+      "compressedBytes": 23132,
+      "crc32": "013cd8d9",
+      "sha256": "9bb227f3052633c4cd8e31f5dbb074a9aba395518238cdaa67089478151ffc47",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/fall_00.png",
+      "bytes": 24287,
+      "compressedBytes": 24112,
+      "crc32": "79d74ffd",
+      "sha256": "b239e8fb6ff1aaa80e01017ce7884ff9ead84c774668bec362671f05b8b078ae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/fall_01.png",
+      "bytes": 25300,
+      "compressedBytes": 25141,
+      "crc32": "2f16b982",
+      "sha256": "9e7a9b3c4d79cd6aa8b762ec44d75205fb0ee3a64b77ed10acb2d2de9be87a23",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/fall_02.png",
+      "bytes": 25320,
+      "compressedBytes": 25103,
+      "crc32": "0ef4e4c3",
+      "sha256": "9b555172320854df621a5a055361885bb8ae6cda90ec77e8371a92b3318cf33b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/fall_03.png",
+      "bytes": 24279,
+      "compressedBytes": 24095,
+      "crc32": "c91a88bd",
+      "sha256": "7df4084688c5a66dbd283dd0c5d2a3341daa2100d42b17e98ff0c57c5737c73f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/jump_00.png",
+      "bytes": 22337,
+      "compressedBytes": 22197,
+      "crc32": "92a35c3b",
+      "sha256": "86372fcaa9492a263dc30b39ddb05ad7edbb3cdb4c9a16b47e122053ea273256",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/jump_01.png",
+      "bytes": 22251,
+      "compressedBytes": 22116,
+      "crc32": "6cdbe241",
+      "sha256": "44704280e4de249fc6d5d3c4da943e81ba90d813207e738234353b008cb17180",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/jump_02.png",
+      "bytes": 22125,
+      "compressedBytes": 21965,
+      "crc32": "f65d622c",
+      "sha256": "b77ce9548c6b21c627c187d9163809497ee85856cdbfeaa4762225b24fe386c1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/jump_03.png",
+      "bytes": 21828,
+      "compressedBytes": 21694,
+      "crc32": "7f60966d",
+      "sha256": "7f5d90e9db1803dd288828033aa5800fe44c90ebe7ed7c34f5336f307eed3060",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/land_00.png",
+      "bytes": 21208,
+      "compressedBytes": 21028,
+      "crc32": "9292a119",
+      "sha256": "5692c8f21865b0c3e146f2e7863d1c5d8ff7595510fa75c72a65323123129ad5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/land_01.png",
+      "bytes": 21422,
+      "compressedBytes": 21281,
+      "crc32": "6fad7415",
+      "sha256": "810821c09948aab611768f90cab8194a03b33d37a7fe5a35f49c0ea31b35301a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/ripley-actions/land_02.png",
+      "bytes": 21533,
+      "compressedBytes": 21377,
+      "crc32": "7b07c08a",
+      "sha256": "4e46e557d501d71630e1be183ef928cad4898e3a6bc960f5c45b5ce80dd52ca3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/linked_00.png",
+      "bytes": 1621,
+      "compressedBytes": 1526,
+      "crc32": "7b0e5e49",
+      "sha256": "aeffff4420a1381c8ac8c7e8b72afe727e9d365addaf23a344af90039b079e2a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/linked_01.png",
+      "bytes": 1638,
+      "compressedBytes": 1505,
+      "crc32": "99bd796b",
+      "sha256": "c2a1b598b2ac391e82a05d9393795020da5d9b24d9e4e2418106d1372adb635f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/linked_02.png",
+      "bytes": 1559,
+      "compressedBytes": 1534,
+      "crc32": "5771546c",
+      "sha256": "070627e6e3b712407f23845a2ee6682f6fc255658b08b2fe7a475c6c1c9bf41f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/linked_03.png",
+      "bytes": 1544,
+      "compressedBytes": 1493,
+      "crc32": "0dfcf170",
+      "sha256": "ba1de57d086ddd1ea4098a16268a3fef3dd527af7fdd71cb55e9b610e5412b55",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/normal_00.png",
+      "bytes": 1624,
+      "compressedBytes": 1509,
+      "crc32": "9f51d942",
+      "sha256": "f8ddee2b6a123c1f476d6f30b25cd96a68d61d25230ca3d024a177910d515c1d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/normal_01.png",
+      "bytes": 1641,
+      "compressedBytes": 1515,
+      "crc32": "cc45c47a",
+      "sha256": "6f968ae8fc0fe66e1148d4983d983b3ab1ea9635ffd6d0c039f221bc5057a2e6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/normal_02.png",
+      "bytes": 1562,
+      "compressedBytes": 1546,
+      "crc32": "7173acf7",
+      "sha256": "846ac8901b3acea47d79aaddff44a81bed9d46fc74dbcf3b30ac58d0f72220bc",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/normal_03.png",
+      "bytes": 1547,
+      "compressedBytes": 1493,
+      "crc32": "b29a4950",
+      "sha256": "9182981cabe9fae6e8ddc223fc979b43850b6d698fd2a1489cef5f995875d10b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/offline_00.png",
+      "bytes": 1330,
+      "compressedBytes": 1254,
+      "crc32": "c4595dde",
+      "sha256": "a7594587b08ab79306459f709a2de7a3b0e5bc7d2c13c0ffc43bd84c0f5a8e1f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/warning_00.png",
+      "bytes": 2133,
+      "compressedBytes": 2111,
+      "crc32": "29f3e507",
+      "sha256": "b7395520435e0287eefd778f36347d981bbd39d3f5cc579900284002b51074ce",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/warning_01.png",
+      "bytes": 2138,
+      "compressedBytes": 2116,
+      "crc32": "bf8eea8c",
+      "sha256": "0321a8847c3fbc8cbcbf208ab71631b8b973dc5d6c9128b02ff4817f0f316b43",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/warning_02.png",
+      "bytes": 2149,
+      "compressedBytes": 2133,
+      "crc32": "8ef21592",
+      "sha256": "698b5e692c5ef1b86d636c2d8ff45cc7445f5443538c3b6b433319be5708fde9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/frames/service-display/warning_03.png",
+      "bytes": 2138,
+      "compressedBytes": 2143,
+      "crc32": "f430299a",
+      "sha256": "0b451c5dd54ff59e6f3c5213a5d9849e567b84c33f10ccd7aa1ac2374ca3e663",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/manifest.json",
+      "bytes": 14551,
+      "compressedBytes": 2321,
+      "crc32": "a1363f69",
+      "sha256": "9586ddb5c7da0d98a5de5ae65251bcac547c9fc3cc929c860ce15225643258af",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/props/service-display.json",
+      "bytes": 5674,
+      "compressedBytes": 1133,
+      "crc32": "b4537183",
+      "sha256": "1d1c07b9dde3a393dff0e397b49a06d83eeb9013b69057e0a0ac7780ab274760",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "assets/v118/props/service-display.png",
+      "bytes": 13984,
+      "compressedBytes": 9663,
+      "crc32": "ec98ff98",
+      "sha256": "7fc6bfcb9cf88b897786a3816c6cb5c7c1c9038cf48cc64b10aa6133021a1c48",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "scripts/build-assets-v117.py",
+      "bytes": 4233,
+      "compressedBytes": 2018,
+      "crc32": "ec9f7337",
+      "sha256": "e33e6731608523b6b0d1452d3b82c872caa2c0bb55470add7730cd9efb27b3ff",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "scripts/build-assets-v118.py",
+      "bytes": 4410,
+      "compressedBytes": 2019,
+      "crc32": "e17a1fa5",
+      "sha256": "1b719d46e80945cfc4099aa2dd560dd3ea76573588ca067bd9b10da1dc650455",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "scripts/build-audio-v117.py",
+      "bytes": 2810,
+      "compressedBytes": 1412,
+      "crc32": "c06bac22",
+      "sha256": "d89716ab4eeea057340606c572c159654a0a5cf5f9db62138d18b8eecc23823f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "scripts/build-gallery-v118.py",
+      "bytes": 5619,
+      "compressedBytes": 2769,
+      "crc32": "cd883879",
+      "sha256": "2767067ee3e6a479ce3f1363bdc33befa15dd3fc2a4282ed5e7dbb443e4e93dd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "src/mire-alien-resurrection-art-v117.js",
+      "bytes": 16951,
+      "compressedBytes": 6470,
+      "crc32": "09b4adaf",
+      "sha256": "1ee789bfb4ccfa3fbe646cb9f193b84a6cf1a5145c4b75cf4779a7c723b089a8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "src/mire-alien-resurrection-poses-v118.js",
+      "bytes": 6450,
+      "compressedBytes": 2657,
+      "crc32": "8a63f77e",
+      "sha256": "ff3c2e6bb47224ff137e615d30c82fb68a2f4d17c5c5b2bb292b78cafe057115",
+      "directory": false,
+      "mode": 33188
+    }
+  ]
+}

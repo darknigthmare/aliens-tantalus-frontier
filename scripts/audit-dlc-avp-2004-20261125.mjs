@@ -503,6 +503,20 @@ export const AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126 = Object.freeze(Object.f
 ));
 // END DLC SOURCE ARCHIVE HOST RECEIPTS 20261126
 
+// BEGIN HISTORICAL DLC ARCHIVE HOST RECEIPTS 20261126
+// New closed archive admission follows PR73 without changing any prior receipt.
+export const AVP_HISTORICAL_ARCHIVE_BASELINE_20261126 = '6b46eaf8f574871e39487e0a10ef46acfb1f41a6';
+export const AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "8ab7c2ba51f873d74c652c91ffa9fa68d670ef4fc448b5f81419de272113a884",
+    "currentSha256": "c3811e89de495ddd1b00eb4e7ef39637b944def0fb81ee58625dad6f6182454c"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END HISTORICAL DLC ARCHIVE HOST RECEIPTS 20261126
+
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -534,8 +548,14 @@ export function reviewedFiorinaV116HostDigest20261125(path, endpoint) {
 }
 
 export function reviewedDlcArchiveSourceHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126,
+  const published = advanceReceipt(path, endpoint, AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126,
     'Broken V116-to-DLC-source-archive source chain: ');
+  return reviewedHistoricalArchiveHostDigest20261126(path, published);
+}
+
+export function reviewedHistoricalArchiveHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126,
+    'Broken PR73-to-historical-archive source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -555,7 +575,7 @@ export function reviewedAliensIncomingDigest20261125(path, endpoint) {
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126), ...Object.keys(AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -566,7 +586,7 @@ export function avpHostRuntimeSources20261125(view) {
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
-      AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126[path]].filter(Boolean);
+      AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126[path], AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -583,6 +603,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'Fiorina sprites require the exact published continuation base');
   assert.equal(AVP_FIORINA_V116_BASELINE_20261125, 'ae4e49bef5fea639d0c381466aefea85f8a57300',
     'Fiorina V116 requires the exact merged V115 continuation base');
+  assert.equal(AVP_HISTORICAL_ARCHIVE_BASELINE_20261126, '6b46eaf8f574871e39487e0a10ef46acfb1f41a6',
+    'Historical archives require the exact PR73 baseline');
   assert.equal(AVP_DLC_ARCHIVE_SOURCE_BASELINE_20261126, 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
     'DLC source archive requires the exact merged V116 continuation base');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
@@ -595,7 +617,7 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   });
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
-    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126]) {
+    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126, AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -656,6 +678,12 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.ok(prior, 'DLC source archive requires an exact published host predecessor: ' + path);
     assert.equal(receipt.previousSha256, prior.currentSha256,
       'DLC source archive must follow the exact V116 endpoint: ' + path);
+  }
+  for (const [path, receipt] of Object.entries(AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126)) {
+    assert.ok(Object.hasOwn(AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126, path),
+      'Historical archive requires a published PR73 predecessor: ' + path);
+    assert.equal(receipt.previousSha256, AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126[path].currentSha256,
+      'Historical archive must follow the exact PR73 endpoint: ' + path);
   }
   const paths = hostPaths();
   for (const path of paths) {

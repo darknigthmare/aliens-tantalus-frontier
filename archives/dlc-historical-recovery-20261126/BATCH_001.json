@@ -1,0 +1,63 @@
+{
+  "batch": "001-resurrection-assets",
+  "date": "2026-11-26",
+  "originalCount": 3,
+  "originalBytes": 44136372,
+  "memberCount": 1419,
+  "pngOccurrences": 1311,
+  "checks": {
+    "zipAllMemberCrc32": "pass",
+    "archiveAndMemberSha256": "computed",
+    "fragmentCreateResponseGitSha1": "all-equal-precomputed-local-values",
+    "remoteBinaryReadback": "pending-isolated-git-readback; connector UTF-8 decoder rejected binary",
+    "sourceSuccessionTests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "closedAdmissionTests": {
+      "passed": 3,
+      "failed": 0
+    }
+  },
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip.part001",
+      "bytes": 10485760,
+      "sha256": "813039bf1d3b58f23636076f744813c04835dbd1aa839362bfc18f30d5df233d",
+      "gitBlobSha1": "bf3fe44f9358eae6676122e756e18386861e6138"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip.part002",
+      "bytes": 2846022,
+      "sha256": "85d7a787c29d596ca8facacee95f4595091ed63ea65bc9dbdccac75d168cb95c",
+      "gitBlobSha1": "a1cea3a06aaa00f48da39216f73996aaacea6b79"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part001",
+      "bytes": 10485760,
+      "sha256": "33d382f24d779250c679a416051a137cded52e8e68de035b6797ffb95bd0d238",
+      "gitBlobSha1": "54af39ea29d5ad724661745203d8467acfdcf8af"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part002",
+      "bytes": 3629859,
+      "sha256": "55634ec19fdea11c07132bdbfff6bca0337131f501aa76b37b2d81409f486998",
+      "gitBlobSha1": "0e61d88c6d64d2eaad36a8e24aef2d03046ecbbe"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip.part001",
+      "bytes": 10485760,
+      "sha256": "29bf3c65ee90883296f33086c87eeee750e9c8b51f7e71c2413d7548e5f6e331",
+      "gitBlobSha1": "9b74f2997e993085518f59c22cb86bb52d841c4f"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip.part002",
+      "bytes": 6203211,
+      "sha256": "d545d9da5a7773cbfe9e76f5f1ad8acfb453c44f013f840cf59faa6bf7934d3f",
+      "gitBlobSha1": "28bed77de6e1de2863a190975458ddcb7c506363"
+    }
+  ],
+  "preservedOriginalsRetained": true,
+  "persistentSourcesDeleted": 0,
+  "runtimeChanged": false
+}

@@ -1,0 +1,2095 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "baselineCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+  "scope": "The initial 284 candidates were absent from 29 compared manifests only; this is not a claim that all are absent from GitHub. Other branches require exact verification before recovery.",
+  "sourcesPreserved": 3,
+  "originalBytesPreserved": 44136372,
+  "candidateCount": 284,
+  "pendingCount": 281,
+  "preserved": [
+    {
+      "archiveId": "alien-resurrection/v117",
+      "originalFilename": "ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip",
+      "bytes": 13331782,
+      "sha256": "63edbfee925d554ad79929fe2327fad3dcb7692e18d51f1288d3982facc6d01e",
+      "format": "zip",
+      "preservation": "exact-original-bytes",
+      "memberCount": 315,
+      "pngOccurrences": 274,
+      "zipCrc32": "pass-all-members",
+      "parts": [
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip.part001",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "813039bf1d3b58f23636076f744813c04835dbd1aa839362bfc18f30d5df233d",
+          "gitBlobSha1": "bf3fe44f9358eae6676122e756e18386861e6138"
+        },
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip.part002",
+          "offset": 10485760,
+          "bytes": 2846022,
+          "sha256": "85d7a787c29d596ca8facacee95f4595091ed63ea65bc9dbdccac75d168cb95c",
+          "gitBlobSha1": "a1cea3a06aaa00f48da39216f73996aaacea6b79"
+        }
+      ],
+      "contents": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/ZIP_CONTENTS.json",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/MANIFEST.json"
+    },
+    {
+      "archiveId": "alien-resurrection/v118",
+      "originalFilename": "ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip",
+      "bytes": 14115619,
+      "sha256": "345788c5e15b89272389fb983b2a30fbf76734c4cf508b04b7e6d95c8d470517",
+      "format": "zip",
+      "preservation": "exact-original-bytes",
+      "memberCount": 351,
+      "pngOccurrences": 304,
+      "zipCrc32": "pass-all-members",
+      "parts": [
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part001",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "33d382f24d779250c679a416051a137cded52e8e68de035b6797ffb95bd0d238",
+          "gitBlobSha1": "54af39ea29d5ad724661745203d8467acfdcf8af"
+        },
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part002",
+          "offset": 10485760,
+          "bytes": 3629859,
+          "sha256": "55634ec19fdea11c07132bdbfff6bca0337131f501aa76b37b2d81409f486998",
+          "gitBlobSha1": "0e61d88c6d64d2eaad36a8e24aef2d03046ecbbe"
+        }
+      ],
+      "contents": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ZIP_CONTENTS.json",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/MANIFEST.json"
+    },
+    {
+      "archiveId": "alien-resurrection/v125",
+      "originalFilename": "ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip",
+      "bytes": 16688971,
+      "sha256": "eef2f8340da347a75c017d3cfbe64568d6916b77d94ba32e24a6bfd789fbe50c",
+      "format": "zip",
+      "preservation": "exact-original-bytes",
+      "memberCount": 753,
+      "pngOccurrences": 733,
+      "zipCrc32": "pass-all-members",
+      "parts": [
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip.part001",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "29bf3c65ee90883296f33086c87eeee750e9c8b51f7e71c2413d7548e5f6e331",
+          "gitBlobSha1": "9b74f2997e993085518f59c22cb86bb52d841c4f"
+        },
+        {
+          "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip.part002",
+          "offset": 10485760,
+          "bytes": 6203211,
+          "sha256": "d545d9da5a7773cbfe9e76f5f1ad8acfb453c44f013f840cf59faa6bf7934d3f",
+          "gitBlobSha1": "28bed77de6e1de2863a190975458ddcb7c506363"
+        }
+      ],
+      "contents": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/ZIP_CONTENTS.json",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/MANIFEST.json"
+    }
+  ],
+  "candidates": [
+    {
+      "filename": "ALIEN3_FIORINA_V104_MISE_A_NIVEAU_SUR_V103.zip",
+      "bytes": 14575411,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "104",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V105_TRAQUES_PREPARATIFS_SUR_V104.zip",
+      "bytes": 27635609,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "105",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V106_TRACES_PENOMBRE_SUR_V105.zip",
+      "bytes": 45056353,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V107_MANOEUVRES_SOUS_TENSION_SUR_V106.zip",
+      "bytes": 63597730,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "107",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V108_ECHOS_DE_METAL_SUR_V107.zip",
+      "bytes": 23812381,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "108",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V109_SOUFFLE_DES_CONDUITES_SUR_V108.zip",
+      "bytes": 30410333,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "109",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V110_GARDER_LE_PASSAGE_SUR_V109.zip",
+      "bytes": 27532055,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "110",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V111_DETOURS_DE_SERVICE_SUR_V110.zip",
+      "bytes": 33181418,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "111",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V112_LAISSER_PASSER_SUR_V111.zip",
+      "bytes": 38263872,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "112",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V113_SEUILS_DE_FIORINA_SUR_V112.zip",
+      "bytes": 29199402,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "113",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V114_ATLAS_CONTINUITE_SUR_V113.zip",
+      "bytes": 10077153,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "114",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN3_FIORINA_V114_CONTINUITES_LIEUX_SUR_V113.zip",
+      "bytes": 21877479,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "114",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.1.0_DLC_COMPLET.zip",
+      "bytes": 38446577,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.1.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.2.0_DLC_COMPLET.zip",
+      "bytes": 44360624,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.2.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.3.0_DLC_COMPLET.zip",
+      "bytes": 46549375,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.3.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.4.0_DLC_COMPLET.zip",
+      "bytes": 49795446,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.4.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.5.0_DLC_COMPLET.zip",
+      "bytes": 54011009,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.5.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.6.0_DLC_COMPLET.zip",
+      "bytes": 61100492,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.6.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.7.0_DLC_COMPLET.zip",
+      "bytes": 70150173,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.7.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.8.0_DLC_COMPLET.zip",
+      "bytes": 90617660,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.8.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_COVENANT_v0.9.0_DLC_COMPLET.zip",
+      "bytes": 103232615,
+      "family": "alien-covenant",
+      "versionFromFilename": "0.9.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip",
+      "bytes": 39336861,
+      "family": "alien-earth",
+      "versionFromFilename": "10",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V1_PROTOTYPE_JOUABLE.zip",
+      "bytes": 11089227,
+      "family": "alien-earth",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V2_MODULE_COMPLET.zip",
+      "bytes": 16902480,
+      "family": "alien-earth",
+      "versionFromFilename": "2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V3_MODULE_COMPLET.zip",
+      "bytes": 16185188,
+      "family": "alien-earth",
+      "versionFromFilename": "3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V4_MODULE_COMPLET.zip",
+      "bytes": 14122782,
+      "family": "alien-earth",
+      "versionFromFilename": "4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip",
+      "bytes": 19392814,
+      "family": "alien-earth",
+      "versionFromFilename": "5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V6_MODULE_COMPLET.zip",
+      "bytes": 22772673,
+      "family": "alien-earth",
+      "versionFromFilename": "6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V7_MODULE_COMPLET.zip",
+      "bytes": 29105693,
+      "family": "alien-earth",
+      "versionFromFilename": "7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip",
+      "bytes": 30595564,
+      "family": "alien-earth",
+      "versionFromFilename": "8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip",
+      "bytes": 36819269,
+      "family": "alien-earth",
+      "versionFromFilename": "9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_1_PROTOTYPE_SOURCE.zip",
+      "bytes": 16833945,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_2_LES_VOIX_DU_MARION.zip",
+      "bytes": 10744490,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_3_NE_RESTEZ_PAS_DERRIERE.zip",
+      "bytes": 21121633,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_4_LES_PORTES_NE_SUFFISENT_PLUS.zip",
+      "bytes": 28665095,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_5_CE_QUI_ECOUTE_DANS_LE_NOIR.zip",
+      "bytes": 38335564,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_6_LES_CHEMINS_DE_TRAVERSE.zip",
+      "bytes": 45520144,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_7_LES_ARCHIVES_NOYEES.zip",
+      "bytes": 54663049,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_8_LES_MEMOIRES_DU_MARION.zip",
+      "bytes": 61934135,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_9_A_BOUT_DE_BRAS.zip",
+      "bytes": 71767300,
+      "family": "hors-des-ombres",
+      "versionFromFilename": "0.9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_RESURRECTION_ASSETS_ANIMES_V117.zip",
+      "bytes": 13331782,
+      "family": "alien-resurrection",
+      "versionFromFilename": "117",
+      "status": "preserved-exact-in-this-recovery",
+      "sha256": "63edbfee925d554ad79929fe2327fad3dcb7692e18d51f1288d3982facc6d01e",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v117/MANIFEST.json"
+    },
+    {
+      "filename": "ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip",
+      "bytes": 14115619,
+      "family": "alien-resurrection",
+      "versionFromFilename": "118",
+      "status": "preserved-exact-in-this-recovery",
+      "sha256": "345788c5e15b89272389fb983b2a30fbf76734c4cf508b04b7e6d95c8d470517",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/MANIFEST.json"
+    },
+    {
+      "filename": "ALIEN_RESURRECTION_IDENTITES_ASSETS_V125.zip",
+      "bytes": 16688971,
+      "family": "alien-resurrection",
+      "versionFromFilename": "125",
+      "status": "preserved-exact-in-this-recovery",
+      "sha256": "eef2f8340da347a75c017d3cfbe64568d6916b77d94ba32e24a6bfd789fbe50c",
+      "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v125/MANIFEST.json"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_AMARRES_v0.15.zip",
+      "bytes": 86519313,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.15",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_ANGLES_v0.17.zip",
+      "bytes": 124966434,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.17",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_APPUIS_v0.11.zip",
+      "bytes": 55037785,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.11",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_CONCORDANCE_v0.19.zip",
+      "bytes": 46400846,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.19",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_CONTINUITE_v0.2.zip",
+      "bytes": 17734905,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_DERNIER_PASSAGER_v0.7.zip",
+      "bytes": 39750197,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_EMPREINTES_v0.14.zip",
+      "bytes": 82196282,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.14",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_HORIZONS_v0.8.zip",
+      "bytes": 47578265,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_INCARNATION_v0.12.zip",
+      "bytes": 70810589,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.12",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_JALONS_v0.18.zip",
+      "bytes": 138678733,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.18",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_LIAISONS_v0.5.zip",
+      "bytes": 22807045,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_NERVURES_v0.16.zip",
+      "bytes": 111282302,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.16",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_PASSAGES_v0.10.zip",
+      "bytes": 50412523,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.10",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_PRESENCES_v0.3.zip",
+      "bytes": 12956390,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_QUARANTAINE_v0.6.zip",
+      "bytes": 28789493,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_RENAISSANCE_v0.1.zip",
+      "bytes": 9705930,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_SOUS_PRESSION_v0.4.zip",
+      "bytes": 15048989,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_TRAQUES_v0.9.zip",
+      "bytes": 43618398,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_ROMULUS_TRAVERSEES_v0.13.zip",
+      "bytes": 71994857,
+      "family": "alien-romulus",
+      "versionFromFilename": "0.13",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_SPRITES_2026-10-05.zip",
+      "bytes": 46566399,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_VILAINS_13_PNG_INDEPENDANTS.zip",
+      "bytes": 19506964,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V106_PASSAGES_RC1.zip",
+      "bytes": 5712554,
+      "family": "aliens-1986",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V107_RALLIER_OPERATIONS_RC1.zip",
+      "bytes": 7568608,
+      "family": "aliens-1986",
+      "versionFromFilename": "107",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V108_CONTACT_PERSISTANT_RC1.zip",
+      "bytes": 11073097,
+      "family": "aliens-1986",
+      "versionFromFilename": "108",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V109_LOGISTIQUE_SOUS_PRESSION_RC1.zip",
+      "bytes": 14525085,
+      "family": "aliens-1986",
+      "versionFromFilename": "109",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V110_TENIR_LES_ACCES_RC1.zip",
+      "bytes": 33028937,
+      "family": "aliens-1986",
+      "versionFromFilename": "110",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V111_DANS_LE_NOIR_RC1.zip",
+      "bytes": 42432709,
+      "family": "aliens-1986",
+      "versionFromFilename": "111",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V112_BALISER_LE_REPLI_RC1.zip",
+      "bytes": 64739989,
+      "family": "aliens-1986",
+      "versionFromFilename": "112",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V113_TENIR_LES_ANGLES_RC1.zip",
+      "bytes": 93623236,
+      "family": "aliens-1986",
+      "versionFromFilename": "113",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip",
+      "bytes": 118891784,
+      "family": "aliens-1986",
+      "versionFromFilename": "114",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_ARMURERIES_3_VARIANTES_96_SPRITES_V172.zip",
+      "bytes": 20851588,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "172",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_AUDIT_PREUVES_2026-10-16.zip",
+      "bytes": 888409,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_CODEX_IA_COMPLET.zip",
+      "bytes": 235687,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_COSTUME_PARTS_V175.zip",
+      "bytes": 21950767,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "175",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_COSTUMES_SPRITES_V170.zip",
+      "bytes": 21414340,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "170",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_COSTUMES_V176_QA.zip",
+      "bytes": 23933700,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "176",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V101_DENSE_LEVEL_DESIGN_PRODUCTION_SAFE.zip",
+      "bytes": 8282852,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "101",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V102_DECORS_ANCRES_PRODUCTION_SAFE.zip",
+      "bytes": 26289661,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "102",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V103_PASSAGES_RESEAUX_PRODUCTION_SAFE.zip",
+      "bytes": 42356990,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "103",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V88_PATCH.zip",
+      "bytes": 33733,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V89_PATCH.zip",
+      "bytes": 70530,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "89",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V90_PATCH.zip",
+      "bytes": 110595,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "90",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V91_PATCH.zip",
+      "bytes": 142399,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "91",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V92_PATCH.zip",
+      "bytes": 179933,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "92",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V93_PATCH.zip",
+      "bytes": 223292,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "93",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V93_PRODUCTION_SAFE.zip",
+      "bytes": 241100,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "93",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V94_PRODUCTION_SAFE.zip",
+      "bytes": 289262,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "94",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V95_PRODUCTION_SAFE.zip",
+      "bytes": 350236,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "95",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V96_PRODUCTION_SAFE.zip",
+      "bytes": 388542,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "96",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V97_HYBRID_PRODUCTION_SAFE.zip",
+      "bytes": 433043,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "97",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V98_HYBRID_DIRECTOR_PRODUCTION_SAFE.zip",
+      "bytes": 2347768,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "98",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V99_ADAPTIVE_PURSUIT_PRODUCTION_SAFE.zip",
+      "bytes": 4538221,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "99",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.1.0.zip",
+      "bytes": 7604057,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.1.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.2.0.zip",
+      "bytes": 19015524,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.2.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip",
+      "bytes": 15692851,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.3.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.4.0.zip",
+      "bytes": 20737593,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.4.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.5.0.zip",
+      "bytes": 23799439,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.5.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip",
+      "bytes": 25056068,
+      "family": "alien-blackout",
+      "versionFromFilename": "0.6.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_1.zip",
+      "bytes": 16206544,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_2.zip",
+      "bytes": 26623818,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_3.zip",
+      "bytes": 39179995,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_4.zip",
+      "bytes": 48891472,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_5.zip",
+      "bytes": 61933554,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_6.zip",
+      "bytes": 49164616,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_7.zip",
+      "bytes": 54299557,
+      "family": "alien-isolation",
+      "versionFromFilename": "0.7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V100.zip",
+      "bytes": 277117,
+      "family": "alien-resurrection",
+      "versionFromFilename": "100",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V102.zip",
+      "bytes": 350376,
+      "family": "alien-resurrection",
+      "versionFromFilename": "102",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V103.zip",
+      "bytes": 828462,
+      "family": "alien-resurrection",
+      "versionFromFilename": "103",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V104.zip",
+      "bytes": 1447581,
+      "family": "alien-resurrection",
+      "versionFromFilename": "104",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V105.zip",
+      "bytes": 2193765,
+      "family": "alien-resurrection",
+      "versionFromFilename": "105",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V106.zip",
+      "bytes": 2158582,
+      "family": "alien-resurrection",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V107.zip",
+      "bytes": 2884748,
+      "family": "alien-resurrection",
+      "versionFromFilename": "107",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V108.zip",
+      "bytes": 3506588,
+      "family": "alien-resurrection",
+      "versionFromFilename": "108",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V109.zip",
+      "bytes": 4485076,
+      "family": "alien-resurrection",
+      "versionFromFilename": "109",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V110.zip",
+      "bytes": 6671447,
+      "family": "alien-resurrection",
+      "versionFromFilename": "110",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V111.zip",
+      "bytes": 17789313,
+      "family": "alien-resurrection",
+      "versionFromFilename": "111",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V112.zip",
+      "bytes": 30049212,
+      "family": "alien-resurrection",
+      "versionFromFilename": "112",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V113.zip",
+      "bytes": 40078237,
+      "family": "alien-resurrection",
+      "versionFromFilename": "113",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V114.zip",
+      "bytes": 49377500,
+      "family": "alien-resurrection",
+      "versionFromFilename": "114",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V115.zip",
+      "bytes": 70147183,
+      "family": "alien-resurrection",
+      "versionFromFilename": "115",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V116.zip",
+      "bytes": 3960728,
+      "family": "alien-resurrection",
+      "versionFromFilename": "116",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V117.zip",
+      "bytes": 44309704,
+      "family": "alien-resurrection",
+      "versionFromFilename": "117",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V118.zip",
+      "bytes": 77663430,
+      "family": "alien-resurrection",
+      "versionFromFilename": "118",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V119.zip",
+      "bytes": 107661721,
+      "family": "alien-resurrection",
+      "versionFromFilename": "119",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V120.zip",
+      "bytes": 126459935,
+      "family": "alien-resurrection",
+      "versionFromFilename": "120",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V121.zip",
+      "bytes": 143225623,
+      "family": "alien-resurrection",
+      "versionFromFilename": "121",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V122.zip",
+      "bytes": 158965103,
+      "family": "alien-resurrection",
+      "versionFromFilename": "122",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V123.zip",
+      "bytes": 173223238,
+      "family": "alien-resurrection",
+      "versionFromFilename": "123",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V124.zip",
+      "bytes": 190580535,
+      "family": "alien-resurrection",
+      "versionFromFilename": "124",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V92.zip",
+      "bytes": 32961,
+      "family": "alien-resurrection",
+      "versionFromFilename": "92",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V93.zip",
+      "bytes": 68164,
+      "family": "alien-resurrection",
+      "versionFromFilename": "93",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V94.zip",
+      "bytes": 101474,
+      "family": "alien-resurrection",
+      "versionFromFilename": "94",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V95.zip",
+      "bytes": 132049,
+      "family": "alien-resurrection",
+      "versionFromFilename": "95",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V96.zip",
+      "bytes": 164773,
+      "family": "alien-resurrection",
+      "versionFromFilename": "96",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V97.zip",
+      "bytes": 194784,
+      "family": "alien-resurrection",
+      "versionFromFilename": "97",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V98.zip",
+      "bytes": 220142,
+      "family": "alien-resurrection",
+      "versionFromFilename": "98",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V99.zip",
+      "bytes": 250427,
+      "family": "alien-resurrection",
+      "versionFromFilename": "99",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v100.zip",
+      "bytes": 549745,
+      "family": "aliens-1986",
+      "versionFromFilename": "100",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v101.zip",
+      "bytes": 620578,
+      "family": "aliens-1986",
+      "versionFromFilename": "101",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v102.zip",
+      "bytes": 687769,
+      "family": "aliens-1986",
+      "versionFromFilename": "102",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v103.zip",
+      "bytes": 902004,
+      "family": "aliens-1986",
+      "versionFromFilename": "103",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v104.zip",
+      "bytes": 1766572,
+      "family": "aliens-1986",
+      "versionFromFilename": "104",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v105.zip",
+      "bytes": 2531087,
+      "family": "aliens-1986",
+      "versionFromFilename": "105",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_V106_CANDIDAT.zip",
+      "bytes": 7385034,
+      "family": "aliens-1986",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v88.zip",
+      "bytes": 16906,
+      "family": "aliens-1986",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v89.zip",
+      "bytes": 44574,
+      "family": "aliens-1986",
+      "versionFromFilename": "89",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v90.zip",
+      "bytes": 82350,
+      "family": "aliens-1986",
+      "versionFromFilename": "90",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v92.zip",
+      "bytes": 157834,
+      "family": "aliens-1986",
+      "versionFromFilename": "92",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v93.zip",
+      "bytes": 200527,
+      "family": "aliens-1986",
+      "versionFromFilename": "93",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v94.zip",
+      "bytes": 242715,
+      "family": "aliens-1986",
+      "versionFromFilename": "94",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v95.zip",
+      "bytes": 289512,
+      "family": "aliens-1986",
+      "versionFromFilename": "95",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v96.zip",
+      "bytes": 336568,
+      "family": "aliens-1986",
+      "versionFromFilename": "96",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v97.zip",
+      "bytes": 386684,
+      "family": "aliens-1986",
+      "versionFromFilename": "97",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v98.zip",
+      "bytes": 438527,
+      "family": "aliens-1986",
+      "versionFromFilename": "98",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_ALIENS_1986_v99.zip",
+      "bytes": 492631,
+      "family": "aliens-1986",
+      "versionFromFilename": "99",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.1.0.zip",
+      "bytes": 8075472,
+      "family": "avp-2004",
+      "versionFromFilename": "0.1.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.10.0.zip",
+      "bytes": 52719452,
+      "family": "avp-2004",
+      "versionFromFilename": "0.10.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.2.0.zip",
+      "bytes": 13087230,
+      "family": "avp-2004",
+      "versionFromFilename": "0.2.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.3.0.zip",
+      "bytes": 17257828,
+      "family": "avp-2004",
+      "versionFromFilename": "0.3.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.4.0.zip",
+      "bytes": 24367850,
+      "family": "avp-2004",
+      "versionFromFilename": "0.4.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.5.0.zip",
+      "bytes": 19036239,
+      "family": "avp-2004",
+      "versionFromFilename": "0.5.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.6.0.zip",
+      "bytes": 27349321,
+      "family": "avp-2004",
+      "versionFromFilename": "0.6.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.7.0.zip",
+      "bytes": 37237468,
+      "family": "avp-2004",
+      "versionFromFilename": "0.7.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.8.0.zip",
+      "bytes": 40593504,
+      "family": "avp-2004",
+      "versionFromFilename": "0.8.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.9.0.zip",
+      "bytes": 46540409,
+      "family": "avp-2004",
+      "versionFromFilename": "0.9.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_1.zip",
+      "bytes": 4891993,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_2.zip",
+      "bytes": 13386449,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_3.zip",
+      "bytes": 24038553,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_4.zip",
+      "bytes": 34737271,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_5.zip",
+      "bytes": 47537685,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_6.zip",
+      "bytes": 58581478,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_7.zip",
+      "bytes": 13086772,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_8.zip",
+      "bytes": 26091647,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_9.zip",
+      "bytes": 14871373,
+      "family": "avp-requiem",
+      "versionFromFilename": "0.9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_1_0.zip",
+      "bytes": 8218839,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.1.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_2_0.zip",
+      "bytes": 21427731,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.2.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_3_0.zip",
+      "bytes": 29827801,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.3.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_4_0.zip",
+      "bytes": 33618584,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.4.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_5_0.zip",
+      "bytes": 51613680,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.5.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_6_0.zip",
+      "bytes": 56339439,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.6.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_7_0.zip",
+      "bytes": 62281365,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.7.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_8_0.zip",
+      "bytes": 67684788,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.8.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_9_0.zip",
+      "bytes": 73587948,
+      "family": "colonial-marines",
+      "versionFromFilename": "0.9.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.1.0.zip",
+      "bytes": 8329372,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.1.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.2.0.zip",
+      "bytes": 12655098,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.2.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.3.0.zip",
+      "bytes": 21376938,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.3.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.4.0.zip",
+      "bytes": 23187032,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.4.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.5.0.zip",
+      "bytes": 29818613,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.5.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.6.0.zip",
+      "bytes": 65259430,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.6.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.7.0.zip",
+      "bytes": 15391325,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.7.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.8.0.zip",
+      "bytes": 13073188,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.8.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_FLEUVE_DOULEUR_v0.9.0.zip",
+      "bytes": 19292972,
+      "family": "river-of-pain",
+      "versionFromFilename": "0.9.0",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v88.zip",
+      "bytes": 20081,
+      "family": "mire-nostromo",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v89_DIRECTOR.zip",
+      "bytes": 41985,
+      "family": "mire-nostromo",
+      "versionFromFilename": "89",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v90_PRODUCTION_PASS.zip",
+      "bytes": 104921,
+      "family": "mire-nostromo",
+      "versionFromFilename": "90",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v91_CINEMATIC_LEVEL_DESIGN.zip",
+      "bytes": 170988,
+      "family": "mire-nostromo",
+      "versionFromFilename": "91",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v92_IMMERSION_SYSTEMS.zip",
+      "bytes": 250622,
+      "family": "mire-nostromo",
+      "versionFromFilename": "92",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v93_ENCOUNTER_MISSION_POLISH.zip",
+      "bytes": 343332,
+      "family": "mire-nostromo",
+      "versionFromFilename": "93",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v94_ART_ANIMATION_PIPELINE.zip",
+      "bytes": 717159,
+      "family": "mire-nostromo",
+      "versionFromFilename": "94",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v95_1_ART_DROP_1.zip",
+      "bytes": 66365481,
+      "family": "mire-nostromo",
+      "versionFromFilename": "95.1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v95_2_ART_DROP_2.zip",
+      "bytes": 93245793,
+      "family": "mire-nostromo",
+      "versionFromFilename": "95.2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v95_4_ART_DROP_4_FULL_ART.zip",
+      "bytes": 158331333,
+      "family": "mire-nostromo",
+      "versionFromFilename": "95.4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v95_RELEASE_CANDIDATE.zip",
+      "bytes": 1475990,
+      "family": "mire-nostromo",
+      "versionFromFilename": "95",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v96_MASTER_POLISH.zip",
+      "bytes": 139995041,
+      "family": "mire-nostromo",
+      "versionFromFilename": "96",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v97_GOLD_MASTER.zip",
+      "bytes": 142255382,
+      "family": "mire-nostromo",
+      "versionFromFilename": "97",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_MIRE_NOSTROMO_v98_HYBRID_STAGING_INTEGRATED.zip",
+      "bytes": 142331049,
+      "family": "mire-nostromo",
+      "versionFromFilename": "98",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V1.zip",
+      "bytes": 9872259,
+      "family": "prometheus",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V10.zip",
+      "bytes": 105799905,
+      "family": "prometheus",
+      "versionFromFilename": "10",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V11.zip",
+      "bytes": 174197182,
+      "family": "prometheus",
+      "versionFromFilename": "11",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V2.zip",
+      "bytes": 26341136,
+      "family": "prometheus",
+      "versionFromFilename": "2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V3.zip",
+      "bytes": 22795648,
+      "family": "prometheus",
+      "versionFromFilename": "3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V4.zip",
+      "bytes": 37560056,
+      "family": "prometheus",
+      "versionFromFilename": "4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V5.zip",
+      "bytes": 53438713,
+      "family": "prometheus",
+      "versionFromFilename": "5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V6.zip",
+      "bytes": 73314388,
+      "family": "prometheus",
+      "versionFromFilename": "6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V7.zip",
+      "bytes": 78381072,
+      "family": "prometheus",
+      "versionFromFilename": "7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V8.zip",
+      "bytes": 87008579,
+      "family": "prometheus",
+      "versionFromFilename": "8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V9.zip",
+      "bytes": 99382291,
+      "family": "prometheus",
+      "versionFromFilename": "9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_FRONTIER_MIRE_ALIEN3_FIORINA_V88.zip",
+      "bytes": 38531,
+      "family": "alien3-fiorina",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V100_SPATIAL_THREATS.zip",
+      "bytes": 145053188,
+      "family": "mire-nostromo",
+      "versionFromFilename": "100",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V101_ENCOUNTER_DIRECTOR.zip",
+      "bytes": 146574303,
+      "family": "mire-nostromo",
+      "versionFromFilename": "101",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V102_ROOM_SYSTEMS.zip",
+      "bytes": 147745099,
+      "family": "mire-nostromo",
+      "versionFromFilename": "102",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V103_PERSISTENT_ENVIRONMENT.zip",
+      "bytes": 148795223,
+      "family": "mire-nostromo",
+      "versionFromFilename": "103",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V104_HUD_CREW_TACTICS.zip",
+      "bytes": 150437978,
+      "family": "mire-nostromo",
+      "versionFromFilename": "104",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V105_LEVEL_DESIGN_CODEX.zip",
+      "bytes": 151763200,
+      "family": "mire-nostromo",
+      "versionFromFilename": "105",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V106_COHERENCE_RC1.zip",
+      "bytes": 180485343,
+      "family": "mire-nostromo",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V106_CORRECTIF_ET_APERCU.zip",
+      "bytes": 28090056,
+      "family": "mire-nostromo",
+      "versionFromFilename": "106",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V107_CIRCUITS_DE_BORD.zip",
+      "bytes": 58744975,
+      "family": "mire-nostromo",
+      "versionFromFilename": "107",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V107_TRAVERSEES_RC1.zip",
+      "bytes": 211562468,
+      "family": "mire-nostromo",
+      "versionFromFilename": "107",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V108_SOUS_LA_COQUE.zip",
+      "bytes": 70762875,
+      "family": "mire-nostromo",
+      "versionFromFilename": "108",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V109_LIAISONS_DU_BORD.zip",
+      "bytes": 85593614,
+      "family": "mire-nostromo",
+      "versionFromFilename": "109",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V110_LE_HUITIEME_PASSAGER.zip",
+      "bytes": 112839832,
+      "family": "mire-nostromo",
+      "versionFromFilename": "110",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V111_PAROLES_ET_TRACES.zip",
+      "bytes": 142106442,
+      "family": "mire-nostromo",
+      "versionFromFilename": "111",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V112_SEUILS_DE_SURVIE.zip",
+      "bytes": 162762522,
+      "family": "mire-nostromo",
+      "versionFromFilename": "112",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V113_ECHOS_DE_SERVICE.zip",
+      "bytes": 184170444,
+      "family": "mire-nostromo",
+      "versionFromFilename": "113",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V114_RESERVES_DE_BORD.zip",
+      "bytes": 208235142,
+      "family": "mire-nostromo",
+      "versionFromFilename": "114",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V115_RECOINS_DE_SURVIE.zip",
+      "bytes": 37592245,
+      "family": "mire-nostromo",
+      "versionFromFilename": "115",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V116_ECOUTE_AUX_SEUILS.zip",
+      "bytes": 61226218,
+      "family": "mire-nostromo",
+      "versionFromFilename": "116",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V117_GAINES_DE_CHASSE.zip",
+      "bytes": 89593706,
+      "family": "mire-nostromo",
+      "versionFromFilename": "117",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V118_ANATOMIE_DU_NOSTROMO.zip",
+      "bytes": 127292073,
+      "family": "mire-nostromo",
+      "versionFromFilename": "118",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V99_DEPTH_COMBAT.zip",
+      "bytes": 144120365,
+      "family": "mire-nostromo",
+      "versionFromFilename": "99",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PLAYER_SPRITES_V87_SPEC.zip",
+      "bytes": 37345,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "87",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_CONTINUATION_2026-10-16.zip",
+      "bytes": 17434964,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_PLAN_XENO_TRIALS_V146.zip",
+      "bytes": 1719007,
+      "family": "project-other",
+      "versionFromFilename": "146",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_PROFILS_COMMANDES_2026-10-16.zip",
+      "bytes": 18532378,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_REPRISE_V149.zip",
+      "bytes": 15719099,
+      "family": "project-other",
+      "versionFromFilename": "149",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_XENO_TRIALS_2026-10-16.zip",
+      "bytes": 19221585,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_PR9_XENO_TRIALS_PLAN_V146.zip",
+      "bytes": 2989521,
+      "family": "project-other",
+      "versionFromFilename": "146",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_RIPLEY_NARCISSUS_UPPER_V173.zip",
+      "bytes": 6182047,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "173",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_SPRITES_REVIEW_HEROS_VILAINS_V194_20261031.zip",
+      "bytes": 68138376,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "194.20261031",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_V177_TOPOLOGY_QA.zip",
+      "bytes": 14078,
+      "family": "project-other",
+      "versionFromFilename": "177",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_V178_RIG_CALIBRATION.zip",
+      "bytes": 22069805,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "178",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIENS_TANTALUS_V190_CUMULATIF_RIG_QA.zip",
+      "bytes": 21734780,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": "190",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ATF_Animaux_USS_PACK_CODEX_v1.zip",
+      "bytes": 40333,
+      "family": "project-other",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ATF_MIRE_NOSTROMO_DLC_V88_INSTALLABLE(1).zip",
+      "bytes": 33008,
+      "family": "mire-nostromo",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ATF_MIRE_NOSTROMO_DLC_V88_INSTALLABLE.zip",
+      "bytes": 33008,
+      "family": "mire-nostromo",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ATF_MIRE_NOSTROMO_DLC_V88_PREUVES(1).zip",
+      "bytes": 8657,
+      "family": "mire-nostromo",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ATF_MIRE_NOSTROMO_DLC_V88_PREUVES.zip",
+      "bytes": 8657,
+      "family": "mire-nostromo",
+      "versionFromFilename": "88",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V10_CANDIDAT.zip",
+      "bytes": 26689519,
+      "family": "alien5-lazare",
+      "versionFromFilename": "10",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V1_CANDIDAT.zip",
+      "bytes": 7262597,
+      "family": "alien5-lazare",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V2_CANDIDAT.zip",
+      "bytes": 12332131,
+      "family": "alien5-lazare",
+      "versionFromFilename": "2",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V3_CANDIDAT.zip",
+      "bytes": 19057552,
+      "family": "alien5-lazare",
+      "versionFromFilename": "3",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip",
+      "bytes": 34123255,
+      "family": "alien5-lazare",
+      "versionFromFilename": "4",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V5_CANDIDAT.zip",
+      "bytes": 11589434,
+      "family": "alien5-lazare",
+      "versionFromFilename": "5",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V6_CANDIDAT.zip",
+      "bytes": 9004672,
+      "family": "alien5-lazare",
+      "versionFromFilename": "6",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V7_CANDIDAT.zip",
+      "bytes": 10588930,
+      "family": "alien5-lazare",
+      "versionFromFilename": "7",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V8_CANDIDAT.zip",
+      "bytes": 8515512,
+      "family": "alien5-lazare",
+      "versionFromFilename": "8",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "DLC_ALIEN5_PROJET_LAZARE_V9_CANDIDAT.zip",
+      "bytes": 10684397,
+      "family": "alien5-lazare",
+      "versionFromFilename": "9",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V130_PR7_SOURCES_QA.zip",
+      "bytes": 481505,
+      "family": "project-other",
+      "versionFromFilename": "130",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V132_SOURCES_PATCH_QA.zip",
+      "bytes": 9844585,
+      "family": "project-other",
+      "versionFromFilename": "132",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V133_CUMULATIVE_LOCALE_V132_V133.zip",
+      "bytes": 12023893,
+      "family": "project-other",
+      "versionFromFilename": "133",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V133_PR7_SOURCES_QA.zip",
+      "bytes": 10514695,
+      "family": "project-other",
+      "versionFromFilename": "133",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V134_PR7_SOURCES_QA.zip",
+      "bytes": 12794090,
+      "family": "project-other",
+      "versionFromFilename": "134",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "FRONTIER_FORGE_V135_PR7_SOURCES_QA.zip",
+      "bytes": 13393408,
+      "family": "project-other",
+      "versionFromFilename": "135",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "MIRE_NOSTROMO_V98_HYBRID_STAGING_OPTION_C_SPEC_AND_TECH.zip",
+      "bytes": 39733,
+      "family": "mire-nostromo",
+      "versionFromFilename": "98",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "NOSTROMO_V110_ATLAS_ANIMATIONS.zip",
+      "bytes": 2912398,
+      "family": "mire-nostromo",
+      "versionFromFilename": "110",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "NOSTROMO_V111_ATLAS_ANIMATIONS.zip",
+      "bytes": 3351466,
+      "family": "mire-nostromo",
+      "versionFromFilename": "111",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "Tantalus_Audio_Optionnel_Correctif.zip",
+      "bytes": 18794,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "Tantalus_Flow_Music_144_fiches.zip",
+      "bytes": 1013729,
+      "family": "project-other",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "TANTALUS_XENOBIOLOGIE_ECHELLES_V1_CANDIDAT.zip",
+      "bytes": 139122,
+      "family": "project-other",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "USS_Tantalus_Refuge_Pixel_PATCH_v1.zip",
+      "bytes": 824928,
+      "family": "project-other",
+      "versionFromFilename": "1",
+      "status": "pending-github-presence-and-byte-verification"
+    },
+    {
+      "filename": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar",
+      "bytes": 168791485,
+      "family": "project-artwork-or-rig",
+      "versionFromFilename": null,
+      "status": "pending-github-presence-and-byte-verification"
+    }
+  ]
+}
