@@ -1,4 +1,18 @@
-# Alien: Covenant — bible et production V017
+# Alien: Covenant — continuation V018
+
+La continuation ajoute **un sas latéral orange retenu au catalogue**. La grande porte terminale est conservée séparément comme **candidat documentaire à réviser** : son rapport de silhouette vaut 2,319:1 pour une cible indicative d’environ 2,8:1 (écart −17,17 %) et son graphisme rouge reste à reprendre. La famille de décor n’est pas déclarée terminée.
+
+La production cumulée contient **155 PNG : 81 dans le rendu et 74 au catalogue**, auxquels s’ajoute un candidat hors production. Les 154 originaux précédents et 46 fichiers récupérés restent intacts. Aucun nouveau raccord de porte, déplacement, collision ou changement du moteur n’est introduit. Les deux PNG natifs conservent leurs pixels et leur alpha. **Aucune fidélité 1:1 n’est certifiée.**
+
+- Annexe V018 : [Markdown](BIBLE_COVENANT_V018.md), [HTML avec fonds d’inspection](BIBLE_COVENANT_V018.html) et [JSON avec l’index courant des 155 PNG](BIBLE_COVENANT_V018.json).
+- [Manifeste et prompts](../../assets/openai/sprites/alien-covenant-v018/manifest.json), [provenance](PROVENANCE_V018.json), [contrôles](SPRITES_V018_STATUS.md) et [aperçu du catalogue](qa/v018/catalogue-desktop.png).
+- Les références primaires du sas latéral et de la grande porte sont distinguées ; le plan de Tony Drew concerne l’ouverture terminale, pas le sas circulaire orange.
+
+La bible exhaustive V017 et ses quatre formats sont conservés. L’annexe V018 décrit les changements et les manques encore ouverts ; les comptes des sections historiques ci-dessous gardent le périmètre de leur publication.
+
+---
+
+## Historique conservé — bible et production V017
 
 La bible consolide les productions V015 et V016 puis ajoute **13 nouveaux PNG originaux : huit phases de marche d’Upworth et cinq accessoires de monde**. L’inventaire contient **154 images : 81 admises dans le rendu et 73 au catalogue**.
 

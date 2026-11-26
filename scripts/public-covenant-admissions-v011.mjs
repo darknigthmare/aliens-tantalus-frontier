@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { covenantArchitecturePathAdmissionV018 } from './public-covenant-architecture-v018.mjs';
 import { covenantLocalRecoveryAdmission } from './covenant-local-recovery-20261126.mjs';
 import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011,
@@ -130,6 +131,8 @@ function admittedAssets(built) {
 export function publicCovenantPathAdmissionV011(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.startsWith('/') || path.includes('\\')
     || path.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  const architecture = covenantArchitecturePathAdmissionV018(path, { directory, built });
+  if (architecture !== null) return architecture;
   const recovered = covenantLocalRecoveryAdmission(path, { directory, built });
   if (recovered !== null) return recovered;
   // Intercept the entire V015 tree before the host's general image policy.

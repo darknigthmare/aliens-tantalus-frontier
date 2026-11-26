@@ -1,0 +1,51 @@
+name: Covenant V018 architecture sources
+on:
+  pull_request:
+    paths:
+      - 'assets/openai/sprites/alien-covenant-v018/**'
+      - 'docs/covenant/**'
+      - 'scripts/*covenant*'
+      - '.github/workflows/covenant-v018-architecture.yml'
+permissions:
+  contents: read
+concurrency:
+  group: covenant-v018-architecture-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            docs/covenant
+            scripts
+            dlc/covenant
+            modules/covenant
+            assets/openai/sprites/alien-covenant-v011
+            assets/openai/sprites/alien-covenant-v012
+            assets/openai/sprites/alien-covenant-v013
+            assets/openai/sprites/alien-covenant-v014
+            assets/openai/sprites/alien-covenant-v015
+            assets/openai/sprites/alien-covenant-v016
+            assets/openai/sprites/alien-covenant-v017
+            assets/openai/sprites/alien-covenant-v018
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Check source preservation, exact admission, and candidate separation
+        run: node scripts/verify-covenant-v018.mjs
+      - name: Check historical Covenant continuation and recovery
+        run: |
+          node scripts/verify-covenant-v017-preservation.mjs
+          node scripts/verify-covenant-local-recovery-20261126.mjs
+      - name: Inspect native alpha without editing pixels
+        run: |
+          python3 -m pip install Pillow==11.3.0
+          python3 scripts/verify-covenant-v018-alpha.py
+      - name: Verify continuation document reproducibility
+        run: |
+          python3 scripts/build-covenant-bible-v018.py
+          git diff --exit-code -- docs/covenant/BIBLE_COVENANT_V018.json docs/covenant/BIBLE_COVENANT_V018.md docs/covenant/BIBLE_COVENANT_V018.html

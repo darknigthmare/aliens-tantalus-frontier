@@ -39,6 +39,9 @@ const REVIEWED_COVENANT_PROVENANCE_SHA256_V014 = '1fd31f3a6473e95fddb9e3e4dfc41a
 export const COVENANT_PROVENANCE_V016 = COVENANT_ASSETS_V016 + '/manifest.json';
 export const COVENANT_PROVENANCE_V017 = COVENANT_ASSETS_V017 + '/manifest.json';
 const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
+  // Exact V018 prompts and primary-reference records remain outside all builds.
+  ['assets/openai/sprites/alien-covenant-v018/manifest.json', '071eed8d03b782e5cb5a379cf17229fd9869b2334b865c43a18c9925889962d4'],
+  ['docs/covenant/BIBLE_COVENANT_V018.json', 'a20cc90244d76e6a8c67a6e67a1f24b082cb224caeb1090283a7ae5ef89393ed'],
   // Historical filenames and measured image records are preserved only at
   // these exact reviewed bytes. The source path gate rejects both from builds.
   ['docs/covenant/recovery-20261126/MANIFEST.json', 'ac1c505f0067a77efc3c917ad3207a11ebe243ce26cbaefcd5f10d52de72e41e'],

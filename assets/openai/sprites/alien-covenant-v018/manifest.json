@@ -1,0 +1,375 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.18.0",
+  "date": "2026-11-26",
+  "baselineCommit": "dc9d0a5bb36266ab0baad616644198b856141c61",
+  "documentationPullRequestUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "verified1to1": false,
+  "fidelityPolicy": "Fidélité aux références comme objectif ; adaptation générée, preuve de production et admission dans le jeu restent distinctes. Aucune certification 1:1.",
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "toolCalls": 4,
+    "selectedProductionOriginals": 1,
+    "documentaryCandidates": 1,
+    "excludedAttempts": 2,
+    "nativePngBytesPreserved": true,
+    "oneImagePerAssetOrAttempt": true,
+    "pixelEditingPerformed": false
+  },
+  "coverage": {
+    "historicalProductionPngs": 154,
+    "newProductionPngs": 1,
+    "cumulativeProductionPngs": 155,
+    "runtimePngs": 81,
+    "catalogueOnlyProductionPngs": 74,
+    "documentaryCandidatesOutsideProduction": 1,
+    "historicalRecoveredFiles": 46,
+    "historicalRecoveredImageCandidates": 16,
+    "runtimePromotions": 0,
+    "completedWorldFamilies": 0,
+    "certified1to1Images": 0
+  },
+  "assets": [
+    {
+      "kind": "prop",
+      "category": "architecture",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "nativeAlphaPreserved": true,
+      "resized": false,
+      "retouched": false,
+      "verified1to1": false,
+      "runtimeIntegrated": false,
+      "currentConsumer": null,
+      "roomIds": [
+        "cargo"
+      ],
+      "sourceReferenceIds": [
+        "ACOV-211"
+      ],
+      "missingWorkIds": [
+        "ROOM-cargo-1",
+        "ROOM-cargo-2"
+      ],
+      "scope": "production-set-reconstruction",
+      "promptSavedBeforeGeneration": true,
+      "id": "prop-covenant-terraforming-side-airlock",
+      "title": "Sas latéral orange de la baie — panneau entrouvert observé sur le plateau",
+      "path": "assets/openai/sprites/alien-covenant-v018/prop-covenant-terraforming-side-airlock.png",
+      "width": 1200,
+      "height": 1310,
+      "bytes": 2038760,
+      "sha256": "cc292e5458b1f0f91a0559c232773f736e1a88c49041450fb16641441e787f59",
+      "gitBlobSha": "1723b4e0b47efd469a88f8dcb9514245d720cbba",
+      "alphaQA": {
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 547526,
+        "bboxAlphaGe32": [
+          70,
+          32,
+          1139,
+          1277
+        ],
+        "alphaThreshold": 32,
+        "edgeAlphaMaximum": 1,
+        "edgeAlphaAbove16": 0,
+        "visibleAspectRatio": 0.8586345381526105,
+        "cornersAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "pass": true
+      },
+      "runtimeAdmission": "catalogue-only",
+      "productionSelected": true,
+      "generationPrompt": "Create ONE isolated game sprite of the ORANGE SIDE AIRLOCK of the terraforming bay from Alien: Covenant. The first attached reference is Jacinta Leong's photograph of the actual constructed set: select only the large orange circular doorway at the LEFT FOREGROUND, complete from the top of its rectangular casing to its grey base and attached short metal threshold. Preserve the observed slight three-quarter camera angle, orange slab casing, thick segmented grey circular ring, large brown-grey bolted locking blocks around the ring, close-spaced silver inner ribs, red-orange warning light across the top of the entrance, small dark tilted display on the left jamb, and stacked short grey pipe stubs with orange-dark open ends on each side of the casing. Preserve the visible orange door panel parked at the inner left of the opening, as in this exact photograph; leave the clear central passage genuinely transparent. The second attached reference is Jacinta Leong's production model, used only to clarify the shape of that same side airlock at its left foreground. Do not copy the yellow construction vehicles or the large red terminal bay doors. Keep the photographed orange finish and restrained practical metallic textures; do not turn the model's untextured grey material into the final color. Remove all surrounding hangar walls, foil insulation, ceiling, cables, floor, people, chains, and construction vehicles. Isolate a single complete doorway assembly, do not show a room behind it and do not invent a new passage. Clean detailed cinematic 2.5D prop rendering closely following the physical reference, with neutral light and small confined practical red illumination; no floor shadow outside the object. One subject only, on a portrait canvas, fully visible with generous transparent margins on every edge, true native alpha background and alpha through the actual empty passage. No captions, labels outside the original prop, watermark, diagram, collage, alternate views, or additional assets.",
+      "inputReferenceIds": [
+        "SRC-V018-LEONG-SIDE-SET",
+        "SRC-V018-LEONG-MODEL"
+      ],
+      "state": "partially-open-production-photo",
+      "visualReview": {
+        "status": "selected-catalogue-reference-reconstruction",
+        "matched": [
+          "Carter rectangulaire orange et socle gris",
+          "Cadre circulaire segmenté, verrous périphériques et nervures intérieures",
+          "Quatre embouts tubulaires sur chacun des côtés visibles",
+          "Écran incliné au jambage gauche",
+          "Éclairage rouge en haut et vantail orange visible à gauche",
+          "Seuil métallique et passage central transparent"
+        ],
+        "limits": [
+          "Lecture du petit écran et microtypographie reconstruites, sans concordance caractère par caractère.",
+          "Reliefs, épaisseurs et quelques jonctions interprétés depuis la perspective photographique.",
+          "Aucune métrique de film, collision ou traversée du jeu certifiée."
+        ],
+        "passageProbe": {
+          "pixel": [
+            648,
+            694
+          ],
+          "alpha": 0
+        }
+      },
+      "acceptance": "Original retenu au catalogue pour ses formes et matériaux documentés. Aucun contrat de déplacement ou de collision attaché.",
+      "inputOrder": [
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-SIDE-SET"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MODEL"
+        }
+      ]
+    }
+  ],
+  "documentaryCandidates": [
+    {
+      "kind": "prop",
+      "category": "architecture",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "nativeAlphaPreserved": true,
+      "resized": false,
+      "retouched": false,
+      "verified1to1": false,
+      "runtimeIntegrated": false,
+      "currentConsumer": null,
+      "roomIds": [
+        "cargo"
+      ],
+      "sourceReferenceIds": [
+        "ACOV-211"
+      ],
+      "missingWorkIds": [
+        "ROOM-cargo-1",
+        "ROOM-cargo-2"
+      ],
+      "scope": "production-set-reconstruction",
+      "promptSavedBeforeGeneration": true,
+      "id": "prop-covenant-terraforming-main-doors-closed",
+      "title": "Grande porte terminale fermée — candidat documentaire à réviser",
+      "path": "docs/covenant/v018-candidates/prop-covenant-terraforming-main-doors-closed.png",
+      "width": 2098,
+      "height": 749,
+      "bytes": 1894740,
+      "sha256": "d5b0b101e6a22bd95c6ab4a4722cf250ce6bed3a6e715fc969446e6388e6a9db",
+      "gitBlobSha": "3b468d3e15cd8884510d161eb667b65d29605491",
+      "alphaQA": {
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 623894,
+        "bboxAlphaGe32": [
+          283,
+          39,
+          1809,
+          697
+        ],
+        "alphaThreshold": 32,
+        "edgeAlphaMaximum": 1,
+        "edgeAlphaAbove16": 0,
+        "visibleAspectRatio": 2.3191489361702127,
+        "cornersAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "pass": true
+      },
+      "runtimeAdmission": "documentary-candidate-only",
+      "productionSelected": false,
+      "generationPrompt": "Edit the first attached generated door sprite to correct TWO specific mismatches against the production references. Output ONE corrected isolated closed terraforming-bay terminal door assembly, not a collage. Image 1 is the edit target. Image 2 is Jacinta Leong's set photograph: the grey-and-red terminal doors at the far center are the color/marking reference. Image 3 is Tony Drew's technical drawing: its FRONT ELEVATION at top left is the shape reference. Image 4 is Jacinta Leong's production model showing the same terminal doors at the back. Correction 1: the current cutout is much too wide and low; reconstruct the whole door in the drawing's approximately 2.8:1 visible width-to-height proportions, with its long flat top and bottom and large rounded corners. Do not merely stretch the existing texture. Correction 2: replace the current many repeated right/left arrowheads with the larger red crossed diagonal markings visible on the actual terminal door: mirrored broad red diagonal braces form the observed larger X pattern across grey metal panels, respecting the center seam; directly follow the reference photograph and model, do not invent lettering or symbols. Keep the frontal elevation, thin grey immediate perimeter frame, central vertical closure division, grey metallic panel seams, restrained mechanical fittings and subdued industrial finish. Do not add room walls, floor, people, vehicles, rails, the orange side airlock, window views, text, measurements or labels. Leave closed door leaves fully opaque. Use a landscape canvas with generous transparent margin on every side; preserve genuine native alpha outside the door frame, no cast shadow or background. High-detail cinematic 2.5D game prop, one whole asset.",
+      "inputReferenceIds": [
+        "SRC-V018-LEONG-MAIN-SET",
+        "SRC-V018-DREW-MAIN-PLAN",
+        "SRC-V018-LEONG-MODEL"
+      ],
+      "inputGeneratedAttemptId": "main-door-initial",
+      "state": "closed",
+      "visualReview": {
+        "status": "revision-required",
+        "matched": [
+          "Porte large à deux vantaux, vue frontale",
+          "Métal gris, diagonales rouges et contour arrondi",
+          "Séparation centrale et état fermé sans ouverture visible."
+        ],
+        "limits": [
+          "Contour utile trop haut pour la proportion visée depuis le plan.",
+          "Motif rouge simplifié en un grand croisement ; répartition et panneaux exacts à reprendre.",
+          "Poignées, subdivision des tôles et usure interprétées depuis des vues éloignées.",
+          "Alpha natif mesuré à 253/255 au centre, proche de l’opacité complète mais non maximal ; conservé sans retouche."
+        ],
+        "observedAspectRatio": 2.3191489361702127,
+        "referenceAspectRatioApproximation": 2.8,
+        "aspectRatioDifferencePercentApproximation": -17.17,
+        "ratioBasis": "Estimation visuelle de l’élévation publiée, non une mesure architecturale certifiée.",
+        "closedCenterProbe": {
+          "pixel": [
+            1049,
+            374
+          ],
+          "alpha": 253
+        }
+      },
+      "acceptance": "Candidat conservé pour révision documentaire ; exclu du total de production, du catalogue retenu et du jeu.",
+      "inputOrder": [
+        {
+          "role": "edit-target",
+          "attemptId": "main-door-initial"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MAIN-SET"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-DREW-MAIN-PLAN"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MODEL"
+        }
+      ]
+    }
+  ],
+  "excludedAttempts": [
+    {
+      "id": "main-door-initial",
+      "sha256": "77af0ee139e7b79d3b9950ce46d99c2af33eec585d214eecbebb642dbcc36746",
+      "bytes": 2144844,
+      "width": 2172,
+      "height": 724,
+      "generationPrompt": "Create ONE isolated game sprite of the LARGE CLOSED TERMINAL DOOR ASSEMBLY at the end of the Alien: Covenant terraforming bay. The first attached reference is Jacinta Leong's finished set photograph: use ONLY the broad grey-and-red closed doors at the FAR END CENTER of the hangar. The second attached reference is Tony Drew's production technical drawing of the terraforming bay door opening; use its top-left FRONT ELEVATION and lower-center REAR ELEVATION to preserve the wide rounded-rectangle opening proportions, long straight top and bottom, and large rounded end corners. The third attached reference is Jacinta Leong's production 3D view, which shows the same closed terminal doors behind the vehicles and helps read their red markings. Reconstruct just those closed door leaves and their narrow immediate grey mounting frame in a frontal elevation. Retain the dark weathered grey metal paneling, the center vertical division of the leaves, the observed broad red diagonal mirrored chevron / X markings across the door faces, the structural panel seams and restrained small mechanical fittings. The construction drawing specifies the outline, not the finished surface colors; the photographed red-and-grey door is the color reference. Keep the assembly very wide and low in the same approximate proportions as the drawing; do not make it a tall room door. Do not use the separate orange circular side airlocks as the subject. No surrounding hangar, side personnel doors, rails, floor, wall, vehicles, chains, people, creature, ceiling, or view through the CLOSED door. Detailed cinematic 2.5D architecture prop cutout, neutral lighting, faithful restrained industrial finish. Entire door assembly in a single landscape canvas with generous transparent margins on all edges, genuine native alpha background outside the frame, opaque closed leaves, no ground plane or cast shadow. One asset, one frontal view only, no labels, no dimensions, no watermark, no contact sheet, no diagram and no invented decorative symbols.",
+      "promptSavedBeforeGeneration": true,
+      "nativeAlphaPreserved": true,
+      "visibleAspectRatio": 3.6745454545454543,
+      "reason": "Contour trop bas et répétitions de flèches rouges.",
+      "publishedPng": false,
+      "productionSelected": false,
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "inputOrder": [
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MAIN-SET"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-DREW-MAIN-PLAN"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MODEL"
+        }
+      ]
+    },
+    {
+      "id": "main-door-proportion-retry",
+      "sha256": "2c70e0fd29c99b71ef7857df418886aca54aa9084ea4cdb3dfb3caf19e51cfcf",
+      "bytes": 2247712,
+      "width": 2097,
+      "height": 750,
+      "generationPrompt": "Make a single targeted geometry correction to image 1, the isolated closed terminal door sprite. Its useful door silhouette is currently approximately 2.32 times wider than tall, which is too tall for the production front elevation in image 2. Reconstruct the same door at a useful silhouette ratio of approximately 2.8 width to 1 height: increase its horizontal extent by about twenty percent while keeping the useful height, its thin grey frame, rounded end corners, two central closing leaves, frontal view, grey metal, red diagonal crossed graphics, and subdued lighting. Aim for a visible object about 1850 pixels wide and 660 pixels tall inside a landscape canvas with transparent margins, with no trimming of the frame. Do not add extra red marks, arrows, labels, wall sections or hardware. Use the primary technical drawing (image 2, top-left front elevation) as the control for the wide low shape. Image 3 is the finished bay reference photograph showing this door at the far end; preserve its general grey-red color family. Output only the one corrected complete isolated door, full native alpha outside the frame, opaque closed leaves, no floor, background, cast shadow, dimensions, people, vehicles, contact sheet or watermark.",
+      "promptSavedBeforeGeneration": true,
+      "nativeAlphaPreserved": true,
+      "visibleAspectRatio": 3.4125636672325976,
+      "reason": "Dernière correction encore trop large ; variante écartée.",
+      "publishedPng": false,
+      "productionSelected": false,
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "inputOrder": [
+        {
+          "role": "edit-target",
+          "documentaryCandidateId": "prop-covenant-terraforming-main-doors-closed"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-DREW-MAIN-PLAN"
+        },
+        {
+          "role": "primary-reference",
+          "referenceId": "SRC-V018-LEONG-MAIN-SET"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "SRC-V018-LEONG-SIDE-SET",
+      "file": "JAC_9576.JPG",
+      "sha256": "4beb3676ee178db3b5392e5d614a4791b7c834189b32b26fd397705a1e3a87d1",
+      "bytes": 206939,
+      "width": 1204,
+      "height": 804,
+      "url": "https://images.squarespace-cdn.com/content/v1/5fbb2d7fbbcb4708490b75b1/1606531728804-11IW2NGQOLXZJD3O8XKK/JAC_9576.JPG",
+      "sourcePage": "https://www.jacintaleong.com/film/alien-covenant",
+      "creator": "Jacinta Leong",
+      "sourceType": "primary-production-reference",
+      "visuallyInspected": true,
+      "description": "Photographie du décor construit ; sas orange au premier plan gauche. Elle ne montre pas une élévation cotée de ce sas."
+    },
+    {
+      "id": "SRC-V018-LEONG-MODEL",
+      "file": "3-15_Int-Covenant-Terraforming-Bay_3DSMax_Cam001_JL_160516.jpg",
+      "sha256": "9a4e5cefe60c30dc07501cecf6b23c56ee61ac7a8ef478e74030c4f782944ac8",
+      "bytes": 319388,
+      "width": 2372,
+      "height": 1215,
+      "url": "https://images.squarespace-cdn.com/content/v1/5fbb2d7fbbcb4708490b75b1/1606522968326-A8GQJLETKUSTLOO0Z0VG/3-15_Int-Covenant-Terraforming-Bay_3DSMax_Cam001_JL_160516.jpg",
+      "sourcePage": "https://www.jacintaleong.com/film/alien-covenant",
+      "creator": "Jacinta Leong",
+      "sourceType": "primary-production-reference",
+      "visuallyInspected": true,
+      "description": "Modèle de production : géométrie du sas latéral à gauche et porte terminale fermée au fond. Les matériaux gris et jaunes du modèle ne prouvent pas les couleurs finales."
+    },
+    {
+      "id": "SRC-V018-DREW-MAIN-PLAN",
+      "file": "img315int-covenant-terraforming-baysht004terraforming-bay-door-opening1-50a0reltd160418-2-copy-2115664.jpg",
+      "sha256": "ac6cdb95b7af4a4c3c7b962421171df8caf7b68e9e740a33f381e51702f29ff6",
+      "bytes": 149377,
+      "width": 953,
+      "height": 674,
+      "url": "https://m1.22slides.com/tonydrew/img315int-covenant-terraforming-baysht004terraforming-bay-door-opening1-50a0reltd160418-2-copy-2115664.jpg?f=webp&s=dd80e3b88594a6c495174c5f1dfe5e4d&w=953",
+      "sourcePage": "https://www.tonydrew.com.au/film",
+      "creator": "Tony Drew",
+      "sourceType": "primary-production-reference",
+      "visuallyInspected": true,
+      "description": "Plan de production de la grande ouverture terminale : élévation, plan et sections. La forme générale est documentée ; ce dessin ne prouve ni la surface rouge des vantaux ni le sas circulaire orange."
+    },
+    {
+      "id": "SRC-V018-LEONG-MAIN-SET",
+      "file": "3-15_Int-Covenant-Terraforming-Bay_160601.jpg",
+      "sha256": "2298640bfd00b17290bf56407cea59fce130d6483e17a83dbc2502cb00206a8d",
+      "bytes": 184301,
+      "width": 1024,
+      "height": 563,
+      "url": "https://images.squarespace-cdn.com/content/v1/5fbb2d7fbbcb4708490b75b1/1606531723757-N2EGGTF4IRHZG312DJR7/3-15_Int-Covenant-Terraforming-Bay_160601.jpg",
+      "sourcePage": "https://www.jacintaleong.com/film/alien-covenant",
+      "creator": "Jacinta Leong",
+      "sourceType": "primary-production-reference",
+      "visuallyInspected": true,
+      "description": "Photographie du décor aménagé ; porte terminale fermée gris et rouge au fond. Le petit cadrage ne permet pas de certifier tous les verrous, subdivisions et marquages."
+    }
+  ],
+  "cycles": [],
+  "runtimePromotions": [],
+  "missingWorkDisposition": {
+    "ROOM-cargo-1": "partial-source-production; main-door-candidate-requires-revision; family-still-open",
+    "ROOM-cargo-2": "open; no-geometry-or-runtime-admission",
+    "cand-juggernaut-bay-iris": "unchanged; intermediate-states-2-3-4-still-missing"
+  },
+  "continuationContract": "Préserver le moteur et les seuils existants. Examiner séparément les états des portes et leurs vues avant toute admission. Aucun panneau ne doit masquer un acteur, un accès ou une commande."
+}
