@@ -28,6 +28,9 @@ test('Aliens continues exactly seven main files while preserving all five Fleuve
   assert.deepEqual(verifyAliens1986MainSuccessionV116(), {
     successors: 7, historicalEvidenceTransferred: false,
   });
+  // The native keyboard QA is a reviewed tooling change; the seven host receipts stay unchanged.
+  assert.equal(sha(read('scripts/qa-title-compositions-v163.py')),
+    '83a2cea01f17149d8a512c265604b572dac653c704001903989e66b8c94ecdba', 'Unreviewed native title keyboard QA bytes');
 });
 
 test('the new succession rejects fabricated predecessors and changed source bytes', () => {
