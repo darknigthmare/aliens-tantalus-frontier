@@ -10,9 +10,10 @@
     "sourceCandidates": 11,
     "sourceFilesUnchanged": 646,
     "pngHashesReverifiedAfterRecovery": 39,
-    "runtimeManifestSha256": "7848840707d4bcc89e517afe1221c5e9b45f045815d1ac4fbc76cb9a771aceb4",
-    "adapterSha256": "6d0e96784d30570e4ae7c76efb9667661be994dafe48cfa072c609104762af47",
-    "sourceCandidatesSha256": "6e420e96c59822cc86fc5a72bdf9d57162e553073eb8ffee5471c6da94f69d7e"
+    "runtimeManifestSha256": "77ba5e22f3461d7f7efa48367b7b6b852cf8179a4b0c99a40f09e1e836cae448",
+    "adapterSha256": "31e513c933fdafe2ece997c3f7c786a9999bf25156ce5f380f1cee0bbc5f4156",
+    "sourceCandidatesSha256": "6e420e96c59822cc86fc5a72bdf9d57162e553073eb8ffee5471c6da94f69d7e",
+    "runtimeBytes": 41856790
   },
   "structuralSpatialAudit": {
     "schema": 1,
@@ -57,7 +58,7 @@
     "doorPortalsOnWall": 123
   },
   "priorLocalValidation": {
-    "scope": "Observations du rendu Skia avant interruption ; runtime et PNG récupérés octet pour octet. Les contrôles des fichiers reconstruits figurent séparément dans recoveryValidation.",
+    "scope": "Observations du rendu Skia avant interruption, sur le runtime initial ensuite publié au commit 6ef1eab9. La composition CRT a été corrigée après le premier essai Chromium ; les anciennes captures Skia ne qualifient pas cette correction.",
     "sourceTestsPassed": 536,
     "integrationTestsPassed": 18,
     "hostDlcTestsPassed": 49,
@@ -82,11 +83,11 @@
     "workflow": ".github/workflows/alien-isolation-dlc.yml",
     "integrationScript": "scripts/qa-alien-isolation-integration.py",
     "fidelityScript": "scripts/qa-alien-isolation-fidelity.py",
-    "statusAtDocumentCreation": "pending-ci",
+    "statusAtDocumentCreation": "pending-ci-retest-after-crt-fix",
     "results": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/80/checks",
     "evidenceArtifact": "alien-isolation-browser-evidence",
     "playableArtifact": "alien-isolation-v0.8-fidelity-1.0.0",
-    "note": "Consulter la CI du commit publié. Aucun succès navigateur n’est affirmé par ce document avant son exécution."
+    "note": "Le premier essai Chromium a validé le parcours de 27 contrôles puis échoué au contrôle pixel des 55 bureaux CRT. Le correctif conserve l’égalité stricte et attend une nouvelle exécution."
   },
   "manualReview": [
     "Silhouette, costume et apparence rapprochés des références visuelles inspectées ; aucun portrait n’est certifié pixel pour pixel.",
@@ -149,6 +150,53 @@
     "galleryAssetPathsAndHashesPassed": 39,
     "publicTextAndPathScanPassed": true,
     "browserRunLocally": false,
-    "nativeRendererRerunAfterRecovery": false
+    "nativeRendererRerunAfterRecovery": false,
+    "commit": "6ef1eab9c884d2a072672a631cc4504f7c57549a"
+  },
+  "browserAttempts": [
+    {
+      "runId": 45837482434,
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45837482434",
+      "headSha": "6ef1eab9c884d2a072672a631cc4504f7c57549a",
+      "browserVersion": "159.0.8154.6",
+      "sourceTestsAndHostBuild": "passed",
+      "integrationJourney": {
+        "passed": 27,
+        "failed": 0
+      },
+      "fidelityJourney": {
+        "passedBeforeFailure": 17,
+        "failed": 1,
+        "failure": "Native keyboard, desk, feet and shadow pixels differ for 55 selected CRT terminals",
+        "laterAssertionsExecuted": false,
+        "javascriptErrors": []
+      },
+      "evidenceArtifactId": 15127546840,
+      "evidenceZipSha256": "e9afcfc44ac21f3a8311d68c8a0b6625ddd546543fb8dcd04de4619c9ce39642",
+      "playableArtifactProduced": false
+    }
+  ],
+  "crtCorrectionValidation": {
+    "change": "Draw the complete original SVG once, preserve the lower region at an integer deskY, and clear/clip only the upper CRT region. Do not resample the desk using a fractional source rectangle.",
+    "imagePngsChanged": 0,
+    "originalSourceFilesChanged": 0,
+    "strictPixelEqualityRetained": true,
+    "differentRgbaPixelCountRequired": 0,
+    "newDiagnostics": [
+      "native and replacement canvas dimensions",
+      "first compared row",
+      "compared height",
+      "compared pixel count",
+      "different RGBA pixel count",
+      "fingerprints"
+    ],
+    "javascriptAndPythonSyntaxPassed": true,
+    "integrationTestsPassed": 18,
+    "isolatedRuntimeBuildAndVerificationPassed": true,
+    "runtimeFiles": 32,
+    "runtimePng": 28,
+    "runtimeBytes": 41856790,
+    "sourceInventoryExact": 646,
+    "chromiumRetest": "pending"
   }
 }

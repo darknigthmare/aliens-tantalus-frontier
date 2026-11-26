@@ -177,8 +177,19 @@ RENDERER_FIXTURES = r"""async () => {
         native.width = reference.naturalWidth; native.height = reference.naturalHeight;
         const context = native.getContext('2d'); context.drawImage(reference, 0, 0);
         const y = Math.round(native.height * 166 / 256), height = native.height - y;
-        row.nativeDeskPreserved = fingerprint(context.getImageData(0, y, native.width, height).data)
-          === fingerprint(image.getContext('2d').getImageData(0, y, native.width, height).data);
+        const nativePixels = context.getImageData(0, y, native.width, height).data;
+        const rasterPixels = image.getContext('2d').getImageData(0, y, native.width, height).data;
+        let differingPixels = 0;
+        for (let i = 0; i < nativePixels.length; i += 4) {
+          if (nativePixels[i] !== rasterPixels[i] || nativePixels[i + 1] !== rasterPixels[i + 1]
+            || nativePixels[i + 2] !== rasterPixels[i + 2] || nativePixels[i + 3] !== rasterPixels[i + 3]) differingPixels++;
+        }
+        row.nativeDeskComparison = {width:native.width, height:native.height,
+          rasterWidth:image.width, rasterHeight:image.height, startY:y, comparedRows:height,
+          comparedPixels:nativePixels.length / 4, differingPixels,
+          nativeFingerprint:fingerprint(nativePixels), rasterFingerprint:fingerprint(rasterPixels)};
+        row.nativeDeskPreserved = native.width === image.width && native.height === image.height
+          && differingPixels === 0;
       }
       props.push(row);
     }
@@ -386,8 +397,11 @@ def main():
             check('Tous les vrais IDs d’objets respectent leurs images autorisées et les exclusions',
                   all(row['drawn'] == row['allowed'] and row['originalBankRestored'] for row in fixture['props'])
                   and fixture['bankRestored'], fixture['props'])
+            terminals = [row for row in fixture['props'] if row['kind'] == 'terminal' and row['allowed']]
             check('Les CRT Sevastolink conservent les pixels des claviers, bureaux, pieds et ombres d’origine',
-                  all(row.get('nativeDeskPreserved') for row in fixture['props'] if row['kind'] == 'terminal' and row['allowed']))
+                  bool(terminals) and all(row.get('nativeDeskPreserved')
+                      and row['nativeDeskComparison']['differingPixels'] == 0 for row in terminals),
+                  [{'id':row['id'], **row.get('nativeDeskComparison', {})} for row in terminals])
             check('Les objets réellement lancés conservent trajectoire, rotation, ombre, amorce et état natifs',
                   len(fixture['projectiles']) == 6 and all(row['accepted'] and row['pngDraws'] == 1
                     and row['transformsPreserved'] and row['stateUnchanged'] and row['rectRestored'] for row in fixture['projectiles']), fixture['projectiles'])

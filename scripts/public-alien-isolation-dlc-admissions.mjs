@@ -36,7 +36,7 @@ const validPath = path => typeof path === 'string' && path.length > 0
 
 
 export const ALIEN_ISOLATION_RUNTIME_MANIFEST = ALIEN_ISOLATION_RUNTIME_ROOT + '/fidelity/manifest.json';
-export const ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256 = '7848840707d4bcc89e517afe1221c5e9b45f045815d1ac4fbc76cb9a771aceb4';
+export const ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256 = '77ba5e22f3461d7f7efa48367b7b6b852cf8179a4b0c99a40f09e1e836cae448';
 export const ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT = 'docs/development/alien-isolation-fidelity';
 export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST = ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT + '/source-assets.json';
 export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST_SHA256 = '6e420e96c59822cc86fc5a72bdf9d57162e553073eb8ffee5471c6da94f69d7e';

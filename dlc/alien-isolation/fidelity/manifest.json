@@ -19,8 +19,8 @@
     },
     {
       "path": "fidelity/adapter.js",
-      "bytes": 24882,
-      "sha256": "6d0e96784d30570e4ae7c76efb9667661be994dafe48cfa072c609104762af47",
+      "bytes": 25096,
+      "sha256": "31e513c933fdafe2ece997c3f7c786a9999bf25156ce5f380f1cee0bbc5f4156",
       "kind": "adapter"
     },
     {

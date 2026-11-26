@@ -68,3 +68,12 @@ Le scénario navigateur a ensuite passé la compilation syntaxique Python. Ses p
 La base cumulative a avancé vers `c7a0339f86e1de0c2209800a81506cddbc71d804` pendant la publication. La jonction conserve les documents de cette base, les deux blocs de reçus Bibles et le bloc Isolation original à l’octet. Les deux prédécesseurs exacts du vérificateur public convergent vers `16e8bf01e569c4540391dc269604404505248406fd1240917d6e75c165454ccd` ; les empreintes inconnues restent refusées.
 
 Les fichiers combinés ont repassé **536 tests du DLC, 10 tests d’intégration et 43 tests des extensions, soit 589 tests ciblés réussis**. Le contrôle d’intégrité confirme toujours 646 fichiers et 107 266 357 octets originaux. La revue indépendante de la jonction n’a identifié aucun blocage. Ces résultats proviennent d’un checkout local ciblé ; le build complet de l’hôte et le parcours navigateur restent à exécuter par la CI de la PR.
+
+
+## Correctif de composition Sevastolink après le premier parcours Chromium
+
+Le [run 45837482434](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45837482434), sur le commit `6ef1eab9c884d2a072672a631cc4504f7c57549a`, a réussi les tests source et d’intégration, le build complet et la vérification de distribution. Le parcours navigateur expédition / sauvegarde / reprise / retour a passé **27 contrôles**. Le contrôle visuel a passé **17 contrôles**, puis a relevé un écart de pixels sur les supports des **55 terminaux Sevastolink** ; les assertions suivantes n’ont pas été exécutées. L’archive jouable n’a donc pas été produite ; les preuves navigateur ont été publiées.
+
+Le correctif dessine le SVG de référence entier, conserve la partie inférieure à partir d’une coordonnée entière et limite l’effacement ainsi que le nouveau CRT à la zone supérieure. Il supprime le recadrage fractionnaire du support. Le test reste strict : mêmes dimensions et **zéro pixel RGBA différent** dans la zone conservée ; les dimensions et les écarts sont maintenant consignés par terminal.
+
+Les **39 PNG** et les **646 fichiers source** restent inchangés. Le runtime compte toujours **32 fichiers**, désormais **41 856 790 octets**. Le nouveau manifeste est épinglé par SHA-256 `77ba5e22f3461d7f7efa48367b7b6b852cf8179a4b0c99a40f09e1e836cae448`. Les **18 tests d’intégration**, le build isolé et la vérification de ses octets ont repassé. La nouvelle exécution Chromium est nécessaire pour confirmer ce correctif ; les 25 contrôles Skia antérieurs ne sont pas présentés comme cette preuve.

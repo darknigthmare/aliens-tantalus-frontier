@@ -159,9 +159,13 @@ function normalizeDeskTerminal(source, reference, documentRef) {
   canvas.height = reference.naturalHeight || reference.height;
   const c = canvas.getContext('2d'), src = imageBounds(source, documentRef, true);
   const scaleX = canvas.width / 256, scaleY = canvas.height / 256;
-  c.drawImage(reference, 0, 166 * scaleY, canvas.width, 90 * scaleY,
-    0, 166 * scaleY, canvas.width, 90 * scaleY);
-  c.save(); c.scale(scaleX, scaleY);
+  // Rasterize the complete SVG once, then preserve its lower integer rows.
+  // Cropping an SVG at a fractional source coordinate can resample the desk.
+  const deskY = Math.round(166 * scaleY);
+  c.drawImage(reference, 0, 0);
+  c.clearRect(0, 0, canvas.width, deskY);
+  c.save(); c.beginPath(); c.rect(0, 0, canvas.width, deskY); c.clip();
+  c.scale(scaleX, scaleY);
   const scale = Math.min(124 / src.width, 112 / src.height);
   const width = src.width * scale, height = src.height * scale;
   c.drawImage(source, src.x, src.y, src.width, src.height, 118 - width / 2, 166 - height, width, height);
