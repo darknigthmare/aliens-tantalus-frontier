@@ -3,6 +3,12 @@ import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
+  'scripts/package-covenant-sprites-v016.py',
+  'scripts/qa-covenant-catalogue-v016.py',
+  'docs/covenant/PROVENANCE_V016.json',
+  'docs/covenant/SPRITES_V016_STATUS.md',
+  'docs/covenant/BIBLE_COVENANT_V016.xlsx',
+
   'scripts/build-covenant-bible-v016.py',
   'scripts/build-covenant-bible-v016.mjs',
   'scripts/verify-covenant-v016-recovery.mjs',

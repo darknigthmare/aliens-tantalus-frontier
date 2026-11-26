@@ -95,8 +95,8 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: |
-          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/package-covenant-sprites-v014.py --output "$RUNNER_TEMP/covenant-v014-pack" 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/package-v014.log"
-          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-catalogue-v014.py --catalogue "$RUNNER_TEMP/covenant-v014-pack/ALIEN_COVENANT_SPRITES_V0.14/index.html" --output "$RUNNER_TEMP/covenant-v011-evidence/catalogue"
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/package-covenant-sprites-v016.py --output "$RUNNER_TEMP/covenant-v016-pack" 2>&1 | tee "$RUNNER_TEMP/covenant-v011-evidence/package-v016.log"
+          "$RUNNER_TEMP/covenant-v011-tools/bin/python" -B scripts/qa-covenant-catalogue-v016.py --catalogue "$RUNNER_TEMP/covenant-v016-pack/ALIEN_COVENANT_SPRITES_V0.16/index.html" --output "$RUNNER_TEMP/covenant-v011-evidence/catalogue"
       - name: Preserve logs, reached-scene screenshots and declared fixture captures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

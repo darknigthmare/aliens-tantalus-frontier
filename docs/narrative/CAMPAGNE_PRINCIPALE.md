@@ -5247,3 +5247,10 @@ Le suivi détaillé du DLC est regroupé dans la [bible Covenant V0.14](../coven
 
 La consolidation parallèle de PR68 reste consultable dans son [index des DLC épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md) et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md). Ses comptes datés conservent leur version ; l’annexe V0.14 les rapproche des sources effectivement récupérées et du suivi courant, sans modifier cette branche. La production d’une image et les résultats techniques ne certifient pas la fidélité 1:1.
 
+
+
+## Continuation de production — DLC Alien: Covenant V0.16
+
+La [bible détaillée V016](../covenant/BIBLE_COVENANT_V016.md), sa [lecture HTML](../covenant/BIBLE_COVENANT_V016.html), son [classeur Excel](../covenant/BIBLE_COVENANT_V016.xlsx) et ses [données JSON](../covenant/BIBLE_COVENANT_V016.json) prolongent l’annexe historique. Elles ajoutent 257 contrats de production pour les personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes, en conservant les 315 références et les identifiants du jeu.
+
+Le lot apporte 16 PNG : 119 cumulés, 72 admissions runtime conservées et 47 images de catalogue. Les cinq poses de David restent une séquence incomplète de catalogue ; les cinq cycles antérieurs sont inchangés. Les images ne certifient pas une fidélité 1:1. Les manques, refus et limites de preuve restent explicites dans le [suivi V016](../covenant/SPRITES_V016_STATUS.md) et la [provenance](../covenant/PROVENANCE_V016.json).

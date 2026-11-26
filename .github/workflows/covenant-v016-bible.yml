@@ -36,10 +36,10 @@ jobs:
         run: node --test scripts/verify-covenant-v016-recovery.mjs
       - name: Generate the detailed reference bible
         run: python3 scripts/build-covenant-bible-v016.py --baseline docs/covenant/BIBLE_COVENANT_V014.json --tables-out "${RUNNER_TEMP}/covenant-v016-tables.json"
-      - name: Validate generated documents and emit recoverable text
+      - name: Validate generated documents and reproducibility
         run: |
           python3 - <<'PY'
-          import base64, hashlib, json
+          import hashlib, json
           from pathlib import Path
           root=Path('docs/covenant')
           d=json.loads((root/'BIBLE_COVENANT_V016.json').read_text())
@@ -55,11 +55,9 @@ jobs:
               path=root/('BIBLE_COVENANT_V016.'+ext)
               raw=path.read_bytes()
               print('DOCUMENT_SHA256 '+path.name+' '+hashlib.sha256(raw).hexdigest()+' '+str(len(raw)))
-              encoded=base64.b64encode(raw).decode()
-              for index in range(0,len(encoded),40000):
-                  print('BIBLE_BYTES '+path.name+' '+str(index//40000)+' '+encoded[index:index+40000])
           print('BIBLE_VALIDATED '+json.dumps(d['summary']))
           PY
+          git diff --exit-code -- docs/covenant/BIBLE_COVENANT_V016.json docs/covenant/BIBLE_COVENANT_V016.md docs/covenant/BIBLE_COVENANT_V016.html
       - name: Preserve generated bible and original image paths
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

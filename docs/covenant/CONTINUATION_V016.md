@@ -1,6 +1,8 @@
-# Covenant V016 — production, bible et reprise vérifiable
+# Covenant V016 — historique de reprise
 
-## État publié
+La bible V016 a ensuite été régénérée dans un nouvel environnement : 257 contrats, 315 références, 119 PNG / 72 runtime / 47 catalogue. Le [suivi courant](SPRITES_V016_STATUS.md), la [bible](BIBLE_COVENANT_V016.md) et la [provenance](PROVENANCE_V016.json) portent les résultats à jour. Les notes ci-dessous décrivent le point de secours antérieur et ne remplacent pas cet état courant.
+
+## Point de reprise initial — état conservé
 
 Cette continuation ajoute 16 PNG originaux, conservés indépendamment de la panne de l’environnement de travail. Les 103 PNG V011–V014 restent inchangés. Les nouvelles images sont toutes au catalogue dans cette branche : **119 images, 72 admissions runtime et 47 images de catalogue**. Les cinq cycles complets et leurs 40 phases restent ceux de V014.
 

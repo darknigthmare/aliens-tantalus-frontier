@@ -1,57 +1,22 @@
-# Alien: Covenant — bible et production V0.14
+# Alien: Covenant — bible et production V0.16
 
-## Continuation V016 en cours
+## Suivi courant
 
-Le lot complémentaire conserve **16 nouvelles images originales**. Tant que la reprise de validation n’est pas terminée, elles restent au catalogue : **119 images cumulées, 72 admissions runtime conservées et 47 images de catalogue**. Le raccord local prévu pour le rocher de berge n’est pas publié dans cette branche.
+La [bible détaillée V0.16](BIBLE_COVENANT_V016.md), son [inventaire JSON](BIBLE_COVENANT_V016.json), sa [lecture HTML](BIBLE_COVENANT_V016.html) et son [classeur Excel](BIBLE_COVENANT_V016.xlsx) relient les huit domaines demandés aux références et aux consommateurs réels du moteur.
 
-Le [point de reprise V016](CONTINUATION_V016.md), le [manifeste](../../assets/openai/sprites/alien-covenant-v016/manifest.json) et les reçus de récupération décrivent les fichiers réellement sauvegardés. Le générateur de bible V016 enrichit les huit catégories demandées ; ses sorties doivent être vérifiées avant de remplacer les documents courants ci-dessous.
+**257 contrats de production** détaillent personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes. Le registre conserve 315 références, 23 profils, 57 entrées spatiales, 67 connexions, 134 seuils, 7 familles d’armes, 126 familles de props et 630 occurrences, 16 terrains et 3 planètes. Les identifiants historiques sont conservés ; les vues documentaires se recoupent et ne s’additionnent pas en objets uniques.
 
-## Suivi courant V014
+La continuation ajoute **16 PNG**, soit **119 originaux cumulés : 72 admis au rendu et 47 au catalogue**. Les cinq cycles complets et leurs 40 phases restent inchangés. Les cinq poses de David sont des images de catalogue, sans nouveau cycle activé. Les autres nouveautés sont cinq accessoires de production, quatre terrains et deux vues du rover Audi.
 
-La [bible détaillée V0.14](BIBLE_COVENANT_V014.md) et son
-[inventaire structuré](BIBLE_COVENANT_V014.json) réunissent les manques en
-personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et
-planète. Les références et les consommateurs réels du moteur déterminent
-la portée de chaque entrée. Les archives non récupérées et les éléments
-encore sans comparaison visuelle restent signalés.
+Le [manifeste V016](../../assets/openai/sprites/alien-covenant-v016/manifest.json), le [suivi de livraison](SPRITES_V016_STATUS.md) et la [provenance](PROVENANCE_V016.json) distinguent ce qui a été documenté, produit et vérifié. Les 16 nouveautés restent au catalogue ; un emplacement envisagé ne constitue pas une admission runtime.
 
-La même bible est disponible en [lecture HTML](BIBLE_COVENANT_V014.html)
-et en [classeur Excel](BIBLE_COVENANT_V014.xlsx).
+Aucune fidélité 1:1 n’est certifiée. Les références inspectées, parties reconstruites et manques sont conservés dans les fiches. Les refus antérieurs de génération ne sont pas relancés. Après la panne de l’environnement, toutes les images ont été récupérées ; douze prompts exacts sur seize ont pu être conservés. Les quatre autres sont explicitement marqués non récupérés.
 
-La production V0.14 cumule **103 PNG originaux : 72 admis au rendu et
-31 au catalogue**, avec cinq cycles de huit phases. Le
-[manifeste V0.14](../../assets/openai/sprites/alien-covenant-v014/manifest.json)
-ajoute 18 images aux 85 originaux conservés. Le
-[suivi de cette passe](SPRITES_V014_STATUS.md) et sa
-[provenance](PROVENANCE_V014.json) précisent les sources et limites.
+## Historique et rattachement
 
-Les nouveaux raccords de jeu sont la marche de Walter, limitée à sa
-présence `walter-cryo` dans `cryo` lorsque son déplacement est réellement
-observé, et le lac comme ciel distant de `landing`, avant les géométries
-natives. Les neuf autres images V0.14 restent au catalogue. La politique
-opaque concerne quatre images du monde ; les 99 autres PNG conservent
-un fond transparent.
+La [bible principale](../narrative/CAMPAGNE_PRINCIPALE.md) renvoie à cette annexe. Le [suivi V014](SPRITES_V014_STATUS.md) conserve son périmètre de 103 PNG, 72 admissions et cinq cycles. Les fichiers V011–V014 gardent leurs octets. Cette continuation n’intègre pas un éventuel lot V015 d’une autre branche.
 
-Le point de reprise publié est V0.13 : **85 PNG originaux, 63 admis au rendu,
-22 au catalogue et quatre cycles de marche jouables**. Le
-[suivi V0.13](SPRITES_V013_STATUS.md) et le
-[manifeste de ce lot](../../assets/openai/sprites/alien-covenant-v013/manifest.json)
-conservent les résultats et limites de cette version. Les 85 originaux
-restent immuables. Les images V0.14 disposent de leur propre provenance
-et de leur admission explicite ; leur présence dans la
-bible ne prouve pas un affichage en jeu.
-
-La [bible principale des campagnes](../narrative/CAMPAGNE_PRINCIPALE.md)
-renvoie à cette annexe. La consolidation parallèle de PR68 conserve son
-[index épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md)
-et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md).
-Leurs comptes datés gardent leur périmètre d’origine.
-
-La version source du moteur reste V0.10.0. Les règles, les collisions,
-les liaisons, les identités de scène et le format de sauvegarde sont
-conservés. Les rendus procéduraux restent disponibles pour les états
-sans images validées. La fidélité 1:1 demeure un objectif de comparaison,
-pas une certification déduite de la génération ou des tests.
+La [PR 79](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79) complète la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71). La [consolidation de PR68](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md) garde son état historique épinglé. La simulation V0.10.0, les sauvegardes, collisions et connexions ne sont pas modifiées.
 
 ---
 
