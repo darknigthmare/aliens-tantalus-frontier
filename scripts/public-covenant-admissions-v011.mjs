@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
-  COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011 } from './build-covenant-v011.mjs';
+  COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011,
+  COVENANT_SOURCE_ONLY_ASSETS_V015, COVENANT_SOURCE_ONLY_PROVENANCE_V015 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
   ...COVENANT_RUNTIME_FILES_V011.map(name => COVENANT_SOURCE_V011 + '/' + name),
@@ -27,17 +28,45 @@ const SOURCE_FILES = new Set([
   'docs/covenant/PROVENANCE_V014.json', 'docs/covenant/SPRITES_V014_STATUS.md',
   'docs/covenant/BIBLE_COVENANT_V014.md', 'docs/covenant/BIBLE_COVENANT_V014.json',
   'docs/covenant/BIBLE_COVENANT_V014.html', 'docs/covenant/BIBLE_COVENANT_V014.xlsx',
+  'docs/covenant/PROVENANCE_V015.json', 'docs/covenant/SPRITES_V015_STATUS.md',
+  'docs/covenant/BIBLE_COVENANT_V015.md', 'docs/covenant/BIBLE_COVENANT_V015.json',
+  'docs/covenant/BIBLE_COVENANT_V015.html',
   '.github/workflows/covenant-v011.yml'
 ]);
 const SOURCE_DIRS = new Set([...SOURCE_FILES].flatMap(file => {
   const parts = file.split('/');
   return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'));
 }));
+// Only these 22 recovered originals are part of the V015 preservation release.
+const SOURCE_ONLY_PNG_PATHS_V015 = new Set([
+  'ricks-walk-01',
+  'ricks-walk-02',
+  'ricks-walk-03',
+  'ricks-walk-04',
+  'ricks-walk-05',
+  'ricks-walk-06',
+  'ricks-walk-07',
+  'ricks-walk-08',
+  'oram-walk-01',
+  'oram-walk-02',
+  'oram-walk-03',
+  'oram-walk-04',
+  'oram-walk-05',
+  'oram-walk-06',
+  'oram-walk-07',
+  'oram-walk-08',
+  'prop-seat-covenant-bridge',
+  'prop-seat-lander',
+  'prop-holotable-covenant-bridge',
+  'prop-medbay-table',
+  'prop-console-covenant-bridge',
+  'prop-console-lander-main'
+].map(id => COVENANT_SOURCE_ONLY_ASSETS_V015 + '/' + id + '.png'));
 const cache = new Map();
 
 function admittedAssets(built) {
   const manifests = built ? [COVENANT_MANIFEST_V011]
-    : COVENANT_ASSET_ROOTS.map(base => base + '/manifest.json');
+    : [...COVENANT_ASSET_ROOTS.map(base => base + '/manifest.json'), COVENANT_SOURCE_ONLY_PROVENANCE_V015];
   const assets = new Set();
   for (const manifestPath of manifests) {
     const url = new URL('../' + manifestPath, import.meta.url);
@@ -72,6 +101,13 @@ function admittedAssets(built) {
 export function publicCovenantPathAdmissionV011(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.startsWith('/') || path.includes('\\')
     || path.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  // Intercept the entire V015 tree before the host's general image policy.
+  // Its reviewed originals are archived in source; none may enter a built release.
+  if (path === COVENANT_SOURCE_ONLY_ASSETS_V015) return !built && directory;
+  if (path.startsWith(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/')) {
+    return !built && !directory && (path === COVENANT_SOURCE_ONLY_PROVENANCE_V015
+      || SOURCE_ONLY_PNG_PATHS_V015.has(path) && admittedAssets(false).has(path));
+  }
   if (path === COVENANT_PUBLIC_V011 || COVENANT_ASSET_ROOTS.includes(path)) return directory;
   if (path.startsWith(COVENANT_PUBLIC_V011 + '/')) {
     return !directory && [COVENANT_PUBLIC_V011 + '/index.html', COVENANT_MANIFEST_V011].includes(path);

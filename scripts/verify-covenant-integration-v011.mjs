@@ -11,6 +11,7 @@ import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admi
 import { buildCovenantDlcV011, verifyCovenantBundleV011, covenantManifestV011,
   COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012,
   COVENANT_PROVENANCE_V013, COVENANT_PROVENANCE_V014,
+  COVENANT_SOURCE_ONLY_ASSETS_V015, COVENANT_SOURCE_ONLY_PROVENANCE_V015,
   COVENANT_ASSET_ROOTS, covenantSourceMetadataPathV011, reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -150,6 +151,8 @@ test('standalone build contains only the admitted page, runtime manifest and ori
         entries.map(row => row.id + '.png').sort());
       else await assert.rejects(readdir(join(out, base)), error => error.code === 'ENOENT');
     }
+    await assert.rejects(readdir(join(out, COVENANT_SOURCE_ONLY_ASSETS_V015)), error => error.code === 'ENOENT',
+      'Source-only V015 originals must not be copied into a standalone build');
     assert.equal((await readdir(out)).includes('modules'), false);
     assert.equal((await readdir(out)).includes('docs'), false);
     assert.equal((await readdir(out)).includes('scripts'), false);
@@ -337,4 +340,81 @@ test('V014 extends rendering with only the actual unarmed cryo Walter and the la
   for (const room of data.rooms) {
     assert.equal(!!compiled.resolve('background', 'landing', 'idle', room.id), room.id === 'landing');
   }
+});
+
+
+test('V015 preservation keeps exactly 22 recovered original PNGs in source and no V015 path in distribution', async () => {
+  const path = COVENANT_SOURCE_ONLY_PROVENANCE_V015;
+  const bytes = await readFile(join(root, path));
+  assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true);
+  const source = JSON.parse(bytes.toString('utf8'));
+  assert.equal(source.schemaVersion, 1);
+  assert.equal(source.version, '0.15.0');
+  const expectedIds = [
+    ...['ricks', 'oram'].flatMap(key => Array.from({ length: 8 }, (_, index) => key + '-walk-' + String(index + 1).padStart(2, '0'))),
+    'prop-seat-covenant-bridge', 'prop-seat-lander', 'prop-holotable-covenant-bridge',
+    'prop-medbay-table', 'prop-console-covenant-bridge', 'prop-console-lander-main'
+  ];
+  assert.equal(source.assets.length, 22);
+  assert.deepEqual(source.cycles, [], 'No V015 animation cycle is admitted into the served runtime');
+  assert.deepEqual(source.catalogueCycles.map(row => row.id).sort(), ['oram-walk', 'ricks-walk']);
+  for (const cycle of source.catalogueCycles) {
+    assert.equal(cycle.consumer, 'catalogue-only');
+    assert.equal(cycle.runtimeIntegrated, false);
+    assert.deepEqual(cycle.frames,
+      Array.from({ length: 8 }, (_, index) => cycle.id + '-' + String(index + 1).padStart(2, '0')));
+  }
+  assert.deepEqual(source.assets.map(row => row.id).sort(), expectedIds.sort());
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015, { directory: true }), true);
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015, { directory: true, built: true }), false);
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/unknown.png'), false);
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/unknown.png', { built: true }), false);
+  for (const id of ['walter-walk-01', 'daniels-walk-01']) {
+    assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/' + id + '.png'), false);
+    assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/' + id + '.png', { built: true }), false);
+  }
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/nested', { directory: true }), false);
+  assert.equal(admit(COVENANT_SOURCE_ONLY_ASSETS_V015 + '/../outside.png'), false);
+  assert.equal(admit(path, { built: false }), true);
+  assert.equal(admit(path, { built: true }), false);
+  for (const row of source.assets) {
+    assert.equal(row.path, COVENANT_SOURCE_ONLY_ASSETS_V015 + '/' + row.id + '.png');
+    assert.equal(row.verified1to1, false);
+    assert.equal(row.runtimeAdmission, 'catalogue-only');
+    const original = await readFile(join(root, row.path));
+    assert.equal(original.length, row.bytes, 'Changed source-only size: ' + row.id);
+    assert.equal(digest(original), row.sha256, 'Changed source-only bytes: ' + row.id);
+    assert.equal(original.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', 'Not PNG: ' + row.id);
+    assert.equal(original.readUInt32BE(16), row.width, 'Changed native width: ' + row.id);
+    assert.equal(original.readUInt32BE(20), row.height, 'Changed native height: ' + row.id);
+    assert.equal(admit(row.path, { built: false }), true);
+    assert.equal(admit(row.path, { built: true }), false);
+  }
+  const { manifest, compiled } = await covenantManifestV011(root);
+  assert.equal(manifest.release, '0.14.0', 'Source preservation must not claim runtime integration');
+  assert.equal(compiled.entries.length, 72);
+  assert.equal(compiled.cycles.length, 5);
+  assert.equal(compiled.entries.some(row => row.path.startsWith('/' + COVENANT_SOURCE_ONLY_ASSETS_V015 + '/')), false);
+  assert.equal(COVENANT_ASSET_ROOTS.includes(COVENANT_SOURCE_ONLY_ASSETS_V015), false);
+});
+
+test('V015 source texts require exact reviewed bytes and stay outside the built runtime', async () => {
+  for (const path of [COVENANT_SOURCE_ONLY_PROVENANCE_V015,
+    'docs/covenant/BIBLE_COVENANT_V015.json', 'docs/covenant/BIBLE_COVENANT_V015.md',
+    'docs/covenant/BIBLE_COVENANT_V015.html']) {
+    const bytes = await readFile(join(root, path));
+    assert.equal(covenantSourceMetadataPathV011(path), true);
+    assert.equal(admit(path, { built: false }), true);
+    assert.equal(admit(path, { built: true }), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from('\n')])), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(COVENANT_PROVENANCE_V014, bytes), false);
+  }
+  for (const path of ['docs/covenant/PROVENANCE_V015.json', 'docs/covenant/SPRITES_V015_STATUS.md']) {
+    assert.equal(admit(path, { built: false }), true);
+    assert.equal(admit(path, { built: true }), false);
+  }
+  assert.equal(admit('docs/covenant/BIBLE_COVENANT_V015.xlsx', { built: false }), false,
+    'The unavailable workbook is not part of this preservation release');
 });

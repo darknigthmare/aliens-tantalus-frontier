@@ -12,6 +12,9 @@ export const COVENANT_ASSETS_V012 = 'assets/openai/sprites/alien-covenant-v012';
 export const COVENANT_ASSETS_V013 = 'assets/openai/sprites/alien-covenant-v013';
 export const COVENANT_ASSETS_V014 = 'assets/openai/sprites/alien-covenant-v014';
 export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013, COVENANT_ASSETS_V014]);
+// V015 is preserved as source material only. Runtime roots and the served V014 bundle remain unchanged.
+export const COVENANT_SOURCE_ONLY_ASSETS_V015 = 'assets/openai/sprites/alien-covenant-v015';
+export const COVENANT_SOURCE_ONLY_PROVENANCE_V015 = COVENANT_SOURCE_ONLY_ASSETS_V015 + '/manifest.json';
 export const COVENANT_MANIFEST_V011 = COVENANT_PUBLIC_V011 + '/sprites-v011.json';
 export const COVENANT_RUNTIME_FILES_V011 = Object.freeze([
   'index.html', 'style.css', 'content.js', 'ship-systems.js', 'maintenance.js',
@@ -36,6 +39,11 @@ const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
   [COVENANT_PROVENANCE_V012, REVIEWED_COVENANT_PROVENANCE_SHA256_V012],
   [COVENANT_PROVENANCE_V013, REVIEWED_COVENANT_PROVENANCE_SHA256_V013],
   [COVENANT_PROVENANCE_V014, REVIEWED_COVENANT_PROVENANCE_SHA256_V014],
+  // Exact source-only preservation; this does not admit V015 into the runtime.
+  [COVENANT_SOURCE_ONLY_PROVENANCE_V015, '0b6679217b73a5c07c43e7384ada3a31f080bbb33d618f61c74331a46c9ddb62'],
+  ['docs/covenant/BIBLE_COVENANT_V015.json', '1fa0e0a235148347252eb6d94f80086705bf614f75de6cfc7d3f6ecd3a2a47a1'],
+  ['docs/covenant/BIBLE_COVENANT_V015.md', '15dedfd844560f2084a95ecdcd2293ee4cfa6cb17ca87450e61e8cb17732e938'],
+  ['docs/covenant/BIBLE_COVENANT_V015.html', '6733e8a929bb7fc513bcc4690118592aa275eb59a86f03efeab7f8a983ee4f1e'],
   // These source-only bible documents retain public reference URL segments and
   // reviewed generation provenance. The Python sanitizer contains a generic
   // local-path prefix literal. Each exact reviewed file is pinned independently;

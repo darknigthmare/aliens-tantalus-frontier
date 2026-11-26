@@ -5247,3 +5247,27 @@ Le suivi détaillé du DLC est regroupé dans la [bible Covenant V0.14](../coven
 
 La consolidation parallèle de PR68 reste consultable dans son [index des DLC épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md) et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md). Ses comptes datés conservent leur version ; l’annexe V0.14 les rapproche des sources effectivement récupérées et du suivi courant, sans modifier cette branche. La production d’une image et les résultats techniques ne certifient pas la fidélité 1:1.
 
+
+## Covenant — continuation V0.15 : sprites récupérés et bible détaillée
+
+Mise à jour du 26 novembre 2026. Cette annexe poursuit l’inventaire Covenant V0.14 et conserve ses données historiques.
+
+La continuation ajoute **22 PNG originaux** : huit phases de marche de Ricks, huit d’Oram et six équipements (consoles du Covenant et du Lander, leurs deux sièges, table centrale du pont et table médicale avec colonne). Les originaux ont été récupérés et leurs empreintes vérifiées après l’incident de l’environnement. Le total atteint **125 PNG dans les sources**, dont **72 utilisés par le runtime V0.14** et **53 hors runtime**.
+
+Le jeu conserve **cinq cycles et 40 phases intégrées**. Les deux nouvelles séries, soit seize phases, sont au catalogue documentaire ; elles n’ajoutent pas de cycle au rendu. Leurs planches finales ont été revues, mais les pivots, la cadence et l’animation continue restent à valider. Les nouveaux équipements conservent leurs limites de rapprochement avec les objets natifs.
+
+La bible V015 reprend les **315 références** et détaille les personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes. Les 23 profils, 126 familles de props / 630 occurrences, 57 fiches spatiales, 67 liaisons, 134 seuils, sept familles d’armes, 16 familles de terrains et trois fiches planétaires sont conservés. Les mises à jour datées distinguent l’apparence sourcée, les PNG présents, les manques, les états attendus et les prochaines actions.
+
+Documents de référence :
+
+- [Bible Covenant V015 — fiches détaillées](../covenant/BIBLE_COVENANT_V015.md).
+- [Bible Covenant V015 — vue HTML](../covenant/BIBLE_COVENANT_V015.html).
+- [Bible Covenant V015 — données JSON](../covenant/BIBLE_COVENANT_V015.json).
+- [État des sprites et manques V015](../covenant/SPRITES_V015_STATUS.md).
+- [Provenance et portée de vérification V015](../covenant/PROVENANCE_V015.json).
+- [Manifeste des 22 nouveaux PNG](../../assets/openai/sprites/alien-covenant-v015/manifest.json).
+
+Les 15 profils mobiles de PNJ sans marche intégrée restent ouverts ; 13 ne disposent pas encore de série PNG de marche publiée. Les quatre courses joueurs, les sept familles d’armes et les autres besoins demeurent suivis. Aucun PNG de ce lot n’attend encore sa récupération. Le checkpoint Oram non téléversé au moment de l’interruption est conservé comme historique résolu, sans modifier le statut courant des huit originaux publiés.
+
+Les formats V015 livrés sont Markdown, HTML et JSON. Le dernier classeur XLSX finalisé reste V014 ; aucun XLSX ni pack ZIP V015 n’est inclus. Les bibles V014 et les PNG antérieurs restent inchangés. Les références de film, les concepts de production, les adaptations pour le jeu et l’admission dans le rendu gardent des statuts distincts. **La fidélité filmique 1:1 n’est pas certifiée.**
+

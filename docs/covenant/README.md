@@ -1,6 +1,46 @@
-# Alien: Covenant — bible et production V0.14
+# Alien: Covenant — bible et conservation V0.15
 
-## Suivi courant
+## Suivi courant — sources V0.15, jeu V0.14
+
+La [bible détaillée V0.15](BIBLE_COVENANT_V015.md), son
+[inventaire structuré](BIBLE_COVENANT_V015.json) et sa
+[lecture HTML](BIBLE_COVENANT_V015.html) prolongent le suivi des personnages,
+lieux, armes, accessoires, véhicules, vaisseaux, terrains et planète.
+Ils distinguent les images conservées, les présences natives, les
+propositions de raccord et les manques encore ouverts.
+
+Cette passe conserve **22 nouveaux PNG originaux** : huit phases de marche
+de Ricks, huit d’Oram et six objets issus de planches de production documentées —
+sièges du Covenant et du Lander, consoles de leurs postes de pilotage,
+holotable du Covenant et table médicale. Avec les 103 originaux des
+passes précédentes, le dépôt contient **125 PNG : 72 admis au rendu
+V0.14 et 53 au catalogue**. Les 22 nouveaux fichiers restent tous au
+catalogue ; les phases de Ricks et d’Oram ne sont pas activées en jeu.
+
+Le [manifeste V0.15](../../assets/openai/sprites/alien-covenant-v015/manifest.json),
+le [statut de production](SPRITES_V015_STATUS.md) et la
+[provenance](PROVENANCE_V015.json) identifient les octets conservés et
+les limites de cette publication. Les deux cycles sont décrits dans
+`catalogueCycles` ; le manifeste n’admet aucun nouveau cycle de jeu.
+Les originaux récupérés conservent leurs dimensions natives, y compris
+la phase Ricks05 en 1024 × 1535.
+
+Le jeu publié reste **V0.14 : cinq cycles et 40 phases**, avec le même
+registre, le même renderer, la même page distribuée et les mêmes règles
+de simulation et de sauvegarde. La présente passe ajoute des sources et
+leur documentation ; aucune nouvelle animation jouable n’est revendiquée.
+Les admissions V0.15 refusent tous ces nouveaux chemins dans la
+distribution du jeu.
+
+Le classeur et le pack complet de référence validés restent ceux de V0.14.
+Le statut de production précise les livrables disponibles, les contrôles
+de conservation, les résultats effectivement exécutés et ce qui reste
+à reprendre. La fidélité 1:1 reste un objectif
+de comparaison ; la génération et les contrôles techniques ne la certifient pas.
+
+---
+
+## Historique conservé — passe V0.14
 
 La [bible détaillée V0.14](BIBLE_COVENANT_V014.md) et son
 [inventaire structuré](BIBLE_COVENANT_V014.json) réunissent les manques en
