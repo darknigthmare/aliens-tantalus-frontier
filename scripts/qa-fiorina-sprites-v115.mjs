@@ -93,8 +93,9 @@ const matrix = ctx => {
 
 function drawSample(draw, bank, id, asset, facing, depthScale, frameIndex = 0) {
   const frame = asset.frames[frameIndex];
-  const width = Math.max(256, Math.ceil(frame.world.w * 2 + 64));
-  const height = Math.max(256, Math.ceil(frame.world.h * 2 + 64));
+  const extentScale = Math.max(1, depthScale);
+  const width = Math.max(256, Math.ceil(frame.world.w * extentScale * 2 + 64));
+  const height = Math.max(256, Math.ceil(frame.world.h * extentScale * 2 + 64));
   assert.ok(width <= 4096 && height <= 4096, `${id}: unreasonable world dimensions for QA`);
   const canvas = createCanvas(width, height), ctx = canvas.getContext('2d');
   const anchor = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
@@ -300,7 +301,16 @@ async function main() {
       const right = drawSample(draw, bank, id, asset, 1, 1, frameIndex);
       const left = drawSample(draw, bank, id, asset, -1, 1, frameIndex);
       const smaller = drawSample(draw, bank, id, asset, 1, 0.6, frameIndex);
-      frameReports.push({ frameIndex, frame, originalAlpha, right, left, depthScale06: smaller,
+      // A one-pixel needle can disappear between sampling columns. Keep the
+      // native-size evidence above, then measure depth ratios at sufficient
+      // observation resolution when the original silhouette is subpixel-small.
+      // This changes neither the source PNG nor its admitted world geometry.
+      const observationScale = right.alpha.bounds && Math.min(right.alpha.bounds.width, right.alpha.bounds.height) < 8
+        ? Math.max(1, Math.min(128 / Math.min(frame.world.w, frame.world.h), 512 / Math.max(frame.world.w, frame.world.h))) : 1;
+      const depthReference = observationScale > 1 ? drawSample(draw, bank, id, asset, 1, observationScale, frameIndex) : right;
+      const depthSmaller = observationScale > 1 ? drawSample(draw, bank, id, asset, 1, observationScale * .6, frameIndex) : smaller;
+      const depthObservation = { scale: observationScale, reference: depthReference, smaller: depthSmaller };
+      frameReports.push({ frameIndex, frame, originalAlpha, right, left, depthScale06: smaller, depthObservation,
         worldContactGap: originalAlpha.bounds ? (frame.pivot.y - originalAlpha.bounds.maxY - 1) * frame.world.h / frame.h : null });
       check(`${id}[${frameIndex}]: source integrity`, () => {
         const bytes = sourceHashes.get(frame.src);
@@ -313,8 +323,11 @@ async function main() {
       check(`${id}[${frameIndex}]: mirrored pivot`, () => assertMirrored(right, left, id));
       check(`${id}[${frameIndex}]: depth scale`, () => {
         assert.equal(smaller.receipt.drawn, true);
+        assert.equal(depthReference.receipt.drawn, true);
+        assert.equal(depthSmaller.receipt.drawn, true);
+        assert.ok(Math.abs(depthSmaller.receipt.depthScale / depthReference.receipt.depthScale - .6) < 1e-12);
         for (const dimension of ['width', 'height']) {
-          assert.ok(Math.abs(smaller.alpha.bounds[dimension] - right.alpha.bounds[dimension] * 0.6) <= 3,
+          assert.ok(Math.abs(depthSmaller.alpha.bounds[dimension] - depthReference.alpha.bounds[dimension] * 0.6) <= 3,
             `${dimension} did not follow depth scale`);
         }
       });

@@ -226,8 +226,10 @@ export async function loadAlien3SpriteBankV115(options = {}) {
 
 const moving = (actor) => !!actor?.moving || Math.abs(actor?.vx || 0) > 2;
 export function alien3SpritePoseV115(actor = {}) {
-  if ((actor.v52HurtClock || 0) > 0 || (actor.shockClock || 0) > 0) return 'hurt';
+  // A fatal hit can leave its hurt flash active after the actor is downed.
+  // Incapacity must keep its own presentation even if the mission stops ticking.
   if (actor.downed) return 'downed';
+  if ((actor.v52HurtClock || 0) > 0 || (actor.shockClock || 0) > 0) return 'hurt';
   if (actor.climbing) return 'climb';
   // Ground contact, not vertical speed, decides whether a pose is airborne.
   // At a jump apex vy can be zero while both feet still lack support.

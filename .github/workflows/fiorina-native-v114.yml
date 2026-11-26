@@ -24,6 +24,8 @@ on:
       - 'docs/development/FIORINA_SPRITES_V115.json'
       - 'docs/development/FIORINA_SPRITES_V116.md'
       - 'docs/development/FIORINA_SPRITES_V116.json'
+      - 'docs/development/FIORINA_SPRITES_V117.md'
+      - 'docs/development/FIORINA_SPRITES_V117.json'
       - 'assets/openai/sprites/alien3-fiorina-v115/**'
       - 'sw.js'
       - 'package.json'
@@ -90,7 +92,7 @@ jobs:
           paths = [file['path'] for file in inventory['files']]
           assert len(images) == inventory['images'] and len(set(paths)) == len(paths)
           assert images == {path for path in paths if path.endswith('.png')}
-          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V116.zip'
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V117.zip'
           with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
               for entry in inventory['files']:
                   path = entry['path']
@@ -108,8 +110,8 @@ jobs:
       - name: Preserve downloadable sprite pack
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: fiorina-sprites-v116-pack
-          path: ${{ runner.temp }}/FIORINA_SPRITES_V116.zip
+          name: fiorina-sprites-v117-pack
+          path: ${{ runner.temp }}/FIORINA_SPRITES_V117.zip
           retention-days: 30
       - run: npm run build
       - run: npm run check:built
@@ -148,7 +150,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: fiorina-sprites-v116
+          name: fiorina-sprites-v117
           path: |
             ${{ runner.temp }}/fiorina-sprites-qa/
             ${{ runner.temp }}/fiorina-native-sprites-qa/

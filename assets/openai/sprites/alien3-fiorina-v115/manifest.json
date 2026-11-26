@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fiorina-sprites-v116",
+  "revision": "fiorina-sprites-v117",
   "assets": {
     "ripley-prison-idle": {
       "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png",
@@ -832,7 +832,8 @@
       "fidelity": "reference-based-adaptation",
       "exact": false,
       "limitations": [
-        "Pose de course isolée disponible au catalogue ; cycle incomplet, rendu animé procédural conservé en course."
+        "Phase historique de compression désormais utilisée par le cycle à quatre poses runner-run V117 ; PNG et géométrie inchangés.",
+        "Cycle de jeu interprété, non certifié comme reproduction image par image du film."
       ]
     },
     "ripley-prison-climb-a": {
@@ -2413,6 +2414,772 @@
             "h": 68.9935
           },
           "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a"
+        }
+      ]
+    },
+    "abattoir-lamp": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/abattoir-lamp.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 1536
+      },
+      "pivot": {
+        "x": 512,
+        "y": 60
+      },
+      "world": {
+        "w": 66.6667,
+        "h": 100
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "7fca263efb29275a01d3003dad7b1fb8ffc161e407ccbd6123b46fdbc8f72799",
+      "bytes": 1703409,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Géométrie guidée par plan original 600×451 ; cotes illisibles.",
+        "Couleur, patine, matériaux fins et revers non documentés : reconstruction explicite.",
+        "Luminaire fixe suspendu, pas une torche portative.",
+        "Dimensions physiques, peinture et matériaux cachés non certifiés ; gabarit world réservé au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "catalogue": {
+        "context": "assembly",
+        "label": "abattoir-lamp",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      }
+    },
+    "clemens-medicine-vial": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/clemens-medicine-vial.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1106,
+        "h": 1422
+      },
+      "pivot": {
+        "x": 553,
+        "y": 1341
+      },
+      "world": {
+        "w": 6.2222,
+        "h": 8.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "f16cf35f03fdfceea79bcf0dbf7bf9ff20fff6581a95d1038384d44ab4c88ad3",
+      "bytes": 1504896,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Flacon partiellement caché par les doigts dans le plan ; base, face cachée et remplissage interprétés.",
+        "Ne prouve aucune mallette ou disposition de kit complet.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "clemens-medicine-vial",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      }
+    },
+    "clemens-syringe": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/clemens-syringe.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 724,
+        "h": 2172
+      },
+      "pivot": {
+        "x": 362,
+        "y": 2097
+      },
+      "world": {
+        "w": 6.0,
+        "h": 18.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "c619dc711b00eea6fa8b3ddf598fa45b284bcdb9293376ba26efb15a360de70e",
+      "bytes": 613218,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Piston inférieur masqué dans la référence principale : terminaison reconstruite sobrement.",
+        "Photo close-up de carte consultée après lancement ; micro-inscriptions non reproduites.",
+        "Un accessoire seul, pas un kit médical complet.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "clemens-syringe",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      }
+    },
+    "mining-flare-case": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/mining-flare-case.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 768,
+        "y": 988
+      },
+      "world": {
+        "w": 36.0,
+        "h": 24.0
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "87c37e0f6f409f02ee5e0a2f67d0485797a162004af4c1b52b8b4e785fb12f3a",
+      "bytes": 2979275,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Premier prompt guidé par photo collection basse résolution ; photos HD et film consultés après génération.",
+        "Lettres, proportions, patine et petits détails reproduits visuellement, non mesurés sur accessoire réel.",
+        "Petit cercle parasite après WEYLAND absent de la photo DSC08561.jpg ; deux tentatives génératives non concluantes, différence visuelle conservée explicitement.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "mining-flare-case",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      }
+    },
+    "murphy-welding-goggles": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/murphy-welding-goggles.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1543,
+        "h": 1019
+      },
+      "pivot": {
+        "x": 770,
+        "y": 1006
+      },
+      "world": {
+        "w": 24.0,
+        "h": 15.8496
+      },
+      "facing": "right",
+      "state": "prop",
+      "sha256": "88c8e560562bab6996543b31ef82e6eb32445d9ae17f90841f360b6898252d9d",
+      "bytes": 2415607,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Patine, matériau et silhouette fondés sur photos ; échelle physique à confirmer.",
+        "Neutralisation du reflet cyan photographique et transparence des lentilles constituent une adaptation optique.",
+        "Marge droite faible mais bord opaque non tronqué ; pas de certification géométrique 1:1.",
+        "Dimensions physiques non vérifiées ; gabarit de présentation au catalogue.",
+        "Accessoire documentaire autonome ; aucun socket, inventaire, pouvoir ou emplacement de jeu ajouté."
+      ],
+      "catalogue": {
+        "context": "documentary",
+        "label": "murphy-welding-goggles",
+        "note": "Accessoire autonome au catalogue ; aucune modification du décor ni de la chronologie native."
+      }
+    },
+    "ripley-crash-climb-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 370,
+        "y": 1570
+      },
+      "world": {
+        "w": 62.4835,
+        "h": 100.9105
+      },
+      "facing": "right",
+      "state": "climb-frame",
+      "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775",
+      "bytes": 860460,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Hand and foot contact with individual ladder rungs is not a certified film measurement.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-climb-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "ripley-crash-climb-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1593
+      },
+      "pivot": {
+        "x": 370,
+        "y": 1549
+      },
+      "world": {
+        "w": 62.4835,
+        "h": 100.8472
+      },
+      "facing": "right",
+      "state": "climb-frame",
+      "sha256": "9e7a3b3fbe163f33bc3126d1bd44c9faca5f349544b8c1ad4f8e44a09aa5f067",
+      "bytes": 787624,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Contact avec chaque barreau non certifié ; deux poses de jeu alternées.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-climb-b",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "ripley-crash-crouch": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1130,
+        "h": 1392
+      },
+      "pivot": {
+        "x": 375,
+        "y": 1338
+      },
+      "world": {
+        "w": 50.5083,
+        "h": 62.2191
+      },
+      "facing": "right",
+      "state": "crouch",
+      "sha256": "0d64554d731669ed07b657b92d5cd70ecef34647876e74cecda7da3700dbecb3",
+      "bytes": 1228182,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      }
+    },
+    "ripley-crash-crouch-walk-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 600,
+        "y": 997
+      },
+      "world": {
+        "w": 87.5864,
+        "h": 58.3909
+      },
+      "facing": "right",
+      "state": "crouch-walk-frame",
+      "sha256": "af9250a1b61ffa2af3583ae48cbb9f25cf78f2b7911a5af5f1b3fd56b9270e98",
+      "bytes": 1625072,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch-walk-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "ripley-crash-crouch-walk-b": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-b.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1312,
+        "h": 1199
+      },
+      "pivot": {
+        "x": 450,
+        "y": 1176
+      },
+      "world": {
+        "w": 71.1512,
+        "h": 65.0231
+      },
+      "facing": "right",
+      "state": "crouch-walk-frame",
+      "sha256": "0dbeda44229c001de96cdedf24ad18f8942b110ef47f5d0dda752707ad3d6c2c",
+      "bytes": 1040416,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch-walk-b",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "ripley-crash-jump": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-jump.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 430,
+        "y": 1558
+      },
+      "world": {
+        "w": 60.7478,
+        "h": 98.1074
+      },
+      "facing": "right",
+      "state": "jump",
+      "sha256": "9c27c3986b891d3852e71361e7c3af4dd587d54e87ba25c294aaa19aebf5ebd0",
+      "bytes": 880381,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose de jeu fondée sur ripley-crash-idle ; mouvement adapté, sans reproduction filmique image par image.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-jump",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      }
+    },
+    "ripley-prison-downed": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-downed.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1060,
+        "y": 663
+      },
+      "world": {
+        "w": 89.1038,
+        "h": 29.7013
+      },
+      "facing": "right",
+      "state": "downed",
+      "sha256": "b5ba76ef9d8297373526027859bae305331a3abafc0d71aa0b5aefd425e790f2",
+      "bytes": 1579728,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-downed",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      }
+    },
+    "runner-run-a": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1195,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "9406ad3536d9e9d6478bdd880f88668e89d4dfd893155de9f85d86597c11ca34",
+      "bytes": 973222,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-a",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "runner-run-c": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-c.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1230,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "4f55ed5ba8f0b6699bd84433520676cd688649e6ca4fd067c1c7ef54c586ab41",
+      "bytes": 1018912,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-c",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "runner-run-d": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-d.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1302,
+        "y": 708
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "run-frame",
+      "sha256": "4d9adac004335be2450260d1f08203981ead07aa82751261efb215f4c35f74c9",
+      "bytes": 1085099,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run-d",
+        "note": "Employé par le sélecteur natif existant ; les images de phase sont réutilisées par leur alias animé."
+      }
+    },
+    "runner-windup": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-windup.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1240,
+        "y": 644
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "windup",
+      "sha256": "170906d55a65a59c77a5874130899a4a677fea1ce2a2e86138c74858ade862f8",
+      "bytes": 1033452,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Nouvelle pose adaptée depuis le PNG historique ; pas de séquence film reproduite image par image.",
+        "Morphologie et repères anatomiques conservés au mieux, réglage des pivots à mesurer.",
+        "Calage anatomique estimé visuellement ; poses de jeu, sans certification image par image du film."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "runner-windup",
+        "note": "Pose sélectionnée par le raccord natif de présentation ; aucun changement du gameplay."
+      }
+    },
+    "runner-run": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2172,
+        "h": 724
+      },
+      "pivot": {
+        "x": 1195,
+        "y": 662
+      },
+      "world": {
+        "w": 320.514,
+        "h": 106.8379
+      },
+      "facing": "right",
+      "state": "run",
+      "sha256": "9406ad3536d9e9d6478bdd880f88668e89d4dfd893155de9f85d86597c11ca34",
+      "bytes": 973222,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de jeu interprété à 4 poses clés distinctes ; transitions intermédiaires et biomécanique filmique non certifiées."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "runner-run",
+        "note": "Alias de présentation employé par l’état natif existant ; aucun nouveau PNG supplémentaire."
+      },
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2172,
+          "h": 724,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-a.png",
+          "pivot": {
+            "x": 1195,
+            "y": 662
+          },
+          "world": {
+            "w": 320.514,
+            "h": 106.8379
+          },
+          "sha256": "9406ad3536d9e9d6478bdd880f88668e89d4dfd893155de9f85d86597c11ca34"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2172,
+          "h": 724,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-c.png",
+          "pivot": {
+            "x": 1230,
+            "y": 662
+          },
+          "world": {
+            "w": 320.514,
+            "h": 106.8379
+          },
+          "sha256": "4f55ed5ba8f0b6699bd84433520676cd688649e6ca4fd067c1c7ef54c586ab41"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2172,
+          "h": 724,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-b.png",
+          "pivot": {
+            "x": 1250,
+            "y": 662
+          },
+          "world": {
+            "w": 320.514,
+            "h": 106.8379
+          },
+          "sha256": "df8234fb8ba90267a49ab8a970e5422b3716939adfa31f34ec024e14091d1047"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2172,
+          "h": 724,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/runner-run-d.png",
+          "pivot": {
+            "x": 1302,
+            "y": 708
+          },
+          "world": {
+            "w": 320.514,
+            "h": 106.8379
+          },
+          "sha256": "4d9adac004335be2450260d1f08203981ead07aa82751261efb215f4c35f74c9"
+        }
+      ]
+    },
+    "ripley-crash-crouch-walk": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "pivot": {
+        "x": 600,
+        "y": 997
+      },
+      "world": {
+        "w": 87.5864,
+        "h": 58.3909
+      },
+      "facing": "right",
+      "state": "crouch-walk",
+      "sha256": "af9250a1b61ffa2af3583ae48cbb9f25cf78f2b7911a5af5f1b3fd56b9270e98",
+      "bytes": 1625072,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de jeu interprété à 2 poses clés distinctes ; transitions intermédiaires et biomécanique filmique non certifiées."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-crouch-walk",
+        "note": "Alias de présentation employé par l’état natif existant ; aucun nouveau PNG supplémentaire."
+      },
+      "fps": 5,
+      "loop": true,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-a.png",
+          "pivot": {
+            "x": 600,
+            "y": 997
+          },
+          "world": {
+            "w": 87.5864,
+            "h": 58.3909
+          },
+          "sha256": "af9250a1b61ffa2af3583ae48cbb9f25cf78f2b7911a5af5f1b3fd56b9270e98"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-crouch-walk-b.png",
+          "pivot": {
+            "x": 450,
+            "y": 1176
+          },
+          "world": {
+            "w": 71.1512,
+            "h": 65.0231
+          },
+          "sha256": "0dbeda44229c001de96cdedf24ad18f8942b110ef47f5d0dda752707ad3d6c2c"
+        }
+      ]
+    },
+    "ripley-crash-climb": {
+      "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 987,
+        "h": 1594
+      },
+      "pivot": {
+        "x": 370,
+        "y": 1570
+      },
+      "world": {
+        "w": 62.4835,
+        "h": 100.9105
+      },
+      "facing": "right",
+      "state": "climb",
+      "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775",
+      "bytes": 860460,
+      "fidelity": "reference-based-adaptation",
+      "exact": false,
+      "limitations": [
+        "Cycle de jeu interprété à 2 poses clés distinctes ; transitions intermédiaires et biomécanique filmique non certifiées."
+      ],
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-climb",
+        "note": "Alias de présentation employé par l’état natif existant ; aucun nouveau PNG supplémentaire."
+      },
+      "fps": 5,
+      "loop": true,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-a.png",
+          "pivot": {
+            "x": 370,
+            "y": 1570
+          },
+          "world": {
+            "w": 62.4835,
+            "h": 100.9105
+          },
+          "sha256": "58ed881cbf5ad701c6013b67717d322329449a758c4f39d61357087cdfdb2775"
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1593,
+          "src": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-climb-b.png",
+          "pivot": {
+            "x": 370,
+            "y": 1549
+          },
+          "world": {
+            "w": 62.4835,
+            "h": 100.8472
+          },
+          "sha256": "9e7a3b3fbe163f33bc3126d1bd44c9faca5f349544b8c1ad4f8e44a09aa5f067"
         }
       ]
     }
