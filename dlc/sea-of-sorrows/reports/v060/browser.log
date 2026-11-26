@@ -1,0 +1,67 @@
+PASS Version 0.6 / schéma 6 / 102 dossiers réellement chargés
+PASS La commande Manette du titre ouvre le guide
+PASS O ouvre une roue de huit commandes avec trois onglets
+PASS La roue est une vraie pause, horloge stable
+PASS Les armes non reçues restent indisponibles
+PASS Cliquer une action indisponible ne ferme ni ne fournit une arme
+PASS Échap referme seulement la roue
+CAPTURE 01_roue_equipe.png
+PASS La roue expose les ordres et les trois outils de travail
+CAPTURE 02_roue_materiel.png
+PASS Les menus de lecture sont accessibles dans la troisième page
+PASS Le panneau capteurs affiche trois appareils distincts
+PASS Les appareils rangés ne peuvent pas être activés à distance
+PASS P pose physiquement un appareil récupéré pendant le parcours
+PASS Une veille active consomme du temps de batterie
+PASS La pause arrête aussi la consommation du capteur
+PASS La coupure depuis la fiche atteint la simulation
+PASS Une veille coupée ne consomme pas quand le jeu reprend
+PASS P récupère sur place sans recharger
+CAPTURE 03_capteur_pose.png
+PASS Le plan local contient le capteur, pas un nouveau symbole ennemi
+CAPTURE 04_plan_capteur.png
+PASS Le dernier scan reçu est conservé dans la sauvegarde distante
+CAPTURE 05_liaison_distante.png
+CAPTURE 06_veille.png
+PASS Une observation montre son heure, pas une identité de créature
+PASS Choisir Cloison sélectionne un outil sans ouvrir instantanément
+PASS E maintenu fait réellement progresser la manœuvre sélectionnée
+PASS La cloison s’ouvre seulement au bout de sa durée
+PASS La roue restaure l’outil standard
+PASS Une touche maintenue avant la pause ne repart pas sur sa répétition
+PASS Le stick gauche standard produit un déplacement analogique
+PASS La petite dérive du stick ne déplace pas Decker
+PASS Le stick droit déplace un vrai viseur
+PASS La gâchette droite appelle le vrai tir
+PASS La gâchette gauche active l’empathie
+PASS L1 / LB ouvre la roue
+PASS R1 / RB change la page de la roue
+PASS Le stick choisit le secteur inférieur
+PASS Rond / B annule la roue sans action
+PASS La fermeture de la roue ne relance pas une gâchette encore maintenue
+PASS Relâcher puis presser à nouveau rend le tir disponible
+PASS R1 sélectionne le travail de réparation hors menu
+PASS R1 peut sélectionner le travail de cloison
+PASS La flèche haute commande la lampe
+PASS La flèche gauche commande Manning sans téléportation
+PASS Select ouvre la carte
+PASS Start met le jeu en pause
+PASS Débrancher en partie ouvre Pause
+PASS Rebrancher ne reprend pas la partie automatiquement
+CAPTURE 07_roue_manette.png
+CAPTURE 08_guide_manette.png
+PASS Reprendre migre le schéma 5 avec trois appareils sans altérer la progression
+PASS La copie de sauvegarde schéma 5 est conservée
+PASS Aucune écriture dans la sauvegarde hôte
+PASS 1024×768 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 1024×768 : aucune superposition des huit boutons
+PASS 390×844 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 390×844 : aucune superposition des huit boutons
+CAPTURE 09_roue_etroite.png
+PASS 360×780 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 360×780 : aucune superposition des huit boutons
+CAPTURE 10_convoi_ordres.png
+PASS Les fonctions anciennes restent présentes après les nouvelles commandes
+PASS Aucune exception JavaScript pendant les contrôles
+PASS Aucune requête de ressource réseau du HTML autonome
+RESULT 56 0

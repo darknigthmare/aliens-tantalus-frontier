@@ -1,0 +1,15 @@
+{
+  "base": {
+    "name": "ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip",
+    "bytes": 79991964,
+    "sha256": "3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1",
+    "version": "0.8.0"
+  },
+  "delivery": "0.9.0",
+  "method": "Cumulative edit of actual mounted ZIP; seven existing modules plus support and soundscape. No host code or deployment.",
+  "engine": "JavaScript/Canvas, geometry and schema 8 preserved. Read-only sound/caption observers; keyboard binding and validated browser save copies.",
+  "native_browser_persistence_certified": false,
+  "controller_physical_hardware_tested": false,
+  "human_audio_quality_reviewed": false,
+  "public_deployment": false
+}

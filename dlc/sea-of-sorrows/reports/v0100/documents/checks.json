@@ -1,0 +1,127 @@
+{
+  "version": "0.10.0",
+  "source_sha256": {
+    "reports/RAPPORT_ILLUSTRE.html": "3313874619a93e73665f478bbe2d823daee2d201887aa8570ea4f75ed3299f6c",
+    "CODEX_MER_DES_CHAGRINS.html": "b4bf54529f4093c9bce6bcaa680690c530e303a0532d9f2b2e695ab0a2c70a12",
+    "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html": "f6f01d0e29aab0a78860fc23e86f958548f2215898f7878a064fed104d542deb"
+  },
+  "checks": [
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html version courante",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html aucun identifiant dupliqué",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html liens internes valides",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html fidélité partielle visible",
+      "pass": true
+    },
+    {
+      "name": "Onze images du rapport",
+      "pass": true
+    },
+    {
+      "name": "Scènes préparées déclarées",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html 1440px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html 1024px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html 390px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "reports/RAPPORT_ILLUSTRE.html 360px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html version courante",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html aucun identifiant dupliqué",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html liens internes valides",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html fidélité partielle visible",
+      "pass": true
+    },
+    {
+      "name": "50 fiches avec schéma",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html 1440px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html 1024px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html 390px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "CODEX_MER_DES_CHAGRINS.html 360px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html version courante",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html aucun identifiant dupliqué",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html liens internes valides",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html fidélité partielle visible",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 1440px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 1024px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 390px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "REGISTRE_FIDELITE_MER_DES_CHAGRINS.html 360px pas de débordement horizontal global",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception documentaire",
+      "pass": true
+    }
+  ],
+  "passed": 28,
+  "failed": 0,
+  "errors": [],
+  "fatal": null,
+  "method": "Actual document HTML set_content; responsive geometry and limited visual review, not human review of every page."
+}

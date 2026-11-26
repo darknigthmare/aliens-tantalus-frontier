@@ -93,3 +93,13 @@ src/vendor/supabase-2.117.2.js -text
 src/vendor/supabase-LICENSE.txt -text
 # Historical ZIPs and their pinned archive inventory retain exact original bytes.
 archives/project-recovery-20261116/** -text
+
+# Recovered DLC sources and historical originals preserve exact upstream bytes.
+dlc/sea-of-sorrows/** -text
+archives/mer-des-chagrins-20261125/** -text
+
+# Preserve recovered visual sources and their provenance bytes.
+archives/sea-sprites-recovery-20261126/source/** -text
+archives/sea-sprites-recovery-20261126/sprites-complete/** -text
+dlc/sea-of-sorrows-visual/sprites/** -text
+docs/mer-des-chagrins-20261126/sprites/** -text

@@ -1,0 +1,54 @@
+PASS Standalone identique aux sept modules et aux styles
+PASS JSON et données JavaScript identiques
+PASS Version et schéma cohérents
+PASS Comptes de contenu
+PASS 32 liaisons de poursuite, 64 extrémités
+PASS Comptage documenté identique aux données
+PASS Installateur complet et reçu actuel
+PASS Descripteur sans écriture dans le jeu hôte
+PASS 261 tests Node réussis
+PASS Tests Node liés aux sources livrées
+PASS browser-regression : source et contrôles
+PASS browser-regression : aucune requête externe
+PASS field-browser : source et contrôles
+PASS field-browser : aucune requête externe
+PASS rearguard-browser : source et contrôles
+PASS rearguard-browser : aucune requête externe
+PASS trace-browser : source et contrôles
+PASS trace-browser : aucune requête externe
+PASS v060/browser : source et contrôles
+PASS v060/browser : aucune requête externe
+PASS Limite native réellement mesurée
+PASS 92 rendus de salles
+PASS field-browser : compte de captures
+PASS field-browser : images originales intactes
+PASS field-browser : sauvegardes sources intactes
+PASS rearguard-browser : compte de captures
+PASS rearguard-browser : images originales intactes
+PASS rearguard-browser : sauvegardes sources intactes
+PASS rearguard-browser : états photographiés intacts
+PASS trace-browser : compte de captures
+PASS trace-browser : images originales intactes
+PASS trace-browser : sauvegardes sources intactes
+PASS trace-browser : états photographiés intacts
+PASS Dix nouvelles captures capteurs/roue
+PASS PNG 0.6 intacts
+PASS États photographiés 0.6 intacts
+PASS Sources gagnées 0.6 intactes
+PASS Manette et stockage de test annoncés
+PASS 198 vrais exports de schéma 5 préservés
+PASS Six parcours complets avec capteur et poursuite
+PASS Parcours liés aux sources courantes
+PASS Instants gagnés intacts
+PASS 198 nouveaux exports de schéma 6
+PASS 198 exports historiques de schéma 4 préservés
+PASS 66 exports historiques de schéma 3 intacts
+PASS 66 exports de référence 0.2 conservés
+PASS Pilote direct courant, défaites explicites
+PASS 14 contrôles de documents réussis
+PASS Documents identiques à ceux contrôlés
+PASS 46 schémas de données dans le codex
+PASS Rapport principal : 10 photos intégrées
+PASS Documentation actuelle
+PASS Pas de lien symbolique
+AUDIT 53 / 53

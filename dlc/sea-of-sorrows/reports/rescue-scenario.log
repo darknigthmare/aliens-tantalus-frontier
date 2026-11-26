@@ -1,0 +1,21 @@
+PASS [
+  {
+    event: 'halt-in-hazard',
+    time: 662.7999999999449,
+    integrity: 100,
+    x: 921.75
+  },
+  { event: 'steam-damage', time: 663.9999999999438, integrity: 92 },
+  {
+    event: 'before-repair',
+    time: 667.3499999999408,
+    integrity: 76,
+    parts: 6
+  },
+  {
+    event: 'repair-completed',
+    time: 670.3499999999381,
+    integrity: 100,
+    parts: 5
+  }
+]

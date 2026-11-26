@@ -1,0 +1,32 @@
+{
+  "name": "alien-mer-des-chagrins-prototype",
+  "private": true,
+  "version": "0.10.0",
+  "description": "DLC autonome non officiel. Aucun paquet externe requis par le jeu.",
+  "scripts": {
+    "test": "node --test qa/core.test.cjs qa/field.test.cjs qa/install.test.cjs qa/tactical.test.cjs qa/rearguard.test.cjs qa/pursuit.test.cjs qa/sensors.test.cjs qa/lighting.test.cjs qa/storage.test.cjs qa/support.test.cjs qa/soundscape.test.cjs qa/fidelity.test.cjs",
+    "check": "node --check src/data.js && node --check src/core.js && node --check src/render.js && node --check src/world-art.js && node --check src/tactics-art.js && node --check src/controls.js && node --check src/main.js && node --check src/support.js && node --check src/soundscape.js && npm test",
+    "build": "python3 tools/sync_data.py && python3 tools/build_standalone.py",
+    "qa:browser": "npm run qa:fidelity-browser",
+    "qa:campaign": "npm run qa:fidelity-campaign",
+    "qa:tactical": "node qa/tactical.cjs",
+    "qa:rescue": "node qa/rescue-scenario.cjs",
+    "qa:baseline": "node qa/difficulty.cjs",
+    "qa:rearguard": "node qa/rearguard-campaign.cjs && node qa/breach-scenario.cjs",
+    "qa:trace": "node qa/trace-campaign.cjs",
+    "qa:sensors": "node qa/sensor-campaign.cjs",
+    "qa:docs": "python3 qa/fidelity-documents.py",
+    "qa:lighting": "node qa/lighting-campaign.cjs",
+    "qa:storage": "node qa/storage-campaign.cjs",
+    "qa:access": "node qa/access-campaign.cjs",
+    "qa:access-browser": "python3 qa/access-browser.py",
+    "qa:fidelity": "node --test qa/fidelity.test.cjs",
+    "qa:fidelity-campaign": "node qa/fidelity-campaign.cjs",
+    "qa:fidelity-browser": "python3 qa/fidelity-browser.py && python3 qa/fidelity-regression-browser.py",
+    "docs": "python3 tools/generate_docs.py && python3 tools/fidelity-docs.py",
+    "qa:delivery": "python3 tools/verify_fidelity_delivery.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

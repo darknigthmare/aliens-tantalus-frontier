@@ -18,6 +18,7 @@
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
+import { verifyMerDesChagrinsBuilt20261125 } from './mer-des-chagrins-admission-20261125.mjs';
 
 export const DEV_SESSION_QUERY_V188 = 'atf-dev';
 export const DEV_SESSION_VALUE_V188 = 'v188';
@@ -100,7 +101,13 @@ export async function shipDevToolsV188(root, output, { env = process.env } = {})
 export async function findBuiltDevToolsPathV188(output) {
   const found = [];
   for (const entry of await readdir(output, { withFileTypes: true })) {
-    if (!entry.isDirectory() || ['src', 'assets', 'dlc'].includes(entry.name)) continue;
+    if (!entry.isDirectory() || ['src', 'assets'].includes(entry.name)) continue;
+    if (entry.name === 'dlc') {
+      // Only the reviewed public catalogue/runtime may coexist with the hidden tools.
+      // Verify every path and byte; an arbitrary directory named dlc is not exempt.
+      await verifyMerDesChagrinsBuilt20261125(output);
+      continue;
+    }
     found.push(entry.name);
   }
   if (found.length !== 1 || !isDevToolsPublicPathV188(found[0])) throw new Error(`Dev tools: exactly one hidden directory is expected in a build (found: ${found.join(', ') || 'none'}).`);

@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "title": "La Mer des Chagrins — créations complémentaires de la bible",
+  "date": "2026-11-26",
+  "scope": "Alien: Sea of Sorrows / La Mer des Chagrins only",
+  "baseline": {
+    "commit": "ff6d538b32f9eb8946f2d296df1b790bf479eef9",
+    "pngCount": 121,
+    "sourcePngBytesPreserved": true
+  },
+  "newPngCount": 12,
+  "canonicalOneToOneCertified": false,
+  "novelExhaustivenessCertified": false,
+  "notes": [
+    "The supplied primary evidence describes a limited set of traits and objects; unspecified visual details remain project interpretations.",
+    "Four earlier refused generations were not retried.",
+    "One preliminary worker image was rejected for excessive resemblance to Decker and is not included in this pack.",
+    "Exact image dimensions are recorded from the generated PNGs; requested framing does not guarantee requested pixel dimensions."
+  ],
+  "assets": [
+    {
+      "assetId": "characters/decker-walk-pass-a",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "sizeBytes": 1688012,
+      "sha256": "cc8353d4b6cbb9619975d8acbeac2f69cfc1baa0f04714b59428005ce908493a",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "decker-walk-pass-a",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [
+        "characters/decker",
+        "characters/decker-walk-a",
+        "characters/decker-walk-b"
+      ],
+      "sourceStatus": "project interpretation; no canonical face certified",
+      "source": "project visual reference assets",
+      "usage": "runtime character key pose",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: identity-preserve.\nAsset type: ONE individual transparent-background full-body character sprite for a 2D side-view adventure.\nReference image 1 is the project's established Alan Decker identity and original outfit. Reference images 2 and 3 are the two existing walking contacts. Maintain the same face, wavy short dark hair, stubble, brown weathered field jacket, charcoal shirt, dark cargo trousers, brown belt, diagonal satchel strap, hip satchel, heavy boots, material detail, lighting, viewpoint and scale.\nCreate the missing PASSING pose between the two contacts, facing screen-right. The torso remains upright at the same height, arms relaxed and close to the body with a modest counter-swing, empty hands. This is a natural restrained walk, not a run.\nComposition: one complete character centered in a 1024x1536 portrait canvas with transparent margins, full hair and boot soles visible. The supporting boot meets a horizontal ground line near the bottom. Match the references' realistic illustrated sprite finish.\nBackground: genuine RGBA transparency, isolated character only, no floor, shadow, backdrop, glow, labels, text, duplicate character or sprite sheet. Do not redesign the face, costume, anatomical side of the bag or body proportions.\nPose A: the leg NEAREST the viewer supports his weight almost vertically beneath the pelvis with its whole boot on the ground; the FAR leg bends at the knee and passes forward closely beside it, its boot raised just above the ground. The two thighs are close at the passing position. Do not spread the legs into another contact pose."
+    },
+    {
+      "assetId": "characters/decker-walk-pass-b",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "sizeBytes": 1678695,
+      "sha256": "47adb7f09bdb75e43b52f728d7474656214356a4edb097b5cf75d5699fc56b41",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "decker-walk-pass-b",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [
+        "characters/decker",
+        "characters/decker-walk-a",
+        "characters/decker-walk-b"
+      ],
+      "sourceStatus": "project interpretation; no canonical face certified",
+      "source": "project visual reference assets",
+      "usage": "runtime character key pose",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: identity-preserve.\nAsset type: ONE individual transparent-background full-body character sprite for a 2D side-view adventure.\nReference image 1 is the project's established Alan Decker identity and original outfit. Reference images 2 and 3 are the two existing walking contacts. Maintain the same face, wavy short dark hair, stubble, brown weathered field jacket, charcoal shirt, dark cargo trousers, brown belt, diagonal satchel strap, hip satchel, heavy boots, material detail, lighting, viewpoint and scale.\nCreate the missing PASSING pose between the two contacts, facing screen-right. The torso remains upright at the same height, arms relaxed and close to the body with a modest counter-swing, empty hands. This is a natural restrained walk, not a run.\nComposition: one complete character centered in a 1024x1536 portrait canvas with transparent margins, full hair and boot soles visible. The supporting boot meets a horizontal ground line near the bottom. Match the references' realistic illustrated sprite finish.\nBackground: genuine RGBA transparency, isolated character only, no floor, shadow, backdrop, glow, labels, text, duplicate character or sprite sheet. Do not redesign the face, costume, anatomical side of the bag or body proportions.\nPose B: the leg FARTHER from the viewer supports his weight almost vertically beneath the pelvis with its whole boot on the ground; the NEAR leg bends at the knee and passes forward closely beside it, its boot raised just above the ground. The two thighs are close at the passing position. This is the opposite anatomical passing step, NOT a mirrored character: still facing right with satchel on the same side. Do not spread the legs into a contact pose."
+    },
+    {
+      "assetId": "characters/carlyle-medic",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-medic.png",
+      "sizeBytes": 1674214,
+      "sha256": "6ba5f9b1efcc16949778360c9ea7b880b7f64e2477bca1301b4fa55462c19b37",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "carlyle-medic",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [
+        "characters/decker"
+      ],
+      "sourceStatus": "primary excerpt traits; exact face, trousers, footwear and standing pose are project interpretation",
+      "source": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE individual transparent full-body female medical character sprite for a realistic illustrated 2D side-view science-fiction adventure.\nThe reference image establishes rendering finish, proportions, subdued material detail and camera angle ONLY; create a different person.\nSubject: the unnamed medical attendant aboard the Carlyle as described in the authorized Chapter Four excerpt of Alien: Sea of Sorrows: a stout woman around forty, graying brown hair pulled back in a bun, blue eyes behind fairly thick glasses, wearing a white lab coat. Calm professional expression. These described traits must be clearly readable. Her exact face and height are unspecified, so use an original ordinary face and normal game-character proportions without likeness to an actor.\nStand facing screen-right in a relaxed three-quarter side pose. Hold one plain clipboard with paper lightly against the abdomen, hands anatomically correct and visible. Simple dark practical trousers and flat closed shoes under the white coat, without invented insignia or name badge.\nComposition: one complete person from hair to soles, centered in a 1024x1536 portrait canvas, generous empty margins, feet on a level line. Match the reference's realistic painted game-sprite finish and gentle neutral light.\nGenuine transparent RGBA background. No room, chair, floor, ground shadow, glow, vignette, text, border, duplicates, weapons or sprite sheet."
+    },
+    {
+      "assetId": "characters/worker",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/worker.png",
+      "sizeBytes": 1631995,
+      "sha256": "605c8efe996e3f5dc24f741996bb65ce590606a96b74cd00a55daf29cc0f370d",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "worker",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original composite worker profile; first style-reference attempt rejected for similarity to Decker",
+      "source": "dlc/sea-of-sorrows/src/data.js fidelity.characters.worker",
+      "usage": "existing composite profile fallback only",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE individual transparent full-body industrial worker sprite for a realistic 2D side-view science-fiction adventure.\nCreate a distinctly original anonymous older maintenance worker, not the game's hero and not an actor likeness: broad round face, short closely cropped brown-and-gray hair, slightly receding hairline, broad nose, dark eyes and a neat short moustache. Ordinary stocky build.\nHe wears a plainly tailored muted GREEN-GRAY zip-front work jacket, zipped closed, dark work trousers and black practical work boots. This anonymous composite role has no franchise-certified face or uniform. No messenger bag, no diagonal strap, no leather adventurer jacket, no armor, weapon, helmet, logo or name badge.\nNeutral standing pose facing screen-right in a three-quarter side view, arms naturally relaxed, hands empty, complete body and both boot soles visible.\nDetailed realistic painted game-sprite finish, restrained industrial colors, neutral gentle lighting, proportionate hands and anatomy. Center in a 1024x1536 portrait canvas, generous transparent margin and flat shared foot line. Genuine transparent RGBA background; isolated character only, no room, floor, ground shadow, glow, vignette, captions or duplicate person."
+    },
+    {
+      "assetId": "props/weather-station",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/weather-station.png",
+      "sizeBytes": 1287257,
+      "sha256": "dccf7a7345ee51afd05661b5aa3a7a3249d3aacaba061cc1c0d4cecb91d17a27",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "weather-station",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original game adaptation; weather station mentioned in s01 propNotes",
+      "source": "dlc/sea-of-sorrows/src/data.js rooms.s01.propNotes",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE individual transparent-background industrial weather station prop for a realistic 2D side-view sci-fi adventure.\nSubject: a compact freestanding surveying weather mast from a dusty colonial worksite. A narrow worn steel pole on one integrated square bolt-down base, a small sealed muted olive-gray instrument box at waist height, a white radiation shield, a simple three-cup wind-speed sensor and a short wind vane at the top. Keep every part visibly joined to this single mast. Plausible readable functional construction; no invented weapon or antenna dish.\nThis is an original interpretation of the weather-station prop mentioned in the game's surface checkpoint notes; do not imply an official franchise design. Realistic painted sprite detail, restrained industrial materials, dusty corners, clean silhouette.\nFull object in modest three-quarter side view, not top-down, centered in a 1024x1536 portrait canvas with ample transparent margin. Neutral light. No labels, logos, glow, ground, backdrop, extra separate props or sprite sheet. Genuine transparent RGBA background."
+    },
+    {
+      "assetId": "props/windsock",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/windsock.png",
+      "sizeBytes": 1317966,
+      "sha256": "2e9ec89ff395fa1f6a75552c8895893135431028290bfd3429fa64d92b08a946",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "windsock",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original game adaptation; windsock mentioned in s02 propNotes",
+      "source": "dlc/sea-of-sorrows/src/data.js rooms.s02.propNotes",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated connected windsock prop for a realistic illustrated 2D side-view science-fiction adventure. A slender weathered steel post secured to a small integrated bolt-down foot, with a short swivel arm and one faded orange industrial fabric windsock. The fabric is partly extended toward screen-right, with plausible seams and a clearly open circular mouth at the swivel. Plain functional construction, no logo, no invented writing. This is an original adaptation of the surface mining-worksite prop in the game's room s02 notes, not a certified official model.\nFull complete mast and cloth, visually readable side / slight three-quarter view; realistic painted industrial materials, muted colors, dusty seams, neutral soft lighting. 1024x1536 portrait canvas with transparent margins on every side. All pieces visibly attached to one object. Genuine transparent RGBA background. No ground, background scenery, shadow, glow, vignette, people, additional objects, caption, border or sprite sheet."
+    },
+    {
+      "assetId": "props/tripod-worklight",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/tripod-worklight.png",
+      "sizeBytes": 1469502,
+      "sha256": "32296e3e0cfb0d2446f1d0798954df918545050cf15e7598079be5827c143bd9",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "tripod-worklight",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original game adaptation; portable tripod lamp mentioned in room notes",
+      "source": "dlc/sea-of-sorrows/src/data.js",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated portable industrial work light on a tripod, intended as an individual realistic painted prop sprite for a 2D side-view science-fiction adventure. A single rectangular protected lamp housing in worn dark gray metal, with dull unlit glass, a simple adjustable neck, a sturdy vertical pole, and three splayed foldable steel tripod legs. Small cable clipped neatly to the pole, no loose detached objects. Restrained functional design, dusty surfaces, orange-brown wear at joints, no logo or text. This is a game adaptation of a mentioned tripod lamp, not an official franchise design.\nShow the complete object from the top of the lamp to all three foot pads, modest three-quarter side view, clean functional silhouette, realistic painted detail under neutral light. Centered portrait 1024x1536 canvas with ample genuine RGBA transparent margins. No emitted light beam, glow, flare, ground, drop shadow, background, people, additional lamps, border, caption or sprite sheet."
+    },
+    {
+      "assetId": "props/service-cart",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/service-cart.png",
+      "sizeBytes": 1846044,
+      "sha256": "0358ae69fc22a88660d76993b8d61af04f9e8531b83c20d5dd26fa9405aa683a",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "promptId": "service-cart",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original game adaptation; service carts mentioned in s10/s17 propNotes",
+      "source": "dlc/sea-of-sorrows/src/data.js rooms.s10/rooms.s17.propNotes",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated compact industrial service cart for a realistic 2D side-view science-fiction game sprite. A practical two-shelf open metal trolley, worn muted olive-gray steel frame, rounded push handle at one end, four small black rubber caster wheels, upper and lower shallow trays. Both trays empty. Plausible bolted construction, lightly dusty corners, localized wear but no decorative junk. The entire cart is one connected object. Original interpretation of service-cart props in the game's rooms s10 and s17, not a certified official design.\nComplete object in a readable modest three-quarter side view, long side toward the viewer. Neutral realistic painted finish matching grounded industrial adventure sprites. Centered in a landscape 1536x1024 canvas with generous transparent margins and all wheels fully visible. Genuine RGBA transparency. No floor, ground shadow, glow, backdrop, labels, logos, people, contents, duplicates, captions or sprite sheet."
+    },
+    {
+      "assetId": "props/medical-clipboard",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/medical-clipboard.png",
+      "sizeBytes": 2349154,
+      "sha256": "a8fc11da01f96bad34d4cc139ea388481295a4d17fedba99cf1d04db29f436f6",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "mode": "RGBA",
+      "promptId": "medical-clipboard",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "primary excerpt object; exact clipboard model is an original interpretation",
+      "source": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "usage": "source bible and gallery only",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated plain medical clipboard with a single modest stack of off-white paper held by a simple steel spring clip, for the game bible and asset gallery of a realistic 2D science-fiction adventure. The board is brown hardboard with slightly worn rounded corners. A few very faint unidentifiable ruling marks may be visible on the paper, but no readable words, personal details, numbers, logos or medical instructions. The object is attested as a paper medical chart in the authorized Carlyle passage of Alien: Sea of Sorrows; this exact board model and finish are an original visual interpretation.\nShow the entire clipboard in a nearly frontal three-quarter view with slight depth; realistic painted material detail and neutral illumination. Centered in a portrait 1024x1536 canvas with ample empty margin. ONE complete object, genuine transparent RGBA background. No hand, person, table, floor, shadow, glow, backdrop, separate pen, duplicates, caption or sprite sheet."
+    },
+    {
+      "assetId": "props/medicine-cup",
+      "path": "dlc/sea-of-sorrows-visual/sprites/props/medicine-cup.png",
+      "sizeBytes": 600962,
+      "sha256": "0589a49ba2f96187d362377dd5403b961046d0bcedb759f89d5d01de7278faa6",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "mode": "RGBA",
+      "promptId": "medicine-cup",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "primary excerpt cup and two pills; exact cup design and material are project interpretation",
+      "source": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "usage": "source bible and gallery only",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated small plain medication cup containing exactly two tiny white tablets, a fictional scene prop for the asset gallery and game bible of a realistic illustrated 2D science-fiction adventure. The cup is a simple short translucent pale plastic medicine cup, unbranded, with a wide enough open top that the two tiny separate round white tablets resting inside are visible. No readable scale, dosage, label or writing. This object echoes the small cup and two tiny white pills in the authorized Carlyle excerpt of Alien: Sea of Sorrows. The exact cup material and design are an original visual interpretation.\nShow the entire small cup in a modest elevated three-quarter product angle, realistic painted plastic detail under gentle neutral lighting, not a photographic mockup. Center the single cup with generous margin on a square transparent canvas. Genuine RGBA transparency. No hands, person, table, additional objects, extra pills, water, shadows, glow, backdrop, caption, border or sprite sheet."
+    },
+    {
+      "assetId": "terrain/toxic-sand",
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/toxic-sand.png",
+      "sizeBytes": 973732,
+      "sha256": "2bf2c6eca006031cbd7b9476d009191e69360d6c3d84f30c3cb41fa75d8ebbf2",
+      "dimensions": {
+        "width": 2172,
+        "height": 724
+      },
+      "mode": "RGBA",
+      "promptId": "toxic-sand",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "toxic sands attested by publisher; local ripple pattern, grass and stones are original game adaptation",
+      "source": "https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/ ; dlc/sea-of-sorrows/src/data.js rooms.s01/rooms.s02",
+      "usage": "scoped runtime visual",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE isolated shallow ground patch for a realistic 2D side-view science-fiction game. A wide low bank of dark charcoal-gray toxic sand, softly wind-rippled, with a few sparse dry coarse grass tufts near the back edge and small ordinary stones. The silhouette is organic and irregular, fading to genuine transparency at the outermost sand grains. Restrained black-gray mineral palette with muted dusty brown hints, no luminous poison, no dramatic effects. This is a small original local surface-dressing interpretation for the game's LV-178 worksite rooms; it is not a planetary map or a certified terrain model, and need not tile.\nMake a wide and LOW mound, side view with only a shallow visible top plane, appropriate behind characters standing in a 2D landscape. The patch should span most of a 1536x1024 landscape canvas horizontally but occupy only the central lower third vertically, with ample transparent margin. Detailed realistically painted sand texture, gentle neutral light. Genuine transparent RGBA background; isolated patch only. No sky, scene background, horizon, structures, people, footprints, text, border, floating cross-section, large rocks or duplicated patches."
+    },
+    {
+      "assetId": "vehicles/chicago-tram",
+      "path": "dlc/sea-of-sorrows-visual/sprites/vehicles/chicago-tram.png",
+      "sizeBytes": 1717942,
+      "sha256": "321cde54dfcc9b5038f9ef22c2f9a04aca4410def59b29bb3083822e0435cd19",
+      "dimensions": {
+        "width": 2172,
+        "height": 724
+      },
+      "mode": "RGBA",
+      "promptId": "chicago-tram",
+      "method": "image_gen",
+      "generatedOn": "2026-11-26",
+      "transparentBackgroundRequested": true,
+      "referenceAssetIds": [],
+      "sourceStatus": "original game interpretation for Chicago transit; no primary-source vehicle design certified",
+      "source": "dlc/sea-of-sorrows/src/data.js rooms.s04/rooms.s05",
+      "usage": "source bible and gallery only",
+      "acceptedVisualReview": true,
+      "prompt": "Use case: stylized-concept.\nONE complete original futuristic urban tram car, a concept asset for the source game bible and gallery of a grounded industrial science-fiction adventure. Single medium-length enclosed passenger rail vehicle with compact cab at each end, two visible door sections on its long side, dark rectangular windows, muted gray-green metal body, a narrow worn pale stripe, small exposed wheel bogies and restrained mechanical roof housings. No military hardware, no alien creature motifs, no official manufacturer badges, words, numbers, city labels or logos. This is an explicit original visual interpretation of transit mentioned in the game's Chicago rooms; no canonical Sea of Sorrows vehicle model is being reproduced.\nReadable almost exact side view with a very slight view of the front end, complete silhouette from nose to rear and all wheels visible. Realistic painted industrial game-sprite finish, moderate wear, neutral light, practical proportions. Centered in a landscape 1536x1024 canvas with broad transparent margins; vehicle horizontal and occupying the middle of the frame. Genuine RGBA transparent background. No tracks, pavement, station, buildings, people, floor, shadow, sky, glow, backdrop, other cars, caption or sprite sheet."
+    }
+  ]
+}

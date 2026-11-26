@@ -20,6 +20,9 @@ import { publicXenoSpritePathAdmissionV191, verifyXenoSpriteAdmissionsV191 } fro
 import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from './public-xeno-arbiter-admissions-v190.mjs';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import { projectRecoveryPathAdmission20261116, verifyProjectRecoveryArchive20261116 } from './project-recovery-admission-20261116.mjs';
+import { merDesChagrinsPathAdmission20261125, isMerDesChagrinsSourceOnly20261125, verifyMerDesChagrinsImport20261125 } from './mer-des-chagrins-admission-20261125.mjs';
+import { verifyMerRecoveryArchive20261126 } from './mer-des-chagrins-recovery-admission-20261126.mjs';
+import { verifyMerVisual20261126 } from './mer-des-chagrins-visual-admission-20261126.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
@@ -1233,6 +1236,8 @@ const AVP_PRODUCTION_SOURCE_FILES_20261126 = new Set([
 ]);
 
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const merAdmission = merDesChagrinsPathAdmission20261125(path, { directory, built });
+  if (merAdmission !== null) return merAdmission;
   if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;
   if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))
     return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);
@@ -1369,6 +1374,9 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      // Exact historical DLC records are preserved as sources, never runtime.
+      // Their complete pinned inventories are checked after this path scan.
+      if (!built && isMerDesChagrinsSourceOnly20261125(path)) continue;
       const recoveredAliens1986 = !built && aliens1986RecoveryFile(path);
       if (recoveredAliens1986) {
         // Original QA receipts retain historical machine paths. The independently
@@ -1396,6 +1404,9 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // Scan admitted paths and private text first, including partial adversarial
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
+  await verifyMerDesChagrinsImport20261125(root, { built });
+  await verifyMerRecoveryArchive20261126(root, { built });
+  await verifyMerVisual20261126(root, { built });
   await verifyAliens1986DlcAdmissions(root, { built });
   await verifyFiorinaSpriteAdmissionsV115(root);
   await verifyAvpAdmission(root, { built });

@@ -1,0 +1,583 @@
+{
+  "revision": 1,
+  "target": "roman_2014",
+  "fullTextCompared": false,
+  "canonicalCoveragePercent": null,
+  "sources": [
+    {
+      "id": "titan",
+      "tier": "primary",
+      "title": "Titan Books — notice du roman",
+      "url": "https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/",
+      "scope": "Decker, ICC, New Galveston/LV-178, sables toxiques, mission de capture."
+    },
+    {
+      "id": "excerpt",
+      "tier": "primary-excerpt",
+      "title": "Extrait public du chapitre 5, Gizmodo",
+      "url": "https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409",
+      "scope": "Chicago ; bureau de Harriman ; début 2497."
+    },
+    {
+      "id": "manning",
+      "tier": "secondary",
+      "title": "Xenopedia — Manning",
+      "url": "https://avp.fandom.com/wiki/Manning",
+      "scope": "Carrure, cheveux noirs grisonnants ; chef mercenaire."
+    },
+    {
+      "id": "adams",
+      "tier": "secondary",
+      "title": "Xenopedia — Adams",
+      "url": "https://avp.fandom.com/wiki/Adams",
+      "scope": "Peau hâlée, auburn court, taches de rousseur."
+    },
+    {
+      "id": "rollins",
+      "tier": "secondary",
+      "title": "Xenopedia — Andrea Rollins",
+      "url": "https://avp.fandom.com/wiki/Andrea_Rollins",
+      "scope": "Mandataire, cheveux bruns ; apparence détaillée non recoupée."
+    },
+    {
+      "id": "reaper",
+      "tier": "secondary",
+      "title": "Xenopedia — Reaper (désambiguïsation)",
+      "url": "https://avp.fandom.com/wiki/Reaper",
+      "scope": "Reaper : pistolet du roman."
+    },
+    {
+      "id": "plasma",
+      "tier": "secondary",
+      "title": "Xenopedia — Plasma Rifle",
+      "url": "https://avp.fandom.com/wiki/Plasma_Rifle",
+      "scope": "Modèle 50 Watt, distinct des armes des autres jeux."
+    },
+    {
+      "id": "plasma-description",
+      "tier": "secondary",
+      "title": "Yautja Encyclopedia — armement humain",
+      "url": "https://yautjaencyclope.altervista.org/weapons-human.html",
+      "scope": "Canon court, trois cellules, modes de tir, risque thermique. Données à confronter au roman."
+    },
+    {
+      "id": "plot",
+      "tier": "secondary",
+      "title": "AvP Central — dossier Sea of Sorrows",
+      "url": "https://www.avpcentral.com/alien-sea-of-sorrows",
+      "scope": "Rôles et séquences générales : chantier, mine, fouilles, reine, hôtes, navette, consigne. Résumé secondaire, pas texte intégral."
+    },
+    {
+      "id": "decker",
+      "tier": "secondary",
+      "title": "AvP Central — Alan Decker",
+      "url": "https://www.avpcentral.com/alan-decker",
+      "scope": "Inspection civile et blessures ; pas de portrait officiel confirmé."
+    }
+  ],
+  "locations": [
+    {
+      "id": "surface",
+      "name": "Sables toxiques de New Galveston",
+      "rooms": [
+        "s01",
+        "s02",
+        "s11",
+        "s36"
+      ],
+      "source": "titan",
+      "status": "présent · plans originaux"
+    },
+    {
+      "id": "earth",
+      "name": "Chicago : commission et retour civil",
+      "rooms": [
+        "s04",
+        "s05",
+        "s06"
+      ],
+      "source": "excerpt",
+      "status": "présent condensé · appartement et consultation non métrés"
+    },
+    {
+      "id": "transport",
+      "name": "Transport sanitaire puis transport W-Y",
+      "rooms": [
+        "s03",
+        "s07",
+        "s08",
+        "s09",
+        "s10",
+        "s38",
+        "s39",
+        "s40"
+      ],
+      "source": "plot",
+      "status": "présent condensé · nom de vaisseau non affirmé"
+    },
+    {
+      "id": "mine",
+      "name": "Ancienne mine et puits",
+      "rooms": [
+        "s13",
+        "s14",
+        "s15",
+        "s16",
+        "s17",
+        "s18",
+        "s30"
+      ],
+      "source": "plot",
+      "status": "présent · extension industrielle originale"
+    },
+    {
+      "id": "camp",
+      "name": "Abri de surface / Quonset",
+      "rooms": [
+        "s12"
+      ],
+      "source": "plot",
+      "status": "présent · dimensions interprétées"
+    },
+    {
+      "id": "excavation",
+      "name": "Carène et fouilles de la cité",
+      "rooms": [
+        "s19",
+        "s20",
+        "s21",
+        "s22",
+        "s23",
+        "s24",
+        "s25"
+      ],
+      "source": "plot",
+      "status": "présent · pas de vaisseau des Ingénieurs imposé"
+    },
+    {
+      "id": "tubes",
+      "name": "Réseau de tubes et passages de ruche",
+      "rooms": [
+        "s26",
+        "s27",
+        "s28",
+        "s29"
+      ],
+      "source": "plot",
+      "status": "présent · graphe original"
+    },
+    {
+      "id": "queen",
+      "name": "Ponte et reine",
+      "rooms": [
+        "s32",
+        "s33"
+      ],
+      "source": "plot",
+      "status": "présent · trois attaches de boss originales"
+    },
+    {
+      "id": "return",
+      "name": "Escalier de secours et remontée",
+      "rooms": [
+        "s31",
+        "s34",
+        "s35"
+      ],
+      "source": "plot",
+      "status": "présent condensé · pas 7000 pieds jouables continus"
+    },
+    {
+      "id": "shuttle",
+      "name": "Navette et capture",
+      "rooms": [
+        "s37"
+      ],
+      "source": "plot",
+      "status": "présent · scène condensée et rôles simplifiés"
+    },
+    {
+      "id": "company-cities",
+      "name": "Autres villes de la compagnie",
+      "rooms": [],
+      "source": "plot",
+      "status": "mention de contexte seulement · pas créées en zones visitables"
+    },
+    {
+      "id": "annexes",
+      "name": "Annexes de jeu",
+      "rooms": [
+        "s41",
+        "s42",
+        "s43",
+        "s44",
+        "s45",
+        "s46",
+        "s47",
+        "s48",
+        "s49",
+        "s50"
+      ],
+      "source": null,
+      "status": "originales · ne pas compter comme lieux attestés"
+    }
+  ],
+  "characters": {
+    "decker": {
+      "name": "Alan Decker",
+      "role": "Inspecteur ICC, civil",
+      "skin": "#ba9676",
+      "hair": "#493b32",
+      "jacket": "#8c8067",
+      "build": 1,
+      "style": "civil",
+      "evidence": "primary-role",
+      "known": "Fonction ICC confirmée par Titan. Visage, yeux, coiffure et mesures non vérifiés."
+    },
+    "manning": {
+      "name": "Manning",
+      "role": "Chef mercenaire",
+      "skin": "#b58f70",
+      "hair": "#343637",
+      "jacket": "#526364",
+      "build": 1.22,
+      "style": "mercenary",
+      "evidence": "secondary",
+      "known": "Cheveux noirs grisonnants et forte carrure : notice Xenopedia. Tenue et visage interprétés."
+    },
+    "adams": {
+      "name": "Adams",
+      "role": "Mercenaire puis porteuse",
+      "skin": "#ad7e59",
+      "hair": "#824730",
+      "jacket": "#666957",
+      "build": 0.98,
+      "style": "mercenary",
+      "evidence": "secondary",
+      "known": "Peau hâlée, cheveux auburn courts et taches de rousseur : notice Xenopedia. Parasite adhérent royal, plus volumineux et à doigts palmés : notice secondaire ; échelle graphique interprétée.",
+      "parasite": "royal_facehugger_secondary"
+    },
+    "elway": {
+      "name": "Elway",
+      "role": "Mercenaire puis porteur",
+      "skin": "#a88367",
+      "hair": "#48423b",
+      "jacket": "#536168",
+      "build": 1.03,
+      "style": "mercenary",
+      "evidence": "secondary-role",
+      "known": "Rôle de porteur recoupé. Apparence non vérifiée.",
+      "parasite": "facehugger_secondary"
+    },
+    "rollins": {
+      "name": "Andrea Rollins",
+      "role": "Mandataire Weyland-Yutani",
+      "skin": "#bb9b83",
+      "hair": "#5b3b2e",
+      "jacket": "#323d46",
+      "build": 0.95,
+      "style": "corporate",
+      "evidence": "secondary",
+      "known": "Cheveux bruns indiqués par Xenopedia. Pas de visage emprunté à la comédienne audio ; tenue interprétée."
+    },
+    "harriman": {
+      "name": "Walter Harriman",
+      "role": "Commission, Chicago",
+      "skin": "#ad917c",
+      "hair": "#74706a",
+      "jacket": "#4b4f56",
+      "build": 1.07,
+      "style": "corporate",
+      "evidence": "primary-excerpt-role",
+      "known": "Nom et bureau à Chicago : extrait public. Apparence non vérifiée."
+    },
+    "rand": {
+      "name": "Lucas Rand",
+      "role": "Chantier de relevés",
+      "skin": "#92765e",
+      "hair": "#403936",
+      "jacket": "#b29b60",
+      "build": 1.02,
+      "style": "worker",
+      "evidence": "secondary-role",
+      "known": "Rôle de chantier : référence secondaire. Apparence interprétée."
+    },
+    "bronson": {
+      "name": "Bronson",
+      "role": "Technicien du chantier",
+      "skin": "#b09070",
+      "hair": "#4f423b",
+      "jacket": "#8d8b5f",
+      "build": 1.03,
+      "style": "worker",
+      "evidence": "secondary-role",
+      "known": "Nom dans le relevé secondaire. Apparence non vérifiée."
+    },
+    "badejo": {
+      "name": "Badejo",
+      "role": "Technicien du chantier",
+      "skin": "#977862",
+      "hair": "#3f3933",
+      "jacket": "#809078",
+      "build": 0.99,
+      "style": "worker",
+      "evidence": "secondary-role",
+      "known": "Nom dans le relevé secondaire. Aucune apparence déduite du patronyme."
+    },
+    "medic": {
+      "name": "Équipe médicale",
+      "role": "Personnel non individualisé",
+      "skin": "#b89576",
+      "hair": "#50443b",
+      "jacket": "#77958e",
+      "build": 1,
+      "style": "medical",
+      "evidence": "original",
+      "known": "Rôle composite de la mise en scène ; ne remplace pas un portrait de Markowitz ou Herschel."
+    },
+    "cho": {
+      "name": "Cho",
+      "role": "Relais mercenaire",
+      "skin": "#ab8e74",
+      "hair": "#3c3630",
+      "jacket": "#58665e",
+      "build": 1.07,
+      "style": "mercenary",
+      "evidence": "secondary-role",
+      "known": "Rôle de relais établi par source secondaire. Apparence non vérifiée ; aucune origine déduite du nom."
+    },
+    "silas": {
+      "name": "Silas",
+      "role": "Équipe archéologique",
+      "skin": "#b69c7e",
+      "hair": "#746953",
+      "jacket": "#797461",
+      "build": 0.97,
+      "style": "worker",
+      "evidence": "secondary-role",
+      "known": "Présence dans le dossier d’incident ; apparition vivante non ajoutée arbitrairement."
+    },
+    "muller": {
+      "name": "Muller",
+      "role": "Mercenaire de la remontée",
+      "skin": "#b49b7b",
+      "hair": "#514b44",
+      "jacket": "#505f61",
+      "build": 1.08,
+      "style": "mercenary",
+      "evidence": "secondary-role",
+      "known": "Rôle attesté secondairement ; apparence interprétée."
+    },
+    "dave": {
+      "name": "Dave",
+      "role": "Mercenaire de la remontée",
+      "skin": "#967a60",
+      "hair": "#383c3b",
+      "jacket": "#697064",
+      "build": 1.09,
+      "style": "mercenary",
+      "evidence": "secondary-role",
+      "known": "Rôle attesté secondairement ; apparence interprétée."
+    },
+    "pritchett": {
+      "name": "Pritchett",
+      "role": "Pilote de la navette",
+      "skin": "#ad9075",
+      "hair": "#52483f",
+      "jacket": "#4b6774",
+      "build": 1,
+      "style": "pilot",
+      "evidence": "secondary-role",
+      "known": "Pilote cité ; mort scénarisée détaillée non reconstituée dans cette passe."
+    },
+    "cherbourg": {
+      "name": "Cherbourg",
+      "role": "Commandement du transport",
+      "skin": "#b99c85",
+      "hair": "#74716a",
+      "jacket": "#324c59",
+      "build": 1.03,
+      "style": "officer",
+      "evidence": "secondary-role",
+      "known": "Nom dans le relevé secondaire. Apparence et uniforme non vérifiés."
+    },
+    "worker": {
+      "name": "Personnel",
+      "role": "Figuration composite",
+      "skin": "#b59a79",
+      "hair": "#474136",
+      "jacket": "#78857c",
+      "build": 1,
+      "style": "worker",
+      "evidence": "original",
+      "known": "Figuration originale."
+    }
+  },
+  "weapons": [
+    {
+      "id": "pistol",
+      "name": "Reaper",
+      "status": "jouable",
+      "source": "reaper",
+      "canonical": "Nom et type de pistolet",
+      "limits": "Silhouette, calibre, 12 coups et dégâts : interprétation de jeu."
+    },
+    {
+      "id": "pulse",
+      "name": "Fusil à impulsions",
+      "status": "jouable_nouveau",
+      "source": "plot",
+      "canonical": "Arme citée lors de la destruction du puits",
+      "limits": "Attribution facultative à Decker originale. Aucun modèle M41A revendiqué ; 30 coups : équilibrage."
+    },
+    {
+      "id": "plasma",
+      "name": "Fusil plasma · 50 W",
+      "status": "jouable_nouveau",
+      "source": "plasma",
+      "canonical": "Modèle cité dans le roman",
+      "limits": "Silhouette, 12 tirs/cellule, cadence, dégâts et seuil thermique interprétés ; trois cellules dans le kit."
+    },
+    {
+      "id": "foam",
+      "name": "Foamer · projection de mousse",
+      "status": "jouable",
+      "source": "plot",
+      "canonical": "Outil de capture employé par Manning",
+      "limits": "Usage direct par Decker et jauge de mousse : adaptation."
+    },
+    {
+      "id": "flame",
+      "name": "Lance-flammes de gameplay",
+      "status": "jouable_original",
+      "source": null,
+      "canonical": "Non certifié comme arme distincte dans le passage de référence",
+      "limits": "Ancienne arme conservée ; ne pas la présenter comme modèle authentifié."
+    },
+    {
+      "id": "grenades",
+      "name": "Grenades de Silas",
+      "status": "récit_seulement",
+      "source": "plot",
+      "canonical": "Employées contre le puits",
+      "limits": "Pas de lancer libre par Decker dans cette version."
+    },
+    {
+      "id": "warheads",
+      "name": "Charges plasma orbitales",
+      "status": "séquence_observation",
+      "source": "plot",
+      "canonical": "Frappe commandée depuis le transport",
+      "limits": "Pas une arme de poche ni un pouvoir orbital libre du joueur."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "radio",
+      "name": "Radio de liaison",
+      "status": "outil_de_jeu",
+      "source": null,
+      "limits": "Liaisons et dialogues de gameplay ; forme, modèle et description matérielle non vérifiés dans le texte intégral."
+    },
+    {
+      "id": "lamp",
+      "name": "Lampe personnelle",
+      "status": "jouable",
+      "source": null,
+      "limits": "État moteur ; modèle et tenue non certifiés."
+    },
+    {
+      "id": "tracker",
+      "name": "Détecteur de mouvement",
+      "status": "jouable",
+      "source": null,
+      "limits": "Fonctionnel ; modèle, chiffres et interface originaux."
+    },
+    {
+      "id": "filter",
+      "name": "Protection respiratoire",
+      "status": "jouable",
+      "source": "titan",
+      "limits": "Les sables toxiques sont confirmés par Titan ; le filtre consommable et son apparence restent un mécanisme de jeu."
+    },
+    {
+      "id": "sampler",
+      "name": "Carottier",
+      "status": "objectif_de_chantier",
+      "source": "plot",
+      "limits": "Interaction au début ; pas un outil de combat portable."
+    },
+    {
+      "id": "scanner",
+      "name": "Relevés et terminal ICC",
+      "status": "objectifs",
+      "source": null,
+      "limits": "Le rôle ICC est confirmé ; cet ensemble de terminal et relevés jouables est une interprétation, pas un équipement authentifié par la notice."
+    },
+    {
+      "id": "cage",
+      "name": "Caisson de capture",
+      "status": "dispositif_physique",
+      "source": "plot",
+      "limits": "État et capture réelle ; modèle dessiné original."
+    },
+    {
+      "id": "stretchers",
+      "name": "Brancards Adams / Elway",
+      "status": "jouable",
+      "source": "plot",
+      "limits": "Transport des deux hôtes ; châssis motorisés, intégrité et allures originaux."
+    },
+    {
+      "id": "cryo",
+      "name": "Consigne cryogénique",
+      "status": "séquence",
+      "source": "plot",
+      "limits": "Les deux porteurs restent contaminés, pas guéris par le sauvetage."
+    },
+    {
+      "id": "medkits",
+      "name": "Trousses et consommables",
+      "status": "jouable",
+      "source": null,
+      "limits": "Soins simplifiés, réserve finie."
+    },
+    {
+      "id": "sensors",
+      "name": "Trois balises réutilisables",
+      "status": "jouable_original",
+      "source": null,
+      "limits": "Création des v0.6, ne pas confondre avec une sonde canonique."
+    },
+    {
+      "id": "decoys",
+      "name": "Leurres acoustiques",
+      "status": "jouable_original",
+      "source": null,
+      "limits": "Création de gameplay."
+    },
+    {
+      "id": "repair",
+      "name": "Renforts de châssis",
+      "status": "jouable_original",
+      "source": null,
+      "limits": "Réparation et économie originales."
+    },
+    {
+      "id": "shocker",
+      "name": "Shocker / neutralisation",
+      "status": "à_vérifier",
+      "source": null,
+      "limits": "Mention à confronter au texte ; non ajouté comme équipement canonique certifié."
+    }
+  ],
+  "remaining": [
+    "Confronter le texte intégral et les variantes roman/audio.",
+    "Vérifier les dimensions, descriptions physiques, uniformes, accessoires et totalité des lieux.",
+    "Reconstituer les décès et interventions secondaires au lieu de simples mentions.",
+    "Remplacer ou proposer une alternative aux trois attaches fictives du boss.",
+    "Reconstituer la capture conduite par Manning et les dernières actions de Decker plutôt qu’un simple objectif.",
+    "Le visage de Decker et de la majorité de la distribution reste non authentifié."
+  ],
+  "sourcePolicy": "Les fiches secondaires sont des pistes, pas une preuve primaire. Les plans, distances et caractéristiques de combat restent du gameplay."
+}

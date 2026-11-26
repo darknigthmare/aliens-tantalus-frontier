@@ -1,0 +1,234 @@
+{
+  "version": "0.9.0",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "checks": [
+    {
+      "name": "HTML v0.5, schéma 8 et 120 dossiers chargés",
+      "pass": true
+    },
+    {
+      "name": "Guide : cloisons, position de Manning et lectures expliqués",
+      "pass": true
+    },
+    {
+      "name": "Migration 0.3→0.5 par Reprendre sans changer les objectifs",
+      "pass": true
+    },
+    {
+      "name": "Copie originale backup-v3 conservée exactement",
+      "pass": true
+    },
+    {
+      "name": "Les sauvegardes du jeu hôte ne sont pas écrasées",
+      "pass": true
+    },
+    {
+      "name": "G maintenu progresse sans ouverture instantanée",
+      "pass": true
+    },
+    {
+      "name": "Pause fige aussi une manœuvre de cloison",
+      "pass": true
+    },
+    {
+      "name": "Reprendre ne garde pas la touche G enfoncée",
+      "pass": true
+    },
+    {
+      "name": "La réouverture au clavier libère effectivement la collision",
+      "pass": true
+    },
+    {
+      "name": "Une manœuvre terminée augmente le compteur une seule fois",
+      "pass": true
+    },
+    {
+      "name": "Clic droit : ordre de position sans tir parasite",
+      "pass": true
+    },
+    {
+      "name": "Manning marche vers le point sans téléportation",
+      "pass": true
+    },
+    {
+      "name": "Manning atteint le point et le tient",
+      "pass": true
+    },
+    {
+      "name": "V rappelle Manning et annule le point",
+      "pass": true
+    },
+    {
+      "name": "La carte utilise l’état réel de la cloison",
+      "pass": true
+    },
+    {
+      "name": "Un clic sur le plan local donne aussi une position praticable",
+      "pass": true
+    },
+    {
+      "name": "Le plan ne contient aucune balise de position ennemie",
+      "pass": true
+    },
+    {
+      "name": "Espace révèle la lecture et sa progression à l’écran",
+      "pass": true
+    },
+    {
+      "name": "La lecture consigne un seul nouveau dossier",
+      "pass": true
+    },
+    {
+      "name": "La lecture facultative ne valide pas un objectif principal",
+      "pass": true
+    },
+    {
+      "name": "La perception se relit dans les dossiers débloqués",
+      "pass": true
+    },
+    {
+      "name": "Le HUD signale une cloison fermée sur le prochain passage",
+      "pass": true
+    },
+    {
+      "name": "Le plan précise quelle cloison locale doit être ouverte",
+      "pass": true
+    },
+    {
+      "name": "Bilan final : 8 lectures et 16 manœuvres conservées",
+      "pass": true
+    },
+    {
+      "name": "Format 960 × 720 sans débordement horizontal de la page",
+      "pass": true
+    },
+    {
+      "name": "48 rendus ciblés : 8 cloisons × 3 états × 2 présentations",
+      "pass": true
+    },
+    {
+      "name": "Aucune erreur JavaScript dans cette suite",
+      "pass": true
+    },
+    {
+      "name": "Aucune dépendance réseau du HTML autonome",
+      "pass": true
+    }
+  ],
+  "passed": 28,
+  "failed": 0,
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "description": "Écran titre réel de la version 0.5.0.",
+      "provenance": "title",
+      "source_save": null,
+      "source_sha256": null,
+      "image_sha256": "7a1fc2d12ae77c5d4086f617246a9186b86eadb0d46663c9e9c7fac6db2b338c",
+      "state_sha256": "40429703a514932103c9bcd920a2a0289fcda31f0e8cb87c4fb4e95e7fc84615"
+    },
+    {
+      "file": "03_manoeuvre.png",
+      "description": "Pupitre de l’atelier : réouverture commencée au clavier G depuis la sauvegarde du parcours. Le travail partiel est affiché.",
+      "provenance": "live_input_from_continuous_save",
+      "source_save": "closed-gate-s17",
+      "source_sha256": "8fb80463e1afe970928e43e51eb4158858711e1d8e5c9a934b8fb7ab95461196",
+      "image_sha256": "d16ec21901dfb791dd7b16237a2a1b57c3d392ab7b735869528ee389b0370694",
+      "state_sha256": "735b6709c57694d5a45dadfbed3863ba5b69adf15d11ebe860285facb3f49584"
+    },
+    {
+      "file": "08_manning.png",
+      "description": "Manning rejoint puis tient une position indiquée au clic droit dans l’atelier ouvert. Déplacement joué dans le navigateur.",
+      "provenance": "live_input_from_continuous_save",
+      "source_save": "closed-gate-s17",
+      "source_sha256": "8fb80463e1afe970928e43e51eb4158858711e1d8e5c9a934b8fb7ab95461196",
+      "image_sha256": "5b4211235dc267bd086d3cc1026e47f28a7fe26bcdc39a114808119c58e5c437",
+      "state_sha256": "0157ead66616b63a529a30f7e39a8351acd8c8d281c4fbbc3842c08a7975e89c"
+    },
+    {
+      "file": "06_perception.png",
+      "description": "Lecture empathique dans la salle des restes : Espace maintenu depuis une sauvegarde du parcours, sans déplacement ou modification des acteurs.",
+      "provenance": "live_input_from_continuous_save",
+      "source_save": "reading-echo-s23",
+      "source_sha256": "a016f58ff65aac5f0f57e7720e7327df1878adf0d89c7504c4c05b422e9743ed",
+      "image_sha256": "8a69f1745d7b2dd4eb580fa5b9097d09eddbc8588e1add22b729541da9460ad3",
+      "state_sha256": "e80284f34906da9b6f21f3195dd6a86ac559ae40fa0db99ccb32cef78aff0a9f"
+    },
+    {
+      "file": "02_cloison.png",
+      "description": "Cloison de l’atelier fermée et point de couverture de Manning. Sauvegarde du parcours complet en Hybride / Survie.",
+      "provenance": "continuous_save",
+      "source_save": "closed-gate-s17",
+      "source_sha256": "8fb80463e1afe970928e43e51eb4158858711e1d8e5c9a934b8fb7ab95461196",
+      "image_sha256": "e427c1a3c3f2d6074c0cd8bdd573151753f230dc999f60869dad967b75f2f5cf",
+      "state_sha256": "c035cfa859109843b05bcd88e9ae1ababe619e51676174c51d8d5886c8721805"
+    },
+    {
+      "file": "04_impact.png",
+      "description": "Frappe annoncée contre la grille de machinerie. Scénario isolé : entrée directe dans s30 depuis une sauvegarde équipée, puis déplacements et dégâts simulés sans repositionner les acteurs.",
+      "provenance": "isolated_simulation",
+      "source_save": "scenario-impact",
+      "source_sha256": "1a27b6c3bf92bf339835b7aae18564b3441e37388d8de825fa67b5ddcebc15fd",
+      "image_sha256": "cedf1623db3f55195d005f97c60e1bd9249798b8c976f5c2a845780774dcb10a",
+      "state_sha256": "a6fff573d90a3c5889cfa88c5058f6145e04bea3f3c2b8314e0309cd5f96be9e"
+    },
+    {
+      "file": "05_rupture.png",
+      "description": "La même grille après sa rupture par les créatures. Les dégâts et la perte d’intégrité proviennent du scénario simulé.",
+      "provenance": "isolated_simulation",
+      "source_save": "scenario-broken",
+      "source_sha256": "520c2507cf5c8739c27660c8ccb9457b89678719200fe121b482c73125e650f1",
+      "image_sha256": "55efac1579cea4b45893f264951e18f35ccc1aa9b7d2bd58230e0479ba74d0f8",
+      "state_sha256": "cea64a06ca95f9ade0aaf54308bee7aa8481095bda9e01f384c3ef479fc872fd"
+    },
+    {
+      "file": "09_convoi.png",
+      "description": "Les brancards rassemblés du même côté de la cloison des paliers. Sauvegarde du parcours complet, sans correction des positions.",
+      "provenance": "continuous_save",
+      "source_save": "closed-gate-s35",
+      "source_sha256": "2a5d9b7350f100fc0923d8aa93779693e2dae983c8bc8f6046d14e63968627e1",
+      "image_sha256": "c0467cb46c723358e61cbdd462b43e99ec9ec6ca7cce7fa25f98032bdc60446c",
+      "state_sha256": "a750676e64fbe4f82036a32b6f3e26cb4c6e78ebbc932758ad2ea65b879f82ed"
+    },
+    {
+      "file": "10_ponte.png",
+      "description": "Chambre des œufs après la lecture facultative. État conservé du parcours Hybride / Survie.",
+      "provenance": "continuous_save",
+      "source_save": "read-echo-s32",
+      "source_sha256": "c87572e44aa456d69e6e7609b7a63879a820b42d4a0f503d09d87347632ca0de",
+      "image_sha256": "fde427ac19b306dee718d422e082249027a705cb8097a1a387d1bb79090d8911",
+      "state_sha256": "bf7f24a338ea91d38be1a3b945bf0d8c065a3168484e30a1625fc0a77f4473a7"
+    },
+    {
+      "file": "07_plan.png",
+      "description": "Plan local : empreinte réelle de la cloison fermée et point donné à Manning, sans position ennemie.",
+      "provenance": "ui_from_continuous_save",
+      "source_save": "closed-gate-s17",
+      "source_sha256": "8fb80463e1afe970928e43e51eb4158858711e1d8e5c9a934b8fb7ab95461196",
+      "image_sha256": "a24fc71d111892415017cf7585fcd17459598283768573cf2e6699eeb6efbe8b",
+      "state_sha256": "ce3d2d9908ec902aeab2c8436dcb618c815792f80804b3fa677e25a05f369054"
+    },
+    {
+      "file": "11_bilan.png",
+      "description": "Bilan réel du parcours Hybride / Survie : campagne terminée, huit lectures et seize manœuvres.",
+      "provenance": "ui_from_continuous_save",
+      "source_save": "HYBRID-survival-33",
+      "source_sha256": "bca32d5e61dfbe9c40006d999fbae204feb1602973077f5530acd4164f969076",
+      "image_sha256": "e2c4ab2015eb21bfce2605c6eb04c05c51006e109f7655cc9be9af155b47f433",
+      "state_sha256": "4d32b9c26a0a49a6e7d384949a4ef29a572a782f30b6b06da25b34070cfd7f47"
+    },
+    {
+      "file": "12_format_960.png",
+      "description": "Même convoi, format 960 × 720. Contrôle de disposition ; ce n’est pas une certification mobile complète.",
+      "provenance": "responsive_from_continuous_save",
+      "source_save": "closed-gate-s35",
+      "source_sha256": "2a5d9b7350f100fc0923d8aa93779693e2dae983c8bc8f6046d14e63968627e1",
+      "image_sha256": "b2e36a9f7effac3caf792d1b0d252c8dd9dd5a57abf15aec1cae0830ff6b317b",
+      "state_sha256": "a750676e64fbe4f82036a32b6f3e26cb4c6e78ebbc932758ad2ea65b879f82ed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "rendered_shutter_states": 48,
+  "storage": "explicit memory fixture; not native persistence"
+}

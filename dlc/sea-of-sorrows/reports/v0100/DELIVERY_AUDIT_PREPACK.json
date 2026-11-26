@@ -1,0 +1,272 @@
+{
+  "version": "0.10.0",
+  "root": "/mnt/data/ALIEN_MER_DES_CHAGRINS_v0.10.0",
+  "passed": 66,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Version 0.10.0",
+      "pass": true
+    },
+    {
+      "name": "Package version",
+      "pass": true
+    },
+    {
+      "name": "Installer descriptor",
+      "pass": true
+    },
+    {
+      "name": "Manifest version",
+      "pass": true
+    },
+    {
+      "name": "Manifest exhaustif",
+      "pass": true
+    },
+    {
+      "name": "Manifest unique",
+      "pass": true
+    },
+    {
+      "name": "Manifest toutes tailles",
+      "pass": true
+    },
+    {
+      "name": "Manifest toutes empreintes",
+      "pass": true
+    },
+    {
+      "name": "Aucune police redistribuée",
+      "pass": true
+    },
+    {
+      "name": "Aucun lien symbolique",
+      "pass": true
+    },
+    {
+      "name": "50 salles",
+      "pass": true
+    },
+    {
+      "name": "59 liaisons",
+      "pass": true
+    },
+    {
+      "name": "54 réciproques",
+      "pass": true
+    },
+    {
+      "name": "5 transferts à sens unique",
+      "pass": true
+    },
+    {
+      "name": "113 seuils",
+      "pass": true
+    },
+    {
+      "name": "Tous les seuils classés",
+      "pass": true
+    },
+    {
+      "name": "98 coordonnées déplacées",
+      "pass": true
+    },
+    {
+      "name": "126 dossiers",
+      "pass": true
+    },
+    {
+      "name": "18 chapitres",
+      "pass": true
+    },
+    {
+      "name": "33 objectifs",
+      "pass": true
+    },
+    {
+      "name": "Registre synchronisé",
+      "pass": true
+    },
+    {
+      "name": "Texte intégral non comparé explicite",
+      "pass": true
+    },
+    {
+      "name": "Aucun pourcentage fictif",
+      "pass": true
+    },
+    {
+      "name": "HTML sans scripts distants",
+      "pass": true
+    },
+    {
+      "name": "HTML sans CSS distant",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact data",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact core",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact render",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact world-art",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact tactics-art",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact controls",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact support",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact soundscape",
+      "pass": true
+    },
+    {
+      "name": "Module embarqué exact main",
+      "pass": true
+    },
+    {
+      "name": "reports/v0100/browser.json même HTML",
+      "pass": true
+    },
+    {
+      "name": "reports/v0100/browser.json aucun échec",
+      "pass": true
+    },
+    {
+      "name": "reports/v0100/regression/browser.json même HTML",
+      "pass": true
+    },
+    {
+      "name": "reports/v0100/regression/browser.json aucun échec",
+      "pass": true
+    },
+    {
+      "name": "201 contrôles navigateur",
+      "pass": true
+    },
+    {
+      "name": "Native refusé déclaré",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 01_titre.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 02_personnages.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 03_armurerie.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 04_ratelier_terrain.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 05_cage_puits.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 06_atelier.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 07_porteurs.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 08_stase.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 09_seuil_s17.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 09_seuil_s21.png",
+      "pass": true
+    },
+    {
+      "name": "Capture PNG exacte 10_registre_390.png",
+      "pass": true
+    },
+    {
+      "name": "Six parcours gagnés",
+      "pass": true
+    },
+    {
+      "name": "198 exports d’objectifs",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours src/core.js",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours src/data.js",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours src/support.js",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours src/soundscape.js",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours qa/tactical.cjs",
+      "pass": true
+    },
+    {
+      "name": "Source de parcours qa/fidelity-campaign.cjs",
+      "pass": true
+    },
+    {
+      "name": "28 contrôles documentaires",
+      "pass": true
+    },
+    {
+      "name": "Document contrôlé exact reports/RAPPORT_ILLUSTRE.html",
+      "pass": true
+    },
+    {
+      "name": "Document contrôlé exact CODEX_MER_DES_CHAGRINS.html",
+      "pass": true
+    },
+    {
+      "name": "Document contrôlé exact REGISTRE_FIDELITE_MER_DES_CHAGRINS.html",
+      "pass": true
+    },
+    {
+      "name": "461 tests Node courants",
+      "pass": true
+    },
+    {
+      "name": "Schéma 8",
+      "pass": true
+    },
+    {
+      "name": "Hôte non raccordé",
+      "pass": true
+    }
+  ]
+}

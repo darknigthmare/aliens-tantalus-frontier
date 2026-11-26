@@ -1,0 +1,6 @@
+
+> alien-mer-des-chagrins-prototype@0.10.0 build
+> python3 tools/sync_data.py && python3 tools/build_standalone.py
+
+src/data.js synchronisé avec data/campaign.json
+/mnt/data/ALIEN_MER_DES_CHAGRINS_v0.10.0/MER_DES_CHAGRINS_JOUABLE.html 551307

@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "edition": "0.10.3",
+  "method": "built-in image_gen",
+  "baseCommit": "ff6d538b32f9eb8946f2d296df1b790bf479eef9",
+  "canonicalOneToOneCertified": false,
+  "completeAnimationCycles": false,
+  "sourcePixelEdits": false,
+  "attempted": 7,
+  "generated": 5,
+  "rejected": 2,
+  "publication": "Git blob bytes verified against measured pre-outage hashes; attached atomically by the parent continuation commit.",
+  "sources": [
+    {
+      "id": "neca-big-chap",
+      "url": "https://store.necaonline.com/products/alien-big-chap-quarter-scale-action-figure",
+      "scope": "Generic film morphology only; not Sea of Sorrows novel-specific design"
+    },
+    {
+      "id": "neca-queen",
+      "url": "https://store.necaonline.com/collections/horror-collection/products/aliens-40th-anniversary-alien-queen-ultra-deluxe-boxed-figure",
+      "scope": "Generic film Queen silhouette only"
+    },
+    {
+      "id": "sws-queen",
+      "url": "https://www.stanwinstonschool.com/blog/aliens-30th-anniversary",
+      "scope": "Primary making-of confirms Queen four-arm anatomy"
+    },
+    {
+      "id": "fidelity-local",
+      "path": "dlc/sea-of-sorrows/data/fidelity.json",
+      "scope": "50 W plasma designation; exact appearance unspecified. Flamethrower explicitly gameplay-original."
+    },
+    {
+      "id": "sos-novel-ch04-joblo",
+      "title": "Alien: Sea of Sorrows, chapter 4 Adrift, authorized excerpt",
+      "url": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "sourceType": "primary-novel-excerpt"
+    }
+  ],
+  "assets": [
+    {
+      "id": "creatures/adult",
+      "status": "generation-refused",
+      "prompt": "Use case: stylized-concept. Asset type: a single high-detail 2D side-view game creature sprite for Alien: Sea of Sorrows / La Mer des Chagrins. Primary request: ONE adult Xenomorph from the Alien franchise, entire body and entire tail in a calm standing stalking-ready pose, in exact orthographic side profile FACING RIGHT. Classic slender black biomechanical anatomy: long smooth domed eyeless head pointing right, small closed toothed mouth, ribbed torso, dorsal biomechanical tubes, two long arms with clawed hands, two bent legs with feet planted on one horizontal baseline, long segmented tail curling gently behind to the left with its tip fully inside the frame. Faithful broad Alien film morphology, not a new hybrid. Rendering: very high detail realistic hand-painted/pre-rendered game art, charcoal black shell with restrained cool blue-grey edge lighting, bone/rib texture sharply readable, subtle worn and damp material, coherent anatomy. Full silhouette, not cropped, generous 8 percent transparent margin on all sides. One creature only, no extra views, no grid, no collage, no sheet, no character, no scenery, no stand or floor, no cast shadow, no text, no labels, no watermark. No injury, no violence, no fluid spray. Genuine fully transparent background/alpha, clean semitransparent antialiased edges. This is a franchise-inspired gameplay interpretation, not a claim of a definitive novel-specific model.",
+      "transparentBackgroundRequested": true,
+      "path": null,
+      "gitBlobSha": null,
+      "sha256": null,
+      "sizeBytes": null,
+      "sourceReferenceType": "franchise-morphology-or-secondary-weapon-reference",
+      "canonicalOneToOneCertified": false,
+      "refusal": {
+        "summary": "Image generation tool rejected this output; no image produced."
+      }
+    },
+    {
+      "id": "creatures/queen",
+      "status": "generated-registered-static-canvas-placement-reviewed",
+      "prompt": "Use case: stylized-concept. Asset type: one high-detail 2D side-view game boss sprite for Alien: Sea of Sorrows / La Mer des Chagrins. Primary request: ONE Alien Queen from Aliens, entire creature visible in a calm grounded alert standing pose, exact orthographic SIDE PROFILE FACING RIGHT. Recognizable broad fan-like swept-back crown/crest, elongated jaw projecting right, ribbed biomechanical neck and torso, FOUR arms total (two large long outer arms and two distinctly smaller inner arms near the chest, with far limbs offset just enough to remain legible), two strong digitigrade legs planted on the same horizontal baseline, long segmented tail curling behind to the left with its spear tip fully visible. No egg sac. Faithful classic Queen silhouette and anatomy, not a new hybrid or humanoid costume. Rendering: crisp high-detail realistically painted/pre-rendered 2D game art, glossy charcoal-black exoskeleton with restrained cool blue-grey edge highlights, organic ribbing and armored crown detail, dark neutral material. Entire crown, limbs, feet and tail fit inside a generous 8 percent transparent margin. One creature only, one view only, no extra limbs, no grid, no collage, no sheet, no other objects, no background, no floor, no stand, no cast shadow, no text, no labels, no watermark, no violence or injury. Genuine transparent alpha background, clean antialiased edges. This sprite is a project interpretation of generic Queen morphology and does not claim an authenticated novel-specific appearance.",
+      "transparentBackgroundRequested": true,
+      "path": "dlc/sea-of-sorrows-visual/sprites/creatures/queen.png",
+      "gitBlobSha": "acc477abe6b425e7254265043355c977d795c01c",
+      "sha256": "0f882eff7928bcd130d09676e3117616656de7dc9c8e401c85b2ded8857f6251",
+      "sizeBytes": 2208282,
+      "sourceReferenceType": "franchise-morphology-or-secondary-weapon-reference",
+      "canonicalOneToOneCertified": false,
+      "refusal": null
+    },
+    {
+      "id": "weapons/plasma",
+      "status": "generation-refused",
+      "prompt": "Use case: stylized-concept. Asset type: single isolated weapon sprite for a detailed realistic 2D side-view science-fiction game. Primary request: one fictional compact 50-watt plasma rifle for the Alien: Sea of Sorrows game adaptation, exact orthographic SIDE PROFILE, short barrel pointing RIGHT, butt stock on LEFT. A practical battered industrial science-fiction device: short thick cylindrical emitter with a small dark aperture, angular compact grey-olive receiver, restrained cooling fins, one seated compact rectangular power-cell housing, clearly separated rear pistol grip with enclosed trigger guard, comfortable foregrip farther forward, simple shoulder stock. The novel's weapon name does not specify its exact appearance; this is an original visual interpretation for the project. Do not imitate an M41A or an XM99A and do not add Colonial Marines insignia. Detailed realistic hand-painted/pre-rendered 2D game-art quality, matte gunmetal and desaturated olive, small rubbed metal edges, minimal warning color, crisp legible silhouette. Safe neutral equipment catalogue pose; no operator, no firing, no beam, no flames, no ammunition diagram, no assembly diagram. Entire single object visible with 8 percent clear transparent margin all around. No disassembled parts, no extra cells beside it, no variants, no collage, no sheet, no text, no numbers, no logos, no watermark, no shadow, no floor or scenery. Genuine transparent alpha background and clean antialiased silhouette.",
+      "transparentBackgroundRequested": true,
+      "path": null,
+      "gitBlobSha": null,
+      "sha256": null,
+      "sizeBytes": null,
+      "sourceReferenceType": "franchise-morphology-or-secondary-weapon-reference",
+      "canonicalOneToOneCertified": false,
+      "refusal": {
+        "summary": "Image generation tool rejected this output; no image produced."
+      }
+    },
+    {
+      "id": "weapons/flame",
+      "status": "generated-registered-static-canvas-placement-reviewed",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated handheld weapon sprite for a detailed realistic 2D side-view science-fiction game. Primary request: ONE fictional industrial sci-fi flamethrower, explicitly an original gameplay design for the Alien: Sea of Sorrows adaptation. Exact orthographic SIDE PROFILE facing RIGHT: compact weathered grey-olive receiver, a short heavy nozzle with protective perforated shroud pointing right, clear rear pistol grip with guard, separated forward support grip, compact sealed reservoir integrated under the rear body, short internal-looking protected connection, simple left-side buttstock. Recognizably robust future industrial equipment and a cohesive whole object, no backpack or loose disconnected parts. Detailed realistic hand-painted/pre-rendered game-art style, matte industrial gunmetal and muted olive, restrained worn ochre accents and subtle edge abrasion. Neutral inactive inventory pose. No operator, no flame, no smoke, no action, no building instructions or mechanism cutaway. Whole object fully inside frame with 8 percent transparent margin. One sprite, one view only, no grid, no collage, no sheet, no labels, no text, no insignia, no watermark, no floor, no cast shadow, no scenery. Genuine transparent alpha background with clean antialiased edges. Do not depict or label this as an authenticated weapon model from the novel.",
+      "transparentBackgroundRequested": true,
+      "path": "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png",
+      "gitBlobSha": "8bc5818eb620cd8b8371cee53b83e7e2ade5891a",
+      "sha256": "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97",
+      "sizeBytes": 1558386,
+      "sourceReferenceType": "gameplay-original",
+      "canonicalOneToOneCertified": false,
+      "refusal": null
+    },
+    {
+      "id": "characters/carlyle-physician",
+      "status": "generated-registered-static-canvas-placement-reviewed",
+      "prompt": "Use case: stylized-concept. Asset type: one full-body 2D raster character sprite for the existing Alien: La Mer des Chagrins game. Primary request: the ANONYMOUS FEMALE PHYSICIAN aboard the Carlyle, as described in chapter 4 of James A. Moore's Alien: Sea of Sorrows. This is a book-based design interpretation, not an actress likeness. Subject: a stout, sturdy woman about forty years old, brown hair turning gray and gathered in a neat bun, blue eyes visible behind thick practical eyeglasses, wearing a white laboratory coat. Single adult woman only. Plain dark work trousers and practical flat medical shoes complete the unspecified lower costume as a restrained game adaptation. Full-length neutral standing pose, facing RIGHT in a readable lateral game profile, arms relaxed and hands empty. High detail realistic painted game sprite, grounded materials and fabric, subdued industrial-science-fiction style matching the project's characters, clean silhouette and soft neutral studio lighting. Show complete head, feet, hands and coat, with clear transparent margins around all edges. Genuine transparent background, no floor, no room, no vignette, no shadow panel, no labels, no text, no weapons, no armor, no badge identifying any named doctor. Keep one figure per image. Do not depict the younger existing field-medic composite.",
+      "transparentBackgroundRequested": true,
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-physician.png",
+      "gitBlobSha": "b57d130180e0da91a5d8eaa5d604686d4c821ed4",
+      "sha256": "a357b23a4509b913f8467f7efd98815c64b4b5b58f8b9851b94f60c325ec52f7",
+      "sizeBytes": 1560708,
+      "referenceSourcePath": null,
+      "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "sceneScope": [
+        "s03"
+      ],
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/decker-medical-gown",
+      "status": "generated-registered-static-canvas-placement-reviewed",
+      "prompt": "Use case: identity-preserve. Edit target: the supplied existing Alan Decker game sprite. Create exactly one new medical costume variant of the SAME man for the Carlyle scene in chapter 4 of Alien: Sea of Sorrows. Preserve his existing face, brown hair, apparent age, body proportions, right-facing orientation, neutral stance, realistic painted rendering, and complete full-body framing. Change only his clothes and footwear: replace the outdoor jacket, shirt, trousers, belt and boots with a simple opaque gray-blue medical gown, closed securely, loose and modest, reaching to mid-calf, with short sleeves, and practical flat hospital slippers. This is a non-graphic recovery scene; no visible wounds are necessary. Empty hands, no weapon, no armor, no bag or field equipment. Keep both feet fully visible, natural anatomy, usable transparent margins above the head and beneath the soles. Preserve transparent background and remove any remaining background haze or vignette; no room, bed, platform, lettering or additional figures. His project face remains a game interpretation, not a canonical official portrait. One separate character sprite only.",
+      "transparentBackgroundRequested": true,
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+      "gitBlobSha": "1d3b0d4437030d12488ee58bf36cb350015f96d2",
+      "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+      "sizeBytes": 1516131,
+      "referenceSourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+      "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "sceneScope": [
+        "s03"
+      ],
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "objectives/icc-handheld",
+      "status": "generated-registered-static-canvas-placement-reviewed",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated portable reporting device sprite for a 2D Alien: La Mer des Chagrins game. Primary request: Alan Decker's hand-held report computer used aboard the Carlyle, the function described in chapter 4 of Alien: Sea of Sorrows. The book gives no exact device silhouette; make a restrained project interpretation consistent with realistic retro-industrial Alien game props. One single compact handheld terminal only, no human hands and no stand: worn dark olive-gray rectangular casing, rounded protective corner edges, small recessed monochrome green display, a few practical physical keys, subtle screws and seam lines, no antenna or weapon-like barrel. The display has dim abstract horizontal data bars only, no readable words, no branding, no invented plot messages. Detailed realistic painted 2D raster sprite with muted materials and light wear, simple shallow three-quarter view, device entirely visible with generous clear margin around every edge. Genuine transparent background, no surface, no room, no vignette or separate accessories. This is not a wall console, gun, motion tracker, smartphone or medical scanner. One object per image.",
+      "transparentBackgroundRequested": true,
+      "path": "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png",
+      "gitBlobSha": "075919e248c603a1c912977c4c79382186ffc528",
+      "sha256": "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4",
+      "sizeBytes": 1773875,
+      "referenceSourcePath": null,
+      "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "sceneScope": [
+        "s03"
+      ],
+      "canonicalOneToOneCertified": false
+    }
+  ],
+  "validation": {
+    "sourceImagesInspected": true,
+    "decodedWithPillow": true,
+    "independentReadOnlyPngDecode": true,
+    "realCanvasRendered": true,
+    "newBrowserJourney": false,
+    "staticPlacementReviewed": true,
+    "artisticOneToOneCertified": false
+  }
+}

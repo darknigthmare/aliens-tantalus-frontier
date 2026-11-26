@@ -23,6 +23,7 @@ import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { RELEASE, validateContent } from '../src/content.js';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
+import { copyMerDesChagrinsRuntime20261125 } from './mer-des-chagrins-admission-20261125.mjs';
 import { resolveSafeBuildOutput } from './build-output-guard.mjs';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
 import { verifyPublicAdmissionsV119 } from './public-release-admissions-v119.mjs';
@@ -73,6 +74,8 @@ for (const directory of ['src', 'assets']) {
   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
 await buildAliens1986Dlc(root, output);
+// The DLC is an independently saved campaign; only its reviewed runtime ships.
+await copyMerDesChagrinsRuntime20261125(root, output);
 await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
 await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));

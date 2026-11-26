@@ -42,6 +42,7 @@ export class TitleScreenController {
     this.newButton = root.querySelector('#title-new');
     this.dlcButton = root.querySelector('#title-dlc');
     this.forgeButton = root.querySelector('#title-forge');
+    this.expeditionsLink = root.querySelector('#title-expeditions');
     this.aliens1986Button = root.querySelector('#title-aliens1986');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
@@ -107,7 +108,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.optionsButton]
+    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.expeditionsLink, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 

@@ -1,0 +1,526 @@
+{
+  "schemaVersion": 1,
+  "title": "La Mer des Chagrins — 31 originaux historiques non actifs",
+  "date": "2026-11-26",
+  "root": "archives/sea-sprites-recovery-20261126/local-recovery-20261126",
+  "baseCommit": "a6519a3d564ad4176c87daf796037c9ec013a496",
+  "sourceSnapshotCommit": "ff6d538b32f9eb8946f2d296df1b790bf479eef9",
+  "provenanceNote": "The snapshot identifies the historical project working copy. The seven unselected generation iterations are identified by exact local bytes; missing original generation filenames or review decisions are not reconstructed.",
+  "activeRuntime": false,
+  "canonicalOneToOneCertified": false,
+  "counts": {
+    "originalFiles": 31,
+    "originalBytes": 31000937,
+    "supersededDeckerPng": 2,
+    "unselectedGenerationIterations": 7,
+    "historicalCodeBibleSnapshots": 15,
+    "historicalQaCaptures": 7
+  },
+  "excludedAlreadyPublishedPng": 10,
+  "excludedPreviouslyPublishedQa": 6,
+  "files": [
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json",
+      "originalPath": "dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "1d6e6b5ac09e1907acacc648fed16007a5b76845",
+      "sha256": "c1162b93a1c23f35371db6d37e6aca69519ff684fb9c5baef38a459ddec83576",
+      "sizeBytes": 30854,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
+      "originalPath": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "c112aada19373a2e9ba0fe8d2cfd06ab2ff32daa",
+      "sha256": "5e8a7596a2c212d9943a5a209fb6f334ea376f5d53f7c60f8b0636a2b7ba64c2",
+      "sizeBytes": 278513,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/index.html",
+      "originalPath": "dlc/sea-of-sorrows-visual/index.html",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "5d24f98a6bf04702a4a8bb0fb7fd84bd5724d459",
+      "sha256": "b6cb4e0bac3d2edf2944f17857b68de1af9671aac03b00674961f33fcc3fd289",
+      "sizeBytes": 7217,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/art-pack.js",
+      "originalPath": "dlc/sea-of-sorrows-visual/src/art-pack.js",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "edad89372e58454e16638457043644fc410da0fe",
+      "sha256": "44ae6c7be6cc93b7f3d6414ddeffa68c037c75c61f87cc185c574c8cde03883d",
+      "sizeBytes": 47541,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/gallery.js",
+      "originalPath": "dlc/sea-of-sorrows-visual/src/gallery.js",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "22497d9527c4c031c3b608e2bff5e5b1aa71c71e",
+      "sha256": "bee088fd477d9d7d82bd7214cee168e4fb0a8cc4ab58dfc7c9781d1915e2b10f",
+      "sizeBytes": 6630,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/src/png-renderer.js",
+      "originalPath": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "85e5b0189be824a96150879c6808c45a06c6c559",
+      "sha256": "049365dd77ae88503d86ccf8c9b06dd80ddbac55ce5232a013410707d4f355f6",
+      "sizeBytes": 34355,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/mer-des-chagrins-visual-admission-20261126.mjs",
+      "originalPath": "scripts/mer-des-chagrins-visual-admission-20261126.mjs",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "4feb5b13035d13c3bb691019f2e84b390fa4d550",
+      "sha256": "1debb1f46232ec8f50fe7fe290871d791162fa10dd183ca1e415e59089a11ad3",
+      "sizeBytes": 9088,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/qa-mer-visual-canvas-20261126.mjs",
+      "originalPath": "scripts/qa-mer-visual-canvas-20261126.mjs",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "997099078e4e6eaa37e899a8187b50b34c48b47e",
+      "sha256": "fd27f7f56b5a1996de58a2b81f7fffc3b6674bb1ffca492faba263a9dd291f91",
+      "sizeBytes": 37160,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/verify-mer-png-renderer-20261126.mjs",
+      "originalPath": "scripts/verify-mer-png-renderer-20261126.mjs",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "39c60c6d4cf3098d343b897db737bdadf97fe2d8",
+      "sha256": "a0ec401b1e3da77f12973e1b54109580bb7630bf80b258e766b00e22f0f9c5a2",
+      "sizeBytes": 53407,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/verify-mer-sprite-metadata-20261126.py",
+      "originalPath": "scripts/verify-mer-sprite-metadata-20261126.py",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "4ea4a6cc63fd6bfacd60d733211e1e2a3ffc4dc6",
+      "sha256": "b36d8d683e8ab6668a9c49f6b26811e0e6059e907568ffdab7e41b3b39a06e04",
+      "sizeBytes": 16783,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "originalPath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "kind": "generated-source-png",
+      "status": "superseded-decker-not-active",
+      "gitBlobSha": "b031d81c77836fa5713d15dfbb9e0d51ed0a8178",
+      "sha256": "cc8353d4b6cbb9619975d8acbeac2f69cfc1baa0f04714b59428005ce908493a",
+      "sizeBytes": 1688012,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "statusEvidence": "Final recovery receipt classifies both Decker phases as superseded."
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "originalPath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "kind": "generated-source-png",
+      "status": "superseded-decker-not-active",
+      "gitBlobSha": "2b6c202cead70c953084bdc58b267b1c5cf43faa",
+      "sha256": "47adb7f09bdb75e43b52f728d7474656214356a4edb097b5cf75d5699fc56b41",
+      "sizeBytes": 1678695,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      },
+      "statusEvidence": "Final recovery receipt classifies both Decker phases as superseded."
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.html",
+      "originalPath": "docs/mer-des-chagrins-20261126/BIBLE.html",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "68877e5fe7dbf99853a0978123ef605953f47a8c",
+      "sha256": "87540fc7a95435f5bbee88d52056f6b94ed38f79a64b2d99df7c6f400d6dead5",
+      "sizeBytes": 2690291,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.json",
+      "originalPath": "docs/mer-des-chagrins-20261126/BIBLE.json",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "6039c9901afd76ed68e22a445e4cbbb9bd381c3b",
+      "sha256": "a31ff00109d4870001c5aade1b9a16c34236e5a1ca692b9b1a1892451af83c06",
+      "sizeBytes": 1305889,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE.md",
+      "originalPath": "docs/mer-des-chagrins-20261126/BIBLE.md",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "5caf1e06b319f69333a3026f93482d693775e3d4",
+      "sha256": "23aef7c857c4c2a0fa81450a394a09f846e4a5c2c2b0db052ff2a6e9876f5089",
+      "sizeBytes": 1284545,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/BIBLE_ART_PROMPTS.json",
+      "originalPath": "docs/mer-des-chagrins-20261126/BIBLE_ART_PROMPTS.json",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "268d29ca1d85323ac1a690b452c9e80807c2d6d4",
+      "sha256": "bc3664e77c15961a20a4ff0a759f05bad9a4eb6d3d905bdc09bbe3ae138baa77",
+      "sizeBytes": 25504,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/locomotion.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/locomotion.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "1169977c9fb42257035cd5874d2a6bb020968aa3",
+      "sha256": "946ac226dcb098f88e2c5956d64e1adc956341fd6656a7111759b3935775cc97",
+      "sizeBytes": 533319,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1800,
+        "height": 1698,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s01.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s01.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "059b39c1f10f6b7113e74f60091c08b919e82866",
+      "sha256": "4fc3f2d1d15c430f9b0c5c22fc2f99ef9ed6d4ab89610f0014aece4292fd5384",
+      "sizeBytes": 1511145,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s02.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s02.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "1e5aa2a02e5bca0ff09c95b6118cdc201a65ca75",
+      "sha256": "0c4c8223920794815d6b51497eb0f16226cfd9a5f6c6eed76a17e3ef88b8d4d1",
+      "sizeBytes": 1540994,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s03.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s03.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "91a81b29554c884568ab963ff9a4b421ae66c120",
+      "sha256": "dcf6ee2f0f8912f8e83543e22c5c4374eb61527644eee7dda5f15945fb7d55b3",
+      "sizeBytes": 1323169,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s10.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s10.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "8c3ed66f7cc201c4a0a6fb59bada828aaa63b13e",
+      "sha256": "0becbb3e8b41c23f01c469624dd493e654c3d363e8d120b7d58f3366b4280437",
+      "sizeBytes": 1362800,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s17.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s17.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "31a095d32a752568ff775e88fc459ae60e79e795",
+      "sha256": "e9631c0797fd0c66d9cd45cb694b619525262d790e96faec5e3263867a6c8144",
+      "sizeBytes": 1515206,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/docs/mer-des-chagrins-20261126/qa/s22.png",
+      "originalPath": "docs/mer-des-chagrins-20261126/qa/s22.png",
+      "kind": "historical-qa-capture",
+      "status": "historical-evidence-only",
+      "gitBlobSha": "62b1c0ded9df02f359929e0db3055532526c60e3",
+      "sha256": "8a06f0838b6cc6d45d0ea91a07c9a7557704a37837bc138d1d4f0c22459b069c",
+      "sizeBytes": 1360368,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1600,
+        "height": 900,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/snapshot/scripts/generate-mer-bible-20261126.mjs",
+      "originalPath": "scripts/generate-mer-bible-20261126.mjs",
+      "kind": "historical-working-copy",
+      "status": "preserved-snapshot-not-applied",
+      "gitBlobSha": "2c58f6e0abd78a93a3ce97a7eeb75556be117272",
+      "sha256": "253803a174b74ca765c6063f1b3be5f41479eae1758601f73e5f1abba4ec3695",
+      "sizeBytes": 39118,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/parasite-iteration-a.png",
+      "originalPath": "parasite-iteration-a",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "e5217e4a9d3d2e2022dd848608a5c9ece65f1ce0",
+      "sha256": "dd6a690b5c38f06399609320412ccd3a6b33a9b38175189fcb9c13d2005eac20",
+      "sizeBytes": 1632292,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/stairs-iteration.png",
+      "originalPath": "stairs-iteration",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "4744b3368e6d82d6c5460b125a7eab6c51abfc11",
+      "sha256": "32a6eeb177cbc861b802b7fb43a8135f8f2cd855a74de7a7aecddad0497b4975",
+      "sizeBytes": 2171532,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/parasite-iteration-b.png",
+      "originalPath": "parasite-iteration-b",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "f4b4a9bdf9a613600d995c978fbe92ab50fd0bef",
+      "sha256": "125b7ab3b135de94b7c7201eeab95d9023b99e3d8ce640e13d00e27adde12474",
+      "sizeBytes": 1650683,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-hands-iteration.png",
+      "originalPath": "decker-hands-iteration",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "cd616fefe734b83dd72cde63e482c6768f60d0ef",
+      "sha256": "7755d114c23d63a9ba2ac019392afe1c0492d82b00ab5f511f8822e171f1fba3",
+      "sizeBytes": 1811372,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/doorframe-iteration.png",
+      "originalPath": "doorframe-iteration",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "a38cc047622a09b257ff5ffaa9664ef0b1c0046e",
+      "sha256": "6da301f8f63fdc7bcd59248cdf8e03b59d1d95194f13883a88e6b7d4fad775b6",
+      "sizeBytes": 1895458,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-ready-iteration.png",
+      "originalPath": "decker-ready-iteration",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "c5bc278b1c72b75140b9dd03a388aa6c13946048",
+      "sha256": "0144dc86d8043efd2966ff96b2298e3768a8110c8f2b828c147a3c1d7bd252d1",
+      "sizeBytes": 1834661,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/local-recovery-20261126/iterations/decker-idle-iteration.png",
+      "originalPath": "decker-idle-iteration",
+      "kind": "unselected-generation-iteration",
+      "status": "reference-and-alpha-review-required",
+      "gitBlobSha": "85bb3c6688461dc8e5224780a0b9f7a1f7c3c772",
+      "sha256": "464fd5dad1b0eed9912b6885e57aeb02aff8d63013a473aacc2cc417adbfec86",
+      "sizeBytes": 1624336,
+      "activeRuntime": false,
+      "canonicalOneToOneCertified": false,
+      "image": {
+        "width": 1024,
+        "height": 1536,
+        "mode": "RGBA",
+        "hasAlphaChannel": true,
+        "alphaExtrema": [
+          0,
+          254
+        ]
+      }
+    }
+  ]
+}

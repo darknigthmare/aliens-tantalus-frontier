@@ -1,0 +1,404 @@
+Deux assertions de régression ont dû être actualisées après la passe d’interface :
+1. rearguard-browser : ESPACE devait être comparé à la touche réellement configurée, sans imposer la casse.
+2. storage-browser : le guide a changé de titre. Le test vérifie maintenant dix casiers, la durée réelle et Stocks repérés, pas un ancien sous-titre. Un premier ajustement exigeait à tort la phrase prototype autonome dans ce sous-panneau ; cette assertion a également été corrigée. Le statut reste explicitement affiché au titre et dans les documents.
+Ces changements n’affectent pas les règles de jeu. Les journaux de la passe initiale sont joints ci-dessous.
+
+
+--- browser-regressions.log ---
+
+> alien-mer-des-chagrins-prototype@0.9.0 qa:browser
+> python3 qa/browser.py && python3 qa/field-browser.py && python3 qa/rearguard-browser.py && python3 qa/trace-browser.py && python3 qa/sensor-browser.py && python3 qa/lighting-browser.py && python3 qa/storage-browser.py
+
+05:26:12 PASS Le vrai HTML démarre : titre, boutons, aucune exception
+CAPTURE 01_menu.png
+05:26:13 PASS Réduction du mouvement et contraste activés depuis les réglages
+05:26:13 PASS Le réglage de lumière atteint le moteur de rendu
+05:26:15 PASS Nouvelle partie lancée par les commandes visibles
+05:26:16 PASS Déplacement clavier réel dans le moteur
+CAPTURE 02_depart.png
+05:26:16 PASS HUD et bandeau mission hors de la surface jouable
+05:26:17 PASS Une porte change réellement de salle via E
+05:26:18 PASS E maintenu remplit le travail sans validation instantanée
+05:26:18 PASS Le menu Pause stoppe effectivement le temps de simulation
+05:26:18 PASS Navigation clavier piégée dans le dialogue actif
+05:26:18 PASS Reprendre ne conserve pas une touche E fantôme
+05:26:21 PASS Prélèvement accompli après la durée d’action
+05:26:22 PASS Le dialogue narratif interrompt lui aussi la simulation
+05:26:22 PASS Autosauvegarde écrite dans la fixture explicite
+05:26:22 PASS Carte de secteur accessible
+05:26:22 PASS Plan local fondé sur les vraies emprises
+CAPTURE 03_plan_local.png
+05:26:23 PASS Recherche fonctionnelle dans les dossiers débloqués
+05:26:24 PASS F6 change la présentation et conserve la progression
+05:26:25 PASS Reprise depuis les données réellement sauvegardées
+05:26:25 PASS Les données du jeu hôte ne sont pas modifiées
+05:26:26 PASS Migration 0.1→0.5 via le bouton Reprendre
+05:26:26 PASS Copie de secours 0.1 conservée avant la nouvelle écriture
+05:26:26 PASS L’équipement possède des commandes utilisables
+05:26:27 PASS Soigner et remplacer depuis le menu consomment les réserves
+CAPTURE 04_equipement.png
+05:26:28 PASS La lampe peut être éteinte au clavier
+05:26:28 PASS Un leurre lancé crée une source sonore et coûte une charge
+05:26:28 PASS Le viseur reconnaît le corps du xénomorphe
+05:26:28 PASS Cliquer le corps produit un vrai dégât sur sa profondeur
+05:26:34 PASS Les 50 salles sont rendues dans les deux présentations
+CAPTURE 05_pompes.png
+CAPTURE 06_tubes.png
+CAPTURE 07_reine.png
+05:26:36 PASS B immobilise les deux brancards
+05:26:37 PASS B relance un suivi physique mesurable
+CAPTURE 08_convoi.png
+05:26:38 PASS L’état des deux châssis est visible hors du terrain
+05:26:41 PASS Arrimage réalisé par E maintenu dans la soute
+05:26:42 PASS Capture après arrimage, mousse réelle et validation clavier
+CAPTURE 09_capture.png
+05:26:43 PASS Erreur de stockage annoncée sans faux succès
+05:26:43 PASS Titre accessible en 390 × 844
+05:26:44 PASS Commandes tactiles de base présentes
+05:26:44 PASS Pas de débordement horizontal global en format étroit
+CAPTURE 10_format_etroit.png
+05:26:44 PASS Équipement accessible sur écran étroit
+CAPTURE 11_equipement_etroit.png
+05:26:44 PASS Aucune exception JavaScript pendant les contrôles
+05:26:44 PASS Le HTML autonome ne demande aucune ressource réseau
+RESULT 41 0
+PASS Le catalogue et le moteur chargent la version 0.5 et 96 dossiers
+PASS Le guide explique Ctrl, la réparation et les cycles
+PASS Reprendre migre une vraie sauvegarde 0.2 vers le schéma 5
+PASS La copie backup-v2 conserve exactement le fichier précédent
+PASS La migration ne touche pas à la sentinelle du jeu hôte
+PASS L’export contient le repère, les pièces et le schéma 5
+PASS Ctrl + direction déclenche une esquive au clavier
+PASS L’esquive déplace le joueur et débite son endurance
+PASS Le délai bloque un deuxième déclenchement immédiat
+PASS Pause fige également une esquive en cours
+PASS Reprendre ne conserve pas une direction fantôme
+PASS La carte locale expose le véritable danger des pompes
+PASS L’emprise de profondeur du danger respecte ses données
+PASS Un dispositif isolé apparaît comme tel sur la carte
+PASS Les destinations sélectionnables se limitent aux lieux repérés
+PASS Le bouton de repère calcule un trajet actuellement ouvert
+PASS Le repère affiche une consigne sans déplacer le joueur
+PASS Le repère est conservé par export/import
+PASS Effacer retire aussi la consigne du HUD
+PASS Le stock de renforts figure dans l’équipement
+PASS La sauvegarde de réparation reprend un brancard réellement endommagé
+PASS Maintenir K affiche la progression de réparation
+PASS La progression de réparation est gelée dans Pause
+PASS La réparation ne redémarre pas sans K
+PASS K termine la réparation et restaure le châssis
+PASS La réparation achevée consomme un seul renfort
+PASS Maintenir K sur un châssis intact ne dépense rien
+CAPTURE 01_titre.png
+PASS L’avertissement d’un danger atteint le bandeau HUD
+PASS Le danger est effectivement dans sa phase de préavis
+CAPTURE 02_pompes_preavis.png
+PASS La sauvegarde conserve l’horloge locale du danger
+PASS Le réarmement met durablement le danger à l’arrêt
+CAPTURE 03_pompes_consignees.png
+CAPTURE 04_esplanade.png
+CAPTURE 05_noeud_ambre.png
+CAPTURE 06_ponte.png
+CAPTURE 07_reine_preavis.png
+CAPTURE 08_esquive.png
+CAPTURE 09_convoi.png
+CAPTURE 11_capture.png
+PASS Le préavis de frappe est affiché dans le HUD
+PASS La pose capturée correspond à une vraie esquive active
+CAPTURE 10_reparation.png
+CAPTURE 12_plan_local.png
+PASS Le plan n’affiche aucune position de créature
+PASS Le HUD ne déborde pas horizontalement en 390 × 844
+PASS Le jeu conserve ses commandes tactiles de base en format étroit
+CAPTURE 13_format_etroit.png
+PASS Le sélecteur de repère est accessible en format étroit
+PASS HUD, terrain et mission restent séparés en 1024 × 768
+PASS Aucune exception JavaScript pendant la régression des fonctions 0.3
+PASS Le prototype ne charge aucune ressource distante
+RESULT 40 0
+PASS HTML v0.5, schéma 8 et 120 dossiers chargés
+CAPTURE 01_titre.png
+PASS Guide : cloisons, position de Manning et lectures expliqués
+PASS Migration 0.3→0.5 par Reprendre sans changer les objectifs
+PASS Copie originale backup-v3 conservée exactement
+PASS Les sauvegardes du jeu hôte ne sont pas écrasées
+PASS G maintenu progresse sans ouverture instantanée
+CAPTURE 03_manoeuvre.png
+PASS Pause fige aussi une manœuvre de cloison
+PASS Reprendre ne garde pas la touche G enfoncée
+PASS La réouverture au clavier libère effectivement la collision
+PASS Une manœuvre terminée augmente le compteur une seule fois
+PASS Clic droit : ordre de position sans tir parasite
+PASS Manning marche vers le point sans téléportation
+PASS Manning atteint le point et le tient
+CAPTURE 08_manning.png
+PASS V rappelle Manning et annule le point
+PASS La carte utilise l’état réel de la cloison
+PASS Un clic sur le plan local donne aussi une position praticable
+PASS Le plan ne contient aucune balise de position ennemie
+FAIL Espace révèle la lecture et sa progression à l’écran
+CAPTURE 06_perception.png
+PASS La lecture consigne un seul nouveau dossier
+PASS La lecture facultative ne valide pas un objectif principal
+PASS La perception se relit dans les dossiers débloqués
+CAPTURE 02_cloison.png
+CAPTURE 04_impact.png
+CAPTURE 05_rupture.png
+CAPTURE 09_convoi.png
+CAPTURE 10_ponte.png
+PASS Le HUD signale une cloison fermée sur le prochain passage
+PASS Le plan précise quelle cloison locale doit être ouverte
+CAPTURE 07_plan.png
+PASS Bilan final : 8 lectures et 16 manœuvres conservées
+CAPTURE 11_bilan.png
+PASS Format 960 × 720 sans débordement horizontal de la page
+CAPTURE 12_format_960.png
+PASS 48 rendus ciblés : 8 cloisons × 3 états × 2 présentations
+PASS Aucune erreur JavaScript dans cette suite
+PASS Aucune dépendance réseau du HTML autonome
+RESULT 27 1
+
+--- browser-rest.log ---
+PASS HTML v0.5, schéma 8 et 120 dossiers chargés
+CAPTURE 01_titre.png
+PASS Guide : cloisons, position de Manning et lectures expliqués
+PASS Migration 0.3→0.5 par Reprendre sans changer les objectifs
+PASS Copie originale backup-v3 conservée exactement
+PASS Les sauvegardes du jeu hôte ne sont pas écrasées
+PASS G maintenu progresse sans ouverture instantanée
+CAPTURE 03_manoeuvre.png
+PASS Pause fige aussi une manœuvre de cloison
+PASS Reprendre ne garde pas la touche G enfoncée
+PASS La réouverture au clavier libère effectivement la collision
+PASS Une manœuvre terminée augmente le compteur une seule fois
+PASS Clic droit : ordre de position sans tir parasite
+PASS Manning marche vers le point sans téléportation
+PASS Manning atteint le point et le tient
+CAPTURE 08_manning.png
+PASS V rappelle Manning et annule le point
+PASS La carte utilise l’état réel de la cloison
+PASS Un clic sur le plan local donne aussi une position praticable
+PASS Le plan ne contient aucune balise de position ennemie
+PASS Espace révèle la lecture et sa progression à l’écran
+CAPTURE 06_perception.png
+PASS La lecture consigne un seul nouveau dossier
+PASS La lecture facultative ne valide pas un objectif principal
+PASS La perception se relit dans les dossiers débloqués
+CAPTURE 02_cloison.png
+CAPTURE 04_impact.png
+CAPTURE 05_rupture.png
+CAPTURE 09_convoi.png
+CAPTURE 10_ponte.png
+PASS Le HUD signale une cloison fermée sur le prochain passage
+PASS Le plan précise quelle cloison locale doit être ouverte
+CAPTURE 07_plan.png
+PASS Bilan final : 8 lectures et 16 manœuvres conservées
+CAPTURE 11_bilan.png
+PASS Format 960 × 720 sans débordement horizontal de la page
+CAPTURE 12_format_960.png
+PASS 48 rendus ciblés : 8 cloisons × 3 états × 2 présentations
+PASS Aucune erreur JavaScript dans cette suite
+PASS Aucune dépendance réseau du HTML autonome
+RESULT 28 0
+PASS Version 0.8, schéma 8 et 120 dossiers chargés
+PASS Aucun point de repli inventé au premier démarrage
+CAPTURE 01_titre.png
+PASS Guide : poursuite, trois disciplines de tir, repli et journal
+PASS Reprendre migre une vraie sauvegarde 0.4 vers 0.5
+PASS Copie backup-v4 identique à l’ancien fichier
+PASS La sauvegarde du jeu hôte n’a pas changé
+PASS Reprendre offre un point de repli valide
+PASS Une poursuite authentique est en cours à la reprise
+PASS La créature progresse hors champ pendant un déplacement clavier
+PASS Le signal visible provient du seuil réellement atteint
+PASS Le signal n’ajoute pas un faux contact au détecteur
+PASS Pause fige le franchissement annoncé
+PASS Le journal contient le bruit entendu au seuil
+PASS Le journal affiche des faits, pas des coordonnées ennemies
+PASS L’arrivée ajoute la même identité dans la salle courante
+PASS L’ennemi a quitté la population de la salle source
+PASS L’arrivée ne produit pas de doublon mondial
+PASS Une arrivée suivie d’un import reste valide
+PASS La retraite gagnée a utilisé la consigne ne pas tirer
+PASS N : ne pas tirer → riposte
+PASS N : riposte → feu libre
+PASS N : feu libre → ne pas tirer, visible dans le HUD
+PASS Le cycle N ne modifie pas l’ordre de déplacement
+PASS U ouvre le journal et met la partie en pause
+PASS Une sauvegarde courante corrompue ne détruit pas les replis
+PASS La corruption est annoncée sans lancer une nouvelle partie
+PASS Trois points distincts sont proposés
+CAPTURE 07_replis.png
+PASS Restaurer exige une confirmation visible
+PASS Choisir seul n’a pas écrasé la sauvegarde
+PASS Annuler revient à la liste sans restauration
+PASS Restaurer reprend le véritable ticket de poursuite
+PASS La restauration ne laisse pas le titre masquer le jeu
+PASS La sauvegarde remplacée est désormais un export valide
+PASS La rotation conserve trois points au maximum
+PASS L’échec d’écriture des replis est signalé
+PASS Les replis invalides sont ignorés sans erreur JavaScript
+CAPTURE 02_retraite.png
+CAPTURE 03_seuil.png
+CAPTURE 04_arrivee.png
+CAPTURE 05_securise.png
+CAPTURE 08_convoi.png
+CAPTURE 06_journal.png
+PASS Le bilan terminé conserve le franchissement réellement subi
+CAPTURE 09_bilan.png
+PASS Avertissement et HUD accessibles en 960 × 720 sans débordement global
+CAPTURE 10_format_960.png
+PASS Aucune exception JavaScript pendant cette suite
+PASS Le HTML autonome n’a demandé aucune ressource réseau
+RESULT 40 0
+PASS Version 0.8 / schéma 8 / 120 dossiers réellement chargés
+PASS La commande Manette du titre ouvre le guide
+PASS O ouvre une roue de huit commandes avec trois onglets
+PASS La roue est une vraie pause, horloge stable
+PASS Les armes non reçues restent indisponibles
+PASS Cliquer une action indisponible ne ferme ni ne fournit une arme
+PASS Échap referme seulement la roue
+CAPTURE 01_roue_equipe.png
+PASS La roue expose les ordres et les trois outils de travail
+CAPTURE 02_roue_materiel.png
+PASS Les menus de lecture sont accessibles dans la troisième page
+PASS Le panneau capteurs affiche trois appareils distincts
+PASS Les appareils rangés ne peuvent pas être activés à distance
+PASS P pose physiquement un appareil récupéré pendant le parcours
+PASS Une veille active consomme du temps de batterie
+PASS La pause arrête aussi la consommation du capteur
+PASS La coupure depuis la fiche atteint la simulation
+PASS Une veille coupée ne consomme pas quand le jeu reprend
+PASS P récupère sur place sans recharger
+CAPTURE 03_capteur_pose.png
+PASS Le plan local contient le capteur, pas un nouveau symbole ennemi
+CAPTURE 04_plan_capteur.png
+PASS Le dernier scan reçu est conservé dans la sauvegarde distante
+CAPTURE 05_liaison_distante.png
+CAPTURE 06_veille.png
+PASS Une observation montre son heure, pas une identité de créature
+PASS Choisir Cloison sélectionne un outil sans ouvrir instantanément
+PASS E maintenu fait réellement progresser la manœuvre sélectionnée
+PASS La cloison s’ouvre seulement au bout de sa durée
+PASS La roue restaure l’outil standard
+PASS Une touche maintenue avant la pause ne repart pas sur sa répétition
+PASS Le stick gauche standard produit un déplacement analogique
+PASS La petite dérive du stick ne déplace pas Decker
+PASS Le stick droit déplace un vrai viseur
+PASS La gâchette droite appelle le vrai tir
+PASS La gâchette gauche active l’empathie
+PASS L1 / LB ouvre la roue
+PASS R1 / RB change la page de la roue
+PASS Le stick choisit le secteur inférieur
+PASS Rond / B annule la roue sans action
+PASS La fermeture de la roue ne relance pas une gâchette encore maintenue
+PASS Relâcher puis presser à nouveau rend le tir disponible
+PASS R1 sélectionne le travail de réparation hors menu
+PASS R1 peut sélectionner le travail de cloison
+PASS La flèche haute commande la lampe
+PASS La flèche gauche commande Manning sans téléportation
+PASS Select ouvre la carte
+PASS Start met le jeu en pause
+PASS Débrancher en partie ouvre Pause
+PASS Rebrancher ne reprend pas la partie automatiquement
+CAPTURE 07_roue_manette.png
+CAPTURE 08_guide_manette.png
+PASS Reprendre migre le schéma 5 avec trois appareils sans altérer la progression
+PASS La copie de sauvegarde schéma 5 est conservée
+PASS Aucune écriture dans la sauvegarde hôte
+PASS 1024×768 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 1024×768 : aucune superposition des huit boutons
+PASS 390×844 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 390×844 : aucune superposition des huit boutons
+CAPTURE 09_roue_etroite.png
+PASS 360×780 : huit commandes restent dans le panneau sans débordement horizontal
+PASS 360×780 : aucune superposition des huit boutons
+CAPTURE 10_convoi_ordres.png
+PASS Les fonctions anciennes restent présentes après les nouvelles commandes
+PASS Aucune exception JavaScript pendant les contrôles
+PASS Aucune requête de ressource réseau du HTML autonome
+RESULT 56 0
+PASS HTML 0.8, schéma 8 et 120 dossiers chargés
+CAPTURE 01_titre.png
+PASS Le guide ancien ne déclare plus la manette absente
+PASS Le guide décrit l’éclairage et les allures
+PASS Le prologue affiche les formations sans les permettre
+PASS Le prologue ne permet pas de faire suivre les patients
+PASS Le pupitre physique est l’interaction la plus proche
+CAPTURE 02_atelier_lumiere.png
+PASS Maintenir E démarre une manœuvre, sans basculer immédiatement
+PASS Relâcher E conserve le travail partiel
+PASS La roue met le travail et l’horloge en pause
+PASS Une seule manœuvre achevée sans inversion automatique
+PASS Le HUD annonce le secours sans modifier le filtre
+PASS La carte représente le pupitre et son état
+PASS Aucun bouton de coupure à distance dans la carte
+PASS Relâcher puis maintenir E rétablit la lumière
+PASS Une sauvegarde d’ombre conserve lampe et circuit éteints
+CAPTURE 03_atelier_secours.png
+CAPTURE 04_paliers_secours.png
+CAPTURE 05_plan_paliers.png
+CAPTURE 06_escorte_discrete.png
+PASS La console expose deux patients et trois formations
+PASS La formation enregistrée est sélectionnée
+PASS Le bouton choisit Rapproché dans la simulation
+PASS Choisir une formation ne téléporte et ne soigne pas
+PASS Arrêter dans le panneau donne le même ordre que B
+PASS Repartir conserve l’allure choisie
+PASS Retour mène à Pause, pas directement au combat
+PASS Le bouton de Pause ouvre les ordres
+PASS L’équipement donne accès aux mêmes ordres
+CAPTURE 07_convoi_rapproche.png
+CAPTURE 08_relais_obscur.png
+PASS 40 rendus de circuits : dix salles, deux vues, deux états
+PASS Reprendre migre le schéma 6 vers 7
+PASS L’export initial v0.6 est gardé en copie locale de migration
+PASS La migration ne supprime pas les capteurs
+PASS 1024 px : pas de débordement horizontal du panneau
+PASS 1024 px : les trois formations ne se chevauchent pas
+PASS 390 px : pas de débordement horizontal du panneau
+PASS 390 px : les trois formations ne se chevauchent pas
+CAPTURE 09_format_etroit.png
+PASS 360 px : pas de débordement horizontal du panneau
+PASS 360 px : les trois formations ne se chevauchent pas
+PASS Aucune exception JavaScript dans les scénarios
+PASS Aucune dépendance réseau du HTML autonome
+TOTAL 36 0
+PASS Version 0.8, 50 salles, 120 dossiers et schéma 8
+CAPTURE 01_titre.png
+FAIL Le guide décrit les casiers sans prétendre être le roman
+PASS Aucun stock secret révélé au prologue
+PASS Retour à l’équipement
+CAPTURE 02_vestiaire_scelle.png
+PASS Maintien E : ouverture partielle sans transfert
+PASS Relâcher conserve la progression
+PASS Scellé terminé : véritable panneau local ouvert
+PASS Aucune ressource accordée automatiquement
+PASS Inspection de stock en pause
+CAPTURE 03_transfert_local.png
+PASS Déposer six cartouches modifie les deux stocks
+PASS Reprendre conserve exactement le total
+PASS Une prise au plafond est désactivée
+CAPTURE 04_vestiaire_ouvert.png
+PASS Les stocks repérés sont lisibles sans commandes de transfert
+PASS Les casiers non ouverts restent scellés dans le registre
+PASS Export/import garde ouverture et contenu
+CAPTURE 05_echangeurs.png
+CAPTURE 06_transit_convoi.png
+CAPTURE 07_magasin.png
+PASS La carte locale montre les deux meubles et leur état
+PASS Aucun transfert possible depuis la carte
+CAPTURE 08_plan_magasin.png
+PASS Huit rendus préparés des quatre annexes et deux vues
+PASS 1024 px : pas de débordement du panneau
+PASS 1024 px : les actions ne se chevauchent pas
+PASS 390 px : pas de débordement du panneau
+PASS 390 px : les actions ne se chevauchent pas
+CAPTURE 09_casier_390.png
+PASS 360 px : pas de débordement du panneau
+PASS 360 px : les actions ne se chevauchent pas
+PASS Reprise par le titre migre une vraie sauvegarde 7 vers 8
+PASS La sauvegarde 7 est préservée en copie de migration
+PASS Aucune exception JavaScript
+PASS Aucun appel réseau du HTML autonome
+TOTAL 27 1

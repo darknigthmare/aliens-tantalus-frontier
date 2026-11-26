@@ -1,0 +1,80 @@
+PASS Version 0.10, 50 salles, 126 dossiers et schéma 8
+PASS Aucun contexte sonore avant autorisation
+CAPTURE 01_titre.png
+PASS Quatre catégories réelles de réglages
+PASS Quatre volumes et légendes indépendantes
+PASS Activer le son ne reprend pas la simulation
+PASS Contexte audio suspendu dans Réglages
+PASS Un curseur modifie seulement son bus
+PASS Le bouton de test réveille réellement AudioContext
+PASS Le test se termine sans boucle ni voix restante
+CAPTURE 02_mixage.png
+PASS Son muet, légendes toujours actives
+PASS Désactivation des légendes indépendante du son
+PASS Conflit L refusé et ancien E conservé
+PASS Échap annule la saisie sans fermer les options
+PASS Interagir devient M, ancien E libéré
+CAPTURE 03_clavier.png
+PASS Les commandes et volumes sont relus à la création d’une page
+PASS Maintenir O ne referme pas la roue par répétition
+PASS La roue indique aussi la touche personnalisée
+PASS Une nouvelle pression ferme la roue
+PASS Ancien E inactif près du casier
+PASS M maintenu réalise une ouverture partielle
+PASS Relâcher M conserve le travail
+PASS Le HUD indique la nouvelle touche
+CAPTURE 04_interaction_m.png
+PASS L’interaction reconfigurée termine le vrai scellé
+PASS Légende d’ouverture sans son
+CAPTURE 05_casier_legende.png
+PASS La retraite émet un préavis légendé sans audio
+PASS La légende ne fournit pas de coordonnées ennemies
+CAPTURE 06_seuil_silencieux.png
+PASS Bandeau de légende en dehors du canvas
+PASS Sauvegarde corrompue distinguée du secours valide
+PASS La sélection ne restaure pas silencieusement
+PASS Annuler conserve la sauvegarde courante
+CAPTURE 07_copie_valide.png
+PASS Confirmation restaure le point sélectionné
+PASS Quota simulé : refus visible au lieu de succès fictif
+PASS Quota simulé : sauvegarde courante intacte
+PASS L’expédition en mémoire reste exportable
+PASS Le stockage reprend après levée du refus
+PASS Synthèse audio réelle : pistol
+PASS Synthèse audio réelle : ally
+PASS Synthèse audio réelle : foam
+PASS Synthèse audio réelle : flame
+PASS Synthèse audio réelle : reload
+PASS Synthèse audio réelle : dodge
+PASS Synthèse audio réelle : step
+PASS Synthèse audio réelle : wheels
+PASS Synthèse audio réelle : impact
+PASS Synthèse audio réelle : hurt
+PASS Synthèse audio réelle : windup
+PASS Synthèse audio réelle : work
+PASS Synthèse audio réelle : latch
+PASS Synthèse audio réelle : confirm
+PASS Synthèse audio réelle : sensor
+PASS Synthèse audio réelle : pursuit
+PASS Synthèse audio réelle : warning
+PASS Synthèse audio réelle : steam
+PASS Synthèse audio réelle : gas
+PASS Synthèse audio réelle : electric
+PASS Synthèse audio réelle : low
+PASS Bus à zéro : rendu sonore intégralement nul
+PASS Panoramique stéréo gauche réel
+PASS Échantillon WAV non vide et généré par le même synthétiseur
+PASS 1024 px : options audio sans débordement horizontal
+PASS 1024 px : commandes sans boutons superposés
+PASS 1024 px : fermeture toujours accessible
+PASS 390 px : options audio sans débordement horizontal
+PASS 390 px : commandes sans boutons superposés
+PASS 390 px : fermeture toujours accessible
+CAPTURE 08_clavier_390.png
+PASS 360 px : options audio sans débordement horizontal
+PASS 360 px : commandes sans boutons superposés
+PASS 360 px : fermeture toujours accessible
+PASS Restauration des commandes sans réinitialiser le mixage
+PASS Aucune exception JavaScript détectée
+PASS Aucun chargement réseau par le HTML autonome
+RESULT 71 0

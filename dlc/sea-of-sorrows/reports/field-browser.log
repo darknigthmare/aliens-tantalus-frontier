@@ -1,0 +1,54 @@
+PASS Le catalogue et le moteur chargent la version 0.5 et 96 dossiers
+PASS Le guide explique Ctrl, la réparation et les cycles
+PASS Reprendre migre une vraie sauvegarde 0.2 vers le schéma 5
+PASS La copie backup-v2 conserve exactement le fichier précédent
+PASS La migration ne touche pas à la sentinelle du jeu hôte
+PASS L’export contient le repère, les pièces et le schéma 5
+PASS Ctrl + direction déclenche une esquive au clavier
+PASS L’esquive déplace le joueur et débite son endurance
+PASS Le délai bloque un deuxième déclenchement immédiat
+PASS Pause fige également une esquive en cours
+PASS Reprendre ne conserve pas une direction fantôme
+PASS La carte locale expose le véritable danger des pompes
+PASS L’emprise de profondeur du danger respecte ses données
+PASS Un dispositif isolé apparaît comme tel sur la carte
+PASS Les destinations sélectionnables se limitent aux lieux repérés
+PASS Le bouton de repère calcule un trajet actuellement ouvert
+PASS Le repère affiche une consigne sans déplacer le joueur
+PASS Le repère est conservé par export/import
+PASS Effacer retire aussi la consigne du HUD
+PASS Le stock de renforts figure dans l’équipement
+PASS La sauvegarde de réparation reprend un brancard réellement endommagé
+PASS Maintenir K affiche la progression de réparation
+PASS La progression de réparation est gelée dans Pause
+PASS La réparation ne redémarre pas sans K
+PASS K termine la réparation et restaure le châssis
+PASS La réparation achevée consomme un seul renfort
+PASS Maintenir K sur un châssis intact ne dépense rien
+CAPTURE 01_titre.png
+PASS L’avertissement d’un danger atteint le bandeau HUD
+PASS Le danger est effectivement dans sa phase de préavis
+CAPTURE 02_pompes_preavis.png
+PASS La sauvegarde conserve l’horloge locale du danger
+PASS Le réarmement met durablement le danger à l’arrêt
+CAPTURE 03_pompes_consignees.png
+CAPTURE 04_esplanade.png
+CAPTURE 05_noeud_ambre.png
+CAPTURE 06_ponte.png
+CAPTURE 07_reine_preavis.png
+CAPTURE 08_esquive.png
+CAPTURE 09_convoi.png
+CAPTURE 11_capture.png
+PASS Le préavis de frappe est affiché dans le HUD
+PASS La pose capturée correspond à une vraie esquive active
+CAPTURE 10_reparation.png
+CAPTURE 12_plan_local.png
+PASS Le plan n’affiche aucune position de créature
+PASS Le HUD ne déborde pas horizontalement en 390 × 844
+PASS Le jeu conserve ses commandes tactiles de base en format étroit
+CAPTURE 13_format_etroit.png
+PASS Le sélecteur de repère est accessible en format étroit
+PASS HUD, terrain et mission restent séparés en 1024 × 768
+PASS Aucune exception JavaScript pendant la régression des fonctions 0.3
+PASS Le prototype ne charge aucune ressource distante
+RESULT 40 0

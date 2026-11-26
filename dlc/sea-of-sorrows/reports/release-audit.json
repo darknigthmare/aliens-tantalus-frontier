@@ -1,0 +1,258 @@
+{
+  "version": "0.9.0",
+  "scope": "Evidence and bytes only, no native browser, hardware or deployment certification",
+  "passed": 62,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "HTML autonome identique aux neuf sources et styles",
+      "pass": true
+    },
+    {
+      "name": "JSON et JavaScript de données identiques",
+      "pass": true
+    },
+    {
+      "name": "Version 0.9.0 / schéma 8 / reçu cohérents",
+      "pass": true
+    },
+    {
+      "name": "50 salles / 59 liaisons / 18 chapitres / 33 objectifs",
+      "pass": true
+    },
+    {
+      "name": "120 dossiers uniques",
+      "pass": true
+    },
+    {
+      "name": "120 obstacles / 355 placements / 52 familles",
+      "pass": true
+    },
+    {
+      "name": "Dix circuits, huit cloisons et neuf dangers conservés",
+      "pass": true
+    },
+    {
+      "name": "Dix casiers uniques avec ouverture 2,4 secondes",
+      "pass": true
+    },
+    {
+      "name": "38 liaisons de poursuite / 76 extrémités",
+      "pass": true
+    },
+    {
+      "name": "Seuils réciproques et transferts narratifs conformes",
+      "pass": true
+    },
+    {
+      "name": "Comptage documentaire actuel",
+      "pass": true
+    },
+    {
+      "name": "Provenance cumulative réelle 0.8 conservée",
+      "pass": true
+    },
+    {
+      "name": "Pas de fausse certification native ou matérielle",
+      "pass": true
+    },
+    {
+      "name": "Aucun moteur ou inventaire hôte raccordé",
+      "pass": true
+    },
+    {
+      "name": "Installateur des neuf modules avec version courante",
+      "pass": true
+    },
+    {
+      "name": "432 tests Node réussis",
+      "pass": true
+    },
+    {
+      "name": "Empreintes Node et TAP courantes",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/browser-regression.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/browser-regression.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/field-browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/field-browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/rearguard-browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/rearguard-browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/trace-browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/trace-browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/v060/browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/v060/browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/v070/browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/v070/browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/v080/browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/v080/browser.json",
+      "pass": true
+    },
+    {
+      "name": "HTML réellement testé courant : reports/v090/browser.json",
+      "pass": true
+    },
+    {
+      "name": "Suite réussie : reports/v090/browser.json",
+      "pass": true
+    },
+    {
+      "name": "100 rendus généraux effectués",
+      "pass": true
+    },
+    {
+      "name": "48 états de cloisons / 40 états d’éclairage",
+      "pass": true
+    },
+    {
+      "name": "Aucun chargement réseau de ressource",
+      "pass": true
+    },
+    {
+      "name": "Navigation native réellement refusée",
+      "pass": true
+    },
+    {
+      "name": "Six parcours des sources courantes",
+      "pass": true
+    },
+    {
+      "name": "Six fois 50 salles et 33 objectifs",
+      "pass": true
+    },
+    {
+      "name": "Six fois dix casiers ouverts et transferts exécutés",
+      "pass": true
+    },
+    {
+      "name": "Éclairage, lectures, cloisons et allures conservés",
+      "pass": true
+    },
+    {
+      "name": "Poursuite, mesure distante et capteur récupéré",
+      "pass": true
+    },
+    {
+      "name": "Deux patients arrimés et vivants à chaque fin",
+      "pass": true
+    },
+    {
+      "name": "198 exports courants en schéma 8",
+      "pass": true
+    },
+    {
+      "name": "Les 198 exports correspondent aux objectifs",
+      "pass": true
+    },
+    {
+      "name": "198 exports historiques 0.8 schéma 8 préservés",
+      "pass": true
+    },
+    {
+      "name": "Origines des scènes gagnées vérifiées",
+      "pass": true
+    },
+    {
+      "name": "Huit PNG et états photographiés intacts",
+      "pass": true
+    },
+    {
+      "name": "Les scènes avancées viennent des sauvegardes gagnées",
+      "pass": true
+    },
+    {
+      "name": "Pilote direct courant : 4 fins / 2 morts",
+      "pass": true
+    },
+    {
+      "name": "Contrôles documentaires actuels réussis",
+      "pass": true
+    },
+    {
+      "name": "Documents testés identiques aux livrables",
+      "pass": true
+    },
+    {
+      "name": "Codex 50 plans / 10 LUX / 10 STOCK / 120 dossiers",
+      "pass": true
+    },
+    {
+      "name": "50 fiches Markdown courantes",
+      "pass": true
+    },
+    {
+      "name": "README, changelog et guides actuels",
+      "pass": true
+    },
+    {
+      "name": "Aucun fichier de police livré",
+      "pass": true
+    },
+    {
+      "name": "31 actions, 21 profils, audio muet et légendes actives par défaut",
+      "pass": true
+    },
+    {
+      "name": "Les quatre volumes documentés sont réels",
+      "pass": true
+    },
+    {
+      "name": "21 signaux réellement rendus, finis et non silencieux",
+      "pass": true
+    },
+    {
+      "name": "WAV de démonstration stéréo valide",
+      "pass": true
+    },
+    {
+      "name": "Invariance périodique de simulation dans les six parcours",
+      "pass": true
+    },
+    {
+      "name": "Pas de dépendance réseau dans le HTML jouable",
+      "pass": true
+    }
+  ],
+  "standalone_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "browser_checks": 340
+}

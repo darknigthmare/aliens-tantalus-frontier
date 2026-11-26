@@ -1,0 +1,21 @@
+.itemGlyph{position:relative;min-height:96px;display:flex;align-items:center;justify-content:center}
+.sos-item-image{position:absolute;inset:0;display:grid;place-items:center}
+.sos-item-image img{width:100%;height:96px;object-fit:contain}
+.itemGlyph.sos-item-ready{font-size:0}
+.sos-respirator-caption{display:block;margin-top:14px;line-height:1.5;color:#b6c8bf}
+.sos-tools{margin-top:28px;padding-top:18px;border-top:1px solid #45635f}
+.sos-tools>h3{font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:#d6c89f}
+.sos-tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sos-tool{padding:16px;background:linear-gradient(150deg,#1a3033,#112326);border:1px solid #3e5b59;min-width:0}
+.sos-tool h4{margin:10px 0 8px;font-size:15px;color:#e0e5db}
+.sos-tool-status{font-size:12px;letter-spacing:.04em;color:#cdbd8e}
+.sos-tool-description{font-size:12px;line-height:1.6;color:#bacbc6}
+.sos-tool[data-available="false"] .sos-equipment-image{opacity:.38}
+.sos-equipment-image{display:grid;place-items:center;height:110px}
+.sos-equipment-image img{width:100%;height:110px;object-fit:contain}
+.referenceCard>.sos-equipment-image{height:130px;margin-bottom:10px}
+.referenceCard>.sos-equipment-image img{height:130px}
+.sos-item-image img[hidden],.sos-equipment-image img[hidden]{display:none}
+.contrast .sos-tool{border-color:#b9cfc6}
+@media(max-width:800px){.loadout>.sos-respirator-caption{grid-column:1/-1}}
+@media(max-width:620px){.sos-tools-grid{grid-template-columns:1fr}.sos-tool{display:grid;grid-template-columns:86px 1fr;column-gap:14px}.sos-tool>.sos-equipment-image{grid-row:1/4;height:100%;min-height:90px}.sos-tool>.sos-equipment-image img{height:90px}.sos-tool h4,.sos-tool p{grid-column:2}.sos-tool h4{margin-top:0}.sos-tool p{margin:3px 0}}

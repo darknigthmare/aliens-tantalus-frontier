@@ -18,6 +18,18 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
   AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
+  AVP_MER_JOIN_BASELINES_20261126 as merBaselines,
+  AVP_MER_JOIN_SUCCESSORS_20261126 as merSuccessors,
+  reviewedMerJoinHostDigest20261126 as advanceMer,
+  AVP_MER_VISUAL_BASELINE_20261126 as merVisualBaseline,
+  AVP_MER_VISUAL_SUCCESSORS_20261126 as merVisualSuccessors,
+  reviewedMerVisualHostDigest20261126 as advanceMerVisual,
+  AVP_MER_HOST_COMPLETION_BASELINES_20261126 as merHostCompletionBaselines,
+  AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126 as merHostCompletionSuccessors,
+  reviewedMerHostCompletionDigest20261126 as advanceMerHostCompletion,
+  AVP_MER_EQUIPMENT_BASELINE_20261126 as merEquipmentBaseline,
+  AVP_MER_EQUIPMENT_SUCCESSORS_20261126 as merEquipmentSuccessors,
+  reviewedMerEquipmentHostDigest20261126 as advanceMerEquipment,
   AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 as bibleDocumentsBaseline,
   AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 as bibleDocumentsSuccessors,
   reviewedDlcBibleDocumentsHostDigest20261126 as advanceBibleDocuments,
@@ -27,6 +39,11 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
   AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
   reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  AVP_MER_BIBLE_JOIN_BASELINES_20261126 as merBibleBaselines,
+  AVP_MER_BIBLE_JOIN_SUCCESSORS_20261126 as merBibleSuccessors,
+  BIBLE_MER_JOIN_SUCCESSORS_20261126 as bibleMerSuccessors,
+  reviewedMerBibleJoinHostDigest20261126 as advanceMerBible,
+  reviewedBibleMerJoinHostDigest20261126 as advanceBibleMer,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
@@ -37,6 +54,7 @@ import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asse
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
   reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
+import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -130,11 +148,14 @@ const expectedSpritePaths = [
 ];
 const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
   'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors)])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
+const expectedMerPaths = ['index.html', 'package.json', 'scripts/build-asset-filter.mjs',
+  'scripts/build-dev-tools-v188.mjs', 'scripts/build.mjs', 'scripts/verify-public-release-v86.mjs', 'src/title-screen-v61.js'];
+const expectedMerHostCompletionPaths = ['.gitattributes', '.vercelignore', 'title-screen-v61.css'];
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...expectedMerPaths, ...expectedMerHostCompletionPaths, ...Object.keys(bibleBridgeSuccessors)])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || merSuccessors[path] || merHostCompletionSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production) source chain/;
+const finalEndpoint = path => merBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || merEquipmentSuccessors[path]?.currentSha256 || merHostCompletionSuccessors[path]?.currentSha256 || merVisualSuccessors[path]?.currentSha256 || merSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|Fiorina-to-Mer-join|Mer-join-to-visual|Mer-visual-to-host-completion|Mer-host-completion-to-equipment|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production|Mer-to-bible-merge|bible-to-Mer-merge) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -151,6 +172,12 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
     spriteSuccessors: expectedSpritePaths.length, spriteV116Successors: expectedSpriteV116Paths.length,
+    merJoinedSuccessors: expectedMerPaths.length,
+    merVisualSuccessors: 3,
+    merHostCompletionSuccessors: expectedMerHostCompletionPaths.length,
+    merEquipmentSuccessors: 1,
+    bibleDocumentsSuccessors: 1, bibleBridgeSuccessors: 1, avpProductionBibleSuccessors: 2,
+    merBibleJoinSuccessors: 2, bibleMerJoinSuccessors: 2,
     historicalEvidenceTransferred: false });
 });
 
@@ -291,6 +318,12 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+  assert.equal(Object.hasOwn(merSuccessors, audit), false);
+  assert.equal(Object.hasOwn(merVisualSuccessors, audit), false);
+  assert.equal(Object.hasOwn(merHostCompletionSuccessors, audit), false);
+  assert.equal(Object.hasOwn(merEquipmentSuccessors, audit), false);
+  for (const receipts of [bibleDocumentsSuccessors, bibleBridgeSuccessors, productionBibleSuccessors, merBibleSuccessors, bibleMerSuccessors])
+    assert.equal(Object.hasOwn(receipts, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
 });
 
@@ -346,6 +379,160 @@ test('V116 advances exactly four reviewed hosts after the merged V115 receipts',
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
 });
 
+test('Mer joins exactly seven cumulative hosts without rewriting any historical receipt', () => {
+  assert.deepEqual(merBaselines, {
+    cumulativeCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    merCommit: '994853bdd9d959980f0f8256cb39b1eadfe29911',
+    recoveryCommit: '7efa1b55eb12c3c4b7401940048ffa2e30caf04a',
+  });
+  assert.deepEqual(Object.keys(merSuccessors).sort(), [...expectedMerPaths].sort());
+  assert.equal(sha(JSON.stringify(merSuccessors)), '5b78f12591c2689013551c6d96a844ba50c8d69fb305dff4d2b0eb0255c4f318');
+  const source = read(audit).toString(), marker = '// END FIORINA V116 HOST RECEIPTS';
+  assert.equal(sha(source.slice(0, source.indexOf(marker) + marker.length)), '6facdfa11619639d6490a9adf8b48ddb188c6f7d93530d07f2052a16ca7903a4');
+  assert.ok(Object.isFrozen(merSuccessors));
+  for (const [path, receipt] of Object.entries(merSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    const prior = spriteV116Successors[path] || spriteSuccessors[path] || aliensMerge[path]
+      || qualitySuccessors[path] || joinSuccessors[path] || successors[path];
+    if (prior) assert.equal(receipt.previousSha256, prior.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceMer(path, receipt.previousSha256), finalEndpoint(path), path);
+    for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceMer(path, value), /Broken Fiorina-to-Mer-join source chain/, path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceMer(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(merSuccessors, audit), false);
+});
+
+test('the visual continuation advances only three hosts from the immutable reconstructed Mer join', () => {
+  assert.equal(merVisualBaseline, '22fec87cad3dd7867b9c2ffe4d682eb9cb1dab04');
+  assert.deepEqual(Object.keys(merVisualSuccessors), [
+    'package.json', 'scripts/build-asset-filter.mjs', 'scripts/verify-public-release-v86.mjs',
+  ]);
+  assert.equal(sha(JSON.stringify(merVisualSuccessors)), 'ed6b42661a0f63b6c5629d10e07f92a8e1372cb9ab1232ec0c426b21b7ceb150');
+  const source = read(audit).toString(), marker = '// END MER DES CHAGRINS JOIN RECEIPTS';
+  assert.equal(sha(source.slice(0, source.indexOf(marker) + marker.length)), '9e7dd19e532b379158f43257faa544a2449f3c29f89660eaba69cd38148cb2d8');
+  assert.ok(Object.isFrozen(merVisualSuccessors));
+  for (const [path, receipt] of Object.entries(merVisualSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, merSuccessors[path].currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceMerVisual(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    for (const endpoint of [merSuccessors[path].previousSha256, receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceMerVisual(path, endpoint), /Broken Mer-join-to-visual source chain/, path);
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceMerVisual(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(merVisualSuccessors, audit), false);
+});
+
+test('the visual continuation refuses same-size changes and rollback of each of its three actual hosts', () => {
+  for (const path of Object.keys(merVisualSuccessors)) {
+    const actual = read(path), changed = Buffer.from(actual); changed[0] ^= 1;
+    assert.throws(() => verify(candidate => candidate === path ? changed : read(candidate)),
+      /Unreviewed AVP host source bytes/, path);
+    assert.throws(() => runtimeView({ [path]: sha(changed) }), /Incorrect AVP host runtime view predecessor/, path);
+    assert.equal(advanceMerVisual(path, merVisualSuccessors[path].previousSha256), sha(actual), path);
+  }
+});
+
+test('Mer host completion pins the three omitted cumulative endpoints and preserves all seven plus three published receipts', () => {
+  assert.deepEqual(merHostCompletionBaselines, {
+    cumulativeCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    publishedCommit: '8cb25462b9b0328b09ae28b278356113d325c603',
+  });
+  assert.deepEqual(Object.keys(merHostCompletionSuccessors), expectedMerHostCompletionPaths);
+  assert.equal(sha(JSON.stringify(merHostCompletionSuccessors)), 'feef2774da289423521245828154b0521d8ccf001ab8ad16f7e0ff490236c982');
+  const source = read(audit).toString(), marker = '// END MER VISUAL HOST RECEIPTS';
+  assert.ok(source.includes(marker));
+  assert.equal(sha(source.slice(0, source.indexOf(marker) + marker.length)), '85434e85fa6d3a4b118d095b333c43ae9b70ed1f423e974b69cc6fda7b9563c6');
+  assert.ok(Object.isFrozen(merHostCompletionBaselines) && Object.isFrozen(merHostCompletionSuccessors));
+  for (const [path, receipt] of Object.entries(merHostCompletionSuccessors)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(merSuccessors[path], undefined, path);
+    assert.equal(merVisualSuccessors[path], undefined, path);
+    assert.equal(receipt.previousSha256, xenoJoin.successors[path].currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceMerHostCompletion(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), finalEndpoint(path), path);
+    for (const endpoint of [receipt.previousSha256, receipt.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: finalEndpoint(path) });
+  }
+});
+
+test('Mer host completion rejects forged, skipped or repeated predecessors and same-size source changes', () => {
+  for (const [path, receipt] of Object.entries(merHostCompletionSuccessors)) {
+    const actual = read(path), altered = Buffer.from(actual); altered[0] ^= 1;
+    for (const endpoint of [xenoJoin.successors[path].previousSha256, receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceMerHostCompletion(path, endpoint), /Broken Mer-visual-to-host-completion source chain/, path);
+    assert.throws(() => verify(candidate => candidate === path ? altered : read(candidate)),
+      /Unreviewed AVP host source bytes/, path);
+    assert.throws(() => runtimeView({ [path]: sha(altered) }), /Incorrect AVP host runtime view predecessor/, path);
+    assert.equal(advanceMerHostCompletion(path, receipt.previousSha256), sha(actual), path);
+  }
+  for (const path of ['.gitattributes/extra', '.vercelignore/extra', 'title-screen-v61.css/extra', 'src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceMerHostCompletion(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(merHostCompletionSuccessors, audit), false);
+});
+
+test('the equipment host continuation advances only the exact published visual package and preserves every earlier receipt', () => {
+  assert.equal(merEquipmentBaseline, '8cb25462b9b0328b09ae28b278356113d325c603');
+  assert.deepEqual(Object.keys(merEquipmentSuccessors), ['package.json']);
+  assert.equal(sha(JSON.stringify(merEquipmentSuccessors)), '296c6c38cb3b5d9b3ffae1a02fbeb4a8882b5c4122342caaec15c2a676e38ec8');
+  const source = read(audit).toString(), marker = '// END MER HOST COMPLETION RECEIPTS';
+  assert.ok(source.includes(marker));
+  assert.equal(sha(source.slice(0, source.indexOf(marker) + marker.length)), 'e3909533c394fa6b082bc7d3410e72864cbe846ad094739f797ce20be4cf8340');
+  assert.ok(Object.isFrozen(merEquipmentSuccessors) && Object.isFrozen(merEquipmentSuccessors['package.json']));
+  const path = 'package.json', receipt = merEquipmentSuccessors[path];
+  assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+  assert.equal(receipt.previousSha256, merVisualSuccessors[path].currentSha256);
+  assert.equal(sha(read(path)), receipt.currentSha256);
+  assert.equal(advanceMerEquipment(path, receipt.previousSha256), receipt.currentSha256);
+  assert.equal(advanceMerVisual(path, merVisualSuccessors[path].previousSha256), receipt.currentSha256);
+  for (const endpoint of [receipt.previousSha256, receipt.currentSha256])
+    assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: receipt.currentSha256 });
+  assert.equal(Object.hasOwn(merEquipmentSuccessors, audit), false);
+});
+
+test('the equipment host continuation rejects a repeated or skipped package predecessor and same-size mutations', () => {
+  const path = 'package.json', receipt = merEquipmentSuccessors[path];
+  for (const endpoint of [merVisualSuccessors[path].previousSha256, receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceMerEquipment(path, endpoint), /Broken Mer-host-completion-to-equipment source chain/);
+  const actual = read(path), altered = Buffer.from(actual); altered[0] ^= 1;
+  assert.throws(() => verify(candidate => candidate === path ? altered : read(candidate)), /Unreviewed AVP host source bytes/);
+  assert.throws(() => runtimeView({ [path]: sha(altered) }), /Incorrect AVP host runtime view predecessor/);
+  for (const unknown of ['package.json/extra', 'src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceMerEquipment(unknown, 'unchanged'), 'unchanged', unknown);
+});
+
+test('test:all collects the new Mer equipment contract exactly once through its actual release collector', () => {
+  const scripts = JSON.parse(read('package.json')).scripts;
+  const path = 'scripts/verify-mer-equipment-ui-20261126.mjs';
+  assert.equal(scripts['test:mer-des-chagrins-visual'].split(/\s+/).filter(entry => entry === path).length, 1);
+  const files = collectReleaseTestsV143(scripts);
+  assert.equal(files.filter(entry => entry === path).length, 1);
+  assert.equal(new Set(files).size, files.length);
+  read(path);
+});
+
+// The two branches appended declarations at the same common marker. Recover
+// the bible parent's declaration ordering for its unchanged published hash pins;
+// the Mer declaration prefix is checked separately by its original tests above.
+function historicalBibleDeclarationPrefix(source, marker) {
+  const merMarker = '// BEGIN MER DES CHAGRINS JOIN RECEIPTS';
+  const bibleMarker = '// BEGIN DLC BIBLE DOCUMENT HOST RECEIPTS 20261126';
+  for (const token of [merMarker, bibleMarker, marker])
+    assert.equal(source.split(token).length, 2, 'Exactly one historical declaration marker: ' + token);
+  const mer = source.indexOf(merMarker), bible = source.indexOf(bibleMarker), end = source.indexOf(marker);
+  assert.ok(mer < bible && bible < end);
+  return source.slice(0, mer) + source.slice(bible, end);
+}
 
 test('DLC bible documents advance only the exact public path verifier from the V116 baseline', () => {
   const path = 'scripts/verify-public-release-v86.mjs';
@@ -431,7 +618,7 @@ test('the campaign-to-DLC bible link advances its exact historical document and 
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceBibleBridge(path, 'unchanged'), 'unchanged');
   const terminal = read(audit).toString();
-  assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126'))),
+  assert.equal(sha(historicalBibleDeclarationPrefix(terminal, '// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126')),
     '6dec230cc7c3e1da4d06fc7e72bcb2af42359732218d711402d1b35ed42ee159', 'All preceding AVP, Aliens, Fiorina and DLC document receipts are preserved');
   assert.equal(Object.hasOwn(bibleBridgeSuccessors, audit), false);
 });
@@ -478,16 +665,16 @@ test('AVP production advances only its two exact source admission hosts after th
     assert.ok(Object.isFrozen(receipt));
     const prior = bibleDocumentsSuccessors[path] || spriteSuccessors[path];
     assert.equal(receipt.previousSha256, prior.currentSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceProductionBible(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceProductionBible(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceProductionBible(path, value), /Broken DLC-bible-to-AVP-production source chain/);
     for (const value of [receipt.previousSha256, receipt.currentSha256])
-      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
   }
   const terminal = read(audit).toString();
-  assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126'))),
+  assert.equal(sha(historicalBibleDeclarationPrefix(terminal, '// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126')),
     '35a14e4f36ab0f8ab0bc119f248d66ecf965e4be24af7d2c77382d9948d8160d', 'All published receipt declarations, including the campaign bridge, remain exact');
   assert.equal(Object.hasOwn(productionBibleSuccessors, audit), false);
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
@@ -558,5 +745,58 @@ test('the AVP production manifest pins each original PNG and keeps generated, in
     assert.ok(Array.isArray(entry.sourceRefs) && entry.sourceRefs.length > 0);
     for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
     assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
+  }
+});
+
+
+test('the Mer and bible merge keeps both exact admission lineages and joins only their two host endpoints', () => {
+  assert.deepEqual(merBibleBaselines, {
+    merCommit: 'fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474',
+    bibleCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    commonCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+  });
+  const paths = ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs'];
+  assert.deepEqual(Object.keys(merBibleSuccessors), paths);
+  assert.deepEqual(Object.keys(bibleMerSuccessors), paths);
+  assert.equal(sha(JSON.stringify(merBibleSuccessors)), '4e2c5e82f177f84d56cc0b684f30e44ef8eba8918c5f5f063c77efcf7871da82');
+  assert.equal(sha(JSON.stringify(bibleMerSuccessors)), '968d09656d6924dfaa10bade48a15451bfbac5f40c139759292fb5b7afd824e1');
+  assert.ok(Object.isFrozen(merBibleBaselines));
+  for (const receipts of [merBibleSuccessors, bibleMerSuccessors]) {
+    assert.ok(Object.isFrozen(receipts));
+    assert.equal(Object.hasOwn(receipts, audit), false);
+    for (const receipt of Object.values(receipts)) {
+      assert.ok(Object.isFrozen(receipt));
+      assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    }
+  }
+  for (const path of paths) {
+    const mer = merBibleSuccessors[path], bible = bibleMerSuccessors[path];
+    assert.equal(mer.previousSha256, merVisualSuccessors[path].currentSha256);
+    assert.equal(bible.previousSha256, productionBibleSuccessors[path].currentSha256);
+    assert.equal(mer.currentSha256, bible.currentSha256);
+    assert.equal(sha(read(path)), mer.currentSha256);
+    assert.equal(advanceMerBible(path, mer.previousSha256), mer.currentSha256);
+    assert.equal(advanceBibleMer(path, bible.previousSha256), bible.currentSha256);
+    assert.equal(advanceMerVisual(path, merVisualSuccessors[path].previousSha256), mer.currentSha256);
+    assert.equal(advanceProductionBible(path, productionBibleSuccessors[path].previousSha256), bible.currentSha256);
+    for (const endpoint of [mer.previousSha256, bible.previousSha256, mer.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: mer.currentSha256 });
+  }
+});
+
+test('the two-parent admission join rejects switched parents, rollback, repeated endpoints and one changed byte', () => {
+  for (const path of Object.keys(merBibleSuccessors)) {
+    const mer = merBibleSuccessors[path], bible = bibleMerSuccessors[path];
+    for (const endpoint of [bible.previousSha256, merVisualSuccessors[path].previousSha256, mer.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceMerBible(path, endpoint), /Broken Mer-to-bible-merge source chain/, path);
+    for (const endpoint of [mer.previousSha256, productionBibleSuccessors[path].previousSha256, bible.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceBibleMer(path, endpoint), /Broken bible-to-Mer-merge source chain/, path);
+    const changed = Buffer.from(read(path)); changed[0] ^= 1;
+    assert.throws(() => verify(candidate => candidate === path ? changed : read(candidate)), /Unreviewed AVP host source bytes/, path);
+    assert.throws(() => runtimeView({ [path]: sha(changed) }), /Incorrect AVP host runtime view predecessor/, path);
+  }
+  for (const path of ['scripts/verify-public-release-v86.mjs/extra', 'scripts/build-asset-filter.mjs/extra', 'src/unreviewed.js', '__proto__', 'constructor', audit]) {
+    assert.equal(advanceMerBible(path, 'unchanged'), 'unchanged', path);
+    assert.equal(advanceBibleMer(path, 'unchanged'), 'unchanged', path);
   }
 });

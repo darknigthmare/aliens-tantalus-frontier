@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "edition": "0.10.4",
+  "date": "2026-11-26",
+  "sourceCommit": "a26188a1e63cd39daaee5167d8e940e48120794d",
+  "tool": "image_gen",
+  "mode": "built-in",
+  "requestedAssetIds": [
+    "characters/decker-walk-pass-a",
+    "characters/decker-walk-pass-b",
+    "characters/decker-focus",
+    "characters/decker-medical-report",
+    "equipment/locker-stocked",
+    "equipment/supply-empty",
+    "devices/parts-empty",
+    "doors/lift-cage",
+    "decor/medical-chart",
+    "decor/medical-cups",
+    "terrain/sand",
+    "terrain/silica",
+    "planets/lv178-orbital",
+    "weapons/flame-compact"
+  ],
+  "producedAssetCount": 13,
+  "pngBytes": 24115511,
+  "refusedAssetCount": 1,
+  "totalToolCalls": 16,
+  "qualification": "Thirteen selected PNGs from fifteen successful image calls (two superseded cage iterations), plus one refused compact-flamethrower request. No prior adult/plasma request retried. Exact prompts preserved. Generated form is not canon certification.",
+  "requests": [
+    {
+      "id": "characters/decker-walk-pass-a",
+      "prompt": "Use case: identity-preserve. Asset type: one full-body transparent PNG frame for an existing 2D side-view game character. Edit the referenced project character into the missing passing pose of his unarmed walk. Image 1 is the exact character identity, costume, proportions, texture, lighting and camera reference. Image 2 is his existing walk contact A and fixes the facing and gait style. Preserve the same dark-haired adult man's face, brown worn field jacket, charcoal shirt and trousers, cross-body brown satchel, boots, realistic painted material finish and right-facing three-quarter side view. Change only the limb pose into passing A: the near leg is straight supporting the body at the floor line, the far leg bends at the knee and passes forward with its boot lifted beside the supporting calf; neither foot makes a long stride. The near arm passes close to the torso and the far arm swings naturally, both hands empty. Keep the head and torso upright at the same full-body scale. Show precisely one complete character from hair to both boots, including satchel and hands, with generous transparent padding. No background, ground plane, halo, cast shadow, words, weapons, extra props, extra limbs, cropped body or contact sheet. Preserve transparency; this is a single intermediate animation frame, not a new identity or redesign.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png"
+      ],
+      "nativeSelection": "Actual unarmed moving player; phase between existing contact A and contact B, outside medical scene and reduced-motion/posture states.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+        "sha256": "ad724f2c102a874976a4ac90ff15ae9bdf1f6feecee713335a76e1cf7492c4a0",
+        "gitBlobSha": "38218d26bd1db39bcaa3bedce4f4626641bb7812",
+        "sizeBytes": 1696702,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": [
+        "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c",
+        "5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d"
+      ]
+    },
+    {
+      "id": "characters/decker-walk-pass-b",
+      "prompt": "Use case: identity-preserve. Asset type: one full-body transparent PNG frame for an existing 2D side-view game character. Edit the referenced project character into the missing opposite passing pose of his unarmed walk. Image 1 is the exact character identity, costume, proportions, texture, lighting and camera reference. Image 2 is his existing walk contact B and fixes the facing and gait style. Preserve the same dark-haired adult man's face, brown worn field jacket, charcoal shirt and trousers, cross-body brown satchel, boots, realistic painted material finish and right-facing three-quarter side view. Change only the limb pose into passing B: the far leg is straight supporting the body at the floor line, the near leg bends at the knee and passes forward with its boot lifted beside the supporting calf; neither foot makes a long stride. The near arm passes close to the torso in the opposite swing from contact B and the far arm swings naturally, both hands empty. Keep the head and torso upright at the same full-body scale. Show precisely one complete character from hair to both boots, including satchel and hands, with generous transparent padding. No background, ground plane, halo, cast shadow, words, weapons, extra props, extra limbs, cropped body or contact sheet. Preserve transparency; this is a single intermediate animation frame, not a new identity or redesign.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png"
+      ],
+      "nativeSelection": "Actual unarmed moving player; phase between existing contact B and contact A, outside medical scene and reduced-motion/posture states.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+        "sha256": "67a33165abeb8bb8ee8bcdff148ab3ecf19872c455e5d24556022bff57b503ac",
+        "gitBlobSha": "05e209b738d36ad22a02e6e420b53b76d487c99f",
+        "sizeBytes": 1726714,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": [
+        "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c",
+        "d5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e"
+      ]
+    },
+    {
+      "id": "characters/decker-focus",
+      "prompt": "Use case: identity-preserve. Asset type: one full-body transparent PNG action hold for an existing 2D side-view game character. Image 1 is the edit target and exact character identity, costume, proportions, materials, lighting and camera reference. Preserve the same dark-haired adult man's face, brown worn field jacket, charcoal shirt and trousers, cross-body brown satchel, boots and realistic painted style. Change only his pose and expression into a restrained stationary concentration pose: feet planted naturally, shoulders slightly tense, eyes partially closed, his near hand with relaxed fingers resting lightly at his temple, other hand relaxed down by the satchel. Keep the full body upright and facing screen-right in the same three-quarter side view. This is his quiet empathic focus state in the game, with no glowing eyes, magic aura, visual effects or newly invented equipment. Show exactly one character, hair to soles fully inside the image with transparent padding. Keep both hands anatomically clear and empty. No background, cast shadow, halo, text, weapon, extra limbs or contact sheet. True transparent background; retain face and costume identity from the project reference.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker.png"
+      ],
+      "nativeSelection": "Actual unarmed stationary Decker with renderer.focus true; exclude medical scene, moving/crouch/dodge and active work.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-focus.png",
+        "sha256": "8659b23dbb7ecc99dc9dfd1937b1020c5b38a95482c268be8461977451151f6f",
+        "gitBlobSha": "3aa1082373ac8e86d25c507cfb0759fe0407e9fc",
+        "sizeBytes": 1725805,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": [
+        "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c"
+      ]
+    },
+    {
+      "id": "characters/decker-medical-report",
+      "prompt": "Use case: identity-preserve. Asset type: one full-body transparent PNG action hold for the existing ship medical scene of a 2D side-view game. Image 1 is the exact character edit target: preserve his dark-haired face and adult body, plain grey-blue short-sleeved calf-length medical gown, grey-blue slippers, proportions, lighting, realistic painted style and right-facing three-quarter side view. Image 2 is the supporting handheld report device reference. Change only the man's arms, gaze and hand action: he stands with both feet on the same baseline, holds one compact version of the referenced rugged olive-grey report reader at mid chest, his far hand supporting its lower edge and near index finger pressing one physical key, looking down at its screen. The reader is handheld, roughly one palm wide and two palms long, with the same green rectangular screen, simple physical buttons and dark rubber corners; no added readable text. Maintain an upright restrained posture. Exactly one fully clothed character with exactly one handheld reader, all hair, hands and slippers visible with transparent padding. No desk, hospital bed, background, halo, cast shadow, extra limbs, weapons or contact sheet. Preserve real transparency and project identity; this pose represents the existing report-transmission action, not a new medical event.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+        "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png"
+      ],
+      "nativeSelection": "Only room s03, actual unarmed player while g.activeWork.id is o02-01; return to medical-gown on cancellation/completion.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-report.png",
+        "sha256": "004e6ca5b3208f83d97c1641c537fb6ea80a6ffeefb8d1b5431cb44a22d9647d",
+        "gitBlobSha": "9404bbbf67f4e531fcf0dfdc9c9a71e67ce72ea2",
+        "sizeBytes": 1562846,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": [
+        "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+        "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4"
+      ]
+    },
+    {
+      "id": "equipment/locker-stocked",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one full isolated transparent PNG game prop state for the existing Aliens Tantalus Sea of Sorrows visual family.\nInput image 1 is the exact edit target: the already open empty storage locker. Keep this same cabinet, same open door angle, camera, outer silhouette, shelves, hinges, handle, vents, scratched olive steel, lighting and fully visible base unchanged.\nChange only the empty interior into the stocked state: put a few compact unmarked sealed khaki and dull green rectangular supply packages neatly resting on each shelf. They are generic closed reserve packages; do not show a specific weapon, loose ammo, medical branding or invented logos. Leave some empty space so the three shelves remain readable. Packages must be physically supported on shelves, with their shadows inside the cabinet.\nMatch the reference's realistic hand-painted 3D game sprite detail and muted industrial colors. A single entire cabinet, generous transparent margin, no scene, no room, no text, no caption, no ground plane, no watermark. Preserve genuine alpha transparency outside the cabinet including around its open door. No other changes.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-stocked.png",
+        "sha256": "1d52abe726fa1cef6dc02544514046ccca9415ba4a0413ab2a568d7af4e2e6e9",
+        "gitBlobSha": "ac4566a277cd5c5726f6ed1a8f1d9c81b56d74b4",
+        "sizeBytes": 2310254,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "transparent_background": true,
+      "referencedImageSha256": [
+        "9c9d393e5337509ec1fa7e6cc9b71db4efda7b78986adf02b180ca6935758743"
+      ]
+    },
+    {
+      "id": "equipment/supply-empty",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one full isolated transparent PNG game prop state for the existing Aliens Tantalus Sea of Sorrows visual family.\nInput image 1 is the exact edit target: the closed wide olive supply chest. Keep this same chest body, exact base footprint, corner armor, handles, front latch positions, scratched olive steel, side/front camera angle, lighting and style.\nChange only the chest from closed to visibly opened and exhausted: raise its lid on the rear hinges to reveal an empty dark interior with no loose objects or supplies. The two front latches are unfastened. Retain the original lid's ribs and weathering, visible on the raised lid; the lid has plausible thickness and supported hinges. Give the open lid enough transparent canvas above so the entire lid and base stay visible; never crop the object.\nMatch the reference's realistic hand-painted 3D game sprite detail and muted industrial colors. One entire chest only, empty interior, no room, no people, no text, no logos, no ground plane, no watermark. Preserve genuine alpha transparency outside the chest.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/equipment/supply.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/supply-empty.png",
+        "sha256": "197acef18a7082229c4d4e91b175c60f809b83b6d356fc3fcfd85029c8262f42",
+        "gitBlobSha": "e5cca66f4242ea168688396ff764bbe3f4860b0f",
+        "sizeBytes": 2195513,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "transparent_background": true,
+      "referencedImageSha256": [
+        "0f46994e4fa4d718bad65756ec7f8ba8a647099b6ddba8fc5bc4d83b1eb4e10d"
+      ]
+    },
+    {
+      "id": "devices/parts-empty",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one full isolated transparent PNG game prop state for the existing Aliens Tantalus Sea of Sorrows visual family.\nInput image 1 is the exact edit target: the compartmented olive metal parts carrier with its raised central handle. Keep the same carrier, same camera angle and framing, same outer silhouette, handle height, hinges, dividers, bolts, scratched olive steel, lighting and base unchanged.\nChange only the contents: remove every loose part, strap, folded fabric packet, rubber roller, pin, bolt and washer from all compartments. Show the now empty dark metal compartments and their bottom surfaces, consistent in perspective and worn material. The structural tray dividers, handle and their attached bolts remain. Nothing may float or protrude into the empty tray.\nMatch the reference's realistic hand-painted 3D game sprite detail and muted industrial colors. Single complete empty carrier, transparent background with real alpha, no replacement contents, no room, no text, no caption, no ground plane, no watermark. No other changes.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/devices/parts.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts-empty.png",
+        "sha256": "6297a0ffa45e87ac4dab75f4330152d6b6be1ee3579a77798c31081616ec6684",
+        "gitBlobSha": "f1251d45dcaec31444d6e70c180e172916de5796",
+        "sizeBytes": 2330186,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "transparent_background": true,
+      "referencedImageSha256": [
+        "dd7e9b956d65058131e8139632c9a6d766ad08d5d3e2859b81bdab2aa93b7716"
+      ]
+    },
+    {
+      "id": "doors/lift-cage",
+      "prompt": "Use case: stylized-concept.\nAsset type: a single isolated transparent PNG mine lift cage frame for the existing Aliens Tantalus Sea of Sorrows side-view game, front elevation.\nInput images 1 and 2 are material and mechanical design references only: use their scratched gray steel, faded olive machine paint, exposed bolts, sturdy industrial construction and realistic hand-painted 3D sprite rendering. Do not copy their winch drum or make another winch. This is a companion mine lift cage assembly, an original project adaptation.\nSubject: the complete empty rectangular steel cage of an industrial mine hoist, a tall person-height entrance with two robust side posts, overhead crossbeam with two small cable attachment rollers, and a shallow grated floor threshold. Keep the complete assembly inside the image with a small transparent margin. Front-facing orthographic elevation, symmetric left and right posts, no perspective angle. The height should be approximately 1.45 times the full outside width.\nThe central entrance must be entirely open and genuinely transparent: no back panel, no rear wall, no lattice or bars crossing the middle opening. Narrow retracted safety gate bars may be packed at the extreme sides next to the side posts. The floor is only a thin horizontal threshold; no deep perspective floor. The game will supply background, gate status and mechanics independently. No external walls, no shaft, no controls panel, no labels, no text, no people, no logos, no smoke or glow, no ground shadows, no watermark. Isolate the frame and its side details on true transparent alpha, including the entire central opening.",
+      "firstResult": {
+        "status": "discarded-for-cropped-cable-tips",
+        "sha256": "003cd3cc4b40d6497018f87b224e8825d7bb58c3329178878a8b22fd5de4a936"
+      },
+      "revisionPrompt": "Use case: precise-object-edit.\nInput image 1 is the exact edit target, this single front-facing empty mine lift cage frame. Correct only the two rope cables that currently extend out of the upper edge and are cut off. Remove both rope extensions above the pulley housings so the existing two pulley housings are the topmost parts of the assembly. Keep the little cable loops inside their housings, but no cable extends above the housings. Add a small completely transparent margin above both housings so every part of the object is visibly inside the canvas. Keep the entire cage, proportions, side posts, empty transparent central aperture, floor threshold, bolts, materials, colors, light and straight orthographic camera unchanged. Genuine transparent alpha background outside and through the entire empty central opening. No other changes, no text or extra objects.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/decor/hoist-drive.png",
+        "dlc/sea-of-sorrows-visual/sprites/decor/winch.png"
+      ],
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+        "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
+        "gitBlobSha": "47e04e7d63d4770563987fe7f21748ed5d50fbf3",
+        "sizeBytes": 1344816,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "secondResult": {
+        "status": "superseded-for-native-aperture-proportions",
+        "sha256": "20d1ad710e741ff7b70ef9c722097f89a25c5f1b60c9514cfdc21144b09e60de"
+      },
+      "nativeProportionPrompt": "Use case: precise-object-edit.\nInput image 1 is the exact edit target, the front-facing empty steel mine lift cage frame. Make one geometric correction for its existing game's actual doorway: widen and shorten the frame so its OPEN INNER APERTURE is nearly SQUARE, as wide as it is tall. This means moving the side posts farther apart, extending the overhead crossbeam and floor threshold horizontally, and shortening the long vertical side posts. Keep the posts, crossbeam and threshold sensible structural thickness; do not simply stretch the whole rendered picture. Rebuild their metal surfaces and bolts coherently at the changed lengths. The entire outside frame should have approximately equal total width and total height, with the two small roller housings slightly above the top beam.\nPreserve every other design choice: front-facing orthographic elevation, bilateral symmetry, scratched gray steel and olive paint, two complete top pulley housings with no projecting cables, narrow retracted gate bars packed against the inner side posts, thin grated floor threshold, exact material style, colors and lighting. Central opening remains wholly transparent with no back wall or gate bars across it. Show the full object with a transparent margin on every side; do not crop the roller housings or feet. No new props, labels, controls, scene, text or ground shadows. Genuine transparent alpha outside and throughout the open inner aperture.",
+      "attemptCount": 3,
+      "transparent_background": true,
+      "attempts": [
+        {
+          "sequence": 1,
+          "prompt": "Use case: stylized-concept.\nAsset type: a single isolated transparent PNG mine lift cage frame for the existing Aliens Tantalus Sea of Sorrows side-view game, front elevation.\nInput images 1 and 2 are material and mechanical design references only: use their scratched gray steel, faded olive machine paint, exposed bolts, sturdy industrial construction and realistic hand-painted 3D sprite rendering. Do not copy their winch drum or make another winch. This is a companion mine lift cage assembly, an original project adaptation.\nSubject: the complete empty rectangular steel cage of an industrial mine hoist, a tall person-height entrance with two robust side posts, overhead crossbeam with two small cable attachment rollers, and a shallow grated floor threshold. Keep the complete assembly inside the image with a small transparent margin. Front-facing orthographic elevation, symmetric left and right posts, no perspective angle. The height should be approximately 1.45 times the full outside width.\nThe central entrance must be entirely open and genuinely transparent: no back panel, no rear wall, no lattice or bars crossing the middle opening. Narrow retracted safety gate bars may be packed at the extreme sides next to the side posts. The floor is only a thin horizontal threshold; no deep perspective floor. The game will supply background, gate status and mechanics independently. No external walls, no shaft, no controls panel, no labels, no text, no people, no logos, no smoke or glow, no ground shadows, no watermark. Isolate the frame and its side details on true transparent alpha, including the entire central opening.",
+          "referencedImagePaths": [
+            "dlc/sea-of-sorrows-visual/sprites/decor/hoist-drive.png",
+            "dlc/sea-of-sorrows-visual/sprites/decor/winch.png"
+          ],
+          "referencedImageSha256": [
+            "72982665cb381ea79275125dacbbd85318567d87bb237d716f241495c0e7e3ef",
+            "538fff5639861792f1c2300c9eea34042fbd5c4d5b44f697636e46c2e12111de"
+          ],
+          "result": {
+            "status": "discarded-for-cropped-cable-tips",
+            "sha256": "003cd3cc4b40d6497018f87b224e8825d7bb58c3329178878a8b22fd5de4a936"
+          }
+        },
+        {
+          "sequence": 2,
+          "prompt": "Use case: precise-object-edit.\nInput image 1 is the exact edit target, this single front-facing empty mine lift cage frame. Correct only the two rope cables that currently extend out of the upper edge and are cut off. Remove both rope extensions above the pulley housings so the existing two pulley housings are the topmost parts of the assembly. Keep the little cable loops inside their housings, but no cable extends above the housings. Add a small completely transparent margin above both housings so every part of the object is visibly inside the canvas. Keep the entire cage, proportions, side posts, empty transparent central aperture, floor threshold, bolts, materials, colors, light and straight orthographic camera unchanged. Genuine transparent alpha background outside and through the entire empty central opening. No other changes, no text or extra objects.",
+          "referencedImageSha256": [
+            "003cd3cc4b40d6497018f87b224e8825d7bb58c3329178878a8b22fd5de4a936"
+          ],
+          "result": {
+            "status": "superseded-for-native-aperture-proportions",
+            "sha256": "20d1ad710e741ff7b70ef9c722097f89a25c5f1b60c9514cfdc21144b09e60de"
+          }
+        },
+        {
+          "sequence": 3,
+          "prompt": "Use case: precise-object-edit.\nInput image 1 is the exact edit target, the front-facing empty steel mine lift cage frame. Make one geometric correction for its existing game's actual doorway: widen and shorten the frame so its OPEN INNER APERTURE is nearly SQUARE, as wide as it is tall. This means moving the side posts farther apart, extending the overhead crossbeam and floor threshold horizontally, and shortening the long vertical side posts. Keep the posts, crossbeam and threshold sensible structural thickness; do not simply stretch the whole rendered picture. Rebuild their metal surfaces and bolts coherently at the changed lengths. The entire outside frame should have approximately equal total width and total height, with the two small roller housings slightly above the top beam.\nPreserve every other design choice: front-facing orthographic elevation, bilateral symmetry, scratched gray steel and olive paint, two complete top pulley housings with no projecting cables, narrow retracted gate bars packed against the inner side posts, thin grated floor threshold, exact material style, colors and lighting. Central opening remains wholly transparent with no back wall or gate bars across it. Show the full object with a transparent margin on every side; do not crop the roller housings or feet. No new props, labels, controls, scene, text or ground shadows. Genuine transparent alpha outside and throughout the open inner aperture.",
+          "referencedImageSha256": [
+            "20d1ad710e741ff7b70ef9c722097f89a25c5f1b60c9514cfdc21144b09e60de"
+          ],
+          "result": {
+            "status": "generated",
+            "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+            "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
+            "gitBlobSha": "47e04e7d63d4770563987fe7f21748ed5d50fbf3",
+            "sizeBytes": 1344816,
+            "sourceImageInspected": true,
+            "canonicalOneToOneCertified": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "decor/medical-chart",
+      "prompt": "Use case: stylized-concept. Asset type: one individually isolated game prop sprite for Aliens: Tantalus Frontier, La Mer des Chagrins, medical scene aboard the Carlyle. Primary request: a simple rigid clipboard holding a few hard-copy medical chart pages, no readable writing or names. Physical clipboard and paper are the only source-established features; the exact industrial design is a project interpretation. Realistic worn practical science-fiction materials matching the existing medical bed: muted grey metal clip, dull olive-grey backing, off-white paper, small wear. Front view with very slight depth, portrait orientation, all outer edges fully visible, compact centered silhouette, bottom edge level as a placement pivot. No hands, no person, no bed, no other equipment, no backdrop, no ground plane, no labels, no logos, no watermark. Crisp neutral directional lighting, production-quality detailed isolated prop, genuine transparent background.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-chart.png",
+        "sha256": "97ebe16bfdb18696e229ddcfef4e6e72b4fb0fcddc2559c8644872ef9bdabff5",
+        "gitBlobSha": "72483af5186e2f8674f2da45a6bce6a4f19aeb4a",
+        "sizeBytes": 2305126,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": []
+    },
+    {
+      "id": "decor/medical-cups",
+      "prompt": "Use case: stylized-concept. Asset type: one individually isolated medical prop sprite for Aliens: Tantalus Frontier, La Mer des Chagrins, scene aboard the Carlyle. Primary request: the two cups described in chapter four: one plain plastic cup holding water and, beside it, a much smaller medicine cup containing exactly two tiny white tablets. This is a static background prop, not an instruction or label. Exact shapes, sizes and color treatment are project interpretation. Realistic practical industrial science-fiction style, neutral translucent grey plastic and subtle surface wear matching the existing muted medical equipment. Both cups stand on the same baseline, three-quarter front view slightly above the rims so the contents can be seen; entirely visible, centered, with space around all edges. No tray, no furniture, no hands, no person, no packaging, no text, no branding, no watermark. Crisp soft-neutral lighting and genuine transparent background; no ground plane or painted backdrop.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-cups.png",
+        "sha256": "fc27ce0faa84b419885cbd3006b491ab3b8658782b7b9037c566b969c2ce8471",
+        "gitBlobSha": "4c9915f075dda715a39ae5a068ede9ddb19a7187",
+        "sizeBytes": 1703691,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": []
+    },
+    {
+      "id": "terrain/sand",
+      "prompt": "Use case: stylized-concept. Asset type: single transparent terrain decal for an existing realistic hand-painted 2D science-fiction side-view game. Create ONE low, wide patch of toxic mineral sand on LV-178 / New Galveston for an unofficial adaptation of Alien: Sea of Sorrows. Only documented premise is dangerous mineral sand; exact material grain and color are the project's interpretation. Show a thin, low-relief flattened irregular oval ground patch, slightly above side-on perspective, not a floating island or tall dune: densely packed dusty gray-olive and muted ochre sand, fine silica grit, shallow wind-combed ripples, a few very small dark stones. Detailed restrained painterly realism, weathered utilitarian survival-horror game-art finish, desaturated brown-gray/green palette, soft upper-left neutral light, consistent subtle relief. Entire patch visible with generous transparent margins, broad horizontal composition, about three times as wide as tall. Outer edge naturally breaks into scattered grains and fades to real alpha so patches can blend over a native floor. Do not create a rectangular texture card. True transparent background, no floor beyond the patch, no cast shadow outside it, no skyline, no people, no machinery, no symbols, no words, no title, no watermark. This is a decorative ground material, not a map or a canonical geology claim.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
+        "sha256": "abb35029ec62424e8c9f13b4f2f05ff4e3ade0a3ff15750e2e3168324bedd276",
+        "gitBlobSha": "2cb9bdfe4f8281b26f782fd9b4f38f7ffdef5bf8",
+        "sizeBytes": 1722927,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": []
+    },
+    {
+      "id": "terrain/silica",
+      "prompt": "Use case: stylized-concept. Asset type: single transparent terrain decal for an existing realistic hand-painted 2D science-fiction side-view game. Create ONE low, wide patch of fractured silica ground for underground mining passages in an unofficial Alien: Sea of Sorrows game adaptation. This is a project interpretation, not an authenticated canonical material specification. Thin flattened irregular oval patch, slight top-down side-on view: smoky amber-gray mineral crust, small jagged pale-gold translucent silica flakes partially embedded in dark brown-gray dust, shallow stress cracks and sparkling gritty chips. Keep relief extremely low so a character can visibly stand on the floor. No giant crystals or tall spikes. Match restrained painterly realism, worn survival-horror game-art finish, muted ochre/olive/gray palette, soft upper-left light and subtle non-emissive mineral highlights. Entire patch visible, broad horizontal composition about three times wider than high, with generous transparent margins. Its edges crumble into individual grains and real alpha, blending naturally when overlaid on a floor. No rectangular card, no floating rock island, no floor outside the patch, no cast shadow outside it, no horizon, no equipment, no creatures, no writing or watermark. True transparent background.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png",
+        "sha256": "1bc859b5800d8db432aa9848ebef16f45ce026309aa16845607a66b2d50e87ac",
+        "gitBlobSha": "8d51568705b86c67ec98570298df24dca2da0ecc",
+        "sizeBytes": 1597263,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": []
+    },
+    {
+      "id": "planets/lv178-orbital",
+      "prompt": "Use case: stylized-concept. Asset type: single isolated planetary globe on transparent background for the orbital viewport of an existing realistic 2D science-fiction game. Primary request: an original interpretive orbital depiction of LV-178, also called New Galveston, in an unofficial Alien: Sea of Sorrows game adaptation. The novel premise establishes mineral sands and a colony, but no exact globe map is supplied: do not imitate Earth geography or imply a verified map. A single complete sphere, roughly centered, with a muted gray-olive and ochre mineral surface veiled by fine dusty atmospheric haze; understated broad irregular surface tone with no recognizable Earth continents, no defined oceans, no invented city lights, no labels or geographic symbols. Soft illumination from upper-left; lower-right hemisphere naturally falls into a deep dark terminator. Thin subtle pale haze at the lit edge, understated realistic painted cinematic rendering to fit an industrial spacecraft window. Entire globe and tiny atmosphere halo visible inside generous transparent margins. Truly transparent background, no stars, no black rectangular backdrop, no window frame, no spacecraft, no moon, no rings, no text or watermark. This is a single decorative planet sprite, not an astronomical diagram or a canonical 1:1 geography claim.",
+      "transparent_background": true,
+      "result": {
+        "status": "generated",
+        "path": "dlc/sea-of-sorrows-visual/sprites/planets/lv178-orbital.png",
+        "sha256": "14aabbcdea3fcf7330a391e20752c138fe049a1e7e7fc9f0d6935e0e079cb196",
+        "gitBlobSha": "7afee2c5faaa63eb47c46bc5caca059cb9c745bb",
+        "sizeBytes": 1893668,
+        "sourceImageInspected": true,
+        "canonicalOneToOneCertified": false
+      },
+      "referencedImageSha256": []
+    },
+    {
+      "id": "weapons/flame-compact",
+      "prompt": "Use case: precise-object-edit. Asset type: one transparent side-view 2D game weapon sprite, an alternate compact presentation of the supplied original fictional flamethrower. The supplied image is the edit target. Keep its worn olive-gray metal, ochre hazard striping, upper carrying handle, perforated heat shield, muzzle, dark main pistol grip and forward support grip, painterly realistic rendering and exact right-facing orthogonal side view. Change only the excessively long rear assembly: make the rear casing, fuel-canister rear section and buttstock much shorter so the main grip is close to the rear end. The length from buttplate to center of main grip should be clearly LESS than the distance from main grip to forward support grip. The new short buttstock must end near the trigger-grip rear instead of projecting far behind the character when held. Preserve the front barrel/heat shield/muzzle design and two grips. This is visual game art, not a working design. Show the entire single weapon with transparent margin; no human, no firing, no flame, no background, no floor, no diagram, no labels, no dimensions, no watermark. True transparent background, preserve clean alpha. Do not create a sheet or multiple views. This is an original project adaptation with no claim of an authenticated novel weapon model.",
+      "referencePaths": [
+        "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png"
+      ],
+      "result": {
+        "status": "refused-by-image-tool",
+        "imageProduced": false,
+        "reason": "The image tool's safety system rejected the request. No retry or substitute image was made.",
+        "fallback": "Existing weapons/flame retained; stock and secondary-hand limitations remain open."
+      },
+      "referencedImageSha256": [
+        "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97"
+      ]
+    }
+  ],
+  "canonicalOneToOneCertified": false,
+  "completeAnimationCycles": false
+}

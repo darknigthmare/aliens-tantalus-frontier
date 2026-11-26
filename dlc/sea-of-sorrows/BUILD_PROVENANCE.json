@@ -1,0 +1,19 @@
+{
+  "base": {
+    "name": "ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip",
+    "version": "0.9.0",
+    "bytes": 84799492,
+    "sha256": "61dc9907fc3309ff4df73b45a1349dbb07e260aa21cdd36504147b2430123714"
+  },
+  "delivery": "0.10.0",
+  "method": "Cumulative edit of actual mounted version 0.9 ZIP. Nine existing runtime modules, 98 thresholds moved and metadata for all 113; no host source merged.",
+  "native_browser_persistence_certified": false,
+  "controller_physical_hardware_tested": false,
+  "human_playthrough_certified": false,
+  "public_deployment": false,
+  "full_novel_compared": false,
+  "canonical_percent": null,
+  "reports": "reports/v0100",
+  "schema": 8,
+  "optional_armory_revision": 1
+}

@@ -1,0 +1,51 @@
+PASS Version 0.5, schéma 6 et 102 dossiers chargés
+PASS Aucun point de repli inventé au premier démarrage
+CAPTURE 01_titre.png
+PASS Guide : poursuite, trois disciplines de tir, repli et journal
+PASS Reprendre migre une vraie sauvegarde 0.4 vers 0.5
+PASS Copie backup-v4 identique à l’ancien fichier
+PASS La sauvegarde du jeu hôte n’a pas changé
+PASS Reprendre offre un point de repli valide
+PASS Une poursuite authentique est en cours à la reprise
+PASS La créature progresse hors champ pendant un déplacement clavier
+PASS Le signal visible provient du seuil réellement atteint
+PASS Le signal n’ajoute pas un faux contact au détecteur
+PASS Pause fige le franchissement annoncé
+PASS Le journal contient le bruit entendu au seuil
+PASS Le journal affiche des faits, pas des coordonnées ennemies
+PASS L’arrivée ajoute la même identité dans la salle courante
+PASS L’ennemi a quitté la population de la salle source
+PASS L’arrivée ne produit pas de doublon mondial
+PASS Une arrivée suivie d’un import reste valide
+PASS La retraite gagnée a utilisé la consigne ne pas tirer
+PASS N : ne pas tirer → riposte
+PASS N : riposte → feu libre
+PASS N : feu libre → ne pas tirer, visible dans le HUD
+PASS Le cycle N ne modifie pas l’ordre de déplacement
+PASS U ouvre le journal et met la partie en pause
+PASS Une sauvegarde courante corrompue ne détruit pas les replis
+PASS La corruption est annoncée sans lancer une nouvelle partie
+PASS Trois points distincts sont proposés
+CAPTURE 07_replis.png
+PASS Restaurer exige une confirmation visible
+PASS Choisir seul n’a pas écrasé la sauvegarde
+PASS Annuler revient à la liste sans restauration
+PASS Restaurer reprend le véritable ticket de poursuite
+PASS La restauration ne laisse pas le titre masquer le jeu
+PASS La sauvegarde remplacée est désormais un export valide
+PASS La rotation conserve trois points au maximum
+PASS L’échec d’écriture des replis est signalé
+PASS Les replis invalides sont ignorés sans erreur JavaScript
+CAPTURE 02_retraite.png
+CAPTURE 03_seuil.png
+CAPTURE 04_arrivee.png
+CAPTURE 05_securise.png
+CAPTURE 08_convoi.png
+CAPTURE 06_journal.png
+PASS Le bilan terminé conserve le franchissement réellement subi
+CAPTURE 09_bilan.png
+PASS Avertissement et HUD accessibles en 960 × 720 sans débordement global
+CAPTURE 10_format_960.png
+PASS Aucune exception JavaScript pendant cette suite
+PASS Le HTML autonome n’a demandé aucune ressource réseau
+RESULT 40 0

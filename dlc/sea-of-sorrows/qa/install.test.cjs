@@ -1,0 +1,12 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {install,FILES}=require('../integration/install.cjs');
+function fixture(fn){const p=fs.mkdtempSync(path.join(os.tmpdir(),'sorrows-test-'));fs.writeFileSync(path.join(p,'index.html'),'HOST ORIGINAL');try{fn(p);}finally{fs.rmSync(p,{recursive:true,force:true});}}
+test('Copie locale : tous les fichiers présents, index hôte intact',()=>fixture(p=>{assert.equal(install(p).status,'installed');for(const f of FILES)assert.ok(fs.existsSync(path.join(p,'dlc/sea-of-sorrows',f)));assert.equal(fs.readFileSync(path.join(p,'index.html'),'utf8'),'HOST ORIGINAL');}));
+test('Deux installations identiques sont idempotentes',()=>fixture(p=>{install(p);assert.equal(install(p).status,'already-installed');}));
+test('La désinstallation enlève uniquement son dossier',()=>fixture(p=>{install(p);fs.writeFileSync(path.join(p,'other.txt'),'KEEP');assert.equal(install(p,true).status,'uninstalled');assert.equal(fs.readFileSync(path.join(p,'other.txt'),'utf8'),'KEEP');assert.equal(install(p,true).status,'already-absent');}));
+test('Un fichier utilisateur modifié interdit la suppression',()=>fixture(p=>{install(p);const f=path.join(p,'dlc/sea-of-sorrows/index.html');fs.appendFileSync(f,'CUSTOM');assert.throws(()=>install(p,true),/modifié/);assert.ok(fs.readFileSync(f,'utf8').endsWith('CUSTOM'));}));
+test('Un dossier étranger ou un fichier supplémentaire est préservé',()=>fixture(p=>{const d=path.join(p,'dlc/sea-of-sorrows');fs.mkdirSync(d,{recursive:true});fs.writeFileSync(path.join(d,'notes.txt'),'KEEP');assert.throws(()=>install(p),/sans reçu/);assert.equal(fs.readFileSync(path.join(d,'notes.txt'),'utf8'),'KEEP');fs.rmSync(d,{recursive:true});install(p);fs.writeFileSync(path.join(d,'notes.txt'),'KEEP');assert.throws(()=>install(p,true),/additionnels/);}));
+test('Un dossier qui n’est pas un projet est refusé',()=>{assert.throws(()=>install('/path/that/does/not/exist'),/index.html/);});
+
+test('La route installée contient chacun des neuf modules réellement référencés',()=>fixture(p=>{install(p);const d=path.join(p,'dlc/sea-of-sorrows'),html=fs.readFileSync(path.join(d,'index.html'),'utf8'),refs=[...html.matchAll(/<script src="([^"]+)"/g)].map(a=>a[1]);assert.equal(refs.length,9);for(const f of refs)assert.ok(fs.existsSync(path.join(d,f)),f);assert.ok(refs.includes('src/tactics-art.js'));assert.equal(JSON.parse(fs.readFileSync(path.join(d,'.sorrows-install.json'),'utf8')).version,'0.10.0');}));

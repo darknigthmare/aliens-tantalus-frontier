@@ -1,0 +1,131 @@
+PASS Version0.10 et registre présents
+PASS Les 50 lieux sont inspectables avant la partie
+PASS 16 personnages identifiés, profil générique exclu du registre public
+PASS Les visages complets ne sont pas présentés comme authentifiés
+PASS Les rôles non joués sont signalés
+PASS Sept entrées d’armes et quatorze d’équipement
+PASS Dix sources externes identifiées
+PASS La confrontation au texte intégral est explicitement absente
+PASS Aucun retrait à distance
+PASS Le râtelier est accessible après marche physique
+PASS Une dotation de 90 cartouches impulsion et trois cellules plasma
+PASS Retrait en double désactivé
+PASS Sélection du plasma par le véritable bouton
+PASS HUD du plasma séparé du Reaper
+PASS HYBRID rendu de s01
+PASS HYBRID rendu de s02
+PASS HYBRID rendu de s03
+PASS HYBRID rendu de s04
+PASS HYBRID rendu de s05
+PASS HYBRID rendu de s06
+PASS HYBRID rendu de s07
+PASS HYBRID rendu de s08
+PASS HYBRID rendu de s09
+PASS HYBRID rendu de s10
+PASS HYBRID rendu de s11
+PASS HYBRID rendu de s12
+PASS HYBRID rendu de s13
+PASS HYBRID rendu de s14
+PASS HYBRID rendu de s15
+PASS HYBRID rendu de s16
+PASS HYBRID rendu de s17
+PASS HYBRID rendu de s18
+PASS HYBRID rendu de s19
+PASS HYBRID rendu de s20
+PASS HYBRID rendu de s21
+PASS HYBRID rendu de s22
+PASS HYBRID rendu de s23
+PASS HYBRID rendu de s24
+PASS HYBRID rendu de s25
+PASS HYBRID rendu de s26
+PASS HYBRID rendu de s27
+PASS HYBRID rendu de s28
+PASS HYBRID rendu de s29
+PASS HYBRID rendu de s30
+PASS HYBRID rendu de s31
+PASS HYBRID rendu de s32
+PASS HYBRID rendu de s33
+PASS HYBRID rendu de s34
+PASS HYBRID rendu de s35
+PASS HYBRID rendu de s36
+PASS HYBRID rendu de s37
+PASS HYBRID rendu de s38
+PASS HYBRID rendu de s39
+PASS HYBRID rendu de s40
+PASS HYBRID rendu de s41
+PASS HYBRID rendu de s42
+PASS HYBRID rendu de s43
+PASS HYBRID rendu de s44
+PASS HYBRID rendu de s45
+PASS HYBRID rendu de s46
+PASS HYBRID rendu de s47
+PASS HYBRID rendu de s48
+PASS HYBRID rendu de s49
+PASS HYBRID rendu de s50
+PASS CLASSIC rendu de s01
+PASS CLASSIC rendu de s02
+PASS CLASSIC rendu de s03
+PASS CLASSIC rendu de s04
+PASS CLASSIC rendu de s05
+PASS CLASSIC rendu de s06
+PASS CLASSIC rendu de s07
+PASS CLASSIC rendu de s08
+PASS CLASSIC rendu de s09
+PASS CLASSIC rendu de s10
+PASS CLASSIC rendu de s11
+PASS CLASSIC rendu de s12
+PASS CLASSIC rendu de s13
+PASS CLASSIC rendu de s14
+PASS CLASSIC rendu de s15
+PASS CLASSIC rendu de s16
+PASS CLASSIC rendu de s17
+PASS CLASSIC rendu de s18
+PASS CLASSIC rendu de s19
+PASS CLASSIC rendu de s20
+PASS CLASSIC rendu de s21
+PASS CLASSIC rendu de s22
+PASS CLASSIC rendu de s23
+PASS CLASSIC rendu de s24
+PASS CLASSIC rendu de s25
+PASS CLASSIC rendu de s26
+PASS CLASSIC rendu de s27
+PASS CLASSIC rendu de s28
+PASS CLASSIC rendu de s29
+PASS CLASSIC rendu de s30
+PASS CLASSIC rendu de s31
+PASS CLASSIC rendu de s32
+PASS CLASSIC rendu de s33
+PASS CLASSIC rendu de s34
+PASS CLASSIC rendu de s35
+PASS CLASSIC rendu de s36
+PASS CLASSIC rendu de s37
+PASS CLASSIC rendu de s38
+PASS CLASSIC rendu de s39
+PASS CLASSIC rendu de s40
+PASS CLASSIC rendu de s41
+PASS CLASSIC rendu de s42
+PASS CLASSIC rendu de s43
+PASS CLASSIC rendu de s44
+PASS CLASSIC rendu de s45
+PASS CLASSIC rendu de s46
+PASS CLASSIC rendu de s47
+PASS CLASSIC rendu de s48
+PASS CLASSIC rendu de s49
+PASS CLASSIC rendu de s50
+PASS 1024px registre lieux sans débordement horizontal
+PASS 1024px registre personnages sans débordement horizontal
+PASS 1024px registre materiel sans débordement horizontal
+PASS 1024px registre ecarts sans débordement horizontal
+PASS 1024px fermeture du registre accessible
+PASS 390px registre lieux sans débordement horizontal
+PASS 390px registre personnages sans débordement horizontal
+PASS 390px registre materiel sans débordement horizontal
+PASS 390px registre ecarts sans débordement horizontal
+PASS 390px fermeture du registre accessible
+PASS 360px registre lieux sans débordement horizontal
+PASS 360px registre personnages sans débordement horizontal
+PASS 360px registre materiel sans débordement horizontal
+PASS 360px registre ecarts sans débordement horizontal
+PASS 360px fermeture du registre accessible
+PASS Aucune exception dans les nouveaux panneaux et rendus
+RESULT 130 0

@@ -1,0 +1,490 @@
+{
+  "version": "0.10.0",
+  "html_sha256": "881ce8fca80f5473366463ad864af050ed0783b329f443f32f90506b5761caaa",
+  "checks": [
+    {
+      "name": "Version 0.10, 50 salles, 126 dossiers et schéma 8",
+      "pass": true
+    },
+    {
+      "name": "Aucun contexte sonore avant autorisation",
+      "pass": true
+    },
+    {
+      "name": "Quatre catégories réelles de réglages",
+      "pass": true
+    },
+    {
+      "name": "Quatre volumes et légendes indépendantes",
+      "pass": true
+    },
+    {
+      "name": "Activer le son ne reprend pas la simulation",
+      "pass": true
+    },
+    {
+      "name": "Contexte audio suspendu dans Réglages",
+      "pass": true
+    },
+    {
+      "name": "Un curseur modifie seulement son bus",
+      "pass": true
+    },
+    {
+      "name": "Le bouton de test réveille réellement AudioContext",
+      "pass": true
+    },
+    {
+      "name": "Le test se termine sans boucle ni voix restante",
+      "pass": true
+    },
+    {
+      "name": "Son muet, légendes toujours actives",
+      "pass": true
+    },
+    {
+      "name": "Désactivation des légendes indépendante du son",
+      "pass": true
+    },
+    {
+      "name": "Conflit L refusé et ancien E conservé",
+      "pass": true
+    },
+    {
+      "name": "Échap annule la saisie sans fermer les options",
+      "pass": true
+    },
+    {
+      "name": "Interagir devient M, ancien E libéré",
+      "pass": true
+    },
+    {
+      "name": "Les commandes et volumes sont relus à la création d’une page",
+      "pass": true
+    },
+    {
+      "name": "Maintenir O ne referme pas la roue par répétition",
+      "pass": true
+    },
+    {
+      "name": "La roue indique aussi la touche personnalisée",
+      "pass": true
+    },
+    {
+      "name": "Une nouvelle pression ferme la roue",
+      "pass": true
+    },
+    {
+      "name": "Ancien E inactif près du casier",
+      "pass": true
+    },
+    {
+      "name": "M maintenu réalise une ouverture partielle",
+      "pass": true
+    },
+    {
+      "name": "Relâcher M conserve le travail",
+      "pass": true
+    },
+    {
+      "name": "Le HUD indique la nouvelle touche",
+      "pass": true
+    },
+    {
+      "name": "L’interaction reconfigurée termine le vrai scellé",
+      "pass": true
+    },
+    {
+      "name": "Légende d’ouverture sans son",
+      "pass": true
+    },
+    {
+      "name": "La retraite émet un préavis légendé sans audio",
+      "pass": true
+    },
+    {
+      "name": "La légende ne fournit pas de coordonnées ennemies",
+      "pass": true
+    },
+    {
+      "name": "Bandeau de légende en dehors du canvas",
+      "pass": true
+    },
+    {
+      "name": "Sauvegarde corrompue distinguée du secours valide",
+      "pass": true
+    },
+    {
+      "name": "La sélection ne restaure pas silencieusement",
+      "pass": true
+    },
+    {
+      "name": "Annuler conserve la sauvegarde courante",
+      "pass": true
+    },
+    {
+      "name": "Confirmation restaure le point sélectionné",
+      "pass": true
+    },
+    {
+      "name": "Quota simulé : refus visible au lieu de succès fictif",
+      "pass": true
+    },
+    {
+      "name": "Quota simulé : sauvegarde courante intacte",
+      "pass": true
+    },
+    {
+      "name": "L’expédition en mémoire reste exportable",
+      "pass": true
+    },
+    {
+      "name": "Le stockage reprend après levée du refus",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : pistol",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : ally",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : foam",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : flame",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : reload",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : dodge",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : step",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : wheels",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : impact",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : hurt",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : windup",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : work",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : latch",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : confirm",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : sensor",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : pursuit",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : warning",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : steam",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : gas",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : electric",
+      "pass": true
+    },
+    {
+      "name": "Synthèse audio réelle : low",
+      "pass": true
+    },
+    {
+      "name": "Bus à zéro : rendu sonore intégralement nul",
+      "pass": true
+    },
+    {
+      "name": "Panoramique stéréo gauche réel",
+      "pass": true
+    },
+    {
+      "name": "Échantillon WAV non vide et généré par le même synthétiseur",
+      "pass": true
+    },
+    {
+      "name": "1024 px : options audio sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "1024 px : commandes sans boutons superposés",
+      "pass": true
+    },
+    {
+      "name": "1024 px : fermeture toujours accessible",
+      "pass": true
+    },
+    {
+      "name": "390 px : options audio sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "390 px : commandes sans boutons superposés",
+      "pass": true
+    },
+    {
+      "name": "390 px : fermeture toujours accessible",
+      "pass": true
+    },
+    {
+      "name": "360 px : options audio sans débordement horizontal",
+      "pass": true
+    },
+    {
+      "name": "360 px : commandes sans boutons superposés",
+      "pass": true
+    },
+    {
+      "name": "360 px : fermeture toujours accessible",
+      "pass": true
+    },
+    {
+      "name": "Restauration des commandes sans réinitialiser le mixage",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript détectée",
+      "pass": true
+    },
+    {
+      "name": "Aucun chargement réseau par le HTML autonome",
+      "pass": true
+    }
+  ],
+  "passed": 71,
+  "failed": 0,
+  "fatal": null,
+  "errors": [],
+  "network": [],
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "sha256": "a4097ee3565057fad60fe455c92379cccf42bf6167ab0952ed035784c3cb729d",
+      "state_sha256": "fa69287a9846c4cfb525f406cacc5f953976f13a9d5f207c096d86665361bcb9",
+      "caption": "Écran titre du HTML livré, état neuf.",
+      "source_snapshot": null,
+      "source_sha256": null
+    },
+    {
+      "file": "02_mixage.png",
+      "sha256": "b0070fed93928ab9b88c0ca0dc8664898159b07634dcbadfe63532fbc78fccee",
+      "state_sha256": "fa69287a9846c4cfb525f406cacc5f953976f13a9d5f207c096d86665361bcb9",
+      "caption": "Réglages : ambiance à 23 %, test sonore terminé. La mission est restée en pause.",
+      "source_snapshot": null,
+      "source_sha256": null
+    },
+    {
+      "file": "03_clavier.png",
+      "sha256": "f8703401fa1fdd3214d5c9e928f83ae1dc1a51ef7b5a3820cc51bf4edd05fef2",
+      "state_sha256": "fa69287a9846c4cfb525f406cacc5f953976f13a9d5f207c096d86665361bcb9",
+      "caption": "Affectation réellement réalisée : Interagir / outil sélectionné est passé à M. Les conflits ont été refusés.",
+      "source_snapshot": null,
+      "source_sha256": null
+    },
+    {
+      "file": "04_interaction_m.png",
+      "sha256": "8601a8d38e0addbcf00d17f72523d76d99464c60db9465d92d1bbb403078d530",
+      "state_sha256": "242f261a963a19fff3c0fb5d3b609e4153238c4aa888f662a920f062498d69b5",
+      "caption": "Casier du vestiaire, après 0,65 s de maintien de M dans Chromium. Position héritée du parcours 0.9, sans déplacement préparé.",
+      "source_snapshot": "sealed-locker-03",
+      "source_sha256": "b6114509c3fd286276491bb5dfe381988d184b846e108566bde967ef246ea60d"
+    },
+    {
+      "file": "05_casier_legende.png",
+      "sha256": "8d5882a9936e161652c1633baf4155dff569308ff8907e2022da3753018773e2",
+      "state_sha256": "d58916710b4453bad6c07cbb426e0b133936047a95a485ae94eb7f769066f11b",
+      "caption": "Ouverture achevée avec M et inspection refermée ; légende du mécanisme, audio désactivé.",
+      "source_snapshot": "sealed-locker-03",
+      "source_sha256": "b6114509c3fd286276491bb5dfe381988d184b846e108566bde967ef246ea60d"
+    },
+    {
+      "file": "06_seuil_silencieux.png",
+      "sha256": "079bd1f6f883692b9bf70d1cebd0851f8e79301d7d9e3019031af89e032f953c",
+      "state_sha256": "6bbb9d86b50a90b2611373101c4b41c9e08d1314942bb544c9db0ba0abd3c9a8",
+      "caption": "Après reprise du départ au belvédère, le poursuivant a rejoint son seuil dans le moteur. Audio muet, légende réelle, positions non retouchées.",
+      "source_snapshot": "trace-departure",
+      "source_sha256": "c24906c4aef332bedac9994a743c47ba23a32652c417b82145385a80b72ca85e"
+    },
+    {
+      "file": "07_copie_valide.png",
+      "sha256": "c8bd418fb5b13b36e59ccce987f9ac6beb33d2163e6cc821e86d72ff7b1e1ff1",
+      "state_sha256": "6bbb9d86b50a90b2611373101c4b41c9e08d1314942bb544c9db0ba0abd3c9a8",
+      "caption": "Scénario de récupération explicitement préparé : sauvegarde courante rendue illisible, véritable export 0.9 placé en secours.",
+      "source_snapshot": null,
+      "source_sha256": null
+    },
+    {
+      "file": "08_clavier_390.png",
+      "sha256": "dd3fc58271ec701b8c40d3787ac5afd36e01d367a99958f21340ee214d2da57f",
+      "state_sha256": "fa69287a9846c4cfb525f406cacc5f953976f13a9d5f207c096d86665361bcb9",
+      "caption": "Réglages clavier en 390 × 844. Contrôle d’agencement ; ne certifie pas un appareil tactile complet.",
+      "source_snapshot": null,
+      "source_sha256": null
+    }
+  ],
+  "audio_metrics": [
+    {
+      "kind": "pistol",
+      "peak": 0.06302999705076218,
+      "rms": 0.004649863995041862,
+      "finite": true
+    },
+    {
+      "kind": "ally",
+      "peak": 0.0907546803355217,
+      "rms": 0.005047082498556291,
+      "finite": true
+    },
+    {
+      "kind": "foam",
+      "peak": 0.07153606414794922,
+      "rms": 0.006488641148638438,
+      "finite": true
+    },
+    {
+      "kind": "flame",
+      "peak": 0.051089029759168625,
+      "rms": 0.0039098582778563686,
+      "finite": true
+    },
+    {
+      "kind": "reload",
+      "peak": 0.06735148280858994,
+      "rms": 0.005270273788486768,
+      "finite": true
+    },
+    {
+      "kind": "dodge",
+      "peak": 0.05230322107672691,
+      "rms": 0.004395634131236336,
+      "finite": true
+    },
+    {
+      "kind": "step",
+      "peak": 0.03571516275405884,
+      "rms": 0.0025322264777386592,
+      "finite": true
+    },
+    {
+      "kind": "wheels",
+      "peak": 0.030793100595474243,
+      "rms": 0.0027151764547301968,
+      "finite": true
+    },
+    {
+      "kind": "impact",
+      "peak": 0.06681717187166214,
+      "rms": 0.004410922490920492,
+      "finite": true
+    },
+    {
+      "kind": "hurt",
+      "peak": 0.08529617637395859,
+      "rms": 0.008520951769243505,
+      "finite": true
+    },
+    {
+      "kind": "windup",
+      "peak": 0.052657824009656906,
+      "rms": 0.0040211659031993245,
+      "finite": true
+    },
+    {
+      "kind": "work",
+      "peak": 0.024996532127261162,
+      "rms": 0.00234260531127319,
+      "finite": true
+    },
+    {
+      "kind": "latch",
+      "peak": 0.0637149065732956,
+      "rms": 0.005278521382635349,
+      "finite": true
+    },
+    {
+      "kind": "confirm",
+      "peak": 0.04779037460684776,
+      "rms": 0.0038477269689303545,
+      "finite": true
+    },
+    {
+      "kind": "sensor",
+      "peak": 0.05202196165919304,
+      "rms": 0.004734812733947859,
+      "finite": true
+    },
+    {
+      "kind": "pursuit",
+      "peak": 0.049410801380872726,
+      "rms": 0.005010429303813327,
+      "finite": true
+    },
+    {
+      "kind": "warning",
+      "peak": 0.048877961933612823,
+      "rms": 0.005222344457203486,
+      "finite": true
+    },
+    {
+      "kind": "steam",
+      "peak": 0.03905102610588074,
+      "rms": 0.0038516843988015415,
+      "finite": true
+    },
+    {
+      "kind": "gas",
+      "peak": 0.030072106048464775,
+      "rms": 0.0032180170694495118,
+      "finite": true
+    },
+    {
+      "kind": "electric",
+      "peak": 0.03804759681224823,
+      "rms": 0.002711561141772903,
+      "finite": true
+    },
+    {
+      "kind": "low",
+      "peak": 0.044817350804805756,
+      "rms": 0.004675612711505209,
+      "finite": true
+    }
+  ],
+  "method": "Playwright/Chromium exact HTML set_content; explicit memory storage. Ordinary keyboard and button operations. Current earned snapshots except the labelled corrupted-save fixture. OfflineAudioContext generated real samples. No human listening audit or native persistence certification."
+}

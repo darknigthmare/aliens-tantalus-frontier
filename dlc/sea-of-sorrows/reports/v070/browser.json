@@ -1,0 +1,232 @@
+{
+  "version": "0.9.0",
+  "html_sha256": "0cc70544e2f3e38b63aa11b0aed0582b18017c0b5e2e0a73257432fcaae8864a",
+  "checks": [
+    {
+      "name": "HTML 0.8, schéma 8 et 120 dossiers chargés",
+      "pass": true
+    },
+    {
+      "name": "Le guide ancien ne déclare plus la manette absente",
+      "pass": true
+    },
+    {
+      "name": "Le guide décrit l’éclairage et les allures",
+      "pass": true
+    },
+    {
+      "name": "Le prologue affiche les formations sans les permettre",
+      "pass": true
+    },
+    {
+      "name": "Le prologue ne permet pas de faire suivre les patients",
+      "pass": true
+    },
+    {
+      "name": "Le pupitre physique est l’interaction la plus proche",
+      "pass": true
+    },
+    {
+      "name": "Maintenir E démarre une manœuvre, sans basculer immédiatement",
+      "pass": true
+    },
+    {
+      "name": "Relâcher E conserve le travail partiel",
+      "pass": true
+    },
+    {
+      "name": "La roue met le travail et l’horloge en pause",
+      "pass": true
+    },
+    {
+      "name": "Une seule manœuvre achevée sans inversion automatique",
+      "pass": true
+    },
+    {
+      "name": "Le HUD annonce le secours sans modifier le filtre",
+      "pass": true
+    },
+    {
+      "name": "La carte représente le pupitre et son état",
+      "pass": true
+    },
+    {
+      "name": "Aucun bouton de coupure à distance dans la carte",
+      "pass": true
+    },
+    {
+      "name": "Relâcher puis maintenir E rétablit la lumière",
+      "pass": true
+    },
+    {
+      "name": "Une sauvegarde d’ombre conserve lampe et circuit éteints",
+      "pass": true
+    },
+    {
+      "name": "La console expose deux patients et trois formations",
+      "pass": true
+    },
+    {
+      "name": "La formation enregistrée est sélectionnée",
+      "pass": true
+    },
+    {
+      "name": "Le bouton choisit Rapproché dans la simulation",
+      "pass": true
+    },
+    {
+      "name": "Choisir une formation ne téléporte et ne soigne pas",
+      "pass": true
+    },
+    {
+      "name": "Arrêter dans le panneau donne le même ordre que B",
+      "pass": true
+    },
+    {
+      "name": "Repartir conserve l’allure choisie",
+      "pass": true
+    },
+    {
+      "name": "Retour mène à Pause, pas directement au combat",
+      "pass": true
+    },
+    {
+      "name": "Le bouton de Pause ouvre les ordres",
+      "pass": true
+    },
+    {
+      "name": "L’équipement donne accès aux mêmes ordres",
+      "pass": true
+    },
+    {
+      "name": "40 rendus de circuits : dix salles, deux vues, deux états",
+      "pass": true
+    },
+    {
+      "name": "Reprendre migre le schéma 6 vers 7",
+      "pass": true
+    },
+    {
+      "name": "L’export initial v0.6 est gardé en copie locale de migration",
+      "pass": true
+    },
+    {
+      "name": "La migration ne supprime pas les capteurs",
+      "pass": true
+    },
+    {
+      "name": "1024 px : pas de débordement horizontal du panneau",
+      "pass": true
+    },
+    {
+      "name": "1024 px : les trois formations ne se chevauchent pas",
+      "pass": true
+    },
+    {
+      "name": "390 px : pas de débordement horizontal du panneau",
+      "pass": true
+    },
+    {
+      "name": "390 px : les trois formations ne se chevauchent pas",
+      "pass": true
+    },
+    {
+      "name": "360 px : pas de débordement horizontal du panneau",
+      "pass": true
+    },
+    {
+      "name": "360 px : les trois formations ne se chevauchent pas",
+      "pass": true
+    },
+    {
+      "name": "Aucune exception JavaScript dans les scénarios",
+      "pass": true
+    },
+    {
+      "name": "Aucune dépendance réseau du HTML autonome",
+      "pass": true
+    }
+  ],
+  "passed": 36,
+  "failed": 0,
+  "fatal": null,
+  "errors": [],
+  "requests": [],
+  "captures": [
+    {
+      "file": "01_titre.png",
+      "caption": "Écran titre de la version livrée. État neuf figé pour la capture.",
+      "source": null,
+      "source_sha256": null,
+      "image_sha256": "27d3d4d38b9c088fd352f54289d0f71c7aa3bcc39ab291abe450b2e5683ecf5d",
+      "state_sha256": "40429703a514932103c9bcd920a2a0289fcda31f0e8cb87c4fb4e95e7fc84615"
+    },
+    {
+      "file": "02_atelier_lumiere.png",
+      "caption": "Atelier avant coupure. Sauvegarde gagnée du parcours Hybride / Survie ; aucune position changée.",
+      "source": "light-on-s17",
+      "source_sha256": "b951630983a764fe5f81a36493f769f5bdc999826d0fcee59ad455d263e5aa76",
+      "image_sha256": "74c5eb32d9cd42df4914f94e7eb5dc7c11fed7dfc42319087ce0f99df3c7a16c",
+      "state_sha256": "6610bf4659cc3812cbb47b03a19ff3f518d4e9e891cb7e09204be0e9b8be022a"
+    },
+    {
+      "file": "03_atelier_secours.png",
+      "caption": "Même atelier en éclairage de secours. Circuit et lampe coupés par les commandes du parcours, positions inchangées.",
+      "source": "light-off-s17",
+      "source_sha256": "65dd8d86783bd0ff8f38d3415f98b32683672a809081ef5e314e1af53306b049",
+      "image_sha256": "43d56dd51dcb0a55fe4eff9ca8039eb03cbeebe08fc5b4e3e86200a9c5fd6895",
+      "state_sha256": "2de1384bc3536fb1010e18271946e1f81f595b986a0e65175560f11e8f20c218"
+    },
+    {
+      "file": "04_paliers_secours.png",
+      "caption": "Paliers pendant le retour des patients. Balisage de secours, cloison et brancards réellement rendus.",
+      "source": "light-off-s35",
+      "source_sha256": "af90ae8f1cffc8aebe4e03d836cd9d7b694644fc9e656babbc05ac7fca7cf4de",
+      "image_sha256": "3c6de80d6c374d17ab18df558082a250fea25ebecff1639e7f5666688d9c79d6",
+      "state_sha256": "f8ce78bb51a171477adcec7fe9cce203442a9f494b5b89890ad6f0ae6de6661b"
+    },
+    {
+      "file": "05_plan_paliers.png",
+      "caption": "Plan local : circuit coupé, emprises et positions du groupe issus du moteur. Aucun ennemi ajouté.",
+      "source": "light-off-s35",
+      "source_sha256": "af90ae8f1cffc8aebe4e03d836cd9d7b694644fc9e656babbc05ac7fca7cf4de",
+      "image_sha256": "fe84da18c63f0e7284adf856cff83b70a96bc289e983ebc96e2f13602a465164",
+      "state_sha256": "f8ce78bb51a171477adcec7fe9cce203442a9f494b5b89890ad6f0ae6de6661b"
+    },
+    {
+      "file": "06_escorte_discrete.png",
+      "caption": "Console d’escorte après le choix Discret dans le parcours complet. Les deux châssis gardent leur intégrité réelle.",
+      "source": "convoy-quiet",
+      "source_sha256": "03e27541b178b539aa82aefa35dd67127145ac7c723e3fb78309b851dd973b50",
+      "image_sha256": "0a694e53e9c97099fd9811f5d8c90d330f0c944cb11298a2d8cd545e51fe5f3c",
+      "state_sha256": "4d05c9a5ef4d8145d06207a89b96b3a2c21276fece5e3d129303cda5ff96e323"
+    },
+    {
+      "file": "07_convoi_rapproche.png",
+      "caption": "Fin de mise en service du treuil : l’allure Rapproché vient d’être choisie. Le changement n’a pas déplacé instantanément les patients.",
+      "source": "convoy-compact",
+      "source_sha256": "552b2c64171fcf1c8d4dde9adda76ab1e78ec6b7dcdf69dafa0adb2591f10fbd",
+      "image_sha256": "3b4da737af0734eac50dfcbbdfe00ded838f5904b79d33c8cde5519517b889f4",
+      "state_sha256": "30009bedfaa29a735ae9403bf84df9ab6acb2294894f4b3a09aa9d76ca7ebf81"
+    },
+    {
+      "file": "08_relais_obscur.png",
+      "caption": "Poste de relevés sous éclairage de secours. Capture d’une sauvegarde gagnée, sans préparation de personnages.",
+      "source": "light-off-s24",
+      "source_sha256": "fc7dfd2959d13359fe15fa09fb46187c047deb7ded6f6000d707a267548a89ee",
+      "image_sha256": "64b486ce663c8c2b7d2b5c935a2eda4353a39572bb369637b7320aa5eb2e113d",
+      "state_sha256": "1d3a47602bef73a6ffefec2db7ceb131bc5608c20bd1241c9969816cdecbf882"
+    },
+    {
+      "file": "09_format_etroit.png",
+      "caption": "Ordres d’escorte en 390 × 844. Contrôle de disposition, pas certification tactile complète.",
+      "source": "convoy-quiet",
+      "source_sha256": "03e27541b178b539aa82aefa35dd67127145ac7c723e3fb78309b851dd973b50",
+      "image_sha256": "96fa5b70966c1c80afd99b1fc4a5d3597bd6b761f43ca8fea32833b7bc9adb15",
+      "state_sha256": "4d05c9a5ef4d8145d06207a89b96b3a2c21276fece5e3d129303cda5ff96e323"
+    }
+  ],
+  "lighting_state_renders": 40,
+  "storage": "Explicit in-memory fixture; native navigation policy not bypassed",
+  "method": "Earned schema-7 playthrough snapshots. UI keys are real Playwright events; forty light render states are prepared explicitly."
+}

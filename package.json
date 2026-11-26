@@ -111,6 +111,10 @@
     "test:trials:priorities:v204": "node --test scripts/verify-xeno-trials-priority-actions-v204.mjs scripts/verify-xeno-trials-defense-v204.mjs scripts/verify-xeno-trials-purge-presentation-v204.mjs scripts/verify-xeno-priorities-audit-v204.mjs",
     "test:trials:visuals:v205": "node --test scripts/verify-xeno-trials-visual-assets-v205.mjs scripts/verify-xeno-visual-assets-audit-v205.mjs",
     "test:trials:production:v206": "node --test scripts/verify-xeno-production-assets-v206.mjs",
+    "test:dlc:sea-of-sorrows": "node --test scripts/verify-mer-des-chagrins-campaign-20261125.mjs",
+    "test:mer-des-chagrins-import": "node --test scripts/verify-mer-des-chagrins-admission-20261125.mjs",
+    "check:mer-des-chagrins-import": "node scripts/mer-des-chagrins-admission-20261125.mjs",
+    "test:mer-des-chagrins-restore": "python3 scripts/verify-mer-des-chagrins-restore.py",
     "test:dlc:aliens1986": "npm --prefix modules/aliens-1986/v114 run check && node --test scripts/verify-aliens1986-dlc-integration.mjs",
     "check:dlc:aliens1986": "node scripts/public-aliens1986-dlc-admissions.mjs",
     "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py",
@@ -122,7 +126,11 @@
     "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs",
     "test:fiorina:sprites": "node --test scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs",
     "qa:fiorina:sprites": "node scripts/qa-fiorina-sprites-v115.mjs",
-    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs"
+    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs",
+    "test:mer-des-chagrins-recovery": "node --test scripts/verify-mer-des-chagrins-recovery-admission-20261126.mjs",
+    "test:mer-des-chagrins-visual": "node --test scripts/verify-mer-png-renderer-20261126.mjs scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs scripts/verify-mer-gallery-20261126.mjs scripts/verify-mer-equipment-ui-20261126.mjs",
+    "check:mer-des-chagrins-sprites": "python3 scripts/verify-mer-sprite-metadata-20261126.py",
+    "qa:mer-des-chagrins:canvas": "node scripts/qa-mer-visual-canvas-20261126.mjs"
   },
   "engines": {
     "node": ">=22"

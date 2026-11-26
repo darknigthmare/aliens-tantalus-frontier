@@ -99,7 +99,8 @@
 }
 
 .title-start:focus-visible,
-.title-menu button:focus-visible {
+.title-menu button:focus-visible,
+.title-menu a:focus-visible {
   outline: 2px solid #f0c36d;
   outline-offset: 5px;
 }
@@ -111,7 +112,8 @@
   margin: 56px auto 0;
 }
 
-.title-menu button {
+.title-menu button,
+.title-menu a {
   min-width: 0;
   overflow-wrap: anywhere;
   min-height: 48px;
@@ -122,6 +124,8 @@
   font: 800 11px/1.4 var(--mono);
   letter-spacing: .12em;
   text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
@@ -135,7 +139,9 @@
 }
 
 .title-menu button:hover,
-.title-menu button:focus-visible {
+.title-menu button:focus-visible,
+.title-menu a:hover,
+.title-menu a:focus-visible {
   border-color: #f0c36d;
   background: #d8ad59;
   color: #080b09;
@@ -279,7 +285,7 @@ html.forge-mode .topbar {
   .title-divider { display: none; }
   .title-start { margin-top: 32px; min-height: 44px; }
   .title-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 600px; width: 100%; margin-top: 18px; }
-  .title-menu button { min-height: 44px; padding: 10px 12px; font-size: calc(10px * var(--atf-text-scale-v188, 1)); }
+  .title-menu button, .title-menu a { min-height: 44px; padding: 10px 12px; font-size: calc(10px * var(--atf-text-scale-v188, 1)); }
   .title-profile-status { left: 24px; right: 24px; bottom: 48px; text-align: center; }
   .title-build { left: 24px; right: 24px; bottom: 12px; text-align: center; }
 }
