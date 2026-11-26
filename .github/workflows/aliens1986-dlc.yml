@@ -7,6 +7,7 @@ on:
       - 'dlc/aliens-1986/**'
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
+      - 'docs/development/aliens-1986-sprites-v117/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -25,6 +26,7 @@ on:
       - 'dlc/aliens-1986/**'
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
+      - 'docs/development/aliens-1986-sprites-v117/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -73,6 +75,10 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/aliens1986-playwright"
           "$RUNNER_TEMP/aliens1986-playwright/bin/pip" install playwright==1.65.2
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -m playwright install --with-deps chromium
+      - name: Inspect the seven V117 prop variants with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v117.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v117"
       - name: Exercise served raster drawing, doors, saves and title navigation
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \

@@ -18,6 +18,12 @@ Les personnages, objets et créatures existants utilisent uniquement les images 
 
 Le build public contient le lanceur, le jeu dérivé et les PNG nécessaires. Le corpus de sources, outils et preuves historiques reste hors du build public.
 
+## Accessoires V117
+
+Le [supplément V117](../../docs/development/aliens-1986-sprites-v117/README.md) ajoute sept états statiques aux 123 images du registre V116 : portes endommagée, renforcée et éventrée, plateau garni, caisse médicale vide, caisse de munitions fermée et vide. Les clés déjà prévues par le renderer V116 sélectionnent ces images selon l’état des sas et des stocks ; les 123 PNG précédents restent inchangés.
+
+Le catalogue réunit désormais **130 images**. La présentation reste V116 et la sauvegarde reste V114. Les sept ajouts sont de nouvelles générations documentées, sans certification de fidélité 1:1 ; les anciens originaux locaux absents ne sont pas présentés comme récupérés.
+
 ## Jouer et vérifier
 
 ```sh
