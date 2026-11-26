@@ -1,0 +1,87 @@
+{
+  "archiveId": "alien5-lazare/v3",
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V3_CANDIDAT.zip",
+  "bytes": 19057552,
+  "sha256": "e940e4a368093e273de4366fbc318f0c30f45fd63ad15ad9b9b709e88f0692fb",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 205,
+  "pngOccurrences": 0,
+  "zipCrc32": "pass-all-members",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/DLC_ALIEN5_PROJET_LAZARE_V3_CANDIDAT.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "e7e62066117780a44046b6b6351408a5769f35daac81cfee0ecc4d7d18156b41",
+      "gitBlobSha1": "56df951fd4368532dee0209e0d692c608d6a6b87"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/DLC_ALIEN5_PROJET_LAZARE_V3_CANDIDAT.zip.part002",
+      "offset": 10485760,
+      "bytes": 8571792,
+      "sha256": "d4a40b3074c7fa770c43b4b774045c2daae9137fa04f850643724a747ef293cb",
+      "gitBlobSha1": "82535168ebd23402e39e060b657eceb28d773286"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/MANIFEST.json",
+  "documents": [
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/CHANGELOG_V3.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/CHANGELOG_V3.md",
+      "bytes": 1732,
+      "sha256": "2ad0eb6bc73593f9a9e6d594213c12d9959fd2642d655d774e37d27fa96dad7f",
+      "gitBlobSha1": "6da6a4d9bea65dfb2114fc87494b35a579bbead5"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/LICENSE_NOTICE.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "gitBlobSha1": "015f0078a32ab032ab2f0f885dde9a6053b7a78b"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/README.md",
+      "bytes": 8948,
+      "sha256": "03e1823a073f025777b46ef76dab2fd7f5e962b36acd5e258d13f976c2fff4bf",
+      "gitBlobSha1": "2f6e557b81ce9684942bfb4692d3267a44df6752"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/docs/CODEX_ALIEN5_V3.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/docs/CODEX_ALIEN5_V3.md",
+      "bytes": 34379,
+      "sha256": "02294eebf912746b3106e4ef7e8ebb53516f28188a846ac703fdfeebbb7b36b7",
+      "gitBlobSha1": "e63a6501c9b9c5de2fa54dd31d9a603c8d465145"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/docs/base-audit.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/docs/base-audit.json",
+      "bytes": 773,
+      "sha256": "124e7f7a8f15bc447073035dd955375a8375c3024d25a502540f311c41b420b1",
+      "gitBlobSha1": "764f96604a72253afa7181c5c5fcfb522d8894ea"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/docs/campaign.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/docs/campaign.json",
+      "bytes": 291608,
+      "sha256": "2e9edc030014f6b32f7b1789b9bc06f96931808db589ad2462e0e7610f4b75b8",
+      "gitBlobSha1": "4e60d887596e77373160024b986bdd5cdbbace93"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/game/data.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/game/data.json",
+      "bytes": 291608,
+      "sha256": "2e9edc030014f6b32f7b1789b9bc06f96931808db589ad2462e0e7610f4b75b8",
+      "gitBlobSha1": "4e60d887596e77373160024b986bdd5cdbbace93"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V3/qa/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v3/documents/ALIEN5_PROJET_LAZARE_V3/qa/README.md",
+      "bytes": 1252,
+      "sha256": "0a032b7997e8d1f3606aa4ddf7e1d1a76397163667f2d8cc23936ad1e1ebbdee",
+      "gitBlobSha1": "963d393770b9c80b84476488bd7db9bca9ec826b"
+    }
+  ]
+}

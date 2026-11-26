@@ -1,0 +1,3971 @@
+{
+  "corpus": [
+    {
+      "id": "TH01",
+      "title": "Alien Queen",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_31"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH02",
+      "title": "Factory",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_07",
+        "A5_09",
+        "A5_48",
+        "A5_49",
+        "A5_50",
+        "A5_51"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH03",
+      "title": "Melting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH04",
+      "title": "Hicks",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_00",
+        "A5_35"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH05",
+      "title": "Mercenaries",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH06",
+      "title": "Mercs",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH07",
+      "title": "Jax",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH08",
+      "title": "Killson",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH09",
+      "title": "City",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_00",
+        "A5_02",
+        "A5_04"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH10",
+      "title": "Building",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_15"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH11",
+      "title": "Weyland",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_12",
+        "A5_13",
+        "A5_14",
+        "A5_15"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH12",
+      "title": "Hunting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH13",
+      "title": "Elevator",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_11",
+        "A5_17",
+        "A5_24",
+        "A5_30"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH14",
+      "title": "Fire Area",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_27",
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH15",
+      "title": "Science",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_20",
+        "A5_52",
+        "A5_53",
+        "A5_54",
+        "A5_55"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH16",
+      "title": "Firesuit",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_57"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH17",
+      "title": "Incinerator",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_09",
+        "A5_28"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH18",
+      "title": "Pipe",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_22",
+        "A5_39"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH19",
+      "title": "Miller pinned",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_26"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH20",
+      "title": "Trematode sniffing",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH21",
+      "title": "Trematode cutting",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH22",
+      "title": "Hicks attack",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH23",
+      "title": "Trematode on Hicks",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH24",
+      "title": "Facehuggers birthing",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_54",
+        "A5_55"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH25",
+      "title": "Jet arriving",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_35"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH26",
+      "title": "Anchor",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_31"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH27",
+      "title": "Ripley arms up in dropship",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_59"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH28",
+      "title": "Planning",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_14"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH29",
+      "title": "Jax arming Comanche",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH30",
+      "title": "Montero",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH31",
+      "title": "Acid eating bombs",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH32",
+      "title": "Gland removal",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH33",
+      "title": "Johnson knocks Jax",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH34",
+      "title": "Trematode",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19",
+        "A5_21"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH35",
+      "title": "Lab",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_19",
+        "A5_20",
+        "A5_52",
+        "A5_53"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH36",
+      "title": "Ventilation Shaft",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_22",
+        "A5_39"
+      ],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "TH37",
+      "title": "Poster",
+      "url": "https://djahalland.com/alien-5",
+      "author": "Geoffroy Thoorens",
+      "evidence": "Légende présente dans le portfolio primaire consulté le 29 septembre 2026.",
+      "status": "NON_RESTITUE",
+      "rooms": [],
+      "limit": "Le raccord, les dimensions et les mécaniques sont originaux. La scène exacte n’est pas reproduite."
+    },
+    {
+      "id": "ARCH_DERELICT",
+      "title": "Derelict dans un hangar",
+      "url": "https://www.avpgalaxy.net/alien-movies/alien-5/gallery/concept-art/",
+      "author": "Concept attribué à Geoffroy Thoorens, archive secondaire",
+      "evidence": "Motif de coque monumentale examiné visuellement.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_57",
+        "A5_58"
+      ],
+      "limit": "Un quai visitable, aucun intérieur reconstitué."
+    },
+    {
+      "id": "ARCH_GARDEN",
+      "title": "Garden",
+      "url": "https://www.avpgalaxy.net/alien-movies/alien-5/gallery/concept-art/",
+      "author": "Archive de concepts",
+      "evidence": "Légende repérée ; composition originale non examinée à pleine résolution.",
+      "status": "REFERENCE_A_APPROFONDIR",
+      "rooms": [
+        "A5_56"
+      ],
+      "limit": "Jardin inventé, aucune fidélité visuelle mesurée."
+    },
+    {
+      "id": "ARCH_NEWT",
+      "title": "Newt adulte",
+      "url": "https://www.avpgalaxy.net/2016/04/26/blomkamp-shares-alien-5-concept-art/",
+      "author": "Publication attribuée à Neill Blomkamp",
+      "evidence": "Bob blond, foulard et tenue verte examinés dans la reproduction.",
+      "status": "INTERPRETATION_PARTIELLE",
+      "rooms": [
+        "A5_01",
+        "A5_42",
+        "A5_43",
+        "A5_44",
+        "A5_45",
+        "A5_46",
+        "A5_47"
+      ],
+      "limit": "Silhouette stylisée, non portrait 1:1."
+    }
+  ],
+  "characters": [
+    {
+      "id": "ripley",
+      "name": "Ellen Ripley",
+      "source": "TH27",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Cheveux bruns, visage dégagé, tenue grise et plastron sombre, pantalon kaki. Armes différenciées. Visage non photoréaliste."
+    },
+    {
+      "id": "hicks",
+      "name": "Dwayne Hicks",
+      "source": "TH04",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Cheveux courts, visage marqué du côté gauche anatomique, écharpe et armure olive. Le côté de la marque n’est pas inversé avec le sens de marche."
+    },
+    {
+      "id": "newt",
+      "name": "Rebecca « Newt » Jorden adulte",
+      "source": "ARCH_NEWT",
+      "status": "SILHOUETTE_INTERPRETEE",
+      "details": "Carré blond, foulard anthracite, veste verte et insignes ronds ; relais civil sans arme."
+    },
+    {
+      "id": "miller",
+      "name": "Miller — technicienne de Calder",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Blouse claire et cheveux auburn. Le nom rappelle une légende de concept ; identité et apparence de cette technicienne originales, pas celles d’un personnage du film certifiées."
+    },
+    {
+      "id": "lena",
+      "name": "Lena Vos",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Technicienne de filtration ; costume original différencié."
+    },
+    {
+      "id": "sana",
+      "name": "Sana Kessler",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Agente de transit ; costume original différencié."
+    },
+    {
+      "id": "ivo",
+      "name": "Ivo Delmas",
+      "source": null,
+      "status": "PERSONNAGE_DU_JEU",
+      "details": "Docker blessé ; costume original différencié."
+    },
+    {
+      "id": "jax",
+      "name": "Jax",
+      "source": "TH07",
+      "status": "RADIO_SEULEMENT",
+      "details": "Le nom est documenté. Fonction de contact inventée ; apparence de terrain non restituée."
+    },
+    {
+      "id": "killson",
+      "name": "Killson",
+      "source": "TH08",
+      "status": "ABSENT",
+      "details": "Concept identifié, rôle et événement non reconstitués. Aucun faux personnage joué ajouté."
+    },
+    {
+      "id": "montero",
+      "name": "Montero",
+      "source": "TH30",
+      "status": "ABSENT",
+      "details": "Légende identifiée, fonction non authentifiée dans le scénario."
+    },
+    {
+      "id": "johnson",
+      "name": "Johnson",
+      "source": "TH33",
+      "status": "ABSENT",
+      "details": "Légende identifiée, scène avec Jax non reconstituée."
+    }
+  ],
+  "equipment": [
+    {
+      "id": "rifle",
+      "name": "Fusil à impulsion",
+      "room": "A5_00",
+      "acquisition": "Départ · Ripley et Hicks",
+      "source": "SOCLE_ALIENS_INTERPRETE",
+      "behavior": "Tir, rechargement, munitions finies. Calibre et capacité de jeu ne sont pas une fiche technique du film."
+    },
+    {
+      "id": "flame",
+      "name": "Incinérateur portatif",
+      "room": "A5_00",
+      "acquisition": "Départ · Ripley",
+      "source": "SOCLE_ALIENS_INTERPRETE",
+      "behavior": "Flamme courte, recul de créature, carburant fini."
+    },
+    {
+      "id": "smartgun",
+      "name": "Arme lourde sur harnais",
+      "room": "A5_59",
+      "acquisition": "REF_SMARTGUN",
+      "source": "TH27",
+      "behavior": "120 cartouches indépendantes, bande de 40 ; pas de verrouillage automatique."
+    },
+    {
+      "id": "firesuit",
+      "name": "Combinaison thermique",
+      "room": "A5_57",
+      "acquisition": "REF_FIRESUIT",
+      "source": "TH16",
+      "behavior": "Réduit les jets thermiques explicites, pas les attaques, l’acide ni le compte à rebours."
+    },
+    {
+      "id": "light",
+      "name": "Torche",
+      "room": "A5_00",
+      "acquisition": "Départ",
+      "source": "SOCLE_INTERPRETE",
+      "behavior": "Visibilité et détection des gardes."
+    },
+    {
+      "id": "scanner",
+      "name": "Détecteur de mouvement",
+      "room": "A5_36",
+      "acquisition": "TOOLS",
+      "source": "SOCLE_INTERPRETE",
+      "behavior": "Contacts mobiles locaux, batterie, aucune identification."
+    },
+    {
+      "id": "cutter",
+      "name": "Découpeur et soudeur",
+      "room": "A5_36",
+      "acquisition": "TOOLS",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Ouvrir D2, souder une fois chaque joint de cloison."
+    },
+    {
+      "id": "medkit",
+      "name": "Soins humains",
+      "room": "A5_00",
+      "acquisition": "Départ et caches finies",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Soin personnel ou à un compagnon à portée."
+    },
+    {
+      "id": "decoy",
+      "name": "Leurre acoustique",
+      "room": "A5_00",
+      "acquisition": "Départ",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Ripley consomme du carburant ; Newt quatre charges distinctes."
+    },
+    {
+      "id": "waterkit",
+      "name": "Kit étanche",
+      "room": "A5_16",
+      "acquisition": "medical",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Réduction des dommages du bassin, pas la combinaison thermique."
+    },
+    {
+      "id": "sentry",
+      "name": "Sentinelle S-12",
+      "room": "A5_36",
+      "acquisition": "S12",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Un châssis, 48 cartouches, déploiement et récupération, chaleur persistante."
+    },
+    {
+      "id": "loader",
+      "name": "Chargeur P-17",
+      "room": "A5_48",
+      "acquisition": "M_LICENSE",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Manutention physique limitée au secteur industriel."
+    },
+    {
+      "id": "hydraulic",
+      "name": "Kits hydrauliques",
+      "room": "A5_48",
+      "acquisition": "M_SPARES",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Trois kits finis pour le chargeur ; distincts des soins."
+    },
+    {
+      "id": "cargo_pf",
+      "name": "Palette PF-09",
+      "room": "A5_49",
+      "acquisition": "PF09",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet physique à porter puis sécuriser."
+    },
+    {
+      "id": "cargo_cp",
+      "name": "Contrepoids CP-2",
+      "room": "A5_50",
+      "acquisition": "CP2",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet physique à placer sur la balance."
+    },
+    {
+      "id": "membrane",
+      "name": "Enveloppe mimétique M-4",
+      "room": "A5_53",
+      "acquisition": "BIO_ACQUIRE",
+      "source": "CONCEPT_ET_MECANIQUES_ORIGINALES",
+      "behavior": "Calibrage, signature limitée, réservoir et instabilité."
+    },
+    {
+      "id": "filter",
+      "name": "Filtre de ventilation",
+      "room": "A5_44",
+      "acquisition": "CIV_FILTER",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Objet de quête du relais civil, installation unique."
+    },
+    {
+      "id": "charges",
+      "name": "Charges d’arrimage",
+      "room": "A5_32",
+      "acquisition": "charges",
+      "source": "TH26",
+      "behavior": "Pose obligatoire sur trois attaches ; dispositifs de jeu originaux."
+    },
+    {
+      "id": "sample",
+      "name": "Prélèvement expérimental",
+      "room": "A5_21",
+      "acquisition": "sample",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Choix au vivarium puis traitement en quarantaine avant départ."
+    },
+    {
+      "id": "blackbox",
+      "name": "Boîte noire de la navette",
+      "room": "A5_35",
+      "acquisition": "FL_RECORDER",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Copie finale facultative des preuves ; dispositif fixe."
+    },
+    {
+      "id": "tram",
+      "name": "Convoi civil",
+      "room": "A5_47",
+      "acquisition": "CIV_DEPARTURE",
+      "source": "JEU_ORIGINAL",
+      "behavior": "Évacuation des personnes réellement présentes, non pilotable librement."
+    },
+    {
+      "id": "dropship",
+      "name": "Navette d’extraction",
+      "room": "A5_35",
+      "acquisition": "extract",
+      "source": "TH25",
+      "behavior": "Préparation jouable et départ animé, pas pilotage spatial."
+    }
+  ],
+  "portals": [
+    {
+      "room": "A5_00",
+      "edge": "P00",
+      "target": "A5_01",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_00_P00",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_00",
+      "edge": "P01",
+      "target": "A5_02",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_00_P01",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_01",
+      "edge": "P00",
+      "target": "A5_00",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_01_P00",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_01",
+      "edge": "P02",
+      "target": "A5_03",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_01_P02",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_01",
+      "edge": "C01",
+      "target": "A5_42",
+      "x": 620,
+      "z": 0.5,
+      "gate": "shelter",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_01_C01",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_02",
+      "edge": "P01",
+      "target": "A5_00",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_02_P01",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_02",
+      "edge": "P03",
+      "target": "A5_03",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_02_P03",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_02",
+      "edge": "P04",
+      "target": "A5_04",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_02_P04",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_02",
+      "edge": "S37C",
+      "target": "A5_37",
+      "x": 1210,
+      "z": 0.23,
+      "gate": "svc_dock",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_02_S37C",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_03",
+      "edge": "P02",
+      "target": "A5_01",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_03_P02",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_03",
+      "edge": "P03",
+      "target": "A5_02",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_03_P03",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_03",
+      "edge": "P05",
+      "target": "A5_05",
+      "x": 560,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_03_P05",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_04",
+      "edge": "P04",
+      "target": "A5_02",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_04_P04",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_04",
+      "edge": "P06",
+      "target": "A5_05",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_04_P06",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_05",
+      "edge": "P05",
+      "target": "A5_03",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_05_P05",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_05",
+      "edge": "P06",
+      "target": "A5_04",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_05_P06",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_05",
+      "edge": "L0",
+      "target": "A5_06",
+      "x": 560,
+      "z": 0.16,
+      "gate": "key_freight",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_05_L0",
+        "clearWidth": 156,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_05",
+      "edge": "S36A",
+      "target": "A5_36",
+      "x": 1230,
+      "z": 0.23,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_05_S36A",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_06",
+      "edge": "P07",
+      "target": "A5_07",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_06_P07",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_06",
+      "edge": "P08",
+      "target": "A5_08",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_06_P08",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_06",
+      "edge": "L0",
+      "target": "A5_05",
+      "x": 560,
+      "z": 0.5,
+      "gate": "key_freight",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_06_L0",
+        "clearWidth": 156,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_07",
+      "edge": "P07",
+      "target": "A5_06",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_07_P07",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_07",
+      "edge": "P09",
+      "target": "A5_09",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_07_P09",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_08",
+      "edge": "P08",
+      "target": "A5_06",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_08_P08",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_08",
+      "edge": "P10",
+      "target": "A5_09",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_08_P10",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_08",
+      "edge": "P11",
+      "target": "A5_10",
+      "x": 560,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_08_P11",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_09",
+      "edge": "P09",
+      "target": "A5_07",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_09_P09",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_09",
+      "edge": "P10",
+      "target": "A5_08",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_09_P10",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_09",
+      "edge": "P12",
+      "target": "A5_11",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_09_P12",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_10",
+      "edge": "P11",
+      "target": "A5_08",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_10_P11",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_10",
+      "edge": "P13",
+      "target": "A5_11",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_10_P13",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_10",
+      "edge": "M01",
+      "target": "A5_48",
+      "x": 480,
+      "z": 0.5,
+      "gate": "power",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_10_M01",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_10",
+      "edge": "R05",
+      "target": "A5_58",
+      "x": 1040,
+      "z": 0.5,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_10_R05",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_11",
+      "edge": "P12",
+      "target": "A5_09",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_11_P12",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_11",
+      "edge": "P13",
+      "target": "A5_10",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_11_P13",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_11",
+      "edge": "L1",
+      "target": "A5_12",
+      "x": 560,
+      "z": 0.16,
+      "gate": "lift_ready",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_11_L1",
+        "clearWidth": 156,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_11",
+      "edge": "M06",
+      "target": "A5_51",
+      "x": 1120,
+      "z": 0.24,
+      "gate": "loader_return",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_11_M06",
+        "clearWidth": 312,
+        "returnDepth": 0.18,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_11",
+      "edge": "R03",
+      "target": "A5_57",
+      "x": 860,
+      "z": 0.18,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_11_R03",
+        "clearWidth": 124,
+        "returnDepth": 0.12,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_12",
+      "edge": "P14",
+      "target": "A5_13",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_12_P14",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_12",
+      "edge": "P15",
+      "target": "A5_14",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_12_P15",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_12",
+      "edge": "L1",
+      "target": "A5_11",
+      "x": 560,
+      "z": 0.16,
+      "gate": "lift_ready",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_12_L1",
+        "clearWidth": 156,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_13",
+      "edge": "P14",
+      "target": "A5_12",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_13_P14",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_13",
+      "edge": "P16",
+      "target": "A5_15",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_13_P16",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_13",
+      "edge": "S40A",
+      "target": "A5_40",
+      "x": 1130,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_13_S40A",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_14",
+      "edge": "P15",
+      "target": "A5_12",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_14_P15",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_14",
+      "edge": "P17",
+      "target": "A5_15",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_14_P17",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_14",
+      "edge": "P18",
+      "target": "A5_16",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_14_P18",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_14",
+      "edge": "R02",
+      "target": "A5_56",
+      "x": 1210,
+      "z": 0.18,
+      "gate": "clearance",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_14_R02",
+        "clearWidth": 124,
+        "returnDepth": 0.12,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_15",
+      "edge": "P16",
+      "target": "A5_13",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_15_P16",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_15",
+      "edge": "P17",
+      "target": "A5_14",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_15_P17",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_15",
+      "edge": "P19",
+      "target": "A5_17",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_15_P19",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_15",
+      "edge": "R01",
+      "target": "A5_56",
+      "x": 1180,
+      "z": 0.18,
+      "gate": "clearance",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_15_R01",
+        "clearWidth": 124,
+        "returnDepth": 0.12,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_16",
+      "edge": "P18",
+      "target": "A5_14",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_16_P18",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_16",
+      "edge": "P20",
+      "target": "A5_17",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_16_P20",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_16",
+      "edge": "S41C",
+      "target": "A5_41",
+      "x": 1140,
+      "z": 0.5,
+      "gate": "svc_watch",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_16_S41C",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_17",
+      "edge": "P19",
+      "target": "A5_15",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_17_P19",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_17",
+      "edge": "P20",
+      "target": "A5_16",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_17_P20",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_17",
+      "edge": "L2",
+      "target": "A5_18",
+      "x": 560,
+      "z": 0.5,
+      "gate": "clearance",
+      "kind": "stairs",
+      "support": {
+        "kind": "stairwell",
+        "id": "A5_17_L2",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_18",
+      "edge": "P21",
+      "target": "A5_19",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_18_P21",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_18",
+      "edge": "P22",
+      "target": "A5_20",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_18_P22",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_18",
+      "edge": "L2",
+      "target": "A5_17",
+      "x": 560,
+      "z": 0.5,
+      "gate": "clearance",
+      "kind": "stairs",
+      "support": {
+        "kind": "stairwell",
+        "id": "A5_18_L2",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_19",
+      "edge": "P21",
+      "target": "A5_18",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_19_P21",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_19",
+      "edge": "P23",
+      "target": "A5_21",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_19_P23",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_19",
+      "edge": "S38A",
+      "target": "A5_38",
+      "x": 1250,
+      "z": 0.25,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_19_S38A",
+        "clearWidth": 124,
+        "returnDepth": 0.19,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_20",
+      "edge": "P22",
+      "target": "A5_18",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_20_P22",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_20",
+      "edge": "P24",
+      "target": "A5_21",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_20_P24",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_20",
+      "edge": "P25",
+      "target": "A5_22",
+      "x": 560,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_20_P25",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_20",
+      "edge": "B01",
+      "target": "A5_52",
+      "x": 1010,
+      "z": 0.5,
+      "gate": "specimen",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_20_B01",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_21",
+      "edge": "P23",
+      "target": "A5_19",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_21_P23",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_21",
+      "edge": "P24",
+      "target": "A5_20",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_21_P24",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_21",
+      "edge": "P26",
+      "target": "A5_23",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_21_P26",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_21",
+      "edge": "B05",
+      "target": "A5_55",
+      "x": 1440,
+      "z": 0.48,
+      "gate": "bio_archive",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_21_B05",
+        "clearWidth": 124,
+        "returnDepth": 0.42,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_22",
+      "edge": "P25",
+      "target": "A5_20",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_22_P25",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_22",
+      "edge": "P27",
+      "target": "A5_23",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_22_P27",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_22",
+      "edge": "S39C",
+      "target": "A5_39",
+      "x": 1170,
+      "z": 0.5,
+      "gate": "svc_coolant",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_22_S39C",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_23",
+      "edge": "P26",
+      "target": "A5_21",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_23_P26",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_23",
+      "edge": "P27",
+      "target": "A5_22",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_23_P27",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_23",
+      "edge": "L3",
+      "target": "A5_24",
+      "x": 560,
+      "z": 0.16,
+      "gate": "quarantine",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_23_L3",
+        "clearWidth": 156,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_24",
+      "edge": "P28",
+      "target": "A5_25",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_24_P28",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_24",
+      "edge": "P29",
+      "target": "A5_26",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_24_P29",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_24",
+      "edge": "L3",
+      "target": "A5_23",
+      "x": 560,
+      "z": 0.5,
+      "gate": "quarantine",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_24_L3",
+        "clearWidth": 156,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_25",
+      "edge": "P28",
+      "target": "A5_24",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_25_P28",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_25",
+      "edge": "P30",
+      "target": "A5_27",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_25_P30",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_26",
+      "edge": "P29",
+      "target": "A5_24",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_26_P29",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_26",
+      "edge": "P31",
+      "target": "A5_27",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_26_P31",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_26",
+      "edge": "P32",
+      "target": "A5_28",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_26_P32",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_27",
+      "edge": "P30",
+      "target": "A5_25",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_27_P30",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_27",
+      "edge": "P31",
+      "target": "A5_26",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_27_P31",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_27",
+      "edge": "P33",
+      "target": "A5_29",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_27_P33",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_28",
+      "edge": "P32",
+      "target": "A5_26",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_28_P32",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_28",
+      "edge": "P34",
+      "target": "A5_29",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_28_P34",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_29",
+      "edge": "P33",
+      "target": "A5_27",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_29_P33",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_29",
+      "edge": "P34",
+      "target": "A5_28",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_29_P34",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_29",
+      "edge": "L4",
+      "target": "A5_30",
+      "x": 560,
+      "z": 0.5,
+      "gate": "sterilized",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_29_L4",
+        "clearWidth": 156,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_30",
+      "edge": "P35",
+      "target": "A5_31",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_30_P35",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_30",
+      "edge": "P36",
+      "target": "A5_32",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_30_P36",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_30",
+      "edge": "L4",
+      "target": "A5_29",
+      "x": 560,
+      "z": 0.16,
+      "gate": "sterilized",
+      "kind": "lift",
+      "support": {
+        "kind": "lift_shaft",
+        "id": "A5_30_L4",
+        "clearWidth": 156,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_31",
+      "edge": "P35",
+      "target": "A5_30",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_31_P35",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_31",
+      "edge": "P37",
+      "target": "A5_33",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_31_P37",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_32",
+      "edge": "P36",
+      "target": "A5_30",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_32_P36",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_32",
+      "edge": "P38",
+      "target": "A5_33",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_32_P38",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_32",
+      "edge": "P39",
+      "target": "A5_34",
+      "x": 560,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_32_P39",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_33",
+      "edge": "P37",
+      "target": "A5_31",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_33_P37",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_33",
+      "edge": "P38",
+      "target": "A5_32",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_33_P38",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_33",
+      "edge": "P40",
+      "target": "A5_35",
+      "x": 560,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_33_P40",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_34",
+      "edge": "P39",
+      "target": "A5_32",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_34_P39",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_34",
+      "edge": "P41",
+      "target": "A5_35",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_34_P41",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_34",
+      "edge": "R06",
+      "target": "A5_59",
+      "x": 1060,
+      "z": 0.19,
+      "gate": "charges",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_34_R06",
+        "clearWidth": 124,
+        "returnDepth": 0.13,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_35",
+      "edge": "P40",
+      "target": "A5_33",
+      "x": 145,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_35_P40",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_35",
+      "edge": "P41",
+      "target": "A5_34",
+      "x": 1655,
+      "z": 0.16,
+      "gate": null,
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_35_P41",
+        "clearWidth": 124,
+        "returnDepth": 0.1,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_35",
+      "edge": "R07",
+      "target": "A5_59",
+      "x": 1140,
+      "z": 0.21,
+      "gate": "charges",
+      "kind": "door",
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_35_R07",
+        "clearWidth": 124,
+        "returnDepth": 0.15,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_36",
+      "edge": "S36A",
+      "target": "A5_05",
+      "x": 140,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_36_S36A",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_36",
+      "edge": "S36B",
+      "target": "A5_37",
+      "x": 1350,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_36_S36B",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_37",
+      "edge": "S36B",
+      "target": "A5_36",
+      "x": 140,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_37_S36B",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_37",
+      "edge": "S37C",
+      "target": "A5_02",
+      "x": 1350,
+      "z": 0.5,
+      "gate": "svc_dock",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_37_S37C",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_38",
+      "edge": "S38A",
+      "target": "A5_19",
+      "x": 145,
+      "z": 0.48,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_38_S38A",
+        "clearWidth": 124,
+        "returnDepth": 0.42,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_38",
+      "edge": "S38B",
+      "target": "A5_39",
+      "x": 1650,
+      "z": 0.48,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_38_S38B",
+        "clearWidth": 124,
+        "returnDepth": 0.42,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_39",
+      "edge": "S38B",
+      "target": "A5_38",
+      "x": 140,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_39_S38B",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_39",
+      "edge": "S39C",
+      "target": "A5_22",
+      "x": 1350,
+      "z": 0.5,
+      "gate": "svc_coolant",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_39_S39C",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_40",
+      "edge": "S40A",
+      "target": "A5_13",
+      "x": 140,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_40_S40A",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_40",
+      "edge": "S40B",
+      "target": "A5_41",
+      "x": 1350,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_40_S40B",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_41",
+      "edge": "S40B",
+      "target": "A5_40",
+      "x": 145,
+      "z": 0.48,
+      "gate": null,
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_41_S40B",
+        "clearWidth": 124,
+        "returnDepth": 0.42,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_41",
+      "edge": "S41C",
+      "target": "A5_16",
+      "x": 1650,
+      "z": 0.48,
+      "gate": "svc_watch",
+      "kind": "door",
+      "service": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_41_S41C",
+        "clearWidth": 124,
+        "returnDepth": 0.42,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_42",
+      "edge": "C01",
+      "target": "A5_01",
+      "x": 145,
+      "z": 0.5,
+      "gate": "shelter",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_42_C01",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_42",
+      "edge": "C02",
+      "target": "A5_43",
+      "x": 1660,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_42_C02",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_42",
+      "edge": "C08",
+      "target": "A5_47",
+      "x": 1190,
+      "z": 0.21,
+      "gate": "civil_power",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_42_C08",
+        "clearWidth": 124,
+        "returnDepth": 0.15,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_43",
+      "edge": "C02",
+      "target": "A5_42",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_43_C02",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_43",
+      "edge": "C03",
+      "target": "A5_44",
+      "x": 1355,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_43_C03",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_44",
+      "edge": "C03",
+      "target": "A5_43",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_44_C03",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_44",
+      "edge": "C04",
+      "target": "A5_45",
+      "x": 1655,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_44_C04",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_44",
+      "edge": "C07",
+      "target": "A5_46",
+      "x": 1120,
+      "z": 0.22,
+      "gate": "civil_air",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_44_C07",
+        "clearWidth": 124,
+        "returnDepth": 0.16,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_45",
+      "edge": "C04",
+      "target": "A5_44",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_45_C04",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_45",
+      "edge": "C05",
+      "target": "A5_46",
+      "x": 1655,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_45_C05",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_46",
+      "edge": "C05",
+      "target": "A5_45",
+      "x": 145,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_46_C05",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_46",
+      "edge": "C06",
+      "target": "A5_47",
+      "x": 1655,
+      "z": 0.5,
+      "gate": "civil_power",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_46_C06",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_46",
+      "edge": "C07",
+      "target": "A5_44",
+      "x": 520,
+      "z": 0.22,
+      "gate": "civil_air",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_46_C07",
+        "clearWidth": 124,
+        "returnDepth": 0.16,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_47",
+      "edge": "C06",
+      "target": "A5_46",
+      "x": 145,
+      "z": 0.5,
+      "gate": "civil_power",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_47_C06",
+        "clearWidth": 124,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_47",
+      "edge": "C08",
+      "target": "A5_42",
+      "x": 600,
+      "z": 0.21,
+      "gate": "civil_power",
+      "kind": "door",
+      "civil": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_47_C08",
+        "clearWidth": 124,
+        "returnDepth": 0.15,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_48",
+      "edge": "M01",
+      "target": "A5_10",
+      "x": 145,
+      "z": 0.45,
+      "gate": "power",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_48_M01",
+        "clearWidth": 312,
+        "returnDepth": 0.39,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_48",
+      "edge": "M02",
+      "target": "A5_49",
+      "x": 1580,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_48_M02",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_48",
+      "edge": "M05",
+      "target": "A5_51",
+      "x": 1250,
+      "z": 0.23,
+      "gate": "loader_aux",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_48_M05",
+        "clearWidth": 312,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_49",
+      "edge": "M02",
+      "target": "A5_48",
+      "x": 220,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_49_M02",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_49",
+      "edge": "M03",
+      "target": "A5_50",
+      "x": 1580,
+      "z": 0.5,
+      "gate": "loader_clearance",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_49_M03",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_50",
+      "edge": "M03",
+      "target": "A5_49",
+      "x": 220,
+      "z": 0.5,
+      "gate": "loader_clearance",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_50_M03",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_50",
+      "edge": "M04",
+      "target": "A5_51",
+      "x": 1580,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_50_M04",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_51",
+      "edge": "M04",
+      "target": "A5_50",
+      "x": 220,
+      "z": 0.5,
+      "gate": null,
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_51_M04",
+        "clearWidth": 312,
+        "returnDepth": 0.44,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_51",
+      "edge": "M05",
+      "target": "A5_48",
+      "x": 1580,
+      "z": 0.3,
+      "gate": "loader_aux",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_51_M05",
+        "clearWidth": 312,
+        "returnDepth": 0.24,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_51",
+      "edge": "M06",
+      "target": "A5_11",
+      "x": 1655,
+      "z": 0.72,
+      "gate": "loader_return",
+      "kind": "door",
+      "machine": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_51_M06",
+        "clearWidth": 312,
+        "returnDepth": 0.6599999999999999,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_52",
+      "edge": "B01",
+      "target": "A5_20",
+      "x": 145,
+      "z": 0.3,
+      "gate": "specimen",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_52_B01",
+        "clearWidth": 124,
+        "returnDepth": 0.24,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_52",
+      "edge": "B02",
+      "target": "A5_53",
+      "x": 1655,
+      "z": 0.4,
+      "gate": "bio_analysis",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_52_B02",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_52",
+      "edge": "B06",
+      "target": "A5_55",
+      "x": 1370,
+      "z": 0.25,
+      "gate": "bio_archive",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_52_B06",
+        "clearWidth": 124,
+        "returnDepth": 0.19,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_53",
+      "edge": "B02",
+      "target": "A5_52",
+      "x": 145,
+      "z": 0.4,
+      "gate": "bio_analysis",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_53_B02",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_53",
+      "edge": "B03",
+      "target": "A5_54",
+      "x": 1655,
+      "z": 0.4,
+      "gate": "bio_calibrated",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_53_B03",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_54",
+      "edge": "B03",
+      "target": "A5_53",
+      "x": 145,
+      "z": 0.4,
+      "gate": "bio_calibrated",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_54_B03",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_54",
+      "edge": "B04",
+      "target": "A5_55",
+      "x": 1655,
+      "z": 0.4,
+      "gate": "bio_trial",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_54_B04",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_55",
+      "edge": "B04",
+      "target": "A5_54",
+      "x": 145,
+      "z": 0.4,
+      "gate": "bio_trial",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_55_B04",
+        "clearWidth": 124,
+        "returnDepth": 0.34,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_55",
+      "edge": "B05",
+      "target": "A5_21",
+      "x": 1655,
+      "z": 0.32,
+      "gate": "bio_archive",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "end_return",
+        "id": "A5_55_B05",
+        "clearWidth": 124,
+        "returnDepth": 0.26,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_55",
+      "edge": "B06",
+      "target": "A5_52",
+      "x": 1320,
+      "z": 0.21,
+      "gate": "bio_archive",
+      "kind": "door",
+      "bio": true,
+      "support": {
+        "kind": "branch_vestibule",
+        "id": "A5_55_B06",
+        "clearWidth": 124,
+        "returnDepth": 0.15,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_56",
+      "edge": "R01",
+      "target": "A5_15",
+      "x": 145,
+      "z": 0.23,
+      "gate": "clearance",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_56_R01",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_56",
+      "edge": "R02",
+      "target": "A5_14",
+      "x": 1655,
+      "z": 0.23,
+      "gate": "clearance",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_56_R02",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_57",
+      "edge": "R03",
+      "target": "A5_11",
+      "x": 145,
+      "z": 0.23,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_57_R03",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_57",
+      "edge": "R04",
+      "target": "A5_58",
+      "x": 1655,
+      "z": 0.23,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_57_R04",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_58",
+      "edge": "R04",
+      "target": "A5_57",
+      "x": 145,
+      "z": 0.23,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_58_R04",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_58",
+      "edge": "R05",
+      "target": "A5_10",
+      "x": 1655,
+      "z": 0.23,
+      "gate": "power",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_58_R05",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_59",
+      "edge": "R06",
+      "target": "A5_34",
+      "x": 145,
+      "z": 0.23,
+      "gate": "charges",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_59_R06",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "left",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    },
+    {
+      "room": "A5_59",
+      "edge": "R07",
+      "target": "A5_35",
+      "x": 1655,
+      "z": 0.23,
+      "gate": "charges",
+      "kind": "door",
+      "support": {
+        "kind": "end_return",
+        "id": "A5_59_R07",
+        "clearWidth": 124,
+        "returnDepth": 0.17,
+        "backZ": 0.06,
+        "ceilingY": 125,
+        "handedness": "right",
+        "source": "ORIGINAL_GAME_ARCHITECTURE"
+      }
+    }
+  ],
+  "fullScriptAuthenticated": false,
+  "nativeHostMerged": false
+}

@@ -1,0 +1,3 @@
+# Notice
+Alien, les personnages et éléments de l’univers appartiennent à leurs ayants droit. Ce paquet est un prototype de fan game non officiel, non présenté comme autorisé. Il ne confère aucun droit d’exploitation sur l’IP ni sur les concepts de production de tiers.
+Les recherches de Geoffroy Thoorens et les contributions mentionnées dans l’entretien studioADI sont créditées dans le codex. Les images de production ne sont pas redistribuées. Les dessins exécutables de cette version et son scénario de raccord sont des créations pour le prototype ; ils ne constituent pas la reconstitution authentifiée d’un scénario de Neill Blomkamp.

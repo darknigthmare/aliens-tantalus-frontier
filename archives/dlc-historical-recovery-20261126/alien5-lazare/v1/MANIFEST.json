@@ -1,0 +1,66 @@
+{
+  "archiveId": "alien5-lazare/v1",
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V1_CANDIDAT.zip",
+  "bytes": 7262597,
+  "sha256": "e83ca79e0d920a328db05f241855e50672bcee70ea4199e408f021f2a560a3b2",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 35,
+  "pngOccurrences": 7,
+  "zipCrc32": "pass-all-members",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/DLC_ALIEN5_PROJET_LAZARE_V1_CANDIDAT.zip.part001",
+      "offset": 0,
+      "bytes": 7262597,
+      "sha256": "e83ca79e0d920a328db05f241855e50672bcee70ea4199e408f021f2a560a3b2",
+      "gitBlobSha1": "7f19aa59695cf8801a230870f11cd483a85698f5"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/MANIFEST.json",
+  "documents": [
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/LICENSE_NOTICE.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "gitBlobSha1": "015f0078a32ab032ab2f0f885dde9a6053b7a78b"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/README.md",
+      "bytes": 6535,
+      "sha256": "c43ef5a5c398f291e04e9edeb2cfb1306c4477750b8005d70ede173791e6f775",
+      "gitBlobSha1": "feaf2170b2fcc4d6be32fde231e973a10a162ece"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/docs/CODEX_ALIEN5.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/docs/CODEX_ALIEN5.md",
+      "bytes": 115307,
+      "sha256": "e41281a61664a314c6150c71a7a361363cfb24e5a13eeccf8db192f13e21eecc",
+      "gitBlobSha1": "d0ad64ebcaee11d4531a41856d40a64bbd2872d6"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/docs/base-audit.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/docs/base-audit.json",
+      "bytes": 630,
+      "sha256": "a9a03270acd567ea1826bb08a5ab7e885959360b57c60a7ee221efe90ef29799",
+      "gitBlobSha1": "70a3892c7aee2924817331cceeb12ed778218739"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/docs/campaign.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/docs/campaign.json",
+      "bytes": 141874,
+      "sha256": "5eb2f6d8d081a29904d8ab2d5b20a5305bc16b98b53854dd7b3725e018f9559b",
+      "gitBlobSha1": "9a0c540afa928e9c48a9b7f3ec4b1fe330137c69"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V1/game/data.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v1/documents/ALIEN5_PROJET_LAZARE_V1/game/data.json",
+      "bytes": 141874,
+      "sha256": "5eb2f6d8d081a29904d8ab2d5b20a5305bc16b98b53854dd7b3725e018f9559b",
+      "gitBlobSha1": "9a0c540afa928e9c48a9b7f3ec4b1fe330137c69"
+    }
+  ]
+}

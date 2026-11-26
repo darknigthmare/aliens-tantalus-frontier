@@ -1,0 +1,1680 @@
+{
+  "archive": "DLC_ALIEN5_PROJET_LAZARE_V5_CANDIDAT.zip",
+  "archiveSha256": "72c7475bb91e7454f2ba264c5c4b494dde1e07e9925733613d8afd38a3d74b6d",
+  "members": [
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/ALIEN5_PROJET_LAZARE_JOUER.html",
+      "bytes": 448492,
+      "compressedBytes": 107567,
+      "crc32": "5cdfa5cd",
+      "sha256": "53a1634167e2256e62a65c518fb602c609965a314a6578d30cff9dfb47745cb6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/CHANGELOG_V5.md",
+      "bytes": 1506,
+      "compressedBytes": 848,
+      "crc32": "ab7a58cd",
+      "sha256": "ef34ebae97498aa0a586871b056855236d33665b4e2cf98bc9c8d823d2e7a2cc",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/CODEX_ALIEN5.html",
+      "bytes": 3592735,
+      "compressedBytes": 2555462,
+      "crc32": "158a6a5b",
+      "sha256": "e890ffe38d0d37646315c1c4b0bcbfbb4e59bc23a1bf8031f97c49f2792c6ac4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "compressedBytes": 386,
+      "crc32": "44975c7c",
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/MANIFEST_SHA256.json",
+      "bytes": 25355,
+      "compressedBytes": 9628,
+      "crc32": "b0a491bf",
+      "sha256": "8d60580a9de4459df8424928c519cbf5e6d7097fac9ac413956ca449cef90458",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/RAPPORT_VISUEL.html",
+      "bytes": 922007,
+      "compressedBytes": 614654,
+      "crc32": "79be6a4f",
+      "sha256": "1e5d1d0d865bb5a3caab64c3dcb82a7409c75fb60c0ecf517c10e8254b9d1783",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/README.md",
+      "bytes": 9759,
+      "compressedBytes": 4508,
+      "crc32": "218f9af3",
+      "sha256": "7d78216c470bb6ddd20cb77db024da1df9c8a6136355c4bbbe513be56bcf25b4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/RELEASE_V5.json",
+      "bytes": 4151,
+      "compressedBytes": 1206,
+      "crc32": "4136eee0",
+      "sha256": "dde5fc698c6f776080576ee4e86f2257d04432407e0f8b48c532775c169cc7ae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/docs/CODEX_REGLES_V4.md",
+      "bytes": 17898,
+      "compressedBytes": 7344,
+      "crc32": "56f194fc",
+      "sha256": "2d2bd57f1f05992a3891c4e9117654ce2bb1d6617d3619f284b31bdf3aa7940e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/docs/CODEX_REGLES_V5.md",
+      "bytes": 26049,
+      "compressedBytes": 10220,
+      "crc32": "8260f273",
+      "sha256": "31cd04f4044291e583cd6c76d3daedfd59c33daa84770a794ad8d9571483e1d4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/docs/REGISTRE_CIVIL_V5.json",
+      "bytes": 2127,
+      "compressedBytes": 778,
+      "crc32": "02fdf962",
+      "sha256": "46cbfdfde07cb2acde7a60bad23b8e8f68ca70ead789a4e0d6d8ca92462d1390",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/docs/ROOMS_V5.json",
+      "bytes": 265909,
+      "compressedBytes": 23143,
+      "crc32": "c983a645",
+      "sha256": "50b7ce5e4f2855283d42b60299053bf48931df2eb2bebe3b5a04b081e52e3e36",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/audio-v4.js",
+      "bytes": 5037,
+      "compressedBytes": 1918,
+      "crc32": "9a81b6b3",
+      "sha256": "3b3ed2544a3725fd79270b4e4e9c829d8e19ed8875663634113a3f98891846b1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/core.js",
+      "bytes": 15873,
+      "compressedBytes": 5897,
+      "crc32": "b2c4eca7",
+      "sha256": "a9edee0e3c2a638705fa26f9331d6f28f62866e7a90c8afaf5a753b88486232e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/data.js",
+      "bytes": 203725,
+      "compressedBytes": 30404,
+      "crc32": "1b25f320",
+      "sha256": "e8c27ff20be43ed644fe9db484994368b5f531b76bb0be103ced9ebf295efa3b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/data.json",
+      "bytes": 337299,
+      "compressedBytes": 33623,
+      "crc32": "67a56e8e",
+      "sha256": "58edd7c3c8661ce09597799344a8c0a5a55998f291f9132eab7dbc3617a04701",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/index.html",
+      "bytes": 5874,
+      "compressedBytes": 2334,
+      "crc32": "65754518",
+      "sha256": "6ce9294ff7f0180070d73bb5703e6df45f8ead3de601d4bb33dfa19148920f4e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/render.js",
+      "bytes": 23066,
+      "compressedBytes": 8790,
+      "crc32": "7c483527",
+      "sha256": "3bc83406abe2d86733141716a5db44269b7427846e587503e267a77f9e585012",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/scenes-v2.js",
+      "bytes": 24674,
+      "compressedBytes": 9424,
+      "crc32": "7727b6ef",
+      "sha256": "5c85bb12e536312c226e7f93a0523e679a2bc1c5f236caceab2bafc695f9c805",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/scenes-v3.js",
+      "bytes": 7443,
+      "compressedBytes": 3057,
+      "crc32": "73911b85",
+      "sha256": "2eec4ad94270864d47110418c30ee902f300265b6a138ea516cb86a60b8122c1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/scenes-v4.js",
+      "bytes": 6281,
+      "compressedBytes": 2664,
+      "crc32": "c5fe089c",
+      "sha256": "609f6667bbfae70c0d1bce9c4f593d65539a16a9fc116e7681f7796c85af0b78",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/scenes-v5.js",
+      "bytes": 8119,
+      "compressedBytes": 3450,
+      "crc32": "61a9707a",
+      "sha256": "9e45aa91fa139f58a41f32e32576665ab517d11c90c412f01f9d07f07c48c589",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/style.css",
+      "bytes": 18710,
+      "compressedBytes": 5088,
+      "crc32": "b4cf645f",
+      "sha256": "8fa92cf785c72d7f73e920b2d7297e48b98667a80fbf7e3d3c1728d38aeeb419",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/systems-v2.js",
+      "bytes": 19631,
+      "compressedBytes": 7350,
+      "crc32": "2c0215a7",
+      "sha256": "75364dcc091a7c9bddcc2d373e44f8105993f297a67925108fa440177f4a8504",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/systems-v3.js",
+      "bytes": 18063,
+      "compressedBytes": 6733,
+      "crc32": "9934be8b",
+      "sha256": "57585743e0c955ddced550933cddbbf37c3d0815580a761782c8df0a3cefb66f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/systems-v4.js",
+      "bytes": 19815,
+      "compressedBytes": 6727,
+      "crc32": "82229b3b",
+      "sha256": "8bf0050f1070b17d6d3732c209a2ea0eee524c8715e0a40c6ae03348fdc716b6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/systems-v5.js",
+      "bytes": 21187,
+      "compressedBytes": 7393,
+      "crc32": "b25b49d1",
+      "sha256": "f9e4e19c0ef9939c4b46672488526ecd6e98e9718405f4e4de59db4b0dac1d82",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/game/ui.js",
+      "bytes": 51221,
+      "compressedBytes": 18285,
+      "crc32": "1a7eabdf",
+      "sha256": "e2e961558537af201078f635d29e298b38e90846020235fb975a49cd3d14a7fd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/integration/install.mjs",
+      "bytes": 7995,
+      "compressedBytes": 3048,
+      "crc32": "9d860eb3",
+      "sha256": "460de6d3038fc349c8b74adfea942250fb117c82be83708086251d90d53926c4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/package.json",
+      "bytes": 753,
+      "compressedBytes": 291,
+      "crc32": "7863d2a6",
+      "sha256": "432d772057936a3506c96a5948b4dd4010f5152e06748921587af4d65dd08454",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/agent-browser-v5.log",
+      "bytes": 47,
+      "compressedBytes": 49,
+      "crc32": "981ef218",
+      "sha256": "e6be8b959bf432a74f18628531d671d7f19330ce25dd82e7c0a88c0fe4c4345c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-export-v5.json",
+      "bytes": 15551,
+      "compressedBytes": 1918,
+      "crc32": "beb20bca",
+      "sha256": "9706abe43fe7361174fac6d59b6fe646b64a07f2752bc4c9c19e8056fe94ea30",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-newt-export-v5.json",
+      "bytes": 23636,
+      "compressedBytes": 2700,
+      "crc32": "754d1dff",
+      "sha256": "c0b36ea216d32206b2c972bed23ef865f35a24b39dea73b85e61e76bf3dbc95b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas0-results.json",
+      "bytes": 2485,
+      "compressedBytes": 348,
+      "crc32": "f021869b",
+      "sha256": "aa205cfdb52caa8a658ac74c216c1eb7a8d6f71434bb36f2ad608ba953c3a83b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas0.log",
+      "bytes": 588,
+      "compressedBytes": 165,
+      "crc32": "a0e59518",
+      "sha256": "956d87aab62fc839ceed04250da5d1b01f7580ad09860dafca039945403ee612",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas1-results.json",
+      "bytes": 2485,
+      "compressedBytes": 348,
+      "crc32": "cf447fe4",
+      "sha256": "d4096ff7d28ac74d3d39c82030aee1de9fa90f1ae535d537cc8d1bb5f62ce753",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas1.log",
+      "bytes": 588,
+      "compressedBytes": 165,
+      "crc32": "bdb1d7cb",
+      "sha256": "b2d57a86141a68191a7c430770d776f67b9b46daf6fe0a8e3d07df1807b2d9c6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas2-results.json",
+      "bytes": 2485,
+      "compressedBytes": 347,
+      "crc32": "6747f876",
+      "sha256": "ee183a992f8cf09c5779875c95e258806e0832412d726c9de4751ba2ce814fb1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas2.log",
+      "bytes": 588,
+      "compressedBytes": 165,
+      "crc32": "b3cfa513",
+      "sha256": "540e946a2d9f3fdaf11d7c9c14018196ba3729b270a5663e41edc85d33032bc0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas3-results.json",
+      "bytes": 2485,
+      "compressedBytes": 348,
+      "crc32": "6071e117",
+      "sha256": "fcdd54660a3ba33d4f42292138f819cdae02885182b51574be8b970045278f16",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-atlas3.log",
+      "bytes": 588,
+      "compressedBytes": 165,
+      "crc32": "100da05f",
+      "sha256": "b865076477d0270c62178f816f54f2ded48c5fe0e3e3d0d7a127e14d5713dfb5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-civil-results.json",
+      "bytes": 2209,
+      "compressedBytes": 655,
+      "crc32": "1d696c4c",
+      "sha256": "028cbaa79fb3331b9c9a5e630312bf11f4b2b8800e763338af4a38177bc5de27",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-civil.log",
+      "bytes": 956,
+      "compressedBytes": 505,
+      "crc32": "0294b21f",
+      "sha256": "2d98ffbce0600a1dcfb3fe6fd1aafd1c1d27391217bf31e8b72d57822ebe6167",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-final-results.json",
+      "bytes": 2437,
+      "compressedBytes": 599,
+      "crc32": "ea7784bf",
+      "sha256": "bafb54fe6b24dfa3c4e7c8fb9c434b78b7465d4fe845c31dd25b0854df73c254",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-final.log",
+      "bytes": 997,
+      "compressedBytes": 411,
+      "crc32": "035eea6f",
+      "sha256": "ca37049a106f52fea719240a532a9c5dd588df309432c7a5524e8f0620524cef",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-ui-results.json",
+      "bytes": 3331,
+      "compressedBytes": 905,
+      "crc32": "883102fe",
+      "sha256": "dc67558d34b3f07e6ee47917d219b4a4b3b0f2518d053155db20f53f2fb1d006",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/browser-v5-ui.log",
+      "bytes": 1418,
+      "compressedBytes": 713,
+      "crc32": "92ddc086",
+      "sha256": "2dbc54a385251127f9d885665d721c626c8598f10a54e53cacc02f6e8769e804",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5-normal-results.json",
+      "bytes": 886,
+      "compressedBytes": 452,
+      "crc32": "47b9ab91",
+      "sha256": "cb265a6ebd9dc1412e1f24f2400bff4cdc2272c7276f74829f67e3f4178ab8b3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5-normal.log",
+      "bytes": 4362,
+      "compressedBytes": 1032,
+      "crc32": "c5e29628",
+      "sha256": "7222a4fb7e13634ab757c97bef5a2981e9c91b04f95d652338c5e52ef9093aee",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5-story-results.json",
+      "bytes": 914,
+      "compressedBytes": 461,
+      "crc32": "e52bdc4b",
+      "sha256": "d7ce7189aa2f6fa9842f3afd09cd4f4ef65c3436f7847fecd6cc8b57be66a177",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5-story.log",
+      "bytes": 4382,
+      "compressedBytes": 1049,
+      "crc32": "9541197d",
+      "sha256": "5b4b8f642f83a6f97e476eaa68253326e4de6c7a852fcd2cbc74a9fb00ff3a16",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5civil-normal-results.json",
+      "bytes": 1057,
+      "compressedBytes": 521,
+      "crc32": "c323d0f9",
+      "sha256": "093d5cfa465157e0efd9d6ec312b42aa161821b9e7ed7192caf62951aa80b5cd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5civil-normal.log",
+      "bytes": 5199,
+      "compressedBytes": 1232,
+      "crc32": "0373c11b",
+      "sha256": "94c673b4d6d628b47134e5086681681d5277a7ff9feb44eddd9666c712c63b39",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5civil-story-results.json",
+      "bytes": 1100,
+      "compressedBytes": 537,
+      "crc32": "bcf269d6",
+      "sha256": "4a0ec313ebfcd7c33456ecab270db1c1cedcfdad54ca34b4617d431fb8acb5c7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/campaign-v5civil-story.log",
+      "bytes": 5234,
+      "compressedBytes": 1259,
+      "crc32": "ee9efb51",
+      "sha256": "7651e2766ba435d289cd0cdaea0291b82eed639fc44aee7e39c5916eac15270b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/docs-v5-browser-results.json",
+      "bytes": 741,
+      "compressedBytes": 237,
+      "crc32": "1363185a",
+      "sha256": "e424e409410950d989839d1b87e7c41f3a1f692b2bb846622ba6fd87c2a949a4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/docs-v5-codex.jpg",
+      "bytes": 89651,
+      "compressedBytes": 64370,
+      "crc32": "039f7183",
+      "sha256": "35617df92cc929ddfd82192597253b6bf76e4dd1181d25162d4f895affbe5812",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/docs-v5-report.jpg",
+      "bytes": 103738,
+      "compressedBytes": 81855,
+      "crc32": "21728c0b",
+      "sha256": "3cb1ab7c2155d47b290bb9b7fd5400f2952aedd92c7f14a2201ce1672ecc9082",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/docs-v5-results.json",
+      "bytes": 2235,
+      "compressedBytes": 587,
+      "crc32": "5cb3a9fb",
+      "sha256": "06ce9fa54db03b306ff6050450efe1b945ee686a33b661be4a3c19c4f128ee17",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/docs-v5-traction.jpg",
+      "bytes": 109456,
+      "compressedBytes": 97067,
+      "crc32": "8161ea56",
+      "sha256": "ef66eef19f93aff2f1e8b08af25d1351adb367e0b01486c4db59707ac5de1ce9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/fixture_complete.json",
+      "bytes": 11895,
+      "compressedBytes": 1544,
+      "crc32": "b51a1a64",
+      "sha256": "cf19075acd80eac2f3bf309d35558c874d0181ca38000d3f4ee58141fe147dfe",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/fixture_flood.json",
+      "bytes": 10362,
+      "compressedBytes": 1232,
+      "crc32": "e762a3c5",
+      "sha256": "cc3d1fe3afe7dfd4c3a7c2a7b4eb689a8866292e3ec1a17be9b0fc595f47a97c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/installer-results.json",
+      "bytes": 826,
+      "compressedBytes": 315,
+      "crc32": "3e1bd4ad",
+      "sha256": "528326e4a948133f4f7ef99336d22c0e28292fb84ec2fc8141d41d20845ff43c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/installer-upgrade-v5.log",
+      "bytes": 924,
+      "compressedBytes": 422,
+      "crc32": "80aee617",
+      "sha256": "094e0558ac437419e49e367dc8a1e39bbff884c4b8a9290fe45ddfb8f5ccc085",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/installer-v2-results.json",
+      "bytes": 1259,
+      "compressedBytes": 442,
+      "crc32": "10f241f6",
+      "sha256": "f451ae1e4f27b39d75c369488b98e60b488acb7d728513b7e75d5b68a6d8be79",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/installer-v5.log",
+      "bytes": 6,
+      "compressedBytes": 8,
+      "crc32": "aa6b4224",
+      "sha256": "27f755d260c188be56e5f4fa1152dcb70691712dac34707ef913799fddd53de5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/npm-test-v5.log",
+      "bytes": 1199,
+      "compressedBytes": 535,
+      "crc32": "0e4d81c3",
+      "sha256": "7823bcb383ab7f57a5497a84480870b28ec343923cc5da9929e72124d3abb872",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/regression-v5-results.json",
+      "bytes": 6113,
+      "compressedBytes": 1906,
+      "crc32": "0ef29317",
+      "sha256": "05ece31bc75898806f67e89ca0a8905d575a5c9d7089cacdf773563322f2138b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/regression-v5.log",
+      "bytes": 36,
+      "compressedBytes": 31,
+      "crc32": "0e3f55f7",
+      "sha256": "e3cf565707fab081f28ee808d5c00093586c8a42c19450c8504175724cd3e43e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/server-v5.log",
+      "bytes": 0,
+      "compressedBytes": 2,
+      "crc32": "00000000",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/summary-v5.json",
+      "bytes": 4151,
+      "compressedBytes": 1206,
+      "crc32": "4136eee0",
+      "sha256": "dde5fc698c6f776080576ee4e86f2257d04432407e0f8b48c532775c169cc7ae",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/systems-v5-results.json",
+      "bytes": 9265,
+      "compressedBytes": 2583,
+      "crc32": "baab73d7",
+      "sha256": "40072d48f7b182fc15b05f625686a39217113a78e7fb498b3bd3097f82105bbe",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/systems-v5.log",
+      "bytes": 36,
+      "compressedBytes": 31,
+      "crc32": "c6af0302",
+      "sha256": "badb4c564627cbb9294a8546815ec4b90572bc5dabbb95bf5bdc29e468f6dc28",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v2_complete.json",
+      "bytes": 13563,
+      "compressedBytes": 1866,
+      "crc32": "6f7eae0a",
+      "sha256": "b76ab82d6edabd6a927ebfb9d4587e724537fb60c98a643b66e1c125aa1cffb8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v2_drain.json",
+      "bytes": 12201,
+      "compressedBytes": 1648,
+      "crc32": "02678019",
+      "sha256": "bc4543a72ecf5c5d14c5a69f66e91be05bfe3808a87a91aa3ae5c97d7dced130",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v3_complete.json",
+      "bytes": 15427,
+      "compressedBytes": 2085,
+      "crc32": "12e770ea",
+      "sha256": "5af6b9cd3dc19d54440201cca6249bb417bc6e8b9e05c2c28a7049456e3c6e8f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v3_drain.json",
+      "bytes": 14126,
+      "compressedBytes": 1835,
+      "crc32": "17a6114d",
+      "sha256": "2c8660095d0f42714510e1273b7e0e1ee53d11cba6897152b4bbb0b6e03608e6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v4_complete.json",
+      "bytes": 22663,
+      "compressedBytes": 2794,
+      "crc32": "ecad6b28",
+      "sha256": "d8b1d2be251cd6a6d8505667a5eb37f0b825a54fccc75026258fe4d22ed43ca9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v4_drain.json",
+      "bytes": 20786,
+      "compressedBytes": 2329,
+      "crc32": "98696f35",
+      "sha256": "3f6f0e5c2650abd14ac42f0896e6d0500b8bf3b195aeb09627eac8ce0d3776d5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5-contact-0.jpg",
+      "bytes": 174922,
+      "compressedBytes": 166946,
+      "crc32": "9b960413",
+      "sha256": "eb6f4e7c06d9dfa456fda78eb7f8e8972c2d7938782dc3a634ca68ce3909e5a4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5-contact-1.jpg",
+      "bytes": 183643,
+      "compressedBytes": 176375,
+      "crc32": "11dc71e1",
+      "sha256": "f94606afa771c73152dcd4d77c92785a9b03ab7d3e2990b522dcb25c26daa6b9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5-contact-2.jpg",
+      "bytes": 174821,
+      "compressedBytes": 165691,
+      "crc32": "ba696345",
+      "sha256": "e8d57b14ab298602105795ced4474dee9251024a223363e4077a9900c1380d25",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5-contact-3.jpg",
+      "bytes": 173284,
+      "compressedBytes": 167645,
+      "crc32": "bf00e4e6",
+      "sha256": "0ca9e520b1f8763a57af1c7dd7a7e4a0cb35ae87a430559dc6777a616c92566f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5_before_extract.json",
+      "bytes": 26994,
+      "compressedBytes": 3603,
+      "crc32": "b67f2546",
+      "sha256": "f5072bfc9180ae923985e5c327280bc5bd97bc1a07ebc644473ef8695ef8c485",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_00.jpg",
+      "bytes": 80272,
+      "compressedBytes": 78137,
+      "crc32": "d0833ba4",
+      "sha256": "0cd17a5b1420fcb604203e63b378a97d3ea1bd76efc1197709e61a7069a53ec6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_01.jpg",
+      "bytes": 89788,
+      "compressedBytes": 87351,
+      "crc32": "25b196f7",
+      "sha256": "a2f30fe63aa22a3d6ef3a32457283261b7f8a7b2cd520da38213917cbf07f7f3",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_02.jpg",
+      "bytes": 79058,
+      "compressedBytes": 77460,
+      "crc32": "5ae57152",
+      "sha256": "f63138b89da88c98344feea1d8dcdb1e222c82b73ba578f5b0c7efd38922c7a2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_03.jpg",
+      "bytes": 88543,
+      "compressedBytes": 85994,
+      "crc32": "ae38e7f1",
+      "sha256": "653c8665af53860fc2b4916ec38abb3b0b7c3d91932ad1088ae9d1311b02959d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_04.jpg",
+      "bytes": 81002,
+      "compressedBytes": 79302,
+      "crc32": "cb51f619",
+      "sha256": "04803e3c7eb27e59a0c6e0ed74184e3aa17e338e274ce38e3e04f0b7ddf1a254",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_05.jpg",
+      "bytes": 84806,
+      "compressedBytes": 82789,
+      "crc32": "2b4fc1b9",
+      "sha256": "6f003b63a0316d3226e916b5232b32a931e009a6f4a73e71d77145b6e9cebdd4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_06.jpg",
+      "bytes": 89068,
+      "compressedBytes": 86474,
+      "crc32": "b1fad502",
+      "sha256": "3cf70cfc1969fef667235779fdd6f75b05292bb78fdcce3ad174de0195606d09",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_07.jpg",
+      "bytes": 81827,
+      "compressedBytes": 79467,
+      "crc32": "c5717a71",
+      "sha256": "ad3ba7d97fa900c43b5982349d084e7e9c7c54731f8db027dfabe8c8c1954748",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_08.jpg",
+      "bytes": 86481,
+      "compressedBytes": 83797,
+      "crc32": "797dd78f",
+      "sha256": "588ca8d47dda7bbafc312f6192f5236d4582d7180b4c2b640342f77f11795595",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_09.jpg",
+      "bytes": 81855,
+      "compressedBytes": 80117,
+      "crc32": "723ee007",
+      "sha256": "74385cc09b9bf3f19ded1e537a2846da3db25f12898a8b830ee4151185d6dcdd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_10.jpg",
+      "bytes": 86626,
+      "compressedBytes": 84530,
+      "crc32": "9ee2260c",
+      "sha256": "a3746ed03e5c1bd4fd150aeeecc64c600481658a85e444fe4133a9ac5d36fc00",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_11.jpg",
+      "bytes": 95548,
+      "compressedBytes": 92671,
+      "crc32": "d1dc9afe",
+      "sha256": "27ca21f91db36420ac5f948fb3ed0be8e9cd86a9bf85fba77a64e3993fbc5464",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_12.jpg",
+      "bytes": 88357,
+      "compressedBytes": 86170,
+      "crc32": "83232095",
+      "sha256": "4a4ed205ff97163a7d86bbf4a66f3d1db6c28db94c347eebdab38af4865d7b5e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_13.jpg",
+      "bytes": 95362,
+      "compressedBytes": 91872,
+      "crc32": "e75fc13c",
+      "sha256": "260f03faadcc7c984764a206e92ba6ce7beceaf449987612d60a8dbecf2bac0e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_14.jpg",
+      "bytes": 89075,
+      "compressedBytes": 86354,
+      "crc32": "ef542e08",
+      "sha256": "fdb0dbfb6dfb6cdebd1449b97c7747e9beeff8422b0ec7b8aa88658013364b8d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_15.jpg",
+      "bytes": 90543,
+      "compressedBytes": 88521,
+      "crc32": "188ba803",
+      "sha256": "c33586d0d3ff5626fa1abc7957469d3808a89b7bcb1b314fe8e69ac06e953d04",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_16.jpg",
+      "bytes": 86665,
+      "compressedBytes": 84082,
+      "crc32": "f0966e11",
+      "sha256": "fe4f01fb67fe1899ca11a682bf5543912481641341c9305fab49baee464f58d1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_17.jpg",
+      "bytes": 90162,
+      "compressedBytes": 87578,
+      "crc32": "da939a1a",
+      "sha256": "fa3ee0f567fd82b2c4e7015e02eec32433f1d097642559566a69d03b561b3dd7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_18.jpg",
+      "bytes": 87313,
+      "compressedBytes": 84417,
+      "crc32": "974c7e28",
+      "sha256": "4818514055528824e5a5836f80626b1a3aac28b3a36fd1f604535e25b01d14f5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_19.jpg",
+      "bytes": 89945,
+      "compressedBytes": 87859,
+      "crc32": "a9fa8b18",
+      "sha256": "87f4538833c4c0f933f2a64ff4952ca179388abc25731b28c7924020f9dbcd0f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_20.jpg",
+      "bytes": 86756,
+      "compressedBytes": 84300,
+      "crc32": "2064d815",
+      "sha256": "2b909d273875fa54d36393985e18c7f5e4e9da29f4c78d37987677392b792222",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_21.jpg",
+      "bytes": 90421,
+      "compressedBytes": 88344,
+      "crc32": "663a9b98",
+      "sha256": "6c422ec563ca9dc8908a9bb7988806a8844efba86627f52bb7e08c566d61f855",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_22.jpg",
+      "bytes": 93614,
+      "compressedBytes": 91305,
+      "crc32": "2de9552f",
+      "sha256": "e27b660d1762a32b5f8fd4ea41141b96a33f60ff422a5b53ee6b3cc71c233232",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_23.jpg",
+      "bytes": 92888,
+      "compressedBytes": 90794,
+      "crc32": "0c1af503",
+      "sha256": "0867ef4f74a89d72a80510d9adeaf9d4207c1df173621a7ff3366e9792649e5a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_24.jpg",
+      "bytes": 104103,
+      "compressedBytes": 101174,
+      "crc32": "867afeab",
+      "sha256": "452f737703d61a8bb77516f8cea048767830f14a50c32b8ea78b58524ef191e1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_25.jpg",
+      "bytes": 93088,
+      "compressedBytes": 91393,
+      "crc32": "914fe5e1",
+      "sha256": "157662a7a122e5b02176490b274c6b1430947606ad0e9a4cc4a0ff5a9e747d56",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_26.jpg",
+      "bytes": 89836,
+      "compressedBytes": 88336,
+      "crc32": "e25bcd46",
+      "sha256": "01c00ed304dce7e1a525aaf7bb6ccb1d43340e041ad3348e7e0ba053e436aa21",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_27.jpg",
+      "bytes": 88959,
+      "compressedBytes": 87353,
+      "crc32": "5c24158b",
+      "sha256": "384d391cb77f9bb94f83dbf161b1f5a14b69877cfa36dfd0fd599f0022f9a689",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_28.jpg",
+      "bytes": 86276,
+      "compressedBytes": 84714,
+      "crc32": "08dc41ef",
+      "sha256": "8ca8ca9c386f5747b8b194646673878ebc66f80a7919347e51a9be1c2f35ce9d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_29.jpg",
+      "bytes": 95011,
+      "compressedBytes": 92815,
+      "crc32": "79135358",
+      "sha256": "decede4f5ae381af5126c3abee391d5c1e0d7958b9176eadb3abcb86adfe4097",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_30.jpg",
+      "bytes": 89243,
+      "compressedBytes": 86677,
+      "crc32": "9496d3f6",
+      "sha256": "e8f4ee3b52804249c3e244c738c3f9b967dd310c8be375cb2f07ca8158370977",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_31.jpg",
+      "bytes": 80223,
+      "compressedBytes": 78974,
+      "crc32": "0282609b",
+      "sha256": "f09a390a6c22569c75773ab73d77fdf42ce4497377ecb953ba3f9fa8ea0f367d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_32.jpg",
+      "bytes": 89501,
+      "compressedBytes": 87125,
+      "crc32": "c145d3fb",
+      "sha256": "a886f65a6c5a0f8c7ab7c2029fea4bd60ec17def781e401e9805ba612d25f482",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_33.jpg",
+      "bytes": 75745,
+      "compressedBytes": 73343,
+      "crc32": "9949ad09",
+      "sha256": "c749929666e83e9cb2d12ba880fc3151252edceb4b759c62ee2c9d8c6880ccc0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_34.jpg",
+      "bytes": 74840,
+      "compressedBytes": 72953,
+      "crc32": "76cdf3bf",
+      "sha256": "9ce51ce15d5036e39baa1b6116391b8612b43c0784f242ecbed2fb86760b13df",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_35.jpg",
+      "bytes": 79912,
+      "compressedBytes": 78041,
+      "crc32": "c10a957c",
+      "sha256": "c14f53837777c84e1ef2f9ac99c8f1a1f7ca71dfabf5a034d8ab4347101606aa",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_36.jpg",
+      "bytes": 87625,
+      "compressedBytes": 85144,
+      "crc32": "c291d489",
+      "sha256": "e3ca68a8e87e74d7ad95f6ad62aaaef8cfbe22401d8dcfb389e574ca0f4d0f7a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_37.jpg",
+      "bytes": 83611,
+      "compressedBytes": 80994,
+      "crc32": "60b0ae21",
+      "sha256": "34c543facb1502d30387913222a2a55f0b8b22a431b879ceb85928d83da2f9e2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_38.jpg",
+      "bytes": 86301,
+      "compressedBytes": 84498,
+      "crc32": "b27f91d4",
+      "sha256": "c39631760330ee5db6b4adc7420bc3dcc7949138981b569c93c4ef21320ca864",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_39.jpg",
+      "bytes": 86754,
+      "compressedBytes": 84155,
+      "crc32": "b4fdfe11",
+      "sha256": "8ae2c8a4d5c8ac6ea6ab28605577faff7d8da4416373ef2651a741289c0288ad",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_40.jpg",
+      "bytes": 91724,
+      "compressedBytes": 88318,
+      "crc32": "3cf05a31",
+      "sha256": "2d8a323b7c8a05f073e3b108bfabc5216ed5fa3003a6a57c808d7d0f46dfb159",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_41.jpg",
+      "bytes": 78208,
+      "compressedBytes": 74742,
+      "crc32": "d6e9358a",
+      "sha256": "c75571907f1d43472665345e21d441e88e64004ec66762f4426b36788b9eaf0b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_42.jpg",
+      "bytes": 77543,
+      "compressedBytes": 75245,
+      "crc32": "5895410c",
+      "sha256": "ce567d38baaf597d5403887dbe3bced7370e8a53935052449f72c92d0dc67f2b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_43.jpg",
+      "bytes": 87599,
+      "compressedBytes": 85654,
+      "crc32": "54ff8343",
+      "sha256": "7b65869fa986adce0e4cbe9c3290004832100387e758f533e823e193ee329efb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_44.jpg",
+      "bytes": 86349,
+      "compressedBytes": 84035,
+      "crc32": "b8a99c8e",
+      "sha256": "0215ab996b459181138a3727899972322bacff8f23de8dae326bb1e81b3f8301",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_45.jpg",
+      "bytes": 93227,
+      "compressedBytes": 90290,
+      "crc32": "2305609e",
+      "sha256": "e20c3c378d4fbbe189ee5d47e35f05aee90120dc7c43c1f70fa08ab47ed27a33",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_46.jpg",
+      "bytes": 79982,
+      "compressedBytes": 77445,
+      "crc32": "3ee1fbf6",
+      "sha256": "10f63e69d86b1e988cdeaa74da466b862459b452cec679a6f669709c9689f505",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5atlas/A5_47.jpg",
+      "bytes": 81741,
+      "compressedBytes": 79664,
+      "crc32": "9d085371",
+      "sha256": "1bead5f91c81d6eba74239d2314fcd5829847d286cbd9e8d7a39d63656fa51e7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_air.json",
+      "bytes": 23850,
+      "compressedBytes": 2766,
+      "crc32": "3ce046d8",
+      "sha256": "2a35c35b7e4d843973c82506603f1cc33a561dccbc20c8417842b04f7fd85861",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_before.json",
+      "bytes": 22483,
+      "compressedBytes": 2334,
+      "crc32": "b019039a",
+      "sha256": "f0069689cdf70e4b79e55e58b655060d36893eae7b023e853a8db5a37024681b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_boarding.json",
+      "bytes": 24804,
+      "compressedBytes": 3166,
+      "crc32": "6a2c6c9b",
+      "sha256": "288ff39639798af7764b9093219ab525076726eb808e0165727b7f5a3e0ea79f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_crew.json",
+      "bytes": 24759,
+      "compressedBytes": 3128,
+      "crc32": "66ff2e54",
+      "sha256": "747107873261ca7ebe66568d10e37a3f0ad76746e78f2624dfbabe9e091ca6f8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_departed.json",
+      "bytes": 26722,
+      "compressedBytes": 3141,
+      "crc32": "9375f486",
+      "sha256": "5339e63b94a7f74643ed8ad971511dfab067921eb8f5d8c20496f292ccc9cbc9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_filter.json",
+      "bytes": 23694,
+      "compressedBytes": 2723,
+      "crc32": "20e7f55d",
+      "sha256": "694836bb6ac0fa2138dab34f9379361521b7f6678caf4a74eb36f242d1e7f82b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_manifest.json",
+      "bytes": 23372,
+      "compressedBytes": 2595,
+      "crc32": "634b2a18",
+      "sha256": "dde17180aa0160038a68373d7bf48806859b77b26c7afa6a34904050bfc33908",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_power.json",
+      "bytes": 24350,
+      "compressedBytes": 3022,
+      "crc32": "4560a68d",
+      "sha256": "b902c04265f153ad8a4e1b5c9c5db4d12bd3cd1718f4c7fbb780c071c87c3a64",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_purge.json",
+      "bytes": 24178,
+      "compressedBytes": 2953,
+      "crc32": "d12f7ddd",
+      "sha256": "2bb9804e4eabc6babd8d5d9426feb568ebda9ee3e5dd85fa640e4c508c249630",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_return.json",
+      "bytes": 26689,
+      "compressedBytes": 3089,
+      "crc32": "2b9648bb",
+      "sha256": "d7292e0950aa95379a571e08a861063466d1c5d3c6cab1bcd40bdae520a8a7b8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_civil_start.json",
+      "bytes": 23101,
+      "compressedBytes": 2440,
+      "crc32": "ca738a51",
+      "sha256": "fc4d9fe8e74d17dd38ec0b1b99b17baec522ee76cff0a4e817ca0e3a88ade7c2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5civil_complete.json",
+      "bytes": 31047,
+      "compressedBytes": 4183,
+      "crc32": "bbb022c2",
+      "sha256": "6eceadadb9ed1aef156ddd4c3fbbad20abed380a73b474b33d16e4563bef5566",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/01_titre.jpg",
+      "bytes": 101934,
+      "compressedBytes": 93319,
+      "crc32": "1be4a7ef",
+      "sha256": "ee7bb3899e21c3151f9869e87b7feb5c0f215ac15afd971ae3270e1b1788d64b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/02_arrivee.jpg",
+      "bytes": 155380,
+      "compressedBytes": 144728,
+      "crc32": "62588991",
+      "sha256": "afe96152ccf557426fe55406e88dd69de68406df6cdd7f21de769f01b6452a77",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/03_registre_avant.jpg",
+      "bytes": 115154,
+      "compressedBytes": 90709,
+      "crc32": "aedefa96",
+      "sha256": "d58d1c2193951eb7ac5a9839f2c5189ce90c29ca0159af9ec2e8580e2622113e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/04_carte_48_lieux.jpg",
+      "bytes": 117184,
+      "compressedBytes": 92893,
+      "crc32": "b2b7ee30",
+      "sha256": "d5a00e227f3308b2bbb576f7925e2c16be4ffccd4d18e4740fc6f3933a8248fd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/05_relais_newt.jpg",
+      "bytes": 162825,
+      "compressedBytes": 151371,
+      "crc32": "235b338d",
+      "sha256": "cd3c6bb11fe6f80aa1c905e00ce63db1d024b3a7d928c51b0b7806733789f7b8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/06_poste_departs.jpg",
+      "bytes": 146201,
+      "compressedBytes": 134638,
+      "crc32": "7e81bee7",
+      "sha256": "8c3a2ee9a80c1e130f0ea6e65d6568eba893095d010b911708c2a7aac1c852dd",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/07_magasin_lena.jpg",
+      "bytes": 152058,
+      "compressedBytes": 140903,
+      "crc32": "07f98430",
+      "sha256": "c010e05e63f6d8e2f48a06f47eb59e02ca02a3952a2fff208d5252a7259d05f6",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/08_traction_configuration.jpg",
+      "bytes": 161601,
+      "compressedBytes": 150080,
+      "crc32": "f6bb29da",
+      "sha256": "0ba226a895842284c20c633a63181ec0f6926a2a56bb75de40eb75db32e70f0e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/09_plan_traction.jpg",
+      "bytes": 72783,
+      "compressedBytes": 52449,
+      "crc32": "4ff77b6b",
+      "sha256": "288e5a8bb982d4e28d22778bcd8593b3d5c3b6d9fd8abe257364f37addbe61e7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/10_purge_active.jpg",
+      "bytes": 169502,
+      "compressedBytes": 157555,
+      "crc32": "45453024",
+      "sha256": "2c6cd4bba8ebaf3563c77a71915cd9af031080cedfb122fb367394cc5cf80954",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/11_depart_partiel.jpg",
+      "bytes": 57168,
+      "compressedBytes": 45037,
+      "crc32": "e6f4dc5a",
+      "sha256": "b5139f4fa4986922b88a4bfcdb54f0dc7aad5b9c815ea2b0d8f2a4635a05cd3d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/12_convoi_partiel.jpg",
+      "bytes": 145161,
+      "compressedBytes": 133910,
+      "crc32": "10dc1d49",
+      "sha256": "4b2e265b3242ef30fb8d5f6352bd325df95b5812d90f43954d22873d83945774",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/13_groupe_au_quai.jpg",
+      "bytes": 150693,
+      "compressedBytes": 139248,
+      "crc32": "7452194f",
+      "sha256": "9db22146ac57c3210d81a6cbafe384fca05e0c96e79e6a2d0b1d788b13457a66",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/14_convoi_embarque.jpg",
+      "bytes": 145943,
+      "compressedBytes": 134528,
+      "crc32": "fb55960b",
+      "sha256": "cf0c298001a4382f7945e0d14530ab7c3770f2dbfcbc0c75e99b91efdec13f57",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/15_quai_apres_depart.jpg",
+      "bytes": 146783,
+      "compressedBytes": 135540,
+      "crc32": "614eb8b0",
+      "sha256": "5a61c6b7fff5665be632cc79c217906e4d338c1dd4cbc7bcb56debc808078df9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/16_bilan_transit.jpg",
+      "bytes": 113331,
+      "compressedBytes": 88353,
+      "crc32": "030c6cd3",
+      "sha256": "d08d886f5ce9c009999486c088e325fbfee70437ff6da39d32435b962549df14",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/17_fin_avec_civils.jpg",
+      "bytes": 92109,
+      "compressedBytes": 78269,
+      "crc32": "aca1ec64",
+      "sha256": "b6b373dceeb1508b1a6a5426890ee815845c8475da855ca51a60daf43fb6ac48",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/18_mobile_newt.jpg",
+      "bytes": 47053,
+      "compressedBytes": 43782,
+      "crc32": "8ac84eeb",
+      "sha256": "7479ff07f022b1f06adab2299ed9e18befa2fffeeaa35b1a209d4a1796b7255d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/19_mobile_registre.jpg",
+      "bytes": 50061,
+      "compressedBytes": 44414,
+      "crc32": "3950f8a0",
+      "sha256": "04d465eace109f5a8691ff09e056a011020c3e023e81867a9239cb89b984e0e9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/20_mobile_carte.jpg",
+      "bytes": 40012,
+      "compressedBytes": 33898,
+      "crc32": "19d6359c",
+      "sha256": "fb53e0b158ebcbf8d52ec40359b261018870e12fce240f2f6c4a4e589bcd240b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_42.jpg",
+      "bytes": 142655,
+      "compressedBytes": 131340,
+      "crc32": "a7865868",
+      "sha256": "ed842c8ba6484d04b8d4bb56d580601302cb74acbcda2b93ebdc3b8af7599205",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_43.jpg",
+      "bytes": 156482,
+      "compressedBytes": 145666,
+      "crc32": "8759a147",
+      "sha256": "8f80b1519bb16fc0cf99cd8fde1a547786c72ad9fa4081f3a21c53bf7d7a9fc9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_44.jpg",
+      "bytes": 154643,
+      "compressedBytes": 143498,
+      "crc32": "c581c0d7",
+      "sha256": "c75b482992b59d99a9de34e530dd9d9579673938a95ee6e5d86b4e7ffb80d572",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_45.jpg",
+      "bytes": 159249,
+      "compressedBytes": 147626,
+      "crc32": "6cfa8c5f",
+      "sha256": "e3078efe6ab4323c1c993d26cea35194b677658eb5ca1217611358e31b78f2fb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_46.jpg",
+      "bytes": 145964,
+      "compressedBytes": 134495,
+      "crc32": "2d5e79b1",
+      "sha256": "f123a341bb3d2b82cfebc931d69def3d3f4b00210d37147783a5d540f74693b8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/qa/v5screens/room_47.jpg",
+      "bytes": 150114,
+      "compressedBytes": 139171,
+      "crc32": "58c89fb3",
+      "sha256": "c6adc9aa31bcde448a6c09dd81d4dbbcde2c8e2483608f8d2796e0aff548d13e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/requirements-dev.txt",
+      "bytes": 33,
+      "compressedBytes": 35,
+      "crc32": "442910d6",
+      "sha256": "2b2d72ac0940e74b20167fffac17de42f768c8851491460c556cccd71bc0b2c4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/browser_v5_qa.py",
+      "bytes": 17144,
+      "compressedBytes": 6213,
+      "crc32": "34a44000",
+      "sha256": "89f82de7628495c6c766cd7c62e2b894676bc21df02833a4e87e7067b6aaa6f2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/campaign-v5.test.cjs",
+      "bytes": 6552,
+      "compressedBytes": 2849,
+      "crc32": "48518380",
+      "sha256": "eb646211581969c06464ecae76e478bfee310a29bfd560ff42be6acf8eed2b91",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/campaign-v5civil.test.cjs",
+      "bytes": 8516,
+      "compressedBytes": 3460,
+      "crc32": "84569b12",
+      "sha256": "a8097ecef12bdeca95a0255d7108d9922b0cb3e2798a81da1501206d75cb9751",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/fixtures/data-v4.json",
+      "bytes": 301733,
+      "compressedBytes": 29509,
+      "crc32": "ef4a7c20",
+      "sha256": "4bb9735e1a04e4b807e2b469400fe1e3c6819d86d2e823787ef4a78e2b44d490",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/installer-v2.test.mjs",
+      "bytes": 5804,
+      "compressedBytes": 1738,
+      "crc32": "e508cb60",
+      "sha256": "8422fa5bfa10b902a35601fc7cac0a396d056da31637c6a3668c9b7e3fb7e4c7",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/installer.test.mjs",
+      "bytes": 3628,
+      "compressedBytes": 1209,
+      "crc32": "648796ca",
+      "sha256": "c65e1271243a6f3165c7a4a3109f5fa97c713b410d30b82ea39f2328a637079c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/regression-v5.test.cjs",
+      "bytes": 18622,
+      "compressedBytes": 5727,
+      "crc32": "bad219f1",
+      "sha256": "99b846e2fae7abcc67802d7ffc17054fdd24785729c04e78185654a8851d0b4d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tests/systems-v5.test.cjs",
+      "bytes": 22966,
+      "compressedBytes": 7085,
+      "crc32": "098369eb",
+      "sha256": "0a0ebc78b872b5af426e33962ebab23f133a923aaa855c8ba2bc6712066ea5cc",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/build_docs_v5.py",
+      "bytes": 31580,
+      "compressedBytes": 12806,
+      "crc32": "08f94d82",
+      "sha256": "f2d5b9843360ca14f0801107d6bd6f58e149333beea73541e29a0f7bccf58b7a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/build_standalone.py",
+      "bytes": 740,
+      "compressedBytes": 431,
+      "crc32": "1def1f2a",
+      "sha256": "d3483a0415ef54d07e8eee7285e7953bf36fc124d4590466ac4a06ad7a2e87c9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/check_doc_layout_v5.py",
+      "bytes": 1755,
+      "compressedBytes": 876,
+      "crc32": "2b73c7d8",
+      "sha256": "f46869d99a9ca8c0c7c316b3c411fd6ee9eaf4239fd2b2d76023de4cbab9ba6a",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/package_v5.py",
+      "bytes": 3508,
+      "compressedBytes": 1568,
+      "crc32": "55082ecd",
+      "sha256": "e4ed8c0c3ac02b31c97dc8ba129235f47582b2dc351f7f308f5b7fd75788b311",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/run_browser_v5.py",
+      "bytes": 310,
+      "compressedBytes": 225,
+      "crc32": "69185427",
+      "sha256": "213c2baa96806b5415ed5a0d010386c7309d7186300ed7d538778ce56061e4eb",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/run_survival_v5.cjs",
+      "bytes": 144,
+      "compressedBytes": 117,
+      "crc32": "5820471f",
+      "sha256": "c0ad1de1c7456ba7367f389d0cf410b40572c065a107517b7c4b666aced22e48",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V5/tools/verify_docs_v5.py",
+      "bytes": 3433,
+      "compressedBytes": 1640,
+      "crc32": "3864ae8a",
+      "sha256": "fdf96cfd54bc9e59bae0037f37b37324d418098a8c537c42c2e304c3ad72f543",
+      "directory": false,
+      "mode": 33188
+    }
+  ]
+}
