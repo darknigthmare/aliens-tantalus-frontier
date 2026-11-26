@@ -16,6 +16,8 @@ PR #72 préserve six ZIP originaux v0.1 à v0.6 : 174 243 911 octets, 20 fragmen
 
 [PR #72 de préservation](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/72) ; [manifeste des six archives](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/MANIFEST.json).
 
+La tête `ed08d329d3e037fbe1db4490896dfde6afde0ee7` complète cette sauvegarde par une [admission fermée des 37 fichiers source](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ed08d329d3e037fbe1db4490896dfde6afde0ee7/scripts/public-40th-source-recovery-20261126.mjs) et de leurs parents exacts, avec tailles et SHA-256 fixes. Les sources restent hors du build et identiques au commit de preuve `8ec16d6448e0833e932294456e3393674a4a79ad`. Les 13 contrôles ciblés de succession et d’admission sont réussis ; aucun succès global de CI ni raccord jouable n’est déduit de cette admission.
+
 Chemins repérés : `dlc/40th-anniversary/`, `archives/40th-anniversary/`.
 
 Voir le [reçu de récupération et le travail restant](RECUPERATION_20261126.md).

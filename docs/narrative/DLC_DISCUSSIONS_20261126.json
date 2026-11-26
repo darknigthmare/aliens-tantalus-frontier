@@ -1179,7 +1179,8 @@
         "archiveBytes": 174243911,
         "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/MANIFEST.json",
         "runtimeIntegratedByRecovery": false,
-        "head": "8ec16d6448e0833e932294456e3393674a4a79ad"
+        "head": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "sourceAdmission": "37 chemins et parents exacts admis comme sources ; tailles et SHA-256 fixes ; exclus du build. Admission au commit ed08d329d3e037fbe1db4490896dfde6afde0ee7."
       },
       "documentEvidence": [
         {
@@ -1858,11 +1859,11 @@
       },
       {
         "number": 72,
-        "head": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "head": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
         "state": "open",
         "draft": true,
         "base": "main",
-        "scope": "Preservation only; source admission required before merge."
+        "scope": "Preservation only; exact source-only admission completed for 37 immutable files and their parents; no runtime activation or overall CI claim."
       },
       {
         "number": 73,
@@ -2171,7 +2172,9 @@
         "pr": 72,
         "commit": "8ec16d6448e0833e932294456e3393674a4a79ad",
         "archiveCount": 6,
-        "originalArchiveBytes": 174243911
+        "originalArchiveBytes": 174243911,
+        "currentHead": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "sourceAdmissionCompleted": true
       },
       {
         "pr": 73,

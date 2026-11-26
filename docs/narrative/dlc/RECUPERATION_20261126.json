@@ -500,7 +500,7 @@
       "originalDocuments": 13,
       "publishedFiles": 37,
       "runtimeIntegratedByRecovery": false,
-      "preciseSourceAdmissionStillRequired": true,
+      "preciseSourceAdmissionStillRequired": false,
       "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8ec16d6448e0833e932294456e3393674a4a79ad/archives/40th-anniversary-recovery-20261126/MANIFEST.json",
       "archives": [
         {
@@ -551,7 +551,20 @@
           "publishedRepresentation": "ordered_verified_fragments",
           "fullArchiveBlobDirectlyPublished": false
         }
-      ]
+      ],
+      "currentHead": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+      "sourceAdmission": {
+        "commit": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "status": "verified_source_only",
+        "admittedFiles": 37,
+        "exactParentDirectories": true,
+        "fixedSizesAndSha256": true,
+        "builtAdmission": false,
+        "targetedTestsPassed": 13,
+        "preservationFilesUnchangedFrom": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "script": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ed08d329d3e037fbe1db4490896dfde6afde0ee7/scripts/public-40th-source-recovery-20261126.mjs",
+        "globalCiClaimed": false
+      }
     },
     "seaSourceRecovery": {
       "pr": 67,
@@ -1710,7 +1723,7 @@
       "sourceArchivesPreserved": true,
       "legacyCommit": "1f39f0f2c41e6a8c80eca4fd5481b92ac372972d",
       "legacyBundleBytes": 256822850,
-      "action": "La PR72 sauve les6archives mais ne restitue pas l’ancien WIP ; admission précise et intégration restent à traiter."
+      "action": "La PR72 sauve les 6 archives et possède une admission fermée des 37 fichiers source ; elle ne restitue pas l’ancien WIP. L’intégration jouable reste à traiter."
     },
     {
       "dlc": "alien-covenant",
