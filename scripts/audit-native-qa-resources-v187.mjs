@@ -18,6 +18,59 @@ const freeze = value => {
   return value;
 };
 
+// Earth V12 continues eight reviewed files from main, via the sprite recovery PR.
+// Earlier endpoints and historical execution evidence remain unchanged.
+export const EARTH_MAIN_BASELINE_V12 = '07ee99d56480780044c74d4f1eb11f31b07fef13';
+export const EARTH_MAIN_SUCCESSORS_V12 = freeze({
+  "index.html": {
+    "previousSha256": "875eb3c528c2fef7219372ae0eeb3782d72b30fbc7568bea131fa7496b4a49b3",
+    "currentSha256": "baace6bb7f68efedb9a27c7b45207f6a75c9c57896c3a5ad1959cf8df2cf2592"
+  },
+  "package.json": {
+    "previousSha256": "a08d5461e62e106d581f1de31647727f11825636e56aa1af767a2746afb8e005",
+    "currentSha256": "d73ce1f5f3975b9c955a3a6e0f279292a87e6a2aa2291180fe4f6f2589eb8138"
+  },
+  "scripts/build.mjs": {
+    "previousSha256": "eba8f2c08906671478a191547540bfa865b1f29d3564cd4936082f1682739d00",
+    "currentSha256": "23eab088c81322baf5c38ed4f7f5b88042f074be94581b98d6c5594c4049477d"
+  },
+  "scripts/dev.mjs": {
+    "previousSha256": "3c7047f833713dc570242d7e8319a8309522ade1efbf82dcc317c028042e1aad",
+    "currentSha256": "9f394705ff311293317338aad5d8d6787bcbaab96719ec3081a82baa257b2320"
+  },
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "83b843ecfaefb08770258331018d18837628b59f9d86b647b2185be75a01327e",
+    "currentSha256": "f75cc95db720260543bef901af26e55508423193b5e8d3c1ebb96f3184e79aff"
+  },
+  "src/app.js": {
+    "previousSha256": "7a3f989423e18ca0a531ccb50120ab0f074b01652ea0d797495f59299563d0df",
+    "currentSha256": "d7a7f26cd7688198dcbf44da488a339c4fba724b617bf38bcc4b1ba7504f7d85"
+  },
+  "src/title-screen-v61.js": {
+    "previousSha256": "c9d13438e40802b6efbcacb5ff584f6c6e8be92b8801b8e33df11b25a4899120",
+    "currentSha256": "1f6d9c2e3851ae038acab2fbbaaba287d4734ebdeafa01b1068b402a572a2347"
+  },
+  "scripts/qa-title-compositions-v163.py": {
+    "previousSha256": "83a2cea01f17149d8a512c265604b572dac653c704001903989e66b8c94ecdba",
+    "currentSha256": "ae774d99fbb3bdaeedb35d266396670b9e73ef41ec9b625445208ac1200f9d08"
+  }
+});
+export function reviewedEarthMainDigestV12(path, endpoint) {
+  const receipt = EARTH_MAIN_SUCCESSORS_V12[path];
+  if (!receipt) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken Earth main predecessor: ' + path);
+  assert.ok(validHash(receipt.currentSha256), 'Invalid Earth main digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Earth successor must change bytes: ' + path);
+  return receipt.currentSha256;
+}
+export function verifyEarthMainSuccessionV12(readSource = readRepository) {
+  for (const [path, receipt] of Object.entries(EARTH_MAIN_SUCCESSORS_V12)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedEarthMainDigestV12(path, receipt.previousSha256), 'Unreviewed Earth main source bytes: ' + path);
+  }
+  return { successors: Object.keys(EARTH_MAIN_SUCCESSORS_V12).length, historicalEvidenceTransferred: false };
+}
+
 // Aliens 1986 V116 follows the published main endpoint, with its own exact
 // receipts. Earlier Fleuve/Obscura/V187 records retain their original bytes.
 export const ALIENS1986_MAIN_BASELINE_V116 = '334fe15ba0b7e01de277a13bfc025b208163882d';
@@ -54,11 +107,11 @@ export const ALIENS1986_MAIN_SUCCESSORS_V116 = freeze({
 
 export function reviewedAliens1986MainDigestV116(path, endpoint) {
   const receipt = ALIENS1986_MAIN_SUCCESSORS_V116[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedEarthMainDigestV12(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken Aliens main predecessor: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid Aliens main digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens main successor must change bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedEarthMainDigestV12(path, receipt.currentSha256);
 }
 
 export function verifyAliens1986MainSuccessionV116(readSource = readRepository) {

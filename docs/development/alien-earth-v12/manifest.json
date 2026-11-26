@@ -1,17 +1,19 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "project": "Aliens Tantalus",
   "dlc": "Alien: Earth",
-  "checkpoint": "V12 — sprites et reprise technique",
+  "edition": "V12 — intégration et sprites",
   "date": "2026-11-26",
-  "status": "draft-asset-recovery-runtime-incomplete",
+  "status": "integration-implemented-final-validation-pending",
+  "completedImages": 15,
+  "generatedBytesTotal": 22676032,
   "originalGenerationBytesPreserved": true,
-  "completedImages": 8,
-  "generatedBytesTotal": 12175758,
-  "runtimePublished": false,
+  "runtimeSourceIncluded": true,
+  "productionDeployment": false,
   "finalBrowserValidation": false,
   "screenExactCertification": false,
   "baseCommit": "07ee99d56480780044c74d4f1eb11f31b07fef13",
+  "recoveryCheckpointCommit": "c3fd0cdc72c58a9a4fd89684c00dc64125cee80d",
   "assets": [
     {
       "id": "mcsx",
@@ -29,34 +31,38 @@
         "fx-armory-mcsx"
       ],
       "sourceClass": "official-screen-photograph",
-      "localHookState": "implemented-not-final-tested",
       "alpha128XYWH": [
-        34,
-        51,
-        1713,
-        784
+        35,
+        54,
+        1709,
+        781
       ],
       "scope": "Fusil autonome, profil droit. Aucun autre armement remplacé.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world-and-catalogue",
+      "renderer": {
+        "bounds": [
+          34,
+          51,
+          1713,
+          784
+        ],
+        "source": [
           26,
           43,
           1729,
           800
         ],
-        "pivotXY": [
+        "pivot": [
           540,
           390
         ],
-        "maxVisibleSize": [
-          79,
-          40
-        ],
-        "state": "written-locally-unverified"
+        "exact": false
       }
     },
     {
@@ -75,34 +81,38 @@
         "weta-species19"
       ],
       "sourceClass": "official-concept-art",
-      "localHookState": "implemented-not-final-tested",
       "alpha128XYWH": [
-        73,
-        80,
-        2032,
-        559
+        74,
+        81,
+        2030,
+        556
       ],
       "scope": "Profil tick adulte uniquement. Une pose ; animation non générée.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world",
+      "renderer": {
+        "bounds": [
+          73,
+          80,
+          2032,
+          559
+        ],
+        "source": [
           65,
           72,
           2048,
           575
         ],
-        "pivotXY": [
+        "pivot": [
           1086,
           639
         ],
-        "maxVisibleSize": [
-          78,
-          42
-        ],
-        "state": "written-locally-unverified"
+        "exact": false
       }
     },
     {
@@ -122,7 +132,6 @@
         "fx-armory-mcsx"
       ],
       "sourceClass": "official-screen-photographs",
-      "localHookState": "implemented-not-final-tested",
       "alpha128XYWH": [
         198,
         24,
@@ -132,22 +141,29 @@
       "scope": "Joe immobile, MCS-X, sans casque. Fusil inclus dans le PNG ; aucun doublon. Exclure déplacement, accroupissement, conduit bas, portage et costume de chapitre d’index 6.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world-and-catalogue",
+      "renderer": {
+        "bounds": [
+          198,
+          24,
+          650,
+          1495
+        ],
+        "source": [
           190,
           16,
           666,
           1511
         ],
-        "pivotXY": [
+        "pivot": [
           462,
           1519
         ],
-        "visibleHeight": 122,
-        "includesWeapon": "mcsx",
-        "state": "written-locally-unverified"
+        "exact": false
       }
     },
     {
@@ -166,7 +182,6 @@
         "fx-zoo-set"
       ],
       "sourceClass": "official-production-set-photograph",
-      "localHookState": "implemented-not-final-tested",
       "alpha128XYWH": [
         186,
         53,
@@ -176,20 +191,29 @@
       "scope": "R18-0 et R18-4 uniquement, trois cylindres sur support continu ; conserver l’emprise physique.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world",
+      "renderer": {
+        "bounds": [
+          186,
+          53,
+          511,
+          1640
+        ],
+        "source": [
           178,
           45,
           527,
           1656
         ],
-        "pivotXY": [
+        "pivot": [
           441.5,
           1693
         ],
-        "state": "written-locally-unverified"
+        "exact": false
       }
     },
     {
@@ -208,7 +232,6 @@
         "fx-zoo-set"
       ],
       "sourceClass": "official-production-set-photograph",
-      "localHookState": "implemented-not-final-tested",
       "alpha128XYWH": [
         407,
         49,
@@ -218,20 +241,29 @@
       "scope": "R18-wall1 et R18-wall3 uniquement. Support mural original y210–267 ; pas de substitution de R18-1 au premier plan.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world",
+      "renderer": {
+        "bounds": [
+          407,
+          49,
+          762,
+          910
+        ],
+        "source": [
           399,
           41,
           778,
           926
         ],
-        "pivotXY": [
+        "pivot": [
           788,
           959
         ],
-        "state": "written-locally-unverified"
+        "exact": false
       }
     },
     {
@@ -250,30 +282,38 @@
         "fx-zoo-set"
       ],
       "sourceClass": "official-production-set-photograph-with-inferred-lower-structure",
-      "localHookState": "pending",
       "alpha128XYWH": [
         41,
         146,
         1691,
         627
       ],
-      "scope": "Prévu seulement pour R18-island, largeur195/profondeur52/hauteur75. Le bas de la table n’est pas intégralement visible dans la référence.",
+      "scope": "R18-island seulement, largeur 195, profondeur 52, hauteur 75. Le bas de la table n’est pas intégralement visible dans la référence.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world",
+      "renderer": {
+        "bounds": [
+          41,
+          146,
+          1691,
+          627
+        ],
+        "source": [
           33,
           138,
           1707,
           643
         ],
-        "pivotXY": [
+        "pivot": [
           886.5,
           773
         ],
-        "state": "proposed-not-applied"
+        "exact": false
       }
     },
     {
@@ -292,30 +332,38 @@
         "fx-zoo-set"
       ],
       "sourceClass": "official-production-set-photograph",
-      "localHookState": "pending",
       "alpha128XYWH": [
         96,
         82,
         895,
         1306
       ],
-      "scope": "Prévu comme décor mural R18, hors panneau de nom, portes et volumes de collision. Placement à vérifier en jeu.",
+      "scope": "Décor mural R18, centré à x450 et posé à y300 ; hors panneau de nom, portes et volumes de collision.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world",
+      "renderer": {
+        "bounds": [
+          96,
+          82,
+          895,
+          1306
+        ],
+        "source": [
           88,
           74,
           911,
           1322
         ],
-        "pivotXY": [
+        "pivot": [
           543.5,
           1388
         ],
-        "state": "proposed-not-applied"
+        "exact": false
       }
     },
     {
@@ -334,7 +382,6 @@
         "fx-arthur"
       ],
       "sourceClass": "official-character-portrait-with-inferred-lower-clothes",
-      "localHookState": "pending",
       "alpha128XYWH": [
         301,
         11,
@@ -344,28 +391,484 @@
       "scope": "Arthur sain immobile uniquement. Le portrait ne documente pas entièrement le pantalon et les chaussures. Exclure explicitement eye_host.",
       "screenExact": false,
       "animationFrames": 1,
-      "githubRuntimeHookState": "not-in-this-checkpoint",
-      "alphaBoundsMeasurement": "alpha >= 128, measured locally before execution outage; XYWH; not a modified PNG",
-      "localRendererParameters": {
-        "sourceXYWH": [
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "useSurface": "world-and-catalogue",
+      "renderer": {
+        "bounds": [
+          301,
+          11,
+          404,
+          1521
+        ],
+        "source": [
           293,
           3,
           420,
           1533
         ],
-        "pivotXY": [
+        "pivot": [
           506,
           1532
         ],
-        "state": "proposed-not-applied"
+        "exact": false
+      }
+    },
+    {
+      "id": "wendy-idle",
+      "label": "Wendy — tenue de sauvetage",
+      "kind": "character",
+      "referenceKeys": [
+        "d23-wendy",
+        "d23-group"
+      ],
+      "scope": "C03/index2 seulement, idle debout et mains libres ; joueur et aperçu. Les actions et le massicot gardent leur rendu animé.",
+      "useSurface": "world-and-catalogue",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/wendy-idle.png",
+      "bytes": 1635742,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "7e0bb40b9b67f78f52ea79fe86ef1941a4e7ca8c78e468a47244d4393d4e4fe8",
+      "gitBlobSha": "e9fc2c6762b43fded620c2de42f58110bb6c0496",
+      "alpha128XYWH": [
+        265,
+        23,
+        428,
+        1494
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          265,
+          23,
+          428,
+          1494
+        ],
+        "source": [
+          257,
+          15,
+          444,
+          1510
+        ],
+        "pivot": [
+          479,
+          1517
+        ],
+        "exact": false
+      }
+    },
+    {
+      "id": "kirsh-idle",
+      "label": "Kirsh — tenue grise",
+      "kind": "character",
+      "referenceKeys": [
+        "fx-kirsh",
+        "d23-group"
+      ],
+      "scope": "Catalogue et sélecteur idle sain sans arme. Aucune tâche talk ne fait apparaître ce sprite comme PNJ dans la campagne actuelle.",
+      "useSurface": "catalogue",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/kirsh-idle.png",
+      "bytes": 1597729,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "5e6104a737c4e9e33d79576605b2bafc75de35f5f811b57124d10bac6fabba79",
+      "gitBlobSha": "89c24d70734183c9e491a553c486b313ab7c55af",
+      "alpha128XYWH": [
+        276,
+        24,
+        436,
+        1501
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          276,
+          24,
+          436,
+          1501
+        ],
+        "source": [
+          268,
+          16,
+          452,
+          1517
+        ],
+        "pivot": [
+          488,
+          1525
+        ],
+        "exact": false
+      }
+    },
+    {
+      "id": "curly-idle",
+      "label": "Curly — tenue de sauvetage",
+      "kind": "character",
+      "referenceKeys": [
+        "fx-curly",
+        "d23-group"
+      ],
+      "scope": "Catalogue C03/index2, idle mains libres. La tâche talk existante est en R21/C06 : ce costume C03 ne la remplace pas.",
+      "useSurface": "catalogue",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/curly-idle.png",
+      "bytes": 1593251,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "6a70201431f6de776e85fe0a37e55e6fb41f17ff6716dc10d65208e686290e9e",
+      "gitBlobSha": "8ead382a699bdeedcf84bcbdfb9f363a2388e1a3",
+      "alpha128XYWH": [
+        285,
+        20,
+        420,
+        1507
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          285,
+          20,
+          420,
+          1507
+        ],
+        "source": [
+          277,
+          12,
+          436,
+          1523
+        ],
+        "pivot": [
+          485,
+          1527
+        ],
+        "exact": false
+      }
+    },
+    {
+      "id": "nibs-idle",
+      "label": "Nibs — tenue de sauvetage",
+      "kind": "character",
+      "referenceKeys": [
+        "fx-nibs",
+        "d23-group"
+      ],
+      "scope": "Catalogue C03/index2, idle mains libres. Aucun PNJ talk ou survivant Nibs présent dans les données actuelles.",
+      "useSurface": "catalogue",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/nibs-idle.png",
+      "bytes": 1586765,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "e3047e1fb95f2ff5fc21173b990be09c897625e64b9c21131a19f28671c6cbb1",
+      "gitBlobSha": "7e9bdc2b261aa884cc7117063dc167c18b1134df",
+      "alpha128XYWH": [
+        286,
+        19,
+        399,
+        1504
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          286,
+          19,
+          399,
+          1504
+        ],
+        "source": [
+          278,
+          11,
+          415,
+          1520
+        ],
+        "pivot": [
+          478,
+          1523
+        ],
+        "exact": false
+      }
+    },
+    {
+      "id": "zoo-wall-light",
+      "label": "Zoo — applique allumée à deux bandes",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "scope": "Référence visuelle et aperçu de validation. Le sélecteur alimenté est prêt, mais R18 reste intrinsèquement hors tension.",
+      "useSurface": "reference-preview",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-wall-light.png",
+      "bytes": 1384241,
+      "width": 1774,
+      "height": 887,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "9a2997277e9ae4f59845443d588a8442c393c8e0c9b990e66ae71f62acbfa47c",
+      "gitBlobSha": "a1a856377ec5dc89f0fc9f23241d952dbb77ae87",
+      "alpha128XYWH": [
+        115,
+        134,
+        1544,
+        655
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          115,
+          134,
+          1544,
+          655
+        ],
+        "source": [
+          107,
+          126,
+          1560,
+          671
+        ],
+        "pivot": [
+          887,
+          789
+        ],
+        "exact": false
+      },
+      "state": "powered-reference"
+    },
+    {
+      "id": "zoo-wall-light-off",
+      "label": "Zoo — applique éteinte à deux bandes",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "scope": "État réellement utilisé sur R18-wall0, R18-wall2 et R18-wall4, sans modifier alimentation ni collisions.",
+      "useSurface": "world",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-wall-light-off.png",
+      "bytes": 1490200,
+      "width": 1774,
+      "height": 887,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "9a26bbd91951a38664b576343af5c38ec2ad31c67bfcfc7b697f1e0497a52e36",
+      "gitBlobSha": "cbdcf912b807d9dc6e79e045b75ed8dae398481a",
+      "alpha128XYWH": [
+        113,
+        131,
+        1548,
+        657
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          113,
+          131,
+          1548,
+          657
+        ],
+        "source": [
+          105,
+          123,
+          1564,
+          673
+        ],
+        "pivot": [
+          887,
+          788
+        ],
+        "exact": false
+      },
+      "variantOf": "zoo-wall-light",
+      "state": "unpowered"
+    },
+    {
+      "id": "zoo-pipette",
+      "label": "Zoo — pipette et support",
+      "kind": "prop",
+      "referenceKeys": [
+        "fx-zoo-set"
+      ],
+      "scope": "Décoration posée sur R18-island lorsque la table raster est dessinée ; aucun nouveau volume de collision.",
+      "useSurface": "world",
+      "sourceClass": "official-photographs-with-adapted-pose-or-hidden-details",
+      "screenExact": false,
+      "animationFrames": 1,
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-pipette.png",
+      "bytes": 1212346,
+      "width": 1024,
+      "height": 1536,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "sha256": "2ff27f16aade9a5a201b7f4021954c32b6d609e69b5b7a26ada11b04c6f6a8d0",
+      "gitBlobSha": "c0a7b833cf05975ef010bfdcb52c240312c40b0a",
+      "alpha128XYWH": [
+        310,
+        63,
+        378,
+        1415
+      ],
+      "sourcePixelsModifiedAfterGeneration": false,
+      "runtimeHookState": "implemented-in-this-revision",
+      "visualValidation": "final-15-asset-pass-pending",
+      "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
+      "renderer": {
+        "bounds": [
+          310,
+          63,
+          378,
+          1415
+        ],
+        "source": [
+          302,
+          55,
+          394,
+          1431
+        ],
+        "pivot": [
+          499,
+          1478
+        ],
+        "exact": false
       }
     }
   ],
-  "rejectedGenerations": [
+  "references": [
     {
-      "id": "xenomorph-maginot",
-      "status": "tool-rejected-no-image",
-      "runtimeFallback": "existing Canvas renderer"
+      "id": "fx-armory-mcsx",
+      "label": "MCS-X",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
+      "local": "fx_mcsx_screen.png",
+      "kind": "photographie officielle FX",
+      "sourceImageSha256": "90c5be97a8ff84e60df929bc9f8de8d60fa06752758fabab62fd663697da30c7",
+      "sourceImageBytes": 89790
+    },
+    {
+      "id": "fx-hermit",
+      "label": "Hermit / équipe SAR",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
+      "local": "fx_hermit_sar_screen.png",
+      "kind": "photographie officielle FX",
+      "sourceImageSha256": "7788c0f05c69bc79285c05bbca833960f11a7926f7d6d82608e67c60ce3cb4b1",
+      "sourceImageBytes": 52580
+    },
+    {
+      "id": "fx-zoo-set",
+      "label": "Zoo Lab",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+      "local": "fx_zoo_lab_set.png",
+      "kind": "photographie officielle du décor",
+      "sourceImageSha256": "275a41d69ffb42015c0ebfdeeca440f154046b4f3a1f907c1592f694587881d5",
+      "sourceImageBytes": 295723
+    },
+    {
+      "id": "fx-arthur",
+      "label": "Arthur Sylvia",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/characters/david-rysdahl-arthur-sylvia",
+      "local": "fx_arthur_portrait.jpg",
+      "kind": "portrait officiel FX",
+      "sourceImageSha256": "324eaae083d187646f9cb583ecf026b07ef50d28770efcd48e6a09f62ec5a523",
+      "sourceImageBytes": 102975
+    },
+    {
+      "id": "weta-species19",
+      "label": "Species 19 / cycle de la tique",
+      "page": "https://www.wetaworkshop.com/projects/alien-earth",
+      "local": "weta_species19_lifecycle_concept.webp",
+      "kind": "concept officiel Wētā Workshop",
+      "sourceImageSha256": "7d2b1dd558d9b204760c096edc5c1db96e9ef692e0b3c9c2adc946b461d52c27",
+      "sourceImageBytes": 47928
+    },
+    {
+      "id": "d23-group",
+      "label": "Groupe des hybrides et Kirsh",
+      "page": "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/",
+      "local": "d23_lost_boys_full_group.jpg",
+      "kind": "official-series-publicity-still",
+      "sourceImageSha256": "2e997e5ab8858db761f846f01e3fb473175021bbc92ef1ad9c6f9987d6f923c6",
+      "sourceImageBytes": 349641,
+      "referenceImageRedistributed": false
+    },
+    {
+      "id": "d23-wendy",
+      "label": "Wendy — photo de mission",
+      "page": "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/",
+      "local": "d23_wendy_header.jpg",
+      "kind": "official-series-publicity-still",
+      "sourceImageSha256": "ddf6da67acaca8fc260ec29835c2e5c32183da815b80e6f4503861eb1074fa27",
+      "sourceImageBytes": 159761,
+      "referenceImageRedistributed": false
+    },
+    {
+      "id": "fx-kirsh",
+      "label": "Kirsh — portrait",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/characters",
+      "local": "fx_kirsh_portrait.jpg",
+      "kind": "official-character-portrait",
+      "sourceImageSha256": "14ae4b41117ac15cf69854ab58415d0a99f8bf5a4f718e71f9bc63636a852c77",
+      "sourceImageBytes": 70565,
+      "referenceImageRedistributed": false
+    },
+    {
+      "id": "fx-curly",
+      "label": "Curly — portrait",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/characters",
+      "local": "fx_curly_portrait.jpg",
+      "kind": "official-character-portrait",
+      "sourceImageSha256": "e977fda1c2c8088211a3cadb9b11c77e248cae685c750705abf2548f38236d5d",
+      "sourceImageBytes": 70970,
+      "referenceImageRedistributed": false
+    },
+    {
+      "id": "fx-nibs",
+      "label": "Nibs — portrait",
+      "page": "https://www.fxnetworks.com/shows/alien-earth/characters",
+      "local": "fx_nibs_portrait.jpg",
+      "kind": "official-character-portrait",
+      "sourceImageSha256": "99ebfa2c94a00a79ab25e75715d2dee2281b436fb9e1a9442c916dc9557e9a38",
+      "sourceImageBytes": 95269,
+      "referenceImageRedistributed": false
     }
   ],
   "originalModule": {
@@ -376,61 +879,47 @@
     "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
     "fileCount": 180,
     "githubCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
-    "githubDirectory": "archives/local-recovery-20261125/alien-earth"
+    "githubDirectory": "archives/local-recovery-20261125/alien-earth",
+    "recoveryReceiptSha256": "e19aa945cb860e57503e41e81c019bb91b40e33198042ebec5c3308d387d199d"
   },
+  "rejectedGenerations": [
+    {
+      "id": "xenomorph-maginot",
+      "status": "tool-rejected-no-image",
+      "runtimeFallback": "existing Canvas renderer"
+    }
+  ],
   "verification": {
-    "pngSignature": "passed-for-all-8-in-cloud-V8",
-    "pngIHDRDimensions": "passed-for-all-8-in-cloud-V8",
-    "pngFormat": "8-bit RGBA for all 8",
-    "sha256": "calculated-from-the-exact-generated-bytes",
-    "sha256ImplementationSelfTests": [
-      "empty input",
-      "abc"
-    ],
-    "localRasterTests": "not-run",
-    "finalBuild": "not-run",
-    "browserGameplay": "not-run"
+    "pngSignature": "all15 checked",
+    "pngIHDRDimensions": "all15 checked",
+    "pngFormat": "RGBA8",
+    "sha256": "calculated from exact PNG bytes",
+    "base8NodeModuleTests": 1240,
+    "base8RealBrowserChecks": 13,
+    "final15NodeTests": {
+      "passed": 1262,
+      "inheritedModule": 1216,
+      "lifecycle": 4,
+      "raster": 30,
+      "integration": 12
+    },
+    "final15Browser": "pending",
+    "historicalSuccession": {
+      "passed": 7
+    }
   },
-  "references": [
+  "history": [
     {
-      "id": "fx-armory-mcsx",
-      "label": "MCS-X",
-      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
-      "image": "https://sdlc-cms-production.fxnetworks.com/2e3164d4-5563-4480-a3f4-d3beff559190.png?imwidth=1440",
-      "local": "fx_mcsx_screen.png",
-      "kind": "photographie officielle FX"
+      "checkpoint": "PR78 initial",
+      "generatedImages": 8,
+      "runtimeCodeIncluded": false,
+      "reason": "Execution environment lost before final integration; original recovery commit retained."
     },
     {
-      "id": "fx-hermit",
-      "label": "Hermit / équipe SAR",
-      "page": "https://www.fxnetworks.com/shows/alien-earth/armory",
-      "image": "https://sdlc-cms-production.fxnetworks.com/23e5f1b0-035a-4f66-a890-99bd0f0cd24d.png?imwidth=1440",
-      "local": "fx_hermit_sar_screen.png",
-      "kind": "photographie officielle FX"
-    },
-    {
-      "id": "fx-zoo-set",
-      "label": "Zoo Lab",
-      "page": "https://www.fxnetworks.com/shows/alien-earth/production-design",
-      "image": "https://sdlc-cms-production.fxnetworks.com/5fa7c790-72ee-403f-a14d-064c3ab6f343.png?imwidth=1440",
-      "local": "fx_zoo_lab_set.png",
-      "kind": "photographie officielle du décor"
-    },
-    {
-      "id": "fx-arthur",
-      "label": "Arthur Sylvia",
-      "page": "https://www.fxnetworks.com/shows/alien-earth/characters/david-rysdahl-arthur-sylvia",
-      "image": "https://sdlc-cms-production.fxnetworks.com/b99fc099-fe86-4a1b-bb7a-4504ebaf9781.jpg?imwidth=1080",
-      "local": "fx_arthur_portrait.jpg",
-      "kind": "portrait officiel FX"
-    },
-    {
-      "id": "weta-species19",
-      "label": "Species 19 / cycle de la tique",
-      "page": "https://www.wetaworkshop.com/projects/alien-earth",
-      "image": "https://www.wetaworkshop.com/web/image/132221-65406052/695_MO_TICK_TickLifeCycle_01_VF,WW.webp",
-      "local": "weta_species19_lifecycle_concept.webp",
-      "kind": "concept officiel Wētā Workshop"
+      "checkpoint": "current continuation",
+      "generatedImages": 15,
+      "runtimeCodeIncluded": true,
+      "note": "V11 restored from verified archive; integration reconstructed; final validation in progress."
     }
   ]
 }

@@ -1,68 +1,35 @@
-# Provenance visuelle — huit PNG Alien: Earth
+# Références visuelles — Alien: Earth V12
 
-Relevé du 26 novembre 2026. Les références ont été téléchargées et inspectées avant l’interruption de l’exécuteur. Les fichiers livrés sont les images générées ; les photographies et concepts sources ne sont pas redistribués dans ce dossier.
+Les photographies et concepts servent de références et ne sont pas redistribués. Les PNG générés sont distincts des images sources. Le manifeste conserve la page primaire, un nom descriptif et l’empreinte des octets de la référence consultée. Les adresses techniques CDN à identifiants opaques restent hors de ce suivi public.
 
-## Correspondances et limites
+## Sources utilisées
 
-| PNG | Référence | Nature et limites |
-|---|---|---|
-| `mcsx.png` | `fx-armory-mcsx` | Arme officielle vue partiellement de trois quarts. Profil généré, surfaces masquées reconstituées. |
-| `species19-adult.png` | `weta-species19` | Forme adulte sélectionnée dans un concept de cycle biologique. Le concept ne certifie pas le résultat final à l’écran. |
-| `joe-mcsx-idle.png` | `fx-hermit` + `fx-armory-mcsx` | Apparence d’Hermit et arme composées depuis deux photos. La pose armée n’est pas celle de la photo où il tient une lampe. |
-| `zoo-cylinder.png` | `fx-zoo-set` | Cylindre éclairé de jaune, isolé du décor ; faces cachées adaptées. |
-| `zoo-console.png` | `fx-zoo-set` | Écran bleu et commandes visibles ; marquages illisibles non certifiés. |
-| `zoo-lab-table.png` | `fx-zoo-set` | Table inox ; dessous et supports partiellement cachés inférés. |
-| `zoo-cabinet.png` | `fx-zoo-set` | Meuble vitré isolé ; côtés et volumes masqués reconstitués. |
-| `arthur-idle.png` | `fx-arthur` | Portrait utile pour le visage et le haut de tenue. Jambes, chaussures et pose complète inférées. |
+| Référence | Page primaire | Nature | Image / SHA‑256 |
+| --- | --- | --- | --- |
+| MCS-X | [Source](https://www.fxnetworks.com/shows/alien-earth/armory) | photographie officielle FX | fx_mcsx_screen.png / 90c5be97a8ff84e60df929bc9f8de8d60fa06752758fabab62fd663697da30c7 |
+| Hermit / équipe SAR | [Source](https://www.fxnetworks.com/shows/alien-earth/armory) | photographie officielle FX | fx_hermit_sar_screen.png / 7788c0f05c69bc79285c05bbca833960f11a7926f7d6d82608e67c60ce3cb4b1 |
+| Zoo Lab | [Source](https://www.fxnetworks.com/shows/alien-earth/production-design) | photographie officielle du décor | fx_zoo_lab_set.png / 275a41d69ffb42015c0ebfdeeca440f154046b4f3a1f907c1592f694587881d5 |
+| Arthur Sylvia | [Source](https://www.fxnetworks.com/shows/alien-earth/characters/david-rysdahl-arthur-sylvia) | portrait officiel FX | fx_arthur_portrait.jpg / 324eaae083d187646f9cb583ecf026b07ef50d28770efcd48e6a09f62ec5a523 |
+| Species 19 / cycle de la tique | [Source](https://www.wetaworkshop.com/projects/alien-earth) | concept officiel Wētā Workshop | weta_species19_lifecycle_concept.webp / 7d2b1dd558d9b204760c096edc5c1db96e9ef692e0b3c9c2adc946b461d52c27 |
+| Groupe des hybrides et Kirsh | [Source](https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/) | official-series-publicity-still | d23_lost_boys_full_group.jpg / 2e997e5ab8858db761f846f01e3fb473175021bbc92ef1ad9c6f9987d6f923c6 |
+| Wendy — photo de mission | [Source](https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/) | official-series-publicity-still | d23_wendy_header.jpg / ddf6da67acaca8fc260ec29835c2e5c32183da815b80e6f4503861eb1074fa27 |
+| Kirsh — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_kirsh_portrait.jpg / 14ae4b41117ac15cf69854ab58415d0a99f8bf5a4f718e71f9bc63636a852c77 |
+| Curly — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_curly_portrait.jpg / e977fda1c2c8088211a3cadb9b11c77e248cae685c750705abf2548f38236d5d |
+| Nibs — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_nibs_portrait.jpg / 99ebfa2c94a00a79ab25e75715d2dee2281b436fb9e1a9442c916dc9557e9a38 |
+| Groupe des hybrides et Kirsh | [Source](https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/) | official-series-publicity-still | d23_lost_boys_full_group.jpg / 2e997e5ab8858db761f846f01e3fb473175021bbc92ef1ad9c6f9987d6f923c6 |
+| Wendy — photo de mission | [Source](https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/) | official-series-publicity-still | d23_wendy_header.jpg / ddf6da67acaca8fc260ec29835c2e5c32183da815b80e6f4503861eb1074fa27 |
+| Kirsh — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_kirsh_portrait.jpg / 14ae4b41117ac15cf69854ab58415d0a99f8bf5a4f718e71f9bc63636a852c77 |
+| Curly — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_curly_portrait.jpg / e977fda1c2c8088211a3cadb9b11c77e248cae685c750705abf2548f38236d5d |
+| Nibs — portrait | [Source](https://www.fxnetworks.com/shows/alien-earth/characters) | official-character-portrait | fx_nibs_portrait.jpg / 99ebfa2c94a00a79ab25e75715d2dee2281b436fb9e1a9442c916dc9557e9a38 |
 
-Les cinq références primaires ci-dessous portent chacune leur catégorie. Une photographie de décor, un portrait et un concept ne constituent pas le même type de preuve.
+## Limites de fidélité
 
-## fx-armory-mcsx — MCS-X
+Le groupe officiel D23 fournit les tenues de mission de Wendy, Kirsh, Curly et Nibs ; les portraits FX précisent les visages. L’attente de trois quarts, les parties occultées et certains bouts de chaussures sont adaptés. La photo de Joe avec sa lampe est combinée à une référence séparée du MCS-X pour sa pose armée.
 
-- [Page primaire](https://www.fxnetworks.com/shows/alien-earth/armory).
-- [Image exacte utilisée](https://sdlc-cms-production.fxnetworks.com/2e3164d4-5563-4480-a3f4-d3beff559190.png?imwidth=1440).
-- Nature : photographie officielle FX.
-- Nom de référence local : `fx_mcsx_screen.png`.
+La photographie FX Zoo Lab guide les six objets de laboratoire. Les surfaces cachées et les petits boutons non lisibles ne sont pas certifiés. L’applique a été corrigée après une première forme trop aplatie ; le jaune non documenté de la pipette a été retiré par une édition générée.
 
-## fx-hermit — Hermit / équipe SAR
+Species19 repose sur un concept Wētā du cycle biologique, et non une mesure du modèle définitif à l’écran. Arthur est fondé sur un portrait qui ne montre pas sa tenue en pied. Tous les assets restent `screenExact:false`.
 
-- [Page primaire](https://www.fxnetworks.com/shows/alien-earth/armory).
-- [Image exacte utilisée](https://sdlc-cms-production.fxnetworks.com/23e5f1b0-035a-4f66-a890-99bd0f0cd24d.png?imwidth=1440).
-- Nature : photographie officielle FX.
-- Nom de référence local : `fx_hermit_sar_screen.png`.
+La source de style des nouveaux personnages est la famille de PNG déjà produite ; elle ne sert pas de preuve de costume. Les prompts exacts, références d’entrée et corrections sont dans [generation-ledger.json](generation-ledger.json).
 
-## fx-zoo-set — Zoo Lab
-
-- [Page primaire](https://www.fxnetworks.com/shows/alien-earth/production-design).
-- [Image exacte utilisée](https://sdlc-cms-production.fxnetworks.com/5fa7c790-72ee-403f-a14d-064c3ab6f343.png?imwidth=1440).
-- Nature : photographie officielle du décor.
-- Nom de référence local : `fx_zoo_lab_set.png`.
-
-## fx-arthur — Arthur Sylvia
-
-- [Page primaire](https://www.fxnetworks.com/shows/alien-earth/characters/david-rysdahl-arthur-sylvia).
-- [Image exacte utilisée](https://sdlc-cms-production.fxnetworks.com/b99fc099-fe86-4a1b-bb7a-4504ebaf9781.jpg?imwidth=1080).
-- Nature : portrait officiel FX.
-- Nom de référence local : `fx_arthur_portrait.jpg`.
-
-## weta-species19 — Species 19 / cycle de la tique
-
-- [Page primaire](https://www.wetaworkshop.com/projects/alien-earth).
-- [Image exacte utilisée](https://www.wetaworkshop.com/web/image/132221-65406052/695_MO_TICK_TickLifeCycle_01_VF,WW.webp).
-- Nature : concept officiel Wētā Workshop.
-- Nom de référence local : `weta_species19_lifecycle_concept.webp`.
-
-
-`fx-mcsx.png`, cité dans le prompt de Joe, est une copie locale de la même référence d’arme que `fx_mcsx_screen.png`.
-
-La page de production désigne sa photo **Zoo Lab**. Cette provenance visuelle ne prouve pas un plan métrique du décor ni toutes les affectations de pièces. Les placements R18 décrits dans la bible restent des adaptations du module à vérifier en jeu.
-
-Le [podcast officiel FX, épisode 6](https://www.fxnetworks.com/shows/alien-earth/podcast/episode-6), est une source complémentaire pour la conception des lieux, les équipements et les scènes de laboratoire. Il n’a pas servi de référence image supplémentaire à ces huit générations.
-
-## Statut du lot
-
-Les sorties sont des adaptations générées avec références ; **`exact:false` pour les huit**. Les paramètres de rendu ne peuvent pas transformer une partie inférée en détail attesté. Les [prompts conservés](generation-ledger.json) décrivent l’intention, sans garantir à eux seuls le résultat.
-
-Aucun PNG de Xénomorphe n’est inclus : l’appel correspondant a été refusé par l’outil. Les autres concepts consultés pendant la recherche — Eye Midge, Orchid ou nid de mouche — ne sont pas des sprites livrés.
-
-Cette notice établit la provenance. Le placement, les collisions, les pivots, le chargement et la lisibilité dans le jeu attendent la validation décrite dans [CONTINUATION.md](CONTINUATION.md).
+La validation du chargement, des silhouettes à l’échelle de jeu et des placements demeure distincte de cette provenance. Une photographie officielle ne garantit ni une géométrie métrique complète, ni tous les raccords spatiaux de la campagne.

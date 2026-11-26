@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101e20"><meta name="description" content="Alien: Earth — Les enfants de Neverland. Adaptation jouable non officielle de la saison 1 pour le projet Tantalus Frontier.">
+<title>Alien: Earth — Les enfants de Neverland · V12</title>
+<link rel="stylesheet" href="earth.css">
+</head>
+<body>
+<div id="shell" data-state="title">
+<header id="hud" class="hud" aria-label="État de la mission">
+ <button class="wordmark" data-act="pause" aria-label="Ouvrir le menu">ALIEN<span>EARTH</span></button>
+ <div class="location"><small id="chapterLabel">NEVERLAND</small><strong id="roomLabel">Une seconde naissance</strong></div>
+ <div class="vitals"><span id="povLabel">Wendy</span><div class="bars"><div class="bar hp" title="Intégrité"><i id="healthBar"></i></div><div class="bar energy" title="Énergie"><i id="energyBar"></i></div></div><span id="ammoLabel"></span><span id="gearLabel" title="U : kits · B : balises · ⌑ : cartouches"></span></div>
+ <span id="situationLabel" class="situation"></span><nav class="hud-nav" aria-label="Dossiers et menu"><button data-act="map" title="Carte · Tab">Carte</button><button data-act="fidelity" title="Références · 5">Référence</button><button data-act="codex" title="Dossiers · K">Dossiers</button><button data-act="bag" title="Équipement · I">Sac</button><button data-act="sensors" title="Récepteur · 2">Sondes</button><button data-act="journal" title="Journal · O">Journal</button><button data-act="pause" aria-label="Pause">Ⅱ</button></nav>
+</header>
+<main id="stage" class="stage">
+ <canvas id="game" width="1280" height="720" tabindex="0" aria-label="Terrain de jeu Alien: Earth. Déplacement horizontal et en profondeur ; E pour interagir."></canvas>
+ <div id="toast" class="toast" role="status" aria-live="polite"></div>
+ <div id="touch" class="touch" aria-label="Commandes tactiles">
+  <div><button data-hold="ArrowLeft" aria-label="Gauche">←</button><button data-hold="ArrowUp" aria-label="Arrière">↑</button><button data-hold="ArrowDown" aria-label="Avant">↓</button><button data-hold="ArrowRight" aria-label="Droite">→</button></div>
+  <div><button data-hold="Digit1" aria-label="Poser une sonde">1</button><button data-act="sensors" aria-label="Récepteur de sondes">2</button><button data-hold="KeyE" aria-label="Interagir">E</button><button data-hold="KeyF" aria-label="Repousser">F</button><button data-hold="KeyJ" aria-label="Tirer">J</button><button data-hold="KeyB" aria-label="Balise sonore">B</button><button data-hold="KeyN" aria-label="Relevé de terrain">N</button><button data-hold="KeyX" aria-label="Verrou de porte">X</button><button data-hold="KeyG" aria-label="Écouter à la porte">G</button><button data-hold="KeyT" aria-label="Rassurer">T</button><button data-hold="KeyM" aria-label="Réparer le verrou">M</button><button data-hold="KeyP" aria-label="Porter ou déposer">P</button></div>
+ </div>
+ <section id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="modalHeading"><div id="panel" class="panel"></div></section>
+</main>
+<div id="guideLabel" class="guide-strip" aria-live="polite"></div><footer class="readout"><span id="objectiveLabel">Les enfants de Neverland</span><span id="interactionLabel">Q/D · Z/S · E interagir</span><span id="saveLabel" aria-live="polite">SAISON 1</span></footer>
+</div>
+<input id="importFile" type="file" accept="application/json,.json" hidden>
+<noscript>Ce jeu nécessite JavaScript.</noscript>
+<script type="module" src="src/alien-earth-ui.js"></script>
+</body>
+</html>

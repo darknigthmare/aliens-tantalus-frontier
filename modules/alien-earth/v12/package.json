@@ -1,0 +1,26 @@
+{
+  "name": "tantalus-alien-earth-dlc",
+  "version": "12.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "data": "node scripts/make_data_v11.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:campaign": "node tests/campaign_v11.mjs --fidelity",
+    "test:campaign:survie": "node tests/campaign_v11.mjs --fidelity --normal",
+    "test:campaign:principal": "node tests/campaign_v11.mjs --main-only",
+    "test:campaigns": "python tests/run_campaigns_v11.py",
+    "test:browser": "python tests/browser_fidelity_v11.py",
+    "test:browser:regression": "python tests/run_browser_v11.py",
+    "test:browser:all": "python tests/run_browser_v11.py && python tests/browser_fidelity_v11.py",
+    "docs": "python scripts/make_delivery_docs_v11.py",
+    "package": "python scripts/package_v11.py",
+    "test:package": "python tests/verify_package_v11.py",
+    "test:report": "python tests/verify_report_v11.py"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

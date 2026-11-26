@@ -1,96 +1,92 @@
-# Alien: Earth — reprise V12 des sprites
+# Alien: Earth — intégration et sprites V12
 
-Date : 26 novembre 2026.
+Cette révision restaure le module V11 complet, raccorde son lancement depuis le Tantalus et conserve quinze PNG individuels. Sept images sont nouvelles depuis le point de récupération initial PR78. La validation finale du lot de 15 images est en cours ; les résultats seront publiés dans les fichiers QA ci-dessous.
 
-**Ce point de reprise conserve huit PNG individuels et leur documentation. Le raccord complet au jeu n’est pas livré dans ce commit.** L’environnement d’exécution est devenu indisponible avant le build final, les tests raster et les contrôles visuels du jeu.
+## Ressources et usages
 
-Les huit fichiers sont les sorties PNG originales, avec canal alpha, sans retouche ni réencodage. Les prompts effectivement utilisés figurent dans [generation-ledger.json](generation-ledger.json). Les signatures PNG, dimensions IHDR, empreintes SHA‑256 et identifiants des blobs Git sont consignés dans [manifest.json](manifest.json).
+| Ressource | Surface raccordée | Périmètre |
+| --- | --- | --- |
+| MCS-X | Monde et catalogue | Fusil autonome, profil droit. Aucun autre armement remplacé. |
+| Species 19 — adulte | Monde | Profil tick adulte uniquement. Une pose ; animation non générée. |
+| Joe / Hermit — MCS-X, attente | Monde et catalogue | Joe immobile, MCS-X, sans casque. Fusil inclus dans le PNG ; aucun doublon. Exclure déplacement, accroupissement, conduit bas, portage et costume de chapitre d’index 6. |
+| Zoo — cylindre de confinement | Monde | R18-0 et R18-4 uniquement, trois cylindres sur support continu ; conserver l’emprise physique. |
+| Zoo — console murale | Monde | R18-wall1 et R18-wall3 uniquement. Support mural original y210–267 ; pas de substitution de R18-1 au premier plan. |
+| Zoo — table de laboratoire | Monde | R18-island seulement, largeur 195, profondeur 52, hauteur 75. Le bas de la table n’est pas intégralement visible dans la référence. |
+| Zoo — meuble à vitrages dépolis | Monde | Décor mural R18, centré à x450 et posé à y300 ; hors panneau de nom, portes et volumes de collision. |
+| Arthur — état sain, attente | Monde et catalogue | Arthur sain immobile uniquement. Le portrait ne documente pas entièrement le pantalon et les chaussures. Exclure explicitement eye_host. |
+| Wendy — tenue de sauvetage | Monde et catalogue | C03/index 2 seulement, idle debout et mains libres ; joueur et aperçu. Les actions et le massicot gardent leur rendu animé. |
+| Kirsh — tenue grise | Catalogue | Catalogue et sélecteur idle sain sans arme. Aucune tâche talk ne fait apparaître ce sprite comme PNJ dans la campagne actuelle. |
+| Curly — tenue de sauvetage | Catalogue | Catalogue C03/index 2, idle mains libres. La tâche talk existante est en R21/C06 : ce costume C03 ne la remplace pas. |
+| Nibs — tenue de sauvetage | Catalogue | Catalogue C03/index 2, idle mains libres. Aucun PNJ talk ou survivant Nibs présent dans les données actuelles. |
+| Zoo — applique allumée à deux bandes | Aperçu de référence | Référence visuelle et aperçu de validation. Le sélecteur alimenté est prêt, mais R18 reste intrinsèquement hors tension. |
+| Zoo — applique éteinte à deux bandes | Monde | État réellement utilisé sur R18-wall0, R18-wall2 et R18-wall4, sans modifier alimentation ni collisions. |
+| Zoo — pipette et support | Monde | Décoration posée sur R18-island lorsque la table raster est dessinée ; aucun nouveau volume de collision. |
 
-## Contenu conservé
+Kirsh, Curly et Nibs sont actuellement des silhouettes de catalogue ; leur présence en campagne n’est pas revendiquée. Les poses et détails masqués sont adaptés, et aucune image n’est certifiée identique à l’écran. Les animations restent à compléter.
 
-| Ressource | Dimensions | État du travail local avant interruption |
-|---|---:|---|
-| [MCS-X](../../../modules/alien-earth/v12/assets/raster-v12/mcsx.png) | 1774 × 887 | Raccord local écrit, non validé |
-| [Species 19 — adulte](../../../modules/alien-earth/v12/assets/raster-v12/species19-adult.png) | 2172 × 724 | Raccord local écrit, non validé |
-| [Joe / Hermit — MCS-X, attente](../../../modules/alien-earth/v12/assets/raster-v12/joe-mcsx-idle.png) | 1024 × 1536 | Raccord local écrit, non validé |
-| [Zoo — cylindre de confinement](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cylinder.png) | 887 × 1774 | Raccord local écrit, non validé |
-| [Zoo — console murale](../../../modules/alien-earth/v12/assets/raster-v12/zoo-console.png) | 1536 × 1024 | Raccord local écrit, non validé |
-| [Zoo — table de laboratoire](../../../modules/alien-earth/v12/assets/raster-v12/zoo-lab-table.png) | 1774 × 887 | À raccorder |
-| [Zoo — meuble à vitrages dépolis](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cabinet.png) | 1086 × 1448 | À raccorder |
-| [Arthur — état sain, attente](../../../modules/alien-earth/v12/assets/raster-v12/arthur-idle.png) | 1024 × 1536 | À raccorder |
+## Documentation
 
-Le code local de raccord n’a pas été transféré dans ce point de reprise. « Raccord local écrit » ne signifie donc ni disponible dans cette branche, ni validé en jeu. Les cinq premières ressources avaient des hooks locaux ; Arthur, la table et le meuble restaient à finaliser.
+- [BIBLE.md](BIBLE.md) : 25 personnages, 70 salles, 49 types de props, 8 profils de créatures, armes, outils, véhicules, terrains et manquants connus.
+- [inventory.json](inventory.json) : inventaire structuré détaillé, portails et sources V11 conservées avec leur date d’origine.
+- [manifest.json](manifest.json) : 15 chemins, empreintes, dimensions, références et périmètre de chaque ressource.
+- [references.md](references.md) : provenance et limites des photographies, portraits et concepts.
+- [generation-ledger.json](generation-ledger.json) : prompts utilisés et deux corrections ciblées des nouveaux props.
+- [CONTINUATION.md](CONTINUATION.md) : reprise technique, historique de panne et vérifications.
+- [Rapport navigateur](qa/browser-report.json) et [rapport de tests](qa/test-report.json) : preuves finales lorsqu’elles ont été produites.
 
-La tentative de génération du Xénomorphe Maginot a été refusée par l’outil et n’a livré aucun PNG. Le dessin Canvas existant reste la solution de repli. Une ancienne mention de quatorze PNG n’a pas pu être matérialisée : ces fichiers ne sont pas comptabilisés comme livrés.
+## Aperçus des sept nouvelles ressources
 
-## Documents
+### Wendy — tenue de sauvetage
 
-- [BIBLE.md](BIBLE.md) : périmètre du DLC, personnages, créatures, équipement, décor et limites de fidélité.
-- [inventory.json](inventory.json) : inventaire structuré des données V11 et de la couverture de cette reprise.
-- [references.md](references.md) : sources primaires et nature de chaque référence.
-- [CONTINUATION.md](CONTINUATION.md) : état exact de l’implémentation interrompue, correction de sauvegarde restante et contrôles à reprendre.
-- [manifest.json](manifest.json) : dimensions, empreintes, rôles et états d’intégration.
-- [generation-ledger.json](generation-ledger.json) : prompts et références de chaque génération, y compris la tentative sans image.
+![Wendy — tenue de sauvetage](../../../modules/alien-earth/v12/assets/raster-v12/wendy-idle.png)
 
-## Fidélité et couverture
+C03/index 2 seulement, idle debout et mains libres ; joueur et aperçu. Les actions et le massicot gardent leur rendu animé.
 
-L’objectif reste la fidélité visuelle à Alien: Earth. Aucun de ces PNG n’est certifié identique à l’écran. Le concept officiel de Species 19 représente une étape de conception ; le portrait d’Arthur ne montre pas toute sa tenue ; certains détails inférieurs de la table ont été déduits. Ce sont des limites de preuve explicitement suivies, et non des éléments considérés comme finalisés.
+### Kirsh — tenue grise
 
-Le lot comprend deux poses humaines, une pose de créature, une arme autonome et quatre éléments de décor. Il ne constitue pas un jeu complet d’animations. Il ne remplace pas les autres personnages, créatures, véhicules, fonds de salle ou textures planétaires.
+![Kirsh — tenue grise](../../../modules/alien-earth/v12/assets/raster-v12/kirsh-idle.png)
 
-## Validation observée
+Catalogue et sélecteur idle sain sans arme. Aucune tâche talk ne fait apparaître ce sprite comme PNJ dans la campagne actuelle.
 
-Avant les dernières modifications locales, les tests du module V11 et la régression de sauvegarde ont donné **1 220 réussites sur 1 220**. Ces résultats ne valident pas le registre raster final, les huit images dans le moteur, ni l’ouverture et le retour depuis le véritable menu hôte.
+### Curly — tenue de sauvetage
 
-Dans ce point de reprise, les contrôles de signature PNG, de dimensions et de format ont réussi sur les huit sorties originales. Les empreintes SHA‑256 ont été calculées sur leurs octets exacts. **Build final, tests raster, contrôle des sauvegardes à l’entrée du DLC et parcours navigateur restent à exécuter.**
+![Curly — tenue de sauvetage](../../../modules/alien-earth/v12/assets/raster-v12/curly-idle.png)
 
-## Aperçus des fichiers conservés
+Catalogue C03/index 2, idle mains libres. La tâche talk existante est en R21/C06 : ce costume C03 ne la remplace pas.
 
-### MCS-X
+### Nibs — tenue de sauvetage
 
-![MCS-X](../../../modules/alien-earth/v12/assets/raster-v12/mcsx.png)
+![Nibs — tenue de sauvetage](../../../modules/alien-earth/v12/assets/raster-v12/nibs-idle.png)
 
-Fusil autonome, profil droit. Aucun autre armement remplacé.
+Catalogue C03/index 2, idle mains libres. Aucun PNJ talk ou survivant Nibs présent dans les données actuelles.
 
-### Species 19 — adulte
+### Zoo — applique allumée à deux bandes
 
-![Species 19 — adulte](../../../modules/alien-earth/v12/assets/raster-v12/species19-adult.png)
+![Zoo — applique allumée à deux bandes](../../../modules/alien-earth/v12/assets/raster-v12/zoo-wall-light.png)
 
-Profil tick adulte uniquement. Une pose ; animation non générée.
+Référence visuelle et aperçu de validation. Le sélecteur alimenté est prêt, mais R18 reste intrinsèquement hors tension.
 
-### Joe / Hermit — MCS-X, attente
+### Zoo — applique éteinte à deux bandes
 
-![Joe / Hermit — MCS-X, attente](../../../modules/alien-earth/v12/assets/raster-v12/joe-mcsx-idle.png)
+![Zoo — applique éteinte à deux bandes](../../../modules/alien-earth/v12/assets/raster-v12/zoo-wall-light-off.png)
 
-Joe immobile, MCS-X, sans casque. Fusil inclus dans le PNG ; aucun doublon. Exclure déplacement, accroupissement, conduit bas, portage et costume de chapitre d’index 6.
+État réellement utilisé sur R18-wall0, R18-wall2 et R18-wall4, sans modifier alimentation ni collisions.
 
-### Zoo — cylindre de confinement
+### Zoo — pipette et support
 
-![Zoo — cylindre de confinement](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cylinder.png)
+![Zoo — pipette et support](../../../modules/alien-earth/v12/assets/raster-v12/zoo-pipette.png)
 
-R18-0 et R18-4 uniquement, trois cylindres sur support continu ; conserver l’emprise physique.
+Décoration posée sur R18-island lorsque la table raster est dessinée ; aucun nouveau volume de collision.
 
-### Zoo — console murale
+## Huit ressources conservées
 
-![Zoo — console murale](../../../modules/alien-earth/v12/assets/raster-v12/zoo-console.png)
-
-R18-wall1 et R18-wall3 uniquement. Support mural original y210–267 ; pas de substitution de R18-1 au premier plan.
-
-### Zoo — table de laboratoire
-
-![Zoo — table de laboratoire](../../../modules/alien-earth/v12/assets/raster-v12/zoo-lab-table.png)
-
-Prévu seulement pour R18-island, largeur195/profondeur52/hauteur75. Le bas de la table n’est pas intégralement visible dans la référence.
-
-### Zoo — meuble à vitrages dépolis
-
-![Zoo — meuble à vitrages dépolis](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cabinet.png)
-
-Prévu comme décor mural R18, hors panneau de nom, portes et volumes de collision. Placement à vérifier en jeu.
-
-### Arthur — état sain, attente
-
-![Arthur — état sain, attente](../../../modules/alien-earth/v12/assets/raster-v12/arthur-idle.png)
-
-Arthur sain immobile uniquement. Le portrait ne documente pas entièrement le pantalon et les chaussures. Exclure explicitement eye_host.
-
+| Ressource | Fichier |
+| --- | --- |
+| MCS-X | [mcsx.png](../../../modules/alien-earth/v12/assets/raster-v12/mcsx.png) |
+| Species 19 — adulte | [species19-adult.png](../../../modules/alien-earth/v12/assets/raster-v12/species19-adult.png) |
+| Joe / Hermit — MCS-X, attente | [joe-mcsx-idle.png](../../../modules/alien-earth/v12/assets/raster-v12/joe-mcsx-idle.png) |
+| Zoo — cylindre de confinement | [zoo-cylinder.png](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cylinder.png) |
+| Zoo — console murale | [zoo-console.png](../../../modules/alien-earth/v12/assets/raster-v12/zoo-console.png) |
+| Zoo — table de laboratoire | [zoo-lab-table.png](../../../modules/alien-earth/v12/assets/raster-v12/zoo-lab-table.png) |
+| Zoo — meuble à vitrages dépolis | [zoo-cabinet.png](../../../modules/alien-earth/v12/assets/raster-v12/zoo-cabinet.png) |
+| Arthur — état sain, attente | [arthur-idle.png](../../../modules/alien-earth/v12/assets/raster-v12/arthur-idle.png) |

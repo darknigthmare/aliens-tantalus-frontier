@@ -216,6 +216,7 @@ let editor = null;
 let activeView = 'command';
 const hubControlBindingsV133 = [];
 let standaloneContext = null;
+let leavingForEarthV12 = false;
 // A rejected terminal balance never becomes a false victory or a paid retreat.
 let pendingResolutionV121 = null;
 let forgePlaytest = null;
@@ -890,6 +891,21 @@ const titleScreen = new TitleScreenController({
   onForge: () => openForgeContext(),
   onDlc: () => globalThis.location.assign('/dlc/fleuve-de-la-douleur/'),
   onAliens1986: () => globalThis.location.assign('/dlc/aliens-1986/'),
+  onAlienEarth: () => {
+    // Opening Earth from the title does not commit a native campaign or Forge session.
+    leavingForEarthV12 = true;
+    try {
+      hubEngine.stop(false); engine.stop();
+      bioforgeRuntimeV80.stopBioforgeEngineOnlyV80();
+      audio.stopEffects(); audio.stopMusic(0);
+      globalThis.location.assign('/dlc/alien-earth/v12/index.html');
+      return true;
+    } catch (error) {
+      leavingForEarthV12 = false;
+      titleScreen.liveStatus.textContent = 'La campagne Earth est indisponible. Le profil Tantalus est conservé.';
+      return false;
+    }
+  },
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');
@@ -4099,6 +4115,7 @@ function bind() {
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
+    if (leavingForEarthV12) { audio.dispose(); return; }
     disposePlayerAppearancePreviewV126();
     if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
@@ -4182,7 +4199,7 @@ async function boot() {
   renderAll();
   startGalaxyJumpSchedulerV116();
   globalThis.addEventListener('pagehide', () => { clearInterval(galaxyJumpTimerV116); galaxyJumpTimerV116 = null; });
-  globalThis.addEventListener('pageshow', event => { if (event.persisted) startGalaxyJumpSchedulerV116(); });
+  globalThis.addEventListener('pageshow', event => { if (event.persisted) { leavingForEarthV12 = false; startGalaxyJumpSchedulerV116(); } });
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
   void audio.prepare();
   globalThis.__ATF_AUDIO_V77__ = audio;

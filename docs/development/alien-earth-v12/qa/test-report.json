@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "project": "Aliens Tantalus — Alien: Earth V12",
+  "ok": true,
+  "sourceBaseCommit": "c3fd0cdc72c58a9a4fd89684c00dc64125cee80d",
+  "sourceSnapshot": "Working tree prepared for PR 78; tested file SHA-256 values below identify this revision.",
+  "runtime": {
+    "node": "v24.22.3"
+  },
+  "suites": {
+    "earth": {
+      "command": "npm run test:dlc:earth",
+      "tests": 1262,
+      "passed": 1262,
+      "failed": 0,
+      "skipped": 0,
+      "inheritedModule": 1216,
+      "lifecycle": 4,
+      "raster": 30,
+      "hostIntegration": 12
+    },
+    "historicalSuccession": {
+      "command": "node --test scripts/verify-aliens1986-main-succession-v116.mjs scripts/verify-river-of-pain-succession.mjs",
+      "tests": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "build": {
+    "scope": "Alien Earth public module only; this is not a full native release build.",
+    "files": 40,
+    "javascript": 23,
+    "png": 15,
+    "html": 1,
+    "css": 1,
+    "exports": {
+      "JOUER_ALIEN_EARTH_V12.html": {
+        "bytes": 31114156,
+        "sha256": "c89e06fd2529bb19a29b829763d6acfdcf8ffe7db26f4d107c735a232d52f4f3"
+      },
+      "ALIEN_EARTH_V12_MODULE_PUBLIC.zip": {
+        "bytes": 21936035,
+        "sha256": "80cfefd3163a0ebb1a400c7f255cf802fc706edb1d6ade777fdd8373850aec73"
+      }
+    }
+  },
+  "sourceSha256": {
+    "src/app.js": "d7a7f26cd7688198dcbf44da488a339c4fba724b617bf38bcc4b1ba7504f7d85",
+    "src/title-screen-v61.js": "1f6d9c2e3851ae038acab2fbbaaba287d4734ebdeafa01b1068b402a572a2347",
+    "scripts/verify-alien-earth-integration-v12.mjs": "1f2214925a6071dc72e403c9a5bd67c912686a1d0a59eb31748db409c7bad2f5",
+    "scripts/build-alien-earth-dlc.mjs": "3363fa1b037711ed0d4f878dbac49aa6f6afbfb14d01f0b1637fd0f675dc2635",
+    "modules/alien-earth/v12/src/alien-earth-raster-v12.js": "713f9789077aae9082ec44dad502a1b7254ec141c3fd74be4e3c154a3d624d85",
+    "modules/alien-earth/RECOVERY_V11.json": "e19aa945cb860e57503e41e81c019bb91b40e33198042ebec5c3308d387d199d"
+  },
+  "browserEvidence": "browser-report.json",
+  "limits": [
+    "Browser traversal is separately reported with its fixtures.",
+    "The automated suites do not prove a complete playthrough of all 70 rooms.",
+    "No image is certified screen-exact.",
+    "Local results are distinct from GitHub Actions results."
+  ]
+}

@@ -1,0 +1,2389 @@
+{
+  "version": "11.0.0",
+  "scope": "Audit des seuils du jeu ; aucune métrique de plateau de tournage revendiquée",
+  "newRooms": [
+    "R63",
+    "R64",
+    "R65",
+    "R66",
+    "R67",
+    "R68",
+    "R69",
+    "R70"
+  ],
+  "newLinks": [
+    {
+      "id": "R02>R66",
+      "to": "R66",
+      "x": 1730,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R04>R68",
+      "to": "R68",
+      "x": 1370,
+      "z": 25,
+      "arrivalX": 630,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R13>R69",
+      "to": "R69",
+      "x": 1370,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R14>R69",
+      "to": "R69",
+      "x": 1570,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R14>R70",
+      "to": "R70",
+      "x": 2030,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R16>R70",
+      "to": "R70",
+      "x": 1370,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R17>R63",
+      "to": "R63",
+      "x": 1370,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R18>R65",
+      "to": "R65",
+      "x": 770,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R19>R64",
+      "to": "R64",
+      "x": 1550,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R19>R65",
+      "to": "R65",
+      "x": 770,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R59>R63",
+      "to": "R63",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R60>R64",
+      "to": "R64",
+      "x": 1610,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R63>R17",
+      "to": "R17",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 1370,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R63>R59",
+      "to": "R59",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R64>R19",
+      "to": "R19",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1550,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R64>R60",
+      "to": "R60",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 1610,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R65>R18",
+      "to": "R18",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 835,
+      "arrivalZ": 25
+    },
+    {
+      "id": "R65>R19",
+      "to": "R19",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 770,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R66>R02",
+      "to": "R02",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 1730,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R66>R67",
+      "to": "R67",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R67>R66",
+      "to": "R66",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1430,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R67>R68",
+      "to": "R68",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 990,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R68>R67",
+      "to": "R67",
+      "x": 990,
+      "z": 25,
+      "arrivalX": 1090,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R68>R04",
+      "to": "R04",
+      "x": 630,
+      "z": 25,
+      "arrivalX": 1370,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R69>R13",
+      "to": "R13",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 1370,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R69>R14",
+      "to": "R14",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 1570,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R70>R14",
+      "to": "R14",
+      "x": 1430,
+      "z": 25,
+      "arrivalX": 2030,
+      "arrivalZ": 95
+    },
+    {
+      "id": "R70>R16",
+      "to": "R16",
+      "x": 1090,
+      "z": 25,
+      "arrivalX": 1370,
+      "arrivalZ": 95
+    }
+  ],
+  "relocated": [
+    {
+      "id": "R02>R66",
+      "before": {
+        "x": 1165,
+        "z": 25
+      },
+      "after": {
+        "x": 1730,
+        "z": 25
+      }
+    },
+    {
+      "id": "R04>R68",
+      "before": {
+        "x": 978,
+        "z": 25
+      },
+      "after": {
+        "x": 1370,
+        "z": 25
+      }
+    },
+    {
+      "id": "R13>R69",
+      "before": {
+        "x": 1310,
+        "z": 25
+      },
+      "after": {
+        "x": 1370,
+        "z": 25
+      }
+    },
+    {
+      "id": "R14>R69",
+      "before": {
+        "x": 1248,
+        "z": 25
+      },
+      "after": {
+        "x": 1570,
+        "z": 25
+      }
+    },
+    {
+      "id": "R14>R70",
+      "before": {
+        "x": 1248,
+        "z": 25
+      },
+      "after": {
+        "x": 2030,
+        "z": 25
+      }
+    },
+    {
+      "id": "R16>R70",
+      "before": {
+        "x": 1248,
+        "z": 25
+      },
+      "after": {
+        "x": 1370,
+        "z": 25
+      }
+    },
+    {
+      "id": "R17>R63",
+      "before": {
+        "x": 1102,
+        "z": 25
+      },
+      "after": {
+        "x": 1370,
+        "z": 25
+      }
+    },
+    {
+      "id": "R18>R65",
+      "before": {
+        "x": 1352,
+        "z": 25
+      },
+      "after": {
+        "x": 770,
+        "z": 25
+      }
+    },
+    {
+      "id": "R19>R64",
+      "before": {
+        "x": 1248,
+        "z": 25
+      },
+      "after": {
+        "x": 1550,
+        "z": 25
+      }
+    },
+    {
+      "id": "R19>R65",
+      "before": {
+        "x": 1248,
+        "z": 25
+      },
+      "after": {
+        "x": 770,
+        "z": 25
+      }
+    },
+    {
+      "id": "R59>R63",
+      "before": {
+        "x": 988,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R60>R64",
+      "before": {
+        "x": 1196,
+        "z": 25
+      },
+      "after": {
+        "x": 1610,
+        "z": 25
+      }
+    },
+    {
+      "id": "R63>R17",
+      "before": {
+        "x": 1144,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R63>R59",
+      "before": {
+        "x": 1144,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R64>R19",
+      "before": {
+        "x": 1300,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R64>R60",
+      "before": {
+        "x": 1300,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R65>R18",
+      "before": {
+        "x": 1196,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R65>R19",
+      "before": {
+        "x": 1196,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R66>R02",
+      "before": {
+        "x": 1144,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R66>R67",
+      "before": {
+        "x": 1144,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R67>R66",
+      "before": {
+        "x": 1274,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R67>R68",
+      "before": {
+        "x": 1274,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R68>R67",
+      "before": {
+        "x": 988,
+        "z": 25
+      },
+      "after": {
+        "x": 990,
+        "z": 25
+      }
+    },
+    {
+      "id": "R68>R04",
+      "before": {
+        "x": 988,
+        "z": 25
+      },
+      "after": {
+        "x": 630,
+        "z": 25
+      }
+    },
+    {
+      "id": "R69>R13",
+      "before": {
+        "x": 1170,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    },
+    {
+      "id": "R69>R14",
+      "before": {
+        "x": 1170,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R70>R14",
+      "before": {
+        "x": 1300,
+        "z": 25
+      },
+      "after": {
+        "x": 1430,
+        "z": 25
+      }
+    },
+    {
+      "id": "R70>R16",
+      "before": {
+        "x": 1300,
+        "z": 25
+      },
+      "after": {
+        "x": 1090,
+        "z": 25
+      }
+    }
+  ],
+  "failures": [],
+  "allThresholds": [
+    {
+      "id": "R01>R02",
+      "room": "R01",
+      "to": "R02",
+      "kind": "right-wall",
+      "x": 1800,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R01>R34",
+      "room": "R01",
+      "to": "R34",
+      "kind": "rear-wall",
+      "x": 870,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R02>R01",
+      "room": "R02",
+      "to": "R01",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R02>R03",
+      "room": "R02",
+      "to": "R03",
+      "kind": "right-wall",
+      "x": 2160,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R02>R04",
+      "room": "R02",
+      "to": "R04",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R02>R33",
+      "room": "R02",
+      "to": "R33",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R02>R49",
+      "room": "R02",
+      "to": "R49",
+      "kind": "floor-hatch",
+      "x": 1570,
+      "z": 125,
+      "logical": "R02|R49"
+    },
+    {
+      "id": "R02>R57",
+      "room": "R02",
+      "to": "R57",
+      "kind": "rear-wall",
+      "x": 1550,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R02>R66",
+      "room": "R02",
+      "to": "R66",
+      "kind": "rear-wall",
+      "x": 1730,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R03>R02",
+      "room": "R03",
+      "to": "R02",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R03>R04",
+      "room": "R03",
+      "to": "R04",
+      "kind": "right-wall",
+      "x": 2440,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R03>R33",
+      "room": "R03",
+      "to": "R33",
+      "kind": "rear-wall",
+      "x": 1010,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R04>R02",
+      "room": "R04",
+      "to": "R02",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R04>R03",
+      "room": "R04",
+      "to": "R03",
+      "kind": "right-wall",
+      "x": 1800,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R04>R34",
+      "room": "R04",
+      "to": "R34",
+      "kind": "rear-wall",
+      "x": 750,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R04>R58",
+      "room": "R04",
+      "to": "R58",
+      "kind": "rear-wall",
+      "x": 970,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R04>R68",
+      "room": "R04",
+      "to": "R68",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R05>R06",
+      "room": "R05",
+      "to": "R06",
+      "kind": "right-wall",
+      "x": 2640,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R05>R35",
+      "room": "R05",
+      "to": "R35",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R06>R05",
+      "room": "R06",
+      "to": "R05",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R06>R07",
+      "room": "R06",
+      "to": "R07",
+      "kind": "right-wall",
+      "x": 2280,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R06>R08",
+      "room": "R06",
+      "to": "R08",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R06>R36",
+      "room": "R06",
+      "to": "R36",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R06>R50",
+      "room": "R06",
+      "to": "R50",
+      "kind": "floor-hatch",
+      "x": 1650,
+      "z": 125,
+      "logical": "R06|R50"
+    },
+    {
+      "id": "R07>R06",
+      "room": "R07",
+      "to": "R06",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R07>R08",
+      "room": "R07",
+      "to": "R08",
+      "kind": "right-wall",
+      "x": 2400,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R07>R35",
+      "room": "R07",
+      "to": "R35",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R08>R06",
+      "room": "R08",
+      "to": "R06",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R08>R07",
+      "room": "R08",
+      "to": "R07",
+      "kind": "right-wall",
+      "x": 1960,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R08>R36",
+      "room": "R08",
+      "to": "R36",
+      "kind": "rear-wall",
+      "x": 810,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R09>R10",
+      "room": "R09",
+      "to": "R10",
+      "kind": "right-wall",
+      "x": 2200,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R09>R37",
+      "room": "R09",
+      "to": "R37",
+      "kind": "rear-wall",
+      "x": 1050,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R10>R09",
+      "room": "R10",
+      "to": "R09",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R10>R11",
+      "room": "R10",
+      "to": "R11",
+      "kind": "right-wall",
+      "x": 2440,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R10>R12",
+      "room": "R10",
+      "to": "R12",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R10>R38",
+      "room": "R10",
+      "to": "R38",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R10>R51",
+      "room": "R10",
+      "to": "R51",
+      "kind": "floor-hatch",
+      "x": 1770,
+      "z": 125,
+      "logical": "R10|R51"
+    },
+    {
+      "id": "R11>R10",
+      "room": "R11",
+      "to": "R10",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R11>R12",
+      "room": "R11",
+      "to": "R12",
+      "kind": "right-wall",
+      "x": 1800,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R11>R37",
+      "room": "R11",
+      "to": "R37",
+      "kind": "rear-wall",
+      "x": 750,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R12>R10",
+      "room": "R12",
+      "to": "R10",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R12>R11",
+      "room": "R12",
+      "to": "R11",
+      "kind": "right-wall",
+      "x": 2400,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R12>R38",
+      "room": "R12",
+      "to": "R38",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R13>R14",
+      "room": "R13",
+      "to": "R14",
+      "kind": "right-wall",
+      "x": 2440,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R13>R39",
+      "room": "R13",
+      "to": "R39",
+      "kind": "rear-wall",
+      "x": 1070,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R13>R69",
+      "room": "R13",
+      "to": "R69",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R14>R13",
+      "room": "R14",
+      "to": "R13",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R14>R15",
+      "room": "R14",
+      "to": "R15",
+      "kind": "right-wall",
+      "x": 2320,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R14>R16",
+      "room": "R14",
+      "to": "R16",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R14>R40",
+      "room": "R14",
+      "to": "R40",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R14>R52",
+      "room": "R14",
+      "to": "R52",
+      "kind": "floor-hatch",
+      "x": 1510,
+      "z": 125,
+      "logical": "R14|R52"
+    },
+    {
+      "id": "R14>R69",
+      "room": "R14",
+      "to": "R69",
+      "kind": "rear-wall",
+      "x": 1570,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R14>R70",
+      "room": "R14",
+      "to": "R70",
+      "kind": "rear-wall",
+      "x": 2030,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R15>R14",
+      "room": "R15",
+      "to": "R14",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R15>R16",
+      "room": "R15",
+      "to": "R16",
+      "kind": "right-wall",
+      "x": 1840,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R15>R39",
+      "room": "R15",
+      "to": "R39",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R16>R14",
+      "room": "R16",
+      "to": "R14",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R16>R15",
+      "room": "R16",
+      "to": "R15",
+      "kind": "right-wall",
+      "x": 2320,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R16>R40",
+      "room": "R16",
+      "to": "R40",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R16>R70",
+      "room": "R16",
+      "to": "R70",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R17>R18",
+      "room": "R17",
+      "to": "R18",
+      "kind": "right-wall",
+      "x": 2040,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R17>R41",
+      "room": "R17",
+      "to": "R41",
+      "kind": "rear-wall",
+      "x": 970,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R17>R63",
+      "room": "R17",
+      "to": "R63",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R18>R17",
+      "room": "R18",
+      "to": "R17",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R18>R19",
+      "room": "R18",
+      "to": "R19",
+      "kind": "right-wall",
+      "x": 2520,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R18>R20",
+      "room": "R18",
+      "to": "R20",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R18>R42",
+      "room": "R18",
+      "to": "R42",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R18>R53",
+      "room": "R18",
+      "to": "R53",
+      "kind": "floor-hatch",
+      "x": 1690,
+      "z": 125,
+      "logical": "R18|R53"
+    },
+    {
+      "id": "R18>R65",
+      "room": "R18",
+      "to": "R65",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R19>R18",
+      "room": "R19",
+      "to": "R18",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R19>R20",
+      "room": "R19",
+      "to": "R20",
+      "kind": "right-wall",
+      "x": 2320,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R19>R41",
+      "room": "R19",
+      "to": "R41",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R19>R59",
+      "room": "R19",
+      "to": "R59",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R19>R64",
+      "room": "R19",
+      "to": "R64",
+      "kind": "rear-wall",
+      "x": 1550,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R19>R65",
+      "room": "R19",
+      "to": "R65",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R20>R18",
+      "room": "R20",
+      "to": "R18",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R20>R19",
+      "room": "R20",
+      "to": "R19",
+      "kind": "right-wall",
+      "x": 1920,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R20>R42",
+      "room": "R20",
+      "to": "R42",
+      "kind": "rear-wall",
+      "x": 870,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R21>R22",
+      "room": "R21",
+      "to": "R22",
+      "kind": "right-wall",
+      "x": 2480,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R21>R43",
+      "room": "R21",
+      "to": "R43",
+      "kind": "rear-wall",
+      "x": 1070,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R22>R21",
+      "room": "R22",
+      "to": "R21",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R22>R23",
+      "room": "R22",
+      "to": "R23",
+      "kind": "right-wall",
+      "x": 2080,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R22>R24",
+      "room": "R22",
+      "to": "R24",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R22>R44",
+      "room": "R22",
+      "to": "R44",
+      "kind": "rear-wall",
+      "x": 770,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R22>R54",
+      "room": "R22",
+      "to": "R54",
+      "kind": "floor-hatch",
+      "x": 1510,
+      "z": 125,
+      "logical": "R22|R54"
+    },
+    {
+      "id": "R23>R22",
+      "room": "R23",
+      "to": "R22",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R23>R24",
+      "room": "R23",
+      "to": "R24",
+      "kind": "right-wall",
+      "x": 2520,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R23>R43",
+      "room": "R23",
+      "to": "R43",
+      "kind": "rear-wall",
+      "x": 1030,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R24>R22",
+      "room": "R24",
+      "to": "R22",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R24>R23",
+      "room": "R24",
+      "to": "R23",
+      "kind": "right-wall",
+      "x": 2160,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R24>R44",
+      "room": "R24",
+      "to": "R44",
+      "kind": "rear-wall",
+      "x": 890,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R25>R26",
+      "room": "R25",
+      "to": "R26",
+      "kind": "right-wall",
+      "x": 2080,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R25>R45",
+      "room": "R25",
+      "to": "R45",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R26>R25",
+      "room": "R26",
+      "to": "R25",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R26>R27",
+      "room": "R26",
+      "to": "R27",
+      "kind": "right-wall",
+      "x": 2720,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R26>R28",
+      "room": "R26",
+      "to": "R28",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R26>R46",
+      "room": "R26",
+      "to": "R46",
+      "kind": "rear-wall",
+      "x": 1550,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R26>R55",
+      "room": "R26",
+      "to": "R55",
+      "kind": "floor-hatch",
+      "x": 1950,
+      "z": 125,
+      "logical": "R26|R55"
+    },
+    {
+      "id": "R27>R26",
+      "room": "R27",
+      "to": "R26",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R27>R28",
+      "room": "R27",
+      "to": "R28",
+      "kind": "right-wall",
+      "x": 2520,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R27>R45",
+      "room": "R27",
+      "to": "R45",
+      "kind": "rear-wall",
+      "x": 1030,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R28>R26",
+      "room": "R28",
+      "to": "R26",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R28>R27",
+      "room": "R28",
+      "to": "R27",
+      "kind": "right-wall",
+      "x": 2240,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R28>R46",
+      "room": "R28",
+      "to": "R46",
+      "kind": "rear-wall",
+      "x": 930,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R29>R30",
+      "room": "R29",
+      "to": "R30",
+      "kind": "right-wall",
+      "x": 1960,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R29>R47",
+      "room": "R29",
+      "to": "R47",
+      "kind": "rear-wall",
+      "x": 930,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R30>R29",
+      "room": "R30",
+      "to": "R29",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R30>R31",
+      "room": "R30",
+      "to": "R31",
+      "kind": "right-wall",
+      "x": 2720,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R30>R32",
+      "room": "R30",
+      "to": "R32",
+      "kind": "rear-wall",
+      "x": 950,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R30>R48",
+      "room": "R30",
+      "to": "R48",
+      "kind": "rear-wall",
+      "x": 1370,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R30>R56",
+      "room": "R30",
+      "to": "R56",
+      "kind": "floor-hatch",
+      "x": 1850,
+      "z": 125,
+      "logical": "R30|R56"
+    },
+    {
+      "id": "R31>R30",
+      "room": "R31",
+      "to": "R30",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R31>R32",
+      "room": "R31",
+      "to": "R32",
+      "kind": "right-wall",
+      "x": 2440,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R31>R47",
+      "room": "R31",
+      "to": "R47",
+      "kind": "rear-wall",
+      "x": 1010,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R32>R30",
+      "room": "R32",
+      "to": "R30",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R32>R31",
+      "room": "R32",
+      "to": "R31",
+      "kind": "right-wall",
+      "x": 2680,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R32>R48",
+      "room": "R32",
+      "to": "R48",
+      "kind": "rear-wall",
+      "x": 1070,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R33>R02",
+      "room": "R33",
+      "to": "R02",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R33>R03",
+      "room": "R33",
+      "to": "R03",
+      "kind": "right-wall",
+      "x": 1660,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R34>R01",
+      "room": "R34",
+      "to": "R01",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R34>R04",
+      "room": "R34",
+      "to": "R04",
+      "kind": "right-wall",
+      "x": 1480,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R34>R49",
+      "room": "R34",
+      "to": "R49",
+      "kind": "floor-hatch",
+      "x": 1150,
+      "z": 125,
+      "logical": "R34|R49"
+    },
+    {
+      "id": "R35>R05",
+      "room": "R35",
+      "to": "R05",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R35>R07",
+      "room": "R35",
+      "to": "R07",
+      "kind": "right-wall",
+      "x": 1800,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R36>R06",
+      "room": "R36",
+      "to": "R06",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R36>R08",
+      "room": "R36",
+      "to": "R08",
+      "kind": "right-wall",
+      "x": 1900,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R36>R50",
+      "room": "R36",
+      "to": "R50",
+      "kind": "floor-hatch",
+      "x": 1390,
+      "z": 125,
+      "logical": "R36|R50"
+    },
+    {
+      "id": "R37>R09",
+      "room": "R37",
+      "to": "R09",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R37>R11",
+      "room": "R37",
+      "to": "R11",
+      "kind": "right-wall",
+      "x": 1520,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R38>R10",
+      "room": "R38",
+      "to": "R10",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R38>R12",
+      "room": "R38",
+      "to": "R12",
+      "kind": "right-wall",
+      "x": 1700,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R38>R51",
+      "room": "R38",
+      "to": "R51",
+      "kind": "floor-hatch",
+      "x": 1250,
+      "z": 125,
+      "logical": "R38|R51"
+    },
+    {
+      "id": "R39>R13",
+      "room": "R39",
+      "to": "R13",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R39>R15",
+      "room": "R39",
+      "to": "R15",
+      "kind": "right-wall",
+      "x": 1820,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R40>R14",
+      "room": "R40",
+      "to": "R14",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R40>R16",
+      "room": "R40",
+      "to": "R16",
+      "kind": "right-wall",
+      "x": 1480,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R40>R52",
+      "room": "R40",
+      "to": "R52",
+      "kind": "floor-hatch",
+      "x": 810,
+      "z": 125,
+      "logical": "R40|R52"
+    },
+    {
+      "id": "R41>R17",
+      "room": "R41",
+      "to": "R17",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R41>R19",
+      "room": "R41",
+      "to": "R19",
+      "kind": "right-wall",
+      "x": 1620,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R41>R62",
+      "room": "R41",
+      "to": "R62",
+      "kind": "rear-wall",
+      "x": 890,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R42>R18",
+      "room": "R42",
+      "to": "R18",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R42>R20",
+      "room": "R42",
+      "to": "R20",
+      "kind": "right-wall",
+      "x": 2060,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R42>R53",
+      "room": "R42",
+      "to": "R53",
+      "kind": "floor-hatch",
+      "x": 1170,
+      "z": 125,
+      "logical": "R42|R53"
+    },
+    {
+      "id": "R43>R21",
+      "room": "R43",
+      "to": "R21",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R43>R23",
+      "room": "R43",
+      "to": "R23",
+      "kind": "right-wall",
+      "x": 1680,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R44>R22",
+      "room": "R44",
+      "to": "R22",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R44>R24",
+      "room": "R44",
+      "to": "R24",
+      "kind": "right-wall",
+      "x": 1840,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R44>R54",
+      "room": "R44",
+      "to": "R54",
+      "kind": "floor-hatch",
+      "x": 1230,
+      "z": 200,
+      "logical": "R44|R54"
+    },
+    {
+      "id": "R45>R25",
+      "room": "R45",
+      "to": "R25",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R45>R27",
+      "room": "R45",
+      "to": "R27",
+      "kind": "right-wall",
+      "x": 1580,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R46>R26",
+      "room": "R46",
+      "to": "R26",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R46>R28",
+      "room": "R46",
+      "to": "R28",
+      "kind": "right-wall",
+      "x": 1860,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R46>R55",
+      "room": "R46",
+      "to": "R55",
+      "kind": "floor-hatch",
+      "x": 1350,
+      "z": 125,
+      "logical": "R46|R55"
+    },
+    {
+      "id": "R47>R29",
+      "room": "R47",
+      "to": "R29",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R47>R31",
+      "room": "R47",
+      "to": "R31",
+      "kind": "right-wall",
+      "x": 1740,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R48>R30",
+      "room": "R48",
+      "to": "R30",
+      "kind": "left-wall",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R48>R32",
+      "room": "R48",
+      "to": "R32",
+      "kind": "right-wall",
+      "x": 1980,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R48>R56",
+      "room": "R48",
+      "to": "R56",
+      "kind": "floor-hatch",
+      "x": 1450,
+      "z": 125,
+      "logical": "R48|R56"
+    },
+    {
+      "id": "R49>R02",
+      "room": "R49",
+      "to": "R02",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R49>R34",
+      "room": "R49",
+      "to": "R34",
+      "kind": "duct-end",
+      "x": 1580,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R50>R06",
+      "room": "R50",
+      "to": "R06",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R50>R36",
+      "room": "R50",
+      "to": "R36",
+      "kind": "duct-end",
+      "x": 1820,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R51>R10",
+      "room": "R51",
+      "to": "R10",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R51>R38",
+      "room": "R51",
+      "to": "R38",
+      "kind": "duct-end",
+      "x": 1700,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R52>R14",
+      "room": "R52",
+      "to": "R14",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R52>R40",
+      "room": "R52",
+      "to": "R40",
+      "kind": "duct-end",
+      "x": 1940,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R53>R18",
+      "room": "R53",
+      "to": "R18",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R53>R42",
+      "room": "R53",
+      "to": "R42",
+      "kind": "duct-end",
+      "x": 2060,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R54>R22",
+      "room": "R54",
+      "to": "R22",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R54>R44",
+      "room": "R54",
+      "to": "R44",
+      "kind": "duct-end",
+      "x": 1820,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R55>R26",
+      "room": "R55",
+      "to": "R26",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R55>R46",
+      "room": "R55",
+      "to": "R46",
+      "kind": "duct-end",
+      "x": 2180,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R56>R30",
+      "room": "R56",
+      "to": "R30",
+      "kind": "duct-end",
+      "x": 80,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R56>R48",
+      "room": "R56",
+      "to": "R48",
+      "kind": "duct-end",
+      "x": 1940,
+      "z": 125,
+      "logical": true
+    },
+    {
+      "id": "R57>R02",
+      "room": "R57",
+      "to": "R02",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R57>R58",
+      "room": "R57",
+      "to": "R58",
+      "kind": "rear-wall",
+      "x": 650,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R58>R57",
+      "room": "R58",
+      "to": "R57",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R58>R04",
+      "room": "R58",
+      "to": "R04",
+      "kind": "rear-wall",
+      "x": 650,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R59>R19",
+      "room": "R59",
+      "to": "R19",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R59>R60",
+      "room": "R59",
+      "to": "R60",
+      "kind": "rear-wall",
+      "x": 650,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R59>R63",
+      "room": "R59",
+      "to": "R63",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R60>R59",
+      "room": "R60",
+      "to": "R59",
+      "kind": "rear-wall",
+      "x": 1110,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R60>R61",
+      "room": "R60",
+      "to": "R61",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R60>R64",
+      "room": "R60",
+      "to": "R64",
+      "kind": "rear-wall",
+      "x": 1610,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R61>R60",
+      "room": "R61",
+      "to": "R60",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R61>R62",
+      "room": "R61",
+      "to": "R62",
+      "kind": "rear-wall",
+      "x": 650,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R62>R61",
+      "room": "R62",
+      "to": "R61",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R62>R41",
+      "room": "R62",
+      "to": "R41",
+      "kind": "rear-wall",
+      "x": 650,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R63>R17",
+      "room": "R63",
+      "to": "R17",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R63>R59",
+      "room": "R63",
+      "to": "R59",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R64>R19",
+      "room": "R64",
+      "to": "R19",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R64>R60",
+      "room": "R64",
+      "to": "R60",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R65>R18",
+      "room": "R65",
+      "to": "R18",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R65>R19",
+      "room": "R65",
+      "to": "R19",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R66>R02",
+      "room": "R66",
+      "to": "R02",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R66>R67",
+      "room": "R66",
+      "to": "R67",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R67>R66",
+      "room": "R67",
+      "to": "R66",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R67>R68",
+      "room": "R67",
+      "to": "R68",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R68>R67",
+      "room": "R68",
+      "to": "R67",
+      "kind": "rear-wall",
+      "x": 990,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R68>R04",
+      "room": "R68",
+      "to": "R04",
+      "kind": "rear-wall",
+      "x": 630,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R69>R13",
+      "room": "R69",
+      "to": "R13",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R69>R14",
+      "room": "R69",
+      "to": "R14",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R70>R14",
+      "room": "R70",
+      "to": "R14",
+      "kind": "rear-wall",
+      "x": 1430,
+      "z": 25,
+      "logical": true
+    },
+    {
+      "id": "R70>R16",
+      "room": "R70",
+      "to": "R16",
+      "kind": "rear-wall",
+      "x": 1090,
+      "z": 25,
+      "logical": true
+    }
+  ]
+}

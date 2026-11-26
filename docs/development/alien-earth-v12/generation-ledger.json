@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "date": "2026-11-26",
   "tool": "image_gen.imagegen",
-  "policy": "One individual asset per successful call; exact output bytes preserved; reference photos are not redistributed here.",
+  "policy": "One individual asset per output; final generated PNG bytes preserved. The wall-light and pipette each have one recorded image-generation correction. Source photographs are not redistributed.",
   "entries": [
     {
       "id": "mcsx",
@@ -74,6 +74,116 @@
       "status": "generation_rejected",
       "reason": "Image generation output rejected by safety system (category other); no PNG delivered; existing Canvas drawing retained.",
       "reference": "weta_xenomorph_practical_suit.webp"
+    },
+    {
+      "id": "wendy-idle",
+      "prompt": "Use case: stylized-concept. Asset type: one individual transparent-background full-body character sprite for the Alien: Earth DLC in a 2D side-view exploration game. Primary request: Wendy, as portrayed in Alien: Earth, mission jumpsuit, idle standing pose. Reference image 1 is the official D23 close view of Wendy: use her exact visible face, short dark brown choppy bob with short bangs, grey-green hooded zip-front work jumpsuit with chest pockets and black utility belt. Reference image 2 is the official full group: Wendy is the third person from the left, just left of the tall white-haired man; use her complete costume silhouette, loose straight trouser legs, boots and small brown stuffed-animal accessory at her left hip. Reference image 3 is the already generated Joe sprite and is ONLY the rendering-style reference, not Wendy's face, clothes, equipment or weapon. Render ONLY Wendy, no other people. Adult human proportions as in the photos, calm alert expression, empty hands naturally lowered, stable neutral idle with both feet planted, three-quarter side view facing screen right, head and torso facing right. Full body including both boot soles completely inside the canvas with a small transparent margin. Realistic textured game illustration, natural cloth folds and material detail, soft neutral upper-left illumination, moderate contrast matching Joe, clean readable silhouette at about 122px gameplay height. Preserve the reference costume; do not add armor, firearms, a helmet, patches, glowing eyes or invented sci-fi devices. No scenery, floor, cast shadow, vignette, aura, haze, text, watermark, frame, extra character, extra limbs or additional views. Genuine transparent alpha outside the character, no dark halo or checkerboard baked into pixels. One sprite only.",
+      "refs": [
+        "d23_wendy_header.jpg",
+        "d23_lost_boys_full_group.jpg",
+        "joe-mcsx-idle.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/wendy-idle.png",
+      "referencePage": "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/",
+      "notes": "Mission costume; adapted idle angle and partially cropped feet. Joe used for rendering style only. No pixel edits."
+    },
+    {
+      "id": "kirsh-idle",
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual full-body transparent character sprite for the Alien: Earth DLC, 2D side-view exploration. Subject: Kirsh in the grey-green mission jumpsuit seen in the official group photograph, standing in a neutral unarmed idle pose. Image 1 is the official FX Kirsh portrait: preserve that man's face, short upswept silver-white hair, white eyebrows, weathered skin, angular face, serious composed expression and black high turtleneck. Image 2 is the official D23 group photograph: Kirsh is the tall white-haired man at the center front. Use HIS precise uniform silhouette: grey-green zip-front work jumpsuit with a normal folded collar, chest flap pockets, long sleeves, straight cargo trousers with knee seam panels, black utility belt with the pale rectangular belt attachments visible in the photograph, dark boots. No hood, no helmet, no weapon in his hands. Image 3 is an existing Wendy game sprite used ONLY for realistic textured rendering, lighting, detail density and full-body framing; do not copy her face, hair, hood or stuffed toy. Entire Kirsh alone, tall lean adult proportions, stable feet planted, arms relaxed at his sides, face and torso three-quarter side view looking screen right. Keep both boot soles and head fully inside the canvas with a small clear margin. Restrained realistic game illustration, cloth folds and metal/plastic surfaces, soft neutral upper-left light, clean silhouette readable at 122px gameplay height. Genuine transparent alpha outside the body. No floor, shadow, background, gradients, glowing rim, aura, text, watermark, collage, additional people, multiple poses, duplicate limbs, tactical armor or invented uniform markings. One complete sprite only.",
+      "refs": [
+        "fx_kirsh_portrait.jpg",
+        "d23_lost_boys_full_group.jpg",
+        "wendy-idle.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/kirsh-idle.png",
+      "referencePages": [
+        "https://www.fxnetworks.com/shows/alien-earth/characters",
+        "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/"
+      ],
+      "notes": "Mission uniform documented by group photo, face by official portrait. Idle angle and partially cropped feet adapted. Wendy used for rendering style only. No pixel edits."
+    },
+    {
+      "id": "curly-idle",
+      "prompt": "Use case: stylized-concept. Asset type: one individual full-body transparent character sprite for a 2D Alien: Earth exploration game. Subject: Curly in her grey-green mission uniform, healthy neutral unarmed idle pose. Image 1 is the official FX portrait of Curly: preserve that face, dark eyes, light olive complexion, dark brown hair in two braids with softly parted waved front sections. Image 2 is the official D23 group photograph: Curly is second from the right, behind the tall dark-haired man and in front of the red-haired woman. Use Curly's own outfit: grey-green short-sleeve work jumpsuit over a plain dark crew-neck undershirt, chest pockets, black utility belt, loose straight work trousers and dark practical boots. Image 3 is the already generated Wendy sprite used ONLY for rendering style, lighting, scale, framing and texture density; do not copy Wendy's face, bob hairstyle, hood, long sleeves or toy. Show Curly alone, adult human proportions matching the photographs, standing with both feet on the same ground line, hands relaxed and empty, calm observant expression, face and torso three-quarter side view facing screen right. Entire head, both hands and both boots visible with small transparent margins. Realistic textured digital game illustration, restrained natural folds, clear face and costume silhouette readable around122px gameplay height, neutral soft upper-left light. Preserve costume identity and braid shape; no gun, helmet, armor, invented patches, jewelry or additional equipment. Transparent alpha outside the character; no scenery, floor, cast shadow, glow, aura, vignette, checkerboard, text, signature, duplicate figure, action scene or sheet of poses. One sprite only. Partly occluded portions in the group must remain simple continuations of the visible garment, not new costume designs.",
+      "refs": [
+        "fx_curly_portrait.jpg",
+        "d23_lost_boys_full_group.jpg",
+        "wendy-idle.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/curly-idle.png",
+      "referencePages": [
+        "https://www.fxnetworks.com/shows/alien-earth/characters",
+        "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/"
+      ],
+      "notes": "Mission uniform documented by group photo, face by official portrait. Idle angle and occluded garment parts adapted. Wendy used only for rendering style. Original pixels preserved."
+    },
+    {
+      "id": "nibs-idle",
+      "prompt": "Use case: stylized-concept. Asset type: ONE full-body transparent character sprite for the Alien: Earth DLC, a side-view exploration game. Subject: Nibs in her grey-green rescue-mission work uniform, healthy quiet idle stance. Reference image 1 is the official FX portrait of Nibs: keep her distinctive pale freckled face, large dark eyes, slightly parted lips, copper/auburn brown chin-length softly waved bob with side part, and light grey-beige crew-neck undershirt. Reference image 2 is the official D23 group walking photograph: Nibs is the red-haired woman furthest right. Use that matching grey-green zip-front work jumpsuit, hood/collar, rolled cuffs as visible, black utility belt, straight loose work trousers and dark practical boots. Reference image 3 is the already generated Wendy sprite ONLY for rendering style, consistent palette/materials, lighting, scale and framing; no Wendy identity, stuffed toy, hairstyle or unique accessories. Nibs alone, adult human proportions like the reference, relaxed upright posture with both boots planted, arms naturally lowered, empty hands, face and torso in three-quarter side view facing screen right. Entire head and both boots completely in frame with a small transparent margin. Realistic textured game illustration, natural fabric folds, soft neutral upper-left light, moderate contrast and clear silhouette at about122px gameplay height. Keep her clothing functional and faithful to the visible photographs; the occluded lower parts should be simple continuations of that uniform, with no new design. No weapon, armor, helmet, jewelry, patches, floor, cast shadow, scenery, glow, aura, background vignette, checkerboard, typography, watermark, additional person, multiple views or extra limbs. Genuine transparent alpha outside the character. One sprite only.",
+      "refs": [
+        "fx_nibs_portrait.jpg",
+        "d23_lost_boys_full_group.jpg",
+        "wendy-idle.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/nibs-idle.png",
+      "referencePages": [
+        "https://www.fxnetworks.com/shows/alien-earth/characters",
+        "https://d23.com/meet-the-cast-and-characters-of-fxs-alien-earth/"
+      ],
+      "notes": "Mission uniform documented by group photo, face by official portrait. Idle angle and occluded garment parts adapted. Wendy used only for rendering style. Original pixels preserved."
+    },
+    {
+      "id": "zoo-wall-light",
+      "prompt": "Use case: precise-object-edit. Edit target: image1 is a generated isolated two-strip Zoo Lab wall lamp. Supporting design reference: image2 is the official FX Zoo Lab photograph; the actual lamp is above the pipes at upper left, aboutx286–415/y189–255, with an identical one at upper right. Correct ONLY the lamp's proportions and clean its outer edge. The current generated lamp is too wide and flat: make the full solid housing approximately TWICE AS WIDE AS IT IS TALL (about2:1 width:height), matching the compact taller trapezoidal box in the official photograph. Keep the housing off-white, beveled/angular, two horizontal cool-white luminous panels and a narrow dark separator. Use a near-front orthographic view and maintain small visible depth on the bottom lip. Keep exactlyone entire fixture centered with clear transparent margins; both light panels and the white housing must remain OPAQUE, only the space outside the object is transparent. Remove stray detached edge pixels. No surrounding wall, pipes, cables, text, glow cloud, scenery, shadow, extra fixture or decorative additions. Same realistic textured game-prop style. One transparent PNG object only.",
+      "initialPrompt": "Use case: stylized-concept. Asset type: ONE isolated transparent-background wall-light fixture sprite for the Alien: Earth Zoo laboratory in a 2D game. The provided official FX Zoo Lab photograph is the sole design reference. Reproduce the compact wall-mounted lamp above the vertical pipes on the upper-left wall (approximately x286–415,y189–255 in the reference), or its identical counterpart on the right. The target is only that complete light fixture: an off-white/very pale grey angular trapezoidal housing with beveled edges, a wider lower lip, and TWO wide horizontal cool-white luminous strips separated by a dark narrow divider. Preserve its actual proportions and restrained industrial materials. Near-front orthographic presentation with only a small amount of depth on the bevels, as a reusable flat wall prop. The whole fixture fully visible with clear transparent margin, centered in a landscape canvas. Detailed realistic textured game illustration, subtle wear, clean readable geometry at approximately55px gameplay width, neutral lighting; the two luminous panels are on. No surrounding wall, pipes, support column, ceiling, additional lights, cables, text, lettering, logos, floating UI, collage, vignette, floor, cast shadow or glowing cloud outside the fixture. Do not redesign it as a generic science-fiction lamp or add a third strip. Genuine transparent alpha outside the solid fixture. One object only.",
+      "refs": [
+        "fx_zoo_lab_set.png",
+        "zoo-wall-light-candidate1.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-wall-light.png",
+      "referencePage": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+      "iterations": 2,
+      "notes": "Second generated version selected after correcting an overly flat fixture. Source-projection adaptation, exact:false. PNG bytes untouched.",
+      "supersededCandidate": {
+        "sha256": "f553ae1e6e657f71995e9ced79f1dd69fe14282a4871e6e935c796444108000e",
+        "status": "not-shipped",
+        "reason": "Too flat; corrected fixture proportions"
+      }
+    },
+    {
+      "id": "zoo-pipette",
+      "prompt": "Use case: precise-object-edit. Edit target is image1, the generated white laboratory pipette in its small upright holder. Image2 is the official FX Zoo Lab set reference: the slim white-and-black upright instrument nearx721–755/y539–625. Change ONLY the yellow top push-button/cap to the same restrained OFF-WHITE plastic as the instrument housing, with a subtle grey rim; eliminate the yellow glow around that top. Preserve the pipette shape, holder, perspective, black oval control inset, button layout, proportions and all other existing details. Keep ONE complete instrument and its integral holder, fully visible, no other objects. White plastic and black controls must be opaque. The area outside the object must remain genuinely transparent with clean edges and no cast shadow, halo, background, table or floor. No new colors, labels, logos, markings, extra switches, extra pipettes or additional views.",
+      "initialPrompt": "Use case: stylized-concept. Asset type: ONE transparent-background laboratory instrument sprite for the Alien: Earth Zoo Lab, a 2D exploration game. Use the provided official FX Zoo Lab set photograph as the visual reference. Target the upright white-and-black laboratory pipette instrument near the middle-right of the stainless table (the left of the two slim upright white instruments, approximatelyx721–755/y539–625). Show just ONE of these pipettes resting upright in its small plain white bench holder as one assembled prop. Preserve the visible narrow white plastic body, dark inset oval control/display area near the top, modest small control details and slender lower dispensing stem, with the small support base visible. No second pipette, bottles, baskets, tray, table or surrounding lab. Three-quarter near-front view compatible with the photographed tabletop, realistic restrained material detail, upright vertical silhouette, complete top and base with clear transparent margins. Clean readable form at about24px gameplay height, soft neutral upper-left lighting, white plastic parts opaque. Keep markings minimal and do not invent readable brand labels or complex extra mechanisms; details not resolved by the photo remain simple and are not redesigned. Genuine transparent alpha outside the instrument and its integral holder. No scenery, ground plane, cast shadow, glow, halo, text, watermark, frame, collage or multiple views. One isolated object only.",
+      "refs": [
+        "fx_zoo_lab_set.png",
+        "zoo-pipette-candidate1.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-pipette.png",
+      "referencePage": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+      "iterations": 2,
+      "notes": "Second output selected: unsupported yellow button removed. Small buttons and unseen details remain adaptations; no pixel edits after final generation.",
+      "supersededCandidate": {
+        "sha256": "63baec3d324f546fc0e5a5be81c63e823bcecce84e47c094572598d0953f99d7",
+        "status": "not-shipped",
+        "reason": "Unsupported yellow button; corrected to white"
+      }
+    },
+    {
+      "id": "zoo-wall-light-off",
+      "prompt": "Use case: precise-object-edit. Edit the supplied single transparent Zoo Lab wall-light fixture to create its UNPOWERED OFF variant. Preserve the housing geometry, angle, proportions, off-white industrial material, edge shape, two-panel layout, composition, transparent canvas and every structural detail. Change only the TWO illuminated cool-white panels: make them visibly OFF, opaque medium grey frosted diffuser surfaces with subtle ordinary reflected room light, no blue/white emission and no glow. Keep the narrow dark separator. Both white housing and grey panels remain opaque; only the background outside the complete fixture is transparent. The fixture is in a dim unpowered laboratory, but keep the solid geometry readable as a game prop. No wall, cables, text, cast shadow, halo, background, vignette, detached colored pixels, additional object or second state in the same image. One complete unpowered lamp sprite only.",
+      "refs": [
+        "zoo-wall-light.png"
+      ],
+      "status": "generated",
+      "path": "modules/alien-earth/v12/assets/raster-v12/zoo-wall-light-off.png",
+      "referencePage": "https://www.fxnetworks.com/shows/alien-earth/production-design",
+      "notes": "Unpowered variant derived by image generation from the selected lamp. Needed because R18 is intrinsically unpowered. No world or collision mutation."
     }
   ]
 }
