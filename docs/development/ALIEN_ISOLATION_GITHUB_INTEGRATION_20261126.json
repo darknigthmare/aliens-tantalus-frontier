@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "date": "2026-11-26",
+  "version": "0.8.0",
+  "source": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+  "sourceArchiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+  "sourceArchiveBytes": 85001778,
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "consolidation": "Fresh checks were executed before the local executor became unavailable. This receipt preserves their observed results without references to ephemeral log files.",
+  "node": {
+    "command": "npm test",
+    "runtime": "v24.22.3",
+    "passed": 536,
+    "failed": 0,
+    "skipped": 0
+  },
+  "build": {
+    "command": "python3 tools/build.py",
+    "exitCode": 0,
+    "stdout": "Standalone 1107027 bytes",
+    "beforeSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+    "afterSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+    "identical": true
+  },
+  "syntax": {
+    "command": "node --input-type=module --check (exact inline module)",
+    "exitCode": 0,
+    "stderr": "",
+    "inlineModuleBytes": 1080351,
+    "scope": "JavaScript embedded in recovered standalone, not the newly prepared Python integration QA script"
+  },
+  "spatialAudit": {
+    "command": "npm run test:spatial",
+    "rooms": 76,
+    "links": 112,
+    "anchors": 224,
+    "localPaths": 2197,
+    "samples": 462564,
+    "failures": [],
+    "pass": true,
+    "scope": "Structural graph ignores story locks. Local routes use real player radius and sampled path segments. This is not a full active-enemy campaign."
+  },
+  "mainCampaigns": {
+    "passed": 9,
+    "total": 9,
+    "goalsEach": 52,
+    "results": [
+      {
+        "difficulty": "recit",
+        "seed": 20141007,
+        "ok": true,
+        "goals": 52,
+        "health": 100,
+        "time": 1281.8999999993819,
+        "damage": 132,
+        "flameUses": 1,
+        "crafted": 2,
+        "alienSteps": 13484,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "recit",
+        "seed": 42,
+        "ok": true,
+        "goals": 52,
+        "health": 78,
+        "time": 1285.9499999993782,
+        "damage": 242,
+        "flameUses": 1,
+        "crafted": 4,
+        "alienSteps": 13485,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "recit",
+        "seed": 29102026,
+        "ok": true,
+        "goals": 52,
+        "health": 100,
+        "time": 1289.9999999993745,
+        "damage": 352,
+        "flameUses": 1,
+        "crafted": 7,
+        "alienSteps": 13486,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "survie",
+        "seed": 20141007,
+        "ok": true,
+        "goals": 52,
+        "health": 68,
+        "time": 1283.6999999993802,
+        "damage": 320,
+        "flameUses": 1,
+        "crafted": 5,
+        "alienSteps": 13520,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "survie",
+        "seed": 42,
+        "ok": true,
+        "goals": 52,
+        "health": 68,
+        "time": 1282.899999999381,
+        "damage": 320,
+        "flameUses": 1,
+        "crafted": 5,
+        "alienSteps": 13504,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "survie",
+        "seed": 29102026,
+        "ok": true,
+        "goals": 52,
+        "health": 68,
+        "time": 1282.899999999381,
+        "damage": 320,
+        "flameUses": 1,
+        "crafted": 5,
+        "alienSteps": 13504,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "cauchemar",
+        "seed": 20141007,
+        "ok": true,
+        "goals": 52,
+        "health": 100,
+        "time": 1288.9999999993754,
+        "damage": 616,
+        "flameUses": 1,
+        "crafted": 13,
+        "alienSteps": 13546,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "cauchemar",
+        "seed": 42,
+        "ok": true,
+        "goals": 52,
+        "health": 100,
+        "time": 1287.5999999993767,
+        "damage": 352,
+        "flameUses": 1,
+        "crafted": 7,
+        "alienSteps": 13518,
+        "detections": 0,
+        "failure": null
+      },
+      {
+        "difficulty": "cauchemar",
+        "seed": 29102026,
+        "ok": true,
+        "goals": 52,
+        "health": 100,
+        "time": 1282.899999999381,
+        "damage": 440,
+        "flameUses": 1,
+        "crafted": 9,
+        "alienSteps": 13424,
+        "detections": 0,
+        "failure": null
+      }
+    ]
+  },
+  "explorationCampaigns": {
+    "passed": 4,
+    "total": 5,
+    "geometryPassed": 2,
+    "geometryTotal": 2,
+    "activePassed": 2,
+    "activeTotal": 3,
+    "results": [
+      {
+        "version": "0.8.0",
+        "active": false,
+        "classic": false,
+        "seed": 20141007,
+        "ok": true,
+        "goals": 52,
+        "tasks": 32,
+        "rooms": 76,
+        "transitions": 158,
+        "rescued": [
+          "nora",
+          "elias"
+        ],
+        "failure": null
+      },
+      {
+        "version": "0.8.0",
+        "active": false,
+        "classic": true,
+        "seed": 20141007,
+        "ok": true,
+        "goals": 52,
+        "tasks": 32,
+        "rooms": 76,
+        "transitions": 158,
+        "rescued": [
+          "nora",
+          "elias"
+        ],
+        "failure": null
+      },
+      {
+        "version": "0.8.0",
+        "active": true,
+        "classic": false,
+        "seed": 20141007,
+        "ok": false,
+        "goals": 13,
+        "tasks": 5,
+        "rooms": 22,
+        "transitions": 31,
+        "rescued": [],
+        "failure": "Mort m_staff objectif C05_03 à 451.3 s (Vous n’avez pas survécu · Le Xénomorphe.)"
+      },
+      {
+        "version": "0.8.0",
+        "active": true,
+        "classic": false,
+        "seed": 42,
+        "ok": true,
+        "goals": 52,
+        "tasks": 32,
+        "rooms": 76,
+        "transitions": 158,
+        "rescued": [
+          "nora",
+          "elias"
+        ],
+        "failure": null
+      },
+      {
+        "version": "0.8.0",
+        "active": true,
+        "classic": false,
+        "seed": 29102026,
+        "ok": true,
+        "goals": 52,
+        "tasks": 32,
+        "rooms": 76,
+        "transitions": 158,
+        "rescued": [
+          "nora",
+          "elias"
+        ],
+        "failure": null
+      }
+    ]
+  },
+  "browser": {
+    "status": "not-run",
+    "attempted": true,
+    "reason": "The system Chromium launcher pointed to an unavailable browser binary; the Playwright-managed Chromium executable was also absent. No browser assertions ran.",
+    "historicalScreenshotsAreFresh": false
+  },
+  "preparedIntegrationQa": {
+    "path": "scripts/qa-alien-isolation-integration.py",
+    "blob": "1301cb7bb42a9e5d7af9be7c9b25866eaa178452",
+    "pythonSyntaxValidated": true,
+    "browserExecuted": false
+  },
+  "knownLimitations": [
+    "Full-exploration live seed20141007 dies at m_staff, C05_03,451.3s; identical failure already recorded in archived V0.8.",
+    "tests/sweep.mjs and tests/spatial-sweep.mjs do not set nonzero exit status for r.ok=false; inspect their JSON matrices.",
+    "Not an exact1:1 reconstruction; condensed2D/2.5D prototype.",
+    "V0.9 from the previous session was not present in this recovery and was not validated."
+  ],
+  "sourceModifications": [],
+  "integration": {
+    "baseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+    "baseBranch": "claude/nifty-shannon-qpy1hl",
+    "recoveredFiles": 646,
+    "recoveredBytes": 107266357,
+    "menuTests": {
+      "passed": 19,
+      "failed": 0
+    },
+    "distributionTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "successionTests": {
+      "passed": 16,
+      "failed": 0
+    },
+    "localResultsBeforeExecutorInterruption": true,
+    "fullHostBuildLocallyVerified": false,
+    "runtimeKind": "independent-expedition-linked-from-host-menu",
+    "fidelity1to1Validated": false
+  },
+  "recoveryCi": {
+    "status": "success",
+    "runId": 45815067075,
+    "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815067075",
+    "workflowCommit": "26b2cc48b463e158d2dffff0983d3597f072f259",
+    "publishedSourceCommit": "cea59ecf6f1f9e455b5df22184721f60456c32bf",
+    "testGroups": [
+      {
+        "name": "DLC Node",
+        "passed": 536,
+        "failed": 0
+      },
+      {
+        "name": "Isolation integration",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "name": "Host DLC regression",
+        "passed": 36,
+        "failed": 0
+      }
+    ],
+    "recoveredFiles": 646,
+    "recoveredBytes": 107266357
+  }
+}

@@ -43,3 +43,9 @@ Le script `scripts/qa-alien-isolation-integration.py` teste l’ouverture via Ex
 Les reçus historiques AVP, Aliens et Fiorina restent inchangés. Une succession depuis la base cumulative suit précisément `package.json`, `scripts/build.mjs`, `scripts/verify-public-release-v86.mjs`, `src/dlc-menu.js` et `scripts/verify-dlc-menu.mjs`. Les preuves historiques ne sont pas transférées aux nouvelles révisions.
 
 La livraison porte sur **V0.8.0**, dernière version complète effectivement retrouvée. La candidate V0.9 n’est pas récupérée et n’est pas publiée. Le résultat est un prototype condensé 2D/2.5D, pas une reconstitution 1:1 certifiée. La suite reste à développer dans une nouvelle version : inventaire canonique des armes et équipements, apparence des personnages, correspondance des lieux et circulation physique, avec conservation des identifiants et migrations de sauvegarde.
+
+## Récupération GitHub vérifiée
+
+Le [workflow de récupération](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815067075) a réussi. Il a réexécuté **536 tests du DLC, 10 tests d’intégration Isolation et 36 tests de régression des extensions**, tous réussis, puis publié les 646 fichiers originaux au commit `cea59ecf6f1f9e455b5df22184721f60456c32bf`. L’inventaire distant contient bien **107 266 357 octets**, et son SHA-256 correspond au manifeste vérifié localement.
+
+Le scénario navigateur a ensuite passé la compilation syntaxique Python. Ses profils sentinelles représentent des parties natives déjà commencées ; après chaque reprise, il compare l’état réellement chargé en mémoire, en plus de l’export public. Son exécution complète et le build hôte sont suivis séparément par la CI de la pull request.
