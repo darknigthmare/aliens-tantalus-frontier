@@ -3,7 +3,7 @@
   "dlc": "Alien: Covenant",
   "version": "0.11-sprites",
   "date": "2026-11-26",
-  "status": "assets-in-review",
+  "status": "partial-reference-guided-release",
   "fidelityPolicy": "Film-reference-guided sprites. No pixel-identical 1:1 certification; unseen views and gameplay poses reconstructed. Generated images are distinct from runtime integration.",
   "assets": [
     {
@@ -132,34 +132,35 @@
     {
       "id": "oram",
       "path": "assets/openai/sprites/alien-covenant-v011/oram.png",
-      "gitBlobSha": "5274c88c95dff68bc80534e9c3ad363f715b014e",
+      "gitBlobSha": "4d720e2a639f358b03c53c489abbffc56bc712f3",
       "generationTool": "image_gen.imagegen",
       "originalBytesPreserved": true,
-      "version": 2,
+      "version": 1,
       "verified1to1": false,
-      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "visualReview": "Complete head, backpack where present, and both boot soles; right-facing three-quarter stable full-body idle; empty hands; single human with alpha-zero exterior. Costume matches the identified scene references.",
       "limitations": [
-        "Reference face is three-quarter and small; fine badge lettering and rear costume unavailable.",
-        "Facing and idle pose adapted for runtime."
+        "The FBFX front still and bridge rear frame document the same onboard upper garment; the stills obscure the lower trouser legs and shoes, which remain conservative reconstructions.",
+        "Photographic lighting is blue-green; neutral garment appearance is interpreted from the observed materials.",
+        "Static right-facing idle pose adapted for runtime; no walk/attack/death cycle verified."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
-        "bytes": 1775928,
+        "bytes": 1404696,
         "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
-        "alphaZero": 1099909,
-        "alphaZeroPercent": 69.93033091227214,
-        "alphaAbove245": 447096,
+        "alphaZero": 1139626,
+        "alphaZeroPercent": 72.45546976725261,
+        "alphaAbove245": 405424,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
-          243,
-          22,
-          755,
-          1519
+          298,
+          24,
+          744,
+          1523
         ],
         "corners": [
           0,
@@ -170,25 +171,30 @@
       },
       "inputReferences": [
         {
-          "file": "walter-oram-expedition-ramp.jpg",
-          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
-          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
-          "credit": "Mark Rogers / 20th Century Fox"
+          "file": "fbfx-eva-3.jpg",
+          "url": "https://static.wixstatic.com/media/a9c6f0_75ef9f0dbc3b45b3964a618dc87fb754~mv2.jpg",
+          "source": "https://www.fbfx.co.uk/film-alien-covenant",
+          "credit": "FBFX official Alien: Covenant film effects/costume portfolio"
         },
         {
-          "file": "oram-crewmessage.jpg",
-          "url": "https://img.youtube.com/vi/icNG-g3pl_I/maxresdefault.jpg",
-          "source": "https://www.youtube.com/watch?v=icNG-g3pl_I",
-          "credit": "Official Alien: Covenant crew promotional video"
+          "file": "bridge-avpcentral.webp",
+          "url": "https://www.avpcentral.com/images/uscss-covenant/covenant-crew-on-bridge.webp",
+          "source": "https://www.avpcentral.com/alien-covenant-novelization",
+          "credit": "Alien: Covenant (2017) film frame / 20th Century Fox, republished by AVP Central"
         }
       ],
-      "generationPrompt": "Use case: photorealistic-natural. Asset type: a single production-ready transparent character sprite for the Alien: Covenant (2017) DLC. Create ONE realistic live-action character cutout only, full body from the very top of the head to the complete soles of BOTH boots, adult human proportions. Three-quarter SIDE view facing to the RIGHT of the canvas, head and torso both toward screen-right, stable relaxed standing idle pose, feet planted and separated so both boots remain legible. Both hands empty, arms slightly separated from the torso; no held weapons, no firearms anywhere, no scene or platform. Center the full silhouette with at least 10% transparent padding on every side. True RGBA transparent background, no opaque background, no checkerboard painted into the pixels, no floor shadow. Preserve the exact facial likeness, body build, garment shapes, material textures, muted film colors and insignia placement seen in the provided film references. High-detail realistic photographic cutout, no cartoon, no pixel art, no doll proportions, no illustration, no glow, no text, no title, no border, no decorative icons, no extra people. The references are appearance evidence, not a composition to reproduce; output the requested single full-body sprite.\nSubject: Christopher Oram, played by Billy Crudup in Alien: Covenant (2017), in expedition outfit. In Image 1 Oram is the SLENDER MAN AT THE LEFT of the white-capped foreground Walter, looking up toward image-left, with a TAN / GREY-BEIGE SMOCK and dark cap with ear flaps. Reproduce Oram alone, never the white-capped man nor the security personnel. Preserve his exact narrow clean-shaven face, straight nose and dark hair, dark explorer cap with hanging side flaps, taupe tan practical expedition anorak with broad folded collar and the visible central shield-like mission patch, webbing harness and olive waist belt with the compact pouches, dark olive trousers and worn dark boots. Image 2 reinforces Oram's face and fabric detail only. Keep the original costume architecture and film colors. Empty hands, no rifle or sling weapon, no invented armor.",
-      "backgroundEditPrompt": "Use case: background-extraction. Edit the attached exact sprite. Change ONLY background and alpha transparency, preserving the person's face, body, every garment, texture, pose, size, right-facing orientation and complete feet without any redesign. REMOVE THE ENTIRE GREY/BROWN HALO, HAZE, SPOTLIGHT AND ALL BACKGROUND PIXELS. Output a proper hard-isolated transparent PNG cutout: every pixel outside the actual physical character silhouette must have alpha EXACTLY 0, including all canvas edges and transparent padding; the interior of the physical person and opaque garments must have alpha EXACTLY 255. Only a narrow one-pixel antialias edge may have intermediate alpha. The background should be empty invisible pixels, not a black, grey, white or checkered rectangle. No glow, no floor, no shadow, no gradient. Keep the exact complete original human figure. No cropping and no extra objects.",
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE realistic complete full-body character PNG cutout: CHRISTOPHER ORAM, played by BILLY CRUDUP, in his ONBOARD BRIDGE outfit in Alien: Covenant (2017). EXACT subject identification: in reference image 1, Oram is the MAN standing at the CENTER behind the console, next to the woman; the yellow helmet at left is NOT part of his outfit. In reference image 2, the SAME MAN is foreground LEFT seen from the BACK, hands together behind him, showing the hood and back of his black garment. Reproduce ONLY this man and faithfully preserve his narrow clean-shaven middle-aged face, short dark combed-back slightly wavy hair, natural slightly receding temples, facial proportions and slender build. The visible BRIDGE garment is a simple dark black/charcoal SLEEVELESS HOODED PULLOVER/VEST worn over a close-fitting pale grey fine microgrid-textured LONG-SLEEVE underlayer. Hood resting behind the neck, no hat, no field cap, NO tan expedition coat, no tactical vest, no harness or backpack. Match the hood shape, plain dark chest and pale fitted sleeves exactly as observed. Dark charcoal straight practical trousers and simple dark shipboard work boots, restrained construction without decorative or invented armor. Do not transfer the woman's blouse or yellow EVA gear. Turn him to a 3/4 SIDE view facing SCREEN RIGHT, head and body both right, relaxed standing stable idle; arms slightly away from sides, BOTH HANDS EMPTY, both boots separate and entirely visible. Natural photoreal live-action material, consistent neutral lighting, realistic adult anatomy. Single person only, NO weapons, no scene, no objects, no text, no border. Include the entire figure from the top of the hair to the very bottom of BOTH soles, centered with at least 7 percent completely EMPTY margin beyond the silhouette on ALL FOUR sides. Output genuine transparent RGBA PNG: every background pixel and all four corners alpha EXACTLY ZERO; subject fully opaque with only a narrow antialiased edge. No haze, no grey/white background, no floor, no ground shadow, no painted checkerboard, no glow. Faithful photographic sprite, not cartoon, not pixel art, not an illustration.",
+      "backgroundEditPrompt": null,
       "animationsVerified": false,
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "catalogOnly": false,
+      "rooms": [
+        "bridge"
+      ],
+      "sourceScene": "Covenant bridge before landing"
     },
     {
       "id": "daniels",
@@ -1893,8 +1899,7 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Lower trousers, boots and rear gear are partly reconstructed from cropped field reference.",
-        "Pose changed from holding wheat to empty-handed idle.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Pose changed from holding wheat to empty-handed idle."
       ],
       "alphaQA": {
         "width": 1024,
@@ -2044,34 +2049,35 @@
     {
       "id": "karine",
       "path": "assets/openai/sprites/alien-covenant-v011/karine.png",
-      "gitBlobSha": "574b9bc9383146f9ac02f6570fc4548dc8f13550",
+      "gitBlobSha": "04704c87e567a6936222d6a68ea6ce76b4396e26",
       "generationTool": "image_gen.imagegen",
       "originalBytesPreserved": true,
       "version": 1,
       "verified1to1": false,
-      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "visualReview": "Complete head, backpack where present, and both boot soles; right-facing three-quarter stable full-body idle; empty hands; single human with alpha-zero exterior. Costume matches the identified scene references.",
       "limitations": [
-        "Film medical-bay shirt variant used for the adapted lander-hold profile; tied-hair procedural parameter superseded by actual chin-length bob reference.",
-        "Lower legs and boots not shown; conservatively reconstructed."
+        "Film expedition stills directly document Carmen Ejogo's face, quilted cap, beige anorak, scarf, gloves, backpack and harness; lower legs and boot details are not visible and remain conservatively reconstructed.",
+        "Fine patch lettering and fully hidden rear garment surfaces cannot be verified 1:1.",
+        "Neutral right-facing idle pose adapted for runtime; no walk/attack/death cycle verified."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
-        "bytes": 1447878,
+        "bytes": 1828831,
         "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
-        "alphaZero": 1166997,
-        "alphaZeroPercent": 74.19567108154297,
-        "alphaAbove245": 378696,
+        "alphaZero": 1014601,
+        "alphaZeroPercent": 64.50659434000652,
+        "alphaAbove245": 529504,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
-          312,
-          20,
-          736,
-          1523
+          171,
+          17,
+          765,
+          1528
         ],
         "corners": [
           0,
@@ -2082,31 +2088,30 @@
       },
       "inputReferences": [
         {
-          "file": "karine-faris-ledward-medbay.jpg",
-          "url": "https://images8.alphacoders.com/869/thumb-1920-869204.jpg",
-          "source": "https://wall.alphacoders.com/big.php?i=869204",
-          "credit": "Alien: Covenant production still / 20th Century Fox, redistributed AlphaCoders"
+          "file": "karine-field-imdb.jpg",
+          "url": "https://m.media-amazon.com/images/M/MV5BYTI2MTNhMjgtNTI4OC00YzVkLTk3MjUtZTUyNTE2ODRjMjdiXkEyXkFqcGc%40._V1_.jpg",
+          "source": "https://www.imdb.com/title/tt2316204/mediaviewer/rm1322021888/",
+          "credit": "Alien: Covenant (2017) studio film still, distributed via IMDb image CDN"
         },
         {
-          "file": "branson-last-supper.jpg",
-          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
-          "source": "https://www.independent.co.uk",
-          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
-        },
-        {
-          "file": "crew-last-supper.jpg",
-          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
-          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
-          "credit": "Mark Rogers / 20th Century Fox"
+          "file": "ledward-interview.jpg",
+          "url": "https://images.squarespace-cdn.com/content/v1/598b5f49d482e97953d22893/922c6fc2-ed1b-42f5-8cbc-55ad6513eb39/aliencovenant155.jpg",
+          "source": "https://www.perfectorganism.com/home/2021/11/9/176-interviewing-alien-covenants-benjamin-rigby-anatomy-of-a-scene-the-medbay-exquisite-corpse-dissecting-alien-covenant-part-four",
+          "credit": "Film still accompanying direct Benjamin Rigby interview on Perfect Organism podcast, 2021-11-09"
         }
       ],
-      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Three references: 1 medbay; 2 unrelated Branson; 3 group. Subject KARINE ORAM, Carmen Ejogo, the WOMAN ON THE RIGHT in image1, leaning toward the patient. Reproduce her exact face, medium-brown skin, slim adult build and straight softly highlighted warm-brown CHIN-LENGTH BOB haircut (not Daniels' dark pixie and not long ponytail). Her garment is the plain LIGHT GREY close-fitting short-sleeve crew-neck T-shirt seen in image1, tucked into dark charcoal/olive practical work trousers, plain black belt and rugged dark work boots. No jacket or tactical vest for this medical/lander interior variant, no cap, no necklace invented. Both bare hands empty in neutral idle, calm attentive expression, no patient or medical equipment.",
+      "generationPrompt": "Use case photorealistic-natural. Produce ONE realistic live-action FULL BODY transparent character sprite of KARINE ORAM played by CARMEN EJOGO in Alien: Covenant (2017), wearing her BEIGE EXPEDITION ANORAK as seen in the two attached film frames. In image 1 she is the WOMAN on the LEFT/front, facing the ill man; in image 2 she is the SAME WOMAN on the LEFT leaning toward him. Do not generate the man. Match exactly her characteristic mature face, medium-brown skin, slim build, warm-brown chin-length bob visible around the cap, and her concerned but composed expression. The real field outfit has a soft dark OLIVE QUILTED EXPLORER CAP with rounded hanging ear flaps, NO protruding baseball visor, the fine light decorative mark above the small blue horizontal wing badge at the front; a generously folded open BEIGE-TAN ANORAK HOOD resting around her neck and shoulders; dark olive crinkled scarf tucked into collar; muted sand-beige practical anorak with the observed large button closure, stitched panels, chest and sleeve details; olive webbing harness with metal fastenings, rectangular compact radio on shoulder strap, olive backpack with visible rounded top and rolled equipment behind her shoulder. Preserve the photographed shapes, subdued colors and textile details. Simple restrained dark olive practical field trousers and dark hiking boots where the photographs do not expose them; no decorative invented armor. Brown work gloves, BOTH HANDS EMPTY, no scanner, rifle, medical implement, weapon, no other person. Generate a stable relaxed standing idle in THREE-QUARTER SIDE view facing SCREEN RIGHT, head and body both right, arms slightly away from torso and two feet apart with both complete boot soles visible. Keep the actual slim adult proportions, real film face, fabric and subdued photographic lighting, no beauty retouching, no cartoon, no pixel art. Include her ENTIRE silhouette from cap to both soles and entire backpack, with at least 7 percent empty margin on EVERY side, particularly above cap and below the boots. Genuine clean PNG CUTOUT with true alpha exactly zero outside her body/backpack and on all four canvas corners; person opaque, only thin antialiased silhouette edges partially transparent. No scene or ground, no floor shadow, no grey/white matte, no haze or halo, no checkerboard drawing, no text, no caption, no border.",
       "backgroundEditPrompt": null,
       "animationsVerified": false,
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "catalogOnly": false,
+      "rooms": [
+        "landerhold"
+      ],
+      "sourceScene": "Planet 4 expedition / landerhold before medbay"
     },
     {
       "id": "branson-record",
@@ -2181,8 +2186,7 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Full-body standing pose and occluded lower legs reconstructed; group field reference identifies Hallett by his ginger beard, matched to captioned full-crew photo.",
-        "Weapon removed for runtime separate weapon layer.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Weapon removed for runtime separate weapon layer."
       ],
       "alphaQA": {
         "width": 1024,
@@ -2250,8 +2254,7 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Lower trousers/boots and hidden rear gear reconstructed from cohort costume; supplied field photo partly occludes Cole behind another crew member.",
-        "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted."
       ],
       "alphaQA": {
         "width": 1024,
@@ -2747,19 +2750,20 @@
       "limitations": [
         "Face from official Rosenthal crew-message clip; expedition upper clothing from Rosenthal at far right of wheat-field film still.",
         "Most lower garment and rear equipment hidden or cropped, continued conservatively from shared security clothing visible in ramp still; not certified 1:1.",
-        "Field cap follows film reference even though procedural code describes tied hair; weapons omitted.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Field cap follows film reference even though procedural code describes tied hair; weapons omitted."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
         "bytes": 1654111,
-        "sha256": "c5968863303be61ad9cfaba51d0f3a717547dab8b09ab6bc21326a743e4f8901",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1110571,
+        "alphaZeroPercent": 70.6082026163737,
+        "alphaAbove245": 435348,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           278,
@@ -2767,7 +2771,12 @@
           738,
           1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2821,12 +2830,14 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1316910,
-        "sha256": "8dbd842fa67d55b880795390691cd2901a786fdd97990a5c35e07da6ea87517d",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1194008,
+        "alphaZeroPercent": 75.91298421223958,
+        "alphaAbove245": 346683,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           305,
@@ -2834,7 +2845,12 @@
           720,
           1521
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2864,27 +2880,33 @@
       "limitations": [
         "Face taken from primary Framestore suit close-up; yellow suit explicitly excluded for normal expedition runtime profile.",
         "Ramp front-right identity cross-checked against IMFDB caption for Ankor's distinctive AR-15, and cast photo.",
-        "Neutral pose and hidden rear gear reconstructed; weapon removed.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Neutral pose and hidden rear gear reconstructed; weapon removed."
       ],
       "alphaQA": {
         "width": 960,
         "height": 1639,
         "bytes": 1164377,
-        "sha256": "accb60303b6c78e8bc47624c8396c273ea0b4e7c8a3e57d006078f54e06b2caa",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 1002512,
+        "alphaZeroPercent": 63.71466341264999,
+        "alphaAbove245": 537891,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
-          211,
+          212,
           6,
           763,
           1632
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -2927,19 +2949,20 @@
       "limitations": [
         "Actual forest reference shows no cap; bareheaded styling supersedes the procedural cap parameter.",
         "Legs, boots and rear equipment are partly outside the supplied frame, reconstructed conservatively in matching security costume.",
-        "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed.",
-        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
+        "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
         "bytes": 1679775,
-        "sha256": "1fee22ec40b39e1da4f5d275e3503484494df465bc82c015a4fbe99938aaf161",
+        "mode": "RGBA",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077289,
+        "alphaZeroPercent": 68.49219004313152,
+        "alphaAbove245": 467428,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
@@ -2947,7 +2970,12 @@
           734,
           1522
         ],
-        "pass": true
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
       },
       "inputReferences": [
         {
@@ -3070,10 +3098,147 @@
         ],
         "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
         "productionBytesUnchanged": true,
-        "visualReview": "Generated full sprite inspected; reference proportions and two-cup count checked; dark/light composite pending root review"
+        "visualReview": "Passed manual inspection of dark (#202830) and light (#ece8df) composites. Complete shapes, transparent handle and gaps, no visible background veil or halo at inspection scale.",
+        "reviewArtifact": "/home/user/covenant-reference-recovery/furniture/teaset-composite-review.jpg"
       },
       "rooms": [
         "whiteroom"
+      ]
+    },
+    {
+      "id": "oram-field",
+      "path": "assets/openai/sprites/alien-covenant-v011/oram-field.png",
+      "gitBlobSha": "5274c88c95dff68bc80534e9c3ad363f715b014e",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Reference face is three-quarter and small; fine badge lettering and rear costume unavailable.",
+        "Facing and idle pose adapted for runtime."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1775928,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1099909,
+        "alphaZeroPercent": 69.93033091227214,
+        "alphaAbove245": 447096,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          243,
+          22,
+          755,
+          1519
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "oram-crewmessage.jpg",
+          "url": "https://img.youtube.com/vi/icNG-g3pl_I/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=icNG-g3pl_I",
+          "credit": "Official Alien: Covenant crew promotional video"
+        }
+      ],
+      "generationPrompt": "Use case: photorealistic-natural. Asset type: a single production-ready transparent character sprite for the Alien: Covenant (2017) DLC. Create ONE realistic live-action character cutout only, full body from the very top of the head to the complete soles of BOTH boots, adult human proportions. Three-quarter SIDE view facing to the RIGHT of the canvas, head and torso both toward screen-right, stable relaxed standing idle pose, feet planted and separated so both boots remain legible. Both hands empty, arms slightly separated from the torso; no held weapons, no firearms anywhere, no scene or platform. Center the full silhouette with at least 10% transparent padding on every side. True RGBA transparent background, no opaque background, no checkerboard painted into the pixels, no floor shadow. Preserve the exact facial likeness, body build, garment shapes, material textures, muted film colors and insignia placement seen in the provided film references. High-detail realistic photographic cutout, no cartoon, no pixel art, no doll proportions, no illustration, no glow, no text, no title, no border, no decorative icons, no extra people. The references are appearance evidence, not a composition to reproduce; output the requested single full-body sprite.\nSubject: Christopher Oram, played by Billy Crudup in Alien: Covenant (2017), in expedition outfit. In Image 1 Oram is the SLENDER MAN AT THE LEFT of the white-capped foreground Walter, looking up toward image-left, with a TAN / GREY-BEIGE SMOCK and dark cap with ear flaps. Reproduce Oram alone, never the white-capped man nor the security personnel. Preserve his exact narrow clean-shaven face, straight nose and dark hair, dark explorer cap with hanging side flaps, taupe tan practical expedition anorak with broad folded collar and the visible central shield-like mission patch, webbing harness and olive waist belt with the compact pouches, dark olive trousers and worn dark boots. Image 2 reinforces Oram's face and fabric detail only. Keep the original costume architecture and film colors. Empty hands, no rifle or sling weapon, no invented armor.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit the attached exact sprite. Change ONLY background and alpha transparency, preserving the person's face, body, every garment, texture, pose, size, right-facing orientation and complete feet without any redesign. REMOVE THE ENTIRE GREY/BROWN HALO, HAZE, SPOTLIGHT AND ALL BACKGROUND PIXELS. Output a proper hard-isolated transparent PNG cutout: every pixel outside the actual physical character silhouette must have alpha EXACTLY 0, including all canvas edges and transparent padding; the interior of the physical person and opaque garments must have alpha EXACTLY 255. Only a narrow one-pixel antialias edge may have intermediate alpha. The background should be empty invisible pixels, not a black, grey, white or checkered rectangle. No glow, no floor, no shadow, no gradient. Keep the exact complete original human figure. No cropping and no extra objects.",
+      "animationsVerified": false,
+      "originalAssetId": "oram",
+      "catalogOnly": true,
+      "rooms": [],
+      "selectionNote": "Expedition outfit retained as catalog variant. It must not be selected for the pre-landing bridge actor.",
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "karine-medical",
+      "path": "assets/openai/sprites/alien-covenant-v011/karine-medical.png",
+      "gitBlobSha": "574b9bc9383146f9ac02f6570fc4548dc8f13550",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
+      "limitations": [
+        "Film medical-bay shirt variant, retained only in the catalogue; the landerhold runtime scene now uses a separate documented beige expedition anorak variant. Actual chin-length bob reference supersedes the former procedural tied-hair parameter.",
+        "Lower legs and boots not shown; conservatively reconstructed."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1447878,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1166997,
+        "alphaZeroPercent": 74.19567108154297,
+        "alphaAbove245": 378696,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          312,
+          20,
+          736,
+          1523
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "karine-faris-ledward-medbay.jpg",
+          "url": "https://images8.alphacoders.com/869/thumb-1920-869204.jpg",
+          "source": "https://wall.alphacoders.com/big.php?i=869204",
+          "credit": "Alien: Covenant production still / 20th Century Fox, redistributed AlphaCoders"
+        },
+        {
+          "file": "branson-last-supper.jpg",
+          "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/02/23/10/alien-covenant.jpg?fit=crop&height=900&width=1200",
+          "source": "https://www.independent.co.uk",
+          "credit": "Alien: Covenant Last Supper promotional frame / 20th Century Fox, redistributed The Independent"
+        },
+        {
+          "file": "crew-last-supper.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211332.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Generate ONE full-body realistic human sprite for Alien: Covenant (2017), normal adult anatomy, precise likeness from the named film photograph. Complete head and soles of both boots inside frame, stable neutral standing idle, 3/4 SIDE view facing screen RIGHT, hands empty separated slightly from torso, feet apart. Faithful practical fabric and color, natural film-age face; no glamorization, no toy/cartoon/pixel art. True alpha-zero transparent PNG cutout, subject visibly opaque, no background or floor, no shadow, no other people/objects, no weapon, no labels. At least7% empty transparent margin all around silhouette, especially both soles. Three references: 1 medbay; 2 unrelated Branson; 3 group. Subject KARINE ORAM, Carmen Ejogo, the WOMAN ON THE RIGHT in image1, leaning toward the patient. Reproduce her exact face, medium-brown skin, slim adult build and straight softly highlighted warm-brown CHIN-LENGTH BOB haircut (not Daniels' dark pixie and not long ponytail). Her garment is the plain LIGHT GREY close-fitting short-sleeve crew-neck T-shirt seen in image1, tucked into dark charcoal/olive practical work trousers, plain black belt and rugged dark work boots. No jacket or tactical vest for this medical/lander interior variant, no cap, no necklace invented. Both bare hands empty in neutral idle, calm attentive expression, no patient or medical equipment.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "originalAssetId": "karine",
+      "catalogOnly": true,
+      "rooms": [],
+      "selectionNote": "Medical-bay T-shirt outfit retained as catalog variant. It must not be selected for the pre-medbay landerhold actor.",
+      "category": "character",
+      "availableStates": [
+        "idle"
       ]
     }
   ],
@@ -3138,5 +3303,5 @@
       "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
     }
   ],
-  "integrationStatus": "Original v0.10 runtime restored with rendering adapters; browser and full host verification pending."
+  "integrationStatus": "Original v0.10 runtime restored; 29 scoped PNG admissions, complete source and browser validation in progress. Catalogue documents incomplete 1:1 and animation coverage."
 }
