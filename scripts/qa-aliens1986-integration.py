@@ -1,7 +1,7 @@
 """Served Aliens 1986 V116: raster drawing, UI journey and save isolation.
 
 Only fixtures: fresh native profiles in an isolated browser context. The Canvas
-observer forwards every original drawImage call and records decoded PNG draws.
+observer forwards every original drawImage call and records PNG draws on #scene.
 No DLC state/position/resource/outcome injection and no mocked clock.
 """
 from __future__ import annotations
@@ -76,7 +76,7 @@ def main():
         "fixtures":{"native":"createDefaultSave(1..3), QA player names, selected profile 1, isolated Chromium context",
                     "seededKeys":sorted(sentinels), "dlc":"None; new operation and public UI input only",
                     "clock":"Real requestAnimationFrame and wall clock",
-                    "rendering":"Pass-through Canvas drawImage observer; no draw replacement"},
+                    "rendering":"Pass-through drawImage observer on #scene; offscreen measurements excluded"},
         "parentTitleRequested":not args.skip_title, "nativeTantalusGameplayTested":False, "physicalPhoneTested":False,
         "tests":tests, "pageErrors":errors, "consoleErrors":consoles, "requestFailures":failed_requests,
         "httpErrors":http_errors,
@@ -133,7 +133,7 @@ def main():
                     const result = original.apply(this, args);
                     const image = args[0];
                     const source = image?.currentSrc || image?.src || '';
-                    if (typeof source === 'string' && source.includes('/assets/dlc/aliens-1986/')) {
+                    if (this.canvas?.id === 'scene' && typeof source === 'string' && source.includes('/assets/dlc/aliens-1986/')) {
                         const row = stats.images[source] || (stats.images[source] = {
                             draws: 0, width: image.naturalWidth, height: image.naturalHeight
                         });
