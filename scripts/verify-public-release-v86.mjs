@@ -1188,6 +1188,8 @@ const AVP_RITUAL_SPRITES_SOURCE_FILES_20261126 = new Set([
   'assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png',
   'assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png',
   'assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png',
+  'assets/openai/sprites/avp2004-reliefs-v001/avp2004-crowned-human-relief-tile.png',
+  'assets/openai/sprites/avp2004-reliefs-v001/avp2004-headdress-human-relief-tile.png',
   'assets/openai/sprites/avp2004-reliefs-v001/manifest.json',
   'assets/openai/sprites/avp2004-reliefs-v001/README.md',
   'assets/openai/sprites/avp2004-reliefs-v001/GALLERY.md',

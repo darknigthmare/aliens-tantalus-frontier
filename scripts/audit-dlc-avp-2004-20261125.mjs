@@ -507,6 +507,18 @@ export const AVP_RITUAL_SOURCE_SUCCESSORS_20261126 = Object.freeze(Object.fromEn
 ));
 // END AVP RITUAL SOURCE ART HOST RECEIPTS 20261126
 
+// The two additional relief candidates extend only the source-path verifier.
+// The first publication's receipts remain unchanged.
+export const AVP_RITUAL_FOLLOWUP_BASELINE_20261126 = '8e8d51c186052c0b0662786677dea3652c915583';
+export const AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "eee2d9472536f077b007986b2f78035ab2529f79c211ce1c031efa5409db7753",
+    "currentSha256": "f2641aec3ac84fb64ad596ce4ee45262066e0d7eaf2400dc294e3e2130700975"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -538,8 +550,14 @@ export function reviewedFiorinaV116HostDigest20261125(path, endpoint) {
 }
 
 export function reviewedAvpRitualSourceHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_RITUAL_SOURCE_SUCCESSORS_20261126,
+  const published = advanceReceipt(path, endpoint, AVP_RITUAL_SOURCE_SUCCESSORS_20261126,
     'Broken V116-to-AVP-ritual-source-art source chain: ');
+  return reviewedAvpRitualFollowupHostDigest20261126(path, published);
+}
+
+export function reviewedAvpRitualFollowupHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126,
+    'Broken AVP-ritual-source-to-followup source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -559,7 +577,7 @@ export function reviewedAliensIncomingDigest20261125(path, endpoint) {
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_RITUAL_SOURCE_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_RITUAL_SOURCE_SUCCESSORS_20261126), ...Object.keys(AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -570,7 +588,7 @@ export function avpHostRuntimeSources20261125(view) {
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
-      AVP_RITUAL_SOURCE_SUCCESSORS_20261126[path]].filter(Boolean);
+      AVP_RITUAL_SOURCE_SUCCESSORS_20261126[path], AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -599,7 +617,7 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   });
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
-    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_RITUAL_SOURCE_SUCCESSORS_20261126]) {
+    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_RITUAL_SOURCE_SUCCESSORS_20261126, AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -660,6 +678,12 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.ok(prior, 'AVP ritual source art requires an exact published host predecessor: ' + path);
     assert.equal(receipt.previousSha256, prior.currentSha256,
       'AVP ritual source art must follow the exact V116 endpoint: ' + path);
+  }
+  assert.equal(AVP_RITUAL_FOLLOWUP_BASELINE_20261126, '8e8d51c186052c0b0662786677dea3652c915583');
+  for (const [path, receipt] of Object.entries(AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126)) {
+    assert.ok(Object.hasOwn(AVP_RITUAL_SOURCE_SUCCESSORS_20261126, path), 'Followup requires a published ritual predecessor: ' + path);
+    assert.equal(receipt.previousSha256, AVP_RITUAL_SOURCE_SUCCESSORS_20261126[path].currentSha256,
+      'AVP ritual followup must preserve the exact first publication endpoint: ' + path);
   }
   const paths = hostPaths();
   for (const path of paths) {

@@ -20,6 +20,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
   AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
+  AVP_RITUAL_FOLLOWUP_BASELINE_20261126 as ritualFollowupBaseline,
+  AVP_RITUAL_FOLLOWUP_SUCCESSORS_20261126 as ritualFollowupSuccessors,
+  reviewedAvpRitualFollowupHostDigest20261126 as advanceRitualFollowup,
   AVP_RITUAL_SOURCE_BASELINE_20261126 as ritualSourceBaseline,
   AVP_RITUAL_SOURCE_SUCCESSORS_20261126 as ritualSourceSuccessors,
   reviewedAvpRitualSourceHostDigest20261126 as advanceRitualSource,
@@ -128,8 +131,8 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => ritualSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-AVP-ritual-source-art) source chain/;
+const finalEndpoint = path => ritualFollowupSuccessors[path]?.currentSha256 || ritualSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-AVP-ritual-source-art|AVP-ritual-source-to-followup) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -353,12 +356,12 @@ test('AVP ritual source art advances only the exact verifier and build filter fr
     assert.ok(Object.isFrozen(receipt));
     assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
     assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256);
-    assert.equal(sha(read(path)), receipt.currentSha256);
-    assert.equal(advanceRitualSource(path, receipt.previousSha256), receipt.currentSha256);
+    assert.equal(sha(read(path)), finalEndpoint(path));
+    assert.equal(advanceRitualSource(path, receipt.previousSha256), finalEndpoint(path));
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceRitualSource(path, value), /Broken V116-to-AVP-ritual-source-art source chain/);
     for (const value of [receipt.previousSha256, receipt.currentSha256])
-      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
   }
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceRitualSource(path, 'unchanged'), 'unchanged', path);
@@ -390,6 +393,8 @@ test('AVP ritual source admission is closed, type-specific and excluded from eve
   "assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png",
   "assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png",
   "assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png",
+  "assets/openai/sprites/avp2004-reliefs-v001/avp2004-crowned-human-relief-tile.png",
+  "assets/openai/sprites/avp2004-reliefs-v001/avp2004-headdress-human-relief-tile.png",
   "assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
   "assets/openai/sprites/avp2004-reliefs-v001/README.md",
   "assets/openai/sprites/avp2004-reliefs-v001/GALLERY.md"
@@ -407,4 +412,22 @@ test('AVP ritual source admission is closed, type-specific and excluded from eve
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
   }
+});
+
+
+test('AVP relief followup preserves the published receipt and advances only the verifier', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  assert.equal(ritualFollowupBaseline, '8e8d51c186052c0b0662786677dea3652c915583');
+  assert.deepEqual(Object.keys(ritualFollowupSuccessors), [path]);
+  assert.equal(sha(JSON.stringify(ritualSourceSuccessors)), '4e68a694a9e5ade4cacc3904adfacd5363ada19d25c2880f17da2a849c027eab');
+  assert.equal(sha(JSON.stringify(ritualFollowupSuccessors)), 'e6967e7f1f3d36a21c5d56e6aeff882f92c3a9f076dc81b03ae533fcea107d46');
+  assert.ok(Object.isFrozen(ritualFollowupSuccessors) && Object.isFrozen(ritualFollowupSuccessors[path]));
+  const receipt = ritualFollowupSuccessors[path];
+  assert.equal(receipt.previousSha256, ritualSourceSuccessors[path].currentSha256);
+  assert.equal(sha(read(path)), receipt.currentSha256);
+  assert.equal(advanceRitualFollowup(path, receipt.previousSha256), receipt.currentSha256);
+  for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceRitualFollowup(path, value), /Broken AVP-ritual-source-to-followup source chain/);
+  assert.equal(advanceRitualFollowup(audit, 'unchanged'), 'unchanged');
+  assert.equal(Object.hasOwn(ritualFollowupSuccessors, audit), false);
 });
