@@ -1,0 +1,32 @@
+{
+  "version": "0.6.0",
+  "episodes": 6,
+  "rooms": 72,
+  "originalRooms": 60,
+  "connectors": 12,
+  "mainActions": 72,
+  "optionalWorks": 24,
+  "documents": 72,
+  "narrativeDocuments": 60,
+  "connectorDocuments": 12,
+  "devices": 12,
+  "directedPortals": 168,
+  "connections": 84,
+  "placements": 796,
+  "propFamilies": 46,
+  "rules": 138,
+  "fieldStations": 18,
+  "fieldPlaques": 18,
+  "voiceTerminals": 12,
+  "voiceFragments": 36,
+  "automaticSlots": 12,
+  "manualSlots": 36,
+  "totalSlots": 48,
+  "finaleBranches": 12,
+  "finalePhaseDefinitions": 48,
+  "views": {
+    "SIDE": 5,
+    "DEPTH": 43,
+    "HYBRID": 24
+  }
+}
