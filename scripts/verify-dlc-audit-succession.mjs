@@ -1,3 +1,4 @@
+import './verify-historical-archive-admissions-20261126.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';

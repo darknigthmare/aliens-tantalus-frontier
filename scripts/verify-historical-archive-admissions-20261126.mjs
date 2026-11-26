@@ -57,3 +57,96 @@ test('historical source continuation preserves PR73 receipt and accepts its exac
   }
   assert.equal(advance('scripts/audit-dlc-avp-2004-20261125.mjs', 'unchanged'), 'unchanged');
 });
+
+const recoveredRoot = 'archives/local-recovery-20261125';
+const reconciliationPath = 'archives/dlc-historical-recovery-20261126/RECONCILIATION_20261126.json';
+
+test('reconciliation admits exactly the 123 preserved source paths and keeps the two AVP records', () => {
+  const receipt = JSON.parse(readFileSync(new URL(reconciliationPath, root), 'utf8'));
+  const manifest = JSON.parse(readFileSync(new URL(recoveredRoot + '/MANIFEST.json', root), 'utf8'));
+  assert.equal(receipt.source.commit, '6ed9b9210a097bbdf90ec3a22043a3fe5845e541');
+  assert.equal(receipt.files.length, 123);
+  assert.equal(receipt.archives.length, 16);
+  assert.equal(Object.keys(files).length, 140);
+  const expectedPaths = receipt.files.map(entry => entry.path).sort();
+  assert.equal(new Set(expectedPaths).size, 123);
+  assert.deepEqual(Object.keys(files).filter(path => path.startsWith(recoveredRoot + '/')).sort(), expectedPaths);
+  const parts = manifest.archives.flatMap(archive => archive.parts.map(part => ({
+    path: recoveredRoot + '/' + part.path,
+    bytes: part.size_bytes,
+    sha256: part.sha256,
+    gitBlobSha1: part.git_blob_sha
+  })));
+  assert.equal(parts.length, 121);
+  assert.deepEqual(parts.map(part => part.path).sort(),
+    receipt.files.filter(entry => entry.archiveId).map(entry => entry.path).sort());
+  for (const part of parts) {
+    assert.deepEqual(files[part.path], { bytes: part.bytes, sha256: part.sha256 }, part.path);
+    assert.equal(receipt.files.find(entry => entry.path === part.path).gitBlobSha1, part.gitBlobSha1, part.path);
+  }
+  for (const path of [recoveredRoot + '/PENDING_TRANSFER.json',
+    recoveredRoot + '/avp-2004/original-standalone-v0.11.0.html']) {
+    assert.equal(Object.hasOwn(files, path), false, 'AVP remains the owner of its original record');
+    assert.equal(admitted(path), true, path);
+    assert.equal(admitted(path, { directory: true }), false, path);
+    assert.equal(admitted(path, { built: true }), false, path);
+  }
+  for (const path of [recoveredRoot + '/unreviewed.zip', recoveredRoot + '/alien-earth/extra.zip.part001',
+    recoveredRoot + '/../escape', recoveredRoot + '/__proto__', recoveredRoot + '/MANIFEST.json/extra',
+    recoveredRoot + '//MANIFEST.json', '/' + recoveredRoot + '/MANIFEST.json',
+    recoveredRoot + '/alien-earth/../../private.txt']) {
+    for (const directory of [false, true]) for (const built of [false, true])
+      assert.equal(admitted(path, { directory, built }), false, path);
+  }
+});
+
+test('reconciliation verifies all copied Git blobs, fragment hashes and 16 complete archive hashes', async () => {
+  const receipt = JSON.parse(readFileSync(new URL(reconciliationPath, root), 'utf8'));
+  const copied = new Map(receipt.files.map(entry => [entry.path, entry]));
+  const archives = new Map(receipt.archives.map(entry => [entry.id,
+    { expected: entry, hash: createHash('sha256'), bytes: 0, parts: 0 }]));
+  let copiedFiles = 0;
+  const result = await verify('', { readSource: async path => {
+    const bytes = readFileSync(new URL(path, root));
+    const expected = copied.get(path);
+    if (expected) {
+      assert.equal(bytes.length, expected.bytes, path);
+      const gitBlob = createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex');
+      assert.equal(gitBlob, expected.gitBlobSha1, 'Changed copied Git blob: ' + path);
+      copiedFiles++;
+      if (expected.archiveId) {
+        const archive = archives.get(expected.archiveId);
+        assert.ok(archive, 'Unknown recovered archive: ' + path);
+        assert.equal(archive.bytes, expected.offset, 'Out-of-order recovered range: ' + path);
+        archive.hash.update(bytes); archive.bytes += bytes.length; archive.parts++;
+      }
+    }
+    return bytes;
+  } });
+  assert.equal(copiedFiles, 123);
+  assert.equal(result.files, 140);
+  assert.equal(result.bytes, Object.values(files).reduce((total, entry) => total + entry.bytes, 0));
+  assert.equal(result.sourceOnly, true);
+  for (const { expected, hash: archiveHash, bytes, parts } of archives.values()) {
+    assert.equal(bytes, expected.bytes, expected.id);
+    assert.equal(parts, expected.fragmentCount, expected.id);
+    assert.equal(archiveHash.digest('hex'), expected.sha256, 'Changed reconstructed archive: ' + expected.id);
+  }
+});
+
+test('reconciled source bytes cannot self-authorize mutation, truncation or absence', async () => {
+  const path = recoveredRoot + '/MANIFEST.json';
+  const original = readFileSync(new URL(path, root));
+  const altered = Buffer.from(original); altered[0] ^= 1;
+  const read = replacement => async requested => requested === path ? replacement : readFileSync(new URL(requested, root));
+  await assert.rejects(verify('', { readSource: read(altered) }), /Changed historical archive bytes/);
+  await assert.rejects(verify('', { readSource: read(original.subarray(1)) }), /Changed historical archive size/);
+  await assert.rejects(verify('', { readSource: async requested => {
+    if (requested === path) throw new Error('missing reconciled source');
+    return readFileSync(new URL(requested, root));
+  } }), /missing reconciled source/);
+  let reads = 0;
+  assert.deepEqual(await verify('', { built: true, readSource: async () => { reads++; throw new Error('archive read in build'); } }),
+    { sourceOnly: true, files: 0 });
+  assert.equal(reads, 0);
+});
