@@ -11,8 +11,8 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
     "sha256": "9fae6f77cc78c926b85e17786ed10e02b30abc6dbbd02c0d8bb18ecbf0309848"
   },
   "archives/dlc-historical-recovery-20261126/INDEX.json": {
-    "bytes": 72620,
-    "sha256": "701203849831c5135c4ebecd8750de7b4c51f6311960fec936587e1d4ad62ffa"
+    "bytes": 80272,
+    "sha256": "a3ec62ee8a390eff83fba6c22394b441f96dc3d3cee9a2b4c3c00f1deac0afd7"
   },
   "archives/dlc-historical-recovery-20261126/README.md": {
     "bytes": 2832,
@@ -565,11 +565,92 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
   "archives/local-recovery-20261125/reconstruct.py": {
     "bytes": 10133,
     "sha256": "2cc9140a15975de512e79ec4000fbe42b8d71bd37761bfcf5116d8681c6e8c3c"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/MANIFEST.json": {
+    "bytes": 6903,
+    "sha256": "88658b9933cea71f1362f8801be4b08fd3a7a3ae961d14e170c339d0ff66b87a"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/RAR_CONTENTS.json": {
+    "bytes": 64842,
+    "sha256": "ee7c76da0b3c7535fb0a998bbf083b3f6095ee030658b000b2db6d7168d63086"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/README.md": {
+    "bytes": 2810,
+    "sha256": "2bb9691cf5ecaf4b6e9dfcaf0fb74a03e22fa44faada2b0a6d630adb3317cbde"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part001": {
+    "bytes": 10485760,
+    "sha256": "99eeb0daa3f47199b7d786b8a12e17274c3e4eaeac8cf410299e71b8c86a2287"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part002": {
+    "bytes": 10485760,
+    "sha256": "bd7823dd220f5b71b150789ac3396c6ca9b8f958cfcc5a1a08293a1238ce24a1"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part003": {
+    "bytes": 10485760,
+    "sha256": "b2ad171c86f80831d6597752e6b1a008d31690a1d845b2561a122d6fe0452ae2"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part004": {
+    "bytes": 10485760,
+    "sha256": "7eae3c61ae1c7ae35932e9b4b1ffbe2ab9e27d933a618d4cd24b6b4ba9a2609c"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part005": {
+    "bytes": 10485760,
+    "sha256": "7346c167b5b3de1e626124688aa85933704e71453c1d0aba8c3ab937a8b371be"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part006": {
+    "bytes": 10485760,
+    "sha256": "b930d85de55699ee4ed8637d24d2911c99bcb27d4ae007b62723f2662e74710c"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part007": {
+    "bytes": 10485760,
+    "sha256": "6a9e1f881a3fd9b50e026c7cac152702716420a6cc5e6f9da7b796f361659aa8"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part008": {
+    "bytes": 10485760,
+    "sha256": "6e728dacd8b52c889ca3989619171b053395deea4c5d3ea282ff6b16ba6788b6"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part009": {
+    "bytes": 10485760,
+    "sha256": "e9e3ef7810f77ea2aa12136eaa3680b2a4706c91b51254e4bfad3a051a785823"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part010": {
+    "bytes": 10485760,
+    "sha256": "d11239f40e79381745b1996e8b2ff9ea725e1c307613ed622a84a6f68dae4784"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part011": {
+    "bytes": 10485760,
+    "sha256": "3c06e9befcfad8d5e8e1e2c3de16e34ceba3b16cfab88a2de3b5544be2cf73e6"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part012": {
+    "bytes": 10485760,
+    "sha256": "768217bb81e1548f9f06f8e556103d80e22ce232958692ff4297bad9e14ff3d9"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part013": {
+    "bytes": 10485760,
+    "sha256": "bc618ffbfca95647be73db3399414bfdad6d230657e3a00041530f9de4140c06"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part014": {
+    "bytes": 10485760,
+    "sha256": "2e7a9189a8d853ab35517f648405195167650eda98c7a119755c4088b6d4bf4c"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part015": {
+    "bytes": 10485760,
+    "sha256": "c1cef9dd443b1c6002ad0e155260e53c2fca5a974a92564ed0309edf4568067c"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part016": {
+    "bytes": 10485760,
+    "sha256": "9b4058011231e625cf4addeaef0a66abffdca93ba876a52453af24b9376d9897"
+  },
+  "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part017": {
+    "bytes": 1019325,
+    "sha256": "7e4a268b75e6e2edcc54b19d5fd446d81a5470deca6794368b24a6b5fa8491fd"
   }
 }).map(([path, value]) => [path, Object.freeze(value)])
 ));
 const prefix = 'archives/dlc-historical-recovery-20261126';
-const scripts = new Set(['scripts/historical-archive-admissions-20261126.mjs', 'scripts/verify-historical-archive-admissions-20261126.mjs']);
+const scripts = new Set(['scripts/historical-archive-admissions-20261126.mjs', 'scripts/verify-historical-archive-admissions-20261126.mjs',
+  '.github/workflows/dlc-archive-preservation.yml']);
 const directories = new Set(Object.keys(HISTORICAL_ARCHIVE_FILES_20261126).flatMap(path => {
   const segments = path.split('/');
   return segments.slice(0, -1).map((_, i) => segments.slice(0, i + 1).join('/'));
@@ -597,3 +678,4 @@ export async function verifyHistoricalArchiveSources20261126(root, { built = fal
   }
   return { sourceOnly: true, files: Object.keys(HISTORICAL_ARCHIVE_FILES_20261126).length, bytes: total };
 }
+

@@ -1,0 +1,33 @@
+name: DLC archive preservation
+on:
+  pull_request:
+    paths:
+      - 'archives/dlc-historical-recovery-20261126/**'
+      - 'archives/local-recovery-20261125/**'
+      - 'scripts/historical-archive-admissions-20261126.mjs'
+      - 'scripts/verify-historical-archive-admissions-20261126.mjs'
+      - '.github/workflows/dlc-archive-preservation.yml'
+permissions:
+  contents: read
+concurrency:
+  group: dlc-archives-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  exact-source-archives:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Closed source admission
+        run: npm run check
+      - name: Historical paths, bytes and archive hashes
+        run: node --test scripts/verify-historical-archive-admissions-20261126.mjs
+      - name: Reconstruct the RAR in a hash stream
+        run: node archives/dlc-historical-recovery-20261126/reconstruct.mjs conversation-images/2026-10-06
+

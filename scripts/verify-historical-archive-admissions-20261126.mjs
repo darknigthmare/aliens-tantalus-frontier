@@ -67,7 +67,7 @@ test('reconciliation admits exactly the 123 preserved source paths and keeps the
   assert.equal(receipt.source.commit, '6ed9b9210a097bbdf90ec3a22043a3fe5845e541');
   assert.equal(receipt.files.length, 123);
   assert.equal(receipt.archives.length, 16);
-  assert.equal(Object.keys(files).length, 140);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/')).length, 140);
   const expectedPaths = receipt.files.map(entry => entry.path).sort();
   assert.equal(new Set(expectedPaths).size, 123);
   assert.deepEqual(Object.keys(files).filter(path => path.startsWith(recoveredRoot + '/')).sort(), expectedPaths);
@@ -124,7 +124,7 @@ test('reconciliation verifies all copied Git blobs, fragment hashes and 16 compl
     return bytes;
   } });
   assert.equal(copiedFiles, 123);
-  assert.equal(result.files, 140);
+  assert.equal(result.files, Object.keys(files).length);
   assert.equal(result.bytes, Object.values(files).reduce((total, entry) => total + entry.bytes, 0));
   assert.equal(result.sourceOnly, true);
   for (const { expected, hash: archiveHash, bytes, parts } of archives.values()) {
@@ -150,3 +150,66 @@ test('reconciled source bytes cannot self-authorize mutation, truncation or abse
     { sourceOnly: true, files: 0 });
   assert.equal(reads, 0);
 });
+
+const conversationRoot = 'archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06';
+const preservationWorkflow = '.github/workflows/dlc-archive-preservation.yml';
+
+test('conversation RAR has a closed source inventory and exact native header counts', () => {
+  const manifest = JSON.parse(readFileSync(new URL(conversationRoot + '/MANIFEST.json', root), 'utf8'));
+  const inventory = JSON.parse(readFileSync(new URL(conversationRoot + '/RAR_CONTENTS.json', root), 'utf8'));
+  const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
+  assert.equal(manifest.archiveId, 'conversation-images/2026-10-06');
+  assert.equal(manifest.originalFilename, 'ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar');
+  assert.equal(manifest.bytes, 168791485);
+  assert.equal(manifest.sha256, '4e5a50ea8b95eb92614d0e57d48c16064dc2f8ce4a5ae208446b1618ae70882a');
+  assert.equal(manifest.format, 'rar');
+  assert.equal(manifest.preservation, 'exact-original-bytes');
+  assert.equal(manifest.parts.length, 17);
+  assert.equal(manifest.rarPayloadCrc32, 'not-tested');
+  assert.deepEqual(index.preserved.filter(row => row.archiveId === manifest.archiveId), [manifest]);
+  const expectedPaths = [...manifest.parts.map(part => part.path),
+    conversationRoot + '/MANIFEST.json', conversationRoot + '/RAR_CONTENTS.json', conversationRoot + '/README.md'];
+  assert.equal(new Set(expectedPaths).size, 20);
+  assert.deepEqual(Object.keys(files).filter(path => path.startsWith(conversationRoot + '/')).sort(), expectedPaths.sort());
+  for (const part of manifest.parts)
+    assert.deepEqual(files[part.path], { bytes: part.bytes, sha256: part.sha256 }, part.path);
+  assert.equal(inventory.complete, true);
+  assert.equal(inventory.memberCount, 232);
+  assert.equal(inventory.fileCount, 232);
+  assert.equal(inventory.directoryCount, 0);
+  assert.equal(inventory.pngCount, 227);
+  assert.equal(inventory.entries.length, 232);
+  assert.equal(inventory.entries.filter(entry => entry.path.toLowerCase().endsWith('.png')).length, 227);
+  assert.equal(inventory.memberPayloadCrcVerified, false);
+  for (const key of ['headerWarnings', 'duplicatePaths', 'unsafePaths', 'encryptedMembers'])
+    assert.deepEqual(inventory[key], [], key);
+  assert.equal(admitted(preservationWorkflow), true);
+  assert.equal(admitted(preservationWorkflow, { directory: true }), false);
+  assert.equal(admitted(preservationWorkflow, { built: true }), false);
+  for (const path of [preservationWorkflow + '.unreviewed', conversationRoot + '/unknown.rar',
+    conversationRoot + '/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part018',
+    conversationRoot + '/MANIFEST.json/extra', conversationRoot + '/../unreviewed.png']) {
+    for (const directory of [false, true]) for (const built of [false, true])
+      assert.equal(admitted(path, { directory, built }), false, path);
+  }
+});
+
+test('conversation RAR reconstructs exact bytes from all 17 pinned Git fragments', () => {
+  const manifest = JSON.parse(readFileSync(new URL(conversationRoot + '/MANIFEST.json', root), 'utf8'));
+  const archiveHash = createHash('sha256');
+  const wholeGitBlob = createHash('sha1').update('blob ' + manifest.bytes + '\0');
+  let offset = 0;
+  for (const [index, part] of manifest.parts.entries()) {
+    assert.equal(part.path, conversationRoot + '/' + manifest.originalFilename + '.part' + String(index + 1).padStart(3, '0'));
+    assert.equal(part.offset, offset, 'Non-contiguous original bytes');
+    const bytes = readFileSync(new URL(part.path, root));
+    assert.equal(bytes.length, part.bytes, part.path);
+    assert.equal(hash(bytes), part.sha256, part.path);
+    assert.equal(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'), part.gitBlobSha1, part.path);
+    archiveHash.update(bytes); wholeGitBlob.update(bytes); offset += bytes.length;
+  }
+  assert.equal(offset, manifest.bytes);
+  assert.equal(archiveHash.digest('hex'), manifest.sha256);
+  assert.equal(wholeGitBlob.digest('hex'), '85ff0458e5ad514b40f0eddcdfbb0a79342f2ce8');
+});
+
