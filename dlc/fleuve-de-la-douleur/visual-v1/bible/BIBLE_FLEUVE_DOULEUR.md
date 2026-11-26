@@ -36,7 +36,7 @@ Définition, génération, intégration et validations restent distinctes. Aucun
 - Les dimensions du modèle sont des choix du projet sauf preuve indépendante.
 - La bible documente des contenus manquants sans les injecter au runtime.
 - Les anciens rapports v0.9 restent historiques.
-- Dans cette reconstruction distante, dimensions globales et tailles non relues sont null ; SHA-256 et ancrages proviennent du manifeste. Le générateur local peut les vérifier depuis les PNG.
+- Les PNG ont été relus par le générateur local : SHA-256, signature, taille et dimensions contrôlés. Cela ne certifie pas leur fidélité visuelle.
 
 ## Règles de raccordement
 
@@ -68,9 +68,9 @@ Capitaine de la garnison, personnage jouable.
 
 **Dimensions et ancrage :** {"modelHeight":87,"bodyScale":1.1,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [brackett-stowed-right](../assets/brackett-stowed-right.png) — dimensions globales non relues, pose stowed, ancre 500/1516
+**Assets :** [brackett-stowed-right](../assets/brackett-stowed-right.png) — 1024 × 1536, pose stowed, ancre 500/1516
 
 **À compléter :**
 
@@ -102,9 +102,9 @@ Lieutenant Paris, personnage jouable.
 
 **Dimensions et ancrage :** {"modelHeight":82,"bodyScale":0.91,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [paris-stowed-right](../assets/paris-stowed-right.png) — dimensions globales non relues, pose stowed, ancre 490/1523
+**Assets :** [paris-stowed-right](../assets/paris-stowed-right.png) — 1024 × 1536, pose stowed, ancre 490/1523
 
 **À compléter :**
 
@@ -136,9 +136,9 @@ Prospectrice, mère de Newt.
 
 **Dimensions et ancrage :** {"modelHeight":79,"bodyScale":1,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [anne-idle-right](../assets/anne-idle-right.png) — dimensions globales non relues, pose idle, ancre 517/1532
+**Assets :** [anne-idle-right](../assets/anne-idle-right.png) — 1024 × 1536, pose idle, ancre 517/1532
 
 **À compléter :**
 
@@ -170,9 +170,9 @@ Rebecca Jorden, enfant jouable dans les conduits.
 
 **Dimensions et ancrage :** {"modelHeight":51,"bodyScale":0.78,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [newt-idle-right](../assets/newt-idle-right.png) — dimensions globales non relues, pose idle, ancre 453/1766
+**Assets :** [newt-idle-right](../assets/newt-idle-right.png) — 887 × 1774, pose idle, ancre 453/1766
 
 **À compléter :**
 
@@ -204,9 +204,9 @@ Russell « Russ » Jorden, prospecteur.
 
 **Dimensions et ancrage :** {"modelHeight":86,"bodyScale":1.08,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [russ-idle-right](../assets/russ-idle-right.png) — dimensions globales non relues, pose idle, ancre 500/1529
+**Assets :** [russ-idle-right](../assets/russ-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1529
 
 **À compléter :**
 
@@ -239,9 +239,9 @@ Médecin de la colonie.
 
 **Dimensions et ancrage :** {"modelHeight":71,"bodyScale":1.42,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [komiskey-idle-right](../assets/komiskey-idle-right.png) — dimensions globales non relues, pose idle, ancre 484/1533
+**Assets :** [komiskey-idle-right](../assets/komiskey-idle-right.png) — 1024 × 1536, pose idle, ancre 484/1533
 
 **À compléter :**
 
@@ -273,9 +273,9 @@ Enfant distincte de Newt, suivie avec une synthèse secondaire.
 
 **Dimensions et ancrage :** {"modelHeight":53,"bodyScale":0.78,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [luisa-idle-right](../assets/luisa-idle-right.png) — dimensions globales non relues, pose idle, ancre 510/1532
+**Assets :** [luisa-idle-right](../assets/luisa-idle-right.png) — 1024 × 1536, pose idle, ancre 510/1532
 
 **À compléter :**
 
@@ -308,9 +308,9 @@ Colon original des interactions locales.
 
 **Dimensions et ancrage :** {"modelHeight":80,"bodyScale":1,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [civilian-idle-right](../assets/civilian-idle-right.png) — dimensions globales non relues, pose idle, ancre 490/1520
+**Assets :** [civilian-idle-right](../assets/civilian-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1520
 
 **À compléter :**
 
@@ -342,9 +342,9 @@ Scientifique de la recherche de la Compagnie.
 
 **Dimensions et ancrage :** {"modelHeight":81,"bodyScale":0.9,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [mori-idle-right](../assets/mori-idle-right.png) — dimensions globales non relues, pose idle, ancre 507/1529
+**Assets :** [mori-idle-right](../assets/mori-idle-right.png) — 1024 × 1536, pose idle, ancre 507/1529
 
 **À compléter :**
 
@@ -377,9 +377,9 @@ Frère de Newt, famille Jorden.
 
 **Dimensions et ancrage :** {"modelHeight":61,"bodyScale":0.85,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [tim-idle-right](../assets/tim-idle-right.png) — dimensions globales non relues, pose idle, ancre 514/1524
+**Assets :** [tim-idle-right](../assets/tim-idle-right.png) — 1024 × 1536, pose idle, ancre 514/1524
 
 **À compléter :**
 
@@ -411,9 +411,9 @@ Administrateur de la colonie.
 
 **Dimensions et ancrage :** {"modelHeight":84,"bodyScale":1.16,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [simpson-idle-right](../assets/simpson-idle-right.png) — dimensions globales non relues, pose idle, ancre 491/1530
+**Assets :** [simpson-idle-right](../assets/simpson-idle-right.png) — 1024 × 1536, pose idle, ancre 491/1530
 
 **À compléter :**
 
@@ -446,9 +446,9 @@ Ingénieur en chef cité dans l’extrait.
 
 **Dimensions et ancrage :** {"modelHeight":86,"bodyScale":1.05,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [hansard-idle-right](../assets/hansard-idle-right.png) — dimensions globales non relues, pose idle, ancre 509/1528
+**Assets :** [hansard-idle-right](../assets/hansard-idle-right.png) — 1024 × 1536, pose idle, ancre 509/1528
 
 **À compléter :**
 
@@ -480,9 +480,9 @@ Infirmier de la scène médicale.
 
 **Dimensions et ancrage :** {"modelHeight":86,"bodyScale":0.82,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [joel-idle-right](../assets/joel-idle-right.png) — dimensions globales non relues, pose idle, ancre 500/1531
+**Assets :** [joel-idle-right](../assets/joel-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1531
 
 **À compléter :**
 
@@ -515,9 +515,9 @@ Cuisinière de la colonie citée dans l’extrait.
 
 **Dimensions et ancrage :** {"modelHeight":79,"bodyScale":1.1,"units":"unites_logiques_du_rendu_pas_centimetres"}
 
-**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [bronagh-idle-right](../assets/bronagh-idle-right.png) — dimensions globales non relues, pose idle, ancre 500/1535
+**Assets :** [bronagh-idle-right](../assets/bronagh-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1535
 
 **À compléter :**
 
@@ -549,9 +549,9 @@ Maintenance de l’habitat
 
 **Dimensions et ancrage :** {"modelHeight":93,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — dimensions globales non relues, pose idle, ancre 510/1548
+**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548
 
 **À compléter :**
 
@@ -581,9 +581,9 @@ Cuisine collective
 
 **Dimensions et ancrage :** {"modelHeight":96,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — dimensions globales non relues, pose idle, ancre 490/1533
+**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
 
 **À compléter :**
 
@@ -613,9 +613,9 @@ Soins de proximité
 
 **Dimensions et ancrage :** {"modelHeight":99,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — dimensions globales non relues, pose idle, ancre 477.5/1520
+**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520
 
 **À compléter :**
 
@@ -645,9 +645,9 @@ Archivage des relevés
 
 **Dimensions et ancrage :** {"modelHeight":102,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [becker-idle-right](../assets/becker-idle-right.png) — dimensions globales non relues, pose idle, ancre 472.5/1521
+**Assets :** [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521
 
 **À compléter :**
 
@@ -677,9 +677,9 @@ Manutention du fret
 
 **Dimensions et ancrage :** {"modelHeight":93,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [ferris-idle-right](../assets/ferris-idle-right.png) — dimensions globales non relues, pose idle, ancre 495/1526
+**Assets :** [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526
 
 **À compléter :**
 
@@ -709,9 +709,9 @@ Relais des transmissions
 
 **Dimensions et ancrage :** {"modelHeight":96,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [corban-idle-right](../assets/corban-idle-right.png) — dimensions globales non relues, pose idle, ancre 504.5/1531
+**Assets :** [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531
 
 **À compléter :**
 
@@ -741,9 +741,9 @@ Atelier des prospecteurs
 
 **Dimensions et ancrage :** {"modelHeight":99,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [hale-idle-right](../assets/hale-idle-right.png) — dimensions globales non relues, pose idle, ancre 490.5/1504
+**Assets :** [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504
 
 **À compléter :**
 
@@ -773,9 +773,9 @@ Maintenance biomédicale
 
 **Dimensions et ancrage :** {"modelHeight":102,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [doran-idle-right](../assets/doran-idle-right.png) — dimensions globales non relues, pose idle, ancre 470.5/1499
+**Assets :** [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499
 
 **À compléter :**
 
@@ -805,9 +805,9 @@ Lingerie de service
 
 **Dimensions et ancrage :** {"modelHeight":93,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — dimensions globales non relues, pose idle, ancre 485.5/1518
+**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
 
 **À compléter :**
 
@@ -837,9 +837,9 @@ Entretien des loisirs
 
 **Dimensions et ancrage :** {"modelHeight":96,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [bell-idle-right](../assets/bell-idle-right.png) — dimensions globales non relues, pose idle, ancre 475/1519
+**Assets :** [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
 
 **À compléter :**
 
@@ -869,9 +869,9 @@ Accueil des arrivants
 
 **Dimensions et ancrage :** {"modelHeight":99,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [kent-idle-right](../assets/kent-idle-right.png) — dimensions globales non relues, pose idle, ancre 502/1514
+**Assets :** [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514
 
 **À compléter :**
 
@@ -901,9 +901,9 @@ Relevés des prospecteurs
 
 **Dimensions et ancrage :** {"modelHeight":102,"units":"unites_logiques_du_rendu"}
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [voss-idle-right](../assets/voss-idle-right.png) — dimensions globales non relues, pose idle, ancre 487/1513
+**Assets :** [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
 
 **À compléter :**
 
@@ -1508,9 +1508,9 @@ Créature basse ; le PNG existant couvre seulement le repos.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_idle_selectif_repli_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [facehugger-idle-right](../assets/facehugger-idle-right.png) — dimensions globales non relues, pose idle, ancre 1100/703
+**Assets :** [facehugger-idle-right](../assets/facehugger-idle-right.png) — 1920 × 819, pose idle, ancre 1100/703
 
 **À compléter :**
 
@@ -3785,9 +3785,9 @@ Identifiant : `rop:armes_equipements:cell`
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Pile de service","capacity":6},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-cell](../assets/item-cell.png) — dimensions globales non relues, pose inventory, ancre 785/523
+**Assets :** [item-cell](../assets/item-cell.png) — 1536 × 1024, pose inventory, ancre 785/523
 
 **À compléter :**
 
@@ -3815,9 +3815,9 @@ Identifiant : `rop:armes_equipements:wire`
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Fil de raccordement","capacity":6},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-wire](../assets/item-wire.png) — dimensions globales non relues, pose inventory, ancre 765/526
+**Assets :** [item-wire](../assets/item-wire.png) — 1536 × 1024, pose inventory, ancre 765/526
 
 **À compléter :**
 
@@ -3845,9 +3845,9 @@ Identifiant : `rop:armes_equipements:casing`
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Boîtier vide","capacity":4},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-casing](../assets/item-casing.png) — dimensions globales non relues, pose inventory, ancre 768/509
+**Assets :** [item-casing](../assets/item-casing.png) — 1536 × 1024, pose inventory, ancre 768/509
 
 **À compléter :**
 
@@ -3875,9 +3875,9 @@ création de gameplay
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Balise sonore","capacity":2},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-decoy](../assets/item-decoy.png) — dimensions globales non relues, pose inventory, ancre 653/568
+**Assets :** [item-decoy](../assets/item-decoy.png) — 1362 × 1155, pose inventory, ancre 653/568
 
 **À compléter :**
 
@@ -3905,9 +3905,9 @@ Identifiant : `rop:armes_equipements:ration`
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Portion froide","healing":25},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-ration](../assets/item-ration.png) — dimensions globales non relues, pose inventory, ancre 763/509
+**Assets :** [item-ration](../assets/item-ration.png) — 1536 × 1024, pose inventory, ancre 763/509
 
 **À compléter :**
 
@@ -3935,9 +3935,9 @@ règle de soin simplifiée
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Trousse de soins","capacity":8},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-medkit](../assets/item-medkit.png) — dimensions globales non relues, pose inventory, ancre 753/514
+**Assets :** [item-medkit](../assets/item-medkit.png) — 1536 × 1024, pose inventory, ancre 753/514
 
 **À compléter :**
 
@@ -3965,9 +3965,9 @@ Identifiant : `rop:armes_equipements:ammo`
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Munitions M41A","capacity":150},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-ammo](../assets/item-ammo.png) — dimensions globales non relues, pose inventory, ancre 769/524
+**Assets :** [item-ammo](../assets/item-ammo.png) — 1536 × 1024, pose inventory, ancre 769/524
 
 **À compléter :**
 
@@ -3995,9 +3995,9 @@ durée simulée
 
 **Dimensions et ancrage :** {"inventoryRules":{"label":"Fusée de détresse","capacity":8},"physicalMeasurement":"non_documentee"}
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-flare](../assets/item-flare.png) — dimensions globales non relues, pose inventory, ancre 781/523
+**Assets :** [item-flare](../assets/item-flare.png) — 1536 × 1024, pose inventory, ancre 781/523
 
 **À compléter :**
 
@@ -4025,9 +4025,9 @@ Détecteur de mouvements et interface natifs.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-tracker](../assets/item-tracker.png) — dimensions globales non relues, pose inventory, ancre 672/586
+**Assets :** [item-tracker](../assets/item-tracker.png) — 1312 × 1199, pose inventory, ancre 672/586
 
 **À compléter :**
 
@@ -4055,9 +4055,9 @@ Outil de soudure des passages.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-weld](../assets/item-weld.png) — dimensions globales non relues, pose inventory, ancre 634/636
+**Assets :** [item-weld](../assets/item-weld.png) — 1254 × 1254, pose inventory, ancre 634/636
 
 **À compléter :**
 
@@ -4085,9 +4085,9 @@ Lampe de service à batterie.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = png_inventaire ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-light](../assets/item-light.png) — dimensions globales non relues, pose inventory, ancre 768/508
+**Assets :** [item-light](../assets/item-light.png) — 1536 × 1024, pose inventory, ancre 768/508
 
 **À compléter :**
 
@@ -4370,9 +4370,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — dimensions globales non relues, pose idle, ancre 510/1548 ; [ferris-idle-right](../assets/ferris-idle-right.png) — dimensions globales non relues, pose idle, ancre 495/1526 ; [hale-idle-right](../assets/hale-idle-right.png) — dimensions globales non relues, pose idle, ancre 490.5/1504 ; [bell-idle-right](../assets/bell-idle-right.png) — dimensions globales non relues, pose idle, ancre 475/1519
+**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548 ; [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526 ; [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504 ; [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
 
 **À compléter :**
 
@@ -4400,9 +4400,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — dimensions globales non relues, pose idle, ancre 490/1533
+**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
 
 **À compléter :**
 
@@ -4430,9 +4430,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — dimensions globales non relues, pose idle, ancre 477.5/1520 ; [becker-idle-right](../assets/becker-idle-right.png) — dimensions globales non relues, pose idle, ancre 472.5/1521 ; [corban-idle-right](../assets/corban-idle-right.png) — dimensions globales non relues, pose idle, ancre 504.5/1531 ; [doran-idle-right](../assets/doran-idle-right.png) — dimensions globales non relues, pose idle, ancre 470.5/1499 ; [kent-idle-right](../assets/kent-idle-right.png) — dimensions globales non relues, pose idle, ancre 502/1514 ; [voss-idle-right](../assets/voss-idle-right.png) — dimensions globales non relues, pose idle, ancre 487/1513
+**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520 ; [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521 ; [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531 ; [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499 ; [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514 ; [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
 
 **À compléter :**
 
@@ -4460,9 +4460,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **Dimensions et ancrage :** Mesures précises non documentées.
 
-**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — dimensions globales non relues, pose idle, ancre 485.5/1518
+**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
 
 **À compléter :**
 
@@ -4752,9 +4752,9 @@ Assise collective ; certaines instances sont physiques. 6 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-64,"right":61,"top":-69,"bottom":0,"width":125,"height":69,"centerX":-1.5,"mountHeight":0},"physicalFootprints":[{"id":"concourse-cover1","room":"concourse","footprint":{"w":190,"d":0.12}},{"id":"concourse-cover3","room":"concourse","footprint":{"w":150,"d":0.1}},{"id":"recreation-cover2","room":"recreation","footprint":{"w":240,"d":0.12}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-bench](../assets/prop-bench.png) — dimensions globales non relues, pose static, ancre 842.5/852
+**Assets :** [prop-bench](../assets/prop-bench.png) — 1686 × 933, pose static, ancre 842.5/852
 
 **À compléter :**
 
@@ -4926,9 +4926,9 @@ Réserve de câble sur bobine. 6 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-51,"right":51,"top":-67,"bottom":-9,"width":102,"height":58,"centerX":0,"mountHeight":9},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-cable-spool](../assets/prop-cable-spool.png) — dimensions globales non relues, pose static, ancre 829.5/919
+**Assets :** [prop-cable-spool](../assets/prop-cable-spool.png) — 1662 × 946, pose static, ancre 829.5/919
 
 **À compléter :**
 
@@ -5063,9 +5063,9 @@ Conteneur de service, distinct des conteneurs interactifs. 5 placement(s) de bas
 
 **Dimensions et ancrage :** {"nativeEnvelope":null,"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [armory-case](../assets/armory-case.png) — dimensions globales non relues, pose static, ancre 884/762
+**Assets :** [armory-case](../assets/armory-case.png) — 1774 × 887, pose static, ancre 884/762
 
 **À compléter :**
 
@@ -5196,9 +5196,9 @@ Assise des postes ou des espaces civils. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-24,"right":24,"top":-86,"bottom":0,"width":48,"height":86,"centerX":0,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-chair](../assets/prop-chair.png) — dimensions globales non relues, pose static, ancre 620/1232
+**Assets :** [prop-chair](../assets/prop-chair.png) — 1246 × 1263, pose static, ancre 620/1232
 
 **À compléter :**
 
@@ -5423,7 +5423,7 @@ Rangement posé ou fixé à une structure. 3 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-45,"right":45,"top":-158,"bottom":0,"width":90,"height":158,"centerX":0,"mountHeight":0},"physicalFootprints":[{"id":"jorden-cover2","room":"jorden","footprint":{"w":130,"d":0.16}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-cupboard](../assets/prop-cupboard.png) — 948 × 1660, pose static, ancre 473.5/1621
 
@@ -5589,9 +5589,9 @@ Identifiant : `rop:props:prop-egg`
 
 **Dimensions et ancrage :** {"nativeEnvelope":null,"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [egg-sealed](../assets/egg-sealed.png) — dimensions globales non relues, pose static, ancre 627/1154
+**Assets :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
 
 **À compléter :**
 
@@ -5710,9 +5710,9 @@ Coffret mural de secours, légende conservée. 9 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-31,"right":31,"top":-128,"bottom":-26,"width":62,"height":102,"centerX":0,"mountHeight":26},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-fire-cabinet](../assets/prop-fire-cabinet.png) — dimensions globales non relues, pose static, ancre 491.5/1523
+**Assets :** [prop-fire-cabinet](../assets/prop-fire-cabinet.png) — 982 × 1602, pose static, ancre 491.5/1523
 
 **À compléter :**
 
@@ -5800,7 +5800,7 @@ Stockage de cuisine ou du réfectoire. 3 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-45,"right":45,"top":-158,"bottom":0,"width":90,"height":158,"centerX":0,"mountHeight":0},"physicalFootprints":[{"id":"pantry-cover2","room":"pantry","footprint":{"w":160,"d":0.16}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-fridge](../assets/prop-fridge.png) — 1086 × 1448, pose static, ancre 544.5/1430
 
@@ -5974,9 +5974,9 @@ Fenêtre murale ; jamais une porte debout au milieu du sol. 1 placement(s) de ba
 
 **Dimensions et ancrage :** {"nativeEnvelope":null,"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [isolation-glass](../assets/isolation-glass.png) — dimensions globales non relues, pose static, ancre 580/1321
+**Assets :** [isolation-glass](../assets/isolation-glass.png) — 1161 × 1354, pose static, ancre 580/1321
 
 **À compléter :**
 
@@ -6012,9 +6012,9 @@ Rangement au vitrage réellement transparent. 2 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-57,"right":57,"top":-154,"bottom":3,"width":114,"height":157,"centerX":0,"mountHeight":-3},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-glass-cabinet](../assets/prop-glass-cabinet.png) — dimensions globales non relues, pose static, ancre 533.5/1401
+**Assets :** [prop-glass-cabinet](../assets/prop-glass-cabinet.png) — 1068 × 1472, pose static, ancre 533.5/1401
 
 **À compléter :**
 
@@ -6095,9 +6095,9 @@ Passage libre pour patient et roues. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-77,"right":77,"top":-82,"bottom":5,"width":154,"height":87,"centerX":0,"mountHeight":-5},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-gurney](../assets/prop-gurney.png) — dimensions globales non relues, pose static, ancre 835.5/886
+**Assets :** [prop-gurney](../assets/prop-gurney.png) — 1670 × 942, pose static, ancre 835.5/886
 
 **À compléter :**
 
@@ -6177,9 +6177,9 @@ Outil à roues et bavette de manutention. 2 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-37,"right":38,"top":-100,"bottom":11,"width":75,"height":111,"centerX":0.5,"mountHeight":-11},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hand-truck](../assets/prop-hand-truck.png) — dimensions globales non relues, pose static, ancre 517/1502
+**Assets :** [prop-hand-truck](../assets/prop-hand-truck.png) — 1036 × 1518, pose static, ancre 517/1502
 
 **À compléter :**
 
@@ -6216,9 +6216,9 @@ Vêtement accroché à hauteur cohérente. 5 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-36,"right":36,"top":-145,"bottom":-33,"width":72,"height":112,"centerX":0,"mountHeight":33},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hanging-coat](../assets/prop-hanging-coat.png) — dimensions globales non relues, pose static, ancre 510.5/1519
+**Assets :** [prop-hanging-coat](../assets/prop-hanging-coat.png) — 1024 × 1536, pose static, ancre 510.5/1519
 
 **À compléter :**
 
@@ -6297,9 +6297,9 @@ Flexible sur support de service. 5 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-37,"right":37,"top":-107,"bottom":-4,"width":74,"height":103,"centerX":0,"mountHeight":4},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hose-reel](../assets/prop-hose-reel.png) — dimensions globales non relues, pose static, ancre 588/1291
+**Assets :** [prop-hose-reel](../assets/prop-hose-reel.png) — 1190 × 1322, pose static, ancre 588/1291
 
 **À compléter :**
 
@@ -6379,9 +6379,9 @@ Plan de travail scientifique ; certaines instances sont physiques. 3 placement(s
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-77,"right":77,"top":-114,"bottom":-3,"width":154,"height":111,"centerX":0,"mountHeight":3},"physicalFootprints":[{"id":"science-cover1","room":"science","footprint":{"w":210,"d":0.15}},{"id":"biomed-cover2","room":"biomed","footprint":{"w":190,"d":0.14}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-lab-bench](../assets/prop-lab-bench.png) — dimensions globales non relues, pose static, ancre 738.5/957
+**Assets :** [prop-lab-bench](../assets/prop-lab-bench.png) — 1478 × 1064, pose static, ancre 738.5/957
 
 **À compléter :**
 
@@ -6461,7 +6461,7 @@ Textile de réserve ou en transport. 2 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-41.5,"right":51.5,"top":-89,"bottom":0,"width":93,"height":89,"centerX":5,"mountHeight":0},"physicalFootprints":[{"id":"wash-cover2","room":"wash","footprint":{"w":190,"d":0.14}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-linen](../assets/prop-linen.png) — 1278 × 1230, pose static, ancre 630/1169
 
@@ -6501,9 +6501,9 @@ Rangement vertical à la hauteur et légende natives. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-45,"right":45,"top":-158,"bottom":0,"width":90,"height":158,"centerX":0,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-locker](../assets/prop-locker.png) — dimensions globales non relues, pose static, ancre 472/1633
+**Assets :** [prop-locker](../assets/prop-locker.png) — 948 × 1659, pose static, ancre 472/1633
 
 **À compléter :**
 
@@ -6582,9 +6582,9 @@ Repère mural au-dessus du poste ou passage. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-25,"right":25,"top":-142,"bottom":-90,"width":50,"height":52,"centerX":0,"mountHeight":90},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-medical-cross](../assets/prop-medical-cross.png) — dimensions globales non relues, pose static, ancre 628.5/1117
+**Assets :** [prop-medical-cross](../assets/prop-medical-cross.png) — 1263 × 1246, pose static, ancre 628.5/1117
 
 **À compléter :**
 
@@ -6623,7 +6623,7 @@ Fournitures sur rangement médical identifiable. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-62,"right":62,"top":-170,"bottom":1,"width":124,"height":171,"centerX":0,"mountHeight":-1},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-medicine](../assets/prop-medicine.png) — 1070 × 1470, pose static, ancre 529.5/1433
 
@@ -6664,9 +6664,9 @@ Optique d’observation et socle. 1 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-40,"right":50,"top":-78,"bottom":0,"width":90,"height":78,"centerX":5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-microscope](../assets/prop-microscope.png) — dimensions globales non relues, pose static, ancre 671/1155
+**Assets :** [prop-microscope](../assets/prop-microscope.png) — 1346 × 1169, pose static, ancre 671/1155
 
 **À compléter :**
 
@@ -6702,9 +6702,9 @@ Appareil de contrôle sur son support. 3 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-40,"right":50,"top":-78,"bottom":0,"width":90,"height":78,"centerX":5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-monitor](../assets/prop-monitor.png) — dimensions globales non relues, pose static, ancre 657.5/1148
+**Assets :** [prop-monitor](../assets/prop-monitor.png) — 1344 × 1170, pose static, ancre 657.5/1148
 
 **À compléter :**
 
@@ -6826,9 +6826,9 @@ Nacelle médicale volumineuse à capot transparent. 1 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-93,"right":111,"top":-109,"bottom":3,"width":204,"height":112,"centerX":9,"mountHeight":-3},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-natal-unit](../assets/prop-natal-unit.png) — dimensions globales non relues, pose static, ancre 837.5/868
+**Assets :** [prop-natal-unit](../assets/prop-natal-unit.png) — 1690 × 931, pose static, ancre 837.5/868
 
 **À compléter :**
 
@@ -6864,9 +6864,9 @@ Informations murales de la colonie. 7 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-36,"right":36,"top":-148,"bottom":-99,"width":72,"height":49,"centerX":0,"mountHeight":99},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-noticeboard](../assets/prop-noticeboard.png) — dimensions globales non relues, pose static, ancre 760/863
+**Assets :** [prop-noticeboard](../assets/prop-noticeboard.png) — 1520 × 1035, pose static, ancre 760/863
 
 **À compléter :**
 
@@ -6908,9 +6908,9 @@ Réservoir, régulateur et support stable. 7 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-18,"right":18,"top":-99,"bottom":1,"width":36,"height":100,"centerX":0,"mountHeight":-1},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-oxygen](../assets/prop-oxygen.png) — dimensions globales non relues, pose static, ancre 367.5/1964
+**Assets :** [prop-oxygen](../assets/prop-oxygen.png) — 724 × 2172, pose static, ancre 367.5/1964
 
 **À compléter :**
 
@@ -7215,9 +7215,9 @@ Culture entretenue dans un contenant. 1 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-33,"right":33,"top":-101.8414519259386,"bottom":0,"width":66,"height":101.8414519259386,"centerX":0,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-plant](../assets/prop-plant.png) — dimensions globales non relues, pose static, ancre 511.5/1500
+**Assets :** [prop-plant](../assets/prop-plant.png) — 1024 × 1536, pose static, ancre 511.5/1500
 
 **À compléter :**
 
@@ -7300,9 +7300,9 @@ Séparation mobile autour des soins. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-57,"right":57,"top":-154,"bottom":3,"width":114,"height":157,"centerX":0,"mountHeight":-3},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-privacy-screen](../assets/prop-privacy-screen.png) — dimensions globales non relues, pose static, ancre 543.5/1419
+**Assets :** [prop-privacy-screen](../assets/prop-privacy-screen.png) — 1086 × 1448, pose static, ancre 543.5/1419
 
 **À compléter :**
 
@@ -7341,9 +7341,9 @@ Machine reliée au réseau, parfois physique. 7 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-70,"right":79,"top":-83,"bottom":0,"width":149,"height":83,"centerX":4.5,"mountHeight":0},"physicalFootprints":[{"id":"pump-cover2","room":"pump","footprint":{"w":175,"d":0.14}},{"id":"drain-cover2","room":"drain","footprint":{"w":240,"d":0.13}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-pump-motor](../assets/prop-pump-motor.png) — dimensions globales non relues, pose static, ancre 848/915
+**Assets :** [prop-pump-motor](../assets/prop-pump-motor.png) — 1682 × 935, pose static, ancre 848/915
 
 **À compléter :**
 
@@ -7386,7 +7386,7 @@ Rangement de pièces sur plusieurs niveaux. 5 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-62,"right":62,"top":-170,"bottom":1,"width":124,"height":171,"centerX":0,"mountHeight":-1},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-rack](../assets/prop-rack.png) — 1070 × 1470, pose static, ancre 534/1451
 
@@ -7428,9 +7428,9 @@ Communications, antenne et support. 3 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-40,"right":50,"top":-135,"bottom":0,"width":90,"height":135,"centerX":5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-radio](../assets/prop-radio.png) — dimensions globales non relues, pose static, ancre 508/1525
+**Assets :** [prop-radio](../assets/prop-radio.png) — 1024 × 1536, pose static, ancre 508/1525
 
 **À compléter :**
 
@@ -7670,9 +7670,9 @@ Identifiant : `rop:props:prop-sealed-egg`
 
 **Dimensions et ancrage :** {"nativeEnvelope":null,"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [egg-sealed](../assets/egg-sealed.png) — dimensions globales non relues, pose static, ancre 627/1154
+**Assets :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
 
 **À compléter :**
 
@@ -7795,7 +7795,7 @@ Rangement ouvert, posé ou fixé. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-62,"right":62,"top":-170,"bottom":1,"width":124,"height":171,"centerX":0,"mountHeight":-1},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-shelf](../assets/prop-shelf.png) — 1070 × 1470, pose static, ancre 536/1454
 
@@ -7914,9 +7914,9 @@ Cuve, robinet et raccords. 7 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-50,"right":60,"top":-107,"bottom":0,"width":110,"height":107,"centerX":5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-sink](../assets/prop-sink.png) — dimensions globales non relues, pose static, ancre 611.5/1228
+**Assets :** [prop-sink](../assets/prop-sink.png) — 1262 × 1246, pose static, ancre 611.5/1228
 
 **À compléter :**
 
@@ -7958,9 +7958,9 @@ Contenant scientifique ; préserver sa version physique. 4 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":null,"physicalFootprints":[{"id":"science-cover2","room":"science","footprint":{"w":175,"d":0.12}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [specimen-jar](../assets/specimen-jar.png) — dimensions globales non relues, pose static, ancre 512/1518
+**Assets :** [specimen-jar](../assets/specimen-jar.png) — 1024 × 1536, pose static, ancre 512/1518
 
 **À compléter :**
 
@@ -8000,7 +8000,7 @@ Cuisine et extraction reliées au plan de travail. 2 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-50,"right":60,"top":-87,"bottom":0,"width":110,"height":87,"centerX":5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-stove](../assets/prop-stove.png) — 1402 × 1122, pose static, ancre 692.5/1090
 
@@ -8081,7 +8081,7 @@ Surface de travail ou mobilier civil selon la pièce. 12 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-87,"right":90,"top":-57,"bottom":0,"width":177,"height":57,"centerX":1.5,"mountHeight":0},"physicalFootprints":[{"id":"jorden-cover1","room":"jorden","footprint":{"w":205,"d":0.14}},{"id":"mess-cover1","room":"mess","footprint":{"w":185,"d":0.13}},{"id":"mess-cover2","room":"mess","footprint":{"w":250,"d":0.14}},{"id":"mess-cover3","room":"mess","footprint":{"w":130,"d":0.1}},{"id":"survey-cover1","room":"survey","footprint":{"w":160,"d":0.13}},{"id":"pantry-cover1","room":"pantry","footprint":{"w":220,"d":0.13}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
 **Assets :** [prop-table](../assets/prop-table.png) — 2206 × 713, pose static, ancre 1101/697
 
@@ -8180,9 +8180,9 @@ Appareil à bandes fixé au poste. 2 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-51,"right":51,"top":-142,"bottom":-84,"width":102,"height":58,"centerX":0,"mountHeight":84},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-tape-reel](../assets/prop-tape-reel.png) — dimensions globales non relues, pose static, ancre 831/868
+**Assets :** [prop-tape-reel](../assets/prop-tape-reel.png) — 1663 × 945, pose static, ancre 831/868
 
 **À compléter :**
 
@@ -8219,9 +8219,9 @@ Rangement mural d’outils. 5 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-53,"right":53,"top":-139,"bottom":-78,"width":106,"height":61,"centerX":0,"mountHeight":78},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-tool-board](../assets/prop-tool-board.png) — dimensions globales non relues, pose static, ancre 826/867
+**Assets :** [prop-tool-board](../assets/prop-tool-board.png) — 1654 × 951, pose static, ancre 826/867
 
 **À compléter :**
 
@@ -8594,9 +8594,9 @@ Mobilier de service ; certaines instances restent physiques. 3 placement(s) de b
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-41,"right":51,"top":-176,"bottom":0,"width":92,"height":176,"centerX":5,"mountHeight":0},"physicalFootprints":[{"id":"concourse-cover2","room":"concourse","footprint":{"w":220,"d":0.14}}],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-vending](../assets/prop-vending.png) — dimensions globales non relues, pose static, ancre 451/1702
+**Assets :** [prop-vending](../assets/prop-vending.png) — 903 × 1741, pose static, ancre 451/1702
 
 **À compléter :**
 
@@ -8686,9 +8686,9 @@ Repère horaire accroché au mur. 12 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-25,"right":25,"top":-159,"bottom":-109,"width":50,"height":50,"centerX":0,"mountHeight":109},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-wall-clock](../assets/prop-wall-clock.png) — dimensions globales non relues, pose static, ancre 626/1212
+**Assets :** [prop-wall-clock](../assets/prop-wall-clock.png) — 1261 × 1247, pose static, ancre 626/1212
 
 **À compléter :**
 
@@ -8735,9 +8735,9 @@ Signal lié au risque local. 12 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-36,"right":36,"top":-148,"bottom":-99,"width":72,"height":49,"centerX":0,"mountHeight":99},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-warning-board](../assets/prop-warning-board.png) — dimensions globales non relues, pose static, ancre 760/923
+**Assets :** [prop-warning-board](../assets/prop-warning-board.png) — 1519 × 1036, pose static, ancre 760/923
 
 **À compléter :**
 
@@ -8912,9 +8912,9 @@ Châssis blanc, témoins verts et bleus. 1 placement(s) de base.
 
 **Dimensions et ancrage :** {"nativeEnvelope":{"left":-26,"right":27,"top":-103,"bottom":0,"width":53,"height":103,"centerX":0.5,"mountHeight":0},"physicalFootprints":[],"units":"coordonnees_logiques ; z = profondeur_normalisee"}
 
-**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = registre_et_liens_verifies_octets_non_relus ; visuel = not_certified.
+**État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-white-monitor](../assets/prop-white-monitor.png) — dimensions globales non relues, pose static, ancre 452.5/1706
+**Assets :** [prop-white-monitor](../assets/prop-white-monitor.png) — 904 × 1739, pose static, ancre 452.5/1706
 
 **À compléter :**
 

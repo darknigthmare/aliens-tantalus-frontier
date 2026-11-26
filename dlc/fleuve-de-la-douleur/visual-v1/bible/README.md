@@ -22,7 +22,7 @@ node scripts/build-river-of-pain-bible.mjs
 
 Le générateur relit le modèle, les notes, le manifeste et les PNG présents. Il vérifie les identifiants, sources, couvertures de placement, signatures PNG et SHA-256, puis reconstruit JSON, Markdown et HTML.
 
-Les présents documents ont été reconstruits à distance après l’indisponibilité de l’exécuteur. Les dimensions globales des 70 anciens PNG et les tailles non relues sont conservées à null ; les dimensions des huit ajouts ont été confirmées avant interruption. Les empreintes et ancrages sont ceux du manifeste de 78 images. La génération locale complète les métadonnées après relecture des fichiers, sans prétendre à une recette visuelle.
+Les documents, d’abord préservés par une reconstruction distante lors de l’interruption, ont ensuite été régénérés localement depuis les 78 PNG réels. Leurs signatures, SHA-256, tailles et dimensions ont été relus et vérifiés. Aucun asset ne conserve de dimension globale ou de taille inconnue dans cette édition. Cette vérification des fichiers reste distincte d’une validation artistique ou d’un parcours en jeu.
 
 ## Validation et distribution
 
@@ -30,4 +30,4 @@ Définition, PNG présent, intégration sélective et validation en jeu restent 
 
 Ces six fichiers (le générateur et les cinq fichiers de ce dossier) sont des sources de production, à admettre précisément et à exclure du build public. Les archives v0.9, sauvegardes, dialogues et collisions ne sont pas réécrits.
 
-Le HTML utilise une pagination de 20 fiches et des images chargées à la demande. La recette de rendu en navigateur reste à réaliser sur la publication finale ; l’interruption de l’exécuteur ne vaut pas validation de cette recette.
+Le HTML utilise une pagination de 20 fiches et des images chargées à la demande. La recette locale dans Chromium 143 a validé neuf contrôles : compte des fiches, navigation entre pages, recherche par nom, filtres par domaine et disponibilité du PNG, décodage des images, absence de débordement horizontal sur mobile et ouverture des détails de placement. Les captures ont été relues en 1280 × 900 et 390 × 844 ; aucune erreur JavaScript n’a été relevée. Cette recette porte sur la consultation de la bible ; la validation artistique et le parcours en jeu conservent leurs états propres.

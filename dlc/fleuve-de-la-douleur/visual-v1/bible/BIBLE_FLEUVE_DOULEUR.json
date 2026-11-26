@@ -7,10 +7,12 @@
     "branch": "codex/river-of-pain-props-v2",
     "commit": "0adf04e16e38adbb325cf297727bb414dc8df646",
     "recoveredVersion": "0.9.0-candidate.1",
-    "modelBlob": "d51967137be1ce50411949241ddd97bb69347f5e",
-    "manifestBlob": "4d91a2fd1af16b712667cf489e7c18a7ccc8db7d",
-    "manifestSha256Reported": "afa580a38a45c066e4bb4cc51aa0f5116410def6fd161ffbfb46927931dffa5c",
-    "rebuildMode": "cloud_reconstruction_after_executor_unavailable"
+    "rebuildMode": "local_png_bytes_verified",
+    "currentSourceHashes": {
+      "model": "e03175aa1db2a83aa10fbb4e3574f84a13815c3b6a9d2498aa6e5566e9b8fde8",
+      "manifest": "afa580a38a45c066e4bb4cc51aa0f5116410def6fd161ffbfb46927931dffa5c",
+      "notes": "fff3fd7a072886649b5954eadeff8674913a532ddbd357d1b240b3adb4166e08"
+    }
   },
   "scope": "Profils humains et créatures natifs, lieux, props et placements, équipements, mobilité, matériaux et mondes du DLC récupéré, avec les manquants identifiés dans les sources consultées.",
   "limitations": [
@@ -19,7 +21,7 @@
     "Les dimensions du modèle sont des choix du projet sauf preuve indépendante.",
     "La bible documente des contenus manquants sans les injecter au runtime.",
     "Les anciens rapports v0.9 restent historiques.",
-    "Dans cette reconstruction distante, dimensions globales et tailles non relues sont null ; SHA-256 et ancrages proviennent du manifeste. Le générateur local peut les vérifier depuis les PNG."
+    "Les PNG ont été relus par le générateur local : SHA-256, signature, taille et dimensions contrôlés. Cela ne certifie pas leur fidélité visuelle."
   ],
   "chronology": [
     {
@@ -280,7 +282,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -293,8 +295,11 @@
           "id": "brackett-stowed-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/brackett-stowed-right.png",
           "sha256": "39187b73b56a75a0115c0589aad2c1986ea9a7426450db46378925c2c18ab5f9",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1741716,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1480,
             "w": 399,
@@ -315,7 +320,7 @@
             "note": "Identité du roman ; visage interprété. Armure inspirée des accessoires originaux documentés par Propstore (R5/R6 de l’inventaire de sprites) ; aucun nom ou marquage personnel d’Apone ou Frost repris. Pose sans arme visible, utilisée seulement lorsque l’arme est rangée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -372,7 +377,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -385,8 +390,11 @@
           "id": "paris-stowed-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/paris-stowed-right.png",
           "sha256": "1b51611c61d4ea40d247ec43604eceb8dcc398b8bfd99bef4a824f4573bc6944",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1770268,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1513,
             "w": 397,
@@ -407,7 +415,7 @@
             "note": "Identité du roman ; visage interprété, sans ressemblance revendiquée avec une interprète audio. Armure inspirée des accessoires documentés par Propstore (R5/R6 de l’inventaire) ; aucun marquage personnel d’Apone ou Frost. Pose sans arme visible, utilisée seulement lorsque l’arme est rangée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -464,7 +472,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -477,8 +485,11 @@
           "id": "anne-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/anne-idle-right.png",
           "sha256": "839d216f64558953911fa262b8696056f5261505d4aaa37e792ff27fb2d268bc",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1771950,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1524,
             "w": 415,
@@ -499,7 +510,7 @@
             "note": "Cheveux bouclés attestés par l’extrait autorisé Titan Books / Daily Dead (R1 du registre v0.9). Visage, teintes et tenue de prospectrice interprétés ; aucune fidélité 1:1 certifiée du visage."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -558,7 +569,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -571,8 +582,11 @@
           "id": "newt-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/newt-idle-right.png",
           "sha256": "d05fa2224dc42bf5e5e9841560bd7aa948c81c255f9786cee81ecf9e29b1e1b5",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1156621,
+          "pixels": {
+            "width": 887,
+            "height": 1774
+          },
           "alphaBounds": {
             "h": 1745,
             "w": 399,
@@ -593,7 +607,7 @@
             "note": "Référence visuelle filmique et figurine NECA sous licence (R3 du registre v0.9). Cheveux longs, haut beige, salopette bleu gris, deux bretelles et absence de casque adaptés à la période précédant la chute. Visage généré : ressemblance exacte non certifiée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -650,7 +664,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -663,8 +677,11 @@
           "id": "russ-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/russ-idle-right.png",
           "sha256": "4282c95538e977790a58133d323c9cac3bce6e7a807f55306cdc1187de5ba565",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1548547,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1521,
             "w": 383,
@@ -685,7 +702,7 @@
             "note": "Apparence fatiguée attestée dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, pilosité et vêtements interprétés."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -740,7 +757,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -753,8 +770,11 @@
           "id": "komiskey-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/komiskey-idle-right.png",
           "sha256": "0f861e5b99d4c74e1c47c6784b5777618f6aff8dd99f793baeda9b4fe668d4e7",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1670058,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1523,
             "w": 475,
@@ -775,7 +795,7 @@
             "note": "L’extrait autorisé Titan Books / Daily Dead (R1) décrit une personne petite et trapue, aux boucles brunes et aux yeux bleus. Blouse et visage interprétés ; la hauteur conserve la différence avec les autres adultes."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -831,7 +851,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -844,8 +864,11 @@
           "id": "luisa-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/luisa-idle-right.png",
           "sha256": "613d023a2f734959a6d844fda455587bbdcc8c4eef4904c20d8b28f063eedc5e",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1544542,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1522,
             "w": 373,
@@ -866,7 +889,7 @@
             "note": "Enfant nommée du récit, distincte de Newt. Visage, cheveux attachés et vêtements interprétés ; apparence exacte non établie par les sources consultées."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -919,7 +942,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -932,8 +955,11 @@
           "id": "civilian-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/civilian-idle-right.png",
           "sha256": "fb00e3a28bcf13abd9f2dc08109c9dcf2aa9eb236542eca8d93c3a0354d253bb",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1594838,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1506,
             "w": 402,
@@ -954,7 +980,7 @@
             "note": "Colon original de gameplay. Visage et vêtements créés pour cette adaptation ; aucune identité canonique revendiquée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1010,7 +1036,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1023,8 +1049,11 @@
           "id": "mori-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/mori-idle-right.png",
           "sha256": "dd397d37ec935d0c187a6f37b0cb771090ac1d8bc26f9e0938376aeedd9e2208",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1422132,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1520,
             "w": 350,
@@ -1045,7 +1074,7 @@
             "note": "Médecin nommé du récit. Visage, coiffure et tenue médicale interprétés ; aucune ressemblance 1:1 revendiquée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1113,7 +1142,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1126,8 +1155,11 @@
           "id": "tim-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/tim-idle-right.png",
           "sha256": "79ab22619bfa0221ba4e40f64c7eafd5ab308085345697a24a8096d666104def",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1623121,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1513,
             "w": 387,
@@ -1148,7 +1180,7 @@
             "note": "Identité et rôle familial attestés dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, tenue et écusson d’épaule interprétés ; proportions d’enfant conservées."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1218,7 +1250,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1231,8 +1263,11 @@
           "id": "simpson-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/simpson-idle-right.png",
           "sha256": "a7aa907ded73f3aa3c25563073c912dda5bb42cad5613520c45ab42facdb9cb4",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1727875,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1523,
             "w": 459,
@@ -1253,7 +1288,7 @@
             "note": "Administrateur identifié dans l’extrait autorisé Titan Books / Daily Dead (R1). Âge visible, visage et tenue interprétés. Placement et état dans la campagne 2179 relèvent de l’adaptation."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1321,7 +1356,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1334,8 +1369,11 @@
           "id": "hansard-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/hansard-idle-right.png",
           "sha256": "7df5b8f75594e3c9846a66f164a049802189708cf214a2b13c14d6057c11bd5e",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1679572,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1520,
             "w": 457,
@@ -1356,7 +1394,7 @@
             "note": "Ingénieur en chef identifié dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage et tenue de travail interprétés. Placement et état en 2179 relèvent de l’adaptation."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1425,7 +1463,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1438,8 +1476,11 @@
           "id": "joel-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/joel-idle-right.png",
           "sha256": "13ff0b658bc22d252ebfd3a77ed036570932d4d03ef4099c11c5b9aa5dc36224",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1541802,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1523,
             "w": 375,
@@ -1460,7 +1501,7 @@
             "note": "Infirmier mince décrit dans l’extrait autorisé Titan Books / Daily Dead (R1). Minceur conservée ; visage et tenue interprétés. Placement et état en 2179 relèvent de l’adaptation."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1528,7 +1569,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_selectif_repli_natif_pour_etats_absents",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -1541,8 +1582,11 @@
           "id": "bronagh-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/bronagh-idle-right.png",
           "sha256": "81801b5b4ad9d4bb35018e5eea2efced0fdd6c86d239f24b05ea3bdc723f521b",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1746956,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1532,
             "w": 418,
@@ -1563,7 +1607,7 @@
             "note": "Cuisinière identifiée dans l’extrait autorisé Titan Books / Daily Dead (R1). Visage, coiffure attachée et tablier interprétés. Placement et état en 2179 relèvent de l’adaptation."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1623,7 +1667,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -1636,8 +1680,11 @@
           "id": "vale-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/vale-idle-right.png",
           "sha256": "db6802101e3560a9cb7b784f28a1eace1b91f02427552b25acba26a3055ffe65",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 929653,
+          "pixels": {
+            "width": 1014,
+            "height": 1551
+          },
           "alphaBounds": {
             "h": 1543,
             "w": 444,
@@ -1658,7 +1705,7 @@
             "note": "Iona Vale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1718,7 +1765,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -1731,8 +1778,11 @@
           "id": "rhee-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/rhee-idle-right.png",
           "sha256": "f741c01534cfdfe7dd8c903d1a9fcc6cf3806ea90251062308ebbd6715e3c484",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1597938,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1531,
             "w": 459,
@@ -1753,7 +1803,7 @@
             "note": "Malik Rhee est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire mug repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1813,7 +1863,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -1826,8 +1876,11 @@
           "id": "arden-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/arden-idle-right.png",
           "sha256": "3913c1be3fed538b29ff3e8ce41c6851e3e9f8812583de493397854bac508911",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1505286,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1510,
             "w": 383,
@@ -1848,7 +1901,7 @@
             "note": "Vera Arden est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -1908,7 +1961,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -1921,8 +1974,11 @@
           "id": "becker-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/becker-idle-right.png",
           "sha256": "aa229865395d0e493bac6a60721388f30f1b02dbcc8c82f451825fa5ed867288",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1356396,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1504,
             "w": 389,
@@ -1943,7 +1999,7 @@
             "note": "Arun Becker est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2003,7 +2059,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2016,8 +2072,11 @@
           "id": "ferris-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/ferris-idle-right.png",
           "sha256": "123a17145eaa3fb203af4f79e26ae0d75db938cea1ce16f6295b9f7b853322aa",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1606272,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1514,
             "w": 426,
@@ -2038,7 +2097,7 @@
             "note": "Solène Ferris est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2098,7 +2157,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2111,8 +2170,11 @@
           "id": "corban-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/corban-idle-right.png",
           "sha256": "04952fc6fcbfaf0bb396e2f668f9acda1abdac14d50fa110d426692e6132e0ef",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1574673,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1525,
             "w": 480,
@@ -2133,7 +2195,7 @@
             "note": "Nils Corban est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2193,7 +2255,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2206,8 +2268,11 @@
           "id": "hale-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/hale-idle-right.png",
           "sha256": "059782863dcff9def1b2de1832554d5e5cc7ad10cf93ed690db935d76e3b4c77",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1627856,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1475,
             "w": 449,
@@ -2228,7 +2293,7 @@
             "note": "Ezra Hale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2288,7 +2353,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2301,8 +2366,11 @@
           "id": "doran-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/doran-idle-right.png",
           "sha256": "36f6bccb48bc8272bd879cee6e1be0cdf4f5f8f9ba6833786648681a57ebb564",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1540030,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1475,
             "w": 439,
@@ -2323,7 +2391,7 @@
             "note": "Mei Doran est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2383,7 +2451,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2396,8 +2464,11 @@
           "id": "sato-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/sato-idle-right.png",
           "sha256": "ac91bb59be2cf284ad96d9234dd6a3adec14ae5949c68708b66dc09a8884e2df",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1539115,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1496,
             "w": 446,
@@ -2418,7 +2489,7 @@
             "note": "Lina Sato est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire linen repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2478,7 +2549,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2491,8 +2562,11 @@
           "id": "bell-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/bell-idle-right.png",
           "sha256": "53ee90e0855ba8f3ba25016f68b315d1c3ab57bd2e9ff7683554e37e78f55d33",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1675694,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1501,
             "w": 465,
@@ -2513,7 +2587,7 @@
             "note": "Tomas Bell est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2573,7 +2647,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2586,8 +2660,11 @@
           "id": "kent-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/kent-idle-right.png",
           "sha256": "6152a0a339d86f9a38bea238bf7e9f9a1106132dcd9564cdfe923eb1bfdcd45a",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1537892,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1495,
             "w": 441,
@@ -2608,7 +2685,7 @@
             "note": "Rosa Kent est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -2668,7 +2745,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif_en_mouvement",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_identite_originale"
       },
@@ -2681,8 +2758,11 @@
           "id": "voss-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/voss-idle-right.png",
           "sha256": "dfd1e99b8a63f078f1a0625a2dc1373165b82bb8c56c3250e700f49b56a81016",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1587267,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1486,
             "w": 485,
@@ -2703,7 +2783,7 @@
             "note": "Anton Voss est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -3459,7 +3539,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_idle_selectif_repli_natif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -3472,8 +3552,11 @@
           "id": "facehugger-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/facehugger-idle-right.png",
           "sha256": "4d16634f91c3d03a47c00832cdd41fbf70ca5cbc85647380b7befcf910253249",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1010893,
+          "pixels": {
+            "width": 1920,
+            "height": 819
+          },
           "alphaBounds": {
             "h": 603,
             "w": 1806,
@@ -3494,7 +3577,7 @@
             "note": "Interprétation peinte d’un accessoire filmique de facehugger fourni en référence : huit pattes visibles et queue segmentée distincte. Anatomie vérifiée visuellement ; pas une numérisation 1:1 de l’accessoire ni une animation."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -12651,7 +12734,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -12664,8 +12747,11 @@
           "id": "prop-bench",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-bench.png",
           "sha256": "7aa627d57e49b7fd94ee2131284c3985e40a43a5b0f4f813fee906da4ce66ce2",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1556440,
+          "pixels": {
+            "width": 1686,
+            "height": 933
+          },
           "alphaBounds": {
             "x": 52,
             "y": 114,
@@ -12686,7 +12772,7 @@
             "note": "Banc collectif bas et large, assise gris-vert, dossier rectangulaire vert sombre à cinq séparations verticales, deux pieds épais. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -13161,7 +13247,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -13174,8 +13260,11 @@
           "id": "prop-cable-spool",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-cable-spool.png",
           "sha256": "818cc15439fe43275c979de972b6878444061334d380396665ba0107047288a3",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2644644,
+          "pixels": {
+            "width": 1662,
+            "height": 946
+          },
           "alphaBounds": {
             "x": 48,
             "y": 26,
@@ -13196,7 +13285,7 @@
             "note": "Touret de câble horizontal à deux flasques métalliques circulaires, moyeu sombre et trois perforations dans chaque flasque, câble entre les flasques. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -13642,7 +13731,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -13655,8 +13744,11 @@
           "id": "armory-case",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/armory-case.png",
           "sha256": "6656bac9e14d154b1c5eec4ebd3f62aaf52dd5594abf2feaf579ce725ed823d8",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1753114,
+          "pixels": {
+            "width": 1774,
+            "height": 887
+          },
           "alphaBounds": {
             "h": 585,
             "w": 1665,
@@ -13677,7 +13769,7 @@
             "note": "Caisse d’armurerie créée pour remplacer le modèle générique des cinq instances case. Design industriel de l’adaptation ; aucun modèle canonique exact revendiqué."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -14058,7 +14150,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -14071,8 +14163,11 @@
           "id": "prop-chair",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-chair.png",
           "sha256": "350ca4972bcecaeb20144fd0fb1ee57c1dfef06bef8f5d65cebacc880b1d2e57",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 876156,
+          "pixels": {
+            "width": 1246,
+            "height": 1263
+          },
           "alphaBounds": {
             "x": 278,
             "y": 33,
@@ -14093,7 +14188,7 @@
             "note": "Chaise coloniale simple sans accoudoirs, assise vert pâle, dossier rectangulaire vert sombre et pieds tubulaires gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -14884,7 +14979,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -14897,7 +14992,7 @@
           "id": "prop-cupboard",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-cupboard.png",
           "sha256": "27356311a6ea52f623d65d7b1d4f5c2618cf648574324ed1b609745fa5944ef5",
-          "bytes": null,
+          "bytes": 2223383,
           "pixels": {
             "width": 948,
             "height": 1660
@@ -14922,7 +15017,7 @@
             "note": "Adaptation du type « cupboard » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -15264,7 +15359,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -15277,8 +15372,11 @@
           "id": "egg-sealed",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/egg-sealed.png",
           "sha256": "16cfef03c669cbca5ce6064f4f83bce3ec0021655a76caf84c466a007ebc632c",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1389004,
+          "pixels": {
+            "width": 1254,
+            "height": 1254
+          },
           "alphaBounds": {
             "h": 988,
             "w": 734,
@@ -15299,7 +15397,7 @@
             "note": "Interprétation peinte d’un œuf filmique fourni en référence : volume ovoïde, enveloppe organique brun olive et quatre lèvres closes. Prop statique fermé ; aucun état ouvert ni contenu généré."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -15646,7 +15744,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -15659,8 +15757,11 @@
           "id": "prop-fire-cabinet",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-fire-cabinet.png",
           "sha256": "90846c127d08147e7b1e2edbcd03b2caf81a270bd0c0b6cbd3a56080d62aabf7",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1817105,
+          "pixels": {
+            "width": 982,
+            "height": 1602
+          },
           "alphaBounds": {
             "x": 129,
             "y": 69,
@@ -15681,7 +15782,7 @@
             "note": "Armoire incendie verticale rouge-brun patiné, cadre rectangulaire et niche sombre montrant un extincteur ocre avec poignée, inscription FIRE. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -15912,7 +16013,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -15925,7 +16026,7 @@
           "id": "prop-fridge",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-fridge.png",
           "sha256": "8e04cc73a7fa6bad3149eeae8d9391be3b0aaeb397d202ecde04afa36e3dff91",
-          "bytes": null,
+          "bytes": 1833332,
           "pixels": {
             "width": 1086,
             "height": 1448
@@ -15950,7 +16051,7 @@
             "note": "Adaptation du type « fridge » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -16398,7 +16499,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -16411,8 +16512,11 @@
           "id": "isolation-glass",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/isolation-glass.png",
           "sha256": "eab5ae1dc0934887cfc90669ee991186311dc793ab56d16cd3ae4d7d17ad4bf2",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2142604,
+          "pixels": {
+            "width": 1161,
+            "height": 1354
+          },
           "alphaBounds": {
             "h": 1281,
             "w": 1040,
@@ -16433,7 +16537,7 @@
             "note": "Cloison vitrée d’isolement créée pour le type glass. Matériaux et forme interprétés à partir de sa fonction dans la scène ; pas un plan canonique du roman."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -16517,7 +16621,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -16530,8 +16634,11 @@
           "id": "prop-glass-cabinet",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-glass-cabinet.png",
           "sha256": "8222c75ac12971c6683305a804d2fe23d18f4072e154d5d2418b805ddd70d711",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1094469,
+          "pixels": {
+            "width": 1068,
+            "height": 1472
+          },
           "alphaBounds": {
             "x": 24,
             "y": 72,
@@ -16552,7 +16659,7 @@
             "note": "Le type glass-cabinet partageait un panneau vitré mobile. La vitrine à deux étagères individualise ce type dans son enveloppe native, avec vrai vitrage transparent ; aménagement interprété, sans accessoire filmique exact authentifié."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -16776,7 +16883,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -16789,8 +16896,11 @@
           "id": "prop-gurney",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-gurney.png",
           "sha256": "0e91dc3343d068f0dae8b269ebd64464ff00a15b020c2d2ede255a9cd75b4cd3",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 903400,
+          "pixels": {
+            "width": 1670,
+            "height": 942
+          },
           "alphaBounds": {
             "x": 20,
             "y": 73,
@@ -16811,7 +16921,7 @@
             "note": "Brancard médical vide large et bas, matelas vert désaturé, plateau clair sur deux pieds métalliques à petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -16977,7 +17087,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -16990,8 +17100,11 @@
           "id": "prop-hand-truck",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hand-truck.png",
           "sha256": "5072cb70f287e6d4109a1aa86acfc4fcd9da084cf95b2425b41921f0468da3f5",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1033686,
+          "pixels": {
+            "width": 1036,
+            "height": 1518
+          },
           "alphaBounds": {
             "x": 92,
             "y": 20,
@@ -17012,7 +17125,7 @@
             "note": "Diable de manutention vide, cadre tubulaire gris-vert à deux montants et barre de poignée, petite bavette basse, deux roues sombres. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -17135,7 +17248,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -17148,8 +17261,11 @@
           "id": "prop-hanging-coat",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hanging-coat.png",
           "sha256": "23936ef2c1dc80b4f65022d948888abddd5453444a052c8f8a7c4093f2b42465",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2553563,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "x": 97,
             "y": 46,
@@ -17170,7 +17286,7 @@
             "note": "Manteau de travail colonial vert désaturé suspendu à une petite barre et un cintre, deux manches baissées et fermeture verticale centrale. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -17355,7 +17471,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -17368,8 +17484,11 @@
           "id": "prop-hose-reel",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-hose-reel.png",
           "sha256": "ef6812960513eed33c70593231402cf8cce37bcd714d306e1fe8bab0f4e74bac",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1509377,
+          "pixels": {
+            "width": 1190,
+            "height": 1322
+          },
           "alphaBounds": {
             "x": 89,
             "y": 38,
@@ -17390,7 +17509,7 @@
             "note": "Enrouleur de flexible, grande bobine circulaire métallique avec tuyau sombre en spires concentriques et extrémité pendante à droite presque jusqu’au sol. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -17587,7 +17706,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -17600,8 +17719,11 @@
           "id": "prop-lab-bench",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-lab-bench.png",
           "sha256": "0573234c16ddd1add8f612b3817ecdc716b4a264c802457572295a0430cc5dca",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1102914,
+          "pixels": {
+            "width": 1478,
+            "height": 1064
+          },
           "alphaBounds": {
             "x": 16,
             "y": 109,
@@ -17622,7 +17744,7 @@
             "note": "Établi de laboratoire bas et large, plateau gris-vert clair sur deux pieds métalliques, petit tapis ou support vert et deux récipients translucides sur le plateau. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -17789,7 +17911,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -17802,7 +17924,7 @@
           "id": "prop-linen",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-linen.png",
           "sha256": "9a86cd2a3c66a192532850688fdeab2a3ab81f4728aa4c8da75cb44765b798aa",
-          "bytes": null,
+          "bytes": 2672997,
           "pixels": {
             "width": 1278,
             "height": 1230
@@ -17827,7 +17949,7 @@
             "note": "Adaptation du type « linen » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -17931,7 +18053,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -17944,8 +18066,11 @@
           "id": "prop-locker",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-locker.png",
           "sha256": "0b0dd126dda170b90d5e3af22c0cc22f8a4361f6f4ca4638ad7e849b8be5414f",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2096824,
+          "pixels": {
+            "width": 948,
+            "height": 1659
+          },
           "alphaBounds": {
             "x": 66,
             "y": 27,
@@ -17966,7 +18091,7 @@
             "note": "Casier de stockage colonial haut à deux portes étroites, acier vert-bleu sombre, fentes d’aération supérieures, poignée claire et marquage STOCK. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -18149,7 +18274,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -18162,8 +18287,11 @@
           "id": "prop-medical-cross",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-medical-cross.png",
           "sha256": "15cd29060aeec25840190b33cb5d6acda0f3b46bef189c82ad2453452883b186",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1786955,
+          "pixels": {
+            "width": 1263,
+            "height": 1246
+          },
           "alphaBounds": {
             "x": 140,
             "y": 131,
@@ -18184,7 +18312,7 @@
             "note": "Plaque carrée médicale ivoire, simple croix vert désaturé centrée, cadre fin. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -18291,7 +18419,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -18304,7 +18432,7 @@
           "id": "prop-medicine",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-medicine.png",
           "sha256": "377e80dd44db13efee4c73ea33c60f4c67679e2371242f1d3b0b9bb7902a12ab",
-          "bytes": null,
+          "bytes": 2326751,
           "pixels": {
             "width": 1070,
             "height": 1470
@@ -18329,7 +18457,7 @@
             "note": "Adaptation du type « medicine » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -18399,7 +18527,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -18412,8 +18540,11 @@
           "id": "prop-microscope",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-microscope.png",
           "sha256": "68da9a25b5d4d801fd6ceba6378ef00c9f5bbac09ff75842078c74c9663802ee",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1951834,
+          "pixels": {
+            "width": 1346,
+            "height": 1169
+          },
           "alphaBounds": {
             "x": 12,
             "y": 12,
@@ -18434,7 +18565,7 @@
             "note": "Le type microscope existait avec un pupitre générique. La forme optique individualise ce sens dans la même enveloppe de rendu ; dessin interprété, sans modèle filmique ou description détaillée authentifiée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -18530,7 +18661,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -18543,8 +18674,11 @@
           "id": "prop-monitor",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-monitor.png",
           "sha256": "055f58b00a3c5fee1c353c11c865ff3fdef1ee52b15dcbad97c36979466fa798",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2121133,
+          "pixels": {
+            "width": 1344,
+            "height": 1170
+          },
           "alphaBounds": {
             "x": 113,
             "y": 34,
@@ -18565,7 +18699,7 @@
             "note": "Terminal médical rétro compact, écran cyan sombre au-dessus d’un socle pupitre gris-vert, commandes physiques sur une surface inclinée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -18825,7 +18959,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -18838,8 +18972,11 @@
           "id": "prop-natal-unit",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-natal-unit.png",
           "sha256": "2891e27bae950d8cfe5a36992a1fe2b698dda3a9f54923ebaf032a951ac8c37b",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1927365,
+          "pixels": {
+            "width": 1690,
+            "height": 931
+          },
           "alphaBounds": {
             "x": 9,
             "y": 98,
@@ -18860,7 +18997,7 @@
             "note": "Unité obstétricale et capot principalement transparent décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Enveloppe, socle et commande à droite repris du DLC ; géométrie détaillée et matériaux interprétés. Vitrage à véritable alpha partiel ; aucun patient représenté."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -19009,7 +19146,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -19022,8 +19159,11 @@
           "id": "prop-noticeboard",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-noticeboard.png",
           "sha256": "2bc8dde3c2015d30cb2474085da419414eea0502ac2951730aa747e63c59f193",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2024285,
+          "pixels": {
+            "width": 1520,
+            "height": 1035
+          },
           "alphaBounds": {
             "x": 80,
             "y": 169,
@@ -19044,7 +19184,7 @@
             "note": "Tableau mural colonial horizontal, cadre métal gris-vert, surface vert pâle et petites fiches ou lignes de consigne claires. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -19193,7 +19333,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -19206,8 +19346,11 @@
           "id": "prop-oxygen",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-oxygen.png",
           "sha256": "b9439594714eaa28e0d16a19eda11407df8b1e1f86543c4028d3eebc3004c6c1",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1258351,
+          "pixels": {
+            "width": 724,
+            "height": 2172
+          },
           "alphaBounds": {
             "x": 82,
             "y": 470,
@@ -19228,7 +19371,7 @@
             "note": "Bouteille d’oxygène verticale gris-vert, col étroit avec robinet et petit manomètre rond à droite, pied rectangulaire sombre. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -20023,7 +20166,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -20036,8 +20179,11 @@
           "id": "prop-plant",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-plant.png",
           "sha256": "1a81a3951801fe0ea332df3bfdc9af1ca4f0cb6964b765f0b90380de003a6ea2",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1889327,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "x": 98,
             "y": 18,
@@ -20058,7 +20204,7 @@
             "note": "Petite plante de logement en pot cubique gris-vert, cinq feuilles ou tiges longues vert olive en éventail, silhouette entière isolée. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -20352,7 +20498,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -20365,8 +20511,11 @@
           "id": "prop-privacy-screen",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-privacy-screen.png",
           "sha256": "c9547990269df19322086cbae30164166fcc638c4b0b4336e8766150449ac146",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1302478,
+          "pixels": {
+            "width": 1086,
+            "height": 1448
+          },
           "alphaBounds": {
             "x": 157,
             "y": 29,
@@ -20387,7 +20536,7 @@
             "note": "Paravent médical mobile à panneau rectangulaire translucide vert pâle, deux montants métalliques, pieds en T et petites roulettes. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -20557,7 +20706,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -20570,8 +20719,11 @@
           "id": "prop-pump-motor",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-pump-motor.png",
           "sha256": "8a213defb00e371233a0c1e6d4dbe21439aaf0a5d77a1c8afcde70f06a401f59",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2584425,
+          "pixels": {
+            "width": 1682,
+            "height": 935
+          },
           "alphaBounds": {
             "x": 31,
             "y": 18,
@@ -20592,7 +20744,7 @@
             "note": "Groupe moteur de pompe bas horizontal, corps sombre à nombreuses ailettes verticales vert-gris, carter circulaire à droite et semelle métallique rectangulaire. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -20707,7 +20859,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -20720,7 +20872,7 @@
           "id": "prop-rack",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-rack.png",
           "sha256": "a14774048d4ec0fddb76bf130042c2a55054a528d92d97932ddf1a8c269e36ab",
-          "bytes": null,
+          "bytes": 2546332,
           "pixels": {
             "width": 1070,
             "height": 1470
@@ -20745,7 +20897,7 @@
             "note": "Adaptation du type « rack » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -20841,7 +20993,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -20854,8 +21006,11 @@
           "id": "prop-radio",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-radio.png",
           "sha256": "db27211f3eb5e30daaac3b65860a230cbfa4beeb2412d15426de0dcd1cd6fd3b",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1746368,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "x": 118,
             "y": 10,
@@ -20876,7 +21031,7 @@
             "note": "Poste de radio colonial fixe sur pupitre compact gris-vert, petit écran sombre, commandes physiques sur plan incliné, antenne verticale mince à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -22470,7 +22625,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -22483,8 +22638,11 @@
           "id": "egg-sealed",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/egg-sealed.png",
           "sha256": "16cfef03c669cbca5ce6064f4f83bce3ec0021655a76caf84c466a007ebc632c",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1389004,
+          "pixels": {
+            "width": 1254,
+            "height": 1254
+          },
           "alphaBounds": {
             "h": 988,
             "w": 734,
@@ -22505,7 +22663,7 @@
             "note": "Interprétation peinte d’un œuf filmique fourni en référence : volume ovoïde, enveloppe organique brun olive et quatre lèvres closes. Prop statique fermé ; aucun état ouvert ni contenu généré."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -22757,7 +22915,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -22770,7 +22928,7 @@
           "id": "prop-shelf",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-shelf.png",
           "sha256": "b53368c55c0f2fcc9f6613f9a6679df15baefa34425bc316233b886ce641e80d",
-          "bytes": null,
+          "bytes": 2704502,
           "pixels": {
             "width": 1070,
             "height": 1470
@@ -22795,7 +22953,7 @@
             "note": "Adaptation du type « shelf » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -23127,7 +23285,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -23140,8 +23298,11 @@
           "id": "prop-sink",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-sink.png",
           "sha256": "7ddd42d9fee3e3fecd4b7e7dd0f6a20192b998ede900f7abd82a9c7fe4ea0b57",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1703705,
+          "pixels": {
+            "width": 1262,
+            "height": 1246
+          },
           "alphaBounds": {
             "x": 125,
             "y": 16,
@@ -23162,7 +23323,7 @@
             "note": "Meuble évier industriel compact gris-vert, grand bac ovale sombre intégré au plan supérieur, robinet coudé métallique simple à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -23270,7 +23431,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -23283,8 +23444,11 @@
           "id": "specimen-jar",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/specimen-jar.png",
           "sha256": "6bc3bb2e9310cd5b42ef9bdb64b3df521f3286868020dfdf1400886f359fdb47",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2451062,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1509,
             "w": 769,
@@ -23305,7 +23469,7 @@
             "note": "Bocal de laboratoire créé pour le prop specimen. Contenant, détails et disposition interprétés ; ne constitue pas une preuve de l’apparence exacte d’un accessoire filmique."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -23389,7 +23553,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -23402,7 +23566,7 @@
           "id": "prop-stove",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-stove.png",
           "sha256": "0ce9dc90a9946e9560b7cf58230976f165b1b5e93f84602013075d1c538e51eb",
-          "bytes": null,
+          "bytes": 2429193,
           "pixels": {
             "width": 1402,
             "height": 1122
@@ -23427,7 +23591,7 @@
             "note": "Adaptation du type « stove » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -23790,7 +23954,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -23803,7 +23967,7 @@
           "id": "prop-table",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-table.png",
           "sha256": "259f7e5286402339b59fa0a6799116b7fc57a66e33d0566456255e05e490253a",
-          "bytes": null,
+          "bytes": 1434557,
           "pixels": {
             "width": 2206,
             "height": 713
@@ -23828,7 +23992,7 @@
             "note": "Adaptation du type « table » présent dans le renderer v0.9 et les salles du DLC. Palette et construction cohérentes avec le mobilier industriel de Hadley’s Hope. Forme individuelle non attestée comme accessoire précis du film. Dimensions, placement et légendes natifs conservés ; aucune fidélité 1:1 de l’objet ni état ouvert/animé certifiés. Ancrage mesuré sur alpha ≥ 16 ; le PNG entier reste dessiné, pixels inchangés."
           },
           "validation": {
-            "source": "dimensions_confirmees_avant_panne_sha256_du_manifeste",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -24119,7 +24283,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -24132,8 +24296,11 @@
           "id": "prop-tape-reel",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-tape-reel.png",
           "sha256": "31ec1bd9669f970046c3c9d93d09e3a356a8036bebaabdd971deb7caca763c8d",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2215768,
+          "pixels": {
+            "width": 1663,
+            "height": 945
+          },
           "alphaBounds": {
             "x": 18,
             "y": 58,
@@ -24154,7 +24321,7 @@
             "note": "Petit enregistreur industriel à deux bobines métalliques circulaires côte à côte, moyeux et trois perforations dans chaque bobine, bande sombre entre les deux. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -24277,7 +24444,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -24290,8 +24457,11 @@
           "id": "prop-tool-board",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-tool-board.png",
           "sha256": "123ba2ef11ccbc9b693612ce492bee473f0378435ab9184c7fa8a2170ea9c248",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2434362,
+          "pixels": {
+            "width": 1654,
+            "height": 951
+          },
           "alphaBounds": {
             "x": 61,
             "y": 89,
@@ -24312,7 +24482,7 @@
             "note": "Panneau mural horizontal métallique sombre, six outils manuels longs bien distincts suspendus verticalement, cadre gris-vert. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -25251,7 +25421,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -25264,8 +25434,11 @@
           "id": "prop-vending",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-vending.png",
           "sha256": "26ac63de868e4ab6abcf96906db5af03a649ee3f51c852583cb914798f5dacfa",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1987095,
+          "pixels": {
+            "width": 903,
+            "height": 1741
+          },
           "alphaBounds": {
             "x": 128,
             "y": 38,
@@ -25286,7 +25459,7 @@
             "note": "Distributeur automatique colonial haut et étroit gris-vert, grande vitre sombre montrant trois rangées de quatre produits, fente de livraison basse et petite commande à droite. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -25708,7 +25881,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -25721,8 +25894,11 @@
           "id": "prop-wall-clock",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-wall-clock.png",
           "sha256": "0453465572e8af35a53e8fcdee16c3718e4671cec5a341bfd8aef0849405790f",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1913453,
+          "pixels": {
+            "width": 1261,
+            "height": 1247
+          },
           "alphaBounds": {
             "x": 62,
             "y": 57,
@@ -25743,7 +25919,7 @@
             "note": "Horloge murale ronde, bord métal gris-vert, cadran crème jauni à douze graduations, deux aiguilles sombres orientées haut-droite et bas-gauche. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -25957,7 +26133,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -25970,8 +26146,11 @@
           "id": "prop-warning-board",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-warning-board.png",
           "sha256": "62ccde2ae0f3562f3e2d824c6c883bcb2bc3380974a68e79f69a5473deb0b7b4",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1985566,
+          "pixels": {
+            "width": 1519,
+            "height": 1036
+          },
           "alphaBounds": {
             "x": 52,
             "y": 122,
@@ -25992,7 +26171,7 @@
             "note": "Plaque d’avertissement murale horizontale, cadre gris-vert, fond ocre clair, triangle noir centré avec point d’exclamation. Enveloppe, palette et emplacement issus du rendu natif du DLC ; détails matériels interprétés, sans certification d’un accessoire filmique exact."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -26383,7 +26562,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_decoratif_selectif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -26396,8 +26575,11 @@
           "id": "prop-white-monitor",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/prop-white-monitor.png",
           "sha256": "7e557b6ea267d8969408d1db9f4b602f36da48032e36a887aef6ef508e33ca64",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 909452,
+          "pixels": {
+            "width": 904,
+            "height": 1739
+          },
           "alphaBounds": {
             "x": 75,
             "y": 83,
@@ -26418,7 +26600,7 @@
             "note": "Moniteurs blancs à indicateurs verts et bleus décrits dans l’extrait autorisé Titan Books / Daily Dead (S18). Silhouette sur pied et palette du DLC ; forme CRT et tracé ECG sont une adaptation, sans modèle exact authentifié."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28049,7 +28231,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28062,8 +28244,11 @@
           "id": "item-cell",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-cell.png",
           "sha256": "6125c126a642acae17416d9bba824f0c5c5f0ba6410cfd779cbf95037d58d5b1",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2038917,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 944,
             "w": 1322,
@@ -28084,7 +28269,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28123,7 +28308,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28136,8 +28321,11 @@
           "id": "item-wire",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-wire.png",
           "sha256": "6cedc5b514c00dfec896d9f395ed3f7a289347852acbce4c0d05305368b06d0a",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1860130,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 801,
             "w": 1052,
@@ -28158,7 +28346,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28197,7 +28385,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28210,8 +28398,11 @@
           "id": "item-casing",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-casing.png",
           "sha256": "293c10fac5441475a41ca489441282596b4dffe6d02e83af5808706cac0feaae",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2217181,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 887,
             "w": 1178,
@@ -28232,7 +28423,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28271,7 +28462,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28284,8 +28475,11 @@
           "id": "item-decoy",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-decoy.png",
           "sha256": "dc2266d89fb9dc2fcce2b57700b916dc525b86156fba72dbe44a878764bbcf6d",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1933161,
+          "pixels": {
+            "width": 1362,
+            "height": 1155
+          },
           "alphaBounds": {
             "h": 1062,
             "w": 1039,
@@ -28306,7 +28500,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28345,7 +28539,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28358,8 +28552,11 @@
           "id": "item-ration",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-ration.png",
           "sha256": "d3ec3f1df0cfae2f3f7f9f3e94400f496ee538e5f745be69a8205705e5e5f4e3",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2371134,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 990,
             "w": 1453,
@@ -28380,7 +28577,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28419,7 +28616,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28432,8 +28629,11 @@
           "id": "item-medkit",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-medkit.png",
           "sha256": "79b74846845581e530f79cc108c40c506ea311e881dd452249a12bb23f8cbd1c",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2340453,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 785,
             "w": 1395,
@@ -28454,7 +28654,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28493,7 +28693,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28506,8 +28706,11 @@
           "id": "item-ammo",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-ammo.png",
           "sha256": "c2cb45def685415533da6a129d957d28558a0ff2cd496d929d0749a0c71a7da5",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2077246,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 806,
             "w": 1312,
@@ -28528,7 +28731,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28567,7 +28770,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28580,8 +28783,11 @@
           "id": "item-flare",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-flare.png",
           "sha256": "3bb01ad9865e317225844bfd713e7dfebc204fdb72ae4d0b0f716721bd8ec343",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1679560,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 774,
             "w": 1303,
@@ -28602,7 +28808,7 @@
             "note": "Équipement de l’inventaire interprété dans le langage industriel du film. La fonction et l’identifiant proviennent des données du DLC ; dessin généré, sans certification d’un modèle canonique exact ni ajout de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28635,7 +28841,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28648,8 +28854,11 @@
           "id": "item-tracker",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-tracker.png",
           "sha256": "013ca34001c0e3053d28942b142549b83c275304fa159c2b5700caaa37f6d245",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1804564,
+          "pixels": {
+            "width": 1312,
+            "height": 1199
+          },
           "alphaBounds": {
             "h": 1034,
             "w": 1103,
@@ -28670,7 +28879,7 @@
             "note": "Corps guidé par les photographies de la réplique Master Replicas M314 et boîtier d’écran guidé par un accessoire filmique présenté par Propstore. La réplique n’est pas un original de tournage. Poignée ouverte et écran latéral saillant conservés ; affichage radar et petits détails de surface interprétés, sans certification 1:1."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28703,7 +28912,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28716,8 +28925,11 @@
           "id": "item-weld",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-weld.png",
           "sha256": "75b54c1faba7033ecc589a1e934afbb50c87d22e436d249f61f400af5f0d1b75",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 721441,
+          "pixels": {
+            "width": 1254,
+            "height": 1254
+          },
           "alphaBounds": {
             "h": 1119,
             "w": 615,
@@ -28738,7 +28950,7 @@
             "note": "Référence photographique fournie : accessoire de soudage portatif d’Aliens (1986). Poignée nervurée, clip latéral, commande rouge, embout transversal et écran de protection relevé conservés. Interprétation peinte sans effet de découpe ni ajout de capacité de jeu ; reproduction 1:1 non certifiée."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -28771,7 +28983,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "png_inventaire",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "not_certified"
       },
@@ -28784,8 +28996,11 @@
           "id": "item-light",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/item-light.png",
           "sha256": "c5a3b025b64b5e0a1cf80877dddfc34bdd632747547ea0ffa8ade3fde2becb0f",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 2422708,
+          "pixels": {
+            "width": 1536,
+            "height": 1024
+          },
           "alphaBounds": {
             "h": 916,
             "w": 1395,
@@ -28806,7 +29021,7 @@
             "note": "Référence photographique Propstore : USCM Shoulder Torch Pack, collection Harry Harris. Boîtier perforé, poignée ouverte, bras articulés et tête carrée à lentille circulaire conservés. Interprétation peinte sans faisceau actif ; aucun modèle 1:1 certifié."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -29166,7 +29381,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "inclus_dans_png_personnage_et_rendu_natif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_accessoire_original"
       },
@@ -29179,8 +29394,11 @@
           "id": "vale-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/vale-idle-right.png",
           "sha256": "db6802101e3560a9cb7b784f28a1eace1b91f02427552b25acba26a3055ffe65",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 929653,
+          "pixels": {
+            "width": 1014,
+            "height": 1551
+          },
           "alphaBounds": {
             "h": 1543,
             "w": 444,
@@ -29201,7 +29419,7 @@
             "note": "Iona Vale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29209,8 +29427,11 @@
           "id": "ferris-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/ferris-idle-right.png",
           "sha256": "123a17145eaa3fb203af4f79e26ae0d75db938cea1ce16f6295b9f7b853322aa",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1606272,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1514,
             "w": 426,
@@ -29231,7 +29452,7 @@
             "note": "Solène Ferris est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29239,8 +29460,11 @@
           "id": "hale-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/hale-idle-right.png",
           "sha256": "059782863dcff9def1b2de1832554d5e5cc7ad10cf93ed690db935d76e3b4c77",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1627856,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1475,
             "w": 449,
@@ -29261,7 +29485,7 @@
             "note": "Ezra Hale est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29269,8 +29493,11 @@
           "id": "bell-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/bell-idle-right.png",
           "sha256": "53ee90e0855ba8f3ba25016f68b315d1c3ab57bd2e9ff7683554e37e78f55d33",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1675694,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1501,
             "w": 465,
@@ -29291,7 +29518,7 @@
             "note": "Tomas Bell est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tools repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -29329,7 +29556,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "inclus_dans_png_personnage_et_rendu_natif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_accessoire_original"
       },
@@ -29342,8 +29569,11 @@
           "id": "rhee-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/rhee-idle-right.png",
           "sha256": "f741c01534cfdfe7dd8c903d1a9fcc6cf3806ea90251062308ebbd6715e3c484",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1597938,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1531,
             "w": 459,
@@ -29364,7 +29594,7 @@
             "note": "Malik Rhee est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire mug repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -29417,7 +29647,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "inclus_dans_png_personnage_et_rendu_natif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_accessoire_original"
       },
@@ -29430,8 +29660,11 @@
           "id": "arden-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/arden-idle-right.png",
           "sha256": "3913c1be3fed538b29ff3e8ce41c6851e3e9f8812583de493397854bac508911",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1505286,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1510,
             "w": 383,
@@ -29452,7 +29685,7 @@
             "note": "Vera Arden est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29460,8 +29693,11 @@
           "id": "becker-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/becker-idle-right.png",
           "sha256": "aa229865395d0e493bac6a60721388f30f1b02dbcc8c82f451825fa5ed867288",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1356396,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1504,
             "w": 389,
@@ -29482,7 +29718,7 @@
             "note": "Arun Becker est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29490,8 +29726,11 @@
           "id": "corban-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/corban-idle-right.png",
           "sha256": "04952fc6fcbfaf0bb396e2f668f9acda1abdac14d50fa110d426692e6132e0ef",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1574673,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1525,
             "w": 480,
@@ -29512,7 +29751,7 @@
             "note": "Nils Corban est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29520,8 +29759,11 @@
           "id": "doran-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/doran-idle-right.png",
           "sha256": "36f6bccb48bc8272bd879cee6e1be0cdf4f5f8f9ba6833786648681a57ebb564",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1540030,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1475,
             "w": 439,
@@ -29542,7 +29784,7 @@
             "note": "Mei Doran est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29550,8 +29792,11 @@
           "id": "kent-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/kent-idle-right.png",
           "sha256": "6152a0a339d86f9a38bea238bf7e9f9a1106132dcd9564cdfe923eb1bfdcd45a",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1537892,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1495,
             "w": 441,
@@ -29572,7 +29817,7 @@
             "note": "Rosa Kent est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         },
@@ -29580,8 +29825,11 @@
           "id": "voss-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/voss-idle-right.png",
           "sha256": "dfd1e99b8a63f078f1a0625a2dc1373165b82bb8c56c3250e700f49b56a81016",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1587267,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1486,
             "w": 485,
@@ -29602,7 +29850,7 @@
             "note": "Anton Voss est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire tablet repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }
@@ -29640,7 +29888,7 @@
         "definition": "documented",
         "generation": "png_present",
         "integration": "inclus_dans_png_personnage_et_rendu_natif",
-        "automaticValidation": "registre_et_liens_verifies_octets_non_relus",
+        "automaticValidation": "file_sha256_and_png_dimensions_verified",
         "visualValidation": "not_certified",
         "fidelity1to1": "non_applicable_accessoire_original"
       },
@@ -29653,8 +29901,11 @@
           "id": "sato-idle-right",
           "file": "dlc/fleuve-de-la-douleur/visual-v1/assets/sato-idle-right.png",
           "sha256": "ac91bb59be2cf284ad96d9234dd6a3adec14ae5949c68708b66dc09a8884e2df",
-          "bytes": null,
-          "pixels": null,
+          "bytes": 1539115,
+          "pixels": {
+            "width": 1024,
+            "height": 1536
+          },
           "alphaBounds": {
             "h": 1496,
             "w": 446,
@@ -29675,7 +29926,7 @@
             "note": "Lina Sato est un personnage original de gameplay, absent du canon revendiqué. Métier, couleur de tenue, carnation, coiffure et accessoire linen repris du profil life.residents de la v0.9 ; visage et détails vestimentaires générés pour cette adaptation. Accessoire représenté dans la pose fixe, sans ajouter de capacité de jeu."
           },
           "validation": {
-            "source": "sha256_et_ancrages_lus_dans_manifeste_non_recalcules",
+            "source": "file_sha256_and_png_dimensions_verified",
             "visualComparison": "not_certified"
           }
         }

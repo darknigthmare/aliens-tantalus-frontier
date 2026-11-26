@@ -51,11 +51,66 @@ Les tests de proportions, de rejet et de repli ont été préparés ; le dernier
 test de notifications asynchrones a été corrigé pour comparer les identités
 sans imposer l’ordre d’achèvement.
 
-L’environnement est devenu indisponible avant la recette finale. Les sources,
-les images et la bible ont donc été reconstruits à partir des données encore
-accessibles et du dépôt distant. Les résultats du workflow exécuté sur le commit
-publié sont nécessaires pour conclure sur le parcours final. La recette visuelle
-du HTML de bible n’a pas abouti localement.
+L’environnement est devenu indisponible avant la première recette finale. Les
+sources, images et documents ont été reconstruits, vérifiés par leurs empreintes
+Git et publiés au commit `18a95887aa0a9d0cc839879f4719abb3368767a3`.
+Après rétablissement de l’exécuteur, une copie temporaire vérifiée a permis
+d’achever les contrôles ci-dessous malgré le disque de travail saturé.
+
+### Recette finale locale du lot 3
+
+- **31/31 tests de sprites réussis**, y compris les textures ImageBitmap,
+  les 148 décors admissibles, les 17 objets physiques et les légendes natives.
+- La reconstruction canonique conserve exactement le HTML publié :
+  **946 358 octets**, SHA-256
+  `81052e40e01f91df501be7d8c353c6d4c2f21303c20122559df2dafb62ea85d3`.
+  La galerie reconstruite reste elle aussi identique.
+- **183/183 contrôles navigateur en HTTP, mode DLC**, avec chargement des
+  **78/78 PNG**, puis **78/78 après rechargement réel**, déplacement natif,
+  export, reprise, inventaire, passage à la version d’origine et échappement F6.
+- **175/175 contrôles en ouverture directe file://**, avec le même corpus,
+  reprise de sauvegarde et résolution des chemins relatifs.
+- Navigateur : **Chromium 143.0.7499.4**, piloté par **Playwright 1.62.0**.
+  Aucune erreur JavaScript, requête de jeu échouée ou réponse HTTP en erreur
+  n’a été enregistrée dans ces deux parcours.
+- La composition des 78 états admissibles utilise les véritables méthodes
+  Canvas et a été examinée visuellement. Les huit nouveaux meubles sont
+  entièrement visibles et ajustés à leurs enveloppes. Cette fixture reste
+  distincte d’un parcours complet des missions.
+- La bible a été reconstruite à partir des **78 PNG réels**, tous vérifiés
+  par signature et SHA-256 : dimensions et tailles connues, total
+  **137 932 789 octets**. Elle contient **278 fiches**,
+  **83 avec au moins un PNG** et **195 sans PNG individuel**.
+- **9/9 contrôles HTML de la bible réussis** : recherche, catégories,
+  pagination, détails, images et absence de débordement. Captures desktop
+  1 280 × 900 et mobile 390 × 844 relues ; aucune erreur JavaScript.
+
+Les deux parcours locaux de sprites ne valident pas le titre hôte complet,
+une sauvegarde Frontier préexistante ni le build de production. Ces points
+appartiennent au workflow distant. La passe locale des tests d’intégration
+a atteint 23/25, avec deux blocages de copie sparse (archives et
+`vercel.json` absents) ; le contrôle complet du modèle récupéré était
+également bloqué par l’absence locale des archives. Ces blocages ne sont pas
+présentés comme des réussites.
+
+Le workflow distant [45815754453](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815754453)
+sur le commit `18a9588` a ensuite validé les **31 tests sprites**,
+les **21 tests de lancement/intégration**, les **4 tests de succession**,
+les **246 contrôles du modèle récupéré**, les **222 fichiers et neuf ZIP**,
+l’admission des sources, le build de production et **26 contrôles du parcours
+hôte complet**. Son second parcours, sans barre finale, a échoué sur une
+assertion immédiate de fin de chargement du wrapper, avant les recettes PNG.
+
+La recette attend désormais que le véritable indicateur `#river-loading`
+soit masqué (timeout 30 s), puis conserve la même assertion. Le runtime n’est
+pas modifié par cette correction de synchronisation. Une navigation ciblée
+sur l’alias HTTP sans slash a confirmé la fin réelle du chargement, la
+conservation de l’URL et l’absence d’erreur JS/HTTP ; la suite complète est
+réexécutée par la CI du commit de consolidation.
+
+La trace Canvas réelle a aussi confirmé une seule légende STOCK par rendu
+de fridge, cupboard et locker, dans la version native comme dans la version
+PNG. Le contraste sur le réfrigérateur clair reste celui de la légende native.
 
 ### Portée artistique
 

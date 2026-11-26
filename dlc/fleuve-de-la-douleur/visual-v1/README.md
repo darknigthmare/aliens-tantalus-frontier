@@ -39,12 +39,17 @@ limité à 1 024 pixels, tout en conservant les PNG sources, leurs dimensions et
 les coordonnées des ancrages. Le navigateur conserve le chemin de chargement
 classique si cette API n’est pas disponible.
 
-Le contrôle local de 29 contrats sprites a réussi avant le dernier complément
-ImageBitmap. Les 78 PNG ont été inspectés et les 222 fichiers historiques v0.9
-comparés à leurs empreintes. Le parcours final avec les textures bornées a été
-interrompu par la perte de l’environnement local ; sa validation dépend du
-workflow distant associé au commit publié. La bible et la galerie ne prouvent
-ni la jouabilité des fiches absentes, ni une fidélité 1:1 complète.
+La recette locale finale valide **31/31 tests de sprites**, **183/183 contrôles
+HTTP du DLC** et **175/175 contrôles file://** sous Chromium 143.0.7499.4.
+Les **78 PNG** chargent avant et après la reprise réelle de sauvegarde.
+La construction canonique du HTML et de la galerie est identique à la version
+publiée. Les 222 fichiers historiques v0.9 restent identiques à leurs empreintes.
+
+La bible comprend **278 fiches** et les dimensions vérifiées des **78 PNG** ;
+ses neuf contrôles HTML et ses vues desktop/mobile ont été validés. Les tests
+de production et du parcours complet depuis le titre hôte sont suivis dans
+le workflow associé à la PR. La bible et la galerie ne prouvent ni la jouabilité
+des fiches absentes, ni une fidélité 1:1 complète.
 
 ## Jouer et examiner les images
 
