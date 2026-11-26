@@ -1494,7 +1494,10 @@
         ],
         "pass": true
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "rooms": [
+        "plaza"
+      ]
     },
     {
       "id": "prop-urn",
@@ -1890,7 +1893,8 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Lower trousers, boots and rear gear are partly reconstructed from cropped field reference.",
-        "Pose changed from holding wheat to empty-handed idle."
+        "Pose changed from holding wheat to empty-handed idle.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 1024,
@@ -1956,7 +1960,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "faris",
@@ -2176,7 +2181,8 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Full-body standing pose and occluded lower legs reconstructed; group field reference identifies Hallett by his ginger beard, matched to captioned full-crew photo.",
-        "Weapon removed for runtime separate weapon layer."
+        "Weapon removed for runtime separate weapon layer.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 1024,
@@ -2230,7 +2236,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "cole",
@@ -2243,7 +2250,8 @@
       "visualReview": "Complete head and both boot soles; right-facing stable full-body idle; empty hands; single human with transparent exterior.",
       "limitations": [
         "Lower trousers/boots and hidden rear gear reconstructed from cohort costume; supplied field photo partly occludes Cole behind another crew member.",
-        "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted."
+        "Identity matched to Uli Latukefu in captioned full-crew photo; gun omitted.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 1024,
@@ -2297,7 +2305,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "ricks",
@@ -2429,24 +2438,113 @@
           "file": "table-e1027-classicon.jpg",
           "url": "https://www.classicon.com/assets/images/p/ClassiCon-adjustable-table-e-1027-down-40_2x-ya36vpkjtwqbev2.jpg",
           "source_page": "https://www.classicon.com/en/product/adjustable-table-e-1027.html",
-          "kind": "Primary licensed manufacturer product photography"
+          "kind": "Primary licensed manufacturer product photography",
+          "bytes": 69307,
+          "sha256": "b144eaed131b85acdbf9e6171a56eb82770e767f8e474bc1af0c016f3b961a89",
+          "inspected": true
         },
         {
           "file": "table-e1027-classicon-side.jpg",
           "url": "https://www.classicon.com/assets/images/9/ClassiCon-adjustable-table-e-1027-down-side_2x-c7km0hbwh87qazf.jpg",
           "source_page": "https://www.classicon.com/en/product/adjustable-table-e-1027.html",
-          "kind": "Primary licensed manufacturer product photography"
+          "kind": "Primary licensed manufacturer product photography",
+          "bytes": 69877,
+          "sha256": "6ab5bca8f3030953230dd96d915ca471411a74fd4a29fa2da9d82d3b11af07fd",
+          "inspected": true
         }
       ],
       "filmIdentificationSource": "https://filmandfurniture.com/2017/05/carlo-bugatti-chair-in-alien-covenant/",
       "limitations": [
         "model-reference reproduction; exact film-instance identity/height not certified",
         "Official licensed-manufacturer photos of the same named design, not a photo of the actual screen-used instance. Preserve clear-glass translucency. Do not apply this model to unrelated DLC tables.",
-        "No separate E1027 table instance exists in the restored module's white room; the procedural tea-set support must not be replaced arbitrarily."
+        "No separate E1027 table instance exists in the restored module's white room; the procedural tea-set support is retained.",
+        "The glass is translucent but its generated light grey appearance is stronger than the source; exact optical fidelity is not certified."
       ],
       "runtimeAdmission": "catalogue-only",
       "alphaQA": {
-        "status": "pending-numeric-check"
+        "id": "prop-table-e1027",
+        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-table-e1027.png",
+        "size": [
+          1245,
+          1263
+        ],
+        "bytes": 579445,
+        "sha256": "0bd08b5ef7522404038f55207486013ceaeb0307a773c970e505a205e5b103af",
+        "gitBlobSha": "3cfde579cf400ea162b846a00b2432f9a3d3e70d",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha0": 1277370,
+        "alpha1to15": 44745,
+        "alpha16to127": 8066,
+        "alpha128to239": 59539,
+        "alpha240to255": 182715,
+        "edgeAlphaMax": 1,
+        "edgeAlphaOver16": 0,
+        "alphaBbox": [
+          43,
+          9,
+          1221,
+          1263
+        ],
+        "bbox16": [
+          242,
+          48,
+          1055,
+          1225
+        ],
+        "bbox32": [
+          243,
+          48,
+          1055,
+          1225
+        ],
+        "bbox128": [
+          243,
+          49,
+          1055,
+          1224
+        ],
+        "bbox240": [
+          244,
+          50,
+          1054,
+          1224
+        ],
+        "sampleGridAlpha": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
+        "productionBytesUnchanged": true,
+        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
       }
     },
     {
@@ -2470,7 +2568,10 @@
           "file": "chair-bugatti-origines.jpg",
           "url": "https://www.galerieorigines.com/sites/default/files/styles/oeuvre_desktop/public/oeuvres/489_Carlo%20Bugatti%2C%20Fauteuil-tr%C3%B4ne7.jpg?itok=dTKX5waG",
           "source_page": "https://www.galerieorigines.com/en/artwork/collections/art-nouveau/carlo-bugatti-throne-chair",
-          "kind": "Original gallery photograph of documented Carlo Bugatti throne-chair, c1900, inventory489; comparable example, not screen-used instance"
+          "kind": "Original gallery photograph of documented Carlo Bugatti throne-chair, c1900, inventory489; comparable example, not screen-used instance",
+          "bytes": 28328,
+          "sha256": "a0d66df4e30db6bc3eea282243f6d479dad9c819ea9249053acd742552403d03",
+          "inspected": true
         }
       ],
       "filmIdentificationSource": "https://filmandfurniture.com/2017/05/carlo-bugatti-chair-in-alien-covenant/",
@@ -2480,7 +2581,59 @@
       ],
       "runtimeAdmission": "catalogue-only",
       "alphaQA": {
-        "status": "pending-numeric-check"
+        "id": "prop-chair-bugatti",
+        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-chair-bugatti.png",
+        "size": [
+          1086,
+          1448
+        ],
+        "bytes": 1270741,
+        "sha256": "875cb28c8f6f20a814a1c096a6a4eadbabf1cfd24bc50aa7f88c64cfd5470a7b",
+        "gitBlobSha": "a053601cfea8fa9cd9e27097a25b21f56edbbe5e",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha0": 1081879,
+        "alpha1to15": 26275,
+        "alpha16to127": 6661,
+        "alpha128to239": 9713,
+        "alpha240to255": 448000,
+        "edgeAlphaMax": 2,
+        "edgeAlphaOver16": 0,
+        "alphaBbox": [
+          0,
+          2,
+          1062,
+          1448
+        ],
+        "bbox16": [
+          107,
+          11,
+          918,
+          1440
+        ],
+        "bbox32": [
+          108,
+          11,
+          918,
+          1440
+        ],
+        "bbox128": [
+          109,
+          12,
+          918,
+          1439
+        ],
+        "bbox240": [
+          111,
+          14,
+          917,
+          1438
+        ],
+        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
+        "productionBytesUnchanged": true,
+        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
       }
     },
     {
@@ -2524,7 +2677,59 @@
       ],
       "runtimeAdmission": "candidate",
       "alphaQA": {
-        "status": "pending-numeric-check"
+        "id": "prop-piano",
+        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-piano.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "bytes": 1402646,
+        "sha256": "f55f6d48965ec5fffc27c962dc070c468501215e11bb372b6528660820e0f80e",
+        "gitBlobSha": "74dd2707fc37bfd221840528e9990dd7f22ca126",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alpha0": 978175,
+        "alpha1to15": 28683,
+        "alpha16to127": 5572,
+        "alpha128to239": 6769,
+        "alpha240to255": 553665,
+        "edgeAlphaMax": 1,
+        "edgeAlphaOver16": 0,
+        "alphaBbox": [
+          0,
+          24,
+          1448,
+          1024
+        ],
+        "bbox16": [
+          158,
+          27,
+          1391,
+          1012
+        ],
+        "bbox32": [
+          159,
+          28,
+          1390,
+          1012
+        ],
+        "bbox128": [
+          159,
+          28,
+          1390,
+          1012
+        ],
+        "bbox240": [
+          160,
+          29,
+          1389,
+          1011
+        ],
+        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
+        "productionBytesUnchanged": true,
+        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
       },
       "rooms": [
         "whiteroom"
@@ -2542,20 +2747,19 @@
       "limitations": [
         "Face from official Rosenthal crew-message clip; expedition upper clothing from Rosenthal at far right of wheat-field film still.",
         "Most lower garment and rear equipment hidden or cropped, continued conservatively from shared security clothing visible in ramp still; not certified 1:1.",
-        "Field cap follows film reference even though procedural code describes tied hair; weapons omitted."
+        "Field cap follows film reference even though procedural code describes tied hair; weapons omitted.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
         "bytes": 1654111,
-        "mode": "RGBA",
+        "sha256": "c5968863303be61ad9cfaba51d0f3a717547dab8b09ab6bc21326a743e4f8901",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1110571,
-        "alphaZeroPercent": 70.6082026163737,
-        "alphaAbove245": 435348,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           278,
@@ -2563,12 +2767,7 @@
           738,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2602,7 +2801,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "upworth",
@@ -2621,14 +2821,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1316910,
-        "mode": "RGBA",
+        "sha256": "8dbd842fa67d55b880795390691cd2901a786fdd97990a5c35e07da6ea87517d",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1194008,
-        "alphaZeroPercent": 75.91298421223958,
-        "alphaAbove245": 346683,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           305,
@@ -2636,12 +2834,7 @@
           720,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2671,33 +2864,27 @@
       "limitations": [
         "Face taken from primary Framestore suit close-up; yellow suit explicitly excluded for normal expedition runtime profile.",
         "Ramp front-right identity cross-checked against IMFDB caption for Ankor's distinctive AR-15, and cast photo.",
-        "Neutral pose and hidden rear gear reconstructed; weapon removed."
+        "Neutral pose and hidden rear gear reconstructed; weapon removed.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 960,
         "height": 1639,
         "bytes": 1164377,
-        "mode": "RGBA",
+        "sha256": "accb60303b6c78e8bc47624c8396c273ea0b4e7c8a3e57d006078f54e06b2caa",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 1002512,
-        "alphaZeroPercent": 63.71466341264999,
-        "alphaAbove245": 537891,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
-          212,
+          211,
           6,
           763,
           1632
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2725,7 +2912,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "ledward",
@@ -2739,20 +2927,19 @@
       "limitations": [
         "Actual forest reference shows no cap; bareheaded styling supersedes the procedural cap parameter.",
         "Legs, boots and rear equipment are partly outside the supplied frame, reconstructed conservatively in matching security costume.",
-        "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed."
+        "Pose adapted from seated cigarette break to empty-handed healthy idle; cigarette, rifle and illness removed.",
+        "The current NPC always carries its configured weapon. This free-hands idle PNG has no active matching pose in the restored module; the original armed renderer remains in use."
       ],
       "alphaQA": {
         "width": 1024,
         "height": 1536,
         "bytes": 1679775,
-        "mode": "RGBA",
+        "sha256": "1fee22ec40b39e1da4f5d275e3503484494df465bc82c015a4fbe99938aaf161",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077289,
-        "alphaZeroPercent": 68.49219004313152,
-        "alphaAbove245": 467428,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
@@ -2760,12 +2947,7 @@
           734,
           1522
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2787,6 +2969,111 @@
       "category": "character",
       "availableStates": [
         "idle"
+      ],
+      "runtimeAdmission": "catalogue-only"
+    },
+    {
+      "id": "prop-teaset",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-teaset.png",
+      "gitBlobSha": "0ce99a1307328dedfb74ac38c6e718ca47159a59",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1090022,
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "static"
+      ],
+      "generationPrompt": "Create one cohesive isolated game-prop sprite of the WHITE ROSENTHAL FORM 2000 TEA SERVICE visible in the second reference image, the actual Alien: Covenant white-room prologue film still. The sprite consists of exactly ONE medium-sized lidded teapot and TWO matching white cups standing at rest together. Use the SECOND attached image as the authority for the pot's proportions, plain white finish, characteristic narrow waist and flared body/rim, long slender rising curved spout and large curved loop handle, plus the two cups' flared upper walls and narrow bases. It is the compact medium pot David is holding in the film; do not elongate it into the taller coffee-pot variant. The FIRST reference is a close photograph of a different decorated Form 2000 pot and is supplied ONLY to clarify the distinctive triangular arched lid finial and recessed lid construction. Do NOT copy its gold trim: every ceramic component of this film service is undecorated glossy white porcelain. No gold rim or ornament anywhere.\n\nTranslate the teapot from the film's hand-held pouring action into a physically plausible upright resting pose, lid fitted. Arrange the pot at LEFT with its spout pointing RIGHT, and the two cups at RIGHT, with slight front/back staggering so both cups remain individually readable, near the spacing and size relationship visible on the film's tabletop. The cups should each be approximately two-fifths the pot's height; faithfully retain the film's plain flared silhouettes. Keep cup handles unobtrusive toward the back as in the visible film angle. Do not invent saucers because they are not clearly visible in this reference. No spoon, tray, sugar bowl, milk jug, table, cloth, person, hands, chair, piano, room or extra vessel. Exactly one arranged tea-service prop, complete and isolated. Gentle three-quarter side view slightly from above, common resting plane, realistic porcelain gloss and soft cool-grey shading, white highlights not clipped. Entire pot, finial, handle, spout and both cups fully inside the image with safe transparent margin. No written labels, logos, text or watermarks.\n\nOutput one production PNG with real transparent background: alpha0 everywhere outside the three porcelain pieces, including between them and through the handle; solid porcelain alpha255 with narrow edge antialiasing. No ground shadow, background, white veil, haze, floor reflection or fake checkerboard. Preserve the visible film design rather than replacing it with a generic round teapot.",
+      "inputReferences": [
+        {
+          "file": "teaset-film-elemental.jpeg",
+          "page": "https://elementalspot.com/product/rosenthal-coffee-pot-tea-set/",
+          "url": "https://elementalspot.com/wp-content/uploads/2022/02/Alien-Covenant-tee-pot-set.jpeg",
+          "kind": "Final-film still rehosted by design-identification site",
+          "sha256": "b82437eee16318528763d336c6445a35f912985d14dfce65071c7b382d26bdbb",
+          "inspected": true,
+          "referenceRole": "Primary geometry/finish/number-of-cups reference; actor pours with medium plain-white pot over two cups."
+        },
+        {
+          "file": "teapot-form2000-gold-dealer.jpg",
+          "page": "https://www.designundklassiker.de/Keramik-Porzellan/Service-teile/Rosenthal-Service-Form-2000-Teekanne::2453.html",
+          "url": "https://www.designundklassiker.de/images/product_images/info_images/2453_0.jpg",
+          "kind": "Dealer closeup of Form2000 gold-rim variant",
+          "sha256": "106f615f972b4615c9bb4fb2f74a889399795687394b55223e7b1515c1c736ab",
+          "inspected": true,
+          "referenceRole": "Lid/triangular finial construction only; gold decor explicitly excluded; not screen-used identity"
+        }
+      ],
+      "limitations": [
+        "Source shows hand-held pouring, not the generated resting arrangement.",
+        "Lower cup portions are cropped by film still boundary; bases are reconstructed.",
+        "Saucers are not attested and explicitly omitted.",
+        "Handle portions occluded by the actor's hands are reconstructed.",
+        "Closeup secondary source is a gold-rim variant used only for lid-finial geometry; finish follows the film.",
+        "No exact screen-used capacity or pot dimensions certified."
+      ],
+      "runtimeAdmission": "candidate",
+      "alphaQA": {
+        "id": "prop-teaset",
+        "sourceURL": "https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier/git/blobs/0ce99a1307328dedfb74ac38c6e718ca47159a59",
+        "size": [
+          1774,
+          887
+        ],
+        "bytes": 1090022,
+        "sha256": "8587046f8fda0bd742ecba6d880eb5435229e95cc80ae54bef774fcb67d2cd28",
+        "gitBlobSha": "0ce99a1307328dedfb74ac38c6e718ca47159a59",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alpha0": 874601,
+        "alpha1to15": 51705,
+        "alpha16to127": 5553,
+        "alpha128to239": 5926,
+        "alpha240to255": 635753,
+        "edgeAlphaMax": 1,
+        "edgeAlphaOver16": 0,
+        "alphaBbox": [
+          0,
+          17,
+          1758,
+          887
+        ],
+        "bbox16": [
+          25,
+          42,
+          1732,
+          830
+        ],
+        "bbox32": [
+          25,
+          42,
+          1732,
+          830
+        ],
+        "bbox128": [
+          26,
+          42,
+          1731,
+          829
+        ],
+        "bbox240": [
+          27,
+          43,
+          1730,
+          828
+        ],
+        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
+        "productionBytesUnchanged": true,
+        "visualReview": "Generated full sprite inspected; reference proportions and two-cup count checked; dark/light composite pending root review"
+      },
+      "rooms": [
+        "whiteroom"
       ]
     }
   ],

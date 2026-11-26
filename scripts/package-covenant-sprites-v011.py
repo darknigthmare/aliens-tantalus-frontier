@@ -15,7 +15,7 @@ NAMES = {
     "walter-field":"Walter · terrain", "walter-injured":"Walter · main gauche absente",
     "david":"David · manteau", "david-young":"David · prologue",
     "tennessee":"Tennessee", "tennessee-eva":"Tennessee · Big Yellow",
-    "oram":"Oram", "lope":"Lope", "faris":"Faris", "karine":"Karine",
+    "oram":"Oram · pont", "oram-field":"Oram · terrain", "karine-medical":"Karine · séquence médicale", "lope":"Lope", "faris":"Faris", "karine":"Karine",
     "ricks":"Ricks", "upworth":"Upworth", "rosenthal":"Rosenthal", "hallett":"Hallett",
     "ledward":"Ledward", "ankor":"Ankor", "cole":"Cole", "weyland":"Peter Weyland",
     "branson-record":"Jacob Branson · enregistrement",
@@ -66,7 +66,7 @@ footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);paddin
 <p><a href="README_FR.md">Lire les limites et le contenu</a> · <a href="coverage.json">Couverture détaillée</a> · <a href="manifest.json">Références et prompts</a></p></header>
 <main><nav aria-label="Filtres du catalogue">
 <label>Rechercher<input id="query" type="search" placeholder="Daniels, caisson, piano…" autocomplete="off"></label>
-<label>Catégorie<select id="category"><option value="">Toutes les catégories</option><option value="character">Personnages</option><option value="creature">Créatures</option><option value="prop">Accessoires</option><option value="vehicle">Véhicules</option></select></label>
+<label>Catégorie<select id="category"><option value="">Toutes les catégories</option><option value="character">Personnages</option><option value="creature">Créatures</option><option value="prop">Accessoires</option><option value="vehicle">Véhicules</option><option value="biology">Spécimens</option></select></label>
 <label>Utilisation<select id="use"><option value="">Tous les PNG</option><option value="runtime">Admis dans le rendu</option><option value="catalogue">Catalogue uniquement</option></select></label>
 <label>Fond d’inspection<select id="bg"><option value="dark">Sombre</option><option value="light">Clair</option><option value="checker">Damier</option></select></label>
 <label>Taille des aperçus<input id="size" type="range" min="200" max="600" value="290"></label>
@@ -77,7 +77,7 @@ footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);paddin
 <script>
 "use strict";
 const data=JSON.parse(document.getElementById("catalogue-data").textContent), rows=data.assets;
-const el=id=>document.getElementById(id), cats={character:"Personnage",creature:"Créature",prop:"Accessoire",vehicle:"Véhicule"};
+const el=id=>document.getElementById(id), cats={character:"Personnage",creature:"Créature",prop:"Accessoire",vehicle:"Véhicule",biology:"Spécimen"};
 function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
 function link(text,href){const a=node("a",text);a.href=href;return a}
 function refs(row){const all=[...(row.inputReferences||[]),...(row.sourcePages||[]).map(source=>({source}))];const seen=new Set();return all.map(r=>typeof r==="string"?r:r.source||r.source_page||r.page||r.url).filter(u=>typeof u==="string"&&/^https?:\/\//.test(u)&&!seen.has(u)&&seen.add(u))}
