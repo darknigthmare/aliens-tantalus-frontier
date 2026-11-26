@@ -191,6 +191,24 @@ test('reviewed provenance and bible text are pinned to exact source paths and by
   }
 });
 
+test('recovered local metadata uses exact source pins and never bypasses the distribution boundary', async () => {
+  const paths = [
+    'docs/covenant/recovery-20261126/MANIFEST.json',
+    'docs/covenant/recovery-20261126/qa/v015/recovered-png-qa.json'
+  ];
+  for (const path of paths) {
+    const bytes = await readFile(join(root, path));
+    assert.equal(covenantSourceMetadataPathV011(path), true);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
+    assert.equal(admit(path), true);
+    assert.equal(admit(path, { built: true }), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from(' ')])), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(paths.find(other => other !== path), bytes), false);
+    assert.equal(covenantSourceMetadataPathV011(path.replace('.json', '-unreviewed.json')), false);
+  }
+});
+
 test('cumulative runtime preserves all 29 V011 bindings and scopes every new prop to a real instance', async () => {
   const { manifest, compiled } = await covenantManifestV011(root);
   const legacy = manifest.assets.filter(row => row.path.startsWith('/assets/openai/sprites/alien-covenant-v011/'));

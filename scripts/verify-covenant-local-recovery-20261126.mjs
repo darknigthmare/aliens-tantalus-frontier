@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { COVENANT_RECOVERY_ROOT, COVENANT_RECOVERY_MANIFEST,
   compileCovenantLocalRecovery, reviewedCovenantLocalRecovery } from './covenant-local-recovery-20261126.mjs';
 import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admissions-v011.mjs';
+import { covenantSourceMetadataPathV011, reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -38,6 +39,13 @@ assert.equal(admit(COVENANT_RECOVERY_ROOT + '/unexpected.png'), false);
 assert.equal(admit(COVENANT_RECOVERY_ROOT + '/../unexpected.png'), false);
 const manifestBytes = await readFile(join(root, COVENANT_RECOVERY_MANIFEST));
 assert.throws(() => compileCovenantLocalRecovery(Buffer.concat([manifestBytes, Buffer.from(' ')])));
+for (const path of [COVENANT_RECOVERY_MANIFEST, COVENANT_RECOVERY_ROOT + '/qa/v015/recovered-png-qa.json']) {
+  const bytes = await readFile(join(root, path));
+  assert.equal(covenantSourceMetadataPathV011(path), true);
+  assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true);
+  assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from(' ')])), false);
+  assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
+}
 
 // Confirm that this preservation pass did not promote any generation or alter gameplay.
 const runtimeBytes = await readFile(join(root, 'dlc/covenant/sprites-v011.json'));

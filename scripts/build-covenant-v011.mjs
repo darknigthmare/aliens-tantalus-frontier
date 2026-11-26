@@ -39,6 +39,10 @@ const REVIEWED_COVENANT_PROVENANCE_SHA256_V014 = '1fd31f3a6473e95fddb9e3e4dfc41a
 export const COVENANT_PROVENANCE_V016 = COVENANT_ASSETS_V016 + '/manifest.json';
 export const COVENANT_PROVENANCE_V017 = COVENANT_ASSETS_V017 + '/manifest.json';
 const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
+  // Historical filenames and measured image records are preserved only at
+  // these exact reviewed bytes. The source path gate rejects both from builds.
+  ['docs/covenant/recovery-20261126/MANIFEST.json', 'ac1c505f0067a77efc3c917ad3207a11ebe243ce26cbaefcd5f10d52de72e41e'],
+  ['docs/covenant/recovery-20261126/qa/v015/recovered-png-qa.json', '9c625d54782981f95bfbc862870c85451fc053841ef2b830815b5119345075b2'],
   // The current continuation is admitted by its exact reviewed bytes only.
   [COVENANT_PROVENANCE_V017, 'a0a552042ae8c0cafaa77c2a9161ef46023a066e0d82391044ad4323276315a4'],
   ['docs/covenant/BIBLE_COVENANT_V017.json', '433065ffd2f6fb3619396d70d9852e52784d57aab9f9cf88e634b0638274836b'],
