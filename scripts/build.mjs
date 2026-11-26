@@ -1,3 +1,4 @@
+import { buildCovenantDlcV011 } from './build-covenant-v011.mjs';
 import { verifyAvpBundle } from './build-dlc-avp-2004.mjs';
 import { verifyFiorinaSpriteAdmissionsV115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -73,6 +74,7 @@ for (const directory of ['src', 'assets']) {
   await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
 await buildAliens1986Dlc(root, output);
+await buildCovenantDlcV011(root, output);
 await cp(join(root, 'user-reference-library-v100.css'), join(output, 'user-reference-library-v100.css'));
 await cp(join(root, 'specimen-bench-v106.css'), join(output, 'specimen-bench-v106.css'));
 await cp(join(root, 'command-v110.css'), join(output, 'command-v110.css'));

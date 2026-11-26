@@ -13,7 +13,7 @@ const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
 
 export class TitleScreenController {
-  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986 }) {
+  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions, onDlc, onAliens1986, onCovenant }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
@@ -27,6 +27,7 @@ export class TitleScreenController {
     this.onOptions = onOptions;
     this.onDlc = onDlc;
     this.onAliens1986 = onAliens1986;
+    this.onCovenant = onCovenant;
     this.state = 'idle';
     this.gamepadFrame = 0;
     this.gamepads = new Map();
@@ -43,6 +44,7 @@ export class TitleScreenController {
     this.dlcButton = root.querySelector('#title-dlc');
     this.forgeButton = root.querySelector('#title-forge');
     this.aliens1986Button = root.querySelector('#title-aliens1986');
+    this.covenantButton = root.querySelector('#title-covenant');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -74,6 +76,9 @@ export class TitleScreenController {
       });
     }
     listen(this.newButton, 'blur', () => this.cancelNewTimelineConfirmation());
+    if (this.covenantButton) listen(this.covenantButton, 'click', (event) => {
+      if (event.detail <= 1) this.openCovenant();
+    });
     if (this.aliens1986Button) listen(this.aliens1986Button, 'click', (event) => {
       if (event.detail <= 1) this.openAliens1986();
     });
@@ -107,7 +112,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.optionsButton]
+    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.aliens1986Button, this.covenantButton, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 
@@ -229,6 +234,14 @@ export class TitleScreenController {
     if (this.root.hidden || this.state !== 'menu') return;
     this.hide();
     this.onForge?.();
+  }
+
+  openCovenant() {
+    if (this.root.hidden || this.state !== 'menu') return;
+    this.cancelNewTimelineConfirmation();
+    this.suspendInput();
+    if (this.onCovenant) return this.onCovenant();
+    globalThis.location.assign('/dlc/covenant/?from=tantalus');
   }
 
   openAliens1986() {

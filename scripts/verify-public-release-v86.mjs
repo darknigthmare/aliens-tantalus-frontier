@@ -1,3 +1,5 @@
+import { publicCovenantPathAdmissionV011 } from './public-covenant-admissions-v011.mjs';
+import { verifyCovenantBundleV011, verifyCovenantAssetsV011 } from './build-covenant-v011.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
@@ -1183,6 +1185,8 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
 ]);
 
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  const covenantAdmission = publicCovenantPathAdmissionV011(path, { directory, built });
+  if (covenantAdmission !== null) return covenantAdmission;
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
@@ -1345,6 +1349,8 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyProjectRecoveryArchive20261116(root, { built });
   await verifyAliens1986DlcAdmissions(root, { built });
   await verifyFiorinaSpriteAdmissionsV115(root);
+  if (built) await verifyCovenantAssetsV011(root);
+  else await verifyCovenantBundleV011(root);
   await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
