@@ -18,6 +18,40 @@ const freeze = value => {
   return value;
 };
 
+// The 40th archive admission continues only the main source verifier. The
+// historical maps below retain their original hashes and execution scope.
+export const FORTIETH_RECOVERY_BASELINE_20261126 = '5f38b7bad2c6401424b23fda11aeb86068f0f354';
+export const FORTIETH_RECOVERY_SUCCESSORS_20261126 = freeze({
+  'scripts/verify-public-release-v86.mjs': {
+    previousSha256: '83b843ecfaefb08770258331018d18837628b59f9d86b647b2185be75a01327e',
+    currentSha256: '61c7ab748a0fc5cf255ba7adc4d1a62098469f7e126616b3044883315ced8018'
+  }
+});
+export const FORTIETH_RECOVERY_SOURCE_SHA256_20261126 = freeze({
+  'scripts/public-40th-source-recovery-20261126.mjs': '170bda10c14047753d68bf48ecae49c64f95ed844deeb42d2c46d8f664cc14ee'
+});
+
+export function reviewedFortiethRecoveryDigest20261126(path, endpoint) {
+  const receipt = FORTIETH_RECOVERY_SUCCESSORS_20261126[path];
+  if (!receipt) return endpoint;
+  assert.equal(endpoint, receipt.previousSha256, 'Broken 40th recovery predecessor: ' + path);
+  assert.ok(validHash(receipt.currentSha256), 'Invalid 40th recovery digest: ' + path);
+  assert.notEqual(receipt.currentSha256, receipt.previousSha256);
+  return receipt.currentSha256;
+}
+
+export function verifyFortiethRecoverySuccession20261126(readSource = readRepository) {
+  for (const [path, receipt] of Object.entries(FORTIETH_RECOVERY_SUCCESSORS_20261126)) {
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(sha(readSource(path)), reviewedFortiethRecoveryDigest20261126(path, receipt.previousSha256),
+      'Unreviewed 40th recovery host bytes: ' + path);
+  }
+  for (const [path, expected] of Object.entries(FORTIETH_RECOVERY_SOURCE_SHA256_20261126)) {
+    assert.equal(sha(readSource(path)), expected, 'Unreviewed 40th recovery admission bytes: ' + path);
+  }
+  return { successors: 1, addedSources: 1, runtimeChanged: false, historicalEvidenceTransferred: false };
+}
+
 // Aliens 1986 V116 follows the published main endpoint, with its own exact
 // receipts. Earlier Fleuve/Obscura/V187 records retain their original bytes.
 export const ALIENS1986_MAIN_BASELINE_V116 = '334fe15ba0b7e01de277a13bfc025b208163882d';
@@ -54,11 +88,11 @@ export const ALIENS1986_MAIN_SUCCESSORS_V116 = freeze({
 
 export function reviewedAliens1986MainDigestV116(path, endpoint) {
   const receipt = ALIENS1986_MAIN_SUCCESSORS_V116[path];
-  if (!receipt) return endpoint;
+  if (!receipt) return reviewedFortiethRecoveryDigest20261126(path, endpoint);
   assert.equal(endpoint, receipt.previousSha256, 'Broken Aliens main predecessor: ' + path);
   assert.ok(validHash(receipt.currentSha256), 'Invalid Aliens main digest: ' + path);
   assert.notEqual(receipt.currentSha256, receipt.previousSha256, 'Aliens main successor must change bytes: ' + path);
-  return receipt.currentSha256;
+  return reviewedFortiethRecoveryDigest20261126(path, receipt.currentSha256);
 }
 
 export function verifyAliens1986MainSuccessionV116(readSource = readRepository) {
@@ -67,6 +101,7 @@ export function verifyAliens1986MainSuccessionV116(readSource = readRepository) 
     assert.equal(sha(readSource(path)), reviewedAliens1986MainDigestV116(path, receipt.previousSha256),
       'Unreviewed Aliens main source bytes: ' + path);
   }
+  verifyFortiethRecoverySuccession20261126(readSource);
   return { successors: Object.keys(ALIENS1986_MAIN_SUCCESSORS_V116).length,
     historicalEvidenceTransferred: false };
 }

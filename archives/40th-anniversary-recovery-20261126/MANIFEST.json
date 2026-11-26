@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-11-26",
+  "scope": "Byte-exact preservation of six original standalone DLC archives; no runtime integration.",
+  "archiveCount": 6,
+  "totalArchiveBytes": 174243911,
+  "maximumPartBytes": 10485760,
+  "archives": [
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.1.0.zip",
+      "sizeBytes": 15637634,
+      "sha256": "63aeb2bdb8c5429d350c24c4536152c06fe081d74bb11e9b6d65a1f3f6ded4b8",
+      "gitBlobSha": "6c741703c9de75fb5289c487713f4e51313a3938",
+      "zipMembers": 59,
+      "parts": [
+        {
+          "path": "parts/v0.1.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "836fe578de2c8cd70485e2d355d5e299870c75bc5807e95472a0adaff4e39e31",
+          "gitBlobSha": "a6c138c72d8e24f834fc60e6f900fbbf93a17325"
+        },
+        {
+          "path": "parts/v0.1.0/archive.zip.part002",
+          "sizeBytes": 5151874,
+          "sha256": "5cf7b514a9bad36619acfa4073bc79866275bf278cec253017e10891d08421d1",
+          "gitBlobSha": "c828469af4da935ead85e0095f0ead218e0ce195"
+        }
+      ]
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.2.0.zip",
+      "sizeBytes": 14005712,
+      "sha256": "665d879573e567d545471f57c00f862047a6c1694a14b17bdd941c840da88bf1",
+      "gitBlobSha": "775ac38d9849c3c075a556fde8956166cdf9f46d",
+      "zipMembers": 104,
+      "parts": [
+        {
+          "path": "parts/v0.2.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "ad177d9c176fbfdcc226a8faab6b8508aa6d9157f6596b536406853f6bcb7266",
+          "gitBlobSha": "9bb4fc6477b01f19306e9badf0083c3dc9ff5465"
+        },
+        {
+          "path": "parts/v0.2.0/archive.zip.part002",
+          "sizeBytes": 3519952,
+          "sha256": "4651f61a682ca5b6b1236093b28b86c065d244d2931f8f76eb5ec120fc61a367",
+          "gitBlobSha": "82915ea3ab450b8a16ce3d658238e22c39232fad"
+        }
+      ]
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.3.0.zip",
+      "sizeBytes": 13167560,
+      "sha256": "6d69c9756d000dc33bbfa9cf41f007c6cdcfb6a76e5f9dde7c841339c27635a7",
+      "gitBlobSha": "2bb3d0923f41652fd990f5a51762f7a34d273752",
+      "zipMembers": 123,
+      "parts": [
+        {
+          "path": "parts/v0.3.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "8b17afd52efd5145fd5a7e0df6031da03e285cdb38f2b558904ef6ae1cfc97de",
+          "gitBlobSha": "8467260ee705fa3c7b506d219c3f96808f3353a5"
+        },
+        {
+          "path": "parts/v0.3.0/archive.zip.part002",
+          "sizeBytes": 2681800,
+          "sha256": "507e05e7a0f491d175d0d7dd20689c7151cbd140cae052300163e89c9c25b1e0",
+          "gitBlobSha": "b22be0a541a4749b2742b54762171d20b324bda5"
+        }
+      ]
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.4.0.zip",
+      "sizeBytes": 20931496,
+      "sha256": "9c4ae6bcd4fda673ed1e3e0700662089cf3d373908c6de851936050bba011175",
+      "gitBlobSha": "09c95dd4a785e3f8ba23ef8eeed9080126e67397",
+      "zipMembers": 167,
+      "parts": [
+        {
+          "path": "parts/v0.4.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "f2309a211a845a4613d229c2c6f84c65a71bd833ea9b92e6063b5ecc2ff6e7aa",
+          "gitBlobSha": "4d7451a75e4447d46d1f16a135cb1db3d408a9e9"
+        },
+        {
+          "path": "parts/v0.4.0/archive.zip.part002",
+          "sizeBytes": 10445736,
+          "sha256": "d9218f184f1eb0eabcfb306c53aaeac93cb5202e92c9232b1f1c1973a6929389",
+          "gitBlobSha": "00cded1112d734534c52715bdf4ea52a2e85ebf9"
+        }
+      ]
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.5.0.zip",
+      "sizeBytes": 23202673,
+      "sha256": "5dadd69108a432244edefa224996849a0af9538540162b7c7ff28b7a4129d605",
+      "gitBlobSha": "6336eb27947b7993baf045c0c9a5e9bef907fc79",
+      "zipMembers": 245,
+      "parts": [
+        {
+          "path": "parts/v0.5.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "a1c17b2f29a939c3a262469b754567672aee3add3eacacf2c0d77d96a1b83490",
+          "gitBlobSha": "07f48a865d1f30151031d670ffa35a33b50d4aae"
+        },
+        {
+          "path": "parts/v0.5.0/archive.zip.part002",
+          "sizeBytes": 10485760,
+          "sha256": "f7e0dfc177a7e9432dd05a149e534c29973b261a6eafe8a17469351489e3691a",
+          "gitBlobSha": "128e39f6aa99e4813008f259129f4fa3225b5018"
+        },
+        {
+          "path": "parts/v0.5.0/archive.zip.part003",
+          "sizeBytes": 2231153,
+          "sha256": "195bfb81ea827e57c6dfe4ca84bef9d02e3bd618da965bad7ce68a7fa1bd20c0",
+          "gitBlobSha": "f513fb288840817943a899921bce03d016cefd38"
+        }
+      ]
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.6.0.zip",
+      "sizeBytes": 87298836,
+      "sha256": "30d3d3b93f3b9f6dc01347b325ce829e0270cbe5a36585ff6c9789982cb523a4",
+      "gitBlobSha": "5adf7ca4e0df25d88ba4d2392778aae5c92b9374",
+      "zipMembers": 376,
+      "parts": [
+        {
+          "path": "parts/v0.6.0/archive.zip.part001",
+          "sizeBytes": 10485760,
+          "sha256": "660626448d6d531704ec21d383ab359c729bbef56c9e01aa74bd0b4ad26a3d3d",
+          "gitBlobSha": "d5197ee8ffd87a6bdaf863d8634caac474b9b605"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part002",
+          "sizeBytes": 10485760,
+          "sha256": "c1d9976f74287ed7cab09665241865d21b07e77f2b696a862e84cb447046401e",
+          "gitBlobSha": "861e37575d7695936e4070242388ab410e9d0f3b"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part003",
+          "sizeBytes": 10485760,
+          "sha256": "1ad5296098b376bb15c7230007dc02bef1fa294870f3a5626c41b3839a5f96eb",
+          "gitBlobSha": "d4c2967861e9453cbfdecc1547c64ba42ea7949d"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part004",
+          "sizeBytes": 10485760,
+          "sha256": "a781aae94d702252883bdf15a4bc95d4267df4e5ae281483728d50d9d5e9c80d",
+          "gitBlobSha": "2e2046b9e2fd889bfe0ecdb0fdaebc9b3922dd44"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part005",
+          "sizeBytes": 10485760,
+          "sha256": "22d6e2c1e11387f2d7eb17848e77d207cff11338505285a6ad871dbe0475b77f",
+          "gitBlobSha": "e9344c321aceec943b121bd82adbf669348afda4"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part006",
+          "sizeBytes": 10485760,
+          "sha256": "c843c079c2efb9c0cfbab3e824641a1cf0bbde159ffe17173306d7d9eea5b94b",
+          "gitBlobSha": "87d62f5a699d769ed9236bd8a4bdf00a85a995f2"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part007",
+          "sizeBytes": 10485760,
+          "sha256": "4925d27b66868cb3da1f0ae1dcb29902b4b78f9d166ed2e0b541c2f4b876a100",
+          "gitBlobSha": "d2a30de6e01a5fbe361ff398f9ad7add85dca9d3"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part008",
+          "sizeBytes": 10485760,
+          "sha256": "2a3ff80cafcd5a5906f00256315882b6bf934e2c8bf17c90c5469e892a94694d",
+          "gitBlobSha": "277546211d50e07763f96485fff38b7c78b9ae8b"
+        },
+        {
+          "path": "parts/v0.6.0/archive.zip.part009",
+          "sizeBytes": 3412756,
+          "sha256": "de9774879832c2ea69372df8d7cec2b43bacecdfba687e519df8971410e2bb67",
+          "gitBlobSha": "a4bba092eb78b6fb4779c09bec768c9aaae029d5"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "allOriginalZipCrcPassed": true,
+    "unsafeArchivePaths": 0,
+    "symlinkMembers": 0
+  },
+  "priorLocalIntegrationCommit": {
+    "sha": "1f39f0f2c41e6a8c80eca4fd5481b92ac372972d",
+    "status": "Not recovered; original local checkout and prepared Git bundle were unavailable in the resumed environment. These archives do not claim to restore that integration commit."
+  },
+  "runtimeIntegrated": false,
+  "fidelity1to1Verified": false
+}

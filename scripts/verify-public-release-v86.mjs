@@ -1,5 +1,6 @@
 import { riverOfPainPathAdmission, verifyRiverOfPainRuntime } from './river-of-pain-distribution.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
+import { FORTIETH_RECOVERY_FILES_20261126, fortiethRecoveryPathAdmission20261126, fortiethRecoveryFile20261126, verifyFortiethRecoveryBytes20261126 } from './public-40th-source-recovery-20261126.mjs';
 import { createHash } from 'node:crypto';
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import assert from 'node:assert/strict';
@@ -565,6 +566,8 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
   if (riverAdmission !== null) return riverAdmission;
   const aliensAdmission = publicAliens1986DlcPathAdmission(path, { directory, built });
   if (aliensAdmission !== null) return aliensAdmission;
+  const fortiethAdmission = fortiethRecoveryPathAdmission20261126(path, { directory, built });
+  if (fortiethAdmission !== null) return fortiethAdmission;
   if (V179_SOURCE_ONLY_SCRIPTS.has(path)) return !built;
   if (!built && FORGE_TOOLING_V140.has(path)) return true;
   if (FORGE_STYLES_V140.has(path)) return true;
@@ -611,7 +614,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   assert.equal(RELEASE.releaseVersion, APP_RELEASE_V143.version);
   assert.equal(APP_RELEASE_V143.saveSchema, 52, 'Release version must not change the save format.');
   assert.equal((await lstat(resolve(root))).isSymbolicLink(), false, 'Distribution root must not be a symbolic link.');
-  let files = 0, assets = 0, userReferenceJpgs = 0;
+  let files = 0, assets = 0, userReferenceJpgs = 0, fortiethRecoveryFiles = 0;
   async function walk(directory, prefix = '') {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const path = prefix + entry.name;
@@ -622,6 +625,13 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
+      if (!built && fortiethRecoveryFile20261126(path)) {
+        // Exact archived sources retain their original historical metadata.
+        // Every byte is pinned independently; none is admitted to a build.
+        verifyFortiethRecoveryBytes20261126(path, await readFile(join(directory, entry.name)));
+        fortiethRecoveryFiles++;
+        continue;
+      }
       const recoveredAliens1986 = !built && aliens1986RecoveryFile(path);
       if (recoveredAliens1986) {
         // Independently pinned archive bytes retain historical QA paths only
@@ -639,6 +649,8 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
     }
   }
   await walk(resolve(root));
+  assert.equal(fortiethRecoveryFiles, built ? 0 : FORTIETH_RECOVERY_FILES_20261126.length,
+    'Incomplete 40th recovery source inventory.');
   if (built) await verifyRiverOfPainRuntime(root);
   await verifyAliens1986DlcAdmissions(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);

@@ -1,0 +1,4589 @@
+{
+  "version": "0.6.0",
+  "baselineVersion": "0.5.0",
+  "scope": "Authoring changes; dynamic validation is reported separately.",
+  "movedProps": [
+    {
+      "episode": "harvest",
+      "room": "H01",
+      "kind": "console",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H02",
+      "kind": "locker",
+      "from": {
+        "x": 530,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H02",
+      "kind": "tank",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H03",
+      "kind": "pipe",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H03",
+      "kind": "cable",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H04",
+      "kind": "panel",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H05",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H06",
+      "kind": "pipe",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H07",
+      "kind": "locker",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H07",
+      "kind": "panel",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H07",
+      "kind": "cable",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H09",
+      "kind": "rack",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "harvest",
+      "room": "H10",
+      "kind": "tank",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C01",
+      "kind": "locker",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C02",
+      "kind": "locker",
+      "from": {
+        "x": 530,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C02",
+      "kind": "tank",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C03",
+      "kind": "seat",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C03",
+      "kind": "cable",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C04",
+      "kind": "tank",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C05",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C06",
+      "kind": "bed",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C07",
+      "kind": "pod",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C07",
+      "kind": "seat",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C07",
+      "kind": "cable",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C09",
+      "kind": "tank",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "containment",
+      "room": "C10",
+      "kind": "cabinet",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S01",
+      "kind": "panel",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S02",
+      "kind": "workbench",
+      "from": {
+        "x": 530,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S02",
+      "kind": "panel",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S03",
+      "kind": "planter",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S03",
+      "kind": "planter",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S04",
+      "kind": "rack",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 730,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S05",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S06",
+      "kind": "planter",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S07",
+      "kind": "workbench",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S07",
+      "kind": "rack",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S07",
+      "kind": "stool",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S09",
+      "kind": "planter",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "specimen",
+      "room": "S10",
+      "kind": "barrel",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N01",
+      "kind": "barrel",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 640,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N02",
+      "kind": "console",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N03",
+      "kind": "locker",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N03",
+      "kind": "tank",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 1000,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N03",
+      "kind": "stall",
+      "from": {
+        "x": 725,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 325
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N04",
+      "kind": "tank",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N05",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N06",
+      "kind": "tank",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N07",
+      "kind": "pod",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N07",
+      "kind": "seat",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N07",
+      "kind": "cable",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N09",
+      "kind": "shelf",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "night-shift",
+      "room": "N10",
+      "kind": "counter",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O01",
+      "kind": "panel",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O02",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O03",
+      "kind": "cart",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O03",
+      "kind": "pipe",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O04",
+      "kind": "lamp",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O05",
+      "kind": "pipe",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O06",
+      "kind": "pipe",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O07",
+      "kind": "winch",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O07",
+      "kind": "pipe",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O07",
+      "kind": "lamp",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O09",
+      "kind": "rock",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "ore",
+      "room": "O10",
+      "kind": "winch",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A01",
+      "kind": "panel",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A02",
+      "kind": "locker",
+      "from": {
+        "x": 530,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A02",
+      "kind": "tank",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A03",
+      "kind": "seat",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A03",
+      "kind": "locker",
+      "from": {
+        "x": 1058,
+        "z": 170
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A04",
+      "kind": "monitor",
+      "from": {
+        "x": 787,
+        "z": 330
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A05",
+      "kind": "workbench",
+      "from": {
+        "x": 530,
+        "z": 60
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A05",
+      "kind": "panel",
+      "from": {
+        "x": 1040,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A06",
+      "kind": "pipe",
+      "from": {
+        "x": 548,
+        "z": 60
+      },
+      "to": {
+        "x": 280,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A07",
+      "kind": "turbine",
+      "from": {
+        "x": 267,
+        "z": 60
+      },
+      "to": {
+        "x": 370,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A07",
+      "kind": "pipe",
+      "from": {
+        "x": 1022,
+        "z": 170
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A07",
+      "kind": "vent",
+      "from": {
+        "x": 102,
+        "z": 70
+      },
+      "to": {
+        "x": 820,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A09",
+      "kind": "tank",
+      "from": {
+        "x": 700,
+        "z": 330
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    },
+    {
+      "episode": "alone",
+      "room": "A10",
+      "kind": "console",
+      "from": {
+        "x": 940,
+        "z": 325
+      },
+      "to": {
+        "x": 460,
+        "z": 70
+      }
+    }
+  ],
+  "doors": [
+    {
+      "episode": "harvest",
+      "from": "H01",
+      "to": "H02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H02",
+      "to": "H01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H02",
+      "to": "H03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 660,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H02",
+      "to": "H11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H03",
+      "to": "H02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 940,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H03",
+      "to": "H04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H03",
+      "to": "H12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 765,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H03",
+      "to": "H09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H04",
+      "to": "H03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H04",
+      "to": "H05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H05",
+      "to": "H11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H05",
+      "to": "H04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H05",
+      "to": "H06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H06",
+      "to": "H05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H06",
+      "to": "H07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H07",
+      "to": "H12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H07",
+      "to": "H06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H07",
+      "to": "H08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H07",
+      "to": "H10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 700,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H08",
+      "to": "H07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H09",
+      "to": "H03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H09",
+      "to": "H10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H10",
+      "to": "H07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H10",
+      "to": "H09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H11",
+      "to": "H02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H11",
+      "to": "H05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H12",
+      "to": "H03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "harvest",
+      "from": "H12",
+      "to": "H07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C01",
+      "to": "C02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C02",
+      "to": "C01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C02",
+      "to": "C03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 740,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C02",
+      "to": "C11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C03",
+      "to": "C02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 975,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C03",
+      "to": "C04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C03",
+      "to": "C12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 850,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C03",
+      "to": "C09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C04",
+      "to": "C03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C04",
+      "to": "C05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C05",
+      "to": "C11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C05",
+      "to": "C04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C05",
+      "to": "C06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C06",
+      "to": "C05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C06",
+      "to": "C07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C07",
+      "to": "C12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C07",
+      "to": "C06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C07",
+      "to": "C08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C07",
+      "to": "C10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 700,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C08",
+      "to": "C07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C09",
+      "to": "C03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C09",
+      "to": "C10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C10",
+      "to": "C07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C10",
+      "to": "C09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C11",
+      "to": "C02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C11",
+      "to": "C05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C12",
+      "to": "C03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "containment",
+      "from": "C12",
+      "to": "C07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S01",
+      "to": "S02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S02",
+      "to": "S01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S02",
+      "to": "S03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 660,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S02",
+      "to": "S11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S03",
+      "to": "S02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 940,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S03",
+      "to": "S04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S03",
+      "to": "S12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 765,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S03",
+      "to": "S09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S04",
+      "to": "S03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S04",
+      "to": "S05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S05",
+      "to": "S11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S05",
+      "to": "S04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S05",
+      "to": "S06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S06",
+      "to": "S05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S06",
+      "to": "S07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S07",
+      "to": "S12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S07",
+      "to": "S06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 785,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S07",
+      "to": "S08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S07",
+      "to": "S10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S08",
+      "to": "S07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S09",
+      "to": "S03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S09",
+      "to": "S10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S10",
+      "to": "S07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S10",
+      "to": "S09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S11",
+      "to": "S02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S11",
+      "to": "S05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S12",
+      "to": "S03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "specimen",
+      "from": "S12",
+      "to": "S07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N01",
+      "to": "N02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N02",
+      "to": "N01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N02",
+      "to": "N03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 660,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N02",
+      "to": "N11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N03",
+      "to": "N02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 940,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N03",
+      "to": "N04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N03",
+      "to": "N12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 765,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N03",
+      "to": "N09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N04",
+      "to": "N03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N04",
+      "to": "N05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 905,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N05",
+      "to": "N11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N05",
+      "to": "N04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 850,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N05",
+      "to": "N06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N06",
+      "to": "N05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N06",
+      "to": "N07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 905,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N07",
+      "to": "N12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N07",
+      "to": "N06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N07",
+      "to": "N08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N07",
+      "to": "N10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 775,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N08",
+      "to": "N07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N09",
+      "to": "N03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N09",
+      "to": "N10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N10",
+      "to": "N07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N10",
+      "to": "N09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N11",
+      "to": "N02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N11",
+      "to": "N05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N12",
+      "to": "N03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "night-shift",
+      "from": "N12",
+      "to": "N07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O01",
+      "to": "O02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O02",
+      "to": "O01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O02",
+      "to": "O03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "lift"
+    },
+    {
+      "episode": "ore",
+      "from": "O02",
+      "to": "O11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O03",
+      "to": "O02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 555,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "lift"
+    },
+    {
+      "episode": "ore",
+      "from": "O03",
+      "to": "O04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O03",
+      "to": "O12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 850,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O03",
+      "to": "O09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 975,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O04",
+      "to": "O03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O04",
+      "to": "O05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 905,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O05",
+      "to": "O11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "ladder"
+    },
+    {
+      "episode": "ore",
+      "from": "O05",
+      "to": "O04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O05",
+      "to": "O06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O06",
+      "to": "O05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O06",
+      "to": "O07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 905,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O07",
+      "to": "O12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O07",
+      "to": "O06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O07",
+      "to": "O08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O07",
+      "to": "O10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 785,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O08",
+      "to": "O07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O09",
+      "to": "O03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O09",
+      "to": "O10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O10",
+      "to": "O07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O10",
+      "to": "O09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O11",
+      "to": "O02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O11",
+      "to": "O05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "ladder"
+    },
+    {
+      "episode": "ore",
+      "from": "O12",
+      "to": "O03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "ore",
+      "from": "O12",
+      "to": "O07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A01",
+      "to": "A02",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A02",
+      "to": "A01",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A02",
+      "to": "A03",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 660,
+      "arrival": [
+        522.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A02",
+      "to": "A11",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A03",
+      "to": "A02",
+      "side": "south",
+      "x": 522.0,
+      "z": 328.0,
+      "profileX": 975,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A03",
+      "to": "A04",
+      "side": "east",
+      "x": 1178.0,
+      "z": 290.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A03",
+      "to": "A12",
+      "side": "east",
+      "x": 1178.0,
+      "z": 110.0,
+      "profileX": 850,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A03",
+      "to": "A09",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 320,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A04",
+      "to": "A03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        290.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A04",
+      "to": "A05",
+      "side": "south",
+      "x": 758.0,
+      "z": 328.0,
+      "profileX": 905,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A05",
+      "to": "A11",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A05",
+      "to": "A04",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 765,
+      "arrival": [
+        758.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A05",
+      "to": "A06",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A06",
+      "to": "A05",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A06",
+      "to": "A07",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A07",
+      "to": "A12",
+      "side": "west",
+      "x": 102.0,
+      "z": 110.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A07",
+      "to": "A06",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 305,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A07",
+      "to": "A08",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A07",
+      "to": "A10",
+      "side": "north",
+      "x": 640.0,
+      "z": 72.0,
+      "profileX": 700,
+      "arrival": [
+        935.0,
+        248.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A08",
+      "to": "A07",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A09",
+      "to": "A03",
+      "side": "south",
+      "x": 640.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A09",
+      "to": "A10",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A10",
+      "to": "A07",
+      "side": "south",
+      "x": 935.0,
+      "z": 328.0,
+      "profileX": 600,
+      "arrival": [
+        640.0,
+        152.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A10",
+      "to": "A09",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A11",
+      "to": "A02",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A11",
+      "to": "A05",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        200.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A12",
+      "to": "A03",
+      "side": "west",
+      "x": 102.0,
+      "z": 200.0,
+      "profileX": 100,
+      "arrival": [
+        1098.0,
+        110.0
+      ],
+      "type": "walk"
+    },
+    {
+      "episode": "alone",
+      "from": "A12",
+      "to": "A07",
+      "side": "east",
+      "x": 1178.0,
+      "z": 200.0,
+      "profileX": 1180,
+      "arrival": [
+        182.0,
+        110.0
+      ],
+      "type": "walk"
+    }
+  ],
+  "connectors": [
+    {
+      "episode": "harvest",
+      "old": [
+        "H02",
+        "H05"
+      ],
+      "now": [
+        "H02",
+        "H11",
+        "H05"
+      ]
+    },
+    {
+      "episode": "harvest",
+      "old": [
+        "H03",
+        "H07"
+      ],
+      "now": [
+        "H03",
+        "H12",
+        "H07"
+      ]
+    },
+    {
+      "episode": "containment",
+      "old": [
+        "C02",
+        "C05"
+      ],
+      "now": [
+        "C02",
+        "C11",
+        "C05"
+      ]
+    },
+    {
+      "episode": "containment",
+      "old": [
+        "C03",
+        "C07"
+      ],
+      "now": [
+        "C03",
+        "C12",
+        "C07"
+      ]
+    },
+    {
+      "episode": "specimen",
+      "old": [
+        "S02",
+        "S05"
+      ],
+      "now": [
+        "S02",
+        "S11",
+        "S05"
+      ]
+    },
+    {
+      "episode": "specimen",
+      "old": [
+        "S03",
+        "S07"
+      ],
+      "now": [
+        "S03",
+        "S12",
+        "S07"
+      ]
+    },
+    {
+      "episode": "night-shift",
+      "old": [
+        "N02",
+        "N05"
+      ],
+      "now": [
+        "N02",
+        "N11",
+        "N05"
+      ]
+    },
+    {
+      "episode": "night-shift",
+      "old": [
+        "N03",
+        "N07"
+      ],
+      "now": [
+        "N03",
+        "N12",
+        "N07"
+      ]
+    },
+    {
+      "episode": "ore",
+      "old": [
+        "O02",
+        "O05"
+      ],
+      "now": [
+        "O02",
+        "O11",
+        "O05"
+      ]
+    },
+    {
+      "episode": "ore",
+      "old": [
+        "O03",
+        "O07"
+      ],
+      "now": [
+        "O03",
+        "O12",
+        "O07"
+      ]
+    },
+    {
+      "episode": "alone",
+      "old": [
+        "A02",
+        "A05"
+      ],
+      "now": [
+        "A02",
+        "A11",
+        "A05"
+      ]
+    },
+    {
+      "episode": "alone",
+      "old": [
+        "A03",
+        "A07"
+      ],
+      "now": [
+        "A03",
+        "A12",
+        "A07"
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "episode": "harvest",
+      "id": "H01",
+      "name": "Réserve de plasma",
+      "view": "SIDE",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "stockage et manutention",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H02",
+      "name": "Anneau de circulation",
+      "view": "DEPTH",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "circulation protégée",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H03",
+      "name": "Intersection des secours",
+      "view": "HYBRID",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "distribution des circulations",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H04",
+      "name": "Atelier de maintenance",
+      "view": "DEPTH",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "maintenance et réparation",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H05",
+      "name": "Galerie des turbines",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H06",
+      "name": "Baie de ventilation",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "ventilation et accès technique",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H07",
+      "name": "Vestiaire des EEV",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "équipement et préparation",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H08",
+      "name": "Nacelles d’évacuation",
+      "view": "DEPTH",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H09",
+      "name": "Relais des balises",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "maintenance et réparation",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H10",
+      "name": "Coursive de récupération",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "stockage et manutention",
+      "original": true
+    },
+    {
+      "episode": "harvest",
+      "id": "H11",
+      "name": "Collecteur des pompes",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": false
+    },
+    {
+      "episode": "harvest",
+      "id": "H12",
+      "name": "Passerelle des EEV",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "circulation protégée",
+      "original": false
+    },
+    {
+      "episode": "containment",
+      "id": "C01",
+      "name": "Poste de pilotage",
+      "view": "DEPTH",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "commande et surveillance",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C02",
+      "name": "Couloir étanche",
+      "view": "DEPTH",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "circulation protégée",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C03",
+      "name": "Banquettes passagers",
+      "view": "DEPTH",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "volume passagers",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C04",
+      "name": "Alcôve médicale",
+      "view": "HYBRID",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "soin en alcôve",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C05",
+      "name": "Caisson des filtres",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C06",
+      "name": "Cloison de quarantaine",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "isolement médical",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C07",
+      "name": "Baie d’amarrage",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C08",
+      "name": "Hublot extérieur",
+      "view": "SIDE",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C09",
+      "name": "Niche de recyclage",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C10",
+      "name": "Passage des bouteilles",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "isolement médical",
+      "original": true
+    },
+    {
+      "episode": "containment",
+      "id": "C11",
+      "name": "Passage du recycleur",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": false
+    },
+    {
+      "episode": "containment",
+      "id": "C12",
+      "name": "Allée de service des sièges",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "volume passagers",
+      "original": false
+    },
+    {
+      "episode": "specimen",
+      "id": "S01",
+      "name": "Vestiaire botanique",
+      "view": "SIDE",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "équipement et préparation",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S02",
+      "name": "Paillasse des prélèvements",
+      "view": "DEPTH",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "travail sur prélèvements",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S03",
+      "name": "Allée des semis",
+      "view": "HYBRID",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "culture sous enceinte",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S04",
+      "name": "Irrigation principale",
+      "view": "DEPTH",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "culture sous enceinte",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S05",
+      "name": "Local électrique",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S06",
+      "name": "Serre de croissance",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "culture sous enceinte",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S07",
+      "name": "Table d’entretien",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "maintenance et réparation",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S08",
+      "name": "Sas de décontamination",
+      "view": "SIDE",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S09",
+      "name": "Pépinière isolée",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "culture sous enceinte",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S10",
+      "name": "Galerie des racines",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "travail sur prélèvements",
+      "original": true
+    },
+    {
+      "episode": "specimen",
+      "id": "S11",
+      "name": "Galerie d’alimentation",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "culture sous enceinte",
+      "original": false
+    },
+    {
+      "episode": "specimen",
+      "id": "S12",
+      "name": "Allée de nettoyage",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "culture sous enceinte",
+      "original": false
+    },
+    {
+      "episode": "night-shift",
+      "id": "N01",
+      "name": "Comptoir de nuit",
+      "view": "DEPTH",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "accueil et comptoir",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N02",
+      "name": "Rayonnage des réserves",
+      "view": "HYBRID",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "stockage et manutention",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N03",
+      "name": "Bloc sanitaire et dégagement",
+      "view": "DEPTH",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "sanitaires séparés de la circulation",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N04",
+      "name": "Réserve médicale",
+      "view": "DEPTH",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "soin en alcôve",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N05",
+      "name": "Tableau des fusibles",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N06",
+      "name": "Chambre de stockage",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "stockage et manutention",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N07",
+      "name": "Porte de livraison",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N08",
+      "name": "Cour du dépôt",
+      "view": "DEPTH",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "cour clôturée",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N09",
+      "name": "Bureau des livraisons",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "commande et surveillance",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N10",
+      "name": "Quai frigorifique",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "stockage et manutention",
+      "original": true
+    },
+    {
+      "episode": "night-shift",
+      "id": "N11",
+      "name": "Couloir du tableau",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "circulation protégée",
+      "original": false
+    },
+    {
+      "episode": "night-shift",
+      "id": "N12",
+      "name": "Dégagement de livraison",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "stockage et manutention",
+      "original": false
+    },
+    {
+      "episode": "ore",
+      "id": "O01",
+      "name": "Salle des casques",
+      "view": "SIDE",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "équipement et préparation",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O02",
+      "name": "Cage de descente",
+      "view": "DEPTH",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "changement de palier",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O03",
+      "name": "Galerie de relève",
+      "view": "HYBRID",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "extraction et roulage",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O04",
+      "name": "Front de taille ancien",
+      "view": "DEPTH",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "extraction et roulage",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O05",
+      "name": "Veine exhumée",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "zone de découverte",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O06",
+      "name": "Treuil de service",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O07",
+      "name": "Retour au palier",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "changement de palier",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O08",
+      "name": "Chantier de barrage",
+      "view": "DEPTH",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "extraction et roulage",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O09",
+      "name": "Niche des contrepoids",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "changement de palier",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O10",
+      "name": "Ancien retour de roulage",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "extraction et roulage",
+      "original": true
+    },
+    {
+      "episode": "ore",
+      "id": "O11",
+      "name": "Échelle du treuil",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "changement de palier",
+      "original": false
+    },
+    {
+      "episode": "ore",
+      "id": "O12",
+      "name": "Travers-banc du retour",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "extraction et roulage",
+      "original": false
+    },
+    {
+      "episode": "alone",
+      "id": "A01",
+      "name": "Carré désert",
+      "view": "DEPTH",
+      "box": [
+        0,
+        4,
+        2,
+        6
+      ],
+      "purpose": "vie quotidienne abandonnée",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A02",
+      "name": "Coursive des réparations",
+      "view": "DEPTH",
+      "box": [
+        2,
+        4,
+        3.6,
+        6
+      ],
+      "purpose": "circulation protégée",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A03",
+      "name": "Passerelle de Mother",
+      "view": "HYBRID",
+      "box": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "purpose": "commande et surveillance",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A04",
+      "name": "Accès B-11a",
+      "view": "DEPTH",
+      "box": [
+        4,
+        3,
+        6,
+        4
+      ],
+      "purpose": "travail sur prélèvements",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A05",
+      "name": "Laboratoire des spécimens",
+      "view": "DEPTH",
+      "box": [
+        4.4,
+        4,
+        6,
+        6
+      ],
+      "purpose": "travail sur prélèvements",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A06",
+      "name": "Galerie de ventilation",
+      "view": "DEPTH",
+      "box": [
+        6,
+        4,
+        8,
+        6
+      ],
+      "purpose": "ventilation et accès technique",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A07",
+      "name": "Régie de propulsion",
+      "view": "HYBRID",
+      "box": [
+        6,
+        2,
+        8,
+        4
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A08",
+      "name": "Sas des visiteurs",
+      "view": "DEPTH",
+      "box": [
+        8,
+        2,
+        10,
+        4
+      ],
+      "purpose": "isolement et contrôle des seuils",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A09",
+      "name": "Banque énergétique",
+      "view": "DEPTH",
+      "box": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "purpose": "réseaux et machines",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A10",
+      "name": "Archive des voix",
+      "view": "HYBRID",
+      "box": [
+        4,
+        0,
+        8,
+        2
+      ],
+      "purpose": "vie quotidienne abandonnée",
+      "original": true
+    },
+    {
+      "episode": "alone",
+      "id": "A11",
+      "name": "Coursive des conduites",
+      "view": "DEPTH",
+      "box": [
+        3.6,
+        4,
+        4.4,
+        6
+      ],
+      "purpose": "circulation protégée",
+      "original": false
+    },
+    {
+      "episode": "alone",
+      "id": "A12",
+      "name": "Galerie des auxiliaires",
+      "view": "HYBRID",
+      "box": [
+        4,
+        2,
+        6,
+        3
+      ],
+      "purpose": "réseaux et machines",
+      "original": false
+    }
+  ],
+  "storyLocks": [
+    {
+      "episode": "night-shift",
+      "from": "N07",
+      "to": "N08",
+      "oldGate": 0,
+      "gate": 10,
+      "reason": "Débloquer le volet de livraison avant de rejoindre la cour."
+    },
+    {
+      "episode": "ore",
+      "from": "O02",
+      "to": "O03",
+      "oldGate": 0,
+      "gate": 2,
+      "reason": "Commander la descente avant d’ouvrir le palier inférieur."
+    },
+    {
+      "episode": "ore",
+      "from": "O11",
+      "to": "O05",
+      "oldGate": 1,
+      "gate": 2,
+      "reason": "Sécuriser le palier inférieur par la commande de descente."
+    },
+    {
+      "episode": "alone",
+      "from": "A11",
+      "to": "A05",
+      "oldGate": 1,
+      "gate": 5,
+      "reason": "L’interverrouillage de B-11a protège aussi les conduites."
+    },
+    {
+      "episode": "alone",
+      "from": "A03",
+      "to": "A04",
+      "oldGate": 0,
+      "gate": 4,
+      "reason": "Isoler la panne de Mother avant l’accès B-11a."
+    },
+    {
+      "episode": "alone",
+      "from": "A04",
+      "to": "A05",
+      "oldGate": 0,
+      "gate": 5,
+      "reason": "Déverrouiller B-11a depuis son accès."
+    },
+    {
+      "episode": "alone",
+      "from": "A06",
+      "to": "A07",
+      "oldGate": 0,
+      "gate": 5,
+      "reason": "L’interverrouillage de B-11a protège le retour biologique."
+    }
+  ]
+}
