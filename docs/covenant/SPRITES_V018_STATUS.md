@@ -35,6 +35,12 @@ Les mesures des PNG originaux figurent dans [alpha.json](qa/v018/alpha.json). Le
 
 La [preuve navigateur](qa/v018/browser.json) distingue cette inspection du catalogue d’un parcours de jeu. L’[aperçu](qa/v018/catalogue-desktop.png) est une capture du navigateur ; il ne remplace aucun original. Le workflow V018 rejoue les contrôles de sources, d’alpha et de reproductibilité documentaire à la publication.
 
+## Correction du premier passage CI
+
+Le [premier passage V018](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45870747775) sur `e73deaff30a3fd9e837f987e137a65e0a2255dda` a échoué parce que le checkout partiel n’incluait pas le dossier du workflow lui-même. Le vérificateur demandait sa présence parmi les sources ; le fichier était présent localement mais absent du runner.
+
+Le correctif ajoute `.github/workflows` au checkout partiel et vérifie que toutes les sources contrôlées sont couvertes par ses entrées. Les contrôles d’existence et d’intégrité restent actifs. Aucun PNG, manifeste de production, document de bible ni fichier runtime n’est modifié par cette correction. Le statut distant courant est suivi dans la PR ; ce document ne transfère pas un succès d’une ancienne tête à une nouvelle.
+
 ## Limites de validation
 
 Aucun parcours de jeu supplémentaire n’est revendiqué : le code runtime, le manifeste de rendu, les collisions et les connexions sont inchangés. L’inspection du catalogue vérifie l’affichage des deux originaux sur plusieurs fonds, pas une traversée de porte.

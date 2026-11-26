@@ -28,6 +28,7 @@ assert.equal(bible.sourceManifest.sha256, hash(manifestBytes));
 assert.equal(bible.inherits.sha256, hash(await read(bible.inherits.path)));
 const runtimeIds = new Set(runtime.assets.map(row => row.id));
 const historicalIds = new Set(), historicalHashes = new Set();
+const historicalPaths = [];
 let historicalCount = 0;
 for (const pin of provenance.historicalSourceManifests) {
   const bytes = await read(pin.path);
@@ -36,6 +37,7 @@ for (const pin of provenance.historicalSourceManifests) {
   for (const row of JSON.parse(bytes.toString('utf8')).assets) {
     assert.equal(historicalIds.has(row.id), false);
     historicalIds.add(row.id);
+    historicalPaths.push(row.path);
     const png = await read(row.path);
     assert.equal(png.length, row.bytes, row.id);
     const expected = row.sha256 || row.alphaQA?.sha256;
@@ -120,6 +122,17 @@ for (const ref of manifest.references) {
 }
 assert.deepEqual(manifest.assets[0].inputReferenceIds, ['SRC-V018-LEONG-SIDE-SET', 'SRC-V018-LEONG-MODEL']);
 assert.ok(!manifest.assets[0].inputReferenceIds.includes('SRC-V018-DREW-MAIN-PLAN'));
+// A local full checkout must not hide a missing CI sparse-checkout directory.
+const workflow = (await read('.github/workflows/covenant-v018-architecture.yml')).toString('utf8');
+const sparseBlock = workflow.match(/          sparse-checkout: \|\n((?:            .+\n)+)/);
+assert.ok(sparseBlock, 'Missing explicit V018 sparse-checkout contract');
+const sparseRoots = sparseBlock[1].trim().split('\n').map(value => value.trim());
+for (const path of [...sourceFiles, ...historicalPaths, ...provenance.historicalSourceManifests.map(row => row.path),
+  ...provenance.frozenDocuments.map(row => row.path), ...provenance.unchangedRuntimeFiles.map(row => row.path),
+  ...recovery.files.map(row => row.path)]) {
+  assert.ok(sparseRoots.some(folder => path === folder || path.startsWith(folder + '/')),
+    'V018 CI sparse-checkout omits a verified source: ' + path);
+}
 for (const path of sourceFiles) {
   await read(path);
   assert.equal(admit(path), true, 'Exact source path denied: ' + path);
@@ -156,5 +169,6 @@ console.log(JSON.stringify({ ok: true, historicalPngsPreserved: historicalCount,
   cumulativeProductionPngs: 155, runtimePngsUnchanged: runtime.assets.length,
   documentaryCandidateOutsideProduction: 1, completedWorldFamilies: 0,
   alteredManifestRejected: true, alteredPngRejected: true, unknownPathsRejected: true,
+  workflowSparseCheckoutCoversVerifiedSources: true,
   builtAdmissionRejected: true, rejectedHistoricalCandidatesPromoted: 0,
   browserCatalogueChecked: true, gameplayWalkthroughRun: false }, null, 2));

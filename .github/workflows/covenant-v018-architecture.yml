@@ -20,6 +20,7 @@ jobs:
         with:
           persist-credentials: false
           sparse-checkout: |
+            .github/workflows
             docs/covenant
             scripts
             dlc/covenant
