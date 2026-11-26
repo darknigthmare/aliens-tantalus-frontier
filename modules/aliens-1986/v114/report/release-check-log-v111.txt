@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "version": "111.0.0-rc.1",
+  "htmlSha256": "611c2cf49a15866e81a180f76dabcf11ded718a66a46c6c907c19d1e6eb59e24",
+  "sourceArchiveSha256": "ef3c6ce0db9d561314f2b40ea45581c44ec503a24d3dd28bf6b0bd70614acdce",
+  "contract": "cfdfea91",
+  "nativeActivated": false,
+  "nativeCampaignRuns": 0,
+  "nodeTestsPassed": 408,
+  "gameBrowserChecksPassed": 187,
+  "separateDistributionChecksPassed": 27,
+  "automatedFullOperations": 6,
+  "pursuitEnemyTransfers": 2,
+  "lightingOperationEnemyTransfers": 6,
+  "directBrowserCaptures": 43,
+  "embeddedReportCaptures": 10,
+  "directFileNavigation": {
+    "validated": false,
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIENS_1986_V111_DANS_LE_NOIR_RC1/JOUER_ALIENS_V111.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIENS_1986_V111_DANS_LE_NOIR_RC1/JOUER_ALIENS_V111.html\", waiting until \"load\"\n"
+  }
+}

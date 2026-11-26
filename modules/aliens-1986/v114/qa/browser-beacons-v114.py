@@ -1,0 +1,102 @@
+"""V114 browser receipt. Executes the exact shipped HTML via unmodified Blob loader.
+All imported files are unedited exports from the public-input beacon driver.
+No session/debug hook, edited image or renderer replacement is used."""
+from pathlib import Path
+import json,hashlib
+from playwright.sync_api import sync_playwright
+R=Path(__file__).resolve().parent.parent;HTML=(R/'JOUER_ALIENS_V114.html').read_text();CAP=R/'report/captures-v114';CAP.mkdir(exist_ok=True)
+results=[];captures=[];errors=[];console=[];requests=[]
+def flush():
+ (R/'report/browser-beacons-v114.json').write_text(json.dumps({'tests':results,'captures':captures,'pageErrors':errors,'consoleErrors':console,'requests':requests,'htmlSHA256':hashlib.sha256(HTML.encode()).hexdigest(),'nativeTantalus':False},ensure_ascii=False,indent=2))
+def ck(name,ok,detail=None):
+ results.append({'name':name,'ok':bool(ok),'detail':detail});flush();print(name,bool(ok),flush=True);assert ok,(name,detail)
+def state(name):return json.loads((R/'report/beacon-states-v114'/f'{name}.json').read_text())
+def export(pg):
+ if not pg.locator('#pause-panel').is_visible():pg.locator('#pause-open').click()
+ with pg.expect_download() as d:pg.locator('#export').click()
+ return json.loads(Path(d.value.path()).read_text())
+def load(pg,d):
+ if not pg.locator('#pause-panel').is_visible():pg.locator('#pause-open').click()
+ pg.locator('#import-file').set_input_files({'name':'aliens113-export.json','mimeType':'application/json','buffer':json.dumps(d).encode()});pg.wait_for_timeout(50)
+def resume(pg):pg.locator('#pause-panel [data-close]').first.click()
+def shot(pg,name,origin):
+ pg.screenshot(path=str(CAP/name));captures.append({'file':name,'origin':origin,'nativeTantalus':False,'imageEdited':False});flush()
+def aim(pg,d,x,z):
+ box=pg.locator('#scene').bounding_box();scale=min(box['width']/1280,box['height']/720);camera=max(0,min(160,d['team'][0]['x']-550));left=box['x']+(box['width']-1280*scale)/2
+ pg.mouse.move(left+(x-camera)*scale,box['y']+(265+z*.86)*scale)
+with sync_playwright() as pw:
+ b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);pg=b.new_page(viewport={'width':1440,'height':980},accept_downloads=True);pg.set_default_timeout(8000)
+ pg.on('pageerror',lambda e:errors.append(str(e)));pg.on('console',lambda e:console.append(e.text) if e.type=='error' else None);pg.on('request',lambda r:requests.append(r.url) if r.url.startswith(('http:','https:')) else None)
+ pg.goto("about:blank");pg.set_content(HTML);pg.locator('[data-sector]').first.wait_for(state='attached');ck('Dix inspections et deux nouvelles cartes',pg.locator('[data-sector]').count()==25 and pg.locator('[data-sector^="v112-"]').count()==2)
+ pg.locator('#start-operation').click();initial=export(pg)
+ ck('Schéma113 et aucune balise offerte',initial['schema']==114 and initial['beacons']['charges']==0 and not initial['beacons']['collected'])
+ ck('Deux nouvelles pièces et deux entrées fermées',len(initial['worlds'])==25 and not initial['contacts']['links']['ops-optics']['open'] and not initial['contacts']['links']['conduit-medical']['open'])
+ ck('Cinq objectifs locaux conservés',initial['step']==0 and initial['flags']=={'relay':False,'newt':False,'defense':False})
+ d=state('01-avant-sas-optique');load(pg,d);ck('Import avant nouveau raccord exact',export(pg)==d)
+ resume(pg);pg.keyboard.press('r');pg.wait_for_timeout(90);pending=export(pg)
+ ck('R prépare le sas optique sans le débloquer immédiatement',pending['action'] and pending['action']['kind']=='link-open' and not pending['contacts']['links']['ops-optics']['open'])
+ resume(pg);pg.wait_for_timeout(1050);opened=export(pg);ck('Sas optique ouvert par le geste réel',opened['contacts']['links']['ops-optics']['open'])
+ resume(pg);pg.keyboard.down('w');pg.wait_for_timeout(150);pg.keyboard.up('w');pg.keyboard.press('e');pg.wait_for_timeout(1800);arrived=export(pg)
+ ck('E et regroupement conduisent au nouvel atelier',arrived['roomId']=='v112-workshop',arrived['roomId'])
+ ck('Équipe réellement réunie au transfert',all(a['roomId']==arrived['roomId'] for a in arrived['team'] if a['recruited']))
+ resume(pg);pg.wait_for_timeout(60);shot(pg,'44_atelier_entree.png','Reprise avant seuil depuis le pilote, puis R, déplacement W et E au clavier dans Chromium ; aucune position injectée')
+ load(pg,state('03-avant-coffret'));resume(pg);pg.keyboard.press('e');pg.wait_for_timeout(160);opening=export(pg)
+ ck('E ouvre les scellés en 1,05 s',opening['action'] and opening['action']['kind']=='beacon-stock' and opening['action']['duration']==1.05)
+ ck('Aucune balise avant achèvement',opening['beacons']['charges']==0 and not opening['beacons']['collected'])
+ pg.wait_for_timeout(130);ck('Pause préserve le coffret en cours',export(pg)==opening)
+ resume(pg);pg.keyboard.press('f');pg.wait_for_timeout(40);cancel=export(pg)
+ ck('F annule la collecte sans donner de balise',cancel['action'] is None and cancel['beacons']['charges']==0 and cancel['team'][0]['ammo']==opening['team'][0]['ammo']-1)
+ load(pg,opening);resume(pg);pg.wait_for_timeout(1100);collected=export(pg)
+ ck('Quatre balises à l’achèvement, une seule collecte',collected['beacons']['charges']==4 and collected['beacons']['metrics']['stocks']==1)
+ resume(pg);shot(pg,'45_coffret_ouvert.png','E terminé dans Chromium depuis un export réel à mi-collecte ; chariot désormais ouvert et vide')
+ pg.keyboard.press('e');pg.wait_for_timeout(50);again=export(pg);ck('Nouvelle interaction ne remplit pas le coffret',again['beacons']['charges']==4 and again['beacons']['metrics']['stocks']==1)
+ load(pg,state('05-coffret-ouvert'));resume(pg);aim(pg,state('05-coffret-ouvert'),955,199);pg.keyboard.press('p');pg.wait_for_timeout(90);work=export(pg)
+ ck('P engage un lancer .6 seconde',work['action'] and work['action']['kind']=='beacon-throw' and work['action']['duration']==.6)
+ ck('Préparation ne débite pas la réserve',work['beacons']['spent']==0 and work['beacons']['charges']==4)
+ pg.wait_for_timeout(200);ck('Pause fige l’amorçage',export(pg)==work)
+ resume(pg);pg.keyboard.down('a');pg.wait_for_timeout(100);pg.keyboard.up('a');interrupted=export(pg)
+ ck('Marche interrompt sans consommer',interrupted['action'] is None and interrupted['beacons']['charges']==4 and interrupted['beacons']['metrics']['interrupted']==work['beacons']['metrics']['interrupted']+1,{'action':interrupted['action'],'metrics':interrupted['beacons']['metrics'],'before':work['beacons']['metrics'],'point':interrupted['team'][0]})
+ load(pg,work);ck('Import au milieu du lancer est exact',export(pg)==work)
+ resume(pg);pg.wait_for_timeout(750);thrown=export(pg)
+ ck('Une balise autonome est créée par achèvement',thrown['beacons']['spent']==1 and thrown['beacons']['charges']==3 and len(thrown['beacons']['markers'])==1)
+ marker=thrown['beacons']['markers'][0]
+ ck('Durée 36 s et point de lancement réellement engagé',abs(marker['expiresAt']-marker['litAt']-36)<.0001 and marker['x']<thrown['team'][0]['x'])
+ ck('Aucun PV, chargeur ni objectif changé par ce lancer',[(a['hp'],a['ammo'])for a in thrown['team']]==[(a['hp'],a['ammo'])for a in work['team']] and thrown['flags']==work['flags'])
+ resume(pg);pg.keyboard.press('l');pg.wait_for_timeout(70);independent=export(pg)
+ ck('Balise reste active après extinction de la torche',not independent['lighting']['torch']['on'] and independent['beacons']['markers'][0]['expiresAt']>independent['elapsed'])
+ resume(pg);shot(pg,'46_balise_sans_torche.png','P terminé dans Chromium puis L ; le cône personnel est éteint, la balise fixée au sol éclaire seule')
+ load(pg,state('07-atelier-balise'));resume(pg);pg.wait_for_timeout(60);shot(pg,'47_atelier_balisage.png','Export non modifié 07-atelier-balise du parcours complet ; circuits et torche coupés, première source lancée par entrées publiques')
+ saved=export(pg);load(pg,saved);ck('Import source allumée conserve position et expiration',export(pg)==saved)
+ load(pg,state('09-coursive-balisee'));resume(pg);pg.wait_for_timeout(60);shot(pg,'48_coursive_conduites.png','Export 09-coursive-balisee non modifié ; seconde balise dans la nouvelle coursive, lumière calculée par occlusion')
+ d=export(pg);ck('Deux identités de balise résident dans deux pièces',len(d['beacons']['markers'])==2 and len({m['roomId'] for m in d['beacons']['markers']})==2)
+ load(pg,state('10-retour-medical'));d=export(pg);ck('Dérivation réelle raccordée à l’infirmerie',d['roomId']=='v106-medlab' and all(id in d['visitedRooms'] for id in ['v112-workshop','v112-conduit']))
+ resume(pg);pg.keyboard.press('m');ck('Carte séparée et sans noms de menaces',pg.locator('#map-panel').is_visible() and not pg.locator('#play').is_visible() and 'optics-stalker' not in pg.locator('#map-panel').inner_text());shot(pg,'49_carte_derivation.png','Carte affichée par M depuis 10-retour-medical ; uniquement les lieux effectivement relevés')
+ pg.locator('#map-panel [data-close]').click();pg.locator('#codex-open').click();ck('Archives expliquent stock, occlusion et compromis', 'Balises de secours' in pg.locator('#codex-content').inner_text() and '36 secondes' in pg.locator('#codex-content').inner_text());pg.locator('#codex-panel [data-close]').click()
+ load(pg,state('12-defense-balisee'));d=export(pg)
+ ck('Défense finie torche et circuit éteints',d['flags']['defense'] and not d['lighting']['torch']['on'] and not d['worlds']['v106-sentry']['circuits']['service'])
+ ck('Balises hors champ vieillissent et ne disparaissent pas du registre',d['beacons']['markers'][0]['expiresAt']<d['elapsed'] and d['beacons']['markers'][1]['expiresAt']<d['elapsed'])
+ ck('Sentinelle garde sa réserve consommée',next(a for a in d['worlds']['v106-sentry']['actors'] if a['id']=='sentry-a')['ammo']<120)
+ resume(pg);pg.wait_for_timeout(50);shot(pg,'50_defense_sur_balise.png','Export 12-defense-balisee : défense terminée sans lampe personnelle ni éclairage de service, troisième balise encore active')
+ good=export(pg)
+ for label,mut in [('stock inventé',lambda d:d['beacons'].__setitem__('charges',99)),('durée rallongée',lambda d:d['beacons']['markers'][0].__setitem__('expiresAt',99999)),('rayon injecté',lambda d:d['beacons'].__setitem__('radius',5000)),('duplicata lumineux',lambda d:d['beacons']['markers'].append(dict(d['beacons']['markers'][0])))]:
+  bad=json.loads(json.dumps(good));mut(bad);load(pg,bad);ck('Refus atomique : '+label,export(pg)==good)
+ old=json.loads((R/'report/lighting-states-v111/02-coupure-en-cours.json').read_text());load(pg,old);m=export(pg)
+ ck('Migration V111 via validateur conserve état de travail et torche',m['schema']==114 and m['action']==old['action'] and m['lighting']==old['lighting'])
+ ck('Migration conserve équipe, réserves et ancien réseau',m['team']==old['team'] and m['logistics']==old['logistics'] and all(m['contacts']['links'][k]==v for k,v in old['contacts']['links'].items()))
+ ck('Migration ne donne aucune balise',m['beacons']['charges']==0 and not m['beacons']['collected'])
+ # Short landscape and portrait, full controls stay outside the terrain.
+ pg.set_viewport_size({'width':844,'height':390});load(pg,state('07-atelier-balise'));resume(pg);pg.wait_for_timeout(70)
+ boxes={id:pg.locator('#'+id).bounding_box() for id in ['scene','contactbar','beacon-throw','hud']}
+ ck('Bouton balise hors canvas en paysage court',boxes['beacon-throw']['y']>=boxes['scene']['y']+boxes['scene']['height']-.5,boxes)
+ ck('Terrain garde au moins 178 px en paysage',boxes['scene']['height']>=178,boxes)
+ ck('Aucun débordement 844×390',pg.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+ shot(pg,'51_balises_paysage.png','Viewport émulé 844×390 ; bouton P dans l’instrumentation extérieure au terrain, pas de téléphone physique')
+ pg.locator('#beacon-throw').click();pg.wait_for_timeout(70);short=export(pg);ck('Bouton P fonctionne sur écran court',short['action'] and short['action']['kind']=='beacon-throw')
+ pg.set_viewport_size({'width':390,'height':844});load(pg,state('07-atelier-balise'));resume(pg);pg.wait_for_timeout(70)
+ ck('Portrait garde au moins 245 px de terrain',pg.locator('#scene').bounding_box()['height']>=245)
+ ck('Portrait sans débordement et bouton visible',pg.evaluate('document.documentElement.scrollWidth<=innerWidth') and pg.locator('#beacon-throw').is_visible())
+ shot(pg,'52_balises_portrait.png','Viewport émulé 390×844 ; source et réserves conservées au changement de format')
+ export(pg);pg.locator('#reduced').check();pg.locator('#contrast').check();ck('Accessibilité activable sans modifier le stock',export(pg)['beacons']==state('07-atelier-balise')['beacons'])
+ pg.set_viewport_size({'width':1440,'height':980});load(pg,state('13-repli-balise'));resume(pg);ck('Parcours complet donne le bilan',pg.locator('#complete-panel').is_visible() and '1 en réserve' in pg.locator('#debrief').inner_text());shot(pg,'53_repli_balises.png','Export final non modifié du parcours continu ; trois balises utilisées, une charge restante, équipe au repli')
+ ck('Aucun réseau externe nécessaire',not requests,requests);ck('Aucune erreur JS ou console',not errors and not console,{'page':errors,'console':console});b.close()
+flush();print(json.dumps({'passed':len(results),'captures':len(captures),'errors':errors}))

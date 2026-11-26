@@ -1,0 +1,1175 @@
+{
+  "description": "Exports intacts des pilotes courants et de la distribution V113. Tests de lecture, pas parcours complets.",
+  "checks": [
+    {
+      "file": "beacon-states-v113/01-avant-sas-optique.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/02-entree-atelier.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/03-avant-coffret.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/04-scelles-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/05-coffret-ouvert.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/06-amorcage.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/07-atelier-balise.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/08-entree-conduites.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/09-coursive-balisee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/10-retour-medical.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/11-sentinelle-balise.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/12-defense-balisee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v113/13-repli-balise.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/01-avant-sas-optique.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/02-entree-atelier.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/03-avant-coffret.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/04-scelles-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/05-coffret-ouvert.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/06-amorcage.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/07-atelier-balise.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/08-entree-conduites.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/09-coursive-balisee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/10-retour-medical.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/11-sentinelle-balise.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/12-defense-balisee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "beacon-states-v114/13-repli-balise.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/01-isolement.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/02-premier-impact.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/03-pression-engagee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/04-breche.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/05-contact-apres-breche.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/06-plaques-collectees.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/06a-avant-les-plaques.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/07-refection-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/08-refection-terminee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/09-soudure-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/10-renfort-soude.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/11-decoupe-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/12-route-rouverte.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v113/13-repli-apres-breche.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/01-isolement.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/02-premier-impact.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/03-pression-engagee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/04-breche.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/05-contact-apres-breche.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/06-plaques-collectees.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/06a-avant-les-plaques.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/07-refection-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/08-refection-terminee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/09-soudure-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/10-renfort-soude.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/11-decoupe-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/12-route-rouverte.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "breach-states-v114/13-repli-apres-breche.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/01_sulaco_cryo.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/02_sulaco_briefing.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/03_armory_retrieve_pending.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/04_armory_ready.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_flame.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_grenade.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_knife.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_launcher.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_pistol.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_pulse.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_shotgun.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/05_weapon_smartgun.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/06_armory_cast.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/07_clean_cargo.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/08_gateway_medical.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/09_gateway_inquiry.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/10_processor_gallery.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/11_hive_cocoons.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/12_queen_nursery.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/13_incinerator_collect.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/14_medlab_m240.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/15_repli_armement.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/16_colony_mess.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/17_drain_escorte.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "fidelity-states-v114/18_sentry_m240_avant.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/01-avant-coupure.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/02-coupure-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/03-operations-noir.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/04-ombre-et-poursuite.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/05-torche-contact.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/06-defense-dans-le-noir.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/07-retour-circuit-conserve.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/08-operations-retablie.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/09-ligne-sans-lampes.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/10-defense-tenue-noir.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v113/11-repli-noir.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/01-avant-coupure.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/02-coupure-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/03-operations-noir.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/04-ombre-et-poursuite.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/05-torche-contact.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/06-defense-dans-le-noir.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/07-retour-circuit-conserve.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/08-operations-retablie.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/09-ligne-sans-lampes.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/10-defense-tenue-noir.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "lighting-states-v114/11-repli-noir.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/01-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/02-galerie-arrivee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/03-blessure-reelle.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/04-stock-munitions.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/05-lot-distribue.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/06-secours-collectes.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/07-soin-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/08-soin-termine.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/09-diagnostic-actif.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/10-alarme-persistante.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/11-relais-via-reserve.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/12-newt-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/13-cartouche-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/14-sentinelle-ravitaillee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/15-repli-boucle.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/eng01-plaques.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/eng02-soudure-en-cours.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/eng03-renforce.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/eng04-decoupe.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v113/eng05-decoupe-terminee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/01-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/02-galerie-arrivee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/03-blessure-reelle.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/04-stock-munitions.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/05-lot-distribue.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/06-secours-collectes.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/07-soin-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/08-soin-termine.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/09-diagnostic-actif.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/10-alarme-persistante.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/11-relais-via-reserve.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/12-newt-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/13-cartouche-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/14-sentinelle-ravitaillee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/15-repli-boucle.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/eng01-plaques.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/eng02-soudure-en-cours.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/eng03-renforce.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/eng04-decoupe.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "logistics-states-v114/eng05-decoupe-terminee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/01-porte-residentielle.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/02-fuite-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/03-contact-franchi.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/04-avant-impulsion.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/04-detecteur.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/05-defense-mobile.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/06-liaison-isolee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v113/07-reprise-isolee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/01-porte-residentielle.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/02-fuite-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/03-contact-franchi.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/04-avant-impulsion.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/04-detecteur.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/05-defense-mobile.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/06-liaison-isolee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "pursuit-states-v114/07-reprise-isolee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/00-insertion.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/01-hadley-ouvert.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/02-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/03-relais.json",
+      "schema": 113,
+      "ok": false,
+      "reason": "Infirmerie : Position ou phase invalide: parasite-a"
+    },
+    {
+      "file": "states-v113/04-newt.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/05-retour-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/06-defense.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v113/07-repli.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/00-insertion.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/01-hadley-ouvert.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/02-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/03-relais.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/04-newt.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/05-retour-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/06-defense.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "states-v114/07-repli.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/00-insertion.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/01-operations-avant-ordres.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/02-deplacement-ordonne.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/03-angles-operations.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/04-newt-au-poste.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/05-affut-avant-rotation.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/06-affut-en-rotation.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/07-ligne-en-place.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/08-axes-libres.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/09-defense-dirigee.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v113/10-repli-angles.json",
+      "schema": 113,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/00-insertion.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/01-operations-avant-ordres.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/02-deplacement-ordonne.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/03-angles-operations.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/04-newt-au-poste.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/05-affut-avant-rotation.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/06-affut-en-rotation.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/07-ligne-en-place.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/08-axes-libres.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/09-defense-dirigee.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    },
+    {
+      "file": "tactics-states-v114/10-repli-angles.json",
+      "schema": 114,
+      "ok": true,
+      "reason": null
+    }
+  ]
+}

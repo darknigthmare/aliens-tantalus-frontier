@@ -1,0 +1,120 @@
+{
+  "browser": "Chromium through Python Playwright",
+  "transport": "distributed offline HTML via set_content; unchanged Blob module loader",
+  "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+  "nativeTantalus": false,
+  "tests": [
+    {
+      "name": "Inspection sentinelle sans progression",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle ne gaspille pas devant la porte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle tire après ouverture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte hors scène et HUD",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives remplacent la scène",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Perte de focus met en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bilan du parcours terminé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "HUD et ordres hors canvas 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 194
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 327,
+          "width": 844,
+          "height": 36
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        }
+      }
+    },
+    {
+      "name": "Pas de débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options accessibilité activables",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "captures": [
+    {
+      "file": "06_sentry_contact.png",
+      "origin": "Inspection isolée : déplacement, ordre couvrir, ouverture puis dégagement vers le bas joués au clavier ; la sentinelle attend un axe sans allié",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "07_carte_liaisons.png",
+      "origin": "Carte des lieux visités au point de défense du parcours complet",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "08_bilan_repli.png",
+      "origin": "État final non modifié du parcours complet automatisé ; import puis affichage du bilan",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "09_service_844x390.png",
+      "origin": "Viewport Chromium 844×390, inspection de la nouvelle maintenance",
+      "htmlSHA256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ]
+}

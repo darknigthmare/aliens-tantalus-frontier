@@ -1,0 +1,81 @@
+{
+  "files": [
+    "65_armurerie_ripley.png",
+    "67_vasquez_drake_dietrich.png",
+    "68_bishop_apone_gorman.png",
+    "69_hangar_preparation.png",
+    "70_gateway_burke.png",
+    "71_processeur_galeries.png",
+    "72_nurserie_inspection.png",
+    "73_mess_colonial.png",
+    "74_drain_newt.png",
+    "66_m240_essai.png",
+    "75_armement_paysage.png",
+    "76_repli_m240.png"
+  ],
+  "captures": [
+    {
+      "file": "65_armurerie_ripley.png",
+      "sha256": "87956aef718be412d9a606076cbe74da8fca3966bc104939076aebc2a29772db",
+      "origin": "Reprise de 04_armory_ready, export non modifié du pilote, puis F2 dans l’interface."
+    },
+    {
+      "file": "67_vasquez_drake_dietrich.png",
+      "sha256": "50e26d41979ce90a2ae8effdcf8e94f54e58aa78024090474c50d74145348ddc",
+      "origin": "Export 06_armory_cast non modifié : NPC de briefing, armes décoratives distinctes, pas renforts dans l’opération."
+    },
+    {
+      "file": "68_bishop_apone_gorman.png",
+      "sha256": "bb74393ac27f514a3a2779658cd77f9f5649734dc4ac7ddeeb7ebcad05820ecf",
+      "origin": "Export non modifié 02_sulaco_briefing du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "69_hangar_preparation.png",
+      "sha256": "4143ab54197243f69a3ee2045016613b32dca4b48654a5c0381f5881fca539c6",
+      "origin": "Export non modifié 07_clean_cargo du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "70_gateway_burke.png",
+      "sha256": "5461d744ae52ba9012e90377f49ccb0e1375f6ffdbd1ad46f1ccec5e05f641df",
+      "origin": "Export non modifié 09_gateway_inquiry du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "71_processeur_galeries.png",
+      "sha256": "20996c096f1499d9e20b909d2589e9b0f48e3529f3f3463280add0e7f8291856",
+      "origin": "Export non modifié 10_processor_gallery du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "72_nurserie_inspection.png",
+      "sha256": "245e4a500c2c26cafa52036e937332da012f4806e12b86caea2bb92237021777",
+      "origin": "Export non modifié 12_queen_nursery du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "73_mess_colonial.png",
+      "sha256": "6467b083627ae09bdddf99afefb915e756176d46475d743bb8f291262b8cbc38",
+      "origin": "Export non modifié 16_colony_mess du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "74_drain_newt.png",
+      "sha256": "d26970c93d726703167cbff0d79894b44cc880ff6372c59fb5854e7f18a73c3b",
+      "origin": "Export non modifié 17_drain_escorte du pilote à entrées publiques. Inspection adaptée, pas séquence filmique complète."
+    },
+    {
+      "file": "66_m240_essai.png",
+      "sha256": "372fa8be6c1b39587e0f74ddf608806dce211aa86d4e0128764d7bcb26b94cb9",
+      "origin": "Armurerie : choix M240 et pressions F réelles ; banc d’essai hors chronologie, pas un combat de campagne."
+    },
+    {
+      "file": "75_armement_paysage.png",
+      "sha256": "93193f6c902c9ff70188355e64f6423408d10568fbf1594be3741c653910dc46",
+      "origin": "Viewport émulé 844×390 ; véritable interface après import non modifié. Aucun téléphone physique testé."
+    },
+    {
+      "file": "76_repli_m240.png",
+      "sha256": "7e118fc0e203b25c0126cab58ec582e1c9cf2d9f50046773ea832b7d27d82fe1",
+      "origin": "Export final inchangé du parcours avec mess, canalisation et M240 ; pas de progression injectée."
+    }
+  ],
+  "rules": 80,
+  "rooms": 25,
+  "htmlSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d"
+}

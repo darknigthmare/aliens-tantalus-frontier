@@ -1,4 +1,6 @@
 import { RIVER_OF_PAIN_RUNTIME, RIVER_OF_PAIN_ROOT } from './river-of-pain-distribution.mjs';
+import { ALIENS1986_RUNTIME_ROOT, ALIENS1986_RUNTIME_FILES } from './public-aliens1986-dlc-admissions.mjs';
+import { renderAliens1986RasterV116 } from './derive-aliens1986-raster-v116.mjs';
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
@@ -24,12 +26,15 @@ function safePath(url) {
   const relative = normalize(requested === '/' ? 'index.html' : requested.replace(/^\/+/, ''));
   if (relative.startsWith('..')) return null;
   if (relative === 'archives' || relative.startsWith('archives/')) return null;
-  if (relative.startsWith('dlc/') && relative !== RIVER_OF_PAIN_ROOT && relative !== RIVER_OF_PAIN_ROOT + '/' && !RIVER_OF_PAIN_RUNTIME.includes(relative)) return null;
+  if (relative.startsWith('dlc/') && relative !== RIVER_OF_PAIN_ROOT && relative !== RIVER_OF_PAIN_ROOT + '/'
+    && relative !== ALIENS1986_RUNTIME_ROOT && relative !== ALIENS1986_RUNTIME_ROOT + '/'
+    && !RIVER_OF_PAIN_RUNTIME.includes(relative) && !ALIENS1986_RUNTIME_FILES.includes(relative)) return null;
   if (relative.split(/[\\/]/).some(segment => /^(?:docs?|tests?|scripts|references?|exports?|captures?|screenshots?|\.git|\.env.*|\.qa.*|\.vercel)$/i.test(segment))) return null;
   return join(root, relative);
 }
 
 await writeAudioManifestV77(root);
+const aliens1986Development = await renderAliens1986RasterV116({ root });
 createServer(async (request, response) => {
   let file = safePath(request.url);
   if (!file) { response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found'); return; }
@@ -37,7 +42,8 @@ createServer(async (request, response) => {
     const info = await stat(file);
     if (info.isDirectory()) file = join(file, 'index.html');
     const bytes = await readFile(file);
-    const body = file === join(root, 'index.html') ? stampReleaseHtmlV143(bytes.toString('utf8'), APP_RELEASE_V143) : bytes;
+    const body = file === join(root, 'index.html') ? stampReleaseHtmlV143(bytes.toString('utf8'), APP_RELEASE_V143)
+      : file === join(root, ALIENS1986_RUNTIME_ROOT, 'game.html') ? aliens1986Development.html : bytes;
     response.writeHead(200, {
       'content-type': mime[extname(file)] || 'application/octet-stream',
       'cache-control': extname(file) === '.html' ? 'no-store' : 'public, max-age=60',

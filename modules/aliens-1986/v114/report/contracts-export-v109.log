@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "counts": {
+    "inspectableRooms": 8,
+    "connectedOperationRooms": 7,
+    "newRooms": 2,
+    "inheritedRooms": 6,
+    "finiteStockCaches": 3,
+    "diagnosticAlarms": 1,
+    "sharedLinkHatches": 8,
+    "derivedThresholdVolumes": 16,
+    "reciprocalLinks": 8,
+    "directedEndpoints": 16,
+    "localObjectives": 5,
+    "solids": 47,
+    "doorVolumes": 9,
+    "decorativeProps": 42,
+    "observationNodes": 30,
+    "circuits": 9,
+    "controls": 9,
+    "enemies": 11,
+    "sentries": 1
+  },
+  "contract": "bace7a01",
+  "failures": []
+}

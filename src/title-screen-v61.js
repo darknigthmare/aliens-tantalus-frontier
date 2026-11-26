@@ -13,7 +13,7 @@ const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
 
 export class TitleScreenController {
-  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onDlc, onOptions }) {
+  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onDlc, onAliens1986, onOptions }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
@@ -25,6 +25,7 @@ export class TitleScreenController {
     this.onNewTimeline = onNewTimeline;
     this.onForge = onForge;
     this.onDlc = onDlc;
+    this.onAliens1986 = onAliens1986;
     this.onOptions = onOptions;
     this.state = 'idle';
     this.gamepadFrame = 0;
@@ -41,6 +42,7 @@ export class TitleScreenController {
     this.newButton = root.querySelector('#title-new');
     this.forgeButton = root.querySelector('#title-forge');
     this.dlcButton = root.querySelector('#title-river-of-pain');
+    this.aliens1986Button = root.querySelector('#title-aliens1986');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -64,7 +66,7 @@ export class TitleScreenController {
     };
     for (const [button, action] of [[this.startButton, 'openMenu'], [this.continueButton, 'continueGame'],
       [this.optionsButton, 'openOptions'], [this.newButton, 'requestNewTimeline'], [this.forgeButton, 'openForge'],
-      [this.dlcButton, 'openDlc']]) {
+      [this.dlcButton, 'openDlc'], [this.aliens1986Button, 'openAliens1986']]) {
       // Older embedded title surfaces can omit the optional DLC entry.
       if (!button) continue;
       listen(button, 'click', (event) => {
@@ -104,7 +106,7 @@ export class TitleScreenController {
   }
 
   menuButtons() {
-    return [this.continueButton, this.newButton, this.dlcButton, this.forgeButton, this.optionsButton]
+    return [this.continueButton, this.newButton, this.dlcButton, this.aliens1986Button, this.forgeButton, this.optionsButton]
       .filter((button) => button && !button.hidden && !button.disabled);
   }
 
@@ -226,6 +228,14 @@ export class TitleScreenController {
     // Navigation leaves both timelines in their own save systems. Keep this
     // surface usable if navigation is refused; no campaign action runs here.
     return this.onDlc() !== false;
+  }
+
+  openAliens1986() {
+    if (this.root.hidden || this.state !== 'menu' || typeof this.onAliens1986 !== 'function') return false;
+    this.cancelNewTimelineConfirmation();
+    // Leave this menu usable when navigation is refused. The independent DLC
+    // owns its checkpoint and does not invoke a native campaign action.
+    return this.onAliens1986() !== false;
   }
 
   requestNewTimeline() {
@@ -359,6 +369,7 @@ export class TitleScreenController {
       menuVisible: !this.menu.hidden,
       forgeAvailable: Boolean(this.forgeButton),
       dlcAvailable: Boolean(this.dlcButton && this.onDlc),
+      aliens1986Available: Boolean(this.aliens1986Button && this.onAliens1986),
       continueTarget: resolveTitleContinueTarget(this.getSave()),
       resumeContext: this.menuContextV89,
       scene: this.scene?.getSnapshot?.() || null

@@ -1,0 +1,18 @@
+{
+  "name": "aliens-1986-lieux-et-identites-v114",
+  "version": "114.0.0-rc.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --test qa/*.test.mjs",
+    "build": "python3 tools/build-preview.py",
+    "preview": "python3 -m http.server 8767",
+    "drive": "node qa/drive-v114.mjs && node qa/drive-pursuit-v114.mjs && node qa/drive-logistics-v114.mjs && node qa/drive-breach-v114.mjs && node qa/drive-lighting-v114.mjs && node qa/drive-beacons-v114.mjs && node qa/drive-tactics-v114.mjs && node qa/drive-fidelity-v114.mjs && node qa/verify-save-corpus-v114.mjs",
+    "browser": "python3 qa/browser-v114.py --parallel && python3 qa/browser-fidelity-v114.py",
+    "verify": "python3 tools/verify-package.py",
+    "docs": "node tools/export-contracts-v114.mjs && python3 tools/build-docs-v114.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

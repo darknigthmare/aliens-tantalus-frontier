@@ -1,0 +1,28 @@
+Initialisation du document exact V111 True
+Huit inspections dans le document distribué True
+Export réel au schéma 111 True
+Inventaire neuf vide True
+Aucune plaque offerte True
+Structures neuves cohérentes True
+Huit sas réciproques sauvegardés True
+Huit lieux sauvegardés True
+État torche présent au schéma 111 True
+Circuits existants initiaux allumés True
+Commandes L/K présentes dans le jeu True
+Jeu sans demande réseau externe True
+Huit fiches Codex True
+Aucune salle revendiquée nouvelle dans cette passe True
+36 règles de conception True
+Filtre Codex fonctionnel True
+Filtre sans résultat correctement vide True
+Retour aux huit fiches True
+Plans des huit lieux présents True
+Codex portrait sans débordement horizontal True
+Dix captures intégrées au rapport True
+Tous les PNG du rapport décodés True
+Les captures embarquées sont les PNG exacts True
+Rapport sans dépendance externe True
+Rapport portrait sans débordement horizontal True
+Hash identique au HTML de recette True
+Aucune erreur JS ou console True
+{"passed": 27, "errors": []}

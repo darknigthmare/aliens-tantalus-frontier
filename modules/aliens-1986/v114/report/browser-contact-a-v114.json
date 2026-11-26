@@ -1,0 +1,134 @@
+{
+  "browser": "Chromium through Python Playwright",
+  "tests": [
+    {
+      "name": "Reprise du parcours V114 : 03-relais",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise du parcours V114 : 04-newt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise du parcours V114 : 05-retour-operations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux menaces restent dans Hadley après le départ",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Poursuite exécutée hors champ puis arrivée dans Operations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une seule instance par menace après changement de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Horloges des lieux hors champ avancées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Impulsion T produit une mesure de mouvement",
+      "ok": true,
+      "detail": {
+        "cooldown": 1.4668000000000019,
+        "age": 0.9332000000000013,
+        "samples": [
+          {
+            "bearing": 4,
+            "range": 300
+          }
+        ],
+        "pulses": 1
+      }
+    },
+    {
+      "name": "Échos quantifiés sans identité, position précise ou PV",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Double impulsion refusée pendant recharge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échos périmés après deux secondes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise exacte de la mémoire, des mondes et de la recharge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Champ de mémoire inconnu rejeté avant mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Créature dupliquée refusée atomiquement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript contacts",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "03_relais_retabli.png",
+      "origin": "État non modifié du parcours complet V114 piloté par entrées publiques : 03-relais",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "04_newt_recrutee.png",
+      "origin": "État non modifié du parcours complet V114 piloté par entrées publiques : 04-newt",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "05_escorte_operations.png",
+      "origin": "État non modifié du parcours complet V114 piloté par entrées publiques : 05-retour-operations",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "10_contact_poursuite.png",
+      "origin": "Reprise du point de fuite non modifié, marche au clavier puis poursuite exécutée en direct dans Chromium",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "11_detecteur_mesure.png",
+      "origin": "Point de poursuite non modifié puis vraie impulsion T dans le navigateur",
+      "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+  "nativeTantalus": false
+}

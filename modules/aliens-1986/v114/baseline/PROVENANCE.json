@@ -1,0 +1,10 @@
+{
+  "baseline": "ALIENS_1986_V106_PASSAGES_RC1.zip",
+  "sha256": "d9891acad79fb69e22175e09d7de2e57bcbd1f4a96fd8064ff9b33f5a642f60c",
+  "unchangedModules": {
+    "src/spatial-core.mjs": "974cbdf30ee94e57d142c62e03cc249fc6e11dc4fff63d8214b39b19747bbd35",
+    "src/validation-scenes.mjs": "9e2fd1a2b4f1d5303bb69918c4a0ef46d51e61f290ff8d6a0ad8b894634ddb19",
+    "src/aliens-1986-spatial-v106.mjs": "13ba52f166a4b2a5c8647c779d8cca59b84acfafbfdeea7ae0e49edc31fe5a43"
+  },
+  "note": "Continuation de la dernière V106 Passages RC1, pas fusion de la V106 Candidat distincte. Coordonnées natives V105 non récupérées."
+}

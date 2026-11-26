@@ -1,0 +1,192 @@
+{
+  "version": "113.0.0-rc.1",
+  "htmlSha256": "d7e6a797fda5a6c7774f32ba6191757e305734382c3f6b23407555372c992a0f",
+  "codexSha256": "fe9bbfc9d1ee1e54b109a6b7543a39af3f548da7dc38f41cae9982457d486a2a",
+  "reportSha256": "323ba826e4da5a1010010c346660410572c34fa0faa5428d7c7cf3034b1f78c0",
+  "checks": [
+    {
+      "name": "Initialisation du document exact V113",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix inspections présentes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export réel au schéma 113",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inventaire logistique neuf vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune plaque offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune balise offerte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Onze structures intactes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Onze liaisons sauvegardées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux extrémités de dérivation commencent fermées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix lieux sauvegardés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ancien contrat de torche conservé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux pièces nouvelles hors tension",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les huit anciens services démarrent inchangés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commande P unique et contrôles L/K conservés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Trois commandes tactiques uniques",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Postes tactiques initialement vides",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Discipline sans gain de ressources",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Affût non orienté gratuitement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Jeu sans demande réseau externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix fiches Codex",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune nouvelle pièce revendiquée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "60 règles de conception",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Recherche des nouveaux raccords",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filtre sans résultat",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour aux dix fiches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix plans présents et étiquetés comme calculés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Codex portrait sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Dix captures intégrées au rapport",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les dix PNG décodent correctement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Images embarquées identiques aux PNG bruts",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport sans dépendance externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport portrait sans débordement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hash identique à celui de toutes les recettes gameplay",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript/console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "transport": {
+    "tested": "set_content of exact distributed bytes; unmodified Blob loader",
+    "directFileNavigation": {
+      "validated": false,
+      "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIENS_1986_V113_TENIR_LES_ANGLES_RC1/JOUER_ALIENS_V113.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIENS_1986_V113_TENIR_LES_ANGLES_RC1/JOUER_ALIENS_V113.html\", waiting until \"load\"\n"
+    }
+  },
+  "nativeActivated": false
+}

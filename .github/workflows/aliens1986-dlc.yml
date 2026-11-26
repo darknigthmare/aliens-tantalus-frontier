@@ -1,0 +1,81 @@
+name: Aliens 1986 DLC
+
+on:
+  pull_request:
+    paths:
+      - 'modules/aliens-1986/**'
+      - 'dlc/aliens-1986/**'
+      - 'assets/dlc/aliens-1986/**'
+      - 'docs/development/aliens-1986-sprites-v116/**'
+      - 'scripts/*aliens1986*'
+      - 'scripts/build.mjs'
+      - 'scripts/dev.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'scripts/audit-native-qa-resources-v187.mjs'
+      - 'src/title-screen-v61.js'
+      - 'src/app.js'
+      - 'index.html'
+      - 'package.json'
+      - '.github/workflows/aliens1986-dlc.yml'
+  push:
+    branches: [main, codex/aliens-1986-complete-v116]
+    paths:
+      - 'modules/aliens-1986/**'
+      - 'dlc/aliens-1986/**'
+      - 'assets/dlc/aliens-1986/**'
+      - 'docs/development/aliens-1986-sprites-v116/**'
+      - 'scripts/*aliens1986*'
+      - 'scripts/build.mjs'
+      - 'scripts/dev.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'scripts/audit-native-qa-resources-v187.mjs'
+      - 'src/title-screen-v61.js'
+      - 'src/app.js'
+      - 'index.html'
+      - 'package.json'
+      - '.github/workflows/aliens1986-dlc.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  aliens1986:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install project dependencies
+        run: npm ci
+      - name: Test the preserved DLC, raster presentation, menus and source succession
+        run: |
+          npm run test:dlc:aliens1986
+          npm run test:dlc:river
+          node --test scripts/verify-river-of-pain-succession.mjs
+      - name: Validate source and build the deterministic derivative
+        run: |
+          npm run check:dlc:aliens1986
+          npm run check
+          npm run build
+          npm run check:built
+      - name: Install the browser harness
+        run: |
+          python3 -m venv "$RUNNER_TEMP/aliens1986-playwright"
+          "$RUNNER_TEMP/aliens1986-playwright/bin/pip" install playwright==1.65.2
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -m playwright install --with-deps chromium
+      - name: Exercise served raster drawing, doors, saves and title navigation
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \
+            --root dist --source-root . --output "$RUNNER_TEMP/aliens1986-evidence"
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aliens1986-browser-evidence
+          path: '${{ runner.temp }}/aliens1986-evidence'
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,494 @@
+{
+  "variant": "direct",
+  "complete": true,
+  "inputs": 3231,
+  "elapsed": 80.78,
+  "transfers": 8,
+  "step": 4,
+  "stats": {
+    "opensCompleted": 4,
+    "opensCancelled": 0,
+    "transfers": 8,
+    "orders": 17,
+    "allyShots": 4,
+    "allyBlocks": 140
+  },
+  "ammunition": [
+    {
+      "id": "ripley",
+      "ammo": 7,
+      "hp": 100
+    },
+    {
+      "id": "hicks",
+      "ammo": 24,
+      "hp": 100
+    },
+    {
+      "id": "hudson",
+      "ammo": 24,
+      "hp": 100
+    },
+    {
+      "id": "newt",
+      "ammo": 0,
+      "hp": 100
+    }
+  ],
+  "rooms": [
+    "v106-hadley",
+    "v107-operations",
+    "v107-service",
+    "v106-medlab",
+    "v106-sentry"
+  ],
+  "checkpoints": [
+    {
+      "label": "00-insertion",
+      "room": "v106-hadley",
+      "time": 0,
+      "step": 0,
+      "ammo": 48,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "01-hadley-ouvert",
+      "room": "v106-hadley",
+      "time": 7.28,
+      "step": 0,
+      "ammo": 38,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "02-operations",
+      "room": "v107-operations",
+      "time": 9.35,
+      "step": 1,
+      "ammo": 38,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "03-relais",
+      "room": "v107-service",
+      "time": 21.42,
+      "step": 2,
+      "ammo": 28,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "04-newt",
+      "room": "v106-medlab",
+      "time": 38.52,
+      "step": 3,
+      "ammo": 18,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "05-retour-operations",
+      "room": "v107-operations",
+      "time": 45,
+      "step": 3,
+      "ammo": 18,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "06-defense",
+      "room": "v106-sentry",
+      "time": 61.17,
+      "step": 4,
+      "ammo": 7,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "07-repli",
+      "room": "v106-hadley",
+      "time": 80.78,
+      "step": 4,
+      "ammo": 7,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    }
+  ]
+}
+{
+  "variant": "service-link-reloads",
+  "complete": true,
+  "inputs": 2738,
+  "elapsed": 68.45,
+  "transfers": 7,
+  "step": 4,
+  "stats": {
+    "opensCompleted": 4,
+    "opensCancelled": 0,
+    "transfers": 7,
+    "orders": 14,
+    "allyShots": 4,
+    "allyBlocks": 170
+  },
+  "ammunition": [
+    {
+      "id": "ripley",
+      "ammo": 7,
+      "hp": 100
+    },
+    {
+      "id": "hicks",
+      "ammo": 24,
+      "hp": 100
+    },
+    {
+      "id": "hudson",
+      "ammo": 24,
+      "hp": 86
+    },
+    {
+      "id": "newt",
+      "ammo": 0,
+      "hp": 100
+    }
+  ],
+  "rooms": [
+    "v106-hadley",
+    "v107-operations",
+    "v107-service",
+    "v106-medlab",
+    "v106-sentry"
+  ],
+  "checkpoints": [
+    {
+      "label": "00-insertion",
+      "room": "v106-hadley",
+      "time": 0,
+      "step": 0,
+      "ammo": 48,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "01-hadley-ouvert",
+      "room": "v106-hadley",
+      "time": 7.28,
+      "step": 0,
+      "ammo": 38,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "02-operations",
+      "room": "v107-operations",
+      "time": 9.35,
+      "step": 1,
+      "ammo": 38,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "03-relais",
+      "room": "v107-service",
+      "time": 21.42,
+      "step": 2,
+      "ammo": 28,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          100
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "04-newt",
+      "room": "v106-medlab",
+      "time": 24.75,
+      "step": 3,
+      "ammo": 20,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          86
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "05-retour-operations",
+      "room": "v107-operations",
+      "time": 32.67,
+      "step": 3,
+      "ammo": 18,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          86
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "06-defense",
+      "room": "v106-sentry",
+      "time": 48.85,
+      "step": 4,
+      "ammo": 7,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          86
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    },
+    {
+      "label": "07-repli",
+      "room": "v106-hadley",
+      "time": 68.45,
+      "step": 4,
+      "ammo": 7,
+      "health": [
+        [
+          "ripley",
+          100
+        ],
+        [
+          "hicks",
+          100
+        ],
+        [
+          "hudson",
+          86
+        ],
+        [
+          "newt",
+          100
+        ]
+      ]
+    }
+  ]
+}

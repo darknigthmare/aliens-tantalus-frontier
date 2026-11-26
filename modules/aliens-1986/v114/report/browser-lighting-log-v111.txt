@@ -1,0 +1,40 @@
+Insertion schema111 et torche sans ressources offertes True
+Huit circuits service existants conservés nominaux True
+Import exact avant manœuvre électrique True
+K déclenche une préparation réelle de 0,95 s True
+Lampe reste alimentée durant la préparation True
+Pause conserve exactement le geste True
+Marcher annule la coupure True
+Tirer annule et dépense une balle ordinaire True
+Import mi-geste ne remet pas le temps à zéro True
+Circuit coupé à l’achèvement seulement True
+Aucune porte de scène ou sas modifié par coupure True
+Aucune population créée True
+L éteint la torche indépendamment du circuit True
+Instrument indique ombre sans coordonnées ennemies True
+Orientation et torche ont été reprises du parcours True
+La souris oriente réellement la torche True
+Obscurité conservée au retour après maintenance True
+Circuit rétabli sans soin ni recharge offert True
+Défense achevée dans un circuit coupé True
+Sentinelle consomme ses munitions réelles True
+Refus atomique : angle non fini True
+Refus atomique : bilan incohérent True
+Refus atomique : propriété inconnue True
+Refus atomique : identité équipe True
+Migration V110 garde équipe et réserves True
+Migration garde tous les circuits et ajoute seulement la torche True
+Bouton torche reflète la touche L True
+Bouton torche réactive indépendamment du clavier True
+Carte reste séparée et sans radar True
+Réglages accessibilité disponibles True
+HUD et boutons hors terrain 844x390 True
+Scène non écrasée 844x390 True
+Torche et contrôle présents 844x390 True
+HUD et boutons hors terrain 390x844 True
+Scène non écrasée 390x844 True
+Torche et contrôle présents 390x844 True
+Opération importée complète donne le bilan True
+Zéro requête externe nécessaire True
+Aucune erreur JS/console True
+{"passed": 39, "total": 39, "captures": 9, "errors": []}

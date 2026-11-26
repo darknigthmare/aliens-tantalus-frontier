@@ -1,0 +1,123 @@
+{
+  "htmlSHA256": "7766a7ad6b024e2596e4395b2f6375d1189c50d7495572f206c6b79cf32daf87",
+  "tests": [
+    {
+      "name": "Commandes tactiles visibles dans le flux de jeu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et commandes tactiles hors canvas en 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 150
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 194,
+          "width": 844,
+          "height": 46
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 283,
+          "width": 844,
+          "height": 36
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        },
+        "touch": {
+          "x": 0,
+          "y": 319,
+          "width": 844,
+          "height": 44
+        }
+      }
+    },
+    {
+      "name": "Canvas visible en paysage tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton prudence accessible au tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement portrait 390×844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et pause accessibles en portrait",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options en pause tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête réseau externe",
+      "ok": true,
+      "detail": [
+        "blob:null/cb1d4ce3-c28a-4d64-869c-45cbe64279c0",
+        "blob:null/1fe5c8bb-ec83-4bcd-a839-f218ece10776",
+        "blob:null/4b2183f7-4bcf-485f-8423-945e8daae1e6",
+        "blob:null/bd2ed8f5-713d-48a4-b4f7-3cf681e74126",
+        "blob:null/2ebaa74c-fea6-4bcb-a08c-ab35d6582a34",
+        "blob:null/90631eb3-a249-4601-9e4a-aac6cace958c",
+        "blob:null/e6dfb7ec-d464-46e4-9247-de602bb25e00",
+        "blob:null/b228664d-599d-4ede-8f6a-f38da487737e",
+        "blob:null/0b32ce4a-0865-4d4a-97ed-b0a7760a901a",
+        "blob:null/1fd05949-aa35-4ee0-ba0d-210f23db1a71",
+        "blob:null/ac72deef-cc26-484a-984e-3c09f847c8d2",
+        "blob:null/56dfa954-9495-4e4f-9970-0eada9a2ce9f",
+        "blob:null/839a7611-fc4e-4898-b9ac-2738441b0aa7",
+        "blob:null/dd7f5542-7c01-44d8-9143-7a52f02f418f",
+        "blob:null/aaeb1623-f858-456c-9440-aff69c250241",
+        "blob:null/9085c81d-a87e-4c5b-bdbe-d6acf1c3d2e0",
+        "blob:null/e660ef1f-54f5-4fc3-80ae-c82a6a90af3a",
+        "blob:null/3564f628-ebd4-42fe-894f-230356e0130e"
+      ]
+    },
+    {
+      "name": "Aucune erreur UI tactile",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "15_tactile_844.png",
+      "origin": "Viewport 844×390 avec has_touch/is_mobile, commande prudente cliquée; pas de téléphone physique",
+      "htmlSHA256": "7766a7ad6b024e2596e4395b2f6375d1189c50d7495572f206c6b79cf32daf87",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "physicalPhoneTested": false
+}

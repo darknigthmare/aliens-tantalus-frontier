@@ -1,0 +1,22 @@
+{
+  "complete": true,
+  "inputs": 4443,
+  "elapsed": 111.07500000000813,
+  "enemyTransfers": 5,
+  "engineering": {
+    "plates": 1,
+    "spent": 2,
+    "collected": true,
+    "nearby": null,
+    "metrics": {
+      "stocks": 1,
+      "reinforced": 1,
+      "cut": 1,
+      "repaired": 1,
+      "started": 4,
+      "interrupted": 0,
+      "enemyHits": 4,
+      "breaches": 1
+    }
+  }
+}
