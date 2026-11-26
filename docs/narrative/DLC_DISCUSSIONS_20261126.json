@@ -1059,12 +1059,16 @@
         "1904, flashback ancien, hors recrutement, secondaires et variantes incomplets.",
         "Camouflage/visions Yautja/bodycam/rations seulement documentés.",
         "Kit médical Yautja, masque Elder et certains engins à vérifier.",
-        "Art vectoriel et métrique non certifiés."
+        "Art vectoriel et métrique non certifiés.",
+        "Les nouveaux PNG restent des candidats : 2 conditionnés par image, 6 textuels ; aucune fidélité 1:1 certifiée, aucune nouvelle animation ou activation runtime.",
+        "Les libellés legacy Italie/archéologues italiens sont en conflit avec la localisation Teotihuacan/Mexique des sources consultées ; ne pas inventer un lieu supplémentaire."
       ],
       "production": [
         "Qualifier masques, silhouettes et équipement par propriétaire plutôt qu'une silhouette Yautja générique.",
         "Préserver la mécanique de fin chaîne/cuve ; ne pas remplacer par un boss à PV arbitraire.",
-        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC.",
+        "Traiter individuellement les 41 lignes ouvertes et les 22 lignes d’armes ; rapprocher les fiches de production de la scène, du propriétaire et des preuves de code.",
+        "Comparer les huit nouveaux PNG candidats aux références ; aucun fichier généré de ce complément n’est encore raccordé au rendu."
       ],
       "exact": false,
       "canonExact": false,
@@ -1072,14 +1076,18 @@
       "publication": {
         "prs": [
           55,
+          68,
           74
         ],
-        "state": "Lancement/retour hôte fusionnés dans la cumulative via PR55 ; moteur et carnets autonomes. PR74 conserve trois nouveaux PNG de reliefs comme sources candidates, sans activation ni fidélité 1:1 certifiée.",
+        "state": "Lanceur/retour hôte fusionnés via PR55 ; bible commune fusionnée via PR68 dans la cumulative. Complément AVP : 132 fiches de référence, 78 spécifications et huit PNG candidats sources sans nouveau raccord runtime. PR74 conserve séparément cinq reliefs candidats.",
         "paths": [
-          "src/dlc/avp-2004/"
+          "src/dlc/avp-2004/",
+          "docs/narrative/dlc/avp-2004-production-20261126/",
+          "assets/openai/sprites/avp2004-production-v001/"
         ],
         "archive": "archives/local-recovery-20261125/avp-2004/",
-        "sourceSpriteCommit": "8e8d51c186052c0b0662786677dea3652c915583"
+        "sourceSpriteCommit": "7e565f05582f20a91274fca30e83962a430b9dd2",
+        "bibleMergeCommit": "c7a0339f86e1de0c2209800a81506cddbc71d804"
       },
       "documentEvidence": [
         {
@@ -1094,6 +1102,16 @@
           "read": true,
           "name": "manifest.json / README.md",
           "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json"
+        },
+        {
+          "read": true,
+          "name": "PR74 current manifest",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/7e565f05582f20a91274fca30e83962a430b9dd2/assets/openai/sprites/avp2004-reliefs-v001/manifest.json"
+        },
+        {
+          "read": true,
+          "name": "AVP runtime inventory, 132 reference briefs and 78 production specifications",
+          "path": "docs/narrative/dlc/avp-2004-production-20261126/README.md"
         }
       ],
       "decisionIds": [
@@ -1114,9 +1132,9 @@
         "D22"
       ],
       "assetCoverage": {
-        "newSourcePNGCount": 3,
-        "totalSourcePngBytes": 11048227,
-        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+        "newSourcePNGCount": 5,
+        "totalSourcePngBytes": 17995777,
+        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/7e565f05582f20a91274fca30e83962a430b9dd2/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
         "candidateCatalogueIds": [
           "AVP2004-159",
           "AVP2004-249"
@@ -1131,9 +1149,83 @@
         ],
         "notCovered": [
           "AVP2004-140 : aucune traduction authentifiée des glyphes",
-          "AVP2004-115 : Snowcat en attente de photographies plus exploitables",
+          "AVP2004-115 : candidat textuel dans le lot de production distinct, corrections photographiques et raccord encore nécessaires",
           "Animations, personnages, poses et autres DLC"
+        ],
+        "scope": "PR74 relief candidates only; separate from the production-bible batch; PR74 open at this read",
+        "history": [
+          {
+            "commit": "8e8d51c186052c0b0662786677dea3652c915583",
+            "newSourcePNGCount": 3,
+            "totalSourcePngBytes": 11048227,
+            "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+            "candidateCatalogueIds": [
+              "AVP2004-159",
+              "AVP2004-249"
+            ],
+            "runtimeIntegrated": false,
+            "verified1to1": false,
+            "alphaMedianNonzero": 253,
+            "remainingReview": [
+              "détourage et pixels faiblement opaques",
+              "microreliefs et proportions",
+              "échelle, ancrages et lisibilité en jeu"
+            ],
+            "notCovered": [
+              "AVP2004-140 : aucune traduction authentifiée des glyphes",
+              "AVP2004-115 : Snowcat en attente de photographies plus exploitables",
+              "Animations, personnages, poses et autres DLC"
+            ]
+          }
         ]
+      },
+      "productionBible": {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/README.md",
+        "date": "2026-11-26",
+        "runtimeSourceCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+        "canonReferences": 132,
+        "sources": 36,
+        "productionSpecifications": 78,
+        "priorityCatalogueRows": 41,
+        "absent": 19,
+        "toVerify": 15,
+        "documentOnly": 7,
+        "weaponCatalogueRows": 22,
+        "canonCategoryCounts": {
+          "personnages": 35,
+          "lieux": 33,
+          "armes": 16,
+          "props": 28,
+          "véhicules": 4,
+          "vaisseaux": 3,
+          "terrain": 12,
+          "planète": 1
+        },
+        "allCatalogueRows": 250,
+        "rooms": 44,
+        "navigableRooms": 43,
+        "reciprocalLinks": 52,
+        "doorFaces": 104,
+        "noStaticDoorAnomalyWithinExaminedScope": true,
+        "dynamicTraversalVerifiedByThisSupplement": false,
+        "countsOverlap": true,
+        "exact": false,
+        "canonExact": false
+      },
+      "generatedProductionBatch": {
+        "manifest": "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+        "gallery": "docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md",
+        "directory": "assets/openai/sprites/avp2004-production-v001/",
+        "generator": "built-in imagegen",
+        "pngCount": 8,
+        "pngBytes": 17031468,
+        "imageConditioned": 2,
+        "textOnly": 6,
+        "blockedAttempts": 1,
+        "candidateOnly": true,
+        "runtimeIntegrated": false,
+        "productionReady": false,
+        "verified1to1": false
       }
     },
     {
