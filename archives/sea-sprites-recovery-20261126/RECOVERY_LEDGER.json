@@ -7,7 +7,6 @@
   "sourceParent": "232cbd2ecb0e370f911b008b2226dafee81bffde",
   "expectedCompleteTree": "dc83ab7c82ff9b626ae5f8e5f2b0940b67be6b1c",
   "sourceBranch": "codex/mer-des-chagrins-sprites-20261126",
-  "sourceWorkspace": "/workspace/scratch/523a772a550e/repo",
   "publicationScope": "Partial preservation of uploaded immutable source blobs only. No active runtime integration.",
   "expectedFileCount": 126,
   "preservedFileCount": 33,
