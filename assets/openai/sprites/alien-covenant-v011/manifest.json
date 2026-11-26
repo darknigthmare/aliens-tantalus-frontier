@@ -1784,27 +1784,20 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1699088,
-        "mode": "RGBA",
+        "sha256": "0abd03ce52373e1fd8aa008243fe7a8706b94b077751b59964abc02480e8cd9a",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1100670,
-        "alphaZeroPercent": 69.97871398925781,
-        "alphaAbove245": 446100,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           271,
-          32,
+          31,
           759,
           1518
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1865,14 +1858,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1641718,
-        "mode": "RGBA",
+        "sha256": "bd3485f6aafa2b89b4827ed044d9d1265447853384290207e89962e030202ad3",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1133180,
-        "alphaZeroPercent": 72.04564412434895,
-        "alphaAbove245": 408416,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           294,
@@ -1880,12 +1871,7 @@
           729,
           1520
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1941,14 +1927,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1447878,
-        "mode": "RGBA",
+        "sha256": "9a2931e8941ac6bfa6411df06d34a54f92b5aa428b8e9cc7309e9146ac0c9a5d",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1166997,
-        "alphaZeroPercent": 74.19567108154297,
-        "alphaAbove245": 378696,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           312,
@@ -1956,12 +1940,7 @@
           736,
           1523
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2008,14 +1987,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1501192,
-        "mode": "RGBA",
+        "sha256": "f3c531c51d54ab332dd1c97970bb4414eaa59c1443a5fceaa5cdafed1da885fe",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1136045,
-        "alphaZeroPercent": 72.22779591878255,
-        "alphaAbove245": 408152,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
@@ -2023,12 +2000,7 @@
           735,
           1525
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2070,14 +2042,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1648023,
-        "mode": "RGBA",
+        "sha256": "925a129b06b191c14c16104f6c6690340b6dd6eff092d1ef7c5108589addec34",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1115036,
-        "alphaZeroPercent": 70.89207967122395,
-        "alphaAbove245": 434321,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           267,
@@ -2085,12 +2055,7 @@
           754,
           1512
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2134,14 +2099,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1768587,
-        "mode": "RGBA",
+        "sha256": "d480556468ad43211af110dd9fa72f5e722f2cc1b1cb43851dee517e67e934ba",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077309,
-        "alphaZeroPercent": 68.49346160888672,
-        "alphaAbove245": 469017,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           244,
@@ -2149,12 +2112,7 @@
           766,
           1517
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2198,14 +2156,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1508795,
-        "mode": "RGBA",
+        "sha256": "4b0fe18190970fe0ce3d77334ee98d9e59a6fa5d27a2bb7e20c7f0ec8693886c",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132843,
-        "alphaZeroPercent": 72.0242182413737,
-        "alphaAbove245": 411380,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           276,
@@ -2213,12 +2169,7 @@
           736,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2270,8 +2221,147 @@
         "The external rescue tool is intentionally not included."
       ],
       "alphaQA": {
+        "width": 2025,
+        "height": 776,
+        "bytes": 2218006,
+        "sha256": "2a139e006207126776597d84803629aef3a2751af79511a665ffda02c112c73d",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZero": 509430,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          41,
+          34,
+          2001,
+          742
+        ],
+        "pass": true
+      },
+      "visualReview": "Root inspected the unchanged PNG composited on a dark background; complete silhouette and clean exterior."
+    },
+    {
+      "id": "prop-table-e1027",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-table-e1027.png",
+      "gitBlobSha": "3cfde579cf400ea162b846a00b2432f9a3d3e70d",
+      "width": 1245,
+      "height": 1263,
+      "bytes": 579445,
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "static"
+      ],
+      "generationPrompt": "Create ONE isolated furniture sprite reproducing the exact Eileen Gray Adjustable Table E1027 shown in the TWO attached official ClassiCon product photographs. This asset belongs only to the white prologue room of Alien: Covenant (2017), where this model is identified. Faithfully preserve the photographed proportions and construction: polished silver/chrome tubular-steel frame, thin round transparent clear-glass tabletop inside a circular chrome rim, the single offset telescoping upright assembly, its small rectangular top handle, the row of adjustment holes, the locking pin and fine hanging chain, and the distinctive open C-shaped floor base. Maintain the low adjustment height in the photographs. The two views show the same one table, not two objects.\n\nRender exactly ONE complete empty table, near-side three-quarter view matching the SECOND photo: offset upright at LEFT, tabletop projecting to RIGHT, the open gap of the C-base readable. Entire top rim, handle, chain and base inside the image with transparent padding. Chrome must reflect neutral soft studio light with clear dark and bright definition; the glass must remain clear and genuinely translucent with subtle edge reflections, not a white opaque disk. No redesign, extra leg, decorative element or invented hardware. No tea objects, chair, room, person, floor, ground shadow, cast shadow, white background, haze, vignette, checkerboard, text, logo or watermark. Background outside the physical table must be real transparent alpha0; opaque metal, appropriate transparent glass, narrow antialiasing only on contours. One production-ready complete furniture cutout.",
+      "inputReferences": [
+        {
+          "file": "table-e1027-classicon.jpg",
+          "url": "https://www.classicon.com/assets/images/p/ClassiCon-adjustable-table-e-1027-down-40_2x-ya36vpkjtwqbev2.jpg",
+          "source_page": "https://www.classicon.com/en/product/adjustable-table-e-1027.html",
+          "kind": "Primary licensed manufacturer product photography"
+        },
+        {
+          "file": "table-e1027-classicon-side.jpg",
+          "url": "https://www.classicon.com/assets/images/9/ClassiCon-adjustable-table-e-1027-down-side_2x-c7km0hbwh87qazf.jpg",
+          "source_page": "https://www.classicon.com/en/product/adjustable-table-e-1027.html",
+          "kind": "Primary licensed manufacturer product photography"
+        }
+      ],
+      "filmIdentificationSource": "https://filmandfurniture.com/2017/05/carlo-bugatti-chair-in-alien-covenant/",
+      "limitations": [
+        "model-reference reproduction; exact film-instance identity/height not certified",
+        "Official licensed-manufacturer photos of the same named design, not a photo of the actual screen-used instance. Preserve clear-glass translucency. Do not apply this model to unrelated DLC tables.",
+        "No separate E1027 table instance exists in the restored module's white room; the procedural tea-set support must not be replaced arbitrarily."
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "alphaQA": {
         "status": "pending-numeric-check"
       }
+    },
+    {
+      "id": "prop-chair-bugatti",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-chair-bugatti.png",
+      "gitBlobSha": "a053601cfea8fa9cd9e27097a25b21f56edbbe5e",
+      "width": 1086,
+      "height": 1448,
+      "bytes": 1270741,
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "static"
+      ],
+      "generationPrompt": "Create ONE isolated furniture sprite of the Carlo Bugatti throne-chair shown in the attached gallery photograph. Faithfully reproduce this specific documented historical chair's complete construction, proportions, ornament and materials rather than inventing a fantasy throne. Preserve its highly asymmetric silhouette: exceptionally tall turned dark-wood finial column at the rear RIGHT, much shorter capped post at the LEFT with a round tasseled disk, large circular parchment-covered backrest between them with concentric ornament and a central round medallion, visible decorative cords spanning from the tall post, curved walnut/ebonized side frames and armrests, pale golden parchment seat and inner panels, warm hammered copper accents, fine pewter/bone-colored inlay, long warm tan silk fringes under the armrests, and the angular stepped wooden floor feet. Keep the authentic dark walnut and blackened wood, antique copper and aged cream/gold vellum palette. Maintain the photographed near-front three-quarter angle and the same asymmetry; do not mirror it or make it symmetric. Whole tall finial, both armrests, all tassels and all feet fully inside the frame with safe empty padding.\n\nOne complete empty chair only. Remove every gallery element, wall, artwork, information plaque, radiator, floor and shadow. No human, cushion added, extra chair, decoration added, sci-fi redesign, exaggerated ornament, text or watermark. Neutral soft studio lighting that makes its real materials readable. Genuine transparent alpha0 background and open gaps between structural parts, opaque chair materials, narrow edge antialiasing; no haze, white veil, floor reflection, checkerboard or cast shadow. This is a same-design reference asset for the white prologue room of Alien: Covenant, not a claim that this photographed antique is the actual film prop.",
+      "inputReferences": [
+        {
+          "file": "chair-bugatti-origines.jpg",
+          "url": "https://www.galerieorigines.com/sites/default/files/styles/oeuvre_desktop/public/oeuvres/489_Carlo%20Bugatti%2C%20Fauteuil-tr%C3%B4ne7.jpg?itok=dTKX5waG",
+          "source_page": "https://www.galerieorigines.com/en/artwork/collections/art-nouveau/carlo-bugatti-throne-chair",
+          "kind": "Original gallery photograph of documented Carlo Bugatti throne-chair, c1900, inventory489; comparable example, not screen-used instance"
+        }
+      ],
+      "filmIdentificationSource": "https://filmandfurniture.com/2017/05/carlo-bugatti-chair-in-alien-covenant/",
+      "limitations": [
+        "comparable documented design; exact screen-used variant not certified",
+        "Gallery example circa1900 vs film-identification description circa1905. Shared asymmetric throne design, but inlay, tassels, patina, dimensions and details of film instance cannot be certified from this source. Do not substitute for unrelated DLC chairs."
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "alphaQA": {
+        "status": "pending-numeric-check"
+      }
+    },
+    {
+      "id": "prop-piano",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-piano.png",
+      "gitBlobSha": "74dd2707fc37bfd221840528e9990dd7f22ca126",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1402646,
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "animationsVerified": false,
+      "availableStates": [
+        "static"
+      ],
+      "generationPrompt": "Create ONE complete isolated photorealistic game-prop sprite of the black Steinway concert grand piano actually visible in these two reference photographs from the Alien: Covenant white-room prologue. Reference 1 is the wide studio publicity film image: use its precise whole-piano silhouette and camera angle. Reference 2 is the closer final-film image: use its glossy ebony surface, inner rim and visible warm brown/brass soundboard details. Reproduce the documented piano as closely as the photographs allow, without introducing a different modern piano design. Three-quarter side/front view, keyboard end to the LEFT and curved long tail to the RIGHT, open raised lid at the reference angle held by its diagonal support, full keyboard, lid, entire curved body, all three legs, rolling casters and the pedal lyre fully visible. Preserve the substantial length of the concert grand, the reference's straight leg style and black high-gloss cabinet. Three pedals beneath the keyboard. The subject is ONLY the piano: omit the actors, piano bench, room, walls, floor, painting, other furniture and all shadows outside the object. Do not add tablets, screens, people or decorative accessories. Show the instrument's own small maker emblem only if consistent with the reference; no labels, captions or added text. Neutral soft lighting reveals black cabinet details without blowing out reflections. Keep the complete instrument inside the frame with generous transparent margin, no crop. Output a single PNG with a genuinely transparent exterior background: all pixels outside the piano must have alpha 0, the piano body must be solid opaque material with alpha 255, antialiasing limited to the immediate silhouette edge. No white haze, fake checkerboard, grey backdrop, floor reflection, border, cast shadow or translucent veil.",
+      "inputReferences": [
+        {
+          "page": "https://www.thewrap.com/alien-covenant-michael-fassbender-photo/",
+          "url": "https://www.thewrap.com/wp-content/uploads/2016/12/Michael-Fassbender-Alien-Covenant.jpg",
+          "file": "piano-film-thewrap.jpg",
+          "sha256": "4455e5cf0e9172661c112c7b9f07113ea63518b253ab3f8b422be52788bfacbf",
+          "inspected": true,
+          "description": "Wide studio publicity frame with David at full black Steinway grand, raised lid, keyboard left."
+        },
+        {
+          "page": "https://www.avpcentral.com/david",
+          "url": "https://www.avpcentral.com/images/peter-weyland/david-plays-for-weyland.webp",
+          "file": "piano-film-avp.webp",
+          "sha256": "a488bb49d3e479fb0af2c1f6f3eee26220dad69b97a6e8a21f733a45e3ef0a73",
+          "inspected": true,
+          "description": "Final-film closer frame with Weyland behind David. Black grand, warm plate/soundboard. WEBP source retained; JPEG inspection derivative only."
+        }
+      ],
+      "limitations": [
+        "Full key layout and piano portions occluded by David are reconstructed.",
+        "Steinway model-D attribution supported secondarily but Sterling finish is speculative and not certified.",
+        "Generated emblem and minute hardware not independently exact."
+      ],
+      "runtimeAdmission": "candidate",
+      "alphaQA": {
+        "status": "pending-numeric-check"
+      },
+      "rooms": [
+        "whiteroom"
+      ]
     }
   ],
   "blocked": [
