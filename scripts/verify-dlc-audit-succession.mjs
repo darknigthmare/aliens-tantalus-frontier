@@ -19,6 +19,9 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 as bibleDocumentsBaseline,
   AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 as bibleDocumentsSuccessors,
   reviewedDlcBibleDocumentsHostDigest20261126 as advanceBibleDocuments,
+  AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 as bibleBridgeBaseline,
+  AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 as bibleBridgeSuccessors,
+  reviewedDlcBibleBridgeHostDigest20261126 as advanceBibleBridge,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
@@ -27,7 +30,7 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
-  reviewedXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
+  reviewedXenoTrialsTantalusJoinV206, verifyXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -121,11 +124,11 @@ const expectedSpritePaths = [
 ];
 const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
   'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors)])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents) source chain/;
+const finalEndpoint = path => bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -398,4 +401,38 @@ test('DLC bible admission is limited to the exact documents and excludes them fr
     assert.equal(isPublicDistributionPathV86(path), false, path);
     assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
   }
+});
+
+
+test('the campaign-to-DLC bible link advances its exact historical document and preserves all published receipts', () => {
+  const path = 'docs/narrative/CAMPAGNE_PRINCIPALE.md';
+  assert.equal(bibleBridgeBaseline, '16686e8681cc0370db3fa3df2967704ef1862155');
+  assert.deepEqual(Object.keys(bibleBridgeSuccessors), [path]);
+  assert.equal(sha(JSON.stringify(bibleBridgeSuccessors)), '9144fec80c7f058a58d9c027af8addcb61e4bb5f5abd8503d9ef4967d2b70edc');
+  assert.ok(Object.isFrozen(bibleBridgeSuccessors) && Object.isFrozen(bibleBridgeSuccessors[path]));
+  const receipt = bibleBridgeSuccessors[path];
+  assert.equal(receipt.previousSha256, xenoJoin.successors[path].currentSha256);
+  const document = read(path).toString();
+  const addition = "## DLC issus des œuvres — reprise du 26 novembre 2026\n\nLa [bible et l'index des DLC](DLC_INDEX_20261126.md) regroupent les 18 familles retrouvées, les décisions des discussions disponibles, leurs versions, PR et manques documentés. La provenance originale annoncée ci-dessus concerne les campagnes Cocyte et leurs annexes ; les adaptations des œuvres et la branche originale Projet Lazare gardent leurs sources et leurs limites dans cet index. La fidélité 1:1 reste une cible suivie élément par élément.\n\n";
+  assert.equal(document.split(addition).length, 2, 'Exactly one index bridge is added');
+  assert.equal(sha(document.replace(addition, '')), receipt.previousSha256,
+    'The original campaign bible remains byte-identical after removing its explicit DLC index link');
+  assert.equal(sha(document), receipt.currentSha256);
+  assert.equal(advanceBibleBridge(path, receipt.previousSha256), receipt.currentSha256);
+  assert.equal(reviewedXenoTrialsTantalusJoinV206(path, xenoJoin.successors[path].previousSha256), receipt.currentSha256);
+  for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceBibleBridge(path, value), /Broken DLC-bible-document-bridge source chain/);
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceBibleBridge(path, 'unchanged'), 'unchanged');
+  const terminal = read(audit).toString();
+  assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126'))),
+    '6dec230cc7c3e1da4d06fc7e72bcb2af42359732218d711402d1b35ed42ee159', 'All preceding AVP, Aliens, Fiorina and DLC document receipts are preserved');
+  assert.equal(Object.hasOwn(bibleBridgeSuccessors, audit), false);
+});
+
+test('the complete Tantalus join accepts the reviewed campaign link and rejects one changed document byte', () => {
+  assert.ok(verifyXenoTrialsTantalusJoinV206().successors > 0);
+  const path = 'docs/narrative/CAMPAGNE_PRINCIPALE.md';
+  const altered = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n')]) : read(candidate);
+  assert.throws(() => verifyXenoTrialsTantalusJoinV206(altered), /Unreviewed tantalus-join source bytes: docs\/narrative\/CAMPAGNE_PRINCIPALE\.md/);
 });
