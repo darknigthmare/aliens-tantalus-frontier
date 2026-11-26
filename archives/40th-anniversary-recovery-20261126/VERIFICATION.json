@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-11-26",
+  "repository": "darknigthmare/aliens-tantalus-frontier",
+  "pullRequest": 72,
+  "verifiedCommit": "8e5338da2879ecb4ec793fdbd62c0990f5d57237",
+  "verifiedTree": "49c719ac6f7d1ca786dc3de63e21d900c2f7e2c0",
+  "originalArchives": [
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.1.0.zip",
+      "sizeBytes": 15637634,
+      "sha256": "63aeb2bdb8c5429d350c24c4536152c06fe081d74bb11e9b6d65a1f3f6ded4b8",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.2.0.zip",
+      "sizeBytes": 14005712,
+      "sha256": "665d879573e567d545471f57c00f862047a6c1694a14b17bdd941c840da88bf1",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.3.0.zip",
+      "sizeBytes": 13167560,
+      "sha256": "6d69c9756d000dc33bbfa9cf41f007c6cdcfb6a76e5f9dde7c841339c27635a7",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.4.0.zip",
+      "sizeBytes": 20931496,
+      "sha256": "9c4ae6bcd4fda673ed1e3e0700662089cf3d373908c6de851936050bba011175",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.5.0.zip",
+      "sizeBytes": 23202673,
+      "sha256": "5dadd69108a432244edefa224996849a0af9538540162b7c7ff28b7a4129d605",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    },
+    {
+      "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.6.0.zip",
+      "sizeBytes": 87298836,
+      "sha256": "30d3d3b93f3b9f6dc01347b325ce829e0270cbe5a36585ff6c9789982cb523a4",
+      "crcVerified": true,
+      "physicallyReconstructedAndSha256Matched": true
+    }
+  ],
+  "remoteVerification": {
+    "fileCount": 36,
+    "bytes": 174615676,
+    "treeTruncated": false,
+    "shaAndSizeMismatches": 0,
+    "files": [
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.1.0/archive.zip.part001",
+        "sha": "a6c138c72d8e24f834fc60e6f900fbbf93a17325",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.1.0/archive.zip.part002",
+        "sha": "c828469af4da935ead85e0095f0ead218e0ce195",
+        "size": 5151874
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.2.0/archive.zip.part001",
+        "sha": "9bb4fc6477b01f19306e9badf0083c3dc9ff5465",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.2.0/archive.zip.part002",
+        "sha": "82915ea3ab450b8a16ce3d658238e22c39232fad",
+        "size": 3519952
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.3.0/archive.zip.part001",
+        "sha": "8467260ee705fa3c7b506d219c3f96808f3353a5",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.3.0/archive.zip.part002",
+        "sha": "b22be0a541a4749b2742b54762171d20b324bda5",
+        "size": 2681800
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.4.0/archive.zip.part001",
+        "sha": "4d7451a75e4447d46d1f16a135cb1db3d408a9e9",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.4.0/archive.zip.part002",
+        "sha": "00cded1112d734534c52715bdf4ea52a2e85ebf9",
+        "size": 10445736
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part001",
+        "sha": "07f48a865d1f30151031d670ffa35a33b50d4aae",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part002",
+        "sha": "128e39f6aa99e4813008f259129f4fa3225b5018",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part003",
+        "sha": "f513fb288840817943a899921bce03d016cefd38",
+        "size": 2231153
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part001",
+        "sha": "d5197ee8ffd87a6bdaf863d8634caac474b9b605",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part002",
+        "sha": "861e37575d7695936e4070242388ab410e9d0f3b",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part003",
+        "sha": "d4c2967861e9453cbfdecc1547c64ba42ea7949d",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part004",
+        "sha": "2e2046b9e2fd889bfe0ecdb0fdaebc9b3922dd44",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part005",
+        "sha": "e9344c321aceec943b121bd82adbf669348afda4",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part006",
+        "sha": "87d62f5a699d769ed9236bd8a4bdf00a85a995f2",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part007",
+        "sha": "d2a30de6e01a5fbe361ff398f9ad7add85dca9d3",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part008",
+        "sha": "277546211d50e07763f96485fff38b7c78b9ae8b",
+        "size": 10485760
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part009",
+        "sha": "a4bba092eb78b6fb4779c09bec768c9aaae029d5",
+        "size": 3412756
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/PACK_MANIFEST.json",
+        "sha": "a21ea9fbe516e7ed4bf17c3097bf686c41c3cfb0",
+        "size": 62886
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/README.md",
+        "sha": "122050854c9093e1a3b6775a72864bd14e32924b",
+        "size": 3856
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/ARCHITECTURE_CHANGES.json",
+        "sha": "a0884810e051376bdaafeab7790d247d8880d098",
+        "size": 78300
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CHANGELOG_V0_2.md",
+        "sha": "26c5c590ac2750ab5407c4fc1a32eef1df4b2553",
+        "size": 2808
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CHANGELOG_V0_3.md",
+        "sha": "df4977efee4246c34bbebb6fc9ae6a1437beb849",
+        "size": 2431
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CHANGELOG_V0_4.md",
+        "sha": "a6edcd9c5f89a3b95deda51c3c469eb6fd81ea72",
+        "size": 2603
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CHANGELOG_V0_5.md",
+        "sha": "773eef287da729a31a0be5ec3b4b330233fb4d90",
+        "size": 2506
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CHANGELOG_V0_6.md",
+        "sha": "6143fead9c7c0a6ff0ca822812a14fc10b528ed3",
+        "size": 830
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CODEX_40TH_V0_5.md",
+        "sha": "29157b45708eee94cb9680d58b9845ff1b466a33",
+        "size": 126232
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CODEX_40TH_V0_6.md",
+        "sha": "9fe5fbbdb327471314156a22439154e4001b8de2",
+        "size": 70562
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/CONTENT_COUNTS.json",
+        "sha": "355aa5b52879596d06bb0846fff1707189b48b59",
+        "size": 623
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/QA_SCOPE.md",
+        "sha": "021db19951c29617b58fc136bbc58313412771b0",
+        "size": 1452
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/documents/docs/SOURCES_ET_ADAPTATION.md",
+        "sha": "ff5ab57eda978d059fa3a7a0d7583011fb60fd65",
+        "size": 3759
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+        "sha": "995a302d5882a8e34866aa7131753cd2ead0095f",
+        "size": 7888
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/README.md",
+        "sha": "3d0927e4819efb471689fc469c9025faca311e4a",
+        "size": 2255
+      },
+      {
+        "path": "archives/40th-anniversary-recovery-20261126/restore.py",
+        "sha": "bb0b66e755aff22d24b826dff745941f94d7060e",
+        "size": 2774
+      }
+    ]
+  },
+  "scope": "The immutable source commit above contains the 36 archived files checked against local hashes and byte sizes. This receipt records their verification; it does not claim runtime integration, successful whole-project CI, or visual 1:1 fidelity.",
+  "unrecoveredPreviousIntegrationCommit": "1f39f0f2c41e6a8c80eca4fd5481b92ac372972d",
+  "deletionPerformedByThisRecovery": false
+}
