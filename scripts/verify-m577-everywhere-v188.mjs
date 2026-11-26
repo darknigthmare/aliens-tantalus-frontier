@@ -198,7 +198,8 @@ test('C3 preparation screen: Noor Okafor listed, marked unavailable at the infir
   assert.match(COLONY_C3_NOOR_PREP_V188.status.fr, /À L’INFIRMERIE/); assert.match(COLONY_C3_NOOR_PREP_V188.status.en, /AT THE INFIRMARY/);
   const app = read('src/app.js');
   assert.match(app, /const preparationCrewV188 = colonyPreparationCrewV188\(campaign\.id, brief\.crewIds\);/);
-  assert.match(app, /<span>ESCOUADE<\/span><b>\$\{soloOperationV121 \? 'UN OPÉRATEUR · SOLO' : escapeHtml\(crewNames\.join\(', '\) \|\| 'AUCUNE'\)\}<\/b>\$\{soloOperationV121 \? '' : unavailableCrewRowsV188\}/);
+  assert.match(app, /<span>ESCOUADE<\/span><b>\$\{fiorinaV114 \? 'RIPLEY · ARCHIVE SOLO' : soloOperationV121 \? 'UN OPÉRATEUR · SOLO' : escapeHtml\(crewNames\.join\(', '\) \|\| 'AUCUNE'\)\}<\/b>\$\{soloOperationV121 \? '' : unavailableCrewRowsV188\}/,
+    'Fiorina identifies Ripley; the ordinary squad keeps its unavailable-member rows');
   assert.match(app, /<span>INDISPONIBLE<\/span><b class="crew-unavailable-v188"[^`]*<span>MOTIF<\/span>/);
 });
 

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="300" viewBox="0 0 160 300"><title>miller · interprétation vectorielle</title><defs><linearGradient id="steel" x2="1" y2=".7"><stop stop-color="#c8c9bd"/><stop offset=".28" stop-color="#69767c"/><stop offset=".57" stop-color="#a4aaab"/><stop offset="1" stop-color="#293a44"/></linearGradient><linearGradient id="dark" x2=".8" y2="1"><stop stop-color="#65717b"/><stop offset=".35" stop-color="#17232a"/><stop offset=".72" stop-color="#090e14"/><stop offset="1" stop-color="#435560"/></linearGradient><linearGradient id="red" x2="1" y2="1"><stop stop-color="#a32f2d"/><stop offset=".4" stop-color="#811f25"/><stop offset="1" stop-color="#390f1c"/></linearGradient><linearGradient id="skin" x2="1" y2="1"><stop stop-color="#a57b49"/><stop offset=".5" stop-color="#696449"/><stop offset="1" stop-color="#313c39"/></linearGradient></defs><g stroke="#10191d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M49 177 39 230 33 281 60 282 77 223 85 279 113 280 109 230 107 177Z" fill="#55594f"/>
+ <path d="M46 212 65 216M40 245 57 249M88 210 107 216M91 244 109 243" stroke="#cfb3a3" opacity=".18" fill="none"/>
+ <path d="M32 274 58 273 63 291 62 298 20 298 20 291ZM86 274 109 274 128 291 129 298 87 298Z" fill="#171f24"/>
+ <path d="M27 294H60M89 294H125" stroke="#787b75"/>
+ <path d="M46 79 33 97 31 162 39 189 76 198 112 184 113 98 94 80Z" fill="#556266"/>
+ <path d="M41 94 47 151 40 181M101 96 98 147 108 174M81 91 79 189M45 156 70 154M87 153 105 150" stroke="#d3b2a0" opacity=".30" fill="none"/>
+ <path d="M34 96 22 113 15 164 20 189 34 194 41 176 47 117ZM105 98 120 111 127 145 147 177 135 190 110 159 97 123Z" fill="#556266"/>
+ <path d="M23 141 35 144M116 140 126 139" stroke="#c9bfb0" opacity=".28"/>
+ <path d="M20 184 34 187 36 205 23 210 15 201ZM134 177 148 174 155 192 143 203 130 193Z" fill="#131e25"/>
+ <path d="M59 70 61 88 82 99 97 79 88 68Z" fill="#bf9e7c"/>
+ <path d="M57 29 69 17 90 20 103 34 99 53 109 61 99 67 94 82 77 86 63 73 56 53Z" fill="#bf9e7c"/>
+ <path d="M88 43 100 47M97 49 98 51M92 71 101 69" fill="none" stroke="#392a26"/>
+ <path d="M55 53 49 43 52 24 66 11 86 13 99 22 106 37 96 33 83 26 72 32 66 51 63 64 59 67Z" fill="#302b25"/>
+ <path d="M55 38 60 25 71 20M60 46 67 30M76 21 88 23" stroke="#9b8a79" opacity=".25" fill="none"/>
+ <path d="M47 87 61 80 77 96 98 79 107 91 83 119 67 118Z" fill="#292e2d"/>
+ <path d="M37 91 47 89 58 178 103 174 100 88 110 94 111 189 53 192Z" fill="#18252a"/>
+ <path d="M41 95 46 95 56 168M104 99 107 170" stroke="#a5aa9f" opacity=".45"/>
+ <path d="M40 179 112 176 114 189 42 193Z" fill="#121b21"/><rect x="71" y="177" width="15" height="13" rx="2" fill="#8a9186"/>
+ <path d="M49 192 57 220 72 224M104 189 105 219 86 227" fill="none" stroke="#171f26" stroke-width="7"/>
+ <circle cx="45" cy="107" r="9" fill="#d5d5b6"/><circle cx="45" cy="107" r="5" fill="#f1ecbc"/>
+ <circle cx="105" cy="107" r="8" fill="#b3bbaa"/><circle cx="105" cy="107" r="4" fill="#e7e6be"/>
+ <rect x="53" y="124" width="14" height="18" rx="2" fill="#2d3e43"/><path d="M55 128H64M55 133H64" stroke="#82928b"/>
+ <path d="M22 102 15 106 12 158 24 169 31 159 33 118Z" fill="#283b42"/><path d="M49 35Q52 1 82 7L108 30 100 38 88 22 66 27 57 50Z" fill="#252b2c"/></g></svg>

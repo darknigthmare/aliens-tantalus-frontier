@@ -1,0 +1,302 @@
+{
+  "version": "112.0.0-rc.1",
+  "scope": "saved public-drive exports validated by current importer, not playthrough counts",
+  "checks": [
+    {
+      "file": "beacon-states-v112/01-avant-sas-optique.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/02-entree-atelier.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/03-avant-coffret.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/04-scelles-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/05-coffret-ouvert.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/06-amorcage.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/07-atelier-balise.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/08-entree-conduites.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/09-coursive-balisee.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/10-retour-medical.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/11-sentinelle-balise.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/12-defense-balisee.json",
+      "ok": true
+    },
+    {
+      "file": "beacon-states-v112/13-repli-balise.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/01-isolement.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/02-premier-impact.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/03-pression-engagee.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/04-breche.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/05-contact-apres-breche.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/06-plaques-collectees.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/06a-avant-les-plaques.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/07-refection-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/08-refection-terminee.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/09-soudure-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/10-renfort-soude.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/11-decoupe-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/12-route-rouverte.json",
+      "ok": true
+    },
+    {
+      "file": "breach-states-v112/13-repli-apres-breche.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/01-avant-coupure.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/02-coupure-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/03-operations-noir.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/04-ombre-et-poursuite.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/05-torche-contact.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/06-defense-dans-le-noir.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/07-retour-circuit-conserve.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/08-operations-retablie.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/09-ligne-sans-lampes.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/10-defense-tenue-noir.json",
+      "ok": true
+    },
+    {
+      "file": "lighting-states-v112/11-repli-noir.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/01-operations.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/02-galerie-arrivee.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/03-blessure-reelle.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/04-stock-munitions.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/05-lot-distribue.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/06-secours-collectes.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/07-soin-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/08-soin-termine.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/09-diagnostic-actif.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/10-alarme-persistante.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/11-relais-via-reserve.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/12-newt-operations.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/13-cartouche-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/14-sentinelle-ravitaillee.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/15-repli-boucle.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/eng01-plaques.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/eng02-soudure-en-cours.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/eng03-renforce.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/eng04-decoupe.json",
+      "ok": true
+    },
+    {
+      "file": "logistics-states-v112/eng05-decoupe-terminee.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/01-porte-residentielle.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/02-fuite-operations.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/03-contact-franchi.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/04-avant-impulsion.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/04-detecteur.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/05-defense-mobile.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/06-liaison-isolee.json",
+      "ok": true
+    },
+    {
+      "file": "pursuit-states-v112/07-reprise-isolee.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/00-insertion.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/01-hadley-ouvert.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/02-operations.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/03-relais.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/04-newt.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/05-retour-operations.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/06-defense.json",
+      "ok": true
+    },
+    {
+      "file": "states-v112/07-repli.json",
+      "ok": true
+    }
+  ]
+}

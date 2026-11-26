@@ -1,0 +1,480 @@
+{
+  "method": "Entrées publiques depuis insertion normale; lit positions pour planifier, ne modifie aucune position, vie, réserve, mémoire ni objectif",
+  "complete": true,
+  "inputs": 4098,
+  "elapsed": 102.45000000000617,
+  "enemyTransfers": 6,
+  "team": [
+    {
+      "id": "ripley",
+      "hp": 100,
+      "ammo": 14
+    },
+    {
+      "id": "hicks",
+      "hp": 100,
+      "ammo": 23
+    },
+    {
+      "id": "hudson",
+      "hp": 86,
+      "ammo": 23
+    },
+    {
+      "id": "newt",
+      "hp": 100,
+      "ammo": 0
+    }
+  ],
+  "lighting": {
+    "powered": true,
+    "torch": true,
+    "angle": -0.17299749361075598,
+    "exposure": "éclairé",
+    "control": null,
+    "metrics": {
+      "started": 3,
+      "completed": 3,
+      "interrupted": 0,
+      "torchSwitches": 2
+    }
+  },
+  "darkRooms": [
+    "v106-sentry",
+    "v112-workshop",
+    "v112-conduit"
+  ],
+  "states": [
+    {
+      "label": "01-avant-coupure",
+      "room": "v107-operations",
+      "elapsed": 13.525000000000125,
+      "hp": 100,
+      "ammo": 48,
+      "lighting": {
+        "powered": true,
+        "torch": true,
+        "angle": 0,
+        "exposure": "éclairé",
+        "control": {
+          "id": "service-switch",
+          "name": "Éclairage du poste"
+        },
+        "metrics": {
+          "started": 0,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "02-coupure-en-cours",
+      "room": "v107-operations",
+      "elapsed": 13.92500000000013,
+      "hp": 100,
+      "ammo": 48,
+      "lighting": {
+        "powered": true,
+        "torch": true,
+        "angle": 0,
+        "exposure": "éclairé",
+        "control": {
+          "id": "service-switch",
+          "name": "Éclairage du poste"
+        },
+        "metrics": {
+          "started": 1,
+          "completed": 0,
+          "interrupted": 0,
+          "torchSwitches": 0
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "03-operations-noir",
+      "room": "v107-operations",
+      "elapsed": 14.525000000000139,
+      "hp": 100,
+      "ammo": 48,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": 0,
+        "exposure": "ombre",
+        "control": {
+          "id": "service-switch",
+          "name": "Éclairage du poste"
+        },
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 1
+    },
+    {
+      "label": "04-ombre-et-poursuite",
+      "room": "v107-operations",
+      "elapsed": 19.249999999999975,
+      "hp": 100,
+      "ammo": 48,
+      "lighting": {
+        "powered": false,
+        "torch": false,
+        "angle": 0,
+        "exposure": "ombre",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 1
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 2
+    },
+    {
+      "label": "05-torche-contact",
+      "room": "v107-operations",
+      "elapsed": 19.249999999999975,
+      "hp": 100,
+      "ammo": 48,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 3.0736032598757808,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 2
+    },
+    {
+      "label": "06-defense-dans-le-noir",
+      "room": "v107-operations",
+      "elapsed": 26.249999999999577,
+      "hp": 100,
+      "ammo": 45,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 3.0542263712959463,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 2
+    },
+    {
+      "label": "07-retour-circuit-conserve",
+      "room": "v107-operations",
+      "elapsed": 44.299999999998555,
+      "hp": 100,
+      "ammo": 20,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0.17155694559196266,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": {
+          "id": "ops-service",
+          "label": "Maintenance",
+          "open": true,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 0,
+          "lastImpact": 0
+        },
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 6
+    },
+    {
+      "label": "08-operations-retablie",
+      "room": "v107-operations",
+      "elapsed": 46.17499999999845,
+      "hp": 100,
+      "ammo": 20,
+      "lighting": {
+        "powered": true,
+        "torch": true,
+        "angle": 0.17155694559196266,
+        "exposure": "éclairé",
+        "control": {
+          "id": "service-switch",
+          "name": "Éclairage du poste"
+        },
+        "metrics": {
+          "started": 2,
+          "completed": 2,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 6
+    },
+    {
+      "label": "09-ligne-sans-lampes",
+      "room": "v106-sentry",
+      "elapsed": 67.34999999999819,
+      "hp": 100,
+      "ammo": 20,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": 0.17155694559196266,
+        "exposure": "éclairé",
+        "control": {
+          "id": "service-switch",
+          "name": "Commande de service"
+        },
+        "metrics": {
+          "started": 3,
+          "completed": 3,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 6
+    },
+    {
+      "label": "10-defense-tenue-noir",
+      "room": "v106-sentry",
+      "elapsed": 82.90000000000173,
+      "hp": 100,
+      "ammo": 14,
+      "lighting": {
+        "powered": false,
+        "torch": true,
+        "angle": -0.17299749361075598,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 3,
+          "completed": 3,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 6
+    },
+    {
+      "label": "11-repli-noir",
+      "room": "v106-hadley",
+      "elapsed": 102.45000000000617,
+      "hp": 100,
+      "ammo": 14,
+      "lighting": {
+        "powered": true,
+        "torch": true,
+        "angle": -0.17299749361075598,
+        "exposure": "éclairé",
+        "control": null,
+        "metrics": {
+          "started": 3,
+          "completed": 3,
+          "interrupted": 0,
+          "torchSwitches": 2
+        }
+      },
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 6
+    }
+  ]
+}

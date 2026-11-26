@@ -1,0 +1,61 @@
+{
+  "version": "108.0.0-rc.1",
+  "separateFromGameplayChecks": true,
+  "transport": {
+    "directFileNavigation": "blocked by administrator policy; not validated",
+    "fallback": "authorized exact HTML bytes through set_content; no security settings changed"
+  },
+  "htmlSha256": "dd0d86b8046aa354020df7155b0c5f59213b0cf14e44500d55e6e5d5c34ebbd7",
+  "checks": [
+    {
+      "name": "HTML distribué initialisé par son chargeur Blob",
+      "ok": true
+    },
+    {
+      "name": "Export réel : schéma108 et six lieux",
+      "ok": true
+    },
+    {
+      "name": "Cinq sas partagés présents dans le point exporté",
+      "ok": true
+    },
+    {
+      "name": "Aucune requête externe pendant le jeu",
+      "ok": true
+    },
+    {
+      "name": "Six fiches géométriques Codex",
+      "ok": true
+    },
+    {
+      "name": "Filtrage du mobilier médical",
+      "ok": true
+    },
+    {
+      "name": "Réinitialisation du filtre Codex",
+      "ok": true
+    },
+    {
+      "name": "Seize images de preuve embarquées",
+      "ok": true
+    },
+    {
+      "name": "Seize PNG du navigateur décodables",
+      "ok": true
+    },
+    {
+      "name": "Documents et jeu sans erreur JavaScript observée",
+      "ok": true
+    },
+    {
+      "name": "Aucune requête média externe requise",
+      "ok": true
+    },
+    {
+      "name": "HTML distribué identique au fichier de recette",
+      "ok": true
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": []
+}

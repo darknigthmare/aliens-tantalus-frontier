@@ -1,3 +1,4 @@
+import { AVP_HOST_SUCCESSORS_20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -69,7 +70,11 @@ test('the complete legacy bridge validates the joined view while default metadat
 
 test('the completion relays to the exact terminal V205 audit and remains source-only', () => {
   const terminal = 'scripts/audit-xeno-production-assets-v206.mjs';
-  assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
+  assert.deepEqual(relativeImports(read(terminal).toString()), ['./audit-dlc-avp-2004-20261125.mjs']);
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
   assert.equal(Object.hasOwn(COMPLETION_SOURCES_V186, terminal), false);
   for (const path of [terminal, 'scripts/verify-xeno-trials-completion-audit-v186.mjs']) {

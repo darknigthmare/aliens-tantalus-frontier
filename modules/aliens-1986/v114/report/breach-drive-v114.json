@@ -1,0 +1,446 @@
+{
+  "method": "Parcours continu depuis insertion normale, entrées publiques uniquement, aucun état acteur/ressource/objectif réécrit",
+  "complete": true,
+  "inputs": 4466,
+  "elapsed": 111.65000000000826,
+  "enemyTransfers": 5,
+  "team": [
+    {
+      "id": "ripley",
+      "hp": 100,
+      "ammo": 7
+    },
+    {
+      "id": "hicks",
+      "hp": 100,
+      "ammo": 22
+    },
+    {
+      "id": "hudson",
+      "hp": 86,
+      "ammo": 22
+    },
+    {
+      "id": "newt",
+      "hp": 100,
+      "ammo": 0
+    }
+  ],
+  "engineering": {
+    "plates": 1,
+    "spent": 2,
+    "collected": true,
+    "nearby": null,
+    "metrics": {
+      "stocks": 1,
+      "reinforced": 1,
+      "cut": 1,
+      "repaired": 1,
+      "started": 4,
+      "interrupted": 0,
+      "enemyHits": 4,
+      "breaches": 1
+    }
+  },
+  "states": [
+    {
+      "label": "01-isolement",
+      "room": "v107-operations",
+      "elapsed": 10.050000000000075,
+      "hp": 100,
+      "ammo": 48,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": false,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 0,
+          "lastImpact": 0
+        },
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "02-premier-impact",
+      "room": "v107-operations",
+      "elapsed": 13.87500000000013,
+      "hp": 100,
+      "ammo": 48,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 1,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "03-pression-engagee",
+      "room": "v107-operations",
+      "elapsed": 14.60000000000014,
+      "hp": 100,
+      "ammo": 48,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 1,
+          "breaches": 0
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "04-breche",
+      "room": "v107-operations",
+      "elapsed": 18.375000000000025,
+      "hp": 100,
+      "ammo": 48,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 0
+    },
+    {
+      "label": "05-contact-apres-breche",
+      "room": "v107-operations",
+      "elapsed": 25.274999999999633,
+      "hp": 100,
+      "ammo": 42,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 2
+    },
+    {
+      "label": "06a-avant-les-plaques",
+      "room": "v107-service",
+      "elapsed": 39.29999999999884,
+      "hp": 100,
+      "ammo": 24,
+      "engineering": {
+        "plates": 0,
+        "spent": 0,
+        "collected": false,
+        "nearby": null,
+        "metrics": {
+          "stocks": 0,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 0,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "06-plaques-collectees",
+      "room": "v107-service",
+      "elapsed": 40.449999999998774,
+      "hp": 100,
+      "ammo": 24,
+      "engineering": {
+        "plates": 3,
+        "spent": 0,
+        "collected": true,
+        "nearby": null,
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 1,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "07-refection-en-cours",
+      "room": "v107-operations",
+      "elapsed": 49.29999999999827,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 3,
+        "spent": 0,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": true,
+          "hp": 0,
+          "brace": 0,
+          "breached": true,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 0,
+          "started": 2,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "08-refection-terminee",
+      "room": "v107-operations",
+      "elapsed": 50.999999999998174,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 2,
+        "spent": 1,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": false,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 1,
+          "started": 2,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "09-soudure-en-cours",
+      "room": "v107-operations",
+      "elapsed": 51.64999999999814,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 2,
+        "spent": 1,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": false,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 0,
+          "cut": 0,
+          "repaired": 1,
+          "started": 3,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "10-renfort-soude",
+      "room": "v107-operations",
+      "elapsed": 52.84999999999807,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 1,
+        "spent": 2,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": false,
+          "hp": 100,
+          "brace": 72,
+          "breached": false,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 0,
+          "repaired": 1,
+          "started": 3,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "11-decoupe-en-cours",
+      "room": "v107-operations",
+      "elapsed": 53.34999999999804,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 1,
+        "spent": 2,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": false,
+          "hp": 100,
+          "brace": 72,
+          "breached": false,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 0,
+          "repaired": 1,
+          "started": 4,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "12-route-rouverte",
+      "room": "v107-operations",
+      "elapsed": 54.299999999997986,
+      "hp": 100,
+      "ammo": 22,
+      "engineering": {
+        "plates": 1,
+        "spent": 2,
+        "collected": true,
+        "nearby": {
+          "id": "residential-ops",
+          "label": "Bloc résidentiel",
+          "open": true,
+          "hp": 100,
+          "brace": 0,
+          "breached": false,
+          "hits": 4,
+          "lastImpact": 18.375000000000025
+        },
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 1,
+          "repaired": 1,
+          "started": 4,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    },
+    {
+      "label": "13-repli-apres-breche",
+      "room": "v106-hadley",
+      "elapsed": 111.65000000000826,
+      "hp": 100,
+      "ammo": 7,
+      "engineering": {
+        "plates": 1,
+        "spent": 2,
+        "collected": true,
+        "nearby": null,
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 1,
+          "repaired": 1,
+          "started": 4,
+          "interrupted": 0,
+          "enemyHits": 4,
+          "breaches": 1
+        }
+      },
+      "enemyTransfers": 5
+    }
+  ]
+}

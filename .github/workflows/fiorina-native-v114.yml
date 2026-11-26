@@ -1,0 +1,155 @@
+name: Fiorina native integration
+on:
+  pull_request:
+    paths:
+      - 'src/alien3-*.js'
+      - 'src/fiorina-campaign-v114.js'
+      - 'src/game-production-runtime.js'
+      - 'src/mission-levels-v52.js'
+      - 'src/content.js'
+      - 'src/special-operations-v131.js'
+      - 'src/app.js'
+      - 'scripts/verify-fiorina-production-v114.mjs'
+      - 'scripts/verify-fiorina-sprite-renderer-v115.mjs'
+      - 'scripts/verify-fiorina-sprite-admissions-v115.mjs'
+      - 'scripts/public-fiorina-sprite-admissions-v115.mjs'
+      - 'scripts/qa-fiorina-sprites-v115.mjs'
+      - 'scripts/qa-fiorina-native-sprites-v115.mjs'
+      - 'scripts/qa-fiorina-native-v114.mjs'
+      - 'scripts/build-asset-filter.mjs'
+      - 'scripts/build.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'scripts/verify-audit-v143.mjs'
+      - 'docs/development/FIORINA_SPRITES_V115.md'
+      - 'docs/development/FIORINA_SPRITES_V115.json'
+      - 'docs/development/FIORINA_SPRITES_V116.md'
+      - 'docs/development/FIORINA_SPRITES_V116.json'
+      - 'assets/openai/sprites/alien3-fiorina-v115/**'
+      - 'sw.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'archives/project-recovery-20261116/**'
+      - '.github/workflows/fiorina-native-v114.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run check
+      - run: npm run test:project-recovery
+      - run: npm run test:fiorina
+      - run: npm run test:fiorina:sprites
+      - run: node --test scripts/verify-audit-v143.mjs scripts/verify-save-lifecycle-v143.mjs scripts/verify-operations-integration-v131.mjs
+      - name: Install real Canvas harness
+        run: npm install --prefix "$RUNNER_TEMP/fiorina-canvas" --ignore-scripts --no-audit --no-fund @napi-rs/canvas@0.1.100
+      - name: Verify delivered Fiorina pixels
+        env:
+          CANVAS_MODULE: ${{ runner.temp }}/fiorina-canvas/node_modules/@napi-rs/canvas
+        run: node scripts/qa-fiorina-sprites-v115.mjs "$RUNNER_TEMP/fiorina-sprites-qa"
+      - name: Verify native sprite hooks
+        env:
+          CANVAS_MODULE: ${{ runner.temp }}/fiorina-canvas/node_modules/@napi-rs/canvas
+        run: node scripts/qa-fiorina-native-sprites-v115.mjs "$RUNNER_TEMP/fiorina-native-sprites-qa"
+      - name: Package reviewed sprite sources
+        run: |
+          node --input-type=module - <<'JS' > "$RUNNER_TEMP/fiorina-sprite-pack.json"
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          import { lstat, readFile } from 'node:fs/promises';
+          import { verifyFiorinaSpriteAdmissionsV115, reviewedFiorinaSpritePackFilesV115 } from './scripts/public-fiorina-sprite-admissions-v115.mjs';
+          const verified = await verifyFiorinaSpriteAdmissionsV115(process.cwd());
+          const files = [];
+          for (const path of reviewedFiorinaSpritePackFilesV115()) {
+            const stat = await lstat(path);
+            assert.ok(stat.isFile() && !stat.isSymbolicLink(), path);
+            const bytes = await readFile(path);
+            files.push({ path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+          }
+          assert.equal(files.filter(file => file.path.endsWith('.png')).length, verified.images);
+          console.log(JSON.stringify({ ...verified, files }));
+          JS
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, zipfile
+          root = pathlib.Path.cwd()
+          inventory = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'fiorina-sprite-pack.json').read_text())
+          manifest_path = 'assets/openai/sprites/alien3-fiorina-v115/manifest.json'
+          manifest_bytes = (root / manifest_path).read_bytes()
+          assert hashlib.sha256(manifest_bytes).hexdigest() == inventory['manifestSha256']
+          manifest = json.loads(manifest_bytes)
+          images = {asset['src'] for asset in manifest['assets'].values()}
+          images.update(frame.get('src', asset['src']) for asset in manifest['assets'].values() for frame in asset.get('frames', []))
+          paths = [file['path'] for file in inventory['files']]
+          assert len(images) == inventory['images'] and len(set(paths)) == len(paths)
+          assert images == {path for path in paths if path.endswith('.png')}
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'FIORINA_SPRITES_V116.zip'
+          with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+              for entry in inventory['files']:
+                  path = entry['path']
+                  file = root / path
+                  assert file.is_file() and not file.is_symlink() and file.resolve().is_relative_to(root)
+                  data = file.read_bytes()
+                  assert len(data) == entry['bytes'] and hashlib.sha256(data).hexdigest() == entry['sha256'], path
+                  archive.writestr(path, data)
+          with zipfile.ZipFile(target) as archive:
+              assert archive.testzip() is None and set(archive.namelist()) == set(paths)
+              for entry in inventory['files']:
+                  assert hashlib.sha256(archive.read(entry['path'])).hexdigest() == entry['sha256'], entry['path']
+          print(f'{len(paths)} reviewed files packaged: {target.name}')
+          PY
+      - name: Preserve downloadable sprite pack
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-sprites-v116-pack
+          path: ${{ runner.temp }}/FIORINA_SPRITES_V116.zip
+          retention-days: 30
+      - run: npm run build
+      - run: npm run check:built
+
+
+      - name: Install browser harness
+        run: |
+          npm install --prefix "$RUNNER_TEMP/fiorina-browser" --ignore-scripts --no-audit --no-fund playwright@1.65.1
+          node "$RUNNER_TEMP/fiorina-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Verify native browser journey
+        timeout-minutes: 8
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/fiorina-browser/node_modules/playwright
+          BASE_URL: http://127.0.0.1:4399/
+          EXPECT_FIORINA_SPRITES_V115: '1'
+          EXPECT_FIORINA_SPRITES_V116: '1'
+        run: |
+          python3 -c 'from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler; from functools import partial; Server = type("Server", (ThreadingHTTPServer,), {"request_queue_size": 1024}); Server(("127.0.0.1", 4399), partial(SimpleHTTPRequestHandler, directory="dist")).serve_forever()' > "$RUNNER_TEMP/fiorina-http.log" 2>&1 &
+          fiorina_server_pid=$!
+          trap 'kill "$fiorina_server_pid" 2>/dev/null || true' EXIT
+          for attempt in 1 2 3 4 5; do
+            if curl --silent --fail http://127.0.0.1:4399/ -o /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/qa-fiorina-native-v114.mjs "$RUNNER_TEMP/fiorina-qa"
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-native-browser-v114
+          path: |
+            ${{ runner.temp }}/fiorina-qa/
+            ${{ runner.temp }}/fiorina-http.log
+          retention-days: 14
+      - name: Preserve sprite evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fiorina-sprites-v116
+          path: |
+            ${{ runner.temp }}/fiorina-sprites-qa/
+            ${{ runner.temp }}/fiorina-native-sprites-qa/
+          retention-days: 14

@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { GameEngine } from '../src/game-production-runtime.js';
-import { CAMPAIGNS, CONTENT_COUNTS, WORLDS, WEAPONS, ENEMIES } from '../src/content.js';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS, WORLDS, WEAPONS, ENEMIES } from '../src/content.js';
+import { projectFiorinaHistoricalCampaignsV188 } from './audit-tantalus-priorities-v188.mjs';
 import { ARBITER_DEVICE_V190, ARBITER_CAMPAIGNS_V190, ARBITER_MISSIONS_V190,
   createArbiterCampaignProgressV190, normalizeArbiterCampaignProgressV190, arbiterCampaignAccessV190,
   createArbiterReceiptV190, createArbiterMissionStateV190, validateArbiterMissionStateV190,
@@ -13,7 +14,10 @@ import { previousProgress, fixture, tick, walk, hold, finish } from './xeno-arbi
 // These are six distinct original investigative operations. No ancient IDs,
 // 1:1 art proof, physical corporate trial or live captive is invented here.
 test('six authored ARBITER chapters extend the real campaign catalog and have connected physical alternatives', () => {
-  assert.equal(CONTENT_COUNTS.campaigns, 526);
+  assert.equal(projectFiorinaHistoricalCampaignsV188(CAMPAIGNS).length, 526);
+  assert.equal(CONTENT_COUNTS.campaigns, 527);
+  assert.equal(CONTENT_COUNTS.campaigns, CAMPAIGNS.length);
+  assert.equal(CONTENT_TARGETS.campaigns, CAMPAIGNS.length);
   assert.equal(CAMPAIGNS.filter(c => c.id.startsWith('special-arbiter-')).length, 6);
   assert.equal(ARBITER_DEVICE_V190.canonExact, false);
   const signatures = new Set();

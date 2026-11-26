@@ -6,7 +6,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createDefaultSave, migrateSave } from '../src/save.js';
-import { CAMPAIGNS, validateContent } from '../src/content.js';
+import { CAMPAIGNS, CONTENT_COUNTS, CONTENT_TARGETS, validateContent } from '../src/content.js';
+import { projectFiorinaHistoricalCampaignsV188 } from './audit-tantalus-priorities-v188.mjs';
 import { selectMissionTemplateV52 } from '../src/mission-levels-v52.js';
 import { resolveMissionRegisterV188 } from '../src/mission-register-v188.js';
 import { normalizeStoryCampaignV188 } from '../src/story-campaign-v188.js';
@@ -85,7 +86,10 @@ function toEnding(save, recommended, options) {
 test('content: five Act V missions on Cocyte from existing templates, registers, ids unchanged elsewhere', () => {
   assert.deepEqual(ACT5_CAMPAIGN_IDS_V188, ['act5-last-run', 'act5-depot-queen', 'act5-port-walls', 'act5-evacuation']);
   assert.equal(validateContent().ok, true);
-  assert.equal(CAMPAIGNS.length, 526); // 511 + the 15 Arc 2 / Arc 3 missions of « La Saison des Reines » (spec 011, 2026-11-23); // 496 Tantalus + 6 Xeno Arbiter operations (V190); + orig-asphodele-2 (spec 007 follow-up), + 19 Port-Méridien missions and contracts; + 9 Arc 1 missions of « La Saison des Reines » (spec 011)
+  assert.equal(projectFiorinaHistoricalCampaignsV188(CAMPAIGNS).length, 526); // Original Tantalus, Arbiter and Queens catalog.
+  assert.equal(CAMPAIGNS.length, 527);
+  assert.equal(CONTENT_COUNTS.campaigns, CAMPAIGNS.length);
+  assert.equal(CONTENT_TARGETS.campaigns, CAMPAIGNS.length);
   for (const campaign of ACT5_CAMPAIGNS_V188) {
     assert.ok(CAMPAIGNS.some(entry => entry.id === campaign.id), campaign.id);
     assert.equal(selectMissionTemplateV52({ campaign }), campaign.templateId, campaign.id);

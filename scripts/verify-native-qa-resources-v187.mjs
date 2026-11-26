@@ -19,6 +19,7 @@ import { verifyOriginalNamesV183 } from './audit-original-names-v183.mjs';
 import { verifyQaBranchV181, QA_BRANCH_CONSTANTS_V181 } from './audit-pr-integration-v182.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
+import { AVP_HOST_SUCCESSORS_20261125, reviewedAvpHostDigest20261125 } from './audit-dlc-avp-2004-20261125.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -92,11 +93,15 @@ test('V187 audit and documentation stay source-only and the new audit test enter
   assert.match(relay, /from '\.\/audit-xeno-trials-completion-v186\.mjs'/);
   assert.match(relay, /from '\.\/audit-tantalus-priorities-v188\.mjs'/);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
-  // After the Xeno Trials merge V187 continues into two chains; each terminal imports no audit.
+  // Both historical chains may continue only through the exact AVP terminal.
+  const avpAudit = 'scripts/audit-dlc-avp-2004-20261125.mjs';
+  const relativeImports = source => [...source.matchAll(/(?:from\s*|import\s*\(?\s*)['"](\.{1,2}\/[^'"]+)['"]/g)].map(match => match[1]);
   for (const terminalPath of ['scripts/audit-tantalus-priorities-v188.mjs', 'scripts/audit-xeno-production-assets-v206.mjs']) {
     const terminal = read(terminalPath).toString();
-    assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(terminal), false);
+    assert.deepEqual(relativeImports(terminal), ['./audit-dlc-avp-2004-20261125.mjs']);
   }
+  assert.deepEqual(relativeImports(read(avpAudit).toString()), [], 'The AVP terminal must not import another audit.');
+  assert.equal(Object.hasOwn(AVP_HOST_SUCCESSORS_20261125, avpAudit), false, 'The AVP terminal cannot admit its own bytes.');
   assert.equal(Object.hasOwn(NATIVE_QA_RESOURCES_SUCCESSORS_V187, 'scripts/audit-native-qa-resources-v187.mjs'), false);
   assert.equal(Object.keys(NATIVE_QA_RESOURCES_SUCCESSORS_V187).some(path => path.startsWith('src/')), false);
 });
@@ -138,7 +143,8 @@ test('Obscura continues the exact V187 verifier endpoint and refuses arbitrary p
   const join = Object.hasOwn(TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors, receipt.path)
     ? TANTALUS_PRIORITIES_XENO_TRIALS_JOIN_V188.successors[receipt.path] : null;
   if (join) assert.equal(join.previousSha256, lead ? lead.currentSha256 : receipt.currentSha256);
-  assert.equal(sha(read(receipt.path)), join ? join.currentSha256 : lead ? lead.currentSha256 : receipt.currentSha256);
+  assert.equal(sha(read(receipt.path)), reviewedAvpHostDigest20261125(receipt.path,
+    join ? join.currentSha256 : lead ? lead.currentSha256 : receipt.currentSha256));
   for (const forged of ['0'.repeat(64), receipt.currentSha256])
     assert.throws(() => reviewedObscuraDigest20261115(receipt.path, forged), /Broken V187-to-Obscura source chain/);
   assert.equal(reviewedObscuraDigest20261115('src/unreviewed.js', 'unchanged'), 'unchanged');
@@ -162,11 +168,12 @@ test('The Xeno Trials join resolves both V187 successor chains to the same merge
   assert.equal(reviewedAfterNativeQaResourcesV187('src/unreviewed.js', 'unchanged'), 'unchanged');
   assert.deepEqual(Object.keys(verifyXenoTrialsTantalusJoinV206()).sort(), ['baselineCommit', 'successors']);
   for (const [path, receipt] of Object.entries(xenoJoin)) {
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), reviewedAvpHostDigest20261125(path, receipt.currentSha256), path);
     for (const forged of ['0'.repeat(64), receipt.currentSha256])
       assert.throws(() => reviewedXenoTrialsTantalusJoinV206(path, forged), /Broken fa2d62fe-to-tantalus-join source chain/);
   }
-  for (const [path, receipt] of Object.entries(tantalusJoin)) assert.equal(sha(read(path)), receipt.currentSha256, path);
+  for (const [path, receipt] of Object.entries(tantalusJoin))
+    assert.equal(sha(read(path)), reviewedAvpHostDigest20261125(path, receipt.currentSha256), path);
   const path = 'scripts/audit-native-qa-resources-v187.mjs';
   assert.ok(Object.hasOwn(tantalusJoin, path) && Object.hasOwn(xenoJoin, path), 'the relay itself is reviewed on both chains');
   const mutated = candidate => candidate === path ? Buffer.concat([read(candidate), Buffer.from('\n// unreviewed')]) : read(candidate);

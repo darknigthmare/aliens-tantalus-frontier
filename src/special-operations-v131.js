@@ -7,6 +7,7 @@ import { HIVE_CAMPAIGNS_V131 } from './hive-missions-v131.js';
 import { MECHA_CAMPAIGNS_V131 } from './mecha-missions-v131.js';
 import { ECOSYSTEM_CAMPAIGNS_V131 } from './ecosystem-missions-v131.js';
 import { LEGACY_CAMPAIGNS_V131 } from './legacy-operations-v131.js';
+import { FIORINA_OPERATION_V114, FIORINA_CAMPAIGN_V114 } from './fiorina-campaign-v114.js';
 
 export const NEW_SPECIAL_CAMPAIGNS_V131 = Object.freeze([
   ...HIVE_CAMPAIGNS_V131, ...MECHA_CAMPAIGNS_V131, ...ECOSYSTEM_CAMPAIGNS_V131, ...LEGACY_CAMPAIGNS_V131
@@ -35,6 +36,7 @@ const freeze = entry => Object.freeze({ ...entry, canonExact: false,
   requiredMechanics: Object.freeze([...entry.requiredMechanics]),
   remainingMechanics: Object.freeze([...(entry.remainingMechanics || [])]) });
 export const SPECIAL_OPERATIONS_V131 = Object.freeze([
+  freeze(FIORINA_OPERATION_V114),
   ...SPECIAL_OPERATIONS_V67.map(original => {
     const route = routes.get(original.id);
     return freeze({ ...original,
@@ -62,7 +64,7 @@ export function getSpecialOperationByCampaignIdV131(id) { return byCampaign.get(
 // the other hive chapters keep the selected squad.
 const JERI_SOLO_CAMPAIGN_ID_V188 = HIVE_CAMPAIGNS_V131.find(c=>c.specialOperationId==='jeri-false-son')?.id;
 export function isSoloSpecialOperationV131(id) {
-  return [BLACK_COCOON_CAMPAIGN_V121.id, JERI_SOLO_CAMPAIGN_ID_V188, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
+  return [FIORINA_CAMPAIGN_V114.id, BLACK_COCOON_CAMPAIGN_V121.id, JERI_SOLO_CAMPAIGN_ID_V188, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id,
     ...MECHA_CAMPAIGNS_V131.map(c=>c.id), ...ECOSYSTEM_CAMPAIGNS_V131.map(c=>c.id), ...LEGACY_CAMPAIGNS_V131.map(c=>c.id)].includes(id);
 }
 export function validateSpecialOperationsV131(campaigns) {

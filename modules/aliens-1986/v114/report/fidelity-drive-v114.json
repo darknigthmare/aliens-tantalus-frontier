@@ -1,0 +1,361 @@
+{
+  "method": "Public inputs only, ordinary starts, unmodified exports imported mid-action; no direct simulation edits.",
+  "results": [
+    {
+      "name": "sulaco-inspections",
+      "publicInputs": 2623,
+      "visited": [
+        "v114-sulaco-cryo",
+        "v114-sulaco-mess",
+        "v114-sulaco-armory",
+        "v114-sulaco-cargo"
+      ],
+      "transitions": 6,
+      "shots": [
+        {
+          "id": "pulse",
+          "before": 48,
+          "after": 47
+        },
+        {
+          "id": "shotgun",
+          "before": 12,
+          "after": 11
+        },
+        {
+          "id": "flame",
+          "before": 80,
+          "after": 79
+        },
+        {
+          "id": "smartgun",
+          "before": 120,
+          "after": 119
+        },
+        {
+          "id": "pistol",
+          "before": 30,
+          "after": 29
+        },
+        {
+          "id": "launcher",
+          "before": 4,
+          "after": 3
+        },
+        {
+          "id": "grenade",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "id": "knife",
+          "before": null,
+          "after": null
+        }
+      ],
+      "arsenal": {
+        "retrieved": 1,
+        "started": 1,
+        "completed": 1,
+        "interrupted": 0,
+        "shots": 8,
+        "impacts": 0,
+        "friendlyImpacts": 0,
+        "switches": 8
+      }
+    },
+    {
+      "name": "gateway-inspections",
+      "visited": [
+        "v114-gateway-medical",
+        "v114-gateway-inquiry"
+      ],
+      "transitions": 2,
+      "publicInputs": 677
+    },
+    {
+      "name": "processor-inspections",
+      "visited": [
+        "v114-processor-entry",
+        "v114-processor-gallery",
+        "v114-hive-cocoons",
+        "v114-queen-nursery"
+      ],
+      "transitions": 6,
+      "publicInputs": 1905
+    },
+    {
+      "name": "operation-m240",
+      "complete": true,
+      "publicInputs": 5041,
+      "elapsed": 126.02500000001153,
+      "arsenal": {
+        "schema": 114,
+        "origin": "new",
+        "selected": {
+          "ripley": "flame",
+          "hicks": "pulse",
+          "hudson": "pulse",
+          "newt": null
+        },
+        "remaining": {
+          "ripley": {
+            "shells": 0,
+            "fuel": 57,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 3,
+            "grenades": 0
+          },
+          "hicks": {
+            "shells": 6,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          },
+          "hudson": {
+            "shells": 0,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          },
+          "newt": {
+            "shells": 0,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          }
+        },
+        "spent": {
+          "ripley": {
+            "shells": 0,
+            "fuel": 23,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          },
+          "hicks": {
+            "shells": 0,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          },
+          "hudson": {
+            "shells": 0,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          },
+          "newt": {
+            "shells": 0,
+            "fuel": 0,
+            "belt": 0,
+            "pistol": 0,
+            "rounds": 0,
+            "grenades": 0
+          }
+        },
+        "collected": [
+          "service-incinerator"
+        ],
+        "serial": 0,
+        "flights": [],
+        "metrics": {
+          "retrieved": 1,
+          "started": 1,
+          "completed": 1,
+          "interrupted": 0,
+          "shots": 53,
+          "impacts": 27,
+          "friendlyImpacts": 0,
+          "switches": 1
+        }
+      },
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 100,
+          "ammo": 18
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 24
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "name": "01_sulaco_cryo",
+      "room": "v114-sulaco-cryo",
+      "time": 4.674999999999999,
+      "weapon": "pulse"
+    },
+    {
+      "name": "02_sulaco_briefing",
+      "room": "v114-sulaco-mess",
+      "time": 12.950000000000117,
+      "weapon": "pulse"
+    },
+    {
+      "name": "03_armory_retrieve_pending",
+      "room": "v114-sulaco-armory",
+      "time": 18.525000000000016,
+      "weapon": "pulse"
+    },
+    {
+      "name": "04_armory_ready",
+      "room": "v114-sulaco-armory",
+      "time": 20.39999999999991,
+      "weapon": "pulse"
+    },
+    {
+      "name": "05_weapon_pulse",
+      "room": "v114-sulaco-armory",
+      "time": 22.199999999999807,
+      "weapon": "pulse"
+    },
+    {
+      "name": "05_weapon_shotgun",
+      "room": "v114-sulaco-armory",
+      "time": 23.999999999999705,
+      "weapon": "shotgun"
+    },
+    {
+      "name": "05_weapon_flame",
+      "room": "v114-sulaco-armory",
+      "time": 25.799999999999603,
+      "weapon": "flame"
+    },
+    {
+      "name": "05_weapon_smartgun",
+      "room": "v114-sulaco-armory",
+      "time": 27.5999999999995,
+      "weapon": "smartgun"
+    },
+    {
+      "name": "05_weapon_pistol",
+      "room": "v114-sulaco-armory",
+      "time": 29.399999999999398,
+      "weapon": "pistol"
+    },
+    {
+      "name": "05_weapon_launcher",
+      "room": "v114-sulaco-armory",
+      "time": 31.199999999999296,
+      "weapon": "launcher"
+    },
+    {
+      "name": "05_weapon_grenade",
+      "room": "v114-sulaco-armory",
+      "time": 32.9999999999992,
+      "weapon": "grenade"
+    },
+    {
+      "name": "05_weapon_knife",
+      "room": "v114-sulaco-armory",
+      "time": 34.799999999999095,
+      "weapon": "knife"
+    },
+    {
+      "name": "06_armory_cast",
+      "room": "v114-sulaco-armory",
+      "time": 36.499999999999,
+      "weapon": "smartgun"
+    },
+    {
+      "name": "07_clean_cargo",
+      "room": "v114-sulaco-cargo",
+      "time": 44.22499999999856,
+      "weapon": "smartgun"
+    },
+    {
+      "name": "08_gateway_medical",
+      "room": "v114-gateway-medical",
+      "time": 3.349999999999992,
+      "weapon": "pulse"
+    },
+    {
+      "name": "09_gateway_inquiry",
+      "room": "v114-gateway-inquiry",
+      "time": 11.7750000000001,
+      "weapon": "pulse"
+    },
+    {
+      "name": "10_processor_gallery",
+      "room": "v114-processor-gallery",
+      "time": 13.25000000000012,
+      "weapon": "pulse"
+    },
+    {
+      "name": "11_hive_cocoons",
+      "room": "v114-hive-cocoons",
+      "time": 20.39999999999991,
+      "weapon": "pulse"
+    },
+    {
+      "name": "12_queen_nursery",
+      "room": "v114-queen-nursery",
+      "time": 27.699999999999495,
+      "weapon": "pulse"
+    },
+    {
+      "name": "16_colony_mess",
+      "room": "v114-colony-mess",
+      "time": 17.92500000000005,
+      "weapon": "pulse"
+    },
+    {
+      "name": "13_incinerator_collect",
+      "room": "v107-service",
+      "time": 40.12499999999879,
+      "weapon": "pulse"
+    },
+    {
+      "name": "14_medlab_m240",
+      "room": "v106-medlab",
+      "time": 63.24999999999748,
+      "weapon": "flame"
+    },
+    {
+      "name": "17_drain_escorte",
+      "room": "v114-colony-drain",
+      "time": 73.14999999999951,
+      "weapon": "flame"
+    },
+    {
+      "name": "18_sentry_m240_avant",
+      "room": "v106-sentry",
+      "time": 88.00000000000288,
+      "weapon": "flame"
+    },
+    {
+      "name": "15_repli_armement",
+      "room": "v106-hadley",
+      "time": 126.02500000001153,
+      "weapon": "flame"
+    }
+  ]
+}

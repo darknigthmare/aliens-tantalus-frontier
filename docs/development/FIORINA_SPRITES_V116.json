@@ -1,0 +1,2600 @@
+{
+  "schemaVersion": 1,
+  "revision": "fiorina-sprites-v116",
+  "baseCommit": "ae4e49bef5fea639d0c381466aefea85f8a57300",
+  "date": "2026-11-25",
+  "previousRevision": {
+    "manifestSha256": "7a13489288e96be84958a159844c5d550d0e4bfa285a8748b49ac19e5b7a72a7",
+    "provenance": "docs/development/FIORINA_SPRITES_V115.json",
+    "pngCount": 39,
+    "historicalProvenanceUnmodified": true
+  },
+  "manifestSha256": "db64e2b36aa8a0fa424adf112a1669a0e325c4497067fc38ddbfe140af418e6a",
+  "counts": {
+    "newPng": 22,
+    "cumulativePng": 61,
+    "manifestEntries": 72,
+    "frameOccurrences": 83,
+    "newLoops": 6,
+    "totalLoops": 11,
+    "newBytes": 31130724,
+    "cumulativeBytes": 87425555
+  },
+  "exactOneToOneCertified": false,
+  "oneSpritePerImage": true,
+  "postGenerationPixelEditingPerformed": false,
+  "assets": [
+    {
+      "id": "dillon-run-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png",
+      "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+      "bytes": 2052298,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        95,
+        5,
+        1371,
+        1015
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 800,
+        "y": 1014
+      },
+      "world": {
+        "w": 108.0462,
+        "h": 72.0308
+      },
+      "geometryReview": {
+        "id": "dillon-run-a",
+        "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "referenceId": "dillon-idle",
+        "pivot": {
+          "x": 800,
+          "y": 1014
+        },
+        "world": {
+          "w": 108.0462,
+          "h": 72.0308
+        },
+        "worldUnitsPerPixel": 0.0703425754,
+        "visibleBBoxAlpha128": [
+          96,
+          6,
+          1371,
+          1014
+        ],
+        "visibleHeightWorld": 70.9053,
+        "headLandmarksEstimatedPixels": {
+          "top": 7,
+          "chin": 196,
+          "height": 189
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.2947,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Wide running contact/extension with coat trailing. Body silhouette is much shorter than idle because of stride geometry; do not fit it to idle full height.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "dillon-run-a",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Dillon from Alien 3 game sprite into RUNNING PHASE A, one complete full-body transparent sprite facing RIGHT in near-orthographic side view. The input is the edit target: preserve recognizable Charles S. Dutton face, bald Black head, black rectangular spectacles, his broad stocky proportions, heavy ragged brown hooded prison robe and layered brown clothes, black gloves, dark worn lace-up boots, exact restrained palette and realistic illustrated texture. Pose A is an extended running contact stride: NEAR leg forward with the near boot reaching out and heel low, FAR leg extending backward with toe trailing. Near arm bent and driven back, far arm bent forward toward chest. Torso inclines forward naturally; heavy robe opens sufficiently to read both legs and trails behind without becoming a cape. A believable powerful run, not a standing or walking pose. No weapons or objects held. Exactly one character, both boots, hands, robe hem and head completely visible, transparent margins around the entire figure. True transparent alpha background, no colored backdrop, halo, cast shadow, ground, scene, blur, text, sprite sheet or extra limbs.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Distinct extended running stride. Character identity and costume visually preserved. Alpha and scale to be measured before admission.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ]
+    },
+    {
+      "id": "dillon-run-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-b.png",
+      "sha256": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f",
+      "bytes": 1486704,
+      "width": 1199,
+      "height": 1312,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        172,
+        6,
+        976,
+        1305
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 620,
+        "y": 1303
+      },
+      "world": {
+        "w": 68.4137,
+        "h": 74.8614
+      },
+      "geometryReview": {
+        "id": "dillon-run-b",
+        "sha256": "5f80b6fadb6f43c6680df4bf030275c7573d7ea9b70a9b55bf905ac5c0b9ba1f",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1199,
+          "h": 1312
+        },
+        "referenceId": "dillon-idle",
+        "pivot": {
+          "x": 620,
+          "y": 1303
+        },
+        "world": {
+          "w": 68.4137,
+          "h": 74.8614
+        },
+        "worldUnitsPerPixel": 0.0570589989,
+        "visibleBBoxAlpha128": [
+          173,
+          8,
+          975,
+          1303
+        ],
+        "visibleHeightWorld": 73.8914,
+        "headLandmarksEstimatedPixels": {
+          "top": 6,
+          "chin": 239,
+          "height": 233
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.2947,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Compact passing pose, raised free knee and reversed arms. Anatomically scaled B is slightly taller than A; describe as passing rather than claiming exact compression timing.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "dillon-run-b",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Dillon Alien 3 running sprite into a clearly DIFFERENT RUNNING PHASE B: the COMPACT PASSING/COMPRESSION phase between the long strides. Preserve the exact Charles S. Dutton face, bald head, black rectangular glasses, stocky body, heavy ragged brown hooded prison robe and same layered clothes and gloves and boots, same palette and realistic illustrated texture. Keep facing RIGHT, near-orthographic side view. CRITICAL: do NOT repeat the wide stretched leg pose. The NEAR leg is bent under the pelvis with near boot contacting the implied ground almost directly below his hip; the FAR knee is raised FORWARD toward waist level, far shin tucked back, boot suspended. Legs form a compact readable running position. Near elbow now drives forward with gloved hand at chest level, far arm bends back. Torso leans forward; robe drapes with motion without a huge horizontal spread. Match head/body scale and costume to input. Both arms and both legs anatomically clear. No axe, weapon, prop, new straps, environment, halo, shadow, ground, text, blur or contact sheet. Exactly one complete full-body sprite with transparent alpha background and margins around entire head, robe and both boots.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "4d3f92907e8dfbd964a8ce45e9660a834d5849a975cc917181adb1eb0074d949",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-run-a.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Compact passing running phase with different arm/leg placement from A, visually accepted. Catalogue use until an actual running stage exists for this NPC.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ]
+    },
+    {
+      "id": "morse-run-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png",
+      "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+      "bytes": 1856775,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        133,
+        9,
+        1357,
+        1014
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 800,
+        "y": 1013
+      },
+      "world": {
+        "w": 110.8562,
+        "h": 73.9042
+      },
+      "geometryReview": {
+        "id": "morse-run-a",
+        "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "referenceId": "morse-idle",
+        "pivot": {
+          "x": 800,
+          "y": 1013
+        },
+        "world": {
+          "w": 110.8562,
+          "h": 73.9042
+        },
+        "worldUnitsPerPixel": 0.0721720339,
+        "visibleBBoxAlpha128": [
+          134,
+          10,
+          1356,
+          1013
+        ],
+        "visibleHeightWorld": 72.3885,
+        "headLandmarksEstimatedPixels": {
+          "top": 10,
+          "chin": 187,
+          "height": 177
+        },
+        "referenceHeadHeightEstimatedPixels": 192,
+        "headHeightWorld": 12.7744,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Wide extension; near torso and head smaller in source pixels than idle, requiring a modest scale increase per pixel.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "morse-run-a",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Morse from Alien 3 game sprite into RUNNING PHASE A, one full-body transparent sprite facing RIGHT in near-orthographic side view. Preserve recognizable Danny Webb face, bald pale head, narrow angular features, slim body, thick grey-brown knitted loop scarf, worn brown hooded long prison coat and loose trousers, worn dark lace-up boots, same grime and muted palette and realistic illustrated rendering. Pose A: long running contact stride with NEAR leg reaching forward, near heel low, FAR leg stretched behind with trailing toe; near arm swung back with bent elbow, far forearm coming forward. Torso pitched forward. Readable gap between the legs; coat hem follows motion but keeps the same length and material, scarf remains around his neck. No weapon, prop, added gloves, new costume or extra straps. Entire person fully visible with transparent margins, one sprite only. True transparent alpha background; no ground, halo, background gradient, shadow, text, motion blur, contact sheet, extra figure or extra limbs.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "39bd0eb7db35164155d78a37c2dfceadd31d5b7ad3ba0782a7275d5ea18503c4",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/morse-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Distinct extended running stride. Character identity and costume visually preserved. Alpha and scale to be measured before admission.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ]
+    },
+    {
+      "id": "morse-run-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/morse-run-b.png",
+      "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a",
+      "bytes": 1333235,
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        226,
+        6,
+        1107,
+        1186
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 650,
+        "y": 1186
+      },
+      "world": {
+        "w": 75.4958,
+        "h": 68.9935
+      },
+      "geometryReview": {
+        "id": "morse-run-b",
+        "sha256": "d4a3cebe670db8edf635d98e1934ca53a8ef61d1d01074886f2715f21a43c52a",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199
+        },
+        "referenceId": "morse-idle",
+        "pivot": {
+          "x": 650,
+          "y": 1186
+        },
+        "world": {
+          "w": 75.4958,
+          "h": 68.9935
+        },
+        "worldUnitsPerPixel": 0.0575425676,
+        "visibleBBoxAlpha128": [
+          227,
+          9,
+          1106,
+          1186
+        ],
+        "visibleHeightWorld": 67.7276,
+        "headLandmarksEstimatedPixels": {
+          "top": 6,
+          "chin": 228,
+          "height": 222
+        },
+        "referenceHeadHeightEstimatedPixels": 192,
+        "headHeightWorld": 12.7744,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Compact flexed support and raised knee; larger source head requires reduced scale per pixel compared with A.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "morse-run-b",
+        "note": "Cycle de course au catalogue : dans le rabattage actuel, le personnage marche vers son poste puis attend."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Morse Alien 3 running sprite into a clearly DIFFERENT RUNNING PHASE B: compact PASSING/COMPRESSION between long strides. Keep the exact recognizable Danny Webb face, bald pale head, slim proportions, thick grey-brown loop scarf, ragged brown hooded long coat, trousers and worn dark boots, same muted palette and realistic illustrated rendering. Facing RIGHT, near-orthographic side view. CRITICAL: not another wide stretched running stride. NEAR leg is flexed beneath the pelvis, near boot contacts implied ground below his hip. FAR knee lifts forward to waist level, far shin tucks behind the knee and boot floats. The compact silhouette is visibly different from input. Near elbow and forearm swing forward, far arm swings back, torso pitched forward. Hands remain bare. Keep scarf wrapped and coat length consistent, with coat lifting only enough to reveal leg action. Whole character including head, hands and both boots, transparent margins. One sprite only, no weapon, scenery, halo, shadow, ground, text, motion blur, extra limbs or sheet. True transparent alpha background.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "8c79ea34ce729ea1b9e476269e06abc2e93aa38926c10fe185852c1313cb9972",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/morse-run-a.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Compact passing running phase with different arm/leg placement from A, visually accepted. Catalogue use until an actual running stage exists for this NPC.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites.",
+        "Ressource de catalogue ; aucune modification de vitesse ou de comportement natif pour la forcer à apparaître."
+      ]
+    },
+    {
+      "id": "ripley-prison-climb-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-b.png",
+      "sha256": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6",
+      "bytes": 895383,
+      "width": 987,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        219,
+        9,
+        777,
+        1578
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 462,
+        "y": 1577
+      },
+      "world": {
+        "w": 71.3187,
+        "h": 115.1794
+      },
+      "geometryReview": {
+        "id": "ripley-prison-climb-b",
+        "sha256": "ad58afb51c8dfa683f6dce574f13218c34c5ac11bd976e8d63d0969e1899c9a6",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594
+        },
+        "referenceId": "ripley-prison-climb-a",
+        "pivot": {
+          "x": 462,
+          "y": 1577
+        },
+        "world": {
+          "w": 71.3187,
+          "h": 115.1794
+        },
+        "worldUnitsPerPixel": 0.0722580928,
+        "visibleBBoxAlpha128": [
+          220,
+          10,
+          777,
+          1577
+        ],
+        "visibleHeightWorld": 113.2284,
+        "headLandmarksEstimatedPixels": {
+          "top": 97,
+          "chin": 270,
+          "height": 173
+        },
+        "referenceHeadHeightEstimatedPixels": null,
+        "headHeightWorld": 12.5007,
+        "scaleMethod": "exact same pixel scale as climb A",
+        "pivotMethod": "Compatible with historic climbA anchor: x490-28=462 using estimated pelvis horizontal shift, and ground referencey1565+12=1577. This intentionally retains the A anchor convention rather than independently recentering B under its visible hip.",
+        "review": "Use the exact world-units-per-pixel scale of climb A. Arms differ and knee height changes; opposite-leg contact and ladder-rung registration still need native review.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review.",
+          "ClimbB has987 source columns versus986 for A, so world width is increased proportionally by exactly one pixel at the same scale."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-climb-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Ellen Ripley Alien 3 game sprite into the OPPOSITE distinct climbing phase, as a single full-body transparent PNG. The reference is the edit target and exact identity/costume/style anchor. Preserve her recognizable Sigourney Weaver face, very short shaved brown hair, dirty brown sleeveless prison shirt, loose brown cargo trousers and worn lace-up boots, body proportions, realistic illustrated game rendering, grime and muted palette. Continue facing RIGHT, near-orthographic side view. CRITICAL POSE CHANGE: the NEAR arm visible in front of the torso is now raised above her head, elbow bent, near hand gripping an imaginary high rung; the FAR arm is lowered, bent close to her chest, far hand gripping an imaginary lower rung. The NEAR leg now has its knee lifted to waist height and its boot forward on a higher imaginary rung; the FAR leg is extended down, far boot low. Thus reverse the near/far limb positions from the input, making a visibly different second climbing frame. Keep clear readable separation of the bent and straight legs. Her torso rises slightly and leans toward the imaginary ladder. Include the entire raised hand, head, both boots, with transparent margin on every side. No ladder, environment, ground, shadow, motion blur, lettering, contact sheet, extra person, or extra limbs. Exactly one climbing sprite; no scenery.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "af6533431a7e98c837651271dcef8711db5e3a4d2735b34a25a59f426f57c9e0",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-climb-a.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Near arm and near knee are raised, opposite to V115 phase A. Distinct pose, matching costume; interpreted animation rather than an exact film frame.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-prison-crouch-walk-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-a.png",
+      "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+      "bytes": 1294184,
+      "width": 1659,
+      "height": 948,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        88,
+        25,
+        1558,
+        930
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 600,
+        "y": 929
+      },
+      "world": {
+        "w": 84.1047,
+        "h": 48.0598
+      },
+      "geometryReview": {
+        "id": "ripley-prison-crouch-walk-a",
+        "sha256": "f44999bde103f631334f7a05faade80e71867a8722f2b103c5a95cdf10f3a2a5",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1659,
+          "h": 948
+        },
+        "referenceId": "ripley-prison-idle",
+        "pivot": {
+          "x": 600,
+          "y": 929
+        },
+        "world": {
+          "w": 84.1047,
+          "h": 48.0598
+        },
+        "worldUnitsPerPixel": 0.0506960384,
+        "visibleBBoxAlpha128": [
+          89,
+          27,
+          1557,
+          929
+        ],
+        "visibleHeightWorld": 45.7278,
+        "headLandmarksEstimatedPixels": {
+          "top": 25,
+          "chin": 282,
+          "height": 257
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.0289,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Low extended crouch step; near-horizontal torso and large horizontal leg reach. Preserve low height rather than expanding to standing height.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-crouch-walk-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Ellen Ripley Alien 3 crouching game sprite into ONE low CROUCH-WALK animation frame facing RIGHT, near-orthographic side view. Preserve the exact recognizable Sigourney Weaver face, closely shaved hair, dirty sleeveless brown prison shirt, same loose cargo trousers with reinforced knees and same worn boots, lean proportions, realistic illustrated style and palette. Keep her body low, approximately the same head-to-ground height as the reference. PHASE A, long low step: the NEAR thigh extends forward with bent knee, near boot planted farther to the RIGHT in front of her body; the FAR leg reaches behind, far knee very low but not touching ground, far heel raised with toes supporting. Hips remain near knee height, torso inclined forward. This must be a moving low stalking step, not the stationary symmetric squat of the reference. Keep the head raised looking right and hands relaxed forward for balance, no added gloves or equipment. Clearly readable two legs; both knees stay off the ground. One complete person with entire head, fingers and boots visible and transparent margin on all sides. True transparent alpha background, no ground, scenery, halo, shadow, text, weapon, motion blur, extra limbs or contact sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "89ecdf43bbdba52d8eaa648808f679bfcf3171e99a34753f5851773eb2b7791a",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Low forward stride A and compact lifted-foot passing B are visually distinct. Full body and both boots retained. Use calibrated pivots/scales; two-frame interpreted loop, not a full motion capture cycle.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-prison-crouch-walk-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch-walk-b.png",
+      "sha256": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545",
+      "bytes": 1339067,
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        130,
+        59,
+        1209,
+        1147
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 440,
+        "y": 1145
+      },
+      "world": {
+        "w": 61.0496,
+        "h": 55.7915
+      },
+      "geometryReview": {
+        "id": "ripley-prison-crouch-walk-b",
+        "sha256": "f7d905f9cc5af0632eae849ebfafd990e6d0fb581be4e7104f7e1025b902c545",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1312,
+          "h": 1199
+        },
+        "referenceId": "ripley-prison-idle",
+        "pivot": {
+          "x": 440,
+          "y": 1145
+        },
+        "world": {
+          "w": 61.0496,
+          "h": 55.7915
+        },
+        "worldUnitsPerPixel": 0.046531721,
+        "visibleBBoxAlpha128": [
+          131,
+          61,
+          1208,
+          1145
+        ],
+        "visibleHeightWorld": 50.4404,
+        "headLandmarksEstimatedPixels": {
+          "top": 59,
+          "chin": 339,
+          "height": 280
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.0289,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Compact crouched passing phase with one boot raised. Head and torso remain lower than standing; hips approximately level with A after anatomical scaling.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-crouch-walk-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit this exact Ellen Ripley Alien 3 crouching game sprite into ONE low CROUCH-WALK animation frame facing RIGHT, near-orthographic side view. Preserve the exact recognizable Sigourney Weaver face, closely shaved hair, dirty sleeveless brown prison shirt, same loose cargo trousers with reinforced knees and same worn boots, lean proportions, realistic illustrated style and palette. Keep her body low, approximately the same head-to-ground height as the reference. PHASE B, compact passing step: the FAR boot is planted below the pelvis and far knee deeply flexed to support her weight; the NEAR knee travels forward and near boot is lifted slightly off ground and tucked close under her body, ready for the next step. Legs are close and compact, not spread as in a long step. Hips remain low at knee height. Near arm slightly forward and far arm back for balance. This must visibly differ from a stationary symmetric squat and from an extended low stride. Keep the head raised looking right and hands relaxed forward for balance, no added gloves or equipment. Clearly readable two legs; both knees stay off the ground. One complete person with entire head, fingers and boots visible and transparent margin on all sides. True transparent alpha background, no ground, scenery, halo, shadow, text, weapon, motion blur, extra limbs or contact sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "89ecdf43bbdba52d8eaa648808f679bfcf3171e99a34753f5851773eb2b7791a",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-crouch.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Low forward stride A and compact lifted-foot passing B are visually distinct. Full body and both boots retained. Use calibrated pivots/scales; two-frame interpreted loop, not a full motion capture cycle.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-prison-hurt",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-hurt.png",
+      "sha256": "4943fec35630d7342d399303d815d08935e522388f2911dc9c749b3b16d8099a",
+      "bytes": 1007410,
+      "width": 986,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        202,
+        112,
+        732,
+        1552
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 400,
+        "y": 1551
+      },
+      "world": {
+        "w": 57.867,
+        "h": 93.5497
+      },
+      "geometryReview": {
+        "id": "ripley-prison-hurt",
+        "sha256": "4943fec35630d7342d399303d815d08935e522388f2911dc9c749b3b16d8099a",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 986,
+          "h": 1594
+        },
+        "referenceId": "ripley-prison-idle",
+        "pivot": {
+          "x": 400,
+          "y": 1551
+        },
+        "world": {
+          "w": 57.867,
+          "h": 93.5497
+        },
+        "worldUnitsPerPixel": 0.0586886571,
+        "visibleBBoxAlpha128": [
+          203,
+          114,
+          731,
+          1551
+        ],
+        "visibleHeightWorld": 84.3356,
+        "headLandmarksEstimatedPixels": {
+          "top": 112,
+          "chin": 334,
+          "height": 222
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.0289,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Hunched hurt pose; shrinking full-frame scale according to head prevents the larger source face from swelling in game. Leave the hunch visible.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-hurt",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Alien 3 Ellen Ripley full-body game sprite into one restrained non-graphic hurt/recoil pose for a game. Preserve her recognizable Sigourney Weaver face, closely shaved brown hair, sleeveless dirty brown prison shirt, loose cargo trousers with the same pockets, worn lace-up boots, lean proportions, realistic illustrated rendering and muted brown palette. Right-facing near-orthographic side view. She bends her knees slightly and hunches forward, one hand pressing her lower ribs over her intact shirt, the other arm low beside the body for balance, with a tense wince. Both boots remain completely visible and on the same implied ground line. The pose must be distinct from the standing input while retaining her identity and costume. No blood, wounds, injury detail, gore, creature, weapon, hospital setting, scenery, ground plane, shadow, text or motion blur. Exactly one full-body character on a truly transparent background, generous transparent margins. No contact sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "6693f849c8706de1c042206d951cf74ab8bf415664a8f07308b45afd3fcd6488",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Single full-body pose visually inspected: consistent identity, prison costume, no added scenery. Animation pose is interpreted, not an exact film frame.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image."
+      ]
+    },
+    {
+      "id": "ripley-prison-interact",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-interact.png",
+      "sha256": "c31ab78f727000fdf88db5e83694d337e80a2b998af8045fda36652b27cb4558",
+      "bytes": 870693,
+      "width": 986,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        181,
+        74,
+        915,
+        1568
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 360,
+        "y": 1567
+      },
+      "world": {
+        "w": 61.1737,
+        "h": 98.8954
+      },
+      "geometryReview": {
+        "id": "ripley-prison-interact",
+        "sha256": "c31ab78f727000fdf88db5e83694d337e80a2b998af8045fda36652b27cb4558",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 986,
+          "h": 1594
+        },
+        "referenceId": "ripley-prison-idle",
+        "pivot": {
+          "x": 360,
+          "y": 1567
+        },
+        "world": {
+          "w": 61.1737,
+          "h": 98.8954
+        },
+        "worldUnitsPerPixel": 0.0620422947,
+        "visibleBBoxAlpha128": [
+          182,
+          76,
+          914,
+          1567
+        ],
+        "visibleHeightWorld": 92.5051,
+        "headLandmarksEstimatedPixels": {
+          "top": 74,
+          "chin": 284,
+          "height": 210
+        },
+        "referenceHeadHeightEstimatedPixels": 194,
+        "headHeightWorld": 13.0289,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "One arm extended, slight forward lean. The source head is slightly enlarged versus idle; preserve scale of anatomy, not exact full-body extent.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-prison-interact",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied exact Alien 3 Ellen Ripley full-body game sprite into one neutral control-interaction pose. Preserve her recognizable Sigourney Weaver face, very short shaved brown hair, brown sleeveless prison vest, loose brown cargo trousers with the same pockets and worn lace-up boots, thin athletic proportions, grime, palette and realistic illustrated rendering. Right-facing near-orthographic side view. Both feet planted, a slight forward inclination of the torso. Near arm extends forward at chest height, elbow softly bent, hand reaching to press an imaginary wall-mounted switch; far arm relaxed beside the hip. Keep a natural open hand with believable fingers and focused, calm expression. No actual switch, wall, control panel, prop, weapon, ladder, ground, shadow, motion blur or other character. Exact same costume, no gloves and no added wrist gadgets. One complete character with head and both boots and reaching fingers entirely visible, transparent background and margin on all sides. A single sprite, not a sheet.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "6693f849c8706de1c042206d951cf74ab8bf415664a8f07308b45afd3fcd6488",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-prison-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Single full-body pose visually inspected: consistent identity, prison costume, no added scenery. Animation pose is interpreted, not an exact film frame.",
+      "limitations": [
+        "Pose animée interprétée à partir du sprite V115 ; aucune séquence du film copiée image par image."
+      ]
+    },
+    {
+      "id": "murphy-idle",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/murphy-idle.png",
+      "sha256": "518aaf21595c0724b808b324b0d1f2c043b2d8918b4db388fb8834a6e2727329",
+      "bytes": 1742102,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        268,
+        15,
+        725,
+        1528
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 510.0,
+        "y": 1527
+      },
+      "world": {
+        "w": 67.7697,
+        "h": 101.6545
+      },
+      "geometryReview": {
+        "basis": "Pieds et silhouette mesurés ; hauteur de présentation en unités projet, non mesurée sur un plateau."
+      },
+      "catalogue": {
+        "context": "assembly",
+        "label": "Murphy — tenue de l’abattoir",
+        "note": "Tenue Assembly ; ressource de catalogue, le statut décédé de la campagne est conservé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Create ONE realistic full-body character sprite as a separate transparent PNG for the Alien 3 Fiorina game. ONE person, ONE relaxed standing idle pose; no sheet, no variants, no other person, no detached props. Body mostly side-on facing RIGHT with a subtle three-quarter turn so the near side of the face can be recognized. Both worn boots fully visible and planted on the same implied ground line, legs comfortably separated, arms naturally relaxed at the sides. Entire head-to-toe figure, no crop, centered in a portrait canvas with a modest transparent margin around every edge. Photographic, natural adult anatomy, highly detailed weathered real textile and skin, restrained neutral soft lighting. Integrate softly lit dimensional volume into the subject itself, but absolutely no floor, backdrop, studio gradient, ground shadow, glow, fog, smoke, vignette, caption, logo or typography. Background must be fully transparent alpha, including all four corners and space between limbs. Do not turn him into a stylized cartoon or videogame armored soldier. Match the level of realism and weathered fabric detail of the FINAL reference image (the already-produced Dillon sprite), but use that LAST reference ONLY for rendering style and composition, NEVER for identity, facial features, glasses, body proportions or costume.\nSUBJECT: Murphy as played by Christopher Fairbank in Alien 3 (1992), specifically his abattoir work clothing from the Assembly scene shown in reference 3. Reference 1 is the high-detail identity portrait; reference 2 confirms the same film face; reference 3 is the full-body costume reference. Preserve his very lean angular weather-beaten pale face, long prominent nose, pronounced ears, sharp cheekbones, thin lips, very short/shaved hair under a close-fitting plain dull brown knitted cap. He is a lean wiry adult man, not bulky. Dirty and exhausted but alert, mouth closed, without a theatrical smile. Copy the work clothing from reference 3: worn loose brown/olive hooded work jacket, dark loosely wrapped neck cloth, broad long brown stained work apron tied around the waist reaching below the knees, grimy loose brown work trousers, worn plain heavy brown work boots, dark heavy work gloves. Keep the apron and clothing silhouette faithful to the full-body image rather than copying Dillon's jacket. This is the abattoir outfit: do NOT add the separate maintenance-scene goggles, no helmet, no guns, no modern tactical items, no necklace invented. The ox and hose in the costume photograph are NOT part of this sprite. Reconstruct only small hidden garment details conservatively; keep the visible cuts and layers.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "4d9484d9363318793037b0c26b5058c53622840505fc8c4cb9a6dc1ffcf43ccd",
+          "referenceName": "murphy-promo-1.jpg"
+        },
+        {
+          "sha256": "2f96f4f85bbcc1a6881015ff5d8a83d299ac54add351abdec099eaf117efccc6",
+          "referenceName": "murphy-film-portrait.jpg"
+        },
+        {
+          "sha256": "8b7e1ab4bcefe42d4027b3b0a7e81565007678132172c6ae8cf3ca602f2e0bb8",
+          "referenceName": "murphy-assembly-still.jpg"
+        },
+        {
+          "sha256": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [
+        "murphy-promo-1.jpg",
+        "murphy-film-portrait.jpg",
+        "murphy-assembly-still.jpg",
+        "v115-dillon-style-only.png"
+      ],
+      "sources": [
+        {
+          "title": "Christopher Fairbank as Murphy",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-promo-034.jpg",
+          "character": "murphy",
+          "file": "murphy-promo-1.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/promo/",
+          "sha256": "4d9484d9363318793037b0c26b5058c53622840505fc8c4cb9a6dc1ffcf43ccd",
+          "dimensions": [
+            570,
+            851
+          ],
+          "bytes": 66164,
+          "status": "downloaded"
+        },
+        {
+          "character": "murphy",
+          "title": "Christopher Fairbank as Murphy — film frame",
+          "url": "https://www.moviedude.co.uk/Christopher%20Fairbank%20%20Alien3%20(1992).jpg",
+          "file": "murphy-film-portrait.jpg",
+          "page": "https://www.moviedude.co.uk/%5BFilm%5D%20Alien3%20(1992).htm",
+          "sha256": "2f96f4f85bbcc1a6881015ff5d8a83d299ac54add351abdec099eaf117efccc6",
+          "dimensions": [
+            190,
+            270
+          ],
+          "bytes": 8039,
+          "status": "downloaded"
+        },
+        {
+          "file": "murphy-assembly-still.jpg",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-019.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/",
+          "sha256": "8b7e1ab4bcefe42d4027b3b0a7e81565007678132172c6ae8cf3ca602f2e0bb8",
+          "bytes": 58149
+        }
+      ],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "film-still-or-publicity-photo",
+      "review": "Recognizable gaunt face, knit cap, abattoir apron and gloves; full body facing right. Preview RGB shows a brown halo but sampled background alpha is 0; alpha >=8 is confined to the figure. No image editing performed.",
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Abattoir outfit follows Assembly still 019; this is not the different maintenance scene outfit with goggles.",
+        "Boot soles, apron fasteners and hidden garment seams reconstructed from limited source resolution.",
+        "Alpha extrema 0..254; faint alpha1..7 noise exists beyond the visible silhouette. Use visibleBBoxAlpha8 for placement, not every nonzero alpha pixel."
+      ]
+    },
+    {
+      "id": "boggs-idle",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/boggs-idle.png",
+      "sha256": "8318c9dfae6299095250f33a755f40696061d1fdcaa409cfd0cd5d01999652b4",
+      "bytes": 2002234,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        227,
+        18,
+        794,
+        1529
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 505.5,
+        "y": 1528
+      },
+      "world": {
+        "w": 67.8595,
+        "h": 101.7893
+      },
+      "geometryReview": {
+        "basis": "Pieds et silhouette mesurés ; hauteur de présentation en unités projet, non mesurée sur un plateau."
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "Boggs",
+        "note": "Ressource de catalogue ; son statut décédé reste propriétaire de sa présence dans la campagne."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Create ONE realistic full-body character sprite as a separate transparent PNG for the Alien 3 Fiorina game. ONE person, ONE relaxed standing idle pose; no sheet, no variants, no other person, no detached props. Body mostly side-on facing RIGHT with a subtle three-quarter turn so the near side of the face can be recognized. Both worn boots fully visible and planted on the same implied ground line, legs comfortably separated, arms naturally relaxed at the sides. Entire head-to-toe figure, no crop, centered in a portrait canvas with a modest transparent margin around every edge. Photographic, natural adult anatomy, highly detailed weathered real textile and skin, restrained neutral soft lighting. Integrate softly lit dimensional volume into the subject itself, but absolutely no floor, backdrop, studio gradient, ground shadow, glow, fog, smoke, vignette, caption, logo or typography. Background must be fully transparent alpha, including all four corners and space between limbs. Do not turn him into a stylized cartoon or videogame armored soldier. Match the level of realism and weathered fabric detail of the FINAL reference image (the already-produced Dillon sprite), but use that LAST reference ONLY for rendering style and composition, NEVER for identity, facial features, glasses, body proportions or costume.\nSUBJECT: Boggs as played by Leon Herbert in Alien 3 (1992), in his refinery exploration overcoat. Reference images 1 and 2 show his identity and crucial forehead tattoo; reference 3 shows his exact coat and layers in the film; reference 4 only confirms the long coat/lower-body silhouette in the tunnel. Keep the face of this particular actor: dark brown skin, shaved scalp, broad rounded-square face, strong brow, broad nose, full lips, short dark stubble, solid athletic build rather than Dillon's stocky build. Preserve the distinctive BLACK OUTLINED CROSS tattoo high and centered on his forehead with the small reddish curved detail from the portraits: follow the actual reference design, not random writing or another character's tattoo. No glasses, no cap. Outfit from reference 3: a very worn dark charcoal/olive heavy thigh-to-knee-length work overcoat worn open, thick rough light-brown/taupe shearling-like lining along both front openings and hood/collar, loose dark faded shirt underneath with frayed collar, simple cord neck pendant as in the still, baggy dark work trousers and battered work boots. Do not add armor or a uniform. Neutral watchful expression. In this relaxed idle pose his hands are lowered and empty: omit the burning flare, smoke, tunnel and other prisoners from the references. Do not copy any face or glasses from the Dillon style-only image.\nThe style-only Dillon reference may display a brown backdrop/halo in its RGB preview. Do NOT reproduce that backdrop: only the person may have visible alpha; all surrounding pixels must be transparent. Keep the subject interior fully opaque, with a clean antialiased silhouette.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "5c166754e4464840397f4826cb1f0b09373b338a12b0d9aab617b6334f2c3c2b",
+          "referenceName": "boggs-promo-1.jpg"
+        },
+        {
+          "sha256": "14f9912eda9072efe871bbe2f4ce30614ad3ed2d30a81138578265c0af4ea529",
+          "referenceName": "boggs-promo-2.jpg"
+        },
+        {
+          "sha256": "d39a300bc8d2e3b51555709710171ac4773d178476d84421e064297e97e80fcf",
+          "referenceName": "boggs-tunnel-still.jpg"
+        },
+        {
+          "sha256": "c90b0c4fab563082f4cc14467cdb17be71f0e888ee842c1f427e337b55ce05a7",
+          "referenceName": "trio-tunnel-still.jpg"
+        },
+        {
+          "sha256": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [
+        "boggs-promo-1.jpg",
+        "boggs-promo-2.jpg",
+        "boggs-tunnel-still.jpg",
+        "trio-tunnel-still.jpg",
+        "v115-dillon-style-only.png"
+      ],
+      "sources": [
+        {
+          "title": "Leon Herbert as Boggs",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-promo-035.jpg",
+          "character": "boggs",
+          "file": "boggs-promo-1.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/promo/",
+          "sha256": "5c166754e4464840397f4826cb1f0b09373b338a12b0d9aab617b6334f2c3c2b",
+          "dimensions": [
+            570,
+            851
+          ],
+          "bytes": 55966,
+          "status": "downloaded"
+        },
+        {
+          "title": "Leon Herbert as Boggs",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-promo-036.jpg",
+          "character": "boggs",
+          "file": "boggs-promo-2.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/promo/",
+          "sha256": "14f9912eda9072efe871bbe2f4ce30614ad3ed2d30a81138578265c0af4ea529",
+          "dimensions": [
+            570,
+            851
+          ],
+          "bytes": 56129,
+          "status": "downloaded"
+        },
+        {
+          "file": "boggs-tunnel-still.jpg",
+          "title": "Boggs explores lower levels of refinery",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-086.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/",
+          "sha256": "d39a300bc8d2e3b51555709710171ac4773d178476d84421e064297e97e80fcf",
+          "bytes": 109942
+        },
+        {
+          "file": "trio-tunnel-still.jpg",
+          "title": "Golic, Rains and Boggs in refinery",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-085.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/",
+          "sha256": "c90b0c4fab563082f4cc14467cdb17be71f0e888ee842c1f427e337b55ce05a7",
+          "bytes": 118890
+        }
+      ],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "film-still-or-publicity-photo",
+      "review": "Distinct shaved head and broad face, recognizable forehead cross motif, rough lined coat and cord pendant derived from the inspected portraits and tunnel still. Full figure facing right.",
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Forehead tattoo is a generated interpretation; its smallest contours are not an exact decal trace.",
+        "Boot construction, trouser seams and pendant details are inferred where references are distant or obscured.",
+        "No idle film frame exists in this exact viewing angle; pose is an adaptation for the sprite catalogue."
+      ]
+    },
+    {
+      "id": "rains-idle",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/rains-idle.png",
+      "sha256": "2347c1f64ddc568c3c296fcb05e57466142eb1b52fea27979e0d3e88e551475c",
+      "bytes": 1821277,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        238,
+        7,
+        772,
+        1535
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 500.0,
+        "y": 1532
+      },
+      "world": {
+        "w": 67.1916,
+        "h": 100.7874
+      },
+      "geometryReview": {
+        "basis": "Pieds et silhouette mesurés ; hauteur de présentation en unités projet, non mesurée sur un plateau."
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "Rains",
+        "note": "Ressource de catalogue ; son statut décédé reste propriétaire de sa présence dans la campagne."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Create ONE realistic full-body character sprite as a separate transparent PNG for the Alien 3 Fiorina game. ONE person, ONE relaxed standing idle pose; no sheet, no variants, no other person, no detached props. Body mostly side-on facing RIGHT with a subtle three-quarter turn so the near side of the face can be recognized. Both worn boots fully visible and planted on the same implied ground line, legs comfortably separated, arms naturally relaxed at the sides. Entire head-to-toe figure, no crop, centered in a portrait canvas with a modest transparent margin around every edge. Photographic, natural adult anatomy, highly detailed weathered real textile and skin, restrained neutral soft lighting. Integrate softly lit dimensional volume into the subject itself, but absolutely no floor, backdrop, studio gradient, ground shadow, glow, fog, smoke, vignette, caption, logo or typography. Background must be fully transparent alpha, including all four corners and space between limbs. Do not turn him into a stylized cartoon or videogame armored soldier. Match the level of realism and weathered fabric detail of the FINAL reference image (the already-produced Dillon sprite), but use that LAST reference ONLY for rendering style and composition, NEVER for identity, facial features, glasses, body proportions or costume.\nSUBJECT: Rains as played by Christopher John Fields in Alien 3 (1992), in his refinery exploration outfit. Reference 1 is his detailed film-era promotional identity portrait; reference 2 is the same man in the film; reference 3 gives the long coat and lower-body silhouette; reference 4 confirms the tunnel outfit. Match his lean pale face, long angular nose, deep-set light eyes, slightly recessed cheeks, fine stubble and faint discoloration near his left eye as visible in the portrait, with a subdued alert expression. Keep his distinctive worn black padded cloth/leather winter work cap: the large rounded rectangular front flap folded UP against the forehead/crown, broad dark padded sides, visible seam and frayed fabric, exactly as in reference 1. This is NOT a baseball cap, ordinary wool beanie, helmet or officer's peaked cap. Clothing from the film still: a battered long dark grey-brown heavy work coat down to around the knees, worn open with thick taupe/brown wool-like front lining and collar, dark faded inner layers, frayed brownish ribbed neckline, simple small metal pendant/cord visible at the chest, dark loose trousers and worn industrial boots. Lean build, narrower than Boggs. Hands lowered in a comfortable idle pose and empty; do not include flare, flames, smoke or backdrop. Do not copy Dillon's face, glasses or body. Copy the visible garments and cap rather than inventing a generic prisoner uniform.\nThe style-only Dillon reference may display a brown backdrop/halo in its RGB preview. Do NOT reproduce that backdrop: only the person may have visible alpha; all surrounding pixels must be transparent. Keep the subject interior fully opaque, with a clean antialiased silhouette.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "ed3b4d1ecbff6135085be6bcb2f7ff2b4740a713e4a31398b8f799d236e1757e",
+          "referenceName": "rains-promo-1.jpg"
+        },
+        {
+          "sha256": "c59fd045d0dda017ecaf37224db479b28f0406ea6af88f75eaa4eef589a4facb",
+          "referenceName": "rains-film-portrait.jpg"
+        },
+        {
+          "sha256": "25d8255bf0f90553237e860f37c2b877397cf8a179ca3362df68351aa62365e1",
+          "referenceName": "rains-tunnel-still.jpg"
+        },
+        {
+          "sha256": "c90b0c4fab563082f4cc14467cdb17be71f0e888ee842c1f427e337b55ce05a7",
+          "referenceName": "trio-tunnel-still.jpg"
+        },
+        {
+          "sha256": "9280c3c37a3f47dabe17606c32372886898d77162878912c41a1596bfdce6c78",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [
+        "rains-promo-1.jpg",
+        "rains-film-portrait.jpg",
+        "rains-tunnel-still.jpg",
+        "trio-tunnel-still.jpg",
+        "v115-dillon-style-only.png"
+      ],
+      "sources": [
+        {
+          "title": "Christopher John Fields as Rains",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-promo-041.jpg",
+          "character": "rains",
+          "file": "rains-promo-1.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/promo/",
+          "sha256": "ed3b4d1ecbff6135085be6bcb2f7ff2b4740a713e4a31398b8f799d236e1757e",
+          "dimensions": [
+            570,
+            851
+          ],
+          "bytes": 60475,
+          "status": "downloaded"
+        },
+        {
+          "character": "rains",
+          "title": "Christopher John Fields as Rains — film frame",
+          "url": "https://www.moviedude.co.uk/Christopher%20John%20Fields%20%20Alien3%20(1992).jpg",
+          "file": "rains-film-portrait.jpg",
+          "page": "https://www.moviedude.co.uk/%5BFilm%5D%20Alien3%20(1992).htm",
+          "sha256": "c59fd045d0dda017ecaf37224db479b28f0406ea6af88f75eaa4eef589a4facb",
+          "dimensions": [
+            190,
+            270
+          ],
+          "bytes": 8723,
+          "status": "downloaded"
+        },
+        {
+          "file": "rains-tunnel-still.jpg",
+          "title": "Rains explores lower levels of refinery",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-083.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/",
+          "sha256": "25d8255bf0f90553237e860f37c2b877397cf8a179ca3362df68351aa62365e1",
+          "bytes": 96388
+        },
+        {
+          "file": "trio-tunnel-still.jpg",
+          "title": "Golic, Rains and Boggs in refinery",
+          "url": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-085.jpg",
+          "page": "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/",
+          "sha256": "c90b0c4fab563082f4cc14467cdb17be71f0e888ee842c1f427e337b55ce05a7",
+          "bytes": 118890
+        }
+      ],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "film-still-or-publicity-photo",
+      "review": "Lean face, raised dark padded front cap flap and lined long work coat are distinguishable from Boggs and Murphy and follow the inspected portrait/still references. Full right-facing standing figure with empty hands.",
+      "limitations": [
+        "Generated reconstruction, not a scan or certified 1:1 reproduction.",
+        "Cap seam, coat fastenings and worn boot details are inferred where the original still is low resolution or shadowed.",
+        "Neutral standing pose and lighting are adapted for a reusable catalogue sprite.",
+        "The metal ring/cord on the chest is based on visible portrait detail, not identified as a named canonical item.",
+        "Very small lower transparent margin: visible alpha>=8 ends at y1535; opaque alpha>=128 at y1532 on a1536-pixel canvas. Whole boots remain present; add display padding in the catalogue renderer rather than silently editing the PNG."
+      ]
+    },
+    {
+      "id": "ripley-crash-walk-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png",
+      "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+      "bytes": 903417,
+      "width": 987,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        27,
+        22,
+        933,
+        1549
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 450,
+        "y": 1548
+      },
+      "world": {
+        "w": 59.566,
+        "h": 96.1988
+      },
+      "geometryReview": {
+        "id": "ripley-crash-walk-a",
+        "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594
+        },
+        "referenceId": "ripley-crash-idle",
+        "pivot": {
+          "x": 450,
+          "y": 1548
+        },
+        "world": {
+          "w": 59.566,
+          "h": 96.1988
+        },
+        "worldUnitsPerPixel": 0.0603505734,
+        "visibleBBoxAlpha128": [
+          27,
+          25,
+          932,
+          1548
+        ],
+        "visibleHeightWorld": 91.9139,
+        "headLandmarksEstimatedPixels": {
+          "top": 23,
+          "chin": 280,
+          "height": 257
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "headHeightWorld": 15.5101,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Wide heel-contact stride. Curls and bare feet preserved; interpreted motion.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-walk-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied Ripley arrival/crash sprite into ONE new movement pose for a realistic 2D side-view game. Preserve the EXACT same adult woman's identity, Sigourney Weaver/Ripley facial structure, short tight dark curls, hairline, existing light facial marks, slim athletic body, age, proportions, skin tone, dirty grey-brown ribbed sleeveless tank top and matching plain dark briefs, bare arms and legs, and BARE FEET. The image is a non-sexual action animation asset. Do not add new injuries, blood, equipment, jewelry, jacket, shoes, trousers, accessories or any other costume change. Preserve her restrained focused facial expression, consistent facial scale and the same photographic rendering style and soft neutral light. Only change the movement pose and the physically necessary fabric folds. Entire single person from hair to toes must fit inside the portrait canvas with transparent margin on all sides. Face and torso oriented to the RIGHT, near side of face visible in subtle three-quarter/profile just like the reference. No camera tilt, no frontal turnaround. One figure, one pose, no pose sequence, no grid, no text, no background or floor, no smoke, no glow, no shadow. Genuine fully transparent alpha outside the figure; solid natural opaque skin and fabric inside, clean antialiased outline. Maintain anatomically plausible consistent leg and arm lengths. This is an interpreted animation pose, not a recovered movie frame.\nPOSE WALK A — CONTACT: a calm purposeful walking step toward the right. The near/front leg reaches clearly forward to the right with an almost straight knee and HEEL touching the implied ground, toes slightly lifted. The far/rear leg extends diagonally back toward the left with only the toes/ball touching ground and heel raised. Distinct long but natural front/back stride, feet well separated horizontally, NOT a standing idle silhouette. Pelvis level, torso nearly upright. Near arm swings backward gently behind the hip, far arm swings forward gently, elbows only softly bent, hands relaxed; arms counterbalance the legs naturally. Keep both feet wholly visible. No running posture and no exaggerated sprint stretch.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Wide contact stride, forward bare heel low and rear forefoot trailing; arms oppose the legs. Face, curls and sleeveless grey-brown costume remain coherent with the source.",
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-crash-walk-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-b.png",
+      "sha256": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf",
+      "bytes": 787330,
+      "width": 987,
+      "height": 1594,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        205,
+        21,
+        787,
+        1563
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 475,
+        "y": 1563
+      },
+      "world": {
+        "w": 59.566,
+        "h": 96.1988
+      },
+      "geometryReview": {
+        "id": "ripley-crash-walk-b",
+        "sha256": "10fd764540582a9884da1879b88b86be5234784166b733ff1e7f7efd1a629acf",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 987,
+          "h": 1594
+        },
+        "referenceId": "ripley-crash-idle",
+        "pivot": {
+          "x": 475,
+          "y": 1563
+        },
+        "world": {
+          "w": 59.566,
+          "h": 96.1988
+        },
+        "worldUnitsPerPixel": 0.0603505734,
+        "visibleBBoxAlpha128": [
+          206,
+          24,
+          785,
+          1563
+        ],
+        "visibleHeightWorld": 92.8795,
+        "headLandmarksEstimatedPixels": {
+          "top": 21,
+          "chin": 278,
+          "height": 257
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "headHeightWorld": 15.5101,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Narrow passing pose; slightly higher than A at the same anatomy scale, consistent with passing rather than contact.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-walk-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied Ripley arrival/crash sprite into ONE new movement pose for a realistic 2D side-view game. Preserve the EXACT same adult woman's identity, Sigourney Weaver/Ripley facial structure, short tight dark curls, hairline, existing light facial marks, slim athletic body, age, proportions, skin tone, dirty grey-brown ribbed sleeveless tank top and matching plain dark briefs, bare arms and legs, and BARE FEET. The image is a non-sexual action animation asset. Do not add new injuries, blood, equipment, jewelry, jacket, shoes, trousers, accessories or any other costume change. Preserve her restrained focused facial expression, consistent facial scale and the same photographic rendering style and soft neutral light. Only change the movement pose and the physically necessary fabric folds. Entire single person from hair to toes must fit inside the portrait canvas with transparent margin on all sides. Face and torso oriented to the RIGHT, near side of face visible in subtle three-quarter/profile just like the reference. No camera tilt, no frontal turnaround. One figure, one pose, no pose sequence, no grid, no text, no background or floor, no smoke, no glow, no shadow. Genuine fully transparent alpha outside the figure; solid natural opaque skin and fabric inside, clean antialiased outline. Maintain anatomically plausible consistent leg and arm lengths. This is an interpreted animation pose, not a recovered movie frame.\nPOSE WALK B — PASSING: this must be geometrically very different from the wide contact stride in the second reference, which is the previous A frame. Bring the feet CLOSE TOGETHER horizontally. One supporting leg is almost straight and VERTICAL DIRECTLY UNDER THE PELVIS, its bare foot planted flat on the implied ground. The other leg passes beside it with its knee clearly bent, its bare foot lifted just above the ground close to the supporting ankle, heel behind the passing knee. Keep both legs individually readable with a little separation, no merged limbs. Pelvis slightly higher than in contact, torso upright. Both relaxed arms pass near the sides with modest opposing motion, NOT widely stretched. It must read as a narrow mid-step passing pose, not another long stride, not a mirror image of frame A, not an idle with both feet planted. Reference 1 controls appearance and costume. Reference 2 controls the same character's rendering and proportions only; actively replace its wide contact stride with the narrow passing silhouette described here.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        },
+        {
+          "sha256": "70f56bc433b4fbd37db810f15270401abcbfb159af0e10ebb67cf116ce6d062f",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-walk-a.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Narrow passing silhouette: support leg vertical under pelvis, other knee bent and foot raised near support ankle; clearly different from A, not a mirrored copy.",
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-crash-run-a",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png",
+      "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+      "bytes": 797953,
+      "width": 1134,
+      "height": 1387,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        25,
+        34,
+        1077,
+        1345
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 515,
+        "y": 1342
+      },
+      "world": {
+        "w": 72.6795,
+        "h": 88.8946
+      },
+      "geometryReview": {
+        "id": "ripley-crash-run-a",
+        "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1134,
+          "h": 1387
+        },
+        "referenceId": "ripley-crash-idle",
+        "pivot": {
+          "x": 515,
+          "y": 1342
+        },
+        "world": {
+          "w": 72.6795,
+          "h": 88.8946
+        },
+        "worldUnitsPerPixel": 0.0640913114,
+        "visibleBBoxAlpha128": [
+          26,
+          38,
+          1076,
+          1342
+        ],
+        "visibleHeightWorld": 83.5751,
+        "headLandmarksEstimatedPixels": {
+          "top": 34,
+          "chin": 276,
+          "height": 242
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "headHeightWorld": 15.5101,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Extended grounded running stride. Keep anatomical scale from head/curls, preserving reduced silhouette height.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-run-a",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied Ripley arrival/crash sprite into ONE new movement pose for a realistic 2D side-view game. Preserve the EXACT same adult woman's identity, Sigourney Weaver/Ripley facial structure, short tight dark curls, hairline, existing light facial marks, slim athletic body, age, proportions, skin tone, dirty grey-brown ribbed sleeveless tank top and matching plain dark briefs, bare arms and legs, and BARE FEET. The image is a non-sexual action animation asset. Do not add new injuries, blood, equipment, jewelry, jacket, shoes, trousers, accessories or any other costume change. Preserve her restrained focused facial expression, consistent facial scale and the same photographic rendering style and soft neutral light. Only change the movement pose and the physically necessary fabric folds. Entire single person from hair to toes must fit inside the portrait canvas with transparent margin on all sides. Face and torso oriented to the RIGHT, near side of face visible in subtle three-quarter/profile just like the reference. No camera tilt, no frontal turnaround. One figure, one pose, no pose sequence, no grid, no text, no background or floor, no smoke, no glow, no shadow. Genuine fully transparent alpha outside the figure; solid natural opaque skin and fabric inside, clean antialiased outline. Maintain anatomically plausible consistent leg and arm lengths. This is an interpreted animation pose, not a recovered movie frame.\nPOSE RUN A — CONTACT / EXTENDED STRIDE: a determined grounded run toward the right, visibly faster than a walk. Torso inclines forward about 12 degrees from hips, head kept upright looking ahead. The leading leg reaches diagonally forward to the RIGHT, knee gently bent, bare forefoot/ball just contacting the implied ground; heel slightly lifted. The trailing leg reaches back toward the LEFT, knee bent and its bare foot visibly lifted behind, so legs form a clear wide running stride. Both arms bent around 80–95 degrees: near arm behind the torso, opposite arm forward, relaxed closed fingers, natural opposite-leg timing. Keep body lean and athletic without changing musculature. Clear split leg silhouette, all toes visible, no floating or jumping impression, no speed lines.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Extended running stride, bent elbows, forward torso lean, rear foot lifted. The generated lead foot is closer to a flat contact than the requested forefoot-only contact.",
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ripley-crash-run-b",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-b.png",
+      "sha256": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086",
+      "bytes": 1581184,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        183,
+        34,
+        827,
+        1507
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 405,
+        "y": 1507
+      },
+      "world": {
+        "w": 58.1771,
+        "h": 87.2656
+      },
+      "geometryReview": {
+        "id": "ripley-crash-run-b",
+        "sha256": "04c559dad497ee1d560485ede2fd13f7e0ba7a63135b376020fcba8f67e6b086",
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 1024,
+          "h": 1536
+        },
+        "referenceId": "ripley-crash-idle",
+        "pivot": {
+          "x": 405,
+          "y": 1507
+        },
+        "world": {
+          "w": 58.1771,
+          "h": 87.2656
+        },
+        "worldUnitsPerPixel": 0.0568135435,
+        "visibleBBoxAlpha128": [
+          183,
+          36,
+          826,
+          1507
+        ],
+        "visibleHeightWorld": 83.5727,
+        "headLandmarksEstimatedPixels": {
+          "top": 37,
+          "chin": 310,
+          "height": 273
+        },
+        "referenceHeadHeightEstimatedPixels": 248,
+        "headHeightWorld": 15.5101,
+        "scaleMethod": "reference worldUnitsPerPixel * estimated reference head height / estimated pose head height",
+        "pivotMethod": "Manual visual estimate of pelvis X projected to ground, with Y at bottom of alpha>=128 silhouette; not the leading foot centre.",
+        "review": "Compact support/free-knee pose. Source head is larger, so use a smaller world-units-per-pixel ratio than A.",
+        "confidence": "medium; human landmark estimation, not skeletal tracking",
+        "limitations": [
+          "Two-dimensional head landmarks depend on head tilt and perspective; allow approximately5–10% art-registration uncertainty.",
+          "Do not describe two poses as a full alternating gait or exact film biomechanics.",
+          "Native collider, ladder, floor and transition alignment are outside this static review."
+        ]
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "ripley-crash-run-b",
+        "note": "Pose reliée au sélecteur natif de Ripley selon la tenue et l’état de jeu ; l’aperçu seul ne prouve pas un parcours."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the supplied Ripley arrival/crash sprite into ONE new movement pose for a realistic 2D side-view game. Preserve the EXACT same adult woman's identity, Sigourney Weaver/Ripley facial structure, short tight dark curls, hairline, existing light facial marks, slim athletic body, age, proportions, skin tone, dirty grey-brown ribbed sleeveless tank top and matching plain dark briefs, bare arms and legs, and BARE FEET. The image is a non-sexual action animation asset. Do not add new injuries, blood, equipment, jewelry, jacket, shoes, trousers, accessories or any other costume change. Preserve her restrained focused facial expression, consistent facial scale and the same photographic rendering style and soft neutral light. Only change the movement pose and the physically necessary fabric folds. Entire single person from hair to toes must fit inside the portrait canvas with transparent margin on all sides. Face and torso oriented to the RIGHT, near side of face visible in subtle three-quarter/profile just like the reference. No camera tilt, no frontal turnaround. One figure, one pose, no pose sequence, no grid, no text, no background or floor, no smoke, no glow, no shadow. Genuine fully transparent alpha outside the figure; solid natural opaque skin and fabric inside, clean antialiased outline. Maintain anatomically plausible consistent leg and arm lengths. This is an interpreted animation pose, not a recovered movie frame.\nPOSE RUN B — COMPRESSION / PASSING: this must be a clearly DIFFERENT phase from the extended contact stride in the second reference. Compress the stance: the supporting bare foot is planted DIRECTLY UNDER THE PELVIS, its shin nearly vertical and its knee strongly flexed roughly 35–45 degrees, with the hips noticeably a little lower. The free thigh drives FORWARD toward the right with its knee lifted in front of the hips, lower leg folded back under the thigh, heel lifted behind that knee. Thus the TWO FEET are much CLOSER HORIZONTALLY than frame A; one foot on the ground and one up, not two wide spread running legs. Keep knees and shins separately legible. Torso retains the same modest forward running lean. Reverse the arm swing from frame A: near bent forearm forward, far bent arm behind, elbows around 90 degrees. Head/facial proportions and costume identical. Reference 1 controls identity/costume. Reference 2 is the A frame: preserve its rendering and character but explicitly replace its extended stride with this compact, bent-knee compression pose. Do not simply re-render or mirror the A pose.",
+      "generationSteps": [],
+      "references": [
+        {
+          "sha256": "129187cce0e1a346eef0b287f9f5148d29f390d65119a2de4ec5c664722b029b",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-idle.png"
+        },
+        {
+          "sha256": "56d4539bbba13c504ec7365aa6208edc3adfbb8ab316d351213e29f0feca106d",
+          "asset": "assets/openai/sprites/alien3-fiorina-v115/ripley-crash-run-a.png"
+        }
+      ],
+      "sourceImages": [],
+      "referenceNames": [],
+      "sources": [],
+      "sourcePageUrls": [],
+      "referenceImageUrls": [],
+      "referenceKind": "V115-generated-asset",
+      "review": "Compact bent-knee stance with free knee driven high in front and arm swing reversed; clearly different from A. This is an interpreted compression/passing pose, not measured film biomechanics.",
+      "limitations": [
+        "Two selected phases per gait form a minimal animation; no complete opposite-leg gait or smooth interpolation was generated.",
+        "Body pose and necessary fabric folds are interpreted; no claim of exact film movement.",
+        "Minor alpha1..7 fringe exists; validate on real light/dark Canvas backgrounds before release.",
+        "Deux poses clés seulement par boucle ; phases intermédiaires et variantes gauche dédiées non produites."
+      ]
+    },
+    {
+      "id": "ox-assembly-idle",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/ox-assembly-idle.png",
+      "sha256": "421a8ef4fc9b3a0afbdb86c5306e1909dbef5fccdde096147f92ef22e2508a51",
+      "bytes": 1965923,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        65,
+        47,
+        1478,
+        951
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "pivot": {
+        "x": 783.36,
+        "y": 947.2
+      },
+      "world": {
+        "w": 150,
+        "h": 100.0
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "assembly",
+        "label": "Bovin vivant — Assembly",
+        "note": "Ressource de catalogue ; le shell ox-approach ne devient pas une salle native jouable."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: isolated game sprite. Create ONE full-body LIVING working ox as seen among the draught cattle in the attached Alien 3 Assembly Cut beach film frame. This is an honest reference-based reconstruction of the live animal, not a certified exact scan. Grounded realistic natural anatomy, heavy broad bovine body, strong neck and shoulders, short dark brown to nearly black coarse coat, broad dark muzzle, large lateral ears and a pair of substantial pale gray-brown horns growing out sideways then curving gently upward. Do not invent a specific breed or bright white patches. The animal stands calmly on all four cloven hooves in a readable idle pose, body in almost pure SIDE PROFILE, HEAD FACING RIGHT, tail hanging at the left rear. All four legs, the entire tail, both horn tips, ears and muzzle must fit in the image with generous clear margins. Healthy animal, no wound, no blood, no carcass, no alien, no humans, no handler, no rope connecting out of frame, no second animal. Do not copy the darkness, people, beach or framing of the reference. Lift the exposure enough to reveal believable coarse fur and muscle forms, using restrained soft neutral side light, subtle muted warm brown highlights, consistent with a detailed cinematic 2D side-scrolling game sprite. Background MUST be genuinely transparent RGBA with clean antialiased edges and no dark halo, no floor, no grounding shadow, no scene, no backdrop, no gradient, no caption, no lettering, no logo, no border. One subject only, centered, landscape composition.",
+      "generationSteps": [],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "oxen-beach-film.jpg",
+          "imageUrl": "https://highwaytohorror.com/wp-content/uploads/2024/05/prisoners-oxen.jpg",
+          "pageUrls": [
+            "https://highwaytohorror.com/alien-3-filming-locations/"
+          ],
+          "sha256": "da6d6bf4ac9e6fa0e37a41907e979cc494d76c596208b7fb82c16ffa98b886c3",
+          "bytes": 55936,
+          "width": 1280,
+          "height": 720,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "oxen-beach-film.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://highwaytohorror.com/alien-3-filming-locations/"
+      ],
+      "referenceImageUrls": [
+        "https://highwaytohorror.com/wp-content/uploads/2024/05/prisoners-oxen.jpg"
+      ],
+      "referenceKind": "film-frame-rehosted-with-film-credit",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "Vue latérale et pose calme reconstruites à partir d’un photogramme frontal très sombre de bœufs vivants.",
+        "Robe brun très sombre, masse et cornes guidées par le photogramme ; nuances du pelage, morphologie précise et éclairage interprétés.",
+        "Aucune certification de fidélité 1:1 ni d’identification d’une race."
+      ]
+    },
+    {
+      "id": "weyland-yutani-matchbox",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/weyland-yutani-matchbox.png",
+      "sha256": "ce8967b10b7d623c6720a4633b0b9559c6b7f261b0bbb0c4272016375481be45",
+      "bytes": 2535666,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        205,
+        161,
+        1325,
+        867
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 768.0,
+        "y": 860.16
+      },
+      "world": {
+        "w": 18,
+        "h": 12.0
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "Boîte d’allumettes Weyland-Yutani",
+        "note": "Accessoire de production documenté ; aucune apparition native revendiquée."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: product-mockup / isolated 2D game prop. Generate exactly ONE Weyland-Yutani matchbox based on the attached photograph of the original Alien 3 production matchbox from Nick Gillard's collection. One closed rectangular shallow cardboard sleeve with its wooden drawer fully inserted, front label facing the viewer in a restrained three-quarter angle showing a little right side and top. Preserve the specific worn cream edges, orange label ground, red circular disc behind the black-and-cream stylized long-tailed bird, fine black stepped rectangular label border, and cream rectangular text panel. The text on the front panel must read MATCH in tall black condensed capitals, with WEYLAND YUTANI in small capitals beneath. Match the attached reference's proportions and design; the bird is a simple vintage flat printed emblem, not a realistic bird. Aged off-white cardboard and warm thin wood edges, dark reddish-brown striker strip on the side, modest production dirt and small scuffs, not severe damage. Do not add any matches, loose parts, flame, hand, person, booklet, paper stack, second box, modern logo, invented extra text, annotation or watermark. This is a realistic detailed game sprite, not a flat logo. Even soft neutral illumination, crisp clean silhouette, ample transparent margin on every side. True transparent RGBA background, no floor, no table, no drop shadow, no colored backdrop, no border. Only the single complete closed matchbox.",
+      "generationSteps": [],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "matchbox-propstore-detail-a.jpg",
+          "imageUrl": "https://images.propstore.com/18a3ddcf7fcac1fadb53ffdb5228d15d-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/lot-830-nick-gillard-collection-nick-gillards-personal-shooting-script-storyboards-and-weyland-yutani-matchbox/"
+          ],
+          "sha256": "8cfdcdcd096dd9b7d9db7e0fcdd5f3cc494c7aa46366c579d7afd87177666241",
+          "bytes": 47896,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        },
+        {
+          "fileName": "matchbox-propstore-detail-b.jpg",
+          "imageUrl": "https://images.propstore.com/d7e983bdd0dc8b7b9a3274811533329d-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/lot-830-nick-gillard-collection-nick-gillards-personal-shooting-script-storyboards-and-weyland-yutani-matchbox/"
+          ],
+          "sha256": "300a7a86271677861e6b994ba421549e9ed4ccded412d0a49ff9e52a8cacfdea",
+          "bytes": 35616,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "matchbox-propstore-detail-a.jpg",
+        "matchbox-propstore-detail-b.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://propstore.com/product/alien-1992/lot-830-nick-gillard-collection-nick-gillards-personal-shooting-script-storyboards-and-weyland-yutani-matchbox/"
+      ],
+      "referenceImageUrls": [
+        "https://images.propstore.com/18a3ddcf7fcac1fadb53ffdb5228d15d-1.jpg",
+        "https://images.propstore.com/d7e983bdd0dc8b7b9a3274811533329d-1.jpg"
+      ],
+      "referenceKind": "production-prop-auction-photographs",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "Boîte de production attribuée à la collection Nick Gillard par Propstore ; présence à un moment précis du montage non établie ici.",
+        "Tiroir refermé pour le sprite ; relief, éclairage et usure régénérés, graphisme approché et non fac-similé garanti."
+      ]
+    },
+    {
+      "id": "company-scientist-goggles",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/company-scientist-goggles.png",
+      "sha256": "3e06b1250b00f5c9a674b76230818b062d55f7d1eda3b3c17b3334661141f2fc",
+      "bytes": 1133798,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        135,
+        149,
+        1594,
+        741
+      ],
+      "cornersAlpha": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 887.0,
+        "y": 727.34
+      },
+      "world": {
+        "w": 16,
+        "h": 8.0
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "Lunettes du scientifique",
+        "note": "Accessoire autonome au catalogue ; ne remplace pas les lunettes intégrées au PNG du scientifique."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: isolated game equipment sprite. Generate ONE complete pair of the Weyland-Yutani scientist's protective glasses from Alien 3, guided closely by the two attached Propstore photographs of the original production prop. Present the glasses alone in a readable front three-quarter view with the front angled slightly toward the RIGHT. Preserve the very broad almost rectangular clear plastic safety lenses with rounded lower corners, integral clear protective side shields, pale translucent frame and slim temples. Crucial identifying detail: ONE small circular auxiliary magnifying lens is mounted on a tiny brass/silver hinge in front of the wearer's RIGHT lens (the lens on the LEFT when seen front-on). Keep that single round loupe and its upper attachment, not two loupes. The main lenses have a very light silver mirrored reflective coating like sprayed safety goggles; translucent edges, faint warm tint and gentle wear; do not turn them into opaque black sunglasses or military goggles. Include both complete temple arms folded neatly back so no parts are cut off. Restore a lightly used screen-era object rather than copying the aged heavy scratches. Do not reproduce the support rod, circular exhibition base, movie title, watermark or any text from the reference. No human face, head, hand, second pair of glasses, additional props or floating loose components. Realistic detailed material rendering and restrained neutral studio illumination, clean silhouette with generous margins, suitable for a cinematic 2D side-scrolling inventory. Background must be genuinely transparent RGBA with no floor, no cast shadow, no halo, no colored glow, no gradient, no border. Exactly one isolated complete pair of glasses.",
+      "generationSteps": [],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "scientist-goggles-propstore-1.jpg",
+          "imageUrl": "https://images.propstore.com/f92951843baa310c3a8761dc92f41d13-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/weyland-yutani-scientists-protective-glasses/"
+          ],
+          "sha256": "a3f99ec916d2882552d0643197fd3f0e933c5720c97f345f523ae861dfb581aa",
+          "bytes": 30767,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        },
+        {
+          "fileName": "scientist-goggles-propstore-2.jpg",
+          "imageUrl": "https://images.propstore.com/e27b53dfcb46e726cf3010565bbdf35b-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/weyland-yutani-scientists-protective-glasses/"
+          ],
+          "sha256": "ad989d006fc331280330fd9d3a0e8ce5be672bf904fe5350ecae383f9577f755",
+          "bytes": 27357,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "scientist-goggles-propstore-1.jpg",
+        "scientist-goggles-propstore-2.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://propstore.com/product/alien-1992/weyland-yutani-scientists-protective-glasses/"
+      ],
+      "referenceImageUrls": [
+        "https://images.propstore.com/f92951843baa310c3a8761dc92f41d13-1.jpg",
+        "https://images.propstore.com/e27b53dfcb46e726cf3010565bbdf35b-1.jpg"
+      ],
+      "referenceKind": "production-prop-auction-photographs",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "Objet photographié avec peinture réfléchissante vieillie ; la légère réflexion argentée et les rayures sont régénérées.",
+        "Loupe unique conservée devant le verre droit du porteur ; socle de collection exclu.",
+        "Asset indépendant de catalogue ; ne prétend pas être un nouvel équipement jouable déjà intégré."
+      ]
+    },
+    {
+      "id": "royal-facehugger-assembly",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/royal-facehugger-assembly.png",
+      "sha256": "7d3ef42dba897af75eea1f9814bf96a1f15388dba13e7b4e018d03d0d3559e8d",
+      "bytes": 1342849,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        18,
+        69,
+        2154,
+        704
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 1629.0,
+        "y": 687.8
+      },
+      "world": {
+        "w": 100,
+        "h": 33.3333
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "assembly",
+        "label": "Facehugger royal — Assembly",
+        "note": "Accessoire inerte de la séquence de l’abattoir ; distinct du facehugger standard de l’ouverture, sans ennemi ajouté."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: isolated realistic creature prop sprite for a 2D cinematic game. Produce exactly ONE Royal / Super Facehugger corresponding to the distinctive Alien 3 Assembly Cut abattoir production prop in the two attached Propstore photographs. This is the dark webbed Royal variant, NOT the ordinary pale tan facehugger seen elsewhere. Show the whole creature resting inert and intact on an implied horizontal plane, low three-quarter dorsal-side view, compact body on the RIGHT, long tapering segmented tail flowing to the LEFT in one gentle shallow curve. Preserve the unusual broad membranous webs between the four finger-like digits on each side, heavy dark olive-brown leathery paired body lobes, ribbed central dorsal ridge and armored repeating tail segments. It should have eight articulated digits total, four per side, connected by the characteristic scalloped webs, with natural irregular texture. Restore only the broken outer finger tips and minor tail wear from the aged museum prop into plausible complete production-era anatomy; retain the original Royal design, not wings or new tentacles. No mammal head, no face, no eyes, no teeth, no egg, no victim, no blood, no gore, no wound, no attack and no motion effect. No bright slime or fantasy glow. The prop's aged green-black paint informs a subdued olive and brown palette, with gentle material highlights for readability. Remove the collector display stand and support rod entirely; exclude all logos, titles, captions and watermark. One creature only, complete from tail tip to every digit, generous transparent margin. Genuine transparent RGBA background, no floor, no cast shadow, no dark halo, no scene or colored background. Detailed realistic sprite rendering, clean edges, landscape composition.",
+      "generationSteps": [],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "royal-facehugger-propstore-1.jpg",
+          "imageUrl": "https://images.propstore.com/58023ba83be0821185bd54062ad970ea-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/super-facehugger-display/",
+            "https://www.avpgalaxy.net/website/interviews/alec-gillis-tom-woodruff-2/"
+          ],
+          "sha256": "333585a1b8577d012485beb1312ebcdd148eba9140a9d416a0604cd044c457fc",
+          "bytes": 26781,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        },
+        {
+          "fileName": "royal-facehugger-propstore-2.jpg",
+          "imageUrl": "https://images.propstore.com/a9bbef8d0f9938834f6674cf1b09e1bb-1.jpg",
+          "pageUrls": [
+            "https://propstore.com/product/alien-1992/super-facehugger-display/",
+            "https://www.avpgalaxy.net/website/interviews/alec-gillis-tom-woodruff-2/"
+          ],
+          "sha256": "09744d16a3edfded2cc861786d02f5ab933f42b222e8384965fe856c1258662a",
+          "bytes": 73793,
+          "width": 734,
+          "height": 734,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "royal-facehugger-propstore-1.jpg",
+        "royal-facehugger-propstore-2.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://propstore.com/product/alien-1992/super-facehugger-display/",
+        "https://www.avpgalaxy.net/website/interviews/alec-gillis-tom-woodruff-2/"
+      ],
+      "referenceImageUrls": [
+        "https://images.propstore.com/58023ba83be0821185bd54062ad970ea-1.jpg",
+        "https://images.propstore.com/a9bbef8d0f9938834f6674cf1b09e1bb-1.jpg"
+      ],
+      "referenceKind": "production-prop-auction-photographs-with-ADI-letter-described",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "Variante Royal/Super de l’abattoir Assembly ; ce sprite ne représente pas le facehugger ordinaire rampant dans l’ouverture.",
+        "Accessoire de production photographié vieilli et avec des doigts incomplets ; extrémités restaurées et pose au sol reconstruites.",
+        "La palette olive-brun est guidée par la photographie de l’accessoire vieilli, dont Propstore signale l’assombrissement ; couleur de tournage exacte non certifiée.",
+        "Pose inerte de catalogue, aucun cycle locomoteur ajouté."
+      ]
+    },
+    {
+      "id": "dillon-glasses",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/dillon-glasses.png",
+      "sha256": "fadc0da30854c40b00e8131a083f92f23487b4410ff2f66010edb26b25176f70",
+      "bytes": 1094340,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "visibleBBoxAlpha8": [
+        102,
+        110,
+        1641,
+        783
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 887.0,
+        "y": 780.56
+      },
+      "world": {
+        "w": 16,
+        "h": 8.0
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "documentary",
+        "label": "Lunettes de Dillon",
+        "note": "Accessoire autonome au catalogue ; ne remplace pas les lunettes intégrées aux PNG de Dillon."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Edit the attached single eyeglasses sprite only. Preserve the entire existing chestnut-brown and translucent amber frame, both temples, the rectangular lens shapes, tiny rivets, wear, angle, size and silhouette exactly. Correct only the two flat milky-white lens interiors: they should be optically CLEAR, colorless transparent glass so that an underlying game scene remains plainly visible through them. Make most of each lens interior nearly fully transparent in the alpha channel, with only a very faint narrow reflection and a thin glass edge highlight. No solid white fill, no opaque silver coating, no foggy frosted glass, no black lenses. Also remove detached white fringe specks around the lower outline while retaining smooth natural antialiasing. Keep one complete pair of glasses and no additional objects. Preserve a genuine transparent RGBA background; no floor, no drop shadow, no halo, no gradient, no text. Do not change the spectacle design or replace it with a different model.",
+      "generationSteps": [
+        {
+          "kind": "initial",
+          "prompt": "Use case: isolated realistic 2D game equipment sprite. Generate exactly ONE pair of Dillon's eyeglasses from Alien 3, based faithfully on the complete pair at the TOP of the attached Propstore auction photograph. Use the actor photograph below only to corroborate scale and style; do not include a person. The frame is substantial dark warm chestnut-brown acetate, broad thick upper brow and bridge, tapering toward a translucent honey-amber to clear lower lens rim. Two wide nearly RECTANGULAR clear lenses with softly rounded corners, not circular lenses and not metal wire-rim spectacles. Small pale metal rivet dots near the outer upper corners, thick dark-brown temples with gently curved ear tips. Show the single complete pair in a front three-quarter view angled slightly toward the RIGHT, both lenses readable and both arms extending neatly behind them, all tips comfortably inside the canvas. Preserve the compact practical 1990s frame proportions from the reference. Modest real production wear, subtle scuffs, optically clear lens surfaces with restrained neutral reflections; not sunglasses, no tint blackening the lenses, no extra magnifier. Do not include the autographed photo, case, display base, support, lettering, maker branding, watermark, second pair or loose parts. Detailed realistic cinematic game-prop rendering, clean sharp silhouette and generous margins. Genuine transparent RGBA background, no floor, no cast shadow, no backdrop, no colored halo, no gradient. One object only.",
+          "retained": false,
+          "reference": "dillon-glasses-auction-spring.jpg",
+          "reason": "Reflets blancs trop opaques sur fond sombre.",
+          "sha256": "181bd9062fc8c0ccf648e3c7783b1295b394b611b4046555dd54fc339e7a5a12"
+        },
+        {
+          "kind": "edit",
+          "prompt": "Edit the attached single eyeglasses sprite only. Preserve the entire existing chestnut-brown and translucent amber frame, both temples, the rectangular lens shapes, tiny rivets, wear, angle, size and silhouette exactly. Correct only the two flat milky-white lens interiors: they should be optically CLEAR, colorless transparent glass so that an underlying game scene remains plainly visible through them. Make most of each lens interior nearly fully transparent in the alpha channel, with only a very faint narrow reflection and a thin glass edge highlight. No solid white fill, no opaque silver coating, no foggy frosted glass, no black lenses. Also remove detached white fringe specks around the lower outline while retaining smooth natural antialiasing. Keep one complete pair of glasses and no additional objects. Preserve a genuine transparent RGBA background; no floor, no drop shadow, no halo, no gradient, no text. Do not change the spectacle design or replace it with a different model.",
+          "retained": true,
+          "reference": "initial-dillon-glasses-generated-png",
+          "reason": "Verres vérifiés translucides sur fonds clair et sombre dans Canvas/Skia.",
+          "inputSha256": "181bd9062fc8c0ccf648e3c7783b1295b394b611b4046555dd54fc339e7a5a12",
+          "sha256": "fadc0da30854c40b00e8131a083f92f23487b4410ff2f66010edb26b25176f70"
+        }
+      ],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "dillon-glasses-auction-spring.jpg",
+          "imageUrl": "https://images.propstore.com/8fcce7040aa1f12dece4114e938f7a2d-2.jpeg",
+          "pageUrls": [
+            "https://propstoreauction.com/lot-details/index/catalog/508/lot/197373",
+            "https://propstore.com/movie/alien-1992/"
+          ],
+          "sha256": "8740dd2f56cf5ecb10aa12b594f0b5d3c54b4425c23b610f45f930720e6de682",
+          "bytes": 16492,
+          "width": 356,
+          "height": 356,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "dillon-glasses-auction-spring.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://propstoreauction.com/lot-details/index/catalog/508/lot/197373",
+        "https://propstore.com/movie/alien-1992/"
+      ],
+      "referenceImageUrls": [
+        "https://images.propstore.com/8fcce7040aa1f12dece4114e938f7a2d-2.jpeg"
+      ],
+      "referenceKind": "production-prop-auction-photograph",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "Monture de lunettes attribuée à Dillon par Propstore, fabriquée par Anglo American Eyewear ; dimensions physiques non relevées.",
+        "Photo consultée de faible résolution (356 × 356 avec deux sujets) ; relief et usure fine interprétés.",
+        "Transparence des verres corrigée par imagegen pour éviter un écran blanc dans le jeu ; ce rendu optique est une adaptation."
+      ]
+    },
+    {
+      "id": "fire-flare",
+      "asset": "assets/openai/sprites/alien3-fiorina-v115/fire-flare.png",
+      "sha256": "111952b339cd5c6ef566a7337dd8de208b14e46f0440ee93cca13b5773666bc0",
+      "bytes": 1286902,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "visibleBBoxAlpha8": [
+        343,
+        15,
+        722,
+        1502
+      ],
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": {
+        "x": 484.0,
+        "y": 1500.0
+      },
+      "world": {
+        "w": 62,
+        "h": 93.0
+      },
+      "geometryReview": {
+        "basis": "Point d’appui proposé et dimensions de présentation ; rapport d’aspect original conservé."
+      },
+      "catalogue": {
+        "context": "common",
+        "label": "Fusée allumée",
+        "note": "Prop lié au support fire-flare-v113 et visible uniquement lorsque flags.fire est actif ; pas d’état éteint inventé."
+      },
+      "generator": "built-in image_gen",
+      "exact": false,
+      "originalPixelsPreserved": true,
+      "prompt": "Use case: one isolated cinematic 2D game environment prop. Recreate ONLY the lit handheld mining flare visible in the hands of the prisoners in the two attached Alien 3 film photographs. Produce one complete lit flare standing upright for placement in the game's existing industrial prop socket. Its handle bottom is at the bottom center, its active tip at the top with a slight lean to the RIGHT. Follow the visible simple prop silhouette: a narrow worn dark gray metallic cylindrical handle/stem, a small round flat metal hand-guard just above the grip, and a short upper projecting tube. Keep this a plain utilitarian mining flare holder, not a tactical flashlight, gun, medieval wooden torch or modern plastic rescue flare. The source film conceals the active tube end in overexposed light; preserve that observable lit state, covering the active tip with a compact brilliant warm-WHITE light and sparse pale yellow sparks, not inventing a detailed cap or internal mechanism. Add only a restrained thin wisp of translucent gray-white smoke rising from the tip. The handle, round guard and much of the shaft must stay crisp and readable; do not surround the whole object with a giant fireball. No red colored flame, no large orange campfire, no electrical bolt, no fuel bottle, no canister label, no words, no logo, no serial number, no strap unless clearly shown, no hands, no person, no case, no additional flares, no wall or environment. One object only. Realistic worn metal and practical cinematic light matching the references. Entire object and smoke comfortably inside the image with clear margins, vertical composition. True transparent RGBA background including all space around the flame, no rectangle of fog or backdrop, no ground plane, no floor shadow, no border. This is a visual reconstruction of the visible lit film prop rather than a technical manufacturing diagram.",
+      "generationSteps": [],
+      "references": [],
+      "sourceImages": [
+        {
+          "fileName": "flare-boggs-film.jpg",
+          "imageUrl": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-086.jpg",
+          "pageUrls": [
+            "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/"
+          ],
+          "sha256": "d39a300bc8d2e3b51555709710171ac4773d178476d84421e064297e97e80fcf",
+          "bytes": 109942,
+          "width": 1282,
+          "height": 848,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        },
+        {
+          "fileName": "flare-084.jpg",
+          "imageUrl": "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-084.jpg",
+          "pageUrls": [
+            "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/"
+          ],
+          "sha256": "df2b6697ac39c0a84cf63b73aa760664acaa3f751428a7d7e7bc3681b62171b6",
+          "bytes": 60084,
+          "width": 573,
+          "height": 844,
+          "inspected": true,
+          "usedForGeneration": true,
+          "distributedInGame": false
+        }
+      ],
+      "referenceNames": [
+        "flare-boggs-film.jpg",
+        "flare-084.jpg"
+      ],
+      "sources": [],
+      "sourcePageUrls": [
+        "https://www.avpgalaxy.net/alien-movies/alien-3/gallery/production-stills/"
+      ],
+      "referenceImageUrls": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-086.jpg",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2022/07/20220714-alien3-still-084.jpg"
+      ],
+      "referenceKind": "film-stills-rehosted-in-film-gallery",
+      "review": "accepted-with-documented-limits",
+      "limitations": [
+        "État allumé uniquement : l’extrémité active est masquée par la lumière dans les photogrammes, aucun capuchon éteint ni mécanisme interne n’est reconstruit.",
+        "Forme visible de poignée, garde ronde et tube guidée par les photogrammes ; proportions précises, zones masquées par les mains, usure et fumée interprétées.",
+        "PNG unique statique : la flamme ne constitue pas un cycle d’animation.",
+        "Raccord proposé uniquement au décor conditionnel existant fire-flare-v113, sous flags.fire ; aucun objet porté ou arme supplémentaire."
+      ]
+    }
+  ],
+  "geometryChanges": [
+    {
+      "id": "ripley-prison-crouch",
+      "before": {
+        "pivot": {
+          "x": 605,
+          "y": 1150
+        },
+        "world": {
+          "w": 80.0296,
+          "h": 73.1368
+        },
+        "worldUnitsPerPixel": 0.06099816513761468,
+        "estimatedHeadHeightWorld": 16.16451376146789
+      },
+      "after": {
+        "pivot": {
+          "x": 390,
+          "y": 1150
+        },
+        "world": {
+          "w": 64.5053,
+          "h": 58.9495
+        },
+        "worldUnitsPerPixel": 0.04916559200331223,
+        "estimatedHeadHeightWorld": 13.028881880877742
+      },
+      "reason": "V115 crouch estimates265 pixels crown-to-chin, while idle estimates194 pixels. With historical world scales, crouch head renders16.1645 world units versus13.0289 for idle (+24.07%). Uniform scaling by0.8060 restores idle anatomy and preserves crouch compression. Moving pivotx605 to390 places the anchor under the estimated pelvis, in agreement with the two new moving crouches; y1150 is retained for the historic ground baseline.",
+      "limitations": [
+        "Crown/chin and pelvis landmarks are human visual estimates, not skeletal tracking.",
+        "Standing-to-crouch and crouch-stop/start transitions need parent Canvas/native verification; no PNG or historical document changed."
+      ],
+      "pngSha256Unchanged": "89ecdf43bbdba52d8eaa648808f679bfcf3171e99a34753f5851773eb2b7791a",
+      "geometryOnly": true
+    }
+  ],
+  "metadataChanges": [
+    {
+      "id": "ripley-prison-climb-a",
+      "field": "limitations",
+      "before": [
+        "Pose de grimpe isolée au catalogue ; seconde phase rejetée pour appuis identiques, rendu procédural animé conservé."
+      ],
+      "after": [
+        "Phase A originale V115, désormais employée avec la phase B V116 par la boucle ripley-prison-climb.",
+        "Deux poses clés ; calage exact de chaque main et pied sur les barreaux non certifié."
+      ],
+      "reason": "Le manque historique de seconde phase est résolu par le nouvel alias ; les pixels et la provenance V115 restent inchangés."
+    }
+  ],
+  "newLoops": [
+    {
+      "id": "ripley-prison-climb",
+      "frames": [
+        "ripley-prison-climb-a",
+        "ripley-prison-climb-b"
+      ],
+      "fps": 5,
+      "state": "climb"
+    },
+    {
+      "id": "ripley-prison-crouch-walk",
+      "frames": [
+        "ripley-prison-crouch-walk-a",
+        "ripley-prison-crouch-walk-b"
+      ],
+      "fps": 5,
+      "state": "crouch-walk"
+    },
+    {
+      "id": "ripley-crash-walk",
+      "frames": [
+        "ripley-crash-walk-a",
+        "ripley-crash-walk-b"
+      ],
+      "fps": 6,
+      "state": "walk"
+    },
+    {
+      "id": "ripley-crash-run",
+      "frames": [
+        "ripley-crash-run-a",
+        "ripley-crash-run-b"
+      ],
+      "fps": 8,
+      "state": "run"
+    },
+    {
+      "id": "dillon-run",
+      "frames": [
+        "dillon-run-a",
+        "dillon-run-b"
+      ],
+      "fps": 8,
+      "state": "run"
+    },
+    {
+      "id": "morse-run",
+      "frames": [
+        "morse-run-a",
+        "morse-run-b"
+      ],
+      "fps": 8,
+      "state": "run"
+    }
+  ],
+  "rejectedIterations": [
+    {
+      "assetId": "dillon-glasses",
+      "sha256": "181bd9062fc8c0ccf648e3c7783b1295b394b611b4046555dd54fc339e7a5a12",
+      "bytes": 961377,
+      "reason": "Reflets des verres trop opaques sur fond sombre ; remplacés par correction imagegen.",
+      "keptInManifest": false
+    }
+  ],
+  "deferred": [
+    {
+      "id": "flight-recorder",
+      "status": "not-generated",
+      "reason": "Les photogrammes de récupération ne montrent pas suffisamment toutes les faces et les connecteurs. Aucun boîtier inventé, aucune inscription issue de la novelisation présentée comme accessoire du film.",
+      "sourceUrls": [
+        "https://catalog.afi.com/Film/59175-ALIEN-3",
+        "https://movie-screencaps.com/alien%C2%B3-1992/page/30"
+      ]
+    },
+    {
+      "id": "medical-kit",
+      "status": "not-generated",
+      "reason": "La photographie de Clemens confirme une seringue verre/métal tenue en main ; elle ne documente pas un plateau ou un kit complet.",
+      "sourceUrls": [
+        "https://www.avpcentral.com/jonathan-clemens"
+      ]
+    },
+    {
+      "id": "clemens-syringe",
+      "status": "not-generated",
+      "reason": "L’aiguille, le collier métallique et une portion du corps transparent sont visibles, mais la main masque le bas et le piston. Reproduction complète non suffisamment étayée dans les références obtenues.",
+      "sourceUrls": [
+        "https://www.avpcentral.com/jonathan-clemens"
+      ],
+      "inspectedReferenceImage": "clemens-injector-film.webp"
+    },
+    {
+      "id": "abattoir-lamp",
+      "status": "not-generated",
+      "reason": "Plan de production identifié et inspecté, mais photographie peu lisible et géométrie complète insuffisamment claire ; aucune lampe fictive produite.",
+      "sourceUrls": [
+        "https://alienexplorations.blogspot.com/2018/01/alien-3-blueprints.html",
+        "https://www.yourprops.com/Abattoir-Lamp-Detail-Blueprint-original-production-material-Alien-3-1992-YP5142.html"
+      ],
+      "inspectedReferenceImage": "abattoir-lamp-blueprint.jpg"
+    },
+    {
+      "id": "mining-flare-case",
+      "status": "not-generated",
+      "reason": "Catalogue primaire et annonces identifiés, mais photographies complètes non consultables dans cette recherche. Les descriptions textuelles seules ne justifient pas une forme 1:1.",
+      "sourceUrls": [
+        "https://studioauctions.com/UserFiles/catalog.pdf",
+        "https://hollywoodrelics.com/?product=alien-3-flare-box-screen-used"
+      ]
+    },
+    {
+      "id": "murphy-welding-goggles",
+      "status": "not-generated",
+      "reason": "Annonce identifiée ; photographies non obtenues car hôte indisponible.",
+      "sourceUrls": [
+        "https://hollywoodrelics.com/?product=alien-3-metal-welding-goggles-by-terry-english-character-murphy"
+      ]
+    }
+  ],
+  "scope": {
+    "native": "Poses Ripley sélectionnées par états existants et fusée allumée seulement si admise ; aucune nouvelle salle, quête ou mécanique.",
+    "catalogue": "Détenus décédés, animaux et accessoires sans socket, courses de Dillon et Morse sans étape de course native.",
+    "chronologyPreserved": true,
+    "physicsPreserved": true,
+    "saveSchemaPreserved": true
+  },
+  "validation": {
+    "status": "local-contracts-passed-complete-ci-required",
+    "manifestSha256": "db64e2b36aa8a0fa424adf112a1669a0e325c4497067fc38ddbfe140af418e6a",
+    "local": {
+      "rendererContracts": {
+        "passed": 19,
+        "realPngProof": false
+      },
+      "hostDigestSuccession": {
+        "passed": 13
+      },
+      "cacheTargeted": {
+        "passed": 24,
+        "completeShellInstallationPassed": false
+      },
+      "admittedInventory": {
+        "png": 61,
+        "entries": 72,
+        "hashDimensionsPathsVerified": true
+      },
+      "historicalIntegrity": {
+        "pngUnchanged": 39,
+        "provenanceDocumentsUnchanged": 2,
+        "currentEntryChanges": [
+          "ripley-prison-crouch:pivot/world",
+          "ripley-prison-climb-a:limitations"
+        ]
+      },
+      "generatedOriginals": {
+        "accepted": 22,
+        "rejectedIterations": 1,
+        "gitBlobHashesVerified": 22,
+        "postGenerationPixelEdits": false
+      },
+      "propsCanvasReview": {
+        "assets": 6,
+        "backgrounds": [
+          "light",
+          "dark"
+        ],
+        "glassesTransparencyReviewed": true
+      },
+      "independentReview": {
+        "scope": [
+          "runtime guards",
+          "strict admissions",
+          "66-file ZIP inventory",
+          "six-prop provenance"
+        ],
+        "blockingFindings": 0
+      },
+      "interruptedChecks": {
+        "signal": "SIGKILL",
+        "exitCode": 137,
+        "assertionFailureReported": false,
+        "checks": [
+          "full pack copy",
+          "complete shell installation",
+          "full pixel corpus",
+          "native hooks with real PNGs"
+        ],
+        "lastPixelAttemptCompletedPartitions": 19,
+        "partitionSize": 1,
+        "completePassClaimed": false
+      }
+    },
+    "ci": {
+      "required": [
+        "complete sprite admissions and copy",
+        "all pixels and frames",
+        "native real-PNG hooks",
+        "public build and built admission",
+        "Chromium native journey"
+      ],
+      "statusAtSourcePublication": "pending",
+      "workflow": ".github/workflows/fiorina-native-v114.yml"
+    },
+    "browserScope": {
+      "reducedMotion": true,
+      "browserAlternationABProven": false,
+      "naturalFireOrSustainedInteractionWalkthroughClaimed": false,
+      "testObservesActualInputAndLoadedSources": true,
+      "executedLocally": false
+    },
+    "filmOneToOneCertified": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "captured": 34,
+  "embedded": 12,
+  "rules": 26,
+  "files": [
+    "00_menu.png",
+    "25_battant_endommage.png",
+    "26_breche_sous_pression.png",
+    "27_plaques_recuperees.png",
+    "28_refection_en_cours.png",
+    "29_soudure_chalumeau.png",
+    "30_sas_soude.png",
+    "31_decoupe_en_cours.png",
+    "32_repli_genie.png",
+    "21_sentinel_ravitaillement.png",
+    "33_genie_844x390.png",
+    "17_galerie_stock_ouvert.png"
+  ],
+  "rawImageBytesUnchanged": true
+}

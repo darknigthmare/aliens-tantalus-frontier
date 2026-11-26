@@ -1,0 +1,44 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10232d"><title>AVP · Sous la glace</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23172c35' d='M0 0h64v64H0z'/%3E%3Cpath fill='none' stroke='%23c8af7d' stroke-width='3' d='M12 47 32 10 52 47ZM22 38h20M26 30h12'/%3E%3C/svg%3E"><!-- AVP_STYLE -->
+
+
+</head><body>
+<div id="shell" class="shell title-state">
+<header class="hud"><div class="brand"><b>AVP</b><span>SOUS LA GLACE</span></div><div class="where"><span id="room-label">EXPÉDITION WEYLAND · 2004</span><strong id="objective-label">Signal thermique sous la glace</strong></div><div class="condition"><span class="condition-name">LEX WOODS <b id="hp-number">100</b></span><div id="health" class="health" role="progressbar" aria-label="Santé" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i></i></div><div id="stamina" class="stamina" role="progressbar" aria-label="Endurance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i></i></div></div><nav aria-label="Carnet et pause"><button id="map-button" title="Carte (M)"><span class="nav-icon">⌑</span><span class="nav-text">Carte</span></button><button id="codex-button" title="Carnet (Tab)"><span class="nav-icon">▤</span><span class="nav-text">Carnet</span></button><button id="pause-button" title="Pause (Échap)"><span class="nav-icon">Ⅱ</span><span class="nav-text">Pause</span></button></nav></header>
+<main id="playfield"><div id="encounter-cue" role="status" aria-live="polite" hidden><strong></strong><span></span></div><canvas id="game" tabindex="0" aria-label="AVP. Se déplacer avec ZQSD ou les flèches. Maintenir E près d’un objectif. M pour la carte, Échap pour la pause."></canvas><section id="crossing-hud" class="crossing-hud" aria-label="État du franchissement" hidden><span class="crossing-kicker">TENIR LA LIGNE</span><h2 id="crossing-title"></h2><p id="crossing-destination"></p><div class="crossing-meter"><span>Progression <b id="crossing-percent">0 %</b></span><div id="crossing-progress" role="progressbar" aria-label="Progression du franchissement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div><div class="crossing-meter grip"><span>Prise <b id="crossing-grip-number">100 %</b></span><div id="crossing-grip" role="progressbar" aria-label="Prise sur la ligne" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i></i></div></div><p id="crossing-alert" role="status"></p><p id="crossing-controls"></p><button id="crossing-guide-button">Carnet des passages · Y</button></section><div id="party-strip" class="party-strip" hidden></div><div id="party-help" class="party-help" hidden></div><div id="evac-help" class="evac-help" role="status" hidden></div><div id="aid-help" class="aid-help" role="status" hidden></div><section id="conversation" class="conversation" aria-label="Échange sur le terrain" hidden></section><div id="terrain-help" class="terrain-help" hidden></div><div id="threshold-help" class="threshold-help" hidden></div><div id="cycle" class="cycle" hidden><span id="cycle-title">PROCHAINE ROTATION</span><b id="cycle-value">10:00</b><span id="phase-value">◇ ◇ ◇</span></div><div id="notice" class="notice" role="status" hidden></div>
+<section id="title" class="title-panel" aria-label="Menu principal"><div class="eyebrow">ALIENS · TANTALUS FRONTIER</div><div class="title-logo" aria-label="Alien versus Predator"><span>A</span><span class="versus">V</span><span>P</span></div><h1>Sous la glace</h1><p class="tagline">Le temple n’attendait pas des explorateurs.</p><div class="gold-rule"></div><p class="premise">Bouvetøya, 2004. Une équipe descend sous la glace.<br>Les armes sont déjà là. Les chasseurs arrivent.</p><div class="start-controls"><label>Expédition<select id="slot-select" aria-label="Profil de sauvegarde"><option value="1">Carnet 01</option><option value="2">Carnet 02</option><option value="3">Carnet 03</option></select></label><label>Difficulté<select id="difficulty-select"><option value="expedition">Expédition</option><option value="survival">Survie</option></select></label></div><div class="title-actions"><button class="primary" id="new-game">Commencer l’expédition <span>→</span></button><button id="continue-game" disabled>Reprendre le carnet</button><button id="title-options" class="text-button">Réglages et commandes</button></div><p id="slot-status" class="slot-status">Aucune progression dans ce carnet.</p><a id="host-return" class="host-return" href="../../../" hidden>← Retour au Tantalus</a><div class="title-credit">v0.11 · LES LIEUX ET LEURS TRACES<br>ADAPTATION NON OFFICIELLE · AVP (2004)</div></section>
+<div id="stealth-strip" class="stealth-strip" hidden><span id="stealth-status">DISCRÈTE</span><span id="stealth-lamp">LAMPE ALLUMÉE · L</span><span id="route-status"></span></div><div id="touch-controls" class="touch-controls" aria-label="Commandes tactiles"><div class="dpad"><button data-key="up" aria-label="Reculer">↑</button><button data-key="left" aria-label="Gauche">←</button><button data-key="down" aria-label="Avancer">↓</button><button data-key="right" aria-label="Droite">→</button></div><div class="actions"><button data-key="interact">E</button><button data-key="attack">Frapper</button><button data-key="dodge">Esquiver</button><button data-key="guard">Garde</button><button data-key="heal">Soin</button><button data-key="flare">Fusée</button><button data-key="run">Courir</button><button data-key="order">Scar</button><button data-key="crouch">Accroupie</button><button data-key="seal" aria-label="Manœuvrer le vantail">Vantail</button><button data-key="listen" aria-label="Écouter au seuil">Écouter</button><button data-key="lamp">Lampe</button><button data-key="talk" aria-label="Parler ou effectuer un relevé avec Sebastian">Parler</button><button id="touch-party" aria-label="Compagnons et échanges">Groupe</button><button data-key="haul" aria-label="Déplacer ou déposer le compagnon à terre">Déplacer</button><button data-key="aid" aria-label="Porter secours ou utiliser la halte proche">Secours</button><button data-key="utility" aria-label="Actionner l’équipement de terrain ou tirer le piton">Terrain</button></div></div></main>
+<footer class="footer"><div class="prompt-row"><span id="prompt"><kbd>ZQSD</kbd> / <kbd>Flèches</kbd> Se déplacer</span><span id="inventory">PIOLET — &nbsp; TROUSSES — &nbsp; FUSÉES —</span><button id="help-button" class="text-button">Commandes</button></div><div class="narration" id="narration" aria-live="polite"><span class="speaker" id="speaker">WEYLAND INDUSTRIES</span><span id="narration-text">Un signal. Six cents mètres de glace. Aucune réponse.</span></div></footer>
+</div>
+<dialog id="panel" aria-labelledby="panel-title"><header class="panel-header"><div><span id="panel-eyebrow" class="eyebrow">CARNET D’EXPÉDITION</span><h2 id="panel-title">Pause</h2></div><button id="close-panel" class="close" aria-label="Fermer">×</button></header><div id="panel-body" class="panel-body"></div></dialog>
+<input id="import-file" type="file" accept="application/json,.json" hidden><div id="live" class="sr-only" aria-live="polite"></div>
+<!-- AVP_SCRIPT:data.js -->
+<!-- AVP_SCRIPT:party-data.js -->
+<!-- AVP_SCRIPT:traversal-data.js -->
+<!-- AVP_SCRIPT:rescue-data.js -->
+<!-- AVP_SCRIPT:evacuation-data.js -->
+<!-- AVP_SCRIPT:encounter-data.js -->
+<!-- AVP_SCRIPT:fidelity-catalog.js -->
+<!-- AVP_SCRIPT:fidelity-data.js -->
+<!-- AVP_SCRIPT:assets.js -->
+<!-- AVP_SCRIPT:core.js -->
+<!-- AVP_SCRIPT:hunt.js -->
+<!-- AVP_SCRIPT:terrain.js -->
+<!-- AVP_SCRIPT:party.js -->
+<!-- AVP_SCRIPT:traversal.js -->
+<!-- AVP_SCRIPT:rescue.js -->
+<!-- AVP_SCRIPT:evacuation.js -->
+<!-- AVP_SCRIPT:encounter.js -->
+<!-- AVP_SCRIPT:render.js -->
+<!-- AVP_SCRIPT:render-expansion.js -->
+<!-- AVP_SCRIPT:render-traces.js -->
+<!-- AVP_SCRIPT:render-hunt.js -->
+<!-- AVP_SCRIPT:render-terrain.js -->
+<!-- AVP_SCRIPT:render-party.js -->
+<!-- AVP_SCRIPT:render-traversal.js -->
+<!-- AVP_SCRIPT:render-rescue.js -->
+<!-- AVP_SCRIPT:render-evacuation.js -->
+<!-- AVP_SCRIPT:render-encounter.js -->
+<!-- AVP_SCRIPT:render-fidelity.js -->
+<!-- AVP_SCRIPT:map-hunt.js -->
+<!-- AVP_SCRIPT:app.js -->
+</body></html>

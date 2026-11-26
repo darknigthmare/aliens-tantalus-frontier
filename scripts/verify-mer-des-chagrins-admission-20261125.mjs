@@ -15,6 +15,7 @@ import {
 } from './mer-des-chagrins-admission-20261125.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
+import { ALIENS1986_RUNTIME_ROOT, ALIENS1986_RUNTIME_FILES } from './public-aliens1986-dlc-admissions.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const encode = value => Buffer.from(JSON.stringify(value, null, 2) + '\n');
@@ -192,4 +193,41 @@ test('global release policy and build filter enforce the same narrow boundary', 
   }
   assert.equal(merDesChagrinsPathAdmission20261125('src/app.js'), null);
   assert.equal(merDesChagrinsPathAdmission20261125(dlcRoot + '/../escape', { built: true }), false);
+});
+
+async function addRealAliensRuntime(output) {
+  await mkdir(join(output, ALIENS1986_RUNTIME_ROOT), { recursive: true });
+  for (const path of ALIENS1986_RUNTIME_FILES)
+    await writeFile(join(output, path), await readFile(new URL('../' + path, import.meta.url)));
+}
+test('the independently verified Aliens runtime coexists with the thirteen Mer runtime files', async t => {
+  const f = await fixture(t);
+  await addRealAliensRuntime(f.output);
+  const result = await copyMerDesChagrinsRuntime20261125(f.root, f.output, f.options);
+  assert.equal(result.files, 15);
+  const filter = createBuildAssetFilter(process.cwd());
+  for (const path of ALIENS1986_RUNTIME_FILES) {
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), true);
+    assert.equal(filter(join(process.cwd(), path)), true);
+    assert.equal(isPublicDistributionPathV86(path, { built: true, directory: true }), false);
+  }
+  assert.equal(filter(join(process.cwd(), ALIENS1986_RUNTIME_ROOT)), true);
+  assert.equal(isPublicDistributionPathV86(ALIENS1986_RUNTIME_ROOT + '/unreviewed.html', { built: true }), false);
+});
+test('Mer coexistence rejects altered Aliens bytes, unknown files and symlinked runtime directories', async t => {
+  const f = await fixture(t);
+  await copyMerDesChagrinsRuntime20261125(f.root, f.output, f.options);
+  await addRealAliensRuntime(f.output);
+  const gamePath = join(f.output, ALIENS1986_RUNTIME_ROOT, 'game.html');
+  const original = await readFile(gamePath);
+  await writeFile(gamePath, Buffer.alloc(original.length, 65));
+  await assert.rejects(verifyMerDesChagrinsBuilt20261125(f.output, f.options), /Changed Aliens 1986 runtime bytes/);
+  await writeFile(gamePath, original);
+  const unknown = join(f.output, ALIENS1986_RUNTIME_ROOT, 'extra.html');
+  await writeFile(unknown, 'unreviewed');
+  await assert.rejects(verifyMerDesChagrinsBuilt20261125(f.output, f.options), /Unapproved Aliens 1986 runtime member/);
+  await rm(unknown);
+  await rm(join(f.output, ALIENS1986_RUNTIME_ROOT), { recursive: true });
+  await symlink(f.root, join(f.output, ALIENS1986_RUNTIME_ROOT));
+  await assert.rejects(verifyMerDesChagrinsBuilt20261125(f.output, f.options), /Invalid Aliens 1986 directory/);
 });

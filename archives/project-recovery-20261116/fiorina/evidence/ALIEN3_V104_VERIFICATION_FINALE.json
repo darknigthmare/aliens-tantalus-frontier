@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "package": "ALIEN3_FIORINA_V104_MISE_A_NIVEAU_SUR_V103.zip",
+  "bytes": 14575411,
+  "sha256": "2059724de3d960ba6ee61b04f38c475f98822d4886720f85204f3d3de0fc30e4",
+  "manifestVerifiedBeforeTests": 79,
+  "incrementalOn": "V103 Passages et réseaux",
+  "notFullGame": true,
+  "runtimeCases": 37,
+  "installerFixtures": 15,
+  "browserControls": 41,
+  "deliveredHtmlControls": 6,
+  "codexControls": 10,
+  "round": {
+    "id": "service-round",
+    "stage": 4,
+    "completed": [
+      "care-light",
+      "cell-light",
+      "service-light"
+    ],
+    "seconds": 18.100000000000254,
+    "finished": true
+  },
+  "reproducedScreenshots": [
+    {
+      "file": "qa-v104/captures/01_ronde_depart.png",
+      "sameBytes": true,
+      "sha256": "cef607677953f3b2dfb47e6d0953b06c019854aeac53ec879a7f3fbc301b7be9"
+    },
+    {
+      "file": "qa-v104/captures/02_cellules_retablies.png",
+      "sameBytes": true,
+      "sha256": "39e93a19360314076dc309889300641c02b3ae6890edec1e2eb1aa4ce4edb42d"
+    },
+    {
+      "file": "qa-v104/captures/03_atelier_retabli.png",
+      "sameBytes": true,
+      "sha256": "525025fb3fe063debf29c3637e677f9e9be04d32d5d6fb747828becb014412e7"
+    },
+    {
+      "file": "qa-v104/captures/04_ronde_terminee.png",
+      "sameBytes": true,
+      "sha256": "5e3f436adfa6a7eaf57f83f2595a9bd0cc1ee6c988a8167482813096e28a1e43"
+    },
+    {
+      "file": "qa-v104/captures/05_plan_releve.png",
+      "sameBytes": true,
+      "sha256": "c253771a56390f5ad6a034ff8faac330182394b405ebcdb608ce4aee69b51d1b"
+    },
+    {
+      "file": "qa-v104/captures/06_archives.png",
+      "sameBytes": true,
+      "sha256": "3162be8159084f9e25073cff20891b0226041a9909d77926191266a15686fce6"
+    },
+    {
+      "file": "qa-v104/captures/07_avant_le_feu.png",
+      "sameBytes": true,
+      "sha256": "d515b0926986d8178155d8ac6cacc5e8fe34c175bf38b011359327b3834a9540"
+    },
+    {
+      "file": "qa-v104/captures/08_incendie.png",
+      "sameBytes": true,
+      "sha256": "f6fece4e45e9d96a417c99f7c061f5aa7a0e120bddc68ebb4a6b7eda9edbb0b1"
+    },
+    {
+      "file": "qa-v104/captures/09_suie.png",
+      "sameBytes": true,
+      "sha256": "c60acd4e019f95c435a1f2992d5a93600bc9e7e6ad1a184e58c1ef4a6f19bd30"
+    },
+    {
+      "file": "qa-v104/captures/10_coulee.png",
+      "sameBytes": true,
+      "sha256": "d122d71b2388f0c16849f008acc001bd96e2660264c746a08100c018e1ca0847"
+    },
+    {
+      "file": "qa-v104/captures/11_refroidissement.png",
+      "sameBytes": true,
+      "sha256": "9055ecd314d1ad40a01f9ca4b00a48185773bb08125783fc1e910cebba8e8328"
+    },
+    {
+      "file": "qa-v104/captures/12_arrivee_compagnie.png",
+      "sameBytes": true,
+      "sha256": "454a1294612322d665811b9b893b4ea64c5f328fbcd59acd914d5e1dd0e5898f"
+    },
+    {
+      "file": "qa-v104/captures/13_hud_discret.png",
+      "sameBytes": true,
+      "sha256": "847ec7efe86fcdfa243fd7d7ac6fad23003e3929d8e8f517159924ccbce0480f"
+    }
+  ],
+  "screenshotsIdentical": 13,
+  "nativeGameBuild": false,
+  "push": false,
+  "deployment": false,
+  "originalZipV103Recovered": false
+}

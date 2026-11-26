@@ -1,4 +1,7 @@
+import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
+import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
+import { publicFiorinaSpritePathAdmissionV115, verifyFiorinaSpriteAdmissionsV115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
@@ -18,6 +21,8 @@ import { publicArbiterPathAdmissionV190, verifyArbiterImageAdmissionsV190 } from
 import { publicReleasePathAdmissionV163, verifyPublicAdmissionsV163 } from './public-release-admissions-v163.mjs';
 import { projectRecoveryPathAdmission20261116, verifyProjectRecoveryArchive20261116 } from './project-recovery-admission-20261116.mjs';
 import { merDesChagrinsPathAdmission20261125, isMerDesChagrinsSourceOnly20261125, verifyMerDesChagrinsImport20261125 } from './mer-des-chagrins-admission-20261125.mjs';
+import { verifyMerRecoveryArchive20261126 } from './mer-des-chagrins-recovery-admission-20261126.mjs';
+import { verifyMerVisual20261126 } from './mer-des-chagrins-visual-admission-20261126.mjs';
 import assert from 'node:assert/strict';
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
@@ -1173,9 +1178,23 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
+const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
+  'scripts/verify-fiorina-production-v114.mjs',
+  'scripts/qa-fiorina-native-v114.mjs',
+  'docs/development/FIORINA_GITHUB_INTEGRATION_V114.md',
+  '.github/workflows/fiorina-native-v114.yml'
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   const merAdmission = merDesChagrinsPathAdmission20261125(path, { directory, built });
   if (merAdmission !== null) return merAdmission;
+  const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
+  if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
+  const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
+  if (aliens1986Admission !== null) return aliens1986Admission;
+  const avpAdmission = avpPathAdmission(path, { directory, built });
+  if (avpAdmission !== null) return avpAdmission;
+  if (FIORINA_INTEGRATION_SOURCE_ONLY_V114.has(path)) return !built;
   const recoveryAdmission = projectRecoveryPathAdmission20261116(path, { directory, built });
   if (recoveryAdmission !== null) return recoveryAdmission;
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
@@ -1305,6 +1324,16 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       // Exact historical DLC records are preserved as sources, never runtime.
       // Their complete pinned inventories are checked after this path scan.
       if (!built && isMerDesChagrinsSourceOnly20261125(path)) continue;
+      const recoveredAliens1986 = !built && aliens1986RecoveryFile(path);
+      if (recoveredAliens1986) {
+        // Original QA receipts retain historical machine paths. The independently
+        // pinned inventory permits only these exact bytes, outside every build.
+        const bytes = await readFile(join(directory, entry.name));
+        assert.equal(bytes.length, recoveredAliens1986.bytes, 'Changed Aliens 1986 recovery size: ' + path);
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), recoveredAliens1986.sha256,
+          'Changed Aliens 1986 recovery bytes: ' + path);
+        continue;
+      }
       if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
         // Third-party tooling keeps its exact upstream bytes (examples may name
         // generic home paths); it is source-only and rejected from any build.
@@ -1323,6 +1352,11 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
   await verifyMerDesChagrinsImport20261125(root, { built });
+  await verifyMerRecoveryArchive20261126(root, { built });
+  await verifyMerVisual20261126(root, { built });
+  await verifyAliens1986DlcAdmissions(root, { built });
+  await verifyFiorinaSpriteAdmissionsV115(root);
+  await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);
   const registeredJpgs = USER_REFERENCE_LIBRARY_V100.map(entry => entry.path.replace(/^\//, '')).filter(path => path.endsWith('.jpg'));
   assert.deepEqual([...new Set(registeredJpgs)].sort(), [...USER_REFERENCE_JPG_PATHS_V100].sort(), 'Reference JPG allowlist differs from the runtime registry.');

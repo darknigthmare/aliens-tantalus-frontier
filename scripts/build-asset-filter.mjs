@@ -1,4 +1,5 @@
 import { publicXenoProductionPathAdmissionV206 } from './public-xeno-production-admissions-v206.mjs';
+import { publicFiorinaSpritePathAdmissionV115, FIORINA_SPRITE_DIRECTORY_V115 } from './public-fiorina-sprite-admissions-v115.mjs';
 import { publicXenoVisualPathAdmissionV205, PUBLIC_XENO_VISUAL_DIRECTORIES_V205 } from './public-xeno-visual-admissions-v205.mjs';
 import { publicXenoPriorityPathAdmissionV204, PUBLIC_XENO_PRIORITY_DIRECTORY_V204 } from './public-xeno-priority-admissions-v204.mjs';
 import { publicXenoPriorityPathAdmissionV203, PUBLIC_XENO_PRIORITY_DIRECTORY_V203 } from './public-xeno-priority-admissions-v203.mjs';
@@ -18,6 +19,8 @@ import { publicArbiterPathAdmissionV190 } from './public-xeno-arbiter-admissions
 import { PUBLIC_COSTUME_ASSET_PATHS_V165, publicCostumePathAdmissionV165 } from './public-costume-admissions-v165.mjs';
 import { relative } from 'node:path';
 import { merDesChagrinsPathAdmission20261125, MER_PUBLIC_DIRECTORIES_20261125 } from './mer-des-chagrins-admission-20261125.mjs';
+import { merVisualPathAdmission20261126 } from './mer-des-chagrins-visual-admission-20261126.mjs';
+import { ALIENS1986_RUNTIME_ROOT } from './public-aliens1986-dlc-admissions.mjs';
 import { publicCampaignArtPathAdmissionV180 } from './public-campaign-art-admissions-v180.mjs';
 
 const costumeDirectoriesV165 = new Set(PUBLIC_COSTUME_ASSET_PATHS_V165.flatMap(path => {
@@ -257,9 +260,12 @@ export function createBuildAssetFilter(projectRoot, {
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
     const merAdmission = merDesChagrinsPathAdmission20261125(sourcePath, {
-      directory: MER_PUBLIC_DIRECTORIES_20261125.includes(sourcePath), built: true,
+      directory: MER_PUBLIC_DIRECTORIES_20261125.includes(sourcePath) || sourcePath === ALIENS1986_RUNTIME_ROOT
+        || merVisualPathAdmission20261126(sourcePath, { directory: true, built: true }) === true, built: true,
     });
     if (merAdmission !== null) return merAdmission;
+    const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(sourcePath, { directory: sourcePath === FIORINA_SPRITE_DIRECTORY_V115, built: true });
+    if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
     const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(sourcePath, { built: true });
     if (productionAdmissionV206 !== null) return productionAdmissionV206;
     const visualAdmissionV205 = publicXenoVisualPathAdmissionV205(sourcePath, { directory: PUBLIC_XENO_VISUAL_DIRECTORIES_V205.has(sourcePath), built: true });

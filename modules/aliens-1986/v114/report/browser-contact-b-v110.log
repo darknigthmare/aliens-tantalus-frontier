@@ -1,0 +1,12 @@
+R lance une ouverture temporisée réelle True
+Pause fige le sas et toutes les mémoires True
+Marche annule la réouverture sans libérer la liaison True
+Réouverture à terme modifie le seul état partagé True
+Carte reste sans liste de menaces True
+V active la prudence dans la simulation True
+L’interface reflète la prudence True
+Import V107 préserve les ressources et le jalon True
+Aucune poursuite inventée à la migration True
+Audio local activable sans média externe True
+Aucune erreur JavaScript contacts True
+{"passed": 11, "total": 11, "captures": 3, "errors": []}

@@ -4,6 +4,12 @@ import { createReadStream, readFileSync } from 'node:fs';
 import { cp, lstat, mkdir, readFile, readdir } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { MER_VISUAL_ROOT_20261126, reviewedMerVisual20261126, merVisualPathAdmission20261126,
+  isMerVisualSourceOnly20261126, verifyMerVisual20261126, copyMerVisualRuntime20261126 } from './mer-des-chagrins-visual-admission-20261126.mjs';
+import { ALIENS1986_RUNTIME_ROOT, ALIENS1986_RUNTIME_FILES,
+  publicAliens1986DlcPathAdmission, verifyAliens1986Runtime } from './public-aliens1986-dlc-admissions.mjs';
+import { merRecoveryPathAdmission20261126, isMerRecoverySourceOnly20261126,
+  MER_RECOVERY_SOURCE_FILES_20261126 } from './mer-des-chagrins-recovery-admission-20261126.mjs';
 
 export const MER_DLC_ROOT_20261125 = 'dlc/sea-of-sorrows';
 export const MER_ARCHIVE_ROOT_20261125 = 'archives/mer-des-chagrins-20261125';
@@ -13,7 +19,7 @@ export const MER_ARCHIVE_MANIFEST_20261125 = MER_ARCHIVE_ROOT_20261125 + '/MANIF
 export const MER_DLC_MANIFEST_SHA256_20261125 = '540b4857e3c15b536ad993b13c2546dcb5e01b682c0346b55956ce7f9bc9be4b';
 export const MER_ARCHIVE_MANIFEST_SHA256_20261125 = '21ca112319b36e41f7bc921a7b811874ba704b03250cf3cc407db497d79021e0';
 export const MER_CATALOG_20261125 = Object.freeze({
-  path: 'dlc/index.html', sizeBytes: 6786, sha256: '0a421d17668d8fba58557c6ef11f8d6ed17f9d2cf2857a483ad5d8aa25929a2a',
+  path: 'dlc/index.html', sizeBytes: 7028, sha256: 'c45eb662f43c4af95e0a3e274ab38d43bb0946f81debe3747ed7c731b998f262',
 });
 export const MER_RUNTIME_PATHS_20261125 = Object.freeze([
   'index.html', 'styles.css', 'MER_DES_CHAGRINS_JOUABLE.html',
@@ -68,6 +74,7 @@ export const MER_SPRITE_CHECKPOINT_DIRECTORIES_20261126 = Object.freeze([
 ]);
 
 export const MER_SOURCE_PATHS_20261125 = Object.freeze([
+  ...MER_RECOVERY_SOURCE_FILES_20261126,
   ...MER_SPRITE_CHECKPOINT_FILES_20261126,
   'scripts/mer-des-chagrins-admission-20261125.mjs',
   'scripts/verify-mer-des-chagrins-admission-20261125.mjs',
@@ -150,6 +157,10 @@ export function reviewedMerArchives20261125() {
 /** null delegates unrelated project paths to the established release policy. */
 export function merDesChagrinsPathAdmission20261125(path, { directory = false, built = false } = {}) {
   if (!validPath(path)) return false;
+  const visualAdmission = merVisualPathAdmission20261126(path, { directory, built });
+  if (visualAdmission !== null) return visualAdmission;
+  const recoveryAdmission = merRecoveryPathAdmission20261126(path, { directory, built });
+  if (recoveryAdmission !== null) return recoveryAdmission;
   if (MER_SPRITE_CHECKPOINT_DIRECTORIES_20261126.includes(path)) return directory && !built;
   if (MER_SOURCE_PATHS_20261125.includes(path)) return !directory && !built;
   if (path.startsWith('docs/mer-des-chagrins-20261126/')) return false;
@@ -158,6 +169,9 @@ export function merDesChagrinsPathAdmission20261125(path, { directory = false, b
   if (path === MER_DLC_ROOT_20261125 || path.startsWith(MER_DLC_ROOT_20261125 + '/')) {
     if (built) return directory ? publicDirectories.has(path) : runtimePaths.has(path);
     return reviewedMerDlc20261125().admits(path, { directory });
+  }
+  if (path === ALIENS1986_RUNTIME_ROOT || path.startsWith(ALIENS1986_RUNTIME_ROOT + '/')) {
+    return publicAliens1986DlcPathAdmission(path, { directory, built });
   }
   if (path.startsWith('dlc/')) return false;
   if (path === MER_ARCHIVE_ROOT_20261125 || path.startsWith(MER_ARCHIVE_ROOT_20261125 + '/')) {
@@ -171,6 +185,8 @@ export function merDesChagrinsPathAdmission20261125(path, { directory = false, b
  * inventories verify them, and the built policy rejects every such record. */
 export function isMerDesChagrinsSourceOnly20261125(path) {
   if (typeof path !== 'string') return false;
+  if (isMerVisualSourceOnly20261126(path)) return true;
+  if (isMerRecoverySourceOnly20261126(path)) return true;
   if (path.startsWith(MER_DLC_ROOT_20261125 + '/') && !runtimePaths.has(path)) {
     return reviewedMerDlc20261125().admits(path);
   }
@@ -252,6 +268,14 @@ export async function verifyMerDesChagrinsBuilt20261125(root, {
   dlcInventory = reviewedMerDlc20261125(), catalog = MER_CATALOG_20261125,
 } = {}) {
   root = resolve(root);
+  let aliensRuntime = null;
+  try { await lstat(join(root, ALIENS1986_RUNTIME_ROOT)); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; aliensRuntime = false; }
+  if (aliensRuntime !== false) aliensRuntime = await verifyAliens1986Runtime(root);
+  let visualRuntime = null;
+  try { await lstat(join(root, MER_VISUAL_ROOT_20261126)); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; visualRuntime = false; }
+  if (visualRuntime !== false) visualRuntime = await verifyMerVisual20261126(root, { built: true });
   const seen = new Set();
   async function walk(directory) {
     const stat = await lstat(join(root, directory));
@@ -265,11 +289,15 @@ export async function verifyMerDesChagrinsBuilt20261125(root, {
     }
   }
   await walk('dlc');
-  assert.deepEqual([...seen].sort(), [...runtimePaths, catalog.path].sort(), 'Built DLC runtime inventory differs.');
+  const expected = [...runtimePaths, catalog.path, ...(aliensRuntime ? ALIENS1986_RUNTIME_FILES : []),
+    ...(visualRuntime ? [...reviewedMerVisual20261126().files.values()].filter(file => file.public).map(file => file.path) : [])];
+  assert.deepEqual([...seen].sort(), expected.sort(), 'Built DLC runtime inventory differs.');
   try { await lstat(join(root, 'archives')); }
   catch (error) {
     if (error.code !== 'ENOENT') throw error;
-    return { ok: true, built: true, ...await verifyRuntimeFiles(root, dlcInventory, catalog) };
+    const runtime = await verifyRuntimeFiles(root, dlcInventory, catalog);
+    return { ok: true, built: true, files: runtime.files + (aliensRuntime?.runtimeFiles || 0) + (visualRuntime?.files || 0),
+      bytes: runtime.bytes + (aliensRuntime?.runtimeBytes || 0) + (visualRuntime?.bytes || 0) };
   }
   throw new Error('Historical archives must not be present in a built distribution.');
 }
@@ -281,6 +309,10 @@ export async function copyMerDesChagrinsRuntime20261125(sourceRoot, outputRoot, 
   sourceRoot = resolve(sourceRoot); outputRoot = resolve(outputRoot);
   assert.notEqual(sourceRoot, outputRoot, 'DLC build output must differ from source.');
   await verifyRuntimeFiles(sourceRoot, dlcInventory, catalog);
+  let hasVisual = true;
+  try { await lstat(join(sourceRoot, MER_VISUAL_ROOT_20261126)); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; hasVisual = false; }
+  if (hasVisual) await copyMerVisualRuntime20261126(sourceRoot, outputRoot);
   for (const path of [catalog.path, ...runtimePaths]) {
     await mkdir(dirname(join(outputRoot, path)), { recursive: true });
     await cp(join(sourceRoot, path), join(outputRoot, path), { dereference: false });

@@ -1,0 +1,406 @@
+{
+  "tests": [
+    {
+      "name": "Schéma113, catalogue conservé et aucun poste offert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pas de ressource ni chargeur offert par les ordres",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise exacte avant les commandes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "X ouvre un mode de désignation sans pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Un clic sur la table refuse le poste et garde la désignation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échap annule la désignation sans ouvrir la pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Refus sans munition ni ordre transmis",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le clic envoie seulement Hicks au poste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Le déplacement est réel, sans téléportation au clic",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Les chargeurs et objectifs ne changent pas au clic de poste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause fige exactement le déplacement ordonné",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise à mi-chemin conserve le poste et la position",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hicks contourne la table et atteint son poste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "N fixe un secteur de couverture de Hicks",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacer la visée ne fait pas tourner le secteur engagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "2 retient le feu individuel sans effacer son poste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton Autoriser libère le même secteur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "H supprime le poste explicite du seul membre choisi",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "G rallie et supprime les réservations locales",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt a un poste mais aucun bouton de feu ou secteur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "N au clavier ne transforme pas Newt en combattante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt rejoint elle-même son nouveau poste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle fixe : déplacer désactivé, orienter disponible",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rotation préparée pendant 1,15 seconde",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Angle final et munitions inchangés avant la fin",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause conserve la rotation à mi-geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La marche annule la rotation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tirer annule aussi l’orientation sans tourner l’affût",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export/import rétablit exactement la rotation restante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Fin de rotation : angle engagé et réserve préservée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Orienter de loin est refusé sans nouveau geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Porte ouverte sans donner d’ennemi ou de munition",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle retient son tir devant un allié vivant",
+      "ok": true,
+      "detail": {
+        "postOrders": 6,
+        "sectorOrders": 4,
+        "disciplineOrders": 5,
+        "arrivals": 6,
+        "safetyHolds": 27,
+        "turnsStarted": 1,
+        "turnsCompleted": 1,
+        "turnsInterrupted": 0
+      }
+    },
+    {
+      "name": "Dégager l’axe libère un tir et consomme des munitions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "La ligne ordonnée tient la défense sans tir du joueur",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt reste au poste, non armée et vivante",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse angle hors bornes sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse munition tactique inventée sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse Newt armée sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse poste à travers table sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import refuse bilan rotation incohérent sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration véritable V112 conserve équipe, stocks et sources",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Migration ne crée ni ordre tactique ni rotation gratuite",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte sans état interne ennemi et hors scène",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives documentent les secteurs et sécurité",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commandes tactiques hors canvas 844×390",
+      "ok": true,
+      "detail": {
+        "post-order": {
+          "x": 636.0625,
+          "y": 332,
+          "width": 54.4375,
+          "height": 27
+        },
+        "sector-order": {
+          "x": 694.5,
+          "y": 332,
+          "width": 64.3125,
+          "height": 27
+        },
+        "fire-discipline": {
+          "x": 762.8125,
+          "y": 332,
+          "width": 74.1875,
+          "height": 27
+        }
+      }
+    },
+    {
+      "name": "Terrain conserve son minimum 844×390",
+      "ok": true,
+      "detail": {
+        "x": 0,
+        "y": 44,
+        "width": 844,
+        "height": 194
+      }
+    },
+    {
+      "name": "Aucun débordement horizontal 844×390",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Commandes tactiques hors canvas 390×844",
+      "ok": true,
+      "detail": {
+        "post-order": {
+          "x": 8,
+          "y": 773,
+          "width": 122.65625,
+          "height": 29
+        },
+        "sector-order": {
+          "x": 133.65625,
+          "y": 773,
+          "width": 122.671875,
+          "height": 29
+        },
+        "fire-discipline": {
+          "x": 259.328125,
+          "y": 773,
+          "width": 122.65625,
+          "height": 29
+        }
+      }
+    },
+    {
+      "name": "Terrain conserve son minimum 390×844",
+      "ok": true,
+      "detail": {
+        "x": 0,
+        "y": 45,
+        "width": 390,
+        "height": 335.953125
+      }
+    },
+    {
+      "name": "Aucun débordement horizontal 390×844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options visuelles ne changent pas les positions et stocks",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Parcours tactique terminé et bilan des ordres visibles",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête externe nécessaire",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Aucune erreur JavaScript ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "54_poste_rejoint.png",
+      "origin": "Depuis 01-operations-avant-ordres, X/clic au sol, export/import pendant la marche puis attente réelle ; Hicks rejoint le poste sans téléportation",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "55_secteurs_operations.png",
+      "origin": "Export non modifié 03-angles-operations du parcours complet : deux secteurs engagés et feu retenu, seuls les plans alliés sont annotés",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "56_newt_au_poste.png",
+      "origin": "Depuis 04-newt-au-poste, sélection Newt, X et clic à un nouveau poste ; marche effective puis attente non armée",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "57_rotation_affut.png",
+      "origin": "Clic de direction réalisé dans Chromium depuis 05-affut-avant-rotation, export/import à mi-geste puis reprise : rotation réellement en cours",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "58_axe_occupe.png",
+      "origin": "Depuis 07-ligne-en-place : sentinelle autorisée, déplacement devant son axe et E pour ouvrir ; elle retient le tir tant que Ripley masque les contacts",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "59_axe_degage.png",
+      "origin": "Suite du même essai : déplacement vers le bas au clavier, puis attente ; la sentinelle tire sans que Ripley ouvre le feu",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "60_defense_positions.png",
+      "origin": "Export intact 08-axes-libres repris, puis treize secondes de simulation navigateur sans tir manuel jusqu’à la défense tenue",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "61_tactique_paysage.png",
+      "origin": "Viewport émulé 844×390, état réel 07-ligne-en-place ; trois commandes tactiques hors terrain, pas un téléphone physique",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "62_tactique_portrait.png",
+      "origin": "Viewport émulé 390×844, état réel 07-ligne-en-place ; trois commandes tactiques hors terrain, pas un téléphone physique",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "63_repli_angles.png",
+      "origin": "Export final non modifié du huitième parcours complet V114 ; ressources finales et métriques d’ordres, pas d’état de victoire fabriqué",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "requests": [],
+  "htmlSHA256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+  "nativeTantalus": false
+}

@@ -1,0 +1,644 @@
+{
+  "method": "Entrées publiques exclusivement ; une blessure obtenue par une attaque réelle, aucune valeur HP éditée.",
+  "nativeCampaign": false,
+  "results": [
+    {
+      "variant": "supply-loop",
+      "complete": true,
+      "inputs": 4566,
+      "elapsed": 114.15000000000883,
+      "transfers": 9,
+      "visited": [
+        "v106-hadley",
+        "v107-operations",
+        "v109-logistics",
+        "v109-reserve",
+        "v107-service",
+        "v106-medlab",
+        "v106-sentry"
+      ],
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 86,
+          "ammo": 26
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 22
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 23
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ],
+      "logistics": {
+        "stock": {
+          "ammo": 2,
+          "medical": 1,
+          "sentry": 0
+        },
+        "spent": {
+          "ammo": 1,
+          "medical": 1,
+          "sentry": 1
+        },
+        "collected": 3,
+        "loopVisited": true,
+        "alarms": {
+          "reserve-alarm": {
+            "remaining": 0,
+            "cooldown": 0,
+            "nextPulse": 0,
+            "activations": 1
+          }
+        }
+      },
+      "engineering": {
+        "plates": 2,
+        "spent": 1,
+        "collected": true,
+        "nearby": null,
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 1,
+          "repaired": 0,
+          "started": 3,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "contactTransfers": 4,
+      "checkpoints": [
+        {
+          "label": "01-operations",
+          "room": "v107-operations",
+          "elapsed": 9.450000000000067,
+          "ammo": 38,
+          "hp": 100,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "02-galerie-arrivee",
+          "room": "v109-logistics",
+          "elapsed": 10.32500000000008,
+          "ammo": 38,
+          "hp": 100,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "03-blessure-reelle",
+          "room": "v109-logistics",
+          "elapsed": 17.500000000000075,
+          "ammo": 38,
+          "hp": 86,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "04-stock-munitions",
+          "room": "v109-logistics",
+          "elapsed": 21.59999999999984,
+          "ammo": 33,
+          "hp": 86,
+          "inventory": {
+            "ammo": 3,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "05-lot-distribue",
+          "room": "v109-logistics",
+          "elapsed": 22.49999999999979,
+          "ammo": 51,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "06-secours-collectes",
+          "room": "v109-reserve",
+          "elapsed": 33.97499999999914,
+          "ammo": 46,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 2,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "07-soin-en-cours",
+          "room": "v109-reserve",
+          "elapsed": 34.57499999999911,
+          "ammo": 46,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 2,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "08-soin-termine",
+          "room": "v109-reserve",
+          "elapsed": 35.674999999999045,
+          "ammo": 46,
+          "hp": 100,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "09-diagnostic-actif",
+          "room": "v109-reserve",
+          "elapsed": 38.299999999998896,
+          "ammo": 39,
+          "hp": 100,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "10-alarme-persistante",
+          "room": "v109-reserve",
+          "elapsed": 39.899999999998805,
+          "ammo": 39,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "11-relais-via-reserve",
+          "room": "v107-service",
+          "elapsed": 43.72499999999859,
+          "ammo": 35,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng01-plaques",
+          "room": "v107-service",
+          "elapsed": 47.52499999999837,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng02-soudure-en-cours",
+          "room": "v107-service",
+          "elapsed": 53.449999999998035,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng03-renforce",
+          "room": "v107-service",
+          "elapsed": 54.649999999997966,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng04-decoupe",
+          "room": "v107-service",
+          "elapsed": 55.14999999999794,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng05-decoupe-terminee",
+          "room": "v107-service",
+          "elapsed": 56.14999999999788,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "12-newt-operations",
+          "room": "v107-operations",
+          "elapsed": 74.49999999999982,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "13-cartouche-en-cours",
+          "room": "v106-sentry",
+          "elapsed": 94.37500000000433,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "14-sentinelle-ravitaillee",
+          "room": "v106-sentry",
+          "elapsed": 95.37500000000456,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "15-repli-boucle",
+          "room": "v106-hadley",
+          "elapsed": 114.15000000000883,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 0
+          }
+        }
+      ]
+    },
+    {
+      "variant": "supply-loop-reloads",
+      "complete": true,
+      "inputs": 4565,
+      "elapsed": 114.12500000000882,
+      "transfers": 9,
+      "visited": [
+        "v106-hadley",
+        "v107-operations",
+        "v109-logistics",
+        "v109-reserve",
+        "v107-service",
+        "v106-medlab",
+        "v106-sentry"
+      ],
+      "team": [
+        {
+          "id": "ripley",
+          "hp": 86,
+          "ammo": 26
+        },
+        {
+          "id": "hicks",
+          "hp": 100,
+          "ammo": 22
+        },
+        {
+          "id": "hudson",
+          "hp": 100,
+          "ammo": 23
+        },
+        {
+          "id": "newt",
+          "hp": 100,
+          "ammo": 0
+        }
+      ],
+      "logistics": {
+        "stock": {
+          "ammo": 2,
+          "medical": 1,
+          "sentry": 0
+        },
+        "spent": {
+          "ammo": 1,
+          "medical": 1,
+          "sentry": 1
+        },
+        "collected": 3,
+        "loopVisited": true,
+        "alarms": {
+          "reserve-alarm": {
+            "remaining": 0,
+            "cooldown": 0,
+            "nextPulse": 0,
+            "activations": 1
+          }
+        }
+      },
+      "engineering": {
+        "plates": 2,
+        "spent": 1,
+        "collected": true,
+        "nearby": null,
+        "metrics": {
+          "stocks": 1,
+          "reinforced": 1,
+          "cut": 1,
+          "repaired": 0,
+          "started": 3,
+          "interrupted": 0,
+          "enemyHits": 0,
+          "breaches": 0
+        }
+      },
+      "contactTransfers": 4,
+      "checkpoints": [
+        {
+          "label": "01-operations",
+          "room": "v107-operations",
+          "elapsed": 9.450000000000067,
+          "ammo": 38,
+          "hp": 100,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "02-galerie-arrivee",
+          "room": "v109-logistics",
+          "elapsed": 10.32500000000008,
+          "ammo": 38,
+          "hp": 100,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "03-blessure-reelle",
+          "room": "v109-logistics",
+          "elapsed": 17.500000000000075,
+          "ammo": 38,
+          "hp": 86,
+          "inventory": {
+            "ammo": 0,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "04-stock-munitions",
+          "room": "v109-logistics",
+          "elapsed": 21.59999999999984,
+          "ammo": 33,
+          "hp": 86,
+          "inventory": {
+            "ammo": 3,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "05-lot-distribue",
+          "room": "v109-logistics",
+          "elapsed": 22.49999999999979,
+          "ammo": 51,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 0,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "06-secours-collectes",
+          "room": "v109-reserve",
+          "elapsed": 33.97499999999914,
+          "ammo": 46,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 2,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "07-soin-en-cours",
+          "room": "v109-reserve",
+          "elapsed": 34.57499999999911,
+          "ammo": 46,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 2,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "08-soin-termine",
+          "room": "v109-reserve",
+          "elapsed": 35.674999999999045,
+          "ammo": 46,
+          "hp": 100,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "09-diagnostic-actif",
+          "room": "v109-reserve",
+          "elapsed": 38.299999999998896,
+          "ammo": 39,
+          "hp": 100,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "10-alarme-persistante",
+          "room": "v109-reserve",
+          "elapsed": 39.899999999998805,
+          "ammo": 39,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "11-relais-via-reserve",
+          "room": "v107-service",
+          "elapsed": 43.69999999999859,
+          "ammo": 36,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng01-plaques",
+          "room": "v107-service",
+          "elapsed": 47.49999999999837,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng02-soudure-en-cours",
+          "room": "v107-service",
+          "elapsed": 53.424999999998036,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng03-renforce",
+          "room": "v107-service",
+          "elapsed": 54.62499999999797,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng04-decoupe",
+          "room": "v107-service",
+          "elapsed": 55.12499999999794,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "eng05-decoupe-terminee",
+          "room": "v107-service",
+          "elapsed": 56.12499999999788,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "12-newt-operations",
+          "room": "v107-operations",
+          "elapsed": 74.47499999999981,
+          "ammo": 31,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "13-cartouche-en-cours",
+          "room": "v106-sentry",
+          "elapsed": 94.35000000000433,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 1
+          }
+        },
+        {
+          "label": "14-sentinelle-ravitaillee",
+          "room": "v106-sentry",
+          "elapsed": 95.35000000000456,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 0
+          }
+        },
+        {
+          "label": "15-repli-boucle",
+          "room": "v106-hadley",
+          "elapsed": 114.12500000000882,
+          "ammo": 26,
+          "hp": 86,
+          "inventory": {
+            "ammo": 2,
+            "medical": 1,
+            "sentry": 0
+          }
+        }
+      ]
+    }
+  ]
+}

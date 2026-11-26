@@ -1,0 +1,915 @@
+{
+  "schemaVersion": 1,
+  "root": "archives/sea-sprites-recovery-20261126",
+  "sourceCommit": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
+  "fileCount": 151,
+  "totalBytes": 274780120,
+  "files": [
+    {
+      "path": "archives/sea-sprites-recovery-20261126/COMPLETE_SPRITES.json",
+      "mode": "100644",
+      "sizeBytes": 32352,
+      "gitBlobSha": "97f75a812fee977aaff38ab06c102e845b33eb77"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/README.md",
+      "mode": "100644",
+      "sizeBytes": 3575,
+      "gitBlobSha": "47eb1b7f7840ca06561c3adbabc54dd7eab7e1c3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+      "mode": "100644",
+      "sizeBytes": 64196,
+      "gitBlobSha": "10afc230c9f07d097c61938cdd1e9500183038d4"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/.gitattributes",
+      "mode": "100644",
+      "sizeBytes": 5637,
+      "gitBlobSha": "e711abd95983a2055a625a1f0262eaacee8f2613"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/.vercelignore",
+      "mode": "100644",
+      "sizeBytes": 7204,
+      "gitBlobSha": "ad1f9dccd65a9d4a043bf427c04979d6dc2944de"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/index.html",
+      "mode": "100644",
+      "sizeBytes": 7028,
+      "gitBlobSha": "c17e9febe29344b198452f5b7b770a9787b3f809"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/galerie.html",
+      "mode": "100644",
+      "sizeBytes": 7679,
+      "gitBlobSha": "67270f91349fa3e512897eb7db8fe7219b109a11"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/index.html",
+      "mode": "100644",
+      "sizeBytes": 7123,
+      "gitBlobSha": "752c1980eaeb5f4f27b5e07c1374fc2e38622e90"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/adams.png",
+      "mode": "100644",
+      "sizeBytes": 1772101,
+      "gitBlobSha": "179527f38a1c85cfa59f59a618ba6ddaba4649fa"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/badejo.png",
+      "mode": "100644",
+      "sizeBytes": 1675685,
+      "gitBlobSha": "036bbe2df61dbdde5b4ea7baf74b36504c0740fb"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/bronson.png",
+      "mode": "100644",
+      "sizeBytes": 1779643,
+      "gitBlobSha": "2abbdf357d166696773f398aa4b6ce27b61adc51"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/cherbourg.png",
+      "mode": "100644",
+      "sizeBytes": 1426947,
+      "gitBlobSha": "cb58948b8a67d1dfcd576d1e57dcb364955dc9f2"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/cho.png",
+      "mode": "100644",
+      "sizeBytes": 1639202,
+      "gitBlobSha": "6feb0df56491d3c45b8d886092832fe2b4290081"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/dave.png",
+      "mode": "100644",
+      "sizeBytes": 1805884,
+      "gitBlobSha": "b28a07652444e34844663c32b95e5a2077582264"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1697088,
+      "gitBlobSha": "00c5fb423dc4d026e23be2bc49e418656d8732d9"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch.png",
+      "mode": "100644",
+      "sizeBytes": 1561783,
+      "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1769977,
+      "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge.png",
+      "mode": "100644",
+      "sizeBytes": 1887477,
+      "gitBlobSha": "0cf723a8ab90bde150ebbd4399ada0bf47bd64cd"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1833806,
+      "gitBlobSha": "f7d8a09754b8fef0d96664cb0e6367be3f421088"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+      "mode": "100644",
+      "sizeBytes": 1626812,
+      "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/elway.png",
+      "mode": "100644",
+      "sizeBytes": 1674049,
+      "gitBlobSha": "ca6c095682baba6f0cf2f60c4f9d6ced0b9d9f6b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/harriman.png",
+      "mode": "100644",
+      "sizeBytes": 1538047,
+      "gitBlobSha": "aa5f4c3094451aebaeca860478ee942233d813cc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1947258,
+      "gitBlobSha": "4892db9f22f3c733691e9f761d536de2372ab18c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/manning.png",
+      "mode": "100644",
+      "sizeBytes": 1826145,
+      "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/medic.png",
+      "mode": "100644",
+      "sizeBytes": 1584745,
+      "gitBlobSha": "d3309873da6d99a19a5e45e5fb05c64a91577866"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/muller.png",
+      "mode": "100644",
+      "sizeBytes": 1723505,
+      "gitBlobSha": "7336d2732792749de2e087a497c7c30fcbc18ecb"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/pritchett.png",
+      "mode": "100644",
+      "sizeBytes": 1682011,
+      "gitBlobSha": "871047d60fd3637fd91673f11536413601ec3ee3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/rand.png",
+      "mode": "100644",
+      "sizeBytes": 1753979,
+      "gitBlobSha": "77f21a5eedfb69cd8ba4ed1d99a4813b44e0c9df"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/rollins.png",
+      "mode": "100644",
+      "sizeBytes": 1446163,
+      "gitBlobSha": "6783db7baf4d48e341f515d4cd4c5e40d62b2235"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/characters/silas.png",
+      "mode": "100644",
+      "sizeBytes": 1654417,
+      "gitBlobSha": "648f6f9f470e9898889658e10fdbdccd29c0743d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/corpses/facehugger.png",
+      "mode": "100644",
+      "sizeBytes": 1303577,
+      "gitBlobSha": "ee1ec30a549bd10acce64e5aa3263b617e71dae8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/creatures/facehugger.png",
+      "mode": "100644",
+      "sizeBytes": 1790221,
+      "gitBlobSha": "8c595e1ffa839e05c9b5d5d3326601afc6f9c672"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/amber.png",
+      "mode": "100644",
+      "sizeBytes": 1445819,
+      "gitBlobSha": "d12b0145c990a25e52b7cb6798286e5854dbcef5"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/antenna.png",
+      "mode": "100644",
+      "sizeBytes": 1987264,
+      "gitBlobSha": "89baa251293ac3c1e2314c853f8c7cd435700e4f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/armory.png",
+      "mode": "100644",
+      "sizeBytes": 2478105,
+      "gitBlobSha": "16cb73f36c9621b93f8d4ce57de8c599a5688916"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/battery.png",
+      "mode": "100644",
+      "sizeBytes": 2570228,
+      "gitBlobSha": "a2355d8ea1886db1c7ff5256439280c89c168baf"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/drill.png",
+      "mode": "100644",
+      "sizeBytes": 2472223,
+      "gitBlobSha": "22cff2ae22bd995d82213d2a6e55272ba6068de8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/locker.png",
+      "mode": "100644",
+      "sizeBytes": 2393757,
+      "gitBlobSha": "7b3ecad4f77ebfacee507d9b9c6c5ab1b4e14ab7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
+      "mode": "100644",
+      "sizeBytes": 1862848,
+      "gitBlobSha": "ebeff870173122f46171499c9c45f044c58f499c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/reel.png",
+      "mode": "100644",
+      "sizeBytes": 2408366,
+      "gitBlobSha": "0cc53fd5019ec4fd5716d7571dadb58ae72bcb80"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png",
+      "mode": "100644",
+      "sizeBytes": 1073705,
+      "gitBlobSha": "5d77bc910f19242be190dbaedf851082cfaacf2c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/adams.png",
+      "mode": "100644",
+      "sizeBytes": 1772101,
+      "gitBlobSha": "179527f38a1c85cfa59f59a618ba6ddaba4649fa"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/badejo.png",
+      "mode": "100644",
+      "sizeBytes": 1675685,
+      "gitBlobSha": "036bbe2df61dbdde5b4ea7baf74b36504c0740fb"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/bronson.png",
+      "mode": "100644",
+      "sizeBytes": 1779643,
+      "gitBlobSha": "2abbdf357d166696773f398aa4b6ce27b61adc51"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cherbourg.png",
+      "mode": "100644",
+      "sizeBytes": 1426947,
+      "gitBlobSha": "cb58948b8a67d1dfcd576d1e57dcb364955dc9f2"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cho.png",
+      "mode": "100644",
+      "sizeBytes": 1639202,
+      "gitBlobSha": "6feb0df56491d3c45b8d886092832fe2b4290081"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/dave.png",
+      "mode": "100644",
+      "sizeBytes": 1805884,
+      "gitBlobSha": "b28a07652444e34844663c32b95e5a2077582264"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1697088,
+      "gitBlobSha": "00c5fb423dc4d026e23be2bc49e418656d8732d9"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch.png",
+      "mode": "100644",
+      "sizeBytes": 1561783,
+      "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1769977,
+      "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge.png",
+      "mode": "100644",
+      "sizeBytes": 1887477,
+      "gitBlobSha": "0cf723a8ab90bde150ebbd4399ada0bf47bd64cd"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1833806,
+      "gitBlobSha": "f7d8a09754b8fef0d96664cb0e6367be3f421088"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker.png",
+      "mode": "100644",
+      "sizeBytes": 1626812,
+      "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/elway.png",
+      "mode": "100644",
+      "sizeBytes": 1674049,
+      "gitBlobSha": "ca6c095682baba6f0cf2f60c4f9d6ced0b9d9f6b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/harriman.png",
+      "mode": "100644",
+      "sizeBytes": 1538047,
+      "gitBlobSha": "aa5f4c3094451aebaeca860478ee942233d813cc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning-ready.png",
+      "mode": "100644",
+      "sizeBytes": 1947258,
+      "gitBlobSha": "4892db9f22f3c733691e9f761d536de2372ab18c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning.png",
+      "mode": "100644",
+      "sizeBytes": 1826145,
+      "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/medic.png",
+      "mode": "100644",
+      "sizeBytes": 1584745,
+      "gitBlobSha": "d3309873da6d99a19a5e45e5fb05c64a91577866"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/muller.png",
+      "mode": "100644",
+      "sizeBytes": 1723505,
+      "gitBlobSha": "7336d2732792749de2e087a497c7c30fcbc18ecb"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/pritchett.png",
+      "mode": "100644",
+      "sizeBytes": 1682011,
+      "gitBlobSha": "871047d60fd3637fd91673f11536413601ec3ee3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rand.png",
+      "mode": "100644",
+      "sizeBytes": 1753979,
+      "gitBlobSha": "77f21a5eedfb69cd8ba4ed1d99a4813b44e0c9df"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rollins.png",
+      "mode": "100644",
+      "sizeBytes": 1446163,
+      "gitBlobSha": "6783db7baf4d48e341f515d4cd4c5e40d62b2235"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/silas.png",
+      "mode": "100644",
+      "sizeBytes": 1654417,
+      "gitBlobSha": "648f6f9f470e9898889658e10fdbdccd29c0743d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/corpses/facehugger.png",
+      "mode": "100644",
+      "sizeBytes": 1303577,
+      "gitBlobSha": "ee1ec30a549bd10acce64e5aa3263b617e71dae8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/creatures/facehugger.png",
+      "mode": "100644",
+      "sizeBytes": 1790221,
+      "gitBlobSha": "8c595e1ffa839e05c9b5d5d3326601afc6f9c672"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/amber.png",
+      "mode": "100644",
+      "sizeBytes": 1445819,
+      "gitBlobSha": "d12b0145c990a25e52b7cb6798286e5854dbcef5"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/antenna.png",
+      "mode": "100644",
+      "sizeBytes": 1987264,
+      "gitBlobSha": "89baa251293ac3c1e2314c853f8c7cd435700e4f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/armory.png",
+      "mode": "100644",
+      "sizeBytes": 2478105,
+      "gitBlobSha": "16cb73f36c9621b93f8d4ce57de8c599a5688916"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/battery.png",
+      "mode": "100644",
+      "sizeBytes": 2570228,
+      "gitBlobSha": "a2355d8ea1886db1c7ff5256439280c89c168baf"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/bridge.png",
+      "mode": "100644",
+      "sizeBytes": 1423302,
+      "gitBlobSha": "dff9849d82f3d1af7eea1e06f6a50c317c6da85e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/briefing.png",
+      "mode": "100644",
+      "sizeBytes": 2344796,
+      "gitBlobSha": "b41f608f647546eaad335e0e6fed92f56c459941"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cable.png",
+      "mode": "100644",
+      "sizeBytes": 1733737,
+      "gitBlobSha": "0e1a02ddd16a6db4522728904f31eb690710f378"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cableTray.png",
+      "mode": "100644",
+      "sizeBytes": 2031704,
+      "gitBlobSha": "e02e58be7b815462ba58e5452980a62f59f6ae2b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/captureBay.png",
+      "mode": "100644",
+      "sizeBytes": 2372554,
+      "gitBlobSha": "f53bb6c3b166b72eef8ff475823e88f8efc5a8c4"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/carene.png",
+      "mode": "100644",
+      "sizeBytes": 2277342,
+      "gitBlobSha": "eb7fb02e0faf7b072881e9a89f2f7b30b8767c2d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cargo.png",
+      "mode": "100644",
+      "sizeBytes": 2907688,
+      "gitBlobSha": "820a503de9f4ebee3153645ad3ce1ec62651c1bb"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/checkpoint.png",
+      "mode": "100644",
+      "sizeBytes": 2441730,
+      "gitBlobSha": "116ce1e51fff4fea2912a80eb24400a9a003557c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cocoon.png",
+      "mode": "100644",
+      "sizeBytes": 2821558,
+      "gitBlobSha": "c17a26da0b5bbe2144aab2f945023ab324e6da8f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/drill.png",
+      "mode": "100644",
+      "sizeBytes": 2472223,
+      "gitBlobSha": "22cff2ae22bd995d82213d2a6e55272ba6068de8"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/dropship.png",
+      "mode": "100644",
+      "sizeBytes": 1756835,
+      "gitBlobSha": "74ebd85bc17657493160166e9dc078e053ce0f7d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/eggs.png",
+      "mode": "100644",
+      "sizeBytes": 2063293,
+      "gitBlobSha": "141bab92c814705b97c25ba92cec2f0841775f86"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/excavator.png",
+      "mode": "100644",
+      "sizeBytes": 2408594,
+      "gitBlobSha": "cf2eef0a6127379bf9074df0dffe87ded7387e2a"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/fence.png",
+      "mode": "100644",
+      "sizeBytes": 3971351,
+      "gitBlobSha": "5c9479f5bc4e69b18f811bc669d4c4dbfc77d66d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/filters.png",
+      "mode": "100644",
+      "sizeBytes": 2440316,
+      "gitBlobSha": "f56306deaf34048138ad7fa89ea2c478c8edddcc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/generator.png",
+      "mode": "100644",
+      "sizeBytes": 2579144,
+      "gitBlobSha": "7f844e9f3f7577d7a3d6bf1a0ff84817f48c1062"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/hoist-drive.png",
+      "mode": "100644",
+      "sizeBytes": 2370745,
+      "gitBlobSha": "eb6a8382e212a5e574bae77a5ae83e9a16d96d42"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/home.png",
+      "mode": "100644",
+      "sizeBytes": 2304188,
+      "gitBlobSha": "109735c1d5589fee5ffe62cba71ce6e9133c3b88"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/landing.png",
+      "mode": "100644",
+      "sizeBytes": 1895098,
+      "gitBlobSha": "45c1fff8f4384e69dbc49f92c88d7e48aa8e73b2"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/locker.png",
+      "mode": "100644",
+      "sizeBytes": 2393757,
+      "gitBlobSha": "7b3ecad4f77ebfacee507d9b9c6c5ab1b4e14ab7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/medical.png",
+      "mode": "100644",
+      "sizeBytes": 1862848,
+      "gitBlobSha": "ebeff870173122f46171499c9c45f044c58f499c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/membrane.png",
+      "mode": "100644",
+      "sizeBytes": 1623574,
+      "gitBlobSha": "03c99ffee0bb16a139cebd5ff4cb89425caa87c7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/monolith.png",
+      "mode": "100644",
+      "sizeBytes": 1411324,
+      "gitBlobSha": "40c4153a6cb64197e4d3f4aac9fee48f8faea38c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/office.png",
+      "mode": "100644",
+      "sizeBytes": 1978635,
+      "gitBlobSha": "e18e3fac3c8019ebf61385186f375e4bc2c3c9ab"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ossuary.png",
+      "mode": "100644",
+      "sizeBytes": 2536837,
+      "gitBlobSha": "a0c496d6b1e2f623e7ae021036c2f0bbf8cc39ba"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pipe.png",
+      "mode": "100644",
+      "sizeBytes": 1694083,
+      "gitBlobSha": "e10587b250a5840a1702fbb23f21ca4293ebf484"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pump.png",
+      "mode": "100644",
+      "sizeBytes": 2488952,
+      "gitBlobSha": "37ce496ef506f79c8f121d4ab534232c6d5c79a6"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/quarantine-instruments.png",
+      "mode": "100644",
+      "sizeBytes": 2633988,
+      "gitBlobSha": "862444f38d1236d88f8e3b71d77937dca3986421"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ravine.png",
+      "mode": "100644",
+      "sizeBytes": 2323581,
+      "gitBlobSha": "67ea926633f65fed335efdf3b9c2c1d23e76b1ef"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/reel.png",
+      "mode": "100644",
+      "sizeBytes": 2408366,
+      "gitBlobSha": "0cc53fd5019ec4fd5716d7571dadb58ae72bcb80"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/resinCable.png",
+      "mode": "100644",
+      "sizeBytes": 1439371,
+      "gitBlobSha": "7a29ab4e9b05cafad789f5dd10b3e3fe9c5d077c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/rib.png",
+      "mode": "100644",
+      "sizeBytes": 2171443,
+      "gitBlobSha": "11ad654635974a65c2454449b7d3289fd057a52e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/seal-equipment.png",
+      "mode": "100644",
+      "sizeBytes": 2638307,
+      "gitBlobSha": "6b5572a5c79d55445f9f4c7b5352cb08dbc2fbba"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silica.png",
+      "mode": "100644",
+      "sizeBytes": 1870151,
+      "gitBlobSha": "d93c0bda7ab9a63d84af3282e10b4d394793969e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silicaShard.png",
+      "mode": "100644",
+      "sizeBytes": 1794129,
+      "gitBlobSha": "bcd137fe99b60801b95c2a30037ce673ca161d48"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/survey.png",
+      "mode": "100644",
+      "sizeBytes": 2479319,
+      "gitBlobSha": "420e08f591134eb035273395db634e1de804d2e7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/terminal.png",
+      "mode": "100644",
+      "sizeBytes": 2346187,
+      "gitBlobSha": "0f3826ea510f97734fda169a855e2d02ea66d5de"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/throne.png",
+      "mode": "100644",
+      "sizeBytes": 2481139,
+      "gitBlobSha": "c2213161f9a0de4f29815381bc366bb13b7296e1"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/triage.png",
+      "mode": "100644",
+      "sizeBytes": 2119122,
+      "gitBlobSha": "ad074458c84003c241bedea418781371487ead72"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/viewport.png",
+      "mode": "100644",
+      "sizeBytes": 2647725,
+      "gitBlobSha": "55a1ed06c6dc2f18b435ac8ced9f07eda7e89b10"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/warningStripe.png",
+      "mode": "100644",
+      "sizeBytes": 1369279,
+      "gitBlobSha": "52e8a6a8690dc0d8e2a5ef436b6a7ba3b410dc84"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/wash.png",
+      "mode": "100644",
+      "sizeBytes": 2477167,
+      "gitBlobSha": "3c18b00d657e5adc8e7389768dba97ad8d745c64"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/winch.png",
+      "mode": "100644",
+      "sizeBytes": 2491980,
+      "gitBlobSha": "e2161bb6c8c7d750615fd1dc2ef92ae139a4b8cc"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/workbench.png",
+      "mode": "100644",
+      "sizeBytes": 2495432,
+      "gitBlobSha": "fdc8d78d51fd7bfd1cc4997ae9245b9aa60c058f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/console.png",
+      "mode": "100644",
+      "sizeBytes": 2091998,
+      "gitBlobSha": "3ed8dc1fda985fa70636e585e2a7d353ba58a7c9"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/isolation.png",
+      "mode": "100644",
+      "sizeBytes": 1382835,
+      "gitBlobSha": "0100200b45c0ebd7cb872a8af898f0a5464af02b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/parts.png",
+      "mode": "100644",
+      "sizeBytes": 2412093,
+      "gitBlobSha": "8ae3463ce40eadb956f861e5eb55adf088b9cf2d"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-frame.png",
+      "mode": "100644",
+      "sizeBytes": 1620849,
+      "gitBlobSha": "5c4ecdaff0e73a87a7c38bc928ca81740c00d45f"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-panel.png",
+      "mode": "100644",
+      "sizeBytes": 2187264,
+      "gitBlobSha": "c55ad591e9d774f7b48e1dbaee6fc49964a51676"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/acid.png",
+      "mode": "100644",
+      "sizeBytes": 802696,
+      "gitBlobSha": "3cbacf353f7ea62732f5839593cab86c8f8422e0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/flame.png",
+      "mode": "100644",
+      "sizeBytes": 900708,
+      "gitBlobSha": "941c482a2efd560ab552be6315d498895bf71994"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/foam.png",
+      "mode": "100644",
+      "sizeBytes": 1906222,
+      "gitBlobSha": "528f8553c8964252881a3e5266e7db2946a771e7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/impact.png",
+      "mode": "100644",
+      "sizeBytes": 959818,
+      "gitBlobSha": "329bcab1079ccd306bb3c161a95ac4e73d6a2e1a"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/muzzle.png",
+      "mode": "100644",
+      "sizeBytes": 351907,
+      "gitBlobSha": "10cf58527401353b795b891483ad65d51855c980"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/spark.png",
+      "mode": "100644",
+      "sizeBytes": 870791,
+      "gitBlobSha": "bea082592a5507b083c0cd6410cc31c22627a775"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/archive.png",
+      "mode": "100644",
+      "sizeBytes": 1720485,
+      "gitBlobSha": "708c4f1639b7ce10d78667db6c505a5eb72f40c0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/armory-rack.png",
+      "mode": "100644",
+      "sizeBytes": 1913670,
+      "gitBlobSha": "951eed860fbf3a7cce47049852e37021281c321e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/decoy.png",
+      "mode": "100644",
+      "sizeBytes": 2332613,
+      "gitBlobSha": "4e94b80258cc7c40891a92ae9d1df2fccc72b2b3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/filter.png",
+      "mode": "100644",
+      "sizeBytes": 2175851,
+      "gitBlobSha": "3eb2d11e422f48c4d014b74d5efe208b36154363"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/lamp.png",
+      "mode": "100644",
+      "sizeBytes": 2162938,
+      "gitBlobSha": "a5fa20e92819094188c6000ba9f8500ae0c9cbde"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/light-panel.png",
+      "mode": "100644",
+      "sizeBytes": 2283328,
+      "gitBlobSha": "8ccd0a2382e6ee710928d0183085effc6ab1285b"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker-open.png",
+      "mode": "100644",
+      "sizeBytes": 2372707,
+      "gitBlobSha": "3279415ca84331e0f3d38218e48f6daaef75d9b9"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker.png",
+      "mode": "100644",
+      "sizeBytes": 2014209,
+      "gitBlobSha": "74fb16434b5f8c7240894cb74ebdb733d37b49f1"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/medkit.png",
+      "mode": "100644",
+      "sizeBytes": 3020553,
+      "gitBlobSha": "0428d0a362e9efb98bea74839d089039875fe8b0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/radio.png",
+      "mode": "100644",
+      "sizeBytes": 2158947,
+      "gitBlobSha": "c6fe1bc0325d399ab6d1c10829355d74d6399e7e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/sensor.png",
+      "mode": "100644",
+      "sizeBytes": 1073705,
+      "gitBlobSha": "5d77bc910f19242be190dbaedf851082cfaacf2c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/shutter-control.png",
+      "mode": "100644",
+      "sizeBytes": 2285487,
+      "gitBlobSha": "9864b48a1a0b2a5557fb2fd4c61d66d9cbe68014"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/stasis-canopy.png",
+      "mode": "100644",
+      "sizeBytes": 1615493,
+      "gitBlobSha": "060e0c2cef414e53a434d90c5cdec49bd171f52c"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/supply.png",
+      "mode": "100644",
+      "sizeBytes": 2193866,
+      "gitBlobSha": "6d077f7af7ad2c56e36de9a7e5f8ee1f19d3a7ea"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/tracker.png",
+      "mode": "100644",
+      "sizeBytes": 1774314,
+      "gitBlobSha": "4cb6d2e91ae1a55a7d59d1dc3d45e713b2cc09f0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/weakpoint.png",
+      "mode": "100644",
+      "sizeBytes": 557039,
+      "gitBlobSha": "81744bac36ac74a5f10e363d48084f9051bd39c7"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/capture.png",
+      "mode": "100644",
+      "sizeBytes": 2391804,
+      "gitBlobSha": "7e9ea005ea3485e922f464d734465d2117b06ac3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/case.png",
+      "mode": "100644",
+      "sizeBytes": 2199451,
+      "gitBlobSha": "b70c340e00f5e9870699fc810ebe69b463a362c3"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/console.png",
+      "mode": "100644",
+      "sizeBytes": 1340223,
+      "gitBlobSha": "562fa41d7b19993907449b206d305dd8f859f4d0"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/sleep.png",
+      "mode": "100644",
+      "sizeBytes": 1938439,
+      "gitBlobSha": "aa49d28baabcf50385a2c809cc2e427a066f5735"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/organic/egg.png",
+      "mode": "100644",
+      "sizeBytes": 1505515,
+      "gitBlobSha": "2b2e0fd5c66037e77c0600e1ad47fa90ae58fa97"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/normal.png",
+      "mode": "100644",
+      "sizeBytes": 1955639,
+      "gitBlobSha": "f8f73386bf8c22092f6f6e671a4feea7ec22bd83"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/royal.png",
+      "mode": "100644",
+      "sizeBytes": 2082406,
+      "gitBlobSha": "362dd6fc5143d331bb4a281302d28a7612f191a2"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/adams.png",
+      "mode": "100644",
+      "sizeBytes": 2034413,
+      "gitBlobSha": "1ef7e7176ee1a1e6108a25198d4ff8e573662498"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/elway.png",
+      "mode": "100644",
+      "sizeBytes": 1879135,
+      "gitBlobSha": "5e4a777b460bdbfa43d9059e68b3b5968c2bae9e"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pistol.png",
+      "mode": "100644",
+      "sizeBytes": 2099052,
+      "gitBlobSha": "4989fcbc9ec111a32a69d60e41e1bea0826e1aaf"
+    },
+    {
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pulse.png",
+      "mode": "100644",
+      "sizeBytes": 1309194,
+      "gitBlobSha": "f4d94c7318acf54669d6c6463ab1df419aeae25f"
+    }
+  ]
+}

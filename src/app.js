@@ -205,6 +205,8 @@ import { HIVE_CAMPAIGNS_V131, buildHiveMissionV131 } from './hive-missions-v131.
 import { MECHA_CAMPAIGNS_V131, buildMechaMissionV131 } from './mecha-missions-v131.js';
 import { ECOSYSTEM_CAMPAIGNS_V131, buildEcosystemMissionV131 } from './ecosystem-missions-v131.js';
 import { LEGACY_CAMPAIGNS_V131, buildLegacyMissionV131 } from './legacy-operations-v131.js';
+import { FIORINA_CUTS_V114, isFiorinaCampaignV114, buildFiorinaMissionV114,
+  fiorinaArchiveWorldV114, fiorinaCutForOperationV114, fiorinaPersistenceDueV114 } from './fiorina-campaign-v114.js';
 import { HiveCommandDockV131 } from './hive-command-ui-v131.js';
 import { SquadCommandDockV132 } from './squad-command-ui-v132.js';
 import { getNarrativeEvidenceModelV132, markNarrativeEvidenceReadV132,
@@ -311,6 +313,7 @@ let pendingMissionLaunchV62 = null;
 // campaign mission and the extraction hand-back state for the engine's boarding event.
 let insertionMissionV188 = null;
 let extractionFlowV188 = createExtractionFlowV188();
+let pendingFiorinaCutV114 = 'theatrical';
 let profileEpochV78 = 0;
 let profileImportRequestV78 = 0;
 let missionOwnerV78 = null;
@@ -1030,6 +1033,17 @@ const titleScreen = new TitleScreenController({
     return false;
   },
   onForge: () => openForgeContext(),
+  onDlc: () => { void openDlcExtensions(); },
+  onAliens1986: () => {
+    try {
+      launchDlcExpedition({ href: '/dlc/aliens-1986/' });
+    } catch {
+      titleScreen.liveStatus.textContent = currentLanguageV185() === 'en'
+        ? 'Aliens (1986) could not be opened. Please try again.'
+        : 'Aliens (1986) ne peut pas être ouvert. Réessayez.';
+      titleScreen.scheduleFocus(titleScreen.aliens1986Button, 'menu');
+    }
+  },
   onOptions: () => {
     titleSceneV79.preservePlacementOnNextShowV87();
     showView('settings');
@@ -1465,6 +1479,56 @@ function openForgeContext() {
   byId('breadcrumb').textContent = 'DEVELOPER // FRONTIER FORGE';
   byId('view-title').textContent = 'Frontier Forge';
   byId('return-title').textContent = 'FERMER FRONTIER FORGE';
+}
+
+let dlcGallery = null;
+let dlcGalleryLoading = false;
+globalThis.addEventListener('pageshow', (event) => {
+  // Browser Back can restore a frozen host whose audio was disposed at unload.
+  if (event.persisted && standaloneContext === 'dlc') globalThis.location.reload();
+});
+
+function launchDlcExpedition(entry) {
+  const previousContext = standaloneContext;
+  standaloneContext = 'dlc';
+  try {
+    hubEngine.stop(false);
+    engine.stop();
+    bioforgeRuntimeV80.stop({ purge: false, reason: 'dlc-launch' });
+    if (typeof xenoTrialsUiV96 !== 'undefined') xenoTrialsUiV96?.close();
+    audio.setScene(null); audio.stopEffects(); audio.stopMusic(0);
+    globalThis.location.assign(entry.href);
+  } catch (error) {
+    standaloneContext = previousContext;
+    audio.setScene('menu');
+    throw error;
+  }
+}
+
+async function openDlcExtensions() {
+  if (dlcGalleryLoading || titleScreen.root.hidden || titleScreen.state !== 'menu') return;
+  dlcGalleryLoading = true;
+  try {
+    const { DlcMenu } = await import('./dlc-menu.js');
+    // A late module response must not interrupt a campaign or another menu.
+    if (titleScreen.root.hidden || titleScreen.state !== 'menu') return;
+    if (!dlcGallery) dlcGallery = new DlcMenu({
+      onClose: () => {
+        showTitleScreen(); titleScreen.openMenu();
+        titleScreen.scheduleFocus(titleScreen.dlcButton, 'menu');
+      },
+      onLaunch: launchDlcExpedition
+    });
+    titleScreen.hide();
+    byId('app').hidden = true;
+    dlcGallery.open({ language: currentLanguageV185() });
+  } catch (error) {
+    showTitleScreen(); titleScreen.openMenu();
+    titleScreen.liveStatus.textContent = currentLanguageV185() === 'en'
+      ? 'Expansions could not be opened. Please try again.'
+      : 'Les extensions ne peuvent pas être ouvertes. Réessayez.';
+    titleScreen.scheduleFocus(titleScreen.dlcButton, 'menu');
+  } finally { dlcGalleryLoading = false; }
 }
 
 function showTitleScreen() {
@@ -2613,7 +2677,7 @@ function renderCampaigns() {
       && (!getArbiterMissionV190(campaign.id) || arbiterCampaignAccessV190(saveSystem.data.xenoArbiterV190, campaign.id).available);
     const planned = saveSystem.data.strategy.plannedCampaignId === campaign.id;
     const completed = saveSystem.data.galaxy.completedCampaignIds.includes(campaign.id);
-    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
+    return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(campaign.archiveWorld?.name || world?.name || 'Frontier')}</span><span>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
   }).join('');
   renderSpecialOperationsV67(term);
   renderOperationPlan();
@@ -2657,7 +2721,7 @@ function renderSpecialOperationsV67(term = '') {
           : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
             : '';
     const actionAttribute = campaign ? `data-plan-campaign="${campaign.id}"` : hubSurface ? 'data-open-hub' : '';
-    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml('REGISTRE TANTALUS')}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : hubSurface ? 'USS TANTALUS · HUB PHYSIQUE' : 'REGISTRE DES OPÉRATIONS'}</span><button class="button compact" ${actionAttribute} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml('REGISTRE TANTALUS')}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(campaign.archiveWorld?.name || world?.name || 'Frontier') : hubSurface ? 'USS TANTALUS · HUB PHYSIQUE' : 'REGISTRE DES OPÉRATIONS'}</span><button class="button compact" ${actionAttribute} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
   }).join('') || '<p class="special-operation-empty">Aucune opération ne correspond à cette recherche.</p>';
 }
 
@@ -2725,11 +2789,14 @@ function renderOperationPlan() {
   // V188 full run (2026-11-22): a launch refused for resources names what is missing, under the button.
   const launchMissingV188 = !recovery.canAbandon && !operation && !brief.ready ? missingStrategicCosts(saveSystem.data, brief.cost) : [];
   const launchRefusalV188 = launchMissingV188.length ? `<p class="hint" role="status" data-launch-refusal-v188>${escapeHtml(strategicCostRefusalV188({ missingCosts: launchMissingV188 }, document.documentElement.lang))}${launchMissingV188.some(entry => entry.key === 'supplies') ? ` ${escapeHtml(colonySupplySourcesTextV188(document.documentElement.lang))}` : ''}</p>` : '';
-  const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9';
+  const fiorinaV114 = isFiorinaCampaignV114(campaign);
+  const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : fiorinaV114 ? 'OUVRIR L’ARCHIVE' : 'DÉPLOYER ECHO-9';
   const recoveryAction = recovery.canAbandon
     ? '<button id="operation-abandon-v69" class="button danger-outline wide">ARCHIVER L’OPÉRATION PERDUE</button>'
     : '';
-  const specialNoticeCopy = specialOperation?.id === 'cargo-brutal'
+  const specialNoticeCopy = fiorinaV114
+    ? 'Reconstitution MIRE en solo : Ripley, outils de la prison, fusées de diversion et Runner unique. Les armes militaires de votre profil restent à bord. Cette adaptation reste partielle.'
+    : specialOperation?.id === 'cargo-brutal'
     ? `Insertion à pied · ${escapeHtml(issuedVehicle?.name || 'matériel lourd')} fourni dans la zone de mission, sans modifier l’inventaire.`
     : specialOperation?.id === 'narrative-collectables'
       ? 'Enquête QZ-17 · quatre preuves physiques à récupérer · confronter les sources pour ouvrir une vraie route.'
@@ -2746,8 +2813,15 @@ function renderOperationPlan() {
   const specialNotice = specialOperation
     ? `<div class="special-operation-notice"><span>ORDRE PRIORITAIRE</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : soloNoticeV121;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b>${soloOperationV121 ? '' : unavailableCrewRowsV188}<span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>${launchRefusalV188}`;
+  const fiorinaCutV114 = operation ? fiorinaCutForOperationV114(operation) : pendingFiorinaCutV114;
+  const fiorinaSelectorV114 = fiorinaV114
+    ? `<label class="field" for="fiorina-cut-v114">VERSION DE L’ARCHIVE<select id="fiorina-cut-v114" ${operation ? 'disabled' : ''}>${FIORINA_CUTS_V114.map(cut => `<option value="${cut.id}" ${cut.id === fiorinaCutV114 ? 'selected' : ''}>${escapeHtml(cut.label)} · ${escapeHtml(cut.detail)}</option>`).join('')}</select></label>`
+    : '';
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaignObjectiveLabelV188(campaign.objective))} · ${escapeHtml(campaign.archiveWorld?.name || world.name)}</p>${specialNotice}${fiorinaSelectorV114}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b>${researchBonusRowV188(campaign)}<span>ESCOUADE</span><b>${fiorinaV114 ? 'RIPLEY · ARCHIVE SOLO' : soloOperationV121 ? 'UN OPÉRATEUR · SOLO' : escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b>${soloOperationV121 ? '' : unavailableCrewRowsV188}<span>ARME</span><b>${fiorinaV114 ? 'FUSÉES DE DIVERSION' : escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${fiorinaV114 ? 'OUTILS RÉCUPÉRÉS SUR PLACE' : escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>${launchRefusalV188}`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
+  if (fiorinaV114 && !operation) byId('fiorina-cut-v114').onchange = event => {
+    pendingFiorinaCutV114 = event.target.value === 'assembly' ? 'assembly' : 'theatrical';
+  };
   mountArbiterDossierV190(byId('operation-plan'), { progress: saveSystem.data.xenoArbiterV190,
     selectedCampaignId: campaign.id, activeOperation: operation,
     worldAvailable: saveSystem.data.galaxy.unlockedWorldIds.includes('world-05-lethe'),
@@ -3570,6 +3644,7 @@ function openArchiveRelayReaderV122(event) {
 
 function buildCampaignMissionLevelV122(options) {
   const id = options.campaign?.id;
+  if (isFiorinaCampaignV114(id)) return buildFiorinaMissionV114(options);
   if (getArbiterMissionV190(id)) return buildArbiterMissionV190(options);
   if (HIVE_CAMPAIGNS_V131.some(c=>c.id===id)) return buildHiveMissionV131(options);
   if (MECHA_CAMPAIGNS_V131.some(c=>c.id===id)) return buildMechaMissionV131(options);
@@ -3830,7 +3905,7 @@ function discardProfileRuntimeV78() {
 // V188: what the insertion cinematic plays for this launch, or null. A mid-mission
 // resume goes straight back into the level, as before (no landing is replayed).
 function insertionCinematicPlanV188(context) {
-  if (!context?.world || context.operationLoadout?.resumeState || standaloneContext) return null;
+  if (!context?.world || context.operationLoadout?.resumeState || standaloneContext || isFiorinaCampaignV114(context.campaign)) return null;
   const story = normalizeStoryCampaignV188(saveSystem.data.storyCampaignV188);
   // QZ-17 opens on its own approach cinematic (CIN-10): the insertion stays short before it.
   const storyApproach = context.campaign?.id === 'special-narrative-qz17' && !(story.cinematicsSeen || []).includes('cin-10');
@@ -3878,14 +3953,21 @@ function startMissionRuntimeV62(context) {
 function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
   destroyMissionInsertionUiV62();
   pendingMissionLaunchV62 = null;
-  insertionMissionV188 = { world: context.world, campaign: context.campaign, handover: insertionHandoverV188
+  insertionMissionV188 = isFiorinaCampaignV114(context.campaign) ? null : { world: context.world, campaign: context.campaign, handover: insertionHandoverV188
     || buildInsertionHandoverV188({ world: context.world, campaign: context.campaign, templateId: context.missionLevel?.templateId, vehicle: context.vehicle }) };
   extractionFlowV188 = createExtractionFlowV188();
   const {
     campaign, world, worldState, levelSeed, missionLevel,
     weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
   } = context;
-  engine.setCoop(saveSystem.data.settings.coop);
+  const missionControlsV114 = byId('retreat-mission').closest('.game-toolbar')?.querySelector('.controls');
+  if (missionControlsV114) {
+    missionControlsV114.dataset.standardControlsV114 ||= missionControlsV114.textContent;
+    missionControlsV114.textContent = isFiorinaCampaignV114(campaign)
+      ? 'A/D · W/S · ESPACE · F : FUSÉE · E : INTERAGIR · C : CODEX · M : PLAN · P : PAUSE'
+      : missionControlsV114.dataset.standardControlsV114;
+  }
+  engine.setCoop(isFiorinaCampaignV114(campaign) ? false : saveSystem.data.settings.coop);
   missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, timeline: saveSystem.data.createdAt, operationId: saveSystem.data.strategy.currentOperation?.id };
   engine.start({
     userCasteCampaignV88: !getSpecialOperationByCampaignIdV67(campaign.id)
@@ -3893,6 +3975,7 @@ function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
       && ![BLACK_COCOON_CAMPAIGN_V121.id, APC_CONVOY_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id].includes(campaign.id)
       && !isAct5RaceCampaignV188(campaign.id),
     operationId: deployment.operation.id,
+    alien3CutV114: isFiorinaCampaignV114(campaign) ? fiorinaCutForOperationV114(deployment.operation) : undefined,
     // V188 Act V convoy race: towed trailers from the M577 manifest and the decisions already recorded.
     act5RaceV188: act5ConvoySetupV188(saveSystem.data, campaign.id),
     arbiterProgressV190: saveSystem.data.xenoArbiterV190,
@@ -3936,16 +4019,16 @@ function startMissionRuntimeNowV62(context, insertionHandoverV188 = null) {
   });
   let resumedMissionV88 = engine.lastResumeResult?.applied === true;
   if (operationLoadout.resumeState && !resumedMissionV88) resumedMissionV88 = applyMissionResumeState(operationLoadout.resumeState) === true;
-  if (applyOpeningMissionSuppliesV88(engine, deployment.operation, resumedMissionV88)) {
+  if (!isFiorinaCampaignV114(campaign) && applyOpeningMissionSuppliesV88(engine, deployment.operation, resumedMissionV88)) {
     try { commitCurrentRuntimeV78(); }
     catch (error) { toast(`Fret chargé, sauvegarde en attente : ${error.message}`); }
   }
   // Restore the saved actors first, then honor the current explicit local-coop
   // setting. The transfer hook preserves their personal equipment and charges.
-  engine.setCoop(Boolean(saveSystem.data.settings.coop));
+  engine.setCoop(!isFiorinaCampaignV114(campaign) && Boolean(saveSystem.data.settings.coop));
   setupAlphaBravoCommandDockV69().refresh();
   const activeAlliesV85 = engine.activeSquadActors?.();
-  if (Array.isArray(activeAlliesV85) && !engine.isArchiveRelayV122?.()) byId('mission-log').textContent = missionDeploymentLogV188(engine, activeAlliesV85.length);
+  if (Array.isArray(activeAlliesV85) && !engine.isArchiveRelayV122?.() && !isFiorinaCampaignV114(campaign)) byId('mission-log').textContent = missionDeploymentLogV188(engine, activeAlliesV85.length);
   setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
   byId('game-canvas').focus({ preventScroll: true });
@@ -4095,6 +4178,8 @@ function launchCampaign(campaign = null) {
   const worldId = activeOperation?.worldId || campaign.worldId;
   const world = WORLDS.find((entry) => entry.id === worldId) || WORLDS[0];
   const worldState = saveSystem.data.galaxy.worldState[world.id];
+  const fiorinaV114 = isFiorinaCampaignV114(campaign);
+  const missionWorld = fiorinaV114 ? fiorinaArchiveWorldV114(world) : world;
   const before = absoluteHours(saveSystem.data.clock);
   let deployment;
   try {
@@ -4121,24 +4206,27 @@ function launchCampaign(campaign = null) {
     neuroProfileCatalog: NEURO_XENO_PROFILES,
     apexDossierCatalog: APEX_DOSSIERS
   });
-  const crew = operationLoadout.crew;
+  const crew = fiorinaV114 ? [] : operationLoadout.crew;
   const weapon = operationLoadout.weapon || WEAPONS[0];
-  const equipment = operationLoadout.equipment;
+  const equipment = fiorinaV114 ? [] : operationLoadout.equipment;
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
-  const vehicle = getArbiterMissionV190(campaign.id) || [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
+  const vehicle = fiorinaV114 || getArbiterMissionV190(campaign.id) || [BLACK_COCOON_CAMPAIGN_V121.id, C12_HORDE_CAMPAIGN_V121.id, ARCHIVE_RELAY_CAMPAIGN_V122.id, ...NEW_SPECIAL_CAMPAIGNS_V131.map(c=>c.id)].includes(campaign.id) ? null
     : campaign.id === APC_CONVOY_CAMPAIGN_V121.id || isAct5RaceCampaignV188(campaign.id) ? VEHICLES.find(entry => entry.id === 'vehicle-001-m577-armored-personnel-carrier')
     : specialOperation?.issuedVehicleId
     ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
     : operationLoadout.vehicle;
-  const costume = operationLoadout.costume;
+  const costume = fiorinaV114 ? null : operationLoadout.costume;
   const missionLevel = buildCampaignMissionLevelV122({
     campaign,
-    world: { ...world, ...worldState },
+    world: { ...missionWorld, ...worldState },
     levelSeeds: LEVEL_SEEDS,
     templateId: deployment.resumed ? deployment.operation.missionTemplateId : null,
     variant: 0
   });
   const levelSeed = missionLevel.levelSeed;
+  if (fiorinaV114 && !deployment.resumed) {
+    recordOperationFlag(saveSystem.data, 'alien3-assembly-cut', pendingFiorinaCutV114 === 'assembly');
+  }
   Object.assign(deployment.operation, {
     levelSeedId: levelSeed.id,
     missionTemplateId: missionLevel.templateId,
@@ -4168,10 +4256,10 @@ function launchCampaign(campaign = null) {
   pendingResolutionV121 = null;
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   delete byId('mission-log').dataset.radioUntilV121;
-  byId('mission-log').textContent = `MU/TH/UR · ${campaignObjectiveLabelV188(campaign.objective).toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
+  byId('mission-log').textContent = `MU/TH/UR · ${campaignObjectiveLabelV188(campaign.objective).toUpperCase()} · ${missionWorld.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
   startMissionInsertionV62({
-    campaign, world, worldState, levelSeed, missionLevel,
+    campaign, world: missionWorld, worldState, levelSeed, missionLevel,
     weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
   });
   return true;
@@ -4544,7 +4632,8 @@ function handleGameEvent(event) {
     if (event.message || event.reason) log.textContent = `MATÉRIEL · ${event.message || event.reason}`;
     renderMissionEquipment();
   }
-  if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${objectiveActionLabelV188(event.action).toUpperCase()}`;
+  if (event.type === 'alien3-phase' && isFiorinaCampaignV114(engine.campaign)) log.textContent = `${event.title || 'FIORINA 161'} · ${event.objective || engine.objectiveProgressText?.() || ''}`;
+  if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${(isFiorinaCampaignV114(engine.campaign) ? engine.objectiveProgressText?.() || campaignObjectiveLabel(engine.campaign.id) : objectiveActionLabelV188(event.action)).toUpperCase()}`;
   if (event.type === 'mission-complete') {
     // Repeated terminal events after durable resolution cannot even rewrite the
     // profile timestamp, let alone manufacture a second result or payment.
@@ -4597,7 +4686,8 @@ function handleGameEvent(event) {
   const survivalPersistenceDue = ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70.has(event.type)
     && (event.type !== 'alien-survival-self-destruct-tick'
       || Math.max(0, Math.ceil(Number(event.remainingSeconds ?? event.remaining) || 0)) % 5 === 0);
-  if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type) || survivalPersistenceDue) && saveSystem.data.strategy.currentOperation) {
+  const fiorinaPersistenceV114 = fiorinaPersistenceDueV114(event, engine.campaign?.id);
+  if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type) || survivalPersistenceDue || fiorinaPersistenceV114) && saveSystem.data.strategy.currentOperation) {
     try {
       const state = captureMissionResumeState();
       if (!state) return false;
@@ -5798,6 +5888,9 @@ function bind() {
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
     disposePlayerAppearancePreviewV126();
+    // The expedition owns separate notebooks. Opening it must not rewrite the
+    // native campaign or its selection, even through the unload autosave.
+    if (standaloneContext === 'dlc') { audio.dispose(); return; }
     if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
     // Capture the live mission before stop releases projectiles, recoverable

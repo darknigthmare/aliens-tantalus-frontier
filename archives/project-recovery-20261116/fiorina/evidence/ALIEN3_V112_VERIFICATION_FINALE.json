@@ -1,0 +1,228 @@
+{
+  "ok": true,
+  "archive": "ALIEN3_FIORINA_V112_LAISSER_PASSER_SUR_V111.zip",
+  "bytes": 38263872,
+  "sha256": "33a651d84ab9b3d68fd1f5b774178be549c33c20edc3beefe3c0ed5da5d39e32",
+  "manifestFiles": 602,
+  "missing": [],
+  "extra": [],
+  "badHashes": [],
+  "freshExtraction": true,
+  "reruns": [
+    {
+      "name": "unit",
+      "ok": true,
+      "seconds": 2.95
+    },
+    {
+      "name": "install",
+      "ok": true,
+      "seconds": 13.11
+    },
+    {
+      "name": "v111-unit",
+      "ok": true,
+      "seconds": 2.65
+    },
+    {
+      "name": "v111-install",
+      "ok": true,
+      "seconds": 12.8
+    },
+    {
+      "name": "spacing-route",
+      "ok": true,
+      "seconds": 46.01
+    },
+    {
+      "name": "spacing-resume",
+      "ok": true,
+      "seconds": 53.55
+    },
+    {
+      "name": "detour",
+      "ok": true,
+      "seconds": 53.19
+    },
+    {
+      "name": "traffic-route",
+      "ok": true,
+      "seconds": 46.45
+    },
+    {
+      "name": "delivered",
+      "ok": true,
+      "seconds": 28.48
+    },
+    {
+      "name": "codex",
+      "ok": true,
+      "seconds": 12.79
+    }
+  ],
+  "nativeCapturesAvailable": 37,
+  "nativeCapturesReproduced": 24,
+  "allComparedCapturesIdentical": true,
+  "captures": [
+    {
+      "file": "qa-v112/captures/50_morse_attend_dillon.png",
+      "sameSha256": true,
+      "sha256": "f9f762b04ad32872680c4cd73644af98cb126221631670d58c0a8de6f96f4e40",
+      "originalSha256": "f9f762b04ad32872680c4cd73644af98cb126221631670d58c0a8de6f96f4e40"
+    },
+    {
+      "file": "qa-v112/captures/51_le_groupe_repart.png",
+      "sameSha256": true,
+      "sha256": "d039f50b1a6178102626fdfbb597a32a3f450e0fab4a49b4814f37435844b58b",
+      "originalSha256": "d039f50b1a6178102626fdfbb597a32a3f450e0fab4a49b4814f37435844b58b"
+    },
+    {
+      "file": "qa-v112/captures/52_postes_apres_file.png",
+      "sameSha256": true,
+      "sha256": "fe288a27128edeee1ec3f11da3712340dc3f5124f24d4bdcd7a2956cb3928aa2",
+      "originalSha256": "fe288a27128edeee1ec3f11da3712340dc3f5124f24d4bdcd7a2956cb3928aa2"
+    },
+    {
+      "file": "qa-v112/captures/53_coulee_apres_file.png",
+      "sameSha256": true,
+      "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d",
+      "originalSha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d"
+    },
+    {
+      "file": "qa-v112/captures/54_retour_apres_file.png",
+      "sameSha256": true,
+      "sha256": "e47a5dbc45f2f0264b481e3b30a5efbc4e4e18a079ddc40e686485d731400389",
+      "originalSha256": "e47a5dbc45f2f0264b481e3b30a5efbc4e4e18a079ddc40e686485d731400389"
+    },
+    {
+      "file": "qa-v112/captures/50_morse_attend_dillon_reprise.png",
+      "sameSha256": true,
+      "sha256": "f9f762b04ad32872680c4cd73644af98cb126221631670d58c0a8de6f96f4e40",
+      "originalSha256": "f9f762b04ad32872680c4cd73644af98cb126221631670d58c0a8de6f96f4e40"
+    },
+    {
+      "file": "qa-v112/captures/55_file_apres_import.png",
+      "sameSha256": true,
+      "sha256": "71cb3efc4757a1f8eaffc3d135920fc7467801ad2053202e237c83930cdf2a3e",
+      "originalSha256": "71cb3efc4757a1f8eaffc3d135920fc7467801ad2053202e237c83930cdf2a3e"
+    },
+    {
+      "file": "qa-v112/captures/51_le_groupe_repart_reprise.png",
+      "sameSha256": true,
+      "sha256": "3f84c19b9f3ab290724bd617d0f2df55dfc15f0654823dcfdb0838a8be23cce9",
+      "originalSha256": "3f84c19b9f3ab290724bd617d0f2df55dfc15f0654823dcfdb0838a8be23cce9"
+    },
+    {
+      "file": "qa-v112/captures/52_postes_apres_file_reprise.png",
+      "sameSha256": true,
+      "sha256": "fe288a27128edeee1ec3f11da3712340dc3f5124f24d4bdcd7a2956cb3928aa2",
+      "originalSha256": "fe288a27128edeee1ec3f11da3712340dc3f5124f24d4bdcd7a2956cb3928aa2"
+    },
+    {
+      "file": "qa-v112/captures/53_coulee_apres_file_reprise.png",
+      "sameSha256": true,
+      "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d",
+      "originalSha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d"
+    },
+    {
+      "file": "qa-v112/captures/54_retour_apres_file_reprise.png",
+      "sameSha256": true,
+      "sha256": "3e566bdcf56ecc8569258fce980ee8aeed83e230755ec0c81c760d5bc26f7e43",
+      "originalSha256": "3e566bdcf56ecc8569258fce980ee8aeed83e230755ec0c81c760d5bc26f7e43"
+    },
+    {
+      "file": "qa-v112/captures/41_porte_refermee.png",
+      "sameSha256": true,
+      "sha256": "8551982428aefbd03b665278b9df85b655b86cc9e459998ba74c748b6cc9734c",
+      "originalSha256": "8551982428aefbd03b665278b9df85b655b86cc9e459998ba74c748b6cc9734c"
+    },
+    {
+      "file": "qa-v112/captures/42_retour_carrefour.png",
+      "sameSha256": true,
+      "sha256": "7f5993dc8457ca0ccb8c49425da0b851a428e681cfc79406f18833bde5aaf3f0",
+      "originalSha256": "7f5993dc8457ca0ccb8c49425da0b851a428e681cfc79406f18833bde5aaf3f0"
+    },
+    {
+      "file": "qa-v112/captures/43_detour_inferieur.png",
+      "sameSha256": true,
+      "sha256": "fe30df68408723f445772f279bb4a7a22b62ea3a417f4895eebd527f9fd48e6b",
+      "originalSha256": "fe30df68408723f445772f279bb4a7a22b62ea3a417f4895eebd527f9fd48e6b"
+    },
+    {
+      "file": "qa-v112/captures/44_postes_apres_detour.png",
+      "sameSha256": true,
+      "sha256": "487c1e07b28ce289f98d7992068f2042ca8f5ffbc8a85c73ff17a461cbd55dcf",
+      "originalSha256": "487c1e07b28ce289f98d7992068f2042ca8f5ffbc8a85c73ff17a461cbd55dcf"
+    },
+    {
+      "file": "qa-v112/captures/45_coulee_apres_detour.png",
+      "sameSha256": true,
+      "sha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d",
+      "originalSha256": "e68c1211c9a617b0402ede9324b2b00fd48d63c6a97fad9cc7db315d0f51717d"
+    },
+    {
+      "file": "qa-v112/captures/46_retour_morse.png",
+      "sameSha256": true,
+      "sha256": "544f18621f3126ac53c8d3bcb98f8e32bf1b6b8bc557af20ccbe149457b189c5",
+      "originalSha256": "544f18621f3126ac53c8d3bcb98f8e32bf1b6b8bc557af20ccbe149457b189c5"
+    },
+    {
+      "file": "qa-v112/captures/30_dillon_attend_le_jet.png",
+      "sameSha256": true,
+      "sha256": "1bd132d29146bdc6d11e98d1b8403eeda7493ecf4f97c88e7886ec3a3eb4255d",
+      "originalSha256": "1bd132d29146bdc6d11e98d1b8403eeda7493ecf4f97c88e7886ec3a3eb4255d"
+    },
+    {
+      "file": "qa-v112/captures/31_refermer_en_cours.png",
+      "sameSha256": true,
+      "sha256": "77bba50ee981a6bfa13515d9dac76fed679502db83f7291348919fcc907572d5",
+      "originalSha256": "77bba50ee981a6bfa13515d9dac76fed679502db83f7291348919fcc907572d5"
+    },
+    {
+      "file": "qa-v112/captures/32_jet_referme.png",
+      "sameSha256": true,
+      "sha256": "665f69046611d3188c63104c94cd23add6824dc158a695e98e3042016666be30",
+      "originalSha256": "665f69046611d3188c63104c94cd23add6824dc158a695e98e3042016666be30"
+    },
+    {
+      "file": "qa-v112/captures/33_attente_volontaire.png",
+      "sameSha256": true,
+      "sha256": "2f017af1db5c0146d8b7c5b1ac036790a379e857290d1c3186c659a1aa3fcf17",
+      "originalSha256": "2f017af1db5c0146d8b7c5b1ac036790a379e857290d1c3186c659a1aa3fcf17"
+    },
+    {
+      "file": "qa-v112/captures/34_reprise_depuis_appui.png",
+      "sameSha256": true,
+      "sha256": "a8c20a7a011ca8dbb97f4f0c0fcca8f1c30b8c1630690dd4dda5418d6f300f87",
+      "originalSha256": "a8c20a7a011ca8dbb97f4f0c0fcca8f1c30b8c1630690dd4dda5418d6f300f87"
+    },
+    {
+      "file": "qa-v112/captures/37_postes_apres_attente.png",
+      "sameSha256": true,
+      "sha256": "f0b408692201d4dfd01b41d81725ea99930fb334debf70d50b227137ac3c4587",
+      "originalSha256": "f0b408692201d4dfd01b41d81725ea99930fb334debf70d50b227137ac3c4587"
+    },
+    {
+      "file": "qa-v112/captures/38_retour_apres_fermeture.png",
+      "sameSha256": true,
+      "sha256": "1eedd8bb7add4f3c6f2360a4dc88dd3bffff69bc098d6b6338c07656b1d711cc",
+      "originalSha256": "1eedd8bb7add4f3c6f2360a4dc88dd3bffff69bc098d6b6338c07656b1d711cc"
+    }
+  ],
+  "sourceChecks": {
+    "unchangedV111Modules": 55,
+    "newModules": 4,
+    "engineLinks": 1
+  },
+  "deliveredOrdinaryHtmlChecks": 20,
+  "codexChecks": 73,
+  "pdf": {
+    "pages": 19,
+    "selectedNativeCaptures": 16,
+    "renderedPages": 19,
+    "visualReview": "Contact sheet of all pages and full-size page 3 reviewed. No clipping observed.",
+    "file": "ALIEN3_V112/RAPPORT_ILLUSTRE_V112.pdf",
+    "sha256": "547626bb0eb8f275d9593189dca7228888765500bc4fdc923c9430650fd2d63b"
+  },
+  "scope": "Incremental on exact V111 sources. Native canvas screenshots from shared shipped modules in a simplified playable host. No native Tantalus build, full film campaign, human QA, push or deployment claimed."
+}

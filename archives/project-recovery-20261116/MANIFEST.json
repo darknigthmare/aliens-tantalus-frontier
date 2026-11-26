@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "archiveRoot": "archives/project-recovery-20261116",
+  "updatedOn": "2026-11-25",
+  "scope": "Exact original Predator records and recovered local Fiorina archives plus evidence; all excluded from public build.",
+  "files": [
+    {
+      "path": "archives/project-recovery-20261116/fiorina/ALIEN3_FIORINA_V113_SEUILS_DE_FIORINA_SUR_V112.zip",
+      "sizeBytes": 29199402,
+      "sha256": "cf2d907eb5cdc15da09f0b79ef1007a4858fd15bd2627623cc7e9e3f148c7123"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/ALIEN3_FIORINA_V114_ATLAS_CONTINUITE_SUR_V113.zip",
+      "sizeBytes": 10077153,
+      "sha256": "9e466319875f269c6a94993e803f386de209bdae5576117469dbdbd89afb6695"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V101_DENSE_LEVEL_DESIGN_PRODUCTION_SAFE.zip",
+      "sizeBytes": 8282852,
+      "sha256": "9a865fa73854c21c62dda426edbce5d1e84b673aeabea1b592e09a397a87ebba"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V102_DECORS_ANCRES_PRODUCTION_SAFE.zip",
+      "sizeBytes": 26289661,
+      "sha256": "c00c124c2d7b8436edd75170ac0c82c3bacd2615622a8aae4b9bd0aeb83220eb"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/ALIENS_TANTALUS_DLC_ALIEN3_FIORINA_V103_PASSAGES_RESEAUX_PRODUCTION_SAFE.zip",
+      "sizeBytes": 42356990,
+      "sha256": "9888c2e0686f7b8ad657901dea80b60753cdfea558f2b51e44d38d40a3014eda"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/INVENTAIRE.json",
+      "sizeBytes": 458159,
+      "sha256": "4bace2f9d67c379e35a964142e52781f3d304e4c01c7cc18a8b0757aac2a3c89"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/README.md",
+      "sizeBytes": 4908,
+      "sha256": "1c002ff7c5c1862ce3c6aa523ee708b7165001e83d9c892bedacc05a86a6a40c"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V104_VERIFICATION_FINALE.json",
+      "sizeBytes": 3058,
+      "sha256": "8b5f4418b2eeedc950458e0c7c4f7804b75a1081478605091f9941bb9a0b4c38"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V105_VERIFICATION_FINALE.json",
+      "sizeBytes": 2813,
+      "sha256": "1078c0edcc4e485b1f21c564ecf22a15e563e71b928edeaa25bfc1c7aa0d9ca4"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V106_VERIFICATION_FINALE.json",
+      "sizeBytes": 2664,
+      "sha256": "d6ffbdd8b94753d088d645324c0b4da76ad6e8f2db3d4c89f4227034f4df0ba0"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V107_VERIFICATION_FINALE.json",
+      "sizeBytes": 3940,
+      "sha256": "e2bd4818b25479a6438a10e17e6878a789f3a55ef40316fccb61f5cd87d7a51c"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V108_VERIFICATION_FINALE.json",
+      "sizeBytes": 3858,
+      "sha256": "eb9736fa42f19d3e7ff0f03f0714878447316a387d0a26fe23f18f84a4b1ad2e"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V109_VERIFICATION_FINALE.json",
+      "sizeBytes": 6520,
+      "sha256": "b7b45eb48545a127ecc08e2458a52f5c95b3a0b0d4e9e7fc861832164d69b285"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V110_VERIFICATION_FINALE.json",
+      "sizeBytes": 4889,
+      "sha256": "e964c06e025c1a7ffcc9b3d1b30679592e166a928296aa3eedb2e8ea3660a5c7"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V111_VERIFICATION_FINALE.json",
+      "sizeBytes": 5508,
+      "sha256": "269339ef4bfb4f1ea6f86e96dafdd6665cd1d19a435575ae4a8e65e118b4b617"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V112_VERIFICATION_FINALE.json",
+      "sizeBytes": 8539,
+      "sha256": "6b4a41981523832dc09d80db303d45d918372f1c896ecf44af2034cdc15fba1d"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V113_VERIFICATION_FINALE.json",
+      "sizeBytes": 6338,
+      "sha256": "39f703ace9db2d23aa941cb01b56dfd8f5ee6e056ea1b40e6ad245699f69f984"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/ALIEN3_V114_VERIFICATION_FINALE.json",
+      "sizeBytes": 1365,
+      "sha256": "0b11f30f09b71adc9de54774f29965b615b92e9d7b9371ec6bc49b54b1eec63f"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V104.html",
+      "sizeBytes": 6008863,
+      "sha256": "f8557a5b0d35a79cedc3497632adb7a2abc034750cebddf591e533638968452d"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V104.pdf",
+      "sizeBytes": 6258778,
+      "sha256": "ce566756b7829de4be6e962bde30dda89f8991e29c19c6b9fd8f2cec429e73dc"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V105.html",
+      "sizeBytes": 4842390,
+      "sha256": "fd8b9c8fa678cd3641ad0f84cbf7efa54868da7d904a53ff6a8f5edeecf941dd"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V105.pdf",
+      "sizeBytes": 4913598,
+      "sha256": "b0da37f411c35eebe3bfed1f978584744f8a706040e8800bf7065304556927a2"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V106(1).html",
+      "sizeBytes": 6850758,
+      "sha256": "b605f57fea3f4d800dcfa4db711296b3c8625c4bf9d3c367097722389fd02ce6"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V106.pdf",
+      "sizeBytes": 6873516,
+      "sha256": "bc28d82746663d8d41c6f7155e43b39b5c1feee714e1ec43fcd558d51fd79602"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V107(1).html",
+      "sizeBytes": 7293978,
+      "sha256": "7a9920403bed7ef34393193f72e29c6635d5f47a428a293b5eec1e1e30a964ca"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V107.pdf",
+      "sizeBytes": 7367416,
+      "sha256": "6207523318ea82bf31cae3d714bf38f312ec01fdc8961a200520983f80002cdc"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V108(1).html",
+      "sizeBytes": 8799183,
+      "sha256": "ffa5d3c378d34ae859e8a2b35346762169b868a0f3e9492e20307a27ae150225"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V108.pdf",
+      "sizeBytes": 8822340,
+      "sha256": "9a80d0ddff80f36c869f28d35da4093d9ce152e3fe71b758d63271eea1114a9b"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V109(1).html",
+      "sizeBytes": 12963737,
+      "sha256": "e9366ebfb6499cff74f8dca48cedcde737ce17e57e5a29844efd49b96e7f78d2"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V109.pdf",
+      "sizeBytes": 8624098,
+      "sha256": "562b1a9af3ec9fe6cdc6129b663fe866124c417fee0122a14a7d667aa07803a0"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V110(1).html",
+      "sizeBytes": 10890350,
+      "sha256": "8e4e68b1f892acb557e9124dff1ead9d99594f12aa17c7338057d33cb7c2d71d"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V110.pdf",
+      "sizeBytes": 8365948,
+      "sha256": "46dd181edf7f621df34d85baccef9473d384f42101dad1516ad237a161ddb07a"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V111(1).html",
+      "sizeBytes": 14366386,
+      "sha256": "5b87da999957068a2493ea150c7b27bc3ecb208628d11eb6ecd5b933e3e74865"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V111.pdf",
+      "sizeBytes": 8284379,
+      "sha256": "657a677f2de6401548d5378ca98d11f7fe2f6b5d92e6e1d25fc76a72ec46a94e"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V112(1).html",
+      "sizeBytes": 17351803,
+      "sha256": "81f37a6ecce91d5058136cee429aaae2915feea708695675c807759cfd5c52fd"
+    },
+    {
+      "path": "archives/project-recovery-20261116/fiorina/evidence/RAPPORT_ILLUSTRE_V112.pdf",
+      "sizeBytes": 8335349,
+      "sha256": "547626bb0eb8f275d9593189dca7228888765500bc4fdc923c9430650fd2d63b"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/ALIENS_TANTALUS_DLC_AVPR_WOLF_v0.7.0-candidate.1.zip",
+      "sizeBytes": 1988097,
+      "sha256": "1b88ed157c581ebd27437a4d0f346fc7bd96bdc3a25b3ea51ec2a6945f9012bd"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/ALIENS_TANTALUS_DLC_AVP_PREDATOR_v0.5.0.zip",
+      "sizeBytes": 282272,
+      "sha256": "c63aca923a08a4db30cc31c36173454de12ca313d5d3d288c7e4bd0095e3f5d4"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/ALIENS_TANTALUS_DLC_PREDATOR_BADLANDS_v0.1.0.zip",
+      "sizeBytes": 1405111,
+      "sha256": "65fba89f2148ee36cea58bafde3f93066f5a1883dea02f10dfef95350194b320"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/INVENTAIRE.json",
+      "sizeBytes": 79999,
+      "sha256": "e1ed7c632c48cd1a44220d8591a7566fd5220c457834a23e574a0aa151bff254"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/MANIFEST.json",
+      "sizeBytes": 1188,
+      "sha256": "e08ff5d1564bae543cf88f825c0cd8f041f9c91dc3664e66158af522bf4d6f06"
+    },
+    {
+      "path": "archives/project-recovery-20261116/predator/README.md",
+      "sizeBytes": 3968,
+      "sha256": "47537a400db875e4d238cdbc735bc44931d496ffbc0f569788312d8cf2a5026b"
+    }
+  ]
+}

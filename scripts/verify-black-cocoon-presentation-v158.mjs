@@ -11,7 +11,7 @@ import { resolveBlackCocoonPresentationV158, resolveBlackCocoonPlayerRigV158, re
   blackCocoonResinGeometryV158, drawBlackCocoonResinV158, BLACK_COCOON_PRESENTATION_V158 } from '../src/black-cocoon-presentation-v158.js';
 import { SaveSystem, beginOperation, createDefaultSave, recordOperationResumeState, migrateSave } from '../src/save.js';
 import { SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131 } from '../src/special-operations-v131.js';
-import { verifyQueenMotherChoirRegistryContinuationV188 } from './audit-tantalus-priorities-v188.mjs';
+import { verifyQueenMotherChoirRegistryContinuationV188, projectFiorinaHistoricalRegistryV188 } from './audit-tantalus-priorities-v188.mjs';
 import { BIOLOGICAL_ART_V188, biologicalArtAnchorV188, drawHumanResinSupportV188 } from '../src/biological-art-v188.js';
 
 // Real production composition and shipped raster dimensions; only the browser
@@ -266,8 +266,11 @@ test('the registry records procedural binding separately from the unfinished bit
   assert.deepEqual(operation.remainingMechanics, ['dedicated-cocoon-bitmap-corpus', 'extended-survivor-campaign']);
   assert.equal(BLACK_COCOON_PRESENTATION_V158.animationStatus, 'dedicated-procedural-animation');
   assert.equal(BLACK_COCOON_PRESENTATION_V158.canonExact, false);
-  assert.equal(SPECIAL_OPERATION_COUNTS_V131.total, 21); assert.equal(SPECIAL_OPERATION_COUNTS_V131.playable, 21);
-  assert.equal(SPECIAL_OPERATION_COUNTS_V131.partial, 19); assert.equal(SPECIAL_OPERATION_COUNTS_V131.effective, 2);
+  const historicalRegistry = projectFiorinaHistoricalRegistryV188(SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131);
+  assert.equal(historicalRegistry.counts.total, 21); assert.equal(historicalRegistry.counts.playable, 21);
+  assert.equal(historicalRegistry.counts.partial, 19); assert.equal(historicalRegistry.counts.effective, 2);
+  assert.equal(SPECIAL_OPERATION_COUNTS_V131.total, historicalRegistry.counts.total + 1,
+    'The exact Fiorina addition remains visible in the live registry.');
   const registry = verifyQueenMotherChoirRegistryContinuationV188(SPECIAL_OPERATIONS_V131, SPECIAL_OPERATION_COUNTS_V131);
   assert.deepEqual(registry.changedIds, ['cargo-brutal', 'broodstorm', 'queen-mother-song'],
     'Guard presentation adds no registry change; Cargo alone changes the counts and the two historical queen debts stay distinct.');
