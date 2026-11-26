@@ -1,32 +1,38 @@
-# La Mer des Chagrins — récupération partielle du lot visuel
+# La Mer des Chagrins — sprites récupérés, code encore partiel
 
-Ce répertoire conserve **38 fichiers vérifiés**, dont **33 PNG**, soit **59 127 508 octets**. Le relevé source complet contient **126 fichiers** ; **88 restent à retrouver**. Ce checkpoint ne constitue ni le lot complet ni son intégration jouable.
+Ce répertoire préserve **115 des 126 fichiers du snapshot d'origine**, soit **215 587 160 octets uniques** : **les 110 PNG originaux et cinq fichiers de texte ou de configuration**. Il reste **11 fichiers de code/configuration à retrouver**, représentant **225 325 octets**.
 
-## Reprise du 26 novembre 2026
+Les 110 PNG sont regroupés sous `sprites-complete/`. Leur conservation exacte ne constitue pas leur activation dans le jeu ni une certification de fidélité visuelle 1:1.
 
-Le premier checkpoint conservait 33 fichiers, dont 28 PNG. La tête `994853bdd9d959980f0f8256cb39b1eadfe29911` de la [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) contient cinq fichiers supplémentaires dont les empreintes Git et les tailles correspondent exactement au relevé d'origine : `decor/drill.png`, `decor/locker.png`, `decor/medical.png`, `decor/reel.png` et `equipment/sensor.png`. Leurs objets Git sont réutilisés sans modification d'octets.
+## Reprises du 26 novembre 2026
 
-Dans l'environnement retrouvé, le commit source local n'est plus lisible et le dossier d'origine du lot est absent. Une recherche par tailles puis SHA Git des fichiers présents n'a pas fourni d'autre correspondance exacte. Cela n'établit pas que les fichiers sont irrécupérables ailleurs. Aucun fichier n'a été supprimé pendant cette reprise.
+1. Premier checkpoint : 33 fichiers, dont 28 PNG, préservés avant l'indisponibilité de l'environnement.
+2. Commit `c4fbee8ce412e5456ef14167be1aa2428ea2c10e` : cinq PNG supplémentaires retrouvés avec les mêmes tailles et SHA dans la PR #58 ; total intermédiaire de 38 fichiers.
+3. Commit concurrent `7efa1b55eb12c3c4b7401940048ffa2e30caf04a` : les **110 objets PNG originaux** sont rattachés à `sprites-complete/`, y compris les 77 encore absents du checkpoint précédent. La présente notice et le ledger sont réconciliés avec cette récupération.
 
-## Origine
+Les 33 PNG déjà rangés dans `source/` restent disponibles à leur ancien chemin ; ces alias ne sont pas comptés deux fois dans les 115 fichiers ni dans les octets uniques.
+
+## Origine et preuves
 
 - Commit source relevé : `f62b3c008df41be6004cff5ea9400daa05f7aa9f`.
-- Parent du snapshot : `232cbd2ecb0e370f911b008b2226dafee81bffde`, tête de la PR #58 au moment du relevé.
-- Arbre attendu du snapshot complet : `dc83ab7c82ff9b626ae5f8e5f2b0940b67be6b1c`.
-- Les travaux actifs d'autres sessions ne sont pas remplacés.
+- Parent du snapshot : `232cbd2ecb0e370f911b008b2226dafee81bffde`.
+- Arbre attendu du snapshot intégral : `dc83ab7c82ff9b626ae5f8e5f2b0940b67be6b1c`.
+- [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) : chantier d'intégration associé.
+- `RECOVERY_LEDGER.json` : les 126 chemins originaux, modes Git, tailles, empreintes et états de préservation.
+- `COMPLETE_SPRITES.json` : inventaire du corpus de 110 PNG publié par la récupération concurrente.
 
-## Fichiers et reprise
+Une lecture indépendante de l'arbre distant du commit `7efa1b55eb12c3c4b7401940048ffa2e30caf04a` confirme **110/110 PNG conformes** au ledger historique en chemin, SHA Git et taille. Les cinq fichiers non PNG préservés sont également conformes. Les recherches individuelles des onze autres blobs de code ont toutes renvoyé `NOT_FOUND`.
 
-Les octets sont rangés dans `source/` en conservant les chemins relatifs d'origine. Les fichiers de configuration et les pages présents ici sont archivés : ils ne remplacent pas les fichiers actifs de la PR #58.
+## Code restant à récupérer
 
-`RECOVERY_LEDGER.json` conserve les **126 chemins, modes Git, tailles et empreintes attendus**. Il distingue les 38 fichiers préservés des 88 restants, indique leur chemin d'archive et la provenance exacte des cinq récupérations supplémentaires.
+Les onze entrées non retrouvées sont les trois modules `art-pack.js`, `gallery.js`, `png-renderer.js`, ainsi que les versions du `package.json`, du filtre de build et des six fichiers d'admission ou de vérification listés exactement dans le ledger. Leurs tailles et empreintes attendues sont conservées.
 
-Pour continuer, retrouver les octets manquants et vérifier chaque SHA. Ensuite seulement, assembler le snapshot et résoudre sa continuité avec la tête courante de la PR #58. Les changements du menu, du renderer et de distribution restent à appliquer et à qualifier ensemble. Aucun force push n'est nécessaire.
+Le commit source et les anciens dossiers locaux ne sont pas lisibles dans l'environnement repris. L'inventaire de 630 PNG du projet n'avait pas fourni de candidat de taille exacte ; la récupération ultérieure des objets Git montre que cette recherche négative ne prouvait pas une perte définitive.
 
-## Contrôles et limites
+## Portée et suite
 
-Les 33 entrées déjà archivées ont été comparées à l'arbre distant courant. Les cinq objets réutilisés ont été comparés à l'arbre distant de la PR #58 et au relevé initial : mêmes empreintes Git et mêmes tailles. Aucun réencodage ni redimensionnement d'image n'est effectué.
+Les fichiers rangés ici sont des **sources archivées**. Aucun fichier actif du menu, du moteur, du renderer ou de la distribution n'est remplacé. Les travaux concurrents sont conservés.
 
-Les essais de jeu et de distribution ne sont pas relancés pour cette récupération de sources. L'admission du répertoire d'archives doit être traitée avant fusion ; la PR reste en brouillon. La fidélité 1:1 n'est pas certifiée.
+L'admission du répertoire, le raccord des images au renderer et les essais en jeu doivent être traités avant fusion. Aucun essai gameplay, décodage intégral des 110 images, cycle complet d'animation ou contrôle visuel 1:1 n'est revendiqué par ce reçu. Ces vérifications restent distinctes de la conformité des octets.
 
-**Ne supprimer aucun des 88 fichiers manquants sur la base de ce reçu partiel.**
+Aucun fichier local ni persistant n'a été supprimé pendant cette récupération. **Ne supprimer aucun des onze fichiers de code manquants sur la base de ce reçu partiel.**
