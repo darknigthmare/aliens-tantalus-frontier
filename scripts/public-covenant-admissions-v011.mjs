@@ -1,9 +1,12 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { covenantLocalRecoveryAdmission } from './covenant-local-recovery-20261126.mjs';
 import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011,
   COVENANT_SOURCE_ONLY_ASSETS_V015, COVENANT_SOURCE_ONLY_PROVENANCE_V015 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
+  'scripts/covenant-local-recovery-20261126.mjs',
+  'scripts/verify-covenant-local-recovery-20261126.mjs',
   'scripts/package-covenant-sprites-v017.py',
   'scripts/qa-covenant-catalogue-v017.py',
   'scripts/build-covenant-bible-v017.py',
@@ -127,6 +130,8 @@ function admittedAssets(built) {
 export function publicCovenantPathAdmissionV011(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.startsWith('/') || path.includes('\\')
     || path.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  const recovered = covenantLocalRecoveryAdmission(path, { directory, built });
+  if (recovered !== null) return recovered;
   // Intercept the entire V015 tree before the host's general image policy.
   // Its reviewed originals are archived in source; none may enter a built release.
   if (path === COVENANT_SOURCE_ONLY_ASSETS_V015) return !built && directory;

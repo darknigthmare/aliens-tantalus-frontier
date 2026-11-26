@@ -1,0 +1,389 @@
+{
+  "inputSha256": "ad066962748876c60a4dc32f4b1ccc6b28bebe11dc87eef4e9c70b025a635666",
+  "outputFilename": "BIBLE_COVENANT_V014.xlsx",
+  "bytes": 274865,
+  "sha256": "65d046fc10004fa680b36b0c477548efba44aab150d55bbec9ca8058e977abc3",
+  "authoringEngine": "@oai/artifact-tool",
+  "sheets": 16,
+  "tableCount": 15,
+  "maximumCellLength": 2149,
+  "sourceTextPreserved": true,
+  "recalculated": true,
+  "summaryValues": [
+    315,
+    103,
+    18,
+    72,
+    31,
+    57,
+    49,
+    630,
+    126,
+    23,
+    17,
+    18,
+    5,
+    0
+  ],
+  "expectedSummaryValues": [
+    315,
+    103,
+    18,
+    72,
+    31,
+    57,
+    49,
+    630,
+    126,
+    23,
+    17,
+    18,
+    5,
+    0
+  ],
+  "sheetReceipts": [
+    {
+      "name": "Personnages",
+      "rows": 38,
+      "columns": 11,
+      "tableRange": "A5:K43",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Profils",
+      "rows": 23,
+      "columns": 11,
+      "tableRange": "A5:K28",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Lieux",
+      "rows": 57,
+      "columns": 11,
+      "tableRange": "A5:K62",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Armes",
+      "rows": 7,
+      "columns": 11,
+      "tableRange": "A5:K12",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Props",
+      "rows": 133,
+      "columns": 11,
+      "tableRange": "A5:K138",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Véhicules",
+      "rows": 3,
+      "columns": 11,
+      "tableRange": "A5:K8",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Vaisseaux",
+      "rows": 5,
+      "columns": 11,
+      "tableRange": "A5:K10",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Composants",
+      "rows": 4,
+      "columns": 11,
+      "tableRange": "A5:K9",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Terrains",
+      "rows": 16,
+      "columns": 11,
+      "tableRange": "A5:K21",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Planètes",
+      "rows": 3,
+      "columns": 11,
+      "tableRange": "A5:K8",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Biologie",
+      "rows": 49,
+      "columns": 11,
+      "tableRange": "A5:K54",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Références",
+      "rows": 315,
+      "columns": 11,
+      "tableRange": "A5:K320",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Seuils",
+      "rows": 134,
+      "columns": 11,
+      "tableRange": "A5:K139",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Occurrences",
+      "rows": 630,
+      "columns": 11,
+      "tableRange": "A5:K635",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    },
+    {
+      "name": "Production",
+      "rows": 103,
+      "columns": 11,
+      "tableRange": "A5:K108",
+      "freezeRows": 5,
+      "freezeColumns": 2
+    }
+  ],
+  "renders": [
+    {
+      "sheet": "Synthèse",
+      "file": "xlsx-previews/synthese.png",
+      "range": "A1:C27"
+    },
+    {
+      "sheet": "Personnages",
+      "file": "xlsx-previews/personnages.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Profils",
+      "file": "xlsx-previews/profils.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Lieux",
+      "file": "xlsx-previews/lieux.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Armes",
+      "file": "xlsx-previews/armes.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Props",
+      "file": "xlsx-previews/props.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Véhicules",
+      "file": "xlsx-previews/vehicules.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Vaisseaux",
+      "file": "xlsx-previews/vaisseaux.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Composants",
+      "file": "xlsx-previews/composants.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Terrains",
+      "file": "xlsx-previews/terrains.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Planètes",
+      "file": "xlsx-previews/planetes.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Biologie",
+      "file": "xlsx-previews/biologie.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Références",
+      "file": "xlsx-previews/references.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Seuils",
+      "file": "xlsx-previews/seuils.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Occurrences",
+      "file": "xlsx-previews/occurrences.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Production",
+      "file": "xlsx-previews/production.png",
+      "range": "A1:D7"
+    },
+    {
+      "sheet": "Biologie",
+      "file": "xlsx-previews/biologie-details.png",
+      "range": "F5:G7"
+    },
+    {
+      "sheet": "Références",
+      "file": "xlsx-previews/references-details.png",
+      "range": "F5:G7"
+    }
+  ],
+  "visualReview": {
+    "status": "passed",
+    "previewCount": 18,
+    "scope": "16 sheet previews plus Biologie and Références dense detail ranges",
+    "observation": "Readable wrapped text, consistent headers, no overlap or visible clipping in the reviewed ranges."
+  },
+  "savedWorkbookVerification": {
+    "xlsxSha256": "65d046fc10004fa680b36b0c477548efba44aab150d55bbec9ca8058e977abc3",
+    "bytes": 274865,
+    "savedWorkbookCellsCompared": 16885,
+    "maximumCellLength": 2149,
+    "sheetCount": 16,
+    "tableCount": 15,
+    "allCellsMatchPayload": true,
+    "formulaErrors": [],
+    "sheetChecks": [
+      {
+        "sheet": "Personnages",
+        "rows": 38,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Profils",
+        "rows": 23,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Lieux",
+        "rows": 57,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Armes",
+        "rows": 7,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Props",
+        "rows": 133,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Véhicules",
+        "rows": 3,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Vaisseaux",
+        "rows": 5,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Composants",
+        "rows": 4,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Terrains",
+        "rows": 16,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Planètes",
+        "rows": 3,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Biologie",
+        "rows": 49,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Références",
+        "rows": 315,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Seuils",
+        "rows": 134,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Occurrences",
+        "rows": 630,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      },
+      {
+        "sheet": "Production",
+        "rows": 103,
+        "allCellsMatchPayload": true,
+        "freeze": "C6",
+        "filter": true
+      }
+    ],
+    "visualReview": {
+      "status": "passed",
+      "previewCount": 18,
+      "scope": "16 sheet previews plus Biologie and Références dense detail ranges",
+      "observation": "Readable wrapped text, consistent headers, no overlap or visible clipping in the reviewed ranges."
+    },
+    "repositoryCopy": "docs/covenant/BIBLE_COVENANT_V014.xlsx",
+    "copyByteIdentical": true
+  }
+}

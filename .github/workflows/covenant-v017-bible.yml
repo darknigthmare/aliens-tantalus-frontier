@@ -40,6 +40,8 @@ jobs:
           node-version: '22'
       - name: Verify all originals and the preserved historical runtime subset
         run: node --test scripts/verify-covenant-v017-preservation.mjs
+      - name: Verify exact local recovery and exclude candidates from runtime
+        run: node scripts/verify-covenant-local-recovery-20261126.mjs
       - name: Generate the detailed reference bible
         run: python3 scripts/build-covenant-bible-v017.py --tables-out "${RUNNER_TEMP}/covenant-v017-tables.json"
       - name: Validate generated documents and reproducibility

@@ -1,0 +1,36 @@
+{
+  "summary": "{\"kind\":\"table\",\"sheet\":\"Synthèse\",\"address\":\"A5:C19\",\"rows\":15,\"cols\":3,\"values\":[[\"Indicateur\",\"Nombre\",\"Portée\"],[\"Références du registre\",315,\"Identifiants ACOV uniques. Les vues thématiques ne s’additionnent pas.\"],[\"PNG cumulés\",103,\"Images des versions V011 à V014.\"],[\"Nouveaux PNG V014\",18,\"Images du lot V014, filtrables dans la table Production.\"],[\"PNG admis dans le rendu\",72,\"Admission de source soumise aux états, salles et acteurs définis.\"],[\"PNG de catalogue\",31,\"Images consultables sans consommateur de jeu autorisé.\"],[\"Fiches spatiales\",57,\"56 fiches de campagne et un tableau blanc autonome. 55 clés de site distinctes.\"],[\"Références biologiques\",49,\"Stades, effets, formes, contenants et bonus restent distincts.\"],[\"Occurrences de props\",630,\"Chaque occurrence conserve son identifiant et ses conditions.\"],[\"Familles de props\",126,\"Référentiel des familles. La vue Props ajoute 7 pistes documentaires d’objets.\"],[\"Profils d’apparence\",23,\"23 profils couvrent les tenues et états de 17 personnages nommés.\"],[\"Identités nommées dans les profils\",17,\"Le libellé Walter / David ne constitue pas une identité supplémentaire.\"],[\"Identités avec le portrait de Shaw\",18,\"Shaw est au catalogue du bonus The Crossing, hors des 23 profils de jeu.\"],[\"Cycles complets de marche\",5,\"4 cycles joueur et 1 cycle Walter, soit 40 phases. Autres poses et cycles restent à couvrir.\"],[\"Images certifiées identiques à 1:1\",0,\"Les images sont des reconstructions documentées. Aucune certification pixel par pixel.\"]]}",
+  "errors": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "expected": [
+    315,
+    103,
+    18,
+    72,
+    31,
+    57,
+    49,
+    630,
+    126,
+    23,
+    17,
+    18,
+    5,
+    0
+  ],
+  "actual": [
+    315,
+    103,
+    18,
+    72,
+    31,
+    57,
+    49,
+    630,
+    126,
+    23,
+    17,
+    18,
+    5,
+    0
+  ]
+}

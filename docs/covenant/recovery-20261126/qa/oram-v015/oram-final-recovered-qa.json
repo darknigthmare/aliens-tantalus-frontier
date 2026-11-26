@@ -1,0 +1,191 @@
+{
+  "assets": [
+    {
+      "id": "oram-walk-01",
+      "sha256": "fd8644466668e17a0b9417ca657fef551271faee5adb13011e41185775558b32",
+      "bytes": 1607014,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        83,
+        26,
+        888,
+        1506
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1123976,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 475,
+      "groundY": 1506
+    },
+    {
+      "id": "oram-walk-02",
+      "sha256": "124ba708d2cf4cb87edf9cfbe2b0f09982e33adcf67ba937385f9ac9bf1f4bd3",
+      "bytes": 1626600,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        98,
+        40,
+        875,
+        1504
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1121732,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 465,
+      "groundY": 1504
+    },
+    {
+      "id": "oram-walk-03",
+      "sha256": "02eb335c09572fdb52f18de180ca14e89283f932c08d71cddd3018150a49be6c",
+      "bytes": 1513296,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        322,
+        26,
+        750,
+        1504
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1179868,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 480,
+      "groundY": 1504
+    },
+    {
+      "id": "oram-walk-04",
+      "sha256": "09874043f558563ff9e94bb7e0223cec9012764b3bd114592ca0700565e8b17e",
+      "bytes": 1658400,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        119,
+        23,
+        956,
+        1514
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1162454,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 490,
+      "groundY": 1514
+    },
+    {
+      "id": "oram-walk-05",
+      "sha256": "76a633bc3da12c605e1c8ab9294568074442ebe2b1d3ee8ae02863e8a838cd3b",
+      "bytes": 1607306,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        68,
+        26,
+        946,
+        1493
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1137629,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 475,
+      "groundY": 1493
+    },
+    {
+      "id": "oram-walk-06",
+      "sha256": "3ae97698ecc31104995a9b8f6eafe623cbd7eedf0f41af8048c9235c228dddfb",
+      "bytes": 1665384,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        85,
+        40,
+        868,
+        1487
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1114470,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 485,
+      "groundY": 1487
+    },
+    {
+      "id": "oram-walk-07",
+      "sha256": "584ea77a38a12817718ed7ca9e9ecf4f35d9326b5950b9e8affad32e00d143b7",
+      "bytes": 1516962,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        274,
+        26,
+        743,
+        1503
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1185251,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 490,
+      "groundY": 1503
+    },
+    {
+      "id": "oram-walk-08",
+      "sha256": "5c5bdaad9722f9ad313724939df1c7ee855d9cee8925c84bb84361fb12ad6e27",
+      "bytes": 1737258,
+      "size": [
+        1024,
+        1536
+      ],
+      "bboxAlphaGe32": [
+        112,
+        20,
+        968,
+        1512
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "alphaZeroPixels": 1121518,
+      "edgePixelsAbove16": 0,
+      "pelvisX": 490,
+      "groundY": 1512
+    }
+  ],
+  "board": "oram-walk-final-review.jpg",
+  "originalPixelsModified": false,
+  "pivotsProvisional": true
+}
