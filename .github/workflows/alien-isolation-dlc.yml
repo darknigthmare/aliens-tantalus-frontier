@@ -1,0 +1,80 @@
+name: Alien Isolation DLC
+on:
+  pull_request:
+    paths:
+      - 'modules/alien-isolation/**'
+      - 'dlc/alien-isolation/**'
+      - 'docs/development/alien-isolation-fidelity/**'
+      - 'src/dlc-menu.js'
+      - 'scripts/*alien-isolation*'
+      - 'scripts/*dlc-menu*'
+      - 'scripts/*dlc-audit*'
+      - 'scripts/audit-dlc-avp-2004-20261125.mjs'
+      - 'scripts/build*.mjs'
+      - 'scripts/verify-public-release-v86.mjs'
+      - 'package.json'
+      - '.github/workflows/alien-isolation-dlc.yml'
+  push:
+    branches: [main, 'claude/nifty-shannon-qpy1hl']
+    paths:
+      - 'modules/alien-isolation/**'
+      - 'dlc/alien-isolation/**'
+      - 'docs/development/alien-isolation-fidelity/**'
+      - 'src/dlc-menu.js'
+      - 'scripts/*alien-isolation*'
+      - '.github/workflows/alien-isolation-dlc.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Test recovered DLC and host integration
+        run: |
+          npm run test:dlc:isolation
+          npm run test:dlc
+          npm run check:dlc:isolation
+      - name: Verify host distribution
+        run: |
+          npm run check
+          npm run build
+          npm run check:built
+      - name: Install browser QA dependencies
+        run: |
+          python3 -m venv "$RUNNER_TEMP/isolation-browser"
+          "$RUNNER_TEMP/isolation-browser/bin/pip" install playwright==1.65.2
+          "$RUNNER_TEMP/isolation-browser/bin/python" -m playwright install --with-deps chromium
+      - name: Play built expedition, save, resume and return
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/isolation-browser/bin/python" -B scripts/qa-alien-isolation-integration.py --root dist --source-root . --output "$RUNNER_TEMP/isolation-evidence"
+      - name: Check raster bindings, fallbacks and save persistence
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/isolation-browser/bin/python" -B scripts/qa-alien-isolation-fidelity.py --root dist --source-root . --output "$RUNNER_TEMP/isolation-fidelity-evidence"
+      - name: Retain the verified standalone DLC
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: alien-isolation-v0.8-fidelity-1.0.0
+          path: dist/dlc/alien-isolation/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: alien-isolation-browser-evidence
+          path: |
+            ${{ runner.temp }}/isolation-evidence
+            ${{ runner.temp }}/isolation-fidelity-evidence
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,396 @@
+{
+  "schema": "alien-isolation-portrait-production/v1",
+  "module": "alien-isolation",
+  "sourceVersion": "0.8.0",
+  "createdAt": "2026-11-26T15:27:08.799144+00:00",
+  "sourceHead": "c2f4574e677d26e74439227c8e6bb8ccae03277c",
+  "status": "generated-and-visually-inspected-pending-runtime-integration",
+  "assetCount": 4,
+  "totalBytes": 6737105,
+  "exact": false,
+  "canonExact": false,
+  "assets": [
+    {
+      "id": "amanda-portrait",
+      "entryId": "amanda",
+      "exactName": "Amanda Ripley",
+      "targetBinding": {
+        "type": "portraits",
+        "name": "Amanda Ripley",
+        "asset": "amanda-portrait"
+      },
+      "generated": true,
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "generator": "imagegen built-in",
+      "transparentBackgroundRequested": true,
+      "prompt": "Create one independent transparent-background game dossier portrait of Amanda Ripley from Alien: Isolation (2014). Reference 1 is the official SEGA final-game screenshot and is the sole identity and costume authority: reproduce this woman's face, brown eyes, dark brown hair pulled into a short low ponytail, simple headset microphone, olive-gray short-sleeved engineering flight coverall, dark blue open collar lining, quilted shoulder panels, worn zipper seams and small metal key necklace. Preserve her adult facial proportions, strong brows, straight nose, natural unglamourized skin and calm alert expression. Reference 2 (Samuels portrait) defines ONLY the rendered portrait format/material quality and must not influence the identity, hairstyle, sex or outfit. Frame Amanda from mid-chest up, all of head and both shoulders visible, slight three-quarter turn towards the viewer's right, looking just right of camera. Do not include the crossed hands from reference 1 in this cropped bust. Detailed realistic game-ready raster painting consistent with the existing portraits, restrained natural diffuse studio lighting, readable cloth and skin textures. One character only, no border, text caption, title, props or background. Native transparent alpha everywhere outside the silhouette, fully opaque interior of body and hair, crisp antialiased edges, no brown or gray halo, no glow, no vignette, no floating shadow. Keep approximately 8 percent transparent padding around the head and shoulder sides. Output exactly one PNG portrait, not a contact sheet.",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg"
+      ],
+      "references": [
+        {
+          "role": "identity-and-costume",
+          "pageURL": "https://alienisolation.sega.jp/story.html",
+          "imageURL": "https://alienisolation.sega.jp/img/news150508_1_7.jpg",
+          "classification": "Official SEGA final-game character screenshot",
+          "inspected": true,
+          "sha256": "b78986b32ccfeb87147c2e8f35f49eba2bb8f1cd141ea2abbc8e0446bf8aeeb2",
+          "width": 500,
+          "height": 860
+        },
+        {
+          "role": "rendering-style-only",
+          "repositoryPath": "dlc/alien-isolation/fidelity/assets/samuels-portrait.png",
+          "inspected": true,
+          "identityExcluded": true
+        }
+      ],
+      "bytes": 1623556,
+      "sha256": "aa4323c5ec65fc16d074cedbbee00d9e7a06c51c920d6d3cd0596c1e8329a30e",
+      "gitBlobSha": "77ff3163831930abf908f6bcd7b93dcbf70c3344",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "inspection": {
+        "visuallyInspected": true,
+        "singleSubject": true,
+        "matchesNamedReference": true,
+        "transparentCutout": true,
+        "alphaZeroPixels": 779436,
+        "alphaZeroFraction": 0.49548149880998393,
+        "alphaAtLeast240Pixels": 755369,
+        "alpha1to127Pixels": 30079,
+        "alphaBoundsByThreshold": {
+          "0": [
+            0,
+            13,
+            1296,
+            1199
+          ],
+          "32": [
+            23,
+            16,
+            1291,
+            1185
+          ],
+          "127": [
+            23,
+            18,
+            1291,
+            1185
+          ],
+          "239": [
+            24,
+            25,
+            1290,
+            1184
+          ]
+        },
+        "notes": [
+          "Official SEGA final-game screenshot inspected. Brown pulled-back hair, headset microphone, olive engineering coverall, blue collar, key necklace and facial proportions reproduced as a generated approximation.",
+          "Native PNG preserved byte-for-byte. Most interior alpha values are near-opaque (typically 252–254), not all exactly 255.",
+          "Generated likeness checked visually; pixel-exact canonical identity is not established."
+        ]
+      }
+    },
+    {
+      "id": "ricardo-portrait",
+      "entryId": "ricardo",
+      "exactName": "Ricardo",
+      "targetBinding": {
+        "type": "portraits",
+        "name": "Ricardo",
+        "asset": "ricardo-portrait"
+      },
+      "generated": true,
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "generator": "imagegen built-in",
+      "transparentBackgroundRequested": true,
+      "prompt": "Create a transparent game dossier portrait of Ricardo, the deputy Marshal from Alien: Isolation (2014), based closely on the supplied screenshot. Reproduce the exact visible face of this young adult man with dark brown skin, short cropped black hair, brown eyes, a broad straight nose, full lips and clean-shaven jaw. Retain his green work jacket with dark black quilted rectangular shoulder panels, brown-gray small plaid shirt open over a black crew-neck undershirt, and the silver seven-point Marshal badge on his left chest as it appears in the screenshot. No cap, military armor or weapon. Preserve the understated, concerned but composed demeanor. Reference 1 is the sole identity and costume authority. Reference 2 (the existing Samuels portrait) controls ONLY portrait rendering quality and framing, never the face, hair, skin color or outfit. One individual adult character, mid-chest-up bust with the complete head and both shoulders visible, slight three-quarter turn towards the viewer's right, calm alert expression. Match the final in-game facial proportions closely; do not idealize or redesign the character. Detailed realistic game-ready raster painting, natural readable diffuse lighting, restrained cloth and skin textures consistent with the existing dossier portraits. Exactly one PNG portrait, no contact sheet. Native transparent alpha outside the character silhouette, opaque interior, crisp clean antialiased edges. No environment, text caption, border, vignette, glow, halo or floating shadow. Leave roughly 8 percent transparent padding at the head and shoulder sides.",
+      "sourceURLs": [
+        "https://renote.net/en/articles/324676/page/4",
+        "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ2OCwicHVyIjoiYmxvYl9pZCJ9fQ==--d6f3c6aa9f2a8bf6eb8b2c88078ccd969408073e/a3k2E99Vtfe5Mlf1682320929_1682320951.png",
+        "https://store.steampowered.com/app/282516/"
+      ],
+      "references": [
+        {
+          "name": "ricardo",
+          "pageURL": "https://renote.net/en/articles/324676/page/4",
+          "imageURL": "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ2OCwicHVyIjoiYmxvYl9pZCJ9fQ==--d6f3c6aa9f2a8bf6eb8b2c88078ccd969408073e/a3k2E99Vtfe5Mlf1682320929_1682320951.png",
+          "classification": "Third-party host of game character imagery; visual appearance reference, not developer-authenticated production art.",
+          "bytes": 503527,
+          "role": "identity-and-costume",
+          "inspected": true,
+          "sha256": "f1ad2502dd231c649448460bd22c53f385ba73efed7bf89ef916d45e4345eff0",
+          "width": 925,
+          "height": 948
+        },
+        {
+          "role": "rendering-style-only",
+          "repositoryPath": "dlc/alien-isolation/fidelity/assets/samuels-portrait.png",
+          "inspected": true,
+          "identityExcluded": true
+        }
+      ],
+      "bytes": 1601114,
+      "sha256": "eafbe19c2efbc8205a327228f1d906e30390fc55786bae6602cc68afa9b89362",
+      "gitBlobSha": "b86ada7b07d4aba3b86c9b366c4706fc25599e26",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "inspection": {
+        "visuallyInspected": true,
+        "singleSubject": true,
+        "matchesNamedReference": true,
+        "transparentCutout": true,
+        "alphaZeroPixels": 795452,
+        "alphaZeroFraction": 0.5056627474114608,
+        "alphaAtLeast240Pixels": 757367,
+        "alpha1to127Pixels": 15745,
+        "alphaBoundsByThreshold": {
+          "0": [
+            0,
+            0,
+            1296,
+            1181
+          ],
+          "32": [
+            40,
+            64,
+            1289,
+            1172
+          ],
+          "127": [
+            41,
+            65,
+            1288,
+            1171
+          ],
+          "239": [
+            42,
+            66,
+            1287,
+            1170
+          ]
+        },
+        "notes": [
+          "Identified in-game screenshot inspected. Short black hair, dark skin, green work jacket, quilted shoulders, plaid shirt and star badge retained.",
+          "Neutral bust reconstruction; no weapon and no trauma scene.",
+          "Native PNG preserved byte-for-byte. Most interior alpha values are near-opaque (typically 252–254), not all exactly 255.",
+          "Generated likeness checked visually; pixel-exact canonical identity is not established."
+        ]
+      }
+    },
+    {
+      "id": "kuhlman-portrait",
+      "entryId": "kuhlman",
+      "exactName": "Dr Kuhlman",
+      "targetBinding": {
+        "type": "portraits",
+        "name": "Dr Kuhlman",
+        "asset": "kuhlman-portrait"
+      },
+      "generated": true,
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "generator": "imagegen built-in",
+      "transparentBackgroundRequested": true,
+      "prompt": "Create a transparent game dossier portrait of Dr Kuhlman from Alien: Isolation (2014), based closely on the supplied screenshot. Reproduce this particular middle-aged man's face: pale skin, short dark brown hair with a side part, slightly heavy brows, tired light gray-blue eyes, faint stubble and visible natural creases. Retain the pale gray worn clinic work jacket with a closed rounded collar, dark neck fastening, buttoned flap chest pocket and the turquoise triangular SEVASTOPOL BIOCHEMICAL RESEARCH arm patch visible in the screenshot; reproduce its existing simple geometric shapes rather than replacing it with a red cross. No stethoscope, glasses, white flowing laboratory coat, medical tools or invented props. Keep the screenshot's subtle wary expression. Reference 1 is the sole identity and costume authority. Reference 2 (the existing Samuels portrait) controls ONLY portrait rendering quality and framing, never the face, hair, skin color or outfit. One individual adult character, mid-chest-up bust with the complete head and both shoulders visible, slight three-quarter turn towards the viewer's right, calm alert expression. Match the final in-game facial proportions closely; do not idealize or redesign the character. Detailed realistic game-ready raster painting, natural readable diffuse lighting, restrained cloth and skin textures consistent with the existing dossier portraits. Exactly one PNG portrait, no contact sheet. Native transparent alpha outside the character silhouette, opaque interior, crisp clean antialiased edges. No environment, text caption, border, vignette, glow, halo or floating shadow. Leave roughly 8 percent transparent padding at the head and shoulder sides.",
+      "sourceURLs": [
+        "https://renote.net/en/articles/324676/page/4",
+        "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ3NCwicHVyIjoiYmxvYl9pZCJ9fQ==--10d11992a51d79395dbcd11222f7c992eae45403/SG7cdXG81t167G31682321163_1682321191.png",
+        "https://avp.fandom.com/wiki/Kuhlman"
+      ],
+      "references": [
+        {
+          "name": "kuhlman",
+          "pageURL": "https://renote.net/en/articles/324676/page/4",
+          "imageURL": "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ3NCwicHVyIjoiYmxvYl9pZCJ9fQ==--10d11992a51d79395dbcd11222f7c992eae45403/SG7cdXG81t167G31682321163_1682321191.png",
+          "classification": "Third-party host of game character imagery; visual appearance reference, not developer-authenticated production art.",
+          "bytes": 1042868,
+          "role": "identity-and-costume",
+          "inspected": true,
+          "sha256": "dfe7330dd23749034d4a9e0bec7de719d36b98a882fd13ec310ecb5c583e618e",
+          "width": 985,
+          "height": 1237
+        },
+        {
+          "role": "rendering-style-only",
+          "repositoryPath": "dlc/alien-isolation/fidelity/assets/samuels-portrait.png",
+          "inspected": true,
+          "identityExcluded": true
+        }
+      ],
+      "bytes": 1579718,
+      "sha256": "b2d805eeeda049186e00603609347e2b5f8e43dfbda39a960838de1bd94ef2b6",
+      "gitBlobSha": "43599b45e15ce67801960efe257977c4f0519994",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "inspection": {
+        "visuallyInspected": true,
+        "singleSubject": true,
+        "matchesNamedReference": true,
+        "transparentCutout": true,
+        "alphaZeroPixels": 851888,
+        "alphaZeroFraction": 0.5415386806078236,
+        "alphaAtLeast240Pixels": 690187,
+        "alpha1to127Pixels": 22755,
+        "alphaBoundsByThreshold": {
+          "0": [
+            0,
+            3,
+            1250,
+            1185
+          ],
+          "32": [
+            82,
+            29,
+            1223,
+            1180
+          ],
+          "127": [
+            83,
+            35,
+            1223,
+            1179
+          ],
+          "239": [
+            84,
+            42,
+            1222,
+            1178
+          ]
+        },
+        "notes": [
+          "Identified in-game screenshot inspected. Short side-parted brown hair, tired eyes, light stubble, worn gray clinic jacket and triangular biochemical research patch retained.",
+          "The generated green rectangular chest detail is not legible in the reference; it is not certified as a canon-exact insignia.",
+          "Native PNG preserved byte-for-byte. Most interior alpha values are near-opaque (typically 252–254), not all exactly 255.",
+          "Generated likeness checked visually; pixel-exact canonical identity is not established."
+        ]
+      }
+    },
+    {
+      "id": "foster-portrait",
+      "entryId": "foster",
+      "exactName": "Catherine Foster",
+      "targetBinding": {
+        "type": "portraits",
+        "name": "Catherine Foster",
+        "asset": "foster-portrait"
+      },
+      "generated": true,
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "generator": "imagegen built-in",
+      "transparentBackgroundRequested": true,
+      "prompt": "Create a transparent game dossier portrait of Catherine Foster from Alien: Isolation (2014), as seen during the Anesidora LV-426 expedition in the supplied screenshot. Preserve her visible adult female face behind the visor, light skin, straight nose, natural brows, unsmiling focused expression, and dark close-fitting inner hood. Keep her helmet ON: reproduce the broad round blue-gray metal helmet rim, large open-looking clear visor area, dark padded inner lining and utilitarian shoulder portion of the bulky Anesidora EVA suit. The reference is a small game screenshot, so keep the visible design restrained and do not invent a different uncovered face, hairstyle or jewelry. The face must remain clearly visible through the glass but the helmet and face interiors must remain opaque; only outside the silhouette is transparent. Do not include any alien creature, injury, attack, egg or background. Reference 1 is the sole identity and costume authority. Reference 2 (the existing Samuels portrait) controls ONLY portrait rendering quality and framing, never the face, hair, skin color or outfit. One individual adult character, mid-chest-up bust with the complete head and both shoulders visible, slight three-quarter turn towards the viewer's right, calm alert expression. Match the final in-game facial proportions closely; do not idealize or redesign the character. Detailed realistic game-ready raster painting, natural readable diffuse lighting, restrained cloth and skin textures consistent with the existing dossier portraits. Exactly one PNG portrait, no contact sheet. Native transparent alpha outside the character silhouette, opaque interior, crisp clean antialiased edges. No environment, text caption, border, vignette, glow, halo or floating shadow. Leave roughly 8 percent transparent padding at the head and shoulder sides.",
+      "sourceURLs": [
+        "https://renote.net/en/articles/324676/page/3",
+        "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ1NywicHVyIjoiYmxvYl9pZCJ9fQ==--078d1bb9b27dd7c6cdd273a0b3f91964b2bc9744/bsA1bdkmp6HHeQv1682319716_1682319726.png",
+        "https://avp.fandom.com/wiki/Catherine_Foster"
+      ],
+      "references": [
+        {
+          "name": "foster",
+          "pageURL": "https://renote.net/en/articles/324676/page/3",
+          "imageURL": "https://renote.net/files/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODU3NzQ1NywicHVyIjoiYmxvYl9pZCJ9fQ==--078d1bb9b27dd7c6cdd273a0b3f91964b2bc9744/bsA1bdkmp6HHeQv1682319716_1682319726.png",
+          "classification": "Third-party host of game character imagery; visual appearance reference, not developer-authenticated production art.",
+          "bytes": 47944,
+          "role": "identity-and-costume",
+          "inspected": true,
+          "sha256": "f13ad3c07e9aba9f93a34c8e95c407d68ebf18c4491936c8b116089336e52e49",
+          "width": 297,
+          "height": 185
+        },
+        {
+          "role": "rendering-style-only",
+          "repositoryPath": "dlc/alien-isolation/fidelity/assets/samuels-portrait.png",
+          "inspected": true,
+          "identityExcluded": true
+        }
+      ],
+      "bytes": 1932717,
+      "sha256": "0f4608f73dd36d8e3246048771cbea50de41b8457443c369658cab3be35f64ac",
+      "gitBlobSha": "8b2b28414779121f49aba7aba203958bcae9a823",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "inspection": {
+        "visuallyInspected": true,
+        "singleSubject": true,
+        "matchesNamedReference": true,
+        "transparentCutout": true,
+        "alphaZeroPixels": 574271,
+        "alphaZeroFraction": 0.3650596787973718,
+        "alphaAtLeast240Pixels": 982343,
+        "alpha1to127Pixels": 12845,
+        "alphaBoundsByThreshold": {
+          "0": [
+            0,
+            4,
+            1302,
+            1199
+          ],
+          "32": [
+            13,
+            32,
+            1299,
+            1165
+          ],
+          "127": [
+            14,
+            33,
+            1298,
+            1164
+          ],
+          "239": [
+            15,
+            34,
+            1298,
+            1164
+          ]
+        },
+        "notes": [
+          "Small 297x185 identified in-game screenshot inspected. Helmet, dark inner hood and visible face retained; no invented uncovered hairstyle.",
+          "The lower shoulder/harness region extends beyond the small reference and remains an interpretation; no 1:1 claim.",
+          "Native PNG preserved byte-for-byte. Most interior alpha values are near-opaque (typically 252–254), not all exactly 255.",
+          "Generated likeness checked visually; pixel-exact canonical identity is not established."
+        ]
+      }
+    }
+  ],
+  "unproduced": [
+    {
+      "exactName": "Dr Morley",
+      "reason": "No sufficiently verified appearance reference inspected; an unknown face was not invented."
+    },
+    {
+      "exactName": "APOLLO",
+      "reason": "Non-human control system, outside this portrait lot."
+    },
+    {
+      "exactName": "Nora Velez",
+      "reason": "Original project character, outside canonical portrait lot."
+    },
+    {
+      "exactName": "Elias Kwan",
+      "reason": "Original project character, outside canonical portrait lot."
+    }
+  ],
+  "excludedAbsentDossiers": [
+    "Ransome",
+    "Hughes"
+  ],
+  "notes": [
+    "Four independent transparent PNGs. No sprite sheets.",
+    "No adapter, runtime manifest, shared documentation or Git ref changed by this portrait task."
+  ]
+}

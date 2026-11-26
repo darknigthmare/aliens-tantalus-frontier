@@ -1,0 +1,24 @@
+{
+  "version": "0.8.0",
+  "method": "Inspection visuelle des dix planches-contact initiales (76 lieux), suivie de contrôles ciblés des corrections finales et des trois documents. Les images sont des rendus, pas une certification de qualité humaine exhaustive.",
+  "findingsFixed": [
+    "Ancrages sans support architectural",
+    "Changements de pont sans escalier visible",
+    "Approches et corridors bloqués par des obstacles",
+    "Sas industriels sur la planète du souvenir",
+    "Sol extérieur sous le plan de marche",
+    "23 affiches et luminaires recouvrant des ouvertures"
+  ],
+  "finalFocusedViews": [
+    "architecture-02",
+    "architecture-06",
+    "architecture-10",
+    "f_surface_L",
+    "86_O22_local",
+    "report-document-preview",
+    "codex-document-preview",
+    "84_plan_morgue"
+  ],
+  "renderedFrames": 228,
+  "preparedStates": true
+}

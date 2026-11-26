@@ -1,0 +1,185 @@
+{
+  "version": "0.8.0",
+  "checks": [
+    {
+      "name": "76 fiches et 76 plans locaux",
+      "ok": true
+    },
+    {
+      "name": "Chaque identifiant de lieu figure une seule fois",
+      "ok": true
+    },
+    {
+      "name": "840 placements documentés",
+      "ok": true
+    },
+    {
+      "name": "224 faces de passage documentées",
+      "ok": true
+    },
+    {
+      "name": "246 règles",
+      "ok": true
+    },
+    {
+      "name": "32 tâches",
+      "ok": true
+    },
+    {
+      "name": "57 archives",
+      "ok": true
+    },
+    {
+      "name": "Coûts et projets sont présents",
+      "ok": true
+    },
+    {
+      "name": "Recherche localise la morgue sans tout afficher",
+      "ok": true
+    },
+    {
+      "name": "Effacement restaure 76 fiches",
+      "ok": true
+    },
+    {
+      "name": "Recherche sans accent",
+      "ok": true
+    },
+    {
+      "name": "Recherche exacte par placement",
+      "ok": true
+    },
+    {
+      "name": "Liens locaux du codex valides",
+      "ok": true
+    },
+    {
+      "name": "Codex sans débordement 1440",
+      "ok": true
+    },
+    {
+      "name": "Codex sans débordement 1024",
+      "ok": true
+    },
+    {
+      "name": "Codex sans débordement 800",
+      "ok": true
+    },
+    {
+      "name": "Codex sans débordement 390",
+      "ok": true
+    },
+    {
+      "name": "20 captures du rapport intégrées et décodées",
+      "ok": true
+    },
+    {
+      "name": "Nombre de tests Node indiqué conforme",
+      "ok": true
+    },
+    {
+      "name": "386 contrôles navigateur indiqués",
+      "ok": true
+    },
+    {
+      "name": "Échec médical conservé",
+      "ok": true
+    },
+    {
+      "name": "Simulations actives et sans menace distinctes",
+      "ok": true
+    },
+    {
+      "name": "Scènes préparées et point réellement atteint distincts",
+      "ok": true
+    },
+    {
+      "name": "Pas de prétention à tous les locaux commerciaux",
+      "ok": true
+    },
+    {
+      "name": "Carte globale schématique explicite",
+      "ok": true
+    },
+    {
+      "name": "Persistance non certifiée explicite",
+      "ok": true
+    },
+    {
+      "name": "Pilotage informé déclaré",
+      "ok": true
+    },
+    {
+      "name": "536 tests et métriques réelles concordent",
+      "ok": true
+    },
+    {
+      "name": "Liens internes du rapport valides",
+      "ok": true
+    },
+    {
+      "name": "Rapport sans débordement 1024",
+      "ok": true
+    },
+    {
+      "name": "Rapport sans débordement 800",
+      "ok": true
+    },
+    {
+      "name": "Rapport sans débordement 390",
+      "ok": true
+    },
+    {
+      "name": "Audit : 76 lignes de lieux",
+      "ok": true
+    },
+    {
+      "name": "Audit : 112 lignes de raccords",
+      "ok": true
+    },
+    {
+      "name": "Audit : 76 plans",
+      "ok": true
+    },
+    {
+      "name": "Audit : 10 planches-contact décodées",
+      "ok": true
+    },
+    {
+      "name": "Audit : chaque lieu inspectable",
+      "ok": true
+    },
+    {
+      "name": "Audit : défauts initiaux et correction documentés",
+      "ok": true
+    },
+    {
+      "name": "Audit : liens internes valides",
+      "ok": true
+    },
+    {
+      "name": "Audit sans débordement 1024",
+      "ok": true
+    },
+    {
+      "name": "Audit sans débordement 390",
+      "ok": true
+    },
+    {
+      "name": "Aucune ressource externe chargée",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception des documents",
+      "ok": true
+    }
+  ],
+  "passCount": 43,
+  "fail": 0,
+  "errors": [],
+  "documents": {
+    "CODEX_ISOLATION.html": "b881df5d9dd76840bef56b85e9ac402d1adb8788207ae8cb7a63713056c0c525",
+    "RAPPORT_VISUEL_ISOLATION.html": "7bd033da1cf6906b2843ee2c9e4d34bb633bdf16ef721daf3565a55abc0708b7",
+    "AUDIT_SPATIAL_ISOLATION.html": "a6b5b46fab9480b2baa061a0ec7293738aa379e1cfcb75482a0d3dfc85ed1bd9"
+  }
+}

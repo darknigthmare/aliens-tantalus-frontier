@@ -1,0 +1,188 @@
+GOAL 1 C01_01 -> t_cryo
+GOAL 2 C01_02 -> t_bridge
+GOAL 3 C01_03 -> t_sas
+GOAL 4 C02_01 -> s_airlock
+GOAL 5 C02_02 -> s_terminal
+GOAL 6 C02_03 -> s_axel
+GOAL 7 C02_04 -> s_transit
+GOAL 8 C03_01 -> y_archive
+GOAL 9 C03_02 -> y_workshop
+GOAL 10 C04_01 -> c_reception
+GOAL 11 C04_02 -> c_control
+GOAL 12 C05_01 -> m_reception
+GOAL 13 C05_02 -> m_morley
+GOAL 14 C05_03 -> m_pharmacy
+GOAL 15 C06_01 -> m_pharmacy
+GOAL 16 C06_02 -> m_coolant
+GOAL 17 C07_01 -> d_warehouse
+GOAL 18 C07_02 -> d_lift
+GOAL 19 C08_01 -> w_bureau
+GOAL 20 C08_02 -> w_bureau
+GOAL 21 C09_01 -> w_cells
+GOAL 22 C09_02 -> f_surface
+GOAL 23 C09_03 -> f_derelict
+GOAL 24 C10_01 -> w_bureau
+GOAL 25 C10_02 -> g_control
+GOAL 26 C10_03 -> g_lab
+GOAL 27 C10_04 -> g_airlock
+GOAL 28 C11_01 -> w_bureau
+GOAL 29 C11_02 -> y_lobby
+GOAL 30 C12_01 -> a_labo
+GOAL 31 C12_02 -> a_samuels
+GOAL 32 C12_03 -> a_samuels
+GOAL 33 C12_04 -> a_samuels
+GOAL 34 C13_01 -> a_access
+GOAL 35 C13_02 -> a_core
+GOAL 36 C14_01 -> r_entry
+GOAL 37 C14_02 -> r_alpha
+GOAL 38 C14_03 -> r_hive
+GOAL 39 C14_04 -> r_beta
+GOAL 40 C14_05 -> r_entry
+GOAL 41 C15_01 -> n_bridge
+GOAL 42 C15_02 -> n_engine
+GOAL 43 C15_03 -> n_dock
+GOAL 44 C16_01 -> c_control
+GOAL 45 C16_02 -> e_sas
+GOAL 46 C16_03 -> e_antenna
+GOAL 47 C17_01 -> s_transit
+GOAL 48 C17_02 -> c_server
+GOAL 49 C18_01 -> e_clamps
+GOAL 50 C18_02 -> e_clamps
+GOAL 51 C19_01 -> t_return
+GOAL 52 C19_02 -> t_return
+{
+  "version": "0.8.0",
+  "spatialExplore": false,
+  "simulationMode": "no-damage-ordinary-enemies-disabled-gemini-actor-active",
+  "failure": null,
+  "active": false,
+  "difficulty": "recit",
+  "classic": false,
+  "seed": 20141007,
+  "explore": false,
+  "rescue": false,
+  "projects": false,
+  "scanner": "off",
+  "signals": {
+    "charge": 100,
+    "silent": false,
+    "selected": "noise",
+    "stats": {
+      "scans": 0,
+      "pings": 0,
+      "swaps": 0,
+      "dockCharges": 0,
+      "drained": 0
+    }
+  },
+  "refuges": {
+    "version": 1,
+    "parts": [],
+    "consumed": [],
+    "stations": {
+      "medical": {
+        "powered": false,
+        "installed": false,
+        "uses": 0
+      },
+      "technical": {
+        "powered": false,
+        "installed": false,
+        "uses": 0
+      }
+    }
+  },
+  "rescued": [],
+  "rescueStates": [
+    {
+      "id": "nora",
+      "status": "sheltered",
+      "room": "m_isolation",
+      "health": 70
+    },
+    {
+      "id": "elias",
+      "status": "sheltered",
+      "room": "d_changing",
+      "health": 70
+    }
+  ],
+  "optional": [],
+  "ok": true,
+  "goals": 52,
+  "visited": [
+    "t_cryo",
+    "t_bridge",
+    "t_sas",
+    "s_airlock",
+    "s_terminal",
+    "s_baggage",
+    "s_axel",
+    "s_transit",
+    "y_lobby",
+    "y_archive",
+    "y_workshop",
+    "c_reception",
+    "c_control",
+    "m_reception",
+    "m_morley",
+    "m_pharmacy",
+    "m_coolant",
+    "d_warehouse",
+    "d_lift",
+    "w_bureau",
+    "w_cells",
+    "f_surface",
+    "f_derelict",
+    "g_control",
+    "g_lab",
+    "g_airlock",
+    "g_hull",
+    "a_access",
+    "a_labo",
+    "a_samuels",
+    "a_core",
+    "r_entry",
+    "r_alpha",
+    "r_hive",
+    "r_beta",
+    "n_dock",
+    "n_bridge",
+    "n_engine",
+    "c_server",
+    "e_sas",
+    "e_antenna",
+    "e_clamps",
+    "t_return"
+  ],
+  "transitions": 81,
+  "health": 100,
+  "stats": {
+    "distance": 123788.20763154238,
+    "actions": 52,
+    "hacks": 10,
+    "failures": 0,
+    "transitions": 81,
+    "noises": 563,
+    "alienSteps": 12413,
+    "frames": 23134,
+    "damage": 0,
+    "flameUses": 0,
+    "crafted": 0,
+    "heard": 4,
+    "detections": 0,
+    "rewires": 0,
+    "seals": 0,
+    "breaches": 0,
+    "optional": 0,
+    "escapes": 13,
+    "throws": 0,
+    "blockedThrows": 0
+  },
+  "time": 1156.6999999994957,
+  "steps": 23134,
+  "snapshots": 30,
+  "transcript": 52,
+  "visitedTargets": 52,
+  "events": 355
+}

@@ -1,0 +1,49 @@
+PASS Import du point de contrôle 0.6
+PASS Tâche O17 réellement restaurée
+CAPTURE 48_O17.png
+PASS Import du point de contrôle 0.6
+PASS Tâche O18 réellement restaurée
+CAPTURE 49_O18.png
+PASS Import du point de contrôle 0.6
+PASS Tâche O19 réellement restaurée
+CAPTURE 50_O19.png
+PASS Import du point de contrôle 0.6
+PASS Tâche O20 réellement restaurée
+CAPTURE 51_O20.png
+PASS Import du point de contrôle 0.6
+PASS Nora présente au refuge
+CAPTURE 52_nora_refuge.png
+PASS Import du point de contrôle 0.6
+PASS J ouvre les liaisons et affiche deux arrivées
+PASS Deux contacts physiques, sans bouton de téléportation
+PASS Les deux arrivées sont identifiées comme refuges locaux
+CAPTURE 53_liaisons.png
+PASS Journal sans débordement horizontal 1280×720
+PASS Journal sans débordement horizontal 1024×768
+PASS Journal sans débordement horizontal 800×700
+PASS E recrute le contact et non un objectif principal
+PASS E demande une attente sur place
+PASS U ordonne une marche vers le casier, sans entrée instantanée
+PASS Le contact rejoint réellement son casier
+PASS Le casier occupé est exclu des cibles d’Amanda
+CAPTURE 54_casier_nora.png
+PASS Import du point de contrôle 0.6
+PASS Cachette et occupant conservés au chargement
+PASS Liaisons suspend l’hémorragie
+PASS Journal expose le délai de blessure
+CAPTURE 55_blessure.png
+PASS Équipement ne suspend pas le délai de secours
+PASS Stabilisation au clavier : 35 PV et une seule trousse consommée
+CAPTURE 56_stabilisation.png
+PASS Sirène déclenchée pour dix-huit secondes au maximum
+CAPTURE 57_sirene.png
+PASS Second E coupe la sirène sans recharger son circuit
+PASS Avertissement humain visible avant les dégâts
+CAPTURE 58_avertissement.png
+PASS Prédation : humain tué par l’état de chasse
+CAPTURE 59_predation.png
+PASS Import réel 0.4 conserve objectifs et ressources
+PASS Import 0.4 initialise deux contacts non recrutés
+PASS Pas de requête réseau externe
+PASS Aucune exception JavaScript 0.6
+{"version": "0.8.0", "pass": 36, "fail": 0, "errors": [], "loading": "Page.set_content; native file/HTTP blocked; no policy overrides.", "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9"}

@@ -1,0 +1,189 @@
+[
+  {
+    "file": "spatial-campaign-geometry-20141007.json",
+    "version": "0.8.0",
+    "active": false,
+    "classic": false,
+    "seed": 20141007,
+    "ok": true,
+    "goals": 52,
+    "tasks": 32,
+    "rooms": 76,
+    "transitions": 158,
+    "rescued": [
+      "nora",
+      "elias"
+    ],
+    "refuges": {
+      "version": 1,
+      "parts": [],
+      "consumed": [
+        "med_protocol",
+        "med_injector",
+        "eva_valve",
+        "eva_filter"
+      ],
+      "stations": {
+        "medical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        },
+        "technical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        }
+      }
+    },
+    "failure": null
+  },
+  {
+    "file": "spatial-campaign-geometry-classic-20141007.json",
+    "version": "0.8.0",
+    "active": false,
+    "classic": true,
+    "seed": 20141007,
+    "ok": true,
+    "goals": 52,
+    "tasks": 32,
+    "rooms": 76,
+    "transitions": 158,
+    "rescued": [
+      "nora",
+      "elias"
+    ],
+    "refuges": {
+      "version": 1,
+      "parts": [],
+      "consumed": [
+        "med_protocol",
+        "med_injector",
+        "eva_valve",
+        "eva_filter"
+      ],
+      "stations": {
+        "medical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        },
+        "technical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        }
+      }
+    },
+    "failure": null
+  },
+  {
+    "file": "spatial-campaign-live-20141007.json",
+    "version": "0.8.0",
+    "active": true,
+    "classic": false,
+    "seed": 20141007,
+    "ok": false,
+    "goals": 13,
+    "tasks": 5,
+    "rooms": 22,
+    "transitions": 31,
+    "rescued": [],
+    "refuges": {
+      "version": 1,
+      "parts": [],
+      "consumed": [],
+      "stations": {
+        "medical": {
+          "powered": false,
+          "installed": false,
+          "uses": 0
+        },
+        "technical": {
+          "powered": false,
+          "installed": false,
+          "uses": 0
+        }
+      }
+    },
+    "failure": "Mort m_staff objectif C05_03 à 451.3 s (Vous n’avez pas survécu · Le Xénomorphe.)"
+  },
+  {
+    "file": "spatial-campaign-live-42.json",
+    "version": "0.8.0",
+    "active": true,
+    "classic": false,
+    "seed": 42,
+    "ok": true,
+    "goals": 52,
+    "tasks": 32,
+    "rooms": 76,
+    "transitions": 158,
+    "rescued": [
+      "nora",
+      "elias"
+    ],
+    "refuges": {
+      "version": 1,
+      "parts": [],
+      "consumed": [
+        "med_protocol",
+        "med_injector",
+        "eva_valve",
+        "eva_filter"
+      ],
+      "stations": {
+        "medical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        },
+        "technical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        }
+      }
+    },
+    "failure": null
+  },
+  {
+    "file": "spatial-campaign-live-29102026.json",
+    "version": "0.8.0",
+    "active": true,
+    "classic": false,
+    "seed": 29102026,
+    "ok": true,
+    "goals": 52,
+    "tasks": 32,
+    "rooms": 76,
+    "transitions": 158,
+    "rescued": [
+      "nora",
+      "elias"
+    ],
+    "refuges": {
+      "version": 1,
+      "parts": [],
+      "consumed": [
+        "med_protocol",
+        "med_injector",
+        "eva_valve",
+        "eva_filter"
+      ],
+      "stations": {
+        "medical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        },
+        "technical": {
+          "powered": true,
+          "installed": true,
+          "uses": 0
+        }
+      }
+    },
+    "failure": null
+  }
+]

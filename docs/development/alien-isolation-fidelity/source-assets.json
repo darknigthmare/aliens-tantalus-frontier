@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "module": "alien-isolation",
+  "files": [
+    {
+      "path": "candidates/amanda-portrait.png",
+      "bytes": 1623556,
+      "sha256": "aa4323c5ec65fc16d074cedbbee00d9e7a06c51c920d6d3cd0596c1e8329a30e",
+      "width": 1312,
+      "height": 1199,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/anesidora-exterior.png",
+      "bytes": 1664978,
+      "sha256": "6fed28192b51500303503aaa5fca50a473659b10346859cd46d5c9ad26d78528",
+      "width": 1774,
+      "height": 887,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/boltgun.png",
+      "bytes": 1002338,
+      "sha256": "73cb820d2d9808bb568a208a6b167cec5c21dbdc7462f7716b1dc0a0d7b89e08",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/door-jack-lock.png",
+      "bytes": 1997881,
+      "sha256": "1c37f93e8de47497b042bbe10881024e436b98385b2dc503a234e3199746f79a",
+      "width": 887,
+      "height": 1774,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/flashbang.png",
+      "bytes": 1022588,
+      "sha256": "4da47d2dbb4eeabed94694515e220402e7866f7251a63880fea2e0f1384a6fb6",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/foster-portrait.png",
+      "bytes": 1932717,
+      "sha256": "0f4608f73dd36d8e3246048771cbea50de41b8457443c369658cab3be35f64ac",
+      "width": 1312,
+      "height": 1199,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/kuhlman-portrait.png",
+      "bytes": 1579718,
+      "sha256": "b2d805eeeda049186e00603609347e2b5f8e43dfbda39a960838de1bd94ef2b6",
+      "width": 1312,
+      "height": 1199,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/locker-closed.png",
+      "bytes": 1301081,
+      "sha256": "ff42d805f0a56bc2af6b392e7fa0398cf48b3831ce53ed6ee828ca3c7320c8f7",
+      "width": 887,
+      "height": 1774,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/locker-open.png",
+      "bytes": 1284285,
+      "sha256": "81b73fa62c90b12b620ad080042f95d9cd76204256cac88f7810dba3a0adc870",
+      "width": 887,
+      "height": 1774,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/maintenancejack.png",
+      "bytes": 494895,
+      "sha256": "52ee9bfffc264af18392337a5e13a299d6b97e40e84675e225fcb8a0e7e79024",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/plasma-cutter.png",
+      "bytes": 808219,
+      "sha256": "7c888c459b76a5d7948b3ddb8b8a50c46f27b79f9abf5f7eb56f3db2473e5e26",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/revolver.png",
+      "bytes": 773549,
+      "sha256": "92d9dcb146452cfe46fb6af0d186dec6f4993fcf99d873cc7dcd3733bc2b0ca3",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/ricardo-portrait.png",
+      "bytes": 1601114,
+      "sha256": "eafbe19c2efbc8205a327228f1d906e30390fc55786bae6602cc68afa9b89362",
+      "width": 1312,
+      "height": 1199,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/sevastopol-exterior.png",
+      "bytes": 1561528,
+      "sha256": "23264ad08b09602e2f95f0977ba0c82fcfa402c6bbfcf45373079c38c22d89e8",
+      "width": 1681,
+      "height": 936,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/shotgun.png",
+      "bytes": 746632,
+      "sha256": "c3fe53e46dd9bd53dac2207aea0d4c62fd5b3fa7ee642b7c3a2ea272a9c2dda7",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/smokebomb.png",
+      "bytes": 880081,
+      "sha256": "7cbf7f89144bdabd8225b27e3cf8faac8ccecb66ffddb0b9328785ad1ae059a1",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/stunbaton.png",
+      "bytes": 382431,
+      "sha256": "48258a923cfd1d274f268b14962541660841f9de68f91fb21de927bc5b1f27b9",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/supply-case-closed.png",
+      "bytes": 1772813,
+      "sha256": "ae20157148f45e60cd61db4f62b15fcfd9f300ba5b766c11f23bd1d500953d99",
+      "width": 1774,
+      "height": 887,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/supply-case-open.png",
+      "bytes": 1706987,
+      "sha256": "4a9cea7f4e393f86e1a6cc5575fa1f7a7e0e8ccfe890adbdde3dace8112fd6cb",
+      "width": 1774,
+      "height": 887,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/torrens-cryopod.png",
+      "bytes": 1652309,
+      "sha256": "f9d5b0eec802a938fc2eec931e795784ddc518765a8be76613af3b3d76cd3ac0",
+      "width": 1877,
+      "height": 838,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/torrens-exterior.png",
+      "bytes": 1156096,
+      "sha256": "79e562a0bd38b53c2bbcd14bb70fc5c3d1f441ef832561ff58d2b92a0a73b655",
+      "width": 2172,
+      "height": 724,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/vending-hot-food.png",
+      "bytes": 2586015,
+      "sha256": "5b3e487e6390ca6de38bf1753318555bbf7100ea9a271fa41b5637cb282d5091",
+      "width": 1089,
+      "height": 1445,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    }
+  ]
+}

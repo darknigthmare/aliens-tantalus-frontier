@@ -1,0 +1,23 @@
+{
+  "name": "tantalus-alien-isolation-dlc",
+  "version": "0.8.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "serve": "node tools/serve.mjs",
+    "build": "python3 tools/build.py",
+    "content:rebuild": "python3 tools/rebuild_content.py",
+    "test:campaign": "node tests/sweep.mjs && node tests/spatial-sweep.mjs",
+    "test:browser": "python3 tests/run_browser_suite.py",
+    "test:rescue": "node tests/rescue-sweep.mjs",
+    "test:projects": "node tests/project-sweep.mjs",
+    "test:signals": "node tests/signals-sweep.mjs",
+    "test:spatial": "node tests/spatial-audit.mjs",
+    "docs:build": "python3 tools/make_docs.py",
+    "test:documents": "python3 tests/documents.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

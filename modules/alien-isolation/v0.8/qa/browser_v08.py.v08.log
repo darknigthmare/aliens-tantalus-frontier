@@ -1,0 +1,100 @@
+PASS Métadonnées et édition 0.8 sur le menu
+PASS Sélecteur propose les 76 lieux
+PASS Le plan inspecté correspond à la morgue
+PASS Deux connexions physiques dans le plan de la morgue
+PASS Condition de Morley affichée au chapitre préparé
+PASS Repère stocké sans téléportation ni objectif offert
+PASS Coordonnées inchangées par le plan
+PASS Inspection du voisin suit le lien réciproque
+PASS Effacer un repère conserve la campagne
+PASS Plan local sans débordement horizontal 1440×900
+PASS Plan et sélecteur accessibles 1440×900
+PASS Plan local sans débordement horizontal 1280×720
+PASS Plan et sélecteur accessibles 1280×720
+PASS Plan local sans débordement horizontal 1024×768
+PASS Plan et sélecteur accessibles 1024×768
+PASS Plan local sans débordement horizontal 800×700
+PASS Plan et sélecteur accessibles 800×700
+PASS E franchit au point déclaré t_cryo__t_galley
+PASS E franchit au point déclaré t_galley__t_bridge
+PASS E franchit au point déclaré t_bridge__t_sas
+PASS Source de captures: parcours actif des 76 lieux terminé
+PASS Trois cadrages du lieu t_cryo
+PASS Trois cadrages du lieu t_bridge
+PASS Trois cadrages du lieu t_sas
+PASS Trois cadrages du lieu s_airlock
+PASS Trois cadrages du lieu s_terminal
+PASS Trois cadrages du lieu s_shop
+PASS Trois cadrages du lieu s_baggage
+PASS Trois cadrages du lieu s_axel
+PASS Trois cadrages du lieu s_transit
+PASS Trois cadrages du lieu y_lobby
+PASS Trois cadrages du lieu y_archive
+PASS Trois cadrages du lieu y_workshop
+PASS Trois cadrages du lieu y_duct
+PASS Trois cadrages du lieu c_reception
+PASS Trois cadrages du lieu c_control
+PASS Trois cadrages du lieu c_server
+PASS Trois cadrages du lieu m_reception
+PASS Trois cadrages du lieu m_corridor
+PASS Trois cadrages du lieu m_morley
+PASS Trois cadrages du lieu m_pharmacy
+PASS Trois cadrages du lieu m_coolant
+PASS Trois cadrages du lieu d_warehouse
+PASS Trois cadrages du lieu d_lift
+PASS Trois cadrages du lieu w_bureau
+PASS Trois cadrages du lieu w_cells
+PASS Trois cadrages du lieu f_surface
+PASS Trois cadrages du lieu f_derelict
+PASS Trois cadrages du lieu g_control
+PASS Trois cadrages du lieu g_lab
+PASS Trois cadrages du lieu g_airlock
+PASS Trois cadrages du lieu a_access
+PASS Trois cadrages du lieu a_labo
+PASS Trois cadrages du lieu a_samuels
+PASS Trois cadrages du lieu a_core
+PASS Trois cadrages du lieu r_entry
+PASS Trois cadrages du lieu r_alpha
+PASS Trois cadrages du lieu r_hive
+PASS Trois cadrages du lieu r_beta
+PASS Trois cadrages du lieu n_dock
+PASS Trois cadrages du lieu n_bridge
+PASS Trois cadrages du lieu n_engine
+PASS Trois cadrages du lieu e_sas
+PASS Trois cadrages du lieu e_antenna
+PASS Trois cadrages du lieu e_clamps
+PASS Trois cadrages du lieu t_return
+PASS Trois cadrages du lieu m_staff
+PASS Trois cadrages du lieu m_sterile
+PASS Trois cadrages du lieu d_relay
+PASS Trois cadrages du lieu d_gantry
+PASS Trois cadrages du lieu a_service
+PASS Trois cadrages du lieu r_observation
+PASS Trois cadrages du lieu g_observation
+PASS Trois cadrages du lieu g_plenum
+PASS Trois cadrages du lieu g_hull
+PASS Trois cadrages du lieu n_coolant
+PASS Trois cadrages du lieu n_service
+PASS Trois cadrages du lieu m_records
+PASS Trois cadrages du lieu m_isolation
+PASS Trois cadrages du lieu e_lockers
+PASS Trois cadrages du lieu e_catwalk
+PASS Trois cadrages du lieu m_triage
+PASS Trois cadrages du lieu m_refuge
+PASS Trois cadrages du lieu d_changing
+PASS Trois cadrages du lieu d_refuge
+PASS Trois cadrages du lieu sc_station
+PASS Trois cadrages du lieu h_galleria_low
+PASS Trois cadrages du lieu h_galleria_high
+PASS Trois cadrages du lieu h_habitation
+PASS Trois cadrages du lieu h_upper
+PASS Trois cadrages du lieu m_morgue
+PASS Trois cadrages du lieu d_fluid
+PASS Trois cadrages du lieu d_orientation
+PASS Trois cadrages du lieu r_maintenance
+PASS Trois cadrages du lieu g_hazard
+PASS Trois cadrages du lieu t_galley
+PASS Trois cadrages du lieu f_pilot
+PASS Aucune ressource réseau externe
+PASS Aucune exception navigateur
+SUMMARY 99 0 228

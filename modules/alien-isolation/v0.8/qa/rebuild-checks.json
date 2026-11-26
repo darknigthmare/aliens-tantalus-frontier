@@ -1,0 +1,724 @@
+{
+  "version": "0.8.0",
+  "before": {
+    "src/content.json": "8014f745999f55aff9ae129a6d63f33f15b9f9b1ff7426c0438cb59584ad3d9d",
+    "src/content.js": "eb7537f5ab192de64e7eadf0b8e8231364e0b522e20c343a4bb826e8d4b8a57a",
+    "src/assets.js": "00725a7a113ab0cca88bd4bc120a4c8dda846bfbc728ead5cea5e9d92f3ae34c",
+    "JOUER_ISOLATION.html": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+    "integration/dlc-manifest.json": "dd058922c035497b9d480e85f1012871f31121b4e4e2d608fdd96ee4bf6ca577"
+  },
+  "after": {
+    "src/content.json": "8014f745999f55aff9ae129a6d63f33f15b9f9b1ff7426c0438cb59584ad3d9d",
+    "src/content.js": "eb7537f5ab192de64e7eadf0b8e8231364e0b522e20c343a4bb826e8d4b8a57a",
+    "src/assets.js": "00725a7a113ab0cca88bd4bc120a4c8dda846bfbc728ead5cea5e9d92f3ae34c",
+    "JOUER_ISOLATION.html": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+    "integration/dlc-manifest.json": "dd058922c035497b9d480e85f1012871f31121b4e4e2d608fdd96ee4bf6ca577"
+  },
+  "checks": [
+    {
+      "name": "Reconstruction déterministe src/content.json",
+      "ok": true
+    },
+    {
+      "name": "Reconstruction déterministe src/content.js",
+      "ok": true
+    },
+    {
+      "name": "Reconstruction déterministe src/assets.js",
+      "ok": true
+    },
+    {
+      "name": "Reconstruction déterministe JOUER_ISOLATION.html",
+      "ok": true
+    },
+    {
+      "name": "Reconstruction déterministe integration/dlc-manifest.json",
+      "ok": true
+    },
+    {
+      "name": "155 SVG 0.7 conservés octet pour octet",
+      "ok": true
+    },
+    {
+      "name": "64 anciens identifiants Lieux conservés",
+      "ok": true
+    },
+    {
+      "name": "88 anciens identifiants Liaisons conservés",
+      "ok": true
+    },
+    {
+      "name": "20 anciens identifiants Tâches conservés",
+      "ok": true
+    },
+    {
+      "name": "45 anciens identifiants Archives conservés",
+      "ok": true
+    },
+    {
+      "name": "708 identifiants de placements conservés (positions corrigées documentées)",
+      "ok": true
+    },
+    {
+      "name": "goals précédents conservés intégralement",
+      "ok": true
+    },
+    {
+      "name": "chapters précédents conservés intégralement",
+      "ok": true
+    }
+  ],
+  "retention": {
+    "rooms": {
+      "before": 64,
+      "after": 76,
+      "missing": []
+    },
+    "links": {
+      "before": 88,
+      "after": 112,
+      "missing": []
+    },
+    "optional": {
+      "before": 20,
+      "after": 32,
+      "missing": []
+    },
+    "logs": {
+      "before": 45,
+      "after": 57,
+      "missing": []
+    },
+    "props": {
+      "before": 708,
+      "after": 840,
+      "missing": []
+    },
+    "sourceArchive": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_7.zip",
+    "sourceSha256": "d09c7001d350a06f5d4699669846b365db1e58e33522117e7cca030b10d65c7b"
+  },
+  "artComparison": [
+    {
+      "file": "assets/characters/alien_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/alien_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_crouch_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/amanda_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_crouch_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_portrait.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/elias_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_crouch_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/eva_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/facehugger.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/human_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/joe_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/marlow_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_crouch_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_portrait.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_0.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_1.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_2.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_3.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_4.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_5.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_6.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/characters/nora_walk_7.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/androidrack.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/antenna.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/barrier.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/bars.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/bed.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/bench.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/cabinet.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/cart.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/case.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/chair.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/clinic_console.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/container.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/core.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/counter.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/crate.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/cryopod.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/desk.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/egg.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/engineering_console.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/engineering_pack.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/fan.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/forklift.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/gantry.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/gurney.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/iv.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/kiosk.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/light.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/locker.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/medical_pack.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/pilot.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/pipe.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/planter.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/poster.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/pump.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/radio.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/relay.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/resin.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/rib.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/rock.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/save.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/server.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/shelf.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/spool.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/suit.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/table.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/tank.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/terminal.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/trolley.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/turbine.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/vending.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/water.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/props/workbench.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/ui/emp.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/ui/flare.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/ui/medkit.svg",
+      "sameAsV07": true
+    },
+    {
+      "file": "assets/ui/noise.svg",
+      "sameAsV07": true
+    }
+  ],
+  "pass": 13,
+  "fail": 0
+}

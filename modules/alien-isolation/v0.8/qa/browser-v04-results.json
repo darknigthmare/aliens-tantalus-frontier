@@ -1,0 +1,225 @@
+{
+  "version": "0.8.0",
+  "pass": 33,
+  "fail": 0,
+  "checks": [
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Tâche O13 validée dans le parcours",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Tâche O14 validée dans le parcours",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Tâche O15 validée dans le parcours",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Tâche O16 validée dans le parcours",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "O₂ faible visible dans le HUD",
+      "ok": true
+    },
+    {
+      "name": "O₂ continue de baisser",
+      "ok": true
+    },
+    {
+      "name": "Bouteille raccordée par E maintenu",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "O₂ et bouteille vide conservés par l’import",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Sas enclenché au clavier, Amanda reste dans l’atelier",
+      "ok": true
+    },
+    {
+      "name": "HUD sas affiché",
+      "ok": true
+    },
+    {
+      "name": "Pause fige le cycle affiché",
+      "ok": true
+    },
+    {
+      "name": "Sas prêt après son délai",
+      "ok": true
+    },
+    {
+      "name": "Seconde action E traverse vers la coque",
+      "ok": true
+    },
+    {
+      "name": "État du stockage visible dans Pause",
+      "ok": true
+    },
+    {
+      "name": "Refus du stockage décrit explicitement",
+      "ok": true
+    },
+    {
+      "name": "Objet lancé au clavier est encore en vol",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Objet en vol conservé au chargement",
+      "ok": true
+    },
+    {
+      "name": "Objet activé seulement après la fin du vol et du délai",
+      "ok": true
+    },
+    {
+      "name": "Import v0.3 par fichier : progression et stocks conservés",
+      "ok": true
+    },
+    {
+      "name": "Import v0.3 initialise l’oxygène",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Oxygène cadré en 1280×720",
+      "ok": true
+    },
+    {
+      "name": "État de contrôle 0.6 restauré",
+      "ok": true
+    },
+    {
+      "name": "Oxygène cadré en 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception JavaScript 0.4",
+      "ok": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "captures/39_O13.png",
+      "title": "San Cristobal · Archives du personnel",
+      "provenance": "État atteint par déplacement et interaction lors de l’exploration Récit graine 42 : 76 lieux, 32 tâches et deux escortes, IA et dégâts actifs. Restauration puis pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/40_O14.png",
+      "title": "San Cristobal · Chambre d’isolement",
+      "provenance": "État atteint par déplacement et interaction lors de l’exploration Récit graine 42 : 76 lieux, 32 tâches et deux escortes, IA et dégâts actifs. Restauration puis pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/41_O15.png",
+      "title": "Sevastopol · Atelier des combinaisons",
+      "provenance": "État atteint par déplacement et interaction lors de l’exploration Récit graine 42 : 76 lieux, 32 tâches et deux escortes, IA et dégâts actifs. Restauration puis pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/42_O16.png",
+      "title": "Sevastopol · Pont de maintenance",
+      "provenance": "État atteint par déplacement et interaction lors de l’exploration Récit graine 42 : 76 lieux, 32 tâches et deux escortes, IA et dégâts actifs. Restauration puis pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/43_oxygen_low.png",
+      "title": "Combinaison · Une marge de retour",
+      "provenance": "SCÈNE PRÉPARÉE pour vérifier le système : position, phase et réserves réglées explicitement. Ce n’est pas une preuve de parcours naturel.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/44_bottle_empty.png",
+      "title": "Oxygène · Bouteille consommée",
+      "provenance": "SCÈNE PRÉPARÉE pour vérifier le système : position, phase et réserves réglées explicitement. Ce n’est pas une preuve de parcours naturel. Le maintien E a réellement ajouté l’oxygène et vidé ce poste.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/45_airlock_cycle.png",
+      "title": "Sas · Égalisation avant la sortie",
+      "provenance": "SCÈNE PRÉPARÉE pour vérifier le système : position, phase et réserves réglées explicitement. Ce n’est pas une preuve de parcours naturel. La première action E déclenche la temporisation, sans changement de pièce.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/46_storage_status.png",
+      "title": "Pause · Stockage et copie de secours",
+      "provenance": "Interface réelle dans le navigateur de test dont le stockage est refusé. L’indication ne prétend pas certifier une persistance native.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/47_projectile_flight.png",
+      "title": "Lancer · Le leurre n’est pas encore actif",
+      "provenance": "SCÈNE PRÉPARÉE pour vérifier le système : position, phase et réserves réglées explicitement. Ce n’est pas une preuve de parcours naturel. L’objet est lancé avec G puis son temps de vol est réglé à mi-parcours pour la capture ; l’effet n’est pas encore appliqué.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    }
+  ],
+  "errors": [],
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "loading": "Page.set_content; native file:// and HTTP navigation blocked by policy; no browser policy override."
+}

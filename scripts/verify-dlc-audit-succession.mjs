@@ -27,6 +27,19 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_PRODUCTION_BIBLE_BASELINE_20261126 as productionBibleBaseline,
   AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 as productionBibleSuccessors,
   reviewedAvpProductionBibleHostDigest20261126 as advanceProductionBible,
+  AVP_ISOLATION_PRODUCTION_JOIN_BASELINES_20261126 as productionJoinBaselines,
+  AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126 as productionJoinSuccessors,
+  AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126 as productionIncoming,
+  reviewedIsolationProductionJoinHostDigest20261126 as advanceProductionJoin,
+  reviewedIsolationProductionIncomingHostDigest20261126 as advanceProductionIncoming,
+  AVP_ISOLATION_BASELINE_20261126 as isolationBaseline,
+  AVP_ISOLATION_SUCCESSORS_20261126 as isolationSuccessors,
+  AVP_ISOLATION_BIBLE_JOIN_BASELINES_20261126 as isolationBibleBaselines,
+  AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126 as isolationBibleSuccessors,
+  AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126 as isolationBibleIncoming,
+  reviewedIsolationHostDigest20261126 as advanceIsolation,
+  reviewedIsolationAfterBibleHostDigest20261126 as advanceIsolationAfterBible,
+  reviewedIsolationIncomingHostDigest20261126 as advanceIsolationIncoming,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
@@ -130,11 +143,19 @@ const expectedSpritePaths = [
 ];
 const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
   'scripts/qa-fiorina-native-v114.mjs', 'scripts/verify-audit-v143.mjs', 'sw.js'];
-const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors)])];
-const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path]).previousSha256;
+const expectedIsolationPredecessors = Object.freeze({
+  "package.json": "f1255982d1e7527ee751e54bc84da66cc34c3633e43a17f9cde5b99ad64eda76",
+  "scripts/build.mjs": "83cf0a94b7001c2f4e3408ecf4432095564ac95d1321d4dbaf9e0cbd898f178b",
+  "scripts/verify-public-release-v86.mjs": "6c42dac3d674ebbfb07a3bb5953faa76d5d246f10b889b793d9d916031efcf3f",
+  "src/dlc-menu.js": "918ca5d666aed072a2055d22ac30a3c4d0359a36468d921e59b9a07abd5de789",
+  "scripts/verify-dlc-menu.mjs": "94f1c58253b10c10374219720e55afaeecadacd70ac56355f339ae28d00bd237"
+});
+const expectedIsolationPaths = Object.keys(expectedIsolationPredecessors);
+const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths, ...Object.keys(bibleBridgeSuccessors), ...expectedIsolationPaths])];
+const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path] || bibleBridgeSuccessors[path] || isolationSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => productionBibleSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|DLC-bible-to-AVP-production) source chain/;
+const finalEndpoint = path => productionJoinSuccessors[path]?.currentSha256 || productionBibleSuccessors[path]?.currentSha256 || isolationBibleSuccessors[path]?.currentSha256 || isolationSuccessors[path]?.currentSha256 || bibleBridgeSuccessors[path]?.currentSha256 || bibleDocumentsSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-bible-documents|DLC-bible-document-bridge|cumulative-to-Isolation|DLC-bible-to-Isolation-join|published-Isolation-to-bible-join|DLC-bible-to-AVP-production|Isolation-bible-to-production-join|AVP-production-to-Isolation-join) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -151,6 +172,12 @@ test('AVP published receipts remain immutable while the exact Fiorina join verif
     joinedSuccessors: expectedJoinPaths.length, qualitySuccessors: expectedQualityPaths.length,
     aliensMergedSuccessors: Object.keys(aliensMerge).length, aliensIncomingSuccessors: Object.keys(aliasesFromAliens).length,
     spriteSuccessors: expectedSpritePaths.length, spriteV116Successors: expectedSpriteV116Paths.length,
+    isolationSuccessors: expectedIsolationPaths.length,
+    isolationBibleJoinSuccessors: Object.keys(isolationBibleSuccessors).length,
+    isolationBibleIncomingSuccessors: Object.keys(isolationBibleIncoming).length,
+    productionBibleSuccessors: Object.keys(productionBibleSuccessors).length,
+    isolationProductionJoinSuccessors: Object.keys(productionJoinSuccessors).length,
+    isolationProductionIncomingSuccessors: Object.keys(productionIncoming).length,
     historicalEvidenceTransferred: false });
 });
 
@@ -289,6 +316,12 @@ test('the actual terminal imports no audit and cannot admit its own bytes', () =
   assert.equal(Object.hasOwn(aliensMerge, audit), false);
   assert.equal(Object.hasOwn(aliasesFromAliens, audit), false);
   assert.equal(Object.hasOwn(aliensIncoming, audit), false);
+  assert.equal(Object.hasOwn(isolationSuccessors, audit), false);
+  assert.equal(Object.hasOwn(isolationBibleSuccessors, audit), false);
+  assert.equal(Object.hasOwn(isolationBibleIncoming, audit), false);
+  assert.equal(Object.hasOwn(productionBibleSuccessors, audit), false);
+  assert.equal(Object.hasOwn(productionJoinSuccessors, audit), false);
+  assert.equal(Object.hasOwn(productionIncoming, audit), false);
   assert.equal(Object.hasOwn(spriteSuccessors, audit), false);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
   assert.doesNotMatch(source, /from\s+['"].*audit-/);
@@ -444,6 +477,106 @@ test('the complete Tantalus join accepts the reviewed campaign link and rejects 
 });
 
 
+test('Isolation advances exactly the reviewed hosts from the cumulative baseline', () => {
+  assert.equal(isolationBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(isolationSuccessors).sort(), [...expectedIsolationPaths].sort());
+  assert.equal(sha(JSON.stringify(isolationSuccessors)), 'a200ab0d99f1210f83577d5a5adb0a138343af325c06bbf5972caa3920545825');
+  assert.ok(Object.isFrozen(isolationSuccessors));
+  for (const [path, receipt] of Object.entries(isolationSuccessors)) {
+    assert.ok(Object.isFrozen(receipt), path);
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256'], path);
+    assert.equal(receipt.previousSha256, expectedIsolationPredecessors[path], path);
+    assert.notEqual(receipt.currentSha256, receipt.previousSha256, path);
+    const prior = spriteV116Successors[path] || spriteSuccessors[path] || aliensMerge[path]
+      || qualitySuccessors[path] || joinSuccessors[path] || successors[path];
+    if (prior) assert.equal(receipt.previousSha256, prior.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceIsolation(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
+    assert.deepEqual(runtimeView({ [path]: receipt.previousSha256 }), { [path]: finalEndpoint(path) });
+    assert.deepEqual(runtimeView({ [path]: receipt.currentSha256 }), { [path]: finalEndpoint(path) });
+  }
+});
+
+test('Isolation rejects unknown, repeated and skipped predecessors without broadening unrelated paths', () => {
+  for (const [path, receipt] of Object.entries(isolationSuccessors)) {
+    const rejected = [receipt.currentSha256, '0'.repeat(64), undefined];
+    if (firstEndpoint(path) !== receipt.previousSha256) rejected.push(firstEndpoint(path));
+    for (const value of new Set(rejected))
+      assert.throws(() => advanceIsolation(path, value), /Broken cumulative-to-Isolation source chain/, path);
+    assert.throws(() => runtimeView({ [path]: '0'.repeat(64) }), /Incorrect AVP host runtime view predecessor/, path);
+  }
+  for (const path of ['src/unreviewed.js', 'src/dlc-menu.js/extra', 'modules/alien-isolation/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceIsolation(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(isolationSuccessors, audit), false);
+});
+
+test('Isolation preserves the complete published AVP, Aliens and Fiorina receipt prefix', () => {
+  const source = read(audit).toString();
+  const marker = '// END FIORINA V116 HOST RECEIPTS';
+  const end = source.indexOf(marker);
+  assert.ok(end > 0 && source.indexOf(marker, end + marker.length) === -1);
+  assert.equal(sha(source.slice(0, end + marker.length)), '6facdfa11619639d6490a9adf8b48ddb188c6f7d93530d07f2052a16ca7903a4');
+});
+
+
+test('the Isolation and bible parents converge through one exact public-verifier join', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  assert.deepEqual(isolationBibleBaselines, {
+    bibleCommit: 'c7a0339f86e1de0c2209800a81506cddbc71d804',
+    isolationCommit: 'a6697cdef91f366c849dbefa4996fa8e7dc24406',
+    commonCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415'
+  });
+  assert.deepEqual(Object.keys(isolationBibleSuccessors), [path]);
+  assert.deepEqual(Object.keys(isolationBibleIncoming), [path]);
+  assert.equal(sha(JSON.stringify(isolationBibleSuccessors)), '369a39a8aceda3324d6c713dab98a489e780cfedf5eddcb4889e3ab2a4650912');
+  assert.equal(sha(JSON.stringify(isolationBibleIncoming)), '1e2046db1973a076156ccd12549fee34c7bfaa54a05a24e4afbe0d38baa4447d');
+  const joined = isolationBibleSuccessors[path], incoming = isolationBibleIncoming[path];
+  assert.ok(Object.isFrozen(isolationBibleBaselines) && Object.isFrozen(isolationBibleSuccessors)
+    && Object.isFrozen(isolationBibleIncoming) && Object.isFrozen(joined) && Object.isFrozen(incoming));
+  assert.equal(joined.previousSha256, bibleDocumentsSuccessors[path].currentSha256);
+  assert.equal(incoming.previousSha256, isolationSuccessors[path].currentSha256);
+  assert.equal(joined.currentSha256, '16e8bf01e569c4540391dc269604404505248406fd1240917d6e75c165454ccd');
+  assert.equal(incoming.currentSha256, joined.currentSha256);
+  assert.equal(sha(read(path)), finalEndpoint(path));
+  assert.equal(advanceIsolationAfterBible(path, joined.previousSha256), finalEndpoint(path));
+  assert.equal(advanceIsolationIncoming(path, incoming.previousSha256), finalEndpoint(path));
+  assert.equal(advanceIsolation(path, isolationSuccessors[path].previousSha256), finalEndpoint(path));
+  assert.equal(advanceBibleDocuments(path, bibleDocumentsSuccessors[path].previousSha256), finalEndpoint(path));
+  for (const endpoint of [joined.previousSha256, incoming.previousSha256, joined.currentSha256])
+    assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: finalEndpoint(path) });
+});
+
+test('the Isolation bible join refuses skipped, repeated and interchanged parent endpoints', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  const joined = isolationBibleSuccessors[path], incoming = isolationBibleIncoming[path];
+  for (const endpoint of [isolationSuccessors[path].previousSha256, incoming.previousSha256,
+    joined.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceIsolationAfterBible(path, endpoint), /Broken DLC-bible-to-Isolation-join source chain/);
+  for (const endpoint of [isolationSuccessors[path].previousSha256, joined.previousSha256,
+    joined.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceIsolationIncoming(path, endpoint), /Broken published-Isolation-to-bible-join source chain/);
+  for (const unknown of ['src/unreviewed.js', 'scripts/verify-public-release-v86.mjs/extra',
+    '__proto__', 'constructor', audit]) {
+    assert.equal(advanceIsolationAfterBible(unknown, 'untouched'), 'untouched');
+    assert.equal(advanceIsolationIncoming(unknown, 'untouched'), 'untouched');
+  }
+});
+
+test('the join keeps both published bible blocks and all original Isolation receipts byte-identical', () => {
+  const source = read(audit).toString();
+  const bibleMarker = '// END DLC BIBLE BRIDGE HOST RECEIPTS 20261126';
+  const end = source.indexOf(bibleMarker);
+  assert.ok(end > 0 && source.indexOf(bibleMarker, end + bibleMarker.length) === -1);
+  assert.equal(sha(source.slice(0, end + bibleMarker.length)), '1001dfb91817bf35bc6b31ed57b69ecfe18d8534c0b382a4c380a81cce93a38d');
+  const begin = '// BEGIN ISOLATION HOST RECEIPTS 20261126';
+  const finish = '// END ISOLATION HOST RECEIPTS 20261126';
+  const start = source.indexOf(begin), stop = source.indexOf(finish, start);
+  assert.ok(start > end && stop > start);
+  assert.equal(sha(source.slice(start, stop + finish.length) + '\n'), 'c86f1a1b265715a1e28717dba67efa4badc96356d9723b8e64de5be2bad6cec1');
+});
+
+
 // Source documents and individual PNG candidates; none are admitted to gameplay.
 const avpProductionDocumentDirectory = 'docs/narrative/dlc/avp-2004-production-20261126';
 const avpProductionAssetDirectory = 'assets/openai/sprites/avp2004-production-v001';
@@ -478,13 +611,13 @@ test('AVP production advances only its two exact source admission hosts after th
     assert.ok(Object.isFrozen(receipt));
     const prior = bibleDocumentsSuccessors[path] || spriteSuccessors[path];
     assert.equal(receipt.previousSha256, prior.currentSha256, path);
-    assert.equal(sha(read(path)), receipt.currentSha256, path);
-    assert.equal(advanceProductionBible(path, receipt.previousSha256), receipt.currentSha256, path);
-    assert.equal(advance(path, firstEndpoint(path)), receipt.currentSha256, path);
+    assert.equal(sha(read(path)), finalEndpoint(path), path);
+    assert.equal(advanceProductionBible(path, receipt.previousSha256), finalEndpoint(path), path);
+    assert.equal(advance(path, firstEndpoint(path)), finalEndpoint(path), path);
     for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
       assert.throws(() => advanceProductionBible(path, value), /Broken DLC-bible-to-AVP-production source chain/);
     for (const value of [receipt.previousSha256, receipt.currentSha256])
-      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: finalEndpoint(path) });
   }
   const terminal = read(audit).toString();
   assert.equal(sha(terminal.slice(0, terminal.indexOf('// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126'))),
@@ -558,5 +691,66 @@ test('the AVP production manifest pins each original PNG and keeps generated, in
     assert.ok(Array.isArray(entry.sourceRefs) && entry.sourceRefs.length > 0);
     for (const reference of entry.sourceRefs) assert.ok(references.has(reference), entry.path + ': ' + reference);
     assert.ok(entry.review && (typeof entry.review === 'string' ? entry.review.length > 0 : Object.keys(entry.review).length > 0));
+  }
+});
+
+
+test('the published Isolation and AVP production parents converge through one exact new verifier receipt', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  assert.deepEqual(productionJoinBaselines, {
+    isolationCommit: '9b874e64a2b79def1150e94da30969bbe1cd4480',
+    productionCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    commonCommit: 'c7a0339f86e1de0c2209800a81506cddbc71d804'
+  });
+  assert.deepEqual(Object.keys(productionJoinSuccessors), [path]);
+  assert.deepEqual(Object.keys(productionIncoming), [path]);
+  assert.equal(sha(JSON.stringify(productionJoinSuccessors)), 'a2c80897ee69bcedadf1a6fe15461b85109e84cd2f08689ef04b01df2bb6f2fa');
+  assert.equal(sha(JSON.stringify(productionIncoming)), 'c87ce0e4fdfd3ccb779470f027ebb4cb4cc1fde60934f35ba4af46743acb6ff3');
+  const joined = productionJoinSuccessors[path], incoming = productionIncoming[path];
+  assert.ok(Object.isFrozen(productionJoinBaselines) && Object.isFrozen(productionJoinSuccessors)
+    && Object.isFrozen(productionIncoming) && Object.isFrozen(joined) && Object.isFrozen(incoming));
+  assert.equal(joined.previousSha256, isolationBibleSuccessors[path].currentSha256);
+  assert.equal(incoming.previousSha256, productionBibleSuccessors[path].currentSha256);
+  assert.equal(joined.currentSha256, incoming.currentSha256);
+  assert.equal(sha(read(path)), joined.currentSha256);
+  assert.equal(advanceProductionJoin(path, joined.previousSha256), joined.currentSha256);
+  assert.equal(advanceProductionIncoming(path, incoming.previousSha256), joined.currentSha256);
+  assert.equal(advanceProductionBible(path, productionBibleSuccessors[path].previousSha256), joined.currentSha256);
+  assert.equal(advanceIsolationAfterBible(path, isolationBibleSuccessors[path].previousSha256), joined.currentSha256);
+  for (const endpoint of [joined.previousSha256, incoming.previousSha256, joined.currentSha256,
+    isolationBibleIncoming[path].previousSha256])
+    assert.deepEqual(runtimeView({ [path]: endpoint }), { [path]: joined.currentSha256 });
+});
+
+test('the new production join rejects swapped, skipped and repeated parent endpoints', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  const joined = productionJoinSuccessors[path], incoming = productionIncoming[path];
+  for (const endpoint of [incoming.previousSha256, isolationBibleSuccessors[path].previousSha256,
+    isolationBibleIncoming[path].previousSha256, joined.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceProductionJoin(path, endpoint), /Broken Isolation-bible-to-production-join source chain/);
+  for (const endpoint of [joined.previousSha256, productionBibleSuccessors[path].previousSha256,
+    isolationBibleIncoming[path].previousSha256, incoming.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceProductionIncoming(path, endpoint), /Broken AVP-production-to-Isolation-join source chain/);
+  for (const unknown of ['src/unreviewed.js', 'scripts/verify-public-release-v86.mjs/extra',
+    '__proto__', 'constructor', audit]) {
+    assert.equal(advanceProductionJoin(unknown, 'untouched'), 'untouched');
+    assert.equal(advanceProductionIncoming(unknown, 'untouched'), 'untouched');
+  }
+  assert.equal(Object.hasOwn(productionJoinSuccessors, audit), false);
+  assert.equal(Object.hasOwn(productionIncoming, audit), false);
+});
+
+test('the production join preserves the exact published AVP production and Isolation bible join blocks', () => {
+  const source = read(audit).toString();
+  for (const [begin, end, expected] of [
+    ['// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126', '// END AVP PRODUCTION BIBLE HOST RECEIPTS 20261126',
+      'a4e3785e9afe9551d23a66526e3423f7d4410a32e912530e122bd7bd2ffcda04'],
+    ['// BEGIN ISOLATION BIBLE JOIN HOST RECEIPTS 20261126', '// END ISOLATION BIBLE JOIN HOST RECEIPTS 20261126',
+      'fe517d670141888ec1a278a0592872edac379fc7c7270c98dd820f0eb4a39571']
+  ]) {
+    const start = source.indexOf(begin), stop = source.indexOf(end, start);
+    assert.ok(start >= 0 && stop > start);
+    assert.equal(source.indexOf(begin, start + begin.length), -1);
+    assert.equal(sha(source.slice(start, stop + end.length)), expected);
   }
 });

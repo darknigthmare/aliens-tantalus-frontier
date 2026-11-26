@@ -1,0 +1,1051 @@
+{
+  "version": "0.8.0",
+  "spatialExplore": true,
+  "simulationMode": "live-enemies-and-damage",
+  "failure": "Mort m_staff objectif C05_03 à 451.3 s (Vous n’avez pas survécu · Le Xénomorphe.)",
+  "active": true,
+  "difficulty": "recit",
+  "classic": false,
+  "seed": 20141007,
+  "explore": true,
+  "rescue": true,
+  "projects": true,
+  "scanner": "off",
+  "signals": {
+    "charge": 100,
+    "silent": false,
+    "selected": "noise",
+    "stats": {
+      "scans": 0,
+      "pings": 0,
+      "swaps": 0,
+      "dockCharges": 0,
+      "drained": 0
+    }
+  },
+  "refuges": {
+    "version": 1,
+    "parts": [],
+    "consumed": [],
+    "stations": {
+      "medical": {
+        "powered": false,
+        "installed": false,
+        "uses": 0
+      },
+      "technical": {
+        "powered": false,
+        "installed": false,
+        "uses": 0
+      }
+    }
+  },
+  "rescued": [],
+  "rescueStates": [
+    {
+      "id": "nora",
+      "status": "sheltered",
+      "room": "m_isolation",
+      "health": 70
+    },
+    {
+      "id": "elias",
+      "status": "sheltered",
+      "room": "d_changing",
+      "health": 70
+    }
+  ],
+  "optional": [
+    "O31",
+    "O01",
+    "O02",
+    "O21",
+    "O03"
+  ],
+  "ok": false,
+  "goals": 13,
+  "visited": [
+    "t_cryo",
+    "t_galley",
+    "t_bridge",
+    "t_sas",
+    "s_airlock",
+    "s_terminal",
+    "s_baggage",
+    "s_axel",
+    "s_shop",
+    "s_transit",
+    "y_lobby",
+    "y_archive",
+    "y_workshop",
+    "y_duct",
+    "c_reception",
+    "c_control",
+    "c_server",
+    "sc_station",
+    "m_reception",
+    "m_morley",
+    "m_corridor",
+    "m_staff"
+  ],
+  "transitions": 31,
+  "health": 0,
+  "stats": {
+    "distance": 49914.47175846407,
+    "actions": 13,
+    "hacks": 2,
+    "failures": 0,
+    "transitions": 31,
+    "noises": 229,
+    "alienSteps": 1104,
+    "frames": 9026,
+    "damage": 122,
+    "flameUses": 0,
+    "crafted": 0,
+    "heard": 2,
+    "detections": 1,
+    "rewires": 0,
+    "seals": 0,
+    "breaches": 0,
+    "optional": 5,
+    "escapes": 1,
+    "throws": 2,
+    "blockedThrows": 0
+  },
+  "time": 451.30000000006834,
+  "steps": 9026,
+  "snapshots": [
+    {
+      "goal": 0,
+      "optional": "O31",
+      "description": "Récupérer les effets du quart",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"t_cryo__t_galley\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":20141007,\"room\":\"t_galley\",\"x\":829.5912714224885,\"y\":302,\"face\":1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":8.299999999999983,\"chapter\":0,\"goal\":0,\"flags\":{},\"tools\":{\"torch\":false,\"tracker\":false,\"tuner\":false,\"flame\":false},\"inventory\":{\"scrap\":5,\"chemical\":4,\"battery\":3,\"flare\":2,\"noise\":1,\"emp\":1,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\"],\"opened\":[],\"read\":[],\"completed\":[],\"decoys\":[],\"effects\":[],\"noise\":6.3999999999999995,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":0,\"systems\":{},\"seals\":{},\"optional\":[\"O31\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":823.5000000000018,\"actions\":0,\"hacks\":0,\"failures\":0,\"transitions\":1,\"noises\":4,\"alienSteps\":0,\"frames\":166,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":1,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1000,\"y\":182,\"home\":1000,\"face\":-1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":900,\"y\":180,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1000,\"y\":235,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 0,
+      "description": "Récupérer le dossier de mission",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"t_cryo__t_galley\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":20141007,\"room\":\"t_cryo\",\"x\":904.6014368182655,\"y\":314.08629671512676,\"face\":1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":21.900000000000176,\"chapter\":0,\"goal\":0,\"flags\":{},\"tools\":{\"torch\":false,\"tracker\":false,\"tuner\":false,\"flame\":false},\"inventory\":{\"scrap\":5,\"chemical\":4,\"battery\":3,\"flare\":2,\"noise\":1,\"emp\":1,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\"],\"opened\":[],\"read\":[],\"completed\":[],\"decoys\":[],\"effects\":[],\"noise\":1.2000000000000002,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":0,\"systems\":{},\"seals\":{},\"optional\":[\"O31\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":2439.999999999983,\"actions\":0,\"hacks\":0,\"failures\":0,\"transitions\":2,\"noises\":11,\"alienSteps\":0,\"frames\":438,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":1,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1000,\"y\":182,\"home\":1000,\"face\":-1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":900,\"y\":180,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1000,\"y\":235,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 4,
+      "description": "Consulter le plan des départs",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"s_airlock__s_terminal\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":20141007,\"room\":\"s_terminal\",\"x\":1273.3660159175656,\"y\":315.08296449786826,\"face\":1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":79.19999999999764,\"chapter\":1,\"goal\":4,\"flags\":{},\"tools\":{\"torch\":true,\"tracker\":false,\"tuner\":false,\"flame\":false},\"inventory\":{\"scrap\":13,\"chemical\":8,\"battery\":7,\"flare\":2,\"noise\":1,\"emp\":1,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\"],\"decoys\":[],\"effects\":[],\"noise\":0,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":4,\"systems\":{},\"seals\":{},\"optional\":[\"O31\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":8271.600000000208,\"actions\":4,\"hacks\":0,\"failures\":0,\"transitions\":6,\"noises\":38,\"alienSteps\":0,\"frames\":1584,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":1,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1000,\"y\":182,\"home\":1000,\"face\":-1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":900,\"y\":180,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1000,\"y\":235,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 6,
+      "optional": "O01",
+      "description": "Inventorier le stock abandonné",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"s_terminal__s_shop\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":20141007,\"room\":\"s_shop\",\"x\":1041.5372495835093,\"y\":343.9142367167308,\"face\":-1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":167.3500000000038,\"chapter\":1,\"goal\":6,\"flags\":{\"axel\":true},\"tools\":{\"torch\":true,\"tracker\":false,\"tuner\":false,\"flame\":false},\"inventory\":{\"scrap\":19,\"chemical\":10,\"battery\":12,\"flare\":2,\"noise\":1,\"emp\":1,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\"],\"decoys\":[],\"effects\":[],\"noise\":6.3999999999999995,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":6,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":18261.141073189563,\"actions\":6,\"hacks\":0,\"failures\":0,\"transitions\":11,\"noises\":82,\"alienSteps\":0,\"frames\":3347,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":2,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":984.7017284687795,\"y\":193.81044144770647,\"home\":1000,\"face\":-1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":29.80000000000029,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":900,\"y\":180,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1000,\"y\":235,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 10,
+      "optional": "O02",
+      "description": "Recopier la fiche de maintenance",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"c_control__c_server\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":412112603,\"room\":\"c_server\",\"x\":494.0000000000008,\"y\":300,\"face\":1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":332.0500000000412,\"chapter\":3,\"goal\":10,\"flags\":{\"axel\":true,\"tuner\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":27,\"chemical\":14,\"battery\":16,\"flare\":2,\"noise\":1,\"emp\":2,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\"],\"decoys\":[],\"effects\":[],\"noise\":6.3999999999999995,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":10,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":36592.07175846722,\"actions\":10,\"hacks\":1,\"failures\":0,\"transitions\":23,\"noises\":163,\"alienSteps\":0,\"frames\":6641,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":3,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":814.9118842561436,\"y\":158.19194990484672,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"warning\",\"warning\":1.800000000000001,\"quiet\":0,\"windup\":0,\"memory\":{\"x\":903.6602561550441,\"y\":127.55684611828273,\"ttl\":5}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":922.8341811491949,\"y\":337.99999999979815,\"home\":1000,\"face\":1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 10,
+      "description": "Établir la liaison avec Samuels",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"c_control__c_server\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":412112603,\"room\":\"c_control\",\"x\":1218.708768601051,\"y\":315.08441918556537,\"face\":-1,\"actor\":\"Amanda\",\"health\":100,\"breath\":100,\"time\":341.35000000004334,\"chapter\":3,\"goal\":10,\"flags\":{\"axel\":true,\"tuner\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":27,\"chemical\":14,\"battery\":16,\"flare\":2,\"noise\":1,\"emp\":2,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\"],\"decoys\":[],\"effects\":[],\"noise\":0,\"alert\":50,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":10,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":37683.971758466956,\"actions\":10,\"hacks\":1,\"failures\":0,\"transitions\":24,\"noises\":167,\"alienSteps\":0,\"frames\":6827,\"damage\":0,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":3,\"escapes\":0,\"throws\":0,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":814.9118842561436,\"y\":158.19194990484672,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"warning\",\"warning\":1.800000000000001,\"quiet\":0,\"windup\":0,\"memory\":{\"x\":903.6602561550441,\"y\":127.55684611828273,\"ttl\":5}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1139.5140894559165,\"y\":373.91559886697655,\"home\":1000,\"face\":1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":{\"x\":1218.708768601051,\"y\":315.08441918556537,\"ttl\":5}},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 11,
+      "optional": "O21",
+      "description": "Vérifier le panneau de correspondances",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"y_lobby__sc_station\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":3608954404,\"room\":\"sc_station\",\"x\":1079.6912714224884,\"y\":302,\"face\":1,\"actor\":\"Amanda\",\"health\":78,\"breath\":100,\"time\":387.0500000000537,\"chapter\":4,\"goal\":11,\"flags\":{\"axel\":true,\"tuner\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":30,\"chemical\":15,\"battery\":17,\"flare\":2,\"noise\":1,\"emp\":0,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\",\"sc_station\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\",\"c_control.p10\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\",\"C04_02\"],\"decoys\":[],\"effects\":[],\"noise\":6.3999999999999995,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":11,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\",\"O21\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":42722.571758465754,\"actions\":11,\"hacks\":2,\"failures\":0,\"transitions\":27,\"noises\":195,\"alienSteps\":0,\"frames\":7741,\"damage\":22,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":4,\"escapes\":0,\"throws\":2,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":945.1116281338453,\"y\":158.00691336775267,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"hostile\",\"warning\":2.000000000000001,\"quiet\":1.4500000000000006,\"windup\":0,\"memory\":{\"x\":1013.3527521042579,\"y\":158.0157145221105,\"ttl\":3.550000000000005}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1028.6321588259125,\"y\":371.7587739240473,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 11,
+      "description": "Contacter le docteur Kuhlman",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"sc_station__m_reception\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":3608954404,\"room\":\"m_reception\",\"x\":1075.7964294639016,\"y\":312.41200246177743,\"face\":-1,\"actor\":\"Amanda\",\"health\":78,\"breath\":100,\"time\":395.4000000000556,\"chapter\":4,\"goal\":11,\"flags\":{\"axel\":true,\"tuner\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":30,\"chemical\":15,\"battery\":17,\"flare\":2,\"noise\":1,\"emp\":0,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\",\"sc_station\",\"m_reception\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\",\"c_control.p10\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\",\"C04_02\"],\"decoys\":[],\"effects\":[],\"noise\":0,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":11,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\",\"O21\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":43698.57175846552,\"actions\":11,\"hacks\":2,\"failures\":0,\"transitions\":28,\"noises\":199,\"alienSteps\":0,\"frames\":7908,\"damage\":22,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":4,\"escapes\":0,\"throws\":2,\"blockedThrows\":0},\"alien\":{\"active\":false,\"room\":\"m_corridor\",\"x\":1650,\"y\":300,\"mode\":\"vent\",\"timer\":5,\"memory\":null,\"destination\":null,\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":null,\"suspicion\":0,\"groundTime\":0,\"cue\":false,\"breach\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":945.1116281338453,\"y\":158.00691336775267,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"hostile\",\"warning\":2.000000000000001,\"quiet\":1.4500000000000006,\"windup\":0,\"memory\":{\"x\":1013.3527521042579,\"y\":158.0157145221105,\"ttl\":3.550000000000005}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1028.6321588259125,\"y\":371.7587739240473,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 12,
+      "description": "Prendre la carte de Morley",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"m_reception__m_morley\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":1227060200,\"room\":\"m_morley\",\"x\":876.9421891486538,\"y\":312.61090091457396,\"face\":1,\"actor\":\"Amanda\",\"health\":78,\"breath\":100,\"time\":411.80000000005936,\"chapter\":4,\"goal\":12,\"flags\":{\"axel\":true,\"tuner\":true,\"hunt\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":32,\"chemical\":16,\"battery\":18,\"flare\":2,\"noise\":1,\"emp\":0,\"medkit\":1},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\",\"sc_station\",\"m_reception\",\"m_morley\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\",\"c_control.p10\",\"m_reception.p09\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\",\"C04_02\",\"C05_01\"],\"decoys\":[],\"effects\":[],\"noise\":0,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":12,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\",\"O21\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":45461.4717584651,\"actions\":12,\"hacks\":2,\"failures\":0,\"transitions\":29,\"noises\":207,\"alienSteps\":314,\"frames\":8236,\"damage\":22,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":4,\"escapes\":0,\"throws\":2,\"blockedThrows\":0},\"alien\":{\"active\":true,\"room\":\"m_records\",\"x\":1249.9956292183856,\"y\":337.9949239038713,\"mode\":\"patrol\",\"timer\":1.30000000000001,\"memory\":null,\"destination\":{\"room\":\"m_records\",\"x\":313.943092150148,\"y\":189.99581796117127},\"face\":-1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":\"m_corridor\",\"suspicion\":0,\"groundTime\":11.65000000000003,\"cue\":false,\"breach\":null,\"travel\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":945.1116281338453,\"y\":158.00691336775267,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"hostile\",\"warning\":2.000000000000001,\"quiet\":1.4500000000000006,\"windup\":0,\"memory\":{\"x\":1013.3527521042579,\"y\":158.0157145221105,\"ttl\":3.550000000000005}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1028.6321588259125,\"y\":371.7587739240473,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    },
+    {
+      "goal": 13,
+      "optional": "O03",
+      "description": "Réactiver le tableau d’appel",
+      "save": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"m_corridor__m_staff\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":1907318949,\"room\":\"m_staff\",\"x\":1118.548669945472,\"y\":349.5888277795673,\"face\":1,\"actor\":\"Amanda\",\"health\":78,\"breath\":100,\"time\":448.75000000006776,\"chapter\":4,\"goal\":13,\"flags\":{\"axel\":true,\"tuner\":true,\"hunt\":true,\"morley\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":34,\"chemical\":17,\"battery\":19,\"flare\":2,\"noise\":2,\"emp\":0,\"medkit\":2},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":true,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\",\"sc_station\",\"m_reception\",\"m_morley\",\"m_corridor\",\"m_staff\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\",\"c_control.p10\",\"m_reception.p09\",\"m_morley.p08\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\",\"C04_02\",\"C05_01\",\"C05_02\"],\"decoys\":[],\"effects\":[],\"noise\":6.3999999999999995,\"alert\":0,\"dead\":false,\"ended\":false,\"classic\":false,\"checkpointCount\":13,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\",\"O21\",\"O03\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":49530.17175846413,\"actions\":13,\"hacks\":2,\"failures\":0,\"transitions\":31,\"noises\":226,\"alienSteps\":1053,\"frames\":8975,\"damage\":22,\"flameUses\":0,\"crafted\":0,\"heard\":0,\"detections\":0,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":5,\"escapes\":1,\"throws\":2,\"blockedThrows\":0},\"alien\":{\"active\":true,\"room\":\"m_staff\",\"x\":1360,\"y\":300,\"mode\":\"vent\",\"timer\":1.699999999999908,\"memory\":null,\"destination\":null,\"face\":1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":\"m_records\",\"suspicion\":0,\"groundTime\":0,\"cue\":true,\"breach\":null,\"travel\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":945.1116281338453,\"y\":158.00691336775267,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"hostile\",\"warning\":2.000000000000001,\"quiet\":1.4500000000000006,\"windup\":0,\"memory\":{\"x\":1013.3527521042579,\"y\":158.0157145221105,\"ttl\":3.550000000000005}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1028.6321588259125,\"y\":371.7587739240473,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+    }
+  ],
+  "transcript": [
+    {
+      "id": "C01_01",
+      "room": "t_cryo",
+      "health": 100,
+      "time": 26.95,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C01_02",
+      "room": "t_bridge",
+      "health": 100,
+      "time": 41.8,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C01_03",
+      "room": "t_sas",
+      "health": 100,
+      "time": 53.65,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C02_01",
+      "room": "s_airlock",
+      "health": 100,
+      "time": 67.1,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C02_02",
+      "room": "s_terminal",
+      "health": 100,
+      "time": 85.9,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C02_03",
+      "room": "s_axel",
+      "health": 100,
+      "time": 122.3,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C02_04",
+      "room": "s_transit",
+      "health": 100,
+      "time": 232.5,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C03_01",
+      "room": "y_archive",
+      "health": 100,
+      "time": 264.05,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C03_02",
+      "room": "y_workshop",
+      "health": 100,
+      "time": 279.55,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C04_01",
+      "room": "c_reception",
+      "health": 100,
+      "time": 310.1,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C04_02",
+      "room": "c_control",
+      "health": 100,
+      "time": 347.7,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C05_01",
+      "room": "m_reception",
+      "health": 78,
+      "time": 401.15,
+      "alienRoom": "m_corridor"
+    },
+    {
+      "id": "C05_02",
+      "room": "m_morley",
+      "health": 78,
+      "time": 416.8,
+      "alienRoom": "m_records"
+    }
+  ],
+  "visitedTargets": [
+    {
+      "goal": "C01_01",
+      "room": "t_cryo",
+      "x": 904.6014368182655,
+      "y": 314.08629671512676,
+      "time": 21.900000000000176
+    },
+    {
+      "goal": "C01_02",
+      "room": "t_bridge",
+      "x": 949.889935381405,
+      "y": 314.50440862042234,
+      "time": 36.500000000000064
+    },
+    {
+      "goal": "C01_03",
+      "room": "t_sas",
+      "x": 774.6000000000018,
+      "y": 300,
+      "time": 48.74999999999937
+    },
+    {
+      "goal": "C02_01",
+      "room": "s_airlock",
+      "x": 963.7000000000025,
+      "y": 300,
+      "time": 61.649999999998634
+    },
+    {
+      "goal": "C02_02",
+      "room": "s_terminal",
+      "x": 1273.3660159175656,
+      "y": 315.08296449786826,
+      "time": 79.19999999999764
+    },
+    {
+      "goal": "C02_03",
+      "room": "s_axel",
+      "x": 1104.0000000000016,
+      "y": 300,
+      "time": 117.14999999999549
+    },
+    {
+      "goal": "C02_04",
+      "room": "s_transit",
+      "x": 1439.014061233131,
+      "y": 314.14401219114586,
+      "time": 225.25000000001697
+    },
+    {
+      "goal": "C03_01",
+      "room": "y_archive",
+      "x": 984.1880031997302,
+      "y": 316.2014522363465,
+      "time": 257.6500000000243
+    },
+    {
+      "goal": "C03_02",
+      "room": "y_workshop",
+      "x": 1055.8989285946352,
+      "y": 314.2853221013009,
+      "time": 273.75000000002797
+    },
+    {
+      "goal": "C04_01",
+      "room": "c_reception",
+      "x": 1014.5424908913051,
+      "y": 313.0681844366671,
+      "time": 304.750000000035
+    },
+    {
+      "goal": "C04_02",
+      "room": "c_control",
+      "x": 1218.708768601051,
+      "y": 315.08441918556537,
+      "time": 341.35000000004334
+    },
+    {
+      "goal": "C05_01",
+      "room": "m_reception",
+      "x": 1075.7964294639016,
+      "y": 312.41200246177743,
+      "time": 395.4000000000556
+    },
+    {
+      "goal": "C05_02",
+      "room": "m_morley",
+      "x": 876.9421891486538,
+      "y": 312.61090091457396,
+      "time": 411.80000000005936
+    }
+  ],
+  "events": [
+    {
+      "time": 1.15,
+      "type": "info",
+      "text": "Passage · Torrens · Carré de l’équipage"
+    },
+    {
+      "type": "transition",
+      "from": "t_cryo",
+      "to": "t_galley",
+      "time": 1.15
+    },
+    {
+      "time": 8.25,
+      "type": "archive",
+      "text": "Amanda — Une table attend le prochain repas de quart. Derrière la cloison, les alarmes de cryostase sont déjà éteintes."
+    },
+    {
+      "time": 14.8,
+      "type": "info",
+      "text": "Passage · Torrens · Cryostase"
+    },
+    {
+      "type": "transition",
+      "from": "t_galley",
+      "to": "t_cryo",
+      "time": 14.8
+    },
+    {
+      "time": 22.7,
+      "type": "dialogue",
+      "text": "Amanda — Quinze ans. Je ne cherche pas une explication parfaite. Je cherche une trace."
+    },
+    {
+      "time": 26.9,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 28.55,
+      "type": "info",
+      "text": "Passage · Torrens · Passerelle"
+    },
+    {
+      "type": "transition",
+      "from": "t_cryo",
+      "to": "t_bridge",
+      "time": 28.55
+    },
+    {
+      "time": 37.2,
+      "type": "dialogue",
+      "text": "Samuels — L’enregistreur du Nostromo a été transféré sur Sevastopol. Nous essaierons d’y accéder ensemble."
+    },
+    {
+      "time": 41.75,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 43.45,
+      "type": "info",
+      "text": "Changement de niveau · Torrens · Sas de transfert"
+    },
+    {
+      "type": "transition",
+      "from": "t_bridge",
+      "to": "t_sas",
+      "time": 43.45
+    },
+    {
+      "time": 50.25,
+      "type": "dialogue",
+      "text": "Verlaine — Les communications ne répondent pas. Vérifiez votre équipement avant de sortir."
+    },
+    {
+      "time": 53.6,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 54.8,
+      "type": "info",
+      "text": "Traversée extérieure · Sevastopol · Arrivée endommagée"
+    },
+    {
+      "type": "transition",
+      "from": "t_sas",
+      "to": "s_airlock",
+      "time": 54.8
+    },
+    {
+      "time": 63.15,
+      "type": "dialogue",
+      "text": "Amanda — Le sas tient. Il faut trouver une voie vers le terminal."
+    },
+    {
+      "time": 67.05,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 68.6,
+      "type": "info",
+      "text": "Passage · Terminal · Hall des départs"
+    },
+    {
+      "type": "transition",
+      "from": "s_airlock",
+      "to": "s_terminal",
+      "time": 68.6
+    },
+    {
+      "time": 80,
+      "type": "dialogue",
+      "text": "Journal — Le terminal dessert le transit par la manutention. La boutique possède encore un stock de dépannage."
+    },
+    {
+      "time": 85.85,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 94.15,
+      "type": "info",
+      "text": "Changement de niveau · Terminal · Tri des bagages"
+    },
+    {
+      "type": "transition",
+      "from": "s_terminal",
+      "to": "s_baggage",
+      "time": 94.15
+    },
+    {
+      "time": 109.15,
+      "type": "info",
+      "text": "Passage · Maintenance · Passage d’Axel"
+    },
+    {
+      "type": "transition",
+      "from": "s_baggage",
+      "to": "s_axel",
+      "time": 109.15
+    },
+    {
+      "time": 117.85,
+      "type": "dialogue",
+      "text": "Axel — Baisse-toi près des portes. Ceux qui restent ici n’ouvrent plus aux inconnus."
+    },
+    {
+      "time": 122.25,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 134.55,
+      "type": "info",
+      "text": "Passage · Terminal · Tri des bagages"
+    },
+    {
+      "type": "transition",
+      "from": "s_axel",
+      "to": "s_baggage",
+      "time": 134.55
+    },
+    {
+      "time": 149.35,
+      "type": "info",
+      "text": "Changement de niveau · Terminal · Hall des départs"
+    },
+    {
+      "type": "transition",
+      "from": "s_baggage",
+      "to": "s_terminal",
+      "time": 149.35
+    },
+    {
+      "time": 158.2,
+      "type": "info",
+      "text": "Passage · Terminal · Boutique fermée"
+    },
+    {
+      "type": "transition",
+      "from": "s_terminal",
+      "to": "s_shop",
+      "time": 158.2
+    },
+    {
+      "time": 167.3,
+      "type": "archive",
+      "text": "Le tiroir contient encore trois piles et des pièces de connectique."
+    },
+    {
+      "time": 175.95,
+      "type": "info",
+      "text": "Passage · Terminal · Hall des départs"
+    },
+    {
+      "type": "transition",
+      "from": "s_shop",
+      "to": "s_terminal",
+      "time": 175.95
+    },
+    {
+      "time": 185.35,
+      "type": "info",
+      "text": "Changement de niveau · Terminal · Tri des bagages"
+    },
+    {
+      "type": "transition",
+      "from": "s_terminal",
+      "to": "s_baggage",
+      "time": 185.35
+    },
+    {
+      "time": 200.35,
+      "type": "info",
+      "text": "Passage · Maintenance · Passage d’Axel"
+    },
+    {
+      "type": "transition",
+      "from": "s_baggage",
+      "to": "s_axel",
+      "time": 200.35
+    },
+    {
+      "time": 213.65,
+      "type": "info",
+      "text": "Changement de niveau · Transit · Échangeur central"
+    },
+    {
+      "type": "transition",
+      "from": "s_axel",
+      "to": "s_transit",
+      "time": 213.65
+    },
+    {
+      "time": 226.75,
+      "type": "dialogue",
+      "text": "Amanda — Axel ne répond plus. Quelque chose se déplace dans les conduits."
+    },
+    {
+      "time": 232.45,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 235.2,
+      "type": "info",
+      "text": "Ascenseur · Tour Systech · Accueil"
+    },
+    {
+      "type": "transition",
+      "from": "s_transit",
+      "to": "y_lobby",
+      "time": 235.2
+    },
+    {
+      "time": 249.95,
+      "type": "info",
+      "text": "Passage · Systech · Enregistreur de vol"
+    },
+    {
+      "type": "transition",
+      "from": "y_lobby",
+      "to": "y_archive",
+      "time": 249.95
+    },
+    {
+      "time": 259.55,
+      "type": "dialogue",
+      "text": "Amanda — L’appareil est là. Mais les données ont disparu. Pourquoi le conserver vide ?"
+    },
+    {
+      "time": 264,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 265.9,
+      "type": "info",
+      "text": "Passage · Systech · Atelier des accès"
+    },
+    {
+      "type": "transition",
+      "from": "y_archive",
+      "to": "y_workshop",
+      "time": 265.9
+    },
+    {
+      "time": 274.85,
+      "type": "info",
+      "text": "Syntoniseur : reproduisez la séquence. Le temps continue."
+    },
+    {
+      "time": 274.95,
+      "type": "dialogue",
+      "text": "Amanda — Les fréquences sont stables. Je peux ouvrir les accès Seegson."
+    },
+    {
+      "time": 279.5,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 281.7,
+      "type": "info",
+      "text": "Conduit de maintenance · Systech · Conduit de retour"
+    },
+    {
+      "type": "transition",
+      "from": "y_workshop",
+      "to": "y_duct",
+      "time": 281.7
+    },
+    {
+      "time": 291.6,
+      "type": "info",
+      "text": "Conduit de maintenance · Tour Systech · Accueil"
+    },
+    {
+      "type": "transition",
+      "from": "y_duct",
+      "to": "y_lobby",
+      "time": 291.6
+    },
+    {
+      "time": 294.5,
+      "type": "warning",
+      "text": "Survivant armé · Reculez. Ne venez pas plus près."
+    },
+    {
+      "type": "guard-warning",
+      "time": 294.5,
+      "enemy": "human-systech",
+      "room": "y_lobby"
+    },
+    {
+      "time": 296.25,
+      "type": "info",
+      "text": "Ascenseur · Seegson · Accueil communications"
+    },
+    {
+      "type": "transition",
+      "from": "y_lobby",
+      "to": "c_reception",
+      "time": 296.25
+    },
+    {
+      "time": 305.55,
+      "type": "dialogue",
+      "text": "Amanda — Un écho n’est pas une identité. Il faudra regarder avant de traverser."
+    },
+    {
+      "time": 310.05,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "time": 311.95,
+      "type": "info",
+      "text": "Passage · Seegson · Salle des transmissions"
+    },
+    {
+      "type": "transition",
+      "from": "c_reception",
+      "to": "c_control",
+      "time": 311.95
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas mécaniques",
+      "side": "TOUT PRÈS",
+      "room": "c_control",
+      "time": 318.35
+    },
+    {
+      "time": 327.85,
+      "type": "info",
+      "text": "Passage · Seegson · Relais de service"
+    },
+    {
+      "type": "transition",
+      "from": "c_control",
+      "to": "c_server",
+      "time": 327.85
+    },
+    {
+      "time": 332,
+      "type": "archive",
+      "text": "La procédure de sécurité indique où brancher une cellule IEM."
+    },
+    {
+      "time": 335.75,
+      "type": "info",
+      "text": "Passage · Seegson · Salle des transmissions"
+    },
+    {
+      "type": "transition",
+      "from": "c_server",
+      "to": "c_control",
+      "time": 335.75
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas mécaniques",
+      "side": "À GAUCHE",
+      "room": "c_control",
+      "time": 341.65
+    },
+    {
+      "type": "item-thrown",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "blocked": true,
+      "time": 341.7
+    },
+    {
+      "type": "item-landed",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "time": 342
+    },
+    {
+      "type": "item-thrown",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "blocked": true,
+      "time": 342.05
+    },
+    {
+      "type": "item-landed",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "time": 342.35
+    },
+    {
+      "type": "emp-impact",
+      "room": "c_control",
+      "hit": [
+        "joe-comms"
+      ],
+      "time": 342.45
+    },
+    {
+      "type": "item-activated",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "time": 342.45
+    },
+    {
+      "time": 342.45,
+      "type": "info",
+      "text": "Syntoniseur : reproduisez la séquence. Le temps continue."
+    },
+    {
+      "time": 342.55,
+      "type": "dialogue",
+      "text": "Samuels — Taylor est blessée. Le centre médical est notre meilleure chance."
+    },
+    {
+      "type": "emp-impact",
+      "room": "c_control",
+      "hit": [
+        "joe-comms"
+      ],
+      "time": 342.8
+    },
+    {
+      "type": "item-activated",
+      "kind": "emp",
+      "room": "c_control",
+      "x": 1074.708768601051,
+      "y": 315.08441918556537,
+      "time": 342.8
+    },
+    {
+      "time": 347.65,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas mécaniques",
+      "side": "TOUT PRÈS",
+      "room": "c_control",
+      "time": 351.2
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas mécaniques",
+      "side": "À DROITE",
+      "room": "c_control",
+      "time": 353.65
+    },
+    {
+      "time": 362.2,
+      "type": "info",
+      "text": "Passage · Seegson · Accueil communications"
+    },
+    {
+      "type": "transition",
+      "from": "c_control",
+      "to": "c_reception",
+      "time": 362.2
+    },
+    {
+      "time": 375.3,
+      "type": "info",
+      "text": "Ascenseur · Tour Systech · Accueil"
+    },
+    {
+      "type": "transition",
+      "from": "c_reception",
+      "to": "y_lobby",
+      "time": 375.3
+    },
+    {
+      "type": "guard-hostile",
+      "time": 375.5,
+      "enemy": "human-systech",
+      "room": "y_lobby"
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas rapides",
+      "side": "À GAUCHE",
+      "room": "y_lobby",
+      "time": 375.9
+    },
+    {
+      "time": 376.1,
+      "type": "warning",
+      "text": "Survivant hostile · 22 dégâts"
+    },
+    {
+      "time": 377.85,
+      "type": "info",
+      "text": "Transfert en tram · SciMed · Station Towerlink"
+    },
+    {
+      "type": "transition",
+      "from": "y_lobby",
+      "to": "sc_station",
+      "time": 377.85
+    },
+    {
+      "time": 387,
+      "type": "archive",
+      "text": "Amanda — Le panneau conserve les anciens départs. La ligne directe dessert l’admission ; le quai de correspondance permet aussi de rejoindre la logistique."
+    },
+    {
+      "time": 394.35,
+      "type": "info",
+      "text": "Ascenseur · San Cristobal · Admission"
+    },
+    {
+      "type": "transition",
+      "from": "sc_station",
+      "to": "m_reception",
+      "time": 394.35
+    },
+    {
+      "time": 396.1,
+      "type": "dialogue",
+      "text": "Kuhlman — Les réserves sont verrouillées. Morley avait accès à la pharmacie."
+    },
+    {
+      "type": "alien-cue",
+      "room": "m_corridor",
+      "time": 398.35
+    },
+    {
+      "type": "alien-emergence",
+      "room": "m_corridor",
+      "time": 400.15
+    },
+    {
+      "time": 401.1,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "type": "alien-threshold",
+      "room": "m_records",
+      "time": 408.1
+    },
+    {
+      "time": 408.15,
+      "type": "info",
+      "text": "Conduit de maintenance · San Cristobal · Bureau de Morley"
+    },
+    {
+      "type": "transition",
+      "from": "m_reception",
+      "to": "m_morley",
+      "time": 408.15
+    },
+    {
+      "time": 412.6,
+      "type": "dialogue",
+      "text": "Amanda — La carte est encore sur place. Ne pas rester dans cette pièce."
+    },
+    {
+      "time": 416.75,
+      "type": "info",
+      "text": "Réserve ouverte : +2 pièces, +1 produit, +1 pile."
+    },
+    {
+      "type": "alien-threshold",
+      "room": "m_staff",
+      "time": 424.6
+    },
+    {
+      "time": 427.4,
+      "type": "info",
+      "text": "Passage · San Cristobal · Couloir des soins"
+    },
+    {
+      "type": "transition",
+      "from": "m_morley",
+      "to": "m_corridor",
+      "time": 427.4
+    },
+    {
+      "time": 439.05,
+      "type": "info",
+      "text": "Passage · San Cristobal · Salle de garde"
+    },
+    {
+      "type": "transition",
+      "from": "m_corridor",
+      "to": "m_staff",
+      "time": 439.05
+    },
+    {
+      "type": "alien-cue",
+      "room": "m_staff",
+      "time": 448.65
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Grille métallique",
+      "side": "À DROITE",
+      "room": "m_staff",
+      "time": 448.65
+    },
+    {
+      "time": 448.65,
+      "type": "warning",
+      "text": "Une grille grince. Quelque chose descend."
+    },
+    {
+      "time": 448.7,
+      "type": "archive",
+      "text": "Le poste de garde rend son dernier kit. Le voyant d’appel ne répond plus."
+    },
+    {
+      "type": "alien-emergence",
+      "room": "m_staff",
+      "time": 450.45
+    },
+    {
+      "type": "perceived-sound",
+      "label": "Pas lourds",
+      "side": "TOUT PRÈS",
+      "room": "m_staff",
+      "time": 451.1
+    },
+    {
+      "type": "alien-detection",
+      "room": "m_staff",
+      "time": 451.2
+    },
+    {
+      "time": 451.3,
+      "type": "danger",
+      "text": "Vous n’avez pas survécu · Le Xénomorphe."
+    }
+  ],
+  "finalSave": "{\"schema\":1,\"id\":\"tantalus.alien-isolation\",\"state\":{\"schema\":1,\"spatial\":{\"waypoint\":null,\"lastPortal\":\"m_corridor__m_staff\"},\"version\":\"0.8.0\",\"difficulty\":\"recit\",\"seed\":1045131594,\"room\":\"m_staff\",\"x\":1409.5839080013984,\"y\":348.2330290633716,\"face\":-1,\"actor\":\"Amanda\",\"health\":0,\"breath\":100,\"time\":451.30000000006834,\"chapter\":4,\"goal\":13,\"flags\":{\"axel\":true,\"tuner\":true,\"hunt\":true,\"morley\":true},\"tools\":{\"torch\":true,\"tracker\":true,\"tuner\":true,\"flame\":false},\"inventory\":{\"scrap\":34,\"chemical\":17,\"battery\":19,\"flare\":2,\"noise\":2,\"emp\":0,\"medkit\":2},\"fuel\":0,\"stashedFuel\":0,\"hidden\":null,\"crouched\":false,\"torch\":false,\"tracker\":false,\"visited\":[\"t_cryo\",\"t_galley\",\"t_bridge\",\"t_sas\",\"s_airlock\",\"s_terminal\",\"s_baggage\",\"s_axel\",\"s_shop\",\"s_transit\",\"y_lobby\",\"y_archive\",\"y_workshop\",\"y_duct\",\"c_reception\",\"c_control\",\"c_server\",\"sc_station\",\"m_reception\",\"m_morley\",\"m_corridor\",\"m_staff\"],\"opened\":[\"t_cryo.p08\",\"t_bridge.p08\",\"t_sas.p07\",\"s_airlock.p07\",\"s_terminal.p10\",\"s_axel.p07\",\"s_transit.p11\",\"y_archive.p08\",\"y_workshop.p07\",\"c_reception.p08\",\"c_control.p10\",\"m_reception.p09\",\"m_morley.p08\"],\"read\":[],\"completed\":[\"C01_01\",\"C01_02\",\"C01_03\",\"C02_01\",\"C02_02\",\"C02_03\",\"C02_04\",\"C03_01\",\"C03_02\",\"C04_01\",\"C04_02\",\"C05_01\",\"C05_02\"],\"decoys\":[],\"effects\":[],\"noise\":43.2,\"alert\":100,\"dead\":true,\"ended\":false,\"classic\":false,\"checkpointCount\":13,\"systems\":{},\"seals\":{},\"optional\":[\"O31\",\"O01\",\"O02\",\"O21\",\"O03\"],\"favorites\":[],\"signals\":{\"charge\":100,\"silent\":false,\"selected\":\"noise\",\"stats\":{\"scans\":0,\"pings\":0,\"swaps\":0,\"dockCharges\":0,\"drained\":0}},\"refuges\":{\"version\":1,\"parts\":[],\"consumed\":[],\"stations\":{\"medical\":{\"powered\":false,\"installed\":false,\"uses\":0},\"technical\":{\"powered\":false,\"installed\":false,\"uses\":0}}},\"encounters\":{\"version\":1,\"alarms\":{},\"bodyLoot\":[],\"prey\":null,\"preyHit\":0,\"recovery\":0,\"rescues\":[{\"id\":\"nora\",\"room\":\"m_isolation\",\"x\":365,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0},{\"id\":\"elias\",\"room\":\"d_changing\",\"x\":970,\"y\":350,\"face\":1,\"health\":70,\"status\":\"sheltered\",\"trail\":[],\"bleed\":0,\"stun\":0,\"hitCooldown\":0,\"locker\":null,\"exposed\":false,\"observedUntil\":0,\"passage\":0,\"pulse\":0,\"rewarded\":false,\"revives\":0,\"careful\":false,\"travelled\":0,\"stepDistance\":0,\"stuck\":0}],\"stats\":{\"recruited\":0,\"arrived\":0,\"wounded\":0,\"lost\":0,\"humanKills\":0,\"alarms\":0}},\"protocols\":{\"gemini\":{\"stage\":\"idle\",\"pulse\":0,\"segment\":null,\"remaining\":0,\"closing\":0,\"crossings\":0},\"samuels\":{\"status\":\"idle\",\"heat\":0,\"order\":[],\"mistakes\":0,\"relief\":0,\"overloads\":0},\"anesidora\":{\"status\":\"idle\",\"remaining\":0,\"stabilized\":false,\"cues\":[],\"elapsed\":0}},\"lifeSupport\":{\"oxygen\":100,\"hypoxia\":0,\"damageClock\":0,\"used\":[],\"warnings\":[],\"airlock\":null,\"exposure\":0,\"cycles\":0,\"refills\":0},\"projectiles\":[],\"throwCooldown\":0,\"stats\":{\"distance\":49914.47175846407,\"actions\":13,\"hacks\":2,\"failures\":0,\"transitions\":31,\"noises\":229,\"alienSteps\":1104,\"frames\":9026,\"damage\":122,\"flameUses\":0,\"crafted\":0,\"heard\":2,\"detections\":1,\"rewires\":0,\"seals\":0,\"breaches\":0,\"optional\":5,\"escapes\":1,\"throws\":2,\"blockedThrows\":0},\"alien\":{\"active\":true,\"room\":\"m_staff\",\"x\":1386.0108180935483,\"y\":353.4946564280349,\"mode\":\"chase\",\"timer\":4.150000000000003,\"memory\":{\"room\":\"m_staff\",\"x\":1409.5839080013984,\"y\":348.2330290633716,\"ttl\":7,\"strength\":2},\"destination\":{\"room\":\"m_staff\",\"x\":337.29328092187643,\"y\":179.6179721248336},\"face\":1,\"habit\":0,\"seenHide\":null,\"moveTimer\":0,\"lastRoom\":\"m_records\",\"suspicion\":1,\"groundTime\":0.8500000000000002,\"cue\":false,\"breach\":null,\"travel\":null},\"enemies\":[{\"id\":\"human-baggage\",\"kind\":\"human\",\"room\":\"s_baggage\",\"x\":1053.8768662888408,\"y\":173.05813952471078,\"home\":1000,\"face\":1,\"min\":1,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"calm\",\"warning\":0,\"quiet\":44.79999999999959,\"windup\":0},{\"id\":\"human-systech\",\"kind\":\"human\",\"room\":\"y_lobby\",\"x\":945.1116281338453,\"y\":158.00691336775267,\"home\":900,\"face\":1,\"min\":2,\"hp\":100,\"cool\":0,\"stun\":0,\"escortCool\":0,\"disposition\":\"hostile\",\"warning\":2.000000000000001,\"quiet\":1.4500000000000006,\"windup\":0,\"memory\":{\"x\":1013.3527521042579,\"y\":158.0157145221105,\"ttl\":3.550000000000005}},{\"id\":\"joe-comms\",\"kind\":\"joe\",\"room\":\"c_control\",\"x\":1028.6321588259125,\"y\":371.7587739240473,\"home\":1000,\"face\":-1,\"min\":3,\"hp\":150,\"cool\":0,\"stun\":0,\"escortCool\":0,\"windup\":0,\"memory\":null},{\"id\":\"joe-cargo\",\"kind\":\"joe\",\"room\":\"d_warehouse\",\"x\":1350,\"y\":185,\"home\":1350,\"face\":1,\"min\":6,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-repair\",\"kind\":\"joe\",\"room\":\"a_labo\",\"x\":1050,\"y\":265,\"home\":1050,\"face\":-1,\"min\":11,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"joe-access\",\"kind\":\"joe\",\"room\":\"a_access\",\"x\":1150,\"y\":300,\"home\":1150,\"face\":-1,\"min\":12,\"hp\":150,\"cool\":0,\"stun\":0},{\"id\":\"facehugger-nest\",\"kind\":\"facehugger\",\"room\":\"r_hive\",\"x\":1080,\"y\":245,\"home\":1080,\"face\":1,\"min\":13,\"hp\":20,\"cool\":0,\"stun\":0}],\"hiddenOrigin\":null}}"
+}

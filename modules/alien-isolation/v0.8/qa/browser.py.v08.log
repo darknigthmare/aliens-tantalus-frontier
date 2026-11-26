@@ -1,0 +1,146 @@
+PASS Démarrage sans requête réseau
+PASS 155 ressources SVG décodées
+PASS Menu initial visible
+PASS Aucune sauvegarde initiale à reprendre
+PASS Trois difficultés disponibles
+CAPTURE 01_menu.png
+PASS Guide ouvert sans lancer la partie
+PASS Nouvelle partie en mode Récit
+PASS Déplacement au clavier
+PASS Premier objectif validé par le clavier réel
+PASS Lampe obtenue
+PASS Lampe commutable
+PASS Posture commutable
+CAPTURE 02_debut.png
+PASS Carte suspend la simulation
+PASS Carte présente les pièces
+PASS Examiner une pièce ne téléporte pas et ne valide aucun objectif
+CAPTURE 03_carte.png
+PASS Retour depuis la carte
+PASS Fabrication en temps réel
+PASS Recette appliquée par le bouton
+CAPTURE 04_equipement.png
+PASS 76 fiches de lieux dans le codex
+PASS 246 règles de conception présentes
+PASS 14 fiches de personnages
+PASS 57 archives présentes, non lues non divulguées
+PASS Trente-deux tâches facultatives présentes
+PASS Recherche sans accents
+PASS Les espaces restent saisissables
+PASS Recherche par nom de local
+PASS Favori ajouté sans déverrouiller le lieu
+PASS Filtre des lieux marqués
+CAPTURE 05_codex.png
+PASS Échap ferme le codex même dans la recherche
+PASS Perte de focus : pause
+PASS Export de sauvegarde disponible
+PASS Export JSON du bon espace de noms
+PASS Avertissement de stockage bloqué sans plantage
+PASS Restauration Consulter le plan des départs
+CAPTURE 06_terminal.png
+PASS Restauration Contacter le docteur Kuhlman
+CAPTURE 07_san_cristobal.png
+PASS Restauration Lancer le leurre de confinement
+CAPTURE 08_gemini.png
+PASS Restauration Isoler P-03 · Ligne principale
+CAPTURE 09_samuels.png
+PASS Restauration Traverser le nid et libérer le relais
+CAPTURE 10_nid.png
+PASS Restauration Lire la copie du journal du Nostromo
+CAPTURE 11_anesidora.png
+PASS Restauration Aligner l’antenne sur le Torrens
+CAPTURE 12_eva.png
+PASS Restauration Réactiver le tableau d’appel
+PASS Tâche O03 conservée à la restauration
+CAPTURE 16_garde.png
+PASS Restauration Ouvrir le lot de pansements stériles
+PASS Tâche O04 conservée à la restauration
+CAPTURE 17_sterilisation.png
+PASS Restauration Vérifier le carnet de consignation
+PASS Tâche O05 conservée à la restauration
+CAPTURE 18_relais.png
+PASS Restauration Inspecter la réserve de sécurité
+PASS Tâche O06 conservée à la restauration
+CAPTURE 19_passerelle.png
+PASS Restauration Récupérer les cellules de diagnostic
+PASS Tâche O07 conservée à la restauration
+CAPTURE 20_diagnostic.png
+PASS Restauration Contrôler la réserve anti-incendie
+PASS Tâche O08 conservée à la restauration
+CAPTURE 21_observation.png
+PASS Restauration Inspecter la réserve de sécurité
+PASS Carte : deux niveaux de logistique
+PASS Carte : filtre de niveau cohérent
+CAPTURE 22_etages.png
+PASS Tableau : extinction par la touche E
+CAPTURE 23_obscurite.png
+PASS Tableau : diversion par le second maintien E
+PASS Dérivation bornée dans le temps
+CAPTURE 24_derivation.png
+PASS T : verrou local et consommation réelle
+CAPTURE 25_verrou.png
+PASS Second T : libération sans surcoût
+PASS 76 pièces rendues en projection normale et CLASSIC
+PASS Écho échantillonné de la créature affiché au détecteur
+CAPTURE 13_traque.png
+PASS Flamme affichée et carburant consommé
+CAPTURE 14_flamme.png
+PASS Projection CLASSIC commutable
+PASS Épilogue affiché après les 52 objectifs
+CAPTURE 15_epilogue.png
+PASS Retour au menu après épilogue
+PASS Menu utilisable en 1280x720
+PASS Menu utilisable en 1024x768
+PASS Import v0.1 par le sélecteur de fichier
+PASS Import v0.1 initialise les nouveaux systèmes
+PASS Restauration Recopier les plans de confinement
+PASS 0.3 tâche O09 et récompense restaurées
+CAPTURE 26_galerie.png
+PASS Restauration Contrôler la pression de la gaine
+PASS 0.3 tâche O10 et récompense restaurées
+CAPTURE 27_plenum.png
+PASS Restauration Stabiliser la boucle de refroidissement
+PASS 0.3 tâche O11 et récompense restaurées
+CAPTURE 28_refroidissement.png
+PASS Restauration Récupérer la batterie de la navette
+PASS 0.3 tâche O12 et récompense restaurées
+CAPTURE 29_service.png
+PASS Restauration KG-348 · Traversée de coque / seuil atteint
+CAPTURE 30_coque.png
+PASS Restauration containment-start
+PASS HUD : fermeture en cours réellement restaurée
+PASS HUD : indique KG-348 et non une mission générique
+CAPTURE 31_confinement.png
+PASS Restauration containment-verified
+PASS Alien encore présent avant la séparation
+CAPTURE 32_confirme.png
+PASS Restauration anesidora-overload
+PASS HUD : rupture visible avec temps réel restant
+CAPTURE 33_vapeur.png
+PASS V ouvre la visée
+PASS Flèches ajustent la visée sans déplacer Amanda
+PASS Visée souris produit un point libre à portée
+CAPTURE 34_visee.png
+PASS G dépense un leurre, puis l’active au point prévisualisé
+PASS Relâcher V quitte la visée
+PASS Réglages de son et effets présents
+PASS Audio synthétisé initialisé après action explicite
+PASS Volume et réduction des effets réellement modifiés
+CAPTURE 35_reglages.png
+PASS Codex : six fiches de protocoles
+CAPTURE 36_protocoles.png
+PASS Import réel v0.2 : objectif et ressources conservés
+PASS Restauration containment-start
+PASS HUD de protocole cadré en 1280x720
+PASS Restauration containment-start
+PASS HUD de protocole cadré en 1024x768
+PASS Gaine : aucune silhouette au sol avant émergence
+PASS Seize poses EVA séparées réellement décodées
+PASS Coffre : trois boutons de reprise réels
+CAPTURE 37_reprises.png
+PASS Bouton de reprise restaure le point sélectionné
+PASS Restauration containment-verified
+PASS Fenêtre : une seule créature, toujours dans le vrai module
+CAPTURE 38_fenetre.png
+PASS Aucune exception JavaScript
+{"pass": 107, "fail": 0, "errors": [], "captures": 38}

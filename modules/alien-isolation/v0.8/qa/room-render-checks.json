@@ -1,0 +1,382 @@
+[
+  {
+    "room": "t_cryo",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "t_bridge",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "t_sas",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_airlock",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_terminal",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_shop",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_baggage",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_axel",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "s_transit",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "y_lobby",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "y_archive",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "y_workshop",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "y_duct",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "c_reception",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "c_control",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "c_server",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_reception",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_corridor",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_morley",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_pharmacy",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_coolant",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_warehouse",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_lift",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "w_bureau",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "w_cells",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "f_surface",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "f_derelict",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_control",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_lab",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_airlock",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "a_access",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "a_labo",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "a_samuels",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "a_core",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_entry",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_alpha",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_hive",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_beta",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "n_dock",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "n_bridge",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "n_engine",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "e_sas",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "e_antenna",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "e_clamps",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "t_return",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_staff",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_sterile",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_relay",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_gantry",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "a_service",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_observation",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_observation",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_plenum",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_hull",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "n_coolant",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "n_service",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_records",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_isolation",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "e_lockers",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "e_catwalk",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_triage",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_refuge",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_changing",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_refuge",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "sc_station",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "h_galleria_low",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "h_galleria_high",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "h_habitation",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "h_upper",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "m_morgue",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_fluid",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "d_orientation",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "r_maintenance",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "g_hazard",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "t_galley",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "room": "f_pilot",
+    "ok": true,
+    "error": ""
+  }
+]

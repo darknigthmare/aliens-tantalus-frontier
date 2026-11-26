@@ -122,7 +122,11 @@
     "qa:fiorina": "node scripts/qa-fiorina-native-v114.mjs",
     "test:fiorina:sprites": "node --test scripts/verify-fiorina-sprite-renderer-v115.mjs scripts/verify-fiorina-sprite-admissions-v115.mjs",
     "qa:fiorina:sprites": "node scripts/qa-fiorina-sprites-v115.mjs",
-    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs"
+    "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs",
+    "test:dlc:isolation": "npm --prefix modules/alien-isolation/v0.8 test && node --test scripts/verify-alien-isolation-dlc-integration.mjs",
+    "check:dlc:isolation": "node scripts/public-alien-isolation-dlc-admissions.mjs",
+    "build:dlc:isolation": "node scripts/build-alien-isolation-dlc.mjs",
+    "qa:dlc:isolation": "python3 -B scripts/qa-alien-isolation-integration.py"
   },
   "engines": {
     "node": ">=22"

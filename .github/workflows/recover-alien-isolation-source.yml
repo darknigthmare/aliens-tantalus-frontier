@@ -1,0 +1,45 @@
+name: Recover exact Alien Isolation source
+on:
+  push:
+    branches: ['codex/integrate-alien-isolation-20261126']
+    paths:
+      - 'scripts/recover-alien-isolation-source.py'
+      - '.github/workflows/recover-alien-isolation-source.yml'
+permissions:
+  contents: write
+concurrency:
+  group: recover-alien-isolation-source
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.repository == 'darknigthmare/aliens-tantalus-frontier'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Restore the pinned archive and verify every byte
+        run: python3 scripts/recover-alien-isolation-source.py
+      - name: Validate the actual recovered package and integration
+        run: |
+          npm run test:dlc:isolation
+          npm run test:dlc
+          npm run check:dlc:isolation
+      - name: Publish only the verified recovered members
+        run: |
+          git add -f -- modules/alien-isolation/v0.8 modules/alien-isolation/RECOVERY_MANIFEST.json dlc/alien-isolation/game.html
+          python3 - <<'PY'
+          import subprocess
+          allowed = ("modules/alien-isolation/v0.8/",)
+          exact = {"modules/alien-isolation/RECOVERY_MANIFEST.json", "dlc/alien-isolation/game.html"}
+          paths = subprocess.check_output(["git", "diff", "--cached", "--name-only"], text=True).splitlines()
+          if any(path not in exact and not path.startswith(allowed) for path in paths):
+              raise RuntimeError("Unexpected staged file; no publication performed.")
+          PY
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat(isolation): restore verified complete V0.8 package"
+          git push origin HEAD:refs/heads/codex/integrate-alien-isolation-20261126

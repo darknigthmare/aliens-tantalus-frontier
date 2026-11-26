@@ -1,0 +1,788 @@
+{
+  "runner": "Playwright Python / Chromium installé",
+  "loading": "Page.set_content du HTML autoportant. Navigation file:// et localhost interdite par la politique du navigateur ; aucune politique modifiée.",
+  "checks": [
+    {
+      "name": "Démarrage sans requête réseau",
+      "ok": true
+    },
+    {
+      "name": "155 ressources SVG décodées",
+      "ok": true
+    },
+    {
+      "name": "Menu initial visible",
+      "ok": true
+    },
+    {
+      "name": "Aucune sauvegarde initiale à reprendre",
+      "ok": true
+    },
+    {
+      "name": "Trois difficultés disponibles",
+      "ok": true
+    },
+    {
+      "name": "Guide ouvert sans lancer la partie",
+      "ok": true
+    },
+    {
+      "name": "Nouvelle partie en mode Récit",
+      "ok": true
+    },
+    {
+      "name": "Déplacement au clavier",
+      "ok": true
+    },
+    {
+      "name": "Premier objectif validé par le clavier réel",
+      "ok": true
+    },
+    {
+      "name": "Lampe obtenue",
+      "ok": true
+    },
+    {
+      "name": "Lampe commutable",
+      "ok": true
+    },
+    {
+      "name": "Posture commutable",
+      "ok": true
+    },
+    {
+      "name": "Carte suspend la simulation",
+      "ok": true
+    },
+    {
+      "name": "Carte présente les pièces",
+      "ok": true
+    },
+    {
+      "name": "Examiner une pièce ne téléporte pas et ne valide aucun objectif",
+      "ok": true
+    },
+    {
+      "name": "Retour depuis la carte",
+      "ok": true
+    },
+    {
+      "name": "Fabrication en temps réel",
+      "ok": true
+    },
+    {
+      "name": "Recette appliquée par le bouton",
+      "ok": true
+    },
+    {
+      "name": "76 fiches de lieux dans le codex",
+      "ok": true
+    },
+    {
+      "name": "246 règles de conception présentes",
+      "ok": true
+    },
+    {
+      "name": "14 fiches de personnages",
+      "ok": true
+    },
+    {
+      "name": "57 archives présentes, non lues non divulguées",
+      "ok": true
+    },
+    {
+      "name": "Trente-deux tâches facultatives présentes",
+      "ok": true
+    },
+    {
+      "name": "Recherche sans accents",
+      "ok": true
+    },
+    {
+      "name": "Les espaces restent saisissables",
+      "ok": true
+    },
+    {
+      "name": "Recherche par nom de local",
+      "ok": true
+    },
+    {
+      "name": "Favori ajouté sans déverrouiller le lieu",
+      "ok": true
+    },
+    {
+      "name": "Filtre des lieux marqués",
+      "ok": true
+    },
+    {
+      "name": "Échap ferme le codex même dans la recherche",
+      "ok": true
+    },
+    {
+      "name": "Perte de focus : pause",
+      "ok": true
+    },
+    {
+      "name": "Export de sauvegarde disponible",
+      "ok": true
+    },
+    {
+      "name": "Export JSON du bon espace de noms",
+      "ok": true
+    },
+    {
+      "name": "Avertissement de stockage bloqué sans plantage",
+      "ok": true
+    },
+    {
+      "name": "Restauration Consulter le plan des départs",
+      "ok": true
+    },
+    {
+      "name": "Restauration Contacter le docteur Kuhlman",
+      "ok": true
+    },
+    {
+      "name": "Restauration Lancer le leurre de confinement",
+      "ok": true
+    },
+    {
+      "name": "Restauration Isoler P-03 · Ligne principale",
+      "ok": true
+    },
+    {
+      "name": "Restauration Traverser le nid et libérer le relais",
+      "ok": true
+    },
+    {
+      "name": "Restauration Lire la copie du journal du Nostromo",
+      "ok": true
+    },
+    {
+      "name": "Restauration Aligner l’antenne sur le Torrens",
+      "ok": true
+    },
+    {
+      "name": "Restauration Réactiver le tableau d’appel",
+      "ok": true
+    },
+    {
+      "name": "Tâche O03 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Ouvrir le lot de pansements stériles",
+      "ok": true
+    },
+    {
+      "name": "Tâche O04 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Vérifier le carnet de consignation",
+      "ok": true
+    },
+    {
+      "name": "Tâche O05 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Inspecter la réserve de sécurité",
+      "ok": true
+    },
+    {
+      "name": "Tâche O06 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Récupérer les cellules de diagnostic",
+      "ok": true
+    },
+    {
+      "name": "Tâche O07 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Contrôler la réserve anti-incendie",
+      "ok": true
+    },
+    {
+      "name": "Tâche O08 conservée à la restauration",
+      "ok": true
+    },
+    {
+      "name": "Restauration Inspecter la réserve de sécurité",
+      "ok": true
+    },
+    {
+      "name": "Carte : deux niveaux de logistique",
+      "ok": true
+    },
+    {
+      "name": "Carte : filtre de niveau cohérent",
+      "ok": true
+    },
+    {
+      "name": "Tableau : extinction par la touche E",
+      "ok": true
+    },
+    {
+      "name": "Tableau : diversion par le second maintien E",
+      "ok": true
+    },
+    {
+      "name": "Dérivation bornée dans le temps",
+      "ok": true
+    },
+    {
+      "name": "T : verrou local et consommation réelle",
+      "ok": true
+    },
+    {
+      "name": "Second T : libération sans surcoût",
+      "ok": true
+    },
+    {
+      "name": "76 pièces rendues en projection normale et CLASSIC",
+      "ok": true
+    },
+    {
+      "name": "Écho échantillonné de la créature affiché au détecteur",
+      "ok": true
+    },
+    {
+      "name": "Flamme affichée et carburant consommé",
+      "ok": true
+    },
+    {
+      "name": "Projection CLASSIC commutable",
+      "ok": true
+    },
+    {
+      "name": "Épilogue affiché après les 52 objectifs",
+      "ok": true
+    },
+    {
+      "name": "Retour au menu après épilogue",
+      "ok": true
+    },
+    {
+      "name": "Menu utilisable en 1280x720",
+      "ok": true
+    },
+    {
+      "name": "Menu utilisable en 1024x768",
+      "ok": true
+    },
+    {
+      "name": "Import v0.1 par le sélecteur de fichier",
+      "ok": true
+    },
+    {
+      "name": "Import v0.1 initialise les nouveaux systèmes",
+      "ok": true
+    },
+    {
+      "name": "Restauration Recopier les plans de confinement",
+      "ok": true
+    },
+    {
+      "name": "0.3 tâche O09 et récompense restaurées",
+      "ok": true
+    },
+    {
+      "name": "Restauration Contrôler la pression de la gaine",
+      "ok": true
+    },
+    {
+      "name": "0.3 tâche O10 et récompense restaurées",
+      "ok": true
+    },
+    {
+      "name": "Restauration Stabiliser la boucle de refroidissement",
+      "ok": true
+    },
+    {
+      "name": "0.3 tâche O11 et récompense restaurées",
+      "ok": true
+    },
+    {
+      "name": "Restauration Récupérer la batterie de la navette",
+      "ok": true
+    },
+    {
+      "name": "0.3 tâche O12 et récompense restaurées",
+      "ok": true
+    },
+    {
+      "name": "Restauration KG-348 · Traversée de coque / seuil atteint",
+      "ok": true
+    },
+    {
+      "name": "Restauration containment-start",
+      "ok": true
+    },
+    {
+      "name": "HUD : fermeture en cours réellement restaurée",
+      "ok": true
+    },
+    {
+      "name": "HUD : indique KG-348 et non une mission générique",
+      "ok": true
+    },
+    {
+      "name": "Restauration containment-verified",
+      "ok": true
+    },
+    {
+      "name": "Alien encore présent avant la séparation",
+      "ok": true
+    },
+    {
+      "name": "Restauration anesidora-overload",
+      "ok": true
+    },
+    {
+      "name": "HUD : rupture visible avec temps réel restant",
+      "ok": true
+    },
+    {
+      "name": "V ouvre la visée",
+      "ok": true
+    },
+    {
+      "name": "Flèches ajustent la visée sans déplacer Amanda",
+      "ok": true
+    },
+    {
+      "name": "Visée souris produit un point libre à portée",
+      "ok": true
+    },
+    {
+      "name": "G dépense un leurre, puis l’active au point prévisualisé",
+      "ok": true
+    },
+    {
+      "name": "Relâcher V quitte la visée",
+      "ok": true
+    },
+    {
+      "name": "Réglages de son et effets présents",
+      "ok": true
+    },
+    {
+      "name": "Audio synthétisé initialisé après action explicite",
+      "ok": true
+    },
+    {
+      "name": "Volume et réduction des effets réellement modifiés",
+      "ok": true
+    },
+    {
+      "name": "Codex : six fiches de protocoles",
+      "ok": true
+    },
+    {
+      "name": "Import réel v0.2 : objectif et ressources conservés",
+      "ok": true
+    },
+    {
+      "name": "Restauration containment-start",
+      "ok": true
+    },
+    {
+      "name": "HUD de protocole cadré en 1280x720",
+      "ok": true
+    },
+    {
+      "name": "Restauration containment-start",
+      "ok": true
+    },
+    {
+      "name": "HUD de protocole cadré en 1024x768",
+      "ok": true
+    },
+    {
+      "name": "Gaine : aucune silhouette au sol avant émergence",
+      "ok": true
+    },
+    {
+      "name": "Seize poses EVA séparées réellement décodées",
+      "ok": true
+    },
+    {
+      "name": "Coffre : trois boutons de reprise réels",
+      "ok": true
+    },
+    {
+      "name": "Bouton de reprise restaure le point sélectionné",
+      "ok": true
+    },
+    {
+      "name": "Restauration containment-verified",
+      "ok": true
+    },
+    {
+      "name": "Fenêtre : une seule créature, toujours dans le vrai module",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception JavaScript",
+      "ok": true
+    }
+  ],
+  "pass": 107,
+  "fail": 0,
+  "errors": [],
+  "captures": [
+    {
+      "file": "captures/01_menu.png",
+      "title": "Menu de l’extension",
+      "provenance": "Écran réellement affiché à l’ouverture du HTML autonome.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/02_debut.png",
+      "title": "Torrens · Cryostase",
+      "provenance": "Partie neuve : mouvement et premier objectif effectués avec les touches du navigateur, sans injection de progression.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/03_carte.png",
+      "title": "Plan des liaisons",
+      "provenance": "Carte ouverte au clavier depuis la partie neuve ; aucune téléportation.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/04_equipement.png",
+      "title": "Fabrication et outils",
+      "provenance": "Équipement ouvert dans la partie neuve ; une recette a réellement consommé des composants.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/05_codex.png",
+      "title": "Codex intégré",
+      "provenance": "Fiches affichées dans l’interface du jeu, sans modification visuelle du rendu.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/06_terminal.png",
+      "title": "Terminal de Sevastopol",
+      "provenance": "État enregistré par le parcours complet Récit, graine 20141007, IA et dégâts actifs. Le moteur est mis en pause uniquement pour cette capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/07_san_cristobal.png",
+      "title": "San Cristobal · Admission",
+      "provenance": "État enregistré par le parcours complet Récit, graine 20141007, IA et dégâts actifs. Le moteur est mis en pause uniquement pour cette capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/08_gemini.png",
+      "title": "Module de confinement KG-348",
+      "provenance": "État enregistré au cours du parcours complet Récit, graine 20141007, IA et dégâts actifs. Restauration mise en pause pour inspection visuelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/09_samuels.png",
+      "title": "Interface de Samuels",
+      "provenance": "État enregistré au cours du parcours complet Récit, graine 20141007, IA et dégâts actifs. Restauration mise en pause pour inspection visuelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/10_nid.png",
+      "title": "Sous le réacteur",
+      "provenance": "État enregistré au cours du parcours complet Récit, graine 20141007, IA et dégâts actifs. Restauration mise en pause pour inspection visuelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/11_anesidora.png",
+      "title": "Anesidora",
+      "provenance": "État enregistré au cours du parcours complet Récit, graine 20141007, IA et dégâts actifs. Restauration mise en pause pour inspection visuelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/12_eva.png",
+      "title": "Alignement de l’antenne",
+      "provenance": "État enregistré au cours du parcours complet Récit, graine 20141007, IA et dégâts actifs. Restauration mise en pause pour inspection visuelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/16_garde.png",
+      "title": "San Cristobal · Salle de garde",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/17_sterilisation.png",
+      "title": "San Cristobal · Stérilisation",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/18_relais.png",
+      "title": "Logistique · Local des relais",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/19_passerelle.png",
+      "title": "Logistique · Passerelle de contrôle",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/20_diagnostic.png",
+      "title": "APOLLO · Banc de diagnostic",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/21_observation.png",
+      "title": "Réacteur · Poste de surveillance",
+      "provenance": "État enregistré après cette tâche lors du parcours Récit intégral avec les vingt tâches et deux escortes, ennemis et dégâts actifs. Restauration mise en pause pour la capture.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/22_etages.png",
+      "title": "Carte · Passerelle et niveau supérieur",
+      "provenance": "Carte ouverte depuis un état du parcours actif ; filtre de niveau actionné via le bouton réel.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/23_obscurite.png",
+      "title": "Circuit · Éclairage coupé",
+      "provenance": "SCÈNE PRÉPARÉE : Amanda est placée au tableau, menace désactivée pour le contrôle. E réellement maintenu dans Chromium ; obscurité produite par le moteur.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/24_derivation.png",
+      "title": "Circuit · Diversion de ventilation",
+      "provenance": "SCÈNE PRÉPARÉE : deuxième action E depuis le tableau. Le circuit et son compte à rebours sont actifs.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/25_verrou.png",
+      "title": "Verrou · Gagner du temps",
+      "provenance": "SCÈNE PRÉPARÉE : position et stock placés près du seuil pour contrôle. La touche T ferme réellement la porte et consomme une pile.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/13_traque.png",
+      "title": "Contrôle visuel · La traque",
+      "provenance": "SCÈNE PRÉPARÉE : acteurs, équipement et phase positionnés pour tester le détecteur et l’échelle des sprites. Déplacement contrôlé de 18 unités et échantillonnage réel avant la pause. Ce n’est pas une capture de progression naturelle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/14_flamme.png",
+      "title": "Contrôle visuel · Repousser la créature",
+      "provenance": "SCÈNE PRÉPARÉE à partir du contrôle précédent ; action lance-flammes réellement exécutée par le moteur.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/15_epilogue.png",
+      "title": "Épilogue de l’adaptation",
+      "provenance": "Restauration du point final du parcours Récit avec IA et dégâts actifs : 52 objectifs, vingt tâches facultatives et deux escortes réalisés, sans injection de progression.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/26_galerie.png",
+      "title": "Gemini · Galerie d’observation",
+      "provenance": "État réellement atteint lors du parcours d’exploration Récit, 76 pièces, 32 tâches et deux escortes, IA et dégâts actifs. Restauration mise en pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/27_plenum.png",
+      "title": "Gemini · Plénum de maintenance",
+      "provenance": "État réellement atteint lors du parcours d’exploration Récit, 76 pièces, 32 tâches et deux escortes, IA et dégâts actifs. Restauration mise en pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/28_refroidissement.png",
+      "title": "Anesidora · Refroidissement stabilisé",
+      "provenance": "État réellement atteint lors du parcours d’exploration Récit, 76 pièces, 32 tâches et deux escortes, IA et dégâts actifs. Restauration mise en pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/29_service.png",
+      "title": "Anesidora · Coursive de retour",
+      "provenance": "État réellement atteint lors du parcours d’exploration Récit, 76 pièces, 32 tâches et deux escortes, IA et dégâts actifs. Restauration mise en pause pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/30_coque.png",
+      "title": "KG-348 · Retour par la coque",
+      "provenance": "Seuil extérieur atteint physiquement après séparation dans le parcours Récit actif. Restauration mise en pause ; le retour n’est plus un saut direct au tram.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/31_confinement.png",
+      "title": "KG-348 · Capteur au sol, clapets en fermeture",
+      "provenance": "Instant enregistré automatiquement lors du parcours Récit actif, au début du verrouillage. La présence réelle de la créature dans le module a été vérifiée par le moteur.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/32_confirme.png",
+      "title": "KG-348 · Volume confiné",
+      "provenance": "État enregistré après les quatre secondes de fermeture pendant le parcours actif. La créature reste présente jusqu’à la commande de séparation.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/33_vapeur.png",
+      "title": "Anesidora · Jet sous pression",
+      "provenance": "SCÈNE PRÉPARÉE depuis le point de surcharge du parcours actif : position d’observation et phase de vapeur réglées pour contrôler l’empreinte affichée. Pas une capture de marche naturelle à cet instant.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/34_visee.png",
+      "title": "Lancer · Choisir le point d’impact",
+      "provenance": "SCÈNE PRÉPARÉE : galerie vide et stock de test. V, flèche et souris réels ; trajectoire et point d’arrêt calculés par le moteur. Pause uniquement pour l’image.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/35_reglages.png",
+      "title": "Pause · Son, effets et points de reprise",
+      "provenance": "Interface réelle. Dans cet environnement sans stockage autorisé, l’historique persistant est annoncé indisponible ; les rotations du coffre sont testées séparément en Node, pas prétendues persistantes ici.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/36_protocoles.png",
+      "title": "Codex · Comprendre les systèmes",
+      "provenance": "Six fiches consultées dans le codex intégré via le bouton réel, sans changement de progression.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/37_reprises.png",
+      "title": "Reprises · Les trois points précédents",
+      "provenance": "SCÈNE DE TEST : le coffre utilise un Storage en mémoire alimenté avec quatre vrais états du parcours actif. Trois boutons sont produits par l’interface ; aucune persistance après fermeture du navigateur n’est prétendue.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/38_fenetre.png",
+      "title": "Galerie · Observer le volume fermé",
+      "provenance": "SCÈNE PRÉPARÉE : état réel de confinement du parcours, Amanda replacée dans la galerie pour contrôler la fenêtre. La position de la créature n’est pas modifiée ; la petite silhouette représente le même acteur dans KG-348, pas un second ennemi.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    }
+  ],
+  "inputSha256": {
+    "JOUER_ISOLATION.html": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+    "src/engine.js": "018716d28cf165b32567be67def47ad316994db7a00811dea6f4e59766338d46",
+    "src/protocols.js": "445bf8d9aaa3f84e12e97356422c57f1331b664941bf274a37aa761e35aac998",
+    "src/renderer.js": "3c8ef3e9331dbac5ab6e1105488cfcde632463a8b51f93f9921cca186d1492a2",
+    "src/content.json": "8014f745999f55aff9ae129a6d63f33f15b9f9b1ff7426c0438cb59584ad3d9d"
+  }
+}
