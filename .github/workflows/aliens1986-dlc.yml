@@ -8,6 +8,7 @@ on:
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
+      - 'docs/development/aliens-1986-sprites-v118/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -27,6 +28,7 @@ on:
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
+      - 'docs/development/aliens-1986-sprites-v118/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -79,6 +81,10 @@ jobs:
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v117.py \
             --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v117"
+      - name: Inspect V118 supports and sentry directions with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v118.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v118"
       - name: Exercise served raster drawing, doors, saves and title navigation
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \

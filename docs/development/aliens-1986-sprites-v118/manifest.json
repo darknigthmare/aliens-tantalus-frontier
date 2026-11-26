@@ -1,0 +1,364 @@
+{
+  "schema": "aliens1986-raster-supplement-v118",
+  "version": 118,
+  "presentationVersion": 118,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "07ee99d56480780044c74d4f1eb11f31b07fef13",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    }
+  ],
+  "counts": {
+    "base": 130,
+    "added": 11,
+    "total": 141
+  },
+  "addedBytes": 23428235,
+  "filmFidelityValidated": false,
+  "notes": [
+    "Eleven native image edits: eight supported props and three sentry views. These are new generations, not recovered original bytes.",
+    "The V116 and V117 manifests and their 130 records remain byte-identical; the V118 presentation extension is additive.",
+    "Seven sentry directions use static PNGs and mirrors. The requested front view was refused; its sector retains the V114 procedural renderer.",
+    "No animation cycle, exact film replica or new gameplay feature is certified.",
+    "Original missing 20 PNGs and 53 documents remain unrecovered."
+  ],
+  "unavailable": [
+    {
+      "id": "sentry-aim-front",
+      "reason": "image-generation-output-refusal",
+      "outputReceived": false,
+      "retryAttempted": false,
+      "runtimeFallback": "original-v114-procedural-sentry"
+    }
+  ],
+  "assets": [
+    {
+      "id": "engineering-case-stocked",
+      "path": "assets/dlc/aliens-1986/v118/props/engineering-case-stocked.png",
+      "sha256": "f1a5d5f9f592d08d1be6b4b77c9a4ba52856e8ae09de2131356d3908c9b24cad",
+      "bytes": 2368689,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        24,
+        108,
+        1504,
+        965
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        764.0,
+        965
+      ],
+      "label": "Renforts — coffret garni de trois plaques",
+      "category": "props",
+      "pose": "stocked",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "gateway-inquiry-display",
+      "path": "assets/dlc/aliens-1986/v118/props/gateway-inquiry-display.png",
+      "sha256": "0736d478db9c2cf2bbc54702b3725cb2edb589605332c611da14cde701a1b05c",
+      "bytes": 2362728,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        121,
+        79,
+        1650,
+        817
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        885.5,
+        817
+      ],
+      "label": "Gateway — écran mural de la commission",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "service-control-pedestal",
+      "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+      "sha256": "1b0be7132e27f1d2829bee04ade31a41cd4a7d1d5cc4e77828bf6cb7e4d4a3b5",
+      "bytes": 1276428,
+      "width": 963,
+      "height": 1633,
+      "bbox": [
+        192,
+        88,
+        764,
+        1565
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        463.0,
+        1565
+      ],
+      "label": "Colonne de commande",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "medical-counter-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/medical-counter-terminal.png",
+      "sha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864",
+      "bytes": 2389765,
+      "width": 1586,
+      "height": 992,
+      "bbox": [
+        65,
+        62,
+        1523,
+        939
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        741.0,
+        939
+      ],
+      "label": "Terminal du comptoir médical",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "optics-calibration-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/optics-calibration-terminal.png",
+      "sha256": "d4e18e908131198f0e501ed70a2a741b782a036b3e8c935b5e037432220c40a3",
+      "bytes": 2325558,
+      "width": 1635,
+      "height": 962,
+      "bbox": [
+        77,
+        43,
+        1554,
+        928
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        748.5,
+        928
+      ],
+      "label": "Terminal du banc de calibration",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "valve-indicator-panel",
+      "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+      "sha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d",
+      "bytes": 2386174,
+      "width": 1327,
+      "height": 1186,
+      "bbox": [
+        90,
+        78,
+        1230,
+        1115
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        646.5,
+        1115
+      ],
+      "label": "Indicateur de vanne",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "sulaco-briefing-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/sulaco-briefing-terminal.png",
+      "sha256": "0e08e812b8e85452ff30bb448483f966159088e728dca1cd3216488ddc1c1555",
+      "bytes": 2043852,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        98,
+        92,
+        1672,
+        820
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        839.5,
+        820
+      ],
+      "label": "Sulaco — terminal de briefing",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "operations-table-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/operations-table-terminal.png",
+      "sha256": "50adeba42a58b714a5048fc93556f2fa6708eb6a8f792c19c1d1d862a0cd868f",
+      "bytes": 2280782,
+      "width": 1706,
+      "height": 922,
+      "bbox": [
+        32,
+        70,
+        1665,
+        880
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        821.5,
+        880
+      ],
+      "label": "Operations — terminal de table",
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "sentry-aim-front-right",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+      "sha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b",
+      "bytes": 2117622,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        214,
+        13,
+        1435,
+        1016
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        824.5,
+        1016
+      ],
+      "label": "Sentinelle — avant droit",
+      "category": "equipment",
+      "pose": "front-right",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "sentry-aim-rear-right",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+      "sha256": "ec994d07af32863311577b72628b0794fafc96a06653aa045f020d5305e60b9c",
+      "bytes": 2090613,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        233,
+        18,
+        1330,
+        1000
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        781.5,
+        1000
+      ],
+      "label": "Sentinelle — arrière droit",
+      "category": "equipment",
+      "pose": "rear-right",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "sentry-aim-rear",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+      "sha256": "6ddcd2bd2bc99d2471a49e49e7ea851efa97010ca70e59e7003a5f10b77375b9",
+      "bytes": 1786024,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        228,
+        14,
+        1307,
+        1008
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        767.5,
+        1008
+      ],
+      "label": "Sentinelle — vue arrière",
+      "category": "equipment",
+      "pose": "rear",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v118-reference-edit",
+      "pixelMode": "RGBA"
+    }
+  ]
+}

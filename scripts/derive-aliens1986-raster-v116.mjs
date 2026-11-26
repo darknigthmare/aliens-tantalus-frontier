@@ -8,13 +8,25 @@ export const SOURCE_FILES_V116=Object.freeze([
   'modules/aliens-1986/v116/sprite-loader-v116.mjs',
   'modules/aliens-1986/v116/raster-renderer-v116.mjs'
 ]);
+export const SOURCE_FILES_V118=Object.freeze(['modules/aliens-1986/v118/raster-props-v118.mjs']);
 export const MANIFEST_PATH_V116='docs/development/aliens-1986-sprites-v116/manifest.json';
 export const MANIFEST_SHA256_V116='b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6';
 export const SUPPLEMENT_PATH_V117='docs/development/aliens-1986-sprites-v117/manifest.json';
+export const SUPPLEMENT_SHA256_V117='09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62';
 export const SUPPLEMENT_IDS_V117=Object.freeze([
   'door-leaf-damaged','door-leaf-reinforced','door-leaf-breached','meal-tray-food',
   'supply-case-medical-empty','supply-case-ammo-closed','supply-case-ammo-empty'
 ]);
+export const SUPPLEMENT_PATH_V118='docs/development/aliens-1986-sprites-v118/manifest.json';
+export const SUPPLEMENT_PATHS_V118=Object.freeze(Object.fromEntries([
+  ['engineering-case-stocked','props'],['gateway-inquiry-display','props'],
+  ['service-control-pedestal','props'],['medical-counter-terminal','props'],
+  ['optics-calibration-terminal','props'],['valve-indicator-panel','props'],
+  ['sulaco-briefing-terminal','props'],['operations-table-terminal','props'],
+  ['sentry-aim-front-right','equipment'],['sentry-aim-rear-right','equipment'],
+  ['sentry-aim-rear','equipment'],
+].map(([id,category])=>[id,'assets/dlc/aliens-1986/v118/'+category+'/'+id+'.png'])));
+export const SUPPLEMENT_IDS_V118=Object.freeze(Object.keys(SUPPLEMENT_PATHS_V118));
 export const V114_HTML_PATH='modules/aliens-1986/v114/JOUER_ALIENS_V114.html';
 export const V114_HTML_SHA256='9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d';
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -45,6 +57,35 @@ export function compileAliens1986RasterSupplementV117(baseText,supplementText) {
   return {assets,entries,baseAssetCount:base.assets.length,supplementAssetCount:supplement.assets.length};
 }
 
+/** V118 preserves both published manifests and appends only the eleven reviewed
+ * presentation assets. A changed predecessor cannot authorize a replacement. */
+export function compileAliens1986RasterSupplementV118(baseText,previousText,supplementText) {
+  if(hash(previousText)!==SUPPLEMENT_SHA256_V117)throw new Error('The preserved V117 manifest failed its immutable hash.');
+  const previous=compileAliens1986RasterSupplementV117(baseText,previousText),supplement=JSON.parse(supplementText);
+  if(supplement.schema!=='aliens1986-raster-supplement-v118' || supplement.version!==118 || supplement.presentationVersion!==118)throw new Error('Unsupported V118 raster supplement.');
+  const expected=[
+    {path:MANIFEST_PATH_V116,sha256:MANIFEST_SHA256_V116,assetCount:123},
+    {path:SUPPLEMENT_PATH_V117,sha256:SUPPLEMENT_SHA256_V117,assetCount:7},
+  ];
+  if(!Array.isArray(supplement.baseManifests) || supplement.baseManifests.length!==2 || expected.some((base,index)=>
+    Object.entries(base).some(([key,value])=>supplement.baseManifests[index]?.[key]!==value)))throw new Error('Broken V118 raster manifest predecessors.');
+  if(!Array.isArray(supplement.assets) || supplement.assets.length!==11)throw new Error('V118 must contain the eleven reviewed prop and sentry images.');
+  if(supplement.counts?.base!==130 || supplement.counts.added!==11 || supplement.counts.total!==141)throw new Error('V118 raster supplement counts disagree.');
+  for(const asset of supplement.assets) {
+    if(!asset || !SUPPLEMENT_IDS_V118.includes(asset.id))throw new Error('Unreviewed V118 sprite id.');
+    if(asset.path!==SUPPLEMENT_PATHS_V118[asset.id])throw new Error('Invalid V118 sprite path: '+asset.id);
+    if(asset.runtimeEligible!==true)throw new Error('V118 presentation image must remain eligible: '+asset.id);
+    if(!/^[a-f0-9]{64}$/.test(asset.sha256||'') || !Number.isSafeInteger(asset.bytes) || asset.bytes<=0)throw new Error('Invalid V118 sprite integrity record: '+asset.id);
+  }
+  const assets=[...previous.assets,...supplement.assets],ids=new Set(),paths=new Set();
+  for(const asset of assets) {
+    if(ids.has(asset.id))throw new Error('Duplicate raster id across V116, V117 and V118: '+asset.id);
+    if(paths.has(asset.path))throw new Error('Duplicate raster path across V116, V117 and V118: '+asset.path);
+    ids.add(asset.id);paths.add(asset.path);
+  }
+  return {assets,entries:validateSpriteEntriesV116(assets),baseAssetCount:130,supplementAssetCount:11};
+}
+
 export function parseAliens1986RegistryV116(html) {
   const start=html.indexOf('const registry=')+'const registry='.length,end=html.indexOf(', urls=new Map();',start);
   if(start<'const registry='.length || end<start)throw new Error('V114 embedded module registry was not found.');
@@ -59,7 +100,8 @@ export async function renderAliens1986RasterV116({root=process.cwd()}={}) {
   const base=await readFile(resolve(root,V114_HTML_PATH),'utf8');
   if(hash(base)!==V114_HTML_SHA256)throw new Error('The preserved V114 HTML failed its immutable hash.');
   const manifestText=await readFile(resolve(root,MANIFEST_PATH_V116),'utf8'),supplementText=await readFile(resolve(root,SUPPLEMENT_PATH_V117),'utf8');
-  const {assets:manifestAssets,entries}=compileAliens1986RasterSupplementV117(manifestText,supplementText);
+  const supplementV118Text=await readFile(resolve(root,SUPPLEMENT_PATH_V118),'utf8');
+  const {assets:manifestAssets,entries}=compileAliens1986RasterSupplementV118(manifestText,supplementText,supplementV118Text);
   const assets=[],sourceHashes={},seenPaths=new Set();
   const canonicalRoot=await realpath(resolve(root)),assetScope=resolve(canonicalRoot,'assets')+sep;
   for(const entry of entries) {
@@ -80,16 +122,23 @@ export async function renderAliens1986RasterV116({root=process.cwd()}={}) {
     sourceHashes[path]=sha256;
     registry[runtimeKeys[index]]={source,sha256,deps:index?{'./sprite-loader-v116.mjs':'v116/sprite-loader-v116.mjs'}:{}};
   }
+  for(const path of SOURCE_FILES_V118) {
+    const source=await readFile(resolve(root,path),'utf8'),sha256=hash(source);
+    sourceHashes[path]=sha256;
+    registry['v118/raster-props-v118.mjs']={source,sha256,deps:{'../v116/sprite-loader-v116.mjs':'v116/sprite-loader-v116.mjs'}};
+  }
   const renderer=registry['preview/renderer.mjs'];
   if(!renderer)throw new Error('V114 renderer was not found.');
   renderer.source=replaceOnce(renderer.source,
     "import {human,filmProp,filmBackdrop} from './film-renderer-v114.mjs';",
-    "import {human,filmProp,filmBackdrop,weapon as rasterFallbackWeaponV116} from './film-renderer-v114.mjs';\nimport {installRasterRendererV116} from '../v116/raster-renderer-v116.mjs';");
+    "import {human,filmProp,filmBackdrop,weapon as rasterFallbackWeaponV116} from './film-renderer-v114.mjs';\nimport {installRasterRendererV116} from '../v116/raster-renderer-v116.mjs';\nimport {installRasterPropsV118} from '../v118/raster-props-v118.mjs';");
   renderer.source=replaceOnce(renderer.source,
     '      if(structural){const box=hatchBox(e)',
     '      this.rasterHatchSurfaceV116(hatchBox(e),{structural,linkOpen,opening});\n      if(structural){const box=hatchBox(e)');
   renderer.source+='\ninstallRasterRendererV116(Renderer,'+JSON.stringify(entries)+',{fallbackWeapon:rasterFallbackWeaponV116});\n';
+  renderer.source+='installRasterPropsV118(Renderer,'+JSON.stringify(entries)+');\n';
   renderer.deps['../v116/raster-renderer-v116.mjs']='v116/raster-renderer-v116.mjs';
+  renderer.deps['../v118/raster-props-v118.mjs']='v118/raster-props-v118.mjs';
   renderer.sha256=hash(renderer.source);
   const app=registry['preview/app.mjs'];
   app.source=replaceOnce(app.source,'Les costumes sont distincts mais restent procéduraux stylisés.',
@@ -99,8 +148,8 @@ export async function renderAliens1986RasterV116({root=process.cwd()}={}) {
   fidelity.source=replaceOnce(fidelity.source,'Œufs et ovipositeur procéduraux','Œufs et ovipositeur de décor');
   fidelity.sha256=hash(fidelity.source);
   let html=base.slice(0,start)+JSON.stringify(registry).replace(/<\//g,'<\\/')+base.slice(end);
-  html=replaceOnce(html,'<title>','<meta name="aliens-raster-version" content="116"><meta name="aliens-raster-asset-version" content="117"><title>');
-  return {html,sha256:hash(html),assets,sourceHashes,manifestSha256:hash(manifestText),supplementManifestSha256:hash(supplementText),assetRevision:117,baseSha256:V114_HTML_SHA256};
+  html=replaceOnce(html,'<title>','<meta name="aliens-raster-version" content="116"><meta name="aliens-raster-extension-version" content="118"><meta name="aliens-raster-asset-version" content="118"><title>');
+  return {html,sha256:hash(html),assets,sourceHashes,manifestSha256:hash(manifestText),supplementManifestSha256:hash(supplementText),supplementManifestSha256V118:hash(supplementV118Text),presentationExtensionRevision:118,assetRevision:118,baseSha256:V114_HTML_SHA256};
 }
 export async function writeAliens1986RasterV116({root=process.cwd(),destination=resolve(root,'dist/dlc/aliens-1986/game.html')}={}) {
   if([V114_HTML_PATH,'dlc/aliens-1986/game.html'].some(path=>resolve(destination)===resolve(root,path)))throw new Error('Cannot overwrite a preserved V114 source HTML.');

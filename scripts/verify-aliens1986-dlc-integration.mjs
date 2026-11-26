@@ -15,14 +15,19 @@ import {
   ALIENS1986_RASTER_BASELINE_V117, ALIENS1986_RASTER_SOURCE_SUCCESSORS_V117,
   ALIENS1986_RASTER_ASSET_ROOT_V117, ALIENS1986_RASTER_ASSET_FILES_V117,
   ALIENS1986_RASTER_ASSET_DIRECTORIES_V117,
+  ALIENS1986_RASTER_SOURCE_ONLY_FILES_V118, ALIENS1986_RASTER_SOURCE_SHA256_V118,
+  ALIENS1986_RASTER_BASELINE_V118, ALIENS1986_RASTER_SOURCE_SUCCESSORS_V118,
+  ALIENS1986_RASTER_ASSET_ROOT_V118, ALIENS1986_RASTER_ASSET_FILES_V118,
+  ALIENS1986_RASTER_ASSET_DIRECTORIES_V118,
   compileAliens1986RecoveryManifest, publicAliens1986DlcPathAdmission,
   reviewedAliens1986Recovery, verifyAliens1986DlcAdmissions, verifyAliens1986Runtime,
-  verifyAliens1986RasterSourcesV116, reviewedAliens1986RasterDigestV117,
+  verifyAliens1986RasterSourcesV116, reviewedAliens1986RasterDigestV117, reviewedAliens1986RasterDigestV118,
 } from './public-aliens1986-dlc-admissions.mjs';
 import { buildAliens1986Dlc } from './build-aliens1986-dlc.mjs';
 import {
   renderAliens1986RasterV116, compileAliens1986RasterSupplementV117,
   MANIFEST_PATH_V116, MANIFEST_SHA256_V116, SUPPLEMENT_PATH_V117, SUPPLEMENT_IDS_V117,
+  compileAliens1986RasterSupplementV118, SUPPLEMENT_SHA256_V117, SUPPLEMENT_PATH_V118, SUPPLEMENT_IDS_V118,
 } from './derive-aliens1986-raster-v116.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 
@@ -67,7 +72,7 @@ test('every recovered source file and directory is admitted only in source', () 
     assert.equal(isPublicDistributionPathV86(path, { directory: true }), true, path);
     assert.equal(isPublicDistributionPathV86(path, { directory: true, built: true }), false, path);
   }
-  for (const path of [...ALIENS1986_SOURCE_ONLY_FILES, ...ALIENS1986_SPRITE_SOURCE_ONLY_FILES_V115, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117]) {
+  for (const path of [...ALIENS1986_SOURCE_ONLY_FILES, ...ALIENS1986_SPRITE_SOURCE_ONLY_FILES_V115, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V118]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
   }
@@ -126,6 +131,42 @@ test('V117 admits exactly seven PNGs and two child directories in source and bui
     }
     const base = JSON.parse(await readFile(join(root, MANIFEST_PATH_V116), 'utf8'));
     for (const asset of base.assets) assert.equal(isPublicDistributionPathV86(asset.path, { built }), true, asset.path);
+  }
+});
+
+test('V118 admits only eight props and three available sentry images in source and build', () => {
+  const prefix = 'assets/dlc/aliens-1986/v118';
+  const expected = [
+    'props/engineering-case-stocked.png', 'props/gateway-inquiry-display.png',
+    'props/service-control-pedestal.png', 'props/medical-counter-terminal.png',
+    'props/optics-calibration-terminal.png', 'props/valve-indicator-panel.png',
+    'props/sulaco-briefing-terminal.png', 'props/operations-table-terminal.png',
+    'equipment/sentry-aim-front-right.png', 'equipment/sentry-aim-rear-right.png',
+    'equipment/sentry-aim-rear.png',
+  ].map(path => prefix + '/' + path);
+  assert.equal(ALIENS1986_RASTER_ASSET_ROOT_V118, prefix);
+  assert.deepEqual(ALIENS1986_RASTER_ASSET_FILES_V118, expected);
+  assert.deepEqual(ALIENS1986_RASTER_ASSET_DIRECTORIES_V118, [prefix, prefix + '/props', prefix + '/equipment']);
+  for (const built of [false, true]) {
+    for (const path of expected) {
+      assert.equal(isPublicDistributionPathV86(path, { built }), true, path);
+      assert.equal(isPublicDistributionPathV86(path, { built, directory: true }), false, path);
+    }
+    for (const path of ALIENS1986_RASTER_ASSET_DIRECTORIES_V118) {
+      assert.equal(isPublicDistributionPathV86(path, { built, directory: true }), true, path);
+      assert.equal(isPublicDistributionPathV86(path, { built }), false, path);
+    }
+    for (const path of [
+      prefix + '/unreviewed.png', prefix + '/props/unreviewed.png', prefix + '/equipment/sentry-aim-front.png',
+      prefix + '/props/sentry-aim-rear.png', prefix + '/equipment/gateway-inquiry-display.png',
+      prefix + '/props/nested', prefix + '/other', prefix + '/props/gateway-inquiry-display.webp',
+      prefix + '/props/GATEWAY-INQUIRY-DISPLAY.png', prefix + '//props/gateway-inquiry-display.png',
+      prefix + '/props/./gateway-inquiry-display.png', prefix + '/props/../gateway-inquiry-display.png',
+    ]) {
+      assert.equal(publicAliens1986DlcPathAdmission(path, { built }), false, path);
+      assert.equal(isPublicDistributionPathV86(path, { built }), false, path);
+      assert.equal(isPublicDistributionPathV86(path, { built, directory: true }), false, path);
+    }
   }
 });
 
@@ -199,15 +240,16 @@ test('a built tree rejects the recovered corpus even when its files are valid', 
   await assert.rejects(verifyAliens1986DlcAdmissions(directory, { built: true }), /Changed Aliens 1986 runtime/);
 });
 
-test('the builder adds the seven V117 PNGs while preserving V114 and all 123 V116 records', async t => {
+test('the builder adds V118 while preserving V114 and all 130 V116/V117 records', async t => {
   const output = await temp(t);
   const originalHtml = await readFile(join(root, ALIENS1986_RUNTIME_ROOT, 'game.html'));
   const derivative = await renderAliens1986RasterV116({ root });
   const result = await buildAliens1986Dlc(root, output);
   assert.equal(result.runtimeFiles, 2);
   assert.equal(result.rasterRevision, 116);
-  assert.equal(result.rasterAssetRevision, 117);
-  assert.equal(result.rasterAssets, 130);
+  assert.equal(result.rasterAssetRevision, 118);
+  assert.equal(result.rasterExtensionRevision, 118);
+  assert.equal(result.rasterAssets, 141);
   assert.equal(result.rasterAssets, derivative.assets.length);
   assert.equal(result.gameSha256, derivative.sha256);
   assert.deepEqual((await readdir(output)).sort(), ['assets', 'dlc']);
@@ -219,7 +261,9 @@ test('the builder adds the seven V117 PNGs while preserving V114 and all 123 V11
   for (const asset of derivative.assets) assert.equal(hash(await readFile(join(output, asset.path))), asset.sha256);
   const baseManifest = JSON.parse(await readFile(join(root, MANIFEST_PATH_V116), 'utf8'));
   assert.deepEqual(derivative.assets.slice(0, 123), baseManifest.assets.map(({ id, path, sha256, bytes }) => ({ id, path, sha256, bytes })));
-  for (const asset of [derivative.assets[0], derivative.assets[123]]) {
+  const previousManifest = JSON.parse(await readFile(join(root, SUPPLEMENT_PATH_V117), 'utf8'));
+  assert.deepEqual(derivative.assets.slice(123, 130), previousManifest.assets.map(({ id, path, sha256, bytes }) => ({ id, path, sha256, bytes })));
+  for (const asset of [derivative.assets[0], derivative.assets[123], derivative.assets[130]]) {
     const bytes = await readFile(join(output, asset.path));
     await writeFile(join(output, asset.path), Buffer.from('unreviewed raster change'));
     await assert.rejects(verifyAliens1986Runtime(output, { built: true }), /Changed Aliens 1986 raster bytes/);
@@ -241,7 +285,22 @@ test('the builder adds the seven V117 PNGs while preserving V114 and all 123 V11
     await rm(missing);
     await assert.rejects(verifyAliens1986Runtime(output, { built }), /Missing Aliens 1986 V117 raster member/);
     await cp(join(root, ALIENS1986_RASTER_ASSET_FILES_V117[0]), missing);
-    assert.equal((await verifyAliens1986Runtime(output, { built })).rasterAssets, 130);
+    const extraV118 = join(output, ALIENS1986_RASTER_ASSET_ROOT_V118, 'props/unreviewed.png');
+    await cp(join(root, ALIENS1986_RASTER_ASSET_FILES_V118[0]), extraV118);
+    await assert.rejects(verifyAliens1986Runtime(output, { built }), /Unapproved Aliens 1986 V118 raster member/);
+    await rm(extraV118);
+    const directoryV118 = join(output, ALIENS1986_RASTER_ASSET_ROOT_V118, 'other');
+    await mkdir(directoryV118);
+    await assert.rejects(verifyAliens1986Runtime(output, { built }), /Unapproved Aliens 1986 V118 raster member/);
+    await rm(directoryV118, { recursive: true });
+    const missingV118 = join(output, ALIENS1986_RASTER_ASSET_FILES_V118[0]);
+    await rm(missingV118);
+    await assert.rejects(verifyAliens1986Runtime(output, { built }), /Missing Aliens 1986 V118 raster member/);
+    await symlink(join(root, ALIENS1986_RASTER_ASSET_FILES_V118[0]), missingV118);
+    await assert.rejects(verifyAliens1986Runtime(output, { built }), /Aliens 1986 V118 raster symlink/);
+    await rm(missingV118);
+    await cp(join(root, ALIENS1986_RASTER_ASSET_FILES_V118[0]), missingV118);
+    assert.equal((await verifyAliens1986Runtime(output, { built })).rasterAssets, 141);
   }
 });
 
@@ -255,7 +314,7 @@ test('the builder rejects a linked output before copying files through it', asyn
 
 test('each reviewed presentation input rejects changed bytes without rewriting the original inventory', async t => {
   const output = await temp(t);
-  const paths = [...Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V116), ...Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V117)];
+  const paths = [...Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V116), ...Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V117), ...Object.keys(ALIENS1986_RASTER_SOURCE_SHA256_V118)];
   for (const path of paths) {
     await mkdir(dirname(join(output, path)), { recursive: true });
     await cp(join(root, path), join(output, path));
@@ -269,17 +328,20 @@ test('each reviewed presentation input rejects changed bytes without rewriting t
   }
 });
 
-test('unknown V116/V117 source siblings and built presentation sources are refused', () => {
+test('unknown V116/V117/V118 source siblings and built presentation sources are refused', () => {
   for (const path of [
     'modules/aliens-1986/v116/unreviewed.mjs',
     'docs/development/aliens-1986-sprites-v116/private.json',
     'docs/development/aliens-1986-sprites-v117/private.json',
     'docs/development/aliens-1986-sprites-v117/unreviewed/manifest.json',
+    'modules/aliens-1986/v118/unreviewed.mjs',
+    'docs/development/aliens-1986-sprites-v118/private.json',
+    'docs/development/aliens-1986-sprites-v118/unreviewed/manifest.json',
   ]) {
     assert.equal(publicAliens1986DlcPathAdmission(path), false);
     assert.equal(publicAliens1986DlcPathAdmission(path, { built: true }), false);
   }
-  for (const path of [...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117]) {
+  for (const path of [...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V117, ...ALIENS1986_RASTER_SOURCE_ONLY_FILES_V118]) {
     assert.equal(publicAliens1986DlcPathAdmission(path, { built: true }), false);
   }
 });
@@ -290,12 +352,29 @@ test('V117 continues only the derivation tool and keeps every historical V116 pi
   assert.deepEqual(Object.keys(ALIENS1986_RASTER_SOURCE_SUCCESSORS_V117), [path]);
   assert.equal(ALIENS1986_RASTER_SOURCE_SHA256_V116[path], '2dbd40d44678f028c865ea03bc99bfc020adce38b5f8465294949f745ad76434');
   for (const [member, previous] of Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V116)) {
-    assert.equal(reviewedAliens1986RasterDigestV117(member, previous), hash(await readFile(join(root, member))));
+    const expected = member === path ? '3b053e26bc98a62b9332554b31e28a7f40172e7e0337e94c45c9eab5551a328a' : hash(await readFile(join(root, member)));
+    assert.equal(reviewedAliens1986RasterDigestV117(member, previous), expected);
   }
   for (const forged of ['0'.repeat(64), ALIENS1986_RASTER_SOURCE_SUCCESSORS_V117[path].currentSha256]) {
     assert.throws(() => reviewedAliens1986RasterDigestV117(path, forged), /Broken Aliens 1986 presentation predecessor/);
   }
   assert.equal(reviewedAliens1986RasterDigestV117('src/unrelated.js', 'unchanged'), 'unchanged');
+});
+
+test('V118 continues the V117 derivation receipt without rewriting either predecessor', async () => {
+  const path = 'scripts/derive-aliens1986-raster-v116.mjs';
+  assert.equal(ALIENS1986_RASTER_BASELINE_V118, '07ee99d56480780044c74d4f1eb11f31b07fef13');
+  assert.deepEqual(Object.keys(ALIENS1986_RASTER_SOURCE_SUCCESSORS_V118), [path]);
+  assert.equal(ALIENS1986_RASTER_SOURCE_SUCCESSORS_V118[path].previousSha256, '3b053e26bc98a62b9332554b31e28a7f40172e7e0337e94c45c9eab5551a328a');
+  for (const [member, original] of Object.entries(ALIENS1986_RASTER_SOURCE_SHA256_V116)) {
+    const predecessor = reviewedAliens1986RasterDigestV117(member, original);
+    assert.equal(reviewedAliens1986RasterDigestV118(member, predecessor), hash(await readFile(join(root, member))));
+  }
+  for (const forged of ['0'.repeat(64), ALIENS1986_RASTER_SOURCE_SHA256_V116[path], ALIENS1986_RASTER_SOURCE_SUCCESSORS_V118[path].currentSha256]) {
+    assert.throws(() => reviewedAliens1986RasterDigestV118(path, forged), /Broken Aliens 1986 V118 presentation predecessor/);
+  }
+  assert.equal(reviewedAliens1986RasterDigestV118('src/unrelated.js', 'unchanged'), 'unchanged');
+  assert.equal(hash(await readFile(join(root, SUPPLEMENT_PATH_V117))), SUPPLEMENT_SHA256_V117);
 });
 
 test('the seven V117 records extend the immutable V116 manifest without collisions or substitutions', async () => {
@@ -328,6 +407,49 @@ test('the seven V117 records extend the immutable V116 manifest without collisio
   ]) {
     const changed = structuredClone(supplement); mutate(changed);
     assert.throws(() => compileAliens1986RasterSupplementV117(baseText, JSON.stringify(changed)));
+  }
+});
+
+test('V118 appends eleven reviewed records to two byte-identical predecessor manifests', async () => {
+  const baseText = await readFile(join(root, MANIFEST_PATH_V116), 'utf8');
+  const previousText = await readFile(join(root, SUPPLEMENT_PATH_V117), 'utf8');
+  const supplementText = await readFile(join(root, SUPPLEMENT_PATH_V118), 'utf8');
+  const previous = compileAliens1986RasterSupplementV117(baseText, previousText);
+  const supplement = JSON.parse(supplementText), merged = compileAliens1986RasterSupplementV118(baseText, previousText, supplementText);
+  assert.equal(merged.baseAssetCount, 130); assert.equal(merged.supplementAssetCount, 11);
+  assert.equal(merged.entries.length, 141);
+  assert.deepEqual(merged.assets.slice(0, 130), previous.assets);
+  assert.deepEqual(merged.assets.slice(130).map(asset => asset.id).sort(), [...SUPPLEMENT_IDS_V118].sort());
+  assert.deepEqual(merged.assets.slice(130).map(asset => asset.path).sort(), [...ALIENS1986_RASTER_ASSET_FILES_V118].sort());
+  assert.equal(new Set(merged.assets.map(asset => asset.id)).size, 141);
+  assert.equal(new Set(merged.assets.map(asset => asset.path)).size, 141);
+  assert.equal(merged.assets.some(asset => asset.id === 'sentry-aim-front'), false);
+  assert.throws(() => compileAliens1986RasterSupplementV118(baseText + ' ', previousText, supplementText), /immutable hash/);
+  assert.throws(() => compileAliens1986RasterSupplementV118(baseText, previousText + ' ', supplementText), /immutable hash/);
+  for (const mutate of [
+    value => { value.baseManifests[0].sha256 = '0'.repeat(64); },
+    value => { value.baseManifests[1].sha256 = '0'.repeat(64); },
+    value => { value.baseManifests.reverse(); },
+    value => { value.baseManifests[1].assetCount = 8; },
+    value => { value.baseManifests.pop(); },
+    value => { value.counts.base = 123; },
+    value => { value.counts.added = 12; },
+    value => { value.counts.total = 142; },
+    value => { value.presentationVersion = 116; },
+    value => { value.assets[0].id = previous.assets[0].id; },
+    value => { value.assets[0] = { ...value.assets[1] }; },
+    value => { value.assets[0].path = previous.assets[0].path; },
+    value => { value.assets[0].path = 'assets/dlc/aliens-1986/v118/equipment/engineering-case-stocked.png'; },
+    value => { value.assets[0].path = 'assets/dlc/aliens-1986/v118/props/nested/engineering-case-stocked.png'; },
+    value => { value.assets[0].id = 'sentry-aim-front'; value.assets[0].path = 'assets/dlc/aliens-1986/v118/equipment/sentry-aim-front.png'; },
+    value => { value.assets[0].runtimeEligible = false; },
+    value => { value.assets[0].sha256 = 'unreviewed'; },
+    value => { value.assets[0].bytes = 0; },
+    value => { value.assets[0].bbox = [0, 0, 0, 0]; },
+    value => { value.assets.pop(); },
+  ]) {
+    const changed = structuredClone(supplement); mutate(changed);
+    assert.throws(() => compileAliens1986RasterSupplementV118(baseText, previousText, JSON.stringify(changed)));
   }
 });
 
