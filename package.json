@@ -128,7 +128,7 @@
     "qa:fiorina:sprites": "node scripts/qa-fiorina-sprites-v115.mjs",
     "qa:fiorina:native-sprites": "node scripts/qa-fiorina-native-sprites-v115.mjs",
     "test:mer-des-chagrins-recovery": "node --test scripts/verify-mer-des-chagrins-recovery-admission-20261126.mjs",
-    "test:mer-des-chagrins-visual": "node --test scripts/verify-mer-png-renderer-20261126.mjs scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs scripts/verify-mer-gallery-20261126.mjs",
+    "test:mer-des-chagrins-visual": "node --test scripts/verify-mer-png-renderer-20261126.mjs scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs scripts/verify-mer-gallery-20261126.mjs scripts/verify-mer-equipment-ui-20261126.mjs",
     "check:mer-des-chagrins-sprites": "python3 scripts/verify-mer-sprite-metadata-20261126.py",
     "qa:mer-des-chagrins:canvas": "node scripts/qa-mer-visual-canvas-20261126.mjs"
   },

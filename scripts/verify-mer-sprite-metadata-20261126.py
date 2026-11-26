@@ -15,6 +15,24 @@ import struct
 from PIL import Image
 
 
+# Captured from the published manifest at 8cb25462b9b0328b09ae28b278356113d325c603.
+# The digest pins every original id, SHA256 and byte length without requiring Git
+# history to be present in a shallow CI checkout.
+HISTORICAL_COUNT = 119
+HISTORICAL_BYTES = 234227391
+HISTORICAL_DIGEST = '5aaa154ce42483758ffc2693dd117938f3c50fd4f3b50d01c17c3c99d746ee7e'
+NEW_PNGS = {
+    'characters/decker-walk-a': {
+        'sha256': '5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d',
+        'sizeBytes': 1867661,
+    },
+    'characters/decker-walk-b': {
+        'sha256': 'd5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e',
+        'sizeBytes': 1766518,
+    },
+}
+
+
 def require(condition, message):
     if not condition:
         raise AssertionError(message)
@@ -31,11 +49,24 @@ def verify(repo):
     entries = {f'{category}/{ident}': entry for category, group in pack['assets'].items() for ident, entry in group.items()}
     rows = manifest['assets']
     require(pack['version'] == 1, 'Unexpected coordinate contract')
-    require(len(rows) == len(entries) == len(actual) == 119, 'Expected 119 individual PNG assets')
+    require(len(rows) == len(entries) == len(actual) == 121, 'Expected 121 individual PNG assets')
+    require(pack['spriteCount'] == manifest['counts']['pngFiles'] == 121, 'Declared PNG counts differ')
     require(len({r['id'] for r in rows}) == len(rows), 'Duplicate asset identifiers')
     require({r['metadata']['src'] for r in rows} == set(actual), 'PNG inventory is not exact')
     require(manifest['canonicalOneToOneCertified'] is False, 'Unsupported canon certification')
     require(manifest['completeAnimationCycles'] is False, 'Unsupported animation completion')
+
+    historical = [row for row in rows if row['id'] not in NEW_PNGS]
+    records = ''.join(f"{row['id']}\t{row['sha256']}\t{row['sizeBytes']}\n"
+                      for row in sorted(historical, key=lambda row: row['id'])).encode('utf-8')
+    require(len(historical) == HISTORICAL_COUNT, 'Historical 119-asset inventory changed')
+    require(sum(row['sizeBytes'] for row in historical) == HISTORICAL_BYTES, 'Historical PNG byte total changed')
+    require(sha256(records).hexdigest() == HISTORICAL_DIGEST, 'Historical PNG hashes or identifiers changed')
+    require(manifest['historicalIntegrity']['sha256'] == HISTORICAL_DIGEST, 'Historical digest declaration differs')
+    by_id = {row['id']: row for row in rows}
+    for key, expected in NEW_PNGS.items():
+        require(key in by_id and all(by_id[key][field] == value for field, value in expected.items()),
+                f'{key}: new source PNG hash or byte length changed')
 
     total = 0
     hashes = set()
@@ -80,11 +111,22 @@ def verify(repo):
                 require(0 <= px <= width and 0 <= py <= height, f'{key}: {name} is not a source pixel coordinate')
         provenance = row['provenance']
         source_path = provenance.get('restoredSourcePath', provenance.get('sourcePath'))
+        if key in NEW_PNGS:
+            require(provenance.get('kind') == 'imagegen-new-source' and provenance.get('generator') == 'image_gen',
+                    f'{key}: new generation must not be classified as recovered artwork')
+            require(source_path == row['path'] and provenance.get('generatedOn') == '2026-11-26',
+                    f'{key}: new source provenance differs')
+            require(provenance.get('promptId') == key.split('/')[1] and
+                    provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json' and
+                    provenance.get('referenceSourcePath') == 'dlc/sea-of-sorrows-visual/sprites/characters/decker.png',
+                    f'{key}: generation prompt/reference provenance missing')
         require(source_path and (repo / source_path).is_file(), f'{key}: original source file missing')
         require((repo / source_path).read_bytes() == data, f'{key}: original PNG bytes were changed')
 
-    require(len(hashes) == 119, 'Duplicate PNG content assigned to different assets')
-    require(total == manifest['counts']['bytes'] == 234227391, 'Unexpected PNG byte total')
+    require(len(hashes) == 121, 'Duplicate PNG content assigned to different assets')
+    require(total == manifest['counts']['bytes'] == 237861570, 'Unexpected PNG byte total')
+    require(manifest['counts']['recoveredOriginalPng'] == 110 and manifest['counts']['preservedNewPng'] == 9 and
+            manifest['counts']['newContinuationPng'] == 2, 'Recovery and new-generation counts are conflated')
     require(dict(sorted(Counter(key.split('/')[0] for key in entries).items())) == manifest['counts']['categories'], 'Category inventory differs')
     for key in ['characters/decker-ready', 'characters/decker-crouch-ready', 'characters/decker-dodge-ready', 'characters/manning-ready']:
         require('handAnchor' in entries[key], f'{key}: primary grip attachment missing')
@@ -96,7 +138,46 @@ def verify(repo):
         require(entries[key]['facing'] == 'none' and 'faceAnchor' in entries[key], f'{key}: invalid patient orientation/attachment')
     require(entries['parasites/normal']['worldHeight'] == 25, 'Normal parasite scale changed')
     require(entries['parasites/royal']['worldHeight'] == 31.75, 'Royal parasite scale changed')
-    return {'verifiedPngFiles': len(rows), 'verifiedBytes': total, 'uniquePngHashes': len(hashes), 'categories': manifest['counts']['categories'], 'browserGameplayCertified': False}
+    for key in NEW_PNGS:
+        entry = entries[key]
+        require(entry.get('unarmedOnly') is True and 'handAnchor' not in entry,
+                f'{key}: walking pose must remain explicitly unarmed')
+        require(entry['worldHeight'] == 110 and entry['facing'] == 'right' and 'lampAnchor' in entry,
+                f'{key}: walking scale/orientation/lamp attachment differs')
+        require(entry['pivot'][1] == by_id[key]['visibleBoundsAlpha8'][3], f'{key}: walking footprint not grounded')
+    for key, names in {
+        'equipment/lamp': ['mountAnchor', 'emitterAnchor'],
+        'equipment/light-panel': ['onAnchor', 'offAnchor'],
+        'equipment/shutter-control': ['statusAnchor'],
+        'effects/acid': ['groundAnchor'],
+        'effects/foam': ['groundAnchor'],
+        'effects/impact': ['impactAnchor'],
+        'effects/spark': ['impactAnchor'],
+        'effects/flame': ['emissionAnchor'],
+        'effects/muzzle': ['emissionAnchor'],
+    }.items():
+        require(all(name in entries[key] for name in names), f'{key}: presentation attachment missing')
+    for key in ['effects/flame', 'effects/muzzle']:
+        require(entries[key]['facing'] == 'right' and entries[key]['pivot'] == entries[key]['emissionAnchor'],
+                f'{key}: directional source is not anchored at its emission tip')
+    require(entries['equipment/lamp']['facing'] == 'right', 'Lamp lens orientation differs')
+    require(entries['equipment/light-panel']['worldHeight'] == 39 and
+            entries['equipment/shutter-control']['worldHeight'] == 27, 'Control enclosure scale differs')
+    frame, panel = entries['doors/bulkhead-frame'], entries['doors/bulkhead-panel']
+    aperture = frame.get('apertureBounds', [])
+    require(len(aperture) == 4 and all(isinstance(v, int) for v in aperture), 'Door aperture bounds missing')
+    ax, ay, aw, ah = aperture
+    require(0 <= ax < frame['width'] and 0 <= ay < frame['height'] and
+            0 < aw <= frame['width']-ax and 0 < ah <= frame['height']-ay, 'Door aperture is outside source canvas')
+    polygon = frame.get('aperturePolygon', [])
+    require(len(polygon) >= 3 and all(isinstance(p, list) and len(p) == 2 and
+            all(isinstance(v, (int, float)) and math.isfinite(v) for v in p) and
+            ax <= p[0] <= ax+aw and ay <= p[1] <= ay+ah for p in polygon), 'Door aperture polygon differs')
+    require(panel.get('canvasMatch') == 'bulkhead-frame' and
+            (frame['width'], frame['height']) == (panel['width'], panel['height']), 'Door panel/frame source canvases differ')
+    return {'verifiedPngFiles': len(rows), 'verifiedBytes': total, 'uniquePngHashes': len(hashes),
+            'historicalPngFilesUnchanged': HISTORICAL_COUNT, 'historicalInventorySha256': HISTORICAL_DIGEST,
+            'newSourcePngFiles': len(NEW_PNGS), 'categories': manifest['counts']['categories'], 'browserGameplayCertified': False}
 
 
 if __name__ == '__main__':

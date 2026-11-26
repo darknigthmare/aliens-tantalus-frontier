@@ -7,17 +7,19 @@ import { pathToFileURL } from 'node:url';
 
 export const MER_VISUAL_ROOT_20261126 = 'dlc/sea-of-sorrows-visual';
 export const MER_VISUAL_MANIFEST_20261126 = MER_VISUAL_ROOT_20261126 + '/RUNTIME_MANIFEST.json';
-export const MER_VISUAL_MANIFEST_SHA256_20261126 = '85d2ca0bf81d027fda2722945fd952e8410fc3657b83678f4a104546cbb6606a';
+export const MER_VISUAL_MANIFEST_SHA256_20261126 = 'fc929c0634616a37a3e9090db3f81aed6754be45b489e95c3a17b87ee4b122f2';
 export const MER_VISUAL_SOURCE_FILES_20261126 = Object.freeze([
   'scripts/mer-des-chagrins-visual-admission-20261126.mjs',
   'scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs',
   'scripts/verify-mer-png-renderer-20261126.mjs',
   'scripts/verify-mer-sprite-metadata-20261126.py',
   'scripts/verify-mer-gallery-20261126.mjs',
+  'scripts/verify-mer-equipment-ui-20261126.mjs',
   'scripts/qa-mer-visual-canvas-20261126.mjs',
   'docs/mer-des-chagrins-20261126/INTEGRATION.md',
   'docs/mer-des-chagrins-20261126/VALIDATION.json',
-  ...['s01', 's14', 's26', 's33', 's34', 's50'].map(id => 'docs/mer-des-chagrins-20261126/canvas/' + id + '.png'),
+  'docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json',
+  ...['s01', 's14', 's26', 's33', 's34', 's50', 'locomotion', 'details'].map(id => 'docs/mer-des-chagrins-20261126/canvas/' + id + '.png'),
 ]);
 const sourceDirectories = new Set(['docs/mer-des-chagrins-20261126/canvas']);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');

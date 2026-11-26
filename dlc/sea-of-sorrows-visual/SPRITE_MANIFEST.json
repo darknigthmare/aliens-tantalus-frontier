@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "title": "La Mer des Chagrins — sprites récupérés et métadonnées reconstruites",
+  "title": "La Mer des Chagrins — édition visuelle 0.10.2, récupération et nouvelles poses",
   "date": "2026-11-26",
   "scope": "Presentation metadata for the immutable Sea of Sorrows 0.10.0 simulation",
   "counts": {
-    "pngFiles": 119,
+    "pngFiles": 121,
     "recoveredOriginalPng": 110,
     "preservedNewPng": 9,
-    "bytes": 234227391,
+    "bytes": 237861570,
     "categories": {
-      "characters": 22,
+      "characters": 24,
       "corpses": 1,
       "creatures": 1,
       "decor": 50,
@@ -23,7 +23,8 @@
       "parasites": 2,
       "stretchers": 2,
       "weapons": 3
-    }
+    },
+    "newContinuationPng": 2
   },
   "coordinateContract": {
     "unit": "source-image-pixels",
@@ -37,15 +38,20 @@
       "none"
     ],
     "stretcherOrientation": "facing none; anatomicalFacing head-right",
-    "royalParasiteScale": "31.75 world units, already 1.27 times normal 25; no second multiplier"
+    "royalParasiteScale": "31.75 world units, already 1.27 times normal 25; no second multiplier",
+    "doorAperture": "apertureBounds and aperturePolygon use full source-image pixels; matching frame/leaf share the frame aperture transform.",
+    "effectOrigin": "Directional effects use emissionAnchor; radial impacts use impactAnchor; ground effects use groundAnchor."
   },
   "coverage": {
     "characterIdentities": 16,
-    "additionalCharacterPoses": 6,
+    "additionalCharacterPoses": 8,
     "decorKinds": 50,
     "obstacleKinds": 6,
     "baseCampaignRooms": 50,
-    "baseCampaignObstaclePlacements": 120
+    "baseCampaignObstaclePlacements": 120,
+    "runtimeWorldMappings": 117,
+    "interfaceOnlyAssets": 4,
+    "galleryAssets": 121
   },
   "canonicalOneToOneCertified": false,
   "completeAnimationCycles": false,
@@ -53,16 +59,16 @@
   "sourceCodeReconstructed": true,
   "validation": {
     "pngDecodeAndAlpha": "measured locally with Pillow",
-    "sha256AndGitBlobSha": "verified against original ledger or new-image checkpoint",
-    "manualAnchorInspection": "ready/crouch/dodge poses, weapons, stretchers and parasites inspected as source images",
+    "sha256AndGitBlobSha": "119 historical PNGs verified against Git 8cb25462 and a pinned inventory digest; two new PNG hashes pinned separately.",
+    "manualAnchorInspection": "Ready/crouch/dodge and two unarmed walk poses, weapons, stretchers, parasites, doors, six effects and equipment inspected as source images; scoped placement review is recorded in VALIDATION.json/nativeCanvas.",
     "browserGameplay": "not certified by this manifest",
-    "renderedPlacement": "separate renderer validation required"
+    "renderedPlacement": "13 continuation assets visually reviewed in real Canvas fixtures; the full fixture run drew 103 distinct PNG kinds. Evidence: docs/mer-des-chagrins-20261126/VALIDATION.json nativeCanvas. No browser journey or universal pose/state coverage certified."
   },
   "remainingWork": [
     "creatures/adult, creatures/queen, weapons/plasma and weapons/flame have no PNG and use native presentation.",
-    "Per-frame walking, firing, reloading and interaction animation cycles are absent; available PNG poses do not certify full animation.",
+    "Two unarmed walking key poses are available. Complete walking, firing, reloading and interaction animation cycles remain absent; these poses do not certify full animation.",
     "Support hand points are measured but the current adapter aligns the primary grip only; secondary-hand anatomy and grip occlusion require additional art.",
-    "Door frame/panel, effects and unplaced equipment remain available in the gallery where the current adapter retains native stateful presentation.",
+    "All 121 PNGs have a runtime presentation use: 117 renderer mappings and four interface-only equipment illustrations. Industrial door PNGs apply only to compatible front/back bulkhead bays; other architecture keeps native rendering.",
     "Documented novel identities and roles do not establish exact faces, costumes or equipment silhouettes; these drawings remain project adaptations.",
     "Crouch/dodge drawings retain the native 85.8-unit pose envelope but their independent anatomy is not a registered full-body animation rig; cross-pose head proportions need further art refinement."
   ],
@@ -122,7 +128,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/adams.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/badejo",
@@ -179,7 +189,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/badejo.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/bronson",
@@ -236,7 +250,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/bronson.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/cherbourg",
@@ -293,7 +311,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cherbourg.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/cho",
@@ -350,7 +372,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cho.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/dave",
@@ -407,7 +433,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/dave.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker-crouch-ready",
@@ -489,7 +519,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch-ready.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker-crouch",
@@ -555,7 +589,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker-dodge-ready",
@@ -637,7 +675,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge-ready.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker-dodge",
@@ -703,7 +745,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker-ready",
@@ -785,7 +831,165 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-ready.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "characters/decker-walk-a",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png",
+      "sizeBytes": 1867661,
+      "gitBlobSha": "43d9985c2789afbe037d7e3850e0a11f52cda926",
+      "sha256": "5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        19,
+        988,
+        1478
+      ],
+      "visibleBoundsAlpha8": [
+        46,
+        24,
+        942,
+        1474
+      ],
+      "transparentPixelCount": 1087836,
+      "visiblePixelCountAlpha8": 463272,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-a.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          44,
+          22,
+          900,
+          1454
+        ],
+        "pivot": [
+          512,
+          1474
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "unarmedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Shared pelvis-axis x=512 for the two walk poses; y at the alpha >= 8 footprint bottom.",
+        "manualSourcePixelAnchors": {
+          "lampAnchor": [
+            566,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Unarmed walking key pose only; no firearm hand attachment and no complete animation cycle certified.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/locomotion.png",
+        "renderedPlacementScope": "Unarmed crop, foot placement, scale and facing in civil fixtures with equipped=false; lampAnchor is not exercised by these walking fixtures."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "43d9985c2789afbe037d7e3850e0a11f52cda926",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png",
+        "referenceSourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json",
+        "promptId": "decker-walk-a"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "characters/decker-walk-b",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
+      "sizeBytes": 1766518,
+      "gitBlobSha": "358255d4120ba65a446558736bb2f4b72345443b",
+      "sha256": "d5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        23,
+        988,
+        1498
+      ],
+      "visibleBoundsAlpha8": [
+        39,
+        25,
+        980,
+        1461
+      ],
+      "transparentPixelCount": 1121078,
+      "visiblePixelCountAlpha8": 432812,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-b.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          37,
+          23,
+          945,
+          1440
+        ],
+        "pivot": [
+          512,
+          1461
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "unarmedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Shared pelvis-axis x=512 for the two walk poses; y at the alpha >= 8 footprint bottom.",
+        "manualSourcePixelAnchors": {
+          "lampAnchor": [
+            566,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Unarmed walking key pose only; no firearm hand attachment and no complete animation cycle certified.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/locomotion.png",
+        "renderedPlacementScope": "Unarmed crop, foot placement, scale and facing in civil fixtures with equipped=false; lampAnchor is not exercised by these walking fixtures."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "358255d4120ba65a446558736bb2f4b72345443b",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
+        "referenceSourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json",
+        "promptId": "decker-walk-b"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/decker",
@@ -851,7 +1055,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/elway",
@@ -908,7 +1116,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/elway.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/harriman",
@@ -965,7 +1177,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/harriman.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/manning-ready",
@@ -1039,7 +1255,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning-ready.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/manning",
@@ -1096,7 +1316,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/medic",
@@ -1153,7 +1377,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/medic.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/muller",
@@ -1210,7 +1438,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/muller.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/pritchett",
@@ -1267,7 +1499,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/pritchett.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/rand",
@@ -1324,7 +1560,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rand.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/rollins",
@@ -1381,7 +1621,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rollins.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "characters/silas",
@@ -1438,7 +1682,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/silas.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "corpses/facehugger",
@@ -1495,7 +1743,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/corpses/facehugger.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "creatures/facehugger",
@@ -1552,7 +1804,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/creatures/facehugger.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/amber",
@@ -1609,7 +1865,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/amber.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/antenna",
@@ -1666,7 +1926,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/antenna.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/armory",
@@ -1723,7 +1987,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/armory.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/battery",
@@ -1780,7 +2048,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/battery.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/bridge",
@@ -1837,7 +2109,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/bridge.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/briefing",
@@ -1894,7 +2170,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/briefing.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/cable",
@@ -1951,7 +2231,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cable.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/cableTray",
@@ -2008,7 +2292,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cableTray.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/captureBay",
@@ -2065,7 +2353,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/captureBay.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/carene",
@@ -2122,7 +2414,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/carene.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/cargo",
@@ -2179,7 +2475,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cargo.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/checkpoint",
@@ -2236,7 +2536,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/checkpoint.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/cocoon",
@@ -2293,7 +2597,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cocoon.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/cryo",
@@ -2350,7 +2658,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/decor/cryo.png",
         "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one horizontal medical cryogenic stasis capsule from a grounded retro-industrial colony facility. Empty long rectangular light-grey base on short mechanical feet, one smooth closed transparent curved canopy with subtle cyan-tinted reflections, recessed padded medical bed visible, compact control panel built into the left end and maintenance seams. Unit shown in direct side elevation, width approximately three times height. No patient or parasite inside. One connected complete capsule only, no surrounding room."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/drill",
@@ -2407,7 +2719,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/drill.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/dropship",
@@ -2464,7 +2780,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/dropship.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/eggs",
@@ -2521,7 +2841,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/eggs.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/excavator",
@@ -2578,7 +2902,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/excavator.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/fence",
@@ -2635,7 +2963,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/fence.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/filters",
@@ -2692,7 +3024,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/filters.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/generator",
@@ -2749,7 +3085,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/generator.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/hoist-drive",
@@ -2806,7 +3146,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/hoist-drive.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/home",
@@ -2863,7 +3207,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/home.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/landing",
@@ -2920,7 +3268,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/landing.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/locker",
@@ -2977,7 +3329,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/locker.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/medical",
@@ -3034,7 +3390,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/medical.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/membrane",
@@ -3091,7 +3451,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/membrane.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/monolith",
@@ -3148,7 +3512,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/monolith.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/office",
@@ -3205,7 +3573,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/office.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/ossuary",
@@ -3262,7 +3634,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ossuary.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/pipe",
@@ -3319,7 +3695,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pipe.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/pump",
@@ -3376,7 +3756,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pump.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/quarantine-instruments",
@@ -3433,7 +3817,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/quarantine-instruments.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/ravine",
@@ -3490,7 +3878,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ravine.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/reel",
@@ -3547,7 +3939,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/reel.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/resinCable",
@@ -3604,7 +4000,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/resinCable.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/rib",
@@ -3661,7 +4061,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/rib.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/seal-equipment",
@@ -3718,7 +4122,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/seal-equipment.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/silica",
@@ -3775,7 +4183,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silica.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/silicaShard",
@@ -3832,7 +4244,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silicaShard.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/survey",
@@ -3889,7 +4305,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/survey.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/terminal",
@@ -3946,7 +4366,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/terminal.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/throne",
@@ -4003,7 +4427,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/throne.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/triage",
@@ -4060,7 +4488,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/triage.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/valve",
@@ -4117,7 +4549,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/decor/valve.png",
         "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one complete heavy industrial pipe valve assembly from a worn off-world mining facility. A large red-orange metal circular handwheel mounted vertically in side/front readable orientation on a short upright valve body, horizontal grey flanged pipe stubs left and right, chunky bolts and a compact pressure dial. Patina, dark grease and desert dust consistent with colony machinery. A single connected asset, not separate components, no pipes disappearing beyond image edges."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/viewport",
@@ -4174,7 +4610,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/viewport.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/warningStripe",
@@ -4231,7 +4671,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/warningStripe.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/wash",
@@ -4288,7 +4732,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/wash.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/winch",
@@ -4345,7 +4793,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/winch.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "decor/workbench",
@@ -4402,7 +4854,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/workbench.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "devices/console",
@@ -4459,7 +4915,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/console.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "devices/isolation",
@@ -4516,7 +4976,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/isolation.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "devices/parts",
@@ -4573,7 +5037,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/parts.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "doors/bulkhead-frame",
@@ -4614,14 +5082,49 @@
           1491
         ],
         "worldHeight": 180,
-        "facing": "none"
+        "facing": "none",
+        "apertureBounds": [
+          169,
+          190,
+          685,
+          1258
+        ],
+        "aperturePolygon": [
+          [
+            206,
+            190
+          ],
+          [
+            817,
+            190
+          ],
+          [
+            854,
+            235
+          ],
+          [
+            854,
+            1448
+          ],
+          [
+            169,
+            1448
+          ],
+          [
+            169,
+            235
+          ]
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
         "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Transparent aperture measured from source alpha; only compatible front/back industrial portals. Frame and leaf share one source-canvas transform aligned to the native opening.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4630,7 +5133,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-frame.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "doors/bulkhead-panel",
@@ -4671,14 +5178,18 @@
           1456
         ],
         "worldHeight": 180,
-        "facing": "none"
+        "facing": "none",
+        "canvasMatch": "bulkhead-frame"
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
         "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Same 1024x1536 source canvas as bulkhead-frame; render behind frame using its aperture transform only when native doorStatus is closed.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4687,7 +5198,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-panel.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/acid",
@@ -4724,18 +5239,30 @@
           417
         ],
         "pivot": [
-          885.5,
-          667
+          886,
+          470
         ],
         "worldHeight": 18,
-        "facing": "none"
+        "facing": "none",
+        "groundAnchor": [
+          886,
+          470
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "pivotMethod": "Manually inspected source-pixel effect origin/center",
+        "manualSourcePixelAnchors": {
+          "groundAnchor": [
+            886,
+            470
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual puddle ground center; native acid time, position and hazard rules remain authoritative.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4744,7 +5271,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/acid.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/flame",
@@ -4781,18 +5312,30 @@
           466
         ],
         "pivot": [
-          1087.0,
-          581
+          171,
+          398
         ],
         "worldHeight": 33,
-        "facing": "none"
+        "facing": "right",
+        "emissionAnchor": [
+          171,
+          398
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "pivotMethod": "Manually inspected source-pixel effect origin/center",
+        "manualSourcePixelAnchors": {
+          "emissionAnchor": [
+            171,
+            398
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual emission tip at left; source extends right. Display only accepted native flame events, without introducing a weapon PNG.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4801,7 +5344,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/flame.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/foam",
@@ -4842,14 +5389,26 @@
           841
         ],
         "worldHeight": 36,
-        "facing": "none"
+        "facing": "none",
+        "groundAnchor": [
+          876,
+          841
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "manualSourcePixelAnchors": {
+          "groundAnchor": [
+            876,
+            841
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "A stationary foamy mound, not a directional jet; native enemy foam state controls its placement and lifetime.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4858,7 +5417,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/foam.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/impact",
@@ -4895,18 +5458,30 @@
           416
         ],
         "pivot": [
-          788.5,
-          703
+          762,
+          519
         ],
         "worldHeight": 30,
-        "facing": "none"
+        "facing": "none",
+        "impactAnchor": [
+          762,
+          519
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "pivotMethod": "Manually inspected source-pixel effect origin/center",
+        "manualSourcePixelAnchors": {
+          "impactAnchor": [
+            762,
+            519
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual center of the impact burst, not the alpha silhouette bottom.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4915,7 +5490,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/impact.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/muzzle",
@@ -4952,18 +5531,30 @@
           352
         ],
         "pivot": [
-          1088.0,
-          527
+          540,
+          398
         ],
         "worldHeight": 18,
-        "facing": "none"
+        "facing": "right",
+        "emissionAnchor": [
+          540,
+          398
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "pivotMethod": "Manually inspected source-pixel effect origin/center",
+        "manualSourcePixelAnchors": {
+          "emissionAnchor": [
+            540,
+            398
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual emission tip at left; source extends right. Attachment uses the current weapon muzzle.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -4972,7 +5563,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/muzzle.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "effects/spark",
@@ -5009,18 +5604,30 @@
           384
         ],
         "pivot": [
-          775.0,
-          704
+          755,
+          531
         ],
         "worldHeight": 24,
-        "facing": "none"
+        "facing": "none",
+        "impactAnchor": [
+          755,
+          531
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "pivotMethod": "Manually inspected source-pixel effect origin/center",
+        "manualSourcePixelAnchors": {
+          "impactAnchor": [
+            755,
+            531
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual center of the spark burst, not the alpha silhouette bottom.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -5029,7 +5636,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/spark.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/archive",
@@ -5086,7 +5697,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/archive.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/armory-rack",
@@ -5143,7 +5758,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/armory-rack.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/decoy",
@@ -5200,7 +5819,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/decoy.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/filter",
@@ -5257,7 +5880,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/filter.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "equipment-interface"
+      ]
     },
     {
       "id": "equipment/lamp",
@@ -5298,14 +5925,34 @@
           878
         ],
         "worldHeight": 9,
-        "facing": "none"
+        "facing": "right",
+        "mountAnchor": [
+          480,
+          842
+        ],
+        "emitterAnchor": [
+          1392,
+          450
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "manualSourcePixelAnchors": {
+          "mountAnchor": [
+            480,
+            842
+          ],
+          "emitterAnchor": [
+            1392,
+            450
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Manual underside clip and optical center; source faces right and follows the character lamp mount.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -5314,7 +5961,12 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/lamp.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer",
+        "equipment-interface"
+      ]
     },
     {
       "id": "equipment/light-panel",
@@ -5354,15 +6006,35 @@
           757.5,
           993
         ],
-        "worldHeight": 58,
-        "facing": "none"
+        "worldHeight": 39,
+        "facing": "none",
+        "onAnchor": [
+          1121,
+          307
+        ],
+        "offAnchor": [
+          1121,
+          202
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "manualSourcePixelAnchors": {
+          "onAnchor": [
+            1121,
+            307
+          ],
+          "offAnchor": [
+            1121,
+            202
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Green and amber indicator centers manually inspected. Height39 matches native control enclosure; fixed switches do not encode state.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -5371,7 +6043,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/light-panel.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/locker-open",
@@ -5428,7 +6104,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker-open.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/locker",
@@ -5485,7 +6165,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/medkit",
@@ -5542,7 +6226,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/medkit.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "equipment-interface"
+      ]
     },
     {
       "id": "equipment/radio",
@@ -5599,7 +6287,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/radio.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "equipment-interface"
+      ]
     },
     {
       "id": "equipment/sensor",
@@ -5656,7 +6348,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/sensor.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/shutter-control",
@@ -5696,15 +6392,27 @@
           756.0,
           999
         ],
-        "worldHeight": 58,
-        "facing": "none"
+        "worldHeight": 27,
+        "facing": "none",
+        "statusAnchor": [
+          921,
+          278
+        ]
       },
       "calibration": {
         "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
         "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
+        "manualSourcePixelAnchors": {
+          "statusAnchor": [
+            921,
+            278
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "placementNotes": "Indicator center manually inspected. Height27 matches native control enclosure; fixed lever does not encode shutter state.",
+        "renderedPlacementEvidence": "docs/mer-des-chagrins-20261126/canvas/details.png",
+        "renderedPlacementScope": "Specific Canvas fixture states and orientations only; see VALIDATION.json/nativeCanvas."
       },
       "provenance": {
         "kind": "recovered-original-git-blob",
@@ -5713,7 +6421,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/shutter-control.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/stasis-canopy",
@@ -5770,7 +6482,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/stasis-canopy.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/supply",
@@ -5827,7 +6543,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/supply.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "equipment/tracker",
@@ -5884,7 +6604,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/tracker.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "equipment-interface"
+      ]
     },
     {
       "id": "equipment/weakpoint",
@@ -5941,7 +6665,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/weakpoint.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "objectives/capture",
@@ -5998,7 +6726,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/capture.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "objectives/case",
@@ -6055,7 +6787,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/case.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "objectives/console",
@@ -6112,7 +6848,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/console.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "objectives/sleep",
@@ -6169,7 +6909,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/sleep.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/crate",
@@ -6226,7 +6970,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/crate.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One squat closed rectangular reinforced grey-olive metal cargo crate, width about twice height, heavy bevelled lid, side handles, industrial latches, narrow worn yellow caution bands, realistic scratches. A single complete crate, no pile of crates and no objects outside it."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/pipe",
@@ -6283,7 +7031,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/pipe.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad horizontal bundle of three thick worn industrial metal pipes fixed on two small saddle supports, capped/flanged ends remain fully visible, grey steel with oxide stains. The connected pipe bundle forms one waist-high obstacle, width approximately three times its height. No long pipes extending off frame."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/rack",
@@ -6340,7 +7092,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/rack.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low rectangular storage rack used as a solid waist-high obstacle, three horizontal shelves securely filled with sealed grey industrial cases and compact cylindrical canisters, dark steel posts and cross-braces, width twice height, exact rectangular silhouette. One connected loaded rack only."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/resin",
@@ -6397,7 +7153,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/resin.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad solid mound of dark alien hive resin, organic biomechanical glossy charcoal ridges and hardened ropy strands forming an obstacle with a closed continuous silhouette, subtle bone-grey mineral residue. Width about two-and-a-half times height. One connected resin growth, no eggs, no creatures, no bodies, no gore."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/rib",
@@ -6454,7 +7214,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/rib.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad broken biomechanical alien structural rib from an ancient derelict spacecraft, a single horizontal arch fragment lying steadily along the baseline, dark grey fossil-like ribbed chitinous/metallic surfaces, segmented ridges and hollow channels. Uneven fractured ends, no bones of a human, no gore. Width about two-and-a-half times height, no complete tall doorway arch."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "obstacles/silica-rubble",
@@ -6511,7 +7275,11 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/obstacles/silica-rubble.png",
         "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One single low broad mound of jagged smoky amber and grey silica mineral rubble, fractured angular quartz-like chunks densely interlocked as a physical obstacle, largest shard near center with smaller shards integrated at edges, dusty surfaces and a few subtle glassy fractures. Width about three times height. Entire connected mound only, no scattered detached debris."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "organic/egg",
@@ -6568,7 +7336,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/organic/egg.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "parasites/normal",
@@ -6631,7 +7403,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/normal.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "parasites/royal",
@@ -6694,7 +7470,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/royal.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "stretchers/adams",
@@ -6761,7 +7541,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/adams.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "stretchers/elway",
@@ -6828,7 +7612,11 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/elway.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
     },
     {
       "id": "weapons/foam",
@@ -6910,7 +7698,12 @@
         "sourcePath": "docs/mer-des-chagrins-20261126/sprites/weapons/foam.png",
         "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one handheld foamer device for capturing a fictional alien with pale foam, short wide round nozzle pointing right, chunky industrial sprayer casing, compact sealed foam reservoir attached beneath, rear pistol grip and forward support handle. Practical rescue/capture equipment with a simple pressure gauge, worn muted yellow-grey accents. The device is inactive with no spray, no target. One standalone whole device only; no separate accessories."
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer",
+        "equipment-interface"
+      ]
     },
     {
       "id": "weapons/pistol",
@@ -6985,7 +7778,12 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pistol.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer",
+        "equipment-interface"
+      ]
     },
     {
       "id": "weapons/pulse",
@@ -7067,7 +7865,12 @@
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pulse.png"
       },
-      "canonicalOneToOneCertified": false
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer",
+        "equipment-interface"
+      ]
     }
   ],
   "referenceSources": [
@@ -7080,5 +7883,12 @@
   "scaleReferences": [
     "dlc/sea-of-sorrows/src/render.js",
     "dlc/sea-of-sorrows/src/world-art.js"
-  ]
+  ],
+  "historicalIntegrity": {
+    "sourceCommit": "8cb25462b9b0328b09ae28b278356113d325c603",
+    "assetCount": 119,
+    "bytes": 234227391,
+    "recordFormat": "UTF-8 rows sorted by id: id\\tsha256\\tsizeBytes\\n",
+    "sha256": "5aaa154ce42483758ffc2693dd117938f3c50fd4f3b50d01c17c3c99d746ee7e"
+  }
 }

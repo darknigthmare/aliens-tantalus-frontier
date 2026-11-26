@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "root": "dlc/sea-of-sorrows-visual",
-  "revision": "0.10.1",
+  "revision": "0.10.2",
   "upstreamRuntime": "dlc/sea-of-sorrows",
   "originalRuntimeTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
   "files": [
     {
       "path": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
-      "sizeBytes": 219749,
-      "sha256": "394fc7dc2948216d462364ce0dec3e80e463e5c211750191bb3ebdeab815a53c",
+      "sizeBytes": 241868,
+      "sha256": "232a11ccfa08e9ec721c5485bc17a4cc14d7a92b93aa67757314e65983b2a7fa",
       "public": false
     },
     {
@@ -19,8 +19,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/index.html",
-      "sizeBytes": 7123,
-      "sha256": "24cc5eba0ec02a4a94dc5e84b334386b74d8dbff262173e2751b28dc11d2b1dc",
+      "sizeBytes": 7217,
+      "sha256": "f4a1f138d20ee5280b45ffd42f89b74d43fd65fed601c4ff58014a177c7098c5",
       "public": true
     },
     {
@@ -87,6 +87,18 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
       "sizeBytes": 1833806,
       "sha256": "15c1f6c41359cd2adefd63add625cf552c49d27c806f47f80729e8ef5df55cc8",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png",
+      "sizeBytes": 1867661,
+      "sha256": "5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
+      "sizeBytes": 1766518,
+      "sha256": "d5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e",
       "public": true
     },
     {
@@ -739,20 +751,32 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
-      "sizeBytes": 40977,
-      "sha256": "62766fc10601b851bbfd0f0f93e804d62c2033c619a94f8124e294c1ad700c5c",
+      "sizeBytes": 43083,
+      "sha256": "12c935c8e8ccd380c24abf318fb5913053986bdffa10644b86056c9cd88bfe01",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/src/equipment-ui.css",
+      "sizeBytes": 1788,
+      "sha256": "c57194d4aa4f12ad0fe3c3643cdfcd815f4655979a09cd261ab31e13b0a49a27",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/src/equipment-ui.js",
+      "sizeBytes": 5778,
+      "sha256": "777401f4e943782923c55bdfee16975db57ac37de5baef5c39315b978a8b0784",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/gallery.js",
-      "sizeBytes": 5601,
-      "sha256": "2d83e5ead5a18e872aa4c15861893c2131d1bcdc1cd2e2f82a5fc5916fb398a3",
+      "sizeBytes": 6063,
+      "sha256": "925545fdf664fa999606e2df86acffb6b57467d24935a662f31448c2022d6640",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
-      "sizeBytes": 20865,
-      "sha256": "3ab3be5d760e38121bdfebb18edc2d48a748afd3b9d8228fc54cebed86ff6b65",
+      "sizeBytes": 30815,
+      "sha256": "8785aebeaa2f8fb5dc1fc88909c61eb688585f20b46a6c131b948a8646ef1c81",
       "public": true
     }
   ]

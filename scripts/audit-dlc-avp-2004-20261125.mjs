@@ -549,6 +549,44 @@ export const AVP_MER_VISUAL_SUCCESSORS_20261126 = Object.freeze(Object.fromEntri
 ));
 // END MER VISUAL HOST RECEIPTS
 
+// BEGIN MER HOST COMPLETION RECEIPTS
+// These three inherited hosts already changed in the published Mer integration.
+// Their previous endpoints are the exact cumulative bytes, retained unchanged by
+// every AVP/Fiorina/Mer receipt above. This terminal records only the missing links.
+export const AVP_MER_HOST_COMPLETION_BASELINES_20261126 = Object.freeze({
+  cumulativeCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+  publishedCommit: '8cb25462b9b0328b09ae28b278356113d325c603',
+});
+export const AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  ".gitattributes": {
+    "previousSha256": "1d4733487bb47787d8a5bcbf3839ce9e24c05e17f39ecde65303d7ab73ff8aae",
+    "currentSha256": "12af7b46a39295579c2c627269485a0ebb06d1ae82b81c38c6b3985b6061065b"
+  },
+  ".vercelignore": {
+    "previousSha256": "499a5f9fbf9f5d183dadc869ebac3453b5e9d364be3437c645d79d4aeea98309",
+    "currentSha256": "a3bc11ec21a60b3243dfc9504cf2ea38a939e9b74041dac39c173ed83aef16b6"
+  },
+  "title-screen-v61.css": {
+    "previousSha256": "88fe408917883476acd0e645178319e231a53dbc4192d5d50d0af79a772be4fd",
+    "currentSha256": "24cb002dec509c818c2b32abddf4bcbdf987f4c126856a7207b4e744240c2c61"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END MER HOST COMPLETION RECEIPTS
+
+// BEGIN MER EQUIPMENT HOST RECEIPTS
+export const AVP_MER_EQUIPMENT_BASELINE_20261126 = '8cb25462b9b0328b09ae28b278356113d325c603';
+export const AVP_MER_EQUIPMENT_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "package.json": {
+    "previousSha256": "b949a468a5f587366ba52391947df196c97b1e9657a63f67c7afb1cd7adf6ba7",
+    "currentSha256": "643be149a5ca147c09f84e45be7bc68874df279da7b55a88eab27c5cc2337264"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END MER EQUIPMENT HOST RECEIPTS
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -586,8 +624,21 @@ export function reviewedMerJoinHostDigest20261126(path, endpoint) {
 }
 
 export function reviewedMerVisualHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_MER_VISUAL_SUCCESSORS_20261126,
+  const visual = advanceReceipt(path, endpoint, AVP_MER_VISUAL_SUCCESSORS_20261126,
     'Broken Mer-join-to-visual source chain: ');
+  return reviewedMerHostCompletionDigest20261126(path, visual);
+}
+
+export function reviewedMerHostCompletionDigest20261126(path, endpoint) {
+  const completed = advanceReceipt(path, endpoint, AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126,
+    'Broken Mer-visual-to-host-completion source chain: ');
+  return reviewedMerEquipmentHostDigest20261126(path, completed);
+}
+
+// Further host continuations follow this terminal with their own exact receipts.
+export function reviewedMerEquipmentHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_MER_EQUIPMENT_SUCCESSORS_20261126,
+    'Broken Mer-host-completion-to-equipment source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -607,7 +658,8 @@ export function reviewedAliensIncomingDigest20261125(path, endpoint) {
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_MER_JOIN_SUCCESSORS_20261126), ...Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_MER_JOIN_SUCCESSORS_20261126), ...Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126),
+  ...Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126), ...Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -617,7 +669,8 @@ export function avpHostRuntimeSources20261125(view) {
     if (!Object.hasOwn(result, path)) continue;
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
-      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path], AVP_MER_JOIN_SUCCESSORS_20261126[path], AVP_MER_VISUAL_SUCCESSORS_20261126[path]].filter(Boolean);
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path], AVP_MER_JOIN_SUCCESSORS_20261126[path], AVP_MER_VISUAL_SUCCESSORS_20261126[path],
+      AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path], AVP_MER_EQUIPMENT_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -644,7 +697,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   });
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
-    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_MER_JOIN_SUCCESSORS_20261126, AVP_MER_VISUAL_SUCCESSORS_20261126]) {
+    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_MER_JOIN_SUCCESSORS_20261126, AVP_MER_VISUAL_SUCCESSORS_20261126,
+    AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126, AVP_MER_EQUIPMENT_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -718,11 +772,33 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.equal(receipt.previousSha256, AVP_MER_JOIN_SUCCESSORS_20261126[path].currentSha256,
       'The visual host continuation must follow the exact Mer join endpoint: ' + path);
   }
+  assert.deepEqual(AVP_MER_HOST_COMPLETION_BASELINES_20261126, {
+    cumulativeCommit: 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    publishedCommit: '8cb25462b9b0328b09ae28b278356113d325c603',
+  }, 'The missing Mer host links require their exact cumulative and published baselines.');
+  assert.deepEqual(Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126),
+    ['.gitattributes', '.vercelignore', 'title-screen-v61.css'],
+    'Mer host completion admits only the three inherited hosts omitted from its published receipts.');
+  for (const path of Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126)) {
+    const prior = AVP_MER_VISUAL_SUCCESSORS_20261126[path] || AVP_MER_JOIN_SUCCESSORS_20261126[path]
+      || AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.equal(prior, undefined, 'A missing Mer host link must retain its inherited cumulative endpoint: ' + path);
+  }
+  assert.equal(AVP_MER_EQUIPMENT_BASELINE_20261126, '8cb25462b9b0328b09ae28b278356113d325c603',
+    'The Mer equipment host receipt requires the exact published visual baseline.');
+  assert.deepEqual(Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126), ['package.json'],
+    'The equipment continuation changes only its registered host test command.');
+  assert.equal(AVP_MER_EQUIPMENT_SUCCESSORS_20261126['package.json'].previousSha256,
+    AVP_MER_VISUAL_SUCCESSORS_20261126['package.json'].currentSha256,
+    'The Mer equipment test registration must follow the exact visual package endpoint.');
   const paths = hostPaths();
   for (const path of paths) {
     const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path]
       || AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]
-      || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path] || AVP_MER_JOIN_SUCCESSORS_20261126[path]).previousSha256;
+      || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path] || AVP_MER_JOIN_SUCCESSORS_20261126[path]
+      || AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126[path]).previousSha256;
     assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, seed), 'Unreviewed AVP host source bytes: ' + path);
   }
   return Object.freeze({ baselineCommit: AVP_HOST_BASELINE_20261125, successors: paths.length,
@@ -733,5 +809,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     spriteSuccessors: Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125).length,
     spriteV116Successors: Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125).length,
     merJoinedSuccessors: Object.keys(AVP_MER_JOIN_SUCCESSORS_20261126).length,
-    merVisualSuccessors: Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126).length, historicalEvidenceTransferred: false });
+    merVisualSuccessors: Object.keys(AVP_MER_VISUAL_SUCCESSORS_20261126).length,
+    merHostCompletionSuccessors: Object.keys(AVP_MER_HOST_COMPLETION_SUCCESSORS_20261126).length,
+    merEquipmentSuccessors: Object.keys(AVP_MER_EQUIPMENT_SUCCESSORS_20261126).length,
+    historicalEvidenceTransferred: false });
 }

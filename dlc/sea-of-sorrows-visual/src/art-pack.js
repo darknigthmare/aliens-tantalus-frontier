@@ -5,7 +5,7 @@
 root.SoSArtPack = {
   "version": 1,
   "coordinateSpace": "source-image-pixels",
-  "spriteCount": 119,
+  "spriteCount": 121,
   "assets": {
     "characters": {
       "adams": {
@@ -238,6 +238,50 @@ root.SoSArtPack = {
           565,
           300
         ]
+      },
+      "decker-walk-a": {
+        "src": "sprites/characters/decker-walk-a.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          44,
+          22,
+          900,
+          1454
+        ],
+        "pivot": [
+          512,
+          1474
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "unarmedOnly": true
+      },
+      "decker-walk-b": {
+        "src": "sprites/characters/decker-walk-b.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          37,
+          23,
+          945,
+          1440
+        ],
+        "pivot": [
+          512,
+          1461
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "unarmedOnly": true
       },
       "decker": {
         "src": "sprites/characters/decker.png",
@@ -1398,7 +1442,39 @@ root.SoSArtPack = {
           1491
         ],
         "worldHeight": 180,
-        "facing": "none"
+        "facing": "none",
+        "apertureBounds": [
+          169,
+          190,
+          685,
+          1258
+        ],
+        "aperturePolygon": [
+          [
+            206,
+            190
+          ],
+          [
+            817,
+            190
+          ],
+          [
+            854,
+            235
+          ],
+          [
+            854,
+            1448
+          ],
+          [
+            169,
+            1448
+          ],
+          [
+            169,
+            235
+          ]
+        ]
       },
       "bulkhead-panel": {
         "src": "sprites/doors/bulkhead-panel.png",
@@ -1415,7 +1491,8 @@ root.SoSArtPack = {
           1456
         ],
         "worldHeight": 180,
-        "facing": "none"
+        "facing": "none",
+        "canvasMatch": "bulkhead-frame"
       }
     },
     "effects": {
@@ -1430,11 +1507,15 @@ root.SoSArtPack = {
           417
         ],
         "pivot": [
-          885.5,
-          667
+          886,
+          470
         ],
         "worldHeight": 18,
-        "facing": "none"
+        "facing": "none",
+        "groundAnchor": [
+          886,
+          470
+        ]
       },
       "flame": {
         "src": "sprites/effects/flame.png",
@@ -1447,11 +1528,15 @@ root.SoSArtPack = {
           466
         ],
         "pivot": [
-          1087.0,
-          581
+          171,
+          398
         ],
         "worldHeight": 33,
-        "facing": "none"
+        "facing": "right",
+        "emissionAnchor": [
+          171,
+          398
+        ]
       },
       "foam": {
         "src": "sprites/effects/foam.png",
@@ -1468,7 +1553,11 @@ root.SoSArtPack = {
           841
         ],
         "worldHeight": 36,
-        "facing": "none"
+        "facing": "none",
+        "groundAnchor": [
+          876,
+          841
+        ]
       },
       "impact": {
         "src": "sprites/effects/impact.png",
@@ -1481,11 +1570,15 @@ root.SoSArtPack = {
           416
         ],
         "pivot": [
-          788.5,
-          703
+          762,
+          519
         ],
         "worldHeight": 30,
-        "facing": "none"
+        "facing": "none",
+        "impactAnchor": [
+          762,
+          519
+        ]
       },
       "muzzle": {
         "src": "sprites/effects/muzzle.png",
@@ -1498,11 +1591,15 @@ root.SoSArtPack = {
           352
         ],
         "pivot": [
-          1088.0,
-          527
+          540,
+          398
         ],
         "worldHeight": 18,
-        "facing": "none"
+        "facing": "right",
+        "emissionAnchor": [
+          540,
+          398
+        ]
       },
       "spark": {
         "src": "sprites/effects/spark.png",
@@ -1515,11 +1612,15 @@ root.SoSArtPack = {
           384
         ],
         "pivot": [
-          775.0,
-          704
+          755,
+          531
         ],
         "worldHeight": 24,
-        "facing": "none"
+        "facing": "none",
+        "impactAnchor": [
+          755,
+          531
+        ]
       }
     },
     "equipment": {
@@ -1606,7 +1707,15 @@ root.SoSArtPack = {
           878
         ],
         "worldHeight": 9,
-        "facing": "none"
+        "facing": "right",
+        "mountAnchor": [
+          480,
+          842
+        ],
+        "emitterAnchor": [
+          1392,
+          450
+        ]
       },
       "light-panel": {
         "src": "sprites/equipment/light-panel.png",
@@ -1622,8 +1731,16 @@ root.SoSArtPack = {
           757.5,
           993
         ],
-        "worldHeight": 58,
-        "facing": "none"
+        "worldHeight": 39,
+        "facing": "none",
+        "onAnchor": [
+          1121,
+          307
+        ],
+        "offAnchor": [
+          1121,
+          202
+        ]
       },
       "locker-open": {
         "src": "sprites/equipment/locker-open.png",
@@ -1724,8 +1841,12 @@ root.SoSArtPack = {
           756.0,
           999
         ],
-        "worldHeight": 58,
-        "facing": "none"
+        "worldHeight": 27,
+        "facing": "none",
+        "statusAnchor": [
+          921,
+          278
+        ]
       },
       "stasis-canopy": {
         "src": "sprites/equipment/stasis-canopy.png",

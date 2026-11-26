@@ -11,7 +11,8 @@
   const native = Object.fromEntries([
     'human', 'alien', 'corpse', 'decor', 'prop', 'egg', 'archive', 'supply',
     'locker', 'armoryRack', 'sensor', 'emitter', 'object', 'device', 'weakpoint',
-    'stretcher', 'stasisDisplay',
+    'stretcher', 'stasisDisplay', 'door', 'shutter', 'lightPanel',
+    'tacticalGround', 'drawEffects',
   ].map(name => [name, R[name]]));
   const states = new Map(), used = new Map(), methods = new Map();
   let drawCount = 0;
@@ -22,6 +23,12 @@
   const point = (entry, name) => {
     const p = entry[name];
     return pair(p) && p[0] >= 0 && p[0] <= entry.width && p[1] >= 0 && p[1] <= entry.height ? p : null;
+  };
+  const box = (entry, name) => {
+    const a = entry[name];
+    return Array.isArray(a) && a.length === 4 && a.every(finite) &&
+      a[0] >= 0 && a[1] >= 0 && a[2] > 0 && a[3] > 0 &&
+      a[0] + a[2] <= entry.width && a[1] + a[3] <= entry.height ? a : null;
   };
   function valid(entry) {
     if (!entry || typeof entry.src !== 'string' || !entry.src ||
@@ -96,6 +103,32 @@
     c.restore();
     return drawn;
   }
+  function emission(renderer, png, from, to, stretchToTarget = false) {
+    const anchor = localPoint(png, 'emissionAnchor');
+    if (!anchor || png.entry.facing !== 'right') return false;
+    const dx = to.x - from.x, dy = to.y - from.y, distance = Math.hypot(dx, dy);
+    if (!(distance > 0)) return false;
+    const right = (png.entry.crop[0] + png.entry.crop[2] - png.entry.pivot[0]) * png.scale;
+    const length = right - anchor.x;
+    if (!(length > 0)) return false;
+    const c = renderer.ctx;
+    c.save(); c.translate(from.x, from.y); c.rotate(Math.atan2(dy, dx));
+    c.scale(stretchToTarget ? distance / length : renderer.unit, renderer.unit);
+    c.translate(-anchor.x, -anchor.y);
+    const drawn = paint(c, png);
+    c.restore();
+    return drawn;
+  }
+  function atSource(renderer, png, origin, sx, sy) {
+    // A pair authored on the same source canvas (door and frame) must keep
+    // that common transform; their individual crops/heights are not two scales.
+    const c = renderer.ctx, k = png.scale;
+    c.save(); c.translate(origin.x, origin.y); c.scale(sx / k, sy / k);
+    c.translate(png.entry.pivot[0] * k, png.entry.pivot[1] * k);
+    const drawn = paint(c, png);
+    c.restore();
+    return drawn;
+  }
   function coverHand(c, png, name) {
     const p = localPoint(png, name);
     if (!p) return;
@@ -109,11 +142,17 @@
   const near = (r, a, n) => r.game.distance(a, r.game.p) < n;
   const profileFor = role => root.SoSData.fidelity.characters[role] || root.SoSData.fidelity.characters.worker;
 
-  function bodyAsset(renderer, actor, role, portrait) {
+  function bodyAsset(renderer, actor, role, portrait, time) {
     const g = renderer.game, actualPlayer = actor === g.p && role === 'decker';
     const armed = !portrait && (role === 'manning' || actualPlayer && g.state.inventory.pistol);
     const posture = actualPlayer && g.p.dodgeTime > 0 ? '-dodge' : actualPlayer && g.p.crouch ? '-crouch' : '';
+    // Two authored contact poses, only for the actual unarmed walking player.
+    // The native simulation clock pauses with the game; reduced motion keeps
+    // the existing static pose. This does not create a locomotion state.
+    const walking = !portrait && actualPlayer && !armed && !posture && actor.moving && !renderer.reduced;
+    const phase = Math.floor(Math.max(0, finite(time) ? time : finite(g.time) ? g.time : 0) * 4) % 2;
     const candidates = portrait ? [role] : [...new Set([
+      ...(walking ? ['decker-walk-' + (phase ? 'b' : 'a')] : []),
       ...(armed ? [role + posture + '-ready'] : []), role + posture,
       ...(armed ? [role + '-ready'] : []), role,
     ])];
@@ -151,7 +190,7 @@
       this._pngMuzzles ||= Object.create(null);
       delete this._pngMuzzles[role];
     }
-    const png = bodyAsset(this, a, role, portrait);
+    const png = bodyAsset(this, a, role, portrait, t);
     if (!png) {
       if (portrait) redrawPortraitWhenReady(this, a, t, role);
       return fallback('human', this, arguments);
@@ -187,12 +226,22 @@
         y: (hand.y - grip.y + muzzle.y) * s,
       };
     }
-    if (!portrait && a === g.p && g.state.flags.equipped && g.p.lamp) {
-      const p = localPoint(png, 'lampAnchor'), f = a.facing < 0 ? -1 : 1;
-      this.ellipse(p.x, p.y, 3, 3, '#e0d08b');
-      const beam = c.createLinearGradient(p.x, p.y, p.x + f * 330, p.y);
-      beam.addColorStop(0, '#e1e6ad19'); beam.addColorStop(1, '#e1e6ad00');
-      this.path([[p.x, p.y], [p.x + f * 330, p.y - 50], [p.x + f * 330, p.y + 70]], beam);
+    if (!portrait && a === g.p && g.state.flags.equipped) {
+      let p = localPoint(png, 'lampAnchor');
+      const lamp = p && asset('equipment', 'lamp', a.facing || 1);
+      const mount = lamp && localPoint(lamp, 'mountAnchor'), tip = lamp && localPoint(lamp, 'emitterAnchor');
+      if (mount && tip) {
+        c.save(); c.translate(p.x - mount.x, p.y - mount.y);
+        const mounted = paint(c, lamp); c.restore();
+        if (mounted) p = { x: p.x - mount.x + tip.x, y: p.y - mount.y + tip.y };
+      }
+      if (g.p.lamp && p) {
+        const f = a.facing < 0 ? -1 : 1;
+        this.ellipse(p.x, p.y, 3, 3, '#e0d08b');
+        const beam = c.createLinearGradient(p.x, p.y, p.x + f * 330, p.y);
+        beam.addColorStop(0, '#e1e6ad19'); beam.addColorStop(1, '#e1e6ad00');
+        this.path([[p.x, p.y], [p.x + f * 330, p.y - 50], [p.x + f * 330, p.y + 70]], beam);
+      }
     }
     c.restore();
     if (!portrait && role !== 'decker' && near(this, a, 290)) this.text(profileFor(role).name, q.x, q.y - 126 * this.unit, 11, '#d4dcce', 'center');
@@ -215,13 +264,26 @@
         const attached = muzzle?.weapon === e.weapon;
         const x = a.x + (attached ? muzzle.x : 25), y = a.y + (attached ? muzzle.y : -61 * this.unit);
         const color = e.weapon === 'flame' ? '#f7c268' : e.weapon === 'foam' ? '#c9d4b0' : '#e8dcb2';
-        this.line(x, y, b.x, b.y - 62 * this.unit, color, e.weapon === 'flame' ? 13 : e.weapon === 'foam' ? 9 : 1.7);
-        this.ellipse(attached ? x : a.x + 29, y, 13, 6, color);
+        const id = e.weapon === 'flame' ? 'flame' : ['pistol', 'pulse', 'ally'].includes(e.weapon) ? 'muzzle' : null;
+        const png = id && asset('effects', id);
+        // Flame follows the accepted shot's exact endpoint. The foam PNG is a
+        // settled mass, so it belongs to an enemy's real foam state below.
+        const target = { x: b.x, y: b.y - 62 * this.unit };
+        if (!(id === 'flame' && png && emission(this, png, { x, y }, target, true))) {
+          this.line(x, y, target.x, target.y, color, e.weapon === 'flame' ? 13 : e.weapon === 'foam' ? 9 : 1.7);
+          if (!(id === 'muzzle' && png && emission(this, png, { x, y }, target))) {
+            this.ellipse(attached ? x : a.x + 29, y, 13, 6, color);
+          }
+        }
       } else {
         const a = this.pos(e.x, this.game.mode === 'SIDE' ? .55 : e.z);
-        for (let j = 0; j < 7; j++) {
-          const angle = j * .89, radius = (1 - e.ttl / e.max) * 60;
-          this.line(a.x, a.y - 60 * this.unit, a.x + Math.cos(angle) * radius, a.y - 60 * this.unit + Math.sin(angle) * radius, '#c2cf82', 2);
+        const id = e.type === 'hit' ? 'impact' : e.type === 'spark' ? 'spark' : null;
+        const png = id && asset('effects', id), impact = png && localPoint(png, 'impactAnchor');
+        if (!impact || !atWorld(this, png, { x: a.x - impact.x * this.unit, y: a.y - (60 + impact.y) * this.unit })) {
+          for (let j = 0; j < 7; j++) {
+            const angle = j * .89, radius = (1 - e.ttl / e.max) * 60;
+            this.line(a.x, a.y - 60 * this.unit, a.x + Math.cos(angle) * radius, a.y - 60 * this.unit + Math.sin(angle) * radius, '#c2cf82', 2);
+          }
         }
       }
       c.restore();
@@ -246,14 +308,118 @@
   };
   R.alien = function (e, t) {
     const png = asset('creatures', e.kind, e.facing || 1);
-    if (!png) return fallback('alien', this, arguments);
     const q = this.pos(e.x, this.game.zFor(e)), s = this.unit * (.85 + this.game.zFor(e) * .33);
-    this.shadow(q, (e.kind === 'queen' ? 85 : e.kind === 'facehugger' ? 30 : 45) * this.unit);
-    if (!atWorld(this, png, q, s)) return fallback('alien', this, arguments);
+    let body = false;
+    if (png) {
+      this.shadow(q, (e.kind === 'queen' ? 85 : e.kind === 'facehugger' ? 30 : 45) * this.unit);
+      body = atWorld(this, png, q, s);
+    }
+    if (!body) fallback('alien', this, arguments);
     if (e.foam > .1) {
       const c = this.ctx; c.save(); c.globalAlpha *= root.SoSCore.clamp(e.foam, .2, .85);
-      this.ellipse(q.x, q.y - 13 * s, 30 * s, 13 * s, '#c6cba3'); c.restore();
+      const foam = asset('effects', 'foam'), ground = foam && localPoint(foam, 'groundAnchor');
+      const drawn = ground && atWorld(this, foam, { x: q.x - ground.x * s, y: q.y - ground.y * s }, s);
+      // The vector alien already includes its restraint. Only a PNG body
+      // needs this native fallback when the foam texture is unavailable.
+      if (!drawn && body) this.ellipse(q.x, q.y - 13 * s, 30 * s, 13 * s, '#c6cba3');
+      c.restore();
     }
+  };
+  R.tacticalGround = function (t) {
+    fallback('tacticalGround', this, arguments);
+    // This native stage runs before corpses and actors. The original draw()
+    // still paints acid's bubbles, footprint and ACIDE warning over the PNG.
+    for (const a of this.game.rs.acid) if (a.time > 0) {
+      const png = asset('effects', 'acid'), ground = png && localPoint(png, 'groundAnchor');
+      if (!ground) continue;
+      const q = this.pos(a.x, this.game.zFor(a));
+      atWorld(this, png, { x: q.x - ground.x * this.unit, y: q.y - ground.y * this.unit });
+    }
+  };
+  R.door = function (d) {
+    const g = this.game, c = this.ctx, u = this.unit, p = d.portal || {};
+    const mount = p.mount || 'back', type = p.type || 'bulkhead';
+    // Oblique walls, travel, rock, lifts and stairs keep their authored native
+    // geometry. This front-facing pair only fits actual industrial bays.
+    if (type !== 'bulkhead' || !['back', 'front'].includes(mount)) return fallback('door', this, arguments);
+    const status = g.doorStatus(d), frame = asset('doors', 'bulkhead-frame');
+    const panel = status.open ? null : asset('doors', 'bulkhead-panel');
+    const aperture = frame && box(frame.entry, 'apertureBounds');
+    if (!aperture || frame.entry.facing !== 'none' || !status.open && (!panel ||
+        panel.entry.facing !== 'none' || panel.entry.canvasMatch !== 'bulkhead-frame' ||
+        panel.entry.width !== frame.entry.width || panel.entry.height !== frame.entry.height)) return fallback('door', this, arguments);
+    const approach = this.pos(d.x, g.zFor(d)), q = this.pos(d.x, p.apertureZ ?? g.zFor(d));
+    const h = 152 * u, w = (p.width || 110) * u, front = mount === 'front';
+    const left = this.pos(0, front ? .95 : .10), right = this.pos(g.room.width, front ? .95 : .10);
+    const sx = w / aperture[2], sy = h / aperture[3];
+    const origin = { x: q.x - (aperture[0] + aperture[2] / 2) * sx, y: q.y - (aperture[1] + aperture[3]) * sy };
+    c.save();
+    if (front && Math.abs(g.p.x - d.x) < 170) c.globalAlpha = .42;
+    // Preserve the exact native enclosing wall and approach. Only its frame
+    // and leaf are replaced, so transparency is not composited twice.
+    const keep = c.globalAlpha, wallH = h * 1.13;
+    if (front) c.globalAlpha = .48;
+    this.rect(left.x, q.y - wallH, Math.max(0, q.x - w * .61 - left.x), wallH + this.H * .12, '#243e49');
+    this.rect(q.x + w * .61, q.y - wallH, Math.max(0, right.x - q.x - w * .61), wallH + this.H * .12, '#243e49');
+    for (let x = left.x + 25 * u; x < right.x; x += 140 * u) {
+      if (Math.abs(x - q.x) < w * .8) continue;
+      this.line(x, q.y - wallH + 5 * u, x, q.y + this.H * .11, '#718a91', 4 * u);
+      this.line(x + 7 * u, q.y - wallH + 5 * u, x + 7 * u, q.y + this.H * .11, '#0c2028', 2 * u);
+    }
+    this.line(left.x, q.y, right.x, q.y, '#9bafa7', 4 * u); c.globalAlpha = keep;
+    this.line(left.x, q.y - h * 1.13, right.x, q.y - h * 1.13, '#758c93', 3 * u);
+    this.rect(q.x - w * .5, q.y - h, w, h, '#081a23');
+    this.line(approach.x - 28 * u, approach.y, q.x - 28 * u, q.y, '#e6c48c99', 2 * u);
+    this.line(approach.x + 28 * u, approach.y, q.x + 28 * u, q.y, '#e6c48c99', 2 * u);
+    if (panel && !atSource(this, panel, origin, sx, sy) || !atSource(this, frame, origin, sx, sy)) {
+      c.restore(); return fallback('door', this, arguments);
+    }
+    c.globalAlpha = 1;
+    const color = status.open ? '#abc9bb' : '#d39474';
+    this.ellipse(approach.x, approach.y, 23 * u, 5 * u, color + '66');
+    if (near(this, d, 175)) {
+      const tx = Math.max(this.camera + 155, Math.min(g.room.width - 150, d.x)) - this.camera;
+      this.rect(tx - 148, q.y - h - 49 * u, 296, 39 * u, '#071923eb');
+      this.text(d.label, tx, q.y - h - 32 * u, 11 * u, color, 'center');
+      this.text((front ? 'PREMIER PLAN' : 'PAROI DE FOND') + ' · PASSAGE', tx, q.y - h - 17 * u, 9 * u, '#a7bfbc', 'center');
+    }
+    c.restore();
+  };
+  R.shutter = function (s, t) {
+    fallback('shutter', this, arguments);
+    const g = this.game, far = this.pos(s.x, g.mode === 'SIDE' ? .55 : .13);
+    if (far.x < -180 || far.x > this.W + 180) return;
+    const png = asset('equipment', 'shutter-control'), status = png && localPoint(png, 'statusAnchor');
+    if (!status) return;
+    const a = g.rs.shutters[s.id], u = this.unit;
+    const color = a.status === 'closed' ? '#c1a680' : a.status === 'broken' ? '#925f50' : '#97bab3';
+    // Keep the real shutter, integrity/progress, supports and G/E prompts.
+    // The painted lever is static; the live indicator and native label carry
+    // open/closed/broken state at both actual control positions.
+    for (const n of g.shutterControls(s)) {
+      const q = this.pos(n.x, g.zFor(n)), panel = { x: q.x, y: q.y - 50 * u };
+      if (atWorld(this, png, panel)) {
+        this.ellipse(panel.x + status.x * u, panel.y + status.y * u, 2.3 * u, 2.3 * u, '#11242a');
+        this.ellipse(panel.x + status.x * u, panel.y + status.y * u, 1.5 * u, 1.5 * u, color);
+      }
+    }
+  };
+  R.lightPanel = function (l, t) {
+    const png = asset('equipment', 'light-panel');
+    const onAnchor = png && localPoint(png, 'onAnchor'), offAnchor = png && localPoint(png, 'offAnchor');
+    if (!onAnchor || !offAnchor) return fallback('lightPanel', this, arguments);
+    const g = this.game, c = this.ctx, q = this.pos(l.x, g.zFor(l)), u = this.unit, on = g.rs.lighting.on;
+    const panel = { x: q.x, y: q.y - 62 * u };
+    c.save();
+    this.rect(q.x - 5 * u, q.y - 74 * u, 10 * u, 74 * u, '#435e65');
+    if (!atWorld(this, png, panel)) { c.restore(); return fallback('lightPanel', this, arguments); }
+    // Neutralise both painted bulbs before lighting only the real state's bulb.
+    for (const a of [onAnchor, offAnchor]) this.ellipse(panel.x + a.x * u, panel.y + a.y * u, 2.1 * u, 2.1 * u, '#11242a');
+    const a = on ? onAnchor : offAnchor;
+    this.ellipse(panel.x + a.x * u, panel.y + a.y * u, 1.5 * u, 1.5 * u, on ? '#9ebca0' : '#d3a66c');
+    this.text('LUX', q.x, q.y - 110 * u, 10, '#d7dfc7', 'center');
+    if (near(this, l, 140)) this.text('E · MAINTENIR', q.x, q.y + 28 * u, 10, '#e7d5ad', 'center');
+    c.restore();
   };
   R.corpse = function (e) {
     const png = asset('corpses', e.kind, e.facing || 1);

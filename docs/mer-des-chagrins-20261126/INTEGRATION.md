@@ -1,29 +1,60 @@
-# La Mer des Chagrins — reprise de l’édition visuelle
+# La Mer des Chagrins — édition visuelle 0.10.2
 
-## Résultat de la reprise du 26 novembre 2026
+## Résultat de la continuation du 26 novembre 2026
 
-Le lot comporte **119 PNG individuels**, soit **234 227 391 octets** : les 110 images du snapshot historique et les neuf images du checkpoint suivant. Les 77 images qui restaient sans chemin publié ont été retrouvées par leurs identifiants Git dans le registre de la PR #67. L’arbre `4796d5f3d91a860812cd64886242e2e501729c79` réunit les 110 originaux ; chaque chemin, blob et taille correspond au registre. Les fichiers locaux sont ensuite décodés et contrôlés par SHA-256 et SHA Git. Aucun PNG n’a été retouché ou réencodé.
+Le lot contient **121 PNG individuels**, soit **237 861 570 octets** : **110 originaux récupérés**, **neuf images conservées du checkpoint suivant** et **deux nouvelles poses de marche de Decker**. Les 119 images déjà publiées restent identiques octet par octet. Les deux nouvelles images proviennent de l’outil intégré image_gen, à partir du sprite de Decker du projet ; leurs prompts et empreintes sont conservés dans [CONTINUATION_PROMPTS.json](CONTINUATION_PROMPTS.json).
 
-Le checkpoint documentaire précédent, `README.md`, `MANIFEST.json` et `RECOVERY.md`, décrit l’étape de 27 images. Il reste conservé comme historique. Le présent document décrit le raccordement ultérieur ; les chiffres de l’étape précédente ne constituent plus l’état courant.
+Les 77 images historiques qui n’avaient pas de chemin publié ont été retrouvées par leurs identifiants Git dans le registre de la PR nº 67. Le snapshot des 110 originaux reste conservé. Le vérificateur protège séparément l’inventaire des 119 PNG du commit 8cb25462 et les SHA des deux nouveaux fichiers ; il ne dépend pas de l’historique Git disponible dans la CI.
 
-## Accès et comportement
+**117 images disposent d’un raccordement au rendu du monde ; quatre autres illustrent exclusivement l’interface d’équipement. Les 121 sont consultables dans la galerie.** Ces nombres décrivent les raccordements disponibles. La QA Canvas de cette version a effectivement dessiné **103 types de PNG** dans sa sélection de cas ; elle n’est pas présentée comme une observation de chaque raccordement.
 
-Le catalogue `/dlc/` propose l’édition visuelle, la galerie et la version originale. L’édition visuelle charge les modules de la campagne originale puis un adaptateur de présentation. Elle conserve le format et la clé de sauvegarde du DLC. Le jeu principal Tantalus conserve sa sauvegarde distincte.
+Les documents README.md, MANIFEST.json et RECOVERY.md de ce dossier décrivent le checkpoint historique de 27 images. Le présent guide et VALIDATION.json décrivent l’état courant.
 
-- Jeu : `dlc/sea-of-sorrows-visual/index.html`.
-- Galerie : `dlc/sea-of-sorrows-visual/galerie.html`, avec recherche, catégories, trois fonds, aperçu et téléchargement de chaque PNG.
-- Métadonnées : `dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json`.
-- Inventaire de distribution : `dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json`.
+## Accès et sauvegardes
 
-Les images du jeu se chargent à la demande. Une image absente, invalide, non chargée, de dimensions incorrectes ou privée d’une attache nécessaire laisse place au dessin natif. La sélection essaie les poses suivantes lorsqu’une pose prioritaire est inutilisable. Les états consommés, détruits, terminés et les ouvertures intermédiaires conservent leur représentation native lorsqu’aucun dessin correspondant n’existe.
+Le catalogue /dlc/ propose l’édition visuelle, la galerie et la version originale.
 
-**104 PNG possèdent un raccordement au rendu du monde.** Les 119 sont consultables dans la galerie. Les 15 dessins encore réservés à cette collection sont les deux éléments de porte, les six effets et sept équipements : filtre, lampe, panneau lumineux, trousse médicale, radio, commande de cloison et détecteur.
+- Jeu : dlc/sea-of-sorrows-visual/index.html.
+- Galerie : dlc/sea-of-sorrows-visual/galerie.html, avec recherche, catégories, trois fonds, aperçu et téléchargement individuel.
+- Métadonnées : dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json.
+- Inventaire de distribution : dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json.
 
-| Famille | Images disponibles |
+L’édition visuelle charge les modules de la campagne 0.10.0 puis ses adaptateurs de présentation. Elle conserve le format et la clé de sauvegarde du DLC. La sauvegarde principale de Tantalus reste distincte.
+
+Les images du jeu se chargent à la demande. Une image absente, invalide, non chargée, de dimensions incorrectes ou privée d’une attache nécessaire conserve le dessin natif. La sélection essaie les poses suivantes lorsqu’une pose prioritaire est inutilisable. Les états consommés, détruits, terminés et les ouvertures sans image adaptée conservent leur représentation native.
+
+## Nouveaux raccordements
+
+| Élément | Usage et état réel |
+| --- | --- |
+| Deux poses de marche | Decker debout, non armé et mobile. Les deux contacts alternent selon l’horloge de simulation ; le repos et les mouvements réduits gardent la pose fixe. |
+| Lampe personnelle | Fixation à l’ancre du corps ; faisceau issu de la lentille. L’orientation et l’extinction sont respectées. |
+| Éclair de bouche | Événements de tirs balistiques admis, au canon effectivement dessiné. |
+| Flamme | Événement natif de tir ; le PNG remplace le trait opaque lorsqu’il est disponible. L’arme sans PNG conserve son dessin natif. |
+| Impact et étincelles | Événements hit et spark existants, sans nouveau dégât. |
+| Acide | Flaques réelles encore actives, dessinées au sol avant les acteurs ; marquage et avertissement natifs conservés. |
+| Mousse | Amas au pied d’un ennemi dont l’état de mousse est actif ; quantité et transparence suivent cet état. Cette image ne représente pas un jet. |
+| Cadre et panneau de porte | Vingt seuils industriels de face ou de fond compatibles. Même transformation du canevas pour les deux pièces ; panneau seulement lorsque la porte native est fermée. |
+| Commande de cloison | Deux boîtiers aux deux positions réelles de commande. Cloison, intégrité, progression, état et instructions restent natifs. |
+| Commande d’éclairage | Boîtier au pupitre réel ; voyant actif selon l’état réel du circuit. |
+
+Les portes obliques, les brèches rocheuses, les ascenseurs, escaliers, rampes et transports conservent leur géométrie native. Le raccordement des PNG ne déplace ni ouverture, ni collision, ni point d’arrivée.
+
+### Interface d’équipement
+
+Le masque respiratoire, la trousse, le détecteur et la radio possèdent maintenant un usage dans l’interface. Les boutons existants, leurs gestionnaires, les stocks et leurs restrictions restent en place. Les trois armes disposant d’un PNG sont également illustrées dans l’armurerie.
+
+Le dessin du filtre représente un **masque complet**, pas une cartouche isolée : la carte porte le titre « Protection respiratoire » et précise que le nombre affiché correspond aux cartouches de réserve. La lampe suit son état dès le prologue. Le détecteur suit sa possession et son activation natives. La radio reste une illustration des communications de mission ; aucun stock, événement d’acquisition ou niveau de batterie n’est inventé.
+
+Les images ne remplacent pas les libellés. Un chargement en échec ou de mauvaises dimensions conserve le texte et les pictogrammes. La légende du masque occupe toute la largeur de la carte dans la disposition mobile.
+
+## Inventaire artistique
+
+| Famille | Images |
 | --- | ---: |
-| Personnages et poses | 22, dont 16 identités |
+| Personnages et poses | 24, dont 16 identités |
 | Décors | 50 |
-| Obstacles | 6, correspondant aux 120 placements de la campagne |
+| Obstacles | 6, correspondant aux 120 placements de campagne |
 | Équipements | 16 |
 | Effets | 6 |
 | Objectifs | 4 |
@@ -32,39 +63,50 @@ Les images du jeu se chargent à la demande. Une image absente, invalide, non ch
 | Portes, parasites, brancards | 2 par famille |
 | Œuf, facehugger vivant et cadavre | 1 par famille |
 
-## Calibration et corrections
+Les découpes, pivots et attaches utilisent les pixels de l’image entière. L’enveloppe alpha ≥ 8 et sa marge de deux pixels sont calculées sans modifier les PNG. La hauteur dans le monde est divisée une seule fois par la hauteur de cette découpe.
 
-Les découpes, pivots et attaches utilisent les pixels de l’image entière. L’enveloppe alpha ≥ 8 et sa marge de deux pixels sont calculées sans modifier la source. La hauteur dans le monde est divisée une seule fois par la hauteur de cette découpe. Cela supprime le risque de coordonnées multipliées deux fois par les dimensions du PNG identifié lors de la précédente reprise.
+Les pieds servent de pivots aux personnages. Le pistolet est composé devant le corps avec reprise des pixels autour des mains ; les deux armes longues restent derrière les mains. Le départ visuel du tir suit le canon dessiné sans déplacer les cibles, impacts ou dégâts. La prise secondaire demeure une limite artistique à affiner.
 
-Les pieds servent de pivots aux personnages. Les prises, les bouches d’arme et les attaches de lampe et de visage sont définies dans le registre. Les proportions du pistolet, du fusil à impulsions et du foamer ont été ajustées après inspection des compositions. Le pistolet est composé devant le corps, avec reprise des pixels autour des mains ; les deux armes longues restent derrière les mains. Le départ visuel du tir suit le canon effectivement dessiné, sans déplacer la cible, les impacts ni les dégâts.
+Le parasite royal mesure 31,75 unités et le parasite normal 25 : le rapport 1,27 est déjà inclus. Les brancards emploient l’orientation none, avec head-right conservé comme indication anatomique séparée.
 
-Le parasite royal mesure 31,75 unités et le parasite normal 25 : le rapport 1,27 est déjà inclus. Aucun second multiplicateur n’est appliqué. Les brancards emploient l’orientation valide `none` ; `head-right` demeure une indication anatomique séparée.
+## Campagne, distribution et correction de la CI
 
-## Conservation de la campagne et distribution
+L’arbre original dlc/sea-of-sorrows demeure **1024a04d3615e135a0a9de7cbff6819e107a2492**. Ses 3 029 fichiers et les 59 livrables historiques restent conservés et vérifiés séparément. Les adaptateurs préservent le prototype du moteur de simulation, les interactions, les sélecteurs de cible, les états de mission et les sauvegardes.
 
-L’arbre original `dlc/sea-of-sorrows` demeure `1024a04d3615e135a0a9de7cbff6819e107a2492`. Ses 3 029 fichiers et les 59 livrables historiques sont vérifiés séparément. L’adaptateur conserve les collisions, ouvertures, sélecteurs de cible, interactions, états de mission et sauvegardes du moteur original.
+La base de cette continuation est le commit **8cb25462b9b0328b09ae28b278356113d325c603** de la PR nº 58. Il réunissait déjà le checkpoint précédent, la récupération de la PR nº 67 et la branche cumulative b0df1877a058f0818f96437fdfdea3f21ba7f415.
 
-La branche réunit le checkpoint PR #58, la récupération PR #67 et la branche cumulative `b0df1877a058f0818f96437fdfdea3f21ba7f415`. Les menus et contrôles de distribution des autres DLC sont conservés. Les reçus de succession sont prolongés pour les fichiers hôtes modifiés ; leurs étapes historiques ne sont pas réécrites.
+La CI de ce checkpoint a révélé trois liens de validation oubliés pour .gitattributes, .vercelignore et title-screen-v61.css. Ils sont ajoutés après les reçus existants, avec les empreintes exactes des fichiers déjà publiés. Un palier suivant inscrit uniquement l’ajout du test d’équipement dans package.json. Les sept reçus de fusion Mer, les trois reçus visuels et tous leurs préfixes historiques sont conservés ; les modifications de mêmes tailles, les prédécesseurs inconnus et les répétitions restent refusés.
 
-Le lot visuel public comporte **124 fichiers** : 119 PNG, deux pages HTML et trois scripts. L’admission épinglée fixe chaque chemin, taille et SHA-256. Les deux manifestes, les archives, les rapports, les scripts de vérification et les captures restent des sources. Les fichiers supplémentaires, chemins ambigus, liens symboliques et octets altérés sont refusés.
+Le lot visuel distribué contient **128 fichiers** : **121 PNG, deux pages HTML, quatre scripts et une feuille de style**. L’admission fixe chaque chemin, taille et SHA-256. Les manifestes, archives, rapports, prompts, outils et captures restent des sources. Les fichiers supplémentaires, chemins ambigus, liens symboliques et octets altérés sont refusés.
 
 ## Validation et portée des preuves
 
-Le reçu courant est `VALIDATION.json`. Les suites du renderer utilisent les vrais modules de simulation et des doubles Canvas/Image. La QA visuelle distincte utilise `@napi-rs/canvas` 0.1.100 : elle charge les 119 PNG, rend les 50 salles et 18 combinaisons de posture, arme et direction. Elle observe 90 types de PNG effectivement dessinés. Les équipements, objectifs et états de sauvetage sont des fixtures explicitement déclarées ; ces rendus ne sont pas une traversée jouée de la campagne.
+[VALIDATION.json](VALIDATION.json) consigne les commandes réellement terminées, leur résultat et le commit utilisé pour le build.
 
-Les six captures conservées correspondent aux salles s01, s14, s26, s33, s34 et s50. Le décodeur Skia utilisé par cette QA refuse les chunks de provenance `caBX` : le script les omet uniquement dans son buffer de décodage en mémoire. Les PNG source, leurs métadonnées de provenance et les chunks de pixels `IDAT` conservent leurs octets d’origine.
+- Les **59 tests du renderer** exécutent les vrais modules de simulation avec des doubles Canvas/Image. Ils couvrent notamment les tirs acceptés et refusés, les effets, les attaches, les portes, les commandes et les deux contacts de marche.
+- Les **six tests d’équipement** utilisent le vrai modèle de partie avec un DOM simulé. Ils vérifient la conservation des boutons et des stocks, les états initiaux, l’absence de doublons et les replis d’image.
+- La QA de pixels utilise **@napi-rs/canvas 0.1.100**. Elle charge **121 PNG**, rend **50 salles**, **18 combinaisons de posture/arme/direction**, **12 cas de locomotion** et **44 cas de détail**.
+- Les 12 locomotions comprennent quatre marches, quatre repos et quatre mouvements réduits. Le repos et les mouvements réduits restent identiques au pixel entre les temps examinés.
+- Les 44 détails comprennent six effets issus d’actions natives, quatre lampes, deux éclairages, trois cloisons, quatre portes compatibles et **25 replis de porte identiques pixel par pixel au renderer original**.
+- Les rendus préservent les sauvegardes sérialisées, les checkpoints, les modules natifs, le prototype du jeu et les 121 fichiers PNG.
 
-Chromium n’est pas disponible dans l’environnement ; son téléchargement renvoie HTTP 403. Aucune nouvelle réussite de parcours navigateur, de contrôle tactile réel ou de manette physique n’est revendiquée.
+Huit captures sont conservées dans le dépôt : s01, s14, s26, s33, s34, s50, [locomotion.png](canvas/locomotion.png) et [details.png](canvas/details.png). La planche de détails montre 23 des 44 cas exécutés. Une neuvième planche de travail de poses/armes a été inspectée sans être ajoutée au lot distribué.
 
-## Travail artistique restant
+Le décodeur Skia refuse les chunks de provenance caBX ; la QA les omet uniquement dans son buffer en mémoire. Les PNG source, leurs métadonnées et leurs chunks de pixels IDAT conservent leurs octets d’origine.
 
-Quatre PNG restent absents : adulte xénomorphe, reine, fusil plasma et lance-flammes. Les dernières demandes de génération correspondantes ont été refusées ; elles ne sont pas relancées par cette reprise. Leur rendu natif demeure disponible. Les cycles complets de marche, tir, rechargement et interaction ne sont pas fournis. La cohérence anatomique de la seconde main et des proportions entre poses reste à affiner.
+Ces rendus sont des **fixtures déclarées**, pas une traversée jouée. Chromium reste indisponible dans l’environnement local ; le téléchargement tenté lors de la reprise précédente a renvoyé HTTP 403. Aucune nouvelle réussite de parcours navigateur Mer, de contrôle tactile réel ou de manette physique n’est revendiquée. Les résultats locaux et la CI distante restent distingués dans le reçu.
 
-Les sept images signalées dans une autre passe locale, dont le répertoire n’a pas été retrouvé, ne sont pas comprises dans les 119 fichiers vérifiés. Le registre récupéré permet de certifier les 110 images de son snapshot ; il ne reconstitue pas ces sept fichiers sans leurs octets ou leurs identités vérifiables. De même, les onze versions anciennes de code dont les octets n’ont pas été retrouvés ont été remplacées par une reconstruction fonctionnelle, sans prétendre retrouver leurs octets d’origine.
+## Limites encore ouvertes
 
-Les visages, costumes et silhouettes de matériel insuffisamment décrits par les références sont des interprétations du projet. L’[édition du roman chez Titan Books](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/) fournit le cadre narratif ; elle ne certifie pas ces dessins. La fidélité globale 1:1 n’est pas certifiée.
+Quatre PNG restent absents : adulte xénomorphe, reine, fusil plasma et lance-flammes. Les demandes de génération précédemment refusées n’ont pas été relancées. Leur représentation native demeure disponible.
 
-## Commandes de vérification
+Les deux nouvelles marches sont **deux poses clés**, pas un cycle complet. Les cycles complets de marche, tir, rechargement et interaction restent à produire. La cohérence anatomique de la seconde main et des proportions entre poses reste à affiner. Le levier dessiné sur la commande de cloison est fixe ; son voyant et sa légende portent l’état réel. Un léger chevauchement des textes natifs G / E et de l’état de cloison reste visible dans une projection isolée.
+
+Les sept images d’une passe locale distincte non retrouvée ne sont pas comprises dans les 121. Aucun identifiant vérifiable supplémentaire n’a pu être récupéré pour elles. Les onze anciennes versions de code dont les octets restent introuvables ont été remplacées par une reconstruction fonctionnelle ; leurs octets originaux ne sont pas déclarés récupérés.
+
+Les identités et rôles du roman ne certifient pas les visages, costumes ou silhouettes de matériel. Les dessins restent des interprétations du projet. Le texte intégral n’a pas été confronté et **la fidélité globale 1:1 n’est pas certifiée**.
+
+## Commandes
 
 ```sh
 npm run test:mer-des-chagrins-visual
@@ -72,9 +114,10 @@ npm run check:mer-des-chagrins-sprites
 node scripts/mer-des-chagrins-visual-admission-20261126.mjs
 npm run test:dlc:sea-of-sorrows
 npm run qa:mer-des-chagrins:canvas
+npm run test:all
 npm run check
 npm run build
 npm run check:built
 ```
 
-La QA Canvas exige `@napi-rs/canvas`, fourni dans l’environnement de travail ; ce paquet ne devient pas une dépendance du jeu. Les résultats réellement obtenus et les éventuels blocages des commandes globales sont consignés dans `VALIDATION.json`.
+La dépendance Canvas de QA est fournie par l’environnement de travail et ne devient pas une dépendance du jeu. L’existence de ces commandes ne constitue pas leur résultat : le reçu de validation indique précisément les exécutions terminées.

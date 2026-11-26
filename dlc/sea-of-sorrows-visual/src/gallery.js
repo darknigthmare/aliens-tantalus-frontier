@@ -15,6 +15,11 @@
     'decker-crouch': 'Decker · accroupi', 'decker-crouch-ready': 'Decker · accroupi, prêt',
     'decker-dodge': 'Decker · esquive', 'decker-dodge-ready': 'Decker · esquive, prêt',
     'manning-ready': 'Manning · prêt',
+    'decker-walk-a': 'Decker · marche, contact A', 'decker-walk-b': 'Decker · marche, contact B',
+    filter: 'Masque respiratoire', medkit: 'Trousse de terrain', radio: 'Radio de liaison',
+    tracker: 'Détecteur de mouvement', lamp: 'Lampe personnelle',
+    'light-panel': 'Commande d’éclairage', 'shutter-control': 'Commande de cloison',
+    acid: 'Nappe d’acide', flame: 'Flamme', impact: 'Impact', muzzle: 'Éclair de bouche', spark: 'Étincelles',
   };
   const $ = id => document.getElementById(id);
   const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
