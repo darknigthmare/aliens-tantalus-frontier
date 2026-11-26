@@ -1,0 +1,565 @@
+{
+  "schema": 1,
+  "id": "river-of-pain-bible-production-assets",
+  "usage": "bible_only",
+  "assets": [
+    {
+      "file": "production/jonesy-study-v1.png",
+      "id": "prod-jonesy-study-v1",
+      "title": "Jonesy — étude de personnage",
+      "kind": "character_study",
+      "targets": [
+        {
+          "recordId": "rop:personnages:jonesy",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "R1",
+        "R21",
+        "R22"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R1",
+          "claim": "Jonesy accompagne Ripley dans la séquence de récupération et auprès de son lit."
+        },
+        {
+          "sourceId": "R22",
+          "claim": "La photographie créditée au studio montre la tête et le torse d’un chat roux tigré tenu par Ripley."
+        },
+        {
+          "sourceId": "R21",
+          "claim": "Le produit sous licence de Ripley comporte une représentation de Jonesy, utilisable comme complément."
+        }
+      ],
+      "interpretations": [
+        "Le corps complet, la pose à quatre pattes et le cadrage sont une reconstruction pour cette étude.",
+        "La source photographique renvoie à Alien (1979) ; elle ne valide pas les animations ou une apparence mesurée dans la campagne 2179."
+      ],
+      "chronology": "Étude pour le personnage du récit en 2179 ; références visuelles issues d’Alien (1979) et de produits sous licence.",
+      "bytes": 2125979,
+      "sha256": "7286a3e2a0f6813f920ee1713d1aa31e3529a0c05a2b21ccc8649cd6eb01e1fe",
+      "pixels": {
+        "width": 1585,
+        "height": 992
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
+        "referenceUrls": [],
+        "referencePaths": [
+          "/workspace/scratch/375209caf28f/generated_images/exec-f22d21a2-eda0-4785-8ff5-3ce56ca9f667.png"
+        ],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-4446e72f-4439-420b-adf7-a761531f2346.png",
+        "transparentBackgroundRequested": false,
+        "attempt": "jonesy-study-v1-opaque",
+        "history": [
+          {
+            "id": "jonesy-study-v1",
+            "prompt": "Use case: stylized-concept. Create ONE complete full-body hand-painted 2D character asset of Jonesy, the ginger tabby cat from Alien, using the supplied credited film photograph as the guide for the cat's face, ginger striped fur, lighter cream muzzle and chin, ear shapes and realistic domestic-cat proportions. The reference contains a person; the output contains ONLY the cat, no person or environment. Reconstruct a calm alert standing pose on FOUR paws, strict side view facing RIGHT with the face turned only slightly toward the viewer. Four anatomically correct legs, all paws fully visible, gently lifted tail curving behind to the LEFT, ears upright, relaxed mouth, complete whiskers. Orange/rust tabby stripes over warm ginger fur, pale cream lower muzzle and chest, pink nose, amber eyes. Short-to-medium domestic-cat fur, not a lion, exotic big cat, fantasy animal or kitten. Detailed restrained realistic hand-painted finish for the same 2D retro-industrial survival-game art family. Entire animal and full tail inside the canvas with generous transparent margins. TRUE TRANSPARENT background. No collar, costume, text, border, floor, ground shadow, effects, blood, extra animals or props. One cat only. This is a production illustration; the new standing pose is an interpretation, not a copy of the held pose in the reference.",
+            "selected": false
+          },
+          {
+            "id": "jonesy-study-v1-clean",
+            "prompt": "Use case: precise-object-edit. Clean ONLY the cutout matte of this existing Jonesy ginger-cat game illustration. Preserve the same cat identity, face, fur colors and tabby markings, body proportions, exact four-paw standing pose, full tail, framing and lighting. Remove the stray bright red and yellow edge contamination and isolated colored speckles around the silhouette, particularly whiskers, belly, tail and paws. Replace stray colored pixels outside the natural fur edge with full transparency; keep natural cream whiskers and fine ginger fur tips with a clean neutral antialiased alpha transition. Do not repaint the cat, add a contour line, add a shadow, crop it or change its pose. Background must remain genuinely transparent everywhere outside the animal. No other changes.",
+            "selected": false
+          },
+          {
+            "id": "jonesy-study-v1-opaque",
+            "prompt": "Use case: background-extraction. This is a production reference illustration of the ginger cat Jonesy. Keep the cat's complete body, exact standing pose, face, tabby markings, proportions, tail and four paws from the supplied image. Replace the transparent background with a perfectly clean, fully OPAQUE, uniform warm neutral light-grey studio backdrop. Clean away all bright red and yellow matte contamination at the fur outline, whiskers and between the legs, blending the natural fur edges normally against the new grey background. No colored halo or outline. Maintain the existing natural cream whiskers and ginger coat, with a clean realistic illustration finish. No text, border, extra object, frame, watermark or cast floor shadow. Do not crop any part of the cat. The entire canvas, including the background, must be opaque; this is a studio production plate, not a transparent runtime sprite.",
+            "selected": true
+          }
+        ]
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Image entière relue : chat roux tigré sur fond gris opaque, pose complète reconstruite.",
+          "Version finale opaque retenue ; les essais de détourage précédents sont conservés dans l’historique et restent hors registre d’assets."
+        ]
+      }
+    },
+    {
+      "file": "production/medlab-study-v1.png",
+      "id": "prod-medlab-study-v1",
+      "title": "Infirmerie — étude du Medlab",
+      "kind": "environment_study",
+      "targets": [
+        {
+          "recordId": "rop:lieux:med",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "R1",
+        "R10"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R1",
+          "claim": "L’extrait décrit le service médical de la colonie et ses soins."
+        },
+        {
+          "sourceId": "R10",
+          "claim": "Un concept original de Ron Cobb représente le Medlab avant sa dégradation."
+        }
+      ],
+      "interpretations": [
+        "L’implantation proposée pour le jeu ne constitue pas un relevé du décor final ni un plan officiel.",
+        "Le cadrage, les raccordements aux autres pièces et les dimensions sont à définir dans le modèle du projet."
+      ],
+      "chronology": "Étude de l’infirmerie coloniale pour 2179 ; les scènes médicales de 2173 sont distinctes.",
+      "bytes": 2857582,
+      "sha256": "a9f74c68033ae67012c89c1afca1ea309819ee037486a299292b5ffd47b16cf2",
+      "pixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE detailed landscape environment production painting of the Hadley's Hope medical laboratory, closely following the supplied Ron Cobb Aliens Medlab concept drawing. Preserve its visible spatial composition: low long room, square blocky examination/reclining stations stepping into depth, a right-side bank of instruments with FOUR circular instrument faces, angled CRT housings, exposed wall cables and conduits, broad rectangular ceiling light bands and service ducts, gridded industrial floor, a real framed passage at the far end. The circular instrument faces belong to equipment, not freestanding doors. View from the same near corner into the room. Palette muted off-white, pale industrial teal/sage and charcoal, restrained amber/green CRT light. Render as a polished realistic hand-painted retro-industrial 2D game environment with crisp architecture and legible material wear, not a technical blueprint. The room is clean, occupied only by its medical equipment, before its destruction. No people, creatures, blood, injuries, organic infestation, modern flat-panel monitors, holograms, floating doors, advertising or added text. Entire image is one coherent room, full opaque background, no page borders, labels, signatures, watermarks, collage or inset views. This is a concept-based visual study, not a certified floor plan or final gameplay background.",
+        "referenceUrls": [
+          "https://images.propstore.com/f9a934af42ec346c322933253cea5576-1.jpg"
+        ],
+        "referencePaths": [
+          "/workspace/scratch/375209caf28f/fleuve-production-reference-images/medlab-concept.jpg"
+        ],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-c4c428e1-f60c-4178-8d34-c9d1e152d98d.png",
+        "transparentBackgroundRequested": false,
+        "attempt": "medlab-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Vue intérieure relue : volumes, postes et surfaces visibles ; composition et matériaux interprétés à partir du concept.",
+          "Vue de production sans plan coté, couches séparées ou parcours de validation."
+        ]
+      }
+    },
+    {
+      "file": "production/daihotai-study-v1.png",
+      "id": "prod-daihotai-study-v1",
+      "title": "Daihotai — étude du tracteur terrestre",
+      "kind": "vehicle_study",
+      "targets": [
+        {
+          "recordId": "rop:vehicules:daihotai-reference",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "R6"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R6",
+          "claim": "Le dessin de Ron Cobb représente le tracteur des Jorden de face, arrière, côté et dessus."
+        }
+      ],
+      "interpretations": [
+        "Le passage du concept à cette vue peinte reste une reconstruction ; les détails non visibles sont interprétés.",
+        "Les dimensions de la feuille de dessin ne sont pas les dimensions du véhicule.",
+        "Aucune identification automatique au heavy-crawler du roman ou au tracteur pilotable du projet."
+      ],
+      "chronology": "Référence de conception d’Aliens (1986), étudiée pour la campagne 2179.",
+      "bytes": 2094219,
+      "sha256": "72d3c0bdd6bd9d4199fdc568ea46e791e3467013839b22d1a83c715c28f5a536",
+      "pixels": {
+        "width": 1774,
+        "height": 887
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE full-vehicle high-detail 2D production illustration of the Jorden family Daihotai exploration tractor, closely following the supplied Ron Cobb Aliens production drawing. Use the SIDE ELEVATION on the lower right of the drawing as the main silhouette guide, with the other views clarifying its volumes. Output ONE lateral vehicle view, facing RIGHT; do not reproduce a technical sheet or multiple views. Six wheels on three axles, exactly THREE large near-side wheels visibly aligned along one ground baseline; far-side wheels normally occluded. Preserve the distinctive low wedge-shaped multi-pane glazed cab at the front, broad sloping windshield, compact industrial body, rectangular rear body, exposed wheel structures, roof rails and small rooftop parabolic dish shown in the concept. This is an exploration tractor, not a military APC, tank or construction bulldozer. No weapons, tracks, scoop, extra axles, characters or invented attachments. Muted industrial grey-green metal with restrained dirt and worn edges; muted green-tinted glazing. Complete vehicle from front bumper to rear end, entire wheels, roof and antenna inside frame with generous margins. Detailed realistic hand-painted game-art finish, neutral soft light. TRUE TRANSPARENT background, no landscape, floor, shadow ellipse, title, diagram lines, dimensions, labels, signatures, border or watermark. This is a production study based on a preproduction concept; surface colors and textures are interpreted.",
+        "referenceUrls": [
+          "https://images.propstore.com/18811284db7f2bb22b6652ebbbfad68c-1.jpg"
+        ],
+        "referencePaths": [
+          "/workspace/scratch/375209caf28f/fleuve-production-reference-images/daihotai-concept.jpg"
+        ],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1509f9c3-86cd-4ec5-909b-ac59b9066d86.png",
+        "transparentBackgroundRequested": true,
+        "attempt": "daihotai-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Vue latérale relue : trois roues visibles du flanc, cabine vitrée et équipement de toit ; traduction peinte du concept.",
+          "Aucun état de conduite ni ancrage runtime n’est livré par cette étude.",
+          "Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.",
+          "La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie."
+        ],
+        "alphaInspection": {
+          "threshold": 16,
+          "bounds": [
+            79,
+            16,
+            1709,
+            878
+          ],
+          "mainSilhouetteEntire": true,
+          "residualNoiseAlphaRange": [
+            1,
+            15
+          ],
+          "provenance": "mesure_de_production_transmise_par_root"
+        }
+      }
+    },
+    {
+      "file": "production/derelict-study-v1.png",
+      "id": "prod-derelict-study-v1",
+      "title": "Épave extraterrestre — étude extérieure",
+      "kind": "ship_study",
+      "targets": [
+        {
+          "recordId": "rop:vaisseaux:prop-wreck",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "S1",
+        "R13",
+        "R14"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "S1",
+          "claim": "Le récit relie l’exploration des Jorden à l’épave extraterrestre."
+        },
+        {
+          "sourceId": "R13",
+          "claim": "Les photographies de production d’Alien montrent un concept, une miniature et des détails de sa surface."
+        },
+        {
+          "sourceId": "R14",
+          "claim": "Une réplique sous licence présente la forme organique du vaisseau et un socle rocheux."
+        }
+      ],
+      "interpretations": [
+        "La source primaire renvoie au film de 1979 ; les dommages précis du récit en 2179 restent à vérifier.",
+        "Le socle de la réplique est une représentation, sans valeur de carte officielle.",
+        "Échelle, accès, intérieur et collision du jeu restent à produire ou à contrôler séparément."
+      ],
+      "chronology": "Étude de l’épave pour la campagne 2179 à partir de références de production d’Alien (1979) et d’une réplique sous licence.",
+      "bytes": 2013646,
+      "sha256": "23ccd7ff4cd824bbc2adf0771b270780762f0cd8dfb89a25eca1a4e728a6f405",
+      "pixels": {
+        "width": 1379,
+        "height": 1141
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE detailed hand-painted production illustration of the derelict extraterrestrial spacecraft from Alien (1979), using the supplied licensed collectible image as a SILHOUETTE and surface reference. Preserve the recognizable asymmetric horseshoe-shaped hull, two tall inward-curving ends with distinct blunt openings, heavy ribbed organic-looking hull segments, recessed circular central relief and layered weathered metal/stone-like surface. Keep the same elevated three-quarter viewing direction and show the entire vessel. This is the original Alien derelict, not a symmetrical Prometheus or Covenant Juggernaut redesign. Retain a small irregular natural patch of dark jagged rocks beneath the hull for support; no circular display pedestal or manufactured base edge. Muted ochre-grey and brown-green weathered hull, charcoal rocks, restrained cool neutral lighting, high-detail painted 2D game-art finish rather than glossy miniature photography. TRUE TRANSPARENT surroundings. All branches and rocks remain within the frame with generous margin. No sky, extra vessel, creatures, people, text, logo, watermark, border, collage or effects. One ship with its immediate rocky support only. This is a documented production study based on a licensed reconstruction; do not add imagined battle damage or imply a measured 2179 state.",
+        "referenceUrls": [
+          "https://www.sideshow.com/storage/product-images/906247/derelict-ship_alien_gallery_5e91199774892.jpg"
+        ],
+        "referencePaths": [
+          "/workspace/scratch/375209caf28f/fleuve-production-reference-images/derelict-licensed.jpg"
+        ],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-04a002a8-01b7-45a6-84fd-a3fdd41e72f8.png",
+        "transparentBackgroundRequested": true,
+        "attempt": "derelict-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Vue trois quarts relue avec son socle rocheux ; comparaison artistique 1:1 non certifiée.",
+          "Le socle fait partie de cette étude de réplique ; il ne définit pas le relief du niveau.",
+          "Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.",
+          "La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie."
+        ],
+        "alphaInspection": {
+          "threshold": 16,
+          "bounds": [
+            49,
+            31,
+            1339,
+            1119
+          ],
+          "mainSilhouetteEntire": true,
+          "residualNoiseAlphaRange": [
+            1,
+            15
+          ],
+          "provenance": "mesure_de_production_transmise_par_root"
+        }
+      }
+    },
+    {
+      "file": "production/exterior-terrain-study-v1.png",
+      "id": "prod-exterior-terrain-study-v1",
+      "title": "Sol rocheux de LV-426 — étude de terrain",
+      "kind": "terrain_study",
+      "targets": [
+        {
+          "recordId": "rop:terrains:material-exterior",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "R1",
+        "R14"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R1",
+          "claim": "À l’arrivée de Brackett, l’extérieur est noir et gris, balayé par le vent et une poussière abrasive."
+        },
+        {
+          "sourceId": "R14",
+          "claim": "Le socle de la réplique sous licence propose un environnement rocheux associé à LV-426."
+        }
+      ],
+      "interpretations": [
+        "Répartition des blocs, granularité, raccords et relief local conçus pour cette étude.",
+        "Le raccord sans couture, les échelles d’utilisation et les couches de jeu ne sont pas validés ; aucune collision n’est dérivée de cette image."
+      ],
+      "chronology": "Direction de terrain de la colonie en 2179 ; géométrie locale adaptée.",
+      "bytes": 3557016,
+      "sha256": "9a2e6abccf0f31c0b065ab6964958399b9ee291f590474e0350cc0c73bf9fc4b",
+      "pixels": {
+        "width": 1254,
+        "height": 1254
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE detailed opaque square material-production study for the rocky surface of LV-426 in Alien: River of Pain. Close top-down view of a continuous field of black and charcoal-grey weathered volcanic stone, angular slate-like fragments, compact fine grey abrasive dust in crevices, occasional muted brown mineral edge wear. Dense but readable realistic hand-painted 2D-game material detail, broad flat surfaces mixed with smaller stones, subdued diffuse light without a strong directional cast shadow. No horizon or sky, no landscape panorama, no buildings, creatures, plants, footprints, equipment, lettering, grid, scale bar, labels, glowing lava or bright crystals. Avoid a single central focal object so this can guide a future terrain texture. One coherent material surface fills the entire frame. FULLY OPAQUE background. This is an interpreted material study based on the novel's black-grey dusty exterior, not a certified seamless tile or a measured planetary surface.",
+        "referenceUrls": [],
+        "referencePaths": [],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-3fc5362d-0d43-4ccc-8e8e-7fa34d71e619.png",
+        "transparentBackgroundRequested": false,
+        "attempt": "exterior-terrain-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Étude de roche sombre et granulats relue.",
+          "Répétition sans couture et échelle de texel non validées ; aucune couche runtime n’est remplacée."
+        ]
+      }
+    },
+    {
+      "file": "production/uplink-study-v1.png",
+      "id": "prod-uplink-study-v1",
+      "title": "Tour Uplink de Hadley’s Hope — étude extérieure",
+      "kind": "environment_study",
+      "targets": [
+        {
+          "recordId": "rop:props:colony-uplink-tower",
+          "role": "subject"
+        },
+        {
+          "recordId": "rop:lieux:aerial",
+          "role": "context"
+        }
+      ],
+      "sourceIds": [
+        "R24"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R24",
+          "claim": "La miniature de la tour Uplink a servi aux plans lointains de Hadley’s Hope dans Aliens."
+        }
+      ],
+      "interpretations": [
+        "La tour extérieure fournit un contexte architectural à la terrasse des antennes du projet.",
+        "Le plan, le chemin d’accès et la terrasse jouable ne sont pas établis par la miniature ; ils restent à produire et à vérifier."
+      ],
+      "chronology": "Référence extérieure d’Aliens (1986) associée à l’adaptation de la colonie en 2179.",
+      "bytes": 1511242,
+      "sha256": "8876c205a8c4438ec6704f5bd64d1b66ccc4f64bf8c6cb4aed365eceea356a9b",
+      "pixels": {
+        "width": 1254,
+        "height": 1254
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE detailed hand-painted 2D production illustration of Hadley's Hope's Uplink communications tower, closely following the supplied ORIGINAL FILM MINIATURE reference. Preserve its exact visible overall arrangement and distinctive industrial silhouette: tall central rectangular support column, angular base and diagonal stabilizing struts with flat feet, open lattice strips beside the lower shaft, broad upper communications-equipment head with rectangular mesh/grid panels extending left and right, vertical central housing and the paired small circular vent-like elements visible at its top. Keep the same slightly elevated three-quarter view as the reference, do not redesign it into a conventional dish antenna, skyscraper or generic radio mast. This is fixed communications infrastructure. Muted aged grey-brown metal, restrained grime, perforated mesh, bolts and service panels, realistic painterly detail consistent with a 2D retro-industrial colony game. Entire tower, every strut, panel and foot inside frame with generous margin. TRUE TRANSPARENT background with real openings through the lattice and mesh. No landscape, platform beyond the tower's own feet, people, vehicles, labels, typography, watermark, diagrams, collage, lights/effects or added hardware. One complete tower only. Production illustration based on a filmed miniature; no invented real-world dimensions.",
+        "referenceUrls": [
+          "https://images.propstore.com/660940bd6ff9279bce0a991980fde734-1.jpg"
+        ],
+        "referencePaths": [
+          "/workspace/scratch/375209caf28f/fleuve-production-reference-images/uplink-miniature.jpg"
+        ],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-ffac2493-c188-4f05-8d9f-b8f77651f4a6.png",
+        "transparentBackgroundRequested": true,
+        "attempt": "uplink-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Structure entière relue ; la tour reste une référence de production extérieure, sans ancrage au runtime.",
+          "Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.",
+          "La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie."
+        ],
+        "alphaInspection": {
+          "threshold": 16,
+          "bounds": [
+            165,
+            57,
+            1114,
+            1222
+          ],
+          "mainSilhouetteEntire": true,
+          "residualNoiseAlphaRange": [
+            1,
+            15
+          ],
+          "provenance": "mesure_de_production_transmise_par_root"
+        }
+      }
+    },
+    {
+      "file": "production/lv426-surface-study-v1.png",
+      "id": "prod-lv426-surface-study-v1",
+      "title": "LV-426 / Acheron — vue de surface",
+      "kind": "world_study",
+      "targets": [
+        {
+          "recordId": "rop:planetes:lv426",
+          "role": "subject"
+        },
+        {
+          "recordId": "rop:terrains:material-exterior",
+          "role": "context"
+        }
+      ],
+      "sourceIds": [
+        "S1",
+        "R1",
+        "R12"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "S1",
+          "claim": "LV-426 / Acheron est le monde de Hadley’s Hope et du récit."
+        },
+        {
+          "sourceId": "R1",
+          "claim": "L’arrivée montre un paysage noir et gris, des bâtiments cubiques, une serre hémisphérique et un processeur atmosphérique dans la tempête."
+        },
+        {
+          "sourceId": "R12",
+          "claim": "Des maquettes de bâtiments ont servi aux vues extérieures de la colonie dans Aliens."
+        }
+      ],
+      "interpretations": [
+        "Cadrage de surface et implantation proposés ; aucune cartographie globale, géographie orbitale ou dimension planétaire certifiée.",
+        "Les distances et le relief entre la colonie, les processeurs et l’épave ne sont pas établis par cette image."
+      ],
+      "chronology": "Vue de contexte de la colonie en 2179 ; LV-426 est qualifiée de lune.",
+      "bytes": 2614374,
+      "sha256": "45a3e5968f41d0b30936a8915bb18dcd533adec08b59871f2eb003f4833e5d0d",
+      "pixels": {
+        "width": 1774,
+        "height": 887
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE wide landscape production painting of the surface of LV-426 / Acheron around Hadley's Hope, for Alien: River of Pain. Ground-level view across black and charcoal-grey angular volcanic ridges and a dusty stony plain, under a low heavy overcast sky. Wind drives low streams of abrasive grey dust across the ground. A small distant cluster of low modular industrial colony blocks with restrained amber work lights occupies the middle distance; the larger angular mass of atmospheric-processing infrastructure is barely visible farther away through dust. The buildings are grounded, functional and connected by low service structures, not floating architecture. Bleak retro-industrial 1980s science-fiction mood, limited charcoal, grey, muted brown and cold slate-blue palette, realistic hand-painted 2D game background with readable foreground/middle/background layers. FULLY OPAQUE scene. No people, creatures, vehicles, plants, alien ruins, spacecraft, domed globe, starfield, giant sky planet, bright lava, explosions, text, map labels, UI or inset panels. This is an interpreted surface view grounded in the novel's dusty black-grey exterior, not an orbital map, exact colony floor plan or certified geography. One coherent view.",
+        "referenceUrls": [],
+        "referencePaths": [],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-1565e132-e03e-41a6-a269-965bc10b4df3.png",
+        "transparentBackgroundRequested": false,
+        "attempt": "lv426-surface-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Panorama relu : colonie et relief rocheux sous un ciel sombre.",
+          "Topographie, composition et distances interprétées ; aucune carte ou vue orbitale certifiée."
+        ]
+      }
+    },
+    {
+      "file": "production/greenhouse-study-v1.png",
+      "id": "prod-greenhouse-study-v1",
+      "title": "Serre hémisphérique — étude de lieu",
+      "kind": "environment_study",
+      "targets": [
+        {
+          "recordId": "rop:lieux:greenhouse",
+          "role": "subject"
+        }
+      ],
+      "sourceIds": [
+        "R1"
+      ],
+      "sourceClaims": [
+        {
+          "sourceId": "R1",
+          "claim": "L’extrait décrit une serre hémisphérique en matériau vitré parmi les bâtiments de la colonie."
+        }
+      ],
+      "interpretations": [
+        "Ossature précise, porte, plantations, équipements et implantation sont interprétés.",
+        "L’image ne fixe ni dimensions officielles, ni circulation, ni parallaxe finale du niveau."
+      ],
+      "chronology": "Étude de la serre visible à l’arrivée de Brackett en 2179.",
+      "bytes": 2808599,
+      "sha256": "4d7182df7f763562ba15cfb7256dad8cff14fb44c5894fc4f82c1f1a314df028",
+      "pixels": {
+        "width": 1774,
+        "height": 887
+      },
+      "usage": "bible_only",
+      "scale": null,
+      "generation": {
+        "tool": "image_gen",
+        "createdOn": "2026-11-26",
+        "prompt": "Use case: stylized-concept. Create ONE detailed landscape production illustration of the hemispherical greenhouse at the Hadley's Hope colony, interpreted from Alien: River of Pain. A single practical HEMISPHERICAL glazed dome stands on a low sealed industrial foundation amid dark grey rocky ground and windblown dust. Through the dusty translucent plastiglass panels, show orderly green cultivated plant rows and a modest metal walkway under warm internal grow lights. The dome is supported by a legible metal rib structure. One small attached rectangular sealed entrance vestibule provides a real framed closed door at ground level, reached by a short solid service path; no floating or isolated doors. Exterior pipes and air-handling units connect physically to the dome foundation, with no invented giant machines. No people or creatures. Muted off-white and grey-green industrial metal, charcoal rocks, restrained green vegetation inside the enclosure, cold overcast exterior light. Polished realistic hand-painted 2D game-environment style matching the retro-industrial colony. FULLY OPAQUE coherent environment image, no transparent background, typography, labels, border, watermark, collage, modern glass office tower, tropical outdoor landscape, warfare, organic infestation or dramatic disaster. This is a concept study of a text-attested hemispherical greenhouse; exact glazing pattern, interior arrangement and dimensions are interpreted.",
+        "referenceUrls": [],
+        "referencePaths": [],
+        "outputSourcePath": "/workspace/scratch/375209caf28f/generated_images/exec-fb421dac-edde-44b0-9f19-25f0a1bff003.png",
+        "transparentBackgroundRequested": false,
+        "attempt": "greenhouse-study-v1",
+        "history": []
+      },
+      "validation": {
+        "visual": "reviewed_with_limitations",
+        "fidelity1to1": "not_certified",
+        "notes": [
+          "Vue extérieure relue : dôme vitré hémisphérique, cultures, sas fermé et terrain rocheux.",
+          "Volumes détaillés, assemblage des panneaux et sas interprétés ; aucune cote officielle ou ouverture jouable certifiée."
+        ]
+      }
+    }
+  ]
+}

@@ -4,6 +4,44 @@ Cette présentation dérive de la version récupérée `0.9.0-candidate.1`. Elle
 des sprites PNG individuels au jeu existant. Ce travail ne constitue pas une
 récupération de la version 0.10 autrefois restée locale.
 
+## Lot 4 — huit illustrations documentées dans la bible
+
+Le 26 novembre 2026, huit études visuelles complètent la
+[bible de production](bible/README.md) : Jonesy, le Medlab, le Daihotai,
+l’épave extraterrestre, le sol rocheux, la surface de LV-426, la serre et la
+tour de communications Uplink. Ces huit PNG représentent **19 582 657 octets**.
+Ils sont conservés entiers dans `bible/production/`, avec leurs prompts,
+références, dimensions, empreintes et limites dans
+[PRODUCTION_ASSETS.json](bible/PRODUCTION_ASSETS.json).
+
+La tour Uplink possède une nouvelle fiche documentaire distincte. Son image
+illustre cette fiche et fournit un contexte visuel au lieu « antenne » ; elle
+ne valide pas le plan ou l’implantation de ce lieu. Les fiches distinguent
+les illustrations du sujet, les références de contexte et les PNG du jeu.
+
+La bible comprend **279 fiches** : 83 reliées à un PNG runtime, huit autres
+dont le sujet est illustré en production et une fiche avec seulement une
+image de contexte. **188 fiches restent sans image de leur sujet**, dont
+**187 sans aucune image**. Le filtre « Sans image du sujet » conserve les
+fiches qui ne disposent que d’un contexte.
+
+Les **78 PNG runtime** et leurs raccordements restent ceux du lot 3. Les
+nouvelles images sont des études de production : elles ne créent ni acteur
+animé, ni véhicule pilotable, ni intérieur traversable. Les fichiers de la
+bible sont admis précisément comme sources et exclus de la distribution publique.
+
+La version retenue de Jonesy est sur fond gris opaque, après deux essais de
+détourage écartés. Les découpes du Daihotai, de l’épave et de la tour conservent
+un faible bruit alpha périphérique, documenté avant toute éventuelle intégration.
+Le terrain ne constitue pas une texture sans couture certifiée et le panorama
+de LV-426 ne définit pas une carte officielle.
+
+Le service de génération a refusé le lot d’essais M41A/M240 et l’essai de
+Xénomorphe adulte ; aucun PNG exploitable de ces essais n’est déclaré livré.
+Les fiches correspondantes conservent les manquants et la trace des tentatives.
+Le [rapport de qualification](../../../docs/development/RIVER_OF_PAIN_SPRITE_QA.md)
+précise les vérifications réalisées pour ce lot.
+
 ## Lot 3 — huit meubles et bible de production
 
 Le 26 novembre 2026, huit PNG individuels complètent les familles `rack`,

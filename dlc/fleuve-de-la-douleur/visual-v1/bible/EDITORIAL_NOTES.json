@@ -57,6 +57,69 @@
       "url": "https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/",
       "type": "maquette_de_production",
       "use": "Volumes et matériaux extérieurs de la colonie ; les dimensions logiques du jeu ne deviennent pas officielles."
+    },
+    {
+      "id": "R13",
+      "title": "Propstore — photographies de production de l’épave, Alien (1979)",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56541/",
+      "type": "photographies_de_production",
+      "use": "Onze photographies du concept, de la miniature et de sa surface. Référence de production de 1979 ; les dommages et le cadrage du récit en 2179 restent à vérifier."
+    },
+    {
+      "id": "R14",
+      "title": "Sideshow / Hollywood Collectibles — réplique sous licence du Derelict",
+      "url": "https://www.sideshow.com/collectibles/alien-derelict-ship-hollywood-collectibles-group-906247",
+      "type": "replique_sous_licence",
+      "use": "Galerie d’une réplique issue du modèle exposé en 2012. Silhouette et revêtement organique ; le socle propose un terrain rocheux. Ni miniature filmée ni carte officielle de LV-426."
+    },
+    {
+      "id": "R15",
+      "title": "Propstore — M240 léger de production, Aliens (1986)",
+      "url": "https://propstore.com/product/aliens-1986/lot-12-lightweight-colonial-marine-flamethrower/",
+      "type": "accessoire_de_production",
+      "use": "Référence de forme et de finition d’un accessoire léger, dont l’état comprend une restauration. Ne prouve ni la dotation d’un personnage du roman ni l’existence d’un nouveau PNG."
+    },
+    {
+      "id": "R17",
+      "title": "Propstore — tête originale de Xenomorph Warrior, Aliens (1986)",
+      "url": "https://propstore.com/product/aliens-1986/lot-7-xenomorph-warrior-head/",
+      "type": "accessoire_de_production",
+      "use": "Référence de tête nervurée de la production de 1986 ; les proportions du corps et les poses nécessitent des références complémentaires."
+    },
+    {
+      "id": "R18",
+      "title": "Propstore — costume de cascade Alien Warrior, Aliens (1986)",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/10/lot/1259/ALIENS-1986-Alien-Warrior-Suit",
+      "type": "costume_de_production",
+      "use": "Référence de construction et de silhouette du corps ; l’état conservé de l’objet ne certifie pas toutes les parties ni une pose animée."
+    },
+    {
+      "id": "R20",
+      "title": "Stan Winston School — fabrication du Xenomorph Drone d’Aliens",
+      "url": "https://www.stanwinstonschool.com/blog/aliens-movie-the-making-of-a-xenomorph-drone",
+      "type": "documentation_primaire_atelier_effets_speciaux",
+      "use": "Photographies et fabrication des créatures de 1986. Employer les images de la version correspondante ; aucune animation de jeu n’est fournie par cette référence."
+    },
+    {
+      "id": "R21",
+      "title": "Sideshow / Hot Toys — Ellen Ripley et Jonesy, produit sous licence",
+      "url": "https://www.sideshow.com/collectibles/alien-ellen-ripley-hot-toys-902230",
+      "type": "replique_sous_licence",
+      "use": "Galerie du produit inspiré d’Alien (1979), avec Jonesy. Complément de silhouette ; ne pas présenter cette figurine comme une photographie du chat filmé."
+    },
+    {
+      "id": "R22",
+      "title": "Reactor — photographie de Ripley et Jonesy créditée 20th Century Studios",
+      "url": "https://reactormag.com/jonesy-versus-the-big-bad-cat-power-in-the-alien-franchise/",
+      "type": "photographie_studio_republiee",
+      "use": "Employer uniquement la photographie créditée au studio pour la tête et le torse du chat roux tigré tenu par Ripley. L’article ne sert pas d’autorité pour les interprétations de comportement ; la pose à quatre pattes reste reconstruite."
+    },
+    {
+      "id": "R24",
+      "title": "Propstore — miniature de la tour Uplink, Aliens (1986)",
+      "url": "https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/",
+      "type": "maquette_de_production",
+      "use": "Miniature utilisée pour les vues lointaines de Hadley’s Hope. Structure industrielle et bras à grilles ; la terrasse des antennes et sa circulation appartiennent au plan adapté du jeu."
     }
   ],
   "chronology": [
@@ -319,8 +382,11 @@
         "salvage_shuttle"
       ],
       "sourceIds": [
-        "R1"
-      ]
+        "R1",
+        "R21",
+        "R22"
+      ],
+      "appearance": "Chat roux tigré. La photographie créditée au studio montre tête et torse dans les bras de Ripley ; le corps complet, la pose à quatre pattes et les états de locomotion restent reconstruits. La réplique sous licence sert de complément, sans certification 1:1."
     },
     {
       "id": "tressa",
@@ -945,14 +1011,39 @@
         "R8"
       ],
       "description": "M41A utilisable dans le modèle récupéré.",
-      "appearance": "Silhouette, poignée supérieure, canon, lance-grenades et compteur à contrôler. Chargeur de 30 = règle du jeu."
+      "appearance": "Silhouette, poignée supérieure, canon, lance-grenades et compteur à contrôler. Chargeur de 30 = règle du jeu.",
+      "generationAttempts": [
+        {
+          "date": "2026-11-26",
+          "tool": "image_gen",
+          "result": "batch_blocked_no_recovered_output",
+          "scope": "lot_m41a_m240",
+          "note": "Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée."
+        }
+      ],
+      "missing": [
+        "Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée."
+      ]
     },
     "flame": {
       "sourceIds": [
-        "R4"
+        "R4",
+        "R15"
       ],
       "description": "M240 facultatif du râtelier.",
-      "appearance": "Référence d’accessoire du film ; dotation exacte dans le roman à confirmer."
+      "appearance": "Référence d’accessoire du film ; dotation exacte dans le roman à confirmer.",
+      "generationAttempts": [
+        {
+          "date": "2026-11-26",
+          "tool": "image_gen",
+          "result": "batch_blocked_no_recovered_output",
+          "scope": "lot_m41a_m240",
+          "note": "Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée."
+        }
+      ],
+      "missing": [
+        "Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée."
+      ]
     },
     "grenade": {
       "description": "Mode sous-canon du M41A, projectile et explosion natifs.",
@@ -1250,6 +1341,57 @@
         "La Terre n’ajoute aucune porte sur la carte coloniale de LV-426.",
         "Ne pas inventer une nouvelle planète ou un itinéraire terrestre."
       ]
+    },
+    {
+      "category": "props",
+      "id": "colony-uplink-tower",
+      "name": "Tour Uplink de Hadley’s Hope",
+      "description": "Tour de communication extérieure attestée par une miniature de production utilisée dans les plans lointains de la colonie dans Aliens (1986).",
+      "provenance": "maquette_filmique_attestee_fiche_documentaire_hors_runtime",
+      "sourceIds": [
+        "R24"
+      ],
+      "sourcePaths": [
+        "dlc/fleuve-de-la-douleur/visual-v1/bible/EDITORIAL_NOTES.json"
+      ],
+      "appearance": "Structure industrielle sur trois appuis, panneau central incliné et deux bras symétriques à grilles. L’état visible de la miniature documente une référence extérieure ; la traduction en illustration reste une adaptation.",
+      "gameplay": "Fiche documentaire. Aucun objet, spawn, accès ou volume de collision ajouté à la carte du DLC.",
+      "chronology": "Référence visuelle d’Aliens (1986), étudiée pour le cadre colonial de 2179 ; sa scène propre dans le roman n’est pas établie par cette source.",
+      "locations": [],
+      "dimensions": null,
+      "placement": null,
+      "missing": [
+        "Dimensions du bâtiment à pleine échelle et implantation précise non établies.",
+        "Plan d’accès, ancrage, collisions et variantes d’état à définir avant toute intégration.",
+        "La terrasse des antennes du projet conserve son plan adapté ; la miniature n’en constitue pas un relevé."
+      ],
+      "acceptance": [
+        "Conserver la distinction entre maquette de production et bâtiment aux dimensions officielles.",
+        "Lier la tour à la terrasse uniquement comme référence extérieure, sans inventer de connexion ou d’accès.",
+        "Maintenir les états génération documentaire, intégration en jeu et fidélité séparés."
+      ]
     }
-  ]
+  ],
+  "creatures": {
+    "adult": {
+      "sourceIds": [
+        "R17",
+        "R18",
+        "R20"
+      ],
+      "appearance": "Variante de Xenomorph Warrior nervurée de la production Aliens (1986), à comparer aux références de tête, costume et atelier. Le passage à une pose latérale de jeu reste une adaptation.",
+      "generationAttempts": [
+        {
+          "date": "2026-11-26",
+          "tool": "image_gen",
+          "result": "blocked_no_output",
+          "scope": "png_adulte_idle",
+          "note": "Tentative de génération de l’adulte immobile bloquée par le service ; aucun fichier image produit ni intégré."
+        }
+      ],
+      "missing": [
+        "La tentative de génération de l’adulte immobile du 26 novembre 2026 a été bloquée ; le rendu procédural reste en place."
+      ]
+    }
+  }
 }

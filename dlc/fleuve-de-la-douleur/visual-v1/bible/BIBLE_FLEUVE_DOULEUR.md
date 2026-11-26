@@ -1,25 +1,25 @@
 # Fleuve de la Douleur — bible de production détaillée
 
-Révision 2026-11-26.2 · Base récupérée 0.9.0-candidate.1
+Révision 2026-11-26.3 · Base récupérée 0.9.0-candidate.1
 
 Profils humains et créatures natifs, lieux, props et placements, équipements, mobilité, matériaux et mondes du DLC récupéré, avec les manquants identifiés dans les sources consultées.
 
 ## État de production
 
-**278 fiches**, **78 PNG**, **47 salles**, **64 connexions**, **113 familles de props**, **547 placements** et **118 détails de phase**.
+**279 fiches**, **78 PNG runtime**, **8 illustrations de production**, **188 fiches sans image du sujet**, **187 fiches sans aucune image**, **47 salles**, **64 connexions**, **113 familles de props**, **547 placements** et **118 détails de phase**.
 
-Définition, génération, intégration et validations restent distinctes. Aucun statut de fidélité 1:1 n’est certifié.
+Définition, génération, intégration et validations restent distinctes. Les illustrations de production servent à la bible ; leur présence ne modifie pas l’intégration en jeu. Aucun statut de fidélité 1:1 n’est certifié.
 
-| Domaine | Fiches |
-| --- | ---: |
-| Personnages et créatures | 45 |
-| Lieux | 52 |
-| Armes et équipements | 27 |
-| Props et mobilier | 111 |
-| Véhicules | 5 |
-| Vaisseaux | 5 |
-| Terrains et matériaux | 31 |
-| Planètes et satellites | 2 |
+| Domaine | Fiches | Avec PNG runtime | Avec illustration de production | Sujet illustré en production | Sans image du sujet | Sans aucune image |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Personnages et créatures | 45 | 27 | 1 | 1 | 17 | 17 |
+| Lieux | 52 | 0 | 3 | 2 | 50 | 49 |
+| Armes et équipements | 27 | 15 | 0 | 0 | 12 | 12 |
+| Props et mobilier | 112 | 41 | 1 | 1 | 70 | 70 |
+| Véhicules | 5 | 0 | 1 | 1 | 4 | 4 |
+| Vaisseaux | 5 | 0 | 1 | 1 | 4 | 4 |
+| Terrains et matériaux | 31 | 0 | 1 | 1 | 30 | 30 |
+| Planètes et satellites | 2 | 0 | 1 | 1 | 1 | 1 |
 
 ## Continuité
 
@@ -70,7 +70,9 @@ Capitaine de la garnison, personnage jouable.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [brackett-stowed-right](../assets/brackett-stowed-right.png) — 1024 × 1536, pose stowed, ancre 500/1516
+**PNG runtime :** [brackett-stowed-right](../assets/brackett-stowed-right.png) — 1024 × 1536, pose stowed, ancre 500/1516
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -104,7 +106,9 @@ Lieutenant Paris, personnage jouable.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [paris-stowed-right](../assets/paris-stowed-right.png) — 1024 × 1536, pose stowed, ancre 490/1523
+**PNG runtime :** [paris-stowed-right](../assets/paris-stowed-right.png) — 1024 × 1536, pose stowed, ancre 490/1523
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -138,7 +142,9 @@ Prospectrice, mère de Newt.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [anne-idle-right](../assets/anne-idle-right.png) — 1024 × 1536, pose idle, ancre 517/1532
+**PNG runtime :** [anne-idle-right](../assets/anne-idle-right.png) — 1024 × 1536, pose idle, ancre 517/1532
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -172,7 +178,9 @@ Rebecca Jorden, enfant jouable dans les conduits.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [newt-idle-right](../assets/newt-idle-right.png) — 887 × 1774, pose idle, ancre 453/1766
+**PNG runtime :** [newt-idle-right](../assets/newt-idle-right.png) — 887 × 1774, pose idle, ancre 453/1766
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -206,7 +214,9 @@ Russell « Russ » Jorden, prospecteur.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [russ-idle-right](../assets/russ-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1529
+**PNG runtime :** [russ-idle-right](../assets/russ-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1529
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -241,7 +251,9 @@ Médecin de la colonie.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [komiskey-idle-right](../assets/komiskey-idle-right.png) — 1024 × 1536, pose idle, ancre 484/1533
+**PNG runtime :** [komiskey-idle-right](../assets/komiskey-idle-right.png) — 1024 × 1536, pose idle, ancre 484/1533
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -275,7 +287,9 @@ Enfant distincte de Newt, suivie avec une synthèse secondaire.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [luisa-idle-right](../assets/luisa-idle-right.png) — 1024 × 1536, pose idle, ancre 510/1532
+**PNG runtime :** [luisa-idle-right](../assets/luisa-idle-right.png) — 1024 × 1536, pose idle, ancre 510/1532
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -310,7 +324,9 @@ Colon original des interactions locales.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [civilian-idle-right](../assets/civilian-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1520
+**PNG runtime :** [civilian-idle-right](../assets/civilian-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1520
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -344,7 +360,9 @@ Scientifique de la recherche de la Compagnie.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [mori-idle-right](../assets/mori-idle-right.png) — 1024 × 1536, pose idle, ancre 507/1529
+**PNG runtime :** [mori-idle-right](../assets/mori-idle-right.png) — 1024 × 1536, pose idle, ancre 507/1529
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -379,7 +397,9 @@ Frère de Newt, famille Jorden.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [tim-idle-right](../assets/tim-idle-right.png) — 1024 × 1536, pose idle, ancre 514/1524
+**PNG runtime :** [tim-idle-right](../assets/tim-idle-right.png) — 1024 × 1536, pose idle, ancre 514/1524
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -413,7 +433,9 @@ Administrateur de la colonie.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [simpson-idle-right](../assets/simpson-idle-right.png) — 1024 × 1536, pose idle, ancre 491/1530
+**PNG runtime :** [simpson-idle-right](../assets/simpson-idle-right.png) — 1024 × 1536, pose idle, ancre 491/1530
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -448,7 +470,9 @@ Ingénieur en chef cité dans l’extrait.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [hansard-idle-right](../assets/hansard-idle-right.png) — 1024 × 1536, pose idle, ancre 509/1528
+**PNG runtime :** [hansard-idle-right](../assets/hansard-idle-right.png) — 1024 × 1536, pose idle, ancre 509/1528
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -482,7 +506,9 @@ Infirmier de la scène médicale.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [joel-idle-right](../assets/joel-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1531
+**PNG runtime :** [joel-idle-right](../assets/joel-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1531
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -517,7 +543,9 @@ Cuisinière de la colonie citée dans l’extrait.
 
 **État :** génération = png_present ; intégration = png_selectif_repli_natif_pour_etats_absents ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [bronagh-idle-right](../assets/bronagh-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1535
+**PNG runtime :** [bronagh-idle-right](../assets/bronagh-idle-right.png) — 1024 × 1536, pose idle, ancre 500/1535
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -551,7 +579,9 @@ Maintenance de l’habitat
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548
+**PNG runtime :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -583,7 +613,9 @@ Cuisine collective
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
+**PNG runtime :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -615,7 +647,9 @@ Soins de proximité
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520
+**PNG runtime :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -647,7 +681,9 @@ Archivage des relevés
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521
+**PNG runtime :** [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -679,7 +715,9 @@ Manutention du fret
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526
+**PNG runtime :** [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -711,7 +749,9 @@ Relais des transmissions
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531
+**PNG runtime :** [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -743,7 +783,9 @@ Atelier des prospecteurs
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504
+**PNG runtime :** [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -775,7 +817,9 @@ Maintenance biomédicale
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499
+**PNG runtime :** [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -807,7 +851,9 @@ Lingerie de service
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
+**PNG runtime :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -839,7 +885,9 @@ Entretien des loisirs
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
+**PNG runtime :** [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -871,7 +919,9 @@ Accueil des arrivants
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514
+**PNG runtime :** [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -903,7 +953,9 @@ Relevés des prospecteurs
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif_en_mouvement ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
+**PNG runtime :** [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -935,7 +987,9 @@ Prospecteur, l’un des frères Finch.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -967,7 +1021,9 @@ Prospecteur distinct d’Otto.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -999,7 +1055,9 @@ Marine de la garnison.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1031,7 +1089,9 @@ Marine de la garnison.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1063,7 +1123,9 @@ Marine identifié dans le chapitre 7.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1095,7 +1157,9 @@ Membre de la garnison cité dans l’extrait.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1127,7 +1191,9 @@ Chercheur de la Compagnie.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1159,7 +1225,9 @@ Chercheur distinct de Mori et Reese.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1191,7 +1259,9 @@ Identité du registre historique, sans profil individuel.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1223,7 +1293,9 @@ Personnage de la récupération et de Gateway.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1255,7 +1327,9 @@ Personnage lié à Gateway.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1273,9 +1347,9 @@ Identifiant : `rop:personnages:jonesy`
 
 Chat de Ripley ; acteur animal distinct des créatures hostiles.
 
-**Provenance :** personnage_atteste_extrait_roman. Références : [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/)
+**Provenance :** personnage_atteste_extrait_roman. Références : [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R21](https://www.sideshow.com/collectibles/alien-ellen-ripley-hot-toys-902230), [R22](https://reactormag.com/jonesy-versus-the-big-bad-cat-power-in-the-alien-franchise/)
 
-**Apparence :** Visage, costume précis et couleurs à documenter.
+**Apparence :** Chat roux tigré. La photographie créditée au studio montre tête et torse dans les bras de Ripley ; le corps complet, la pose à quatre pattes et les états de locomotion restent reconstruits. La réplique sous licence sert de complément, sans certification 1:1.
 
 **Chronologie :** Conserver scène, époque et rôle du roman ; aucune insertion automatique dans la colonie.
 
@@ -1287,7 +1361,35 @@ Chat de Ripley ; acteur animal distinct des créatures hostiles.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Jonesy — étude de personnage
+
+![Jonesy — étude de personnage](production/jonesy-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-jonesy-study-v1` ; 1585 × 992 ; 2125979 octets.
+
+**Sources :** [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R21](https://www.sideshow.com/collectibles/alien-ellen-ripley-hot-toys-902230), [R22](https://reactormag.com/jonesy-versus-the-big-bad-cat-power-in-the-alien-franchise/)
+
+- Jonesy accompagne Ripley dans la séquence de récupération et auprès de son lit. (R1).
+- La photographie créditée au studio montre la tête et le torse d’un chat roux tigré tenu par Ripley. (R22).
+- Le produit sous licence de Ripley comporte une représentation de Jonesy, utilisable comme complément. (R21).
+
+**Interprétations :**
+
+- Le corps complet, la pose à quatre pattes et le cadrage sont une reconstruction pour cette étude.
+- La source photographique renvoie à Alien (1979) ; elle ne valide pas les animations ou une apparence mesurée dans la campagne 2179.
+
+**Chronologie :** Étude pour le personnage du récit en 2179 ; références visuelles issues d’Alien (1979) et de produits sous licence.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Image entière relue : chat roux tigré sur fond gris opaque, pose complète reconstruite.
+- Version finale opaque retenue ; les essais de détourage précédents sont conservés dans l’historique et restent hors registre d’assets.
 
 **À compléter :**
 
@@ -1319,7 +1421,9 @@ Pilote du véhicule de descente de Brackett.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1351,7 +1455,9 @@ Membre de la récupération spatiale.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1383,7 +1489,9 @@ Membre de la récupération à individualiser.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1415,7 +1523,9 @@ Membre de la récupération à individualiser.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1447,7 +1557,9 @@ Reste au poste de pilotage pendant que les trois autres récupérateurs descende
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1465,9 +1577,9 @@ Identifiant : `rop:personnages:adult`
 
 Patrouille, recherche, poursuite et préparation d’attaque natives.
 
-**Provenance :** creature_franchise_adaptee_au_jeu. Références : [S1](https://titanbooks.com/6486-alien-river-of-pain-book-3/)
+**Provenance :** creature_franchise_adaptee_au_jeu. Références : [S1](https://titanbooks.com/6486-alien-river-of-pain-book-3/), [R17](https://propstore.com/product/aliens-1986/lot-7-xenomorph-warrior-head/), [R18](https://propstoreauction.com/lot-details/index/catalog/10/lot/1259/ALIENS-1986-Alien-Warrior-Suit), [R20](https://www.stanwinstonschool.com/blog/aliens-movie-the-making-of-a-xenomorph-drone)
 
-**Apparence :** Comparer silhouette, membres, queue, matière et échelle aux références dédiées.
+**Apparence :** Variante de Xenomorph Warrior nervurée de la production Aliens (1986), à comparer aux références de tête, costume et atelier. Le passage à une pose latérale de jeu reste une adaptation. Comparer silhouette, membres, queue, matière et échelle aux références dédiées.
 
 **Chronologie :** Campagne coloniale 2179 ; dialogues et parcours adaptés.
 
@@ -1479,12 +1591,19 @@ Patrouille, recherche, poursuite et préparation d’attaque natives.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
+
+**Tentatives sans nouvelle livraison :**
+
+- 2026-11-26 — Tentative de génération de l’adulte immobile bloquée par le service ; aucun fichier image produit ni intégré.
 
 **À compléter :**
 
-- PNG adulte absent ; variante de crâne et proportions à documenter.
+- PNG individuel absent ; variante de crâne et proportions à documenter.
 - Marche, course, attaque, recul, entrée par conduit et mort à produire.
+- La tentative de génération de l’adulte immobile du 26 novembre 2026 a été bloquée ; le rendu procédural reste en place.
 
 **Contrôles attendus :**
 
@@ -1510,7 +1629,9 @@ Créature basse ; le PNG existant couvre seulement le repos.
 
 **État :** génération = png_present ; intégration = png_idle_selectif_repli_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [facehugger-idle-right](../assets/facehugger-idle-right.png) — 1920 × 819, pose idle, ancre 1100/703
+**PNG runtime :** [facehugger-idle-right](../assets/facehugger-idle-right.png) — 1920 × 819, pose idle, ancre 1100/703
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1542,7 +1663,9 @@ Périmètre, niveau 0. Repère : Tour de contrôle et feux d’approche.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1582,7 +1705,9 @@ Accueil, niveau 0. Repère : Double porte pressurisée, douche de décontaminati
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1623,7 +1748,9 @@ Accueil, niveau 0. Repère : Signalétique des blocs, galerie vitrée.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1667,7 +1794,9 @@ Administration, niveau 1. Repère : Baie de supervision et consoles de communica
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1711,7 +1840,9 @@ Administration, niveau 1. Repère : Casiers individuels et table de service.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1752,7 +1883,9 @@ Habitat, niveau 1. Repère : Portes numérotées et fenêtres des logements.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1796,7 +1929,9 @@ Habitat, niveau 1. Repère : Table familiale, lits et dessins d’enfant.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1837,7 +1972,9 @@ Habitat, niveau 0. Repère : Tables, cuisine et distributeurs.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1880,7 +2017,9 @@ Habitat, niveau 0. Repère : Jeux, bancs et accès à la maintenance.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -1923,7 +2062,34 @@ Médical, niveau 0. Repère : Lits isolés, vitres d’observation et moniteurs.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Infirmerie — étude du Medlab
+
+![Infirmerie — étude du Medlab](production/medlab-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-medlab-study-v1` ; 1672 × 941 ; 2857582 octets.
+
+**Sources :** [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R10](https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/)
+
+- L’extrait décrit le service médical de la colonie et ses soins. (R1).
+- Un concept original de Ron Cobb représente le Medlab avant sa dégradation. (R10).
+
+**Interprétations :**
+
+- L’implantation proposée pour le jeu ne constitue pas un relevé du décor final ni un plan officiel.
+- Le cadrage, les raccordements aux autres pièces et les dimensions sont à définir dans le modèle du projet.
+
+**Chronologie :** Étude de l’infirmerie coloniale pour 2179 ; les scènes médicales de 2173 sont distinctes.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Vue intérieure relue : volumes, postes et surfaces visibles ; composition et matériaux interprétés à partir du concept.
+- Vue de production sans plan coté, couches séparées ou parcours de validation.
 
 **À compléter :**
 
@@ -1967,7 +2133,9 @@ Médical, niveau 0. Repère : Lit d’observation et hublot de quarantaine.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2008,7 +2176,9 @@ Recherche, niveau 0. Repère : Paillasses, cuves et racks de confinement.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2051,7 +2221,9 @@ Recherche, niveau 1. Repère : Bandes de données et baie réseau.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2092,7 +2264,9 @@ Logistique, niveau 0. Repère : Tracteur de prospection sur sa voie de service.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2136,7 +2310,9 @@ Logistique, niveau 0. Repère : Cartes topographiques et postes radio.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2178,7 +2354,9 @@ Logistique, niveau 0. Repère : Palettes, rack de levage et allées dégagées.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2220,7 +2398,9 @@ Maintenance, niveau -1. Repère : Deux banques de coupe-circuits et conduites.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2262,7 +2442,9 @@ Maintenance, niveau -1. Repère : Collecteurs, vannes et caniveaux protégés.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2305,7 +2487,9 @@ Maintenance, niveau -1. Repère : Passage sous les bâtiments, conduites continu
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2347,7 +2531,9 @@ Périmètre, niveau 0. Repère : Piquets de balisage, roches et ravines non prat
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2389,7 +2575,9 @@ Périmètre, niveau 0. Repère : Jalons de prospection, dépôt de service et ac
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2430,7 +2618,9 @@ Identifiant : `rop:lieux:derelict`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2471,7 +2661,9 @@ Terraformage, niveau 0. Repère : Passerelle industrielle et conduites sous pres
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2512,7 +2704,9 @@ Terraformage, niveau 0. Repère : Pylônes, sas de maintenance et énormes écha
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2553,7 +2747,9 @@ Terraformage, niveau -1. Repère : Cabine de fret et paliers identifiés.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2594,7 +2790,9 @@ Terraformage, niveau -2. Repère : Résine sur les structures industrielles, bal
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2635,7 +2833,9 @@ Terraformage, niveau -2. Repère : Passage étroit entre les échangeurs, ruche 
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2677,7 +2877,9 @@ Ventilation, niveau 1. Repère : Jonctions basses, grilles et câbles de repéra
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2720,7 +2922,9 @@ Ventilation, niveau 1. Repère : Grilles d’observation et courbe de service.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2762,7 +2966,9 @@ Ventilation, niveau 0. Repère : Grille de secours au-dessus de la dernière bar
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2804,7 +3010,9 @@ Ventilation, niveau 0. Repère : Petit renfoncement hors des axes de ventilation
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2846,7 +3054,9 @@ Recherche, niveau 0. Repère : Navette de service, passerelle et réserves de ca
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2887,7 +3097,9 @@ Recherche, niveau 0. Repère : Sas arrière, sièges et commandes de navigation.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2927,7 +3139,9 @@ Habitat, niveau 0. Repère : Machines, linge abandonné et évier de service.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -2970,7 +3184,9 @@ Administration, niveau 1. Repère : Baie relais et émetteurs directionnels.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3012,7 +3228,9 @@ Médical, niveau 0. Repère : Tiroirs de soins et stockage réfrigéré.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3053,7 +3271,9 @@ Habitat, niveau 0. Repère : Passe-plats, chambre froide et escalier réservé a
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3094,7 +3314,9 @@ Médical, niveau 0. Repère : Banc de réparation, berceaux de moniteurs et port
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3135,7 +3357,34 @@ Administration, niveau 2. Repère : Mâts inclinés par le vent, boîtier de syn
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** context_image_only.
+
+#### Illustration de production — Tour Uplink de Hadley’s Hope — étude extérieure
+
+![Tour Uplink de Hadley’s Hope — étude extérieure](production/uplink-study-v1.png)
+
+**Rôle :** contexte visuel associé, sans livraison du sujet propre à la fiche. **Fichier :** `prod-uplink-study-v1` ; 1254 × 1254 ; 1511242 octets.
+
+**Sources :** [R24](https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/)
+
+- La miniature de la tour Uplink a servi aux plans lointains de Hadley’s Hope dans Aliens. (R24).
+
+**Interprétations :**
+
+- La tour extérieure fournit un contexte architectural à la terrasse des antennes du projet.
+- Le plan, le chemin d’accès et la terrasse jouable ne sont pas établis par la miniature ; ils restent à produire et à vérifier.
+
+**Chronologie :** Référence extérieure d’Aliens (1986) associée à l’adaptation de la colonie en 2179.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Structure entière relue ; la tour reste une référence de production extérieure, sans ancrage au runtime.
+- Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.
+- La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie.
 
 **À compléter :**
 
@@ -3176,7 +3425,9 @@ Logistique, niveau 0. Repère : Chaîne de palan, établi moteur et galerie vers
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3217,7 +3468,9 @@ Maintenance, niveau -2. Repère : Deux vannes de purge, cuves fermées et passer
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3258,7 +3511,9 @@ Ventilation, niveau 1. Repère : Rubans colorés, couverture pliée et petite gr
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3299,7 +3554,33 @@ Habitat, niveau 0. Repère : Dôme vitré hémisphérique : présence attestée,
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Serre hémisphérique — étude de lieu
+
+![Serre hémisphérique — étude de lieu](production/greenhouse-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-greenhouse-study-v1` ; 1774 × 887 ; 2808599 octets.
+
+**Sources :** [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/)
+
+- L’extrait décrit une serre hémisphérique en matériau vitré parmi les bâtiments de la colonie. (R1).
+
+**Interprétations :**
+
+- Ossature précise, porte, plantations, équipements et implantation sont interprétés.
+- L’image ne fixe ni dimensions officielles, ni circulation, ni parallaxe finale du niveau.
+
+**Chronologie :** Étude de la serre visible à l’arrivée de Brackett en 2179.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Vue extérieure relue : dôme vitré hémisphérique, cultures, sas fermé et terrain rocheux.
+- Volumes détaillés, assemblage des panneaux et sas interprétés ; aucune cote officielle ou ouverture jouable certifiée.
 
 **À compléter :**
 
@@ -3340,7 +3621,9 @@ Administration, niveau 1. Repère : Râteliers identifiés et dépôt séparé d
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3381,7 +3664,9 @@ Identifiant : `rop:lieux:derelict_gallery`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3422,7 +3707,9 @@ Identifiant : `rop:lieux:pilot_chamber`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3463,7 +3750,9 @@ Identifiant : `rop:lieux:egg_vault`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3503,7 +3792,9 @@ Séquence extérieure au plan colonial, attestée dans l’extrait. Ne pas la re
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3534,7 +3825,9 @@ Séquence extérieure au plan colonial, attestée dans l’extrait. Ne pas la re
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3565,7 +3858,9 @@ Séquence extérieure au plan colonial, attestée dans l’extrait. Ne pas la re
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3596,7 +3891,9 @@ Séquence extérieure au plan colonial, attestée dans l’extrait. Ne pas la re
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3627,7 +3924,9 @@ Poste où Moore reste pendant la descente des autres récupérateurs.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3659,12 +3958,19 @@ M41A utilisable dans le modèle récupéré.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
+
+**Tentatives sans nouvelle livraison :**
+
+- 2026-11-26 — Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée.
 
 **À compléter :**
 
 - PNG individuel et vues utiles absents.
 - Poses tenue, visée, tir et rechargement à produire pour les personnages admissibles.
+- Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée.
 
 **Contrôles attendus :**
 
@@ -3677,7 +3983,7 @@ Identifiant : `rop:armes_equipements:flame`
 
 M240 facultatif du râtelier.
 
-**Provenance :** reference_identifiee_implementation_adaptee. Références : [R4](https://propstore.com/product/aliens-1986/19-ellen-ripleys-sigourney-weaver-practical-special-effects-m240-flamethrower/)
+**Provenance :** reference_identifiee_implementation_adaptee. Références : [R4](https://propstore.com/product/aliens-1986/19-ellen-ripleys-sigourney-weaver-practical-special-effects-m240-flamethrower/), [R15](https://propstore.com/product/aliens-1986/lot-12-lightweight-colonial-marine-flamethrower/)
 
 **Apparence :** Référence d’accessoire du film ; dotation exacte dans le roman à confirmer.
 
@@ -3691,12 +3997,19 @@ M240 facultatif du râtelier.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
+
+**Tentatives sans nouvelle livraison :**
+
+- 2026-11-26 — Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée.
 
 **À compléter :**
 
 - PNG individuel et vues utiles absents.
 - Poses tenue, visée, tir et rechargement à produire pour les personnages admissibles.
+- Lot d’essais M41A/M240 refusé par le service ; aucun PNG exploitable récupéré pour cette entrée.
 
 **Contrôles attendus :**
 
@@ -3723,7 +4036,9 @@ Mode sous-canon du M41A, projectile et explosion natifs.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3755,7 +4070,9 @@ Référence du fusil de Hicks dans Aliens ; aucun porteur ou scène de River of 
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3787,7 +4104,9 @@ Identifiant : `rop:armes_equipements:cell`
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-cell](../assets/item-cell.png) — 1536 × 1024, pose inventory, ancre 785/523
+**PNG runtime :** [item-cell](../assets/item-cell.png) — 1536 × 1024, pose inventory, ancre 785/523
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3817,7 +4136,9 @@ Identifiant : `rop:armes_equipements:wire`
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-wire](../assets/item-wire.png) — 1536 × 1024, pose inventory, ancre 765/526
+**PNG runtime :** [item-wire](../assets/item-wire.png) — 1536 × 1024, pose inventory, ancre 765/526
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3847,7 +4168,9 @@ Identifiant : `rop:armes_equipements:casing`
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-casing](../assets/item-casing.png) — 1536 × 1024, pose inventory, ancre 768/509
+**PNG runtime :** [item-casing](../assets/item-casing.png) — 1536 × 1024, pose inventory, ancre 768/509
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3877,7 +4200,9 @@ création de gameplay
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-decoy](../assets/item-decoy.png) — 1362 × 1155, pose inventory, ancre 653/568
+**PNG runtime :** [item-decoy](../assets/item-decoy.png) — 1362 × 1155, pose inventory, ancre 653/568
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3907,7 +4232,9 @@ Identifiant : `rop:armes_equipements:ration`
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-ration](../assets/item-ration.png) — 1536 × 1024, pose inventory, ancre 763/509
+**PNG runtime :** [item-ration](../assets/item-ration.png) — 1536 × 1024, pose inventory, ancre 763/509
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3937,7 +4264,9 @@ règle de soin simplifiée
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-medkit](../assets/item-medkit.png) — 1536 × 1024, pose inventory, ancre 753/514
+**PNG runtime :** [item-medkit](../assets/item-medkit.png) — 1536 × 1024, pose inventory, ancre 753/514
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3967,7 +4296,9 @@ Identifiant : `rop:armes_equipements:ammo`
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-ammo](../assets/item-ammo.png) — 1536 × 1024, pose inventory, ancre 769/524
+**PNG runtime :** [item-ammo](../assets/item-ammo.png) — 1536 × 1024, pose inventory, ancre 769/524
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -3997,7 +4328,9 @@ durée simulée
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-flare](../assets/item-flare.png) — 1536 × 1024, pose inventory, ancre 781/523
+**PNG runtime :** [item-flare](../assets/item-flare.png) — 1536 × 1024, pose inventory, ancre 781/523
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4027,7 +4360,9 @@ Détecteur de mouvements et interface natifs.
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-tracker](../assets/item-tracker.png) — 1312 × 1199, pose inventory, ancre 672/586
+**PNG runtime :** [item-tracker](../assets/item-tracker.png) — 1312 × 1199, pose inventory, ancre 672/586
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4057,7 +4392,9 @@ Outil de soudure des passages.
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-weld](../assets/item-weld.png) — 1254 × 1254, pose inventory, ancre 634/636
+**PNG runtime :** [item-weld](../assets/item-weld.png) — 1254 × 1254, pose inventory, ancre 634/636
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4087,7 +4424,9 @@ Lampe de service à batterie.
 
 **État :** génération = png_present ; intégration = png_inventaire ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [item-light](../assets/item-light.png) — 1536 × 1024, pose inventory, ancre 768/508
+**PNG runtime :** [item-light](../assets/item-light.png) — 1536 × 1024, pose inventory, ancre 768/508
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4117,7 +4456,9 @@ Balise de repli du gameplay.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4148,7 +4489,9 @@ Robot de découpe de récupération spatiale.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4180,7 +4523,9 @@ Scanner de récupération spatiale.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4212,7 +4557,9 @@ Scaphandre de récupération spatiale.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4244,7 +4591,9 @@ Déposé sur les commandes de la navette de Ripley ; distinct du réseau de bras
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4276,7 +4625,9 @@ Ne pas déduire sa présence dans River of Pain du seul arsenal de la franchise.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4308,7 +4659,9 @@ Ne pas déduire sa présence dans River of Pain du seul arsenal de la franchise.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4340,7 +4693,9 @@ Ne pas déduire sa présence dans River of Pain du seul arsenal de la franchise.
 
 **État :** génération = no_png ; intégration = absent ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4372,7 +4727,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548 ; [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526 ; [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504 ; [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
+**PNG runtime :** [vale-idle-right](../assets/vale-idle-right.png) — 1014 × 1551, pose idle, ancre 510/1548 ; [ferris-idle-right](../assets/ferris-idle-right.png) — 1024 × 1536, pose idle, ancre 495/1526 ; [hale-idle-right](../assets/hale-idle-right.png) — 1024 × 1536, pose idle, ancre 490.5/1504 ; [bell-idle-right](../assets/bell-idle-right.png) — 1024 × 1536, pose idle, ancre 475/1519
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4402,7 +4759,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
+**PNG runtime :** [rhee-idle-right](../assets/rhee-idle-right.png) — 1024 × 1536, pose idle, ancre 490/1533
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4432,7 +4791,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520 ; [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521 ; [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531 ; [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499 ; [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514 ; [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
+**PNG runtime :** [arden-idle-right](../assets/arden-idle-right.png) — 1024 × 1536, pose idle, ancre 477.5/1520 ; [becker-idle-right](../assets/becker-idle-right.png) — 1024 × 1536, pose idle, ancre 472.5/1521 ; [corban-idle-right](../assets/corban-idle-right.png) — 1024 × 1536, pose idle, ancre 504.5/1531 ; [doran-idle-right](../assets/doran-idle-right.png) — 1024 × 1536, pose idle, ancre 470.5/1499 ; [kent-idle-right](../assets/kent-idle-right.png) — 1024 × 1536, pose idle, ancre 502/1514 ; [voss-idle-right](../assets/voss-idle-right.png) — 1024 × 1536, pose idle, ancre 487/1513
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4462,7 +4823,9 @@ Accessoire métier inclus dans certains PNG humains, sans sprite autonome.
 
 **État :** génération = png_present ; intégration = inclus_dans_png_personnage_et_rendu_natif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
+**PNG runtime :** [sato-idle-right](../assets/sato-idle-right.png) — 1024 × 1536, pose idle, ancre 485.5/1518
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4494,7 +4857,9 @@ Communication ou mesure, raccordée au poste. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4536,7 +4901,9 @@ Machine du centre de loisirs avec état d’alimentation cohérent. 3 placement(
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4578,7 +4945,9 @@ Guide la circulation d’un espace industriel ou extérieur. 5 placement(s) de b
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4621,7 +4990,9 @@ Repère lumineux de la zone d’arrivée. 8 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4667,7 +5038,9 @@ Distinguer mobilier médical et domestique selon la salle. 8 placement(s) de bas
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4714,7 +5087,9 @@ Identifiant : `rop:props:prop-bed-lamp`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4754,7 +5129,9 @@ Assise collective ; certaines instances sont physiques. 6 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-bench](../assets/prop-bench.png) — 1686 × 933, pose static, ancre 842.5/852
+**PNG runtime :** [prop-bench](../assets/prop-bench.png) — 1686 × 933, pose static, ancre 842.5/852
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4798,7 +5175,9 @@ Textile domestique ou médical lié à son support. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4838,7 +5217,9 @@ Plaque technique fixée dans sa paroi. 5 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4881,7 +5262,9 @@ Liaison à raccorder à un appareil ou cheminement. 9 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4928,7 +5311,9 @@ Réserve de câble sur bobine. 6 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-cable-spool](../assets/prop-cable-spool.png) — 1662 × 946, pose static, ancre 829.5/919
+**PNG runtime :** [prop-cable-spool](../assets/prop-cable-spool.png) — 1662 × 946, pose static, ancre 829.5/919
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -4971,7 +5356,9 @@ Support mural ou suspendu pour réseaux. 14 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5023,7 +5410,9 @@ Roues et plateau doivent garder une ligne de sol cohérente. 3 placement(s) de b
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5065,7 +5454,9 @@ Conteneur de service, distinct des conteneurs interactifs. 5 placement(s) de bas
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [armory-case](../assets/armory-case.png) — 1774 × 887, pose static, ancre 884/762
+**PNG runtime :** [armory-case](../assets/armory-case.png) — 1774 × 887, pose static, ancre 884/762
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5107,7 +5498,9 @@ Luminaire relié visuellement à un support supérieur. 10 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5156,7 +5549,9 @@ Levage nécessitant support et charge cohérents. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5198,7 +5593,9 @@ Assise des postes ou des espaces civils. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-chair](../assets/prop-chair.png) — 1246 × 1263, pose static, ancre 620/1232
+**PNG runtime :** [prop-chair](../assets/prop-chair.png) — 1246 × 1263, pose static, ancre 620/1232
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5239,7 +5636,9 @@ Volume organique lié à la phase d’envahissement. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5284,7 +5683,9 @@ Stockage ou réseau selon la fonction de la salle. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5325,7 +5726,9 @@ Pupitre et affichage associés à une fonction réelle. 10 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5375,7 +5778,9 @@ Conteneur souvent utilisé comme couverture physique. 11 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5425,7 +5830,9 @@ Rangement posé ou fixé à une structure. 3 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-cupboard](../assets/prop-cupboard.png) — 948 × 1660, pose static, ancre 473.5/1621
+**PNG runtime :** [prop-cupboard](../assets/prop-cupboard.png) — 948 × 1660, pose static, ancre 473.5/1621
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5466,7 +5873,9 @@ Signalétique liée à une porte précise. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5505,7 +5914,9 @@ Détail de vie coloniale attaché à un support. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5549,7 +5960,9 @@ Raccord aligné sur les volumes de ventilation. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5591,7 +6004,9 @@ Identifiant : `rop:props:prop-egg`
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
+**PNG runtime :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5629,7 +6044,9 @@ Zone organique large ; un œuf seul ne la remplace pas. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5670,7 +6087,9 @@ Organe d’air fixé à une ouverture technique. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5712,7 +6131,9 @@ Coffret mural de secours, légende conservée. 9 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-fire-cabinet](../assets/prop-fire-cabinet.png) — 982 × 1602, pose static, ancre 491.5/1523
+**PNG runtime :** [prop-fire-cabinet](../assets/prop-fire-cabinet.png) — 982 × 1602, pose static, ancre 491.5/1523
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5758,7 +6179,9 @@ Identifiant : `rop:props:prop-floodlight`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5802,7 +6225,9 @@ Stockage de cuisine ou du réfectoire. 3 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-fridge](../assets/prop-fridge.png) — 1086 × 1448, pose static, ancre 544.5/1430
+**PNG runtime :** [prop-fridge](../assets/prop-fridge.png) — 1086 × 1448, pose static, ancre 544.5/1430
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5843,7 +6268,9 @@ Conteneur en zone extérieure ou de maintenance. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5888,7 +6315,9 @@ Structure porteuse avec base et passage visibles. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5932,7 +6361,9 @@ Instrument relié à un circuit de pression. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -5976,7 +6407,9 @@ Fenêtre murale ; jamais une porte debout au milieu du sol. 1 placement(s) de ba
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [isolation-glass](../assets/isolation-glass.png) — 1161 × 1354, pose static, ancre 580/1321
+**PNG runtime :** [isolation-glass](../assets/isolation-glass.png) — 1161 × 1354, pose static, ancre 580/1321
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6014,7 +6447,9 @@ Rangement au vitrage réellement transparent. 2 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-glass-cabinet](../assets/prop-glass-cabinet.png) — 1068 × 1472, pose static, ancre 533.5/1401
+**PNG runtime :** [prop-glass-cabinet](../assets/prop-glass-cabinet.png) — 1068 × 1472, pose static, ancre 533.5/1401
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6053,7 +6488,9 @@ Protection de conduit ou de sol dans la bonne orientation. 6 placement(s) de bas
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6097,7 +6534,9 @@ Passage libre pour patient et roues. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-gurney](../assets/prop-gurney.png) — 1670 × 942, pose static, ancre 835.5/886
+**PNG runtime :** [prop-gurney](../assets/prop-gurney.png) — 1670 × 942, pose static, ancre 835.5/886
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6138,7 +6577,9 @@ Façade à distinguer d’un portail interactif. 3 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6179,7 +6620,9 @@ Outil à roues et bavette de manutention. 2 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hand-truck](../assets/prop-hand-truck.png) — 1036 × 1518, pose static, ancre 517/1502
+**PNG runtime :** [prop-hand-truck](../assets/prop-hand-truck.png) — 1036 × 1518, pose static, ancre 517/1502
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6218,7 +6661,9 @@ Vêtement accroché à hauteur cohérente. 5 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hanging-coat](../assets/prop-hanging-coat.png) — 1024 × 1536, pose static, ancre 510.5/1519
+**PNG runtime :** [prop-hanging-coat](../assets/prop-hanging-coat.png) — 1024 × 1536, pose static, ancre 510.5/1519
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6260,7 +6705,9 @@ Ouverture technique distincte d’un conduit traversable. 1 placement(s) de base
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6299,7 +6746,9 @@ Flexible sur support de service. 5 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-hose-reel](../assets/prop-hose-reel.png) — 1190 × 1322, pose static, ancre 588/1291
+**PNG runtime :** [prop-hose-reel](../assets/prop-hose-reel.png) — 1190 × 1322, pose static, ancre 588/1291
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6341,7 +6790,9 @@ Extraction au-dessus de la cuisson. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6381,7 +6832,9 @@ Plan de travail scientifique ; certaines instances sont physiques. 3 placement(s
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-lab-bench](../assets/prop-lab-bench.png) — 1478 × 1064, pose static, ancre 738.5/957
+**PNG runtime :** [prop-lab-bench](../assets/prop-lab-bench.png) — 1478 × 1064, pose static, ancre 738.5/957
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6423,7 +6876,9 @@ Identifiant : `rop:props:prop-lamp`
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6463,7 +6918,9 @@ Textile de réserve ou en transport. 2 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-linen](../assets/prop-linen.png) — 1278 × 1230, pose static, ancre 630/1169
+**PNG runtime :** [prop-linen](../assets/prop-linen.png) — 1278 × 1230, pose static, ancre 630/1169
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6503,7 +6960,9 @@ Rangement vertical à la hauteur et légende natives. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-locker](../assets/prop-locker.png) — 948 × 1659, pose static, ancre 472/1633
+**PNG runtime :** [prop-locker](../assets/prop-locker.png) — 948 × 1659, pose static, ancre 472/1633
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6544,7 +7003,9 @@ Orientation ; contenu du plan à documenter séparément. 2 placement(s) de base
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6584,7 +7045,9 @@ Repère mural au-dessus du poste ou passage. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-medical-cross](../assets/prop-medical-cross.png) — 1263 × 1246, pose static, ancre 628.5/1117
+**PNG runtime :** [prop-medical-cross](../assets/prop-medical-cross.png) — 1263 × 1246, pose static, ancre 628.5/1117
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6625,7 +7088,9 @@ Fournitures sur rangement médical identifiable. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-medicine](../assets/prop-medicine.png) — 1070 × 1470, pose static, ancre 529.5/1433
+**PNG runtime :** [prop-medicine](../assets/prop-medicine.png) — 1070 × 1470, pose static, ancre 529.5/1433
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6666,7 +7131,9 @@ Optique d’observation et socle. 1 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-microscope](../assets/prop-microscope.png) — 1346 × 1169, pose static, ancre 671/1155
+**PNG runtime :** [prop-microscope](../assets/prop-microscope.png) — 1346 × 1169, pose static, ancre 671/1155
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6704,7 +7171,9 @@ Appareil de contrôle sur son support. 3 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-monitor](../assets/prop-monitor.png) — 1344 × 1170, pose static, ancre 657.5/1148
+**PNG runtime :** [prop-monitor](../assets/prop-monitor.png) — 1344 × 1170, pose static, ancre 657.5/1148
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6744,7 +7213,9 @@ Objet d’usage quotidien des postes civils. 6 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6788,7 +7259,9 @@ Repère de scène qui ne remplace pas un humain individualisé. 1 placement(s) d
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6828,7 +7301,9 @@ Nacelle médicale volumineuse à capot transparent. 1 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-natal-unit](../assets/prop-natal-unit.png) — 1690 × 931, pose static, ancre 837.5/868
+**PNG runtime :** [prop-natal-unit](../assets/prop-natal-unit.png) — 1690 × 931, pose static, ancre 837.5/868
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6866,7 +7341,9 @@ Informations murales de la colonie. 7 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-noticeboard](../assets/prop-noticeboard.png) — 1520 × 1035, pose static, ancre 760/863
+**PNG runtime :** [prop-noticeboard](../assets/prop-noticeboard.png) — 1520 × 1035, pose static, ancre 760/863
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6910,7 +7387,9 @@ Réservoir, régulateur et support stable. 7 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-oxygen](../assets/prop-oxygen.png) — 724 × 2172, pose static, ancre 367.5/1964
+**PNG runtime :** [prop-oxygen](../assets/prop-oxygen.png) — 724 × 2172, pose static, ancre 367.5/1964
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6954,7 +7433,9 @@ Support de fret avec emprise lisible. 5 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -6998,7 +7479,9 @@ Interface fixée à la cloison ou à l’appareil. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7040,7 +7523,9 @@ Détail domestique ; ne pas inventer une identité canonique. 3 placement(s) de 
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7081,7 +7566,9 @@ Structure biomécanique monumentale liée à sa chambre. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7122,7 +7609,9 @@ Réseau technique continu avec fixations. 9 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7170,7 +7659,9 @@ Changement de direction raccordé aux tronçons. 9 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7217,7 +7708,9 @@ Culture entretenue dans un contenant. 1 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-plant](../assets/prop-plant.png) — 1024 × 1536, pose static, ancre 511.5/1500
+**PNG runtime :** [prop-plant](../assets/prop-plant.png) — 1024 × 1536, pose static, ancre 511.5/1500
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7255,7 +7748,9 @@ Culture intérieure, drainage et support. 8 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7302,7 +7797,9 @@ Séparation mobile autour des soins. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-privacy-screen](../assets/prop-privacy-screen.png) — 1086 × 1448, pose static, ancre 543.5/1419
+**PNG runtime :** [prop-privacy-screen](../assets/prop-privacy-screen.png) — 1086 × 1448, pose static, ancre 543.5/1419
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7343,7 +7840,9 @@ Machine reliée au réseau, parfois physique. 7 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-pump-motor](../assets/prop-pump-motor.png) — 1682 × 935, pose static, ancre 848/915
+**PNG runtime :** [prop-pump-motor](../assets/prop-pump-motor.png) — 1682 × 935, pose static, ancre 848/915
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7388,7 +7887,9 @@ Rangement de pièces sur plusieurs niveaux. 5 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-rack](../assets/prop-rack.png) — 1070 × 1470, pose static, ancre 534/1451
+**PNG runtime :** [prop-rack](../assets/prop-rack.png) — 1070 × 1470, pose static, ancre 534/1451
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7430,7 +7931,9 @@ Communications, antenne et support. 3 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-radio](../assets/prop-radio.png) — 1024 × 1536, pose static, ancre 508/1525
+**PNG runtime :** [prop-radio](../assets/prop-radio.png) — 1024 × 1536, pose static, ancre 508/1525
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7470,7 +7973,9 @@ Structure extérieure raccordée au site. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7512,7 +8017,9 @@ Réserve visible distincte de l’objet d’inventaire. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7552,7 +8059,9 @@ Conteneur dédié, contenu à référencer. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7591,7 +8100,9 @@ Support qui ne crée pas une dotation supplémentaire. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7630,7 +8141,9 @@ Affichage lié au contrôle local. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7672,7 +8185,9 @@ Identifiant : `rop:props:prop-sealed-egg`
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
+**PNG runtime :** [egg-sealed](../assets/egg-sealed.png) — 1254 × 1254, pose static, ancre 627/1154
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7717,7 +8232,9 @@ Siège associé à la salle ou au véhicule. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7757,7 +8274,9 @@ Meuble technique ventilé et alimenté. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7797,7 +8316,9 @@ Rangement ouvert, posé ou fixé. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-shelf](../assets/prop-shelf.png) — 1070 × 1470, pose static, ancre 536/1454
+**PNG runtime :** [prop-shelf](../assets/prop-shelf.png) — 1070 × 1470, pose static, ancre 536/1454
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7838,7 +8359,9 @@ Arrivée et évacuation dans le sas. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7877,7 +8400,9 @@ Panneau cohérent avec la direction réelle du secteur. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7916,7 +8441,9 @@ Cuve, robinet et raccords. 7 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-sink](../assets/prop-sink.png) — 1262 × 1246, pose static, ancre 611.5/1228
+**PNG runtime :** [prop-sink](../assets/prop-sink.png) — 1262 × 1246, pose static, ancre 611.5/1228
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -7960,7 +8487,9 @@ Contenant scientifique ; préserver sa version physique. 4 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [specimen-jar](../assets/specimen-jar.png) — 1024 × 1536, pose static, ancre 512/1518
+**PNG runtime :** [specimen-jar](../assets/specimen-jar.png) — 1024 × 1536, pose static, ancre 512/1518
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8002,7 +8531,9 @@ Cuisine et extraction reliées au plan de travail. 2 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-stove](../assets/prop-stove.png) — 1402 × 1122, pose static, ancre 692.5/1090
+**PNG runtime :** [prop-stove](../assets/prop-stove.png) — 1402 × 1122, pose static, ancre 692.5/1090
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8041,7 +8572,9 @@ Repère de prospection implanté au sol. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8083,7 +8616,9 @@ Surface de travail ou mobilier civil selon la pièce. 12 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-table](../assets/prop-table.png) — 2206 × 713, pose static, ancre 1101/697
+**PNG runtime :** [prop-table](../assets/prop-table.png) — 2206 × 713, pose static, ancre 1101/697
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8133,7 +8668,9 @@ Réservoir avec base et conduites cohérentes. 10 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8182,7 +8719,9 @@ Appareil à bandes fixé au poste. 2 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-tape-reel](../assets/prop-tape-reel.png) — 1663 × 945, pose static, ancre 831/868
+**PNG runtime :** [prop-tape-reel](../assets/prop-tape-reel.png) — 1663 × 945, pose static, ancre 831/868
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8221,7 +8760,9 @@ Rangement mural d’outils. 5 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-tool-board](../assets/prop-tool-board.png) — 1654 × 951, pose static, ancre 826/867
+**PNG runtime :** [prop-tool-board](../assets/prop-tool-board.png) — 1654 × 951, pose static, ancre 826/867
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8263,7 +8804,9 @@ Outils sur support ou suspendus. 5 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8307,7 +8850,9 @@ Volume du périmètre raccordé à l’horizon. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8347,7 +8892,9 @@ Objet personnel de l’habitat familial. 3 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8388,7 +8935,9 @@ Indice au sol associé au passage et à la phase. 5 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8431,7 +8980,9 @@ Appareil associé au circuit et à ses sécurités. 3 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8473,7 +9024,9 @@ Support de nourriture ou d’instruments selon la salle. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8512,7 +9065,9 @@ Machine rotative dans son volume industriel. 3 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8554,7 +9109,9 @@ Commande montée sur son réseau de fluides. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8596,7 +9153,9 @@ Mobilier de service ; certaines instances restent physiques. 3 placement(s) de b
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-vending](../assets/prop-vending.png) — 903 × 1741, pose static, ancre 451/1702
+**PNG runtime :** [prop-vending](../assets/prop-vending.png) — 903 × 1741, pose static, ancre 451/1702
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8637,7 +9196,9 @@ Grille fixée à une bouche ou un conduit. 13 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8688,7 +9249,9 @@ Repère horaire accroché au mur. 12 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-wall-clock](../assets/prop-wall-clock.png) — 1261 × 1247, pose static, ancre 626/1212
+**PNG runtime :** [prop-wall-clock](../assets/prop-wall-clock.png) — 1261 × 1247, pose static, ancre 626/1212
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8737,7 +9300,9 @@ Signal lié au risque local. 12 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-warning-board](../assets/prop-warning-board.png) — 1519 × 1036, pose static, ancre 760/923
+**PNG runtime :** [prop-warning-board](../assets/prop-warning-board.png) — 1519 × 1036, pose static, ancre 760/923
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8786,7 +9351,9 @@ Appareil de lavage et raccordements. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8829,7 +9396,9 @@ Support lié aux règles d’équipement. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8871,7 +9440,9 @@ Pièce stockée au garage. 4 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8914,7 +9485,9 @@ Châssis blanc, témoins verts et bleus. 1 placement(s) de base.
 
 **État :** génération = png_present ; intégration = png_decoratif_selectif ; automatique = file_sha256_and_png_dimensions_verified ; visuel = not_certified.
 
-**Assets :** [prop-white-monitor](../assets/prop-white-monitor.png) — 904 × 1739, pose static, ancre 452.5/1706
+**PNG runtime :** [prop-white-monitor](../assets/prop-white-monitor.png) — 904 × 1739, pose static, ancre 452.5/1706
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8952,7 +9525,9 @@ Vitrage intégré à un mur. 3 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -8993,7 +9568,9 @@ Variante de phase de l’installation existante. 0 placement(s) de base et 32 de
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9027,7 +9604,9 @@ Doit indiquer un trajet accessible. 0 placement(s) de base et 27 de phase.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9061,7 +9640,9 @@ Désordre sans collision ajoutée. 0 placement(s) de base et 32 de phase.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9095,7 +9676,9 @@ Détail de surface sans trou traversable implicite. 0 placement(s) de base et 27
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9129,7 +9712,9 @@ Réseau de bras maintenant la navette dans la baie ; distinct du pistolet-grappi
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9138,6 +9723,67 @@ Réseau de bras maintenant la navette dans la baie ; distinct du pistolet-grappi
 **Contrôles attendus :**
 
 - Séparer cet équipement de manutention et le pistolet-grappin de Ripley.
+
+### Tour Uplink de Hadley’s Hope
+
+Identifiant : `rop:props:colony-uplink-tower`
+
+Tour de communication extérieure attestée par une miniature de production utilisée dans les plans lointains de la colonie dans Aliens (1986).
+
+**Provenance :** maquette_filmique_attestee_fiche_documentaire_hors_runtime. Références : [R24](https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/)
+
+**Apparence :** Structure industrielle sur trois appuis, panneau central incliné et deux bras symétriques à grilles. L’état visible de la miniature documente une référence extérieure ; la traduction en illustration reste une adaptation.
+
+**Chronologie :** Référence visuelle d’Aliens (1986), étudiée pour le cadre colonial de 2179 ; sa scène propre dans le roman n’est pas établie par cette source.
+
+**Jeu :** Fiche documentaire. Aucun objet, spawn, accès ou volume de collision ajouté à la carte du DLC.
+
+**Localisation :** Hors parcours ou scène à préciser.
+
+**Dimensions et ancrage :** Mesures précises non documentées.
+
+**État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
+
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Tour Uplink de Hadley’s Hope — étude extérieure
+
+![Tour Uplink de Hadley’s Hope — étude extérieure](production/uplink-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-uplink-study-v1` ; 1254 × 1254 ; 1511242 octets.
+
+**Sources :** [R24](https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/)
+
+- La miniature de la tour Uplink a servi aux plans lointains de Hadley’s Hope dans Aliens. (R24).
+
+**Interprétations :**
+
+- La tour extérieure fournit un contexte architectural à la terrasse des antennes du projet.
+- Le plan, le chemin d’accès et la terrasse jouable ne sont pas établis par la miniature ; ils restent à produire et à vérifier.
+
+**Chronologie :** Référence extérieure d’Aliens (1986) associée à l’adaptation de la colonie en 2179.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Structure entière relue ; la tour reste une référence de production extérieure, sans ancrage au runtime.
+- Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.
+- La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie.
+
+**À compléter :**
+
+- Dimensions du bâtiment à pleine échelle et implantation précise non établies.
+- Plan d’accès, ancrage, collisions et variantes d’état à définir avant toute intégration.
+- La terrasse des antennes du projet conserve son plan adapté ; la miniature n’en constitue pas un relevé.
+
+**Contrôles attendus :**
+
+- Conserver la distinction entre maquette de production et bâtiment aux dimensions officielles.
+- Lier la tour à la terrasse uniquement comme référence extérieure, sans inventer de connexion ou d’accès.
+- Maintenir les états génération documentaire, intégration en jeu et fidélité séparés.
 
 ## Véhicules
 
@@ -9161,7 +9807,9 @@ Distinct du tracteur pilotable natif. 2 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9202,7 +9850,9 @@ Tracteur pilotable entre piste et plateau, distinct des véhicules statiques.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9235,7 +9885,36 @@ Concept de tracteur conçu pour Aliens.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Daihotai — étude du tracteur terrestre
+
+![Daihotai — étude du tracteur terrestre](production/daihotai-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-daihotai-study-v1` ; 1774 × 887 ; 2094219 octets.
+
+**Sources :** [R6](https://propstore.com/product/aliens-1986/hand-illustrated-ron-cobb-daihotai-tractor-concept-sketch/)
+
+- Le dessin de Ron Cobb représente le tracteur des Jorden de face, arrière, côté et dessus. (R6).
+
+**Interprétations :**
+
+- Le passage du concept à cette vue peinte reste une reconstruction ; les détails non visibles sont interprétés.
+- Les dimensions de la feuille de dessin ne sont pas les dimensions du véhicule.
+- Aucune identification automatique au heavy-crawler du roman ou au tracteur pilotable du projet.
+
+**Chronologie :** Référence de conception d’Aliens (1986), étudiée pour la campagne 2179.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Vue latérale relue : trois roues visibles du flanc, cabine vitrée et équipement de toit ; traduction peinte du concept.
+- Aucun état de conduite ni ancrage runtime n’est livré par cette étude.
+- Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.
+- La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie.
 
 **À compléter :**
 
@@ -9266,7 +9945,9 @@ Véhicule de récupération évoqué au chapitre 7.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9297,7 +9978,9 @@ Piste historique du registre, sans présence authentifiée dans ce récit.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9330,7 +10013,9 @@ Modèle et nom exacts non établis. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9370,7 +10055,38 @@ Vaisseau en fer à cheval associé à son seuil. 1 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Épave extraterrestre — étude extérieure
+
+![Épave extraterrestre — étude extérieure](production/derelict-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-derelict-study-v1` ; 1379 × 1141 ; 2013646 octets.
+
+**Sources :** [S1](https://titanbooks.com/6486-alien-river-of-pain-book-3/), [R13](https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56541/), [R14](https://www.sideshow.com/collectibles/alien-derelict-ship-hollywood-collectibles-group-906247)
+
+- Le récit relie l’exploration des Jorden à l’épave extraterrestre. (S1).
+- Les photographies de production d’Alien montrent un concept, une miniature et des détails de sa surface. (R13).
+- Une réplique sous licence présente la forme organique du vaisseau et un socle rocheux. (R14).
+
+**Interprétations :**
+
+- La source primaire renvoie au film de 1979 ; les dommages précis du récit en 2179 restent à vérifier.
+- Le socle de la réplique est une représentation, sans valeur de carte officielle.
+- Échelle, accès, intérieur et collision du jeu restent à produire ou à contrôler séparément.
+
+**Chronologie :** Étude de l’épave pour la campagne 2179 à partir de références de production d’Alien (1979) et d’une réplique sous licence.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Vue trois quarts relue avec son socle rocheux ; comparaison artistique 1:1 non certifiée.
+- Le socle fait partie de cette étude de réplique ; il ne définit pas le relief du niveau.
+- Fin bruit alpha résiduel hors silhouette signalé ; détourage destiné à l’illustration documentaire, non certifié pour un sprite.
+- La silhouette principale reste entière au seuil alpha 16 ; seuls des pixels faibles (alpha 1 à 15) atteignent la périphérie.
 
 **À compléter :**
 
@@ -9409,7 +10125,9 @@ Appareil piloté par Tressa à l’arrivée.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9441,7 +10159,9 @@ Cadre spatial de récupération, distinct de la colonie.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9473,7 +10193,9 @@ Navette et couchette de la scène de récupération.
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9507,7 +10229,9 @@ Habillage de ruche selon phase et surface. 10 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9556,7 +10280,9 @@ Structure de l’épave ou de la ruche. 38 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9633,7 +10359,9 @@ Relief extérieur parfois utilisé comme couverture. 12 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9684,7 +10412,9 @@ Détail du sol dans la palette de la zone. 5 placement(s) de base.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9727,7 +10457,9 @@ Stockage, cloisons et circulation administrative.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9760,7 +10492,9 @@ Aménagement militaire local et dotation.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9793,7 +10527,9 @@ Sols, surfaces lavables et service civil.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9826,7 +10562,9 @@ Pupitres et structures du poste colonial.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9859,7 +10597,9 @@ Assemblages répétables entre les secteurs.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9892,7 +10632,9 @@ Joints, drainage et surfaces de décontamination.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9925,7 +10667,9 @@ Parois et nervures biomécaniques monumentales.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9958,7 +10702,9 @@ Logements, textiles et vie quotidienne.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -9991,7 +10737,60 @@ Roche, poussière et structures exposées.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — Sol rocheux de LV-426 — étude de terrain
+
+![Sol rocheux de LV-426 — étude de terrain](production/exterior-terrain-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-exterior-terrain-study-v1` ; 1254 × 1254 ; 3557016 octets.
+
+**Sources :** [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R14](https://www.sideshow.com/collectibles/alien-derelict-ship-hollywood-collectibles-group-906247)
+
+- À l’arrivée de Brackett, l’extérieur est noir et gris, balayé par le vent et une poussière abrasive. (R1).
+- Le socle de la réplique sous licence propose un environnement rocheux associé à LV-426. (R14).
+
+**Interprétations :**
+
+- Répartition des blocs, granularité, raccords et relief local conçus pour cette étude.
+- Le raccord sans couture, les échelles d’utilisation et les couches de jeu ne sont pas validés ; aucune collision n’est dérivée de cette image.
+
+**Chronologie :** Direction de terrain de la colonie en 2179 ; géométrie locale adaptée.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Étude de roche sombre et granulats relue.
+- Répétition sans couture et échelle de texel non validées ; aucune couche runtime n’est remplacée.
+
+#### Illustration de production — LV-426 / Acheron — vue de surface
+
+![LV-426 / Acheron — vue de surface](production/lv426-surface-study-v1.png)
+
+**Rôle :** contexte visuel associé, sans livraison du sujet propre à la fiche. **Fichier :** `prod-lv426-surface-study-v1` ; 1774 × 887 ; 2614374 octets.
+
+**Sources :** [S1](https://titanbooks.com/6486-alien-river-of-pain-book-3/), [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R12](https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/)
+
+- LV-426 / Acheron est le monde de Hadley’s Hope et du récit. (S1).
+- L’arrivée montre un paysage noir et gris, des bâtiments cubiques, une serre hémisphérique et un processeur atmosphérique dans la tempête. (R1).
+- Des maquettes de bâtiments ont servi aux vues extérieures de la colonie dans Aliens. (R12).
+
+**Interprétations :**
+
+- Cadrage de surface et implantation proposés ; aucune cartographie globale, géographie orbitale ou dimension planétaire certifiée.
+- Les distances et le relief entre la colonie, les processeurs et l’épave ne sont pas établis par cette image.
+
+**Chronologie :** Vue de contexte de la colonie en 2179 ; LV-426 est qualifiée de lune.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Panorama relu : colonie et relief rocheux sous un ciel sombre.
+- Topographie, composition et distances interprétées ; aucune carte ou vue orbitale certifiée.
 
 **À compléter :**
 
@@ -10024,7 +10823,9 @@ Supports, cloisons sécurisées et sol dégagé.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10057,7 +10858,9 @@ Vitrage, ossature, culture et drainage.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10090,7 +10893,9 @@ Manutention, sol porteur et ouvertures.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10123,7 +10928,9 @@ Résine superposée au bâti industriel.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10156,7 +10963,9 @@ Métal, machines, tuyaux et passerelles.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10189,7 +10998,9 @@ Surfaces techniques, vitrages et mobilier.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10222,7 +11033,9 @@ Mobilier civil et détente.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10255,7 +11068,9 @@ Trappes, outillage et réseaux.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10288,7 +11103,9 @@ Surfaces nettoyables et circulation de soins.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10321,7 +11138,9 @@ Volumes abrités, câbles et accès enfant.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10354,7 +11173,9 @@ Coursives, plaques et façades de logements.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10387,7 +11208,9 @@ Guides, parois, plateformes et niveaux.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10420,7 +11243,9 @@ Cabine, sièges et seuils du vaisseau.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10453,7 +11278,9 @@ Buanderie, réserves et conduites.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10486,7 +11313,9 @@ Sections étroites, raccords et grilles.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10519,7 +11348,9 @@ Stockage, marquages et manutention.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10552,7 +11383,9 @@ Surface routière du système de mobilité.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10583,7 +11416,9 @@ Surface routière du système de mobilité.
 
 **État :** génération = no_png ; intégration = native_procedural ; automatique = data_inventory_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10616,7 +11451,35 @@ Lune du récit, territoire de la colonie et de l’épave.
 
 **État :** génération = no_png ; intégration = cadre_narratif_sans_asset_orbital ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** illustration_present.
+
+#### Illustration de production — LV-426 / Acheron — vue de surface
+
+![LV-426 / Acheron — vue de surface](production/lv426-surface-study-v1.png)
+
+**Rôle :** sujet principal de la fiche. **Fichier :** `prod-lv426-surface-study-v1` ; 1774 × 887 ; 2614374 octets.
+
+**Sources :** [S1](https://titanbooks.com/6486-alien-river-of-pain-book-3/), [R1](https://dailydead.com/read-exclusive-excerpt-alien-river-pain/), [R12](https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/)
+
+- LV-426 / Acheron est le monde de Hadley’s Hope et du récit. (S1).
+- L’arrivée montre un paysage noir et gris, des bâtiments cubiques, une serre hémisphérique et un processeur atmosphérique dans la tempête. (R1).
+- Des maquettes de bâtiments ont servi aux vues extérieures de la colonie dans Aliens. (R12).
+
+**Interprétations :**
+
+- Cadrage de surface et implantation proposés ; aucune cartographie globale, géographie orbitale ou dimension planétaire certifiée.
+- Les distances et le relief entre la colonie, les processeurs et l’épave ne sont pas établis par cette image.
+
+**Chronologie :** Vue de contexte de la colonie en 2179 ; LV-426 est qualifiée de lune.
+
+**Échelle :** Aucune échelle physique, ancre ou ligne de sol certifiée.
+
+**Validation :** fichier = file_sha256_and_png_dimensions_verified ; revue visuelle = reviewed_with_limitations ; fidélité 1:1 = not_certified.
+
+- Panorama relu : colonie et relief rocheux sous un ciel sombre.
+- Topographie, composition et distances interprétées ; aucune carte ou vue orbitale certifiée.
 
 **À compléter :**
 
@@ -10648,7 +11511,9 @@ La Terre est visible depuis Gateway dans l’extrait ; fiche de cadre orbital di
 
 **État :** génération = no_png ; intégration = absent ; automatique = source_reference_only ; visuel = not_certified.
 
-**Assets :** Aucun PNG individuel référencé.
+**PNG runtime :** Aucun PNG runtime individuel référencé.
+
+**Production documentaire :** no_production_image.
 
 **À compléter :**
 
@@ -10762,6 +11627,60 @@ Type : dessin_de_conception_de_production. Usage : Direction architecturale des 
 https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/
 
 Type : maquette_de_production. Usage : Volumes et matériaux extérieurs de la colonie ; les dimensions logiques du jeu ne deviennent pas officielles.
+
+### R13 — Propstore — photographies de production de l’épave, Alien (1979)
+
+https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56541/
+
+Type : photographies_de_production. Usage : Onze photographies du concept, de la miniature et de sa surface. Référence de production de 1979 ; les dommages et le cadrage du récit en 2179 restent à vérifier.
+
+### R14 — Sideshow / Hollywood Collectibles — réplique sous licence du Derelict
+
+https://www.sideshow.com/collectibles/alien-derelict-ship-hollywood-collectibles-group-906247
+
+Type : replique_sous_licence. Usage : Galerie d’une réplique issue du modèle exposé en 2012. Silhouette et revêtement organique ; le socle propose un terrain rocheux. Ni miniature filmée ni carte officielle de LV-426.
+
+### R15 — Propstore — M240 léger de production, Aliens (1986)
+
+https://propstore.com/product/aliens-1986/lot-12-lightweight-colonial-marine-flamethrower/
+
+Type : accessoire_de_production. Usage : Référence de forme et de finition d’un accessoire léger, dont l’état comprend une restauration. Ne prouve ni la dotation d’un personnage du roman ni l’existence d’un nouveau PNG.
+
+### R17 — Propstore — tête originale de Xenomorph Warrior, Aliens (1986)
+
+https://propstore.com/product/aliens-1986/lot-7-xenomorph-warrior-head/
+
+Type : accessoire_de_production. Usage : Référence de tête nervurée de la production de 1986 ; les proportions du corps et les poses nécessitent des références complémentaires.
+
+### R18 — Propstore — costume de cascade Alien Warrior, Aliens (1986)
+
+https://propstoreauction.com/lot-details/index/catalog/10/lot/1259/ALIENS-1986-Alien-Warrior-Suit
+
+Type : costume_de_production. Usage : Référence de construction et de silhouette du corps ; l’état conservé de l’objet ne certifie pas toutes les parties ni une pose animée.
+
+### R20 — Stan Winston School — fabrication du Xenomorph Drone d’Aliens
+
+https://www.stanwinstonschool.com/blog/aliens-movie-the-making-of-a-xenomorph-drone
+
+Type : documentation_primaire_atelier_effets_speciaux. Usage : Photographies et fabrication des créatures de 1986. Employer les images de la version correspondante ; aucune animation de jeu n’est fournie par cette référence.
+
+### R21 — Sideshow / Hot Toys — Ellen Ripley et Jonesy, produit sous licence
+
+https://www.sideshow.com/collectibles/alien-ellen-ripley-hot-toys-902230
+
+Type : replique_sous_licence. Usage : Galerie du produit inspiré d’Alien (1979), avec Jonesy. Complément de silhouette ; ne pas présenter cette figurine comme une photographie du chat filmé.
+
+### R22 — Reactor — photographie de Ripley et Jonesy créditée 20th Century Studios
+
+https://reactormag.com/jonesy-versus-the-big-bad-cat-power-in-the-alien-franchise/
+
+Type : photographie_studio_republiee. Usage : Employer uniquement la photographie créditée au studio pour la tête et le torse du chat roux tigré tenu par Ripley. L’article ne sert pas d’autorité pour les interprétations de comportement ; la pose à quatre pattes reste reconstruite.
+
+### R24 — Propstore — miniature de la tour Uplink, Aliens (1986)
+
+https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/
+
+Type : maquette_de_production. Usage : Miniature utilisée pour les vues lointaines de Hadley’s Hope. Structure industrielle et bras à grilles ; la terrasse des antennes et sa circulation appartiennent au plan adapté du jeu.
 
 ## Reconstruction
 

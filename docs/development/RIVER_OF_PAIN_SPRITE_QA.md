@@ -1,5 +1,96 @@
 # Fleuve de la Douleur — qualification du rendu PNG
 
+## Lot 4 — huit illustrations dans la bible, 26 novembre 2026
+
+### Livraison et périmètre
+
+Huit images de production complètent les fiches de Jonesy, du Medlab, du
+Daihotai, de l’épave, du sol rocheux, de la surface de LV-426, de la serre
+et de la tour Uplink. Elles totalisent **19 582 657 octets**. Le registre
+[`PRODUCTION_ASSETS.json`](../../dlc/fleuve-de-la-douleur/visual-v1/bible/PRODUCTION_ASSETS.json)
+conserve leurs prompts exacts, leurs sources, les détails interprétés,
+leurs dimensions, poids, SHA-256 et historique de génération applicable.
+
+Ces images ont l’usage `bible_only`. Le manifeste des **78 PNG runtime**,
+les raccordements du rendu, le chargeur et le gameplay sont identiques au
+commit de départ `6fa117ae714a25ab070789bcabf9a7c9075a31bc`.
+La nouvelle fiche Uplink est documentaire ; son lien de contexte vers
+`rop:lieux:aerial` ne crée pas une tour ou un accès dans le niveau.
+
+### Inspection des images
+
+- **8/8 PNG décodables**, tailles et SHA-256 recalculés ; les empreintes Git
+  correspondent aux blobs préparés pour la publication.
+- Cinq images opaques : Jonesy, Medlab, terrain, panorama et serre.
+  Trois images possèdent un canal alpha : Daihotai, épave et Uplink.
+- Aucun des trois sujets détourés ne touche un bord à alpha ≥16. Des
+  pixels périphériques d’alpha 1–15 subsistent ; aucune qualité de
+  détourage runtime ni animation n’est certifiée.
+- Les huit images complètes ont été relues visuellement. Les deux essais
+  précédents de Jonesy, affectés par une frange colorée, restent hors
+  des assets admis ; seule la version finale sur fond gris opaque est livrée.
+- Les PNG sont conservés sans découpe, recoloration ou réencodage par script.
+
+| Image | Dimensions en pixels | Poids en octets |
+| --- | ---: | ---: |
+| Jonesy | 1 585 × 992 | 2 125 979 |
+| Medlab | 1 672 × 941 | 2 857 582 |
+| Daihotai | 1 774 × 887 | 2 094 219 |
+| Épave extraterrestre | 1 379 × 1 141 | 2 013 646 |
+| Sol rocheux | 1 254 × 1 254 | 3 557 016 |
+| Tour Uplink | 1 254 × 1 254 | 1 511 242 |
+| Surface de LV-426 | 1 774 × 887 | 2 614 374 |
+| Serre | 1 774 × 887 | 2 808 599 |
+
+### Couverture et consultation
+
+La bible reconstruite comprend **279 fiches** : 83 reliées à au moins un
+PNG runtime, huit autres dont le sujet est illustré en production et une
+avec seulement une image de contexte. Il reste **188 fiches sans image du
+sujet**, dont **187 sans aucune image**. Les compteurs et filtres distinguent
+ces cas ; une image de contexte n’efface pas le manque du sujet principal.
+Les statuts d’intégration des 278 fiches antérieures sont conservés.
+
+La recette locale de la bible a passé **29/29 contrôles** sous
+**Chromium 143.0.7499.4 / Playwright 1.62.0** : recherche, catégories,
+pagination, six filtres d’images, affichage des tentatives sans résultat,
+décodage et dimensions des huit images, métadonnées sur mobile, ainsi que
+quatre vérifications distinguant le contexte de la fiche `aerial` de son
+sujet. Aucune erreur JavaScript ni débordement horizontal mobile constaté.
+Les captures desktop 1 280 × 900, Medlab et Jonesy mobile à 390 pixels de
+large ont été relues. Cette recette porte sur la bible ; elle ne constitue
+pas une nouvelle recette de gameplay.
+
+Le générateur vérifie l’identité des fiches et des sources, les rôles
+`subject`/`context`, l’usage documentaire, les chemins confinés au dossier
+de production, l’absence de lien symbolique, ainsi que les tailles,
+dimensions et empreintes des fichiers. Les huit PNG et le registre sont
+admis individuellement comme sources et exclus de la distribution publique.
+La revue indépendante confirme **2/2 tests d’admission réussis**, le rejet
+des chemins arbitraires et la conservation des **85 fichiers publics** et
+des **222 sources historiques** par rapport au commit de départ.
+Le résultat du workflow complet du DLC est attaché au commit de la
+[PR 66](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/66).
+
+### Sources, limites et tentatives sans résultat
+
+Le Medlab et le Daihotai dérivent de concepts de Ron Cobb. L’épave utilise
+une réplique sous licence, distinguée des photographies de production de
+1979. Jonesy reprend une photographie de studio republiée, avec une pose
+entière reconstruite. La miniature Uplink est documentée comme élément
+de Hadley’s Hope. Le texte autorisé du roman atteste les grands caractères
+de la serre et du terrain ; leurs détails et implantations restent interprétés.
+Les références exactes figurent dans chaque fiche et dans le registre.
+
+Le service de génération a refusé le lot d’essais M41A/M240 et l’essai de
+Xénomorphe adulte. Aucun résultat exploitable n’a été récupéré pour ces
+entrées. Aucun asset ni raccordement runtime supplémentaire n’est compté
+pour ces tentatives, qui restent consignées dans les fiches concernées.
+
+La fidélité 1:1 générale et l’exhaustivité du canon restent non certifiées.
+Les études ne définissent ni plans officiels, ni mesures réelles, ni cycles
+d’animation, ni texture de terrain sans couture validée.
+
 ## Lot 3 — 78 PNG et bible de production, 26 novembre 2026
 
 ### Fichiers et rendu
