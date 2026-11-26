@@ -56,8 +56,8 @@ test('all 646 recovered files are exact and the raster runtime is the reviewed d
   const result = await verifyAlienIsolationDlcAdmissions(root);
   assert.equal(result.recoveredFiles, 646);
   assert.equal(result.recoveredBytes, 107266357);
-  assert.equal(result.runtimeFiles, 32);
-  assert.equal(result.runtimeImages, 28);
+  assert.equal(result.runtimeFiles, 33);
+  assert.equal(result.runtimeImages, 29);
   assert.equal(result.candidateImages, 22);
   assert.equal(result.runtimeManifestSha256, ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256);
   assert.equal(result.manifestSha256, ALIEN_ISOLATION_RECOVERY_MANIFEST_SHA256);
@@ -148,13 +148,13 @@ test('symlinked recovered files and additional runtime files are refused', async
   await assert.rejects(verifyAlienIsolationRuntime(directory), /Unapproved/);
 });
 
-test('the actual build exports all 32 pinned runtime members and no recovered corpus', async t => {
+test('the actual build exports all 33 pinned runtime members and no recovered corpus', async t => {
   const directory = await temp(t);
   const result = await buildAlienIsolationDlc(root, directory);
   assert.equal(result.built, true);
   assert.equal(result.recoveredFiles, 0);
   assert.deepEqual(await readdir(directory), ['dlc']);
-  assert.equal(result.runtimeFiles, 32);
+  assert.equal(result.runtimeFiles, 33);
   assert.deepEqual((await readdir(join(directory, ALIEN_ISOLATION_RUNTIME_ROOT))).sort(), ['fidelity', 'game.html', 'index.html']);
   for (const path of alienIsolationRuntimeFiles()) assert.deepEqual(await readFile(join(directory, path)), await readFile(join(root, path)), path);
   await mkdir(join(directory, 'modules/alien-isolation'), { recursive: true });
@@ -183,7 +183,7 @@ test('the runtime inventory cannot change its external digest pin', () => {
   const changed = runtimeManifest(); changed.files[0].sha256 = 'f'.repeat(64);
   assert.throws(() => compileAlienIsolationRuntimeManifest(encoded(changed)), /Unreviewed/);
   const inventory = reviewedAlienIsolationRuntime();
-  assert.equal(inventory.files.size, 32); assert.equal(inventory.images.size, 28);
+  assert.equal(inventory.files.size, 33); assert.equal(inventory.images.size, 29);
 });
 
 test('runtime paths, duplicates, unlisted fields and invented item slots are refused', () => {
@@ -230,6 +230,12 @@ test('source terminal IDs and portraits are scoped to actual existing content', 
   for (const id of ['c_server.optional', 'g_observation.v03.11', 'sc_station.v08.p09', 'sc_station.v08.task']) assert.ok(scoped.includes(id), id);
   for (const binding of inventory.manifest.bindings.props)
     for (const id of binding.propIds || []) assert.equal(props.get(id), binding.kind, id);
+  const rewire = inventory.manifest.bindings.props.find(binding => binding.asset === 'rewire-panel');
+  const nativeRewires = content.rooms.flatMap(room => room.props.filter(prop => prop.interactive === 'rewire'));
+  assert.equal(nativeRewires.length, 23);
+  assert.equal(rewire.kind, 'relay');
+  assert.deepEqual([...rewire.propIds].sort(), nativeRewires.map(prop => prop.id).sort());
+  assert.equal(rewire.openedAsset, undefined, 'Native rewire has no opened visual state');
   for (const binding of inventory.manifest.bindings.portraits)
     assert.ok(content.characters.some(character => character.name === binding.name), binding.name);
 });

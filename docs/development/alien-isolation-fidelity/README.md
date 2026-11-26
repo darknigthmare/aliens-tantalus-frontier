@@ -1,6 +1,17 @@
 # Alien: Isolation — bible de production du pack visuel
 
-## Périmètre de cette livraison
+## État courant après la passe de dérivation du 26 novembre 2026
+
+**51 PNG sont conservés : 29 utilisés par le jeu et 22 candidats dans les sources.** Cette passe ajoute seulement `rewire-panel.png`. Les 50 PNG antérieurs, les 646 fichiers historiques V0.8, le jeu dérivé et l’adaptateur gardent leurs octets. Les inventaires et la galerie regroupent désormais les 11 candidats récupérés précédemment ; ils ne sont pas comptés comme de nouvelles générations.
+
+Le nouveau boîtier reprend la vue fermée publiée par [Tunde Glover, son créateur](https://tunde_glover.artstation.com/projects/49VVLY). Il est limité aux **23 placements `interactive:'rewire'`**. Les **30 autres objets `relay`** restent en SVG. Le cycle natif normal → éclairage coupé → ventilation détournée pendant 24 secondes, son indicateur CIRCUIT et les règles de distance restent ceux du moteur. Aucune nouvelle pièce ni nouvelle mécanique n’est ajoutée.
+
+Le [registre de cette passe](rewire-production-20261126.json) contient les deux prompts, la référence, l’empreinte du PNG natif et les 23 identifiants. La vue frontale presque orthographique est une adaptation de la capture en perspective ; les bouts des conduits sont extrapolés. Le canal alpha natif est conservé sans retouche de pixels : le corps est principalement à 253/255 et de faibles résidus <8 existent hors silhouette visible. La conformité 1:1 et un alpha mathématiquement parfait ne sont pas revendiqués.
+
+Qualification obtenue : **18/18 tests d’intégration et d’admission**, build isolé de **33 fichiers / 43 632 190 octets**, **30/30 contrôles Chromium 143.0.7499.4**, aucune erreur JavaScript et galerie **51 images / 29 runtime / 22 candidates** vérifiée. La fixture indépendante dessine les 23 boîtiers et les 30 relais SVG, exerce le maintien et le cycle 0 → 1 → 2 → 0, contrôle la distance, le délai de 24 secondes et le secours après échec réseau du PNG. Elle ne constitue pas un parcours complet de la campagne. Les résultats historiques ci-dessous restent datés de leurs passes respectives.
+
+## Inventaire historique initial (39 PNG)
+
 
 Ce pack apporte **39 PNG indépendants** à l’adaptation 2D **Alien: Isolation · Dernière transmission**, fondée sur la V0.8. Il comprend **28 images admises par le manifeste du jeu** et **11 images candidates conservées dans les sources de développement**. Les références, prompts et empreintes permettent de retrouver chaque image et d’en poursuivre la comparaison visuelle.
 

@@ -9,6 +9,7 @@ and host-navigation journey as well.
 from __future__ import annotations
 
 import argparse
+import base64
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
@@ -170,6 +171,7 @@ RENDERER_FIXTURES = r"""async () => {
       const image = calls.find(call => call.image instanceof HTMLCanvasElement)?.image;
       const allowed = !binding.propIds || binding.propIds.includes(prop.id);
       const row = {kind: binding.kind, id: prop.id, room: room.id, allowed, drawn: !!image,
+        originalSVGDrawn: calls.some(call => call.image === reference),
         stateUnchanged: propState === JSON.stringify(engine.s),
         originalBankRestored: renderer.images['props/' + binding.kind + '.svg'] === reference};
       if (binding.kind === 'terminal' && allowed && image) {
@@ -195,8 +197,66 @@ RENDERER_FIXTURES = r"""async () => {
     }
   }
   const propStateUnchanged = props.every(row => row.stateUnchanged);
+  // Exercise the real hold/use/rewire methods on an independent seeded engine.
+  // Room and position are fixture setup, never a claimed campaign journey.
+  const rewires = [], rewireCaptures = [];
+  const rewireBinding = fixtureManifest.bindings.props.find(binding => binding.asset === 'rewire-panel');
+  if (rewireBinding) for (const room of live.CONTENT.rooms) for (const prop of room.props) {
+    if (prop.interactive !== 'rewire') continue;
+    const circuit = new live.engine.constructor('recit', 20141007);
+    circuit.s.room = room.id; circuit.s.x = prop.x; circuit.s.y = prop.y;
+    const inventoryBefore = JSON.stringify(circuit.s.inventory);
+    const progressBefore = JSON.stringify([circuit.s.chapter,circuit.s.goal,circuit.s.completed,circuit.s.flags]);
+    const modes = [0], held = [], drawn = [];
+    renderer.engine = circuit;
+    renderer.camera = Math.max(0, Math.min(prop.x - 650, room.w - 1440));
+    for (let turn = 0; turn < 3; turn++) {
+      while (circuit.cooldown > 0) circuit.step(.08, {interact:false});
+      const target = circuit.targets()[0];
+      const before = circuit.s.systems[room.id]?.mode || 0;
+      circuit.interact(.54); circuit.interact(.55);
+      const beforeThreshold = circuit.s.systems[room.id]?.mode || 0;
+      circuit.interact(.02);
+      modes.push(circuit.s.systems[room.id]?.mode || 0);
+      held.push(target?.id === prop.id && beforeThreshold === before);
+      calls.length = 0;
+      const state = JSON.stringify(circuit.s);
+      renderer.prop(prop);
+      drawn.push({raster:calls.some(call => call.image instanceof HTMLCanvasElement),
+        svg:calls.some(call => call.image === originalImages['props/relay.svg']),
+        stateUnchanged:state === JSON.stringify(circuit.s)});
+      if (!rewires.length && [0,1].includes(turn)) {
+        circuit.s.x = prop.x - 110;
+        renderer.render();
+        rewireCaptures.push({file:'rewire-fixture-mode-'+modes.at(-1)+'.png',
+          meaning:'Independent native renderer fixture in '+room.id+', circuit mode '+modes.at(-1)+'; no campaign teleport or storage write',
+          png:canvas.toDataURL('image/png')});
+        circuit.s.x = prop.x;
+      }
+    }
+    const cyclesComplete = circuit.s.stats.rewires === 3;
+    circuit.s.x = prop.x + 150;
+    const farState = JSON.stringify(circuit.s);
+    const farRejected = circuit.rewire(prop) === false && farState === JSON.stringify(circuit.s);
+    circuit.s.x = prop.x;
+    let timedReturn = null;
+    if (!rewires.length) {
+      circuit.rewire(prop); circuit.rewire(prop);
+      const expiry = circuit.s.systems[room.id].until;
+      const duration = expiry - circuit.s.time;
+      while (circuit.s.time < expiry - .04) circuit.step(Math.min(.08, expiry - .04 - circuit.s.time));
+      const activeBefore = circuit.s.systems[room.id].mode === 2;
+      circuit.step(.08);
+      timedReturn = {duration, activeBefore, normalAfter:circuit.s.systems[room.id].mode === 0};
+    }
+    rewires.push({id:prop.id,room:room.id,admitted:rewireBinding.propIds.includes(prop.id),modes,
+      holdThresholdPreserved:held.every(Boolean),cyclesComplete,farRejected,drawn,timedReturn,
+      inventoryUnchanged:inventoryBefore === JSON.stringify(circuit.s.inventory),
+      progressUnchanged:progressBefore === JSON.stringify([circuit.s.chapter,circuit.s.goal,circuit.s.completed,circuit.s.flags])});
+  }
+  renderer.engine = engine;
   presentation.uninstall();
-  return {rows, fallbacks, props, projectiles, ventInvisible, marlowIdentityPreserved, bankRestored, propStateUnchanged,
+  return {rows, fallbacks, props, projectiles, rewires, rewireCaptures, ventInvisible, marlowIdentityPreserved, bankRestored, propStateUnchanged,
     liveStateUnchanged: beforeLive === JSON.stringify(live.engine.s),
     storageUnchanged: beforeStorage === JSON.stringify(Object.fromEntries(Object.entries(localStorage)))};
 }"""
@@ -382,7 +442,28 @@ def main():
                   child.locator('[data-isolation-portrait]').evaluate_all('(nodes)=>nodes.every(node=>node.alt===node.closest(".codex-card").querySelector("h3").textContent.trim())'))
             capture(page, '04-codex-portraits.png', 'Dossiers narratifs : ces portraits ne créent pas de PNJ physiques')
             fixture = child.evaluate(RENDERER_FIXTURES)
+            for native_capture in fixture.pop('rewireCaptures', []):
+                destination = output / native_capture['file']
+                destination.write_bytes(base64.b64decode(native_capture['png'].split(',', 1)[1]))
+                report['captures'].append({'file':native_capture['file'], 'meaning':native_capture['meaning'],
+                    'sha256':hashlib.sha256(destination.read_bytes()).hexdigest(), 'imageEdited':False,
+                    'source':'Unmodified PNG export of the independent native renderer canvas'})
             report['offscreenRenderer'] = fixture
+            if any(binding.get('asset') == 'rewire-panel' for binding in manifest['bindings']['props']):
+                rewire_rows = [row for row in fixture['props'] if row['kind'] == 'relay']
+                check('Le boîtier est limité aux 23 dérivations et les 30 autres relais gardent leur SVG',
+                      sum(row['drawn'] for row in rewire_rows) == 23
+                      and sum(row['originalSVGDrawn'] for row in rewire_rows) == 30
+                      and all(row['drawn'] == row['allowed'] for row in rewire_rows), rewire_rows)
+                check('Les 23 interactions natives gardent leur maintien, cycle, distance et progression',
+                      len(fixture['rewires']) == 23 and all(row['admitted'] and row['modes'] == [0,1,2,0]
+                        and row['holdThresholdPreserved'] and row['cyclesComplete'] and row['farRejected']
+                        and row['inventoryUnchanged'] and row['progressUnchanged']
+                        and all(draw['raster'] and draw['stateUnchanged'] for draw in row['drawn'])
+                        for row in fixture['rewires']), fixture['rewires'])
+                timer = next(row['timedReturn'] for row in fixture['rewires'] if row['timedReturn'])
+                check('La ventilation revient au mode normal après ses 24 secondes natives',
+                      abs(timer['duration'] - 24) < 1e-8 and timer['activeBefore'] and timer['normalAfter'], timer)
             check('Chaque pose fournie est dessinée avec ses vrais cadres distincts',
                   all(row['allRaster'] and row['frameCanvasCorrect'] and row['observedFrames'] == row['suppliedFrames']
                       and row['observedPixelFrames'] == row['suppliedFrames'] for row in fixture['rows']), fixture['rows'])
@@ -424,6 +505,9 @@ def main():
             missing = next(asset for asset in manifest['assets'] if asset['id'] == idle['frames'][0])
             await_pattern = '**/fidelity/' + missing['src'].removeprefix('./')
             failed_context.route(await_pattern, lambda route: route.abort())
+            rewire_asset = next((asset for asset in manifest['assets'] if asset['id'] == 'rewire-panel'), None)
+            if rewire_asset:
+                failed_context.route('**/fidelity/' + rewire_asset['src'].removeprefix('./'), lambda route: route.abort())
             failed_page = failed_context.new_page()
             failed_page.set_default_timeout(30000)
             failed_page.goto(base + '/dlc/alien-isolation/index.html', wait_until='load')
@@ -434,6 +518,14 @@ def main():
                   and not any(row['kind'] == 'amanda' and row['pose'] == 'idle' for row in partial['characters'])
                   and failed_child.evaluate("__isolation.renderer.images['characters/amanda_walk_0.svg'].complete"))
             failed_child.locator('#newGame').click()
+            if rewire_asset:
+                failed_fixture = failed_child.evaluate(RENDERER_FIXTURES)
+                failed_relays = [row for row in failed_fixture['props'] if row['kind'] == 'relay']
+                check('Le PNG de dérivation absent laisse 53 relais SVG et leurs interactions utilisables',
+                      any(row['id'] == 'rewire-panel' for row in partial['failed'])
+                      and len(failed_relays) == 53 and all(row['originalSVGDrawn'] and not row['drawn'] for row in failed_relays)
+                      and all(row['modes'] == [0,1,2,0] and row['cyclesComplete'] for row in failed_fixture['rewires']),
+                      {'relays':failed_relays, 'cycles':[{'id':row['id'],'modes':row['modes']} for row in failed_fixture['rewires']]})
             x = failed_child.evaluate('__isolation.engine.s.x')
             try:
                 failed_page.keyboard.down('d')
@@ -441,7 +533,7 @@ def main():
             finally:
                 failed_page.keyboard.up('d')
             check('Le jeu reste utilisable après cet échec de chargement', failed_child.evaluate('__isolation.engine.s.x') > x + 10)
-            capture(failed_page, '05-missing-image-fallback.png', 'Échec réseau volontaire d’une seule image : présentation SVG conservée pour la pose absente')
+            capture(failed_page, '05-missing-image-fallback.png', 'Échecs réseau volontaires des images ciblées : SVG conservés pour Amanda et, si présent, le boîtier de dérivation')
             failed_context.close()
             context.close()
             browser.close()

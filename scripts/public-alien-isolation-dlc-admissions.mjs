@@ -26,7 +26,7 @@ export const ALIEN_ISOLATION_SOURCE_ONLY_FILES = Object.freeze([
   '.github/workflows/alien-isolation-dlc.yml',
   'docs/development/ALIEN_ISOLATION_GITHUB_INTEGRATION_20261126.md',
   'docs/development/ALIEN_ISOLATION_GITHUB_INTEGRATION_20261126.json',
-  ...['README.md', 'coverage.json', 'prompts.json', 'visual-qa.json', 'index.html', 'source-assets.json', 'props-production-local-20261126.json', 'portraits-production-local-20261126.json', 'local-recovery-20261126.json', 'local-recovery-20261126.html']
+  ...['README.md', 'coverage.json', 'prompts.json', 'visual-qa.json', 'index.html', 'source-assets.json', 'props-production-local-20261126.json', 'portraits-production-local-20261126.json', 'local-recovery-20261126.json', 'local-recovery-20261126.html', 'rewire-production-20261126.json']
     .map(name => 'docs/development/alien-isolation-fidelity/' + name),
 ]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -36,7 +36,7 @@ const validPath = path => typeof path === 'string' && path.length > 0
 
 
 export const ALIEN_ISOLATION_RUNTIME_MANIFEST = ALIEN_ISOLATION_RUNTIME_ROOT + '/fidelity/manifest.json';
-export const ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256 = '77ba5e22f3461d7f7efa48367b7b6b852cf8179a4b0c99a40f09e1e836cae448';
+export const ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256 = 'a1d005d0d20cacadb2ebdbd669d1d259170d0d2884211792976d3896c87914cd';
 export const ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT = 'docs/development/alien-isolation-fidelity';
 export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST = ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT + '/source-assets.json';
 export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST_SHA256 = 'e905a54ad1da9ddb401ffdf8ecad8bd8ebd0945c46d775c4df2a96b9a2647753';

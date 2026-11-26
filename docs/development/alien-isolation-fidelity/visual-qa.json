@@ -198,5 +198,1558 @@
     "runtimeBytes": 41856790,
     "sourceInventoryExact": 646,
     "chromiumRetest": "pending"
-  }
+  },
+  "rewireValidation": {
+    "status": "passed",
+    "date": "2026-11-26T17:40:46.150699+00:00",
+    "integrationAdmissionTests": {
+      "command": "node --test scripts/verify-alien-isolation-dlc-integration.mjs",
+      "passed": 18,
+      "failed": 0
+    },
+    "build": {
+      "runtimeFiles": 33,
+      "runtimePng": 29,
+      "runtimeBytes": 43632190,
+      "sourceFilesInBuild": 0,
+      "runtimeManifestSha256": "a1d005d0d20cacadb2ebdbd669d1d259170d0d2884211792976d3896c87914cd"
+    },
+    "preservation": {
+      "originalSourceFiles": 646,
+      "previousRuntimePng": 28,
+      "previousCandidatePng": 22,
+      "all50PngExact": true,
+      "gameSha256": "799ad304aa300d7bf156237d926c3640bc09190313015f8de3193c044950519d",
+      "adapterSha256": "31e513c933fdafe2ece997c3f7c786a9999bf25156ce5f380f1cee0bbc5f4156",
+      "sourceAssetsManifestSha256": "e905a54ad1da9ddb401ffdf8ecad8bd8ebd0945c46d775c4df2a96b9a2647753"
+    },
+    "browser": {
+      "command": "python -B scripts/qa-alien-isolation-fidelity.py --root /home/agent/isolation-rewire-build-20261126 --source-root /tmp/tantalus-isolation-publish-cb72f0bb8d63 --output /home/agent/isolation-rewire-qa-final-20261126",
+      "browserVersion": "143.0.7499.4",
+      "reportSha256": "f1303197a865a5cf31a5b43db2d987c31785fed42cf4e125d3de4713e4935336",
+      "scriptSha256": "114a2256c1a00f04c08767d11476099d50489227b10c766aaade6f797ad719f0",
+      "startedAt": "2026-11-26T17:40:22.797303+00:00",
+      "finishedAt": "2026-11-26T17:40:46.150699+00:00",
+      "checks": [
+        {
+          "name": "Toutes les images du manifeste sont chargées",
+          "ok": true
+        },
+        {
+          "name": "Le chargement du pack ne crée pas de sauvegarde",
+          "ok": true
+        },
+        {
+          "name": "La marche utilise la pose prévue et déplace Amanda",
+          "ok": true
+        },
+        {
+          "name": "La progression accroupie utilise ses deux poses prévues",
+          "ok": true
+        },
+        {
+          "name": "Le premier équipement conserve son acquisition native",
+          "ok": true
+        },
+        {
+          "name": "Les quatre objets utilisables affichent leurs vrais PNG dans l’équipement",
+          "ok": true
+        },
+        {
+          "name": "La roue rapide reprend les mêmes images sans changer les quatre IDs",
+          "ok": true
+        },
+        {
+          "name": "Les illustrations d’outils restent conditionnées à leur acquisition",
+          "ok": true
+        },
+        {
+          "name": "Les portraits correspondent aux dossiers exacts",
+          "ok": true
+        },
+        {
+          "name": "Le boîtier est limité aux 23 dérivations et les 30 autres relais gardent leur SVG",
+          "ok": true
+        },
+        {
+          "name": "Les 23 interactions natives gardent leur maintien, cycle, distance et progression",
+          "ok": true
+        },
+        {
+          "name": "La ventilation revient au mode normal après ses 24 secondes natives",
+          "ok": true
+        },
+        {
+          "name": "Chaque pose fournie est dessinée avec ses vrais cadres distincts",
+          "ok": true
+        },
+        {
+          "name": "Hauteur et ligne des pieds communes : amanda/walk",
+          "ok": true
+        },
+        {
+          "name": "Hauteur et ligne des pieds communes : amanda/crouch-walk",
+          "ok": true
+        },
+        {
+          "name": "Hauteur et ligne des pieds communes : eva/walk",
+          "ok": true
+        },
+        {
+          "name": "Hauteur et ligne des pieds communes : joe/walk",
+          "ok": true
+        },
+        {
+          "name": "Les poses absentes gardent leurs SVG et l’alien en conduit reste caché",
+          "ok": true
+        },
+        {
+          "name": "Marlow conserve son identité dans le souvenir extérieur",
+          "ok": true
+        },
+        {
+          "name": "Tous les vrais IDs d’objets respectent leurs images autorisées et les exclusions",
+          "ok": true
+        },
+        {
+          "name": "Les CRT Sevastolink conservent les pixels des claviers, bureaux, pieds et ombres d’origine",
+          "ok": true
+        },
+        {
+          "name": "Les objets réellement lancés conservent trajectoire, rotation, ombre, amorce et état natifs",
+          "ok": true
+        },
+        {
+          "name": "Le rendu ne modifie ni la partie réelle ni ses sauvegardes",
+          "ok": true
+        },
+        {
+          "name": "Les changements de présentation ne réécrivent pas le point de reprise",
+          "ok": true
+        },
+        {
+          "name": "Un rechargement conserve les octets de sauvegarde",
+          "ok": true
+        },
+        {
+          "name": "Reprendre garde la salle, l’objectif et la lampe acquis réellement",
+          "ok": true
+        },
+        {
+          "name": "Le parcours et les fixtures ne déclenchent aucune erreur JavaScript",
+          "ok": true
+        },
+        {
+          "name": "Une image absente est signalée sans remplacer son SVG par du vide",
+          "ok": true
+        },
+        {
+          "name": "Le PNG de dérivation absent laisse 53 relais SVG et leurs interactions utilisables",
+          "ok": true
+        },
+        {
+          "name": "Le jeu reste utilisable après cet échec de chargement",
+          "ok": true
+        }
+      ],
+      "pageErrors": [],
+      "rewireRendererRows": [
+        {
+          "kind": "relay",
+          "id": "t_sas.p03",
+          "room": "t_sas",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "t_sas.p04",
+          "room": "t_sas",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "s_airlock.p03",
+          "room": "s_airlock",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "s_airlock.p04",
+          "room": "s_airlock",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "s_transit.p07",
+          "room": "s_transit",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "s_transit.p08",
+          "room": "s_transit",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "y_lobby.rewire",
+          "room": "y_lobby",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "c_control.rewire",
+          "room": "c_control",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_morley.rewire",
+          "room": "m_morley",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_pharmacy.rewire",
+          "room": "m_pharmacy",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_coolant.p05",
+          "room": "m_coolant",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_warehouse.rewire",
+          "room": "d_warehouse",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_lift.p03",
+          "room": "d_lift",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_lift.p04",
+          "room": "d_lift",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_control.rewire",
+          "room": "g_control",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_lab.p05",
+          "room": "g_lab",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_lab.rewire",
+          "room": "g_lab",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "a_samuels.p05",
+          "room": "a_samuels",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "a_samuels.p06",
+          "room": "a_samuels",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "a_samuels.p07",
+          "room": "a_samuels",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "a_samuels.v03.13",
+          "room": "a_samuels",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "r_entry.rewire",
+          "room": "r_entry",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "r_alpha.p05",
+          "room": "r_alpha",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "r_beta.p05",
+          "room": "r_beta",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "n_dock.p03",
+          "room": "n_dock",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "n_engine.p05",
+          "room": "n_engine",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "e_sas.p03",
+          "room": "e_sas",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "e_clamps.p03",
+          "room": "e_clamps",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "e_clamps.p04",
+          "room": "e_clamps",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "t_return.p03",
+          "room": "t_return",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "t_return.p04",
+          "room": "t_return",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_staff.rewire",
+          "room": "m_staff",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_relay.p07",
+          "room": "d_relay",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_relay.rewire",
+          "room": "d_relay",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_observation.v03.07",
+          "room": "g_observation",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_plenum.v03.06",
+          "room": "g_plenum",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "n_coolant.v03.11",
+          "room": "n_coolant",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_isolation.v04.07",
+          "room": "m_isolation",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_triage.v05.12",
+          "room": "m_triage",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "refuge.medical.power",
+          "room": "m_refuge",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_changing.v05.12",
+          "room": "d_changing",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "refuge.technical.power",
+          "room": "d_refuge",
+          "allowed": false,
+          "drawn": false,
+          "originalSVGDrawn": true,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "sc_station.v08.p06",
+          "room": "sc_station",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "h_galleria_low.v08.p06",
+          "room": "h_galleria_low",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "h_galleria_high.v08.p06",
+          "room": "h_galleria_high",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "h_habitation.v08.p06",
+          "room": "h_habitation",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "h_upper.v08.p06",
+          "room": "h_upper",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "m_morgue.v08.p06",
+          "room": "m_morgue",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_fluid.v08.p06",
+          "room": "d_fluid",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "d_orientation.v08.p06",
+          "room": "d_orientation",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "r_maintenance.v08.p06",
+          "room": "r_maintenance",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "g_hazard.v08.p06",
+          "room": "g_hazard",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        },
+        {
+          "kind": "relay",
+          "id": "t_galley.v08.p06",
+          "room": "t_galley",
+          "allowed": true,
+          "drawn": true,
+          "originalSVGDrawn": false,
+          "stateUnchanged": true,
+          "originalBankRestored": true
+        }
+      ],
+      "rewireInteractionRows": [
+        {
+          "id": "y_lobby.rewire",
+          "room": "y_lobby",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": {
+            "duration": 24,
+            "activeBefore": true,
+            "normalAfter": true
+          },
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "c_control.rewire",
+          "room": "c_control",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "m_morley.rewire",
+          "room": "m_morley",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "m_pharmacy.rewire",
+          "room": "m_pharmacy",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "d_warehouse.rewire",
+          "room": "d_warehouse",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "g_control.rewire",
+          "room": "g_control",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "g_lab.rewire",
+          "room": "g_lab",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "r_entry.rewire",
+          "room": "r_entry",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "m_staff.rewire",
+          "room": "m_staff",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "d_relay.rewire",
+          "room": "d_relay",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "g_observation.v03.07",
+          "room": "g_observation",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "m_isolation.v04.07",
+          "room": "m_isolation",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "sc_station.v08.p06",
+          "room": "sc_station",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "h_galleria_low.v08.p06",
+          "room": "h_galleria_low",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "h_galleria_high.v08.p06",
+          "room": "h_galleria_high",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "h_habitation.v08.p06",
+          "room": "h_habitation",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "h_upper.v08.p06",
+          "room": "h_upper",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "m_morgue.v08.p06",
+          "room": "m_morgue",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "d_fluid.v08.p06",
+          "room": "d_fluid",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "d_orientation.v08.p06",
+          "room": "d_orientation",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "r_maintenance.v08.p06",
+          "room": "r_maintenance",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "g_hazard.v08.p06",
+          "room": "g_hazard",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        },
+        {
+          "id": "t_galley.v08.p06",
+          "room": "t_galley",
+          "admitted": true,
+          "modes": [
+            0,
+            1,
+            2,
+            0
+          ],
+          "holdThresholdPreserved": true,
+          "cyclesComplete": true,
+          "farRejected": true,
+          "drawn": [
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            },
+            {
+              "raster": true,
+              "svg": false,
+              "stateUnchanged": true
+            }
+          ],
+          "timedReturn": null,
+          "inventoryUnchanged": true,
+          "progressUnchanged": true
+        }
+      ],
+      "captures": [
+        {
+          "file": "01-amanda-idle.png",
+          "meaning": "Amanda immobile dans la vraie première salle",
+          "sha256": "f98883f5dc99b944adf302c4d2119b002a965a7fd66beeba0ba20ebb6bdaec6c",
+          "imageEdited": false
+        },
+        {
+          "file": "02-amanda-walk.png",
+          "meaning": "Marche au clavier dans le runtime servi",
+          "sha256": "9c4a98ee34d7b6d225440b3b708ecee19acc9d50f8404c30060f0549eb5bd68b",
+          "imageEdited": false
+        },
+        {
+          "file": "03-amanda-crouch.png",
+          "meaning": "Accroupissement réel, sans modification de l’état par le test",
+          "sha256": "f21bbe1c36c41f5124cb5118213ba7955fcc166a3c476eb67dad55282b4fae4b",
+          "imageEdited": false
+        },
+        {
+          "file": "03b-amanda-crouch-walk.png",
+          "meaning": "Déplacement accroupi réel au clavier",
+          "sha256": "cf9b7e72a01bfad41a41416b08365f02266bc12894b8e00883e4caf0afe5d69d",
+          "imageEdited": false
+        },
+        {
+          "file": "04-codex-portraits.png",
+          "meaning": "Dossiers narratifs : ces portraits ne créent pas de PNJ physiques",
+          "sha256": "7c1bf2d9f31080ab3fcdf5aa1d9cce300de97760f19b37c4e730a52d3f103f93",
+          "imageEdited": false
+        },
+        {
+          "file": "rewire-fixture-mode-1.png",
+          "meaning": "Independent native renderer fixture in y_lobby, circuit mode 1; no campaign teleport or storage write",
+          "sha256": "31b351b69964643c9ac835230c11fb91e8edd1168aae94417dc7a9f158788be6",
+          "imageEdited": false,
+          "source": "Unmodified PNG export of the independent native renderer canvas"
+        },
+        {
+          "file": "rewire-fixture-mode-2.png",
+          "meaning": "Independent native renderer fixture in y_lobby, circuit mode 2; no campaign teleport or storage write",
+          "sha256": "2670699bd2b6e0b1e8edf886ac9b6be505270a30dcc54e85098c8965d12fc271",
+          "imageEdited": false,
+          "source": "Unmodified PNG export of the independent native renderer canvas"
+        },
+        {
+          "file": "05-missing-image-fallback.png",
+          "meaning": "Échecs réseau volontaires des images ciblées : SVG conservés pour Amanda et, si présent, le boîtier de dérivation",
+          "sha256": "a21b77674c3bfcfff4357b690151caec01de6245dc946a2fa9f60701f19258e4",
+          "imageEdited": false
+        }
+      ],
+      "scope": "Public UI and keyboard first-room journey; independent seeded renderer/engine fixture for 23 rewire placements. Does not certify a complete campaign traversal or commercial-game likeness."
+    },
+    "gallery": {
+      "checks": [
+        {
+          "name": "51 images représentées dans la galerie",
+          "ok": true
+        },
+        {
+          "name": "Filtres 29 runtime et22 candidats exacts",
+          "ok": true
+        },
+        {
+          "name": "Fiche boîtier,PNG1086px,23postes etSHA corrects",
+          "ok": true
+        }
+      ],
+      "errors": [],
+      "capture": {
+        "path": "/home/agent/isolation-rewire-qa-20261126/rewire-gallery.png",
+        "sha256": "519a1b6522191db71efe0288f554ed01b6bd5f62f98219c60500921974ad6a51"
+      },
+      "ok": true
+    }
+  },
+  "latestValidation": "rewireValidation",
+  "historicalValidationNote": "Les champs antérieurs restent les observations de leurs passes ; la vérification actuelle du boîtier est portée par rewireValidation."
 }

@@ -246,6 +246,14 @@
       "kind": "image",
       "width": 1024,
       "height": 1536
+    },
+    {
+      "path": "fidelity/assets/rewire-panel.png",
+      "bytes": 1774236,
+      "sha256": "8a50999393c76b70575bc33fb31bf8feaa877b2cf5c62d95e9a11ce6b14824b1",
+      "kind": "image",
+      "width": 1086,
+      "height": 1448
     }
   ],
   "assets": [
@@ -400,6 +408,11 @@
       "id": "flamethrower",
       "src": "./assets/flamethrower.png",
       "requireAlpha": true
+    },
+    {
+      "id": "rewire-panel",
+      "src": "./assets/rewire-panel.png",
+      "requireAlpha": true
     }
   ],
   "bindings": {
@@ -529,6 +542,35 @@
           "r_maintenance.v08.task",
           "g_hazard.v08.p09",
           "g_hazard.v08.task"
+        ]
+      },
+      {
+        "kind": "relay",
+        "asset": "rewire-panel",
+        "propIds": [
+          "y_lobby.rewire",
+          "c_control.rewire",
+          "m_morley.rewire",
+          "m_pharmacy.rewire",
+          "d_warehouse.rewire",
+          "g_control.rewire",
+          "g_lab.rewire",
+          "r_entry.rewire",
+          "m_staff.rewire",
+          "d_relay.rewire",
+          "g_observation.v03.07",
+          "m_isolation.v04.07",
+          "sc_station.v08.p06",
+          "h_galleria_low.v08.p06",
+          "h_galleria_high.v08.p06",
+          "h_habitation.v08.p06",
+          "h_upper.v08.p06",
+          "m_morgue.v08.p06",
+          "d_fluid.v08.p06",
+          "d_orientation.v08.p06",
+          "r_maintenance.v08.p06",
+          "g_hazard.v08.p06",
+          "t_galley.v08.p06"
         ]
       }
     ],

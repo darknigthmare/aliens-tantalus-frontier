@@ -23,9 +23,9 @@
     "mainGoals": 52,
     "optionalTasks": 32,
     "logs": 57,
-    "generatedPng": 39,
-    "runtimePng": 28,
-    "candidatePng": 11
+    "generatedPng": 51,
+    "runtimePng": 29,
+    "candidatePng": 22
   },
   "structuralSpatialAudit": {
     "schema": 1,
@@ -2761,7 +2761,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -4045,7 +4046,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -5306,7 +5308,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -5646,7 +5649,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -6302,7 +6306,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -8002,7 +8007,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -8331,7 +8337,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -10087,7 +10094,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         }
       ],
       "connections": [
@@ -13036,7 +13044,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "sig_medical",
@@ -13710,7 +13719,8 @@
           "cover": false,
           "purpose": "tableau électrique : éclairage → dérivation ventilation 24 s → normal ; interaction locale",
           "interactive": "rewire",
-          "addedV02": true
+          "addedV02": true,
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "supply.eva_valve",
@@ -14751,7 +14761,8 @@
           "cover": false,
           "purpose": "commande locale de l’éclairage",
           "addedV03": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "g_observation.v03.08",
@@ -16339,7 +16350,8 @@
           "cover": false,
           "purpose": "éclairage d’isolement",
           "addedV04": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "m_isolation.v04.08",
@@ -18414,7 +18426,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "sc_station.v08.p07",
@@ -18705,7 +18718,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "h_galleria_low.v08.p07",
@@ -19032,7 +19046,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "h_galleria_high.v08.p07",
@@ -19287,7 +19302,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "h_habitation.v08.p07",
@@ -19542,7 +19558,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "h_upper.v08.p07",
@@ -19833,7 +19850,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "m_morgue.v08.p07",
@@ -20088,7 +20106,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "d_fluid.v08.p07",
@@ -20342,7 +20361,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "d_orientation.v08.p07",
@@ -20597,7 +20617,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "r_maintenance.v08.p07",
@@ -20852,7 +20873,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "g_hazard.v08.p07",
@@ -21107,7 +21129,8 @@
           "cover": false,
           "purpose": "Tableau électrique local",
           "addedV08": true,
-          "interactive": "rewire"
+          "interactive": "rewire",
+          "generatedAsset": "rewire-panel"
         },
         {
           "id": "t_galley.v08.p07",
@@ -21493,11 +21516,15 @@
         "amanda-eva-walk-a",
         "amanda-eva-walk-b",
         "amanda-crouch-walk-a",
-        "amanda-crouch-walk-b"
+        "amanda-crouch-walk-b",
+        "amanda-portrait"
       ],
       "exact": false,
       "originalDlcCharacter": false,
-      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique."
+      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique.",
+      "sourceCandidateAssets": [
+        "amanda-portrait"
+      ]
     },
     {
       "name": "Christopher Samuels",
@@ -21547,10 +21574,15 @@
       "name": "Dr Kuhlman",
       "role": "Médecin",
       "text": "Introduit le verrou médical et la recherche de la carte de Morley.",
-      "generatedAssets": [],
+      "generatedAssets": [
+        "kuhlman-portrait"
+      ],
       "exact": false,
       "originalDlcCharacter": false,
-      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique."
+      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique.",
+      "sourceCandidateAssets": [
+        "kuhlman-portrait"
+      ]
     },
     {
       "name": "Dr Morley",
@@ -21576,10 +21608,15 @@
       "name": "Ricardo",
       "role": "Adjoint des Marshals",
       "text": "Accompagne la seconde partie par radio et donne des directions compréhensibles.",
-      "generatedAssets": [],
+      "generatedAssets": [
+        "ricardo-portrait"
+      ],
       "exact": false,
       "originalDlcCharacter": false,
-      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique."
+      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique.",
+      "sourceCandidateAssets": [
+        "ricardo-portrait"
+      ]
     },
     {
       "name": "Henry Marlow",
@@ -21596,10 +21633,15 @@
       "name": "Catherine Foster",
       "role": "Membre de l’expédition",
       "text": "Mentionnée dans le souvenir ; pas d’avatar jouable supplémentaire.",
-      "generatedAssets": [],
+      "generatedAssets": [
+        "foster-portrait"
+      ],
       "exact": false,
       "originalDlcCharacter": false,
-      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique."
+      "scope": "Le rôle décrit est celui du contenu V0.8 ; un portrait ne prouve pas la présence d’un acteur physique.",
+      "sourceCandidateAssets": [
+        "foster-portrait"
+      ]
     },
     {
       "name": "APOLLO",
@@ -22479,10 +22521,35 @@
         "g_hazard",
         "t_galley"
       ],
-      "generatedAsset": null,
-      "generatedPlacementCount": 0,
+      "generatedAsset": "rewire-panel",
+      "generatedPlacementCount": 23,
       "originalSvgRetained": true,
-      "collisionsChanged": false
+      "collisionsChanged": false,
+      "generatedPropIds": [
+        "y_lobby.rewire",
+        "c_control.rewire",
+        "m_morley.rewire",
+        "m_pharmacy.rewire",
+        "d_warehouse.rewire",
+        "g_control.rewire",
+        "g_lab.rewire",
+        "r_entry.rewire",
+        "m_staff.rewire",
+        "d_relay.rewire",
+        "g_observation.v03.07",
+        "m_isolation.v04.07",
+        "sc_station.v08.p06",
+        "h_galleria_low.v08.p06",
+        "h_galleria_high.v08.p06",
+        "h_habitation.v08.p06",
+        "h_upper.v08.p06",
+        "m_morgue.v08.p06",
+        "d_fluid.v08.p06",
+        "d_orientation.v08.p06",
+        "r_maintenance.v08.p06",
+        "g_hazard.v08.p06",
+        "t_galley.v08.p06"
+      ]
     },
     {
       "kind": "resin",
@@ -23825,6 +23892,35 @@
           "g_hazard.v08.p09",
           "g_hazard.v08.task"
         ]
+      },
+      {
+        "kind": "relay",
+        "asset": "rewire-panel",
+        "propIds": [
+          "y_lobby.rewire",
+          "c_control.rewire",
+          "m_morley.rewire",
+          "m_pharmacy.rewire",
+          "d_warehouse.rewire",
+          "g_control.rewire",
+          "g_lab.rewire",
+          "r_entry.rewire",
+          "m_staff.rewire",
+          "d_relay.rewire",
+          "g_observation.v03.07",
+          "m_isolation.v04.07",
+          "sc_station.v08.p06",
+          "h_galleria_low.v08.p06",
+          "h_galleria_high.v08.p06",
+          "h_habitation.v08.p06",
+          "h_upper.v08.p06",
+          "m_morgue.v08.p06",
+          "d_fluid.v08.p06",
+          "d_orientation.v08.p06",
+          "r_maintenance.v08.p06",
+          "g_hazard.v08.p06",
+          "t_galley.v08.p06"
+        ]
       }
     ],
     "ui": [
@@ -24319,6 +24415,138 @@
       "bytes": 1384872,
       "use": "Visuel de l’outil existant, montré après son acquisition ; fonctionnement et ressources d’origine conservés.",
       "remainingWork": "Affiner détails et animations d’usage. Le lance-flammes est une icône stylisée, pas une reproduction métrique."
+    },
+    {
+      "id": "door-jack-lock",
+      "label": "Verrou pour clé de maintenance",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/door-jack-lock.png",
+      "runtimeIntegrated": false,
+      "sha256": "1c37f93e8de47497b042bbe10881024e436b98385b2dc503a234e3199746f79a",
+      "bytes": 1997881,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "locker-closed",
+      "label": "Casier personnel · fermé",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/locker-closed.png",
+      "runtimeIntegrated": false,
+      "sha256": "ff42d805f0a56bc2af6b392e7fa0398cf48b3831ce53ed6ee828ca3c7320c8f7",
+      "bytes": 1301081,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "locker-open",
+      "label": "Casier personnel · ouvert",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/locker-open.png",
+      "runtimeIntegrated": false,
+      "sha256": "81b73fa62c90b12b620ad080042f95d9cd76204256cac88f7810dba3a0adc870",
+      "bytes": 1284285,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "supply-case-closed",
+      "label": "Mallette de réserve · fermée",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/supply-case-closed.png",
+      "runtimeIntegrated": false,
+      "sha256": "ae20157148f45e60cd61db4f62b15fcfd9f300ba5b766c11f23bd1d500953d99",
+      "bytes": 1772813,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "supply-case-open",
+      "label": "Mallette de réserve · ouverte",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/supply-case-open.png",
+      "runtimeIntegrated": false,
+      "sha256": "4a9cea7f4e393f86e1a6cc5575fa1f7a7e0e8ccfe890adbdde3dace8112fd6cb",
+      "bytes": 1706987,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "torrens-cryopod",
+      "label": "Torrens · cryopod individuel",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/torrens-cryopod.png",
+      "runtimeIntegrated": false,
+      "sha256": "f9d5b0eec802a938fc2eec931e795784ddc518765a8be76613af3b3d76cd3ac0",
+      "bytes": 1652309,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "vending-hot-food",
+      "label": "Distributeur Hot Food",
+      "category": "Décor et mobilier",
+      "path": "docs/development/alien-isolation-fidelity/candidates/vending-hot-food.png",
+      "runtimeIntegrated": false,
+      "sha256": "5b3e487e6390ca6de38bf1753318555bbf7100ea9a271fa41b5637cb282d5091",
+      "bytes": 2586015,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "amanda-portrait",
+      "label": "Amanda Ripley · portrait",
+      "category": "Portraits",
+      "path": "docs/development/alien-isolation-fidelity/candidates/amanda-portrait.png",
+      "runtimeIntegrated": false,
+      "sha256": "aa4323c5ec65fc16d074cedbbee00d9e7a06c51c920d6d3cd0596c1e8329a30e",
+      "bytes": 1623556,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "foster-portrait",
+      "label": "Catherine Foster · portrait",
+      "category": "Portraits",
+      "path": "docs/development/alien-isolation-fidelity/candidates/foster-portrait.png",
+      "runtimeIntegrated": false,
+      "sha256": "0f4608f73dd36d8e3246048771cbea50de41b8457443c369658cab3be35f64ac",
+      "bytes": 1932717,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "kuhlman-portrait",
+      "label": "Dr Kuhlman · portrait",
+      "category": "Portraits",
+      "path": "docs/development/alien-isolation-fidelity/candidates/kuhlman-portrait.png",
+      "runtimeIntegrated": false,
+      "sha256": "b2d805eeeda049186e00603609347e2b5f8e43dfbda39a960838de1bd94ef2b6",
+      "bytes": 1579718,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "ricardo-portrait",
+      "label": "Ricardo · portrait",
+      "category": "Portraits",
+      "path": "docs/development/alien-isolation-fidelity/candidates/ricardo-portrait.png",
+      "runtimeIntegrated": false,
+      "sha256": "eafbe19c2efbc8205a327228f1d906e30390fc55786bae6602cc68afa9b89362",
+      "bytes": 1601114,
+      "use": "Candidat préservé dans la récupération locale précédente, exclu de la distribution du jeu.",
+      "remainingWork": "Raccordement aux états et aux identifiants du moteur à vérifier ; cette consolidation documentaire ne change pas son admission."
+    },
+    {
+      "id": "rewire-panel",
+      "label": "Tableau Seegson · dérivation électrique",
+      "category": "Décor et mobilier",
+      "path": "dlc/alien-isolation/fidelity/assets/rewire-panel.png",
+      "runtimeIntegrated": true,
+      "sha256": "8a50999393c76b70575bc33fb31bf8feaa877b2cf5c62d95e9a11ce6b14824b1",
+      "bytes": 1774236,
+      "use": "Visuel fermé des 23 postes existants interactive:rewire ; les 30 autres relay gardent le SVG. Le cycle normal → obscurité → ventilation 24 s reste natif.",
+      "remainingWork": "Le boîtier de dérivation reprend la vue fermée du modèle de Tunde Glover. La vue frontale est adaptée à la caméra 2D ; les extrémités courtes des conduits sont extrapolées depuis la référence coupée. Le voyant vert peint ne remplace pas la barre CIRCUIT dynamique du moteur. Aucun état ouvert ni conformité métrique 1:1 n’est certifié."
     }
   ],
   "equipmentMechanics": {
@@ -24381,9 +24609,26 @@
     "Les 76 salles ne représentent pas toutes les pièces ni toutes les extensions du jeu commercial ; le réseau global est schématique, sans échelle métrique.",
     "Les cycles de déplacement ajoutés comportent deux images ; les poses non produites gardent les SVG existants.",
     "Les six portraits restent associés aux dossiers et transmissions existants ; ils ne créent pas de nouveaux acteurs physiques.",
-    "Les 11 candidats sont exclus du runtime. Leurs armes, équipements ou vaisseaux ne deviennent pas jouables par la présence d’une image.",
+    "Les 22 candidats sont exclus du runtime. Leurs armes, équipements ou vaisseaux ne deviennent pas jouables par la présence d’une image.",
     "Les trois poses Xénomorphe, Molotov et bombe artisanale n’ont pas été produites ; le chasseur conserve ses SVG et sa non-mortalité.",
     "La tenue EVA ne possède pas une référence complète observée pour jambes et bottes ; ces parties sont extrapolées.",
-    "Le parcours historique de graine 20141007 qui meurt dans m_staff à C05_03 reste une limite de la source ; ce lot visuel ne prétend pas l’avoir corrigé."
-  ]
+    "Le parcours historique de graine 20141007 qui meurt dans m_staff à C05_03 reste une limite de la source ; ce lot visuel ne prétend pas l’avoir corrigé.",
+    "Le boîtier de dérivation reprend la vue fermée du modèle de Tunde Glover. La vue frontale est adaptée à la caméra 2D ; les extrémités courtes des conduits sont extrapolées depuis la référence coupée. Le voyant vert peint ne remplace pas la barre CIRCUIT dynamique du moteur. Aucun état ouvert ni conformité métrique 1:1 n’est certifié."
+  ],
+  "previousInventoryCounts": {
+    "rooms": 76,
+    "links": 112,
+    "portalFaces": 224,
+    "propPlacements": 840,
+    "placedPropKinds": 52,
+    "characterDossiers": 14,
+    "chapters": 19,
+    "mainGoals": 52,
+    "optionalTasks": 32,
+    "logs": 57,
+    "generatedPng": 39,
+    "runtimePng": 28,
+    "candidatePng": 11
+  },
+  "revision": "20261126-rewire"
 }
