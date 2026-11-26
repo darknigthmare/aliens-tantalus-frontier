@@ -23,14 +23,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1650766,
-        "mode": "RGBA",
+        "sha256": "4afb94cd68d3594f6b1b151722a44a78f704e04060c768b4dc8f1cfff01367bf",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1176697,
-        "alphaZeroPercent": 74.81238047281902,
-        "alphaAbove245": 366575,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           281,
@@ -38,12 +36,7 @@
           735,
           1527
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -65,7 +58,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1650766
     },
     {
       "id": "walter-field",
@@ -84,14 +80,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1729773,
-        "mode": "RGBA",
+        "sha256": "5612335b92ae4c4db10b1ebacba9732aafcaa1deb949cba0bd14400774307375",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1120077,
-        "alphaZeroPercent": 71.21257781982422,
-        "alphaAbove245": 429828,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -99,12 +93,7 @@
           747,
           1519
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -127,7 +116,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1729773
     },
     {
       "id": "oram",
@@ -147,14 +139,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1404696,
-        "mode": "RGBA",
+        "sha256": "3de234d19b5c01b4af8183c9eb2cd3e18ed8bd98b5c2fa8d6cab22dbb78a2cc2",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1139626,
-        "alphaZeroPercent": 72.45546976725261,
-        "alphaAbove245": 405424,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           298,
@@ -162,12 +152,7 @@
           744,
           1523
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -194,7 +179,10 @@
       "rooms": [
         "bridge"
       ],
-      "sourceScene": "Covenant bridge before landing"
+      "sourceScene": "Covenant bridge before landing",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1404696
     },
     {
       "id": "daniels",
@@ -213,27 +201,20 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1678369,
-        "mode": "RGBA",
+        "sha256": "eac65f04e3e4e6c8cc764bd54ba94a2c96271e4f323863a9d9f3dba01d368d86",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084209,
-        "alphaZeroPercent": 68.9321517944336,
-        "alphaAbove245": 454712,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           204,
-          36,
+          35,
           758,
-          1521
+          1522
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -273,7 +254,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1678369
     },
     {
       "id": "tennessee",
@@ -292,14 +276,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1633599,
-        "mode": "RGBA",
+        "sha256": "63ff8da8b39f4645a2a65f8b790fdd7240c92a6e9e6f93b340b75a0a2e1b7246",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1084330,
-        "alphaZeroPercent": 68.93984476725261,
-        "alphaAbove245": 464983,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           261,
@@ -307,12 +289,7 @@
           760,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -347,7 +324,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1633599
     },
     {
       "id": "walter",
@@ -366,14 +346,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1476134,
-        "mode": "RGBA",
+        "sha256": "02fb4529e6616100201bc86df1f200e19b34e2df4481bc879c12a2a927026958",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1146950,
-        "alphaZeroPercent": 72.92111714680989,
-        "alphaAbove245": 396467,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           259,
@@ -381,12 +359,7 @@
           735,
           1509
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -408,7 +381,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1476134
     },
     {
       "id": "prop-flute",
@@ -458,7 +434,10 @@
       ],
       "generationPrompt": "Create ONE game prop sprite from the reference images already attached in this conversation. The target is ONLY DAVID'S FLUTE from Alien: Covenant (2017), shown in the Matt Boug maker photograph: the warm ivory/bone-colored semi-transparent flute lying on wood, with a second close-up view of its holes below. The other two reference images depict firearms; IGNORE THOSE COMPLETELY. Do not include any firearm or any part of a firearm.\n\nFaithfully reproduce the physical flute from that specific maker photograph as closely as the available photograph supports. This is an asset reproduction, not a redesign. Preserve its long, slender, gently irregular cylindrical bone silhouette, the small natural taper and rounded ends, the carved mouthpiece, the actual fingering holes and their spacing visible in the reference, the aged ivory/honey coloration, darker fine weathering and natural bone-like markings, and the subtle translucency described by its maker. No invented ornaments, buttons, metallic fittings, decorative rings, or instrument keys. Resolve only the parts visible in the photograph; keep unseen details restrained.\n\nOutput exactly one COMPLETE flute, isolated, horizontal left-to-right with the mouthpiece on the left, centered and comfortably inside the image with clear transparent padding at both ends. Use a slightly elevated three-quarter side angle so its round shaft and photographed holes can be read, keeping the object horizontal overall. Render its material and surface detail clearly with neutral soft light suitable for a production game sprite. No table, no background, no wood, no environment, no supporting prop, no second view, no duplicate, no hand, no separate detail insert, no contact or cast shadow, no border, no text, no labels, no watermark. True transparent alpha background, not a drawn checkerboard. One object only.",
       "revisionPrompts": [],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 2172,
+      "height": 724,
+      "bytes": 585902
     },
     {
       "id": "neomorph",
@@ -517,7 +496,10 @@
           "prompt": "Edit the SECOND attached image, the isolated right-facing Neomorph game sprite. The FIRST image is the authoritative final-film MPC still from Alien: Covenant (2017). Correct the sprite to match that FINAL adult Neomorph more closely. Keep the complete existing patrol pose, limb lengths, fingers, feet, tail, body proportions, orientation, framing and transparent background. Make only these targeted design corrections: (1) shorten the overly long blade-like rear projection of the head by about one third and give its tip a softer flesh-covered taper, retaining the film creature's elongated smooth eyeless bulbous head, with no separate horn; (2) reduce the exposed dorsal spikes to the small restrained ridge of short fleshy spines visible on the film creature, around one third their current height, not tall rigid horns; (3) smooth the excessive bumpy toy-like surface into taut subtly wrinkled pale grey-ivory skin with faint veins and believable soft tissue, following the film still. The film still controls anatomy; retain neutral soft lighting rather than its blue scene lighting. Preserve a lean organic body. Do not add a Deacon crest, tubes or Xenomorph armor. Do not include the human, injury, blood, environment or floor from the film still. One complete creature facing RIGHT, entire tail and feet visible. Keep all non-creature pixels genuinely empty alpha0 with no white fringe, haze, ground shadow or checkerboard; solid body effectively opaque with antialiasing only at its contour. No text."
         }
       ],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1699,
+      "height": 926,
+      "bytes": 735200
     },
     {
       "id": "neomorph-attack",
@@ -581,7 +563,10 @@
           "prompt": "Edit the SECOND attached sprite, the airborne Neomorph. Use the FIRST attached corrected patrol sprite as exact character-design reference. Change ONLY the shape of the top/rear cranium of the airborne creature so it is clearly the SAME Neomorph head as the first image. Its smooth eyeless bulbous cranium must elongate backward toward the LEFT in the same softly rounded flesh-covered taper as the first image; the second image currently has a too-short round dome. Match the head length-to-dome-height proportion of the first image (about1.6:1), retaining the first image's soft blunt posterior taper rather than any sharp horn. Preserve the second image's open jaw and teeth, facial direction, exact airborne pose, tiny dorsal spines, full tail, hands, legs, feet, skin color, surface texture and framing. Keep all other pixels/parts visually unchanged. Only the skull silhouette is being harmonized between two animation poses. Do not add spikes, ears, visible eyes, crests, Xenomorph tubes or toy joints. One complete clean fictional creature facing RIGHT, no humans, blood, environment or props. Preserve genuine transparent alpha0 background with no shadow, fringe, haze, checkerboard or text. No clipping."
         }
       ],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1774,
+      "height": 887,
+      "bytes": 1639176
     },
     {
       "id": "prop-lander",
@@ -739,14 +724,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1858103,
-        "mode": "RGBA",
+        "sha256": "b8e247a76d09613f8dcedc18f312e33546e1c8ab607aaf921515b34d15e39395",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1106388,
-        "alphaZeroPercent": 70.34225463867188,
-        "alphaAbove245": 432701,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           256,
@@ -754,12 +737,7 @@
           732,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -778,7 +756,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1858103
     },
     {
       "id": "david-young",
@@ -797,14 +778,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1410108,
-        "mode": "RGBA",
+        "sha256": "50d058bf675eadf6632f664efa97321ab68a71814e83319156318c6d48b8b552",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1181287,
-        "alphaZeroPercent": 75.10420481363933,
-        "alphaAbove245": 360699,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
@@ -812,12 +791,7 @@
           729,
           1520
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -833,7 +807,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1410108
     },
     {
       "id": "weyland",
@@ -852,14 +829,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1320137,
-        "mode": "RGBA",
+        "sha256": "37c2998af59c694276e0f70ea90b9808f7f277fee1bc1d67b056425ab4f152c0",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132959,
-        "alphaZeroPercent": 72.0315933227539,
-        "alphaAbove245": 411602,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           275,
@@ -867,12 +842,7 @@
           731,
           1526
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -894,7 +864,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1320137
     },
     {
       "id": "david",
@@ -913,14 +886,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1764036,
-        "mode": "RGBA",
+        "sha256": "25cb51bb9b1542a337c7d408c8281e4ec9146f60999f810aba3238f5a1ffeabd",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1064258,
-        "alphaZeroPercent": 67.66370137532552,
-        "alphaAbove245": 486404,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           213,
@@ -928,12 +899,7 @@
           748,
           1469
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -967,7 +933,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1764036
     },
     {
       "id": "tennessee-eva",
@@ -986,14 +955,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2074465,
-        "mode": "RGBA",
+        "sha256": "89f32778b7568347fe8f78f90631de93a0297b627fa5cd4f6d59a119402f8967",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 986998,
-        "alphaZeroPercent": 62.75164286295573,
-        "alphaAbove245": 555200,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           197,
@@ -1001,12 +968,7 @@
           834,
           1490
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1046,7 +1008,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2074465
     },
     {
       "id": "prop-evasuit-heavy",
@@ -1065,14 +1030,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 2029535,
-        "mode": "RGBA",
+        "sha256": "31e9e5899925e3369f5b6b603a7a002bd07a461d6f3dab7a8ded965c288433ca",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 991061,
-        "alphaZeroPercent": 63.009961446126304,
-        "alphaAbove245": 542268,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           203,
@@ -1080,12 +1043,7 @@
           829,
           1515
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1126,7 +1084,10 @@
       "availableStates": [
         "static"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2029535
     },
     {
       "id": "prop-evahelmet-heavy",
@@ -1144,14 +1105,12 @@
         "width": 1536,
         "height": 1024,
         "bytes": 2015661,
-        "mode": "RGBA",
+        "sha256": "b85c448ea05a39a071febfb3e09b8c9786c76c082c957b44abc5ac9d4f224250",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 952808,
-        "alphaZeroPercent": 60.577901204427086,
-        "alphaAbove245": 600217,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           331,
@@ -1159,12 +1118,7 @@
           1183,
           1015
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1199,7 +1153,10 @@
       "availableStates": [
         "static"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2015661
     },
     {
       "id": "daniels-eva",
@@ -1218,14 +1175,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1829019,
-        "mode": "RGBA",
+        "sha256": "22e7bb3b400cc38f4278717745fd0ecbe01f141e7a2caa6c17d70f7dfbe2c904",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1155821,
-        "alphaZeroPercent": 73.48512013753255,
-        "alphaAbove245": 387039,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           293,
@@ -1233,12 +1188,7 @@
           716,
           1500
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1269,7 +1219,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1829019
     },
     {
       "id": "prop-evasuit",
@@ -1288,14 +1241,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1832546,
-        "mode": "RGBA",
+        "sha256": "7f23b3db805c3afd68fc50760c84edeba55afada825c9bad1175f2c033d048e6",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1141977,
-        "alphaZeroPercent": 72.60494232177734,
-        "alphaAbove245": 395782,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           318,
@@ -1303,12 +1254,7 @@
           725,
           1511
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1339,7 +1285,10 @@
       "category": "prop",
       "availableStates": [
         "static"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1832546
     },
     {
       "id": "prop-evahelmet",
@@ -1357,14 +1306,12 @@
         "width": 1312,
         "height": 1199,
         "bytes": 1707857,
-        "mode": "RGBA",
+        "sha256": "4fba306b22d426979eaf45ad8baea1fc7e971f4f5f6f8692d981f0b0888b68d5",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 800333,
-        "alphaZeroPercent": 50.876556174861165,
-        "alphaAbove245": 755904,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
@@ -1372,12 +1319,7 @@
           1089,
           1174
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1408,7 +1350,10 @@
       "category": "prop",
       "availableStates": [
         "static"
-      ]
+      ],
+      "width": 1312,
+      "height": 1199,
+      "bytes": 1707857
     },
     {
       "id": "bio-facehugger-embryo",
@@ -1453,7 +1398,10 @@
         "pass": true
       },
       "animationsVerified": false,
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2178656
     },
     {
       "id": "prop-cargoLifter",
@@ -1503,7 +1451,10 @@
       "animationsVerified": false,
       "rooms": [
         "plaza"
-      ]
+      ],
+      "width": 1672,
+      "height": 941,
+      "bytes": 2284252
     },
     {
       "id": "prop-urn",
@@ -1553,7 +1504,10 @@
         ],
         "pass": true
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1199,
+      "height": 1312,
+      "bytes": 1362064
     },
     {
       "id": "facehugger",
@@ -1621,7 +1575,10 @@
           "prompt": "Correct the SECOND image, the isolated Facehugger game sprite, using the FIRST final-film still only as anatomy/material reference. The current sprite incorrectly places the ventral mouth on its upper back while posing as a walking animal. Fix that anatomical orientation: show the creature crawling naturally RIGHT with its DORSAL SIDE uppermost and its ventral mouth facing DOWN toward the implied ground, hidden beneath the body. The visible top of the flattened central body must be continuous pale wrinkled leathery flesh with restrained natural ridges, not an open mouth or pink ventral aperture. Paired breathing sacs belong low on the underside and can remain partially visible from the side. Preserve the reference's eight articulated finger-like legs, natural extra joint segments, small hooked tips, long full muscular tail extending to LEFT, coloration and realistic fine skin detail. Put all feet naturally below or beside the body; no upside-down torso. Use a low near-side profile with only a slight view of the top so this anatomical correction reads clearly. Preserve the complete overall silhouette size and one-object composition; keep all8leg tips and entire tail fully inside the image. This is the film's creature repositioned, not a new design or toy. No human, attachment, blood, egg, wall, floor, cobweb, stand, shadow, fog, vignette, text or checkerboard. True transparent alpha0 background, effectively opaque body, narrow silhouette antialias only. Clean cutout without a white fringe."
         }
       ],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 2172,
+      "height": 724,
+      "bytes": 772276
     },
     {
       "id": "facehugger-attack",
@@ -1680,7 +1637,10 @@
       ],
       "generationPrompt": "Create ONE airborne attack-pose sprite of the SAME Alien: Covenant (2017) Facehugger. The FIRST TWO attached images are authoritative Framestore final-film stills; the THIRD image is the matching corrected crawling sprite and controls consistent body proportions, pale beige leathery material and tail. Keep the film creature's eight long finger-like articulated legs with additional joints and hooked tips, flattened organic central body, paired low breathing sacs and one complete long tapering muscular tail.\n\nPOSE: a forward leap toward the RIGHT, seen from a restrained side three-quarter view. The central body tilts nearly upright with the ventral surface aimed toward RIGHT and slightly toward the camera, as it prepares to grasp. All eight legs extend and curl forward toward the RIGHT, in a natural open grasping arc; their tips are individually readable. The ventral central anatomy matches the film close-up and belongs on the forward-facing underside, not the dorsal back. The full long tail streams behind toward LEFT in a shallow energetic curve. No target, no host, no contact, no detached parts. Show one full airborne animal with all eight leg tips and entire tail safely inside the canvas with transparent padding. No ground-touching idle stance. Neutral soft lighting and sharply readable realistic details. Keep the anatomy consistent with the third image, without toy joints, plastic construction or invented armor.\n\nNo human, face, wound, blood, egg, environment, wall, floor, cobweb, stand, shadow, motion blur, haze, vignette, white veil, checkerboard, labels or text. Genuine alpha0 transparent background, effectively opaque creature, narrow silhouette antialias only. Clean compositing-ready cutout.",
       "revisionPrompts": [],
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1913,
+      "height": 822,
+      "bytes": 927076
     },
     {
       "id": "prop-flare",
@@ -1733,7 +1693,10 @@
         ],
         "pass": true
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1619883
     },
     {
       "id": "prop-drawing-ammonite",
@@ -1782,7 +1745,10 @@
         ],
         "pass": true
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1409,
+      "height": 1116,
+      "bytes": 2769690
     },
     {
       "id": "prop-drawing-arthropod",
@@ -1831,7 +1797,10 @@
         ],
         "pass": true
       },
-      "animationsVerified": false
+      "animationsVerified": false,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2508077
     },
     {
       "id": "prop-terraformer",
@@ -1886,7 +1855,10 @@
           "sha256": "2a34abde92ad3dce84e0ae9d6cfcf97971398b9c45674e883ce86ab3022ef58c",
           "credit": "Tony Drew, production design"
         }
-      ]
+      ],
+      "width": 1717,
+      "height": 916,
+      "bytes": 1701068
     },
     {
       "id": "lope",
@@ -1905,27 +1877,20 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1699088,
-        "mode": "RGBA",
+        "sha256": "0abd03ce52373e1fd8aa008243fe7a8706b94b077751b59964abc02480e8cd9a",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1100670,
-        "alphaZeroPercent": 69.97871398925781,
-        "alphaAbove245": 446100,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           271,
-          32,
+          31,
           759,
           1518
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -1966,7 +1931,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1699088
     },
     {
       "id": "faris",
@@ -1987,14 +1955,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1641718,
-        "mode": "RGBA",
+        "sha256": "bd3485f6aafa2b89b4827ed044d9d1265447853384290207e89962e030202ad3",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1133180,
-        "alphaZeroPercent": 72.04564412434895,
-        "alphaAbove245": 408416,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           294,
@@ -2002,12 +1968,7 @@
           729,
           1520
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2044,7 +2005,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1641718
     },
     {
       "id": "karine",
@@ -2064,14 +2028,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1828831,
-        "mode": "RGBA",
+        "sha256": "e61c5790bc0281d9b3ba93061a3867b7437c1f496da537515151d17aa0b964ba",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1014601,
-        "alphaZeroPercent": 64.50659434000652,
-        "alphaAbove245": 529504,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           171,
@@ -2079,12 +2041,7 @@
           765,
           1528
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2111,7 +2068,10 @@
       "rooms": [
         "landerhold"
       ],
-      "sourceScene": "Planet 4 expedition / landerhold before medbay"
+      "sourceScene": "Planet 4 expedition / landerhold before medbay",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1828831
     },
     {
       "id": "branson-record",
@@ -2130,14 +2090,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1501192,
-        "mode": "RGBA",
+        "sha256": "f3c531c51d54ab332dd1c97970bb4414eaa59c1443a5fceaa5cdafed1da885fe",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1136045,
-        "alphaZeroPercent": 72.22779591878255,
-        "alphaAbove245": 408152,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           282,
@@ -2145,12 +2103,7 @@
           735,
           1525
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2173,7 +2126,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1501192
     },
     {
       "id": "hallett",
@@ -2192,14 +2148,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1648023,
-        "mode": "RGBA",
+        "sha256": "925a129b06b191c14c16104f6c6690340b6dd6eff092d1ef7c5108589addec34",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1115036,
-        "alphaZeroPercent": 70.89207967122395,
-        "alphaAbove245": 434321,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           267,
@@ -2207,12 +2161,7 @@
           754,
           1512
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2241,7 +2190,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1648023
     },
     {
       "id": "cole",
@@ -2260,14 +2212,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1768587,
-        "mode": "RGBA",
+        "sha256": "d480556468ad43211af110dd9fa72f5e722f2cc1b1cb43851dee517e67e934ba",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077309,
-        "alphaZeroPercent": 68.49346160888672,
-        "alphaAbove245": 469017,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           244,
@@ -2275,12 +2225,7 @@
           766,
           1517
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2309,7 +2254,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1768587
     },
     {
       "id": "ricks",
@@ -2328,14 +2276,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1508795,
-        "mode": "RGBA",
+        "sha256": "4b0fe18190970fe0ce3d77334ee98d9e59a6fa5d27a2bb7e20c7f0ec8693886c",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1132843,
-        "alphaZeroPercent": 72.0242182413737,
-        "alphaAbove245": 411380,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           276,
@@ -2343,12 +2289,7 @@
           736,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2364,7 +2305,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1508795
     },
     {
       "id": "prop-cryopod-closed-crew",
@@ -2418,7 +2362,10 @@
         ],
         "pass": true
       },
-      "visualReview": "Root inspected the unchanged PNG composited on a dark background; complete silhouette and clean exterior."
+      "visualReview": "Root inspected the unchanged PNG composited on a dark background; complete silhouette and clean exterior.",
+      "width": 2025,
+      "height": 776,
+      "bytes": 2218006
     },
     {
       "id": "prop-table-e1027",
@@ -2465,89 +2412,37 @@
       ],
       "runtimeAdmission": "catalogue-only",
       "alphaQA": {
-        "id": "prop-table-e1027",
-        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-table-e1027.png",
-        "size": [
-          1245,
-          1263
-        ],
+        "width": 1245,
+        "height": 1263,
         "bytes": 579445,
         "sha256": "0bd08b5ef7522404038f55207486013ceaeb0307a773c970e505a205e5b103af",
-        "gitBlobSha": "3cfde579cf400ea162b846a00b2432f9a3d3e70d",
         "alphaExtrema": [
           0,
           255
         ],
-        "alpha0": 1277370,
-        "alpha1to15": 44745,
-        "alpha16to127": 8066,
-        "alpha128to239": 59539,
-        "alpha240to255": 182715,
-        "edgeAlphaMax": 1,
-        "edgeAlphaOver16": 0,
-        "alphaBbox": [
-          43,
-          9,
-          1221,
-          1263
-        ],
-        "bbox16": [
-          242,
-          48,
-          1055,
-          1225
-        ],
-        "bbox32": [
+        "alphaZero": 1277370,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
           243,
           48,
           1055,
           1225
         ],
-        "bbox128": [
-          243,
-          49,
-          1055,
-          1224
+        "pass": true
+      },
+      "materialQA": {
+        "region": [
+          480,
+          190,
+          850,
+          235
         ],
-        "bbox240": [
-          244,
-          50,
-          1054,
-          1224
-        ],
-        "sampleGridAlpha": [
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
-        ],
-        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
-        "productionBytesUnchanged": true,
-        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
+        "alphaMin": 138,
+        "alphaMax": 243,
+        "alphaMean": 157.26,
+        "pixelsAtLeast240": 15,
+        "pixelsMeasured": 16650,
+        "note": "Translucent but too milky for exact optical fidelity."
       }
     },
     {
@@ -2584,59 +2479,23 @@
       ],
       "runtimeAdmission": "catalogue-only",
       "alphaQA": {
-        "id": "prop-chair-bugatti",
-        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-chair-bugatti.png",
-        "size": [
-          1086,
-          1448
-        ],
+        "width": 1086,
+        "height": 1448,
         "bytes": 1270741,
         "sha256": "875cb28c8f6f20a814a1c096a6a4eadbabf1cfd24bc50aa7f88c64cfd5470a7b",
-        "gitBlobSha": "a053601cfea8fa9cd9e27097a25b21f56edbbe5e",
         "alphaExtrema": [
           0,
           255
         ],
-        "alpha0": 1081879,
-        "alpha1to15": 26275,
-        "alpha16to127": 6661,
-        "alpha128to239": 9713,
-        "alpha240to255": 448000,
-        "edgeAlphaMax": 2,
-        "edgeAlphaOver16": 0,
-        "alphaBbox": [
-          0,
-          2,
-          1062,
-          1448
-        ],
-        "bbox16": [
-          107,
-          11,
-          918,
-          1440
-        ],
-        "bbox32": [
+        "alphaZero": 1081879,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
           108,
           11,
           918,
           1440
         ],
-        "bbox128": [
-          109,
-          12,
-          918,
-          1439
-        ],
-        "bbox240": [
-          111,
-          14,
-          917,
-          1438
-        ],
-        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
-        "productionBytesUnchanged": true,
-        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
+        "pass": true
       }
     },
     {
@@ -2680,59 +2539,23 @@
       ],
       "runtimeAdmission": "candidate",
       "alphaQA": {
-        "id": "prop-piano",
-        "sourceURL": "https://raw.githubusercontent.com/darknigthmare/aliens-tantalus-frontier/5d4f882d882f881e04606572be4cb99f431ac565/assets/openai/sprites/alien-covenant-v011/prop-piano.png",
-        "size": [
-          1536,
-          1024
-        ],
+        "width": 1536,
+        "height": 1024,
         "bytes": 1402646,
         "sha256": "f55f6d48965ec5fffc27c962dc070c468501215e11bb372b6528660820e0f80e",
-        "gitBlobSha": "74dd2707fc37bfd221840528e9990dd7f22ca126",
         "alphaExtrema": [
           0,
           254
         ],
-        "alpha0": 978175,
-        "alpha1to15": 28683,
-        "alpha16to127": 5572,
-        "alpha128to239": 6769,
-        "alpha240to255": 553665,
-        "edgeAlphaMax": 1,
-        "edgeAlphaOver16": 0,
-        "alphaBbox": [
-          0,
-          24,
-          1448,
-          1024
-        ],
-        "bbox16": [
-          158,
-          27,
-          1391,
-          1012
-        ],
-        "bbox32": [
+        "alphaZero": 978175,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
           159,
           28,
           1390,
           1012
         ],
-        "bbox128": [
-          159,
-          28,
-          1390,
-          1012
-        ],
-        "bbox240": [
-          160,
-          29,
-          1389,
-          1011
-        ],
-        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
-        "productionBytesUnchanged": true,
-        "visualReview": "Root reviewed dark composites: framing/alpha acceptable; table material limitation separately documented"
+        "pass": true
       },
       "rooms": [
         "whiteroom"
@@ -2756,14 +2579,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1654111,
-        "mode": "RGBA",
+        "sha256": "c5968863303be61ad9cfaba51d0f3a717547dab8b09ab6bc21326a743e4f8901",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1110571,
-        "alphaZeroPercent": 70.6082026163737,
-        "alphaAbove245": 435348,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           278,
@@ -2771,12 +2592,7 @@
           738,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2811,7 +2627,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1654111
     },
     {
       "id": "upworth",
@@ -2830,14 +2649,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1316910,
-        "mode": "RGBA",
+        "sha256": "8dbd842fa67d55b880795390691cd2901a786fdd97990a5c35e07da6ea87517d",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1194008,
-        "alphaZeroPercent": 75.91298421223958,
-        "alphaAbove245": 346683,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           305,
@@ -2845,12 +2662,7 @@
           720,
           1521
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2866,7 +2678,10 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1316910
     },
     {
       "id": "ankor",
@@ -2886,27 +2701,20 @@
         "width": 960,
         "height": 1639,
         "bytes": 1164377,
-        "mode": "RGBA",
+        "sha256": "accb60303b6c78e8bc47624c8396c273ea0b4e7c8a3e57d006078f54e06b2caa",
         "alphaExtrema": [
           0,
           255
         ],
         "alphaZero": 1002512,
-        "alphaZeroPercent": 63.71466341264999,
-        "alphaAbove245": 537891,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
-          212,
+          211,
           6,
           763,
           1632
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2935,7 +2743,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 960,
+      "height": 1639,
+      "bytes": 1164377
     },
     {
       "id": "ledward",
@@ -2955,14 +2766,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1679775,
-        "mode": "RGBA",
+        "sha256": "1fee22ec40b39e1da4f5d275e3503484494df465bc82c015a4fbe99938aaf161",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1077289,
-        "alphaZeroPercent": 68.49219004313152,
-        "alphaAbove245": 467428,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           220,
@@ -2970,12 +2779,7 @@
           734,
           1522
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -2998,7 +2802,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1679775
     },
     {
       "id": "prop-teaset",
@@ -3046,60 +2853,23 @@
       ],
       "runtimeAdmission": "candidate",
       "alphaQA": {
-        "id": "prop-teaset",
-        "sourceURL": "https://api.github.com/repos/darknigthmare/aliens-tantalus-frontier/git/blobs/0ce99a1307328dedfb74ac38c6e718ca47159a59",
-        "size": [
-          1774,
-          887
-        ],
+        "width": 1774,
+        "height": 887,
         "bytes": 1090022,
         "sha256": "8587046f8fda0bd742ecba6d880eb5435229e95cc80ae54bef774fcb67d2cd28",
-        "gitBlobSha": "0ce99a1307328dedfb74ac38c6e718ca47159a59",
         "alphaExtrema": [
           0,
           255
         ],
-        "alpha0": 874601,
-        "alpha1to15": 51705,
-        "alpha16to127": 5553,
-        "alpha128to239": 5926,
-        "alpha240to255": 635753,
-        "edgeAlphaMax": 1,
-        "edgeAlphaOver16": 0,
-        "alphaBbox": [
-          0,
-          17,
-          1758,
-          887
-        ],
-        "bbox16": [
+        "alphaZero": 874601,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
           25,
           42,
           1732,
           830
         ],
-        "bbox32": [
-          25,
-          42,
-          1732,
-          830
-        ],
-        "bbox128": [
-          26,
-          42,
-          1731,
-          829
-        ],
-        "bbox240": [
-          27,
-          43,
-          1730,
-          828
-        ],
-        "numericAlphaReview": "passed: nonzero fully transparent exterior and no edge pixel with alpha greater than 16",
-        "productionBytesUnchanged": true,
-        "visualReview": "Passed manual inspection of dark (#202830) and light (#ece8df) composites. Complete shapes, transparent handle and gaps, no visible background veil or halo at inspection scale.",
-        "reviewArtifact": "/home/user/covenant-reference-recovery/furniture/teaset-composite-review.jpg"
+        "pass": true
       },
       "rooms": [
         "whiteroom"
@@ -3122,14 +2892,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1775928,
-        "mode": "RGBA",
+        "sha256": "e202663c2a0d4f6465619f0874bb460591e8a7db5b6d1aefa5f077616e046185",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1099909,
-        "alphaZeroPercent": 69.93033091227214,
-        "alphaAbove245": 447096,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           243,
@@ -3137,12 +2905,7 @@
           755,
           1519
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -3169,7 +2932,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1775928
     },
     {
       "id": "karine-medical",
@@ -3188,14 +2954,12 @@
         "width": 1024,
         "height": 1536,
         "bytes": 1447878,
-        "mode": "RGBA",
+        "sha256": "9a2931e8941ac6bfa6411df06d34a54f92b5aa428b8e9cc7309e9146ac0c9a5d",
         "alphaExtrema": [
           0,
           254
         ],
         "alphaZero": 1166997,
-        "alphaZeroPercent": 74.19567108154297,
-        "alphaAbove245": 378696,
         "edgeAlphaAbove16": 0,
         "bboxAbove32": [
           312,
@@ -3203,12 +2967,7 @@
           736,
           1523
         ],
-        "corners": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "pass": true
       },
       "inputReferences": [
         {
@@ -3241,7 +3000,10 @@
       "availableStates": [
         "idle"
       ],
-      "runtimeAdmission": "catalogue-only"
+      "runtimeAdmission": "catalogue-only",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1447878
     }
   ],
   "blocked": [
@@ -3305,5 +3067,5 @@
       "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
     }
   ],
-  "integrationStatus": "Original v0.10 runtime restored; 29 scoped PNG admissions, complete source and browser validation in progress. Catalogue documents incomplete 1:1 and animation coverage."
+  "integrationStatus": "29 scoped runtime admissions verified in the restored DLC; 20 catalogue-only images. Full Tantalus integration is checked by the dedicated PR workflow. See docs/covenant/PROVENANCE_V011.json for test scope and incomplete coverage."
 }
