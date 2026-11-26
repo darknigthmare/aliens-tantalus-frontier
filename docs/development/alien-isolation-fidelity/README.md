@@ -305,3 +305,24 @@ les parcours affectés. Le sweep actif historique possède déjà un échec conn
 dans `m_staff` pour un seed ; il faut séparer cette référence d’une régression
 nouvelle et inspecter les résultats JSON, car certains sweeps rendent zéro même
 lorsqu’un cas interne échoue.
+
+
+## Récupération locale du 26 novembre — 11 PNG de production
+
+Les sprites produits après la livraison initiale sont conservés à l’octet dans cette même PR. [La galerie complémentaire](local-recovery-20261126.html) et [son inventaire SHA-256](local-recovery-20261126.json) permettent de les examiner individuellement.
+
+| Famille | Fichiers ajoutés | État |
+| --- | --- | --- |
+| Casiers | Fermé, ouvert | Candidats à raccorder |
+| Mallettes | Fermée, ouverte | Candidats à raccorder |
+| Mobilier | Distributeur Hot Food, cryopod individuel du Torrens | Candidats à raccorder |
+| Mécanisme | Verrou pour clé de maintenance | Mécanique à vérifier avant raccordement |
+| Portraits | Amanda, Ricardo, Dr Kuhlman, Catherine Foster | Dossiers identifiés, raccordement à réaliser |
+
+Les prompts et références restent disponibles dans [la production des props](props-production-local-20261126.json) et [celle des portraits](portraits-production-local-20261126.json). Les PNG restent les originaux générés, avec leurs dimensions et leur canal alpha. Aucune image de référence externe n’est redistribuée dans ce lot.
+
+Le pack compte désormais **50 PNG** : **28 déjà utilisés par le jeu** et **22 candidats conservés dans les sources**. Le jeu, son adaptateur et ses 28 PNG gardent exactement les octets du commit `c2f4574e677d26e74439227c8e6bb8ccae03277c`. La distribution reste limitée aux **32 fichiers et 41 856 790 octets** admis. Les huit mécaniques supplémentaires d’équipement annoncées dans une autre passe restent non vérifiées et ne sont pas ajoutées par cette publication de sprites.
+
+Contrôles réellement obtenus : **18/18 tests d’intégration et d’admission**, **646 fichiers source vérifiés à l’octet**, **22 PNG candidats vérifiés**, **11 nouveaux PNG décodés avec transparence**, puis build isolé réussi avec les **32 fichiers runtime inchangés**. Aucun nouveau résultat de parcours navigateur n’est revendiqué.
+
+La fidélité 1:1 reste à qualifier face aux références de l’œuvre ; les champs `exact` et `canonExact` restent faux. Les raccordements aux scènes et les poses manquantes sont toujours ouverts.

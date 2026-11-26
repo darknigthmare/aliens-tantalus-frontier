@@ -58,7 +58,7 @@ test('all 646 recovered files are exact and the raster runtime is the reviewed d
   assert.equal(result.recoveredBytes, 107266357);
   assert.equal(result.runtimeFiles, 32);
   assert.equal(result.runtimeImages, 28);
-  assert.equal(result.candidateImages, 11);
+  assert.equal(result.candidateImages, 22);
   assert.equal(result.runtimeManifestSha256, ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256);
   assert.equal(result.manifestSha256, ALIEN_ISOLATION_RECOVERY_MANIFEST_SHA256);
   assert.deepEqual(await readFile(join(root, 'dlc/alien-isolation/game.html')),
@@ -248,7 +248,7 @@ test('candidate PNG inventory is pinned and cannot declare a runtime or exact as
   ]) {
     const value = sourceAssetsManifest(); mutate(value); assert.throws(() => compileCandidates(value));
   }
-  assert.equal(reviewedAlienIsolationSourceAssets().files.size, 11);
+  assert.equal(reviewedAlienIsolationSourceAssets().files.size, 22);
 });
 
 test('runtime PNG alteration, omission and symlinks fail even when the manifest stays unchanged', async t => {
@@ -267,7 +267,7 @@ test('runtime PNG alteration, omission and symlinks fail even when the manifest 
 test('source candidates reject additions and changes; every source-only member stays out of built output', async t => {
   const directory = await temp(t);
   await cp(join(root, ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT), join(directory, ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT), { recursive: true });
-  assert.equal((await verifyAlienIsolationSourceAssets(directory)).candidateImages, 11);
+  assert.equal((await verifyAlienIsolationSourceAssets(directory)).candidateImages, 22);
   const unexpected = join(directory, ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT, 'candidates/unreviewed.png');
   await writeFile(unexpected, 'Unlisted');
   await assert.rejects(verifyAlienIsolationSourceAssets(directory), /Unapproved/);

@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "packVersion": "1.1.0",
+  "assets": [
+    {
+      "id": "locker-closed",
+      "prompt": "Use case: stylized-concept. Production asset for the user's Alien: Isolation 2D/2.5D adaptation.\nCreate ONE isolated full-height Sevastopol personal storage locker, CLOSED, with genuine transparent background. The attached game screenshot is the visual reference only: reproduce the locker design, not the screenshot or its HUD.\nMatch the reference: narrow tall off-white painted steel door, dark rectangular louver vents at upper and lower ends, recessed dark horizontal pull and small vertical black latch mechanism with green status lamp on its left side, understated worn red PERSONAL STORAGE lettering and a small vertical number 793. A very slim metal enclosure around that one door, no neighboring lockers, no room, no character.\nFront view with at most a slight right side visible, orthographic long focal length, level upright. Entire cabinet and its bottom base fully inside frame, floor baseline near 92% of image. Fine realistic painted-metal scuffs and subtle grime, restrained 1979 retro-industrial palette, soft neutral studio illumination matching game prop readability. No floor plane or cast ground shadow, no floating debris, no icon frame, no text outside the object's real labels. One independent PNG sprite only, no sprite sheet, no comparison views. This asset will replace a hideable locker in a side-on game and must read as a solid full cabinet with a coherent supported base.",
+      "selectedPrompt": "Use case: stylized-concept. Production asset for the user's Alien: Isolation 2D/2.5D adaptation.\nCreate ONE isolated full-height Sevastopol personal storage locker, CLOSED, with genuine transparent background. The attached game screenshot is the visual reference only: reproduce the locker design, not the screenshot or its HUD.\nMatch the reference: narrow tall off-white painted steel door, dark rectangular louver vents at upper and lower ends, recessed dark horizontal pull and small vertical black latch mechanism with green status lamp on its left side, understated worn red PERSONAL STORAGE lettering and a small vertical number 793. A very slim metal enclosure around that one door, no neighboring lockers, no room, no character.\nFront view with at most a slight right side visible, orthographic long focal length, level upright. Entire cabinet and its bottom base fully inside frame, floor baseline near 92% of image. Fine realistic painted-metal scuffs and subtle grime, restrained 1979 retro-industrial palette, soft neutral studio illumination matching game prop readability. No floor plane or cast ground shadow, no floating debris, no icon frame, no text outside the object's real labels. One independent PNG sprite only, no sprite sheet, no comparison views. This asset will replace a hideable locker in a side-on game and must read as a solid full cabinet with a coherent supported base.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://steamcommunity.com/sharedfiles/filedetails/?id=677616090",
+        "https://steamuserimages-a.akamaihd.net/ugc/268339469294830269/3CB3288FEA4AE46EE5795AD62AC6036067C86963/"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "generatedAssetID": "?id=677616090",
+          "role": "approved-closed-state-edit-target",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "locker-open",
+      "prompt": "Use case: precise-object-edit. Production sprite variant. Edit the attached ONE Alien: Isolation personal storage locker to show its DOOR OPEN about 45 degrees, revealing an empty narrow metal cabinet interior with a coat rail and a low dark shelf. Preserve the exact same cabinet identity, off-white paint, original top and bottom vents, worn red 793 / PERSONAL STORAGE label, left latch green lamp, metal scuffs and base. The door is hinged on the right. Preserve the cabinet's full height and base alignment and lighting. A single cabinet and its attached door only, no person, no room, no extra props, no ground plane or cast shadow. Three-quarter frontal orthographic game prop with real transparent background; the complete door and cabinet fit within the canvas. One independent PNG only, no panels or sheet.",
+      "selectedPrompt": "Use case: precise-object-edit. Production sprite variant. Edit the attached ONE Alien: Isolation personal storage locker to show its DOOR OPEN about 45 degrees, revealing an empty narrow metal cabinet interior with a coat rail and a low dark shelf. Preserve the exact same cabinet identity, off-white paint, original top and bottom vents, worn red 793 / PERSONAL STORAGE label, left latch green lamp, metal scuffs and base. The door is hinged on the right. Preserve the cabinet's full height and base alignment and lighting. A single cabinet and its attached door only, no person, no room, no extra props, no ground plane or cast shadow. Three-quarter frontal orthographic game prop with real transparent background; the complete door and cabinet fit within the canvas. One independent PNG only, no panels or sheet.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://steamcommunity.com/sharedfiles/filedetails/?id=677616090",
+        "https://steamuserimages-a.akamaihd.net/ugc/268339469294830269/3CB3288FEA4AE46EE5795AD62AC6036067C86963/"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "generatedAssetID": "locker-closed",
+          "role": "approved-closed-state-edit-target",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "vending-hot-food",
+      "prompt": "Use case: stylized-concept. Production prop for an Alien: Isolation 2D/2.5D game.\nCreate ONE isolated full-height HOT FOOD vending machine matching the LEFT machine in the supplied game screenshot. Use the screenshot solely as the object design reference; omit the drinks machine on the right and all surroundings.\nReproduce the broad warm off-white industrial body with rounded edges, inset upper advertising banner reading HOT FOOD, a three by three grid of small food selection pictures on the upper left with dark round selection buttons, right-side coin/control panel and recessed service slot, lower-left black dispensing hatch, lower broad plain panel, subtle age and scratches. Keep the real machine's layout and 1970s analogue design. Straight-on view with only slight side depth, orthographic, all feet/base fully visible, softly lit neutral materials for readable game sprite, genuine transparent background. One object only, no floor, ground shadow, room, HUD, frame or comparison views. Render polished realistic textures rather than simple vector blocks.",
+      "selectedPrompt": "Use case: stylized-concept. Production prop for an Alien: Isolation 2D/2.5D game.\nCreate ONE isolated full-height HOT FOOD vending machine matching the LEFT machine in the supplied game screenshot. Use the screenshot solely as the object design reference; omit the drinks machine on the right and all surroundings.\nReproduce the broad warm off-white industrial body with rounded edges, inset upper advertising banner reading HOT FOOD, a three by three grid of small food selection pictures on the upper left with dark round selection buttons, right-side coin/control panel and recessed service slot, lower-left black dispensing hatch, lower broad plain panel, subtle age and scratches. Keep the real machine's layout and 1970s analogue design. Straight-on view with only slight side depth, orthographic, all feet/base fully visible, softly lit neutral materials for readable game sprite, genuine transparent background. One object only, no floor, ground shadow, room, HUD, frame or comparison views. Render polished realistic textures rather than simple vector blocks.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://vgsmproject.com/category/alien-franchise/",
+        "https://vgsmproject.com/wp-content/uploads/2017/10/1-2.jpg"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "sourceURL": "https://vgsmproject.com/wp-content/uploads/2017/10/1-2.jpg",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "torrens-cryopod",
+      "prompt": "Use case: precise-object-edit. Image 1 is the edit target, one cryopod sprite; image 2 is the original game reference. Correct the target for reuse as ONE individual Torrens cryobed. REMOVE the large hexagonal tower/hub on the left entirely: that multi-bed central hub must not be duplicated on each individual bed. Keep the elongated cream-white pod shell, brown padded mattress/headrest, curved transparent lid raised above the bed, slender hinges, scuffs and compact lower supporting base. Replace the removed left tower with only the rounded head end of the individual bed. Show one self-contained empty pod with the head on the left and foot on the right, same slightly elevated side view and materials. Widen/reframe the canvas as needed so EVERY PART of the raised glass lid and base has clear transparent margin and is not cropped. Do not add a separate machine or tower, floor, room, people, HUD or ground shadow. Real alpha transparency. One independent PNG sprite.",
+      "selectedPrompt": "Use case: precise-object-edit. Image 1 is the edit target, one cryopod sprite; image 2 is the original game reference. Correct the target for reuse as ONE individual Torrens cryobed. REMOVE the large hexagonal tower/hub on the left entirely: that multi-bed central hub must not be duplicated on each individual bed. Keep the elongated cream-white pod shell, brown padded mattress/headrest, curved transparent lid raised above the bed, slender hinges, scuffs and compact lower supporting base. Replace the removed left tower with only the rounded head end of the individual bed. Show one self-contained empty pod with the head on the left and foot on the right, same slightly elevated side view and materials. Widen/reframe the canvas as needed so EVERY PART of the raised glass lid and base has clear transparent margin and is not cropped. Do not add a separate machine or tower, floor, room, people, HUD or ground shadow. Real alpha transparency. One independent PNG sprite.",
+      "precedingPrompts": [
+        "Use case: stylized-concept. ONE transparent-background environment sprite for the user's Alien: Isolation 2D/2.5D game. Use the attached in-game screenshot as the visual reference for ONE Torrens hypersleep pod, not for its surroundings. Recreate a single empty elongated off-white cryobed with the screenshot's warm brown tufted padded mattress and rounded head-end padding, raised curved transparent glass lid in a slim off-white frame, worn but clean industrial shell and compact supported lower base. Head end at the left, foot at the right. Show the whole bed and raised lid from a coherent slightly elevated three-quarter side view, orthographic long focal length. Preserve the characteristic 1979 retro-futuristic design; no modern touchscreen, no cyan neon, no generic white medical gurney, no person or body. Omit the central multi-pod hub and adjacent pods. Fine material detail and neutral studio lighting. Every part remains within the frame, genuine alpha transparency, no floor plane, no cast ground shadow, no scene or HUD. Single independent PNG, no sheet."
+      ],
+      "sourceURLs": [
+        "https://www.theastronauts.com/2014/10/alienating-player-first-60-seconds-alien-isolation/",
+        "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/01.jpg",
+        "https://pogop.artstation.com/projects/Ze1zN"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "generatedAssetID": "torrens-cryopod-draft",
+          "role": "discarded-iteration-edit-target",
+          "inspected": true
+        },
+        {
+          "sourceURL": "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/01.jpg",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "supply-case-closed",
+      "prompt": "Use case: stylized-concept. Create ONE isolated closed mustard-yellow hard-shell storage case based on the yellow cases in the supplied Alien: Isolation screenshot. It is a small rigid supply case for a 2D/2.5D game. Match the rounded rectangular yellow shell, slightly domed lid, worn gloss, black or metal seam band, two small metal closures and a recessed carry handle. Use a coherent slightly elevated three-quarter frontal view so the front and lid are visible, long side horizontal. Entire case fully visible, softly lit realistic surface textures, restrained 1970s industrial design. No surrounding baggage, no corridor, no person, no floor or shadow; genuine transparent background. One case and one PNG only. Do not add invented futuristic electronics, weapon contents, oversized logos or readable invented labels.",
+      "selectedPrompt": "Use case: stylized-concept. Create ONE isolated closed mustard-yellow hard-shell storage case based on the yellow cases in the supplied Alien: Isolation screenshot. It is a small rigid supply case for a 2D/2.5D game. Match the rounded rectangular yellow shell, slightly domed lid, worn gloss, black or metal seam band, two small metal closures and a recessed carry handle. Use a coherent slightly elevated three-quarter frontal view so the front and lid are visible, long side horizontal. Entire case fully visible, softly lit realistic surface textures, restrained 1970s industrial design. No surrounding baggage, no corridor, no person, no floor or shadow; genuine transparent background. One case and one PNG only. Do not add invented futuristic electronics, weapon contents, oversized logos or readable invented labels.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://www.theastronauts.com/2014/10/alienating-player-first-60-seconds-alien-isolation/",
+        "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/21.jpg"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "sourceURL": "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/21.jpg",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "door-jack-lock",
+      "prompt": "Use case: stylized-concept. ONE isolated door locking device sprite from Alien: Isolation. The attached actual game screenshot is the object reference. Recreate the slim vertical gray/off-white metal locking panel seen at center: black-framed cream indicator plate in the upper third, three vertically stacked rectangular cream/amber indicator windows on its right, below it the TWO red ribbed horizontal hand grips separated by a small central gap and mounted into a pale rectangular recess, lower long gray access panel with subtle small black safety markings. Preserve the compact narrow door-mounted silhouette, exact two red grips and relative proportions. Straight-on orthographic front view, full panel visible. Transparent background, NO surrounding orange door, room, hands, HUD, floor, wall fragment or ground shadow. Fine realistic industrial textures, subtle wear, even neutral lighting for a game sprite. This is a wall/door-mounted lock fixture, not a freestanding post or console. One PNG, no sheet.",
+      "selectedPrompt": "Use case: stylized-concept. ONE isolated door locking device sprite from Alien: Isolation. The attached actual game screenshot is the object reference. Recreate the slim vertical gray/off-white metal locking panel seen at center: black-framed cream indicator plate in the upper third, three vertically stacked rectangular cream/amber indicator windows on its right, below it the TWO red ribbed horizontal hand grips separated by a small central gap and mounted into a pale rectangular recess, lower long gray access panel with subtle small black safety markings. Preserve the compact narrow door-mounted silhouette, exact two red grips and relative proportions. Straight-on orthographic front view, full panel visible. Transparent background, NO surrounding orange door, room, hands, HUD, floor, wall fragment or ground shadow. Fine realistic industrial textures, subtle wear, even neutral lighting for a game sprite. This is a wall/door-mounted lock fixture, not a freestanding post or console. One PNG, no sheet.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://www.theastronauts.com/2014/10/alienating-player-first-60-seconds-alien-isolation/",
+        "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/09.jpg"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "sourceURL": "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/09.jpg",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    },
+    {
+      "id": "supply-case-open",
+      "prompt": "Use case: precise-object-edit. Edit the supplied mustard-yellow Alien: Isolation supply case into its OPEN, EMPTY state. Preserve the exact same yellow shell, metal band, front handle, two clasps, worn finish, three-quarter camera and lighting. The rear-hinged lid is now raised about 80 degrees, showing its plain dark lining and the empty shallow lower compartment. Do not add objects inside. Keep the bottom and front body at precisely the same proportion to the closed case; do not enlarge the base to compensate for the open lid. Entire lid and base fully visible with transparent padding on every side. One independent sprite PNG, genuine alpha background, no floor, cast shadow, scene, HUD, other object or sheet.",
+      "selectedPrompt": "Use case: precise-object-edit. Edit the supplied mustard-yellow Alien: Isolation supply case into its OPEN, EMPTY state. Preserve the exact same yellow shell, metal band, front handle, two clasps, worn finish, three-quarter camera and lighting. The rear-hinged lid is now raised about 80 degrees, showing its plain dark lining and the empty shallow lower compartment. Do not add objects inside. Keep the bottom and front body at precisely the same proportion to the closed case; do not enlarge the base to compensate for the open lid. Entire lid and base fully visible with transparent padding on every side. One independent sprite PNG, genuine alpha background, no floor, cast shadow, scene, HUD, other object or sheet.",
+      "precedingPrompts": [],
+      "sourceURLs": [
+        "https://www.theastronauts.com/2014/10/alienating-player-first-60-seconds-alien-isolation/",
+        "https://www.theastronauts.com/wordpress/wp-content/uploads/2014/10/21.jpg"
+      ],
+      "referenceInspected": true,
+      "inputReferences": [
+        {
+          "generatedAssetID": "supply-case-closed",
+          "role": "approved-closed-state-edit-target",
+          "inspected": true
+        }
+      ],
+      "generated": true,
+      "exact": false,
+      "canonExact": false
+    }
+  ]
+}

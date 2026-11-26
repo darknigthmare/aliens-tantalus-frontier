@@ -26,7 +26,7 @@ export const ALIEN_ISOLATION_SOURCE_ONLY_FILES = Object.freeze([
   '.github/workflows/alien-isolation-dlc.yml',
   'docs/development/ALIEN_ISOLATION_GITHUB_INTEGRATION_20261126.md',
   'docs/development/ALIEN_ISOLATION_GITHUB_INTEGRATION_20261126.json',
-  ...['README.md', 'coverage.json', 'prompts.json', 'visual-qa.json', 'index.html', 'source-assets.json']
+  ...['README.md', 'coverage.json', 'prompts.json', 'visual-qa.json', 'index.html', 'source-assets.json', 'props-production-local-20261126.json', 'portraits-production-local-20261126.json', 'local-recovery-20261126.json', 'local-recovery-20261126.html']
     .map(name => 'docs/development/alien-isolation-fidelity/' + name),
 ]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -39,7 +39,7 @@ export const ALIEN_ISOLATION_RUNTIME_MANIFEST = ALIEN_ISOLATION_RUNTIME_ROOT + '
 export const ALIEN_ISOLATION_RUNTIME_MANIFEST_SHA256 = '77ba5e22f3461d7f7efa48367b7b6b852cf8179a4b0c99a40f09e1e836cae448';
 export const ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT = 'docs/development/alien-isolation-fidelity';
 export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST = ALIEN_ISOLATION_FIDELITY_SOURCE_ROOT + '/source-assets.json';
-export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST_SHA256 = '6e420e96c59822cc86fc5a72bdf9d57162e553073eb8ffee5471c6da94f69d7e';
+export const ALIEN_ISOLATION_SOURCE_ASSETS_MANIFEST_SHA256 = 'e905a54ad1da9ddb401ffdf8ecad8bd8ebd0945c46d775c4df2a96b9a2647753';
 const RASTER_INJECTION = '<script type="module" src="./fidelity/adapter.js"></script>\n';
 const roleNames = new Set(['amanda', 'eva', 'marlow', 'alien', 'joe', 'human', 'facehugger', 'nora', 'elias']);
 const poseNames = new Set(['idle', 'walk', 'crouch', 'crouch-walk']);
