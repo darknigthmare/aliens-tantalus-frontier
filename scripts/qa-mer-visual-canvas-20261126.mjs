@@ -88,17 +88,18 @@ for (const name of ['art-pack', 'png-renderer']) {
 const api = context.SoSPngRenderer;
 await api.preload();
 const loaded = api.status();
-assert.equal(loaded.total, 121, '121 unique sprite entries');
-assert.equal(loaded.requested, 121, 'every image requested by explicit QA preload');
-assert.equal(loaded.ready, 121, JSON.stringify(loaded.assets));
-assert.equal(inputChecks.size, 121);
+const expectedPng = JSON.parse(readFileSync(resolve(visualRoot, 'SPRITE_MANIFEST.json'), 'utf8')).counts.pngFiles;
+assert.equal(loaded.total, expectedPng, 'exact declared sprite entries');
+assert.equal(loaded.requested, expectedPng, 'every image requested by explicit QA preload');
+assert.equal(loaded.ready, expectedPng, JSON.stringify(loaded.assets));
+assert.equal(inputChecks.size, expectedPng);
 for (const [name, method] of Object.entries(unmodifiedMethods)) assert.equal(context.SoSRenderer.prototype[name], method, name);
 for (const [name, descriptor] of Object.entries(simulationDescriptors)) assert.deepEqual(Object.getOwnPropertyDescriptor(context.SoSCore.Game.prototype, name), descriptor, name);
 
 const canvas = makeCanvas(1600, 900);
 const game = new context.SoSCore.Game({ difficulty: 'exploration' });
 const renderer = new context.SoSRenderer(canvas, game);
-const selected = new Set(['s01', 's14', 's26', 's33', 's34', 's50']);
+const selected = new Set(['s01', 's03', 's14', 's26', 's33', 's34', 's50']);
 const roomResults = [], captureResults = [];
 const objectives = context.SoSCore.objectiveOrder;
 function prepareRoom(room) {
@@ -148,15 +149,19 @@ for (const room of context.SoSData.rooms) {
   }
 }
 assert.equal(roomResults.length, 50);
-assert.equal(captureResults.length, 6);
+assert.equal(captureResults.length, selected.size);
+for (const id of ['characters/carlyle-physician', 'characters/decker-medical-gown', 'objectives/icc-handheld']) {
+  assert.ok(roomResults.find(r => r.room === 's03').imageUses.includes(id), 's03: new contextual image drawn through the full room renderer: ' + id);
+}
+assert.ok(roomResults.find(r => r.room === 's33').imageUses.includes('creatures/queen'), 's33: real authored queen uses its PNG');
 
 // A separate contact sheet exercises the actual renderer in both orientations,
-// all recovered player posture states and all three available PNG held weapons.
-const posesCanvas = makeCanvas(1800, 1500), poses = new context.SoSRenderer(posesCanvas, game);
-poses.canvas.width = 1800; poses.canvas.height = 1500; poses.W = 1800; poses.H = 1500; poses.unit = 2.3;
-const c = poses.ctx; c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#142329'; c.fillRect(0, 0, 1800, 1500);
+// all recovered player posture states and all four available PNG held weapons.
+const posesCanvas = makeCanvas(1800, 1980), poses = new context.SoSRenderer(posesCanvas, game);
+poses.canvas.width = 1800; poses.canvas.height = 1980; poses.W = 1800; poses.H = 1980; poses.unit = 2.3;
+const c = poses.ctx; c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#142329'; c.fillRect(0, 0, 1800, 1980);
 prepareRoom(context.SoSData.rooms.find(r => r.id === 's14'));
-const combinations = ['pistol', 'pulse', 'foam'].flatMap(weapon => [1, -1].flatMap(facing => ['standing', 'crouch', 'dodge'].map(posture => ({ weapon, facing, posture }))));
+const combinations = ['pistol', 'pulse', 'foam', 'flame'].flatMap(weapon => [1, -1].flatMap(facing => ['standing', 'crouch', 'dodge'].map(posture => ({ weapon, facing, posture }))));
 const poseResults = [];
 for (const [i, combination] of combinations.entries()) {
   const x = i % 6 * 300 + 150, y = Math.floor(i / 6) * 480 + 355;
@@ -172,7 +177,7 @@ for (const [i, combination] of combinations.entries()) {
   assert.ok(used.some(key => key.startsWith('characters/decker')), JSON.stringify(combination));
   poseResults.push({ ...combination, drawn: used });
 }
-const posesPath = resolve(output, 'poses-weapons.png');
+const posesPath = resolve(captures, 'poses-weapons.png');
 writeFileSync(posesPath, posesCanvas.toBuffer('image/png'));
 
 // Isolated views call the actual renderer, at an explicitly magnified projection.
@@ -247,6 +252,82 @@ for (const mode of ['walking', 'rest', 'reduced-motion']) for (const facing of [
 }
 const locomotionCapture = contactSheet('locomotion', locomotionCells, 4, 450, 410,
   'Locomotion — rendu réel Canvas, poses isolées ; fixtures, pas parcours joué');
+
+// Version 0.10.3: real pixels for the contextual medical cast and boss.
+// These fixtures change only initial setup; every draw is guarded by the same
+// serialized-save invariant as the fifty-room pass. Out-of-scene/armed guards
+// prevent a portrait or a later room from inheriting the medical costume.
+const continuationResults = [], continuationCells = [];
+function changedBounds(before, after, width, height) {
+  let x0 = width, y0 = height, x1 = -1, y1 = -1;
+  for (let p = 0; p < before.length; p += 4) {
+    if (before[p] === after[p] && before[p + 1] === after[p + 1] && before[p + 2] === after[p + 2] && before[p + 3] === after[p + 3]) continue;
+    const i = p / 4, x = i % width, y = Math.floor(i / width);
+    x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+  }
+  return x1 < 0 ? null : [x0, y0, x1 + 1, y1 + 1];
+}
+function continuationCase(id, title, g, r, draw, expected, absent = [], extra = {}, capture = true) {
+  const beforePixels = r.ctx.getImageData(0, 0, r.canvas.width, r.canvas.height).data;
+  const result = { id, expected, absent, ...extra, ...observe(g, r, id, draw) };
+  for (const key of expected) assert.ok(result.drawn.includes(key), id + ': expected image ' + key);
+  for (const key of absent) assert.ok(!result.drawn.includes(key), id + ': scoped image must be absent ' + key);
+  result.changedBounds = changedBounds(beforePixels, r.ctx.getImageData(0, 0, r.canvas.width, r.canvas.height).data, r.canvas.width, r.canvas.height);
+  continuationResults.push(result);
+  if (capture) continuationCells.push({ id, title, canvas: r.canvas });
+  return result;
+}
+for (const facing of [1, -1]) {
+  const g = fixtureGame('s03');
+  g.state.inventory.pistol = false; g.state.flags.equipped = false;
+  Object.assign(g.p, { x: 720, z: .55, facing, crouch: false, dodgeTime: 0, moving: true });
+  const r = stage(g, { unit: 2.3 });
+  continuationCase('medical/decker/' + facing, 'Tenue médicale · ' + (facing > 0 ? 'droite' : 'gauche'), g, r,
+    () => r.human(g.p, .3, 'decker'), ['characters/decker-medical-gown'], ['characters/decker-walk-b'], { room: 's03', facing, moving: true });
+  const physician = { ...g.room.cast.find(a => a.id === 'medic'), facing };
+  const doctorRenderer = stage(g, { unit: 2.3, focusX: physician.x, focusZ: g.zFor(physician) });
+  continuationCase('medical/physician/' + facing, 'Médecin du Carlyle · ' + (facing > 0 ? 'droite' : 'gauche'), g, doctorRenderer,
+    () => doctorRenderer.human(physician, 0, 'medic'), ['characters/carlyle-physician'], ['characters/medic'], { room: 's03', facing });
+}
+for (const completed of [false, true]) {
+  const g = fixtureGame('s03'), objective = g.room.interactables.find(o => o.id === 'o02-01');
+  g.state.flags[objective.flag] = completed;
+  Object.assign(g.p, { x: objective.x - 100, z: objective.z });
+  const r = stage(g, { unit: 2, focusX: objective.x, focusZ: g.zFor(objective) });
+  continuationCase('medical/handheld/' + completed, 'Rapport ICC · ' + (completed ? 'transmis' : 'à transmettre'), g, r,
+    () => r.object(objective), completed ? [] : ['objectives/icc-handheld'], completed ? ['objectives/icc-handheld'] : [],
+    { room: 's03', completed, objectiveId: objective.id });
+}
+for (const room of ['s01', 's04']) {
+  const g = fixtureGame(room);
+  g.state.inventory.pistol = false; g.state.flags.equipped = false;
+  Object.assign(g.p, { x: 600, z: .55, moving: false, crouch: false, dodgeTime: 0 });
+  const r = stage(g);
+  continuationCase('medical/scope/' + room, 'Tenue civile hors infirmerie', g, r,
+    () => r.human(g.p, 0, 'decker'), ['characters/decker'], ['characters/decker-medical-gown'], { room }, false);
+}
+{
+  const g = fixtureGame('s03'); equipForMedicalGuard(g);
+  const r = stage(g);
+  continuationCase('medical/armed-guard', 'Garde de tenue armée', g, r, () => r.human(g.p, 0, 'decker'),
+    ['weapons/pistol'], ['characters/decker-medical-gown'], { room: 's03', armedFixture: true }, false);
+}
+function equipForMedicalGuard(g) {
+  g.state.inventory.pistol = true; g.state.flags.equipped = true;
+  Object.assign(g.p, { weapon: 'pistol', x: 600, z: .55, lamp: false, moving: false, crouch: false, dodgeTime: 0 });
+}
+for (const facing of [1, -1]) {
+  const g = fixtureGame('s33'), queen = g.rs.enemies.find(e => e.kind === 'queen');
+  assert.ok(queen, 'authored boss exists in native s33 state'); queen.facing = facing;
+  const r = stage(g, { width: 840, height: 620, unit: 1, focusX: queen.x, focusZ: g.zFor(queen), groundY: 558 });
+  const result = continuationCase('queen/' + facing, 'Reine · ' + (facing > 0 ? 'droite' : 'gauche'), g, r,
+    () => r.alien(queen, 0), ['creatures/queen'], [], { room: 's33', facing, enemyId: queen.id, fixtureUnit: 1 });
+  const bounds = result.changedBounds;
+  assert.ok(bounds && bounds[0] > 8 && bounds[1] > 8 && bounds[2] < r.canvas.width - 8 && bounds[3] < r.canvas.height - 8,
+    'queen fixture preserves the whole sprite within the diagnostic frame: ' + JSON.stringify(bounds));
+}
+const continuationCapture = contactSheet('medical-queen', continuationCells, 4, 600, 460,
+  'Médecine et reine — nouveaux pixels ; fixtures explicites, pas parcours joué');
 
 const detailResults = [], detailCells = [];
 function addDetail(id, kind, title, g, r, draw, extra = {}, capture = true) {
@@ -407,9 +488,11 @@ assert.deepEqual(Object.getOwnPropertyNames(context.SoSCore.Game.prototype), Obj
 for (const [name, descriptor] of Object.entries(simulationDescriptors)) assert.deepEqual(Object.getOwnPropertyDescriptor(context.SoSCore.Game.prototype, name), descriptor, name + ': simulation prototype unchanged after all fixtures');
 for (const [name, method] of Object.entries(unmodifiedMethods)) assert.equal(context.SoSRenderer.prototype[name], method, name + ': native method unchanged after all fixtures');
 const status = api.status();
+const newAssetIds = ['characters/carlyle-physician', 'characters/decker-medical-gown', 'objectives/icc-handheld', 'creatures/queen', 'weapons/flame'];
+for (const id of newAssetIds) assert.ok(status.drawn[id] > 0, 'new source actually reached drawImage: ' + id);
 const detailCounts = Object.fromEntries([...new Set(detailResults.map(r => r.kind))].map(kind => [kind, detailResults.filter(r => r.kind === kind).length]));
 const report = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   engine: '@napi-rs/canvas', engineVersion: canvasVersion,
   browserJourney: false,
   explanation: 'Real Canvas pixels rendered from the original simulation and PNG adapter. Rooms, equipment, actor positions and diagnostic camera magnification are explicit fixtures. Six effects originate from native shoot/hurtEnemy actions and their real events/states. This is neither a keyboard journey nor a full campaign completion.',
@@ -418,9 +501,9 @@ const report = {
     ancillaryMetadataExcludedInMemory: 'caBX provenance chunks only; the installed Skia decoder rejects these chunks. All source files and all IDAT compressed pixel chunks are retained byte-for-byte.',
     imagesWithCaBX: [...inputChecks.values()].filter(a => a.omittedAncillaryCaBX > 0).length,
   },
-  counts: { declared: loaded.total, loaded: loaded.ready, rooms: roomResults.length, savedRoomCaptures: captureResults.length, poseAndWeaponCases: poseResults.length, locomotionCases: locomotionResults.length, walkingCases: locomotionResults.filter(r => r.mode === 'walking').length, restCases: locomotionResults.filter(r => r.mode === 'rest').length, reducedMotionCases: locomotionResults.filter(r => r.mode === 'reduced-motion').length, detailCases: detailResults.length, detailGroups: detailCounts, savedDiagnosticCaptures: 2, capturedDetailCases: detailCells.length, pngKindsDrawn: Object.keys(status.drawn).length },
+  counts: { declared: loaded.total, loaded: loaded.ready, rooms: roomResults.length, savedRoomCaptures: captureResults.length, poseAndWeaponCases: poseResults.length, locomotionCases: locomotionResults.length, walkingCases: locomotionResults.filter(r => r.mode === 'walking').length, restCases: locomotionResults.filter(r => r.mode === 'rest').length, reducedMotionCases: locomotionResults.filter(r => r.mode === 'reduced-motion').length, detailCases: detailResults.length, detailGroups: detailCounts, savedDiagnosticCaptures: 3, capturedDetailCases: detailCells.length, continuationCases: continuationResults.length, newAssetKindsDrawn: newAssetIds.length, pngKindsDrawn: Object.keys(status.drawn).length },
   checks: { allImageDimensionsMatch: true, allImageSourcesUnchanged: true, immutableCampaignModulesUnchanged: true, simulationPrototypeUnchanged: true, targetingArchitectureAndEventAdmissionUnchanged: true, unmodifiedNativeMethods: Object.keys(unmodifiedMethods), allRoomStatesUnchangedByRendering: true, allFixtureSavesUnchangedByRendering: true, restAndReducedMotionPixelsStable: true, nativeDoorFallbackPixelsIdentical: true, sixEffectsUseNativeActionsAndState: true },
-  captures: captureResults, contactSheet: posesPath, diagnosticCaptures: { locomotion: locomotionCapture, details: detailsCapture }, rooms: roomResults, poses: poseResults, locomotion: locomotionResults, details: detailResults, status,
+  captures: captureResults, contactSheet: relative(repo, posesPath), diagnosticCaptures: { locomotion: locomotionCapture, details: detailsCapture, continuation: continuationCapture }, rooms: roomResults, poses: poseResults, locomotion: locomotionResults, details: detailResults, continuation: continuationResults, newAssetIds, status,
   images: [...inputChecks.values()],
 };
 const reportPath = resolve(output, 'canvas-report.json');

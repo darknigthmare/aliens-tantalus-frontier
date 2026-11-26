@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
   "root": "dlc/sea-of-sorrows-visual",
-  "revision": "0.10.2",
+  "revision": "0.10.3",
   "upstreamRuntime": "dlc/sea-of-sorrows",
   "originalRuntimeTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
   "files": [
     {
       "path": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
-      "sizeBytes": 241868,
-      "sha256": "232a11ccfa08e9ec721c5485bc17a4cc14d7a92b93aa67757314e65983b2a7fa",
+      "sizeBytes": 255457,
+      "sha256": "3e00d549880f9e02a0859233e2bd8a9c7233a5204b327b0ebca9ef4e24bdd7f4",
       "public": false
     },
     {
       "path": "dlc/sea-of-sorrows-visual/galerie.html",
-      "sizeBytes": 7788,
-      "sha256": "d36d2484fd6ee73b7c4edb875cf1553b6b9024532ff876ee889b03aff011b3b2",
+      "sizeBytes": 7876,
+      "sha256": "d0da072957f5d2e9a1bdadb77a16f81ce7b7f6ba2e7077ccd3c6208fc8b347bf",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/index.html",
       "sizeBytes": 7217,
-      "sha256": "f4a1f138d20ee5280b45ffd42f89b74d43fd65fed601c4ff58014a177c7098c5",
+      "sha256": "b6cb4e0bac3d2edf2944f17857b68de1af9671aac03b00674961f33fcc3fd289",
       "public": true
     },
     {
@@ -39,6 +39,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/bronson.png",
       "sizeBytes": 1779643,
       "sha256": "5ee1aadf105c6baf8b6c22a2a46267c13c1fda7bc1f1877027b7f91d9e3b2b67",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-physician.png",
+      "sizeBytes": 1560708,
+      "sha256": "a357b23a4509b913f8467f7efd98815c64b4b5b58f8b9851b94f60c325ec52f7",
       "public": true
     },
     {
@@ -81,6 +87,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge.png",
       "sizeBytes": 1887477,
       "sha256": "3373768d355036d107248b22f3d375306e04a598091e4f7fa5427248abe715a2",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+      "sizeBytes": 1516131,
+      "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
       "public": true
     },
     {
@@ -177,6 +189,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/creatures/facehugger.png",
       "sizeBytes": 1790221,
       "sha256": "8e7d0cca0e4c78ae9baaff939a8c8a540571f476b93fe11ed5b9e6d04bb2b2a9",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/creatures/queen.png",
+      "sizeBytes": 2208282,
+      "sha256": "0f882eff7928bcd130d09676e3117616656de7dc9c8e401c85b2ded8857f6251",
       "public": true
     },
     {
@@ -660,6 +678,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png",
+      "sizeBytes": 1773875,
+      "sha256": "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/objectives/sleep.png",
       "sizeBytes": 1938439,
       "sha256": "ff4c6b0416ac4febc32c4fbe14385bb5663b03b6a30f803b4616f3445468b8c0",
@@ -732,6 +756,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png",
+      "sizeBytes": 1558386,
+      "sha256": "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/weapons/foam.png",
       "sizeBytes": 2340514,
       "sha256": "0254fa69a918922f567f4bd3e1f71100c416f5cad6abc4c84cd50be8668e98d0",
@@ -751,8 +781,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
-      "sizeBytes": 43083,
-      "sha256": "12c935c8e8ccd380c24abf318fb5913053986bdffa10644b86056c9cd88bfe01",
+      "sizeBytes": 45229,
+      "sha256": "571fa45b5e5bd5c8918f86bf334e6e8b2e183da036c83c4172cd70c3bd9a693e",
       "public": true
     },
     {
@@ -775,8 +805,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
-      "sizeBytes": 30815,
-      "sha256": "8785aebeaa2f8fb5dc1fc88909c61eb688585f20b46a6c131b948a8646ef1c81",
+      "sizeBytes": 32025,
+      "sha256": "f11f13888b565f01c452217d05430321d70d55a3d670977ce8e43f3b69e9dec1",
       "public": true
     }
   ]

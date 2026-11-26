@@ -146,12 +146,18 @@
     const g = renderer.game, actualPlayer = actor === g.p && role === 'decker';
     const armed = !portrait && (role === 'manning' || actualPlayer && g.state.inventory.pistol);
     const posture = actualPlayer && g.p.dodgeTime > 0 ? '-dodge' : actualPlayer && g.p.crouch ? '-crouch' : '';
+    // Chapter-four medical variants belong only to the existing sanitary
+    // transit scene. The generic medic/civilian portraits and all simulation
+    // identities remain unchanged in every other room.
+    const medicalPose = !portrait && g.room.id === 's03' ?
+      actualPlayer && !armed ? 'decker-medical-gown' : role === 'medic' ? 'carlyle-physician' : null : null;
     // Two authored contact poses, only for the actual unarmed walking player.
     // The native simulation clock pauses with the game; reduced motion keeps
     // the existing static pose. This does not create a locomotion state.
-    const walking = !portrait && actualPlayer && !armed && !posture && actor.moving && !renderer.reduced;
+    const walking = !portrait && actualPlayer && !armed && !posture && !medicalPose && actor.moving && !renderer.reduced;
     const phase = Math.floor(Math.max(0, finite(time) ? time : finite(g.time) ? g.time : 0) * 4) % 2;
     const candidates = portrait ? [role] : [...new Set([
+      ...(medicalPose ? [medicalPose] : []),
       ...(walking ? ['decker-walk-' + (phase ? 'b' : 'a')] : []),
       ...(armed ? [role + posture + '-ready'] : []), role + posture,
       ...(armed ? [role + '-ready'] : []), role,
@@ -244,7 +250,9 @@
       }
     }
     c.restore();
-    if (!portrait && role !== 'decker' && near(this, a, 290)) this.text(profileFor(role).name, q.x, q.y - 126 * this.unit, 11, '#d4dcce', 'center');
+    if (!portrait && role !== 'decker' && near(this, a, 290)) this.text(
+      png.pose === 'carlyle-physician' ? 'Médecin du Carlyle' : profileFor(role).name,
+      q.x, q.y - 126 * this.unit, 11, '#d4dcce', 'center');
   };
 
   const nativeDraw = R.draw;
@@ -307,7 +315,9 @@
     if (!atWorld(this, png, q, w / naturalWidth, h / png.entry.worldHeight)) return fallback('prop', this, arguments);
   };
   R.alien = function (e, t) {
-    const png = asset('creatures', e.kind, e.facing || 1);
+    // captureAdult is a simulation role for the same adult morphology, not a
+    // separate species. Never mutate the kind or reuse a living pose for death.
+    const png = asset('creatures', e.kind === 'captureAdult' ? 'adult' : e.kind, e.facing || 1);
     const q = this.pos(e.x, this.game.zFor(e)), s = this.unit * (.85 + this.game.zFor(e) * .33);
     let body = false;
     if (png) {
@@ -489,6 +499,17 @@
   R.object = function (o) {
     const g = this.game;
     if (['boss', 'rescue'].includes(o.type) || g.state.flags[o.flag]) return fallback('object', this, arguments);
+    if (g.room.id === 's03' && o.id === 'o02-01' && o.type === 'analyse') {
+      const handheld = asset('objectives', 'icc-handheld');
+      if (handheld) {
+        // Keep the native reporting pedestal, objective marker and physical
+        // interaction. The handheld rests in its display cradle, not in space.
+        fallback('object', this, arguments);
+        const q = this.pos(o.x, g.zFor(o));
+        atWorld(this, handheld, { x: q.x, y: q.y - 64 * this.unit });
+        return;
+      }
+    }
     const id = o.type === 'capture' ? 'capture' : o.type === 'sleep' ? 'sleep' :
       ['sample', 'scan', 'survey', 'recover', 'brood', 'sense'].includes(o.type) ? 'case' : 'console';
     const png = asset('objectives', id), q = this.pos(o.x, g.zFor(o)), u = this.unit;

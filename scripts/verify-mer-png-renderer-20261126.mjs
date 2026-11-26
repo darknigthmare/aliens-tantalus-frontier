@@ -286,6 +286,100 @@ test('facehugger and corpse sprites do not substitute for missing adult or queen
   assert.deepEqual(drawn(f).map(a => a.src), ['sprites/creatures/facehugger.png', 'sprites/corpses/facehugger.png']);
   assert.equal(f.api.status().methods.alien.vectorCalls, 2);
 });
+test('queen art and an explicitly supplied adult alias preserve capture and death states', async () => {
+  const assets = fixtureAssets();
+  assets.creatures.adult = entry('creatures', 'adult', { worldHeight: 135 });
+  assets.creatures.queen = entry('creatures', 'queen', { worldHeight: 200 });
+  const f = boot({ assets }); await f.api.preload();
+  const actors = ['adult', 'captureAdult', 'queen'].map(kind => ({ x: 500, z: .55, facing: -1, kind, foam: 0 }));
+  const before = JSON.stringify(actors), simulation = snapshot(f);
+  for (const actor of actors) f.renderer.alien(actor, 0);
+  assert.deepEqual(drawn(f).map(a => a.src), [
+    'sprites/creatures/adult.png', 'sprites/creatures/adult.png', 'sprites/creatures/queen.png',
+  ]);
+  assert.ok(drawn(f).every(a => a.matrix[0] < 0), 'each morphology respects facing');
+  f.calls.length = 0;
+  for (const actor of actors) f.renderer.corpse(actor);
+  assert.equal(drawn(f).length, 0, 'no living art is used for an absent death pose');
+  assert.equal(JSON.stringify(actors), before);
+  assert.equal(snapshot(f), simulation);
+});
+function medicalAssets() {
+  const assets = fixtureAssets();
+  assets.characters['decker-medical-gown'] = entry('characters', 'decker-medical-gown', { unarmedOnly: true });
+  assets.characters['carlyle-physician'] = entry('characters', 'carlyle-physician');
+  assets.objectives['icc-handheld'] = entry('objectives', 'icc-handheld', { worldHeight: 42, facing: 'none' });
+  return assets;
+}
+test('chapter-four costumes are confined to s03 and leave original identities and saves intact', async () => {
+  const f = boot({ assets: medicalAssets() }); await f.api.preload();
+  f.game.enter('s03'); f.game.p.moving = true;
+  const medic = f.game.room.cast.find(a => a.id === 'medic');
+  f.game.p.x = medic.x;
+  const before = snapshot(f);
+  f.renderer.human(f.game.p, 0, 'decker'); f.renderer.human(medic, 0, 'medic');
+  assert.deepEqual(drawn(f).map(a => a.src), [
+    'sprites/characters/decker-medical-gown.png', 'sprites/characters/carlyle-physician.png',
+  ]);
+  assert.ok(f.calls.some(c => c.op === 'fillText' && c.args[0] === 'Médecin du Carlyle'));
+  assert.equal(medic.id, 'medic', 'the campaign actor is unchanged');
+  assert.equal(snapshot(f), before);
+  f.game.enter('s01'); f.game.p.moving = false; f.calls.length = 0;
+  f.renderer.human(f.game.p, 0, 'decker'); f.renderer.human(medic, 0, 'medic');
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/characters/decker.png', 'sprites/characters/medic.png']);
+});
+test('the medical variant never overrides an armed loadout or generic dossier portrait', async () => {
+  const f = boot({ assets: medicalAssets() }); await f.api.preload(); f.game.enter('s03');
+  f.game.state.inventory.pistol = true;
+  f.renderer.human(f.game.p, 0, 'decker');
+  assert.ok(drawn(f).some(a => a.src === 'sprites/weapons/pistol.png'));
+  assert.ok(!drawn(f).some(a => a.src.includes('medical-gown')));
+  const p = boot({ assets: medicalAssets(), portrait: true }); await p.api.preload(); p.game.enter('s03');
+  p.renderer.human(p.game.p, 0, 'decker');
+  p.renderer.human({ x: 200, z: .55, facing: 1 }, 0, 'medic');
+  assert.deepEqual(drawn(p).map(a => a.src), ['sprites/characters/decker.png', 'sprites/characters/medic.png']);
+});
+test('failed medical art falls back to existing portraits and objective art', async () => {
+  const f = boot({ assets: medicalAssets(), behavior: {
+    'sprites/characters/decker-medical-gown.png': 'wrong-size',
+    'sprites/characters/carlyle-physician.png': 'failed',
+    'sprites/objectives/icc-handheld.png': 'failed',
+  } });
+  await f.api.preload(); f.game.enter('s03');
+  f.renderer.human(f.game.p, 0, 'decker');
+  f.renderer.human(f.game.room.cast[0], 0, 'medic');
+  f.renderer.object(f.game.room.interactables[0]);
+  assert.deepEqual(drawn(f).map(a => a.src), [
+    'sprites/characters/decker.png', 'sprites/characters/medic.png', 'sprites/objectives/console.png',
+  ]);
+});
+test('the ICC handheld is docked on the existing s03 reporting pedestal only while unfinished', async () => {
+  const f = boot({ assets: medicalAssets() }); await f.api.preload(); f.game.enter('s03');
+  const o = f.game.room.interactables[0], before = snapshot(f), original = JSON.stringify(o);
+  f.renderer.object(o);
+  const image = drawn(f)[0]; assert.equal(image.src, 'sprites/objectives/icc-handheld.png');
+  close(sourcePoint(image, f.assets.objectives['icc-handheld'].pivot)[1], f.renderer.pos(o.x, f.game.zFor(o)).y - 64);
+  assert.ok(f.calls.some(c => c.op === 'fillRect'), 'the native pedestal remains beneath the device');
+  assert.equal(snapshot(f), before); assert.equal(JSON.stringify(o), original);
+  f.calls.length = 0; f.game.state.flags[o.flag] = true; f.renderer.object(o);
+  assert.equal(drawn(f).length, 0, 'completed objectives retain their native state');
+  f.game.state.flags[o.flag] = false; f.game.enter('s04'); f.calls.length = 0; f.renderer.object(o);
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/objectives/console.png']);
+});
+for (const facing of [-1, 1]) test(`new flame sprite uses the native weapon grip and muzzle facing ${facing}`, async () => {
+  const assets = fixtureAssets();
+  assets.weapons.flame = entry('weapons', 'flame', { worldHeight: 24, gripAnchor: [110, 210], muzzleAnchor: [215, 145] });
+  const f = boot({ assets }); await f.api.preload();
+  f.game.state.inventory.pistol = true; f.game.state.inventory.flame = true;
+  f.game.p.weapon = 'flame'; f.game.p.facing = facing;
+  const before = snapshot(f); f.renderer.human(f.game.p, 0, 'decker');
+  const weapon = drawn(f).find(a => a.src === 'sprites/weapons/flame.png'); assert.ok(weapon);
+  const muzzle = sourcePoint(weapon, assets.weapons.flame.muzzleAnchor);
+  const q = f.renderer.pos(f.game.p.x, f.game.zFor(f.game.p));
+  close(q.x + f.renderer._pngMuzzles.decker.x, muzzle[0]);
+  close(q.y + f.renderer._pngMuzzles.decker.y, muzzle[1]);
+  assert.equal(snapshot(f), before);
+});
 test('the adapter leaves simulation, architecture and target selection untouched', () => {
   const f = boot();
   for (const name of ['architecture', 'pickTarget', 'worldDressing', 'lightOverlay', 'tacticalOverlay', 'addEffect']) assert.equal(f.context.SoSRenderer.prototype[name], f.baseMethods[name], name);

@@ -1,30 +1,31 @@
 {
   "schemaVersion": 1,
-  "title": "La Mer des Chagrins — édition visuelle 0.10.2, récupération et nouvelles poses",
+  "title": "La Mer des Chagrins — édition visuelle 0.10.3, bible et cinq nouveaux sprites",
   "date": "2026-11-26",
   "scope": "Presentation metadata for the immutable Sea of Sorrows 0.10.0 simulation",
   "counts": {
-    "pngFiles": 121,
+    "pngFiles": 126,
     "recoveredOriginalPng": 110,
     "preservedNewPng": 9,
-    "bytes": 237861570,
+    "bytes": 246478952,
     "categories": {
-      "characters": 24,
+      "characters": 26,
       "corpses": 1,
-      "creatures": 1,
+      "creatures": 2,
       "decor": 50,
       "devices": 3,
       "doors": 2,
       "effects": 6,
       "equipment": 16,
-      "objectives": 4,
+      "objectives": 5,
       "obstacles": 6,
       "organic": 1,
       "parasites": 2,
       "stretchers": 2,
-      "weapons": 3
+      "weapons": 4
     },
-    "newContinuationPng": 2
+    "newContinuationPng": 7,
+    "newThisPassPng": 5
   },
   "coordinateContract": {
     "unit": "source-image-pixels",
@@ -43,34 +44,40 @@
     "effectOrigin": "Directional effects use emissionAnchor; radial impacts use impactAnchor; ground effects use groundAnchor."
   },
   "coverage": {
-    "characterIdentities": 16,
-    "additionalCharacterPoses": 8,
+    "characterIdentities": 17,
+    "additionalCharacterPoses": 9,
     "decorKinds": 50,
     "obstacleKinds": 6,
     "baseCampaignRooms": 50,
     "baseCampaignObstaclePlacements": 120,
-    "runtimeWorldMappings": 117,
+    "runtimeWorldMappings": 122,
     "interfaceOnlyAssets": 4,
-    "galleryAssets": 121
+    "galleryAssets": 126
   },
   "canonicalOneToOneCertified": false,
   "completeAnimationCycles": false,
   "imageBytesModified": false,
   "sourceCodeReconstructed": true,
   "validation": {
-    "pngDecodeAndAlpha": "measured locally with Pillow",
-    "sha256AndGitBlobSha": "119 historical PNGs verified against Git 8cb25462 and a pinned inventory digest; two new PNG hashes pinned separately.",
-    "manualAnchorInspection": "Ready/crouch/dodge and two unarmed walk poses, weapons, stretchers, parasites, doors, six effects and equipment inspected as source images; scoped placement review is recorded in VALIDATION.json/nativeCanvas.",
-    "browserGameplay": "not certified by this manifest",
-    "renderedPlacement": "13 continuation assets visually reviewed in real Canvas fixtures; the full fixture run drew 103 distinct PNG kinds. Evidence: docs/mer-des-chagrins-20261126/VALIDATION.json nativeCanvas. No browser journey or universal pose/state coverage certified."
+    "pngDecodeAndAlpha": "121 baseline assets retain their published measurements; five additions decoded with Pillow before executor failure and independently re-decoded in JavaScript with zlib Adler32 validation.",
+    "sha256AndGitBlobSha": "All 121 prior PNG bytes preserved. Five new Git blobs match the pre-outage source byte lengths, SHA-256 and Git blob hashes.",
+    "manualAnchorInspection": "Five new source images and their real Canvas placements inspected: medical actors and Queen in both directions, ICC before/after transmission, six flame posture/direction combinations.",
+    "logicTests": "87/87 visual-suite tests passed after executor recovery on the 126-asset candidate. Canvas/Image/DOM doubles are distinct from the separate real Canvas QA.",
+    "historicalRenderedPlacement": "Edition 0.10.2 observed 103 distinct PNG kinds in prepared real Canvas fixtures; historical evidence remains in docs/mer-des-chagrins-20261126/VALIDATION.json.",
+    "renderedPlacement": "Edition 0.10.3 loaded 126 PNGs, rendered 50 rooms, 24 weapon/posture/direction cases, 12 locomotion cases and 55 other diagnostic cases. All five additions were drawn and visually reviewed in scoped fixtures. No browser journey or universal state coverage certified.",
+    "browserGameplay": "not certified by this manifest"
   },
   "remainingWork": [
-    "creatures/adult, creatures/queen, weapons/plasma and weapons/flame have no PNG and use native presentation.",
-    "Two unarmed walking key poses are available. Complete walking, firing, reloading and interaction animation cycles remain absent; these poses do not certify full animation.",
-    "Support hand points are measured but the current adapter aligns the primary grip only; secondary-hand anatomy and grip occlusion require additional art.",
-    "All 121 PNGs have a runtime presentation use: 117 renderer mappings and four interface-only equipment illustrations. Industrial door PNGs apply only to compatible front/back bulkhead bays; other architecture keeps native rendering.",
-    "Documented novel identities and roles do not establish exact faces, costumes or equipment silhouettes; these drawings remain project adaptations.",
-    "Crouch/dodge drawings retain the native 85.8-unit pose envelope but their independent anatomy is not a registered full-body animation rig; cross-pose head proportions need further art refinement."
+    "creatures/adult and weapons/plasma have no PNG after generation refusals and retain native presentation.",
+    "Five new PNG placements have been inspected in static real Canvas fixtures; complete action sequences, browser journeys and animation remain unverified.",
+    "Two unarmed walking key poses are available. Complete walking, firing, reloading and interaction animation cycles remain absent.",
+    "Support-hand points are measured but the current adapter aligns the primary grip only; secondary-hand anatomy and grip occlusion require additional art.",
+    "All 126 PNGs have a presentation use: 122 renderer mappings and four interface-only equipment illustrations. A mapping does not certify that the image was observed in a played campaign.",
+    "Medical variants are restricted to s03; Decker's gown is unarmed. Their static silhouettes do not implement consultation, sitting, lying or rising animations.",
+    "Queen morphology is based on film reference, not an authenticated novel-specific visual; native death presentation and the original three-anchor boss mechanic remain.",
+    "The flamethrower is original project gameplay. Its stock extends behind the torso in some poses, and secondary-hand contact and grip occlusion remain artwork issues.",
+    "Documented identities and roles do not establish exact faces, costumes or equipment silhouettes; the remaining interpretations are identified in the detailed bible.",
+    "Crouch/dodge drawings retain the native 85.8-unit pose envelope but their anatomy is not a registered full-body animation rig; cross-pose head proportions need refinement."
   ],
   "assets": [
     {
@@ -257,6 +264,75 @@
       ]
     },
     {
+      "id": "characters/carlyle-physician",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-physician.png",
+      "sizeBytes": 1560708,
+      "sha256": "a357b23a4509b913f8467f7efd98815c64b4b5b58f8b9851b94f60c325ec52f7",
+      "gitBlobSha": "b57d130180e0da91a5d8eaa5d604686d4c821ed4",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaBounds": [
+        19,
+        0,
+        1012,
+        1536
+      ],
+      "visibleBoundsAlpha8": [
+        285,
+        12,
+        692,
+        1529
+      ],
+      "transparentPixelCount": 1138735,
+      "visiblePixelCountAlpha8": 422532,
+      "metadata": {
+        "src": "sprites/characters/carlyle-physician.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          283,
+          10,
+          411,
+          1521
+        ],
+        "pivot": [
+          471,
+          1529
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "label": "Médecin anonyme du Carlyle",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected lower contact band; runtime placement not yet observed.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Static real Canvas fixtures in both directions, with prepared game state; not a browser journey or full animation."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "b57d130180e0da91a5d8eaa5d604686d4c821ed4",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-physician.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json",
+        "promptId": "characters/carlyle-physician",
+        "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "characters/cherbourg",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/cherbourg.png",
       "sizeBytes": 1426947,
@@ -291,7 +367,7 @@
           1533
         ],
         "pivot": [
-          516.0,
+          516,
           1535
         ],
         "worldHeight": 110,
@@ -352,7 +428,7 @@
           1522
         ],
         "pivot": [
-          500.0,
+          500,
           1524
         ],
         "worldHeight": 110,
@@ -432,6 +508,146 @@
         "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/dave.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "characters/decker",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+      "sizeBytes": 1626812,
+      "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
+      "sha256": "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        65,
+        13,
+        764,
+        1523
+      ],
+      "visibleBoundsAlpha8": [
+        262,
+        15,
+        705,
+        1521
+      ],
+      "transparentPixelCount": 1140500,
+      "visiblePixelCountAlpha8": 419478,
+      "metadata": {
+        "src": "sprites/characters/decker.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          260,
+          13,
+          447,
+          1510
+        ],
+        "pivot": [
+          495,
+          1521
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "lampAnchor": [
+          566,
+          324
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Alpha footprint: center of lower 8% band",
+        "manualSourcePixelAnchors": {
+          "lampAnchor": [
+            566,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": false
+      },
+      "provenance": {
+        "kind": "recovered-original-git-blob",
+        "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
+        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "characters/decker-crouch",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch.png",
+      "sizeBytes": 1561783,
+      "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5",
+      "sha256": "103e5e0273a7383685be7ac06812fe7da901e7119e8ce70ce3a0a14bf20dd971",
+      "width": 1220,
+      "height": 1289,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        35,
+        1192,
+        1289
+      ],
+      "visibleBoundsAlpha8": [
+        78,
+        60,
+        1185,
+        1220
+      ],
+      "transparentPixelCount": 894632,
+      "visiblePixelCountAlpha8": 658704,
+      "metadata": {
+        "src": "sprites/characters/decker-crouch.png",
+        "width": 1220,
+        "height": 1289,
+        "crop": [
+          76,
+          58,
+          1111,
+          1164
+        ],
+        "pivot": [
+          560.5,
+          1220
+        ],
+        "worldHeight": 85.8,
+        "facing": "right",
+        "lampAnchor": [
+          855,
+          410
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Alpha footprint: center of lower 8% band",
+        "manualSourcePixelAnchors": {
+          "lampAnchor": [
+            855,
+            410
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": false
+      },
+      "provenance": {
+        "kind": "recovered-original-git-blob",
+        "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5",
+        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch.png"
       },
       "canonicalOneToOneCertified": false,
       "runtimeSurfaces": [
@@ -526,162 +742,6 @@
       ]
     },
     {
-      "id": "characters/decker-crouch",
-      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch.png",
-      "sizeBytes": 1561783,
-      "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5",
-      "sha256": "103e5e0273a7383685be7ac06812fe7da901e7119e8ce70ce3a0a14bf20dd971",
-      "width": 1220,
-      "height": 1289,
-      "format": "PNG",
-      "mode": "RGBA",
-      "alphaBounds": [
-        0,
-        35,
-        1192,
-        1289
-      ],
-      "visibleBoundsAlpha8": [
-        78,
-        60,
-        1185,
-        1220
-      ],
-      "transparentPixelCount": 894632,
-      "visiblePixelCountAlpha8": 658704,
-      "metadata": {
-        "src": "sprites/characters/decker-crouch.png",
-        "width": 1220,
-        "height": 1289,
-        "crop": [
-          76,
-          58,
-          1111,
-          1164
-        ],
-        "pivot": [
-          560.5,
-          1220
-        ],
-        "worldHeight": 85.8,
-        "facing": "right",
-        "lampAnchor": [
-          855,
-          410
-        ]
-      },
-      "calibration": {
-        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha footprint: center of lower 8% band",
-        "manualSourcePixelAnchors": {
-          "lampAnchor": [
-            855,
-            410
-          ]
-        },
-        "facingInspected": true,
-        "renderedPlacementVerified": false
-      },
-      "provenance": {
-        "kind": "recovered-original-git-blob",
-        "gitBlobSha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5",
-        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
-        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
-        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch.png"
-      },
-      "canonicalOneToOneCertified": false,
-      "runtimeSurfaces": [
-        "gallery",
-        "world-renderer"
-      ]
-    },
-    {
-      "id": "characters/decker-dodge-ready",
-      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge-ready.png",
-      "sizeBytes": 1769977,
-      "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc",
-      "sha256": "1ebb7dcc7daa00990561e11b5bee5248301e2b7bd927d5f469fa6e9448752103",
-      "width": 1536,
-      "height": 1024,
-      "format": "PNG",
-      "mode": "RGBA",
-      "alphaBounds": [
-        0,
-        9,
-        1516,
-        1008
-      ],
-      "visibleBoundsAlpha8": [
-        108,
-        18,
-        1321,
-        1006
-      ],
-      "transparentPixelCount": 1111355,
-      "visiblePixelCountAlpha8": 443663,
-      "metadata": {
-        "src": "sprites/characters/decker-dodge-ready.png",
-        "width": 1536,
-        "height": 1024,
-        "crop": [
-          106,
-          16,
-          1217,
-          992
-        ],
-        "pivot": [
-          594.0,
-          1006
-        ],
-        "worldHeight": 85.8,
-        "facing": "right",
-        "handAnchor": [
-          896,
-          340
-        ],
-        "supportHandAnchor": [
-          1272,
-          330
-        ],
-        "lampAnchor": [
-          1030,
-          300
-        ]
-      },
-      "calibration": {
-        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha footprint: center of lower 8% band",
-        "manualSourcePixelAnchors": {
-          "handAnchor": [
-            896,
-            340
-          ],
-          "supportHandAnchor": [
-            1272,
-            330
-          ],
-          "lampAnchor": [
-            1030,
-            300
-          ]
-        },
-        "facingInspected": true,
-        "renderedPlacementVerified": false
-      },
-      "provenance": {
-        "kind": "recovered-original-git-blob",
-        "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc",
-        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
-        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
-        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge-ready.png"
-      },
-      "canonicalOneToOneCertified": false,
-      "runtimeSurfaces": [
-        "gallery",
-        "world-renderer"
-      ]
-    },
-    {
       "id": "characters/decker-dodge",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge.png",
       "sizeBytes": 1887477,
@@ -752,6 +812,163 @@
       ]
     },
     {
+      "id": "characters/decker-dodge-ready",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge-ready.png",
+      "sizeBytes": 1769977,
+      "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc",
+      "sha256": "1ebb7dcc7daa00990561e11b5bee5248301e2b7bd927d5f469fa6e9448752103",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        9,
+        1516,
+        1008
+      ],
+      "visibleBoundsAlpha8": [
+        108,
+        18,
+        1321,
+        1006
+      ],
+      "transparentPixelCount": 1111355,
+      "visiblePixelCountAlpha8": 443663,
+      "metadata": {
+        "src": "sprites/characters/decker-dodge-ready.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          106,
+          16,
+          1217,
+          992
+        ],
+        "pivot": [
+          594,
+          1006
+        ],
+        "worldHeight": 85.8,
+        "facing": "right",
+        "handAnchor": [
+          896,
+          340
+        ],
+        "supportHandAnchor": [
+          1272,
+          330
+        ],
+        "lampAnchor": [
+          1030,
+          300
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Alpha footprint: center of lower 8% band",
+        "manualSourcePixelAnchors": {
+          "handAnchor": [
+            896,
+            340
+          ],
+          "supportHandAnchor": [
+            1272,
+            330
+          ],
+          "lampAnchor": [
+            1030,
+            300
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": false
+      },
+      "provenance": {
+        "kind": "recovered-original-git-blob",
+        "gitBlobSha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc",
+        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge-ready.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "characters/decker-medical-gown",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+      "sizeBytes": 1516131,
+      "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+      "gitBlobSha": "1d3b0d4437030d12488ee58bf36cb350015f96d2",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaBounds": [
+        49,
+        13,
+        1000,
+        1520
+      ],
+      "visibleBoundsAlpha8": [
+        263,
+        16,
+        707,
+        1510
+      ],
+      "transparentPixelCount": 1141969,
+      "visiblePixelCountAlpha8": 414357,
+      "metadata": {
+        "src": "sprites/characters/decker-medical-gown.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          261,
+          14,
+          448,
+          1498
+        ],
+        "pivot": [
+          481,
+          1510
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "label": "Decker · tenue médicale",
+        "sceneScope": [
+          "s03"
+        ],
+        "unarmedOnly": true
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected lower contact band; runtime placement not yet observed.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Static real Canvas fixtures in both directions, with prepared game state; not a browser journey or full animation."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "1d3b0d4437030d12488ee58bf36cb350015f96d2",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json",
+        "promptId": "characters/decker-medical-gown",
+        "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+        "referenceSourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "characters/decker-ready",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
       "sizeBytes": 1833806,
@@ -786,7 +1003,7 @@
           1499
         ],
         "pivot": [
-          438.0,
+          438,
           1521
         ],
         "worldHeight": 110,
@@ -992,76 +1209,6 @@
       ]
     },
     {
-      "id": "characters/decker",
-      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
-      "sizeBytes": 1626812,
-      "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
-      "sha256": "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c",
-      "width": 1024,
-      "height": 1536,
-      "format": "PNG",
-      "mode": "RGBA",
-      "alphaBounds": [
-        65,
-        13,
-        764,
-        1523
-      ],
-      "visibleBoundsAlpha8": [
-        262,
-        15,
-        705,
-        1521
-      ],
-      "transparentPixelCount": 1140500,
-      "visiblePixelCountAlpha8": 419478,
-      "metadata": {
-        "src": "sprites/characters/decker.png",
-        "width": 1024,
-        "height": 1536,
-        "crop": [
-          260,
-          13,
-          447,
-          1510
-        ],
-        "pivot": [
-          495.0,
-          1521
-        ],
-        "worldHeight": 110,
-        "facing": "right",
-        "lampAnchor": [
-          566,
-          324
-        ]
-      },
-      "calibration": {
-        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha footprint: center of lower 8% band",
-        "manualSourcePixelAnchors": {
-          "lampAnchor": [
-            566,
-            324
-          ]
-        },
-        "facingInspected": true,
-        "renderedPlacementVerified": false
-      },
-      "provenance": {
-        "kind": "recovered-original-git-blob",
-        "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
-        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
-        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
-        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker.png"
-      },
-      "canonicalOneToOneCertified": false,
-      "runtimeSurfaces": [
-        "gallery",
-        "world-renderer"
-      ]
-    },
-    {
       "id": "characters/elway",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/elway.png",
       "sizeBytes": 1674049,
@@ -1096,7 +1243,7 @@
           1527
         ],
         "pivot": [
-          507.0,
+          507,
           1531
         ],
         "worldHeight": 110,
@@ -1184,6 +1331,67 @@
       ]
     },
     {
+      "id": "characters/manning",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning.png",
+      "sizeBytes": 1826145,
+      "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc",
+      "sha256": "7d1e5c39cd1d44ee2464be0cf1a8875ea25c68eef8fcbe84e7eb6f564cdeeb19",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        1,
+        1004,
+        1536
+      ],
+      "visibleBoundsAlpha8": [
+        201,
+        10,
+        763,
+        1529
+      ],
+      "transparentPixelCount": 1041547,
+      "visiblePixelCountAlpha8": 512388,
+      "metadata": {
+        "src": "sprites/characters/manning.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          199,
+          8,
+          566,
+          1523
+        ],
+        "pivot": [
+          500,
+          1529
+        ],
+        "worldHeight": 110,
+        "facing": "right"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Alpha footprint: center of lower 8% band",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": false
+      },
+      "provenance": {
+        "kind": "recovered-original-git-blob",
+        "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc",
+        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "characters/manning-ready",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png",
       "sizeBytes": 1947258,
@@ -1218,7 +1426,7 @@
           1514
         ],
         "pivot": [
-          496.0,
+          496,
           1523
         ],
         "worldHeight": 110,
@@ -1254,67 +1462,6 @@
         "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning-ready.png"
-      },
-      "canonicalOneToOneCertified": false,
-      "runtimeSurfaces": [
-        "gallery",
-        "world-renderer"
-      ]
-    },
-    {
-      "id": "characters/manning",
-      "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning.png",
-      "sizeBytes": 1826145,
-      "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc",
-      "sha256": "7d1e5c39cd1d44ee2464be0cf1a8875ea25c68eef8fcbe84e7eb6f564cdeeb19",
-      "width": 1024,
-      "height": 1536,
-      "format": "PNG",
-      "mode": "RGBA",
-      "alphaBounds": [
-        0,
-        1,
-        1004,
-        1536
-      ],
-      "visibleBoundsAlpha8": [
-        201,
-        10,
-        763,
-        1529
-      ],
-      "transparentPixelCount": 1041547,
-      "visiblePixelCountAlpha8": 512388,
-      "metadata": {
-        "src": "sprites/characters/manning.png",
-        "width": 1024,
-        "height": 1536,
-        "crop": [
-          199,
-          8,
-          566,
-          1523
-        ],
-        "pivot": [
-          500.0,
-          1529
-        ],
-        "worldHeight": 110,
-        "facing": "right"
-      },
-      "calibration": {
-        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha footprint: center of lower 8% band",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": true,
-        "renderedPlacementVerified": false
-      },
-      "provenance": {
-        "kind": "recovered-original-git-blob",
-        "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc",
-        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
-        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
-        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning.png"
       },
       "canonicalOneToOneCertified": false,
       "runtimeSurfaces": [
@@ -1479,7 +1626,7 @@
           1524
         ],
         "pivot": [
-          512.0,
+          512,
           1528
         ],
         "worldHeight": 110,
@@ -1811,6 +1958,83 @@
       ]
     },
     {
+      "id": "creatures/queen",
+      "path": "dlc/sea-of-sorrows-visual/sprites/creatures/queen.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sizeBytes": 2208282,
+      "sha256": "0f882eff7928bcd130d09676e3117616656de7dc9c8e401c85b2ded8857f6251",
+      "gitBlobSha": "acc477abe6b425e7254265043355c977d795c01c",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        16,
+        0,
+        1536,
+        1024
+      ],
+      "visibleBoundsAlpha8": [
+        18,
+        2,
+        1520,
+        1017
+      ],
+      "transparentPixelCount": 971691,
+      "opaquePixelCount": 0,
+      "pixelCount": 1572864,
+      "format": "PNG",
+      "visiblePixelCountAlpha8": 546552,
+      "metadata": {
+        "src": "sprites/creatures/queen.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          16,
+          0,
+          1506,
+          1019
+        ],
+        "pivot": [
+          763,
+          1017
+        ],
+        "worldHeight": 425,
+        "facing": "right",
+        "label": "Reine xénomorphe"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected foot midpoint; runtime placement not yet observed.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            763,
+            1017
+          ],
+          "inspection": "feet midpoint on baseline; verify runtime before certification"
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Static real Canvas fixtures in both directions, with prepared game state; not a browser journey or full animation."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "acc477abe6b425e7254265043355c977d795c01c",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/creatures/queen.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json",
+        "promptId": "creatures/queen"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "decor/amber",
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/amber.png",
       "sizeBytes": 1445819,
@@ -2028,7 +2252,7 @@
           845
         ],
         "pivot": [
-          887.0,
+          887,
           865
         ],
         "worldHeight": 97,
@@ -2150,7 +2374,7 @@
           1009
         ],
         "pivot": [
-          768.0,
+          768,
           1013
         ],
         "worldHeight": 224,
@@ -2211,7 +2435,7 @@
           884
         ],
         "pivot": [
-          886.0,
+          886,
           882
         ],
         "worldHeight": 120,
@@ -2455,7 +2679,7 @@
           864
         ],
         "pivot": [
-          887.0,
+          887,
           876
         ],
         "worldHeight": 97,
@@ -2577,7 +2801,7 @@
           1015
         ],
         "pivot": [
-          768.0,
+          768,
           1016
         ],
         "worldHeight": 232,
@@ -2638,7 +2862,7 @@
           623
         ],
         "pivot": [
-          1087.0,
+          1087,
           678
         ],
         "worldHeight": 155,
@@ -2699,7 +2923,7 @@
           1502
         ],
         "pivot": [
-          499.0,
+          499,
           1515
         ],
         "worldHeight": 342,
@@ -2882,7 +3106,7 @@
           1002
         ],
         "pivot": [
-          762.0,
+          762,
           1006
         ],
         "worldHeight": 230,
@@ -3187,7 +3411,7 @@
           852
         ],
         "pivot": [
-          870.0,
+          870,
           862
         ],
         "worldHeight": 194,
@@ -3248,7 +3472,7 @@
           759
         ],
         "pivot": [
-          889.0,
+          889,
           831
         ],
         "worldHeight": 224,
@@ -3370,7 +3594,7 @@
           1004
         ],
         "pivot": [
-          754.0,
+          754,
           1013
         ],
         "worldHeight": 178,
@@ -3431,7 +3655,7 @@
           1195
         ],
         "pivot": [
-          656.0,
+          656,
           1193
         ],
         "worldHeight": 315,
@@ -3553,7 +3777,7 @@
           946
         ],
         "pivot": [
-          828.0,
+          828,
           944
         ],
         "worldHeight": 150,
@@ -3614,7 +3838,7 @@
           1007
         ],
         "pivot": [
-          753.0,
+          753,
           1012
         ],
         "worldHeight": 257,
@@ -3736,7 +3960,7 @@
           1013
         ],
         "pivot": [
-          775.0,
+          775,
           1018
         ],
         "worldHeight": 207,
@@ -3797,7 +4021,7 @@
           958
         ],
         "pivot": [
-          768.0,
+          768,
           988
         ],
         "worldHeight": 193,
@@ -3858,7 +4082,7 @@
           864
         ],
         "pivot": [
-          877.0,
+          877,
           865
         ],
         "worldHeight": 265,
@@ -3919,7 +4143,7 @@
           972
         ],
         "pivot": [
-          784.0,
+          784,
           999
         ],
         "worldHeight": 120,
@@ -4224,7 +4448,7 @@
           860
         ],
         "pivot": [
-          887.0,
+          887,
           872
         ],
         "worldHeight": 66,
@@ -4285,7 +4509,7 @@
           977
         ],
         "pivot": [
-          765.0,
+          765,
           981
         ],
         "worldHeight": 230,
@@ -4407,7 +4631,7 @@
           1021
         ],
         "pivot": [
-          768.0,
+          768,
           1019
         ],
         "worldHeight": 395,
@@ -4651,7 +4875,7 @@
           308
         ],
         "pivot": [
-          1078.0,
+          1078,
           531
         ],
         "worldHeight": 24,
@@ -4712,7 +4936,7 @@
           1006
         ],
         "pivot": [
-          741.0,
+          741,
           1017
         ],
         "worldHeight": 213,
@@ -4895,7 +5119,7 @@
           1161
         ],
         "pivot": [
-          658.0,
+          658,
           1185
         ],
         "worldHeight": 61,
@@ -4956,7 +5180,7 @@
           1300
         ],
         "pivot": [
-          600.0,
+          600,
           1304
         ],
         "worldHeight": 117,
@@ -5078,7 +5302,7 @@
           1448
         ],
         "pivot": [
-          512.0,
+          512,
           1491
         ],
         "worldHeight": 180,
@@ -5174,7 +5398,7 @@
           1281
         ],
         "pivot": [
-          512.0,
+          512,
           1456
         ],
         "worldHeight": 180,
@@ -5385,7 +5609,7 @@
           777
         ],
         "pivot": [
-          876.0,
+          876,
           841
         ],
         "worldHeight": 36,
@@ -5738,7 +5962,7 @@
           1152
         ],
         "pivot": [
-          662.0,
+          662,
           1175
         ],
         "worldHeight": 146,
@@ -5860,7 +6084,7 @@
           921
         ],
         "pivot": [
-          770.0,
+          770,
           972
         ],
         "worldHeight": 30,
@@ -5921,7 +6145,7 @@
           742
         ],
         "pivot": [
-          763.0,
+          763,
           878
         ],
         "worldHeight": 9,
@@ -6050,67 +6274,6 @@
       ]
     },
     {
-      "id": "equipment/locker-open",
-      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png",
-      "sizeBytes": 2372707,
-      "gitBlobSha": "3279415ca84331e0f3d38218e48f6daaef75d9b9",
-      "sha256": "9c9d393e5337509ec1fa7e6cc9b71db4efda7b78986adf02b180ca6935758743",
-      "width": 1024,
-      "height": 1536,
-      "format": "PNG",
-      "mode": "RGBA",
-      "alphaBounds": [
-        0,
-        0,
-        1016,
-        1536
-      ],
-      "visibleBoundsAlpha8": [
-        91,
-        5,
-        940,
-        1528
-      ],
-      "transparentPixelCount": 367863,
-      "visiblePixelCountAlpha8": 1187823,
-      "metadata": {
-        "src": "sprites/equipment/locker-open.png",
-        "width": 1024,
-        "height": 1536,
-        "crop": [
-          89,
-          3,
-          853,
-          1527
-        ],
-        "pivot": [
-          515.5,
-          1528
-        ],
-        "worldHeight": 181,
-        "facing": "none"
-      },
-      "calibration": {
-        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
-        "pivotMethod": "Alpha silhouette bottom-center",
-        "manualSourcePixelAnchors": {},
-        "facingInspected": false,
-        "renderedPlacementVerified": false
-      },
-      "provenance": {
-        "kind": "recovered-original-git-blob",
-        "gitBlobSha": "3279415ca84331e0f3d38218e48f6daaef75d9b9",
-        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
-        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
-        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker-open.png"
-      },
-      "canonicalOneToOneCertified": false,
-      "runtimeSurfaces": [
-        "gallery",
-        "world-renderer"
-      ]
-    },
-    {
       "id": "equipment/locker",
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker.png",
       "sizeBytes": 2014209,
@@ -6172,6 +6335,67 @@
       ]
     },
     {
+      "id": "equipment/locker-open",
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png",
+      "sizeBytes": 2372707,
+      "gitBlobSha": "3279415ca84331e0f3d38218e48f6daaef75d9b9",
+      "sha256": "9c9d393e5337509ec1fa7e6cc9b71db4efda7b78986adf02b180ca6935758743",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        0,
+        1016,
+        1536
+      ],
+      "visibleBoundsAlpha8": [
+        91,
+        5,
+        940,
+        1528
+      ],
+      "transparentPixelCount": 367863,
+      "visiblePixelCountAlpha8": 1187823,
+      "metadata": {
+        "src": "sprites/equipment/locker-open.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          89,
+          3,
+          853,
+          1527
+        ],
+        "pivot": [
+          515.5,
+          1528
+        ],
+        "worldHeight": 181,
+        "facing": "none"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounding box plus 2 source pixels padding; original PNG bytes preserved.",
+        "pivotMethod": "Alpha silhouette bottom-center",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": false,
+        "renderedPlacementVerified": false
+      },
+      "provenance": {
+        "kind": "recovered-original-git-blob",
+        "gitBlobSha": "3279415ca84331e0f3d38218e48f6daaef75d9b9",
+        "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+        "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker-open.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "equipment/medkit",
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/medkit.png",
       "sizeBytes": 3020553,
@@ -6206,7 +6430,7 @@
           992
         ],
         "pivot": [
-          761.0,
+          761,
           1002
         ],
         "worldHeight": 43,
@@ -6267,7 +6491,7 @@
           1514
         ],
         "pivot": [
-          492.0,
+          492,
           1523
         ],
         "worldHeight": 30,
@@ -6328,7 +6552,7 @@
           1081
         ],
         "pivot": [
-          708.0,
+          708,
           1088
         ],
         "worldHeight": 38,
@@ -6389,7 +6613,7 @@
           984
         ],
         "pivot": [
-          756.0,
+          756,
           999
         ],
         "worldHeight": 27,
@@ -6462,7 +6686,7 @@
           512
         ],
         "pivot": [
-          1085.0,
+          1085,
           636
         ],
         "worldHeight": 132,
@@ -6523,7 +6747,7 @@
           842
         ],
         "pivot": [
-          838.0,
+          838,
           902
         ],
         "worldHeight": 43,
@@ -6645,7 +6869,7 @@
           1743
         ],
         "pivot": [
-          447.0,
+          447,
           1751
         ],
         "worldHeight": 160,
@@ -6706,7 +6930,7 @@
           849
         ],
         "pivot": [
-          887.0,
+          887,
           865
         ],
         "worldHeight": 128,
@@ -6828,7 +7052,7 @@
           1342
         ],
         "pivot": [
-          585.0,
+          585,
           1348
         ],
         "worldHeight": 111,
@@ -6847,6 +7071,75 @@
         "ledgerCommit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
         "ledgerPath": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/console.png"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "objectives/icc-handheld",
+      "path": "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png",
+      "sizeBytes": 1773875,
+      "sha256": "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4",
+      "gitBlobSha": "075919e248c603a1c912977c4c79382186ffc528",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaBounds": [
+        113,
+        19,
+        1502,
+        1008
+      ],
+      "visibleBoundsAlpha8": [
+        371,
+        28,
+        1169,
+        1004
+      ],
+      "transparentPixelCount": 1015780,
+      "visiblePixelCountAlpha8": 548704,
+      "metadata": {
+        "src": "sprites/objectives/icc-handheld.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          369,
+          26,
+          802,
+          980
+        ],
+        "pivot": [
+          688.5,
+          1004
+        ],
+        "worldHeight": 30,
+        "facing": "none",
+        "label": "Appareil portatif ICC",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected lower contact band; runtime placement not yet observed.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Static real Canvas fixtures in both directions, with prepared game state; not a browser journey or full animation."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "075919e248c603a1c912977c4c79382186ffc528",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json",
+        "promptId": "objectives/icc-handheld",
+        "sourceReference": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/"
       },
       "canonicalOneToOneCertified": false,
       "runtimeSurfaces": [
@@ -6950,7 +7243,7 @@
           708
         ],
         "pivot": [
-          887.0,
+          887,
           808
         ],
         "worldHeight": 100,
@@ -7011,7 +7304,7 @@
           563
         ],
         "pivot": [
-          1087.0,
+          1087,
           652
         ],
         "worldHeight": 100,
@@ -7133,7 +7426,7 @@
           524
         ],
         "pivot": [
-          992.0,
+          992,
           695
         ],
         "worldHeight": 100,
@@ -7194,7 +7487,7 @@
           523
         ],
         "pivot": [
-          992.0,
+          992,
           667
         ],
         "worldHeight": 100,
@@ -7511,7 +7804,7 @@
           642
         ],
         "pivot": [
-          1085.0,
+          1085,
           696
         ],
         "worldHeight": 70,
@@ -7582,7 +7875,7 @@
           659
         ],
         "pivot": [
-          1090.0,
+          1090,
           699
         ],
         "worldHeight": 70,
@@ -7616,6 +7909,109 @@
       "runtimeSurfaces": [
         "gallery",
         "world-renderer"
+      ]
+    },
+    {
+      "id": "weapons/flame",
+      "path": "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png",
+      "width": 2059,
+      "height": 764,
+      "mode": "RGBA",
+      "sizeBytes": 1558386,
+      "sha256": "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97",
+      "gitBlobSha": "8bc5818eb620cd8b8371cee53b83e7e2ade5891a",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        0,
+        2,
+        2045,
+        764
+      ],
+      "visibleBoundsAlpha8": [
+        38,
+        73,
+        2026,
+        694
+      ],
+      "transparentPixelCount": 900777,
+      "opaquePixelCount": 908,
+      "pixelCount": 1573076,
+      "format": "PNG",
+      "visiblePixelCountAlpha8": 630979,
+      "metadata": {
+        "src": "sprites/weapons/flame.png",
+        "width": 2059,
+        "height": 764,
+        "crop": [
+          36,
+          71,
+          1992,
+          625
+        ],
+        "pivot": [
+          1032,
+          694
+        ],
+        "worldHeight": 24,
+        "facing": "right",
+        "label": "Lance-flammes",
+        "gripAnchor": [
+          916,
+          492
+        ],
+        "supportGripAnchor": [
+          1451,
+          507
+        ],
+        "muzzleAnchor": [
+          2017,
+          265
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected body base and grips; runtime placement not yet observed.",
+        "manualSourcePixelAnchors": {
+          "gripAnchor": [
+            916,
+            492
+          ],
+          "supportGripAnchor": [
+            1451,
+            507
+          ],
+          "muzzleAnchor": [
+            2017,
+            265
+          ],
+          "pivot": [
+            1032,
+            694
+          ],
+          "inspection": "manual full-size visual estimate; verify runtime before certification"
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Static real Canvas fixtures in both directions, with prepared game state; not a browser journey or full animation.",
+        "remainingArtIssue": "Stock extends behind the torso in some poses; support-hand contact and grip occlusion need further artwork."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "8bc5818eb620cd8b8371cee53b83e7e2ade5891a",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json",
+        "promptId": "weapons/flame"
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer",
+        "equipment-interface"
       ]
     },
     {
@@ -7653,7 +8049,7 @@
           841
         ],
         "pivot": [
-          768.0,
+          768,
           931
         ],
         "worldHeight": 23,
@@ -7740,7 +8136,7 @@
           1001
         ],
         "pivot": [
-          769.0,
+          769,
           1010
         ],
         "worldHeight": 12,
@@ -7878,6 +8274,11 @@
       "url": "https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/",
       "type": "publisher",
       "scope": "Author, Decker ICC role, LV-178/New Galveston and living-Xenomorph mission; not a detailed visual design specification."
+    },
+    {
+      "url": "https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/",
+      "type": "primary-authorized-novel-excerpt",
+      "scope": "Chapter 4 Carlyle medical consultation, Decker's medical gown and handheld report device; exact portraits and device design remain adaptations."
     }
   ],
   "scaleReferences": [
@@ -7890,5 +8291,12 @@
     "bytes": 234227391,
     "recordFormat": "UTF-8 rows sorted by id: id\\tsha256\\tsizeBytes\\n",
     "sha256": "5aaa154ce42483758ffc2693dd117938f3c50fd4f3b50d01c17c3c99d746ee7e"
+  },
+  "priorEditionIntegrity": {
+    "sourceCommit": "ff6d538b32f9eb8946f2d296df1b790bf479eef9",
+    "assetCount": 121,
+    "bytes": 237861570,
+    "recordFormat": "UTF-8 rows sorted by id: id\\tsha256\\tsizeBytes\\n",
+    "sha256": "7eb9f37d39496f2508b98b5abd32c2b01ba42f7921a288363e81d65dde5fbd20"
   }
 }

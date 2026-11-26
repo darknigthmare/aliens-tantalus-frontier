@@ -116,6 +116,15 @@ test('armory illustrations preserve availability and leave unsupported weapons r
   assert.equal(JSON.stringify(f.game.state), before);
 });
 
+test('a newly supplied flame illustration preserves its native equip button and availability', () => {
+  const f = boot({ inventory: false, armory: true });
+  f.pack.weapons.flame = { src: 'sprites/weapons/flame.png', width: 2059, height: 764 };
+  const button = f.buttons.flame, action = button.onclick, before = JSON.stringify(f.game.state);
+  f.renderer.draw();
+  assert.ok(imageSources(f).includes('sprites/weapons/flame.png'));
+  assert.equal(button.onclick, action); assert.equal(button.disabled, true);
+  assert.equal(JSON.stringify(f.game.state), before);
+});
 test('unsafe paths and invalid image metadata cannot trigger an image request', () => {
   const f = boot(); f.pack.equipment.medkit.src = '../private.png'; f.pack.equipment.filter.width = 0;
   f.renderer.draw(); assert.equal(imageSources(f).length, 3);

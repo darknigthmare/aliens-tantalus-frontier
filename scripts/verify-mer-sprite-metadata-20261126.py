@@ -21,7 +21,7 @@ from PIL import Image
 HISTORICAL_COUNT = 119
 HISTORICAL_BYTES = 234227391
 HISTORICAL_DIGEST = '5aaa154ce42483758ffc2693dd117938f3c50fd4f3b50d01c17c3c99d746ee7e'
-NEW_PNGS = {
+WALK_PNGS = {
     'characters/decker-walk-a': {
         'sha256': '5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d',
         'sizeBytes': 1867661,
@@ -31,6 +31,29 @@ NEW_PNGS = {
         'sizeBytes': 1766518,
     },
 }
+COMPLETION_PNGS = {
+    "creatures/queen": {
+        "sha256": "0f882eff7928bcd130d09676e3117616656de7dc9c8e401c85b2ded8857f6251",
+        "sizeBytes": 2208282
+    },
+    "weapons/flame": {
+        "sha256": "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97",
+        "sizeBytes": 1558386
+    },
+    "characters/carlyle-physician": {
+        "sha256": "a357b23a4509b913f8467f7efd98815c64b4b5b58f8b9851b94f60c325ec52f7",
+        "sizeBytes": 1560708
+    },
+    "characters/decker-medical-gown": {
+        "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+        "sizeBytes": 1516131
+    },
+    "objectives/icc-handheld": {
+        "sha256": "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4",
+        "sizeBytes": 1773875
+    }
+}
+NEW_PNGS = {**WALK_PNGS, **COMPLETION_PNGS}
 
 
 def require(condition, message):
@@ -49,8 +72,8 @@ def verify(repo):
     entries = {f'{category}/{ident}': entry for category, group in pack['assets'].items() for ident, entry in group.items()}
     rows = manifest['assets']
     require(pack['version'] == 1, 'Unexpected coordinate contract')
-    require(len(rows) == len(entries) == len(actual) == 121, 'Expected 121 individual PNG assets')
-    require(pack['spriteCount'] == manifest['counts']['pngFiles'] == 121, 'Declared PNG counts differ')
+    require(len(rows) == len(entries) == len(actual) == 126, 'Expected 126 individual PNG assets')
+    require(pack['spriteCount'] == manifest['counts']['pngFiles'] == 126, 'Declared PNG counts differ')
     require(len({r['id'] for r in rows}) == len(rows), 'Duplicate asset identifiers')
     require({r['metadata']['src'] for r in rows} == set(actual), 'PNG inventory is not exact')
     require(manifest['canonicalOneToOneCertified'] is False, 'Unsupported canon certification')
@@ -116,35 +139,46 @@ def verify(repo):
                     f'{key}: new generation must not be classified as recovered artwork')
             require(source_path == row['path'] and provenance.get('generatedOn') == '2026-11-26',
                     f'{key}: new source provenance differs')
-            require(provenance.get('promptId') == key.split('/')[1] and
-                    provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json' and
-                    provenance.get('referenceSourcePath') == 'dlc/sea-of-sorrows-visual/sprites/characters/decker.png',
-                    f'{key}: generation prompt/reference provenance missing')
+            if key in WALK_PNGS:
+                require(provenance.get('promptId') == key.split('/')[1] and
+                        provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/CONTINUATION_PROMPTS.json' and
+                        provenance.get('referenceSourcePath') == 'dlc/sea-of-sorrows-visual/sprites/characters/decker.png',
+                        f'{key}: walking prompt/reference provenance missing')
+            else:
+                require(provenance.get('promptId') == key and
+                        provenance.get('promptSource') == 'docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json',
+                        f'{key}: completion prompt provenance missing')
         require(source_path and (repo / source_path).is_file(), f'{key}: original source file missing')
         require((repo / source_path).read_bytes() == data, f'{key}: original PNG bytes were changed')
 
-    require(len(hashes) == 121, 'Duplicate PNG content assigned to different assets')
-    require(total == manifest['counts']['bytes'] == 237861570, 'Unexpected PNG byte total')
+    require(len(hashes) == 126, 'Duplicate PNG content assigned to different assets')
+    require(total == manifest['counts']['bytes'] == 246478952, 'Unexpected PNG byte total')
     require(manifest['counts']['recoveredOriginalPng'] == 110 and manifest['counts']['preservedNewPng'] == 9 and
-            manifest['counts']['newContinuationPng'] == 2, 'Recovery and new-generation counts are conflated')
+            manifest['counts']['newContinuationPng'] == 7 and manifest['counts']['newThisPassPng'] == 5, 'Recovery and new-generation counts are conflated')
     require(dict(sorted(Counter(key.split('/')[0] for key in entries).items())) == manifest['counts']['categories'], 'Category inventory differs')
     for key in ['characters/decker-ready', 'characters/decker-crouch-ready', 'characters/decker-dodge-ready', 'characters/manning-ready']:
         require('handAnchor' in entries[key], f'{key}: primary grip attachment missing')
     for key in ['characters/decker', 'characters/decker-ready', 'characters/decker-crouch', 'characters/decker-crouch-ready', 'characters/decker-dodge', 'characters/decker-dodge-ready']:
         require('lampAnchor' in entries[key], f'{key}: lamp attachment missing')
-    for key in ['weapons/pistol', 'weapons/pulse', 'weapons/foam']:
+    for key in ['weapons/pistol', 'weapons/pulse', 'weapons/foam', 'weapons/flame']:
         require('gripAnchor' in entries[key], f'{key}: weapon grip missing')
     for key in ['stretchers/adams', 'stretchers/elway']:
         require(entries[key]['facing'] == 'none' and 'faceAnchor' in entries[key], f'{key}: invalid patient orientation/attachment')
     require(entries['parasites/normal']['worldHeight'] == 25, 'Normal parasite scale changed')
     require(entries['parasites/royal']['worldHeight'] == 31.75, 'Royal parasite scale changed')
-    for key in NEW_PNGS:
+    for key in WALK_PNGS:
         entry = entries[key]
         require(entry.get('unarmedOnly') is True and 'handAnchor' not in entry,
                 f'{key}: walking pose must remain explicitly unarmed')
         require(entry['worldHeight'] == 110 and entry['facing'] == 'right' and 'lampAnchor' in entry,
                 f'{key}: walking scale/orientation/lamp attachment differs')
         require(entry['pivot'][1] == by_id[key]['visibleBoundsAlpha8'][3], f'{key}: walking footprint not grounded')
+    for key in ['characters/carlyle-physician', 'characters/decker-medical-gown', 'objectives/icc-handheld']:
+        require(entries[key].get('sceneScope') == ['s03'], f'{key}: medical scene scope differs')
+    require(entries['characters/decker-medical-gown'].get('unarmedOnly') is True,
+            'Medical gown must remain unarmed')
+    require('creatures/adult' not in entries and 'weapons/plasma' not in entries,
+            'Refused generations must not be counted as produced PNGs')
     for key, names in {
         'equipment/lamp': ['mountAnchor', 'emitterAnchor'],
         'equipment/light-panel': ['onAnchor', 'offAnchor'],

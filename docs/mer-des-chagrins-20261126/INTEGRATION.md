@@ -1,4 +1,64 @@
-# La Mer des Chagrins — édition visuelle 0.10.2
+# La Mer des Chagrins — édition visuelle 0.10.3
+
+## Résultat du 26 novembre 2026
+
+**126 PNG individuels, 246 478 952 octets.** Cette édition ajoute cinq sprites sur fond transparent aux 121 fichiers du checkpoint 0.10.2, conservés sans changement d’octets. La campagne originale 0.10.0 reste sur son arbre `1024a04d3615e135a0a9de7cbff6819e107a2492`.
+
+La [bible détaillée](BIBLE_COMPLETION_20261126.md) et sa [version structurée](BIBLE_COMPLETION_20261126.json) recensent **239 fiches** : 29 personnages/créatures/variantes, 50 lieux, 7 armes, 119 props/équipements/effets/passages, 5 véhicules, 5 vaisseaux, 22 terrains et 2 planètes. Chaque fiche associe contenu existant, source, qualification, travaux précis et critères de clôture. Les 50 salles sont reliées par 59 liaisons et 113 seuils fonctionnels documentés ; un contrôle du graphe ne certifie pas à lui seul leur traversée physique.
+
+## Ajouts réellement produits et raccordés
+
+| Sprite | Usage livré | Limite conservée |
+| --- | --- | --- |
+| Reine xénomorphe | Corps entier, quatre bras, queue, pivot aux pieds ; raccord au kind queen. | Morphologie inspirée de références filmiques ; états animés, cadavre PNG et exactitude romanesque non certifiés. |
+| Lance-flammes | Arme native et illustration d’armurerie ; prise principale et bouche mesurées, retournement dans les deux sens. | Arme originale au gameplay du projet ; la crosse dépasse le dos dans certaines poses, la seconde main reste imparfaite et aucun nouveau cycle de recharge n’est produit. |
+| Médecin anonyme du Carlyle | Remplace visuellement le cast medic dans s03 seulement. | Le profil composite et les portraits restent distincts ; visage exact interprété. |
+| Decker en tenue médicale | Variante non armée dans s03 ; retour aux poses existantes hors contexte. | Sprite debout fixe, sans séquence assis/allongé/lever. |
+| Appareil portatif ICC | Posé sur le pupitre natif de o02-01 dans s03, avant achèvement. | Boîtier et écran interprétés ; état terminé et autres consoles restent natifs. |
+
+Les prompts exacts, sources et résultats sont conservés dans [GENERATION_0_10_3.json](GENERATION_0_10_3.json). Un objet ou une pose correspond à un PNG individuel. Les pixels générés ne sont pas retouchés par script.
+
+**Deux demandes ont été refusées par l’outil d’image : adulte xénomorphe et fusil plasma.** Aucun fichier n’est compté pour ces sorties. Le rendu natif continue de les présenter. L’alias de présentation `captureAdult → adult` est prêt, sans changement d’espèce ni de simulation ; il reste en repli tant que l’image adulte est absente.
+
+## Accès
+
+- [Édition visuelle](../../dlc/sea-of-sorrows-visual/index.html).
+- [Galerie des 126 images](../../dlc/sea-of-sorrows-visual/galerie.html).
+- [Manifeste des images](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
+- [Manifeste exact de distribution](../../dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json).
+- [Preuves de cette édition](VALIDATION_0_10_3.json).
+- [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58).
+
+**122 images ont un raccord au monde, quatre sont réservées à l’interface et les 126 figurent dans la galerie.** Ce décompte décrit les chemins de présentation, pas le nombre de sprites aperçus dans une campagne jouée.
+
+L’overlay conserve les contrôles, la collision, les identifiants, les objectifs et la clé de sauvegarde du DLC. Un PNG absent, incorrect ou sans ancre requise laisse fonctionner le rendu natif. Les personnages armés ne prennent pas la tenue médicale ; les portraits de dossier restent ceux des identités d’origine.
+
+## Vérifications de cette édition
+
+| Contrôle | Résultat | Portée |
+| --- | --- | --- |
+| `npm run test:mer-des-chagrins-visual` | **87/87 réussis**, 0 échec | Renderer, équipement, galerie, admission ; doublures Canvas/Image/DOM. |
+| `npm run check:mer-des-chagrins-sprites` | **126 PNG vérifiés**, 246 478 952 octets | Dimensions, alpha, empreintes, pivots, sources, distinction des 119 historiques, des deux marches et des cinq ajouts. |
+| QA Canvas avec les vrais PNG | **126 images chargées, 50 salles, 24 combinaisons posture/arme/direction** | États de jeu et projections préparés ; aucune campagne clavier complète. |
+| Inspection des cinq ajouts | **Effectuée sur les captures Canvas de cette édition** | Corps, pieds, prise/bouche et pupitre ; n’authentifie pas un modèle canonique. |
+| Distribution de l’overlay | 133 fichiers publics copiés et vérifiés ; manifestes, bible, prompts et QA source uniquement | La vérification du lot est séparée du build global et de la CI distante. |
+
+L’environnement a été interrompu puis rétabli. Les tests et mesures finaux ci-dessus ont été réexécutés après restauration des sources. Les preuves antérieures restent dans [VALIDATION.json](VALIDATION.json) ; leurs résultats de build et de campagne ne sont pas transférés à cette édition.
+
+Le build global et les parcours navigateur de cette continuation ne sont pas certifiés par ce guide. Leur éventuel résultat distant reste visible dans les checks de la PR. Le contrôle de distribution propre au lot, ses chemins exacts et ses empreintes sont consignés séparément.
+
+## Fidélité et travail encore ouvert
+
+La notice Titan et l’extrait autorisé du chapitre 4 étayent des identités, lieux, objets et traits décrits. Ils ne fixent pas tous les visages, plans, matières, dimensions et silhouettes. Les données de la dramatique Audible sont séparées du roman ; le Carlyle ne devient pas le Kiangya et le médecin anonyme n’est pas renommé Markowitz ou Herschel.
+
+La fidélité globale **1:1 reste non certifiée**. Le roman intégral n’a pas été confronté. Les fiches signalent les éléments originaux du jeu, dont dix salles annexes, le lance-flammes et les trois attaches du boss. Deux poses de marche et des sprites statiques ne ferment pas les cycles de déplacement, tir, rechargement, consultation, interaction ou mort.
+
+Les documents README.md, MANIFEST.json et RECOVERY.md de ce dossier décrivent le checkpoint historique de 27 images. Le présent guide, le manifeste courant et VALIDATION_0_10_3.json décrivent l’édition 0.10.3.
+
+<details>
+<summary>Guide historique 0.10.2 — preuves propres à la version précédente</summary>
+
+## La Mer des Chagrins — édition visuelle 0.10.2
 
 ## Résultat de la continuation du 26 novembre 2026
 
@@ -121,3 +181,6 @@ npm run check:built
 ```
 
 La dépendance Canvas de QA est fournie par l’environnement de travail et ne devient pas une dépendance du jeu. L’existence de ces commandes ne constitue pas leur résultat : le reçu de validation indique précisément les exécutions terminées.
+
+
+</details>

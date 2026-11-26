@@ -5,7 +5,7 @@
 root.SoSArtPack = {
   "version": 1,
   "coordinateSpace": "source-image-pixels",
-  "spriteCount": 121,
+  "spriteCount": 126,
   "assets": {
     "characters": {
       "adams": {
@@ -70,7 +70,7 @@ root.SoSArtPack = {
           1533
         ],
         "pivot": [
-          516.0,
+          516,
           1535
         ],
         "worldHeight": 110,
@@ -87,7 +87,7 @@ root.SoSArtPack = {
           1522
         ],
         "pivot": [
-          500.0,
+          500,
           1524
         ],
         "worldHeight": 110,
@@ -171,7 +171,7 @@ root.SoSArtPack = {
           992
         ],
         "pivot": [
-          594.0,
+          594,
           1006
         ],
         "worldHeight": 85.8,
@@ -221,7 +221,7 @@ root.SoSArtPack = {
           1499
         ],
         "pivot": [
-          438.0,
+          438,
           1521
         ],
         "worldHeight": 110,
@@ -294,7 +294,7 @@ root.SoSArtPack = {
           1510
         ],
         "pivot": [
-          495.0,
+          495,
           1521
         ],
         "worldHeight": 110,
@@ -315,7 +315,7 @@ root.SoSArtPack = {
           1527
         ],
         "pivot": [
-          507.0,
+          507,
           1531
         ],
         "worldHeight": 110,
@@ -349,7 +349,7 @@ root.SoSArtPack = {
           1514
         ],
         "pivot": [
-          496.0,
+          496,
           1523
         ],
         "worldHeight": 110,
@@ -374,7 +374,7 @@ root.SoSArtPack = {
           1523
         ],
         "pivot": [
-          500.0,
+          500,
           1529
         ],
         "worldHeight": 110,
@@ -425,7 +425,7 @@ root.SoSArtPack = {
           1524
         ],
         "pivot": [
-          512.0,
+          512,
           1528
         ],
         "worldHeight": 110,
@@ -481,6 +481,49 @@ root.SoSArtPack = {
         ],
         "worldHeight": 110,
         "facing": "right"
+      },
+      "carlyle-physician": {
+        "src": "sprites/characters/carlyle-physician.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          283,
+          10,
+          411,
+          1521
+        ],
+        "pivot": [
+          471,
+          1529
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "label": "Médecin anonyme du Carlyle",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "decker-medical-gown": {
+        "src": "sprites/characters/decker-medical-gown.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          261,
+          14,
+          448,
+          1498
+        ],
+        "pivot": [
+          481,
+          1510
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "label": "Decker · tenue médicale",
+        "sceneScope": [
+          "s03"
+        ],
+        "unarmedOnly": true
       }
     },
     "corpses": {
@@ -519,6 +562,24 @@ root.SoSArtPack = {
         ],
         "worldHeight": 30,
         "facing": "right"
+      },
+      "queen": {
+        "src": "sprites/creatures/queen.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          16,
+          0,
+          1506,
+          1019
+        ],
+        "pivot": [
+          763,
+          1017
+        ],
+        "worldHeight": 425,
+        "facing": "right",
+        "label": "Reine xénomorphe"
       }
     },
     "decor": {
@@ -584,7 +645,7 @@ root.SoSArtPack = {
           845
         ],
         "pivot": [
-          887.0,
+          887,
           865
         ],
         "worldHeight": 97,
@@ -618,7 +679,7 @@ root.SoSArtPack = {
           1009
         ],
         "pivot": [
-          768.0,
+          768,
           1013
         ],
         "worldHeight": 224,
@@ -635,7 +696,7 @@ root.SoSArtPack = {
           884
         ],
         "pivot": [
-          886.0,
+          886,
           882
         ],
         "worldHeight": 120,
@@ -703,7 +764,7 @@ root.SoSArtPack = {
           864
         ],
         "pivot": [
-          887.0,
+          887,
           876
         ],
         "worldHeight": 97,
@@ -737,7 +798,7 @@ root.SoSArtPack = {
           1015
         ],
         "pivot": [
-          768.0,
+          768,
           1016
         ],
         "worldHeight": 232,
@@ -754,7 +815,7 @@ root.SoSArtPack = {
           623
         ],
         "pivot": [
-          1087.0,
+          1087,
           678
         ],
         "worldHeight": 155,
@@ -771,7 +832,7 @@ root.SoSArtPack = {
           1502
         ],
         "pivot": [
-          499.0,
+          499,
           1515
         ],
         "worldHeight": 342,
@@ -822,7 +883,7 @@ root.SoSArtPack = {
           1002
         ],
         "pivot": [
-          762.0,
+          762,
           1006
         ],
         "worldHeight": 230,
@@ -907,7 +968,7 @@ root.SoSArtPack = {
           852
         ],
         "pivot": [
-          870.0,
+          870,
           862
         ],
         "worldHeight": 194,
@@ -924,7 +985,7 @@ root.SoSArtPack = {
           759
         ],
         "pivot": [
-          889.0,
+          889,
           831
         ],
         "worldHeight": 224,
@@ -958,7 +1019,7 @@ root.SoSArtPack = {
           1004
         ],
         "pivot": [
-          754.0,
+          754,
           1013
         ],
         "worldHeight": 178,
@@ -975,7 +1036,7 @@ root.SoSArtPack = {
           1195
         ],
         "pivot": [
-          656.0,
+          656,
           1193
         ],
         "worldHeight": 315,
@@ -1009,7 +1070,7 @@ root.SoSArtPack = {
           946
         ],
         "pivot": [
-          828.0,
+          828,
           944
         ],
         "worldHeight": 150,
@@ -1026,7 +1087,7 @@ root.SoSArtPack = {
           1007
         ],
         "pivot": [
-          753.0,
+          753,
           1012
         ],
         "worldHeight": 257,
@@ -1060,7 +1121,7 @@ root.SoSArtPack = {
           1013
         ],
         "pivot": [
-          775.0,
+          775,
           1018
         ],
         "worldHeight": 207,
@@ -1077,7 +1138,7 @@ root.SoSArtPack = {
           958
         ],
         "pivot": [
-          768.0,
+          768,
           988
         ],
         "worldHeight": 193,
@@ -1094,7 +1155,7 @@ root.SoSArtPack = {
           864
         ],
         "pivot": [
-          877.0,
+          877,
           865
         ],
         "worldHeight": 265,
@@ -1111,7 +1172,7 @@ root.SoSArtPack = {
           972
         ],
         "pivot": [
-          784.0,
+          784,
           999
         ],
         "worldHeight": 120,
@@ -1196,7 +1257,7 @@ root.SoSArtPack = {
           860
         ],
         "pivot": [
-          887.0,
+          887,
           872
         ],
         "worldHeight": 66,
@@ -1213,7 +1274,7 @@ root.SoSArtPack = {
           977
         ],
         "pivot": [
-          765.0,
+          765,
           981
         ],
         "worldHeight": 230,
@@ -1247,7 +1308,7 @@ root.SoSArtPack = {
           1021
         ],
         "pivot": [
-          768.0,
+          768,
           1019
         ],
         "worldHeight": 395,
@@ -1315,7 +1376,7 @@ root.SoSArtPack = {
           308
         ],
         "pivot": [
-          1078.0,
+          1078,
           531
         ],
         "worldHeight": 24,
@@ -1332,7 +1393,7 @@ root.SoSArtPack = {
           1006
         ],
         "pivot": [
-          741.0,
+          741,
           1017
         ],
         "worldHeight": 213,
@@ -1385,7 +1446,7 @@ root.SoSArtPack = {
           1161
         ],
         "pivot": [
-          658.0,
+          658,
           1185
         ],
         "worldHeight": 61,
@@ -1402,7 +1463,7 @@ root.SoSArtPack = {
           1300
         ],
         "pivot": [
-          600.0,
+          600,
           1304
         ],
         "worldHeight": 117,
@@ -1438,7 +1499,7 @@ root.SoSArtPack = {
           1448
         ],
         "pivot": [
-          512.0,
+          512,
           1491
         ],
         "worldHeight": 180,
@@ -1487,7 +1548,7 @@ root.SoSArtPack = {
           1281
         ],
         "pivot": [
-          512.0,
+          512,
           1456
         ],
         "worldHeight": 180,
@@ -1549,7 +1610,7 @@ root.SoSArtPack = {
           777
         ],
         "pivot": [
-          876.0,
+          876,
           841
         ],
         "worldHeight": 36,
@@ -1652,7 +1713,7 @@ root.SoSArtPack = {
           1152
         ],
         "pivot": [
-          662.0,
+          662,
           1175
         ],
         "worldHeight": 146,
@@ -1686,7 +1747,7 @@ root.SoSArtPack = {
           921
         ],
         "pivot": [
-          770.0,
+          770,
           972
         ],
         "worldHeight": 30,
@@ -1703,7 +1764,7 @@ root.SoSArtPack = {
           742
         ],
         "pivot": [
-          763.0,
+          763,
           878
         ],
         "worldHeight": 9,
@@ -1787,7 +1848,7 @@ root.SoSArtPack = {
           992
         ],
         "pivot": [
-          761.0,
+          761,
           1002
         ],
         "worldHeight": 43,
@@ -1804,7 +1865,7 @@ root.SoSArtPack = {
           1514
         ],
         "pivot": [
-          492.0,
+          492,
           1523
         ],
         "worldHeight": 30,
@@ -1821,7 +1882,7 @@ root.SoSArtPack = {
           1081
         ],
         "pivot": [
-          708.0,
+          708,
           1088
         ],
         "worldHeight": 38,
@@ -1838,7 +1899,7 @@ root.SoSArtPack = {
           984
         ],
         "pivot": [
-          756.0,
+          756,
           999
         ],
         "worldHeight": 27,
@@ -1859,7 +1920,7 @@ root.SoSArtPack = {
           512
         ],
         "pivot": [
-          1085.0,
+          1085,
           636
         ],
         "worldHeight": 132,
@@ -1876,7 +1937,7 @@ root.SoSArtPack = {
           842
         ],
         "pivot": [
-          838.0,
+          838,
           902
         ],
         "worldHeight": 43,
@@ -1910,7 +1971,7 @@ root.SoSArtPack = {
           1743
         ],
         "pivot": [
-          447.0,
+          447,
           1751
         ],
         "worldHeight": 160,
@@ -1929,7 +1990,7 @@ root.SoSArtPack = {
           849
         ],
         "pivot": [
-          887.0,
+          887,
           865
         ],
         "worldHeight": 128,
@@ -1963,7 +2024,7 @@ root.SoSArtPack = {
           1342
         ],
         "pivot": [
-          585.0,
+          585,
           1348
         ],
         "worldHeight": 111,
@@ -1985,6 +2046,27 @@ root.SoSArtPack = {
         ],
         "worldHeight": 100,
         "facing": "none"
+      },
+      "icc-handheld": {
+        "src": "sprites/objectives/icc-handheld.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          369,
+          26,
+          802,
+          980
+        ],
+        "pivot": [
+          688.5,
+          1004
+        ],
+        "worldHeight": 30,
+        "facing": "none",
+        "label": "Appareil portatif ICC",
+        "sceneScope": [
+          "s03"
+        ]
       }
     },
     "obstacles": {
@@ -1999,7 +2081,7 @@ root.SoSArtPack = {
           708
         ],
         "pivot": [
-          887.0,
+          887,
           808
         ],
         "worldHeight": 100,
@@ -2016,7 +2098,7 @@ root.SoSArtPack = {
           563
         ],
         "pivot": [
-          1087.0,
+          1087,
           652
         ],
         "worldHeight": 100,
@@ -2050,7 +2132,7 @@ root.SoSArtPack = {
           524
         ],
         "pivot": [
-          992.0,
+          992,
           695
         ],
         "worldHeight": 100,
@@ -2067,7 +2149,7 @@ root.SoSArtPack = {
           523
         ],
         "pivot": [
-          992.0,
+          992,
           667
         ],
         "worldHeight": 100,
@@ -2160,7 +2242,7 @@ root.SoSArtPack = {
           642
         ],
         "pivot": [
-          1085.0,
+          1085,
           696
         ],
         "worldHeight": 70,
@@ -2182,7 +2264,7 @@ root.SoSArtPack = {
           659
         ],
         "pivot": [
-          1090.0,
+          1090,
           699
         ],
         "worldHeight": 70,
@@ -2206,7 +2288,7 @@ root.SoSArtPack = {
           841
         ],
         "pivot": [
-          768.0,
+          768,
           931
         ],
         "worldHeight": 23,
@@ -2235,7 +2317,7 @@ root.SoSArtPack = {
           1001
         ],
         "pivot": [
-          769.0,
+          769,
           1010
         ],
         "worldHeight": 12,
@@ -2277,6 +2359,36 @@ root.SoSArtPack = {
         "muzzleAnchor": [
           1753,
           352
+        ]
+      },
+      "flame": {
+        "src": "sprites/weapons/flame.png",
+        "width": 2059,
+        "height": 764,
+        "crop": [
+          36,
+          71,
+          1992,
+          625
+        ],
+        "pivot": [
+          1032,
+          694
+        ],
+        "worldHeight": 24,
+        "facing": "right",
+        "label": "Lance-flammes",
+        "gripAnchor": [
+          916,
+          492
+        ],
+        "supportGripAnchor": [
+          1451,
+          507
+        ],
+        "muzzleAnchor": [
+          2017,
+          265
         ]
       }
     }
