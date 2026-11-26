@@ -1,6 +1,6 @@
 # La Mer des Chagrins — bible de complétion des huit domaines
 
-**Édition 0.10.3 : 126 PNG et 239 fiches détaillées.** Les cinq ajouts et leur niveau de vérification sont décrits dans la section de continuation ; le recensement de référence ci-dessous reste épinglé au checkpoint précédent.
+**Édition courante 0.10.4 : 139 PNG et 239 fiches détaillées.** Le registre courant suit 576 travaux distincts. Les checkpoints 0.10.2 et 0.10.3 conservent leurs chiffres et leurs preuves propres.
 
 **Référence : édition visuelle 0.10.2, PR #58, commit `ff6d538b32f9eb8946f2d296df1b790bf479eef9`.** Ce complément recense les définitions et les images réellement présentes à ce checkpoint, puis détaille le travail restant pour personnages, lieux, armes, props, véhicules, vaisseaux, terrain et planètes. Le roman intégral n’a pas été confronté : le recensement de toutes ses omissions et la fidélité globale 1:1 restent ouverts.
 
@@ -24,9 +24,49 @@ La [version structurée](BIBLE_COMPLETION_20261126.json) conserve les placements
 
 Le manifeste de référence déclare 117 raccordements de monde et quatre images d’interface. Cela ne signifie pas 117 sprites observés dans chaque parcours : Silas, Muller, Dave et Pritchett ont un portrait mais aucun placement `room.cast` dans les 50 salles. Les mesures de rendu restent celles du reçu qui les a réellement observées.
 
-## Édition 0.10.3 — ajouts de cette publication
+## Édition 0.10.4 — registre courant et production par état
 
-**126 PNG individuels, 246 478 952 octets** : les 121 du checkpoint et cinq nouvelles sources inchangées. Les métadonnées actuelles sont dans [SPRITE_MANIFEST.json](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), les prompts exacts dans [GENERATION_0_10_3.json](GENERATION_0_10_3.json), les preuves dans [VALIDATION_0_10_3.json](VALIDATION_0_10_3.json).
+**13 nouveaux PNG, 139 fichiers uniques dans le lot courant.** Le relevé de référence reste à 121 images ; les cinq ajouts 0.10.3 restent leur propre checkpoint. Les 13 sources de cette passe représentent 24 115 511 octets. Les [prompts exacts](GENERATION_0_10_4.json), le [manifeste](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json) et le [reçu de validation](VALIDATION_0_10_4.json) distinguent production, raccordement et vérification.
+
+| Asset de cette passe | État ou usage couvert |
+| --- | --- |
+| `characters/decker-focus` | Concentration native, seulement à l’arrêt, non armé, hors s03, sans posture réduite ni travail actif ; aucune capacité ajoutée. |
+| `characters/decker-medical-report` | Consultation debout de s03 pendant activeWork o02-01, à l’arrêt et non armé ; appareil tenu unique, pose de couchette non produite. |
+| `characters/decker-walk-pass-a` | Pose de passage de marche A, distincte des deux contacts historiques ; usage soumis au déplacement non armé. |
+| `characters/decker-walk-pass-b` | Pose de passage B intégrée entre les contacts historiques ; genou haut et transitions encore sommaires, cycle complet non certifié. |
+| `decor/medical-chart` | Dossier papier posé sur la couchette existante de s03 ; pas de données personnelles ou de nouvelle action médicale. |
+| `decor/medical-cups` | Deux contenants sur le meuble existant de s03 ; un seul PNG et aucune nouvelle consommation jouable. |
+| `devices/parts-empty` | Dispositif après collecte/validation, avec indication VIDE ; marqueurs, ressources et interactions natifs conservés. |
+| `doors/lift-cage` | Cage intégrée aux deux vrais seuils s14/droite et s15/gauche ; parois, rails, barres fermées, labels et transitions natifs conservés. Aucun trajet vertical animé. |
+| `equipment/locker-stocked` | Casier ouvert avec réserves génériques ; l’image ne compte pas chaque objet réel. Après épuisement, ancien locker-open vide et dépôt encore possible. |
+| `equipment/supply-empty` | État de fourniture épuisée selon supplyUsed ; aucun stock restitué. |
+| `planets/lv178-orbital` | Illustration orbitale cadrée dans la baie de s39 ; globe interprété, cadre et signal strike_seen natifs conservés. |
+| `terrain/sand` | Texture de surface limitée au sol sand ; aucune carte ou topographie canonique revendiquée. |
+| `terrain/silica` | Texture de surface limitée au sol silica ; les gravats et passages gardent leur géométrie native. |
+
+**Réemploi contrôlé.** Le PNG historique `equipment/locker-open` est déjà vide ; `equipment/armory-rack` est un cadre sans arme. Leur réemploi après épuisement ou acquisition ne compte pas comme une nouvelle image. Les états et ressources demeurent ceux de la simulation.
+
+**Production et limites artistiques.** Seize appels de génération ont donné treize fichiers retenus, deux versions de cage remplacées et un refus pour `weapons/flame-compact`. Aucun PNG refusé ou remplacé n’entre dans les treize ajouts. La crosse du lance-flammes historique et l’appui de sa seconde main restent imparfaits. Le passage B de marche lève fortement le genou ; les transitions des quatre poses restent sommaires. Concentration et rapport sont des poses fixes conditionnelles, pas des cycles complets.
+
+### Ce que signifie le statut courant
+
+Les **576 travaux identifiés** du checkpoint sont conservés mot pour mot dans le JSON. Le nouveau registre `currentWorkLedger` donne leur statut courant et la version de la preuve. Les tâches de source, d’animation, de scène ou de parcours restent indépendantes de la simple présence du PNG.
+
+| Statut du registre courant | Travaux |
+| --- | ---: |
+| Ouvert | 552 |
+| Réalisé en partie | 16 |
+| Résolu dans le périmètre déclaré | 8 |
+
+Ces comptes ne sont pas une mesure de fidélité, de temps restant ou de pourcentage de jeu terminé. Les **239 fiches possèdent désormais un contrat de production propre à leur type**, en plus des placements, sources et critères historiques. Aucun des huit domaines n’est déclaré intégralement achevé.
+
+**Vérifications 0.10.4.** Suite visuelle finale : 105/105 tests réussis, zéro échec et zéro ignoré. Les 139 PNG sont contrôlés (270 594 463 octets), les 126 images et lignes de métadonnées antérieures préservées. La QA Canvas finale décode 139 images, rend 50 salles, 24 cas posture/arme, 16 locomotions, 42 diagnostics dont 23 replis de porte identiques pixel par pixel, 11 cas médicaux/reine historiques et 35 cas de cette édition. Les 13 nouveaux PNG sont effectivement dessinés parmi 125 types observés. Treize captures finales totalisent 11 375 616 octets. Les salles, positions, états et grossissements sont des fixtures déclarées ; il ne s’agit pas d’une campagne parcourue dans un navigateur. Aucun cycle complet d’animation ni fidélité globale 1:1 n’est certifié.
+
+**Fidélité.** Les dimensions, palettes, détails de matière, globe et dessins industriels sont des interprétations du projet. Le chapitre 4 étaye seulement les traits explicitement décrits de la scène médicale. Le roman intégral et les variantes audio ne sont pas confrontés ; `canonicalOneToOneCertified` reste faux.
+
+## Édition 0.10.3 — checkpoint historique de cinq ajouts
+
+**126 PNG individuels, 246 478 952 octets** : les 121 du checkpoint et cinq nouvelles sources inchangées. Les métadonnées de ce checkpoint sont dans le [manifeste 0.10.3 épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), les prompts exacts dans [GENERATION_0_10_3.json](GENERATION_0_10_3.json), les preuves dans [VALIDATION_0_10_3.json](VALIDATION_0_10_3.json).
 
 | Identifiant | Raccord livré | Qualification |
 | --- | --- | --- |
@@ -94,6 +134,13 @@ Le cadre et le panneau PNG conviennent seulement aux baies industrielles compati
 
 ### MER-PERS-decker — Alan Decker
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Alan Decker entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-focus`, `characters/decker-medical-report`, `characters/decker-walk-pass-a`, `characters/decker-walk-pass-b`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-decker-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Inspecteur ICC, civil
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s01`, `s02`, `s03`, `s04`, `s05`, `s06`, `s07`, `s08`, `s09`, `s10`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s19`, `s20`, `s21`, `s22`, `s23`, `s24`, `s25`, `s26`, `s27`, `s28`, `s29`, `s30`, `s31`, `s32`, `s33`, `s34`, `s35`, `s36`, `s37`, `s38`, `s39`, `s40`, `s41`, `s42`, `s43`, `s44`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `characters/decker-crouch-ready`, `characters/decker-crouch`, `characters/decker-dodge-ready`, `characters/decker-dodge`, `characters/decker-ready`, `characters/decker-walk-a`, `characters/decker-walk-b`, `characters/decker`.
@@ -104,7 +151,7 @@ Inspecteur ICC, civil
 
 **Qualification.** documented-role-incomplete-appearance. Références : [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/), [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Fonction ICC confirmée par Titan. Visage, yeux, coiffure et mesures non vérifiés. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les deux contacts de marche puis course, visée, tir, recharge, interaction et franchissements réellement disponibles. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -116,6 +163,9 @@ Inspecteur ICC, civil
 
 ### MER-PERS-manning — Manning
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Manning entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Chef mercenaire
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s09`, `s10`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s19`, `s20`, `s21`, `s22`, `s23`, `s24`, `s25`, `s26`, `s27`, `s28`, `s29`, `s30`, `s31`, `s32`, `s33`, `s34`, `s35`, `s36`, `s37`. Images : `characters/manning-ready`, `characters/manning`.
@@ -126,7 +176,7 @@ Chef mercenaire
 
 **Qualification.** documented-role-incomplete-appearance. Références : [manning](https://avp.fandom.com/wiki/Manning), [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Cheveux noirs grisonnants et forte carrure : notice Xenopedia. Tenue et visage interprétés. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Marche, arrêt, tir et reprise du compagnon ; les deux images présentes ne sont pas des cycles. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -138,6 +188,9 @@ Chef mercenaire
 
 ### MER-PERS-adams — Adams
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Adams entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 2 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Mercenaire puis porteuse
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s09`, `s12`. Images : `characters/adams`, `stretchers/adams`, `parasites/royal`.
@@ -148,7 +201,7 @@ Mercenaire puis porteuse
 
 **Qualification.** documented-role-incomplete-appearance. Références : [adams](https://avp.fandom.com/wiki/Adams), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Peau hâlée, cheveux auburn courts et taches de rousseur : notice Xenopedia. Parasite adhérent royal, plus volumineux et à doigts palmés : notice secondaire ; échelle graphique interprétée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — États vivants nécessaires, transport, halte et arrimage avec maintien du parasite. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -160,6 +213,9 @@ Mercenaire puis porteuse
 
 ### MER-PERS-elway — Elway
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Elway entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Mercenaire puis porteur
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s10`. Images : `characters/elway`, `stretchers/elway`, `parasites/normal`.
@@ -170,7 +226,7 @@ Mercenaire puis porteur
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Rôle de porteur recoupé. Apparence non vérifiée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — États vivants nécessaires, transport, halte et arrimage avec maintien du parasite. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -182,6 +238,9 @@ Mercenaire puis porteur
 
 ### MER-PERS-rollins — Andrea Rollins
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Andrea Rollins entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 2 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Mandataire Weyland-Yutani
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s08`, `s38`. Images : `characters/rollins`.
@@ -192,7 +251,7 @@ Mandataire Weyland-Yutani
 
 **Qualification.** documented-role-incomplete-appearance. Références : [rollins](https://avp.fandom.com/wiki/Andrea_Rollins), [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Cheveux bruns indiqués par Xenopedia. Pas de visage emprunté à la comédienne audio ; tenue interprétée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -202,6 +261,9 @@ Mandataire Weyland-Yutani
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-harriman — Walter Harriman
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Walter Harriman entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Commission, Chicago
 
@@ -213,7 +275,7 @@ Commission, Chicago
 
 **Qualification.** documented-role-incomplete-appearance. Références : [excerpt](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Nom et bureau à Chicago : extrait public. Apparence non vérifiée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -223,6 +285,9 @@ Commission, Chicago
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-rand — Lucas Rand
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Lucas Rand entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Chantier de relevés
 
@@ -234,7 +299,7 @@ Chantier de relevés
 
 **Qualification.** documented-role-incomplete-appearance. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/), [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Rôle de chantier : référence secondaire. Apparence interprétée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -244,6 +309,9 @@ Chantier de relevés
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-bronson — Bronson
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Bronson entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Technicien du chantier
 
@@ -255,7 +323,7 @@ Technicien du chantier
 
 **Qualification.** documented-role-incomplete-appearance. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Nom dans le relevé secondaire. Apparence non vérifiée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -265,6 +333,9 @@ Technicien du chantier
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-badejo — Badejo
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Badejo entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Technicien du chantier
 
@@ -276,7 +347,7 @@ Technicien du chantier
 
 **Qualification.** documented-role-incomplete-appearance. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Nom dans le relevé secondaire. Aucune apparence déduite du patronyme. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -286,6 +357,9 @@ Technicien du chantier
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-medic — Équipe médicale
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Équipe médicale entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 2 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Personnel non individualisé
 
@@ -297,7 +371,7 @@ Personnel non individualisé
 
 **Qualification.** original-composite. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · design** — Conserver l'identité composite et ne pas la rebaptiser pour combler une identité nommée. **À vérifier :** Le statut original demeure visible.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -307,6 +381,9 @@ Personnel non individualisé
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-cho — Cho
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Cho entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Relais mercenaire
 
@@ -318,7 +395,7 @@ Relais mercenaire
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Rôle de relais établi par source secondaire. Apparence non vérifiée ; aucune origine déduite du nom. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -328,6 +405,9 @@ Relais mercenaire
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-silas — Silas
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Silas entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Équipe archéologique
 
@@ -339,7 +419,7 @@ Relais mercenaire
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Présence dans le dossier d’incident ; apparition vivante non ajoutée arbitrairement. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · integration** — Le portrait existe, mais aucun room.cast ne place ce rôle ; documenter ses interventions et son devenir avant création de scène. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -351,6 +431,9 @@ Relais mercenaire
 
 ### MER-PERS-muller — Muller
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Muller entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Mercenaire de la remontée
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Aucune salle dédiée ou occurrence statique. Images : `characters/muller`.
@@ -361,7 +444,7 @@ Mercenaire de la remontée
 
 **Qualification.** documented-role-incomplete-appearance. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Rôle attesté secondairement ; apparence interprétée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · integration** — Le portrait existe, mais aucun room.cast ne place ce rôle ; documenter ses interventions et son devenir avant création de scène. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -373,6 +456,9 @@ Mercenaire de la remontée
 
 ### MER-PERS-dave — Dave
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Dave entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Mercenaire de la remontée
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Aucune salle dédiée ou occurrence statique. Images : `characters/dave`.
@@ -383,7 +469,7 @@ Mercenaire de la remontée
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Rôle attesté secondairement ; apparence interprétée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · integration** — Le portrait existe, mais aucun room.cast ne place ce rôle ; documenter ses interventions et son devenir avant création de scène. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -395,6 +481,9 @@ Mercenaire de la remontée
 
 ### MER-PERS-pritchett — Pritchett
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Pritchett entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Pilote de la navette
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Aucune salle dédiée ou occurrence statique. Images : `characters/pritchett`.
@@ -405,7 +494,7 @@ Pilote de la navette
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Pilote cité ; mort scénarisée détaillée non reconstituée dans cette passe. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · integration** — Le portrait existe, mais aucun room.cast ne place ce rôle ; documenter ses interventions et son devenir avant création de scène. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -417,6 +506,9 @@ Pilote de la navette
 
 ### MER-PERS-cherbourg — Cherbourg
 
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Cherbourg entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 1 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
+
 Commandement du transport
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.castForRoom ; voies propres au joueur et au compagnon`. Salles concernées : `s39`. Images : `characters/cherbourg`.
@@ -427,7 +519,7 @@ Commandement du transport
 
 **Qualification.** documented-role-incomplete-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Nom dans le relevé secondaire. Apparence et uniforme non vérifiés. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Prévoir parole, posture de consultation ou gestes professionnels seulement pour les actions de sa scène. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -437,6 +529,9 @@ Commandement du transport
 **Sources du projet :** [dlc/sea-of-sorrows/data/fidelity.json](../../dlc/sea-of-sorrows/data/fidelity.json), [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js), [dlc/sea-of-sorrows/src/main.js](../../dlc/sea-of-sorrows/src/main.js).
 
 ### MER-PERS-worker — Personnel
+
+**Contrat de production courant.** Conserver identité, visage de référence du projet, palette et tenue de Personnel entre ses vues. Raccorder uniquement aux actions natives : joueur/compagnon ou fenêtres des 0 placements statiques recensés ; un portrait ne crée pas de placement. Pose, ligne des pieds, pivot, mains et occlusion doivent rester cohérents dans les deux directions ; les mesures sont artistiques, pas canoniques.
+
 
 Figuration composite
 
@@ -448,7 +543,7 @@ Figuration composite
 
 **Qualification.** original-composite. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · design** — Conserver l'identité composite et ne pas la rebaptiser pour combler une identité nommée. **À vérifier :** Le statut original demeure visible.
 - **P2 · visual** — Aucun PNG dédié : ce profil sert de repli humain natif. **À vérifier :** Produire seulement si une scène requiert une figuration individualisée.
@@ -459,6 +554,9 @@ Figuration composite
 
 ### MER-PERS-adult — Adulte xénomorphe
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+
 Population native, dimensions et statistiques de gameplay.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.alien / populations persistées`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s23`, `s24`, `s25`, `s26`, `s27`, `s28`, `s29`, `s30`, `s31`, `s32`, `s34`, `s35`, `s36`, `s48`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -467,7 +565,7 @@ Population native, dimensions et statistiques de gameplay.
 
 **Qualification.** adaptation-specific-body-unverified. Références : [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Le PNG correspondant est absent au checkpoint. **À vérifier :** Corps entier, alpha, pivot et raccord au kind exact ; repli natif disponible.
 - **P1 · animation** — Locomotion, alerte, préparation, attaque, interruption, mousse et mort à raccorder aux états réels. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -480,6 +578,11 @@ Population native, dimensions et statistiques de gameplay.
 
 ### MER-PERS-queen — Reine
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-queen-W01` — Résolu dans le périmètre déclaré (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Population native, dimensions et statistiques de gameplay.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.alien / populations persistées`. Salles concernées : `s33`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -488,7 +591,7 @@ Population native, dimensions et statistiques de gameplay.
 
 **Qualification.** adaptation-specific-body-unverified. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Le PNG correspondant est absent au checkpoint. **À vérifier :** Corps entier, alpha, pivot et raccord au kind exact ; repli natif disponible.
 - **P1 · animation** — Locomotion, alerte, préparation, attaque, interruption, mousse et mort à raccorder aux états réels. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -502,6 +605,9 @@ Population native, dimensions et statistiques de gameplay.
 
 ### MER-PERS-facehugger — Facehugger libre
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+
 Population native, dimensions et statistiques de gameplay.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.alien / populations persistées`. Salles concernées : `s32`, `s50`. Images : `creatures/facehugger`, `corpses/facehugger`.
@@ -510,7 +616,7 @@ Population native, dimensions et statistiques de gameplay.
 
 **Qualification.** adaptation-specific-body-unverified. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · animation** — Locomotion, alerte, préparation, attaque, interruption, mousse et mort à raccorder aux états réels. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
 - **P1 · reference** — Morphologie et proportions spécifiques au roman non authentifiées par une référence visuelle détaillée. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -521,6 +627,11 @@ Population native, dimensions et statistiques de gameplay.
 
 ### MER-PERS-captureAdult — Adulte de capture
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-captureAdult-W01` — Réalisé en partie (0.10.3) ; `MER-PERS-captureAdult-W05` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Population native, dimensions et statistiques de gameplay.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.alien / populations persistées`. Salles concernées : `s37`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -529,7 +640,7 @@ Population native, dimensions et statistiques de gameplay.
 
 **Qualification.** adaptation-specific-body-unverified. Références : [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Rôle de simulation distinct, même adulte biologique : définir explicitement l'alias de présentation, sans inventer une espèce. **À vérifier :** Corps entier, alpha, pivot et raccord au kind exact ; repli natif disponible.
 - **P1 · animation** — Locomotion, alerte, préparation, attaque, interruption, mousse et mort à raccorder aux états réels. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -543,13 +654,16 @@ Population native, dimensions et statistiques de gameplay.
 
 ### MER-PERS-parasite-normal — Parasite adhérent normal
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+
 Superposition au visage du patient ; distinct du facehugger libre.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.stretcher / stasisDisplay`. Salles concernées : `s34`, `s35`, `s36`, `s37`, `s38`. Images : `parasites/normal`.
 
 **Qualification.** secondary-detail-project-scale. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Forme et rapport d'échelle détaillés à confronter au texte ; 1,27 est un réglage du projet. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Mouvements respiratoires ou doigts seulement si utiles et lisibles. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -560,13 +674,16 @@ Superposition au visage du patient ; distinct du facehugger libre.
 
 ### MER-PERS-parasite-royal — Parasite adhérent royal
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+
 Superposition au visage du patient ; distinct du facehugger libre.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.stretcher / stasisDisplay`. Salles concernées : `s34`, `s35`, `s36`, `s37`, `s38`. Images : `parasites/royal`.
 
 **Qualification.** secondary-detail-project-scale. Références : [adams](https://avp.fandom.com/wiki/Adams), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Forme et rapport d'échelle détaillés à confronter au texte ; 1,27 est un réglage du projet. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Mouvements respiratoires ou doigts seulement si utiles et lisibles. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -577,13 +694,16 @@ Superposition au visage du patient ; distinct du facehugger libre.
 
 ### MER-PERS-egg — Œuf xénomorphe
 
+**Contrat de production courant.** Préserver le kind de simulation et ses états biologiques ; aucune nouvelle caste créée par une variante graphique. Séparer silhouette vivante, parasite attaché, état immobilisé et mort quand ces états existent ; conserver leur repli natif. Vérifier contacts, proportions, direction, cible et interruption sur le propriétaire de rendu indiqué.
+
+
 Élément de ponte distinct de la population adulte.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.egg`. Salles concernées : `s32`, `s33`. Images : `organic/egg`, `decor/eggs`.
 
 **Qualification.** adaptation-appearance. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Apparence, dimensions et marquages sans référence primaire précise. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Créer ouvert/fermé et transition seulement si un déclenchement d'éclosion existe ; une image fixe ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -594,6 +714,11 @@ Superposition au visage du patient ; distinct du facehugger libre.
 
 ### MER-PERS-carlyle-physician — Médecin anonyme du Carlyle
 
+**Contrat de production courant.** La variante du médecin anonyme habille le cast medic existant de s03, sans renommer le profil composite ailleurs ni remplacer ses portraits. Conserver les traits explicitement décrits dans la source et l’identité graphique du projet ; le visage exact reste interprété. Consultation assise, geste vers le dossier et retour à la pose demeurent des besoins d’animation séparés du sprite debout.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-carlyle-physician-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PERS-carlyle-physician-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Identité non nommée du chapitre 4 ; distincte du composite médical.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -602,7 +727,7 @@ Identité non nommée du chapitre 4 ; distincte du composite médical.
 
 **Qualification.** primary-described-appearance-partial. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Source générée : blouse blanche, chignon brun grisonnant, lunettes, corpulence forte ; visage exact interprété. **À vérifier :** Comparer les traits décrits, mesurer pivot et silhouette puis vérifier les octets publiés.
 - **P0 · integration** — Raccorder au seul contexte médical s03 ; conserver medic ailleurs. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -614,6 +739,13 @@ Identité non nommée du chapitre 4 ; distincte du composite médical.
 
 ### MER-PERS-decker-medical-gown — Decker — tenue hospitalière du Carlyle
 
+**Contrat de production courant.** Variante médicale du joueur limitée à s03 et à son état non armé ; les poses normales ou armées restent distinctes. Pendant la transmission native o02-01, utiliser la pose de rapport seulement si les conditions de travail sont satisfaites ; un seul appareil ICC visible. La consultation debout produite ne représente pas les positions assise/allongée ni le lever de la couchette ; ces actions restent ouvertes.
+
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PERS-decker-medical-gown-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PERS-decker-medical-gown-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Variante de Decker ; aucune nouvelle identité.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -622,7 +754,7 @@ Variante de Decker ; aucune nouvelle identité.
 
 **Qualification.** primary-costume-partial. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Source générée de la tenue hospitalière ; coupe, matière et portrait restent l'interprétation du projet. **À vérifier :** Pivot et proportions compatibles ; mesurer et vérifier les octets publiés.
 - **P0 · integration** — Limiter le costume à s03 et conserver la présentation normale ailleurs. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -634,6 +766,9 @@ Variante de Decker ; aucune nouvelle identité.
 
 ### MER-PERS-check-markowitz — Markowitz
 
+**Contrat de production courant.** Résoudre identité, continuité et passage source avant une nouvelle silhouette. Ne pas transformer un nom à vérifier en acteur placé ; aucune apparence de comédien empruntée par défaut.
+
+
 Nom cité par une limite du registre historique, sans preuve primaire relue dans cette passe.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Aucune salle dédiée ou occurrence statique. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -642,7 +777,7 @@ Nom cité par une limite du registre historique, sans preuve primaire relue dans
 
 **Qualification.** unverified-historical-name. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Résoudre rôle, scène et statut dans le texte primaire avant portrait ou placement. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 
@@ -652,6 +787,9 @@ Nom cité par une limite du registre historique, sans preuve primaire relue dans
 
 ### MER-PERS-check-herschel — Herschel
 
+**Contrat de production courant.** Résoudre identité, continuité et passage source avant une nouvelle silhouette. Ne pas transformer un nom à vérifier en acteur placé ; aucune apparence de comédien empruntée par défaut.
+
+
 Nom cité par une limite du registre historique, sans preuve primaire relue dans cette passe.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Aucune salle dédiée ou occurrence statique. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -660,7 +798,7 @@ Nom cité par une limite du registre historique, sans preuve primaire relue dans
 
 **Qualification.** unverified-historical-name. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Résoudre rôle, scène et statut dans le texte primaire avant portrait ou placement. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 
@@ -670,13 +808,16 @@ Nom cité par une limite du registre historique, sans preuve primaire relue dans
 
 ### MER-PERS-audio-piotrowicz — Piotrowicz
 
+**Contrat de production courant.** Résoudre identité, continuité et passage source avant une nouvelle silhouette. Ne pas transformer un nom à vérifier en acteur placé ; aucune apparence de comédien empruntée par défaut.
+
+
 Rôle de la dramatique audio ; aucune incorporation automatique au parcours roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s05`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Définir une variante audio avant production. **À vérifier :** La version et la scène gardent leur provenance.
 - **P1 · reference** — Apparence non décrite ; ne pas utiliser l'interprète comme portrait officiel. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -744,6 +885,11 @@ Les cinquante salles existent déjà. Les travaux portent sur leur représentati
 
 ### MER-LIEU-s01 — Poste de contrôle
 
+**Contrat de production courant.** Stage de Poste de contrôle : conserver la largeur de jeu 1960 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Portique de surveillance ; bornes météo ; clôture ouverte ; câbles enterrés ; traces de chenilles. Seuils à garder sur leur support : exterior-path ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la voie de service.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s01`. Images : `decor/checkpoint`, `decor/fence`, `decor/cableTray`, `decor/warningStripe`, `obstacles/crate`, `obstacles/rack`, `obstacles/pipe`, `characters/rand`, `equipment/archive`.
@@ -754,7 +900,7 @@ Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Poste de contrôle ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -765,6 +911,11 @@ Des herbes rases butent sur une bande de sable noir. Le poste reste relié à la
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s02 — Le carottier
+
+**Contrat de production courant.** Stage de Le carottier : conserver la largeur de jeu 2240 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Carottier ancré ; vérins ; caisse de prélèvement ; manche à air ; balises de périmètre. Seuils à garder sur leur support : exterior-path, transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice. Une passerelle permet de contourner la machine.
 
@@ -778,7 +929,7 @@ Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Le carottier ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -789,6 +940,13 @@ Le forage repose sur une plateforme dissymétrique au-dessus des tubes de silice
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s03 — Transport sanitaire
+
+**Contrat de production courant.** Stage de Transport sanitaire : conserver la largeur de jeu 1580 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Couchette ; moniteur ; écran de télémétrie ; rangement mural ; hublot oblong. Seuils à garder sur leur support : transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-LIEU-s03-W01` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
 
 Une courte cabine pressurisée : couchette à gauche, terminal médical au centre, sas à droite.
 
@@ -804,7 +962,7 @@ Une courte cabine pressurisée : couchette à gauche, terminal médical au centr
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · integration** — Rattacher Carlyle et les trois présentations médicales au seul contexte s03, avec o02-01 inchangé. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -816,6 +974,9 @@ Une courte cabine pressurisée : couchette à gauche, terminal médical au centr
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s04 — Commission · bureau de Harriman
+
+**Contrat de production courant.** Stage de Commission · bureau de Harriman : conserver la largeur de jeu 1960 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Bureaux ; imprimante ; casiers ; rangements documentaires ; baie sur les voies urbaines. Seuils à garder sur leur support : bulkhead, urban-transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Les guichets ouvrent sur une salle de consultation. Les fenêtres montrent la ville et non le chantier minier.
 
@@ -831,7 +992,7 @@ Les guichets ouvrent sur une salle de consultation. Les fenêtres montrent la vi
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [excerpt](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Commission · bureau de Harriman ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -842,6 +1003,9 @@ Les guichets ouvrent sur une salle de consultation. Les fenêtres montrent la vi
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s05 — Appartement de Decker
+
+**Contrat de production courant.** Stage de Appartement de Decker : conserver la largeur de jeu 1800 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table ; assises ; rangement bas ; dessins ; terminal familial ; fenêtre sur la rue. Seuils à garder sur leur support : interlude, urban-transit ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Un logement habité, pas une arène. Des affaires familiales occupent le fond ; une circulation libre mène au terminal personnel.
 
@@ -855,7 +1019,7 @@ Un logement habité, pas une arène. Des affaires familiales occupent le fond ; 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [excerpt](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Appartement de Decker ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -866,6 +1030,9 @@ Un logement habité, pas une arène. Des affaires familiales occupent le fond ; 
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s06 — Consultation · retour sur Terre
+
+**Contrat de production courant.** Stage de Consultation · retour sur Terre : conserver la largeur de jeu 1660 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table d’examen ; rideau ; analyseur ; lave-mains ; dossier patient. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Le cabinet médical est relié à la Commission par la circulation publique. Un écran isole la table d’examen.
 
@@ -879,7 +1046,7 @@ Le cabinet médical est relié à la Commission par la circulation publique. Un 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [excerpt](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Consultation · retour sur Terre ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -890,6 +1057,9 @@ Le cabinet médical est relié à la Commission par la circulation publique. Un 
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s07 — Coursive sous garde
+
+**Contrat de production courant.** Stage de Coursive sous garde : conserver la largeur de jeu 1720 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Caméra ; grille de ventilation ; banc fixé ; canalisation ; voyant de verrou. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une coursive surveillée relie l’infirmerie à la salle d’entretien. Les portes de service ne mènent pas à un autre monde.
 
@@ -903,7 +1073,7 @@ Une coursive surveillée relie l’infirmerie à la salle d’entretien. Les por
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Coursive sous garde ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -914,6 +1084,9 @@ Une coursive surveillée relie l’infirmerie à la salle d’entretien. Les por
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s08 — La salle d’entretien
+
+**Contrat de production courant.** Stage de La salle d’entretien : conserver la largeur de jeu 1760 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Console ; deux fauteuils ; écran dossier ; armoire scellée ; vitrage technique. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Deux sièges se font face, séparés par une console. Le vitrage laisse voir les coursives du bord.
 
@@ -927,7 +1100,7 @@ Deux sièges se font face, séparés par une console. Le vitrage laisse voir les
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de La salle d’entretien ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -938,6 +1111,11 @@ Deux sièges se font face, séparés par une console. Le vitrage laisse voir les
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s09 — Réserve d’équipement
+
+**Contrat de production courant.** Stage de Réserve d’équipement : conserver la largeur de jeu 2080 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Racks ancrés ; combinaisons ; chargeurs ; malle de filtres ; casiers numérotés. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Trois travées stockent l’équipement de l’expédition. Les passages entre les racks permettent de changer de profondeur. Implantation v0.3 : magasins en vis-à-vis. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -951,7 +1129,7 @@ Trois travées stockent l’équipement de l’expédition. Les passages entre l
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Réserve d’équipement ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -963,6 +1141,9 @@ Trois travées stockent l’équipement de l’expédition. Les passages entre l
 
 ### MER-LIEU-s10 — Baie d’embarquement
 
+**Contrat de production courant.** Stage de Baie d’embarquement : conserver la largeur de jeu 2480 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Navette ; câbles ombilicaux ; treuil ; chariots ; balises de rampe. Seuils à garder sur leur support : boarding, bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Une rampe et un couloir de sécurité conduisent à la navette. Les volumes au fond ne sont pas jouables.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s10`. Images : `decor/dropship`, `decor/cargo`, `decor/cableTray`, `decor/warningStripe`, `obstacles/crate`, `obstacles/rack`, `obstacles/pipe`, `characters/elway`, `equipment/archive`.
@@ -973,7 +1154,7 @@ Une rampe et un couloir de sécurité conduisent à la navette. Les volumes au f
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Baie d’embarquement ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -984,6 +1165,11 @@ Une rampe et un couloir de sécurité conduisent à la navette. Les volumes au f
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s11 — Aire d’atterrissage
+
+**Contrat de production courant.** Stage de Aire d’atterrissage : conserver la largeur de jeu 2560 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Dalles prises dans le sable ; balises ; réservoir ; abri radio ; traces de moteurs. Seuils à garder sur leur support : boarding-ramp, building-entrance, exterior-path ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d’accès au nord. Implantation v0.3 : aire ouverte et ligne de fret. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -999,7 +1185,7 @@ La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d�
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Aire d’atterrissage ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1010,6 +1196,11 @@ La même aire sera retrouvée au retour. Le camp reste à l’est et le ravin d�
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s12 — Abri d’expédition · Quonset
+
+**Contrat de production courant.** Stage de Abri d’expédition · Quonset : conserver la largeur de jeu 1940 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table de mission ; bancs ; cartes ; thermos ; casiers ; filtre d’air. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 L’abri possède une entrée, une zone de briefing et un passage vers la décontamination.
 
@@ -1023,7 +1214,7 @@ L’abri possède une entrée, une zone de briefing et un passage vers la décon
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Abri d’expédition · Quonset ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1034,6 +1225,9 @@ L’abri possède une entrée, une zone de briefing et un passage vers la décon
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s13 — Décontamination
+
+**Contrat de production courant.** Stage de Décontamination : conserver la largeur de jeu 1760 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Buses ; caillebotis ; cuve de collecte ; combinaisons ; râtelier de bottes. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Deux portes encadrent les buses de nettoyage. Les équipements humides restent dans la partie sale.
 
@@ -1047,7 +1241,7 @@ Deux portes encadrent les buses de nettoyage. Les équipements humides restent d
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Décontamination ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1058,6 +1252,11 @@ Deux portes encadrent les buses de nettoyage. Les équipements humides restent d
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s14 — Tête de puits
+
+**Contrat de production courant.** Stage de Tête de puits : conserver la largeur de jeu 2240 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage ; poulies ; commandes ; garde-corps ; câble principal ; barrières de bord. Seuils à garder sur leur support : bulkhead, lift-cage ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse seulement deux passages balisés. Implantation v0.3 : contour de la cage. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1071,7 +1270,7 @@ Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse s
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Tête de puits ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1083,6 +1282,11 @@ Une cage d’ascenseur occupe le centre d’un chevalement. La rambarde laisse s
 
 ### MER-LIEU-s15 — Recette de l’ancienne mine
 
+**Contrat de production courant.** Stage de Recette de l’ancienne mine : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage ; rails ; butoir ; boulonnage ; tuyauteries ; éclairage de secours. Seuils à garder sur leur support : bulkhead, lift-cage ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 La cage arrive dans une recette protégée. Les rails sortent vers le relais, loin du bord du puits.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s15`. Images : `decor/hoist-drive`, `decor/reel`, `decor/cableTray`, `decor/warningStripe`, `obstacles/crate`, `obstacles/rack`, `obstacles/pipe`, `equipment/archive`, `equipment/shutter-control`, `equipment/light-panel`.
@@ -1093,7 +1297,7 @@ La cage arrive dans une recette protégée. Les rails sortent vers le relais, lo
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Recette de l’ancienne mine ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1104,6 +1308,11 @@ La cage arrive dans une recette protégée. Les rails sortent vers le relais, lo
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s16 — Relais de Cho
+
+**Contrat de production courant.** Stage de Relais de Cho : conserver la largeur de jeu 2280 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table radio ; touret ; casiers ; antenne filaire ; lampe ; repères de secteur. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans bloquer les circulations. Implantation v0.3 : baie de relais décalée. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1117,7 +1326,7 @@ Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Relais de Cho ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1129,6 +1338,11 @@ Le relais distribue les voies de la mine. La radio se trouve contre un mur, sans
 
 ### MER-LIEU-s17 — Atelier de maintenance
 
+**Contrat de production courant.** Stage de Atelier de maintenance : conserver la largeur de jeu 1960 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Établi ; outils ; bouteilles ; chariot ; caisses ; crochets ; établi secondaire. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/locker-stocked`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Un établi, un passage central libre et une remise arrière. Le matériel lourd reste appuyé au sol.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s17`. Images : `decor/workbench`, `decor/reel`, `decor/cableTray`, `decor/warningStripe`, `obstacles/crate`, `obstacles/rack`, `obstacles/pipe`, `equipment/archive`, `equipment/supply`, `equipment/locker`, `equipment/locker-open`, `equipment/armory-rack`, `equipment/shutter-control`, `equipment/light-panel`, `devices/parts`.
@@ -1139,7 +1353,7 @@ Un établi, un passage central libre et une remise arrière. Le matériel lourd 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Atelier de maintenance ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1150,6 +1364,9 @@ Un établi, un passage central libre et une remise arrière. Le matériel lourd 
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s18 — Galerie d’alimentation
+
+**Contrat de production courant.** Stage de Galerie d’alimentation : conserver la largeur de jeu 2420 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Armoires ; câbles ; disjoncteurs ; isolateurs ; tuyaux ; porte coupe-feu. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Les câbles longent le plafond. Le chemin de service évite les armoires haute tension.
 
@@ -1163,7 +1380,7 @@ Les câbles longent le plafond. Le chemin de service évite les armoires haute t
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Galerie d’alimentation ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1175,6 +1392,9 @@ Les câbles longent le plafond. Le chemin de service évite les armoires haute t
 
 ### MER-LIEU-s19 — La carène enfouie
 
+**Contrat de production courant.** Stage de La carène enfouie : conserver la largeur de jeu 2880 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Coque courbe ; échafaudage ; passerelle ; roche fracturée ; balises humaines. Seuils à garder sur leur support : rock-breach, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 La coque apparaît dans une caverne bien plus vaste que le champ de déplacement. La zone de fouille se poursuit en contrebas. Implantation v0.3 : brèche et membrures rompues. Les emprises sont distinctes du décor et des zones dangereuses.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s19`. Images : `decor/carene`, `decor/rib`, `decor/resinCable`, `decor/silicaShard`, `decor/pipe`, `obstacles/rib`, `obstacles/silica-rubble`, `obstacles/resin`, `equipment/archive`, `devices/isolation`.
@@ -1185,7 +1405,7 @@ La coque apparaît dans une caverne bien plus vaste que le champ de déplacement
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de La carène enfouie ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1196,6 +1416,9 @@ La coque apparaît dans une caverne bien plus vaste que le champ de déplacement
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s20 — Brèche de coque
+
+**Contrat de production courant.** Stage de Brèche de coque : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Arches non humaines ; peau nervurée ; jauges de relevé ; câbles humains temporaires. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une ouverture irrégulière suit la peau du vaisseau. Les ajouts humains s’arrêtent aux premiers renflements.
 
@@ -1209,7 +1432,7 @@ Une ouverture irrégulière suit la peau du vaisseau. Les ajouts humains s’arr
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Brèche de coque ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1220,6 +1443,9 @@ Une ouverture irrégulière suit la peau du vaisseau. Les ajouts humains s’arr
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s21 — Tranchée de fouille
+
+**Contrat de production courant.** Stage de Tranchée de fouille : conserver la largeur de jeu 2560 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Strates rocheuses ; tamis ; cordes ; boîtes d’échantillons ; piquets ; passerelle. Seuils à garder sur leur support : rock-breach, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 La fouille descend vers la ville ruinée. Les cordes, grilles et repères racontent le travail des chercheurs. Implantation v0.3 : tranchée et tables de fouille. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1233,7 +1459,7 @@ La fouille descend vers la ville ruinée. Les cordes, grilles et repères racont
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Tranchée de fouille ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1245,6 +1471,9 @@ La fouille descend vers la ville ruinée. Les cordes, grilles et repères racont
 
 ### MER-LIEU-s22 — Esplanade ensevelie
 
+**Contrat de production courant.** Stage de Esplanade ensevelie : conserver la largeur de jeu 2860 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Contreforts ; arches effondrées ; pierres ; éclairages sur trépied ; instruments. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Des bâtiments non humains entourent une place partiellement dégagée. Les portes visibles ont des destinations cohérentes. Implantation v0.3 : esplanade à deux contournements. Les emprises sont distinctes du décor et des zones dangereuses.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s22`. Images : `decor/monolith`, `decor/survey`, `decor/resinCable`, `decor/silicaShard`, `obstacles/rib`, `obstacles/resin`, `obstacles/silica-rubble`, `equipment/archive`.
@@ -1255,7 +1484,7 @@ Des bâtiments non humains entourent une place partiellement dégagée. Les port
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Esplanade ensevelie ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1266,6 +1495,9 @@ Des bâtiments non humains entourent une place partiellement dégagée. Les port
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s23 — Salle des restes
+
+**Contrat de production courant.** Stage de Salle des restes : conserver la largeur de jeu 1860 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Tables de relevé ; fragments protégés ; toile ; scanner ; jalons ; niches. Seuils à garder sur leur support : crawl-opening, rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Les restes sont des témoins archéologiques, pas des ennemis ressuscités. Le joueur traverse un passage balisé.
 
@@ -1279,7 +1511,7 @@ Les restes sont des témoins archéologiques, pas des ennemis ressuscités. Le j
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Salle des restes ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1290,6 +1522,11 @@ Les restes sont des témoins archéologiques, pas des ennemis ressuscités. Le j
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s24 — Poste de relevés
+
+**Contrat de production courant.** Stage de Poste de relevés : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Console portable ; caisses de capteurs ; panneaux ; fil guide ; bouteilles d’air. Seuils à garder sur leur support : bulkhead, crawl-opening ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Une implantation humaine fragile occupe un seuil de la cité. La radio et le matériel restent visibles depuis l’entrée. Implantation v0.3 : baie de relevé protégée. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1303,7 +1540,7 @@ Une implantation humaine fragile occupe un seuil de la cité. La radio et le mat
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Poste de relevés ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1315,6 +1552,9 @@ Une implantation humaine fragile occupe un seuil de la cité. La radio et le mat
 
 ### MER-LIEU-s25 — Passerelle suspendue
 
+**Contrat de production courant.** Stage de Passerelle suspendue : conserver la largeur de jeu 2680 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Platelage ; ancrages ; câble latéral ; contreventement ; balises cassées. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Une passerelle suit la paroi ; des volumes descendent sous le plan jouable. Le vide n’est pas une seconde route.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s25`. Images : `decor/bridge`, `decor/cable`, `decor/cableTray`, `decor/warningStripe`, `decor/pipe`, `equipment/archive`, `devices/isolation`.
@@ -1325,7 +1565,7 @@ Une passerelle suit la paroi ; des volumes descendent sous le plan jouable. Le v
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Passerelle suspendue ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1336,6 +1576,11 @@ Une passerelle suit la paroi ; des volumes descendent sous le plan jouable. Le v
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s26 — Entrée des tubes
+
+**Contrat de production courant.** Stage de Entrée des tubes : conserver la largeur de jeu 2120 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Silice ; roche ; repères arrachés ; lampe tombée ; peau translucide ; résine. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 La mine humaine rejoint des tubes de silice. La transition architecturale est visible avant le changement de salle. Implantation v0.3 : gorge à bifurcation. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1349,7 +1594,7 @@ La mine humaine rejoint des tubes de silice. La transition architecturale est vi
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Entrée des tubes ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1360,6 +1605,11 @@ La mine humaine rejoint des tubes de silice. La transition architecturale est vi
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s27 — Le nœud ambré
+
+**Contrat de production courant.** Stage de Le nœud ambré : conserver la largeur de jeu 2680 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Piliers ; gouttes minérales ; membranes ; débris d’équipement ; trace de traînée. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Trois passages composent une boucle. Les piliers de silice délimitent les bandes sans former un mur infranchissable. Implantation v0.3 : nœud à pilier central. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1373,7 +1623,7 @@ Trois passages composent une boucle. Les piliers de silice délimitent les bande
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Le nœud ambré ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1384,6 +1634,9 @@ Trois passages composent une boucle. Les piliers de silice délimitent les bande
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s28 — Alcôve des disparus
+
+**Contrat de production courant.** Stage de Alcôve des disparus : conserver la largeur de jeu 1960 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cocons ; casque ; balise ; arme vide ; résine ; réseaux organiques. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une alcôve accessible par un boyau étroit. Les cocons occupent le fond, le passage reste latéral.
 
@@ -1397,7 +1650,7 @@ Une alcôve accessible par un boyau étroit. Les cocons occupent le fond, le pas
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Alcôve des disparus ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1408,6 +1661,11 @@ Une alcôve accessible par un boyau étroit. Les cocons occupent le fond, le pas
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s29 — Le retour fermé
+
+**Contrat de production courant.** Stage de Le retour fermé : conserver la largeur de jeu 2220 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Membrane de fermeture ; ancien repère ; fissure latérale ; tube de ventilation. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Le retour se bouche après le relevé. Une dérivation identifiée existe avant le changement d’état. Implantation v0.3 : dérivation derrière la membrane. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1421,7 +1679,7 @@ Le retour se bouche après le relevé. Une dérivation identifiée existe avant 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Le retour fermé ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1432,6 +1690,11 @@ Le retour se bouche après le relevé. Une dérivation identifiée existe avant 
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s30 — Ascenseur secondaire
+
+**Contrat de production courant.** Stage de Ascenseur secondaire : conserver la largeur de jeu 2300 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cage inclinée ; câbles rompus ; supports tordus ; panneau défaut ; rambardes. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 La seconde installation ne garantit plus de sortie. Les commandes restent accessibles malgré les dommages.
 
@@ -1445,7 +1708,7 @@ La seconde installation ne garantit plus de sortie. Les commandes restent access
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Ascenseur secondaire ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1456,6 +1719,9 @@ La seconde installation ne garantit plus de sortie. Les commandes restent access
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s31 — Pied de l’escalier
+
+**Contrat de production courant.** Stage de Pied de l’escalier : conserver la largeur de jeu 2420 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Volées ; paliers ; échelle de secours ; numérotation ; main courante ; conduites. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 La cage d’escalier possède des paliers lisibles et un itinéraire de maintenance, sans téléportation entre étages. Implantation v0.3 : palier et baie technique. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1469,7 +1735,7 @@ La cage d’escalier possède des paliers lisibles et un itinéraire de maintena
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Pied de l’escalier ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1480,6 +1746,9 @@ La cage d’escalier possède des paliers lisibles et un itinéraire de maintena
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s32 — Chambre des œufs
+
+**Contrat de production courant.** Stage de Chambre des œufs : conserver la largeur de jeu 2820 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Œufs ; résine ; condensation ; carcasses minérales ; creux sombres ; gaines. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Les œufs forment des îlots, jamais une grille décorative. Deux passages continus permettent de se replier. Implantation v0.3 : deux poches autour de la ponte. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1493,7 +1762,7 @@ Les œufs forment des îlots, jamais une grille décorative. Deux passages conti
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Chambre des œufs ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1504,6 +1773,9 @@ Les œufs forment des îlots, jamais une grille décorative. Deux passages conti
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s33 — La pondeuse
+
+**Contrat de production courant.** Stage de La pondeuse : conserver la largeur de jeu 3040 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Reine ; attaches ; ovipositeur stylisé ; œufs périphériques ; arches ; sol corrodé. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une grande chambre distribue trois ancrages de résine autour d’un axe d’évacuation. Le boss ne remplit pas l’écran.
 
@@ -1517,7 +1789,7 @@ Une grande chambre distribue trois ancrages de résine autour d’un axe d’év
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de La pondeuse ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1529,6 +1801,11 @@ Une grande chambre distribue trois ancrages de résine autour d’un axe d’év
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s34 — Dérivation de secours
+
+**Contrat de production courant.** Stage de Dérivation de secours : conserver la largeur de jeu 2140 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Civière ; couvertures ; éclairage mobile ; caisses ; conduites ; fermeture coupe-feu. Seuils à garder sur leur support : bulkhead, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`, `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Le retour vers l’escalier passe par une galerie industrielle partiellement envahie. Une zone de soins improvisée ne promet aucune guérison. Les deux brancards doivent être préparés séparément puis escortés jusqu’à la navette. Implantation v0.3 : baie de stabilisation à deux brancards. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1542,7 +1819,7 @@ Le retour vers l’escalier passe par une galerie industrielle partiellement env
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Dérivation de secours ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1553,6 +1830,9 @@ Le retour vers l’escalier passe par une galerie industrielle partiellement env
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s35 — Paliers supérieurs
+
+**Contrat de production courant.** Stage de Paliers supérieurs : conserver la largeur de jeu 2660 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Treuil ; paliers ; câble de levage ; mains courantes ; bouche de surface. Seuils à garder sur leur support : bulkhead, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une succession de paliers comprimée pour le jeu, reliée explicitement au bas de la cage. Les marches sont une animation de liaison.
 
@@ -1566,7 +1846,7 @@ Une succession de paliers comprimée pour le jeu, reliée explicitement au bas d
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Paliers supérieurs ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1577,6 +1857,11 @@ Une succession de paliers comprimée pour le jeu, reliée explicitement au bas d
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s36 — Ravin de service
+
+**Contrat de production courant.** Stage de Ravin de service : conserver la largeur de jeu 2700 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Talus ; antenne ; câble enterré ; talweg sec ; route de service ; sable en mouvement. Seuils à garder sur leur support : exterior-path, stairwell ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises permettent de reconnaître le lieu. Implantation v0.3 : ravin et drainage latéral. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1590,7 +1875,7 @@ Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises perme
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Ravin de service ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1601,6 +1886,11 @@ Le ravin rejoint le nord de l’aire initiale. Les mêmes tours et balises perme
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s37 — Soute de la navette
+
+**Contrat de production courant.** Stage de Soute de la navette : conserver la largeur de jeu 2400 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Caisson ; moussoir ; treuil ; sangles ; rampes ; rails de chargement ; banquettes. Seuils à garder sur leur support : boarding, boarding-ramp ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 La rampe débouche sur une soute assez large pour l’opération de capture. Le caisson est ancré, et non posé devant une porte. Implantation v0.3 : berceaux et cage séparés. Les emprises sont distinctes du décor et des zones dangereuses.
 
@@ -1614,7 +1904,7 @@ La rampe débouche sur une soute assez large pour l’opération de capture. Le 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Soute de la navette ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1626,6 +1916,9 @@ La rampe débouche sur une soute assez large pour l’opération de capture. Le 
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s38 — Consigne cryogénique W-Y
+
+**Contrat de production courant.** Stage de Consigne cryogénique W-Y : conserver la largeur de jeu 1840 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Vitrage ; cryocuves ; dossier transfert ; caméra ; clapets ; sas sécurisé. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 Une vitre sépare le personnel des spécimens. Les hôtes ne sont pas soignés par une interaction magique.
 
@@ -1641,7 +1934,7 @@ Une vitre sépare le personnel des spécimens. Les hôtes ne sont pas soignés p
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Consigne cryogénique W-Y ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1652,6 +1945,11 @@ Une vitre sépare le personnel des spécimens. Les hôtes ne sont pas soignés p
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s39 — Poste d’observation
+
+**Contrat de production courant.** Stage de Poste d’observation : conserver la largeur de jeu 2080 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Baie ; console ; écran de mission ; sièges fixés ; éclairage de veille. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
 
 La baie montre la planète, pas une ville terrestre. La frappe est une séquence orbitale non jouable comme arme.
 
@@ -1665,7 +1963,7 @@ La baie montre la planète, pas une ville terrestre. La frappe est une séquence
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Poste d’observation ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1676,6 +1974,9 @@ La baie montre la planète, pas une ville terrestre. La frappe est une séquence
 **Sources du projet :** [dlc/sea-of-sorrows/data/campaign.json](../../dlc/sea-of-sorrows/data/campaign.json), [dlc/sea-of-sorrows/src/world-art.js](../../dlc/sea-of-sorrows/src/world-art.js), [dlc/sea-of-sorrows/src/render.js](../../dlc/sea-of-sorrows/src/render.js), [dlc/sea-of-sorrows-visual/src/png-renderer.js](../../dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
 ### MER-LIEU-s40 — Hypersommeil
+
+**Contrat de production courant.** Stage de Hypersommeil : conserver la largeur de jeu 1820 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Couchettes ; casiers ; terminal ; lumière de veille ; hublot ; tubulures. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
 
 La dernière salle referme le récit. Des couchettes et des moniteurs encadrent un couloir presque vide.
 
@@ -1689,7 +1990,7 @@ La dernière salle referme le récit. Des couchettes et des moniteurs encadrent 
 
 **Qualification.** documented-context-original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [plot](https://www.avpcentral.com/alien-sea-of-sorrows).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le lieu général peut être documenté ; le nom local, le plan et les métriques restent une adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Hypersommeil ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1701,6 +2002,9 @@ La dernière salle referme le récit. Des couchettes et des moniteurs encadrent 
 
 ### MER-LIEU-s41 — Local des filtres
 
+**Contrat de production courant.** Stage de Local des filtres : conserver la largeur de jeu 1480 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cartouches scellées ; banc de contrôle ; tuyaux de retour ; panneau de débit. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Un local fermé derrière le sas conserve les cartouches hors de la poussière.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s41`. Images : `decor/filters`, `decor/wash`, `decor/cableTray`, `decor/warningStripe`, `equipment/archive`, `devices/console`.
@@ -1711,7 +2015,7 @@ Un local fermé derrière le sas conserve les cartouches hors de la poussière.
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Local des filtres ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1723,6 +2027,9 @@ Un local fermé derrière le sas conserve les cartouches hors de la poussière.
 
 ### MER-LIEU-s42 — Pompes de desserte
 
+**Contrat de production courant.** Stage de Pompes de desserte : conserver la largeur de jeu 2200 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Deux volutes de pompe ; soupapes ; câble de commande ; jauges ; drain. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Un circuit secondaire rejoint la galerie d’alimentation sans repasser par le relais.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s42`. Images : `decor/pump`, `decor/generator`, `decor/cableTray`, `decor/warningStripe`, `decor/pipe`, `obstacles/pipe`, `obstacles/rack`, `equipment/archive`, `equipment/shutter-control`, `equipment/light-panel`, `devices/console`.
@@ -1733,7 +2040,7 @@ Un circuit secondaire rejoint la galerie d’alimentation sans repasser par le r
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Pompes de desserte ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1745,6 +2052,9 @@ Un circuit secondaire rejoint la galerie d’alimentation sans repasser par le r
 
 ### MER-LIEU-s43 — Belvédère de fouille
 
+**Contrat de production courant.** Stage de Belvédère de fouille : conserver la largeur de jeu 1840 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Table de relevés ; mât de visée ; balustrade ; sondes ; sacs. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Une passerelle d’observation domine la tranchée, mais ne descend pas directement jusqu’aux tubes.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s43`. Images : `decor/survey`, `decor/bridge`, `decor/resinCable`, `decor/silicaShard`, `obstacles/pipe`, `obstacles/rack`, `equipment/archive`, `devices/console`.
@@ -1755,7 +2065,7 @@ Une passerelle d’observation domine la tranchée, mais ne descend pas directem
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Belvédère de fouille ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1767,6 +2077,11 @@ Une passerelle d’observation domine la tranchée, mais ne descend pas directem
 
 ### MER-LIEU-s44 — Conduit de retour
 
+**Contrat de production courant.** Stage de Conduit de retour : conserver la largeur de jeu 2050 et la présentation SIDE ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Tubes gainés ; membrures fendues ; vanne de purge humaine posée à l’entrée. Seuils à garder sur leur support : rock-breach ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Une desserte étroite contourne la membrane refermée et rejoint le pied de l’escalier.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s44`. Images : `decor/silica`, `decor/valve`, `decor/resinCable`, `decor/silicaShard`, `decor/pipe`, `equipment/archive`, `devices/console`.
@@ -1777,7 +2092,7 @@ Une desserte étroite contourne la membrane refermée et rejoint le pied de l’
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Conduit de retour ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1789,6 +2104,11 @@ Une desserte étroite contourne la membrane refermée et rejoint le pied de l’
 
 ### MER-LIEU-s45 — Infirmerie de secours
 
+**Contrat de production courant.** Stage de Infirmerie de secours : conserver la largeur de jeu 1860 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Deux stations de brancards ; armoire de soins ; couvertures ; ventilation. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Un renfoncement de soins permet de reprendre souffle sans bloquer le palier du treuil.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s45`. Images : `decor/triage`, `decor/medical`, `decor/cableTray`, `decor/warningStripe`, `obstacles/pipe`, `obstacles/rack`, `equipment/archive`, `equipment/locker`, `equipment/locker-open`, `devices/console`.
@@ -1799,7 +2119,7 @@ Un renfoncement de soins permet de reprendre souffle sans bloquer le palier du t
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Infirmerie de secours ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1811,6 +2131,9 @@ Un renfoncement de soins permet de reprendre souffle sans bloquer le palier du t
 
 ### MER-LIEU-s46 — Poste de guidage
 
+**Contrat de production courant.** Stage de Poste de guidage : conserver la largeur de jeu 2080 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Antenne de guidage ; pupitre ; jalons ; vitrage blindé ; batteries. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+
 Le poste donne une ligne dégagée vers l’aire d’atterrissage. La balise principale reste sur l’aire.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s46`. Images : `decor/antenna`, `decor/terminal`, `decor/cableTray`, `decor/warningStripe`, `obstacles/pipe`, `obstacles/rack`, `equipment/archive`, `devices/console`.
@@ -1821,7 +2144,7 @@ Le poste donne une ligne dégagée vers l’aire d’atterrissage. La balise pri
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Poste de guidage ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1833,6 +2156,11 @@ Le poste donne une ligne dégagée vers l’aire d’atterrissage. La balise pri
 
 ### MER-LIEU-s47 — Vestiaire des équipes
 
+**Contrat de production courant.** Stage de Vestiaire des équipes : conserver la largeur de jeu 2160 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Les scellés protègent du matériel oublié, pas une réserve inépuisable. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Des armoires de quart longent le mur des équipes. La réserve de quart donne sur une cour technique qui rejoint la galerie d’alimentation.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s47`. Images : `decor/locker`, `decor/wash`, `decor/cableTray`, `decor/warningStripe`, `obstacles/rack`, `obstacles/crate`, `obstacles/pipe`, `equipment/archive`, `equipment/locker`, `equipment/locker-open`.
@@ -1843,7 +2171,7 @@ Des armoires de quart longent le mur des équipes. La réserve de quart donne su
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Vestiaire des équipes ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1855,6 +2183,11 @@ Des armoires de quart longent le mur des équipes. La réserve de quart donne su
 
 ### MER-LIEU-s48 — Cour des échangeurs
 
+**Contrat de production courant.** Stage de Cour des échangeurs : conserver la largeur de jeu 2580 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Regarder entre les machines avant de fouiller les casiers : le cliquetis de leur fermeture porte loin. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Des échangeurs longent la cour encaissée. Une coursive latérale ramène vers l’alimentation sans repasser par l’atelier.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s48`. Images : `decor/generator`, `decor/pump`, `decor/cableTray`, `decor/warningStripe`, `obstacles/rack`, `obstacles/crate`, `obstacles/pipe`, `equipment/archive`, `equipment/locker`, `equipment/locker-open`.
@@ -1865,7 +2198,7 @@ Des échangeurs longent la cour encaissée. Une coursive latérale ramène vers 
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Cour des échangeurs ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1877,6 +2210,11 @@ Des échangeurs longent la cour encaissée. Une coursive latérale ramène vers 
 
 ### MER-LIEU-s49 — Transit des blessés
 
+**Contrat de production courant.** Stage de Transit des blessés : conserver la largeur de jeu 2240 et la présentation HYBRID ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Cette boucle accepte les deux brancards. Elle ne remplace pas le treuil, la balise ou l’arrimage. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Deux rails de guidage conduisent les châssis jusqu’au poste de transit. Un retour par le magasin rejoint l’infirmerie.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s49`. Images : `decor/triage`, `decor/medical`, `decor/cableTray`, `decor/warningStripe`, `obstacles/rack`, `obstacles/crate`, `obstacles/pipe`, `equipment/archive`, `equipment/locker`, `equipment/locker-open`.
@@ -1887,7 +2225,7 @@ Deux rails de guidage conduisent les châssis jusqu’au poste de transit. Un re
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Transit des blessés ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1899,6 +2237,11 @@ Deux rails de guidage conduisent les châssis jusqu’au poste de transit. Un re
 
 ### MER-LIEU-s50 — Magasin de la remontée
 
+**Contrat de production courant.** Stage de Magasin de la remontée : conserver la largeur de jeu 2420 et la présentation DEPTH ; ces valeurs ne sont pas des mesures canoniques. Modules à coordonner : Le détour offre un endroit où déposer un surplus pour le reprendre plus tard. Un bruit remue à l’arrière du magasin. Seuils à garder sur leur support : bulkhead ; vérifier chaque connexion listée, ses conditions et son arrivée. Conserver objectifs, obstacles, cast et passages exacts du JSON ; aucune nouvelle géométrie jouable n’est déduite d’un fond peint.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Les établis ont été abandonnés en plein inventaire. Des renforts et des consommables subsistent derrière les portes des armoires.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture/worldDressing/door ; Game transitions`. Salles concernées : `s50`. Images : `decor/cargo`, `decor/battery`, `decor/cableTray`, `decor/warningStripe`, `obstacles/rack`, `obstacles/crate`, `obstacles/pipe`, `creatures/facehugger`, `equipment/archive`, `equipment/locker`, `equipment/locker-open`.
@@ -1909,7 +2252,7 @@ Les établis ont été abandonnés en plein inventaire. Des renforts et des cons
 
 **Qualification.** original-game-annex. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · design** — Conserver cette annexe comme création du jeu. **À vérifier :** Ne la compter comme lieu attesté ni comme preuve littéraire.
 - **P1 · visual** — Compléter sol, parois, fond et premier plan de Magasin de la remontée ; les modules PNG ne constituent pas un stage complet. **À vérifier :** Garder ouvertures sur leurs supports, échelle humaine et trajectoire lisible en SIDE/HYBRID.
@@ -1923,6 +2266,9 @@ Les établis ont été abandonnés en plein inventaire. Des renforts et des cons
 
 ### MER-ARME-pistol — Reaper
 
+**Contrat de production courant.** Conserver weaponId=pistol, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
+
+
 Nom et type de pistolet
 
 **Présent au checkpoint.** Propriétaire : `Game.shoot/reload ; SoSRenderer.human/drawEffects`. Aucune salle dédiée ou occurrence statique. Images : `weapons/pistol`, `effects/muzzle`, `effects/impact`.
@@ -1933,7 +2279,7 @@ Nom et type de pistolet
 
 **Qualification.** secondary-reference-partial. Références : [reaper](https://avp.fandom.com/wiki/Reaper), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Silhouette, calibre, 12 coups et dégâts : interprétation de jeu. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Prise, visée, tir, interruption et recharge adaptés à Reaper. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -1945,6 +2291,9 @@ Nom et type de pistolet
 
 ### MER-ARME-pulse — Fusil à impulsions
 
+**Contrat de production courant.** Conserver weaponId=pulse, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
+
+
 Arme citée lors de la destruction du puits
 
 **Présent au checkpoint.** Propriétaire : `Game.shoot/reload ; SoSRenderer.human/drawEffects`. Salles concernées : `s09`, `s17`. Images : `weapons/pulse`, `effects/muzzle`, `effects/impact`.
@@ -1955,7 +2304,7 @@ Arme citée lors de la destruction du puits
 
 **Qualification.** secondary-reference-partial. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Attribution facultative à Decker originale. Aucun modèle M41A revendiqué ; 30 coups : équilibrage. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Prise, visée, tir, interruption et recharge adaptés à Fusil à impulsions. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -1967,6 +2316,9 @@ Arme citée lors de la destruction du puits
 
 ### MER-ARME-plasma — Fusil plasma · 50 W
 
+**Contrat de production courant.** Conserver weaponId=plasma, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
+
+
 Modèle cité dans le roman
 
 **Présent au checkpoint.** Propriétaire : `Game.shoot/reload ; SoSRenderer.human/drawEffects`. Salles concernées : `s09`, `s17`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -1977,7 +2329,7 @@ Modèle cité dans le roman
 
 **Qualification.** secondary-reference-partial. Références : [plasma](https://avp.fandom.com/wiki/Plasma_Rifle), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Silhouette, 12 tirs/cellule, cadence, dégâts et seuil thermique interprétés ; trois cellules dans le kit. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P0 · visual** — Génération refusée ; conserver le rendu natif et le besoin ouvert. **À vérifier :** Contrôler l'objet/l'effet, l'échelle, prises et bouche avant admission.
@@ -1990,6 +2342,9 @@ Modèle cité dans le roman
 
 ### MER-ARME-foam — Foamer · projection de mousse
 
+**Contrat de production courant.** Conserver weaponId=foam, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
+
+
 Outil de capture employé par Manning
 
 **Présent au checkpoint.** Propriétaire : `Game.shoot/reload ; SoSRenderer.human/drawEffects`. Aucune salle dédiée ou occurrence statique. Images : `weapons/foam`, `effects/foam`.
@@ -2000,7 +2355,7 @@ Outil de capture employé par Manning
 
 **Qualification.** secondary-reference-partial. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Usage direct par Decker et jauge de mousse : adaptation. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Prise, visée, tir, interruption et recharge adaptés à Foamer · projection de mousse. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2012,6 +2367,11 @@ Outil de capture employé par Manning
 
 ### MER-ARME-flame — Lance-flammes de gameplay
 
+**Contrat de production courant.** Conserver weaponId=flame, possessions, munitions, cadence et règles natives. Vue individuelle du modèle, grip primaire, appui secondaire et bouche du canon ; mesurer leur composition sur chaque posture. États repos, visée, tir, interruption et recharge doivent suivre les actions acceptées ; une animation graphique ne change pas les dégâts.
+
+**Avancement des travaux du checkpoint :** `MER-ARME-flame-W02` — Réalisé en partie (0.10.3) ; `MER-ARME-flame-W04` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Non certifié comme arme distincte dans le passage de référence
 
 **Présent au checkpoint.** Propriétaire : `Game.shoot/reload ; SoSRenderer.human/drawEffects`. Aucune salle dédiée ou occurrence statique. Images : `effects/flame`, `effects/spark`.
@@ -2022,7 +2382,7 @@ Non certifié comme arme distincte dans le passage de référence
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Ancienne arme conservée ; ne pas la présenter comme modèle authentifié. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P0 · visual** — Source générée hors du checkpoint, publication et raccord à vérifier. **À vérifier :** Contrôler l'objet/l'effet, l'échelle, prises et bouche avant admission.
@@ -2035,6 +2395,9 @@ Non certifié comme arme distincte dans le passage de référence
 
 ### MER-ARME-grenades — Grenades de Silas
 
+**Contrat de production courant.** Arme narrative : produire la vue liée à la scène de Grenades de Silas seulement après référence suffisante. Ne pas ajouter de possession, munitions, dégâts ou commande de tir au joueur. Une vue orbitale du lieu ne constitue pas un sprite de la charge ou de son effet.
+
+
 Employées contre le puits
 
 **Présent au checkpoint.** Propriétaire : `Objectif/dossier de campagne`. Aucune salle dédiée ou occurrence statique. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -2043,7 +2406,7 @@ Employées contre le puits
 
 **Qualification.** secondary-reference-partial. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Pas de lancer libre par Decker dans cette version. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Aucun PNG distinct de cet armement au checkpoint. **À vérifier :** Contrôler l'objet/l'effet, l'échelle, prises et bouche avant admission.
@@ -2055,6 +2418,9 @@ Employées contre le puits
 
 ### MER-ARME-warheads — Charges plasma orbitales
 
+**Contrat de production courant.** Arme narrative : produire la vue liée à la scène de Charges plasma orbitales seulement après référence suffisante. Ne pas ajouter de possession, munitions, dégâts ou commande de tir au joueur. Une vue orbitale du lieu ne constitue pas un sprite de la charge ou de son effet.
+
+
 Frappe commandée depuis le transport
 
 **Présent au checkpoint.** Propriétaire : `Objectif/dossier de campagne`. Salles concernées : `s39`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -2063,7 +2429,7 @@ Frappe commandée depuis le transport
 
 **Qualification.** secondary-reference-partial. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Pas une arme de poche ni un pouvoir orbital libre du joueur. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Aucun PNG distinct de cet armement au checkpoint. **À vérifier :** Contrôler l'objet/l'effet, l'échelle, prises et bouche avant admission.
@@ -2077,13 +2443,16 @@ Frappe commandée depuis le transport
 
 ### MER-EQUIP-radio — Radio de liaison
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Radio de liaison. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Liaisons et dialogues de gameplay ; forme, modèle et description matérielle non vérifiés dans le texte intégral.
 
 **Présent au checkpoint.** Propriétaire : `SoSEquipmentArt / dialogues de mission`. Aucune salle dédiée ou occurrence statique. Images : `equipment/radio`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Liaisons et dialogues de gameplay ; forme, modèle et description matérielle non vérifiés dans le texte intégral. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Une image d'inventaire ne couvre pas une manipulation corporelle. **À vérifier :** Définir seulement les gestes utiles, liés aux actions et aux stocks natifs.
@@ -2094,13 +2463,16 @@ Liaisons et dialogues de gameplay ; forme, modèle et description matérielle no
 
 ### MER-EQUIP-lamp — Lampe personnelle
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Lampe personnelle. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 État moteur ; modèle et tenue non certifiés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.human / Game.toggleLamp`. Aucune salle dédiée ou occurrence statique. Images : `equipment/lamp`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — État moteur ; modèle et tenue non certifiés. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2111,13 +2483,16 @@ Liaisons et dialogues de gameplay ; forme, modèle et description matérielle no
 
 ### MER-EQUIP-tracker — Détecteur de mouvement
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Détecteur de mouvement. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Fonctionnel ; modèle, chiffres et interface originaux.
 
 **Présent au checkpoint.** Propriétaire : `SoSEquipmentArt / Game.toggleTracker`. Aucune salle dédiée ou occurrence statique. Images : `equipment/tracker`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Fonctionnel ; modèle, chiffres et interface originaux. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Une image d'inventaire ne couvre pas une manipulation corporelle. **À vérifier :** Définir seulement les gestes utiles, liés aux actions et aux stocks natifs.
@@ -2128,13 +2503,16 @@ Fonctionnel ; modèle, chiffres et interface originaux.
 
 ### MER-EQUIP-filter — Protection respiratoire
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Protection respiratoire. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Les sables toxiques sont confirmés par Titan ; le filtre consommable et son apparence restent un mécanisme de jeu.
 
 **Présent au checkpoint.** Propriétaire : `SoSEquipmentArt / Game.replaceFilter`. Salles concernées : `s13`, `s41`. Images : `equipment/filter`, `decor/filters`.
 
 **Qualification.** secondary-context-project-design. Références : [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Les sables toxiques sont confirmés par Titan ; le filtre consommable et son apparence restent un mécanisme de jeu. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Une image d'inventaire ne couvre pas une manipulation corporelle. **À vérifier :** Définir seulement les gestes utiles, liés aux actions et aux stocks natifs.
@@ -2145,13 +2523,16 @@ Les sables toxiques sont confirmés par Titan ; le filtre consommable et son app
 
 ### MER-EQUIP-sampler — Carottier
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Carottier. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Interaction au début ; pas un outil de combat portable.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor/object / o01-01`. Salles concernées : `s02`, `s15`, `s17`, `s20`, `s21`, `s23`, `s26`, `s28`, `s32`. Images : `decor/drill`, `decor/reel`, `objectives/case`.
 
 **Qualification.** secondary-context-project-design. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Interaction au début ; pas un outil de combat portable. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2162,13 +2543,16 @@ Interaction au début ; pas un outil de combat portable.
 
 ### MER-EQUIP-scanner — Relevés et terminal ICC
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Relevés et terminal ICC. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Le rôle ICC est confirmé ; cet ensemble de terminal et relevés jouables est une interprétation, pas un équipement authentifié par la notice.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor/object`. Salles concernées : `s03`, `s04`, `s05`, `s06`, `s08`, `s09`, `s11`, `s12`, `s13`, `s14`, `s16`, `s18`, `s21`, `s22`, `s24`, `s27`, `s29`, `s30`, `s31`, `s35`, `s36`, `s38`, `s39`, `s43`, `s46`. Images : `decor/survey`, `decor/terminal`, `objectives/console`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Le rôle ICC est confirmé ; cet ensemble de terminal et relevés jouables est une interprétation, pas un équipement authentifié par la notice. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2179,13 +2563,16 @@ Le rôle ICC est confirmé ; cet ensemble de terminal et relevés jouables est u
 
 ### MER-EQUIP-cage — Caisson de capture
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Caisson de capture. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 État et capture réelle ; modèle dessiné original.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.object / capture`. Salles concernées : `s37`. Images : `objectives/capture`, `decor/captureBay`.
 
 **Qualification.** secondary-context-project-design. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — État et capture réelle ; modèle dessiné original. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2196,13 +2583,16 @@ Le rôle ICC est confirmé ; cet ensemble de terminal et relevés jouables est u
 
 ### MER-EQUIP-cryo — Consigne cryogénique
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Consigne cryogénique. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Les deux porteurs restent contaminés, pas guéris par le sauvetage.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.stasisDisplay/object`. Salles concernées : `s38`, `s40`. Images : `decor/cryo`, `equipment/stasis-canopy`, `objectives/sleep`.
 
 **Qualification.** secondary-context-project-design. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Les deux porteurs restent contaminés, pas guéris par le sauvetage. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Les capsules sont déjà illustrées ; manque de spécificité de scène et d'état, pas absence totale de visuel. **À vérifier :** Séparer s40, s38 et décor médical ; garder les hôtes contaminés.
@@ -2213,13 +2603,16 @@ Les deux porteurs restent contaminés, pas guéris par le sauvetage.
 
 ### MER-EQUIP-medkits — Trousses et consommables
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Trousses et consommables. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Soins simplifiés, réserve finie.
 
 **Présent au checkpoint.** Propriétaire : `SoSEquipmentArt / Game.useMedkit`. Aucune salle dédiée ou occurrence statique. Images : `equipment/medkit`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Soins simplifiés, réserve finie. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Une image d'inventaire ne couvre pas une manipulation corporelle. **À vérifier :** Définir seulement les gestes utiles, liés aux actions et aux stocks natifs.
@@ -2230,13 +2623,16 @@ Soins simplifiés, réserve finie.
 
 ### MER-EQUIP-sensors — Trois balises réutilisables
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Trois balises réutilisables. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Création des v0.6, ne pas confondre avec une sonde canonique.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.sensor / balises`. Aucune salle dédiée ou occurrence statique. Images : `equipment/sensor`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Création des v0.6, ne pas confondre avec une sonde canonique. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2247,13 +2643,16 @@ Création des v0.6, ne pas confondre avec une sonde canonique.
 
 ### MER-EQUIP-decoys — Leurres acoustiques
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Leurres acoustiques. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Création de gameplay.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.emitter / Game.deployDecoy`. Aucune salle dédiée ou occurrence statique. Images : `equipment/decoy`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Création de gameplay. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2264,13 +2663,18 @@ Création de gameplay.
 
 ### MER-EQUIP-repair — Renforts de châssis
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Renforts de châssis. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Réparation et économie originales.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.device / réparation`. Salles concernées : `s17`, `s34`. Images : `devices/parts`.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Réparation et économie originales. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler les variantes d'état utiles ; garder les replis natifs lorsque terminé, vide ou détruit. **À vérifier :** Aucune réserve pleine ni machine active affichée à contre-état.
@@ -2281,13 +2685,16 @@ Réparation et économie originales.
 
 ### MER-EQUIP-shocker — Shocker / neutralisation
 
+**Contrat de production courant.** Conserver fonction, stock, accès et restrictions de Shocker / neutralisation. Distinguer illustration d’interface, objet posé et geste d’utilisation ; chaque surface a son propre critère de raccord. La réparation, collecte ou consommation doit conserver son état après sauvegarde et reprise.
+
+
 Mention à confronter au texte ; non ajouté comme équipement canonique certifié.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Aucune salle dédiée ou occurrence statique. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-gameplay. Références : [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Mention à confronter au texte ; non ajouté comme équipement canonique certifié. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · reference** — Nature et présence à vérifier avant production canonique. **À vérifier :** Retrouver le passage et distinguer arme, neutralisation médicale et traduction.
@@ -2298,13 +2705,16 @@ Mention à confronter au texte ; non ajouté comme équipement canonique certifi
 
 ### MER-PROP-decor-amber — Nœud ambré
 
+**Contrat de production courant.** Module fixe decor/amber : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s27`. Images : `decor/amber`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2315,13 +2725,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-antenna — Antenne
 
+**Contrat de production courant.** Module fixe decor/antenna : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s11`, `s16`, `s46`. Images : `decor/antenna`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2332,13 +2745,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-armory — Module d'armurerie
 
+**Contrat de production courant.** Module fixe decor/armory : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s09`. Images : `decor/armory`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2349,13 +2765,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-battery — Batterie
 
+**Contrat de production courant.** Module fixe decor/battery : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s12`, `s50`. Images : `decor/battery`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2366,13 +2785,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-bridge — Passerelle suspendue
 
+**Contrat de production courant.** Module fixe decor/bridge : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s25`, `s43`. Images : `decor/bridge`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2383,13 +2805,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-briefing — Table de briefing
 
+**Contrat de production courant.** Module fixe decor/briefing : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s08`, `s12`. Images : `decor/briefing`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2400,13 +2825,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-cable — Câble
 
+**Contrat de production courant.** Module fixe decor/cable : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s25`, `s30`, `s34`, `s36`. Images : `decor/cable`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2417,13 +2845,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-cableTray — Chemin de câbles
 
+**Contrat de production courant.** Module fixe decor/cableTray : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s01`, `s02`, `s03`, `s04`, `s05`, `s06`, `s07`, `s08`, `s09`, `s10`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s24`, `s25`, `s30`, `s31`, `s34`, `s35`, `s36`, `s37`, `s38`, `s39`, `s40`, `s41`, `s42`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `decor/cableTray`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2434,13 +2865,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-captureBay — Baie de capture
 
+**Contrat de production courant.** Module fixe decor/captureBay : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s37`. Images : `decor/captureBay`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2451,13 +2885,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-cargo — Cargaison
 
+**Contrat de production courant.** Module fixe decor/cargo : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s10`, `s50`. Images : `decor/cargo`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2468,13 +2905,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-checkpoint — Poste de surveillance
 
+**Contrat de production courant.** Module fixe decor/checkpoint : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s01`. Images : `decor/checkpoint`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2485,13 +2925,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-cocoon — Cocon
 
+**Contrat de production courant.** Module fixe decor/cocoon : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s28`, `s32`. Images : `decor/cocoon`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2502,13 +2945,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-cryo — Capsule cryogénique
 
+**Contrat de production courant.** Module fixe decor/cryo : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s40`. Images : `decor/cryo`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2519,13 +2965,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-drill — Carottier
 
+**Contrat de production courant.** Module fixe decor/drill : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s02`. Images : `decor/drill`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2536,13 +2985,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-eggs — Groupe d'œufs
 
+**Contrat de production courant.** Module fixe decor/eggs : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s32`, `s33`. Images : `decor/eggs`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2553,13 +3005,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-fence — Clôture
 
+**Contrat de production courant.** Module fixe decor/fence : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s01`. Images : `decor/fence`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2570,13 +3025,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-filters — Ensemble de filtration
 
+**Contrat de production courant.** Module fixe decor/filters : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s13`, `s41`. Images : `decor/filters`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2587,13 +3045,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-generator — Générateur
 
+**Contrat de production courant.** Module fixe decor/generator : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s18`, `s42`, `s48`. Images : `decor/generator`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2604,13 +3065,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-hoist-drive — Motorisation du treuil
 
+**Contrat de production courant.** Module fixe decor/hoist-drive : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s14`, `s15`, `s30`. Images : `decor/hoist-drive`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2621,13 +3085,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-home — Mobilier domestique
 
+**Contrat de production courant.** Module fixe decor/home : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s05`. Images : `decor/home`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2638,13 +3105,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-landing — Infrastructure d'atterrissage
 
+**Contrat de production courant.** Module fixe decor/landing : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s11`. Images : `decor/landing`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2655,13 +3125,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-locker — Armoire de décor
 
+**Contrat de production courant.** Module fixe decor/locker : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s03`, `s05`, `s07`, `s09`, `s47`. Images : `decor/locker`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2672,13 +3145,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-medical — Module médical
 
+**Contrat de production courant.** Module fixe decor/medical : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s03`, `s06`, `s38`, `s40`, `s45`, `s49`. Images : `decor/medical`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2689,13 +3165,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-membrane — Membrane organique
 
+**Contrat de production courant.** Module fixe decor/membrane : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s29`. Images : `decor/membrane`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2706,13 +3185,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-monolith — Monolithe
 
+**Contrat de production courant.** Module fixe decor/monolith : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s22`. Images : `decor/monolith`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2723,13 +3205,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-office — Mobilier de bureau
 
+**Contrat de production courant.** Module fixe decor/office : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s04`, `s08`. Images : `decor/office`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2740,13 +3225,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-ossuary — Restes et ossuaire
 
+**Contrat de production courant.** Module fixe decor/ossuary : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s23`. Images : `decor/ossuary`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2757,13 +3245,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-pipe — Canalisation
 
+**Contrat de production courant.** Module fixe decor/pipe : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s19`, `s25`, `s29`, `s35`, `s36`, `s42`, `s44`. Images : `decor/pipe`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2774,13 +3265,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-pump — Pompe
 
+**Contrat de production courant.** Module fixe decor/pump : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s18`, `s42`, `s48`. Images : `decor/pump`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2791,13 +3285,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-quarantine-instruments — Instruments de quarantaine
 
+**Contrat de production courant.** Module fixe decor/quarantine-instruments : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s38`. Images : `decor/quarantine-instruments`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2808,13 +3305,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-ravine — Ravin
 
+**Contrat de production courant.** Module fixe decor/ravine : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s36`. Images : `decor/ravine`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2825,13 +3325,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-reel — Dévidoir
 
+**Contrat de production courant.** Module fixe decor/reel : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s02`, `s15`, `s17`. Images : `decor/reel`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -2842,13 +3345,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-resinCable — Liaison de résine
 
+**Contrat de production courant.** Module fixe decor/resinCable : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s23`, `s26`, `s27`, `s28`, `s29`, `s32`, `s33`, `s43`, `s44`. Images : `decor/resinCable`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2859,13 +3365,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-rib — Nervure
 
+**Contrat de production courant.** Module fixe decor/rib : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s19`, `s20`, `s23`, `s26`, `s28`. Images : `decor/rib`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2876,13 +3385,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-seal-equipment — Équipement de scellement
 
+**Contrat de production courant.** Module fixe decor/seal-equipment : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s07`. Images : `decor/seal-equipment`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2893,13 +3405,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-silica — Formation de silice
 
+**Contrat de production courant.** Module fixe decor/silica : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s26`, `s27`, `s29`, `s44`. Images : `decor/silica`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2910,13 +3425,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-silicaShard — Éclat de silice
 
+**Contrat de production courant.** Module fixe decor/silicaShard : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s23`, `s26`, `s27`, `s28`, `s29`, `s32`, `s33`, `s43`, `s44`. Images : `decor/silicaShard`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2927,13 +3445,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-survey — Machine de relevé/excavation
 
+**Contrat de production courant.** Module fixe decor/survey : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s21`, `s22`, `s24`, `s43`. Images : `decor/survey`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2944,13 +3465,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-terminal — Terminal
 
+**Contrat de production courant.** Module fixe decor/terminal : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s04`, `s16`, `s24`, `s39`, `s46`. Images : `decor/terminal`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2961,13 +3485,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-throne — Structure de la chambre royale
 
+**Contrat de production courant.** Module fixe decor/throne : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s33`. Images : `decor/throne`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2978,13 +3505,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-triage — Poste de triage
 
+**Contrat de production courant.** Module fixe decor/triage : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s34`, `s45`, `s49`. Images : `decor/triage`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -2995,13 +3525,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-valve — Vanne
 
+**Contrat de production courant.** Module fixe decor/valve : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s44`. Images : `decor/valve`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3012,13 +3545,18 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-viewport — Hublot
 
+**Contrat de production courant.** Module fixe decor/viewport : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s39`. Images : `decor/viewport`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3029,13 +3567,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-warningStripe — Bande de signalisation
 
+**Contrat de production courant.** Module fixe decor/warningStripe : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s01`, `s02`, `s03`, `s04`, `s05`, `s06`, `s07`, `s08`, `s09`, `s10`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s24`, `s25`, `s30`, `s31`, `s34`, `s35`, `s36`, `s37`, `s38`, `s39`, `s40`, `s41`, `s42`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `decor/warningStripe`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3046,13 +3587,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-wash — Décontamination
 
+**Contrat de production courant.** Module fixe decor/wash : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s06`, `s13`, `s41`, `s47`. Images : `decor/wash`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3063,13 +3607,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-winch — Treuil
 
+**Contrat de production courant.** Module fixe decor/winch : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s14`, `s31`, `s35`. Images : `decor/winch`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Pièces mobiles uniquement liées à l'état actif de la machine. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3080,13 +3627,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-decor-workbench — Établi
 
+**Contrat de production courant.** Module fixe decor/workbench : conserver silhouette, matériaux, pivot et échelle des occurrences décrites. Composer le décor selon sa profondeur sans masquer les acteurs, les objectifs ni les passages ; aucune animation artificielle requise.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s17`. Images : `decor/workbench`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3097,13 +3647,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-devices-console — devices / console
 
+**Contrat de production courant.** Module devices/console : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.device`. Salles concernées : `s37`, `s41`, `s42`, `s43`, `s44`, `s45`, `s46`. Images : `devices/console`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3114,13 +3667,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-devices-isolation — devices / isolation
 
+**Contrat de production courant.** Module devices/isolation : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.device`. Salles concernées : `s19`, `s25`, `s31`, `s36`. Images : `devices/isolation`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3131,13 +3687,20 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-devices-parts — devices / parts
 
+**Contrat de production courant.** Module devices/parts : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+**Ajouts 0.10.4 liés à cette fiche :** `devices/parts-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-devices-parts-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.device`. Salles concernées : `s17`, `s34`. Images : `devices/parts`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3148,13 +3711,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-doors-bulkhead-frame — doors / bulkhead-frame
 
+**Contrat de production courant.** Module doors/bulkhead-frame : conserver ancrage et ouverture du seuil compatible. Les positions intermédiaires ou supports incompatibles gardent un repli natif ; le PNG ne suffit pas à valider le passage.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door`. Aucune salle dédiée ou occurrence statique. Images : `doors/bulkhead-frame`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Pièce de baie industrielle ; ne couvre pas roche, rampe, cage, escalier ou mur oblique. **À vérifier :** Modules adaptés à chaque architecture ; ne pas étirer ce cadre sur une forme incompatible.
@@ -3165,13 +3731,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-doors-bulkhead-panel — doors / bulkhead-panel
 
+**Contrat de production courant.** Module doors/bulkhead-panel : conserver ancrage et ouverture du seuil compatible. Les positions intermédiaires ou supports incompatibles gardent un repli natif ; le PNG ne suffit pas à valider le passage.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door`. Aucune salle dédiée ou occurrence statique. Images : `doors/bulkhead-panel`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Pièce de baie industrielle ; ne couvre pas roche, rampe, cage, escalier ou mur oblique. **À vérifier :** Modules adaptés à chaque architecture ; ne pas étirer ce cadre sur une forme incompatible.
@@ -3182,13 +3751,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-acid — effects / acid
 
+**Contrat de production courant.** Effet acid : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/acid`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement acid ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3199,13 +3771,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-flame — effects / flame
 
+**Contrat de production courant.** Effet flame : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/flame`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement flame ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3216,13 +3791,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-foam — effects / foam
 
+**Contrat de production courant.** Effet foam : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/foam`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement foam ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3233,13 +3811,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-impact — effects / impact
 
+**Contrat de production courant.** Effet impact : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/impact`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement impact ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3250,13 +3831,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-muzzle — effects / muzzle
 
+**Contrat de production courant.** Effet muzzle : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/muzzle`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement muzzle ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3267,13 +3851,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-effects-spark — effects / spark
 
+**Contrat de production courant.** Effet spark : suivre l’événement natif, son origine et sa durée, avec retour au repos. Séparer phase de départ, maintien utile et disparition seulement si l’événement le justifie ; vérifier les tirs ou impacts répétés.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.drawEffects/tacticalGround/alien`. Aucune salle dédiée ou occurrence statique. Images : `effects/spark`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Compléter les phases utiles de l'événement spark ; une image ne forme pas un cycle. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -3284,13 +3871,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-archive — equipment / archive
 
+**Contrat de production courant.** Module equipment/archive : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s01`, `s02`, `s03`, `s04`, `s05`, `s06`, `s07`, `s08`, `s09`, `s10`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s19`, `s20`, `s21`, `s22`, `s23`, `s24`, `s25`, `s26`, `s27`, `s28`, `s29`, `s30`, `s31`, `s32`, `s33`, `s34`, `s35`, `s36`, `s37`, `s38`, `s39`, `s40`, `s41`, `s42`, `s43`, `s44`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `equipment/archive`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3301,13 +3891,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-armory-rack — equipment / armory-rack
 
+**Contrat de production courant.** Module equipment/armory-rack : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s09`, `s17`. Images : `equipment/armory-rack`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3318,13 +3911,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-decoy — equipment / decoy
 
+**Contrat de production courant.** Module equipment/decoy : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/decoy`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3335,13 +3931,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-filter — equipment / filter
 
+**Contrat de production courant.** Module equipment/filter : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/filter`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3352,13 +3951,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-lamp — equipment / lamp
 
+**Contrat de production courant.** Module equipment/lamp : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/lamp`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3369,13 +3971,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-light-panel — equipment / light-panel
 
+**Contrat de production courant.** Module equipment/light-panel : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s13`, `s15`, `s17`, `s18`, `s24`, `s30`, `s34`, `s35`, `s37`, `s42`. Images : `equipment/light-panel`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3386,13 +3991,20 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-locker-open — equipment / locker-open
 
+**Contrat de production courant.** Module equipment/locker-open : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-equipment-locker-open-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s17`, `s45`, `s47`, `s48`, `s49`, `s50`. Images : `equipment/locker-open`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3403,13 +4015,20 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-locker — equipment / locker
 
+**Contrat de production courant.** Module equipment/locker : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/locker-stocked`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-equipment-locker-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s17`, `s45`, `s47`, `s48`, `s49`, `s50`. Images : `equipment/locker`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3420,13 +4039,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-medkit — equipment / medkit
 
+**Contrat de production courant.** Module equipment/medkit : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/medkit`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3437,13 +4059,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-radio — equipment / radio
 
+**Contrat de production courant.** Module equipment/radio : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/radio`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3454,13 +4079,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-sensor — equipment / sensor
 
+**Contrat de production courant.** Module equipment/sensor : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/sensor`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3471,13 +4099,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-shutter-control — equipment / shutter-control
 
+**Contrat de production courant.** Module equipment/shutter-control : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s13`, `s15`, `s17`, `s18`, `s30`, `s35`, `s37`, `s42`. Images : `equipment/shutter-control`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Levier peint fixe et léger chevauchement ponctuel des textes natifs à corriger. **À vérifier :** Levier, témoin et libellé représentent le même état de cloison.
@@ -3488,13 +4119,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-stasis-canopy — equipment / stasis-canopy
 
+**Contrat de production courant.** Module equipment/stasis-canopy : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s38`. Images : `equipment/stasis-canopy`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3505,13 +4139,20 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-supply — equipment / supply
 
+**Contrat de production courant.** Module equipment/supply : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+**Ajouts 0.10.4 liés à cette fiche :** `equipment/supply-empty`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-equipment-supply-W02` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Salles concernées : `s09`, `s12`, `s16`, `s17`, `s24`, `s30`, `s34`, `s37`. Images : `equipment/supply`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3522,13 +4163,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-tracker — equipment / tracker
 
+**Contrat de production courant.** Module equipment/tracker : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/tracker`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3539,13 +4183,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-equipment-weakpoint — equipment / weakpoint
 
+**Contrat de production courant.** Module equipment/weakpoint : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer ou SoSEquipmentArt selon état`. Aucune salle dédiée ou occurrence statique. Images : `equipment/weakpoint`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3556,13 +4203,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-objectives-capture — objectives / capture
 
+**Contrat de production courant.** Module objectives/capture : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.object`. Salles concernées : `s37`. Images : `objectives/capture`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3573,13 +4223,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-objectives-case — objectives / case
 
+**Contrat de production courant.** Module objectives/case : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.object`. Salles concernées : `s02`, `s20`, `s21`, `s23`, `s26`, `s28`, `s32`. Images : `objectives/case`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3590,13 +4243,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-objectives-console — objectives / console
 
+**Contrat de production courant.** Module objectives/console : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.object`. Salles concernées : `s03`, `s04`, `s05`, `s06`, `s08`, `s09`, `s11`, `s12`, `s13`, `s14`, `s16`, `s18`, `s24`, `s27`, `s29`, `s30`, `s31`, `s35`, `s36`, `s38`, `s39`. Images : `objectives/console`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3607,13 +4263,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-objectives-sleep — objectives / sleep
 
+**Contrat de production courant.** Module objectives/sleep : distinguer disponible, utilisé/collecté et terminé selon son propriétaire natif. Employer la variante de l’état réel ; ne pas dessiner de stock après consommation ni réintroduire une action terminée. Si un état manque ou que l’image ne charge pas, conserver son rendu natif exact.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.object`. Salles concernées : `s40`. Images : `objectives/sleep`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — États intermédiaires, vides, consommés ou détruits encore natifs selon le cas. **À vérifier :** Conserver le repli tant qu'une image de l'état exact n'est pas disponible.
@@ -3624,13 +4283,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-crate — obstacles / crate
 
+**Contrat de production courant.** Module crate : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s01`, `s02`, `s04`, `s06`, `s08`, `s09`, `s10`, `s11`, `s12`, `s15`, `s16`, `s17`, `s21`, `s24`, `s30`, `s31`, `s34`, `s36`, `s37`, `s39`, `s47`, `s48`, `s49`, `s50`. Images : `obstacles/crate`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3641,13 +4303,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-pipe — obstacles / pipe
 
+**Contrat de production courant.** Module pipe : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s01`, `s02`, `s04`, `s06`, `s08`, `s10`, `s11`, `s12`, `s14`, `s15`, `s17`, `s24`, `s30`, `s31`, `s34`, `s36`, `s37`, `s39`, `s42`, `s43`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `obstacles/pipe`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3658,13 +4323,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-rack — obstacles / rack
 
+**Contrat de production courant.** Module rack : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s01`, `s02`, `s04`, `s06`, `s08`, `s09`, `s10`, `s11`, `s12`, `s14`, `s15`, `s16`, `s17`, `s21`, `s24`, `s30`, `s31`, `s34`, `s37`, `s39`, `s42`, `s43`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `obstacles/rack`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3675,13 +4343,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-resin — obstacles / resin
 
+**Contrat de production courant.** Module resin : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s19`, `s20`, `s22`, `s26`, `s27`, `s29`, `s32`, `s33`. Images : `obstacles/resin`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3692,13 +4363,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-rib — obstacles / rib
 
+**Contrat de production courant.** Module rib : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s26`, `s27`, `s29`, `s32`, `s33`. Images : `obstacles/rib`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3709,13 +4383,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-obstacles-silica-rubble — obstacles / silica-rubble
 
+**Contrat de production courant.** Module silica-rubble : garder empreinte physique, hauteur, couche de profondeur et blocksClassic de chaque occurrence. La silhouette peut habiller le volume existant ; elle ne crée ni collision supplémentaire ni ouverture traversable.
+
+
 Module graphique existant ; fichier et occurrences de placement sont comptés séparément.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.prop`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s26`, `s27`, `s29`, `s32`, `s33`, `s36`. Images : `obstacles/silica-rubble`.
 
 **Qualification.** project-adaptation. Références : [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Image du projet déjà publiée ; modèle, marquages et matière non authentifiés individuellement par une source primaire. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Contrôler silhouette, matière et échelle utile de ce module fixe ; aucune animation artificielle n'est exigée. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -3726,13 +4403,16 @@ Module graphique existant ; fichier et occurrences de placement sont comptés s�
 
 ### MER-PROP-portal-boarding — Seuil : boarding
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : boarding. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s10`, `s37`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3743,13 +4423,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-boarding-ramp — Seuil : boarding-ramp
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : boarding-ramp. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s11`, `s37`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3760,13 +4443,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-building-entrance — Seuil : building-entrance
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : building-entrance. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s11`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3777,13 +4463,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-bulkhead — Seuil : bulkhead
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : bulkhead. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s04`, `s06`, `s07`, `s08`, `s09`, `s10`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s24`, `s25`, `s30`, `s31`, `s34`, `s35`, `s38`, `s39`, `s40`, `s41`, `s42`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Images : `doors/bulkhead-frame`, `doors/bulkhead-panel`.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3794,13 +4483,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-crawl-opening — Seuil : crawl-opening
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : crawl-opening. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s23`, `s24`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3811,13 +4503,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-exterior-path — Seuil : exterior-path
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : exterior-path. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s01`, `s02`, `s11`, `s36`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3828,13 +4523,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-interlude — Seuil : interlude
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : interlude. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s05`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3845,13 +4543,20 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-lift-cage — Seuil : lift-cage
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : lift-cage. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-portal-lift-cage-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s14`, `s15`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3862,13 +4567,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-rock-breach — Seuil : rock-breach
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : rock-breach. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s19`, `s20`, `s21`, `s22`, `s23`, `s26`, `s27`, `s28`, `s29`, `s32`, `s33`, `s43`, `s44`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3879,13 +4587,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-stairwell — Seuil : stairwell
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : stairwell. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s19`, `s21`, `s34`, `s35`, `s36`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3896,13 +4607,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-transit — Seuil : transit
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : transit. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s02`, `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3913,13 +4627,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-portal-urban-transit — Seuil : urban-transit
 
+**Contrat de production courant.** Produire cadre, ouverture et état de fermeture adaptés au type Seuil : urban-transit. Les montures gauche/droite/fond/sol ont des géométries différentes ; conserver le natif quand le PNG ne correspond pas. Comparer passage visible, zone d’interaction, arrivée, retour et transport de groupe sur les connexions de la fiche.
+
+
 Type de passage natif et raison structurelle conservés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.door / transitions`. Salles concernées : `s04`, `s05`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-layout. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-RUNTIME](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/src/png-renderer.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Définir les pièces et états propres à ce passage et aux montages utilisés. **À vérifier :** Support, ouverture et arrivée cohérents ; ellipse narrative explicitement identifiée.
 - **P1 · verification** — Observer traversée, verrouillage, retour et groupe selon le passage. **À vérifier :** Un graphe connecté ne remplace pas un passage physique.
@@ -3930,13 +4647,16 @@ Type de passage natif et raison structurelle conservés.
 
 ### MER-PROP-hazard-arc — Danger : arc
 
+**Contrat de production courant.** Représenter les phases inactif, avertissement, actif et consigné du danger Danger : arc. Déclencher l’effet sur le danger réel ; aucun dommage, chronomètre ou zone à risque ajouté par l’image.
+
+
 Danger cyclique original ; ne pas le traiter comme décor passif.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.fieldGround/fieldWarnings ; simulation`. Salles concernées : `s18`, `s31`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-gameplay. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-CORE](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/src/core.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · animation** — Inactif, avertissement, phase dangereuse et consignation de arc. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
 
@@ -3946,13 +4666,16 @@ Danger cyclique original ; ne pas le traiter comme décor passif.
 
 ### MER-PROP-hazard-gas — Danger : gas
 
+**Contrat de production courant.** Représenter les phases inactif, avertissement, actif et consigné du danger Danger : gas. Déclencher l’effet sur le danger réel ; aucun dommage, chronomètre ou zone à risque ajouté par l’image.
+
+
 Danger cyclique original ; ne pas le traiter comme décor passif.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.fieldGround/fieldWarnings ; simulation`. Salles concernées : `s19`, `s36`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-gameplay. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-CORE](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/src/core.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · animation** — Inactif, avertissement, phase dangereuse et consignation de gas. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
 
@@ -3962,13 +4685,16 @@ Danger cyclique original ; ne pas le traiter comme décor passif.
 
 ### MER-PROP-hazard-steam — Danger : steam
 
+**Contrat de production courant.** Représenter les phases inactif, avertissement, actif et consigné du danger Danger : steam. Déclencher l’effet sur le danger réel ; aucun dommage, chronomètre ou zone à risque ajouté par l’image.
+
+
 Danger cyclique original ; ne pas le traiter comme décor passif.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.fieldGround/fieldWarnings ; simulation`. Salles concernées : `s25`, `s29`, `s35`, `s42`, `s44`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-gameplay. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-CORE](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/src/core.js).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · animation** — Inactif, avertissement, phase dangereuse et consignation de steam. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
 
@@ -3978,6 +4704,11 @@ Danger cyclique original ; ne pas le traiter comme décor passif.
 
 ### MER-PROP-icc-handheld — Appareil portable du rapport ICC
 
+**Contrat de production courant.** Conserver un seul appareil visible pour le rapport électronique de s03 : posé hors consultation ou tenu dans la pose dédiée quand le raccord la sélectionne. La transmission conserve objectif o02-01, durée, marqueur et drapeau report_sent ; pas de nouvelle fonction du dispositif. La silhouette, les boutons et la dimension de présentation restent des choix du projet, distincts du dossier papier.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-icc-handheld-W01` — Résolu dans le périmètre déclaré (0.10.3) ; `MER-PROP-icc-handheld-W02` — Réalisé en partie (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Présentation distincte de la console générique de o02-01.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
@@ -3986,7 +4717,7 @@ Présentation distincte de la console générique de o02-01.
 
 **Qualification.** primary-object-unspecified-design. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · visual** — Source générée de l'appareil portable ; boîtier et écran interprétés. **À vérifier :** Contrôler octets, alpha, dimensions et lisibilité avant admission.
 - **P0 · integration** — Seulement o02-01 de s03 ; conserver durée, drapeau et état terminé. **À vérifier :** Vérifier action, état avant/après et sauvegarde/reprise ; une galerie seule ne suffit pas.
@@ -3997,13 +4728,20 @@ Présentation distincte de la console générique de o02-01.
 
 ### MER-PROP-medical-chart — Dossier médical papier
 
+**Contrat de production courant.** Dossier papier et porte-documents sont décrits ; le modèle représenté reste une adaptation. Support physique lisible en s03, feuilles sans données personnelles lisibles ; pas de nouvelle mécanique médicale. Ne pas confondre cet objet avec le rapport ICC électronique ou compter le médecin et son dossier comme une seule identité.
+
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-medical-chart-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Accessoire du contexte médical, sans PNG individuel identifié.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-prop-partial. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · visual** — Créer l'accessoire séparé seulement s'il est lisible et nécessaire à la consultation. **À vérifier :** Support physique cohérent ; aucune donnée personnelle ou intrigue additionnelle inventée.
 
@@ -4013,13 +4751,20 @@ Accessoire du contexte médical, sans PNG individuel identifié.
 
 ### MER-PROP-medical-cups — Gobelets médicaux
 
+**Contrat de production courant.** Un gobelet d’eau et un récipient plus petit avec deux comprimés blancs ; silhouette et matière fine restent interprétées. Poser les deux contenants sur un même support en s03, à une échelle lisible, sans consommation inventée. Un ensemble de deux objets dans un seul PNG ne compte ni comme deux fichiers ni comme une nouvelle action de soin.
+
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PROP-medical-cups-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Accessoire du contexte médical, sans PNG individuel identifié.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s03`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-prop-partial. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · visual** — Créer l'accessoire séparé seulement s'il est lisible et nécessaire à la consultation. **À vérifier :** Support physique cohérent ; aucune donnée personnelle ou intrigue additionnelle inventée.
 
@@ -4029,13 +4774,16 @@ Accessoire du contexte médical, sans PNG individuel identifié.
 
 ### MER-PROP-audio-yellow-survey-flag — Balise jaune du relevé
 
+**Contrat de production courant.** Variante audio à décider avant incorporation ; conserver la preuve et sa continuité. Produire seulement le support et l’état utilisés dans la scène choisie ; aucune apparence officielle présumée.
+
+
 Besoin possible de la version audio ; absence non déclarée comme omission certifiée du roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s01`, `s02`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Décider d'une variante audio avant incorporation. **À vérifier :** Source et scène propres à cette version.
 - **P2 · visual** — Produire si la scène est retenue ; toute forme non décrite reste adaptation. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -4046,13 +4794,16 @@ Besoin possible de la version audio ; absence non déclarée comme omission cert
 
 ### MER-PROP-audio-restraint-chair — Siège et sangles de retenue
 
+**Contrat de production courant.** Variante audio à décider avant incorporation ; conserver la preuve et sa continuité. Produire seulement le support et l’état utilisés dans la scène choisie ; aucune apparence officielle présumée.
+
+
 Besoin possible de la version audio ; absence non déclarée comme omission certifiée du roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s08`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Décider d'une variante audio avant incorporation. **À vérifier :** Source et scène propres à cette version.
 - **P2 · visual** — Produire si la scène est retenue ; toute forme non décrite reste adaptation. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -4063,13 +4814,16 @@ Besoin possible de la version audio ; absence non déclarée comme omission cert
 
 ### MER-PROP-audio-hood — Cagoule de transport
 
+**Contrat de production courant.** Variante audio à décider avant incorporation ; conserver la preuve et sa continuité. Produire seulement le support et l’état utilisés dans la scène choisie ; aucune apparence officielle présumée.
+
+
 Besoin possible de la version audio ; absence non déclarée comme omission certifiée du roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s05`, `s07`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Décider d'une variante audio avant incorporation. **À vérifier :** Source et scène propres à cette version.
 - **P2 · visual** — Produire si la scène est retenue ; toute forme non décrite reste adaptation. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -4080,13 +4834,16 @@ Besoin possible de la version audio ; absence non déclarée comme omission cert
 
 ### MER-PROP-audio-tranquillizer — Dispositif de sédation
 
+**Contrat de production courant.** Variante audio à décider avant incorporation ; conserver la preuve et sa continuité. Produire seulement le support et l’état utilisés dans la scène choisie ; aucune apparence officielle présumée.
+
+
 Besoin possible de la version audio ; absence non déclarée comme omission certifiée du roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s05`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Décider d'une variante audio avant incorporation. **À vérifier :** Source et scène propres à cette version.
 - **P2 · visual** — Produire si la scène est retenue ; toute forme non décrite reste adaptation. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -4099,13 +4856,16 @@ Besoin possible de la version audio ; absence non déclarée comme omission cert
 
 ### MER-EQUIP-stretchers — Brancards Adams / Elway
 
+**Contrat de production courant.** Deux châssis distincts pour Adams et Elway ; identité et parasite attaché conservés. Produire les états roulage, arrêt, réparation et arrimage seulement pour leurs états natifs. Vérifier largeur utile, roues au sol et franchissement groupé de s34 à s38 ; les détours annexes restent distincts.
+
+
 Transport des deux hôtes ; châssis motorisés, intégrité et allures originaux.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.stretcher / état rescue`. Salles concernées : `s34`, `s35`, `s36`, `s37`, `s38`, `s45`, `s49`, `s50`. Images : `stretchers/adams`, `stretchers/elway`.
 
 **Qualification.** secondary-context-project-design. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-FIDELITY](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/fidelity.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Transport des deux hôtes ; châssis motorisés, intégrité et allures originaux. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Roues, arrêt, réparation, arrimage et seuil, sans téléportation. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -4116,13 +4876,16 @@ Transport des deux hôtes ; châssis motorisés, intégrité et allures originau
 
 ### MER-VEH-excavator — Excavateur du chantier
 
+**Contrat de production courant.** Conserver l’excavateur de fouille existant, son outil et sa base comme véhicule de chantier statique. Séparer bras, outil et train de roulement uniquement si une action de chantier les utilise. Comparer empreinte visuelle, dimensions du décor et dégagement des chemins en s21, s22, s24 et s43.
+
+
 Images de machine de chantier déjà présentes ; elles ne donnent pas un véhicule pilotable.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.decor`. Salles concernées : `s21`, `s22`, `s24`, `s43`. Images : `decor/excavator`, `decor/survey`.
 
 **Qualification.** project-design-with-audio-context. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Ne pas confondre excavateur et crawler de transport ; modèle et silhouette industriels non authentifiés. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · animation** — Bras, outils, roues/chenilles seulement si une action de chantier les nécessite. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -4133,13 +4896,18 @@ Images de machine de chantier déjà présentes ; elles ne donnent pas un véhic
 
 ### MER-VEH-mine-cages — Cages et moyens de levage de la mine
 
+**Contrat de production courant.** Séparer cage, palier, porte, guides, câble et entraînement ; ne pas assimiler le treuil à un véhicule entier. La pièce lift-cage habille uniquement un seuil compatible ; le rendu des verrous et les destinations restent natifs. Course, suspension, arrêts et cabine occupée restent à réaliser si une ellipse est remplacée ; s30 doit être vérifiée indépendamment.
+
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Passages verticaux et treuils, distincts d'un véhicule routier.
 
 **Présent au checkpoint.** Propriétaire : `Transitions lift-cage / SoSRenderer.door`. Salles concernées : `s14`, `s15`, `s30`. Images : `decor/winch`, `decor/hoist-drive`.
 
 **Qualification.** secondary-context-original-layout. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Apparence, dimensions et marquages sans référence primaire précise. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · animation** — Cabine, suspension, course et arrêts seulement si un trajet animé remplace l'ellipse. **À vérifier :** PNG individuels, proportions/pivots/attaches stables ; entrée, action et retour observés sur un état réel.
@@ -4150,13 +4918,16 @@ Passages verticaux et treuils, distincts d'un véhicule routier.
 
 ### MER-VEH-tram — Transport urbain de Chicago
 
+**Contrat de production courant.** Le tram des données est une liaison originale de Chicago ; le modèle n’est pas authentifié par le roman. Avant de produire une voiture, définir entrée, station, cadre du transfert et sortie ; ne pas accoler artificiellement les salles. Extérieur, accès et intérieur doivent décrire le même véhicule si ce moyen est représenté.
+
+
 Liaison tram s04–s05 dans les données ; aucun véhicule entier PNG.
 
 **Présent au checkpoint.** Propriétaire : `Seuil urban-transit`. Salles concernées : `s04`, `s05`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** original-gameplay-not-confirmed-novel. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Moyen de transport romanesque à confirmer avant qualification canonique. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P2 · visual** — Station/voiture seulement si la transition en a besoin. **À vérifier :** Les stations restent distinctes ; ne pas accoler artificiellement les deux intérieurs.
@@ -4167,13 +4938,16 @@ Liaison tram s04–s05 dans les données ; aucun véhicule entier PNG.
 
 ### MER-VEH-audio-crawler — Crawler du relevé
 
+**Contrat de production courant.** Garder le crawler dans la variante audio tant que la continuité n’est pas décidée. Définir cabine, accès, plateau et empreinte seulement à partir des besoins de la scène retenue. Ne pas renommer l’excavateur existant ni ajouter une conduite jouable sans contrat de gameplay.
+
+
 Véhicule de transport audio ; non couvert par une image d'excavateur.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s01`, `s02`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Définir la variante audio avant ajout au prologue. **À vérifier :** Ne pas qualifier son absence comme omission romanesque sans passage correspondant.
 - **P2 · visual** — Extérieur et accès utiles, sans modèle officiel ou pilotage inventé. **À vérifier :** Comparer silhouette, alpha, échelle et référence ; conserver les règles natives.
@@ -4186,13 +4960,20 @@ Véhicule de transport audio ; non couvert par une image d'excavateur.
 
 ### MER-SHIP-carlyle — Carlyle — transport sanitaire
 
+**Contrat de production courant.** Conserver le nom Carlyle dans le contexte médical de s03 ; distinguer le transport contractuel ultérieur. La consultation et ses props documentent un intérieur ; aucune silhouette, propulsion ou dimension extérieure n’en découle. Tout extérieur futur doit être qualifié d’adaptation et garder des accès cohérents avec la cabine produite.
+
+**Ajouts 0.10.4 liés à cette fiche :** `characters/decker-medical-report`, `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-SHIP-carlyle-W01` — Résolu dans le périmètre déclaré (0.10.3). Les autres travaux de cette fiche restent ouverts.
+
+
 Transport nommé au chapitre 4 ; s03 en condense le contexte.
 
 **Présent au checkpoint.** Propriétaire : `Décors, territoires et ellipses de campagne`. Salles concernées : `s03`. Images : `decor/medical`, `decor/cryo`.
 
 **Qualification.** primary-name-no-exterior-design. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P0 · reference** — Qualifier s03 comme Carlyle sans renommer le transport W-Y ultérieur. **À vérifier :** Les deux vaisseaux restent distincts.
 - **P1 · reference** — Extérieur, plan interne, dimensions et propulsion exacts non authentifiés pour cet appareil. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4204,13 +4985,18 @@ Transport nommé au chapitre 4 ; s03 en condense le contexte.
 
 ### MER-SHIP-contractual-transport — Transport contractuel Weyland-Yutani
 
+**Contrat de production courant.** Relier coursive, briefing, armurerie, hangar, quarantaine, observatoire et dernière salle comme lieux d’un même transport. Établir les accès et volumes utiles avant extérieur ; conserver les noms et silhouettes distincts du Carlyle. Aucune classe de vaisseau, propulsion, tonnage ou mesure canonique n’est déduite du graphe des salles.
+
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Intérieurs présents ; nom et extérieur non établis par les preuves romanesques examinées.
 
 **Présent au checkpoint.** Propriétaire : `Décors, territoires et ellipses de campagne`. Salles concernées : `s07`, `s08`, `s09`, `s10`, `s38`, `s39`, `s40`. Images : `decor/cargo`, `decor/viewport`, `decor/cryo`.
 
 **Qualification.** secondary-context-unnamed-in-current-novel-proof. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Extérieur, plan interne, dimensions et propulsion exacts non authentifiés pour cet appareil. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter les vues nécessaires : extérieur, embarquement, soute/cabine et transitions. **À vérifier :** Même silhouette et mêmes accès entre extérieur et intérieur.
@@ -4221,13 +5007,16 @@ Intérieurs présents ; nom et extérieur non établis par les preuves romanesqu
 
 ### MER-SHIP-shuttle — Navette d'expédition
 
+**Contrat de production courant.** Conserver une silhouette cohérente entre vue extérieure, aire de posé, rampe et soute. Présenter état au sol, ouverture de rampe, capture et embarquement selon les drapeaux existants. Approche, décollage, vol et pilote restent des besoins séparés ; l’image dropship ne prouve pas une animation de vol.
+
+
 L'extérieur existe sous decor/dropship ; la soute et la capture sont des surfaces séparées.
 
 **Présent au checkpoint.** Propriétaire : `Décors, territoires et ellipses de campagne`. Salles concernées : `s10`, `s11`, `s36`, `s37`. Images : `decor/dropship`, `decor/landing`, `decor/captureBay`.
 
 **Qualification.** secondary-context-project-exterior. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Extérieur, plan interne, dimensions et propulsion exacts non authentifiés pour cet appareil. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter les vues nécessaires : extérieur, embarquement, soute/cabine et transitions. **À vérifier :** Même silhouette et mêmes accès entre extérieur et intérieur.
@@ -4239,13 +5028,16 @@ L'extérieur existe sous decor/dropship ; la soute et la capture sont des surfac
 
 ### MER-SHIP-buried-hull — Carène ancienne enfouie
 
+**Contrat de production courant.** Maintenir continuité de coque entre s19 et s20 et cohérence de la brèche accessible. Les parties enfouies restent masquées ; ne pas extrapoler un plan intégral, constructeur ou espèce sans référence. Distinguer carène de décor, pièces d’obstacle et passage : chacun garde son propriétaire natif.
+
+
 Vestige et brèche ; aucune attribution automatique aux Ingénieurs.
 
 **Présent au checkpoint.** Propriétaire : `Décors, territoires et ellipses de campagne`. Salles concernées : `s19`, `s20`. Images : `decor/carene`.
 
 **Qualification.** secondary-context-unidentified-origin. Références : [plot](https://www.avpcentral.com/alien-sea-of-sorrows), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · reference** — Extérieur, plan interne, dimensions et propulsion exacts non authentifiés pour cet appareil. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
 - **P1 · visual** — Compléter les vues nécessaires : extérieur, embarquement, soute/cabine et transitions. **À vérifier :** Même silhouette et mêmes accès entre extérieur et intérieur.
@@ -4256,13 +5048,16 @@ Vestige et brèche ; aucune attribution automatique aux Ingénieurs.
 
 ### MER-SHIP-audio-kiangya — Kiangya — variante audio
 
+**Contrat de production courant.** Le nom Kiangya appartient à la preuve audio disponible ; pas de renommage automatique du transport du roman. Produire des vues seulement pour une variante audio explicitement retenue. Extérieur et plan interne demeurent non authentifiés ; un nouveau nom ne fournit pas une nouvelle silhouette.
+
+
 Nom du cargo audio, à conserver distinct de la preuve du roman.
 
 **Présent au checkpoint.** Aucun raccord distinct au checkpoint. Salles concernées : `s07`, `s08`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-audio-only. Références : [AUDIO-SAMPLE](https://m.media-amazon.com/images/G/02/AudibleUK/en_GB/cruk/email/merch/2019/May_AudibleNewcomersCompetition/ALIEN.pdf), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · continuity** — Décider d'une couche audio avant de reprendre ce nom dans le parcours roman. **À vérifier :** Aucune confusion avec Carlyle.
 - **P1 · reference** — Extérieur, plan interne, dimensions et propulsion exacts non authentifiés pour cet appareil. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4276,13 +5071,16 @@ Nom du cargo audio, à conserver distinct de la preuve du roman.
 
 ### MER-TERRAIN-alien — Brèche de coque
 
+**Contrat de production courant.** Sol : coque courbe fracturée, raccord du seuil à la brèche. Parois et profondeur : nervures profondes, rebords de rupture. Contrôle de cohérence : la brèche doit laisser visible son passage effectif.
+
+
 Famille alien : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s20`. Images : `decor/rib`, `decor/resinCable`, `decor/silicaShard`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4294,13 +5092,16 @@ Famille alien : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-armory — Armurerie
 
+**Contrat de production courant.** Sol : sol métallique sec et antidérapant. Parois et profondeur : panneaux porteurs et rangements de dotation. Contrôle de cohérence : les stocks et accès physiques restent lisibles devant le fond.
+
+
 Famille armory : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s09`. Images : `decor/armory`, `decor/locker`, `decor/cableTray`, `decor/warningStripe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4312,13 +5113,16 @@ Famille armory : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-bridge — Passerelle de fouille
 
+**Contrat de production courant.** Sol : tablier et bords porteurs du pont. Parois et profondeur : structures de soutien et profondeur de fouille. Contrôle de cohérence : le vide figuré ne crée ni chute ni zone traversable supplémentaire.
+
+
 Famille bridge : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s25`. Images : `decor/bridge`, `decor/cable`, `decor/cableTray`, `decor/warningStripe`, `decor/pipe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4330,13 +5134,16 @@ Famille bridge : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-camp — Abri Quonset
 
+**Contrat de production courant.** Sol : sol d’abri et jonction au seuil. Parois et profondeur : paroi cintrée du Quonset, fixations et cloisonnement. Contrôle de cohérence : préserver l’espace du groupe et les fournitures.
+
+
 Famille camp : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s12`. Images : `decor/briefing`, `decor/battery`, `decor/cableTray`, `decor/warningStripe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4348,13 +5155,16 @@ Famille camp : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-decon — Sas et filtration
 
+**Contrat de production courant.** Sol : grille de drainage et seuils de sas. Parois et profondeur : conduits de filtration, surfaces lavables. Contrôle de cohérence : le filtre et la consignation restent des états natifs.
+
+
 Famille decon : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s13`, `s41`. Images : `decor/wash`, `decor/filters`, `decor/cableTray`, `decor/warningStripe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4366,13 +5176,16 @@ Famille decon : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-derelict — Carène enfouie
 
+**Contrat de production courant.** Sol : dépôt minéral au pied de la carène. Parois et profondeur : coque ancienne partiellement ensevelie. Contrôle de cohérence : distinguer une cavité décorative d’un accès.
+
+
 Famille derelict : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s19`. Images : `decor/carene`, `decor/rib`, `decor/resinCable`, `decor/silicaShard`, `decor/pipe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4384,13 +5197,16 @@ Famille derelict : fond, sol et architecture procéduraux, modules PNG réutilis
 
 ### MER-TERRAIN-hangar — Hangar et soute
 
+**Contrat de production courant.** Sol : plancher de soute, lignes d’arrimage. Parois et profondeur : cloisons, ouverture de rampe et profondeur de hangar. Contrôle de cohérence : conserver le volume d’embarquement des brancards et du spécimen.
+
+
 Famille hangar : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s10`, `s37`. Images : `decor/dropship`, `decor/cargo`, `decor/cableTray`, `decor/warningStripe`, `decor/captureBay`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4402,13 +5218,16 @@ Famille hangar : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-hive — Ruche et résine
 
+**Contrat de production courant.** Sol : résine au niveau du sol et surfaces de passage. Parois et profondeur : nervures, poches et couches organiques. Contrôle de cohérence : aucun élément décoratif ne remplace une population ou un œuf actif.
+
+
 Famille hive : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s28`, `s32`. Images : `decor/cocoon`, `decor/rib`, `decor/resinCable`, `decor/silicaShard`, `decor/eggs`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4420,13 +5239,16 @@ Famille hive : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-home — Appartement habité
 
+**Contrat de production courant.** Sol : sol domestique et raccord aux murs. Parois et profondeur : parois habitées et meubles civils. Contrôle de cohérence : conserver la rupture entre vie civile et espaces d’expédition.
+
+
 Famille home : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s05`. Images : `decor/home`, `decor/locker`, `decor/cableTray`, `decor/warningStripe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4438,13 +5260,18 @@ Famille home : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-lift — Puits et recettes
 
+**Contrat de production courant.** Sol : palier, seuil de cage et bord du puits. Parois et profondeur : guides, suspension et parois du puits. Contrôle de cohérence : une cage de seuil fixe ne prétend pas simuler une course verticale.
+
+**Ajouts 0.10.4 liés à cette fiche :** `doors/lift-cage`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Famille lift : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s14`, `s15`, `s30`. Images : `decor/hoist-drive`, `decor/winch`, `decor/cableTray`, `decor/warningStripe`, `decor/reel`, `decor/cable`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4456,13 +5283,18 @@ Famille lift : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-medical — Sols et parois médicales
 
+**Contrat de production courant.** Sol : sol lavable, socles de couchette et circulation. Parois et profondeur : parois de cabine, équipements et surfaces sanitaires. Contrôle de cohérence : Carlyle, clinique terrestre, quarantaine et secours gardent leurs contextes propres.
+
+**Ajouts 0.10.4 liés à cette fiche :** `decor/medical-chart`, `decor/medical-cups`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Famille medical : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s03`, `s06`, `s38`, `s40`, `s45`, `s49`. Images : `decor/medical`, `decor/locker`, `decor/cableTray`, `decor/warningStripe`, `decor/wash`, `decor/quarantine-instruments`, `decor/cryo`, `decor/triage`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4474,13 +5306,16 @@ Famille medical : fond, sol et architecture procéduraux, modules PNG réutilis�
 
 ### MER-TERRAIN-office — Bureaux et locaux civils
 
+**Contrat de production courant.** Sol : sol civil et dégagement devant les bureaux. Parois et profondeur : cloisons, portes et surfaces de travail. Contrôle de cohérence : Chicago et la salle contractuelle ne deviennent pas une même pièce.
+
+
 Famille office : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s04`, `s08`. Images : `decor/office`, `decor/terminal`, `decor/cableTray`, `decor/warningStripe`, `decor/briefing`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4492,13 +5327,16 @@ Famille office : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-ossuary — Restes enfouis
 
+**Contrat de production courant.** Sol : sédiment et zones de marche dégagées. Parois et profondeur : restes enfouis, parois et profondeur. Contrôle de cohérence : ne pas transformer des restes de décor en nouvelles identités biologiques.
+
+
 Famille ossuary : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s23`. Images : `decor/ossuary`, `decor/rib`, `decor/resinCable`, `decor/silicaShard`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4510,13 +5348,16 @@ Famille ossuary : fond, sol et architecture procéduraux, modules PNG réutilis�
 
 ### MER-TERRAIN-power — Desserte énergétique
 
+**Contrat de production courant.** Sol : sol technique, caniveaux et passages de câble. Parois et profondeur : panneaux, alimentations et conduites. Contrôle de cohérence : arcs et consignations doivent rester lisibles dans leur phase réelle.
+
+
 Famille power : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s18`, `s34`, `s42`, `s48`. Images : `decor/generator`, `decor/pump`, `decor/cableTray`, `decor/warningStripe`, `decor/triage`, `decor/cable`, `decor/pipe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4528,13 +5369,16 @@ Famille power : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-queen — Chambre royale
 
+**Contrat de production courant.** Sol : aire de circulation autour de la reine. Parois et profondeur : résine, hauteur de chambre et profondeur du trône. Contrôle de cohérence : les trois attaches restent une mécanique originale déclarée.
+
+
 Famille queen : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s33`. Images : `decor/throne`, `decor/eggs`, `decor/resinCable`, `decor/silicaShard`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4546,13 +5390,16 @@ Famille queen : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-relay — Postes de relais
 
+**Contrat de production courant.** Sol : sol de poste technique et supports des appareils. Parois et profondeur : panneaux, antennes, câbles et fonds de relevé. Contrôle de cohérence : les consoles utiles se distinguent des modules non interactifs.
+
+
 Famille relay : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s16`, `s24`, `s46`. Images : `decor/antenna`, `decor/terminal`, `decor/cableTray`, `decor/warningStripe`, `decor/survey`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4564,13 +5411,16 @@ Famille relay : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-ruins — Fouilles ensevelies
 
+**Contrat de production courant.** Sol : sédiment de fouille et pistes accessibles. Parois et profondeur : coupes du terrain, vestiges et grandes masses enfouies. Contrôle de cohérence : les engins et fragments ne masquent ni sorties ni obstacles physiques.
+
+
 Famille ruins : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s21`, `s22`, `s43`. Images : `decor/excavator`, `decor/survey`, `decor/resinCable`, `decor/silicaShard`, `decor/monolith`, `decor/bridge`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4582,13 +5432,20 @@ Famille ruins : fond, sol et architecture procéduraux, modules PNG réutilisés
 
 ### MER-TERRAIN-sand — Sable noir de surface
 
+**Contrat de production courant.** Sol : surface granuleuse sombre et petites ondulations. Parois et profondeur : coupes de dune, lointains minéraux et brume de surface. Contrôle de cohérence : la texture du sol ne porte ni lune, ni route, ni coordonnée géographique inventée.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/sand`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-TERRAIN-sand-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Famille sand : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s01`, `s02`, `s11`, `s36`. Images : `decor/checkpoint`, `decor/fence`, `decor/cableTray`, `decor/warningStripe`, `decor/drill`, `decor/reel`, `decor/landing`, `decor/antenna`, `decor/ravine`, `decor/cable`, `decor/pipe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4600,13 +5457,18 @@ Famille sand : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-ship — Coursive et observatoire du transport
 
+**Contrat de production courant.** Sol : coursive pressurisée et seuils de cloison. Parois et profondeur : parois, conduits et baie d’observation. Contrôle de cohérence : le panorama orbital reste derrière la baie de s39 et hors de la marche.
+
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+
 Famille ship : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s07`, `s39`. Images : `decor/seal-equipment`, `decor/locker`, `decor/cableTray`, `decor/warningStripe`, `decor/viewport`, `decor/terminal`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4618,13 +5480,20 @@ Famille ship : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 ### MER-TERRAIN-silica — Tubes de silice
 
+**Contrat de production courant.** Sol : grain minéral et facettes de silice au sol. Parois et profondeur : parois tubulaires, joints et éclats de bord. Contrôle de cohérence : distinguer brillance décorative, gravats physiques et résine.
+
+**Ajouts 0.10.4 liés à cette fiche :** `terrain/silica`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-TERRAIN-silica-W01` — Réalisé en partie (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Famille silica : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s26`, `s27`, `s29`, `s44`. Images : `decor/silica`, `decor/rib`, `decor/resinCable`, `decor/silicaShard`, `decor/amber`, `decor/membrane`, `decor/pipe`, `decor/valve`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4636,13 +5505,16 @@ Famille silica : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-stairs — Escalier et paliers
 
+**Contrat de production courant.** Sol : marches, paliers et jonctions praticables. Parois et profondeur : supports, garde-corps et volume de cage d’escalier. Contrôle de cohérence : la perspective doit suivre les points d’entrée et de sortie existants.
+
+
 Famille stairs : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s31`, `s35`. Images : `decor/cableTray`, `decor/winch`, `decor/warningStripe`, `decor/pipe`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4654,13 +5526,16 @@ Famille stairs : fond, sol et architecture procéduraux, modules PNG réutilisé
 
 ### MER-TERRAIN-workshop — Ateliers et magasins
 
+**Contrat de production courant.** Sol : sol de maintenance, caniveaux et zones de travail. Parois et profondeur : établis, gaines, rangements et séparations. Contrôle de cohérence : une pièce vide après collecte ne doit pas conserver un stock illustré.
+
+
 Famille workshop : fond, sol et architecture procéduraux, modules PNG réutilisés.
 
 **Présent au checkpoint.** Propriétaire : `SoSRenderer.backdrop/floor/architecture`. Salles concernées : `s17`, `s47`, `s50`. Images : `decor/workbench`, `decor/reel`, `decor/cableTray`, `decor/warningStripe`, `decor/locker`, `decor/wash`, `decor/cargo`, `decor/battery`.
 
 **Qualification.** documented-context-original-materials. Références : [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json), [PROJECT-ART](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P1 · visual** — Textures ou modules sol/paroi/plafond et couches de profondeur cohérents pour cette famille. **À vérifier :** Ni ouverture fictive ni obstacle visuel contradictoire avec le chemin réel.
 - **P1 · reference** — Couleurs exactes, matières fines et métriques non documentées ; un matériau cité n'authentifie pas ses pixels. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4674,13 +5549,20 @@ Famille workshop : fond, sol et architecture procéduraux, modules PNG réutilis
 
 ### MER-PLANETE-lv178 — LV-178 / New Galveston
 
+**Contrat de production courant.** Conserver LV-178 et New Galveston comme alias d’une seule planète. La vue orbitale de s39 est une illustration pour l’observation ; elle ne constitue ni carte ni vue métrique certifiée. Continents, atmosphère, distances, satellites et échelle globale restent non authentifiés ; ne pas les déduire des salles.
+
+**Ajouts 0.10.4 liés à cette fiche :** `planets/lv178-orbital`. État de la passe : `integrated-and-static-canvas-verified`. Les usages et conditions figurent dans `currentEdition.bindings` du JSON.
+
+**Avancement des travaux du checkpoint :** `MER-PLANETE-lv178-W01` — Résolu dans le périmètre déclaré (0.10.4). Les autres travaux de cette fiche restent ouverts.
+
+
 Cadre principal ; noms et sables toxiques confirmés, géographie globale non cartographiée.
 
 **Présent au checkpoint.** Propriétaire : `Territoires et transferts narratifs`. Salles concernées : `s01`, `s02`, `s11`, `s12`, `s13`, `s14`, `s15`, `s16`, `s17`, `s18`, `s19`, `s20`, `s21`, `s22`, `s23`, `s24`, `s25`, `s26`, `s27`, `s28`, `s29`, `s30`, `s31`, `s32`, `s33`, `s34`, `s35`, `s36`, `s37`, `s41`, `s42`, `s43`, `s44`, `s45`, `s46`, `s47`, `s48`, `s49`, `s50`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-context-no-global-map. Références : [titan](https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · visual** — Créer vue orbitale ou carte seulement pour une transition utile. **À vérifier :** Continent, lune, dimension ou atmosphère non décrits restent interprétés.
 - **P1 · reference** — Coordonnées, distances et géographie complète à documenter. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.
@@ -4691,13 +5573,16 @@ Cadre principal ; noms et sables toxiques confirmés, géographie globale non ca
 
 ### MER-PLANETE-earth — Terre
 
+**Contrat de production courant.** La Terre est le cadre des scènes civiles s04 à s06 ; Chicago reste un lieu terrestre. Aucune nouvelle vue planétaire n’est nécessaire pour prétendre couvrir les scènes locales existantes. Si une transition orbitale est retenue, définir son cadrage et son usage avant l’asset ; ne pas créer de planète ou satellite supplémentaire.
+
+
 Retour terrestre et scènes civiles ; Chicago n'est pas une planète supplémentaire.
 
 **Présent au checkpoint.** Propriétaire : `Territoires et transferts narratifs`. Salles concernées : `s04`, `s05`, `s06`. Aucun PNG distinct ; repli natif ou contenu documentaire selon le cas.
 
 **Qualification.** primary-context-no-global-map. Références : [NOVEL-CH04](https://www.joblo.com/exclusive-book-preview-of-alien-sea-of-sorrows-178/), [excerpt](https://gizmodo.com/discover-weyland-yutanis-darkest-secrets-in-this-alien-1612140409), [PROJECT-CAMPAIGN](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ff6d538b32f9eb8946f2d296df1b790bf479eef9/dlc/sea-of-sorrows/data/campaign.json).
 
-**Travail restant et critère de clôture :**
+**Travaux du checkpoint 0.10.2 et critères de clôture — voir leur statut courant ci-dessus :**
 
 - **P2 · visual** — Créer vue orbitale ou carte seulement pour une transition utile. **À vérifier :** Continent, lune, dimension ou atmosphère non décrits restent interprétés.
 - **P1 · reference** — Coordonnées, distances et géographie complète à documenter. **À vérifier :** Associer la preuve au trait concerné ; qualifier le reste comme adaptation.

@@ -5,7 +5,7 @@
 root.SoSArtPack = {
   "version": 1,
   "coordinateSpace": "source-image-pixels",
-  "spriteCount": 126,
+  "spriteCount": 139,
   "assets": {
     "characters": {
       "adams": {
@@ -524,6 +524,101 @@ root.SoSArtPack = {
           "s03"
         ],
         "unarmedOnly": true
+      },
+      "decker-focus": {
+        "src": "sprites/characters/decker-focus.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          248,
+          17,
+          485,
+          1507
+        ],
+        "pivot": [
+          495,
+          1522
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          568,
+          324
+        ],
+        "label": "Decker · concentration"
+      },
+      "decker-medical-report": {
+        "src": "sprites/characters/decker-medical-report.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          260,
+          15,
+          481,
+          1502
+        ],
+        "pivot": [
+          481,
+          1515
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "heldProp": "objectives/icc-handheld",
+        "actionScope": [
+          "o02-01"
+        ],
+        "sceneScope": [
+          "s03"
+        ],
+        "label": "Decker · transmission du rapport"
+      },
+      "decker-walk-pass-a": {
+        "src": "sprites/characters/decker-walk-pass-a.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          203,
+          24,
+          629,
+          1467
+        ],
+        "pivot": [
+          512,
+          1489
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "label": "Decker · passage A"
+      },
+      "decker-walk-pass-b": {
+        "src": "sprites/characters/decker-walk-pass-b.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          175,
+          20,
+          654,
+          1467
+        ],
+        "pivot": [
+          512,
+          1485
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "label": "Decker · passage B"
       }
     },
     "corpses": {
@@ -1432,6 +1527,48 @@ root.SoSArtPack = {
         ],
         "worldHeight": 238,
         "facing": "none"
+      },
+      "medical-chart": {
+        "src": "sprites/decor/medical-chart.png",
+        "width": 1086,
+        "height": 1448,
+        "crop": [
+          109,
+          26,
+          870,
+          1395
+        ],
+        "pivot": [
+          544.0,
+          1418
+        ],
+        "worldHeight": 21,
+        "facing": "none",
+        "label": "Dossier médical papier",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "medical-cups": {
+        "src": "sprites/decor/medical-cups.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          207,
+          72,
+          1079,
+          864
+        ],
+        "pivot": [
+          746.5,
+          933
+        ],
+        "worldHeight": 11,
+        "facing": "none",
+        "label": "Gobelets médicaux",
+        "sceneScope": [
+          "s03"
+        ]
       }
     },
     "devices": {
@@ -1485,6 +1622,24 @@ root.SoSArtPack = {
         ],
         "worldHeight": 84,
         "facing": "none"
+      },
+      "parts-empty": {
+        "src": "sprites/devices/parts-empty.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          64,
+          68,
+          1397,
+          918
+        ],
+        "pivot": [
+          761.5,
+          983
+        ],
+        "worldHeight": 84,
+        "facing": "none",
+        "label": "Bac de renforts vide"
       }
     },
     "doors": {
@@ -1554,6 +1709,30 @@ root.SoSArtPack = {
         "worldHeight": 180,
         "facing": "none",
         "canvasMatch": "bulkhead-frame"
+      },
+      "lift-cage": {
+        "src": "sprites/doors/lift-cage.png",
+        "width": 1290,
+        "height": 1219,
+        "crop": [
+          17,
+          41,
+          1256,
+          1148
+        ],
+        "pivot": [
+          645,
+          1187
+        ],
+        "worldHeight": 190,
+        "facing": "none",
+        "label": "Châssis de cage minière",
+        "apertureBounds": [
+          202,
+          285,
+          885,
+          775
+        ]
       }
     },
     "effects": {
@@ -1976,6 +2155,42 @@ root.SoSArtPack = {
         ],
         "worldHeight": 160,
         "facing": "none"
+      },
+      "locker-stocked": {
+        "src": "sprites/equipment/locker-stocked.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          87,
+          4,
+          855,
+          1526
+        ],
+        "pivot": [
+          515.5,
+          1528
+        ],
+        "worldHeight": 181,
+        "facing": "none",
+        "label": "Armoire ouverte avec réserves"
+      },
+      "supply-empty": {
+        "src": "sprites/equipment/supply-empty.png",
+        "width": 1448,
+        "height": 1086,
+        "crop": [
+          74,
+          19,
+          1301,
+          1041
+        ],
+        "pivot": [
+          724.5,
+          1058
+        ],
+        "worldHeight": 61,
+        "facing": "none",
+        "label": "Coffre de ravitaillement épuisé"
       }
     },
     "objectives": {
@@ -2390,6 +2605,73 @@ root.SoSArtPack = {
           2017,
           265
         ]
+      }
+    },
+    "planets": {
+      "lv178-orbital": {
+        "src": "sprites/planets/lv178-orbital.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          283,
+          36,
+          958,
+          956
+        ],
+        "pivot": [
+          762.0,
+          514.0
+        ],
+        "worldHeight": 155,
+        "facing": "none",
+        "sceneScope": [
+          "s39"
+        ],
+        "label": "New Galveston · vue orbitale"
+      }
+    },
+    "terrain": {
+      "sand": {
+        "src": "sprites/terrain/sand.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          33,
+          211,
+          2086,
+          400
+        ],
+        "pivot": [
+          1076.0,
+          411.0
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "sand"
+        ],
+        "label": "Sable minéral · surface"
+      },
+      "silica": {
+        "src": "sprites/terrain/silica.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          43,
+          145,
+          2099,
+          426
+        ],
+        "pivot": [
+          1092.5,
+          358.0
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "silica"
+        ],
+        "label": "Silice fracturée · surface"
       }
     }
   }

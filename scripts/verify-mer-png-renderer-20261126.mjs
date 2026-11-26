@@ -263,7 +263,7 @@ test('obstacles retain the visible native width and height without modifying geo
   close(image.args[7] * Math.abs(image.matrix[3]), b.h * depth);
   assert.equal(JSON.stringify(b), before);
 });
-test('depleted, completed, destroyed and moving mechanisms retain their native states', async () => {
+test('depleted and claimed mechanisms preserve their state when specialised art is absent', async () => {
   const f = boot(); await f.api.preload();
   f.game.rs.supplyUsed = true; f.renderer.supply();
   f.game.state.armory.claimed = true; f.renderer.armoryRack({ x: 500, bodyZ: .3, z: .55 });
@@ -273,8 +273,9 @@ test('depleted, completed, destroyed and moving mechanisms retain their native s
   const locker = { id: 'fixture-locker', x: 500, bodyZ: .3, z: .55, duration: 3 };
   f.game.rs.lockers[locker.id] = { progress: 1, opened: false, contents: { reserve: 10 } }; f.renderer.locker(locker);
   f.game.rs.lockers[locker.id] = { progress: 3, opened: true, contents: { reserve: 0 } }; f.renderer.locker(locker);
-  assert.equal(drawn(f).length, 0);
-  for (const name of ['supply', 'armoryRack', 'weakpoint', 'device', 'locker']) assert.ok(f.api.status().methods[name].vectorCalls > 0);
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/equipment/armory-rack.png', 'sprites/equipment/locker-open.png']);
+  assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === 'ALLOCATION RETIRÉE'));
+  for (const name of ['supply', 'weakpoint', 'device', 'locker']) assert.ok(f.api.status().methods[name].vectorCalls > 0);
   assert.equal(f.ctx.stackDepth, 0);
 });
 test('facehugger and corpse sprites do not substitute for missing adult or queen artwork', async () => {
@@ -676,4 +677,328 @@ test('50 room rendering fixtures preserve complete campaign state and Canvas bal
   }
   assert.equal(f.context.SoSData.rooms.length, 50);
   assert.ok(Object.keys(f.api.status().drawn).length > 30);
+});
+
+// Edition 0.10.4 fixtures extend the old two-contact pack deliberately. Its
+// tests above still exercise compatibility with a pack lacking the new images.
+function continuationAssets() {
+  const assets = medicalAssets();
+  for (const id of ['decker-walk-pass-a', 'decker-walk-pass-b', 'decker-focus']) {
+    assets.characters[id] = entry('characters', id, { unarmedOnly: true, lampAnchor: [167, 112] });
+  }
+  assets.characters['decker-medical-report'] = entry('characters', 'decker-medical-report', {
+    unarmedOnly: true, sceneScope: ['s03'], actionScope: ['o02-01'], heldProp: 'objectives/icc-handheld',
+  });
+  for (const id of ['locker-stocked', 'supply-empty']) {
+    assets.equipment[id] = entry('equipment', id, { facing: 'none', stateScope: [id === 'locker-stocked' ? 'opened-with-contents' : 'spent'] });
+  }
+  assets.devices['parts-empty'] = entry('devices', 'parts-empty', { facing: 'none', stateScope: ['completed'] });
+  assets.doors['lift-cage'] = entry('doors', 'lift-cage', { facing: 'none', apertureBounds: [70, 60, 220, 250] });
+  assets.terrain = Object.fromEntries(['sand', 'silica'].map(id => [id, entry('terrain', id, {
+    width: 900, height: 300, crop: [20, 20, 860, 260], pivot: [450, 150], worldHeight: 90,
+    facing: 'none', terrainScope: [id],
+  })]));
+  assets.planets = { 'lv178-orbital': entry('planets', 'lv178-orbital', { facing: 'none', sceneScope: ['s39'], worldHeight: 155 }) };
+  for (const id of ['medical-chart', 'medical-cups']) assets.decor[id] = entry('decor', id, { facing: 'none', sceneScope: ['s03'] });
+  // The aperture in this existing image is calibrated in source pixels.
+  Object.assign(assets.decor.viewport, { width: 1536, height: 1024, crop: [20, 20, 1490, 980], pivot: [768, 1000] });
+  Object.assign(assets.decor.medical, { width: 1536, height: 1024, crop: [20, 20, 1490, 980], pivot: [768, 1000] });
+  return assets;
+}
+function prepareReport(f) {
+  f.game.enter('s03');
+  f.game.state.objectiveIndex = f.context.SoSCore.objectiveOrder.indexOf('o02-01');
+  assert.ok(f.game.state.objectiveIndex >= 0);
+  const o = f.game.current;
+  Object.assign(f.game.p, { x: o.x, z: o.z, moving: false, crouch: false, dodgeTime: 0 });
+  f.game.state.inventory.pistol = false; f.game.state.flags.equipped = false;
+  f.game.advanceWork(.1);
+  assert.equal(f.game.activeWork?.id, o.id, 'the native operation actually began');
+  return o;
+}
+const characterSources = f => drawn(f).filter(a => a.src.startsWith('sprites/characters/')).map(a => a.src);
+const assertNoSimulationChange = (f, draw) => {
+  const before = snapshot(f); draw(); assert.equal(snapshot(f), before); assert.equal(f.ctx.stackDepth, 0);
+};
+
+for (const facing of [-1, 1]) test(`four walking phases stay grounded and pause without advancing simulation facing ${facing}`, async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  f.game.p.moving = true; f.game.p.facing = facing;
+  for (const [time, id] of [[0, 'decker-walk-a'], [.13, 'decker-walk-pass-a'], [.26, 'decker-walk-b'], [.38, 'decker-walk-pass-b'], [.51, 'decker-walk-a'], [.51, 'decker-walk-a']]) {
+    f.game.time = time; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(f.game.p, undefined, 'decker'));
+    const body = drawn(f)[0], a = f.assets.characters[id]; assert.equal(body.src, a.src);
+    assert.equal(Math.sign(body.matrix[0]), facing);
+    const ground = sourcePoint(body, a.pivot), q = f.renderer.pos(f.game.p.x, f.game.zFor(f.game.p));
+    close(ground[0], q.x); close(ground[1], q.y);
+    close(body.args[7] * Math.abs(body.matrix[3]), 110 * (.82 + f.game.zFor(f.game.p) * .30));
+  }
+});
+test('new passing phases retain rest, posture, equipment, medical and reduced-motion exclusions', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  for (const [label, change, expected] of [
+    ['rest', () => { f.game.p.moving = false; }, 'decker'],
+    ['weapon', () => { f.game.state.inventory.pistol = true; }, 'decker-ready'],
+    ['crouch', () => { f.game.p.crouch = true; }, 'decker-crouch'],
+    ['dodge', () => { f.game.p.dodgeTime = .2; }, 'decker-dodge'],
+    ['reduced motion', () => { f.renderer.reduced = true; }, 'decker'],
+    ['medical scene', () => { f.game.enter('s03'); f.game.p.moving = true; }, 'decker-medical-gown'],
+  ]) {
+    f.game.enter('s01'); Object.assign(f.game.p, { moving: true, crouch: false, dodgeTime: 0 });
+    f.game.state.inventory.pistol = false; f.renderer.reduced = false; change(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(f.game.p, .13, 'decker'));
+    assert.equal(characterSources(f)[0], `sprites/characters/${expected}.png`, label);
+  }
+});
+test('unavailable intermediate frames retain the original two-contact gait', async () => {
+  const assets = continuationAssets(); delete assets.characters['decker-walk-pass-b'];
+  const f = boot({ assets, behavior: { 'sprites/characters/decker-walk-pass-a.png': 'failed' } });
+  await f.api.preload(); f.game.p.moving = true;
+  for (const [time, contact] of [[.13, 'a'], [.38, 'b']]) {
+    f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.human(f.game.p, time, 'decker'));
+    assert.deepEqual(characterSources(f), [`sprites/characters/decker-walk-${contact}.png`]);
+  }
+});
+test('focus follows the real presentation flag and yields to movement, posture, work and equipment', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  f.renderer.focus = true; f.renderer.reduced = true;
+  assertNoSimulationChange(f, () => f.renderer.human(f.game.p, .13, 'decker'));
+  assert.deepEqual(characterSources(f), ['sprites/characters/decker-focus.png']);
+  for (const [label, change] of [
+    ['released focus', () => { f.renderer.focus = false; }],
+    ['movement', () => { f.game.p.moving = true; }],
+    ['crouch', () => { f.game.p.crouch = true; }],
+    ['dodge', () => { f.game.p.dodgeTime = .2; }],
+    ['held work', () => { f.game.activeWork = { id: 'fixture-work', progress: .2 }; }],
+    ['weapon', () => { f.game.state.inventory.pistol = true; }],
+    ['medical gown', () => { f.game.enter('s03'); }],
+  ]) {
+    f.game.enter('s01'); Object.assign(f.game.p, { moving: false, crouch: false, dodgeTime: 0 });
+    f.game.state.inventory.pistol = false; f.renderer.focus = true; change(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.human(f.game.p, .13, 'decker'));
+    assert.ok(!characterSources(f).some(src => src.endsWith('/decker-focus.png')), label);
+  }
+});
+test('focus never replaces a dossier, a copied actor, or missing artwork', async () => {
+  const f = boot({ assets: continuationAssets(), behavior: { 'sprites/characters/decker-focus.png': 'wrong-size' } });
+  await f.api.preload(); f.renderer.focus = true;
+  f.renderer.human(f.game.p, 0, 'decker'); f.renderer.human({ ...f.game.p }, 0, 'decker');
+  assert.deepEqual(characterSources(f), ['sprites/characters/decker.png', 'sprites/characters/decker.png']);
+  const p = boot({ assets: continuationAssets(), portrait: true }); await p.api.preload(); p.renderer.focus = true;
+  p.renderer.human(p.game.p, 0, 'decker'); assert.deepEqual(characterSources(p), ['sprites/characters/decker.png']);
+});
+test('a native report operation holds one ICC reader while preserving its pedestal and objective marker', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload(); const o = prepareReport(f);
+  assertNoSimulationChange(f, () => { f.renderer.object(o); f.renderer.human(f.game.p, 0, 'decker'); });
+  assert.deepEqual(characterSources(f), ['sprites/characters/decker-medical-report.png']);
+  assert.ok(!drawn(f).some(a => a.src === 'sprites/objectives/icc-handheld.png'), 'the held reader is not duplicated on the pedestal');
+  assert.ok(f.calls.some(a => a.op === 'fillRect'), 'native reporting pedestal remains');
+  assert.ok(f.calls.some(a => a.op === 'ellipse' && a.fill === '#d8c77044'), 'native objective marker remains');
+  f.game.step(.01, {}); assert.equal(f.game.activeWork, null); f.calls.length = 0;
+  assertNoSimulationChange(f, () => { f.renderer.object(o); f.renderer.human(f.game.p, 0, 'decker'); });
+  assert.deepEqual(characterSources(f), ['sprites/characters/decker-medical-gown.png']);
+  assert.equal(drawn(f).filter(a => a.src === 'sprites/objectives/icc-handheld.png').length, 1, 'releasing work restores the docked reader');
+  for (let i = 0; i < 45 && !f.game.state.flags.report_sent; i++) f.game.advanceWork(.05);
+  assert.equal(f.game.state.flags.report_sent, true); assert.equal(f.game.activeWork, null); f.calls.length = 0;
+  assertNoSimulationChange(f, () => { f.renderer.object(o); f.renderer.human(f.game.p, 0, 'decker'); });
+  assert.deepEqual(characterSources(f), ['sprites/characters/decker-medical-gown.png']);
+  assert.ok(!drawn(f).some(a => a.src === 'sprites/objectives/icc-handheld.png'), 'completed report retains the native completed objective');
+});
+test('medical report pose rejects unrelated actions, bad progress and incompatible physical states', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  for (const [label, change] of [
+    ['other action', () => { f.game.activeWork.id = 'other-objective'; }],
+    ['other current objective', () => { f.game.state.objectiveIndex = 0; }],
+    ['negative progress', () => { f.game.activeWork.progress = -.1; }],
+    ['progress above one', () => { f.game.activeWork.progress = 1.1; }],
+    ['nonfinite progress', () => { f.game.activeWork.progress = NaN; }],
+    ['completed report', () => { f.game.state.flags.report_sent = true; }],
+    ['moving', () => { f.game.p.moving = true; }],
+    ['crouch', () => { f.game.p.crouch = true; }],
+    ['dodge', () => { f.game.p.dodgeTime = .2; }],
+    ['armed', () => { f.game.state.inventory.pistol = true; }],
+    ['other room', () => { f.game.enter('s04'); f.game.activeWork = { id: 'o02-01', progress: .2 }; }],
+  ]) {
+    f.game.state.flags.report_sent = false; f.game.rs.work['o02-01'] = 0;
+    const o = prepareReport(f); change(); f.calls.length = 0;
+    assertNoSimulationChange(f, () => { f.renderer.object(o); f.renderer.human(f.game.p, 0, 'decker'); });
+    assert.ok(!characterSources(f).some(src => src.endsWith('/decker-medical-report.png')), label);
+    if (f.game.room.id === 's03' && !f.game.state.flags.report_sent) {
+      assert.ok(drawn(f).some(a => a.src === 'sprites/objectives/icc-handheld.png'), label + ' keeps the docked reader');
+    }
+  }
+});
+test('failed or wrongly scoped report art cannot hide the docked reader', async () => {
+  for (const [label, change, behavior] of [
+    ['image failure', () => {}, { 'sprites/characters/decker-medical-report.png': 'failed' }],
+    ['image dimensions', () => {}, { 'sprites/characters/decker-medical-report.png': 'wrong-size' }],
+    ['wrong room scope', a => { a.sceneScope = ['s04']; }, {}],
+    ['wrong action scope', a => { a.actionScope = ['o01-01']; }, {}],
+    ['wrong held prop', a => { a.heldProp = 'equipment/archive'; }, {}],
+  ]) {
+    const assets = continuationAssets(); change(assets.characters['decker-medical-report']);
+    const f = boot({ assets, behavior }); await f.api.preload(); const o = prepareReport(f);
+    assertNoSimulationChange(f, () => { f.renderer.object(o); f.renderer.human(f.game.p, 0, 'decker'); });
+    assert.deepEqual(characterSources(f), ['sprites/characters/decker-medical-gown.png'], label);
+    assert.equal(drawn(f).filter(a => a.src === 'sprites/objectives/icc-handheld.png').length, 1, label);
+  }
+});
+test('open lockers distinguish actual contents, empty storage and an unfinished opening', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  const room = f.context.SoSData.rooms.find(r => r.lockers.length); f.game.enter(room.id);
+  const l = f.game.room.lockers[0]; Object.assign(f.game.p, { x: l.x, z: l.z });
+  const s = f.game.rs.lockers[l.id];
+  for (const [opened, progress, contents, expected, label] of [
+    [false, 0, { reserve: 4 }, 'locker', 'SCELLÉ'],
+    [false, .4, { reserve: 4 }, null, 'SCELLÉ'],
+    [true, l.duration, { reserve: 4, foam: 0 }, 'locker-stocked', 'OUVERT · RÉSERVES'],
+    [true, l.duration, { reserve: 0, foam: 0 }, 'locker-open', 'VIDE · DÉPÔT POSSIBLE'],
+  ]) {
+    Object.assign(s, { opened, progress, contents }); f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.locker(l));
+    assert.deepEqual(drawn(f).map(a => a.src), expected ? [`sprites/equipment/${expected}.png`] : []);
+    assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === label));
+  }
+  for (const mode of ['pending', 'failed']) {
+    const assets = continuationAssets(), stocked = assets.equipment['locker-stocked'];
+    const unavailable = boot({ assets, behavior: { [stocked.src]: mode } });
+    // Load the old empty image first, as may happen after visiting another
+    // emptied locker, while the new stocked image has not yet been requested.
+    delete assets.equipment['locker-stocked']; await unavailable.api.preload(['equipment']);
+    assets.equipment['locker-stocked'] = stocked;
+    unavailable.game.enter(room.id);
+    Object.assign(unavailable.game.p, { x: l.x, z: l.z });
+    Object.assign(unavailable.game.rs.lockers[l.id], { opened: true, progress: l.duration, contents: { reserve: 4 } });
+    unavailable.renderer.locker(l); await flush(); unavailable.calls.length = 0;
+    assert.equal(unavailable.api.status().assets['equipment/locker-open'], 'ready');
+    assert.equal(unavailable.api.status().assets['equipment/locker-stocked'], mode === 'pending' ? 'loading' : 'failed');
+    assertNoSimulationChange(unavailable, () => unavailable.renderer.locker(l));
+    assert.equal(drawn(unavailable).length, 0, mode + ' stocked image must not show an already loaded empty cabinet');
+    const native = unavailable.calls.filter(c => ['fillRect', 'fillText', 'ellipse'].includes(c.op)); unavailable.calls.length = 0;
+    unavailable.baseMethods.locker.call(unavailable.renderer, l);
+    assert.deepEqual(unavailable.calls.filter(c => ['fillRect', 'fillText', 'ellipse'].includes(c.op)), native, mode + ' preserves complete native stock presentation');
+  }
+});
+test('depleted supply art follows real collection without granting stock during rendering', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  const room = f.context.SoSData.rooms.find(r => r.supply); f.game.enter(room.id);
+  Object.assign(f.game.p, { x: 320, z: .55 }); f.game.cooldowns.interaction = 0;
+  assert.equal(f.game.nearby()?.action, 'supply');
+  assertNoSimulationChange(f, () => f.renderer.supply());
+  assert.equal(drawn(f)[0].src, 'sprites/equipment/supply.png');
+  assert.equal(f.game.interact(), true); assert.equal(f.game.rs.supplyUsed, true); f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer.supply());
+  assert.equal(drawn(f)[0].src, 'sprites/equipment/supply-empty.png');
+});
+test('parts depletion follows native completion and never substitutes for another completed device', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload(); f.game.enter('s17');
+  const d = f.game.room.devices.find(d => d.kind === 'parts'); Object.assign(f.game.p, { x: d.x, z: d.z });
+  assertNoSimulationChange(f, () => f.renderer.device(d, 0)); assert.equal(drawn(f)[0].src, 'sprites/devices/parts.png');
+  f.game.rs.work[d.id] = d.duration; const parts = f.game.p.parts;
+  assert.equal(f.game.finishDevice(d), true); assert.equal(f.game.p.parts, parts + 2); f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer.device(d, 0)); assert.equal(drawn(f)[0].src, 'sprites/devices/parts-empty.png');
+  assert.ok(!f.calls.some(a => a.op === 'fillText' && a.args[0] === 'MAINTENIR E'));
+  assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === 'VIDE'), 'native completed-stock cue remains readable');
+  const other = { ...d, id: 'fixture-isolation', kind: 'isolation' }; f.game.state.optional[other.id] = true; f.calls.length = 0;
+  assertNoSimulationChange(f, () => f.renderer.device(other, 0)); assert.equal(drawn(f).length, 0);
+});
+test('armory keeps both native weapons until claimed, then an empty rack without refilling ammunition', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  const room = f.context.SoSData.rooms.find(r => r.armoryRack); f.game.enter(room.id); f.game.state.flags.equipped = true;
+  const a = f.game.room.armoryRack; Object.assign(f.game.p, { x: a.x, z: a.z });
+  assertNoSimulationChange(f, () => f.renderer.armoryRack(a));
+  assert.equal(drawn(f).length, 0, 'the empty PNG does not falsely replace the stocked native rack');
+  for (const color of ['#798d75', '#8fa9a9']) assert.ok(f.calls.some(c => c.op === 'fillRect' && c.fill === color), 'both native weapon bodies remain');
+  const stocked = f.calls.filter(c => ['fillRect', 'fillText', 'ellipse'].includes(c.op)); f.calls.length = 0;
+  f.baseMethods.armoryRack.call(f.renderer, a);
+  assert.deepEqual(f.calls.filter(c => ['fillRect', 'fillText', 'ellipse'].includes(c.op)), stocked);
+  f.calls.length = 0;
+  assert.equal(f.game.claimArmory(), true); f.game.state.armory.pulseAmmo = 7;
+  assertNoSimulationChange(f, () => f.renderer.armoryRack(a));
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/equipment/armory-rack.png']);
+  assert.ok(f.calls.some(a => a.op === 'fillText' && a.args[0] === 'ALLOCATION RETIRÉE'));
+  assert.equal(f.game.claimArmory(), false); assert.equal(f.game.state.armory.pulseAmmo, 7);
+});
+test('terrain decals are limited to their material, stable in world space, and read no simulation time forward', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  for (const kind of ['sand', 'silica']) {
+    f.game.enter(f.context.SoSData.rooms.find(r => r.kind === kind).id); f.renderer.camera = 100; f.calls.length = 0;
+    assertNoSimulationChange(f, () => f.renderer.floor(0));
+    const first = drawn(f); assert.ok(first.length > 0, kind + ' has visible floor decals');
+    assert.ok(first.every(a => a.src === `sprites/terrain/${kind}.png`));
+    const before = JSON.stringify(first); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.floor(90));
+    assert.equal(JSON.stringify(drawn(f)), before, 'floor does not shimmer with elapsed time');
+    const worldPoints = first.map(a => { const p = sourcePoint(a, f.assets.terrain[kind].pivot); return [p[0] + 100, p[1]]; });
+    f.renderer.camera = 123; f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.floor(90));
+    const moved = drawn(f).map(a => { const p = sourcePoint(a, f.assets.terrain[kind].pivot); return [p[0] + 123, p[1]]; });
+    assert.ok(worldPoints.some(a => moved.some(b => Math.abs(a[0] - b[0]) < 1e-8 && Math.abs(a[1] - b[1]) < 1e-8)), 'scrolling preserves at least one world-anchored patch');
+  }
+  for (const r of f.context.SoSData.rooms.filter(r => !['sand', 'silica'].includes(r.kind))) {
+    f.game.enter(r.id); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.floor(0)); assert.equal(drawn(f).length, 0, r.id);
+  }
+});
+test('the orbital globe is confined to the calibrated s39 viewport and preserves other decor', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload();
+  f.game.enter('s39'); assertNoSimulationChange(f, () => f.renderer.decor('viewport', 0));
+  assert.equal(drawn(f).filter(a => a.src === 'sprites/planets/lv178-orbital.png').length, 1);
+  assert.ok(drawn(f).some(a => a.src === 'sprites/decor/viewport.png'), 'existing viewport remains');
+  f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.decor('terminal', 0));
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/decor/terminal.png']);
+  f.game.enter('s38'); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.decor('viewport', 0));
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/decor/viewport.png']);
+  const assets = continuationAssets(); assets.decor.viewport.width = 1600;
+  const other = boot({ assets }); await other.api.preload(); other.game.enter('s39'); other.renderer.decor('viewport', 0);
+  assert.deepEqual(drawn(other).map(a => a.src), ['sprites/decor/viewport.png'], 'unmatched source aperture keeps the existing window');
+});
+test('the two authored lift frames preserve native opening, walls, rails, labels and traversal state', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload(); let count = 0;
+  const geometry = [], line = f.renderer.line, path = f.renderer.path;
+  f.renderer.line = function (...args) { geometry.push(['line', ...args]); return line.apply(this, args); };
+  f.renderer.path = function (...args) { geometry.push(['path', ...args]); return path.apply(this, args); };
+  for (const room of f.context.SoSData.rooms) for (const d of room.doors.filter(d => d.portal.type === 'lift-cage')) {
+    f.game.enter(room.id); assert.ok(['left', 'right'].includes(d.portal.mount));
+    for (const open of [false, true]) {
+      f.game.state.flags.lift_ready = open; Object.assign(f.game.p, { x: d.x, z: d.z }); f.calls.length = 0; geometry.length = 0;
+      const status = f.game.doorStatus(d);
+      assertNoSimulationChange(f, () => f.renderer.door(d));
+      assert.deepEqual(drawn(f).map(a => a.src), ['sprites/doors/lift-cage.png']);
+      const frame = drawn(f)[0], a = f.assets.doors['lift-cage'], q = f.renderer.pos(d.x, d.portal.apertureZ), [x, y, w, h] = a.apertureBounds;
+      const first = sourcePoint(frame, [x, y]), last = sourcePoint(frame, [x + w, y + h]);
+      close(first[0], q.x - d.portal.width * .45); close(last[0], q.x + d.portal.width * .45);
+      close(first[1], q.y - 144); close(last[1], q.y - 10);
+      const label = f.calls.filter(a => a.op === 'fillText'), surroundings = geometry.filter(a => a[0] === 'path' || a[5] === '#a0b5b3');
+      assert.equal(geometry.filter(a => a[0] === 'line' && a[5] === '#93aaa7').length, status.open ? 0 : 8, 'closed cage keeps its visible bars');
+      f.calls.length = 0; geometry.length = 0;
+      f.baseMethods.door.call(f.renderer, d);
+      assert.deepEqual(f.calls.filter(a => a.op === 'fillText'), label);
+      assert.deepEqual(geometry.filter(a => a[0] === 'path' || a[5] === '#a0b5b3'), surroundings);
+    }
+    count++;
+  }
+  assert.equal(count, 2);
+});
+test('missing or invalid lift aperture art returns the complete original threshold', async () => {
+  for (const [change, behavior] of [
+    [a => { a.apertureBounds[2] = a.width; }, {}],
+    [a => { a.facing = 'right'; }, {}],
+    [() => {}, { 'sprites/doors/lift-cage.png': 'failed' }],
+  ]) {
+    const assets = continuationAssets(); change(assets.doors['lift-cage']);
+    const f = boot({ assets, behavior }); await f.api.preload(); f.game.enter('s14');
+    const d = f.game.room.doors.find(d => d.portal.type === 'lift-cage'); Object.assign(f.game.p, { x: d.x, z: d.z });
+    assertNoSimulationChange(f, () => f.renderer.door(d)); assert.equal(drawn(f).length, 0);
+    const actual = f.calls.filter(a => a.op === 'fillRect' || a.op === 'fillText'); f.calls.length = 0;
+    f.baseMethods.door.call(f.renderer, d); assert.deepEqual(f.calls.filter(a => a.op === 'fillRect' || a.op === 'fillText'), actual);
+  }
+});
+test('chapter-four paper and cups stay on their existing medical dressing without spreading to other rooms', async () => {
+  const f = boot({ assets: continuationAssets() }); await f.api.preload(); f.game.enter('s03');
+  assertNoSimulationChange(f, () => f.renderer.decor('medical', 0));
+  assert.deepEqual(new Set(drawn(f).map(a => a.src)), new Set([
+    'sprites/decor/medical.png', 'sprites/decor/medical-chart.png', 'sprites/decor/medical-cups.png',
+  ]));
+  f.game.enter('s04'); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.decor('medical', 0));
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/decor/medical.png']);
+  f.game.enter('s03'); f.calls.length = 0; assertNoSimulationChange(f, () => f.renderer.decor('terminal', 0));
+  assert.deepEqual(drawn(f).map(a => a.src), ['sprites/decor/terminal.png']);
 });

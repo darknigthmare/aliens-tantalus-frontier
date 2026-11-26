@@ -5,6 +5,7 @@
     creatures: 'Créatures', corpses: 'Restes', equipment: 'Équipement',
     weapons: 'Armes', effects: 'Effets', devices: 'Dispositifs', doors: 'Portes',
     objectives: 'Objectifs', organic: 'Organismes', parasites: 'Parasites', stretchers: 'Brancards',
+    terrain: 'Terrains', planets: 'Planètes',
   };
   const names = {
     foam: 'Mousse', cryo: 'Capsule de stase', valve: 'Vanne', crate: 'Caisse',

@@ -1,0 +1,6235 @@
+{
+  "schemaVersion": 1,
+  "title": "La Mer des Chagrins — validation de l’édition visuelle 0.10.4",
+  "date": "2026-11-26",
+  "baseCommit": "a26188a1e63cd39daaee5167d8e940e48120794d",
+  "scope": {
+    "visualVersion": "0.10.4",
+    "simulationVersion": "0.10.0",
+    "originalSimulationTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
+    "originalGameFiles": 3029,
+    "historicalDeliverables": 59,
+    "pngFiles": 139,
+    "pngBytes": 270594463,
+    "worldRendererMappings": 135,
+    "interfaceOnlyPng": 4,
+    "galleryPng": 139,
+    "canonicalOneToOneCertified": false,
+    "completeAnimationCycles": false
+  },
+  "continuation": {
+    "previousPngFiles": 126,
+    "previousPngBytes": 246478952,
+    "newPngFiles": 13,
+    "newPngBytes": 24115511,
+    "previousCompleteAssetRowsSha256": "b7458b3d7667db1e2acd819ca18a83267e637ab3351b31b4e3818a3bcd86be34",
+    "requestedAssetTargets": 14,
+    "imageToolCalls": 16,
+    "selectedFinalPng": 13,
+    "supersededLiftCageCandidates": 2,
+    "refusedTargets": [
+      "weapons/flame-compact"
+    ],
+    "priorRefusalsNotRetried": [
+      "creatures/adult",
+      "weapons/plasma"
+    ],
+    "sourcePngBytesModified": false,
+    "generationRecord": "GENERATION_0_10_4.json"
+  },
+  "execution": {
+    "nodeVersion": "v24.22.3",
+    "workingTreeBasedOn": "a26188a1e63cd39daaee5167d8e940e48120794d",
+    "testedRuntimeIdentifiedBy": "RUNTIME_MANIFEST.json SHA256 and sourceFiles below",
+    "globalTestAllRunThisEdition": false,
+    "globalBuildRunThisEdition": false,
+    "globalCheckBuiltRunThisEdition": false,
+    "browserCampaignRunThisEdition": false,
+    "physicalTouchOrGamepadRunThisEdition": false
+  },
+  "nodeVisualSuite": {
+    "command": "npm run test:mer-des-chagrins-visual",
+    "exitCode": 0,
+    "tests": 105,
+    "pass": 105,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 1329.586403,
+    "rendererTests": 84,
+    "rendererTestsAdded": 18,
+    "logSha256": "84e02e76b0ea9ab2d313353da30280011001a02d5bc645e3c89f8f34d07e3f2a",
+    "scope": "Real simulation modules with Canvas/Image/DOM doubles; runtime pixels are verified independently below."
+  },
+  "metadataVerification": {
+    "command": "npm run check:mer-des-chagrins-sprites",
+    "exitCode": 0,
+    "result": {
+      "verifiedPngFiles": 139,
+      "verifiedBytes": 270594463,
+      "uniquePngHashes": 139,
+      "historicalPngFilesUnchanged": 119,
+      "historicalInventorySha256": "5aaa154ce42483758ffc2693dd117938f3c50fd4f3b50d01c17c3c99d746ee7e",
+      "previousEditionPngAndMetadataUnchanged": 126,
+      "newThisEditionPngFiles": 13,
+      "newSourcePngFiles": 20,
+      "categories": {
+        "characters": 30,
+        "corpses": 1,
+        "creatures": 2,
+        "decor": 52,
+        "devices": 4,
+        "doors": 3,
+        "effects": 6,
+        "equipment": 18,
+        "objectives": 5,
+        "obstacles": 6,
+        "organic": 1,
+        "parasites": 2,
+        "planets": 1,
+        "stretchers": 2,
+        "terrain": 2,
+        "weapons": 4
+      },
+      "browserGameplayCertified": false
+    },
+    "logSha256": "d960a254f8cb472c2d840ef4342bc068789737a2ad536ee664090653270ff879"
+  },
+  "nativeCanvasExecution": {
+    "command": "MALLOC_ARENA_MAX=2 node --expose-gc scripts/qa-mer-visual-canvas-20261126.mjs --captures docs/mer-des-chagrins-20261126/canvas-0.10.4 --output QA_OUTPUT_DIRECTORY",
+    "exitCode": 0,
+    "environment": {
+      "MALLOC_ARENA_MAX": "2"
+    },
+    "scope": "Allocator environment setting for the QA process only; no production runtime change.",
+    "lastInterruptedAttempt": {
+      "exitCode": 137,
+      "decodedSources": 139,
+      "assertionFailureReported": false,
+      "successfulResultClaimed": false
+    },
+    "logSha256": "ad3862d6c44ad157f06611b4de956952f387ce256bdf3c3a8fc2acd4155050fb"
+  },
+  "nativeCanvas": {
+    "schemaVersion": 4,
+    "edition": "0.10.4",
+    "engine": "@napi-rs/canvas",
+    "engineVersion": "0.1.100",
+    "browserJourney": false,
+    "explanation": "Real Canvas pixels rendered from the original simulation and PNG adapter. Rooms, equipment, actor positions and diagnostic camera magnification are explicit fixtures. Six effects originate from native shoot/hurtEnemy actions and their real events/states. This is neither a keyboard journey nor a full campaign completion.",
+    "decoder": {
+      "preloadScheduling": "Sequential categories through the production preload API; optional explicit garbage collection between categories when Node exposes it.",
+      "nativeImageCache": {
+        "limit": 24,
+        "decodes": 386,
+        "reloads": 247,
+        "evictions": 362,
+        "maxCachedNativeImages": 24,
+        "maxImagesInOneRender": 21,
+        "observedPeakResidentMiB": 910,
+        "uniqueFullResolutionSourcesDecoded": 139,
+        "scope": "QA harness only: a discarded image-selection pass records the exact paths for each frame, restoring Canvas pixels and all renderer properties. Native onload is awaited for those full-resolution images before the retained render; actual drawImage counts exclude selection passes. The production renderer and its normal browser image loading are unchanged.",
+        "reason": "An initial all-resident preload was killed with exit 137 after 136 images and an observed 1165 MiB RSS. No assertion result or capture was claimed for that interrupted attempt.",
+        "nativeReadiness": "Native complete/dimensions can precede pixel readiness; every retained image draw waits for the actual native onload callback.",
+        "peakMeasurement": "Maximum RSS sampled after each native PNG decode and isolated render; not a continuous process peak and not a performance comparison."
+      },
+      "sourcePngFilesChanged": false,
+      "ancillaryMetadataExcludedInMemory": "caBX provenance chunks only; the installed Skia decoder rejects these chunks. All source files and all IDAT compressed pixel chunks are retained byte-for-byte.",
+      "imagesWithCaBX": 139
+    },
+    "counts": {
+      "declared": 139,
+      "loaded": 139,
+      "rooms": 50,
+      "savedRoomCaptures": 8,
+      "poseAndWeaponCases": 24,
+      "locomotionCases": 16,
+      "walkingCases": 8,
+      "restCases": 4,
+      "reducedMotionCases": 4,
+      "detailCases": 42,
+      "detailGroups": {
+        "effect": 6,
+        "lamp": 4,
+        "light-panel": 2,
+        "shutter": 3,
+        "bulkhead": 4,
+        "native-door-fallback": 23
+      },
+      "savedDiagnosticCaptures": 4,
+      "capturedDetailCases": 22,
+      "continuationCases": 11,
+      "editionCases": 35,
+      "capturedEditionCases": 26,
+      "newAssetKindsDrawn": 13,
+      "pngKindsDrawn": 125
+    },
+    "checks": {
+      "allImageDimensionsMatch": true,
+      "allImageSourcesUnchanged": true,
+      "immutableCampaignModulesUnchanged": true,
+      "simulationPrototypeUnchanged": true,
+      "targetingArchitectureAndEventAdmissionUnchanged": true,
+      "unmodifiedNativeMethods": [
+        "architecture",
+        "pickTarget",
+        "worldDressing",
+        "lightOverlay",
+        "tacticalOverlay",
+        "addEffect"
+      ],
+      "allRoomStatesUnchangedByRendering": true,
+      "allFixtureSavesUnchangedByRendering": true,
+      "restAndReducedMotionPixelsStable": true,
+      "nativeDoorFallbackPixelsIdentical": true,
+      "sixEffectsUseNativeActionsAndState": true
+    },
+    "captures": [
+      {
+        "room": "s01",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s01.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 1857120,
+        "sha256": "fcb6a971d471166cd0314ac0dfae252930393f8d8fd90f7f971d8ae4c389ba03"
+      },
+      {
+        "room": "s03",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s03.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 324783,
+        "sha256": "a63ec9e78cceb187525f3b4d665ef933259bf4c65a1f7bdcdc87bc9ae6053bbf"
+      },
+      {
+        "room": "s14",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s14.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 600728,
+        "sha256": "aa84fa0a064b6cbc5fb192c962136084d31c9b0e0ed2710b1774691e12685934"
+      },
+      {
+        "room": "s26",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s26.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 986042,
+        "sha256": "6d77c07ffe5a766f749c7a19026a1ef86da49cda0ace1317bc91c5ddbc2da0b2"
+      },
+      {
+        "room": "s33",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s33.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 696064,
+        "sha256": "cf5936a01a747a4130b6954bad29892493d703362ae5021ef5494bfc73593a2a"
+      },
+      {
+        "room": "s34",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s34.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 503441,
+        "sha256": "f92dda2c609cb13eff740fe9291bd48edf3a7b02bce0872ac1f75bb489befa43"
+      },
+      {
+        "room": "s39",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s39.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 484898,
+        "sha256": "9a263d18473ac3fb0ed150a7e1a8bc76f938c95267fd70b29645c74252096bb1"
+      },
+      {
+        "room": "s50",
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s50.png",
+        "width": 1600,
+        "height": 900,
+        "bytes": 418202,
+        "sha256": "91c3cd3042c47678db6eccb19cd94f0551d3443e3ee3738e7356f339aa7d9514"
+      }
+    ],
+    "contactSheet": "docs/mer-des-chagrins-20261126/canvas-0.10.4/poses-weapons.png",
+    "diagnosticCaptures": {
+      "locomotion": {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/locomotion.png",
+        "width": 1800,
+        "height": 1698,
+        "bytes": 537570,
+        "sha256": "eaeb309424231a2890c790ba6f68cf85e2e0c2f04c69afdb83d2edbeeac4f791",
+        "cells": [
+          "locomotion/walking/1/0.05",
+          "locomotion/walking/1/0.18",
+          "locomotion/walking/1/0.3",
+          "locomotion/walking/1/0.43",
+          "locomotion/walking/-1/0.05",
+          "locomotion/walking/-1/0.18",
+          "locomotion/walking/-1/0.3",
+          "locomotion/walking/-1/0.43",
+          "locomotion/rest/1/0.05",
+          "locomotion/rest/1/0.3",
+          "locomotion/rest/-1/0.05",
+          "locomotion/rest/-1/0.3",
+          "locomotion/reduced-motion/1/0.05",
+          "locomotion/reduced-motion/1/0.3",
+          "locomotion/reduced-motion/-1/0.05",
+          "locomotion/reduced-motion/-1/0.3"
+        ],
+        "columns": 4,
+        "rows": 4
+      },
+      "details": {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/details.png",
+        "width": 2400,
+        "height": 2608,
+        "bytes": 776555,
+        "sha256": "388f3f4b295c189a209e93a6282117adb5cf664630f5e7f70e526d51bfd6384d",
+        "cells": [
+          "effects/muzzle",
+          "effects/flame",
+          "effects/impact",
+          "effects/spark",
+          "effects/acid",
+          "effects/foam",
+          "lamp/1/off",
+          "lamp/1/on",
+          "lamp/-1/off",
+          "lamp/-1/on",
+          "lighting/off",
+          "lighting/on",
+          "shutter/open",
+          "shutter/closed",
+          "shutter/broken",
+          "door/back/open",
+          "door/back/closed",
+          "door/front/open",
+          "door/front/closed",
+          "native-door/bulkhead/left",
+          "native-door/rock-breach/front",
+          "native-door/stairwell/back"
+        ],
+        "columns": 4,
+        "rows": 6
+      },
+      "continuation": {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/medical-queen.png",
+        "width": 2400,
+        "height": 978,
+        "bytes": 430421,
+        "sha256": "f766bee2f6077e27b7d4b4ace9dc0946a404f1675dc71b29593dc7e5ddfb2314",
+        "cells": [
+          "medical/decker/1",
+          "medical/physician/1",
+          "medical/decker/-1",
+          "medical/physician/-1",
+          "medical/handheld/false",
+          "medical/handheld/true",
+          "queen/1",
+          "queen/-1"
+        ],
+        "columns": 4,
+        "rows": 2
+      },
+      "edition": {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/states-and-world.png",
+        "width": 2400,
+        "height": 3313,
+        "bytes": 2369779,
+        "sha256": "f45b32661898a031f72858c142ed261f6b45f5a37fda086a0655d01538a0dfbc",
+        "cells": [
+          "stock/locker/sealed",
+          "stock/locker/opening",
+          "stock/locker/stocked",
+          "stock/locker/empty",
+          "stock/locker/deposited",
+          "stock/supply/false",
+          "stock/supply/true",
+          "stock/parts/false",
+          "stock/parts/true",
+          "stock/armory/false",
+          "stock/armory/true",
+          "action/medical-report/1",
+          "action/medical-report/-1",
+          "action/focus/focus/1",
+          "action/focus/focus/-1",
+          "scenery/medical/s03",
+          "scenery/planet/false",
+          "scenery/planet/true",
+          "terrain/sand/false",
+          "terrain/sand/true",
+          "terrain/silica/false",
+          "terrain/silica/true",
+          "door/lift/s14/open",
+          "door/lift/s14/closed",
+          "door/lift/s15/open",
+          "door/lift/s15/closed"
+        ],
+        "columns": 4,
+        "rows": 7
+      }
+    },
+    "rooms": [
+      {
+        "room": "s01",
+        "imageUses": [
+          "terrain/sand",
+          "decor/checkpoint",
+          "decor/fence",
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "characters/rand",
+          "characters/decker",
+          "obstacles/rack"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": false,
+          "player": {
+            "x": 180,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s02",
+        "imageUses": [
+          "terrain/sand",
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "characters/decker",
+          "obstacles/rack",
+          "decor/drill",
+          "decor/reel",
+          "characters/badejo",
+          "characters/bronson",
+          "objectives/case"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": false,
+          "player": {
+            "x": 1120,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s03",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "decor/medical",
+          "decor/medical-chart",
+          "decor/medical-cups",
+          "decor/locker",
+          "objectives/icc-handheld",
+          "characters/carlyle-physician",
+          "characters/decker-medical-gown"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 1,
+          "equipped": false,
+          "player": {
+            "x": 790,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s04",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "characters/decker",
+          "obstacles/rack",
+          "decor/office",
+          "decor/terminal",
+          "characters/harriman",
+          "objectives/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 2,
+          "equipped": false,
+          "player": {
+            "x": 980,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s05",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "characters/decker",
+          "decor/locker",
+          "objectives/console",
+          "decor/home"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 4,
+          "equipped": false,
+          "player": {
+            "x": 900,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s06",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "characters/decker",
+          "obstacles/rack",
+          "decor/medical",
+          "objectives/console",
+          "decor/wash",
+          "characters/medic"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 3,
+          "equipped": false,
+          "player": {
+            "x": 830,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s07",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "decor/locker",
+          "decor/seal-equipment",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 860,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s08",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/office",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/briefing",
+          "characters/rollins"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 5,
+          "equipped": true,
+          "player": {
+            "x": 880,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s09",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/locker",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/armory",
+          "equipment/armory-rack",
+          "characters/adams",
+          "equipment/supply"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 6,
+          "equipped": true,
+          "player": {
+            "x": 1040,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s10",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/dropship",
+          "decor/cargo",
+          "characters/elway"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1240,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s11",
+        "imageUses": [
+          "terrain/sand",
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/landing",
+          "decor/antenna"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 28,
+          "equipped": true,
+          "player": {
+            "x": 1280,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s12",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/briefing",
+          "characters/adams",
+          "equipment/supply",
+          "decor/battery"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 7,
+          "equipped": true,
+          "player": {
+            "x": 970,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s13",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "objectives/console",
+          "decor/wash",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/filters",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "equipment/shutter-control"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 8,
+          "equipped": true,
+          "player": {
+            "x": 880,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s14",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/hoist-drive",
+          "decor/winch",
+          "doors/lift-cage"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 9,
+          "equipped": true,
+          "player": {
+            "x": 1120,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s15",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/reel",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/hoist-drive",
+          "doors/lift-cage"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1060,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s16",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/terminal",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/supply",
+          "decor/antenna",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "characters/cho"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 10,
+          "equipped": true,
+          "player": {
+            "x": 1140,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s17",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/reel",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/armory-rack",
+          "equipment/supply",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/workbench",
+          "equipment/locker",
+          "devices/parts"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 980,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s18",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/generator",
+          "decor/pump"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 11,
+          "equipped": true,
+          "player": {
+            "x": 1210,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s19",
+        "imageUses": [
+          "equipment/archive",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/carene",
+          "decor/rib",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/pipe",
+          "obstacles/rib",
+          "devices/isolation",
+          "obstacles/silica-rubble",
+          "obstacles/resin"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1440,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s20",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/rib",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 12,
+          "equipped": true,
+          "player": {
+            "x": 1060,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s21",
+        "imageUses": [
+          "obstacles/crate",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "decor/excavator",
+          "decor/survey"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 13,
+          "equipped": true,
+          "player": {
+            "x": 1280,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s22",
+        "imageUses": [
+          "equipment/archive",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "decor/survey",
+          "decor/monolith"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1430,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s23",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/rib",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/ossuary"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 14,
+          "equipped": true,
+          "player": {
+            "x": 930,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s24",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/terminal",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/supply",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "decor/survey"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 15,
+          "equipped": true,
+          "player": {
+            "x": 1060,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s25",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/pipe",
+          "devices/isolation",
+          "decor/bridge",
+          "decor/cable"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1340,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s26",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/rib",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "terrain/silica",
+          "decor/silica"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 16,
+          "equipped": true,
+          "player": {
+            "x": 1060,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s27",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "terrain/silica",
+          "decor/silica",
+          "decor/amber"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 18,
+          "equipped": true,
+          "player": {
+            "x": 1340,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s28",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/rib",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/cocoon"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 17,
+          "equipped": true,
+          "player": {
+            "x": 980,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s29",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/pipe",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "terrain/silica",
+          "decor/silica",
+          "decor/membrane"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 19,
+          "equipped": true,
+          "player": {
+            "x": 1110,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s30",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/supply",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/hoist-drive",
+          "decor/cable"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 20,
+          "equipped": true,
+          "player": {
+            "x": 1150,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s31",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "decor/winch",
+          "devices/isolation"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 21,
+          "equipped": true,
+          "player": {
+            "x": 1210,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s32",
+        "imageUses": [
+          "equipment/archive",
+          "objectives/case",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "decor/cocoon",
+          "decor/eggs",
+          "creatures/facehugger"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 22,
+          "equipped": true,
+          "player": {
+            "x": 1410,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s33",
+        "imageUses": [
+          "equipment/archive",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "obstacles/rib",
+          "obstacles/silica-rubble",
+          "obstacles/resin",
+          "decor/eggs",
+          "decor/throne",
+          "creatures/queen",
+          "equipment/weakpoint"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 23,
+          "equipped": true,
+          "player": {
+            "x": 1520,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s34",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/supply",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "devices/parts",
+          "decor/cable",
+          "decor/triage",
+          "stretchers/adams",
+          "parasites/royal",
+          "stretchers/elway",
+          "parasites/normal"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 24,
+          "equipped": true,
+          "player": {
+            "x": 1070,
+            "z": 0.55
+          },
+          "rescuedActors": true
+        }
+      },
+      {
+        "room": "s35",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/winch",
+          "decor/pipe"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 26,
+          "equipped": true,
+          "player": {
+            "x": 1330,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s36",
+        "imageUses": [
+          "terrain/sand",
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "objectives/console",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/pipe",
+          "devices/isolation",
+          "obstacles/silica-rubble",
+          "decor/cable",
+          "decor/ravine"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 27,
+          "equipped": true,
+          "player": {
+            "x": 1350,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s37",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/supply",
+          "decor/dropship",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/captureBay",
+          "objectives/capture",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 29,
+          "equipped": true,
+          "player": {
+            "x": 1200,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s38",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "decor/medical",
+          "objectives/console",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "characters/rollins",
+          "decor/quarantine-instruments"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 30,
+          "equipped": true,
+          "player": {
+            "x": 920,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s39",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/terminal",
+          "objectives/console",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/viewport",
+          "planets/lv178-orbital",
+          "characters/cherbourg"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 31,
+          "equipped": true,
+          "player": {
+            "x": 1040,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s40",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "decor/medical",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/cryo",
+          "objectives/sleep"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 32,
+          "equipped": true,
+          "player": {
+            "x": 910,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s41",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "equipment/archive",
+          "decor/wash",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/filters",
+          "doors/bulkhead-frame",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 740,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s42",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/light-panel",
+          "equipment/shutter-control",
+          "decor/generator",
+          "decor/pump",
+          "decor/pipe",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1100,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s43",
+        "imageUses": [
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/survey",
+          "decor/bridge",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 920,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s44",
+        "imageUses": [
+          "equipment/archive",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/resinCable",
+          "decor/silicaShard",
+          "decor/pipe",
+          "terrain/silica",
+          "decor/silica",
+          "devices/console",
+          "decor/valve"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1025,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s45",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/medical",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-frame",
+          "equipment/locker",
+          "decor/triage",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 930,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s46",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/terminal",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/antenna",
+          "doors/bulkhead-frame",
+          "devices/console"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1040,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s47",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/locker",
+          "decor/wash",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-frame",
+          "equipment/locker"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1080,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s48",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-frame",
+          "equipment/locker",
+          "decor/generator",
+          "decor/pump"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1290,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s49",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "decor/medical",
+          "characters/manning-ready",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame",
+          "equipment/locker",
+          "decor/triage"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 0,
+          "equipped": true,
+          "player": {
+            "x": 1120,
+            "z": 0.55
+          },
+          "rescuedActors": false
+        }
+      },
+      {
+        "room": "s50",
+        "imageUses": [
+          "decor/cableTray",
+          "decor/warningStripe",
+          "obstacles/crate",
+          "obstacles/pipe",
+          "equipment/archive",
+          "obstacles/rack",
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "decor/cargo",
+          "decor/battery",
+          "equipment/locker",
+          "creatures/facehugger",
+          "stretchers/adams",
+          "parasites/royal",
+          "stretchers/elway",
+          "parasites/normal"
+        ],
+        "stateUnchanged": true,
+        "fixture": {
+          "objectiveIndex": 32,
+          "equipped": true,
+          "player": {
+            "x": 1210,
+            "z": 0.55
+          },
+          "rescuedActors": true
+        }
+      }
+    ],
+    "poses": [
+      {
+        "weapon": "pistol",
+        "facing": 1,
+        "posture": "standing",
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ]
+      },
+      {
+        "weapon": "pistol",
+        "facing": 1,
+        "posture": "crouch",
+        "drawn": [
+          "weapons/pistol",
+          "equipment/lamp",
+          "characters/decker-crouch-ready"
+        ]
+      },
+      {
+        "weapon": "pistol",
+        "facing": 1,
+        "posture": "dodge",
+        "drawn": [
+          "weapons/pistol",
+          "equipment/lamp",
+          "characters/decker-dodge-ready"
+        ]
+      },
+      {
+        "weapon": "pistol",
+        "facing": -1,
+        "posture": "standing",
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ]
+      },
+      {
+        "weapon": "pistol",
+        "facing": -1,
+        "posture": "crouch",
+        "drawn": [
+          "weapons/pistol",
+          "equipment/lamp",
+          "characters/decker-crouch-ready"
+        ]
+      },
+      {
+        "weapon": "pistol",
+        "facing": -1,
+        "posture": "dodge",
+        "drawn": [
+          "weapons/pistol",
+          "equipment/lamp",
+          "characters/decker-dodge-ready"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": 1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": 1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": 1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": -1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": -1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "pulse",
+        "facing": -1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/pulse"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": 1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": 1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": 1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": -1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": -1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "foam",
+        "facing": -1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/foam"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": 1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/flame"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": 1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/flame"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": 1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/flame"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": -1,
+        "posture": "standing",
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/flame"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": -1,
+        "posture": "crouch",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-crouch-ready",
+          "weapons/flame"
+        ]
+      },
+      {
+        "weapon": "flame",
+        "facing": -1,
+        "posture": "dodge",
+        "drawn": [
+          "equipment/lamp",
+          "characters/decker-dodge-ready",
+          "weapons/flame"
+        ]
+      }
+    ],
+    "locomotion": [
+      {
+        "id": "locomotion/walking/1/0.05",
+        "mode": "walking",
+        "facing": 1,
+        "time": 0.05,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-a",
+        "drawn": [
+          "characters/decker-walk-a"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "c8792a562b526bb42afd445e3cb29db0cfce4e4434233815a4865fac6536b1f6",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/1/0.18",
+        "mode": "walking",
+        "facing": 1,
+        "time": 0.18,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-pass-a",
+        "drawn": [
+          "characters/decker-walk-pass-a"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "7cc3946879dd163094b9e2071e88629fdfdeb21e4d100bcc116f2187c9123ae5",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/1/0.3",
+        "mode": "walking",
+        "facing": 1,
+        "time": 0.3,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-b",
+        "drawn": [
+          "characters/decker-walk-b"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "6584b8e0e3d29e39ea5de173b355c1ed05991fbfaea3d7ddc4d86f285231987b",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/1/0.43",
+        "mode": "walking",
+        "facing": 1,
+        "time": 0.43,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-pass-b",
+        "drawn": [
+          "characters/decker-walk-pass-b"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a3d2e97af3c871b4022f7469f91f5710c26b0a0e9d6416cb4c211e53512684f5",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/-1/0.05",
+        "mode": "walking",
+        "facing": -1,
+        "time": 0.05,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-a",
+        "drawn": [
+          "characters/decker-walk-a"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "2e5105134b1497226072aea0fe6194ae57fdfd27eac27f9d5642918672d6bbfc",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/-1/0.18",
+        "mode": "walking",
+        "facing": -1,
+        "time": 0.18,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-pass-a",
+        "drawn": [
+          "characters/decker-walk-pass-a"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "2691cfef5c5800e350f21f39e9d933a163d28e51b2039bc0db3d9d42d5507c91",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/-1/0.3",
+        "mode": "walking",
+        "facing": -1,
+        "time": 0.3,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-b",
+        "drawn": [
+          "characters/decker-walk-b"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4f5484c353fb952591f995209d3e28646322f14ace44bb16cc7be8be01232f6f",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/walking/-1/0.43",
+        "mode": "walking",
+        "facing": -1,
+        "time": 0.43,
+        "moving": true,
+        "reducedMotion": false,
+        "expected": "characters/decker-walk-pass-b",
+        "drawn": [
+          "characters/decker-walk-pass-b"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f4a57eb25c718dc61b9a42cf040c83825ecb71af45d1629ac9a12784ac3867ae",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/rest/1/0.05",
+        "mode": "rest",
+        "facing": 1,
+        "time": 0.05,
+        "moving": false,
+        "reducedMotion": false,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "0b48f9a9c6f0f0d314a24105f143c5df9a0c6aac92939e3741a4041839f577fc",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/rest/1/0.3",
+        "mode": "rest",
+        "facing": 1,
+        "time": 0.3,
+        "moving": false,
+        "reducedMotion": false,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "0b48f9a9c6f0f0d314a24105f143c5df9a0c6aac92939e3741a4041839f577fc",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/rest/-1/0.05",
+        "mode": "rest",
+        "facing": -1,
+        "time": 0.05,
+        "moving": false,
+        "reducedMotion": false,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3b0ab61f9047e984c96c9c27c19392c4a7165d5bca78e55c432f60950b49b7b7",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/rest/-1/0.3",
+        "mode": "rest",
+        "facing": -1,
+        "time": 0.3,
+        "moving": false,
+        "reducedMotion": false,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3b0ab61f9047e984c96c9c27c19392c4a7165d5bca78e55c432f60950b49b7b7",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/reduced-motion/1/0.05",
+        "mode": "reduced-motion",
+        "facing": 1,
+        "time": 0.05,
+        "moving": true,
+        "reducedMotion": true,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "0b48f9a9c6f0f0d314a24105f143c5df9a0c6aac92939e3741a4041839f577fc",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/reduced-motion/1/0.3",
+        "mode": "reduced-motion",
+        "facing": 1,
+        "time": 0.3,
+        "moving": true,
+        "reducedMotion": true,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "0b48f9a9c6f0f0d314a24105f143c5df9a0c6aac92939e3741a4041839f577fc",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/reduced-motion/-1/0.05",
+        "mode": "reduced-motion",
+        "facing": -1,
+        "time": 0.05,
+        "moving": true,
+        "reducedMotion": true,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3b0ab61f9047e984c96c9c27c19392c4a7165d5bca78e55c432f60950b49b7b7",
+        "width": 450,
+        "height": 365
+      },
+      {
+        "id": "locomotion/reduced-motion/-1/0.3",
+        "mode": "reduced-motion",
+        "facing": -1,
+        "time": 0.3,
+        "moving": true,
+        "reducedMotion": true,
+        "expected": "characters/decker",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3b0ab61f9047e984c96c9c27c19392c4a7165d5bca78e55c432f60950b49b7b7",
+        "width": 450,
+        "height": 365
+      }
+    ],
+    "details": [
+      {
+        "id": "effects/muzzle",
+        "kind": "effect",
+        "effect": "muzzle",
+        "room": "s01",
+        "nativeAction": "shoot(clearTarget)",
+        "eventTypes": [
+          "shot"
+        ],
+        "fixture": {
+          "player": {
+            "x": 120,
+            "z": 0.35
+          },
+          "target": {
+            "x": 340,
+            "z": 0.35
+          },
+          "weapon": "pistol",
+          "enemy": null,
+          "foam": 0,
+          "acid": []
+        },
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "effects/muzzle"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "6f93e57c8b0e2da4bdf98ea94b83ff5caed5f0a893431489127b0c34b03b3a9b",
+        "width": 600,
+        "height": 380,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "effects/flame",
+        "kind": "effect",
+        "effect": "flame",
+        "room": "s01",
+        "nativeAction": "shoot(clearTarget)",
+        "eventTypes": [
+          "shot"
+        ],
+        "fixture": {
+          "player": {
+            "x": 120,
+            "z": 0.35
+          },
+          "target": {
+            "x": 340,
+            "z": 0.35
+          },
+          "weapon": "flame",
+          "enemy": null,
+          "foam": 0,
+          "acid": []
+        },
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/flame",
+          "effects/flame"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "188ac0a7cc1dda170bc84f5622c814a4d67df33d8cd652998bba2f9244c4b121",
+        "width": 600,
+        "height": 380,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "effects/impact",
+        "kind": "effect",
+        "effect": "impact",
+        "room": "s19",
+        "nativeAction": "shoot(clearTarget)",
+        "eventTypes": [
+          "shot",
+          "hit"
+        ],
+        "fixture": {
+          "player": {
+            "x": 120,
+            "z": 0.35
+          },
+          "target": {
+            "x": 340,
+            "z": 0.35
+          },
+          "weapon": "pistol",
+          "enemy": "s19-e0",
+          "foam": 0,
+          "acid": []
+        },
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp",
+          "effects/muzzle",
+          "effects/impact"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f778d663974affba8ce8a98361b0c51a7680b7a0005c0c53f1c3711d30c49658",
+        "width": 600,
+        "height": 380,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "effects/spark",
+        "kind": "effect",
+        "effect": "spark",
+        "room": "s33",
+        "nativeAction": "shoot(clearTarget)",
+        "eventTypes": [
+          "shot",
+          "spark"
+        ],
+        "fixture": {
+          "player": {
+            "x": 760,
+            "z": 0.5
+          },
+          "target": {
+            "x": 980,
+            "z": 0.5
+          },
+          "weapon": "flame",
+          "enemy": null,
+          "foam": 0,
+          "acid": []
+        },
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "equipment/weakpoint",
+          "weapons/flame",
+          "effects/flame",
+          "effects/spark"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "b0a274d4c4a4bdc39f95e4d9072a5b3ab0e26d0db7f051d668a58a11886f617a",
+        "width": 600,
+        "height": 380,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "effects/acid",
+        "kind": "effect",
+        "effect": "acid",
+        "room": "s19",
+        "nativeAction": "hurtEnemy(existingAdult, hp)",
+        "eventTypes": [
+          "hit"
+        ],
+        "fixture": {
+          "player": {
+            "x": 120,
+            "z": 0.35
+          },
+          "target": {
+            "x": 340,
+            "z": 0.35
+          },
+          "weapon": "pistol",
+          "enemy": "s19-e0",
+          "foam": 0,
+          "acid": [
+            {
+              "x": 340,
+              "z": 0.35,
+              "time": 7
+            }
+          ]
+        },
+        "drawn": [
+          "effects/acid"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a9706a6bbecc7523bc8f7db53f76ca217940221cb6387d696a2469ae4c879f9b",
+        "width": 600,
+        "height": 380,
+        "inactiveStateDrawsPng": false,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "effects/foam",
+        "kind": "effect",
+        "effect": "foam",
+        "room": "s19",
+        "nativeAction": "shoot(clearTarget)",
+        "eventTypes": [
+          "shot"
+        ],
+        "fixture": {
+          "player": {
+            "x": 120,
+            "z": 0.35
+          },
+          "target": {
+            "x": 340,
+            "z": 0.35
+          },
+          "weapon": "foam",
+          "enemy": "s19-e0",
+          "foam": 0.38,
+          "acid": []
+        },
+        "drawn": [
+          "characters/decker-ready",
+          "equipment/lamp",
+          "weapons/foam",
+          "effects/foam"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "97708597f5d8aae1deb814846b26803e7d5d5d512e2ec7bbb1b315fb6edc7714",
+        "width": 600,
+        "height": 380,
+        "inactiveStateDrawsPng": false,
+        "eventQueueExpired": true
+      },
+      {
+        "id": "lamp/1/off",
+        "kind": "lamp",
+        "facing": 1,
+        "on": false,
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "508cafd6df55414c54f4a4ef4681159cf87458db1d2c2cdebc25571fcf9f605c",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "lamp/1/on",
+        "kind": "lamp",
+        "facing": 1,
+        "on": true,
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "488b1d6a6f06bedc11f1f8073264b8a9738c020bf1d79221a206e9028556c863",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "lamp/-1/off",
+        "kind": "lamp",
+        "facing": -1,
+        "on": false,
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "d07241ba9bcdb5b3466d1e4eef75f0e617609d9b39043e793b396435dbe1e6b6",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "lamp/-1/on",
+        "kind": "lamp",
+        "facing": -1,
+        "on": true,
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4e075506ebb49aa486e8c5bd4e49f37dc7c8a260db05a9903d8064dbae196fc6",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "lighting/off",
+        "kind": "light-panel",
+        "on": false,
+        "room": "s13",
+        "control": "light-s13",
+        "drawn": [
+          "equipment/light-panel"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4b96fd52601a7f7ebee421d925f0de2b04d011a85c2c280bd316f4f6101eab6d",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "lighting/on",
+        "kind": "light-panel",
+        "on": true,
+        "room": "s13",
+        "control": "light-s13",
+        "drawn": [
+          "equipment/light-panel"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a1e96c4108265f5438c6c9600eab01158c436bf39859682d6b4546aa95753ba0",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "shutter/open",
+        "kind": "shutter",
+        "status": "open",
+        "room": "s13",
+        "shutter": "gate-s13",
+        "controls": [
+          {
+            "id": "gate-s13:-1",
+            "x": 805,
+            "z": 0.55
+          },
+          {
+            "id": "gate-s13:1",
+            "x": 1015,
+            "z": 0.55
+          }
+        ],
+        "drawn": [
+          "equipment/shutter-control"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "7aab052d09b11ea995479e13f57f70cc3d6b87045562d595e861ec0ca64874a8",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "shutter/closed",
+        "kind": "shutter",
+        "status": "closed",
+        "room": "s13",
+        "shutter": "gate-s13",
+        "controls": [
+          {
+            "id": "gate-s13:-1",
+            "x": 805,
+            "z": 0.55
+          },
+          {
+            "id": "gate-s13:1",
+            "x": 1015,
+            "z": 0.55
+          }
+        ],
+        "drawn": [
+          "equipment/shutter-control"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "b6a2b429cb39b268f16e5d17834dfef43a6953a079297f25324523ae58f29cd3",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "shutter/broken",
+        "kind": "shutter",
+        "status": "broken",
+        "room": "s13",
+        "shutter": "gate-s13",
+        "controls": [
+          {
+            "id": "gate-s13:-1",
+            "x": 805,
+            "z": 0.55
+          },
+          {
+            "id": "gate-s13:1",
+            "x": 1015,
+            "z": 0.55
+          }
+        ],
+        "drawn": [
+          "equipment/shutter-control"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "5717b81ce73e3897a757adf62a9c1fed8b3dc92ff28c1fa7aaa22ff4f02c272b",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/back/open",
+        "kind": "bulkhead",
+        "room": "s13",
+        "door": "link-46-a",
+        "mount": "back",
+        "open": true,
+        "nativeStatus": {
+          "open": true,
+          "reason": ""
+        },
+        "drawn": [
+          "doors/bulkhead-frame"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3878e0eb71466fd660f8a76ae9109bd2b839e073869fff188886589f759649e3",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/back/closed",
+        "kind": "bulkhead",
+        "room": "s13",
+        "door": "link-46-a",
+        "mount": "back",
+        "open": false,
+        "nativeStatus": {
+          "open": false,
+          "reason": "Manning est séparé du groupe. V : le rappeler ; ouvrez les cloisons sur son trajet."
+        },
+        "drawn": [
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "231930418b0459a952679d58980bf9a7dbe04bf92c3ccad37696dc37ca9dec0e",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/front/open",
+        "kind": "bulkhead",
+        "room": "s17",
+        "door": "link-54-a",
+        "mount": "front",
+        "open": true,
+        "nativeStatus": {
+          "open": true,
+          "reason": ""
+        },
+        "drawn": [
+          "doors/bulkhead-frame"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "1c439f531542065a0983bd8b9032ce460f581862390d581de91fb01e067844a1",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/front/closed",
+        "kind": "bulkhead",
+        "room": "s17",
+        "door": "link-54-a",
+        "mount": "front",
+        "open": false,
+        "nativeStatus": {
+          "open": false,
+          "reason": "Accès en attente — prendre l’équipement"
+        },
+        "drawn": [
+          "doors/bulkhead-panel",
+          "doors/bulkhead-frame"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "2d7a69ffc1c8c4f3b480d2541657badfb1a72cc2ba43ebd497d606627af29fc4",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "native-door/exterior-path/right",
+        "kind": "native-door-fallback",
+        "room": "s01",
+        "door": "link-01-a",
+        "type": "exterior-path",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "534bf2084f9f67449936c2475aab8945e63ea7bc1999ba070e18c1828a8ab5d1",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/exterior-path/left",
+        "kind": "native-door-fallback",
+        "room": "s02",
+        "door": "link-01-b",
+        "type": "exterior-path",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "5c34d5373eb661d9f0a07c278b50b80541047eefcc916fec5a9f4394b61c0baf",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/transit/right",
+        "kind": "native-door-fallback",
+        "room": "s02",
+        "door": "link-02-a",
+        "type": "transit",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "1afd25266ed38104f0199c64ee3db7991eed31fe77fdbac2462b8e53f29918de",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/urban-transit/right",
+        "kind": "native-door-fallback",
+        "room": "s04",
+        "door": "link-04-a",
+        "type": "urban-transit",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "7d2870b32690f3f142be5e0b2a0c13cfa2a2e7561f890dd9f261ad9852289f67",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/bulkhead/left",
+        "kind": "native-door-fallback",
+        "room": "s04",
+        "door": "link-05-a",
+        "type": "bulkhead",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4bc83a39bc56d18b0894e31cc9e737dee7c88ef48df22f509378c2051528a1d4",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/urban-transit/left",
+        "kind": "native-door-fallback",
+        "room": "s05",
+        "door": "link-04-b",
+        "type": "urban-transit",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a761d47ea9ca9f79bc33baa2d5ae1b54b75830b2bab69c7345e9192ce09f503a",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/interlude/right",
+        "kind": "native-door-fallback",
+        "room": "s05",
+        "door": "link-06-a",
+        "type": "interlude",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "880243bbec871d823df96b9367f9e0316ef5763f0848a5d1a1b3e7c3857a20fe",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/bulkhead/right",
+        "kind": "native-door-fallback",
+        "room": "s06",
+        "door": "link-05-b",
+        "type": "bulkhead",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f321f81cfcc596690f66c2ada3b02f4afdc095f965e6c3feafdeb3248115fe8a",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/boarding/right",
+        "kind": "native-door-fallback",
+        "room": "s10",
+        "door": "link-10-a",
+        "type": "boarding",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "ecbbac991bf13ba48e575e249248fcbd1e0dbc97df378e053525df39aeb9efdb",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/building-entrance/right",
+        "kind": "native-door-fallback",
+        "room": "s11",
+        "door": "link-11-a",
+        "type": "building-entrance",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "5139c2119d016bd2d32977fc8f8e4ad05a237a7368350fefe35ad72f1c600ffb",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/boarding-ramp/back",
+        "kind": "native-door-fallback",
+        "room": "s11",
+        "door": "link-42-a",
+        "type": "boarding-ramp",
+        "mount": "back",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "b55ce1d2d3df71d5776549ac57486c910eb647ca3216b4291c65e301cf56da08",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/building-entrance/front",
+        "kind": "native-door-fallback",
+        "room": "s11",
+        "door": "link-51-a",
+        "type": "building-entrance",
+        "mount": "front",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "609aaf84fde5edd53846715859c63cb823d353c67cb4a678b4bbfd8f0db2effe",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/rock-breach/left",
+        "kind": "native-door-fallback",
+        "room": "s19",
+        "door": "link-18-b",
+        "type": "rock-breach",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "30ec9ed5b7c579d95eb47357775a35da94dcb5041193b6e61bf4cddd0cbf8c28",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/rock-breach/front",
+        "kind": "native-door-fallback",
+        "room": "s19",
+        "door": "link-19-b",
+        "type": "rock-breach",
+        "mount": "front",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f77ad2c5bbc79f3c8b61346e7855b9b7aea8c0a5b32984cd95ddea2d01548f8b",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/rock-breach/right",
+        "kind": "native-door-fallback",
+        "room": "s19",
+        "door": "link-20-a",
+        "type": "rock-breach",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "eb9a908181ec78f224e87893b2943fb7ee1d91123ecf37e964291bf25842289a",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/stairwell/back",
+        "kind": "native-door-fallback",
+        "room": "s19",
+        "door": "link-21-a",
+        "type": "stairwell",
+        "mount": "back",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "00ed46d825623663b2608fdc7c8fa3a7213323608a4d4ffc9169f6c57a133880",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/rock-breach/back",
+        "kind": "native-door-fallback",
+        "room": "s20",
+        "door": "link-28-a",
+        "type": "rock-breach",
+        "mount": "back",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "516e72f20696983debf1094479cb2b26b4f43838f9be2812480eb6468ba33b9f",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/stairwell/front",
+        "kind": "native-door-fallback",
+        "room": "s21",
+        "door": "link-21-b",
+        "type": "stairwell",
+        "mount": "front",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "5207b19ed4b40bd67cf36eac5abafe0c92ac8564d6148c89ca00879bb6f97e9e",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/crawl-opening/right",
+        "kind": "native-door-fallback",
+        "room": "s23",
+        "door": "link-25-a",
+        "type": "crawl-opening",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "8fc583d0ccc407c18e8a670f84fb9167a56886fccfdcafc854a3c0db01d762cd",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/crawl-opening/left",
+        "kind": "native-door-fallback",
+        "room": "s24",
+        "door": "link-25-b",
+        "type": "crawl-opening",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "d9e1d1f88f238515d5b13fec61ce70889796028b39e748c409630dcfc88490fc",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/stairwell/right",
+        "kind": "native-door-fallback",
+        "room": "s34",
+        "door": "link-39-a",
+        "type": "stairwell",
+        "mount": "right",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "c3a99268ca5e7100bca6abb74840c5256cd6f2875290797ee9b97df905828d45",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/stairwell/left",
+        "kind": "native-door-fallback",
+        "room": "s35",
+        "door": "link-39-b",
+        "type": "stairwell",
+        "mount": "left",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a25c95a46c1c2b7605195cb44f93ed8b482938c98b77169078987490fd789ec8",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "native-door/boarding-ramp/front",
+        "kind": "native-door-fallback",
+        "room": "s37",
+        "door": "link-42-b",
+        "type": "boarding-ramp",
+        "mount": "front",
+        "open": true,
+        "comparison": "pixel-by-pixel with original door method",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "7c2161a71188be4fa8ce7a3f089d1039b2da57ed37d78c07b02290e9373f9aad",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      }
+    ],
+    "continuation": [
+      {
+        "id": "medical/decker/1",
+        "expected": [
+          "characters/decker-medical-gown"
+        ],
+        "absent": [
+          "characters/decker-walk-b"
+        ],
+        "room": "s03",
+        "facing": 1,
+        "moving": true,
+        "drawn": [
+          "characters/decker-medical-gown"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "28a9071ed802889686955c6c36ebfdc2d13471ce5a781a31efaef964ecc3a192",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          245,
+          79,
+          355,
+          347
+        ]
+      },
+      {
+        "id": "medical/physician/1",
+        "expected": [
+          "characters/carlyle-physician"
+        ],
+        "absent": [
+          "characters/medic"
+        ],
+        "room": "s03",
+        "facing": 1,
+        "drawn": [
+          "characters/carlyle-physician"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "64c9584110b8cbdf5ce11a9bb9f0bb5d5918095eea9bc26e99d8cf3e05d4e24d",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          245,
+          29,
+          355,
+          347
+        ]
+      },
+      {
+        "id": "medical/decker/-1",
+        "expected": [
+          "characters/decker-medical-gown"
+        ],
+        "absent": [
+          "characters/decker-walk-b"
+        ],
+        "room": "s03",
+        "facing": -1,
+        "moving": true,
+        "drawn": [
+          "characters/decker-medical-gown"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4d1356d0caefc5bc88fd872e3e209681e8ab1108862e819bc3190f4c199638bc",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          245,
+          79,
+          355,
+          347
+        ]
+      },
+      {
+        "id": "medical/physician/-1",
+        "expected": [
+          "characters/carlyle-physician"
+        ],
+        "absent": [
+          "characters/medic"
+        ],
+        "room": "s03",
+        "facing": -1,
+        "drawn": [
+          "characters/carlyle-physician"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f407311350a8cfefe0d493a0d509c6a66b95e6ce64bd153debf2f10728de0928",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          245,
+          29,
+          355,
+          347
+        ]
+      },
+      {
+        "id": "medical/handheld/false",
+        "expected": [
+          "objectives/icc-handheld"
+        ],
+        "absent": [],
+        "room": "s03",
+        "completed": false,
+        "objectiveId": "o02-01",
+        "drawn": [
+          "objectives/icc-handheld"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "17eeb8bb5a71fe1c78abb1ce66134eb22c4f696bde32d593b5a43bea6b7e284d",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          263,
+          32,
+          337,
+          345
+        ]
+      },
+      {
+        "id": "medical/handheld/true",
+        "expected": [],
+        "absent": [
+          "objectives/icc-handheld"
+        ],
+        "room": "s03",
+        "completed": true,
+        "objectiveId": "o02-01",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "c7b76f10804143c43140570268efe27d88c7650e006b834a778484e8e11bf4fb",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          263,
+          32,
+          337,
+          345
+        ]
+      },
+      {
+        "id": "medical/scope/s01",
+        "expected": [
+          "characters/decker"
+        ],
+        "absent": [
+          "characters/decker-medical-gown"
+        ],
+        "room": "s01",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "246065e6a7498fb03ea340c2d5b503db9fcb0e7c6d1ed79eb9ca9702e5bc89c2",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          257,
+          133,
+          343,
+          344
+        ]
+      },
+      {
+        "id": "medical/scope/s04",
+        "expected": [
+          "characters/decker"
+        ],
+        "absent": [
+          "characters/decker-medical-gown"
+        ],
+        "room": "s04",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "246065e6a7498fb03ea340c2d5b503db9fcb0e7c6d1ed79eb9ca9702e5bc89c2",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          257,
+          133,
+          343,
+          344
+        ]
+      },
+      {
+        "id": "medical/armed-guard",
+        "expected": [
+          "weapons/pistol"
+        ],
+        "absent": [
+          "characters/decker-medical-gown"
+        ],
+        "room": "s03",
+        "armedFixture": true,
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f0d8dfe031d7c0194efafff786abbdbcd77223e9792175c9323c3fc7c344acda",
+        "width": 600,
+        "height": 380,
+        "changedBounds": [
+          257,
+          133,
+          357,
+          344
+        ]
+      },
+      {
+        "id": "queen/1",
+        "expected": [
+          "creatures/queen"
+        ],
+        "absent": [],
+        "room": "s33",
+        "facing": 1,
+        "enemyId": "s33-e0",
+        "fixtureUnit": 1,
+        "drawn": [
+          "creatures/queen"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "cd51d7b969a0024e1dceb6f00053265dd8374062c0b0a6b77671e9a3d526b83c",
+        "width": 840,
+        "height": 620,
+        "changedBounds": [
+          120,
+          148,
+          725,
+          568
+        ]
+      },
+      {
+        "id": "queen/-1",
+        "expected": [
+          "creatures/queen"
+        ],
+        "absent": [],
+        "room": "s33",
+        "facing": -1,
+        "enemyId": "s33-e0",
+        "fixtureUnit": 1,
+        "drawn": [
+          "creatures/queen"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "bc34168de489f06ec0b7a9554aae716754e38e10ea51cfd1aae3611ca1bb4b86",
+        "width": 840,
+        "height": 620,
+        "changedBounds": [
+          115,
+          148,
+          720,
+          568
+        ]
+      }
+    ],
+    "editionResults": [
+      {
+        "id": "stock/locker/sealed",
+        "expected": [
+          "equipment/locker"
+        ],
+        "absent": [],
+        "room": "s17",
+        "lockerId": "locker-01",
+        "fixture": {
+          "opened": false,
+          "progress": 0,
+          "contents": {
+            "reserve": 12,
+            "fuel": 0,
+            "foam": 0,
+            "medkits": 0,
+            "filters": 0,
+            "decoys": 1,
+            "parts": 0
+          }
+        },
+        "drawn": [
+          "equipment/locker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "2e7b7350be710cc5a3659c8382e8476a82d75eb40f956756a609d40818cc4048",
+        "width": 600,
+        "height": 450
+      },
+      {
+        "id": "stock/locker/opening",
+        "expected": [],
+        "absent": [
+          "equipment/locker",
+          "equipment/locker-open",
+          "equipment/locker-stocked"
+        ],
+        "room": "s17",
+        "lockerId": "locker-01",
+        "fixture": {
+          "opened": false,
+          "progress": 1.2,
+          "contents": {
+            "reserve": 12,
+            "fuel": 0,
+            "foam": 0,
+            "medkits": 0,
+            "filters": 0,
+            "decoys": 1,
+            "parts": 0
+          }
+        },
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "ca8053d759801528cd72f0e0d68544a1352306ee653f231884144781617df0dc",
+        "width": 600,
+        "height": 450,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "stock/locker/stocked",
+        "expected": [
+          "equipment/locker-stocked"
+        ],
+        "absent": [],
+        "room": "s17",
+        "lockerId": "locker-01",
+        "fixture": {
+          "opened": true,
+          "progress": 2.4,
+          "contents": {
+            "reserve": 12,
+            "fuel": 0,
+            "foam": 0,
+            "medkits": 0,
+            "filters": 0,
+            "decoys": 1,
+            "parts": 0
+          }
+        },
+        "drawn": [
+          "equipment/locker-stocked"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "787722f3af847cf6e769150b488c7ab0f6f0df3bd9916f0d4d78c3897f5e05e9",
+        "width": 600,
+        "height": 450
+      },
+      {
+        "id": "stock/locker/empty",
+        "expected": [
+          "equipment/locker-open"
+        ],
+        "absent": [],
+        "room": "s17",
+        "lockerId": "locker-01",
+        "fixture": {
+          "opened": true,
+          "progress": 2.4,
+          "contents": {
+            "reserve": 0,
+            "fuel": 0,
+            "foam": 0,
+            "medkits": 0,
+            "filters": 0,
+            "decoys": 0,
+            "parts": 0
+          }
+        },
+        "drawn": [
+          "equipment/locker-open"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "4633e17ff2608de5835d7677cf7b066499d34cff23a3c6562e0437da4a39b5bb",
+        "width": 600,
+        "height": 450
+      },
+      {
+        "id": "stock/locker/deposited",
+        "expected": [
+          "equipment/locker-stocked"
+        ],
+        "absent": [],
+        "room": "s17",
+        "lockerId": "locker-01",
+        "fixture": {
+          "opened": true,
+          "progress": 2.4,
+          "contents": {
+            "reserve": 1,
+            "fuel": 0,
+            "foam": 0,
+            "medkits": 0,
+            "filters": 0,
+            "decoys": 0,
+            "parts": 0
+          }
+        },
+        "drawn": [
+          "equipment/locker-stocked"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "787722f3af847cf6e769150b488c7ab0f6f0df3bd9916f0d4d78c3897f5e05e9",
+        "width": 600,
+        "height": 450
+      },
+      {
+        "id": "stock/supply/false",
+        "expected": [
+          "equipment/supply"
+        ],
+        "absent": [
+          "equipment/supply-empty"
+        ],
+        "room": "s17",
+        "supplyUsed": false,
+        "drawn": [
+          "equipment/supply"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "33d7c0c2ed4fadde3e44f11c1d3a65d9a10428fcacc8ed3d3a4110a1060bd6ca",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "stock/supply/true",
+        "expected": [
+          "equipment/supply-empty"
+        ],
+        "absent": [
+          "equipment/supply"
+        ],
+        "room": "s17",
+        "supplyUsed": true,
+        "drawn": [
+          "equipment/supply-empty"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "cdfb24421aa9f54a9c4589ab922c109ecc1fb4a9c5e91056a790ec6a1a155cdc",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "stock/parts/false",
+        "expected": [
+          "devices/parts"
+        ],
+        "absent": [
+          "devices/parts-empty"
+        ],
+        "room": "s17",
+        "deviceId": "parts-workshop",
+        "completed": false,
+        "drawn": [
+          "devices/parts"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "6b0bed06dbdb55241235184fdaa27308acd24a3a70c83b1e7b6caf75f9b93613",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "stock/parts/true",
+        "expected": [
+          "devices/parts-empty"
+        ],
+        "absent": [
+          "devices/parts"
+        ],
+        "room": "s17",
+        "deviceId": "parts-workshop",
+        "completed": true,
+        "drawn": [
+          "devices/parts-empty"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "1f4396ccc17471bf07a9a04dc625454c0eb9ab505e0b9408b64f705495877a37",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "stock/armory/false",
+        "expected": [],
+        "absent": [
+          "equipment/armory-rack"
+        ],
+        "room": "s09",
+        "claimed": false,
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "7b660bd2bdde3b1139b65ff512c89ae311124a8f344556df52ed28f3569b5564",
+        "width": 600,
+        "height": 430,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "stock/armory/true",
+        "expected": [
+          "equipment/armory-rack"
+        ],
+        "absent": [],
+        "room": "s09",
+        "claimed": true,
+        "drawn": [
+          "equipment/armory-rack"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "aac3047e5ea9efe1d86da3b9cf6dec3cbc9e1661e31e854f649c582b199800a5",
+        "width": 600,
+        "height": 430
+      },
+      {
+        "id": "action/medical-report/1",
+        "expected": [
+          "characters/decker-medical-report"
+        ],
+        "absent": [
+          "objectives/icc-handheld",
+          "characters/decker-medical-gown"
+        ],
+        "room": "s03",
+        "facing": 1,
+        "objectiveId": "o02-01",
+        "activeWork": {
+          "id": "o02-01",
+          "label": "Transmettre les résultats",
+          "progress": 0.5
+        },
+        "preparedOperationProgress": true,
+        "drawn": [
+          "characters/decker-medical-report"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "f834f831dd826d07f552af72ff7b3369bc0fc14a124ae667fda4ec5db62d5126",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/medical-report/-1",
+        "expected": [
+          "characters/decker-medical-report"
+        ],
+        "absent": [
+          "objectives/icc-handheld",
+          "characters/decker-medical-gown"
+        ],
+        "room": "s03",
+        "facing": -1,
+        "objectiveId": "o02-01",
+        "activeWork": {
+          "id": "o02-01",
+          "label": "Transmettre les résultats",
+          "progress": 0.5
+        },
+        "preparedOperationProgress": true,
+        "drawn": [
+          "characters/decker-medical-report"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "d06dc4f84f5d9079ca7a68457a0971b742bce622ff35b33e5420f32a183f0679",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/focus/1",
+        "expected": [
+          "characters/decker-focus"
+        ],
+        "absent": [],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "focus",
+        "drawn": [
+          "characters/decker-focus"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "eec1acd97df2944840bdacdf610e11cb77e0f833964537a1fa6cfc7875f9c702",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/focus/-1",
+        "expected": [
+          "characters/decker-focus"
+        ],
+        "absent": [],
+        "room": "s01",
+        "facing": -1,
+        "presentationFocus": true,
+        "mode": "focus",
+        "drawn": [
+          "characters/decker-focus"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "361c6fa357e555c4a0f3940d707e915c16415198749dc70ef47f142a53deb8b2",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/moving/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "moving",
+        "drawn": [
+          "characters/decker-walk-pass-a"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "25bf59e7ba9d2f12d53e7b77ca00a57e72027c675921dea7055e9c484a250098",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/crouch/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "crouch",
+        "drawn": [
+          "characters/decker-crouch"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "749434e830b79b415a7f9e2e318ffd22bba1505f8f2d43922e930961eec125c7",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/dodge/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "dodge",
+        "drawn": [
+          "characters/decker-dodge"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "e0014b2e062e67ca39795f368fdc0f4c3f4773d9a2ff24c8fd321518e4cc0d31",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/other-operation/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "other-operation",
+        "drawn": [
+          "characters/decker"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "80d6762d58dbbbe8a127e6acaad5cd8ae2238680271fc83074c4d6f16cf8b69d",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/armed/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s01",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "armed",
+        "drawn": [
+          "weapons/pistol",
+          "characters/decker-ready",
+          "equipment/lamp"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3812ebebed433c3c557193f8ff6cc50732138c30e95a61c026ffb0a1d8d30cca",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "action/focus/medical/1",
+        "expected": [],
+        "absent": [
+          "characters/decker-focus"
+        ],
+        "room": "s03",
+        "facing": 1,
+        "presentationFocus": true,
+        "mode": "medical",
+        "drawn": [
+          "characters/decker-medical-gown"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "ce7d4eef5d47686cc2a33ceb65f577de70d2fd80b9c3327d70f443edecceecd2",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "scenery/medical/s03",
+        "expected": [
+          "decor/medical",
+          "decor/medical-chart",
+          "decor/medical-cups"
+        ],
+        "absent": [],
+        "room": "s03",
+        "fixture": "existing medical scenery rendered at magnification 2.2",
+        "drawn": [
+          "decor/medical",
+          "decor/medical-chart",
+          "decor/medical-cups"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "9b56f06a81b7084c3c13f5ec1ac3dea4829d5401964b3adcf98255e231da7890",
+        "width": 600,
+        "height": 500
+      },
+      {
+        "id": "scenery/medical/s45",
+        "expected": [
+          "decor/medical"
+        ],
+        "absent": [
+          "decor/medical-chart",
+          "decor/medical-cups"
+        ],
+        "room": "s45",
+        "fixture": "existing medical scenery rendered at magnification 2.2",
+        "drawn": [
+          "decor/medical"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "79c51aef2abddbd4d78203dc5fcfa234647aeb9c227a7f39ab6b47540dd0e719",
+        "width": 600,
+        "height": 500
+      },
+      {
+        "id": "scenery/planet/false",
+        "expected": [
+          "decor/viewport",
+          "planets/lv178-orbital"
+        ],
+        "absent": [],
+        "room": "s39",
+        "strikeSeen": false,
+        "interpretivePlanet": true,
+        "drawn": [
+          "decor/viewport",
+          "planets/lv178-orbital"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3712d1d44effcdae86fd578732e950ec6e4c670e39cde39a046ab22465b1c5a5",
+        "width": 600,
+        "height": 440
+      },
+      {
+        "id": "scenery/planet/true",
+        "expected": [
+          "decor/viewport",
+          "planets/lv178-orbital"
+        ],
+        "absent": [],
+        "room": "s39",
+        "strikeSeen": true,
+        "interpretivePlanet": true,
+        "drawn": [
+          "decor/viewport",
+          "planets/lv178-orbital"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3a7a0c8b5538b45402d1a646426fbd6ea599c3ed7f41704d31cc1a4c8837b66b",
+        "width": 600,
+        "height": 440
+      },
+      {
+        "id": "scenery/planet/out-of-scope",
+        "expected": [
+          "decor/viewport"
+        ],
+        "absent": [
+          "planets/lv178-orbital"
+        ],
+        "room": "s07",
+        "deliberatelySelectedSceneryKind": "viewport",
+        "drawn": [
+          "decor/viewport"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "d2c391b82d1f86d522c7acbbf9bfb2e775cf46d552703d5588b4cd6931add0b3",
+        "width": 600,
+        "height": 440
+      },
+      {
+        "id": "terrain/sand/false",
+        "expected": [
+          "terrain/sand"
+        ],
+        "absent": [
+          "terrain/silica"
+        ],
+        "room": "s01",
+        "kind": "sand",
+        "highContrast": false,
+        "drawn": [
+          "terrain/sand"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "b821e903ca2e8f4924a53f7dd20bb8bd38f19c1d15d78c5d24740f01dd2954f5",
+        "width": 600,
+        "height": 380,
+        "changedBoundsAgainstNative": [
+          0,
+          230,
+          600,
+          380
+        ],
+        "upperScenePixelsUnchanged": true
+      },
+      {
+        "id": "terrain/sand/true",
+        "expected": [
+          "terrain/sand"
+        ],
+        "absent": [
+          "terrain/silica"
+        ],
+        "room": "s01",
+        "kind": "sand",
+        "highContrast": true,
+        "drawn": [
+          "terrain/sand"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "6b44357de1dc4d4f94d1f95be6a05271f58f60c28c62c9aed5567fa6a9dd65b0",
+        "width": 600,
+        "height": 380,
+        "changedBoundsAgainstNative": [
+          0,
+          230,
+          600,
+          380
+        ],
+        "upperScenePixelsUnchanged": true
+      },
+      {
+        "id": "terrain/silica/false",
+        "expected": [
+          "terrain/silica"
+        ],
+        "absent": [
+          "terrain/sand"
+        ],
+        "room": "s26",
+        "kind": "silica",
+        "highContrast": false,
+        "drawn": [
+          "terrain/silica"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "45d41895d0411827502b61dd028a281c4cb67868ec68caa91ecb9852a93d8a31",
+        "width": 600,
+        "height": 380,
+        "changedBoundsAgainstNative": [
+          0,
+          230,
+          600,
+          380
+        ],
+        "upperScenePixelsUnchanged": true
+      },
+      {
+        "id": "terrain/silica/true",
+        "expected": [
+          "terrain/silica"
+        ],
+        "absent": [
+          "terrain/sand"
+        ],
+        "room": "s26",
+        "kind": "silica",
+        "highContrast": true,
+        "drawn": [
+          "terrain/silica"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "e8e1242dc405fa6604384f4425cab030f1b464baa60e016e60891dbac73d1a2b",
+        "width": 600,
+        "height": 380,
+        "changedBoundsAgainstNative": [
+          0,
+          230,
+          600,
+          380
+        ],
+        "upperScenePixelsUnchanged": true
+      },
+      {
+        "id": "terrain/out-of-scope",
+        "expected": [],
+        "absent": [
+          "terrain/sand",
+          "terrain/silica"
+        ],
+        "room": "s03",
+        "drawn": [],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "9edbb283ed324e46edded3db95a9f39e85e479de55eea34f4afce9afc0e8a8bd",
+        "width": 600,
+        "height": 380,
+        "nativePixelsIdentical": true
+      },
+      {
+        "id": "door/lift/s14/open",
+        "expected": [
+          "doors/lift-cage"
+        ],
+        "absent": [],
+        "room": "s14",
+        "doorId": "link-14-a",
+        "mount": "right",
+        "open": true,
+        "nativeStatus": {
+          "open": true,
+          "reason": ""
+        },
+        "fixture": "authored left/right threshold; enclosing native wall and floor retained",
+        "drawn": [
+          "doors/lift-cage"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "cec2067501bc84b67ff6d49b2fa2205df525a6466693439f65346d7ad7fb1ff9",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/lift/s14/closed",
+        "expected": [
+          "doors/lift-cage"
+        ],
+        "absent": [],
+        "room": "s14",
+        "doorId": "link-14-a",
+        "mount": "right",
+        "open": false,
+        "nativeStatus": {
+          "open": false,
+          "reason": "Accès en attente — activer la cage"
+        },
+        "fixture": "authored left/right threshold; enclosing native wall and floor retained",
+        "drawn": [
+          "doors/lift-cage"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "1acf7ec70ab389feac6173e7e81eb912981904ea3fb5ed1f5aedc39c1601db55",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/lift/s15/open",
+        "expected": [
+          "doors/lift-cage"
+        ],
+        "absent": [],
+        "room": "s15",
+        "doorId": "link-14-b",
+        "mount": "left",
+        "open": true,
+        "nativeStatus": {
+          "open": true,
+          "reason": ""
+        },
+        "fixture": "authored left/right threshold; enclosing native wall and floor retained",
+        "drawn": [
+          "doors/lift-cage"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "a7fccca765689ac54c60ae2d8b943873b6d8cef69b8d496c658486562204a256",
+        "width": 600,
+        "height": 380
+      },
+      {
+        "id": "door/lift/s15/closed",
+        "expected": [
+          "doors/lift-cage"
+        ],
+        "absent": [],
+        "room": "s15",
+        "doorId": "link-14-b",
+        "mount": "left",
+        "open": false,
+        "nativeStatus": {
+          "open": false,
+          "reason": "Manning est séparé du groupe. V : le rappeler ; ouvrez les cloisons sur son trajet."
+        },
+        "fixture": "authored left/right threshold; enclosing native wall and floor retained",
+        "drawn": [
+          "doors/lift-cage"
+        ],
+        "saveUnchanged": true,
+        "activeWorkUnchanged": true,
+        "pixelSha256": "3bbdcc547c1045316df4fe7caf12afe9c52876e957db1e05cf35d81a542fcbc1",
+        "width": 600,
+        "height": 380
+      }
+    ],
+    "newAssetIds": [
+      "characters/decker-walk-pass-a",
+      "characters/decker-walk-pass-b",
+      "characters/decker-focus",
+      "characters/decker-medical-report",
+      "equipment/locker-stocked",
+      "equipment/supply-empty",
+      "devices/parts-empty",
+      "doors/lift-cage",
+      "decor/medical-chart",
+      "decor/medical-cups",
+      "terrain/sand",
+      "terrain/silica",
+      "planets/lv178-orbital"
+    ],
+    "previousEditionAssetIds": [
+      "characters/carlyle-physician",
+      "characters/decker-medical-gown",
+      "objectives/icc-handheld",
+      "creatures/queen",
+      "weapons/flame"
+    ],
+    "status": {
+      "total": 139,
+      "requested": 139,
+      "ready": 139,
+      "assets": {
+        "characters/adams": "ready",
+        "characters/badejo": "ready",
+        "characters/bronson": "ready",
+        "characters/cherbourg": "ready",
+        "characters/cho": "ready",
+        "characters/dave": "ready",
+        "characters/decker-crouch-ready": "ready",
+        "characters/decker-crouch": "ready",
+        "characters/decker-dodge-ready": "ready",
+        "characters/decker-dodge": "ready",
+        "characters/decker-ready": "ready",
+        "characters/decker-walk-a": "ready",
+        "characters/decker-walk-b": "ready",
+        "characters/decker": "ready",
+        "characters/elway": "ready",
+        "characters/harriman": "ready",
+        "characters/manning-ready": "ready",
+        "characters/manning": "ready",
+        "characters/medic": "ready",
+        "characters/muller": "ready",
+        "characters/pritchett": "ready",
+        "characters/rand": "ready",
+        "characters/rollins": "ready",
+        "characters/silas": "ready",
+        "characters/carlyle-physician": "ready",
+        "characters/decker-medical-gown": "ready",
+        "characters/decker-focus": "ready",
+        "characters/decker-medical-report": "ready",
+        "characters/decker-walk-pass-a": "ready",
+        "characters/decker-walk-pass-b": "ready",
+        "corpses/facehugger": "ready",
+        "creatures/facehugger": "ready",
+        "creatures/queen": "ready",
+        "decor/amber": "ready",
+        "decor/antenna": "ready",
+        "decor/armory": "ready",
+        "decor/battery": "ready",
+        "decor/bridge": "ready",
+        "decor/briefing": "ready",
+        "decor/cable": "ready",
+        "decor/cableTray": "ready",
+        "decor/captureBay": "ready",
+        "decor/carene": "ready",
+        "decor/cargo": "ready",
+        "decor/checkpoint": "ready",
+        "decor/cocoon": "ready",
+        "decor/cryo": "ready",
+        "decor/drill": "ready",
+        "decor/dropship": "ready",
+        "decor/eggs": "ready",
+        "decor/excavator": "ready",
+        "decor/fence": "ready",
+        "decor/filters": "ready",
+        "decor/generator": "ready",
+        "decor/hoist-drive": "ready",
+        "decor/home": "ready",
+        "decor/landing": "ready",
+        "decor/locker": "ready",
+        "decor/medical": "ready",
+        "decor/membrane": "ready",
+        "decor/monolith": "ready",
+        "decor/office": "ready",
+        "decor/ossuary": "ready",
+        "decor/pipe": "ready",
+        "decor/pump": "ready",
+        "decor/quarantine-instruments": "ready",
+        "decor/ravine": "ready",
+        "decor/reel": "ready",
+        "decor/resinCable": "ready",
+        "decor/rib": "ready",
+        "decor/seal-equipment": "ready",
+        "decor/silica": "ready",
+        "decor/silicaShard": "ready",
+        "decor/survey": "ready",
+        "decor/terminal": "ready",
+        "decor/throne": "ready",
+        "decor/triage": "ready",
+        "decor/valve": "ready",
+        "decor/viewport": "ready",
+        "decor/warningStripe": "ready",
+        "decor/wash": "ready",
+        "decor/winch": "ready",
+        "decor/workbench": "ready",
+        "decor/medical-chart": "ready",
+        "decor/medical-cups": "ready",
+        "devices/console": "ready",
+        "devices/isolation": "ready",
+        "devices/parts": "ready",
+        "devices/parts-empty": "ready",
+        "doors/bulkhead-frame": "ready",
+        "doors/bulkhead-panel": "ready",
+        "doors/lift-cage": "ready",
+        "effects/acid": "ready",
+        "effects/flame": "ready",
+        "effects/foam": "ready",
+        "effects/impact": "ready",
+        "effects/muzzle": "ready",
+        "effects/spark": "ready",
+        "equipment/archive": "ready",
+        "equipment/armory-rack": "ready",
+        "equipment/decoy": "ready",
+        "equipment/filter": "ready",
+        "equipment/lamp": "ready",
+        "equipment/light-panel": "ready",
+        "equipment/locker-open": "ready",
+        "equipment/locker": "ready",
+        "equipment/medkit": "ready",
+        "equipment/radio": "ready",
+        "equipment/sensor": "ready",
+        "equipment/shutter-control": "ready",
+        "equipment/stasis-canopy": "ready",
+        "equipment/supply": "ready",
+        "equipment/tracker": "ready",
+        "equipment/weakpoint": "ready",
+        "equipment/locker-stocked": "ready",
+        "equipment/supply-empty": "ready",
+        "objectives/capture": "ready",
+        "objectives/case": "ready",
+        "objectives/console": "ready",
+        "objectives/sleep": "ready",
+        "objectives/icc-handheld": "ready",
+        "obstacles/crate": "ready",
+        "obstacles/pipe": "ready",
+        "obstacles/rack": "ready",
+        "obstacles/resin": "ready",
+        "obstacles/rib": "ready",
+        "obstacles/silica-rubble": "ready",
+        "organic/egg": "ready",
+        "parasites/normal": "ready",
+        "parasites/royal": "ready",
+        "stretchers/adams": "ready",
+        "stretchers/elway": "ready",
+        "weapons/foam": "ready",
+        "weapons/pistol": "ready",
+        "weapons/pulse": "ready",
+        "weapons/flame": "ready",
+        "planets/lv178-orbital": "ready",
+        "terrain/sand": "ready",
+        "terrain/silica": "ready"
+      },
+      "drawn": {
+        "terrain/sand": 114,
+        "decor/checkpoint": 1,
+        "decor/fence": 1,
+        "decor/cableTray": 111,
+        "decor/warningStripe": 74,
+        "obstacles/crate": 26,
+        "obstacles/pipe": 28,
+        "equipment/archive": 50,
+        "characters/rand": 1,
+        "characters/decker": 16,
+        "obstacles/rack": 31,
+        "decor/drill": 1,
+        "decor/reel": 3,
+        "characters/badejo": 1,
+        "characters/bronson": 1,
+        "objectives/case": 7,
+        "decor/medical": 8,
+        "decor/medical-chart": 2,
+        "decor/medical-cups": 2,
+        "decor/locker": 5,
+        "objectives/icc-handheld": 2,
+        "characters/carlyle-physician": 3,
+        "characters/decker-medical-gown": 4,
+        "decor/office": 2,
+        "decor/terminal": 5,
+        "characters/harriman": 1,
+        "objectives/console": 19,
+        "decor/home": 1,
+        "decor/wash": 4,
+        "characters/medic": 1,
+        "decor/seal-equipment": 1,
+        "characters/manning-ready": 120,
+        "weapons/pistol": 98,
+        "characters/decker-ready": 171,
+        "equipment/lamp": 79,
+        "decor/briefing": 2,
+        "characters/rollins": 2,
+        "decor/armory": 1,
+        "equipment/armory-rack": 3,
+        "characters/adams": 2,
+        "equipment/supply": 9,
+        "decor/dropship": 2,
+        "decor/cargo": 2,
+        "characters/elway": 1,
+        "decor/landing": 1,
+        "decor/antenna": 3,
+        "decor/battery": 2,
+        "decor/filters": 2,
+        "doors/bulkhead-panel": 14,
+        "doors/bulkhead-frame": 24,
+        "equipment/light-panel": 12,
+        "equipment/shutter-control": 22,
+        "decor/hoist-drive": 3,
+        "decor/winch": 3,
+        "doors/lift-cage": 6,
+        "characters/cho": 1,
+        "decor/workbench": 1,
+        "equipment/locker": 11,
+        "devices/parts": 3,
+        "decor/generator": 3,
+        "decor/pump": 3,
+        "decor/carene": 1,
+        "decor/rib": 6,
+        "decor/resinCable": 38,
+        "decor/silicaShard": 26,
+        "decor/pipe": 7,
+        "obstacles/rib": 13,
+        "devices/isolation": 4,
+        "obstacles/silica-rubble": 11,
+        "obstacles/resin": 11,
+        "decor/excavator": 1,
+        "decor/survey": 4,
+        "decor/monolith": 1,
+        "decor/ossuary": 1,
+        "decor/bridge": 2,
+        "decor/cable": 4,
+        "terrain/silica": 111,
+        "decor/silica": 4,
+        "decor/amber": 1,
+        "decor/cocoon": 2,
+        "decor/membrane": 1,
+        "decor/eggs": 2,
+        "creatures/facehugger": 3,
+        "decor/throne": 1,
+        "creatures/queen": 3,
+        "equipment/weakpoint": 4,
+        "decor/triage": 3,
+        "stretchers/adams": 2,
+        "parasites/royal": 2,
+        "stretchers/elway": 2,
+        "parasites/normal": 2,
+        "decor/ravine": 1,
+        "decor/captureBay": 1,
+        "objectives/capture": 1,
+        "devices/console": 7,
+        "decor/quarantine-instruments": 1,
+        "decor/viewport": 4,
+        "planets/lv178-orbital": 3,
+        "characters/cherbourg": 1,
+        "decor/cryo": 1,
+        "objectives/sleep": 1,
+        "decor/valve": 1,
+        "characters/decker-crouch-ready": 12,
+        "characters/decker-dodge-ready": 12,
+        "weapons/pulse": 6,
+        "weapons/foam": 7,
+        "weapons/flame": 8,
+        "characters/decker-walk-a": 2,
+        "characters/decker-walk-pass-a": 3,
+        "characters/decker-walk-b": 2,
+        "characters/decker-walk-pass-b": 2,
+        "equipment/locker-stocked": 2,
+        "equipment/locker-open": 1,
+        "equipment/supply-empty": 1,
+        "devices/parts-empty": 1,
+        "characters/decker-medical-report": 2,
+        "characters/decker-focus": 2,
+        "characters/decker-crouch": 1,
+        "characters/decker-dodge": 1,
+        "effects/muzzle": 2,
+        "effects/flame": 2,
+        "effects/impact": 1,
+        "effects/spark": 1,
+        "effects/acid": 1,
+        "effects/foam": 1
+      },
+      "methods": {
+        "human": {
+          "calls": 338,
+          "pngCalls": 338,
+          "vectorCalls": 0
+        },
+        "alien": {
+          "calls": 90,
+          "pngCalls": 14,
+          "vectorCalls": 76
+        },
+        "corpse": {
+          "calls": 2,
+          "pngCalls": 0,
+          "vectorCalls": 2
+        },
+        "decor": {
+          "calls": 718,
+          "pngCalls": 718,
+          "vectorCalls": 0
+        },
+        "prop": {
+          "calls": 240,
+          "pngCalls": 240,
+          "vectorCalls": 0
+        },
+        "egg": {
+          "calls": 0,
+          "pngCalls": 0,
+          "vectorCalls": 0
+        },
+        "archive": {
+          "calls": 100,
+          "pngCalls": 100,
+          "vectorCalls": 0
+        },
+        "supply": {
+          "calls": 20,
+          "pngCalls": 20,
+          "vectorCalls": 0
+        },
+        "locker": {
+          "calls": 30,
+          "pngCalls": 28,
+          "vectorCalls": 2
+        },
+        "armoryRack": {
+          "calls": 8,
+          "pngCalls": 6,
+          "vectorCalls": 2
+        },
+        "sensor": {
+          "calls": 0,
+          "pngCalls": 0,
+          "vectorCalls": 0
+        },
+        "emitter": {
+          "calls": 0,
+          "pngCalls": 0,
+          "vectorCalls": 0
+        },
+        "object": {
+          "calls": 70,
+          "pngCalls": 60,
+          "vectorCalls": 10
+        },
+        "device": {
+          "calls": 30,
+          "pngCalls": 30,
+          "vectorCalls": 0
+        },
+        "weakpoint": {
+          "calls": 8,
+          "pngCalls": 8,
+          "vectorCalls": 0
+        },
+        "stretcher": {
+          "calls": 8,
+          "pngCalls": 8,
+          "vectorCalls": 0
+        },
+        "stasisDisplay": {
+          "calls": 0,
+          "pngCalls": 0,
+          "vectorCalls": 0
+        },
+        "door": {
+          "calls": 288,
+          "pngCalls": 60,
+          "vectorCalls": 228
+        },
+        "shutter": {
+          "calls": 22,
+          "pngCalls": 22,
+          "vectorCalls": 0
+        },
+        "lightPanel": {
+          "calls": 24,
+          "pngCalls": 24,
+          "vectorCalls": 0
+        },
+        "tacticalGround": {
+          "calls": 104,
+          "pngCalls": 2,
+          "vectorCalls": 102
+        },
+        "drawEffects": {
+          "calls": 122,
+          "pngCalls": 8,
+          "vectorCalls": 114
+        },
+        "floor": {
+          "calls": 110,
+          "pngCalls": 24,
+          "vectorCalls": 86
+        }
+      },
+      "methodMetricsIncludeSelectionPass": true
+    },
+    "images": [
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/adams.png",
+        "bytes": 1772101,
+        "sha256": "3fc67597bdf89b97cb018f20fddf2843dca86b70a0d9d09dc13cff7517c44778",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/badejo.png",
+        "bytes": 1675685,
+        "sha256": "2c7695a8c524955cfac625ec900319a3cb3c78e62b36245a5397e90d8b0ee7d5",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/bronson.png",
+        "bytes": 1779643,
+        "sha256": "5ee1aadf105c6baf8b6c22a2a46267c13c1fda7bc1f1877027b7f91d9e3b2b67",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/cherbourg.png",
+        "bytes": 1426947,
+        "sha256": "d6393f978fbf34e6f7d006164aa92e1e95dc5e8e9078179d4a69e46cc3fd19f2",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/cho.png",
+        "bytes": 1639202,
+        "sha256": "569cdcbbc0c909a4f6bb0190a9d7f0c9490270d8bf7510fad52ef19600e21de9",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/dave.png",
+        "bytes": 1805884,
+        "sha256": "99875e126bbdc0ce421b3548baffd8a22243b02b5df0de26a23698d98c36161e",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch-ready.png",
+        "bytes": 1697088,
+        "sha256": "38032ab5a4515d904ebfaf1939ccd0c0dead69d4170c16b2f6501c9c576b29fb",
+        "width": 1199,
+        "height": 1312,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch.png",
+        "bytes": 1561783,
+        "sha256": "103e5e0273a7383685be7ac06812fe7da901e7119e8ce70ce3a0a14bf20dd971",
+        "width": 1220,
+        "height": 1289,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge-ready.png",
+        "bytes": 1769977,
+        "sha256": "1ebb7dcc7daa00990561e11b5bee5248301e2b7bd927d5f469fa6e9448752103",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge.png",
+        "bytes": 1887477,
+        "sha256": "3373768d355036d107248b22f3d375306e04a598091e4f7fa5427248abe715a2",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
+        "bytes": 1833806,
+        "sha256": "15c1f6c41359cd2adefd63add625cf552c49d27c806f47f80729e8ef5df55cc8",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png",
+        "bytes": 1867661,
+        "sha256": "5346662681f590e25e53dbd75da3360c345284254942cea9f717c5095317987d",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
+        "bytes": 1766518,
+        "sha256": "d5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+        "bytes": 1626812,
+        "sha256": "2122dd795b37a0f8ef0b6f441861eb0d03f960986a37b3996285bc3937d5563c",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/elway.png",
+        "bytes": 1674049,
+        "sha256": "0c41e21aeb7641924bbd906ca0a89088e0c1102ca91200336f012dd3c2c73bd6",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/harriman.png",
+        "bytes": 1538047,
+        "sha256": "992c5a3f1a2622cf710489ad86cc34b7723e5e81edc9f56928511beeb6653b86",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png",
+        "bytes": 1947258,
+        "sha256": "786272996f5059f19b6661283986c7cd3ed812f67c884db4f031cfb9b3824995",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/manning.png",
+        "bytes": 1826145,
+        "sha256": "7d1e5c39cd1d44ee2464be0cf1a8875ea25c68eef8fcbe84e7eb6f564cdeeb19",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/medic.png",
+        "bytes": 1584745,
+        "sha256": "fb8c5bfe9dfe8d1267c54e665fd20bc8a94d6de8b3450a6d5ead61deae12c3e6",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/muller.png",
+        "bytes": 1723505,
+        "sha256": "bf832b75447f05790585c261562c52c394dc35871dd5de4365453e8f7f5be94a",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/pritchett.png",
+        "bytes": 1682011,
+        "sha256": "e49bec711487259e6906cac4f7349c1abb787e8e6a58b019d5eed3af6bba7c75",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/rand.png",
+        "bytes": 1753979,
+        "sha256": "30dd8d3896acb52b15e2fcab9329f72a08d0b84995fe66ce6445d6dd298b5dca",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/rollins.png",
+        "bytes": 1446163,
+        "sha256": "e8d9fcbaaf98338623cdd20aa22b02b5081662a705ea41a10f90d62247cbea86",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/silas.png",
+        "bytes": 1654417,
+        "sha256": "7a23a1626dde3cd3c26a7bad253530cbf3a880fe5bd44cecbd1d3fb4249fc73b",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/carlyle-physician.png",
+        "bytes": 1560708,
+        "sha256": "a357b23a4509b913f8467f7efd98815c64b4b5b58f8b9851b94f60c325ec52f7",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+        "bytes": 1516131,
+        "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-focus.png",
+        "bytes": 1725805,
+        "sha256": "8659b23dbb7ecc99dc9dfd1937b1020c5b38a95482c268be8461977451151f6f",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-report.png",
+        "bytes": 1562846,
+        "sha256": "004e6ca5b3208f83d97c1641c537fb6ea80a6ffeefb8d1b5431cb44a22d9647d",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+        "bytes": 1696702,
+        "sha256": "ad724f2c102a874976a4ac90ff15ae9bdf1f6feecee713335a76e1cf7492c4a0",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+        "bytes": 1726714,
+        "sha256": "67a33165abeb8bb8ee8bcdff148ab3ecf19872c455e5d24556022bff57b503ac",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/corpses/facehugger.png",
+        "bytes": 1303577,
+        "sha256": "fc7c3205e77702fabdddedf62560df440324ac3c7928ea52b59fb400873fbc63",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/creatures/facehugger.png",
+        "bytes": 1790221,
+        "sha256": "8e7d0cca0e4c78ae9baaff939a8c8a540571f476b93fe11ed5b9e6d04bb2b2a9",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/creatures/queen.png",
+        "bytes": 2208282,
+        "sha256": "0f882eff7928bcd130d09676e3117616656de7dc9c8e401c85b2ded8857f6251",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/amber.png",
+        "bytes": 1445819,
+        "sha256": "6ea052199dd91e5f44d3ddf4f19590c8b7416652a6acd3c866cb80196d031625",
+        "width": 1147,
+        "height": 1371,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/antenna.png",
+        "bytes": 1987264,
+        "sha256": "0a97b35c191be79fc625bcaab667221f1d06a8af93bbee3fa94c55bfeb129a65",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/armory.png",
+        "bytes": 2478105,
+        "sha256": "68efd5d886ec133f521ea664bf059e8b584b321c5075f72664eb112f0913cd6a",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/battery.png",
+        "bytes": 2570228,
+        "sha256": "403feaa4cfc3d8a4282397ff1301f0c4a5ddaf9a79b9086358e64741dc350787",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/bridge.png",
+        "bytes": 1423302,
+        "sha256": "4624a08b8757dcbedac18d4166d8ba13acc825e231577c80cfefbeee3826d392",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/briefing.png",
+        "bytes": 2344796,
+        "sha256": "da971fa4a34e85c8a54cf01fe43c16ccf6feac740ec2baf0ca070b42e6ee330c",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/cable.png",
+        "bytes": 1733737,
+        "sha256": "54ae1db11327ae54d41fe171530078792236bac8ff5c426330ec11ef9559e209",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/cableTray.png",
+        "bytes": 2031704,
+        "sha256": "736fc3f7d7baafc8b7f721ebb492787cbe2032750ff662242d0742aca200627f",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/captureBay.png",
+        "bytes": 2372554,
+        "sha256": "60f7f2d665f4b3bc44827e46cedf3ef7b439b5cd2145b9c2d97cb0041f5c1874",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/carene.png",
+        "bytes": 2277342,
+        "sha256": "00607f515a0a4b184983ed238ecf9cf25f839556d3b590c72d2b0c7384822f2b",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/cargo.png",
+        "bytes": 2907688,
+        "sha256": "b225cf463ac7fa18f29b37883e79ec8c28d25226b039a75b2208d3defc4e9a5a",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/checkpoint.png",
+        "bytes": 2441730,
+        "sha256": "2010e51a1b3554a18f61b4c09fd1aca41c63acc5f878e68f0ee797e2b33061fd",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/cocoon.png",
+        "bytes": 2821558,
+        "sha256": "88e8e6692212e29915668f526b5b770ba671a8850268866577593044afb09b9f",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/cryo.png",
+        "bytes": 2119346,
+        "sha256": "99dd71564adaae63a2d491c10d666985542761b3f083818a28e22f571962dd07",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/drill.png",
+        "bytes": 2472223,
+        "sha256": "ed5eba789c2bcb6e1463003d7b2bf6fd9d6150a11ca614d7932d87b0184be180",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/dropship.png",
+        "bytes": 1756835,
+        "sha256": "0e3b67a555bb79d7a10fc5a85f68866d428e72f9c565502cf965520f62b049a0",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/eggs.png",
+        "bytes": 2063293,
+        "sha256": "d02e6f00f5532435ddde340d776aaf8dcb77ecd591afdd60a8ff983253d0e05a",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/excavator.png",
+        "bytes": 2408594,
+        "sha256": "4f60a82130cc1143bd04d8f6e7de0c9abde7cfc7e81cb223695df61a32a795e3",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/fence.png",
+        "bytes": 3971351,
+        "sha256": "a43b0af982113249a100620c75d830862898ae2a5002c15f379e5656f09133ff",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/filters.png",
+        "bytes": 2440316,
+        "sha256": "e4109119ce81983f38dfbed6cc06e7cbcb44497182b94c81c00672d2e20158e4",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/generator.png",
+        "bytes": 2579144,
+        "sha256": "e316c38a8423765e30e4873cb254d73215f628f33ec525677aad9cbfa48552d8",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/hoist-drive.png",
+        "bytes": 2370745,
+        "sha256": "72982665cb381ea79275125dacbbd85318567d87bb237d716f241495c0e7e3ef",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/home.png",
+        "bytes": 2304188,
+        "sha256": "5bf03a94941b94757cfb6d4c7bc6cbf7d0eec9a07d670d48538ba61586622c2d",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/landing.png",
+        "bytes": 1895098,
+        "sha256": "5885d26b99360f4ba3c7aeba7d50864926cc6fdb168f4310a100ccb6e217175c",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/locker.png",
+        "bytes": 2393757,
+        "sha256": "1872d7d6a0b4483fe1ea03835f4d1d3158b8cd91ff5adabb51accd8c357bbae6",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
+        "bytes": 1862848,
+        "sha256": "325e5622bd318fbcda739d68d546271245632d251f537c50317a855501fbd649",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
+        "bytes": 1623574,
+        "sha256": "023e1cf43dfc3434ad541d88ec8588e5c1e423bd7c57e9b1428fb72c8a24bb45",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/monolith.png",
+        "bytes": 1411324,
+        "sha256": "05135215db0fabc4292f876f2e737c977ada02fb9e94ff56f559ce4c59eaf7e4",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/office.png",
+        "bytes": 1978635,
+        "sha256": "0970ef7259bcfd9239ea5a1dad608bbf03712c11a154a3c46785d94380fa6ff4",
+        "width": 1656,
+        "height": 950,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/ossuary.png",
+        "bytes": 2536837,
+        "sha256": "777c7a75346ed59b422dcd0f78bc757ede05634fc4a71b1e9cd4fb419d21ea23",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/pipe.png",
+        "bytes": 1694083,
+        "sha256": "1eed0f25e71f00e123955ef1456defab1a1c8b2151f5153f187662fce50112e3",
+        "width": 1199,
+        "height": 1312,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/pump.png",
+        "bytes": 2488952,
+        "sha256": "5ddbb80487b0e9d147cf8f0a62a2557e69aafbc3cf9882145e4552fc26ed2f2b",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/quarantine-instruments.png",
+        "bytes": 2633988,
+        "sha256": "ba3d0fddb06047d2181c2d0a10d4fbf455da4ceac6b4a33824c996058741ac9c",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/ravine.png",
+        "bytes": 2323581,
+        "sha256": "47872f4fec8be23bf1aa5c0fa6393dcb7486f99dc1f0189b626d50f5a5a9e76a",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/reel.png",
+        "bytes": 2408366,
+        "sha256": "42592fb514713a3e5ea546dc075608a533568d25c97f7989d498aeb8540296a9",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/resinCable.png",
+        "bytes": 1439371,
+        "sha256": "cdb8b3ace05b20df3ab262782c7826c626c4404b43ddd0c33e0b4c42a13a14c7",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/rib.png",
+        "bytes": 2171443,
+        "sha256": "63426ad873b73ed32077b9bb2ba08167d5ed9c0e18a83e7331931c22453b9da6",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/seal-equipment.png",
+        "bytes": 2638307,
+        "sha256": "e14df58149375e05000c5fe1f3ea49c45bc09b5ce220d17ac0be17ef96e16e97",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/silica.png",
+        "bytes": 1870151,
+        "sha256": "83288e32c604bfb09adf42ec22fa425270bfb3d916c6d8edeb4a68addd81cff9",
+        "width": 1199,
+        "height": 1312,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/silicaShard.png",
+        "bytes": 1794129,
+        "sha256": "4f1e08181a8a2294f1ec3b7a7b75c368e7ec33f261b200cf90fcb055eb3c4b00",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/survey.png",
+        "bytes": 2479319,
+        "sha256": "e9427cdb48e7342332010b6b6f0c25b92932b7c312b75d0b0c47a5ac3a45f101",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/terminal.png",
+        "bytes": 2346187,
+        "sha256": "37317b82e6ed11283d660a4b7111d58feb38ba869caae8a992d01b23662207cf",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/throne.png",
+        "bytes": 2481139,
+        "sha256": "92833d8ca7e92a7bb3143802b637b3d4335f8276f3cd2e1c3ffa44a5d94c273f",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/triage.png",
+        "bytes": 2119122,
+        "sha256": "b8e7c8183c176e5d9f20bdb7cd36fdf64ae9f81e63059f8f357b148963175554",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/valve.png",
+        "bytes": 1859613,
+        "sha256": "6f0bcc2de433cbc4d1f66ba6a3ed1832842e0ae08b2b5cd6f1c36e7a11681c90",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/viewport.png",
+        "bytes": 2647725,
+        "sha256": "43cd0785bdfe58b035633ac80bf76012925bad8b28bfba3942a74d00aee39e5e",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/warningStripe.png",
+        "bytes": 1369279,
+        "sha256": "a98199e5e6fbc6da22925b5ac82455dc7a28c1609fcd5db44595c14a3e846560",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/wash.png",
+        "bytes": 2477167,
+        "sha256": "dc3728291a5ea2673b4c4005662222450d6dff099b417f2206302c16b2e48f93",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/winch.png",
+        "bytes": 2491980,
+        "sha256": "538fff5639861792f1c2300c9eea34042fbd5c4d5b44f697636e46c2e12111de",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/workbench.png",
+        "bytes": 2495432,
+        "sha256": "a9e10b992354406cc2320b5fc37e8c8fdc53fd321898f0c21fe0c189d0261338",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-chart.png",
+        "bytes": 2305126,
+        "sha256": "97ebe16bfdb18696e229ddcfef4e6e72b4fb0fcddc2559c8644872ef9bdabff5",
+        "width": 1086,
+        "height": 1448,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-cups.png",
+        "bytes": 1703691,
+        "sha256": "fc27ce0faa84b419885cbd3006b491ab3b8658782b7b9037c566b969c2ce8471",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/console.png",
+        "bytes": 2091998,
+        "sha256": "90e7154ac78f5b9382b25d1a1c87d88ef8f83b976c99b21246691c34fc59ac25",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png",
+        "bytes": 1382835,
+        "sha256": "f5bcc21a3c573fbb34f857aac4debe799e83229fa2456d95653a1a65122aa877",
+        "width": 1199,
+        "height": 1312,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts.png",
+        "bytes": 2412093,
+        "sha256": "dd7e9b956d65058131e8139632c9a6d766ad08d5d3e2859b81bdab2aa93b7716",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts-empty.png",
+        "bytes": 2330186,
+        "sha256": "6297a0ffa45e87ac4dab75f4330152d6b6be1ee3579a77798c31081616ec6684",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-frame.png",
+        "bytes": 1620849,
+        "sha256": "e03d27bc739fde15de5fce5f96ac48582cc374bd0155cb14c79fa23ffaa9772c",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-panel.png",
+        "bytes": 2187264,
+        "sha256": "a4ad28a467c28569f03779a3558f54cce8fa998ab873300b991958f06a4d26c5",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+        "bytes": 1344816,
+        "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
+        "width": 1290,
+        "height": 1219,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/acid.png",
+        "bytes": 802696,
+        "sha256": "ffe8719cc542e03c494e62dd5552f4d5df3ecfd7655489b41cf539b5d118b1fe",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/flame.png",
+        "bytes": 900708,
+        "sha256": "9f338786aedd57ce4543ed7058b1b2a3e7abc9ee6ce0aee580185c26966eafc4",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/foam.png",
+        "bytes": 1906222,
+        "sha256": "1c931f31666534b6fbe70235d2faba7ae647ac9cf1a4d6f2696878583d2dbdee",
+        "width": 1752,
+        "height": 897,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/impact.png",
+        "bytes": 959818,
+        "sha256": "12f7f250107c45bc671d8b1b3b9fb88f3ea7eb74ea0d470ad1cba9b62cd98528",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/muzzle.png",
+        "bytes": 351907,
+        "sha256": "e52dd7f8d42da158100f33bb357e5e98b4abadb43eb0220a9f4af32cd4efe526",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/effects/spark.png",
+        "bytes": 870791,
+        "sha256": "5e8d62e424bdacc69874b527deb46fd3dad482e59f047ad2b5dd6661b4d20300",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/archive.png",
+        "bytes": 1720485,
+        "sha256": "ee9fd133c4d338bb16174977eefab266e08adf00aae84f9ff3836e69187d1e44",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/armory-rack.png",
+        "bytes": 1913670,
+        "sha256": "b0f4f5d7cc10e1c0d221e41e13f77654a137c25a2a39f0772f25b81b0202106a",
+        "width": 1312,
+        "height": 1199,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/decoy.png",
+        "bytes": 2332613,
+        "sha256": "0ea16a5aaade2e5cd0423601415d8e76646cb0cf8f17fd1e1e489488b0d1c120",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/filter.png",
+        "bytes": 2175851,
+        "sha256": "3b7163bc5afa46c14ff819fd51bd20f7be31d2831ce8b2debeb140e4b90a3753",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/lamp.png",
+        "bytes": 2162938,
+        "sha256": "88f20d53d38aaa6e7eeaade864765628a9fe5df52ea7469fcc77a26bd8aa05db",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/light-panel.png",
+        "bytes": 2283328,
+        "sha256": "54c0679f52bfff706a10b1e7a1dcd93ce31523024a17bdc1707a35396a038e56",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png",
+        "bytes": 2372707,
+        "sha256": "9c9d393e5337509ec1fa7e6cc9b71db4efda7b78986adf02b180ca6935758743",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker.png",
+        "bytes": 2014209,
+        "sha256": "8bf1350e163356ac1057605e29b1c85f68001afa2365fea25c22f7879a21f550",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/medkit.png",
+        "bytes": 3020553,
+        "sha256": "1d9f947ea9474df00034ff368669ac492c6a203416f1eda5455e68d7065c0b3c",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/radio.png",
+        "bytes": 2158947,
+        "sha256": "959dade0325d632ad8b3c86d03594c573f3e3c0d026edeaf66179f0725dda5b6",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png",
+        "bytes": 1073705,
+        "sha256": "2b5db634e981ffb5eab299313366ad01a170c9725bf32680918170ab713c5d12",
+        "width": 1425,
+        "height": 1104,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/shutter-control.png",
+        "bytes": 2285487,
+        "sha256": "55b7ced4991e520902caf3edcaa1de4ce462da9222ad653437a95d267c34d4b7",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/stasis-canopy.png",
+        "bytes": 1615493,
+        "sha256": "218de8f48980121573e38dc92a2329c8dcd7897407b27265e38f7da963e725a4",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/supply.png",
+        "bytes": 2193866,
+        "sha256": "0f46994e4fa4d718bad65756ec7f8ba8a647099b6ddba8fc5bc4d83b1eb4e10d",
+        "width": 1672,
+        "height": 941,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/tracker.png",
+        "bytes": 1774314,
+        "sha256": "941fe7967be24b45d50c2bfd9f9b0cefed5edf0e828b49fcdcf65e0a4b27bf1c",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint.png",
+        "bytes": 557039,
+        "sha256": "dcfed487dbfb0113b13bcb4c29d4e32fe1bf19ac9307b70e945f28a7a4ed7a00",
+        "width": 887,
+        "height": 1774,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-stocked.png",
+        "bytes": 2310254,
+        "sha256": "1d52abe726fa1cef6dc02544514046ccca9415ba4a0413ab2a568d7af4e2e6e9",
+        "width": 1024,
+        "height": 1536,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/equipment/supply-empty.png",
+        "bytes": 2195513,
+        "sha256": "197acef18a7082229c4d4e91b175c60f809b83b6d356fc3fcfd85029c8262f42",
+        "width": 1448,
+        "height": 1086,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/objectives/capture.png",
+        "bytes": 2391804,
+        "sha256": "8dbfa63fbd8a16cbe501291848a6d99587666a0c97fdc9c1f07ca562f8061ccf",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/objectives/case.png",
+        "bytes": 2199451,
+        "sha256": "d3a581a9b7c00d384dbc5816c98f31939bf423336471986b67156c461f61a76f",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/objectives/console.png",
+        "bytes": 1340223,
+        "sha256": "ecf797597f19d66903d6994e36d8655fe19fd3ab57a1b0cc22eef218db0deb4c",
+        "width": 1161,
+        "height": 1355,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/objectives/sleep.png",
+        "bytes": 1938439,
+        "sha256": "ff4c6b0416ac4febc32c4fbe14385bb5663b03b6a30f803b4616f3445468b8c0",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png",
+        "bytes": 1773875,
+        "sha256": "f659a2c161942a3eaf7704dc41fc24f6d67b1d08bf9a071e3187302a672683c4",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/crate.png",
+        "bytes": 2566414,
+        "sha256": "0175e7b7edc94e3798d109220ad14fa279a7473ba0efb1ebb4ad2946363a7ee2",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/pipe.png",
+        "bytes": 2363379,
+        "sha256": "ecd7b7bea2f3925e10ef1da9f724a27a8a3c29803b2f7ffb041706d2bae35a7d",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/rack.png",
+        "bytes": 2634038,
+        "sha256": "bdb8edd5034d268d5c395faf3c0ca261a51fbe7df1fae8060c05adb0409200c6",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/resin.png",
+        "bytes": 1508392,
+        "sha256": "af144b20115d56a03af9d9915cc036bd737eff552f13c1a9c6b22284788bfa49",
+        "width": 1983,
+        "height": 793,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/rib.png",
+        "bytes": 1359619,
+        "sha256": "0786ad5cf21305d52bd90eb6ed4d400aa519fc1743d25c73ad84542134495867",
+        "width": 1983,
+        "height": 793,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/obstacles/silica-rubble.png",
+        "bytes": 1923587,
+        "sha256": "691d276ab71a19e5a8fd0fc2f6ce9d55bdfb2db020fb612a94196b6f7d133beb",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/organic/egg.png",
+        "bytes": 1505515,
+        "sha256": "ec912802480b5de57c138fbf57e41696be9c3151d736fca75ceaf2a3dfc4262e",
+        "width": 1268,
+        "height": 1241,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/parasites/normal.png",
+        "bytes": 1955639,
+        "sha256": "e4a69f08d08619d30f871ac41e275f5ddeaf13e64e720be0191550434a00e12d",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/parasites/royal.png",
+        "bytes": 2082406,
+        "sha256": "c4ea5e393a2e481ef6e47a08132a0a0e440d8b7c1d581c0416ced3ab34566690",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/stretchers/adams.png",
+        "bytes": 2034413,
+        "sha256": "a67e7f862ace2a220ae1c3bb59f48cf4304f970718fbdcacb93bdaf4f889c33c",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/stretchers/elway.png",
+        "bytes": 1879135,
+        "sha256": "e22b572c48dc74d13e8b0d5c7be6ddc93b1331396d968c66f5f81f6074a667c7",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/weapons/foam.png",
+        "bytes": 2340514,
+        "sha256": "0254fa69a918922f567f4bd3e1f71100c416f5cad6abc4c84cd50be8668e98d0",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/weapons/pistol.png",
+        "bytes": 2099052,
+        "sha256": "87058761009134da01117efbfb3221ac2d850e21bee0f7e4101645ca645cdfe2",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/weapons/pulse.png",
+        "bytes": 1309194,
+        "sha256": "2ef953239ce88458a2485015326c385650a9bfee72627104a77a2d321124f9c5",
+        "width": 1774,
+        "height": 887,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/weapons/flame.png",
+        "bytes": 1558386,
+        "sha256": "81166877f76721c6316f0eeeeca2cbf5b0f87f8741c7002db241aa3444075f97",
+        "width": 2059,
+        "height": 764,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/planets/lv178-orbital.png",
+        "bytes": 1893668,
+        "sha256": "14aabbcdea3fcf7330a391e20752c138fe049a1e7e7fc9f0d6935e0e079cb196",
+        "width": 1536,
+        "height": 1024,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
+        "bytes": 1722927,
+        "sha256": "abb35029ec62424e8c9f13b4f2f05ff4e3ade0a3ff15750e2e3168324bedd276",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      },
+      {
+        "path": "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png",
+        "bytes": 1597263,
+        "sha256": "1bc859b5800d8db432aa9848ebef16f45ce026309aa16845607a66b2d50e87ac",
+        "width": 2172,
+        "height": 724,
+        "omittedAncillaryCaBX": 1
+      }
+    ]
+  },
+  "captureInventory": {
+    "count": 13,
+    "sizeBytes": 11375616,
+    "files": [
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/details.png",
+        "sizeBytes": 776555,
+        "sha256": "388f3f4b295c189a209e93a6282117adb5cf664630f5e7f70e526d51bfd6384d",
+        "gitBlobSha": "47409e244c0faf3fa84e30a73d566cb322d6e7c0"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/locomotion.png",
+        "sizeBytes": 537570,
+        "sha256": "eaeb309424231a2890c790ba6f68cf85e2e0c2f04c69afdb83d2edbeeac4f791",
+        "gitBlobSha": "7687b6725c6edc914fed56cbb6eff51826950885"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/medical-queen.png",
+        "sizeBytes": 430421,
+        "sha256": "f766bee2f6077e27b7d4b4ace9dc0946a404f1675dc71b29593dc7e5ddfb2314",
+        "gitBlobSha": "dc71a1f4adc219f3a82a86aeedd893eed0e5cc28"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/poses-weapons.png",
+        "sizeBytes": 1390013,
+        "sha256": "47c4d30ff12c6a166a1ee430d7d84ac42e1633f3d43ba444e1ad84366eba79f2",
+        "gitBlobSha": "f2f3f8f8093641164f68c739a9097182ea2fe0e1"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s01.png",
+        "sizeBytes": 1857120,
+        "sha256": "fcb6a971d471166cd0314ac0dfae252930393f8d8fd90f7f971d8ae4c389ba03",
+        "gitBlobSha": "8624364ff580afe33d8cfe6b70f34f6cdd87b3d6"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s03.png",
+        "sizeBytes": 324783,
+        "sha256": "a63ec9e78cceb187525f3b4d665ef933259bf4c65a1f7bdcdc87bc9ae6053bbf",
+        "gitBlobSha": "121d8404a132244bf832d76c51236bedf0c66739"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s14.png",
+        "sizeBytes": 600728,
+        "sha256": "aa84fa0a064b6cbc5fb192c962136084d31c9b0e0ed2710b1774691e12685934",
+        "gitBlobSha": "76923611e1c62dc0f7619fce3c86d3e33c632b3b"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s26.png",
+        "sizeBytes": 986042,
+        "sha256": "6d77c07ffe5a766f749c7a19026a1ef86da49cda0ace1317bc91c5ddbc2da0b2",
+        "gitBlobSha": "f94296c5faba90916cb9bed82c9c17dba464cf66"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s33.png",
+        "sizeBytes": 696064,
+        "sha256": "cf5936a01a747a4130b6954bad29892493d703362ae5021ef5494bfc73593a2a",
+        "gitBlobSha": "1bda0e15f6a200944bef45bd9d090aed955c2faf"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s34.png",
+        "sizeBytes": 503441,
+        "sha256": "f92dda2c609cb13eff740fe9291bd48edf3a7b02bce0872ac1f75bb489befa43",
+        "gitBlobSha": "5a8622387ce251a044ce9d82e2ade6fd62490382"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s39.png",
+        "sizeBytes": 484898,
+        "sha256": "9a263d18473ac3fb0ed150a7e1a8bc76f938c95267fd70b29645c74252096bb1",
+        "gitBlobSha": "fea7718fe49048f7a7deae75be3a489d8b0aeef5"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/s50.png",
+        "sizeBytes": 418202,
+        "sha256": "91c3cd3042c47678db6eccb19cd94f0551d3443e3ee3738e7356f339aa7d9514",
+        "gitBlobSha": "f0ca5e71bac508bc94cad09c1930efc9402a30bd"
+      },
+      {
+        "path": "docs/mer-des-chagrins-20261126/canvas-0.10.4/states-and-world.png",
+        "sizeBytes": 2369779,
+        "sha256": "f45b32661898a031f72858c142ed261f6b45f5a37fda086a0655d01538a0dfbc",
+        "gitBlobSha": "4f7134119834777555e7d53ad258e20eab2c1655"
+      }
+    ]
+  },
+  "visualInspection": {
+    "completed": true,
+    "sourceAssetsInspected": 13,
+    "finalStateSheetInspectedAfterLockerLabelCorrection": true,
+    "reviewedAreas": [
+      "medical dressing and single held ICC reader",
+      "four-phase gait in both directions with rest/reduced-motion controls",
+      "real stock and depletion variants",
+      "native armory allocation before withdrawal",
+      "lift apertures and actual opening/blocked states",
+      "terrain placement and tactical-layer order",
+      "orbital globe confined to s39 window"
+    ],
+    "remainingArtIssues": [
+      "High knee on passing pose B and coarse arm timing between four key poses.",
+      "Standing static medical reading does not reproduce the full lying/sitting/rising sequence.",
+      "Existing flame stock and secondary hand remain imperfect after refused compact edit.",
+      "Locker packages are generic reserves, not a rendering of each inventory item.",
+      "Lift presentation has no vertical travel animation."
+    ],
+    "inspectionDoesNotCertifyCanon": true
+  },
+  "scopedDistribution": {
+    "command": "copyMerVisualRuntime20261126(sourceRoot, outputRoot)",
+    "result": {
+      "files": 146,
+      "bytes": 270715549,
+      "manifestSha256": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c",
+      "built": true
+    },
+    "sourceVerification": {
+      "files": 147,
+      "bytes": 271005976,
+      "manifestSha256": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c",
+      "built": false
+    },
+    "onlyOverlay": true,
+    "sourceDocumentsExcluded": true,
+    "publicFiles": 146,
+    "sourceInventoryMembers": 147,
+    "runtimeManifestNotCountedAsMember": true,
+    "doesNotCertifyGlobalBuild": true
+  },
+  "bible": {
+    "entries": 239,
+    "productionContracts": 239,
+    "historicalWorkItems": 576,
+    "workCounts": {
+      "open": 552,
+      "partially-implemented": 16,
+      "resolved-for-declared-scope": 8
+    },
+    "resolvedByEvidenceVersion": {
+      "0.10.3": 5,
+      "0.10.4": 3
+    },
+    "entryCategories": {
+      "personnages": 29,
+      "lieux": 50,
+      "armes": 7,
+      "props": 119,
+      "vehicules": 5,
+      "vaisseaux": 5,
+      "terrain": 22,
+      "planetes": 2
+    },
+    "historicalDescriptionsPreserved": true,
+    "historicalAssetIndexesPreserved": true,
+    "newAssetsVerified": 13,
+    "currentLedgerDoesNotEraseHistoricalMissingWork": true,
+    "allMissingWorkCompleted": false
+  },
+  "sourceFiles": [
+    {
+      "path": "dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json",
+      "sizeBytes": 32200,
+      "sha256": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
+      "sizeBytes": 290427,
+      "sha256": "1c7aa577388caec67fe3b42e6c641853abfeb6ba48e00716ff0842ed52291091"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/index.html",
+      "sizeBytes": 7217,
+      "sha256": "d1ca3cc1bb7c1808e98d351b90fa05268554ce2b47bf2426808ef2da7a5fe641"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/galerie.html",
+      "sizeBytes": 7876,
+      "sha256": "e8c0bc4a5827abeebb6d7fe28752b37745f54b9b077f203e7d7d386be1d87c2d"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
+      "sizeBytes": 51046,
+      "sha256": "e833170b55f8adf6c0256d28f8b3e972a47889d5e310a6b5f65052f824ab31db"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/src/gallery.js",
+      "sizeBytes": 6110,
+      "sha256": "71f64a2630aa7611149135bb8f6a2b90f83ff18a720ae488034479aa7b123bdb"
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
+      "sizeBytes": 41271,
+      "sha256": "fa32338e1575f40734cb4ecca4525c965844c6da9bf8f0febf9caf07d5779976"
+    },
+    {
+      "path": "scripts/mer-des-chagrins-visual-admission-20261126.mjs",
+      "sizeBytes": 9464,
+      "sha256": "86968d9fe5803fa844594ddd21a3f374b8b29be6fe18658f2aed34d970dfbb5b"
+    },
+    {
+      "path": "scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs",
+      "sizeBytes": 7619,
+      "sha256": "4702f16537a476ad986b15a606c0cba445fd64d6c13bf564515c01443d7936bc"
+    },
+    {
+      "path": "scripts/verify-mer-png-renderer-20261126.mjs",
+      "sizeBytes": 70404,
+      "sha256": "37b3f5ff3bd1e6a5f913cd3cb81f17d85fe794ad4379f6378b044b4112b23008"
+    },
+    {
+      "path": "scripts/verify-mer-sprite-metadata-20261126.py",
+      "sizeBytes": 18119,
+      "sha256": "2b82c884c15224a8d47b83524358a3387a0eb4fe9eca182ccb686f9a01a1a345"
+    },
+    {
+      "path": "scripts/qa-mer-visual-canvas-20261126.mjs",
+      "sizeBytes": 54103,
+      "sha256": "568d4daaa16a8bf56dde0da1c7eec59a1a92a5df57b1485343b7005bee9183c3"
+    },
+    {
+      "path": "docs/mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.json",
+      "sizeBytes": 1010715,
+      "sha256": "3bb9d6c287d11346690a9fb4ddb2b96f4d12ec2097438cc8a34557009f9cd63b"
+    },
+    {
+      "path": "docs/mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.md",
+      "sizeBytes": 638070,
+      "sha256": "4110398cd26cc5cb6de4ec249c5cf86a8b5af77d136a778731cd77174fc93e31"
+    },
+    {
+      "path": "docs/narrative/dlc/sea-of-sorrows.md",
+      "sizeBytes": 16076,
+      "sha256": "9198a86ffc7f377c2f35e78530be3a11d6608b95b83c769c33a3215f0dd40be9"
+    },
+    {
+      "path": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+      "sizeBytes": 37226,
+      "sha256": "e86b4bc69588803b4512a5487a4717d05224a91fa5bab1b4d26e013956c7b48c"
+    },
+    {
+      "path": "docs/mer-des-chagrins-20261126/INTEGRATION.md",
+      "sizeBytes": 28467,
+      "sha256": "1964f22aeffa7a24bf18904b25d723170464650ec0ca3b0145a2de803934bb5e"
+    }
+  ],
+  "publication": {
+    "repository": "darknigthmare/aliens-tantalus-frontier",
+    "pullRequest": 58,
+    "branch": "codex/mer-des-chagrins-github-20261125",
+    "targetBranch": "claude/nifty-shannon-qpy1hl",
+    "receiptPreparedBeforeCommit": true,
+    "remoteCommitAndReadbackEvidence": "The PR description records publication and remote readback after this immutable receipt is committed.",
+    "newHeadCiSuccessClaimed": false
+  },
+  "limits": [
+    "This receipt describes selected local tests and explicit full-resolution Canvas fixtures, not a complete keyboard browser playthrough.",
+    "Global test:all, build and check:built results of previous versions are not inherited by this edition.",
+    "All 139 PNGs were decoded; 125 distinct PNG kinds, including all 13 additions, were observed in the tested fixtures. Available mappings and observed types are different counts.",
+    "The full novel has not been compared. Exact faces, geometry, materials and globe geography remain project interpretations where sources are insufficient.",
+    "The bible retains 552 open and 16 partially implemented work items. Its eight closed items are limited to their declared technical or visual scope.",
+    "Full movement, shooting, reloading, interaction and death animation cycles remain incomplete.",
+    "The compact flame edit was refused and was not retried; earlier adult and plasma refusals were not retried.",
+    "The Canvas image cache and in-memory caBX omission affect the QA harness only; source PNG bytes and production browser loading remain unchanged."
+  ],
+  "independentReview": {
+    "schemaVersion": 1,
+    "edition": "0.10.4",
+    "baselineCommit": "a26188a1e63cd39daaee5167d8e940e48120794d",
+    "independentReviewPassed": true,
+    "nodeVersion": "v24.22.3",
+    "tests": [
+      {
+        "name": "visual",
+        "command": "npm run test:mer-des-chagrins-visual",
+        "exitCode": 0,
+        "nodeVersion": "v24.22.3",
+        "result": {
+          "tests": 105,
+          "pass": 105,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0,
+          "durationMs": 1329.586403
+        },
+        "logSha256": "84e02e76b0ea9ab2d313353da30280011001a02d5bc645e3c89f8f34d07e3f2a",
+        "sourceFiles": [
+          {
+            "path": "scripts/verify-mer-png-renderer-20261126.mjs",
+            "sha256": "37b3f5ff3bd1e6a5f913cd3cb81f17d85fe794ad4379f6378b044b4112b23008"
+          },
+          {
+            "path": "scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs",
+            "sha256": "4702f16537a476ad986b15a606c0cba445fd64d6c13bf564515c01443d7936bc"
+          },
+          {
+            "path": "scripts/verify-mer-gallery-20261126.mjs",
+            "sha256": "2993bacd4f7810896bb6b748c1fa2c86dc036f59e008d95ed0063035e5f0c89e"
+          },
+          {
+            "path": "scripts/verify-mer-equipment-ui-20261126.mjs",
+            "sha256": "96ce9bad080fe48136f068de4ad742fcf7a1a90551686a233097f4300501cf38"
+          }
+        ],
+        "runtimeManifestSha256AtRun": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c"
+      },
+      {
+        "name": "dlc",
+        "command": "npm run test:dlc",
+        "exitCode": 0,
+        "nodeVersion": "v24.22.3",
+        "result": {
+          "tests": 46,
+          "pass": 46,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0,
+          "durationMs": 1082.482118
+        },
+        "logSha256": "38d6aabd64ae4786c04eab87123caa4c3594ce3e6ff62ae429fcfa52c99cdca1",
+        "sourceFiles": [
+          {
+            "path": "package.json",
+            "sha256": "643be149a5ca147c09f84e45be7bc68874df279da7b55a88eab27c5cc2337264"
+          },
+          {
+            "path": "scripts/verify-dlc-menu.mjs",
+            "sha256": "94f1c58253b10c10374219720e55afaeecadacd70ac56355f339ae28d00bd237"
+          },
+          {
+            "path": "scripts/verify-dlc-avp-2004.mjs",
+            "sha256": "947cba4c0c1f8ed531f8758768fba5c71b86ba312701de22feacf0417f2637bb"
+          },
+          {
+            "path": "scripts/verify-dlc-audit-succession.mjs",
+            "sha256": "827844b0b51548f3f5ec7882500bbf829b97aff2679e17c7940506e03309cbdf"
+          }
+        ],
+        "scopeNote": "Executed before the final visual locker fallback correction; DLC shared code, tests and protected guard bytes remained unchanged at the final review."
+      },
+      {
+        "name": "admissions",
+        "command": "node --test scripts/verify-mer-des-chagrins-admission-20261125.mjs scripts/verify-mer-des-chagrins-recovery-admission-20261126.mjs scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs",
+        "exitCode": 0,
+        "nodeVersion": "v24.22.3",
+        "result": {
+          "tests": 33,
+          "pass": 33,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0,
+          "durationMs": 1039.350123
+        },
+        "logSha256": "dd4209e5481ba523e0e8b2a0d4933777817944d85aa8e16417d31fbc8bfe629c",
+        "sourceFiles": [
+          {
+            "path": "scripts/verify-mer-des-chagrins-admission-20261125.mjs",
+            "sha256": "2cf07fae8098a38df90cbcd3bd347e83ff3de1924c36dab9d9c40a7d0d491429"
+          },
+          {
+            "path": "scripts/verify-mer-des-chagrins-recovery-admission-20261126.mjs",
+            "sha256": "8a682a634cce7c5ec5401cc4d4b9a047769082a1d7bae63b9c5607bb9bebab7a"
+          },
+          {
+            "path": "scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs",
+            "sha256": "4702f16537a476ad986b15a606c0cba445fd64d6c13bf564515c01443d7936bc"
+          }
+        ],
+        "runtimeManifestSha256AtRun": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c"
+      }
+    ],
+    "sourcePolicy": {
+      "candidateFileCount": 44,
+      "candidateTextFileCount": 18,
+      "parentDirectoryCount": 17,
+      "relativeMarkdownLinkCount": 1078,
+      "sourceOnlyCandidateFiles": 26,
+      "publicVisualCandidateFiles": 18,
+      "runtimeManifestSha256": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c",
+      "exactAdmissionPolicyUsed": true,
+      "existingPrivateTextGuardUsed": true
+    },
+    "negativeControls": {
+      "unlistedOrTraversalPathsRejected": 5,
+      "privateTextProbesRejected": 3
+    },
+    "preservation": {
+      "nativeTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
+      "nativeFileCount": 3030,
+      "nativeGitIndexMatchesBaseline": true,
+      "nativePhysicallyVerifiedCount": 33,
+      "nativePhysicallyVerifiedBytes": 4308736,
+      "nativeSparseSkippedCount": 2997,
+      "oldPngCount": 126,
+      "oldPngBytes": 246478952,
+      "allOldPngBytesAndFullRowsUnchanged": true,
+      "historicalCaptureCount": 19,
+      "protectedGuardsAndSuccession": [
+        {
+          "path": "scripts/verify-public-release-v86.mjs",
+          "sha256": "2390895f1ac26b58d0360e56190f15847cae7ff72ad0ba33821dbb9ec065e7a9",
+          "unchangedFromBaseline": true
+        },
+        {
+          "path": "scripts/build-asset-filter.mjs",
+          "sha256": "96736647ff2bfa4fc34e607915692cf46640b2458c37747c43317726ca998694",
+          "unchangedFromBaseline": true
+        },
+        {
+          "path": "scripts/audit-dlc-avp-2004-20261125.mjs",
+          "sha256": "74f2ddf0bf847b3f4c4ffad013f1f1b305fe365110ff4136e63d3ac5b4728207",
+          "unchangedFromBaseline": true
+        },
+        {
+          "path": "scripts/verify-dlc-audit-succession.mjs",
+          "sha256": "827844b0b51548f3f5ec7882500bbf829b97aff2679e17c7940506e03309cbdf",
+          "unchangedFromBaseline": true
+        }
+      ]
+    },
+    "scopeLimits": [
+      "The repository is sparse: 2,997 native files were checked through exact unchanged Git index entries, not downloaded or physically decoded; 33 materialized native files were hashed.",
+      "The 126 prior PNG files and full manifest rows, plus 19 prior Canvas captures, were physically compared and are unchanged.",
+      "Global test:all and global build/check:built were not run by this task.",
+      "The final VALIDATION_0_10_4.json will acquire this receipt and the latest Canvas measurements after this check; root must rerun the existing private-text guard and JSON parsing on those final bytes.",
+      "The suite totals overlap at visual admission tests and are not summed into a unique overall total.",
+      "No commit or branch ref was changed by these checks."
+    ],
+    "postReceiptAppendRequired": "Recheck final VALIDATION_0_10_4.json bytes with existing private-text guard and JSON parser; the 44-file candidate was checked before this evidence append."
+  },
+  "sourceAdmission": {
+    "candidateFiles": 44,
+    "candidateTextFiles": 18,
+    "privateTextPassed": true,
+    "exactPathAdmissionPassed": true,
+    "relativeMarkdownLinksVerified": 1078,
+    "priorPngAndFullRowsUnchanged": 126,
+    "historicalCapturesUnchanged": 19,
+    "nativeGitTreePreserved": true,
+    "postAppendJsonAndPrivateTextGuardPassed": true,
+    "visualIntegrity": {
+      "files": 147,
+      "bytes": 271005976,
+      "manifestSha256": "2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c",
+      "built": false
+    }
+  }
+}

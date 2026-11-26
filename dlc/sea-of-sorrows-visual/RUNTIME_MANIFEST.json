@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
   "root": "dlc/sea-of-sorrows-visual",
-  "revision": "0.10.3",
+  "revision": "0.10.4",
   "upstreamRuntime": "dlc/sea-of-sorrows",
   "originalRuntimeTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
   "files": [
     {
       "path": "dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json",
-      "sizeBytes": 255457,
-      "sha256": "3e00d549880f9e02a0859233e2bd8a9c7233a5204b327b0ebca9ef4e24bdd7f4",
+      "sizeBytes": 290427,
+      "sha256": "1c7aa577388caec67fe3b42e6c641853abfeb6ba48e00716ff0842ed52291091",
       "public": false
     },
     {
       "path": "dlc/sea-of-sorrows-visual/galerie.html",
       "sizeBytes": 7876,
-      "sha256": "d0da072957f5d2e9a1bdadb77a16f81ce7b7f6ba2e7077ccd3c6208fc8b347bf",
+      "sha256": "e8c0bc4a5827abeebb6d7fe28752b37745f54b9b077f203e7d7d386be1d87c2d",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/index.html",
       "sizeBytes": 7217,
-      "sha256": "b6cb4e0bac3d2edf2944f17857b68de1af9671aac03b00674961f33fcc3fd289",
+      "sha256": "d1ca3cc1bb7c1808e98d351b90fa05268554ce2b47bf2426808ef2da7a5fe641",
       "public": true
     },
     {
@@ -90,9 +90,21 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-focus.png",
+      "sizeBytes": 1725805,
+      "sha256": "8659b23dbb7ecc99dc9dfd1937b1020c5b38a95482c268be8461977451151f6f",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
       "sizeBytes": 1516131,
       "sha256": "b2b55de00f85e0bc2df551e88ec3dbe3fa64782f10516771689a261b6a3476d4",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-report.png",
+      "sizeBytes": 1562846,
+      "sha256": "004e6ca5b3208f83d97c1641c537fb6ea80a6ffeefb8d1b5431cb44a22d9647d",
       "public": true
     },
     {
@@ -111,6 +123,18 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png",
       "sizeBytes": 1766518,
       "sha256": "d5a1922de8ec49f2609a02c654ec0204df45b29c26d8107da813217d4d84625e",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "sizeBytes": 1696702,
+      "sha256": "ad724f2c102a874976a4ac90ff15ae9bdf1f6feecee713335a76e1cf7492c4a0",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "sizeBytes": 1726714,
+      "sha256": "67a33165abeb8bb8ee8bcdff148ab3ecf19872c455e5d24556022bff57b503ac",
       "public": true
     },
     {
@@ -348,6 +372,18 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-chart.png",
+      "sizeBytes": 2305126,
+      "sha256": "97ebe16bfdb18696e229ddcfef4e6e72b4fb0fcddc2559c8644872ef9bdabff5",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-cups.png",
+      "sizeBytes": 1703691,
+      "sha256": "fc27ce0faa84b419885cbd3006b491ab3b8658782b7b9037c566b969c2ce8471",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
       "sizeBytes": 1862848,
       "sha256": "325e5622bd318fbcda739d68d546271245632d251f537c50317a855501fbd649",
@@ -510,6 +546,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts-empty.png",
+      "sizeBytes": 2330186,
+      "sha256": "6297a0ffa45e87ac4dab75f4330152d6b6be1ee3579a77798c31081616ec6684",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts.png",
       "sizeBytes": 2412093,
       "sha256": "dd7e9b956d65058131e8139632c9a6d766ad08d5d3e2859b81bdab2aa93b7716",
@@ -525,6 +567,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-panel.png",
       "sizeBytes": 2187264,
       "sha256": "a4ad28a467c28569f03779a3558f54cce8fa998ab873300b991958f06a4d26c5",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+      "sizeBytes": 1344816,
+      "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
       "public": true
     },
     {
@@ -606,6 +654,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-stocked.png",
+      "sizeBytes": 2310254,
+      "sha256": "1d52abe726fa1cef6dc02544514046ccca9415ba4a0413ab2a568d7af4e2e6e9",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker.png",
       "sizeBytes": 2014209,
       "sha256": "8bf1350e163356ac1057605e29b1c85f68001afa2365fea25c22f7879a21f550",
@@ -639,6 +693,12 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/stasis-canopy.png",
       "sizeBytes": 1615493,
       "sha256": "218de8f48980121573e38dc92a2329c8dcd7897407b27265e38f7da963e725a4",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/supply-empty.png",
+      "sizeBytes": 2195513,
+      "sha256": "197acef18a7082229c4d4e91b175c60f809b83b6d356fc3fcfd85029c8262f42",
       "public": true
     },
     {
@@ -744,6 +804,12 @@
       "public": true
     },
     {
+      "path": "dlc/sea-of-sorrows-visual/sprites/planets/lv178-orbital.png",
+      "sizeBytes": 1893668,
+      "sha256": "14aabbcdea3fcf7330a391e20752c138fe049a1e7e7fc9f0d6935e0e079cb196",
+      "public": true
+    },
+    {
       "path": "dlc/sea-of-sorrows-visual/sprites/stretchers/adams.png",
       "sizeBytes": 2034413,
       "sha256": "a67e7f862ace2a220ae1c3bb59f48cf4304f970718fbdcacb93bdaf4f889c33c",
@@ -753,6 +819,18 @@
       "path": "dlc/sea-of-sorrows-visual/sprites/stretchers/elway.png",
       "sizeBytes": 1879135,
       "sha256": "e22b572c48dc74d13e8b0d5c7be6ddc93b1331396d968c66f5f81f6074a667c7",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
+      "sizeBytes": 1722927,
+      "sha256": "abb35029ec62424e8c9f13b4f2f05ff4e3ade0a3ff15750e2e3168324bedd276",
+      "public": true
+    },
+    {
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png",
+      "sizeBytes": 1597263,
+      "sha256": "1bc859b5800d8db432aa9848ebef16f45ce026309aa16845607a66b2d50e87ac",
       "public": true
     },
     {
@@ -781,8 +859,8 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
-      "sizeBytes": 45229,
-      "sha256": "571fa45b5e5bd5c8918f86bf334e6e8b2e183da036c83c4172cd70c3bd9a693e",
+      "sizeBytes": 51046,
+      "sha256": "e833170b55f8adf6c0256d28f8b3e972a47889d5e310a6b5f65052f824ab31db",
       "public": true
     },
     {
@@ -799,14 +877,14 @@
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/gallery.js",
-      "sizeBytes": 6063,
-      "sha256": "925545fdf664fa999606e2df86acffb6b57467d24935a662f31448c2022d6640",
+      "sizeBytes": 6110,
+      "sha256": "71f64a2630aa7611149135bb8f6a2b90f83ff18a720ae488034479aa7b123bdb",
       "public": true
     },
     {
       "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
-      "sizeBytes": 32025,
-      "sha256": "f11f13888b565f01c452217d05430321d70d55a3d670977ce8e43f3b69e9dec1",
+      "sizeBytes": 41271,
+      "sha256": "fa32338e1575f40734cb4ecca4525c965844c6da9bf8f0febf9caf07d5779976",
       "public": true
     }
   ]

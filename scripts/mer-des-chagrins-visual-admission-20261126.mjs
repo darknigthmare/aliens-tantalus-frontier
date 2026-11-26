@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 
 export const MER_VISUAL_ROOT_20261126 = 'dlc/sea-of-sorrows-visual';
 export const MER_VISUAL_MANIFEST_20261126 = MER_VISUAL_ROOT_20261126 + '/RUNTIME_MANIFEST.json';
-export const MER_VISUAL_MANIFEST_SHA256_20261126 = 'be3b9a10e3313fc7a52b75491db11c2242737f6bdeeffe5b5e0c911950f79996';
+export const MER_VISUAL_MANIFEST_SHA256_20261126 = '2dac23ac466b71940bd38d155f58e521ff0f2c93d3d2101a0e508bda0780a78c';
 export const MER_VISUAL_SOURCE_FILES_20261126 = Object.freeze([
   'scripts/mer-des-chagrins-visual-admission-20261126.mjs',
   'scripts/verify-mer-des-chagrins-visual-admission-20261126.mjs',
@@ -23,10 +23,13 @@ export const MER_VISUAL_SOURCE_FILES_20261126 = Object.freeze([
   'docs/mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.md',
   'docs/mer-des-chagrins-20261126/GENERATION_0_10_3.json',
   'docs/mer-des-chagrins-20261126/VALIDATION_0_10_3.json',
+  'docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json',
+  'docs/mer-des-chagrins-20261126/VALIDATION_0_10_4.json',
   ...['s01', 's14', 's26', 's33', 's34', 's50', 'locomotion', 'details'].map(id => 'docs/mer-des-chagrins-20261126/canvas/' + id + '.png'),
   ...['s01', 's03', 's14', 's26', 's33', 's34', 's50', 'locomotion', 'details', 'medical-queen', 'poses-weapons'].map(id => 'docs/mer-des-chagrins-20261126/canvas-0.10.3/' + id + '.png'),
+  ...['s01', 's03', 's14', 's26', 's33', 's34', 's39', 's50', 'locomotion', 'details', 'medical-queen', 'poses-weapons', 'states-and-world'].map(id => 'docs/mer-des-chagrins-20261126/canvas-0.10.4/' + id + '.png'),
 ]);
-const sourceDirectories = new Set(['docs/mer-des-chagrins-20261126/canvas', 'docs/mer-des-chagrins-20261126/canvas-0.10.3']);
+const sourceDirectories = new Set(['docs/mer-des-chagrins-20261126/canvas', 'docs/mer-des-chagrins-20261126/canvas-0.10.3', 'docs/mer-des-chagrins-20261126/canvas-0.10.4']);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const safe = path => typeof path === 'string' && path.length > 0 && !/[\\\0\r\n]/.test(path)
   && !path.startsWith('/') && path.split('/').every(part => part && part !== '.' && part !== '..');

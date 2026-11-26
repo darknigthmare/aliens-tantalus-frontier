@@ -1,3 +1,90 @@
+# La Mer des Chagrins — édition visuelle 0.10.4
+
+## Résultat du 26 novembre 2026
+
+**139 PNG individuels, 270 594 463 octets.** Cette continuation ajoute **13 images** aux 126 de l’édition 0.10.3. Les 126 fichiers antérieurs et leurs lignes complètes de métadonnées sont conservés. La campagne originale 0.10.0 reste sur son arbre `1024a04d3615e135a0a9de7cbff6819e107a2492`.
+
+La [bible détaillée](BIBLE_COMPLETION_20261126.md), sa [version structurée](BIBLE_COMPLETION_20261126.json) et la [bible centrale du DLC](../narrative/dlc/sea-of-sorrows.md) relient désormais **239 fiches à 239 contrats de production** : références, silhouette, matières, échelle, cadrage, états, raccordement, vérifications et critères de clôture. Les 576 travaux recensés au checkpoint historique restent traçables ; un registre courant précise les progrès sans réécrire ce point de départ.
+
+| Famille de fiches | Nombre |
+| --- | ---: |
+| Personnages, créatures et variantes | 29 |
+| Lieux | 50 |
+| Armes | 7 |
+| Props, équipements, effets et types de passages | 119 |
+| Véhicules | 5 |
+| Vaisseaux | 5 |
+| Terrains | 22 |
+| Planètes | 2 |
+
+Ces nombres désignent des fiches de production, pas des images supplémentaires. Les descriptions de véhicules, vaisseaux, lieux et terrains détaillent aussi ce qu’il reste à produire.
+
+## Les treize images ajoutées et leur usage
+
+| Ajout | PNG | Comportement livré |
+| --- | ---: | --- |
+| Decker, passages de marche A et B | 2 | Les deux anciens contacts et les deux passages forment quatre poses successives pendant la marche non armée. Repos et mouvements réduits gardent la pose fixe. |
+| Decker, écoute/concentration | 1 | Suit le mode de présentation focus du joueur immobile, sans arme ni action incompatible. |
+| Decker, consultation du rapport ICC | 1 | Pose médicale dans s03 pendant l’action réelle o02-01 ; le lecteur posé disparaît pendant qu’un seul lecteur est tenu, puis revient si l’action est relâchée. |
+| Dossier papier et gobelets médicaux | 2 | Posés sur le mobilier déjà présent dans s03. Ces accessoires visuels n’ajoutent aucune prise de médicament ni interaction. |
+| Armoire ouverte avec réserves | 1 | Choisie uniquement si le contenu réel est non vide. L’ancienne armoire ouverte représente l’état vide, y compris après retrait et après dépôt. |
+| Caisse de ravitaillement et panier de pièces épuisés | 2 | Suivent les vrais états de collecte et de complétion. Le rendu n’ajoute ni ne retire aucun stock. |
+| Cage d’ascenseur | 1 | Cadre ajusté à l’ouverture native de s14/right et s15/left ; rails, seuil, commandes, barreaux de fermeture et règles de passage conservés. |
+| Sable et silice au sol | 2 | Surfaces limitées aux matériaux natifs sand et silica, ancrées dans le monde et placées sous les acteurs et indications tactiques. |
+| LV-178 depuis l’orbite | 1 | Globe confiné au hublot existant de s39 ; signal natif de frappe conservé. Géographie interprétée pour le projet. |
+
+**135 images possèdent un raccordement au rendu du monde ; quatre restent réservées à l’interface. Les 139 sont disponibles dans la galerie.** La QA de cette édition a effectivement dessiné 125 types de PNG dans ses cas préparés, dont les treize nouveaux.
+
+Le râtelier d’armurerie montre maintenant les deux armes natives tant que l’allocation n’a pas été retirée ; le PNG vide apparaît après le retrait réel. Les libellés d’armoire ont été relevés au-dessus des nouvelles images après inspection. Les ouvertures intermédiaires et tout cas dont l’image ou les attaches sont invalides gardent leur rendu natif.
+
+Les [prompts exacts et résultats](GENERATION_0_10_4.json) distinguent 14 cibles demandées, 13 fichiers retenus, deux itérations de cage remplacées et un refus. Les PNG générés sont conservés sans retouche ni réencodage par script. La source précédente du personnage, du mobilier ou du terrain accompagne chaque édition visuelle qui en dérive.
+
+La demande de correction du lance-flammes vers une crosse plus courte a été **refusée par l’outil d’image**. Aucun nouveau PNG n’est compté pour elle et aucune tentative de contournement n’a été effectuée. Les fichiers adulte xénomorphe et fusil plasma restent absents après les refus de la version précédente ; leur génération n’a pas été relancée dans cette passe.
+
+## Accès et preuves
+
+- [Édition visuelle — point d’entrée](../../dlc/sea-of-sorrows-visual/index.html).
+- [Galerie des 139 images](../../dlc/sea-of-sorrows-visual/galerie.html).
+- [Manifeste des images](../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json).
+- [Inventaire exact de distribution](../../dlc/sea-of-sorrows-visual/RUNTIME_MANIFEST.json).
+- [Reçu de validation 0.10.4](VALIDATION_0_10_4.json).
+- [Planche des états, actions et environnements](canvas-0.10.4/states-and-world.png).
+- [Marche dans les deux directions](canvas-0.10.4/locomotion.png).
+- [Infirmerie s03](canvas-0.10.4/s03.png) et [hublot s39](canvas-0.10.4/s39.png).
+- [PR GitHub #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58).
+
+## Vérifications exécutées
+
+| Vérification | Résultat | Portée |
+| --- | --- | --- |
+| `npm run test:mer-des-chagrins-visual` | **105/105 réussis**, 0 échec, 0 ignoré | Renderer, états réels, équipement, galerie et admission ; doublures Canvas/Image/DOM pour cette suite. |
+| `npm run check:mer-des-chagrins-sprites` | **139 PNG vérifiés** | Octets, dimensions, alpha, découpes, pivots, attaches, portées et conservation des 126 lignes antérieures. |
+| QA Canvas avec les PNG originaux | **139 décodés, 50 salles, 24 cas posture/arme/direction** | Rendu de pixels réels à partir de fixtures déclarées. |
+| Locomotion | **16 cas** | Huit marches, quatre repos, quatre mouvements réduits ; repos et mouvements réduits stables au pixel. |
+| Diagnostics | **42 existants, 11 de 0.10.3 et 35 de 0.10.4** | Inclut 23 replis de portes identiques pixel par pixel au natif et les états médicaux, stocks, sols, globe et cages. |
+| Nouveaux visuels observés | **13/13** | Présence constatée dans les appels de dessin réels, hors passe préparatoire du décodeur. |
+| Captures finales | **13 PNG, 11 375 616 octets** | Conservées, empreintes vérifiées, planches relues. |
+| Distribution de l’overlay | **146 fichiers publics**, 270 715 549 octets | Copie du seul lot visuel puis contrôle de chaque chemin, taille et empreinte. |
+
+Le manifeste source comporte 147 membres : les 146 fichiers publics et le manifeste des sprites. Le manifeste de distribution lui-même n’est pas compté comme membre et reste source uniquement. Les documents, prompts, rapports, scripts de QA et captures ne sont pas distribués avec le runtime.
+
+La QA utilise `@napi-rs/canvas 0.1.100`. Son cache conserve au maximum 24 images natives à pleine résolution, avec au plus 21 images requises pour un rendu. Une première passe de sélection est jetée ; la capture retenue attend le chargement réel de toutes ses images. Cette adaptation concerne uniquement le banc de QA. Les chunks de provenance caBX sont omis dans son buffer de décodage en mémoire ; les fichiers PNG source et les chunks de pixels IDAT restent identiques. Le reçu consigne également la tentative initiale interrompue par manque de mémoire, sans lui attribuer de résultat réussi.
+
+Les rendus vérifiés conservent les états sérialisés, les sauvegardes, le prototype de simulation et les méthodes natives protégées. Ces preuves ne représentent pas une campagne complète jouée au clavier. Le build global, le parcours navigateur, les commandes tactiles réelles et une manette physique n’ont pas été recertifiés pendant cette continuation. Les checks distants de la PR restent distincts de ces résultats locaux.
+
+## Fidélité et limites encore ouvertes
+
+Les sources du roman identifiées dans la bible étayent les identités, certains objets et certains traits de la scène médicale. Elles ne définissent pas tous les visages, silhouettes, plans, matériaux ni dimensions. Les détails issus de la dramatique audio sont séparés de ceux du roman. Le Carlyle, le Kiangya et le médecin anonyme conservent leurs identités distinctes.
+
+La fidélité globale **1:1 reste non certifiée** : le roman intégral n’a pas été confronté. Le globe, les visages, les silhouettes de véhicules et les plans détaillés restent des interprétations signalées. Les quatre poses de marche améliorent la continuité mais n’achèvent pas l’animation : genou haut de la pose B, balancement des bras et transitions demandent encore un ajustement. La consultation médicale est une adaptation debout ; les mouvements allongé, assis et lever ne sont pas produits. Les paquets d’armoire représentent des réserves génériques, sans identifier chaque objet contenu.
+
+L’ancien lance-flammes conserve sa crosse trop longue et une prise secondaire imparfaite dans certaines poses. La cage illustre l’accès et sa fermeture, sans nouvelle animation de déplacement vertical. Le registre courant distingue travaux techniquement résolus, partiels et encore ouverts ; une fiche ou un prompt n’équivaut pas à un asset finalisé.
+
+Les documents README.md, MANIFEST.json et RECOVERY.md de ce dossier décrivent toujours le checkpoint historique de 27 images. Le présent guide, les manifestes courants et VALIDATION_0_10_4.json décrivent l’édition 0.10.4. Les guides et preuves précédents sont conservés ci-dessous avec leur portée propre.
+
+<details>
+<summary>Guide historique 0.10.3 et éditions précédentes — preuves propres à leurs versions</summary>
+
 # La Mer des Chagrins — édition visuelle 0.10.3
 
 ## Résultat du 26 novembre 2026
@@ -181,6 +268,9 @@ npm run check:built
 ```
 
 La dépendance Canvas de QA est fournie par l’environnement de travail et ne devient pas une dépendance du jeu. L’existence de ces commandes ne constitue pas leur résultat : le reçu de validation indique précisément les exécutions terminées.
+
+
+</details>
 
 
 </details>

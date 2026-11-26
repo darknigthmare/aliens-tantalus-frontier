@@ -2,7 +2,23 @@
 
 [Retour à l'index des DLC](../DLC_INDEX_20261126.md)
 
-## Périmètre et version
+## Continuation 0.10.4 — état courant
+
+**139 PNG, dont 13 nouveaux, et 239 fiches de production.** Cette passe prolonge la [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) depuis `a26188a1e63cd39daaee5167d8e940e48120794d`. La simulation originale 0.10.0 reste distincte de son édition visuelle.
+
+La [bible détaillée](../../mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.md) et son [inventaire structuré](../../mer-des-chagrins-20261126/BIBLE_COMPLETION_20261126.json) conservent le checkpoint 0.10.2, les ajouts 0.10.3 et un registre courant des 576 travaux. Les 239 fiches couvrent toujours 29 personnages/créatures/variantes, 50 lieux, 7 armes, 119 props, 5 véhicules, 5 vaisseaux, 22 terrains et 2 planètes.
+
+Les nouveaux états comprennent les passages intermédiaires de marche et les poses contextuelles de Decker, des objets disponibles ou épuisés, les accessoires médicaux, les cages des deux seuils s14/s15, deux familles de sol et la vue orbitale de LV-178 dans la baie de s39. Les conditions détaillées demeurent dans le manifeste et les fiches. Le cadre d’armurerie et le casier vide historiques sont réutilisés ; ils ne sont pas recomptés comme des générations.
+
+**Périmètre de preuve.** Suite visuelle finale : 105/105 tests réussis, zéro échec et zéro ignoré. Les 139 PNG sont contrôlés (270 594 463 octets), les 126 images et lignes de métadonnées antérieures préservées. La QA Canvas finale décode 139 images, rend 50 salles, 24 cas posture/arme, 16 locomotions, 42 diagnostics dont 23 replis de porte identiques pixel par pixel, 11 cas médicaux/reine historiques et 35 cas de cette édition. Les 13 nouveaux PNG sont effectivement dessinés parmi 125 types observés. Treize captures finales totalisent 11 375 616 octets. Les salles, positions, états et grossissements sont des fixtures déclarées ; il ne s’agit pas d’une campagne parcourue dans un navigateur. Aucun cycle complet d’animation ni fidélité globale 1:1 n’est certifié.
+
+La variante compacte du lance-flammes a été refusée : aucun nouveau fichier ni relance ; la crosse et la seconde main historiques restent à corriger. Le passage B de marche garde un genou haut et les transitions restent sommaires. La vue orbitale ne certifie aucune géographie canonique. Le revêtement de sol ne constitue pas un stage complet, la cage fixe ne constitue pas une animation d’ascenseur et les poses supplémentaires ne certifient pas les cycles de combat, de recharge ou de consultation. Les huit domaines conservent des travaux ouverts. Adulte et plasma restent sans PNG après refus ; les demandes refusées ne sont pas relancées dans cette passe.
+
+Références courantes : [manifeste des PNG](../../../dlc/sea-of-sorrows-visual/SPRITE_MANIFEST.json), [prompts 0.10.4](../../mer-des-chagrins-20261126/GENERATION_0_10_4.json), [validation 0.10.4](../../mer-des-chagrins-20261126/VALIDATION_0_10_4.json).
+
+## Checkpoint publié 0.10.3
+
+### Périmètre et version du checkpoint 0.10.3
 
 **Simulation conservée : 0.10.0 ; édition visuelle publiée : 0.10.3, PR #58, commit `fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474`.** Le module garde sa simulation et sa sauvegarde propres ; plans, mécanismes et impressions de Decker restent une adaptation. Le complément de production contient **239 fiches dans les huit domaines demandés**.
 
@@ -10,7 +26,7 @@
 
 Ces comptes reprennent la définition de la version source : états de scène, pièces physiques, inspections, occurrences de frames et images uniques sont comptés séparément.
 
-## Publication et raccord au jeu
+### Publication et raccord au jeu 0.10.3
 
 [PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58) publie l’édition visuelle **0.10.3 au commit `fbab4f4a2f26d5a6561e70c0dfe76839aa3eb474` : 126 PNG distincts**, dont les 121 images du checkpoint 0.10.2 et **cinq nouveaux fichiers** : reine, lance-flammes, médecin anonyme du Carlyle, Decker en tenue hospitalière et appareil portable du rapport ICC. Leurs usages sont rattachés à la présentation existante ; les trois ajouts médicaux concernent uniquement `s03`, l’appareil concernant `o02-01`. Le composite médical reste disponible ailleurs.
 
@@ -38,14 +54,14 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 - Grenades Silas et charges orbitales narratives.
 - Adams/Elway gardent parasites au transport/stase ; trois attaches reine = règle originale.
 
-## Écarts concrets encore ouverts
+## Écarts concrets encore ouverts — réconciliés par le registre courant
 
 - **SEA-OF-SORROWS-01** — Roman intégral/variantes audio non confrontés.
 - **SEA-OF-SORROWS-02** — Silas/Muller/Dave/Pritchett possèdent des portraits, sans placements `room.cast` dans les 50 salles ; leurs interventions restent à réaliser.
 - **SEA-OF-SORROWS-03** — Capture Manning, dernières actions Decker, décès/interventions secondaires à reconstituer.
 - **SEA-OF-SORROWS-04** — Visage Decker et majorité distribution non authentifiés ; boss à trois attaches à revoir.
 - **SEA-OF-SORROWS-05** — Adulte xénomorphe et fusil plasma sans nouveau PNG après refus ; cadavres adulte/reine et cycles complets d’animation restent à produire.
-- **SEA-OF-SORROWS-06** — Les cinq nouvelles images sont observées dans la QA Canvas finale ; la crosse du lance-flammes et la seconde main gardent des défauts documentés. Le parcours navigateur, les cycles complets et la qualification canonique restent ouverts.
+- **SEA-OF-SORROWS-06** — Les cinq images de la 0.10.3 sont observées dans sa QA Canvas ; la crosse du lance-flammes et la seconde main gardent des défauts documentés. Le parcours navigateur, les cycles complets et la qualification canonique restent ouverts.
 
 ## Reprise artistique et intégration
 
@@ -88,6 +104,6 @@ Les nouvelles références distinguent le [chapitre 4 du roman publié en extrai
 
 ## Qualification
 
-Les données décrivent les sources récupérées et les reçus techniques cités. Les tests ciblés et les fixtures Canvas de la 0.10.3 ont leur périmètre propre ; aucun résultat de campagne jouée, de build global ou de CI globale ne leur est attribué. L'existence d'un document, d'un PNG ou d'une archive ne prouve pas sa jouabilité ni une fidélité 1:1.
+Les données décrivent les sources récupérées et les reçus techniques cités. Les tests ciblés et les fixtures Canvas de chaque édition ont leur périmètre propre ; aucun résultat de campagne jouée, de build global ou de CI globale ne leur est attribué. L'existence d'un document, d'un PNG ou d'une archive ne prouve pas sa jouabilité ni une fidélité 1:1.
 
 La cible demeure `1:1` ; l'état de qualification reste `exact:false` et `canonExact:false` tant que la comparaison spécifique n'est pas acquise. Une adaptation identifiée conserve son étiquette.

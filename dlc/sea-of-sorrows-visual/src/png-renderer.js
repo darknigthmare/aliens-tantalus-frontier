@@ -12,7 +12,7 @@
     'human', 'alien', 'corpse', 'decor', 'prop', 'egg', 'archive', 'supply',
     'locker', 'armoryRack', 'sensor', 'emitter', 'object', 'device', 'weakpoint',
     'stretcher', 'stasisDisplay', 'door', 'shutter', 'lightPanel',
-    'tacticalGround', 'drawEffects',
+    'tacticalGround', 'drawEffects', 'floor',
   ].map(name => [name, R[name]]));
   const states = new Map(), used = new Map(), methods = new Map();
   let drawCount = 0;
@@ -151,14 +151,26 @@
     // identities remain unchanged in every other room.
     const medicalPose = !portrait && g.room.id === 's03' ?
       actualPlayer && !armed ? 'decker-medical-gown' : role === 'medic' ? 'carlyle-physician' : null : null;
-    // Two authored contact poses, only for the actual unarmed walking player.
+    const reportEntry = pack.characters?.['decker-medical-report'];
+    const report = medicalPose === 'decker-medical-gown' && !posture && !actor.moving &&
+      g.current?.id === 'o02-01' && !g.state.flags.report_sent && g.activeWork?.id === 'o02-01' &&
+      finite(g.activeWork.progress) && g.activeWork.progress >= 0 && g.activeWork.progress <= 1 &&
+      reportEntry?.heldProp === 'objectives/icc-handheld' && reportEntry.sceneScope?.includes('s03') &&
+      reportEntry.actionScope?.includes('o02-01');
+    const focus = !portrait && actualPlayer && !armed && !posture && !medicalPose &&
+      !actor.moving && !g.activeWork && renderer.focus;
+    // Contact and passing poses share the same half-second presentation cycle.
     // The native simulation clock pauses with the game; reduced motion keeps
     // the existing static pose. This does not create a locomotion state.
     const walking = !portrait && actualPlayer && !armed && !posture && !medicalPose && actor.moving && !renderer.reduced;
-    const phase = Math.floor(Math.max(0, finite(time) ? time : finite(g.time) ? g.time : 0) * 4) % 2;
+    const clock = Math.max(0, finite(time) ? time : finite(g.time) ? g.time : 0);
+    const phase = Math.floor(clock * 8) % 4;
+    const walk = ['decker-walk-a', 'decker-walk-pass-a', 'decker-walk-b', 'decker-walk-pass-b'];
     const candidates = portrait ? [role] : [...new Set([
+      ...(report ? ['decker-medical-report'] : []),
       ...(medicalPose ? [medicalPose] : []),
-      ...(walking ? ['decker-walk-' + (phase ? 'b' : 'a')] : []),
+      ...(focus ? ['decker-focus'] : []),
+      ...(walking ? [walk[phase], 'decker-walk-' + (phase >= 2 ? 'b' : 'a')] : []),
       ...(armed ? [role + posture + '-ready'] : []), role + posture,
       ...(armed ? [role + '-ready'] : []), role,
     ])];
@@ -302,6 +314,58 @@
   R.decor = function (kind, t) {
     const png = asset('decor', kind);
     if (!png || !paint(this.ctx, png)) return fallback('decor', this, arguments);
+    const c = this.ctx;
+    // The chart rests against the cot rail; cups sit on its instrument cabinet.
+    // Source anchors are calibrated only for this existing, unmodified medical
+    // drawing. Both remain scenery outside the playable strip in s03.
+    if (kind === 'medical' && this.game.room.id === 's03' && png.entry.width === 1536 && png.entry.height === 1024) {
+      for (const [id, anchor] of [['medical-chart', [785, 568]], ['medical-cups', [1325, 653]]]) {
+        const prop = asset('decor', id);
+        if (!prop || !prop.entry.sceneScope?.includes('s03')) continue;
+        c.save();
+        c.translate((anchor[0] - png.entry.pivot[0]) * png.scale, (anchor[1] - png.entry.pivot[1]) * png.scale);
+        paint(c, prop); c.restore();
+      }
+    }
+    if (kind === 'viewport' && this.game.room.id === 's39' && png.entry.width === 1536 && png.entry.height === 1024) {
+      const planet = asset('planets', 'lv178-orbital');
+      if (!planet || !planet.entry.sceneScope?.includes('s39')) return;
+      const source = ([x, y]) => [(x - png.entry.pivot[0]) * png.scale, (y - png.entry.pivot[1]) * png.scale];
+      // Replace only the glass aperture. The original frame and other ship
+      // windows remain intact; this globe is an explicitly interpretive view.
+      const corners = [[274, 229], [1192, 229], [1282, 301], [1282, 695], [1202, 766], [271, 766], [193, 696], [193, 311]].map(source);
+      c.save(); c.beginPath(); c.moveTo(...corners[0]);
+      for (const p of corners.slice(1)) c.lineTo(...p);
+      c.closePath(); c.clip();
+      const top = source([180, 220]);
+      c.fillStyle = '#07151c'; c.fillRect(top[0], top[1], 1120 * png.scale, 560 * png.scale);
+      const center = source([805, 525]); c.save(); c.translate(...center); paint(c, planet); c.restore();
+      if (this.game.state.flags.strike_seen) {
+        const strike = source([922, 563]);
+        this.ellipse(strike[0], strike[1], 8, 5, '#ffe0a8');
+        this.ellipse(strike[0], strike[1], 14, 9, '#ffe0a844');
+      }
+      c.restore();
+    }
+  };
+  R.floor = function (t) {
+    fallback('floor', this, arguments);
+    const kind = this.game.room.kind;
+    if (!['sand', 'silica'].includes(kind)) return;
+    const png = asset('terrain', kind);
+    if (!png || !png.entry.terrainScope?.includes(kind)) return;
+    const c = this.ctx, spacing = 440;
+    c.save(); c.beginPath(); c.rect(0, this.H * .605, this.W, this.H * .395); c.clip();
+    c.globalAlpha *= this.highContrast ? .2 : .38;
+    // Fixed world positions prevent texture swimming when the camera moves.
+    // Native hazards, footprints and actors are painted at later draw stages.
+    const first = Math.max(0, Math.floor((this.camera - 600) / spacing));
+    const last = Math.min(Math.ceil(this.game.room.width / spacing), Math.ceil((this.camera + this.W + 600) / spacing));
+    for (let row = 0; row < 3; row++) for (let i = first; i <= last; i++) {
+      const x = i * spacing + (row % 2) * spacing / 2 - this.camera;
+      atWorld(this, png, { x, y: this.H * (.70 + row * .105) }, this.unit * (.78 + row * .16));
+    }
+    c.restore();
   };
   R.prop = function (b) {
     const png = asset('obstacles', b.kind);
@@ -346,9 +410,64 @@
       atWorld(this, png, { x: q.x - ground.x * this.unit, y: q.y - ground.y * this.unit });
     }
   };
+  function liftDoor(renderer, d) {
+    const g = renderer.game, c = renderer.ctx, u = renderer.unit, p = d.portal || {}, m = p.mount || 'back';
+    const png = asset('doors', 'lift-cage'), aperture = png && box(png.entry, 'apertureBounds');
+    if (!aperture || png.entry.facing !== 'none' || !['left', 'right', 'back', 'front'].includes(m)) return false;
+    const approach = renderer.pos(d.x, g.zFor(d)), q = renderer.pos(d.x, p.apertureZ ?? g.zFor(d));
+    const h = 152 * u, w = (p.width || 110) * u, status = g.doorStatus(d), color = status.open ? '#abc9bb' : '#d39474';
+    c.save();
+    if (m === 'front' && Math.abs(g.p.x - d.x) < 170) c.globalAlpha = .42;
+    // Preserve the native enclosing wall, including the oblique walls at both
+    // authored mine stops. Their cage interior is frontal in the native art.
+    if (m === 'left' || m === 'right') {
+      const sign = m === 'left' ? -1 : 1, outer = renderer.pos(m === 'left' ? 0 : g.room.width, .94), back = renderer.pos(m === 'left' ? 0 : g.room.width, .105);
+      renderer.path([[back.x, back.y - h * 1.3], [q.x, q.y - h], [q.x, q.y], [outer.x, outer.y], [back.x, back.y]], '#1c303b', '#687e86', 1.5);
+      renderer.path([[q.x - sign * 16 * u, q.y - h], [q.x + sign * 40 * u, q.y - h - 29 * u], [q.x + sign * 40 * u, q.y - 16 * u], [q.x - sign * 16 * u, q.y]], '#0a1a22', '#b0c2bf', 3 * u);
+      for (let j = 0; j < 4; j++) renderer.line(q.x + sign * 45 * u, q.y - h - 24 * u + j * 36 * u, q.x + sign * 84 * u, q.y - h - 45 * u + j * 36 * u, '#7c93914d', 1);
+    } else {
+      const front = m === 'front', wallZ = front ? .95 : .10, left = renderer.pos(0, wallZ), right = renderer.pos(g.room.width, wallZ), keep = c.globalAlpha, wallH = h * 1.13;
+      if (front) c.globalAlpha = .48;
+      renderer.rect(left.x, q.y - wallH, Math.max(0, q.x - w * .61 - left.x), wallH + renderer.H * .12, '#243e49');
+      renderer.rect(q.x + w * .61, q.y - wallH, Math.max(0, right.x - q.x - w * .61), wallH + renderer.H * .12, '#243e49');
+      for (let x = left.x + 25 * u; x < right.x; x += 140 * u) {
+        if (Math.abs(x - q.x) < w * .8) continue;
+        renderer.line(x, q.y - wallH + 5 * u, x, q.y + renderer.H * .11, '#718a91', 4 * u);
+        renderer.line(x + 7 * u, q.y - wallH + 5 * u, x + 7 * u, q.y + renderer.H * .11, '#0c2028', 2 * u);
+      }
+      renderer.line(left.x, q.y, right.x, q.y, '#9bafa7', 4 * u); c.globalAlpha = keep;
+      renderer.line(left.x, q.y - h * 1.13, right.x, q.y - h * 1.13, '#758c93', 3 * u);
+      renderer.rect(q.x - w * .60, q.y - h * 1.08, w * 1.2, h * 1.08, '#52666a', '#adc0b9');
+      renderer.rect(q.x - w * .5, q.y - h, w, h, '#081a23', '#8fa8a7');
+      renderer.line(approach.x - 28 * u, approach.y, q.x - 28 * u, q.y, '#e6c48c99', 2 * u);
+      renderer.line(approach.x + 28 * u, approach.y, q.x + 28 * u, q.y, '#e6c48c99', 2 * u);
+    }
+    for (const sign of [-1, 1]) renderer.line(q.x + sign * w * .68, 0, q.x + sign * w * .68, q.y, '#a0b5b3', 3 * u);
+    renderer.rect(q.x - w * .55, q.y - h, w * 1.1, h, '#1c343f', '#a2b9b5');
+    const sx = w * .9 / aperture[2], sy = (h - 18 * u) / aperture[3];
+    const origin = { x: q.x - (aperture[0] + aperture[2] / 2) * sx, y: q.y - 10 * u - (aperture[1] + aperture[3]) * sy };
+    if (!atSource(renderer, png, origin, sx, sy)) { c.restore(); return false; }
+    renderer.rect(q.x - w * .65, q.y - 5 * u, w * 1.3, 9 * u, '#c5bc93');
+    if (!status.open) {
+      for (let j = 0; j < 8; j++) renderer.line(q.x - w * .45 + j * w * .13, q.y - h + 8 * u, q.x - w * .45 + j * w * .13, q.y - 10 * u, '#93aaa7', 2 * u);
+      renderer.text('CAGE INDISPONIBLE', q.x, q.y - h - 15 * u, 9 * u, '#e7b18e', 'center');
+    }
+    c.globalAlpha = 1; renderer.ellipse(approach.x, approach.y, 23 * u, 5 * u, color + '66');
+    if (near(renderer, d, 175)) {
+      const tx = Math.max(renderer.camera + 155, Math.min(g.room.width - 150, d.x)) - renderer.camera;
+      renderer.rect(tx - 148, q.y - h - 49 * u, 296, 39 * u, '#071923eb');
+      renderer.text(d.label, tx, q.y - h - 32 * u, 11 * u, color, 'center');
+      renderer.text(({ left: 'PAROI GAUCHE', right: 'PAROI DROITE', back: 'PAROI DE FOND', front: 'PREMIER PLAN' })[m] + ' · CAGE', tx, q.y - h - 17 * u, 9 * u, '#a7bfbc', 'center');
+    }
+    c.restore(); return true;
+  }
   R.door = function (d) {
     const g = this.game, c = this.ctx, u = this.unit, p = d.portal || {};
     const mount = p.mount || 'back', type = p.type || 'bulkhead';
+    if (type === 'lift-cage') {
+      if (!liftDoor(this, d)) return fallback('door', this, arguments);
+      return;
+    }
     // Oblique walls, travel, rock, lifts and stairs keep their authored native
     // geometry. This front-facing pair only fits actual industrial bays.
     if (type !== 'bulkhead' || !['back', 'front'].includes(mount)) return fallback('door', this, arguments);
@@ -444,27 +563,32 @@
     if (!png || !atWorld(this, png, this.pos(a.x, this.game.zFor(a)))) return fallback('archive', this, arguments);
   };
   R.supply = function () {
-    const png = !this.game.rs.supplyUsed && asset('equipment', 'supply');
+    const png = asset('equipment', this.game.rs.supplyUsed ? 'supply-empty' : 'supply');
     if (!png || !atWorld(this, png, this.pos(320, .55))) return fallback('supply', this, arguments);
   };
   R.locker = function (l) {
     const g = this.game, state = g.rs.lockers[l.id];
     const empty = state.opened && Object.values(state.contents).every(n => n === 0);
-    const png = !empty && !(state.progress > 0 && !state.opened) && asset('equipment', state.opened ? 'locker-open' : 'locker');
+    const png = !(state.progress > 0 && !state.opened) &&
+      asset('equipment', state.opened ? empty ? 'locker-open' : 'locker-stocked' : 'locker');
     if (!png) return fallback('locker', this, arguments);
     const q = this.pos(l.x, l.bodyZ), u = this.unit;
     this.shadow(q, 68 * u);
     if (!atWorld(this, png, q)) return fallback('locker', this, arguments);
-    const color = state.opened ? '#91c9b1' : '#dfb679';
-    this.text(l.id.slice(-2), q.x, q.y - 112 * u, 12 * u, color, 'center');
-    if (near(this, l, 230)) this.text(state.opened ? 'OUVERT · RÉSERVES' : 'SCELLÉ', q.x, q.y - 134 * u, 10 * u, color, 'center');
+    const color = state.opened ? empty ? '#738589' : '#91c9b1' : '#dfb679';
+    const labelHeight = Math.max(112, png.entry.worldHeight + 12);
+    this.text(l.id.slice(-2), q.x, q.y - labelHeight * u, 12 * u, color, 'center');
+    if (near(this, l, 230)) this.text(state.opened ? empty ? 'VIDE · DÉPÔT POSSIBLE' : 'OUVERT · RÉSERVES' : 'SCELLÉ', q.x, q.y - (labelHeight + 22) * u, 10 * u, color, 'center');
   };
   R.armoryRack = function (a) {
-    const png = !this.game.state.armory.claimed && asset('equipment', 'armory-rack');
+    // This source depicts an empty support. Until the real allocation is
+    // claimed, keep the native rack with both available weapon silhouettes.
+    if (!this.game.state.armory.claimed) return fallback('armoryRack', this, arguments);
+    const png = asset('equipment', 'armory-rack');
     if (!png) return fallback('armoryRack', this, arguments);
     const q = this.pos(a.x, a.bodyZ), at = this.pos(a.x, this.game.zFor(a));
     if (!atWorld(this, png, q)) return fallback('armoryRack', this, arguments);
-    this.text('DOTATION · IMPULSIONS / PLASMA', q.x, q.y - 159 * this.unit, 10 * this.unit, '#d9c295', 'center');
+    this.text(this.game.state.armory.claimed ? 'ALLOCATION RETIRÉE' : 'DOTATION · IMPULSIONS / PLASMA', q.x, q.y - 159 * this.unit, 10 * this.unit, '#d9c295', 'center');
     this.line(q.x, q.y, at.x, at.y, '#acb99555', 1.5); this.ellipse(at.x, at.y, 24, 5, '#c3a86f55');
   };
   R.sensor = function (b, t) {
@@ -505,6 +629,8 @@
         // Keep the native reporting pedestal, objective marker and physical
         // interaction. The handheld rests in its display cradle, not in space.
         fallback('object', this, arguments);
+        const pose = bodyAsset(this, g.p, 'decker', false, g.time);
+        if (pose?.pose === 'decker-medical-report' && pose.entry.heldProp === 'objectives/icc-handheld') return;
         const q = this.pos(o.x, g.zFor(o));
         atWorld(this, handheld, { x: q.x, y: q.y - 64 * this.unit });
         return;
@@ -521,12 +647,14 @@
   };
   R.device = function (d, t) {
     const id = ['isolation', 'parts'].includes(d.kind) ? d.kind : 'console';
-    const png = !this.game.state.optional[d.id] && asset('devices', id);
+    const complete = this.game.state.optional[d.id];
+    const png = complete ? id === 'parts' && asset('devices', 'parts-empty') : asset('devices', id);
     if (!png) return fallback('device', this, arguments);
     const q = this.pos(d.x, this.game.zFor(d)), u = this.unit;
     this.shadow(q, 37);
     if (!atWorld(this, png, q)) return fallback('device', this, arguments);
-    if (near(this, d, 145)) this.text('MAINTENIR E', q.x, q.y - (id === 'parts' ? 95 : id === 'isolation' ? 133 : 77) * u, 10, '#e4c690', 'center');
+    if (complete && id === 'parts' && near(this, d, 145)) this.text('VIDE', q.x, q.y - 95 * u, 10, '#a8c8b2', 'center');
+    if (!complete && near(this, d, 145)) this.text('MAINTENIR E', q.x, q.y - (id === 'parts' ? 95 : id === 'isolation' ? 133 : 77) * u, 10, '#e4c690', 'center');
   };
   R.weakpoint = function (w) {
     const png = w.hp > 0 && asset('equipment', 'weakpoint');

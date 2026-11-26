@@ -1,31 +1,33 @@
 {
   "schemaVersion": 1,
-  "title": "La Mer des Chagrins — édition visuelle 0.10.3, bible et cinq nouveaux sprites",
+  "title": "La Mer des Chagrins — édition visuelle 0.10.4, états, mouvements et environnements",
   "date": "2026-11-26",
   "scope": "Presentation metadata for the immutable Sea of Sorrows 0.10.0 simulation",
   "counts": {
-    "pngFiles": 126,
+    "pngFiles": 139,
     "recoveredOriginalPng": 110,
     "preservedNewPng": 9,
-    "bytes": 246478952,
+    "bytes": 270594463,
     "categories": {
-      "characters": 26,
+      "characters": 30,
       "corpses": 1,
       "creatures": 2,
-      "decor": 50,
-      "devices": 3,
-      "doors": 2,
+      "decor": 52,
+      "devices": 4,
+      "doors": 3,
       "effects": 6,
-      "equipment": 16,
+      "equipment": 18,
       "objectives": 5,
       "obstacles": 6,
       "organic": 1,
       "parasites": 2,
+      "planets": 1,
       "stretchers": 2,
+      "terrain": 2,
       "weapons": 4
     },
-    "newContinuationPng": 7,
-    "newThisPassPng": 5
+    "newContinuationPng": 20,
+    "newThisPassPng": 13
   },
   "coordinateContract": {
     "unit": "source-image-pixels",
@@ -45,39 +47,44 @@
   },
   "coverage": {
     "characterIdentities": 17,
-    "additionalCharacterPoses": 9,
+    "additionalCharacterPoses": 13,
     "decorKinds": 50,
     "obstacleKinds": 6,
     "baseCampaignRooms": 50,
     "baseCampaignObstaclePlacements": 120,
-    "runtimeWorldMappings": 122,
+    "runtimeWorldMappings": 135,
     "interfaceOnlyAssets": 4,
-    "galleryAssets": 126
+    "galleryAssets": 139,
+    "decorSprites": 52,
+    "terrainKindsWithPngSurface": 2,
+    "planetSprites": 1
   },
   "canonicalOneToOneCertified": false,
   "completeAnimationCycles": false,
   "imageBytesModified": false,
   "sourceCodeReconstructed": true,
   "validation": {
-    "pngDecodeAndAlpha": "121 baseline assets retain their published measurements; five additions decoded with Pillow before executor failure and independently re-decoded in JavaScript with zlib Adler32 validation.",
-    "sha256AndGitBlobSha": "All 121 prior PNG bytes preserved. Five new Git blobs match the pre-outage source byte lengths, SHA-256 and Git blob hashes.",
-    "manualAnchorInspection": "Five new source images and their real Canvas placements inspected: medical actors and Queen in both directions, ICC before/after transmission, six flame posture/direction combinations.",
-    "logicTests": "87/87 visual-suite tests passed after executor recovery on the 126-asset candidate. Canvas/Image/DOM doubles are distinct from the separate real Canvas QA.",
-    "historicalRenderedPlacement": "Edition 0.10.2 observed 103 distinct PNG kinds in prepared real Canvas fixtures; historical evidence remains in docs/mer-des-chagrins-20261126/VALIDATION.json.",
-    "renderedPlacement": "Edition 0.10.3 loaded 126 PNGs, rendered 50 rooms, 24 weapon/posture/direction cases, 12 locomotion cases and 55 other diagnostic cases. All five additions were drawn and visually reviewed in scoped fixtures. No browser journey or universal state coverage certified.",
+    "edition": "0.10.4",
+    "pngDecodeAndAlpha": "139 unique RGBA PNGs verified with Pillow; full-resolution native Canvas decode verified separately.",
+    "sha256AndGitBlobSha": "126 previous PNGs and their complete asset rows are preserved exactly; thirteen new source PNG hashes, lengths and Git blobs verified.",
+    "manualAnchorInspection": "Thirteen new individual source images and their scoped real Canvas placements inspected. Locker labels raised above their PNG after visual review.",
+    "logicTests": "Executed commands, results and source hashes are recorded in docs/mer-des-chagrins-20261126/VALIDATION_0_10_4.json.",
+    "renderedPlacement": "50 rooms, 24 posture/weapon cases, 16 locomotion cases, 42 established diagnostics, 11 prior-edition diagnostics and 35 new state/environment cases. All thirteen additions are drawn; 125 PNG kinds observed. Explicit fixtures and bounded native-image cache are described in the validation receipt.",
     "browserGameplay": "not certified by this manifest"
   },
   "remainingWork": [
-    "creatures/adult and weapons/plasma have no PNG after generation refusals and retain native presentation.",
-    "Five new PNG placements have been inspected in static real Canvas fixtures; complete action sequences, browser journeys and animation remain unverified.",
-    "Two unarmed walking key poses are available. Complete walking, firing, reloading and interaction animation cycles remain absent.",
-    "Support-hand points are measured but the current adapter aligns the primary grip only; secondary-hand anatomy and grip occlusion require additional art.",
-    "All 126 PNGs have a presentation use: 122 renderer mappings and four interface-only equipment illustrations. A mapping does not certify that the image was observed in a played campaign.",
-    "Medical variants are restricted to s03; Decker's gown is unarmed. Their static silhouettes do not implement consultation, sitting, lying or rising animations.",
-    "Queen morphology is based on film reference, not an authenticated novel-specific visual; native death presentation and the original three-anchor boss mechanic remain.",
-    "The flamethrower is original project gameplay. Its stock extends behind the torso in some poses, and secondary-hand contact and grip occlusion remain artwork issues.",
-    "Documented identities and roles do not establish exact faces, costumes or equipment silhouettes; the remaining interpretations are identified in the detailed bible.",
-    "Crouch/dodge drawings retain the native 85.8-unit pose envelope but their anatomy is not a registered full-body animation rig; cross-pose head proportions need refinement."
+    "creatures/adult and weapons/plasma remain absent after prior image-tool refusals; native presentation retained.",
+    "The compact-flamethrower image request was refused in this pass. Existing weapons/flame and its stock/secondary-hand issues are retained.",
+    "Four unarmed gait poses and two contextual action holds are coarse presentation states, not full walking, firing, reloading, sitting, rising or interaction animation cycles.",
+    "Global 1:1 fidelity is not certified: complete novel comparison, exact faces, geography, ship exteriors and undocumented dimensions remain open in the bible.",
+    "Stocked lockers show generic closed reserve packages; their count and packaging are not an exact item-by-item inventory depiction.",
+    "The orbital globe is an interpretive s39 viewport layer, not a canonical map, coordinate set, ocean/atmosphere specification or additional playable planet.",
+    "Sand and silica are decorative low-relief floor patches with stable world anchors; physical terrain, hazards and collision remain native.",
+    "The mine cage keeps the native two-stop transitions and gate state. Its static frame does not implement vertical vehicle travel animation.",
+    "Medical props decorate the existing s03 cot/cabinet; they do not add medication, sitting or medical dialogue actions.",
+    "Support-hand anatomy, grip occlusion and consistent full-body proportions across poses still require dedicated art review.",
+    "All 139 images have a declared presentation use (135 world mappings, four interface illustrations); counts do not attest a full campaign playthrough.",
+    "Walking passage B raises the knee prominently; four poses do not certify a natural continuous gait. The high-step phase and arm timing remain art refinement items."
   ],
   "assets": [
     {
@@ -898,6 +905,96 @@
       ]
     },
     {
+      "id": "characters/decker-focus",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-focus.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1725805,
+      "sha256": "8659b23dbb7ecc99dc9dfd1937b1020c5b38a95482c268be8461977451151f6f",
+      "gitBlobSha": "3aa1082373ac8e86d25c507cfb0759fe0407e9fc",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        17,
+        1000,
+        1523
+      ],
+      "visibleBoundsAlpha8": [
+        250,
+        19,
+        731,
+        1522
+      ],
+      "transparentPixelCount": 1114801,
+      "visiblePixelCountAlpha8": 442596,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-focus.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          248,
+          17,
+          485,
+          1507
+        ],
+        "pivot": [
+          495,
+          1522
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          568,
+          324
+        ],
+        "label": "Decker · concentration"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Baseline at lowest alpha >= 8 boot pixel; source x495 retains the original Decker idle body registration.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            495,
+            1522
+          ],
+          "inspection": "Full source inspected; baseline covers boot/slipper soles and leaves full hair/hands inside alpha crop.",
+          "lampAnchor": [
+            568,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "3aa1082373ac8e86d25c507cfb0759fe0407e9fc",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-focus.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "characters/decker-focus",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual unarmed stationary Decker with renderer.focus true; exclude medical scene, moving/crouch/dodge and active work.",
+      "completeAnimationCycle": false
+    },
+    {
       "id": "characters/decker-medical-gown",
       "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
       "sizeBytes": 1516131,
@@ -967,6 +1064,96 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "characters/decker-medical-report",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-report.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1562846,
+      "sha256": "004e6ca5b3208f83d97c1641c537fb6ea80a6ffeefb8d1b5431cb44a22d9647d",
+      "gitBlobSha": "9404bbbf67f4e531fcf0dfdc9c9a71e67ce72ea2",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        15,
+        1010,
+        1520
+      ],
+      "visibleBoundsAlpha8": [
+        262,
+        17,
+        739,
+        1515
+      ],
+      "transparentPixelCount": 1144388,
+      "visiblePixelCountAlpha8": 411602,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-medical-report.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          260,
+          15,
+          481,
+          1502
+        ],
+        "pivot": [
+          481,
+          1515
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "heldProp": "objectives/icc-handheld",
+        "actionScope": [
+          "o02-01"
+        ],
+        "sceneScope": [
+          "s03"
+        ],
+        "label": "Decker · transmission du rapport"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Baseline at lowest alpha >= 8 slipper pixel; source x481 retains the original medical-gown body registration.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            481,
+            1515
+          ],
+          "inspection": "Full source inspected; baseline covers boot/slipper soles and leaves full hair/hands inside alpha crop."
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "9404bbbf67f4e531fcf0dfdc9c9a71e67ce72ea2",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-report.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "characters/decker-medical-report",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker-medical-gown.png",
+          "dlc/sea-of-sorrows-visual/sprites/objectives/icc-handheld.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Only room s03, actual unarmed player while g.activeWork.id is o02-01; return to medical-gown on cancellation/completion.",
+      "completeAnimationCycle": false
     },
     {
       "id": "characters/decker-ready",
@@ -1207,6 +1394,188 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "characters/decker-walk-pass-a",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1696702,
+      "sha256": "ad724f2c102a874976a4ac90ff15ae9bdf1f6feecee713335a76e1cf7492c4a0",
+      "gitBlobSha": "38218d26bd1db39bcaa3bedce4f4626641bb7812",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        23,
+        1010,
+        1491
+      ],
+      "visibleBoundsAlpha8": [
+        205,
+        26,
+        830,
+        1489
+      ],
+      "transparentPixelCount": 1175179,
+      "visiblePixelCountAlpha8": 382967,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-pass-a.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          203,
+          24,
+          629,
+          1467
+        ],
+        "pivot": [
+          512,
+          1489
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "label": "Decker · passage A"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Image-inspected under torso at source x512; baseline at lowest alpha>=8 boot pixel.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1489
+          ],
+          "inspection": "Full source inspected; baseline covers boot/slipper soles and leaves full hair/hands inside alpha crop.",
+          "lampAnchor": [
+            566,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "38218d26bd1db39bcaa3bedce4f4626641bb7812",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-a.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "characters/decker-walk-pass-a",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-a.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual unarmed moving player; phase between existing contact A and contact B, outside medical scene and reduced-motion/posture states.",
+      "completeAnimationCycle": false
+    },
+    {
+      "id": "characters/decker-walk-pass-b",
+      "path": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+      "width": 1024,
+      "height": 1536,
+      "format": "PNG",
+      "mode": "RGBA",
+      "sizeBytes": 1726714,
+      "sha256": "67a33165abeb8bb8ee8bcdff148ab3ecf19872c455e5d24556022bff57b503ac",
+      "gitBlobSha": "05e209b738d36ad22a02e6e420b53b76d487c99f",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        17,
+        1006,
+        1512
+      ],
+      "visibleBoundsAlpha8": [
+        177,
+        22,
+        827,
+        1485
+      ],
+      "transparentPixelCount": 1142281,
+      "visiblePixelCountAlpha8": 411398,
+      "pixelCount": 1572864,
+      "metadata": {
+        "src": "sprites/characters/decker-walk-pass-b.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          175,
+          20,
+          654,
+          1467
+        ],
+        "pivot": [
+          512,
+          1485
+        ],
+        "worldHeight": 110,
+        "facing": "right",
+        "unarmedOnly": true,
+        "lampAnchor": [
+          566,
+          324
+        ],
+        "label": "Decker · passage B"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Image-inspected under torso at source x512; baseline at lowest alpha>=8 boot pixel.",
+        "manualSourcePixelAnchors": {
+          "pivot": [
+            512,
+            1485
+          ],
+          "inspection": "Full source inspected; baseline covers boot/slipper soles and leaves full hair/hands inside alpha crop.",
+          "lampAnchor": [
+            566,
+            324
+          ]
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "05e209b738d36ad22a02e6e420b53b76d487c99f",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-pass-b.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "characters/decker-walk-pass-b",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+          "dlc/sea-of-sorrows-visual/sprites/characters/decker-walk-b.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "intendedRuntime": "Actual unarmed moving player; phase between existing contact B and contact A, outside medical scene and reduced-motion/posture states.",
+      "completeAnimationCycle": false
     },
     {
       "id": "characters/elway",
@@ -3621,6 +3990,158 @@
       ]
     },
     {
+      "id": "decor/medical-chart",
+      "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-chart.png",
+      "width": 1086,
+      "height": 1448,
+      "mode": "RGBA",
+      "sizeBytes": 2305126,
+      "sha256": "97ebe16bfdb18696e229ddcfef4e6e72b4fb0fcddc2559c8644872ef9bdabff5",
+      "gitBlobSha": "72483af5186e2f8674f2da45a6bce6a4f19aeb4a",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        0,
+        9,
+        1085,
+        1422
+      ],
+      "visibleBoundsAlpha8": [
+        111,
+        28,
+        977,
+        1419
+      ],
+      "transparentPixelCount": 447035,
+      "opaquePixelCount": 1433,
+      "pixelCount": 1572528,
+      "format": "PNG",
+      "visiblePixelCountAlpha8": 1113875,
+      "metadata": {
+        "src": "sprites/decor/medical-chart.png",
+        "width": 1086,
+        "height": 1448,
+        "crop": [
+          109,
+          26,
+          870,
+          1395
+        ],
+        "pivot": [
+          544.0,
+          1418
+        ],
+        "worldHeight": 21,
+        "facing": "none",
+        "label": "Dossier médical papier",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Bottom center of thresholded subject; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "72483af5186e2f8674f2da45a6bce6a4f19aeb4a",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/medical-chart.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "decor/medical-chart",
+        "projectReferencePaths": []
+      },
+      "canonicalOneToOneCertified": false,
+      "completeAnimationCycle": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "decor/medical-cups",
+      "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical-cups.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "sizeBytes": 1703691,
+      "sha256": "fc27ce0faa84b419885cbd3006b491ab3b8658782b7b9037c566b969c2ce8471",
+      "gitBlobSha": "4c9915f075dda715a39ae5a068ede9ddb19a7187",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        23,
+        1500,
+        948
+      ],
+      "visibleBoundsAlpha8": [
+        209,
+        74,
+        1284,
+        934
+      ],
+      "transparentPixelCount": 977076,
+      "opaquePixelCount": 0,
+      "pixelCount": 1572864,
+      "format": "PNG",
+      "visiblePixelCountAlpha8": 582255,
+      "metadata": {
+        "src": "sprites/decor/medical-cups.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          207,
+          72,
+          1079,
+          864
+        ],
+        "pivot": [
+          746.5,
+          933
+        ],
+        "worldHeight": 11,
+        "facing": "none",
+        "label": "Gobelets médicaux",
+        "sceneScope": [
+          "s03"
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Bottom center of thresholded subject; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "4c9915f075dda715a39ae5a068ede9ddb19a7187",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/medical-cups.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "decor/medical-cups",
+        "projectReferencePaths": []
+      },
+      "canonicalOneToOneCertified": false,
+      "completeAnimationCycle": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "decor/membrane",
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
       "sizeBytes": 1623574,
@@ -5268,6 +5789,79 @@
       ]
     },
     {
+      "id": "devices/parts-empty",
+      "path": "dlc/sea-of-sorrows-visual/sprites/devices/parts-empty.png",
+      "sizeBytes": 2330186,
+      "sha256": "6297a0ffa45e87ac4dab75f4330152d6b6be1ee3579a77798c31081616ec6684",
+      "gitBlobSha": "f1251d45dcaec31444d6e70c180e172916de5796",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        33,
+        41,
+        1480,
+        1000
+      ],
+      "visibleBoundsAlpha8": [
+        66,
+        70,
+        1459,
+        984
+      ],
+      "transparentPixelCount": 705127,
+      "visiblePixelCountAlpha8": 849262,
+      "metadata": {
+        "src": "sprites/devices/parts-empty.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          64,
+          68,
+          1397,
+          918
+        ],
+        "pivot": [
+          761.5,
+          983
+        ],
+        "worldHeight": 84,
+        "facing": "none",
+        "label": "Bac de renforts vide"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source-inspected base contact; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "f1251d45dcaec31444d6e70c180e172916de5796",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/parts-empty.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "devices/parts-empty",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/devices/parts.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "completeAnimationCycle": false
+    },
+    {
       "id": "doors/bulkhead-frame",
       "path": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-frame.png",
       "sizeBytes": 1620849,
@@ -5427,6 +6021,102 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "doors/lift-cage",
+      "path": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+      "sizeBytes": 1344816,
+      "sha256": "554ffcf5dce6a5652474a5bf1b36b7e696cf3a7f14621c5720407799e1ccd0f5",
+      "gitBlobSha": "47e04e7d63d4770563987fe7f21748ed5d50fbf3",
+      "width": 1290,
+      "height": 1219,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        0,
+        19,
+        1287,
+        1219
+      ],
+      "visibleBoundsAlpha8": [
+        19,
+        43,
+        1271,
+        1187
+      ],
+      "transparentPixelCount": 963179,
+      "visiblePixelCountAlpha8": 537895,
+      "metadata": {
+        "src": "sprites/doors/lift-cage.png",
+        "width": 1290,
+        "height": 1219,
+        "crop": [
+          17,
+          41,
+          1256,
+          1148
+        ],
+        "pivot": [
+          645,
+          1187
+        ],
+        "worldHeight": 190,
+        "facing": "none",
+        "label": "Châssis de cage minière",
+        "apertureBounds": [
+          202,
+          285,
+          885,
+          775
+        ]
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source-inspected base contact; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {
+          "aperture": [
+            202,
+            285,
+            885,
+            775
+          ],
+          "clearInterior": [
+            215,
+            400,
+            860,
+            640
+          ],
+          "clearInteriorAlphaMax": 1,
+          "inspection": "Broader near-square native opening, complete pulley housings and feet, no clipped cable. Triangular corner braces remain part of frame."
+        },
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "scaleRationale": "Native aperture binding controls source transform; worldHeight190 is gallery/fallback display metadata only.",
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "47e04e7d63d4770563987fe7f21748ed5d50fbf3",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/doors/lift-cage.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "doors/lift-cage",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/decor/hoist-drive.png",
+          "dlc/sea-of-sorrows-visual/sprites/decor/winch.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "completeAnimationCycle": false
     },
     {
       "id": "effects/acid",
@@ -6396,6 +7086,79 @@
       ]
     },
     {
+      "id": "equipment/locker-stocked",
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-stocked.png",
+      "sizeBytes": 2310254,
+      "sha256": "1d52abe726fa1cef6dc02544514046ccca9415ba4a0413ab2a568d7af4e2e6e9",
+      "gitBlobSha": "ac4566a277cd5c5726f6ed1a8f1d9c81b56d74b4",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        978,
+        1536
+      ],
+      "visibleBoundsAlpha8": [
+        89,
+        6,
+        940,
+        1528
+      ],
+      "transparentPixelCount": 363891,
+      "visiblePixelCountAlpha8": 1188671,
+      "metadata": {
+        "src": "sprites/equipment/locker-stocked.png",
+        "width": 1024,
+        "height": 1536,
+        "crop": [
+          87,
+          4,
+          855,
+          1526
+        ],
+        "pivot": [
+          515.5,
+          1528
+        ],
+        "worldHeight": 181,
+        "facing": "none",
+        "label": "Armoire ouverte avec réserves"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source-inspected base contact; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "ac4566a277cd5c5726f6ed1a8f1d9c81b56d74b4",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-stocked.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "equipment/locker-stocked",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "completeAnimationCycle": false
+    },
+    {
       "id": "equipment/medkit",
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/medkit.png",
       "sizeBytes": 3020553,
@@ -6772,6 +7535,80 @@
         "gallery",
         "world-renderer"
       ]
+    },
+    {
+      "id": "equipment/supply-empty",
+      "path": "dlc/sea-of-sorrows-visual/sprites/equipment/supply-empty.png",
+      "sizeBytes": 2195513,
+      "sha256": "197acef18a7082229c4d4e91b175c60f809b83b6d356fc3fcfd85029c8262f42",
+      "gitBlobSha": "e5cca66f4242ea168688396ff764bbe3f4860b0f",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "format": "PNG",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        0,
+        15,
+        1428,
+        1086
+      ],
+      "visibleBoundsAlpha8": [
+        76,
+        21,
+        1373,
+        1058
+      ],
+      "transparentPixelCount": 404815,
+      "visiblePixelCountAlpha8": 1148861,
+      "metadata": {
+        "src": "sprites/equipment/supply-empty.png",
+        "width": 1448,
+        "height": 1086,
+        "crop": [
+          74,
+          19,
+          1301,
+          1041
+        ],
+        "pivot": [
+          724.5,
+          1058
+        ],
+        "worldHeight": 61,
+        "facing": "none",
+        "label": "Coffre de ravitaillement épuisé"
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; generated PNG bytes preserved.",
+        "pivotMethod": "Source-inspected base contact; placement inspected in scoped Canvas fixtures.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "scaleRationale": "61 presentation units keeps the open chest width within 1% of the original supply sprite at 43 units; the lid increases height.",
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "e5cca66f4242ea168688396ff764bbe3f4860b0f",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/supply-empty.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "equipment/supply-empty",
+        "projectReferencePaths": [
+          "dlc/sea-of-sorrows-visual/sprites/equipment/supply.png"
+        ]
+      },
+      "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ],
+      "completeAnimationCycle": false
     },
     {
       "id": "equipment/tracker",
@@ -7770,6 +8607,76 @@
       ]
     },
     {
+      "id": "planets/lv178-orbital",
+      "path": "dlc/sea-of-sorrows-visual/sprites/planets/lv178-orbital.png",
+      "sizeBytes": 1893668,
+      "sha256": "14aabbcdea3fcf7330a391e20752c138fe049a1e7e7fc9f0d6935e0e079cb196",
+      "gitBlobSha": "7afee2c5faaa63eb47c46bc5caca059cb9c745bb",
+      "width": 1536,
+      "height": 1024,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        7,
+        1526,
+        1008
+      ],
+      "visibleBoundsAlpha8": [
+        285,
+        38,
+        1239,
+        990
+      ],
+      "transparentPixelCount": 834487,
+      "visiblePixelCountAlpha8": 710248,
+      "metadata": {
+        "src": "sprites/planets/lv178-orbital.png",
+        "width": 1536,
+        "height": 1024,
+        "crop": [
+          283,
+          36,
+          958,
+          956
+        ],
+        "pivot": [
+          762.0,
+          514.0
+        ],
+        "worldHeight": 155,
+        "facing": "none",
+        "sceneScope": [
+          "s39"
+        ],
+        "label": "New Galveston · vue orbitale"
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "7afee2c5faaa63eb47c46bc5caca059cb9c745bb",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/planets/lv178-orbital.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "planets/lv178-orbital",
+        "projectReferencePaths": []
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected ground patch or globe center; decorative presentation only.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "canonicalOneToOneCertified": false,
+      "completeAnimationCycle": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
       "id": "stretchers/adams",
       "path": "dlc/sea-of-sorrows-visual/sprites/stretchers/adams.png",
       "sizeBytes": 2034413,
@@ -7906,6 +8813,146 @@
         "restoredSourcePath": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/elway.png"
       },
       "canonicalOneToOneCertified": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "terrain/sand",
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
+      "sizeBytes": 1722927,
+      "sha256": "abb35029ec62424e8c9f13b4f2f05ff4e3ade0a3ff15750e2e3168324bedd276",
+      "gitBlobSha": "2cb9bdfe4f8281b26f782fd9b4f38f7ffdef5bf8",
+      "width": 2172,
+      "height": 724,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        0,
+        19,
+        2152,
+        724
+      ],
+      "visibleBoundsAlpha8": [
+        35,
+        213,
+        2117,
+        609
+      ],
+      "transparentPixelCount": 995887,
+      "visiblePixelCountAlpha8": 506898,
+      "metadata": {
+        "src": "sprites/terrain/sand.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          33,
+          211,
+          2086,
+          400
+        ],
+        "pivot": [
+          1076.0,
+          411.0
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "sand"
+        ],
+        "label": "Sable minéral · surface"
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "2cb9bdfe4f8281b26f782fd9b4f38f7ffdef5bf8",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/terrain/sand.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "terrain/sand",
+        "projectReferencePaths": []
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected ground patch or globe center; decorative presentation only.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "canonicalOneToOneCertified": false,
+      "completeAnimationCycle": false,
+      "runtimeSurfaces": [
+        "gallery",
+        "world-renderer"
+      ]
+    },
+    {
+      "id": "terrain/silica",
+      "path": "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png",
+      "sizeBytes": 1597263,
+      "sha256": "1bc859b5800d8db432aa9848ebef16f45ce026309aa16845607a66b2d50e87ac",
+      "gitBlobSha": "8d51568705b86c67ec98570298df24dca2da0ecc",
+      "width": 2172,
+      "height": 724,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaBounds": [
+        21,
+        9,
+        2146,
+        724
+      ],
+      "visibleBoundsAlpha8": [
+        45,
+        147,
+        2140,
+        569
+      ],
+      "transparentPixelCount": 937446,
+      "visiblePixelCountAlpha8": 580905,
+      "metadata": {
+        "src": "sprites/terrain/silica.png",
+        "width": 2172,
+        "height": 724,
+        "crop": [
+          43,
+          145,
+          2099,
+          426
+        ],
+        "pivot": [
+          1092.5,
+          358.0
+        ],
+        "worldHeight": 90,
+        "facing": "none",
+        "terrainScope": [
+          "silica"
+        ],
+        "label": "Silice fracturée · surface"
+      },
+      "provenance": {
+        "kind": "imagegen-new-source",
+        "generator": "image_gen",
+        "generatedOn": "2026-11-26",
+        "gitBlobSha": "8d51568705b86c67ec98570298df24dca2da0ecc",
+        "sourcePath": "dlc/sea-of-sorrows-visual/sprites/terrain/silica.png",
+        "promptSource": "docs/mer-des-chagrins-20261126/GENERATION_0_10_4.json",
+        "promptId": "terrain/silica",
+        "projectReferencePaths": []
+      },
+      "calibration": {
+        "cropMethod": "Alpha >= 8 bounds plus 2 source pixels; PNG bytes preserved.",
+        "pivotMethod": "Source-inspected ground patch or globe center; decorative presentation only.",
+        "manualSourcePixelAnchors": {},
+        "facingInspected": true,
+        "renderedPlacementVerified": true,
+        "renderedPlacementScope": "Edition 0.10.4: inspected explicit real Canvas fixtures for the scoped states; not a browser campaign, animation certification or canonical measurement."
+      },
+      "canonicalOneToOneCertified": false,
+      "completeAnimationCycle": false,
       "runtimeSurfaces": [
         "gallery",
         "world-renderer"
@@ -8298,5 +9345,22 @@
     "bytes": 237861570,
     "recordFormat": "UTF-8 rows sorted by id: id\\tsha256\\tsizeBytes\\n",
     "sha256": "7eb9f37d39496f2508b98b5abd32c2b01ba42f7921a288363e81d65dde5fbd20"
+  },
+  "priorEdition0_10_3Integrity": {
+    "sourceCommit": "a26188a1e63cd39daaee5167d8e940e48120794d",
+    "assetCount": 126,
+    "bytes": 246478952,
+    "sha256": "149ad4381481216acb3075c56a1207d4546ac9d1be08ed4b16208e01dbff7f9a",
+    "assetRowsSha256": "b7458b3d7667db1e2acd819ca18a83267e637ab3351b31b4e3818a3bcd86be34",
+    "assetRowsFormat": "UTF-8 JSON of rows sorted by id, sort_keys=True, ensure_ascii=False, compact separators"
+  },
+  "priorEdition0_10_3Validation": {
+    "pngDecodeAndAlpha": "121 baseline assets retain their published measurements; five additions decoded with Pillow before executor failure and independently re-decoded in JavaScript with zlib Adler32 validation.",
+    "sha256AndGitBlobSha": "All 121 prior PNG bytes preserved. Five new Git blobs match the pre-outage source byte lengths, SHA-256 and Git blob hashes.",
+    "manualAnchorInspection": "Five new source images and their real Canvas placements inspected: medical actors and Queen in both directions, ICC before/after transmission, six flame posture/direction combinations.",
+    "logicTests": "87/87 visual-suite tests passed after executor recovery on the 126-asset candidate. Canvas/Image/DOM doubles are distinct from the separate real Canvas QA.",
+    "historicalRenderedPlacement": "Edition 0.10.2 observed 103 distinct PNG kinds in prepared real Canvas fixtures; historical evidence remains in docs/mer-des-chagrins-20261126/VALIDATION.json.",
+    "renderedPlacement": "Edition 0.10.3 loaded 126 PNGs, rendered 50 rooms, 24 weapon/posture/direction cases, 12 locomotion cases and 55 other diagnostic cases. All five additions were drawn and visually reviewed in scoped fixtures. No browser journey or universal state coverage certified.",
+    "browserGameplay": "not certified by this manifest"
   }
 }
