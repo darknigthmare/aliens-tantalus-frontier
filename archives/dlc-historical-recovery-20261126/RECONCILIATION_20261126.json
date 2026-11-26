@@ -1,0 +1,1379 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "purpose": "Additive reconciliation of 16 preserved DLC archives into PR76",
+  "repository": "darknigthmare/aliens-tantalus-frontier",
+  "source": {
+    "branch": "archive/local-recovery-20261125",
+    "commit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+    "manifest": "archives/local-recovery-20261125/MANIFEST.json",
+    "tree": "a045e057491081b38a016c308b4bc12e6a5f75cc"
+  },
+  "destination": {
+    "pullRequest": 76,
+    "branch": "codex/dlc-historical-archives-20261126",
+    "baseCommit": "7ccf4173003faffcd2e69b12dead3e455a6625f5"
+  },
+  "scope": {
+    "originalArchiveCount": 16,
+    "originalArchiveBytes": 1189845299,
+    "sourceFileCount": 123,
+    "fragmentCount": 121,
+    "sourceFileBytes": 1189905201,
+    "sourceFilesAreCopiesOfExistingGitObjects": true,
+    "newBinaryUploads": 0,
+    "existingFilesModified": 0,
+    "existingFilesRemoved": 0,
+    "rootReadmeCopied": false,
+    "mergePerformed": false,
+    "productionDeploymentPerformed": false
+  },
+  "preservation": {
+    "existingPathsRetained": [
+      "archives/local-recovery-20261125/PENDING_TRANSFER.json",
+      "archives/local-recovery-20261125/avp-2004/original-standalone-v0.11.0.html"
+    ],
+    "note": "Historical transfer records remain byte-identical; this receipt records the additional preserved files without rewriting prior claims."
+  },
+  "files": [
+    {
+      "path": "archives/local-recovery-20261125/MANIFEST.json",
+      "bytes": 49769,
+      "gitBlobSha1": "3266c917ef03d6d017642d8efb22b5a81d38c305",
+      "mode": "100644"
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "e9a80e1eca9345588ea0c7d8d6d94367fa7da9f8",
+      "mode": "100644",
+      "sha256": "819d6bbc6b91545a7b7dd53ed51010f407b5b79bf57584b1758ba97ce5ce1d37",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "22a8f967794135a6ef4ca8ac842597842a3b4f8a",
+      "mode": "100644",
+      "sha256": "255347aa6e955344004b2fda54a529044a48656feaa8e80936e2e2b7b2c9241e",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "78ca9b19df05c0f0dda36b6708e24a675dfcda45",
+      "mode": "100644",
+      "sha256": "e0499929c671d8cb35017ce4f3770f7766f0c0ff1b18ee4319b5a01e7a1e2e1d",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "d2483b45e8d8bf0f1126a58e870cb06cdd0ddab1",
+      "mode": "100644",
+      "sha256": "03c6851fd8dedaa26e0ec79e208ec429ca2c6c5468d33546245cc5c7fd6373b2",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "c2ad3a9a5a210d5c43e738deafaad084fa2f5588",
+      "mode": "100644",
+      "sha256": "71a884485076a065fcc2b3e8a60b9a8eef75615030707cbb41478c66fb4a41ae",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "955a3428b0f9a9247560d1c4c789df5644fac71a",
+      "mode": "100644",
+      "sha256": "6de2f9541be3904b0ebd397c54629e276a9426fd2b71801e75728141adf94318",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "0048170925d59c4cc4640be12fc3105ec5a9f1cc",
+      "mode": "100644",
+      "sha256": "208672b4f0edc0ca36551883332e2a8358f1356e5e32b98c00702ab62eb7211f",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-covenant/ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip.part008",
+      "bytes": 4035066,
+      "gitBlobSha1": "faadf0f48fa29f35df3c8bcb58765b467e532639",
+      "mode": "100644",
+      "sha256": "299c328472110eaae2641e10cf2bb351ed35f0db2b38de59a0f720ba815daaf7",
+      "archiveId": "alien-covenant-v0-10-0",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "01fe031895bd1869c1633fe1feb1f084ef75dc27",
+      "mode": "100644",
+      "sha256": "617b87da33c483b191d62c1fb68da5e2a8100252f11d7774f7d6016f6873785b",
+      "archiveId": "alien-earth-v11",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "2e6182a97b50bd9fea8dd53dea4bf5ea6bc4c873",
+      "mode": "100644",
+      "sha256": "22ffd1258d0ebc88b288a76fea05488dc737699f07d13fae5ee1607d5fcbe6b0",
+      "archiveId": "alien-earth-v11",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part003",
+      "bytes": 2924202,
+      "gitBlobSha1": "a7a7653ba670a5a92657ac07d78c92cc3b5ed0a6",
+      "mode": "100644",
+      "sha256": "3c73fba993587e3fef936599a8d027db43e877c1e5d5747f563f872122e7eb36",
+      "archiveId": "alien-earth-v11",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "390ea4f805cd199617a9768d9f039a1307e01dbd",
+      "mode": "100644",
+      "sha256": "f2478a7a3e3ba286c7a366447a5d942469759453fb2c1d4189a9fd5ba5d02d07",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "6131c6018931c3813a4035d8d1997a966c8b380f",
+      "mode": "100644",
+      "sha256": "ea2310c27364f46ac7ee0e4a9c4546a46f8822a2166953d73d0d7829ffbe78d8",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "e4365e0fbcc106f4bda991d54ab14db5eeb023d6",
+      "mode": "100644",
+      "sha256": "a0427f6a534c1adbae7c86303698011c5697bda1aad863c3ccb3d9426154c157",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "606a1532244f8ee45b0c4ab74766ee89d71379bb",
+      "mode": "100644",
+      "sha256": "c76a00d2ba17bff3052e1f66afe9d3e8b5181ddd7579483e65f95579142b30da",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "26f35123945d40186ca3376fd7f8bf69748b57f7",
+      "mode": "100644",
+      "sha256": "1ca602210b7dc3a12d2f7f64f75de5545ca8bcc8cde913fdba2736f659c94840",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "e6d7e1e2a586b7364311537981efa365f9e03734",
+      "mode": "100644",
+      "sha256": "22964de349b9e7770d7c8f31500c8bd4a62ea155e7b611dc4d01ecfc9d000eeb",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "1a0ca36b765b61789ce13c6ec37af308d18b0e7e",
+      "mode": "100644",
+      "sha256": "0990fc54f7c474e87c5cc6c2b45b825f6360aa21a786daac6a044899602ed50c",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part008",
+      "bytes": 10485760,
+      "gitBlobSha1": "1cc4cc3fb758e01b892094d793d66ea57cd842ee",
+      "mode": "100644",
+      "sha256": "83bba43d07ff02ceaec7392d81ec94d0ba69c539b010837012fe6ce705d4ea12",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-hors-des-ombres/ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip.part009",
+      "bytes": 9563135,
+      "gitBlobSha1": "561a7a00347f14439a4a69a96aea9f2d518e4ec4",
+      "mode": "100644",
+      "sha256": "75adc9798ebbfdde23546bb09b2411da87a6849420ac97decad5c50c2b742f7f",
+      "archiveId": "alien-hors-des-ombres-v0-10",
+      "offset": 83886080
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip",
+      "bytes": 8481728,
+      "gitBlobSha1": "154549212ba746bba2dd9e36c22c1720e9db7a15",
+      "mode": "100644",
+      "sha256": "28d0fae31df52d8b30b18c56b0ee42bcef919ece5a085a82c17c3eb0d0df8fc5",
+      "archiveId": "alien-mer-des-chagrins-v0-1-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "0f87e97216d320ab2d97dcb59570e8492b8812fd",
+      "mode": "100644",
+      "sha256": "c02dac5b04b4b6f4ca23236c56ce2aaca4896763b61a678b4dd174c26fe2cad5",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "dbeed9c396d9244c8bd95559fe5a4e7a484c2860",
+      "mode": "100644",
+      "sha256": "d7e847bd446cbd0920427051d610c205064b9a0e37ebc80a711c82e134b70307",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "d614f931a06428b42bb9b380635ea877af74b9ae",
+      "mode": "100644",
+      "sha256": "b7ccc588e76bf71dca036e8bfe2d6d5dc7f04ffff6385e8202c4e9439e993f4d",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "0fb42a22354ad36826e350ab8625f9962c76c13a",
+      "mode": "100644",
+      "sha256": "f7461d7bf4f62f71519961f501337c1d3630f975a1e0b1d8b59073399e039ba4",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "85a394b123d0a7e8c7e45fca7705b764e83746eb",
+      "mode": "100644",
+      "sha256": "2dff631d9ffbbbb996ccc5f764c89c3fa0b5071e9f2562ba67dc0cc5e1f9adbc",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "d9c7fdf7649aff119f0db50b9592297e63b73ac2",
+      "mode": "100644",
+      "sha256": "f1a1533f4253a0e6de0c2872589c8e7dc305fba70c57aa6d523a7de5b31d7e48",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "360c508236e5e06c0d3baf7460aa1fcf99c0f7e3",
+      "mode": "100644",
+      "sha256": "77b14148ba0993319a63e960081206382ee0f1bec6de3e6875eec0ca9f267249",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part008",
+      "bytes": 10485760,
+      "gitBlobSha1": "17350ef0bd1769b0e64dad78032fe2f209f414e6",
+      "mode": "100644",
+      "sha256": "9f6be9eca26ad23cb5836b8594fd54aa1461457021ea1de7d5c11535a0f6aca1",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part009",
+      "bytes": 10485760,
+      "gitBlobSha1": "c72eafc19ea07026eac78d8bf664f318e12a3fcb",
+      "mode": "100644",
+      "sha256": "da5f65e770b0b0401c20546680cbdea4f6ffaf4adb64baee1db86325509ca350",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 83886080
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part010",
+      "bytes": 10485760,
+      "gitBlobSha1": "4602680f56e8e21545e95e16ed7f8010f456afe6",
+      "mode": "100644",
+      "sha256": "45dab49f745fda56bf07126fb7b1ddafe2b4b6b40fcd44b84d28a06545594780",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 94371840
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip.part011",
+      "bytes": 10312844,
+      "gitBlobSha1": "798ce3e18a3fc1db9d6344254d21ae2aa6f17ac0",
+      "mode": "100644",
+      "sha256": "917294046b6ea09af639383d9ac10c80c6c3fe31b679a0d9e67f3889bd785874",
+      "archiveId": "alien-mer-des-chagrins-v0-10-0",
+      "offset": 104857600
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "5c94a25651f83f69a08fdb57bac30957255add64",
+      "mode": "100644",
+      "sha256": "4d39df305163e9b40ca684e74eafc19829000342447fb37fc490962b32aea8e3",
+      "archiveId": "alien-mer-des-chagrins-v0-2-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip.part002",
+      "bytes": 1472786,
+      "gitBlobSha1": "320f8f94454e399b601523b1b2569e12813c430e",
+      "mode": "100644",
+      "sha256": "3771cb300f6ed6f6ece1479713236585cb8df121982258b98b51f746d27f9ef3",
+      "archiveId": "alien-mer-des-chagrins-v0-2-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "a54662fec653abbd2bbaf8320a207b8247cd1fb5",
+      "mode": "100644",
+      "sha256": "870d15f92283616fb829d3cf2e7099d9c2ab88eccfc63df633fbe97f5e62fe50",
+      "archiveId": "alien-mer-des-chagrins-v0-3-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "e53c3d4cc9ae6c0cc3e240b18740b5f62634bfa6",
+      "mode": "100644",
+      "sha256": "26b4f053bb5b2b1b0d44920eef3aad38123cf626d4100d90f7da21a444111d39",
+      "archiveId": "alien-mer-des-chagrins-v0-3-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip.part003",
+      "bytes": 7945436,
+      "gitBlobSha1": "331b898b6f3522ba505f5dbdf9492450b9cc06c3",
+      "mode": "100644",
+      "sha256": "5e61a8f0a11b168dc8560e96804d7c54db289110204a9137899952102c6e99a9",
+      "archiveId": "alien-mer-des-chagrins-v0-3-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "be86e8312249afd80ac9b64464235351860a877d",
+      "mode": "100644",
+      "sha256": "db57a9e350818a26eb72026babaf184d4e3f6ca5f90eeaaa56dc254f5da153bb",
+      "archiveId": "alien-mer-des-chagrins-v0-4-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "b015b285a8280267c046c7441a5621693a4467f6",
+      "mode": "100644",
+      "sha256": "549671552168779b2948099b316b466aa0d41e9449d6f8237a0dd590c76cda09",
+      "archiveId": "alien-mer-des-chagrins-v0-4-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "1c6b5d06f1225154792c129a08921559e6f97eec",
+      "mode": "100644",
+      "sha256": "e0fc8dc7c07011870b5ab51ecf817ef49f9cb26e5648c98eb8fa98a778fb33d6",
+      "archiveId": "alien-mer-des-chagrins-v0-4-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "a8113345a791e7a9b1a42c95efa6e59566cfc193",
+      "mode": "100644",
+      "sha256": "164bc94e0b138e10d238bce3e0a60b2b64a8b06034d7a7e5a93dedfc08ba3bf4",
+      "archiveId": "alien-mer-des-chagrins-v0-4-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip.part005",
+      "bytes": 515519,
+      "gitBlobSha1": "92a7829c53e08a2f7690b1f608af49f712e0acc2",
+      "mode": "100644",
+      "sha256": "d34a040bef3da367ff9015e51932c92a9fdcd221162e1ba63b17c99ec1efb459",
+      "archiveId": "alien-mer-des-chagrins-v0-4-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "f41727a4863fb20bdf4b0871f236a03420ebc469",
+      "mode": "100644",
+      "sha256": "6eef2ed45ad42d57ce2fc399eb5edb6df3df8fa6a3465ddcdb8ec3b1530c8dfa",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "475dabc42765499fb1dfc898827294a19c04d708",
+      "mode": "100644",
+      "sha256": "ac95df973ca5a83fb35633f7b4b63b3e5c9c7c1b93aed8863393c982da36173f",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "0c59c1dbabeca9e5470b78628987e8b7a36a6a84",
+      "mode": "100644",
+      "sha256": "0cde0efc63d879568184f6a1aaa082802a7331531c0cd5c4e77d864174e1d727",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "ad74440554f8bcce134775eda67d88ef84b31d66",
+      "mode": "100644",
+      "sha256": "d615726fbb40129a0d4f2d39e1ffe6c7db16ca42baa27c41af32b3bcc011051b",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "e132b1b289d048741519e2909e196ba745f37bc9",
+      "mode": "100644",
+      "sha256": "74295eb4bb887a36cdaa4fb246f03fcf6c743d022d764475c4e207cd4148ddb3",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip.part006",
+      "bytes": 1964812,
+      "gitBlobSha1": "ff3ecec9fc1a37220875b67d2305b75444050cda",
+      "mode": "100644",
+      "sha256": "9e8294bc671c014ee0e53873ee0ccef4ce536e358fd438535c81b21f86903fc9",
+      "archiveId": "alien-mer-des-chagrins-v0-5-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "2d761f9aaeefb6df3734b8409a7f9867cd8546d8",
+      "mode": "100644",
+      "sha256": "948cd7d2262f83cb23f415f28ce9ccc1e76929f72f8392d5163c8eef9e3844a8",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "ac5625139a5055357321d9e55fc5de0910d7714f",
+      "mode": "100644",
+      "sha256": "7a18c6c78c2bcfb3969a0659e67fae545022f9e909430842cb54348f99ab6278",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "c0528a73b638d15e6c9c00f8c61dedc7b509303a",
+      "mode": "100644",
+      "sha256": "f55c02939f2b4acb3608bc02c5f6659be1571dcab0290c00231af24091d096bc",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "b7b552e8832e02c6f20b246d30fbb2ae5bcb3831",
+      "mode": "100644",
+      "sha256": "9c3659ca3b7082c91810d8dd4602eaad0ebda1ec2619d74f010b6c0769b81d74",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "5e466ddc524b695ba867e4ba7984cb421063014b",
+      "mode": "100644",
+      "sha256": "7f8b6db5c40b968483f09e4e15b68b648d85a47775cf63a3d706c763e66169f0",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip.part006",
+      "bytes": 6653414,
+      "gitBlobSha1": "d310dda5dd44ec5273701b4709751e1aec0e6f46",
+      "mode": "100644",
+      "sha256": "4bebcd54598730492e5e01249019350b3774e2908c354135540103f8e6b7d447",
+      "archiveId": "alien-mer-des-chagrins-v0-6-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "16d794863e3f1b77d20c2f4fe438866d06b7c410",
+      "mode": "100644",
+      "sha256": "114842b0a7b29215d86bbaee3fda5a553a1625c92bcceee2c37adaf86cccc8f5",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "0c4e0412a0bc72d2df93e40ca8748a8f0fe77726",
+      "mode": "100644",
+      "sha256": "32488d33b8f5eeaadd48afd9c9f692c4447c015f62a7eb0ba3caf1e6e53ffa10",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "b4a0bc9c783be763df65b23d3f172f6d50fe0f60",
+      "mode": "100644",
+      "sha256": "d4da3623192feeb0d5321593379fc8819b56db233ac286826a2bf16e0ca87b5f",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "2e7d738197f8622dcbf32dbb22a95f4c848da784",
+      "mode": "100644",
+      "sha256": "be2b56b213963afcdcb4b90e52c2ec45fd8ae6c5249d5824b60f0b2b97311d2e",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "29858a31260163312bcf91442fb5ece941b4704c",
+      "mode": "100644",
+      "sha256": "5eaa03f9010c1aa5977ebb7bf5e2892cd9897f3fc96d0f5a41a1e324d4581472",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "bff9719af3d6265b1bc4a5022a867dd4440a1c85",
+      "mode": "100644",
+      "sha256": "2ba6b9c45989628a5c50a04f7a9a4b6b53972d58dc53f6cf8dc137826386fdf2",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip.part007",
+      "bytes": 5168457,
+      "gitBlobSha1": "c507efb346dd36e1f8ce8b5a64e40b8e6ae6352b",
+      "mode": "100644",
+      "sha256": "ba40079715c71257d868dda522e470f18f36b031999fc4fb4ce9402b63e7e738",
+      "archiveId": "alien-mer-des-chagrins-v0-7-0",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "f82be407178fa0fa31580d7db0543a76b36ef734",
+      "mode": "100644",
+      "sha256": "b4af87b98aa8f7603106edad25a8bb3db7a2290b779506b459a170cb2e860724",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "bb3288ba7a8ec102e1ecd292201b21f8d3912aed",
+      "mode": "100644",
+      "sha256": "97b8d772fb3cbc875c20877e49eecdcfb43ef88408dd4dcd7c12c232e4bca8e2",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "3e5f79f2e75801ac7774b310be8340668d5486c0",
+      "mode": "100644",
+      "sha256": "56e1587f7403a7abab0490adda9dab97951a903d43d7044facf1338df2bb935a",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "591e108f9487a105a1bb529f4a299e8a785b1432",
+      "mode": "100644",
+      "sha256": "5c2e308095f588ccdcf8a96267fef665ef7fe2cdd7b0b2f7ef68845cff6be464",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "9d575d89af769d1e89bb86e784220f182c6bbb96",
+      "mode": "100644",
+      "sha256": "00c1b4a0356217ad425301490437b11a727be7ee4bf4e75df66bff40152e68fb",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "d7150b508c74706d208092df96c04f981241705b",
+      "mode": "100644",
+      "sha256": "e98887479920ba69af83e523baa4daba6a0e3d672d7140efc89544a00bae7778",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "0ef571e26845c2a094bd182d0c7728f7d169a096",
+      "mode": "100644",
+      "sha256": "b9f3ec4cdb18b3397b72bc99874bdbb87a0ac4e425b32b2f8ee176c6c99ca934",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip.part008",
+      "bytes": 6591644,
+      "gitBlobSha1": "c96c0cd9dec7d348c56c568f9c36a1aed04a472b",
+      "mode": "100644",
+      "sha256": "06825b73120cedb8d55ea4a1de9961db9df93fb26197769f15f6ab7f5d69e868",
+      "archiveId": "alien-mer-des-chagrins-v0-8-0",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "1233359d57fbb6a2151f5c8dd43f5b2b56b4f8b0",
+      "mode": "100644",
+      "sha256": "24f5eea6cec5b9baa8b203eeebce3929fd67df9c424cbec70e4551ebd820251c",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "242161ca0d1cf5b78dea944d75e59cb76bb5ba04",
+      "mode": "100644",
+      "sha256": "cfa0595454a03dbe61e6832d6bac530cfd67ff0e10fae6ad60e3e1a5ff85ca72",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "f50d00e82d86932e7cdb9e82de5f2dce78030c36",
+      "mode": "100644",
+      "sha256": "3afa03c7d9a23b36570ec7f34ae592c1609f112e757037b117d9ea7bc2d3818a",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "695c322460013600898a528dc7f0fbfcfbf2f9fc",
+      "mode": "100644",
+      "sha256": "fa1bfa432115cbddb168ebd184b78dff5ed333140ec1f20017a44155d2122d4e",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "b5f6706a9815b0e79260b821976aa9e532ed6bb8",
+      "mode": "100644",
+      "sha256": "cec22a293d908e787ade96d99ae414bf12c82f7c35dca7d8b05b6396483b783f",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "00a2a7b1f00cb7d85dbeb1e9f38d6442f3260369",
+      "mode": "100644",
+      "sha256": "8e1f244adb55b3c7ed6c048519089bda44710af6402a80bd3e6819bae77a3c92",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "56335225178e2a456eab21ebdfd36250334b5771",
+      "mode": "100644",
+      "sha256": "9921b92754633585e79f3c0edd35399db7e88f553e29e294f005204bb3b124df",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part008",
+      "bytes": 10485760,
+      "gitBlobSha1": "04e0ef7e33fb8d731787e28256c6ba0b0d42c5d4",
+      "mode": "100644",
+      "sha256": "6b6e979674c08a4199a6d3f9851ab46e7370d65bf6d5e773f88a314043757889",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-mer-des-chagrins/ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip.part009",
+      "bytes": 913412,
+      "gitBlobSha1": "5b9d422441c7aa440272846826db1e4972f6ff6e",
+      "mode": "100644",
+      "sha256": "cf774e1080c5b75e0703fa09bc04acb6f309bd6a25094fcf638c5ac774bf50d9",
+      "archiveId": "alien-mer-des-chagrins-v0-9-0",
+      "offset": 83886080
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "8e24f8172d1835ffba6e145b1ff4dd95b973471b",
+      "mode": "100644",
+      "sha256": "e4e1a62c33ecf3801d797a7b9628df48f51c986a2d6beb6b2f5307ca4c82d7d8",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "4d31c14ff97bb9e8ea503ab4ed1c830c39697f7e",
+      "mode": "100644",
+      "sha256": "f64cbf7e44d523892f24082a0f6697fb3243236c2068daa640e2f9208b2498f2",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "2d7ee5ce32c6221c8faea2f829918725e045f33c",
+      "mode": "100644",
+      "sha256": "2fd12a4bec567234ad995916aa2c8345accf2a119fc1c58ea5f17847853e6a80",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "6bca800e1fd8f0a72618803bcc3509dbc8cd0534",
+      "mode": "100644",
+      "sha256": "c92804e50334257c092cafa998485add6c87476e7bda8ff7097716d2a5866e5f",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "037e123477f7c6b686bdd9742e0869ca6d4e199b",
+      "mode": "100644",
+      "sha256": "7ec181d233e3397b304ff38d8d2357f299c0b01c56231fbacb03a52897ccd148",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "e85953fb344107812e81fbd8c3dc29443c93f363",
+      "mode": "100644",
+      "sha256": "ed7a806ae447b8b8e1a6ace67a0e7a6dd8ce22d5a55dd5e22cf7bc18d3a8c7e5",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "3d2a8100dba6e01dc8dfd047f72942b2f22adc96",
+      "mode": "100644",
+      "sha256": "6be79db88f492b119b9ff9f5113507122567bc60e8d8bd07503cc9fbde7e03cd",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part008",
+      "bytes": 10485760,
+      "gitBlobSha1": "5489f0ed81ba75713042f6f1c60b9d75f8b25cec",
+      "mode": "100644",
+      "sha256": "5343a7c247dac2eae6fc78c3695d78ffd26babe248e94454fd47ec4352d25235",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part009",
+      "bytes": 10485760,
+      "gitBlobSha1": "2216af2679d0c18b7ea59abfb0ba1986bc31fcea",
+      "mode": "100644",
+      "sha256": "8b4c56667559f962ec27a04d075f6498437bce56845137c1987ac4c3e675b77d",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 83886080
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part010",
+      "bytes": 10485760,
+      "gitBlobSha1": "6f81f5abfbe5d069555dfc458da3a35f89109170",
+      "mode": "100644",
+      "sha256": "3df823b5b724eaf53aeab5588098df9883512a6452d5f2a567413af190092693",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 94371840
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part011",
+      "bytes": 10485760,
+      "gitBlobSha1": "7e11426b87cf914c4a4e0a8f1c3b4f085d7fcec0",
+      "mode": "100644",
+      "sha256": "f5ec10f7f8990c3ec35dae283776da8fdee1cfc44405a93f57869f55d9c1f973",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 104857600
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part012",
+      "bytes": 10485760,
+      "gitBlobSha1": "b33a935097b44405d2d8489826925b21d292b095",
+      "mode": "100644",
+      "sha256": "5923b6dd17c3504ea8cb857cc6643be6448ec3492b134751d8d22b1dc84195c9",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 115343360
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part013",
+      "bytes": 10485760,
+      "gitBlobSha1": "19bae7084218ade9ed479412c961f796c7cb9eb0",
+      "mode": "100644",
+      "sha256": "9ff08197bab94c0e4540c7ef02c42647fcda3744142e36810098f129a4b72699",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 125829120
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part014",
+      "bytes": 10485760,
+      "gitBlobSha1": "c65d19c8088e039ce93b10babf74b557dfb0dbe8",
+      "mode": "100644",
+      "sha256": "a8d06a8f70aa35d53eb951b31d40ed6e2ca87da97a36f792918e24f944612909",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 136314880
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part015",
+      "bytes": 10485760,
+      "gitBlobSha1": "67eb114d02e80b0d5d547efb2017fb53e7b65c03",
+      "mode": "100644",
+      "sha256": "8700f2fa0eaad2835523e0f367c81f61079c08a47328e72171931223d4103256",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 146800640
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part016",
+      "bytes": 10485760,
+      "gitBlobSha1": "364dd2de25cb61a249d19cad59e0862aa4d98cc7",
+      "mode": "100644",
+      "sha256": "64ff7d1eefe2accdddabc6d281fe36c95b245c004735018a8a6ca454ea3f6a4a",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 157286400
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part017",
+      "bytes": 10485760,
+      "gitBlobSha1": "19d729d8c1bd778bbc8f9c99e0089e2807c0a4e2",
+      "mode": "100644",
+      "sha256": "6b86ac99ccae69e0dc6e163afe8ee9b34b7f4cfecb46b6e1282c0d57ec2e3463",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 167772160
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part018",
+      "bytes": 10485760,
+      "gitBlobSha1": "2e27d88212fcb9814b7db5546c6b86b97e05d2b0",
+      "mode": "100644",
+      "sha256": "4ac4e2e536a00fec3d693209634f319b18b74bd6ea2ea8c19f0aefec607f2bd9",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 178257920
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part019",
+      "bytes": 10485760,
+      "gitBlobSha1": "521b6cf0f86cc3f1c54335d2a7b5a4a6fc56ec2b",
+      "mode": "100644",
+      "sha256": "b18ff7e978bec4455eee24530c8a3348b870db46a280ee792b473e13d34e4e2f",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 188743680
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part020",
+      "bytes": 10485760,
+      "gitBlobSha1": "081e610da82ae54ebc8b81cbcf141dd06d4072d4",
+      "mode": "100644",
+      "sha256": "e73628eb799cf76297c536c04950cf4eb62aad30990f3fdbc39a08728459f7a3",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 199229440
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part021",
+      "bytes": 10485760,
+      "gitBlobSha1": "50195883fdb5ed8cad689435321468b645edf976",
+      "mode": "100644",
+      "sha256": "8c78b28be78b02d46c7c351bfcb81114287ea237888245d18b184a97ec970c64",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 209715200
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part022",
+      "bytes": 10485760,
+      "gitBlobSha1": "b70ae41f1ed7355a106bb88c88f87275b5239331",
+      "mode": "100644",
+      "sha256": "68bd336bcb284fd997c0ffc714cea161db245a73a5fb32624bc0b45b6a5c7237",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 220200960
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part023",
+      "bytes": 10485760,
+      "gitBlobSha1": "6e24bee90c3c560929529c7ebefa55ca7d2764e5",
+      "mode": "100644",
+      "sha256": "dd86374eed69d6df43c225206846cb606adc36ff84d94ce8850505d01a5ffcce",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 230686720
+    },
+    {
+      "path": "archives/local-recovery-20261125/alien-resurrection/ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip.part024",
+      "bytes": 8395416,
+      "gitBlobSha1": "9477affc7af32614bb98e0f195febdadf73d444b",
+      "mode": "100644",
+      "sha256": "2ab2846e8a743a6ae98fa92127b4a29a8bd470ffaff3019f45ba1b4265ec05c5",
+      "archiveId": "alien-resurrection-v125",
+      "offset": 241172480
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part001",
+      "bytes": 6291456,
+      "gitBlobSha1": "26ccca600c751fb14c271f80f17cfd3d8a962e24",
+      "mode": "100644",
+      "sha256": "6098da5c0b00edfaf12b980a96e85e3e8eb67323dd814f3b4f6cf2e8cae833f5",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "814737ba4e5987407de5bec6fecc63d3fbad1b5b",
+      "mode": "100644",
+      "sha256": "eb9d7fd332a0e1ba40b730076a68945294535b3e857d7672abca5fea18620d87",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 6291456
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "1993fa4fcec6db8666b3eba11f53fef01d376bc4",
+      "mode": "100644",
+      "sha256": "917377b6b8783c9aef80033c547008549917800e0dca54b94ec97da16a3ec6e5",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 16777216
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "fc9eaea7ff690fdf0f0f7756c76f264eb6e09005",
+      "mode": "100644",
+      "sha256": "4d7b183e065dba1b3cac0ce1c434d4d5a9741ac54a2be00742a31f50d2841b19",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 27262976
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "2b48d36592c7cd8ace3a448be419e9de4ccf5dde",
+      "mode": "100644",
+      "sha256": "50a982166742f3bd71c6ab712fb61f1b2bd21c8eb1aba7e47c227d470ca04057",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 37748736
+    },
+    {
+      "path": "archives/local-recovery-20261125/avp-2004/ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip.part006",
+      "bytes": 10469518,
+      "gitBlobSha1": "6a0d75365ca6b40aed063fffbf71dd7b5b457373",
+      "mode": "100644",
+      "sha256": "bf6aab76e57b8bf4559b4f906befa6f1fbd139f588f7fdd06383bf19a58b1b30",
+      "archiveId": "avp-2004-v0-11-0",
+      "offset": 48234496
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part001",
+      "bytes": 10485760,
+      "gitBlobSha1": "2829795684e2f4ce04fb5310804d5c55f1159e76",
+      "mode": "100644",
+      "sha256": "65c882a0afc4603dc60f3bb8a38d2dbcc43783c384582bbca6665e81388b0a32",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 0
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part002",
+      "bytes": 10485760,
+      "gitBlobSha1": "b8170b4039e6b3b838fc5243901e7ffde50c25de",
+      "mode": "100644",
+      "sha256": "061277962ea92c166b814dd40554c5e18fb74b4d91d88508c2ecedf1ff818518",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 10485760
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part003",
+      "bytes": 10485760,
+      "gitBlobSha1": "a546be132ef87d67cb168dfb576f0f9f84cf4aff",
+      "mode": "100644",
+      "sha256": "314b8597158672f85a026cf997ebf9976dff5c2bff47889e8412c6198af16182",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 20971520
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part004",
+      "bytes": 10485760,
+      "gitBlobSha1": "42a3981c779e1fe497c317ba7c183045e6f71714",
+      "mode": "100644",
+      "sha256": "770dbca5c80a051162f21d239083d7b45fbb9387c023bbe76af696911c055dba",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 31457280
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part005",
+      "bytes": 10485760,
+      "gitBlobSha1": "90d68ead29f36f91fbc3b7b27ad6b79498fcd47c",
+      "mode": "100644",
+      "sha256": "a8b524cce48cd4cb3beef5840b1a7100a0effab409b2c4fd24ab3e6fd733322c",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 41943040
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part006",
+      "bytes": 10485760,
+      "gitBlobSha1": "2beb999a7fdffb1f8c16b26af93d96f37f76021e",
+      "mode": "100644",
+      "sha256": "3db27e25dc05170d92edc8c4597cd1a1c091ead3feae616f069a0ad788eabf9f",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 52428800
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part007",
+      "bytes": 10485760,
+      "gitBlobSha1": "ab96487cf5dcb3aede5e311d7bf064c5a8fbd6d9",
+      "mode": "100644",
+      "sha256": "e554bfd55bf6956e22d58eba6783072508df770a6e1100d84f75aaf26643941c",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 62914560
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part008",
+      "bytes": 10485760,
+      "gitBlobSha1": "8634ce32e0020a546e11812e72cc4c1189adc9ae",
+      "mode": "100644",
+      "sha256": "2876fcbce9c0f71d308f41e9591b2d62403e3786560ba94b999d98bafdc278db",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 73400320
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part009",
+      "bytes": 10485760,
+      "gitBlobSha1": "eb0bf153c28696f68fcea342406de04450a939ed",
+      "mode": "100644",
+      "sha256": "38bdf37ef8eedf8296ea3997956f5fcca5342b90ff8c1baf92a548bc2ccb1d58",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 83886080
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part010",
+      "bytes": 10485760,
+      "gitBlobSha1": "ef1ab252542061c19264826912af3cae6163559c",
+      "mode": "100644",
+      "sha256": "79683a5b3f573e45286caa5fbf10e5be5ee4bfab5c7f38c41b84a1839f61116d",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 94371840
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part011",
+      "bytes": 10485760,
+      "gitBlobSha1": "6a90ce64139d982ee2045b907b08eb9d173a86af",
+      "mode": "100644",
+      "sha256": "9423fc96038234984a24fdfe364af7f643df6f35cf08b40d79a235cb1aa8b168",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 104857600
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part012",
+      "bytes": 10485760,
+      "gitBlobSha1": "e919d5b541432d2feca32876db543125d1c0b5f0",
+      "mode": "100644",
+      "sha256": "a7bebfc309d01ad7c1fa18274cff4d99cbfe2c736aae65025699f4435b46cf36",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 115343360
+    },
+    {
+      "path": "archives/local-recovery-20261125/mire-nostromo/ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip.part013",
+      "bytes": 7627414,
+      "gitBlobSha1": "774dec6fb3425e6eb7e58c7fef11165835754d81",
+      "mode": "100644",
+      "sha256": "73361ff73d2bbb0da68c525d27363300785306c076add0efa2537cc8649c241b",
+      "archiveId": "mire-nostromo-v119",
+      "offset": 125829120
+    },
+    {
+      "path": "archives/local-recovery-20261125/reconstruct.py",
+      "bytes": 10133,
+      "gitBlobSha1": "7a98659a605992fc465adc9de4a2d6d82ba5d9b7",
+      "mode": "100755"
+    }
+  ],
+  "archives": [
+    {
+      "id": "alien-resurrection-v125",
+      "module": "alien-resurrection",
+      "version": "125",
+      "filename": "ALIENS_TANTALUS_DLC_ALIEN_RESURRECTION_V125.zip",
+      "bytes": 249567896,
+      "sha256": "cf25334e8a5a08d259a36d8bb4a1dd99d30632e21a0f6f97adcd29b3ed1fefef",
+      "zipMemberCount": 2281,
+      "fragmentCount": 24,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "avp-2004-v0-11-0",
+      "module": "avp-2004",
+      "version": "0.11.0",
+      "filename": "ALIENS_TANTALUS_DLC_AVP_2004_v0.11.0.zip",
+      "bytes": 58704014,
+      "sha256": "0520c1d4ecc47ffd72ea2907807e978ca4fc0b8b26e49a80bc8c83166641a155",
+      "zipMemberCount": 620,
+      "fragmentCount": 6,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "mire-nostromo-v119",
+      "module": "mire-nostromo",
+      "version": "119",
+      "filename": "ALIENS_TANTALUS_MIRE_NOSTROMO_V119_CONTINUITE_NOSTROMO.zip",
+      "bytes": 133456534,
+      "sha256": "d25c5b914eb7f4c6535b828d75a24ff5a9541bcec6a274179ec6a71ed7600577",
+      "zipMemberCount": 1039,
+      "fragmentCount": 13,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-covenant-v0-10-0",
+      "module": "alien-covenant",
+      "version": "0.10.0",
+      "filename": "ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip",
+      "bytes": 77435386,
+      "sha256": "b765f46776df1308d3872f4793478facc18f2b0603ade64fddbe4d996a4183d1",
+      "zipMemberCount": 995,
+      "fragmentCount": 8,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-earth-v11",
+      "module": "alien-earth",
+      "version": "11",
+      "filename": "ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip",
+      "bytes": 23895722,
+      "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
+      "zipMemberCount": 180,
+      "fragmentCount": 3,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-hors-des-ombres-v0-10",
+      "module": "alien-hors-des-ombres",
+      "version": "0.10",
+      "filename": "ALIEN_HORS_DES_OMBRES_V0_10_LE_MARION_PIECE_PAR_PIECE.zip",
+      "bytes": 93449215,
+      "sha256": "8faa1e9c18e8db3ecefc99605ced070cf3acdae1f74b1f65017cadfed5db0bf3",
+      "zipMemberCount": 321,
+      "fragmentCount": 9,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-1-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.1.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.1.0_DLC_AUTONOME.zip",
+      "bytes": 8481728,
+      "sha256": "28d0fae31df52d8b30b18c56b0ee42bcef919ece5a085a82c17c3eb0d0df8fc5",
+      "zipMemberCount": 43,
+      "fragmentCount": 1,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-10-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.10.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.10.0_DLC_AUTONOME.zip",
+      "bytes": 115170444,
+      "sha256": "7a2761f657d20c8c515f460df27b5701ca151aa1cd4ff1a81a7ef5b5dec6a56e",
+      "zipMemberCount": 3029,
+      "fragmentCount": 11,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-2-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.2.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.2.0_DLC_AUTONOME.zip",
+      "bytes": 11958546,
+      "sha256": "0f5a15c7b198f221639e278ea5c4c23bd4f4d77dc8a94f69e043ffa83a7b3e0d",
+      "zipMemberCount": 126,
+      "fragmentCount": 2,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-3-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.3.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.3.0_DLC_AUTONOME.zip",
+      "bytes": 28916956,
+      "sha256": "aa7934ffe009aae627391321202f88a6391b853254a669b710daaf18f6dc9dcd",
+      "zipMemberCount": 433,
+      "fragmentCount": 3,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-4-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.4.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.4.0_DLC_AUTONOME.zip",
+      "bytes": 42458559,
+      "sha256": "44ec3f786124c28f001d969c643bd0a7972450789a0dbfd744f603f47caf96d0",
+      "zipMemberCount": 767,
+      "fragmentCount": 5,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-5-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.5.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.5.0_DLC_AUTONOME.zip",
+      "bytes": 54393612,
+      "sha256": "62dd32eb8cef50c1605b4835c6b3c0e5accaa77a564e22dbadda893e1f82229d",
+      "zipMemberCount": 1465,
+      "fragmentCount": 6,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-6-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.6.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.6.0_DLC_AUTONOME.zip",
+      "bytes": 59082214,
+      "sha256": "e36aa7867c7f5e57034b98d11eea452dd7fbac649dcc989321c4dc51993f9ea7",
+      "zipMemberCount": 1729,
+      "fragmentCount": 6,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-7-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.7.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.7.0_DLC_AUTONOME.zip",
+      "bytes": 68083017,
+      "sha256": "6899a71d15d3fceb18f5de228d1872d7340bf3711a7b866521a45ac11a3f5695",
+      "zipMemberCount": 2013,
+      "fragmentCount": 7,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-8-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.8.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.8.0_DLC_AUTONOME.zip",
+      "bytes": 79991964,
+      "sha256": "3a4f54a44b3c793b057f5d8d2f20b3779e5b956baa3eec8960ed16f8900c36e1",
+      "zipMemberCount": 2331,
+      "fragmentCount": 8,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    },
+    {
+      "id": "alien-mer-des-chagrins-v0-9-0",
+      "module": "alien-mer-des-chagrins",
+      "version": "0.9.0",
+      "filename": "ALIEN_MER_DES_CHAGRINS_v0.9.0_DLC_AUTONOME.zip",
+      "bytes": 84799492,
+      "sha256": "61dc9907fc3309ff4df73b45a1349dbb07e260aa21cdd36504147b2430123714",
+      "zipMemberCount": 2644,
+      "fragmentCount": 9,
+      "checksumSource": "Preserved manifest at source commit; original ZIP independently re-read in this reconciliation only for Alien: Earth V11."
+    }
+  ],
+  "verification": {
+    "sourceGitTreeComplete": true,
+    "sourceManifestPartsMatchGitTree": 121,
+    "sourceGitTreeReusedWithoutBinaryTransformation": true,
+    "originalEarthV11": {
+      "filename": "ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip",
+      "bytes": 23895722,
+      "sha256": "c6402939c7e3085609b191848f710cd2efe84c5bfe6547a2cf95ca39494c38f3",
+      "calculatedFullArchiveGitBlobSha1": "06d6e99b618c8f592f90b2bbe856bca29fb8e76a",
+      "fullArchiveGitBlobIsPublished": false,
+      "archiveHashMatchesSourceManifest": true,
+      "zip": {
+        "member_count": 180,
+        "crc_all_members_pass": true,
+        "bad_member": null,
+        "duplicate_names": 0,
+        "unsafe_paths": []
+      },
+      "parts": [
+        {
+          "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part001",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "617b87da33c483b191d62c1fb68da5e2a8100252f11d7774f7d6016f6873785b",
+          "gitBlobSha1": "01fe031895bd1869c1633fe1feb1f084ef75dc27",
+          "manifestSha256Matches": true,
+          "manifestGitBlobMatches": true,
+          "sourceGitTreeGitBlobMatches": true,
+          "sourceGitTreeBytesMatch": true
+        },
+        {
+          "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part002",
+          "offset": 10485760,
+          "bytes": 10485760,
+          "sha256": "22ffd1258d0ebc88b288a76fea05488dc737699f07d13fae5ee1607d5fcbe6b0",
+          "gitBlobSha1": "2e6182a97b50bd9fea8dd53dea4bf5ea6bc4c873",
+          "manifestSha256Matches": true,
+          "manifestGitBlobMatches": true,
+          "sourceGitTreeGitBlobMatches": true,
+          "sourceGitTreeBytesMatch": true
+        },
+        {
+          "path": "archives/local-recovery-20261125/alien-earth/ALIEN_EARTH_DLC_V11_MODULE_COMPLET.zip.part003",
+          "offset": 20971520,
+          "bytes": 2924202,
+          "sha256": "3c73fba993587e3fef936599a8d027db43e877c1e5d5747f563f872122e7eb36",
+          "gitBlobSha1": "a7a7653ba670a5a92657ac07d78c92cc3b5ed0a6",
+          "manifestSha256Matches": true,
+          "manifestGitBlobMatches": true,
+          "sourceGitTreeGitBlobMatches": true,
+          "sourceGitTreeBytesMatch": true
+        }
+      ],
+      "comparisonPassed": true,
+      "method": "Original Library bytes sliced at manifest offsets; every slice matched both manifest SHA-256 and Git blob SHA-1 present in the non-truncated GitHub commit tree. No remote binary duplicate was downloaded."
+    },
+    "runtimeAndGameplayTests": "Not rerun for this archive-only reconciliation.",
+    "sourceAdmissionAndCI": "No admission, verifier or runtime code is changed. The new head must receive its own source-admission and CI results; no CI success is claimed.",
+    "fidelity": "Archival preservation does not certify playable integration or visual 1:1 fidelity."
+  }
+}
