@@ -489,6 +489,35 @@ export const AVP_FIORINA_V116_SUCCESSORS_20261125 = Object.freeze(Object.fromEnt
 ));
 // END FIORINA V116 HOST RECEIPTS
 
+// BEGIN DLC BIBLE DOCUMENT HOST RECEIPTS 20261126
+// Source-only paths follow the exact V116 baseline. Historical receipts and
+// earlier QA remain unchanged; this stage grants no artistic or runtime approval.
+export const AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126 = 'b0df1877a058f0818f96437fdfdea3f21ba7f415';
+export const AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "6c42dac3d674ebbfb07a3bb5953faa76d5d246f10b889b793d9d916031efcf3f",
+    "currentSha256": "699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END DLC BIBLE DOCUMENT HOST RECEIPTS 20261126
+
+// BEGIN DLC BIBLE BRIDGE HOST RECEIPTS 20261126
+// PR 68 added the campaign-to-DLC index link without its source successor.
+// Record that exact document change after the published document-admission stage.
+// This source-only receipt changes no campaign content, game state or art status.
+export const AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126 = '16686e8681cc0370db3fa3df2967704ef1862155';
+export const AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+    "previousSha256": "aa4681a3a1eec25fb8bb2ef4502fd0a0dbcffd10bb57a8092b3fbc559bfc51b2",
+    "currentSha256": "0828b50f85fb83f3e10a831ceb0f8d5aa489e20a289007057758d03b836bfcf2"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END DLC BIBLE BRIDGE HOST RECEIPTS 20261126
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -514,8 +543,20 @@ export function reviewedFiorinaSpriteHostDigest20261125(path, endpoint) {
 }
 
 export function reviewedFiorinaV116HostDigest20261125(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_FIORINA_V116_SUCCESSORS_20261125,
+  const published = advanceReceipt(path, endpoint, AVP_FIORINA_V116_SUCCESSORS_20261125,
     'Broken Fiorina-V115-to-V116 source chain: ');
+  return reviewedDlcBibleDocumentsHostDigest20261126(path, published);
+}
+
+export function reviewedDlcBibleDocumentsHostDigest20261126(path, endpoint) {
+  const published = advanceReceipt(path, endpoint, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
+    'Broken V116-to-DLC-bible-documents source chain: ');
+  return reviewedDlcBibleBridgeHostDigest20261126(path, published);
+}
+
+export function reviewedDlcBibleBridgeHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126,
+    'Broken DLC-bible-document-bridge source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -535,7 +576,8 @@ export function reviewedAliensIncomingDigest20261125(path, endpoint) {
 const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_QA_SUCCESSORS_20261125),
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
-  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125)])];
+  ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126),
+  ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -545,7 +587,8 @@ export function avpHostRuntimeSources20261125(view) {
     if (!Object.hasOwn(result, path)) continue;
     const receipts = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
-      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path]].filter(Boolean);
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
+      AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path], AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -562,6 +605,10 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'Fiorina sprites require the exact published continuation base');
   assert.equal(AVP_FIORINA_V116_BASELINE_20261125, 'ae4e49bef5fea639d0c381466aefea85f8a57300',
     'Fiorina V116 requires the exact merged V115 continuation base');
+  assert.equal(AVP_DLC_BIBLE_DOCUMENTS_BASELINE_20261126, 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
+    'DLC bible documents requires the exact merged V116 continuation base');
+  assert.equal(AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126, '16686e8681cc0370db3fa3df2967704ef1862155',
+    'DLC bible bridge requires the exact published PR 68 document head');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -572,7 +619,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
   });
   for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125, AVP_FIORINA_QA_SUCCESSORS_20261125,
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
-    AVP_FIORINA_V116_SUCCESSORS_20261125]) {
+    AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
+    AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -626,11 +674,27 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.equal(receipt.previousSha256, AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path].currentSha256,
       'Fiorina V116 must follow its exact merged V115 endpoint: ' + path);
   }
+  for (const [path, receipt] of Object.entries(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126)) {
+    const prior = AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(prior, 'DLC bible documents requires an exact published host predecessor: ' + path);
+    assert.equal(receipt.previousSha256, prior.currentSha256,
+      'DLC bible documents must follow the exact V116 endpoint: ' + path);
+  }
+  assert.deepEqual(Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ['docs/narrative/CAMPAGNE_PRINCIPALE.md'],
+    'The bible bridge can advance only the exact reviewed campaign document');
+  for (const path of Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126))
+    for (const receipts of [AVP_HOST_SUCCESSORS_20261125, AVP_FIORINA_JOIN_SUCCESSORS_20261125,
+      AVP_FIORINA_QA_SUCCESSORS_20261125, AVP_ALIENS_JOIN_SUCCESSORS_20261125,
+      AVP_FIORINA_SPRITES_SUCCESSORS_20261125, AVP_FIORINA_V116_SUCCESSORS_20261125,
+      AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126])
+      assert.equal(Object.hasOwn(receipts, path), false, 'The bible bridge must preserve every existing host receipt: ' + path);
   const paths = hostPaths();
   for (const path of paths) {
     const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path]
       || AVP_FIORINA_QA_SUCCESSORS_20261125[path] || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path]
-      || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]).previousSha256;
+      || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path] || AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path]).previousSha256;
     assert.equal(sha(readSource(path)), reviewedAvpHostDigest20261125(path, seed), 'Unreviewed AVP host source bytes: ' + path);
   }
   return Object.freeze({ baselineCommit: AVP_HOST_BASELINE_20261125, successors: paths.length,
