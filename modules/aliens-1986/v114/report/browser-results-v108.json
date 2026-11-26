@@ -1,0 +1,575 @@
+{
+  "version": "108.0.0-rc.1",
+  "browser": "Chromium through Playwright",
+  "transport": "distributed HTML bytes via set_content, unmodified Blob module loader",
+  "htmlSha256": "dd0d86b8046aa354020df7155b0c5f59213b0cf14e44500d55e6e5d5c34ebbd7",
+  "nativeTantalus": false,
+  "tests": [
+    {
+      "name": "Six inspections et une opération distincte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Démarrage opération à Hadley",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Newt dans son lieu avant le secours",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État contient les six lieux sans HTML de contrôle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ordre tenir au clavier conserve la position",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouverture réellement différée",
+      "ok": true,
+      "detail": {
+        "kind": "open",
+        "roomId": "v106-hadley",
+        "id": "service-gate",
+        "elapsed": 0.7333000000000005,
+        "duration": 0.88,
+        "x": 572.5828000000002,
+        "z": 198,
+        "hp": 100
+      }
+    },
+    {
+      "name": "Pause ne consomme pas le temps du geste",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Déplacement annule le geste sans ouvrir",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Ouverture achevée au clavier",
+      "ok": true,
+      "detail": {
+        "action": null,
+        "p": {
+          "id": "ripley",
+          "x": 572.5828000000002,
+          "z": 198,
+          "roomId": "v106-hadley",
+          "hp": 100,
+          "ammo": 48,
+          "alive": true,
+          "invulnerable": 0,
+          "phase": "idle",
+          "clock": 0,
+          "aim": null,
+          "order": "follow",
+          "anchor": null,
+          "facing": 1,
+          "recruited": true
+        },
+        "note": "Passage ouvert."
+      }
+    },
+    {
+      "name": "Tirs réels consomment les munitions",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux contacts neutralisés par les tirs UI",
+      "ok": true,
+      "detail": [
+        {
+          "id": "warrior-a",
+          "x": 681.2607863579684,
+          "z": 195.26094272502033,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        },
+        {
+          "id": "warrior-b",
+          "x": 908.1238352260857,
+          "z": 220.24832745846467,
+          "hp": 0,
+          "ammo": 0,
+          "alive": false,
+          "invulnerable": 0,
+          "phase": "dead",
+          "clock": 0,
+          "aim": null,
+          "waiting": false
+        }
+      ]
+    },
+    {
+      "name": "Premier raccord traversé avec la vraie équipe",
+      "ok": true,
+      "detail": "v107-operations"
+    },
+    {
+      "name": "Porte de la salle quittée conservée",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Objectif avancé seulement après transfert",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export/import exact de tous les lieux",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Champ de rôle injecté refusé sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "État de porte erroné refusé sans mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inspection sentinelle sans progression",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle ne gaspille pas devant la porte",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Sentinelle tire après ouverture",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte hors scène et HUD",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Archives remplacent la scène",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Perte de focus met en pause",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bilan du parcours terminé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "HUD et ordres hors canvas 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 229
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 319,
+          "width": 844,
+          "height": 44
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        }
+      }
+    },
+    {
+      "name": "Pas de débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options accessibilité activables",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Reprise du parcours V108 : 03-relais",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise du parcours V108 : 04-newt",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise du parcours V108 : 05-retour-operations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux menaces restent dans Hadley après le départ",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Poursuite exécutée hors champ puis arrivée dans Operations",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Une seule instance par menace après changement de pièce",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Horloges des lieux hors champ avancées",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Impulsion T produit une mesure de mouvement",
+      "ok": true,
+      "detail": {
+        "cooldown": 1.6501000000000015,
+        "age": 0.7499,
+        "samples": [
+          {
+            "bearing": 4,
+            "range": 300
+          }
+        ],
+        "pulses": 1
+      }
+    },
+    {
+      "name": "Échos quantifiés sans identité, position précise ou PV",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Double impulsion refusée pendant recharge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Échos périmés après deux secondes",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Reprise exacte de la mémoire, des mondes et de la recharge",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Champ de mémoire inconnu rejeté avant mutation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Créature dupliquée refusée atomiquement",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript contacts",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    },
+    {
+      "name": "R lance une ouverture temporisée réelle",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Pause fige le sas et toutes les mémoires",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Marche annule la réouverture sans libérer la liaison",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Réouverture à terme modifie le seul état partagé",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Carte reste sans liste de menaces",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "V active la prudence dans la simulation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "L’interface reflète la prudence",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Import V107 préserve les ressources et le jalon",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune poursuite inventée à la migration",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Audio local activable sans média externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JavaScript contacts",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    },
+    {
+      "name": "Commandes tactiles visibles dans le flux de jeu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et commandes tactiles hors canvas en 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 185
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 229,
+          "width": 844,
+          "height": 46
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 275,
+          "width": 844,
+          "height": 44
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        },
+        "touch": {
+          "x": 0,
+          "y": 319,
+          "width": 844,
+          "height": 44
+        }
+      }
+    },
+    {
+      "name": "Canvas visible en paysage tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton prudence accessible au tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement portrait 390×844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et pause accessibles en portrait",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options en pause tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête réseau externe",
+      "ok": true,
+      "detail": [
+        "blob:null/cfe04025-f377-4ef9-b45e-770d4f9c0801",
+        "blob:null/6936bbe8-9cc5-48c1-bcbc-b97960162a54",
+        "blob:null/29b036be-17c9-4eed-be7f-437d8a3c9e21",
+        "blob:null/b26a26ec-f4df-46de-b305-95d06b919ab4",
+        "blob:null/e56d4499-2b49-4bc5-af1d-8a4e550c6fdb",
+        "blob:null/3931e8e7-5f48-4fdc-bd42-8c837b1c1eee",
+        "blob:null/138c6e0b-fc97-4ff8-aa21-f33888bc24bc",
+        "blob:null/05eb3d80-f9d0-42fa-a6f9-fa641f93dcfa",
+        "blob:null/5beb874b-74bd-4038-976e-84c0938485a3",
+        "blob:null/07f5cf46-2367-4892-af32-bc7eafd26742"
+      ]
+    },
+    {
+      "name": "Aucune erreur UI tactile",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "00_menu.png",
+      "origin": "HTML distribué au menu",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "01_ouverture_en_cours.png",
+      "origin": "Approche et ouverture au clavier depuis le début du parcours",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "02_operations_arrivee.png",
+      "origin": "Premier raccord depuis Hadley joué au clavier/souris",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "06_sentry_contact.png",
+      "origin": "Inspection isolée : déplacement, ordre couvrir et ouverture joués au clavier",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "07_carte_liaisons.png",
+      "origin": "Carte des lieux visités au point de défense du parcours complet",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "08_bilan_repli.png",
+      "origin": "État final non modifié du parcours complet automatisé ; import puis affichage du bilan",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "09_service_844x390.png",
+      "origin": "Viewport Chromium 844×390, inspection de la nouvelle maintenance",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "03_relais_retabli.png",
+      "origin": "État non modifié du parcours complet V108 piloté par entrées publiques : 03-relais",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "04_newt_recrutee.png",
+      "origin": "État non modifié du parcours complet V108 piloté par entrées publiques : 04-newt",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "05_escorte_operations.png",
+      "origin": "État non modifié du parcours complet V108 piloté par entrées publiques : 05-retour-operations",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "10_contact_poursuite.png",
+      "origin": "Reprise du point de fuite non modifié, marche au clavier puis poursuite exécutée en direct dans Chromium",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "11_detecteur_mesure.png",
+      "origin": "Point de poursuite non modifié puis vraie impulsion T dans le navigateur",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "12_sas_isole.png",
+      "origin": "État d’isolement obtenu par le pilote avec R, sans modification du fichier",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "13_reouverture_sas.png",
+      "origin": "Commande R réelle sur la liaison fermée",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "14_carte_isolement.png",
+      "origin": "Carte relevée affichée par M sur le même état d’isolement, sans contacts radar",
+      "nativeTantalus": false,
+      "imageEdited": false
+    },
+    {
+      "file": "15_tactile_844.png",
+      "origin": "Viewport 844×390 avec has_touch/is_mobile, commande prudente cliquée; pas de téléphone physique",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "physicalPhoneTested": false
+}

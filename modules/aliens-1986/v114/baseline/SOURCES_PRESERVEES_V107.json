@@ -1,0 +1,57 @@
+{
+  "baseline": "ALIENS_1986_V107_RALLIER_OPERATIONS_RC1.zip",
+  "sha256": "be41861ba77b4c4aa80ff0360b00bafc1f2aaa9cc7023c9492a7c6795248008f",
+  "files": [
+    {
+      "path": "src/spatial-core.mjs",
+      "sha256": "974cbdf30ee94e57d142c62e03cc249fc6e11dc4fff63d8214b39b19747bbd35",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "src/validation-scenes.mjs",
+      "sha256": "9e2fd1a2b4f1d5303bb69918c4a0ef46d51e61f290ff8d6a0ad8b894634ddb19",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "src/operation-scenes-v107.mjs",
+      "sha256": "41e351a13feeb1d9b5f6477fc2485446f73493b72425d9a5d23932be5f5a3bb3",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "src/operation-v107.mjs",
+      "sha256": "012eb882162c7ffa3ab98e5b8b7f55931c21bbfd94c360cae452d76b5d975fa9",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "src/aliens-1986-spatial-v106.mjs",
+      "sha256": "13ba52f166a4b2a5c8647c779d8cca59b84acfafbfdeea7ae0e49edc31fe5a43",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "qa/adapter.test.mjs",
+      "sha256": "7e6e5237a16a74042e073998e5cd1c498d6ff59a07561c5e3d6c1422232f017c",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "qa/core.test.mjs",
+      "sha256": "ecc82666217f9a1b76365192aeb3b880d1f7d93d4936797aab223ac37d32961c",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "qa/installer.test.mjs",
+      "sha256": "e0181e70e659f38e95069ba56848120653ec283b04e0878c8d3cc0cc57d0e038",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "qa/operation.test.mjs",
+      "sha256": "7b292f5302fd3bac360db397ca914a5529dc61157fd313ed3c13244e8f7d78b9",
+      "byteIdenticalToV107": true
+    },
+    {
+      "path": "tools/stage-v106.mjs",
+      "sha256": "9f5bbf89bb36a11fdf72b9d49a1aedb36159ce73683915e590558f78e653773a",
+      "byteIdenticalToV107": true
+    }
+  ],
+  "newSpatialCore": "src/spatial-core-v108.mjs"
+}

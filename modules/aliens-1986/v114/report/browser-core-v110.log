@@ -1,0 +1,18 @@
+Huit inspections et une opération distincte True
+Démarrage opération à Hadley True
+Newt dans son lieu avant le secours True
+État contient les huit lieux sans HTML de contrôle True
+Ordre tenir au clavier conserve la position True
+Ouverture réellement différée True
+Pause ne consomme pas le temps du geste True
+Déplacement annule le geste sans ouvrir True
+Ouverture achevée au clavier True
+Tirs réels consomment les munitions True
+Deux contacts neutralisés par les tirs UI True
+Premier raccord traversé avec la vraie équipe True
+Porte de la salle quittée conservée True
+Objectif avancé seulement après transfert True
+Export/import exact de tous les lieux True
+Champ de rôle injecté refusé sans mutation True
+État de porte erroné refusé sans mutation True
+{"passed": 17, "total": 17, "errors": [], "captures": 3}

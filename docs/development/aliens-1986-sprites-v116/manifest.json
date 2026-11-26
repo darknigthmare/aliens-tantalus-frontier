@@ -1,0 +1,3736 @@
+{
+  "schema": "aliens1986-raster-assets-v116",
+  "version": 116,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "title": "Aliens (1986) — sprites individuels et raccordement V116",
+  "baseCommit": "334fe15ba0b7e01de277a13bfc025b208163882d",
+  "preservedArchive": {
+    "version": "114.0.0-rc.1",
+    "files": 1159,
+    "sha256": "c6dfb2baa886d7b1651463f9685a666f37185aaa0d5cec7d42ccae928762d1e2"
+  },
+  "counts": {
+    "total": 123,
+    "v115": 70,
+    "reusedExisting": 11,
+    "newlyGenerated": 42
+  },
+  "filmFidelityValidated": false,
+  "animationCyclesValidated": false,
+  "runtime": {
+    "mode": "presentation-layer-on-immutable-v114",
+    "saveSchema": 114,
+    "selection": "Only available keys are selected; absent poses retain the original renderer.",
+    "bounds": "V115 uses measured alpha128 bounds; other entries are measured after image decode.",
+    "scope": "Registry eligibility does not establish that an asset is used by an existing actor or prop."
+  },
+  "assets": [
+    {
+      "id": "alarm-unit",
+      "label": "Hadley — sirène murale",
+      "path": "assets/dlc/aliens-1986/v115/architecture/alarm-unit.png",
+      "sha256": "43994fe8160f3a689e60ede33102a1a78697f481f2e524a1ca61bb2c2106a9d9",
+      "bytes": 1775944,
+      "width": 1218,
+      "height": 1292,
+      "bbox": [
+        167,
+        102,
+        1047,
+        1219
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        607,
+        1219
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "apc-monitors",
+      "label": "M577 — baie de moniteurs",
+      "path": "assets/dlc/aliens-1986/v115/architecture/apc-monitors.png",
+      "sha256": "20de569984eff0f5813035a7749cd0b555661c5723b90d746ff3de2dc136b26c",
+      "bytes": 2610668,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        20,
+        24,
+        1519,
+        997
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        769.5,
+        997
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "apone-idle-right",
+      "label": "Apone — tenue de sergent",
+      "path": "assets/dlc/aliens-1986/v115/characters/apone-idle-right.png",
+      "sha256": "e9f06759352031117da8e607f4f5e0fb6efec8c887aebc64458fa8b58fce7d76",
+      "bytes": 1702095,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        275,
+        11,
+        721,
+        1526
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        498,
+        1526
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "apone-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/apone-interact-right.png",
+      "sha256": "3c5f0fd9d38be4afae4d74578f1a7128939717956d195a7e9c6b830bf7a533ef",
+      "bytes": 1817918,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "apone-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/apone-walk-right.png",
+      "sha256": "6d80f98dee845daf9ec6320cdc4c9bb664078d467c06e89bc68ec401aba823d3",
+      "bytes": 1975884,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "armament-case-closed",
+      "label": "Armurerie — mallette fermée",
+      "path": "assets/dlc/aliens-1986/v115/props/armament-case-closed.png",
+      "sha256": "37cc38c13e51825a8d8cf6cdbae3686e9bc6bf05921026571ea3580ad3f12903",
+      "bytes": 1874696,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        30,
+        67,
+        2140,
+        677
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1085,
+        677
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "armament-case-open",
+      "label": "Armurerie — caisse ouverte assortie",
+      "path": "assets/dlc/aliens-1986/v115/props/armament-case-open.png",
+      "sha256": "e0746e97934e22b7aba347679e382df444f64cb32e58d971388d27884b9baff6",
+      "bytes": 2235941,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        223,
+        9,
+        1947,
+        709
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1085,
+        709
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "armor-rack",
+      "label": "Armurerie — support d’armures",
+      "path": "assets/dlc/aliens-1986/v115/architecture/armor-rack.png",
+      "sha256": "033415354abfb526e454fcdd6c35f445e1fcc48c6364dbceea6df8ef201a2cb0",
+      "bytes": 1511611,
+      "width": 1199,
+      "height": 1312,
+      "bbox": [
+        15,
+        33,
+        1184,
+        1290
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        599.5,
+        1290
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "beacon",
+      "label": "Repli — balise portative",
+      "path": "assets/dlc/aliens-1986/v115/props/beacon.png",
+      "sha256": "97b9beb81815baac04ec60525cd23f72ffc6320ceb547f8a6337c89b143eef96",
+      "bytes": 1631322,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        299,
+        53,
+        724,
+        1508
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        511.5,
+        1508
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "beacon-case",
+      "label": "Coffret — quatre logements cohérents",
+      "path": "assets/dlc/aliens-1986/v115/props/beacon-case.png",
+      "sha256": "9d2f9eeaafd3650dddc6b97a2e6110796ecd08f0823820f5a9047ceb253f8787",
+      "bytes": 2299957,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        184,
+        11,
+        1323,
+        1022
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        753.5,
+        1022
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "beacon-case-closed",
+      "label": "Coffret de balisage — fermé",
+      "path": "assets/dlc/aliens-1986/v115/props/beacon-case-closed.png",
+      "sha256": "0e885a54e0643939faa88a768a619b78ee7d972a01b6976230b2d6d511bd036b",
+      "bytes": 1622285,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        178,
+        448,
+        1281,
+        1018
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        729.5,
+        1018
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "bishop-damaged",
+      "label": "Bishop — variante synthétique du final",
+      "path": "assets/dlc/aliens-1986/v115/variants/bishop-damaged.png",
+      "sha256": "5d756e7dd484e4b146f3a0d4134344f6b2654ee090661ec98d9d89318370330b",
+      "bytes": 1987713,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        77,
+        18,
+        1374,
+        999
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        725.5,
+        999
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "bishop-idle-right",
+      "label": "Bishop — détourage corrigé",
+      "path": "assets/dlc/aliens-1986/v115/characters/bishop-idle-right.png",
+      "sha256": "814795c8cb8a2ff3a15cf15ca510a036ab9f33ecf72f4ce95de6790cfac979e0",
+      "bytes": 1689272,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        292,
+        7,
+        682,
+        1532
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        487,
+        1532
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "bishop-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/bishop-interact-right.png",
+      "sha256": "8ab70a6c7aa2be7f107cb2d995609be42566eae864aa1a0c0015c95e78745c5a",
+      "bytes": 1748924,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "bishop-uplink",
+      "label": "Bishop — terminal de liaison",
+      "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png",
+      "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+      "bytes": 1985049,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        208,
+        4,
+        1326,
+        1021
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        767,
+        1021
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "bishop-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/bishop-walk-right.png",
+      "sha256": "5a1dbf6634ab6171eeaad78d63fb3bad29de77c5561b091cb0dc6ca723a6b3a6",
+      "bytes": 1907641,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "burke-idle-right",
+      "label": "Burke — gilet et chemise de terrain",
+      "path": "assets/dlc/aliens-1986/v115/characters/burke-idle-right.png",
+      "sha256": "ace8149a7ea4fa0eb0bea083f5e32f9799c3dce87f70ee5a7612b5811ca701d8",
+      "bytes": 1592804,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        281,
+        10,
+        676,
+        1532
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        478.5,
+        1532
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "burke-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/burke-interact-right.png",
+      "sha256": "be1809e6f39096c881d02bc83beea46981b59deed86c2e1d41ea2c18dbdcc45d",
+      "bytes": 1575163,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "burke-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/burke-walk-right.png",
+      "sha256": "690490afcaad363e6f1d282c7c097e17d7daf936aa73cac583ab7290b26f5412",
+      "bytes": 1869912,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "cargo-crate",
+      "label": "Sulaco — caisse de fret",
+      "path": "assets/dlc/aliens-1986/v115/props/cargo-crate.png",
+      "sha256": "a68420aa374557c8dbc607081a78ad699cad816f2b734a5d4d4fadf51ff4fadf",
+      "bytes": 2264356,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        72,
+        106,
+        1690,
+        836
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        881,
+        836
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "casey-head",
+      "label": "Casey — cheveux blond sale corrigés",
+      "path": "assets/dlc/aliens-1986/v115/props/casey-head.png",
+      "sha256": "1fb033edaa9a6beea81be0338436bedc62e423840e975f31b8dd6e86099405b5",
+      "bytes": 1814403,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        205,
+        61,
+        1104,
+        1152
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        654.5,
+        1152
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "chestburster-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/chestburster-idle-right.png",
+      "sha256": "132848483cb8855dc8affc9767bb548a5f5030bd9735bf7f11d37f37ab3f3e90",
+      "bytes": 760100,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        1086,
+        724
+      ],
+      "category": "creatures",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "colonist-cocoon",
+      "label": "Ruche — colon adulte encoconné",
+      "path": "assets/dlc/aliens-1986/v115/architecture/colonist-cocoon.png",
+      "sha256": "e799683a79747ac2f8090331661b91ff88ec50d181513eb9908e16e7e7c0a6b8",
+      "bytes": 1914250,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        224,
+        4,
+        770,
+        1527
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        497,
+        1527
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "combat-knife",
+      "label": "Couteau Explorer MM-IV — Hudson/Bishop",
+      "path": "assets/dlc/aliens-1986/v115/props/combat-knife.png",
+      "sha256": "df923886e7af0d68ba7887df4c96f244a44a464c5da4611ce3dd63b91ea5d3af",
+      "bytes": 683047,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        97,
+        209,
+        2075,
+        522
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1086,
+        522
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "comms",
+      "label": "USCM — micro-casque Racal Minilite",
+      "path": "assets/dlc/aliens-1986/v115/props/comms.png",
+      "sha256": "4d2ee01e598d7795a6182871b373ec10a11a1bd283e89c10688664c890c22820",
+      "bytes": 412160,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        150,
+        40,
+        1192,
+        1172
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        671,
+        1172
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "crowe-idle-right",
+      "label": "Crowe — armure The Bird",
+      "path": "assets/dlc/aliens-1986/v115/characters/crowe-idle-right.png",
+      "sha256": "47196d9dbcffecc023ca361a5d7e11b50f49fc64134c76b0f629f6d24db94f58",
+      "bytes": 1708480,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        256,
+        31,
+        735,
+        1510
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        495.5,
+        1510
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "crowe-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/crowe-interact-right.png",
+      "sha256": "1e92e37283222f8f51d48c59137c86e28201f767aa03d2093fba537584460799",
+      "bytes": 1844637,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "crowe-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/crowe-walk-right.png",
+      "sha256": "a57f2f7eb3d94331b2dba696b794ea762faac0b605e4825a838ebd63e8093684",
+      "bytes": 1939397,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "cryo-pillow",
+      "label": "Sulaco — appui-tête de cryostase",
+      "path": "assets/dlc/aliens-1986/v115/props/cryo-pillow.png",
+      "sha256": "3ab47941c56bf751fde04364e62e1ea64a47e09f69a9d14b130153617c961138",
+      "bytes": 1923197,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        17,
+        192,
+        1518,
+        925
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        767.5,
+        925
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "cryopod-sulaco",
+      "label": "Sulaco — caisson de cryostase fermé",
+      "path": "assets/dlc/aliens-1986/v115/architecture/cryopod-sulaco.png",
+      "sha256": "0bf703c67b06330889f36ce8ac9ce6b531264dac106bfc28f8a9230b39cc95f4",
+      "bytes": 2019585,
+      "width": 1983,
+      "height": 793,
+      "bbox": [
+        25,
+        45,
+        1960,
+        747
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        992.5,
+        747
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "dietrich-idle-right",
+      "label": "Dietrich — corpsman",
+      "path": "assets/dlc/aliens-1986/v115/characters/dietrich-idle-right.png",
+      "sha256": "e35c6bd46ee709b3b6f58ba63dcb80edbc95db5779c582fdb9582469428e3f1a",
+      "bytes": 1532950,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        306,
+        107,
+        686,
+        1463
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        496,
+        1463
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "dietrich-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/dietrich-interact-right.png",
+      "sha256": "0838b5d19870d760b15117072056c55b460516fbc045c1e27e959ed4dc91abf9",
+      "bytes": 1684073,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "dietrich-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/dietrich-walk-right.png",
+      "sha256": "41b72c77e9a772e087526162f10baee614a451a7d87bd27c476c027ea651045e",
+      "bytes": 1748784,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "door-frame",
+      "label": "Hadley — cadre de porte assorti au panneau",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-frame.png",
+      "sha256": "4f2c6b67a752d9828545de69e847b4b1d60786a821bb51228bd89e2a621eecc1",
+      "bytes": 1995294,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        130,
+        53,
+        894,
+        1483
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        512,
+        1483
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "door-leaf",
+      "label": "Hadley — panneau coulissant",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+      "bytes": 2540215,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        127,
+        38,
+        896,
+        1504
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        511.5,
+        1504
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "drain-grate",
+      "label": "Drain de Newt — grille",
+      "path": "assets/dlc/aliens-1986/v115/architecture/drain-grate.png",
+      "sha256": "f0a06cd7d6641c6325d6c09253b23bd127c20c5b0ce011fbef2120e43e254c75",
+      "bytes": 2103506,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        22,
+        15,
+        1752,
+        873
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887,
+        873
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "drake-idle-right",
+      "label": "Drake — cadrage complet",
+      "path": "assets/dlc/aliens-1986/v115/characters/drake-idle-right.png",
+      "sha256": "7a8e290634bbb612bd1ac3fffaced9d4ac9e3cd1fa5eb22938ebf913d3e090f3",
+      "bytes": 1577704,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        286,
+        160,
+        779,
+        1382
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        532.5,
+        1382
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "drake-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/drake-interact-right.png",
+      "sha256": "f70633c93450fd71f306bc70ee28537b769f03e111a5c74a32dfe8952c1ff4d6",
+      "bytes": 2017631,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "drake-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/drake-walk-right.png",
+      "sha256": "dc24837616baf635d47fd69114ee0cc48067c3d70bbf013064db1337d9b0be52",
+      "bytes": 2002002,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "egg-closed",
+      "category": "creatures",
+      "path": "assets/user/castes-v87/film_ovomorphe_aliens_1986.png",
+      "sha256": "b7b3c189e4c39a0b12c5fc31828ed134bd2d19d4dcc133e801f913e7ef9077a3",
+      "bytes": 2594158,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "egg-cluster",
+      "label": "Nurserie — grappe d’œufs",
+      "path": "assets/dlc/aliens-1986/v115/architecture/egg-cluster.png",
+      "sha256": "d59faefa346fd28d9a9bc8ca45a1eacdd28bb288b8d603cd655d384eafe57315",
+      "bytes": 2174920,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        28,
+        14,
+        1752,
+        867
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        890,
+        867
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "egg-open",
+      "label": "Œuf — état ouvert",
+      "path": "assets/dlc/aliens-1986/v115/creatures/egg-open.png",
+      "sha256": "d0dedeebadc084c0157d2d2c596d5dabc764db1bbb29c20048080dbeb423a350",
+      "bytes": 2019841,
+      "width": 1261,
+      "height": 1247,
+      "bbox": [
+        140,
+        54,
+        1098,
+        1206
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        619,
+        1206
+      ],
+      "category": "creatures",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "facehugger-idle-right",
+      "label": "Facehugger — sprite individuel",
+      "path": "assets/dlc/aliens-1986/v115/creatures/facehugger-idle-right.png",
+      "sha256": "e8f35a159ab2239f4c73314fef1014989218999e7690f9f9af922774d3f1df27",
+      "bytes": 698963,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        19,
+        246,
+        1753,
+        704
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        886,
+        704
+      ],
+      "category": "creatures",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "facehugger-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/facehugger-walk-right.png",
+      "sha256": "6a91989d3551694974a1389b04f3fd6fcedc632f80c4a4af01faba0f0898a7c9",
+      "bytes": 970535,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "ferro-idle-right",
+      "label": "Ferro — tenue de pilote",
+      "path": "assets/dlc/aliens-1986/v115/characters/ferro-idle-right.png",
+      "sha256": "85973354cf28f357e27f6f9259a1f440b9757eb9fe51180d359c260b439e5006",
+      "bytes": 1634158,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        256,
+        13,
+        753,
+        1527
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        504.5,
+        1527
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ferro-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/ferro-interact-right.png",
+      "sha256": "bc79cd467b17ce14788f6901f7ebaa3dea062a6cda7656adc289f507a08804da",
+      "bytes": 1659158,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "ferro-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/ferro-walk-right.png",
+      "sha256": "7a40726c68fcdb1c3686830146df7f273e197f3042773838e2e0e6e5d4841915",
+      "bytes": 1810933,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "flight-console",
+      "label": "Dropship — module de navigation",
+      "path": "assets/dlc/aliens-1986/v115/architecture/flight-console.png",
+      "sha256": "972ccbda14f4127a53adfcfb5926f164339a4191feebc0c3c648be65e0e113d7",
+      "bytes": 1897992,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        167,
+        19,
+        1119,
+        1176
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        643,
+        1176
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "frost-idle-right",
+      "label": "Frost — armure HEATH",
+      "path": "assets/dlc/aliens-1986/v115/characters/frost-idle-right.png",
+      "sha256": "d35167bc537c473c9cb8bf7197e9d2a36dda042313e3ef57c36f688e4f040eba",
+      "bytes": 1755159,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        245,
+        96,
+        754,
+        1463
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        499.5,
+        1463
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "frost-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/frost-interact-right.png",
+      "sha256": "ce1b1557ccdc70e7fdeb1206cc154232bfb96cbb9b37e92997437a75db5a8a11",
+      "bytes": 1838155,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": [
+        "A preceding generation with the wrong character identity was rejected before runtime integration."
+      ]
+    },
+    {
+      "id": "frost-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/frost-walk-right.png",
+      "sha256": "da58bad7cd77190b959ea4277f963177a338a3e088e98bfb376c1419dfe5430a",
+      "bytes": 1908819,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "gateway-photo",
+      "label": "Gateway — carte portrait d’Amanda",
+      "path": "assets/dlc/aliens-1986/v115/props/gateway-photo.png",
+      "sha256": "3c805c665b2a2509e033d323000cd84eaa2a31c56d5c8bc132951d04848b48b4",
+      "bytes": 2628706,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        87,
+        23,
+        1449,
+        1001
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        768,
+        1001
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "gateway-pillow",
+      "label": "Gateway — oreiller de lit",
+      "path": "assets/dlc/aliens-1986/v115/props/gateway-pillow.png",
+      "sha256": "ba76571dfdc648fe6262657a973b01a9c02419508d116187118b940271fe1562",
+      "bytes": 1832169,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        70,
+        66,
+        1692,
+        829
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        881,
+        829
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "gorman-idle-right",
+      "label": "Gorman — uniforme de commandement",
+      "path": "assets/dlc/aliens-1986/v115/characters/gorman-idle-right.png",
+      "sha256": "7f907334291942593d03c98c08324e48e08b5413419dd398c70e5e69580d6e6b",
+      "bytes": 1459755,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        289,
+        9,
+        690,
+        1535
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        489.5,
+        1535
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "gorman-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/gorman-interact-right.png",
+      "sha256": "267471fe60f5c4f543b69eb4d1e83ba98f1ddd13078ec63d69836984b597d116",
+      "bytes": 1565737,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "gorman-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/gorman-walk-right.png",
+      "sha256": "591fb60b4e5363997fd984401c71f4d3cd1a15f6f4ffab6f2357455984caf0cd",
+      "bytes": 1790450,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "gorman-wounded",
+      "label": "Gorman — retour avec bandage",
+      "path": "assets/dlc/aliens-1986/v115/variants/gorman-wounded.png",
+      "sha256": "b863448c53000fede5f2e129b1456c76bcf2379ace94df9a7f9cdea2f0bf4603",
+      "bytes": 1508770,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        295,
+        18,
+        705,
+        1531
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        500,
+        1531
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "gun-rack",
+      "label": "Armurerie — râtelier",
+      "path": "assets/dlc/aliens-1986/v115/architecture/gun-rack.png",
+      "sha256": "80059015c81e1f2e1398b9b0cac68a8e7318da513bd45932c78d4c6d68493457",
+      "bytes": 1456373,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        19,
+        11,
+        1293,
+        1184
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        656,
+        1184
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "helmet-camera",
+      "label": "Caméra de casque USCM",
+      "path": "assets/dlc/aliens-1986/v115/props/helmet-camera.png",
+      "sha256": "d7417c6e47457b6667fd54dd3aeaa7903f9b3453e6a868ced349acb70fba5a71",
+      "bytes": 1914053,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        70,
+        71,
+        1473,
+        951
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        771.5,
+        951
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "sha256": "3965ef085ed611ea1dba999f683b797f54824495437367e7b2abfa0acd795870",
+      "bytes": 1859098,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "hicks-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-interact-right.png",
+      "sha256": "7b86206b7db41e66405dd10954e4322ed20b503cbe3e0ccc98744cad333df50a",
+      "bytes": 1962526,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "hicks-shotgun",
+      "label": "Hicks — fusil spécifique au film",
+      "path": "assets/dlc/aliens-1986/v115/props/hicks-shotgun.png",
+      "sha256": "be542456f10442de1cc1fcf2bd590e686aa194e0b6764f86b0589160bce41357",
+      "bytes": 851404,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        70,
+        191,
+        2093,
+        615
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1081.5,
+        615
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "hicks-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-walk-right.png",
+      "sha256": "0858cbd44b244d931ea4b2c0b62d249e36eba979337bac5d1ac8dcc3e70df890",
+      "bytes": 1940444,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "hudson-idle-right",
+      "label": "Hudson — armure personnalisée",
+      "path": "assets/dlc/aliens-1986/v115/characters/hudson-idle-right.png",
+      "sha256": "92d170aaad4804412ebe41a222ea62fc93e21e7a20dd1ca03a3dd4d1c6025725",
+      "bytes": 1809525,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        264,
+        7,
+        733,
+        1531
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        498.5,
+        1531
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "hudson-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hudson-interact-right.png",
+      "sha256": "e8c636c3b9a21baba6a41b50c19cc0e4b4079a997d31e8aff5fadb130350fd8e",
+      "bytes": 1851597,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "hudson-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hudson-walk-right.png",
+      "sha256": "4110c7d2378f9ee6130a96a3c4cd0df7cdfb2e832a6e07dcc54feae82e880c51",
+      "bytes": 2026339,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "industrial-pipe",
+      "label": "Processeur — conduite industrielle",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "sha256": "d37704f5c0792d845b3de76d8d9eeb7665cf4c3c3454c99886341b1673ec91bf",
+      "bytes": 1816931,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        11,
+        10,
+        2161,
+        715
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1086,
+        715
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "industrial-tug",
+      "label": "Sulaco — tracteur recadré entier",
+      "path": "assets/dlc/aliens-1986/v115/vehicles/industrial-tug.png",
+      "sha256": "31139bb667731ee86c1dbdb40ec2d138d22fe77890e6ba3c959f501b9beb2f05",
+      "bytes": 1279292,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        123,
+        160,
+        1652,
+        772
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887.5,
+        772
+      ],
+      "category": "vehicles",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "locator-receiver",
+      "label": "Localisateur — récepteur cylindrique",
+      "path": "assets/dlc/aliens-1986/v115/props/locator-receiver.png",
+      "sha256": "b6e31656e5cbdf4dff19423e18b015e24830aba0818148c3918044577e1a109a",
+      "bytes": 1416877,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        379,
+        19,
+        646,
+        1520
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        512.5,
+        1520
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "locator-wrist",
+      "label": "Balise de localisation — bracelet",
+      "path": "assets/dlc/aliens-1986/v115/props/locator-wrist.png",
+      "sha256": "822daf880baa6431b024410d457951eea83f1ba778858544572c50adf7cad1bb",
+      "bytes": 1817781,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        73,
+        12,
+        1229,
+        1194
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        651,
+        1194
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "m240-incinerator",
+      "category": "props",
+      "path": "assets/openai/equipment/v118-weapons/m240-incinerator-native-v118.png",
+      "sha256": "cdd6ffdb64b5ed11b21f7ac57b5052b0fd42c5a11e95ff946adb220195cb5747",
+      "bytes": 855630,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "m314-tracker",
+      "label": "Détecteur M314 — objet individuel",
+      "path": "assets/dlc/aliens-1986/v115/props/m314-tracker.png",
+      "sha256": "d8884dfc1f643427e65a8af88dd1a3bb9b40e891931d5c9c6901a8c426a6a528",
+      "bytes": 2380460,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        104,
+        16,
+        1421,
+        1011
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        762.5,
+        1011
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "m40-grenade",
+      "category": "props",
+      "path": "assets/openai/equipment/v121-weapons/m40-hedp-grenade-native-v121.png",
+      "sha256": "a98e3ab91ac3c644250cc89253641260f12384c9be3c705c977e2cabca58ccee",
+      "bytes": 989447,
+      "width": 1217,
+      "height": 1293,
+      "bbox": [
+        0,
+        0,
+        1217,
+        1293
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        608.5,
+        1293
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "category": "props",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "sha256": "8ec28caf174cd92c2d9b26d5cb6e249a8370591fc3d294575626702f903f2cc2",
+      "bytes": 1433266,
+      "width": 1945,
+      "height": 809,
+      "bbox": [
+        0,
+        0,
+        1945,
+        809
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        972.5,
+        809
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "m56-smartgun",
+      "category": "props",
+      "path": "assets/openai/equipment/v117-weapons/m56-smartgun-native-v117.png",
+      "sha256": "86804c83d1facc8ef79ccde37d73887fb25d984dc518bb52e20fe6aaf979d62f",
+      "bytes": 967903,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        1086,
+        724
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "m577-apc-right",
+      "category": "vehicles",
+      "path": "assets/act5/v188/m577-side-corrected.png",
+      "sha256": "55d8bc21f48c11e21cff3d7eeeff9395896e1e1ca4efd03fd44d98232b47553e",
+      "bytes": 2064185,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        1086,
+        724
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "meal-tray",
+      "label": "Sulaco — plateau du mess",
+      "path": "assets/dlc/aliens-1986/v115/props/meal-tray.png",
+      "sha256": "3d64c7ffca83a35a44b42bbd7e083fdb86ab06f4d023e379ca7d886297c39679",
+      "bytes": 2229467,
+      "width": 1672,
+      "height": 941,
+      "bbox": [
+        25,
+        113,
+        1648,
+        848
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        836.5,
+        848
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "medical-kit",
+      "label": "Sac médical de Dietrich — ouvert",
+      "path": "assets/dlc/aliens-1986/v115/props/medical-kit.png",
+      "sha256": "21c7ad9a633307e67f3f103160c9bdd9af96582de7cc7b1ac58ca7ff98e28bcf",
+      "bytes": 2130139,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        307,
+        13,
+        1230,
+        1010
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        768.5,
+        1010
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "newt-drain",
+      "label": "Newt — après le drain",
+      "path": "assets/dlc/aliens-1986/v115/variants/newt-drain.png",
+      "sha256": "cbdd1959c2d6aac596414ede64e6779be061173a9e3382167406a009db641c85",
+      "bytes": 1706989,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        274,
+        25,
+        688,
+        1529
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        481,
+        1529
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "newt-idle-right",
+      "label": "Newt — correction du costume",
+      "path": "assets/dlc/aliens-1986/v115/characters/newt-idle-right.png",
+      "sha256": "b070ffe438364f09f1544eb9f7443bdee313a71d4e2dd32cd9696210bd7d2d50",
+      "bytes": 1811982,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        270,
+        13,
+        664,
+        1532
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        467,
+        1532
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "newt-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/newt-interact-right.png",
+      "sha256": "bdee08ddcf26de1f24c4b9ec9ecb1a9169c0d1cacf15a60f6a4ada716af61543",
+      "bytes": 1916392,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "newt-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/newt-walk-right.png",
+      "sha256": "8af3affcc869136ddce4c246235f9d50b129f995d78d5b8f9d99ce090c6639b5",
+      "bytes": 2030033,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "operations-console",
+      "label": "Operations — console indépendante",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+      "bytes": 2449437,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        15,
+        42,
+        1756,
+        860
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        885.5,
+        860
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ovipositor",
+      "label": "Ruche — masse ovipositrice de la Reine",
+      "path": "assets/dlc/aliens-1986/v115/architecture/ovipositor.png",
+      "sha256": "c668cc49bbfe6276c00cf871693f1c6911dfd056ca515cd41747064f86ec1ff9",
+      "bytes": 1781381,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        47,
+        13,
+        2155,
+        703
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1101,
+        703
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "p5000-right",
+      "label": "P5000 — poste vide, orienté à droite",
+      "path": "assets/dlc/aliens-1986/v115/vehicles/p5000-right.png",
+      "sha256": "12b0230b20a173c9b4fec76bf954d8c220ea3264a3ef565c0dd2eea69e227a2a",
+      "bytes": 1647148,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        90,
+        12,
+        1273,
+        1171
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        681.5,
+        1171
+      ],
+      "category": "vehicles",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "queen-attack-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-attack-right.png",
+      "sha256": "aeeb28cb7b1ba2d3cfacc3dc8a68092a74155341b73b558533776226160715a3",
+      "bytes": 1528140,
+      "width": 1672,
+      "height": 941,
+      "bbox": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        836,
+        941
+      ],
+      "category": "creatures",
+      "pose": "attack",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "queen-death-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-death-right.png",
+      "sha256": "44576485f1a6363898cec5ea5d55d784d386f547dde93dea9a3da8643194fdae",
+      "bytes": 1464490,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "death",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "queen-idle-right",
+      "category": "creatures",
+      "path": "assets/user/castes-v87/film_queen_aliens_1986.png",
+      "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991",
+      "bytes": 1929156,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        768,
+        1024
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "queen-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-walk-right.png",
+      "sha256": "77b1b97078aebe2b114e7e09afb846ee0955c539d5b39a79aa19057a855dcc57",
+      "bytes": 1280045,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "resin-column",
+      "label": "Ruche — colonne de résine",
+      "path": "assets/dlc/aliens-1986/v115/architecture/resin-column.png",
+      "sha256": "c387c1c2f1e596172544457a907aca32982f16ed209a0254f864fb5db94e4b2c",
+      "bytes": 1688679,
+      "width": 887,
+      "height": 1774,
+      "bbox": [
+        89,
+        3,
+        790,
+        1771
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        439.5,
+        1771
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ripley-gateway",
+      "label": "Ripley — audience à Gateway",
+      "path": "assets/dlc/aliens-1986/v115/variants/ripley-gateway.png",
+      "sha256": "9e2c1ff85cdd98d5417749b4d2e796e5085f6b4751ab2d36feb4d4e23ec2e9af",
+      "bytes": 1492531,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        310,
+        18,
+        693,
+        1521
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        501.5,
+        1521
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ripley-hive-rescue",
+      "label": "Ripley — sauvetage dans la ruche",
+      "path": "assets/dlc/aliens-1986/v115/variants/ripley-hive-rescue.png",
+      "sha256": "b4b479eb950692cd6845d1b32cdbf8652d8be46eaba756edb7f35e811466791d",
+      "bytes": 1757450,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        296,
+        17,
+        705,
+        1526
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        500.5,
+        1526
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ripley-idle-right",
+      "label": "Ripley — bomber et chaussures corrigés",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "sha256": "278b39031eba709f7c2678f726be48088e754f8fe81b3dccb433161831cec0d5",
+      "bytes": 1617936,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        295,
+        11,
+        700,
+        1526
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        497.5,
+        1526
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ripley-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/ripley-interact-right.png",
+      "sha256": "d2e8e36b3c9b85118f160325e4a83d1e065dbad8c93ac6cb390d62c57926b709",
+      "bytes": 1779243,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "ripley-loader",
+      "label": "Ripley — tenue du combat final",
+      "path": "assets/dlc/aliens-1986/v115/variants/ripley-loader.png",
+      "sha256": "0df6909a184350170c129e00e05a3161fb6b0d03df730597b68358a8b320a826",
+      "bytes": 1778402,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        257,
+        18,
+        815,
+        1522
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        536,
+        1522
+      ],
+      "category": "variants",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ripley-m41a-m240-combination-right",
+      "path": "assets/dlc/aliens-1986/v116/props/ripley-m41a-m240-combination-right.png",
+      "sha256": "f2d245af510b7f187472a5fe549fbad429c0f17138b7abfdc5544a16c2691971",
+      "bytes": 1836777,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": [
+        "M41A stock and some shroud details visually interpreted; film-reference correction remains open."
+      ]
+    },
+    {
+      "id": "ripley-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/ripley-walk-right.png",
+      "sha256": "5d08fac05c7287e4bf9453b1525172929f9ba38fb4b145029aa504804cd1d971",
+      "bytes": 1883761,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "sentry-idle-right",
+      "category": "props",
+      "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+      "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+      "bytes": 2026614,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        768,
+        1024
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "shoulder-lamp",
+      "label": "USCM — lampe d’épaule compacte",
+      "path": "assets/dlc/aliens-1986/v115/props/shoulder-lamp.png",
+      "sha256": "cd77b4f5620fef6102118ff9e6543d085535754fc21d81443a04a688a636e70b",
+      "bytes": 1826813,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        126,
+        69,
+        966,
+        1447
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        546,
+        1447
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "smartgun-bench",
+      "label": "Armurerie — établi de préparation",
+      "path": "assets/dlc/aliens-1986/v115/architecture/smartgun-bench.png",
+      "sha256": "a2b34cdc61ed859f1139952b6fd8ff2b7a2a25c2bd2d293c112ba3774c63facc",
+      "bytes": 1358811,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        13,
+        50,
+        1761,
+        841
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887,
+        841
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "smartgun-eyepiece",
+      "label": "Smartgun — viseur et caméra autonomes",
+      "path": "assets/dlc/aliens-1986/v115/props/smartgun-eyepiece.png",
+      "sha256": "e4284f6da0ff2d92a31f1faac34cd97866cc11cb72429311210a0a40f6c629d4",
+      "bytes": 694790,
+      "width": 1254,
+      "height": 1254,
+      "bbox": [
+        235,
+        25,
+        1018,
+        1228
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        626.5,
+        1228
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "smartgun-harness",
+      "label": "Smartgun — harnais et bras porteur",
+      "path": "assets/dlc/aliens-1986/v115/props/smartgun-harness.png",
+      "sha256": "c24e0a98977147a080c52159f9ab9d9f7daa7575b2ee60c0fda51a1b1ba86aa1",
+      "bytes": 1796512,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        13,
+        24,
+        1295,
+        1172
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        654,
+        1172
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "specimen-jar",
+      "label": "Medlab — cuve à facehugger",
+      "path": "assets/dlc/aliens-1986/v115/props/specimen-jar.png",
+      "sha256": "fe11050207fd6489225dc14c9533e87f6150e471f3dccf768d0f78c39115b40c",
+      "bytes": 2184084,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        132,
+        8,
+        963,
+        1526
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        547.5,
+        1526
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "spunkmeyer-idle-right",
+      "label": "Spunkmeyer — équipage du dropship",
+      "path": "assets/dlc/aliens-1986/v115/characters/spunkmeyer-idle-right.png",
+      "sha256": "42c760fbde5cc216224ff1fac9a1056be1c25b43dbdc0056ab97f3d3943bf5fe",
+      "bytes": 1760762,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        240,
+        10,
+        740,
+        1532
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        490,
+        1532
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "spunkmeyer-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-interact-right.png",
+      "sha256": "fd87f9cdf07931abd7f1320ec96813d80380f186ca7b32aff292dc653e9484d9",
+      "bytes": 1828739,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": [
+        "A preceding generation with the wrong character identity was rejected before runtime integration."
+      ]
+    },
+    {
+      "id": "spunkmeyer-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-walk-right.png",
+      "sha256": "0db292956fe4981b31ca6bca5f50fb3ac30aa0f40232ac686d2a400dcc6dc239",
+      "bytes": 1927572,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "supply-case",
+      "label": "Medlab — caisse de ravitaillement",
+      "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+      "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+      "bytes": 2298763,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        30,
+        84,
+        1505,
+        968
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        767.5,
+        968
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "ud4l-flight-right",
+      "category": "vehicles",
+      "path": "assets/insertion/v188/ud4l-side.png",
+      "sha256": "3af34f1bc0ec995c3e4fc27139bc5c4acab644652bacd99c33f4c188de72611d",
+      "bytes": 1233519,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        1086,
+        724
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "ud4l-landed-right",
+      "label": "UD4L — posé sur ses patins",
+      "path": "assets/dlc/aliens-1986/v115/vehicles/ud4l-landed-right.png",
+      "sha256": "ae4ad902554e91c3991ee6fd14ca577a31093222d82a2fb43db602b058b44b94",
+      "bytes": 1297810,
+      "width": 1920,
+      "height": 819,
+      "bbox": [
+        19,
+        102,
+        1903,
+        745
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        961,
+        745
+      ],
+      "category": "vehicles",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "uscm-armor",
+      "label": "USCM — plastron et épaulières autonomes",
+      "path": "assets/dlc/aliens-1986/v115/props/uscm-armor.png",
+      "sha256": "8890645672f0f481314fed058ff3b7ba44022687c90e752a7d333e8f10f28140",
+      "bytes": 2107171,
+      "width": 1312,
+      "height": 1199,
+      "bbox": [
+        10,
+        15,
+        1296,
+        1183
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        653,
+        1183
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "uscm-helmet",
+      "label": "USCM — casque autonome",
+      "path": "assets/dlc/aliens-1986/v115/props/uscm-helmet.png",
+      "sha256": "0c1749f9ba673c75a10b5ade0428069112740dd43b0cfb6b37989f228c04d418",
+      "bytes": 1532562,
+      "width": 1354,
+      "height": 1161,
+      "bbox": [
+        121,
+        39,
+        1242,
+        1139
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        681.5,
+        1139
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "vasquez-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/vasquez-idle-right.png",
+      "sha256": "1c1873f382849e153717400049a6b14f7664880dc4cc6684739be7012cf75cfb",
+      "bytes": 1840668,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "vasquez-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/vasquez-interact-right.png",
+      "sha256": "51925122456e9da7dafc8341515bea6cf22cb2126ac6833bf9c40cedc0279654",
+      "bytes": 1834396,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "vasquez-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/vasquez-walk-right.png",
+      "sha256": "c493b6f64834950157ea4760f4c9b2a0fe852561b87c2ed46f7accb148fa04d7",
+      "bytes": 1891640,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "vp70-pistol",
+      "category": "props",
+      "path": "assets/openai/equipment/v120-weapons/vp70m-sidearm-native-v120.png",
+      "sha256": "b2d4016ee71430a80b86363badad6521ee15010b0d3172131909aaaef2215def",
+      "bytes": 1213691,
+      "width": 1254,
+      "height": 1254,
+      "bbox": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        627,
+        1254
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "candidate",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "wall-light",
+      "label": "Hadley — luminaire industriel",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "sha256": "0c46cefee888fe9809de750d25968abdc052271fde4e646d8834720c629e181a",
+      "bytes": 1515605,
+      "width": 2172,
+      "height": 724,
+      "bbox": [
+        54,
+        135,
+        2118,
+        588
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1086,
+        588
+      ],
+      "category": "architecture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "warrior-attack-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+      "sha256": "f42f4c297ddbbad7caa35808146b639a332021a24ad0ee4462e46842f49f08bf",
+      "bytes": 1964121,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        768,
+        1024
+      ],
+      "category": "creatures",
+      "pose": "attack",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "warrior-death-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+      "sha256": "a856860b93e01d0b5fc862b7b592c99ab4c10515e3d2accad3c1dbb46b7ed0fb",
+      "bytes": 2025583,
+      "width": 1900,
+      "height": 828,
+      "bbox": [
+        0,
+        0,
+        1900,
+        828
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        950,
+        828
+      ],
+      "category": "creatures",
+      "pose": "death",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "warrior-idle-right",
+      "category": "creatures",
+      "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+      "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+      "bytes": 1801730,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        768,
+        1024
+      ],
+      "frameCount": 1,
+      "animated": false,
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "filmFidelityValidated": false,
+      "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
+      "auditDecision": "reuse-base",
+      "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "welder",
+      "label": "Soudeur USCM — accessoire de film",
+      "path": "assets/dlc/aliens-1986/v115/props/welder.png",
+      "sha256": "9bc1729277f37eac774c197858361d60cc869c2ec42a2b8f2910d3567537218a",
+      "bytes": 808868,
+      "width": 1254,
+      "height": 1254,
+      "bbox": [
+        321,
+        94,
+        948,
+        1178
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        634.5,
+        1178
+      ],
+      "category": "props",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "wierzbowski-idle-right",
+      "label": "Wierzbowski — détourage corrigé",
+      "path": "assets/dlc/aliens-1986/v115/characters/wierzbowski-idle-right.png",
+      "sha256": "31e0ff7e771c260ae989d484ed82687bc9d170b989b5913b345b97812c5efe4b",
+      "bytes": 1128088,
+      "width": 980,
+      "height": 1605,
+      "bbox": [
+        248,
+        58,
+        731,
+        1563
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        489.5,
+        1563
+      ],
+      "category": "characters",
+      "pose": "idle",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v115-checkpoint",
+      "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "wierzbowski-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-interact-right.png",
+      "sha256": "597553e0bbc66cadeb9870071cb97ed3756acae3be49a7f1f06a03519f9d461a",
+      "bytes": 1115316,
+      "width": 980,
+      "height": 1605,
+      "bbox": [
+        0,
+        0,
+        980,
+        1605
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        490,
+        1605
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "wierzbowski-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-walk-right.png",
+      "sha256": "fa13100e14055e8ca3f5560fa911f1a84f8df559697d4c6921d78aec9548478d",
+      "bytes": 1246723,
+      "width": 980,
+      "height": 1604,
+      "bbox": [
+        0,
+        0,
+        980,
+        1604
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        490,
+        1604
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    }
+  ],
+  "coverage": {
+    "characters": [
+      {
+        "id": "ripley",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "hicks",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "hudson",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "newt",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "bishop",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "vasquez",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "drake",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "apone",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "gorman",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "burke",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "ferro",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "spunkmeyer",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "dietrich",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "frost",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "crowe",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      },
+      {
+        "id": "wierzbowski",
+        "availablePoses": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycle": false
+      }
+    ],
+    "missingAtSnapshot": [
+      "warrior-walk-right",
+      "facehugger-attack-right",
+      "facehugger-death-right",
+      "hicks-wounded"
+    ],
+    "generationBlocked": [
+      "hicks-wounded",
+      "warrior-walk-right",
+      "facehugger-attack-right",
+      "facehugger-death-right"
+    ]
+  },
+  "recovery": {
+    "localPngsPreviouslyIdentifiedButNotPublished": 20,
+    "localDocumentsPreviouslyIdentifiedButNotPublished": 53,
+    "olderPoseSourceFilesAlreadyMissing": 19,
+    "reason": "The local execution environment stopped before these files were uploaded. They are not represented as recovered assets.",
+    "unpublishedVariants": [
+      "door-leaf-damaged",
+      "door-leaf-reinforced",
+      "door-leaf-breached",
+      "meal-tray-food",
+      "supply-case-medical-empty",
+      "supply-case-ammo-closed",
+      "supply-case-ammo-empty"
+    ],
+    "additionalUnpublishedImages": "One sentry orientation sheet and twelve superseded revisions.",
+    "localPngBytesPreviouslyIdentified": 40024719,
+    "localDocumentBytesPreviouslyIdentified": 1759979,
+    "originalDirectoryHint": "aliens-sprites-v115/generated_images_preserved_v115"
+  },
+  "limits": [
+    "Exact film fidelity remains subject to detailed reference comparison.",
+    "Single pose images are not complete animation cycles.",
+    "The Queen assets do not add a new boss or scene to the preserved campaign.",
+    "The Ripley M41A/M240 assembly includes interpreted details and remains under visual review.",
+    "Hicks wounded, Warrior walk, Facehugger attack and Facehugger death remain unproduced after rejected image-generation attempts."
+  ]
+}

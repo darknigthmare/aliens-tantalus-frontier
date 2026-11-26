@@ -1,0 +1,117 @@
+{
+  "version": "109.0.0-rc.1",
+  "htmlSha256": "dd0228ae9027b840162eb437abc737b27eeb73957d1081e6027c472a8b9c7b13",
+  "checks": [
+    {
+      "name": "Initialisation du document exact V109",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit inspections dans le document distribué",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Export réel au schéma 109",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Inventaire neuf vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit sas réciproques sauvegardés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit lieux sauvegardés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Jeu sans demande réseau externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Huit fiches Codex",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Deux nouvelles fiches mises en avant",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filtre Codex fonctionnel",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Filtre sans résultat correctement vide",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Retour aux huit fiches",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Plans des huit lieux présents",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Codex portrait sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Douze captures intégrées au rapport",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Tous les PNG du rapport décodés",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport sans dépendance externe",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Rapport portrait sans débordement horizontal",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Hash identique au HTML de recette",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune erreur JS ou console",
+      "ok": true,
+      "detail": {
+        "page": [],
+        "console": []
+      }
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "transport": {
+    "tested": "set_content exact authorized HTML bytes with distributed Blob loader",
+    "directFileNavigation": "not retested; not certified in this environment"
+  },
+  "nativeActivated": false
+}

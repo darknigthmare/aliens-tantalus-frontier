@@ -238,15 +238,19 @@ with sync_playwright() as pw:
                     check(label + ': every visible menu control fits viewport', all(not c['visible'] or (c['x'] >= 0 and c['y'] >= 0
                           and c['x'] + c['w'] <= size['width'] + .5 and c['y'] + c['h'] <= size['height'] + .5) for c in before['controls']))
                     capture(page, label + '-menu.png')
-                    # Real arrow keys exercise the complete focus ring including
-                    # the deferred Forge button without entering that workspace.
+                    # Real arrow keys exercise both DLC entries and the deferred
+                    # Forge button without entering any of those destinations.
                     page.keyboard.press('Home')
                     page.wait_for_function('()=>document.activeElement?.id==="title-continue"')
+                    expected_focus_order = ['title-continue', 'title-new', 'title-river-of-pain',
+                                            'title-aliens1986', 'title-forge', 'title-options']
                     focus_order = []
-                    for _ in range(4):
+                    for _ in expected_focus_order:
                         focus_order.append(observed(page)['focus'])
                         page.keyboard.press('ArrowDown')
-                    check(label + ': native keyboard reaches each existing menu action once', focus_order == ['title-continue', 'title-new', 'title-forge', 'title-options'])
+                    check(label + ': native keyboard reaches each existing menu action once', focus_order == expected_focus_order)
+                    check(label + ': native keyboard wraps to the first menu action',
+                          observed(page)['focus'] == expected_focus_order[0])
                     page.keyboard.press('End')
                     page.keyboard.press('Enter')
                     page.wait_for_function('()=>!__ATF_V61__.snapshot().visible&&document.querySelector("[data-panel=settings]").classList.contains("active")')

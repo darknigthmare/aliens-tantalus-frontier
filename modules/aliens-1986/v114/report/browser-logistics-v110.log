@@ -1,0 +1,40 @@
+Huit inspections visibles dans le catalogue True
+Reprise exacte à la nouvelle galerie True
+Réserve affichée et HUD hors scène True
+E sur caisse vide ne duplique pas les lots True
+B commence un vrai ravitaillement True
+Aucun lot déduit avant fin True
+Pause conserve temps de travail et réserves True
+Marche annule lot sans le dépenser True
+Bouton ravitailler crédite exactement 18 cartouches True
+Blessure réelle et soins non consommés à la reprise True
+Soigner engage une action de 1,6 seconde True
+La vie ne remonte pas avant la fin True
+Tirer interrompt le soin et garde la trousse True
+Import reprend le geste médical au même temps True
+Soin terminé plafonné à 100 et une trousse utilisée True
+Import refuse lot inventé sans mutation True
+Import refuse alarme immortelle sans mutation True
+Import refuse stock inconnu sans mutation True
+Import refuse propriété de soin inconnue sans mutation True
+État sirène/recharge restauré exactement True
+E ne relance pas une sirène pendant recharge True
+Le bruit de diagnostic existe dans la simulation True
+Durée alarme décroît réellement True
+L’alarme n’a ajouté aucune identité ennemie True
+Geste cartouche exact à la reprise True
+Cartouche crédite 40 au maximum 120, une seule fois True
+Newt reste sans arme après la logistique True
+Ravitaillement Newt désactivé dans l’interface True
+Carte montre la boucle sans acteurs ennemis True
+Archives contiennent les règles logistiques True
+Opération complète affiche bilan logistique réel True
+Migration V108 réelle sans soin ni munitions True
+Migration V108 ne donne aucun stock True
+Barre logistique hors terrain 844×390 True
+Aucun débordement horizontal V110 True
+Barre logistique reste visible en portrait True
+Portrait sans débordement horizontal True
+Aucune requête externe nécessaire True
+Aucune erreur JavaScript ou console True
+{"passed": 39, "captures": 9}

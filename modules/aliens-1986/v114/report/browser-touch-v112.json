@@ -1,0 +1,136 @@
+{
+  "htmlSHA256": "442b8146e28400d55c81c80cc40a8a4145cde9fca25ceb7f142fb2285bafd1f5",
+  "tests": [
+    {
+      "name": "Commandes tactiles visibles dans le flux de jeu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et commandes tactiles hors canvas en 844×390",
+      "ok": true,
+      "detail": {
+        "hud": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 44
+        },
+        "scene": {
+          "x": 0,
+          "y": 44,
+          "width": 844,
+          "height": 150
+        },
+        "contactbar": {
+          "x": 0,
+          "y": 194,
+          "width": 844,
+          "height": 46
+        },
+        "squadbar": {
+          "x": 0,
+          "y": 283,
+          "width": 844,
+          "height": 36
+        },
+        "footer": {
+          "x": 0,
+          "y": 363,
+          "width": 844,
+          "height": 27
+        },
+        "touch": {
+          "x": 0,
+          "y": 319,
+          "width": 844,
+          "height": 44
+        }
+      }
+    },
+    {
+      "name": "Canvas visible en paysage tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement paysage",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Bouton prudence accessible au tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucun débordement portrait 390×844",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Détecteur et pause accessibles en portrait",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Options en pause tactile",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Aucune requête réseau externe",
+      "ok": true,
+      "detail": [
+        "blob:null/9cd94b32-439d-4508-9cd1-4933bcf9fbed",
+        "blob:null/2fdfdc94-1395-482a-9b67-fdcfc6e58116",
+        "blob:null/2588d78b-2395-4756-ba5b-f8756e2757c5",
+        "blob:null/58a22d6e-d8b1-4c01-951b-2e65377be2f8",
+        "blob:null/e06dab12-3990-4450-bbd2-3971327e60e7",
+        "blob:null/fd33e5ce-5d2a-461e-8000-73a4493caaec",
+        "blob:null/f77fa049-667e-482d-91b8-750d093a10eb",
+        "blob:null/aa0ff141-2941-403f-9275-3c3f1a5b7558",
+        "blob:null/a59003e4-133c-4d94-9c56-0e07a1d097f6",
+        "blob:null/09b82526-867f-428b-830c-89e835f56c4e",
+        "blob:null/86c60f7d-a12a-444e-8abb-fa3ae4fab86c",
+        "blob:null/72a223e5-36ad-4307-85ee-32930f3dd7b9",
+        "blob:null/603cbabf-dd55-4264-a5b1-50e2c45afef3",
+        "blob:null/a6438efd-fec6-4947-8401-1cdb5b2584c1",
+        "blob:null/6ad412da-b818-400b-9cc2-92361733758e",
+        "blob:null/f6037ebc-30b0-431f-9fcb-1e44e0d8a76d",
+        "blob:null/1374958b-b5c3-4b57-b260-9f672ae2d0de",
+        "blob:null/6ac6dd45-76b3-4453-8578-533cc9db071b",
+        "blob:null/04eb405e-e321-4d6a-a157-863fdc74c99a",
+        "blob:null/67b7a5db-af74-402b-a4bb-d66a32dc805d",
+        "blob:null/a4860698-3345-4cb8-9d1d-048b2b9a2d36",
+        "blob:null/41298a20-869d-44fe-b1a9-e420a896f9f9",
+        "blob:null/13e993ca-9925-43a2-bda8-09f595306ace",
+        "blob:null/9c1dd033-1af1-4a50-96e5-41b0adf2e805",
+        "blob:null/63109c7f-bed0-420d-bb5f-c2edee2b855e",
+        "blob:null/2e2e12b6-afef-431e-a2f2-629a54b3e7d6",
+        "blob:null/a4e3c5f4-e312-4091-9fd4-ad79d1e83b23",
+        "blob:null/6b50b0a4-caf6-4156-a65d-c64c36bcab42",
+        "blob:null/5bca1915-b562-4256-8903-3fe661f82b01",
+        "blob:null/5d7056f3-0e50-4b43-a1e6-1af599ff0f8f",
+        "blob:null/a1c316a5-3f6e-4e50-b4af-c4006c04f535"
+      ]
+    },
+    {
+      "name": "Aucune erreur UI tactile",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    {
+      "file": "15_tactile_844.png",
+      "origin": "Viewport 844×390 avec has_touch/is_mobile, commande prudente cliquée; pas de téléphone physique",
+      "htmlSHA256": "442b8146e28400d55c81c80cc40a8a4145cde9fca25ceb7f142fb2285bafd1f5",
+      "nativeTantalus": false,
+      "imageEdited": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "physicalPhoneTested": false
+}

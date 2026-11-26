@@ -1,0 +1,18 @@
+{
+  "captured": 53,
+  "embedded": 10,
+  "rules": 48,
+  "files": [
+    "44_atelier_entree.png",
+    "45_coffret_ouvert.png",
+    "46_balise_sans_torche.png",
+    "47_atelier_balisage.png",
+    "48_coursive_conduites.png",
+    "49_carte_derivation.png",
+    "50_defense_sur_balise.png",
+    "51_balises_paysage.png",
+    "52_balises_portrait.png",
+    "53_repli_balises.png"
+  ],
+  "rawImageBytesUnchanged": true
+}

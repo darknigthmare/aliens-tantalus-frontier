@@ -78,7 +78,10 @@
     "test:open:v177": "node --test scripts/verify-weapon-conservation-v177.mjs scripts/verify-hub-armory-layering-v177.mjs scripts/verify-tantalus-enrichment-v177.mjs scripts/verify-capture-observation-v177.mjs scripts/verify-npc-lift-queue-v177.mjs scripts/verify-weapon-feed-admission-v193.mjs",
     "test:dlc:river": "node --test scripts/verify-river-of-pain-launcher.mjs scripts/verify-river-of-pain-integration.mjs",
     "test:dlc:river:source": "node scripts/test-river-of-pain-source.mjs",
-    "qa:dlc:river": "python3 scripts/qa-river-of-pain.py"
+    "qa:dlc:river": "python3 scripts/qa-river-of-pain.py",
+    "test:dlc:aliens1986": "npm --prefix modules/aliens-1986/v114 run check && node --test scripts/verify-aliens1986-dlc-integration.mjs scripts/verify-aliens1986-main-succession-v116.mjs scripts/verify-aliens1986-raster-presentation-v116.mjs",
+    "check:dlc:aliens1986": "node scripts/public-aliens1986-dlc-admissions.mjs",
+    "qa:dlc:aliens1986": "python3 -B scripts/qa-aliens1986-integration.py"
   },
   "engines": {
     "node": ">=22"
