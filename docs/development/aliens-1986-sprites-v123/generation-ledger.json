@@ -1,0 +1,162 @@
+{
+  "schema": "aliens1986-generation-ledger-v123",
+  "date": "2026-11-26",
+  "tool": "built-in-imagegen",
+  "oneAssetPerImage": true,
+  "nativeBytesPreserved": true,
+  "pixelEditingOutsideImagegen": false,
+  "externalResampling": false,
+  "filmFidelityValidated": false,
+  "counts": {
+    "base": 164,
+    "added": 2,
+    "total": 166
+  },
+  "assets": [
+    {
+      "id": "sentry-aim-front",
+      "repositoryPath": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+      "prompt": "Create ONE production game sprite for Aliens (1986): the UA 571-C automated sentry gun, exact FRONT aiming direction, facing straight toward the camera. This is one missing directional sprite for an existing JavaScript/Canvas game.\n\nREFERENCE ROLES:\nImage 1 is the existing game's front-right sentry sprite. Preserve its recognizable object identity, olive drab palette, realistic small-scale raster rendering, worn metal, overall body-to-tripod proportions, and game-art sharpness.\nImage 2 is a photograph of the actual Aliens production prop from Propstore. It is the authoritative reference for the industrial shape: elongated rectangular receiver, single short MG42-derived perforated muzzle, boxy armored body, central pivot, fabricated three-legged metal stand and the wired control box hanging on the viewer-left side. Do NOT reproduce the photograph's watermark, turquoise outlines, backdrop or text.\n\nTASK:\nRotate the existing object to a strict frontal view: the muzzle points straight at the viewer, centered over the vertical pivot, with a circular visible bore and strong natural foreshortening. The top of the body is slightly visible from the same gently elevated game camera. It must read as the missing front sector between the existing front-right pose and its mirror. Show the entire gun, all three feet, hanging control box and connecting cable. Keep believable front-to-back depth but no oblique three-quarter barrel angle. Match the production prop's restrained military olive finish and dark machinery; small natural wear only. Do not add extra weapons, barrels, new screens, glowing laser beams or fictional attachments.\n\nOUTPUT:\nExactly one isolated full-object raster sprite on a genuinely transparent RGBA canvas, landscape 1536 by 1024 if supported. Center the physical tripod weight-bearing point horizontally and keep the tripod contact line close to the lower edge with clean safety margins. Every part must fit inside the image. No scenery, no pedestal, no ground plane, no cast floor shadow, no haze, no vignette, no opaque background, no framing, no lettering, no contact sheet. Native transparent edges, crisp detailed silhouette. This is a new front-angle asset only; do not modify the supplied originals.",
+      "sha256": "f32141090ca966b7644185878342a2d95f4eea05b472e9c44344a7cb779125f7",
+      "gitBlobSha1": "6f85d94b97ad6730c56ae5872eb25e20b20eebf0",
+      "bytes": 1617328,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "pixelMode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bboxAlpha128": [
+        335,
+        10,
+        1201,
+        1012
+      ],
+      "bboxAlphaPositive": [
+        33,
+        0,
+        1522,
+        1024
+      ],
+      "alpha0Pixels": 1234359,
+      "alpha255Pixels": 0,
+      "partialAlphaPixels": 338505,
+      "pivot": [
+        768,
+        1012
+      ],
+      "transparentBackgroundRequested": true,
+      "nativeBytesPreserved": true,
+      "externalPixelEditing": false,
+      "externalResampling": false,
+      "oneAssetPerImage": true,
+      "frameCount": 1,
+      "animated": false,
+      "selectionStatus": "selected-for-existing-runtime-selector",
+      "filmFidelityValidated": false,
+      "referenceInputs": [
+        {
+          "role": "existing-project-identity-camera-and-style",
+          "repositoryPath": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+          "sha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b"
+        },
+        {
+          "role": "actual-production-prop-geometry",
+          "sourceId": "v123-sentry-production-prop",
+          "url": "https://content.propstore.com/collectionimages/aliens/sentrygun/collection-item_03.jpg",
+          "sha256": "3b37052f0c24437ca5c67ee62f1f4dfbb957fc197717994b67983b9f5f5232af"
+        }
+      ],
+      "visualReview": "Vue frontale centrée, bouche foreshortened, trois pieds visibles et boîtier câblé à gauche. Palette et détails du sprite V118 conservés ; reconstruction frontale interprétative.",
+      "pivotReason": "Axe du pivot central à x=768 ; ligne du pied avant à y=1012.",
+      "limits": [
+        "Exact film fidelity has not been certified.",
+        "Source alpha has native semi-transparent edges and faint fringe pixels; bytes remain unedited.",
+        "A single pose does not establish a complete animation cycle."
+      ],
+      "runtimeVerification": {
+        "status": "verified-in-existing-selector",
+        "browser": "Chromium 143.0.7499.4",
+        "receipt": "verification.json",
+        "filmFidelityValidated": false
+      }
+    },
+    {
+      "id": "warrior-walk-right",
+      "repositoryPath": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+      "prompt": "Create ONE missing animation key pose for the existing Aliens (1986) Warrior game sprite in the supplied reference image.\n\nThe reference is the current project's approved character identity and raster style. Preserve the same elongated RIDGED head with its open rib structure (not a smooth dome), the same compact jaw and visible teeth, neck tubes, narrow biomechanical rib cage, dorsal tubes, long segmented tail, long five-fingered hands, humanoid leg anatomy, charcoal-black surfaces and restrained warm silver highlights. Preserve the same right-facing, gently elevated side-view camera and the exact whole-body proportions. Do not redesign the character or change its film-era appearance.\n\nONLY CHANGE THE POSE to a clear rightward WALKING contact keyframe: one foot planted ahead toward the right with its knee slightly bent, the other leg extending back toward the left as the rear heel lifts. Both feet and all toes stay visible and anatomically coherent. Opposite arms swing slightly for balance. Torso leans subtly forward but is not lunging or attacking. Head and jaw are calm and stay the same size. The long tail trails left in a low sweeping curve, counterbalancing the step, and its tip fits fully inside the canvas. This is a single walk pose, not an animation strip. Exactly two arms and two legs. No duplicate hands, disconnected limbs or additional tails.\n\nKeep the visual scale comparable to the reference: the head near the upper margin, feet at a common ground contact near the lower margin, main body occupying the right-hand part of the landscape canvas with the whole tail to its left. No arbitrary new angle. Keep the contact feet separate so the pivot can be measured.\n\nOUTPUT exactly one isolated full-body game sprite, landscape 1536 by 1024 if supported, genuine transparent RGBA background and native clean alpha edges. No scenery, no floor, no cast ground shadow, no haze or vignette, no text, no framing, no sheet, no extra character. A non-graphic neutral locomotion pose for a game. Preserve the original input file and deliver this as a new sprite.",
+      "sha256": "7ba739ff6f7b6e78ed43306015cbb26cccf3f4d2ad5b48f0b4afc09494ddcdc2",
+      "gitBlobSha1": "11e0f449c2b280922e9b71e6bfe7213059f38985",
+      "bytes": 1802161,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "pixelMode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "bboxAlpha128": [
+        38,
+        33,
+        1494,
+        988
+      ],
+      "bboxAlphaPositive": [
+        0,
+        30,
+        1524,
+        1024
+      ],
+      "alpha0Pixels": 1172529,
+      "alpha255Pixels": 0,
+      "partialAlphaPixels": 400335,
+      "pivot": [
+        1090,
+        988
+      ],
+      "transparentBackgroundRequested": true,
+      "nativeBytesPreserved": true,
+      "externalPixelEditing": false,
+      "externalResampling": false,
+      "oneAssetPerImage": true,
+      "frameCount": 1,
+      "animated": false,
+      "selectionStatus": "selected-for-existing-runtime-selector",
+      "filmFidelityValidated": false,
+      "referenceInputs": [
+        {
+          "role": "existing-project-character-identity-camera-and-style",
+          "repositoryPath": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+          "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f"
+        }
+      ],
+      "visualReview": "Un Warrior complet orienté à droite, tête striée, queue intégralement visible, jambes séparées en pas de marche et deux bras distincts. Une seule pose de contact.",
+      "pivotReason": "Ancrage de poids x=1090 conservé par rapport au repère du Warrior idle existant ; contact inférieur mesuré y=988. Le centre de la boîte alpha serait déplacé par la longue queue.",
+      "limits": [
+        "Exact film fidelity has not been certified.",
+        "Source alpha has native semi-transparent edges and faint fringe pixels; bytes remain unedited.",
+        "A single pose does not establish a complete animation cycle."
+      ],
+      "runtimeVerification": {
+        "status": "verified-in-existing-selector",
+        "browser": "Chromium 143.0.7499.4",
+        "receipt": "verification.json",
+        "filmFidelityValidated": false
+      }
+    }
+  ],
+  "selectedImages": [
+    "sentry-aim-front",
+    "warrior-walk-right"
+  ],
+  "referencePathPolicy": "Repository paths or source URLs identify inputs; temporary host paths are not published.",
+  "limits": [
+    "These are newly generated replacements for missing selectors, not recovery of historical bytes.",
+    "Two individual static images; no locomotion strip or complete film animation claimed."
+  ]
+}

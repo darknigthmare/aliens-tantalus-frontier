@@ -62,6 +62,13 @@ export const SUPPLEMENT_PATHS_V122=Object.freeze(Object.fromEntries([
   ['narcissus-shuttle','exteriors'],['hadley-uplink-tower','environments'],['hadley-colony-wall-panel','environments'],
 ].map(([id,category])=>[id,'assets/dlc/aliens-1986/v122/'+category+'/'+id+'.png'])));
 export const SUPPLEMENT_IDS_V122=Object.freeze(Object.keys(SUPPLEMENT_PATHS_V122));
+export const SUPPLEMENT_SHA256_V122='6579c0f0bd346cb2849e7261b5edce061c495636e7119dd82352cbcfcf5ff780';
+export const SUPPLEMENT_PATH_V123='docs/development/aliens-1986-sprites-v123/manifest.json';
+export const SUPPLEMENT_PATHS_V123=Object.freeze({
+  'sentry-aim-front':'assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png',
+  'warrior-walk-right':'assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png',
+});
+export const SUPPLEMENT_IDS_V123=Object.freeze(Object.keys(SUPPLEMENT_PATHS_V123));
 export const SUPPLEMENT_BINDINGS_V122=Object.freeze(Object.entries({
   'sulaco-hangar':['uss-sulaco','sulaco-deck-tile'],jorden:['jorden-survey-tractor'],
   'processor-entry':['atmosphere-processor-facade'],'hadley-main':['hadley-colony-building','hadley-colony-wall-panel'],
@@ -261,6 +268,41 @@ export function compileAliens1986RasterSupplementV122(baseText,v117Text,v118Text
   }
   return {assets,entries:validateSpriteEntriesV116(assets),baseAssetCount:155,supplementAssetCount:SUPPLEMENT_IDS_V122.length};
 }
+/** V123 fills two keys already selected by V116/V118. The seven published
+ * manifests and the runtime renderer modules retain their original bytes. */
+export function compileAliens1986RasterSupplementV123(baseText,v117Text,v118Text,v119Text,v120Text,v121Text,v122Text,supplementText) {
+  if(hash(v122Text)!==SUPPLEMENT_SHA256_V122)throw new Error('The preserved V122 manifest failed its immutable hash.');
+  const previous=compileAliens1986RasterSupplementV122(baseText,v117Text,v118Text,v119Text,v120Text,v121Text,v122Text),supplement=JSON.parse(supplementText);
+  if(supplement.schema!=='aliens1986-raster-supplement-v123' || supplement.version!==123 || supplement.presentationVersion!==123)throw new Error('Unsupported V123 raster supplement.');
+  const expected=[
+    {path:MANIFEST_PATH_V116,sha256:MANIFEST_SHA256_V116,assetCount:123},
+    {path:SUPPLEMENT_PATH_V117,sha256:SUPPLEMENT_SHA256_V117,assetCount:7},
+    {path:SUPPLEMENT_PATH_V118,sha256:SUPPLEMENT_SHA256_V118,assetCount:11},
+    {path:SUPPLEMENT_PATH_V119,sha256:SUPPLEMENT_SHA256_V119,assetCount:6},
+    {path:SUPPLEMENT_PATH_V120,sha256:SUPPLEMENT_SHA256_V120,assetCount:4},
+    {path:SUPPLEMENT_PATH_V121,sha256:SUPPLEMENT_SHA256_V121,assetCount:4},
+    {path:SUPPLEMENT_PATH_V122,sha256:SUPPLEMENT_SHA256_V122,assetCount:9},
+  ];
+  if(!Array.isArray(supplement.baseManifests) || supplement.baseManifests.length!==7 || expected.some((base,index)=>
+    Object.entries(base).some(([key,value])=>supplement.baseManifests[index]?.[key]!==value)))throw new Error('Broken V123 raster manifest predecessors.');
+  if(!Array.isArray(supplement.assets) || supplement.assets.length!==2)throw new Error('V123 must contain the two reviewed directional poses.');
+  if(supplement.counts?.base!==164 || supplement.counts.added!==2 || supplement.counts.total!==166)throw new Error('V123 raster supplement counts disagree.');
+  if(supplement.filmFidelityValidated!==false)throw new Error('V123 cannot claim validated exact film fidelity.');
+  for(const asset of supplement.assets) {
+    if(!asset || !SUPPLEMENT_IDS_V123.includes(asset.id))throw new Error('Unreviewed V123 sprite id.');
+    if(asset.path!==SUPPLEMENT_PATHS_V123[asset.id])throw new Error('Invalid V123 sprite path: '+asset.id);
+    if(asset.runtimeEligible!==true || asset.frameCount!==1 || asset.animated!==false || asset.filmFidelityValidated!==false)throw new Error('Unsupported V123 presentation claim: '+asset.id);
+    if(asset.pixelMode!=='RGBA' || asset.bboxStatus!=='alpha128-measured' || asset.alphaRange?.[0]!==0 || !Number.isInteger(asset.alphaRange?.[1]) || asset.alphaRange[1]<128 || asset.alphaRange[1]>255)throw new Error('V123 requires measured transparent PNG geometry: '+asset.id);
+    if(!/^[a-f0-9]{64}$/.test(asset.sha256||'') || !Number.isSafeInteger(asset.bytes) || asset.bytes<=0)throw new Error('Invalid V123 sprite integrity record: '+asset.id);
+  }
+  const assets=[...previous.assets,...supplement.assets],ids=new Set(),paths=new Set();
+  for(const asset of assets) {
+    if(ids.has(asset.id))throw new Error('Duplicate raster id across V116–V123: '+asset.id);
+    if(paths.has(asset.path))throw new Error('Duplicate raster path across V116–V123: '+asset.path);
+    ids.add(asset.id);paths.add(asset.path);
+  }
+  return {assets,entries:validateSpriteEntriesV116(assets),baseAssetCount:164,supplementAssetCount:2};
+}
 function replaceOnce(source,needle,replacement) {
   const first=source.indexOf(needle);
   if(first<0 || source.indexOf(needle,first+needle.length)>=0)throw new Error('V114 presentation anchor changed: '+needle);
@@ -275,7 +317,8 @@ export async function renderAliens1986RasterV116({root=process.cwd()}={}) {
   const supplementV120Text=await readFile(resolve(root,SUPPLEMENT_PATH_V120),'utf8');
   const supplementV121Text=await readFile(resolve(root,SUPPLEMENT_PATH_V121),'utf8');
   const supplementV122Text=await readFile(resolve(root,SUPPLEMENT_PATH_V122),'utf8');
-  const {assets:manifestAssets,entries}=compileAliens1986RasterSupplementV122(manifestText,supplementText,supplementV118Text,supplementV119Text,supplementV120Text,supplementV121Text,supplementV122Text);
+  const supplementV123Text=await readFile(resolve(root,SUPPLEMENT_PATH_V123),'utf8');
+  const {assets:manifestAssets,entries}=compileAliens1986RasterSupplementV123(manifestText,supplementText,supplementV118Text,supplementV119Text,supplementV120Text,supplementV121Text,supplementV122Text,supplementV123Text);
   const assets=[],sourceHashes={},seenPaths=new Set();
   const canonicalRoot=await realpath(resolve(root)),assetScope=resolve(canonicalRoot,'assets')+sep;
   for(const entry of entries) {
@@ -359,8 +402,8 @@ export async function renderAliens1986RasterV116({root=process.cwd()}={}) {
   fidelity.source=replaceOnce(fidelity.source,'Œufs et ovipositeur procéduraux','Œufs et ovipositeur de décor');
   fidelity.sha256=hash(fidelity.source);
   let html=base.slice(0,start)+JSON.stringify(registry).replace(/<\//g,'<\\/')+base.slice(end);
-  html=replaceOnce(html,'<title>','<meta name="aliens-raster-version" content="116"><meta name="aliens-raster-extension-version" content="122"><meta name="aliens-raster-asset-version" content="122"><title>');
-  return {html,sha256:hash(html),assets,sourceHashes,manifestSha256:hash(manifestText),supplementManifestSha256:hash(supplementText),supplementManifestSha256V118:hash(supplementV118Text),supplementManifestSha256V119:hash(supplementV119Text),supplementManifestSha256V120:hash(supplementV120Text),supplementManifestSha256V121:hash(supplementV121Text),supplementManifestSha256V122:hash(supplementV122Text),presentationExtensionRevision:122,assetRevision:122,baseSha256:V114_HTML_SHA256};
+  html=replaceOnce(html,'<title>','<meta name="aliens-raster-version" content="116"><meta name="aliens-raster-extension-version" content="123"><meta name="aliens-raster-asset-version" content="123"><title>');
+  return {html,sha256:hash(html),assets,sourceHashes,manifestSha256:hash(manifestText),supplementManifestSha256:hash(supplementText),supplementManifestSha256V118:hash(supplementV118Text),supplementManifestSha256V119:hash(supplementV119Text),supplementManifestSha256V120:hash(supplementV120Text),supplementManifestSha256V121:hash(supplementV121Text),supplementManifestSha256V122:hash(supplementV122Text),supplementManifestSha256V123:hash(supplementV123Text),presentationExtensionRevision:123,assetRevision:123,baseSha256:V114_HTML_SHA256};
 }
 export async function writeAliens1986RasterV116({root=process.cwd(),destination=resolve(root,'dist/dlc/aliens-1986/game.html')}={}) {
   if([V114_HTML_PATH,'dlc/aliens-1986/game.html'].some(path=>resolve(destination)===resolve(root,path)))throw new Error('Cannot overwrite a preserved V114 source HTML.');

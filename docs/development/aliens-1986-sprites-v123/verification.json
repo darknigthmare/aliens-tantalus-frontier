@@ -1,0 +1,4897 @@
+{
+  "schema": "aliens1986-verification-v123",
+  "date": "2026-11-26",
+  "status": "local-tests-isolated-build-and-real-chromium-passed",
+  "sourceBaseCommit": "870a95c9f319f3caaa5f76498cbfb2e0f7be5dbf",
+  "counts": {
+    "base": 164,
+    "added": 2,
+    "total": 166
+  },
+  "nativePngIntegrity": {
+    "passed": true,
+    "files": 2,
+    "bytes": 3419489,
+    "originalBytesPreserved": true
+  },
+  "historicalManifests": {
+    "passed": true,
+    "files": 7
+  },
+  "browser": {
+    "status": "passed",
+    "passed": true,
+    "engine": {
+      "engine": "Chromium",
+      "version": "143.0.7499.4",
+      "headless": true
+    },
+    "checksPassed": 33,
+    "checksTotal": 33,
+    "normalChecks": 18,
+    "blockedPngChecks": 15,
+    "fixturesPerContext": 14,
+    "reportSha256": "0e45a8de4663db5694fcc57cc1326664df83dad06d31e3cdfcd7e01f13119580",
+    "report": {
+      "schema": 1,
+      "ok": true,
+      "timestampUtc": "2026-11-26T17:34:54.886027+00:00",
+      "scope": "Native actor fixtures with declared state changes; no campaign claim",
+      "runs": [
+        {
+          "ok": true,
+          "mode": "normal",
+          "checks": [
+            {
+              "name": "Fourteen declared states execute without mutating native session data",
+              "pass": true
+            },
+            {
+              "name": "The first frame retains the exact native V114 pixels while images load",
+              "pass": true
+            },
+            {
+              "name": "All independent expected image keys are drawn, except deliberately failed new PNGs",
+              "pass": true
+            },
+            {
+              "name": "Eight directional samples preserve the reviewed mirror convention",
+              "pass": true
+            },
+            {
+              "name": "Routed Warrior selects the new walking key in both directions",
+              "pass": true
+            },
+            {
+              "name": "Idle, windup and death keep their historical priority over the walking key",
+              "pass": true
+            },
+            {
+              "name": "Native PNG dimensions agree with the pinned catalog",
+              "pass": true
+            },
+            {
+              "name": "Alpha crop and aspect ratio remain native, without nonuniform stretching",
+              "pass": true
+            },
+            {
+              "name": "Sentry height and Warrior source-scale normalization stay native",
+              "pass": true
+            },
+            {
+              "name": "Bottom pivots remain at the projected ground line",
+              "pass": true
+            },
+            {
+              "name": "All drawn PNGs remain inside their inspection canvases",
+              "pass": true
+            },
+            {
+              "name": "Unexpected image failures are absent",
+              "pass": true
+            },
+            {
+              "name": "All eight sentry directions, including the formerly missing front, draw PNGs",
+              "pass": true
+            },
+            {
+              "name": "Half of a native 0 to 180 degree turn selects the new frontal view",
+              "pass": true
+            },
+            {
+              "name": "Both new native PNGs contain real transparent and visible pixels",
+              "pass": true
+            },
+            {
+              "name": "Measured alpha ranges, including a possible maximum of 254, match the records",
+              "pass": true
+            },
+            {
+              "name": "Measured alpha>=128 bounds match both new manifest records",
+              "pass": true
+            },
+            {
+              "name": "No unexpected network or browser error",
+              "pass": true
+            }
+          ],
+          "fixtures": [
+            {
+              "id": "sentry-right",
+              "expectedAsset": "sentry-idle-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    47,
+                    39,
+                    1459,
+                    959
+                  ],
+                  "destination": [
+                    -57.051616266944734,
+                    -75,
+                    114.10323253388947,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 205.89676746611053,
+                    "right": 434.10323253388947,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-idle-right",
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    47,
+                    39,
+                    1506,
+                    998
+                  ],
+                  "pivot": [
+                    776.5,
+                    998
+                  ],
+                  "category": "props",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  114.10323253388947,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "sentry-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-front-right",
+              "expectedAsset": "sentry-aim-front-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    214,
+                    13,
+                    1221,
+                    1003
+                  ],
+                  "destination": [
+                    -45.6505483549352,
+                    -75,
+                    91.3010967098704,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 228.6989032901296,
+                    "right": 411.3010967098704,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    214,
+                    13,
+                    1435,
+                    1016
+                  ],
+                  "pivot": [
+                    824.5,
+                    1016
+                  ],
+                  "category": "equipment",
+                  "pose": "front-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  91.3010967098704,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-front",
+              "expectedAsset": "sentry-aim-front",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    335,
+                    10,
+                    866,
+                    1002
+                  ],
+                  "destination": [
+                    -32.41017964071856,
+                    -75,
+                    64.82035928143712,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 255.1796407185629,
+                    "right": 384.8203592814371,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front",
+                  "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    335,
+                    10,
+                    1201,
+                    1012
+                  ],
+                  "pivot": [
+                    768,
+                    1012
+                  ],
+                  "category": "equipment",
+                  "pose": "front",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  64.82035928143712,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-front-left",
+              "expectedAsset": "sentry-aim-front-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    214,
+                    13,
+                    1221,
+                    1003
+                  ],
+                  "destination": [
+                    -45.6505483549352,
+                    -75,
+                    91.3010967098704,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 228.6989032901296,
+                    "right": 411.3010967098704,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    214,
+                    13,
+                    1435,
+                    1016
+                  ],
+                  "pivot": [
+                    824.5,
+                    1016
+                  ],
+                  "category": "equipment",
+                  "pose": "front-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  91.3010967098704,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-left",
+              "expectedAsset": "sentry-idle-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    47,
+                    39,
+                    1459,
+                    959
+                  ],
+                  "destination": [
+                    -57.051616266944734,
+                    -75,
+                    114.10323253388947,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 205.89676746611053,
+                    "right": 434.10323253388947,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-idle-right",
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    47,
+                    39,
+                    1506,
+                    998
+                  ],
+                  "pivot": [
+                    776.5,
+                    998
+                  ],
+                  "category": "props",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  114.10323253388947,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "sentry-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear-left",
+              "expectedAsset": "sentry-aim-rear-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    233,
+                    18,
+                    1097,
+                    982
+                  ],
+                  "destination": [
+                    -41.89154786150713,
+                    -75,
+                    83.78309572301426,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 236.21690427698576,
+                    "right": 403.78309572301424,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    233,
+                    18,
+                    1330,
+                    1000
+                  ],
+                  "pivot": [
+                    781.5,
+                    1000
+                  ],
+                  "category": "equipment",
+                  "pose": "rear-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  83.78309572301426,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear",
+              "expectedAsset": "sentry-aim-rear",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    228,
+                    14,
+                    1079,
+                    994
+                  ],
+                  "destination": [
+                    -40.706740442655935,
+                    -75,
+                    81.41348088531187,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 238.58651911468814,
+                    "right": 401.41348088531186,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    228,
+                    14,
+                    1307,
+                    1008
+                  ],
+                  "pivot": [
+                    767.5,
+                    1008
+                  ],
+                  "category": "equipment",
+                  "pose": "rear",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  81.41348088531187,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear-right",
+              "expectedAsset": "sentry-aim-rear-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    233,
+                    18,
+                    1097,
+                    982
+                  ],
+                  "destination": [
+                    -41.89154786150713,
+                    -75,
+                    83.78309572301426,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 236.21690427698576,
+                    "right": 403.78309572301424,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    233,
+                    18,
+                    1330,
+                    1000
+                  ],
+                  "pivot": [
+                    781.5,
+                    1000
+                  ],
+                  "category": "equipment",
+                  "pose": "rear-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  83.78309572301426,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-turn-front",
+              "expectedAsset": "sentry-aim-front",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    335,
+                    10,
+                    866,
+                    1002
+                  ],
+                  "destination": [
+                    -32.41017964071856,
+                    -75,
+                    64.82035928143712,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 255.1796407185629,
+                    "right": 384.8203592814371,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front",
+                  "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    335,
+                    10,
+                    1201,
+                    1012
+                  ],
+                  "pivot": [
+                    768,
+                    1012
+                  ],
+                  "category": "equipment",
+                  "pose": "front",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  64.82035928143712,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-walk-right",
+              "expectedAsset": "warrior-walk-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    38,
+                    33,
+                    1456,
+                    955
+                  ],
+                  "destination": [
+                    -127.44969199178645,
+                    -115.6981519507187,
+                    176.39425051334703,
+                    115.6981519507187
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 65.1006160164271,
+                    "right": 417.88911704312113,
+                    "top": 88.60369609856261,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-walk-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-walk-right",
+                  "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    38,
+                    33,
+                    1494,
+                    988
+                  ],
+                  "pivot": [
+                    1090,
+                    988
+                  ],
+                  "category": "creatures",
+                  "pose": "walk",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  176.39425051334703,
+                  115.6981519507187
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 2,
+                "used": [
+                  "warrior-walk-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-walk-left",
+              "expectedAsset": "warrior-walk-right",
+              "expectedFlip": true,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    38,
+                    33,
+                    1456,
+                    955
+                  ],
+                  "destination": [
+                    -127.44969199178645,
+                    -115.6981519507187,
+                    176.39425051334703,
+                    115.6981519507187
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 222.11088295687884,
+                    "right": 574.8993839835729,
+                    "top": 88.60369609856261,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-walk-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-walk-right",
+                  "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    38,
+                    33,
+                    1494,
+                    988
+                  ],
+                  "pivot": [
+                    1090,
+                    988
+                  ],
+                  "category": "creatures",
+                  "pose": "walk",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  176.39425051334703,
+                  115.6981519507187
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 2,
+                "used": [
+                  "warrior-walk-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-idle",
+              "expectedAsset": "warrior-idle-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    65,
+                    27,
+                    1399,
+                    974
+                  ],
+                  "destination": [
+                    -124.17864476386038,
+                    -118,
+                    169.48870636550308,
+                    118
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 71.64271047227925,
+                    "right": 410.6201232032854,
+                    "top": 84,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-idle-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-idle-right",
+                  "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    65,
+                    27,
+                    1464,
+                    1001
+                  ],
+                  "pivot": [
+                    764.5,
+                    1001
+                  ],
+                  "category": "creatures",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  169.48870636550308,
+                  118
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "warrior-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-attack",
+              "expectedAsset": "warrior-attack-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "windup",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    64,
+                    112,
+                    1442,
+                    846
+                  ],
+                  "destination": [
+                    -87.34907597535934,
+                    -102.49281314168378,
+                    174.69815195071868,
+                    102.49281314168378
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 145.30184804928132,
+                    "right": 494.6981519507187,
+                    "top": 115.01437371663243,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-attack-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-attack-right",
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    64,
+                    112,
+                    1506,
+                    958
+                  ],
+                  "pivot": [
+                    785,
+                    958
+                  ],
+                  "category": "creatures",
+                  "pose": "attack",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  174.69815195071868,
+                  102.49281314168378
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 2,
+                "decoded": 2,
+                "used": [
+                  "warrior-attack-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-dead",
+              "expectedAsset": "warrior-death-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": false,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+                  "naturalWidth": 1900,
+                  "naturalHeight": 828,
+                  "source": [
+                    24,
+                    36,
+                    1843,
+                    765
+                  ],
+                  "destination": [
+                    -90.25182751540041,
+                    -74.92419755754891,
+                    180.50365503080081,
+                    74.92419755754891
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 139.49634496919919,
+                    "right": 500.5036550308008,
+                    "top": 170.15160488490218,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-death-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-death-right",
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+                  "width": 1900,
+                  "height": 828,
+                  "bbox": [
+                    24,
+                    36,
+                    1867,
+                    801
+                  ],
+                  "pivot": [
+                    945.5,
+                    801
+                  ],
+                  "category": "creatures",
+                  "pose": "death",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  180.50365503080081,
+                  74.92419755754891
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 2,
+                "decoded": 2,
+                "used": [
+                  "warrior-death-right"
+                ],
+                "errors": {}
+              }
+            }
+          ],
+          "imageMeasurements": [
+            {
+              "id": "sentry-aim-front",
+              "range": [
+                0,
+                254
+              ],
+              "transparentPixels": 1234359,
+              "lowAlphaPixels": 33304,
+              "visiblePixels": 305201,
+              "bbox": [
+                335,
+                10,
+                1201,
+                1012
+              ],
+              "width": 1536,
+              "height": 1024
+            },
+            {
+              "id": "warrior-walk-right",
+              "range": [
+                0,
+                254
+              ],
+              "transparentPixels": 1172529,
+              "lowAlphaPixels": 62792,
+              "visiblePixels": 337543,
+              "bbox": [
+                38,
+                33,
+                1494,
+                988
+              ],
+              "width": 1536,
+              "height": 1024
+            }
+          ],
+          "limits": [
+            "Fourteen explicitly prepared native sessions/actor states; no campaign completion is claimed.",
+            "Eight static views/mirrors and one walk key are not complete animation cycles.",
+            "Pixel integrity, alpha and geometry are verified; exact film fidelity remains unvalidated."
+          ],
+          "resourceEvidence": {
+            "pageErrors": [],
+            "unexpectedRequestFailures": [],
+            "httpErrors": [],
+            "deliberatelyAborted": []
+          }
+        },
+        {
+          "ok": true,
+          "mode": "new-png-requests-aborted",
+          "checks": [
+            {
+              "name": "Fourteen declared states execute without mutating native session data",
+              "pass": true
+            },
+            {
+              "name": "The first frame retains the exact native V114 pixels while images load",
+              "pass": true
+            },
+            {
+              "name": "All independent expected image keys are drawn, except deliberately failed new PNGs",
+              "pass": true
+            },
+            {
+              "name": "Eight directional samples preserve the reviewed mirror convention",
+              "pass": true
+            },
+            {
+              "name": "Routed Warrior selects the new walking key in both directions",
+              "pass": true
+            },
+            {
+              "name": "Idle, windup and death keep their historical priority over the walking key",
+              "pass": true
+            },
+            {
+              "name": "Native PNG dimensions agree with the pinned catalog",
+              "pass": true
+            },
+            {
+              "name": "Alpha crop and aspect ratio remain native, without nonuniform stretching",
+              "pass": true
+            },
+            {
+              "name": "Sentry height and Warrior source-scale normalization stay native",
+              "pass": true
+            },
+            {
+              "name": "Bottom pivots remain at the projected ground line",
+              "pass": true
+            },
+            {
+              "name": "All drawn PNGs remain inside their inspection canvases",
+              "pass": true
+            },
+            {
+              "name": "Unexpected image failures are absent",
+              "pass": true
+            },
+            {
+              "name": "Deliberately failed new PNGs retain pixel-identical native V114 fallback",
+              "pass": true
+            },
+            {
+              "name": "No unexpected network or browser error",
+              "pass": true
+            },
+            {
+              "name": "Both new PNG request paths were deliberately aborted",
+              "pass": true
+            }
+          ],
+          "fixtures": [
+            {
+              "id": "sentry-right",
+              "expectedAsset": "sentry-idle-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    47,
+                    39,
+                    1459,
+                    959
+                  ],
+                  "destination": [
+                    -57.051616266944734,
+                    -75,
+                    114.10323253388947,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 205.89676746611053,
+                    "right": 434.10323253388947,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-idle-right",
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    47,
+                    39,
+                    1506,
+                    998
+                  ],
+                  "pivot": [
+                    776.5,
+                    998
+                  ],
+                  "category": "props",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  114.10323253388947,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "sentry-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-front-right",
+              "expectedAsset": "sentry-aim-front-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    214,
+                    13,
+                    1221,
+                    1003
+                  ],
+                  "destination": [
+                    -45.6505483549352,
+                    -75,
+                    91.3010967098704,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 228.6989032901296,
+                    "right": 411.3010967098704,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    214,
+                    13,
+                    1435,
+                    1016
+                  ],
+                  "pivot": [
+                    824.5,
+                    1016
+                  ],
+                  "category": "equipment",
+                  "pose": "front-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  91.3010967098704,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 3,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-front",
+              "expectedAsset": "sentry-aim-front",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [],
+              "finalFallbacks": 1,
+              "nativeFallbackPixelsEqual": true,
+              "selectedCreatureId": null,
+              "geometry": null,
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 0,
+                "failed": 1,
+                "draws": 0,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 0,
+                "used": [],
+                "errors": {
+                  "sentry-aim-front": "Image could not be decoded."
+                }
+              }
+            },
+            {
+              "id": "sentry-front-left",
+              "expectedAsset": "sentry-aim-front-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    214,
+                    13,
+                    1221,
+                    1003
+                  ],
+                  "destination": [
+                    -45.6505483549352,
+                    -75,
+                    91.3010967098704,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 228.6989032901296,
+                    "right": 411.3010967098704,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-front-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    214,
+                    13,
+                    1435,
+                    1016
+                  ],
+                  "pivot": [
+                    824.5,
+                    1016
+                  ],
+                  "category": "equipment",
+                  "pose": "front-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  91.3010967098704,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 3,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-front-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-left",
+              "expectedAsset": "sentry-idle-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    47,
+                    39,
+                    1459,
+                    959
+                  ],
+                  "destination": [
+                    -57.051616266944734,
+                    -75,
+                    114.10323253388947,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 205.89676746611053,
+                    "right": 434.10323253388947,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-idle-right",
+                  "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    47,
+                    39,
+                    1506,
+                    998
+                  ],
+                  "pivot": [
+                    776.5,
+                    998
+                  ],
+                  "category": "props",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  114.10323253388947,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "sentry-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear-left",
+              "expectedAsset": "sentry-aim-rear-right",
+              "expectedFlip": true,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    233,
+                    18,
+                    1097,
+                    982
+                  ],
+                  "destination": [
+                    -41.89154786150713,
+                    -75,
+                    83.78309572301426,
+                    75
+                  ],
+                  "transform": [
+                    -2,
+                    -0.0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": true,
+                  "bounds": {
+                    "left": 236.21690427698576,
+                    "right": 403.78309572301424,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    233,
+                    18,
+                    1330,
+                    1000
+                  ],
+                  "pivot": [
+                    781.5,
+                    1000
+                  ],
+                  "category": "equipment",
+                  "pose": "rear-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  83.78309572301426,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear",
+              "expectedAsset": "sentry-aim-rear",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    228,
+                    14,
+                    1079,
+                    994
+                  ],
+                  "destination": [
+                    -40.706740442655935,
+                    -75,
+                    81.41348088531187,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 238.58651911468814,
+                    "right": 401.41348088531186,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    228,
+                    14,
+                    1307,
+                    1008
+                  ],
+                  "pivot": [
+                    767.5,
+                    1008
+                  ],
+                  "category": "equipment",
+                  "pose": "rear",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  81.41348088531187,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 3,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-rear-right",
+              "expectedAsset": "sentry-aim-rear-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    233,
+                    18,
+                    1097,
+                    982
+                  ],
+                  "destination": [
+                    -41.89154786150713,
+                    -75,
+                    83.78309572301426,
+                    75
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 236.21690427698576,
+                    "right": 403.78309572301424,
+                    "top": 170,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": null,
+              "geometry": {
+                "measuredAsset": {
+                  "id": "sentry-aim-rear-right",
+                  "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    233,
+                    18,
+                    1330,
+                    1000
+                  ],
+                  "pivot": [
+                    781.5,
+                    1000
+                  ],
+                  "category": "equipment",
+                  "pose": "rear-right",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  83.78309572301426,
+                  75
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 1,
+                "used": [
+                  "sentry-aim-rear-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "sentry-turn-front",
+              "expectedAsset": "sentry-aim-front",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-sentry",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [],
+              "finalFallbacks": 1,
+              "nativeFallbackPixelsEqual": true,
+              "selectedCreatureId": null,
+              "geometry": null,
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 0,
+                "failed": 1,
+                "draws": 0,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 0,
+                "used": [],
+                "errors": {
+                  "sentry-aim-front": "Image could not be decoded."
+                }
+              }
+            },
+            {
+              "id": "warrior-walk-right",
+              "expectedAsset": "warrior-walk-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [],
+              "finalFallbacks": 1,
+              "nativeFallbackPixelsEqual": true,
+              "selectedCreatureId": "warrior-walk-right",
+              "geometry": null,
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 0,
+                "failed": 1,
+                "draws": 0,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 0,
+                "used": [],
+                "errors": {
+                  "warrior-walk-right": "Image could not be decoded."
+                }
+              }
+            },
+            {
+              "id": "warrior-walk-left",
+              "expectedAsset": "warrior-walk-right",
+              "expectedFlip": true,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [],
+              "finalFallbacks": 1,
+              "nativeFallbackPixelsEqual": true,
+              "selectedCreatureId": "warrior-walk-right",
+              "geometry": null,
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 0,
+                "failed": 1,
+                "draws": 0,
+                "evicted": 0,
+                "measured": 0,
+                "decoded": 0,
+                "used": [],
+                "errors": {
+                  "warrior-walk-right": "Image could not be decoded."
+                }
+              }
+            },
+            {
+              "id": "warrior-idle",
+              "expectedAsset": "warrior-idle-right",
+              "expectedFlip": false,
+              "declaredRoute": [],
+              "phase": "idle",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    65,
+                    27,
+                    1399,
+                    974
+                  ],
+                  "destination": [
+                    -124.17864476386038,
+                    -118,
+                    169.48870636550308,
+                    118
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 71.64271047227925,
+                    "right": 410.6201232032854,
+                    "top": 84,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-idle-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-idle-right",
+                  "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    65,
+                    27,
+                    1464,
+                    1001
+                  ],
+                  "pivot": [
+                    764.5,
+                    1001
+                  ],
+                  "category": "creatures",
+                  "pose": "",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  169.48870636550308,
+                  118
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 1,
+                "loaded": 1,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 1,
+                "decoded": 1,
+                "used": [
+                  "warrior-idle-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-attack",
+              "expectedAsset": "warrior-attack-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "windup",
+              "alive": true,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+                  "naturalWidth": 1536,
+                  "naturalHeight": 1024,
+                  "source": [
+                    64,
+                    112,
+                    1442,
+                    846
+                  ],
+                  "destination": [
+                    -87.34907597535934,
+                    -102.49281314168378,
+                    174.69815195071868,
+                    102.49281314168378
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 145.30184804928132,
+                    "right": 494.6981519507187,
+                    "top": 115.01437371663243,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-attack-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-attack-right",
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+                  "width": 1536,
+                  "height": 1024,
+                  "bbox": [
+                    64,
+                    112,
+                    1506,
+                    958
+                  ],
+                  "pivot": [
+                    785,
+                    958
+                  ],
+                  "category": "creatures",
+                  "pose": "attack",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  174.69815195071868,
+                  102.49281314168378
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 2,
+                "evicted": 0,
+                "measured": 2,
+                "decoded": 2,
+                "used": [
+                  "warrior-attack-right"
+                ],
+                "errors": {}
+              }
+            },
+            {
+              "id": "warrior-dead",
+              "expectedAsset": "warrior-death-right",
+              "expectedFlip": false,
+              "declaredRoute": [
+                {
+                  "x": 970,
+                  "z": 190
+                }
+              ],
+              "phase": "idle",
+              "alive": false,
+              "room": "v106-hadley",
+              "firstFrame": {
+                "fallbacks": 1,
+                "draws": 0,
+                "nativePixelsEqual": true
+              },
+              "stateUnchanged": true,
+              "draws": [
+                {
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+                  "naturalWidth": 1900,
+                  "naturalHeight": 828,
+                  "source": [
+                    24,
+                    36,
+                    1843,
+                    765
+                  ],
+                  "destination": [
+                    -90.25182751540041,
+                    -74.92419755754891,
+                    180.50365503080081,
+                    74.92419755754891
+                  ],
+                  "transform": [
+                    2,
+                    0,
+                    0,
+                    2,
+                    320,
+                    320
+                  ],
+                  "flip": false,
+                  "bounds": {
+                    "left": 139.49634496919919,
+                    "right": 500.5036550308008,
+                    "top": 170.15160488490218,
+                    "bottom": 320
+                  }
+                }
+              ],
+              "finalFallbacks": 0,
+              "nativeFallbackPixelsEqual": null,
+              "selectedCreatureId": "warrior-death-right",
+              "geometry": {
+                "measuredAsset": {
+                  "id": "warrior-death-right",
+                  "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+                  "width": 1900,
+                  "height": 828,
+                  "bbox": [
+                    24,
+                    36,
+                    1867,
+                    801
+                  ],
+                  "pivot": [
+                    945.5,
+                    801
+                  ],
+                  "category": "creatures",
+                  "pose": "death",
+                  "heldWeapon": false,
+                  "bboxStatus": "alpha128-measured"
+                },
+                "expectedSize": [
+                  180.50365503080081,
+                  74.92419755754891
+                ],
+                "aspectPreserved": true,
+                "sizeCorrect": true,
+                "groundPivot": true,
+                "cropCorrect": true
+              },
+              "status": {
+                "version": 116,
+                "requested": 2,
+                "loaded": 2,
+                "failed": 0,
+                "draws": 1,
+                "evicted": 0,
+                "measured": 2,
+                "decoded": 2,
+                "used": [
+                  "warrior-death-right"
+                ],
+                "errors": {}
+              }
+            }
+          ],
+          "imageMeasurements": [],
+          "limits": [
+            "Fourteen explicitly prepared native sessions/actor states; no campaign completion is claimed.",
+            "Eight static views/mirrors and one walk key are not complete animation cycles.",
+            "Pixel integrity, alpha and geometry are verified; exact film fidelity remains unvalidated."
+          ],
+          "resourceEvidence": {
+            "pageErrors": [],
+            "unexpectedRequestFailures": [],
+            "httpErrors": [],
+            "deliberatelyAborted": [
+              "/assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+              "/assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png"
+            ]
+          }
+        }
+      ],
+      "captures": [
+        {
+          "file": "directions-v123.png",
+          "sha256": "106467feb63429c629f1db14d4d0387aa45f2b92936f04627835debda8ae9afd",
+          "imageEdited": false
+        },
+        {
+          "file": "directions-v123-failure.png",
+          "sha256": "94ce5198f181267257158d67f252c9d9e66d0cf0c46c5fe2513fd6e5b4e0a187",
+          "imageEdited": false
+        }
+      ],
+      "provenance": {
+        "gitHeadAtRun": "d36e52a825b53ace0739c80bf4eb0947cc76bfd4",
+        "manifestHashes": {
+          "docs/development/aliens-1986-sprites-v116/manifest.json": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+          "docs/development/aliens-1986-sprites-v117/manifest.json": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+          "docs/development/aliens-1986-sprites-v118/manifest.json": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+          "docs/development/aliens-1986-sprites-v119/manifest.json": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0",
+          "docs/development/aliens-1986-sprites-v120/manifest.json": "a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437",
+          "docs/development/aliens-1986-sprites-v121/manifest.json": "80424f4dd7a15fc56759c428d88917e7c2a5b713260c41244184fe6f62906f90",
+          "docs/development/aliens-1986-sprites-v122/manifest.json": "6579c0f0bd346cb2849e7261b5edce061c495636e7119dd82352cbcfcf5ff780",
+          "docs/development/aliens-1986-sprites-v123/manifest.json": "6c7da69916b672d109fd324f35740452df51efb29256cee76cf1fcbaa97e737e"
+        },
+        "modules": {
+          "modules/aliens-1986/v114/src/operation-v114.mjs": "d35dabd9cc0f20173ea8a9f1e9004237960568f43459d406184d9bcdac3d07c5",
+          "modules/aliens-1986/v114/src/operation-scenes-v114.mjs": "b038701ea26c03807990f972a219682a55872394315f60852b91c30a56289a75",
+          "modules/aliens-1986/v114/src/operation-scenes-v112.mjs": "7f2c66acd411e4afb0972f16d7daadaaf765800eb59a848bcae50ee06f12ec98",
+          "modules/aliens-1986/v114/src/operation-scenes-v109.mjs": "c0f0b2847e107f1d83838c5a85d24fee9507298e96548baf5e4b30076e38ce41",
+          "modules/aliens-1986/v114/src/operation-scenes-v107.mjs": "41e351a13feeb1d9b5f6477fc2485446f73493b72425d9a5d23932be5f5a3bb3",
+          "modules/aliens-1986/v114/src/validation-scenes.mjs": "9e2fd1a2b4f1d5303bb69918c4a0ef46d51e61f290ff8d6a0ad8b894634ddb19",
+          "modules/aliens-1986/v114/src/logistics-v114.mjs": "6d6553a74eaaa027e57a64298a960d2396f3de2769b21f3879bcae777816b7a2",
+          "modules/aliens-1986/v114/src/contact-v114.mjs": "9e151a30fc8b0891bb98298d5564ef09be6963fcfb036efc7e8656fbe21813c8",
+          "modules/aliens-1986/v114/src/engineering-v114.mjs": "5e303a8add77c667592c803f800cfeeb82b8c95d111e02d09ce3b3960df52618",
+          "modules/aliens-1986/v114/src/spatial-core-v108.mjs": "cbc5c2ad29666b181514604db48b399524e298403277237868021a36646e3edc",
+          "modules/aliens-1986/v114/src/lighting-v114.mjs": "4bed8506c6825050da6e4b44b188c1eb8a3de7b1dae79654f355a2b01b07cc5b",
+          "modules/aliens-1986/v114/src/beacons-v114.mjs": "953b7d0b339c800f8f19b0d47f540b9f938e09d582aeee063e6d69e1ffa05761",
+          "modules/aliens-1986/v114/src/tactics-v114.mjs": "1a85fae4ace17be5282050558c1c896735048ad0565ed0b5500d2f1ff4e6dd16",
+          "modules/aliens-1986/v114/src/arsenal-v114.mjs": "385a10eff7aca4d435df53113754b56dfde529737aead8a804d083f409554947",
+          "modules/aliens-1986/v114/src/operation-v113.mjs": "d31bee8e807c76cd1f857e2c7e757aad93a3fc396aa4dd25fd6eaf2797526e88",
+          "modules/aliens-1986/v114/src/logistics-v112.mjs": "9e6f086a4bbda918b7c3fe5d4c80ab348a84ab101986a6a34081a026ae1668d0",
+          "modules/aliens-1986/v114/src/contact-v112.mjs": "e222657e57add884b9c619bca6882883cec5e93a10891bf51989396944f5fecd",
+          "modules/aliens-1986/v114/src/engineering-v112.mjs": "bf4001ab71cc53f368adc5f65692e5757463730cf86d3f0786bd2f7aba6001c9",
+          "modules/aliens-1986/v114/src/lighting-v112.mjs": "ecdb86384aed7f5b0d329041a18d5b5bd6a0614cfe222c5fc8fa3bfc0d703095",
+          "modules/aliens-1986/v114/src/beacons-v112.mjs": "8a9f0aeec931388bcb50cbce2013dc1f090aa40a554b39d42da186899dc15649",
+          "modules/aliens-1986/v114/src/tactics-v113.mjs": "866c90cf6706438b15fd717c0244e1db930cacce5cd07643779048b6238fcc6e",
+          "modules/aliens-1986/v114/src/operation-v112.mjs": "7dfbe6b3f2d16ac0e96e9114762e716ae848a2264839e9469efa065cd58ebb90",
+          "modules/aliens-1986/v114/src/operation-v111.mjs": "cce2a5851f8347b450a9a62041d33db372b0633eb999c157587f587db38b8b7b",
+          "modules/aliens-1986/v114/src/logistics-v111.mjs": "413ecc3b0154096997af1e219794746936bf44e2844cfeea310669f8d993cd46",
+          "modules/aliens-1986/v114/src/contact-v111.mjs": "93c22048aa88c23020b94cb144ab471c0fc676ba600b4172e3d15c5863bd05cf",
+          "modules/aliens-1986/v114/src/engineering-v111.mjs": "506e86b913f9f943b1c9c6f22587c0b20079e1e2ed909028d26156de1ae08691",
+          "modules/aliens-1986/v114/src/lighting-v111.mjs": "5a8a48fe81636b29e76ed7e3a1ee64f341a81ecd8994a53c76607fca9533bed0",
+          "modules/aliens-1986/v114/src/operation-v110.mjs": "ee70913307b44b6ee3715eaa9555083835e732933da95f46afd09ff03b7a33fe",
+          "modules/aliens-1986/v114/src/logistics-v110.mjs": "4c30af8970f079b6ff5890f673a3fb848fa8832f496cb77c557b77861cae9ec3",
+          "modules/aliens-1986/v114/src/contact-v110.mjs": "c9dfae8495b18e323dc9eba37541cb26077e3a8a7614e95a5073eef29ecef4ca",
+          "modules/aliens-1986/v114/src/engineering-v110.mjs": "506e86b913f9f943b1c9c6f22587c0b20079e1e2ed909028d26156de1ae08691",
+          "modules/aliens-1986/v114/src/operation-v109.mjs": "c22c23161eb2fc0f93ed245714e5b0949d337e4498322770e3414619262da086",
+          "modules/aliens-1986/v114/src/logistics-v109.mjs": "dfbf82528ca6047e85b8816ef4cdee701a3b6a9b8f19e2b9ec3169af221f4b20",
+          "modules/aliens-1986/v114/src/contact-v109.mjs": "dc79c46ab41d377ef80d973b69320f8003a942e2ebd0703fa65078ca2ebf61fc",
+          "modules/aliens-1986/v114/src/operation-v108.mjs": "b5a8750cf07457afaff449d8c6854c74157f26602e025d95183bf0de59853fae",
+          "modules/aliens-1986/v114/src/operation-v107.mjs": "012eb882162c7ffa3ab98e5b8b7f55931c21bbfd94c360cae452d76b5d975fa9",
+          "modules/aliens-1986/v114/src/spatial-core.mjs": "974cbdf30ee94e57d142c62e03cc249fc6e11dc4fff63d8214b39b19747bbd35",
+          "modules/aliens-1986/v114/src/contact-v108.mjs": "142eab4666f72a93f6e761c39f7b41e06725c7b1f18bbcc1e691171826db81e7",
+          "modules/aliens-1986/v114/preview/renderer.mjs": "eb77ed0054f06889f57e7be41796916994d15d0b0fb978882da01fecb184de8b",
+          "modules/aliens-1986/v114/preview/lighting-renderer.mjs": "843d9d3bd4c3053a2d570c30ad8a5d9cc22b58627605d7da38e5bd04e197a0f3",
+          "modules/aliens-1986/v114/preview/tactical-renderer.mjs": "df3618a7bdb5f23a997a2f77f1bcc219e6d21efb54eb2ad086e9aeb3bfdaf569",
+          "modules/aliens-1986/v114/preview/film-renderer-v114.mjs": "a63edbdc901a07738ad43d0a755e2361721afb46606dd1a5e029f4690cf0c6c1",
+          "modules/aliens-1986/v114/src/fidelity-v114.mjs": "fff93154e622c24d1b76a5a3646ef74c8d4373877c08a11585e945b874ab85b2",
+          "modules/aliens-1986/v121/raster-furniture-v121.mjs": "5cb18fda7b4ea68c5715681c8931388e0fd464e4a61af38ae9a3761cc10883a1",
+          "modules/aliens-1986/v116/sprite-loader-v116.mjs": "8dd7974d0222294b0e013e06efdc74d76259927ae9890648b57b6fa4385cc7c5",
+          "modules/aliens-1986/v120/raster-furniture-v120.mjs": "c725d9f7e40ab4f1f86609d69ccacfd94a9b8e28d5e704db5f721668846aec4b",
+          "modules/aliens-1986/v119/raster-furniture-v119.mjs": "c6adb36868509894beb75e1f350b884f573543e3c55e840db6015322d4c01176",
+          "modules/aliens-1986/v118/raster-props-v118.mjs": "dd17932bedfe1f457440f11d9f4e1fd9b87da19660177c2c210d1d85b3c3b31c",
+          "modules/aliens-1986/v116/raster-renderer-v116.mjs": "77d7315bbc4adb6ddb01c4493fc45daaed8beb73ba68efc3d1f88373a7d28170"
+        },
+        "pngsVerified": [
+          {
+            "id": "alarm-unit",
+            "path": "assets/dlc/aliens-1986/v115/architecture/alarm-unit.png",
+            "sha256": "43994fe8160f3a689e60ede33102a1a78697f481f2e524a1ca61bb2c2106a9d9",
+            "bytes": 1775944
+          },
+          {
+            "id": "apc-monitors",
+            "path": "assets/dlc/aliens-1986/v115/architecture/apc-monitors.png",
+            "sha256": "20de569984eff0f5813035a7749cd0b555661c5723b90d746ff3de2dc136b26c",
+            "bytes": 2610668
+          },
+          {
+            "id": "apone-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/apone-idle-right.png",
+            "sha256": "e9f06759352031117da8e607f4f5e0fb6efec8c887aebc64458fa8b58fce7d76",
+            "bytes": 1702095
+          },
+          {
+            "id": "apone-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/apone-interact-right.png",
+            "sha256": "3c5f0fd9d38be4afae4d74578f1a7128939717956d195a7e9c6b830bf7a533ef",
+            "bytes": 1817918
+          },
+          {
+            "id": "apone-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/apone-walk-right.png",
+            "sha256": "6d80f98dee845daf9ec6320cdc4c9bb664078d467c06e89bc68ec401aba823d3",
+            "bytes": 1975884
+          },
+          {
+            "id": "armament-case-closed",
+            "path": "assets/dlc/aliens-1986/v115/props/armament-case-closed.png",
+            "sha256": "37cc38c13e51825a8d8cf6cdbae3686e9bc6bf05921026571ea3580ad3f12903",
+            "bytes": 1874696
+          },
+          {
+            "id": "armament-case-open",
+            "path": "assets/dlc/aliens-1986/v115/props/armament-case-open.png",
+            "sha256": "e0746e97934e22b7aba347679e382df444f64cb32e58d971388d27884b9baff6",
+            "bytes": 2235941
+          },
+          {
+            "id": "armor-rack",
+            "path": "assets/dlc/aliens-1986/v115/architecture/armor-rack.png",
+            "sha256": "033415354abfb526e454fcdd6c35f445e1fcc48c6364dbceea6df8ef201a2cb0",
+            "bytes": 1511611
+          },
+          {
+            "id": "beacon",
+            "path": "assets/dlc/aliens-1986/v115/props/beacon.png",
+            "sha256": "97b9beb81815baac04ec60525cd23f72ffc6320ceb547f8a6337c89b143eef96",
+            "bytes": 1631322
+          },
+          {
+            "id": "beacon-case",
+            "path": "assets/dlc/aliens-1986/v115/props/beacon-case.png",
+            "sha256": "9d2f9eeaafd3650dddc6b97a2e6110796ecd08f0823820f5a9047ceb253f8787",
+            "bytes": 2299957
+          },
+          {
+            "id": "beacon-case-closed",
+            "path": "assets/dlc/aliens-1986/v115/props/beacon-case-closed.png",
+            "sha256": "0e885a54e0643939faa88a768a619b78ee7d972a01b6976230b2d6d511bd036b",
+            "bytes": 1622285
+          },
+          {
+            "id": "bishop-damaged",
+            "path": "assets/dlc/aliens-1986/v115/variants/bishop-damaged.png",
+            "sha256": "5d756e7dd484e4b146f3a0d4134344f6b2654ee090661ec98d9d89318370330b",
+            "bytes": 1987713
+          },
+          {
+            "id": "bishop-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/bishop-idle-right.png",
+            "sha256": "814795c8cb8a2ff3a15cf15ca510a036ab9f33ecf72f4ce95de6790cfac979e0",
+            "bytes": 1689272
+          },
+          {
+            "id": "bishop-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/bishop-interact-right.png",
+            "sha256": "8ab70a6c7aa2be7f107cb2d995609be42566eae864aa1a0c0015c95e78745c5a",
+            "bytes": 1748924
+          },
+          {
+            "id": "bishop-uplink",
+            "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png",
+            "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+            "bytes": 1985049
+          },
+          {
+            "id": "bishop-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/bishop-walk-right.png",
+            "sha256": "5a1dbf6634ab6171eeaad78d63fb3bad29de77c5561b091cb0dc6ca723a6b3a6",
+            "bytes": 1907641
+          },
+          {
+            "id": "burke-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/burke-idle-right.png",
+            "sha256": "ace8149a7ea4fa0eb0bea083f5e32f9799c3dce87f70ee5a7612b5811ca701d8",
+            "bytes": 1592804
+          },
+          {
+            "id": "burke-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/burke-interact-right.png",
+            "sha256": "be1809e6f39096c881d02bc83beea46981b59deed86c2e1d41ea2c18dbdcc45d",
+            "bytes": 1575163
+          },
+          {
+            "id": "burke-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/burke-walk-right.png",
+            "sha256": "690490afcaad363e6f1d282c7c097e17d7daf936aa73cac583ab7290b26f5412",
+            "bytes": 1869912
+          },
+          {
+            "id": "cargo-crate",
+            "path": "assets/dlc/aliens-1986/v115/props/cargo-crate.png",
+            "sha256": "a68420aa374557c8dbc607081a78ad699cad816f2b734a5d4d4fadf51ff4fadf",
+            "bytes": 2264356
+          },
+          {
+            "id": "casey-head",
+            "path": "assets/dlc/aliens-1986/v115/props/casey-head.png",
+            "sha256": "1fb033edaa9a6beea81be0338436bedc62e423840e975f31b8dd6e86099405b5",
+            "bytes": 1814403
+          },
+          {
+            "id": "chestburster-idle-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/chestburster-idle-right.png",
+            "sha256": "132848483cb8855dc8affc9767bb548a5f5030bd9735bf7f11d37f37ab3f3e90",
+            "bytes": 760100
+          },
+          {
+            "id": "colonist-cocoon",
+            "path": "assets/dlc/aliens-1986/v115/architecture/colonist-cocoon.png",
+            "sha256": "e799683a79747ac2f8090331661b91ff88ec50d181513eb9908e16e7e7c0a6b8",
+            "bytes": 1914250
+          },
+          {
+            "id": "combat-knife",
+            "path": "assets/dlc/aliens-1986/v115/props/combat-knife.png",
+            "sha256": "df923886e7af0d68ba7887df4c96f244a44a464c5da4611ce3dd63b91ea5d3af",
+            "bytes": 683047
+          },
+          {
+            "id": "comms",
+            "path": "assets/dlc/aliens-1986/v115/props/comms.png",
+            "sha256": "4d2ee01e598d7795a6182871b373ec10a11a1bd283e89c10688664c890c22820",
+            "bytes": 412160
+          },
+          {
+            "id": "crowe-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/crowe-idle-right.png",
+            "sha256": "47196d9dbcffecc023ca361a5d7e11b50f49fc64134c76b0f629f6d24db94f58",
+            "bytes": 1708480
+          },
+          {
+            "id": "crowe-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/crowe-interact-right.png",
+            "sha256": "1e92e37283222f8f51d48c59137c86e28201f767aa03d2093fba537584460799",
+            "bytes": 1844637
+          },
+          {
+            "id": "crowe-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/crowe-walk-right.png",
+            "sha256": "a57f2f7eb3d94331b2dba696b794ea762faac0b605e4825a838ebd63e8093684",
+            "bytes": 1939397
+          },
+          {
+            "id": "cryo-pillow",
+            "path": "assets/dlc/aliens-1986/v115/props/cryo-pillow.png",
+            "sha256": "3ab47941c56bf751fde04364e62e1ea64a47e09f69a9d14b130153617c961138",
+            "bytes": 1923197
+          },
+          {
+            "id": "cryopod-sulaco",
+            "path": "assets/dlc/aliens-1986/v115/architecture/cryopod-sulaco.png",
+            "sha256": "0bf703c67b06330889f36ce8ac9ce6b531264dac106bfc28f8a9230b39cc95f4",
+            "bytes": 2019585
+          },
+          {
+            "id": "dietrich-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/dietrich-idle-right.png",
+            "sha256": "e35c6bd46ee709b3b6f58ba63dcb80edbc95db5779c582fdb9582469428e3f1a",
+            "bytes": 1532950
+          },
+          {
+            "id": "dietrich-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/dietrich-interact-right.png",
+            "sha256": "0838b5d19870d760b15117072056c55b460516fbc045c1e27e959ed4dc91abf9",
+            "bytes": 1684073
+          },
+          {
+            "id": "dietrich-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/dietrich-walk-right.png",
+            "sha256": "41b72c77e9a772e087526162f10baee614a451a7d87bd27c476c027ea651045e",
+            "bytes": 1748784
+          },
+          {
+            "id": "door-frame",
+            "path": "assets/dlc/aliens-1986/v115/architecture/door-frame.png",
+            "sha256": "4f2c6b67a752d9828545de69e847b4b1d60786a821bb51228bd89e2a621eecc1",
+            "bytes": 1995294
+          },
+          {
+            "id": "door-leaf",
+            "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+            "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+            "bytes": 2540215
+          },
+          {
+            "id": "drain-grate",
+            "path": "assets/dlc/aliens-1986/v115/architecture/drain-grate.png",
+            "sha256": "f0a06cd7d6641c6325d6c09253b23bd127c20c5b0ce011fbef2120e43e254c75",
+            "bytes": 2103506
+          },
+          {
+            "id": "drake-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/drake-idle-right.png",
+            "sha256": "7a8e290634bbb612bd1ac3fffaced9d4ac9e3cd1fa5eb22938ebf913d3e090f3",
+            "bytes": 1577704
+          },
+          {
+            "id": "drake-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/drake-interact-right.png",
+            "sha256": "f70633c93450fd71f306bc70ee28537b769f03e111a5c74a32dfe8952c1ff4d6",
+            "bytes": 2017631
+          },
+          {
+            "id": "drake-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/drake-walk-right.png",
+            "sha256": "dc24837616baf635d47fd69114ee0cc48067c3d70bbf013064db1337d9b0be52",
+            "bytes": 2002002
+          },
+          {
+            "id": "egg-closed",
+            "path": "assets/user/castes-v87/film_ovomorphe_aliens_1986.png",
+            "sha256": "b7b3c189e4c39a0b12c5fc31828ed134bd2d19d4dcc133e801f913e7ef9077a3",
+            "bytes": 2594158
+          },
+          {
+            "id": "egg-cluster",
+            "path": "assets/dlc/aliens-1986/v115/architecture/egg-cluster.png",
+            "sha256": "d59faefa346fd28d9a9bc8ca45a1eacdd28bb288b8d603cd655d384eafe57315",
+            "bytes": 2174920
+          },
+          {
+            "id": "egg-open",
+            "path": "assets/dlc/aliens-1986/v115/creatures/egg-open.png",
+            "sha256": "d0dedeebadc084c0157d2d2c596d5dabc764db1bbb29c20048080dbeb423a350",
+            "bytes": 2019841
+          },
+          {
+            "id": "facehugger-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/creatures/facehugger-idle-right.png",
+            "sha256": "e8f35a159ab2239f4c73314fef1014989218999e7690f9f9af922774d3f1df27",
+            "bytes": 698963
+          },
+          {
+            "id": "facehugger-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/facehugger-walk-right.png",
+            "sha256": "6a91989d3551694974a1389b04f3fd6fcedc632f80c4a4af01faba0f0898a7c9",
+            "bytes": 970535
+          },
+          {
+            "id": "ferro-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/ferro-idle-right.png",
+            "sha256": "85973354cf28f357e27f6f9259a1f440b9757eb9fe51180d359c260b439e5006",
+            "bytes": 1634158
+          },
+          {
+            "id": "ferro-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/ferro-interact-right.png",
+            "sha256": "bc79cd467b17ce14788f6901f7ebaa3dea062a6cda7656adc289f507a08804da",
+            "bytes": 1659158
+          },
+          {
+            "id": "ferro-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/ferro-walk-right.png",
+            "sha256": "7a40726c68fcdb1c3686830146df7f273e197f3042773838e2e0e6e5d4841915",
+            "bytes": 1810933
+          },
+          {
+            "id": "flight-console",
+            "path": "assets/dlc/aliens-1986/v115/architecture/flight-console.png",
+            "sha256": "972ccbda14f4127a53adfcfb5926f164339a4191feebc0c3c648be65e0e113d7",
+            "bytes": 1897992
+          },
+          {
+            "id": "frost-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/frost-idle-right.png",
+            "sha256": "d35167bc537c473c9cb8bf7197e9d2a36dda042313e3ef57c36f688e4f040eba",
+            "bytes": 1755159
+          },
+          {
+            "id": "frost-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/frost-interact-right.png",
+            "sha256": "ce1b1557ccdc70e7fdeb1206cc154232bfb96cbb9b37e92997437a75db5a8a11",
+            "bytes": 1838155
+          },
+          {
+            "id": "frost-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/frost-walk-right.png",
+            "sha256": "da58bad7cd77190b959ea4277f963177a338a3e088e98bfb376c1419dfe5430a",
+            "bytes": 1908819
+          },
+          {
+            "id": "gateway-photo",
+            "path": "assets/dlc/aliens-1986/v115/props/gateway-photo.png",
+            "sha256": "3c805c665b2a2509e033d323000cd84eaa2a31c56d5c8bc132951d04848b48b4",
+            "bytes": 2628706
+          },
+          {
+            "id": "gateway-pillow",
+            "path": "assets/dlc/aliens-1986/v115/props/gateway-pillow.png",
+            "sha256": "ba76571dfdc648fe6262657a973b01a9c02419508d116187118b940271fe1562",
+            "bytes": 1832169
+          },
+          {
+            "id": "gorman-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/gorman-idle-right.png",
+            "sha256": "7f907334291942593d03c98c08324e48e08b5413419dd398c70e5e69580d6e6b",
+            "bytes": 1459755
+          },
+          {
+            "id": "gorman-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/gorman-interact-right.png",
+            "sha256": "267471fe60f5c4f543b69eb4d1e83ba98f1ddd13078ec63d69836984b597d116",
+            "bytes": 1565737
+          },
+          {
+            "id": "gorman-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/gorman-walk-right.png",
+            "sha256": "591fb60b4e5363997fd984401c71f4d3cd1a15f6f4ffab6f2357455984caf0cd",
+            "bytes": 1790450
+          },
+          {
+            "id": "gorman-wounded",
+            "path": "assets/dlc/aliens-1986/v115/variants/gorman-wounded.png",
+            "sha256": "b863448c53000fede5f2e129b1456c76bcf2379ace94df9a7f9cdea2f0bf4603",
+            "bytes": 1508770
+          },
+          {
+            "id": "gun-rack",
+            "path": "assets/dlc/aliens-1986/v115/architecture/gun-rack.png",
+            "sha256": "80059015c81e1f2e1398b9b0cac68a8e7318da513bd45932c78d4c6d68493457",
+            "bytes": 1456373
+          },
+          {
+            "id": "helmet-camera",
+            "path": "assets/dlc/aliens-1986/v115/props/helmet-camera.png",
+            "sha256": "d7417c6e47457b6667fd54dd3aeaa7903f9b3453e6a868ced349acb70fba5a71",
+            "bytes": 1914053
+          },
+          {
+            "id": "hicks-idle-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+            "sha256": "3965ef085ed611ea1dba999f683b797f54824495437367e7b2abfa0acd795870",
+            "bytes": 1859098
+          },
+          {
+            "id": "hicks-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/hicks-interact-right.png",
+            "sha256": "7b86206b7db41e66405dd10954e4322ed20b503cbe3e0ccc98744cad333df50a",
+            "bytes": 1962526
+          },
+          {
+            "id": "hicks-shotgun",
+            "path": "assets/dlc/aliens-1986/v115/props/hicks-shotgun.png",
+            "sha256": "be542456f10442de1cc1fcf2bd590e686aa194e0b6764f86b0589160bce41357",
+            "bytes": 851404
+          },
+          {
+            "id": "hicks-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/hicks-walk-right.png",
+            "sha256": "0858cbd44b244d931ea4b2c0b62d249e36eba979337bac5d1ac8dcc3e70df890",
+            "bytes": 1940444
+          },
+          {
+            "id": "hudson-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/hudson-idle-right.png",
+            "sha256": "92d170aaad4804412ebe41a222ea62fc93e21e7a20dd1ca03a3dd4d1c6025725",
+            "bytes": 1809525
+          },
+          {
+            "id": "hudson-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/hudson-interact-right.png",
+            "sha256": "e8c636c3b9a21baba6a41b50c19cc0e4b4079a997d31e8aff5fadb130350fd8e",
+            "bytes": 1851597
+          },
+          {
+            "id": "hudson-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/hudson-walk-right.png",
+            "sha256": "4110c7d2378f9ee6130a96a3c4cd0df7cdfb2e832a6e07dcc54feae82e880c51",
+            "bytes": 2026339
+          },
+          {
+            "id": "industrial-pipe",
+            "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+            "sha256": "d37704f5c0792d845b3de76d8d9eeb7665cf4c3c3454c99886341b1673ec91bf",
+            "bytes": 1816931
+          },
+          {
+            "id": "industrial-tug",
+            "path": "assets/dlc/aliens-1986/v115/vehicles/industrial-tug.png",
+            "sha256": "31139bb667731ee86c1dbdb40ec2d138d22fe77890e6ba3c959f501b9beb2f05",
+            "bytes": 1279292
+          },
+          {
+            "id": "locator-receiver",
+            "path": "assets/dlc/aliens-1986/v115/props/locator-receiver.png",
+            "sha256": "b6e31656e5cbdf4dff19423e18b015e24830aba0818148c3918044577e1a109a",
+            "bytes": 1416877
+          },
+          {
+            "id": "locator-wrist",
+            "path": "assets/dlc/aliens-1986/v115/props/locator-wrist.png",
+            "sha256": "822daf880baa6431b024410d457951eea83f1ba778858544572c50adf7cad1bb",
+            "bytes": 1817781
+          },
+          {
+            "id": "m240-incinerator",
+            "path": "assets/openai/equipment/v118-weapons/m240-incinerator-native-v118.png",
+            "sha256": "cdd6ffdb64b5ed11b21f7ac57b5052b0fd42c5a11e95ff946adb220195cb5747",
+            "bytes": 855630
+          },
+          {
+            "id": "m314-tracker",
+            "path": "assets/dlc/aliens-1986/v115/props/m314-tracker.png",
+            "sha256": "d8884dfc1f643427e65a8af88dd1a3bb9b40e891931d5c9c6901a8c426a6a528",
+            "bytes": 2380460
+          },
+          {
+            "id": "m40-grenade",
+            "path": "assets/openai/equipment/v121-weapons/m40-hedp-grenade-native-v121.png",
+            "sha256": "a98e3ab91ac3c644250cc89253641260f12384c9be3c705c977e2cabca58ccee",
+            "bytes": 989447
+          },
+          {
+            "id": "m41a-pulse-rifle",
+            "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+            "sha256": "8ec28caf174cd92c2d9b26d5cb6e249a8370591fc3d294575626702f903f2cc2",
+            "bytes": 1433266
+          },
+          {
+            "id": "m56-smartgun",
+            "path": "assets/openai/equipment/v117-weapons/m56-smartgun-native-v117.png",
+            "sha256": "86804c83d1facc8ef79ccde37d73887fb25d984dc518bb52e20fe6aaf979d62f",
+            "bytes": 967903
+          },
+          {
+            "id": "m577-apc-right",
+            "path": "assets/act5/v188/m577-side-corrected.png",
+            "sha256": "55d8bc21f48c11e21cff3d7eeeff9395896e1e1ca4efd03fd44d98232b47553e",
+            "bytes": 2064185
+          },
+          {
+            "id": "meal-tray",
+            "path": "assets/dlc/aliens-1986/v115/props/meal-tray.png",
+            "sha256": "3d64c7ffca83a35a44b42bbd7e083fdb86ab06f4d023e379ca7d886297c39679",
+            "bytes": 2229467
+          },
+          {
+            "id": "medical-kit",
+            "path": "assets/dlc/aliens-1986/v115/props/medical-kit.png",
+            "sha256": "21c7ad9a633307e67f3f103160c9bdd9af96582de7cc7b1ac58ca7ff98e28bcf",
+            "bytes": 2130139
+          },
+          {
+            "id": "newt-drain",
+            "path": "assets/dlc/aliens-1986/v115/variants/newt-drain.png",
+            "sha256": "cbdd1959c2d6aac596414ede64e6779be061173a9e3382167406a009db641c85",
+            "bytes": 1706989
+          },
+          {
+            "id": "newt-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/newt-idle-right.png",
+            "sha256": "b070ffe438364f09f1544eb9f7443bdee313a71d4e2dd32cd9696210bd7d2d50",
+            "bytes": 1811982
+          },
+          {
+            "id": "newt-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/newt-interact-right.png",
+            "sha256": "bdee08ddcf26de1f24c4b9ec9ecb1a9169c0d1cacf15a60f6a4ada716af61543",
+            "bytes": 1916392
+          },
+          {
+            "id": "newt-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/newt-walk-right.png",
+            "sha256": "8af3affcc869136ddce4c246235f9d50b129f995d78d5b8f9d99ce090c6639b5",
+            "bytes": 2030033
+          },
+          {
+            "id": "operations-console",
+            "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+            "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+            "bytes": 2449437
+          },
+          {
+            "id": "ovipositor",
+            "path": "assets/dlc/aliens-1986/v115/architecture/ovipositor.png",
+            "sha256": "c668cc49bbfe6276c00cf871693f1c6911dfd056ca515cd41747064f86ec1ff9",
+            "bytes": 1781381
+          },
+          {
+            "id": "p5000-right",
+            "path": "assets/dlc/aliens-1986/v115/vehicles/p5000-right.png",
+            "sha256": "12b0230b20a173c9b4fec76bf954d8c220ea3264a3ef565c0dd2eea69e227a2a",
+            "bytes": 1647148
+          },
+          {
+            "id": "queen-attack-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/queen-attack-right.png",
+            "sha256": "aeeb28cb7b1ba2d3cfacc3dc8a68092a74155341b73b558533776226160715a3",
+            "bytes": 1528140
+          },
+          {
+            "id": "queen-death-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/queen-death-right.png",
+            "sha256": "44576485f1a6363898cec5ea5d55d784d386f547dde93dea9a3da8643194fdae",
+            "bytes": 1464490
+          },
+          {
+            "id": "queen-idle-right",
+            "path": "assets/user/castes-v87/film_queen_aliens_1986.png",
+            "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991",
+            "bytes": 1929156
+          },
+          {
+            "id": "queen-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/queen-walk-right.png",
+            "sha256": "77b1b97078aebe2b114e7e09afb846ee0955c539d5b39a79aa19057a855dcc57",
+            "bytes": 1280045
+          },
+          {
+            "id": "resin-column",
+            "path": "assets/dlc/aliens-1986/v115/architecture/resin-column.png",
+            "sha256": "c387c1c2f1e596172544457a907aca32982f16ed209a0254f864fb5db94e4b2c",
+            "bytes": 1688679
+          },
+          {
+            "id": "ripley-gateway",
+            "path": "assets/dlc/aliens-1986/v115/variants/ripley-gateway.png",
+            "sha256": "9e2c1ff85cdd98d5417749b4d2e796e5085f6b4751ab2d36feb4d4e23ec2e9af",
+            "bytes": 1492531
+          },
+          {
+            "id": "ripley-hive-rescue",
+            "path": "assets/dlc/aliens-1986/v115/variants/ripley-hive-rescue.png",
+            "sha256": "b4b479eb950692cd6845d1b32cdbf8652d8be46eaba756edb7f35e811466791d",
+            "bytes": 1757450
+          },
+          {
+            "id": "ripley-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+            "sha256": "278b39031eba709f7c2678f726be48088e754f8fe81b3dccb433161831cec0d5",
+            "bytes": 1617936
+          },
+          {
+            "id": "ripley-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/ripley-interact-right.png",
+            "sha256": "d2e8e36b3c9b85118f160325e4a83d1e065dbad8c93ac6cb390d62c57926b709",
+            "bytes": 1779243
+          },
+          {
+            "id": "ripley-loader",
+            "path": "assets/dlc/aliens-1986/v115/variants/ripley-loader.png",
+            "sha256": "0df6909a184350170c129e00e05a3161fb6b0d03df730597b68358a8b320a826",
+            "bytes": 1778402
+          },
+          {
+            "id": "ripley-m41a-m240-combination-right",
+            "path": "assets/dlc/aliens-1986/v116/props/ripley-m41a-m240-combination-right.png",
+            "sha256": "f2d245af510b7f187472a5fe549fbad429c0f17138b7abfdc5544a16c2691971",
+            "bytes": 1836777
+          },
+          {
+            "id": "ripley-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/ripley-walk-right.png",
+            "sha256": "5d08fac05c7287e4bf9453b1525172929f9ba38fb4b145029aa504804cd1d971",
+            "bytes": 1883761
+          },
+          {
+            "id": "sentry-idle-right",
+            "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+            "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+            "bytes": 2026614
+          },
+          {
+            "id": "shoulder-lamp",
+            "path": "assets/dlc/aliens-1986/v115/props/shoulder-lamp.png",
+            "sha256": "cd77b4f5620fef6102118ff9e6543d085535754fc21d81443a04a688a636e70b",
+            "bytes": 1826813
+          },
+          {
+            "id": "smartgun-bench",
+            "path": "assets/dlc/aliens-1986/v115/architecture/smartgun-bench.png",
+            "sha256": "a2b34cdc61ed859f1139952b6fd8ff2b7a2a25c2bd2d293c112ba3774c63facc",
+            "bytes": 1358811
+          },
+          {
+            "id": "smartgun-eyepiece",
+            "path": "assets/dlc/aliens-1986/v115/props/smartgun-eyepiece.png",
+            "sha256": "e4284f6da0ff2d92a31f1faac34cd97866cc11cb72429311210a0a40f6c629d4",
+            "bytes": 694790
+          },
+          {
+            "id": "smartgun-harness",
+            "path": "assets/dlc/aliens-1986/v115/props/smartgun-harness.png",
+            "sha256": "c24e0a98977147a080c52159f9ab9d9f7daa7575b2ee60c0fda51a1b1ba86aa1",
+            "bytes": 1796512
+          },
+          {
+            "id": "specimen-jar",
+            "path": "assets/dlc/aliens-1986/v115/props/specimen-jar.png",
+            "sha256": "fe11050207fd6489225dc14c9533e87f6150e471f3dccf768d0f78c39115b40c",
+            "bytes": 2184084
+          },
+          {
+            "id": "spunkmeyer-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/spunkmeyer-idle-right.png",
+            "sha256": "42c760fbde5cc216224ff1fac9a1056be1c25b43dbdc0056ab97f3d3943bf5fe",
+            "bytes": 1760762
+          },
+          {
+            "id": "spunkmeyer-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-interact-right.png",
+            "sha256": "fd87f9cdf07931abd7f1320ec96813d80380f186ca7b32aff292dc653e9484d9",
+            "bytes": 1828739
+          },
+          {
+            "id": "spunkmeyer-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-walk-right.png",
+            "sha256": "0db292956fe4981b31ca6bca5f50fb3ac30aa0f40232ac686d2a400dcc6dc239",
+            "bytes": 1927572
+          },
+          {
+            "id": "supply-case",
+            "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+            "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+            "bytes": 2298763
+          },
+          {
+            "id": "ud4l-flight-right",
+            "path": "assets/insertion/v188/ud4l-side.png",
+            "sha256": "3af34f1bc0ec995c3e4fc27139bc5c4acab644652bacd99c33f4c188de72611d",
+            "bytes": 1233519
+          },
+          {
+            "id": "ud4l-landed-right",
+            "path": "assets/dlc/aliens-1986/v115/vehicles/ud4l-landed-right.png",
+            "sha256": "ae4ad902554e91c3991ee6fd14ca577a31093222d82a2fb43db602b058b44b94",
+            "bytes": 1297810
+          },
+          {
+            "id": "uscm-armor",
+            "path": "assets/dlc/aliens-1986/v115/props/uscm-armor.png",
+            "sha256": "8890645672f0f481314fed058ff3b7ba44022687c90e752a7d333e8f10f28140",
+            "bytes": 2107171
+          },
+          {
+            "id": "uscm-helmet",
+            "path": "assets/dlc/aliens-1986/v115/props/uscm-helmet.png",
+            "sha256": "0c1749f9ba673c75a10b5ade0428069112740dd43b0cfb6b37989f228c04d418",
+            "bytes": 1532562
+          },
+          {
+            "id": "vasquez-idle-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/vasquez-idle-right.png",
+            "sha256": "1c1873f382849e153717400049a6b14f7664880dc4cc6684739be7012cf75cfb",
+            "bytes": 1840668
+          },
+          {
+            "id": "vasquez-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/vasquez-interact-right.png",
+            "sha256": "51925122456e9da7dafc8341515bea6cf22cb2126ac6833bf9c40cedc0279654",
+            "bytes": 1834396
+          },
+          {
+            "id": "vasquez-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/vasquez-walk-right.png",
+            "sha256": "c493b6f64834950157ea4760f4c9b2a0fe852561b87c2ed46f7accb148fa04d7",
+            "bytes": 1891640
+          },
+          {
+            "id": "vp70-pistol",
+            "path": "assets/openai/equipment/v120-weapons/vp70m-sidearm-native-v120.png",
+            "sha256": "b2d4016ee71430a80b86363badad6521ee15010b0d3172131909aaaef2215def",
+            "bytes": 1213691
+          },
+          {
+            "id": "wall-light",
+            "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+            "sha256": "0c46cefee888fe9809de750d25968abdc052271fde4e646d8834720c629e181a",
+            "bytes": 1515605
+          },
+          {
+            "id": "warrior-attack-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+            "sha256": "f42f4c297ddbbad7caa35808146b639a332021a24ad0ee4462e46842f49f08bf",
+            "bytes": 1964121
+          },
+          {
+            "id": "warrior-death-right",
+            "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+            "sha256": "a856860b93e01d0b5fc862b7b592c99ab4c10515e3d2accad3c1dbb46b7ed0fb",
+            "bytes": 2025583
+          },
+          {
+            "id": "warrior-idle-right",
+            "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+            "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+            "bytes": 1801730
+          },
+          {
+            "id": "welder",
+            "path": "assets/dlc/aliens-1986/v115/props/welder.png",
+            "sha256": "9bc1729277f37eac774c197858361d60cc869c2ec42a2b8f2910d3567537218a",
+            "bytes": 808868
+          },
+          {
+            "id": "wierzbowski-idle-right",
+            "path": "assets/dlc/aliens-1986/v115/characters/wierzbowski-idle-right.png",
+            "sha256": "31e0ff7e771c260ae989d484ed82687bc9d170b989b5913b345b97812c5efe4b",
+            "bytes": 1128088
+          },
+          {
+            "id": "wierzbowski-interact-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-interact-right.png",
+            "sha256": "597553e0bbc66cadeb9870071cb97ed3756acae3be49a7f1f06a03519f9d461a",
+            "bytes": 1115316
+          },
+          {
+            "id": "wierzbowski-walk-right",
+            "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-walk-right.png",
+            "sha256": "fa13100e14055e8ca3f5560fa911f1a84f8df559697d4c6921d78aec9548478d",
+            "bytes": 1246723
+          },
+          {
+            "id": "door-leaf-damaged",
+            "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-damaged.png",
+            "sha256": "a8f4c202b50eacc5fac67cdedbba47c283fcbeb33077450a03f1180dafedf5d5",
+            "bytes": 2269157
+          },
+          {
+            "id": "door-leaf-reinforced",
+            "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-reinforced.png",
+            "sha256": "44facf80cbef7bee784d6c925d40419670bbc0a37dae090b086909f41c374567",
+            "bytes": 2352553
+          },
+          {
+            "id": "door-leaf-breached",
+            "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-breached.png",
+            "sha256": "055e68b4014d5040eaaef50649ecc9dc73d2310b5441fa331e313c3b49c41eb0",
+            "bytes": 2187687
+          },
+          {
+            "id": "meal-tray-food",
+            "path": "assets/dlc/aliens-1986/v117/props/meal-tray-food.png",
+            "sha256": "cd0f41e0fe33f279a0115308da46db2c036dba6e681176fe2ac5e6d05be20f26",
+            "bytes": 2160552
+          },
+          {
+            "id": "supply-case-medical-empty",
+            "path": "assets/dlc/aliens-1986/v117/props/supply-case-medical-empty.png",
+            "sha256": "e5afb1bd9bf62b869af49b6bf9ebc7f2f854cc241b2f693695c6b6f7b9ffc49e",
+            "bytes": 2192057
+          },
+          {
+            "id": "supply-case-ammo-closed",
+            "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-closed.png",
+            "sha256": "fc6006bca4fe6129eea7a3c752f2c44b2fc4fc6c8e7a13fddbd577bac01ed497",
+            "bytes": 2345905
+          },
+          {
+            "id": "supply-case-ammo-empty",
+            "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-empty.png",
+            "sha256": "af91a6299d2579b75643df843f8f81348015f2d09089b4634f207ee60e68c000",
+            "bytes": 2174847
+          },
+          {
+            "id": "engineering-case-stocked",
+            "path": "assets/dlc/aliens-1986/v118/props/engineering-case-stocked.png",
+            "sha256": "f1a5d5f9f592d08d1be6b4b77c9a4ba52856e8ae09de2131356d3908c9b24cad",
+            "bytes": 2368689
+          },
+          {
+            "id": "gateway-inquiry-display",
+            "path": "assets/dlc/aliens-1986/v118/props/gateway-inquiry-display.png",
+            "sha256": "0736d478db9c2cf2bbc54702b3725cb2edb589605332c611da14cde701a1b05c",
+            "bytes": 2362728
+          },
+          {
+            "id": "service-control-pedestal",
+            "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+            "sha256": "1b0be7132e27f1d2829bee04ade31a41cd4a7d1d5cc4e77828bf6cb7e4d4a3b5",
+            "bytes": 1276428
+          },
+          {
+            "id": "medical-counter-terminal",
+            "path": "assets/dlc/aliens-1986/v118/props/medical-counter-terminal.png",
+            "sha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864",
+            "bytes": 2389765
+          },
+          {
+            "id": "optics-calibration-terminal",
+            "path": "assets/dlc/aliens-1986/v118/props/optics-calibration-terminal.png",
+            "sha256": "d4e18e908131198f0e501ed70a2a741b782a036b3e8c935b5e037432220c40a3",
+            "bytes": 2325558
+          },
+          {
+            "id": "valve-indicator-panel",
+            "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+            "sha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d",
+            "bytes": 2386174
+          },
+          {
+            "id": "sulaco-briefing-terminal",
+            "path": "assets/dlc/aliens-1986/v118/props/sulaco-briefing-terminal.png",
+            "sha256": "0e08e812b8e85452ff30bb448483f966159088e728dca1cd3216488ddc1c1555",
+            "bytes": 2043852
+          },
+          {
+            "id": "operations-table-terminal",
+            "path": "assets/dlc/aliens-1986/v118/props/operations-table-terminal.png",
+            "sha256": "50adeba42a58b714a5048fc93556f2fa6708eb6a8f792c19c1d1d862a0cd868f",
+            "bytes": 2280782
+          },
+          {
+            "id": "sentry-aim-front-right",
+            "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+            "sha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b",
+            "bytes": 2117622
+          },
+          {
+            "id": "sentry-aim-rear-right",
+            "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+            "sha256": "ec994d07af32863311577b72628b0794fafc96a06653aa045f020d5305e60b9c",
+            "bytes": 2090613
+          },
+          {
+            "id": "sentry-aim-rear",
+            "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+            "sha256": "6ddcd2bd2bc99d2471a49e49e7ea851efa97010ca70e59e7003a5f10b77375b9",
+            "bytes": 1786024
+          },
+          {
+            "id": "medlab-bed",
+            "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+            "sha256": "6732cd31383a70ea7050e423d18f0751a299f23d5ff28d6cb009baada63096b4",
+            "bytes": 1155497
+          },
+          {
+            "id": "medlab-storage-cabinet",
+            "path": "assets/dlc/aliens-1986/v119/furniture/medlab-storage-cabinet.png",
+            "sha256": "bc012f56d4d5dca0a8af63aa320fb4272bb875fc1cd600e26d81509bbefec591",
+            "bytes": 2768121
+          },
+          {
+            "id": "reserve-service-locker",
+            "path": "assets/dlc/aliens-1986/v119/furniture/reserve-service-locker.png",
+            "sha256": "2a2dede3faa3b0ed4c571a840389fd01c61aacb522d96ffb85d0a962f441908d",
+            "bytes": 2701493
+          },
+          {
+            "id": "operations-storage-rack",
+            "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+            "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+            "bytes": 2886102
+          },
+          {
+            "id": "sulaco-mess-table",
+            "path": "assets/dlc/aliens-1986/v119/furniture/sulaco-mess-table.png",
+            "sha256": "f02e11b5d50e7104fd49a86164960aab3223412111737a889667d039cb17371b",
+            "bytes": 2306400
+          },
+          {
+            "id": "operations-command-table",
+            "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+            "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+            "bytes": 1719633
+          },
+          {
+            "id": "reserve-medical-counter",
+            "path": "assets/dlc/aliens-1986/v120/furniture/reserve-medical-counter.png",
+            "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+            "bytes": 2189660
+          },
+          {
+            "id": "utility-storage-cabinet",
+            "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+            "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
+            "bytes": 2601946
+          },
+          {
+            "id": "optics-workbench",
+            "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+            "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+            "bytes": 1963841
+          },
+          {
+            "id": "operations-display-bank",
+            "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+            "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
+            "bytes": 2728175
+          },
+          {
+            "id": "hadley-service-generator",
+            "path": "assets/dlc/aliens-1986/v121/furniture/hadley-service-generator.png",
+            "sha256": "8899ee95baf096ef06edc0fbb5f995f717fbbbe2958b90e3a1c856ff3b38066f",
+            "bytes": 2663142
+          },
+          {
+            "id": "service-pump-unit",
+            "path": "assets/dlc/aliens-1986/v121/furniture/service-pump-unit.png",
+            "sha256": "1193a040c1305535d36ded3869361dc717a35ca836363a53f2ab5f415639cf10",
+            "bytes": 2293428
+          },
+          {
+            "id": "conduit-heat-exchanger",
+            "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+            "sha256": "34c50e1c2644a65a40dbdad83f3b232e4ace14191e35f05bfbec6155682eb304",
+            "bytes": 2411055
+          },
+          {
+            "id": "conduit-valve-plinth",
+            "path": "assets/dlc/aliens-1986/v121/furniture/conduit-valve-plinth.png",
+            "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+            "bytes": 2349034
+          }
+        ],
+        "fixtureSources": {
+          "script": "e7ec1158fb8c239af05aa3de59269d9941b7f1126a11a036ea23b767d8a6dc1d",
+          "html": "549ba8f219311c44e728674b6e4d06a42b0b344e5e1cbeda805ecfee00bfe1e9",
+          "javascript": "9c74f89e0c98ecff42ca2619096137a1e969a532d454117edc3446f1fc8202bf"
+        },
+        "gameSha256": "9495439e9514f2d178eaa7b0e95bd22777587f82bfce94532d1caf2df6aa3f28",
+        "assetRevision": 123,
+        "verifiedPngCount": 166
+      },
+      "browser": {
+        "engine": "Chromium",
+        "version": "143.0.7499.4",
+        "headless": true
+      }
+    },
+    "captureStatus": "Native screenshots retained as local QA evidence and reproduced as CI artifacts; screenshot bytes are not included in the source supplement.",
+    "rootVisualReview": {
+      "normalCaptureReviewed": true,
+      "nativeSourcePngsReviewed": true,
+      "proportionsAndAnchorsConsistent": true,
+      "observation": "Eight sentry sectors, interpolated front sector, routed Warrior in both directions and historical idle/attack/death are legible. The walk contact pose retains source-scale normalization and its ground anchor."
+    },
+    "provenanceClarification": {
+      "embeddedPngsVerifiedList": {
+        "count": 155,
+        "scope": "Inherited V116–V121 preflight inventory; the native report is preserved as captured."
+      },
+      "currentVerifiedPngCount": {
+        "count": 166,
+        "scope": "V123 deriver preflight independently checks the complete V116–V123 catalogue, including the nine V122 and two V123 entries."
+      },
+      "independentReview": {
+        "all166PngSha256Checked": true,
+        "all164PriorRecordsUnchanged": true,
+        "allSevenHistoricalManifestsUnchanged": true,
+        "allSevenTestedCodeFileDigestsMatched": true
+      }
+    }
+  },
+  "filmFidelityValidated": false,
+  "fullCampaignValidated": false,
+  "completeAnimationCyclesValidated": 0,
+  "limitations": [
+    "One static Warrior walking contact pose; no full locomotion cycle is claimed.",
+    "Exact film fidelity remains unvalidated; front-view reconstruction and generated detail remain interpretive.",
+    "Native alpha [0,254] and low-opacity fringe pixels are preserved without pixel edits.",
+    "Fourteen explicit native actor states per browser context; this is not a complete campaign playthrough.",
+    "The known partial checkout lacks all 105 required original JPG references outside this Aliens supplement, so the full repository check is blocked while the isolated DLC build passes.",
+    "The 350 presentation assertions are included in the 41 integration tests and are not an additional independent suite.",
+    "The normal screenshot banner shows 17 checks; the Python driver adds the eighteenth network/browser-error check in the JSON report."
+  ],
+  "finishedAt": "2026-11-26T17:37:18.470053+00:00",
+  "testedSourceState": "Uncommitted V123 working tree above the recorded baseline; exact runtime, manifest and verification source digests identify tested bytes.",
+  "manifestSha256": "6c7da69916b672d109fd324f35740452df51efb29256cee76cf1fcbaa97e737e",
+  "integrationReceiptSha256": "7075c13a44dbe142f43ab26f076b0c218e34a022a4e0192d776cb3192c783317",
+  "integrity": {
+    "historicalAssetCount": 164,
+    "historicalManifestCount": 7,
+    "addedAssets": 2,
+    "totalRasterAssets": 166,
+    "preservedSourceRecoveryFiles": 1159,
+    "preservedSourceRecoveryBytes": 135643835,
+    "nativeRuntimeModulesChanged": 0
+  },
+  "tests": {
+    "nativeV114": {
+      "passed": 665,
+      "failed": 0
+    },
+    "integrationSuccessionPresentation": {
+      "passed": 41,
+      "failed": 0,
+      "includesPresentationScript": true
+    },
+    "presentationAssertions": {
+      "passed": 350,
+      "newV123": 22,
+      "includedInPrevious41": true
+    }
+  },
+  "isolatedBuild": {
+    "ok": true,
+    "built": true,
+    "recoveredFiles": 0,
+    "runtimeFiles": 2,
+    "runtimeBytes": 307685869,
+    "gameSha256": "9495439e9514f2d178eaa7b0e95bd22777587f82bfce94532d1caf2df6aa3f28",
+    "originalGameSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+    "rasterAssets": 166,
+    "rasterRevision": 116,
+    "rasterAssetRevision": 123,
+    "rasterExtensionRevision": 123
+  },
+  "testedCodeFiles": [
+    {
+      "path": ".github/workflows/aliens1986-dlc.yml",
+      "sha256": "057af9dc5444765174b385b4b580bd0a8ebc62fb2ab65e9220984e0d5901bbc3"
+    },
+    {
+      "path": "scripts/derive-aliens1986-raster-v116.mjs",
+      "sha256": "487a1d3cf38d2128b15be96e6362e53496f62f7010e79906d51caa5536743eb3"
+    },
+    {
+      "path": "scripts/public-aliens1986-dlc-admissions.mjs",
+      "sha256": "c1bd5fa07e767573de50239255ab8eb4abca6c42c123fcb4d0046053cbba36fc"
+    },
+    {
+      "path": "scripts/verify-aliens1986-dlc-integration.mjs",
+      "sha256": "92133b25d0e377dea3794837ec28d1de1fd9dbc80c43d01766beced868a228a8"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-presentation-v116.mjs",
+      "sha256": "a222001299699f6ecb2e3e0c6558d6f4a9a32fb0d4d142dd0b319f0ad62a2459"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-directions-v123.mjs",
+      "sha256": "a4276d7541ad2beddbd822987618c7d29fc045c4fd700ff93fcc998db41da10c"
+    },
+    {
+      "path": "scripts/qa-aliens1986-directions-v123.py",
+      "sha256": "e7ec1158fb8c239af05aa3de59269d9941b7f1126a11a036ea23b767d8a6dc1d"
+    }
+  ],
+  "publicReleaseCheck": {
+    "ok": false,
+    "reason": "Known partial checkout: zero of 105 required assets/user/pack-v100/*.jpg original references are present. Guard unchanged; full build was not run."
+  },
+  "logEvidence": {
+    "tests": {
+      "filename": "aliens-v123-tests.log",
+      "sha256": "be46ee510a230e55d3bc35cfbfb07f56a2faee0a170c68cbec785f62659a6927",
+      "storage": "local-execution-log"
+    },
+    "admissions": {
+      "filename": "aliens-v123-admissions.log",
+      "sha256": "b58b06c0fa72765bf6709b5829968850d8b0a6feb5733d61f510e1a4def700c4",
+      "storage": "local-execution-log"
+    },
+    "publicCheck": {
+      "filename": "aliens-v123-public-check.log",
+      "sha256": "1d3cb5e51998e7deb1a170fd5620d9ded4112d8f3499750cbc515db59040ed28",
+      "storage": "local-execution-log"
+    },
+    "isolatedBuild": {
+      "filename": "aliens-v123-isolated-build.log",
+      "sha256": "dd4036ce6d0f6303ba5d919faeae8df53dbeba79fa9cbcac0f9ba746d77d7b14",
+      "storage": "local-execution-log"
+    },
+    "browser": {
+      "filename": "aliens-v123-directions-qa.log",
+      "sha256": "95e4627aa37e9dec61dec55104089adfd1ca99ccfdb00a6dc2e52002b5aa1d02",
+      "storage": "local-execution-log"
+    }
+  },
+  "catalogueDigestAudit": {
+    "count": 166,
+    "sha256ChecksPassed": 166,
+    "records": [
+      {
+        "id": "alarm-unit",
+        "path": "assets/dlc/aliens-1986/v115/architecture/alarm-unit.png",
+        "sha256": "43994fe8160f3a689e60ede33102a1a78697f481f2e524a1ca61bb2c2106a9d9",
+        "bytes": 1775944
+      },
+      {
+        "id": "apc-monitors",
+        "path": "assets/dlc/aliens-1986/v115/architecture/apc-monitors.png",
+        "sha256": "20de569984eff0f5813035a7749cd0b555661c5723b90d746ff3de2dc136b26c",
+        "bytes": 2610668
+      },
+      {
+        "id": "apone-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/apone-idle-right.png",
+        "sha256": "e9f06759352031117da8e607f4f5e0fb6efec8c887aebc64458fa8b58fce7d76",
+        "bytes": 1702095
+      },
+      {
+        "id": "apone-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/apone-interact-right.png",
+        "sha256": "3c5f0fd9d38be4afae4d74578f1a7128939717956d195a7e9c6b830bf7a533ef",
+        "bytes": 1817918
+      },
+      {
+        "id": "apone-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/apone-walk-right.png",
+        "sha256": "6d80f98dee845daf9ec6320cdc4c9bb664078d467c06e89bc68ec401aba823d3",
+        "bytes": 1975884
+      },
+      {
+        "id": "armament-case-closed",
+        "path": "assets/dlc/aliens-1986/v115/props/armament-case-closed.png",
+        "sha256": "37cc38c13e51825a8d8cf6cdbae3686e9bc6bf05921026571ea3580ad3f12903",
+        "bytes": 1874696
+      },
+      {
+        "id": "armament-case-open",
+        "path": "assets/dlc/aliens-1986/v115/props/armament-case-open.png",
+        "sha256": "e0746e97934e22b7aba347679e382df444f64cb32e58d971388d27884b9baff6",
+        "bytes": 2235941
+      },
+      {
+        "id": "armor-rack",
+        "path": "assets/dlc/aliens-1986/v115/architecture/armor-rack.png",
+        "sha256": "033415354abfb526e454fcdd6c35f445e1fcc48c6364dbceea6df8ef201a2cb0",
+        "bytes": 1511611
+      },
+      {
+        "id": "beacon",
+        "path": "assets/dlc/aliens-1986/v115/props/beacon.png",
+        "sha256": "97b9beb81815baac04ec60525cd23f72ffc6320ceb547f8a6337c89b143eef96",
+        "bytes": 1631322
+      },
+      {
+        "id": "beacon-case",
+        "path": "assets/dlc/aliens-1986/v115/props/beacon-case.png",
+        "sha256": "9d2f9eeaafd3650dddc6b97a2e6110796ecd08f0823820f5a9047ceb253f8787",
+        "bytes": 2299957
+      },
+      {
+        "id": "beacon-case-closed",
+        "path": "assets/dlc/aliens-1986/v115/props/beacon-case-closed.png",
+        "sha256": "0e885a54e0643939faa88a768a619b78ee7d972a01b6976230b2d6d511bd036b",
+        "bytes": 1622285
+      },
+      {
+        "id": "bishop-damaged",
+        "path": "assets/dlc/aliens-1986/v115/variants/bishop-damaged.png",
+        "sha256": "5d756e7dd484e4b146f3a0d4134344f6b2654ee090661ec98d9d89318370330b",
+        "bytes": 1987713
+      },
+      {
+        "id": "bishop-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/bishop-idle-right.png",
+        "sha256": "814795c8cb8a2ff3a15cf15ca510a036ab9f33ecf72f4ce95de6790cfac979e0",
+        "bytes": 1689272
+      },
+      {
+        "id": "bishop-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/bishop-interact-right.png",
+        "sha256": "8ab70a6c7aa2be7f107cb2d995609be42566eae864aa1a0c0015c95e78745c5a",
+        "bytes": 1748924
+      },
+      {
+        "id": "bishop-uplink",
+        "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png",
+        "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+        "bytes": 1985049
+      },
+      {
+        "id": "bishop-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/bishop-walk-right.png",
+        "sha256": "5a1dbf6634ab6171eeaad78d63fb3bad29de77c5561b091cb0dc6ca723a6b3a6",
+        "bytes": 1907641
+      },
+      {
+        "id": "burke-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/burke-idle-right.png",
+        "sha256": "ace8149a7ea4fa0eb0bea083f5e32f9799c3dce87f70ee5a7612b5811ca701d8",
+        "bytes": 1592804
+      },
+      {
+        "id": "burke-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/burke-interact-right.png",
+        "sha256": "be1809e6f39096c881d02bc83beea46981b59deed86c2e1d41ea2c18dbdcc45d",
+        "bytes": 1575163
+      },
+      {
+        "id": "burke-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/burke-walk-right.png",
+        "sha256": "690490afcaad363e6f1d282c7c097e17d7daf936aa73cac583ab7290b26f5412",
+        "bytes": 1869912
+      },
+      {
+        "id": "cargo-crate",
+        "path": "assets/dlc/aliens-1986/v115/props/cargo-crate.png",
+        "sha256": "a68420aa374557c8dbc607081a78ad699cad816f2b734a5d4d4fadf51ff4fadf",
+        "bytes": 2264356
+      },
+      {
+        "id": "casey-head",
+        "path": "assets/dlc/aliens-1986/v115/props/casey-head.png",
+        "sha256": "1fb033edaa9a6beea81be0338436bedc62e423840e975f31b8dd6e86099405b5",
+        "bytes": 1814403
+      },
+      {
+        "id": "chestburster-idle-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/chestburster-idle-right.png",
+        "sha256": "132848483cb8855dc8affc9767bb548a5f5030bd9735bf7f11d37f37ab3f3e90",
+        "bytes": 760100
+      },
+      {
+        "id": "colonist-cocoon",
+        "path": "assets/dlc/aliens-1986/v115/architecture/colonist-cocoon.png",
+        "sha256": "e799683a79747ac2f8090331661b91ff88ec50d181513eb9908e16e7e7c0a6b8",
+        "bytes": 1914250
+      },
+      {
+        "id": "combat-knife",
+        "path": "assets/dlc/aliens-1986/v115/props/combat-knife.png",
+        "sha256": "df923886e7af0d68ba7887df4c96f244a44a464c5da4611ce3dd63b91ea5d3af",
+        "bytes": 683047
+      },
+      {
+        "id": "comms",
+        "path": "assets/dlc/aliens-1986/v115/props/comms.png",
+        "sha256": "4d2ee01e598d7795a6182871b373ec10a11a1bd283e89c10688664c890c22820",
+        "bytes": 412160
+      },
+      {
+        "id": "crowe-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/crowe-idle-right.png",
+        "sha256": "47196d9dbcffecc023ca361a5d7e11b50f49fc64134c76b0f629f6d24db94f58",
+        "bytes": 1708480
+      },
+      {
+        "id": "crowe-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/crowe-interact-right.png",
+        "sha256": "1e92e37283222f8f51d48c59137c86e28201f767aa03d2093fba537584460799",
+        "bytes": 1844637
+      },
+      {
+        "id": "crowe-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/crowe-walk-right.png",
+        "sha256": "a57f2f7eb3d94331b2dba696b794ea762faac0b605e4825a838ebd63e8093684",
+        "bytes": 1939397
+      },
+      {
+        "id": "cryo-pillow",
+        "path": "assets/dlc/aliens-1986/v115/props/cryo-pillow.png",
+        "sha256": "3ab47941c56bf751fde04364e62e1ea64a47e09f69a9d14b130153617c961138",
+        "bytes": 1923197
+      },
+      {
+        "id": "cryopod-sulaco",
+        "path": "assets/dlc/aliens-1986/v115/architecture/cryopod-sulaco.png",
+        "sha256": "0bf703c67b06330889f36ce8ac9ce6b531264dac106bfc28f8a9230b39cc95f4",
+        "bytes": 2019585
+      },
+      {
+        "id": "dietrich-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/dietrich-idle-right.png",
+        "sha256": "e35c6bd46ee709b3b6f58ba63dcb80edbc95db5779c582fdb9582469428e3f1a",
+        "bytes": 1532950
+      },
+      {
+        "id": "dietrich-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/dietrich-interact-right.png",
+        "sha256": "0838b5d19870d760b15117072056c55b460516fbc045c1e27e959ed4dc91abf9",
+        "bytes": 1684073
+      },
+      {
+        "id": "dietrich-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/dietrich-walk-right.png",
+        "sha256": "41b72c77e9a772e087526162f10baee614a451a7d87bd27c476c027ea651045e",
+        "bytes": 1748784
+      },
+      {
+        "id": "door-frame",
+        "path": "assets/dlc/aliens-1986/v115/architecture/door-frame.png",
+        "sha256": "4f2c6b67a752d9828545de69e847b4b1d60786a821bb51228bd89e2a621eecc1",
+        "bytes": 1995294
+      },
+      {
+        "id": "door-leaf",
+        "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+        "sha256": "1be53df9934888d74f48483dc68a58d0a5d3a1bd87fe4512b0891f8a4423c0b3",
+        "bytes": 2540215
+      },
+      {
+        "id": "drain-grate",
+        "path": "assets/dlc/aliens-1986/v115/architecture/drain-grate.png",
+        "sha256": "f0a06cd7d6641c6325d6c09253b23bd127c20c5b0ce011fbef2120e43e254c75",
+        "bytes": 2103506
+      },
+      {
+        "id": "drake-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/drake-idle-right.png",
+        "sha256": "7a8e290634bbb612bd1ac3fffaced9d4ac9e3cd1fa5eb22938ebf913d3e090f3",
+        "bytes": 1577704
+      },
+      {
+        "id": "drake-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/drake-interact-right.png",
+        "sha256": "f70633c93450fd71f306bc70ee28537b769f03e111a5c74a32dfe8952c1ff4d6",
+        "bytes": 2017631
+      },
+      {
+        "id": "drake-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/drake-walk-right.png",
+        "sha256": "dc24837616baf635d47fd69114ee0cc48067c3d70bbf013064db1337d9b0be52",
+        "bytes": 2002002
+      },
+      {
+        "id": "egg-closed",
+        "path": "assets/user/castes-v87/film_ovomorphe_aliens_1986.png",
+        "sha256": "b7b3c189e4c39a0b12c5fc31828ed134bd2d19d4dcc133e801f913e7ef9077a3",
+        "bytes": 2594158
+      },
+      {
+        "id": "egg-cluster",
+        "path": "assets/dlc/aliens-1986/v115/architecture/egg-cluster.png",
+        "sha256": "d59faefa346fd28d9a9bc8ca45a1eacdd28bb288b8d603cd655d384eafe57315",
+        "bytes": 2174920
+      },
+      {
+        "id": "egg-open",
+        "path": "assets/dlc/aliens-1986/v115/creatures/egg-open.png",
+        "sha256": "d0dedeebadc084c0157d2d2c596d5dabc764db1bbb29c20048080dbeb423a350",
+        "bytes": 2019841
+      },
+      {
+        "id": "facehugger-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/creatures/facehugger-idle-right.png",
+        "sha256": "e8f35a159ab2239f4c73314fef1014989218999e7690f9f9af922774d3f1df27",
+        "bytes": 698963
+      },
+      {
+        "id": "facehugger-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/facehugger-walk-right.png",
+        "sha256": "6a91989d3551694974a1389b04f3fd6fcedc632f80c4a4af01faba0f0898a7c9",
+        "bytes": 970535
+      },
+      {
+        "id": "ferro-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/ferro-idle-right.png",
+        "sha256": "85973354cf28f357e27f6f9259a1f440b9757eb9fe51180d359c260b439e5006",
+        "bytes": 1634158
+      },
+      {
+        "id": "ferro-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/ferro-interact-right.png",
+        "sha256": "bc79cd467b17ce14788f6901f7ebaa3dea062a6cda7656adc289f507a08804da",
+        "bytes": 1659158
+      },
+      {
+        "id": "ferro-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/ferro-walk-right.png",
+        "sha256": "7a40726c68fcdb1c3686830146df7f273e197f3042773838e2e0e6e5d4841915",
+        "bytes": 1810933
+      },
+      {
+        "id": "flight-console",
+        "path": "assets/dlc/aliens-1986/v115/architecture/flight-console.png",
+        "sha256": "972ccbda14f4127a53adfcfb5926f164339a4191feebc0c3c648be65e0e113d7",
+        "bytes": 1897992
+      },
+      {
+        "id": "frost-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/frost-idle-right.png",
+        "sha256": "d35167bc537c473c9cb8bf7197e9d2a36dda042313e3ef57c36f688e4f040eba",
+        "bytes": 1755159
+      },
+      {
+        "id": "frost-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/frost-interact-right.png",
+        "sha256": "ce1b1557ccdc70e7fdeb1206cc154232bfb96cbb9b37e92997437a75db5a8a11",
+        "bytes": 1838155
+      },
+      {
+        "id": "frost-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/frost-walk-right.png",
+        "sha256": "da58bad7cd77190b959ea4277f963177a338a3e088e98bfb376c1419dfe5430a",
+        "bytes": 1908819
+      },
+      {
+        "id": "gateway-photo",
+        "path": "assets/dlc/aliens-1986/v115/props/gateway-photo.png",
+        "sha256": "3c805c665b2a2509e033d323000cd84eaa2a31c56d5c8bc132951d04848b48b4",
+        "bytes": 2628706
+      },
+      {
+        "id": "gateway-pillow",
+        "path": "assets/dlc/aliens-1986/v115/props/gateway-pillow.png",
+        "sha256": "ba76571dfdc648fe6262657a973b01a9c02419508d116187118b940271fe1562",
+        "bytes": 1832169
+      },
+      {
+        "id": "gorman-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/gorman-idle-right.png",
+        "sha256": "7f907334291942593d03c98c08324e48e08b5413419dd398c70e5e69580d6e6b",
+        "bytes": 1459755
+      },
+      {
+        "id": "gorman-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/gorman-interact-right.png",
+        "sha256": "267471fe60f5c4f543b69eb4d1e83ba98f1ddd13078ec63d69836984b597d116",
+        "bytes": 1565737
+      },
+      {
+        "id": "gorman-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/gorman-walk-right.png",
+        "sha256": "591fb60b4e5363997fd984401c71f4d3cd1a15f6f4ffab6f2357455984caf0cd",
+        "bytes": 1790450
+      },
+      {
+        "id": "gorman-wounded",
+        "path": "assets/dlc/aliens-1986/v115/variants/gorman-wounded.png",
+        "sha256": "b863448c53000fede5f2e129b1456c76bcf2379ace94df9a7f9cdea2f0bf4603",
+        "bytes": 1508770
+      },
+      {
+        "id": "gun-rack",
+        "path": "assets/dlc/aliens-1986/v115/architecture/gun-rack.png",
+        "sha256": "80059015c81e1f2e1398b9b0cac68a8e7318da513bd45932c78d4c6d68493457",
+        "bytes": 1456373
+      },
+      {
+        "id": "helmet-camera",
+        "path": "assets/dlc/aliens-1986/v115/props/helmet-camera.png",
+        "sha256": "d7417c6e47457b6667fd54dd3aeaa7903f9b3453e6a868ced349acb70fba5a71",
+        "bytes": 1914053
+      },
+      {
+        "id": "hicks-idle-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+        "sha256": "3965ef085ed611ea1dba999f683b797f54824495437367e7b2abfa0acd795870",
+        "bytes": 1859098
+      },
+      {
+        "id": "hicks-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/hicks-interact-right.png",
+        "sha256": "7b86206b7db41e66405dd10954e4322ed20b503cbe3e0ccc98744cad333df50a",
+        "bytes": 1962526
+      },
+      {
+        "id": "hicks-shotgun",
+        "path": "assets/dlc/aliens-1986/v115/props/hicks-shotgun.png",
+        "sha256": "be542456f10442de1cc1fcf2bd590e686aa194e0b6764f86b0589160bce41357",
+        "bytes": 851404
+      },
+      {
+        "id": "hicks-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/hicks-walk-right.png",
+        "sha256": "0858cbd44b244d931ea4b2c0b62d249e36eba979337bac5d1ac8dcc3e70df890",
+        "bytes": 1940444
+      },
+      {
+        "id": "hudson-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/hudson-idle-right.png",
+        "sha256": "92d170aaad4804412ebe41a222ea62fc93e21e7a20dd1ca03a3dd4d1c6025725",
+        "bytes": 1809525
+      },
+      {
+        "id": "hudson-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/hudson-interact-right.png",
+        "sha256": "e8c636c3b9a21baba6a41b50c19cc0e4b4079a997d31e8aff5fadb130350fd8e",
+        "bytes": 1851597
+      },
+      {
+        "id": "hudson-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/hudson-walk-right.png",
+        "sha256": "4110c7d2378f9ee6130a96a3c4cd0df7cdfb2e832a6e07dcc54feae82e880c51",
+        "bytes": 2026339
+      },
+      {
+        "id": "industrial-pipe",
+        "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+        "sha256": "d37704f5c0792d845b3de76d8d9eeb7665cf4c3c3454c99886341b1673ec91bf",
+        "bytes": 1816931
+      },
+      {
+        "id": "industrial-tug",
+        "path": "assets/dlc/aliens-1986/v115/vehicles/industrial-tug.png",
+        "sha256": "31139bb667731ee86c1dbdb40ec2d138d22fe77890e6ba3c959f501b9beb2f05",
+        "bytes": 1279292
+      },
+      {
+        "id": "locator-receiver",
+        "path": "assets/dlc/aliens-1986/v115/props/locator-receiver.png",
+        "sha256": "b6e31656e5cbdf4dff19423e18b015e24830aba0818148c3918044577e1a109a",
+        "bytes": 1416877
+      },
+      {
+        "id": "locator-wrist",
+        "path": "assets/dlc/aliens-1986/v115/props/locator-wrist.png",
+        "sha256": "822daf880baa6431b024410d457951eea83f1ba778858544572c50adf7cad1bb",
+        "bytes": 1817781
+      },
+      {
+        "id": "m240-incinerator",
+        "path": "assets/openai/equipment/v118-weapons/m240-incinerator-native-v118.png",
+        "sha256": "cdd6ffdb64b5ed11b21f7ac57b5052b0fd42c5a11e95ff946adb220195cb5747",
+        "bytes": 855630
+      },
+      {
+        "id": "m314-tracker",
+        "path": "assets/dlc/aliens-1986/v115/props/m314-tracker.png",
+        "sha256": "d8884dfc1f643427e65a8af88dd1a3bb9b40e891931d5c9c6901a8c426a6a528",
+        "bytes": 2380460
+      },
+      {
+        "id": "m40-grenade",
+        "path": "assets/openai/equipment/v121-weapons/m40-hedp-grenade-native-v121.png",
+        "sha256": "a98e3ab91ac3c644250cc89253641260f12384c9be3c705c977e2cabca58ccee",
+        "bytes": 989447
+      },
+      {
+        "id": "m41a-pulse-rifle",
+        "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+        "sha256": "8ec28caf174cd92c2d9b26d5cb6e249a8370591fc3d294575626702f903f2cc2",
+        "bytes": 1433266
+      },
+      {
+        "id": "m56-smartgun",
+        "path": "assets/openai/equipment/v117-weapons/m56-smartgun-native-v117.png",
+        "sha256": "86804c83d1facc8ef79ccde37d73887fb25d984dc518bb52e20fe6aaf979d62f",
+        "bytes": 967903
+      },
+      {
+        "id": "m577-apc-right",
+        "path": "assets/act5/v188/m577-side-corrected.png",
+        "sha256": "55d8bc21f48c11e21cff3d7eeeff9395896e1e1ca4efd03fd44d98232b47553e",
+        "bytes": 2064185
+      },
+      {
+        "id": "meal-tray",
+        "path": "assets/dlc/aliens-1986/v115/props/meal-tray.png",
+        "sha256": "3d64c7ffca83a35a44b42bbd7e083fdb86ab06f4d023e379ca7d886297c39679",
+        "bytes": 2229467
+      },
+      {
+        "id": "medical-kit",
+        "path": "assets/dlc/aliens-1986/v115/props/medical-kit.png",
+        "sha256": "21c7ad9a633307e67f3f103160c9bdd9af96582de7cc7b1ac58ca7ff98e28bcf",
+        "bytes": 2130139
+      },
+      {
+        "id": "newt-drain",
+        "path": "assets/dlc/aliens-1986/v115/variants/newt-drain.png",
+        "sha256": "cbdd1959c2d6aac596414ede64e6779be061173a9e3382167406a009db641c85",
+        "bytes": 1706989
+      },
+      {
+        "id": "newt-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/newt-idle-right.png",
+        "sha256": "b070ffe438364f09f1544eb9f7443bdee313a71d4e2dd32cd9696210bd7d2d50",
+        "bytes": 1811982
+      },
+      {
+        "id": "newt-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/newt-interact-right.png",
+        "sha256": "bdee08ddcf26de1f24c4b9ec9ecb1a9169c0d1cacf15a60f6a4ada716af61543",
+        "bytes": 1916392
+      },
+      {
+        "id": "newt-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/newt-walk-right.png",
+        "sha256": "8af3affcc869136ddce4c246235f9d50b129f995d78d5b8f9d99ce090c6639b5",
+        "bytes": 2030033
+      },
+      {
+        "id": "operations-console",
+        "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+        "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+        "bytes": 2449437
+      },
+      {
+        "id": "ovipositor",
+        "path": "assets/dlc/aliens-1986/v115/architecture/ovipositor.png",
+        "sha256": "c668cc49bbfe6276c00cf871693f1c6911dfd056ca515cd41747064f86ec1ff9",
+        "bytes": 1781381
+      },
+      {
+        "id": "p5000-right",
+        "path": "assets/dlc/aliens-1986/v115/vehicles/p5000-right.png",
+        "sha256": "12b0230b20a173c9b4fec76bf954d8c220ea3264a3ef565c0dd2eea69e227a2a",
+        "bytes": 1647148
+      },
+      {
+        "id": "queen-attack-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/queen-attack-right.png",
+        "sha256": "aeeb28cb7b1ba2d3cfacc3dc8a68092a74155341b73b558533776226160715a3",
+        "bytes": 1528140
+      },
+      {
+        "id": "queen-death-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/queen-death-right.png",
+        "sha256": "44576485f1a6363898cec5ea5d55d784d386f547dde93dea9a3da8643194fdae",
+        "bytes": 1464490
+      },
+      {
+        "id": "queen-idle-right",
+        "path": "assets/user/castes-v87/film_queen_aliens_1986.png",
+        "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991",
+        "bytes": 1929156
+      },
+      {
+        "id": "queen-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/queen-walk-right.png",
+        "sha256": "77b1b97078aebe2b114e7e09afb846ee0955c539d5b39a79aa19057a855dcc57",
+        "bytes": 1280045
+      },
+      {
+        "id": "resin-column",
+        "path": "assets/dlc/aliens-1986/v115/architecture/resin-column.png",
+        "sha256": "c387c1c2f1e596172544457a907aca32982f16ed209a0254f864fb5db94e4b2c",
+        "bytes": 1688679
+      },
+      {
+        "id": "ripley-gateway",
+        "path": "assets/dlc/aliens-1986/v115/variants/ripley-gateway.png",
+        "sha256": "9e2c1ff85cdd98d5417749b4d2e796e5085f6b4751ab2d36feb4d4e23ec2e9af",
+        "bytes": 1492531
+      },
+      {
+        "id": "ripley-hive-rescue",
+        "path": "assets/dlc/aliens-1986/v115/variants/ripley-hive-rescue.png",
+        "sha256": "b4b479eb950692cd6845d1b32cdbf8652d8be46eaba756edb7f35e811466791d",
+        "bytes": 1757450
+      },
+      {
+        "id": "ripley-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+        "sha256": "278b39031eba709f7c2678f726be48088e754f8fe81b3dccb433161831cec0d5",
+        "bytes": 1617936
+      },
+      {
+        "id": "ripley-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/ripley-interact-right.png",
+        "sha256": "d2e8e36b3c9b85118f160325e4a83d1e065dbad8c93ac6cb390d62c57926b709",
+        "bytes": 1779243
+      },
+      {
+        "id": "ripley-loader",
+        "path": "assets/dlc/aliens-1986/v115/variants/ripley-loader.png",
+        "sha256": "0df6909a184350170c129e00e05a3161fb6b0d03df730597b68358a8b320a826",
+        "bytes": 1778402
+      },
+      {
+        "id": "ripley-m41a-m240-combination-right",
+        "path": "assets/dlc/aliens-1986/v116/props/ripley-m41a-m240-combination-right.png",
+        "sha256": "f2d245af510b7f187472a5fe549fbad429c0f17138b7abfdc5544a16c2691971",
+        "bytes": 1836777
+      },
+      {
+        "id": "ripley-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/ripley-walk-right.png",
+        "sha256": "5d08fac05c7287e4bf9453b1525172929f9ba38fb4b145029aa504804cd1d971",
+        "bytes": 1883761
+      },
+      {
+        "id": "sentry-idle-right",
+        "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+        "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+        "bytes": 2026614
+      },
+      {
+        "id": "shoulder-lamp",
+        "path": "assets/dlc/aliens-1986/v115/props/shoulder-lamp.png",
+        "sha256": "cd77b4f5620fef6102118ff9e6543d085535754fc21d81443a04a688a636e70b",
+        "bytes": 1826813
+      },
+      {
+        "id": "smartgun-bench",
+        "path": "assets/dlc/aliens-1986/v115/architecture/smartgun-bench.png",
+        "sha256": "a2b34cdc61ed859f1139952b6fd8ff2b7a2a25c2bd2d293c112ba3774c63facc",
+        "bytes": 1358811
+      },
+      {
+        "id": "smartgun-eyepiece",
+        "path": "assets/dlc/aliens-1986/v115/props/smartgun-eyepiece.png",
+        "sha256": "e4284f6da0ff2d92a31f1faac34cd97866cc11cb72429311210a0a40f6c629d4",
+        "bytes": 694790
+      },
+      {
+        "id": "smartgun-harness",
+        "path": "assets/dlc/aliens-1986/v115/props/smartgun-harness.png",
+        "sha256": "c24e0a98977147a080c52159f9ab9d9f7daa7575b2ee60c0fda51a1b1ba86aa1",
+        "bytes": 1796512
+      },
+      {
+        "id": "specimen-jar",
+        "path": "assets/dlc/aliens-1986/v115/props/specimen-jar.png",
+        "sha256": "fe11050207fd6489225dc14c9533e87f6150e471f3dccf768d0f78c39115b40c",
+        "bytes": 2184084
+      },
+      {
+        "id": "spunkmeyer-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/spunkmeyer-idle-right.png",
+        "sha256": "42c760fbde5cc216224ff1fac9a1056be1c25b43dbdc0056ab97f3d3943bf5fe",
+        "bytes": 1760762
+      },
+      {
+        "id": "spunkmeyer-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-interact-right.png",
+        "sha256": "fd87f9cdf07931abd7f1320ec96813d80380f186ca7b32aff292dc653e9484d9",
+        "bytes": 1828739
+      },
+      {
+        "id": "spunkmeyer-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-walk-right.png",
+        "sha256": "0db292956fe4981b31ca6bca5f50fb3ac30aa0f40232ac686d2a400dcc6dc239",
+        "bytes": 1927572
+      },
+      {
+        "id": "supply-case",
+        "path": "assets/dlc/aliens-1986/v115/props/supply-case.png",
+        "sha256": "9306f850dc37acb7a1be76daf5ec0fc3f3c1463d1a1e6720c1546de039e757c9",
+        "bytes": 2298763
+      },
+      {
+        "id": "ud4l-flight-right",
+        "path": "assets/insertion/v188/ud4l-side.png",
+        "sha256": "3af34f1bc0ec995c3e4fc27139bc5c4acab644652bacd99c33f4c188de72611d",
+        "bytes": 1233519
+      },
+      {
+        "id": "ud4l-landed-right",
+        "path": "assets/dlc/aliens-1986/v115/vehicles/ud4l-landed-right.png",
+        "sha256": "ae4ad902554e91c3991ee6fd14ca577a31093222d82a2fb43db602b058b44b94",
+        "bytes": 1297810
+      },
+      {
+        "id": "uscm-armor",
+        "path": "assets/dlc/aliens-1986/v115/props/uscm-armor.png",
+        "sha256": "8890645672f0f481314fed058ff3b7ba44022687c90e752a7d333e8f10f28140",
+        "bytes": 2107171
+      },
+      {
+        "id": "uscm-helmet",
+        "path": "assets/dlc/aliens-1986/v115/props/uscm-helmet.png",
+        "sha256": "0c1749f9ba673c75a10b5ade0428069112740dd43b0cfb6b37989f228c04d418",
+        "bytes": 1532562
+      },
+      {
+        "id": "vasquez-idle-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/vasquez-idle-right.png",
+        "sha256": "1c1873f382849e153717400049a6b14f7664880dc4cc6684739be7012cf75cfb",
+        "bytes": 1840668
+      },
+      {
+        "id": "vasquez-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/vasquez-interact-right.png",
+        "sha256": "51925122456e9da7dafc8341515bea6cf22cb2126ac6833bf9c40cedc0279654",
+        "bytes": 1834396
+      },
+      {
+        "id": "vasquez-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/vasquez-walk-right.png",
+        "sha256": "c493b6f64834950157ea4760f4c9b2a0fe852561b87c2ed46f7accb148fa04d7",
+        "bytes": 1891640
+      },
+      {
+        "id": "vp70-pistol",
+        "path": "assets/openai/equipment/v120-weapons/vp70m-sidearm-native-v120.png",
+        "sha256": "b2d4016ee71430a80b86363badad6521ee15010b0d3172131909aaaef2215def",
+        "bytes": 1213691
+      },
+      {
+        "id": "wall-light",
+        "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+        "sha256": "0c46cefee888fe9809de750d25968abdc052271fde4e646d8834720c629e181a",
+        "bytes": 1515605
+      },
+      {
+        "id": "warrior-attack-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+        "sha256": "f42f4c297ddbbad7caa35808146b639a332021a24ad0ee4462e46842f49f08bf",
+        "bytes": 1964121
+      },
+      {
+        "id": "warrior-death-right",
+        "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+        "sha256": "a856860b93e01d0b5fc862b7b592c99ab4c10515e3d2accad3c1dbb46b7ed0fb",
+        "bytes": 2025583
+      },
+      {
+        "id": "warrior-idle-right",
+        "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
+        "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f",
+        "bytes": 1801730
+      },
+      {
+        "id": "welder",
+        "path": "assets/dlc/aliens-1986/v115/props/welder.png",
+        "sha256": "9bc1729277f37eac774c197858361d60cc869c2ec42a2b8f2910d3567537218a",
+        "bytes": 808868
+      },
+      {
+        "id": "wierzbowski-idle-right",
+        "path": "assets/dlc/aliens-1986/v115/characters/wierzbowski-idle-right.png",
+        "sha256": "31e0ff7e771c260ae989d484ed82687bc9d170b989b5913b345b97812c5efe4b",
+        "bytes": 1128088
+      },
+      {
+        "id": "wierzbowski-interact-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-interact-right.png",
+        "sha256": "597553e0bbc66cadeb9870071cb97ed3756acae3be49a7f1f06a03519f9d461a",
+        "bytes": 1115316
+      },
+      {
+        "id": "wierzbowski-walk-right",
+        "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-walk-right.png",
+        "sha256": "fa13100e14055e8ca3f5560fa911f1a84f8df559697d4c6921d78aec9548478d",
+        "bytes": 1246723
+      },
+      {
+        "id": "door-leaf-damaged",
+        "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-damaged.png",
+        "sha256": "a8f4c202b50eacc5fac67cdedbba47c283fcbeb33077450a03f1180dafedf5d5",
+        "bytes": 2269157
+      },
+      {
+        "id": "door-leaf-reinforced",
+        "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-reinforced.png",
+        "sha256": "44facf80cbef7bee784d6c925d40419670bbc0a37dae090b086909f41c374567",
+        "bytes": 2352553
+      },
+      {
+        "id": "door-leaf-breached",
+        "path": "assets/dlc/aliens-1986/v117/architecture/door-leaf-breached.png",
+        "sha256": "055e68b4014d5040eaaef50649ecc9dc73d2310b5441fa331e313c3b49c41eb0",
+        "bytes": 2187687
+      },
+      {
+        "id": "meal-tray-food",
+        "path": "assets/dlc/aliens-1986/v117/props/meal-tray-food.png",
+        "sha256": "cd0f41e0fe33f279a0115308da46db2c036dba6e681176fe2ac5e6d05be20f26",
+        "bytes": 2160552
+      },
+      {
+        "id": "supply-case-medical-empty",
+        "path": "assets/dlc/aliens-1986/v117/props/supply-case-medical-empty.png",
+        "sha256": "e5afb1bd9bf62b869af49b6bf9ebc7f2f854cc241b2f693695c6b6f7b9ffc49e",
+        "bytes": 2192057
+      },
+      {
+        "id": "supply-case-ammo-closed",
+        "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-closed.png",
+        "sha256": "fc6006bca4fe6129eea7a3c752f2c44b2fc4fc6c8e7a13fddbd577bac01ed497",
+        "bytes": 2345905
+      },
+      {
+        "id": "supply-case-ammo-empty",
+        "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-empty.png",
+        "sha256": "af91a6299d2579b75643df843f8f81348015f2d09089b4634f207ee60e68c000",
+        "bytes": 2174847
+      },
+      {
+        "id": "engineering-case-stocked",
+        "path": "assets/dlc/aliens-1986/v118/props/engineering-case-stocked.png",
+        "sha256": "f1a5d5f9f592d08d1be6b4b77c9a4ba52856e8ae09de2131356d3908c9b24cad",
+        "bytes": 2368689
+      },
+      {
+        "id": "gateway-inquiry-display",
+        "path": "assets/dlc/aliens-1986/v118/props/gateway-inquiry-display.png",
+        "sha256": "0736d478db9c2cf2bbc54702b3725cb2edb589605332c611da14cde701a1b05c",
+        "bytes": 2362728
+      },
+      {
+        "id": "service-control-pedestal",
+        "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+        "sha256": "1b0be7132e27f1d2829bee04ade31a41cd4a7d1d5cc4e77828bf6cb7e4d4a3b5",
+        "bytes": 1276428
+      },
+      {
+        "id": "medical-counter-terminal",
+        "path": "assets/dlc/aliens-1986/v118/props/medical-counter-terminal.png",
+        "sha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864",
+        "bytes": 2389765
+      },
+      {
+        "id": "optics-calibration-terminal",
+        "path": "assets/dlc/aliens-1986/v118/props/optics-calibration-terminal.png",
+        "sha256": "d4e18e908131198f0e501ed70a2a741b782a036b3e8c935b5e037432220c40a3",
+        "bytes": 2325558
+      },
+      {
+        "id": "valve-indicator-panel",
+        "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+        "sha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d",
+        "bytes": 2386174
+      },
+      {
+        "id": "sulaco-briefing-terminal",
+        "path": "assets/dlc/aliens-1986/v118/props/sulaco-briefing-terminal.png",
+        "sha256": "0e08e812b8e85452ff30bb448483f966159088e728dca1cd3216488ddc1c1555",
+        "bytes": 2043852
+      },
+      {
+        "id": "operations-table-terminal",
+        "path": "assets/dlc/aliens-1986/v118/props/operations-table-terminal.png",
+        "sha256": "50adeba42a58b714a5048fc93556f2fa6708eb6a8f792c19c1d1d862a0cd868f",
+        "bytes": 2280782
+      },
+      {
+        "id": "sentry-aim-front-right",
+        "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+        "sha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b",
+        "bytes": 2117622
+      },
+      {
+        "id": "sentry-aim-rear-right",
+        "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+        "sha256": "ec994d07af32863311577b72628b0794fafc96a06653aa045f020d5305e60b9c",
+        "bytes": 2090613
+      },
+      {
+        "id": "sentry-aim-rear",
+        "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+        "sha256": "6ddcd2bd2bc99d2471a49e49e7ea851efa97010ca70e59e7003a5f10b77375b9",
+        "bytes": 1786024
+      },
+      {
+        "id": "medlab-bed",
+        "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+        "sha256": "6732cd31383a70ea7050e423d18f0751a299f23d5ff28d6cb009baada63096b4",
+        "bytes": 1155497
+      },
+      {
+        "id": "medlab-storage-cabinet",
+        "path": "assets/dlc/aliens-1986/v119/furniture/medlab-storage-cabinet.png",
+        "sha256": "bc012f56d4d5dca0a8af63aa320fb4272bb875fc1cd600e26d81509bbefec591",
+        "bytes": 2768121
+      },
+      {
+        "id": "reserve-service-locker",
+        "path": "assets/dlc/aliens-1986/v119/furniture/reserve-service-locker.png",
+        "sha256": "2a2dede3faa3b0ed4c571a840389fd01c61aacb522d96ffb85d0a962f441908d",
+        "bytes": 2701493
+      },
+      {
+        "id": "operations-storage-rack",
+        "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+        "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+        "bytes": 2886102
+      },
+      {
+        "id": "sulaco-mess-table",
+        "path": "assets/dlc/aliens-1986/v119/furniture/sulaco-mess-table.png",
+        "sha256": "f02e11b5d50e7104fd49a86164960aab3223412111737a889667d039cb17371b",
+        "bytes": 2306400
+      },
+      {
+        "id": "operations-command-table",
+        "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+        "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+        "bytes": 1719633
+      },
+      {
+        "id": "reserve-medical-counter",
+        "path": "assets/dlc/aliens-1986/v120/furniture/reserve-medical-counter.png",
+        "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+        "bytes": 2189660
+      },
+      {
+        "id": "utility-storage-cabinet",
+        "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+        "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
+        "bytes": 2601946
+      },
+      {
+        "id": "optics-workbench",
+        "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+        "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+        "bytes": 1963841
+      },
+      {
+        "id": "operations-display-bank",
+        "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+        "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
+        "bytes": 2728175
+      },
+      {
+        "id": "hadley-service-generator",
+        "path": "assets/dlc/aliens-1986/v121/furniture/hadley-service-generator.png",
+        "sha256": "8899ee95baf096ef06edc0fbb5f995f717fbbbe2958b90e3a1c856ff3b38066f",
+        "bytes": 2663142
+      },
+      {
+        "id": "service-pump-unit",
+        "path": "assets/dlc/aliens-1986/v121/furniture/service-pump-unit.png",
+        "sha256": "1193a040c1305535d36ded3869361dc717a35ca836363a53f2ab5f415639cf10",
+        "bytes": 2293428
+      },
+      {
+        "id": "conduit-heat-exchanger",
+        "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+        "sha256": "34c50e1c2644a65a40dbdad83f3b232e4ace14191e35f05bfbec6155682eb304",
+        "bytes": 2411055
+      },
+      {
+        "id": "conduit-valve-plinth",
+        "path": "assets/dlc/aliens-1986/v121/furniture/conduit-valve-plinth.png",
+        "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+        "bytes": 2349034
+      },
+      {
+        "id": "uss-sulaco",
+        "path": "assets/dlc/aliens-1986/v122/exteriors/uss-sulaco.png",
+        "sha256": "edfca27af5b00ede4f5ea64da49b79f8a71e616a7eea3e26ee207f23d3d4bb3a",
+        "bytes": 1508899
+      },
+      {
+        "id": "jorden-survey-tractor",
+        "path": "assets/dlc/aliens-1986/v122/exteriors/jorden-survey-tractor.png",
+        "sha256": "b28f7064586172b81b44ef1c17d2f1a5bcf64d36b9300817decbcc6a01b54354",
+        "bytes": 2059152
+      },
+      {
+        "id": "sulaco-deck-tile",
+        "path": "assets/dlc/aliens-1986/v122/environments/sulaco-deck-tile.png",
+        "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789",
+        "bytes": 2820620
+      },
+      {
+        "id": "atmosphere-processor-facade",
+        "path": "assets/dlc/aliens-1986/v122/environments/atmosphere-processor-facade.png",
+        "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87",
+        "bytes": 1142795
+      },
+      {
+        "id": "hadley-colony-building",
+        "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-building.png",
+        "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34",
+        "bytes": 2734194
+      },
+      {
+        "id": "gateway-orbital-backdrop",
+        "path": "assets/dlc/aliens-1986/v122/environments/gateway-orbital-backdrop.png",
+        "sha256": "a04a5520ea48fb1ed83fc2a9bafd42f6e921ed02d8ea9e62e2f316132381eefe",
+        "bytes": 2177536
+      },
+      {
+        "id": "narcissus-shuttle",
+        "path": "assets/dlc/aliens-1986/v122/exteriors/narcissus-shuttle.png",
+        "sha256": "57cdcd7b7f2aeae3748cf95b11e94727f636b2cae738cb919a13b0aeb6479a74",
+        "bytes": 1824812
+      },
+      {
+        "id": "hadley-uplink-tower",
+        "path": "assets/dlc/aliens-1986/v122/environments/hadley-uplink-tower.png",
+        "sha256": "b36bcd109f6e01d772c1372847b2db5eba2020df2b48f6a70ff8fe1dd15621ca",
+        "bytes": 1610267
+      },
+      {
+        "id": "hadley-colony-wall-panel",
+        "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-wall-panel.png",
+        "sha256": "fae5bc149190e7c4014be252e3ec0e30caaf870aeb1a9632627a03e9c8bc89f5",
+        "bytes": 3074209
+      },
+      {
+        "id": "sentry-aim-front",
+        "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+        "sha256": "f32141090ca966b7644185878342a2d95f4eea05b472e9c44344a7cb779125f7",
+        "bytes": 1617328
+      },
+      {
+        "id": "warrior-walk-right",
+        "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+        "sha256": "7ba739ff6f7b6e78ed43306015cbb26cccf3f4d2ad5b48f0b4afc09494ddcdc2",
+        "bytes": 1802161
+      }
+    ]
+  }
+}
