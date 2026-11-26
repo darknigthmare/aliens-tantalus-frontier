@@ -8,6 +8,7 @@ import { EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { AVP_HISTORICAL_ARCHIVE_BASELINE_20261126 as baseline, AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126 as successors,
   AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126 as previous, reviewedHistoricalArchiveHostDigest20261126 as advance } from './audit-dlc-avp-2004-20261125.mjs';
 const root = new URL('../', import.meta.url);
+const blackoutRoot = 'archives/dlc-historical-recovery-20261126/alien-blackout';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 
 test('historical archive admission is closed, typed and excluded from public builds', () => {
@@ -67,7 +68,7 @@ test('reconciliation admits exactly the 123 preserved source paths and keeps the
   assert.equal(receipt.source.commit, '6ed9b9210a097bbdf90ec3a22043a3fe5845e541');
   assert.equal(receipt.files.length, 123);
   assert.equal(receipt.archives.length, 16);
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/')).length, 140);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/') && !path.startsWith(blackoutRoot + '/')).length, 140);
   const expectedPaths = receipt.files.map(entry => entry.path).sort();
   assert.equal(new Set(expectedPaths).size, 123);
   assert.deepEqual(Object.keys(files).filter(path => path.startsWith(recoveredRoot + '/')).sort(), expectedPaths);
@@ -213,3 +214,129 @@ test('conversation RAR reconstructs exact bytes from all 17 pinned Git fragments
   assert.equal(wholeGitBlob.digest('hex'), '85ff0458e5ad514b40f0eddcdfbb0a79342f2ce8');
 });
 
+
+const blackoutExpected = [
+  {
+    "archiveId": "alien-blackout/v0.1.0",
+    "bytes": 7604057,
+    "sha256": "7c74c14e3e1e660b8285be220953e872e1745909465e8e937348d3129bebd304",
+    "wholeArchiveGitBlobSha1": "d2ff3598915a0eee61cd8339090cb8a1993bcad8",
+    "memberCount": 76,
+    "pngOccurrences": 9
+  },
+  {
+    "archiveId": "alien-blackout/v0.2.0",
+    "bytes": 19015524,
+    "sha256": "285aeffe826cd122b3fe8c2da90cb54f8cdb346709ae91493099c75b8d201794",
+    "wholeArchiveGitBlobSha1": "1cefa41bc467e173f0cf99a3e91c110b5c502449",
+    "memberCount": 178,
+    "pngOccurrences": 0
+  },
+  {
+    "archiveId": "alien-blackout/v0.3.0",
+    "bytes": 15692851,
+    "sha256": "d6f9e904153ce91c31324897f77a1a7df93db92f88ec5db64675df8c44e08fc8",
+    "wholeArchiveGitBlobSha1": "d32f8893b6a36f0e73b5bc44ec15a86ac36a969e",
+    "memberCount": 220,
+    "pngOccurrences": 0
+  },
+  {
+    "archiveId": "alien-blackout/v0.4.0",
+    "bytes": 20737593,
+    "sha256": "579936acdb52b58c629c3e944ed7db853b66225dc81369ce0f9179912aa379ad",
+    "wholeArchiveGitBlobSha1": "5c458d8068c65a3e83e6068c4b97c88e2c4ad685",
+    "memberCount": 281,
+    "pngOccurrences": 0
+  },
+  {
+    "archiveId": "alien-blackout/v0.5.0",
+    "bytes": 23799439,
+    "sha256": "e44b6ffab9350a3dad521eab4466e5ecf7c3d96000e10558a070b2e55600d664",
+    "wholeArchiveGitBlobSha1": "b69c230d5413c6511547c36d6d102c71bcc9b56e",
+    "memberCount": 337,
+    "pngOccurrences": 0
+  },
+  {
+    "archiveId": "alien-blackout/v0.6.0",
+    "bytes": 25056068,
+    "sha256": "8102117a0d1e16b9f121a403659bde35ccfc82c93f747b15d40bef7dce748663",
+    "wholeArchiveGitBlobSha1": "1dc1b383b574023e2df7b8f2b52b94e85cac0788",
+    "memberCount": 304,
+    "pngOccurrences": 0
+  }
+];
+
+test('Blackout v0.1-v0.6 preserves six complete ZIP inventories behind exact source paths', () => {
+  const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(blackoutRoot + '/')).length, 160);
+  const paths = [blackoutRoot + '/README.md'];
+  let members = 0, pngs = 0, bytes = 0, fragments = 0;
+  for (const expected of blackoutExpected) {
+    const folder = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId;
+    const manifest = JSON.parse(readFileSync(new URL(folder + '/MANIFEST.json', root), 'utf8'));
+    const inventory = JSON.parse(readFileSync(new URL(folder + '/ZIP_CONTENTS.json', root), 'utf8'));
+    for (const [key, value] of Object.entries(expected)) assert.equal(manifest[key], value, expected.archiveId + ':' + key);
+    assert.equal(manifest.originalFilename, 'ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_' + expected.archiveId.split('/')[1] + '.zip');
+    assert.equal(manifest.format, 'zip');
+    assert.equal(manifest.preservation, 'exact-original-bytes');
+    assert.equal(manifest.zipCrc32, 'verified');
+    assert.equal(manifest.manifest, folder + '/MANIFEST.json');
+    assert.equal(manifest.contents, folder + '/ZIP_CONTENTS.json');
+    assert.deepEqual(index.preserved.filter(row => row.archiveId === expected.archiveId), [manifest]);
+    const candidate = index.candidates.filter(row => row.filename === manifest.originalFilename);
+    assert.equal(candidate.length, 1);
+    assert.equal(candidate[0].status, 'preserved-exact-in-this-recovery');
+    assert.equal(candidate[0].sha256, manifest.sha256);
+    assert.equal(inventory.complete, true);
+    assert.equal(inventory.allMemberCrc32Verified, true);
+    assert.equal(inventory.entries.length, expected.memberCount);
+    assert.equal(inventory.entries.filter(row => !row.directory && row.path.toLowerCase().endsWith('.png')).length, expected.pngOccurrences);
+    assert.deepEqual(inventory.duplicatePaths, []);
+    assert.deepEqual(inventory.unsafePaths, []);
+    for (const row of inventory.entries) {
+      assert.match(row.sha256, /^[a-f0-9]{64}$/);
+      assert.match(row.crc32, /^[a-f0-9]{8}$/);
+      assert.equal(row.unsafePath, false);
+    }
+    for (const part of manifest.parts) {
+      assert.deepEqual(files[part.path], { bytes: part.bytes, sha256: part.sha256 }, part.path);
+      assert.ok(part.bytes > 0 && part.bytes <= 10485760);
+      paths.push(part.path);
+    }
+    paths.push(manifest.manifest, manifest.contents);
+    members += manifest.memberCount; pngs += manifest.pngOccurrences; bytes += manifest.bytes; fragments += manifest.parts.length;
+  }
+  assert.equal(bytes, 111905532);
+  assert.equal(members, 1396);
+  assert.equal(pngs, 9);
+  assert.equal(fragments, 13);
+  assert.equal(paths.length, 26);
+  assert.equal(new Set(paths).size, 26);
+  assert.deepEqual(Object.keys(files).filter(path => path.startsWith(blackoutRoot + '/')).sort(), paths.sort());
+  for (const path of [blackoutRoot + '/unreviewed.zip', blackoutRoot + '/v0.6.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip.part004',
+    blackoutRoot + '/../unknown', blackoutRoot + '/v0.1.0/MANIFEST.json/extra'])
+    for (const directory of [false, true]) for (const built of [false, true])
+      assert.equal(admitted(path, { directory, built }), false, path);
+});
+
+test('Blackout originals reconstruct their SHA256 and Git hashes from all 13 fragments', () => {
+  for (const expected of blackoutExpected) {
+    const manifest = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/' + expected.archiveId + '/MANIFEST.json', root), 'utf8'));
+    const archiveHash = createHash('sha256');
+    const archiveGit = createHash('sha1').update('blob ' + expected.bytes + '\0');
+    let offset = 0;
+    for (const [index, part] of manifest.parts.entries()) {
+      const path = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId + '/' + manifest.originalFilename + '.part' + String(index + 1).padStart(3, '0');
+      assert.equal(part.path, path);
+      assert.equal(part.offset, offset, path);
+      const bytes = readFileSync(new URL(path, root));
+      assert.equal(bytes.length, part.bytes, path);
+      assert.equal(hash(bytes), part.sha256, path);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'), part.gitBlobSha1, path);
+      archiveHash.update(bytes); archiveGit.update(bytes); offset += bytes.length;
+    }
+    assert.equal(offset, expected.bytes, expected.archiveId);
+    assert.equal(archiveHash.digest('hex'), expected.sha256, expected.archiveId);
+    assert.equal(archiveGit.digest('hex'), expected.wholeArchiveGitBlobSha1, expected.archiveId);
+  }
+});

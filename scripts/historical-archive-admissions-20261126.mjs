@@ -11,8 +11,8 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
     "sha256": "9fae6f77cc78c926b85e17786ed10e02b30abc6dbbd02c0d8bb18ecbf0309848"
   },
   "archives/dlc-historical-recovery-20261126/INDEX.json": {
-    "bytes": 80272,
-    "sha256": "a3ec62ee8a390eff83fba6c22394b441f96dc3d3cee9a2b4c3c00f1deac0afd7"
+    "bytes": 90294,
+    "sha256": "61cb37f0ac3515f660742349485c7949b94f6531d451435c0d2eecd287a81f98"
   },
   "archives/dlc-historical-recovery-20261126/README.md": {
     "bytes": 2832,
@@ -645,6 +645,110 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
   "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part017": {
     "bytes": 1019325,
     "sha256": "7e4a268b75e6e2edcc54b19d5fd446d81a5470deca6794368b24a6b5fa8491fd"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/README.md": {
+    "bytes": 2261,
+    "sha256": "a44d04495f4bee310b9a8d55d16ef3114ff0b0bcf3db46fc5ab63fd5822380cc"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.1.0/MANIFEST.json": {
+    "bytes": 968,
+    "sha256": "c3a1bb250f85a8a534f5da7059f94608d125f92f5f76c410299f3e7feaa2c4c9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.1.0/ZIP_CONTENTS.json": {
+    "bytes": 22303,
+    "sha256": "bc8c12f26500bf13c9eb06fab819d80894ceee35d34865ae5d3e42657fbd36de"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.2.0/MANIFEST.json": {
+    "bytes": 1317,
+    "sha256": "d1e148c3bd3d593f80a14b679834297f9c3b8164f6b6c4d52550354645df60ec"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.2.0/ZIP_CONTENTS.json": {
+    "bytes": 52423,
+    "sha256": "5b19ea126897617b06243c729e6f1dab683bf5e9941c3dfe1a4e10b53beb61e7"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/MANIFEST.json": {
+    "bytes": 1317,
+    "sha256": "404f517c0f8480ee4a98e0efdbc4fd4e70cf61f40116b5dc0847bd5ed6db9a8b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ZIP_CONTENTS.json": {
+    "bytes": 65227,
+    "sha256": "af50d280f0f06b19ea53356e17c9b85596a44c12b2fa5e816e9ae12b642bc6f4"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.4.0/MANIFEST.json": {
+    "bytes": 1318,
+    "sha256": "a3da115c71f13821677dba4065fc55058805c2dfc58b5ab6fec1ac5c4358adcf"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.4.0/ZIP_CONTENTS.json": {
+    "bytes": 83969,
+    "sha256": "b385b99a95decbdd6e04d7bd5bbd732c0b803d05a0e2121d7057474062293fa9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.5.0/MANIFEST.json": {
+    "bytes": 1664,
+    "sha256": "80098d426501752faf98c39343256546d3b9b79ce074ae781378df9a60653ef3"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.5.0/ZIP_CONTENTS.json": {
+    "bytes": 100657,
+    "sha256": "016bfa89681ae315397df78f534c62daf9135767bed77049dbf483a5c039c17b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/MANIFEST.json": {
+    "bytes": 1664,
+    "sha256": "684c8505766fce98b1cfde0d7ad8e847de0c9e98b85bf0325a5772dc697cf50b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/ZIP_CONTENTS.json": {
+    "bytes": 90422,
+    "sha256": "afe6777b6cf3fcd2285ad85cc94488af01e8b4e3ca47fcb7616a7169cb3e5f5b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.1.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.1.0.zip.part001": {
+    "bytes": 7604057,
+    "sha256": "7c74c14e3e1e660b8285be220953e872e1745909465e8e937348d3129bebd304"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.2.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.2.0.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "9ca8409ad9a43480ddf6cda3da6ef706c3e9e8797a90cd785f8936ed8dc36c9f"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.2.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.2.0.zip.part002": {
+    "bytes": 8529764,
+    "sha256": "0970342688e9725f213cc42ddbb26275bce41c334009cf0990e611ebedfde37b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "2be8d3269c3313b10465ec6e8a5f6ef2cef8e5c7aa4ff0b18b7a1e48ab6e4b69"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.3.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.3.0.zip.part002": {
+    "bytes": 5207091,
+    "sha256": "713f10cccae6d5a7090e07bd00e9548cfa68d7af83402f9011f0ca025d2d4b3c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.4.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.4.0.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "c3d218b378f6dd8bb62822385cf2163aa4183d6077f99c440ba0295ccd739bba"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.4.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.4.0.zip.part002": {
+    "bytes": 10251833,
+    "sha256": "1be05acd0aaa6843f53187689ede41f4610d91a52bd891d69f7ee19ae501ebec"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.5.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.5.0.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "333bde4f9957784d5729be58f359fb3da6276f63a22a8ab7720ce2ddfc6104c0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.5.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.5.0.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "616271a9e9c2014918cb8c939262944820a54e2e483aac9e27b6e5737184b9c4"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.5.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.5.0.zip.part003": {
+    "bytes": 2827919,
+    "sha256": "42a4dfebaeee134233f0465878d5604e26fadebc72d5a17ac39096d3383409d7"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "20ca2b3c0439bbcf18c0880d3a7337ac65d4f911058be53c7fe821caad6cd75e"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "8f962b0603ac74f9ec688f07f8109ae275426a3f42f44416a601f1faace05f9b"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip.part003": {
+    "bytes": 4084548,
+    "sha256": "e6a95b1d17cdaecce40e2b5f6d8f88522642580501104d0d4f3a469fdd21c81f"
   }
 }).map(([path, value]) => [path, Object.freeze(value)])
 ));

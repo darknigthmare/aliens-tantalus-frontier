@@ -1,0 +1,3048 @@
+{
+  "schemaVersion": 1,
+  "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.5.0.zip",
+  "method": "Python zipfile, every member streamed and CRC32 checked; no member extracted",
+  "complete": true,
+  "allMemberCrc32Verified": true,
+  "memberCount": 337,
+  "fileCount": 337,
+  "directoryCount": 0,
+  "pngCount": 0,
+  "duplicatePaths": [],
+  "unsafePaths": [],
+  "entries": [
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/CODEX_ALIEN_BLACKOUT_v0.5.0.html",
+      "bytes": 5658167,
+      "compressedBytes": 3745784,
+      "crc32": "d07bb9ea",
+      "sha256": "6dd08007218f6ab118b4ae22a61d4c7d38d6d722d16afdbd81d7ed322bad935f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/JOUER_ALIEN_BLACKOUT_v0.5.0.html",
+      "bytes": 506176,
+      "compressedBytes": 109683,
+      "crc32": "6adc9caa",
+      "sha256": "4a0473747582ceaa3a7927e4e5c4e4b0752160feb3a40c293cb4b4281a80d666",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/LANCER_BLACKOUT.cmd",
+      "bytes": 71,
+      "compressedBytes": 72,
+      "crc32": "68cc794e",
+      "sha256": "d0c86276e0b00815107b8055d490f656b7f4211f21dc1f7e036f6aaca51c7946",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/MANIFEST_V5.json",
+      "bytes": 54822,
+      "compressedBytes": 17344,
+      "crc32": "c5c08dc6",
+      "sha256": "51123d0b041e7a0e26de84dc62bde722c36f6929d213f7fcf100762f5ec7cff7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/RAPPORT_VISUEL_ALIEN_BLACKOUT_v0.5.0.html",
+      "bytes": 12912204,
+      "compressedBytes": 8389724,
+      "crc32": "6fdfae0a",
+      "sha256": "05fe83bdc609681f8c886ab347e21c0299e562ec71eaacbbf6e6ed2465443193",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/README.md",
+      "bytes": 7481,
+      "compressedBytes": 3485,
+      "crc32": "da5796bc",
+      "sha256": "d68dc857052e869b0f3998666a26698a9b02fba926c5d535a566f4ab43766213",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/batterycell.svg",
+      "bytes": 1455,
+      "compressedBytes": 426,
+      "crc32": "960a0108",
+      "sha256": "a32c527cb5ddc000c94fd3228c0e5a3b489e6f910ea33c05c8ceacc08f8fcd82",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/bench.svg",
+      "bytes": 703,
+      "compressedBytes": 339,
+      "crc32": "fa7c2c68",
+      "sha256": "36b83d9861622dd17a79655dcaf23425e6c50f06a2c80690c360525f4b4a4fd8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/bunks.svg",
+      "bytes": 746,
+      "compressedBytes": 351,
+      "crc32": "bd39da95",
+      "sha256": "abdf6772042216614339ae1737661dfa6284a77e4b0e2c345c27a655b1bf31f6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/cabinet.svg",
+      "bytes": 818,
+      "compressedBytes": 385,
+      "crc32": "5f6759af",
+      "sha256": "40064eb142b8dad8392900799c71a9fd6733e53f574ebe3c86a94311c2152deb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/cabletray.svg",
+      "bytes": 969,
+      "compressedBytes": 337,
+      "crc32": "e1afc5a8",
+      "sha256": "7130716256cf83b34f5f7d0191c6b32d7e9fab205a44f291ee0337ba27b11a64",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/cart.svg",
+      "bytes": 829,
+      "compressedBytes": 387,
+      "crc32": "ad0b744c",
+      "sha256": "66d3ec54267201a7e6c62c3d6db7608cf5e64f2a230820913a8d7374cb6a3b53",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/console.svg",
+      "bytes": 1362,
+      "compressedBytes": 448,
+      "crc32": "6ec33ebe",
+      "sha256": "0a2ee117d56f810eb3fb01b5b406a4df238b34e7577624d88736cf4aa28258b2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/core.svg",
+      "bytes": 1372,
+      "compressedBytes": 403,
+      "crc32": "941ce9bf",
+      "sha256": "d528eff7dc1048d68cd6206c0d6005dd4aadce16604c692dd75dae3a7287d2fc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/crate.svg",
+      "bytes": 741,
+      "compressedBytes": 366,
+      "crc32": "07b1bf7e",
+      "sha256": "49b882ca0012e1a5ba189e6469a2b8c56d3468f2563a613b9920ae0467fe2289",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/desk.svg",
+      "bytes": 786,
+      "compressedBytes": 376,
+      "crc32": "05811d3e",
+      "sha256": "8ccc8b6df8554a7ad8d933a2d67ada6558e6b6326afcd3d8c7fff2faaadfba39",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/extinguisher.svg",
+      "bytes": 851,
+      "compressedBytes": 396,
+      "crc32": "67a1c778",
+      "sha256": "542cd0c6e4cdf17a4ad27b4a37e331b730843746d988f90bf5dab9fe2096b5ce",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/filter.svg",
+      "bytes": 969,
+      "compressedBytes": 405,
+      "crc32": "4e709631",
+      "sha256": "486605ab34304781b7c8337e7793665607e1fc1ec16fc8f2c62abea72b487c67",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/firstaid.svg",
+      "bytes": 704,
+      "compressedBytes": 342,
+      "crc32": "995e6dee",
+      "sha256": "fb3ee5a344903c7651f9dafc0bee0c70e832cde9ba803cd93d789dc4cec121a7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/fridge.svg",
+      "bytes": 743,
+      "compressedBytes": 346,
+      "crc32": "dfc06172",
+      "sha256": "49b43b2e394d353113d8d87330300bf8a214e8163d24778e4cd9d16c103d18b7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/hose.svg",
+      "bytes": 904,
+      "compressedBytes": 346,
+      "crc32": "97dcfbcd",
+      "sha256": "34dcdb12054223ee266dd3077c46f8ad788398046c0b4963dd1f8c507086e4e3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/labtable.svg",
+      "bytes": 797,
+      "compressedBytes": 388,
+      "crc32": "708bdf85",
+      "sha256": "2d50e3b04e682001d029e74561bd4ad8d3e5fa66a49ba71e45f25671b112238c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/light.svg",
+      "bytes": 576,
+      "compressedBytes": 280,
+      "crc32": "058f7845",
+      "sha256": "9dd6003f360d509502f0f03c455139ee8fc63997afa8409ff749e1461140f4c2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/locker.svg",
+      "bytes": 1562,
+      "compressedBytes": 398,
+      "crc32": "d44d3353",
+      "sha256": "c4a989d1d12acee8c1ce26a7c267ce6ddfbd35446efabeb96c245c38709e1a0e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/monitor.svg",
+      "bytes": 739,
+      "compressedBytes": 361,
+      "crc32": "52972b59",
+      "sha256": "69cea34213f23e7a2ef4bedd3a6230db43c50dea55cfe225985dd267029a80f0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/mug.svg",
+      "bytes": 631,
+      "compressedBytes": 322,
+      "crc32": "3dbb35a1",
+      "sha256": "a9e0a8e9a82cafd9684c8d04308184ee0ac8e5accee20e4e77e88d03f821b8b0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/oxygen.svg",
+      "bytes": 847,
+      "compressedBytes": 349,
+      "crc32": "442bcb0e",
+      "sha256": "96eadc26df7cf6b41efe160305be1f815e1a8a88425db2da8cd6138a58f086f8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/palletjack.svg",
+      "bytes": 722,
+      "compressedBytes": 357,
+      "crc32": "92be0882",
+      "sha256": "fedcf4383bec19716a7b275ab8cc1805a7e65d67a0b3327a8f1812115dcbccf8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/pipe.svg",
+      "bytes": 685,
+      "compressedBytes": 317,
+      "crc32": "4f7cff90",
+      "sha256": "12ae07d135b0ba24d8fdaae277712227b105e9ca0dd14027235290114d63c545",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/rack.svg",
+      "bytes": 1126,
+      "compressedBytes": 401,
+      "crc32": "9d54a8e5",
+      "sha256": "fdd3be96eb4784bd80debbbec40a9e1142941144f514e2c4e0c00472adb71df0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/resin.svg",
+      "bytes": 704,
+      "compressedBytes": 339,
+      "crc32": "de1c1536",
+      "sha256": "a518bd8a46ceb2e3f55be286e9aa24bb4bf07543484a9ca9977904ec83e82eba",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/screenwide.svg",
+      "bytes": 965,
+      "compressedBytes": 335,
+      "crc32": "978e36ff",
+      "sha256": "61f94927b7bc482a73cad841193e60aeeb07d4e0e4b4fc92b60371734ffd5ab5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/seatrow.svg",
+      "bytes": 867,
+      "compressedBytes": 336,
+      "crc32": "057c2aff",
+      "sha256": "5d262e8a8028ae7665989246ac660c36a281238f67633ebc64479eb0a6d3a022",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/server.svg",
+      "bytes": 1556,
+      "compressedBytes": 413,
+      "crc32": "837e3e35",
+      "sha256": "a327229ae4f05f87bce7f73beba0fa69bcad99ce8a0738249201dd9ad7a2d3ea",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/sign.svg",
+      "bytes": 678,
+      "compressedBytes": 331,
+      "crc32": "198ac96c",
+      "sha256": "96b9967ceaebe86357c01c36cb138b620044b0506ece6758dc289d492a0660f3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/specimen.svg",
+      "bytes": 839,
+      "compressedBytes": 414,
+      "crc32": "487b998e",
+      "sha256": "a846f286fb4e67186160e30aa59329496677689869ccafad50f884d27b3c97c2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/straps.svg",
+      "bytes": 601,
+      "compressedBytes": 299,
+      "crc32": "cd7e89b5",
+      "sha256": "daded46864a219584d282f118abdb7f6277bd8a348bb1e32677f52f7b4a2859e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/toolpanel.svg",
+      "bytes": 3990,
+      "compressedBytes": 562,
+      "crc32": "489f152c",
+      "sha256": "a42b8031756204549738fe005dde43b3aae502cbd3bb6389c9f1e944ca555d85",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/trash.svg",
+      "bytes": 666,
+      "compressedBytes": 326,
+      "crc32": "5a450fb5",
+      "sha256": "6b08d8af4f346db074f3531382c8c8f0b5ba8b8c294fcb911c4afc7ec5b686e5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/valve.svg",
+      "bytes": 1153,
+      "compressedBytes": 413,
+      "crc32": "91453aee",
+      "sha256": "1bea3c6bc418297e5970f1af871478826fce9206f272cc575c56e911d5bbe1bd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/vent.svg",
+      "bytes": 930,
+      "compressedBytes": 307,
+      "crc32": "49d40844",
+      "sha256": "04f2151317ef835ff50dceb0ade416609b7e1d583e4073ef7394cbe88b45cf9e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/washer.svg",
+      "bytes": 836,
+      "compressedBytes": 397,
+      "crc32": "9a449f8a",
+      "sha256": "52cb7c7490596535941778e66a1f0b3b2809333659403221bab05324eec44419",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/assets/workbench.svg",
+      "bytes": 770,
+      "compressedBytes": 372,
+      "crc32": "b0338088",
+      "sha256": "35b981c97427e620dfaf2a61a9e5b84a858fc614f3eff1b8f0586ca1a0903b0f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/active-save-v2.json",
+      "bytes": 7268,
+      "compressedBytes": 1635,
+      "crc32": "5721b299",
+      "sha256": "4d9f22decbc12495ea2aa9d4c4129dbfbf547ae26c40b3acc85f0afa3b335979",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/active-save-v3.json",
+      "bytes": 8796,
+      "compressedBytes": 1954,
+      "crc32": "37021286",
+      "sha256": "fc28862bdb2dedd7a7c44c99d7c9807332547a48704fcf15ddf8cb77f41dc643",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/active-save-v4.json",
+      "bytes": 10664,
+      "compressedBytes": 2244,
+      "crc32": "09eafc1a",
+      "sha256": "2f5e28e399a4a9b1be953e00f62092216d5f9b4635c6da1b838d82cc6cb09cd6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/completed-save-v1.json",
+      "bytes": 21429,
+      "compressedBytes": 2781,
+      "crc32": "057254ee",
+      "sha256": "433621352a44664bbd12f9ce7f56e2b21c86c8073404af0e067f74f6de1e4165",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/completed-save-v2.json",
+      "bytes": 23122,
+      "compressedBytes": 2930,
+      "crc32": "25329c79",
+      "sha256": "cb887d48d5386c556afcf3e9391c7654ef4c929134fca0147ee6281878519b9f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/completed-save-v3.json",
+      "bytes": 22854,
+      "compressedBytes": 3684,
+      "crc32": "f3b31072",
+      "sha256": "bb9671d9a06465228ca0c13370dc5fa69ceb7bbb9903818eb11bdaaf6f165c29",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/completed-save-v4.json",
+      "bytes": 25489,
+      "compressedBytes": 4164,
+      "crc32": "102391ea",
+      "sha256": "a65efda4398bedc878f7bdaaaa833a46dd02ec8fdbc0119690e7c9208b574001",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/content-v1.json",
+      "bytes": 125516,
+      "compressedBytes": 14021,
+      "crc32": "f6991011",
+      "sha256": "186806faaf49e2578374b76efd11dbd4fd4993c7dcdb379361c91a8ca21affa3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/install-v4.mjs",
+      "bytes": 8490,
+      "compressedBytes": 3031,
+      "crc32": "7c793589",
+      "sha256": "2c4b4af03e6fd80f0342c2ceeb4301c9e6406372c9f71c740d1b888b4e5ce513",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/playable-v1.html",
+      "bytes": 167499,
+      "compressedBytes": 43624,
+      "crc32": "3d299a99",
+      "sha256": "a66c473570ac3f0c66d673472e518aa8f0a11e1b4f9b9f4da0735238111a8812",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/playable-v2.html",
+      "bytes": 359181,
+      "compressedBytes": 66001,
+      "crc32": "08df75cd",
+      "sha256": "5396154048b6417ba0577181c30e24d438fa5b383aebfea90b5b766553c9e964",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/playable-v3.html",
+      "bytes": 423396,
+      "compressedBytes": 85631,
+      "crc32": "fc268a2e",
+      "sha256": "57a99d28b45c031b91f5e7623181f464072dfff02fb4bea156a873dcfdb76882",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/compat/playable-v4.html",
+      "bytes": 472852,
+      "compressedBytes": 100149,
+      "crc32": "c2e1d3e4",
+      "sha256": "1948fee5cde03cabbf026e9fb112cd093aaf91de8aacc74966f8c8936fa03cb0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/CHANGELOG.md",
+      "bytes": 1041,
+      "compressedBytes": 610,
+      "crc32": "6c55d602",
+      "sha256": "b787edc793cb3304fda6b69b111c8a5c0d04eacb852b5361babe1fc4d18d2651",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/CODEX_COMPLET_v0.5.0.md",
+      "bytes": 138614,
+      "compressedBytes": 22539,
+      "crc32": "77283963",
+      "sha256": "6fc92e7ed11ca43476472a22f81d827657ea103b3fe2f111fc919d872de5bf1a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/CONTENT_MANIFEST.json",
+      "bytes": 340,
+      "compressedBytes": 200,
+      "crc32": "c832e830",
+      "sha256": "afeb95c3be00a9b07f648d39aafcbf4f0ab4ce7072b4378fcbda03ab5dba47d2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/INTEGRATION.md",
+      "bytes": 793,
+      "compressedBytes": 464,
+      "crc32": "d7bbceae",
+      "sha256": "b7cd2006f4db556da04e0a11bad1732fa5eadbcd168ae61313be129f1c62997e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/KNOWN_LIMITS.md",
+      "bytes": 1291,
+      "compressedBytes": 744,
+      "crc32": "c385ff5e",
+      "sha256": "f92fc8a621fc76da7a6b9d688f96091fb09ab420fc16647185fa30ba9d7ff517",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/SMOKE_TEST_MANUEL.md",
+      "bytes": 1300,
+      "compressedBytes": 704,
+      "crc32": "3f907b39",
+      "sha256": "ccf5c7f8c824adc5ca5c3dfdd91caa842571c742df620b5d2079a2bf0491cef6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/SOURCES_ET_FIDELITE.md",
+      "bytes": 1299,
+      "compressedBytes": 743,
+      "crc32": "d1394db9",
+      "sha256": "967b8d80a72fa2c89c94e8f72f602f7579a6a8ccf3b7879e79d8a1129570ca41",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/SOURCE_PROVENANCE_V3_INHERITED.json",
+      "bytes": 1265,
+      "compressedBytes": 578,
+      "crc32": "ad3d1ddc",
+      "sha256": "06977385d03830ff8847735ab88630d15786fb57fa70a3cd3bb326730a4a78f0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/SOURCE_V4.json",
+      "bytes": 232,
+      "compressedBytes": 195,
+      "crc32": "82f32913",
+      "sha256": "66f982f29135db2946c628fe2fdd303cb431a4c6942808b52c85518528c911a4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/SOURCE_V5.json",
+      "bytes": 297,
+      "compressedBytes": 230,
+      "crc32": "2a405d90",
+      "sha256": "a93bc8c7ead46b3858354cfe54bf5df82da3a895e624f3bf3c7e248bdc278dbb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/docs/content-v5.json",
+      "bytes": 377807,
+      "compressedBytes": 33369,
+      "crc32": "6d1c85ac",
+      "sha256": "9c2c3e27897c271d1c8693cac470bb89d3287185bbe943c6fa84883c524abd57",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/index.html",
+      "bytes": 11483,
+      "compressedBytes": 4263,
+      "crc32": "d2501bc2",
+      "sha256": "c0d0810f88d69d66f62cbd0ec549b8fbe45c5cc72a79c58ac475573d358aadc7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/integration/module.json",
+      "bytes": 836,
+      "compressedBytes": 371,
+      "crc32": "98ea7533",
+      "sha256": "2037734eb5d768b25f2a79533384bdd2bb838612c29a5fd7886a768767edbec3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/package.json",
+      "bytes": 863,
+      "compressedBytes": 346,
+      "crc32": "418325e0",
+      "sha256": "bf24e0f1969725096e0bfc0cf06e3a7854d085eafe50421ab293c221e6c92bf4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/REPRODUCIBILITE.md",
+      "bytes": 2129,
+      "compressedBytes": 1047,
+      "crc32": "635de150",
+      "sha256": "4b41bdd0b008d7fc40a67b31000d0d1b89a44a2c6c78e8a9d66b08184b5e7409",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/SUMMARY_V5.json",
+      "bytes": 1027,
+      "compressedBytes": 473,
+      "crc32": "0c9f20cf",
+      "sha256": "acf8144a2e2e5ea5fff1f188a981d0bb834cef531e50f5281e2ea4b14ae3b4b9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/base-engine-rerun.log",
+      "bytes": 4166,
+      "compressedBytes": 1598,
+      "crc32": "fea9c69b",
+      "sha256": "dea6d2e749a5ae178217d787734f58b605ac4c2440f93c53c36a87b1cb655807",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/base-protocol-rerun.log",
+      "bytes": 4859,
+      "compressedBytes": 1701,
+      "crc32": "507b6a3d",
+      "sha256": "5748e72a93538a6502bcf202d16967fbc7094979343836582456dc58df82b17a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/browser-v5-harness-correction.log",
+      "bytes": 8524,
+      "compressedBytes": 2691,
+      "crc32": "8e68424f",
+      "sha256": "7701e43307c0c530f74ecbe0b33b7c3b0ae689e75b37ec36b695a57c23f47574",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/browser-v5-order-fixture-correction.log",
+      "bytes": 11391,
+      "compressedBytes": 3006,
+      "crc32": "5b9e6b7c",
+      "sha256": "e803875a94744f282222fbe800fb823345512c40be26d6d6d0a5358dc42048f0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/browser-v5-results.json",
+      "bytes": 44212,
+      "compressedBytes": 6076,
+      "crc32": "d499adce",
+      "sha256": "7666722b8632db532b117e40eb68c275f4412f24498d4a51aa9649a611a7e188",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/browser-v5-run.log",
+      "bytes": 11679,
+      "compressedBytes": 3136,
+      "crc32": "f3614464",
+      "sha256": "1891145e9d4b5fd2cdc019f5f87f197fe980c62e730877339b32a23b7714f71d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-browser-v5.json",
+      "bytes": 13593,
+      "compressedBytes": 2381,
+      "crc32": "a35d361c",
+      "sha256": "7d7609c1370d98a1c698c2f57ed11e3568702cad31a7bba62be69c9c93254c7b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-cauchemar.json",
+      "bytes": 9360,
+      "compressedBytes": 1306,
+      "crc32": "cf6f5b07",
+      "sha256": "903ce6ce72bbe26645f5ea4adf18f627c8f7861530e1b1f0cf2739e14c1de677",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-recit.json",
+      "bytes": 10045,
+      "compressedBytes": 1338,
+      "crc32": "e3a34ced",
+      "sha256": "263eae9bf650c97865f9b316017aa2017479ae32c6ce27936b09850501e9ea4a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-survie.json",
+      "bytes": 12246,
+      "compressedBytes": 1453,
+      "crc32": "0af451e6",
+      "sha256": "2de2f5e64be683a7c0a438533edcad8b30752906cf153af6642c2110ae93bd27",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v2.mjs",
+      "bytes": 1166,
+      "compressedBytes": 534,
+      "crc32": "161e6718",
+      "sha256": "1011c5db1ab7f9f8ff97aeb2e999d6818983e0efd239b92d397772057e91ddef",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-cauchemar-0.json",
+      "bytes": 14453,
+      "compressedBytes": 2380,
+      "crc32": "68662d33",
+      "sha256": "3ec95bac531e8c67cedbca9eb9930ffff381c3d35de3b2569df1c644c80436d8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-cauchemar-1979.json",
+      "bytes": 15631,
+      "compressedBytes": 2715,
+      "crc32": "12558d94",
+      "sha256": "3c9280f42076e9452738bb810988404ed92fac7328141a53583334fde93cd7ee",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-cauchemar-26319.json",
+      "bytes": 10540,
+      "compressedBytes": 2123,
+      "crc32": "16a71e40",
+      "sha256": "f3a23b7a3119a7424ce79dffb5fbde78bcbecc0c40bde23f07e3642dfb77e0c8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-cauchemar-8675309.json",
+      "bytes": 15133,
+      "compressedBytes": 2457,
+      "crc32": "3eae3574",
+      "sha256": "4e60d5421a1584db9b544fc18e5a35004c91604e100a0e930c06510c39d1d83f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-0-single.json",
+      "bytes": 21849,
+      "compressedBytes": 2975,
+      "crc32": "c2113db8",
+      "sha256": "c07f77eef6610e3190dc263c7f01d8991953a637b60ff1b4637aa97fd59c6ff4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-0.json",
+      "bytes": 16982,
+      "compressedBytes": 2677,
+      "crc32": "508f2488",
+      "sha256": "99dc1f90e0553cc567092bff781b42851db0d8234ba05de5316b3340d908e5c7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-1979-maintenance.json",
+      "bytes": 14357,
+      "compressedBytes": 2485,
+      "crc32": "7ac008bb",
+      "sha256": "fa254cbc21225de9b6f3f63cf6084472b75efefd429098119a1d8455dde8c878",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-1979.json",
+      "bytes": 15860,
+      "compressedBytes": 2596,
+      "crc32": "e3e4367e",
+      "sha256": "faed6b4583001a6f3783bde1d588459d448a6513d82202759a4dde7d5b3375dc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-26319.json",
+      "bytes": 22669,
+      "compressedBytes": 2984,
+      "crc32": "d72f9af4",
+      "sha256": "598a9120c5c9f5ecd2ccabad5f7d7ab5aa125d9860ea7cd2ddf1dd99eb6fa699",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-recit-8675309.json",
+      "bytes": 15264,
+      "compressedBytes": 2524,
+      "crc32": "6bc854a2",
+      "sha256": "48c12ea1dad169bddc93716074326635789c77dcbee992de9be1640a08bb7950",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-0.json",
+      "bytes": 16763,
+      "compressedBytes": 2604,
+      "crc32": "8b7a2183",
+      "sha256": "68148f159e9ecddf308fe3e996fdeef6ea82042d71a3f2e6085cbfd23d7b11d4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-1979.json",
+      "bytes": 14198,
+      "compressedBytes": 2374,
+      "crc32": "ee0ccaed",
+      "sha256": "d5403fd472c5d17c71c3471d7eefe01eeedbbb75a2e89ec9dc47c79ae276f60e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-26319-queued.json",
+      "bytes": 15520,
+      "compressedBytes": 2623,
+      "crc32": "2626b41f",
+      "sha256": "53aefc531ccda124dc65718ce2651c4ffd672fc65f2513e095e863cc81c99b7f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-26319-single.json",
+      "bytes": 17447,
+      "compressedBytes": 2589,
+      "crc32": "79dcaa99",
+      "sha256": "78fd641ae5e7ac978ece24d71b6ae3227f01581a1e323ba15f46c1f359aed1b5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-26319.json",
+      "bytes": 15460,
+      "compressedBytes": 2602,
+      "crc32": "ca4b2ad3",
+      "sha256": "ef6c6f6d609ae84f02810bc0596c6264557e30a1497e4149c5ffce39abfc072c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5-survie-8675309.json",
+      "bytes": 17133,
+      "compressedBytes": 2545,
+      "crc32": "f7a15121",
+      "sha256": "6bd83d4e9e51f960a2fd0495aaba3882c73007e4e4c96520b7ee63e021ac4cd4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/campaign-v5.mjs",
+      "bytes": 1930,
+      "compressedBytes": 878,
+      "crc32": "a30d0bea",
+      "sha256": "e2c9e0139cda4e34c956fbcf3fbfb9e464197571abd597a3782586a19178ce97",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/01-menu.jpg",
+      "bytes": 104724,
+      "compressedBytes": 92401,
+      "crc32": "5218fe2d",
+      "sha256": "79c33b9a77b9c87fc822a3a93c27428f2a337cfe8f4ada3d3b14395c818b7f2a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/02-poste.jpg",
+      "bytes": 201051,
+      "compressedBytes": 178221,
+      "crc32": "2afc2ef4",
+      "sha256": "7633235507a90f8af59a74b5487956771e7a02e010bdfee083c51f032323ba53",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/03-guide.jpg",
+      "bytes": 134261,
+      "compressedBytes": 120745,
+      "crc32": "b96fd76a",
+      "sha256": "b2575c1099eead75821386e78f6c1eb6b8c438e6c536e6ebf76e912bc1734849",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/04-power.jpg",
+      "bytes": 202154,
+      "compressedBytes": 169347,
+      "crc32": "2d1988df",
+      "sha256": "b9d0e3e40226753cbbc48e3f8ee87cafabcdd957200d8d07029a011c4ea102e8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/04-pressure.jpg",
+      "bytes": 205401,
+      "compressedBytes": 172067,
+      "crc32": "955731fb",
+      "sha256": "e8777a694e285f7d8ee21068cc4c7ed269a853604e3dacf8bdca2237040713d3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/04-signal.jpg",
+      "bytes": 206326,
+      "compressedBytes": 174254,
+      "crc32": "89f96737",
+      "sha256": "8d72b477a8f89769a581adef676adace49eef75c07aea4d84156f4c51ecbc819",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/05-soins.jpg",
+      "bytes": 192897,
+      "compressedBytes": 162405,
+      "crc32": "56c013f7",
+      "sha256": "6fae61470425c69d6306fbbc9ffe08bf0ab08e49e2558ff4ea19cc48319b7039",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/06-binome.jpg",
+      "bytes": 191903,
+      "compressedBytes": 161497,
+      "crc32": "28ef0f5b",
+      "sha256": "7dc5e20e73ece9afd6fa253f6835f4a5dd87249824dbb09adf31fb066fcc712d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/07-sauvegarde.jpg",
+      "bytes": 105213,
+      "compressedBytes": 92332,
+      "crc32": "3bc63f44",
+      "sha256": "914c64e26404e7a0b7611efc9298b04828a3bd1aef27e2b28d9378e5dbe38450",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/08-journal.jpg",
+      "bytes": 80239,
+      "compressedBytes": 63628,
+      "crc32": "313d16e3",
+      "sha256": "66d0af2a7fb73fa63522d35958cc4bb3cf5d27a1ad233085250fc7740682bc9c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/09-codex.jpg",
+      "bytes": 81366,
+      "compressedBytes": 55690,
+      "crc32": "01ac5a3d",
+      "sha256": "13a032b9f73e927f27bb60f78636b63dc7388fe8340055f6892bbed0e350f691",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/10-responsive-1280.jpg",
+      "bytes": 155666,
+      "compressedBytes": 136518,
+      "crc32": "6e542bd5",
+      "sha256": "b9a3f3628f506eb028e00379675fe9a5ea1d0291a42d84f3289f2db8ddd6b0c5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/10-responsive-390.jpg",
+      "bytes": 63347,
+      "compressedBytes": 60726,
+      "crc32": "af5ac8a1",
+      "sha256": "e6e38af377d2251bffb3bdb55bd3a47f2a88c133be4356b979b10b814e1c87b2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/10-responsive-850.jpg",
+      "bytes": 112560,
+      "compressedBytes": 102805,
+      "crc32": "87ab803c",
+      "sha256": "a19c994472241447d68e1c01f40bfc164f89ab46ac173cb384ed40e828e63679",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/14-camera-hors-service.jpg",
+      "bytes": 32663,
+      "compressedBytes": 17218,
+      "crc32": "9cf40398",
+      "sha256": "5b8ee462f9ab9b71fe973abaef60d3c657baa3ce0b695e0d2b5a99d157e556f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/15-itineraire.jpg",
+      "bytes": 80897,
+      "compressedBytes": 63252,
+      "crc32": "e69c1eb8",
+      "sha256": "16e3160d1cff37fe5d4e6ef9c40b32b06368e64f30450e994c85d0b71b5b896e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/16-echos.jpg",
+      "bytes": 182543,
+      "compressedBytes": 151181,
+      "crc32": "ec71673f",
+      "sha256": "89fa5ca783ee565b886481f011c45b2c31f81edaf77c92200b29c1f4fd7f82a2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/17-accord.jpg",
+      "bytes": 10360,
+      "compressedBytes": 7059,
+      "crc32": "dceda5d5",
+      "sha256": "a45d754c4eef186dd2ed4d9c7fa33b02b440778bd7968387b2048d29ed0ea354",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/18-direct.jpg",
+      "bytes": 19609,
+      "compressedBytes": 17284,
+      "crc32": "391147af",
+      "sha256": "65a9ae066fcdea3f65f852ed7a8c68beca9b6d6cdf8964d026fdd05ac103330c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/19-incident-power.jpg",
+      "bytes": 196155,
+      "compressedBytes": 164845,
+      "crc32": "b08cbad4",
+      "sha256": "070398faba904b6ef59614860bd6f83170b0a0f2a4331cbd665578e2dd2583db",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/19-incident-signal.jpg",
+      "bytes": 185389,
+      "compressedBytes": 154618,
+      "crc32": "0f8a4548",
+      "sha256": "26c385b6287035039c1b55f6b5c8058f1ae01ab845227dcd414ea439352e30fb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/19-incident-steam.jpg",
+      "bytes": 213882,
+      "compressedBytes": 187827,
+      "crc32": "6c86ab9c",
+      "sha256": "66ee10debc064b2f153f221c668ad6b20ac90d3121bbca13980e2eb4196b33eb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/20-plan-1280.jpg",
+      "bytes": 63661,
+      "compressedBytes": 49902,
+      "crc32": "eb000601",
+      "sha256": "82c085368ef3b9763ba9e51728f642cc9d69f1b49a6ceeba62c10f661391852f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/20-plan-390.jpg",
+      "bytes": 46398,
+      "compressedBytes": 39866,
+      "crc32": "e3e9de73",
+      "sha256": "e7ad2de522c0fc62bf79a3825a8141c586311201dedda1df10ba0fcc09bea8c1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/21-parcours-1.jpg",
+      "bytes": 219710,
+      "compressedBytes": 188743,
+      "crc32": "bb16ace3",
+      "sha256": "fb483ebfae23579f2df43b2e56bca8256f0f394a3ac28b43a84878d3403dd04d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/21-parcours-3.jpg",
+      "bytes": 224501,
+      "compressedBytes": 195172,
+      "crc32": "ae35d297",
+      "sha256": "51640a7dfad49412eda673f7aae03307e1aa6ba13e292fc96262bda3769ad699",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/21-parcours-5.jpg",
+      "bytes": 218829,
+      "compressedBytes": 188020,
+      "crc32": "a28cb0ff",
+      "sha256": "7a8b04ed6210a08bb2128ac86d50a8316f8cd238637fd8cff7a32803eb3f5ee7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/21-parcours-7.jpg",
+      "bytes": 227450,
+      "compressedBytes": 196752,
+      "crc32": "3d2ab365",
+      "sha256": "d4faf4a759e58b490a6233a5b8033d271f80777364ab2f793f47122f7a387881",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/22-fuite-0.jpg",
+      "bytes": 148395,
+      "compressedBytes": 110402,
+      "crc32": "b762e345",
+      "sha256": "88b59a3012b63bb2e98b50c046a7727fdec3b0d7b655b86f4cede0e5e19e6eca",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/22-fuite-1.jpg",
+      "bytes": 152943,
+      "compressedBytes": 116563,
+      "crc32": "36ad3c67",
+      "sha256": "190eb9f2ad0608f61846691733d3229463a342afea41b7fa037f7805f967c9c6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/22-fuite-2.jpg",
+      "bytes": 153714,
+      "compressedBytes": 116700,
+      "crc32": "4c6f7e32",
+      "sha256": "970f33b6aeebbae42c5d2562e498cb5451bdd273acefa22f1305ed7869f8573d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/22-fuite-3.jpg",
+      "bytes": 150879,
+      "compressedBytes": 113747,
+      "crc32": "4b6e47b3",
+      "sha256": "0ddf33ecdbd980bf0fca4e461f31787565140a8f58220663a777cf5ff6ca9b24",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/23-amarrage.jpg",
+      "bytes": 222965,
+      "compressedBytes": 192051,
+      "crc32": "4e78fd3c",
+      "sha256": "1de2085aee2b915c6bb2aa77838784e4ab11918d3ba160e620f890924696a66c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/24-fin.jpg",
+      "bytes": 68520,
+      "compressedBytes": 52703,
+      "crc32": "a3e7078d",
+      "sha256": "1305113fbc883d60a1e4381a3cc3ecf795f2bc2ef133d5aaf59250031ef36731",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/25-fuite-mobile.jpg",
+      "bytes": 67320,
+      "compressedBytes": 63334,
+      "crc32": "2391a712",
+      "sha256": "b98cbb12158bb43616b1d368b6e81a9fd8037b0975b2d1eb15f466521b4ea8ff",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/26-reanimation.jpg",
+      "bytes": 221358,
+      "compressedBytes": 190279,
+      "crc32": "83e8d943",
+      "sha256": "8399359f3b89cefa9bdef48fa7192c4f6cc4600d636b7200645726f4731dfe1a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/27-portage.jpg",
+      "bytes": 222170,
+      "compressedBytes": 191783,
+      "crc32": "6ff64302",
+      "sha256": "f929bbff5fbc4189a55a8cade32c1b583644acc13e4a5199090d3a78aa3a3f23",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/28-fouille.jpg",
+      "bytes": 220531,
+      "compressedBytes": 190557,
+      "crc32": "31a007bd",
+      "sha256": "8882c648a4e593175cd7d1f49f0855c54f5d8a804ea482620b798f0aedab97f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/29-secours-mobile.jpg",
+      "bytes": 54269,
+      "compressedBytes": 47283,
+      "crc32": "78dabfa1",
+      "sha256": "eac57f735b17f061b50779018c0205ea768e3286e263b25d21f03929a0719734",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-01.jpg",
+      "bytes": 79843,
+      "compressedBytes": 73800,
+      "crc32": "096b4793",
+      "sha256": "46ebadba0bad2a8f8be8140bc0d2df40d778cb9b2fdeff61ad98cd2b60a162d3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-02.jpg",
+      "bytes": 77699,
+      "compressedBytes": 71347,
+      "crc32": "7d65e91a",
+      "sha256": "b5835ed4a350932f7fc9de133b026dc6c2a7f760ca65920aa644819fe470e8c2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-03.jpg",
+      "bytes": 79036,
+      "compressedBytes": 71321,
+      "crc32": "b39f2c05",
+      "sha256": "80cec13466cbc0a96023c32d99d6780bcd08d584f13f3ef0fafb96fe958f687f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-04.jpg",
+      "bytes": 82290,
+      "compressedBytes": 75169,
+      "crc32": "a8a1b34a",
+      "sha256": "e243d43abd2458b948b4934e3d8512adf2f25cfaf07fdcde608098b396aeb277",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-05.jpg",
+      "bytes": 57704,
+      "compressedBytes": 52451,
+      "crc32": "f5dd0ffd",
+      "sha256": "1d6c1d1c7254f7cadaf899141cddf1fda22dbd9da226e99a727c9f73b69aa4b9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-06.jpg",
+      "bytes": 78875,
+      "compressedBytes": 72787,
+      "crc32": "fc9757a5",
+      "sha256": "ea2032bb68e9ad295d5f8cdfdf1028b7d18f59b0d756160344debdd990a33a77",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-07.jpg",
+      "bytes": 57579,
+      "compressedBytes": 51888,
+      "crc32": "033991d7",
+      "sha256": "712663e1c6b83ff7076caa8a332a4fc196a4ad540ec9be7eae590ef137aad934",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-01-08.jpg",
+      "bytes": 57586,
+      "compressedBytes": 53296,
+      "crc32": "492181cf",
+      "sha256": "45d7be015c2c661ef6df458692747dd36ad486632ffbdd6398a6200c88880e54",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-01.jpg",
+      "bytes": 76253,
+      "compressedBytes": 68374,
+      "crc32": "a3952f02",
+      "sha256": "697cf1f302ba23a449c2580a497d5038e03cc85587d16525913c4cb0d6830620",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-02.jpg",
+      "bytes": 56333,
+      "compressedBytes": 51805,
+      "crc32": "79acf469",
+      "sha256": "0093b1cc1125601f1e1bc78c9287f907683a831f687d6f2503f37002d8690f9e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-03.jpg",
+      "bytes": 77917,
+      "compressedBytes": 70396,
+      "crc32": "db54a90d",
+      "sha256": "364b99fdd1df1c238dd30e90aea5b245386a63f46d8872e22347e77373d19220",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-04.jpg",
+      "bytes": 80919,
+      "compressedBytes": 73731,
+      "crc32": "f37ce7a1",
+      "sha256": "89807efd32ce1921b5dbc1bdc8c0f679f112e806867054f630fb0cb3abfc483b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-05.jpg",
+      "bytes": 77625,
+      "compressedBytes": 70196,
+      "crc32": "7c5b1625",
+      "sha256": "765fccdba2f77faee566290ae91bf592b0947de0677edd58de9beb827ac78a8c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-06.jpg",
+      "bytes": 77786,
+      "compressedBytes": 71654,
+      "crc32": "d53fec97",
+      "sha256": "247acde0069011b9a59b6ffdc6ea4a087c210e97093ceca99b03b172982727c8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-07.jpg",
+      "bytes": 58469,
+      "compressedBytes": 52967,
+      "crc32": "4e89396c",
+      "sha256": "b4168f1d93756c961a644778ded730f5bd294878f28079e3af953ce6e7513e98",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-02-08.jpg",
+      "bytes": 58132,
+      "compressedBytes": 53685,
+      "crc32": "54411abb",
+      "sha256": "962c81ba23310bf9cbd59c46bc5431204d3b39037aa79517957b2f2963e464b4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-01.jpg",
+      "bytes": 79489,
+      "compressedBytes": 73013,
+      "crc32": "04dcac3e",
+      "sha256": "a9520bbb257550f06883d16bd126632c12463457df907605ec2076cdbd17fbb1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-02.jpg",
+      "bytes": 77816,
+      "compressedBytes": 69889,
+      "crc32": "13161563",
+      "sha256": "b9762556622daddbbad4b333a8f4ff1ec2e6819e6f214fff468efa4e488f7017",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-03.jpg",
+      "bytes": 77748,
+      "compressedBytes": 69703,
+      "crc32": "8bf6e720",
+      "sha256": "1244ef0b995c27edf6f834aac7bb04d0d3aca961aa94c7ec30d9ce7c91abe98b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-04.jpg",
+      "bytes": 59146,
+      "compressedBytes": 54356,
+      "crc32": "f4f8435c",
+      "sha256": "bec7b50300de8cf8043492bd58090bddb09ea17633f9a44d7a872f64cfad11b9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-05.jpg",
+      "bytes": 76944,
+      "compressedBytes": 69082,
+      "crc32": "9e8a49f4",
+      "sha256": "91695cc2dfcb5c1cedf349c276602913856d66e9c3b0327641711acb9ceffc61",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-06.jpg",
+      "bytes": 78062,
+      "compressedBytes": 71838,
+      "crc32": "9763a96b",
+      "sha256": "973433c09af7acdf1ca4ec72eddbd14c42336c5d44fd8b42c87a4ac4a8a17e03",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-07.jpg",
+      "bytes": 57725,
+      "compressedBytes": 52155,
+      "crc32": "76e9e128",
+      "sha256": "628c2c01d54320c969e8b551462854557b373e0fc6a4b15432169d267c3f9c75",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-03-08.jpg",
+      "bytes": 58186,
+      "compressedBytes": 53926,
+      "crc32": "9a1a1818",
+      "sha256": "62e76270e48dbd8f75208d3c5e1cffcfa1575cb4f24492f84dcb44ff3b7c46be",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-01.jpg",
+      "bytes": 79368,
+      "compressedBytes": 73714,
+      "crc32": "c062103f",
+      "sha256": "05ecb9b93f1a2ebab0cad450f49d1d1cb40a13b2f78af2de2a3db7d6af27c398",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-02.jpg",
+      "bytes": 77944,
+      "compressedBytes": 71883,
+      "crc32": "d9bac813",
+      "sha256": "d0a88347bf37f79d960af36cabd69b62f3824ce6c974412565227359c143a091",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-03.jpg",
+      "bytes": 79549,
+      "compressedBytes": 72179,
+      "crc32": "6070b799",
+      "sha256": "fee17497d73bc48af66a01a455ead8ae2be52e88b633d089844b3da5658339d9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-04.jpg",
+      "bytes": 82311,
+      "compressedBytes": 74905,
+      "crc32": "075a02ec",
+      "sha256": "b8a022b21028b3d2764a991a0538338fcc4c86ebf4c032145cce4b2fffd0ccfa",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-05.jpg",
+      "bytes": 57834,
+      "compressedBytes": 52907,
+      "crc32": "135d77f4",
+      "sha256": "7f615c070e9de1dba6490717cbc7d83a95f7a1fdc848fc027332456477eaa981",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-06.jpg",
+      "bytes": 78414,
+      "compressedBytes": 72390,
+      "crc32": "4faba237",
+      "sha256": "865a4f1768b8324bcbc862c4bb7c51fc9cd6617f79c6cf614dca739832d00ea7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-07.jpg",
+      "bytes": 59491,
+      "compressedBytes": 54181,
+      "crc32": "84b4d918",
+      "sha256": "e26018cea6196781f2af3ab4d1e4ed6091c547ad177a591480b7092604ff1978",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-04-08.jpg",
+      "bytes": 58910,
+      "compressedBytes": 54560,
+      "crc32": "ae584749",
+      "sha256": "0589a89db5f4eb9db5e2b29222ef6af371ab9a171a37fb97de11eeb25ec2ad49",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-01.jpg",
+      "bytes": 80150,
+      "compressedBytes": 73356,
+      "crc32": "684ec9b9",
+      "sha256": "dfec6368ee4a2838f48ac87e693846982ac88f4c301fabdc26eeaead3bd1db38",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-02.jpg",
+      "bytes": 57751,
+      "compressedBytes": 53250,
+      "crc32": "f7154115",
+      "sha256": "0f6f239a227b33e852d97b625b3370ef85f56b83fccb542c31ed292d9fe90934",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-03.jpg",
+      "bytes": 77851,
+      "compressedBytes": 69491,
+      "crc32": "731018ad",
+      "sha256": "bb76e07ee8fe45cc20ad04e0b48b9c26293cd7e3323ce58e9803b01452685650",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-04.jpg",
+      "bytes": 76363,
+      "compressedBytes": 68542,
+      "crc32": "503f878c",
+      "sha256": "b4a761f45ee1018a8c9b94f03133d785ed36dc37ac3aa738cb57ed26f5f8fff5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-05.jpg",
+      "bytes": 76231,
+      "compressedBytes": 68155,
+      "crc32": "21c2f323",
+      "sha256": "b1b25ecd1bed7ce803baecced62a515fd8feff4eed6f2eb02d7c480988f8e0cf",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-06.jpg",
+      "bytes": 79120,
+      "compressedBytes": 72886,
+      "crc32": "1e9d52d2",
+      "sha256": "ea03ac170faecca3233a14db0634f44da1adb37bd5d64c06b23f74d8d609ea45",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-07.jpg",
+      "bytes": 59391,
+      "compressedBytes": 54105,
+      "crc32": "872a6d9b",
+      "sha256": "a493d0ac7a2d5f5915d77eec360cf4a4fad2e4ac82a43d6a92240f33e5edf35e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-05-08.jpg",
+      "bytes": 58529,
+      "compressedBytes": 53848,
+      "crc32": "982de89e",
+      "sha256": "344975b2c8621656ef5a2602de502a6d1ae589c6814e4163ea1db4d3517df042",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-01.jpg",
+      "bytes": 83826,
+      "compressedBytes": 77792,
+      "crc32": "25d43d49",
+      "sha256": "314c76263ca792b192f4e291c47ddfcc777f189652b1fae2a2d0fdacfdfc49dd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-02.jpg",
+      "bytes": 81446,
+      "compressedBytes": 75013,
+      "crc32": "799601e3",
+      "sha256": "2eae27d15bcab4cdac90800f8cd9ad8d2a6f4cabfa042ae4fff91b02f1bcb880",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-03.jpg",
+      "bytes": 85108,
+      "compressedBytes": 78129,
+      "crc32": "c94f7a6f",
+      "sha256": "4fbc10f0c73bfbc7953db1241c39a8ffcb911f7153f2a4fab79c7e3cc67a47ee",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-04.jpg",
+      "bytes": 85916,
+      "compressedBytes": 78672,
+      "crc32": "d96dff6f",
+      "sha256": "33dbf9876cefb6c6c401c0d229b8a509b6b6deb96012726221cce23670690722",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-05.jpg",
+      "bytes": 58575,
+      "compressedBytes": 52949,
+      "crc32": "52328785",
+      "sha256": "4f89a7d85c677e7cfeda7abd85b64b9222f55a217fbb33dc0875547cc77091b4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-06.jpg",
+      "bytes": 82185,
+      "compressedBytes": 76018,
+      "crc32": "5cca7bdf",
+      "sha256": "0d42f803fbb6c23946b8871892a9b1e4f17dbbc0f090b022ad3a5ec5625ddfb9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-07.jpg",
+      "bytes": 59540,
+      "compressedBytes": 54079,
+      "crc32": "9e08fbc3",
+      "sha256": "c95048dc55132c957fdf4be67c0ed96ddb3ee684462db5c0f01e82e1f2a37be6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-06-08.jpg",
+      "bytes": 58723,
+      "compressedBytes": 54403,
+      "crc32": "bf8276d8",
+      "sha256": "b3658eff22d33cdacfb2a28c0949f1d03896b3229efe81c91bc71b8e804b8a85",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-01.jpg",
+      "bytes": 79509,
+      "compressedBytes": 74124,
+      "crc32": "fb652106",
+      "sha256": "853a6cf63c898b638644d3c4c2863d5ebd11230a31ce793cfa9799f019f71dc8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-02.jpg",
+      "bytes": 80862,
+      "compressedBytes": 75572,
+      "crc32": "7ee4f655",
+      "sha256": "2fdca52327905f479f3dd44bb62e4716d24ac15572ec9704feaffc2f65fae5a6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-03.jpg",
+      "bytes": 79613,
+      "compressedBytes": 72887,
+      "crc32": "fb5d24b4",
+      "sha256": "6b417875e48ce806c09b5ec1c61fdeef1a72c413389c462c5e1dfd973bb5b565",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-04.jpg",
+      "bytes": 59410,
+      "compressedBytes": 54363,
+      "crc32": "ca80b508",
+      "sha256": "51d169b80ca858f17737e2921cf91e3ebef206dc8cdf27c115174c7d47a7c34b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-05.jpg",
+      "bytes": 76697,
+      "compressedBytes": 69297,
+      "crc32": "856c2b9d",
+      "sha256": "1755d531ca622be1d5d6e3cf0de31531fa7d3c1d66f86e0bb6190fd6b97d2601",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-06.jpg",
+      "bytes": 78532,
+      "compressedBytes": 72965,
+      "crc32": "2e9137f9",
+      "sha256": "a32ad7ca2e0b903d1be66e6231cdffc78aecc7f673eca4f1a50eeae6736af11d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-07.jpg",
+      "bytes": 58181,
+      "compressedBytes": 53011,
+      "crc32": "bfe7a7c9",
+      "sha256": "af7ce3f593a7c8a2767f0d4c68675d5ef61b6a5cd2b6cc547f31b5d73be0f903",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/captures-v5/salle-07-08.jpg",
+      "bytes": 58169,
+      "compressedBytes": 53935,
+      "crc32": "b45b5204",
+      "sha256": "a7be35bb1cab9459ec7c251c1f0196aeb255bebc4ea3efb5d95a113460ca28b4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-cauchemar-0.json",
+      "bytes": 143987,
+      "compressedBytes": 10945,
+      "crc32": "ef399a3d",
+      "sha256": "a442b8492f28c1a91cb6617681a1426c4e72ed2dc2b85b1cbb24c60976f3fb69",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-cauchemar-1979.json",
+      "bytes": 198749,
+      "compressedBytes": 14853,
+      "crc32": "77c8ad1e",
+      "sha256": "01f8c6300ccdc6a23b0ca595934c98fb43a8f854d0d7b4cc23ac0f498d0e5c37",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-cauchemar-26319.json",
+      "bytes": 86782,
+      "compressedBytes": 7690,
+      "crc32": "2386c5b2",
+      "sha256": "1ba1271f6930fdc41fe3557c3f86f0aefe6d4153bf3b97a0c10258aa9cea590e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-cauchemar-8675309.json",
+      "bytes": 140912,
+      "compressedBytes": 10788,
+      "crc32": "1b420def",
+      "sha256": "1fa83835cea5edd9f2e5544973d3ebc5b87b673d3f88ff4e612ca8b6378b599f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-0-single.json",
+      "bytes": 203871,
+      "compressedBytes": 14643,
+      "crc32": "58db12b8",
+      "sha256": "f3af3adfca6d5b147fa1134a1a23b19acfb12d8f16fa00ae186d804c9742626a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-0.json",
+      "bytes": 201093,
+      "compressedBytes": 14600,
+      "crc32": "031d9fe5",
+      "sha256": "02858a49bef0dc4914e11c328dbbc93fcc4ec5aa9c276bae5e44aa7480db1c63",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-1979-maintenance.json",
+      "bytes": 207543,
+      "compressedBytes": 16866,
+      "crc32": "ac8214d4",
+      "sha256": "16b76f8d2ff04a2e370e7091112235ef08446771a4c09a80132410b1f813bc82",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-1979.json",
+      "bytes": 200658,
+      "compressedBytes": 14744,
+      "crc32": "319c136a",
+      "sha256": "addd3319da78dbd164675bad18621a4c93d4d0d82faa7dbfe20e52e1ccedca24",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-26319.json",
+      "bytes": 204462,
+      "compressedBytes": 14788,
+      "crc32": "12c5d7b5",
+      "sha256": "26ca6da157ec081ed5a1d6d44e8d553989ad0f1a5ac09d8a1ca4266c1d6726c3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-recit-8675309.json",
+      "bytes": 204367,
+      "compressedBytes": 14742,
+      "crc32": "d6a8c09d",
+      "sha256": "5fd89170904e739bd1f4d57b55d87e0bac3ddcd1db7910716bffe0f0f2e8f2d1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-0.json",
+      "bytes": 204518,
+      "compressedBytes": 14944,
+      "crc32": "67b265c1",
+      "sha256": "613d8f9981e1c94cb0d2607a5e12c2109fc1d8881f670bb0a8ff3b75d4062a49",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-1979.json",
+      "bytes": 143182,
+      "compressedBytes": 10899,
+      "crc32": "2670d617",
+      "sha256": "a9ba7bb057f124ed55661449d1a2cdac3c00d51750ad348f532ad0811192fc56",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-26319-queued.json",
+      "bytes": 204842,
+      "compressedBytes": 14905,
+      "crc32": "5ccffbb7",
+      "sha256": "6b435a3ad6445b4427df12fd89851a13e1f98a1c810c67c84fd8ac5ee4b87020",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-26319-single.json",
+      "bytes": 148607,
+      "compressedBytes": 10991,
+      "crc32": "9bbeb485",
+      "sha256": "bba6cc59fed816c9d1bc16a8b13d8f0a4c3c4b2c0af2b4331b0172d3e5a2f397",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-26319.json",
+      "bytes": 200934,
+      "compressedBytes": 14950,
+      "crc32": "795951f6",
+      "sha256": "d47d44837ddf900fa683e55c3eddba5a21fc45d7162fd95412a87e28ec54dba5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/checkpoints-v5-survie-8675309.json",
+      "bytes": 142252,
+      "compressedBytes": 10851,
+      "crc32": "2b067a00",
+      "sha256": "bb7653bf209d5ffe882d39fbf611de2791162b43d618d29da17d6b131df7bd92",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/codex-document-preview.jpg",
+      "bytes": 116499,
+      "compressedBytes": 91386,
+      "crc32": "2e371ddd",
+      "sha256": "7e8681e8cf13d3e2c573a58138980ce7e4b722cedc8c32987c36589cc3ad841d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/docs-v4-build.log",
+      "bytes": 918,
+      "compressedBytes": 469,
+      "crc32": "319f3a01",
+      "sha256": "3917e8f1a4b3e1fbaf8d62b5ad6e8ba880946dc4029486a88cd66bae92ca18a7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/docs-v5-run.log",
+      "bytes": 834,
+      "compressedBytes": 448,
+      "crc32": "a9fcd530",
+      "sha256": "d2d81eb6d7b6cf81a73d2a89ecf16675735a1c99e701549c7d1f2aa04f2b844d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/documents-v5-results.json",
+      "bytes": 733,
+      "compressedBytes": 299,
+      "crc32": "e71766c6",
+      "sha256": "0be556540c872e5f35c4a6d0fb55722f45f8478c0f78029ca0b96ac524572376",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/documents-v5-run.log",
+      "bytes": 562,
+      "compressedBytes": 281,
+      "crc32": "1d64e972",
+      "sha256": "92f5788c20921b4c43f9b17adc0c94d83c705794a5c240dba092787eeeec19f2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/engine-results.json",
+      "bytes": 7681,
+      "compressedBytes": 1789,
+      "crc32": "66a6b930",
+      "sha256": "ae07619ccb58a7bba295f9acda93335c86f09e1993414fc89335cd5cb7295997",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/engine-v3-results.json",
+      "bytes": 8412,
+      "compressedBytes": 1847,
+      "crc32": "7e098974",
+      "sha256": "693b7c289aca1ff3a79234ff9d4adbfca68510cf1f2c6525a80195a473ad29e0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/engine-v4-results.json",
+      "bytes": 8858,
+      "compressedBytes": 1540,
+      "crc32": "be7590c9",
+      "sha256": "02b9ed5d43e6cc5f75757130c23c41565482d4964db0387d12ae32705059bfbd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/engine-v5-results.json",
+      "bytes": 6737,
+      "compressedBytes": 1269,
+      "crc32": "a0c45f71",
+      "sha256": "b604d38cfb3ff22fa99ff2cd0bdbe0d1877c96cc60293a23dd5fba4d47d87f28",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/escape-v5-browser.json",
+      "bytes": 27033,
+      "compressedBytes": 4438,
+      "crc32": "6aa7f14f",
+      "sha256": "d404245b926652069f7aaadbb3132aa7f05646441ff3aa3320ba18579674593c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-cauchemar-0.json",
+      "bytes": 11487,
+      "compressedBytes": 2175,
+      "crc32": "33c6d5ae",
+      "sha256": "f2f9662ed752de1bfa33c8c22a6e8698dc3fba06b1fc7f63433b6ff9ee89208f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-recit-0.json",
+      "bytes": 21246,
+      "compressedBytes": 2697,
+      "crc32": "9b38b59b",
+      "sha256": "e4f39d76cb642625138137cf40029813e15e18035593319693bca96ffbd3c63b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-recit-1979.json",
+      "bytes": 13139,
+      "compressedBytes": 1970,
+      "crc32": "93599902",
+      "sha256": "8eeafec50ea1f001483933fd218c4fdf76f35f6158c29d8541fc785c13a90720",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-recit-26319.json",
+      "bytes": 13489,
+      "compressedBytes": 1995,
+      "crc32": "285f6e7f",
+      "sha256": "3c17417d9a1b9c42b3e5339d64a96dbdf9452da11c369be2d6d87cfd7000aafd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-survie-0.json",
+      "bytes": 19222,
+      "compressedBytes": 2491,
+      "crc32": "32133c4c",
+      "sha256": "97039b6d8e9233b664bbedb2500543845731714f32e1ef60fa8bcdb1f32060b1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-survie-1979.json",
+      "bytes": 16853,
+      "compressedBytes": 2696,
+      "crc32": "36df2a5d",
+      "sha256": "3621dd195f7ba0358d64ac89231539c6c98dba7299384a341db3c8b2f262215f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/campaign-v5-survie-26319.json",
+      "bytes": 15570,
+      "compressedBytes": 2263,
+      "crc32": "73236ec9",
+      "sha256": "02c166895491c8c44309105aa1092887f89d8094242f4060fd276c08303760fe",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-recit-0.json",
+      "bytes": 24532,
+      "compressedBytes": 2951,
+      "crc32": "0197ccf9",
+      "sha256": "1ee00efba0f7a708246b7b9c4168830fbd47542fa223e9121cd7edfe61cf89e6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-recit-1979.json",
+      "bytes": 27708,
+      "compressedBytes": 3246,
+      "crc32": "0c351505",
+      "sha256": "605b1864f85599b7eca887dac0a4b214624e0e714d20930812e82c9eb2a5036b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-recit-26319.json",
+      "bytes": 27775,
+      "compressedBytes": 3303,
+      "crc32": "9fbaf3c9",
+      "sha256": "bf4b477afc430de2cb5e2882bb92dc3ce86c37d78e6dd59de1c9ce0ce50b904a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-survie-0.json",
+      "bytes": 16715,
+      "compressedBytes": 2371,
+      "crc32": "a519c4bd",
+      "sha256": "c57396eb7c4b23da3c30751f4d7bd8910822e18eb521fdcfa929c59f07da3147",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-survie-1979.json",
+      "bytes": 19684,
+      "compressedBytes": 2760,
+      "crc32": "87cebe84",
+      "sha256": "a5ee38dbf742d8a53657501fb06ebf4d93935b62327e1da421d3fde1e4abc963",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-2/campaign-v5-survie-26319.json",
+      "bytes": 24371,
+      "compressedBytes": 3218,
+      "crc32": "b506f60a",
+      "sha256": "04edc5ff4e95c07d4dc6ac66587968283b72d3527c648467e61fb3b80b04317e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-cauchemar-0.json",
+      "bytes": 11478,
+      "compressedBytes": 2167,
+      "crc32": "f49fd525",
+      "sha256": "ffd28ebb31362de5d07a0d70cbf6a90086db8aab83343463f283719cd820cba9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-cauchemar-1979.json",
+      "bytes": 11617,
+      "compressedBytes": 2193,
+      "crc32": "5e7fdabe",
+      "sha256": "dc3403adeda1db492d46b2fabd9776da66d6bb3172780e9ac5763565462578ab",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-cauchemar-26319.json",
+      "bytes": 11612,
+      "compressedBytes": 2182,
+      "crc32": "a0d5e99f",
+      "sha256": "91afa29fff54223fcd58b55bc966499f11afa9648523590aadd6f64a86511cb5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-cauchemar-8675309.json",
+      "bytes": 12359,
+      "compressedBytes": 2252,
+      "crc32": "db8f4b70",
+      "sha256": "4c7d18eae01faf6d942933ce7eeae886df2b1d36a938d2fe33ab29ab524c09b3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-recit-0.json",
+      "bytes": 21243,
+      "compressedBytes": 2692,
+      "crc32": "7cd1773e",
+      "sha256": "3b1630fcd5404cbaf336a00b63c8a691435c4b50b733fbb8383efe5fc15315d0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-recit-1979.json",
+      "bytes": 13139,
+      "compressedBytes": 1970,
+      "crc32": "93599902",
+      "sha256": "8eeafec50ea1f001483933fd218c4fdf76f35f6158c29d8541fc785c13a90720",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-recit-26319.json",
+      "bytes": 13489,
+      "compressedBytes": 1995,
+      "crc32": "285f6e7f",
+      "sha256": "3c17417d9a1b9c42b3e5339d64a96dbdf9452da11c369be2d6d87cfd7000aafd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-recit-8675309.json",
+      "bytes": 20464,
+      "compressedBytes": 2546,
+      "crc32": "3e2ca1f6",
+      "sha256": "9bca4c3fdce8f11d7ed580f87933ef0f3b68d584491e29c0212fac64a2183b54",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-survie-0.json",
+      "bytes": 19222,
+      "compressedBytes": 2491,
+      "crc32": "32133c4c",
+      "sha256": "97039b6d8e9233b664bbedb2500543845731714f32e1ef60fa8bcdb1f32060b1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-survie-1979.json",
+      "bytes": 16853,
+      "compressedBytes": 2696,
+      "crc32": "7ed343ad",
+      "sha256": "00ffba131076be98772a3264e6d174651cf535fc8b9b6c48b5a8c5031e07fd63",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-survie-26319.json",
+      "bytes": 15570,
+      "compressedBytes": 2263,
+      "crc32": "73236ec9",
+      "sha256": "02c166895491c8c44309105aa1092887f89d8094242f4060fd276c08303760fe",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/exploratory-v5/pilot-revision-3/campaign-v5-survie-8675309.json",
+      "bytes": 15843,
+      "compressedBytes": 2724,
+      "crc32": "61d8e815",
+      "sha256": "cbf5464af5d4c03041d2eed3e1dfccebd8b93e96703afdfd444832d2491f1054",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/export-v5-base-browser.json",
+      "bytes": 12670,
+      "compressedBytes": 2540,
+      "crc32": "4cda30c3",
+      "sha256": "a17d5cfcba30a264a209fc232883d5b93974c1d5e397fe21d16b050a77abd869",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/export-v5-browser.json",
+      "bytes": 12796,
+      "compressedBytes": 2572,
+      "crc32": "022adfb2",
+      "sha256": "7412d7b5b56e302416694ac827062663c1e24ef7ad679e49f5421ad5bb859c4d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/export-v5-carry-browser.json",
+      "bytes": 13132,
+      "compressedBytes": 2721,
+      "crc32": "7098d2f0",
+      "sha256": "3815828c700b0b8fc4219e3799f1864da22b86c92284f7a7ecd6b64411655c8f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/export-v5-rescue-browser.json",
+      "bytes": 13069,
+      "compressedBytes": 2688,
+      "crc32": "833c8641",
+      "sha256": "78b565063323b53442ac69cfd9a62dfbf1eb7d264705f8c0295926eb7f37d0db",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-base-run.log",
+      "bytes": 9176,
+      "compressedBytes": 3147,
+      "crc32": "0d90b251",
+      "sha256": "9b71b18e2ae0405f730f6c75501b701939873b828ab62f259f087d9395520bd3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-matrix-run.log",
+      "bytes": 379,
+      "compressedBytes": 134,
+      "crc32": "67dd2cba",
+      "sha256": "7240692ab3ae54c885822585d7eb9e786ca34ba78e35da31356a3cd9fcb7ee84",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-test-run.log",
+      "bytes": 3846,
+      "compressedBytes": 1199,
+      "crc32": "ed944e24",
+      "sha256": "097ef2ae35d0badd6f4d7d53a42be7d4ab6ba7c6990346dd8fa249157abc1005",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-cauchemar-0.json",
+      "bytes": 26124,
+      "compressedBytes": 4096,
+      "crc32": "a28d94fd",
+      "sha256": "e8f02c5c4b8c21cc51243e53424cf3c9cd49eca6a9e7441b89677a4d4af0d27c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-cauchemar-1979.json",
+      "bytes": 27115,
+      "compressedBytes": 4554,
+      "crc32": "80e2baea",
+      "sha256": "2dc4cf6e0f4d0c6085f5b9db4ce8e74c543791ae80d8755f5b2d853839fbfd8d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-cauchemar-26319.json",
+      "bytes": 23801,
+      "compressedBytes": 3605,
+      "crc32": "4696bd07",
+      "sha256": "8a39694bd3919e3279de389f1c6eaa8000096e4b53a836961d82edb4126d0e55",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-cauchemar-8675309.json",
+      "bytes": 24471,
+      "compressedBytes": 3839,
+      "crc32": "b4d25c7a",
+      "sha256": "b0103213b2797b8cc1792c0ea813667ba94f31669cbd4d48c95b729f7a0bb874",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-0-single.json",
+      "bytes": 26483,
+      "compressedBytes": 4157,
+      "crc32": "bd995f50",
+      "sha256": "8d8a4689a61408133b82c6cf999fcd223f6dbd2f6a0503a1ef87b512de8d18f5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-0.json",
+      "bytes": 26352,
+      "compressedBytes": 4291,
+      "crc32": "2aa81435",
+      "sha256": "9d299645dca28f8d0c7bcfe2119374b5b70961642211c3c72e24151685f2bea7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-1979-maintenance.json",
+      "bytes": 27289,
+      "compressedBytes": 4246,
+      "crc32": "7066119b",
+      "sha256": "eb50604c56ed2116da37e2892371e9af1f3e88c90b0603089f77075fe462cae1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-1979.json",
+      "bytes": 26714,
+      "compressedBytes": 4319,
+      "crc32": "d03ba10e",
+      "sha256": "0b6277918d69db525790c2388e423d11377090ef0b446bfb1208a72d2b28482e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-26319.json",
+      "bytes": 26445,
+      "compressedBytes": 4340,
+      "crc32": "a93e8d52",
+      "sha256": "57a5b8cae8b2aa67302070432d6b817a92a94749441bde9ea455a8d8f1bb6381",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-recit-8675309.json",
+      "bytes": 26164,
+      "compressedBytes": 4114,
+      "crc32": "92fd0ad8",
+      "sha256": "aa3da5dbde3dcfba438f2ebcb53e77e6d550230eb795b9a4b620a5a3ae7543f9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-0.json",
+      "bytes": 28300,
+      "compressedBytes": 4393,
+      "crc32": "013d57af",
+      "sha256": "dac7736e2e838a0ebaa5a3dca4eba7df2e6b42bab8fd76ee48efba3a854fe6a3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-1979.json",
+      "bytes": 25057,
+      "compressedBytes": 3888,
+      "crc32": "98276f6e",
+      "sha256": "aa1c409094baddbff12353cbadbcfdc9aa7cce2998d34e1927c417834d5390e0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-26319-queued.json",
+      "bytes": 27428,
+      "compressedBytes": 4395,
+      "crc32": "ea1443e6",
+      "sha256": "9e5b0e8064214f21002830cf8547db1836d34fb93c7b753fc5ab34cbf097a474",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-26319-single.json",
+      "bytes": 24723,
+      "compressedBytes": 3880,
+      "crc32": "38e0d599",
+      "sha256": "618595036e203c86d6893686147e61fdafe7d89efc2b3e7185df5742ecba4aff",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-26319.json",
+      "bytes": 27287,
+      "compressedBytes": 4455,
+      "crc32": "004975fd",
+      "sha256": "339ecb97fa34b1c102892b7f65157654e4befb10602cf27a3e8272f0511795b5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/final-v5-survie-8675309.json",
+      "bytes": 26556,
+      "compressedBytes": 3969,
+      "crc32": "7e80573e",
+      "sha256": "9d4cf7632ff2b9fd76fb867c8ad7d85ea53e02e45a4e86cfecadafbb2847ff8a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/helpers-v3.mjs",
+      "bytes": 1369,
+      "compressedBytes": 704,
+      "crc32": "72880653",
+      "sha256": "95d29f5354506995b0985c6977116c63fed303ddc8b4ee5ac0c4048f5b417aa6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/helpers-v4.mjs",
+      "bytes": 1145,
+      "compressedBytes": 607,
+      "crc32": "97ec12b7",
+      "sha256": "7880a6a540d5fc074619b30498ee781722f4c15e7eb779e11d89c14e413b642a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/helpers-v5.mjs",
+      "bytes": 1536,
+      "compressedBytes": 769,
+      "crc32": "66034f1b",
+      "sha256": "013acef539febedc693bf28c0f951ca7de1b37cf15c90eb7aa7b42f854614589",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/inherited-on-v5-results.json",
+      "bytes": 8860,
+      "compressedBytes": 1536,
+      "crc32": "dc331859",
+      "sha256": "baa46491190471cebd91e26c1dc504b5ac6333c209c8aaf20c200902505274ee",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/inherited-on-v5.log",
+      "bytes": 146,
+      "compressedBytes": 129,
+      "crc32": "03e351c2",
+      "sha256": "3148f01244c3ad679f4a778fa5769f11610c4771822fb4cb17116938655cbdcd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/installer-v5-results.json",
+      "bytes": 2461,
+      "compressedBytes": 635,
+      "crc32": "7abd43c8",
+      "sha256": "3334046d1e93a815cde9cba60a8209aa62fb3a2e6371dc0022e84f817dd508a0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/package-verification.json",
+      "bytes": 35950,
+      "compressedBytes": 3019,
+      "crc32": "c29a98a7",
+      "sha256": "55d525d47af5a0482ecc704ff820bb34204ae7ed0fe88295b3c88f16b4946812",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/pilot-v3.js",
+      "bytes": 6734,
+      "compressedBytes": 2880,
+      "crc32": "6be6242d",
+      "sha256": "d64029a43de07220f9d5f2c7e9b900d39b4394eca117e8c368cb4db290e07114",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/pilot-v5.js",
+      "bytes": 9173,
+      "compressedBytes": 3732,
+      "crc32": "1988e413",
+      "sha256": "78f5403a9bc8a533942a7308646ecf726b0228eb006dffe898d26dcfc674da89",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/pilot.js",
+      "bytes": 5419,
+      "compressedBytes": 2320,
+      "crc32": "b7a20f1d",
+      "sha256": "9fc3c894d52603922da598ba6860fd5df90b3407bea66b14149d981e7ca0e841",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/planche-56-1.jpg",
+      "bytes": 686608,
+      "compressedBytes": 577898,
+      "crc32": "1f866926",
+      "sha256": "7758e0c7a3c52681e3a925bed8ffd200f209ec4e896140ac62c47e13d81ff22a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/planche-56-2.jpg",
+      "bytes": 687768,
+      "compressedBytes": 593144,
+      "crc32": "1f9aada6",
+      "sha256": "987e1378563320ec95c0532553443db112577d6cda0e26374bd51a8c1a5ce3b7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/protocol-results.json",
+      "bytes": 8387,
+      "compressedBytes": 1875,
+      "crc32": "03f69ddf",
+      "sha256": "dbe7ab2fd9d41934c801f557b6307e8a263f42f1810bf82c14420daefad831fc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/report-document-preview.jpg",
+      "bytes": 123025,
+      "compressedBytes": 96613,
+      "crc32": "1348a14b",
+      "sha256": "2318f5d760d2527da6a61ae59bb71a5d699c395102a8f0046634f6898a3f18fe",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/report-qa-preview.jpg",
+      "bytes": 189316,
+      "compressedBytes": 166049,
+      "crc32": "8710f576",
+      "sha256": "40a1822501f1db1230d35290a3df37c6930747e1636f31603e46441d35a06985",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-cauchemar-0.json",
+      "bytes": 468632,
+      "compressedBytes": 27281,
+      "crc32": "85de3159",
+      "sha256": "1958a354db61e74e96bee6823b7d19b969ab72cd561083773b29c6c6546e2d62",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-cauchemar-1979.json",
+      "bytes": 620151,
+      "compressedBytes": 32187,
+      "crc32": "94f58275",
+      "sha256": "4176c281f9081652f9a1858540f7c746b509d3698ed196e651e8e2c3896bd020",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-cauchemar-26319.json",
+      "bytes": 346217,
+      "compressedBytes": 20054,
+      "crc32": "4ceb6cf5",
+      "sha256": "af951191cee0f3cd5351e2994ac5f288dc0fe65c28c611c5529fa0e82e24bc41",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-cauchemar-8675309.json",
+      "bytes": 482328,
+      "compressedBytes": 30624,
+      "crc32": "b6d73b7e",
+      "sha256": "d7793f21d6592652dc7a32fbb666e1c41b1912b44aeaac9e065560e3696a87f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-0-single.json",
+      "bytes": 653285,
+      "compressedBytes": 33270,
+      "crc32": "6aedb23b",
+      "sha256": "b531ad2fa7d0bb813d25ad0efab4805744d28d3c1de970b3a40e668360872290",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-0.json",
+      "bytes": 657501,
+      "compressedBytes": 35314,
+      "crc32": "46179ab4",
+      "sha256": "e0cebf4afedb4fb6c5c8a51b0ff3f6df15ec823e0048e7b4f8686c116f27a318",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-1979-maintenance.json",
+      "bytes": 481362,
+      "compressedBytes": 31635,
+      "crc32": "4928824b",
+      "sha256": "6cc01388612c02abf5b9ed7351a0f013ace3d99f5675d52b49b15256caf5bf48",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-1979.json",
+      "bytes": 665577,
+      "compressedBytes": 40872,
+      "crc32": "011efd48",
+      "sha256": "431d61ce75365f5ed9f46ff8bcd79f0ff3e1a21d1c400612af5e3a12fd0cac5c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-26319.json",
+      "bytes": 611634,
+      "compressedBytes": 33228,
+      "crc32": "2da16b83",
+      "sha256": "d99d03d70aa72dff9e317c2631e7e65f7fdf39b30a18b900885623d62b1e16c9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-recit-8675309.json",
+      "bytes": 617698,
+      "compressedBytes": 34955,
+      "crc32": "7efce0e2",
+      "sha256": "fd617496af29d3ed39431cb521db817c65496c4d1661ef6597688b6111c67557",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-0.json",
+      "bytes": 615814,
+      "compressedBytes": 31778,
+      "crc32": "77bc0b3a",
+      "sha256": "1fb2e1883946541800e55106807d8497291f93b9c1289713ccfc7576b69006a2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-1979.json",
+      "bytes": 455600,
+      "compressedBytes": 22660,
+      "crc32": "76e98029",
+      "sha256": "b955b0b9585fe1e40a63f4cac9cfe913546acc269ed892f22739d7c21af121f4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-26319-queued.json",
+      "bytes": 632889,
+      "compressedBytes": 35583,
+      "crc32": "6035b45f",
+      "sha256": "bd6d04a66be3abbe8935c66c9911cb111cb160d6d98c7b5fa473fe59e8b620b1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-26319-single.json",
+      "bytes": 492729,
+      "compressedBytes": 21940,
+      "crc32": "a7f53a72",
+      "sha256": "f2e21fb6fa83e5aa8b62cd66364052072e574312c67d66fa582a3d5dd71b2aab",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-26319.json",
+      "bytes": 619678,
+      "compressedBytes": 33274,
+      "crc32": "76511e70",
+      "sha256": "7c45ee1930b9be12e7c376e6d1f202a5e4f3bc62f1634ea996cec3b4d660a58e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/states-v5-survie-8675309.json",
+      "bytes": 463933,
+      "compressedBytes": 24996,
+      "crc32": "125dc377",
+      "sha256": "8caeec11388884132a2ba648f1e45228ec98e56c7abaa8e040139565f34d0072",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-browser-v5.py",
+      "bytes": 39881,
+      "compressedBytes": 12099,
+      "crc32": "fd216aef",
+      "sha256": "cff0626bedf4e991bb061776451620a378ba7070ae537ce60d7694ae72031b72",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-documents-v5.py",
+      "bytes": 2130,
+      "compressedBytes": 999,
+      "crc32": "251d4d13",
+      "sha256": "627fd4acd6bafd28501911c36c967dd08edc455a1650e143ccdbb5575ea88887",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-engine.mjs",
+      "bytes": 13970,
+      "compressedBytes": 4565,
+      "crc32": "d261920d",
+      "sha256": "924deba91bdc67e088a525dd1a84524c42ffd74476d5b98dd5a034292b365a0d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-inherited-on-v5.mjs",
+      "bytes": 13790,
+      "compressedBytes": 4307,
+      "crc32": "df261c3e",
+      "sha256": "151c636dec84aeeb54b17a7be463cbfbcea03b524c938cf7e0bd954bc117ab29",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-installer-v5.mjs",
+      "bytes": 9113,
+      "compressedBytes": 2554,
+      "crc32": "668c9aab",
+      "sha256": "05b3f67f973c8bacf31d84aec2e7c7d36eae98e8ab12e99106c02873521c7279",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-protocol.mjs",
+      "bytes": 16659,
+      "compressedBytes": 5758,
+      "crc32": "1422b1d8",
+      "sha256": "82317607fca5b1573f941980d9624bff8b30eacc21e6a4e544a03ecb51edb257",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-v3.mjs",
+      "bytes": 16339,
+      "compressedBytes": 5020,
+      "crc32": "39c0849b",
+      "sha256": "7801c22e0c9ac986b3d763c9064606884e83860802b5d4839863cc984e05aa98",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-v4-rerun.log",
+      "bytes": 19,
+      "compressedBytes": 21,
+      "crc32": "a2cc6644",
+      "sha256": "11c3f86672e782beed475c9a36bc3465f0478788d4ffdec11ecd44375bf8cd12",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-v4.mjs",
+      "bytes": 13782,
+      "compressedBytes": 4304,
+      "crc32": "6a105425",
+      "sha256": "7c9d157443b9d75bf69f5e3799154f3b5c9ed9bb8b62784e2969d5e39ffb1234",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-v5.log",
+      "bytes": 3674,
+      "compressedBytes": 1124,
+      "crc32": "ce25e848",
+      "sha256": "93752b07b95ed588d579b4db612ab8a68589825b58b07b4573995181d5751a36",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/test-v5.mjs",
+      "bytes": 12476,
+      "compressedBytes": 3812,
+      "crc32": "aae7f729",
+      "sha256": "c7df5548710b6fd6ff7209c612aff28de1d96b24ba694c4237ed476cf457a477",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/v3-base-rerun.log",
+      "bytes": 25,
+      "compressedBytes": 24,
+      "crc32": "163878ac",
+      "sha256": "33d35fda187271ab4d8d7f3b07a7e16de38d82f23c5f9905d556d24358afd60d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/qa/verify-v5.py",
+      "bytes": 5023,
+      "compressedBytes": 2326,
+      "crc32": "ac67a3b8",
+      "sha256": "4bb60689a88c1eab3d1ebf0da58d1b4141321f0c8163ec3b3cd62a24cd4bde2d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/app.js",
+      "bytes": 23994,
+      "compressedBytes": 8861,
+      "crc32": "d2d003f4",
+      "sha256": "158aaaf59ddbf79ffddb5159d75af654d6c764d96c3654469c22b91aee7ac280",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/assets.js",
+      "bytes": 40755,
+      "compressedBytes": 4888,
+      "crc32": "3d865409",
+      "sha256": "07073057cbf2480c4a6ac7a6e54aecd62b1eb0d0733d0ea3f8bd66c650b18701",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/content-v3.js",
+      "bytes": 6781,
+      "compressedBytes": 3114,
+      "crc32": "9ac564dd",
+      "sha256": "d24015f76e58738ccbe14f477c184f991a27ed9210481598410a1cb7d7bdc02d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/content-v4.js",
+      "bytes": 6942,
+      "compressedBytes": 3104,
+      "crc32": "7f2cac14",
+      "sha256": "a1ebc73ee198c76b1255042931945f3ce163a73ca0df25e0112acd5f875fb598",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/content-v5.js",
+      "bytes": 5404,
+      "compressedBytes": 2519,
+      "crc32": "cd81dafc",
+      "sha256": "9d1d43ca725cf623462341e99d4a5272df8f88cf3ae06dbe10a82a373cbd6433",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/data.js",
+      "bytes": 203985,
+      "compressedBytes": 22371,
+      "crc32": "c6cacdaf",
+      "sha256": "7860676ee577aa11d13c85c84c58016dfba5bf71b5fb9ec4986091a17400e039",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/engine.js",
+      "bytes": 23339,
+      "compressedBytes": 8092,
+      "crc32": "3536cd08",
+      "sha256": "614b5b2cf9d5287ba9daa11d6b8de16ee29d33776b71e3f3ac75b10da532425d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/interface-v3.js",
+      "bytes": 20575,
+      "compressedBytes": 7929,
+      "crc32": "1ce00790",
+      "sha256": "ba63d3d54ff46dc0be2b79de52a91125e747099bcea3159fb6b5eef08efd060e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/interface-v4.js",
+      "bytes": 12178,
+      "compressedBytes": 4758,
+      "crc32": "74bf0a20",
+      "sha256": "730bf9c179c56cc986bf96acb9fe4c8ab82e2a5243a59b452fc71764cac106a7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/interface-v5.js",
+      "bytes": 6718,
+      "compressedBytes": 2945,
+      "crc32": "6f46ecc5",
+      "sha256": "5c4f66c1af7a1eb0d42054850b2954fa3ec47542f73bc82bb8840471d17d9b17",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/liaison-v4.js",
+      "bytes": 19103,
+      "compressedBytes": 6341,
+      "crc32": "9f169950",
+      "sha256": "3f748e1d1f94b8f2dac0cc09df0e4c58a37985ca2a7c7d0dd9c9a212540d248f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/protocol.js",
+      "bytes": 22939,
+      "compressedBytes": 7616,
+      "crc32": "0ba9ad00",
+      "sha256": "c927bd8533225c40d5a6c7aca4baff11d65755ead0be9793c58fb7e6ef5ef497",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/render-v4.js",
+      "bytes": 5054,
+      "compressedBytes": 2365,
+      "crc32": "a01d30aa",
+      "sha256": "49da676cc75f25f0f51bdff56d51312147890f9984afc73c94f810a36904c822",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/render-v5.js",
+      "bytes": 1266,
+      "compressedBytes": 734,
+      "crc32": "8dd83d7e",
+      "sha256": "d9754238456b3ebb2bd04e0cbdcf311b7219e149e5bc8482d2c4bbd045bd9ed8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/render.js",
+      "bytes": 21972,
+      "compressedBytes": 9367,
+      "crc32": "f40e0611",
+      "sha256": "62ba33a0af4d56e35a6b899a92763eefad7c7e234e70ba67f55acd15d15e64ea",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/rescue-v5.js",
+      "bytes": 18089,
+      "compressedBytes": 6033,
+      "crc32": "4e1cffc9",
+      "sha256": "060d1920ce2470f4b57eb067482faf7e3438ae7d814eee22133aa529e86791d1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/src/survival-v3.js",
+      "bytes": 23815,
+      "compressedBytes": 7842,
+      "crc32": "bdf21897",
+      "sha256": "2cc1cb050617bd208adeddd365513b4400bcd168ca0cb8de15f7391a56f443a7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/styles.css",
+      "bytes": 32159,
+      "compressedBytes": 8156,
+      "crc32": "efdf4e0c",
+      "sha256": "98c02fe2760b70c575e9291711c31c270991f55106d25cbc13b69322bb086b9e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/build.py",
+      "bytes": 965,
+      "compressedBytes": 515,
+      "crc32": "8cd2afba",
+      "sha256": "d3958c6f12654435a7a83f2f74a17b165ec0d97491d6bc70335441c2e3fa3fd1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/docs-v5.py",
+      "bytes": 27070,
+      "compressedBytes": 11408,
+      "crc32": "5a61ef7e",
+      "sha256": "78dc882ee56f885fc12ff05df30ab712dfb8b0cfa5a76ee48e6455ae6f32c946",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/embed_assets.py",
+      "bytes": 601,
+      "compressedBytes": 408,
+      "crc32": "e0799244",
+      "sha256": "6fa41eaf438b484ec6a07e86e4731c095d2a0ca7cdcc23262763e60ddea2f966",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/install.mjs",
+      "bytes": 8761,
+      "compressedBytes": 3177,
+      "crc32": "82ff0475",
+      "sha256": "cb4bbf7cbe22cd87d4ac459ab0e9fc9db2ab52a20eb3e8e3798c864d750c81a5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/manifest-v5.py",
+      "bytes": 667,
+      "compressedBytes": 430,
+      "crc32": "4850b541",
+      "sha256": "cb8db1c1c78e63052f1c07f7cc58eea013c64b31e2612e17904b17e4e905de21",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_BLACKOUT_v0.5.0/tools/rerun-matrix.mjs",
+      "bytes": 922,
+      "compressedBytes": 527,
+      "crc32": "529cc622",
+      "sha256": "3042f600c0d21975cceb96810e2738627700639c3ed9a54feef0d2f2629d9626",
+      "directory": false,
+      "unsafePath": false
+    }
+  ]
+}
