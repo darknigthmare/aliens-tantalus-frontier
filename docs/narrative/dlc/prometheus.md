@@ -12,11 +12,11 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.
+Archive originale sauvegardée en PR73 : 14 678 996 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.
 
-Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
+[PR #73 de préservation](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/73) · [Manifeste exact](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json) · [Documents extraits](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/documents)
 
-Chemin de publication prévu : `archives/dlc-source-recovery-20261126/prometheus/`. Ce chemin a été préparé localement ; aucun octet de ce ZIP n'a été publié. Voir le [reçu des sept archives](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees).
+Chemin publié : `archives/dlc-source-recovery-20261126/prometheus/`, commit `6b46eaf8f574871e39487e0a10ef46acfb1f41a6`. Le ZIP peut être reconstruit à partir des fragments décrits par le manifeste. Les chemins, tailles et empreintes du lot ont été comparés au dépôt ; ils restent des sources exclues de la distribution. Voir le [reçu de cette reprise](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise).
 
 ## Décisions à préserver
 
@@ -47,7 +47,7 @@ Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant p
 
 ## Documents examinés
 
-Archive : `ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip` ; SHA-256 `b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1` ; 14 678 996 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees) conserve le statut de transfert.
+Archive : `ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip` ; SHA-256 `b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1` ; 14 678 996 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise) conserve le statut de transfert.
 
 - `README_V12.md` — contenu lu.
 - `CODEX_PROMETHEUS_V12.md` — contenu lu.

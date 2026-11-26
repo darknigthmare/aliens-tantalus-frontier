@@ -820,16 +820,21 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [
-          54
+          54,
+          73
         ],
-        "state": "PR54 ouverte de récupération ; statut de publication distinct de la qualification du raccord hôte. ZIP original récupéré/contrôlé mais non transféré ; la préservation complémentaire prévue en PR54 est interrompue.",
+        "state": "PR54 conserve le raccord Blackout ; Archive originale sauvegardée en PR73 : 33 103 752 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
         "paths": [
           "dlc/alien-blackout/",
           "modules/alien-blackout/"
         ],
-        "zipBytesPublished": false,
+        "zipBytesPublished": true,
         "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
-        "archiveSizeBytes": 33103752
+        "archiveSizeBytes": 33103752,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/blackout-source-recovery-20261126/alien-blackout/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -843,6 +848,12 @@
           "member": "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
           "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
           "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1060,13 +1071,15 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [
-          55
+          55,
+          74
         ],
-        "state": "Lancement/retour hôte fusionnés dans la cumulative ; moteur et carnets autonomes.",
+        "state": "Lancement/retour hôte fusionnés dans la cumulative via PR55 ; moteur et carnets autonomes. PR74 conserve trois nouveaux PNG de reliefs comme sources candidates, sans activation ni fidélité 1:1 certifiée.",
         "paths": [
           "src/dlc/avp-2004/"
         ],
-        "archive": "archives/local-recovery-20261125/avp-2004/"
+        "archive": "archives/local-recovery-20261125/avp-2004/",
+        "sourceSpriteCommit": "8e8d51c186052c0b0662786677dea3652c915583"
       },
       "documentEvidence": [
         {
@@ -1076,6 +1089,11 @@
         {
           "read": true,
           "name": "docs/CODEX_AVP_2004.md"
+        },
+        {
+          "read": true,
+          "name": "manifest.json / README.md",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json"
         }
       ],
       "decisionIds": [
@@ -1094,7 +1112,29 @@
         "D20",
         "D21",
         "D22"
-      ]
+      ],
+      "assetCoverage": {
+        "newSourcePNGCount": 3,
+        "totalSourcePngBytes": 11048227,
+        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+        "candidateCatalogueIds": [
+          "AVP2004-159",
+          "AVP2004-249"
+        ],
+        "runtimeIntegrated": false,
+        "verified1to1": false,
+        "alphaMedianNonzero": 253,
+        "remainingReview": [
+          "détourage et pixels faiblement opaques",
+          "microreliefs et proportions",
+          "échelle, ancrages et lisibilité en jeu"
+        ],
+        "notCovered": [
+          "AVP2004-140 : aucune traduction authentifiée des glyphes",
+          "AVP2004-115 : Snowcat en attente de photographies plus exploitables",
+          "Animations, personnages, poses et autres DLC"
+        ]
+      }
     },
     {
       "id": "40th-anniversary",
@@ -1138,7 +1178,8 @@
         "archiveCount": 6,
         "archiveBytes": 174243911,
         "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/MANIFEST.json",
-        "runtimeIntegratedByRecovery": false
+        "runtimeIntegratedByRecovery": false,
+        "head": "8ec16d6448e0833e932294456e3393674a4a79ad"
       },
       "documentEvidence": [
         {
@@ -1203,13 +1244,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/prometheus/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 14 678 996 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
-        "archiveSizeBytes": 14678996
+        "archiveSizeBytes": 14678996,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/prometheus/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1223,6 +1269,12 @@
           "name": "CODEX_PROMETHEUS_V12.md",
           "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
           "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1272,13 +1324,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien-romulus/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 47 349 199 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
-        "archiveSizeBytes": 47349199
+        "archiveSizeBytes": 47349199,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/romulus/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1292,6 +1349,12 @@
           "name": "docs/REGISTRE_CONVERGENCES_V20.json",
           "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
           "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1339,13 +1402,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien-isolation/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 85 001 778 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
-        "archiveSizeBytes": 85001778
+        "archiveSizeBytes": 85001778,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/alien-isolation/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1365,6 +1433,12 @@
           "name": "docs/METRIQUES.json",
           "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
           "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1411,13 +1485,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien5-lazare/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 7 330 460 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
-        "archiveSizeBytes": 7330460
+        "archiveSizeBytes": 7330460,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/alien5-lazare/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1434,6 +1513,12 @@
           "read": true,
           "name": "docs/AUDIT_FIDELITE_V11.json",
           "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1481,13 +1566,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/colonial-marines/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 62 621 653 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
-        "archiveSizeBytes": 62621653
+        "archiveSizeBytes": 62621653,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/colonial-marines/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1504,6 +1594,12 @@
           "read": true,
           "name": "docs/ADAPTATION.md",
           "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1552,13 +1648,18 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
-        "plannedArchivePath": "archives/dlc-source-recovery-20261126/avp-requiem/",
-        "zipBytesPublished": false,
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 32 506 386 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
         "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
         "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
-        "archiveSizeBytes": 32506386
+        "archiveSizeBytes": 32506386,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/avpr/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
       },
       "documentEvidence": [
         {
@@ -1570,6 +1671,12 @@
           "read": true,
           "name": "docs/AUDIT_FIDELITE_V0_10.md",
           "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
         }
       ],
       "decisionIds": [
@@ -1596,10 +1703,10 @@
     "Les statistiques sont celles des versions documentaires, pas une nouvelle exécution de gameplay.",
     "Les détails des PR proviennent du snapshot l'inventaire GitHub de la reprise du 26 novembre ; toute publication suivante doit être ajoutée comme nouvel état.",
     "Les bibles historiques déjà conformes ne sont pas présentées comme des corrections de code réalisées ici.",
-    "Les six archives supplémentaires ont leurs documents effectivement lus dans cette passe. Leur transfert des octets reste interrompu ; aucune publication de ces ZIP ni lancement natif n'est déclaré.",
     "Reprise : trois recherches ciblées ont retrouvé de nouvelles exigences utilisateur ; l’historique intégral reste non accessible.",
     "Les nouvelles fiches gardent les 14 décisions initiales et ajoutent D15–D22 sans convertir les rapports assistant anciens en faits actuels.",
-    "Les fichiers temporaires de l’ancienne session peuvent manquer après réinitialisation ; cela ne constitue pas une suppression vérifiée effectuée par cette reprise."
+    "Les fichiers temporaires de l’ancienne session peuvent manquer après réinitialisation ; cela ne constitue pas une suppression vérifiée effectuée par cette reprise.",
+    "Les sept archives supplémentaires ont été récupérées à nouveau et publiées intégralement en PR73 ; leurs SHA-256 correspondent au premier reçu. Les documents source lus lors de la première passe sont maintenant conservés sur GitHub."
   ],
   "publicationSnapshot": {
     "date": "2026-11-26",
@@ -1613,11 +1720,14 @@
       68,
       69,
       70,
-      71
+      71,
+      72,
+      73,
+      74
     ],
-    "note": "Nouvel état documentaire : Aliens PR70 fusionnée dans main ; Covenant PR71 ouverte ; Mer PR58 a avancé. Les reçus de sauvegarde/effacement restent séparés et sont mis à jour avec leurs propres preuves.",
+    "note": "Aliens PR70 fusionnée dans main ; Covenant PR71 ouverte ; Mer PR67 conserve 115 sources / 110 PNG ; six ZIP du 40e anniversaire en PR72 et sept ZIP complémentaires en PR73. Les registres d’intégrité ne certifient pas la fidélité visuelle ni une activation nouvelle.",
     "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
-    "verifiedAt": "2026-11-26T06:45:27Z",
+    "verifiedAt": "2026-11-26T06:54:35Z",
     "mainAliensMerge": "5f38b7bad2c6401424b23fda11aeb86068f0f354",
     "branches": [
       {
@@ -1640,21 +1750,21 @@
       },
       {
         "number": 68,
-        "head": "a4c8ae68eb66ef3a85dbabab89aa03780cd72d62",
+        "head": "84cca8266421b3d865941acd645c861549c121ef",
         "branch": "codex/dlc-bibles-recovery-20261126",
         "base": "claude/nifty-shannon-qpy1hl",
         "state": "open",
         "draft": true,
-        "title": "Consolider les bibles et les manques de 18 DLC"
+        "title": "Consolider les bibles et 22 exigences de 18 DLC"
       },
       {
         "number": 67,
-        "head": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+        "head": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
         "branch": "codex/sea-sprites-source-recovery-20261126",
         "base": "codex/mer-des-chagrins-github-20261125",
         "state": "open",
         "draft": true,
-        "title": "Mer des Chagrins : préserver 33 fichiers du lot visuel et le ledger complet"
+        "title": "Mer des Chagrins : 115 sources préservées dont 110 PNG"
       },
       {
         "number": 66,
@@ -1745,6 +1855,30 @@
         "state": "open",
         "draft": false,
         "title": "chore(ai-tools): adopt Spec Kit and Game Studios, open the V188 audit link"
+      },
+      {
+        "number": 72,
+        "head": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "state": "open",
+        "draft": true,
+        "base": "main",
+        "scope": "Preservation only; source admission required before merge."
+      },
+      {
+        "number": 73,
+        "head": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "state": "open",
+        "draft": true,
+        "base": "claude/nifty-shannon-qpy1hl",
+        "scope": "Seven original archives; exact source-only admission; no runtime activation."
+      },
+      {
+        "number": 74,
+        "head": "8e8d51c186052c0b0662786677dea3652c915583",
+        "state": "open",
+        "draft": true,
+        "base": "claude/nifty-shannon-qpy1hl",
+        "scope": "Three new AVP2004 relief PNG source candidates; no runtime activation."
       }
     ],
     "ci": {
@@ -2031,6 +2165,38 @@
         }
       ],
       "qualification": "Résultats distants lus, non réexécutés pour cette modification documentaire. Ils sont propres aux commits indiqués ; les échecs et annulations ne sont pas présentés comme des succès."
+    },
+    "newArchiveGroups": [
+      {
+        "pr": 72,
+        "commit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "archiveCount": 6,
+        "originalArchiveBytes": 174243911
+      },
+      {
+        "pr": 73,
+        "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archiveCount": 7,
+        "originalArchiveBytes": 282592224
+      }
+    ],
+    "documentationCommit": "84cca8266421b3d865941acd645c861549c121ef",
+    "cleanup": {
+      "currentPassLocalDeletedCopies": 78,
+      "currentPassLocalLogicalBytes": 1447943791,
+      "persistentDeletedFiles": 0,
+      "persistentFreedBytes": 0,
+      "receipt": "dlc/RECUPERATION_20261126.json",
+      "qualification": "Copies temporaires de téléchargement/reconstruction/fragmentation de cette reprise uniquement ; la disparition des anciens dossiers n’est pas comptée."
+    },
+    "newSprites": {
+      "pr": 74,
+      "commit": "8e8d51c186052c0b0662786677dea3652c915583",
+      "dlc": "avp-2004",
+      "pngCount": 3,
+      "pngBytes": 11048227,
+      "runtimeIntegrated": false,
+      "verified1to1": false
     }
   },
   "conversationEvidence": [

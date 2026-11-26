@@ -12,11 +12,11 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.
+Archive originale sauvegardée en PR73 : 32 506 386 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.
 
-Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
+[PR #73 de préservation](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/73) · [Manifeste exact](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json) · [Documents extraits](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/documents)
 
-Chemin de publication prévu : `archives/dlc-source-recovery-20261126/avp-requiem/`. Ce chemin a été préparé localement ; aucun octet de ce ZIP n'a été publié. Voir le [reçu des sept archives](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees).
+Chemin publié : `archives/dlc-source-recovery-20261126/avpr/`, commit `6b46eaf8f574871e39487e0a10ef46acfb1f41a6`. Le ZIP peut être reconstruit à partir des fragments décrits par le manifeste. Les chemins, tailles et empreintes du lot ont été comparés au dépôt ; ils restent des sources exclues de la distribution. Voir le [reçu de cette reprise](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise).
 
 ## Décisions à préserver
 
@@ -50,7 +50,7 @@ Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant p
 
 ## Documents examinés
 
-Archive : nom exact non consigné dans ce reçu ; SHA-256 `b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617` ; 32 506 386 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees) conserve le statut de transfert.
+Archive : nom exact non consigné dans ce reçu ; SHA-256 `b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617` ; 32 506 386 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise) conserve le statut de transfert.
 
 - `LIRE_DABORD.md` — contenu lu.
 - `docs/AUDIT_FIDELITE_V0_10.md` — contenu lu.

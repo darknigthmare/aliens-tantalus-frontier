@@ -12,11 +12,11 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.
+Archive originale sauvegardée en PR73 : 47 349 199 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.
 
-Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
+[PR #73 de préservation](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/73) · [Manifeste exact](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json) · [Documents extraits](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/documents)
 
-Chemin de publication prévu : `archives/dlc-source-recovery-20261126/alien-romulus/`. Ce chemin a été préparé localement ; aucun octet de ce ZIP n'a été publié. Voir le [reçu des sept archives](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees).
+Chemin publié : `archives/dlc-source-recovery-20261126/romulus/`, commit `6b46eaf8f574871e39487e0a10ef46acfb1f41a6`. Le ZIP peut être reconstruit à partir des fragments décrits par le manifeste. Les chemins, tailles et empreintes du lot ont été comparés au dépôt ; ils restent des sources exclues de la distribution. Voir le [reçu de cette reprise](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise).
 
 ## Décisions à préserver
 
@@ -59,7 +59,7 @@ Le codex des castes demandé le 27 septembre 2026 inclut tadpole et cocon (`D21`
 
 ## Documents examinés
 
-Archive : `ALIEN_ROMULUS_CONVERGENCES_v0.20.zip` ; SHA-256 `f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293` ; 47 349 199 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees) conserve le statut de transfert.
+Archive : `ALIEN_ROMULUS_CONVERGENCES_v0.20.zip` ; SHA-256 `f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293` ; 47 349 199 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise) conserve le statut de transfert.
 
 - `README.md` — contenu lu.
 - `docs/REGISTRE_CONVERGENCES_V20.json` — contenu lu.

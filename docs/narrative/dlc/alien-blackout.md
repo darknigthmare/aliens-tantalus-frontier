@@ -12,13 +12,11 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-PR #54 ouverte de récupération ; statut de publication distinct de la qualification du raccord hôte. ZIP original récupéré/contrôlé mais non transféré ; la préservation complémentaire prévue en PR #54 est interrompue.
+PR54 conserve le raccord Blackout ; Archive originale sauvegardée en PR73 : 33 103 752 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.
 
-[PR #54](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/54)
+[PR #73 de préservation](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/73) · [Manifeste exact](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json) · [Documents extraits](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/documents) · [PR #54 d’intégration](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/54)
 
-Chemins repérés : `dlc/alien-blackout/`, `modules/alien-blackout/`.
-
-Voir le [reçu de récupération et le travail restant](RECUPERATION_20261126.md).
+Chemin publié : `archives/blackout-source-recovery-20261126/alien-blackout/`, commit `6b46eaf8f574871e39487e0a10ef46acfb1f41a6`. Le ZIP peut être reconstruit à partir des fragments décrits par le manifeste. Les chemins, tailles et empreintes du lot ont été comparés au dépôt ; ils restent des sources exclues de la distribution. Voir le [reçu de cette reprise](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise).
 
 ## Décisions à préserver
 
@@ -49,7 +47,7 @@ Les décisions `D18` à `D22` complètent le contrat commun : PNG indépendant p
 
 ## Documents examinés
 
-Archive : `ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip` ; SHA-256 `b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c` ; 33 103 752 octets. Les noms suivants sont relatifs à la racine extraite `ALIEN_BLACKOUT_v0.7.0` et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees) conserve le statut de transfert.
+Archive : `ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip` ; SHA-256 `b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c` ; 33 103 752 octets. Les noms suivants sont relatifs à la racine extraite `ALIEN_BLACKOUT_v0.7.0` et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise) conserve le statut de transfert.
 
 - `ALIEN_BLACKOUT_v0.7.0/README.md` dans `ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip` — contenu lu.
 - `ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md` dans `ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip` — contenu lu.
