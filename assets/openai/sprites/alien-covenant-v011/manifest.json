@@ -3168,7 +3168,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     },
     {
       "id": "karine-medical",
@@ -3239,7 +3240,8 @@
       "category": "character",
       "availableStates": [
         "idle"
-      ]
+      ],
+      "runtimeAdmission": "catalogue-only"
     }
   ],
   "blocked": [

@@ -98,6 +98,8 @@ def main():
                 row['rooms'] = ['bridge', 'comms', 'landercockpit']
             if key == 'cryopod' and 'rooms' not in row:
                 row['rooms'] = ['cryo']
+            if key == 'cargoLifter' and 'rooms' not in row:
+                row['rooms'] = ['plaza']
             assets.append(row)
     manifest = {'schemaVersion': 1, 'release': '0.11.0', 'sourceModuleVersion': '0.10.0',
                 'verified1to1': False, 'assets': assets}

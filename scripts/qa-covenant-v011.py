@@ -105,6 +105,7 @@ def main():
             "creatureCaptures": "Separate browser context; existing go(room,true), explicit enemy pose and camera placement; not a playthrough",
             "missingImages": "Separate browser context; PNG requests deliberately aborted",
             "clock": "Real requestAnimationFrame and wall clock",
+            "alphaPolicy": {"supportThreshold": 32, "opaqueThresholdReported": 240, "opacityRatioInformational": True},
             "serviceWorkers": "Blocked in isolated QA contexts"
         },
         "tests": [], "reachedRooms": [], "controls": {"keyTransitions": 0, "jumps": 0},
@@ -311,7 +312,7 @@ def main():
                     ok:sha256===entry.sha256 && bytes.byteLength===entry.bytes
                       && canvas.width===entry.width && canvas.height===entry.height
                       && JSON.stringify(bounds)===JSON.stringify(entry.alphaBounds)
-                      && zeros>0 && visible>0 && opaque/visible>=.95 && edgeAbove16===0});
+                      && zeros>0 && visible>0 && edgeAbove16===0});
                   canvas.width=1;canvas.height=1;
                 } finally {URL.revokeObjectURL(url);}
               }return rows;

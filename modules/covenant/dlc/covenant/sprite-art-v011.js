@@ -41,6 +41,9 @@
       const sprite = !special && this.visual('human', profile.id, state);
       // Free hands in the neutral source do not imply a validated armed pose.
       if (!sprite || gun && !sprite.entry.heldGrip) return super.human(actor, role, moving);
+      // Mirroring would move Walter's left-hand injury to the wrong anatomical side.
+      if (profile.id === 'walter-injured' && (actor.facing || 1) !== sprite.entry.sourceFacing)
+        return super.human(actor, role, moving);
       const p = this.project(actor.x, actor.z);
       if (p.x < -240 || p.x > this.W + 240) return;
       this.ellipse(p.x, p.y + 6, 23 * p.s * (profile.build || 1), 6 * p.s, '#06101599');

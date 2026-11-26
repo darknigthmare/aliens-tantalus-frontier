@@ -135,6 +135,8 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument("--root",type=Path,default=Path(__file__).resolve().parents[1])
     p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--ci-run-url",default="")
+    p.add_argument("--ci-conclusion",default="not-recorded")
     args=p.parse_args()
     source=args.root/BASE
     manifest=json.loads((source/"manifest.json").read_text())
@@ -154,14 +156,21 @@ def main():
         catalogue.append({**entry,**record,"name":NAMES.get(entry["id"],entry.get("label",entry["id"])),
                           "file":filename,"runtime":entry["id"] in runtime_ids,
                           "category":entry.get("category","prop")})
+    catalogue.sort(key=lambda row: ({"character":0,"creature":1,"prop":2,"vehicle":3,"biology":4}.get(row["category"],5),row["id"]))
     if len(catalogue)!=len({a["id"] for a in catalogue}):
         raise ValueError("Duplicate sprites")
     (dest/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n")
     coverage=provenance.get("coverage",provenance)
     (dest/"coverage.json").write_text(json.dumps(coverage,ensure_ascii=False,indent=2)+"\n")
-    (dest/"QA.json").write_text(json.dumps({"pngChecks":qa,"validation":provenance.get("validation",{})},ensure_ascii=False,indent=2)+"\n")
+    validation=dict(provenance.get("validation",{}))
+    if args.ci_run_url:
+        validation["githubActions"]={"url":args.ci_run_url,"conclusion":args.ci_conclusion}
+    (dest/"QA.json").write_text(json.dumps({"pngChecks":qa,"validation":validation},ensure_ascii=False,indent=2)+"\n")
     (dest/"SHA256SUMS.txt").write_text("\n".join(hashes)+"\n")
-    shutil.copyfile(args.root/"docs/covenant/SPRITES_V011_STATUS.md",dest/"README_FR.md")
+    readme=(args.root/"docs/covenant/SPRITES_V011_STATUS.md").read_text()
+    if args.ci_run_url:
+        readme+="\n## Vérification GitHub Actions du lot livré\n\nRésultat : "+args.ci_conclusion+".\n\nJournal : "+args.ci_run_url+"\n"
+    (dest/"README_FR.md").write_text(readme)
     data=json.dumps({"assets":catalogue},ensure_ascii=False).replace("<","\\u003c")
     (dest/"index.html").write_text(HTML.replace("__DATA__",data))
     cols=6;cell_w,cell_h=260,340

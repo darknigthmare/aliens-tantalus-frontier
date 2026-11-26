@@ -187,6 +187,28 @@ test('facing reflection does not mutate actor or engine', () => {
   assert.equal(a.facing, -1);
 });
 
+test('Walter left-hand injury cannot become a right-hand injury through reflection', () => {
+  for (const sourceFacing of [1, -1]) {
+    const row = asset({ id: 'walter-injured', key: 'walter-injured', sourceFacing,
+      path: '/assets/openai/sprites/alien-covenant-v011/walter-injured.png' });
+    for (const facing of [1, -1]) {
+      const h = harness([row], { profile: { id: 'walter-injured' } });
+      const person = freeze({ ...actor(), id: 'synthetic-return', facing });
+      h.renderer.human(person, 'walter');
+      const images = h.commands.filter(command => command[0] === 'drawImage');
+      if (facing === sourceFacing) {
+        assert.equal(images.length, 1);
+        assert.equal(h.inherited.length, 0);
+        assert.ok(h.commands.some(command => command[0] === 'scale' && command[1] === 1));
+      } else {
+        assert.equal(images.length, 0);
+        assert.equal(h.inherited[0][0], 'human');
+        assert.equal(h.renderer.spriteDrawsV011.human, 0);
+      }
+    }
+  }
+});
+
 test('moving and armed characters do not borrow a neutral free-hands pose', () => {
   const walking = harness([asset()]);
   walking.renderer.human(actor(), 'daniels', true);

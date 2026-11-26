@@ -48,6 +48,9 @@ tout fichier absent, en échec de chargement ou de dimensions incorrectes.
   les bornes d’alpha significatives au seuil 32 et une ancre de support.
   Le sens opposé emploie la réflexion existante du jeu ; cela ne constitue
   pas une nouvelle vue documentée du costume ou de ses inscriptions.
+  Exception : la pose walter-injured ne peut pas être retournée, afin de
+  préserver le côté anatomique de la main manquante ; le sens opposé
+  conserve le renderer d’origine.
 - Les accessoires isolés se placent dans l’enveloppe de l’objet existant.
   Les consoles, affichages fonctionnels, rotors, grue et autres mécanismes
   actifs restent procéduraux. L’atterrisseur intact n’apparaît pas dans sa
