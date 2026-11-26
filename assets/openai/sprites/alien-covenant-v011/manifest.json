@@ -1,0 +1,832 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.11-sprites",
+  "date": "2026-11-26",
+  "status": "production-in-progress",
+  "fidelityPolicy": "Film-reference-guided sprites. No pixel-identical 1:1 certification; unseen views and gameplay poses reconstructed. Generated images are distinct from runtime integration.",
+  "assets": [
+    {
+      "id": "daniels-work",
+      "path": "assets/openai/sprites/alien-covenant-v011/daniels-work.png",
+      "gitBlobSha": "86ccf5d49e96d9a77284c3a7f5808746e9240831",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Reference crops legs and boots; lower garment continuation reconstructed.",
+        "Facing and idle pose adapted for runtime."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1650766,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1176697,
+        "alphaZeroPercent": 74.81238047281902,
+        "alphaAbove245": 366575,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          281,
+          12,
+          735,
+          1527
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        }
+      ],
+      "generationPrompt": "Use case: photorealistic-natural. Asset type: a single production-ready transparent character sprite for the Alien: Covenant (2017) DLC. Create ONE realistic live-action character cutout only, full body from the very top of the head to the complete soles of BOTH boots, adult human proportions. Three-quarter SIDE view facing to the RIGHT of the canvas, head and torso both toward screen-right, stable relaxed standing idle pose, feet planted and separated so both boots remain legible. Both hands empty, arms slightly separated from the torso; no held weapons, no firearms anywhere, no scene or platform. Center the full silhouette with at least 10% transparent padding on every side. True RGBA transparent background, no opaque background, no checkerboard painted into the pixels, no floor shadow. Preserve the exact facial likeness, body build, garment shapes, material textures, muted film colors and insignia placement seen in the provided film references. High-detail realistic photographic cutout, no cartoon, no pixel art, no doll proportions, no illustration, no glow, no text, no title, no border, no decorative icons, no extra people. The references are appearance evidence, not a composition to reproduce; output the requested single full-body sprite.\nSubject: Katherine Daniels, played by Katherine Waterston in Alien: Covenant (2017), in her shipboard working/combat clothing. Image 1: Daniels is the WOMAN IN THE FOREGROUND; use her exact face, short messy dark pixie haircut, slim build, grey ribbed scoop-neck tank top with small USCSS Covenant/Weyland-Yutani breast patch and olive/dark work trousers. Remove the rifle and its loose carry sling completely, retaining empty hands. Image 2 is the SAME Daniels and supports her precise face/build only, not the expedition jacket. No jacket, no hat, no hood, no helmet, no bag in this shipboard variant. Modest practical cargo/work trousers and rugged dark flat work boots consistent with the film; render conservative lower-garment continuation where cropped, without inventing decorative gear. Her expression is focused and calm. Preserve natural mature face, not beautified or glamorized.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit the attached exact sprite. Change ONLY background and alpha transparency, preserving the person's face, body, every garment, texture, pose, size, right-facing orientation and complete feet without any redesign. REMOVE THE ENTIRE GREY/BROWN HALO, HAZE, SPOTLIGHT AND ALL BACKGROUND PIXELS. Output a proper hard-isolated transparent PNG cutout: every pixel outside the actual physical character silhouette must have alpha EXACTLY 0, including all canvas edges and transparent padding; the interior of the physical person and opaque garments must have alpha EXACTLY 255. Only a narrow one-pixel antialias edge may have intermediate alpha. The background should be empty invisible pixels, not a black, grey, white or checkered rectangle. No glow, no floor, no shadow, no gradient. Keep the exact complete original human figure. No cropping and no extra objects.",
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "walter-field",
+      "path": "assets/openai/sprites/alien-covenant-v011/walter-field.png",
+      "gitBlobSha": "43414428c1a96581440827c878f5a36aa7ae7261",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Boots and rear of uniform not fully visible in individual foreground reference.",
+        "Facing and idle pose adapted for runtime."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1729773,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1120077,
+        "alphaZeroPercent": 71.21257781982422,
+        "alphaAbove245": 429828,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          259,
+          17,
+          747,
+          1519
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "walter-ad.jpg",
+          "url": "https://img.youtube.com/vi/B4Cmf4BuNgg/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=B4Cmf4BuNgg",
+          "credit": "Meet Walter official Alien: Covenant promotional video"
+        }
+      ],
+      "generationPrompt": "Use case: photorealistic-natural. Asset type: a single production-ready transparent character sprite for the Alien: Covenant (2017) DLC. Create ONE realistic live-action character cutout only, full body from the very top of the head to the complete soles of BOTH boots, adult human proportions. Three-quarter SIDE view facing to the RIGHT of the canvas, head and torso both toward screen-right, stable relaxed standing idle pose, feet planted and separated so both boots remain legible. Both hands empty, arms slightly separated from the torso; no held weapons, no firearms anywhere, no scene or platform. Center the full silhouette with at least 10% transparent padding on every side. True RGBA transparent background, no opaque background, no checkerboard painted into the pixels, no floor shadow. Preserve the exact facial likeness, body build, garment shapes, material textures, muted film colors and insignia placement seen in the provided film references. High-detail realistic photographic cutout, no cartoon, no pixel art, no doll proportions, no illustration, no glow, no text, no title, no border, no decorative icons, no extra people. The references are appearance evidence, not a composition to reproduce; output the requested single full-body sprite.\nSubject: Walter, Michael Fassbender's synthetic from Alien: Covenant (2017), expedition costume. In Image 1 he is the man FRONT CENTER wearing the OFF-WHITE CAP, nearest the viewer. Reproduce ONLY him: clean-shaven exact face, short brown hair, ivory/light grey explorer cap with long side ear/neck flaps, grey-brown fabric anorak, restrained small Covenant chest patch, pack/shoulder straps and compact communicator, horizontal utility belts, olive-brown gloves, charcoal quilted trousers, rugged dark boots. His physique is lean athletic, his demeanor composed and precise. Image 2 locks his facial identity only; do NOT replace the expedition outfit with Image 2's uniform. Both anatomical hands are intact and gloved. Do not copy any of the armed security personnel behind him. Keep his fabric outfit and compact utilitarian gear; no armor plates, no futuristic shiny suit, no helmet.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit the attached exact sprite. Change ONLY background and alpha transparency, preserving the person's face, body, every garment, texture, pose, size, right-facing orientation and complete feet without any redesign. REMOVE THE ENTIRE GREY/BROWN HALO, HAZE, SPOTLIGHT AND ALL BACKGROUND PIXELS. Output a proper hard-isolated transparent PNG cutout: every pixel outside the actual physical character silhouette must have alpha EXACTLY 0, including all canvas edges and transparent padding; the interior of the physical person and opaque garments must have alpha EXACTLY 255. Only a narrow one-pixel antialias edge may have intermediate alpha. The background should be empty invisible pixels, not a black, grey, white or checkered rectangle. No glow, no floor, no shadow, no gradient. Keep the exact complete original human figure. No cropping and no extra objects.",
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "oram",
+      "path": "assets/openai/sprites/alien-covenant-v011/oram.png",
+      "gitBlobSha": "5274c88c95dff68bc80534e9c3ad363f715b014e",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 2,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Reference face is three-quarter and small; fine badge lettering and rear costume unavailable.",
+        "Facing and idle pose adapted for runtime."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1775928,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1099909,
+        "alphaZeroPercent": 69.93033091227214,
+        "alphaAbove245": 447096,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          243,
+          22,
+          755,
+          1519
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        },
+        {
+          "file": "oram-crewmessage.jpg",
+          "url": "https://img.youtube.com/vi/icNG-g3pl_I/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=icNG-g3pl_I",
+          "credit": "Official Alien: Covenant crew promotional video"
+        }
+      ],
+      "generationPrompt": "Use case: photorealistic-natural. Asset type: a single production-ready transparent character sprite for the Alien: Covenant (2017) DLC. Create ONE realistic live-action character cutout only, full body from the very top of the head to the complete soles of BOTH boots, adult human proportions. Three-quarter SIDE view facing to the RIGHT of the canvas, head and torso both toward screen-right, stable relaxed standing idle pose, feet planted and separated so both boots remain legible. Both hands empty, arms slightly separated from the torso; no held weapons, no firearms anywhere, no scene or platform. Center the full silhouette with at least 10% transparent padding on every side. True RGBA transparent background, no opaque background, no checkerboard painted into the pixels, no floor shadow. Preserve the exact facial likeness, body build, garment shapes, material textures, muted film colors and insignia placement seen in the provided film references. High-detail realistic photographic cutout, no cartoon, no pixel art, no doll proportions, no illustration, no glow, no text, no title, no border, no decorative icons, no extra people. The references are appearance evidence, not a composition to reproduce; output the requested single full-body sprite.\nSubject: Christopher Oram, played by Billy Crudup in Alien: Covenant (2017), in expedition outfit. In Image 1 Oram is the SLENDER MAN AT THE LEFT of the white-capped foreground Walter, looking up toward image-left, with a TAN / GREY-BEIGE SMOCK and dark cap with ear flaps. Reproduce Oram alone, never the white-capped man nor the security personnel. Preserve his exact narrow clean-shaven face, straight nose and dark hair, dark explorer cap with hanging side flaps, taupe tan practical expedition anorak with broad folded collar and the visible central shield-like mission patch, webbing harness and olive waist belt with the compact pouches, dark olive trousers and worn dark boots. Image 2 reinforces Oram's face and fabric detail only. Keep the original costume architecture and film colors. Empty hands, no rifle or sling weapon, no invented armor.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit the attached exact sprite. Change ONLY background and alpha transparency, preserving the person's face, body, every garment, texture, pose, size, right-facing orientation and complete feet without any redesign. REMOVE THE ENTIRE GREY/BROWN HALO, HAZE, SPOTLIGHT AND ALL BACKGROUND PIXELS. Output a proper hard-isolated transparent PNG cutout: every pixel outside the actual physical character silhouette must have alpha EXACTLY 0, including all canvas edges and transparent padding; the interior of the physical person and opaque garments must have alpha EXACTLY 255. Only a narrow one-pixel antialias edge may have intermediate alpha. The background should be empty invisible pixels, not a black, grey, white or checkered rectangle. No glow, no floor, no shadow, no gradient. Keep the exact complete original human figure. No cropping and no extra objects.",
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "daniels",
+      "path": "assets/openai/sprites/alien-covenant-v011/daniels.png",
+      "gitBlobSha": "0bd04e263a5f2b5dbd52c7a7e3eb7faf2ba1f752",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Cap omitted for runtime profile; bare-headed hairstyle taken from second film still.",
+        "Lower legs, boot details and invisible rear costume reconstructed; pose adapted."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1678369,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1084209,
+        "alphaZeroPercent": 68.9321517944336,
+        "alphaAbove245": 454712,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          204,
+          36,
+          758,
+          1521
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "daniels-expedition.jpg",
+          "url": "https://images-prod.dazeddigital.com/2400/azure/dazed-prod/1210/1/1211335.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox; Craig Green interview"
+        },
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "tennessee-crewmessage.jpg",
+          "url": "https://img.youtube.com/vi/VLmtyhSV3Ss/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=VLmtyhSV3Ss",
+          "credit": "Official Alien: Covenant crew message promotional video"
+        },
+        {
+          "file": "walter-ad.jpg",
+          "url": "https://img.youtube.com/vi/B4Cmf4BuNgg/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=B4Cmf4BuNgg",
+          "credit": "Meet Walter official Alien: Covenant promotional video"
+        },
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Create ONE full-body realistic character sprite for the Alien: Covenant (2017) DLC, adult proportions, three-quarter SIDE view facing screen RIGHT, complete head to both soles, neutral stable idle with feet separated. Both hands are empty and slightly apart from body. No weapon or weapon sling, no scene, no floor, no shadow. Transparent PNG cutout: true alpha 0 outside silhouette, subject visibly opaque, only a thin antialiased edge. Preserve at least 7% clean transparent padding beyond the entire silhouette, especially hat and soles. Accurate live-action face and garment construction from provided photos, muted film colors. No cartoon, no generic hero, no glamorization, no toy, no text, no extra person. Five references in order: 1 Daniels expedition close-up; 2 Daniels and Tennessee aboard; 3 Tennessee crew message; 4 Walter official uniform advertisement; 5 crew on landing ramp. Use only the named subject and designated costume reference, never blend identities or outfits. Subject Katherine Daniels, played by Katherine Waterston. Her accurate slender face and short dark pixie hair are from the FOREGROUND WOMAN in image 2. Give her the grey-blue/charcoal expedition anorak, olive webbing harness, double utilitarian belt, compact chest communicator, red-burgundy rucksack and small shoulder-mounted camera apparatus shown in image 1, but bare-headed with visible short hair, hood down. No cap, no helmet. Preserve the soft wrinkled fabric and functional gear, no hard armor. Olive work trousers and dark expedition boots, conservative lower garment continuation. She has her nail pendant on a thin chain, mostly tucked inside collar. Focused expression. Hands empty and anatomically correct.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "tennessee",
+      "path": "assets/openai/sprites/alien-covenant-v011/tennessee.png",
+      "gitBlobSha": "e6f999df6a4306c8beb332df701edb566c96df33",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Hat repositioned from hand to head for runtime pilot profile.",
+        "Legs and boot details unavailable in cropped references, reconstructed conservatively; pose adapted."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1633599,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1084330,
+        "alphaZeroPercent": 68.93984476725261,
+        "alphaAbove245": 464983,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          261,
+          23,
+          760,
+          1521
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "daniels-tennessee-combat.jpg",
+          "url": "https://lumiere-a.akamaihd.net/v1/images/image_8b148ad7.jpeg?region=0,0,1600,750",
+          "source": "20th Century Studios official film gallery",
+          "credit": "20th Century Fox"
+        },
+        {
+          "file": "tennessee-crewmessage.jpg",
+          "url": "https://img.youtube.com/vi/VLmtyhSV3Ss/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=VLmtyhSV3Ss",
+          "credit": "Official Alien: Covenant crew message promotional video"
+        },
+        {
+          "file": "walter-ad.jpg",
+          "url": "https://img.youtube.com/vi/B4Cmf4BuNgg/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=B4Cmf4BuNgg",
+          "credit": "Meet Walter official Alien: Covenant promotional video"
+        },
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Create ONE full-body realistic character sprite for the Alien: Covenant (2017) DLC, adult proportions, three-quarter SIDE view facing screen RIGHT, complete head to both soles, neutral stable idle with feet separated. Both hands are empty and slightly apart from body. No weapon or weapon sling, no scene, no floor, no shadow. Transparent PNG cutout: true alpha 0 outside silhouette, subject visibly opaque, only a thin antialiased edge. Preserve at least 7% clean transparent padding beyond the entire silhouette, especially hat and soles. Accurate live-action face and garment construction from provided photos, muted film colors. No cartoon, no generic hero, no glamorization, no toy, no text, no extra person. Four references in order: 1 Daniels and Tennessee aboard; 2 Tennessee crew message; 3 Walter uniform advertisement; 4 crew ramp. Use only Tennessee from images 1 and 2. Subject Tennessee Faris, played by Danny McBride. Use the STOCKY BEARDED MAN in image 2, same accurate middle-aged broad face, curly dark hair and substantial dark beard. Dress him in the dark navy zip-front pilot work jacket, rectangular USCSS Covenant chest patch and mustard-ochre T-shirt seen in image 2. Put the exact pale beige cowboy hat shown at the left of image 2 on HIS HEAD: naturally curved broad brim, pinched crown, dark brown band. Image 1's man behind Daniels confirms his face/build only. Matching practical dark navy work trousers and sturdy dark work boots, conservative continuation. Full hat and both boots inside generous transparent frame. Empty relaxed hands. No rifle, no badge from other franchise.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "walter",
+      "path": "assets/openai/sprites/alien-covenant-v011/walter.png",
+      "gitBlobSha": "a7dc6afce9fa8168e26f4fdea43e8e2aef53d527",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "version": 1,
+      "verified1to1": false,
+      "visualReview": "complete silhouette; facing right three-quarter idle; empty hands; recognizable reference face and costume",
+      "limitations": [
+        "Official promotional reference only shows uniform upper body clearly; trousers, shoes and rear panels conservatively reconstructed.",
+        "Idle pose adapted for runtime."
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1476134,
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1146950,
+        "alphaZeroPercent": 72.92111714680989,
+        "alphaAbove245": 396467,
+        "edgeAlphaAbove16": 0,
+        "bboxAbove32": [
+          259,
+          41,
+          735,
+          1509
+        ],
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inputReferences": [
+        {
+          "file": "walter-ad.jpg",
+          "url": "https://img.youtube.com/vi/B4Cmf4BuNgg/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=B4Cmf4BuNgg",
+          "credit": "Meet Walter official Alien: Covenant promotional video"
+        },
+        {
+          "file": "walter-oram-expedition-ramp.jpg",
+          "url": "https://images-prod.dazeddigital.com/1024/azure/dazed-prod/1210/1/1211331.jpg",
+          "source": "https://www.dazeddigital.com/fashion/article/36032/1/craig-green-on-creating-costumes-for-alien-covenant-interview",
+          "credit": "Mark Rogers / 20th Century Fox"
+        }
+      ],
+      "generationPrompt": "Use case photorealistic-natural. Create ONE full-body realistic character sprite for the Alien: Covenant (2017) DLC, adult proportions, three-quarter SIDE view facing screen RIGHT, complete head to both soles, neutral stable idle with feet separated. Both hands are empty and slightly apart from body. No weapon or weapon sling, no scene, no floor, no shadow. Transparent PNG cutout: true alpha 0 outside silhouette, subject visibly opaque, only a thin antialiased edge. Preserve at least 7% clean transparent padding beyond the entire silhouette, especially hat and soles. Accurate live-action face and garment construction from provided photos, muted film colors. No cartoon, no generic hero, no glamorization, no toy, no text, no extra person. Two references in order: 1 Walter official uniform advertisement; 2 crew landing ramp. Use the clean-shaven foreground man and plain grey onboard uniform from image 1. Subject Walter, Michael Fassbender's clean-shaven android in the FOREGROUND of image 1, onboard uniform variant. Accurate mature angular face, blue eyes, short dark brown neatly slicked side-parted hair. Reproduce image 1's plain grey subtly textured work uniform with small rounded point collar, neat straight concealed front placket, restrained fitted shoulders, long sleeves, no tactical harness or armor, no cap, no hood, no helmet, no bag. Matching straight grey work trousers, plain dark flat work shoes. Both anatomical hands intact, ungloved, empty. Calm precise neutral expression. Exclude the field outfit of the other images and never make him long blond-haired David.",
+      "backgroundEditPrompt": null,
+      "animationsVerified": false,
+      "category": "character",
+      "availableStates": [
+        "idle"
+      ]
+    },
+    {
+      "id": "prop-flute",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-flute.png",
+      "gitBlobSha": "85e9a74d1b929a53a0400bbc821a02bc74f9e18a",
+      "category": "prop",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "static"
+      ],
+      "alphaQA": {
+        "size": [
+          2172,
+          724
+        ],
+        "bytes": 585902,
+        "sha256": "4db32ab4739d1c713172bd1a631fa8d1afb9c4046cc911d1455d22e4db330a9d",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha0_pixels": 1310723,
+        "alpha255_pixels": 839,
+        "alpha250plus": 232922,
+        "median_nonzero_alpha": 253,
+        "alpha_bbox": [
+          57,
+          70,
+          2116,
+          700
+        ],
+        "visible_alpha_bounds": {
+          "16": [
+            60,
+            305,
+            2112,
+            447
+          ],
+          "128": [
+            60,
+            305,
+            2112,
+            446
+          ],
+          "250": [
+            62,
+            306,
+            2111,
+            445
+          ]
+        },
+        "edge_alpha_extrema": {
+          "top": [
+            0,
+            0
+          ],
+          "bottom": [
+            0,
+            0
+          ],
+          "left": [
+            0,
+            0
+          ],
+          "right": [
+            0,
+            0
+          ]
+        }
+      },
+      "inputReferences": [
+        {
+          "file": "flute-matt-boug.jpg",
+          "url": "https://images.squarespace-cdn.com/content/v1/53ec54f4e4b0b5ada3895283/1588646652095-MYILBYXE7G3FZWWMZLFN/david8e.jpg",
+          "source_page": "https://mattboug.squarespace.com/",
+          "kind": "Primary film prop maker",
+          "status": "downloaded",
+          "bytes": 184860,
+          "sha256": "8648ee7b44ec0272d221ae48d8a4b111cbe30bc01e363b7f2ae0ca150b7af825"
+        }
+      ],
+      "generationPrompt": "Create ONE game prop sprite from the reference images already attached in this conversation. The target is ONLY DAVID'S FLUTE from Alien: Covenant (2017), shown in the Matt Boug maker photograph: the warm ivory/bone-colored semi-transparent flute lying on wood, with a second close-up view of its holes below. The other two reference images depict firearms; IGNORE THOSE COMPLETELY. Do not include any firearm or any part of a firearm.\n\nFaithfully reproduce the physical flute from that specific maker photograph as closely as the available photograph supports. This is an asset reproduction, not a redesign. Preserve its long, slender, gently irregular cylindrical bone silhouette, the small natural taper and rounded ends, the carved mouthpiece, the actual fingering holes and their spacing visible in the reference, the aged ivory/honey coloration, darker fine weathering and natural bone-like markings, and the subtle translucency described by its maker. No invented ornaments, buttons, metallic fittings, decorative rings, or instrument keys. Resolve only the parts visible in the photograph; keep unseen details restrained.\n\nOutput exactly one COMPLETE flute, isolated, horizontal left-to-right with the mouthpiece on the left, centered and comfortably inside the image with clear transparent padding at both ends. Use a slightly elevated three-quarter side angle so its round shaft and photographed holes can be read, keeping the object horizontal overall. Render its material and surface detail clearly with neutral soft light suitable for a production game sprite. No table, no background, no wood, no environment, no supporting prop, no second view, no duplicate, no hand, no separate detail insert, no contact or cast shadow, no border, no text, no labels, no watermark. True transparent alpha background, not a drawn checkerboard. One object only.",
+      "limitations": [
+        "Original retained; attempted alpha correction added no useful improvement. Source maker describes semitransparent bone. Body median alpha253. No image pixels edited outside imagegen.",
+        "reference-guided, not certified1:1"
+      ]
+    },
+    {
+      "id": "neomorph",
+      "path": "assets/openai/sprites/alien-covenant-v011/neomorph.png",
+      "gitBlobSha": "e006c1052b520b9a2101b61f54c61289eb72e4b2",
+      "category": "creature",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "idle"
+      ],
+      "alphaQA": {
+        "size": [
+          1698,
+          926
+        ],
+        "bytes": 795914,
+        "sha256": "1d6a32765f527080c0ed64c5653fb87c8e07c36105b8e2da0c12dbcd2396d6ee",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha0_pixels": 1251986,
+        "alpha255_pixels": 2369,
+        "alpha250plus": 258796,
+        "alpha1to15": 33855,
+        "median_nonzero_alpha": 252,
+        "alpha_bbox": [
+          0,
+          0,
+          1676,
+          926
+        ],
+        "visible_alpha_bounds": {
+          "16": [
+            10,
+            7,
+            1643,
+            907
+          ],
+          "128": [
+            12,
+            8,
+            1642,
+            906
+          ],
+          "250": [
+            34,
+            9,
+            1641,
+            905
+          ]
+        },
+        "edge_alpha_extrema": {
+          "top": [
+            0,
+            1
+          ],
+          "bottom": [
+            0,
+            1
+          ],
+          "left": [
+            0,
+            1
+          ],
+          "right": [
+            0,
+            0
+          ]
+        }
+      },
+      "inputReferences": [
+        {
+          "file": "neomorph-final-adult.jpg",
+          "url": "https://media.mpcvfx.com/app/uploads/2022/04/o_134_rec_0010_marketingstill_v41052.jpeg",
+          "source_page": "https://www.mpcvfx.com/en/filmography/alien-covenant/",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 54613,
+          "sha256": "92ecd9dbd17e56c0219294487a1897a4a2eb5f3ac10efaec60bf9d491a027dd0"
+        },
+        {
+          "file": "neomorph-final-mouth.jpg",
+          "url": "https://www.fxguide.com/wp-content/uploads/2017/05/O_133_rec_0540_Marketing_still_v4.1044-830x349.jpg",
+          "source_page": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+          "kind": "VFX supervisor interview; credited MPC final film still",
+          "status": "downloaded",
+          "bytes": 13760,
+          "sha256": "4eb046b5a01e8e76dd746a9e96815cd5eadf28dda3c8b26f792af84223e0b2f5"
+        },
+        {
+          "file": "51659-Neomorph2.jpg",
+          "url": "https://necaonline.com/wp-content/uploads/2017/05/51659-Neomorph2.jpg",
+          "source_page": "https://store.necaonline.com/blogs/news/massive-photo-gallery-alien-covenant-products-revealed-1",
+          "kind": "Licensed secondary figure reference; final film anatomy takes priority; no toy joints",
+          "status": "downloaded",
+          "bytes": 241769,
+          "sha256": "0d5bd18d89628ca828f5fce610ca7fa9cc11e1416f91d62d28790084948325ca"
+        }
+      ],
+      "generationPrompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: neutral stalking/patrol idle, the adult is low and slightly forward-leaning, knees bent, both feet planted at the same implied ground level, arms relaxed and slightly reaching ahead without attacking, mouth closed. Head and hands point RIGHT; full tail sweeps far to the LEFT in one readable shallow curve. The tail-to-hands silhouette should be wider than the standing height, suitable for an approx330:180 logical game footprint. Show the entire body clearly. It must be a single coherent animal, not separated parts.",
+      "limitations": [
+        "Final film anatomy and material take precedence over licensed figure; unseen whole-body angle and pose reconstructed.",
+        "reference-guided, not certified 1:1"
+      ]
+    },
+    {
+      "id": "neomorph-attack",
+      "path": "assets/openai/sprites/alien-covenant-v011/neomorph-attack.png",
+      "gitBlobSha": "c2bb89004e0209e0420d681d87a93eb05d121681",
+      "category": "creature",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "lunge"
+      ],
+      "alphaQA": {
+        "size": [
+          1774,
+          887
+        ],
+        "bytes": 817199,
+        "sha256": "1211a75155612dc0bdd417156db4b3ef2e52966ba637d4bba11885a09de41cc1",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha0_pixels": 1216441,
+        "alpha255_pixels": 1336,
+        "alpha250plus": 269751,
+        "alpha1to15": 55056,
+        "median_nonzero_alpha": 252,
+        "alpha_bbox": [
+          0,
+          9,
+          1773,
+          887
+        ],
+        "visible_alpha_bounds": {
+          "16": [
+            28,
+            61,
+            1748,
+            830
+          ],
+          "128": [
+            29,
+            62,
+            1747,
+            829
+          ],
+          "250": [
+            56,
+            62,
+            1746,
+            828
+          ]
+        },
+        "edge_alpha_extrema": {
+          "top": [
+            0,
+            0
+          ],
+          "bottom": [
+            0,
+            1
+          ],
+          "left": [
+            0,
+            1
+          ],
+          "right": [
+            0,
+            0
+          ]
+        }
+      },
+      "inputReferences": [
+        {
+          "file": "neomorph-final-adult.jpg",
+          "url": "https://media.mpcvfx.com/app/uploads/2022/04/o_134_rec_0010_marketingstill_v41052.jpeg",
+          "source_page": "https://www.mpcvfx.com/en/filmography/alien-covenant/",
+          "kind": "Primary final film VFX still",
+          "status": "downloaded",
+          "bytes": 54613,
+          "sha256": "92ecd9dbd17e56c0219294487a1897a4a2eb5f3ac10efaec60bf9d491a027dd0"
+        },
+        {
+          "file": "neomorph-final-mouth.jpg",
+          "url": "https://www.fxguide.com/wp-content/uploads/2017/05/O_133_rec_0540_Marketing_still_v4.1044-830x349.jpg",
+          "source_page": "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+          "kind": "VFX supervisor interview; credited MPC final film still",
+          "status": "downloaded",
+          "bytes": 13760,
+          "sha256": "4eb046b5a01e8e76dd746a9e96815cd5eadf28dda3c8b26f792af84223e0b2f5"
+        },
+        {
+          "file": "51659-Neomorph2.jpg",
+          "url": "https://necaonline.com/wp-content/uploads/2017/05/51659-Neomorph2.jpg",
+          "source_page": "https://store.necaonline.com/blogs/news/massive-photo-gallery-alien-covenant-products-revealed-1",
+          "kind": "Licensed secondary figure reference; final film anatomy takes priority; no toy joints",
+          "status": "downloaded",
+          "bytes": 241769,
+          "sha256": "0d5bd18d89628ca828f5fce610ca7fa9cc11e1416f91d62d28790084948325ca"
+        }
+      ],
+      "generationPrompt": "Create one isolated high-resolution creature sprite for a 2D side-view game set in Alien: Covenant (2017). Faithfully reproduce the FINAL MOVIE creature shown in the attached primary film stills. The licensed figure photograph is a SECONDARY proportion guide only: remove every manufactured joint, seam, pin and toy feature, and give final-film anatomy and skin precedence wherever the references disagree. Not a redesign, not pixel art, not a concept monster. One complete living creature only, facing RIGHT, near side profile with a restrained three-quarter view so both arms/legs remain readable. Fit the entire head, all fingertips, both feet and full long tail inside the frame with generous empty transparent padding. Detailed realistic surface, controlled soft neutral illumination, no dramatic colored lighting. The canvas outside the creature must be genuinely transparent alpha0, the solid body effectively opaque, partial alpha only along the antialiased silhouette. Absolutely no floor, ground plane, shadow, haze, fog, white veil, texture, background, checkerboard, text, border, weapon, human, corpse, blood or gore.\n\nAdult NEOMORPH, not a newborn and not a Xenomorph: smooth elongated eyeless pale ivory-grey head tapering backward, flesh-covered lean organic torso and ribs, fine cool-grey veins and subtle pale-pink subsurface shading, narrow waist, long muscular legs, very long slender arms and clawed fingers, restrained short spines along the back as in the final film, and a long tapering organic tail. Keep the body skin smooth and taut like the MPC still, not plated armor or a mechanical skeleton. The figure supplies whole-body proportions, not its exaggerated bony appendages.\n\nPOSE: one dynamic airborne forward pounce/attack facing RIGHT, full body stretched horizontally in mid-jump, torso leaning forward, both long arms reaching to the right with fingers spread, legs drawn back with bent knees and all feet fully visible, full tail streaming to the left. The eyeless head faces right with the extensible jaw opened like the final-film close-up, sharp teeth visible but no contact with a target, no injury, no blood. Show the entire creature comfortably inside the canvas with at least8percent empty padding on EVERY side. This image will be the attack animation pose; there is no prey or second creature. Maintain the same final-film pale Neomorph anatomy, finer smooth fleshy skin and short dorsal spines. Avoid the figure's coarse plastic wrinkles and articulated limbs.",
+      "limitations": [
+        "Final movie references determine creature design; dynamic side-view pose reconstructed for gameplay, not present identically in reference images.",
+        "reference-guided, not certified 1:1"
+      ]
+    },
+    {
+      "id": "prop-lander",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-lander.png",
+      "gitBlobSha": "f613cfbe2bd32a4f3b55d7891339331b1c844581",
+      "category": "prop",
+      "label": "Lander One — fond transparent corrigé",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "static"
+      ],
+      "width": 1895,
+      "height": 830,
+      "bytes": 1481857,
+      "sourcePages": [
+        "https://www.mpcvfx.com/en/filmography/alien-covenant/"
+      ],
+      "referenceFiles": [
+        "prop-lander.png"
+      ],
+      "generationPrompt": "EDIT THE PROVIDED IMAGE: perform precise background removal on this single Alien: Covenant LANDER shuttle. Keep the entire spacecraft exactly as in the supplied image: same shape, same orientation, same panels, colors, dimensions and details. Remove EVERY bit of the pale grey-white textured background and all soft ambient shadow outside the metal silhouette. Output a genuine clean PNG CUTOUT with alpha exactly zero on all background pixels, including all four corners and a wide margin around the entire craft. The metal ship is opaque; only the thin antialiased silhouette edge may have partial alpha. No white matte, no grey backdrop, no haze, no checkerboard drawing, no ground shadow, no labels. Preserve antennas and the four thruster pods. This is technical background removal, not a reinterpretation or redesign. Exactly one complete ship, entirely inside the image, fully transparent surroundings.",
+      "limitations": [
+        "Reconstruction guidée par les références ; détails des parties non visibles non certifiés."
+      ],
+      "generationHistory": [
+        "Produce ONE transparent-background game sprite of the exact LANDER ONE shuttle from Alien: Covenant (2017) shown in these two FINAL FILM VFX stills. Reconstruct the ship as faithfully as possible, preserving its very broad rectangular landing-craft proportions, low blunt wedge cockpit with the exact dark window shape, industrial grey plating with worn muted yellow-green lateral panels, square dorsal equipment bays and round canisters, the paired huge aft engine drums and the four separately mounted downward VTOL thrusters. Use the three-quarter left-facing side view of the FIRST reference: nose on the left, aft engines on the right, low camera, enough dorsal detail to read shape. Second image is geometry/detail reference only, not the desired overhead view. Isolate the entire shuttle, with all thrusters and engines visible within the frame. Engines idle, no flame, no exhaust, no water, no landscape, no sky, no people, no ground, no cast shadow, no labels or caption, no extra ship. High-detail photorealistic cinematic 2D asset for side-on gameplay, neutral light revealing reference details, no redesign, no extra wings, no sci-fi fighter features. Exactly one complete object with transparent alpha and generous margin on all sides. Keep the film silhouette, proportions, windows, panel placements and worn material finishes."
+      ],
+      "alphaQA": {
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "bboxAbove32": [
+          49,
+          148,
+          1837,
+          705
+        ],
+        "alphaZero": 972174,
+        "alpha240plus": 575516
+      }
+    },
+    {
+      "id": "prop-egg",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-egg.png",
+      "gitBlobSha": "68299fdfefa9da4d6b59d403f724d104b6ccbbcf",
+      "category": "prop",
+      "label": "Ovomorphe Covenant fermé",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "static"
+      ],
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1293783,
+      "sourcePages": [
+        "https://propstore.com/product/alien-covenant-2017/lot-832-xenomorph-egg/"
+      ],
+      "referenceFiles": [
+        "egg-propstore.jpg"
+      ],
+      "generationPrompt": "Create one isolated, faithful game sprite of the SPECIFIC Alien: Covenant 2017 Xenomorph egg in the attached photograph of the actual production prop. Reproduce THIS exact Covenant design rather than a generic Alien egg: squat asymmetrical pear-shaped ochre yellow-brown translucent-looking leathery body, broad taut side panels with dark branching veins, four thick pink-brown ribbed lip seams meeting at the unopened top, the irregular intertwined rootlike tendrils spread around the base. Same three-quarter frontal view, full egg and every root visible, clean clear silhouette. Match the film-prop proportions, pigmentation, leathery texture and lip structure very closely. Neutral soft product lighting, photographic detailed realistic 2D game asset, no surrounding room, no person, no platform, no shadow, no labels or text. Precisely ONE egg, closed at top. Genuine transparent PNG: background alpha exactly zero including all four corners, object opaque with only antialiased edge partial transparency; NO white background, no grey fog, no painted checkerboard. At least 10 percent empty transparent margin around all protruding roots.",
+      "limitations": [
+        "Reconstruction guidée par les références ; détails des parties non visibles non certifiés."
+      ],
+      "alphaQA": {
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "bboxAbove32": [
+          57,
+          131,
+          1198,
+          1122
+        ],
+        "alphaZero": 1085987,
+        "alpha240plus": 456633
+      }
+    },
+    {
+      "id": "prop-cryopod",
+      "path": "assets/openai/sprites/alien-covenant-v011/prop-cryopod.png",
+      "gitBlobSha": "692c1c2323733dc06b4d060e202690600e594679",
+      "category": "prop",
+      "label": "Cryopod du Covenant — ouvert",
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "availableStates": [
+        "static"
+      ],
+      "width": 1926,
+      "height": 817,
+      "bytes": 1707461,
+      "sourcePages": [
+        "https://mattboug.squarespace.com/"
+      ],
+      "referenceFiles": [
+        "cryopod-matt.jpeg"
+      ],
+      "generationPrompt": "Create ONE isolated full-body equipment game sprite of a crew CRYOPOD from Alien: Covenant (2017), using this photo taken by the actual manufacturer Matt Boug as the exact design reference. Select the nearest complete pod, reconstruct the whole single pod only, including its elongated rectangular metal lower capsule, pale off-white rounded nose end, yellow-black edge hazard markings, blue hinge hardware, dark graphite ribbed long lid with TWO red recessed latch fittings, white angular head-end hood and cool pale illuminated head aperture. The lid is in the same raised/open hinged position as the reference, the chamber EMPTY. Use a nearly side-on three-quarter view, long horizontal pod axis, head-end to right, foot end to left, all four edges entirely visible. Match film construction, realistic proportions and panel layout, no generic glass sarcophagus or rounded spaceship pod. Do not include the adjacent pods, room, ceiling pipes, floor, or people. One object only, high-detail photorealistic cinema asset suitable for a 2D side-scrolling game. Genuine transparent PNG cutout: all background pixels alpha ZERO, opaque metal surfaces with antialiasing only along edges, no haze, no backdrop, no ground shadow, no text outside the physical prop. Leave a generous transparent margin around the pod and raised lid.",
+      "limitations": [
+        "Reconstruction guidée par les références ; détails des parties non visibles non certifiés.",
+        "Cryopod ouvert ; usage prévu dans la chambre de réveil uniquement."
+      ],
+      "alphaQA": {
+        "status": "pending-numeric-check"
+      }
+    }
+  ],
+  "blocked": [
+    {
+      "id": "weapon-f90",
+      "reason": "Image generation rejected by automatic output moderation; no PNG produced."
+    },
+    {
+      "id": "weapon-sl40",
+      "reason": "F90-derived visual variant not attempted after F90 moderation rejection."
+    }
+  ],
+  "integrationStatus": "Pending recovered-module verification; this checkpoint contains assets only."
+}
