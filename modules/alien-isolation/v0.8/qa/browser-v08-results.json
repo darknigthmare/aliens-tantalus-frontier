@@ -1,0 +1,2304 @@
+{
+  "version": "0.8.0",
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "passCount": 99,
+  "fail": 0,
+  "checks": [
+    {
+      "name": "Métadonnées et édition 0.8 sur le menu",
+      "ok": true
+    },
+    {
+      "name": "Sélecteur propose les 76 lieux",
+      "ok": true
+    },
+    {
+      "name": "Le plan inspecté correspond à la morgue",
+      "ok": true
+    },
+    {
+      "name": "Deux connexions physiques dans le plan de la morgue",
+      "ok": true
+    },
+    {
+      "name": "Condition de Morley affichée au chapitre préparé",
+      "ok": true
+    },
+    {
+      "name": "Repère stocké sans téléportation ni objectif offert",
+      "ok": true
+    },
+    {
+      "name": "Coordonnées inchangées par le plan",
+      "ok": true
+    },
+    {
+      "name": "Inspection du voisin suit le lien réciproque",
+      "ok": true
+    },
+    {
+      "name": "Effacer un repère conserve la campagne",
+      "ok": true
+    },
+    {
+      "name": "Plan local sans débordement horizontal 1440×900",
+      "ok": true
+    },
+    {
+      "name": "Plan et sélecteur accessibles 1440×900",
+      "ok": true
+    },
+    {
+      "name": "Plan local sans débordement horizontal 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Plan et sélecteur accessibles 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Plan local sans débordement horizontal 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Plan et sélecteur accessibles 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Plan local sans débordement horizontal 800×700",
+      "ok": true
+    },
+    {
+      "name": "Plan et sélecteur accessibles 800×700",
+      "ok": true
+    },
+    {
+      "name": "E franchit au point déclaré t_cryo__t_galley",
+      "ok": true
+    },
+    {
+      "name": "E franchit au point déclaré t_galley__t_bridge",
+      "ok": true
+    },
+    {
+      "name": "E franchit au point déclaré t_bridge__t_sas",
+      "ok": true
+    },
+    {
+      "name": "Source de captures: parcours actif des 76 lieux terminé",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu t_cryo",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu t_bridge",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu t_sas",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_airlock",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_terminal",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_shop",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_baggage",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_axel",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu s_transit",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu y_lobby",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu y_archive",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu y_workshop",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu y_duct",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu c_reception",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu c_control",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu c_server",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_reception",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_corridor",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_morley",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_pharmacy",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_coolant",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_warehouse",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_lift",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu w_bureau",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu w_cells",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu f_surface",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu f_derelict",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_control",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_lab",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_airlock",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu a_access",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu a_labo",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu a_samuels",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu a_core",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_entry",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_alpha",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_hive",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_beta",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu n_dock",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu n_bridge",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu n_engine",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu e_sas",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu e_antenna",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu e_clamps",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu t_return",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_staff",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_sterile",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_relay",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_gantry",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu a_service",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_observation",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_observation",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_plenum",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_hull",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu n_coolant",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu n_service",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_records",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_isolation",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu e_lockers",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu e_catwalk",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_triage",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_refuge",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_changing",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_refuge",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu sc_station",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu h_galleria_low",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu h_galleria_high",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu h_habitation",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu h_upper",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu m_morgue",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_fluid",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu d_orientation",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu r_maintenance",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu g_hazard",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu t_galley",
+      "ok": true
+    },
+    {
+      "name": "Trois cadrages du lieu f_pilot",
+      "ok": true
+    },
+    {
+      "name": "Aucune ressource réseau externe",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception navigateur",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "captures": [
+    {
+      "file": "captures/83_menu_spatial.png",
+      "title": "Une station, des chemins",
+      "provenance": "Écran de lancement du HTML exact 0.8, sans état injecté."
+    },
+    {
+      "file": "captures/84_plan_morgue.png",
+      "title": "Plan local · Maintenance et morgue",
+      "provenance": "SCÈNE PRÉPARÉE : progression fixée au chapitre 6 pour examiner les conditions. Manipulation réelle du sélecteur et du repère, sans déplacement ni validation d’objectif."
+    },
+    {
+      "file": "captures/85_O21_local.png",
+      "title": "Vérifier le panneau de correspondances",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/86_O22_local.png",
+      "title": "Consulter le registre des boutiques",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/87_O23_local.png",
+      "title": "Sécuriser le palier supérieur",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/88_O24_local.png",
+      "title": "Relever le registre des logements",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/89_O25_local.png",
+      "title": "Réarmer la signalisation du transit",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/90_O26_local.png",
+      "title": "Fermer le circuit de transport mortuaire",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/91_O27_local.png",
+      "title": "Purger le circuit de fluide",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/92_O28_local.png",
+      "title": "Mettre les cabines en veille",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/93_O29_local.png",
+      "title": "Contrôler le retour de maintenance",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/94_O30_local.png",
+      "title": "Consigner les échantillons à risque",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/95_O31_local.png",
+      "title": "Récupérer les effets du quart",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    },
+    {
+      "file": "captures/96_O32_local.png",
+      "title": "Examiner le relief de la chambre",
+      "provenance": "PARCOURS ACTIF : point atteint en Récit, graine 42, ressources finies, ennemis et dégâts actifs. Restauration exacte puis pause; le pilote lit l’état interne pour planifier."
+    }
+  ],
+  "roomCaptures": [
+    {
+      "room": "t_cryo",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/00_t_cryo_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_cryo",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/00_t_cryo_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_cryo",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/00_t_cryo_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_bridge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/01_t_bridge_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_bridge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/01_t_bridge_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_bridge",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/01_t_bridge_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_sas",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/02_t_sas_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_sas",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/02_t_sas_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_sas",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/02_t_sas_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_airlock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/03_s_airlock_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_airlock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/03_s_airlock_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_airlock",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/03_s_airlock_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_terminal",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/04_s_terminal_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_terminal",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/04_s_terminal_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_terminal",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/04_s_terminal_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_shop",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/05_s_shop_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_shop",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/05_s_shop_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_shop",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/05_s_shop_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_baggage",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/06_s_baggage_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_baggage",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/06_s_baggage_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_baggage",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/06_s_baggage_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_axel",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/07_s_axel_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_axel",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/07_s_axel_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_axel",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/07_s_axel_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_transit",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/08_s_transit_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_transit",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/08_s_transit_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "s_transit",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/08_s_transit_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_lobby",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/09_y_lobby_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_lobby",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/09_y_lobby_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_lobby",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/09_y_lobby_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_archive",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/10_y_archive_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_archive",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/10_y_archive_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_archive",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/10_y_archive_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_workshop",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/11_y_workshop_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_workshop",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/11_y_workshop_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_workshop",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/11_y_workshop_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_duct",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/12_y_duct_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_duct",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/12_y_duct_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "y_duct",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/12_y_duct_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_reception",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/13_c_reception_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_reception",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/13_c_reception_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_reception",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/13_c_reception_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_control",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/14_c_control_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_control",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/14_c_control_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_control",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/14_c_control_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_server",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/15_c_server_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_server",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/15_c_server_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "c_server",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/15_c_server_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_reception",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/16_m_reception_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_reception",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/16_m_reception_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_reception",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/16_m_reception_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_corridor",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/17_m_corridor_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_corridor",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/17_m_corridor_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_corridor",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/17_m_corridor_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morley",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/18_m_morley_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morley",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/18_m_morley_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morley",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/18_m_morley_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_pharmacy",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/19_m_pharmacy_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_pharmacy",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/19_m_pharmacy_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_pharmacy",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/19_m_pharmacy_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_coolant",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/20_m_coolant_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_coolant",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/20_m_coolant_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_coolant",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/20_m_coolant_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_warehouse",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/21_d_warehouse_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_warehouse",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/21_d_warehouse_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_warehouse",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/21_d_warehouse_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_lift",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/22_d_lift_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_lift",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/22_d_lift_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_lift",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/22_d_lift_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_bureau",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/23_w_bureau_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_bureau",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/23_w_bureau_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_bureau",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/23_w_bureau_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_cells",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/24_w_cells_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_cells",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/24_w_cells_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "w_cells",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/24_w_cells_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_surface",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/25_f_surface_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_surface",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/25_f_surface_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_surface",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/25_f_surface_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_derelict",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/26_f_derelict_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_derelict",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/26_f_derelict_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_derelict",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/26_f_derelict_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_control",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/27_g_control_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_control",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/27_g_control_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_control",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/27_g_control_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_lab",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/28_g_lab_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_lab",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/28_g_lab_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_lab",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/28_g_lab_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_airlock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/29_g_airlock_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_airlock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/29_g_airlock_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_airlock",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/29_g_airlock_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_access",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/30_a_access_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_access",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/30_a_access_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_access",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/30_a_access_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_labo",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/31_a_labo_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_labo",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/31_a_labo_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_labo",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/31_a_labo_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_samuels",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/32_a_samuels_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_samuels",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/32_a_samuels_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_samuels",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/32_a_samuels_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_core",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/33_a_core_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_core",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/33_a_core_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_core",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/33_a_core_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_entry",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/34_r_entry_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_entry",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/34_r_entry_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_entry",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/34_r_entry_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_alpha",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/35_r_alpha_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_alpha",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/35_r_alpha_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_alpha",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/35_r_alpha_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_hive",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/36_r_hive_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_hive",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/36_r_hive_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_hive",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/36_r_hive_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_beta",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/37_r_beta_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_beta",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/37_r_beta_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_beta",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/37_r_beta_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_dock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/38_n_dock_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_dock",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/38_n_dock_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_dock",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/38_n_dock_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_bridge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/39_n_bridge_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_bridge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/39_n_bridge_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_bridge",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/39_n_bridge_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_engine",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/40_n_engine_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_engine",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/40_n_engine_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_engine",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/40_n_engine_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_sas",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/41_e_sas_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_sas",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/41_e_sas_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_sas",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/41_e_sas_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_antenna",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/42_e_antenna_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_antenna",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/42_e_antenna_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_antenna",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/42_e_antenna_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_clamps",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/43_e_clamps_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_clamps",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/43_e_clamps_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_clamps",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/43_e_clamps_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_return",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/44_t_return_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_return",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/44_t_return_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_return",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/44_t_return_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_staff",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/45_m_staff_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_staff",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/45_m_staff_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_staff",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/45_m_staff_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_sterile",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/46_m_sterile_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_sterile",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/46_m_sterile_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_sterile",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/46_m_sterile_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_relay",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/47_d_relay_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_relay",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/47_d_relay_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_relay",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/47_d_relay_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_gantry",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/48_d_gantry_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_gantry",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/48_d_gantry_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_gantry",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/48_d_gantry_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_service",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/49_a_service_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_service",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/49_a_service_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "a_service",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/49_a_service_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_observation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/50_r_observation_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_observation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/50_r_observation_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_observation",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/50_r_observation_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_observation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/51_g_observation_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_observation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/51_g_observation_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_observation",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/51_g_observation_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_plenum",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/52_g_plenum_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_plenum",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/52_g_plenum_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_plenum",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/52_g_plenum_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hull",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/53_g_hull_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hull",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/53_g_hull_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hull",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/53_g_hull_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_coolant",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/54_n_coolant_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_coolant",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/54_n_coolant_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_coolant",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/54_n_coolant_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_service",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/55_n_service_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_service",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/55_n_service_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "n_service",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/55_n_service_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_records",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/56_m_records_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_records",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/56_m_records_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_records",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/56_m_records_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_isolation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/57_m_isolation_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_isolation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/57_m_isolation_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_isolation",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/57_m_isolation_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_lockers",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/58_e_lockers_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_lockers",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/58_e_lockers_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_lockers",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/58_e_lockers_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_catwalk",
+      "view": "SIDE",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/59_e_catwalk_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_catwalk",
+      "view": "SIDE",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/59_e_catwalk_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "e_catwalk",
+      "view": "SIDE",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/59_e_catwalk_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_triage",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/60_m_triage_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_triage",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/60_m_triage_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_triage",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/60_m_triage_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_refuge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/61_m_refuge_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_refuge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/61_m_refuge_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_refuge",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/61_m_refuge_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_changing",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/62_d_changing_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_changing",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/62_d_changing_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_changing",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/62_d_changing_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_refuge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/63_d_refuge_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_refuge",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/63_d_refuge_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_refuge",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/63_d_refuge_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "sc_station",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/64_sc_station_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "sc_station",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/64_sc_station_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "sc_station",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/64_sc_station_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_low",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/65_h_galleria_low_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_low",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/65_h_galleria_low_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_low",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/65_h_galleria_low_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_high",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/66_h_galleria_high_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_high",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/66_h_galleria_high_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_galleria_high",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/66_h_galleria_high_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_habitation",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/67_h_habitation_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_habitation",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/67_h_habitation_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_habitation",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/67_h_habitation_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_upper",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/68_h_upper_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_upper",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/68_h_upper_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "h_upper",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/68_h_upper_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morgue",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/69_m_morgue_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morgue",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/69_m_morgue_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "m_morgue",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/69_m_morgue_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_fluid",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/70_d_fluid_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_fluid",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/70_d_fluid_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_fluid",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/70_d_fluid_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_orientation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/71_d_orientation_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_orientation",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/71_d_orientation_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "d_orientation",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/71_d_orientation_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_maintenance",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/72_r_maintenance_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_maintenance",
+      "view": "HYBRID",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/72_r_maintenance_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "r_maintenance",
+      "view": "HYBRID",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/72_r_maintenance_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hazard",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/73_g_hazard_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hazard",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/73_g_hazard_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "g_hazard",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/73_g_hazard_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_galley",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/74_t_galley_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_galley",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/74_t_galley_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "t_galley",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/74_t_galley_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_pilot",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "L",
+      "file": "architecture/75_f_pilot_L.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_pilot",
+      "view": "DEPTH",
+      "classic": false,
+      "side": "R",
+      "file": "architecture/75_f_pilot_R.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    },
+    {
+      "room": "f_pilot",
+      "view": "DEPTH",
+      "classic": true,
+      "side": "C",
+      "file": "architecture/75_f_pilot_CLASSIC.jpg",
+      "provenance": "SCÈNE PRÉPARÉE : placement pour contrôle de rendu, menaces neutralisées, aucune revendication de progression."
+    }
+  ],
+  "loading": "Page.set_content; native navigations blocked by administrator. No policy changes."
+}

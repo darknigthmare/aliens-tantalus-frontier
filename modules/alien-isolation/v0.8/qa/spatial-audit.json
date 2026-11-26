@@ -1,0 +1,773 @@
+{
+  "version": "0.8.0",
+  "rooms": 76,
+  "links": 112,
+  "anchors": 224,
+  "localPaths": 2197,
+  "samples": 462564,
+  "failures": [],
+  "pass": true,
+  "rows": [
+    {
+      "id": "t_cryo",
+      "name": "Torrens · Cryostase",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "t_bridge",
+      "name": "Torrens · Passerelle",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "t_sas",
+      "name": "Torrens · Sas de transfert",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_airlock",
+      "name": "Sevastopol · Arrivée endommagée",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_terminal",
+      "name": "Terminal · Hall des départs",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_shop",
+      "name": "Terminal · Boutique fermée",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 1,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_baggage",
+      "name": "Terminal · Tri des bagages",
+      "deck": -1,
+      "view": "HYBRID",
+      "doors": 2,
+      "targets": 6,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_axel",
+      "name": "Maintenance · Passage d’Axel",
+      "deck": -1,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "s_transit",
+      "name": "Transit · Échangeur central",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 8,
+      "targets": 15,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "y_lobby",
+      "name": "Tour Systech · Accueil",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 6,
+      "targets": 12,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "y_archive",
+      "name": "Systech · Enregistreur de vol",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "y_workshop",
+      "name": "Systech · Atelier des accès",
+      "deck": 1,
+      "view": "HYBRID",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "y_duct",
+      "name": "Systech · Conduit de retour",
+      "deck": 1,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 2,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "c_reception",
+      "name": "Seegson · Accueil communications",
+      "deck": 2,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "c_control",
+      "name": "Seegson · Salle des transmissions",
+      "deck": 2,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "c_server",
+      "name": "Seegson · Relais de service",
+      "deck": 2,
+      "view": "SIDE",
+      "doors": 3,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_reception",
+      "name": "San Cristobal · Admission",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 5,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_corridor",
+      "name": "San Cristobal · Couloir des soins",
+      "deck": 1,
+      "view": "SIDE",
+      "doors": 5,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_morley",
+      "name": "San Cristobal · Bureau de Morley",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_pharmacy",
+      "name": "San Cristobal · Pharmacie",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 5,
+      "targets": 14,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_coolant",
+      "name": "San Cristobal · Refroidissement",
+      "deck": 0,
+      "view": "HYBRID",
+      "doors": 3,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_warehouse",
+      "name": "Seegson · Entrepôt synthétique",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 7,
+      "targets": 14,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_lift",
+      "name": "Logistique · Monte-charge",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 5,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "w_bureau",
+      "name": "Marshals · Poste de sécurité",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 15,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "w_cells",
+      "name": "Marshals · Cellules",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "f_surface",
+      "name": "Souvenir · Sol de LV-426",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 3,
+      "targets": 5,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "f_derelict",
+      "name": "Souvenir · Chambre des œufs",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 4,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_control",
+      "name": "Gemini · Régulation atmosphérique",
+      "deck": 2,
+      "view": "HYBRID",
+      "doors": 4,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_lab",
+      "name": "KG-348 · Module de confinement",
+      "deck": 2,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_airlock",
+      "name": "KG-348 · Issue extérieure",
+      "deck": 2,
+      "view": "SIDE",
+      "doors": 3,
+      "targets": 5,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "a_access",
+      "name": "APOLLO · Contrôle humain",
+      "deck": -1,
+      "view": "SIDE",
+      "doors": 4,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "a_labo",
+      "name": "Seegson · Réparation des synthétiques",
+      "deck": -1,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "a_samuels",
+      "name": "Seegson · Interface de Samuels",
+      "deck": -1,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 14,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "a_core",
+      "name": "APOLLO · Noyau de consultation",
+      "deck": -2,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_entry",
+      "name": "Réacteur · Plateforme supérieure",
+      "deck": -3,
+      "view": "DEPTH",
+      "doors": 5,
+      "targets": 13,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_alpha",
+      "name": "Réacteur · Branche alpha",
+      "deck": -3,
+      "view": "HYBRID",
+      "doors": 3,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_hive",
+      "name": "Réacteur · Sous le nid",
+      "deck": -4,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_beta",
+      "name": "Réacteur · Branche bêta",
+      "deck": -3,
+      "view": "HYBRID",
+      "doors": 3,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "n_dock",
+      "name": "Anesidora · Sas d’embarquement",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 4,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "n_bridge",
+      "name": "Anesidora · Passerelle des archives",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "n_engine",
+      "name": "Anesidora · Salle des machines",
+      "deck": -1,
+      "view": "HYBRID",
+      "doors": 3,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "e_sas",
+      "name": "Sevastopol · Préparation EVA",
+      "deck": 3,
+      "view": "SIDE",
+      "doors": 3,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "e_antenna",
+      "name": "Sevastopol · Antenne de communication",
+      "deck": 3,
+      "view": "SIDE",
+      "doors": 4,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "e_clamps",
+      "name": "Sevastopol · Verrous d’amarrage",
+      "deck": 3,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "t_return",
+      "name": "Torrens · Le dernier sas",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 1,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_staff",
+      "name": "San Cristobal · Salle de garde",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 13,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_sterile",
+      "name": "San Cristobal · Stérilisation",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_relay",
+      "name": "Logistique · Local des relais",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 13,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_gantry",
+      "name": "Logistique · Passerelle de contrôle",
+      "deck": 1,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "a_service",
+      "name": "Seegson · Banc de diagnostic",
+      "deck": -1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_observation",
+      "name": "Réacteur · Poste de surveillance",
+      "deck": -3,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_observation",
+      "name": "Gemini · Galerie d’observation",
+      "deck": 2,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_plenum",
+      "name": "Gemini · Plénum de maintenance",
+      "deck": 2,
+      "view": "SIDE",
+      "doors": 3,
+      "targets": 8,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_hull",
+      "name": "KG-348 · Traversée de coque",
+      "deck": 2,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 4,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "n_coolant",
+      "name": "Anesidora · Boucle de refroidissement",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "n_service",
+      "name": "Anesidora · Coursive de retour",
+      "deck": 0,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 7,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_records",
+      "name": "San Cristobal · Archives du personnel",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_isolation",
+      "name": "San Cristobal · Chambre d’isolement",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "e_lockers",
+      "name": "Sevastopol · Atelier des combinaisons",
+      "deck": 3,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "e_catwalk",
+      "name": "Sevastopol · Pont de maintenance",
+      "deck": 3,
+      "view": "SIDE",
+      "doors": 2,
+      "targets": 6,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_triage",
+      "name": "San Cristobal · Préparation des soins",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_refuge",
+      "name": "San Cristobal · Salle de repli",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 13,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_changing",
+      "name": "Logistique · Vestiaire des équipes",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_refuge",
+      "name": "Logistique · Poste de relève",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 13,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "sc_station",
+      "name": "SciMed · Station Towerlink",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "h_galleria_low",
+      "name": "Solomons · Galleria basse",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 4,
+      "targets": 11,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "h_galleria_high",
+      "name": "Solomons · Galleria haute",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "h_habitation",
+      "name": "Solomons · Quartiers d’habitation",
+      "deck": 1,
+      "view": "HYBRID",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "h_upper",
+      "name": "Solomons · Transit supérieur",
+      "deck": 2,
+      "view": "DEPTH",
+      "doors": 3,
+      "targets": 10,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "m_morgue",
+      "name": "San Cristobal · Maintenance et morgue",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_fluid",
+      "name": "Seegson · Production de fluide synthétique",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "d_orientation",
+      "name": "Seegson · Orientation des androïdes",
+      "deck": -1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "r_maintenance",
+      "name": "Ingénierie · Pont de maintenance",
+      "deck": -3,
+      "view": "HYBRID",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "g_hazard",
+      "name": "KG-348 · Laboratoires à risques",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "t_galley",
+      "name": "Torrens · Carré de l’équipage",
+      "deck": 1,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 9,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "f_pilot",
+      "name": "Souvenir · Chambre du pilote",
+      "deck": 0,
+      "view": "DEPTH",
+      "doors": 2,
+      "targets": 5,
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "scope": "Structural graph ignores story locks. Local routes use real player radius and sampled path segments. This is not a full active-enemy campaign."
+}

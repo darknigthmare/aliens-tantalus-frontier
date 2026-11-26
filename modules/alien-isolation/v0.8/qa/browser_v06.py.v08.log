@@ -1,0 +1,63 @@
+PASS Deux projets installés dans le parcours enregistré
+PASS 155 images SVG décodées dans le navigateur
+PASS Chargement de point de contrôle
+PASS Projet medical conservé à la reprise
+PASS Les colis installés ne restent pas dans le sac
+CAPTURE 60_projet_medical.png
+PASS J détaille les deux postes sans action distante
+PASS Le projet installé a un état DOM distinct
+CAPTURE 61_journal_medical.png
+PASS Chargement de point de contrôle
+PASS Projet technical conservé à la reprise
+PASS Les colis installés ne restent pas dans le sac
+CAPTURE 62_projet_technical.png
+PASS J détaille les deux postes sans action distante
+PASS Le projet installé a un état DOM distinct
+CAPTURE 63_journal_technical.png
+PASS Chargement de point de contrôle
+PASS Colis med_protocol ouvert et enregistré
+CAPTURE 64_colis_med_protocol.png
+PASS Chargement de point de contrôle
+PASS Colis eva_filter ouvert et enregistré
+CAPTURE 65_colis_eva_filter.png
+PASS Refuge non recruté: vrai E refusé, pas de dépense
+PASS Relâcher E annule le relais sans payer
+PASS Relais: E consomme exactement 2 pièces et 1 pile
+PASS Service de Nora: E soigne 40 PV, coûte un produit
+CAPTURE 66_soins_nora.png
+PASS Ramassage par E : med_protocol
+PASS Ramassage par E : med_injector
+PASS Projet: maintien interrompu conserve les colis
+PASS Projet: vrai maintien consomme deux colis
+CAPTURE 67_installation.png
+PASS Santé complète: charge et produit conservés
+PASS Écartement réel d’au moins 43 unités
+PASS Écartement ne déplace pas Amanda
+PASS N au clavier donne l’ordre prudent
+CAPTURE 68_nora_prudente.png
+PASS Journal affiche la posture prudente
+CAPTURE 69_liaisons_prudentes.png
+PASS Liaisons sans débordement horizontal à 1280×720
+PASS Portraits chargés à 1280×720
+PASS Liaisons sans débordement horizontal à 1024×768
+PASS Portraits chargés à 1024×768
+PASS Liaisons sans débordement horizontal à 800×700
+PASS Portraits chargés à 800×700
+CAPTURE 70_journal_800.png
+PASS Chargement de point de contrôle
+PASS Blessure améliorée ouvre 35 secondes
+PASS Délai amélioré visible dans J
+CAPTURE 71_protocole_secours.png
+PASS Import 0.5 depuis le sélecteur: progression conservée
+PASS Import 0.5: aucun projet offert
+PASS Chargement de point de contrôle
+PASS Export JSON: régulateur et colis installés inclus
+PASS Chargement de point de contrôle
+PASS Cartes des projets visibles après défilement
+CAPTURE 73_services_et_colis.png
+PASS Chargement de point de contrôle
+CAPTURE 72_epilogue.png
+PASS Épilogue comprend les deux projets
+PASS Aucune ressource HTTP externe
+PASS Aucune exception JavaScript
+{"version": "0.8.0", "pass": 48, "fail": 0, "errors": []}

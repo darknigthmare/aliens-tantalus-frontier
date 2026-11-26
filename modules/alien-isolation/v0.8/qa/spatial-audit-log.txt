@@ -1,0 +1,11 @@
+{
+  "version": "0.8.0",
+  "rooms": 76,
+  "links": 112,
+  "anchors": 224,
+  "localPaths": 2197,
+  "samples": 462564,
+  "failures": [],
+  "pass": true,
+  "scope": "Structural graph ignores story locks. Local routes use real player radius and sampled path segments. This is not a full active-enemy campaign."
+}

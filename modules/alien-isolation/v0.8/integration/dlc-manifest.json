@@ -1,0 +1,9 @@
+{
+  "id": "tantalus.alien-isolation",
+  "version": "0.8.0",
+  "title": "ALIEN: ISOLATION",
+  "entry": "index.html",
+  "standalone": true,
+  "nativeIntegration": false,
+  "saveKey": "tantalus.dlc.alien-isolation.v1"
+}

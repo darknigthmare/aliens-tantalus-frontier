@@ -1,0 +1,17 @@
+{
+  "version": "0.8.0",
+  "pass": 386,
+  "fail": 0,
+  "sources": [
+    "browser-results.json",
+    "browser-v04-results.json",
+    "browser-v05-results.json",
+    "browser-v06-results.json",
+    "browser-v07-results.json",
+    "browser-v08-results.json"
+  ],
+  "errors": [],
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "captureCount": 96,
+  "architecturalFrames": 228
+}

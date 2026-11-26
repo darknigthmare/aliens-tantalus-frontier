@@ -1,0 +1,43 @@
+{
+  "version": "0.8.0",
+  "sourceArchive": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_7.zip",
+  "sourceSha256": "d09c7001d350a06f5d4699669846b365db1e58e33522117e7cca030b10d65c7b",
+  "newHtmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "checks": [
+    {
+      "name": "Archive source réellement en 0.7.0",
+      "ok": true
+    },
+    {
+      "name": "Installation du véritable HTML 0.7",
+      "ok": true
+    },
+    {
+      "name": "Version et transition 0.7 vers 0.8",
+      "ok": true
+    },
+    {
+      "name": "HTML 0.8 installé sans transformation",
+      "ok": true
+    },
+    {
+      "name": "Ancien HTML 0.7 conservé octet par octet",
+      "ok": true
+    },
+    {
+      "name": "Retour arrière restaure la 0.7 exacte",
+      "ok": true
+    },
+    {
+      "name": "Désinstallation du lanceur seul",
+      "ok": true
+    },
+    {
+      "name": "Fichiers hôtes inchangés",
+      "ok": true
+    }
+  ],
+  "pass": 8,
+  "fail": 0,
+  "scope": "Original 0.7 launcher bytes on a temporary host fixture, not a production Tantalus merge."
+}

@@ -1,0 +1,44 @@
+{
+  "version": "0.8.0",
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "suites": [
+    {
+      "file": "browser-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 107,
+      "fail": 0
+    },
+    {
+      "file": "browser-v04-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 33,
+      "fail": 0
+    },
+    {
+      "file": "browser-v05-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 36,
+      "fail": 0
+    },
+    {
+      "file": "browser-v06-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 48,
+      "fail": 0
+    },
+    {
+      "file": "browser-v07-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 63,
+      "fail": 0
+    },
+    {
+      "file": "browser-v08-results.json",
+      "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+      "passCount": 99,
+      "fail": 0
+    }
+  ],
+  "errors": [],
+  "scope": "Same delivered standalone bytes in all six browser suites. Native navigation remains unverified."
+}

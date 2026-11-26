@@ -1,0 +1,43 @@
+PASS État de contrôle 0.6 restauré
+PASS Tâche O13 validée dans le parcours
+CAPTURE 39_O13.png
+PASS État de contrôle 0.6 restauré
+PASS Tâche O14 validée dans le parcours
+CAPTURE 40_O14.png
+PASS État de contrôle 0.6 restauré
+PASS Tâche O15 validée dans le parcours
+CAPTURE 41_O15.png
+PASS État de contrôle 0.6 restauré
+PASS Tâche O16 validée dans le parcours
+CAPTURE 42_O16.png
+PASS État de contrôle 0.6 restauré
+PASS O₂ faible visible dans le HUD
+PASS O₂ continue de baisser
+CAPTURE 43_oxygen_low.png
+PASS Bouteille raccordée par E maintenu
+CAPTURE 44_bottle_empty.png
+PASS État de contrôle 0.6 restauré
+PASS O₂ et bouteille vide conservés par l’import
+PASS État de contrôle 0.6 restauré
+PASS Sas enclenché au clavier, Amanda reste dans l’atelier
+PASS HUD sas affiché
+CAPTURE 45_airlock_cycle.png
+PASS Pause fige le cycle affiché
+PASS Sas prêt après son délai
+PASS Seconde action E traverse vers la coque
+PASS État du stockage visible dans Pause
+PASS Refus du stockage décrit explicitement
+CAPTURE 46_storage_status.png
+PASS Objet lancé au clavier est encore en vol
+CAPTURE 47_projectile_flight.png
+PASS État de contrôle 0.6 restauré
+PASS Objet en vol conservé au chargement
+PASS Objet activé seulement après la fin du vol et du délai
+PASS Import v0.3 par fichier : progression et stocks conservés
+PASS Import v0.3 initialise l’oxygène
+PASS État de contrôle 0.6 restauré
+PASS Oxygène cadré en 1280×720
+PASS État de contrôle 0.6 restauré
+PASS Oxygène cadré en 1024×768
+PASS Aucune exception JavaScript 0.4
+{"version": "0.8.0", "pass": 33, "fail": 0, "errors": [], "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9", "loading": "Page.set_content; native file:// and HTTP navigation blocked by policy; no browser policy override."}

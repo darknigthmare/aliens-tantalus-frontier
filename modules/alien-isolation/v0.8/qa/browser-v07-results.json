@@ -1,0 +1,345 @@
+{
+  "version": "0.8.0",
+  "pass": 63,
+  "fail": 0,
+  "checks": [
+    {
+      "name": "Version courante 0.8.0",
+      "ok": true
+    },
+    {
+      "name": "155 SVG décodés avec les quatre icônes distinctes",
+      "ok": true
+    },
+    {
+      "name": "TAB ouvre quatre choix rapides",
+      "ok": true
+    },
+    {
+      "name": "La roue ne suspend pas le temps",
+      "ok": true
+    },
+    {
+      "name": "Flèche basse prévisualise IEM",
+      "ok": true
+    },
+    {
+      "name": "Aperçu sans dépense ni changement validé",
+      "ok": true
+    },
+    {
+      "name": "Touches de choix ne fuient pas vers le monde",
+      "ok": true
+    },
+    {
+      "name": "Entrée valide IEM et referme",
+      "ok": true
+    },
+    {
+      "name": "Échap annule l’aperçu sans pause",
+      "ok": true
+    },
+    {
+      "name": "La souris valide une trousse sans la consommer",
+      "ok": true
+    },
+    {
+      "name": "Santé pleine: clic droit ne dépense aucune trousse",
+      "ok": true
+    },
+    {
+      "name": "Clic droit utilise la sélection et soigne",
+      "ok": true
+    },
+    {
+      "name": "V prépare le type sélectionné",
+      "ok": true
+    },
+    {
+      "name": "IEM rapide consomme et démarre un vrai projectile",
+      "ok": true
+    },
+    {
+      "name": "Le projectile termine son vol",
+      "ok": true
+    },
+    {
+      "name": "Équipement: quatre cartes illustrées et coûts visibles",
+      "ok": true
+    },
+    {
+      "name": "Équipement: sélection et fabrication distinctes",
+      "ok": true
+    },
+    {
+      "name": "Sélection dans équipement ne fabrique rien",
+      "ok": true
+    },
+    {
+      "name": "Fabrication retire exactement les composants",
+      "ok": true
+    },
+    {
+      "name": "Perte de focus pendant équipement ouvre la pause",
+      "ok": true
+    },
+    {
+      "name": "La simulation cesse effectivement sur perte de focus",
+      "ok": true
+    },
+    {
+      "name": "Préférence indépendante des sons perçus",
+      "ok": true
+    },
+    {
+      "name": "Désactiver les sous-titres modifie la préférence",
+      "ok": true
+    },
+    {
+      "name": "R: charge consommée sans cible fictive",
+      "ok": true
+    },
+    {
+      "name": "R relâché: charge conservée",
+      "ok": true
+    },
+    {
+      "name": "Un acteur en mouvement produit une mesure",
+      "ok": true
+    },
+    {
+      "name": "Lecture sans identité, espèce ni coordonnées absolues",
+      "ok": true
+    },
+    {
+      "name": "Bips physiques actifs même audio de restitution coupé",
+      "ok": true
+    },
+    {
+      "name": "Panneau de charge au-dessus de l’écran du détecteur",
+      "ok": true
+    },
+    {
+      "name": "K coupe le haut-parleur, sans couper les scans",
+      "ok": true
+    },
+    {
+      "name": "Un acteur devenu immobile disparaît du détecteur",
+      "ok": true
+    },
+    {
+      "name": "Y interrompu: aucune pile dépensée",
+      "ok": true
+    },
+    {
+      "name": "Y complet: une pile pour 70 points de charge",
+      "ok": true
+    },
+    {
+      "name": "Le maintien prolongé ne dépense pas une seconde pile",
+      "ok": true
+    },
+    {
+      "name": "Pile vide: aucune mort ni objectif offert",
+      "ok": true
+    },
+    {
+      "name": "Banc par E: recharge à 100 sans coût de pile",
+      "ok": true
+    },
+    {
+      "name": "Banc refusé lorsque son circuit est éteint",
+      "ok": true
+    },
+    {
+      "name": "Son proche: sous-titre directionnel sans nom de créature",
+      "ok": true
+    },
+    {
+      "name": "Sous-titres expirent au fil de la simulation",
+      "ok": true
+    },
+    {
+      "name": "Interférences locales a_core",
+      "ok": true
+    },
+    {
+      "name": "Interférences locales r_alpha",
+      "ok": true
+    },
+    {
+      "name": "Interférences locales r_beta",
+      "ok": true
+    },
+    {
+      "name": "Export contient la charge, le mode et le choix enregistrés",
+      "ok": true
+    },
+    {
+      "name": "Import du fichier exporté restaure les trois réglages",
+      "ok": true
+    },
+    {
+      "name": "Import réel 0.6 garde la progression et ses stocks",
+      "ok": true
+    },
+    {
+      "name": "Import 0.6 initialise le détecteur sans donner de pile de sac",
+      "ok": true
+    },
+    {
+      "name": "Roue intégralement cadrée 1440×900",
+      "ok": true
+    },
+    {
+      "name": "Quatre choix accessibles 1440×900",
+      "ok": true
+    },
+    {
+      "name": "Équipement sans débordement horizontal 1440×900",
+      "ok": true
+    },
+    {
+      "name": "Roue intégralement cadrée 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Quatre choix accessibles 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Équipement sans débordement horizontal 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Roue intégralement cadrée 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Quatre choix accessibles 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Équipement sans débordement horizontal 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Roue intégralement cadrée 800×700",
+      "ok": true
+    },
+    {
+      "name": "Quatre choix accessibles 800×700",
+      "ok": true
+    },
+    {
+      "name": "Équipement sans débordement horizontal 800×700",
+      "ok": true
+    },
+    {
+      "name": "Décès: roue fermée et écran de reprise visible",
+      "ok": true
+    },
+    {
+      "name": "Décès: équipement ne masque pas la reprise",
+      "ok": true
+    },
+    {
+      "name": "Piratage: la roue ne s’ouvre pas par-dessus",
+      "ok": true
+    },
+    {
+      "name": "Aucune requête externe",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception JavaScript",
+      "ok": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "captures/74_roue.png",
+      "title": "Accès rapide · Préparer un lancer",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. TAB ouvre la roue ; les flèches prévisualisent sans consommer. Le temps continue pendant cet écran.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/75_equipement.png",
+      "title": "Équipement · Choisir ou fabriquer",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. Sélection et utilisation effectuées au clavier et à la souris ; aucun collage ne remplace l’interface.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/76_detecteur.png",
+      "title": "Détecteur · Une position mesurée, pas une certitude",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. Un garde a marché avec sa vraie IA pendant le maintien de R. La mesure a été figée en pause pour l’inspection.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/77_remplacement.png",
+      "title": "Détecteur · Remplacer sans bouger",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. Maintien réel de Y interrompu par une pause de contrôle avant la fin de l’opération.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/78_pile_vide.png",
+      "title": "Détecteur · Continuer sans mesure",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. La charge s’est épuisée dans la vraie simulation ; santé et objectif ne sont pas modifiés.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/79_banc_medical.png",
+      "title": "Salle de garde · Recharger au poste",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. E maintenu pendant 2,4 secondes a rechargé le détecteur à partir de cinq points. Pause après réussite.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/80_sons_percus.png",
+      "title": "Sous-titres · Écouter sans coordonnées",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. Source sonore de contrôle soumise au calcul réel d’atténuation et de portée ; indication qualitative seulement.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/81_interferences.png",
+      "title": "APOLLO · Portée instrumentale réduite",
+      "provenance": "SCÈNE PRÉPARÉE : placement, équipement et ressources de contrôle. Les commandes clavier/souris et les mécanismes du moteur sont exécutés ; ce n’est pas un parcours naturel. Maintien de R dans APOLLO. Portée réduite à 450 unités sans présence artificielle.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/82_parcours_signal.png",
+      "title": "Campagne · Une pile réellement remplacée",
+      "provenance": "PARCOURS ACTIF : état atteint dans la campagne Récit graine 42, détecteur levé et haut-parleur actif, ressources finies et dégâts actifs. Restauration puis pause. Le pilote connaît l’état interne ; aucune jauge ni ressource n’a été corrigée après restauration.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    }
+  ],
+  "errors": [],
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "loading": "Page.set_content, politiques inchangées. Fixtures explicitement préparées, export/import réel, pas de stockage persistant certifié."
+}

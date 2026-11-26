@@ -1,0 +1,64 @@
+PASS Version courante 0.8.0
+PASS 155 SVG décodés avec les quatre icônes distinctes
+PASS TAB ouvre quatre choix rapides
+PASS La roue ne suspend pas le temps
+PASS Flèche basse prévisualise IEM
+PASS Aperçu sans dépense ni changement validé
+PASS Touches de choix ne fuient pas vers le monde
+PASS Entrée valide IEM et referme
+PASS Échap annule l’aperçu sans pause
+PASS La souris valide une trousse sans la consommer
+PASS Santé pleine: clic droit ne dépense aucune trousse
+PASS Clic droit utilise la sélection et soigne
+PASS V prépare le type sélectionné
+PASS IEM rapide consomme et démarre un vrai projectile
+PASS Le projectile termine son vol
+PASS Équipement: quatre cartes illustrées et coûts visibles
+PASS Équipement: sélection et fabrication distinctes
+PASS Sélection dans équipement ne fabrique rien
+PASS Fabrication retire exactement les composants
+PASS Perte de focus pendant équipement ouvre la pause
+PASS La simulation cesse effectivement sur perte de focus
+PASS Préférence indépendante des sons perçus
+PASS Désactiver les sous-titres modifie la préférence
+PASS R: charge consommée sans cible fictive
+PASS R relâché: charge conservée
+PASS Un acteur en mouvement produit une mesure
+PASS Lecture sans identité, espèce ni coordonnées absolues
+PASS Bips physiques actifs même audio de restitution coupé
+PASS Panneau de charge au-dessus de l’écran du détecteur
+PASS K coupe le haut-parleur, sans couper les scans
+PASS Un acteur devenu immobile disparaît du détecteur
+PASS Y interrompu: aucune pile dépensée
+PASS Y complet: une pile pour 70 points de charge
+PASS Le maintien prolongé ne dépense pas une seconde pile
+PASS Pile vide: aucune mort ni objectif offert
+PASS Banc par E: recharge à 100 sans coût de pile
+PASS Banc refusé lorsque son circuit est éteint
+PASS Son proche: sous-titre directionnel sans nom de créature
+PASS Sous-titres expirent au fil de la simulation
+PASS Interférences locales a_core
+PASS Interférences locales r_alpha
+PASS Interférences locales r_beta
+PASS Export contient la charge, le mode et le choix enregistrés
+PASS Import du fichier exporté restaure les trois réglages
+PASS Import réel 0.6 garde la progression et ses stocks
+PASS Import 0.6 initialise le détecteur sans donner de pile de sac
+PASS Roue intégralement cadrée 1440×900
+PASS Quatre choix accessibles 1440×900
+PASS Équipement sans débordement horizontal 1440×900
+PASS Roue intégralement cadrée 1280×720
+PASS Quatre choix accessibles 1280×720
+PASS Équipement sans débordement horizontal 1280×720
+PASS Roue intégralement cadrée 1024×768
+PASS Quatre choix accessibles 1024×768
+PASS Équipement sans débordement horizontal 1024×768
+PASS Roue intégralement cadrée 800×700
+PASS Quatre choix accessibles 800×700
+PASS Équipement sans débordement horizontal 800×700
+PASS Décès: roue fermée et écran de reprise visible
+PASS Décès: équipement ne masque pas la reprise
+PASS Piratage: la roue ne s’ouvre pas par-dessus
+PASS Aucune requête externe
+PASS Aucune exception JavaScript
+{"version": "0.8.0", "pass": 63, "fail": 0, "errors": []}

@@ -1,0 +1,26 @@
+[
+  {
+    "script": "browser.py",
+    "exitCode": 0
+  },
+  {
+    "script": "browser_v04.py",
+    "exitCode": 0
+  },
+  {
+    "script": "browser_v05.py",
+    "exitCode": 0
+  },
+  {
+    "script": "browser_v06.py",
+    "exitCode": 0
+  },
+  {
+    "script": "browser_v07.py",
+    "exitCode": 0
+  },
+  {
+    "script": "browser_v08.py",
+    "exitCode": 0
+  }
+]

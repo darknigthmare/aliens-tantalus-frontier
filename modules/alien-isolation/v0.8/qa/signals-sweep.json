@@ -1,0 +1,264 @@
+{
+  "version": "0.8.0",
+  "method": "Pilote interne, Récit, détecteur maintenu levé après acquisition, remplacements Y finis avant les objectifs si charge <25. IA et dégâts actifs. Aucun objectif ni ressource injecté.",
+  "runs": [
+    {
+      "scanner": "audible",
+      "seed": 20141007,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 100,
+      "time": 1290.8999999993737,
+      "signals": {
+        "charge": 51.99599999999228,
+        "silent": false,
+        "selected": "noise",
+        "stats": {
+          "scans": 1289,
+          "pings": 242,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 1
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 866,
+        "alienSteps": 13628,
+        "frames": 25818,
+        "damage": 264,
+        "flameUses": 1,
+        "crafted": 5,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    },
+    {
+      "scanner": "audible",
+      "seed": 42,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 78,
+      "time": 1294.94999999937,
+      "signals": {
+        "charge": 51.99599999999228,
+        "silent": false,
+        "selected": "noise",
+        "stats": {
+          "scans": 1289,
+          "pings": 238,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 1
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 862,
+        "alienSteps": 13629,
+        "frames": 25899,
+        "damage": 242,
+        "flameUses": 1,
+        "crafted": 4,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    },
+    {
+      "scanner": "audible",
+      "seed": 29102026,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 78,
+      "time": 1298.9999999993663,
+      "signals": {
+        "charge": 48.36399999996957,
+        "silent": false,
+        "selected": "noise",
+        "stats": {
+          "scans": 1298,
+          "pings": 242,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 0
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 869,
+        "alienSteps": 13594,
+        "frames": 25980,
+        "damage": 286,
+        "flameUses": 1,
+        "crafted": 5,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    },
+    {
+      "scanner": "silent",
+      "seed": 20141007,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 100,
+      "time": 1290.8999999993737,
+      "signals": {
+        "charge": 51.99599999999228,
+        "silent": true,
+        "selected": "noise",
+        "stats": {
+          "scans": 1289,
+          "pings": 0,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 1
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 625,
+        "alienSteps": 13628,
+        "frames": 25818,
+        "damage": 264,
+        "flameUses": 1,
+        "crafted": 5,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    },
+    {
+      "scanner": "silent",
+      "seed": 42,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 78,
+      "time": 1294.94999999937,
+      "signals": {
+        "charge": 51.99599999999228,
+        "silent": true,
+        "selected": "noise",
+        "stats": {
+          "scans": 1289,
+          "pings": 0,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 1
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 622,
+        "alienSteps": 13629,
+        "frames": 25899,
+        "damage": 154,
+        "flameUses": 1,
+        "crafted": 2,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    },
+    {
+      "scanner": "silent",
+      "seed": 29102026,
+      "ok": true,
+      "failure": null,
+      "goals": 52,
+      "health": 100,
+      "time": 1298.9999999993663,
+      "signals": {
+        "charge": 48.36399999996957,
+        "silent": true,
+        "selected": "noise",
+        "stats": {
+          "scans": 1298,
+          "pings": 0,
+          "swaps": 6,
+          "dockCharges": 0,
+          "drained": 0
+        }
+      },
+      "stats": {
+        "distance": 135397.95569332852,
+        "actions": 52,
+        "hacks": 10,
+        "failures": 0,
+        "transitions": 81,
+        "noises": 628,
+        "alienSteps": 13594,
+        "frames": 25980,
+        "damage": 308,
+        "flameUses": 1,
+        "crafted": 6,
+        "heard": 4,
+        "detections": 0,
+        "rewires": 3,
+        "seals": 0,
+        "breaches": 0,
+        "optional": 0,
+        "escapes": 13,
+        "throws": 1,
+        "blockedThrows": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "agentBrowser": "[Errno 2] No such file or directory: 'agent-browser'",
+  "probes": [
+    {
+      "url": "http://127.0.0.1:8127/",
+      "ok": false,
+      "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:8127/\nCall log:\n  - navigating to \"http://127.0.0.1:8127/\", waiting until \"load\"\n",
+      "errors": []
+    },
+    {
+      "url": "file:///mnt/data/ALIEN_ISOLATION_DLC_V0_8/JOUER_ISOLATION.html",
+      "ok": false,
+      "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///mnt/data/ALIEN_ISOLATION_DLC_V0_8/JOUER_ISOLATION.html\nCall log:\n  - navigating to \"file:///mnt/data/ALIEN_ISOLATION_DLC_V0_8/JOUER_ISOLATION.html\", waiting until \"load\"\n",
+      "errors": []
+    }
+  ]
+}

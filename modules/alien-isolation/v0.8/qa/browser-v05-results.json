@@ -1,0 +1,264 @@
+{
+  "version": "0.8.0",
+  "checks": [
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Tâche O17 réellement restaurée",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Tâche O18 réellement restaurée",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Tâche O19 réellement restaurée",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Tâche O20 réellement restaurée",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Nora présente au refuge",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "J ouvre les liaisons et affiche deux arrivées",
+      "ok": true
+    },
+    {
+      "name": "Deux contacts physiques, sans bouton de téléportation",
+      "ok": true
+    },
+    {
+      "name": "Les deux arrivées sont identifiées comme refuges locaux",
+      "ok": true
+    },
+    {
+      "name": "Journal sans débordement horizontal 1280×720",
+      "ok": true
+    },
+    {
+      "name": "Journal sans débordement horizontal 1024×768",
+      "ok": true
+    },
+    {
+      "name": "Journal sans débordement horizontal 800×700",
+      "ok": true
+    },
+    {
+      "name": "E recrute le contact et non un objectif principal",
+      "ok": true
+    },
+    {
+      "name": "E demande une attente sur place",
+      "ok": true
+    },
+    {
+      "name": "U ordonne une marche vers le casier, sans entrée instantanée",
+      "ok": true
+    },
+    {
+      "name": "Le contact rejoint réellement son casier",
+      "ok": true
+    },
+    {
+      "name": "Le casier occupé est exclu des cibles d’Amanda",
+      "ok": true
+    },
+    {
+      "name": "Import du point de contrôle 0.6",
+      "ok": true
+    },
+    {
+      "name": "Cachette et occupant conservés au chargement",
+      "ok": true
+    },
+    {
+      "name": "Liaisons suspend l’hémorragie",
+      "ok": true
+    },
+    {
+      "name": "Journal expose le délai de blessure",
+      "ok": true
+    },
+    {
+      "name": "Équipement ne suspend pas le délai de secours",
+      "ok": true
+    },
+    {
+      "name": "Stabilisation au clavier : 35 PV et une seule trousse consommée",
+      "ok": true
+    },
+    {
+      "name": "Sirène déclenchée pour dix-huit secondes au maximum",
+      "ok": true
+    },
+    {
+      "name": "Second E coupe la sirène sans recharger son circuit",
+      "ok": true
+    },
+    {
+      "name": "Avertissement humain visible avant les dégâts",
+      "ok": true
+    },
+    {
+      "name": "Prédation : humain tué par l’état de chasse",
+      "ok": true
+    },
+    {
+      "name": "Import réel 0.4 conserve objectifs et ressources",
+      "ok": true
+    },
+    {
+      "name": "Import 0.4 initialise deux contacts non recrutés",
+      "ok": true
+    },
+    {
+      "name": "Pas de requête réseau externe",
+      "ok": true
+    },
+    {
+      "name": "Aucune exception JavaScript 0.6",
+      "ok": true
+    }
+  ],
+  "pass": 36,
+  "fail": 0,
+  "captures": [
+    {
+      "file": "captures/48_O17.png",
+      "title": "Préparation des soins · Le triage",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/49_O18.png",
+      "title": "Salle de repli · Un abri local",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/50_O19.png",
+      "title": "Vestiaire · Les équipes dispersées",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/51_O20.png",
+      "title": "Poste de relève · Le second refuge",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/52_nora_refuge.png",
+      "title": "Nora · L’arrivée confirmée",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection. Amanda effectue ensuite quelques pas au clavier dans le refuge ; aucun acteur n’est replacé artificiellement.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/53_liaisons.png",
+      "title": "Liaisons · Deux personnes à l’abri",
+      "provenance": "État atteint lors du parcours Récit graine 42 : 52 objectifs, 32 tâches, 76 lieux et deux escortes, ennemis et dégâts actifs. Restauration puis pause pour l’inspection. Journal ouvert avec J depuis le point d’arrivée d’Elias.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/54_casier_nora.png",
+      "title": "Nora · Une cachette occupée",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Recrutement et ordre U réels ; la marche jusqu’au casier est simulée par le moteur.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/55_blessure.png",
+      "title": "Liaisons · Un délai pour intervenir",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Blessure injectée pour vérifier le compte à rebours et sa suspension dans J.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/56_stabilisation.png",
+      "title": "Nora · Stabilisée, en attente",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Après la blessure préparée, maintien E réel pendant la procédure de 2,4 secondes.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/57_sirene.png",
+      "title": "Triage · Faire du bruit ailleurs",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Maintien E réel sur le poste de sirène ; sa minuterie appartient au moteur.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/58_avertissement.png",
+      "title": "Survivant armé · Garder ses distances",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Le garde voit Amanda et entre en avertissement dans la vraie boucle d’IA ; pause avant l’hostilité.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "captures/59_predation.png",
+      "title": "Triage · La créature a une autre proie",
+      "provenance": "SCÈNE PRÉPARÉE : position, menace et état réglés pour le contrôle ciblé ; les commandes testées sont celles du navigateur. Pas une preuve de parcours naturel. Une seconde de logique de prédation résout l’attaque ; Amanda est replacée pour voir son résultat. Pas un événement tiré d’un parcours naturel.",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      }
+    }
+  ],
+  "errors": [],
+  "loading": "Page.set_content; native file/HTTP blocked; no policy overrides.",
+  "htmlSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9"
+}
