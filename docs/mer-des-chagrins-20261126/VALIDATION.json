@@ -4,8 +4,14 @@
   "runtimeManifestSha256": "85d2ca0bf81d027fda2722945fd952e8410fc3657b83678f4a104546cbb6606a",
   "originalDlcTree": "1024a04d3615e135a0a9de7cbff6819e107a2492",
   "publication": {
-    "status": "prepared_for_pr_58",
-    "codeCommit": null
+    "repository": "darknigthmare/aliens-tantalus-frontier",
+    "pullRequest": 58,
+    "codeCommit": "f195082fc7aafa762b2206b91aa5e69ec6a864d1",
+    "codeTree": "1ade308b85c207253441dba6e4c9070732aad4ba",
+    "verifiedRemoteVisualTree": "0c5703111cde2f38c2772881a74efad64405dedf",
+    "remotePngFiles": 119,
+    "remotePngBytes": 234227391,
+    "receiptScope": "This receipt is committed after the tested code; its change is source-only documentation."
   },
   "sprites": {
     "files": 119,
@@ -29,7 +35,14 @@
       "tests": 6,
       "pass": 6,
       "fail": 0
-    }
+    },
+    "finalCombinedRerun": {
+      "tests": 101,
+      "pass": 101,
+      "fail": 0,
+      "skipped": 0
+    },
+    "reportSha256": "c525b3896cc276d5843865897e212dd46db131fa832496c3b17878b7b61ab13a"
   },
   "sourceRecovery": {
     "files": 151,
@@ -2880,11 +2893,17 @@
     "build": {
       "passed": true,
       "files": 2799,
-      "initialBuildId": "143.0.0+417825f14a0e"
+      "buildId": "143.0.0+f195082fc7aa",
+      "sourceCommit": "f195082fc7aafa762b2206b91aa5e69ec6a864d1"
     },
     "builtArtifact": {
       "passed": true,
-      "sourceMetadataCommit": "417825f14a0e3c524fd82a87d4c64a9b010ef44b"
+      "ok": true,
+      "buildId": "143.0.0+f195082fc7aa",
+      "sourceCommit": "f195082fc7aafa762b2206b91aa5e69ec6a864d1",
+      "files": 2799,
+      "shell": 915,
+      "manifestSha256": "4a649ae60f80b1757f0251e461dfae3b80768fa351b0e1cdc28cfcc6d026f5fa"
     }
   },
   "limitations": {
@@ -2915,6 +2934,16 @@
       "equipment/radio",
       "equipment/shutter-control",
       "equipment/tracker"
-    ]
+    ],
+    "separateLaterImagePass": {
+      "reportedImages": 7,
+      "recovered": false,
+      "includedIn119": false,
+      "reason": "The later local directory and verifiable identities were not recovered."
+    },
+    "historicalCodeBlobs": {
+      "unrecovered": 11,
+      "replacement": "Functional reconstruction; original bytes are not claimed recovered."
+    }
   }
 }
