@@ -4,7 +4,7 @@
 
 ## Résultat constaté
 
-**31 copies locales ont été supprimées après comparaison avec GitHub, soit 1 959 810 600 octets libérés. Aucune suppression de fichier distant n'a réussi.** Le résultat porte sur le disque de travail local ; il ne prouve aucune augmentation du quota distant.
+**31 copies locales ont été supprimées après comparaison avec GitHub, soit 1 959 810 600 octets de copies supprimées. Aucune suppression de fichier distant n'a réussi.** Le résultat porte sur le disque de travail local ; il ne prouve aucune augmentation du quota distant.
 
 | Opération | Résultat vérifié | Limite |
 | --- | --- | --- |
@@ -24,9 +24,9 @@ Les 31 copies locales peuvent inclure plusieurs copies d'un même contenu. Leur 
 | Prometheus V12 | `ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip` | 14 678 996 | `b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1` |
 | Alien: Romulus v0.20 | `ALIEN_ROMULUS_CONVERGENCES_v0.20.zip` | 47 349 199 | `f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293` |
 | Alien: Isolation v0.8 | `ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip` | 85 001 778 | `880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978` |
-| AVP: Requiem v0.10 | Nom non consigné | 32 506 386 | `b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617` |
-| Aliens: Colonial Marines v0.10 | Nom non consigné | 62 621 653 | `5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322` |
-| Alien5 — Projet Lazare V11 | Nom non consigné | 7 330 460 | `c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c` |
+| AVP: Requiem v0.10 | `ALIENS_TANTALUS_DLC_AVPR_V0_10.zip` | 32 506 386 | `b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617` |
+| Aliens: Colonial Marines v0.10 | `ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip` | 62 621 653 | `5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322` |
+| Alien5 — Projet Lazare V11 | `DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip` | 7 330 460 | `c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c` |
 | Alien: Blackout v0.7 | `ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip` | 33 103 752 | `b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c` |
 
 Le [reçu JSON](RECUPERATION_20261126.json) associe chaque empreinte aux documents sélectionnés et au chemin de publication prévu. Les préfixes ZIP non consignés restent nuls. Les chemins `archives/dlc-source-recovery-20261126/…` et `archives/blackout-source-recovery-20261126/…` ont été préparés localement : ils ne sont pas des liens vers des archives publiées. Le ZIP Blackout complète la récupération de la [PR #54](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/54) ; cette publication complémentaire reste à faire. Aucune nouvelle PR de préservation des six autres ZIP n'est annoncée.
@@ -64,3 +64,9 @@ Aucun de ces manques n'est déclaré sauvegardé par l'existence de ce reçu. Un
 Les 18 fiches de bibles intègrent les exigences et les écarts des documents réellement lus. L'accès aux conversations historiques complètes était indisponible ; la consolidation ne prétend pas couvrir tous les chats. La cible de fidélité reste 1:1, avec `exact:false` et `canonExact:false` tant que la référence et la comparaison spécifique ne sont pas acquises.
 
 L'environnement local est devenu indisponible avant la fin des transferts. Aucune exécution de gameplay n'est attribuée à ce reçu. Les résultats CI distants doivent rester attachés à leur commit ; les validations d'une autre PR ne sont pas transférées à cette branche.
+
+## Précisions de reprise
+
+Les noms des sept archives sont maintenant consignés avec leurs tailles et leurs empreintes. Les racines internes non relevées restent indéterminées. Le volume de nettoyage représente la somme des tailles des copies supprimées ; l'espace libre final n'a pas été mesuré après l'indisponibilité de l'environnement.
+
+Pour Hors des Ombres, 365 des 368 fichiers locaux examinés correspondaient déjà à la PR59 au commit `4af559dfa8db35cbc3b028c415d557366d9d075e`. Les trois scripts distincts et le pack artistique local nécessitent encore une sauvegarde. Pour Résurrection, l'archive V125 est préservée, tandis que le brouillon local d'intégration et d'admission reste à publier.

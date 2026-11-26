@@ -17,14 +17,16 @@
     "archiveCount": 16,
     "familyCount": 7,
     "totalBytes": 1189845299,
-    "remoteBytesCompared": true
+    "remoteBytesCompared": true,
+    "verificationMethod": "Remote Git tree blob SHAs and sizes matched the archive manifest; local complete-archive SHA-256 values matched that manifest."
   },
   "localCleanup": {
     "deletedCopyCount": 31,
     "deletedBytes": 1959810600,
     "onlyAfterRemoteComparison": true,
     "repositoryModificationsDeleted": false,
-    "note": "Le total porte sur des copies locales et peut comprendre plusieurs copies du même contenu. Il ne doit pas être additionné au volume d'archives comme s'il s'agissait de fichiers distincts."
+    "note": "Le total porte sur des copies locales et peut comprendre plusieurs copies du même contenu. Il ne doit pas être additionné au volume d'archives comme s'il s'agissait de fichiers distincts.",
+    "byteMeasure": "Sum of logical file sizes removed, not a measurement of post-cleanup filesystem free space."
   },
   "remoteStorageCleanup": {
     "uniqueFilesAttempted": 15,
@@ -105,14 +107,14 @@
       {
         "dlc": "avp-requiem",
         "title": "AVP: Requiem v0.10",
-        "archiveName": null,
+        "archiveName": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
         "sizeBytes": 32506386,
         "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
         "zipRoot": null,
         "published": false,
         "plannedPr": null,
         "status": "local_archive_verified_remote_transfer_interrupted",
-        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "archiveNameStatus": "recorded",
         "zipRootStatus": "not_recorded_in_public_receipt",
         "selectedDocuments": [
           "LIRE_DABORD.md",
@@ -123,14 +125,14 @@
       {
         "dlc": "colonial-marines",
         "title": "Aliens: Colonial Marines v0.10",
-        "archiveName": null,
+        "archiveName": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
         "sizeBytes": 62621653,
         "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
         "zipRoot": null,
         "published": false,
         "plannedPr": null,
         "status": "local_archive_verified_remote_transfer_interrupted",
-        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "archiveNameStatus": "recorded",
         "zipRootStatus": "not_recorded_in_public_receipt",
         "selectedDocuments": [
           "README.md",
@@ -142,14 +144,14 @@
       {
         "dlc": "alien5-projet-lazare",
         "title": "Alien5 — Projet Lazare V11",
-        "archiveName": null,
+        "archiveName": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
         "sizeBytes": 7330460,
         "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
         "zipRoot": null,
         "published": false,
         "plannedPr": null,
         "status": "local_archive_verified_remote_transfer_interrupted",
-        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "archiveNameStatus": "recorded",
         "zipRootStatus": "not_recorded_in_public_receipt",
         "selectedDocuments": [
           "README.md",
@@ -284,7 +286,11 @@
       "dlc": "out-of-the-shadows",
       "status": "local_branch_overlap_not_fully_reconciled",
       "pr": 59,
-      "action": "Comparer les différences locales et la PR59 ; ne supprimer aucun travail distinct."
+      "action": "Préserver les trois scripts distincts et le pack artistique local encore non rapproché de PR59 ; les 365 fichiers identiques ne doivent pas être retransférés inutilement.",
+      "comparedLocalFiles": 368,
+      "identicalToPublishedFiles": 365,
+      "distinctScriptFiles": 3,
+      "comparedRemoteCommit": "4af559dfa8db35cbc3b028c415d557366d9d075e"
     },
     {
       "dlc": "sea-of-sorrows",
@@ -296,6 +302,11 @@
       "dlc": "multiple",
       "status": "seven_recovered_zip_bytes_unpublished",
       "action": "Publier les sept ZIP ci-dessus quand leur contenu redevient accessible ; contrôler chaque empreinte distante."
+    },
+    {
+      "dlc": "alien-resurrection",
+      "status": "local_integration_wip_unpublished",
+      "action": "Préserver les modifications locales du raccord et de l'admission ; le ZIP V125 original est déjà présent dans les archives historiques vérifiées."
     }
   ],
   "fidelity": {
