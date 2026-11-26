@@ -41,6 +41,30 @@ test('Content counts preserve the recovered campaign rather than announcing v0.1
   assert.equal(D.fidelityAudit.length, 250);
   assert.equal(Object.keys(sim.AVP_ASSETS).length, 145);
 });
+test('Only two existing scene props receive self-contained PNG overrides', () => {
+  const rasters = plain(sim.AVP_RASTER_ASSETS);
+  assert.deepEqual(Object.keys(rasters).sort(), ['film-snowcat', 'whalebone']);
+  for (const [id, asset] of Object.entries(rasters)) {
+    assert.match(sim.AVP_ASSETS[id], /^<svg /, 'An SVG fallback remains available for ' + id);
+    assert.match(asset.src, /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/);
+    const png = Buffer.from(asset.src.slice('data:image/png;base64,'.length), 'base64');
+    assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+    assert.equal(png.readUInt32BE(16), asset.width);
+    assert.equal(png.readUInt32BE(20), asset.height);
+    assert.equal(png[25], 6, 'RGBA source transparency');
+    assert.ok(asset.frame.every(Number.isInteger));
+    const [x, y, w, h] = asset.frame;
+    assert.ok(x >= 0 && y >= 0 && w > 0 && h > 0 && x + w <= asset.width && y + h <= asset.height);
+    const [px, py] = asset.pivot;
+    assert.ok(px >= x && px <= x + w && py >= y && py <= y + h);
+    assert.ok(asset.fit.every(value => Number.isFinite(value) && value > 0));
+  }
+  const vehicle = D.filmProps.filter(prop => prop.asset === 'film-snowcat');
+  assert.equal(vehicle.length, 1);
+  assert.equal(vehicle[0].room, 'landing');
+  assert.ok(D.rooms.find(room => room.id === 'station').props.some(prop => prop.asset === 'whalebone'));
+  assert.equal(rasters['film-newborn'], undefined, 'The epilogue keeps its own creature artwork.');
+});
 test('All 104 door faces have reciprocal destinations', () => {
   const rooms = new Map(D.rooms.map(room => [room.id, room]));
   let faces = 0;

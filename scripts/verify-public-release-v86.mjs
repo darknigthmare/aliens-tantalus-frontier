@@ -1232,7 +1232,36 @@ const AVP_PRODUCTION_SOURCE_FILES_20261126 = new Set([
   "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png"
 ]);
 
+// Reference originals and review evidence stay source-only. Selected pixels are
+// separately embedded in the reviewed autonomous AVP HTML by its exact registry.
+const AVP_REFERENCE_SOURCE_DIRECTORIES_V002 = new Set([
+  'docs/narrative/dlc/avp-2004-reference-v002',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence',
+  'assets/openai/sprites/avp2004-reference-v002'
+]);
+const AVP_REFERENCE_SOURCE_FILES_V002 = new Set([
+  'docs/narrative/dlc/avp-2004-reference-v002/README.md',
+  'docs/narrative/dlc/avp-2004-reference-v002/GALLERY.md',
+  'docs/narrative/dlc/avp-2004-reference-v002/manifest.json',
+  'docs/narrative/dlc/avp-2004-reference-v002/reference-sources.json',
+  'docs/narrative/dlc/avp-2004-reference-v002/VALIDATION.md',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/before-desktop-landing.png',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/before-desktop-station.png',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/desktop-landing.png',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/desktop-station.png',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/mobile-landing.png',
+  'docs/narrative/dlc/avp-2004-reference-v002/evidence/mobile-station.png',
+  'assets/openai/sprites/avp2004-reference-v002/snowcat-avp2004-v002.png',
+  'assets/openai/sprites/avp2004-reference-v002/whalebone-avp2004-v002.png',
+  'assets/openai/sprites/avp2004-reference-v002/weyland-satellite-avp2004-v002.png',
+  'assets/openai/sprites/avp2004-reference-v002/celtic-damaged-avp2004-v001.png',
+  'assets/openai/sprites/avp2004-reference-v002/queen-machine-avp2004-v001.png'
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (AVP_REFERENCE_SOURCE_DIRECTORIES_V002.has(path)) return !built && directory;
+  if (typeof path === 'string' && [...AVP_REFERENCE_SOURCE_DIRECTORIES_V002].some(root => path.startsWith(root + '/')))
+    return !built && !directory && AVP_REFERENCE_SOURCE_FILES_V002.has(path);
   if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;
   if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))
     return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);
