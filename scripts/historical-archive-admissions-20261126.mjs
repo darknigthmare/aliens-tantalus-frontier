@@ -11,8 +11,8 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
     "sha256": "9fae6f77cc78c926b85e17786ed10e02b30abc6dbbd02c0d8bb18ecbf0309848"
   },
   "archives/dlc-historical-recovery-20261126/INDEX.json": {
-    "bytes": 90294,
-    "sha256": "61cb37f0ac3515f660742349485c7949b94f6531d451435c0d2eecd287a81f98"
+    "bytes": 108261,
+    "sha256": "05071194a07bef1d44cd6a781dd04c20ea577bb19811819891619a55600564aa"
   },
   "archives/dlc-historical-recovery-20261126/README.md": {
     "bytes": 2832,
@@ -749,6 +749,198 @@ export const HISTORICAL_ARCHIVE_FILES_20261126 = Object.freeze(Object.fromEntrie
   "archives/dlc-historical-recovery-20261126/alien-blackout/v0.6.0/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.6.0.zip.part003": {
     "bytes": 4084548,
     "sha256": "e6a95b1d17cdaecce40e2b5f6d8f88522642580501104d0d4f3a469fdd21c81f"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/README.md": {
+    "bytes": 2496,
+    "sha256": "ae517c74cfde4e859320f69daec907cb495ed030316f3772843f38df3461ad10"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v1/MANIFEST.json": {
+    "bytes": 1266,
+    "sha256": "f7d9573d59beab1b3591e060243180ef324c8f3fbb7c65a917c4084a85723283"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v1/ZIP_CONTENTS.json": {
+    "bytes": 12872,
+    "sha256": "289d152e108d0379d39e3c027e8c22b69ca39b1fb4a4e58081120f43c7d597d9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/MANIFEST.json": {
+    "bytes": 1935,
+    "sha256": "0185dd57b805228f231c82abebc9f9b22e7ee742121ac5a84ec432175f03d655"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/ZIP_CONTENTS.json": {
+    "bytes": 61347,
+    "sha256": "fe6f9277a021d5b9a74e09afe6ac7293fdb411c3ecf186eadad46e8e852c13ab"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v2/MANIFEST.json": {
+    "bytes": 1258,
+    "sha256": "b6107ec85476f9ca69bb81e70d40e4cb1a18b2fbf6e504c9885c730e4ca42a9d"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v2/ZIP_CONTENTS.json": {
+    "bytes": 20549,
+    "sha256": "a6a2a182d8547b3c90dd59c089aebe1c5d10e6f20126dc19deb175ab13ade9a1"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v3/MANIFEST.json": {
+    "bytes": 1258,
+    "sha256": "47845adff75209b0d5cc4d8a6f1d7b51026928906e2e2c9e6c5f8edbcd2da51c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v3/ZIP_CONTENTS.json": {
+    "bytes": 21717,
+    "sha256": "837ab37df6571cd2b4e17fb4036d2d2fd6a7e2d22d7c7028eb02069b4d69de55"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v4/MANIFEST.json": {
+    "bytes": 1258,
+    "sha256": "26fd731e5df52d556c6396b8c2753b8cef3d9dde246d580c407a65f5458a2d14"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v4/ZIP_CONTENTS.json": {
+    "bytes": 25030,
+    "sha256": "8ad5cd2d0baf68410c40d98128cce2f240208d3e8595310e7ba931a8c9d88272"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v5/MANIFEST.json": {
+    "bytes": 1259,
+    "sha256": "fdb71c4b122fbd9cee0e31e0dc3af77ffc142b9936bb8680b4e75c90ccc29063"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v5/ZIP_CONTENTS.json": {
+    "bytes": 31589,
+    "sha256": "a8e03e14f334957a4860cf503ee60549c84d9bb3995bab50518fd3c989d5c044"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v6/MANIFEST.json": {
+    "bytes": 1591,
+    "sha256": "0f9078859a7318977b14ecad20379e504e8b63289eacbad592b6115d2c32edb3"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v6/ZIP_CONTENTS.json": {
+    "bytes": 42912,
+    "sha256": "0accb707e1985e7e928153af6af3aee26df61b8c7cc072be3857b83be36ddd51"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v7/MANIFEST.json": {
+    "bytes": 1591,
+    "sha256": "eea5f0570aaf06a45e0969671403502b3a3c3846c7140415b151ecb2127ccce9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v7/ZIP_CONTENTS.json": {
+    "bytes": 51572,
+    "sha256": "b84d8190f4d50dd6f7bebd79fa655a169933d3a7a27141e107bf327e056bfc53"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v8/MANIFEST.json": {
+    "bytes": 1591,
+    "sha256": "f06ade72bc429c0cb9bdd9ea6451d4f7a1bc2f1bf149b9c42d4da491ddce7fd0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v8/ZIP_CONTENTS.json": {
+    "bytes": 60238,
+    "sha256": "7d3844a32918010b3bbccb4b2cd860b7e08488d415a103568a64fefd128ea73c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/MANIFEST.json": {
+    "bytes": 1923,
+    "sha256": "84ae67033e860f76f13f8b6dbcb290968543bcd699ef862555fc70738b17fcf9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/ZIP_CONTENTS.json": {
+    "bytes": 67838,
+    "sha256": "28960ecef1bca562a04084d02a03312804cffad923a12fb1bf275832dbe4db79"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v1/ALIEN_EARTH_DLC_V1_PROTOTYPE_JOUABLE.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "433febe6130244f8766ef52d659dfd2e918c39d6797798575b193875f0dc799d"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v1/ALIEN_EARTH_DLC_V1_PROTOTYPE_JOUABLE.zip.part002": {
+    "bytes": 603467,
+    "sha256": "ba8a897acded09ac7607ff762f4637c0f058e5a4501d7695875e3e7bfdd9c4a4"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v2/ALIEN_EARTH_DLC_V2_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "9d3a5f361f469ac760926c9d9146e045b358e165530e7f563ff46388ba954287"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v2/ALIEN_EARTH_DLC_V2_MODULE_COMPLET.zip.part002": {
+    "bytes": 6416720,
+    "sha256": "5540363a20fc411975f489473f70cb1495c5b2df40282a4b0ef43c6bd4322314"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v3/ALIEN_EARTH_DLC_V3_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "9c003bd2c7e4cd2dae4c32e51eb9dadc8cc2d825ad5379963eb40d6f5051b6fd"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v3/ALIEN_EARTH_DLC_V3_MODULE_COMPLET.zip.part002": {
+    "bytes": 5699428,
+    "sha256": "90307e6e5c3f64c960077fbf338fa340985925fd4f76a9445d8c384916cdfb0a"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v4/ALIEN_EARTH_DLC_V4_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "7fafb8db6523405243121fe9c99193d57b91a3c460c1b212e25e12def35028b0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v4/ALIEN_EARTH_DLC_V4_MODULE_COMPLET.zip.part002": {
+    "bytes": 3637022,
+    "sha256": "84702d94c53e60837794f7f551103fe3d78c29bb86245687aabf2c86d10614d3"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v5/ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "148db2a969fc1a6dc66350b81cd699f67f8e15cfe3815009a4576f354a8769d0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v5/ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip.part002": {
+    "bytes": 8907054,
+    "sha256": "bb57c7881d12d4b5259021216e8651262821b65a763ce644da22a5d56782678c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v6/ALIEN_EARTH_DLC_V6_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "85458427822e4f33a45a2a08ea5235ee8e6674b8f966b73b5d7407492cfc36a8"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v6/ALIEN_EARTH_DLC_V6_MODULE_COMPLET.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "21993c5f11ab86f353b0ad3e47d5adc4611aad854cb30dbd6c3fabada895a0e5"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v6/ALIEN_EARTH_DLC_V6_MODULE_COMPLET.zip.part003": {
+    "bytes": 1801153,
+    "sha256": "f0e0bb5070662213fd8806377cf6d9aa6f18ee3944c332eb3d8800854187662c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v7/ALIEN_EARTH_DLC_V7_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "b0099f315558a649cd06e96ae436a678c69937e0ef14bd91eba4d455bd69afb0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v7/ALIEN_EARTH_DLC_V7_MODULE_COMPLET.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "d75e2e90a2651956dc78353b8c41425c67fd04859ad6c11476668f9d4d53b646"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v7/ALIEN_EARTH_DLC_V7_MODULE_COMPLET.zip.part003": {
+    "bytes": 8134173,
+    "sha256": "25f4d2e99188b284900666ba370060a5df7188613f4df7ac8a4c024d26374565"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v8/ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "85c574e16bc7ea20b114722cd3bdf84b466e28ee8f9e172a8f2292441f9c74e0"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v8/ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "546eda106a46109452762fe28f9cdb7063cf9f3a859a871e054afeb88a8954c9"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v8/ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip.part003": {
+    "bytes": 9624044,
+    "sha256": "a633529e1f560fcbf9222aa51d9a4045dacfbb62999102482287fc45d5443732"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "9605c55d76fe5c20adc0da0ab45a1e761a44b1ba733ac021c00ef0d2e7cd929c"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "66e7e9f1aa2be414caca7736c81a3d89368866f4f84f170f5b6887eebe802a32"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip.part003": {
+    "bytes": 10485760,
+    "sha256": "1f306fdb094d515c3f5045c7c6831835e4832792ff99f8dffce88598e5241eb6"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v9/ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip.part004": {
+    "bytes": 5361989,
+    "sha256": "760b83dfb3ec804730a4b41bbd591303ed674773da4f9a02b2badc158a17a17e"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip.part001": {
+    "bytes": 10485760,
+    "sha256": "93dccc81b938f81d0c51527d456d294a775b6f5be6fd055165c65e605926a780"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip.part002": {
+    "bytes": 10485760,
+    "sha256": "27681beb895db7c58ce927a0c6f31c825d2057b0da7bab23289e811f4f562961"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip.part003": {
+    "bytes": 10485760,
+    "sha256": "c8fcaf18d572c7c7d57fb40acd9e6940779a75170285df1ff0360e9128bf6b3e"
+  },
+  "archives/dlc-historical-recovery-20261126/alien-earth/v10/ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip.part004": {
+    "bytes": 7879581,
+    "sha256": "e7efdc526dd396a341d3bbd98ff5e6a42afaa7699a1d62211c053e546aac978b"
   }
 }).map(([path, value]) => [path, Object.freeze(value)])
 ));

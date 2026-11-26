@@ -8,6 +8,7 @@ import { EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { AVP_HISTORICAL_ARCHIVE_BASELINE_20261126 as baseline, AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126 as successors,
   AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126 as previous, reviewedHistoricalArchiveHostDigest20261126 as advance } from './audit-dlc-avp-2004-20261125.mjs';
 const root = new URL('../', import.meta.url);
+const earthRoot = 'archives/dlc-historical-recovery-20261126/alien-earth';
 const blackoutRoot = 'archives/dlc-historical-recovery-20261126/alien-blackout';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 
@@ -68,7 +69,7 @@ test('reconciliation admits exactly the 123 preserved source paths and keeps the
   assert.equal(receipt.source.commit, '6ed9b9210a097bbdf90ec3a22043a3fe5845e541');
   assert.equal(receipt.files.length, 123);
   assert.equal(receipt.archives.length, 16);
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/') && !path.startsWith(blackoutRoot + '/')).length, 140);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(conversationRoot + '/') && !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/')).length, 140);
   const expectedPaths = receipt.files.map(entry => entry.path).sort();
   assert.equal(new Set(expectedPaths).size, 123);
   assert.deepEqual(Object.keys(files).filter(path => path.startsWith(recoveredRoot + '/')).sort(), expectedPaths);
@@ -268,7 +269,7 @@ const blackoutExpected = [
 
 test('Blackout v0.1-v0.6 preserves six complete ZIP inventories behind exact source paths', () => {
   const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
-  assert.equal(Object.keys(files).filter(path => !path.startsWith(blackoutRoot + '/')).length, 160);
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(blackoutRoot + '/') && !path.startsWith(earthRoot + '/')).length, 160);
   const paths = [blackoutRoot + '/README.md'];
   let members = 0, pngs = 0, bytes = 0, fragments = 0;
   for (const expected of blackoutExpected) {
@@ -321,6 +322,176 @@ test('Blackout v0.1-v0.6 preserves six complete ZIP inventories behind exact sou
 
 test('Blackout originals reconstruct their SHA256 and Git hashes from all 13 fragments', () => {
   for (const expected of blackoutExpected) {
+    const manifest = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/' + expected.archiveId + '/MANIFEST.json', root), 'utf8'));
+    const archiveHash = createHash('sha256');
+    const archiveGit = createHash('sha1').update('blob ' + expected.bytes + '\0');
+    let offset = 0;
+    for (const [index, part] of manifest.parts.entries()) {
+      const path = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId + '/' + manifest.originalFilename + '.part' + String(index + 1).padStart(3, '0');
+      assert.equal(part.path, path);
+      assert.equal(part.offset, offset, path);
+      const bytes = readFileSync(new URL(path, root));
+      assert.equal(bytes.length, part.bytes, path);
+      assert.equal(hash(bytes), part.sha256, path);
+      assert.equal(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'), part.gitBlobSha1, path);
+      archiveHash.update(bytes); archiveGit.update(bytes); offset += bytes.length;
+    }
+    assert.equal(offset, expected.bytes, expected.archiveId);
+    assert.equal(archiveHash.digest('hex'), expected.sha256, expected.archiveId);
+    assert.equal(archiveGit.digest('hex'), expected.wholeArchiveGitBlobSha1, expected.archiveId);
+  }
+});
+
+const earthExpected = [
+  {
+    "archiveId": "alien-earth/v1",
+    "originalFilename": "ALIEN_EARTH_DLC_V1_PROTOTYPE_JOUABLE.zip",
+    "bytes": 11089227,
+    "sha256": "f47ab4a6a99a64158b34663571277a5623ce567ff3e96a391b02874974193f77",
+    "wholeArchiveGitBlobSha1": "0da24be3333f73f015707ca95115dafd36a3055f",
+    "memberCount": 43,
+    "pngOccurrences": 12
+  },
+  {
+    "archiveId": "alien-earth/v2",
+    "originalFilename": "ALIEN_EARTH_DLC_V2_MODULE_COMPLET.zip",
+    "bytes": 16902480,
+    "sha256": "bb879ec2d1677a01cb5798f63972b28f397ffef8957e959c3cbfea95b80f8086",
+    "wholeArchiveGitBlobSha1": "229abd3a06b98d9dd30b73c4012e9b9449d7b8c7",
+    "memberCount": 69,
+    "pngOccurrences": 25
+  },
+  {
+    "archiveId": "alien-earth/v3",
+    "originalFilename": "ALIEN_EARTH_DLC_V3_MODULE_COMPLET.zip",
+    "bytes": 16185188,
+    "sha256": "da9c35a79591ad2c4f9d7cc616c5782735a9c9f484474ed47778d925c4154780",
+    "wholeArchiveGitBlobSha1": "db961defde4eb8d0049e261f123de8666a73beb3",
+    "memberCount": 73,
+    "pngOccurrences": 25
+  },
+  {
+    "archiveId": "alien-earth/v4",
+    "originalFilename": "ALIEN_EARTH_DLC_V4_MODULE_COMPLET.zip",
+    "bytes": 14122782,
+    "sha256": "4235e12983f36c2079bc346598fd5697757dc937691391cfd7a754178767e8dc",
+    "wholeArchiveGitBlobSha1": "149ba14af4639fd3de794fcf7d8fe1b94d782ce5",
+    "memberCount": 84,
+    "pngOccurrences": 24
+  },
+  {
+    "archiveId": "alien-earth/v5",
+    "originalFilename": "ALIEN_EARTH_DLC_V5_MODULE_COMPLET.zip",
+    "bytes": 19392814,
+    "sha256": "1df3294a24538ad636c8245e4b15353df97a469516ae14f54f74f3b437afa8c1",
+    "wholeArchiveGitBlobSha1": "e54015928b4afd7fa00e636361a6df586d4a9298",
+    "memberCount": 105,
+    "pngOccurrences": 37
+  },
+  {
+    "archiveId": "alien-earth/v6",
+    "originalFilename": "ALIEN_EARTH_DLC_V6_MODULE_COMPLET.zip",
+    "bytes": 22772673,
+    "sha256": "47075ae3467b9a3c149ad92afec5cc434e7ee6f6ef2cb6ea8fa121d342e9a227",
+    "wholeArchiveGitBlobSha1": "ae07818831f6ba0d717ed92f816c76c51251f790",
+    "memberCount": 143,
+    "pngOccurrences": 48
+  },
+  {
+    "archiveId": "alien-earth/v7",
+    "originalFilename": "ALIEN_EARTH_DLC_V7_MODULE_COMPLET.zip",
+    "bytes": 29105693,
+    "sha256": "e5123f208ddb844b47fc876612d945f721ce3d382620cfa389fac1dd75d27b5c",
+    "wholeArchiveGitBlobSha1": "9e0c3251a759d5c1773d0b6519eb1e4cbbd7f85f",
+    "memberCount": 172,
+    "pngOccurrences": 57
+  },
+  {
+    "archiveId": "alien-earth/v8",
+    "originalFilename": "ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip",
+    "bytes": 30595564,
+    "sha256": "d4d30711500d317b1f0e4d408ea9d3122fb7a5b56607a6a3d7162501eb6ca8a9",
+    "wholeArchiveGitBlobSha1": "2f6e2d9a3346594b3cb97784f9ea281c1c85de58",
+    "memberCount": 199,
+    "pngOccurrences": 69
+  },
+  {
+    "archiveId": "alien-earth/v9",
+    "originalFilename": "ALIEN_EARTH_DLC_V9_MODULE_COMPLET.zip",
+    "bytes": 36819269,
+    "sha256": "7680925c191f65ca205925e5268594f6fa03c6b2d08cf796c60f22d40969ef49",
+    "wholeArchiveGitBlobSha1": "702d4c64f340007ace43adbec7bb334d40f94156",
+    "memberCount": 224,
+    "pngOccurrences": 79
+  },
+  {
+    "archiveId": "alien-earth/v10",
+    "originalFilename": "ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip",
+    "bytes": 39336861,
+    "sha256": "b0afb821b6acbe57f591c9c489426abb4c3b8e92bb945f7b2dc0b5e9b67423e7",
+    "wholeArchiveGitBlobSha1": "594a4b3eb40417be3147e3a50a117370350b67e8",
+    "memberCount": 202,
+    "pngOccurrences": 81
+  }
+];
+
+test('Earth V1-V10 preserves ten exact ZIP inventories and closed source admissions', () => {
+  const index = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/INDEX.json', root), 'utf8'));
+  assert.equal(Object.keys(files).filter(path => !path.startsWith(earthRoot + '/')).length, 186);
+  const paths = [earthRoot + '/README.md'];
+  let members = 0, pngs = 0, bytes = 0, fragments = 0;
+  for (const [position, expected] of earthExpected.entries()) {
+    assert.equal(expected.archiveId, 'alien-earth/v' + (position + 1));
+    const folder = 'archives/dlc-historical-recovery-20261126/' + expected.archiveId;
+    const manifest = JSON.parse(readFileSync(new URL(folder + '/MANIFEST.json', root), 'utf8'));
+    const inventory = JSON.parse(readFileSync(new URL(folder + '/ZIP_CONTENTS.json', root), 'utf8'));
+    for (const [key, value] of Object.entries(expected)) assert.equal(manifest[key], value, expected.archiveId + ':' + key);
+    assert.equal(manifest.format, 'zip');
+    assert.equal(manifest.preservation, 'exact-original-bytes');
+    assert.equal(manifest.zipCrc32, 'verified');
+    assert.equal(manifest.manifest, folder + '/MANIFEST.json');
+    assert.equal(manifest.contents, folder + '/ZIP_CONTENTS.json');
+    assert.deepEqual(index.preserved.filter(row => row.archiveId === expected.archiveId), [manifest]);
+    const candidate = index.candidates.filter(row => row.filename === manifest.originalFilename);
+    assert.equal(candidate.length, 1);
+    assert.equal(candidate[0].status, 'preserved-exact-in-this-recovery');
+    assert.equal(candidate[0].sha256, manifest.sha256);
+    assert.equal(inventory.filename, manifest.originalFilename);
+    assert.equal(inventory.complete, true);
+    assert.equal(inventory.allMemberCrc32Verified, true);
+    assert.equal(inventory.entries.length, expected.memberCount);
+    assert.equal(inventory.fileCount + inventory.directoryCount, expected.memberCount);
+    assert.equal(inventory.entries.filter(row => !row.directory && row.path.toLowerCase().endsWith('.png')).length, expected.pngOccurrences);
+    assert.deepEqual(inventory.duplicatePaths, []);
+    assert.deepEqual(inventory.unsafePaths, []);
+    for (const row of inventory.entries) {
+      assert.match(row.sha256, /^[a-f0-9]{64}$/);
+      assert.match(row.crc32, /^[a-f0-9]{8}$/);
+      assert.equal(row.unsafePath, false);
+    }
+    for (const part of manifest.parts) {
+      assert.deepEqual(files[part.path], { bytes: part.bytes, sha256: part.sha256 }, part.path);
+      assert.ok(part.bytes > 0 && part.bytes <= 10485760);
+      paths.push(part.path);
+    }
+    paths.push(manifest.manifest, manifest.contents);
+    members += manifest.memberCount; pngs += manifest.pngOccurrences; bytes += manifest.bytes; fragments += manifest.parts.length;
+  }
+  assert.equal(bytes, 236322551);
+  assert.equal(members, 1314);
+  assert.equal(pngs, 457);
+  assert.equal(fragments, 27);
+  assert.equal(paths.length, 48);
+  assert.equal(new Set(paths).size, 48);
+  assert.deepEqual(Object.keys(files).filter(path => path.startsWith(earthRoot + '/')).sort(), paths.sort());
+  for (const path of [earthRoot + '/unreviewed.zip', earthRoot + '/v10/ALIEN_EARTH_DLC_V10_MODULE_COMPLET.zip.part005',
+    earthRoot + '/../unknown', earthRoot + '/v1/MANIFEST.json/extra', earthRoot + '/v11/unknown.zip'])
+    for (const directory of [false, true]) for (const built of [false, true])
+      assert.equal(admitted(path, { directory, built }), false, path);
+});
+
+test('Earth V1-V10 reconstruct their original SHA256 and Git hashes from all 27 fragments', () => {
+  for (const expected of earthExpected) {
     const manifest = JSON.parse(readFileSync(new URL('archives/dlc-historical-recovery-20261126/' + expected.archiveId + '/MANIFEST.json', root), 'utf8'));
     const archiveHash = createHash('sha256');
     const archiveGit = createHash('sha1').update('blob ' + expected.bytes + '\0');
