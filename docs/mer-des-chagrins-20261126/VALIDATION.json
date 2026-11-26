@@ -8,9 +8,19 @@
     "repository": "darknigthmare/aliens-tantalus-frontier",
     "pullRequest": 58,
     "baseCommit": "8cb25462b9b0328b09ae28b278356113d325c603",
-    "status": "prepared_unpublished",
-    "codeCommit": null,
-    "codeTree": null
+    "status": "validation_complete_for_pr_update",
+    "codeCommit": "38a2e7f88162f63d9015300bf216131bf1ad47e1",
+    "codeTree": "8aaf0819f9dcb92eaa06c3f538b8f2c3d66e8cc5",
+    "remoteSpriteInventory": {
+      "sourceCommit": "38a2e7f88162f63d9015300bf216131bf1ad47e1",
+      "visualTree": "316669863aa1fbc85728f060440f4fd031f3b79f",
+      "pngFiles": 121,
+      "bytes": 237861570,
+      "allGitBlobShasAndSizesMatch": true,
+      "fullVisualTreeFiles": 130
+    },
+    "targetBranch": "codex/mer-des-chagrins-github-20261125",
+    "receiptCommitRole": "Documentation-only child of the codeCommit; the build and all runtime/source file contents remain those of codeCommit."
   },
   "sprites": {
     "files": 121,
@@ -54,9 +64,27 @@
     "canvasAndDomDoublesDeclared": true,
     "fullSuite": {
       "command": "npm run test:all",
-      "status": "running",
+      "status": "passed",
       "nodeVersion": "24.22.3",
-      "testFiles": 397
+      "testFiles": 397,
+      "scopeNote": "The runtime and test source bytes were fixed before the full run. The final evidence-only sprite metadata and manifest pin update was separately replayed through the 79-test visual suite, the 121-PNG metadata check and the full source check before building this code commit.",
+      "exitCode": 0,
+      "tests": 6879,
+      "suites": 0,
+      "pass": 6878,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 1,
+      "todo": 0,
+      "duration_ms": 2128718.05573,
+      "logSha256": "9ad689f62985a3d306756ebcbba69c09643d56b73fb2879bbdfc49d65dd4e58c",
+      "skippedTests": [
+        {
+          "file": "scripts/verify-costume-art-installer-v175.mjs",
+          "name": "V176 optional physical V175 fixture has exact opaque reconstruction",
+          "condition": "Optional external physical fixture enabled by TANTALUS_V175_ART_ROOT; not supplied in this run."
+        }
+      ]
     },
     "targetedScope": "Real simulation with Canvas/Image doubles; real inventory model with DOM doubles; exact host source chain and mutation tests. Individual suite counts are not added to the global run.",
     "finalVisualSuite": {
@@ -4278,10 +4306,28 @@
       "finalEvidenceManifestRechecked": true
     },
     "build": {
-      "status": "pending"
+      "command": "npm run build",
+      "status": "passed",
+      "exitCode": 0,
+      "outputSelection": "ATF_BUILD_OUTPUT selects the existing guarded PUBLIC_BUILD_OUTPUT_V122 directory.",
+      "buildId": "143.0.0+38a2e7f88162",
+      "sourceCommit": "38a2e7f88162f63d9015300bf216131bf1ad47e1",
+      "builtAt": "2026-11-26T08:57:49.768Z",
+      "files": 2803,
+      "totalBytes": 2596670356,
+      "visualPublicFiles": 128,
+      "manifestSha256": "97938e999c5086cb90356e29729950e11c474bedccc0a0522151b18c27582ebc"
     },
     "builtArtifact": {
-      "status": "pending"
+      "command": "npm run check:built",
+      "status": "passed",
+      "exitCode": 0,
+      "ok": true,
+      "buildId": "143.0.0+38a2e7f88162",
+      "sourceCommit": "38a2e7f88162f63d9015300bf216131bf1ad47e1",
+      "files": 2803,
+      "shell": 915,
+      "manifestSha256": "97938e999c5086cb90356e29729950e11c474bedccc0a0522151b18c27582ebc"
     },
     "spriteMetadata": {
       "command": "npm run check:mer-des-chagrins-sprites",
