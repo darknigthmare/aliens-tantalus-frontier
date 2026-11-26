@@ -1,0 +1,1777 @@
+{
+  "schemaVersion": 2,
+  "auditedOn": "2026-11-26",
+  "updatedAt": "2026-11-26T06:54:35Z",
+  "project": "Aliens: Tantalus Frontier",
+  "kind": "recovery-and-cleanup-receipt",
+  "scope": "État actuel de cette reprise, avec conservation explicite du reçu précédent. La preuve des octets est séparée de l’intégration et de la fidélité visuelle.",
+  "previousPass": {
+    "commit": "a4c8ae68eb66ef3a85dbabab89aa03780cd72d62",
+    "receiptUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/a4c8ae68eb66ef3a85dbabab89aa03780cd72d62/docs/narrative/dlc/RECUPERATION_20261126.json",
+    "receipt": {
+      "schemaVersion": 1,
+      "auditedOn": "2026-11-26",
+      "project": "Aliens: Tantalus Frontier",
+      "kind": "recovery-and-cleanup-receipt",
+      "scope": "État vérifié pendant la reprise ; synthèse documentaire distincte d'une certification gameplay ou de fidélité 1:1.",
+      "evidenceScope": {
+        "fullConversationAccess": false,
+        "sourceDocumentsRead": true,
+        "cleanupProof": "Relevé agrégé de la passe de comparaison GitHub et suppression locale.",
+        "perDeletedCopyLedgerIncluded": false,
+        "localExecutionBecameUnavailable": true
+      },
+      "historicalArchives": {
+        "commit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+        "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6ed9b9210a097bbdf90ec3a22043a3fe5845e541/archives/local-recovery-20261125",
+        "archiveCount": 16,
+        "familyCount": 7,
+        "totalBytes": 1189845299,
+        "remoteBytesCompared": true,
+        "verificationMethod": "Remote Git tree blob SHAs and sizes matched the archive manifest; local complete-archive SHA-256 values matched that manifest."
+      },
+      "localCleanup": {
+        "deletedCopyCount": 31,
+        "deletedBytes": 1959810600,
+        "onlyAfterRemoteComparison": true,
+        "repositoryModificationsDeleted": false,
+        "note": "Le total porte sur des copies locales et peut comprendre plusieurs copies du même contenu. Il ne doit pas être additionné au volume d'archives comme s'il s'agissait de fichiers distincts.",
+        "byteMeasure": "Sum of logical file sizes removed, not a measurement of post-cleanup filesystem free space."
+      },
+      "remoteStorageCleanup": {
+        "uniqueFilesAttempted": 15,
+        "initialFailedAttempts": 15,
+        "retryAttempts": 1,
+        "retryDlc": "alien-covenant",
+        "retryFailed": true,
+        "errorCode": "destination_conflict",
+        "reportedReason": "migration conflict",
+        "deletedFileCount": 0,
+        "freedBytes": 0
+      },
+      "recoveredUnpublishedArchives": {
+        "archiveCount": 7,
+        "totalBytes": 282592224,
+        "allBytesRead": true,
+        "zipCrcChecked": true,
+        "memberPathsChecked": true,
+        "sourceFileIdentityChecked": true,
+        "bytesPublishedToGitHub": false,
+        "reason": "Le transfert des octets a été interrompu par l'indisponibilité de l'environnement d'exécution.",
+        "archives": [
+          {
+            "dlc": "prometheus",
+            "title": "Prometheus V12",
+            "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+            "sizeBytes": 14678996,
+            "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "README_V12.md",
+              "CODEX_PROMETHEUS_V12.md"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/prometheus/"
+          },
+          {
+            "dlc": "alien-romulus",
+            "title": "Alien: Romulus v0.20",
+            "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+            "sizeBytes": 47349199,
+            "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "README.md",
+              "docs/REGISTRE_CONVERGENCES_V20.json"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien-romulus/"
+          },
+          {
+            "dlc": "alien-isolation",
+            "title": "Alien: Isolation v0.8",
+            "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+            "sizeBytes": 85001778,
+            "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "README_FR.md",
+              "docs/CODEX_ISOLATION.md",
+              "docs/METRIQUES.json"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien-isolation/"
+          },
+          {
+            "dlc": "avp-requiem",
+            "title": "AVP: Requiem v0.10",
+            "archiveName": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+            "sizeBytes": 32506386,
+            "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "LIRE_DABORD.md",
+              "docs/AUDIT_FIDELITE_V0_10.md"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/avp-requiem/"
+          },
+          {
+            "dlc": "colonial-marines",
+            "title": "Aliens: Colonial Marines v0.10",
+            "archiveName": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+            "sizeBytes": 62621653,
+            "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "README.md",
+              "docs/ASSETS_STATUS.md",
+              "docs/ADAPTATION.md"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/colonial-marines/"
+          },
+          {
+            "dlc": "alien5-projet-lazare",
+            "title": "Alien5 — Projet Lazare V11",
+            "archiveName": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+            "sizeBytes": 7330460,
+            "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+            "zipRoot": null,
+            "published": false,
+            "plannedPr": null,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "not_recorded_in_public_receipt",
+            "selectedDocuments": [
+              "README.md",
+              "docs/CODEX_REGLES_V11.md",
+              "docs/AUDIT_FIDELITE_V11.json"
+            ],
+            "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien5-lazare/"
+          },
+          {
+            "dlc": "alien-blackout",
+            "title": "Alien: Blackout v0.7",
+            "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+            "sizeBytes": 33103752,
+            "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+            "zipRoot": "ALIEN_BLACKOUT_v0.7.0",
+            "published": false,
+            "plannedPr": 54,
+            "status": "local_archive_verified_remote_transfer_interrupted",
+            "archiveNameStatus": "recorded",
+            "zipRootStatus": "recorded",
+            "selectedDocuments": [
+              "ALIEN_BLACKOUT_v0.7.0/README.md",
+              "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md"
+            ],
+            "plannedPublicationPath": "archives/blackout-source-recovery-20261126/alien-blackout/"
+          }
+        ]
+      },
+      "publishedWork": [
+        {
+          "dlc": "aliens-1986",
+          "pr": 65,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/65",
+          "commit": "30353c828cca199a7c1f2b07fa05b438326db86e",
+          "pngCount": 70,
+          "status": "draft_source_sprites",
+          "verified1to1": false
+        },
+        {
+          "dlc": "river-of-pain",
+          "pr": 66,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/66",
+          "commit": "0adf04e16e38adbb325cf297727bb414dc8df646",
+          "newPngCount": 28,
+          "totalPngCount": 70,
+          "status": "open_additional_props",
+          "verified1to1": false
+        },
+        {
+          "dlc": "sea-of-sorrows",
+          "pr": 67,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/67",
+          "commit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+          "preservedFileCount": 33,
+          "preservedBytes": 48916609,
+          "preservedPngCount": 28,
+          "expectedFileCount": 126,
+          "remainingFileCount": 93,
+          "status": "draft_partial_checkpoint",
+          "runtimeIntegrated": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "alien-covenant",
+          "pr": 69,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/69",
+          "commit": "65e3c378b8dd4469a053eafff6a5ae4d5a9669e1",
+          "pngCount": 3,
+          "totalPngBytes": 4414495,
+          "status": "draft_source_candidates",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/65e3c378b8dd4469a053eafff6a5ae4d5a9669e1/docs/development/covenant-sprites-20261126/manifest.json",
+          "runtimeIntegrated": false,
+          "verified1to1": false,
+          "assets": [
+            {
+              "path": "docs/development/covenant-sprites-20261126/neomorph-adult-citadel.png",
+              "sizeBytes": 981223,
+              "sha256": "204df7dba4df40b6c7c3580e804fcbd6f2fd82d9f727c4feca9ca8d436876ccf",
+              "gitBlobSha": "a6579a83b7b5c92cfa1eb1c6b08a1eb0283b1935",
+              "width": 1774,
+              "height": 887
+            },
+            {
+              "path": "docs/development/covenant-sprites-20261126/facehugger-covenant.png",
+              "sizeBytes": 966212,
+              "sha256": "4431c66ab1697ea7d83e784f70f629e1378f690f60de77e54cb8f8af6841094b",
+              "gitBlobSha": "8f1161acdb6b59a0fcb9ab61b9647686fb18c3ce",
+              "width": 2172,
+              "height": 724
+            },
+            {
+              "path": "docs/development/covenant-sprites-20261126/ovomorph-covenant.png",
+              "sizeBytes": 2467060,
+              "sha256": "b9eb1cca63258c796763d59847a86d13b036e03493badb164efbdfdcab4f27d8",
+              "gitBlobSha": "d66bc57c9fdc4061752e315a160a78271e82b446",
+              "width": 1166,
+              "height": 1349
+            }
+          ],
+          "unproduced": [
+            {
+              "asset": "neomorph-juvenile-hallett.png",
+              "status": "generation_refused",
+              "fileCreated": false
+            },
+            {
+              "asset": "xenomorph-covenant-idle.png",
+              "status": "generation_refused",
+              "fileCreated": false
+            }
+          ]
+        }
+      ],
+      "remainingWork": [
+        {
+          "dlc": "40th-anniversary",
+          "status": "not_preserved_in_new_pr",
+          "bundleBytes": 256822850,
+          "action": "Retrouver les octets du bundle et le commit d'intégration local, puis comparer/publier."
+        },
+        {
+          "dlc": "alien-covenant",
+          "status": "local_integration_wip_unpublished",
+          "action": "Préserver les modifications locales de raccord séparément des trois candidats PNG de PR69."
+        },
+        {
+          "dlc": "alien-earth",
+          "status": "local_sprites_not_fully_preserved",
+          "action": "Retrouver les nouveaux sprites et leurs manifests avant tout nettoyage supplémentaire."
+        },
+        {
+          "dlc": "out-of-the-shadows",
+          "status": "local_branch_overlap_not_fully_reconciled",
+          "pr": 59,
+          "action": "Préserver les trois scripts distincts et le pack artistique local encore non rapproché de PR59 ; les 365 fichiers identiques ne doivent pas être retransférés inutilement.",
+          "comparedLocalFiles": 368,
+          "identicalToPublishedFiles": 365,
+          "distinctScriptFiles": 3,
+          "comparedRemoteCommit": "4af559dfa8db35cbc3b028c415d557366d9d075e"
+        },
+        {
+          "dlc": "sea-of-sorrows",
+          "status": "93_of_126_files_still_unpublished",
+          "pr": 67,
+          "action": "Reprendre les 93 fichiers manquants depuis le ledger de PR67 avant raccord du renderer."
+        },
+        {
+          "dlc": "multiple",
+          "status": "seven_recovered_zip_bytes_unpublished",
+          "action": "Publier les sept ZIP ci-dessus quand leur contenu redevient accessible ; contrôler chaque empreinte distante."
+        },
+        {
+          "dlc": "alien-resurrection",
+          "status": "local_integration_wip_unpublished",
+          "action": "Préserver les modifications locales du raccord et de l'admission ; le ZIP V125 original est déjà présent dans les archives historiques vérifiées."
+        }
+      ],
+      "fidelity": {
+        "target": "1:1",
+        "exact": false,
+        "canonExact": false,
+        "verified1to1": false,
+        "qualification": "Les preuves de fichiers et d'intégrité ne certifient ni apparence canonique, ni sélection/runtime, ni qualité en jeu."
+      }
+    }
+  },
+  "currentPass": {
+    "conversationConsolidation": {
+      "fullConversationAccess": false,
+      "targetedRetrievalGroups": 3,
+      "dlcFamilies": 18,
+      "requirements": 22,
+      "newRequirements": 8,
+      "documentCommit": "84cca8266421b3d865941acd645c861549c121ef",
+      "documentsChanged": 20,
+      "relativeLinksChecked": 77,
+      "publishedBlobHashesCompared": 20
+    },
+    "sevenArchives": {
+      "pr": 73,
+      "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+      "archiveCount": 7,
+      "totalOriginalBytes": 282592224,
+      "parts": 31,
+      "publishedFiles": 210,
+      "publishedFileBytes": 301491758,
+      "exactExtractedDocuments": 153,
+      "zipFileMembers": 2746,
+      "additionalZipDirectoryMembers": 24,
+      "remoteBlobSizeModeMismatches": 0,
+      "localSuccessionTestsPassed": 15,
+      "runtimeIntegratedByRecovery": false,
+      "archives": [
+        {
+          "dlc": "prometheus",
+          "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+          "sizeBytes": 14678996,
+          "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "wholeArchiveGitBlobShaComputed": "23105bc3753dcd746305a253f7de81595e93262b",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 2,
+          "memberCount": 298,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/prometheus",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "alien-romulus",
+          "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+          "sizeBytes": 47349199,
+          "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "wholeArchiveGitBlobShaComputed": "0d49b2f1fee32757c2fc2790b942a7f8594c170f",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 5,
+          "memberCount": 416,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/romulus",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "alien-isolation",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+          "sizeBytes": 85001778,
+          "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "wholeArchiveGitBlobShaComputed": "53bc96ff4fd598506e04154c72f962905851a4b7",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 9,
+          "memberCount": 646,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/alien-isolation",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "avp-requiem",
+          "archiveName": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+          "sizeBytes": 32506386,
+          "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+          "wholeArchiveGitBlobShaComputed": "40c677cba3e62dcc30b46860057255bdc7914800",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 4,
+          "memberCount": 352,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/avpr",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "colonial-marines",
+          "archiveName": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+          "sizeBytes": 62621653,
+          "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+          "wholeArchiveGitBlobShaComputed": "d264a06a008b20f6c57ca3b4eb8c5f9807a64d62",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 6,
+          "memberCount": 457,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/colonial-marines",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "alien5-projet-lazare",
+          "archiveName": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+          "sizeBytes": 7330460,
+          "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+          "wholeArchiveGitBlobShaComputed": "be095b065356868d71db959af056caacc589ed0c",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 1,
+          "memberCount": 177,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/dlc-source-recovery-20261126/alien5-lazare",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        },
+        {
+          "dlc": "alien-blackout",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "sizeBytes": 33103752,
+          "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+          "wholeArchiveGitBlobShaComputed": "ba68c7bc3633e769ccbd67f11137bb34c77773f0",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false,
+          "parts": 4,
+          "memberCount": 400,
+          "published": true,
+          "pr": 73,
+          "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "path": "archives/blackout-source-recovery-20261126/alien-blackout",
+          "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+          "documents": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/documents",
+          "runtimeIntegratedByPreservation": false,
+          "verified1to1": false
+        }
+      ]
+    },
+    "fortiethArchives": {
+      "pr": 72,
+      "commit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+      "sourceCommit": "8e5338da2879ecb4ec793fdbd62c0990f5d57237",
+      "archiveCount": 6,
+      "totalOriginalBytes": 174243911,
+      "parts": 20,
+      "originalDocuments": 13,
+      "publishedFiles": 37,
+      "runtimeIntegratedByRecovery": false,
+      "preciseSourceAdmissionStillRequired": false,
+      "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8ec16d6448e0833e932294456e3393674a4a79ad/archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+      "archives": [
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.1.0.zip",
+          "sizeBytes": 15637634,
+          "sha256": "63aeb2bdb8c5429d350c24c4536152c06fe081d74bb11e9b6d65a1f3f6ded4b8",
+          "wholeArchiveGitBlobShaComputed": "6c741703c9de75fb5289c487713f4e51313a3938",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.2.0.zip",
+          "sizeBytes": 14005712,
+          "sha256": "665d879573e567d545471f57c00f862047a6c1694a14b17bdd941c840da88bf1",
+          "wholeArchiveGitBlobShaComputed": "775ac38d9849c3c075a556fde8956166cdf9f46d",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.3.0.zip",
+          "sizeBytes": 13167560,
+          "sha256": "6d69c9756d000dc33bbfa9cf41f007c6cdcfb6a76e5f9dde7c841339c27635a7",
+          "wholeArchiveGitBlobShaComputed": "2bb3d0923f41652fd990f5a51762f7a34d273752",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.4.0.zip",
+          "sizeBytes": 20931496,
+          "sha256": "9c4ae6bcd4fda673ed1e3e0700662089cf3d373908c6de851936050bba011175",
+          "wholeArchiveGitBlobShaComputed": "09c95dd4a785e3f8ba23ef8eeed9080126e67397",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.5.0.zip",
+          "sizeBytes": 23202673,
+          "sha256": "5dadd69108a432244edefa224996849a0af9538540162b7c7ff28b7a4129d605",
+          "wholeArchiveGitBlobShaComputed": "6336eb27947b7993baf045c0c9a5e9bef907fc79",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.6.0.zip",
+          "sizeBytes": 87298836,
+          "sha256": "30d3d3b93f3b9f6dc01347b325ce829e0270cbe5a36585ff6c9789982cb523a4",
+          "wholeArchiveGitBlobShaComputed": "5adf7ca4e0df25d88ba4d2392778aae5c92b9374",
+          "publishedRepresentation": "ordered_verified_fragments",
+          "fullArchiveBlobDirectlyPublished": false
+        }
+      ],
+      "currentHead": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+      "sourceAdmission": {
+        "commit": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "status": "verified_source_only",
+        "admittedFiles": 37,
+        "exactParentDirectories": true,
+        "fixedSizesAndSha256": true,
+        "builtAdmission": false,
+        "targetedTestsPassed": 13,
+        "preservationFilesUnchangedFrom": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "script": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/ed08d329d3e037fbe1db4490896dfde6afde0ee7/scripts/public-40th-source-recovery-20261126.mjs",
+        "globalCiClaimed": false
+      }
+    },
+    "seaSourceRecovery": {
+      "pr": 67,
+      "commit": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
+      "sourceSnapshot": "f62b3c008df41be6004cff5ea9400daa05f7aa9f",
+      "preservedUniqueFiles": 115,
+      "preservedOriginalPNGs": 110,
+      "preservedUniqueBytes": 215587160,
+      "pendingFiles": [
+        {
+          "path": "dlc/sea-of-sorrows-visual/src/art-pack.js",
+          "sizeBytes": 42511,
+          "gitBlobSha": "413e6fcf637f20fff668b88cb37c561253fddc22"
+        },
+        {
+          "path": "dlc/sea-of-sorrows-visual/src/gallery.js",
+          "sizeBytes": 7603,
+          "gitBlobSha": "5817c0ec29695ca79037bb4be35dd248d5fc4904"
+        },
+        {
+          "path": "dlc/sea-of-sorrows-visual/src/png-renderer.js",
+          "sizeBytes": 42552,
+          "gitBlobSha": "e6be8473acb9c410b7e9b04d294cf4ef3f422604"
+        },
+        {
+          "path": "package.json",
+          "sizeBytes": 23562,
+          "gitBlobSha": "0f245a74beb4b4afca261849a3ca8263ac070eb3"
+        },
+        {
+          "path": "scripts/build-asset-filter.mjs",
+          "sizeBytes": 32235,
+          "gitBlobSha": "d65aec47499cbd776393a7dd364fee614d893775"
+        },
+        {
+          "path": "scripts/mer-des-chagrins-admission-20261125.mjs",
+          "sizeBytes": 17012,
+          "gitBlobSha": "eff73761509f336c815c993323f10f378edcae36"
+        },
+        {
+          "path": "scripts/mer-des-chagrins-visual-admission-20261125.mjs",
+          "sizeBytes": 7759,
+          "gitBlobSha": "1d8e3bf6019bc7c00340ccf85c06bc9edf0493a1"
+        },
+        {
+          "path": "scripts/verify-mer-des-chagrins-admission-20261125.mjs",
+          "sizeBytes": 12961,
+          "gitBlobSha": "0914405703f736e12476f97a3fd79107b9d3b0d3"
+        },
+        {
+          "path": "scripts/verify-mer-des-chagrins-sprite-pack-20261125.mjs",
+          "sizeBytes": 7038,
+          "gitBlobSha": "3242153dbd3bcb81d4e43e41c0a58e62876c23ef"
+        },
+        {
+          "path": "scripts/verify-mer-des-chagrins-visual-20261125.mjs",
+          "sizeBytes": 25432,
+          "gitBlobSha": "f1195c792b3d8407b9f425cd988fce103f071b52"
+        },
+        {
+          "path": "scripts/verify-mer-des-chagrins-visual-admission-20261125.mjs",
+          "sizeBytes": 6660,
+          "gitBlobSha": "958a315a94be0815b43b11a2aaed7daabe96be49"
+        }
+      ],
+      "pendingFileCount": 11,
+      "pendingBytes": 225325,
+      "runtimeActivatedByRecovery": false,
+      "ledger": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/e716f75318f243a981fdf6e64728cd6f039ad6dd/archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+      "qualification": "The 110 original PNG bytes match the historical ledger. They are recovered files, not newly generated poses; duplicate archive paths are excluded from unique totals.",
+      "lastLocalSearch": {
+        "activeWorktreesCompared": 2,
+        "gitObjectLookupsWithoutLazyFetch": 22,
+        "exactMatches": 0,
+        "pendingFilesStillUnrecovered": 11,
+        "pendingBytes": 225325
+      }
+    },
+    "persistentCleanup": {
+      "attemptedFiles": 1,
+      "successfulDeletions": 0,
+      "logicalBytesDeleted": 0,
+      "errorCode": "destination_conflict",
+      "reportedReason": "Library folder migration requires a fresh native request",
+      "verifiedArchiveName": "ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip",
+      "sourceSha256": "b765f46776df1308d3872f4793478facc18f2b0603ade64fddbe4d996a4183d1",
+      "archiveCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+      "remotePartsChecked": 121,
+      "remotePartErrors": 0,
+      "retriesStopped": true
+    },
+    "localCleanup": {
+      "schemaVersion": 1,
+      "recordedAt": "2026-11-26T06:52:47.369449+00:00",
+      "scope": "local temporary recovery copies only",
+      "requestedFiles": 78,
+      "deletedFiles": 78,
+      "logicalBytesDeleted": 1447943791,
+      "allocatedBytesOfDeletedFiles": 1448075264,
+      "failed": [],
+      "entries": [
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.1.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 15637634,
+          "sha256": "63aeb2bdb8c5429d350c24c4536152c06fe081d74bb11e9b6d65a1f3f6ded4b8",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.1.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 15637634,
+          "sha256": "63aeb2bdb8c5429d350c24c4536152c06fe081d74bb11e9b6d65a1f3f6ded4b8",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.2.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 14005712,
+          "sha256": "665d879573e567d545471f57c00f862047a6c1694a14b17bdd941c840da88bf1",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.2.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 14005712,
+          "sha256": "665d879573e567d545471f57c00f862047a6c1694a14b17bdd941c840da88bf1",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.3.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 13167560,
+          "sha256": "6d69c9756d000dc33bbfa9cf41f007c6cdcfb6a76e5f9dde7c841339c27635a7",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.3.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 13167560,
+          "sha256": "6d69c9756d000dc33bbfa9cf41f007c6cdcfb6a76e5f9dde7c841339c27635a7",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.4.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 20931496,
+          "sha256": "9c4ae6bcd4fda673ed1e3e0700662089cf3d373908c6de851936050bba011175",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.4.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 20931496,
+          "sha256": "9c4ae6bcd4fda673ed1e3e0700662089cf3d373908c6de851936050bba011175",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.5.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 23202673,
+          "sha256": "5dadd69108a432244edefa224996849a0af9538540162b7c7ff28b7a4129d605",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.5.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 23202673,
+          "sha256": "5dadd69108a432244edefa224996849a0af9538540162b7c7ff28b7a4129d605",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.6.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 87298836,
+          "sha256": "30d3d3b93f3b9f6dc01347b325ce829e0270cbe5a36585ff6c9789982cb523a4",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_40TH_ANNIVERSARY_6_EPISODES_v0.6.0.zip",
+          "group": "fortieth",
+          "category": "original_archive_reconstructable_from_verified_parts",
+          "bytes": 87298836,
+          "sha256": "30d3d3b93f3b9f6dc01347b325ce829e0270cbe5a36585ff6c9789982cb523a4",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "836fe578de2c8cd70485e2d355d5e299870c75bc5807e95472a0adaff4e39e31",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.1.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 5151874,
+          "sha256": "5cf7b514a9bad36619acfa4073bc79866275bf278cec253017e10891d08421d1",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.1.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "ad177d9c176fbfdcc226a8faab6b8508aa6d9157f6596b536406853f6bcb7266",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.2.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 3519952,
+          "sha256": "4651f61a682ca5b6b1236093b28b86c065d244d2931f8f76eb5ec120fc61a367",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.2.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "8b17afd52efd5145fd5a7e0df6031da03e285cdb38f2b558904ef6ae1cfc97de",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.3.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 2681800,
+          "sha256": "507e05e7a0f491d175d0d7dd20689c7151cbd140cae052300163e89c9c25b1e0",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.3.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "f2309a211a845a4613d229c2c6f84c65a71bd833ea9b92e6063b5ecc2ff6e7aa",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.4.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10445736,
+          "sha256": "d9218f184f1eb0eabcfb306c53aaeac93cb5202e92c9232b1f1c1973a6929389",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.4.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "a1c17b2f29a939c3a262469b754567672aee3add3eacacf2c0d77d96a1b83490",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "f7e0dfc177a7e9432dd05a149e534c29973b261a6eafe8a17469351489e3691a",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part003",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 2231153,
+          "sha256": "195bfb81ea827e57c6dfe4ca84bef9d02e3bd618da965bad7ce68a7fa1bd20c0",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.5.0/archive.zip.part003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part001",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "660626448d6d531704ec21d383ab359c729bbef56c9e01aa74bd0b4ad26a3d3d",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part002",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "c1d9976f74287ed7cab09665241865d21b07e77f2b696a862e84cb447046401e",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part003",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "1ad5296098b376bb15c7230007dc02bef1fa294870f3a5626c41b3839a5f96eb",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part004",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "a781aae94d702252883bdf15a4bc95d4267df4e5ae281483728d50d9d5e9c80d",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part004",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part005",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "22d6e2c1e11387f2d7eb17848e77d207cff11338505285a6ad871dbe0475b77f",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part005",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part006",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "c843c079c2efb9c0cfbab3e824641a1cf0bbde159ffe17173306d7d9eea5b94b",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part006",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part007",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "4925d27b66868cb3da1f0ae1dcb29902b4b78f9d166ed2e0b541c2f4b876a100",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part007",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part008",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 10485760,
+          "sha256": "2a3ff80cafcd5a5906f00256315882b6bf934e2c8bf17c90c5469e892a94694d",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part008",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "archive.zip.part009",
+          "group": "fortieth",
+          "category": "exact_remote_blob",
+          "bytes": 3412756,
+          "sha256": "de9774879832c2ea69372df8d7cec2b43bacecdfba687e519df8971410e2bb67",
+          "remoteCommit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+          "remotePath": "archives/40th-anniversary-recovery-20261126/parts/v0.6.0/archive.zip.part009",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 14678996,
+          "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 14678996,
+          "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "bc7e9b94ae4bb2473153b686f16cc3525d1088f60c1b847fa7d7233f6ce5058f",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/prometheus/parts/ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 4193236,
+          "sha256": "96b9844af6a686ff87fcf4b2e079acc72fad5df4db586f9e1e9ef79e62eb7837",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/prometheus/parts/ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 47349199,
+          "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 47349199,
+          "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "2b6293abcbbddba97c0ac5c885ccf42604e61fdd25e67c32dcb5e19859f50685",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "e523bae96cc211de9ce20cd800c632d8dd335c22137ebee1230d59c98edd3639",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-002",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "bc0c4a85087db25d86d837e0d437326a40083a5a45e929898a612c7ba506836b",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-003",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "bf4932363772ce077d7b4e41d45d9cf99e95be9695bb98c7177b0952e85e7f7b",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-004",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 5406159,
+          "sha256": "6e04525c92f8b66b200cc9eaa9d2835c3f26b383b9f9421044eb0ecd07b18519",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/romulus/parts/ALIEN_ROMULUS_CONVERGENCES_v0.20.zip.part-004",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 85001778,
+          "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 85001778,
+          "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "56991c33f3c3946b73be7e1afe6331fcb1d1dc279238d768093965881271681a",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "54f1fa7f92dea91fd33dd9a79a60c6ad8f103d1d97eb72dc70838ae9429dec92",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-002",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "442e3de45c3e19aad0bf498ad301f43058247ffce3ff96481571bdfa5c22bcc3",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-003",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "60a651893ed8fc53c9270c77964f59c107114bd24418e73633db0939727ff767",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-004",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "4e873884d76c5241ae0415c7bb3281d983cbb5a4551dec912311b21321c20c5a",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-004",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-005",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "1c2c19c8476bbea850a097fab7693e914f819f797307a3f4d566d9c0fd315b9b",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-005",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-006",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "89dc34ef4d9dc564ffc217ba9072dbbfa6e53e4a23494089080c5209de4dda67",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-006",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-007",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "34d6752b53f2bead21fd46139428b1c9c212ce2b5b1d03844c3a47539ee3f8fc",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-007",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-008",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 1115698,
+          "sha256": "52f7231014445b36848153c72202484e27fdafa1608d68240cbb6f98178434b6",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien-isolation/parts/ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip.part-008",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 32506386,
+          "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 32506386,
+          "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "7c7a3ce0b8aff559174ae6d532f88ed61cbe1038cea0131262c47778b39306db",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "60e054fda5109b54aa36233d43232b35ce9b7e4085d2b9b75d316b3ccbc5b933",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-002",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "188d89043fe8d7d97fc2f66a164cc384d59d2b21dd7cf4344cf3df496d981694",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-003",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 1049106,
+          "sha256": "e147119e77a477f32d4dfc7dad84a9f2e50b888faf55de2cde1059601fa118f8",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/avpr/parts/ALIENS_TANTALUS_DLC_AVPR_V0_10.zip.part-003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 62621653,
+          "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 62621653,
+          "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "5a1a309d28bcfbda5c1f3f8b368cc9a3d5295ed48f95b920e190243bd0827455",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "e9d10de8ae90fdbab6109446fb44815cc1c03a5778ba6d8a3662265443ba8f4a",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-002",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "12a0cc381b3605d379d1e94745b842a61e639995525e35650e9757ef04a44622",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-003",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "373df459d4c5a98f930e9fcb2c226945c9af9ea566e9494a029495b34f57a110",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-004",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "0006d1040815b6053c6bc9d0ab68e7f3cb75a3cdcaeb42fee67cfa846186fe8d",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-004",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-005",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10192853,
+          "sha256": "7c68594515ba28d87fb887bc78415b987e9cb51c879a913bbf5006918d81c684",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/colonial-marines/parts/ALIENS_TANTALUS_DLC_COLONIAL_MARINES_0_10_0.zip.part-005",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 7330460,
+          "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 7330460,
+          "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 7330460,
+          "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/dlc-source-recovery-20261126/alien5-lazare/parts/DLC_ALIEN5_PROJET_LAZARE_V11_CANDIDAT.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "group": "extraArchives",
+          "category": "downloaded-zip",
+          "bytes": 33103752,
+          "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "group": "extraArchives",
+          "category": "reconstructed-zip",
+          "bytes": 33103752,
+          "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-000",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "53899e34f00eeaba4ae00a377450f2b807bfa365b2a2f0b4d6e1dc3ec4ddd16e",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-000",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-001",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "9802aea249acda73c64b6b0c1b5350f8a9f10cbdce2eaa195b2e99776cd088f7",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-001",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-002",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 10485760,
+          "sha256": "10a9fc00c08d993bd8959971b9b0413902a5c9af74435816d54d9b5ba1ec9783",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-002",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-003",
+          "group": "extraArchives",
+          "category": "fragment-copy",
+          "bytes": 1646472,
+          "sha256": "709340dd800a1658fda66fa10c38b501fab89dc4436e838df5d973400ff030f3",
+          "remoteCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+          "remotePath": "archives/blackout-source-recovery-20261126/alien-blackout/parts/ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip.part-003",
+          "verificationMode": "exact_direct_remote_blob",
+          "deleted": true
+        },
+        {
+          "filename": "ALIEN_COVENANT_v0.10.0_DLC_COMPLET.zip",
+          "group": "covenant",
+          "category": "downloaded-verification-copy",
+          "bytes": 77435386,
+          "sha256": "b765f46776df1308d3872f4793478facc18f2b0603ade64fddbe4d996a4183d1",
+          "remoteCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+          "remotePath": "archives/local-recovery-20261125/MANIFEST.json",
+          "verificationMode": "exact_archive_sha256_and_verified_ordered_remote_parts",
+          "deleted": true
+        }
+      ],
+      "persistentFilesDeleted": 0,
+      "persistentBytesDeleted": 0,
+      "persistentDeletionError": "destination_conflict: Library folder migration requires a fresh native request",
+      "byteMeasure": "Logical file sizes removed. This includes downloaded, reconstructed and fragmented copies made for this recovery, not newly freed persistent ChatGPT quota. It is not a measurement of final filesystem free space.",
+      "oldSessionDisappearanceCounted": false
+    },
+    "independentRemoteVerification": {
+      "fortieth": {
+        "checked": 36,
+        "errors": [],
+        "treeTruncated": false
+      },
+      "mer": {
+        "checked": 115,
+        "png": 110,
+        "errors": [],
+        "pendingSourceCount": 11,
+        "pendingSourcePaths": [
+          "dlc/sea-of-sorrows-visual/src/art-pack.js",
+          "dlc/sea-of-sorrows-visual/src/gallery.js",
+          "dlc/sea-of-sorrows-visual/src/png-renderer.js",
+          "package.json",
+          "scripts/build-asset-filter.mjs",
+          "scripts/mer-des-chagrins-admission-20261125.mjs",
+          "scripts/mer-des-chagrins-visual-admission-20261125.mjs",
+          "scripts/verify-mer-des-chagrins-admission-20261125.mjs",
+          "scripts/verify-mer-des-chagrins-sprite-pack-20261125.mjs",
+          "scripts/verify-mer-des-chagrins-visual-20261125.mjs",
+          "scripts/verify-mer-des-chagrins-visual-admission-20261125.mjs"
+        ],
+        "treeTruncated": false
+      },
+      "extraArchives": {
+        "checked": 210,
+        "errors": [],
+        "treeTruncated": false
+      },
+      "avpSources": {
+        "head": "8e8d51c186052c0b0662786677dea3652c915583",
+        "checked": 10,
+        "errors": [],
+        "generatedPngCount": 3,
+        "generatedPngBytes": 11048227
+      }
+    },
+    "newSourceSprites": {
+      "pr": 74,
+      "commit": "8e8d51c186052c0b0662786677dea3652c915583",
+      "dlc": "avp-2004",
+      "count": 3,
+      "totalPngBytes": 11048227,
+      "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+      "sourceFiles": 6,
+      "totalChangedFiles": 10,
+      "remoteFilesCompared": 10,
+      "localAdmissionTestsPassed": 16,
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "alphaMedianNonzero": 253,
+      "alphaEdgesApproved": false,
+      "assets": [
+        {
+          "id": "avp2004-ritual-wall-panel",
+          "file": "avp2004-ritual-wall-panel.png",
+          "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png",
+          "bytes": 3751193,
+          "sha256": "cf8e76405fdf7e7489434e47bc30f72240cb2fd0b6059bfd9c0d1e191802d6a9",
+          "git_blob_sha": "7357e2c20af83c5e4dc55941e94923bdc3a09298",
+          "width": 887,
+          "height": 1774,
+          "candidateCatalogueIds": [
+            "AVP2004-159",
+            "AVP2004-249"
+          ],
+          "status": "source_candidate_generated_not_runtime_admitted",
+          "alpha_diagnostics": {
+            "nearly_opaque_pixels_250_255": 1212837,
+            "faint_pixels_1_15": 10053,
+            "core_bbox_alpha_ge128": [
+              61,
+              79,
+              826,
+              1689
+            ],
+            "core_bbox_alpha_ge250": [
+              62,
+              80,
+              825,
+              1688
+            ],
+            "median_nonzero_alpha": 253
+          }
+        },
+        {
+          "id": "avp2004-serpent-relief-tile",
+          "file": "avp2004-serpent-relief-tile.png",
+          "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png",
+          "bytes": 4106711,
+          "sha256": "b78e199fcc0796cbbac443cdc41ded38ab0be22c43931e8d3ab8d872e6be3eb6",
+          "git_blob_sha": "88b0cd389d414418fa26bfe8b7b485c2627959e9",
+          "width": 1254,
+          "height": 1254,
+          "candidateCatalogueIds": [
+            "AVP2004-159",
+            "AVP2004-249"
+          ],
+          "status": "source_candidate_generated_not_runtime_admitted",
+          "alpha_diagnostics": {
+            "nearly_opaque_pixels_250_255": 1352947,
+            "faint_pixels_1_15": 16522,
+            "core_bbox_alpha_ge128": [
+              45,
+              32,
+              1209,
+              1216
+            ],
+            "core_bbox_alpha_ge250": [
+              47,
+              34,
+              1207,
+              1215
+            ],
+            "median_nonzero_alpha": 253
+          }
+        },
+        {
+          "id": "avp2004-mask-relief-tile",
+          "file": "avp2004-mask-relief-tile.png",
+          "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png",
+          "bytes": 3190323,
+          "sha256": "98619e1e4c26c740e322e1f21a29ec9573658ebd52031f87fdff137ddadbee32",
+          "git_blob_sha": "2a5e4045e1659217c0b48cd4f037d7d808be3e1c",
+          "width": 1254,
+          "height": 1254,
+          "candidateCatalogueIds": [
+            "AVP2004-159",
+            "AVP2004-249"
+          ],
+          "status": "source_candidate_generated_not_runtime_admitted",
+          "alpha_diagnostics": {
+            "nearly_opaque_pixels_250_255": 1202996,
+            "faint_pixels_1_15": 20139,
+            "core_bbox_alpha_ge128": [
+              76,
+              77,
+              1178,
+              1178
+            ],
+            "core_bbox_alpha_ge250": [
+              77,
+              78,
+              1177,
+              1177
+            ],
+            "median_nonzero_alpha": 253
+          }
+        }
+      ]
+    }
+  },
+  "currentIntegrationReferences": [
+    {
+      "dlc": "aliens-1986",
+      "pr": 70,
+      "merged": true,
+      "mergeCommit": "5f38b7bad2c6401424b23fda11aeb86068f0f354",
+      "manifestHead": "1c20e87e8656dc0996523fd27319917b6215cdf7",
+      "pngCount": 123,
+      "newlyGeneratedInThatPR": 42,
+      "performedByThisDocumentationPass": false
+    },
+    {
+      "dlc": "alien-covenant",
+      "pr": 71,
+      "merged": false,
+      "draft": true,
+      "head": "aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9",
+      "pngCount": 49,
+      "runtimeAdmittedPNGs": 29,
+      "catalogueOnlyPNGs": 20,
+      "performedByThisDocumentationPass": false
+    }
+  ],
+  "remainingWork": [
+    {
+      "dlc": "sea-of-sorrows",
+      "status": "eleven_code_or_configuration_files_unrecovered",
+      "pr": 67,
+      "count": 11,
+      "bytes": 225325,
+      "action": "Retrouver les octets des11fichiers du ledger,ou documenter une reconstruction distincte, puis recaler les pivots et brancards, réappliquer les correctifs et valider l’activation."
+    },
+    {
+      "dlc": "40th-anniversary",
+      "status": "legacy_integration_commit_and_bundle_unrecovered",
+      "sourceArchivesPreserved": true,
+      "legacyCommit": "1f39f0f2c41e6a8c80eca4fd5481b92ac372972d",
+      "legacyBundleBytes": 256822850,
+      "action": "La PR72 sauve les 6 archives et possède une admission fermée des 37 fichiers source ; elle ne restitue pas l’ancien WIP. L’intégration jouable reste à traiter."
+    },
+    {
+      "dlc": "alien-covenant",
+      "status": "latest_module_reconnected_legacy_wip_exact_recovery_unproven",
+      "pr": 71,
+      "action": "Conserver le raccordV0.11 publié ; ne pas prétendre que la nouvelle intégration restitue chaque ancien script local à l’octet près."
+    },
+    {
+      "dlc": "aliens-1986",
+      "status": "older_unpublished_local_sources_to_find",
+      "pr": 70,
+      "reportedPNGCount": 20,
+      "reportedPNGBytes": 40024719,
+      "reportedDocumentCount": 53,
+      "reportedDocumentBytes": 1759979,
+      "olderPoseSourcesAlreadyAbsent": 19,
+      "action": "Retrouver les anciennes sources signalées dansPR70 et les comparer aux123PNG publiés ; aucune récupération n’est déduite d’une génération de remplacement."
+    },
+    {
+      "dlc": "alien-earth",
+      "status": "recent_sprite_files_and_manifest_to_recover",
+      "action": "Le rapport historique mentionne14sprites ; les fichiers et leurs empreintes doivent être retrouvés avant de déclarer leur publication."
+    },
+    {
+      "dlc": "out-of-the-shadows",
+      "status": "three_distinct_scripts_and_art_pack_to_recover",
+      "pr": 59,
+      "historicalComparedFiles": 368,
+      "historicalIdenticalFiles": 365,
+      "distinctScripts": 3,
+      "action": "Conserver les sources distantes existantes et récupérer les trois scripts divergents ainsi que le lot graphique non rapproché."
+    },
+    {
+      "dlc": "alien-resurrection",
+      "status": "legacy_local_integration_wip_not_preserved",
+      "action": "LeZIPV125 reste sauvegardé ; retrouver ou reconstruire en le déclarant les modifications locales d’intégration et d’admission."
+    },
+    {
+      "dlc": "all",
+      "status": "complete_animation_and_visual_fidelity_unfinished",
+      "action": "Reprendre seulement les variantes réellement absentes, avec références précises ; une image clé, un catalogue ou une suite technique ne ferme pas la fidélité1:1."
+    }
+  ],
+  "fidelity": {
+    "target": "1:1",
+    "exact": false,
+    "canonExact": false,
+    "verified1to1": false,
+    "qualification": "Archives, PNG récupérés, images générées, fichiers admis, comportements chargés et fidélité visuelle sont des états distincts."
+  }
+}

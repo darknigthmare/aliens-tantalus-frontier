@@ -1,0 +1,2327 @@
+{
+  "schemaVersion": 1,
+  "auditedOn": "2026-11-26",
+  "project": "Aliens: Tantalus Frontier",
+  "fullConversationAccess": false,
+  "contextRetrieval": {
+    "firstPass": {
+      "attempts": 3,
+      "error": "Personal context is unavailable for this conversation.",
+      "errorCode": "INVALID_ARGUMENT"
+    },
+    "reprise": {
+      "checkedAt": "2026-11-26T06:45:27Z",
+      "rootSuccessfulQueries": 3,
+      "childAttempt": {
+        "error": "Personal context is unavailable for this conversation.",
+        "errorCode": "INVALID_ARGUMENT"
+      },
+      "resultKind": "targeted_retrieved_summaries",
+      "fullTranscriptsAvailable": false,
+      "notes": [
+        "Les résultats sont des extraits et synthèses avec dates et auteurs, pas un accès exhaustif aux conversations.",
+        "Des résultats de recherche mêlent plusieurs fils ; le périmètre est fixé seulement lorsque l’identité du DLC est explicite.",
+        "Les anciens chiffres de rapports assistant ne remplacent pas les manifests et les commits récents."
+      ]
+    }
+  },
+  "baseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+  "verified1to1": false,
+  "decisions": [
+    {
+      "id": "D01",
+      "requirement": "Inventorier et publier tous les DLC et tous les fichiers locaux manquants",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Index des livraisons, branches et PR avec preuve d'intégrité par fichier.",
+      "domain": "archives",
+      "qualification": "À rapprocher des PR ; le nom d'un fichier ne prouve pas la sauvegarde de ses octets."
+    },
+    {
+      "id": "D02",
+      "requirement": "Libérer l'espace une fois les copies GitHub vérifiées",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Suppression limitée aux copies dont le contenu est récupérable depuis un commit vérifié.",
+      "domain": "archives",
+      "qualification": "Conserver tout élément différent, non transféré ou sans preuve distante."
+    },
+    {
+      "id": "D03",
+      "requirement": "Réintégrer dans les bibles les décisions des discussions",
+      "source": "26 novembre 2026, demande courante",
+      "acceptance": "Décision → périmètre → état réel → pièce de preuve → écart restant.",
+      "domain": "documentation",
+      "qualification": "La reprise retrouve des synthèses ciblées de conversations, pas leur export intégral. Seules les exigences attribuables et les preuves consultées sont intégrées."
+    },
+    {
+      "id": "D04",
+      "requirement": "Rendre tous les lieux requis présents, cohérents et interconnectés",
+      "source": "Extraits visibles Aliens, Alien 3, Résurrection, Covenant, Earth, Fleuve",
+      "acceptance": "Inventaire des lieux attestés, graphe praticable, correspondance avec la chronologie, liste explicite des absents.",
+      "domain": "world",
+      "qualification": "Un lieu seulement décrit, inspectable ou condensé ne vaut pas une séquence de campagne complète."
+    },
+    {
+      "id": "D05",
+      "requirement": "Placer les portes dans une architecture logique",
+      "source": "Mêmes extraits : « que les porte soit pas poser en plein milieux si pas logique »",
+      "acceptance": "Chaque seuil possède support visible, côté, point de contact, destination, arrivée dégagée et garde narrative.",
+      "domain": "world",
+      "qualification": "Déjà documenté dans plusieurs codex ; conserver la séparation entre support visuel et collision."
+    },
+    {
+      "id": "D06",
+      "requirement": "Respecter tous les équipements et armes de l'œuvre",
+      "source": "Mêmes extraits : « tout les armes ou equipement soit dans le jeux aussi »",
+      "acceptance": "Propriétaire, scène, disponibilité et état jouable/représenté/narratif/documentaire/absent de chaque objet.",
+      "domain": "equipment",
+      "qualification": "La demande de couverture n'autorise pas à attribuer toutes les armes à chaque personnage."
+    },
+    {
+      "id": "D07",
+      "requirement": "Faire correspondre personnages, apparences et variantes",
+      "source": "Mêmes extraits : « que les perso corresponde a l apparence correspondante »",
+      "acceptance": "Personnage × scène × tenue × état/blessure × équipement, références distinctes et apparences admises.",
+      "domain": "appearance",
+      "qualification": "Une silhouette générique réutilisée ne ferme pas plusieurs personnages nommés."
+    },
+    {
+      "id": "D08",
+      "requirement": "Viser la fidélité 1:1 sur l'ensemble",
+      "source": "Demandes répétées dans les extraits et demande courante",
+      "acceptance": "Référence par œuvre/version et comparaison visuelle documentée ; inconnues et adaptations explicites.",
+      "domain": "fidelity",
+      "qualification": "La cible reste ouverte. Ni les tests, ni la génération, ni un compteur ne certifient la fidélité."
+    },
+    {
+      "id": "D09",
+      "requirement": "Mettre tous les DLC au standard élaboré entre eux",
+      "source": "Extraits Aliens, Alien 3, Résurrection et « sur la même base » Covenant/Earth/Fleuve",
+      "acceptance": "Même exigence de lisibilité, intégration, preuves et qualité, sans effacer les règles propres à chaque œuvre.",
+      "domain": "quality",
+      "qualification": "Les moteurs autonomes et les campagnes natives restent identifiés séparément."
+    },
+    {
+      "id": "D10",
+      "requirement": "Développer le codex, la parallaxe et les graphismes",
+      "source": "2-DLC Aliens, fil commencé le 28 septembre 2026",
+      "acceptance": "Plans lisibles, vrais aperçus identifiés, couches de profondeur, matières/éclairage et props cohérents.",
+      "domain": "art",
+      "qualification": "Un schéma n'est pas une capture de gameplay ; un fond ne constitue pas une salle jouable."
+    },
+    {
+      "id": "D11",
+      "requirement": "Remplacer les placeholders et améliorer densité/cohérence des props",
+      "source": "2-DLC Alien 3, fil commencé le 29 septembre 2026",
+      "acceptance": "Prioriser les assets actifs, respecter les supports et garder dégagés les volumes praticables.",
+      "domain": "art",
+      "qualification": "Les références déjà produites ou sur une branche distincte sont comparées avant nouvelle génération."
+    },
+    {
+      "id": "D12",
+      "requirement": "Auditer le level design contre le film et les références visuelles",
+      "source": "Branche 2-DLC Alien résurrections, extrait visible du 25 novembre 2026",
+      "acceptance": "Audit des lieux, placements et séquences contre les références précises, puis correction vérifiée.",
+      "domain": "fidelity",
+      "qualification": "La liste historique des cinq conseils n'est pas visible : le message « pas le 1 » ne permet pas de reconstruire ce point exclu."
+    },
+    {
+      "id": "D13",
+      "requirement": "Continuer tous les sprites manquants après sauvegarde",
+      "source": "26 novembre 2026 et extraits Aliens/Alien3/Covenant/Fleuve",
+      "acceptance": "Backlog par ID stable : absent, candidat, admis, chargé, raccordé et vérifié dans un état de jeu réel.",
+      "domain": "art",
+      "qualification": "Le statut documentaire ancien doit être rapproché du manifeste et de la PR actuels."
+    },
+    {
+      "id": "D14",
+      "requirement": "Générer pour le bon DLC",
+      "source": "Correction explicite Covenant, 26 novembre 2026",
+      "acceptance": "Chaque génération indique DLC, scène/version, personnage/objet, référence et destination.",
+      "domain": "art",
+      "qualification": "Une production d'un autre DLC ne clôture pas la demande Covenant."
+    },
+    {
+      "id": "D15",
+      "requirement": "Livrer un rapport illustré de captures du jeu pour chaque passe majeure",
+      "source": "2026-09-25T07:18:20Z ; 2026-09-25T07:19:17Z — 2026-11-26, groupe 1, c8 et c9/c11",
+      "acceptance": "Rapport associé à la version et au commit ; captures du jeu réellement exécuté, scénario, état, provenance et limites de la validation.",
+      "domain": "delivery",
+      "qualification": "Exigence retrouvée dans les fils Fiorina et Résurrection. Une galerie de sprites, une illustration générée ou une fixture isolée ne devient pas une capture de parcours complet.",
+      "evidenceIds": [
+        "CTX-R2-01"
+      ],
+      "appliesTo": [
+        "alien-resurrection",
+        "alien3-fiorina"
+      ]
+    },
+    {
+      "id": "D16",
+      "requirement": "Conserver le mode hybride et un Codex Fiorina dédié",
+      "source": "2026-09-25T06:48:46Z — 2026-11-26, groupe 1, c9/c11",
+      "acceptance": "Scène par scène, déclarer profondeur/2.5D ou vraie 2D latérale, passage entre les modes et documentation Fiorina séparée du MIRE.",
+      "domain": "world",
+      "qualification": "Cette demande concerne Alien 3 ; elle ne prescrit pas arbitrairement le même mode à tous les DLC.",
+      "evidenceIds": [
+        "CTX-R2-02"
+      ],
+      "appliesTo": [
+        "alien3-fiorina"
+      ]
+    },
+    {
+      "id": "D17",
+      "requirement": "Achever les quatre priorités acceptées pour Romulus",
+      "source": "2026-09-28T02:56:55Z ; 2026-09-28T23:20:31Z — 2026-11-26, groupe 1, c0",
+      "acceptance": "Laboratoire de référence, parcours complets sans diagnostic, raccords continus du Corbelan, performances et sons : chacune possède source, état réel et preuve.",
+      "domain": "world",
+      "qualification": "Une liaison de graphe ou une succession d’écrans de diagnostic ne clôt pas un parcours. Les dialogues disponibles et les dialogues originaux gardent une provenance distincte.",
+      "evidenceIds": [
+        "CTX-R2-03"
+      ],
+      "appliesTo": [
+        "alien-romulus"
+      ]
+    },
+    {
+      "id": "D18",
+      "requirement": "Produire des sprites individuels en profil 2D et une livraison consultable",
+      "source": "2026-10-05T13:22:17Z — 2026-11-26, groupe 1, c2",
+      "acceptance": "Un PNG par asset ou pose, identité/variante stable, direction artistique Tantalus, galerie et archive retraçables ; couvrir héros et variantes réellement manquants.",
+      "domain": "art",
+      "qualification": "Une planche n’est pas plusieurs PNG indépendants ; une pose statique n’est pas un cycle et une archive annoncée sans octets vérifiés reste à livrer.",
+      "evidenceIds": [
+        "CTX-R2-04"
+      ],
+      "appliesTo": [
+        "shared-sprite-production"
+      ]
+    },
+    {
+      "id": "D19",
+      "requirement": "Préserver les continuités et l’historique sans mélanger leurs versions",
+      "source": "2026-08-18T23:04:45Z ; 2026-08-19T10:02:32Z — 2026-11-26, groupe 1, c3",
+      "acceptance": "Œuvre, montage, période et statut de création explicités ; archives antérieures conservées avec empreintes, liens de succession et récupération possible.",
+      "domain": "continuity",
+      "qualification": "La consigne v1–v38 vise l’historique du projet initial, pas une affirmation que chaque DLC possède 38 versions. Alien 5/Lazare reste une adaptation de concepts et une création du projet.",
+      "evidenceIds": [
+        "CTX-R2-05"
+      ],
+      "appliesTo": [
+        "project-history",
+        "continuity"
+      ]
+    },
+    {
+      "id": "D20",
+      "requirement": "Rendre les références visuellement consultables",
+      "source": "2026-08-24T10:32:20Z — 2026-11-26, groupe 1, c7",
+      "acceptance": "Lien de source ou image contextualisée si disponible, avec œuvre/version, sujet, angle ou scène et statut d’accès.",
+      "domain": "reference",
+      "qualification": "Un lien de recherche n’est pas une image effectivement examinée ; une source inaccessible reste signalée.",
+      "evidenceIds": [
+        "CTX-R2-06"
+      ],
+      "appliesTo": [
+        "reference-catalogue"
+      ]
+    },
+    {
+      "id": "D21",
+      "requirement": "Documenter les capacités et réactions propres à chaque caste",
+      "source": "2026-09-27T19:36:12Z — 2026-11-26, groupe 1, c4",
+      "acceptance": "Pour chaque caste concernée : provenance, stimuli, perception, déplacements, attaque échouable, réaction, transformation et identité persistante.",
+      "domain": "behavior",
+      "qualification": "Le codex comportemental historique est une spécification rapportée, pas une preuve de raccord IA. Ne pas confondre tadpole, cocon de maturation et enveloppe de survie de Big Chap.",
+      "evidenceIds": [
+        "CTX-R2-07"
+      ],
+      "appliesTo": [
+        "creature-behavior",
+        "alien-romulus"
+      ]
+    },
+    {
+      "id": "D22",
+      "requirement": "Conserver le support et le tier de provenance des références",
+      "source": "2026-11-08T17:07:01Z ; 2026-11-08T18:01:33Z — 2026-11-26, groupe 1, c5",
+      "acceptance": "Relier la référence à son œuvre, support, source et qualification dans alien_base ; marquer les mentions limitées au nom ou à la présence.",
+      "domain": "reference",
+      "qualification": "Un classement de référence ne certifie pas une apparence, un mécanisme de jeu ni une continuité partagée. Les tiers de l’article doivent être relus avant attribution.",
+      "evidenceIds": [
+        "CTX-R2-08"
+      ],
+      "appliesTo": [
+        "alien_base",
+        "reference-provenance"
+      ]
+    }
+  ],
+  "dlcs": [
+    {
+      "id": "alien-1979-nostromo",
+      "title": "Alien / MIRE Nostromo",
+      "version": "V119",
+      "scope": "Branche autonome cumulative ; pas de fusion native attestée par la livraison source.",
+      "counts": "62 états de scène ; 51 connexions / 102 faces ; 229 cibles physiques ; 20 catégories d'équipement ; 46 opérations narratives.",
+      "documented": [
+        "Ponts/corrosion structurés par fonctions et raccords de gameplay.",
+        "Dallas/Lambert/Kane EVA avec repères rouge/bleu/jaune ; tenue claire Narcissus distincte pour Ripley.",
+        "RXF-M5 visible sans transformation en arme libre."
+      ],
+      "gaps": [
+        "Relevé métrique complet des ponts et du Narcissus.",
+        "Visages, proportions, textures et chorégraphies à qualifier.",
+        "Raccord de lancement/retour/sauvegarde à établir depuis les sources réelles."
+      ],
+      "production": [
+        "Rapprocher les 20 catégories d'équipement et les variantes EVA des fichiers réellement produits avant génération.",
+        "Qualifier le Big Chap, les tenues par scène et le Narcissus contre leurs références ; garder les dimensions de jeu séparées des cotes de tournage.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive historique préservée ; aucun raccord natif dédié confirmé par ce snapshot.",
+        "archive": "archives/local-recovery-20261125/mire-nostromo/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN_V119.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "aliens-1986",
+      "title": "Aliens (1986)",
+      "version": "V114 conservée + présentation V116 fusionnée dans main",
+      "scope": "Opération autonome et inspections ; raccord hôte documenté dans le dépôt, distinct d'une conversion native.",
+      "counts": "25 lieux inspectables ; 11 lieux d'opération ; 20 raccords réciproques ; 5 objectifs locaux ; 80 règles ; 8 repères absents.",
+      "documented": [
+        "Ensembles Sulaco/planète séparés, sans porte magique.",
+        "Newt désarmée ; M240/grenades avec dotation finie ; shotgun propre à Hicks.",
+        "Inspections, objectifs locaux et campagne film distincts."
+      ],
+      "gaps": [
+        "Boss Reine, duel P-5000 et expulsion finale non joués dans cette branche.",
+        "Narcissus/récupération et appartement Gateway seulement références.",
+        "Façades/extérieurs, transports et ascenseurs partiels.",
+        "Hicks blessé, Warrior marche, Facehugger attaque et défaite : quatre poses encore absentes après refus de génération.",
+        "20 PNG anciens et 53 documents non transférés dans la PR70 ; 19 sources de poses étaient déjà absentes.",
+        "Les détails M41A/M240 de Ripley et tous les cycles complets d’animation restent à qualifier."
+      ],
+      "production": [
+        "Comparer le manifeste V116 de 123 PNG avant toute création ; les 70 V115 et 42 nouveaux ne sont plus à régénérer comme s’ils étaient absents.",
+        "Raccorder chaque tenue/arme à son propriétaire ; une Reine d'inspection ou un loader de décor ne clôture pas le final.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          57,
+          65,
+          70
+        ],
+        "state": "PR70 fusionnée dans main au commit 5f38b7bad2c6401424b23fda11aeb86068f0f354 ; 123 PNG dans le manifeste V116. La branche V115/PR65 reste une provenance historique distincte.",
+        "paths": [
+          "modules/aliens-1986/v114/",
+          "dlc/aliens-1986/",
+          "assets/dlc/aliens-1986/v115/"
+        ],
+        "mergeCommit": "5f38b7bad2c6401424b23fda11aeb86068f0f354",
+        "testedHead": "1c20e87e8656dc0996523fd27319917b6215cdf7"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "member": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/README.md",
+          "archiveName": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip"
+        },
+        {
+          "read": true,
+          "member": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1/CODEX_LEVEL_DESIGN_V114.md",
+          "archiveName": "ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/1c20e87e8656dc0996523fd27319917b6215cdf7/docs/development/aliens-1986-sprites-v116/README.md"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/1c20e87e8656dc0996523fd27319917b6215cdf7/docs/development/aliens-1986-sprites-v116/manifest.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "assetCoverage": {
+        "count": 123,
+        "v115": 70,
+        "reused": 11,
+        "newV116": 42,
+        "characterProfiles": 16,
+        "posesPerCharacter": [
+          "idle",
+          "walk",
+          "interact"
+        ],
+        "fullAnimationCycles": false,
+        "verified1to1": false,
+        "missing": [
+          "warrior-walk-right",
+          "facehugger-attack-right",
+          "facehugger-death-right",
+          "hicks-wounded"
+        ],
+        "unpublishedLocalPngs": 20,
+        "unpublishedLocalPngBytes": 40024719,
+        "unpublishedLocalDocuments": 53,
+        "unpublishedLocalDocumentBytes": 1759979,
+        "olderPoseSourceFilesMissing": 19,
+        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/1c20e87e8656dc0996523fd27319917b6215cdf7/docs/development/aliens-1986-sprites-v116/manifest.json"
+      }
+    },
+    {
+      "id": "alien3-fiorina",
+      "title": "Alien 3 / Fiorina 161",
+      "version": "V114 natif, V116 fusionné, V117 en PR",
+      "scope": "Campagne native ; audit de préparation V117 historique à rapprocher de la PR64.",
+      "counts": "V117 : 77 PNG distincts ; 91 entrées ; 107 occurrences de frames ; 14 animations. Seize PNG nouveaux dont onze employés par les raccords natifs et cinq documentaires.",
+      "documented": [
+        "Appui/pivot, propriétaire de collision et garde narrative conservés par raccord.",
+        "Spike/montage cinéma et bovin/Assembly séparés ; scènes de inspection ≠ route de campagne.",
+        "Pas d'arsenal Marines pour Ripley ; fusil Compagnie représenté à l'arrivée, non ramassable.",
+        "V117 livre course Runner à quatre phases, windup, six poses d'arrivée Ripley et downed prison ; 61 PNG historiques conservés."
+      ],
+      "gaps": [
+        "Runner recover et M41A noir autonome non produits, service image ayant refusé les tentatives de V117.",
+        "Enregistreur de vol et kit médical complet sans géométrie de référence suffisante ; seringue/flacon séparés ne ferment pas le kit.",
+        "EEV et autres props demandent un raccord natif identifié et une image admissible ; pas de substitution globale inventée.",
+        "Toutes les nouvelles entrées gardent exact:false ; les écarts de dôme, marquages et parties cachées restent déclarés."
+      ],
+      "production": [
+        "Lire le manifeste V117 et ses raccords avant de générer ; préserver les anciens reçus V115/V116.",
+        "Ne pas réintroduire Murphy/Boggs/Rains vivants pour afficher leurs poses.",
+        "Ne pas confondre une lampe de catalogue avec les lampes fixes actives.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          56,
+          61,
+          63,
+          64
+        ],
+        "state": "V114 native et V115/V116 fusionnées dans la cumulative ; V117 en PR64 ouverte.",
+        "paths": [
+          "src/alien3-*.js",
+          "assets/openai/sprites/alien3-fiorina-v115/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "AUDIT_RACCORDS_V117.md"
+        },
+        {
+          "read": true,
+          "name": "AUDIT_SPRITES_FIORINA_V114.md"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/906d514fdae2a110ab1a5b0c9598c36068d6425e/docs/development/FIORINA_SPRITES_V117.md",
+          "name": "fiorina-v117-current.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D11",
+        "D13",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien-resurrection",
+      "title": "Alien Résurrection",
+      "version": "125.0.0-references-architecture-candidate.1",
+      "scope": "Correctif V124 et aperçu ValidationHost ; une préservation de sources n'établit pas la fusion native.",
+      "counts": "60 états de salles ; 40 frontières locales dont 20 sas et 20 ouvertures ; 19 transferts narratifs ; 503 objets ; 15 nouveaux atlas / 167 clips / 697 images de frames.",
+      "documented": [
+        "États de salle et pièces physiques distingués ; ouvertures permanentes non artificiellement fermables.",
+        "Armes propriétaire et modes joueur distingués ; Draco à acquisition physique.",
+        "Provenance de costumes Call/Christie/Wren ; chestburster séparé du facehugger."
+      ],
+      "gaps": [
+        "Quartiers Perez absents comme lieu visitable distinct.",
+        "Confrontation Purvis/Wren à déplacer réellement dans le Betty.",
+        "Portage Christie/Vriess manquant ; fauteuil autonome non équivalent.",
+        "Réservoirs/extérieurs/épilogue condensés ; visages illustrés non 1:1."
+      ],
+      "production": [
+        "Reprendre la matrice de référence avant toute création d'armes/tenues.",
+        "Traiter le portage comme poses + propriétaire de mouvement + passage, pas seulement image.",
+        "Garder inconnue la consigne historique « pas le 1 » dont la liste de conseils manque.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive historique préservée ; sources/essais locaux distincts de leur publication et d'une intégration native.",
+        "archive": "archives/local-recovery-20261125/alien-resurrection/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_V125.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_REFERENCES_FIDELITE_V125.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D12",
+        "D13",
+        "D15",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien-covenant",
+      "title": "Alien: Covenant",
+      "version": "V0.10 conservée + raccord graphique V0.11 en PR71",
+      "scope": "Module autonome avec registre d'adaptation ; aucune ligne verified1to1=true annoncée.",
+      "counts": "56 espaces physiques + tableau séparé ; 67 liaisons / 134 seuils ; 42 objectifs / 12 chapitres ; 315 fiches dont 224 cinéma : 150 correspondances partielles et 74 sans correspondance.",
+      "documented": [
+        "Support/matière/contact par seuil ; embarquement de berge distinct d'une porte.",
+        "Pièce blanche séparée ; Origae-6 non inventée comme lieu visité ; lander condamné selon chronologie.",
+        "Walter intact/amputé, David sanctuaire et David sous apparence Walter distincts.",
+        "Quatre armes manipulables ; SL40 représenté sans projectile inventé.",
+        "Le PNG de Walter blessé ne doit pas être retourné horizontalement : main anatomique gauche manquante.",
+        "Oram au pont et Karine sur le terrain gardent leurs variantes propres ; leurs autres tenues restent au catalogue.",
+        "Daniels EVA souple et Tennessee Big Yellow sont distincts ; Cargo Lifter de plaza ne remplace pas la grue dynamique de lifter.",
+        "Capsule ouverte seulement en cryo ; modèles de capsules fermées, trône Bugatti et table E1027 restent qualifiés selon leurs références, sans substitution universelle."
+      ],
+      "gaps": [
+        "74 références cinéma sans correspondance dans le registre source.",
+        "Cabine cargo lifter, volumes de lancement/amarrage, états biologiques et équipements particuliers partiels.",
+        "Visages, plans cotés et chorégraphies non certifiés.",
+        "Sept familles d’armes, deux poses du xénomorphe et statue : absentes après refus ou sujet lié ; ne pas compter de fichiers inexistants.",
+        "37 des 50 familles d’objets candidats n’ont pas de PNG dédié ; les affichages et mécanismes actifs conservent leur renderer.",
+        "Les humains disposent de poses neutres ; marche, course, armes en main, rechargement, impact et mort ne forment pas des cycles livrés."
+      ],
+      "production": [
+        "Comparer les 3 candidats PR69 aux références avant raccord : adulte Néomorphe, Facehugger et Ovomorphe. Juvénile Hallett et Xénomorphe idle non produits après refus ; ne pas les compter.",
+        "Toute génération doit indiquer Covenant explicitement, conformément à la correction utilisateur du 26 novembre.",
+        "Prioriser les profils actifs distincts et les équipements déjà raccordés ; conserver apparence Walter après révélation.",
+        "Les données de jeu (munitions/dégâts) ne deviennent pas des spécifications canoniques.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          69,
+          71
+        ],
+        "state": "PR71 brouillon à aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9 : 49 PNG, 29 admis au rendu et 20 au catalogue ; module et menu raccordés sur cette branche. PR69 conserve séparément trois candidats sources non activés.",
+        "archive": "archives/local-recovery-20261125/alien-covenant/",
+        "spriteManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/65e3c378b8dd4469a053eafff6a5ae4d5a9669e1/docs/development/covenant-sprites-20261126/manifest.json",
+        "head": "aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN_COVENANT.md"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9/assets/openai/sprites/alien-covenant-v011/manifest.json"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9/docs/covenant/SPRITES_V011_STATUS.md"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9/docs/covenant/PROVENANCE_V011.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D14",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "assetCoverage": {
+        "totalPNGs": 49,
+        "newlyGeneratedPNGs": 48,
+        "reusedPNGs": 1,
+        "humanPNGs": 25,
+        "expectedHumanProfiles": 23,
+        "expectedHumanProfilesWithPNG": 23,
+        "creaturePNGs": 4,
+        "expectedCreatureStaticPoses": 6,
+        "weaponPNGs": 0,
+        "expectedWeaponFamilies": 7,
+        "otherPNGs": 20,
+        "runtimePNGs": 29,
+        "catalogueOnlyPNGs": 20,
+        "filmObjectCandidateFamilies": 50,
+        "filmCandidateFamiliesWithSomePNG": 13,
+        "filmCandidateFamiliesWithRuntimeVariant": 11,
+        "filmCandidateFamiliesWithoutPNG": 37,
+        "allPropFamilies": 126,
+        "allPropInstances": 630,
+        "blockedOrRelatedStaticAssets": 10,
+        "certified1to1PNGs": 0,
+        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9/assets/openai/sprites/alien-covenant-v011/manifest.json",
+        "statusDocument": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9/docs/covenant/SPRITES_V011_STATUS.md",
+        "fullAnimationCycles": false
+      }
+    },
+    {
+      "id": "alien-earth",
+      "title": "Alien: Earth",
+      "version": "V11.0.0",
+      "scope": "Saison 1 condensée, moteur autonome ; audit historique d'intégration distinct du contenu.",
+      "counts": "70 lieux ; 32 tâches principales + 38 facultatives ; 102 liaisons / 204 seuils ; 958 placements / 49 types ; 331 règles ; 25 silhouettes ; 3 points de vue jouables.",
+      "documented": [
+        "Noms/fonctions attestés distingués d'adjacences reconstruites.",
+        "Transferts géographiques/temporels explicites ; seuils ancrés.",
+        "MCS-X/Maxim9 Joe, pistolet Maginot Morrow ; KRISS documenté non jouable.",
+        "Outils originaux marqués adaptation."
+      ],
+      "gaps": [
+        "Blueprints et inventaire image par image des huit épisodes non complets.",
+        "Armes/accessoires de fond, tenues/blessures, visages et animations.",
+        "Extérieurs New Siam/Neverland et chorégraphies non complets.",
+        "Audit historique : sauvegarde depuis le titre via visibilitychange à vérifier/corriger dans l'intégration actuelle."
+      ],
+      "production": [
+        "Comparer les 25 silhouettes et les packs récents avant de produire de nouveaux doublons.",
+        "Qualifier chaque personnage et chaque organisme contre les références de la saison 1 ; séparer invention de gameplay et espèce attestée.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [],
+        "state": "Archive V11 préservée ; raccord natif non confirmé.",
+        "archive": "archives/local-recovery-20261125/alien-earth/"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_ALIEN_EARTH_V11.md"
+        },
+        {
+          "read": true,
+          "name": "ALIEN_EARTH_V11_INTEGRATION_AUDIT.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "river-of-pain",
+      "title": "Alien : Fleuve de la Douleur",
+      "version": "0.9.0-candidate.1 + packs visuels",
+      "scope": "Module autonome récupéré ; raccord et42 sprites fusionnés dans main selon snapshot,28 props sur branche distincte.",
+      "counts": "47 lieux ; 64 connexions /128 seuils ; 16 chapitres ; 49 objectifs +6 détours ; 14 profils ; 93 entrées documentaires.",
+      "documented": [
+        "Types de seuil/support ; pistes sans portes isolées ;44 props gênants déplacés.",
+        "Corrections Russ/Brackett, Luisa/Newt et transmission Hidalgo.",
+        "Anne/Newt désarmées ; M240/grenades facultatifs = adaptation.",
+        "Plans reconstruits ; texte intégral non confronté."
+      ],
+      "gaps": [
+        "Séquences hors-colonie, certains personnages et équipements absents.",
+        "Unité médicale observable, sans chirurgie jouable.",
+        "Apparences source vectorielles : les packs plus récents doivent remplacer cette lecture historique."
+      ],
+      "production": [
+        "Intégrer/comparer les28 props déjà produits avant génération ; conserver42sprites déjà fusionnés.",
+        "Raccorder les assets à leur scène, pas globalement à chaque type de prop.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          60,
+          62,
+          66
+        ],
+        "state": "Module et 42 sprites fusionnés dans main ; 28 props supplémentaires en PR66, soit 70 PNG sur cette branche.",
+        "paths": [
+          "dlc/fleuve-de-la-douleur/",
+          "archives/river-of-pain/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien-blackout",
+      "title": "Alien: Blackout",
+      "version": "0.7.0",
+      "scope": "Sept secteurs distincts, module autonome et extensions Tantalus signalées.",
+      "counts": "56 pièces (4 SIDE/52 DEPTH) ; 66 cloisons /132 faces ; 21 gaines ; 41 familles /703 placements ; 5 silhouettes ; 16 équipements ; 11 écarts ; 271 fiches.",
+      "documented": [
+        "Studwick ingénieur, Thorncroft scientifique ; armes portatives non confirmées non ajoutées.",
+        "Cartes/caméras ne téléportent personne ; gaines réservées aux Aliens.",
+        "Refuge unique, deux Aliens finaux, balises/soins/secours = adaptations."
+      ],
+      "gaps": [
+        "Feuille officielle de personnages non récupérée, silhouettes interprétées.",
+        "Haldin intérieur/vol, refuge multiaccès et déroulé des objectifs incomplets.",
+        "Plans métriques, correspondance caméras/pièces et timings non établis."
+      ],
+      "production": [
+        "Produire les personnages après références, pas à partir de rôles confondus.",
+        "Préserver explicitement les extensions Tantalus sans les attribuer au jeu original.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          54,
+          73
+        ],
+        "state": "PR54 conserve le raccord Blackout ; Archive originale sauvegardée en PR73 : 33 103 752 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "paths": [
+          "dlc/alien-blackout/",
+          "modules/alien-blackout/"
+        ],
+        "zipBytesPublished": true,
+        "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+        "archiveSizeBytes": 33103752,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/blackout-source-recovery-20261126/alien-blackout/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "member": "ALIEN_BLACKOUT_v0.7.0/README.md",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c"
+        },
+        {
+          "read": true,
+          "member": "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/blackout-source-recovery-20261126/alien-blackout/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "out-of-the-shadows",
+      "title": "Alien : Hors des Ombres",
+      "version": "0.10.0",
+      "scope": "Extrait autorisé et sources éditoriales ; roman/dramatique à distinguer.",
+      "counts": "41 pièces ; 52 liaisons /104 seuils ; 16 chapitres /48 objectifs ; 48 types /331 placements ; 228 notices ; 18 équipements ; 10 profils /28 présences.",
+      "documented": [
+        "Portes dans retours de cloison ; plans originaux non cotés.",
+        "Cinq outils utilisables distincts des références documentaires.",
+        "Rôles civils et apparences provisoires sans portraits des comédiens vocaux."
+      ],
+      "gaps": [
+        "Quatre adultes au vestibule, vitres rompues et décompression partiels.",
+        "Carte minière/quartiers/systèmes épave incomplets.",
+        "Xénobiologie épave non authentifiée ; ne pas identifier automatiquement les vestiges aux Ingénieurs."
+      ],
+      "production": [
+        "Comparer les packs déjà générés et PR59 avant génération.",
+        "La morphologie non décrite par les sources doit rester interprétation de production, même si le PNG est détaillé.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          59
+        ],
+        "state": "PR59 ouverte ; comparer les modifications locales aux octets de cette branche avant nettoyage.",
+        "paths": [
+          "dlc/alien-hors-des-ombres/",
+          "archives/dlc-hors-des-ombres-v010/"
+        ]
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V010.json"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_LEVEL_DESIGN.html"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "sea-of-sorrows",
+      "title": "Alien : La Mer des Chagrins",
+      "version": "0.10.0 + pack visuel local",
+      "scope": "Module autonome ; plans/mécanismes/impressions Decker = adaptation.",
+      "counts": "50 salles ; 59 liaisons dont54 réciproques et5 transferts narratifs ; 113 seuils ; 5 armes jouables/7 documentaires ; 16 fiches distribution.",
+      "documented": [
+        "Râteliers à dotation finie unique, acquisition physique, pas ressources gratuites.",
+        "Grenades Silas et charges orbitales narratives.",
+        "Adams/Elway gardent parasites au transport/stase ; trois attaches reine = règle originale."
+      ],
+      "gaps": [
+        "Roman intégral/variantes audio non confrontés.",
+        "Silas/Muller/Dave/Pritchett seulement fiches dans la source.",
+        "Capture Manning, dernières actions Decker, décès/interventions secondaires à reconstituer.",
+        "Visage Decker et majorité distribution non authentifiés ; boss à trois attaches à revoir.",
+        "48 pivots de décors hors image à recalibrer en pixels source ; orientations adams/elway head-right non admises.",
+        "Correctif de repli après pose PNG invalide et suppression du double agrandissement du parasite royal documentés mais non activés.",
+        "Xénomorphe adulte, Reine, fusil plasma et lance-flammes sans nouveau PNG après refus.",
+        "Le besoin de récupérer les 110 PNG historiques est fermé dans PR67 après vérification des empreintes ; 11 fichiers de code/configuration (225 325 octets) restent absents. Le code complet et son activation doivent encore être restitués et validés."
+      ],
+      "production": [
+        "Préserver les 115 sources vérifiées dans PR67 ; retrouver les 11 fichiers de code/configuration manquants. Les 110 PNG historiques ne sont plus à régénérer comme s’ils étaient absents ; leur sauvegarde ne constitue pas leur activation.",
+        "Ne pas confondre cinq armes jouables, sept références et seize fiches de distribution avec une reconstitution complète.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          58,
+          67
+        ],
+        "state": "PR58 conserve 27 PNG sources non activés à 994853bdd9d959980f0f8256cb39b1eadfe29911. PR67 conserve maintenant 115/126 sources uniques, dont les 110 PNG historiques, soit 215 587 160 octets à e716f75318f243a981fdf6e64728cd6f039ad6dd ; 11 fichiers de code/configuration (225 325 octets) restent à retrouver. Les lots se recouvrent et ne doivent pas être additionnés.",
+        "paths": [
+          "dlc/sea-of-sorrows/",
+          "dlc/sea-of-sorrows-visual/"
+        ],
+        "head": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "recoveryPr67": {
+          "head": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
+          "preservedFileCount": 115,
+          "preservedPngCount": 110,
+          "pendingFileCount": 11,
+          "preservedBytes": 215587160,
+          "ledger": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/e716f75318f243a981fdf6e64728cd6f039ad6dd/archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json"
+        }
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_DLC_MER_DES_CHAGRINS.md"
+        },
+        {
+          "read": true,
+          "name": "fidelity.json"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/994853bdd9d959980f0f8256cb39b1eadfe29911/docs/mer-des-chagrins-20261126/MANIFEST.json"
+        },
+        {
+          "read": true,
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/994853bdd9d959980f0f8256cb39b1eadfe29911/docs/mer-des-chagrins-20261126/RECOVERY.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "assetCoverage": {
+        "pr58SourcePNG": 27,
+        "new": 9,
+        "recovered": 18,
+        "pr58PNGBytes": 50302608,
+        "runtimeEnabled": false,
+        "pr67HistoricalSourceFiles": 33,
+        "pr67HistoricalPNG": 28,
+        "pr67HistoricalRemainingFiles": 93,
+        "previousSnapshotPNG": 110,
+        "previousSnapshotPNGMissingFromPR58": 92,
+        "noAdditionOfOverlappingCounts": true,
+        "pr67Current": {
+          "preservedFileCount": 115,
+          "preservedPngCount": 110,
+          "pendingFileCount": 11,
+          "preservedBytes": 215587160
+        }
+      }
+    },
+    {
+      "id": "avp-2004",
+      "title": "AVP (2004) — Sous la glace",
+      "version": "0.11.0",
+      "scope": "Lanceur/retour hôte intégrés sur cumulative ; moteur/sauvegarde AVP autonomes.",
+      "counts": "43 salles navigables +épilogue ; 52 liaisons /104 faces ; 145 SVG ; 188 notices ; 250 références ; 22 lignes armes/68 équipement.",
+      "documented": [
+        "Lex/Scar/Celtic/Chopper/Grid/Ancien distincts ; pas de biomask/canon offert à Lex.",
+        "Reine vaincue par chaîne/cuve ; Predalien limité à l'épilogue.",
+        "Continuité séparée de2204/Prometheus ; attribution précise des armes."
+      ],
+      "gaps": [
+        "1904, flashback ancien, hors recrutement, secondaires et variantes incomplets.",
+        "Camouflage/visions Yautja/bodycam/rations seulement documentés.",
+        "Kit médical Yautja, masque Elder et certains engins à vérifier.",
+        "Art vectoriel et métrique non certifiés."
+      ],
+      "production": [
+        "Qualifier masques, silhouettes et équipement par propriétaire plutôt qu'une silhouette Yautja générique.",
+        "Préserver la mécanique de fin chaîne/cuve ; ne pas remplacer par un boss à PV arbitraire.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          55,
+          74
+        ],
+        "state": "Lancement/retour hôte fusionnés dans la cumulative via PR55 ; moteur et carnets autonomes. PR74 conserve trois nouveaux PNG de reliefs comme sources candidates, sans activation ni fidélité 1:1 certifiée.",
+        "paths": [
+          "src/dlc/avp-2004/"
+        ],
+        "archive": "archives/local-recovery-20261125/avp-2004/",
+        "sourceSpriteCommit": "8e8d51c186052c0b0662786677dea3652c915583"
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_AVP_2004.md"
+        },
+        {
+          "read": true,
+          "name": "manifest.json / README.md",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "assetCoverage": {
+        "newSourcePNGCount": 3,
+        "totalSourcePngBytes": 11048227,
+        "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e8d51c186052c0b0662786677dea3652c915583/assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+        "candidateCatalogueIds": [
+          "AVP2004-159",
+          "AVP2004-249"
+        ],
+        "runtimeIntegrated": false,
+        "verified1to1": false,
+        "alphaMedianNonzero": 253,
+        "remainingReview": [
+          "détourage et pixels faiblement opaques",
+          "microreliefs et proportions",
+          "échelle, ancrages et lisibilité en jeu"
+        ],
+        "notCovered": [
+          "AVP2004-140 : aucune traduction authentifiée des glyphes",
+          "AVP2004-115 : Snowcat en attente de photographies plus exploitables",
+          "Animations, personnages, poses et autres DLC"
+        ]
+      }
+    },
+    {
+      "id": "40th-anniversary",
+      "title": "Alien — Anthologie40e anniversaire",
+      "version": "0.6.0",
+      "scope": "Six histoires indépendantes condensées ; édition autonome Canvas et intégration locale à publier.",
+      "counts": "6 histoires indépendantes ; 72 sous-espaces de jeu dont 12 galeries de raccord originales ; 84 connexions / 168 seuils orientés ; 72 actions principales, 24 travaux facultatifs, 796 placements / 46 familles.",
+      "documented": [
+        "Containment = sous-volumes de navette ; pas douze grandes salles.",
+        "Ore = transitions de palier, pas simulation d'ascenseur revendiquée.",
+        "Seuils sur cloison et raccords originaux étiquetés.",
+        "Harvest conserve détecteur, blessure d’Alec et fausse promesse de sauvetage ; une variante de quarantaine ne promet pas une évacuation saine.",
+        "Containment distingue Nass de Mills inconscient ; Night Shift ne transforme pas le dépôt en véritable hôpital.",
+        "Specimen laisse l’origine de l’œuf non expliquée ; la défense finale d’Ore garde son issue ouverte.",
+        "Alone ne transforme pas la synthétique en hôte humain et ne domestique pas l’organisme."
+      ],
+      "gaps": [
+        "Inventaire plan par plan des six courts non établi.",
+        "Graphismes vectoriels provisoires, fragments écrits et épilogues textuels.",
+        "Raccord natif non attesté par le README source ; intégration hôte distincte."
+      ],
+      "production": [
+        "Conserver une liste d'assets distincte pour chaque court ; ne pas fusionner leurs personnages/chronologies.",
+        "Comparer aux médias effectivement présents et au commit local d'intégration avant production.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          72
+        ],
+        "state": "PR72 préserve six ZIP originaux v0.1 à v0.6 : 174 243 911 octets, 20 fragments, 13 documents source. Ancien commit et bundle d’intégration non récupérés ; aucun raccord runtime ajouté.",
+        "paths": [
+          "dlc/40th-anniversary/",
+          "archives/40th-anniversary/"
+        ],
+        "bundleBytes": 256822850,
+        "archiveCommit": "8e5338da2879ecb4ec793fdbd62c0990f5d57237",
+        "archiveCount": 6,
+        "archiveBytes": 174243911,
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/MANIFEST.json",
+        "runtimeIntegratedByRecovery": false,
+        "head": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "sourceAdmission": "37 chemins et parents exacts admis comme sources ; tailles et SHA-256 fixes ; exclus du build. Admission au commit ed08d329d3e037fbe1db4490896dfde6afde0ee7."
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_40TH_V0_6.md"
+        },
+        {
+          "read": true,
+          "name": "CONTENT_COUNTS.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/documents/docs/CONTENT_COUNTS.json"
+        },
+        {
+          "read": true,
+          "name": "SOURCES_ET_ADAPTATION.md",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/8e5338da2879ecb4ec793fdbd62c0990f5d57237/archives/40th-anniversary-recovery-20261126/documents/docs/SOURCES_ET_ADAPTATION.md"
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "prometheus",
+      "title": "Prometheus",
+      "version": "12.0.0-candidate.1",
+      "scope": "Module autonome cumulatif ; rendu vectoriel de travail et fusion native non attestée.",
+      "counts": "44 lieux ; 54 connexions / 108 seuils ; 41 objectifs principaux ; 37 entrées matériel.",
+      "documented": [
+        "Passerelle sur deux niveaux jouables reliés par escalier ; géométrie adaptée.",
+        "Prologue et époques lointaines séparés du graphe physique.",
+        "Pièces du film et aménagements de jeu distingués."
+      ],
+      "gaps": [
+        "Sacrifice de l'Ingénieur, découverte archéologique terrestre et rêve de Shaw absents comme lieux jouables.",
+        "Quartiers Weyland et tunnels du complexe partiels ; embarquement/extérieur du second vaisseau condensés.",
+        "RT01 sans cabine détaillée, quad de décor, équipe secondaire incomplète."
+      ],
+      "production": [
+        "Reprendre les 37 inspections matérielles avec statut exact ; la présence dans le codex ne prouve pas l'usage.",
+        "Qualifier les apparences de Shaw/David/Vickers et des techniciens contre la scène concernée ; ne pas remplacer un lieu absent par une chambre générique.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 14 678 996 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+        "archiveSizeBytes": 14678996,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/prometheus/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_V12.md",
+          "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip"
+        },
+        {
+          "read": true,
+          "name": "CODEX_PROMETHEUS_V12.md",
+          "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/prometheus/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien-romulus",
+      "title": "Alien: Romulus",
+      "version": "0.20 — Convergences",
+      "scope": "Module autonome ; dialogues et chorégraphies d'adaptation originaux, séquences temporelles distinguées des niveaux libres.",
+      "counts": "20 chapitres ; 53 états de scène ; 26 lieux persistants + 2 lieux temporels ; 60 manipulations ; 38 séquences + prologue ; 41 franchissements physiques ; 30 seuils partagés ; 30 entrées matériel ; 8 profils ; 10 écarts.",
+      "documented": [
+        "Séquence Andy/Jackson's Star enrichie sans copier les dialogues du film.",
+        "Capsules guidées vers le sas ; bâtis fixes conservés ; transfert complet vers Corbelan encore ellipse.",
+        "Monte-charge Kay animé/sauvegardable ; course complète non prétendue.",
+        "Couches pluie Navarro/Kay/Bjorn/Tyler, parka rouge Rain et tenue Andy séparées."
+      ],
+      "gaps": [
+        "Prologue exploratoire, foule complète et extensions Jackson's Star incomplets.",
+        "Trajet intégral capsules/Corbelan et course inter-ponts du monte-charge.",
+        "Lieu exact de l'injection Kay non certifié ; plans Renaissance/Corbelan non métriques.",
+        "Second F44 Tyler partiellement simulé ; vêtements/dommages/visages stylisés.",
+        "Couloir de sécurité coupé volontairement exclu, à ne pas inventer dans le montage cinéma."
+      ],
+      "production": [
+        "Comparer les manifests incarnation/concordance avant de produire des doublons.",
+        "Distinguer infrastructure fixe (berceau, monte-charge) et matériel attribuable à Rain.",
+        "Garder les ellipses déclarées tant qu'une référence ne justifie pas le trajet physique.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 47 349 199 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+        "archiveSizeBytes": 47349199,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/romulus/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md",
+          "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip"
+        },
+        {
+          "read": true,
+          "name": "docs/REGISTRE_CONVERGENCES_V20.json",
+          "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/romulus/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien-isolation",
+      "title": "Alien: Isolation",
+      "version": "0.8.0 — Une station, des chemins",
+      "scope": "Adaptation autonome condensée ; pas toutes les pièces ni tous les DLC commerciaux d'Alien: Isolation.",
+      "counts": "76 lieux ; 112 liaisons / 224 seuils ; 840 placements ; 246 règles ; 19 chapitres ; 52 objectifs ; 32 tâches facultatives ; 57 archives ; 155 SVG.",
+      "documented": [
+        "Ouverture, approche et arrivée distinctes ; neuf changements de pont représentés en escaliers.",
+        "Morley requis à chaque entrée de pharmacie ; KG-348 verrouille ses annexes.",
+        "Chasseur non tuable ; roue/équipement sans pause ; Nora/Elias escortes originales.",
+        "Carte globale schématique et transports inter-salles condensés."
+      ],
+      "gaps": [
+        "Plan métrique complet, toutes les pièces et extensions commerciales non reproduits.",
+        "Rendu vectoriel provisoire, visages/animations et correspondance exacte des appareils à qualifier.",
+        "Persistance native et hôte Tantalus non qualifiés par les essais en mémoire du paquet."
+      ],
+      "production": [
+        "Inventorier Amanda, le chasseur, synthétiques et appareils depuis le vrai contenu, puis rapprocher les 155 SVG.",
+        "Conserver l'équilibre de furtivité et la non-mortalité du chasseur ; un nouvel asset ne justifie pas un arsenal létal contre lui.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 85 001 778 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+        "archiveSizeBytes": 85001778,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/alien-isolation/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README_FR.md",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_ISOLATION.md",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
+        },
+        {
+          "read": true,
+          "name": "docs/METRIQUES.json",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien-isolation/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "alien5-projet-lazare",
+      "title": "Alien5 — Projet Lazare",
+      "version": "V11 / 2.0.0-candidate.1 — Red Harvest",
+      "scope": "Branche alternative originale après Aliens, inspirée de concepts de production. Aucun film réalisé ni scénario intégral authentifié à reproduire.",
+      "counts": "68 lieux ; 95 connexions / 190 seuils ; 12 chapitres ; 27 objectifs ; 26 entrées matériel/installations ; 14 identités ; 43 références, dont 42 interprétations partielles et une à approfondir.",
+      "documented": [
+        "Calder/Lazare, raccords, civils/dialogues/fins = créations du jeu ; Alien 3/Résurrection non effacés.",
+        "Relais Newt désarmée, positions/ressources séparées, recrutement différent d'évacuation.",
+        "Prototype biomécanique quatrième arme avec réserve finie ; valeurs = gameplay.",
+        "Décor monumental du Derelict ne promet pas un intérieur sans raccord."
+      ],
+      "gaps": [
+        "Authentification partielle des concepts et correspondances ; pas reconstitution de film 1:1 possible sur ces seules sources.",
+        "Rendu vectoriel, métrique et équilibres humains non qualifiés.",
+        "Le codex cumulatif conserve des comptes historiques V10 (60 lieux/83 liens) ; utiliser README/audit V11 pour 68/95."
+      ],
+      "production": [
+        "Étiqueter chaque asset comme concept attesté adapté ou création Lazare ; garder canonExact:false.",
+        "Préserver l'identité originale de Calder et des systèmes P-17/M-4/S-12 ; ne pas inventer leur présence dans une œuvre publiée.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 7 330 460 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+        "archiveSizeBytes": 7330460,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/alien5-lazare/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
+        },
+        {
+          "read": true,
+          "name": "docs/CODEX_REGLES_V11.md",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
+        },
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V11.json",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/alien5-lazare/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "colonial-marines",
+      "title": "Aliens: Colonial Marines",
+      "version": "0.10.0 — Retour aux références",
+      "scope": "Adaptation autonome campagne/Stasis/Bug Hunt ; pas reproduction exhaustive du jeu commercial.",
+      "counts": "105 salles campagne/Stasis ; 15 chapitres ; 3 arènes Bug Hunt ; 107 liaisons / 214 seuils ; 21 profils d'armes ; 11 profils de personnages.",
+      "documented": [
+        "Acquisition physique de 17 ajouts d'armes ; trois sous-canons à réserves séparées ; six légendaires placées dans leur mission de référence.",
+        "Grue Sulaco Falls, escorte Reid/The Raven, trois valves Redemption.",
+        "Hicks corrige l'étiquette Lisbeth dans Awakening sans changer les IDs de sauvegarde.",
+        "Fiorina/Legato/Resolute et conclusion = scènes condensées/documentaires."
+      ],
+      "gaps": [
+        "G2 électrochoc, tourelle WY téléopérée, GAU-113/B, modifications/progression absents ou incomplets.",
+        "Mine non équivalente à une Claymore directionnelle ; économie/XP adaptées.",
+        "Sous-secteurs, verticalité, cinématiques/animations/dialogues non reconstitués intégralement.",
+        "Pas coop réseau/Versus ; Bug Hunt original, pas Broadside/Mercenary/Tribute ; Reconnaissance/Movie/Academy non reproduits."
+      ],
+      "production": [
+        "Commencer par les 21 profils réellement jouables et leurs utilisateurs ; ne pas compter les PNJ statiques comme scènes d'IA complètes.",
+        "Documenter armes/accessoires absents et leurs mécaniques propres avant de générer des images qui laisseraient croire au gameplay.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 62 621 653 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+        "archiveSizeBytes": 62621653,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/colonial-marines/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "README.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
+        },
+        {
+          "read": true,
+          "name": "docs/ASSETS_STATUS.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
+        },
+        {
+          "read": true,
+          "name": "docs/ADAPTATION.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/colonial-marines/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "avp-requiem",
+      "title": "AVP: Requiem",
+      "version": "0.10.0-candidate.1 — Les lieux et les visages",
+      "scope": "Module autonome ; montage cinéma/non censuré/scènes coupées encore distingués sans fusion sous un canon unique.",
+      "counts": "48 lieux au sol + 1 environnement aérien ; 65 liaisons / 130 seuils ; 15 séquences / 50 objectifs ; 373 props / 678 détails ; 30 entrées arsenal-équipement ; 11 profils / 8 présences secondaires ; 3 tableaux distants non jouables.",
+      "documented": [
+        "Routes/sentiers sans battant ; bâtiments ancrés ; descentes extérieures au sol ; Stryker avec rampe.",
+        "Gunnison et clairière finale séparés par séquence aérienne.",
+        "Armes film et jeu PSP non mélangées ; GUU-5P/Colt723 reste incertain.",
+        "Wolf masque/armure/cicatrice différenciés, sculpture faciale approximative."
+      ],
+      "gaps": [
+        "Préparation Wolf/homeworld, intérieur/prologue du vaisseau éclaireur et détachement orbital non reconstitués.",
+        "Commandement Stevens/remise Yutani consultatifs ; morgue/intérieurs secondaires incomplets.",
+        "Cimetière variante sans scène Karl ; pizzeria intérieur inventé ; maternité/nurserie sans toutes actions du film.",
+        "Stryker immobile ; Colt Python/MP5SD3/K3/CM203 et variantes sans gameplay complet.",
+        "Montage exact, apparences, dimensions et manipulations restent partiels."
+      ],
+      "production": [
+        "Établir le montage de référence par séquence ; ne pas ajouter dépôt de bus/scènes supprimées au cinéma sans étiquette.",
+        "Qualifier Wolf/Predalien/humains et leurs armes séparément ; garder les trois tableaux au statut documentaire.",
+        "Produire des PNG individuels de profil 2D dans la direction artistique Tantalus, avec référence consultable, variantes distinctes, galerie et archive vérifiables ; préserver la continuité propre au DLC."
+      ],
+      "exact": false,
+      "canonExact": false,
+      "referenceQualification": "adaptation_documented_not_1to1_certified",
+      "publication": {
+        "prs": [
+          73
+        ],
+        "state": "Archive originale sauvegardée en PR73 : 32 506 386 octets, SHA-256 identique au reçu initial. Les documents source sont consultables ; aucune activation gameplay nouvelle n’est effectuée par cette préservation.",
+        "zipBytesPublished": true,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+        "archiveSizeBytes": 32506386,
+        "archiveCommit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archivePath": "archives/dlc-source-recovery-20261126/avpr/",
+        "archiveManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+        "plannedArchivePathSuperseded": null
+      },
+      "documentEvidence": [
+        {
+          "read": true,
+          "name": "LIRE_DABORD.md",
+          "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617"
+        },
+        {
+          "read": true,
+          "name": "docs/AUDIT_FIDELITE_V0_10.md",
+          "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617"
+        },
+        {
+          "read": true,
+          "name": "MANIFEST.json",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/6b46eaf8f574871e39487e0a10ef46acfb1f41a6/archives/dlc-source-recovery-20261126/avpr/MANIFEST.json",
+          "qualification": "Manifeste de sauvegarde, tailles/SHA et noms de documents lus ; ce relevé ne signifie pas une nouvelle revue de chaque ligne du jeu."
+        }
+      ],
+      "decisionIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D13",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22"
+      ]
+    }
+  ],
+  "scopeNotes": [
+    "Documents et extraits visibles examinés ; aucune lecture exhaustive des conversations.",
+    "Les statistiques sont celles des versions documentaires, pas une nouvelle exécution de gameplay.",
+    "Les détails des PR proviennent du snapshot l'inventaire GitHub de la reprise du 26 novembre ; toute publication suivante doit être ajoutée comme nouvel état.",
+    "Les bibles historiques déjà conformes ne sont pas présentées comme des corrections de code réalisées ici.",
+    "Reprise : trois recherches ciblées ont retrouvé de nouvelles exigences utilisateur ; l’historique intégral reste non accessible.",
+    "Les nouvelles fiches gardent les 14 décisions initiales et ajoutent D15–D22 sans convertir les rapports assistant anciens en faits actuels.",
+    "Les fichiers temporaires de l’ancienne session peuvent manquer après réinitialisation ; cela ne constitue pas une suppression vérifiée effectuée par cette reprise.",
+    "Les sept archives supplémentaires ont été récupérées à nouveau et publiées intégralement en PR73 ; leurs SHA-256 correspondent au premier reçu. Les documents source lus lors de la première passe sont maintenant conservés sur GitHub."
+  ],
+  "publicationSnapshot": {
+    "date": "2026-11-26",
+    "cumulativeBase": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+    "historicalArchiveCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+    "currentReadPRs": [
+      58,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "note": "Aliens PR70 fusionnée dans main ; Covenant PR71 ouverte ; Mer PR67 conserve 115 sources / 110 PNG ; six ZIP du 40e anniversaire en PR72 et sept ZIP complémentaires en PR73. Les registres d’intégrité ne certifient pas la fidélité visuelle ni une activation nouvelle.",
+    "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+    "verifiedAt": "2026-11-26T06:54:35Z",
+    "mainAliensMerge": "5f38b7bad2c6401424b23fda11aeb86068f0f354",
+    "branches": [
+      {
+        "number": 71,
+        "head": "aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9",
+        "branch": "codex/covenant-sprites-v011",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": true,
+        "title": "Covenant V0.11 — restore DLC and add 49 reference-guided sprites"
+      },
+      {
+        "number": 69,
+        "head": "65e3c378b8dd4469a053eafff6a5ae4d5a9669e1",
+        "branch": "codex/covenant-sprites-source-20261126",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": true,
+        "title": "Covenant : 3 sprites sources, manifeste exact et galerie de revue"
+      },
+      {
+        "number": 68,
+        "head": "84cca8266421b3d865941acd645c861549c121ef",
+        "branch": "codex/dlc-bibles-recovery-20261126",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": true,
+        "title": "Consolider les bibles et 22 exigences de 18 DLC"
+      },
+      {
+        "number": 67,
+        "head": "e716f75318f243a981fdf6e64728cd6f039ad6dd",
+        "branch": "codex/sea-sprites-source-recovery-20261126",
+        "base": "codex/mer-des-chagrins-github-20261125",
+        "state": "open",
+        "draft": true,
+        "title": "Mer des Chagrins : 115 sources préservées dont 110 PNG"
+      },
+      {
+        "number": 66,
+        "head": "0adf04e16e38adbb325cf297727bb414dc8df646",
+        "branch": "codex/river-of-pain-props-v2",
+        "base": "main",
+        "state": "open",
+        "draft": false,
+        "title": "Fleuve de la Douleur : raccorder les 28 sprites du deuxième lot"
+      },
+      {
+        "number": 65,
+        "head": "30353c828cca199a7c1f2b07fa05b438326db86e",
+        "branch": "codex/aliens-1986-sprites-v115",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": true,
+        "title": "Aliens 1986 V115 : préserver les 70 sprites et leur inventaire"
+      },
+      {
+        "number": 64,
+        "head": "906d514fdae2a110ab1a5b0c9598c36068d6425e",
+        "branch": "codex/fiorina-sprites-v117",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": false,
+        "title": "Fiorina V117 : 16 sprites, course du Runner et poses de Ripley"
+      },
+      {
+        "number": 59,
+        "head": "4af559dfa8db35cbc3b028c415d557366d9d075e",
+        "branch": "codex/integrate-hors-des-ombres-20261125",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": false,
+        "title": "Intégrer Hors des ombres V0.10 et préserver toute la livraison locale récupérée"
+      },
+      {
+        "number": 58,
+        "head": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "branch": "codex/mer-des-chagrins-github-20261125",
+        "base": "claude/nifty-shannon-qpy1hl",
+        "state": "open",
+        "draft": false,
+        "title": "La Mer des Chagrins v0.10 : import historique et reprise de 27 sprites"
+      },
+      {
+        "number": 54,
+        "head": "4c2a789d3afa62d2db7f13a0d5f0f20b1f3da57e",
+        "branch": "codex/integrate-blackout-local-20261125",
+        "base": "main",
+        "state": "open",
+        "draft": true,
+        "title": "Blackout : récupérer la v0.7 et préserver l’intégration interrompue"
+      },
+      {
+        "number": 53,
+        "head": "08645ae4e39d040677c18e6dec7df7f4433088f1",
+        "branch": "chore/spritecast-shared-skill-20261123",
+        "base": "main",
+        "state": "open",
+        "draft": false,
+        "title": "chore(ai): intégrer SpriteCast aux skills existants"
+      },
+      {
+        "number": 52,
+        "head": "550aa19fe535e67fb5b9c9c0377bd5a7fd02b6d4",
+        "branch": "chore/add-sand3d-skill-20261122",
+        "base": "main",
+        "state": "open",
+        "draft": false,
+        "title": "chore(ai): intégrer Sand3D aux skills existants"
+      },
+      {
+        "number": 51,
+        "head": "f70e14de689914bf274071b134ac081991969955",
+        "branch": "chore/codegraph-agent-skills-20261122",
+        "base": "main",
+        "state": "open",
+        "draft": false,
+        "title": "chore(ai): uniformiser CodeGraph, 3Dviz, game-dev et Spec Kit"
+      },
+      {
+        "number": 47,
+        "head": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+        "branch": "claude/nifty-shannon-qpy1hl",
+        "base": "main",
+        "state": "open",
+        "draft": false,
+        "title": "chore(ai-tools): adopt Spec Kit and Game Studios, open the V188 audit link"
+      },
+      {
+        "number": 72,
+        "head": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "state": "open",
+        "draft": true,
+        "base": "main",
+        "scope": "Preservation only; exact source-only admission completed for 37 immutable files and their parents; no runtime activation or overall CI claim."
+      },
+      {
+        "number": 73,
+        "head": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "state": "open",
+        "draft": true,
+        "base": "claude/nifty-shannon-qpy1hl",
+        "scope": "Seven original archives; exact source-only admission; no runtime activation."
+      },
+      {
+        "number": 74,
+        "head": "8e8d51c186052c0b0662786677dea3652c915583",
+        "state": "open",
+        "draft": true,
+        "base": "claude/nifty-shannon-qpy1hl",
+        "scope": "Three new AVP2004 relief PNG source candidates; no runtime activation."
+      }
+    ],
+    "ci": {
+      "bibleHead": "a4c8ae68eb66ef3a85dbabab89aa03780cd72d62",
+      "bibleAtPreviousHead": [
+        {
+          "name": "Vercel Preview Comments",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/runs/139674046724"
+        },
+        {
+          "name": "Native V163 (inez-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051757"
+        },
+        {
+          "name": "Native V163 (crew-leases)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051632"
+        },
+        {
+          "name": "Native V163 (costumes-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051571"
+        },
+        {
+          "name": "Native V163 (player-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051514"
+        },
+        {
+          "name": "Native V163 (david-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051441"
+        },
+        {
+          "name": "Native V163 (jun-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051410"
+        },
+        {
+          "name": "Native V163 (cal-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051377"
+        },
+        {
+          "name": "Native V163 (campaign)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051302"
+        },
+        {
+          "name": "Native V163 (crew-lifts)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051283"
+        },
+        {
+          "name": "Native V163 (maksim-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051275"
+        },
+        {
+          "name": "Native V163 (weapons-title)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051247"
+        },
+        {
+          "name": "Native V163 (ship-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051212"
+        },
+        {
+          "name": "Native V163 (trials)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051210"
+        },
+        {
+          "name": "Native V163 (rigs-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051196"
+        },
+        {
+          "name": "Native V163 (workposts-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722486/job/139671051072"
+        },
+        {
+          "name": "forge",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722445/job/139671049945"
+        },
+        {
+          "name": "release",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722496/job/139671049332"
+        },
+        {
+          "name": "avp-integration",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722481/job/139671049194"
+        },
+        {
+          "name": "continuation-v162",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722483/job/139671049136"
+        },
+        {
+          "name": "native",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722557/job/139671044739"
+        },
+        {
+          "name": "validate",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45748722509/job/139671044728"
+        }
+      ],
+      "covenantHead": "aa6e3ccdecd54a5d20905e9d5cb6f9273cc27fa9",
+      "covenant": [
+        {
+          "name": "Vercel Preview Comments",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/runs/139694323550"
+        },
+        {
+          "name": "Native V163 (ship-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427744"
+        },
+        {
+          "name": "Native V163 (player-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427619"
+        },
+        {
+          "name": "Native V163 (david-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427613"
+        },
+        {
+          "name": "Native V163 (crew-leases)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427603"
+        },
+        {
+          "name": "Native V163 (inez-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427590"
+        },
+        {
+          "name": "Native V163 (costumes-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427578"
+        },
+        {
+          "name": "Native V163 (maksim-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427576"
+        },
+        {
+          "name": "Native V163 (jun-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427571"
+        },
+        {
+          "name": "Native V163 (weapons-title)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427501"
+        },
+        {
+          "name": "Native V163 (crew-lifts)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427495"
+        },
+        {
+          "name": "Native V163 (campaign)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427484"
+        },
+        {
+          "name": "Native V163 (workposts-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427464"
+        },
+        {
+          "name": "Native V163 (cal-v165)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427385"
+        },
+        {
+          "name": "Native V163 (trials)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427341"
+        },
+        {
+          "name": "Native V163 (rigs-v165)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581569/job/139693427175"
+        },
+        {
+          "name": "release",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581742/job/139693324995"
+        },
+        {
+          "name": "covenant",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581619/job/139693324921"
+        },
+        {
+          "name": "avp-integration",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581624/job/139693324803"
+        },
+        {
+          "name": "continuation-v162",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581606/job/139693324802"
+        },
+        {
+          "name": "validate",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581698/job/139693324653"
+        },
+        {
+          "name": "forge",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581472/job/139693324310"
+        },
+        {
+          "name": "native",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581567/job/139693324122"
+        },
+        {
+          "name": "test-bridge",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45755581576/job/139693323993"
+        }
+      ],
+      "qualification": "Résultats distants lus, non réexécutés pour cette modification documentaire. Ils sont propres aux commits indiqués ; les échecs et annulations ne sont pas présentés comme des succès."
+    },
+    "newArchiveGroups": [
+      {
+        "pr": 72,
+        "commit": "8ec16d6448e0833e932294456e3393674a4a79ad",
+        "archiveCount": 6,
+        "originalArchiveBytes": 174243911,
+        "currentHead": "ed08d329d3e037fbe1db4490896dfde6afde0ee7",
+        "sourceAdmissionCompleted": true
+      },
+      {
+        "pr": 73,
+        "commit": "6b46eaf8f574871e39487e0a10ef46acfb1f41a6",
+        "archiveCount": 7,
+        "originalArchiveBytes": 282592224
+      }
+    ],
+    "documentationCommit": "84cca8266421b3d865941acd645c861549c121ef",
+    "cleanup": {
+      "currentPassLocalDeletedCopies": 78,
+      "currentPassLocalLogicalBytes": 1447943791,
+      "persistentDeletedFiles": 0,
+      "persistentFreedBytes": 0,
+      "receipt": "dlc/RECUPERATION_20261126.json",
+      "qualification": "Copies temporaires de téléchargement/reconstruction/fragmentation de cette reprise uniquement ; la disparition des anciens dossiers n’est pas comptée."
+    },
+    "newSprites": {
+      "pr": 74,
+      "commit": "8e8d51c186052c0b0662786677dea3652c915583",
+      "dlc": "avp-2004",
+      "pngCount": 3,
+      "pngBytes": 11048227,
+      "runtimeIntegrated": false,
+      "verified1to1": false
+    }
+  },
+  "conversationEvidence": [
+    {
+      "id": "CTX-R2-01",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-09-25T07:18:20Z",
+        "2026-09-25T07:19:17Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c8 et c9/c11",
+      "scope": [
+        "alien-resurrection",
+        "alien3-fiorina"
+      ],
+      "content": "Rapport avec captures du jeu à chaque passe ou livraison majeure ; demande permanente dans les deux fils.",
+      "verbatimExcerpt": "un rapport avec des captures du jeu à chaque fois"
+    },
+    {
+      "id": "CTX-R2-02",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-09-25T06:48:46Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c9/c11",
+      "scope": [
+        "alien3-fiorina"
+      ],
+      "content": "Réadapter tout le DLC Alien 3 selon le mode hybride profondeur/2.5D et vraie 2D latérale, avec un Codex dédié séparé du MIRE."
+    },
+    {
+      "id": "CTX-R2-03",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-09-28T02:56:55Z",
+        "2026-09-28T23:20:31Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c0",
+      "scope": [
+        "alien-romulus"
+      ],
+      "content": "Reproduction quasi exacte des niveaux et connexions, dialogues exacts si disponibles et nouveaux dialogues compatibles avec le lore. Quatre priorités acceptées : laboratoire de référence, parcours complets sans diagnostic, raccords continus du Corbelan, performances et sons."
+    },
+    {
+      "id": "CTX-R2-04",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-10-05T13:22:17Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c2",
+      "scope": [
+        "shared-sprite-production"
+      ],
+      "content": "Sprites indépendants, profil latéral 2D, direction artistique Tantalus Frontier, tous les héros et variantes Alien ; produire ce qui manque et livrer une archive accessible depuis une page web."
+    },
+    {
+      "id": "CTX-R2-05",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-08-18T23:04:45Z",
+        "2026-08-19T10:02:32Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c3",
+      "scope": [
+        "project-history",
+        "continuity"
+      ],
+      "content": "Vérifier depuis le début, ne pas oublier les courts officiels ni Alien 5 selon les faits connus, ne pas mélanger les continuités ; conserver les versions v1 à v38 du projet initial."
+    },
+    {
+      "id": "CTX-R2-06",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-08-24T10:32:20Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c7",
+      "scope": [
+        "reference-catalogue"
+      ],
+      "content": "Associer si possible un lien ou une image à chaque référence pour pouvoir la visualiser."
+    },
+    {
+      "id": "CTX-R2-07",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-09-27T19:36:12Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c4",
+      "scope": [
+        "creature-behavior",
+        "alien-romulus"
+      ],
+      "content": "Description complète des castes principales pour l’IA, avec capacités, réactions et comportements du tadpole et du cocon de Romulus."
+    },
+    {
+      "id": "CTX-R2-08",
+      "kind": "user_requirement_summary",
+      "messages": [
+        "2026-11-08T17:07:01Z",
+        "2026-11-08T18:01:33Z"
+      ],
+      "retrieval": "2026-11-26, groupe 1, c5",
+      "scope": [
+        "alien_base",
+        "reference-provenance"
+      ],
+      "content": "Continuer les références manquantes ou insuffisamment couvertes et prendre tous les tiers de l’article dans alien_base : armes, véhicules, xénos, synthétiques, compagnies, planètes et équipements.",
+      "limit": "Le texte de l’article et sa taxonomie ne sont pas fournis par cet extrait ; aucun tier n’est deviné."
+    }
+  ],
+  "historicalContextNotPromoted": [
+    {
+      "retrieval": "groupe 1, c1",
+      "reason": "Un ancien rapport de catalogue mentionne Fireteam Elite 2, Rogue Incursion et Dark Descent. Il ne constitue ni vérification des titres publiés, ni preuve d’un nouveau DLC de ce dépôt ; aucune dix-neuvième famille n’est inventée."
+    },
+    {
+      "retrieval": "groupe 2, c14",
+      "reason": "Un ancien rapport AVP annonce 69 pièces et 80 séquences ; version et attribution restent ambiguës face à la source V0.11. Il ne remplace pas les 43 salles documentées."
+    },
+    {
+      "retrieval": "groupe 2, c12/c13",
+      "reason": "14 sprites Earth ont été annoncés dans un rapport assistant. Tant que leurs fichiers et manifests n’ont pas été retrouvés et publiés, ce rapport ne vaut pas sauvegarde GitHub."
+    }
+  ]
+}

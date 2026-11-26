@@ -49,3 +49,10 @@ La livraison porte sur **V0.8.0**, dernière version complète effectivement ret
 Le [workflow de récupération](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815067075) a réussi. Il a réexécuté **536 tests du DLC, 10 tests d’intégration Isolation et 36 tests de régression des extensions**, tous réussis, puis publié les 646 fichiers originaux au commit `cea59ecf6f1f9e455b5df22184721f60456c32bf`. L’inventaire distant contient bien **107 266 357 octets**, et son SHA-256 correspond au manifeste vérifié localement.
 
 Le scénario navigateur a ensuite passé la compilation syntaxique Python. Ses profils sentinelles représentent des parties natives déjà commencées ; après chaque reprise, il compare l’état réellement chargé en mémoire, en plus de l’export public. Son exécution complète et le build hôte sont suivis séparément par la CI de la pull request.
+
+
+## Synchronisation avec les bibles des DLC
+
+La base cumulative a avancé vers `c7a0339f86e1de0c2209800a81506cddbc71d804` pendant la publication. La jonction conserve les documents de cette base, les deux blocs de reçus Bibles et le bloc Isolation original à l’octet. Les deux prédécesseurs exacts du vérificateur public convergent vers `16e8bf01e569c4540391dc269604404505248406fd1240917d6e75c165454ccd` ; les empreintes inconnues restent refusées.
+
+Les fichiers combinés ont repassé **536 tests du DLC, 10 tests d’intégration et 43 tests des extensions, soit 589 tests ciblés réussis**. Le contrôle d’intégrité confirme toujours 646 fichiers et 107 266 357 octets originaux. La revue indépendante de la jonction n’a identifié aucun blocage. Ces résultats proviennent d’un checkout local ciblé ; le build complet de l’hôte et le parcours navigateur restent à exécuter par la CI de la PR.

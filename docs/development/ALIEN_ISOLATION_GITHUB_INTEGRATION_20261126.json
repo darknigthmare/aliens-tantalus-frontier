@@ -326,5 +326,33 @@
     ],
     "recoveredFiles": 646,
     "recoveredBytes": 107266357
+  },
+  "mergeValidation": {
+    "base": "c7a0339f86e1de0c2209800a81506cddbc71d804",
+    "isolationParent": "a6697cdef91f366c849dbefa4996fa8e7dc24406",
+    "date": "2026-11-26",
+    "sourceTests": {
+      "passed": 536,
+      "failed": 0
+    },
+    "integrationTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "hostDlcTests": {
+      "passed": 43,
+      "failed": 0
+    },
+    "totalTests": 589,
+    "sourceIntegrity": {
+      "files": 646,
+      "bytes": 107266357,
+      "passed": true
+    },
+    "historyPreserved": true,
+    "combinedReleaseVerifierSha256": "16e8bf01e569c4540391dc269604404505248406fd1240917d6e75c165454ccd",
+    "browserExecuted": false,
+    "fullHostBuildExecuted": false,
+    "scope": "Focused tests on the merged files in a sparse local checkout; full host build and browser journey remain the PR CI gate."
   }
 }
