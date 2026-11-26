@@ -4,7 +4,7 @@
   "dlc": "Alien: Earth",
   "edition": "V12 — intégration et sprites",
   "date": "2026-11-26",
-  "status": "integration-implemented-final-validation-pending",
+  "status": "module-and-portable-validated-host-ci-pending",
   "completedImages": 15,
   "generatedBytesTotal": 22676032,
   "originalGenerationBytesPreserved": true,
@@ -43,7 +43,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world-and-catalogue",
       "renderer": {
         "bounds": [
@@ -93,7 +93,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world",
       "renderer": {
         "bounds": [
@@ -144,7 +144,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world-and-catalogue",
       "renderer": {
         "bounds": [
@@ -194,7 +194,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world",
       "renderer": {
         "bounds": [
@@ -244,7 +244,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world",
       "renderer": {
         "bounds": [
@@ -294,7 +294,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world",
       "renderer": {
         "bounds": [
@@ -344,7 +344,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world",
       "renderer": {
         "bounds": [
@@ -394,7 +394,7 @@
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "useSurface": "world-and-catalogue",
       "renderer": {
         "bounds": [
@@ -445,7 +445,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -496,7 +496,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -547,7 +547,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -598,7 +598,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -648,7 +648,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -699,7 +699,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -751,7 +751,7 @@
       ],
       "sourcePixelsModifiedAfterGeneration": false,
       "runtimeHookState": "implemented-in-this-revision",
-      "visualValidation": "final-15-asset-pass-pending",
+      "visualValidation": "reviewed-in-browser-with-declared-scope; not-screen-exact",
       "alphaBoundsMeasurement": "Alpha >=128 bounds measured from final original PNG; XYWH; no pixel edit.",
       "renderer": {
         "bounds": [
@@ -897,15 +897,27 @@
     "base8NodeModuleTests": 1240,
     "base8RealBrowserChecks": 13,
     "final15NodeTests": {
-      "passed": 1262,
+      "passed": 1266,
       "inheritedModule": 1216,
       "lifecycle": 4,
       "raster": 30,
-      "integration": 12
+      "integration": 16
     },
-    "final15Browser": "pending",
+    "final15Browser": {
+      "dlcChecks": 11,
+      "dlcScope": "Raster and gameplay checks before navigation/audio-only correction; renderer and PNG bytes unchanged.",
+      "portable": "passed-current-build",
+      "portableSha256": "a46e362d845e646c6defd9920f0cff800faf5abfd29729495bb82d1350950511",
+      "localHost": "failed after second history return; GPU process exit9; cause unknown",
+      "hostCI": "pending on complete native distribution",
+      "report": "qa/browser-report.json"
+    },
     "historicalSuccession": {
       "passed": 7
+    },
+    "targetedCompatibility": {
+      "passed": 105,
+      "includesOverlappingEarthIntegrationTests": true
     }
   },
   "history": [
@@ -919,7 +931,7 @@
       "checkpoint": "current continuation",
       "generatedImages": 15,
       "runtimeCodeIncluded": true,
-      "note": "V11 restored from verified archive; integration reconstructed; final validation in progress."
+      "note": "V11 restored from verified archive; module,15 individual PNGs and portable validated. Local repeated host return retains a GPU/browser crash; a separate CI job tests the complete native distribution."
     }
   ]
 }

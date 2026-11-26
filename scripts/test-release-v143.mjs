@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { readdirSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -10,6 +11,16 @@ export function collectReleaseTestsV143(scripts) {
   for (const [name, command] of Object.entries(scripts)) {
     if (!name.startsWith('test:') || !command.startsWith('node --test ')) continue;
     for (const file of command.slice('node --test '.length).trim().split(/\s+/)) {
+      if (file === 'modules/alien-earth/v12/tests/*.test.mjs') {
+        // Expand this admitted suite to literal files without invoking a shell.
+        const directory = 'modules/alien-earth/v12/tests/';
+        const tests = readdirSync(new URL('../' + directory, import.meta.url), { withFileTypes: true })
+          .filter(entry => entry.name.endsWith('.test.mjs'));
+        if (!tests.length || tests.some(entry => !entry.isFile() || !/^[a-z0-9-]+\.test\.mjs$/.test(entry.name)))
+          throw new Error(`Unsupported test entry: ${name}`);
+        for (const entry of tests) files.add(directory + entry.name);
+        continue;
+      }
       if (!/^scripts\/[a-z0-9-]+\.mjs$/.test(file)) throw new Error(`Unsupported test entry: ${name}`);
       files.add(file);
     }

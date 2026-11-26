@@ -44,7 +44,7 @@ export const EARTH_MAIN_SUCCESSORS_V12 = freeze({
   },
   "src/app.js": {
     "previousSha256": "7a3f989423e18ca0a531ccb50120ab0f074b01652ea0d797495f59299563d0df",
-    "currentSha256": "d7a7f26cd7688198dcbf44da488a339c4fba724b617bf38bcc4b1ba7504f7d85"
+    "currentSha256": "8f859ac837d454311b5a2b5bfe9e18d7382f6b00a0a581df27eaaf4aa09b8eb4"
   },
   "src/title-screen-v61.js": {
     "previousSha256": "c9d13438e40802b6efbcacb5ff584f6c6e8be92b8801b8e33df11b25a4899120",

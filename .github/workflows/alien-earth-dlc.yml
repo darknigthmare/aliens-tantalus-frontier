@@ -93,3 +93,54 @@ jobs:
           path: '${{ runner.temp }}/earth-export'
           if-no-files-found: error
           retention-days: 30
+
+  host-roundtrips:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install locked dependencies for the complete host
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/earth-host-evidence"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/earth-host-evidence/source-commit.txt"
+          npm ci --ignore-scripts --no-audit --no-fund 2>&1 | tee "$RUNNER_TEMP/earth-host-evidence/dependencies.log"
+      - name: Build the complete native distribution
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee "$RUNNER_TEMP/earth-host-evidence/build.log"
+          cp dist/build-info.json "$RUNNER_TEMP/earth-host-evidence/"
+      - name: Prepare the same browser for host verification
+        run: |
+          python3 -m venv "$RUNNER_TEMP/earth-host-playwright"
+          "$RUNNER_TEMP/earth-host-playwright/bin/pip" install playwright==1.62.0
+          "$RUNNER_TEMP/earth-host-playwright/bin/python" -m playwright install --with-deps chromium
+      - name: Verify two host round trips on the real distribution
+        shell: bash
+        env:
+          DEBUG: 'pw:browser'
+        run: |
+          set -o pipefail
+          ATF_CHROMIUM_EXECUTABLE="$("$RUNNER_TEMP/earth-host-playwright/bin/python" -c 'from playwright.sync_api import sync_playwright; p = sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          export ATF_CHROMIUM_EXECUTABLE
+          "$RUNNER_TEMP/earth-host-playwright/bin/python" -B scripts/qa-alien-earth-integration-v12.py \
+            --root dist --source-root . --output "$RUNNER_TEMP/earth-host-evidence" \
+            --scenario host-roundtrips --trace-mode light --expected-raster-count 15 \
+            2>&1 | tee "$RUNNER_TEMP/earth-host-evidence/browser.log"
+      - name: Preserve host round-trip evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: alien-earth-v12-host-roundtrips
+          path: '${{ runner.temp }}/earth-host-evidence'
+          if-no-files-found: ignore
+          retention-days: 7

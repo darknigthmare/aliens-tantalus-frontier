@@ -11,6 +11,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 let engine=new EarthEngine(),renderer=new EarthRenderer($('game')),modal='title',started=false,saved=null,saveError='',protectSave=false;
 let lastStoredRaw=null;
 const hostReturnUrlV12=/^https?:$/.test(location.protocol)&&/^\/dlc\/alien-earth\/v12(?:\/|$)/.test(location.pathname)?'/':null;
+let hostNavigationPendingV12=null;
 let keys=new Set(),returnTo='title',audioOn=false,audioContext=null,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let investigationId=null,investigationAnswer=['','',''],objectiveFilter='all';
 let codexTab='organisms',codexIndex=0,puzzleAnswer=[],toastTimer=0,last=0,saveClock=0,hudClock=0;
@@ -24,12 +25,26 @@ function save(){
  catch(e){if(e.code==='EARTH_SAVE_CONFLICT'){protectSave=true;saveError=e.message;$('saveLabel').textContent='CONFLIT';notify(saveError);return false;}protectSave=true;saveError='La sauvegarde locale a échoué. Exportez votre progression avant de fermer cette fenêtre.';$('saveLabel').textContent='NON ENREGISTRÉ';notify(saveError);return false;}
 }
 function returnHostV12(force=false){
- if(!hostReturnUrlV12)return false;
+ if(!hostReturnUrlV12||hostNavigationPendingV12)return false;
  if(!force&&started&&!engine.dead&&!save()){
   open('returnHost',header('Retour au Tantalus','Conserver la progression',false)+'<p>'+esc(saveError||'La sauvegarde n’a pas pu être enregistrée.')+' Exportez votre progression pour la conserver.</p><div class="actions"><button data-act="export">Exporter la progression</button><button data-act="hostForce">Quitter sans enregistrer</button><button data-act="pause">Rester ici</button></div>');return false;
  }
  const previousProtection=protectSave;if(force)protectSave=true;keys.clear();
- try{location.assign(hostReturnUrlV12);return true;}catch(error){protectSave=previousProtection;notify('Le retour est indisponible. Votre progression reste accessible ici.');return false;}
+ let previousHostNavigation=null;
+ try{
+  const navigation=globalThis.navigation,index=navigation?.currentEntry?.index;
+  if(globalThis.top===globalThis.self&&Number.isInteger(index)&&index>0&&typeof navigation?.entries==='function'&&typeof navigation.back==='function'){
+   const previous=navigation.entries()[index-1],url=new URL(previous?.url);
+   if(previous.index===index-1&&url.origin===location.origin&&(url.pathname==='/'||url.pathname==='/index.html'))previousHostNavigation=navigation;
+  }
+ }catch{}
+ const attempt={};hostNavigationPendingV12=attempt;
+ const failed=()=>{if(hostNavigationPendingV12!==attempt)return;hostNavigationPendingV12=null;protectSave=previousProtection;notify('Le retour est indisponible. Votre progression reste accessible ici.');};
+ try{
+  if(previousHostNavigation){const transition=previousHostNavigation.back();Promise.all([transition.committed,transition.finished]).catch(failed);}
+  else location.assign(hostReturnUrlV12);
+  return true;
+ }catch(error){failed();return false;}
 }
 function sound(kind){
  if(!audioOn)return;
@@ -237,6 +252,7 @@ document.addEventListener('keyup',e=>keys.delete(e.code));
 window.addEventListener('blur',()=>{keys.clear();if(started&&!modal&&!engine.state.finished)showPause();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){keys.clear();if(started&&!modal&&!engine.state.finished)showPause();save();}});
 window.addEventListener('pagehide',()=>{if(started&&!engine.dead)save();});
+window.addEventListener('pageshow',()=>{hostNavigationPendingV12=null;});
 document.addEventListener('click',event=>{
  const b=event.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;sound('click');
  if(a==='host'){returnHostV12();return;}

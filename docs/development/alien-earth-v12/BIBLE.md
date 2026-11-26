@@ -8,7 +8,7 @@ La base V11 vérifiée est conservée sous `modules/alien-earth/v12` avec ses 18
 
 Les huit premières images de la PR78 sont conservées. Sept images sont ajoutées : Wendy, Kirsh, Curly, Nibs, une applique avec ses états allumé/éteint et une pipette. Une pose isolée ne constitue pas une animation complète. Trois nouvelles silhouettes — Kirsh, Curly, Nibs — sont actuellement utilisées par le catalogue : leur costume ou leur absence de PNJ talk empêche de revendiquer leur apparition dans la campagne actuelle.
 
-Les signatures PNG, dimensions, alpha et empreintes sont contrôlées. Le parcours Chromium de la base à 8 images a passé 13 contrôles ; la validation finale des15 ressources est encore en cours. Les résultats définitifs seront consignés dans `qa/browser-report.json` et `qa/test-report.json`.
+Les signatures PNG, dimensions, alpha et empreintes des quinze ressources sont contrôlées. Les tests du module, les contrôles du fichier autonome et les allers-retours vers le Tantalus sont documentés séparément dans [le rapport navigateur](qa/browser-report.json) et [le rapport de tests](qa/test-report.json). Les résultats acquis sur la première base à huit images restent identifiés comme historiques.
 
 ## 1. Ressources réellement présentes
 
@@ -328,4 +328,4 @@ L’entrée depuis le menu du Tantalus ouvre le module indépendant à `dlc/alie
 
 Le garde d’enregistrement empêche un écran de titre Earth non démarré d’écraser une sauvegarde existante. Le lancement hôte arrête seulement le moteur Forge, afin de préserver la session native. Les fichiers publics sont admis explicitement ; les bibles, références et preuves QA restent hors de la distribution jouable.
 
-Voir [CONTINUATION.md](CONTINUATION.md) pour l’état de reconstruction, les commandes et les limites de validation. Les résultats de la base à 8 images ne doivent pas être transférés aux 15 images sans nouvelle exécution.
+Voir [CONTINUATION.md](CONTINUATION.md) pour les raccords, les commandes, l’historique des essais et les limites de validation. La preuve du lot à quinze images et les résultats historiques de la base à huit images restent distingués.

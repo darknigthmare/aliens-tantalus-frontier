@@ -1,6 +1,6 @@
 # Alien: Earth — intégration et sprites V12
 
-Cette révision restaure le module V11 complet, raccorde son lancement depuis le Tantalus et conserve quinze PNG individuels. Sept images sont nouvelles depuis le point de récupération initial PR78. La validation finale du lot de 15 images est en cours ; les résultats seront publiés dans les fichiers QA ci-dessous.
+Cette révision restaure le module V11 complet, raccorde son lancement depuis le Tantalus et conserve quinze PNG individuels. Sept images sont nouvelles depuis le point de récupération initial PR78. Les rapports QA distinguent les tests du module, les contrôles du fichier autonome et les allers-retours vers l’hôte, avec leurs fixtures et leurs limites.
 
 ## Ressources et usages
 
@@ -24,6 +24,19 @@ Cette révision restaure le module V11 complet, raccorde son lancement depuis le
 
 Kirsh, Curly et Nibs sont actuellement des silhouettes de catalogue ; leur présence en campagne n’est pas revendiquée. Les poses et détails masqués sont adaptés, et aucune image n’est certifiée identique à l’écran. Les animations restent à compléter.
 
+## Jouer et générer les fichiers
+
+Le fichier `JOUER_ALIEN_EARTH_V12.html` contient le code, les styles et les quinze images. Il se télécharge puis s’ouvre directement dans le navigateur. La sauvegarde utilise l’espace Earth ; le bouton de retour au Tantalus apparaît dans la version servie depuis l’hôte.
+
+Le ZIP `ALIEN_EARTH_V12_MODULE_PUBLIC.zip` contient les quarante fichiers du module public, sous `dlc/alien-earth/v12/`. Cette édition utilise des modules JavaScript : servir le dossier extrait avec un serveur HTTP local, ou l’intégrer à la distribution native.
+
+Les deux fichiers sont produits par le workflow [Alien Earth DLC](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/workflows/alien-earth-dlc.yml), dans l’artefact `alien-earth-v12-playable` conservé trente jours. Les sources et la commande de reconstruction restent dans le dépôt :
+
+```sh
+npm run test:dlc:earth
+node scripts/build-alien-earth-dlc.mjs --standalone --output=earth-export/JOUER_ALIEN_EARTH_V12.html
+```
+
 ## Documentation
 
 - [BIBLE.md](BIBLE.md) : 25 personnages, 70 salles, 49 types de props, 8 profils de créatures, armes, outils, véhicules, terrains et manquants connus.
@@ -32,7 +45,7 @@ Kirsh, Curly et Nibs sont actuellement des silhouettes de catalogue ; leur prés
 - [references.md](references.md) : provenance et limites des photographies, portraits et concepts.
 - [generation-ledger.json](generation-ledger.json) : prompts utilisés et deux corrections ciblées des nouveaux props.
 - [CONTINUATION.md](CONTINUATION.md) : reprise technique, historique de panne et vérifications.
-- [Rapport navigateur](qa/browser-report.json) et [rapport de tests](qa/test-report.json) : preuves finales lorsqu’elles ont été produites.
+- [Rapport navigateur](qa/browser-report.json) et [rapport de tests](qa/test-report.json) : résultats, versions testées, historique des essais et limites.
 
 ## Aperçus des sept nouvelles ressources
 

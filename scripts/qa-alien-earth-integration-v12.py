@@ -67,6 +67,25 @@ def read_storage(page, keys):
     return page.evaluate("ks=>Object.fromEntries(ks.map(k=>[k,localStorage.getItem(k)]))", keys)
 
 
+def document_observation(page):
+    """Read document, history-entry and audio identity without changing state."""
+    return page.evaluate("""() => {
+      const api=globalThis.navigation, entry=api?.currentEntry;
+      const audio=globalThis.__ATF_AUDIO_V77__;
+      const timing=performance.getEntriesByType('navigation')[0];
+      return {
+        url:location.href, referrer:document.referrer,
+        timeOrigin:performance.timeOrigin, navigationType:timing?.type??null,
+        historyLength:history.length,
+        navigationEntry:entry?{key:entry.key,id:entry.id,index:entry.index,url:entry.url}:null,
+        navigationEntryCount:typeof api?.entries==='function'?api.entries().length:null,
+        pageShowEvents:(globalThis.__ATF_QA_PAGESHOWS||[]).map(event=>({...event})),
+        audio:audio?{disposed:audio.disposed,unlockStatus:audio.unlockStatus,
+          scene:audio.scene,contextState:audio.context?.state??null,musicStatus:audio.musicStatus}:null
+      };
+    }""")
+
+
 def state(page):
     return page.evaluate("()=>window.__EARTH_QA.state()")
 
@@ -453,21 +472,27 @@ def main():
             # crash observed after loading the host's decoded image atlases.
             browser.close();browser = launch_browser(ordinary=True)
             repeated_context, page = new_context(with_earth=True)
-            page.add_init_script("""window.__ATF_QA_PAGESHOWS=[];addEventListener('pageshow',e=>window.__ATF_QA_PAGESHOWS.push({persisted:e.persisted,url:location.href}));""")
-            page.goto(host_url, wait_until="networkidle")
+            page.add_init_script("""window.__ATF_QA_PAGESHOWS=[];addEventListener('pageshow',e=>window.__ATF_QA_PAGESHOWS.push({persisted:e.persisted,url:location.href,timeOrigin:performance.timeOrigin}));""")
+            report["hostDocumentObservations"] = []
             cycles = []
+            report["sameBrowserRoundTrips"] = {"cycles": cycles, "browserResetBetweenCycles": False, "backForwardCacheDisableFlagRemoved": True, "status": "running"}
+            page.goto(host_url, wait_until="networkidle")
             for cycle in (1, 2):
+                page.locator('#title-start:visible, #title-alien-earth:visible').first.wait_for()
                 if page.locator('#title-start').is_visible():
                     page.locator('#title-start').click()
                 page.locator('#title-alien-earth').wait_for()
                 native_intact(page)
                 assert read_storage(page, [EARTH_KEY])[EARTH_KEY] == fixture["earth"]
+                native_before = document_observation(page)
+                report["hostDocumentObservations"].append({"cycle": cycle, "stage": "native-before-earth", **native_before})
                 page.locator('#title-alien-earth').click()
                 page.wait_for_url("**/dlc/alien-earth/v12/**", timeout=15000)
                 page.locator('#shell[data-state="title"]').wait_for()
                 page.wait_for_timeout(500)
                 assert read_storage(page, [EARTH_KEY])[EARTH_KEY] == fixture["earth"], "Repeated title visit changed Earth bytes"
                 native_intact(page)
+                report["hostDocumentObservations"].append({"cycle": cycle, "stage": "earth-title", **document_observation(page)})
                 if cycle == 1:
                     page.locator('[data-act="host"]').click()
                     return_method = "UI host button"
@@ -479,9 +504,17 @@ def main():
                 page.wait_for_timeout(300)
                 native_intact(page)
                 assert read_storage(page, [EARTH_KEY])[EARTH_KEY] == fixture["earth"], "Repeated return changed Earth bytes"
+                native_after = document_observation(page)
+                report["hostDocumentObservations"].append({"cycle": cycle, "stage": "native-after-return", **native_after})
                 page_shows = page.evaluate("()=>window.__ATF_QA_PAGESHOWS||[]")
-                cycles.append({"cycle": cycle, "url": page.url, "returnMethod": return_method, "pageShowEvents": page_shows, "earthBytesPreserved": True, "nativeBytesPreserved": True})
-            report["sameBrowserRoundTrips"] = {"cycles": cycles, "browserResetBetweenCycles": False, "backForwardCacheDisableFlagRemoved": True}
+                entry_before = (native_before.get("navigationEntry") or {}).get("key")
+                entry_after = (native_after.get("navigationEntry") or {}).get("key")
+                cycles.append({"cycle": cycle, "url": page.url, "returnMethod": return_method, "pageShowEvents": page_shows, "earthBytesPreserved": True, "nativeBytesPreserved": True,
+                    "nativeTimeOriginBefore": native_before["timeOrigin"], "nativeTimeOriginAfter": native_after["timeOrigin"],
+                    "sameNativeDocumentAfterReturn": native_before["timeOrigin"] == native_after["timeOrigin"],
+                    "nativeEntryKeyBefore": entry_before, "nativeEntryKeyAfter": entry_after,
+                    "sameNativeHistoryEntryAfterReturn": entry_before == entry_after if entry_before and entry_after else None})
+            report["sameBrowserRoundTrips"] = {"cycles": cycles, "browserResetBetweenCycles": False, "backForwardCacheDisableFlagRemoved": True, "status": "complete", "pageshowPersistedObserved": any(event.get("persisted") is True for cycle_result in cycles for event in cycle_result["pageShowEvents"])}
             assert report["pageErrors"] == [] and report["resourceErrors"] == [], "Repeated navigation produced browser/resource errors"
             passed("two consecutive host/Earth/host round trips in one ordinary browser preserve all save bytes", cycles=2)
             repeated_context.tracing.stop(path=str(args.output / "same-browser-roundtrips-trace.zip"))
