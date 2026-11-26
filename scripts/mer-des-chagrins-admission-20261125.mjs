@@ -23,7 +23,52 @@ export const MER_RUNTIME_PATHS_20261125 = Object.freeze([
 export const MER_PUBLIC_DIRECTORIES_20261125 = Object.freeze([
   'dlc', MER_DLC_ROOT_20261125, MER_DLC_ROOT_20261125 + '/src',
 ]);
+
+/** Exact source-only sprite checkpoint. It is never a public runtime admission. */
+export const MER_SPRITE_CHECKPOINT_FILES_20261126 = Object.freeze([
+  "docs/mer-des-chagrins-20261126/sprites/weapons/foam.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/cryo.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/valve.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/crate.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/rack.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/pipe.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/rib.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/silica-rubble.png",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles/resin.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/adams.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/badejo.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/bronson.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/cho.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/decker.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/elway.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/harriman.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/manning.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/medic.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/rand.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/rollins.png",
+  "docs/mer-des-chagrins-20261126/sprites/characters/silas.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/amber.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/drill.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/locker.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/medical.png",
+  "docs/mer-des-chagrins-20261126/sprites/decor/reel.png",
+  "docs/mer-des-chagrins-20261126/sprites/equipment/sensor.png",
+  "docs/mer-des-chagrins-20261126/MANIFEST.json",
+  "docs/mer-des-chagrins-20261126/README.md",
+  "docs/mer-des-chagrins-20261126/RECOVERY.md"
+]);
+export const MER_SPRITE_CHECKPOINT_DIRECTORIES_20261126 = Object.freeze([
+  "docs/mer-des-chagrins-20261126",
+  "docs/mer-des-chagrins-20261126/sprites",
+  "docs/mer-des-chagrins-20261126/sprites/characters",
+  "docs/mer-des-chagrins-20261126/sprites/decor",
+  "docs/mer-des-chagrins-20261126/sprites/equipment",
+  "docs/mer-des-chagrins-20261126/sprites/obstacles",
+  "docs/mer-des-chagrins-20261126/sprites/weapons"
+]);
+
 export const MER_SOURCE_PATHS_20261125 = Object.freeze([
+  ...MER_SPRITE_CHECKPOINT_FILES_20261126,
   'scripts/mer-des-chagrins-admission-20261125.mjs',
   'scripts/verify-mer-des-chagrins-admission-20261125.mjs',
   'scripts/verify-mer-des-chagrins-campaign-20261125.mjs',
@@ -105,7 +150,9 @@ export function reviewedMerArchives20261125() {
 /** null delegates unrelated project paths to the established release policy. */
 export function merDesChagrinsPathAdmission20261125(path, { directory = false, built = false } = {}) {
   if (!validPath(path)) return false;
+  if (MER_SPRITE_CHECKPOINT_DIRECTORIES_20261126.includes(path)) return directory && !built;
   if (MER_SOURCE_PATHS_20261125.includes(path)) return !directory && !built;
+  if (path.startsWith('docs/mer-des-chagrins-20261126/')) return false;
   if (path === 'dlc') return directory;
   if (path === MER_CATALOG_20261125.path) return !directory;
   if (path === MER_DLC_ROOT_20261125 || path.startsWith(MER_DLC_ROOT_20261125 + '/')) {

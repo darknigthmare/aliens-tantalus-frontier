@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "title": "La Mer des Chagrins — reprise des sprites du 26 novembre 2026",
+  "date": "2026-11-26",
+  "root": "docs/mer-des-chagrins-20261126",
+  "baseBranch": "codex/mer-des-chagrins-github-20261125",
+  "baseCommit": "232cbd2ecb0e370f911b008b2226dafee81bffde",
+  "publishedAs": "source-checkpoint",
+  "runtimeEnabled": false,
+  "generatedSpriteCount": 9,
+  "recoveredSpriteCount": 18,
+  "uniquePngCount": 27,
+  "baseCampaign": "0.10.0",
+  "canonicalOneToOneCertified": false,
+  "completeAnimationCycles": false,
+  "generationTool": "image_gen",
+  "newAssets": [
+    {
+      "id": "weapons/foam",
+      "label": "Foamer de capture",
+      "path": "docs/mer-des-chagrins-20261126/sprites/weapons/foam.png",
+      "gitBlobSha": "dc5ad5d969bfa4610da060360b3e4b95727f9f52",
+      "sizeBytes": 2340514,
+      "width": 1536,
+      "height": 1024,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one handheld foamer device for capturing a fictional alien with pale foam, short wide round nozzle pointing right, chunky industrial sprayer casing, compact sealed foam reservoir attached beneath, rear pistol grip and forward support handle. Practical rescue/capture equipment with a simple pressure gauge, worn muted yellow-grey accents. The device is inactive with no spray, no target. One standalone whole device only; no separate accessories."
+    },
+    {
+      "id": "decor/cryo",
+      "label": "Capsule de stase",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/cryo.png",
+      "gitBlobSha": "314b8eb5a1dea340b02796c063c0c09eb98480f8",
+      "sizeBytes": 2119346,
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one horizontal medical cryogenic stasis capsule from a grounded retro-industrial colony facility. Empty long rectangular light-grey base on short mechanical feet, one smooth closed transparent curved canopy with subtle cyan-tinted reflections, recessed padded medical bed visible, compact control panel built into the left end and maintenance seams. Unit shown in direct side elevation, width approximately three times height. No patient or parasite inside. One connected complete capsule only, no surrounding room."
+    },
+    {
+      "id": "decor/valve",
+      "label": "Vanne industrielle",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/valve.png",
+      "gitBlobSha": "b5f9ca292d76b956727a39740fdca317f39ef533",
+      "sizeBytes": 1859613,
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Create one single isolated game asset for a detailed realistic 2D side-view science-fiction game, Alien: Sea of Sorrows. Neutral orthographic SIDE VIEW facing right, whole object fully visible with 8 percent transparent margin, practical worn industrial materials, sharp legible silhouette, muted grey/olive hardware, detailed painted/prerendered game-art quality. No character, no collage, no sheet, no text, no watermark, no scenery, no floor, no shadow, no glow halo. Genuine transparent alpha background required. Subject: one complete heavy industrial pipe valve assembly from a worn off-world mining facility. A large red-orange metal circular handwheel mounted vertically in side/front readable orientation on a short upright valve body, horizontal grey flanged pipe stubs left and right, chunky bolts and a compact pressure dial. Patina, dark grease and desert dust consistent with colony machinery. A single connected asset, not separate components, no pipes disappearing beyond image edges."
+    },
+    {
+      "id": "obstacles/crate",
+      "label": "Caisse de fret",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/crate.png",
+      "gitBlobSha": "645d5d956ea7aefeb86478019f2dd5ae9228b575",
+      "sizeBytes": 2566414,
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One squat closed rectangular reinforced grey-olive metal cargo crate, width about twice height, heavy bevelled lid, side handles, industrial latches, narrow worn yellow caution bands, realistic scratches. A single complete crate, no pile of crates and no objects outside it."
+    },
+    {
+      "id": "obstacles/rack",
+      "label": "Rayonnage chargé",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/rack.png",
+      "gitBlobSha": "a6096ac110cd64916b0276e989ab649d4998c32f",
+      "sizeBytes": 2634038,
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low rectangular storage rack used as a solid waist-high obstacle, three horizontal shelves securely filled with sealed grey industrial cases and compact cylindrical canisters, dark steel posts and cross-braces, width twice height, exact rectangular silhouette. One connected loaded rack only."
+    },
+    {
+      "id": "obstacles/pipe",
+      "label": "Faisceau de conduites",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/pipe.png",
+      "gitBlobSha": "7d3ad3910ff3eb6b7d20c8cec79463ef209b3d90",
+      "sizeBytes": 2363379,
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad horizontal bundle of three thick worn industrial metal pipes fixed on two small saddle supports, capped/flanged ends remain fully visible, grey steel with oxide stains. The connected pipe bundle forms one waist-high obstacle, width approximately three times its height. No long pipes extending off frame."
+    },
+    {
+      "id": "obstacles/rib",
+      "label": "Nervure de structure extraterrestre",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/rib.png",
+      "gitBlobSha": "bd685b922d8b64f8e3fb4b9f737e130167337e50",
+      "sizeBytes": 1359619,
+      "width": 1983,
+      "height": 793,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad broken biomechanical alien structural rib from an ancient derelict spacecraft, a single horizontal arch fragment lying steadily along the baseline, dark grey fossil-like ribbed chitinous/metallic surfaces, segmented ridges and hollow channels. Uneven fractured ends, no bones of a human, no gore. Width about two-and-a-half times height, no complete tall doorway arch."
+    },
+    {
+      "id": "obstacles/silica-rubble",
+      "label": "Éboulis de silice",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/silica-rubble.png",
+      "gitBlobSha": "a1eac3cd7113c35c69c88a54d2874dacd33eb064",
+      "sizeBytes": 1923587,
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One single low broad mound of jagged smoky amber and grey silica mineral rubble, fractured angular quartz-like chunks densely interlocked as a physical obstacle, largest shard near center with smaller shards integrated at edges, dusty surfaces and a few subtle glassy fractures. Width about three times height. Entire connected mound only, no scattered detached debris."
+    },
+    {
+      "id": "obstacles/resin",
+      "label": "Amas de résine",
+      "path": "docs/mer-des-chagrins-20261126/sprites/obstacles/resin.png",
+      "gitBlobSha": "3632f965cd0852d1975668d15cc6f8f7533f0712",
+      "sizeBytes": 1508392,
+      "width": 1983,
+      "height": 793,
+      "bitDepth": 8,
+      "colorType": 6,
+      "status": "generated-and-preserved",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated static 2D side-view obstacle sprite for the Alien: Sea of Sorrows mining/ruins DLC. Detailed realistic painted / prerendered game art, orthographic front-side elevation matching a horizontal side-scrolling game, whole object contained in frame with clear margins, stable bottom contact line, no perspective floor. Neutral diffuse light, dark weathered practical industrial materials and mineral dust. Genuine transparent alpha background, no scene/background, no cast shadow, no gradient glow, no text, no watermark, no multiple views, no sprite sheet. One low broad solid mound of dark alien hive resin, organic biomechanical glossy charcoal ridges and hardened ropy strands forming an obstacle with a closed continuous silhouette, subtle bone-grey mineral residue. Width about two-and-a-half times height. One connected resin growth, no eggs, no creatures, no bodies, no gore."
+    }
+  ],
+  "recoveredAssets": [
+    {
+      "id": "characters/adams",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/adams.png",
+      "gitBlobSha": "179527f38a1c85cfa59f59a618ba6ddaba4649fa",
+      "sizeBytes": 1772101,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/badejo",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/badejo.png",
+      "gitBlobSha": "036bbe2df61dbdde5b4ea7baf74b36504c0740fb",
+      "sizeBytes": 1675685,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/bronson",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/bronson.png",
+      "gitBlobSha": "2abbdf357d166696773f398aa4b6ce27b61adc51",
+      "sizeBytes": 1779643,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/cho",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/cho.png",
+      "gitBlobSha": "6feb0df56491d3c45b8d886092832fe2b4290081",
+      "sizeBytes": 1639202,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/decker",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/decker.png",
+      "gitBlobSha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
+      "sizeBytes": 1626812,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/elway",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/elway.png",
+      "gitBlobSha": "ca6c095682baba6f0cf2f60c4f9d6ced0b9d9f6b",
+      "sizeBytes": 1674049,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/harriman",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/harriman.png",
+      "gitBlobSha": "aa5f4c3094451aebaeca860478ee942233d813cc",
+      "sizeBytes": 1538047,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/manning",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/manning.png",
+      "gitBlobSha": "970eee9d998a63f69e316775826e394aab6f44dc",
+      "sizeBytes": 1826145,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/medic",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/medic.png",
+      "gitBlobSha": "d3309873da6d99a19a5e45e5fb05c64a91577866",
+      "sizeBytes": 1584745,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/rand",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/rand.png",
+      "gitBlobSha": "77f21a5eedfb69cd8ba4ed1d99a4813b44e0c9df",
+      "sizeBytes": 1753979,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/rollins",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/rollins.png",
+      "gitBlobSha": "6783db7baf4d48e341f515d4cd4c5e40d62b2235",
+      "sizeBytes": 1446163,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "characters/silas",
+      "path": "docs/mer-des-chagrins-20261126/sprites/characters/silas.png",
+      "gitBlobSha": "648f6f9f470e9898889658e10fdbdccd29c0743d",
+      "sizeBytes": 1654417,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "decor/amber",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/amber.png",
+      "gitBlobSha": "d12b0145c990a25e52b7cb6798286e5854dbcef5",
+      "sizeBytes": 1445819,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "decor/drill",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/drill.png",
+      "gitBlobSha": "22cff2ae22bd995d82213d2a6e55272ba6068de8",
+      "sizeBytes": 2472223,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "decor/locker",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/locker.png",
+      "gitBlobSha": "7b3ecad4f77ebfacee507d9b9c6c5ab1b4e14ab7",
+      "sizeBytes": 2393757,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "decor/medical",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/medical.png",
+      "gitBlobSha": "ebeff870173122f46171499c9c45f044c58f499c",
+      "sizeBytes": 1862848,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "decor/reel",
+      "path": "docs/mer-des-chagrins-20261126/sprites/decor/reel.png",
+      "gitBlobSha": "0cc53fd5019ec4fd5716d7571dadb58ae72bcb80",
+      "sizeBytes": 2408366,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    },
+    {
+      "id": "equipment/sensor",
+      "path": "docs/mer-des-chagrins-20261126/sprites/equipment/sensor.png",
+      "gitBlobSha": "5d77bc910f19242be190dbaedf851082cfaacf2c",
+      "sizeBytes": 1073705,
+      "status": "recovered-existing-blob",
+      "integrationStatus": "pending-runtime-validation",
+      "canonicalOneToOneCertified": false
+    }
+  ],
+  "unresolvedGeneratedIds": [
+    "creatures/adult",
+    "creatures/queen",
+    "weapons/plasma",
+    "weapons/flame"
+  ],
+  "previousLocalInventory": {
+    "observedPngCount": 110,
+    "verifiedDistinctSha256Count": 110,
+    "decodedRgbaCount": 110,
+    "recoveredInThisCheckpoint": 18,
+    "remainingUnpublishedCount": 92,
+    "newerSevenImagesRecovered": false
+  },
+  "validation": {
+    "newPngHeaderChecks": 9,
+    "localRendererTestsPassedBeforeOutage": 40,
+    "localMergeAdmissionTestsPassedBeforeOutage": 17,
+    "localSuccessionTestsPassedBeforeOutage": 15,
+    "localMenuTestsPassedBeforeOutage": 15,
+    "localChangesNotPublished": true,
+    "fullBuildCompletedForThisCheckpoint": false,
+    "browserQaCompleted": false,
+    "sourceOnlyAdmissionAssertionsPassed": 113
+  },
+  "remainingWork": [
+    "Recover the 92 other previously inspected PNG files.",
+    "Correct the 48 decor anchors expressed in multiplied pixel coordinates.",
+    "Replace facing=head-right by a supported orientation on both stretcher entries.",
+    "Recover and apply the locally tested renderer fixes and cumulative branch merge.",
+    "Complete the exact visual manifest and admission pin.",
+    "Calibrate foam grip/muzzle anchors and obstacle ground anchors, then validate real scene rendering.",
+    "Run source checks, build and browser QA before activating the visual edition.",
+    "Review art against source descriptions; the novel has no verified complete visual model sheet in the consulted reference set."
+  ],
+  "referenceSources": [
+    {
+      "url": "https://titanbooks.com/6484-alien-sea-of-sorrows-book-2/",
+      "type": "publisher",
+      "scope": "Author, Decker ICC role, LV-178/New Galveston and living-Xenomorph mission; not a detailed visual design specification."
+    }
+  ]
+}
