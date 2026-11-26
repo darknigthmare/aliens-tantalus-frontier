@@ -8,6 +8,7 @@ import {createSpriteStoreV116,validateSpriteEntriesV116} from '../modules/aliens
 import {humanAssetIdV116,creatureAssetIdV116,propSelectionV116,installRasterRendererV116} from '../modules/aliens-1986/v116/raster-renderer-v116.mjs';
 import {renderAliens1986RasterV116,parseAliens1986RegistryV116,V114_HTML_PATH,V114_HTML_SHA256,SUPPLEMENT_IDS_V117} from './derive-aliens1986-raster-v116.mjs';
 import {runPropsUnitChecksV118} from './verify-aliens1986-raster-props-v118.mjs';
+import {runFurnitureUnitChecksV119} from './verify-aliens1986-raster-furniture-v119.mjs';
 
 function entry(id,extra={}) {return {id,path:'assets/test/'+id+'.png',width:100,height:200,bbox:[10,20,90,190],pivot:[50,190],runtimeEligible:true,...extra};}
 function contextSpy() {
@@ -157,7 +158,7 @@ export function runPresentationUnitChecksV116() {
   return checks;
 }
 export async function runPresentationChecksV116({root=process.cwd()}={}) {
-  const v116Checks=runPresentationUnitChecksV116(),v118Checks=runPropsUnitChecksV118();
+  const v116Checks=runPresentationUnitChecksV116(),v118Checks=runPropsUnitChecksV118(),v119Checks=runFurnitureUnitChecksV119();
   const first=await renderAliens1986RasterV116({root}),second=await renderAliens1986RasterV116({root});
   assert.equal(first.html,second.html);assert.equal(first.sha256,second.sha256);
   const base=await readFile(resolve(root,V114_HTML_PATH),'utf8'),hash=x=>createHash('sha256').update(x).digest('hex');
@@ -166,21 +167,24 @@ export async function runPresentationChecksV116({root=process.cwd()}={}) {
   const presentationOnly=new Set(['preview/renderer.mjs','preview/app.mjs','src/fidelity-v114.mjs']);
   for(const [key,entry] of Object.entries(before))if(!presentationOnly.has(key))assert.deepEqual(after[key],entry,'Unrelated V114 module changed: '+key);
   assert.match(first.html,/<meta name="aliens-raster-version" content="116">/);
-  assert.match(first.html,/<meta name="aliens-raster-extension-version" content="118">/);
-  assert.match(first.html,/<meta name="aliens-raster-asset-version" content="118">/);
-  assert.equal(first.assetRevision,118);assert.equal(first.presentationExtensionRevision,118);
-  assert.equal(first.assets.length,141);
+  assert.match(first.html,/<meta name="aliens-raster-extension-version" content="119">/);
+  assert.match(first.html,/<meta name="aliens-raster-asset-version" content="119">/);
+  assert.equal(first.assetRevision,119);assert.equal(first.presentationExtensionRevision,119);
+  assert.equal(first.assets.length,147);
   assert.equal(after['preview/renderer.mjs'].deps['../v118/raster-props-v118.mjs'],'v118/raster-props-v118.mjs');
   assert.deepEqual(after['v118/raster-props-v118.mjs'].deps,{'../v116/sprite-loader-v116.mjs':'v116/sprite-loader-v116.mjs'});
   const rendererSource=after['preview/renderer.mjs'].source;
   assert.ok(rendererSource.lastIndexOf('installRasterPropsV118(Renderer,')>rendererSource.lastIndexOf('installRasterRendererV116(Renderer,'));
-  for(const sourcePath of ['v116/sprite-loader-v116.mjs','v116/raster-renderer-v116.mjs','v118/raster-props-v118.mjs']) {
+  assert.ok(rendererSource.lastIndexOf('installRasterFurnitureV119(Renderer,')>rendererSource.lastIndexOf('installRasterPropsV118(Renderer,'));
+  assert.equal(after['preview/renderer.mjs'].deps['../v119/raster-furniture-v119.mjs'],'v119/raster-furniture-v119.mjs');
+  assert.deepEqual(after['v119/raster-furniture-v119.mjs'].deps,{'../v116/sprite-loader-v116.mjs':'v116/sprite-loader-v116.mjs'});
+  for(const sourcePath of ['v116/sprite-loader-v116.mjs','v116/raster-renderer-v116.mjs','v118/raster-props-v118.mjs','v119/raster-furniture-v119.mjs']) {
     assert.equal(after[sourcePath].sha256,hash(await readFile(resolve(root,'modules/aliens-1986/'+sourcePath))));
   }
   assert.match(after['preview/app.mjs'].source,/aliens_1986_v114_fidelity_checkpoint/);
   assert.match(after['src/arsenal-v114.mjs'].source,/schema:114/);
   assert.ok(!after['v116/sprite-loader-v116.mjs'].source.includes('fetch('),'Runtime must not fetch a manifest.');
-  return {ok:true,unitChecks:v116Checks+v118Checks,v116UnitChecks:v116Checks,v118UnitChecks:v118Checks,deterministic:true,immutableBase:true,saveSchema:114,rasterVersion:116,presentationExtensionRevision:118,assetRevision:first.assetRevision,assets:first.assets.length,sha256:first.sha256};
+  return {ok:true,unitChecks:v116Checks+v118Checks+v119Checks,v116UnitChecks:v116Checks,v118UnitChecks:v118Checks,v119UnitChecks:v119Checks,deterministic:true,immutableBase:true,saveSchema:114,rasterVersion:116,presentationExtensionRevision:119,assetRevision:first.assetRevision,assets:first.assets.length,sha256:first.sha256};
 }
 if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
   process.stdout.write(JSON.stringify(await runPresentationChecksV116())+'\n');

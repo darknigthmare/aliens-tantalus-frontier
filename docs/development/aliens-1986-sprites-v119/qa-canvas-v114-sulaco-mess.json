@@ -1,0 +1,545 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v114-sulaco-mess",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 12,
+    "loaded": 12,
+    "failed": 0,
+    "draws": 42,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 12,
+    "used": [
+      "apone-idle-right",
+      "bishop-idle-right",
+      "combat-knife",
+      "gorman-idle-right",
+      "hicks-idle-right",
+      "m41a-pulse-rifle",
+      "meal-tray-food",
+      "operations-console",
+      "ripley-idle-right",
+      "sulaco-briefing-terminal",
+      "sulaco-mess-table",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        320,
+        111.63999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1120,
+        111.63999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "sulaco-mess-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/sulaco-mess-table.png",
+      "source": [
+        22,
+        53,
+        1704,
+        811
+      ],
+      "destination": [
+        -118.99999999999999,
+        -113.27347417840375,
+        237.99999999999997,
+        113.27347417840375
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        431,
+        394
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "meal-tray-food",
+      "path": "assets/dlc/aliens-1986/v117/props/meal-tray-food.png",
+      "source": [
+        23,
+        112,
+        1626,
+        736
+      ],
+      "destination": [
+        -16.56929347826087,
+        -15,
+        33.13858695652174,
+        15
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        390,
+        300.2799987792969
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "combat-knife",
+      "path": "assets/dlc/aliens-1986/v115/props/combat-knife.png",
+      "source": [
+        97,
+        209,
+        1978,
+        313
+      ],
+      "destination": [
+        -15.499999999999998,
+        -4.90546006066734,
+        30.999999999999996,
+        4.90546006066734
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        480,
+        302
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        140,
+        432.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        152,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "apone-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/apone-idle-right.png",
+      "source": [
+        275,
+        11,
+        446,
+        1515
+      ],
+      "destination": [
+        -14.866666666666667,
+        -101,
+        29.733333333333334,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1230,
+        436.1400146484375
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1242,
+        393.1400146484375
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "bishop-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/bishop-idle-right.png",
+      "source": [
+        292,
+        7,
+        390,
+        1525
+      ],
+      "destination": [
+        -12.914754098360655,
+        -101,
+        25.82950819672131,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1000,
+        444.739990234375
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "gorman-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/gorman-idle-right.png",
+      "source": [
+        289,
+        9,
+        401,
+        1526
+      ],
+      "destination": [
+        -13.270314547837483,
+        -101,
+        26.540629095674966,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1150,
+        444.739990234375
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        106,
+        481.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        118,
+        438.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        540,
+        514.4000244140625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "sulaco-briefing-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/sulaco-briefing-terminal.png",
+      "source": [
+        98,
+        92,
+        1574,
+        728
+      ],
+      "destination": [
+        -44.28271918678526,
+        -43.47649301143583,
+        94,
+        43.47649301143583
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1135,
+        474
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "v114-sulaco-mess-wall-north",
+      "x": 870,
+      "z": 0,
+      "w": 32,
+      "d": 135,
+      "h": 181,
+      "material": "metal"
+    },
+    {
+      "id": "v114-sulaco-mess-wall-south",
+      "x": 870,
+      "z": 255,
+      "w": 32,
+      "d": 125,
+      "h": 164,
+      "material": "metal"
+    },
+    {
+      "id": "v114-sulaco-mess-body-0",
+      "material": "metal",
+      "x": 312,
+      "z": 65,
+      "w": 238,
+      "d": 85,
+      "h": 49
+    },
+    {
+      "id": "v114-sulaco-mess-body-1",
+      "material": "metal",
+      "x": 1010,
+      "z": 266,
+      "w": 232,
+      "d": 72,
+      "h": 49
+    },
+    {
+      "id": "vestibule:sulaco-wakeup-b:0",
+      "x": 0,
+      "z": 146,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:sulaco-wakeup-b:1",
+      "x": 0,
+      "z": 232,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:sulaco-loadout-a:0",
+      "x": 1348,
+      "z": 146,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:sulaco-loadout-a:1",
+      "x": 1348,
+      "z": 232,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "v114-sulaco-mess-console",
+      "x": 540,
+      "z": 290,
+      "support": "pupitre de service fixé au sol",
+      "type": "console"
+    },
+    {
+      "id": "v114-sulaco-mess-light-a",
+      "x": 320,
+      "z": 24,
+      "support": "rail nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "v114-sulaco-mess-light-b",
+      "x": 1120,
+      "z": 24,
+      "support": "rail nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "v114-sulaco-mess-prop-0",
+      "support": "table du mess",
+      "x": 390,
+      "z": 98,
+      "supportId": "v114-sulaco-mess-body-0",
+      "elevation": 49,
+      "type": "meal"
+    },
+    {
+      "id": "v114-sulaco-mess-prop-1",
+      "support": "table du mess",
+      "x": 480,
+      "z": 100,
+      "supportId": "v114-sulaco-mess-body-0",
+      "elevation": 49,
+      "type": "knife"
+    },
+    {
+      "id": "v114-sulaco-mess-prop-2",
+      "support": "table de briefing",
+      "x": 1135,
+      "z": 300,
+      "supportId": "v114-sulaco-mess-body-1",
+      "elevation": 49,
+      "type": "console"
+    }
+  ],
+  "sourceImageCount": 12
+}

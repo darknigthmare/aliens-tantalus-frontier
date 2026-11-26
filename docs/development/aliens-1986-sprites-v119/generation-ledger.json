@@ -1,0 +1,266 @@
+{
+  "schema": "aliens1986-generation-ledger-v119",
+  "date": "2026-11-26",
+  "tool": "built-in-imagegen",
+  "oneObjectPerImage": true,
+  "nativeBytesPreserved": true,
+  "pixelEditing": false,
+  "filmFidelityValidated": false,
+  "assets": [
+    {
+      "id": "medlab-bed",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+      "sha256": "6732cd31383a70ea7050e423d18f0751a299f23d5ff28d6cb009baada63096b4",
+      "bytes": 1155497,
+      "width": 1562,
+      "height": 1007,
+      "bbox": [
+        27,
+        80,
+        1537,
+        930
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        782.0,
+        930
+      ],
+      "label": "Medlab — lit médical",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: precise-object-edit. Asset type: a single isolated UHD raster furniture sprite for the 2.5D Aliens (1986) game. Image 1 is the film set reference for the BED ONLY; image 2 is the game's worn realistic material/shading reference, not the subject. Reconstruct one EMPTY medical bed based on the cream tubular steel bed in image 1: narrow pale mattress with simple pale sheet, one pillow at left end, cream metal tubular head/foot ends, open space underneath, four slim legs and small casters. Remove all people, equipment, wires, cameras, surrounding furniture and room; no character anywhere. Correct the warm orange set lighting to neutral desaturated off-white and gray with faint sage undertones and modest wear. View: exactly from the broad long side, camera raised to show the mattress top, parallel orthographic projection, bed long axis strictly horizontal, vertical legs exactly vertical, no visible left or right end side face, no perspective convergence, front feet on the same horizontal baseline. Aim visible silhouette width-to-height about 1.55:1 with enough depth visible above the long front edge; no foreshortened diagonal object. One bed only, fully in frame with breathing room; not a sheet/grid or multiple poses. Sharp realistic painterly raster detail matching the game's assets, no vector appearance, no cartoon outlines. Genuine transparent alpha background, including between legs and rails, no room, no floor, no cast shadow outside the object, no text, no logo, no labels, no watermark. Keep all four casters and mattress intact.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    },
+    {
+      "id": "medlab-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-storage-cabinet.png",
+      "sha256": "bc012f56d4d5dca0a8af63aa320fb4272bb875fc1cd600e26d81509bbefec591",
+      "bytes": 2768121,
+      "width": 908,
+      "height": 1731,
+      "bbox": [
+        33,
+        9,
+        875,
+        1721
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        454.0,
+        1721
+      ],
+      "label": "Medlab — armoire de rangement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated UHD raster game sprite for the existing Aliens (1986) DLC, Canvas 2.5D game. Reference image is ONLY a style/material/lighting reference, not the object to copy. Match its worn 1980s practical-prop construction, subdued industrial olive-gray painted metal, fine scratches, machined fasteners, realistic material shading, crisp textured edges. Single object, fully visible including base and feet, narrow transparent margins. STRICT orthographic parallel projection from directly in front and above: front face absolutely straight-on, vertical uprights vertical, front horizontal rails exactly horizontal, no side face visible, no convergence and no sideways vanishing point. Show the top surface as an upright rectangle extending upward, not diagonally sideways. Camera centered on front face. Soft cool neutral light. Truly transparent alpha background, no checkerboard painted into image, no floor, no room, no cast shadow, no text, labels, logos, UI, border, human, weapons, extra furniture, or multiple views. High quality realistic 2D raster, never flat vector. Subject: one tall narrow closed medical storage cabinet for Hadley's Hope Medlab. Two framed closed glass doors on the upper half, discreet compact supplies behind dusty translucent gray-green glass; orderly pale packets and small closed bottles, no writing. Four shallow metal drawers on lower half with simple horizontal recessed handles, subdued light gray-green enamel, dark metal plinth and short feet. Functional practical analog science-fiction hospital cabinet, moderately worn, not futuristic rounded glossy furniture. Object silhouette width/total visible height 0.48. Frontal height is 124 units, top depth projects 71 units vertically above that front, so a fairly deep top surface must be visible. Preserve narrow straight rectangular silhouette.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    },
+    {
+      "id": "reserve-service-locker",
+      "path": "assets/dlc/aliens-1986/v119/furniture/reserve-service-locker.png",
+      "sha256": "2a2dede3faa3b0ed4c571a840389fd01c61aacb522d96ffb85d0a962f441908d",
+      "bytes": 2701493,
+      "width": 911,
+      "height": 1727,
+      "bbox": [
+        18,
+        18,
+        893,
+        1716
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        455.5,
+        1716
+      ],
+      "label": "Réserve — casier de service",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated UHD raster game sprite for the existing Aliens (1986) DLC, Canvas 2.5D game. Reference image is ONLY a style/material/lighting reference, not the object to copy. Match its worn 1980s practical-prop construction, subdued industrial olive-gray painted metal, fine scratches, machined fasteners, realistic material shading, crisp textured edges. Single object, fully visible including base and feet, narrow transparent margins. STRICT orthographic parallel projection from directly in front and above: front face absolutely straight-on, vertical uprights vertical, front horizontal rails exactly horizontal, no side face visible, no convergence and no sideways vanishing point. Show the top surface as an upright rectangle extending upward, not diagonally sideways. Camera centered on front face. Soft cool neutral light. Truly transparent alpha background, no checkerboard painted into image, no floor, no room, no cast shadow, no text, labels, logos, UI, border, human, weapons, extra furniture, or multiple views. High quality realistic 2D raster, never flat vector. Subject: one tall narrow closed utilitarian service locker for a Hadley's Hope maintenance store room. Two equally sized solid hinged metal doors, small upper and lower horizontal ventilation slots, rectangular recessed handles adjacent at the center, visible external screws, flat thick rectangular top, heavy low plinth and short leveling feet. Worn slate olive-gray enamel and a little bare metal on edges, no markings and no things beside it. Object silhouette width/total visible height 0.53. Frontal cabinet height 128 units, top depth projects 78 units vertically above that front, so a deep top surface must be visible. Functional 1980s industrial colonial furniture.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    },
+    {
+      "id": "operations-storage-rack",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+      "bytes": 2886102,
+      "width": 948,
+      "height": 1659,
+      "bbox": [
+        12,
+        9,
+        936,
+        1648
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        474.0,
+        1648
+      ],
+      "label": "Operations — rack de rangement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated UHD raster game sprite for the existing Aliens (1986) DLC, Canvas 2.5D game. Reference image is ONLY a style/material/lighting reference, not the object to copy. Match its worn 1980s practical-prop construction, subdued industrial olive-gray painted metal, fine scratches, machined fasteners, realistic material shading, crisp textured edges. Single object, fully visible including base and feet, narrow transparent margins. STRICT orthographic parallel projection from directly in front and above: front face absolutely straight-on, vertical uprights vertical, front horizontal rails exactly horizontal, no side face visible, no convergence and no sideways vanishing point. Show the top surface as an upright rectangle extending upward, not diagonally sideways. Camera centered on front face. Soft cool neutral light. Truly transparent alpha background, no checkerboard painted into image, no floor, no room, no cast shadow, no text, labels, logos, UI, border, human, weapons, extra furniture, or multiple views. High quality realistic 2D raster, never flat vector. Subject: one tall upright rectangular analog electronics storage/server rack for the Hadley's Hope Operations room. Four stacked modular equipment bays inside a heavy freestanding metal enclosure: tiny recessed dark blank CRT status window, small knobs and switches without text on an upper bay, cooling grille panels and removable lower drawer, compact orderly blank service modules. Tall rack NOT a seated desk or console, no keyboard shelf or protruding sloping control desk. Worn matte dark olive gray steel with lighter gray removable panels, a few muted amber and green point indicators, realistic bolts and perforated vents. Closed front modules, no loose cables outside silhouette. Object silhouette width/total visible height 0.70. Frontal rack height 126 units, top depth projects 64.5 units vertically above that front, top surface visible.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    },
+    {
+      "id": "sulaco-mess-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/sulaco-mess-table.png",
+      "sha256": "f02e11b5d50e7104fd49a86164960aab3223412111737a889667d039cb17371b",
+      "bytes": 2306400,
+      "width": 1748,
+      "height": 899,
+      "bbox": [
+        22,
+        53,
+        1726,
+        864
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        874.0,
+        864
+      ],
+      "label": "Sulaco — table du mess",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE isolated UHD raster furniture sprite for the Sulaco mess room in the Aliens (1986) 2.5D game. Use the supplied image ONLY as reference for detailed industrial physical materials, muted gray/olive palette and light direction. Produce one empty utilitarian rectangular mess TABLE, not a console: thick light warm-gray laminate tabletop with very slightly rounded metal corner guards, subtly scuffed gray-green steel rim, two recessed sturdy support pedestals/feet underneath. Top must be completely empty because the existing game renders meal trays and knife separately. No integrated screens, no control panels, no electronics on the top, no chairs, no trays, no cutlery. View exactly front-on looking at the long side, camera elevated, orthographic parallel projection: back edge and front edge equal length and exactly horizontal; vertical legs vertical; left/right edges of the tabletop parallel to vertical screen axis (no diagonal sideways skew). Table depth is visible upward, with tabletop top occupying about 55 percent of silhouette height and supports below about 45 percent. Visible total width:height about 1.95:1. Feet on one horizontal baseline. Clean silhouette readable at 238 by 122 screen pixels, highly detailed UHD source. One object centered, entire table visible with transparent margins. Same realistic worn practical set dressing as Aliens 1986, no vector simplification, no modern glossy design. Transparent alpha background including the gaps between supports, no floor, no room, no cast floor shadow, no text, no logos, no watermark.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    },
+    {
+      "id": "operations-command-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+      "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+      "bytes": 1719633,
+      "width": 1706,
+      "height": 922,
+      "bbox": [
+        12,
+        129,
+        1694,
+        865
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        853.0,
+        865
+      ],
+      "label": "Operations — table de commandement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE isolated UHD raster furniture sprite for Hadley's Hope Operations in the Aliens (1986) 2.5D game. Supplied image is ONLY a material and industrial construction reference; create a low command TABLE, not a computer console. Wide rectangular empty working surface, dark desaturated olive green inset top, thick worn dark gray painted steel perimeter, four short recessed box-section legs connected by a low crossbar and modest bolted industrial joints. Absolutely empty top, because the game overlays its separate command terminal. No screens, no buttons on the top, no chairs, no maps, no props, no humans. Exact front elevation from a raised camera in parallel orthographic projection: long side perfectly horizontal, equal length parallel front/back edges, no vanishing point, no sideward skew, no visible end face left/right, vertical support edges vertical. Depth extends straight upward, top surface about 56 percent of full silhouette height. Entire silhouette about 1.85:1 width-to-height; readable at game box 238 by129 pixels. Front feet share one horizontal line. Source high definition textured raster, physically plausible industrial patina, dark gray and olive metal, subtle soft upper-left light, coherent with Aliens 1986 retro industrial set dressing. One table only, generous transparent margins. Genuine transparent background, including open under-table regions, no floor or floor shadow, no scenery, no text, no labels, no logo, no watermark.",
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "gameScaleReview": "native-canvas-reviewed-no-blocking-defect-observed",
+        "filmFidelityValidated": false,
+        "gameScaleEvidence": "verification.json#/nativeCanvas"
+      }
+    }
+  ],
+  "referenceEvidence": [
+    {
+      "label": "Medlab bed film set photograph",
+      "url": "https://www.theguardian.com/film/gallery/2016/aug/09/behind-the-scenes-james-cameron-aliens-in-pictures",
+      "credit": "Twentieth Century Fox Film Corporation; reproduced in Aliens: The Set Photography",
+      "sha256": "752443e768e96213cb91f8b8dfd33bfcf289f98859c2dd40d4f2416ebfbf692d",
+      "use": "Bed tubing, open underside, casters and mattress; lighting, orthographic projection and unseen portions adapted."
+    },
+    {
+      "label": "Ron Cobb Medlab concept",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/",
+      "use": "Context for materials and industrial medical environment; not used as exact furniture geometry."
+    },
+    {
+      "label": "Existing game operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+      "use": "Consistent source raster materials and light; not a primary film reference."
+    }
+  ],
+  "inspectionScope": "Four prepared full-renderer rooms at 1280x720 using native Skia Canvas. This is not Chromium acceptance or a film-fidelity certification."
+}

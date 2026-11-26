@@ -1,0 +1,215 @@
+{
+  "schema": "aliens1986-raster-supplement-v119",
+  "version": 119,
+  "presentationVersion": 119,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "5ec98a99ea1bfea30159f11ab1a698b0106ae9de",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v118/manifest.json",
+      "sha256": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+      "assetCount": 11
+    }
+  ],
+  "counts": {
+    "base": 141,
+    "added": 6,
+    "total": 147
+  },
+  "addedBytes": 13537246,
+  "filmFidelityValidated": false,
+  "notes": [
+    "Six individual furniture images cover seven existing V114 scene bodies.",
+    "Native PNG bytes and measured alpha are preserved; no pixel retouch, resampling or stretching.",
+    "Presentation and supported-prop ordering only. No collision, room geometry, character, animation or save schema changes.",
+    "Film set photograph supports the medical bed structure. Other furniture silhouettes are project adaptations; exact film fidelity is unverified.",
+    "Previous missing poses and missing historical sources remain open."
+  ],
+  "assets": [
+    {
+      "id": "medlab-bed",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+      "sha256": "6732cd31383a70ea7050e423d18f0751a299f23d5ff28d6cb009baada63096b4",
+      "bytes": 1155497,
+      "width": 1562,
+      "height": 1007,
+      "bbox": [
+        27,
+        80,
+        1537,
+        930
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        782.0,
+        930
+      ],
+      "label": "Medlab — lit médical",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "medlab-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-storage-cabinet.png",
+      "sha256": "bc012f56d4d5dca0a8af63aa320fb4272bb875fc1cd600e26d81509bbefec591",
+      "bytes": 2768121,
+      "width": 908,
+      "height": 1731,
+      "bbox": [
+        33,
+        9,
+        875,
+        1721
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        454.0,
+        1721
+      ],
+      "label": "Medlab — armoire de rangement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "reserve-service-locker",
+      "path": "assets/dlc/aliens-1986/v119/furniture/reserve-service-locker.png",
+      "sha256": "2a2dede3faa3b0ed4c571a840389fd01c61aacb522d96ffb85d0a962f441908d",
+      "bytes": 2701493,
+      "width": 911,
+      "height": 1727,
+      "bbox": [
+        18,
+        18,
+        893,
+        1716
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        455.5,
+        1716
+      ],
+      "label": "Réserve — casier de service",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "operations-storage-rack",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+      "bytes": 2886102,
+      "width": 948,
+      "height": 1659,
+      "bbox": [
+        12,
+        9,
+        936,
+        1648
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        474.0,
+        1648
+      ],
+      "label": "Operations — rack de rangement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "sulaco-mess-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/sulaco-mess-table.png",
+      "sha256": "f02e11b5d50e7104fd49a86164960aab3223412111737a889667d039cb17371b",
+      "bytes": 2306400,
+      "width": 1748,
+      "height": 899,
+      "bbox": [
+        22,
+        53,
+        1726,
+        864
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        874.0,
+        864
+      ],
+      "label": "Sulaco — table du mess",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "operations-command-table",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+      "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+      "bytes": 1719633,
+      "width": 1706,
+      "height": 922,
+      "bbox": [
+        12,
+        129,
+        1694,
+        865
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        853.0,
+        865
+      ],
+      "label": "Operations — table de commandement",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v119-native-reference-generation",
+      "pixelMode": "RGBA"
+    }
+  ]
+}

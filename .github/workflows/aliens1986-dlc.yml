@@ -9,6 +9,7 @@ on:
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
       - 'docs/development/aliens-1986-sprites-v118/**'
+      - 'docs/development/aliens-1986-sprites-v119/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -29,6 +30,7 @@ on:
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
       - 'docs/development/aliens-1986-sprites-v118/**'
+      - 'docs/development/aliens-1986-sprites-v119/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -85,6 +87,10 @@ jobs:
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v118.py \
             --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v118"
+      - name: Inspect V119 furniture and supported props with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-furniture-v119.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/furniture-v119"
       - name: Exercise served raster drawing, doors, saves and title navigation
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \
