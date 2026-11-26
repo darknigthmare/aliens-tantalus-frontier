@@ -104,6 +104,7 @@ def main():
             "observations": "Existing qa=1 read-only engine/snapshot API; explicit pause for renderer-purity check",
             "nativeStorage": "Opaque sentinel values" if args.skip_title else "createDefaultSave(1..3), QA names, selected profile 1",
             "creatureCaptures": "Separate browser context; existing go(room,true), explicit enemy pose and camera placement; not a playthrough",
+            "walkCostumes": "Daniels field at landing and EVA at sailaccess use separate prepared rooms and empty hands; movement then uses real keyboard/RAF. David uses the public isolated prologue button, without campaign injection.",
             "missingImages": "Separate browser context; PNG requests deliberately aborted",
             "clock": "Real requestAnimationFrame and wall clock",
             "alphaPolicy": {"supportThreshold": 32, "opaqueThresholdReported": 240, "opacityRatioInformational": True},
@@ -111,7 +112,8 @@ def main():
         },
         "tests": [], "reachedRooms": [], "controls": {"keyTransitions": 0, "jumps": 0},
         "captures": [], "pageErrors": [], "httpErrors": [], "assetDecoding": [],
-        "preparedCreaturePoses": [], "preparedPropPoses": [], "walkCycles": [], "sourceHashes": {}
+        "preparedCreaturePoses": [], "preparedPropPoses": [], "walkCycles": [],
+        "incompleteWalkCycles": [], "sourceHashes": {}
     }
     for relative in ("dlc/covenant/index.html", "dlc/covenant/sprites-v011.json", "index.html",
                      "src/title-screen-v61.js", "docs/covenant/RUNTIME_SOURCE_V011.json"):
@@ -197,6 +199,93 @@ def main():
         finally:
             release(page, held)
 
+    def observe_walk_cycle(page, cycle, prepared):
+        """Observe actual drawImage transforms while keyboard input moves the player.
+
+        The temporary wrapper records renderer calls; it never edits simulation,
+        player position, motion flags, costume selection or the simulation clock.
+        """
+        key = cycle["key"]
+        initial = page.evaluate("""() => {
+          const q=__COVENANT_QA__,e=q.engine,p=e.appearance(e.state.player,'daniels');
+          q.renderer.walkObservedV013=[];
+          q.renderer.walkOriginalV013=q.renderer.drawPose;
+          q.renderer.drawPose=function(sprite,height,anchor){
+            if(sprite.cycle){const m=this.c.getTransform();this.walkObservedV013.push({
+              id:sprite.entry.id,cycle:sprite.cycle,a:m.a,d:m.d,facing:e.state.player.facing,
+              moving:e.motion.moving,time:e.state.time});}
+            return this.walkOriginalV013(sprite,height,anchor);
+          };
+          return {room:e.room.id,profile:p.id,x:e.state.player.x,weapon:e.state.weapon,
+            safePresentation:!!e.room.safePresentation,crawl:!!e.room.crawl};
+        }""")
+        check("Walk costume is the real profile in its permitted room: " + key,
+              initial["profile"] == key and initial["room"] in cycle["rooms"]
+              and not initial["crawl"] and (not initial["weapon"] or initial["safePresentation"]), initial)
+        try:
+            page.keyboard.down("ArrowRight")
+            try:
+                page.wait_for_function("""ids=>ids.every(id=>__COVENANT_QA__.renderer.walkObservedV013
+                  .some(row=>row.id===id&&row.a>0&&row.d>0&&row.facing===1&&row.moving))""",
+                  arg=cycle["frames"])
+                pause = page.evaluate("""key=>{
+                  const q=__COVENANT_QA__,e=q.engine;q.freeze();
+                  return {time:e.state.time,x:e.state.player.x,moving:e.motion.moving,
+                    before:JSON.stringify(q.snapshot()),
+                    frame:CovenantSpritesV011.entry('human',key,'walk',e.room.id,e.state.time).id};
+                }""", key)
+            finally:
+                page.keyboard.up("ArrowRight")
+            right_draws = page.evaluate("__COVENANT_QA__.renderer.walkObservedV013.slice()")
+            check("Keyboard movement draws all eight right-facing phases: " + key,
+                  pause["x"] > initial["x"] + 10 and pause["moving"]
+                  and all(any(row["id"] == identity and row["a"] > 0 and row["moving"]
+                              for row in right_draws) for identity in cycle["frames"]),
+                  {"startX": initial["x"], "endX": pause["x"], "frames": cycle["frames"]})
+            page.wait_for_timeout(160)
+            paused = page.evaluate("""key=>{
+              const q=__COVENANT_QA__,e=q.engine;q.renderer.frame(0,{});
+              return {time:e.state.time,after:JSON.stringify(q.snapshot()),
+                frame:CovenantSpritesV011.entry('human',key,'walk',e.room.id,e.state.time).id};
+            }""", key)
+            check("Pause keeps the costume phase and exact simulation unchanged: " + key,
+                  pause["time"] == paused["time"] and pause["frame"] == paused["frame"]
+                  and pause["before"] == paused["after"])
+            capture(page, "walk-" + key + "-right",
+                    ("Prepared costume room; " if prepared else "Public independent prologue; ")
+                    + "real keyboard walk paused; not a campaign-completion proof")
+            page.evaluate("__COVENANT_QA__.renderer.walkObservedV013=[];__COVENANT_QA__.resume()")
+            before_left = observation(page)["player"]["x"]
+            page.keyboard.down("ArrowLeft")
+            try:
+                page.wait_for_function("""ids=>ids.every(id=>__COVENANT_QA__.renderer.walkObservedV013
+                  .some(row=>row.id===id&&row.a<0&&row.d>0&&row.facing===-1&&row.moving))""",
+                  arg=cycle["frames"])
+                page.evaluate("__COVENANT_QA__.freeze()")
+            finally:
+                page.keyboard.up("ArrowLeft")
+            after_left = observation(page)["player"]["x"]
+            left_draws = page.evaluate("__COVENANT_QA__.renderer.walkObservedV013.slice()")
+            check("Keyboard return draws eight reflected phases with unchanged costume: " + key,
+                  after_left < before_left - 10
+                  and all(any(row["id"] == identity and row["a"] < 0 and row["moving"]
+                              for row in left_draws) for identity in cycle["frames"]),
+                  {"startX": before_left, "endX": after_left, "frames": cycle["frames"]})
+            capture(page, "walk-" + key + "-left", "Real opposite keyboard movement; Canvas reflection observed")
+            receipt["walkCycles"].append({"id": cycle["id"], "key": key, "room": initial["room"],
+                "gameplayStateInjected": prepared, "clockInjected": False,
+                "observedRightFrames": sorted(set(row["id"] for row in right_draws if row["a"] > 0)),
+                "observedLeftFrames": sorted(set(row["id"] for row in left_draws if row["a"] < 0)),
+                "rightDraws": right_draws, "leftDraws": left_draws,
+                "pausedFrame": pause["frame"], "pausedTime": pause["time"]})
+            flush()
+        finally:
+            page.keyboard.up("ArrowLeft")
+            page.keyboard.up("ArrowRight")
+            page.evaluate("""()=>{const q=__COVENANT_QA__;
+              q.renderer.drawPose=q.renderer.walkOriginalV013;
+              delete q.renderer.walkOriginalV013;delete q.renderer.walkObservedV013;q.resume();}""")
+
     page = None
     try:
         with static_site(root, args.base) as base, sync_playwright() as pw:
@@ -221,7 +310,7 @@ def main():
                 "url": response.url, "status": response.status
             }) if response.status >= 400 and (
                 "/dlc/covenant/" in response.url or "/alien-covenant-v011/" in response.url
-                or "/alien-covenant-v012/" in response.url) else None)
+                or "/alien-covenant-v012/" in response.url or "/alien-covenant-v013/" in response.url) else None)
             response = page.goto(base + "/dlc/covenant/?qa=1&from=tantalus", wait_until="load")
             check("Served Covenant route returns HTTP 200", response is not None and response.status == 200)
             page.wait_for_function("!!window.__COVENANT_QA__ && !!window.CovenantSpritesV011")
@@ -241,13 +330,19 @@ def main():
             receipt["reachedRooms"].append("cryo")
 
             walk_cycles = page.evaluate("CovenantSpritesV011.inspect().cycles || []")
+            check("Four complete player walk cycles are declared with distinct costume scopes",
+                  len(walk_cycles) == 4
+                  and {cycle.get("key") for cycle in walk_cycles} == {"daniels-work", "daniels", "daniels-eva", "david-young"}
+                  and all(len(cycle["frames"]) == 8 and cycle["rooms"] for cycle in walk_cycles),
+                  [{"id": cycle["id"], "key": cycle.get("key"), "rooms": cycle.get("rooms")} for cycle in walk_cycles])
+            opening_cycle = next(cycle for cycle in walk_cycles if cycle["key"] == "daniels-work")
             if walk_cycles:
                 before_walk = observation(page)
                 page.keyboard.down("ArrowRight")
                 try:
                     page.wait_for_function("""(ids) => ids.every(id =>
                         (__COVENANT_QA__.renderer.spriteFrameDrawsV012[id] || 0) > 0)""",
-                        arg=walk_cycles[0]["frames"])
+                        arg=opening_cycle["frames"])
                     pause = page.evaluate("""() => {
                       const q=__COVENANT_QA__, e=q.engine;q.freeze();
                       return {time:e.state.time, moving:e.motion.moving, before:JSON.stringify(q.snapshot()),
@@ -267,7 +362,7 @@ def main():
                 check("Pausing a real walk freezes its phase without changing simulation",
                       pause["time"] == paused["time"] and pause["frame"] == paused["frame"]
                       and pause["before"] == paused["after"])
-                receipt["walkCycles"] = [{"id": walk_cycles[0]["id"], "room": "cryo",
+                receipt["walkCycles"] = [{"id": opening_cycle["id"], "key": "daniels-work", "room": "cryo",
                     "observedFrameDraws": observation(page)["cycleFrameDraws"],
                     "pausedFrame": pause["frame"], "time": pause["time"],
                     "gameplayStateInjected": False}]
@@ -366,6 +461,11 @@ def main():
             page.wait_for_function("__COVENANT_QA__.engine.room.id === 'whiteroom'")
             page.wait_for_timeout(300)
             check("White-room tableau does not overwrite the reached campaign", storage(page)[DLC_KEY] == stored_before_tableau)
+            young_cycle = next((cycle for cycle in walk_cycles if cycle.get("key") == "david-young"), None)
+            if young_cycle:
+                observe_walk_cycle(page, young_cycle, prepared=False)
+                check("Walking David through the public tableau preserves the reached campaign bytes",
+                      storage(page)[DLC_KEY] == stored_before_tableau)
             capture(page, "04-public-prologue-tableau", "Public isolated prologue button; campaign save remains unchanged")
             page.locator("#leaveScene").click()
             check("Leaving the tableau preserves the exact campaign bytes", storage(page)[DLC_KEY] == stored_before_tableau)
@@ -387,6 +487,15 @@ def main():
             fixture_page.on("pageerror", lambda error: receipt["pageErrors"].append("pose fixture: " + str(error)))
             fixture_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
             fixture_page.wait_for_function("!!window.__COVENANT_QA__")
+            for key, room in (("daniels", "landing"), ("daniels-eva", "sailaccess")):
+                cycle = next((row for row in walk_cycles if row.get("key") == key), None)
+                if not cycle:
+                    continue
+                fixture_page.evaluate("""room=>{
+                  const q=__COVENANT_QA__;q.go(room,true);q.engine.state.weapon=false;
+                  q.resume();
+                }""", room)
+                observe_walk_cycle(fixture_page, cycle, prepared=True)
             available = fixture_page.evaluate("CovenantSpritesV011.entries().filter(e=>e.kind==='creature').map(e=>({id:e.id,key:e.key,state:e.state}))")
             for entry in available:
                 prepared = fixture_page.evaluate("""(entry) => {
@@ -442,16 +551,27 @@ def main():
                 capture(fixture_page, "fixture-" + entry["id"], "Prepared exact prop instance; not a gameplay-reached room")
             fixture_context.close()
 
-            if walk_cycles:
+            for cycle in walk_cycles:
                 partial_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
                 partial_page = partial_context.new_page()
+                partial_page.set_default_timeout(20000)
                 partial_errors = []
                 partial_page.on("pageerror", lambda error: partial_errors.append(str(error)))
-                missing_phase = walk_cycles[0]["frames"][-1]
-                partial_page.route("**/alien-covenant-v012/" + missing_phase + ".png",
-                                   lambda route: route.abort("failed"))
+                missing_phase = cycle["frames"][-1]
+                missing_path = page.evaluate("id=>CovenantSpritesV011.entries().find(row=>row.id===id).path", missing_phase)
+                partial_page.route("**" + missing_path, lambda route: route.abort("failed"))
                 partial_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
-                partial_page.locator("#begin").click()
+                partial_page.wait_for_function("!!window.__COVENANT_QA__")
+                key = cycle.get("key", "daniels-work")
+                prepared = key in ("daniels", "daniels-eva")
+                if key == "daniels-work":
+                    partial_page.locator("#begin").click()
+                elif key == "david-young":
+                    partial_page.locator("#prologueFront").click()
+                else:
+                    room = {"daniels": "landing", "daniels-eva": "sailaccess"}[key]
+                    partial_page.evaluate("""room=>{const q=__COVENANT_QA__;
+                        q.go(room,true);q.engine.state.weapon=false;q.resume();}""", room)
                 before = observation(partial_page)
                 partial_page.keyboard.down("ArrowRight")
                 try:
@@ -462,19 +582,24 @@ def main():
                     partial_page.keyboard.up("ArrowRight")
                 after = observation(partial_page)
                 partial_status = partial_page.evaluate("CovenantSpritesV011.inspect()")
-                check("One unavailable phase keeps the entire walk cycle procedural and playable",
-                      after["player"]["x"] > before["player"]["x"] + 10
-                      and not after["cycleFrameDraws"] and not partial_errors
-                      and not partial_status["cycles"][0]["ready"],
-                      {"blockedPhase": missing_phase, "expectedPNGFailure": True, "pageErrors": partial_errors})
-                capture(partial_page, "fixture-incomplete-walk-cycle", "One PNG deliberately blocked; no partial cycle is drawn")
+                status = next(row for row in partial_status["cycles"] if row["id"] == cycle["id"])
+                complete_fallback = (after["player"]["x"] > before["player"]["x"] + 10
+                    and all(not after["cycleFrameDraws"].get(identity, 0) for identity in cycle["frames"])
+                    and not partial_errors and not status["ready"])
+                check("One unavailable phase keeps the entire costume cycle procedural and playable: " + key,
+                      complete_fallback, {"blockedPhase": missing_phase, "expectedPNGFailure": True,
+                      "gameplayStateInjected": prepared, "pageErrors": partial_errors})
+                receipt["incompleteWalkCycles"].append({"id": cycle["id"], "blockedPhase": missing_phase,
+                    "room": before["room"], "gameplayStateInjected": prepared, "passed": complete_fallback})
+                capture(partial_page, "fixture-incomplete-" + cycle["id"],
+                        "One PNG deliberately blocked; no phase of that cycle is drawn")
                 partial_context.close()
 
             missing_context = browser.new_context(viewport={"width": 1440, "height": 1000}, service_workers="block")
             missing_page = missing_context.new_page()
             fallback_errors = []
             missing_page.on("pageerror", lambda error: fallback_errors.append(str(error)))
-            for version in ("v011", "v012"):
+            for version in ("v011", "v012", "v013"):
                 missing_page.route("**/assets/openai/sprites/alien-covenant-" + version + "/*.png",
                                    lambda route: route.abort("failed"))
             missing_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")

@@ -303,16 +303,16 @@ test('console PNGs cannot mask functional panels or navigation displays', () => 
 });
 
 
-function walkingManifest() {
+function walkingManifest(key = 'daniels-work', rooms = ['cryo', 'service', 'cabin', 'funeralairlock', 'evaprep', 'bridge', 'comms']) {
+  const folder = key === 'daniels-work' ? 'v012' : 'v013';
   const frames = Array.from({ length: 8 }, (_, index) => {
-    const id = 'daniels-work-walk-' + String(index + 1).padStart(2, '0');
-    return asset({ id, key: 'daniels-work', state: 'walk',
-      path: '/assets/openai/sprites/alien-covenant-v012/' + id + '.png',
-      rooms: ['cryo', 'service', 'cabin', 'funeralairlock', 'evaprep', 'bridge', 'comms'] });
+    const id = key + '-walk-' + String(index + 1).padStart(2, '0');
+    return asset({ id, key, state: 'walk', logicalHeight: key === 'daniels-eva' ? 139 : 122,
+      path: '/assets/openai/sprites/alien-covenant-' + folder + '/' + id + '.png', rooms });
   });
-  return { schemaVersion: 1, release: '0.12.0', verified1to1: false,
+  return { schemaVersion: 1, release: key === 'daniels-work' ? '0.12.0' : '0.13.0', verified1to1: false,
     assets: [asset(), ...frames], cycles: [{
-      id: 'daniels-work-walk', kind: 'human', key: 'daniels-work', state: 'walk',
+      id: key + '-walk', kind: 'human', key, state: 'walk',
       angularFrequency: 11, frames: frames.map(frame => frame.id)
     }] };
 }
@@ -441,3 +441,108 @@ test('a V012 prop binds to the reviewed instance and room, without replacing its
   wrongRoom.renderer.prop({ id: 'shaw-f10-identification', kind: 'identification', x: 100, w: 70, h: 80 });
   assert.equal(wrongRoom.inherited[0][0], 'prop');
 });
+
+const newPlayerCycles = [
+  { key: 'daniels', room: 'landing', height: 122 },
+  { key: 'daniels-eva', room: 'sailaccess', height: 139 },
+  { key: 'david-young', room: 'whiteroom', height: 122, safePresentation: true }
+];
+
+for (const profile of newPlayerCycles) {
+  test(profile.key + ': all eight clock phases render in both directions without changing simulation', () => {
+    const raw = walkingManifest(profile.key, [profile.room]);
+    for (const facing of [-1, 1]) for (let index = 0; index < 8; index++) {
+      const h = harness([], { manifest: raw, profile: { id: profile.key },
+        room: { id: profile.room, safePresentation: !!profile.safePresentation },
+        motion: { moving: true }, state: { time: (index + .25) / 8 * 2 * Math.PI / 11 },
+        engine: { paused: true } });
+      const person = freeze({ ...actor(), facing }), before = JSON.stringify(h.engine);
+      h.renderer.human(person, 'daniels', true);
+      const calls = h.commands.filter(row => row[0] === 'drawImage');
+      assert.equal(calls.length, 1);
+      assert.equal(calls[0][1].id, raw.cycles[0].frames[index]);
+      assert.equal(calls[0][9], profile.height);
+      assert.ok(h.commands.some(row => row[0] === 'scale' && row[1] === facing && row[2] === 1));
+      assert.equal(h.inherited.length, 0);
+      assert.equal(JSON.stringify(h.engine), before);
+      assert.equal(person.facing, facing);
+    }
+  });
+
+  test(profile.key + ': unsupported motion, actor roles and action states keep the native renderer', () => {
+    const raw = walkingManifest(profile.key, [profile.room]);
+    const variants = [
+      { motion: { moving: false } }, { motion: { run: true } }, { motion: { crouch: true } },
+      { room: { crawl: true } }, { engine: { grip: {} } }, { engine: { work: {} } },
+      { engine: { scanning: {} } }, { engine: { healing: 1 } }, { engine: { rotating: {} } },
+      { engine: { detector: true } }, { engine: { reloadTime: 1 } },
+      { engine: { shoveCooldown: 2 } }, { engine: { dead: true } },
+      { person: { y: 12 } }, { person: { id: 'npc-fixture', phase: 'walk' } }
+    ];
+    if (!profile.safePresentation) variants.push({ state: { weapon: true } });
+    for (const change of variants) {
+      const h = harness([], { manifest: raw, profile: { id: profile.key },
+        room: { id: profile.room, safePresentation: !!profile.safePresentation, ...change.room },
+        motion: { moving: true, ...change.motion }, state: change.state,
+        engine: change.engine });
+      h.renderer.human({ ...actor(), ...change.person }, 'daniels', true);
+      assert.equal(h.commands.filter(row => row[0] === 'drawImage').length, 0);
+      assert.equal(h.inherited[0][0], 'human');
+    }
+    if (profile.safePresentation) {
+      const h = harness([], { manifest: raw, profile: { id: profile.key },
+        room: { id: profile.room, safePresentation: true }, motion: { moving: true },
+        state: { weapon: true }, engine: { currentWeapon() { throw Error('Tableau must not select a weapon'); } } });
+      h.renderer.human(actor(), 'daniels', true);
+      assert.equal(h.commands.filter(row => row[0] === 'drawImage').length, 1);
+      assert.equal(h.inherited.length, 0);
+    }
+  });
+
+  test(profile.key + ': one failed phase disables this cycle without disabling a ready costume', () => {
+    const work = walkingManifest(), added = walkingManifest(profile.key, [profile.room]);
+    const raw = { ...work, release: '0.13.0',
+      assets: [...work.assets, ...added.assets.slice(1)], cycles: [...work.cycles, ...added.cycles] };
+    const created = [];
+    class ImageDouble { constructor() { created.push(this); } }
+    const registry = createRegistry({ manifest: raw, ImageClass: ImageDouble });
+    registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1);
+    for (const image of created) {
+      image.naturalWidth = 140; image.naturalHeight = 240; image.onload();
+    }
+    assert.ok(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1));
+    registry.sprite('human', profile.key, 'walk', profile.room, .1);
+    assert.equal(created.length, 16);
+    for (const image of created.slice(8, 15)) {
+      image.naturalWidth = 140; image.naturalHeight = 240; image.onload();
+    }
+    created[15].onerror();
+    for (let phase = 0; phase < 8; phase++) {
+      assert.equal(registry.sprite('human', profile.key, 'walk', profile.room, phase / 8 * 2 * Math.PI / 11), null);
+    }
+    assert.ok(registry.sprite('human', 'daniels-work', 'walk', 'cryo', .1));
+    assert.equal(registry.inspect().cycles.find(row => row.key === profile.key).ready, false);
+    assert.equal(registry.inspect().cycles.find(row => row.key === 'daniels-work').ready, true);
+  });
+}
+
+test('new costume cycles reject foreign rooms, unsupplied order and cross-version image substitution', () => {
+  for (const profile of newPlayerCycles) {
+    const otherRoom = profile.key === 'david-young' ? 'landing' : 'whiteroom';
+    const variants = [
+      raw => { raw.release = '0.12.0'; },
+      raw => { for (const row of raw.assets.slice(1)) row.rooms = [otherRoom]; },
+      raw => { for (const row of raw.assets.slice(1)) row.rooms = ['filterduct']; },
+      raw => { for (const row of raw.assets.slice(1)) row.rooms = null; },
+      raw => { for (const row of raw.assets.slice(1)) row.rooms = [profile.room, profile.room]; },
+      raw => { for (const row of raw.assets.slice(1)) row.path = row.path.replace('v013', 'v012'); },
+      raw => { raw.cycles[0].frames.reverse(); },
+      raw => { delete raw.cycles; }
+    ];
+    for (const change of variants) {
+      const raw = walkingManifest(profile.key, [profile.room]); change(raw);
+      assert.throws(() => compileManifest(raw));
+    }
+  }
+});
+

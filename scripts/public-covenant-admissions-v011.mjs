@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011, COVENANT_ASSETS_V012,
+import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
@@ -11,12 +11,15 @@ const SOURCE_FILES = new Set([
   'scripts/build-covenant-v011.mjs', 'scripts/public-covenant-admissions-v011.mjs',
   'scripts/sync-covenant-sprites-v011.py', 'scripts/verify-covenant-integration-v011.mjs',
   'scripts/package-covenant-sprites-v011.py', 'scripts/package-covenant-sprites-v012.py',
+  'scripts/package-covenant-sprites-v013.py',
   'scripts/verify-covenant-sprites-v011.mjs',
   'scripts/qa-covenant-v011.py', 'scripts/qa-covenant-catalogue-v012.py',
+  'scripts/qa-covenant-catalogue-v013.py',
   'docs/covenant/INVENTORY_V011.json', 'docs/covenant/PROVENANCE_V011.json',
   'docs/covenant/SPRITE_PROVENANCE_V011.json', 'docs/covenant/README.md',
   'docs/covenant/SPRITES_V011_STATUS.md', 'docs/covenant/RUNTIME_SOURCE_V011.json',
   'docs/covenant/PROVENANCE_V012.json', 'docs/covenant/SPRITES_V012_STATUS.md',
+  'docs/covenant/PROVENANCE_V013.json', 'docs/covenant/SPRITES_V013_STATUS.md',
   '.github/workflows/covenant-v011.yml'
 ]);
 const SOURCE_DIRS = new Set([...SOURCE_FILES].flatMap(file => {
@@ -27,11 +30,11 @@ const cache = new Map();
 
 function admittedAssets(built) {
   const manifests = built ? [COVENANT_MANIFEST_V011]
-    : [COVENANT_ASSETS_V011 + '/manifest.json', COVENANT_ASSETS_V012 + '/manifest.json'];
+    : COVENANT_ASSET_ROOTS.map(base => base + '/manifest.json');
   const assets = new Set();
   for (const manifestPath of manifests) {
     const url = new URL('../' + manifestPath, import.meta.url);
-    if (!built && manifestPath === COVENANT_ASSETS_V012 + '/manifest.json' && !existsSync(url)) continue;
+    if (!built && manifestPath !== COVENANT_ASSETS_V011 + '/manifest.json' && !existsSync(url)) continue;
     const raw = readFileSync(url, 'utf8');
     const previous = cache.get(manifestPath);
     let current = previous?.raw === raw ? previous.assets : null;

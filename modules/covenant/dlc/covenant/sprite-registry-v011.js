@@ -1,10 +1,24 @@
-/* Covenant visual releases 0.11/0.12. Runtime images do not change simulation data.
+/* Covenant visual releases 0.11/0.12/0.13. Runtime images do not change simulation data.
  * Only manifest-admitted, successfully decoded states replace Canvas artwork.
  */
 (function (root) {
   'use strict';
   const ASSET_ROOT = '/assets/openai/sprites/alien-covenant-v011/';
   const ASSET_ROOT_V012 = '/assets/openai/sprites/alien-covenant-v012/';
+  const ASSET_ROOT_V013 = '/assets/openai/sprites/alien-covenant-v013/';
+  // These are the actual player costume scopes; the three ducts require crawling.
+  // The independent activation tableau never borrows a campaign costume or cycle.
+  const WALK_ROOMS = Object.freeze({
+    'daniels-work': Object.freeze(['cryo', 'service', 'cabin', 'funeralairlock', 'evaprep', 'bridge', 'comms']),
+    daniels: Object.freeze(['landing', 'wheat', 'ravine', 'forest', 'juggernaut', 'pilot', 'medlander',
+      'burning', 'reeds', 'necropolis', 'court', 'workshop', 'gallery', 'garden', 'crypt', 'shaw',
+      'catacomb', 'nave', 'plaza', 'infirmary', 'corridor', 'returncryo', 'embryos', 'coolantwalk',
+      'evaclocker', 'cistern', 'undercroft', 'stores', 'relay', 'aqueduct', 'sluiceworks', 'effigybasin',
+      'reliquary', 'windfall', 'sporehollow', 'surveyblind', 'landerhold', 'landercockpit', 'landermed',
+      'davidquarters', 'musicroom', 'washroom', 'colonistvault']),
+    'daniels-eva': Object.freeze(['lifter', 'cargo', 'sailaccess']),
+    'david-young': Object.freeze(['whiteroom'])
+  });
   const MANIFEST_URL = '/dlc/covenant/sprites-v011.json';
   const KINDS = new Set(['human', 'creature', 'weapon', 'prop']);
   const STATES = new Set(['idle', 'attack', 'walk', 'run', 'crawl', 'dead', 'armed']);
@@ -14,18 +28,21 @@
     return Object.freeze(v.slice());
   };
   function compileManifest(raw) {
-    if (!raw || raw.schemaVersion !== 1 || !['0.11.0', '0.12.0'].includes(raw.release) || !Array.isArray(raw.assets)) {
+    if (!raw || raw.schemaVersion !== 1 || !['0.11.0', '0.12.0', '0.13.0'].includes(raw.release) || !Array.isArray(raw.assets)) {
       throw new Error('Invalid Covenant sprite manifest');
     }
     const definitions = raw.cycles === undefined ? [] : raw.cycles;
-    if (!Array.isArray(definitions) || definitions.length && raw.release !== '0.12.0') {
+    if (!Array.isArray(definitions) || definitions.length && !['0.12.0', '0.13.0'].includes(raw.release)) {
       throw new Error('Invalid Covenant sprite cycles');
     }
     const frameOwners = new Map(), cycleIds = new Set();
     for (const cycle of definitions) {
       if (!/^[a-z][a-zA-Z0-9-]{0,79}$/.test(cycle?.id || '') || cycleIds.has(cycle.id)
-        || cycle.kind !== 'human' || cycle.key !== 'daniels-work' || cycle.state !== 'walk'
-        || cycle.angularFrequency !== 11 || !Array.isArray(cycle.frames) || cycle.frames.length !== 8) {
+        || cycle.kind !== 'human' || !Object.hasOwn(WALK_ROOMS, cycle.key) || cycle.state !== 'walk'
+        || raw.release === '0.12.0' && cycle.key !== 'daniels-work'
+        || cycle.id !== cycle.key + '-walk' || cycle.angularFrequency !== 11
+        || !Array.isArray(cycle.frames) || cycle.frames.length !== 8
+        || cycle.frames.some((id, index) => id !== cycle.id + '-' + String(index + 1).padStart(2, '0'))) {
         throw new Error('Invalid Covenant walk cycle');
       }
       cycleIds.add(cycle.id);
@@ -35,7 +52,8 @@
       }
     }
     const byId = new Map(), byState = new Map(), byCycle = new Map();
-    const roots = raw.release === '0.12.0' ? [ASSET_ROOT, ASSET_ROOT_V012] : [ASSET_ROOT];
+    const roots = raw.release === '0.13.0' ? [ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013]
+      : raw.release === '0.12.0' ? [ASSET_ROOT, ASSET_ROOT_V012] : [ASSET_ROOT];
     for (const input of raw.assets) {
       const { id, kind, key, state, path, width, height, bytes, sha256 } = input;
       if (!/^[a-z][a-zA-Z0-9-]{0,79}$/.test(id || '') || !KINDS.has(kind)
@@ -46,7 +64,8 @@
         || !Number.isSafeInteger(bytes) || bytes < 1 || !/^[a-f0-9]{64}$/.test(sha256 || '')) {
         throw new Error('Invalid Covenant sprite identity: ' + id);
       }
-      if (kind === 'human' && state === 'walk' && path.startsWith(ASSET_ROOT_V012) && !frameOwners.has(id)) {
+      if (kind === 'human' && state === 'walk'
+        && [ASSET_ROOT_V012, ASSET_ROOT_V013].some(base => path.startsWith(base)) && !frameOwners.has(id)) {
         throw new Error('Walk frame is not part of a complete declared cycle: ' + id);
       }
       const b = input.alphaBounds;
@@ -80,10 +99,13 @@
     for (const definition of definitions) {
       const token = definition.kind + ':' + definition.key + ':' + definition.state;
       const frames = definition.frames.map(id => byId.get(id));
+      const sourceRoot = definition.key === 'daniels-work' ? ASSET_ROOT_V012 : ASSET_ROOT_V013;
       if (byState.has(token) || byCycle.has(token) || frames.some(frame => !frame)
         || frames.some(frame => frame.kind !== definition.kind || frame.key !== definition.key
-          || frame.state !== definition.state || !frame.path.startsWith(ASSET_ROOT_V012)
-          || frame.heldGrip || frame.sourceFacing !== 1)
+          || frame.state !== definition.state || !frame.path.startsWith(sourceRoot)
+          || frame.heldGrip || frame.sourceFacing !== 1 || !frame.rooms?.length
+          || new Set(frame.rooms).size !== frame.rooms.length
+          || frame.rooms.some(room => !WALK_ROOMS[definition.key].includes(room)))
         || frames.some(frame => JSON.stringify(frame.rooms) !== JSON.stringify(frames[0].rooms))) {
         throw new Error('Incomplete or incompatible Covenant walk cycle: ' + definition.id);
       }
@@ -155,11 +177,13 @@
         return image ? { entry, image, ...(cycle ? { cycle: cycle.id } : {}) } : null;
       },
       inspect: () => ({ status, error, admitted: compiled.entries.length,
-        cycles: compiled.cycles.map(cycle => ({ id: cycle.id, frames: cycle.frames.map(frame => frame.id),
+        cycles: compiled.cycles.map(cycle => ({ id: cycle.id, key: cycle.key, rooms: cycle.rooms,
+          frames: cycle.frames.map(frame => frame.id),
           ready: cycle.frames.every(frame => images.get(frame.id)?.status === 'ready') })),
         images: [...images].map(([id, value]) => ({ id, status: value.status })) }) });
   }
-  const api = Object.freeze({ ASSET_ROOT, ASSET_ROOT_V012, MANIFEST_URL, compileManifest, createRegistry });
+  const api = Object.freeze({ ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, WALK_ROOMS,
+    MANIFEST_URL, compileManifest, createRegistry });
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else {
     root.CovenantSpriteRegistryV011 = api;

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, readdir, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -9,9 +10,11 @@ import { TitleScreenController } from '../src/title-screen-v61.js';
 import { publicCovenantPathAdmissionV011 as admit } from './public-covenant-admissions-v011.mjs';
 import { buildCovenantDlcV011, verifyCovenantBundleV011, covenantManifestV011,
   COVENANT_SOURCE_V011, COVENANT_RUNTIME_FILES_V011, COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012,
+  COVENANT_PROVENANCE_V013,
   COVENANT_ASSET_ROOTS, covenantSourceMetadataPathV011, reviewedCovenantSourceMetadataV011 } from './build-covenant-v011.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const require = createRequire(import.meta.url);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const originalFiles = [
   'app.js', 'archaeology-art.js', 'archaeology.js', 'art-direction.js',
@@ -34,7 +37,7 @@ test('original recovered runtime remains byte-identical except the declared page
       const added = '<script src="fidelity-art.js"></script><script src="sprite-registry-v011.js"></script><script src="sprite-art-v011.js"></script><script src="app.js"></script>';
       assert.equal(text.split(added).length, 2, 'One final renderer insertion is required');
       text = text.replace(added, '<script src="fidelity-art.js"></script><script src="app.js"></script>');
-      text = text.replace(/version 0\.(?:11|12)\.0/, 'version 0.10.0');
+      text = text.replace(/version 0\.(?:11|12|13)\.0/, 'version 0.10.0');
       bytes = Buffer.from(text);
     }
     assert.equal(bytes.length, row.bytes, 'Changed recovered source size: ' + row.name);
@@ -97,10 +100,18 @@ test('only declared PNG files and the two public module files enter distribution
   assert.equal(admit('assets/openai/sprites/alien-covenant-v012/manifest.json', { built: false }), true);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v012/manifest.json', { built: true }), false);
   assert.equal(admit('assets/openai/sprites/alien-covenant-v012/unknown.png', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v013/manifest.json', { built: false }), true);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v013/manifest.json', { built: true }), false);
+  assert.equal(admit('assets/openai/sprites/alien-covenant-v013/unknown.png', { built: true }), false);
   assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: false }), true);
   assert.equal(admit('docs/covenant/PROVENANCE_V012.json', { built: true }), false);
   assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: false }), true);
   assert.equal(admit('docs/covenant/SPRITES_V012_STATUS.md', { built: true }), false);
+  for (const path of ['docs/covenant/PROVENANCE_V013.json', 'docs/covenant/SPRITES_V013_STATUS.md',
+    'scripts/package-covenant-sprites-v013.py', 'scripts/qa-covenant-catalogue-v013.py']) {
+    assert.equal(admit(path, { built: false }), true);
+    assert.equal(admit(path, { built: true }), false);
+  }
   assert.equal(admit('dlc/covenant/index.html', { built: true }), true);
   assert.equal(admit('dlc/covenant/sprites-v011.json', { built: true }), true);
   assert.equal(admit('dlc/covenant/hidden.html', { built: true }), false);
@@ -141,13 +152,13 @@ test('standalone build contains only the admitted page, runtime manifest and ori
 
 test('reviewed provenance is pinned to each exact source path and bytes, never admitted in dist', async () => {
   assert.equal(covenantSourceMetadataPathV011('docs/covenant/other.json'), false);
-  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012]) {
+  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012, COVENANT_PROVENANCE_V013]) {
     assert.equal(covenantSourceMetadataPathV011(path), true);
     assert.equal(admit(path, { built: true }), false, 'The path gate rejects metadata before text scanning');
     let bytes;
     try { bytes = await readFile(join(root, path)); }
     catch (error) {
-      if (path === COVENANT_PROVENANCE_V012 && error.code === 'ENOENT') continue;
+      if (path !== COVENANT_PROVENANCE_V011 && error.code === 'ENOENT') continue;
       throw error;
     }
     assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true,
@@ -199,5 +210,58 @@ test('Covenant build helpers can be imported without recovered sources in a spar
       error.code === 'MODULE_NOT_FOUND' && error.message.includes('sprite-registry-v011.js'));
   } finally {
     await rm(sparse, { recursive: true, force: true });
+  }
+});
+
+test('V013 preserves every V012 runtime binding and all 61 earlier original PNGs', async () => {
+  const { manifest } = await covenantManifestV011(root);
+  const previous = manifest.assets.filter(row => !row.path.startsWith('/assets/openai/sprites/alien-covenant-v013/'));
+  assert.equal(previous.length, 39);
+  // Captured from the frozen V012 runtime using JSON.stringify (Python's
+  // serializer preserves integral floats differently and has a separate pin).
+  assert.equal(digest(Buffer.from(JSON.stringify(previous))),
+    'c9aca346c879d606f2469d7117c66ef5425d6c82e9ebb63c596484e8a57152ed');
+  const originals = new Set();
+  for (const path of [COVENANT_PROVENANCE_V011, COVENANT_PROVENANCE_V012]) {
+    const source = JSON.parse(await readFile(join(root, path), 'utf8'));
+    for (const row of source.assets) {
+      assert.equal(originals.has(row.path), false);
+      originals.add(row.path);
+      const bytes = await readFile(join(root, row.path));
+      assert.equal(digest(bytes), row.sha256 || row.alphaQA?.sha256, 'Changed original PNG: ' + row.id);
+      assert.equal(bytes.length, row.bytes, 'Changed original size: ' + row.id);
+    }
+  }
+  assert.equal(originals.size, 61);
+});
+
+test('four complete walk cycles follow every real player costume scope without including crawling or NPCs', async () => {
+  const { manifest, compiled } = await covenantManifestV011(root);
+  const data = require('../modules/covenant/dlc/covenant/content.js');
+  const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
+  assert.equal(manifest.release, '0.13.0');
+  assert.equal(compiled.entries.length, 63);
+  assert.deepEqual(compiled.cycles.map(row => row.key).sort(),
+    ['daniels', 'daniels-eva', 'daniels-work', 'david-young']);
+  for (const cycle of compiled.cycles) {
+    const expected = data.rooms.filter(room => !room.crawl && appearance({room, data, actorDefs: new Map()}, {}, 'daniels').id === cycle.key)
+      .map(room => room.id).sort();
+    assert.deepEqual(cycle.rooms.slice().sort(), expected, cycle.key);
+    assert.equal(cycle.frames.length, 8);
+    const scales = cycle.frames.map(frame => frame.logicalHeight / (frame.alphaBounds[3] - frame.alphaBounds[1]));
+    for (const frame of cycle.frames) {
+      assert.equal(frame.anchor[1], frame.alphaBounds[3], 'Ground line uses the reviewed visible foot support');
+      assert.ok(Math.abs(frame.logicalHeight / (frame.alphaBounds[3] - frame.alphaBounds[1]) - scales[0]) < 1e-10,
+        'One constant image scale must preserve walking body motion: ' + frame.id);
+    }
+    for (const room of data.rooms) {
+      const resolved = compiled.resolve('human', cycle.key, 'walk', room.id, .2);
+      assert.equal(!!resolved, expected.includes(room.id), cycle.key + ' in ' + room.id);
+    }
+  }
+  assert.equal(compiled.cycles.reduce((sum, cycle) => sum + cycle.rooms.length, 0), 54);
+  assert.deepEqual(compiled.cycles.find(row => row.key === 'david-young').rooms, ['whiteroom']);
+  for (const room of data.rooms.filter(room => room.crawl)) {
+    assert.equal(compiled.resolve('human', 'daniels', 'walk', room.id, .2), null);
   }
 });

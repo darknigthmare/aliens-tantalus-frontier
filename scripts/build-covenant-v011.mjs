@@ -9,7 +9,8 @@ export const COVENANT_SOURCE_V011 = 'modules/covenant/dlc/covenant';
 export const COVENANT_PUBLIC_V011 = 'dlc/covenant';
 export const COVENANT_ASSETS_V011 = 'assets/openai/sprites/alien-covenant-v011';
 export const COVENANT_ASSETS_V012 = 'assets/openai/sprites/alien-covenant-v012';
-export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012]);
+export const COVENANT_ASSETS_V013 = 'assets/openai/sprites/alien-covenant-v013';
+export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013]);
 export const COVENANT_MANIFEST_V011 = COVENANT_PUBLIC_V011 + '/sprites-v011.json';
 export const COVENANT_RUNTIME_FILES_V011 = Object.freeze([
   'index.html', 'style.css', 'content.js', 'ship-systems.js', 'maintenance.js',
@@ -23,11 +24,14 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 export const COVENANT_PROVENANCE_V011 = COVENANT_ASSETS_V011 + '/manifest.json';
 export const COVENANT_PROVENANCE_V012 = COVENANT_ASSETS_V012 + '/manifest.json';
+export const COVENANT_PROVENANCE_V013 = COVENANT_ASSETS_V013 + '/manifest.json';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V011 = '3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V012 = 'd29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3';
+const REVIEWED_COVENANT_PROVENANCE_SHA256_V013 = '5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788';
 const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
   [COVENANT_PROVENANCE_V011, REVIEWED_COVENANT_PROVENANCE_SHA256_V011],
-  [COVENANT_PROVENANCE_V012, REVIEWED_COVENANT_PROVENANCE_SHA256_V012]
+  [COVENANT_PROVENANCE_V012, REVIEWED_COVENANT_PROVENANCE_SHA256_V012],
+  [COVENANT_PROVENANCE_V013, REVIEWED_COVENANT_PROVENANCE_SHA256_V013]
 ]);
 
 export function covenantSourceMetadataPathV011(path) {
