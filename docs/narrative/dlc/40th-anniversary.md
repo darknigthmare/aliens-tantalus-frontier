@@ -12,11 +12,13 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-Intégration locale documentée ; publication distincte à confirmer par reçu.
+Intégration locale et bundle de 256 822 850 octets repérés ; conservation GitHub du bundle non réalisée dans cette reprise.
 
 Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
 
 Chemins repérés : `dlc/40th-anniversary/`, `archives/40th-anniversary/`.
+
+Voir le [reçu de récupération et le travail restant](RECUPERATION_20261126.md).
 
 ## Décisions à préserver
 

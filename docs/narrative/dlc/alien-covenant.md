@@ -12,9 +12,9 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-Archive historique préservée ; intégration locale à préserver séparément, pas de PR runtime dédiée confirmée.
+Archive historique préservée ; 3 candidats PNG réels en PR69, sans raccord runtime. L'intégration locale reste à préserver.
 
-Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
+[PR #69](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/69) — [manifeste des trois candidats](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/65e3c378b8dd4469a053eafff6a5ae4d5a9669e1/docs/development/covenant-sprites-20261126/manifest.json). Deux demandes n'ont créé aucun fichier : `neomorph-juvenile-hallett.png` et `xenomorph-covenant-idle.png`. La nouvelle série contient exactement trois PNG, soit 4 414 495 octets, sans intégration en jeu ni fidélité 1:1 certifiée.
 
 Corpus d'archive repéré : `archives/local-recovery-20261125/alien-covenant/`. Voir la [branche d'archives épinglée](https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6ed9b9210a097bbdf90ec3a22043a3fe5845e541/archives/local-recovery-20261125/alien-covenant/).
 

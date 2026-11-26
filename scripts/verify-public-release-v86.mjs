@@ -765,6 +765,8 @@ const FORGE_TOOLING_V140 = new Set([
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
   // DLC bible consolidation: exact source-only documents, never shipped.
   'docs/narrative/dlc',
+  'docs/narrative/dlc/RECUPERATION_20261126.json',
+  'docs/narrative/dlc/RECUPERATION_20261126.md',
   'docs/narrative/DLC_DISCUSSIONS_20261126.json',
   'docs/narrative/DLC_INDEX_20261126.md',
   'docs/narrative/dlc/40th-anniversary.md',

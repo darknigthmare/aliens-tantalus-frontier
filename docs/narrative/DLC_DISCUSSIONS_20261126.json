@@ -377,6 +377,7 @@
         "Visages, plans cotés et chorégraphies non certifiés."
       ],
       "production": [
+        "Comparer les 3 candidats PR69 aux références avant raccord : adulte Néomorphe, Facehugger et Ovomorphe. Juvénile Hallett et Xénomorphe idle non produits après refus ; ne pas les compter.",
         "Toute génération doit indiquer Covenant explicitement, conformément à la correction utilisateur du 26 novembre.",
         "Prioriser les profils actifs distincts et les équipements déjà raccordés ; conserver apparence Walter après révélation.",
         "Les données de jeu (munitions/dégâts) ne deviennent pas des spécifications canoniques."
@@ -385,9 +386,12 @@
       "canonExact": false,
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
-        "prs": [],
-        "state": "Archive historique préservée ; intégration locale à préserver séparément, pas de PR runtime dédiée confirmée.",
-        "archive": "archives/local-recovery-20261125/alien-covenant/"
+        "prs": [
+          69
+        ],
+        "state": "Archive historique préservée ; 3 candidats PNG réels en PR69, sans raccord runtime. L'intégration locale reste à préserver.",
+        "archive": "archives/local-recovery-20261125/alien-covenant/",
+        "spriteManifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/65e3c378b8dd4469a053eafff6a5ae4d5a9669e1/docs/development/covenant-sprites-20261126/manifest.json"
       },
       "documentEvidence": [
         {
@@ -470,7 +474,7 @@
       "id": "river-of-pain",
       "title": "Alien : Fleuve de la Douleur",
       "version": "0.9.0-candidate.1 + packs visuels",
-      "scope": "Module autonome récupéré ; raccord et 42 sprites fusionnés dans main selon snapshot,28 props sur branche distincte.",
+      "scope": "Module autonome récupéré ; raccord et42 sprites fusionnés dans main selon snapshot,28 props sur branche distincte.",
       "counts": "47 lieux ; 64 connexions /128 seuils ; 16 chapitres ; 49 objectifs +6 détours ; 14 profils ; 93 entrées documentaires.",
       "documented": [
         "Types de seuil/support ; pistes sans portes isolées ;44 props gênants déplacés.",
@@ -484,7 +488,7 @@
         "Apparences source vectorielles : les packs plus récents doivent remplacer cette lecture historique."
       ],
       "production": [
-        "Intégrer/comparer les28 props déjà produits avant génération ; conserver42 sprites déjà fusionnés.",
+        "Intégrer/comparer les28 props déjà produits avant génération ; conserver42sprites déjà fusionnés.",
         "Raccorder les assets à leur scène, pas globalement à chaque type de prop."
       ],
       "exact": false,
@@ -552,22 +556,27 @@
         "prs": [
           54
         ],
-        "state": "PR54 ouverte de récupération ; statut de publication distinct de la qualification du raccord hôte.",
+        "state": "PR54 ouverte de récupération ; statut de publication distinct de la qualification du raccord hôte. ZIP original récupéré/contrôlé mais non transféré ; la préservation complémentaire prévue en PR54 est interrompue.",
         "paths": [
           "dlc/alien-blackout/",
           "modules/alien-blackout/"
-        ]
+        ],
+        "zipBytesPublished": false,
+        "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+        "archiveSizeBytes": 33103752
       },
       "documentEvidence": [
         {
           "read": true,
           "member": "ALIEN_BLACKOUT_v0.7.0/README.md",
-          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip"
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c"
         },
         {
           "read": true,
           "member": "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md",
-          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip"
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+          "archiveSha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c"
         }
       ],
       "decisionIds": [
@@ -657,7 +666,7 @@
         "Visage Decker et majorité distribution non authentifiés ; boss à trois attaches à revoir."
       ],
       "production": [
-        "Publier et comparer le pack visuel déjà commité localement avant génération supplémentaire.",
+        "Reprendre les 93 fichiers du pack visuel non transférés depuis le ledger PR67, puis comparer le renderer avant génération supplémentaire.",
         "Ne pas confondre cinq armes jouables, sept références et seize fiches de distribution avec une reconstitution complète."
       ],
       "exact": false,
@@ -665,9 +674,10 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [
-          58
+          58,
+          67
         ],
-        "state": "PR58 ouverte de récupération ; pack visuel local supplémentaire à publier/qualifier séparément.",
+        "state": "PR58 de récupération ; PR67 conserve 33 fichiers / 48 916 609 octets dont 28 PNG du pack visuel. 93 fichiers sur 126 restent à transférer.",
         "paths": [
           "dlc/sea-of-sorrows/",
           "dlc/sea-of-sorrows-visual/"
@@ -709,7 +719,7 @@
       "documented": [
         "Lex/Scar/Celtic/Chopper/Grid/Ancien distincts ; pas de biomask/canon offert à Lex.",
         "Reine vaincue par chaîne/cuve ; Predalien limité à l'épilogue.",
-        "Continuité séparée de2204 / Prometheus ; attribution précise des armes."
+        "Continuité séparée de2204/Prometheus ; attribution précise des armes."
       ],
       "gaps": [
         "1904, flashback ancien, hors recrutement, secondaires et variantes incomplets.",
@@ -782,11 +792,12 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Intégration locale documentée ; publication distincte à confirmer par reçu.",
+        "state": "Intégration locale et bundle de 256 822 850 octets repérés ; conservation GitHub du bundle non réalisée dans cette reprise.",
         "paths": [
           "dlc/40th-anniversary/",
           "archives/40th-anniversary/"
-        ]
+        ],
+        "bundleBytes": 256822850
       },
       "documentEvidence": [
         {
@@ -836,17 +847,25 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/prometheus/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/prometheus/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+        "archiveSizeBytes": 14678996
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "README_V12.md"
+          "name": "README_V12.md",
+          "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip"
         },
         {
           "read": true,
-          "name": "CODEX_PROMETHEUS_V12.md"
+          "name": "CODEX_PROMETHEUS_V12.md",
+          "archiveSha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+          "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip"
         }
       ],
       "decisionIds": [
@@ -891,17 +910,25 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/alien-romulus/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien-romulus/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+        "archiveSizeBytes": 47349199
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "README.md"
+          "name": "README.md",
+          "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip"
         },
         {
           "read": true,
-          "name": "docs/REGISTRE_CONVERGENCES_V20.json"
+          "name": "docs/REGISTRE_CONVERGENCES_V20.json",
+          "archiveSha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+          "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip"
         }
       ],
       "decisionIds": [
@@ -943,21 +970,31 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/alien-isolation/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien-isolation/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+        "archiveSizeBytes": 85001778
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "README_FR.md"
+          "name": "README_FR.md",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
         },
         {
           "read": true,
-          "name": "docs/CODEX_ISOLATION.md"
+          "name": "docs/CODEX_ISOLATION.md",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
         },
         {
           "read": true,
-          "name": "docs/METRIQUES.json"
+          "name": "docs/METRIQUES.json",
+          "archiveSha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+          "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip"
         }
       ],
       "decisionIds": [
@@ -999,21 +1036,28 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/alien5-lazare/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/alien5-lazare/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+        "archiveSizeBytes": 7330460
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "README.md"
+          "name": "README.md",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
         },
         {
           "read": true,
-          "name": "docs/CODEX_REGLES_V11.md"
+          "name": "docs/CODEX_REGLES_V11.md",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
         },
         {
           "read": true,
-          "name": "docs/AUDIT_FIDELITE_V11.json"
+          "name": "docs/AUDIT_FIDELITE_V11.json",
+          "archiveSha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c"
         }
       ],
       "decisionIds": [
@@ -1036,7 +1080,7 @@
       "scope": "Adaptation autonome campagne/Stasis/Bug Hunt ; pas reproduction exhaustive du jeu commercial.",
       "counts": "105 salles campagne/Stasis ; 15 chapitres ; 3 arènes Bug Hunt ; 107 liaisons / 214 seuils ; 21 profils d'armes ; 11 profils de personnages.",
       "documented": [
-        "Acquisition physique de 17 ajouts d'armes ; trois modules sous canon à réserves séparées ; six légendaires placées dans leur mission de référence.",
+        "Acquisition physique de 17 ajouts d'armes ; trois sous-canons à réserves séparées ; six légendaires placées dans leur mission de référence.",
         "Grue Sulaco Falls, escorte Reid/The Raven, trois valves Redemption.",
         "Hicks corrige l'étiquette Lisbeth dans Awakening sans changer les IDs de sauvegarde.",
         "Fiorina/Legato/Resolute et conclusion = scènes condensées/documentaires."
@@ -1056,21 +1100,28 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/colonial-marines/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/colonial-marines/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+        "archiveSizeBytes": 62621653
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "README.md"
+          "name": "README.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
         },
         {
           "read": true,
-          "name": "docs/ASSETS_STATUS.md"
+          "name": "docs/ASSETS_STATUS.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
         },
         {
           "read": true,
-          "name": "docs/ADAPTATION.md"
+          "name": "docs/ADAPTATION.md",
+          "archiveSha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322"
         }
       ],
       "decisionIds": [
@@ -1095,7 +1146,7 @@
       "documented": [
         "Routes/sentiers sans battant ; bâtiments ancrés ; descentes extérieures au sol ; Stryker avec rampe.",
         "Gunnison et clairière finale séparés par séquence aérienne.",
-        "Armes film et jeu PSP non mélangées ; GUU-5P/Colt 723 reste incertain.",
+        "Armes film et jeu PSP non mélangées ; GUU-5P/Colt723 reste incertain.",
         "Wolf masque/armure/cicatrice différenciés, sculpture faciale approximative."
       ],
       "gaps": [
@@ -1114,17 +1165,23 @@
       "referenceQualification": "adaptation_documented_not_1to1_certified",
       "publication": {
         "prs": [],
-        "state": "Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.",
-        "archive": "archives/dlc-source-recovery-20261126/avp-requiem/"
+        "state": "ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.",
+        "plannedArchivePath": "archives/dlc-source-recovery-20261126/avp-requiem/",
+        "zipBytesPublished": false,
+        "recoveryReceipt": "dlc/RECUPERATION_20261126.json",
+        "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+        "archiveSizeBytes": 32506386
       },
       "documentEvidence": [
         {
           "read": true,
-          "name": "LIRE_DABORD.md"
+          "name": "LIRE_DABORD.md",
+          "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617"
         },
         {
           "read": true,
-          "name": "docs/AUDIT_FIDELITE_V0_10.md"
+          "name": "docs/AUDIT_FIDELITE_V0_10.md",
+          "archiveSha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617"
         }
       ],
       "decisionIds": [
@@ -1146,7 +1203,7 @@
     "Les statistiques sont celles des versions documentaires, pas une nouvelle exécution de gameplay.",
     "Les détails des PR proviennent du snapshot l'inventaire GitHub de la reprise du 26 novembre ; toute publication suivante doit être ajoutée comme nouvel état.",
     "Les bibles historiques déjà conformes ne sont pas présentées comme des corrections de code réalisées ici.",
-    "Les six archives supplémentaires ont leurs documents effectivement lus dans cette passe. Leur préservation ne vaut pas lancement natif validé."
+    "Les six archives supplémentaires ont leurs documents effectivement lus dans cette passe. Leur transfert des octets reste interrompu ; aucune publication de ces ZIP ni lancement natif n'est déclaré."
   ],
   "publicationSnapshot": {
     "date": "2026-11-26",
@@ -1154,8 +1211,11 @@
     "historicalArchiveCommit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
     "currentReadPRs": [
       65,
-      66
+      66,
+      67,
+      69
     ],
-    "note": "Les statuts décrivent l'instant de rapprochement. Les commits de publication/nettoyage postérieurs doivent être ajoutés avec leurs reçus."
+    "note": "Reçus de publication partielle et de nettoyage contrôlé ajoutés ; les sept nouveaux ZIP restent non publiés après interruption de l'environnement.",
+    "recoveryReceipt": "dlc/RECUPERATION_20261126.json"
   }
 }

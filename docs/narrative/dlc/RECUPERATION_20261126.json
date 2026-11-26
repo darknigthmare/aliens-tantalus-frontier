@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "auditedOn": "2026-11-26",
+  "project": "Aliens: Tantalus Frontier",
+  "kind": "recovery-and-cleanup-receipt",
+  "scope": "État vérifié pendant la reprise ; synthèse documentaire distincte d'une certification gameplay ou de fidélité 1:1.",
+  "evidenceScope": {
+    "fullConversationAccess": false,
+    "sourceDocumentsRead": true,
+    "cleanupProof": "Relevé agrégé de la passe de comparaison GitHub et suppression locale.",
+    "perDeletedCopyLedgerIncluded": false,
+    "localExecutionBecameUnavailable": true
+  },
+  "historicalArchives": {
+    "commit": "6ed9b9210a097bbdf90ec3a22043a3fe5845e541",
+    "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/tree/6ed9b9210a097bbdf90ec3a22043a3fe5845e541/archives/local-recovery-20261125",
+    "archiveCount": 16,
+    "familyCount": 7,
+    "totalBytes": 1189845299,
+    "remoteBytesCompared": true
+  },
+  "localCleanup": {
+    "deletedCopyCount": 31,
+    "deletedBytes": 1959810600,
+    "onlyAfterRemoteComparison": true,
+    "repositoryModificationsDeleted": false,
+    "note": "Le total porte sur des copies locales et peut comprendre plusieurs copies du même contenu. Il ne doit pas être additionné au volume d'archives comme s'il s'agissait de fichiers distincts."
+  },
+  "remoteStorageCleanup": {
+    "uniqueFilesAttempted": 15,
+    "initialFailedAttempts": 15,
+    "retryAttempts": 1,
+    "retryDlc": "alien-covenant",
+    "retryFailed": true,
+    "errorCode": "destination_conflict",
+    "reportedReason": "migration conflict",
+    "deletedFileCount": 0,
+    "freedBytes": 0
+  },
+  "recoveredUnpublishedArchives": {
+    "archiveCount": 7,
+    "totalBytes": 282592224,
+    "allBytesRead": true,
+    "zipCrcChecked": true,
+    "memberPathsChecked": true,
+    "sourceFileIdentityChecked": true,
+    "bytesPublishedToGitHub": false,
+    "reason": "Le transfert des octets a été interrompu par l'indisponibilité de l'environnement d'exécution.",
+    "archives": [
+      {
+        "dlc": "prometheus",
+        "title": "Prometheus V12",
+        "archiveName": "ALIENS_TANTALUS_DLC_PROMETHEUS_V12.zip",
+        "sizeBytes": 14678996,
+        "sha256": "b7d1e1324dd6e4e08ce5bb6574a68a204a4214e649dc8c79e2d705b6da336da1",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "recorded",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "README_V12.md",
+          "CODEX_PROMETHEUS_V12.md"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/prometheus/"
+      },
+      {
+        "dlc": "alien-romulus",
+        "title": "Alien: Romulus v0.20",
+        "archiveName": "ALIEN_ROMULUS_CONVERGENCES_v0.20.zip",
+        "sizeBytes": 47349199,
+        "sha256": "f36995586ebc169a6d36fd52d4e62e0d353f1c5228a46c37cd273dd081c51293",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "recorded",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "README.md",
+          "docs/REGISTRE_CONVERGENCES_V20.json"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien-romulus/"
+      },
+      {
+        "dlc": "alien-isolation",
+        "title": "Alien: Isolation v0.8",
+        "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_ISOLATION_V0_8.zip",
+        "sizeBytes": 85001778,
+        "sha256": "880f74e69551afd41af36b62c34778dd239a10386f573cb86eb170641855a978",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "recorded",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "README_FR.md",
+          "docs/CODEX_ISOLATION.md",
+          "docs/METRIQUES.json"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien-isolation/"
+      },
+      {
+        "dlc": "avp-requiem",
+        "title": "AVP: Requiem v0.10",
+        "archiveName": null,
+        "sizeBytes": 32506386,
+        "sha256": "b74829983d3ddedd5d55b7a3aa6fc40a9f315966ada4bb733495e3b4d7731617",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "LIRE_DABORD.md",
+          "docs/AUDIT_FIDELITE_V0_10.md"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/avp-requiem/"
+      },
+      {
+        "dlc": "colonial-marines",
+        "title": "Aliens: Colonial Marines v0.10",
+        "archiveName": null,
+        "sizeBytes": 62621653,
+        "sha256": "5d7e921c787396377098457898f28b99424c306f340ec0b4973a01595cca6322",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "README.md",
+          "docs/ASSETS_STATUS.md",
+          "docs/ADAPTATION.md"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/colonial-marines/"
+      },
+      {
+        "dlc": "alien5-projet-lazare",
+        "title": "Alien5 — Projet Lazare V11",
+        "archiveName": null,
+        "sizeBytes": 7330460,
+        "sha256": "c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c",
+        "zipRoot": null,
+        "published": false,
+        "plannedPr": null,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "not_recorded_in_public_receipt",
+        "zipRootStatus": "not_recorded_in_public_receipt",
+        "selectedDocuments": [
+          "README.md",
+          "docs/CODEX_REGLES_V11.md",
+          "docs/AUDIT_FIDELITE_V11.json"
+        ],
+        "plannedPublicationPath": "archives/dlc-source-recovery-20261126/alien5-lazare/"
+      },
+      {
+        "dlc": "alien-blackout",
+        "title": "Alien: Blackout v0.7",
+        "archiveName": "ALIENS_TANTALUS_DLC_ALIEN_BLACKOUT_v0.7.0.zip",
+        "sizeBytes": 33103752,
+        "sha256": "b02538fafdc1a73aa88d80efa82e51d5852a6bf4fdaee85f90972ab32f21e35c",
+        "zipRoot": "ALIEN_BLACKOUT_v0.7.0",
+        "published": false,
+        "plannedPr": 54,
+        "status": "local_archive_verified_remote_transfer_interrupted",
+        "archiveNameStatus": "recorded",
+        "zipRootStatus": "recorded",
+        "selectedDocuments": [
+          "ALIEN_BLACKOUT_v0.7.0/README.md",
+          "ALIEN_BLACKOUT_v0.7.0/docs/KNOWN_LIMITS.md"
+        ],
+        "plannedPublicationPath": "archives/blackout-source-recovery-20261126/alien-blackout/"
+      }
+    ]
+  },
+  "publishedWork": [
+    {
+      "dlc": "aliens-1986",
+      "pr": 65,
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/65",
+      "commit": "30353c828cca199a7c1f2b07fa05b438326db86e",
+      "pngCount": 70,
+      "status": "draft_source_sprites",
+      "verified1to1": false
+    },
+    {
+      "dlc": "river-of-pain",
+      "pr": 66,
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/66",
+      "commit": "0adf04e16e38adbb325cf297727bb414dc8df646",
+      "newPngCount": 28,
+      "totalPngCount": 70,
+      "status": "open_additional_props",
+      "verified1to1": false
+    },
+    {
+      "dlc": "sea-of-sorrows",
+      "pr": 67,
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/67",
+      "commit": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+      "preservedFileCount": 33,
+      "preservedBytes": 48916609,
+      "preservedPngCount": 28,
+      "expectedFileCount": 126,
+      "remainingFileCount": 93,
+      "status": "draft_partial_checkpoint",
+      "runtimeIntegrated": false,
+      "verified1to1": false
+    },
+    {
+      "dlc": "alien-covenant",
+      "pr": 69,
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/69",
+      "commit": "65e3c378b8dd4469a053eafff6a5ae4d5a9669e1",
+      "pngCount": 3,
+      "totalPngBytes": 4414495,
+      "status": "draft_source_candidates",
+      "manifest": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/65e3c378b8dd4469a053eafff6a5ae4d5a9669e1/docs/development/covenant-sprites-20261126/manifest.json",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "assets": [
+        {
+          "path": "docs/development/covenant-sprites-20261126/neomorph-adult-citadel.png",
+          "sizeBytes": 981223,
+          "sha256": "204df7dba4df40b6c7c3580e804fcbd6f2fd82d9f727c4feca9ca8d436876ccf",
+          "gitBlobSha": "a6579a83b7b5c92cfa1eb1c6b08a1eb0283b1935",
+          "width": 1774,
+          "height": 887
+        },
+        {
+          "path": "docs/development/covenant-sprites-20261126/facehugger-covenant.png",
+          "sizeBytes": 966212,
+          "sha256": "4431c66ab1697ea7d83e784f70f629e1378f690f60de77e54cb8f8af6841094b",
+          "gitBlobSha": "8f1161acdb6b59a0fcb9ab61b9647686fb18c3ce",
+          "width": 2172,
+          "height": 724
+        },
+        {
+          "path": "docs/development/covenant-sprites-20261126/ovomorph-covenant.png",
+          "sizeBytes": 2467060,
+          "sha256": "b9eb1cca63258c796763d59847a86d13b036e03493badb164efbdfdcab4f27d8",
+          "gitBlobSha": "d66bc57c9fdc4061752e315a160a78271e82b446",
+          "width": 1166,
+          "height": 1349
+        }
+      ],
+      "unproduced": [
+        {
+          "asset": "neomorph-juvenile-hallett.png",
+          "status": "generation_refused",
+          "fileCreated": false
+        },
+        {
+          "asset": "xenomorph-covenant-idle.png",
+          "status": "generation_refused",
+          "fileCreated": false
+        }
+      ]
+    }
+  ],
+  "remainingWork": [
+    {
+      "dlc": "40th-anniversary",
+      "status": "not_preserved_in_new_pr",
+      "bundleBytes": 256822850,
+      "action": "Retrouver les octets du bundle et le commit d'intégration local, puis comparer/publier."
+    },
+    {
+      "dlc": "alien-covenant",
+      "status": "local_integration_wip_unpublished",
+      "action": "Préserver les modifications locales de raccord séparément des trois candidats PNG de PR69."
+    },
+    {
+      "dlc": "alien-earth",
+      "status": "local_sprites_not_fully_preserved",
+      "action": "Retrouver les nouveaux sprites et leurs manifests avant tout nettoyage supplémentaire."
+    },
+    {
+      "dlc": "out-of-the-shadows",
+      "status": "local_branch_overlap_not_fully_reconciled",
+      "pr": 59,
+      "action": "Comparer les différences locales et la PR59 ; ne supprimer aucun travail distinct."
+    },
+    {
+      "dlc": "sea-of-sorrows",
+      "status": "93_of_126_files_still_unpublished",
+      "pr": 67,
+      "action": "Reprendre les 93 fichiers manquants depuis le ledger de PR67 avant raccord du renderer."
+    },
+    {
+      "dlc": "multiple",
+      "status": "seven_recovered_zip_bytes_unpublished",
+      "action": "Publier les sept ZIP ci-dessus quand leur contenu redevient accessible ; contrôler chaque empreinte distante."
+    }
+  ],
+  "fidelity": {
+    "target": "1:1",
+    "exact": false,
+    "canonExact": false,
+    "verified1to1": false,
+    "qualification": "Les preuves de fichiers et d'intégrité ne certifient ni apparence canonique, ni sélection/runtime, ni qualité en jeu."
+  }
+}

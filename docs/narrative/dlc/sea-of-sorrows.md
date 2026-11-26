@@ -12,9 +12,9 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-PR58 ouverte de récupération ; pack visuel local supplémentaire à publier/qualifier séparément.
+PR58 de récupération ; PR67 conserve 33 fichiers / 48 916 609 octets dont 28 PNG du pack visuel. 93 fichiers sur 126 restent à transférer.
 
-[PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58)
+[PR #58](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/58), [PR #67](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/67)
 
 Chemins repérés : `dlc/sea-of-sorrows/`, `dlc/sea-of-sorrows-visual/`.
 
@@ -37,7 +37,7 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 
 ## Reprise artistique et intégration
 
-1. Publier et comparer le pack visuel déjà commité localement avant génération supplémentaire.
+1. Reprendre les 93 fichiers du pack visuel non transférés depuis le ledger PR67, puis comparer le renderer avant génération supplémentaire.
 2. Ne pas confondre cinq armes jouables, sept références et seize fiches de distribution avec une reconstitution complète.
 
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.

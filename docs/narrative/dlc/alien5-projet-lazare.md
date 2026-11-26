@@ -12,11 +12,11 @@ Ces comptes reprennent la définition de la version source : états de scène, p
 
 ## Publication et raccord au jeu
 
-Livraison récupérée et documents lus ; préservation des sources en préparation, intégration native non qualifiée.
+ZIP récupéré et vérifié localement ; transfert GitHub des octets interrompu par l'indisponibilité de l'environnement. Intégration native non qualifiée.
 
 Aucune PR dédiée confirmée dans l'inventaire initial ; compléter depuis le reçu de publication, sans inventer de numéro.
 
-Corpus d'archive repéré : `archives/dlc-source-recovery-20261126/alien5-lazare/`. La préparation de ce chemin n'est pas une preuve de publication ; consulter le reçu de récupération.
+Chemin de publication prévu : `archives/dlc-source-recovery-20261126/alien5-lazare/`. Ce chemin a été préparé localement ; aucun octet de ce ZIP n'a été publié. Voir le [reçu des sept archives](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees).
 
 ## Décisions à préserver
 
@@ -43,6 +43,8 @@ Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D0
 Pour chaque asset, renseigner un identifiant stable, la référence et sa scène, la tenue/l'état, le fichier et son empreinte, le pivot et l'échelle, puis le propriétaire du raccord. Conserver les états **absent → candidat → admis → chargé → raccordé → observé en jeu**. La correction d'une pose ne change pas le collider, la sauvegarde ni le destin narratif du personnage. La règle de priorité est la couverture réellement manquante au commit courant, après comparaison des manifests et des PR ci-dessus.
 
 ## Documents examinés
+
+Archive : nom exact non consigné dans ce reçu ; SHA-256 `c90acf14976373a0bcdb28748f32a1abcf1d29693384d6258e36b38b1774841c` ; 7 330 460 octets. Les noms suivants sont relatifs à la racine extraite (préfixe ZIP non consigné) et rattachés à cette archive. Le [reçu de récupération](RECUPERATION_20261126.md#sept-archives-verifiees-mais-non-publiees) conserve le statut de transfert.
 
 - `README.md` — contenu lu.
 - `docs/CODEX_REGLES_V11.md` — contenu lu.
