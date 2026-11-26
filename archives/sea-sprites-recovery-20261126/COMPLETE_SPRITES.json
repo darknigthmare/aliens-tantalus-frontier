@@ -1,0 +1,788 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-11-26",
+  "repository": "darknigthmare/aliens-tantalus-frontier",
+  "relatedPullRequests": [
+    58,
+    67
+  ],
+  "originalSnapshot": "f62b3c008df41be6004cff5ea9400daa05f7aa9f",
+  "sourceLedger": "archives/sea-sprites-recovery-20261126/RECOVERY_LEDGER.json",
+  "scope": "All 110 original PNG blobs recovered by exact Git blob SHA and size; original code blobs are not recovered. Runtime integration is a separate step.",
+  "verifiedTree": "4796d5f3d91a860812cd64886242e2e501729c79",
+  "pngCount": 110,
+  "totalBytes": 215552489,
+  "verification": "Remote recursive Git tree read: every path, SHA, mode and byte size matches the historical ledger. Full local PNG decoding follows separately.",
+  "files": [
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/adams.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/adams.png",
+      "sha": "179527f38a1c85cfa59f59a618ba6ddaba4649fa",
+      "mode": "100644",
+      "size": 1772101
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/badejo.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/badejo.png",
+      "sha": "036bbe2df61dbdde5b4ea7baf74b36504c0740fb",
+      "mode": "100644",
+      "size": 1675685
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/bronson.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/bronson.png",
+      "sha": "2abbdf357d166696773f398aa4b6ce27b61adc51",
+      "mode": "100644",
+      "size": 1779643
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/cherbourg.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cherbourg.png",
+      "sha": "cb58948b8a67d1dfcd576d1e57dcb364955dc9f2",
+      "mode": "100644",
+      "size": 1426947
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/cho.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/cho.png",
+      "sha": "6feb0df56491d3c45b8d886092832fe2b4290081",
+      "mode": "100644",
+      "size": 1639202
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/dave.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/dave.png",
+      "sha": "b28a07652444e34844663c32b95e5a2077582264",
+      "mode": "100644",
+      "size": 1805884
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch-ready.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch-ready.png",
+      "sha": "00c5fb423dc4d026e23be2bc49e418656d8732d9",
+      "mode": "100644",
+      "size": 1697088
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-crouch.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-crouch.png",
+      "sha": "2cf0f8f421ff59ed7c03c60c6a3a4dead66966b5",
+      "mode": "100644",
+      "size": 1561783
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge-ready.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge-ready.png",
+      "sha": "b8b4b7f71330051aa486ceeed479f5e520fa24cc",
+      "mode": "100644",
+      "size": 1769977
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-dodge.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-dodge.png",
+      "sha": "0cf723a8ab90bde150ebbd4399ada0bf47bd64cd",
+      "mode": "100644",
+      "size": 1887477
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker-ready.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker-ready.png",
+      "sha": "f7d8a09754b8fef0d96664cb0e6367be3f421088",
+      "mode": "100644",
+      "size": 1833806
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/decker.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/decker.png",
+      "sha": "c2d3319ef7c602502c59fa535711c4754a0dafa8",
+      "mode": "100644",
+      "size": 1626812
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/elway.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/elway.png",
+      "sha": "ca6c095682baba6f0cf2f60c4f9d6ced0b9d9f6b",
+      "mode": "100644",
+      "size": 1674049
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/harriman.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/harriman.png",
+      "sha": "aa5f4c3094451aebaeca860478ee942233d813cc",
+      "mode": "100644",
+      "size": 1538047
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning-ready.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning-ready.png",
+      "sha": "4892db9f22f3c733691e9f761d536de2372ab18c",
+      "mode": "100644",
+      "size": 1947258
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/manning.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/manning.png",
+      "sha": "970eee9d998a63f69e316775826e394aab6f44dc",
+      "mode": "100644",
+      "size": 1826145
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/medic.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/medic.png",
+      "sha": "d3309873da6d99a19a5e45e5fb05c64a91577866",
+      "mode": "100644",
+      "size": 1584745
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/muller.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/muller.png",
+      "sha": "7336d2732792749de2e087a497c7c30fcbc18ecb",
+      "mode": "100644",
+      "size": 1723505
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/pritchett.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/pritchett.png",
+      "sha": "871047d60fd3637fd91673f11536413601ec3ee3",
+      "mode": "100644",
+      "size": 1682011
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/rand.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rand.png",
+      "sha": "77f21a5eedfb69cd8ba4ed1d99a4813b44e0c9df",
+      "mode": "100644",
+      "size": 1753979
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/rollins.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/rollins.png",
+      "sha": "6783db7baf4d48e341f515d4cd4c5e40d62b2235",
+      "mode": "100644",
+      "size": 1446163
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/characters/silas.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/characters/silas.png",
+      "sha": "648f6f9f470e9898889658e10fdbdccd29c0743d",
+      "mode": "100644",
+      "size": 1654417
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/corpses/facehugger.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/corpses/facehugger.png",
+      "sha": "ee1ec30a549bd10acce64e5aa3263b617e71dae8",
+      "mode": "100644",
+      "size": 1303577
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/creatures/facehugger.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/creatures/facehugger.png",
+      "sha": "8c595e1ffa839e05c9b5d5d3326601afc6f9c672",
+      "mode": "100644",
+      "size": 1790221
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/amber.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/amber.png",
+      "sha": "d12b0145c990a25e52b7cb6798286e5854dbcef5",
+      "mode": "100644",
+      "size": 1445819
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/antenna.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/antenna.png",
+      "sha": "89baa251293ac3c1e2314c853f8c7cd435700e4f",
+      "mode": "100644",
+      "size": 1987264
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/armory.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/armory.png",
+      "sha": "16cb73f36c9621b93f8d4ce57de8c599a5688916",
+      "mode": "100644",
+      "size": 2478105
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/battery.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/battery.png",
+      "sha": "a2355d8ea1886db1c7ff5256439280c89c168baf",
+      "mode": "100644",
+      "size": 2570228
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/bridge.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/bridge.png",
+      "sha": "dff9849d82f3d1af7eea1e06f6a50c317c6da85e",
+      "mode": "100644",
+      "size": 1423302
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/briefing.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/briefing.png",
+      "sha": "b41f608f647546eaad335e0e6fed92f56c459941",
+      "mode": "100644",
+      "size": 2344796
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/cable.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cable.png",
+      "sha": "0e1a02ddd16a6db4522728904f31eb690710f378",
+      "mode": "100644",
+      "size": 1733737
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/cableTray.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cableTray.png",
+      "sha": "e02e58be7b815462ba58e5452980a62f59f6ae2b",
+      "mode": "100644",
+      "size": 2031704
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/captureBay.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/captureBay.png",
+      "sha": "f53bb6c3b166b72eef8ff475823e88f8efc5a8c4",
+      "mode": "100644",
+      "size": 2372554
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/carene.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/carene.png",
+      "sha": "eb7fb02e0faf7b072881e9a89f2f7b30b8767c2d",
+      "mode": "100644",
+      "size": 2277342
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/cargo.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cargo.png",
+      "sha": "820a503de9f4ebee3153645ad3ce1ec62651c1bb",
+      "mode": "100644",
+      "size": 2907688
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/checkpoint.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/checkpoint.png",
+      "sha": "116ce1e51fff4fea2912a80eb24400a9a003557c",
+      "mode": "100644",
+      "size": 2441730
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/cocoon.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/cocoon.png",
+      "sha": "c17a26da0b5bbe2144aab2f945023ab324e6da8f",
+      "mode": "100644",
+      "size": 2821558
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/drill.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/drill.png",
+      "sha": "22cff2ae22bd995d82213d2a6e55272ba6068de8",
+      "mode": "100644",
+      "size": 2472223
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/dropship.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/dropship.png",
+      "sha": "74ebd85bc17657493160166e9dc078e053ce0f7d",
+      "mode": "100644",
+      "size": 1756835
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/eggs.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/eggs.png",
+      "sha": "141bab92c814705b97c25ba92cec2f0841775f86",
+      "mode": "100644",
+      "size": 2063293
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/excavator.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/excavator.png",
+      "sha": "cf2eef0a6127379bf9074df0dffe87ded7387e2a",
+      "mode": "100644",
+      "size": 2408594
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/fence.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/fence.png",
+      "sha": "5c9479f5bc4e69b18f811bc669d4c4dbfc77d66d",
+      "mode": "100644",
+      "size": 3971351
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/filters.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/filters.png",
+      "sha": "f56306deaf34048138ad7fa89ea2c478c8edddcc",
+      "mode": "100644",
+      "size": 2440316
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/generator.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/generator.png",
+      "sha": "7f844e9f3f7577d7a3d6bf1a0ff84817f48c1062",
+      "mode": "100644",
+      "size": 2579144
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/hoist-drive.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/hoist-drive.png",
+      "sha": "eb6a8382e212a5e574bae77a5ae83e9a16d96d42",
+      "mode": "100644",
+      "size": 2370745
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/home.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/home.png",
+      "sha": "109735c1d5589fee5ffe62cba71ce6e9133c3b88",
+      "mode": "100644",
+      "size": 2304188
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/landing.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/landing.png",
+      "sha": "45c1fff8f4384e69dbc49f92c88d7e48aa8e73b2",
+      "mode": "100644",
+      "size": 1895098
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/locker.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/locker.png",
+      "sha": "7b3ecad4f77ebfacee507d9b9c6c5ab1b4e14ab7",
+      "mode": "100644",
+      "size": 2393757
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/medical.png",
+      "sha": "ebeff870173122f46171499c9c45f044c58f499c",
+      "mode": "100644",
+      "size": 1862848
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/membrane.png",
+      "sha": "03c99ffee0bb16a139cebd5ff4cb89425caa87c7",
+      "mode": "100644",
+      "size": 1623574
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/monolith.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/monolith.png",
+      "sha": "40c4153a6cb64197e4d3f4aac9fee48f8faea38c",
+      "mode": "100644",
+      "size": 1411324
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/office.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/office.png",
+      "sha": "e18e3fac3c8019ebf61385186f375e4bc2c3c9ab",
+      "mode": "100644",
+      "size": 1978635
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/ossuary.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ossuary.png",
+      "sha": "a0c496d6b1e2f623e7ae021036c2f0bbf8cc39ba",
+      "mode": "100644",
+      "size": 2536837
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/pipe.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pipe.png",
+      "sha": "e10587b250a5840a1702fbb23f21ca4293ebf484",
+      "mode": "100644",
+      "size": 1694083
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/pump.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/pump.png",
+      "sha": "37ce496ef506f79c8f121d4ab534232c6d5c79a6",
+      "mode": "100644",
+      "size": 2488952
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/quarantine-instruments.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/quarantine-instruments.png",
+      "sha": "862444f38d1236d88f8e3b71d77937dca3986421",
+      "mode": "100644",
+      "size": 2633988
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/ravine.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/ravine.png",
+      "sha": "67ea926633f65fed335efdf3b9c2c1d23e76b1ef",
+      "mode": "100644",
+      "size": 2323581
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/reel.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/reel.png",
+      "sha": "0cc53fd5019ec4fd5716d7571dadb58ae72bcb80",
+      "mode": "100644",
+      "size": 2408366
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/resinCable.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/resinCable.png",
+      "sha": "7a29ab4e9b05cafad789f5dd10b3e3fe9c5d077c",
+      "mode": "100644",
+      "size": 1439371
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/rib.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/rib.png",
+      "sha": "11ad654635974a65c2454449b7d3289fd057a52e",
+      "mode": "100644",
+      "size": 2171443
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/seal-equipment.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/seal-equipment.png",
+      "sha": "6b5572a5c79d55445f9f4c7b5352cb08dbc2fbba",
+      "mode": "100644",
+      "size": 2638307
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/silica.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silica.png",
+      "sha": "d93c0bda7ab9a63d84af3282e10b4d394793969e",
+      "mode": "100644",
+      "size": 1870151
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/silicaShard.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/silicaShard.png",
+      "sha": "bcd137fe99b60801b95c2a30037ce673ca161d48",
+      "mode": "100644",
+      "size": 1794129
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/survey.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/survey.png",
+      "sha": "420e08f591134eb035273395db634e1de804d2e7",
+      "mode": "100644",
+      "size": 2479319
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/terminal.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/terminal.png",
+      "sha": "0f3826ea510f97734fda169a855e2d02ea66d5de",
+      "mode": "100644",
+      "size": 2346187
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/throne.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/throne.png",
+      "sha": "c2213161f9a0de4f29815381bc366bb13b7296e1",
+      "mode": "100644",
+      "size": 2481139
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/triage.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/triage.png",
+      "sha": "ad074458c84003c241bedea418781371487ead72",
+      "mode": "100644",
+      "size": 2119122
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/viewport.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/viewport.png",
+      "sha": "55a1ed06c6dc2f18b435ac8ced9f07eda7e89b10",
+      "mode": "100644",
+      "size": 2647725
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/warningStripe.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/warningStripe.png",
+      "sha": "52e8a6a8690dc0d8e2a5ef436b6a7ba3b410dc84",
+      "mode": "100644",
+      "size": 1369279
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/wash.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/wash.png",
+      "sha": "3c18b00d657e5adc8e7389768dba97ad8d745c64",
+      "mode": "100644",
+      "size": 2477167
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/winch.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/winch.png",
+      "sha": "e2161bb6c8c7d750615fd1dc2ef92ae139a4b8cc",
+      "mode": "100644",
+      "size": 2491980
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/decor/workbench.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/decor/workbench.png",
+      "sha": "fdc8d78d51fd7bfd1cc4997ae9245b9aa60c058f",
+      "mode": "100644",
+      "size": 2495432
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/console.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/console.png",
+      "sha": "3ed8dc1fda985fa70636e585e2a7d353ba58a7c9",
+      "mode": "100644",
+      "size": 2091998
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/isolation.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/isolation.png",
+      "sha": "0100200b45c0ebd7cb872a8af898f0a5464af02b",
+      "mode": "100644",
+      "size": 1382835
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/devices/parts.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/devices/parts.png",
+      "sha": "8ae3463ce40eadb956f861e5eb55adf088b9cf2d",
+      "mode": "100644",
+      "size": 2412093
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-frame.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-frame.png",
+      "sha": "5c4ecdaff0e73a87a7c38bc928ca81740c00d45f",
+      "mode": "100644",
+      "size": 1620849
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/doors/bulkhead-panel.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/doors/bulkhead-panel.png",
+      "sha": "c55ad591e9d774f7b48e1dbaee6fc49964a51676",
+      "mode": "100644",
+      "size": 2187264
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/acid.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/acid.png",
+      "sha": "3cbacf353f7ea62732f5839593cab86c8f8422e0",
+      "mode": "100644",
+      "size": 802696
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/flame.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/flame.png",
+      "sha": "941c482a2efd560ab552be6315d498895bf71994",
+      "mode": "100644",
+      "size": 900708
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/foam.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/foam.png",
+      "sha": "528f8553c8964252881a3e5266e7db2946a771e7",
+      "mode": "100644",
+      "size": 1906222
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/impact.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/impact.png",
+      "sha": "329bcab1079ccd306bb3c161a95ac4e73d6a2e1a",
+      "mode": "100644",
+      "size": 959818
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/muzzle.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/muzzle.png",
+      "sha": "10cf58527401353b795b891483ad65d51855c980",
+      "mode": "100644",
+      "size": 351907
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/effects/spark.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/effects/spark.png",
+      "sha": "bea082592a5507b083c0cd6410cc31c22627a775",
+      "mode": "100644",
+      "size": 870791
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/archive.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/archive.png",
+      "sha": "708c4f1639b7ce10d78667db6c505a5eb72f40c0",
+      "mode": "100644",
+      "size": 1720485
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/armory-rack.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/armory-rack.png",
+      "sha": "951eed860fbf3a7cce47049852e37021281c321e",
+      "mode": "100644",
+      "size": 1913670
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/decoy.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/decoy.png",
+      "sha": "4e94b80258cc7c40891a92ae9d1df2fccc72b2b3",
+      "mode": "100644",
+      "size": 2332613
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/filter.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/filter.png",
+      "sha": "3eb2d11e422f48c4d014b74d5efe208b36154363",
+      "mode": "100644",
+      "size": 2175851
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/lamp.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/lamp.png",
+      "sha": "a5fa20e92819094188c6000ba9f8500ae0c9cbde",
+      "mode": "100644",
+      "size": 2162938
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/light-panel.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/light-panel.png",
+      "sha": "8ccd0a2382e6ee710928d0183085effc6ab1285b",
+      "mode": "100644",
+      "size": 2283328
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/locker-open.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker-open.png",
+      "sha": "3279415ca84331e0f3d38218e48f6daaef75d9b9",
+      "mode": "100644",
+      "size": 2372707
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/locker.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/locker.png",
+      "sha": "74fb16434b5f8c7240894cb74ebdb733d37b49f1",
+      "mode": "100644",
+      "size": 2014209
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/medkit.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/medkit.png",
+      "sha": "0428d0a362e9efb98bea74839d089039875fe8b0",
+      "mode": "100644",
+      "size": 3020553
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/radio.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/radio.png",
+      "sha": "c6fe1bc0325d399ab6d1c10829355d74d6399e7e",
+      "mode": "100644",
+      "size": 2158947
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/sensor.png",
+      "sha": "5d77bc910f19242be190dbaedf851082cfaacf2c",
+      "mode": "100644",
+      "size": 1073705
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/shutter-control.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/shutter-control.png",
+      "sha": "9864b48a1a0b2a5557fb2fd4c61d66d9cbe68014",
+      "mode": "100644",
+      "size": 2285487
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/stasis-canopy.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/stasis-canopy.png",
+      "sha": "060e0c2cef414e53a434d90c5cdec49bd171f52c",
+      "mode": "100644",
+      "size": 1615493
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/supply.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/supply.png",
+      "sha": "6d077f7af7ad2c56e36de9a7e5f8ee1f19d3a7ea",
+      "mode": "100644",
+      "size": 2193866
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/tracker.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/tracker.png",
+      "sha": "4cb6d2e91ae1a55a7d59d1dc3d45e713b2cc09f0",
+      "mode": "100644",
+      "size": 1774314
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/equipment/weakpoint.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/equipment/weakpoint.png",
+      "sha": "81744bac36ac74a5f10e363d48084f9051bd39c7",
+      "mode": "100644",
+      "size": 557039
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/objectives/capture.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/capture.png",
+      "sha": "7e9ea005ea3485e922f464d734465d2117b06ac3",
+      "mode": "100644",
+      "size": 2391804
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/objectives/case.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/case.png",
+      "sha": "b70c340e00f5e9870699fc810ebe69b463a362c3",
+      "mode": "100644",
+      "size": 2199451
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/objectives/console.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/console.png",
+      "sha": "562fa41d7b19993907449b206d305dd8f859f4d0",
+      "mode": "100644",
+      "size": 1340223
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/objectives/sleep.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/objectives/sleep.png",
+      "sha": "aa49d28baabcf50385a2c809cc2e427a066f5735",
+      "mode": "100644",
+      "size": 1938439
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/organic/egg.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/organic/egg.png",
+      "sha": "2b2e0fd5c66037e77c0600e1ad47fa90ae58fa97",
+      "mode": "100644",
+      "size": 1505515
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/parasites/normal.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/normal.png",
+      "sha": "f8f73386bf8c22092f6f6e671a4feea7ec22bd83",
+      "mode": "100644",
+      "size": 1955639
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/parasites/royal.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/parasites/royal.png",
+      "sha": "362dd6fc5143d331bb4a281302d28a7612f191a2",
+      "mode": "100644",
+      "size": 2082406
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/stretchers/adams.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/adams.png",
+      "sha": "1ef7e7176ee1a1e6108a25198d4ff8e573662498",
+      "mode": "100644",
+      "size": 2034413
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/stretchers/elway.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/stretchers/elway.png",
+      "sha": "5e4a777b460bdbfa43d9059e68b3b5968c2bae9e",
+      "mode": "100644",
+      "size": 1879135
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/weapons/pistol.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pistol.png",
+      "sha": "4989fcbc9ec111a32a69d60e41e1bea0826e1aaf",
+      "mode": "100644",
+      "size": 2099052
+    },
+    {
+      "sourcePath": "dlc/sea-of-sorrows-visual/sprites/weapons/pulse.png",
+      "path": "archives/sea-sprites-recovery-20261126/sprites-complete/weapons/pulse.png",
+      "sha": "f4d94c7318acf54669d6c6463ab1df419aeae25f",
+      "mode": "100644",
+      "size": 1309194
+    }
+  ]
+}
