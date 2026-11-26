@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "recordedOn": "2026-11-26",
   "repository": "darknigthmare/aliens-tantalus-frontier",
   "relatedPullRequest": 58,
@@ -7,12 +7,12 @@
   "sourceParent": "232cbd2ecb0e370f911b008b2226dafee81bffde",
   "expectedCompleteTree": "dc83ab7c82ff9b626ae5f8e5f2b0940b67be6b1c",
   "sourceBranch": "codex/mer-des-chagrins-sprites-20261126",
-  "publicationScope": "Partial preservation of uploaded immutable source blobs only. No active runtime integration.",
+  "publicationScope": "Partial preservation of exact source blobs only. No active runtime integration.",
   "expectedFileCount": 126,
-  "preservedFileCount": 33,
-  "preservedPngCount": 28,
-  "pendingFileCount": 93,
-  "preservedBytes": 48916609,
+  "preservedFileCount": 38,
+  "preservedPngCount": 33,
+  "pendingFileCount": 88,
+  "preservedBytes": 59127508,
   "expectedBytes": 215812485,
   "reasonInterrupted": "The local execution environment became unavailable during transfer. 33 remote blob SHAs were verified before the interruption.",
   "allRows": [
@@ -400,8 +400,13 @@
       "sha": "22cff2ae22bd995d82213d2a6e55272ba6068de8",
       "status": "A",
       "size": 2472223,
-      "preservationStatus": "not_uploaded_in_this_run",
-      "archivePath": null
+      "preservationStatus": "preserved_in_this_checkpoint",
+      "archivePath": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/drill.png",
+      "recoveredFrom": {
+        "commit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "pullRequest": 58,
+        "path": "docs/mer-des-chagrins-20261126/sprites/decor/drill.png"
+      }
     },
     {
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/dropship.png",
@@ -490,8 +495,13 @@
       "sha": "7b3ecad4f77ebfacee507d9b9c6c5ab1b4e14ab7",
       "status": "A",
       "size": 2393757,
-      "preservationStatus": "not_uploaded_in_this_run",
-      "archivePath": null
+      "preservationStatus": "preserved_in_this_checkpoint",
+      "archivePath": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/locker.png",
+      "recoveredFrom": {
+        "commit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "pullRequest": 58,
+        "path": "docs/mer-des-chagrins-20261126/sprites/decor/locker.png"
+      }
     },
     {
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
@@ -499,8 +509,13 @@
       "sha": "ebeff870173122f46171499c9c45f044c58f499c",
       "status": "A",
       "size": 1862848,
-      "preservationStatus": "not_uploaded_in_this_run",
-      "archivePath": null
+      "preservationStatus": "preserved_in_this_checkpoint",
+      "archivePath": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/medical.png",
+      "recoveredFrom": {
+        "commit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "pullRequest": 58,
+        "path": "docs/mer-des-chagrins-20261126/sprites/decor/medical.png"
+      }
     },
     {
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/membrane.png",
@@ -580,8 +595,13 @@
       "sha": "0cc53fd5019ec4fd5716d7571dadb58ae72bcb80",
       "status": "A",
       "size": 2408366,
-      "preservationStatus": "not_uploaded_in_this_run",
-      "archivePath": null
+      "preservationStatus": "preserved_in_this_checkpoint",
+      "archivePath": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/decor/reel.png",
+      "recoveredFrom": {
+        "commit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "pullRequest": 58,
+        "path": "docs/mer-des-chagrins-20261126/sprites/decor/reel.png"
+      }
     },
     {
       "path": "dlc/sea-of-sorrows-visual/sprites/decor/resinCable.png",
@@ -904,8 +924,13 @@
       "sha": "5d77bc910f19242be190dbaedf851082cfaacf2c",
       "status": "A",
       "size": 1073705,
-      "preservationStatus": "not_uploaded_in_this_run",
-      "archivePath": null
+      "preservationStatus": "preserved_in_this_checkpoint",
+      "archivePath": "archives/sea-sprites-recovery-20261126/source/dlc/sea-of-sorrows-visual/sprites/equipment/sensor.png",
+      "recoveredFrom": {
+        "commit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+        "pullRequest": 58,
+        "path": "docs/mer-des-chagrins-20261126/sprites/equipment/sensor.png"
+      }
     },
     {
       "path": "dlc/sea-of-sorrows-visual/sprites/equipment/shutter-control.png",
@@ -1157,7 +1182,7 @@
     "For each pending source blob, verify its Git SHA from exact original bytes before uploading.",
     "The original complete snapshot has tree dc83ab7c82ff9b626ae5f8e5f2b0940b67be6b1c. Its exact parent is 232cbd2ecb0e370f911b008b2226dafee81bffde.",
     "Check the independent runtime admission and visual tests before activating the renderer.",
-    "Do not delete unverified local files based only on this manifest; it preserves 33 files, not all 126."
+    "Do not delete unverified local files based only on this manifest; it preserves 38 files, not all 126."
   ],
   "priorCreatedPullRequests": [
     {
@@ -1169,6 +1194,18 @@
       "number": 66,
       "head": "0adf04e16e38adbb325cf297727bb414dc8df646",
       "scope": "River of Pain +28 props, 70PNG total"
+    }
+  ],
+  "recoveryPasses": [
+    {
+      "date": "2026-11-26",
+      "priorHead": "bfae75ca358810b83dceea5a0c65ba259f53690d",
+      "addedFileCount": 5,
+      "addedBytes": 10210899,
+      "sourceCommit": "994853bdd9d959980f0f8256cb39b1eadfe29911",
+      "sourcePullRequest": 58,
+      "verification": "Every reused blob SHA and byte size exactly matches the original 126-row ledger. Existing 33 archived entries were checked against the current remote tree.",
+      "localRecoveryStatus": "The previous immutable source commit could not be read in the resumed local environment; the original source and 40th-anniversary transfer directories were not present. The current scratch files produced no exact matches for remaining ledger entries. No file has been deleted by this recovery pass."
     }
   ]
 }
