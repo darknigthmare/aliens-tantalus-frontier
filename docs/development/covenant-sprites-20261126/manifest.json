@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "kind": "covenant-source-sprite-candidates",
+  "createdOn": "2026-11-26",
+  "work": "Alien: Covenant (2017)",
+  "target": "Aliens: Tantalus Frontier — DLC Covenant",
+  "root": "docs/development/covenant-sprites-20261126",
+  "assetCount": 3,
+  "generated": true,
+  "runtimeIntegrated": false,
+  "verified1to1": false,
+  "referenceSources": [
+    {
+      "url": "https://www.mpcvfx.com/en/filmography/alien-covenant/",
+      "role": "Primary production overview and design context for Covenant creatures; read on 2026-11-26."
+    },
+    {
+      "url": "https://oddstudio.com/creature-effects-character-design/",
+      "role": "Creature effects studio portfolio. Entries explicitly list Covenant Neomorph, Xenomorph, Facehugger and Chestburster; read on 2026-11-26."
+    }
+  ],
+  "validation": {
+    "pngSignature": "passed",
+    "ihdr": "passed",
+    "pngChunkCrc": "passed",
+    "gitBlobShaComparedAfterUpload": "passed",
+    "visualReview": "Global silhouette inspected in generated output; no exhaustive shot-by-shot reference comparison.",
+    "alphaPixelDistribution": "not_measured",
+    "alphaEdgeReview": "pending",
+    "runtimeDecode": "not_run",
+    "gameplay": "not_run",
+    "reason": "Local execution environment unavailable."
+  },
+  "artLimitations": [
+    "Source candidates only; posing, scale, fine surface anatomy and edge quality require reference comparison.",
+    "RGBA encoding establishes alpha-channel support; it does not certify the quality of every boundary pixel.",
+    "No sprite is marked as canonically exact or integrated into the playable DLC."
+  ],
+  "assets": [
+    {
+      "path": "docs/development/covenant-sprites-20261126/neomorph-adult-citadel.png",
+      "sizeBytes": 981223,
+      "sha256": "204df7dba4df40b6c7c3580e804fcbd6f2fd82d9f727c4feca9ca8d436876ccf",
+      "gitBlobSha": "a6579a83b7b5c92cfa1eb1c6b08a1eb0283b1935",
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "fidelityEntry": "ACOV-045",
+      "prompt": "Use case: stylized-concept.\nAsset type: one production 2D side-scrolling game sprite for the Alien: Covenant DLC of Aliens Tantalus Frontier.\nPrimary request: create exactly ONE full-body adult Neomorph from the released 2017 film Alien: Covenant, with the closest possible fidelity to its actual on-screen design. This is the pale adult creature in David's citadel, not a redesign. Reference context: MPC's Alien Covenant VFX breakdown and Odd Studio's Alien: Covenant Neomorph creature effects portfolio.\nComposition: strict readable side view, facing right, alert predatory low bipedal stance, long arms held ready, whole head, all hands and feet and the entire long tail visible. One single creature, one single pose. Feet on a common horizontal baseline. Leave 10% transparent margin around the silhouette.\nAppearance: smooth elongated eyeless pale head with rounded frontal cranium, small closed forward mouth, thin taut translucent ivory-gray skin, subtle pink-gray subsurface tones, extremely lean organic torso with readable ribs and tendons, elongated non-human limbs, long thin flexible tail, film-specific organic spinal detail. Maintain film proportions. No dark biomechanical plating, no xenomorph dorsal exhaust tubes, no human eyes, no armor or ornaments.\nStyle: finely rendered realistic hand-painted UHD 2D game art with crisp natural silhouette, coherent soft neutral overhead illumination, subtle texture, readable at gameplay scale. No pixel art, no comic outlines.\nBackground: actual transparent alpha, no floor, no cast shadow, no glow, no background color, no labels, no text, no contact sheet, no alternate views, no duplicate creature. Non-graphic: no blood, no victims.",
+      "generated": true,
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "chunkCrcVerified": true,
+      "chunkCount": 4
+    },
+    {
+      "path": "docs/development/covenant-sprites-20261126/facehugger-covenant.png",
+      "name": "Facehugger — Covenant",
+      "sizeBytes": 966212,
+      "sha256": "4431c66ab1697ea7d83e784f70f629e1378f690f60de77e54cb8f8af6841094b",
+      "gitBlobSha": "8f1161acdb6b59a0fcb9ab61b9647686fb18c3ce",
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "chunkCrcVerified": true,
+      "chunkCount": 4,
+      "prompt": "Asset type: one isolated 2D game sprite, transparent PNG.\nSubject: a single Facehugger creature matching the 2017 film Alien: Covenant practical and digital design, shown alone as a neutral creature study for the Covenant DLC. Closely preserve the long, pale articulated finger-like legs, low flattened fleshy ribbed central body, and single long segmented tail seen in the film. Eight jointed walking limbs, four on each side; the tail attaches to the rear. Beige ivory skin, subtle pink-gray tendon detail, no hard insect armor, no eyes, no teeth added on top.\nComposition: full creature viewed from a shallow side angle appropriate for a side-scrolling 2D game, front facing right, low poised stance. Carefully separate visible limbs so the silhouette remains readable. Keep the entire tail and every limb within the image, with a generous empty border. One creature and one pose only.\nRendering: realistic detailed UHD game art with neutral diffuse illumination, crisp naturally antialiased edges and anatomically coherent joints. Actual alpha transparency. No person, no host, no scene, no floor, no shadow, no blood, no labels, no text, no sheet, no duplicated creature.",
+      "generated": true,
+      "runtimeIntegrated": false,
+      "verified1to1": false
+    },
+    {
+      "path": "docs/development/covenant-sprites-20261126/ovomorph-covenant.png",
+      "name": "Ovomorphe fermé — Covenant",
+      "sizeBytes": 2467060,
+      "sha256": "b9eb1cca63258c796763d59847a86d13b036e03493badb164efbdfdcab4f27d8",
+      "gitBlobSha": "d66bc57c9fdc4061752e315a160a78271e82b446",
+      "width": 1166,
+      "height": 1349,
+      "bitDepth": 8,
+      "colorType": 6,
+      "chunkCrcVerified": true,
+      "chunkCount": 4,
+      "prompt": "Create ONE isolated Ovomorph egg as a high-resolution 2D game sprite for the Alien: Covenant (2017) DLC. Match the film's mature eggs in David's underground egg chamber as closely as possible, preserving their organically sculpted leathery surface and four-lobed crown. This is the 2017 Covenant egg form, shown closed and intact, alone.\nComposition: complete egg seen exactly from the side at eye-level of its midsection, upright on a flat baseline, slightly broader organic base tapering to the closed four-petal opening. All of the object visible with empty space around it. No pedestal or display support.\nMaterials: natural olive-gray and umber leathery skin, subtle vein and tendon texture, fine wet specular highlights, layered organic ridges, darker creases between the four closed lip lobes. Realistic restrained neutral illumination, strong readable outline, detailed UHD hand-painted game art. Keep the form coherent with the released film; no added mechanical panels, cables, glowing markings or decorative symbols.\nOne subject, one sprite, no alternatives, no extra creatures, no illustration background. Genuine alpha transparency, no floor, shadow, aura, smoke, typography, labels or borders.",
+      "generated": true,
+      "runtimeIntegrated": false,
+      "verified1to1": false
+    }
+  ],
+  "unproduced": [
+    {
+      "asset": "neomorph-juvenile-hallett.png",
+      "status": "generation_refused",
+      "fileCreated": false
+    },
+    {
+      "asset": "xenomorph-covenant-idle.png",
+      "status": "generation_refused",
+      "fileCreated": false
+    }
+  ]
+}

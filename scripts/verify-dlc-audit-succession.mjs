@@ -16,11 +16,15 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
   AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
+  AVP_COVENANT_SOURCE_BASELINE_20261126 as covenantSourceBaseline,
+  AVP_COVENANT_SOURCE_SUCCESSORS_20261126 as covenantSourceSuccessors,
+  reviewedCovenantSourceHostDigest20261126 as advanceCovenantSource,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
+import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
   reviewedXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
@@ -120,8 +124,8 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116) source chain/;
+const finalEndpoint = path => covenantSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-Covenant-source-art) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -331,4 +335,51 @@ test('V116 advances exactly four reviewed hosts after the merged V115 receipts',
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceV116(path, 'unchanged'), 'unchanged', path);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+});
+
+
+test('Covenant source art advances only the exact public path verifier from the V116 baseline', () => {
+  const path = 'scripts/verify-public-release-v86.mjs';
+  assert.equal(covenantSourceBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(covenantSourceSuccessors), [path]);
+  assert.equal(sha(JSON.stringify(covenantSourceSuccessors)), '81e11456c221d67fab56633a836f5a176c82e0d5c161cb4b489d5d402e9e70c6');
+  assert.ok(Object.isFrozen(covenantSourceSuccessors));
+  const receipt = covenantSourceSuccessors[path];
+  assert.ok(Object.isFrozen(receipt));
+  assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+  assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256);
+  assert.equal(sha(read(path)), receipt.currentSha256);
+  assert.equal(advanceCovenantSource(path, receipt.previousSha256), receipt.currentSha256);
+  for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+    assert.throws(() => advanceCovenantSource(path, value), /Broken V116-to-Covenant-source-art source chain/);
+  for (const value of [receipt.previousSha256, receipt.currentSha256])
+    assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceCovenantSource(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(covenantSourceSuccessors, audit), false);
+});
+
+test('Covenant source admission is closed, type-specific and excluded from every built distribution', () => {
+  const directory = 'docs/development/covenant-sprites-20261126';
+  const files = [
+  "docs/development/covenant-sprites-20261126/neomorph-adult-citadel.png",
+  "docs/development/covenant-sprites-20261126/facehugger-covenant.png",
+  "docs/development/covenant-sprites-20261126/ovomorph-covenant.png",
+  "docs/development/covenant-sprites-20261126/manifest.json",
+  "docs/development/covenant-sprites-20261126/README.md",
+  "docs/development/covenant-sprites-20261126/gallery.html"
+];
+  assert.equal(isPublicDistributionPathV86(directory, { directory: true }), true);
+  assert.equal(isPublicDistributionPathV86(directory), false);
+  assert.equal(isPublicDistributionPathV86(directory, { directory: true, built: true }), false);
+  for (const path of files) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
+  for (const path of [directory + '/extra.png', directory + '/nested/file.png',
+    directory + '/README.md/extra', directory + '/../README.md', directory + '/manifest.JSON']) {
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+  }
 });
