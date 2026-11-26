@@ -7,6 +7,10 @@
   const TABLETOP = new Set(['flute', 'notebook', 'necklace', 'teaset', 'medtray', 'surgicaltray']);
   const LIVE_PROPS = new Set(['console', 'navigationdisplay', 'crane', 'freight-cart', 'freight-rail', 'freight-dock',
     'maintenance-fan', 'stone-crown', 'hydraulic-lever', 'counterweight', 'sluice-gauge']);
+  const NPC_WALK_ACTORS = Object.freeze({
+    'walter-cryo': Object.freeze({ room: 'cryo', role: 'walter', profile: 'walter' }),
+    'upworth-comms': Object.freeze({ room: 'comms', role: 'upworth', profile: 'upworth' })
+  });
   const WEAPON_BOX = {
     f90: [-9, -19, 75, 21], sl40: [-9, -19, 75, 26],
     beretta: [0, -12, 34, 18], inox: [0, -12, 34, 18], eaa: [0, -12, 34, 18],
@@ -28,16 +32,17 @@
       const E = this.engine, time = E.state.time;
       let previous = this.npcWalkObservationV014;
       // The native phase is an intent set before collision handling. Only a
-      // consecutive observed displacement can admit the one supplied NPC cycle.
+      // consecutive observed displacement can admit the supplied NPC cycle.
       // These observations belong to this renderer, never to an actor or save.
       if (previous && (previous.state !== E.state || previous.room !== E.room.id
         || !Number.isFinite(time) || time < previous.time || time - previous.time > .1)) {
         previous = null; this.npcWalkObservationV014 = null;
       }
-      if (actor.id !== 'walter-cryo' || actor.room !== 'cryo' || E.room.id !== 'cryo'
-        || role !== 'walter' || profile.id !== 'walter' || gun || !Number.isFinite(time)
+      const scope = NPC_WALK_ACTORS[actor.id];
+      if (!scope || actor.room !== scope.room || E.room.id !== scope.room
+        || role !== scope.role || profile.id !== scope.profile || gun || !Number.isFinite(time)
         || !Number.isFinite(actor.x) || !Number.isFinite(actor.z) || (actor.y || 0) !== 0) {
-        if (actor.id === 'walter-cryo') this.npcWalkObservationV014 = null;
+        if (scope) this.npcWalkObservationV014 = null;
         return false;
       }
       const sameActor = previous?.actor === actor;

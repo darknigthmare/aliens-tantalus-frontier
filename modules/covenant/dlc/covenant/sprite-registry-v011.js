@@ -1,4 +1,4 @@
-/* Covenant visual releases 0.11/0.12/0.13/0.14. Runtime images do not change simulation data.
+/* Covenant visual releases 0.11/0.12/0.13/0.14/0.17. Runtime images do not change simulation data.
  * Only manifest-admitted, successfully decoded states replace Canvas artwork.
  */
 (function (root) {
@@ -7,6 +7,8 @@
   const ASSET_ROOT_V012 = '/assets/openai/sprites/alien-covenant-v012/';
   const ASSET_ROOT_V013 = '/assets/openai/sprites/alien-covenant-v013/';
   const ASSET_ROOT_V014 = '/assets/openai/sprites/alien-covenant-v014/';
+  const ASSET_ROOT_V016 = '/assets/openai/sprites/alien-covenant-v016/';
+  const ASSET_ROOT_V017 = '/assets/openai/sprites/alien-covenant-v017/';
   // These are the actual player costume scopes; the three ducts require crawling.
   // The independent activation tableau never borrows a campaign costume or cycle.
   const WALK_ROOMS = Object.freeze({
@@ -21,7 +23,8 @@
     'david-young': Object.freeze(['whiteroom'])
   });
   const NPC_WALK_SCOPES = Object.freeze({
-    walter: Object.freeze({ rooms: Object.freeze(['cryo']), actors: Object.freeze(['walter-cryo']) })
+    walter: Object.freeze({ rooms: Object.freeze(['cryo']), actors: Object.freeze(['walter-cryo']), sourceRoot: ASSET_ROOT_V014 }),
+    upworth: Object.freeze({ rooms: Object.freeze(['comms']), actors: Object.freeze(['upworth-comms']), sourceRoot: ASSET_ROOT_V017 })
   });
   const MANIFEST_URL = '/dlc/covenant/sprites-v011.json';
   const KINDS = new Set(['human', 'creature', 'weapon', 'prop', 'background']);
@@ -32,11 +35,11 @@
     return Object.freeze(v.slice());
   };
   function compileManifest(raw) {
-    if (!raw || raw.schemaVersion !== 1 || !['0.11.0', '0.12.0', '0.13.0', '0.14.0'].includes(raw.release) || !Array.isArray(raw.assets)) {
+    if (!raw || raw.schemaVersion !== 1 || !['0.11.0', '0.12.0', '0.13.0', '0.14.0', '0.17.0'].includes(raw.release) || !Array.isArray(raw.assets)) {
       throw new Error('Invalid Covenant sprite manifest');
     }
     const definitions = raw.cycles === undefined ? [] : raw.cycles;
-    if (!Array.isArray(definitions) || definitions.length && !['0.12.0', '0.13.0', '0.14.0'].includes(raw.release)) {
+    if (!Array.isArray(definitions) || definitions.length && !['0.12.0', '0.13.0', '0.14.0', '0.17.0'].includes(raw.release)) {
       throw new Error('Invalid Covenant sprite cycles');
     }
     const frameOwners = new Map(), cycleIds = new Set();
@@ -46,7 +49,8 @@
         || cycle.kind !== 'human' || !npc && !Object.hasOwn(WALK_ROOMS, cycle.key) || cycle.state !== 'walk'
         || raw.release === '0.12.0' && cycle.key !== 'daniels-work'
         || cycle.id !== cycle.key + '-walk'
-        || (npc ? raw.release !== '0.14.0' || cycle.consumer !== 'npc'
+        || (npc ? !['0.14.0', '0.17.0'].includes(raw.release)
+          || cycle.key === 'upworth' && raw.release !== '0.17.0' || cycle.consumer !== 'npc'
           || JSON.stringify(cycle.actors) !== JSON.stringify(NPC_WALK_SCOPES[cycle.key].actors)
           || !finite(cycle.angularFrequency) || cycle.angularFrequency <= 0 || cycle.angularFrequency > 11
           : cycle.angularFrequency !== 11 || cycle.consumer !== undefined || cycle.actors !== undefined)
@@ -61,7 +65,8 @@
       }
     }
     const byId = new Map(), byState = new Map(), byCycle = new Map();
-    const roots = raw.release === '0.14.0' ? [ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014]
+    const roots = raw.release === '0.17.0' ? [ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014, ASSET_ROOT_V016, ASSET_ROOT_V017]
+      : raw.release === '0.14.0' ? [ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014]
       : raw.release === '0.13.0' ? [ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013]
       : raw.release === '0.12.0' ? [ASSET_ROOT, ASSET_ROOT_V012] : [ASSET_ROOT];
     for (const input of raw.assets) {
@@ -75,7 +80,7 @@
         throw new Error('Invalid Covenant sprite identity: ' + id);
       }
       if (kind === 'human' && state === 'walk'
-        && [ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014].some(base => path.startsWith(base)) && !frameOwners.has(id)) {
+        && [ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014, ASSET_ROOT_V017].some(base => path.startsWith(base)) && !frameOwners.has(id)) {
         throw new Error('Walk frame is not part of a complete declared cycle: ' + id);
       }
       const b = input.alphaBounds;
@@ -95,10 +100,24 @@
         throw new Error('Invalid room restriction: ' + id);
       }
       const actors = input.actors;
-      if (actors !== undefined && (kind !== 'human' || key !== 'walter' || state !== 'walk'
-        || !path.startsWith(ASSET_ROOT_V014)
-        || JSON.stringify(actors) !== JSON.stringify(NPC_WALK_SCOPES.walter.actors))) {
+      const npcScope = NPC_WALK_SCOPES[key];
+      if (actors !== undefined && (kind !== 'human' || !npcScope || state !== 'walk'
+        || !path.startsWith(npcScope.sourceRoot)
+        || JSON.stringify(actors) !== JSON.stringify(npcScope.actors))) {
         throw new Error('Invalid NPC actor restriction: ' + id);
+      }
+      // Catalogue roots are never admitted wholesale. The only V016 promotion
+      // is the reviewed non-solid rock at this exact native shore occurrence.
+      if (path.startsWith(ASSET_ROOT_V016) && (id !== 'world-planet4-shore-rock'
+        || kind !== 'prop' || key !== 'landing-light2' || state !== 'idle'
+        || JSON.stringify(rooms) !== JSON.stringify(['landing']) || actors !== undefined)) {
+        throw new Error('Invalid V016 shore occurrence admission: ' + id);
+      }
+      if (path.startsWith(ASSET_ROOT_V017) && (kind !== 'human' || key !== 'upworth'
+        || state !== 'walk' || !frameOwners.has(id)
+        || JSON.stringify(rooms) !== JSON.stringify(NPC_WALK_SCOPES.upworth.rooms)
+        || JSON.stringify(actors) !== JSON.stringify(NPC_WALK_SCOPES.upworth.actors))) {
+        throw new Error('Invalid V017 NPC admission: ' + id);
       }
       const background = kind === 'background';
       if (background ? id !== 'background-planet4-lake' || key !== 'landing' || state !== 'idle'
@@ -132,7 +151,7 @@
       const frames = definition.frames.map(id => byId.get(id));
       const npcScope = NPC_WALK_SCOPES[definition.key];
       const rooms = npcScope?.rooms || WALK_ROOMS[definition.key];
-      const sourceRoot = npcScope ? ASSET_ROOT_V014 : definition.key === 'daniels-work' ? ASSET_ROOT_V012 : ASSET_ROOT_V013;
+      const sourceRoot = npcScope ? npcScope.sourceRoot : definition.key === 'daniels-work' ? ASSET_ROOT_V012 : ASSET_ROOT_V013;
       if (byState.has(token) || byCycle.has(token) || frames.some(frame => !frame)
         || frames.some(frame => frame.kind !== definition.kind || frame.key !== definition.key
           || frame.state !== definition.state || !frame.path.startsWith(sourceRoot)
@@ -220,7 +239,7 @@
           ready: cycle.frames.every(frame => images.get(frame.id)?.status === 'ready') })),
         images: [...images].map(([id, value]) => ({ id, status: value.status })) }) });
   }
-  const api = Object.freeze({ ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014, WALK_ROOMS, NPC_WALK_SCOPES,
+  const api = Object.freeze({ ASSET_ROOT, ASSET_ROOT_V012, ASSET_ROOT_V013, ASSET_ROOT_V014, ASSET_ROOT_V016, ASSET_ROOT_V017, WALK_ROOMS, NPC_WALK_SCOPES,
     MANIFEST_URL, compileManifest, createRegistry });
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else {

@@ -290,77 +290,81 @@ def main():
               q.renderer.drawPose=q.renderer.walkOriginalV013;
               delete q.renderer.walkOriginalV013;delete q.renderer.walkObservedV013;q.resume();}""")
 
-    def observe_native_walter(page, cycle):
-        """Wait for the existing opening patrol and record real sprite transforms."""
+    def observe_native_npc(page, cycle):
+        """Observe an existing patrol after its room is reached by real controls."""
+        config = {"walter": {"actor": "walter-cryo", "room": "cryo", "speed": 26},
+                  "upworth": {"actor": "upworth-comms", "room": "comms", "speed": 22}}[cycle["key"]]
+        config = {**config, "key": cycle["key"], "cycle": cycle["id"]}
+        name = cycle["key"].capitalize()
         initial = observation(page)
-        page.evaluate("""() => {
+        page.evaluate("""cfg => {
           const q=__COVENANT_QA__,e=q.engine;
-          q.renderer.npcObservedV014=[];q.renderer.npcOriginalDrawV014=q.renderer.drawPose;
+          q.renderer.npcObservedV017=[];q.renderer.npcOriginalDrawV017=q.renderer.drawPose;
           q.renderer.drawPose=function(sprite,height,anchor){
-            if(sprite.cycle==='walter-walk'){
-              const actor=e.state.crew['walter-cryo'],m=this.c.getTransform();
-              this.npcObservedV014.push({id:sprite.entry.id,actor:actor.id,room:e.room.id,
+            if(sprite.cycle===cfg.cycle){
+              const actor=e.state.crew[cfg.actor],m=this.c.getTransform();
+              this.npcObservedV017.push({id:sprite.entry.id,actor:actor.id,room:e.room.id,
                 profile:e.appearance(actor,e.crewRole(actor)).id,x:actor.x,z:actor.z,
                 phase:actor.phase,facing:actor.facing,time:e.state.time,a:m.a,d:m.d,
                 moved:!!this.npcWalkObservationV014?.moving});
-            }return this.npcOriginalDrawV014(sprite,height,anchor);
+            }return this.npcOriginalDrawV017(sprite,height,anchor);
           };
-        }""")
+        }""", config)
         draws_by_direction = {}
         try:
             for facing, label in ((1, "right"), (-1, "left")):
-                page.wait_for_function("""({ids,facing})=>{
-                  const q=__COVENANT_QA__,a=q.engine.state.crew['walter-cryo'];
-                  const complete=a.phase==='walk'&&a.facing===facing&&ids.every(id=>q.renderer.npcObservedV014
+                page.wait_for_function("""({ids,facing,actor})=>{
+                  const q=__COVENANT_QA__,a=q.engine.state.crew[actor];
+                  const complete=a.phase==='walk'&&a.facing===facing&&ids.every(id=>q.renderer.npcObservedV017
                     .some(row=>row.id===id&&row.facing===facing&&row.a*facing>0&&row.d>0&&row.moved));
                   if(complete)q.freeze();return complete;
-                }""", arg={"ids": cycle["frames"], "facing": facing}, timeout=90000)
-                paused = page.evaluate("""()=>{
+                }""", arg={"ids": cycle["frames"], "facing": facing, "actor": config["actor"]}, timeout=90000)
+                paused = page.evaluate("""actor=>{
                   const q=__COVENANT_QA__,e=q.engine;q.freeze();q.renderer.frame(0,{});
                   return {time:e.state.time,before:JSON.stringify(q.snapshot()),
-                    actor:{phase:e.state.crew['walter-cryo'].phase,facing:e.state.crew['walter-cryo'].facing},
-                    last:q.renderer.npcObservedV014.at(-1)};
-                }""")
-                rows = page.evaluate("__COVENANT_QA__.renderer.npcObservedV014.slice()")
+                    actor:{phase:e.state.crew[actor].phase,facing:e.state.crew[actor].facing},
+                    last:q.renderer.npcObservedV017.at(-1)};
+                }""", config["actor"])
+                rows = page.evaluate("__COVENANT_QA__.renderer.npcObservedV017.slice()")
                 selected = [row for row in rows if row["facing"] == facing]
-                check("Native Walter patrol draws eight " + label + "-facing phases without actor edits",
+                check("Native " + name + " patrol draws eight " + label + "-facing phases without actor edits",
                       all(any(row["id"] == identity and row["moved"] and row["a"] * facing > 0
-                              and row["profile"] == "walter" and row["actor"] == "walter-cryo"
-                              and row["room"] == "cryo" and row["phase"] == "walk" for row in selected)
+                              and row["profile"] == config["key"] and row["actor"] == config["actor"]
+                              and row["room"] == config["room"] and row["phase"] == "walk" for row in selected)
                           for identity in cycle["frames"]),
-                      {"frames": cycle["frames"], "nativeSpeed": 26, "angularFrequency": cycle["angularFrequency"]})
+                      {"frames": cycle["frames"], "nativeSpeed": config["speed"], "angularFrequency": cycle["angularFrequency"]})
                 page.wait_for_timeout(160)
                 repeated = page.evaluate("""()=>{
                   const q=__COVENANT_QA__;q.renderer.frame(0,{});
-                  return {time:q.engine.state.time,after:JSON.stringify(q.snapshot()),last:q.renderer.npcObservedV014.at(-1)};
+                  return {time:q.engine.state.time,after:JSON.stringify(q.snapshot()),last:q.renderer.npcObservedV017.at(-1)};
                 }""")
-                check("Paused Walter keeps the observed frame and exact simulation: " + label,
+                check("Paused " + name + " keeps the observed frame and exact simulation: " + label,
                       paused["time"] == repeated["time"] and paused["before"] == repeated["after"]
                       and paused["actor"] == {"phase": "walk", "facing": facing}
                       and repeated["last"]["time"] == paused["time"]
                       and paused["last"]["id"] == repeated["last"]["id"]
                       and repeated["last"]["facing"] == facing and repeated["last"]["moved"])
-                capture(page, "walk-walter-" + label,
-                        "Natural opening cryo patrol; no route, actor, position or clock injection")
+                capture(page, "walk-" + config["key"] + "-" + label,
+                        "Native patrol in a room reached by real controls; no actor, route or clock injection")
                 draws_by_direction[label] = selected
                 page.evaluate("__COVENANT_QA__.resume()")
             after = observation(page)
-            check("Observing Walter leaves the player and opening progression untouched",
-                  after["room"] == initial["room"] == "cryo"
+            check("Observing " + name + " leaves the player and reached progression untouched",
+                  after["room"] == initial["room"] == config["room"]
                   and after["player"]["x"] == initial["player"]["x"]
                   and after["player"]["z"] == initial["player"]["z"]
-                  and after["actions"] == initial["actions"] == [])
-            receipt["npcWalkCycles"].append({"id": cycle["id"], "key": "walter", "actor": "walter-cryo",
-                "room": "cryo", "gameplayStateInjected": False, "clockInjected": False,
-                "nativeSpeed": 26, "angularFrequency": cycle["angularFrequency"],
+                  and after["actions"] == initial["actions"])
+            receipt["npcWalkCycles"].append({"id": cycle["id"], "key": config["key"], "actor": config["actor"],
+                "room": config["room"], "gameplayStateInjected": False, "clockInjected": False,
+                "nativeSpeed": config["speed"], "angularFrequency": cycle["angularFrequency"],
                 "observedRightFrames": sorted({row["id"] for row in draws_by_direction["right"]}),
                 "observedLeftFrames": sorted({row["id"] for row in draws_by_direction["left"]}),
                 "rightDraws": draws_by_direction["right"], "leftDraws": draws_by_direction["left"]})
             flush()
         finally:
             page.evaluate("""()=>{const q=__COVENANT_QA__;
-              q.renderer.drawPose=q.renderer.npcOriginalDrawV014;
-              delete q.renderer.npcOriginalDrawV014;delete q.renderer.npcObservedV014;q.resume();}""")
+              q.renderer.drawPose=q.renderer.npcOriginalDrawV017;
+              delete q.renderer.npcOriginalDrawV017;delete q.renderer.npcObservedV017;q.resume();}""")
 
     page = None
     try:
@@ -387,7 +391,7 @@ def main():
             }) if response.status >= 400 and (
                 "/dlc/covenant/" in response.url or "/alien-covenant-v011/" in response.url
                 or "/alien-covenant-v012/" in response.url or "/alien-covenant-v013/" in response.url
-                or "/alien-covenant-v014/" in response.url) else None)
+                or "/alien-covenant-v014/" in response.url or "/alien-covenant-v016/" in response.url or "/alien-covenant-v017/" in response.url) else None)
             response = page.goto(base + "/dlc/covenant/?qa=1&from=tantalus", wait_until="load")
             check("Served Covenant route returns HTTP 200", response is not None and response.status == 200)
             page.wait_for_function("!!window.__COVENANT_QA__ && !!window.CovenantSpritesV011")
@@ -414,10 +418,11 @@ def main():
                   and all(len(cycle["frames"]) == 8 and cycle["rooms"] for cycle in player_cycles),
                   [{"id": cycle["id"], "key": cycle.get("key"), "rooms": cycle.get("rooms")} for cycle in player_cycles])
             npc_cycles = [cycle for cycle in walk_cycles if cycle.get("consumer") == "npc"]
-            check("Only the existing uninjured cryo Walter receives an NPC cycle",
-                  len(npc_cycles) == 1 and npc_cycles[0]["id"] == "walter-walk"
-                  and npc_cycles[0]["actors"] == ["walter-cryo"] and npc_cycles[0]["rooms"] == ["cryo"], npc_cycles)
-            observe_native_walter(page, npc_cycles[0])
+            check("NPC cycles are restricted to the existing unarmed Walter and Upworth presences",
+                  len(npc_cycles) == 2 and {row["id"] for row in npc_cycles} == {"walter-walk", "upworth-walk"}
+                  and all(row["actors"] == [{"walter": "walter-cryo", "upworth": "upworth-comms"}[row["key"]]]
+                          and row["rooms"] == [{"walter": "cryo", "upworth": "comms"}[row["key"]]] for row in npc_cycles), npc_cycles)
+            observe_native_npc(page, next(row for row in npc_cycles if row["key"] == "walter"))
             opening_cycle = next(cycle for cycle in walk_cycles if cycle["key"] == "daniels-work")
             if walk_cycles:
                 before_walk = observation(page)
@@ -472,6 +477,7 @@ def main():
                 capture(page, "02-reached-" + destination, "Real keyboard traversal from " + room_id)
             check("Opening journey crosses the real service obstruction", receipt["controls"]["jumps"] > 0)
             check("Six mandatory actions were actually completed", len(observation(page)["actions"]) == 6)
+            observe_native_npc(page, next(row for row in npc_cycles if row["key"] == "upworth"))
             check("New visuals preserve host profiles during play", host_preserved(page))
 
             page.keyboard.press("Escape")
@@ -644,7 +650,7 @@ def main():
                 receipt["preparedCreaturePoses"].append({**entry, **prepared})
                 capture(fixture_page, "fixture-" + entry["id"], "Prepared creature pose; not a gameplay-reached combat state")
             props = fixture_page.evaluate("""CovenantSpritesV011.entries().filter(e=>
-                e.kind==='prop'&&e.path.startsWith('/assets/openai/sprites/alien-covenant-v012/'))
+                e.kind==='prop'&&(e.path.startsWith('/assets/openai/sprites/alien-covenant-v012/')||e.id==='world-planet4-shore-rock'))
                 .map(e=>({id:e.id,key:e.key,rooms:e.rooms}))""")
             for entry in props:
                 prepared = fixture_page.evaluate("""(entry) => {
@@ -663,12 +669,33 @@ def main():
                     "(id)=>CovenantSpritesV011.inspect().images.some(v=>v.id===id&&v.status==='ready')", arg=entry["id"])
                 rendered = fixture_page.evaluate("""(key) => {
                   const q=__COVENANT_QA__, before=JSON.stringify(q.snapshot()),count=q.renderer.spriteDrawsV011.prop;
-                  q.renderer.prop(q.engine.room.props.find(o=>o.id===key));
-                  return {pure:before===JSON.stringify(q.snapshot()),drawn:q.renderer.spriteDrawsV011.prop>count};
+                  const object=q.engine.room.props.find(o=>o.id===key),point=q.renderer.propPoint(object);
+                  const original=q.renderer.drawPose;let geometry=null;
+                  q.renderer.drawPose=function(sprite,height,anchor){
+                    if(sprite.entry.id==='world-planet4-shore-rock'){
+                      const e=sprite.entry,b=e.alphaBounds,m=this.c.getTransform(),scale=height/(b[3]-b[1]);
+                      // Canvas pixels include the frame's viewport scale; native
+                      // propPoint and footprint limits use logical scene units.
+                      const canvasScale=this.scale;
+                      geometry={width:(b[2]-b[0])*scale*m.a/canvasScale,height:height*m.d/canvasScale,
+                        foot:(m.f+(b[3]-(anchor||e.anchor)[1])*scale*m.d)/canvasScale,canvasScale,
+                        nativeFoot:point.y,limitWidth:object.w*point.s,limitHeight:object.h*point.s,
+                        solid:object.solid};
+                    }return original.call(this,sprite,height,anchor);
+                  };
+                  try{q.renderer.prop(object)}finally{q.renderer.drawPose=original}
+                  return {pure:before===JSON.stringify(q.snapshot()),drawn:q.renderer.spriteDrawsV011.prop>count,geometry};
                 }""", entry["key"])
                 check("Prepared prop draws without editing simulation: " + entry["id"],
                       rendered["pure"] and rendered["drawn"])
-                receipt["preparedPropPoses"].append({**entry, **prepared})
+                if entry["id"] == "world-planet4-shore-rock":
+                    geometry = rendered["geometry"]
+                    check("The promoted shore rock keeps its foot on the native shore and fits its non-solid footprint",
+                          geometry is not None and abs(geometry["foot"] - geometry["nativeFoot"]) < 1e-6
+                          and 0 < geometry["width"] <= geometry["limitWidth"] + 1e-6
+                          and 0 < geometry["height"] <= geometry["limitHeight"] + 1e-6
+                          and geometry["solid"] is False, geometry)
+                receipt["preparedPropPoses"].append({**entry, **prepared, "geometry": rendered["geometry"]})
                 capture(fixture_page, "fixture-" + entry["id"], "Prepared exact prop instance; not a gameplay-reached room")
             fixture_context.close()
 
@@ -684,18 +711,19 @@ def main():
                 partial_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
                 partial_page.wait_for_function("!!window.__COVENANT_QA__")
                 key = cycle.get("key", "daniels-work")
-                prepared = key in ("daniels", "daniels-eva")
-                npc = key == "walter"
+                prepared = key in ("daniels", "daniels-eva", "upworth")
+                npc = cycle.get("consumer") == "npc"
+                actor_id = cycle["actors"][0] if npc else None
                 if key in ("daniels-work", "walter"):
                     partial_page.locator("#begin").click()
                 elif key == "david-young":
                     partial_page.locator("#prologueFront").click()
                 else:
-                    room = {"daniels": "landing", "daniels-eva": "sailaccess"}[key]
+                    room = {"daniels": "landing", "daniels-eva": "sailaccess", "upworth": "comms"}[key]
                     partial_page.evaluate("""room=>{const q=__COVENANT_QA__;
                         q.go(room,true);q.engine.state.weapon=false;q.resume();}""", room)
                 before = observation(partial_page)
-                before_npc = partial_page.evaluate("__COVENANT_QA__.engine.state.crew['walter-cryo'].x") if npc else None
+                before_npc = partial_page.evaluate("id=>__COVENANT_QA__.engine.state.crew[id].x", actor_id) if npc else None
                 if not npc:
                     partial_page.keyboard.down("ArrowRight")
                 try:
@@ -706,10 +734,10 @@ def main():
                     if not npc:
                         partial_page.keyboard.up("ArrowRight")
                 after = observation(partial_page)
-                after_npc = partial_page.evaluate("__COVENANT_QA__.engine.state.crew['walter-cryo'].x") if npc else None
+                after_npc = partial_page.evaluate("id=>__COVENANT_QA__.engine.state.crew[id].x", actor_id) if npc else None
                 partial_status = partial_page.evaluate("CovenantSpritesV011.inspect()")
                 status = next(row for row in partial_status["cycles"] if row["id"] == cycle["id"])
-                movement = after_npc > before_npc + 10 if npc else after["player"]["x"] > before["player"]["x"] + 10
+                movement = abs(after_npc - before_npc) > 10 if npc else after["player"]["x"] > before["player"]["x"] + 10
                 complete_fallback = (movement
                     and all(not after["cycleFrameDraws"].get(identity, 0) for identity in cycle["frames"])
                     and not partial_errors and not status["ready"])
@@ -751,7 +779,7 @@ def main():
             missing_page = missing_context.new_page()
             fallback_errors = []
             missing_page.on("pageerror", lambda error: fallback_errors.append(str(error)))
-            for version in ("v011", "v012", "v013", "v014"):
+            for version in ("v011", "v012", "v013", "v014", "v016", "v017"):
                 missing_page.route("**/assets/openai/sprites/alien-covenant-" + version + "/*.png",
                                    lambda route: route.abort("failed"))
             missing_page.goto(base + "/dlc/covenant/?qa=1", wait_until="load")
@@ -768,6 +796,19 @@ def main():
                   and after["spriteDraws"]["human"] == 0 and not fallback_errors,
                   {"expectedPNGFailures": True, "pageErrors": fallback_errors})
             capture(missing_page, "fixture-missing-images", "Deliberate PNG failures in a separate context; procedural fallback")
+            missing_page.evaluate("""()=>{const q=__COVENANT_QA__;q.go('landing',true);q.freeze();
+                q.renderer.camera=950;q.renderer.frame(0,{});}""")
+            missing_page.wait_for_function("CovenantSpritesV011.inspect().images.some(v=>v.id==='world-planet4-shore-rock'&&v.status==='unavailable')")
+            fallback_rock = missing_page.evaluate("""()=>{
+              const q=__COVENANT_QA__,parent=Object.getPrototypeOf(CovenantSpriteRendererV011.prototype);
+              const original=parent.prop,before=JSON.stringify(q.snapshot()),count=q.renderer.spriteDrawsV011.prop;
+              let native=false;parent.prop=function(o){if(o.id==='landing-light2')native=true;return original.call(this,o)};
+              try{q.renderer.prop(q.engine.room.props.find(o=>o.id==='landing-light2'))}finally{parent.prop=original}
+              return {native,pure:before===JSON.stringify(q.snapshot()),noPNG:count===q.renderer.spriteDrawsV011.prop};
+            }""")
+            check("A missing shore-rock image retains its native rendering and exact simulation",
+                  all(fallback_rock.values()) and not fallback_errors, fallback_rock)
+            capture(missing_page, "fixture-missing-shore-rock", "Prepared landing; all PNG requests blocked, exact rock uses native Canvas")
             missing_context.close()
             check("No unexpected Covenant page or asset errors", not receipt["pageErrors"] and not receipt["httpErrors"],
                   {"pageErrors": receipt["pageErrors"], "httpErrors": receipt["httpErrors"]})

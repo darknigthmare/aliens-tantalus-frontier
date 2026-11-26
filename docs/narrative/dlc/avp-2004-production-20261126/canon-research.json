@@ -1,0 +1,3101 @@
+{
+  "schema_version": 1,
+  "title": "AVP (2004) — canon et matrice de production",
+  "research_date": "2026-11-26",
+  "scope": "AVP2004 Sous la glace ; variantes étendues explicitement étiquetées",
+  "publication_note": "Reconstruction éditoriale depuis les notes de recherche ; équivalence d’octets avec les fichiers scratch initiaux non revendiquée.",
+  "status": "Research/production specification. Runtime absence/integration and fidelity1:1 are not certified.",
+  "source_priority": [
+    "plans du montage retenu",
+    "objet/document de production rapproché du plan",
+    "fabricant effets/modèles",
+    "réplique sous licence",
+    "analyse secondaire"
+  ],
+  "counts": {
+    "personnages": 35,
+    "lieux": 33,
+    "armes": 16,
+    "props": 28,
+    "véhicules": 4,
+    "vaisseaux": 3,
+    "terrain": 12,
+    "planète": 1
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "20th Century Studios — Alien vs. Predator",
+      "url": "https://www.20thcenturystudios.com/movies/alien-vs-predator",
+      "type": "studio",
+      "limits": "Périmètre du film2004 et distribution ; ne fournit pas de modèle complet."
+    },
+    {
+      "id": "S02",
+      "title": "MPC — Alien Vs Predator",
+      "url": "https://www.mpcvfx.com/en/filmography/alien-vs-predator/",
+      "type": "fabricant VFX",
+      "limits": "Créatures, reine, vaisseau et environnements ; modèles numériques associés aux effets pratiques."
+    },
+    {
+      "id": "S03",
+      "title": "studioADI — AVP Filming Predators In Temple BTS",
+      "url": "https://www.youtube.com/watch?v=1Q9V_1aXe2w",
+      "type": "fabricant effets",
+      "limits": "Costume Predator, tête Alien et décor de temple ; timecodes à relever."
+    },
+    {
+      "id": "S04",
+      "title": "Propstore — Scar costume 69075",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/scar-predator-ian-whyte-creature-costume/",
+      "type": "costume de production",
+      "limits": "Équipement ADI ; épines faciales retirées après tournage pour AVPR. Ne pas reproduire cette altération de conservation."
+    },
+    {
+      "id": "S05",
+      "title": "Propstore — Scar bio-mask lot833",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/lot-833-scars-ian-whyte-predator-bio-mask/",
+      "type": "objet de production",
+      "limits": "Masque argenté, visière quadrillée, détails latéraux ; dimensions d’accessoire uniquement."
+    },
+    {
+      "id": "S06",
+      "title": "Propstore — Celtic screen-matched costume lot13",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/449/lot/156867/13-Celtic-s-Ian-Whyte-Screen-Matched-Predator-Costume-Display-AVP-ALIEN-VS-PREDATOR-2004",
+      "type": "costume rapproché des plans",
+      "limits": "Masque et dégâts de plastron rapprochés du film. Assemblage d’exposition ne prouve pas possession de chaque arme à chaque scène."
+    },
+    {
+      "id": "S07",
+      "title": "Propstore — Celtic helmet lot55",
+      "url": "https://usm.propstoreauction.com/lot-details/index/catalog/267/lot/62166/Lot-55-AVP-ALIEN-VS-PREDATOR-2004-Celtic-s-Ian-Whyte-Predator-Helmet",
+      "type": "objet de production",
+      "limits": "Masque gris métallique, mécanique sculptée, tri-laser ; états à associer aux scènes."
+    },
+    {
+      "id": "S08",
+      "title": "Sideshow / Prime1 — Chopper913286",
+      "url": "https://www.sideshow.com/collectibles/predator-chopper-predator-prime-1-studio-913286",
+      "type": "réplique sous licence",
+      "limits": "Branchies du masque, lames longues et deux trophées dorsaux ; le film prime sur le produit commercial."
+    },
+    {
+      "id": "S09",
+      "title": "HeroProp — Elder ceremonial mask",
+      "url": "https://heroprop.com/product/alien-vs-predator-predator-ceremonial-mask/",
+      "type": "objet attribué à la production",
+      "limits": "Masque doré à détails argentés et ouverture de bouche ; affectation exacte à vérifier dans la finale."
+    },
+    {
+      "id": "S10",
+      "title": "Propstore — Animatronic Shoulder Cannon",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/animatronic-shoulder-cannon/",
+      "type": "objet de production",
+      "limits": "Canon articulé, support, surfaces et marquages ; aucune caractéristique énergétique fictionnelle démontrée."
+    },
+    {
+      "id": "S11",
+      "title": "Propstore — Combistick lot17",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/118654/Lot-17-AVP-ALIEN-VS-PREDATOR-2004-Predator-Combistick",
+      "type": "objet de production",
+      "limits": "Lance ADI argent/cuivre ; distinguer lance métallique finale et arme organique improvisée de Lex."
+    },
+    {
+      "id": "S12",
+      "title": "Propstore — Stafford jacket lot431",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/299/lot/80637/Lot-431-AVP-ALIEN-VS-PREDATOR-2004-Maxwell-Stafford-s-Colin-Salmon-Hero-Weyland-Corp-Jacket-and-Sweater",
+      "type": "costume de production",
+      "limits": "Veste grise réfléchissante/rembourrée, W jaune, col roulé cramoisi ; portrait à relever au film."
+    },
+    {
+      "id": "S13",
+      "title": "Propstore — Weyland Antarctic snowcat lot460",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/496/lot/192510/460-Light-Up-Weyland-Antarctic-Snowcat-Model-Miniature-AVP-ALIEN-VS-PREDATOR-2004",
+      "type": "miniature de production",
+      "limits": "PistenBully, lame, antenne, feux orange, inscriptions WI-PBOO3-A/AJ-2 ; ne pas convertir dimensions de vitrine en dimensions du véhicule."
+    },
+    {
+      "id": "S14",
+      "title": "Propstore — Xenomorph Alien Egg",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/xenomorph-alien-egg/",
+      "type": "objet de production",
+      "limits": "Œuf AVP ; trous de manipulation et vieillissement ne sont pas des détails diégétiques."
+    },
+    {
+      "id": "S15",
+      "title": "Propstore — Hero Animatronic Facehugger lot19",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/lot-19-hero-animatronic-facehugger/",
+      "type": "objet de production",
+      "limits": "Forme, coloration et articulation ; exclure câbles/mécanismes de tournage du rendu."
+    },
+    {
+      "id": "S16",
+      "title": "studioADI — Tests1/3 Scale Puppet Queen",
+      "url": "https://www.youtube.com/watch?v=BC_2vNVpZBQ",
+      "type": "fabricant effets",
+      "limits": "Reine et ovipositeur de la chambre de ponte ; échelle de la maquette explicitée."
+    },
+    {
+      "id": "S17",
+      "title": "studioADI — Building The Mini Queen BTS",
+      "url": "https://www.youtube.com/watch?v=D3jkx-HSxsk",
+      "type": "fabricant effets",
+      "limits": "Construction, variantes et sac de ponte ; le plan final prime sur le test."
+    },
+    {
+      "id": "S18",
+      "title": "Propstore — Predalien chestburster maquette lot835",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/119470/Lot-835-AVP-ALIEN-VS-PREDATOR-2004-Predalien-Chestburster-Maquette",
+      "type": "maquette de conception",
+      "limits": "Patrick Tatopoulos ; ne certifie pas chaque détail du nouveau-né filmé."
+    },
+    {
+      "id": "S19",
+      "title": "Propstore — Seven Antarctic Pyramid Tiles",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/set-of-seven-antarctic-pyramid-tiles/",
+      "type": "décor de production",
+      "limits": "Motifs de dalles attestés ; ne démontre pas plan complet du labyrinthe."
+    },
+    {
+      "id": "S20",
+      "title": "studioADI — Alien Slice And Dice BTS",
+      "url": "https://www.youtube.com/watch?v=vHV1VX8lqJA",
+      "type": "fabricant effets",
+      "limits": "Silhouette Alien, suspension et pose ; pas une preuve du quadrillage de Grid."
+    },
+    {
+      "id": "S21",
+      "title": "studioADI — Brains, Blood & Guts BTS",
+      "url": "https://www.youtube.com/watch?v=UEm3Tj6L_QE",
+      "type": "fabricant effets",
+      "limits": "Effets pratiques et surfaces Alien ; séparer fabrication et chronologie."
+    },
+    {
+      "id": "S22",
+      "title": "Norwegian Polar Institute — Bouvetøya",
+      "url": "https://npolar.no/en/themes/bouvetoya/",
+      "type": "autorité géographique",
+      "limits": "Île volcanique/glaciaire de l’océan Austral, au nord de60°S ; hors Antarctique strict, différence avec le vocabulaire du film."
+    },
+    {
+      "id": "S23",
+      "title": "Smithsonian Global Volcanism Program — Bouvet",
+      "url": "https://volcano.si.edu/volcano.cfm?vn=386020",
+      "type": "autorité géologique",
+      "limits": "Complément terrain réel ; ne certifie aucun décor fictionnel."
+    },
+    {
+      "id": "S24",
+      "title": "AVP Galaxy — From Script to Screen",
+      "url": "https://www.avpgalaxy.net/avp-movies/avp-movie/from-script-to-screen/",
+      "type": "analyse secondaire",
+      "limits": "Variantes de noms, scènes, prologue et roman ; garder montage/source associés à chaque entrée."
+    },
+    {
+      "id": "S25",
+      "title": "AbsoluteAVP — Production Notes",
+      "url": "https://www.absoluteavp.com/sections.php?artid=113&op=viewarticle",
+      "type": "republication de notes de production",
+      "limits": "Noms de décors et principes du labyrinthe ; hébergement secondaire et scènes à retrouver."
+    },
+    {
+      "id": "S26",
+      "title": "IMFDB — Alien vs. Predator",
+      "url": "https://www.imfdb.org/wiki/Alien_vs._Predator",
+      "type": "identification secondaire illustrée",
+      "limits": "Beretta84FS, Desert Eagle MkVII, G36C modifié, SPSh ; calibres/capacités discutés ne deviennent pas automatiquement gameplay canon."
+    },
+    {
+      "id": "S27",
+      "title": "Rotten Tomatoes — Cast and Crew",
+      "url": "https://www.rottentomatoes.com/m/alien_vs_predator/cast-and-crew",
+      "type": "base secondaire",
+      "limits": "Personnages principaux/interprètes ; contrôle au générique encore requis."
+    },
+    {
+      "id": "S28",
+      "title": "MovieMeter — Full Cast",
+      "url": "https://www.moviemeter.com/movies/action/avp-alien-vs-predator/cast",
+      "type": "base secondaire",
+      "limits": "Noms secondaires crédités ; ne prouve ni costume ni position exacte."
+    },
+    {
+      "id": "S29",
+      "title": "AVP Galaxy — Joseph Pepe interview",
+      "url": "https://www.avpgalaxy.net/website/interviews/joseph-pepe/",
+      "type": "témoignage créateur, accès partiel",
+      "limits": "Extrait indexé attribue design des armes AVP ; page403, contenu complet non lu."
+    },
+    {
+      "id": "S30",
+      "title": "AVP Galaxy — Concept Art",
+      "url": "https://www.avpgalaxy.net/avp-movies/avp-movie/gallery/concept-art/",
+      "type": "reproduction de conception",
+      "limits": "Concepts armes/lieux/engins/vaisseau ; inclut des intentions abandonnées."
+    },
+    {
+      "id": "S31",
+      "title": "AVP Galaxy — Storyboards",
+      "url": "https://www.avpgalaxy.net/avp-movies/avp-movie/gallery/storyboards/",
+      "type": "reproduction de préparation",
+      "limits": "Cadrage et trajectoires préparatoires ; pas preuve du montage final ni de sa géométrie."
+    },
+    {
+      "id": "S32",
+      "title": "Propstore — Scar costume display lot23",
+      "url": "https://propstore.com/product/avp-alien-vs-predator-2004/lot-23-scars-ian-whyte-predator-costume-display/",
+      "type": "costume de production",
+      "limits": "Brûlures intentionnelles d’épaule/canon reliées à l’attaque de Weyland ; distinguer dégâts narratifs et vieillissement."
+    },
+    {
+      "id": "S33",
+      "title": "John Lee — Senior model maker, Alien vs Predator",
+      "url": "https://www.johnleemodelmaker.me/avp.aspx",
+      "type": "fabricant primaire",
+      "limits": "Photos satellite, navire miniature15pieds et machineReine1/3 ; plusieurs stades de fabrication, détails finaux à contrôler."
+    },
+    {
+      "id": "S34",
+      "title": "AVP Galaxy — Official Production Stills",
+      "url": "https://www.avpgalaxy.net/avp-movies/avp-movie/gallery/production-stills/",
+      "type": "republication de photos de production",
+      "limits": "Portraits/personnages2004 identifiés ; les légendes restent à recouper pour secondaires."
+    },
+    {
+      "id": "S35",
+      "title": "AVP Central — Predator Spaceships",
+      "url": "https://www.avpcentral.com/predator-spaceships",
+      "type": "compilation fan multi-œuvres",
+      "limits": "Image légendée Mothership from Alien vs.Predator ; texte mélange films2004/2007 et jeu2010. Ne certifie pas provenance du frame/yautja-empire."
+    },
+    {
+      "id": "S36",
+      "title": "Movie-Censorship — AVPR R-Rated/Unrated",
+      "url": "https://www.movie-censorship.com/report.php?ID=996488",
+      "type": "comparaison secondaire de montages",
+      "limits": "Départ du scout ship près deSaturne appartient à AVPR versionUnrated. Sert à exclure une fausse référence2004."
+    }
+  ],
+  "reference_images": [
+    {
+      "id": "johnlee_satellite_maquette",
+      "source_id": "S33",
+      "url": "https://www.johnleemodelmaker.me/images/avp/AVP_0018_S72.JPG",
+      "role": "reference",
+      "caption": "Satellite maquette — stade de conception/fabrication",
+      "film": "AVP2004",
+      "download_status": "not_downloaded_environment_unavailable",
+      "sha256": null
+    },
+    {
+      "id": "johnlee_piper_maru",
+      "source_id": "S33",
+      "url": "https://www.johnleemodelmaker.me/images/avp/AVP_009D_S72.JPG",
+      "role": "reference",
+      "caption": "Miniature15pieds du brise-glace",
+      "film": "AVP2004",
+      "download_status": "not_downloaded_environment_unavailable",
+      "sha256": null
+    },
+    {
+      "id": "johnlee_piper_maru_on_set",
+      "source_id": "S33",
+      "url": "https://www.johnleemodelmaker.me/images/avp/SHI_0024_S72.JPG",
+      "role": "reference",
+      "caption": "Finition de la miniature sur plateau",
+      "film": "AVP2004",
+      "download_status": "not_downloaded_environment_unavailable",
+      "sha256": null
+    },
+    {
+      "id": "johnlee_queen_hoist",
+      "source_id": "S33",
+      "url": "https://www.johnleemodelmaker.me/images/avp/P1010017_S72.JPG",
+      "role": "reference",
+      "caption": "Reine1/3 hissée hors du bac",
+      "film": "AVP2004",
+      "download_status": "not_downloaded_environment_unavailable",
+      "sha256": null
+    },
+    {
+      "id": "johnlee_queen_machine_side",
+      "source_id": "S33",
+      "url": "https://www.johnleemodelmaker.me/images/avp/P1010084_S72.JPG",
+      "role": "reference",
+      "caption": "Élévation latérale de la machineReine",
+      "film": "AVP2004",
+      "download_status": "not_downloaded_environment_unavailable",
+      "sha256": null
+    },
+    {
+      "id": "unconfirmed_mothership_frame",
+      "source_id": "S35",
+      "url": "https://www.avpcentral.com/images/yautja-empire/predator-mothership.webp",
+      "role": "provisional_reference",
+      "caption": "Vaisseau en orbite ; frame2004/2007 non confirmé",
+      "film": "unknown",
+      "download_status": "parent_observed_not_reverified_by_research_agent",
+      "sha256": null
+    }
+  ],
+  "items": [
+    {
+      "id": "char_lex",
+      "category": "personnages",
+      "name": "Alexa «Lex» Woods — Sanaa Lathan",
+      "role": "Guide/protagoniste",
+      "visual_brief": "Portrait, coiffure et proportions à relever sur plans identifiés ; tenue rouge/noire, harnais et équipement de glace à différencier selon séquence.",
+      "required_states": [
+        "Népal",
+        "expédition",
+        "alliance",
+        "marque",
+        "finale"
+      ],
+      "placement_rule": "Aucun trophée Alien ni marque faciale avant acquisition.",
+      "source_ids": [
+        "S01",
+        "S03",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_sebastian",
+      "category": "personnages",
+      "name": "Sebastian de Rosa — Raoul Bova",
+      "role": "Archéologue",
+      "visual_brief": "Visage distinct de Miller ; costumes de recrutement et d’exploration, sac et salissures à relever.",
+      "required_states": [
+        "Recrutement",
+        "exploration",
+        "séparation",
+        "cocon"
+      ],
+      "placement_rule": "Une présence unique liée à progression ; ne persiste pas après son dénouement.",
+      "source_ids": [
+        "S27",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_weyland",
+      "category": "personnages",
+      "name": "Charles Bishop Weyland — Lance Henriksen",
+      "role": "Commanditaire humain",
+      "visual_brief": "Ressemblance et tenue polaire à établir ; distinguer cet humain de Bishop androïde et Peter Weyland.",
+      "required_states": [
+        "Briefing",
+        "descente",
+        "respiration difficile",
+        "confrontation"
+      ],
+      "placement_rule": "Outil de confrontation suit le propriétaire et sa scène.",
+      "source_ids": [
+        "S01",
+        "S27",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_miller",
+      "category": "personnages",
+      "name": "Graeme Miller — Ewen Bremner",
+      "role": "Scientifique",
+      "visual_brief": "Portrait, coiffure, éventuelles lunettes et équipement à capturer ; pas de clone de Sebastian ni mercenaire générique.",
+      "required_states": [
+        "Hélicoptère",
+        "exploration",
+        "séparation",
+        "ruche"
+      ],
+      "placement_rule": "Tout emprunt d’arme doit correspondre à un transfert documenté.",
+      "source_ids": [
+        "S27",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_stafford",
+      "category": "personnages",
+      "name": "Maxwell Stafford — Colin Salmon",
+      "role": "Sécurité/assistant de Weyland",
+      "visual_brief": "Veste grise rembourrée réfléchissante, W jaune, col roulé cramoisi documentés ; visage et position des accessoires à contrôler.",
+      "required_states": [
+        "Voyage",
+        "équipé",
+        "combat",
+        "filet"
+      ],
+      "placement_rule": "Ne pas employer le nom Sheppherd d’un brouillon.",
+      "source_ids": [
+        "S12",
+        "S27"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_verheiden",
+      "category": "personnages",
+      "name": "Mark Verheiden — Tommy Flanagan",
+      "role": "Sécurité",
+      "visual_brief": "Visage, tenue et holster spécifiques à relever ; ne pas importer un autre rôle de l’acteur.",
+      "required_states": [
+        "Préparation",
+        "exploration",
+        "séparation",
+        "ruche"
+      ],
+      "placement_rule": "Suivre arme portée/perdue et relation spatiale avec Miller.",
+      "source_ids": [
+        "S26",
+        "S27"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_connors",
+      "category": "personnages",
+      "name": "Joe Connors — Joseph Rye",
+      "role": "Sécurité",
+      "visual_brief": "Portrait, cheveux, couches thermiques et arme à identifier dans les plans de groupe.",
+      "required_states": [
+        "Équipé",
+        "exploration",
+        "confrontation"
+      ],
+      "placement_rule": "Groupe/position de progression confirmés avant placement.",
+      "source_ids": [
+        "S27"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_rousseau",
+      "category": "personnages",
+      "name": "Adèle Rousseau — Agathe de La Boulaye",
+      "role": "Sécurité",
+      "visual_brief": "Portrait propre et holster ; pistolet nickel de petit format distinct du Desert Eagle.",
+      "required_states": [
+        "Préparation",
+        "chambre",
+        "attaque"
+      ],
+      "placement_rule": "Arme associée à la bonne personne et au bon état.",
+      "source_ids": [
+        "S26",
+        "S28",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_quinn",
+      "category": "personnages",
+      "name": "Rusten Quinn — Carsten Nørgaard",
+      "role": "Expédition",
+      "visual_brief": "Rusten/Rustin à verrouiller au générique ; barbe/coiffure, bonnet et manteau à relever sans invention.",
+      "required_states": [
+        "Surface",
+        "attaque",
+        "chute/descente"
+      ],
+      "placement_rule": "Ne pas importer de relation romantique provenant du roman.",
+      "source_ids": [
+        "S27",
+        "S24",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_thomas",
+      "category": "personnages",
+      "name": "Thomas Parks — Sam Troughton",
+      "role": "Scientifique",
+      "visual_brief": "Parks/Parkes à vérifier au générique ; portrait et instruments spécifiques à capturer.",
+      "required_states": [
+        "Briefing",
+        "exploration",
+        "chambre"
+      ],
+      "placement_rule": "Identifier son plan et son état sans trajectoire autonome inventée.",
+      "source_ids": [
+        "S27",
+        "S28",
+        "S34"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_stone",
+      "category": "personnages",
+      "name": "Stone — Petr Jákl",
+      "role": "Expédition nommée",
+      "visual_brief": "Nom crédité ; portrait et costume non confirmés dans cette recherche. Capture identifiée requise.",
+      "required_states": [
+        "À identifier",
+        "état final à confirmer"
+      ],
+      "placement_rule": "Aucun lieu de spawn canon inventé.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_bass",
+      "category": "personnages",
+      "name": "Bass — Pavel Bezděk",
+      "role": "Expédition nommée",
+      "visual_brief": "Identifier silhouette, visage et armement sur plans d’action.",
+      "required_states": [
+        "Équipé",
+        "confrontation"
+      ],
+      "placement_rule": "Brouillon ne vaut pas déroulé final.",
+      "source_ids": [
+        "S28",
+        "S26"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_klaus",
+      "category": "personnages",
+      "name": "Klaus — Kieran Bew",
+      "role": "Expédition nommée",
+      "visual_brief": "Vue de visage et vue entière identifiées requises avant modèle.",
+      "required_states": [
+        "À identifier",
+        "fin à confirmer"
+      ],
+      "placement_rule": "Localisation inconnue tant que plan non associé.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_mikkel",
+      "category": "personnages",
+      "name": "Mikkel — Carsten Voigt",
+      "role": "Expédition nommée",
+      "visual_brief": "Portrait/costume à associer au crédit ; pas de teinte ou couvre-chef imaginé.",
+      "required_states": [
+        "À identifier",
+        "fin à confirmer"
+      ],
+      "placement_rule": "Ne pas attribuer arbitrairement un figurant.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_boris",
+      "category": "personnages",
+      "name": "Boris — Jan Pavel Filipenský",
+      "role": "Expédition nommée",
+      "visual_brief": "Silhouette, bonnet et harnais à relever après identification.",
+      "required_states": [
+        "À identifier",
+        "fin à confirmer"
+      ],
+      "placement_rule": "Position de groupe à documenter.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_sven",
+      "category": "personnages",
+      "name": "Sven — Adrian Bouchet",
+      "role": "Expédition nommée",
+      "visual_brief": "Portrait et matériel individualisés à documenter ; pas d’armure de Marine colonial.",
+      "required_states": [
+        "À identifier",
+        "fin à confirmer"
+      ],
+      "placement_rule": "Ni marchand ni instructeur ajoutés sans source.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_juan",
+      "category": "personnages",
+      "name": "Juan Ramirez — Andy Lucas",
+      "role": "Recrutement de Sebastian",
+      "visual_brief": "Tenue/environnement à identifier dans la séquence mexicaine ; ne pas le convertir en explorateur polaire.",
+      "required_states": [
+        "Recrutement"
+      ],
+      "placement_rule": "Ellipse de voyage ; pas de présence dans la pyramide postulée.",
+      "source_ids": [
+        "S28",
+        "S24"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_supervisor",
+      "category": "personnages",
+      "name": "Superviseuse — Liz May Brice",
+      "role": "Surveillance",
+      "visual_brief": "Portrait, poste d’écran et tenue de bureau à identifier.",
+      "required_states": [
+        "Poste de supervision"
+      ],
+      "placement_rule": "Scène distante, pas de PNJ souterrain.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_technician",
+      "category": "personnages",
+      "name": "Technicien — Glenn Conroy",
+      "role": "Surveillance",
+      "visual_brief": "Tenue, équipement du poste et éclairage à capturer ; pas de nom propre ajouté.",
+      "required_states": [
+        "Poste de surveillance"
+      ],
+      "placement_rule": "Lieu distant relié narrativement.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_karl",
+      "category": "personnages",
+      "name": "Karl — Eoin McCarthy",
+      "role": "Baleinier du prologue1904",
+      "visual_brief": "Costume de travail historique et barbe à relever sur version étendue.",
+      "required_states": [
+        "Prologue1904"
+      ],
+      "placement_rule": "Variante de montage, pas contemporain2004.",
+      "source_ids": [
+        "S28",
+        "S24"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_sacrifice",
+      "category": "personnages",
+      "name": "Femme du sacrifice — Karima Adebibe",
+      "role": "Flashback historique",
+      "visual_brief": "Costume cérémoniel et pose à relever ; aucune tenue moderne.",
+      "required_states": [
+        "Rituel"
+      ],
+      "placement_rule": "Couche temporelle séparée.",
+      "source_ids": [
+        "S28"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_expedition_extras",
+      "category": "personnages",
+      "name": "Équipage et personnel anonyme",
+      "role": "Plans de groupe",
+      "visual_brief": "Compter silhouettes réelles, variantes de costumes et badges ; ne pas dupliquer tous les visages.",
+      "required_states": [
+        "Marin",
+        "technicien",
+        "expédition",
+        "victime"
+      ],
+      "placement_rule": "Inconnu reste anonyme ; quantité à relever.",
+      "source_ids": [
+        "S01",
+        "S03"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_historical_extras",
+      "category": "personnages",
+      "name": "Prêtres et population historique",
+      "role": "Flashback",
+      "visual_brief": "Silhouettes et costumes du plan ; aucun peuple/lieu précis ajouté par conjecture.",
+      "required_states": [
+        "Rituel",
+        "fuite",
+        "foule"
+      ],
+      "placement_rule": "Séquence historique indépendante.",
+      "source_ids": [
+        "S02",
+        "S31"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_scar",
+      "category": "personnages",
+      "name": "Scar",
+      "role": "Allié Predator",
+      "visual_brief": "Corps puissant, filet, armure acier usée, dreadlocks et masque argenté distinct ; visage/épines/marque selon film, pas état détérioré d’un costume conservé.",
+      "required_states": [
+        "Masqué",
+        "démasqué",
+        "marqué",
+        "brûlé",
+        "canon récupéré",
+        "blessé",
+        "corps"
+      ],
+      "placement_rule": "Canon seulement après restitution ; masque et visage sont états du même acteur.",
+      "source_ids": [
+        "S04",
+        "S05",
+        "S32"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_celtic",
+      "category": "personnages",
+      "name": "Celtic",
+      "role": "Chasseur affrontant Grid",
+      "visual_brief": "Masque/plastron propres ; variantes rayures et lames rongées par acide. Display de vente ne prouve pas équipement de chaque scène.",
+      "required_states": [
+        "Intact",
+        "combat",
+        "rayé",
+        "fin"
+      ],
+      "placement_rule": "Ne pas lui ajouter un canon parce qu’un mannequin en porte un.",
+      "source_ids": [
+        "S06",
+        "S07"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_chopper",
+      "category": "personnages",
+      "name": "Chopper / Gill",
+      "role": "Troisième chasseur",
+      "visual_brief": "Masque à branchies, longues lames d’avant-bras, deux trophées dorsaux ; géométrie à recouper contre film.",
+      "required_states": [
+        "Masqué",
+        "camouflé",
+        "lames déployées",
+        "blessé"
+      ],
+      "placement_rule": "Silhouette distincte de dos et de face.",
+      "source_ids": [
+        "S08",
+        "S03"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_elder",
+      "category": "personnages",
+      "name": "Ancien / Elder",
+      "role": "Autorité finale",
+      "visual_brief": "Costume et ornements de finale ; masque cérémoniel doré documenté, porté ou tenu à contrôler.",
+      "required_states": [
+        "Apparition",
+        "inspection",
+        "remise lance"
+      ],
+      "placement_rule": "Ne pas substituer Greyback/Predator2 ni son pistolet.",
+      "source_ids": [
+        "S09",
+        "S11"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_clan",
+      "category": "personnages",
+      "name": "Chasseurs du clan final",
+      "role": "Récupération de Scar",
+      "visual_brief": "Inventorier chaque masque visible et porteurs ; noms commerciaux non automatiquement canoniques.",
+      "required_states": [
+        "Camouflé",
+        "apparition",
+        "transport"
+      ],
+      "placement_rule": "Liés au vaisseau et à la finale, sans renfort anticipé.",
+      "source_ids": [
+        "S09",
+        "S03"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "char_historic_predators",
+      "category": "personnages",
+      "name": "Chasseurs historiques",
+      "role": "Flashback",
+      "visual_brief": "Variantes d’armure à relever dans les plans ; ne pas recycler aveuglément les trois jeunes2004.",
+      "required_states": [
+        "Rituel",
+        "bataille",
+        "autodestruction"
+      ],
+      "placement_rule": "Couche temporelle distincte.",
+      "source_ids": [
+        "S02",
+        "S31"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_warrior",
+      "category": "personnages",
+      "name": "Xénomorphe adulte AVP2004",
+      "role": "Menace",
+      "visual_brief": "Dôme, mâchoires, torse, tubes, membres et queue sur costume/CG2004 ; silhouettes AVPR/Covenant exclues.",
+      "required_states": [
+        "Marche",
+        "course",
+        "rampant",
+        "plafond",
+        "attaque",
+        "blessé",
+        "mort"
+      ],
+      "placement_rule": "Collision et portée suivent le modèle et ses poses.",
+      "source_ids": [
+        "S02",
+        "S20",
+        "S21"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_grid",
+      "category": "personnages",
+      "name": "Grid",
+      "role": "Adulte marqué par filet",
+      "visual_brief": "Même baseAVP puis cicatrices de compression en quadrillage, à cartographier d’après plans ; aucun damier décoratif générique.",
+      "required_states": [
+        "Avant filet",
+        "comprimé",
+        "cicatrices",
+        "combat"
+      ],
+      "placement_rule": "Quadrillage après événement, jamais tous adultes.",
+      "source_ids": [
+        "S06",
+        "S20"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_queen",
+      "category": "personnages",
+      "name": "Reine AVP2004",
+      "role": "Ponte et finale",
+      "visual_brief": "Couronne, mâchoire, deux paires de bras, queue, entraves ; rapprocher marionnette de ponte et extensionCG.",
+      "required_states": [
+        "Cryostase",
+        "attachée+ovipositeur",
+        "libérée",
+        "poursuite",
+        "finale"
+      ],
+      "placement_rule": "Sac de ponte reste en salle après rupture ; volume de sortie dimensionné.",
+      "source_ids": [
+        "S02",
+        "S16",
+        "S17"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_facehugger",
+      "category": "personnages",
+      "name": "Facehugger AVP2004",
+      "role": "Parasite",
+      "visual_brief": "Corps, huit membres, sacs et queue ; surfaces organiques, jamais câbles de puppeteering.",
+      "required_states": [
+        "Œuf",
+        "saut",
+        "course",
+        "fixation",
+        "dépouille"
+      ],
+      "placement_rule": "Points de contact œuf/visage/sol et volume contrôlés.",
+      "source_ids": [
+        "S15"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_chestburster",
+      "category": "personnages",
+      "name": "Chestburster AVP2004",
+      "role": "Éclosion",
+      "visual_brief": "Étudier stade filmé et proportions ; distinguer naissance, locomotion et adulte.",
+      "required_states": [
+        "Naissance",
+        "déplacement",
+        "inactif"
+      ],
+      "placement_rule": "Transition temporelle explicite vers autres stades.",
+      "source_ids": [
+        "S21",
+        "S03"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "creature_predalien",
+      "category": "personnages",
+      "name": "Predalien nouveau-né",
+      "role": "Épilogue",
+      "visual_brief": "Hybride naissant seulement ; maquette sert de piste de conception, plan final prime.",
+      "required_states": [
+        "Naissance"
+      ],
+      "placement_rule": "Aucun Predalien adulteAVPR dans campagne2004.",
+      "source_ids": [
+        "S18",
+        "S21"
+      ],
+      "evidence_confidence": "voir type et limites de chaque source ; contrôle du plan requis",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_earth_orbit",
+      "category": "lieux",
+      "name": "Orbite terrestre et satellite",
+      "role": "Introduction",
+      "visual_brief": "Courbure terrestre, satellite, phase jour/nuit d’après plan ; pas de planète fictive ajoutée.",
+      "required_states": [
+        "Orbite",
+        "détection"
+      ],
+      "placement_rule": "Transition cinématique, jamais porte vers sous-sol.",
+      "source_ids": [
+        "S01",
+        "S24",
+        "S33"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_monitoring",
+      "category": "lieux",
+      "name": "Centre de surveillance Weyland",
+      "role": "Détection",
+      "visual_brief": "Postes, écrans, signal thermique et géométrie à relever.",
+      "required_states": [
+        "Surveillance",
+        "alerte"
+      ],
+      "placement_rule": "Lieu distant relié narrativement.",
+      "source_ids": [
+        "S28",
+        "S24"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_nepal",
+      "category": "lieux",
+      "name": "Cascade de glace du Népal",
+      "role": "Recrutement Lex",
+      "visual_brief": "Paroi, corniche et aire d’arrivée à capturer ; glace distincte du site2004.",
+      "required_states": [
+        "Escalade",
+        "sommet",
+        "départ"
+      ],
+      "placement_rule": "Ellipse de transport, aucun trajet pédestre vers Bouvetøya.",
+      "source_ids": [
+        "S24"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_teotihuacan",
+      "category": "lieux",
+      "name": "Teotihuacan, Mexique",
+      "role": "Recrutement Sebastian",
+      "visual_brief": "Fouille et décor chaud terrestres ; pas copie de temple extraterrestre.",
+      "required_states": [
+        "Fouille",
+        "recrutement"
+      ],
+      "placement_rule": "Ellipse vers expédition.",
+      "source_ids": [
+        "S24",
+        "S28"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ocean",
+      "category": "lieux",
+      "name": "Océan et route maritime",
+      "role": "Voyage",
+      "visual_brief": "Mer, glace, brume et silhouettes de coque à associer aux plans.",
+      "required_states": [
+        "Navigation",
+        "arrivée"
+      ],
+      "placement_rule": "Distance par voyage explicite.",
+      "source_ids": [
+        "S02",
+        "S24"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ship_deck",
+      "category": "lieux",
+      "name": "Piper Maru — pont",
+      "role": "Accueil",
+      "visual_brief": "Superstructures, rails, passerelles et zone d’hélicoptère à mesurer.",
+      "required_states": [
+        "Arrivée",
+        "préparation"
+      ],
+      "placement_rule": "Portes dans cloisons ; accès continus.",
+      "source_ids": [
+        "S24",
+        "S33"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ship_briefing",
+      "category": "lieux",
+      "name": "Piper Maru — briefing",
+      "role": "Présentation mission",
+      "visual_brief": "Tables, sièges, projection et accès à relever.",
+      "required_states": [
+        "Briefing",
+        "préparation"
+      ],
+      "placement_rule": "Objets ancrés au mobilier, portes périphériques.",
+      "source_ids": [
+        "S24"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ship_interiors",
+      "category": "lieux",
+      "name": "Piper Maru — cabines/coursives visibles",
+      "role": "Vie à bord",
+      "visual_brief": "Recenser intérieurs du montage choisi ; cabines du brouillon non automatiquement canoniques.",
+      "required_states": [
+        "Repos",
+        "préparation selon montage"
+      ],
+      "placement_rule": "Cabine extrapolée porte statut adaptation.",
+      "source_ids": [
+        "S24"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_bouvet_arrival",
+      "category": "lieux",
+      "name": "Bouvetøya — route de convoi",
+      "role": "Approche",
+      "visual_brief": "Neige, traces de chenilles et relief raccordés aux vues de station.",
+      "required_states": [
+        "Convoi",
+        "site",
+        "retour"
+      ],
+      "placement_rule": "Route continue adaptée au véhicule.",
+      "source_ids": [
+        "S13",
+        "S22"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_station_wide",
+      "category": "lieux",
+      "name": "Station baleinière — plan-masse",
+      "role": "Surface",
+      "visual_brief": "Bâtiments, cheminées, passerelles et axes reconstruits sur plusieurs plans.",
+      "required_states": [
+        "Avant attaque",
+        "attaque",
+        "destruction"
+      ],
+      "placement_rule": "Façades définies, pas porte isolée en terrain ouvert.",
+      "source_ids": [
+        "S25",
+        "S30",
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_station_huts",
+      "category": "lieux",
+      "name": "Station — cabanes explorées",
+      "role": "Exploration",
+      "visual_brief": "Bois/métal vieillis, fenêtres et mobilier à identifier.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "endommagé"
+      ],
+      "placement_rule": "Même mur pour entrée et sortie ; seuil compatible.",
+      "source_ids": [
+        "S25",
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_station_mess",
+      "category": "lieux",
+      "name": "Station — réfectoire/repas",
+      "role": "Vestiges",
+      "visual_brief": "Tables, bancs, vaisselle et gel selon preuve ; appellation exacte à vérifier.",
+      "required_states": [
+        "Abandonné",
+        "exploré"
+      ],
+      "placement_rule": "Meubles laissent passages ; fenêtres raccordées à façade.",
+      "source_ids": [
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_station_works",
+      "category": "lieux",
+      "name": "Station — installations industrielles",
+      "role": "Repères",
+      "visual_brief": "Treuils, structures et conduites visibles, additions marquées.",
+      "required_states": [
+        "Intact",
+        "dégât",
+        "effondré"
+      ],
+      "placement_rule": "Supports au sol ; pas de masse technique dans porte.",
+      "source_ids": [
+        "S30",
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_surface_camp",
+      "category": "lieux",
+      "name": "Camp de surface Weyland",
+      "role": "Descente",
+      "visual_brief": "Snowcats, caisses, éclairage et dispositif de rappel autour du tunnel.",
+      "required_states": [
+        "Installation",
+        "abandonné",
+        "retour"
+      ],
+      "placement_rule": "Axes et volumes de véhicules cohérents.",
+      "source_ids": [
+        "S13"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_tunnel_mouth",
+      "category": "lieux",
+      "name": "Bouche du tunnel",
+      "role": "Transition verticale",
+      "visual_brief": "Bord de glace continu et appareils ancrés.",
+      "required_states": [
+        "Arrivée",
+        "descente",
+        "sortie"
+      ],
+      "placement_rule": "Ouverture verticale/inclinée, pas porte plane isolée.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ice_tunnel",
+      "category": "lieux",
+      "name": "Tunnel dans la glace",
+      "role": "Descente/remontée",
+      "visual_brief": "Paroi, section, pente et câble continu selon plans.",
+      "required_states": [
+        "Descente",
+        "remontée",
+        "explosion"
+      ],
+      "placement_rule": "Axe haut/bas unique et cohérent.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ice_grotto",
+      "category": "lieux",
+      "name": "Grotte de glace",
+      "role": "Découverte pyramide",
+      "visual_brief": "Grand volume, silhouette pyramidale et sortie du tunnel à mesurer.",
+      "required_states": [
+        "Découverte",
+        "approche"
+      ],
+      "placement_rule": "Tunnel débouche dans caverne ; pyramide posée au sol.",
+      "source_ids": [
+        "S25",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_pyramid_steps",
+      "category": "lieux",
+      "name": "Approche et escalier de pyramide",
+      "role": "Entrée",
+      "visual_brief": "Marches, statues, pente et seuil à relever.",
+      "required_states": [
+        "Approche",
+        "entrée",
+        "sortie"
+      ],
+      "placement_rule": "Marches continues et porte dans façade.",
+      "source_ids": [
+        "S25",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_pyramid_entry",
+      "category": "lieux",
+      "name": "Vestibule et premiers corridors",
+      "role": "Labyrinthe",
+      "visual_brief": "Dalles, reliefs et orientation des murs.",
+      "required_states": [
+        "Exploration",
+        "reconfiguration"
+      ],
+      "placement_rule": "Raccords mur/sol/plafond sans sortie vide.",
+      "source_ids": [
+        "S19",
+        "S25"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_sacrifice",
+      "category": "lieux",
+      "name": "Chambre sacrificielle",
+      "role": "Piège",
+      "visual_brief": "Dalles, restes, trappes d’œufs et fermetures ; implantation mesurée.",
+      "required_states": [
+        "Avant",
+        "verrouillée",
+        "attaque",
+        "après"
+      ],
+      "placement_rule": "Œufs arrivent par mécanismes ; portes en parois.",
+      "source_ids": [
+        "S14",
+        "S15",
+        "S25"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_sarcophagus",
+      "category": "lieux",
+      "name": "Chambre du sarcophage/armes",
+      "role": "Déclenchement",
+      "visual_brief": "Coffre central, trois logements et hiéroglyphes.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "vide"
+      ],
+      "placement_rule": "Coffre interactif, pas sortie de salle.",
+      "source_ids": [
+        "S10",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_hieroglyphs",
+      "category": "lieux",
+      "name": "Chambre des hiéroglyphes",
+      "role": "Révélation",
+      "visual_brief": "Panneaux, murs et lumière de lecture ; aucun glyphage aléatoire qualifié de traduction exacte.",
+      "required_states": [
+        "Lecture",
+        "révélation"
+      ],
+      "placement_rule": "Mur plein sauf ouverture démontrée.",
+      "source_ids": [
+        "S19",
+        "S25"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_gods",
+      "category": "lieux",
+      "name": "Chambre des Dieux/statues",
+      "role": "Repère cultuel",
+      "visual_brief": "Statues, socles, symétrie et passage à relever.",
+      "required_states": [
+        "Exploration",
+        "menace"
+      ],
+      "placement_rule": "Statue ne devient ennemi que par événement établi.",
+      "source_ids": [
+        "S25",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_fight",
+      "category": "lieux",
+      "name": "Salle Celtic/Grid",
+      "role": "Combat",
+      "visual_brief": "Surfaces d’accrochage, limites de lutte et obstacles.",
+      "required_states": [
+        "Intact",
+        "filet",
+        "dégâts acides"
+      ],
+      "placement_rule": "Filet et impacts rattachés à ce volume.",
+      "source_ids": [
+        "S06",
+        "S25"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_moving_maze",
+      "category": "lieux",
+      "name": "Labyrinthe mobile",
+      "role": "Séparation",
+      "visual_brief": "Pièces géométriques rigides avec directions de déplacement.",
+      "required_states": [
+        "Phase initiale",
+        "fermeture",
+        "ouverture"
+      ],
+      "placement_rule": "Graphe valide par phase ; pas téléportation d’obstacle sur joueur.",
+      "source_ids": [
+        "S25",
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_chasm",
+      "category": "lieux",
+      "name": "Gouffre et paliers",
+      "role": "Verticalité",
+      "visual_brief": "Bords, traversées et supports selon scènes.",
+      "required_states": [
+        "Traversée",
+        "obstacle",
+        "effondrement"
+      ],
+      "placement_rule": "Niveaux et chutes vers volumes plausibles.",
+      "source_ids": [
+        "S30",
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_hive",
+      "category": "lieux",
+      "name": "Ruche et captifs",
+      "role": "Sauvetage",
+      "visual_brief": "Résine sur architecture, cocons et œufs conservant accès lisibles.",
+      "required_states": [
+        "Captif",
+        "éclosion",
+        "fuite"
+      ],
+      "placement_rule": "Corps attachés à surfaces, pas suspension arbitraire.",
+      "source_ids": [
+        "S14",
+        "S15",
+        "S21"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_queen_chamber",
+      "category": "lieux",
+      "name": "Chambre de la Reine",
+      "role": "Ponte/libération",
+      "visual_brief": "Reine, supports, chaînes, sac et transfert d’œufs reconstruits ensemble.",
+      "required_states": [
+        "Réveil",
+        "ponte",
+        "attaque",
+        "libération"
+      ],
+      "placement_rule": "Sortie adaptée au gabarit ; trajet œufs cohérent.",
+      "source_ids": [
+        "S16",
+        "S17",
+        "S33"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_escape",
+      "category": "lieux",
+      "name": "Parcours d’évasion",
+      "role": "Fuite",
+      "visual_brief": "Réemploi des axes de l’approche avec dégâts et obstacles.",
+      "required_states": [
+        "Poursuite",
+        "bombe",
+        "remontée"
+      ],
+      "placement_rule": "Raccord à la même base du tunnel.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_queen_surface",
+      "category": "lieux",
+      "name": "Surface finale et bord marin",
+      "role": "Dénouement Reine",
+      "visual_brief": "Station détruite, neige, chaîne, réservoir et falaise dans même espace.",
+      "required_states": [
+        "Combat",
+        "piège",
+        "chute"
+      ],
+      "placement_rule": "Chaîne et réservoir ont trajet continu jusqu’au bord.",
+      "source_ids": [
+        "S02",
+        "S13"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ship_finale",
+      "category": "lieux",
+      "name": "Apparition du vaisseau et hommage",
+      "role": "Finale surface",
+      "visual_brief": "Lumière, accès et positions du clan autour de Scar.",
+      "required_states": [
+        "Apparition",
+        "retrait",
+        "départ"
+      ],
+      "placement_rule": "Accès du vaisseau rejoint sol, pas porte flottante.",
+      "source_ids": [
+        "S02",
+        "S09"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_ship_scar",
+      "category": "lieux",
+      "name": "Vaisseau — salle de Scar",
+      "role": "Épilogue",
+      "visual_brief": "Support du corps, parois et ouverture selon dernier plan.",
+      "required_states": [
+        "Corps déposé",
+        "hybride"
+      ],
+      "placement_rule": "Scène isolée sans niveau entier inventé.",
+      "source_ids": [
+        "S18",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "loc_historical_city",
+      "category": "lieux",
+      "name": "Pyramide et cité historiques",
+      "role": "Passé",
+      "visual_brief": "Architecture/population du flashback, pas de ville réelle arbitrairement nommée.",
+      "required_states": [
+        "Rituel",
+        "invasion",
+        "destruction"
+      ],
+      "placement_rule": "Couche temporelle séparée de carte2004.",
+      "source_ids": [
+        "S02",
+        "S30"
+      ],
+      "evidence_confidence": "topologie complète non attestée ; plans du montage à relever",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_g36",
+      "category": "armes",
+      "name": "G36C de l’expédition",
+      "role": "Arme longue",
+      "visual_brief": "Gabarit compact, poignéeG36E, lampe et laser vert selon captures ; sangle et crosse à contrôler.",
+      "required_states": [
+        "Mallette",
+        "porté",
+        "visé",
+        "rechargé",
+        "perdu"
+      ],
+      "placement_rule": "Aux porteurs identifiés ; pas de Pulse Rifle.",
+      "source_ids": [
+        "S26"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_desert_eagle",
+      "category": "armes",
+      "name": "Desert Eagle MkVII",
+      "role": "Arme de poing",
+      "visual_brief": "Finition, holster et accessoires selon propriétaire ; taille dans la main.",
+      "required_states": [
+        "Holster",
+        "saisi",
+        "tir",
+        "vide",
+        "abandonné"
+      ],
+      "placement_rule": "Suivre chaque transfert de possession.",
+      "source_ids": [
+        "S26"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_beretta",
+      "category": "armes",
+      "name": "Beretta84FS nickel de Rousseau",
+      "role": "Arme distincte",
+      "visual_brief": "Petit format et silhouette propres ; aucun remplacement par Desert Eagle.",
+      "required_states": [
+        "Holster",
+        "préparation",
+        "défense"
+      ],
+      "placement_rule": "Assigné à Rousseau et ses états.",
+      "source_ids": [
+        "S26"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_flare_pistol",
+      "category": "armes",
+      "name": "Lance-fusée de Lex",
+      "role": "Éclairage",
+      "visual_brief": "IdentificationSPSh secondaire à confirmer ; pistolet, cartouche et projectile séparés.",
+      "required_states": [
+        "Porté",
+        "armé",
+        "tir",
+        "rechargement"
+      ],
+      "placement_rule": "Lumière émise par projectile situé.",
+      "source_ids": [
+        "S26"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_plasmacaster",
+      "category": "armes",
+      "name": "Canon plasmaAVP",
+      "role": "Arme Predator",
+      "visual_brief": "Support d’épaule articulé, argent/gris, câbles apparents et gravures ; aucune énergie inventée.",
+      "required_states": [
+        "Coffre",
+        "transporté",
+        "monté",
+        "visée",
+        "tir",
+        "dégât"
+      ],
+      "placement_rule": "Pas équipé avant restitution ; pivot au bon point.",
+      "source_ids": [
+        "S10"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_wrist_blades",
+      "category": "armes",
+      "name": "Lames de poignetAVP",
+      "role": "Mêlée",
+      "visual_brief": "Boîtier, lames et course d’extension ; métal/usure cohérents.",
+      "required_states": [
+        "Rétractées",
+        "sortie",
+        "déployées",
+        "attaque",
+        "acide"
+      ],
+      "placement_rule": "Fixes sur avant-bras entre animations.",
+      "source_ids": [
+        "S04",
+        "S06"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_chopper_blades",
+      "category": "armes",
+      "name": "Lames longues de Chopper",
+      "role": "Signature",
+      "visual_brief": "Longueur, nombre et forme des lames contrôlés au film.",
+      "required_states": [
+        "Rétractées",
+        "déployées",
+        "attaque"
+      ],
+      "placement_rule": "Spécifiques à Chopper.",
+      "source_ids": [
+        "S08"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_combistick",
+      "category": "armes",
+      "name": "Combistick chasseurs",
+      "role": "Lance télescopique",
+      "visual_brief": "Extrémités métalliques, segments et motifs ; propor­tions cohérentes court/déployé.",
+      "required_states": [
+        "Fermé",
+        "déployé",
+        "porté",
+        "lancé",
+        "planté"
+      ],
+      "placement_rule": "Mains restent aux bons points lors extension.",
+      "source_ids": [
+        "S11"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_elder_spear",
+      "category": "armes",
+      "name": "Lance remise par l’Ancien",
+      "role": "Récompense",
+      "visual_brief": "Comparer variante finale au combistick ordinaire avant mutualisation.",
+      "required_states": [
+        "Tenue Ancien",
+        "transfert",
+        "tenue Lex"
+      ],
+      "placement_rule": "Finale uniquement ; différente de lance organique.",
+      "source_ids": [
+        "S11",
+        "S09"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_shuriken",
+      "category": "armes",
+      "name": "ShurikenAVP",
+      "role": "Lancer",
+      "visual_brief": "Lames rayonnantes et centre du prop2004 ; nombre/sens à vérifier.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "lancé",
+        "planté"
+      ],
+      "placement_rule": "Pas SmartDisc rond ni Wolf2007 non vérifié.",
+      "source_ids": [
+        "S04",
+        "S29"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_net",
+      "category": "armes",
+      "name": "Filet offensif",
+      "role": "Capture",
+      "visual_brief": "Maillage, ancrages et contraction ; lanceur à repérer sur plan.",
+      "required_states": [
+        "Lancé",
+        "accroché",
+        "contracté",
+        "coupé"
+      ],
+      "placement_rule": "Surface/points d’attache réels.",
+      "source_ids": [
+        "S06"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_dagger",
+      "category": "armes",
+      "name": "Dague cérémonielle",
+      "role": "Découpe",
+      "visual_brief": "Poignée, lame, fourreau de jambe et prise sur référence.",
+      "required_states": [
+        "Fourreau",
+        "dégainée",
+        "découpe",
+        "rangée"
+      ],
+      "placement_rule": "Pas de loot industriel placé au hasard.",
+      "source_ids": [
+        "S04",
+        "S29"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_wrist_bomb",
+      "category": "armes",
+      "name": "Dispositif d’autodestruction",
+      "role": "Destruction",
+      "visual_brief": "Ordinateur détachable, interface et rythme du compte à rebours selon plan.",
+      "required_states": [
+        "Porté",
+        "programmé",
+        "détaché",
+        "posé",
+        "actif"
+      ],
+      "placement_rule": "Explosion et objet partagent origine physique.",
+      "source_ids": [
+        "S04",
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_lex_tail",
+      "category": "armes",
+      "name": "Lance organique en queue Alien",
+      "role": "Arme de Lex",
+      "visual_brief": "Segments, pointe, poignée et attaches à capturer ; surface organique, pas métal Predator.",
+      "required_states": [
+        "Fabrication",
+        "portée",
+        "combat"
+      ],
+      "placement_rule": "Après acquisition ; longueur relative à Lex.",
+      "source_ids": [
+        "S03",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_lex_shield",
+      "category": "armes",
+      "name": "Bouclier en tête Alien",
+      "role": "Protection Lex",
+      "visual_brief": "Coque allongée, extérieur/intérieur et prise réelle à capturer ; pas visage humanoïde inventé.",
+      "required_states": [
+        "Fabrication",
+        "porté",
+        "parade"
+      ],
+      "placement_rule": "Main/avant-bras coïncide avec prise ; cadre entier.",
+      "source_ids": [
+        "S03",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "weapon_improvised_flame",
+      "category": "armes",
+      "name": "Jet de feu improvisé Weyland",
+      "role": "Confrontation",
+      "visual_brief": "Identifier les deux objets du plan avant génération définitive ; pas un M240.",
+      "required_states": [
+        "Porté",
+        "allumage",
+        "flamme",
+        "abandonné"
+      ],
+      "placement_rule": "Dégâts d’épaule Scar apparaissent ensuite.",
+      "source_ids": [
+        "S32"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_biomasks",
+      "category": "props",
+      "name": "Biomasks des trois chasseurs",
+      "role": "Identité/vision",
+      "visual_brief": "Trois modèles distincts, lentilles/tri-laser/attaches et états par propriétaire.",
+      "required_states": [
+        "Porté",
+        "retiré",
+        "endommagé"
+      ],
+      "placement_rule": "Socket tête cohérent ; visage séparé.",
+      "source_ids": [
+        "S05",
+        "S07",
+        "S08"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_wrist_computer",
+      "category": "props",
+      "name": "Ordinateur de poignet",
+      "role": "Commande",
+      "visual_brief": "Boîtier, clapet, glyphes et écran à référencer.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "actif"
+      ],
+      "placement_rule": "Ancrage avant-bras ; interaction locale.",
+      "source_ids": [
+        "S04",
+        "S29"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_armor",
+      "category": "props",
+      "name": "Armures et filets",
+      "role": "Silhouette",
+      "visual_brief": "Plastron, épaules, jambes, pagne, filet et pochettes par personnage.",
+      "required_states": [
+        "Intact",
+        "dégâts",
+        "sans masque"
+      ],
+      "placement_rule": "Pièces ne changent ni côté ni propriétaire.",
+      "source_ids": [
+        "S04",
+        "S06",
+        "S08"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_trophies",
+      "category": "props",
+      "name": "Trophées et colliers",
+      "role": "Signature",
+      "visual_brief": "Crânes/piques et attaches de Chopper selon plans ; pas additions décoratives.",
+      "required_states": [
+        "Portés",
+        "balancement"
+      ],
+      "placement_rule": "Attaches physiques au harnais/dos.",
+      "source_ids": [
+        "S08"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_rope",
+      "category": "props",
+      "name": "Cordes",
+      "role": "Escalade",
+      "visual_brief": "Diamètre/couleur/nœuds et points d’ancrage relevés.",
+      "required_states": [
+        "Lovée",
+        "fixée",
+        "tendue",
+        "récupérée"
+      ],
+      "placement_rule": "Continuité entre ancrage et utilisateur.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_harness",
+      "category": "props",
+      "name": "Harnais et mousquetons",
+      "role": "Descente",
+      "visual_brief": "Sangles, boucles, attaches et variantes individuelles.",
+      "required_states": [
+        "Porté",
+        "attaché",
+        "décroché"
+      ],
+      "placement_rule": "État visible correspond à rappel.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_ice_axes",
+      "category": "props",
+      "name": "Piolets et crampons",
+      "role": "Glace",
+      "visual_brief": "Modèles du Népal et de l’expédition à distinguer.",
+      "required_states": [
+        "Portés",
+        "utilisés",
+        "rangés"
+      ],
+      "placement_rule": "Pas nouvelle arme militaire supposée.",
+      "source_ids": [
+        "S24"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_backpacks",
+      "category": "props",
+      "name": "Sacs d’expédition",
+      "role": "Transport",
+      "visual_brief": "Modèles, volumes et sangles selon porteur ; chargement visible.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "vidé",
+        "abandonné"
+      ],
+      "placement_rule": "Canon transporté occupe un volume et sort du coffre.",
+      "source_ids": [
+        "S03"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_lights",
+      "category": "props",
+      "name": "Lampes/frontales/projecteurs",
+      "role": "Éclairage",
+      "visual_brief": "Objet émetteur, cône et attache ; matériel contemporain2004.",
+      "required_states": [
+        "Éteint",
+        "allumé",
+        "abandonné"
+      ],
+      "placement_rule": "Lumière dynamique correspond à objet physique.",
+      "source_ids": [
+        "S03",
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_radios",
+      "category": "props",
+      "name": "Radios et oreillettes",
+      "role": "Communication",
+      "visual_brief": "Modèles, portage et gestes selon film.",
+      "required_states": [
+        "Portées",
+        "émission",
+        "liaison perdue"
+      ],
+      "placement_rule": "Pas terminal futuriste omniscient.",
+      "source_ids": [
+        "S03"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_survey",
+      "category": "props",
+      "name": "Instruments scientifiques",
+      "role": "Mesure",
+      "visual_brief": "Inventorier les appareils visibles individuellement ; pas kit sci-fi générique.",
+      "required_states": [
+        "Transport",
+        "mesure",
+        "lecture"
+      ],
+      "placement_rule": "Support main/table/sol explicite.",
+      "source_ids": [
+        "S03",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_cases",
+      "category": "props",
+      "name": "Mallettes et caisses",
+      "role": "Transport",
+      "visual_brief": "Ouverture des mallettes d’armes, poignées et marquages.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "vide"
+      ],
+      "placement_rule": "Collision/empreinte et accès dégagés.",
+      "source_ids": [
+        "S26",
+        "S13"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_flare",
+      "category": "props",
+      "name": "Fusées",
+      "role": "Signal",
+      "visual_brief": "Cartouche, projectile, lumière et effet séparés ; couleurs/durée relevées.",
+      "required_states": [
+        "Rangée",
+        "active",
+        "éteinte"
+      ],
+      "placement_rule": "Trajectoire, lumière et ombre raccordées.",
+      "source_ids": [
+        "S26"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_satellite",
+      "category": "props",
+      "name": "Satellite Weyland",
+      "role": "Détection",
+      "visual_brief": "Panneaux, antennes et corps d’après maquetteJohnLee puis plans finaux.",
+      "required_states": [
+        "Orbite",
+        "balayage"
+      ],
+      "placement_rule": "Scène distante ; maquette n’est pas modèle final garanti.",
+      "source_ids": [
+        "S24",
+        "S33"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_briefing_equipment",
+      "category": "props",
+      "name": "Mobilier/écran de briefing",
+      "role": "Exposition",
+      "visual_brief": "Schéma thermique, carte, tables et sièges à documenter.",
+      "required_states": [
+        "Projection",
+        "arrêt"
+      ],
+      "placement_rule": "Interface adaptée séparée du contenu canon.",
+      "source_ids": [
+        "S24"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_sarcophagus",
+      "category": "props",
+      "name": "Sarcophage des canons",
+      "role": "Déclencheur",
+      "visual_brief": "Couvercle, mécanisme et trois logements distincts.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "plein",
+        "vide"
+      ],
+      "placement_rule": "Pas d’arme dupliquée après transfert.",
+      "source_ids": [
+        "S10",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_slabs",
+      "category": "props",
+      "name": "Dalles sacrificielles",
+      "role": "Piège",
+      "visual_brief": "Pierre, sculpture et position des corps ; dimensions relatives.",
+      "required_states": [
+        "Vide",
+        "restes",
+        "hôte"
+      ],
+      "placement_rule": "Passage contourne le mobilier solide.",
+      "source_ids": [
+        "S25"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_eggs",
+      "category": "props",
+      "name": "ŒufsAVP",
+      "role": "Cycle Alien",
+      "visual_brief": "Surface et volets du modèle2004 ; pas œuf Covenant ni trous de marionnettiste.",
+      "required_states": [
+        "Fermé",
+        "ouvert",
+        "vide",
+        "détruit"
+      ],
+      "placement_rule": "Émergence dans trappe ou chaîne de ponte.",
+      "source_ids": [
+        "S14"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_cocoons",
+      "category": "props",
+      "name": "Cocons et résine",
+      "role": "Captivité",
+      "visual_brief": "Couche organique sur architecture, visage dégagé comme dans plans.",
+      "required_states": [
+        "Vide",
+        "captif",
+        "brisé"
+      ],
+      "placement_rule": "Position du captif stable à interaction.",
+      "source_ids": [
+        "S15",
+        "S21"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_queen_restraints",
+      "category": "props",
+      "name": "Entraves et chaînes Reine",
+      "role": "Confinement",
+      "visual_brief": "Maillons, supports et points d’attache ; chaînes restant en salle ou traînées distinguées.",
+      "required_states": [
+        "Fermé",
+        "contraint",
+        "rompu",
+        "traîné"
+      ],
+      "placement_rule": "Conserver les attaches après mouvement.",
+      "source_ids": [
+        "S16",
+        "S17",
+        "S33"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_ovipositor",
+      "category": "props",
+      "name": "Ovipositeur/sac",
+      "role": "Ponte",
+      "visual_brief": "Volumes biologiques et raccords à la Reine ; proportion de la maquette puis du plan.",
+      "required_states": [
+        "Ponte",
+        "rupture",
+        "vestige"
+      ],
+      "placement_rule": "Reste en chambre après séparation.",
+      "source_ids": [
+        "S16",
+        "S17"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_egg_transport",
+      "category": "props",
+      "name": "Transfert mécanique d’œufs",
+      "role": "Piège spatial",
+      "visual_brief": "Plateaux, conduits et trappes à relever.",
+      "required_states": [
+        "Attente",
+        "transport",
+        "montée",
+        "arrivée"
+      ],
+      "placement_rule": "Trajet continu jusqu’à chambre sacrificielle.",
+      "source_ids": [
+        "S14",
+        "S16",
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_tiles",
+      "category": "props",
+      "name": "Dalles/panneaux pyramidaux",
+      "role": "Architecture",
+      "visual_brief": "Motifs attestés et patine de pierre ; ne pas recopier dégâts modernes du prop.",
+      "required_states": [
+        "Intact",
+        "givré",
+        "mobile",
+        "brisé"
+      ],
+      "placement_rule": "Alignement aux murs ; pas traduction de glyphes inventée.",
+      "source_ids": [
+        "S19"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_statues",
+      "category": "props",
+      "name": "Statues Predator",
+      "role": "Repère cultuel",
+      "visual_brief": "Pose, socle et matériau d’après modèle final, concepts étiquetés.",
+      "required_states": [
+        "Statique",
+        "occultée"
+      ],
+      "placement_rule": "Socle au sol, passages non obstrués arbitrairement.",
+      "source_ids": [
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_historical_remains",
+      "category": "props",
+      "name": "Restes anciens",
+      "role": "Indices",
+      "visual_brief": "Humain/Alien/objet rituel séparés, pas assemblage aléatoire.",
+      "required_states": [
+        "En place",
+        "examiné"
+      ],
+      "placement_rule": "Sur dalle/sol ; pas ennemi ajouté.",
+      "source_ids": [
+        "S25"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_whaling_equipment",
+      "category": "props",
+      "name": "Équipement baleinier",
+      "role": "Identité station",
+      "visual_brief": "Treuils, caisses, crochets, câbles, fûts et mobilier selon plan attesté.",
+      "required_states": [
+        "Abandonné",
+        "déplacé",
+        "détruit"
+      ],
+      "placement_rule": "Supports et attaches partagés avec structures.",
+      "source_ids": [
+        "S25",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_water_tank",
+      "category": "props",
+      "name": "Réservoir de la finale",
+      "role": "Dénouement",
+      "visual_brief": "Volume, support, chaîne et masse visuelle à mesurer.",
+      "required_states": [
+        "Fixe",
+        "attaché",
+        "bascule",
+        "chute"
+      ],
+      "placement_rule": "Trajet jusqu’au bord sans traverser murs.",
+      "source_ids": [
+        "S02",
+        "S31"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "prop_ship_bier",
+      "category": "props",
+      "name": "Support du corps de Scar",
+      "role": "Épilogue",
+      "visual_brief": "Table/plateforme, hauteur et lumière d’après dernier plan.",
+      "required_states": [
+        "Vide",
+        "occupé"
+      ],
+      "placement_rule": "Contact corps/support et gabarit entier.",
+      "source_ids": [
+        "S18",
+        "S30"
+      ],
+      "evidence_confidence": "documenté selon sources ; proportions/états exacts à contrôler au film",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "vehicle_snowcat",
+      "category": "véhicules",
+      "name": "Snowcat Weyland/PistenBully",
+      "role": "Transport",
+      "visual_brief": "Chenilles, cabine, plateau, lame, antenne, feux orange ; décals WI-PBOO3-A/AJ-2 de miniature à vérifier au film.",
+      "required_states": [
+        "Convoi",
+        "stationné",
+        "départ"
+      ],
+      "placement_rule": "Collision/rayon de rotation/porte cabine compatibles avec terrain.",
+      "source_ids": [
+        "S13"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "vehicle_helicopter",
+      "category": "véhicules",
+      "name": "Hélicoptère de transport",
+      "role": "Arrivée",
+      "visual_brief": "Silhouette, rotors, train, portes et livrée à relever ; Weyland14/modèle réel à confirmer.",
+      "required_states": [
+        "Vol",
+        "approche",
+        "posé",
+        "embarquement"
+      ],
+      "placement_rule": "Aire de poser et accès cabine cohérents ; SeaKing du roman ne suffit pas.",
+      "source_ids": [
+        "S24",
+        "S30",
+        "S31"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "vehicle_sled",
+      "category": "véhicules",
+      "name": "Traîneau/appareil de remontée",
+      "role": "Évasion",
+      "visual_brief": "Relever assise, attache et câble de l’appareil montré ; pas motoneige ajoutée.",
+      "required_states": [
+        "En bas",
+        "accroché",
+        "remontée",
+        "sortie"
+      ],
+      "placement_rule": "Suit l’axe du tunnel ; capacité visuelle pour deux occupants.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "vehicle_additional_transport",
+      "category": "véhicules",
+      "name": "Autres engins du convoi",
+      "role": "Contrôle périmètre",
+      "visual_brief": "Compter chaque silhouette ; Hagglunds des textes n’est pas une preuve de modèle filmé.",
+      "required_states": [
+        "À confirmer"
+      ],
+      "placement_rule": "Fiche de vérification, pas nouvel engin automatique.",
+      "source_ids": [
+        "S24",
+        "S30"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "ship_piper_maru",
+      "category": "vaisseaux",
+      "name": "Piper Maru",
+      "role": "Brise-glace",
+      "visual_brief": "Coque, proue, pont, hélicoptère et superstructures d’après miniatureJohnLee et plans ; aucune jauge ou longueur fictionnelle inventée.",
+      "required_states": [
+        "Navigation",
+        "base",
+        "arrivée"
+      ],
+      "placement_rule": "Raccorder volumes intérieurs et coque ; portes sur limite du volume.",
+      "source_ids": [
+        "S24",
+        "S30",
+        "S33"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "ship_mothership",
+      "category": "vaisseaux",
+      "name": "Vaisseau PredatorAVP2004",
+      "role": "Chasse/finale",
+      "visual_brief": "Coque, lumière, camouflage et accès du film ; frameyautja-empire non confirmé2004/2007.",
+      "required_states": [
+        "Orbite",
+        "transit",
+        "camouflé",
+        "révélé",
+        "départ"
+      ],
+      "placement_rule": "Aucune extrapolation de planète d’origine ; accès finale au sol.",
+      "source_ids": [
+        "S02",
+        "S30",
+        "S35",
+        "S36"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "ship_pods",
+      "category": "vaisseaux",
+      "name": "Capsules de descente",
+      "role": "Arrivée chasseurs",
+      "visual_brief": "Forme, nombre, impact et ouverture à relever ; concepts distincts des capsules finales.",
+      "required_states": [
+        "Fermées",
+        "descente",
+        "impact",
+        "ouvertes"
+      ],
+      "placement_rule": "Un impact/accès cohérent par capsule visible.",
+      "source_ids": [
+        "S30",
+        "S31",
+        "S33"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_snow",
+      "category": "terrain",
+      "name": "Neige de surface",
+      "role": "Sol",
+      "visual_brief": "Texture mate, accumulation et traces selon scène.",
+      "required_states": [
+        "Intacte",
+        "pas",
+        "chenilles",
+        "débris"
+      ],
+      "placement_rule": "Traces suivent trajectoires ; seuils restent lisibles.",
+      "source_ids": [
+        "S02",
+        "S13"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_glacier",
+      "category": "terrain",
+      "name": "Glace/glaciers",
+      "role": "Relief",
+      "visual_brief": "Strates, arêtes et corniches d’après plans ; contexte réel en complément.",
+      "required_states": [
+        "Sèche",
+        "givrée",
+        "fracturée"
+      ],
+      "placement_rule": "Épaisseur et limites cohérentes.",
+      "source_ids": [
+        "S22",
+        "S23"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_rock",
+      "category": "terrain",
+      "name": "Roche volcanique",
+      "role": "Substrat",
+      "visual_brief": "Roche sombre plausible réelle, affleurements à confirmer au film ; pas lave ajoutée.",
+      "required_states": [
+        "Affleurante",
+        "enneigée"
+      ],
+      "placement_rule": "Transitions roche/neige continues.",
+      "source_ids": [
+        "S22",
+        "S23"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_cliff",
+      "category": "terrain",
+      "name": "Falaise côtière",
+      "role": "Danger",
+      "visual_brief": "Profil, corniche et niveau marin à mesurer.",
+      "required_states": [
+        "Intacte",
+        "fracturée",
+        "chute"
+      ],
+      "placement_rule": "Chute vers volume inférieur/mer établi.",
+      "source_ids": [
+        "S02",
+        "S22"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_sea",
+      "category": "terrain",
+      "name": "Mer et glace flottante",
+      "role": "Voyage",
+      "visual_brief": "État d’eau, banquise et vagues à proportion du navire.",
+      "required_states": [
+        "Surface",
+        "sillage",
+        "immersion"
+      ],
+      "placement_rule": "Un niveau marin par site.",
+      "source_ids": [
+        "S02",
+        "S24"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_tunnel_ice",
+      "category": "terrain",
+      "name": "Glace du tunnel",
+      "role": "Transition",
+      "visual_brief": "Section/pente/forage et éclairage selon plans.",
+      "required_states": [
+        "Intacte",
+        "endommagée",
+        "éclairée"
+      ],
+      "placement_rule": "Continuité entre bouche et grotte.",
+      "source_ids": [
+        "S31"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_cavern_ice",
+      "category": "terrain",
+      "name": "Glace de la grotte",
+      "role": "Cadre pyramide",
+      "visual_brief": "Grand volume et contraste laissant pyramide identifiable.",
+      "required_states": [
+        "Découverte",
+        "éclairée"
+      ],
+      "placement_rule": "Contacts au sol et voûte cohérents.",
+      "source_ids": [
+        "S25",
+        "S30"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_stone",
+      "category": "terrain",
+      "name": "Pierre architecturale",
+      "role": "Temple",
+      "visual_brief": "Blocs, joints et reliefs à échelle ; motifs spécifiques conservés.",
+      "required_states": [
+        "Fixe",
+        "mobile",
+        "cassée"
+      ],
+      "placement_rule": "Collision suit blocs ; joint n’est pas automatiquement porte.",
+      "source_ids": [
+        "S19"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_resin",
+      "category": "terrain",
+      "name": "Résine de ruche",
+      "role": "Occupation",
+      "visual_brief": "Surfaces organiques sur architecture reconnaissable.",
+      "required_states": [
+        "Fine",
+        "épaisse",
+        "cocon",
+        "arrachée"
+      ],
+      "placement_rule": "Support réel pour chaque couche.",
+      "source_ids": [
+        "S21"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_rubble",
+      "category": "terrain",
+      "name": "Gravats",
+      "role": "Effondrement",
+      "visual_brief": "Débris du matériau du lieu : bois/métal/pierre/glace.",
+      "required_states": [
+        "Fissure",
+        "chute",
+        "amas"
+      ],
+      "placement_rule": "Collision et parcours mis à jour après chute.",
+      "source_ids": [
+        "S02"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_atmosphere",
+      "category": "terrain",
+      "name": "Brume, buée, neige soufflée",
+      "role": "Ambiance",
+      "visual_brief": "Vent/densité/lumière par scène ; ne pas masquer systématiquement silhouettes.",
+      "required_states": [
+        "Calme",
+        "tempête",
+        "intérieur"
+      ],
+      "placement_rule": "Effets par volume, pas traversée de mur fermé.",
+      "source_ids": [
+        "S02",
+        "S22"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "terrain_historic_ground",
+      "category": "terrain",
+      "name": "Sol historique",
+      "role": "Flashback",
+      "visual_brief": "État ancien suivant plans ; aucun biome/ville précis inventé.",
+      "required_states": [
+        "Rituel",
+        "invasion",
+        "destruction"
+      ],
+      "placement_rule": "Matériaux distincts de2004.",
+      "source_ids": [
+        "S02",
+        "S30"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    },
+    {
+      "id": "planet_earth",
+      "category": "planète",
+      "name": "Terre",
+      "role": "Seule planète requise",
+      "visual_brief": "Orbite/atmosphère/localisation selon film ; expliciter différence Antarctique narratif/Bouvetøya réelle subantarctique.",
+      "required_states": [
+        "Orbite",
+        "carte",
+        "expédition"
+      ],
+      "placement_rule": "Aucune planète d’origineYautja à inventer pour remplir catégorie.",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S22"
+      ],
+      "evidence_confidence": "sources hiérarchisées ; modèle final à rapprocher des plans",
+      "runtime_status": "à croiser avec inventaire du dépôt",
+      "fidelity_1to1": "non certifiée"
+    }
+  ],
+  "open_decisions": [
+    "Montage de référence à verrouiller : cinéma versus version étendue. Karl/prologue1904 restent des variantes étiquetées.",
+    "Stone, Bass, Klaus, Mikkel, Boris, Sven : noms de crédit trouvés, correspondance visage/costume/plan à établir.",
+    "JuanRamirez : créditAndyLucas, séquence de recrutement mexicaine à recouper avant toute tenue finale.",
+    "CapitaineLeighton et officierGordon : attestations de versions écrites/secondaires, aucun personnage filmé/costume certifié dans cette recherche ; ne pas générer comme manquefilm confirmé.",
+    "Assistant de Quinn : identité et nombre non établis ; conserver anonyme et rechercher un plan avant modèle.",
+    "Parks/Parkes et Rusten/Rustin : variantes de graphie à résoudre par générique du montage.",
+    "Le frame https://www.avpcentral.com/images/yautja-empire/predator-mothership.webp n’est pas attribué sûrement à2004 ; tout plan près deSaturne exige contrôleAVPRUnrated.",
+    "Dimensions cachées, faces non visibles, carte exhaustive de la pyramide et planète d’origine Predator ne sont pas établies.",
+    "Liste complète des figurants/props d’arrière-plan nécessite dépouillement plan par plan ;132fiches ne prétendent pas certifier l’exhaustivité du film.",
+    "Aucun timecode inventé. Fournir montage, cadence, offset et horodatage réellement lu pour chaque capture."
+  ],
+  "validation_contract": [
+    "Identité : silhouette, visage, costume, masque et accessoires comparés au bon personnage.",
+    "Version : montage, année, scène et état narratif explicités ; concept abandonné distinct du film.",
+    "Mesure : repère d’échelle vérifiable ; aucun chiffre de vitrine/mannequin/miniature converti sans contrôle.",
+    "Vues : face/profil/dos disponibles ou faces reconstruites explicitement marquées.",
+    "Matériaux : apparence filmée ; latex/résine de tournage ne deviennent pas matériau fictionnel.",
+    "Animations : sockets main/tête/épaule, attaches, proportions, pieds au sol, collision et accessoires conservés.",
+    "Continuité : acquisition, transport, transfert, consommation, dégâts et perte représentés.",
+    "Topologie : portes dans parois, faces réciproques, niveaux/raccords compatibles, arrivée praticable.",
+    "Runtime : chemin/hachage, chargement par renderer, emplacement, état, animation et preuve de rendu.",
+    "Validation1:1 : comparaison documentée sur captures et écarts résiduels, pas seulement fichier existant."
+  ],
+  "priority_batch": [
+    {
+      "name": "Celtic entier",
+      "purpose": "Distinguer le chasseur et ses dégâts.",
+      "source_ids": [
+        "S06",
+        "S07"
+      ]
+    },
+    {
+      "name": "Chopper entier",
+      "purpose": "Masque à branchies, lames longues, trophées dorsaux.",
+      "source_ids": [
+        "S08",
+        "S03"
+      ]
+    },
+    {
+      "name": "Scar masqué/démasqué en fichiers séparés",
+      "purpose": "Chronologie des marques et restitution du canon.",
+      "source_ids": [
+        "S04",
+        "S05",
+        "S32"
+      ]
+    },
+    {
+      "name": "Lex tenue expédition",
+      "purpose": "Identité humaine et costume exact.",
+      "source_ids": [
+        "S01",
+        "S03",
+        "S34"
+      ]
+    },
+    {
+      "name": "Bouclier organique Lex isolé",
+      "purpose": "Forme, intérieur et prise à fixer sur capture.",
+      "source_ids": [
+        "S03",
+        "S30"
+      ]
+    },
+    {
+      "name": "Lance queueAlien isolée",
+      "purpose": "Empêcher confusion avec combistick final.",
+      "source_ids": [
+        "S03",
+        "S30"
+      ]
+    },
+    {
+      "name": "SnowcatWeyland",
+      "purpose": "Transport de surface et dénouement.",
+      "source_ids": [
+        "S13"
+      ]
+    },
+    {
+      "name": "Chambre sacrificielle",
+      "purpose": "Portes/trappes/dalles et œufs reliés.",
+      "source_ids": [
+        "S14",
+        "S15",
+        "S25"
+      ]
+    },
+    {
+      "name": "Réservoir et chaînes finale",
+      "purpose": "Dénouement physiquement intelligible.",
+      "source_ids": [
+        "S02",
+        "S31"
+      ]
+    },
+    {
+      "name": "PiperMaru extérieur",
+      "purpose": "Coque primaire disponible chezJohnLee.",
+      "source_ids": [
+        "S33"
+      ]
+    },
+    {
+      "name": "VaisseauPredator2004",
+      "purpose": "Éviter modèle d’autre film ; frameàconfirmer.",
+      "source_ids": [
+        "S02",
+        "S30",
+        "S35",
+        "S36"
+      ]
+    },
+    {
+      "name": "Stafford",
+      "purpose": "Costume de production précisément documenté.",
+      "source_ids": [
+        "S12"
+      ]
+    }
+  ]
+}

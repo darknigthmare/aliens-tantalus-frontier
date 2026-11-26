@@ -549,34 +549,37 @@ test('new costume cycles reject foreign rooms, unsupplied order and cross-versio
   }
 });
 
-function npcWalkingManifest(frequency = 2.1) {
+function npcWalkingManifest(frequency = 2.1, key = 'walter') {
+  const room = key === 'upworth' ? 'comms' : 'cryo';
+  const version = key === 'upworth' ? '017' : '014', actorId = key + '-' + room;
   const frames = Array.from({ length: 8 }, (_, index) => {
-    const id = 'walter-walk-' + String(index + 1).padStart(2, '0');
-    return asset({ id, key: 'walter', state: 'walk', rooms: ['cryo'], actors: ['walter-cryo'],
-      path: '/assets/openai/sprites/alien-covenant-v014/' + id + '.png' });
+    const id = key + '-walk-' + String(index + 1).padStart(2, '0');
+    return asset({ id, key, state: 'walk', rooms: [room], actors: [actorId],
+      path: '/assets/openai/sprites/alien-covenant-v' + version + '/' + id + '.png' });
   });
-  return { schemaVersion: 1, release: '0.14.0', assets: frames, cycles: [{
-    id: 'walter-walk', kind: 'human', key: 'walter', state: 'walk', consumer: 'npc',
-    actors: ['walter-cryo'], angularFrequency: frequency, frames: frames.map(row => row.id)
+  return { schemaVersion: 1, release: key === 'upworth' ? '0.17.0' : '0.14.0', assets: frames, cycles: [{
+    id: key + '-walk', kind: 'human', key, state: 'walk', consumer: 'npc',
+    actors: [actorId], angularFrequency: frequency, frames: frames.map(row => row.id)
   }] };
 }
 
-function npcHarness() {
+function npcHarness(key = 'walter') {
   // Accessors let the test advance an external observation timeline while the
   // actual objects read by the renderer remain deeply frozen.
-  const timeline = { time: 0, x: 450, z: .5, y: 0, facing: 1, phase: 'walk',
-    room: 'cryo', profile: 'walter', gun: null };
-  const person = freeze({ id: 'walter-cryo', room: 'cryo',
+  const room = key === 'upworth' ? 'comms' : 'cryo', speed = key === 'upworth' ? 22 : 26;
+  const timeline = { time: 0, x: key === 'upworth' ? 1050 : 450, z: .5, y: 0, facing: 1, phase: 'walk',
+    room, profile: key, gun: null };
+  const person = freeze({ id: key + '-' + room, room,
     get x() { return timeline.x; }, get z() { return timeline.z; }, get y() { return timeline.y; },
     get facing() { return timeline.facing; }, get phase() { return timeline.phase; } });
-  const h = harness([], { manifest: npcWalkingManifest(), engine: {
+  const h = harness([], { manifest: npcWalkingManifest(2.1, key), engine: {
     state: { get time() { return timeline.time; }, weapon: false },
     room: { get id() { return timeline.room; } },
     appearance: () => freeze({ id: timeline.profile, gun: timeline.gun }), paused: false
   } });
   return { ...h, person, timeline,
-    draw: () => h.renderer.human(person, 'walter', true),
-    step: (dx = 26 / 60, dt = 1 / 60) => { timeline.time += dt; timeline.x += dx; },
+    draw: () => h.renderer.human(person, key, true),
+    step: (dx = speed / 60, dt = 1 / 60) => { timeline.time += dt; timeline.x += dx; },
     pngs: () => h.commands.filter(row => row[0] === 'drawImage') };
 }
 
@@ -703,6 +706,125 @@ test('the untouched native Walter patrol supplies all phases in both directions 
   assert.equal(observed['1'].size, 8); assert.equal(observed['-1'].size, 8);
   assert.equal(engine.state.room, 'cryo'); assert.equal(engine.state.player.x, 160);
   assert.equal(engine.state.player.z, .5);
+});
+
+test('Upworth requires her complete V017 cycle, exact actor and communications room', () => {
+  const raw = npcWalkingManifest(2.1, 'upworth'), compiled = compileManifest(raw);
+  assert.equal(compiled.resolve('human', 'upworth', 'walk', 'comms', .1, 'upworth-comms').id, 'upworth-walk-01');
+  for (const id of [null, 'upworth-infirmary', 'walter-cryo', 'daniels']) {
+    assert.equal(compiled.resolve('human', 'upworth', 'walk', 'comms', .1, id), null);
+  }
+  for (const room of ['cryo', 'infirmary', 'corridor']) {
+    assert.equal(compiled.resolve('human', 'upworth', 'walk', room, .1, 'upworth-comms'), null);
+  }
+  for (const mutate of [
+    x => { x.release = '0.14.0'; }, x => { x.assets.pop(); }, x => { x.cycles[0].frames.reverse(); },
+    x => { delete x.cycles; }, x => { delete x.cycles[0].consumer; },
+    x => { x.assets[0].actors = ['upworth-infirmary']; },
+    x => { x.assets[0].rooms = ['comms', 'infirmary']; },
+    x => { x.assets[0].path = x.assets[0].path.replace('v017', 'v014'); }
+  ]) {
+    const invalid = npcWalkingManifest(2.1, 'upworth'); mutate(invalid);
+    assert.throws(() => compileManifest(invalid));
+  }
+});
+
+test('Upworth movement, stopped steps and invalid observations select PNGs without simulation writes', () => {
+  for (const facing of [-1, 1]) for (let phase = 0; phase < 8; phase++) {
+    const h = npcHarness('upworth'); h.timeline.time = 2 * Math.PI / 2.1 * (phase + .25) / 8 - 1 / 60;
+    h.timeline.facing = facing; h.draw();
+    assert.equal(h.pngs().length, 0);
+    h.step(facing * 22 / 60);
+    const before = JSON.stringify({ engine: h.engine, person: h.person });
+    h.draw(); h.draw();
+    assert.equal(h.pngs().length, 2);
+    assert.equal(h.pngs()[0][1].id, 'upworth-walk-' + String(phase + 1).padStart(2, '0'));
+    assert.equal(h.pngs()[1][1].id, h.pngs()[0][1].id);
+    assert.ok(h.commands.some(row => row[0] === 'scale' && row[1] === facing && row[2] === 1));
+    assert.equal(JSON.stringify({ engine: h.engine, person: h.person }), before);
+    h.step(0); h.draw(); assert.equal(h.pngs().length, 2, 'Blocked intent falls back');
+  }
+  for (const invalidate of [
+    h => { h.timeline.gun = 'beretta'; }, h => { h.timeline.y = 1; },
+    h => { h.timeline.phase = 'idle'; }, h => { h.timeline.profile = 'daniels-work'; },
+    h => { h.timeline.room = 'infirmary'; }, h => { h.timeline.time -= 2; },
+    h => { h.timeline.time += .2; },
+    h => { h.renderer.human(freeze({ ...h.person }), 'upworth', true); }
+  ]) {
+    const h = npcHarness('upworth'); h.timeline.time = 3; h.draw(); h.step(); h.draw();
+    assert.equal(h.pngs().length, 1);
+    invalidate(h); h.step(); h.draw(); assert.equal(h.pngs().length, 1);
+  }
+});
+
+test('an unavailable Upworth phase disables her entire cycle while Walter remains available', () => {
+  const upworth = npcWalkingManifest(2.1, 'upworth'), walter = npcWalkingManifest();
+  const raw = { ...upworth, assets: [...walter.assets, ...upworth.assets], cycles: [...walter.cycles, ...upworth.cycles] };
+  const created = [];
+  class ImageDouble { constructor() { created.push(this); } }
+  const registry = createRegistry({ manifest: raw, ImageClass: ImageDouble });
+  registry.sprite('human', 'walter', 'walk', 'cryo', .1, 'walter-cryo');
+  for (const image of created) { image.naturalWidth = 140; image.naturalHeight = 240; image.onload(); }
+  registry.sprite('human', 'upworth', 'walk', 'comms', .1, 'upworth-comms');
+  assert.equal(created.length, 16);
+  for (const image of created.slice(8, 15)) { image.naturalWidth = 140; image.naturalHeight = 240; image.onload(); }
+  created[15].onerror();
+  for (let phase = 0; phase < 8; phase++) {
+    assert.equal(registry.sprite('human', 'upworth', 'walk', 'comms', phase / 8 * 2 * Math.PI / 2.1, 'upworth-comms'), null);
+  }
+  assert.ok(registry.sprite('human', 'walter', 'walk', 'cryo', .1, 'walter-cryo'));
+});
+
+test('the native Upworth communications patrol supplies both directions without actor or renderer state writes', () => {
+  const { CovenantEngine } = require('../dlc/covenant/core.js');
+  const data = require('../dlc/covenant/content.js');
+  const engine = new CovenantEngine(data);
+  engine.enter('comms'); // Explicit room fixture; native route, speed and clock remain untouched.
+  const h = harness([], { manifest: npcWalkingManifest(2.1, 'upworth'), realEngine: engine });
+  const initialPlayer = JSON.stringify(engine.state.player), observed = { '-1': new Set(), '1': new Set() };
+  // Native pauses and the effective patrol leg need a full cadence beat.
+  for (let tick = 0; tick < 4800 && (observed['1'].size < 8 || observed['-1'].size < 8); tick++) {
+    engine.tick(1 / 60, {});
+    const person = engine.crew().find(row => row.id === 'upworth-comms');
+    const before = JSON.stringify(engine.state), count = h.commands.length;
+    h.renderer.human(person, engine.crewRole(person), person.phase === 'walk');
+    assert.equal(JSON.stringify(engine.state), before);
+    for (const row of h.commands.slice(count)) if (row[0] === 'drawImage') observed[person.facing].add(row[1].id);
+  }
+  assert.equal(observed['1'].size, 8); assert.equal(observed['-1'].size, 8);
+  assert.equal(engine.state.room, 'comms'); assert.equal(JSON.stringify(engine.state.player), initialPlayer);
+});
+
+function shoreRockManifest() {
+  return { schemaVersion: 1, release: '0.17.0', assets: [asset({
+    id: 'world-planet4-shore-rock', kind: 'prop', key: 'landing-light2', rooms: ['landing'],
+    path: '/assets/openai/sprites/alien-covenant-v016/world-planet4-shore-rock.png'
+  })] };
+}
+
+test('the V016 shore rock is admitted only at its reviewed non-solid landing occurrence', () => {
+  const raw = shoreRockManifest(), compiled = compileManifest(raw);
+  assert.equal(compiled.resolve('prop', 'landing-light2', 'idle', 'landing').id, 'world-planet4-shore-rock');
+  assert.equal(compiled.resolve('prop', 'rock', 'idle', 'landing'), null);
+  assert.equal(compiled.resolve('prop', 'landing-light2', 'idle', 'wheat'), null);
+  for (const change of [
+    { key: 'rock' }, { key: 'landing-light1' }, { rooms: ['landing', 'wheat'] },
+    { kind: 'human' }, { state: 'walk' }, { actors: ['upworth-comms'] },
+    { id: 'world-planet4-scorched-grass', path: '/assets/openai/sprites/alien-covenant-v016/world-planet4-scorched-grass.png' }
+  ]) {
+    const invalid = shoreRockManifest(); Object.assign(invalid.assets[0], change);
+    assert.throws(() => compileManifest(invalid));
+  }
+  const prop = freeze({ id: 'landing-light2', kind: 'rock', x: 1750, z: .02, w: 110, h: 65, solid: false });
+  const h = harness([], { manifest: raw, room: { id: 'landing' } });
+  h.renderer.W = 2400;
+  const before = JSON.stringify({ engine: h.engine, prop }); h.renderer.prop(prop);
+  assert.equal(h.commands.filter(row => row[0] === 'drawImage').length, 1);
+  assert.equal(JSON.stringify({ engine: h.engine, prop }), before);
+  h.renderer.prop(freeze({ ...prop, id: 'another-rock' }));
+  assert.equal(h.inherited.at(-1)[0], 'prop');
+  const fallback = harness([], { room: { id: 'landing' } }); fallback.renderer.prop(prop);
+  assert.equal(fallback.inherited[0][0], 'prop');
 });
 
 function lakeManifest() {

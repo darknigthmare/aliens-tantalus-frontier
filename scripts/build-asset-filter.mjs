@@ -74,6 +74,8 @@ import { publicReleasePathAdmissionV123, PUBLIC_MEDIA_DIRECTORIES_V123 } from '.
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
+  'assets/openai/sprites/avp2004-production-v001',
+  'docs/narrative/dlc/avp-2004-production-20261126',
   'archives',
   'docs/forge',
   'docs/references/v118-batch',

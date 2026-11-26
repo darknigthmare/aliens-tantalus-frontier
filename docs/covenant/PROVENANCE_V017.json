@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.17.0",
+  "date": "2026-11-26",
+  "snapshotStatus": "local-sources-frozen-publication-browser-package-and-ci-pending",
+  "workingTreeBaseCommit": "17cdb13b377248fb46412a75de5691fccd03f549",
+  "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "historicalBaselines": {
+    "lastPublishedPR79Commit": "2539d67020950b5ebcd269413729ec7acec7eb76",
+    "covenantV015Commit": "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+    "targetPR71Commit": "6c2d610b7faf9ed88fc6c6977a98411ad1880940",
+    "targetPullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71",
+    "historicalEvidenceTransferred": false
+  },
+  "verified1to1": false,
+  "fidelityPolicy": "Fidélité aux références suivie objet par objet. Film, bonus, fabrication et adaptation restent distincts ; aucune image n’est certifiée 1:1.",
+  "coverage": {
+    "newPngs": 13,
+    "newRuntimePngs": 8,
+    "newCataloguePngs": 5,
+    "previousCataloguePromotions": 1,
+    "historicalPngs": 141,
+    "cumulativePngs": 154,
+    "runtimePngs": 81,
+    "cataloguePngs": 73,
+    "completeCycles": 8,
+    "completeCyclePhases": 64,
+    "runtimeCycles": 6,
+    "runtimeCyclePhases": 48,
+    "catalogueCycles": 2,
+    "catalogueCyclePhases": 16,
+    "incompleteDavidPoses": 5,
+    "animationImages": 69,
+    "certified1to1Images": 0,
+    "productionBriefs": 261,
+    "referenceEntries": 315,
+    "connections": 67,
+    "thresholds": 134,
+    "propInstances": 630,
+    "newPngBytes": 19005748,
+    "originalPngBytes": 254133331,
+    "excludedUpworthAttempts": 4,
+    "newWorldObjectCandidates": 4,
+    "bibleSummary": {
+      "referenceEntries": 315,
+      "characterProfiles": 23,
+      "humanIdentitiesInProfiles": 17,
+      "namedIdentitiesIncludingSeparateShawPortrait": 18,
+      "sourceCharacterEntries": 38,
+      "biologyReferenceEntries": 49,
+      "weaponFamilies": 7,
+      "playableWeapons": 4,
+      "propFamilies": 126,
+      "propInstances": 630,
+      "filmCandidatePropFamilies": 50,
+      "spatialRecords": 57,
+      "campaignRecords": 56,
+      "independentTableaux": 1,
+      "distinctPhysicalSiteKeysIncludingTableau": 55,
+      "connections": 67,
+      "thresholds": 134,
+      "terrainFamilies": 16,
+      "planetEntries": 3,
+      "transportRecordsIncludingComponentsAndUnresolvedGroups": 12,
+      "pngs": 154,
+      "newPngs": 13,
+      "runtimePngs": 81,
+      "catalogueOnlyPngs": 73,
+      "playerWalkCycles": 4,
+      "npcWalkCycles": 2,
+      "animationPhases": 48,
+      "movingNpcProfilesWithoutWalkPng": 14,
+      "unconsumedProfilesWithoutWalk": 3,
+      "playerProfilesWithoutRunPng": 4,
+      "certified1to1Images": 0,
+      "worldWorkItemsNotPngCount": 154,
+      "supplementalCandidates": 17,
+      "supplementalObjectCandidates": 14,
+      "incompleteCharacterSequencePngs": 5,
+      "currentRuntimeVersion": "0.17.0",
+      "newRuntimeAdmissions": 9,
+      "servedCycles": 6,
+      "publishedWalkCycles": 8,
+      "publishedAnimationPhases": 64,
+      "availableUnintegratedNpcCycles": 2,
+      "availableUnintegratedNpcPhases": 16,
+      "movingNpcProfilesWithoutIntegratedWalkPng": 14,
+      "movingNpcProfilesWithoutPublishedWalkPng": 12,
+      "documentaryObjectRecordsV015": 6,
+      "animationImagesIncludingIncomplete": 69
+    }
+  },
+  "sourceManifests": [
+    {
+      "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+      "bytes": 212497,
+      "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923",
+      "version": "V011",
+      "originalPngs": 49,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "2539d67020950b5ebcd269413729ec7acec7eb76"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v012/manifest.json",
+      "bytes": 78199,
+      "sha256": "d29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3",
+      "version": "V012",
+      "originalPngs": 12,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "2539d67020950b5ebcd269413729ec7acec7eb76"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v013/manifest.json",
+      "bytes": 265179,
+      "sha256": "5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788",
+      "version": "V013",
+      "originalPngs": 24,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "2539d67020950b5ebcd269413729ec7acec7eb76"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+      "bytes": 142223,
+      "sha256": "1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482",
+      "version": "V014",
+      "originalPngs": 18,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "2539d67020950b5ebcd269413729ec7acec7eb76"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v015/manifest.json",
+      "bytes": 361866,
+      "sha256": "0b6679217b73a5c07c43e7384ada3a31f080bbb33d618f61c74331a46c9ddb62",
+      "version": "V015",
+      "originalPngs": 22,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "6c2d610b7faf9ed88fc6c6977a98411ad1880940"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v016/manifest.json",
+      "bytes": 79206,
+      "sha256": "6e166985008494e08f2b528368d0ffa53ae299f59634f91a7b0e9941df607c6a",
+      "version": "V016",
+      "originalPngs": 16,
+      "historical": true,
+      "unchanged": true,
+      "comparedToCommit": "2539d67020950b5ebcd269413729ec7acec7eb76"
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v017/manifest.json",
+      "bytes": 136343,
+      "sha256": "a0a552042ae8c0cafaa77c2a9161ef46023a066e0d82391044ad4323276315a4",
+      "version": "V017",
+      "originalPngs": 13,
+      "historical": false,
+      "status": "frozen-current-source"
+    }
+  ],
+  "currentSourceManifest": {
+    "path": "assets/openai/sprites/alien-covenant-v017/manifest.json",
+    "bytes": 136343,
+    "sha256": "a0a552042ae8c0cafaa77c2a9161ef46023a066e0d82391044ad4323276315a4"
+  },
+  "runtime": {
+    "release": "0.17.0",
+    "unchanged": false,
+    "assets": 81,
+    "cycles": 6,
+    "phases": 48,
+    "newAdmissions": 9,
+    "newPNGAdmissions": 8,
+    "previousCataloguePromotions": 1,
+    "historicalBindingsPreserved": 72,
+    "historicalCyclesPreserved": 5,
+    "nativeSimulationUnchanged": true,
+    "manifestSha256": "f43305542a68190d5f44b53305612e58664ddc556ee89e264735e5af9ec1046d",
+    "files": [
+      {
+        "path": "dlc/covenant/index.html",
+        "bytes": 1066732,
+        "sha256": "e83c6f8b51068aca7f1d70de2cec95e1f36ec7566fb2e6dcab5beb46a46b4bfc"
+      },
+      {
+        "path": "dlc/covenant/sprites-v011.json",
+        "bytes": 72588,
+        "sha256": "f43305542a68190d5f44b53305612e58664ddc556ee89e264735e5af9ec1046d"
+      }
+    ],
+    "upworth": {
+      "actors": [
+        "upworth-comms"
+      ],
+      "rooms": [
+        "comms"
+      ],
+      "state": "walk",
+      "unarmedOnly": true,
+      "cycle": "upworth-walk",
+      "frames": 8,
+      "angularFrequency": 2.1,
+      "existingSimulationMovementPreserved": true,
+      "missingFrameFallback": "whole-cycle-procedural",
+      "browserObservationStatus": "pending"
+    },
+    "terrainPromotion": {
+      "assetId": "world-planet4-shore-rock",
+      "sourceManifest": "assets/openai/sprites/alien-covenant-v016/manifest.json",
+      "runtimeAdmission": "instance-scoped",
+      "instance": "landing-light2",
+      "rooms": [
+        "landing"
+      ],
+      "bibleRecordIds": [
+        "TERR-LAKE",
+        "rock",
+        "landing"
+      ],
+      "bibleOccurrenceIds": [
+        "landing-light2"
+      ],
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "nativeGeometry": {
+        "x": 1750,
+        "z": 0.02,
+        "w": 110,
+        "h": 65,
+        "solid": false
+      },
+      "scope": "Seule cette occurrence du rivage reçoit le PNG V016. Le manifeste historique, les dimensions, les collisions et la simulation restent inchangés."
+    },
+    "newWorldAssetsRuntimeAdmissions": 0
+  },
+  "bibleDocuments": [
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.json",
+      "bytes": 6455774,
+      "sha256": "433065ffd2f6fb3619396d70d9852e52784d57aab9f9cf88e634b0638274836b"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.md",
+      "bytes": 1656669,
+      "sha256": "a01be6dfbccd4e282cf98b2422d4fd0be8f6f06759dfd972b4f6fa6567d8586a"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.html",
+      "bytes": 5459093,
+      "sha256": "a3d1ae6f4d094d5bdd2e0353279dac5cd42bef5345db7368b9d2f77eca61a067"
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V017.xlsx",
+      "bytes": 319125,
+      "sha256": "f0377aee4a15dab52f18841b4755d7eef22838e3427f0b69d2d3cd000b166fc8"
+    }
+  ],
+  "implementationSources": [
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-registry-v011.js",
+      "bytes": 16312,
+      "sha256": "09ddc45736eb20653eab50152773b06dde31e3b0da68e3baa615285ba793827c"
+    },
+    {
+      "path": "modules/covenant/dlc/covenant/sprite-art-v011.js",
+      "bytes": 10639,
+      "sha256": "80fccc4b6c4988800123234c5c3514cc5fa341074239d37c5c90de58374373e0"
+    },
+    {
+      "path": "scripts/sync-covenant-sprites-v011.py",
+      "bytes": 19648,
+      "sha256": "1ba4f5482b4b4543e80061854893ef40ccdcabbcee73f5391215903ba843794f"
+    },
+    {
+      "path": "scripts/audit-dlc-avp-2004-20261125.mjs",
+      "bytes": 58717,
+      "sha256": "6400c3543aa944b914d073f6966527c7d31c5c2c41d567b6c5888bb85e93f1f3"
+    },
+    {
+      "path": "scripts/verify-dlc-audit-succession.mjs",
+      "bytes": 71042,
+      "sha256": "57c3689bd986494cee2d42830a20c54f76b16ce4ff2535907b65fb9257f6b43c"
+    },
+    {
+      "path": "scripts/verify-covenant-v017-preservation.mjs",
+      "bytes": 17531,
+      "sha256": "5a1b70bfd05e9eae5369e348c0dca29440520ffb716878b3edb78fa4d632a0d5"
+    }
+  ],
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "selectedPngs": 13,
+    "selectedUpworthPngs": 8,
+    "selectedWorldPngs": 5,
+    "nativePngBytesPreserved": true,
+    "nativeDimensionsPreserved": true,
+    "oneSelectedOriginalPerPoseOrState": true,
+    "selectedPngsComparedToOriginalGenerationFiles": 13,
+    "sha256AndGitBlobShaVerified": true,
+    "exactSelectedPrompts": 13,
+    "promptStringsCopiedIntoThisDocument": false,
+    "promptsReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets",
+    "referenceHashesAndPublicAttributionsReference": "assets/openai/sprites/alien-covenant-v017/manifest.json",
+    "selectedAssets": [
+      {
+        "id": "prop-colonist-cryopod-vertical",
+        "path": "assets/openai/sprites/alien-covenant-v017/prop-colonist-cryopod-vertical.png",
+        "bytes": 1589541,
+        "sha256": "563601aacf2598dffe1e971f15b65eade055318ea51267e589f79963113f0c45",
+        "gitBlobSha": "68b9c72f0e3cde5876b6d5c77c03e13c729ba507",
+        "width": 724,
+        "height": 2172,
+        "selectedGenerationId": "prop-colonist-cryopod-vertical",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": false,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/0/generationPrompt",
+        "promptSha256": "23a335e5c0ad6df8a1d3782695b250c6dfed458c16053d335bac93a2a38f6073",
+        "verified1to1": false
+      },
+      {
+        "id": "prop-cryopod-hanging-yoke-production",
+        "path": "assets/openai/sprites/alien-covenant-v017/prop-cryopod-hanging-yoke-production.png",
+        "bytes": 893243,
+        "sha256": "1380b06e3062cce42539e881876aa5c671df4aa6fa9481b98f5e02d15148e03e",
+        "gitBlobSha": "b007c687ab92803419873745d195cd40e8de152f",
+        "width": 1374,
+        "height": 1145,
+        "selectedGenerationId": "prop-cryopod-hanging-yoke-production",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": false,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/1/generationPrompt",
+        "promptSha256": "78d9e57103e3b2b57c0652fd55fa85a3a599fb4a3a4ffc31e817714f23bf184c",
+        "verified1to1": false
+      },
+      {
+        "id": "prop-juggernaut-bay-iris-closed",
+        "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-bay-iris-closed.png",
+        "bytes": 1622081,
+        "sha256": "ae9b94016da39e404e61810d8aed8fd5284c0325e5e54e2af84fec6fd67b640a",
+        "gitBlobSha": "01bbbd98717f7a84d3fa21b88cd6f5cfbcb79d65",
+        "width": 1254,
+        "height": 1254,
+        "selectedGenerationId": "prop-juggernaut-bay-iris-closed",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": false,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/2/generationPrompt",
+        "promptSha256": "d33f587a95b63cad542c0b44f3658e51aa99c617b58c485406b7594b76816905",
+        "verified1to1": false
+      },
+      {
+        "id": "prop-juggernaut-bay-iris-open",
+        "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-bay-iris-open.png",
+        "bytes": 1146374,
+        "sha256": "a3252805283e86cd9947a9821d0f1fd0089faf1af720e11cd22d8e6a33c8c3b7",
+        "gitBlobSha": "df2974690864949e804fa82e34d34530e823b37a",
+        "width": 1254,
+        "height": 1254,
+        "selectedGenerationId": "prop-juggernaut-bay-iris-open",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": false,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/3/generationPrompt",
+        "promptSha256": "a3eb263d0f3c8ebfd8283b1429b1eb26eedd3759ae028dce8274b0c347948a1b",
+        "verified1to1": false
+      },
+      {
+        "id": "prop-juggernaut-pilot-chair-production",
+        "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-pilot-chair-production.png",
+        "bytes": 1429337,
+        "sha256": "ea2066d41113e16a2c087a3e21536d8dad42108124c5a7a16e3eabc0fd355f1d",
+        "gitBlobSha": "8bc88523e9216f15ec81e23de7519b5308192223",
+        "width": 1536,
+        "height": 1024,
+        "selectedGenerationId": "prop-juggernaut-pilot-chair-production",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": false,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/4/generationPrompt",
+        "promptSha256": "ab31f2c3925c5f97cfe2cf8ec21a7117a8b93ece1f7adfb89fdd3ae8367847ff",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-01",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-01.png",
+        "bytes": 1553050,
+        "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+        "gitBlobSha": "855712a51c52f9efd02cb1fb5d5101d08ce9fd88",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-01",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/5/generationPrompt",
+        "promptSha256": "0d807812dc6885d65104d537470c8293c457cf445babca79af45cd632364ddfe",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-02",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-02.png",
+        "bytes": 1569762,
+        "sha256": "80814221148810df99650071d6e5a79af6393a271ac01cac08f07dadfd83c8b6",
+        "gitBlobSha": "1923a3ddf9b97684f42d6a3279c895a7e6a651e9",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-02",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/6/generationPrompt",
+        "promptSha256": "9945d2cf76875b25dec6ff178d1d986e4d8ba84127bb9ea40e7f01d0f4eb2727",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-03",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-03.png",
+        "bytes": 1427213,
+        "sha256": "20d0ea4284bc9d6132adb42bd21be00d7dd1ee809914566bb4e84a07036bbd1d",
+        "gitBlobSha": "2dc0f0d3c8468c17aa55598754dd5c6234ad33b1",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-03",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/7/generationPrompt",
+        "promptSha256": "662c9f1adcffe0455907ea315043ee711aa9dee941f57d662c1d7d08a63adce2",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-04",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-04.png",
+        "bytes": 1539659,
+        "sha256": "f6696bf5f84e27e4434474d19e83e45ac4e7dbd147145bcf68c9d84adf9f38e4",
+        "gitBlobSha": "c1c051fa0cd6fe74beedf5acd293ff3d81259e98",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-04-v2",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/8/generationPrompt",
+        "promptSha256": "424e573833ca879cc8a1410fe9ca663aa315f5c13ffcf5ac9ab58d9824f2a21b",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-05",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-05.png",
+        "bytes": 1509624,
+        "sha256": "85028f86ffc190073c650c5dec4885e1ef43f8665daa17f1d457466f61690604",
+        "gitBlobSha": "23e9b1439b3eb79818e839a397fabbd1c639d116",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-05-v2",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/9/generationPrompt",
+        "promptSha256": "81e71c9e1d31bb5dfef8f7c57c7b58d6411e7d040a8706c37c3b8b2242a852ea",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-06",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-06.png",
+        "bytes": 1529996,
+        "sha256": "8dc8e0182ffcaee9b8cd34c9fa0be9fc511b6b2612e4326b21ea22cdb1817be9",
+        "gitBlobSha": "6cfe27e8bf1b4b312660918e72e02ff9f813c149",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-06-v2",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/10/generationPrompt",
+        "promptSha256": "3655a3b046fbf08876a27ad05bd28d7055d278dfd00d9ea8139df54a4b15b7d0",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-07",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-07.png",
+        "bytes": 1582785,
+        "sha256": "5a0f2286c6d0b62013adcdfa0635711aa84efb3c6d0a3b1a2de73c922852c8ab",
+        "gitBlobSha": "e1cd14ce5d6991d2fe6df6f636d902a24540afc8",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-07",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/11/generationPrompt",
+        "promptSha256": "75ac723079e7681ad9e5021c0248e22d7219946aaf309af80568cd1bfbe64b94",
+        "verified1to1": false
+      },
+      {
+        "id": "upworth-walk-08",
+        "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-08.png",
+        "bytes": 1613083,
+        "sha256": "611cfcc1e7f83301b28bd38b0d6ff58d1d3db5ba6093b217d23487835551ad18",
+        "gitBlobSha": "6e87f571f5ffc264de401a2e9ad8e65f80db7b21",
+        "width": 1024,
+        "height": 1536,
+        "selectedGenerationId": "upworth-walk-08-v2",
+        "originalBytesPreserved": true,
+        "resized": false,
+        "runtimeAdmission": true,
+        "promptReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/assets/12/generationPrompt",
+        "promptSha256": "443f770c4b9ad868bb4c286d5cf6156db340573c0de03ca1df3eab71d5347f0b",
+        "verified1to1": false
+      }
+    ],
+    "excludedAttempts": [
+      {
+        "generationId": "upworth-walk-04",
+        "sha256": "1c1e2a56397f71c046d993faf1d1eb7deacc3dff041bcec03acff741adffefab",
+        "gitBlobSha": "70e2467dd045bec3813de4622c8dd166e1c8d360",
+        "bytes": 1611425,
+        "reason": "Initial result kept near leg forward and near arm back instead of the opposite support needed at phase04; replaced by04-v2.",
+        "status": "excluded-attempt",
+        "runtimeAdmission": "none",
+        "selectedForManifest": false,
+        "recordReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/excludedGenerationAttempts/0"
+      },
+      {
+        "generationId": "upworth-walk-05",
+        "sha256": "dde61939068e3681a36e4d7036225492e3a8a5fc320467bba41187eb4f82b08e",
+        "gitBlobSha": "3d21ef9cceb6a5b978e38e244ff7433740c6d120",
+        "bytes": 1544631,
+        "reason": "Initial result changed near arm forward but retained near leg forward; ipsilateral arm/leg combination rejected, replaced by05-v2.",
+        "status": "excluded-attempt",
+        "runtimeAdmission": "none",
+        "selectedForManifest": false,
+        "recordReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/excludedGenerationAttempts/1"
+      },
+      {
+        "generationId": "upworth-walk-06",
+        "sha256": "0db2a61ea729954f3cd3eb0df4fb8641dd40ec49bff705a667a028e9025d1efb",
+        "gitBlobSha": "884caba32d6136e1fbc5aa2707e432c6e7ba6d6e",
+        "bytes": 1583650,
+        "reason": "Initial result retained near leg forward instead of far support; replaced by minimal-edit06-v2 from the corrected contact05-v2.",
+        "status": "excluded-attempt",
+        "runtimeAdmission": "none",
+        "selectedForManifest": false,
+        "recordReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/excludedGenerationAttempts/2"
+      },
+      {
+        "generationId": "upworth-walk-08",
+        "sha256": "966a89250b15340b4531600a172c652951e332afcd48f965e985a3c34bb1e694",
+        "gitBlobSha": "cf235a2a9a1ff155a0a05baabfd85b2427b4e6c8",
+        "bytes": 1580849,
+        "reason": "Initial result placed forward boot too near the support level for the requested airborne pre-contact; replaced by08-v2.",
+        "status": "excluded-attempt",
+        "runtimeAdmission": "none",
+        "selectedForManifest": false,
+        "recordReference": "assets/openai/sprites/alien-covenant-v017/manifest.json#/excludedGenerationAttempts/3"
+      }
+    ],
+    "excludedAttemptsIncludedInImageTotals": false,
+    "visualReviewScope": "Assets contrôlés pour identité, anatomie, alpha et appuis ; observation du rendu dans le navigateur encore attendue."
+  },
+  "evidenceReceipts": [
+    {
+      "id": "bible-final",
+      "filename": "bible-final-receipt.json",
+      "bytes": 3755,
+      "sha256": "dcd4791cf49d6614a52405a7eff50ac9cb4e478e6a3aacbba59cc388f6fe0eda",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "people-generation",
+      "filename": "assets-people-v017.json",
+      "bytes": 82490,
+      "sha256": "027b25b80dfb82fd435d1d64284d700ff74a8a030d3a1df67680fd77739b5c95",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "world-generation",
+      "filename": "assets-world-v017.json",
+      "bytes": 49067,
+      "sha256": "b1b11f6175917dc927bbcf130c0a052261754a21a9597662939e702749c1d96b",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "audit-succession",
+      "filename": "final-succession-receipt.json",
+      "bytes": 2951,
+      "sha256": "6d283e10a206a532953ffb74fba095d0bce866011a13ca268d5df8b155c23721",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "tests-dlc-log",
+      "filename": "tests-dlc.log",
+      "bytes": 7734,
+      "sha256": "1cbaf9dd126fb0986dc8d28a1e1a03ecde1d617b60c7a1d0c40797b47552f9bb",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "check-dlc-avp-log",
+      "filename": "check-avp.log",
+      "bytes": 288,
+      "sha256": "69965d35e984cd5890ed8faa73f0d2e97afb62553f5f231440316eba84a7e139",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "source-check-local-log",
+      "filename": "source-check.log",
+      "bytes": 964,
+      "sha256": "c8877ef1f6c345594adc6ad37685436be8df27a1a8ea0e6bf13c944f19ecf1db",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "native-pilots-summary",
+      "filename": "release-playthroughs.json",
+      "bytes": 205716,
+      "sha256": "5d337de61aabb3e36da1f385fb144697442b4080680f08de2b87937d315e4b9b",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-archaeology-explorer",
+      "filename": "v10-archaeology-explorer.json",
+      "bytes": 204398,
+      "sha256": "84e5365097f91d954c2a272065febf07703f9210be4562a09b0f63e6623cf1cf",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-archaeology-standard",
+      "filename": "v10-archaeology-standard.json",
+      "bytes": 204398,
+      "sha256": "0f3ae01363adc13ff57d5fb689bf4f209fbaad31aab8fd255a8acb2826033d79",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-atmosphere-explorer",
+      "filename": "v10-atmosphere-explorer.json",
+      "bytes": 232440,
+      "sha256": "18ebe78f2633128dd4db7dc2eced40e7a5e2b871d7d6487bc16c8eb967aab601",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-atmosphere-standard",
+      "filename": "v10-atmosphere-standard.json",
+      "bytes": 232440,
+      "sha256": "3f43c8e26582b9e422b029e5bbd82fe67f442512300660d06542d35b660fcd2c",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-base-discretion",
+      "filename": "v10-base-discretion.json",
+      "bytes": 131787,
+      "sha256": "93f1dd06f6d3857ecb6ac1dade97cd2c1bbe23b6195df6d58c3946427aebe20c",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-base-explorer",
+      "filename": "v10-base-explorer.json",
+      "bytes": 122460,
+      "sha256": "1c80ad4a003b6d1693f8470170f15e123148d204c2ebf2bc074d49d3c88e8afc",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-base-standard",
+      "filename": "v10-base-standard.json",
+      "bytes": 121289,
+      "sha256": "e19cfcd729530b8ba67550e34d5d04b2623fe80ac90f224c7e31cab9877fabe4",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-base-survival",
+      "filename": "v10-base-survival.json",
+      "bytes": 126962,
+      "sha256": "da9c6bdbe882b1514d5e8398a176f5ce5e88f0752f765a62d2576b7e0e167f7b",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-fidelity-explorer",
+      "filename": "v10-fidelity-explorer.json",
+      "bytes": 259798,
+      "sha256": "161722c7b556ebce56244cba6829c669aecdd044798427d995abc72bf4574b4f",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-fidelity-standard",
+      "filename": "v10-fidelity-standard.json",
+      "bytes": 259798,
+      "sha256": "630898ddd499cf903c29b7db1af200e51c90955f3de20a337b4de666440c4d84",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-field",
+      "filename": "v10-field.json",
+      "bytes": 146896,
+      "sha256": "f251441a1d4ed7d7a4dff4caa5661cef64ce0816862b94d7bdcd1c2df5e15733",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-freight-explorer",
+      "filename": "v10-freight-explorer.json",
+      "bytes": 235264,
+      "sha256": "23267737a8749bae5373f77fb3d981f42b464073ecfb5c812e33ee98d5bf392b",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-freight-standard",
+      "filename": "v10-freight-standard.json",
+      "bytes": 235264,
+      "sha256": "21fd1a598f029cffe4151ac96af013232a4ef056430dca0a3807ff72c6c2b3f3",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-maintenance",
+      "filename": "v10-maintenance.json",
+      "bytes": 181891,
+      "sha256": "2c0676454679bf12585931bcad46c0ece25847acb29a303a067bb59a8fcda0cd",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    },
+    {
+      "id": "pilot-v10-network",
+      "filename": "v10-network.json",
+      "bytes": 153571,
+      "sha256": "bcc1050d62265fb4954cd73dd1047f6a3aa55cf1c0c72894382ca9507cbd4fd2",
+      "scope": "local-evidence-receipt",
+      "repositoryFile": false
+    }
+  ],
+  "evidenceReceiptPolicy": "Noms et empreintes de reçus locaux ; leurs chaînes de chemins privés et leurs prompts ne sont pas recopiés. Les commandes observées par l’intégrateur sans log ont une attribution explicite.",
+  "validation": {
+    "localCovenantTests": {
+      "status": "passed",
+      "source": "root-observed-tool-result",
+      "command": "npm run test:covenant",
+      "passed": 67,
+      "failed": 0,
+      "logRetained": false
+    },
+    "localBundleCheck": {
+      "status": "passed",
+      "source": "root-observed-tool-result",
+      "command": "npm run check:covenant",
+      "logRetained": false
+    },
+    "localPreservation": {
+      "status": "passed",
+      "source": "root-observed-tool-result",
+      "command": "node scripts/verify-covenant-v017-preservation.mjs",
+      "exitCode": 0,
+      "logRetained": false,
+      "historicalOriginals": 141,
+      "historicalManifests": 6,
+      "historicalDocumentPins": 12,
+      "historicalBuilders": 3,
+      "cumulativePngs": 154,
+      "runtimePngs": 81,
+      "cataloguePngs": 73,
+      "historicalBindingsPreserved": 72,
+      "historicalCyclesPreserved": 5,
+      "runtimeCycles": 6,
+      "runtimePhases": 48,
+      "publishedCycles": 8,
+      "publishedPhases": 64,
+      "catalogueCycles": 2,
+      "cataloguePhases": 16,
+      "incompleteDavidPoses": 5,
+      "newRuntimeFrames": 8,
+      "cataloguePromotions": 1,
+      "nativeSimulationUnchanged": true,
+      "newPngBytes": 19005748
+    },
+    "nativeCoordinatePilots": {
+      "status": "passed",
+      "passed": 15,
+      "failed": 0,
+      "receiptId": "native-pilots-summary",
+      "method": "Coordinate-informed pilots calling native simulation, movement, interaction and combat APIs.",
+      "teleports": false,
+      "statEdits": false,
+      "invulnerability": false,
+      "questOverrides": false,
+      "browserQA": false,
+      "pilotNames": [
+        "v10-base-explorer",
+        "v10-base-standard",
+        "v10-base-survival",
+        "v10-base-discretion",
+        "v10-field",
+        "v10-network",
+        "v10-maintenance",
+        "v10-archaeology-explorer",
+        "v10-archaeology-standard",
+        "v10-atmosphere-explorer",
+        "v10-atmosphere-standard",
+        "v10-freight-explorer",
+        "v10-freight-standard",
+        "v10-fidelity-explorer",
+        "v10-fidelity-standard"
+      ]
+    },
+    "localDlcTests": {
+      "status": "passed",
+      "command": "npm run test:dlc",
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "successionTests": 32,
+      "historicalSuccessionTestsPreserved": 29,
+      "newSuccessionTests": 3,
+      "otherDlcTests": 16,
+      "receiptId": "audit-succession",
+      "logReceiptId": "tests-dlc-log"
+    },
+    "localAvpBundleCheck": {
+      "status": "passed",
+      "command": "npm run check:dlc:avp",
+      "modules": 30,
+      "htmlBytes": 1115546,
+      "receiptId": "audit-succession",
+      "logReceiptId": "check-dlc-avp-log"
+    },
+    "newOriginalPreservation": {
+      "status": "passed",
+      "selectedOriginals": 13,
+      "nativeBytesCompared": true,
+      "sha256AndGitBlobShaVerified": true,
+      "selectedPromptsEqualGenerationReceipts": true,
+      "historicalManifestBytesComparedToPublishedCommits": 6
+    },
+    "assetInspection": {
+      "status": "passed-with-adaptation-limits",
+      "decodedRGBA": 13,
+      "upworthImages": 8,
+      "worldImages": 5,
+      "upworthAlphaPassCount": 8,
+      "worldAlphaPassCount": 5,
+      "openIrisCenterAlpha": 0,
+      "closedIrisCenterAlpha": 253,
+      "receiptIds": [
+        "people-generation",
+        "world-generation"
+      ],
+      "nativeBrowserRenderingVerified": false
+    },
+    "bibleGeneration": {
+      "status": "passed",
+      "draft": false,
+      "formats": 4,
+      "productionBriefs": 261,
+      "referenceEntries": 315,
+      "receiptId": "bible-final"
+    },
+    "excel": {
+      "status": "passed",
+      "sheets": 16,
+      "comparedPayloadCells": 17600,
+      "formulaErrorCells": 0,
+      "zipCrcValid": true,
+      "filters": 15,
+      "freezePanesVerified": true,
+      "reviewedViews": 33,
+      "currentProfileViews": 10,
+      "unchangedViewsReused": 23,
+      "nativeExcelApplicationOpened": false,
+      "method": "Cell comparison, ZIP integrity, freeze panes and filters verified; sheet/detail renders inspected.",
+      "receiptId": "bible-final"
+    },
+    "sourceAdmission": {
+      "status": "blocked-local-sparse-checkout",
+      "command": "npm run check",
+      "exitCode": 1,
+      "presentFilesWalk": "passed-before-later-recovery-check",
+      "missingTrackedPath": "archives",
+      "reason": "Checkout local partiel : le garde de récupération exige le dossier suivi archives.",
+      "logReceiptId": "source-check-local-log",
+      "fullSourceCheckPassed": false,
+      "guardRelaxed": false,
+      "requiredInCompleteCheckoutCI": true
+    },
+    "fullBuild": {
+      "status": "pending-ci-complete-checkout",
+      "commands": [
+        "npm run build",
+        "npm run check:built"
+      ],
+      "passed": false
+    },
+    "gameBrowser": {
+      "status": "pending",
+      "passed": false,
+      "scope": "Real keyboard route, exact Upworth occurrence, terrain scope, failure fixtures and save isolation require separate evidence."
+    },
+    "catalogueBrowser": {
+      "status": "pending",
+      "passed": false,
+      "expectedPngs": 154,
+      "expectedRuntimePngs": 81,
+      "expectedCataloguePngs": 73,
+      "expectedCycles": 8,
+      "expectedCompletePhases": 64,
+      "expectedAnimationImages": 69,
+      "bibleFormats": 4
+    },
+    "finalPackage": {
+      "status": "pending",
+      "passed": false,
+      "expectedPngs": 154,
+      "bibleFormats": 4
+    },
+    "publication": {
+      "status": "pending",
+      "v017Commit": null
+    },
+    "githubActions": {
+      "status": "pending-for-v017-published-commit",
+      "commit": null,
+      "runUrl": null,
+      "historicalEvidenceTransferred": false
+    }
+  },
+  "historicalPromptLimitations": {
+    "source": "docs/covenant/PROVENANCE_V016.json",
+    "preserved": true,
+    "unrecoveredExactPrompts": [
+      "world-planet4-shore-rock",
+      "world-planet4-scorched-grass",
+      "vehicle-audi-lunar-quattro-front",
+      "vehicle-audi-lunar-quattro-patrol"
+    ],
+    "newV017SelectedPromptsComplete": true
+  },
+  "limitations": [
+    "Aucune fidélité 1:1 certifiée ; tests techniques, génération et observation navigateur sont des états distincts.",
+    "Les cinq accessoires V017 restent au catalogue ; aucune occurrence horizontale de cryopod ne reçoit la capsule verticale.",
+    "Deux états statiques d’iris sont disponibles ; trois états intermédiaires restent manquants.",
+    "Les cinq poses David incomplètes sont exclues du runtime et du lecteur de cycles complets.",
+    "Les cycles Ricks et Oram sont disponibles au catalogue ; leur intégration au jeu reste non validée.",
+    "Les pilotes natifs guidés par coordonnées ne remplacent pas une QA navigateur.",
+    "Le contrôle général des sources est bloqué par le checkout partiel ; build, navigateurs, pack, publication et CI restent en attente.",
+    "Aucune surface canonique d’Origae-6 ni variante non documentée n’est inventée pour fermer les manques."
+  ],
+  "statusDocuments": [
+    {
+      "path": "docs/covenant/SPRITES_V017_STATUS.md",
+      "bytes": 9759,
+      "sha256": "9b54f6e78ebd359240fade7c7040e9c502a1bf66ae82aaccf5cbf792bc81bcf7"
+    },
+    {
+      "path": "docs/covenant/CONTINUATION_V017.md",
+      "bytes": 10380,
+      "sha256": "bd5e197f8ee108e4e6f3981e884153324670615ab11a12253d164a23b40c2b7b"
+    }
+  ]
+}

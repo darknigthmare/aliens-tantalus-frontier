@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "0.14.0",
+  "release": "0.17.0",
   "sourceModuleVersion": "0.10.0",
   "verified1to1": false,
   "assets": [
@@ -2457,6 +2457,300 @@
         "walter-cryo"
       ],
       "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-01",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-01.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1553050,
+      "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+      "alphaBounds": [
+        137,
+        24,
+        834,
+        1500
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1500
+      ],
+      "logicalHeight": 122.00000000000001,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-02",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-02.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1569762,
+      "sha256": "80814221148810df99650071d6e5a79af6393a271ac01cac08f07dadfd83c8b6",
+      "alphaBounds": [
+        127,
+        26,
+        810,
+        1487
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1487
+      ],
+      "logicalHeight": 120.76016260162602,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-03",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-03.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1427213,
+      "sha256": "20d0ea4284bc9d6132adb42bd21be00d7dd1ee809914566bb4e84a07036bbd1d",
+      "alphaBounds": [
+        256,
+        23,
+        735,
+        1497
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1497
+      ],
+      "logicalHeight": 121.83468834688348,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-04",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-04.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1539659,
+      "sha256": "f6696bf5f84e27e4434474d19e83e45ac4e7dbd147145bcf68c9d84adf9f38e4",
+      "alphaBounds": [
+        112,
+        17,
+        960,
+        1482
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1482
+      ],
+      "logicalHeight": 121.09078590785909,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-05",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-05.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1509624,
+      "sha256": "85028f86ffc190073c650c5dec4885e1ef43f8665daa17f1d457466f61690604",
+      "alphaBounds": [
+        114,
+        21,
+        911,
+        1473
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1473
+      ],
+      "logicalHeight": 120.01626016260164,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-06",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-06.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1529996,
+      "sha256": "8dc8e0182ffcaee9b8cd34c9fa0be9fc511b6b2612e4326b21ea22cdb1817be9",
+      "alphaBounds": [
+        114,
+        34,
+        845,
+        1477
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1477
+      ],
+      "logicalHeight": 119.27235772357724,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-07",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-07.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1582785,
+      "sha256": "5a0f2286c6d0b62013adcdfa0635711aa84efb3c6d0a3b1a2de73c922852c8ab",
+      "alphaBounds": [
+        203,
+        14,
+        804,
+        1504
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1504
+      ],
+      "logicalHeight": 123.15718157181573,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "upworth-walk-08",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "path": "/assets/openai/sprites/alien-covenant-v017/upworth-walk-08.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1613083,
+      "sha256": "611cfcc1e7f83301b28bd38b0d6ff58d1d3db5ba6093b217d23487835551ad18",
+      "alphaBounds": [
+        159,
+        23,
+        876,
+        1471
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        512,
+        1471
+      ],
+      "logicalHeight": 119.68563685636857,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "Generated pose; only the declared state and consumer are available. Film fidelity is not certified.",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "imagePolicy": "transparent-sprite"
+    },
+    {
+      "id": "world-planet4-shore-rock",
+      "kind": "prop",
+      "key": "landing-light2",
+      "state": "idle",
+      "path": "/assets/openai/sprites/alien-covenant-v016/world-planet4-shore-rock.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 2136154,
+      "sha256": "644ec53216086a3fc2d977c2fa2506dca24779490955c7d17e5e7834e9947eff",
+      "alphaBounds": [
+        51,
+        176,
+        1723,
+        801
+      ],
+      "alphaThreshold": 32,
+      "anchor": [
+        887.0,
+        801
+      ],
+      "logicalHeight": 100,
+      "sourceFacing": 1,
+      "verified1to1": false,
+      "note": "V017 promotion of the unchanged V016 shore rock; exact non-solid landing-light2 occurrence only. No film scale or 1:1 fidelity certified.",
+      "rooms": [
+        "landing"
+      ],
+      "imagePolicy": "transparent-sprite"
     }
   ],
   "cycles": [
@@ -2547,6 +2841,30 @@
         "walter-walk-06",
         "walter-walk-07",
         "walter-walk-08"
+      ]
+    },
+    {
+      "id": "upworth-walk",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "consumer": "npc",
+      "actors": [
+        "upworth-comms"
+      ],
+      "rooms": [
+        "comms"
+      ],
+      "angularFrequency": 2.1,
+      "frames": [
+        "upworth-walk-01",
+        "upworth-walk-02",
+        "upworth-walk-03",
+        "upworth-walk-04",
+        "upworth-walk-05",
+        "upworth-walk-06",
+        "upworth-walk-07",
+        "upworth-walk-08"
       ]
     }
   ]

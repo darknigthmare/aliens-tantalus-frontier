@@ -1,6 +1,34 @@
-# Alien: Covenant — bible et production V0.16
+# Alien: Covenant — bible et production V017
+
+La bible consolide les productions V015 et V016 puis ajoute **13 nouveaux PNG originaux : huit phases de marche d’Upworth et cinq accessoires de monde**. L’inventaire contient **154 images : 81 admises dans le rendu et 73 au catalogue**.
+
+Les **261 contrats de production** couvrent personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et planètes. Les **315 références, 67 liaisons, 134 seuils et 630 occurrences de props** gardent leurs identifiants. Les fiches précisent les états disponibles, les manquants, les consommateurs, les sources et les critères de validation.
+
+- Bible V017 : [Markdown](BIBLE_COVENANT_V017.md), [HTML](BIBLE_COVENANT_V017.html), [JSON](BIBLE_COVENANT_V017.json), [Excel](BIBLE_COVENANT_V017.xlsx).
+- [Suivi et contrôles](SPRITES_V017_STATUS.md), [journal](CONTINUATION_V017.md), [manifeste](../../assets/openai/sprites/alien-covenant-v017/manifest.json) et [provenance](PROVENANCE_V017.json).
+- [PR 79 — continuation Covenant](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79), rattachée à la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71).
+
+Le jeu utilise **six cycles complets et 48 phases**. Les cycles de Ricks et d’Oram restent au catalogue, avec 16 phases supplémentaires ; les cinq poses incomplètes de David restent exclues du lecteur de cycles. L’iris du Juggernaut possède deux vues statiques et trois états intermédiaires encore manquants. Les cinq nouveaux accessoires restent au catalogue ; le rocher V016 est limité à l’occurrence `landing-light2`.
+
+Les validations et leurs limites figurent dans les documents liés. Le catalogue hors ligne inclut tous les originaux ; seules les admissions du manifeste cumulatif alimentent la distribution du jeu. Les PNG, manifestes et bibles historiques sont préservés. **Aucune fidélité 1:1 n’est certifiée.** Les sections ci-dessous gardent les comptes propres à leur publication.
+
+---
+
+## Texte historique intégral conservé
+
+# Alien: Covenant — convergence des productions V015 et V016
 
 ## Suivi courant
+
+Les productions publiées en V015 et V016 sont réunies sans modifier leurs fichiers historiques. L’inventaire consolidé contient **141 PNG originaux : 72 admis au rendu et 69 au catalogue**. Les cinq cycles runtime restent distincts des deux séries de catalogue de Ricks et d’Oram ; les cinq poses de David restent incomplètes.
+
+- [Bible V015](BIBLE_COVENANT_V015.md) : 22 nouveaux originaux — Ricks, Oram et six équipements.
+- [Bible V016](BIBLE_COVENANT_V016.md), [HTML](BIBLE_COVENANT_V016.html), [JSON](BIBLE_COVENANT_V016.json) et [Excel](BIBLE_COVENANT_V016.xlsx) : 257 contrats détaillés et 16 autres originaux.
+- Les comptes des documents historiques gardent le périmètre de leur publication ; ils ne décrivent pas encore cet inventaire réuni.
+
+La nouvelle continuation utilise cet ensemble comme base. Les 315 références et les identifiants du jeu sont conservés. Aucune fidélité visuelle 1:1 n’est certifiée.
+
+## Historique conservé — passe V016
 
 La [bible détaillée V0.16](BIBLE_COVENANT_V016.md), son [inventaire JSON](BIBLE_COVENANT_V016.json), sa [lecture HTML](BIBLE_COVENANT_V016.html) et son [classeur Excel](BIBLE_COVENANT_V016.xlsx) relient les huit domaines demandés aux références et aux consommateurs réels du moteur.
 
@@ -14,7 +42,7 @@ Aucune fidélité 1:1 n’est certifiée. Les références inspectées, parties 
 
 ## Historique et rattachement
 
-La [bible principale](../narrative/CAMPAGNE_PRINCIPALE.md) renvoie à cette annexe. Le [suivi V014](SPRITES_V014_STATUS.md) conserve son périmètre de 103 PNG, 72 admissions et cinq cycles. Les fichiers V011–V014 gardent leurs octets. Cette continuation n’intègre pas un éventuel lot V015 d’une autre branche.
+La [bible principale](../narrative/CAMPAGNE_PRINCIPALE.md) renvoie à cette annexe. Le [suivi V014](SPRITES_V014_STATUS.md) conserve son périmètre de 103 PNG, 72 admissions et cinq cycles. Les fichiers V011–V014 gardent leurs octets. Au moment de la publication V016, le lot V015 n’était pas encore réuni à cette branche ; la section courante ci-dessus indique la convergence effective.
 
 La [PR 79](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79) complète la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71). La [consolidation de PR68](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md) garde son état historique épinglé. La simulation V0.10.0, les sauvegardes, collisions et connexions ne sont pas modifiées.
 

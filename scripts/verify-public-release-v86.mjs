@@ -766,6 +766,30 @@ const FORGE_TOOLING_V140 = new Set([
   // Source-only narrative design bible; never shipped in a built distribution.
   'docs/narrative',
   'docs/narrative/CAMPAGNE_PRINCIPALE.md',
+  // DLC bible consolidation: exact source-only documents, never shipped.
+  'docs/narrative/dlc',
+  'docs/narrative/dlc/RECUPERATION_20261126.json',
+  'docs/narrative/dlc/RECUPERATION_20261126.md',
+  'docs/narrative/DLC_DISCUSSIONS_20261126.json',
+  'docs/narrative/DLC_INDEX_20261126.md',
+  'docs/narrative/dlc/40th-anniversary.md',
+  'docs/narrative/dlc/alien-1979-nostromo.md',
+  'docs/narrative/dlc/alien-blackout.md',
+  'docs/narrative/dlc/alien-covenant.md',
+  'docs/narrative/dlc/alien-earth.md',
+  'docs/narrative/dlc/alien-isolation.md',
+  'docs/narrative/dlc/alien-resurrection.md',
+  'docs/narrative/dlc/alien-romulus.md',
+  'docs/narrative/dlc/alien3-fiorina.md',
+  'docs/narrative/dlc/alien5-projet-lazare.md',
+  'docs/narrative/dlc/aliens-1986.md',
+  'docs/narrative/dlc/avp-2004.md',
+  'docs/narrative/dlc/avp-requiem.md',
+  'docs/narrative/dlc/colonial-marines.md',
+  'docs/narrative/dlc/out-of-the-shadows.md',
+  'docs/narrative/dlc/prometheus.md',
+  'docs/narrative/dlc/river-of-pain.md',
+  'docs/narrative/dlc/sea-of-sorrows.md',
   // Narrow, source-only admission for the arsenal specification; not shipped.
   'docs/arsenal',
   'docs/arsenal/README.md',
@@ -1185,7 +1209,36 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
   '.github/workflows/fiorina-native-v114.yml'
 ]);
 
+// Exact AVP production sources remain outside the playable distribution.
+// A generated candidate is not a runtime asset or a fidelity certification.
+const AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126 = new Set([
+  "docs/narrative/dlc/avp-2004-production-20261126",
+  "assets/openai/sprites/avp2004-production-v001"
+]);
+const AVP_PRODUCTION_SOURCE_FILES_20261126 = new Set([
+  "docs/narrative/dlc/avp-2004-production-20261126/README.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/SOURCES.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/INVENTORY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/runtime-inventory.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/PRODUCTION_SPECIFICATIONS.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/production-specs.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md",
+  "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+  "docs/narrative/dlc/avp-2004-production-20261126/canon-research.json",
+  "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+  "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png"
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126.has(path)) return !built && directory;
+  if (typeof path === 'string' && [...AVP_PRODUCTION_SOURCE_DIRECTORIES_20261126].some(root => path.startsWith(root + '/')))
+    return !built && !directory && AVP_PRODUCTION_SOURCE_FILES_20261126.has(path);
   const covenantAdmission = publicCovenantPathAdmissionV011(path, { directory, built });
   if (covenantAdmission !== null) return covenantAdmission;
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
