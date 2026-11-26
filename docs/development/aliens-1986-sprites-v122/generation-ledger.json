@@ -1,0 +1,1122 @@
+{
+  "schema": "aliens1986-generation-ledger-v122",
+  "date": "2026-11-26",
+  "tool": "built-in-imagegen",
+  "oneAssetPerImage": true,
+  "nativeBytesPreserved": true,
+  "pixelEditingOutsideImagegen": false,
+  "externalResampling": false,
+  "filmFidelityValidated": false,
+  "counts": {
+    "base": 155,
+    "added": 9,
+    "total": 164,
+    "recoveredLocalImages": 7,
+    "newImages": 2,
+    "atlasPlacements": 11,
+    "illustratedLocationCards": 8
+  },
+  "assets": [
+    {
+      "id": "uss-sulaco",
+      "prompt": "Use case: precise-object-edit.\nAsset type: transparent isolated spacecraft sprite for an Aliens (1986) reference atlas.\nInput image 1 is the official Syd Mead Archive illustration of the USS Sulaco. Create a new detailed painted miniature-style rendering of ONLY that spacecraft, using the attached image as the strict silhouette, mechanical-layout, proportions, materials and camera-angle reference.\nPreserve the long low slab-like hull, the dense projecting communications antennae at the bow on the RIGHT, layered longitudinal mechanical rails, restrained vertical fins, and clustered propulsion mass at the LEFT. Keep the same slightly low oblique side view as the reference, with the bow to the right. Maintain its lean industrial military cargo-ship proportions. Reconstruct the full object within the frame with generous clear margins, including every antenna tip.\nMaterials: subdued blue-grey and charcoal painted metal, restrained worn edges, deep recesses, fine miniature surface detailing. Keep the recognizable design and panel layout seen in the reference; readable neutral diffuse illumination with restrained cool highlights.\nOutput exactly ONE whole USS Sulaco, isolated on genuinely transparent alpha, landscape composition. No planet, stars, space scene, paper, frame, printed poster, labels, watermark, inset views, scale bar, ground, floor shadow, beam, smoke or glow outside the craft. Do not add other craft, people, weapons or invented structures. Preserve the object as a single production-reference-derived asset. This is an interpretation for reference comparison, not a certification of exact film fidelity.",
+      "provenance": {
+        "id": "uss-sulaco",
+        "path": "local-reference/uss-sulaco.png",
+        "repositoryPath": "assets/dlc/aliens-1986/v122/exteriors/uss-sulaco.png",
+        "placementMethod": "hardlink",
+        "sameInode": true,
+        "format": "PNG",
+        "mode": "RGBA",
+        "bytes": 1508899,
+        "width": 1774,
+        "height": 887,
+        "bboxAlpha128": [
+          26,
+          15,
+          1748,
+          853
+        ],
+        "alpha0Pixels": 950059,
+        "alpha255Pixels": 467,
+        "partialAlphaPixels": 623012,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "sha256": "edfca27af5b00ede4f5ea64da49b79f8a71e616a7eea3e26ee207f23d3d4bb3a",
+        "gitBlobSha1": "08507c0e0477bfc9a2aafb25b764c84da3edddb7",
+        "nativeBytesUnchanged": true,
+        "filmFidelityValidated": false,
+        "referenceIdentityAndProvenanceChecked": true,
+        "selectionStatus": "selected-for-reference-atlas",
+        "exactRequest": {
+          "prompt": "Use case: precise-object-edit.\nAsset type: transparent isolated spacecraft sprite for an Aliens (1986) reference atlas.\nInput image 1 is the official Syd Mead Archive illustration of the USS Sulaco. Create a new detailed painted miniature-style rendering of ONLY that spacecraft, using the attached image as the strict silhouette, mechanical-layout, proportions, materials and camera-angle reference.\nPreserve the long low slab-like hull, the dense projecting communications antennae at the bow on the RIGHT, layered longitudinal mechanical rails, restrained vertical fins, and clustered propulsion mass at the LEFT. Keep the same slightly low oblique side view as the reference, with the bow to the right. Maintain its lean industrial military cargo-ship proportions. Reconstruct the full object within the frame with generous clear margins, including every antenna tip.\nMaterials: subdued blue-grey and charcoal painted metal, restrained worn edges, deep recesses, fine miniature surface detailing. Keep the recognizable design and panel layout seen in the reference; readable neutral diffuse illumination with restrained cool highlights.\nOutput exactly ONE whole USS Sulaco, isolated on genuinely transparent alpha, landscape composition. No planet, stars, space scene, paper, frame, printed poster, labels, watermark, inset views, scale bar, ground, floor shadow, beam, smoke or glow outside the craft. Do not add other craft, people, weapons or invented structures. Preserve the object as a single production-reference-derived asset. This is an interpretation for reference comparison, not a certification of exact film fidelity.",
+          "referenced_image_paths": [
+            "local-reference/sulaco-syd-mead-archive.jpg"
+          ],
+          "transparent_background": true
+        },
+        "reference": {
+          "referenceFile": "sulaco-syd-mead-archive.jpg",
+          "path": "local-reference/sulaco-syd-mead-archive.jpg",
+          "width": 1000,
+          "height": 1000,
+          "bytes": 123708,
+          "sha256": "e49fd989c344bbbf9c78234080f385752aad8c2d64e0d9675cabbd13be1bdf82",
+          "pageUrl": "https://shop.sydmead.com/products/vintage-poster-sulaco-poster-print-comicon-2012",
+          "imageUrl": "https://shop.sydmead.com/cdn/shop/products/USSSulacoVintagePosterbySydMead.jpg?v=1658513246",
+          "kind": "official-artist-archive-illustration",
+          "description": "Official Syd Mead Archive poster produced for Comic-Con 2012; illustration of the Aliens (1986) Sulaco. It is not an orthographic production blueprint or a measured final filming miniature.",
+          "visuallyInspected": true
+        },
+        "alphaMeasurement": {
+          "id": "uss-sulaco",
+          "alphaPositiveBbox": [
+            19,
+            10,
+            1756,
+            887
+          ],
+          "nonzeroAlphaPixels": 623479,
+          "medianPositiveAlpha": 253,
+          "alphaAtLeast240Pixels": 555636,
+          "mostFrequentAlphas": [
+            [
+              0,
+              950059
+            ],
+            [
+              253,
+              354633
+            ],
+            [
+              252,
+              159042
+            ],
+            [
+              1,
+              26041
+            ],
+            [
+              251,
+              13500
+            ],
+            [
+              2,
+              6775
+            ]
+          ]
+        },
+        "view": "oblique side view; bow right, propulsion left",
+        "visualReview": "One complete isolated spacecraft; recognizable longitudinal slab hull, front antennae and aft propulsion arrangement retained. Selected for the reference atlas.",
+        "limitations": [
+          "Exact film fidelity has not been validated.",
+          "The input illustration partly crops its antenna extremities; completed tips and detailed surfaces are interpretive.",
+          "The neutral illumination differs from the source illustration's dramatic colored lighting.",
+          "No flight, scale-in-world, scene placement or gameplay behavior is implemented by this asset.",
+          "Native near-opaque alpha values are mainly 252–253; alpha was preserved unchanged.",
+          "Some sub-threshold alpha pixels extend to the lower canvas edge; the alpha≥128 silhouette remains inset."
+        ]
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "jorden-survey-tractor",
+      "prompt": "Use case: sketch-to-render.\nAsset type: transparent isolated vehicle sprite for an Aliens (1986) reference atlas.\nInput image 1 is Ron Cobb's production concept sheet labeled The Jorden Tractor. Translate ONLY the large side elevation at the lower RIGHT of the sheet into one detailed painted miniature-style vehicle rendering. The other three drawings are supporting geometry references only; do not reproduce the sheet.\nPreserve that side elevation's exact silhouette and proportions: compact six-wheel survey tractor with three wheel positions visible on the near side, wedge-shaped enclosed glazed cab at the LEFT, sloping front windscreen, angular lower nose, long box-like machinery body behind the cab to the RIGHT, exposed roof pipes and its small roof equipment. Preserve the reference's unusual window divisions, wheel spacing and profile. The vehicle faces LEFT and is shown in the same near-orthographic lateral view as that reference elevation.\nUse restrained industrial painted metal and rubber material interpretation: neutral muted grey body, the faint green-tinted windows actually indicated in the reference, dark rubber tires, subtle surface wear, detailed mechanical seams. No bright invented livery or hazard markings.\nOutput exactly ONE whole tractor, all three near-side wheels and roof details fully inside the frame with clear margins, on genuinely transparent alpha. Landscape composition with neutral diffuse lighting. No people, driver, landscape, road, ground plane, cast floor shadow, cargo, trailer, text, paper, blueprint lines, poster, watermark, labels, or inset views. Do not substitute an APC, a yellow airport tug, or a contemporary truck. Preserve the Ron Cobb reference as closely as possible; material interpretation remains subject to comparison with the finished film.",
+      "provenance": {
+        "id": "jorden-survey-tractor",
+        "path": "local-reference/jorden-survey-tractor.png",
+        "repositoryPath": "assets/dlc/aliens-1986/v122/exteriors/jorden-survey-tractor.png",
+        "placementMethod": "hardlink",
+        "sameInode": true,
+        "format": "PNG",
+        "mode": "RGBA",
+        "bytes": 2059152,
+        "width": 1717,
+        "height": 916,
+        "bboxAlpha128": [
+          42,
+          21,
+          1680,
+          910
+        ],
+        "alpha0Pixels": 639570,
+        "alpha255Pixels": 397,
+        "partialAlphaPixels": 932805,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "sha256": "b28f7064586172b81b44ef1c17d2f1a5bcf64d36b9300817decbcc6a01b54354",
+        "gitBlobSha1": "3ff338947ad88c906e9e0a1019dadbe689940b1e",
+        "nativeBytesUnchanged": true,
+        "filmFidelityValidated": false,
+        "referenceIdentityAndProvenanceChecked": true,
+        "selectionStatus": "selected-for-reference-atlas",
+        "exactRequest": {
+          "prompt": "Use case: sketch-to-render.\nAsset type: transparent isolated vehicle sprite for an Aliens (1986) reference atlas.\nInput image 1 is Ron Cobb's production concept sheet labeled The Jorden Tractor. Translate ONLY the large side elevation at the lower RIGHT of the sheet into one detailed painted miniature-style vehicle rendering. The other three drawings are supporting geometry references only; do not reproduce the sheet.\nPreserve that side elevation's exact silhouette and proportions: compact six-wheel survey tractor with three wheel positions visible on the near side, wedge-shaped enclosed glazed cab at the LEFT, sloping front windscreen, angular lower nose, long box-like machinery body behind the cab to the RIGHT, exposed roof pipes and its small roof equipment. Preserve the reference's unusual window divisions, wheel spacing and profile. The vehicle faces LEFT and is shown in the same near-orthographic lateral view as that reference elevation.\nUse restrained industrial painted metal and rubber material interpretation: neutral muted grey body, the faint green-tinted windows actually indicated in the reference, dark rubber tires, subtle surface wear, detailed mechanical seams. No bright invented livery or hazard markings.\nOutput exactly ONE whole tractor, all three near-side wheels and roof details fully inside the frame with clear margins, on genuinely transparent alpha. Landscape composition with neutral diffuse lighting. No people, driver, landscape, road, ground plane, cast floor shadow, cargo, trailer, text, paper, blueprint lines, poster, watermark, labels, or inset views. Do not substitute an APC, a yellow airport tug, or a contemporary truck. Preserve the Ron Cobb reference as closely as possible; material interpretation remains subject to comparison with the finished film.",
+          "referenced_image_paths": [
+            "local-reference/jorden-tractor-ron-cobb-propstore.jpg"
+          ],
+          "transparent_background": true
+        },
+        "reference": {
+          "referenceFile": "jorden-tractor-ron-cobb-propstore.jpg",
+          "path": "local-reference/jorden-tractor-ron-cobb-propstore.jpg",
+          "width": 734,
+          "height": 734,
+          "bytes": 57736,
+          "sha256": "839677811f10f122835cb53f3b6dfe8692665df1925f51f03c85b991ec8f595d",
+          "pageUrl": "https://propstore.com/product/aliens-1986/hand-illustrated-ron-cobb-daihotai-tractor-concept-sketch/",
+          "imageUrl": "https://images.propstore.com/18811284db7f2bb22b6652ebbbfad68c-1.jpg",
+          "kind": "production-concept-drawing",
+          "description": "Propstore stock 105583: Ron Cobb production concept sheet The Jorden Tractor, front/back/side/overhead drawings. Primary drawing photographed by the auction house.",
+          "visuallyInspected": true
+        },
+        "alphaMeasurement": {
+          "id": "jorden-survey-tractor",
+          "alphaPositiveBbox": [
+            27,
+            15,
+            1685,
+            916
+          ],
+          "nonzeroAlphaPixels": 933202,
+          "medianPositiveAlpha": 253,
+          "alphaAtLeast240Pixels": 896344,
+          "mostFrequentAlphas": [
+            [
+              0,
+              639570
+            ],
+            [
+              253,
+              609696
+            ],
+            [
+              252,
+              246205
+            ],
+            [
+              251,
+              16601
+            ],
+            [
+              1,
+              10856
+            ],
+            [
+              250,
+              7982
+            ]
+          ]
+        },
+        "view": "near-orthographic side elevation from the lower-right drawing; facing left",
+        "visualReview": "One enclosed survey tractor with three near-side wheels, wedge cabin and roof machinery. Visually distinct from the existing open yellow industrial-tug asset. Selected for the Special Edition reference atlas.",
+        "limitations": [
+          "Exact film fidelity has not been validated.",
+          "This follows a production concept, not a screen-matched finished vehicle photograph.",
+          "Grey body, material finish, weathering and roof equipment details are interpretive; the reference explicitly indicates green glazing but not the full film livery.",
+          "No Jorden character, room, driving behavior, trailer or new campaign sequence is implemented by this asset.",
+          "Native near-opaque alpha values are mainly 252–253; alpha was preserved unchanged.",
+          "Some sub-threshold alpha pixels extend to the lower canvas edge; the alpha≥128 silhouette remains inset."
+        ]
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "sulaco-deck-tile",
+      "prompt": "Use case: product-mockup.\nAsset type: high resolution photorealistic raster game surface, one isolated Sulaco deck tile for Aliens (1986).\nInput image 1 is a primary production-object photograph showing TWO surviving full-size floor tiles. Use ONLY the LEFT tile as the design reference. Generate ONE tile, never the pair.\nPrimary request: a careful visually referenced reconstruction of that single square openwork tile, viewed exactly perpendicular to its top surface. Preserve the observable construction: square perimeter frame with short oblong slots; an orthogonal lattice with repeated diagonal X braces; circular ring junctions; four shallow square molded recesses near the corners. Keep the arrangement and density close to the LEFT photographed tile. Do not replace it with a generic sewer grate or parallel-bar grid.\nComposition: one complete square tile centered on a square canvas, edges parallel to the image borders, equal transparent padding of roughly 4 percent on every side. Strict top-down orthographic view. No perspective convergence, no visible side wall, no bevel that creates a three-quarter view. The tile is a single physical object with a coherent continuous frame.\nMaterials: detailed realistic molded rigid material coated in dull silver-gray metallic-looking paint, small worn edges revealing muted green substrate, restrained grime in recesses, subtly scuffed industrial finish. Use the reference for molded detail and wear character. Neutral, even illumination suitable for compositing; no dramatic cast shadow, floor, tabletop, scenery, or studio backdrop.\nTransparency: genuinely transparent background outside the square tile AND genuinely transparent apertures through its lattice. The openings are actual empty holes, not white paint, black filled polygons, gray checkerboard, or a floor behind them. Preserve fine native alpha edges without colored fringes.\nConstraints: exactly one tile and no second object; no people; no lettering, labels, logos, watermark, ruler, or measuring marks. Do not claim or imply a seamless repeating pattern: deliver the complete framed tile as an isolated object. Raster photorealism, not line art, vector art, stylized icon, or diagram.",
+      "provenance": {
+        "id": "sulaco-deck-tile",
+        "attemptId": "sulaco-deck-tile-attempt-1",
+        "prompt": "Use case: product-mockup.\nAsset type: high resolution photorealistic raster game surface, one isolated Sulaco deck tile for Aliens (1986).\nInput image 1 is a primary production-object photograph showing TWO surviving full-size floor tiles. Use ONLY the LEFT tile as the design reference. Generate ONE tile, never the pair.\nPrimary request: a careful visually referenced reconstruction of that single square openwork tile, viewed exactly perpendicular to its top surface. Preserve the observable construction: square perimeter frame with short oblong slots; an orthogonal lattice with repeated diagonal X braces; circular ring junctions; four shallow square molded recesses near the corners. Keep the arrangement and density close to the LEFT photographed tile. Do not replace it with a generic sewer grate or parallel-bar grid.\nComposition: one complete square tile centered on a square canvas, edges parallel to the image borders, equal transparent padding of roughly 4 percent on every side. Strict top-down orthographic view. No perspective convergence, no visible side wall, no bevel that creates a three-quarter view. The tile is a single physical object with a coherent continuous frame.\nMaterials: detailed realistic molded rigid material coated in dull silver-gray metallic-looking paint, small worn edges revealing muted green substrate, restrained grime in recesses, subtly scuffed industrial finish. Use the reference for molded detail and wear character. Neutral, even illumination suitable for compositing; no dramatic cast shadow, floor, tabletop, scenery, or studio backdrop.\nTransparency: genuinely transparent background outside the square tile AND genuinely transparent apertures through its lattice. The openings are actual empty holes, not white paint, black filled polygons, gray checkerboard, or a floor behind them. Preserve fine native alpha edges without colored fringes.\nConstraints: exactly one tile and no second object; no people; no lettering, labels, logos, watermark, ruler, or measuring marks. Do not claim or imply a seamless repeating pattern: deliver the complete framed tile as an isolated object. Raster photorealism, not line art, vector art, stylized icon, or diagram.",
+        "sourceUrl": "https://propstore.com/product/aliens-1986/lot-474-pair-of-full-size-uss-sulaco-floor-tiles/",
+        "referenceImageUrl": "https://images.propstore.com/363467e439d355d88945141f89334ced-1.jpeg",
+        "referenceSha256": "13cbe58f8d14aa90676398bbe885eca40925456332f6888712c669125d03c429",
+        "status": "generation-complete-atlas-review-pending",
+        "filmFidelityValidated": false,
+        "attempts": [
+          {
+            "id": "sulaco-deck-tile",
+            "attemptId": "sulaco-deck-tile-attempt-1",
+            "bytes": 2755208,
+            "sha256": "168426ce3003854bc6714196cf12d0facfc80244fa2733d6d8a5ee0cf6ba3671",
+            "width": 1254,
+            "height": 1254,
+            "pixelMode": "RGBA",
+            "bbox": [
+              43,
+              39,
+              1211,
+              1206
+            ],
+            "pivot": [
+              627.0,
+              1206
+            ],
+            "transparentPixels": 518174,
+            "opaquePixels": 2188,
+            "partialAlphaPixels": 1052154,
+            "frameCount": 1,
+            "status": "not-selected-visible-colored-alpha-fringes",
+            "filmFidelityValidated": false,
+            "prompt": "Use case: product-mockup.\nAsset type: high resolution photorealistic raster game surface, one isolated Sulaco deck tile for Aliens (1986).\nInput image 1 is a primary production-object photograph showing TWO surviving full-size floor tiles. Use ONLY the LEFT tile as the design reference. Generate ONE tile, never the pair.\nPrimary request: a careful visually referenced reconstruction of that single square openwork tile, viewed exactly perpendicular to its top surface. Preserve the observable construction: square perimeter frame with short oblong slots; an orthogonal lattice with repeated diagonal X braces; circular ring junctions; four shallow square molded recesses near the corners. Keep the arrangement and density close to the LEFT photographed tile. Do not replace it with a generic sewer grate or parallel-bar grid.\nComposition: one complete square tile centered on a square canvas, edges parallel to the image borders, equal transparent padding of roughly 4 percent on every side. Strict top-down orthographic view. No perspective convergence, no visible side wall, no bevel that creates a three-quarter view. The tile is a single physical object with a coherent continuous frame.\nMaterials: detailed realistic molded rigid material coated in dull silver-gray metallic-looking paint, small worn edges revealing muted green substrate, restrained grime in recesses, subtly scuffed industrial finish. Use the reference for molded detail and wear character. Neutral, even illumination suitable for compositing; no dramatic cast shadow, floor, tabletop, scenery, or studio backdrop.\nTransparency: genuinely transparent background outside the square tile AND genuinely transparent apertures through its lattice. The openings are actual empty holes, not white paint, black filled polygons, gray checkerboard, or a floor behind them. Preserve fine native alpha edges without colored fringes.\nConstraints: exactly one tile and no second object; no people; no lettering, labels, logos, watermark, ruler, or measuring marks. Do not claim or imply a seamless repeating pattern: deliver the complete framed tile as an isolated object. Raster photorealism, not line art, vector art, stylized icon, or diagram."
+          },
+          {
+            "id": "sulaco-deck-tile",
+            "attemptId": "sulaco-deck-tile-attempt-2",
+            "path": "assets/dlc/aliens-1986/v122/environments/sulaco-deck-tile.png",
+            "bytes": 2820620,
+            "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789",
+            "width": 1254,
+            "height": 1254,
+            "pixelMode": "RGBA",
+            "bbox": [
+              42,
+              36,
+              1212,
+              1209
+            ],
+            "pivot": [
+              627.0,
+              1209
+            ],
+            "bboxStatus": "alpha128-measured",
+            "transparentPixels": 558206,
+            "alphaAtLeast128Pixels": 874695,
+            "partialAlphaPixels": 1012101,
+            "highSaturationPixels": 14830,
+            "highSaturationAlpha128Pixels": 0,
+            "highSaturationAlpha32Pixels": 0,
+            "frameCount": 1,
+            "animated": false,
+            "filmFidelityValidated": false,
+            "status": "selected-for-review",
+            "limits": [
+              "Small native edge fringes remain visible in image tool preview; no pixel processing performed.",
+              "Exact 1:1 film fidelity and seamless repetition are not validated."
+            ],
+            "prompt": "Use case: precise-object-edit.\nInput image 1 is the edit target: the already generated single square Sulaco deck tile. Preserve its full square outline, exact orthographic top-down camera, scale, lattice design, diagonal braces, circular junctions, four corner recesses, green-under-silver worn surface, and current empty margin.\nChange only the defective alpha boundary: remove the conspicuous green, yellow, red, cyan and white speckled halos floating in the openings and outside the perimeter. Restore truly empty, fully transparent negative space in every through-opening and around the tile. The physical gray/green structural edges must remain intact and crisp with natural fine antialiasing.\nDo not add a background or fill the holes. Do not erase the genuine muted green paint on the tile itself. Keep all solid parts and their realistic surface detail. No geometry redesign, no new features, no shadows outside the object, no text, no second tile. Return one complete unchanged tile with clean native transparent alpha.",
+            "sourceAttemptId": "sulaco-deck-tile-attempt-1",
+            "sourceSha256": "168426ce3003854bc6714196cf12d0facfc80244fa2733d6d8a5ee0cf6ba3671",
+            "alphaRange": [
+              0,
+              255
+            ],
+            "containsTransparentPixels": true,
+            "nativeFileHardlinkCount": 2,
+            "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150"
+          }
+        ],
+        "selected": {
+          "id": "sulaco-deck-tile",
+          "attemptId": "sulaco-deck-tile-attempt-2",
+          "path": "assets/dlc/aliens-1986/v122/environments/sulaco-deck-tile.png",
+          "bytes": 2820620,
+          "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789",
+          "width": 1254,
+          "height": 1254,
+          "pixelMode": "RGBA",
+          "bbox": [
+            42,
+            36,
+            1212,
+            1209
+          ],
+          "pivot": [
+            627.0,
+            1209
+          ],
+          "bboxStatus": "alpha128-measured",
+          "transparentPixels": 558206,
+          "alphaAtLeast128Pixels": 874695,
+          "partialAlphaPixels": 1012101,
+          "highSaturationPixels": 14830,
+          "highSaturationAlpha128Pixels": 0,
+          "highSaturationAlpha32Pixels": 0,
+          "frameCount": 1,
+          "animated": false,
+          "filmFidelityValidated": false,
+          "status": "selected-for-review",
+          "limits": [
+            "Small native edge fringes remain visible in image tool preview; no pixel processing performed.",
+            "Exact 1:1 film fidelity and seamless repetition are not validated."
+          ],
+          "alphaRange": [
+            0,
+            255
+          ],
+          "containsTransparentPixels": true,
+          "nativeFileHardlinkCount": 2,
+          "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150"
+        },
+        "generator": "built-in image_gen",
+        "pixelEditing": "none outside image_gen",
+        "preservation": "native PNG bytes hardlinked into project",
+        "reviewStatus": "source and generated-image previews inspected; final atlas Canvas compositing pending root review",
+        "sourceObservations": [
+          "Photograph shows two square openwork production tiles; generation uses the left tile only.",
+          "Observed diagonal X braces, circular junctions, four square corner recesses and oblong perimeter slots.",
+          "Surviving silver-colored finish is heavily worn and reveals green substrate; this is not proof of the original film lighting or pristine paint state."
+        ],
+        "sourceLimits": [
+          "The lot474 description and Item size fields give contradictory dimensions; neither was converted into game dimensions.",
+          "Framed isolated square tile; seamless repetition was neither requested nor validated.",
+          "Generated fine detail and weathering are adaptations; no screen-match validation."
+        ]
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "atmosphere-processor-facade",
+      "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster illustration for the Aliens (1986) location atlas.\nInput image 1 is the primary-reference photograph of the production-made LV-426 Atmosphere Processing Plant forced-perspective facade miniature, extracted from Propstore's Summer 2026 catalog, lot 8. It is a reference for the actual silhouette and visible construction, not a style suggestion.\nPrimary request: reconstruct this same single facade assembly as an isolated, detailed raster object. Preserve its recognizable proportions and layout: a broad low flaring truncated tower, a narrower truncated upper crown with a flat open rim, thin spires rising at the rim, the broken band of orange-lit openings below the crown, sloping segmented walls radiating downwards, two tall narrow outside pylons, low lateral extensions, and the darker low foreground structure with a central glowing opening. Treat these connected foreground and background facade elements as ONE assembly, not a collection of separate buildings.\nCamera and composition: keep the near-frontal slightly elevated viewpoint of the reference and the very broad overall silhouette, approximately 2.1 to 2.3 times wider than high. Center the whole structure on a landscape canvas with ample genuinely transparent margin on all sides. Show every spire, left and right wing, and the full base. Do not crop or invent hidden rear architecture.\nMaterials and lighting: follow the photograph's weathered pale gray and muted pink-gray panel surfaces, fine seams and subtle painted wear, darker front structure, and restrained warm orange illumination inside the visible apertures. Keep exterior details legible. Light stays inside or immediately on the architecture; no large glowing cloud around the cutout.\nBackground: genuine alpha transparency. Remove the reference's black photographic background and any exhibition wire or support outside the modeled architecture. No planet, sky, terrain, floor slab, stars, people, vehicles, explosions, smoke or extra structures.\nConstraints: retain the observed miniature's design rather than inventing a generic refinery, cooling towers, smokestacks, antenna forest, domes or futuristic city. No lettering, dimensions, arrows, captions, logos, watermark, or catalog page elements. One complete architectural assembly per PNG. Photorealistic raster surface detail, not vector art or an isometric icon. Clean native alpha without colored edge halos.",
+      "provenance": {
+        "id": "atmosphere-processor-facade",
+        "attemptId": "atmosphere-processor-facade-attempt-1",
+        "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster illustration for the Aliens (1986) location atlas.\nInput image 1 is the primary-reference photograph of the production-made LV-426 Atmosphere Processing Plant forced-perspective facade miniature, extracted from Propstore's Summer 2026 catalog, lot 8. It is a reference for the actual silhouette and visible construction, not a style suggestion.\nPrimary request: reconstruct this same single facade assembly as an isolated, detailed raster object. Preserve its recognizable proportions and layout: a broad low flaring truncated tower, a narrower truncated upper crown with a flat open rim, thin spires rising at the rim, the broken band of orange-lit openings below the crown, sloping segmented walls radiating downwards, two tall narrow outside pylons, low lateral extensions, and the darker low foreground structure with a central glowing opening. Treat these connected foreground and background facade elements as ONE assembly, not a collection of separate buildings.\nCamera and composition: keep the near-frontal slightly elevated viewpoint of the reference and the very broad overall silhouette, approximately 2.1 to 2.3 times wider than high. Center the whole structure on a landscape canvas with ample genuinely transparent margin on all sides. Show every spire, left and right wing, and the full base. Do not crop or invent hidden rear architecture.\nMaterials and lighting: follow the photograph's weathered pale gray and muted pink-gray panel surfaces, fine seams and subtle painted wear, darker front structure, and restrained warm orange illumination inside the visible apertures. Keep exterior details legible. Light stays inside or immediately on the architecture; no large glowing cloud around the cutout.\nBackground: genuine alpha transparency. Remove the reference's black photographic background and any exhibition wire or support outside the modeled architecture. No planet, sky, terrain, floor slab, stars, people, vehicles, explosions, smoke or extra structures.\nConstraints: retain the observed miniature's design rather than inventing a generic refinery, cooling towers, smokestacks, antenna forest, domes or futuristic city. No lettering, dimensions, arrows, captions, logos, watermark, or catalog page elements. One complete architectural assembly per PNG. Photorealistic raster surface detail, not vector art or an isometric icon. Clean native alpha without colored edge halos.",
+        "sourceUrl": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208689/8-Light-Up-LV-426-Atmosphere-Processing-Plant-Forced-Perspective-Building-Facade-Model-Miniature-ALIENS-1986",
+        "referenceCatalogUrl": "https://content.propstore.com/auction/emlaus26-2/Catalog/EMLA-US_Summer26_Catalog_WEB_LO.pdf",
+        "referenceCatalogSha256": "1fc5484df46b20550aecac7f3a673dd376a8153cf4be0883666ee11318c100c4",
+        "referencePdfPage": 7,
+        "referencePrintedPage": 10,
+        "referenceImagePdfObject": 79,
+        "referenceImageExtraction": "Poppler pdfimages PNG decode, original embedded color photograph; no geometry or pixel retouch.",
+        "status": "generation-complete-atlas-review-pending",
+        "filmFidelityValidated": false,
+        "referenceImageSha256": "63987052ed884fad826d9642844a40e71d6255d2facce8d9fa37b8d5be66424d",
+        "attempts": [
+          {
+            "id": "atmosphere-processor-facade",
+            "attemptId": "atmosphere-processor-facade-attempt-1",
+            "width": 1837,
+            "height": 856,
+            "pixelMode": "RGBA",
+            "bytes": 1745761,
+            "sha256": "9e79886b0203a19d218de3ff82bf8540b793289dec28cb5857b0ef25bdc649d5",
+            "bbox": [
+              15,
+              9,
+              1824,
+              852
+            ],
+            "pivot": [
+              919.5,
+              852
+            ],
+            "transparentPixels": 833823,
+            "frameCount": 1,
+            "animated": false,
+            "status": "not-selected-insufficient-transparent-margin",
+            "filmFidelityValidated": false,
+            "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster illustration for the Aliens (1986) location atlas.\nInput image 1 is the primary-reference photograph of the production-made LV-426 Atmosphere Processing Plant forced-perspective facade miniature, extracted from Propstore's Summer 2026 catalog, lot 8. It is a reference for the actual silhouette and visible construction, not a style suggestion.\nPrimary request: reconstruct this same single facade assembly as an isolated, detailed raster object. Preserve its recognizable proportions and layout: a broad low flaring truncated tower, a narrower truncated upper crown with a flat open rim, thin spires rising at the rim, the broken band of orange-lit openings below the crown, sloping segmented walls radiating downwards, two tall narrow outside pylons, low lateral extensions, and the darker low foreground structure with a central glowing opening. Treat these connected foreground and background facade elements as ONE assembly, not a collection of separate buildings.\nCamera and composition: keep the near-frontal slightly elevated viewpoint of the reference and the very broad overall silhouette, approximately 2.1 to 2.3 times wider than high. Center the whole structure on a landscape canvas with ample genuinely transparent margin on all sides. Show every spire, left and right wing, and the full base. Do not crop or invent hidden rear architecture.\nMaterials and lighting: follow the photograph's weathered pale gray and muted pink-gray panel surfaces, fine seams and subtle painted wear, darker front structure, and restrained warm orange illumination inside the visible apertures. Keep exterior details legible. Light stays inside or immediately on the architecture; no large glowing cloud around the cutout.\nBackground: genuine alpha transparency. Remove the reference's black photographic background and any exhibition wire or support outside the modeled architecture. No planet, sky, terrain, floor slab, stars, people, vehicles, explosions, smoke or extra structures.\nConstraints: retain the observed miniature's design rather than inventing a generic refinery, cooling towers, smokestacks, antenna forest, domes or futuristic city. No lettering, dimensions, arrows, captions, logos, watermark, or catalog page elements. One complete architectural assembly per PNG. Photorealistic raster surface detail, not vector art or an isometric icon. Clean native alpha without colored edge halos."
+          },
+          {
+            "id": "atmosphere-processor-facade",
+            "attemptId": "atmosphere-processor-facade-attempt-2",
+            "path": "assets/dlc/aliens-1986/v122/environments/atmosphere-processor-facade.png",
+            "width": 1837,
+            "height": 856,
+            "pixelMode": "RGBA",
+            "bytes": 1142795,
+            "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87",
+            "bbox": [
+              161,
+              94,
+              1677,
+              800
+            ],
+            "pivot": [
+              919.0,
+              800
+            ],
+            "bboxStatus": "alpha128-measured",
+            "transparentPixels": 1068207,
+            "alphaAtLeast128Pixels": 486226,
+            "partialAlphaPixels": 503792,
+            "frameCount": 1,
+            "animated": false,
+            "status": "selected-for-review",
+            "filmFidelityValidated": false,
+            "limits": [
+              "Reconstruction of a photographed surviving forced-perspective facade miniature; not a complete building or verified film frame.",
+              "Tiny colored edge fringes remain in native alpha; no external pixel editing."
+            ],
+            "prompt": "Use case: precise-object-edit.\nInput image 1 is the edit target, an already generated single Atmosphere Processor facade assembly.\nChange ONLY framing and native alpha cleanliness. Preserve every architectural shape, the broad low silhouette, relative scale of all parts, viewpoint, colors, surface detail, and orange internal lighting exactly as in the input.\nThe object is currently much too close to the canvas edges. Make the entire unchanged assembly smaller within a larger transparent landscape canvas, so there is a clear empty margin of at least 7 percent of the canvas width at both left and right and at least 7 percent of the canvas height above the highest spire and below the lowest base. Include the full tip of every spire and both outer wings. Keep its aspect ratio; do not stretch or widen the building itself.\nRemove only colored speckles or stray pixels outside the genuine architectural boundary; preserve legitimate orange windows and worn pink-gray surfaces. All newly added canvas area and background must be genuinely transparent, with no floor, horizon, black fill, shadow, smoke, text, labels or added objects. One assembly, complete silhouette, no redesign.",
+            "sourceAttemptId": "atmosphere-processor-facade-attempt-1",
+            "sourceSha256": "9e79886b0203a19d218de3ff82bf8540b793289dec28cb5857b0ef25bdc649d5",
+            "alphaRange": [
+              0,
+              255
+            ],
+            "containsTransparentPixels": true,
+            "nativeFileHardlinkCount": 2,
+            "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150",
+            "highSaturationPixels": 20907,
+            "highSaturationAlpha32Pixels": 19181,
+            "highSaturationAlpha128Pixels": 19181
+          }
+        ],
+        "selected": {
+          "id": "atmosphere-processor-facade",
+          "attemptId": "atmosphere-processor-facade-attempt-2",
+          "path": "assets/dlc/aliens-1986/v122/environments/atmosphere-processor-facade.png",
+          "width": 1837,
+          "height": 856,
+          "pixelMode": "RGBA",
+          "bytes": 1142795,
+          "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87",
+          "bbox": [
+            161,
+            94,
+            1677,
+            800
+          ],
+          "pivot": [
+            919.0,
+            800
+          ],
+          "bboxStatus": "alpha128-measured",
+          "transparentPixels": 1068207,
+          "alphaAtLeast128Pixels": 486226,
+          "partialAlphaPixels": 503792,
+          "frameCount": 1,
+          "animated": false,
+          "status": "selected-for-review",
+          "filmFidelityValidated": false,
+          "limits": [
+            "Reconstruction of a photographed surviving forced-perspective facade miniature; not a complete building or verified film frame.",
+            "Tiny colored edge fringes remain in native alpha; no external pixel editing."
+          ],
+          "alphaRange": [
+            0,
+            255
+          ],
+          "containsTransparentPixels": true,
+          "nativeFileHardlinkCount": 2,
+          "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150",
+          "highSaturationPixels": 20907,
+          "highSaturationAlpha32Pixels": 19181,
+          "highSaturationAlpha128Pixels": 19181
+        },
+        "generator": "built-in image_gen",
+        "pixelEditing": "none outside image_gen",
+        "preservation": "native PNG bytes hardlinked into project",
+        "reviewStatus": "source and generated-image previews inspected; final atlas Canvas compositing pending root review",
+        "sourceObservations": [
+          "Official Summer2026 catalog PDF page7, printed page10, shows the front of the same lot8 forced-perspective facade miniature.",
+          "Observed flared truncated central structure, crown apertures with orange illumination, narrow spires, outer pylons and low foreground wings.",
+          "The lot describes two physical facade layers, not a fully volumetric complete power station."
+        ],
+        "sourceLimits": [
+          "Reference color photograph embedded in PDF is628×325 pixels, limiting confirmation of small detail.",
+          "Generation removes external display wires and reconstructs small architectural textures.",
+          "Production-miniature provenance does not certify generated pixels or a full building reconstruction as film1:1."
+        ]
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "hadley-colony-building",
+      "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster architectural illustration for the Aliens (1986) location atlas.\nInput image 1: primary production-object photograph, front view of the surviving Hadley's Hope model miniature building sold by Propstore in 2020. It controls the silhouette, front elevation, roof arrangement, color and camera.\nInput image 2: second photograph of the SAME miniature at an angle, used only to clarify the materials and construction. Do not copy its angled camera.\nPrimary request: create ONE isolated complete building that faithfully follows the visible design of this specific miniature. It is a squat rectangular industrial block with broad sloping outer walls, a large flat inset roof edged by narrow raised strips, the same sparse asymmetric roof panel divisions, a central recessed ribbed hatch on the front, and geometric triangular/trapezoidal panel relief on the two sloped front shoulders. Include the narrow integral rim at its base. Preserve the deliberately simple low, broad geometry and the existing panel arrangement; do not turn this into a tall building, vehicle, sci-fi container, or a cluster of buildings.\nView: centered near-frontal elevated orthographic presentation like image 1, enough roof visible to read its panels, front horizontal and vertical axes aligned with the image, no left or right side face. Preserve the approximate visible width-to-height ratio of about 2.2 to 1. Use a landscape canvas, and place the entire building inside a clear genuinely transparent margin of at least 7 percent on ALL four sides. Keep the complete silhouette and bottom rim.\nSurface: detailed realistic brown, dull olive and bronze-gray painted panels, aged soot and restrained rust-like grime matching the production miniature, fine scratches and dark seams. Soft neutral illumination, legible front and roof. No extra lights or glowing windows.\nBackground: genuine alpha transparency. No white photographic background, table, ground, display stand, loose foam below the base, shadow outside the object, sky or scenery. No people, creatures, vehicles, added pipes, antennae, new doors or other buildings.\nDo not reproduce the photography watermark or any text, logos, labels, dimensions or catalog marks. A single photorealistic raster architectural object, not a vector drawing, flat icon or stylized render. Clean fine alpha edges without bright colored halos.",
+      "provenance": {
+        "id": "hadley-colony-building",
+        "attemptId": "hadley-colony-building-attempt-1",
+        "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster architectural illustration for the Aliens (1986) location atlas.\nInput image 1: primary production-object photograph, front view of the surviving Hadley's Hope model miniature building sold by Propstore in 2020. It controls the silhouette, front elevation, roof arrangement, color and camera.\nInput image 2: second photograph of the SAME miniature at an angle, used only to clarify the materials and construction. Do not copy its angled camera.\nPrimary request: create ONE isolated complete building that faithfully follows the visible design of this specific miniature. It is a squat rectangular industrial block with broad sloping outer walls, a large flat inset roof edged by narrow raised strips, the same sparse asymmetric roof panel divisions, a central recessed ribbed hatch on the front, and geometric triangular/trapezoidal panel relief on the two sloped front shoulders. Include the narrow integral rim at its base. Preserve the deliberately simple low, broad geometry and the existing panel arrangement; do not turn this into a tall building, vehicle, sci-fi container, or a cluster of buildings.\nView: centered near-frontal elevated orthographic presentation like image 1, enough roof visible to read its panels, front horizontal and vertical axes aligned with the image, no left or right side face. Preserve the approximate visible width-to-height ratio of about 2.2 to 1. Use a landscape canvas, and place the entire building inside a clear genuinely transparent margin of at least 7 percent on ALL four sides. Keep the complete silhouette and bottom rim.\nSurface: detailed realistic brown, dull olive and bronze-gray painted panels, aged soot and restrained rust-like grime matching the production miniature, fine scratches and dark seams. Soft neutral illumination, legible front and roof. No extra lights or glowing windows.\nBackground: genuine alpha transparency. No white photographic background, table, ground, display stand, loose foam below the base, shadow outside the object, sky or scenery. No people, creatures, vehicles, added pipes, antennae, new doors or other buildings.\nDo not reproduce the photography watermark or any text, logos, labels, dimensions or catalog marks. A single photorealistic raster architectural object, not a vector drawing, flat icon or stylized render. Clean fine alpha edges without bright colored halos.",
+        "sourceUrl": "https://propstore.com/product/aliens-1986/hadleys-hope-model-miniature-building/",
+        "secondarySourceUrl": "https://usm.propstoreauction.com/lot-details/index/catalog/267/lot/62135/Lot-24-ALIENS-1986-Hadley-s-Hope-Model-Miniature-Building",
+        "references": [
+          {
+            "url": "https://images.propstore.com/e7f2b5caaa13703742a70da303ab71c7-1.jpg",
+            "sha256": "251d18ce20f3ffb0a5bdae7b773613bf3bba505fbbb3b03096a6d3f070f1b5c5",
+            "bytes": 41648,
+            "role": "primary frontal silhouette and panel layout"
+          },
+          {
+            "url": "https://images.propstore.com/80fdd01320f8341187ba9621d9c45886-1.jpg",
+            "sha256": "dda2617a2567b84e43244e6ef13be20a5733f518373021707352da981c3db4c5",
+            "bytes": 44307,
+            "role": "same miniature angled construction/material reference, not target camera"
+          }
+        ],
+        "status": "generation-complete-atlas-review-pending",
+        "filmFidelityValidated": false,
+        "attempts": [
+          {
+            "id": "hadley-colony-building",
+            "attemptId": "hadley-colony-building-attempt-1",
+            "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-building.png",
+            "width": 1774,
+            "height": 887,
+            "pixelMode": "RGBA",
+            "bytes": 2734194,
+            "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34",
+            "bbox": [
+              37,
+              66,
+              1738,
+              841
+            ],
+            "pivot": [
+              887.5,
+              841
+            ],
+            "bboxStatus": "alpha128-measured",
+            "transparentPixels": 512440,
+            "alphaAtLeast128Pixels": 1040346,
+            "partialAlphaPixels": 1059508,
+            "highSaturationPixels": 3849,
+            "highSaturationAlpha128Pixels": 0,
+            "highSaturationAlpha32Pixels": 0,
+            "frameCount": 1,
+            "animated": false,
+            "status": "selected-for-review",
+            "filmFidelityValidated": false,
+            "limits": [
+              "Based on photographs of a surviving production miniature; fine details and wear are reconstructed rather than certified exact.",
+              "Transparent margin is smaller than the requested 7 percent, but the full opaque silhouette is contained; no pixel editing performed.",
+              "Bright native alpha-edge speckles remain in the tool preview and need atlas compositing review."
+            ],
+            "prompt": "Use case: product-mockup.\nAsset type: photorealistic raster architectural illustration for the Aliens (1986) location atlas.\nInput image 1: primary production-object photograph, front view of the surviving Hadley's Hope model miniature building sold by Propstore in 2020. It controls the silhouette, front elevation, roof arrangement, color and camera.\nInput image 2: second photograph of the SAME miniature at an angle, used only to clarify the materials and construction. Do not copy its angled camera.\nPrimary request: create ONE isolated complete building that faithfully follows the visible design of this specific miniature. It is a squat rectangular industrial block with broad sloping outer walls, a large flat inset roof edged by narrow raised strips, the same sparse asymmetric roof panel divisions, a central recessed ribbed hatch on the front, and geometric triangular/trapezoidal panel relief on the two sloped front shoulders. Include the narrow integral rim at its base. Preserve the deliberately simple low, broad geometry and the existing panel arrangement; do not turn this into a tall building, vehicle, sci-fi container, or a cluster of buildings.\nView: centered near-frontal elevated orthographic presentation like image 1, enough roof visible to read its panels, front horizontal and vertical axes aligned with the image, no left or right side face. Preserve the approximate visible width-to-height ratio of about 2.2 to 1. Use a landscape canvas, and place the entire building inside a clear genuinely transparent margin of at least 7 percent on ALL four sides. Keep the complete silhouette and bottom rim.\nSurface: detailed realistic brown, dull olive and bronze-gray painted panels, aged soot and restrained rust-like grime matching the production miniature, fine scratches and dark seams. Soft neutral illumination, legible front and roof. No extra lights or glowing windows.\nBackground: genuine alpha transparency. No white photographic background, table, ground, display stand, loose foam below the base, shadow outside the object, sky or scenery. No people, creatures, vehicles, added pipes, antennae, new doors or other buildings.\nDo not reproduce the photography watermark or any text, logos, labels, dimensions or catalog marks. A single photorealistic raster architectural object, not a vector drawing, flat icon or stylized render. Clean fine alpha edges without bright colored halos.",
+            "alphaRange": [
+              0,
+              255
+            ],
+            "containsTransparentPixels": true,
+            "nativeFileHardlinkCount": 2,
+            "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150"
+          }
+        ],
+        "selected": {
+          "id": "hadley-colony-building",
+          "attemptId": "hadley-colony-building-attempt-1",
+          "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-building.png",
+          "width": 1774,
+          "height": 887,
+          "pixelMode": "RGBA",
+          "bytes": 2734194,
+          "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34",
+          "bbox": [
+            37,
+            66,
+            1738,
+            841
+          ],
+          "pivot": [
+            887.5,
+            841
+          ],
+          "bboxStatus": "alpha128-measured",
+          "transparentPixels": 512440,
+          "alphaAtLeast128Pixels": 1040346,
+          "partialAlphaPixels": 1059508,
+          "highSaturationPixels": 3849,
+          "highSaturationAlpha128Pixels": 0,
+          "highSaturationAlpha32Pixels": 0,
+          "frameCount": 1,
+          "animated": false,
+          "status": "selected-for-review",
+          "filmFidelityValidated": false,
+          "limits": [
+            "Based on photographs of a surviving production miniature; fine details and wear are reconstructed rather than certified exact.",
+            "Transparent margin is smaller than the requested 7 percent, but the full opaque silhouette is contained; no pixel editing performed.",
+            "Bright native alpha-edge speckles remain in the tool preview and need atlas compositing review."
+          ],
+          "alphaRange": [
+            0,
+            255
+          ],
+          "containsTransparentPixels": true,
+          "nativeFileHardlinkCount": 2,
+          "highSaturationRule": "maxRGB>200 and maxRGB-minRGB>150"
+        },
+        "generator": "built-in image_gen",
+        "pixelEditing": "none outside image_gen",
+        "preservation": "native PNG bytes hardlinked into project",
+        "reviewStatus": "source and generated-image previews inspected; final atlas Canvas compositing pending root review",
+        "sourceObservations": [
+          "Two photographs of the same documented Hadley miniature were inspected: frontal and oblique.",
+          "Observed squat tapered block, sloping walls, flat inset roof with sparse asymmetrical strips, central ribbed recess and triangular side panel relief.",
+          "The surviving model has brown and olive weathering and a thin basal rim."
+        ],
+        "sourceLimits": [
+          "The frontal view controls composition; oblique view informs material only.",
+          "The output omits loose display-foam material below the base and does not invent a rear facade.",
+          "Photographic source documents a surviving model; exact in-film scale, scene lighting, complete unseen surfaces and generated pixel fidelity remain unvalidated."
+        ]
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "gateway-orbital-backdrop",
+      "prompt": "Use case: precise-object-edit. Create ONE production-reference-matched game BACKDROP layer reproducing the orbital view seen through the Gateway Station hospital window in Aliens (1986). Use the FIRST attached image, a photograph of the actual production backdrop transparency, as the strict composition and geometry guide. The SECOND attached film frame confirms its intended colour and orientation; use only the view beyond the window from that frame, never its actors, window frame or room. Reconstruct only the rectangular painted space image within the first photo. Fill the complete wide landscape canvas with this one opaque background layer, about 1.6:1 width to height. Preserve the exact view: near-black open space at left; the huge blue-and-white curved Earth limb rises diagonally from the bottom left area toward the upper right, with blue oceans and wispy cloud texture in the lower and right portion; a heavily detailed steel grey-blue station arm descends from the top slightly right of centre, its long panelled rectangular hanging section with stacked rows of small pale window grids, narrow pipes, heavy parallel trusses and braces crossing the top; a thin horizontal station bridge extends rightward in front of space. Preserve the narrow cropped station fragment at the far right if visible in the reference. Closely match all visible major shapes, their relative sizes, positions, spacing and the understated 1980s practical miniature / matte-painting appearance. Do not reinterpret this as a new circular station, ring station, futuristic skyscraper or full standalone Earth planet. Keep the same restrained cold blue and steel-grey colours and dark space, with faint stars only. Restore the image from the photographed aged transparency: remove only its storage damage, folds, tape, central seam, scratches, glare from damaged plastic and the white auction-photo margins. Do not remove or rearrange the depicted station parts or Earth horizon. No extra spacecraft, no explosions, no nebula, no text or logos, no frames, no borders, no captions, no furniture, no people, no hospital, no foreground window. A single continuous full-bleed opaque background, not a sprite sheet, not multiple views. This is for a faithful reference illustration; maintain the original camera and perspective instead of inventing unseen architecture.",
+      "provenance": {
+        "id": "gateway-orbital-backdrop",
+        "path": "assets/dlc/aliens-1986/v122/environments/gateway-orbital-backdrop.png",
+        "sha256": "a04a5520ea48fb1ed83fc2a9bafd42f6e921ed02d8ea9e62e2f316132381eefe",
+        "bytes": 2177536,
+        "width": 1586,
+        "height": 992,
+        "pixelMode": "RGB",
+        "frameCount": 1,
+        "bbox": [
+          0,
+          0,
+          1586,
+          992
+        ],
+        "bboxStatus": "opaque-full-image",
+        "pivot": [
+          793.0,
+          992
+        ],
+        "label": "Gateway — vue orbitale sur la Terre",
+        "category": "environments",
+        "pose": "static",
+        "runtimeEligible": true,
+        "heldWeapon": false,
+        "animated": false,
+        "filmFidelityValidated": false,
+        "origin": "v122-native-imagegen-generation",
+        "referenceUrls": [
+          "https://propstore.com/product/aliens-1986/lot-478-oversized-gateway-station-set-backdrop-transparency/",
+          "https://propstoreauction.com/lot-details/index/catalog/496/lot/192501/451-Oversized-Gateway-Station-Set-Backdrop-Transparency-ALIENS-1986"
+        ],
+        "selectedAttempt": 1,
+        "prompt": "Use case: precise-object-edit. Create ONE production-reference-matched game BACKDROP layer reproducing the orbital view seen through the Gateway Station hospital window in Aliens (1986). Use the FIRST attached image, a photograph of the actual production backdrop transparency, as the strict composition and geometry guide. The SECOND attached film frame confirms its intended colour and orientation; use only the view beyond the window from that frame, never its actors, window frame or room. Reconstruct only the rectangular painted space image within the first photo. Fill the complete wide landscape canvas with this one opaque background layer, about 1.6:1 width to height. Preserve the exact view: near-black open space at left; the huge blue-and-white curved Earth limb rises diagonally from the bottom left area toward the upper right, with blue oceans and wispy cloud texture in the lower and right portion; a heavily detailed steel grey-blue station arm descends from the top slightly right of centre, its long panelled rectangular hanging section with stacked rows of small pale window grids, narrow pipes, heavy parallel trusses and braces crossing the top; a thin horizontal station bridge extends rightward in front of space. Preserve the narrow cropped station fragment at the far right if visible in the reference. Closely match all visible major shapes, their relative sizes, positions, spacing and the understated 1980s practical miniature / matte-painting appearance. Do not reinterpret this as a new circular station, ring station, futuristic skyscraper or full standalone Earth planet. Keep the same restrained cold blue and steel-grey colours and dark space, with faint stars only. Restore the image from the photographed aged transparency: remove only its storage damage, folds, tape, central seam, scratches, glare from damaged plastic and the white auction-photo margins. Do not remove or rearrange the depicted station parts or Earth horizon. No extra spacecraft, no explosions, no nebula, no text or logos, no frames, no borders, no captions, no furniture, no people, no hospital, no foreground window. A single continuous full-bleed opaque background, not a sprite sheet, not multiple views. This is for a faithful reference illustration; maintain the original camera and perspective instead of inventing unseen architecture.",
+        "inspection": {
+          "sourceImageReviewed": true,
+          "singleBackdropLayer": true,
+          "transparentBackground": false,
+          "nativeBytesPreserved": true,
+          "filmFidelityValidated": false,
+          "observedLimits": [
+            "Composition générale et vue sur le limbe terrestre tirées du véritable fond photographié, avec comparaison au plan de la chambre médicale publié par Propstore.",
+            "Les petits panneaux, nuages et lumières sont reconstruits ; la courbure et l’échelle relative de la Terre diffèrent légèrement de la photographie du fond. Le résultat reste une interprétation référencée, non une restauration pixel identique."
+          ]
+        }
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "narcissus-shuttle",
+      "prompt": "Use case: precise-object-edit. Create ONE isolated high-resolution photorealistic raster game sprite of the Narcissus shuttle model from Aliens (1986), using the attached Museum of Pop Culture object photograph as the strict visual reference. Preserve the photographed object's identity, outline, proportions and the exact same elevated three-quarter camera angle: the pointed triangular bow points toward the lower right of the canvas, the broad rear is at upper left, both short engine housings are visible along the rear. This is the photographed 1986 miniature, not a redesigned spacecraft. Reproduce the broad, low triangular wedge hull, sloping faceted upper panels, the dark two-part cockpit glazing recessed near the forward center, closely spaced rectangular access-panel pattern along the edges, long triangular inset side channels with dark mechanical detailing, rear exposed equipment area and the two raised rounded rectangular engine bodies with ribbed ends. Preserve the reference's muted cool grey, subtle grime in recesses, matt painted surface and tiny practical model panel seams. Read all visible outlines directly from the reference; do not invent wings, long engine tubes, weapons, landing gear, antennae, lights or extra markings. Keep every visible existing major panel in its location. Neutral soft illumination sufficient to read the grey structure, crisp realistic material, no artistic redesign, no cartoon, no vector simplification. The entire single shuttle must be completely visible with 6 percent empty transparent margin on every side. Genuine transparent RGBA background, no studio floor, no cast shadow outside the silhouette, no pedestal, no scene, no planet, no other craft, no stars, no text, no captions, no border or watermark. Preserve the perspective rather than forcing a new view from unseen geometry. One static object in one frame, not a sheet or multiple views.",
+      "provenance": {
+        "id": "narcissus-shuttle",
+        "path": "assets/dlc/aliens-1986/v122/exteriors/narcissus-shuttle.png",
+        "sha256": "57cdcd7b7f2aeae3748cf95b11e94727f636b2cae738cb919a13b0aeb6479a74",
+        "bytes": 1824812,
+        "width": 1472,
+        "height": 1069,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          54,
+          71,
+          1397,
+          1011
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          725.5,
+          1011
+        ],
+        "label": "Narcissus — navette de sauvetage",
+        "category": "exteriors",
+        "pose": "static",
+        "runtimeEligible": true,
+        "heldWeapon": false,
+        "animated": false,
+        "filmFidelityValidated": false,
+        "origin": "v122-native-imagegen-generation",
+        "referenceUrls": [
+          "https://mopop.emuseum.com/objects/130565/narcissus-spaceship-model-from-the-film-aliens"
+        ],
+        "selectedAttempt": 1,
+        "prompt": "Use case: precise-object-edit. Create ONE isolated high-resolution photorealistic raster game sprite of the Narcissus shuttle model from Aliens (1986), using the attached Museum of Pop Culture object photograph as the strict visual reference. Preserve the photographed object's identity, outline, proportions and the exact same elevated three-quarter camera angle: the pointed triangular bow points toward the lower right of the canvas, the broad rear is at upper left, both short engine housings are visible along the rear. This is the photographed 1986 miniature, not a redesigned spacecraft. Reproduce the broad, low triangular wedge hull, sloping faceted upper panels, the dark two-part cockpit glazing recessed near the forward center, closely spaced rectangular access-panel pattern along the edges, long triangular inset side channels with dark mechanical detailing, rear exposed equipment area and the two raised rounded rectangular engine bodies with ribbed ends. Preserve the reference's muted cool grey, subtle grime in recesses, matt painted surface and tiny practical model panel seams. Read all visible outlines directly from the reference; do not invent wings, long engine tubes, weapons, landing gear, antennae, lights or extra markings. Keep every visible existing major panel in its location. Neutral soft illumination sufficient to read the grey structure, crisp realistic material, no artistic redesign, no cartoon, no vector simplification. The entire single shuttle must be completely visible with 6 percent empty transparent margin on every side. Genuine transparent RGBA background, no studio floor, no cast shadow outside the silhouette, no pedestal, no scene, no planet, no other craft, no stars, no text, no captions, no border or watermark. Preserve the perspective rather than forcing a new view from unseen geometry. One static object in one frame, not a sheet or multiple views.",
+        "inspection": {
+          "sourceImageReviewed": true,
+          "singleObject": true,
+          "transparentBackground": true,
+          "nativeBytesPreserved": true,
+          "filmFidelityValidated": false,
+          "observedLimits": [
+            "La silhouette générale, la vue trois-quarts, les deux blocs moteurs et la structure triangulaire reproduisent la référence photographique.",
+            "Les petits panneaux et éléments de surface ont été reconstruits par génération à partir d’une photographie basse résolution ; aucune égalité géométrique point par point ni échelle métrique n’est certifiée."
+          ]
+        }
+      },
+      "origin": "recovered-local-generation-record"
+    },
+    {
+      "id": "hadley-uplink-tower",
+      "prompt": "Use case: product-mockup. Asset type: ONE high resolution raster game sprite for Aliens (1986), Hadley's Hope uplink tower. The attached photograph is the actual production miniature and is the sole geometry and appearance reference. Reconstruct this ONE complete tower with extremely faithful silhouette, proportions, panel arrangement, structural legs, all mesh openings, cables and weathered grey-brown finish. Keep the same gently elevated near-frontal camera orientation as the photograph so the visible structure is not invented. Preserve the wide upper mechanical assembly with two rectangular radiator wings, central long tilted panel bordered by open grating, two conical horn-like protrusions at the top, faceted rotating collar and splayed structural support legs with rectangular ground feet. Preserve the particular asymmetry visible in the photograph; do not make it into a generic satellite dish, radar dish, radio mast or modern antenna. Production-miniature-like detailed photorealistic material, subtle rust, dirt and restrained edge wear. Render ONE isolated complete object, centered, on genuine transparent RGBA, including transparency between legs and through mesh, with at least 5 percent empty padding on all sides. No white background, black background, ground plane, floor, cast shadow outside the object, environmental scene, labels, logos or watermark. Do not add extra buildings, figures or separate accessories. Retain fine mesh and thin struts. Clear natural studio illumination, no dramatic glow. No vector outline or cartoon. This is a carefully referenced 2D game asset reconstruction, not a photograph of the original artifact.",
+      "origin": "new-generation",
+      "referenceImage": {
+        "file": "local-reference/uplink-tower.jpg",
+        "url": "https://images.propstore.com/660940bd6ff9279bce0a991980fde734-1.jpg",
+        "bytes": 47704,
+        "sha256": "8ae4546a9bb70d400292f5d4c45dafc2b312141227a2f66d3be4ccd6fba6c539"
+      },
+      "sourceUrl": "https://propstore.com/product/aliens-1986/lot-13-uplink-tower-model-miniature/",
+      "referenceVisuallyInspected": true,
+      "selectedAttempt": 2,
+      "filmFidelityValidated": false,
+      "notes": [
+        "Single transparent object; silhouette and major divisions reviewed against photographed production miniature.",
+        "Fine surface detail and restored frontal perspective are generated interpretations; original miniature dimensions are not game world dimensions."
+      ],
+      "correction": {
+        "prompt": "Precise-object-edit of the attached Hadley's Hope uplink tower game sprite. Preserve its entire object geometry, composition, proportions, original camera view, materials, all thin structural struts and mesh openings, two horn-like upper structures, two horizontal side assemblies, and all support feet. Change ONLY edge quality and transparency: remove the small saturated red patch at the upper central back edge and every yellow/green/red color fringe on the outer contour. Replace these stray colors with the immediately adjacent natural grey-brown weathered metal edge. Maintain genuine transparent RGBA with clean neutral antialiased edges and transparent space through the structure. No shadow, backdrop, new shapes, missing components, object resizing, cropping, relighting, text or watermark. The entire single tower must remain visible. Keep fine interior mesh and all surface detail. The intended result is the same sprite with clean neutral edge colors."
+      },
+      "discardedAttempt": {
+        "sha256": "71a540774f6fd6fcb2f2b512547c1cc64c74b895502726eec826ce214c003e1c",
+        "bytes": 1698772,
+        "reason": "Targeted correction of colored edge fringes; not part of active catalogue."
+      }
+    },
+    {
+      "id": "hadley-colony-wall-panel",
+      "prompt": "Use case: product-mockup. Asset type: ONE high resolution raster game environment sprite for Aliens (1986), Hadley's Hope colony facade panel. The attached photograph shows the original grey-resin production miniature panel with a dirty rusty ochre weathered painted surface. Create a careful visually faithful 2D reconstruction of this ONE panel. Preserve its actual six-sided facade silhouette, upper trapezoidal section and lower section narrowing toward the bottom, the strong horizontal structural division, the upper central deep recessed closed doorway with four long rounded vertical recessed strips and chamfered sides, the matching small geometric upper side panels, the lower bank of eight narrow rounded vertical recesses and small end panels. Preserve the arrangement, relative proportions, practical molded detail, irregular rusty staining and subdued tan-grey color. Use a straight-on front orthographic camera with horizontal crossbeam and vertical central recesses, so it is usable as a game facade piece. One complete panel, centered, with 5 percent clear padding all around. Genuine transparent RGBA outside the physical facade. Keep the closed doorway solid, not an arbitrary hole. No acrylic display stand, no support sticks, no surrounding environment, no floor, no cast shadow, no watermark, no lettering or logo. Subtle neutral lighting, photorealistic detailed raster, not cartoon, vector, icon or invented sci-fi redesign. Do not add extra doors or equipment. The panel is a visual atlas asset, not a claim that a new traversable entrance exists in the game.",
+      "origin": "new-generation",
+      "referenceImage": {
+        "file": "local-reference/hadley-wall-panel.jpg",
+        "url": "https://www.thepropgallery.com/media/catalog/product/cache/1/image/1237a862d6c676013bffa5bff9a163f3/a/l/alienshadleyhocr.jpg",
+        "bytes": 169402,
+        "sha256": "dafa0eeea2e2df1981fe523e01b07b57d9f03dbfb94088d8cbdc594b08c7e0ed"
+      },
+      "sourceUrl": "https://www.thepropgallery.com/aliens-hadleys-hope-colony-miniature",
+      "referenceVisuallyInspected": true,
+      "selectedAttempt": 1,
+      "filmFidelityValidated": false,
+      "notes": [
+        "Single transparent object; silhouette and major divisions reviewed against photographed production miniature.",
+        "Fine surface detail and restored frontal perspective are generated interpretations; original miniature dimensions are not game world dimensions."
+      ]
+    }
+  ],
+  "selectedImages": [
+    {
+      "id": "uss-sulaco",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/uss-sulaco.png",
+      "sha256": "edfca27af5b00ede4f5ea64da49b79f8a71e616a7eea3e26ee207f23d3d4bb3a",
+      "bytes": 1508899,
+      "width": 1774,
+      "height": 887,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        26,
+        15,
+        1748,
+        853
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887.0,
+        853
+      ],
+      "label": "USS Sulaco — vue extérieure",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "jorden-survey-tractor",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/jorden-survey-tractor.png",
+      "sha256": "b28f7064586172b81b44ef1c17d2f1a5bcf64d36b9300817decbcc6a01b54354",
+      "bytes": 2059152,
+      "width": 1717,
+      "height": 916,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        42,
+        21,
+        1680,
+        910
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        861.0,
+        910
+      ],
+      "label": "Tracteur d’exploration Jorden — édition longue",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "sulaco-deck-tile",
+      "path": "assets/dlc/aliens-1986/v122/environments/sulaco-deck-tile.png",
+      "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789",
+      "bytes": 2820620,
+      "width": 1254,
+      "height": 1254,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        42,
+        36,
+        1212,
+        1209
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        627.0,
+        1209
+      ],
+      "label": "Sulaco — dalle de pont",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "atmosphere-processor-facade",
+      "path": "assets/dlc/aliens-1986/v122/environments/atmosphere-processor-facade.png",
+      "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87",
+      "bytes": 1142795,
+      "width": 1837,
+      "height": 856,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        161,
+        94,
+        1677,
+        800
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        919.0,
+        800
+      ],
+      "label": "LV-426 — façade du processeur atmosphérique",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-colony-building",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-building.png",
+      "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34",
+      "bytes": 2734194,
+      "width": 1774,
+      "height": 887,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        37,
+        66,
+        1738,
+        841
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887.5,
+        841
+      ],
+      "label": "Hadley’s Hope — bâtiment de la colonie",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "gateway-orbital-backdrop",
+      "path": "assets/dlc/aliens-1986/v122/environments/gateway-orbital-backdrop.png",
+      "sha256": "a04a5520ea48fb1ed83fc2a9bafd42f6e921ed02d8ea9e62e2f316132381eefe",
+      "bytes": 2177536,
+      "width": 1586,
+      "height": 992,
+      "pixelMode": "RGB",
+      "frameCount": 1,
+      "bbox": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "bboxStatus": "opaque-full-image",
+      "pivot": [
+        793.0,
+        992
+      ],
+      "label": "Gateway — vue orbitale sur la Terre",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local"
+    },
+    {
+      "id": "narcissus-shuttle",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/narcissus-shuttle.png",
+      "sha256": "57cdcd7b7f2aeae3748cf95b11e94727f636b2cae738cb919a13b0aeb6479a74",
+      "bytes": 1824812,
+      "width": 1472,
+      "height": 1069,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        54,
+        71,
+        1397,
+        1011
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        725.5,
+        1011
+      ],
+      "label": "Narcissus — navette de secours",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-uplink-tower",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-uplink-tower.png",
+      "sha256": "b36bcd109f6e01d772c1372847b2db5eba2020df2b48f6a70ff8fe1dd15621ca",
+      "bytes": 1610267,
+      "width": 1254,
+      "height": 1254,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        140,
+        47,
+        1143,
+        1223
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        641.5,
+        1223
+      ],
+      "label": "Hadley’s Hope — tour de liaison",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-colony-wall-panel",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-wall-panel.png",
+      "sha256": "fae5bc149190e7c4014be252e3ec0e30caaf870aeb1a9632627a03e9c8bc89f5",
+      "bytes": 3074209,
+      "width": 1536,
+      "height": 1024,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        62,
+        29,
+        1469,
+        996
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        765.5,
+        996
+      ],
+      "label": "Hadley’s Hope — panneau de façade",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        254
+      ]
+    }
+  ],
+  "limits": "Discarded attempts remain traced by hash; their bytes are not active atlas files. Recovered records describe prior generation, not new calls in this continuation."
+}

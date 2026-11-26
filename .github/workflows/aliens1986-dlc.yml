@@ -12,6 +12,7 @@ on:
       - 'docs/development/aliens-1986-sprites-v119/**'
       - 'docs/development/aliens-1986-sprites-v120/**'
       - 'docs/development/aliens-1986-sprites-v121/**'
+      - 'docs/development/aliens-1986-sprites-v122/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -35,6 +36,7 @@ on:
       - 'docs/development/aliens-1986-sprites-v119/**'
       - 'docs/development/aliens-1986-sprites-v120/**'
       - 'docs/development/aliens-1986-sprites-v121/**'
+      - 'docs/development/aliens-1986-sprites-v122/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -103,6 +105,10 @@ jobs:
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-furniture-v121.py \
             --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/furniture-v121"
+      - name: Inspect V122 fidelity atlas images on desktop and mobile
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-atlas-v122.py \
+            --root dist --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/atlas-v122"
       - name: Exercise served raster drawing, doors, saves and title navigation
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \

@@ -1,0 +1,431 @@
+{
+  "schema": "aliens1986-raster-supplement-v122",
+  "version": 122,
+  "presentationVersion": 122,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "fe6ad985cfc5ed7ac30b71121d11d505a6cfe03f",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v118/manifest.json",
+      "sha256": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+      "assetCount": 11
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/manifest.json",
+      "sha256": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0",
+      "assetCount": 6
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v120/manifest.json",
+      "sha256": "a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437",
+      "assetCount": 4
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v121/manifest.json",
+      "sha256": "80424f4dd7a15fc56759c428d88917e7c2a5b713260c41244184fe6f62906f90",
+      "assetCount": 4
+    }
+  ],
+  "counts": {
+    "base": 155,
+    "added": 9,
+    "total": 164,
+    "recoveredLocalImages": 7,
+    "newImages": 2,
+    "atlasPlacements": 11,
+    "illustratedLocationCards": 8
+  },
+  "addedBytes": 18952484,
+  "filmFidelityValidated": false,
+  "assets": [
+    {
+      "id": "uss-sulaco",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/uss-sulaco.png",
+      "sha256": "edfca27af5b00ede4f5ea64da49b79f8a71e616a7eea3e26ee207f23d3d4bb3a",
+      "bytes": 1508899,
+      "width": 1774,
+      "height": 887,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        26,
+        15,
+        1748,
+        853
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887.0,
+        853
+      ],
+      "label": "USS Sulaco — vue extérieure",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "jorden-survey-tractor",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/jorden-survey-tractor.png",
+      "sha256": "b28f7064586172b81b44ef1c17d2f1a5bcf64d36b9300817decbcc6a01b54354",
+      "bytes": 2059152,
+      "width": 1717,
+      "height": 916,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        42,
+        21,
+        1680,
+        910
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        861.0,
+        910
+      ],
+      "label": "Tracteur d’exploration Jorden — édition longue",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "sulaco-deck-tile",
+      "path": "assets/dlc/aliens-1986/v122/environments/sulaco-deck-tile.png",
+      "sha256": "40f85ed610085b94a573c9e6e520bfb878ae3d18d2d76ba4277e9d4af2ec2789",
+      "bytes": 2820620,
+      "width": 1254,
+      "height": 1254,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        42,
+        36,
+        1212,
+        1209
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        627.0,
+        1209
+      ],
+      "label": "Sulaco — dalle de pont",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "atmosphere-processor-facade",
+      "path": "assets/dlc/aliens-1986/v122/environments/atmosphere-processor-facade.png",
+      "sha256": "195774ee3fb8e51acd2e4c0288ec1fce5db994d5aa725de3ea4bd8b561446a87",
+      "bytes": 1142795,
+      "width": 1837,
+      "height": 856,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        161,
+        94,
+        1677,
+        800
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        919.0,
+        800
+      ],
+      "label": "LV-426 — façade du processeur atmosphérique",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-colony-building",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-building.png",
+      "sha256": "d53198338c786728664d78b5836c99d0dedf44dd9203811786eea332bc256e34",
+      "bytes": 2734194,
+      "width": 1774,
+      "height": 887,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        37,
+        66,
+        1738,
+        841
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        887.5,
+        841
+      ],
+      "label": "Hadley’s Hope — bâtiment de la colonie",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "gateway-orbital-backdrop",
+      "path": "assets/dlc/aliens-1986/v122/environments/gateway-orbital-backdrop.png",
+      "sha256": "a04a5520ea48fb1ed83fc2a9bafd42f6e921ed02d8ea9e62e2f316132381eefe",
+      "bytes": 2177536,
+      "width": 1586,
+      "height": 992,
+      "pixelMode": "RGB",
+      "frameCount": 1,
+      "bbox": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "bboxStatus": "opaque-full-image",
+      "pivot": [
+        793.0,
+        992
+      ],
+      "label": "Gateway — vue orbitale sur la Terre",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local"
+    },
+    {
+      "id": "narcissus-shuttle",
+      "path": "assets/dlc/aliens-1986/v122/exteriors/narcissus-shuttle.png",
+      "sha256": "57cdcd7b7f2aeae3748cf95b11e94727f636b2cae738cb919a13b0aeb6479a74",
+      "bytes": 1824812,
+      "width": 1472,
+      "height": 1069,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        54,
+        71,
+        1397,
+        1011
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        725.5,
+        1011
+      ],
+      "label": "Narcissus — navette de secours",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "recovered-local",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-uplink-tower",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-uplink-tower.png",
+      "sha256": "b36bcd109f6e01d772c1372847b2db5eba2020df2b48f6a70ff8fe1dd15621ca",
+      "bytes": 1610267,
+      "width": 1254,
+      "height": 1254,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        140,
+        47,
+        1143,
+        1223
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        641.5,
+        1223
+      ],
+      "label": "Hadley’s Hope — tour de liaison",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "hadley-colony-wall-panel",
+      "path": "assets/dlc/aliens-1986/v122/environments/hadley-colony-wall-panel.png",
+      "sha256": "fae5bc149190e7c4014be252e3ec0e30caaf870aeb1a9632627a03e9c8bc89f5",
+      "bytes": 3074209,
+      "width": 1536,
+      "height": 1024,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        62,
+        29,
+        1469,
+        996
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        765.5,
+        996
+      ],
+      "label": "Hadley’s Hope — panneau de façade",
+      "category": "atlas",
+      "pose": "static",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-location-reference-card",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v122-native-imagegen-generation",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        254
+      ]
+    }
+  ],
+  "atlasBindings": [
+    {
+      "locationId": "sulaco-hangar",
+      "assetIds": [
+        "uss-sulaco",
+        "sulaco-deck-tile"
+      ]
+    },
+    {
+      "locationId": "jorden",
+      "assetIds": [
+        "jorden-survey-tractor"
+      ]
+    },
+    {
+      "locationId": "processor-entry",
+      "assetIds": [
+        "atmosphere-processor-facade"
+      ]
+    },
+    {
+      "locationId": "hadley-main",
+      "assetIds": [
+        "hadley-colony-building",
+        "hadley-colony-wall-panel"
+      ]
+    },
+    {
+      "locationId": "colony-exterior",
+      "assetIds": [
+        "hadley-colony-building",
+        "hadley-uplink-tower"
+      ]
+    },
+    {
+      "locationId": "gateway-medical",
+      "assetIds": [
+        "gateway-orbital-backdrop"
+      ]
+    },
+    {
+      "locationId": "gateway-inquiry",
+      "assetIds": [
+        "gateway-orbital-backdrop"
+      ]
+    },
+    {
+      "locationId": "narcissus",
+      "assetIds": [
+        "narcissus-shuttle"
+      ]
+    }
+  ],
+  "notes": [
+    "Native PNG bytes, resolution, alpha and aspect ratios preserved. One asset per PNG.",
+    "Atlas integration only: existing rooms, doors, progression, vehicles, physics and saves unchanged.",
+    "Production references support appearance; generated detail and exact film fidelity remain unvalidated."
+  ]
+}

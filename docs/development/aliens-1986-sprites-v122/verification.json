@@ -1,0 +1,50 @@
+{
+  "schema": "aliens1986-v122-verification",
+  "date": "2026-11-26",
+  "baseline": "fe6ad985cfc5ed7ac30b71121d11d505a6cfe03f",
+  "status": "local-tests-and-isolated-build-passed-browser-unavailable",
+  "historicalDlcTests": {
+    "passed": 665,
+    "failed": 0
+  },
+  "integrationRunnerTests": {
+    "passed": 38,
+    "failed": 0
+  },
+  "presentationAssertions": {
+    "passed": 328,
+    "includedInRunner": true,
+    "v122Assertions": 104
+  },
+  "preflight": {
+    "passed": true,
+    "historicalFiles": 1159,
+    "catalogueImages": 164
+  },
+  "isolatedBuild": {
+    "passed": true,
+    "runtimeFiles": 2,
+    "assets": 164,
+    "gameSha256": "159bdb74aa62b8abb0c1ac55d670234f8e4d60d1d16bffb681c658e3ad0e0c52"
+  },
+  "independentReview": {
+    "blockingIssues": 0,
+    "historicalManifestsUnchanged": 6,
+    "historicalPngUnchanged": 155,
+    "newPngVerified": 9,
+    "locationCards": 8,
+    "placements": 11
+  },
+  "sourceReleaseCheck": {
+    "passed": false,
+    "reason": "Sparse checkout has zero of the 105 historical reference JPGs expected by the unchanged release inventory. No admission rule was relaxed. Full checkout CI remains required."
+  },
+  "browser": {
+    "status": "not-run-successfully",
+    "reason": "System Chromium binary is missing. Playwright headless-shell download returned HTTP 403. Existing PR CI includes the desktop/mobile atlas harness; its results must be checked for the published commit.",
+    "assertionsPassedLocally": 0
+  },
+  "filmFidelityValidated": false,
+  "completeFilmCampaignClaimed": false,
+  "fullRepositoryBuild": "not-run-in-sparse-checkout"
+}
