@@ -1,3 +1,4 @@
+import { publicAlienIsolationDlcPathAdmission, alienIsolationRecoveryFile, verifyAlienIsolationDlcAdmissions } from './public-alien-isolation-dlc-admissions.mjs';
 import { avpPathAdmission, verifyAvpAdmission } from './dlc-admission-avp-2004.mjs';
 import { DEV_TOOLS_FILES_V188, isDevToolsPublicPathV188 } from './build-dev-tools-v188.mjs';
 import { publicAliens1986DlcPathAdmission, aliens1986RecoveryFile, verifyAliens1986DlcAdmissions } from './public-aliens1986-dlc-admissions.mjs';
@@ -1185,6 +1186,8 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
+  const isolationAdmission = publicAlienIsolationDlcPathAdmission(path, { directory, built });
+  if (isolationAdmission !== null) return isolationAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });
   if (aliens1986Admission !== null) return aliens1986Admission;
   const avpAdmission = avpPathAdmission(path, { directory, built });
@@ -1316,14 +1319,14 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
       assert.equal(entry.isFile(), true, `Unsupported filesystem entry: ${path}`);
       files++; if (path.startsWith('assets/')) assets++;
       if (USER_REFERENCE_JPG_PATHS_V100.has(path)) userReferenceJpgs++;
-      const recoveredAliens1986 = !built && aliens1986RecoveryFile(path);
+      const recoveredAliens1986 = !built && (aliens1986RecoveryFile(path) || alienIsolationRecoveryFile(path));
       if (recoveredAliens1986) {
         // Original QA receipts retain historical machine paths. The independently
         // pinned inventory permits only these exact bytes, outside every build.
         const bytes = await readFile(join(directory, entry.name));
-        assert.equal(bytes.length, recoveredAliens1986.bytes, 'Changed Aliens 1986 recovery size: ' + path);
+        assert.equal(bytes.length, recoveredAliens1986.bytes, 'Changed recovered DLC size: ' + path);
         assert.equal(createHash('sha256').update(bytes).digest('hex'), recoveredAliens1986.sha256,
-          'Changed Aliens 1986 recovery bytes: ' + path);
+          'Changed recovered DLC bytes: ' + path);
         continue;
       }
       if (!built && AI_TOOLS_FILE_SHA256_V188.has(path)) {
@@ -1344,6 +1347,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   // fixtures. A complete source validation still requires the exact archives.
   await verifyProjectRecoveryArchive20261116(root, { built });
   await verifyAliens1986DlcAdmissions(root, { built });
+  await verifyAlienIsolationDlcAdmissions(root, { built });
   await verifyFiorinaSpriteAdmissionsV115(root);
   await verifyAvpAdmission(root, { built });
   const { USER_REFERENCE_LIBRARY_V100 } = await import(pathToFileURL(join(resolve(root), 'src/user-reference-library-v100.js')).href);

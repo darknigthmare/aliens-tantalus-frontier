@@ -56,10 +56,11 @@ function titleFixture(t, { dlc = true, recovery = null, handler = true, aliens =
   return { title, document, nodes, get opens() { return opens; }, get continues() { return continues; } };
 }
 
-test('only installed AVP can be selected; unknown IDs never navigate', async () => {
-  assert.equal(DLC_EXPEDITIONS.length, 1);
+test('installed AVP and Isolation can be selected; unknown IDs never navigate', async () => {
+  assert.deepEqual(DLC_EXPEDITIONS.map(entry => entry.id), ['avp-2004', 'alien-isolation']);
   assert.deepEqual(expeditionById('avp-2004'), { id: 'avp-2004', title: 'AVP · Sous la glace', version: '0.11.0', href: '/src/dlc/avp-2004/index.html' });
-  assert.ok(Object.isFrozen(DLC_EXPEDITIONS) && Object.isFrozen(DLC_EXPEDITIONS[0]));
+  assert.deepEqual(expeditionById('alien-isolation'), { id: 'alien-isolation', title: 'Alien: Isolation · Dernière transmission', version: '0.8.0', href: '/dlc/alien-isolation/index.html' });
+  assert.ok(Object.isFrozen(DLC_EXPEDITIONS) && DLC_EXPEDITIONS.every(Object.isFrozen));
   const document = documentFixture(); let launched = 0;
   const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: () => launched++ }); menu.open();
   for (const id of ['covenant', '../save', 'https://example.com', null]) assert.equal(await menu.launch(id), false);
@@ -69,8 +70,12 @@ test('gallery keyboard navigation, close and reopen preserve one dialog', () => 
   const document = documentFixture(); let closed = 0;
   const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch() {}, onClose: () => closed++ });
   menu.open(); menu.open(); assert.equal(document.body.children.length, 1); assert.equal(document.activeElement, menu.playButton);
+  menu.handleKeydown(key('Tab')); assert.equal(document.activeElement, menu.playButtons[1]);
   menu.handleKeydown(key('Tab')); assert.equal(document.activeElement, menu.backButton);
   menu.handleKeydown(key('Tab')); assert.equal(document.activeElement, menu.playButton);
+  menu.handleKeydown(key('Tab', { shiftKey: true })); assert.equal(document.activeElement, menu.backButton);
+  menu.handleKeydown(key('ArrowUp')); assert.equal(document.activeElement, menu.playButtons[1]);
+  menu.handleKeydown(key('ArrowUp')); assert.equal(document.activeElement, menu.playButton);
   menu.handleKeydown(key('End')); assert.equal(document.activeElement, menu.backButton);
   menu.handleKeydown(key('Home')); assert.equal(document.activeElement, menu.playButton);
   menu.handleKeydown(key('Escape')); assert.equal(closed, 1); assert.equal(menu.dialog.open, false);
@@ -81,11 +86,13 @@ test('launch is single-shot and failed navigation stays recoverable', async () =
   const document = documentFixture(); let launches = 0, resolve;
   const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: () => { launches++; return new Promise(done => { resolve = done; }); } });
   menu.open(); const pending = menu.launch('avp-2004');
-  assert.equal(await menu.launch('avp-2004'), false); assert.equal(menu.close(), false);
+  assert.equal(await menu.launch('avp-2004'), false); assert.equal(await menu.launch('alien-isolation'), false); assert.equal(menu.close(), false);
+  assert.ok(menu.playButtons.every(button => button.disabled)); assert.equal(menu.backButton.disabled, true);
+  menu.playButtons[1].click(); assert.equal(launches, 1, 'another card cannot navigate during launch');
   resolve(); assert.equal(await pending, true); assert.equal(launches, 1); menu.destroy();
   const failure = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: () => { throw new Error('fixture navigation failure'); } });
   failure.open(); assert.equal(await failure.launch('avp-2004'), false);
-  assert.equal(failure.playButton.disabled, false); assert.equal(failure.backButton.disabled, false);
+  assert.ok(failure.playButtons.every(button => !button.disabled)); assert.equal(failure.backButton.disabled, false);
   assert.match(failure.status.textContent, /Réessayez/); assert.equal(failure.close(), true); failure.destroy();
 });
 test('gallery gamepad ignores held activation and stops polling on close', async () => {
@@ -93,10 +100,67 @@ test('gallery gamepad ignores held activation and stops polling on close', async
   const windowRef = { navigator: { getGamepads: () => [] }, requestAnimationFrame: callback => { frames.set(++serial, callback); return serial; }, cancelAnimationFrame: id => frames.delete(id) };
   const menu = new DlcMenu({ documentRef: document, windowRef, onLaunch: () => launches++ });
   menu.open(); menu.pollGamepads([pad([0])]); assert.equal(launches, 0);
+  menu.pollGamepads([pad()]); menu.pollGamepads([pad([13])]); assert.equal(document.activeElement, menu.playButtons[1]);
+  menu.pollGamepads([pad([13])]); assert.equal(document.activeElement, menu.playButtons[1], 'held direction does not skip a card');
   menu.pollGamepads([pad()]); menu.pollGamepads([pad([13])]); assert.equal(document.activeElement, menu.backButton);
   menu.pollGamepads([pad()]); menu.pollGamepads([pad([0])]); assert.equal(menu.isOpen, false); assert.equal(frames.size, 0); assert.equal(launches, 0);
   menu.open(); menu.pollGamepads([pad()]); menu.pollGamepads([pad([0])]); menu.pollGamepads([pad([0])]);
   await Promise.resolve(); assert.equal(launches, 1); menu.destroy(); assert.equal(frames.size, 0);
+});
+
+test('both cards keep their own save instructions and accessible labels in French and English', () => {
+  const menu = new DlcMenu({ documentRef: documentFixture(), windowRef: {}, onLaunch() {} });
+  try {
+    menu.open();
+    const [avp, isolation] = menu.cards;
+    assert.equal(avp.title.textContent, 'Sous la glace'); assert.equal(isolation.title.textContent, 'Dernière transmission');
+    assert.match(avp.notebooks.textContent, /trois carnets/);
+    assert.match(isolation.notebooks.textContent, /exporter et de l’importer/);
+    assert.doesNotMatch(isolation.notebooks.textContent, /carnet|trois/);
+    assert.match(isolation.independence.textContent, /autres extensions/);
+    for (const card of menu.cards) {
+      assert.equal(card.card.attributes['aria-labelledby'], card.title.id);
+      assert.match(card.playButton.attributes['aria-label'], new RegExp(card.title.textContent));
+    }
+    menu.close(); menu.open({ language: 'en' });
+    assert.equal(avp.title.textContent, 'Under the Ice'); assert.equal(isolation.title.textContent, 'Last Transmission');
+    assert.match(isolation.description.textContent, /presented in French/);
+    assert.match(isolation.notebooks.textContent, /export and import/);
+    assert.doesNotMatch(isolation.notebooks.textContent, /notebook|three/);
+    assert.match(isolation.playButton.attributes['aria-label'], /Last Transmission/);
+    menu.close(); menu.open({ language: '__proto__' });
+    assert.equal(menu.heading.textContent, 'Extensions', 'unknown locales use the French copy');
+  } finally { menu.destroy(); }
+});
+
+test('Isolation launches from its keyboard-focused card and recovers focus after a failure', async () => {
+  const document = documentFixture(); let fail = true; const launched = [];
+  const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: entry => {
+    launched.push(entry); if (fail) throw new Error('fixture failure');
+  } });
+  try {
+    assert.equal(await menu.launch('alien-isolation'), false, 'closed gallery cannot navigate');
+    menu.open(); menu.handleKeydown(key('ArrowDown')); menu.handleKeydown(key('Enter'));
+    await Promise.resolve();
+    assert.deepEqual(launched.map(entry => entry.id), ['alien-isolation']);
+    assert.equal(document.activeElement, menu.playButtons[1]);
+    assert.equal(menu.isOpen, true); assert.equal(menu.launching, false);
+    assert.ok(menu.playButtons.every(button => !button.disabled)); assert.equal(menu.backButton.disabled, false);
+    fail = false; menu.handleKeydown(key('Space')); await Promise.resolve();
+    assert.deepEqual(launched.map(entry => entry.href), [expeditionById('alien-isolation').href, expeditionById('alien-isolation').href]);
+    assert.equal(menu.launching, true);
+  } finally { menu.destroy(); }
+});
+
+test('gamepad selects Isolation after neutral input and launches it only once', async () => {
+  const document = documentFixture(), launched = [];
+  const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: entry => launched.push(entry.id) });
+  try {
+    menu.open(); menu.pollGamepads([pad()]); menu.pollGamepads([pad([13])]);
+    assert.equal(document.activeElement, menu.playButtons[1]);
+    menu.pollGamepads([pad()]); menu.pollGamepads([pad([0])]); menu.pollGamepads([pad([0])]);
+    await Promise.resolve(); assert.deepEqual(launched, ['alien-isolation']);
+  } finally { menu.destroy(); }
 });
 test('Extensions joins native keyboard navigation without triggering Continue', t => {
   const fixture = titleFixture(t);
@@ -227,5 +291,24 @@ test('AVP gallery uses the same protected launcher and recovers from a navigatio
     assert.equal(host.context.standaloneContext, 'dlc');
     assert.deepEqual(host.calls.filter(call => call[0] === 'navigate').at(-1), ['navigate', expeditionById('avp-2004').href]);
     assert.deepEqual(host.calls.slice(-2), [['preview'], ['audio']]);
+  } finally { menu.destroy(); }
+});
+
+test('Isolation gallery reaches the protected host launcher and unload without touching the native profile', async () => {
+  const host = hostLaunchFixture({ fail: true, unload: true });
+  const document = documentFixture();
+  const menu = new DlcMenu({ documentRef: document, windowRef: {}, onLaunch: host.launch });
+  try {
+    menu.open();
+    assert.equal(await menu.launch('alien-isolation'), false);
+    assert.equal(host.context.standaloneContext, null);
+    assert.equal(document.activeElement, menu.playButtons[1]);
+    assert.ok(menu.playButtons.every(button => !button.disabled));
+    host.context.failNavigation = false;
+    assert.equal(await menu.launch('alien-isolation'), true);
+    assert.equal(host.context.standaloneContext, 'dlc');
+    assert.deepEqual(host.calls.filter(call => call[0] === 'navigate').at(-1), ['navigate', expeditionById('alien-isolation').href]);
+    assert.deepEqual(host.calls.slice(-2), [['preview'], ['audio']]);
+    assert.equal(host.calls[0][1], false, 'host hub cannot autosave during the launch');
   } finally { menu.destroy(); }
 });

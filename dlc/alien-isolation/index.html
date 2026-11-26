@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080e13">
+  <link rel="icon" type="image/png" href="../../assets/openai/pwa/tantalus-frontier-icon-192-v68.png">
+  <meta name="description" content="Alien: Isolation — dernière transmission de Sevastopol. Une opération indépendante de Tantalus Frontier.">
+  <title>Alien: Isolation — Tantalus Frontier</title>
+  <style>
+    :root { color-scheme: dark; font-family: ui-monospace, Consolas, monospace; background: #080e13; color: #dce9e4; }
+    * { box-sizing: border-box; }
+    body { margin: 0; height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .6rem 1rem; border-bottom: 1px solid #30433f; }
+    nav strong { color: #9acfb8; letter-spacing: .12em; margin-right: auto; }
+    a, button { color: #dae9e2; background: #142620; border: 1px solid #49665a; border-radius: 3px; font: inherit; font-size: .8rem; padding: .45rem .7rem; text-decoration: none; cursor: pointer; }
+    a:hover, button:hover { background: #284638; }
+    :focus-visible { outline: 2px solid #edc578; outline-offset: 3px; }
+    iframe { width: 100%; flex: 1; min-height: 0; border: 0; background: #080e13; }
+    @media (max-width: 580px) { nav { padding: .4rem .6rem; gap: .4rem; } nav strong { font-size: .8rem; } }
+  </style>
+</head>
+<body>
+  <nav aria-label="Navigation du DLC">
+    <strong>ALIEN: ISOLATION</strong>
+    <a id="return-tantalus" href="../../">Retour au Tantalus</a>
+    <a href="./game.html">Ouvrir le jeu seul</a>
+    <button id="fullscreen" type="button" hidden>Plein écran</button>
+  </nav>
+  <iframe id="isolation-game" src="./game.html" title="Alien: Isolation — Dernière transmission" allow="fullscreen" allowfullscreen></iframe>
+  <script>
+    const frame = document.getElementById('isolation-game');
+    const fullscreen = document.getElementById('fullscreen');
+    if (document.fullscreenEnabled && frame.requestFullscreen) {
+      fullscreen.hidden = false;
+      fullscreen.addEventListener('click', () => { frame.requestFullscreen().catch(() => frame.focus()); });
+    }
+    frame.addEventListener('load', () => frame.focus());
+  </script>
+</body>
+</html>
