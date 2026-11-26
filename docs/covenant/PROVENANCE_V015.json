@@ -9,10 +9,18 @@
     "branch": "codex/covenant-sprites-v011",
     "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71",
     "draft": true,
-    "parentCommit": "806a9c387477b5d972846df92016ac3537b3f402",
-    "parentTree": "210eb518e089b2f17a0c21e203208679f2cec59c",
+    "parentCommit": "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+    "parentTree": "392957e8df65132f3dea28ad3981d4f450750281",
     "scope": "source-only sprites and documentary bible; runtime V014 preserved",
-    "commitReceiptLocation": "Pull request history and checks record the publication commit and its exact CI run."
+    "commitReceiptLocation": "Pull request history and checks record the publication commit and its exact CI run.",
+    "originalFeatureParentCommit": "806a9c387477b5d972846df92016ac3537b3f402",
+    "originalFeatureParentTree": "210eb518e089b2f17a0c21e203208679f2cec59c",
+    "initialFeatureCommit": "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+    "mergeParents": [
+      "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+      "2e8309081d206b86d9f234ebfc33c13ea74970f4"
+    ],
+    "targetBranch": "claude/nifty-shannon-qpy1hl"
   },
   "counts": {
     "runtimeVersion": "0.14.0",
@@ -809,7 +817,7 @@
     "gitBlobHashesVerified": true,
     "newRuntimeAnimationBrowserValidation": false,
     "newBibleBrowserValidation": false,
-    "ciStatusAtFileCreation": "pending commit publication",
+    "ciStatusAtFileCreation": "Initial feature commit had no workflow run because the PR conflicted with its advanced target. The combined commit requires a new workflow run; no previous green run is claimed.",
     "ciEvidenceLocation": "The PR description and GitHub Actions run associated with the published commit supply the actual post-publication results.",
     "historicalBibleComparison": {
       "primitiveValuesCompared": 64105,
@@ -857,7 +865,174 @@
       "sourceOnlyTextPinsRequired": true
     },
     "javascriptExactTextPinAssertions": 26,
-    "expectedChangedPaths": 33
+    "initialFeaturePublicationChangedPaths": 33,
+    "mergeTerminalReader": {
+      "result": "pass",
+      "actualCurrentSources": 50,
+      "historicalEvidenceTransferred": false
+    },
+    "mergeIsolatedNodeConvergence": {
+      "assertions": 284,
+      "result": "pass",
+      "scope": "Historical endpoints, refusal of unknown hashes and convergence; separate from the full Node test suite."
+    },
+    "mergeIndependentCodeReview": {
+      "result": "pass",
+      "historicalReceiptBlocksPreserved": 11,
+      "endpointHashesChecked": 12,
+      "forbiddenPredecessorsRejected": 12,
+      "privateTextRulesUnchanged": true,
+      "runtimeRulesPreserved": true
+    },
+    "localTestDependencies": {
+      "bytes": 7891336,
+      "gitAndSha256AndLengthChecks": "377 passed",
+      "targetDocumentsRestoredAndVerified": 31,
+      "targetPngsUnavailableInLocalCheckout": 8,
+      "scope": "Only local test preparation. Original GitHub blobs remain intact; no image substitutes were made.",
+      "rootRestoredTextDependencies": 377,
+      "additionalDynamicManifest": {
+        "path": "scripts/dlc/avp-2004/MANIFEST.json",
+        "bytes": 32712,
+        "sha256": "e1d8f5d1669db991687294bc2bfd621bc6476675f86bb296fc98f00d0e024548",
+        "alreadyPresentInRepository": true
+      }
+    },
+    "requiredPostMergeWorkflows": [
+      "Covenant sprites and recovered DLC",
+      "AVP DLC integration"
+    ],
+    "localMergeValidation": {
+      "schemaVersion": 1,
+      "status": "local-merge-checks-passed-ci-full-suite-required",
+      "parents": {
+        "covenant": "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+        "target": "2e8309081d206b86d9f234ebfc33c13ea74970f4",
+        "common": "b0df1877a058f0818f96437fdfdea3f21ba7f415"
+      },
+      "checks": {
+        "nodeSyntax": {
+          "files": 4,
+          "passed": 4
+        },
+        "nodeHistoricalEndpointConvergence": {
+          "paths": 50,
+          "assertions": 284,
+          "passed": true
+        },
+        "historicalReceiptPrefixHashes": {
+          "count": 4,
+          "matched": 4
+        },
+        "localSourceBytesEqualUploadedBlobs": {
+          "count": 4,
+          "matched": 4
+        },
+        "oldReceiptJsonPinsChanged": 0,
+        "newMergeSources": 3,
+        "realTerminalReader": {
+          "passed": true,
+          "baselineCommit": "001a20bdc0f9f1a3c835e84d8f3c9434bc159330",
+          "successors": 50,
+          "joinedSuccessors": 15,
+          "qualitySuccessors": 7,
+          "aliensMergedSuccessors": 17,
+          "aliensIncomingSuccessors": 12,
+          "spriteSuccessors": 9,
+          "spriteV116Successors": 4,
+          "covenantV012Successors": 2,
+          "historicalEvidenceTransferred": false
+        },
+        "mainBibleThroughHistoricalTantalusChain": {
+          "passed": true,
+          "sha256": "7f318ee44a83d3cf0fd7a84b48aa94ae7d7a51d25253ae0c289a7e862a37a525"
+        },
+        "unchangedPrivateTextRules": {
+          "rules": 9,
+          "checkedResolvedScripts": 4,
+          "violations": 0
+        },
+        "independentReview": {
+          "agent": "people",
+          "conclusion": "passed",
+          "historicalReceiptBlocksPreserved": 11,
+          "mergeDigestsVerified": 12,
+          "fullNodeSuiteRunByReviewer": false
+        }
+      },
+      "sourceOnly": {
+        "covenantPng": 125,
+        "version015NewPng": 22,
+        "runtimeVersion": "0.14.0",
+        "runtimePng": 72,
+        "runtimeCycles": 5,
+        "runtimePhases": 40,
+        "newVersion015RuntimeEntries": 0
+      },
+      "files": [
+        {
+          "path": "scripts/build-asset-filter.mjs",
+          "sha": "5147cbd55def37ccfc698c93c32d5c34ba2fd0b0",
+          "sha256": "088d0ede8a8460c2b56329f3372e2b4c77d62b6b4a51d8dc65a16d2b180d2785",
+          "bytes": 32513,
+          "syntax": "node --check passed",
+          "reversibleToCovenantParent": true,
+          "status": "reviewed-and-locally-verified"
+        },
+        {
+          "path": "scripts/verify-public-release-v86.mjs",
+          "sha": "0ee11144498ad8740907c13bb96f224fc250027a",
+          "sha256": "a1539aeab9240e04cae927d11a50a6c1dccfe36157ab487fb715539458f5158c",
+          "bytes": 81756,
+          "syntax": "node --check passed",
+          "reversibleToCovenantParent": true,
+          "status": "reviewed-and-locally-verified"
+        },
+        {
+          "path": "scripts/audit-dlc-avp-2004-20261125.mjs",
+          "sha": "60e440461955e3e8adb56eab9adf0ff9e89662d8",
+          "sha256": "e5149026b2d3f1b483c20064079976153d9915d9af79da2b7f564d75d608071f",
+          "bytes": 56074,
+          "syntax": "node --check passed",
+          "status": "reviewed-and-locally-verified"
+        },
+        {
+          "path": "scripts/verify-dlc-audit-succession.mjs",
+          "sha": "19e166c56f272d0a5bc6cf24e0988e32bca40ca5",
+          "sha256": "7084ccb447318f51dfe7c7ee3abb3db805df42b5e7109f4c70fe9d7bdae35c41",
+          "bytes": 64153,
+          "syntax": "node --check passed",
+          "status": "reviewed-and-locally-verified"
+        }
+      ],
+      "fullSuccessionSuite": {
+        "totalDefinedTests": 29,
+        "localExecuted": 26,
+        "localPassed": 26,
+        "localFailed": 0,
+        "explicitlyExcluded": [
+          "the complete Tantalus join accepts the reviewed campaign link and rejects one changed document byte",
+          "AVP production documents and PNG candidates have closed source admission and are excluded from the build",
+          "the AVP production manifest pins each original PNG and keeps generated, integrated and exact states separate"
+        ],
+        "full29RequiredInCI": true,
+        "localSelectionMethod": "node --test --test-skip-pattern with three exact test names",
+        "localRunner": "Node.js v24.22.3",
+        "excludedCount": 3,
+        "ciSuite": "npm run test:dlc in AVP DLC integration workflow, without exclusions",
+        "localOutputSha256": "b73ccca11bae36acdc863f6e466db0808b4281eb368c1c2bc7cbf2a45924751d"
+      },
+      "runtimeConservationExpected": {
+        "protectedV014Group": 40,
+        "unchanged": 37,
+        "explicitAuditSuccessions": 3,
+        "originalPng": 103,
+        "newSourceOnlyPng": 22,
+        "initialV015FilesUnchanged": 4
+      }
+    },
+    "localMergeValidationReceiptSha256": "407dc2869d45716cfa62a1ae3de2775852e6c967cfb5a0c0ac7d978ebfa707a7",
+    "expectedMergeChangedPaths": 45
   },
   "statusDocument": {
     "path": "docs/covenant/SPRITES_V015_STATUS.md",
@@ -867,10 +1042,13 @@
   },
   "mainCampaignBible": {
     "path": "docs/narrative/CAMPAGNE_PRINCIPALE.md",
-    "sha": "d71b341a62855646f0f9dd4753c6b493e0d13432",
-    "sha256": "952270ba5a6841c54f89b3b1283d2842563e16d948152ec0de809b37ca9514e4",
-    "bytes": 586450,
-    "priorContentPreservedAsExactPrefix": true
+    "sha": "8dfb13b5611f911df01711ddfd8f7385f5528597",
+    "sha256": "7f318ee44a83d3cf0fd7a84b48aa94ae7d7a51d25253ae0c289a7e862a37a525",
+    "bytes": 586969,
+    "targetDocumentationBridgeIncluded": true,
+    "targetBridgeOccurrences": 1,
+    "removingTargetBridgeMatchesInitialFeatureSha256": "952270ba5a6841c54f89b3b1283d2842563e16d948152ec0de809b37ca9514e4",
+    "method": "Byte-verified clean three-way text merge; both Covenant appendices preserved."
   },
   "galleryPolicy": "Image associations in Markdown and HTML exclude negative metadata branches notCovered, doesNotCover and doesNotComplete; exclusions remain present in the detailed data.",
   "bibles": [
@@ -893,5 +1071,404 @@
       "bytes": 5871121
     }
   ],
-  "preparedAtUtc": "2026-11-26 12:22:53 UTC"
+  "preparedAtUtc": "2026-11-26 12:22:53 UTC",
+  "mainCampaignBibleInitialFeature": {
+    "path": "docs/narrative/CAMPAGNE_PRINCIPALE.md",
+    "sha": "d71b341a62855646f0f9dd4753c6b493e0d13432",
+    "sha256": "952270ba5a6841c54f89b3b1283d2842563e16d948152ec0de809b37ca9514e4",
+    "bytes": 586450,
+    "priorContentPreservedAsExactPrefix": true
+  },
+  "baseIntegration": {
+    "mergeBaseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+    "incomingTargetCommit": "2e8309081d206b86d9f234ebfc33c13ea74970f4",
+    "ourFeatureCommit": "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+    "reason": "The target branch advanced while this draft PR was open. Its merge conflicts prevented a pull-request workflow from being created for the initial feature commit.",
+    "initialFeatureChangedPaths": 33,
+    "targetChangedPathsSinceMergeBase": 44,
+    "targetNonconflictingPathsToPreserve": 39,
+    "threeWayCollisionPaths": [
+      "docs/narrative/CAMPAGNE_PRINCIPALE.md",
+      "scripts/audit-dlc-avp-2004-20261125.mjs",
+      "scripts/build-asset-filter.mjs",
+      "scripts/verify-dlc-audit-succession.mjs",
+      "scripts/verify-public-release-v86.mjs"
+    ],
+    "targetDocumentationBridgeAddedBytes": 519,
+    "bibleMergeIndependentReviewPassed": true,
+    "bibleMergeRemovesNoPublishedContent": true,
+    "mergeStatus": "resolved-in-feature-branch; pull request remains draft",
+    "targetDeltaScope": {
+      "documents": 32,
+      "otherDlcAvpPngs": 8,
+      "guardScripts": 4,
+      "changedAgentInstructions": false,
+      "changedGameModules": false,
+      "changedPackageManifests": false,
+      "changedWorkflows": false
+    },
+    "targetOtherDlcPngsDoNotChangeCovenantCounts": true,
+    "mainBibleIndependentReviews": 2,
+    "targetTree": "7976b03bbc1a950d5a0be96ceb0944c31ed17785",
+    "preservedTargetAdditions": [
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "29b1e0ad72cd5605f0914e649280a329dde2276b",
+        "action": "add",
+        "bytes": 1886251
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "55d5652ef04032adc74edb2aad821c3b7a12e888",
+        "action": "add",
+        "bytes": 2505530
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "513c3fab7a6c2cddcf26e735ba1c28adcb24b1d8",
+        "action": "add",
+        "bytes": 2400997
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "3346d65fc90bee1dceaa45ba14f3801586fdaf6d",
+        "action": "add",
+        "bytes": 1534498
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "751e83b2e7bb24617e807ac73fb7f4eb508a5091",
+        "action": "add",
+        "bytes": 2338215
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c2926331b28ea51f4d7b1b949a4ca853fe3c5600",
+        "action": "add",
+        "bytes": 1406999
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "83f05e23fad78c997af96f2b837348447e68afb7",
+        "action": "add",
+        "bytes": 1794042
+      },
+      {
+        "path": "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "cc230c92872975ad4b9e8db18139f6868fbaec52",
+        "action": "add",
+        "bytes": 3164936
+      },
+      {
+        "path": "docs/narrative/DLC_DISCUSSIONS_20261126.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "508fc3bda226e07eb8e5523ae2fcc59396325ea7",
+        "action": "add",
+        "bytes": 110312
+      },
+      {
+        "path": "docs/narrative/DLC_INDEX_20261126.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "ad21fcaa262726a8103ed4950f83b21fee165c7b",
+        "action": "add",
+        "bytes": 27648
+      },
+      {
+        "path": "docs/narrative/dlc/40th-anniversary.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "6300a1de47df8d4c5a8a8cf25ccd7136ffc31de0",
+        "action": "add",
+        "bytes": 7340
+      },
+      {
+        "path": "docs/narrative/dlc/RECUPERATION_20261126.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "bf23018e22fb58d7ee79f3a87405dd873b05f10c",
+        "action": "add",
+        "bytes": 84625
+      },
+      {
+        "path": "docs/narrative/dlc/RECUPERATION_20261126.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c016b9431677e150f6a0b0f0cbf6dbdfc9285cf3",
+        "action": "add",
+        "bytes": 14341
+      },
+      {
+        "path": "docs/narrative/dlc/alien-1979-nostromo.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c85d535fccf8512cbfc557ee0e1e4393dca69e22",
+        "action": "add",
+        "bytes": 4136
+      },
+      {
+        "path": "docs/narrative/dlc/alien-blackout.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "5d9a70e74b04edb71764f698482163df28c47c7d",
+        "action": "add",
+        "bytes": 5388
+      },
+      {
+        "path": "docs/narrative/dlc/alien-covenant.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "ccfd9a5f4fb64c52596c4c418058c27a94ea9bfb",
+        "action": "add",
+        "bytes": 7624
+      },
+      {
+        "path": "docs/narrative/dlc/alien-earth.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "795e7c52092930e3bcf750ea0fa3223f0c0eced2",
+        "action": "add",
+        "bytes": 4308
+      },
+      {
+        "path": "docs/narrative/dlc/alien-isolation.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "4b2ccadf507ab8a6ca1696b47033dc8eb9ad9409",
+        "action": "add",
+        "bytes": 5404
+      },
+      {
+        "path": "docs/narrative/dlc/alien-resurrection.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "73219712c65f0d5444e03436179eedffbffcc2d8",
+        "action": "add",
+        "bytes": 5381
+      },
+      {
+        "path": "docs/narrative/dlc/alien-romulus.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "cbafc67e1c48d5a19bf97516aaa4004f8fe5f390",
+        "action": "add",
+        "bytes": 7083
+      },
+      {
+        "path": "docs/narrative/dlc/alien3-fiorina.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "619349d5dd88e993f894abe06a82b26669358628",
+        "action": "add",
+        "bytes": 5885
+      },
+      {
+        "path": "docs/narrative/dlc/alien5-projet-lazare.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "3a474ca1e3066294f93d1c225821efab30a9d40f",
+        "action": "add",
+        "bytes": 5571
+      },
+      {
+        "path": "docs/narrative/dlc/aliens-1986.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "eb182e235c72637736fada6e83b526ac7f50eeb5",
+        "action": "add",
+        "bytes": 6292
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/GALLERY.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "b32254b60abd191bed1d0ae2cd0b8803368729af",
+        "action": "add",
+        "bytes": 15729
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/INVENTORY.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "c4810077c90319fe340df9c0853ea8839d127dec",
+        "action": "add",
+        "bytes": 47784
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/PRODUCTION_SPECIFICATIONS.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "03f66b0734248c2edf6937853e646d8b61078b79",
+        "action": "add",
+        "bytes": 236552
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/README.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "50960ec69818dd0fb39a069a92b90a5f51991b1b",
+        "action": "add",
+        "bytes": 13798
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/SOURCES.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "9d6f58f9734c9108e8d7890a4207203e2647c5a5",
+        "action": "add",
+        "bytes": 78524
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/canon-research.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "daadb824ddd89ff46528c951e55341032d736868",
+        "action": "add",
+        "bytes": 110038
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/manifest.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "fc0a6f8dcb6cb346d44eb3e0286875936e2743c8",
+        "action": "add",
+        "bytes": 34880
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/production-specs.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "bb8df6954b93910deb4d9db52b532c88be0170f3",
+        "action": "add",
+        "bytes": 569694
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004-production-20261126/runtime-inventory.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d6ceb27bd1b3cf2b572879d55a7aa1b1cd8dd391",
+        "action": "add",
+        "bytes": 657516
+      },
+      {
+        "path": "docs/narrative/dlc/avp-2004.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "b22329f68c3afdfca4679c91ea07c3158dd4579a",
+        "action": "add",
+        "bytes": 8079
+      },
+      {
+        "path": "docs/narrative/dlc/avp-requiem.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "3ebd040e0e06274dfa070bafce53f00ad39b695b",
+        "action": "add",
+        "bytes": 5673
+      },
+      {
+        "path": "docs/narrative/dlc/colonial-marines.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "1e717191e444aa983a8cf3048843a80dbc76d6a5",
+        "action": "add",
+        "bytes": 5627
+      },
+      {
+        "path": "docs/narrative/dlc/out-of-the-shadows.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d27c9400770766fd80d3ab6738503076adcbfa67",
+        "action": "add",
+        "bytes": 3875
+      },
+      {
+        "path": "docs/narrative/dlc/prometheus.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "275f441dd454cc831d7772fc5a55f7455da62cc6",
+        "action": "add",
+        "bytes": 5141
+      },
+      {
+        "path": "docs/narrative/dlc/river-of-pain.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "659d163dba33826900a13bc313dbdf690d04bfe3",
+        "action": "add",
+        "bytes": 4099
+      },
+      {
+        "path": "docs/narrative/dlc/sea-of-sorrows.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "42359854f6e0cd50ca10d8f3a1a01b1b64a27271",
+        "action": "add",
+        "bytes": 7029
+      }
+    ],
+    "planReceipt": {
+      "gitBlobSha": "007549c88bcc87acfac005a1abd95b4ca6d3d165",
+      "sha256": "0b86d1f8981fa69ea93911cbf8f26ecf80a9af2253ac60b794821f35162200ef",
+      "bytes": 9552,
+      "scope": "Merge preparation evidence; not a separate published project file."
+    },
+    "resolvedHostSources": [
+      {
+        "path": "scripts/audit-dlc-avp-2004-20261125.mjs",
+        "sha": "60e440461955e3e8adb56eab9adf0ff9e89662d8",
+        "sha256": "e5149026b2d3f1b483c20064079976153d9915d9af79da2b7f564d75d608071f",
+        "bytes": 56074
+      },
+      {
+        "path": "scripts/build-asset-filter.mjs",
+        "sha": "5147cbd55def37ccfc698c93c32d5c34ba2fd0b0",
+        "sha256": "088d0ede8a8460c2b56329f3372e2b4c77d62b6b4a51d8dc65a16d2b180d2785",
+        "bytes": 32513
+      },
+      {
+        "path": "scripts/verify-dlc-audit-succession.mjs",
+        "sha": "19e166c56f272d0a5bc6cf24e0988e32bca40ca5",
+        "sha256": "7084ccb447318f51dfe7c7ee3abb3db805df42b5e7109f4c70fe9d7bdae35c41",
+        "bytes": 64153
+      },
+      {
+        "path": "scripts/verify-public-release-v86.mjs",
+        "sha": "0ee11144498ad8740907c13bb96f224fc250027a",
+        "sha256": "a1539aeab9240e04cae927d11a50a6c1dccfe36157ab487fb715539458f5158c",
+        "bytes": 81756
+      }
+    ],
+    "historicalReceiptBlocksPreserved": 11,
+    "newMergeRecords": 3,
+    "newMergeRecordEndpointsVerified": 12,
+    "unchangedCovenantRuntime": true,
+    "previousProtectedFileGroup": {
+      "total": 40,
+      "unchanged": 37,
+      "explicitlySucceededAuditOrGuardFiles": 3,
+      "changedFiles": [
+        "scripts/audit-dlc-avp-2004-20261125.mjs",
+        "scripts/verify-dlc-audit-succession.mjs",
+        "scripts/verify-public-release-v86.mjs"
+      ]
+    }
+  }
 }
