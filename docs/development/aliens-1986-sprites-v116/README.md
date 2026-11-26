@@ -8,8 +8,8 @@ Cette livraison raccorde le DLC Aliens (1986) au menu de Tantalus Frontier et aj
 | --- | ---: |
 | Lot V115 préservé | 70 |
 | Images déjà présentes dans le dépôt | 11 |
-| Nouvelles images V116 | 26 |
-| Total du registre | 107 |
+| Nouvelles images V116 | 42 |
+| Total du registre | 123 |
 
 Chaque entrée du [manifeste](manifest.json) indique son fichier, ses dimensions, sa taille, son SHA-256 et son état de contrôle. [Ouvrir la galerie](index.html). Le [journal de génération](generation-ledger.json) conserve les demandes de création et les références publiques disponibles. Le lot V115 historique est conservé dans le commit `30353c828cca199a7c1f2b07fa05b438326db86e`.
 
@@ -40,7 +40,7 @@ Le serveur de développement sert la version dérivée de `dlc/aliens-1986/game.
 
 ## Limites encore ouvertes
 
-La fidélité exacte au film n'est pas certifiée. Les détails du montage M41A/M240 de Ripley nécessitent notamment une comparaison supplémentaire. Chaque fichier contient une pose ; les états marche, interaction ou attaque ne sont pas des cycles d'animation complets. La variante Hicks blessé n'a pas été produite après un refus de génération.
+La fidélité exacte au film n'est pas certifiée. Les détails du montage M41A/M240 de Ripley nécessitent notamment une comparaison supplémentaire. Chaque fichier contient une pose ; les états marche, interaction ou attaque ne sont pas des cycles d'animation complets. Quatre variantes restent absentes après des refus du générateur : Hicks blessé, Warrior en marche, Facehugger en attaque et Facehugger en défaite.
 
 L'arrêt de l'environnement local a empêché l'envoi de 20 anciens PNG et de 53 documents repérés avant la panne. Ces éléments ne sont pas comptés comme publiés. Ils comprennent sept variantes utiles, une planche d'orientations de sentinelle et douze révisions antérieures. Dix-neuf anciens fichiers sources de poses étaient déjà absents lors de l'inventaire. Le manifeste énumère les poses encore manquantes et les sept variantes concernées.
 

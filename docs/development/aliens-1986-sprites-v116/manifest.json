@@ -11,10 +11,10 @@
     "sha256": "c6dfb2baa886d7b1651463f9685a666f37185aaa0d5cec7d42ccae928762d1e2"
   },
   "counts": {
-    "total": 107,
+    "total": 123,
     "v115": 70,
     "reusedExisting": 11,
-    "newlyGenerated": 26
+    "newlyGenerated": 42
   },
   "filmFidelityValidated": false,
   "animationCyclesValidated": false,
@@ -774,6 +774,62 @@
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
     },
     {
+      "id": "crowe-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/crowe-interact-right.png",
+      "sha256": "1e92e37283222f8f51d48c59137c86e28201f767aa03d2093fba537584460799",
+      "bytes": 1844637,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "crowe-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/crowe-walk-right.png",
+      "sha256": "a57f2f7eb3d94331b2dba696b794ea762faac0b605e4825a838ebd63e8093684",
+      "bytes": 1939397,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
       "id": "cryo-pillow",
       "label": "Sulaco — appui-tête de cryostase",
       "path": "assets/dlc/aliens-1986/v115/props/cryo-pillow.png",
@@ -1033,6 +1089,62 @@
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
     },
     {
+      "id": "drake-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/drake-interact-right.png",
+      "sha256": "f70633c93450fd71f306bc70ee28537b769f03e111a5c74a32dfe8952c1ff4d6",
+      "bytes": 2017631,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "drake-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/drake-walk-right.png",
+      "sha256": "dc24837616baf635d47fd69114ee0cc48067c3d70bbf013064db1337d9b0be52",
+      "bytes": 2002002,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
       "id": "egg-closed",
       "category": "creatures",
       "path": "assets/user/castes-v87/film_ovomorphe_aliens_1986.png",
@@ -1146,6 +1258,34 @@
       "filmFidelityValidated": false,
       "origin": "v115-checkpoint",
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "facehugger-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/facehugger-walk-right.png",
+      "sha256": "6a91989d3551694974a1389b04f3fd6fcedc632f80c4a4af01faba0f0898a7c9",
+      "bytes": 970535,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
     },
     {
       "id": "ferro-idle-right",
@@ -1289,6 +1429,64 @@
       "filmFidelityValidated": false,
       "origin": "v115-checkpoint",
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "frost-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/frost-interact-right.png",
+      "sha256": "ce1b1557ccdc70e7fdeb1206cc154232bfb96cbb9b37e92997437a75db5a8a11",
+      "bytes": 1838155,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": [
+        "A preceding generation with the wrong character identity was rejected before runtime integration."
+      ]
+    },
+    {
+      "id": "frost-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/frost-walk-right.png",
+      "sha256": "da58bad7cd77190b959ea4277f963177a338a3e088e98bfb376c1419dfe5430a",
+      "bytes": 1908819,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
     },
     {
       "id": "gateway-photo",
@@ -2148,6 +2346,34 @@
       "reviewNotes": []
     },
     {
+      "id": "newt-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/newt-walk-right.png",
+      "sha256": "8af3affcc869136ddce4c246235f9d50b129f995d78d5b8f9d99ce090c6639b5",
+      "bytes": 2030033,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
       "id": "operations-console",
       "label": "Operations — console indépendante",
       "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
@@ -2235,6 +2461,62 @@
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
     },
     {
+      "id": "queen-attack-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-attack-right.png",
+      "sha256": "aeeb28cb7b1ba2d3cfacc3dc8a68092a74155341b73b558533776226160715a3",
+      "bytes": 1528140,
+      "width": 1672,
+      "height": 941,
+      "bbox": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        836,
+        941
+      ],
+      "category": "creatures",
+      "pose": "attack",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "queen-death-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-death-right.png",
+      "sha256": "44576485f1a6363898cec5ea5d55d784d386f547dde93dea9a3da8643194fdae",
+      "bytes": 1464490,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "death",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
       "id": "queen-idle-right",
       "category": "creatures",
       "path": "assets/user/castes-v87/film_queen_aliens_1986.png",
@@ -2261,6 +2543,34 @@
       "sourceCommit": "b89dc6ba47ee1ca90de29f3ccff47ddfe699d2d9",
       "auditDecision": "reuse-base",
       "origin": "existing-repository-candidate"
+    },
+    {
+      "id": "queen-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/queen-walk-right.png",
+      "sha256": "77b1b97078aebe2b114e7e09afb846ee0955c539d5b39a79aa19057a855dcc57",
+      "bytes": 1280045,
+      "width": 1774,
+      "height": 887,
+      "bbox": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        887,
+        887
+      ],
+      "category": "creatures",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
     },
     {
       "id": "resin-column",
@@ -2696,6 +3006,36 @@
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
     },
     {
+      "id": "spunkmeyer-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-interact-right.png",
+      "sha256": "fd87f9cdf07931abd7f1320ec96813d80380f186ca7b32aff292dc653e9484d9",
+      "bytes": 1828739,
+      "width": 1024,
+      "height": 1536,
+      "bbox": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        512,
+        1536
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": [
+        "A preceding generation with the wrong character identity was rejected before runtime integration."
+      ]
+    },
+    {
       "id": "spunkmeyer-walk-right",
       "path": "assets/dlc/aliens-1986/v116/characters/spunkmeyer-walk-right.png",
       "sha256": "0db292956fe4981b31ca6bca5f50fb3ac30aa0f40232ac686d2a400dcc6dc239",
@@ -3009,6 +3349,62 @@
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
     },
     {
+      "id": "warrior-attack-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/warrior-attack-right.png",
+      "sha256": "f42f4c297ddbbad7caa35808146b639a332021a24ad0ee4462e46842f49f08bf",
+      "bytes": 1964121,
+      "width": 1536,
+      "height": 1024,
+      "bbox": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        768,
+        1024
+      ],
+      "category": "creatures",
+      "pose": "attack",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "warrior-death-right",
+      "path": "assets/dlc/aliens-1986/v116/creatures/warrior-death-right.png",
+      "sha256": "a856860b93e01d0b5fc862b7b592c99ab4c10515e3d2accad3c1dbb46b7ed0fb",
+      "bytes": 2025583,
+      "width": 1900,
+      "height": 828,
+      "bbox": [
+        0,
+        0,
+        1900,
+        828
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        950,
+        828
+      ],
+      "category": "creatures",
+      "pose": "death",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
       "id": "warrior-idle-right",
       "category": "creatures",
       "path": "assets/user/castes-v87/film_warrior_aliens_1986.png",
@@ -3093,6 +3489,62 @@
       "filmFidelityValidated": false,
       "origin": "v115-checkpoint",
       "sourceCommit": "30353c828cca199a7c1f2b07fa05b438326db86e"
+    },
+    {
+      "id": "wierzbowski-interact-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-interact-right.png",
+      "sha256": "597553e0bbc66cadeb9870071cb97ed3756acae3be49a7f1f06a03519f9d461a",
+      "bytes": 1115316,
+      "width": 980,
+      "height": 1605,
+      "bbox": [
+        0,
+        0,
+        980,
+        1605
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        490,
+        1605
+      ],
+      "category": "characters",
+      "pose": "interact",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
+    },
+    {
+      "id": "wierzbowski-walk-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/wierzbowski-walk-right.png",
+      "sha256": "fa13100e14055e8ca3f5560fa911f1a84f8df559697d4c6921d78aec9548478d",
+      "bytes": 1246723,
+      "width": 980,
+      "height": 1604,
+      "bbox": [
+        0,
+        0,
+        980,
+        1604
+      ],
+      "bboxStatus": "full-image-unmeasured",
+      "pivot": [
+        490,
+        1604
+      ],
+      "category": "characters",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "generated-v116",
+      "reviewNotes": []
     }
   ],
   "coverage": {
@@ -3128,6 +3580,7 @@
         "id": "newt",
         "availablePoses": [
           "idle",
+          "walk",
           "interact"
         ],
         "fullAnimationCycle": false
@@ -3153,7 +3606,9 @@
       {
         "id": "drake",
         "availablePoses": [
-          "idle"
+          "idle",
+          "walk",
+          "interact"
         ],
         "fullAnimationCycle": false
       },
@@ -3197,7 +3652,8 @@
         "id": "spunkmeyer",
         "availablePoses": [
           "idle",
-          "walk"
+          "walk",
+          "interact"
         ],
         "fullAnimationCycle": false
       },
@@ -3213,46 +3669,42 @@
       {
         "id": "frost",
         "availablePoses": [
-          "idle"
+          "idle",
+          "walk",
+          "interact"
         ],
         "fullAnimationCycle": false
       },
       {
         "id": "crowe",
         "availablePoses": [
-          "idle"
+          "idle",
+          "walk",
+          "interact"
         ],
         "fullAnimationCycle": false
       },
       {
         "id": "wierzbowski",
         "availablePoses": [
-          "idle"
+          "idle",
+          "walk",
+          "interact"
         ],
         "fullAnimationCycle": false
       }
     ],
     "missingAtSnapshot": [
-      "newt-walk-right",
-      "drake-walk-right",
-      "drake-interact-right",
-      "spunkmeyer-interact-right",
-      "frost-walk-right",
-      "frost-interact-right",
-      "crowe-walk-right",
-      "crowe-interact-right",
-      "wierzbowski-walk-right",
-      "wierzbowski-interact-right",
       "warrior-walk-right",
-      "warrior-attack-right",
-      "warrior-death-right",
-      "facehugger-walk-right",
       "facehugger-attack-right",
       "facehugger-death-right",
-      "queen-walk-right",
-      "queen-attack-right",
-      "queen-death-right",
       "hicks-wounded"
+    ],
+    "generationBlocked": [
+      "hicks-wounded",
+      "warrior-walk-right",
+      "facehugger-attack-right",
+      "facehugger-death-right"
     ]
   },
   "recovery": {
@@ -3269,13 +3721,16 @@
       "supply-case-ammo-closed",
       "supply-case-ammo-empty"
     ],
-    "additionalUnpublishedImages": "One sentry orientation sheet and twelve superseded revisions."
+    "additionalUnpublishedImages": "One sentry orientation sheet and twelve superseded revisions.",
+    "localPngBytesPreviouslyIdentified": 40024719,
+    "localDocumentBytesPreviouslyIdentified": 1759979,
+    "originalDirectoryHint": "aliens-sprites-v115/generated_images_preserved_v115"
   },
   "limits": [
     "Exact film fidelity remains subject to detailed reference comparison.",
     "Single pose images are not complete animation cycles.",
     "The Queen assets do not add a new boss or scene to the preserved campaign.",
-    "Hicks wounded remains unproduced after a rejected image-generation attempt.",
-    "The Ripley M41A/M240 assembly includes interpreted details and remains under visual review."
+    "The Ripley M41A/M240 assembly includes interpreted details and remains under visual review.",
+    "Hicks wounded, Warrior walk, Facehugger attack and Facehugger death remain unproduced after rejected image-generation attempts."
   ]
 }

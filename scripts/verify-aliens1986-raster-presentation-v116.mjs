@@ -79,6 +79,16 @@ export function runPresentationUnitChecksV116() {
     renderer.actor(ripley,world);
     assert.equal(renderer.c.calls.filter(a=>a[0]==='drawImage').length,2);assert.equal(renderer.fallbackActors,0);
     assert.equal(JSON.stringify({world,ripley,session:renderer.session}),before);checks++;
+    const movingActor={...ripley,route:[]};
+    renderer.c.calls.length=0;renderer.actor(movingActor,world);
+    assert.match(renderer.c.calls.find(a=>a[0]==='drawImage')[1].src,/ripley-idle-right\.png$/);
+    movingActor.x+=12;
+    const movementSnapshot=JSON.stringify({actor:movingActor,world,session:renderer.session});
+    renderer.c.calls.length=0;renderer.actor(movingActor,world);
+    assert.match(renderer.c.calls.find(a=>a[0]==='drawImage')[1].src,/ripley-walk-right\.png$/);
+    renderer.c.calls.length=0;renderer.actor(movingActor,world);
+    assert.match(renderer.c.calls.find(a=>a[0]==='drawImage')[1].src,/ripley-idle-right\.png$/);
+    assert.equal(JSON.stringify({actor:movingActor,world,session:renderer.session}),movementSnapshot);checks++;
     renderer.c.calls.length=0;renderer.actor({...ripley,id:'newt',kind:'escort'},world);
     const newtDraws=renderer.c.calls.filter(a=>a[0]==='drawImage');
     assert.equal(newtDraws.length,1);assert.equal(newtDraws[0][9],66);checks++;

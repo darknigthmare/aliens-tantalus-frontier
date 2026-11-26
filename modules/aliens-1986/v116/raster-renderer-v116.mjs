@@ -11,13 +11,13 @@ const clamp = x => Math.max(0,Math.min(1,x));
 const first = (store,ids) => ids.find(id=>id && store.has(id)) || null;
 const text = (c,value,x,y,color='#d4d6bd') => {c.fillStyle=color;c.font='600 9px ui-monospace,Consolas,monospace';c.textAlign='center';c.fillText(value,x,y);};
 const ellipse = (c,x,y,rx,ry,color) => {c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=color;c.fill();};
-export function humanAssetIdV116(store,actor,world,session) {
+export function humanAssetIdV116(store,actor,world,session,{moving=false}={}) {
   const id=identity(actor);
   if (!PEOPLE.has(id)) return null;
   if (!actor.alive) return first(store,[id+'-death-right']);
   if (id==='ripley' && isGateway(world)) return first(store,['ripley-gateway']);
   const interacting=actor.kind==='player' && session?.action;
-  return first(store,[interacting?id+'-interact-right':null,!interacting&&actor.route?.length?id+'-walk-right':null,id+'-idle-right']);
+  return first(store,[interacting?id+'-interact-right':null,!interacting&&(moving||actor.route?.length)?id+'-walk-right':null,id+'-idle-right']);
 }
 export function creatureAssetIdV116(store,actor) {
   const role=actor.role==='facehugger'?'facehugger':actor.role==='queen'?'queen':actor.role==='chestburster'?'chestburster':'warrior';
@@ -51,8 +51,8 @@ export function propSelectionV116(prop,world,session) {
   return d?{ids:[d[0]],height:d[1],width:d[2],offsetY:type==='lamp'?-174:0}:null;
 }
 function shadow(c,p,r=23) {ellipse(c,p.x,p.y+3,r,6,'#00000068');}
-function drawHuman(renderer,actor,world,store,fallbackWeapon) {
-  const id=humanAssetIdV116(store,actor,world,renderer.session);
+function drawHuman(renderer,actor,world,store,fallbackWeapon,moving=false) {
+  const id=humanAssetIdV116(store,actor,world,renderer.session,{moving});
   if (!id || !store.get(id)) return false;
   const person=identity(actor),p=renderer.project(actor),height=person==='newt'?66:101,flip=(actor.facing||1)<0,c=renderer.c;
   shadow(c,p,person==='newt'?17:23);
@@ -145,11 +145,20 @@ function hatchSurface(renderer,box,{structural,linkOpen,opening},store) {
 export function installRasterRendererV116(Renderer,entries,{fallbackWeapon=null} = {}) {
   if (Renderer.prototype.rasterVersionV116===116) return Renderer;
   const actor=Renderer.prototype.actor,prop=Renderer.prototype.prop,door=Renderer.prototype.door;
+  const positions=new WeakMap();
+  function playerMoved(renderer,a,world) {
+    if(a.kind!=='player')return false;
+    let samples=positions.get(renderer);
+    if(!samples){samples=new WeakMap();positions.set(renderer,samples);}
+    const previous=samples.get(a);
+    samples.set(a,{x:a.x,z:a.z,roomId:world.scene.id});
+    return Boolean(previous && previous.roomId===world.scene.id && Math.hypot(a.x-previous.x,a.z-previous.z)>.01);
+  }
   function sprites(renderer) {return renderer.rasterSpritesV116||(renderer.rasterSpritesV116=createSpriteStoreV116(entries));}
   Object.defineProperty(Renderer.prototype,'rasterVersionV116',{value:116});
   Renderer.prototype.rasterStatusV116=function(){return sprites(this).status();};
   Renderer.prototype.actor=function(a,world){
-    const store=sprites(this),drawn=a.role==='sentry'?drawSentry(this,a,store):a.kind==='enemy'?drawCreature(this,a,world,store):drawHuman(this,a,world,store,fallbackWeapon);
+    const moving=playerMoved(this,a,world),store=sprites(this),drawn=a.role==='sentry'?drawSentry(this,a,store):a.kind==='enemy'?drawCreature(this,a,world,store):drawHuman(this,a,world,store,fallbackWeapon,moving);
     if (!drawn) return actor.call(this,a,world);
   };
   Renderer.prototype.prop=function(p,world,pal){if(!drawProp(this,p,world,pal,sprites(this)))return prop.call(this,p,world,pal);};

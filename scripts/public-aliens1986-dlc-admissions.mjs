@@ -4,7 +4,6 @@ import { readFileSync } from 'node:fs';
 import { lstat, readdir, readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { renderAliens1986RasterV116 } from './derive-aliens1986-raster-v116.mjs';
 
 export const ALIENS1986_MODULE_ROOT = 'modules/aliens-1986';
 export const ALIENS1986_RECOVERY_ROOT = `${ALIENS1986_MODULE_ROOT}/v114`;
@@ -53,9 +52,9 @@ export const ALIENS1986_RASTER_SOURCE_ONLY_FILES_V116 = Object.freeze([
 // Reviewed presentation inputs cannot silently re-authorize a changed derivative.
 export const ALIENS1986_RASTER_SOURCE_SHA256_V116 = Object.freeze({
   'modules/aliens-1986/v116/sprite-loader-v116.mjs': '8dd7974d0222294b0e013e06efdc74d76259927ae9890648b57b6fa4385cc7c5',
-  'modules/aliens-1986/v116/raster-renderer-v116.mjs': '3330723b8b208897e6f708cae1a58f786f037a3affd0f06e734b4c2585112060',
+  'modules/aliens-1986/v116/raster-renderer-v116.mjs': '77d7315bbc4adb6ddb01c4493fc45daaed8beb73ba68efc3d1f88373a7d28170',
   'scripts/derive-aliens1986-raster-v116.mjs': '2dbd40d44678f028c865ea03bc99bfc020adce38b5f8465294949f745ad76434',
-  'docs/development/aliens-1986-sprites-v116/manifest.json': 'c3fc17105cc7b61be45efdc3a038b14f1644bf80d79048b50e3ae5fa809df503',
+  'docs/development/aliens-1986-sprites-v116/manifest.json': 'b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6',
 });
 const checkoutRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -158,6 +157,8 @@ export async function verifyAliens1986RasterSourcesV116(sourceRoot = checkoutRoo
 export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot, built = false } = {}) {
   const base = resolve(root);
   await verifyAliens1986RasterSourcesV116(sourceRoot);
+  // Path-policy consumers may use a sparse source checkout without the DLC.
+  const { renderAliens1986RasterV116 } = await import('./derive-aliens1986-raster-v116.mjs');
   const derivative = await renderAliens1986RasterV116({ root: resolve(sourceRoot) });
   assert.equal(digest(derivative.html), derivative.sha256, 'Aliens 1986 derivative digest mismatch.');
   await assertDirectory(join(base, 'dlc'));
@@ -179,8 +180,10 @@ export async function verifyAliens1986Runtime(root, { sourceRoot = checkoutRoot,
   }
   assert.ok(Array.isArray(derivative.assets) && derivative.assets.length > 0, 'Aliens 1986 derivative has no raster inventory.');
   const seen = new Set();
+  // The pinned manifest is the closed asset list, including reviewed host PNGs.
+  // Each path stays under assets and every byte is checked independently.
   for (const asset of derivative.assets) {
-    assert.ok(validPath(asset.path) && asset.path.startsWith('assets/dlc/aliens-1986/') && asset.path.endsWith('.png'), 'Invalid Aliens 1986 raster path.');
+    assert.ok(validPath(asset.path) && asset.path.startsWith('assets/') && asset.path.endsWith('.png'), 'Invalid Aliens 1986 raster path: ' + asset.path);
     assert.equal(seen.has(asset.path), false, 'Duplicate Aliens 1986 raster path: ' + asset.path);
     assert.match(asset.sha256, /^[a-f0-9]{64}$/, 'Invalid Aliens 1986 raster digest: ' + asset.path);
     const bytes = await checkedFile(base, asset.path);

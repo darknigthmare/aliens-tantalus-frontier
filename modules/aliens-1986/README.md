@@ -1,42 +1,44 @@
-# Aliens (1986) — module récupéré et raccordé
+# Aliens (1986) — module V114 et présentation V116
 
-La livraison **V114 · Lieux et identités RC1** est conservée intégralement dans [v114](v114/). Le menu principal de Tantalus propose **ALIENS (1986)** et ouvre [le lanceur du DLC](../../dlc/aliens-1986/index.html). Dans une version servie, la route est `/dlc/aliens-1986/`.
+Le menu principal propose **ALIENS (1986)** et ouvre [le lanceur du DLC](../../dlc/aliens-1986/index.html). La route servie est `/dlc/aliens-1986/`. Le jeu conserve son checkpoint indépendant `aliens_1986_v114_fidelity_checkpoint`.
 
-Le jeu utilise son propre checkpoint, `aliens_1986_v114_fidelity_checkpoint`. Le bouton de retour ramène au menu Tantalus. Cette intégration relie le lancement, la distribution et la sauvegarde du module autonome ; elle ne transforme pas ses missions en missions de la campagne native.
+## Source conservée
 
-## Fichiers conservés
+La livraison **V114 · Lieux et identités RC1** reste intégralement dans [v114](v114/) : **1 159 fichiers, 135 643 835 octets extraits**. Le [manifeste de récupération](RECOVERY_MANIFEST.json) fixe la taille et le SHA-256 de chaque membre.
 
-Les **1 159 fichiers** de l’archive sont repris sans modification : 40 modules de source, 8 fichiers de prévisualisation, 123 fichiers de QA, 37 outils, 22 fichiers de provenance, 908 preuves/états/captures et 21 fichiers à la racine. Le manifeste de récupération fournit la taille et le SHA-256 de chaque fichier.
+Archive d'origine : `ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip`, 118 891 784 octets, SHA-256 `c6dfb2baa886d7b1651463f9685a666f37185aaa0d5cec7d42ccae928762d1e2`. Ses contenus extraits complets sont versionnés. Les déclarations historiques dans ce dossier décrivent leur date de rédaction.
 
-Archive d’origine : `ALIENS_1986_V114_LIEUX_ET_IDENTITES_RC1.zip`, 118 891 784 octets, SHA-256 `c6dfb2baa886d7b1651463f9685a666f37185aaa0d5cec7d42ccae928762d1e2`. Le ZIP d’origine dépasse la taille d’un fichier GitHub ordinaire ; ses **contenus extraits complets** sont versionnés, avec leur provenance.
+Le HTML [JOUER_ALIENS_V114.html](v114/JOUER_ALIENS_V114.html) et la copie source `dlc/aliens-1986/game.html` gardent leurs octets V114. Le build produit un dérivé V116 dans `dist` ; le serveur de développement le sert en mémoire.
 
-Les mentions « aucun push GitHub » dans les documents sous `v114/` décrivent la livraison historique. La [notice d’intégration du 25 novembre 2026](../../docs/development/ALIENS_1986_GITHUB_INTEGRATION_20261125.md) décrit le raccordement actuel.
+## Présentation V116
+
+Les deux modules dans [v116](v116/) ajoutent le chargement des PNG et leur sélection selon les états de présentation. Le [registre des sprites](../../docs/development/aliens-1986-sprites-v116/README.md) décrit les images effectivement disponibles, leurs empreintes, les références visuelles et les limites de récupération.
+
+Les personnages, objets et créatures existants utilisent uniquement les images déclarées. Une pose manquante garde le rendu de secours. Les dimensions physiques, la simulation, les sauvegardes et les ouvertures de portes restent celles de V114. Une image de marche n'est pas un cycle animé complet. Aucune fidélité exacte 1:1 au film n'est certifiée.
+
+Le build public contient le lanceur, le jeu dérivé et les PNG nécessaires. Le corpus de sources, outils et preuves historiques reste hors du build public.
 
 ## Jouer et vérifier
 
-```bash
+```sh
+npm ci
 npm run dev
 npm run test:dlc:aliens1986
 npm run check:dlc:aliens1986
+npm run build
+npm run check:built
 ```
 
-Ouvrir le menu principal, puis **ALIENS (1986)**. Le HTML autonome original reste directement ouvrable : [JOUER_ALIENS_V114.html](v114/JOUER_ALIENS_V114.html).
+Après construction, la recette navigateur utilise Python Playwright et Chromium :
 
-La recette navigateur utilise Python Playwright avec Chromium :
-
-```bash
-python3 -B scripts/qa-aliens1986-integration.py --root . --source-root . --output /tmp/aliens1986-qa
+```sh
+python3 -B scripts/qa-aliens1986-integration.py --root dist --source-root . --output .qa/aliens1986-integration
 ```
 
-La CI dédiée rejoue la suite du DLC, ses admissions de distribution et le parcours navigateur sur le build. Les sources, outils, rapports et captures du corpus ne sont pas copiés dans le build public : seuls les deux HTML du lanceur sont distribués.
+Le workflow **Aliens 1986 DLC** conserve les preuves navigateur du commit testé.
 
-## Périmètre réel
+## Périmètre de l'opération V114
 
-- 25 lieux inspectables, dont 11 dans l’opération locale.
-- 20 raccords réciproques, 40 faces et 25 portes intérieures.
-- 8 profils d’armes fonctionnels ; 24 références d’équipement, dont certaines sont encore documentaires ou décoratives.
-- 16 profils de personnages et 12 PNJ de préparation.
+Le module documente 25 lieux inspectables, dont 11 dans l'opération locale, 20 raccords réciproques, 40 faces, 25 portes intérieures, 8 profils d'armes fonctionnels, 16 profils de personnages et 12 PNJ de préparation.
 
-Les huit repères manquants de cette version restent signalés : Narcissus, appartement de Gateway, extérieur de Hadley, plafond d’Operations, conduits de repli, ascenseurs, famille Jorden et Derelict. Le pilotage des véhicules, la Reine et le final P-5000/sas ne sont pas jouables dans ce module. Le rendu est stylisé et aucune fidélité 1:1 n’est déclarée.
-
-Le chantier V115 mentionné dans la conversation n’a pas été retrouvé parmi les fichiers récupérables. Aucune de ses fonctionnalités ni aucun de ses compteurs n’est présenté comme livré dans cette intégration.
+Les huit repères absents restent signalés dans le corpus : Narcissus, appartement de Gateway, extérieur de Hadley, plafond d'Operations, conduits de repli, ascenseurs, famille Jorden et Derelict. Les nouvelles images n'ajoutent pas le pilotage des véhicules, une Reine jouable ni le final P-5000/sas. Ces scènes demandent un travail de gameplay distinct.

@@ -18,7 +18,7 @@ on:
       - 'package.json'
       - '.github/workflows/aliens1986-dlc.yml'
   push:
-    branches: [main, codex/aliens-1986-complete-v116]
+    branches: [main]
     paths:
       - 'modules/aliens-1986/**'
       - 'dlc/aliens-1986/**'
@@ -34,6 +34,10 @@ on:
       - 'index.html'
       - 'package.json'
       - '.github/workflows/aliens1986-dlc.yml'
+
+concurrency:
+  group: aliens1986-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

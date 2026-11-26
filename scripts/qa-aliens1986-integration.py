@@ -6,6 +6,7 @@ No DLC state/position/resource/outcome injection and no mocked clock.
 """
 from __future__ import annotations
 import argparse
+import base64
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import functools
@@ -94,8 +95,11 @@ def main():
     def screenshot(page,name,meaning):
         p=output/name
         page.screenshot(path=str(p))
-        shots.append({"file":name,"meaning":meaning,"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"imageEdited":False})
+        inline_jpeg=page.screenshot(type="jpeg",quality=55)
+        shots.append({"file":name,"meaning":meaning,"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+                      "imageEdited":False,"inlineJpegSha256":hashlib.sha256(inline_jpeg).hexdigest()})
         flush()
+        print("ALIENS_VISUAL_JPEG:"+Path(name).stem+":"+base64.b64encode(inline_jpeg).decode("ascii"),flush=True)
     def frame(page):
         child=page.locator("#aliens1986-game").element_handle().content_frame()
         child.locator("#start-operation").wait_for(state="visible")
@@ -158,15 +162,15 @@ def main():
                   child.locator("[data-sector]").count()==25
                   and child.locator('meta[name="aliens-raster-version"]').get_attribute("content")=="116"
                   and "V114" in child.locator(".stamp").inner_text())
-            child.wait_for_function("window.__aliensRasterQaV116?.draws > 0", timeout=30000)
-            raster_menu=child.evaluate("JSON.parse(JSON.stringify(window.__aliensRasterQaV116))")
-            receipt["rasterAtMenu"]=raster_menu
-            check("Des PNG du DLC sont decodes et dessines sur le Canvas",
-                  raster_menu["draws"]>0 and all(row["width"]>0 and row["height"]>0 for row in raster_menu["images"].values()),
-                  raster_menu)
             check("Les profils natifs restent identiques au chargement",storage(page)==sentinels)
-            screenshot(page,"01-dlc-menu.png","Route servie, menu historique et presentation raster V116 dans l'iframe")
+            screenshot(page,"01-dlc-menu.png","Route servie et menu historique du derive V116 dans l'iframe")
             child.locator("#start-operation").click()
+            child.wait_for_function("window.__aliensRasterQaV116?.draws > 0", timeout=30000)
+            raster_initial=child.evaluate("JSON.parse(JSON.stringify(window.__aliensRasterQaV116))")
+            receipt["rasterAtOperationStart"]=raster_initial
+            check("Des PNG du DLC sont decodes et dessines sur le Canvas",
+                  raster_initial["draws"]>0 and all(row["width"]>0 and row["height"]>0 for row in raster_initial["images"].values()),
+                  raster_initial)
             initial=export(page,child,"01-initial")
             check("Nouvelle operation reelle a Hadley",initial["schema"]==114 and initial["roomId"]=="v106-hadley" and initial["mode"]=="operation" and initial["step"]==0)
             check("Export des 25 lieux",len(initial["worlds"])==25)
@@ -178,8 +182,12 @@ def main():
             raster_operation=child.evaluate("JSON.parse(JSON.stringify(window.__aliensRasterQaV116))")
             receipt["rasterInOperation"]=raster_operation
             check("Le rendu raster reste actif pendant le deplacement de Ripley",
-                  raster_operation["draws"]>raster_menu["draws"]
+                  raster_operation["draws"]>raster_initial["draws"]
                   and any("ripley" in path.lower() for path in raster_operation["images"]),
+                  raster_operation)
+            check("La pose de marche de Ripley est reellement dessinee apres l'entree clavier",
+                  any("ripley" in path.lower() and "walk" in path.lower() and row["draws"]>0
+                      for path,row in raster_operation["images"].items()),
                   raster_operation)
             h0=next(a for a in initial["team"] if a["id"]=="hicks")
             h1=next(a for a in state["team"] if a["id"]=="hicks")
