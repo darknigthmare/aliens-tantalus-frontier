@@ -2,11 +2,23 @@
 
 **26 novembre 2026.** Base cumulative : `b0df1877a058f0818f96437fdfdea3f21ba7f415`, branche `claude/nifty-shannon-qpy1hl`.
 
+## Suivi du pack de fidélité 1.0.0
+
+Ce rapport conserve ci-dessous les constats de l’intégration initiale. Le pack suivant est suivi dans la [PR #80](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/80), la [documentation de fidélité](alien-isolation-fidelity/README.md) et la [galerie source](alien-isolation-fidelity/index.html).
+
+Le nouveau lot comporte **39 PNG produits : 28 raccordés au rendu et 11 candidats source**. Les candidats n’ajoutent pas de mécanique. Le runtime comporte **32 fichiers** admis par un manifeste à empreinte externe ; les 646 fichiers historiques restent immuables.
+
+La [CI 45817718748](https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45817718748), sur la tête `9b874e64a2b79def1150e94da30969bbe1cd4480`, avait échoué dans `npm run check` sur un chemin documentaire contenu dans l’URL des cartes. Les étapes de build et de navigateur n’avaient pas été exécutées. Le correctif du runtime retire uniquement ce champ documentaire et injecte le module de présentation ; aucune exemption générale de contrôle des métadonnées privées n’est ajoutée.
+
+Avant une nouvelle interruption de l’environnement, **536 tests source, 18 tests d’intégration et 49 tests DLC** avaient réussi localement. **25 contrôles de rendu Skia**, sur les 28 PNG et 14 captures, avaient aussi réussi. Skia n’est pas un navigateur.
+
+Le manifeste, l’adaptateur, le jeu dérivé et les 39 PNG ont été récupérés avec leurs empreintes exactes. Les scripts d’admission, de build et d’intégration ont ensuite été reconstruits fonctionnellement : les résultats antérieurs ne valident pas à eux seuls ces nouveaux octets. Après cette reconstitution, les nouveaux fichiers ont à leur tour passé localement **536/536 tests source, 18/18 tests d’intégration et 49/49 tests DLC**. Le test d’intégration a construit puis revérifié les 32 fichiers du runtime. L’inventaire des 646 sources et les contrôles publics des chemins et textes ont aussi été vérifiés. Les vérifications de la nouvelle tête de PR et les deux QA navigateur sont requises avant de présenter l’archive construite comme vérifiée. L’artefact téléchargeable du seul DLC est produit après leur réussite, pour 30 jours.
+
 ## Résultat
 
 Le paquet Isolation était archivé dans la PR #73 mais absent du menu des expéditions. Cette intégration ajoute une deuxième carte à Extensions, un lanceur avec retour au Tantalus et les deux fichiers du jeu autonome au build. Elle réutilise le lanceur hôte existant pour arrêter les scènes et l’audio, sans migrer les profils natifs vers le DLC.
 
-Le dossier `modules/alien-isolation/v0.8/` conserve **646 fichiers, 107 266 357 octets**. Chaque taille et empreinte est épinglée dans un manifeste lui-même épinglé. Le jeu public est identique à l’original. Sources, rapports et captures sont exclus de la distribution publique.
+Le dossier `modules/alien-isolation/v0.8/` conserve **646 fichiers, 107 266 357 octets**. Chaque taille et empreinte est épinglée dans un manifeste lui-même épinglé. Dans cet état initial, le jeu public était identique à l’original. Sources, rapports et captures sont exclus de la distribution publique.
 
 La galerie à deux cartes conserve AVP et ajoute Isolation en français et anglais. L’expédition reste en français. Clavier et manette parcourent les deux cartes et le retour ; tous les boutons sont verrouillés pendant une ouverture et le focus revient sur la carte concernée après un échec.
 

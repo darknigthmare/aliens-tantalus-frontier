@@ -4,6 +4,7 @@ on:
     paths:
       - 'modules/alien-isolation/**'
       - 'dlc/alien-isolation/**'
+      - 'docs/development/alien-isolation-fidelity/**'
       - 'src/dlc-menu.js'
       - 'scripts/*alien-isolation*'
       - 'scripts/*dlc-menu*'
@@ -18,6 +19,7 @@ on:
     paths:
       - 'modules/alien-isolation/**'
       - 'dlc/alien-isolation/**'
+      - 'docs/development/alien-isolation-fidelity/**'
       - 'src/dlc-menu.js'
       - 'scripts/*alien-isolation*'
       - '.github/workflows/alien-isolation-dlc.yml'
@@ -54,11 +56,25 @@ jobs:
           PYTHONDONTWRITEBYTECODE: '1'
         run: |
           "$RUNNER_TEMP/isolation-browser/bin/python" -B scripts/qa-alien-isolation-integration.py --root dist --source-root . --output "$RUNNER_TEMP/isolation-evidence"
+      - name: Check raster bindings, fallbacks and save persistence
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          "$RUNNER_TEMP/isolation-browser/bin/python" -B scripts/qa-alien-isolation-fidelity.py --root dist --source-root . --output "$RUNNER_TEMP/isolation-fidelity-evidence"
+      - name: Retain the verified standalone DLC
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: alien-isolation-v0.8-fidelity-1.0.0
+          path: dist/dlc/alien-isolation/
+          if-no-files-found: error
+          retention-days: 30
       - name: Retain browser evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: alien-isolation-browser-evidence
-          path: ${{ runner.temp }}/isolation-evidence
+          path: |
+            ${{ runner.temp }}/isolation-evidence
+            ${{ runner.temp }}/isolation-fidelity-evidence
           if-no-files-found: ignore
           retention-days: 7

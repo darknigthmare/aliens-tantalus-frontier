@@ -18,6 +18,14 @@ Archive originale sauvegardée en PR73 : 85 001 778 octets, SHA-256 identique au
 
 Chemin publié : `archives/dlc-source-recovery-20261126/alien-isolation/`, commit `6b46eaf8f574871e39487e0a10ef46acfb1f41a6`. Le ZIP peut être reconstruit à partir des fragments décrits par le manifeste. Les chemins, tailles et empreintes du lot ont été comparés au dépôt ; ils restent des sources exclues de la distribution. Voir le [reçu de cette reprise](RECUPERATION_20261126.md#sauvegardes-de-cette-reprise).
 
+## Suivi de l’intégration et du pack de présentation
+
+La [PR #80](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/80) relie désormais l’expédition au menu Tantalus et prépare un pack de **39 images produites : 28 raccordées au runtime et 11 candidates source**. Le corpus original de 646 fichiers reste immuable. La source conserve **76 salles et 224 seuils** ; cette passe graphique ne transforme pas ces lieux condensés en un relevé métrique intégral du jeu commercial.
+
+La [documentation du pack](../../development/alien-isolation-fidelity/README.md) et sa [galerie source](../../development/alien-isolation-fidelity/index.html) décrivent les fichiers, leurs rôles et les mécaniques absentes. Les candidats ne sont pas admis dans la distribution jouable. **25 contrôles de rendu Skia** ont passé sur le pack ; cette preuve reste distincte des essais navigateur.
+
+Après reconstitution des scripts d’intégration, **603 tests locaux ont réussi** : 536 source, 18 intégration et 49 DLC. Les deux QA navigateur et la CI de la nouvelle tête doivent encore être exécutées avant de qualifier l’archive construite. Les constats historiques et les écarts ci-dessous restent conservés ; `exact:false` et `canonExact:false` restent applicables.
+
 ## Décisions à préserver
 
 Cette fiche applique les exigences `D01`, `D02`, `D03`, `D04`, `D05`, `D06`, `D07`, `D08`, `D09`, `D13`, `D18`, `D19`, `D20`, `D21`, `D22` du [registre commun](../DLC_INDEX_20261126.md#exigences-issues-des-discussions). Leur portée est une demande de production et de qualité, pas l'affirmation que leur réalisation est achevée.

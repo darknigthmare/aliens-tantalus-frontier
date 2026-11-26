@@ -518,6 +518,24 @@ export const AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126 = Object.freeze(Object.fro
 ));
 // END DLC BIBLE BRIDGE HOST RECEIPTS 20261126
 
+// BEGIN AVP PRODUCTION BIBLE HOST RECEIPTS 20261126
+// A closed source-only production inventory follows the exact corrected bible head.
+// Earlier receipts remain immutable; this stage grants no gameplay or art approval.
+export const AVP_PRODUCTION_BIBLE_BASELINE_20261126 = '268b1a517c60338899578a165e9784c5b7313dba';
+export const AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "699e7e0234f0528ffe1e7be1b78b6d0130a5f7cb364ac1be1e670c1b625f7558",
+    "currentSha256": "ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b"
+  },
+  "scripts/build-asset-filter.mjs": {
+    "previousSha256": "c49bbc4bf3598a633f78c98febff0309e54b367e5643e4a98daf0371d9b91a56",
+    "currentSha256": "5735cc0a8110342349313df1c70cba220308238ee756674a357f45aa98a4f8bd"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END AVP PRODUCTION BIBLE HOST RECEIPTS 20261126
+
 // BEGIN ISOLATION HOST RECEIPTS 20261126
 // Only these reviewed integration files advance from the exact cumulative
 // commit. Published AVP, Aliens and Fiorina receipts above remain unchanged.
@@ -576,6 +594,33 @@ export const AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126 = Object.freeze(Ob
 ));
 // END ISOLATION BIBLE JOIN HOST RECEIPTS 20261126
 
+// BEGIN ISOLATION AVP PRODUCTION JOIN RECEIPTS 20261126
+// The published Isolation/bible integration and the later AVP production base
+// retain their independent receipts. Only their shared public verifier joins;
+// AVP's eight source candidates remain outside the playable distribution.
+export const AVP_ISOLATION_PRODUCTION_JOIN_BASELINES_20261126 = Object.freeze({
+  isolationCommit: '9b874e64a2b79def1150e94da30969bbe1cd4480',
+  productionCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+  commonCommit: 'c7a0339f86e1de0c2209800a81506cddbc71d804'
+});
+export const AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "16e8bf01e569c4540391dc269604404505248406fd1240917d6e75c165454ccd",
+    "currentSha256": "d34582df0d38048730e38b366ed653de9304e171c7dd6d258c74fbe27c32ea3d"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+export const AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "scripts/verify-public-release-v86.mjs": {
+    "previousSha256": "ee4324f23d1a4d3282f55490ea19222dcc9bcea096f4a38d3dce4c937b74916b",
+    "currentSha256": "d34582df0d38048730e38b366ed653de9304e171c7dd6d258c74fbe27c32ea3d"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END ISOLATION AVP PRODUCTION JOIN RECEIPTS 20261126
+
 function advanceReceipt(path, endpoint, receipts, message) {
   if (!Object.hasOwn(receipts, path)) return endpoint;
   const receipt = receipts[path];
@@ -625,15 +670,34 @@ export function reviewedIsolationHostDigest20261126(path, endpoint) {
 }
 
 export function reviewedIsolationIncomingHostDigest20261126(path, endpoint) {
-  return advanceReceipt(path, endpoint, AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126,
+  const published = advanceReceipt(path, endpoint, AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126,
     'Broken published-Isolation-to-bible-join source chain: ');
+  return reviewedIsolationProductionJoinHostDigest20261126(path, published);
 }
 
 export function reviewedIsolationAfterBibleHostDigest20261126(path, endpoint) {
-  if (Object.hasOwn(AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126, path))
-    return advanceReceipt(path, endpoint, AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126,
+  if (Object.hasOwn(AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126, path)) {
+    const published = advanceReceipt(path, endpoint, AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126,
       'Broken DLC-bible-to-Isolation-join source chain: ');
-  return reviewedIsolationHostDigest20261126(path, endpoint);
+    return reviewedIsolationProductionJoinHostDigest20261126(path, published);
+  }
+  return reviewedAvpProductionBibleHostDigest20261126(path, reviewedIsolationHostDigest20261126(path, endpoint));
+}
+
+export function reviewedAvpProductionBibleHostDigest20261126(path, endpoint) {
+  const published = advanceReceipt(path, endpoint, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
+    'Broken DLC-bible-to-AVP-production source chain: ');
+  return reviewedIsolationProductionIncomingHostDigest20261126(path, published);
+}
+
+export function reviewedIsolationProductionJoinHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126,
+    'Broken Isolation-bible-to-production-join source chain: ');
+}
+
+export function reviewedIsolationProductionIncomingHostDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126,
+    'Broken AVP-production-to-Isolation-join source chain: ');
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -655,7 +719,8 @@ const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125
   ...Object.keys(AVP_ALIENS_JOIN_SUCCESSORS_20261125), ...Object.keys(AVP_FIORINA_SPRITES_SUCCESSORS_20261125),
   ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126),
   ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ...Object.keys(AVP_ISOLATION_SUCCESSORS_20261126),
-  ...Object.keys(AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126)])];
+  ...Object.keys(AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126), ...Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126),
+  ...Object.keys(AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126)])];
 
 // A combined view may already resolve an earlier reviewed stage. Only its
 // recorded endpoints are accepted; independent incoming bytes still fail.
@@ -667,7 +732,9 @@ export function avpHostRuntimeSources20261125(view) {
       AVP_FIORINA_QA_SUCCESSORS_20261125[path], AVP_ALIENS_JOIN_SUCCESSORS_20261125[path],
       AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path], AVP_FIORINA_V116_SUCCESSORS_20261125[path],
       AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path], AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path],
-      AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126[path] || AVP_ISOLATION_SUCCESSORS_20261126[path]].filter(Boolean);
+      AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126[path] || AVP_ISOLATION_SUCCESSORS_20261126[path],
+      !Object.hasOwn(AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126, path) && AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path],
+      AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126[path]].filter(Boolean);
     for (let i = 1; i < receipts.length; i++)
       assert.equal(receipts[i].previousSha256, receipts[i - 1].currentSha256,
         'Broken recorded host runtime view chain: ' + path);
@@ -676,8 +743,21 @@ export function avpHostRuntimeSources20261125(view) {
       const incoming = AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126[path];
       assert.equal(incoming.previousSha256, AVP_ISOLATION_SUCCESSORS_20261126[path].currentSha256,
         'Broken published Isolation runtime parent: ' + path);
-      assert.equal(incoming.currentSha256, receipts.at(-1).currentSha256,
-        'Isolation runtime parents must converge exactly: ' + path);
+      assert.equal(incoming.currentSha256, AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126[path].currentSha256,
+        'Isolation runtime parents must preserve their published join: ' + path);
+      endpoints.push(incoming.previousSha256);
+    }
+    if (Object.hasOwn(AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126, path)) {
+      const incoming = AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126[path];
+      const joined = AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126[path];
+      assert.equal(joined.previousSha256, AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126[path].currentSha256,
+        'Broken published Isolation/bible runtime parent: ' + path);
+      assert.equal(incoming.previousSha256, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path].currentSha256,
+        'Broken published AVP production runtime parent: ' + path);
+      assert.equal(incoming.currentSha256, joined.currentSha256,
+        'Isolation and AVP production runtime parents must converge exactly: ' + path);
+      assert.equal(joined.currentSha256, receipts.at(-1).currentSha256,
+        'Broken terminal Isolation production endpoint: ' + path);
       endpoints.push(incoming.previousSha256);
     }
     assert.ok(endpoints.includes(result[path]), 'Incorrect AVP host runtime view predecessor: ' + path);
@@ -696,6 +776,13 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'DLC bible documents requires the exact merged V116 continuation base');
   assert.equal(AVP_DLC_BIBLE_BRIDGE_BASELINE_20261126, '16686e8681cc0370db3fa3df2967704ef1862155',
     'DLC bible bridge requires the exact published PR 68 document head');
+  assert.equal(AVP_PRODUCTION_BIBLE_BASELINE_20261126, '268b1a517c60338899578a165e9784c5b7313dba',
+    'AVP production documents require the exact corrected bible continuation base');
+  assert.deepEqual(AVP_ISOLATION_PRODUCTION_JOIN_BASELINES_20261126, {
+    isolationCommit: '9b874e64a2b79def1150e94da30969bbe1cd4480',
+    productionCommit: '2e8309081d206b86d9f234ebfc33c13ea74970f4',
+    commonCommit: 'c7a0339f86e1de0c2209800a81506cddbc71d804'
+  });
   assert.equal(AVP_ISOLATION_BASELINE_20261126, 'b0df1877a058f0818f96437fdfdea3f21ba7f415',
     'Isolation requires its exact original cumulative baseline');
   assert.deepEqual(AVP_ISOLATION_BIBLE_JOIN_BASELINES_20261126, {
@@ -715,7 +802,9 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
     AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
     AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_ISOLATION_SUCCESSORS_20261126,
-    AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126, AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126]) {
+    AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126, AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126,
+    AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126, AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126,
+    AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -785,6 +874,15 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
       AVP_FIORINA_SPRITES_SUCCESSORS_20261125, AVP_FIORINA_V116_SUCCESSORS_20261125,
       AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126])
       assert.equal(Object.hasOwn(receipts, path), false, 'The bible bridge must preserve every existing host receipt: ' + path);
+  for (const [path, receipt] of Object.entries(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126)) {
+    const prior = AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126[path] || AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126[path]
+      || AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
+      || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
+      || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path] || AVP_HOST_SUCCESSORS_20261125[path];
+    assert.ok(prior, 'AVP production requires an exact published host predecessor: ' + path);
+    assert.equal(receipt.previousSha256, prior.currentSha256,
+      'AVP production must follow the exact corrected bible endpoint: ' + path);
+  }
   for (const [path, receipt] of Object.entries(AVP_ISOLATION_SUCCESSORS_20261126)) {
     const prior = AVP_FIORINA_V116_SUCCESSORS_20261125[path] || AVP_FIORINA_SPRITES_SUCCESSORS_20261125[path]
       || AVP_ALIENS_JOIN_SUCCESSORS_20261125[path] || AVP_FIORINA_QA_SUCCESSORS_20261125[path]
@@ -805,6 +903,18 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     assert.equal(joined.currentSha256, incoming.currentSha256,
       'Both Isolation and bible parents must converge to the same source: ' + path);
   }
+  assert.deepEqual(Object.keys(AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126), joinedPaths);
+  assert.deepEqual(Object.keys(AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126), joinedPaths);
+  for (const path of joinedPaths) {
+    const joined = AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126[path];
+    const incoming = AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126[path];
+    assert.equal(joined.previousSha256, AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126[path].currentSha256,
+      'The production join requires the exact published Isolation/bible source: ' + path);
+    assert.equal(incoming.previousSha256, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126[path].currentSha256,
+      'The production incoming receipt requires its exact published source: ' + path);
+    assert.equal(joined.currentSha256, incoming.currentSha256,
+      'Both Isolation and production parents must converge to the same source: ' + path);
+  }
   const paths = hostPaths();
   for (const path of paths) {
     const seed = (AVP_HOST_SUCCESSORS_20261125[path] || AVP_FIORINA_JOIN_SUCCESSORS_20261125[path]
@@ -823,5 +933,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     isolationSuccessors: Object.keys(AVP_ISOLATION_SUCCESSORS_20261126).length,
     isolationBibleJoinSuccessors: Object.keys(AVP_ISOLATION_BIBLE_JOIN_SUCCESSORS_20261126).length,
     isolationBibleIncomingSuccessors: Object.keys(AVP_ISOLATION_BIBLE_INCOMING_SUCCESSORS_20261126).length,
+    productionBibleSuccessors: Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126).length,
+    isolationProductionJoinSuccessors: Object.keys(AVP_ISOLATION_PRODUCTION_JOIN_SUCCESSORS_20261126).length,
+    isolationProductionIncomingSuccessors: Object.keys(AVP_ISOLATION_PRODUCTION_INCOMING_SUCCESSORS_20261126).length,
     historicalEvidenceTransferred: false });
 }

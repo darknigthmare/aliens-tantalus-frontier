@@ -1,0 +1,598 @@
+{
+  "schema": 1,
+  "module": "alien-isolation",
+  "packVersion": "1.0.0",
+  "sourceVersion": "0.8.0",
+  "sourceGameSha256": "e21c5a50305e392dd8ee324783f2e6b9448f78001e342255a34c024440928df9",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 2369,
+      "sha256": "1dbdcfa146e15bede20391ce8a226544fdfb2c959bbf4642bfd94c0682f6eaae",
+      "kind": "launcher"
+    },
+    {
+      "path": "game.html",
+      "bytes": 1106993,
+      "sha256": "799ad304aa300d7bf156237d926c3640bc09190313015f8de3193c044950519d",
+      "kind": "game"
+    },
+    {
+      "path": "fidelity/adapter.js",
+      "bytes": 24882,
+      "sha256": "6d0e96784d30570e4ae7c76efb9667661be994dafe48cfa072c609104762af47",
+      "kind": "adapter"
+    },
+    {
+      "path": "fidelity/assets/access-tuner.png",
+      "bytes": 1377409,
+      "sha256": "d53d73377c56cb2778cf8a97d675d3e596a28bc881e48956a4f89c3c7867b379",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/amanda-crouch.png",
+      "bytes": 1412283,
+      "sha256": "55ee12ce40cd2b27831f473a30bb649edaad74e2bf663d811b2900f6cad453f0",
+      "kind": "image",
+      "width": 1385,
+      "height": 1136
+    },
+    {
+      "path": "fidelity/assets/amanda-crouch-walk-a.png",
+      "bytes": 1991171,
+      "sha256": "130a91acae1da8b70db334d64d4eb2ffbda293e16ade8c1228b31acd79a07af9",
+      "kind": "image",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "fidelity/assets/amanda-crouch-walk-b.png",
+      "bytes": 1731960,
+      "sha256": "8a714ae7807dc80cd34300393b7630954c108810a783771e91113110a36b954f",
+      "kind": "image",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "fidelity/assets/amanda-eva-idle.png",
+      "bytes": 1366754,
+      "sha256": "e1cf78922601b4d613d374d341eac01fea8d3cd628cbb18ce46576683ac252fe",
+      "kind": "image",
+      "width": 887,
+      "height": 1774
+    },
+    {
+      "path": "fidelity/assets/amanda-eva-walk-a.png",
+      "bytes": 1562350,
+      "sha256": "3f8ea25805740061c66105b8941bb26d462c498127bec6e568d0bbf74245d8db",
+      "kind": "image",
+      "width": 887,
+      "height": 1774
+    },
+    {
+      "path": "fidelity/assets/amanda-eva-walk-b.png",
+      "bytes": 1384881,
+      "sha256": "7a782f80baae468bcb9817e397cbed31327b1dd053090984d2e7af1f5182c691",
+      "kind": "image",
+      "width": 887,
+      "height": 1774
+    },
+    {
+      "path": "fidelity/assets/amanda-idle.png",
+      "bytes": 1752978,
+      "sha256": "1a8f5945c582b02255f0125debda1b2e9d426cac1614fb42b937e16f596035e2",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "path": "fidelity/assets/amanda-walk-a.png",
+      "bytes": 1865495,
+      "sha256": "9b453817446fb130570d1e54461be4396b727d25cbc0117167b5ec0f3d87d71d",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "path": "fidelity/assets/amanda-walk-b.png",
+      "bytes": 1850900,
+      "sha256": "7c09a657f7ca39959eafbc140911fdbe67393b439383aa9e32ef6d99b01e0ff1",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "path": "fidelity/assets/axel-portrait.png",
+      "bytes": 1732531,
+      "sha256": "a25cbc4e2f8155f97e775c134d1661c8081ecabc9db9f0a3cd28676f2bbb6bd8",
+      "kind": "image",
+      "width": 1312,
+      "height": 1199
+    },
+    {
+      "path": "fidelity/assets/emp.png",
+      "bytes": 533995,
+      "sha256": "7dd92dc3b7e3579af6703cac98d691da4264c46d0a8dc4a3a54aef6239369423",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/flamethrower.png",
+      "bytes": 1384872,
+      "sha256": "cad241a1060632e4fdfa5ed57665325298c0db482cd9e3c993078d41cab76096",
+      "kind": "image",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "fidelity/assets/flare.png",
+      "bytes": 305254,
+      "sha256": "d39330f30a08564ce10c68cedb3171f9c42a58cce0daf3f69e605c1c62f0f422",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/flashlight.png",
+      "bytes": 570620,
+      "sha256": "57bd5fcda3dedd8d9fd95edf6750d7bc5c052d03d3b3aadc4faabec4b67d4151",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/marlow-portrait.png",
+      "bytes": 2083147,
+      "sha256": "aeff33ee02a303ae98033b7f70c80eaba377ad8205d1b54ed1affe0ae96e6625",
+      "kind": "image",
+      "width": 1200,
+      "height": 1310
+    },
+    {
+      "path": "fidelity/assets/medkit-injector.png",
+      "bytes": 315893,
+      "sha256": "7864628dbbea7c42ce6d9081625eec0742d066720a0ed016d746eae0f3403cac",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/motion-tracker.png",
+      "bytes": 1235731,
+      "sha256": "d3ccdb09a74ae390505f4932346feb5ccc25e9fff7727eb329c926dab3f85a85",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/noisemaker.png",
+      "bytes": 894453,
+      "sha256": "688725fccb826a2b41117d4221b03465ceeb6fe93101f1ea1458357c218bb17d",
+      "kind": "image",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "fidelity/assets/samuels-portrait.png",
+      "bytes": 1588741,
+      "sha256": "65effcb55deae59e2d02eb5c37ce2ac805b4c33e614b95f6922d1f005055f374",
+      "kind": "image",
+      "width": 1312,
+      "height": 1199
+    },
+    {
+      "path": "fidelity/assets/save-station.png",
+      "bytes": 1880001,
+      "sha256": "7e051f422b21ce5703b5762946e06c9e8d05d5d4802492fc8c96474b034c2bda",
+      "kind": "image",
+      "width": 1133,
+      "height": 1388
+    },
+    {
+      "path": "fidelity/assets/sevastolink-terminal.png",
+      "bytes": 2235316,
+      "sha256": "71d6b6ce2aca1e371c8285aff3043d55def5ffc82b024116e96e810c9e6ae380",
+      "kind": "image",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "fidelity/assets/taylor-portrait.png",
+      "bytes": 1805731,
+      "sha256": "297d25376e97be04bfdfdcebe5ea72b39ccdd791529be2891608defc1e5cd5f8",
+      "kind": "image",
+      "width": 1207,
+      "height": 1303
+    },
+    {
+      "path": "fidelity/assets/verlaine-portrait.png",
+      "bytes": 1361619,
+      "sha256": "1234f2fa62dcb74a21f557224e68b8945492458c354c22fd362e1a55aecdf768",
+      "kind": "image",
+      "width": 1372,
+      "height": 1146
+    },
+    {
+      "path": "fidelity/assets/waits-portrait.png",
+      "bytes": 1738581,
+      "sha256": "576405e58b12dd1900aa77458fe787719799daae272def3c27ff85798641b80d",
+      "kind": "image",
+      "width": 1311,
+      "height": 1200
+    },
+    {
+      "path": "fidelity/assets/working-joe-idle.png",
+      "bytes": 1393447,
+      "sha256": "8bc5029fe504828a2f8e019a71813b10673da6a1930e404022dad848ede1c109",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "path": "fidelity/assets/working-joe-walk-a.png",
+      "bytes": 1727043,
+      "sha256": "b6be183ec64ab143c41e4a6efa55bccb6a066d30e2fdb3504383e437ec2f9d52",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "path": "fidelity/assets/working-joe-walk-b.png",
+      "bytes": 1624114,
+      "sha256": "d7ef03701738b988449b301cebce84793af2d8e1202963ded1e39692f20effe5",
+      "kind": "image",
+      "width": 1024,
+      "height": 1536
+    }
+  ],
+  "assets": [
+    {
+      "id": "amanda-idle",
+      "src": "./assets/amanda-idle.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-crouch",
+      "src": "./assets/amanda-crouch.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-walk-a",
+      "src": "./assets/amanda-walk-a.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-walk-b",
+      "src": "./assets/amanda-walk-b.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-crouch-walk-a",
+      "src": "./assets/amanda-crouch-walk-a.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-crouch-walk-b",
+      "src": "./assets/amanda-crouch-walk-b.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-eva-idle",
+      "src": "./assets/amanda-eva-idle.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-eva-walk-a",
+      "src": "./assets/amanda-eva-walk-a.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "amanda-eva-walk-b",
+      "src": "./assets/amanda-eva-walk-b.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "working-joe-idle",
+      "src": "./assets/working-joe-idle.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "working-joe-walk-a",
+      "src": "./assets/working-joe-walk-a.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "working-joe-walk-b",
+      "src": "./assets/working-joe-walk-b.png",
+      "requireAlpha": true,
+      "facing": "right"
+    },
+    {
+      "id": "motion-tracker",
+      "src": "./assets/motion-tracker.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "save-station",
+      "src": "./assets/save-station.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "sevastolink-terminal",
+      "src": "./assets/sevastolink-terminal.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "samuels-portrait",
+      "src": "./assets/samuels-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "taylor-portrait",
+      "src": "./assets/taylor-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "waits-portrait",
+      "src": "./assets/waits-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "axel-portrait",
+      "src": "./assets/axel-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "verlaine-portrait",
+      "src": "./assets/verlaine-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "marlow-portrait",
+      "src": "./assets/marlow-portrait.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "medkit-injector",
+      "src": "./assets/medkit-injector.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "noisemaker",
+      "src": "./assets/noisemaker.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "emp",
+      "src": "./assets/emp.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "flare",
+      "src": "./assets/flare.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "flashlight",
+      "src": "./assets/flashlight.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "access-tuner",
+      "src": "./assets/access-tuner.png",
+      "requireAlpha": true
+    },
+    {
+      "id": "flamethrower",
+      "src": "./assets/flamethrower.png",
+      "requireAlpha": true
+    }
+  ],
+  "bindings": {
+    "characters": [
+      {
+        "kind": "amanda",
+        "pose": "idle",
+        "frames": [
+          "amanda-idle"
+        ]
+      },
+      {
+        "kind": "amanda",
+        "pose": "crouch",
+        "frames": [
+          "amanda-crouch"
+        ]
+      },
+      {
+        "kind": "amanda",
+        "pose": "walk",
+        "frames": [
+          "amanda-walk-a",
+          "amanda-walk-b"
+        ]
+      },
+      {
+        "kind": "amanda",
+        "pose": "crouch-walk",
+        "frames": [
+          "amanda-crouch-walk-a",
+          "amanda-crouch-walk-b"
+        ]
+      },
+      {
+        "kind": "eva",
+        "pose": "idle",
+        "frames": [
+          "amanda-eva-idle"
+        ]
+      },
+      {
+        "kind": "eva",
+        "pose": "walk",
+        "frames": [
+          "amanda-eva-walk-a",
+          "amanda-eva-walk-b"
+        ]
+      },
+      {
+        "kind": "joe",
+        "pose": "idle",
+        "frames": [
+          "working-joe-idle"
+        ]
+      },
+      {
+        "kind": "joe",
+        "pose": "walk",
+        "frames": [
+          "working-joe-walk-a",
+          "working-joe-walk-b"
+        ]
+      }
+    ],
+    "props": [
+      {
+        "kind": "save",
+        "asset": "save-station"
+      },
+      {
+        "kind": "terminal",
+        "asset": "sevastolink-terminal",
+        "propIds": [
+          "s_axel.p04",
+          "y_lobby.p07",
+          "y_archive.p05",
+          "y_workshop.p04",
+          "c_control.p06",
+          "c_control.p07",
+          "c_server.p05",
+          "c_server.optional",
+          "m_reception.p06",
+          "m_pharmacy.p05",
+          "d_warehouse.p06",
+          "w_bureau.p05",
+          "w_bureau.p06",
+          "w_bureau.p08",
+          "w_cells.p04",
+          "g_control.p05",
+          "g_airlock.p03",
+          "a_access.p05",
+          "a_labo.p05",
+          "a_core.p05",
+          "r_entry.p06",
+          "r_hive.p07",
+          "m_staff.optional",
+          "d_relay.optional",
+          "a_service.optional",
+          "r_observation.optional",
+          "g_observation.v03.11",
+          "g_plenum.v03.09",
+          "m_records.v04.07",
+          "e_lockers.v04.08",
+          "m_triage.v05.10",
+          "m_refuge.v05.10",
+          "d_changing.v05.10",
+          "d_refuge.v05.10",
+          "sc_station.v08.p09",
+          "sc_station.v08.task",
+          "h_galleria_low.v08.p09",
+          "h_galleria_low.v08.task",
+          "h_galleria_high.v08.p09",
+          "h_galleria_high.v08.task",
+          "h_habitation.v08.p09",
+          "h_habitation.v08.task",
+          "h_upper.v08.p09",
+          "h_upper.v08.task",
+          "m_morgue.v08.p09",
+          "m_morgue.v08.task",
+          "d_fluid.v08.p09",
+          "d_fluid.v08.task",
+          "d_orientation.v08.p02",
+          "d_orientation.v08.p09",
+          "d_orientation.v08.task",
+          "r_maintenance.v08.p09",
+          "r_maintenance.v08.task",
+          "g_hazard.v08.p09",
+          "g_hazard.v08.task"
+        ]
+      }
+    ],
+    "ui": [
+      {
+        "key": "noise",
+        "asset": "noisemaker"
+      },
+      {
+        "key": "flare",
+        "asset": "flare"
+      },
+      {
+        "key": "emp",
+        "asset": "emp"
+      },
+      {
+        "key": "medkit",
+        "asset": "medkit-injector"
+      }
+    ],
+    "tools": [
+      {
+        "key": "tracker",
+        "asset": "motion-tracker"
+      },
+      {
+        "key": "torch",
+        "asset": "flashlight"
+      },
+      {
+        "key": "tuner",
+        "asset": "access-tuner"
+      },
+      {
+        "key": "flame",
+        "asset": "flamethrower"
+      }
+    ],
+    "portraits": [
+      {
+        "name": "Christopher Samuels",
+        "asset": "samuels-portrait"
+      },
+      {
+        "name": "Nina Taylor",
+        "asset": "taylor-portrait"
+      },
+      {
+        "name": "Waits",
+        "asset": "waits-portrait"
+      },
+      {
+        "name": "Axel",
+        "asset": "axel-portrait"
+      },
+      {
+        "name": "Diane Verlaine",
+        "asset": "verlaine-portrait"
+      },
+      {
+        "name": "Henry Marlow",
+        "asset": "marlow-portrait"
+      }
+    ]
+  }
+}

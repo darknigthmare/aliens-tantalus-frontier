@@ -1,0 +1,573 @@
+{
+  "schema": 1,
+  "title": "AVP 2004 — huit sources candidates de production",
+  "date": "2026-11-26",
+  "runtimeSourceCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+  "bibleBaseCommit": "268b1a517c60338899578a165e9784c5b7313dba",
+  "scope": "Sources de bible ; aucun raccord au rendu, inventaire, collision ou sauvegarde AVP.",
+  "exact": false,
+  "canonExact": false,
+  "counts": {
+    "generatedFiles": 8,
+    "generatedBytes": 17031468,
+    "imageConditioned": 2,
+    "textOnly": 6,
+    "runtimeIntegrated": 0,
+    "fidelityCertified": 0,
+    "blockedGenerations": 1
+  },
+  "references": [
+    {
+      "id": "PROP_CHESTBURSTER",
+      "kind": "production-prop",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/359/lot/118656",
+      "title": "Chestburster AVP 2004, ADI, Propstore lot 118656",
+      "use": "Photographie inspectée et fournie au générateur.",
+      "imageUrl": "https://images.propstore.com/577ea988047090afd8906933b2c1fa12-1.jpg",
+      "inputSha256": "40b76484ee4a6917e2beb9d1b56d2b5ea126b2d6650c3428e6110746323e34f4"
+    },
+    {
+      "id": "FILM_PIPER",
+      "kind": "film-still-secondary-host",
+      "url": "https://avp.fandom.com/wiki/Piper_Maru",
+      "title": "Piper Maru, image du film reproduite par Xenopedia",
+      "use": "Image inspectée et fournie au générateur ; éclairage sombre et angle à reconstruire.",
+      "imageUrl": "https://static.wikia.nocookie.net/avp/images/c/c2/Piper-maru-3.jpg/revision/latest?cb=20150528140308",
+      "inputSha256": "b2f510061eba67a82b6cb35b1888ab162e7300e7a3b09f66585016d25f4f0bc5"
+    },
+    {
+      "id": "JOHN_LEE",
+      "kind": "primary-model-maker",
+      "url": "https://www.johnleemodelmaker.me/avp.aspx",
+      "title": "John Lee — maquettes AVP",
+      "use": "Texte et liens d'images retrouvés ; photographies non téléchargées après interruption. Aucune image John Lee fournie au générateur.",
+      "imageUrls": [
+        "https://www.johnleemodelmaker.me/images/avp/AVP_009D_S72.JPG",
+        "https://www.johnleemodelmaker.me/images/avp/SHI_0024_S72.JPG",
+        "https://www.johnleemodelmaker.me/images/avp/AVP_0018_S72.JPG"
+      ]
+    },
+    {
+      "id": "PROP_SNOWCAT",
+      "kind": "production-miniature",
+      "url": "https://propstoreauction.com/lot-details/index/catalog/496/lot/192510/460-Light-Up-Weyland-Antarctic-Snowcat-Model-Miniature-AVP-ALIEN-VS-PREDATOR-2004",
+      "title": "Snowcat Weyland PistenBully, miniature de production",
+      "use": "Description textuelle consultée : chenilles, lame, plateau métallique et balises orange. Pas de photographie fournie à cette génération."
+    },
+    {
+      "id": "NASA_EARTH",
+      "kind": "primary-natural-reference",
+      "url": "https://science.nasa.gov/resource/the-blue-marble/",
+      "title": "NASA — The Blue Marble",
+      "use": "Contexte géographique terrestre ; aucune photo NASA fournie au générateur. La géographie générée n'est pas certifiée."
+    },
+    {
+      "id": "MPC_AVP",
+      "kind": "primary-effects-studio",
+      "url": "https://www.mpcvfx.com/en/filmography/alien-vs-predator/",
+      "title": "MPC — AVP 2004",
+      "use": "Contexte des environnements, neige et effets ; ne prouve pas la forme du module de glace ou de la façade."
+    },
+    {
+      "id": "FILM_WHALING",
+      "kind": "film-clip-secondary-host",
+      "url": "https://clip.cafe/alien-vs-predator-2004/what-are-these-whale-bones/",
+      "title": "Station baleinière — extrait film",
+      "use": "Contexte de scène et présence d'ossements ; pas de frame fournie au générateur. Angle, nombre et forme des côtes à relever."
+    },
+    {
+      "id": "RUNTIME_BASE",
+      "kind": "project-source",
+      "url": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/b0df1877a058f0818f96437fdfdea3f21ba7f415/scripts/dlc/avp-2004/web/fidelity-catalog.js",
+      "title": "Registre v0.11.0 examiné",
+      "use": "Identifiants et statuts historiques, sans certification canon."
+    },
+    {
+      "id": "PROP_COMBISTICK",
+      "kind": "production-prop-auction-reproduction",
+      "url": "https://www.invaluable.com/auction-lot/avp-alien-vs-predator-2004-predator-combistick-513-c-e1f4261b3f",
+      "title": "Combistick ornementé, Propstore lot 513",
+      "use": "Deux photographies inspectées pour tentative refusée ; attribution Scar/Ancien à résoudre par plan.",
+      "inputImageSha256": [
+        "741eae217e120d6b304d28e262629bae8ba69632437fff670206d2501b949c1b",
+        "ae285b4877869adc3fab5e5749c2226d10ca68ef3e6547f1d3f98ca1479e0b83"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+      "gitBlobSha": "29b1e0ad72cd5605f0914e649280a329dde2276b",
+      "width": 1536,
+      "height": 1024,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 1886251,
+      "sha256": "e2c0680ad987e86b8e1a6d31504f975a2f5539ae86381622289d933ed893de24",
+      "promptKey": "chestbursterPrompt",
+      "label": "Chestburster standard",
+      "category": "personnages",
+      "catalogIds": [
+        "AVP2004-054"
+      ],
+      "canonIds": [
+        "creature_chestburster"
+      ],
+      "sourceRefs": [
+        "PROP_CHESTBURSTER",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "image-conditioned",
+      "review": "Silhouette complète et queue visibles. Teinte, petits bras, dents et proportions à comparer au prop et aux plans. La pose fixe ne fournit ni naissance ni locomotion. Le contenu runtime reste ABSENT.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 1146626,
+        "alphaNonzero": 426238,
+        "alphaFull": 0,
+        "medianNonzero": 253,
+        "bboxAlpha128": [
+          77,
+          87,
+          1447,
+          915
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 72.901
+      },
+      "inputPixelsProvided": true
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+      "gitBlobSha": "3346d65fc90bee1dceaa45ba14f3801586fdaf6d",
+      "width": 2057,
+      "height": 764,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 1534498,
+      "sha256": "af035524b7d63ef535c84a490edc72dea780a5116cd73b46baca5831a7d5079c",
+      "promptKey": "piperMaruPrompt",
+      "label": "Piper Maru — coque complète",
+      "category": "vaisseaux",
+      "catalogIds": [
+        "AVP2004-113"
+      ],
+      "canonIds": [
+        "ship_piper_maru"
+      ],
+      "sourceRefs": [
+        "FILM_PIPER",
+        "JOHN_LEE",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "image-conditioned",
+      "review": "Coque entière, ouverture et rampe reliées au navire. La projection de profil, les fenêtres et détails peu visibles dans le plan nocturne sont des reconstructions. Comparer à la miniature John Lee avant admission. Marge de tête faible autour du mât.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 835265,
+        "alphaNonzero": 736283,
+        "alphaFull": 1082,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          27,
+          20,
+          2030,
+          743
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 53.149
+      },
+      "inputPixelsProvided": true
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+      "gitBlobSha": "55d5652ef04032adc74edb2aad821c3b7a12e888",
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 2505530,
+      "sha256": "0f63616322aa67e9a8c0366857622128f00a92917399807250fa1e63edb75b3b",
+      "promptKey": "earthPrompt",
+      "label": "Terre — élément d'établissement",
+      "category": "planète",
+      "catalogIds": [],
+      "canonIds": [
+        "planet_earth"
+      ],
+      "sourceRefs": [
+        "NASA_EARTH",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Afrique, Atlantique et calotte australe reconnaissables. Aucun relevé des côtes, nuages, orientation ou éclairage du plan AVP ; cette image ne sert pas de carte de navigation ni de géographie certifiée.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 477334,
+        "alphaNonzero": 1095182,
+        "alphaFull": 237,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          42,
+          46,
+          1207,
+          1215
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 30.355
+      },
+      "inputPixelsProvided": false
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+      "gitBlobSha": "513c3fab7a6c2cddcf26e735ba1c28adcb24b1d8",
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 2400997,
+      "sha256": "86af606156957fd985e67a2d578fa881844deb4fd129acb219752385296a8704",
+      "promptKey": "glacierPrompt",
+      "label": "Paroi de glacier",
+      "category": "terrain",
+      "catalogIds": [],
+      "canonIds": [
+        "terrain_glacier"
+      ],
+      "sourceRefs": [
+        "MPC_AVP",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Module de matière et de silhouette original. Raccords non testés, répétition non garantie, aucun collider défini. Ne reproduit pas une paroi mesurée du film.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 456685,
+        "alphaNonzero": 1115843,
+        "alphaFull": 898,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          33,
+          65,
+          2146,
+          658
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 29.041
+      },
+      "inputPixelsProvided": false
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+      "gitBlobSha": "751e83b2e7bb24617e807ac73fb7f4eb508a5091",
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 2338215,
+      "sha256": "6c7b3b7840660de29c8a71c7324d71b116964cceadc704719cdd37fd949bad94",
+      "promptKey": "snowcatPrompt",
+      "label": "Snowcat Weyland — candidat de profil",
+      "category": "véhicules",
+      "catalogIds": [
+        "AVP2004-115"
+      ],
+      "canonIds": [
+        "vehicle_snowcat"
+      ],
+      "sourceRefs": [
+        "PROP_SNOWCAT",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Chenilles, cabine, plateau, lame et feux présents. Rapport cabine/plateau, nombre de feux/galets et livrée restent à corriger par photo ; inscriptions non dessinées volontairement. Pas de véhicule pilotable livré.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 622856,
+        "alphaNonzero": 949672,
+        "alphaFull": 1180,
+        "medianNonzero": 253,
+        "bboxAlpha128": [
+          16,
+          8,
+          2133,
+          708
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 39.609
+      },
+      "inputPixelsProvided": false
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+      "gitBlobSha": "83f05e23fad78c997af96f2b837348447e68afb7",
+      "width": 1774,
+      "height": 887,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 1794042,
+      "sha256": "92507c5ceb5f8d947d57b7486bc271e37d59b7f09314960b58af9c4a0340c976",
+      "promptKey": "whalebonePrompt",
+      "label": "Ossements de baleine",
+      "category": "props",
+      "catalogIds": [],
+      "canonIds": [
+        "prop_whaling_equipment"
+      ],
+      "sourceRefs": [
+        "FILM_WHALING",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Prop complet avec ouvertures entre côtes. La projection conserve de la profondeur et ne satisfait pas encore le profil latéral strict ; anatomie, nombre de côtes et échelle de scène non validés.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 918882,
+        "alphaNonzero": 654656,
+        "alphaFull": 1249,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          37,
+          42,
+          1741,
+          853
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 58.396
+      },
+      "inputPixelsProvided": false
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+      "gitBlobSha": "cc230c92872975ad4b9e8db18139f6868fbaec52",
+      "width": 1536,
+      "height": 1024,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 3164936,
+      "sha256": "3ec8f5337de6645259600d65e072bf85283f65799c8c83f3e7287d862c1a87a2",
+      "promptKey": "stationPrompt",
+      "label": "Façade de station baleinière",
+      "category": "lieux",
+      "catalogIds": [],
+      "canonIds": [
+        "loc_station_wide"
+      ],
+      "sourceRefs": [
+        "FILM_WHALING",
+        "MPC_AVP",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Porte, jambages, linteau et seuil appartiennent à une façade continue. Bâtiment original de travail, sans preuve de correspondance à une façade filmée. Dégagement, ouvrant, occlusion et raccord de sol à intégrer et tester ; aucun remplacement de salle.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 357125,
+        "alphaNonzero": 1215739,
+        "alphaFull": 0,
+        "medianNonzero": 252,
+        "bboxAlpha128": [
+          59,
+          53,
+          1473,
+          971
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 22.705
+      },
+      "inputPixelsProvided": false
+    },
+    {
+      "path": "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png",
+      "gitBlobSha": "c2926331b28ea51f4d7b1b949a4ca853fe3c5600",
+      "width": 2172,
+      "height": 724,
+      "bitDepth": 8,
+      "colorType": 6,
+      "interlace": 0,
+      "bytes": 1406999,
+      "sha256": "8283a5cdd918c5e92d78f97d511e0336201a67817598494cb654ef4130fac3db",
+      "promptKey": "satellitePrompt",
+      "label": "Satellite Weyland — candidat",
+      "category": "props",
+      "catalogIds": [],
+      "canonIds": [
+        "prop_satellite",
+        "loc_earth_orbit"
+      ],
+      "sourceRefs": [
+        "JOHN_LEE",
+        "RUNTIME_BASE"
+      ],
+      "referenceMode": "text-only",
+      "review": "Panneaux raccordés au corps et silhouette entière au seuil alpha128. Géométrie textuelle provisoire, orientation non strictement orthographique et marge très faible aux extrémités. La maquette John Lee doit guider une prochaine itération ; livrée exacte absente.",
+      "generated": true,
+      "generator": "built-in imagegen",
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false,
+      "canonExact": false,
+      "productionReady": false,
+      "alpha": {
+        "method": "RGBA8 PNG decode, zlib inflate and PNG unfilter in JavaScript; original bytes unchanged",
+        "alphaZero": 944904,
+        "alphaNonzero": 627624,
+        "alphaFull": 386,
+        "medianNonzero": 253,
+        "bboxAlpha128": [
+          6,
+          10,
+          2165,
+          710
+        ],
+        "edgePixelsAlpha128": 0,
+        "percentTransparent": 60.088
+      },
+      "inputPixelsProvided": false
+    }
+  ],
+  "prompts": {
+    "chestbursterPrompt": "Use case: stylized-concept\nAsset type: individual transparent 2D side-view production sprite candidate for the AVP (2004) game bible.\nReference image: the attached photograph is the actual 2004 ADI Chestburster prop (Propstore lot 118656), the sole morphology reference; the white photographic background is not part of the asset.\nPrimary request: recreate this standard human-host AVP 2004 chestburster as ONE complete isolated game sprite, facing right, strict lateral view, full head, small folded arms, ribbed torso and entire coiled segmented tail visible. Match the pictured elongated translucent bone-beige head, short silver-grey teeth, olive/tan folds and ribs, little arms and heavy tapering ringed tail. Retain the characteristic small head-to-torso proportions; no Predator mandibles.\nStyle: carefully painted, high-detail realistic 2D game art, crisp legible silhouette at game scale, restrained cold highlights, not a cartoon and not a 3D collectible on a pedestal.\nComposition: one subject centered with 8% transparent breathing room on every side, horizontal body, coiled tail as in reference; no cropped tail or body parts.\nConstraints: truly transparent alpha background, no drop shadow or floor, no gore, no person or host, no text, no watermark, no display stand, no extra limbs, no alien warrior back tubes, no Predalien features. Do not invent markings or armor. This is a new art candidate based on a production reference, not a claim of pixel-exact reproduction.",
+    "piperMaruPrompt": "Use case: stylized-concept\nAsset type: one complete ship cutout for the Aliens Tantalus AVP 2004 production bible.\nReference image: the attached image is a film still of the Piper Maru icebreaker in AVP (2004). Use the actual ship silhouette and deck layout visible in it; the night background, snow and people are reference context only.\nCreate one isolated Piper Maru icebreaker, bow facing left, strict 2D lateral broadside view. Preserve the tall dark blue-black hull, bluff icebreaking bow, cargo cranes and heavy derricks over the forward working deck, stepped white superstructure with rows of small portholes/windows, tall central antenna mast and aft deck arrangement visible in the reference. Show the rectangular hull-side loading opening and its lit doorway, with its hinged ramp logically attached to that opening, not a door floating separately from the ship. Small warm-white work lights.\nStyle: detailed realistic painted 2D game asset, cold desaturated maritime palette, readable silhouette, mild wear and salt streaks; no cartoon, no display plinth.\nFraming: the entire vessel including mast, bow and stern fits with 8% transparent padding, horizontally long composition; preserve length-to-height proportions as far as the reference allows. No invented measurements.\nConstraints: true transparent alpha, no ocean or snow background, no people, no helicopter or extra boats, no shadow plane, no text, watermark or technical labels. Keep it a 2004 surface ship, no spaceship engines, no futuristic turret. Candidate for further frame comparison; unseen details should remain restrained.",
+    "earthPrompt": "Use case: stylized-concept\nAsset type: one isolated planet image for the AVP (2004) game production bible.\nSubject: Earth as seen from space, early-2000s cinematic realism. One complete globe, with Africa and the southern Atlantic visible and Antarctic ice on the lower limb, deep blue oceans, natural white cloud systems and a fine blue atmospheric edge. Use Earth's actual recognizable geography; do not invent continents. This is an establishing-image art candidate, not a geographic map or a literal movie frame.\nComposition: the whole circular globe centered, 12% empty transparent margin around the atmospheric halo. Natural sunlight from the upper left, lower right limb gently in darkness; avoid total black loss of the Antarctic silhouette.\nStyle: carefully painted realistic 2D game background element, subdued cold space palette, dense but plausible clouds, legible at small size.\nConstraints: genuinely transparent alpha outside the globe and its very thin atmospheric rim. No starfield or sky rectangle, no moon, no satellites, no spacecraft, no labels, no grids, no place markers, no logos or watermark, no invented alien planet. Preserve a single spherical outline. Earth is the only planet required for the AVP 2004 episode; do not add planets from other films.",
+    "glacierPrompt": "Use case: stylized-concept\nAsset type: one individual side-view environmental terrain sprite candidate for the AVP 2004 Antarctic game bible.\nSubject: a single thick exposed wall section of blue glacier ice near the Bouvetøya expedition setting, vertical layered ice face with frosted translucent blue-white veins, compact wind-carved snow resting on top and dark compressed ice at its base. Pure natural terrain, not an architectural door.\nComposition: strict 2D lateral elevation, one continuous low horizontal terrain module, front face almost vertical, top contour irregular but mostly level. Entire module visible, 8% transparent margin, no isometric perspective and no labels. Both ends exposed as irregular ice edges for later artist-authored joins; do not claim tileability.\nStyle: detailed realistic painted 2D Tantalus game art, cold desaturated Antarctic light, fine surface cracks and compacted snow; readable silhouette, no cartoon.\nConstraints: truly transparent alpha around one terrain slab, no sky, ground plane, cast shadow or scene background; no characters, equipment, doorway, invented symbol or watermark. No excessive towering ice spikes or fantasy crystals. This is a material and silhouette candidate; the game's collision polygon and metric geography must be defined separately and are not depicted here.",
+    "snowcatPrompt": "Use case: stylized-concept\nAsset type: one independent 2D vehicle sprite candidate for the AVP (2004) production bible.\nPrimary request: the Weyland expedition's Antarctic PistenBully snowcat from AVP 2004, complete strict lateral profile, facing left. Use the film's practical early-2000s machine, not a modern red resort groomer: broad low tracked undercarriage with many small road wheels, boxy steel-grey glazed operator cab at the front, work headlights, rear exposed cargo deck with raised backing and orange emergency beacons, an antenna mast, front snow-plow blade joined by its mechanical lifting arms. Weathered metallic chassis, frost and packed snow on track cleats.\nReference basis: production miniature catalog Propstore lot 192510 identifies PistenBully, a metal-finished cargo bed and chassis, orange beacons, attached plow mechanism and side doors; its listed miniature dimensions are not full-size vehicle dimensions. This is a text-informed candidate, not a traced orthographic reconstruction.\nStyle: detailed realistic painted 2D Tantalus game asset, cold desaturated steel palette, legible silhouette, no cartoon. Side-on wheels and tracks, avoid isometric or three-quarter view.\nComposition: one whole snowcat with both ends and blade visible, 10% clear transparent margin. Cabin door integrated into cab wall. No human driver visible.\nConstraints: actual transparent alpha background, no snowfield or floor, no cast shadow plane, no people, no separate second vehicle, no weapon, no invented futuristic components, no watermark or extra annotation. Do not invent readable registration numbers or decals without a close reference; leave their small paint patches plain for later exact art pass.",
+    "whalebonePrompt": "Use case: stylized-concept\nAsset type: one environmental prop sprite candidate for the AVP (2004) Bouvetøya whaling-station production bible.\nSubject: one large old whale rib cage remnant forming an open arch in the abandoned whaling station. A weathered off-white spinal ridge with paired curved ribs descending on either side, worn porous bone with frost in cracks, a little compacted snow caught on upper surfaces. It should read as remains left by a historical whaling operation, not fantasy architecture.\nComposition: strict lateral 2D elevation with the spine horizontal, a sequence of several complete curved ribs and generous open spaces between them, one cohesive skeleton remnant, full silhouette inside the frame with 10% padding; no separate loose pieces.\nStyle: realistic finely painted 2D game prop for Tantalus, cold blue-grey shadows, ivory bone, restrained snow; readable silhouette and convincing old bone texture.\nConstraints: truly transparent alpha background including holes between ribs, no person, no living animal, no blood, no ground rectangle, no sky, no door panel placed in the arch, no sign, no text or watermark. This is a reference-informed production candidate for later frame matching, not an archaeological diagram or a metrically certified film prop.",
+    "stationPrompt": "Use case: stylized-concept\nAsset type: one independent front-elevation building module candidate for the AVP (2004) abandoned whaling station game bible.\nSubject: a small complete weather-beaten wooden whaling-station service building at Bouvetøya, early-20th-century industrial construction abandoned and crusted in ice. Dark greying timber plank walls, steep simple corrugated metal gable roof with compacted snow, diagonal timber bracing, one closed heavy plank door and one small frost-clouded window. Door must be built into the wall opening, with continuous jambs and a lintel supported by the wall; its threshold rests on the same continuous foundation as the building. No free-standing door, floating arch or isolated portal.\nComposition: strict flat 2D side-scrolling elevation, full building including roof and foundation inside the frame, 10% transparent margin. Door remains at ground level; a short ice-covered threshold is physically joined to the foundation. No isometric camera.\nStyle: detailed realistic painted 2D Tantalus environmental art, cold charcoal wood, pale blue frost, worn iron door hinges and corrugated metal, restrained material contrast.\nConstraints: truly transparent alpha around building, no scene sky or large snowfield background, no people, vehicles or signs, no invented glyphs, no text or watermark. Keep it one cohesive building, not a collage or a floor plan. This is an architectural production candidate for frame matching; it must not pretend to reproduce a measured movie location or establish new room connections.",
+    "satellitePrompt": "Use case: stylized-concept\nAsset type: one independent spacecraft-equipment sprite candidate for the AVP (2004) game bible.\nSubject: the early-2000s industrial Weyland Earth-observation satellite visual family from AVP 2004: a compact silver-grey orbital instrument body with cylindrical and rectangular sections, exposed truss bracing and cable conduits, a prominent sensor aperture, paired broad dark blue photovoltaic panel wings, small antenna rods. Practical studio-miniature detailing with pale insulated panels, dark mechanical recesses and restrained weathering. No propulsion fantasy.\nSource basis: model maker John Lee documents a Weyland satellite maquette and a fully detailed satellite for this film; this request is a text-informed design candidate, not a traced reconstruction of his unseen photographs.\nComposition: ONE complete satellite in strict lateral 2D profile with panel wings visibly attached to the central body, all antennas and panel tips intact, 12% transparent padding. Horizontal composition and readable silhouette.\nStyle: realistic detailed painted 2D Tantalus art with neutral cool lighting suitable for later space-scene compositing.\nConstraints: genuine transparent alpha background, no Earth, starfield or environment, no unrelated spacecraft, no astronauts, no weapons, no invented readable corporate decal or registration, no labels, watermark or diagram arrows. All panels must attach logically, no floating parts. Do not confuse this with a Weyland-Yutani installation from the later Alien films.",
+    "combistickPrompt": "Use case: stylized-concept\nAsset type: one independent transparent side-view weapon sprite candidate for the AVP 2004 game bible.\nReference images: Image 1 is the complete extended AVP combistick production prop, Propstore lot 513 as photographed by its auctioneer; Image 2 is a close-up of the SAME prop grip and ornaments. Use image 1 for full geometry, image 2 for surface details. They are reference photographs, not backgrounds.\nRequest: create ONE straight, fully extended combistick, vertical in the image, strict orthographic lateral view, both end points intact and the whole weapon visible. Preserve the exact visual family of the reference: long slender dark silver shaft, small pointed metal spear tips at both ends, copper-brown engraved central grip with blue oval inset, four openwork hooked silver blades arranged as the photographed paired wings above and below the grip, thin brown leather ties with small metal beads and the one small bone trophy dangling beside the central grip.\nArt: meticulously painted realistic 2D game art with restrained worn metal highlights; clear silhouette and fully transparent openings through the hooked wing blades. Authentic 2004 ornate design, no modern rifle features.\nComposition: one weapon centered, vertical, 8% clear transparent margin above and below; retain the reference proportions with narrow shaft and much wider central hooks; no perspective shortening.\nConstraints: actual transparent alpha background, no floor or shadow, no hands or character, no stand, no montage, no labels or watermark, no invented runes beyond the reference's visible surface relief, no added barrel or extra blade. Retain ornamented variant rather than silently replacing it with a generic Scar weapon. This is a candidate for later scene-specific attribution, not a 1:1 certification."
+  },
+  "generationAttempts": [
+    {
+      "promptKey": "chestbursterPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/chestburster-human-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "piperMaruPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/piper-maru-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "earthPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/earth-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "glacierPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/glacier-face-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "snowcatPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/snowcat-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "whalebonePrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/whalebone-arch-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "stationPrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/whaling-station-facade-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "satellitePrompt",
+      "result": "generated",
+      "path": "assets/openai/sprites/avp2004-production-v001/weyland-satellite-avp2004-v001.png",
+      "tool": "built-in imagegen",
+      "postprocessing": "none"
+    },
+    {
+      "promptKey": "combistickPrompt",
+      "result": "blocked_by_image_service",
+      "category": "illicit",
+      "outputCount": 0,
+      "sourceRefs": [
+        "PROP_COMBISTICK"
+      ],
+      "note": "Refus automatique du service de génération ; aucune image produite ni comptée, aucun contournement ou substitution CLI."
+    }
+  ],
+  "verification": {
+    "originalBytesPreserved": true,
+    "sha256Method": "Pure JavaScript SHA-256 with abc standard test vector; chestburster hash agrees with pre-interruption Python hashlib.",
+    "pngHeaders": "All eight original PNGs: RGBA8, non-interlaced; width/height read from IHDR.",
+    "alphaMethod": "Original PNG bytes decoded with JavaScript zlib/PNG unfilter. Reader cross-checked against pre-interruption Pillow chestburster results.",
+    "alphaScope": "Transparency and alpha128 silhouette containment only; no film-similarity metric. Nonzero alpha medians are 252–253/255; faint fringe pixels need review.",
+    "browserPlaytest": "Not executed for these source-only images.",
+    "environment": "Local executor interrupted during reference retrieval. GitHub blobs and in-memory validations continued; no post-interruption local Node success claimed."
+  },
+  "licensingNote": "Les liens externes identifient des références de recherche ; leurs photographies ne sont pas redistribuées dans ce lot. Les huit PNG sont des générations nouvelles, pas des scans des props."
+}

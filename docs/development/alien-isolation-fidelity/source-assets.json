@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "module": "alien-isolation",
+  "files": [
+    {
+      "path": "candidates/anesidora-exterior.png",
+      "bytes": 1664978,
+      "sha256": "6fed28192b51500303503aaa5fca50a473659b10346859cd46d5c9ad26d78528",
+      "width": 1774,
+      "height": 887,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/boltgun.png",
+      "bytes": 1002338,
+      "sha256": "73cb820d2d9808bb568a208a6b167cec5c21dbdc7462f7716b1dc0a0d7b89e08",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/flashbang.png",
+      "bytes": 1022588,
+      "sha256": "4da47d2dbb4eeabed94694515e220402e7866f7251a63880fea2e0f1384a6fb6",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/maintenancejack.png",
+      "bytes": 494895,
+      "sha256": "52ee9bfffc264af18392337a5e13a299d6b97e40e84675e225fcb8a0e7e79024",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/plasma-cutter.png",
+      "bytes": 808219,
+      "sha256": "7c888c459b76a5d7948b3ddb8b8a50c46f27b79f9abf5f7eb56f3db2473e5e26",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/revolver.png",
+      "bytes": 773549,
+      "sha256": "92d9dcb146452cfe46fb6af0d186dec6f4993fcf99d873cc7dcd3733bc2b0ca3",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/sevastopol-exterior.png",
+      "bytes": 1561528,
+      "sha256": "23264ad08b09602e2f95f0977ba0c82fcfa402c6bbfcf45373079c38c22d89e8",
+      "width": 1681,
+      "height": 936,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/shotgun.png",
+      "bytes": 746632,
+      "sha256": "c3fe53e46dd9bd53dac2207aea0d4c62fd5b3fa7ee642b7c3a2ea272a9c2dda7",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/smokebomb.png",
+      "bytes": 880081,
+      "sha256": "7cbf7f89144bdabd8225b27e3cf8faac8ccecb66ffddb0b9328785ad1ae059a1",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/stunbaton.png",
+      "bytes": 382431,
+      "sha256": "48258a923cfd1d274f268b14962541660841f9de68f91fb21de927bc5b1f27b9",
+      "width": 1254,
+      "height": 1254,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    },
+    {
+      "path": "candidates/torrens-exterior.png",
+      "bytes": 1156096,
+      "sha256": "79e562a0bd38b53c2bbcd14bb70fc5c3d1f441ef832561ff58d2b92a0a73b655",
+      "width": 2172,
+      "height": 724,
+      "generated": true,
+      "status": "candidate",
+      "runtimeIntegrated": false,
+      "exact": false
+    }
+  ]
+}

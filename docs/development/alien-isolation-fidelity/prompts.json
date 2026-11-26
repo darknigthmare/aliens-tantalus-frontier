@@ -1,0 +1,2343 @@
+{
+  "schema": 2,
+  "module": "alien-isolation",
+  "sourceVersion": "0.8.0",
+  "packVersion": "1.0.0",
+  "provenance": "Registre reconstitué à partir des données de production conservées ; les 39 PNG sont inchangés et leurs empreintes Git/SHA256 ont été revérifiées.",
+  "counts": {
+    "generatedPng": 39,
+    "runtimeIntegrated": 28,
+    "sourceCandidates": 11,
+    "pngBytes": 51200605
+  },
+  "exact": false,
+  "canonExact": false,
+  "assets": [
+    {
+      "id": "amanda-idle",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "5145896238968e6aa389c11ec8d7000ce4dd8907",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg",
+        "https://creativeassembly.artstation.com/projects/Jr1BPm"
+      ],
+      "referenceInspected": true,
+      "prompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "precedingPrompts": [
+        "Transform the referenced official Amanda Ripley image into ONE production 2D game character sprite. Preserve Amanda's identity, hair, costume construction, olive gray flight coverall, blue collar with red trim, rolled short sleeves, ribbed shoulder panels, key necklace and black wristwatch as shown. Remove the cat, background, poster lettering and frame. Extend naturally to full body with matching olive gray utility trousers and worn white high-top sneakers. Entire head to both soles visible. Pose: alert idle standing, body and face directed to the RIGHT in a readable near side view, hands relaxed ready at waist, no gun. Dark brown hair in a short ponytail. Realistic hand-painted high-detail 2D survival horror game art, crisp silhouette and natural anatomy, subdued cinematic top-left light, no vector look, no chibi. One person only, absolutely no grid or multiple poses. Transparent background with actual alpha, no ground, no cast shadow or glow, all limbs within frame with 8 percent margin. Preserve costume and likeness of this image; do not redesign her as Ellen Ripley. Portrait format suitable for a character sprite."
+      ],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 1752978,
+      "sha256": "1a8f5945c582b02255f0125debda1b2e9d426cac1614fb42b937e16f596035e2",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-idle.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · repos",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "idle",
+          "frames": [
+            "amanda-idle"
+          ]
+        }
+      ],
+      "selectedPrompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "amanda-crouch",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "26378dbb579f2db8e86c7ad9cac9edd706ccac2f",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg",
+        "https://creativeassembly.artstation.com/projects/Jr1BPm"
+      ],
+      "referenceInspected": true,
+      "prompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "precedingPrompts": [
+        "Use the first reference as the exact character design to preserve, and second reference for the final game's face and clothing. Amanda Ripley from Alien: Isolation: olive gray industrial coverall, dark blue collar with red piping, rolled sleeves above elbow, actual woven cloth cuffs not fur, shoulder patch, exposed forearms, key pendant, black wristwatch, brown ponytail, worn white high-top sneakers. Preserve same proportions, colors, age, face and lighting. One full-body near-side-view sprite facing RIGHT. Realistic finely painted 2D game art, crisp readable silhouette, flat neutral diffuse upper-left lighting, complete body and shoes within frame. True transparent alpha background with no haze, spotlight, shadow, backdrop, text, sheet, extra view or other person. No weapon. 8 percent empty margin. Change ONLY the pose to: low stealth crouch, both knees naturally bent, torso leaning forward, heels near ground, one hand lowered ready for balance, alert head looking right. Entire body readable and all extremities separated. Landscape or square composition to fit the crouched silhouette."
+      ],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 1412283,
+      "sha256": "55ee12ce40cd2b27831f473a30bb649edaad74e2bf663d811b2900f6cad453f0",
+      "width": 1385,
+      "height": 1136,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-crouch.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · accroupie",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "crouch",
+          "frames": [
+            "amanda-crouch"
+          ]
+        }
+      ],
+      "selectedPrompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "amanda-walk-a",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "d826e723f8b0b0236cd291828d325f593d43d514",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg",
+        "https://creativeassembly.artstation.com/projects/Jr1BPm"
+      ],
+      "referenceInspected": true,
+      "prompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "precedingPrompts": [
+        "Use the first reference as the exact character design to preserve, and second reference for the final game's face and clothing. Amanda Ripley from Alien: Isolation: olive gray industrial coverall, dark blue collar with red piping, rolled sleeves above elbow, actual woven cloth cuffs not fur, shoulder patch, exposed forearms, key pendant, black wristwatch, brown ponytail, worn white high-top sneakers. Preserve same proportions, colors, age, face and lighting. One full-body near-side-view sprite facing RIGHT. Realistic finely painted 2D game art, crisp readable silhouette, flat neutral diffuse upper-left lighting, complete body and shoes within frame. True transparent alpha background with no haze, spotlight, shadow, backdrop, text, sheet, extra view or other person. No weapon. 8 percent empty margin. Change ONLY the pose to: cautious walking contact pose A: LEFT leg forward to the right, RIGHT leg behind, RIGHT arm forward and LEFT arm behind in a natural opposite swing. Feet clearly apart in a short cautious step, no running and no raised knee. Camera consistent with idle, vertical full-body framing."
+      ],
+      "notes": "Deux cadres constituent le cycle admis ; aucune animation commerciale complète n’est revendiquée.",
+      "bytes": 1865495,
+      "sha256": "9b453817446fb130570d1e54461be4396b727d25cbc0117167b5ec0f3d87d71d",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-walk-a.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · marche A",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "walk",
+          "frames": [
+            "amanda-walk-a",
+            "amanda-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "amanda-walk-b",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "6b3f57091f7f0d5f6d78713f860bf4dee807c428",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg",
+        "https://creativeassembly.artstation.com/projects/Jr1BPm"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create the OPPOSITE contact pose of this exact Amanda Ripley sprite in her walk cycle. Keep identical face, clothes, hair, shoes, proportions and right-facing camera. The leg CLOSEST to the viewer must now extend BACK toward the LEFT of the image; the FARTHER leg must extend FORWARD toward the RIGHT. The wristwatch arm closest to viewer must swing BACK toward the LEFT, while the opposite arm swings FORWARD to the RIGHT. This must visibly exchange which leg and arm is forward; do not repeat the supplied stride. Natural short walking step, not running. Full body, crisp realistic 2D painted sprite. Remove all background glow and vignette; completely transparent pixels outside the exact character silhouette, opaque body, no ground shadow, no backdrop, no sheet. Entire head and both shoes visible.",
+      "precedingPrompts": [
+        "Use the first reference as the exact character design to preserve, and second reference for the final game's face and clothing. Amanda Ripley from Alien: Isolation: olive gray industrial coverall, dark blue collar with red piping, rolled sleeves above elbow, actual woven cloth cuffs not fur, shoulder patch, exposed forearms, key pendant, black wristwatch, brown ponytail, worn white high-top sneakers. Preserve same proportions, colors, age, face and lighting. One full-body near-side-view sprite facing RIGHT. Realistic finely painted 2D game art, crisp readable silhouette, flat neutral diffuse upper-left lighting, complete body and shoes within frame. True transparent alpha background with no haze, spotlight, shadow, backdrop, text, sheet, extra view or other person. No weapon. 8 percent empty margin. Change ONLY the pose to: cautious walking contact pose B, opposite stride: RIGHT leg forward to the right, LEFT leg behind, LEFT arm forward and RIGHT arm behind in a natural opposite swing. Feet clearly apart in a short cautious step, no running and no raised knee. Camera consistent with idle, vertical full-body framing."
+      ],
+      "notes": "Deux cadres constituent le cycle admis ; aucune animation commerciale complète n’est revendiquée.",
+      "bytes": 1850900,
+      "sha256": "7c09a657f7ca39959eafbc140911fdbe67393b439383aa9e32ef6d99b01e0ff1",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-walk-b.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · marche B",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "walk",
+          "frames": [
+            "amanda-walk-a",
+            "amanda-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create the OPPOSITE contact pose of this exact Amanda Ripley sprite in her walk cycle. Keep identical face, clothes, hair, shoes, proportions and right-facing camera. The leg CLOSEST to the viewer must now extend BACK toward the LEFT of the image; the FARTHER leg must extend FORWARD toward the RIGHT. The wristwatch arm closest to viewer must swing BACK toward the LEFT, while the opposite arm swings FORWARD to the RIGHT. This must visibly exchange which leg and arm is forward; do not repeat the supplied stride. Natural short walking step, not running. Full body, crisp realistic 2D painted sprite. Remove all background glow and vignette; completely transparent pixels outside the exact character silhouette, opaque body, no ground shadow, no backdrop, no sheet. Entire head and both shoes visible.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "working-joe-idle",
+      "entryId": "joe_standard",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "d5794487df6a4c57571c909988dc41140d13f59d",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/battle.html",
+        "https://alienisolation.sega.jp/img/20150320_002.png"
+      ],
+      "referenceInspected": true,
+      "prompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "precedingPrompts": [
+        "Redraw ONLY the standard Seegson Working Joe android visible on the LEFT of this official Alien: Isolation screenshot into one isolated full-body 2D game sprite. Preserve the bald pale smooth artificial male head, uncanny neutral face, two small luminous orange-white eyes, unadorned dark olive-brown industrial coveralls with waist and brass center zip, black utility shoes, pale hands, slender average human proportions. Standing idle with arms down, near side view facing RIGHT with head slightly visible, empty hands. Do not create orange hazmat suit, armor, human hair or a battle robot. Improve readability using neutral soft top-left light, detailed realistic painted 2D survival-horror art and crisp outline. True transparent alpha background, no fog or glow surrounding body, no scenery, wheelchair, text, multiple frames or ground. Entire person head to soles with 8 percent margin."
+      ],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 1393447,
+      "sha256": "8bc5029fe504828a2f8e019a71813b10673da6a1930e404022dad848ede1c109",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/working-joe-idle.png",
+      "runtimeIntegrated": true,
+      "label": "Working Joe · repos",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "joe",
+          "pose": "idle",
+          "frames": [
+            "working-joe-idle"
+          ]
+        }
+      ],
+      "selectedPrompt": "Background extraction correction only. Preserve the provided single character's face, anatomy, clothing, color, pose, size and details. Remove ALL background pixels, the entire broad brown/gray glow, vignette, haze and shadow around the character. The subject must be opaque; only the exact exterior of the character must be fully transparent alpha 0. Clean precise antialiasing only along the actual silhouette, no halo at any distance. Transparent PNG game sprite, one character, no layout or extra content.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "motion-tracker",
+      "entryId": "motion_tracker",
+      "category": "Armes et équipement",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "97457c74e2a1bafa3f0698552b540682339d5d51",
+      "sourceURLs": [
+        "https://creativeassembly.artstation.com/projects/xE5vY",
+        "https://news.xbox.com/en-us/2014/09/24/games-8-awesome-retro-gadgets-in-alien-isolation/"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE isolated transparent game inventory sprite of the Alien: Isolation motion tracker shown in these references. Use the front-facing device on the RIGHT of reference1 as the sole subject and reference2 only to confirm in-game materials. Exact recognizable construction: large black square CRT head angled slightly upward, green fan-shaped radar display, olive gray ribbed electronics housing to its right, cylindrical textured vertical grip below, rectangular foot guard, red indicator, short coiled black cable looping from the right housing to the lower grip. Preserve proportions, hard industrial corners, screws, black knobs, muted worn paint, small manufacturer label geometry. Show a clear front-right three-quarter view of the whole device, no hand and no second/back view. High-detail realistic painted 2D object sprite, clean solid edges, restrained top-left light, no glow beyond object. Transparent background actual alpha; no text outside object, no poster/grid/base, no isolated loose parts, 8 percent margin. Do not use the Aliens 1986 military tracker. Square composition.",
+      "precedingPrompts": [],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 1235731,
+      "sha256": "d3ccdb09a74ae390505f4932346feb5ccc25e9fff7727eb329c926dab3f85a85",
+      "width": 1254,
+      "height": 1254,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/motion-tracker.png",
+      "runtimeIntegrated": true,
+      "label": "Détecteur de mouvements",
+      "bindings": [
+        {
+          "group": "tools",
+          "key": "tracker",
+          "asset": "motion-tracker"
+        }
+      ],
+      "selectedPrompt": "Create ONE isolated transparent game inventory sprite of the Alien: Isolation motion tracker shown in these references. Use the front-facing device on the RIGHT of reference1 as the sole subject and reference2 only to confirm in-game materials. Exact recognizable construction: large black square CRT head angled slightly upward, green fan-shaped radar display, olive gray ribbed electronics housing to its right, cylindrical textured vertical grip below, rectangular foot guard, red indicator, short coiled black cable looping from the right housing to the lower grip. Preserve proportions, hard industrial corners, screws, black knobs, muted worn paint, small manufacturer label geometry. Show a clear front-right three-quarter view of the whole device, no hand and no second/back view. High-detail realistic painted 2D object sprite, clean solid edges, restrained top-left light, no glow beyond object. Transparent background actual alpha; no text outside object, no poster/grid/base, no isolated loose parts, 8 percent margin. Do not use the Aliens 1986 military tracker. Square composition.",
+      "use": "Visuel de l’outil existant, montré après son acquisition ; fonctionnement et ressources d’origine conservés.",
+      "remainingWork": "Affiner détails, écran, inscriptions et animations d’usage par comparaison de référence."
+    },
+    {
+      "id": "save-station",
+      "entryId": "save_station",
+      "category": "Appareils",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "b544cb5a4e07d345ff838913ef4b6352529236af",
+      "sourceURLs": [
+        "https://news.xbox.com/en-us/2014/09/24/games-8-awesome-retro-gadgets-in-alien-isolation/",
+        "https://xboxwire.thesourcemediaassets.com/sites/2/Alien-02-SaveStation.bmp"
+      ],
+      "referenceInspected": true,
+      "prompt": "Extract and faithfully redraw the complete Alien: Isolation emergency save station from the reference as ONE isolated 2D game prop sprite, straight-on front view with only slight visible right-side thickness. Remove the hand, wall and environment. Preserve black rounded tall cabinet, cream top sign with exact word EMERGENCY, yellow instruction strip, cream instrument face, left black rotary controls, central three black switches labeled L1 L2 L3, three stacked warm circular amber lamps, card slot, black telephone handset mounted on the RIGHT, lower square buttons including green lamp, and a short coiled black cable at bottom. Entire housing and cable visible, correct proportions and detailed weathered metal/plastic, all components firmly attached. High quality realistic painted 2D survival horror art, readable at small scale, crisp alpha edges, restrained soft top-left light. Transparent background actual alpha; no hands, no floor, no shadow, no additional objects, no sheet or mockup border. Portrait composition with 8 percent transparent margin.",
+      "precedingPrompts": [],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 1880001,
+      "sha256": "7e051f422b21ce5703b5762946e06c9e8d05d5d4802492fc8c96474b034c2bda",
+      "width": 1133,
+      "height": 1388,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/save-station.png",
+      "runtimeIntegrated": true,
+      "label": "Borne de sauvegarde",
+      "bindings": [
+        {
+          "group": "props",
+          "kind": "save",
+          "asset": "save-station"
+        }
+      ],
+      "selectedPrompt": "Extract and faithfully redraw the complete Alien: Isolation emergency save station from the reference as ONE isolated 2D game prop sprite, straight-on front view with only slight visible right-side thickness. Remove the hand, wall and environment. Preserve black rounded tall cabinet, cream top sign with exact word EMERGENCY, yellow instruction strip, cream instrument face, left black rotary controls, central three black switches labeled L1 L2 L3, three stacked warm circular amber lamps, card slot, black telephone handset mounted on the RIGHT, lower square buttons including green lamp, and a short coiled black cable at bottom. Entire housing and cable visible, correct proportions and detailed weathered metal/plastic, all components firmly attached. High quality realistic painted 2D survival horror art, readable at small scale, crisp alpha edges, restrained soft top-left light. Transparent background actual alpha; no hands, no floor, no shadow, no additional objects, no sheet or mockup border. Portrait composition with 8 percent transparent margin.",
+      "use": "61 bornes existantes : appareil posé sur un support étroit, interaction et empreinte conservées.",
+      "remainingWork": "Qualifier les détails du boîtier par scène ; aucun nouveau mur ni collider n’est ajouté."
+    },
+    {
+      "id": "samuels-portrait",
+      "entryId": "samuels",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "3110e681f892e800e2db2dbd4ad599ae1a6d30ff",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_8.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Faithfully transform Christopher Samuels from this official Alien: Isolation game screenshot into ONE portrait sprite, bust from mid-chest upwards. Preserve his actual clean-shaven human face, short side-parted brown hair, pale skin, composed expression and olive gray Weyland-Yutani work jacket with quilted shoulder panels, dark undershirt, corporate chest patch. Human-looking android, not a bald Working Joe. Head facing slightly RIGHT, eyes attentive, neutral diffuse soft light, realistic detailed painted 2D game portrait. Exact character identity from screenshot, not a redesign. Remove background entirely to clean transparent alpha, opaque face and clothing, no vignette/haze/glow/shadow outside subject. No text captions, border, environment or second person. Top of hair and shoulders fully visible with 10 percent margin.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 1588741,
+      "sha256": "65effcb55deae59e2d02eb5c37ce2ac805b4c33e614b95f6922d1f005055f374",
+      "width": 1312,
+      "height": 1199,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/samuels-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Christopher Samuels",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Christopher Samuels",
+          "asset": "samuels-portrait"
+        }
+      ],
+      "selectedPrompt": "Faithfully transform Christopher Samuels from this official Alien: Isolation game screenshot into ONE portrait sprite, bust from mid-chest upwards. Preserve his actual clean-shaven human face, short side-parted brown hair, pale skin, composed expression and olive gray Weyland-Yutani work jacket with quilted shoulder panels, dark undershirt, corporate chest patch. Human-looking android, not a bald Working Joe. Head facing slightly RIGHT, eyes attentive, neutral diffuse soft light, realistic detailed painted 2D game portrait. Exact character identity from screenshot, not a redesign. Remove background entirely to clean transparent alpha, opaque face and clothing, no vignette/haze/glow/shadow outside subject. No text captions, border, environment or second person. Top of hair and shoulders fully visible with 10 percent margin.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "taylor-portrait",
+      "entryId": "nina_taylor",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "e220b0464b4018fca47eea1a8922f4940c38d985",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_9.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Faithfully transform ONLY Nina Taylor, the woman wearing black glasses on the LEFT of this official Alien: Isolation screenshot, into ONE portrait sprite, bust from mid-chest up. Keep her short dark-brown bob hair, narrow black rectangular glasses, exact face and sensible composed expression, dark turtleneck, dark olive uniform jacket with pale ivory vertical chest panels, TAYLOR name badge, blue triangular Weyland-Yutani shoulder patch. Do not include Amanda on the right. Face looking slightly RIGHT, realistic detailed painted 2D game portrait, neutral diffuse soft light. Transparent alpha background with NO haze, vignette or glow around subject; face and clothing opaque. No captions, frames or extra people. Entire hair and shoulders visible, 10 percent margin.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 1805731,
+      "sha256": "297d25376e97be04bfdfdcebe5ea72b39ccdd791529be2891608defc1e5cd5f8",
+      "width": 1207,
+      "height": 1303,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/taylor-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Nina Taylor",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Nina Taylor",
+          "asset": "taylor-portrait"
+        }
+      ],
+      "selectedPrompt": "Faithfully transform ONLY Nina Taylor, the woman wearing black glasses on the LEFT of this official Alien: Isolation screenshot, into ONE portrait sprite, bust from mid-chest up. Keep her short dark-brown bob hair, narrow black rectangular glasses, exact face and sensible composed expression, dark turtleneck, dark olive uniform jacket with pale ivory vertical chest panels, TAYLOR name badge, blue triangular Weyland-Yutani shoulder patch. Do not include Amanda on the right. Face looking slightly RIGHT, realistic detailed painted 2D game portrait, neutral diffuse soft light. Transparent alpha background with NO haze, vignette or glow around subject; face and clothing opaque. No captions, frames or extra people. Entire hair and shoulders visible, 10 percent margin.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "torrens-exterior",
+      "entryId": "torrens_external",
+      "category": "Vaisseaux et station",
+      "candidate": true,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "4df06060948e3622f62fd916722429a1004a494e",
+      "sourceURLs": [
+        "https://creativeassembly.artstation.com/projects/8xJzx"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE clean, high fidelity 3D-rendered game asset of the USCSS Torrens from Alien: Isolation using this official Creative Assembly orthographic sheet as the binding shape reference. Use ONLY the long horizontal SIDE ELEVATION third row from the top, bow facing right. Reconstruct the exact visible silhouette, broad white weathered utilitarian hull, yellow band around the forward hull, long central spine, bulky twin rear engine structures at left, forward bridge at right, antennas, segmented plates, underside lifeboats and gear visible in that side view. Maintain reference proportions. One single vessel, not an orthographic sheet. Full vessel entirely inside the canvas with generous transparent margin, side elevation with minimal perspective, natural neutral diffuse light, all details readable. This is a reusable PNG prop, no outer space, no stars, no horizon, no text labels, no floor, no cast shadow, no background atmosphere, no glow. Exact alpha-zero empty area outside the vessel, solid opaque vessel interior and crisp antialiased silhouette. No Nostromo design, no cinematic redesign, no humans.",
+      "precedingPrompts": [],
+      "notes": "Vue extérieure candidate ; aucun espace jouable n’est créé.",
+      "bytes": 1156096,
+      "sha256": "79e562a0bd38b53c2bbcd14bb70fc5c3d1f441ef832561ff58d2b92a0a73b655",
+      "width": 2172,
+      "height": 724,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/torrens-exterior.png",
+      "runtimeIntegrated": false,
+      "label": "Torrens · extérieur",
+      "bindings": [],
+      "selectedPrompt": "Create ONE clean, high fidelity 3D-rendered game asset of the USCSS Torrens from Alien: Isolation using this official Creative Assembly orthographic sheet as the binding shape reference. Use ONLY the long horizontal SIDE ELEVATION third row from the top, bow facing right. Reconstruct the exact visible silhouette, broad white weathered utilitarian hull, yellow band around the forward hull, long central spine, bulky twin rear engine structures at left, forward bridge at right, antennas, segmented plates, underside lifeboats and gear visible in that side view. Maintain reference proportions. One single vessel, not an orthographic sheet. Full vessel entirely inside the canvas with generous transparent margin, side elevation with minimal perspective, natural neutral diffuse light, all details readable. This is a reusable PNG prop, no outer space, no stars, no horizon, no text labels, no floor, no cast shadow, no background atmosphere, no glow. Exact alpha-zero empty area outside the vessel, solid opaque vessel interior and crisp antialiased silhouette. No Nostromo design, no cinematic redesign, no humans.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "sevastopol-exterior",
+      "entryId": "sevastopol_external",
+      "category": "Vaisseaux et station",
+      "candidate": true,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "468d08aa6b4a14c00665c97a1e41b5f8daa354db",
+      "sourceURLs": [
+        "https://creativeassembly.artstation.com/projects/WZWxy"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE isolated high fidelity 3D game asset of Sevastopol station from Alien: Isolation, faithfully matching the supplied official Creative Assembly reference. Preserve the distinctive THREE long upright industrial towers, their asymmetric relative heights and stepped spires, the heavy low crossbars interconnecting all three, the central suspended rounded structures, exact blocky layered silhouettes, utility conduits, plates and visible station proportions. Same recognizable three-quarter viewpoint as reference, all three towers completely visible and unobscured. Make the structural details readable with neutral soft illumination; retain worn dark grey and beige industrial construction. One station only, with a generous transparent border. Absolutely no space backdrop, stars, planet, fog, glow, floor, stand, text labels or duplicate views. True transparent PNG, empty pixels outside station alpha zero, opaque structure with sharp antialiased boundary. The shape and connected support structures are more important than decorative additions; don't invent extra towers.",
+      "precedingPrompts": [],
+      "notes": "Vue extérieure candidate ; aucun espace jouable n’est créé.",
+      "bytes": 1561528,
+      "sha256": "23264ad08b09602e2f95f0977ba0c82fcfa402c6bbfcf45373079c38c22d89e8",
+      "width": 1681,
+      "height": 936,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/sevastopol-exterior.png",
+      "runtimeIntegrated": false,
+      "label": "Sevastopol · extérieur",
+      "bindings": [],
+      "selectedPrompt": "Create ONE isolated high fidelity 3D game asset of Sevastopol station from Alien: Isolation, faithfully matching the supplied official Creative Assembly reference. Preserve the distinctive THREE long upright industrial towers, their asymmetric relative heights and stepped spires, the heavy low crossbars interconnecting all three, the central suspended rounded structures, exact blocky layered silhouettes, utility conduits, plates and visible station proportions. Same recognizable three-quarter viewpoint as reference, all three towers completely visible and unobscured. Make the structural details readable with neutral soft illumination; retain worn dark grey and beige industrial construction. One station only, with a generous transparent border. Absolutely no space backdrop, stars, planet, fog, glow, floor, stand, text labels or duplicate views. True transparent PNG, empty pixels outside station alpha zero, opaque structure with sharp antialiased boundary. The shape and connected support structures are more important than decorative additions; don't invent extra towers.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "anesidora-exterior",
+      "entryId": "anesidora_external",
+      "category": "Vaisseaux et station",
+      "candidate": true,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "8546c180eaafb84e5e81bf1e1de04dee14b03834",
+      "sourceURLs": [
+        "https://bradwright.artstation.com/projects/b5LmE"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE isolated high fidelity 3D-rendered game asset of the Anesidora vessel from Alien: Isolation, directly based on the supplied original production paintover. Preserve the exact overall squat broad industrial silhouette, clustered rounded rectangular engine housings, large grey side panels and exposed grilles, central raised cockpit, antenna array, short industrial landing struts, and the lumpy asymmetrical construction. Use the same three-quarter side viewpoint as the reference, with the whole vessel and all landing gear fully inside frame. Worn pale grey hull, dark graphite recesses and restrained subtle muted ochre grime; neutral diffuse studio lighting showing form. Reconstruct the source vessel, not a sleek generic spaceship and not the Nostromo or Torrens. One vessel, no reference-sheet text or designer notes. Remove the reference ground and background entirely. Transparent PNG cutout with alpha zero outside the ship and opaque surface pixels, crisp antialiased edge, no floor plane, no cast shadow, no halo, no outer space, no duplicate angles.",
+      "precedingPrompts": [],
+      "notes": "Vue extérieure candidate ; aucun espace jouable n’est créé.",
+      "bytes": 1664978,
+      "sha256": "6fed28192b51500303503aaa5fca50a473659b10346859cd46d5c9ad26d78528",
+      "width": 1774,
+      "height": 887,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/anesidora-exterior.png",
+      "runtimeIntegrated": false,
+      "label": "Anesidora · extérieur",
+      "bindings": [],
+      "selectedPrompt": "Create ONE isolated high fidelity 3D-rendered game asset of the Anesidora vessel from Alien: Isolation, directly based on the supplied original production paintover. Preserve the exact overall squat broad industrial silhouette, clustered rounded rectangular engine housings, large grey side panels and exposed grilles, central raised cockpit, antenna array, short industrial landing struts, and the lumpy asymmetrical construction. Use the same three-quarter side viewpoint as the reference, with the whole vessel and all landing gear fully inside frame. Worn pale grey hull, dark graphite recesses and restrained subtle muted ochre grime; neutral diffuse studio lighting showing form. Reconstruct the source vessel, not a sleek generic spaceship and not the Nostromo or Torrens. One vessel, no reference-sheet text or designer notes. Remove the reference ground and background entirely. Transparent PNG cutout with alpha zero outside the ship and opaque surface pixels, crisp antialiased edge, no floor plane, no cast shadow, no halo, no outer space, no duplicate angles.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "waits-portrait",
+      "entryId": "waits",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "0c92823492c1ab465532f5348e7a8c2411de99f1",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_11.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create one isolated chest-up codex portrait of Marshal Waits as he actually appears in Alien: Isolation, based closely on this official game screenshot. Preserve his older weathered pale face, grey hair at temples, dark baseball cap with exact simple uppercase text MARSHAL, dark black-brown leather uniform jacket with round Sevastopol marshal sleeve patch, grey uniform shirt, dark tie and two gold collar emblems. Accurate likeness to the in-game person shown. Show calm stern alert expression, turned slightly toward viewer's right, looking to the right, shoulders level, arms outside crop. Do not copy the handgun or pose from reference. Photorealistic game-character material rendering with readable neutral lighting; no beautification, not a younger man. Entire head, cap, and both shoulders within canvas, chest ends at bottom with clean crop. No scenery, no reference captions, no logo graphic, no vignette, no halo or cast shadow. True transparent PNG background, pixels outside the person alpha zero, solid opaque interior and antialiased contour.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 1738581,
+      "sha256": "576405e58b12dd1900aa77458fe787719799daae272def3c27ff85798641b80d",
+      "width": 1311,
+      "height": 1200,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/waits-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Waits",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Waits",
+          "asset": "waits-portrait"
+        }
+      ],
+      "selectedPrompt": "Create one isolated chest-up codex portrait of Marshal Waits as he actually appears in Alien: Isolation, based closely on this official game screenshot. Preserve his older weathered pale face, grey hair at temples, dark baseball cap with exact simple uppercase text MARSHAL, dark black-brown leather uniform jacket with round Sevastopol marshal sleeve patch, grey uniform shirt, dark tie and two gold collar emblems. Accurate likeness to the in-game person shown. Show calm stern alert expression, turned slightly toward viewer's right, looking to the right, shoulders level, arms outside crop. Do not copy the handgun or pose from reference. Photorealistic game-character material rendering with readable neutral lighting; no beautification, not a younger man. Entire head, cap, and both shoulders within canvas, chest ends at bottom with clean crop. No scenery, no reference captions, no logo graphic, no vignette, no halo or cast shadow. True transparent PNG background, pixels outside the person alpha zero, solid opaque interior and antialiased contour.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "axel-portrait",
+      "entryId": "axel",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "374a490c7327c5291a71d534471df45f44e7b0c7",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_12.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create one isolated chest-up codex portrait of Axel from Alien: Isolation, with the actual in-game appearance shown in this official screenshot. Keep his completely bald head, pale tired and slightly gaunt face, distinctive narrow features, stubble and creases, anxious wary eyes, orange padded industrial jacket with dark charcoal ribbed collar/shoulders and zip. This is Axel, not a generic bald soldier or a Working Joe. Neutral readable light showing the real in-game facial proportions, realistic worn fabric. Head angled slightly to the viewer's right, expression watchful, both shoulders level. Remove the flashlight, extended arm, all scenery, blue cinematic flare and subtitles from the reference; only the portrait. Head and shoulders wholly inside canvas, clean chest crop. Transparent PNG with no background/no halo/no shadow, all outside pixels alpha zero, opaque character interior. Do not invent armor, helmets, weapons, insignia or new text.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 1732531,
+      "sha256": "a25cbc4e2f8155f97e775c134d1661c8081ecabc9db9f0a3cd28676f2bbb6bd8",
+      "width": 1312,
+      "height": 1199,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/axel-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Axel",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Axel",
+          "asset": "axel-portrait"
+        }
+      ],
+      "selectedPrompt": "Create one isolated chest-up codex portrait of Axel from Alien: Isolation, with the actual in-game appearance shown in this official screenshot. Keep his completely bald head, pale tired and slightly gaunt face, distinctive narrow features, stubble and creases, anxious wary eyes, orange padded industrial jacket with dark charcoal ribbed collar/shoulders and zip. This is Axel, not a generic bald soldier or a Working Joe. Neutral readable light showing the real in-game facial proportions, realistic worn fabric. Head angled slightly to the viewer's right, expression watchful, both shoulders level. Remove the flashlight, extended arm, all scenery, blue cinematic flare and subtitles from the reference; only the portrait. Head and shoulders wholly inside canvas, clean chest crop. Transparent PNG with no background/no halo/no shadow, all outside pixels alpha zero, opaque character interior. Do not invent armor, helmets, weapons, insignia or new text.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "verlaine-portrait",
+      "entryId": "verlaine",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "3e2f47ce132c50b242a973210ac6abbbcc324c0b",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_10.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create one isolated chest-up portrait of Captain Diane Verlaine of the Torrens from Alien: Isolation, directly grounded in this official game screenshot. Preserve her mature pale face, brown hair pulled back neatly, small facial lines, expression, dark olive quilted leather flight jacket and the distinctive purple patterned scarf / shirt collar visible in the source. Keep her actual game likeness and hair silhouette, no glamorous reinterpretation. Turn her head slightly toward the viewer's right with a calm professional expression; hands out of crop. Neutral diffuse lighting so the face and jacket are legible. The portrait alone, entire head and both shoulders inside canvas, chest crop at bottom. Remove the hand/telephone pose, spacecraft cabin, lens flare and all background. Real transparent PNG, alpha zero outside the figure, solid opaque material and clean antialiased hair edges. No halo, no vignette, no pedestal, no text labels.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 1361619,
+      "sha256": "1234f2fa62dcb74a21f557224e68b8945492458c354c22fd362e1a55aecdf768",
+      "width": 1372,
+      "height": 1146,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/verlaine-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Diane Verlaine",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Diane Verlaine",
+          "asset": "verlaine-portrait"
+        }
+      ],
+      "selectedPrompt": "Create one isolated chest-up portrait of Captain Diane Verlaine of the Torrens from Alien: Isolation, directly grounded in this official game screenshot. Preserve her mature pale face, brown hair pulled back neatly, small facial lines, expression, dark olive quilted leather flight jacket and the distinctive purple patterned scarf / shirt collar visible in the source. Keep her actual game likeness and hair silhouette, no glamorous reinterpretation. Turn her head slightly toward the viewer's right with a calm professional expression; hands out of crop. Neutral diffuse lighting so the face and jacket are legible. The portrait alone, entire head and both shoulders inside canvas, chest crop at bottom. Remove the hand/telephone pose, spacecraft cabin, lens flare and all background. Real transparent PNG, alpha zero outside the figure, solid opaque material and clean antialiased hair edges. No halo, no vignette, no pedestal, no text labels.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "working-joe-walk-a",
+      "entryId": "joe_standard",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "c39e23ba85a264de269728e042a350b593bfcd85",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/battle.html",
+        "https://alienisolation.sega.jp/img/20150320_002.png"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create one full-body right-facing walking sprite of the exact same standard Working Joe android shown in the first image. Preserve the identical bald artificial pale grey face, small orange glowing eyes, slightly stiff body proportions, dark olive-brown zip industrial jacket with brown shoulder panels, pockets and matching trousers and heavy black work shoes. The second image is the final-game appearance reference. ONE WALK CYCLE FRAME A: the nearest visible leg steps FORWARD toward the right edge with heel low, the far leg reaches BACK toward the left. Nearest arm swings BACK left, far arm forward right. Keep his characteristic stiff restrained stride, not a march or running. Whole head and both soles fully contained, camera at hip height, near side profile, face to the right, neutral diffuse lighting and crisp high-detail material. No extra poses, no generic hair, no helmet, no weapon. Transparent PNG cutout; outside character alpha0, opaque interiors. No floor or scenery, no shadow plane, no glow except tiny eyes, no vignette.",
+      "precedingPrompts": [],
+      "notes": "Deux cadres constituent le cycle admis ; aucune animation commerciale complète n’est revendiquée.",
+      "bytes": 1727043,
+      "sha256": "b6be183ec64ab143c41e4a6efa55bccb6a066d30e2fdb3504383e437ec2f9d52",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/working-joe-walk-a.png",
+      "runtimeIntegrated": true,
+      "label": "Working Joe · marche A",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "joe",
+          "pose": "walk",
+          "frames": [
+            "working-joe-walk-a",
+            "working-joe-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create one full-body right-facing walking sprite of the exact same standard Working Joe android shown in the first image. Preserve the identical bald artificial pale grey face, small orange glowing eyes, slightly stiff body proportions, dark olive-brown zip industrial jacket with brown shoulder panels, pockets and matching trousers and heavy black work shoes. The second image is the final-game appearance reference. ONE WALK CYCLE FRAME A: the nearest visible leg steps FORWARD toward the right edge with heel low, the far leg reaches BACK toward the left. Nearest arm swings BACK left, far arm forward right. Keep his characteristic stiff restrained stride, not a march or running. Whole head and both soles fully contained, camera at hip height, near side profile, face to the right, neutral diffuse lighting and crisp high-detail material. No extra poses, no generic hair, no helmet, no weapon. Transparent PNG cutout; outside character alpha0, opaque interiors. No floor or scenery, no shadow plane, no glow except tiny eyes, no vignette.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "working-joe-walk-b",
+      "entryId": "joe_standard",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "14636ad375c1264e56ccb1146e2c9cda12f03fb3",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/battle.html",
+        "https://alienisolation.sega.jp/img/20150320_002.png"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create one full-body right-facing walking sprite of the exact same standard Working Joe android shown in first image, faithfully preserving bald artificial pale grey face, small orange glowing eyes, proportions, dark olive-brown zip work jacket with brown shoulder panels, matching trousers and heavy black shoes. Second image is the final-game appearance. ONE WALK CYCLE FRAME B, opposite stride: the NEAREST VISIBLE LEG reaches BACK toward LEFT edge and the FAR LEG steps FORWARD toward RIGHT edge. NEAREST ARM swings FORWARD to the right, far arm backward left. Feet clearly separated horizontally, stiff restrained android step, no march/run. Near side profile facing right, whole figure including soles within frame, identical identity/clothes and neutral lighting. No weapon, no hair, no helmet, no extra characters. Reusable transparent PNG, outside contour truly alpha0, opaque android interior, clean antialias. No ground, no background, no glow cloud, no cast shadow or vignette.",
+      "precedingPrompts": [],
+      "notes": "Deux cadres constituent le cycle admis ; aucune animation commerciale complète n’est revendiquée.",
+      "bytes": 1624114,
+      "sha256": "d7ef03701738b988449b301cebce84793af2d8e1202963ded1e39692f20effe5",
+      "width": 1024,
+      "height": 1536,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/working-joe-walk-b.png",
+      "runtimeIntegrated": true,
+      "label": "Working Joe · marche B",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "joe",
+          "pose": "walk",
+          "frames": [
+            "working-joe-walk-a",
+            "working-joe-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create one full-body right-facing walking sprite of the exact same standard Working Joe android shown in first image, faithfully preserving bald artificial pale grey face, small orange glowing eyes, proportions, dark olive-brown zip work jacket with brown shoulder panels, matching trousers and heavy black shoes. Second image is the final-game appearance. ONE WALK CYCLE FRAME B, opposite stride: the NEAREST VISIBLE LEG reaches BACK toward LEFT edge and the FAR LEG steps FORWARD toward RIGHT edge. NEAREST ARM swings FORWARD to the right, far arm backward left. Feet clearly separated horizontally, stiff restrained android step, no march/run. Near side profile facing right, whole figure including soles within frame, identical identity/clothes and neutral lighting. No weapon, no hair, no helmet, no extra characters. Reusable transparent PNG, outside contour truly alpha0, opaque android interior, clean antialias. No ground, no background, no glow cloud, no cast shadow or vignette.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "marlow-portrait",
+      "entryId": "marlow",
+      "category": "Portraits",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "088409f21a097080cd2229ea02e9aea98b74f1f3",
+      "sourceURLs": [
+        "https://sinhouse.artstation.com/projects/RxmZA"
+      ],
+      "referenceInspected": true,
+      "prompt": "Generate ONE chest-up codex portrait of Henry Marlow from Alien: Isolation, based directly on the original model artist's reference images. Match the actual male face: pale worn skin, short straight brown hair, tired pale eyes, long nose, narrow compressed lips, slightly heavy lower cheeks, stocky practical build. His exact outfit is the grey sleeveless worn 'PERRY'S BOXING GYM' T-shirt shown in the first reference, with faded pale circular boxer print. Face angled slightly toward viewer's right with a guarded stern expression. Natural diffuse light, realistic game-character materials. No spacesuit for this portrait and no invented uniform. Head and shoulders fully contained, clean bust crop, only one person. Remove original multi-view sheet and Alien Isolation logo. True transparent PNG, alpha0 outside, solid subject interior, no scenery, no background halo, no floor/shadow and no caption.",
+      "precedingPrompts": [],
+      "notes": "Portrait de dossier ; aucun acteur physique n’est créé.",
+      "bytes": 2083147,
+      "sha256": "aeff33ee02a303ae98033b7f70c80eaba377ad8205d1b54ed1affe0ae96e6625",
+      "width": 1200,
+      "height": 1310,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/marlow-portrait.png",
+      "runtimeIntegrated": true,
+      "label": "Henry Marlow",
+      "bindings": [
+        {
+          "group": "portraits",
+          "name": "Henry Marlow",
+          "asset": "marlow-portrait"
+        }
+      ],
+      "selectedPrompt": "Generate ONE chest-up codex portrait of Henry Marlow from Alien: Isolation, based directly on the original model artist's reference images. Match the actual male face: pale worn skin, short straight brown hair, tired pale eyes, long nose, narrow compressed lips, slightly heavy lower cheeks, stocky practical build. His exact outfit is the grey sleeveless worn 'PERRY'S BOXING GYM' T-shirt shown in the first reference, with faded pale circular boxer print. Face angled slightly toward viewer's right with a guarded stern expression. Natural diffuse light, realistic game-character materials. No spacesuit for this portrait and no invented uniform. Head and shoulders fully contained, clean bust crop, only one person. Remove original multi-view sheet and Alien Isolation logo. True transparent PNG, alpha0 outside, solid subject interior, no scenery, no background halo, no floor/shadow and no caption.",
+      "use": "Portrait associé au nom exact du dossier existant. Il ne crée pas un PNJ physique.",
+      "remainingWork": "Affiner la ressemblance et les détails ; produire les poses physiques seulement lorsque la scène les requiert."
+    },
+    {
+      "id": "sevastolink-terminal",
+      "entryId": "sevastolink",
+      "category": "Appareils",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "1bf7c8bf70fa5a0037351c3c99bf5d5a2c9f0a25",
+      "sourceURLs": [
+        "https://news.xbox.com/en-us/2014/09/24/games-8-awesome-retro-gadgets-in-alien-isolation/",
+        "https://xboxwire.thesourcemediaassets.com/sites/2/Alien-03-PCTerminal.bmp"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE reusable game prop of the Sevastolink computer monitor from Alien: Isolation, using the supplied official in-game screenshot as a strict shape/material reference. Entire chunky CRT monitor enclosure fully visible, almost front view with slight three-quarter depth on right. Preserve worn white/ivory metal bezel, black rounded inset glass, side ventilation slots, left two black circular control knobs, right lower panel with colored ports. Keep the green screen content minimal: accurately spelled SEVASTOLINK in block retro letters, simple green loading bar, no other detailed text. Respect the distinctive monitor outline and aged surface, no futuristic flat screen. Reconstruct only the monitor, no keyboard or invented desk/cabinet. Full housing entirely inside canvas with transparent margin, neutral lighting, crisp engineering details. Absolutely no wall/room/desk/stand/background, no hands, no vignette/glow cloud, no cast shadow. True transparent PNG cutout, alpha zero outside the monitor, opaque monitor materials.",
+      "precedingPrompts": [],
+      "notes": "Comparaison visuelle effectuée ; la conformité exacte n’est pas certifiée.",
+      "bytes": 2235316,
+      "sha256": "71d6b6ce2aca1e371c8285aff3043d55def5ffc82b024116e96e810c9e6ae380",
+      "width": 1536,
+      "height": 1024,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/sevastolink-terminal.png",
+      "runtimeIntegrated": true,
+      "label": "Moniteur Sevastolink",
+      "bindings": [
+        {
+          "group": "props",
+          "kind": "terminal",
+          "asset": "sevastolink-terminal",
+          "propIds": [
+            "s_axel.p04",
+            "y_lobby.p07",
+            "y_archive.p05",
+            "y_workshop.p04",
+            "c_control.p06",
+            "c_control.p07",
+            "c_server.p05",
+            "c_server.optional",
+            "m_reception.p06",
+            "m_pharmacy.p05",
+            "d_warehouse.p06",
+            "w_bureau.p05",
+            "w_bureau.p06",
+            "w_bureau.p08",
+            "w_cells.p04",
+            "g_control.p05",
+            "g_airlock.p03",
+            "a_access.p05",
+            "a_labo.p05",
+            "a_core.p05",
+            "r_entry.p06",
+            "r_hive.p07",
+            "m_staff.optional",
+            "d_relay.optional",
+            "a_service.optional",
+            "r_observation.optional",
+            "g_observation.v03.11",
+            "g_plenum.v03.09",
+            "m_records.v04.07",
+            "e_lockers.v04.08",
+            "m_triage.v05.10",
+            "m_refuge.v05.10",
+            "d_changing.v05.10",
+            "d_refuge.v05.10",
+            "sc_station.v08.p09",
+            "sc_station.v08.task",
+            "h_galleria_low.v08.p09",
+            "h_galleria_low.v08.task",
+            "h_galleria_high.v08.p09",
+            "h_galleria_high.v08.task",
+            "h_habitation.v08.p09",
+            "h_habitation.v08.task",
+            "h_upper.v08.p09",
+            "h_upper.v08.task",
+            "m_morgue.v08.p09",
+            "m_morgue.v08.task",
+            "d_fluid.v08.p09",
+            "d_fluid.v08.task",
+            "d_orientation.v08.p02",
+            "d_orientation.v08.p09",
+            "d_orientation.v08.task",
+            "r_maintenance.v08.p09",
+            "r_maintenance.v08.task",
+            "g_hazard.v08.p09",
+            "g_hazard.v08.task"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE reusable game prop of the Sevastolink computer monitor from Alien: Isolation, using the supplied official in-game screenshot as a strict shape/material reference. Entire chunky CRT monitor enclosure fully visible, almost front view with slight three-quarter depth on right. Preserve worn white/ivory metal bezel, black rounded inset glass, side ventilation slots, left two black circular control knobs, right lower panel with colored ports. Keep the green screen content minimal: accurately spelled SEVASTOLINK in block retro letters, simple green loading bar, no other detailed text. Respect the distinctive monitor outline and aged surface, no futuristic flat screen. Reconstruct only the monitor, no keyboard or invented desk/cabinet. Full housing entirely inside canvas with transparent margin, neutral lighting, crisp engineering details. Absolutely no wall/room/desk/stand/background, no hands, no vignette/glow cloud, no cast shadow. True transparent PNG cutout, alpha zero outside the monitor, opaque monitor materials.",
+      "use": "55 moniteurs autorisés par identifiant ; bureau, clavier, pieds et ombre SVG conservés. 11 autres terminaux gardent leur apparence initiale.",
+      "remainingWork": "Produire les variantes de terminaux propres aux autres contextes ; ne pas appliquer Sevastolink à tous les vaisseaux."
+    },
+    {
+      "id": "amanda-eva-idle",
+      "entryId": "amanda_eva",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "8cbbed50ad38e373659bf3d0a369abc66ada1973",
+      "sourceURLs": [
+        "https://zlu.artstation.com/projects/EXG8N",
+        "https://alienisolation.sega.jp/story.html"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE full-body idle sprite of Amanda Ripley wearing the Torrens EVA spacesuit from Alien: Isolation, facing RIGHT in near side profile. Treat the original game's suit reference as the main design guide: large rounded clear smoked visor, mustard/antique-gold reinforced helmet frame, rear life-support fittings, broad ornate gold shoulder plates with hexagonal fasteners, curved chest control plate, dark undersuit with visible reinforcing net pattern, heavy practical gloves, utility box at waist, pressure-sealed pants and thick reinforced boots. Keep this recognizably the actual Torrens suit, not a modern NASA suit or military armor. Amanda's brown hair and face, from second reference, only subtly visible behind the dark visor. Extrapolate the cropped lower body conservatively with the matching suit fabric, knee/ankle reinforcements and pale heavy boots; do not introduce unrelated decoration or emblems. Relaxed alert stance with both soles on one baseline, arms down close to body, no gun, no tools held. All helmet, backpack, hands and boots wholly contained inside a tall portrait canvas. Realistic detailed 3D game character lighting and materials, readable on dark backgrounds. Only the suited figure on true transparent PNG; alpha0 outside, opaque suit, no backdrop, ground, shadows, flare, halo or text.",
+      "precedingPrompts": [],
+      "notes": "Casque et haut de combinaison comparés à la capture de l’artiste de production. Jambes et chaussures extrapolées prudemment depuis cette référence partielle : forme complète non certifiée. Réservé à Amanda dans les espaces extérieurs.",
+      "bytes": 1366754,
+      "sha256": "e1cf78922601b4d613d374d341eac01fea8d3cd628cbb18ce46576683ac252fe",
+      "width": 887,
+      "height": 1774,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-eva-idle.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda EVA · repos",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "eva",
+          "pose": "idle",
+          "frames": [
+            "amanda-eva-idle"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE full-body idle sprite of Amanda Ripley wearing the Torrens EVA spacesuit from Alien: Isolation, facing RIGHT in near side profile. Treat the original game's suit reference as the main design guide: large rounded clear smoked visor, mustard/antique-gold reinforced helmet frame, rear life-support fittings, broad ornate gold shoulder plates with hexagonal fasteners, curved chest control plate, dark undersuit with visible reinforcing net pattern, heavy practical gloves, utility box at waist, pressure-sealed pants and thick reinforced boots. Keep this recognizably the actual Torrens suit, not a modern NASA suit or military armor. Amanda's brown hair and face, from second reference, only subtly visible behind the dark visor. Extrapolate the cropped lower body conservatively with the matching suit fabric, knee/ankle reinforcements and pale heavy boots; do not introduce unrelated decoration or emblems. Relaxed alert stance with both soles on one baseline, arms down close to body, no gun, no tools held. All helmet, backpack, hands and boots wholly contained inside a tall portrait canvas. Realistic detailed 3D game character lighting and materials, readable on dark backgrounds. Only the suited figure on true transparent PNG; alpha0 outside, opaque suit, no backdrop, ground, shadows, flare, halo or text.",
+      "use": "Tenue EVA réservée à Amanda dans les salles extérieures ; repli SVG pour les poses absentes.",
+      "remainingWork": "Le casque et le haut de combinaison suivent la référence observée ; jambes et bottes extrapolées. Autres poses et cycle complet restent à produire."
+    },
+    {
+      "id": "amanda-eva-walk-a",
+      "entryId": "amanda_eva",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "f4d9f39cde4e96dd459b1acb650a315aa0fb1e04",
+      "sourceURLs": [
+        "https://zlu.artstation.com/projects/EXG8N",
+        "https://alienisolation.sega.jp/story.html"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE full-body walking frame A of EXACTLY the suited Amanda Ripley in first image. Preserve her face inside the visor, all helmet/visor shapes, gold shoulder plates, chest control box, dark grey pressure suit with net reinforcement, gloves, backpack and thick pale boots unchanged; second image is original-game material reference. Right-facing near side profile, careful heavy walking stride. Near LEFT boot forward to right, FAR RIGHT boot trailing left; near left arm back, far right arm slightly forward. Feet separated in a clear contact step. Keep overall head/body proportions, suit scale and camera consistent. No weapons, no new pockets or emblems. Entire person helmet-to-soles, backpack and hands fully inside tall canvas. True transparent PNG, alpha0 exterior, opaque suit, clean contour, neutral diffuse lighting. No station, space, floor, cast shadow, vignette, halo or text.",
+      "precedingPrompts": [],
+      "notes": "Casque et haut de combinaison comparés à la capture de l’artiste de production. Jambes et chaussures extrapolées prudemment depuis cette référence partielle : forme complète non certifiée. Réservé à Amanda dans les espaces extérieurs.",
+      "bytes": 1562350,
+      "sha256": "3f8ea25805740061c66105b8941bb26d462c498127bec6e568d0bbf74245d8db",
+      "width": 887,
+      "height": 1774,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-eva-walk-a.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda EVA · marche A",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "eva",
+          "pose": "walk",
+          "frames": [
+            "amanda-eva-walk-a",
+            "amanda-eva-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE full-body walking frame A of EXACTLY the suited Amanda Ripley in first image. Preserve her face inside the visor, all helmet/visor shapes, gold shoulder plates, chest control box, dark grey pressure suit with net reinforcement, gloves, backpack and thick pale boots unchanged; second image is original-game material reference. Right-facing near side profile, careful heavy walking stride. Near LEFT boot forward to right, FAR RIGHT boot trailing left; near left arm back, far right arm slightly forward. Feet separated in a clear contact step. Keep overall head/body proportions, suit scale and camera consistent. No weapons, no new pockets or emblems. Entire person helmet-to-soles, backpack and hands fully inside tall canvas. True transparent PNG, alpha0 exterior, opaque suit, clean contour, neutral diffuse lighting. No station, space, floor, cast shadow, vignette, halo or text.",
+      "use": "Tenue EVA réservée à Amanda dans les salles extérieures ; repli SVG pour les poses absentes.",
+      "remainingWork": "Le casque et le haut de combinaison suivent la référence observée ; jambes et bottes extrapolées. Autres poses et cycle complet restent à produire."
+    },
+    {
+      "id": "amanda-eva-walk-b",
+      "entryId": "amanda_eva",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "3f3a2d4dc6bf53e348f1893ca9daedfefb34ebca",
+      "sourceURLs": [
+        "https://zlu.artstation.com/projects/EXG8N",
+        "https://alienisolation.sega.jp/story.html"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE full-body walking passing frame B of EXACTLY the suited Amanda Ripley in first image. Same Amanda face inside smoked visor, gold helmet rim and ornamented shoulder plates, chest and waist boxes, dark grey net-reinforced pressure suit, gloves, backpack and heavy pale boots. Original game suit second reference. Facing RIGHT near side profile. A CLEARLY DIFFERENT passing phase: near left boot planted directly below her torso, far right boot swinging forward with toe slightly lifted, knees closer together, nearest LEFT gloved arm swings forward to the RIGHT and far arm back. Do not use the wide split-leg pose. Preserve height, proportions, costume and lighting of the master reference. One figure, all helmet/boots/hands inside canvas. Reusable transparent PNG cutout, exterior alpha0 and opaque suit. No floor, scenery, weapon, label, halo, cast shadow or duplicate frame.",
+      "precedingPrompts": [],
+      "notes": "Casque et haut de combinaison comparés à la capture de l’artiste de production. Jambes et chaussures extrapolées prudemment depuis cette référence partielle : forme complète non certifiée. Réservé à Amanda dans les espaces extérieurs.",
+      "bytes": 1384881,
+      "sha256": "7a782f80baae468bcb9817e397cbed31327b1dd053090984d2e7af1f5182c691",
+      "width": 887,
+      "height": 1774,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-eva-walk-b.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda EVA · marche B",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "eva",
+          "pose": "walk",
+          "frames": [
+            "amanda-eva-walk-a",
+            "amanda-eva-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE full-body walking passing frame B of EXACTLY the suited Amanda Ripley in first image. Same Amanda face inside smoked visor, gold helmet rim and ornamented shoulder plates, chest and waist boxes, dark grey net-reinforced pressure suit, gloves, backpack and heavy pale boots. Original game suit second reference. Facing RIGHT near side profile. A CLEARLY DIFFERENT passing phase: near left boot planted directly below her torso, far right boot swinging forward with toe slightly lifted, knees closer together, nearest LEFT gloved arm swings forward to the RIGHT and far arm back. Do not use the wide split-leg pose. Preserve height, proportions, costume and lighting of the master reference. One figure, all helmet/boots/hands inside canvas. Reusable transparent PNG cutout, exterior alpha0 and opaque suit. No floor, scenery, weapon, label, halo, cast shadow or duplicate frame.",
+      "use": "Tenue EVA réservée à Amanda dans les salles extérieures ; repli SVG pour les poses absentes.",
+      "remainingWork": "Le casque et le haut de combinaison suivent la référence observée ; jambes et bottes extrapolées. Autres poses et cycle complet restent à produire."
+    },
+    {
+      "id": "amanda-crouch-walk-a",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "5508e1212453c01915a8d93cd26ace9f13141389",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE crouched-walking animation sprite of the exact Amanda Ripley in both supplied images. Keep identical face and tied brown ponytail, tiny headset, worn olive-grey jumpsuit, blue/red collar, patch, rolled sleeves, key necklace, black wristwatch on her LEFT wrist and dirty white high-top shoes. Facing RIGHT, near side profile. Crouch-walk frame A: body stays low with knees deeply bent, the nearest left foot is FORWARD toward right, far right foot trails left, left forearm held slightly back, right forearm forward for balance. She is sneaking and moving, not sitting, kneeling on the floor, or running. Preserve a low crouch silhouette, head about half standing height. Both feet visibly support the crouch, no knee contacts ground, hands not touching ground, one complete figure. Same restrained diffuse illumination and fine realistic textures as reference. Full hair to soles inside transparent canvas, no floor, no halo or shadow, no background, no props, no text. Exterior pixels alpha0 and figure fully opaque with clean antialiased edges.",
+      "precedingPrompts": [],
+      "notes": "Deux cadres de déplacement accroupi : contact et passage compact. Visage/costume comparés ; aucun cycle commercial complet revendiqué.",
+      "bytes": 1991171,
+      "sha256": "130a91acae1da8b70db334d64d4eb2ffbda293e16ade8c1228b31acd79a07af9",
+      "width": 1536,
+      "height": 1024,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-crouch-walk-a.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · déplacement accroupi A",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "crouch-walk",
+          "frames": [
+            "amanda-crouch-walk-a",
+            "amanda-crouch-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE crouched-walking animation sprite of the exact Amanda Ripley in both supplied images. Keep identical face and tied brown ponytail, tiny headset, worn olive-grey jumpsuit, blue/red collar, patch, rolled sleeves, key necklace, black wristwatch on her LEFT wrist and dirty white high-top shoes. Facing RIGHT, near side profile. Crouch-walk frame A: body stays low with knees deeply bent, the nearest left foot is FORWARD toward right, far right foot trails left, left forearm held slightly back, right forearm forward for balance. She is sneaking and moving, not sitting, kneeling on the floor, or running. Preserve a low crouch silhouette, head about half standing height. Both feet visibly support the crouch, no knee contacts ground, hands not touching ground, one complete figure. Same restrained diffuse illumination and fine realistic textures as reference. Full hair to soles inside transparent canvas, no floor, no halo or shadow, no background, no props, no text. Exterior pixels alpha0 and figure fully opaque with clean antialiased edges.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "amanda-crouch-walk-b",
+      "entryId": "amanda",
+      "category": "Personnages",
+      "candidate": false,
+      "generated": true,
+      "exact": false,
+      "canonExact": false,
+      "gitBlobSha": "73a8c2dcbc32e4ba21c77c532d82a3580f3d460f",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/story.html",
+        "https://alienisolation.sega.jp/img/news150508_1_7.jpg"
+      ],
+      "referenceInspected": true,
+      "prompt": "Create ONE NEW crouch-walk PASSING frame of the identical Amanda Ripley in the references. Identity, olive grey jumpsuit with rolled cuffs, patches, blue/red collar, tiny headset, brown ponytail, key necklace, black watch and dirty white high-top shoes must remain unchanged. She faces RIGHT. Change the pose decisively from the first wide-stride reference: BOTH KNEES are brought closer together underneath her hips in a compact low squat; the planted near foot sits just below the hip, and the other foot lifts slightly to pass close behind it. The torso stays low and leaned forward, head at the same low crouch height. Both elbows bent, forearms gathered near the chest for balance, hands away from ground. This is a compact passing phase between strides, not the wide-legged contact pose, not a standing or running pose, not kneeling. Show whole body hair-to-shoes with no crop, believable balance over planted foot. Realistic game sprite, consistent neutral lighting/materials. Only the character, true transparent PNG exterior alpha0, no floor, ground shadow, environment, glow, vignette or text.",
+      "precedingPrompts": [
+        "Create ONE opposite-stride crouched-walking animation sprite of the exact Amanda Ripley in supplied references, facing RIGHT in near side profile. Identical face, brown ponytail, headset, olive-grey worn coveralls, blue/red collar, patch, rolled sleeves, key necklace, dirty white high-top shoes and black digital watch on her LEFT wrist. Crouch-walk frame B: nearest LEFT FOOT reaches BACK toward LEFT while the far RIGHT FOOT steps FORWARD toward RIGHT; nearest LEFT FOREARM with the visible watch moves FORWARD to right, other forearm backward. Keep torso low and knees deeply bent in a balanced sneaking stance, same crouch head height, no kneeling or sitting, feet rather than knees support the body, hands stay clear of floor. This must be the opposite leg/arm contact to a near-left-leg-forward frame. One full-body sprite, all hair/hands/shoes inside canvas. Fine realistic game-character materials and neutral light consistent with references. Transparent PNG, empty exterior alpha0, opaque person, no scenery, floor, fake background gradient, glow, shadow or labels."
+      ],
+      "notes": "Deux cadres de déplacement accroupi : contact et passage compact. Visage/costume comparés ; aucun cycle commercial complet revendiqué.",
+      "bytes": 1731960,
+      "sha256": "8a714ae7807dc80cd34300393b7630954c108810a783771e91113110a36b954f",
+      "width": 1536,
+      "height": 1024,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/amanda-crouch-walk-b.png",
+      "runtimeIntegrated": true,
+      "label": "Amanda · déplacement accroupi B",
+      "bindings": [
+        {
+          "group": "characters",
+          "kind": "amanda",
+          "pose": "crouch-walk",
+          "frames": [
+            "amanda-crouch-walk-a",
+            "amanda-crouch-walk-b"
+          ]
+        }
+      ],
+      "selectedPrompt": "Create ONE NEW crouch-walk PASSING frame of the identical Amanda Ripley in the references. Identity, olive grey jumpsuit with rolled cuffs, patches, blue/red collar, tiny headset, brown ponytail, key necklace, black watch and dirty white high-top shoes must remain unchanged. She faces RIGHT. Change the pose decisively from the first wide-stride reference: BOTH KNEES are brought closer together underneath her hips in a compact low squat; the planted near foot sits just below the hip, and the other foot lifts slightly to pass close behind it. The torso stays low and leaned forward, head at the same low crouch height. Both elbows bent, forearms gathered near the chest for balance, hands away from ground. This is a compact passing phase between strides, not the wide-legged contact pose, not a standing or running pose, not kneeling. Show whole body hair-to-shoes with no crop, believable balance over planted foot. Realistic game sprite, consistent neutral lighting/materials. Only the character, true transparent PNG exterior alpha0, no floor, ground shadow, environment, glow, vignette or text.",
+      "use": "Pose ou frame raccordée au personnage et à son état existants ; proportions normalisées et pieds alignés.",
+      "remainingWork": "Cycles limités à deux images pour les déplacements. Variantes, transitions et animations complètes restent à produire."
+    },
+    {
+      "id": "medkit-injector",
+      "entryId": "medkit",
+      "filename": "medkit-injector.png",
+      "gitBlobSha": "8d7ff6b3c362cfcbff59277151364ec11850baa0",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/medkit.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/medkit.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation craftable medikit: a slender reusable injection device, pale ivory and silver cylindrical barrel, red ribbed collar near its narrow metallic needle assembly, small dark rings and end cap. Preserve the exact slender proportions from the reference. This is a small injector, never a medical suitcase.\nComposition: horizontal clean side view with needle pointing right.",
+      "observations": [
+        "Référence d’inventaire inspectée avant génération.",
+        "Composition et silhouette lisibles ; comparaison fine des composants et inscriptions encore requise.",
+        "Ne pas considérer ce PNG comme une preuve de mécanique jouable.",
+        "Faibles traces alpha éloignées du contour ; utiliser alphaBoundsByThreshold pour apprécier le cadrage, pixels inchangés. Pas de certification sans halo."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/medkit-injector.png",
+      "sha256": "7864628dbbea7c42ce6d9081625eec0742d066720a0ed016d746eae0f3403cac",
+      "bytes": 315893,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          49,
+          55,
+          1216,
+          1232
+        ],
+        "transparentFraction": 0.91807,
+        "opaqueFraction": 0.00035,
+        "semiTransparentFraction": 0.08158,
+        "sha256": "7864628dbbea7c42ce6d9081625eec0742d066720a0ed016d746eae0f3403cac",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            73,
+            548,
+            1179,
+            737
+          ],
+          "16": [
+            75,
+            550,
+            1179,
+            734
+          ],
+          "32": [
+            75,
+            551,
+            1179,
+            734
+          ],
+          "64": [
+            76,
+            551,
+            1178,
+            734
+          ],
+          "128": [
+            76,
+            551,
+            1177,
+            734
+          ],
+          "224": [
+            77,
+            552,
+            1174,
+            733
+          ],
+          "250": [
+            77,
+            552,
+            1167,
+            733
+          ],
+          "254": [
+            77,
+            552,
+            1050,
+            733
+          ]
+        },
+        "alphaAbove224Fraction": 0.07219
+      },
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/medkit-injector.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Injecteur médical",
+      "bindings": [
+        {
+          "group": "ui",
+          "key": "medkit",
+          "asset": "medkit-injector"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation craftable medikit: a slender reusable injection device, pale ivory and silver cylindrical barrel, red ribbed collar near its narrow metallic needle assembly, small dark rings and end cap. Preserve the exact slender proportions from the reference. This is a small injector, never a medical suitcase.\nComposition: horizontal clean side view with needle pointing right.",
+      "use": "Visuel de l’objet rapide existant ; leurre, IEM et fusée sont aussi raccordés aux projectiles et objets en armement.",
+      "remainingWork": "Affiner les détails et les variantes de fabrication ; aucune extension de mécanique n’est déduite de la seule présence du PNG."
+    },
+    {
+      "id": "noisemaker",
+      "entryId": "noise",
+      "filename": "noisemaker.png",
+      "gitBlobSha": "f792a2460c82eb31f3ea0a45ffc74e4d5b043b74",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/noisemaker1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/noisemaker1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation improvised noisemaker: the exact compact square open-frame device shown, two dark rounded supporting side hoops, exposed blue electronic modules, central pale yellow rectangular block, small circuit board and short bundled wiring, aged metal cage. It must not turn into a handheld radio or modern speaker.\nComposition: same readable slightly oblique side angle as reference, entire cage visible.",
+      "observations": [
+        "Référence d’inventaire inspectée avant génération.",
+        "Composition et silhouette lisibles ; comparaison fine des composants et inscriptions encore requise.",
+        "Ne pas considérer ce PNG comme une preuve de mécanique jouable.",
+        "Faibles traces alpha éloignées du contour ; utiliser alphaBoundsByThreshold pour apprécier le cadrage, pixels inchangés. Pas de certification sans halo."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/noisemaker.png",
+      "sha256": "688725fccb826a2b41117d4221b03465ceeb6fe93101f1ea1458357c218bb17d",
+      "bytes": 894453,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          0,
+          0,
+          1192,
+          1238
+        ],
+        "transparentFraction": 0.73822,
+        "opaqueFraction": 0.00062,
+        "semiTransparentFraction": 0.26116,
+        "sha256": "688725fccb826a2b41117d4221b03465ceeb6fe93101f1ea1458357c218bb17d",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            212,
+            204,
+            1048,
+            1065
+          ],
+          "16": [
+            215,
+            206,
+            1046,
+            1063
+          ],
+          "32": [
+            215,
+            207,
+            1046,
+            1063
+          ],
+          "64": [
+            215,
+            207,
+            1046,
+            1063
+          ],
+          "128": [
+            215,
+            207,
+            1045,
+            1062
+          ],
+          "224": [
+            216,
+            208,
+            1045,
+            1062
+          ],
+          "250": [
+            216,
+            209,
+            1045,
+            1062
+          ],
+          "254": [
+            223,
+            209,
+            1042,
+            1062
+          ]
+        },
+        "alphaAbove224Fraction": 0.25226
+      },
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/noisemaker.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Leurre sonore",
+      "bindings": [
+        {
+          "group": "ui",
+          "key": "noise",
+          "asset": "noisemaker"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation improvised noisemaker: the exact compact square open-frame device shown, two dark rounded supporting side hoops, exposed blue electronic modules, central pale yellow rectangular block, small circuit board and short bundled wiring, aged metal cage. It must not turn into a handheld radio or modern speaker.\nComposition: same readable slightly oblique side angle as reference, entire cage visible.",
+      "use": "Visuel de l’objet rapide existant ; leurre, IEM et fusée sont aussi raccordés aux projectiles et objets en armement.",
+      "remainingWork": "Affiner les détails et les variantes de fabrication ; aucune extension de mécanique n’est déduite de la seule présence du PNG."
+    },
+    {
+      "id": "emp",
+      "entryId": "emp",
+      "filename": "emp.png",
+      "gitBlobSha": "99e4a3e2f6aa24e4e338ca1e10e53b0264eabc91",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/emp1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/emp1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation EMP mine: the exact improvised elongated metallic spindle with densely wound red and blue wires, cylindrical and rectangular electronic parts strapped around its core, silver caps and protruding contact at the narrow end. Preserve asymmetry and the exposed construction; not a generic grenade or radio box.\nComposition: horizontal side view, narrow contact pointing right.",
+      "observations": [
+        "Référence d’inventaire inspectée avant génération.",
+        "Composition et silhouette lisibles ; comparaison fine des composants et inscriptions encore requise.",
+        "Ne pas considérer ce PNG comme une preuve de mécanique jouable.",
+        "Faibles traces alpha éloignées du contour ; utiliser alphaBoundsByThreshold pour apprécier le cadrage, pixels inchangés. Pas de certification sans halo."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/emp.png",
+      "sha256": "7dd92dc3b7e3579af6703cac98d691da4264c46d0a8dc4a3a54aef6239369423",
+      "bytes": 533995,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          0,
+          41,
+          1186,
+          1220
+        ],
+        "transparentFraction": 0.86671,
+        "opaqueFraction": 0.00036,
+        "semiTransparentFraction": 0.13293,
+        "sha256": "7dd92dc3b7e3579af6703cac98d691da4264c46d0a8dc4a3a54aef6239369423",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            73,
+            465,
+            1181,
+            786
+          ],
+          "16": [
+            75,
+            468,
+            1179,
+            781
+          ],
+          "32": [
+            76,
+            468,
+            1179,
+            781
+          ],
+          "64": [
+            76,
+            469,
+            1179,
+            781
+          ],
+          "128": [
+            76,
+            469,
+            1178,
+            780
+          ],
+          "224": [
+            77,
+            470,
+            1178,
+            780
+          ],
+          "250": [
+            78,
+            471,
+            1177,
+            779
+          ],
+          "254": [
+            80,
+            471,
+            1177,
+            771
+          ]
+        },
+        "alphaAbove224Fraction": 0.11953
+      },
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/emp.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Dispositif IEM",
+      "bindings": [
+        {
+          "group": "ui",
+          "key": "emp",
+          "asset": "emp"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation EMP mine: the exact improvised elongated metallic spindle with densely wound red and blue wires, cylindrical and rectangular electronic parts strapped around its core, silver caps and protruding contact at the narrow end. Preserve asymmetry and the exposed construction; not a generic grenade or radio box.\nComposition: horizontal side view, narrow contact pointing right.",
+      "use": "Visuel de l’objet rapide existant ; leurre, IEM et fusée sont aussi raccordés aux projectiles et objets en armement.",
+      "remainingWork": "Affiner les détails et les variantes de fabrication ; aucune extension de mécanique n’est déduite de la seule présence du PNG."
+    },
+    {
+      "id": "flare",
+      "entryId": "flare",
+      "filename": "flare.png",
+      "gitBlobSha": "7629d7f05f09c8c89a76d3fe27c1f63b33f6bda3",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flare1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flare1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation handheld flare, unlit: long narrow red signal flare with a dark band below the red cap, a small pale paper label wrapped around the middle and the dark striking end. Preserve the exact simple long cylinder from the reference; no flame, smoke or glow.\nComposition: horizontal side view.",
+      "observations": [
+        "Référence d’inventaire inspectée avant génération.",
+        "Composition et silhouette lisibles ; comparaison fine des composants et inscriptions encore requise.",
+        "Ne pas considérer ce PNG comme une preuve de mécanique jouable.",
+        "Faibles traces alpha éloignées du contour ; utiliser alphaBoundsByThreshold pour apprécier le cadrage, pixels inchangés. Pas de certification sans halo."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/flare.png",
+      "sha256": "d39330f30a08564ce10c68cedb3171f9c42a58cce0daf3f69e605c1c62f0f422",
+      "bytes": 305254,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          0,
+          21,
+          1238,
+          1254
+        ],
+        "transparentFraction": 0.91374,
+        "opaqueFraction": 7e-05,
+        "semiTransparentFraction": 0.08618,
+        "sha256": "d39330f30a08564ce10c68cedb3171f9c42a58cce0daf3f69e605c1c62f0f422",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            74,
+            573,
+            1180,
+            702
+          ],
+          "16": [
+            76,
+            575,
+            1178,
+            699
+          ],
+          "32": [
+            76,
+            575,
+            1178,
+            699
+          ],
+          "64": [
+            77,
+            576,
+            1177,
+            699
+          ],
+          "128": [
+            77,
+            576,
+            1177,
+            698
+          ],
+          "224": [
+            78,
+            577,
+            1176,
+            698
+          ],
+          "250": [
+            78,
+            577,
+            1176,
+            697
+          ],
+          "254": [
+            78,
+            579,
+            1176,
+            695
+          ]
+        },
+        "alphaAbove224Fraction": 0.0726
+      },
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/flare.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Fusée éclairante",
+      "bindings": [
+        {
+          "group": "ui",
+          "key": "flare",
+          "asset": "flare"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons.\nSubject: the Alien: Isolation handheld flare, unlit: long narrow red signal flare with a dark band below the red cap, a small pale paper label wrapped around the middle and the dark striking end. Preserve the exact simple long cylinder from the reference; no flame, smoke or glow.\nComposition: horizontal side view.",
+      "use": "Visuel de l’objet rapide existant ; leurre, IEM et fusée sont aussi raccordés aux projectiles et objets en armement.",
+      "remainingWork": "Affiner les détails et les variantes de fabrication ; aucune extension de mécanique n’est déduite de la seule présence du PNG."
+    },
+    {
+      "id": "revolver",
+      "entryId": "revolver",
+      "filename": "revolver.png",
+      "gitBlobSha": "9fc68254565f8f86fed6293784d8272673a8fa38",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/revolver.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/revolver.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The revolver from Alien: Isolation: oversized pale ivory slotted rectangular barrel shroud, several long dark recessed vent slots, exposed dark metallic cylinder and upper mechanism, compact deep reddish-brown angled pistol grip, restrained small fasteners. Preserve the unusual long boxy barrel silhouette and proportions of the reference; do not replace with a generic cowboy revolver.\nComposition: Complete weapon in readable side three-quarter view, muzzle left, grip down right.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les silhouettes d'Isolation.",
+        "Silhouette et palette reconnaissables ; dimensions fines, composants et petits marquages restent à comparer au modèle du jeu.",
+        "Illustration seule, aucune preuve de mécanique jouable."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/revolver.png",
+      "sha256": "92d9dcb146452cfe46fb6af0d186dec6f4993fcf99d873cc7dcd3733bc2b0ca3",
+      "bytes": 773549,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          97,
+          67,
+          1240,
+          1216
+        ],
+        "transparentFraction": 0.8079078368677965,
+        "opaqueFraction": 0.000531632110579479,
+        "semiTransparentFraction": 0.19156053102162396,
+        "sha256": "92d9dcb146452cfe46fb6af0d186dec6f4993fcf99d873cc7dcd3733bc2b0ca3",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            103,
+            300,
+            1154,
+            937
+          ],
+          "16": [
+            105,
+            303,
+            1151,
+            935
+          ],
+          "32": [
+            105,
+            303,
+            1151,
+            935
+          ],
+          "64": [
+            105,
+            303,
+            1151,
+            935
+          ],
+          "128": [
+            106,
+            303,
+            1151,
+            934
+          ],
+          "224": [
+            107,
+            304,
+            1150,
+            934
+          ],
+          "250": [
+            107,
+            304,
+            1150,
+            934
+          ],
+          "254": [
+            107,
+            304,
+            1150,
+            934
+          ]
+        },
+        "alphaAbove224Fraction": 0.18380099153204166,
+        "byteLength": 773549,
+        "gitBlobShaComputed": "9fc68254565f8f86fed6293784d8272673a8fa38"
+      },
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/revolver.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Revolver",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The revolver from Alien: Isolation: oversized pale ivory slotted rectangular barrel shroud, several long dark recessed vent slots, exposed dark metallic cylinder and upper mechanism, compact deep reddish-brown angled pistol grip, restrained small fasteners. Preserve the unusual long boxy barrel silhouette and proportions of the reference; do not replace with a generic cowboy revolver.\nComposition: Complete weapon in readable side three-quarter view, muzzle left, grip down right.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "shotgun",
+      "entryId": "shotgun",
+      "filename": "shotgun.png",
+      "gitBlobSha": "6a338f58f5c89e2be2bc9a8d54863ee8fa211bd3",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/shotgun1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/shotgun1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The shotgun from Alien: Isolation: the exact long narrow science-fiction pump shotgun in the reference, pale ivory tubular receiver and forward barrel shrouds, dark steel segmented mechanics, worn dark red lower furniture and stock area, black ribs and small metal trigger guard. Preserve its compact butt, long slim continuous profile, pale/dark/red placement and barrel structure; not a wooden sporting shotgun and no added scope.\nComposition: Complete weapon diagonally from butt lower-left to muzzle upper-right, shallow three-quarter view like the reference, enough space around both ends.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les silhouettes d'Isolation.",
+        "Silhouette et palette reconnaissables ; dimensions fines, composants et petits marquages restent à comparer au modèle du jeu.",
+        "Illustration seule, aucune preuve de mécanique jouable."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/shotgun.png",
+      "sha256": "c3fe53e46dd9bd53dac2207aea0d4c62fd5b3fa7ee642b7c3a2ea272a9c2dda7",
+      "bytes": 746632,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "transparentFraction": 0.6297265019878971,
+        "opaqueFraction": 9.8568154473468e-05,
+        "semiTransparentFraction": 0.37017492985762945,
+        "sha256": "c3fe53e46dd9bd53dac2207aea0d4c62fd5b3fa7ee642b7c3a2ea272a9c2dda7",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            121,
+            53,
+            1253,
+            1233
+          ],
+          "16": [
+            129,
+            256,
+            1158,
+            1012
+          ],
+          "32": [
+            129,
+            256,
+            1158,
+            1012
+          ],
+          "64": [
+            129,
+            257,
+            1158,
+            1012
+          ],
+          "128": [
+            130,
+            257,
+            1157,
+            1012
+          ],
+          "224": [
+            130,
+            258,
+            1157,
+            1011
+          ],
+          "250": [
+            131,
+            258,
+            1156,
+            1011
+          ],
+          "254": [
+            131,
+            258,
+            1156,
+            1010
+          ]
+        },
+        "alphaAbove224Fraction": 0.1029000658816826,
+        "byteLength": 746632,
+        "gitBlobShaComputed": "6a338f58f5c89e2be2bc9a8d54863ee8fa211bd3"
+      },
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/shotgun.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Fusil à pompe",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The shotgun from Alien: Isolation: the exact long narrow science-fiction pump shotgun in the reference, pale ivory tubular receiver and forward barrel shrouds, dark steel segmented mechanics, worn dark red lower furniture and stock area, black ribs and small metal trigger guard. Preserve its compact butt, long slim continuous profile, pale/dark/red placement and barrel structure; not a wooden sporting shotgun and no added scope.\nComposition: Complete weapon diagonally from butt lower-left to muzzle upper-right, shallow three-quarter view like the reference, enough space around both ends.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "boltgun",
+      "entryId": "boltgun",
+      "filename": "boltgun.png",
+      "gitBlobSha": "44fc446f8a198286d80001755735379f4afab7cf",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/boltgun.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/boltgun.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The industrial bolt gun from Alien: Isolation: an ungainly heavy maintenance tool with long exposed squared rail cage and parallel copper-brown rods at the front, two dark blue cylindrical tank-like housings stacked along the upper rear, boxy silver metal brackets, black angular rear pistol grip and little beige equipment plate. Preserve the exact distinctive front rail arrangement and blue cylindrical upper body; no rifle stock, no scope and no military pulse-rifle design.\nComposition: Complete tool in side three-quarter view with the rail muzzle down-left and the blue rear cylinder up-right, matching the reference angle.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les silhouettes d'Isolation.",
+        "Silhouette et palette reconnaissables ; dimensions fines, composants et petits marquages restent à comparer au modèle du jeu.",
+        "Illustration seule, aucune preuve de mécanique jouable."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/boltgun.png",
+      "sha256": "73cb820d2d9808bb568a208a6b167cec5c21dbdc7462f7716b1dc0a0d7b89e08",
+      "bytes": 1002338,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          33,
+          29,
+          1236,
+          1208
+        ],
+        "transparentFraction": 0.7371352660322693,
+        "opaqueFraction": 0.0007274965723719186,
+        "semiTransparentFraction": 0.26213723739535877,
+        "sha256": "73cb820d2d9808bb568a208a6b167cec5c21dbdc7462f7716b1dc0a0d7b89e08",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            46,
+            238,
+            1190,
+            1029
+          ],
+          "16": [
+            49,
+            240,
+            1188,
+            1027
+          ],
+          "32": [
+            49,
+            240,
+            1188,
+            1027
+          ],
+          "64": [
+            49,
+            240,
+            1188,
+            1027
+          ],
+          "128": [
+            49,
+            240,
+            1187,
+            1026
+          ],
+          "224": [
+            50,
+            241,
+            1186,
+            1026
+          ],
+          "250": [
+            50,
+            242,
+            1186,
+            1025
+          ],
+          "254": [
+            53,
+            242,
+            1186,
+            1023
+          ]
+        },
+        "alphaAbove224Fraction": 0.24583406464544716,
+        "byteLength": 1002338,
+        "gitBlobShaComputed": "44fc446f8a198286d80001755735379f4afab7cf"
+      },
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/boltgun.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Fusil à clous",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The industrial bolt gun from Alien: Isolation: an ungainly heavy maintenance tool with long exposed squared rail cage and parallel copper-brown rods at the front, two dark blue cylindrical tank-like housings stacked along the upper rear, boxy silver metal brackets, black angular rear pistol grip and little beige equipment plate. Preserve the exact distinctive front rail arrangement and blue cylindrical upper body; no rifle stock, no scope and no military pulse-rifle design.\nComposition: Complete tool in side three-quarter view with the rail muzzle down-left and the blue rear cylinder up-right, matching the reference angle.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "maintenancejack",
+      "entryId": "maintenancejack",
+      "filename": "maintenancejack.png",
+      "gitBlobSha": "24af57eabfb86d9d665a8b50f4c9e1248e38c30d",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.mobygames.com/game/68903/alien-isolation/screenshots/windows/736060/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/jack.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/jack.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: Amanda's maintenance jack from Alien: Isolation: a long dark steel manual door-opening wrench/pry tool with a broad curved open C-shaped working jaw, dark industrial shaft, black ribbed grip and distinct yellow grip bands. Input 1 shows the held shaft and bands, input 2 shows the working jaw next to an orange door locking mechanism. Depict only the complete handheld black/yellow tool. Preserve the dark open wrench head visible at lower-right of input 2; the large orange door mechanism is NOT part of the tool. No door clamp, no hands, no new giant hammer head, no generic red crowbar.\nComposition: Complete long handheld tool isolated diagonally, handle at lower-left and open steel wrench/pry head at upper-right, shallow three-quarter view.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les silhouettes d'Isolation.",
+        "Silhouette et palette reconnaissables ; dimensions fines, composants et petits marquages restent à comparer au modèle du jeu.",
+        "Illustration seule, aucune preuve de mécanique jouable."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/maintenancejack.png",
+      "sha256": "52ee9bfffc264af18392337a5e13a299d6b97e40e84675e225fcb8a0e7e79024",
+      "bytes": 494895,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          2,
+          37,
+          1232,
+          1254
+        ],
+        "transparentFraction": 0.8691708065291546,
+        "opaqueFraction": 0.0004909330016355955,
+        "semiTransparentFraction": 0.13033826046920985,
+        "sha256": "52ee9bfffc264af18392337a5e13a299d6b97e40e84675e225fcb8a0e7e79024",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            69,
+            50,
+            1197,
+            1215
+          ],
+          "16": [
+            72,
+            55,
+            1194,
+            1213
+          ],
+          "32": [
+            72,
+            55,
+            1194,
+            1212
+          ],
+          "64": [
+            72,
+            55,
+            1194,
+            1212
+          ],
+          "128": [
+            73,
+            55,
+            1194,
+            1212
+          ],
+          "224": [
+            73,
+            56,
+            1193,
+            1211
+          ],
+          "250": [
+            74,
+            57,
+            1193,
+            1211
+          ],
+          "254": [
+            74,
+            57,
+            1193,
+            1211
+          ]
+        },
+        "alphaAbove224Fraction": 0.11161921404933241,
+        "byteLength": 494895,
+        "gitBlobShaComputed": "24af57eabfb86d9d665a8b50f4c9e1248e38c30d"
+      },
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/maintenancejack.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Clé de maintenance",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: Amanda's maintenance jack from Alien: Isolation: a long dark steel manual door-opening wrench/pry tool with a broad curved open C-shaped working jaw, dark industrial shaft, black ribbed grip and distinct yellow grip bands. Input 1 shows the held shaft and bands, input 2 shows the working jaw next to an orange door locking mechanism. Depict only the complete handheld black/yellow tool. Preserve the dark open wrench head visible at lower-right of input 2; the large orange door mechanism is NOT part of the tool. No door clamp, no hands, no new giant hammer head, no generic red crowbar.\nComposition: Complete long handheld tool isolated diagonally, handle at lower-left and open steel wrench/pry head at upper-right, shallow three-quarter view.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "stunbaton",
+      "entryId": "stunbaton",
+      "filename": "stunbaton.png",
+      "gitBlobSha": "442c813b1319ef89387da1a05fab45ae667c8f84",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/stunbaton.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/stunbaton.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The stun baton from Alien: Isolation: long slim industrial electric prod, substantial black ribbed cylindrical handle, short metallic collar, an extended shaft composed of two parallel bright steel rails with open space between them, thin central dark/yellow structural elements, narrowing pointed electrode end. Preserve the length ratio, visible open double rail silhouette, black handle and sparse yellow bands of the reference. No lightning discharge and no medieval club.\nComposition: Complete baton diagonal from electrode lower-left to handle upper-right, side three-quarter view matching the reference.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les silhouettes d'Isolation.",
+        "Silhouette et palette reconnaissables ; dimensions fines, composants et petits marquages restent à comparer au modèle du jeu.",
+        "Illustration seule, aucune preuve de mécanique jouable."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/stunbaton.png",
+      "sha256": "48258a923cfd1d274f268b14962541660841f9de68f91fb21de927bc5b1f27b9",
+      "bytes": 382431,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "originalInspection": {
+        "mode": "RGBA",
+        "size": [
+          1254,
+          1254
+        ],
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaBoundingBox": [
+          23,
+          29,
+          1220,
+          1116
+        ],
+        "transparentFraction": 0.922576304470034,
+        "opaqueFraction": 0.00036819975122669656,
+        "semiTransparentFraction": 0.0770554957787393,
+        "sha256": "48258a923cfd1d274f268b14962541660841f9de68f91fb21de927bc5b1f27b9",
+        "copyUnchanged": true,
+        "alphaBoundsByThreshold": {
+          "2": [
+            67,
+            225,
+            1181,
+            1047
+          ],
+          "16": [
+            70,
+            227,
+            1179,
+            1045
+          ],
+          "32": [
+            70,
+            227,
+            1179,
+            1045
+          ],
+          "64": [
+            70,
+            228,
+            1179,
+            1045
+          ],
+          "128": [
+            71,
+            228,
+            1178,
+            1045
+          ],
+          "224": [
+            72,
+            229,
+            1178,
+            1044
+          ],
+          "250": [
+            72,
+            229,
+            1177,
+            1044
+          ],
+          "254": [
+            98,
+            256,
+            1177,
+            1017
+          ]
+        },
+        "alphaAbove224Fraction": 0.06197583999145319,
+        "byteLength": 382431,
+        "gitBlobShaComputed": "442c813b1319ef89387da1a05fab45ae667c8f84"
+      },
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/stunbaton.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Matraque électrique",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: only actual solid material belongs in the alpha mask. Pixels outside the complete object must have alpha exactly zero; opaque material interiors must be fully opaque. No ambient occlusion puddle, glow, drop shadow, vignette or translucent haze outside the silhouette.\nSubject: The stun baton from Alien: Isolation: long slim industrial electric prod, substantial black ribbed cylindrical handle, short metallic collar, an extended shaft composed of two parallel bright steel rails with open space between them, thin central dark/yellow structural elements, narrowing pointed electrode end. Preserve the length ratio, visible open double rail silhouette, black handle and sparse yellow bands of the reference. No lightning discharge and no medieval club.\nComposition: Complete baton diagonal from electrode lower-left to handle upper-right, side three-quarter view matching the reference.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "access-tuner",
+      "entryId": "access_tuner",
+      "filename": "access-tuner.png",
+      "gitBlobSha": "9148fb71a1021645d62c01edac059a8e2a163425",
+      "sourceURLs": [
+        "https://alienisolation.sega.jp/battle.html",
+        "https://alienisolation.sega.jp/img/battle05.png"
+      ],
+      "referenceImageURLs": [
+        "https://alienisolation.sega.jp/img/battle05.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: The Security Access Tuner from Alien: Isolation: handheld thick dark grey and faded blue-grey rugged rectangular industrial unit, a square green monochrome CRT in the upper half, metal corner screws, chipped paint, fine etched markings, large black circular tuning dial low on the face, several small lower switches, short top projections/antenna. Precisely preserve the face layout and proportions in the screenshot, including the screen over the large round dial. On the screen, abstract bright-green rectilinear signal glyphs and blocks rather than invented readable words. No hands, wall or terminal.\nComposition: One complete rectangular device almost front-on with slight three-quarter thickness visible on right and top, centered upright.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les formes d'Isolation.",
+        "Détails fins et proportions encore à comparer ; aucun statut de fidélité1:1 certifiée."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/access-tuner.png",
+      "sha256": "d53d73377c56cb2778cf8a97d675d3e596a28bc881e48956a4f89c3c7867b379",
+      "bytes": 1377409,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/access-tuner.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Syntoniseur de sécurité",
+      "bindings": [
+        {
+          "group": "tools",
+          "key": "tuner",
+          "asset": "access-tuner"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: The Security Access Tuner from Alien: Isolation: handheld thick dark grey and faded blue-grey rugged rectangular industrial unit, a square green monochrome CRT in the upper half, metal corner screws, chipped paint, fine etched markings, large black circular tuning dial low on the face, several small lower switches, short top projections/antenna. Precisely preserve the face layout and proportions in the screenshot, including the screen over the large round dial. On the screen, abstract bright-green rectilinear signal glyphs and blocks rather than invented readable words. No hands, wall or terminal.\nComposition: One complete rectangular device almost front-on with slight three-quarter thickness visible on right and top, centered upright.",
+      "use": "Visuel de l’outil existant, montré après son acquisition ; fonctionnement et ressources d’origine conservés.",
+      "remainingWork": "Affiner détails, écran, inscriptions et animations d’usage par comparaison de référence."
+    },
+    {
+      "id": "flashlight",
+      "entryId": "flashlight",
+      "filename": "flashlight.png",
+      "gitBlobSha": "ad9a624c35980c1fa4174ee1875f00141a4f6330",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flashlight.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flashlight.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: Amanda's compact head-mounted flashlight from Alien: Isolation. The reference shows the flashlight beside Amanda's temple: a short off-white cylindrical lamp with two dark circumferential rings, round pale-blue glass lens set in a small dark rectangular mount, thin black support strut and short white connection wire. Reconstruct only this detached lamp unit, mounting bracket and short attached cable. Keep its exact compact headset-mounted form. No face, ear, hair, head, helmet or generic handheld torch body. Lamp switched off, pale glass without light beam or glow.\nComposition: Complete compact headlamp unit in close side three-quarter view so its circular front lens and two rings are clear; cable ends visible, all contained inside transparent margin.",
+      "observations": [
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les formes d'Isolation.",
+        "Détails fins et proportions encore à comparer ; aucun statut de fidélité1:1 certifiée."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/flashlight.png",
+      "sha256": "57bd5fcda3dedd8d9fd95edf6750d7bc5c052d03d3b3aadc4faabec4b67d4151",
+      "bytes": 570620,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/flashlight.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Lampe torche",
+      "bindings": [
+        {
+          "group": "tools",
+          "key": "torch",
+          "asset": "flashlight"
+        }
+      ],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: Amanda's compact head-mounted flashlight from Alien: Isolation. The reference shows the flashlight beside Amanda's temple: a short off-white cylindrical lamp with two dark circumferential rings, round pale-blue glass lens set in a small dark rectangular mount, thin black support strut and short white connection wire. Reconstruct only this detached lamp unit, mounting bracket and short attached cable. Keep its exact compact headset-mounted form. No face, ear, hair, head, helmet or generic handheld torch body. Lamp switched off, pale glass without light beam or glow.\nComposition: Complete compact headlamp unit in close side three-quarter view so its circular front lens and two rings are clear; cable ends visible, all contained inside transparent margin.",
+      "use": "Visuel de l’outil existant, montré après son acquisition ; fonctionnement et ressources d’origine conservés.",
+      "remainingWork": "Affiner détails, écran, inscriptions et animations d’usage par comparaison de référence."
+    },
+    {
+      "id": "plasma-cutter",
+      "entryId": "plasma_cutter",
+      "filename": "plasma-cutter.png",
+      "gitBlobSha": "632ac5705b44fbad548e490561f2488cea29f4ed",
+      "sourceURLs": [
+        "https://www.mobygames.com/game/68903/alien-isolation/screenshots/windows/736081/",
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://cdn.mobygames.com/screenshots/16818421-alien-isolation-windows-cutting-a-blocked-door-with-plasma-torch.png"
+      ],
+      "referenceImageURLs": [
+        "https://cdn.mobygames.com/screenshots/16818421-alien-isolation-windows-cutting-a-blocked-door-with-plasma-torch.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: The compact plasma cutting torch from Alien: Isolation, seen in the supplied game screenshot. Depict its equipment design alone: worn compact red-brown industrial handheld body, short metal cutting tip, dark grip with a circular pale metal control, and the characteristic square dark amber/red protective viewing shield mounted just above and behind the cutting point on a narrow bracket. Input 1 shows the actual plasma torch in use; input 2 shows the red base cutter-family housing in clearer light. Preserve the squared protective visor and compact handheld form from input 1. No emitted beam, sparks, lighting flare, wall, hand, floating HUD or Russian text. The shield is a physical component with dark amber glass, not a screen. Do not invent a long rifle barrel or sci-fi laser gun.\nComposition: Full handheld cutting tool in clear three-quarter side view, small nozzle pointed left, handle below and physical square protective shield upright over the nozzle, enough transparent margin.",
+      "observations": [
+        "Capture réelle plasma inspectée ; la silhouette cachée par les mains et l'éblouissement impose une reconstruction partielle à valider.",
+        "Le visuel candidat représente le découpeur avec écran protecteur ; variantes gaz/plasma/ion distinctes non certifiées.",
+        "Références visuelles inspectées avant génération ; PNG candidat peint d'après les formes d'Isolation.",
+        "Détails fins et proportions encore à comparer ; aucun statut de fidélité1:1 certifiée."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/plasma-cutter.png",
+      "sha256": "7c888c459b76a5d7948b3ddb8b8a50c46f27b79f9abf5f7eb56f3db2473e5e26",
+      "bytes": 808219,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/plasma-cutter.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Découpeur plasma",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. Asset type: a single independent 2D equipment sprite for Aliens Tantalus's Alien: Isolation adaptation. Input image 1 is a visual identity reference from the released 2014 game, not a background to reproduce. Repaint the one object faithfully in a restrained photorealistic hand-painted game-art finish: realistic worn materials, sharp readable silhouette, muted industrial colors, fine texture without excessive microdetail. Preserve its specific game design and component arrangement. Scene/backdrop: genuinely transparent RGBA, fully isolated object with clean anti-aliased edges. Soft neutral upper-left illumination only on the object. No backdrop, no black field, no floor, no cast shadow, no halo, no rim glow, no hand, no person, no frame, no watermarks, no added accessories. One object only, not a collage or sheet. Keep 10 percent clear transparent margin around the complete object, no cropping. Prefer a square 1024 canvas with object centered. Text: do not add any title or invented writing; existing tiny labels can remain understated texture. Match Alien: Isolation rather than Aliens 1986 military weapons. Transparency requirement: outside the object alpha must be exactly zero, inside opaque solid material alpha255. No ambient shadow, haze, translucent glow or background pixels. Render the equipment only; do not retain human hands or face from reference.\nSubject: The compact plasma cutting torch from Alien: Isolation, seen in the supplied game screenshot. Depict its equipment design alone: worn compact red-brown industrial handheld body, short metal cutting tip, dark grip with a circular pale metal control, and the characteristic square dark amber/red protective viewing shield mounted just above and behind the cutting point on a narrow bracket. Input 1 shows the actual plasma torch in use; input 2 shows the red base cutter-family housing in clearer light. Preserve the squared protective visor and compact handheld form from input 1. No emitted beam, sparks, lighting flare, wall, hand, floating HUD or Russian text. The shield is a physical component with dark amber glass, not a screen. Do not invent a long rifle barrel or sci-fi laser gun.\nComposition: Full handheld cutting tool in clear three-quarter side view, small nozzle pointed left, handle below and physical square protective shield upright over the nozzle, enough transparent margin.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "smokebomb",
+      "entryId": "smokebomb",
+      "filename": "smokebomb.png",
+      "gitBlobSha": "8e6dabd182c1ef4cc99fadedf7adfce0f73772be",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/smokebomb1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/smokebomb1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. A single decorative 2D inventory sprite depicting an inert fictional prop from the released video game Alien: Isolation. This is only game-art illustration of the object's external appearance, not manufacturing information or a functional design. Use the supplied image as visual reference for silhouette, colors and material wear. Restrained photorealistic hand-painted Tantalus game-art finish. Exactly one object, complete and centered, on true transparent RGBA with only the prop in the alpha mask. Exterior empty space must have alpha0 and solid material must be opaque. Fine anti-aliased edges, soft neutral light on object only. No cast shadow, ground, backdrop, halo, glow, text title, watermark, hands, persons, diagram, dimensions, labels explaining components, cutaway or disassembled parts. Keep clear transparent margins. Square canvas, no cropping. Preserve the particular fictional 2014 game's look; no generic modern military substitute.\nSubject: An inert smokebomb inventory prop from Alien: Isolation. Only copy the external visual form of the reference: squat off-white translucent cylindrical container, wide dark burgundy-red lid, thick off-white tape bands wrapping the body, small grey box against the upper side, a few curved exterior lines and one thin short upright stick. Keep the specific industrial improvised game-prop silhouette and muted cream/red/grey palette. Unreadable tiny aged labels may be surface texture. No smoke cloud, flame, technical cutaway, schematic or exploded assembly.\nComposition: Complete compact container in three-quarter view with the red lid visible toward upper-right, centered.",
+      "observations": [],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/smokebomb.png",
+      "sha256": "7cbf7f89144bdabd8225b27e3cf8faac8ccecb66ffddb0b9328785ad1ae059a1",
+      "bytes": 880081,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/smokebomb.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Fumigène",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. A single decorative 2D inventory sprite depicting an inert fictional prop from the released video game Alien: Isolation. This is only game-art illustration of the object's external appearance, not manufacturing information or a functional design. Use the supplied image as visual reference for silhouette, colors and material wear. Restrained photorealistic hand-painted Tantalus game-art finish. Exactly one object, complete and centered, on true transparent RGBA with only the prop in the alpha mask. Exterior empty space must have alpha0 and solid material must be opaque. Fine anti-aliased edges, soft neutral light on object only. No cast shadow, ground, backdrop, halo, glow, text title, watermark, hands, persons, diagram, dimensions, labels explaining components, cutaway or disassembled parts. Keep clear transparent margins. Square canvas, no cropping. Preserve the particular fictional 2014 game's look; no generic modern military substitute.\nSubject: An inert smokebomb inventory prop from Alien: Isolation. Only copy the external visual form of the reference: squat off-white translucent cylindrical container, wide dark burgundy-red lid, thick off-white tape bands wrapping the body, small grey box against the upper side, a few curved exterior lines and one thin short upright stick. Keep the specific industrial improvised game-prop silhouette and muted cream/red/grey palette. Unreadable tiny aged labels may be surface texture. No smoke cloud, flame, technical cutaway, schematic or exploded assembly.\nComposition: Complete compact container in three-quarter view with the red lid visible toward upper-right, centered.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "flashbang",
+      "entryId": "flashbang",
+      "filename": "flashbang.png",
+      "gitBlobSha": "ea4e524fac35db7d2f60c49776524e0e4b830626",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flashbang1.jpg"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flashbang1.jpg"
+      ],
+      "prompt": "Use case: stylized-concept. A single decorative 2D inventory sprite depicting an inert fictional prop from the released video game Alien: Isolation. This is only game-art illustration of the object's external appearance, not manufacturing information or a functional design. Use the supplied image as visual reference for silhouette, colors and material wear. Restrained photorealistic hand-painted Tantalus game-art finish. Exactly one object, complete and centered, on true transparent RGBA with only the prop in the alpha mask. Exterior empty space must have alpha0 and solid material must be opaque. Fine anti-aliased edges, soft neutral light on object only. No cast shadow, ground, backdrop, halo, glow, text title, watermark, hands, persons, diagram, dimensions, labels explaining components, cutaway or disassembled parts. Keep clear transparent margins. Square canvas, no cropping. Preserve the particular fictional 2014 game's look; no generic modern military substitute.\nSubject: An inert flashbang inventory prop from Alien: Isolation. Copy the supplied reference's external fictional appearance: off-white short plastic bottle/canister with pale ribbed screw cap at one end, a thick pale band around the upper body, a boxy grey outer module, a small blue exterior block and sparse fine red and yellow lines. Preserve its exact compact asymmetric silhouette and grey/cream/blue color placement; no modern military hand-grenade replacement. Tiny warning marks may be texture only. No flash, sparks, smoke, technical cutaway or assembly diagram.\nComposition: Complete closed game prop in side three-quarter view, bottle bottom lower-left and pale screw cap upper-right, matching reference.",
+      "observations": [],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "source_candidate",
+      "path": "docs/development/alien-isolation-fidelity/candidates/flashbang.png",
+      "sha256": "4da47d2dbb4eeabed94694515e220402e7866f7251a63880fea2e0f1384a6fb6",
+      "bytes": 1022588,
+      "width": 1254,
+      "height": 1254,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": true,
+      "repositoryPath": "docs/development/alien-isolation-fidelity/candidates/flashbang.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": false,
+      "label": "Grenade aveuglante",
+      "bindings": [],
+      "selectedPrompt": "Use case: stylized-concept. A single decorative 2D inventory sprite depicting an inert fictional prop from the released video game Alien: Isolation. This is only game-art illustration of the object's external appearance, not manufacturing information or a functional design. Use the supplied image as visual reference for silhouette, colors and material wear. Restrained photorealistic hand-painted Tantalus game-art finish. Exactly one object, complete and centered, on true transparent RGBA with only the prop in the alpha mask. Exterior empty space must have alpha0 and solid material must be opaque. Fine anti-aliased edges, soft neutral light on object only. No cast shadow, ground, backdrop, halo, glow, text title, watermark, hands, persons, diagram, dimensions, labels explaining components, cutaway or disassembled parts. Keep clear transparent margins. Square canvas, no cropping. Preserve the particular fictional 2014 game's look; no generic modern military substitute.\nSubject: An inert flashbang inventory prop from Alien: Isolation. Copy the supplied reference's external fictional appearance: off-white short plastic bottle/canister with pale ribbed screw cap at one end, a thick pale band around the upper body, a boxy grey outer module, a small blue exterior block and sparse fine red and yellow lines. Preserve its exact compact asymmetric silhouette and grey/cream/blue color placement; no modern military hand-grenade replacement. Tiny warning marks may be texture only. No flash, sparks, smoke, technical cutaway or assembly diagram.\nComposition: Complete closed game prop in side three-quarter view, bottle bottom lower-left and pale screw cap upper-right, matching reference.",
+      "use": "Source visuelle candidate ; aucune nouvelle mécanique ni nouvelle salle n’est activée par cette image.",
+      "remainingWork": "Raccorder à un comportement, une progression et une sauvegarde réellement implémentés, puis valider en jeu."
+    },
+    {
+      "id": "flamethrower",
+      "entryId": "flamethrower",
+      "filename": "flamethrower.png",
+      "gitBlobSha": "015f00d4c580fb61b58cdbd09a066e5ef1d1609c",
+      "sourceURLs": [
+        "https://www.avpgalaxy.net/games/alien-isolation/weapons/",
+        "https://alienisolation.sega.jp/battle.html",
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flamethrowers.jpg",
+        "https://alienisolation.sega.jp/img/battle04.png"
+      ],
+      "referenceImageURLs": [
+        "https://www.avpgalaxy.net/wordpress/wp-content/uploads/2014/10/flamethrowers.jpg",
+        "https://alienisolation.sega.jp/img/battle04.png"
+      ],
+      "prompt": "Create one simple hand-painted stylized 2D inventory icon of the fictional flamethrower prop from the video game Alien: Isolation. Use the attached small inventory screenshot for its recognizable elongated silhouette and muted ivory, dark steel and red color blocks. Depict an inert deactivated video-game prop only, with simplified opaque closed outer shapes. Keep this a readable painted icon with broad shapes and restrained texture, not a photorealistic product rendering. Do not show exposed reservoirs, pipes, circuits, fuel, internal mechanisms or construction details. No functional schematic, diagram, dimensions, instructions or disassembled view. No flame, smoke, muzzle glow, hands or people. Exactly one complete closed prop on a transparent RGBA background, diagonally matching the reference angle, generous clear margin around it. Pixels outside the silhouette fully transparent. No cast shadow, floor, ambient haze, halo, labels, title or watermark. Match the fictional game's general inventory appearance and avoid modern military weapon substitutions.",
+      "observations": [
+        "Nouvel essai matériellement simplifié après rejet initial : icône stylisée inerte, silhouette/couleurs, pas de détails de fonctionnement ni éléments internes exposés.",
+        "Fidélité des composants volontairement réduite ; candidat visuel d'inventaire, pas reconstruction détaillée1:1.",
+        "Version simplifiée de l’icône fictive ; les détails fins du modèle original restent à comparer. La première demande de génération n’avait pas produit de PNG."
+      ],
+      "referenceWasInspected": true,
+      "fidelitypending": true,
+      "admission": "runtime_visual",
+      "path": "dlc/alien-isolation/fidelity/assets/flamethrower.png",
+      "sha256": "cad241a1060632e4fdfa5ed57665325298c0db482cd9e3c993078d41cab76096",
+      "bytes": 1384872,
+      "width": 1536,
+      "height": 1024,
+      "bitDepth": 8,
+      "pngColorType": 6,
+      "gitBlobVerified": true,
+      "copyUnchanged": true,
+      "visualConformityVerified": false,
+      "candidate": false,
+      "repositoryPath": "dlc/alien-isolation/fidelity/assets/flamethrower.png",
+      "exact": false,
+      "canonExact": false,
+      "category": "Armes et équipement",
+      "runtimeIntegrated": true,
+      "label": "Lance-flammes",
+      "bindings": [
+        {
+          "group": "tools",
+          "key": "flame",
+          "asset": "flamethrower"
+        }
+      ],
+      "selectedPrompt": "Create one simple hand-painted stylized 2D inventory icon of the fictional flamethrower prop from the video game Alien: Isolation. Use the attached small inventory screenshot for its recognizable elongated silhouette and muted ivory, dark steel and red color blocks. Depict an inert deactivated video-game prop only, with simplified opaque closed outer shapes. Keep this a readable painted icon with broad shapes and restrained texture, not a photorealistic product rendering. Do not show exposed reservoirs, pipes, circuits, fuel, internal mechanisms or construction details. No functional schematic, diagram, dimensions, instructions or disassembled view. No flame, smoke, muzzle glow, hands or people. Exactly one complete closed prop on a transparent RGBA background, diagonally matching the reference angle, generous clear margin around it. Pixels outside the silhouette fully transparent. No cast shadow, floor, ambient haze, halo, labels, title or watermark. Match the fictional game's general inventory appearance and avoid modern military weapon substitutions.",
+      "use": "Visuel de l’outil existant, montré après son acquisition ; fonctionnement et ressources d’origine conservés.",
+      "remainingWork": "Affiner détails et animations d’usage. Le lance-flammes est une icône stylisée, pas une reproduction métrique."
+    }
+  ],
+  "unproduced": [
+    {
+      "id": "molotov",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "pipebomb",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-idle",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-walk-a",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-walk-b",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    }
+  ],
+  "limits": [
+    "Adaptation autonome condensée 2D/2.5D de la V0.8 : aucune certification globale de fidélité 1:1.",
+    "Les 76 salles ne représentent pas toutes les pièces ni toutes les extensions du jeu commercial ; le réseau global est schématique, sans échelle métrique.",
+    "Les cycles de déplacement ajoutés comportent deux images ; les poses non produites gardent les SVG existants.",
+    "Les six portraits restent associés aux dossiers et transmissions existants ; ils ne créent pas de nouveaux acteurs physiques.",
+    "Les 11 candidats sont exclus du runtime. Leurs armes, équipements ou vaisseaux ne deviennent pas jouables par la présence d’une image.",
+    "Les trois poses Xénomorphe, Molotov et bombe artisanale n’ont pas été produites ; le chasseur conserve ses SVG et sa non-mortalité.",
+    "La tenue EVA ne possède pas une référence complète observée pour jambes et bottes ; ces parties sont extrapolées.",
+    "Le parcours historique de graine 20141007 qui meurt dans m_staff à C05_03 reste une limite de la source ; ce lot visuel ne prétend pas l’avoir corrigé."
+  ]
+}

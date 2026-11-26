@@ -1,0 +1,154 @@
+{
+  "schema": 2,
+  "module": "alien-isolation",
+  "sourceVersion": "0.8.0",
+  "packVersion": "1.0.0",
+  "exact": false,
+  "canonExact": false,
+  "presentation": {
+    "runtimePng": 28,
+    "sourceCandidates": 11,
+    "sourceFilesUnchanged": 646,
+    "pngHashesReverifiedAfterRecovery": 39,
+    "runtimeManifestSha256": "7848840707d4bcc89e517afe1221c5e9b45f045815d1ac4fbc76cb9a771aceb4",
+    "adapterSha256": "6d0e96784d30570e4ae7c76efb9667661be994dafe48cfa072c609104762af47",
+    "sourceCandidatesSha256": "6e420e96c59822cc86fc5a72bdf9d57162e553073eb8ffee5471c6da94f69d7e"
+  },
+  "structuralSpatialAudit": {
+    "schema": 1,
+    "method": "Évaluation structurelle en lecture seule de content.json original : graphe des 112 liaisons parcouru dans les deux sens, seuils comparés aux limites L/R/N/S de chaque salle. Les conditions de chapitre et de progression ne sont pas supprimées.",
+    "sourceGitBlob": "013d51b3c1b8d1536f8e8afc3e0582610039a9b1",
+    "roomCount": 76,
+    "linkCount": 112,
+    "portalCount": 224,
+    "connectedRoomCount": 76,
+    "unreachableRooms": [],
+    "mounts": {
+      "wall": 206,
+      "narrative": 2,
+      "open": 10,
+      "hull": 6
+    },
+    "linkKinds": {
+      "door": 63,
+      "stairs": 19,
+      "transfer": 4,
+      "lift": 8,
+      "vent": 6,
+      "tram": 5,
+      "memory": 1,
+      "passage": 3,
+      "shuttle": 1,
+      "walkway": 2
+    },
+    "wallAlignmentErrors": [],
+    "placementCount": 840,
+    "savePlacements": 61,
+    "terminalPlacements": 66,
+    "propKindCount": 52,
+    "exactMetricMap": false,
+    "canonExact": false,
+    "wallCounts": {
+      "R": 74,
+      "L": 76,
+      "N": 74
+    },
+    "doorPortalCount": 126,
+    "doorPortalsOnWall": 123
+  },
+  "priorLocalValidation": {
+    "scope": "Observations du rendu Skia avant interruption ; runtime et PNG récupérés octet pour octet. Les contrôles des fichiers reconstruits figurent séparément dans recoveryValidation.",
+    "sourceTestsPassed": 536,
+    "integrationTestsPassed": 18,
+    "hostDlcTestsPassed": 49,
+    "nativeRendererChecksPassed": 25,
+    "nativeRenderer": "Skia, pas Chromium",
+    "capturesObserved": 14,
+    "capturesBundledHere": false,
+    "propPlacementsChecked": 127,
+    "selectedTerminalPlacements": 55,
+    "excludedTerminalPlacements": 11,
+    "mobileFramePairsChecked": 4,
+    "projectileCasesChecked": 6,
+    "pngBindingsChecked": 28,
+    "saveStateMutationObserved": false,
+    "limits": [
+      "Les captures locales historiques ne sont pas distribuées ici.",
+      "Un succès Skia ne remplace pas un parcours navigateur.",
+      "Un essai antérieur terminé avec code137 a une cause non établie."
+    ]
+  },
+  "currentBrowserGate": {
+    "workflow": ".github/workflows/alien-isolation-dlc.yml",
+    "integrationScript": "scripts/qa-alien-isolation-integration.py",
+    "fidelityScript": "scripts/qa-alien-isolation-fidelity.py",
+    "statusAtDocumentCreation": "pending-ci",
+    "results": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/80/checks",
+    "evidenceArtifact": "alien-isolation-browser-evidence",
+    "playableArtifact": "alien-isolation-v0.8-fidelity-1.0.0",
+    "note": "Consulter la CI du commit publié. Aucun succès navigateur n’est affirmé par ce document avant son exécution."
+  },
+  "manualReview": [
+    "Silhouette, costume et apparence rapprochés des références visuelles inspectées ; aucun portrait n’est certifié pixel pour pixel.",
+    "Pieds et hauteurs des paires de déplacement raccordés ; deux images ne constituent pas un cycle commercial complet.",
+    "Borne sur support étroit ; moniteur Sevastolink posé sur le bureau SVG conservé.",
+    "Le chasseur en conduit reste masqué ; Marlow ne reçoit pas la tenue EVA d’Amanda.",
+    "Une image manquante conserve son SVG ; aucune entité de jeu n’est supprimée."
+  ],
+  "unproduced": [
+    {
+      "id": "molotov",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "pipebomb",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-idle",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-walk-a",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    },
+    {
+      "id": "xenomorph-walk-b",
+      "status": "not-produced",
+      "reason": "La génération a été refusée par le service d’image ; aucun PNG correspondant n’est livré."
+    }
+  ],
+  "limitations": [
+    "Adaptation autonome condensée 2D/2.5D de la V0.8 : aucune certification globale de fidélité 1:1.",
+    "Les 76 salles ne représentent pas toutes les pièces ni toutes les extensions du jeu commercial ; le réseau global est schématique, sans échelle métrique.",
+    "Les cycles de déplacement ajoutés comportent deux images ; les poses non produites gardent les SVG existants.",
+    "Les six portraits restent associés aux dossiers et transmissions existants ; ils ne créent pas de nouveaux acteurs physiques.",
+    "Les 11 candidats sont exclus du runtime. Leurs armes, équipements ou vaisseaux ne deviennent pas jouables par la présence d’une image.",
+    "Les trois poses Xénomorphe, Molotov et bombe artisanale n’ont pas été produites ; le chasseur conserve ses SVG et sa non-mortalité.",
+    "La tenue EVA ne possède pas une référence complète observée pour jambes et bottes ; ces parties sont extrapolées.",
+    "Le parcours historique de graine 20141007 qui meurt dans m_staff à C05_03 reste une limite de la source ; ce lot visuel ne prétend pas l’avoir corrigé."
+  ],
+  "recoveryValidation": {
+    "sourceTestsPassed": 536,
+    "integrationTestsPassed": 18,
+    "hostDlcTestsPassed": 49,
+    "totalTargetedTestsPassed": 603,
+    "sourceFilesUnchanged": 646,
+    "runtimeFilesVerified": 32,
+    "runtimeBytesVerified": 41856576,
+    "runtimePngVerified": 28,
+    "candidatePngVerified": 11,
+    "generatedPngGitAndSha256Reverified": 39,
+    "isolatedDlcBuildPassed": true,
+    "galleryJavaScriptSyntaxPassed": true,
+    "galleryLocalLinksAndAnchorsPassed": true,
+    "galleryAssetPathsAndHashesPassed": 39,
+    "publicTextAndPathScanPassed": true,
+    "browserRunLocally": false,
+    "nativeRendererRerunAfterRecovery": false
+  }
+}
