@@ -1182,7 +1182,21 @@ const FIORINA_INTEGRATION_SOURCE_ONLY_V114 = new Set([
   '.github/workflows/fiorina-native-v114.yml'
 ]);
 
+// Generated AVP ritual art is source-only; admit this closed batch, never a folder wildcard.
+const AVP_RITUAL_SPRITES_SOURCE_DIRECTORY_20261126 = 'assets/openai/sprites/avp2004-reliefs-v001';
+const AVP_RITUAL_SPRITES_SOURCE_FILES_20261126 = new Set([
+  'assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png',
+  'assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png',
+  'assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png',
+  'assets/openai/sprites/avp2004-reliefs-v001/manifest.json',
+  'assets/openai/sprites/avp2004-reliefs-v001/README.md',
+  'assets/openai/sprites/avp2004-reliefs-v001/GALLERY.md',
+]);
+
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
+  if (path === AVP_RITUAL_SPRITES_SOURCE_DIRECTORY_20261126) return !built && directory;
+  if (typeof path === 'string' && path.startsWith(AVP_RITUAL_SPRITES_SOURCE_DIRECTORY_20261126 + '/'))
+    return !built && !directory && AVP_RITUAL_SPRITES_SOURCE_FILES_20261126.has(path);
   const fiorinaSpriteAdmission = publicFiorinaSpritePathAdmissionV115(path, { directory, built });
   if (fiorinaSpriteAdmission !== null) return fiorinaSpriteAdmission;
   const aliens1986Admission = publicAliens1986DlcPathAdmission(path, { directory, built });

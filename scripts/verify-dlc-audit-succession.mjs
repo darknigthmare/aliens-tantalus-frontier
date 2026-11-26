@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as successors,
   AVP_FIORINA_JOIN_BASELINES_20261125 as joinBaselines,
   AVP_FIORINA_INCOMING_SOURCES_20261125 as incomingSources,
@@ -16,11 +20,15 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_FIORINA_SPRITES_SUCCESSORS_20261125 as spriteSuccessors,
   AVP_FIORINA_V116_BASELINE_20261125 as spriteV116Baseline,
   AVP_FIORINA_V116_SUCCESSORS_20261125 as spriteV116Successors,
+  AVP_RITUAL_SOURCE_BASELINE_20261126 as ritualSourceBaseline,
+  AVP_RITUAL_SOURCE_SUCCESSORS_20261126 as ritualSourceSuccessors,
+  reviewedAvpRitualSourceHostDigest20261126 as advanceRitualSource,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
   reviewedAvpHostDigest20261125 as advance, avpHostRuntimeSources20261125 as runtimeView,
   verifyAvpHostSources20261125 as verify } from './audit-dlc-avp-2004-20261125.mjs';
+import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
 import { reviewedAfterNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
 import { XENO_TRIALS_TANTALUS_JOIN_V206 as xenoJoin,
   reviewedXenoTrialsTantalusJoinV206 } from './audit-xeno-production-assets-v206.mjs';
@@ -120,8 +128,8 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116) source chain/;
+const finalEndpoint = path => ritualSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-AVP-ritual-source-art) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -331,4 +339,72 @@ test('V116 advances exactly four reviewed hosts after the merged V115 receipts',
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceV116(path, 'unchanged'), 'unchanged', path);
   assert.equal(Object.hasOwn(spriteV116Successors, audit), false);
+});
+
+
+test('AVP ritual source art advances only the exact verifier and build filter from the V116 baseline', () => {
+  const paths = ['scripts/verify-public-release-v86.mjs', 'scripts/build-asset-filter.mjs'];
+  assert.equal(ritualSourceBaseline, 'b0df1877a058f0818f96437fdfdea3f21ba7f415');
+  assert.deepEqual(Object.keys(ritualSourceSuccessors), paths);
+  assert.equal(sha(JSON.stringify(ritualSourceSuccessors)), '4e68a694a9e5ade4cacc3904adfacd5363ada19d25c2880f17da2a849c027eab');
+  assert.ok(Object.isFrozen(ritualSourceSuccessors));
+  for (const path of paths) {
+    const receipt = ritualSourceSuccessors[path];
+    assert.ok(Object.isFrozen(receipt));
+    assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
+    assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256);
+    assert.equal(sha(read(path)), receipt.currentSha256);
+    assert.equal(advanceRitualSource(path, receipt.previousSha256), receipt.currentSha256);
+    for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
+      assert.throws(() => advanceRitualSource(path, value), /Broken V116-to-AVP-ritual-source-art source chain/);
+    for (const value of [receipt.previousSha256, receipt.currentSha256])
+      assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+  }
+  for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
+    assert.equal(advanceRitualSource(path, 'unchanged'), 'unchanged', path);
+  assert.equal(Object.hasOwn(ritualSourceSuccessors, audit), false);
+});
+
+test('the real build copy excludes the whole AVP ritual candidate folder and keeps an unrelated asset', async () => {
+  const temporary = await mkdtemp(join(tmpdir(), 'avp-ritual-build-'));
+  try {
+    const source = join(temporary, 'source'), output = join(temporary, 'output');
+    const directory = 'assets/openai/sprites/avp2004-reliefs-v001';
+    await mkdir(join(source, directory, 'unreviewed'), { recursive: true });
+    await writeFile(join(source, directory, 'avp2004-ritual-wall-panel.png'), 'candidate fixture');
+    await writeFile(join(source, directory, 'unreviewed', 'extra.png'), 'unreviewed fixture');
+    await writeFile(join(source, 'assets', 'control.png'), 'unrelated fixture');
+    assert.ok(EXCLUDED_BUILD_ASSET_PATHS.includes(directory));
+    await cp(join(source, 'assets'), join(output, 'assets'), { recursive: true, filter: createBuildAssetFilter(source) });
+    assert.equal(await readFile(join(output, 'assets', 'control.png'), 'utf8'), 'unrelated fixture');
+    await assert.rejects(readFile(join(output, directory, 'avp2004-ritual-wall-panel.png')), { code: 'ENOENT' });
+    await assert.rejects(readFile(join(output, directory, 'unreviewed', 'extra.png')), { code: 'ENOENT' });
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test('AVP ritual source admission is closed, type-specific and excluded from every built distribution', () => {
+  const directory = 'assets/openai/sprites/avp2004-reliefs-v001';
+  const files = [
+  "assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png",
+  "assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png",
+  "assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png",
+  "assets/openai/sprites/avp2004-reliefs-v001/manifest.json",
+  "assets/openai/sprites/avp2004-reliefs-v001/README.md",
+  "assets/openai/sprites/avp2004-reliefs-v001/GALLERY.md"
+];
+  assert.equal(isPublicDistributionPathV86(directory, { directory: true }), true);
+  assert.equal(isPublicDistributionPathV86(directory), false);
+  assert.equal(isPublicDistributionPathV86(directory, { directory: true, built: true }), false);
+  for (const path of files) {
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);
+  }
+  for (const path of [directory + '/extra.png', directory + '/nested/file.png',
+    directory + '/README.md/extra', directory + '/../README.md', directory + '/manifest.JSON']) {
+    assert.equal(isPublicDistributionPathV86(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path, { directory: true }), false, path);
+  }
 });

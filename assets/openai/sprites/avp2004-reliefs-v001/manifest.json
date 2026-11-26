@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-11-26",
+  "repository": "darknigthmare/aliens-tantalus-frontier",
+  "baseCommit": "b0df1877a058f0818f96437fdfdea3f21ba7f415",
+  "relatedMergedPullRequest": 55,
+  "batch": "avp2004-reliefs-v001",
+  "scope": "Three individual PNG source candidates for AVP2004 pyramid reliefs; not gameplay or production-runtime integration.",
+  "spriteCount": 3,
+  "totalPngBytes": 11048227,
+  "faithfulnessPolicy": "Conserver les références et les sources originales ; ne pas déclarer une fidélité 1:1 tant que la comparaison visuelle et le détourage ne sont pas validés.",
+  "notCovered": [
+    "AVP2004-140 : aucune traduction authentifiée des glyphes",
+    "AVP2004-115 : Snowcat en attente de photographies plus exploitables",
+    "Animations, personnages, poses et autres DLC"
+  ],
+  "entries": [
+    {
+      "id": "avp2004-ritual-wall-panel",
+      "bytes": 3751193,
+      "sha256": "cf8e76405fdf7e7489434e47bc30f72240cb2fd0b6059bfd9c0d1e191802d6a9",
+      "git_blob_sha": "7357e2c20af83c5e4dc55941e94923bdc3a09298",
+      "mode": "RGBA",
+      "width": 887,
+      "height": 1774,
+      "alpha_bbox": [
+        0,
+        75,
+        829,
+        1756
+      ],
+      "transparent_pixels": 335763,
+      "opaque_pixels": 1637,
+      "partial_alpha_pixels": 1236138,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_diagnostics": {
+        "nearly_opaque_pixels_250_255": 1212837,
+        "faint_pixels_1_15": 10053,
+        "core_bbox_alpha_ge128": [
+          61,
+          79,
+          826,
+          1689
+        ],
+        "core_bbox_alpha_ge250": [
+          62,
+          80,
+          825,
+          1688
+        ],
+        "median_nonzero_alpha": 253
+      },
+      "file": "avp2004-ritual-wall-panel.png",
+      "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-ritual-wall-panel.png",
+      "status": "source_candidate_generated_not_runtime_admitted",
+      "dlc": "AVP (2004)",
+      "candidateCatalogueIds": [
+        "AVP2004-159",
+        "AVP2004-249"
+      ],
+      "existingRuntimeAsset": "relief",
+      "source": {
+        "type": "photograph_of_original_production_prop",
+        "publisher": "Propstore",
+        "pageUrl": "https://propstore.com/product/avp-alien-vs-predator-2004/lot-509-oversized-antarctic-pyramid-wall-panel/",
+        "imageUrl": "https://images.propstore.com/3414c49bb1aef860c768365080c641d8-1.jpg",
+        "referenceImageSha256": "37ca2138da9a6592f68ed7b71ae77fefbeb0a154221ef3edf915acb341eb52e2",
+        "referenceRegion": "complete photographed panel or tile",
+        "reviewedOn": "2026-11-26",
+        "referencePhotoRedistributed": false
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparentBackgroundRequested": true,
+        "prompt": "Create one production-ready 2D environmental sprite for the game Aliens: Tantalus Frontier, AVP (2004) pyramid DLC, using the attached photograph of an actual film-production ritual wall panel as the sole geometric reference. Isolate ONLY this tall rectangular carved panel, no floor, no pedestal, no background. Orthographic FRONT view, completely visible, centered with a small clear transparent margin, tall portrait aspect. Preserve the exact overall panel proportions (about 1:2), the arrangement and relative sizes of all the depicted figures, horizontal glyph bands, carved linear motifs, round sun medallion near the upper part, standing figure at the right, seated central figure, feet and lower relief as shown. Preserve the sculpted shallow bas-relief rather than creating living characters. Faithfully follow the pictured shapes and wear without inventing readable letters, decorative marks or a different scene. Use the same weathered charcoal-gray, gray-stone highlights and muted rusty brown coloration, with consistent subtle upper-left illumination for a dark 2D game; fine sharp detail that remains legible at reduced sprite size, no glossy 3D plastic. Remove only the white photographic background and photographic framing; preserve the outer edges and visible small mounting holes as part of this source representation. Do not reconstruct invisible reverse side or add any new elements. Exactly ONE separate sprite, no sprite sheet, no title, no watermark, no text outside the carving. True transparent alpha background.",
+        "generatedOn": "2026-11-26"
+      },
+      "visualReview": {
+        "result": "recognizable_reference_based_source_candidate",
+        "pixelExactMatchCertified": false,
+        "observations": [
+          "Composition générale et silhouette reconnaissables ; aucune traduction des glyphes.",
+          "Microreliefs, grains, trous et proportions fines restent à comparer et peuvent différer de la photographie.",
+          "Alpha médian non nul = 253 ; des pixels très faiblement opaques débordent la silhouette principale.",
+          "Le contenu principal reste à l’intérieur du canevas au seuil alpha>=128."
+        ],
+        "requiredBeforeRuntime": [
+          "Nettoyer ou régénérer le détourage sans altérer les motifs attestés.",
+          "Comparer les reliefs et proportions avec un plan du film et la photographie du décor.",
+          "Valider l’échelle, les ancrages, la lisibilité et l’éclairage en jeu."
+        ]
+      }
+    },
+    {
+      "id": "avp2004-serpent-relief-tile",
+      "bytes": 4106711,
+      "sha256": "b78e199fcc0796cbbac443cdc41ded38ab0be22c43931e8d3ab8d872e6be3eb6",
+      "git_blob_sha": "88b0cd389d414418fa26bfe8b7b485c2627959e9",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_bbox": [
+        33,
+        3,
+        1212,
+        1238
+      ],
+      "transparent_pixels": 186676,
+      "opaque_pixels": 233,
+      "partial_alpha_pixels": 1385607,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_diagnostics": {
+        "nearly_opaque_pixels_250_255": 1352947,
+        "faint_pixels_1_15": 16522,
+        "core_bbox_alpha_ge128": [
+          45,
+          32,
+          1209,
+          1216
+        ],
+        "core_bbox_alpha_ge250": [
+          47,
+          34,
+          1207,
+          1215
+        ],
+        "median_nonzero_alpha": 253
+      },
+      "file": "avp2004-serpent-relief-tile.png",
+      "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-serpent-relief-tile.png",
+      "status": "source_candidate_generated_not_runtime_admitted",
+      "dlc": "AVP (2004)",
+      "candidateCatalogueIds": [
+        "AVP2004-159",
+        "AVP2004-249"
+      ],
+      "existingRuntimeAsset": "relief",
+      "source": {
+        "type": "photograph_of_original_production_prop",
+        "publisher": "Propstore",
+        "pageUrl": "https://propstore.com/product/avp-alien-vs-predator-2004/set-of-seven-antarctic-pyramid-tiles/",
+        "imageUrl": "https://images.propstore.com/cf3256ca7787729066795ff32996f30f-1.jpg",
+        "referenceImageSha256": "c914e8eaa183cd1d2c970a05d6c96de0280b7691949b3c1d2e09b258fa7ef138",
+        "referenceRegion": "complete photographed panel or tile",
+        "reviewedOn": "2026-11-26",
+        "referencePhotoRedistributed": false
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparentBackgroundRequested": true,
+        "prompt": "Create one production-ready 2D environment prop sprite for Aliens: Tantalus Frontier, AVP (2004) pyramid DLC, using the attached photo of the actual film-production serpent relief tile as the sole geometric reference. Isolate exactly the single square tile in this photograph. Orthographic FRONT view; preserve the square outside boundary, the original carved serpent shape with its broad lower curved coils, central descending curved tail, the fan of raised ridges from the middle and the concentric rectilinear/radial stone groove pattern. Preserve the exact arrangement, uneven weathering and proportions of the carvings and the small existing mounting holes. Material must remain sculpted worn charcoal-gray artificial stone with pale speckled weathering and the restrained rusty-brown pigment seen in the reference, not a living alien or newly redesigned creature. Subtle upper-left lighting suitable for a dark side-view 2D game, clear sharp contours and details that stay readable at reduced sprite scale. One complete isolated sprite, centered with a small even transparent margin, true alpha background. Remove the white photographic background only. No perspective floor, no cast shadow outside the tile, no new symbols, no text, no labels, no watermark, no sprite sheet. Do not add, remove, rearrange or reinterpret any sculpted motif.",
+        "generatedOn": "2026-11-26"
+      },
+      "visualReview": {
+        "result": "recognizable_reference_based_source_candidate",
+        "pixelExactMatchCertified": false,
+        "observations": [
+          "Composition générale et silhouette reconnaissables ; aucune traduction des glyphes.",
+          "Microreliefs, grains, trous et proportions fines restent à comparer et peuvent différer de la photographie.",
+          "Alpha médian non nul = 253 ; des pixels très faiblement opaques débordent la silhouette principale.",
+          "Le contenu principal reste à l’intérieur du canevas au seuil alpha>=128."
+        ],
+        "requiredBeforeRuntime": [
+          "Nettoyer ou régénérer le détourage sans altérer les motifs attestés.",
+          "Comparer les reliefs et proportions avec un plan du film et la photographie du décor.",
+          "Valider l’échelle, les ancrages, la lisibilité et l’éclairage en jeu."
+        ]
+      }
+    },
+    {
+      "id": "avp2004-mask-relief-tile",
+      "bytes": 3190323,
+      "sha256": "98619e1e4c26c740e322e1f21a29ec9573658ebd52031f87fdff137ddadbee32",
+      "git_blob_sha": "2a5e4045e1659217c0b48cd4f037d7d808be3e1c",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_bbox": [
+        0,
+        0,
+        1230,
+        1254
+      ],
+      "transparent_pixels": 336970,
+      "opaque_pixels": 1079,
+      "partial_alpha_pixels": 1234467,
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_diagnostics": {
+        "nearly_opaque_pixels_250_255": 1202996,
+        "faint_pixels_1_15": 20139,
+        "core_bbox_alpha_ge128": [
+          76,
+          77,
+          1178,
+          1178
+        ],
+        "core_bbox_alpha_ge250": [
+          77,
+          78,
+          1177,
+          1177
+        ],
+        "median_nonzero_alpha": 253
+      },
+      "file": "avp2004-mask-relief-tile.png",
+      "repositoryPath": "assets/openai/sprites/avp2004-reliefs-v001/avp2004-mask-relief-tile.png",
+      "status": "source_candidate_generated_not_runtime_admitted",
+      "dlc": "AVP (2004)",
+      "candidateCatalogueIds": [
+        "AVP2004-159",
+        "AVP2004-249"
+      ],
+      "existingRuntimeAsset": "relief",
+      "source": {
+        "type": "photograph_of_original_production_prop",
+        "publisher": "Propstore",
+        "pageUrl": "https://propstore.com/product/avp-alien-vs-predator-2004/set-of-seven-antarctic-pyramid-tiles/",
+        "imageUrl": "https://images.propstore.com/e2afbe5042d9073bf84a87e217f2940e-1.jpg",
+        "referenceImageSha256": "95285d8c367f33672942cda65fe5cedb16c6991dc8bff89bdfa9f07dcbf43c16",
+        "referenceRegion": "left tile only",
+        "reviewedOn": "2026-11-26",
+        "referencePhotoRedistributed": false
+      },
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "transparentBackgroundRequested": true,
+        "prompt": "Create one production-ready 2D environmental sprite for Aliens: Tantalus Frontier, AVP (2004) pyramid DLC, using the attached photograph of two actual film-production mask relief tiles. Use ONLY the LEFT tile as reference and output ONLY that ONE complete square tile, not the right tile and not a pair. Orthographic FRONT view with its original outer square boundary; preserve the shallow sculpted mask, broad smooth triangular swept upper brow, narrow reddish recessed eyes, small cheek planes and central open sculpted mouth, rectangular stepped side channels, lower fan-shaped collar carving, original thin inner raised border and relative dimensions exactly as in the left photographed tile. It is a stone ritual carving, not a living character or a new helmet design. Preserve charcoal-gray and gray highlights with faint reddish-brown weathering, existing irregular texture and tiny visible fixing holes; subdued upper-left illumination, crisp detailed 2D sprite suitable for the dark Tantalus game aesthetic. Center the entire isolated tile with a small even transparent margin, true alpha background. Remove the white photographic background only. No other tile, no floor or pedestal, no external shadow, no text, no labels, no watermark, no sprite sheet. Do not add any new carved symbols or unseen details.",
+        "generatedOn": "2026-11-26"
+      },
+      "visualReview": {
+        "result": "recognizable_reference_based_source_candidate",
+        "pixelExactMatchCertified": false,
+        "observations": [
+          "Composition générale et silhouette reconnaissables ; aucune traduction des glyphes.",
+          "Microreliefs, grains, trous et proportions fines restent à comparer et peuvent différer de la photographie.",
+          "Alpha médian non nul = 253 ; des pixels très faiblement opaques débordent la silhouette principale.",
+          "Le contenu principal reste à l’intérieur du canevas au seuil alpha>=128."
+        ],
+        "requiredBeforeRuntime": [
+          "Nettoyer ou régénérer le détourage sans altérer les motifs attestés.",
+          "Comparer les reliefs et proportions avec un plan du film et la photographie du décor.",
+          "Valider l’échelle, les ancrages, la lisibilité et l’éclairage en jeu."
+        ]
+      }
+    }
+  ]
+}
