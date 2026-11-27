@@ -1,0 +1,18 @@
+{
+  "repo": "darknigthmare/aliens-tantalus-frontier",
+  "commit": "496996f5ea557d970ec625aa346876f3eaed1c5f",
+  "package_version": "86.0.0",
+  "verified_reads": [
+    "package.json",
+    "index.html lines 1-115",
+    "scripts/build.mjs",
+    "scripts/build-asset-filter.mjs"
+  ],
+  "index_blob_sha": "e0c33c7e04e29985b22be23e6eee5f2260a6c546",
+  "build_blob_sha": "2e6e754d75d25d79181cc88184b8b10e41624f11",
+  "filter_blob_sha": "9ec0958765114919d83b2a2cd3e3e7957debf61d",
+  "written_to_remote": false,
+  "full_build_executed": false,
+  "native_runtime_merged": false,
+  "additive_launcher_tested": "minimal local fixtures only"
+}

@@ -1,0 +1,321 @@
+{
+  "archive": "DLC_ALIEN5_PROJET_LAZARE_V1_CANDIDAT.zip",
+  "archiveSha256": "e83ca79e0d920a328db05f241855e50672bcee70ea4199e408f021f2a560a3b2",
+  "members": [
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/ALIEN5_PROJET_LAZARE_JOUER.html",
+      "bytes": 155386,
+      "compressedBytes": 42647,
+      "crc32": "7267203f",
+      "sha256": "8a68a2a7373c4e64b6276ae3aae8608333c486b586d7ca1176174fa23ea615f8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/CODEX_ALIEN5.html",
+      "bytes": 116900,
+      "compressedBytes": 19374,
+      "crc32": "be27f1cf",
+      "sha256": "82881185a39e8d6ba47c85cf16d2c7798656c29c2daf128e508be888dc34249d",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "compressedBytes": 386,
+      "crc32": "44975c7c",
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/MANIFEST_SHA256.json",
+      "bytes": 5087,
+      "compressedBytes": 2108,
+      "crc32": "6e109651",
+      "sha256": "5cdbf3bdd5def2b3b1e9b128f3ea7495ac4166f14eccdf453aaf39700c96f9d9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/RAPPORT_VISUEL.html",
+      "bytes": 4732275,
+      "compressedBytes": 3560722,
+      "crc32": "13d20f33",
+      "sha256": "0fe010009ff9f68d19d347c6599c583588778c109309e741571e68e59b0ec8b1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/README.md",
+      "bytes": 6535,
+      "compressedBytes": 3185,
+      "crc32": "2c78e4ae",
+      "sha256": "c43ef5a5c398f291e04e9edeb2cfb1306c4477750b8005d70ede173791e6f775",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/docs/CODEX_ALIEN5.md",
+      "bytes": 115307,
+      "compressedBytes": 18543,
+      "crc32": "26d8b96a",
+      "sha256": "e41281a61664a314c6150c71a7a361363cfb24e5a13eeccf8db192f13e21eecc",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/docs/base-audit.json",
+      "bytes": 630,
+      "compressedBytes": 376,
+      "crc32": "b698c4ca",
+      "sha256": "a9a03270acd567ea1826bb08a5ab7e885959360b57c60a7ee221efe90ef29799",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/docs/campaign.json",
+      "bytes": 141874,
+      "compressedBytes": 16730,
+      "crc32": "6f79f7c6",
+      "sha256": "5eb2f6d8d081a29904d8ab2d5b20a5305bc16b98b53854dd7b3725e018f9559b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/core.js",
+      "bytes": 15873,
+      "compressedBytes": 5897,
+      "crc32": "b2c4eca7",
+      "sha256": "a9edee0e3c2a638705fa26f9331d6f28f62866e7a90c8afaf5a753b88486232e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/data.js",
+      "bytes": 81220,
+      "compressedBytes": 15473,
+      "crc32": "b8eaacf1",
+      "sha256": "1f7d70bf5a38749df8d30a6a0ff3b955cfc8d886bb2e8a68d5f45f73c11872e1",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/data.json",
+      "bytes": 141874,
+      "compressedBytes": 16730,
+      "crc32": "6f79f7c6",
+      "sha256": "5eb2f6d8d081a29904d8ab2d5b20a5305bc16b98b53854dd7b3725e018f9559b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/index.html",
+      "bytes": 4010,
+      "compressedBytes": 1757,
+      "crc32": "b0f77f31",
+      "sha256": "af171eed81661ef15c96b168df09db6e12b73150bfb3c0ec866cd913ff14ff0e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/render.js",
+      "bytes": 21878,
+      "compressedBytes": 8495,
+      "crc32": "295a0c8a",
+      "sha256": "68190328f655426b7e849bd65bddba6eea06aa3d5c8044271783acf580c296a9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/style.css",
+      "bytes": 9162,
+      "compressedBytes": 2937,
+      "crc32": "869d5009",
+      "sha256": "98fe9c63507ed00e9f195fe1778958dc9a832a02c51248a10f93cb7d1a389b7e",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/game/ui.js",
+      "bytes": 23314,
+      "compressedBytes": 9009,
+      "crc32": "bac148e3",
+      "sha256": "52e5fb00c71d5e94a36054daa4c67cc3a0a043cc2d623f86fca10610b3cdaab8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/integration/install.mjs",
+      "bytes": 6169,
+      "compressedBytes": 2573,
+      "crc32": "60d1cdff",
+      "sha256": "0f626a927ea546ee1ebf64979cad9c87faa5d59c5a1a97a6d8de23355277b602",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/package.json",
+      "bytes": 235,
+      "compressedBytes": 167,
+      "crc32": "24408b63",
+      "sha256": "184028994844697a04cc267fec96e6d3c753814bafa5ee1d023847dc7a65bea0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/browser-results.json",
+      "bytes": 2995,
+      "compressedBytes": 876,
+      "crc32": "65024727",
+      "sha256": "ae06cfe5e6a6b3bc7e7a971ca5817004d88f2a58e71c721aea90c8c71ea6b6c0",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/core-results.json",
+      "bytes": 3482,
+      "compressedBytes": 1161,
+      "crc32": "e5171951",
+      "sha256": "cd1017b7b89feeed7dcd70515fa45546113681ffe4603010ef8ccc81434e1c57",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/fixture_complete.json",
+      "bytes": 11895,
+      "compressedBytes": 1544,
+      "crc32": "b51a1a64",
+      "sha256": "cf19075acd80eac2f3bf309d35558c874d0181ca38000d3f4ee58141fe147dfe",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/fixture_flood.json",
+      "bytes": 10362,
+      "compressedBytes": 1232,
+      "crc32": "e762a3c5",
+      "sha256": "cc3d1fe3afe7dfd4c3a7c2a7b4eb689a8866292e3ec1a17be9b0fc595f47a97c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/fixture_queen.json",
+      "bytes": 11783,
+      "compressedBytes": 1649,
+      "crc32": "0be3dabc",
+      "sha256": "afd78e9c07ab086d983c2e399b4ae16ac2f9c3b5bea4bfa92c972e34fc0a03f2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/installer-results.json",
+      "bytes": 826,
+      "compressedBytes": 315,
+      "crc32": "3e1bd4ad",
+      "sha256": "528326e4a948133f4f7ef99336d22c0e28292fb84ec2fc8141d41d20845ff43c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/01_menu.png",
+      "bytes": 869001,
+      "compressedBytes": 867176,
+      "crc32": "53768c01",
+      "sha256": "930b2a65188fa5ab5cf43188a02521d1aa70b6d154750583e150f34a467f2349",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/02_quais.png",
+      "bytes": 716659,
+      "compressedBytes": 714187,
+      "crc32": "c56a98c8",
+      "sha256": "e32ace7451e29995fd0df792e2cbe2f55b1879ff5f165b152b4140196dd082ac",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/03_carte.png",
+      "bytes": 199351,
+      "compressedBytes": 196323,
+      "crc32": "a222987a",
+      "sha256": "a360bfac669816d924fbc1fce5d733240ecfd5863d519a45bbc995cdc09127d5",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/04_laboratoire.png",
+      "bytes": 693272,
+      "compressedBytes": 691061,
+      "crc32": "876388e8",
+      "sha256": "54d845b4640c3ac4cf5c505f0461e8461aec5a12ea5c9a43076788b0e02473b8",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/05_couronne.png",
+      "bytes": 764702,
+      "compressedBytes": 762543,
+      "crc32": "a0c2a3b9",
+      "sha256": "e73dfbf827120f40f94721b335e74952ab3be0eeb5627cbe82b1edc850ae7cb4",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/06_epilogue.png",
+      "bytes": 146450,
+      "compressedBytes": 143889,
+      "crc32": "8e09bd23",
+      "sha256": "9f79e49373da37cdad918276d0c27c59427405721fe30b655f3f9e54b9ec263b",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/qa/screenshots/07_mobile_menu.png",
+      "bytes": 150539,
+      "compressedBytes": 139268,
+      "crc32": "a4422c8c",
+      "sha256": "d66cc98ffacde7ac813fb333f41a098dbef1b1de794422dfa733acb3fa0da8e9",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/tests/browser_qa.py",
+      "bytes": 7345,
+      "compressedBytes": 2963,
+      "crc32": "fdfee0b6",
+      "sha256": "54ab3b0c86f7532f10411555057cc0647abf0c15e60608ee46b7a7e92c28e19f",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/tests/core.test.cjs",
+      "bytes": 11131,
+      "compressedBytes": 3886,
+      "crc32": "1dcb6185",
+      "sha256": "7c3964697be44dcb16994820b2504a23a4fef3ee4de90bd378b8e99969d26ea2",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/tests/installer.test.mjs",
+      "bytes": 3628,
+      "compressedBytes": 1209,
+      "crc32": "648796ca",
+      "sha256": "c65e1271243a6f3165c7a4a3109f5fa97c713b410d30b82ea39f2328a637079c",
+      "directory": false,
+      "mode": 33188
+    },
+    {
+      "path": "ALIEN5_PROJET_LAZARE_V1/tools/build_standalone.py",
+      "bytes": 629,
+      "compressedBytes": 396,
+      "crc32": "91fd4a03",
+      "sha256": "71875ae311cdcb3bb8fbf6c9635ee4892d0f7612a2b59541301b8ff596dcde89",
+      "directory": false,
+      "mode": 33188
+    }
+  ]
+}

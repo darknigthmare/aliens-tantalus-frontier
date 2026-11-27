@@ -1,0 +1,1934 @@
+{
+  "schemaVersion": 1,
+  "filename": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar",
+  "parser": "libarchive 3.7.4",
+  "method": "Native libarchive headers; archive_read_data_skip; no member extraction",
+  "complete": true,
+  "headerWarnings": [],
+  "memberCount": 232,
+  "fileCount": 232,
+  "directoryCount": 0,
+  "pngCount": 227,
+  "totalUncompressedBytes": 168760817,
+  "duplicatePaths": [],
+  "unsafePaths": [],
+  "encryptedMembers": [],
+  "memberPayloadCrcVerified": false,
+  "entries": [
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/GALERIE.html",
+      "uncompressedBytes": 3829858,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/INVENTAIRE_IMAGES.txt",
+      "uncompressedBytes": 50939,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/LIRE_MOI.txt",
+      "uncompressedBytes": 1656,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/MANIFESTE_IMAGES.json",
+      "uncompressedBytes": 1643435,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/SHA256SUMS.txt",
+      "uncompressedBytes": 28008,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/aaron_alien3_apres_explosion_costume_original.png",
+      "uncompressedBytes": 634892,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/cassandra_harper_dark_descent_concept_f.png",
+      "uncompressedBytes": 427270,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/corrigan_dark_descent_concept_orange_a.png",
+      "uncompressedBytes": 445465,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/dell_broussard_screenplay_scaphandre_casque_ote.png",
+      "uncompressedBytes": 626634,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/distephano_resurrection_uniforme_usm_original.png",
+      "uncompressedBytes": 605459,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/complement_ancien_pack/purvis_resurrection_tenue_originale.png",
+      "uncompressedBytes": 468962,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ahab_fire_stone_demasque_neca.png",
+      "uncompressedBytes": 1053231,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ahab_fire_stone_demasque_neca_r2.png",
+      "uncompressedBytes": 779291,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ahab_fire_stone_masque_neca.png",
+      "uncompressedBytes": 1016709,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ahab_fire_stone_masque_neca_r2.png",
+      "uncompressedBytes": 828431,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/alec_brand_rescue2_cryosommeil.png",
+      "uncompressedBytes": 485094,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/alec_brand_rescue2_cryosommeil_r2.png",
+      "uncompressedBytes": 464965,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/alec_brand_rescue3_marine.png",
+      "uncompressedBytes": 614577,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/amanda_isolation_combinaison.png",
+      "uncompressedBytes": 675799,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/amanda_isolation_combinaison_r2.png",
+      "uncompressedBytes": 605195,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/amanda_isolation_eva_casque.png",
+      "uncompressedBytes": 699438,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/amanda_isolation_eva_casque_r2.png",
+      "uncompressedBytes": 547051,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/amanda_rescue3_tenue_terrain.png",
+      "uncompressedBytes": 469181,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/andy_romulus_combinaison.png",
+      "uncompressedBytes": 457963,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/andy_romulus_combinaison_r2.png",
+      "uncompressedBytes": 451546,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/angela_foster_omega_survie_arc.png",
+      "uncompressedBytes": 634327,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/apone_aliens_armure_hottoys_film.png",
+      "uncompressedBytes": 703759,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/apone_aliens_armure_hottoys_film_r2.png",
+      "uncompressedBytes": 566304,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/axel_isolation_bomber_ref_integrale.png",
+      "uncompressedBytes": 1499619,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/axel_isolation_bomber_ref_integrale_r2.png",
+      "uncompressedBytes": 1677988,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/axel_isolation_bomber_ref_integrale_r3_alpha.png",
+      "uncompressedBytes": 1304172,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/bella_colonial_marines_promo.png",
+      "uncompressedBytes": 579937,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/bishop_aliens_combinaison.png",
+      "uncompressedBytes": 533753,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/bishop_aliens_combinaison_r2.png",
+      "uncompressedBytes": 388165,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/bishop_gibson_v1.png",
+      "uncompressedBytes": 446001,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/bishop_gibson_v2.png",
+      "uncompressedBytes": 440863,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/brett_alien_1979_chemise.png",
+      "uncompressedBytes": 541390,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/call_resurrection_gilet.png",
+      "uncompressedBytes": 514687,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/call_resurrection_sans_gilet.png",
+      "uncompressedBytes": 454338,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/call_resurrection_sans_gilet_r2.png",
+      "uncompressedBytes": 414464,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/call_resurrection_sans_gilet_r3.png",
+      "uncompressedBytes": 362147,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/christie_resurrection_manteau_ref_integrale.png",
+      "uncompressedBytes": 620096,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/christie_resurrection_manteau_ref_integrale_r2.png",
+      "uncompressedBytes": 498931,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/clemens_alien3_manteau_sauvetage_ref_integrale.png",
+      "uncompressedBytes": 678789,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/clemens_alien3_manteau_sauvetage_ref_integrale_r2.png",
+      "uncompressedBytes": 522323,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/crowe_dernier_lot.png",
+      "uncompressedBytes": 662259,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/curly_earth_combinaison.png",
+      "uncompressedBytes": 399015,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dallas_alien_1979_eva.png",
+      "uncompressedBytes": 863658,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dallas_alien_1979_uniforme.png",
+      "uncompressedBytes": 592410,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/daniels_covenant_exploration_casquette.png",
+      "uncompressedBytes": 553567,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/daniels_covenant_exploration_casquette_r2.png",
+      "uncompressedBytes": 522922,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/davis01_rogue_incursion.png",
+      "uncompressedBytes": 1677183,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/davis01_rogue_incursion_r2.png",
+      "uncompressedBytes": 1446545,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dayton_thaw_tenue_polaire.png",
+      "uncompressedBytes": 587086,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dietrich_dernier_lot.png",
+      "uncompressedBytes": 682903,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_manteau_original.png",
+      "uncompressedBytes": 948486,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_manteau_original_r2.png",
+      "uncompressedBytes": 868437,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_manteau_original_r3.png",
+      "uncompressedBytes": 771924,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_veste_courte_originale.png",
+      "uncompressedBytes": 692661,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_veste_courte_originale_r2.png",
+      "uncompressedBytes": 672119,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dillon_alien3_veste_courte_originale_r3.png",
+      "uncompressedBytes": 576592,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/drake_aliens_smartgun_hottoys_film.png",
+      "uncompressedBytes": 811878,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/drake_aliens_smartgun_hottoys_film_r2.png",
+      "uncompressedBytes": 641696,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dutch_avp_arcade_cyborg.png",
+      "uncompressedBytes": 821490,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/dutch_avp_arcade_cyborg_r2.png",
+      "uncompressedBytes": 624460,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ferro_dernier_lot.png",
+      "uncompressedBytes": 514589,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/frost_aliens_armure_m240.png",
+      "uncompressedBytes": 749755,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/frost_aliens_armure_m240_r2.png",
+      "uncompressedBytes": 688109,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/frost_aliens_armure_m240_r3.png",
+      "uncompressedBytes": 691186,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/frost_aliens_armure_m240_r4.png",
+      "uncompressedBytes": 750591,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/frost_aliens_armure_m240_r5.png",
+      "uncompressedBytes": 631075,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/gabriel_cruz_alien2021_6_eva.png",
+      "uncompressedBytes": 733840,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/gabriel_cruz_alien2021_6_eva_r2.png",
+      "uncompressedBytes": 773267,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/galgo_fire_stone4_tenue_chasseur.png",
+      "uncompressedBytes": 687313,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/galgo_fire_stone4_tenue_chasseur_r2.png",
+      "uncompressedBytes": 640460,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/gorman_dernier_lot.png",
+      "uncompressedBytes": 645801,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/harrison_avp2_production_concept.png",
+      "uncompressedBytes": 601510,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/harrison_avp2_production_concept_r2.png",
+      "uncompressedBytes": 523253,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/herk_mondo_heat_tenue_chasseur.png",
+      "uncompressedBytes": 721120,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/herk_mondo_heat_tenue_chasseur_r2.png",
+      "uncompressedBytes": 594938,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/herrera_fireteam_concept_officiel.png",
+      "uncompressedBytes": 536484,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/herrera_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 446960,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_casque.png",
+      "uncompressedBytes": 759015,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_casque_r2.png",
+      "uncompressedBytes": 607173,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_sans_casque.png",
+      "uncompressedBytes": 783771,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_sans_casque_r2.png",
+      "uncompressedBytes": 680055,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_m41a_v1.png",
+      "uncompressedBytes": 730977,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_m41a_v2.png",
+      "uncompressedBytes": 1525143,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_wilks_book_two_tenue_interieure.png",
+      "uncompressedBytes": 709861,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hoenikker_fireteam_concept_officiel.png",
+      "uncompressedBytes": 532163,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hoenikker_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 431863,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/holloway_prometheus_exploration_sans_casque.png",
+      "uncompressedBytes": 530181,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/holloway_prometheus_exploration_sans_casque_r2.png",
+      "uncompressedBytes": 445770,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_aliens_armure_casque.png",
+      "uncompressedBytes": 697887,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_aliens_armure_casque_r2.png",
+      "uncompressedBytes": 577337,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_aliens_armure_sans_casque.png",
+      "uncompressedBytes": 783437,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_aliens_armure_sans_casque_r2.png",
+      "uncompressedBytes": 607160,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_m41a_v1.png",
+      "uncompressedBytes": 798009,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hudson_m41a_v2.png",
+      "uncompressedBytes": 685427,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/jeremy_cruz_colonial_marines_promo.png",
+      "uncompressedBytes": 703696,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/jeri_stronghold_eaglemoss43.png",
+      "uncompressedBytes": 969061,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/joe_hermit_earth_neverland_gilet.png",
+      "uncompressedBytes": 469147,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/joe_hermit_earth_neverland_gilet_r2.png",
+      "uncompressedBytes": 455515,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/johner_resurrection_tenue_betty.png",
+      "uncompressedBytes": 574316,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/johner_resurrection_tenue_betty_r2.png",
+      "uncompressedBytes": 536728,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/johner_resurrection_tenue_betty_r3.png",
+      "uncompressedBytes": 470106,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/jonas_harper_dark_descent_uniforme.png",
+      "uncompressedBytes": 414808,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/jones_alien_1979.png",
+      "uncompressedBytes": 1244989,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/kane_alien_1979_eva.png",
+      "uncompressedBytes": 866929,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/kane_alien_1979_uniforme.png",
+      "uncompressedBytes": 547161,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/kay_dernier_lot.png",
+      "uncompressedBytes": 476987,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/kirsh_earth_uniforme.png",
+      "uncompressedBytes": 467625,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ko_fireteam_pilote_concept_officiel.png",
+      "uncompressedBytes": 565346,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ko_fireteam_pilote_concept_officiel_r2.png",
+      "uncompressedBytes": 455064,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ko_fireteam_pilote_modele_jeu.png",
+      "uncompressedBytes": 497938,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ko_fireteam_pilote_modele_jeu_r2.png",
+      "uncompressedBytes": 404779,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/lambert_alien_1979_eva.png",
+      "uncompressedBytes": 832960,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/lambert_alien_1979_uniforme.png",
+      "uncompressedBytes": 496575,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/lex_dernier_lot.png",
+      "uncompressedBytes": 775847,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/linn_avp_arcade.png",
+      "uncompressedBytes": 717155,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/linn_avp_arcade_r2.png",
+      "uncompressedBytes": 599267,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/linn_avp_arcade_r3.png",
+      "uncompressedBytes": 608095,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/lisbeth_hutchins_stasis_interrupted_tenue_civile.png",
+      "uncompressedBytes": 564478,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/machiko_neca_armure_masque.png",
+      "uncompressedBytes": 806096,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/machiko_neca_armure_masque_r2.png",
+      "uncompressedBytes": 629245,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/machiko_neca_armure_sans_masque.png",
+      "uncompressedBytes": 1687480,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/machiko_neca_armure_sans_masque_r2.png",
+      "uncompressedBytes": 1527487,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/maeko_hayes_dark_descent_corporate.png",
+      "uncompressedBytes": 369093,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/maeko_hayes_dark_descent_survivante.png",
+      "uncompressedBytes": 1572659,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/marla_bookard_dark_descent_medicale.png",
+      "uncompressedBytes": 480262,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/martine_roby_screenplay5_combinaison_detecteur.png",
+      "uncompressedBytes": 586783,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/navarro_romulus_veste_cuir_ref_integrale.png",
+      "uncompressedBytes": 569225,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/navarro_romulus_veste_cuir_ref_integrale_r2.png",
+      "uncompressedBytes": 421890,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/newt_aliens_colonie.png",
+      "uncompressedBytes": 438970,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/newt_billie_book_two_combinaison_rouge.png",
+      "uncompressedBytes": 595381,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/newt_casey_v1.png",
+      "uncompressedBytes": 413675,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/newt_casey_v2.png",
+      "uncompressedBytes": 333316,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/nibs_earth_combinaison.png",
+      "uncompressedBytes": 407411,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/nina_taylor_isolation_torrens_ref_integrale.png",
+      "uncompressedBytes": 1522439,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/nina_taylor_isolation_torrens_ref_integrale_r2.png",
+      "uncompressedBytes": 1327164,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/olivia_shipp_fireteam_concept_officiel.png",
+      "uncompressedBytes": 477260,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/olivia_shipp_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 423595,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/olivia_shipp_fireteam_concept_officiel_r3.png",
+      "uncompressedBytes": 430503,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/olivia_shipp_fireteam_concept_officiel_r4.png",
+      "uncompressedBytes": 396064,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/oneal_colonial_marines_promo.png",
+      "uncompressedBytes": 695878,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/park_fireteam_concept_officiel.png",
+      "uncompressedBytes": 547465,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/park_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 420745,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/parker_alien_1979_uniforme.png",
+      "uncompressedBytes": 632546,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/rain_dbd.png",
+      "uncompressedBytes": 411562,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/rain_romulus_exploration.png",
+      "uncompressedBytes": 982425,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/rain_romulus_f44aa.png",
+      "uncompressedBytes": 724711,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/rico_martinez_dark_descent_armure.png",
+      "uncompressedBytes": 591714,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/rico_martinez_dark_descent_armure_r2.png",
+      "uncompressedBytes": 491821,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley8_resurrection_betty.png",
+      "uncompressedBytes": 649697,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley8_resurrection_betty_r2.png",
+      "uncompressedBytes": 623093,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley8_resurrection_betty_r3.png",
+      "uncompressedBytes": 497282,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien3_fiorina.png",
+      "uncompressedBytes": 680575,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_nostromo.png",
+      "uncompressedBytes": 791218,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_nostromo_r2.png",
+      "uncompressedBytes": 666085,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_nostromo_r3.png",
+      "uncompressedBytes": 619961,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_nostromo_r4_reconstruction.png",
+      "uncompressedBytes": 673866,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_scaphandre.png",
+      "uncompressedBytes": 992596,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_scaphandre_r2.png",
+      "uncompressedBytes": 832943,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_alien_1979_scaphandre_r3.png",
+      "uncompressedBytes": 643187,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_bomber.png",
+      "uncompressedBytes": 760033,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_bomber_r2.png",
+      "uncompressedBytes": 613236,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_exploration.png",
+      "uncompressedBytes": 681928,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_exploration_r2.png",
+      "uncompressedBytes": 739557,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_exploration_r3.png",
+      "uncompressedBytes": 586016,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_power_loader.png",
+      "uncompressedBytes": 1566381,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_power_loader_r2.png",
+      "uncompressedBytes": 1513363,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_power_loader_r3.png",
+      "uncompressedBytes": 1212436,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_sauvetage.png",
+      "uncompressedBytes": 844527,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_sauvetage_r2.png",
+      "uncompressedBytes": 707560,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_sauvetage_r3.png",
+      "uncompressedBytes": 621801,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_aliens_1986_sauvetage_r4_reconstruction.png",
+      "uncompressedBytes": 679890,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_fortnite_default.png",
+      "uncompressedBytes": 494112,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_fortnite_nostromo.png",
+      "uncompressedBytes": 533545,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_narcissus_scaphandre_v1.png",
+      "uncompressedBytes": 872466,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_narcissus_scaphandre_v2.png",
+      "uncompressedBytes": 690036,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/ripley_narcissus_sommeil.png",
+      "uncompressedBytes": 383067,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/saira_kabiri_dark_descent_concept_final.png",
+      "uncompressedBytes": 391792,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/santos_fireteam_concept_officiel.png",
+      "uncompressedBytes": 459077,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/santos_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 408536,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/savane_fireteam_concept_officiel.png",
+      "uncompressedBytes": 510933,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/savane_fireteam_concept_officiel_r2.png",
+      "uncompressedBytes": 395884,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/scar_avp_armure_demasque_ref_integrale.png",
+      "uncompressedBytes": 906126,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/scar_avp_armure_demasque_ref_integrale_r2.png",
+      "uncompressedBytes": 711189,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/scar_avp_armure_demasque_ref_integrale_r3.png",
+      "uncompressedBytes": 703550,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/sebastian_avp_expedition_ref_integrale.png",
+      "uncompressedBytes": 544763,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/sebastian_avp_expedition_ref_integrale_r2.png",
+      "uncompressedBytes": 436864,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/selkirk_salvation_tenue_cuisinier.png",
+      "uncompressedBytes": 548484,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/selkirk_salvation_tenue_cuisinier_r2.png",
+      "uncompressedBytes": 530991,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/shaw_prometheus_exploration.png",
+      "uncompressedBytes": 533304,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/shaw_prometheus_scaphandre_casque_ref_integrale.png",
+      "uncompressedBytes": 1459689,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/shaw_prometheus_scaphandre_casque_ref_integrale_r2.png",
+      "uncompressedBytes": 1852650,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/shaw_prometheus_scaphandre_casque_ref_integrale_r3_alpha.png",
+      "uncompressedBytes": 1423637,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/slightly_earth_combinaison.png",
+      "uncompressedBytes": 469650,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/slightly_earth_combinaison_r2.png",
+      "uncompressedBytes": 456860,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/smee_earth_combinaison.png",
+      "uncompressedBytes": 473493,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/specimen6_avp2010_promotion_guerriere.png",
+      "uncompressedBytes": 1588123,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/spence_anchorpoint_v1.png",
+      "uncompressedBytes": 482241,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/spence_anchorpoint_v2.png",
+      "uncompressedBytes": 483841,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/spunkmeyer_dernier_lot.png",
+      "uncompressedBytes": 528381,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tennessee_covenant_eva_jaune_ref_integrale.png",
+      "uncompressedBytes": 1820456,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tennessee_covenant_eva_jaune_ref_integrale_r2.png",
+      "uncompressedBytes": 1846712,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tennessee_covenant_eva_jaune_ref_integrale_r3_alpha.png",
+      "uncompressedBytes": 1620626,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tennessee_covenant_scaphandre_iva.png",
+      "uncompressedBytes": 731114,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tennessee_covenant_scaphandre_iva_r2.png",
+      "uncompressedBytes": 613872,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tootles_earth_combinaison.png",
+      "uncompressedBytes": 458958,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/tyler_dernier_lot.png",
+      "uncompressedBytes": 566377,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/vasquez_aliens_bdu_pistolet.png",
+      "uncompressedBytes": 518772,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/vasquez_aliens_bdu_pistolet_r2.png",
+      "uncompressedBytes": 501134,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/vasquez_aliens_bdu_pistolet_r3.png",
+      "uncompressedBytes": 457772,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/vasquez_aliens_smartgun.png",
+      "uncompressedBytes": 842220,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/vasquez_aliens_smartgun_r2.png",
+      "uncompressedBytes": 687197,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wascylewski_dead_orbit_eva.png",
+      "uncompressedBytes": 1850069,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wascylewski_dead_orbit_interieur.png",
+      "uncompressedBytes": 588907,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wendy_earth_combinaison.png",
+      "uncompressedBytes": 469477,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/weyland_dernier_lot.png",
+      "uncompressedBytes": 664140,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wierzbowski_dernier_lot.png",
+      "uncompressedBytes": 715293,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/willa_hunslet_dark_descent_casque.png",
+      "uncompressedBytes": 434994,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/willa_hunslet_dark_descent_sans_casque.png",
+      "uncompressedBytes": 439079,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/winter_colonial_marines_promo.png",
+      "uncompressedBytes": 1936040,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/winter_colonial_marines_promo_r2.png",
+      "uncompressedBytes": 1640624,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wolf_avpr_chasse_masque_ref_integrale.png",
+      "uncompressedBytes": 761884,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/wolf_avpr_chasse_masque_ref_integrale_r2.png",
+      "uncompressedBytes": 629613,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/zasha_zahn_thaw_tenue_polaire.png",
+      "uncompressedBytes": 616063,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/zasha_zahn_thaw_tenue_polaire_r2.png",
+      "uncompressedBytes": 543795,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/zula_defiance1_compression.png",
+      "uncompressedBytes": 769281,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/zula_rogue_incursion.png",
+      "uncompressedBytes": 1798800,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/zula_rogue_incursion_r2.png",
+      "uncompressedBytes": 1611723,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    }
+  ],
+  "filenameMatches": [
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_casque.png",
+      "uncompressedBytes": 759015,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_casque_r2.png",
+      "uncompressedBytes": 607173,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_sans_casque.png",
+      "uncompressedBytes": 783771,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_aliens_armure_sans_casque_r2.png",
+      "uncompressedBytes": 680055,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_m41a_v1.png",
+      "uncompressedBytes": 730977,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_m41a_v2.png",
+      "uncompressedBytes": 1525143,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06/images/conversation/hicks_wilks_book_two_tenue_interieure.png",
+      "uncompressedBytes": 709861,
+      "directory": false,
+      "fileType": 32768,
+      "encrypted": false,
+      "unsafePath": false
+    }
+  ]
+}
+

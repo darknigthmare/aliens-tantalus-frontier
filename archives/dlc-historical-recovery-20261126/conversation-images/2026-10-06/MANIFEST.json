@@ -1,0 +1,143 @@
+{
+  "archiveId": "conversation-images/2026-10-06",
+  "originalFilename": "ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar",
+  "bytes": 168791485,
+  "sha256": "4e5a50ea8b95eb92614d0e57d48c16064dc2f8ce4a5ae208446b1618ae70882a",
+  "format": "rar",
+  "preservation": "exact-original-bytes",
+  "memberCount": 232,
+  "pngOccurrences": 227,
+  "rarPayloadCrc32": "not-tested",
+  "nativeInventory": {
+    "parser": "libarchive 3.7.4",
+    "complete": true,
+    "headerWarnings": 0,
+    "duplicatePaths": 0,
+    "unsafePaths": 0,
+    "encryptedMembers": 0
+  },
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "99eeb0daa3f47199b7d786b8a12e17274c3e4eaeac8cf410299e71b8c86a2287",
+      "gitBlobSha1": "52ae80cdf69d6daf1b6f70b9bec1920906f0f9bd"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part002",
+      "offset": 10485760,
+      "bytes": 10485760,
+      "sha256": "bd7823dd220f5b71b150789ac3396c6ca9b8f958cfcc5a1a08293a1238ce24a1",
+      "gitBlobSha1": "84acb7168733cad75554b9945554e4623436494e"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part003",
+      "offset": 20971520,
+      "bytes": 10485760,
+      "sha256": "b2ad171c86f80831d6597752e6b1a008d31690a1d845b2561a122d6fe0452ae2",
+      "gitBlobSha1": "3031c418be551951d1942f80f32cf7fab3473654"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part004",
+      "offset": 31457280,
+      "bytes": 10485760,
+      "sha256": "7eae3c61ae1c7ae35932e9b4b1ffbe2ab9e27d933a618d4cd24b6b4ba9a2609c",
+      "gitBlobSha1": "627615487e0896f6f78c01f464f8883eedfc2252"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part005",
+      "offset": 41943040,
+      "bytes": 10485760,
+      "sha256": "7346c167b5b3de1e626124688aa85933704e71453c1d0aba8c3ab937a8b371be",
+      "gitBlobSha1": "7e91813c3d271dda1c8c9f955d169c95c14fb1f7"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part006",
+      "offset": 52428800,
+      "bytes": 10485760,
+      "sha256": "b930d85de55699ee4ed8637d24d2911c99bcb27d4ae007b62723f2662e74710c",
+      "gitBlobSha1": "f8c1f8ab6cf73990905c0eb988b1b8d368e6bd97"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part007",
+      "offset": 62914560,
+      "bytes": 10485760,
+      "sha256": "6a9e1f881a3fd9b50e026c7cac152702716420a6cc5e6f9da7b796f361659aa8",
+      "gitBlobSha1": "ab2dd6cbf11f541a58cbb663f7f209b173e0043e"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part008",
+      "offset": 73400320,
+      "bytes": 10485760,
+      "sha256": "6e728dacd8b52c889ca3989619171b053395deea4c5d3ea282ff6b16ba6788b6",
+      "gitBlobSha1": "06f20b4c119faf2523fb66b80454ce9fd118a87d"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part009",
+      "offset": 83886080,
+      "bytes": 10485760,
+      "sha256": "e9e3ef7810f77ea2aa12136eaa3680b2a4706c91b51254e4bfad3a051a785823",
+      "gitBlobSha1": "0547ab8a2c3bd56e1f3e0068016502c7592cb92e"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part010",
+      "offset": 94371840,
+      "bytes": 10485760,
+      "sha256": "d11239f40e79381745b1996e8b2ff9ea725e1c307613ed622a84a6f68dae4784",
+      "gitBlobSha1": "55e0d95cd7a9debf77d3cfbd32aea30be5340fbf"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part011",
+      "offset": 104857600,
+      "bytes": 10485760,
+      "sha256": "3c06e9befcfad8d5e8e1e2c3de16e34ceba3b16cfab88a2de3b5544be2cf73e6",
+      "gitBlobSha1": "5038400fa7ae45ca16d7fe675455f65fe631365c"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part012",
+      "offset": 115343360,
+      "bytes": 10485760,
+      "sha256": "768217bb81e1548f9f06f8e556103d80e22ce232958692ff4297bad9e14ff3d9",
+      "gitBlobSha1": "dc55f829358632438638a914dcb2c04bdb2d213a"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part013",
+      "offset": 125829120,
+      "bytes": 10485760,
+      "sha256": "bc618ffbfca95647be73db3399414bfdad6d230657e3a00041530f9de4140c06",
+      "gitBlobSha1": "ffc24e187d4bc4e5d28988f103de83cae1840f84"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part014",
+      "offset": 136314880,
+      "bytes": 10485760,
+      "sha256": "2e7a9189a8d853ab35517f648405195167650eda98c7a119755c4088b6d4bf4c",
+      "gitBlobSha1": "bf286ba022252278950685cfc9119cad942eb8b4"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part015",
+      "offset": 146800640,
+      "bytes": 10485760,
+      "sha256": "c1cef9dd443b1c6002ad0e155260e53c2fca5a974a92564ed0309edf4568067c",
+      "gitBlobSha1": "2cebd75c0fd9d001b70bbab2238aa1bbe53fb48e"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part016",
+      "offset": 157286400,
+      "bytes": 10485760,
+      "sha256": "9b4058011231e625cf4addeaef0a66abffdca93ba876a52453af24b9376d9897",
+      "gitBlobSha1": "65d27845be990b961ef1f03ca95e82b9f429abe9"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/ALIEN_IMAGES_CONVERSATION_COMPLETE_2026-10-06.rar.part017",
+      "offset": 167772160,
+      "bytes": 1019325,
+      "sha256": "7e4a268b75e6e2edcc54b19d5fd446d81a5470deca6794368b24a6b5fa8491fd",
+      "gitBlobSha1": "e59ec8984634ebc59a6f45b6c95b0ab2abc8b95d"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/RAR_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/conversation-images/2026-10-06/MANIFEST.json"
+}
+

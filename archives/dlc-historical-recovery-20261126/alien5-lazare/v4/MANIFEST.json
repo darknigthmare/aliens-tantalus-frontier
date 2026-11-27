@@ -1,0 +1,122 @@
+{
+  "archiveId": "alien5-lazare/v4",
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip",
+  "bytes": 34123255,
+  "sha256": "5b62b7bec7a09cf4fdf2d3fed4c8b958064ce8bb0c10f8430993fe750d2d79d9",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 401,
+  "pngOccurrences": 0,
+  "zipCrc32": "pass-all-members",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "d508ff030da8f211ff6c717c018e421382f8ff6a5ff2159231dc96c14e0dee26",
+      "gitBlobSha1": "cb839d5ad007c349ad6bc8854a0de1db1572b33c"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip.part002",
+      "offset": 10485760,
+      "bytes": 10485760,
+      "sha256": "8f4a66c8a508e5d6380915d582e048d300a56236aa5756ce464a2b7d312b236e",
+      "gitBlobSha1": "c48427876526c05d845be0d7c161bee2b4c4af76"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip.part003",
+      "offset": 20971520,
+      "bytes": 10485760,
+      "sha256": "230810f75b0504b735e494cac25e34c1c3ced7e092c597f20fcd04e426bf6303",
+      "gitBlobSha1": "8e56c38bdbe06b24956fdb713d526b85b8541ef8"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/DLC_ALIEN5_PROJET_LAZARE_V4_CANDIDAT.zip.part004",
+      "offset": 31457280,
+      "bytes": 2665975,
+      "sha256": "aa604fcf829fdc9fbacad395cfed583fc5fe4f4d85486168ffdc7f2c96901357",
+      "gitBlobSha1": "26a6a9fbc55b64d3645b14ebf4fcc5fe693dd860"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/MANIFEST.json",
+  "documents": [
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/CHANGELOG_V3.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/CHANGELOG_V3.md",
+      "bytes": 1732,
+      "sha256": "2ad0eb6bc73593f9a9e6d594213c12d9959fd2642d655d774e37d27fa96dad7f",
+      "gitBlobSha1": "6da6a4d9bea65dfb2114fc87494b35a579bbead5"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/CHANGELOG_V4.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/CHANGELOG_V4.md",
+      "bytes": 2083,
+      "sha256": "9ce526ebc01f35be8b289f69a0cd48be0d3387a4a7360a3f3e8ce2bc551324cf",
+      "gitBlobSha1": "a8fb17769a90b58bc8c23defeac3ad8f42d7ab07"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/LICENSE_NOTICE.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "gitBlobSha1": "015f0078a32ab032ab2f0f885dde9a6053b7a78b"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/README.md",
+      "bytes": 7179,
+      "sha256": "53c9000241f27421cf3f8bc63b57040e2fb4a8fcf538667d719620a31b75e0e7",
+      "gitBlobSha1": "a87bf369b33c667b3b466cd3deec279ba7a2b7ff"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/docs/CODEX_ALIEN5_V3.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/docs/CODEX_ALIEN5_V3.md",
+      "bytes": 34379,
+      "sha256": "02294eebf912746b3106e4ef7e8ebb53516f28188a846ac703fdfeebbb7b36b7",
+      "gitBlobSha1": "e63a6501c9b9c5de2fa54dd31d9a603c8d465145"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/docs/CODEX_REGLES_V4.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/docs/CODEX_REGLES_V4.md",
+      "bytes": 17898,
+      "sha256": "2d2bd57f1f05992a3891c4e9117654ce2bb1d6617d3619f284b31bdf3aa7940e",
+      "gitBlobSha1": "372c505620186fe500131a3b64359a5f3f986947"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/docs/REGISTRE_CLOISONS_NICHES_V4.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/docs/REGISTRE_CLOISONS_NICHES_V4.json",
+      "bytes": 6059,
+      "sha256": "4165b96e5b9bad32a32cc0a23ecf2733b3c0a30998f8824bedd864732b3e42d3",
+      "gitBlobSha1": "c8bd2ed65d9f37b309bb4abad0f1422478f08b12"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/docs/base-audit.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/docs/base-audit.json",
+      "bytes": 773,
+      "sha256": "124e7f7a8f15bc447073035dd955375a8375c3024d25a502540f311c41b420b1",
+      "gitBlobSha1": "764f96604a72253afa7181c5c5fcfb522d8894ea"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/docs/campaign.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/docs/campaign.json",
+      "bytes": 301733,
+      "sha256": "4bb9735e1a04e4b807e2b469400fe1e3c6819d86d2e823787ef4a78e2b44d490",
+      "gitBlobSha1": "6d4e7fc22b69ea234f6d2ec95b40debbd973fd0e"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/game/data.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/game/data.json",
+      "bytes": 301733,
+      "sha256": "4bb9735e1a04e4b807e2b469400fe1e3c6819d86d2e823787ef4a78e2b44d490",
+      "gitBlobSha1": "6d4e7fc22b69ea234f6d2ec95b40debbd973fd0e"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V4/qa/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v4/documents/ALIEN5_PROJET_LAZARE_V4/qa/README.md",
+      "bytes": 2626,
+      "sha256": "d0e0725660420937201fd23bf214a2ceb38d1061e4b2e91e136f7b764fa86eed",
+      "gitBlobSha1": "3b9f1e932faa9131d66c29769aaccd5baf25d76b"
+    }
+  ]
+}

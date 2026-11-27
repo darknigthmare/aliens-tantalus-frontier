@@ -1,0 +1,1806 @@
+{
+  "schemaVersion": 1,
+  "filename": "ALIEN_EARTH_DLC_V8_MODULE_COMPLET.zip",
+  "method": "Python zipfile, every member streamed and CRC32 checked; no member extracted",
+  "complete": true,
+  "allMemberCrc32Verified": true,
+  "memberCount": 199,
+  "fileCount": 199,
+  "directoryCount": 0,
+  "pngCount": 69,
+  "duplicatePaths": [],
+  "unsafePaths": [],
+  "entries": [
+    {
+      "path": "ALIEN_EARTH_DLC_V8/JOUER_ALIEN_EARTH_V8.html",
+      "bytes": 675452,
+      "compressedBytes": 151545,
+      "crc32": "1fa18c3f",
+      "sha256": "9e5bce57098322525a9fba3dde42a6f4dbbcc17c6888a2cc164c036e72fa20bc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/NOTICE_FR.md",
+      "bytes": 628,
+      "compressedBytes": 390,
+      "crc32": "930a88a9",
+      "sha256": "220583a59b60ac4c70c12dade94891800d2eaf54eca81dfee24534c9436feb72",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/README_FR.md",
+      "bytes": 9818,
+      "compressedBytes": 4544,
+      "crc32": "f4d5558d",
+      "sha256": "20d2306d9fd859fb72f1fb559c2f8d796ea9637ab67415fe276c36ae35ca656f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/README.md",
+      "bytes": 697,
+      "compressedBytes": 414,
+      "crc32": "589bf6f2",
+      "sha256": "c6f979a0283886aadd38f061bc6ea0c8ec1f8b0863ffab04a111b8ac6c2b9ff0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v1.json",
+      "bytes": 188271,
+      "compressedBytes": 21772,
+      "crc32": "85c5f284",
+      "sha256": "d3bd70bd6cf3bbfdd9dae65dd3d1f84d17cc1e5b607dc506dc553509d5119dd3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v2.json",
+      "bytes": 337552,
+      "compressedBytes": 36979,
+      "crc32": "74b6e9ce",
+      "sha256": "6fb9a3871120041d06fb90ff4d1c801b08acbe2fd04f1f44418df107dff08791",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v3.json",
+      "bytes": 390308,
+      "compressedBytes": 41211,
+      "crc32": "d29c6523",
+      "sha256": "c95c90c39d0d6a45724412acfc0e04fe562d1421f322be92abd751ae69da9460",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v4.json",
+      "bytes": 467073,
+      "compressedBytes": 48238,
+      "crc32": "10bae17e",
+      "sha256": "e312174894938b45ab593e088a5af90bb6eb3e0397bc0ca087cde63b623a0e0c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v5.json",
+      "bytes": 490688,
+      "compressedBytes": 52716,
+      "crc32": "89179716",
+      "sha256": "84d7ca5bb0c6221667d4a6a534192f2a6e6a2b858b831589b2ed0967be11175a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v6.json",
+      "bytes": 510921,
+      "compressedBytes": 56160,
+      "crc32": "604370fa",
+      "sha256": "707df3153d252d09e8be2a864babf9c1bdc27c230ad507a17536b61dbd213913",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/base-v7.json",
+      "bytes": 366499,
+      "compressedBytes": 57023,
+      "crc32": "172f33bf",
+      "sha256": "dd6f8193d4a487261c29e1fe413de775fbd7eaaf0b231024f67d2e92a587f679",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/qa-export-v4.json",
+      "bytes": 19557,
+      "compressedBytes": 1715,
+      "crc32": "c547d68f",
+      "sha256": "be17d138879ac52ada648d404aa0d3312629d077610ab63d6c7d0a363ce8228f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/qa-export-v5.json",
+      "bytes": 19798,
+      "compressedBytes": 1792,
+      "crc32": "25a86941",
+      "sha256": "0be81ba3a40035d9c0795a909e1697c862eb47b5f9e3a1b652b4d1441ff135f8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/qa-export-v6.json",
+      "bytes": 20500,
+      "compressedBytes": 1913,
+      "crc32": "aa1e4c6c",
+      "sha256": "88f24b309ddea1901b8a00e55a1e6158aa879c9ea97ea5dafaa5b8fe45ef9d9b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/data/qa-export-v7.json",
+      "bytes": 24372,
+      "compressedBytes": 2030,
+      "crc32": "29f0bd6a",
+      "sha256": "fe85989fac37e8ad8c78b6a63fbdecf1f5b29b9bb4f1370004bcaec5a670acb1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/ALIEN_EARTH_CONTENT.json",
+      "bytes": 614262,
+      "compressedBytes": 68324,
+      "crc32": "85eb0281",
+      "sha256": "b9931ba6ef2ce080d7d04b9a1714c3bb1c549afe8ae0d71744480244f11e201d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/CHANGELOG_V8.md",
+      "bytes": 1101,
+      "compressedBytes": 666,
+      "crc32": "11428e83",
+      "sha256": "ddda63b6319a9104e4f054b448ec194e87d15b21d60debfe4259a859df959bf5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/CODEX_ALIEN_EARTH_V8.md",
+      "bytes": 309845,
+      "compressedBytes": 53695,
+      "crc32": "7fae4a93",
+      "sha256": "03506b4715e0e69adb019d3beacb7f49c7284d00762bab8a2b816700fff08b58",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/CONTENT_COUNTS_V8.json",
+      "bytes": 435,
+      "compressedBytes": 231,
+      "crc32": "4b3073c6",
+      "sha256": "e565aa39741ba8983b43a1014fe55ae83e29a50ab766c9f2c9bb9a41250232da",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/INTEGRATION_ET_PROVENANCE_V8.md",
+      "bytes": 1933,
+      "compressedBytes": 1059,
+      "crc32": "dff52dbf",
+      "sha256": "e45dffe7518465760a8ba56e5241fb360a755124764e52f734dcb052a240d477",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_BROWSER_CONTAINMENT_V8.json",
+      "bytes": 8322,
+      "compressedBytes": 2369,
+      "crc32": "c980f66f",
+      "sha256": "6e21193691dd1899da4a64219507db8e121841ead427565c459e6e3381082909",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_BROWSER_DUCTS_V8.json",
+      "bytes": 6388,
+      "compressedBytes": 1841,
+      "crc32": "b62fb769",
+      "sha256": "c75434e6e955423240fda706ac7b128cfb55cf507e7bf80a18161162559fec3d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_BROWSER_EXPORT_V8.json",
+      "bytes": 24836,
+      "compressedBytes": 2161,
+      "crc32": "d45d4c4d",
+      "sha256": "3cbda834f7d87b6b698c129532387a036d597ccec8e02d7dd90b5885b1334591",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_BROWSER_SERVICES_V8.json",
+      "bytes": 8037,
+      "compressedBytes": 2294,
+      "crc32": "46d3ad70",
+      "sha256": "07e6dddfa38629566dc16e698d6a06242a062ef666890c405956485c6c531d57",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_BROWSER_V8.json",
+      "bytes": 14769,
+      "compressedBytes": 2373,
+      "crc32": "fd802513",
+      "sha256": "c8bd7642afbd36b165083e26e03e3e6d75f07af236504720b82344298e183739",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8.json",
+      "bytes": 23643,
+      "compressedBytes": 3707,
+      "crc32": "4586c918",
+      "sha256": "05ef0eabfa99a0bdfa505adff5424580274a05bc744277c7811c96cd99acd571",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_CONTAINMENT.json",
+      "bytes": 24302,
+      "compressedBytes": 3900,
+      "crc32": "4d66289f",
+      "sha256": "fc899eafb43be7f3de99ee47a8bd0b0640a5045e3bcc371bca2dcc81d99b3365",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_CONTAINMENT_NORMAL.json",
+      "bytes": 24223,
+      "compressedBytes": 3864,
+      "crc32": "6af86a18",
+      "sha256": "e47d2370bafc8fe45161982e97413a5eeee6018c1308ec55f2ea335b19a750c7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_DUCTS.json",
+      "bytes": 28214,
+      "compressedBytes": 4136,
+      "crc32": "7fe08666",
+      "sha256": "9793f797e722bac1daac09a2c7fc7219b379babb543bb224f5a98e49bb0950f6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_DUCTS_NORMAL.json",
+      "bytes": 28107,
+      "compressedBytes": 4125,
+      "crc32": "6447e5c4",
+      "sha256": "4785d85c41a53053c4e2c0b04ccf7689a29b6a41137791c26c5beb84fca29879",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_INVESTIGATIONS.json",
+      "bytes": 32547,
+      "compressedBytes": 4517,
+      "crc32": "61f3d3a5",
+      "sha256": "8944e6fff99344514e72b0c024ac41b4e7bdb47d7d7df82dae43ffcbe1ef2975",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_INVESTIGATIONS_NORMAL.json",
+      "bytes": 32437,
+      "compressedBytes": 4496,
+      "crc32": "284a3ff3",
+      "sha256": "ed8b1575f2266bcbb5654e77d9408ebf38525bbfdeefea739fd15213b61a3044",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_MAIN.json",
+      "bytes": 16875,
+      "compressedBytes": 2866,
+      "crc32": "ef90a8e4",
+      "sha256": "3ebd552d02d7790022dc13904131d9da0c52e86bd50486145df0c23cbfbb5843",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_NORMAL.json",
+      "bytes": 23555,
+      "compressedBytes": 3683,
+      "crc32": "4fd62f65",
+      "sha256": "254061affe61b86fb0ff9f444b484136e19414f480c18771ac0f2cc8a6f7987f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_SENSORS.json",
+      "bytes": 27543,
+      "compressedBytes": 4058,
+      "crc32": "6a5e3f32",
+      "sha256": "82342333f548925f937af87f9f6b9a313132163ba53649e383b36a529acd2558",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_SENSORS_NORMAL.json",
+      "bytes": 27469,
+      "compressedBytes": 4046,
+      "crc32": "821e65e1",
+      "sha256": "c818736b777c90eba02455a6f8807602b0a8f4906751bbd1a1fd9fa2aee2ad40",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_SERVICES.json",
+      "bytes": 29296,
+      "compressedBytes": 4034,
+      "crc32": "595c787d",
+      "sha256": "e7c3e8028ae38c24153a8d0bea38a1d72c07201efda726c44eb60a1098e31c09",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CAMPAIGN_V8_SERVICES_NORMAL.json",
+      "bytes": 29210,
+      "compressedBytes": 4005,
+      "crc32": "9bb1b76e",
+      "sha256": "3714b8ea42d8171547cf04c5e06a27803727583fb66e9a1831b25b43ddb72f19",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_CONTAINMENT_EXPORT_V8.json",
+      "bytes": 25197,
+      "compressedBytes": 2272,
+      "crc32": "6b6c5fff",
+      "sha256": "9095c1f740156dd4ea164cd0299db01b6467556846eabbff31dd42c809cdc733",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_MEDICAL_ROUTE_V8.json",
+      "bytes": 465,
+      "compressedBytes": 282,
+      "crc32": "b939ff19",
+      "sha256": "5b1b504aa63fd86a2fcb802cf2bd127a3322794daf61d05f8180b513dd6491e0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_REPORT_DOCUMENT_V8.json",
+      "bytes": 888,
+      "compressedBytes": 306,
+      "crc32": "f4f5e7d5",
+      "sha256": "2f24fcefaf5aad24f258e83bf732839793d029280c52fed0fc0f9e8987272de0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/QA_SUMMARY_V8.json",
+      "bytes": 26106,
+      "compressedBytes": 3551,
+      "crc32": "cef6702b",
+      "sha256": "f02550329fd44e0b60932d1bfcdb909e7dedfdbfb1a4fa691b1c178ccdd16dd2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/RAPPORT_APERCU_V8.png",
+      "bytes": 232223,
+      "compressedBytes": 225894,
+      "crc32": "d8781499",
+      "sha256": "07f5094661a7174d5a97d6dcb022477770cb09969aadd9a495555e96002c47f6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/RAPPORT_QA_ALIEN_EARTH_V8.html",
+      "bytes": 4199462,
+      "compressedBytes": 3143292,
+      "crc32": "8cf7bab2",
+      "sha256": "52690ffd3abff1ad47f6ab3b4e564838507939e7d38c2e59bf0a52ffab310724",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/03-cour-neverland.png",
+      "bytes": 618450,
+      "compressedBytes": 617185,
+      "crc32": "48a955c4",
+      "sha256": "2f707614d2461b926b359f296d5db699e9283abeabc3c23d9678b5963d288449",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/04-new-siam.png",
+      "bytes": 591260,
+      "compressedBytes": 589849,
+      "crc32": "9932622c",
+      "sha256": "fdb2e5896a3c175a9d037c1ee620d623f5a297f7b6c50bb375a47550c8b5e225",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/05-tour.png",
+      "bytes": 606644,
+      "compressedBytes": 605422,
+      "crc32": "3c11b129",
+      "sha256": "a0d0cb468218304d5b0c18385d0e2930a25ebfa1387f65515d9ea35c6d70d356",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/06-vivarium.png",
+      "bytes": 606309,
+      "compressedBytes": 605000,
+      "crc32": "bb910195",
+      "sha256": "7263ee1baec44ae5e5d43e25cd5e8a33c2c6b2304d5e5e7fbcaf846b1a4b3c22",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/07-maginot.png",
+      "bytes": 565151,
+      "compressedBytes": 563891,
+      "crc32": "20a91846",
+      "sha256": "9afd59ab8bf7a50319c44f00c360a4d96f17d5496dbf283dd5aec38a3f7b0b0c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/08-mouche.png",
+      "bytes": 608828,
+      "compressedBytes": 607505,
+      "crc32": "88dede61",
+      "sha256": "a98444cc00ac33ad3118bd99d68493c42f2df46134184bcc8bb2a42cd723c650",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/09-reserve.png",
+      "bytes": 629524,
+      "compressedBytes": 628229,
+      "crc32": "ac09a094",
+      "sha256": "da66a4c942ea3a35cb75f102ee7958015e1ba80ab11b997b6abf35af2994bfda",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/10-laboratoire-final.png",
+      "bytes": 624527,
+      "compressedBytes": 623162,
+      "crc32": "e7eeaccc",
+      "sha256": "2ba8a9bcde934dd318aeb601b4ff2659fd70615f155e6d770c20f8bb7bdef5de",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/11-codex-lieux.png",
+      "bytes": 227707,
+      "compressedBytes": 223577,
+      "crc32": "d7c074b3",
+      "sha256": "eba9cd6f4ec4ad5256f12beea8ea286ea9de56bfaa8cdee631c2bd1872dcb138",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/captures/12-mobile-dossiers.png",
+      "bytes": 61475,
+      "compressedBytes": 59441,
+      "crc32": "68d69e42",
+      "sha256": "ba25bf8e3fa3ac3f88201f0dba3ceede32ce7318446ac42995a750ed9f9f3d55",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/AGENT_BROWSER.txt",
+      "bytes": 47,
+      "compressedBytes": 49,
+      "crc32": "981ef218",
+      "sha256": "e6be8b959bf432a74f18628531d671d7f19330ce25dd82e7c0a88c0fe4c4345c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/BASELINE_V7.txt",
+      "bytes": 131293,
+      "compressedBytes": 19806,
+      "crc32": "a733cd9a",
+      "sha256": "e1bb3da64acf2c3452ba177736e9422304fa59bae55f6ae2028a6ddd82e9d4fc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/CAMPAIGN_BATCH.json",
+      "bytes": 701,
+      "compressedBytes": 125,
+      "crc32": "9eeecabb",
+      "sha256": "dc7e2a44bc8c8dff493533cdf6239fb1a41fe331fc1e71fc624e41a482781323",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/CAMPAIGN_BATCH.log",
+      "bytes": 179,
+      "compressedBytes": 83,
+      "crc32": "cdc2a322",
+      "sha256": "d89a9f5d79660714a46dcf0cb3350dfb70b33a9c6138c0c54ebc149206c6de3b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/DEV_SERVER.log",
+      "bytes": 39,
+      "compressedBytes": 39,
+      "crc32": "a2cd0aa3",
+      "sha256": "c876a0b55186ae9adbcad754313ad89ac136b28f91e4ba9abfcee88d40d9a15a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/DOCS_BUILD.json",
+      "bytes": 704,
+      "compressedBytes": 362,
+      "crc32": "6fa79701",
+      "sha256": "cd436bd0a5d05c88872ed8faa3d307c26b88aa9ba94d0711dabcd861ea0894f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/NODE_AFTER_EXTENSION.txt",
+      "bytes": 126391,
+      "compressedBytes": 18789,
+      "crc32": "82d1bb15",
+      "sha256": "05d0c31aadcc6a43e1591fed5a4bfab63d5a8c61e83613933b37efb7f3046481",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/NODE_LEGACY_V8.txt",
+      "bytes": 132839,
+      "compressedBytes": 20637,
+      "crc32": "8a375054",
+      "sha256": "181e207fa5e83c875fba40b0d581676f7dd41dbca0de51d7f34c03708b4a9a85",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_BROWSER_EXPORT_V8.json",
+      "bytes": 24828,
+      "compressedBytes": 2138,
+      "crc32": "f0fff8ab",
+      "sha256": "0e650c5ddb40b641723d00af50adce8d181d05791449f24dc80af8a1e76f38e7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_BROWSER_INVESTIGATIONS_V8.json",
+      "bytes": 7317,
+      "compressedBytes": 2099,
+      "crc32": "7ca4320e",
+      "sha256": "859f01a142466048167da2b043451870b3bfeb03c74ab1006bb2d44e8b5c54f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_BROWSER_SENSORS_V8.json",
+      "bytes": 6829,
+      "compressedBytes": 2140,
+      "crc32": "9f881e9e",
+      "sha256": "a8a5b640c2aa936337a5abacbd5c4811e5ed747639d681da93b103ea3a38da6d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_BROWSER_TRANSPORT_V8.json",
+      "bytes": 974,
+      "compressedBytes": 584,
+      "crc32": "9464b668",
+      "sha256": "f8b91aadac982a1489f5b1511308ccf0f4acbdffe0362d471729806686c4a929",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_FIELD_REPORT_EXPORT_V8.json",
+      "bytes": 1383,
+      "compressedBytes": 572,
+      "crc32": "d65c9329",
+      "sha256": "892c1656c4d8b575bcf26392351cced01b6cab429fb165cd93bc2a71fc183f6d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_INVESTIGATION_SAVE_EXPORT_V8.json",
+      "bytes": 4205,
+      "compressedBytes": 1291,
+      "crc32": "01b1adbb",
+      "sha256": "298fe1a4983bfb63efdad3c97b5bdd5a29e9125e13074e60026c04e660d9e2d2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/QA_NODE_V8.txt",
+      "bytes": 148568,
+      "compressedBytes": 22128,
+      "crc32": "d8f8fc7b",
+      "sha256": "337b4b18695c4ab9c9daa3e98f81dcec762ece804b3e3c6c05b1a62ee55eaf6a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser-transport.log",
+      "bytes": 975,
+      "compressedBytes": 585,
+      "crc32": "712a8b4f",
+      "sha256": "1229d69c767c60b656f5c6586944a53790063c67941a3fbeaa0358f0296b74de",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_containment_v8.log",
+      "bytes": 2605,
+      "compressedBytes": 1141,
+      "crc32": "26edcdf7",
+      "sha256": "83eab44396645e57943aa70417f2641fb65166098259079246659421715e7bc1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_ducts_v8.log",
+      "bytes": 1842,
+      "compressedBytes": 766,
+      "crc32": "2e7bdc67",
+      "sha256": "3bab5f15af500a9daa5ba4c4d97d04793a8d762e39a801557cca0fa3afb29afa",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_investigations_v8.log",
+      "bytes": 2424,
+      "compressedBytes": 1100,
+      "crc32": "8a0baf34",
+      "sha256": "9f7e4a9e18b2537037943584291dd5c45640612f51d86c1ec8829362bdae67be",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_sensors_v8.log",
+      "bytes": 1795,
+      "compressedBytes": 880,
+      "crc32": "ee8caa50",
+      "sha256": "1b76fb89c188f5046232e97480915f050f40ac498106403840039bd4627a5dd8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_services_v8.log",
+      "bytes": 2716,
+      "compressedBytes": 1179,
+      "crc32": "bb424324",
+      "sha256": "718fbfd24bee82de5f59b224252c692e3d6662d5717e4e512dfa092c535b003e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/browser_v8.log",
+      "bytes": 5099,
+      "compressedBytes": 1708,
+      "crc32": "a96d4ca0",
+      "sha256": "eb3213acd60e211f707afae0c4622d1c65efdf9f37b82f036ff54c44b54e9fe9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-containment-normal.log",
+      "bytes": 24224,
+      "compressedBytes": 3865,
+      "crc32": "21d166af",
+      "sha256": "e848259e849d8ba6771e17142a4288e86450f9c49ea4ff4c9d8af6b5b0a6700a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-containment.log",
+      "bytes": 24303,
+      "compressedBytes": 3901,
+      "crc32": "522aee6e",
+      "sha256": "abe7628b5e49405515e7f7aa024527fe2a43470327d62bf498e9e3cf261e1a89",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-ducts-normal.log",
+      "bytes": 28108,
+      "compressedBytes": 4126,
+      "crc32": "aeba47df",
+      "sha256": "f48bc773d5b4c40bf05bebf7e09cd6e4e96b6d544d149f33e071821ce208fecd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-ducts.log",
+      "bytes": 28215,
+      "compressedBytes": 4137,
+      "crc32": "96792278",
+      "sha256": "2f543d13073e223c346474a5d441f59285324de839f5efc1582ae72e6da49b67",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-investigations-normal.log",
+      "bytes": 32438,
+      "compressedBytes": 4497,
+      "crc32": "164bef0a",
+      "sha256": "162bdb2e96726c7bf9d386a0576e60e41ec472f7758ac234e97bd0f1025f800a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-investigations.log",
+      "bytes": 32548,
+      "compressedBytes": 4518,
+      "crc32": "940aa227",
+      "sha256": "477d104353d8d63c0b695c5fb8f122f4e6fb41de3161d0ac4a467e966cd96481",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-main.log",
+      "bytes": 16876,
+      "compressedBytes": 2867,
+      "crc32": "955fb05a",
+      "sha256": "4360d2a522e867ed597ef9f9d625498f90afff5be2f294a6c5b018d3350cfb39",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-normal.log",
+      "bytes": 23556,
+      "compressedBytes": 3684,
+      "crc32": "0f40456b",
+      "sha256": "ab433b7c7d221a012f9c612d870252e22e4dacd3f4155677dcf23d4b552f9215",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-sensors-normal.log",
+      "bytes": 27470,
+      "compressedBytes": 4048,
+      "crc32": "e558ca18",
+      "sha256": "fd8595c637354cf181cd9b6bf5a4711363d1f0c95c183fcf4c0d29668a2bf958",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-sensors.log",
+      "bytes": 27544,
+      "compressedBytes": 4059,
+      "crc32": "fa6a092c",
+      "sha256": "93b09e28b29100509d75d9f85941d95684ccfefecd94849187536ec634dba1ba",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-services-normal.log",
+      "bytes": 29211,
+      "compressedBytes": 4006,
+      "crc32": "9846fb7b",
+      "sha256": "5899ee4316f55f052c899555fdc2533fb539113ad63beca3cb9be4e6065d812f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-services.log",
+      "bytes": 29297,
+      "compressedBytes": 4035,
+      "crc32": "1c3a576a",
+      "sha256": "7db95fe84ff99123103c07e5e3dd7a4397f7d27b4f37816459d118e4f4cb6495",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/campaign-story.log",
+      "bytes": 23644,
+      "compressedBytes": 3708,
+      "crc32": "21fe180c",
+      "sha256": "e6030984f2448a1653dcdf92b3390973d3ed4030716a6f8b0539dae632255b7b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-01-titre.png",
+      "bytes": 826606,
+      "compressedBytes": 821751,
+      "crc32": "d78042a0",
+      "sha256": "83614794a4beceba9e53bb95857ffa774cec12a2a488efd036ac164754abd629",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-02-carnet.png",
+      "bytes": 285249,
+      "compressedBytes": 277749,
+      "crc32": "aeb1ab3c",
+      "sha256": "e0031ca4864fa42b215ab27d0b81724f41c8b0655070c414c665b309accb2e7f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-03-sources-absentes.png",
+      "bytes": 220886,
+      "compressedBytes": 216088,
+      "crc32": "3b171ab6",
+      "sha256": "f8fe3a19c32a476d328df7d37c9131958fdfb9e2bf32f1db7deafc3fc4834ec0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-04-terminal.png",
+      "bytes": 211582,
+      "compressedBytes": 207855,
+      "crc32": "9fedaba7",
+      "sha256": "8614d557e5f2e971e483931c368b5ea7fbcc72837f7dd50faf7de1c464c318f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-05-recoupement.png",
+      "bytes": 251621,
+      "compressedBytes": 247244,
+      "crc32": "3d82ae61",
+      "sha256": "66be05b8520aa9a8a0e0276921f684d7cd293c6bab484b147e0ac4da75feca94",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-06-copie-conservee.png",
+      "bytes": 241469,
+      "compressedBytes": 237268,
+      "crc32": "a5834dd2",
+      "sha256": "e3b8f9159df9afd510a9796d8beec62943b39b58b15bc6230fce304b8038c87c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-07-objectifs.png",
+      "bytes": 217277,
+      "compressedBytes": 212914,
+      "crc32": "79464d3d",
+      "sha256": "402ae4f6745b4596a40321fb5e232f751dd32ec3090b4617f001a69a31ac5351",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-08-bilan.png",
+      "bytes": 215280,
+      "compressedBytes": 211984,
+      "crc32": "92c361b1",
+      "sha256": "75441a106b749e589e45fc4e860c46d519290bac9b2fde093fe63b44489fdefc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-09-mobile.png",
+      "bytes": 59266,
+      "compressedBytes": 57078,
+      "crc32": "0a855f6e",
+      "sha256": "f35f4dfe7d525311a619d45fc5911b7a69ee1c56d2d620683d0e676d046a0692",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-10-transmission.png",
+      "bytes": 577063,
+      "compressedBytes": 574573,
+      "crc32": "01bed7be",
+      "sha256": "d4a1a9671df32229c5ae02431d18b47fa5e47b7a2dff0d993dc9ae58257d0733",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-11-emission-conservee.png",
+      "bytes": 242003,
+      "compressedBytes": 237762,
+      "crc32": "9dbef182",
+      "sha256": "b9ab65c6627b87cfad7c6b253f3a8c7a9ad3d1c5fd58c8a7b155a1205130600e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-error.png",
+      "bytes": 241226,
+      "compressedBytes": 238242,
+      "crc32": "99b2daa3",
+      "sha256": "2b0eb667842040c064b36898300bc3c5c124c2957b4f688f2e0bc7b46e6ee665",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-01-titre.png",
+      "bytes": 811572,
+      "compressedBytes": 808823,
+      "crc32": "ec8ac705",
+      "sha256": "4b55ec064b3ac193930feef3158b5dc17bc63374b97cc99d0eda633d9599141e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-02-grille-fermee.png",
+      "bytes": 572449,
+      "compressedBytes": 570373,
+      "crc32": "d32a4a57",
+      "sha256": "5f10867dbc3fad662b9f92df5d89c5fcdc3491b529f5b1729ffb985cd523d950",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-02-plateau.png",
+      "bytes": 234363,
+      "compressedBytes": 230896,
+      "crc32": "dbc45e01",
+      "sha256": "9ece0ae3a62b80f86c39ff3befc6d9b7e488ba8dd6ca7536b7653a2e69d42e42",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-02-recepteur.png",
+      "bytes": 235489,
+      "compressedBytes": 230992,
+      "crc32": "f994c15c",
+      "sha256": "a2db2db5b6406e9296a7e3c2b6b7a83528b498beab33c3d1603300680afceb6e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-03-grille-deposee.png",
+      "bytes": 575096,
+      "compressedBytes": 572958,
+      "crc32": "29667b30",
+      "sha256": "2ce6f2dc1b511f39143448a15e649685ecfdf8e8af6fd75c505253aafa8e732c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-03-mobile.png",
+      "bytes": 59916,
+      "compressedBytes": 58436,
+      "crc32": "82dff32b",
+      "sha256": "ab47586d06b653f08d3227d99752be38f4cbebd823adc18f341bff023ea8d4f7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-03-sonde-posee.png",
+      "bytes": 621038,
+      "compressedBytes": 619753,
+      "crc32": "f04be0c8",
+      "sha256": "428e953b92ea39863c98efd08952f32e8647bc35e1ea6bc5777efc62d545d3e6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-04-appat.png",
+      "bytes": 597919,
+      "compressedBytes": 595775,
+      "crc32": "fdf6aac0",
+      "sha256": "2e6a97638cc4a9291dc7cab8303a50a12a795e058ab98cd787c8a9b21d2de217",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-04-carter-en-marche.png",
+      "bytes": 519003,
+      "compressedBytes": 516303,
+      "crc32": "5710b5fd",
+      "sha256": "51d83ae4deeb05b0f188110235e0c5226bb60c8a76e67b895e7cff2d27744682",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-04-mouvement.png",
+      "bytes": 274351,
+      "compressedBytes": 269742,
+      "crc32": "c179d4ef",
+      "sha256": "f7f1914c521057d0e51490715c36fd38dc363e5b6e26cb8444dce7dc5b6883db",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-05-atelier.png",
+      "bytes": 193751,
+      "compressedBytes": 190070,
+      "crc32": "08fe2097",
+      "sha256": "26700bcf7322897678c9b7c4ff8b7e8a0d1c82539d9518f9f9dce5b2eeaab3a1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-05-emission.png",
+      "bytes": 620346,
+      "compressedBytes": 619082,
+      "crc32": "f20bbd3f",
+      "sha256": "0819d890e9dd44ae311c396e817a07eb8604453dc1ba8793b97cb119efbd5636",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-05-franchissement-au-repos.png",
+      "bytes": 513070,
+      "compressedBytes": 510790,
+      "crc32": "33296a8c",
+      "sha256": "73ec2d4f932bf50d0f628154a630558b06024c86d0f679d62e14d063513e6d08",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-06-atelier.png",
+      "bytes": 180736,
+      "compressedBytes": 178028,
+      "crc32": "d49e6289",
+      "sha256": "454832ecf20f9c1d086e62d37fdaf1cc495e0d8ebcaa32e3ec6a8432c4e9465b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-06-facehugger.png",
+      "bytes": 533320,
+      "compressedBytes": 531397,
+      "crc32": "483c91d2",
+      "sha256": "3526f508a17e730b9a2465499674c358cccc4064e8b0f336da657d47ceccc630",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-06-turbine-consignee.png",
+      "bytes": 514837,
+      "compressedBytes": 512361,
+      "crc32": "dcae9f28",
+      "sha256": "c683eed8e82fff58b271137b884030f03519193280ff6687c94bd282b745a1f6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-07-carte-sept-lieux.png",
+      "bytes": 171966,
+      "compressedBytes": 168163,
+      "crc32": "8c8646ea",
+      "sha256": "17ea380eb203fb0e615f02c3fc3d744542cf58cef697df450db02b47b36aea75",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-07-poursuite-partielle.png",
+      "bytes": 272508,
+      "compressedBytes": 267503,
+      "crc32": "3130d328",
+      "sha256": "c517eb45e4a33df041b446bf5cbf1db17f377c484c6b86dc9ea46338b8c0e94e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-07-registre.png",
+      "bytes": 219669,
+      "compressedBytes": 216214,
+      "crc32": "aadab68f",
+      "sha256": "997c57703194a7cd2e0fa6101b8a773f04d25350cf92cbdf36b651d63e34fe08",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-08-carte.png",
+      "bytes": 178241,
+      "compressedBytes": 173919,
+      "crc32": "01b04fd0",
+      "sha256": "879200b7f2b7ceb840b77f7cf0feada3cb8c00a14105a04365df4beeb6813554",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-08-liaison-coupee.png",
+      "bytes": 269445,
+      "compressedBytes": 264858,
+      "crc32": "a700862c",
+      "sha256": "80456ce9af95b3c039384e9832552f843094375ccaa2ce7fd379180913e6320f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-08-monte-charge.png",
+      "bytes": 523553,
+      "compressedBytes": 520863,
+      "crc32": "fa4020d6",
+      "sha256": "c0604cf214884329a04bf5e3acf3b15ebc4d29705448638fc3140b523e46595f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-09-carte.png",
+      "bytes": 183886,
+      "compressedBytes": 180373,
+      "crc32": "03d9aeb0",
+      "sha256": "806567dac085a0fd87a2fa23104f55a31d3ab7a6bcc07098a4082d8574e7bb49",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-09-double-fond-maginot.png",
+      "bytes": 517987,
+      "compressedBytes": 515239,
+      "crc32": "0b575b2b",
+      "sha256": "622a7d01d1ac4c5fae5049f3817c8281805228147c16989aed90ae969bbe511a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-09-liberation.png",
+      "bytes": 223391,
+      "compressedBytes": 219923,
+      "crc32": "1cbbabc0",
+      "sha256": "2615e90b041913738cbb0dfc4e62aeeef93cbb9d0984864005ccb149fafc0833",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-10-drain-littoral.png",
+      "bytes": 512800,
+      "compressedBytes": 510066,
+      "crc32": "197d3142",
+      "sha256": "a97b9cbdb5c8307e2aecfb5a5fd5ab7593791b03f3228b0ae00c2a787b635ab5",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-10-non-observee.png",
+      "bytes": 275454,
+      "compressedBytes": 270921,
+      "crc32": "97c50b90",
+      "sha256": "451ba16d0c9006daea4f74c72f1d100c0560fdf1a7147b0e9eaafcedf41dc630",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-10-tique.png",
+      "bytes": 498772,
+      "compressedBytes": 496448,
+      "crc32": "3634be40",
+      "sha256": "ea0e0d08f91034494bed27895a984213b29a6e87e7f902a028012e26f0065497",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-11-carte-mobile.png",
+      "bytes": 58662,
+      "compressedBytes": 57296,
+      "crc32": "55efbf35",
+      "sha256": "26f787e0396b53467422738c4e9bef8db8eb78e7e3cfd5e8ea95c579d60e8f8b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-11-mobile.png",
+      "bytes": 109638,
+      "compressedBytes": 107597,
+      "crc32": "4075302a",
+      "sha256": "06c2111d6b793bb139dcac3dc5a8b2e7b968f1c0a3f0d4cb1bca78523f6592c8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-11-mouche.png",
+      "bytes": 566259,
+      "compressedBytes": 564463,
+      "crc32": "2da45ea2",
+      "sha256": "106494cf45c9c7299632da32efb6d3bb4d1804bbefcd88eea2dbee46177f8682",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-12-pression.png",
+      "bytes": 542229,
+      "compressedBytes": 540040,
+      "crc32": "c1238a60",
+      "sha256": "cf864d9327db2f72304289020d3323e9ff465db36ca0f7b221a73b7799b1b276",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/captures/v8-regression-13-rupture.png",
+      "bytes": 544125,
+      "compressedBytes": 542048,
+      "crc32": "d21c9226",
+      "sha256": "be83f381c62db3e9af34e946e3308571fa62a6c92fb1ade4433570bdb4f94be7",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/main-first.log",
+      "bytes": 8849,
+      "compressedBytes": 1780,
+      "crc32": "1e215991",
+      "sha256": "c4aeed6f1f877b57ab8e83f1f007a4b58faee0a1c6b9cdee03e3b302fe5dbbc0",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/medical-route.log",
+      "bytes": 466,
+      "compressedBytes": 283,
+      "crc32": "560597ac",
+      "sha256": "a99b014c6c428beac528dbe3572b46b3d0d342ec19bac6f40286e444e43112f1",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/report-check.log",
+      "bytes": 889,
+      "compressedBytes": 307,
+      "crc32": "c49ad52f",
+      "sha256": "522168ce49b0d162ce47b7a9fc8175197c8786fe0c6b65d39f734698c86dca84",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-01-titre.png",
+      "bytes": 811724,
+      "compressedBytes": 808998,
+      "crc32": "b5c471c6",
+      "sha256": "72c4f246d9ca74b37e20c691c940ef4bf8af04eb6e96e341df1836830e9be8c3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-02-repartiteur.png",
+      "bytes": 207136,
+      "compressedBytes": 203868,
+      "crc32": "c9fbf9a1",
+      "sha256": "49956612126c7f0a7306c8d4b0fc996a551619af36c74cd36fdafc6470dec269",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-03-galerie-coupee.png",
+      "bytes": 580838,
+      "compressedBytes": 578649,
+      "crc32": "7f94db4c",
+      "sha256": "18ac71ea15af18894e4fdd601a5e96bbdb7fd9b43f8740cd288750bb1e93e800",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-04-atelier.png",
+      "bytes": 594052,
+      "compressedBytes": 591905,
+      "crc32": "0f481a85",
+      "sha256": "9409ef15222fa1584cbd3cb7a13139503ec2e6be7f2e8d6d81a70b339a0f305d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-05-fabrication.png",
+      "bytes": 193079,
+      "compressedBytes": 189322,
+      "crc32": "e8ee8da6",
+      "sha256": "8fe617c4dca73d3d94acbe48c33b6ae2ff49ee176f73f6c86d8991bfd79529b8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-06-verrou-repare.png",
+      "bytes": 563237,
+      "compressedBytes": 561517,
+      "crc32": "3fd30205",
+      "sha256": "bc0aedcd7c42776d356ee4cbfd2a54a6d040833ddc8b9fcdceb52a39e478093b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-07-surveillance.png",
+      "bytes": 198991,
+      "compressedBytes": 195213,
+      "crc32": "fa3236b4",
+      "sha256": "52210aacdbc346875a95e9669c848fae8dbbcb652a759f98c172702f142033f2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-08-releve.png",
+      "bytes": 182491,
+      "compressedBytes": 178882,
+      "crc32": "c6e6092a",
+      "sha256": "8a5c2b154b965daf56f066a29156f55795c660ba2f97570f26e854be8f699c4b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-09-portage.png",
+      "bytes": 541739,
+      "compressedBytes": 539642,
+      "crc32": "a2d6962c",
+      "sha256": "86b46b9d315771175916c4ae3bac1832733825cfbf4016653922c65e92407121",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-10-sac-secours.png",
+      "bytes": 192425,
+      "compressedBytes": 188833,
+      "crc32": "5d2ce32a",
+      "sha256": "4a0d1e9fb9a6499a6f8599b150f4e8da5959390c81a4744afc9adbe498ed3c43",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-11-evacuation.png",
+      "bytes": 500629,
+      "compressedBytes": 498225,
+      "crc32": "90298012",
+      "sha256": "2fa284929dd988b3ce10e7b3bd48e79a1cadaa57db7519e50d1b82d9f9767a09",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-12-codex.png",
+      "bytes": 206075,
+      "compressedBytes": 201420,
+      "crc32": "c2136450",
+      "sha256": "582c323d562fb4884aba4bdd60353937305d13c0ee5d5d7e70cebdd952aea907",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/docs/v8/services-captures/v8-regression-services-13-mobile-repartiteur.png",
+      "bytes": 61554,
+      "compressedBytes": 60035,
+      "crc32": "29c8ba22",
+      "sha256": "e5f2bab6f419104a65e72bf7b9a0d65aea06fc41d573f5e063e27ebead8e9612",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/earth.css",
+      "bytes": 26851,
+      "compressedBytes": 7199,
+      "crc32": "924d280f",
+      "sha256": "480fe5c2041f40b3f0f7ab213807c35fc727d71b9d0cdfdb9d2bce345333eace",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/index.html",
+      "bytes": 3691,
+      "compressedBytes": 1496,
+      "crc32": "9ca94f13",
+      "sha256": "fe08e3b675de31850027f3d3e23b7053ee1e76217c790f3fe0d9c5bc00be7c59",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/integration/launcher.js",
+      "bytes": 1950,
+      "compressedBytes": 1005,
+      "crc32": "fc915db3",
+      "sha256": "2056432d1b4c93912b9ba18ea60b9863188d668d1093d0398760d5fddc341df2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/package.json",
+      "bytes": 2096,
+      "compressedBytes": 479,
+      "crc32": "37e1588e",
+      "sha256": "2896296d9742c53132a7a497d91d6b0dd0f1943984d8b6a2d988239746ac2170",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/build.mjs",
+      "bytes": 1599,
+      "compressedBytes": 754,
+      "crc32": "b67ce656",
+      "sha256": "4165a84a4654dd27a4704c5f3267f6c293f6342a1cec779193397b82db8bb85e",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/install-alien-earth.mjs",
+      "bytes": 6420,
+      "compressedBytes": 2323,
+      "crc32": "094cc000",
+      "sha256": "65d52fa09f223f1260f50e63d2ddab6c8e2ca2b64415cd81858a01338d57a57b",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/make_data_v8.mjs",
+      "bytes": 8655,
+      "compressedBytes": 3960,
+      "crc32": "84344824",
+      "sha256": "c232bee5ae9eb92e3a7f398b5573e4e6c323fd2ae5fe652793948d98a60eec48",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/make_delivery_docs_v8.py",
+      "bytes": 32900,
+      "compressedBytes": 12950,
+      "crc32": "f74df5de",
+      "sha256": "07493da8bf99f312eba148bf68f0c31cad99d97b9b2328bfb9964355be5addcc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/package_v8.py",
+      "bytes": 2422,
+      "compressedBytes": 1115,
+      "crc32": "f62df17c",
+      "sha256": "f83af15bbcc727490b527d96d8db0eb56d18fac1490436210cfc95c901f78884",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/scripts/serve.mjs",
+      "bytes": 1202,
+      "compressedBytes": 628,
+      "crc32": "d210ab29",
+      "sha256": "4411803d00f0774e69ea0112ce9b41e065b58b7592a798538e07320a40915efb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-containment-art-v5.js",
+      "bytes": 3120,
+      "compressedBytes": 1584,
+      "crc32": "58d72603",
+      "sha256": "011a8338cd26b416ad2af2dfc570b97108d1b4c8622fc88ffc38a0ce855dd4fa",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-containment-v5.js",
+      "bytes": 12839,
+      "compressedBytes": 4332,
+      "crc32": "48c7805b",
+      "sha256": "026348d8024c98375248b9953e7b693155b22179de0293705e924ec93b2a2bdc",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-core.js",
+      "bytes": 59580,
+      "compressedBytes": 18185,
+      "crc32": "73ad4456",
+      "sha256": "1066e7ffc39cdfa606d22e3ff024af1158ff8e6fe462e25162e8d3add4ae8170",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-data.js",
+      "bytes": 379121,
+      "compressedBytes": 60062,
+      "crc32": "e43cef64",
+      "sha256": "ec2fe86807d2d72060375aadf1250367cbfd82deeee465031a743965d1718f5f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-ducts-art-v7.js",
+      "bytes": 7212,
+      "compressedBytes": 3035,
+      "crc32": "b4a6bd13",
+      "sha256": "0e8b5cb9c24f2c69c54943c0ce2e7c6b1588a3d229bfc05b026a9ec845bf2aeb",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-ducts-v7.js",
+      "bytes": 9251,
+      "compressedBytes": 3501,
+      "crc32": "481a3100",
+      "sha256": "b26c16725bd4220fb9d1fb4c168ff9077eb55650bd0a04d8760bf01c4c2e061a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-investigations-v8.js",
+      "bytes": 9820,
+      "compressedBytes": 3316,
+      "crc32": "077610de",
+      "sha256": "80535b6765ee9e6bffb754d57f138d21ce9d2e04da6a3b61c6f4ed910d76c2f4",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-renderer.js",
+      "bytes": 31081,
+      "compressedBytes": 10857,
+      "crc32": "99edb482",
+      "sha256": "09997830ce24ec89eb26a47104e5cdaf8222cea1903f50b1acbf2420b221306f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-scenery-v2.js",
+      "bytes": 12720,
+      "compressedBytes": 4873,
+      "crc32": "bca69d0c",
+      "sha256": "7b6c0a14ef413987d9bafce893409867f0855bfd2789f69934be28b82a0ce9e9",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-scenery-v3.js",
+      "bytes": 3861,
+      "compressedBytes": 1554,
+      "crc32": "09e9801e",
+      "sha256": "4e8be1d90063c56092eae95b0bf832af634355f7fc5e4157fd979098c0d03c07",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-scenery-v4.js",
+      "bytes": 5749,
+      "compressedBytes": 2464,
+      "crc32": "9d7acb68",
+      "sha256": "74bc7221c1a14f6c1cd85d7a6a57814159dd6cba46f850feb3384ee0ec7b1b53",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-sensors-art-v6.js",
+      "bytes": 1468,
+      "compressedBytes": 718,
+      "crc32": "8fb1e380",
+      "sha256": "d469956d079f61c1584dc0dbd1fa88a36ebc4d36e3fd1efe44349c2060a1816f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-sensors-v6.js",
+      "bytes": 16941,
+      "compressedBytes": 5539,
+      "crc32": "e773befe",
+      "sha256": "50a2edfbbc798d085cb296fd8436c3eef5831dc696120a96ffcf262f1de0f435",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-services-v4.js",
+      "bytes": 14964,
+      "compressedBytes": 5102,
+      "crc32": "df313b4b",
+      "sha256": "4e12ec22c221d73e9db67600711039f9a8c91f387f46ba0d836be189c845f0f2",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-storage-v2.js",
+      "bytes": 1004,
+      "compressedBytes": 569,
+      "crc32": "ad301b0d",
+      "sha256": "dae95a24365942fdcbb7a150f00d7c69e60bb108be07356b1389c0974f895117",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/src/alien-earth-ui.js",
+      "bytes": 78723,
+      "compressedBytes": 25670,
+      "crc32": "778d1241",
+      "sha256": "82f8f8c3d690d482ca3e39062a653fda78b827234fb4462023f0911a20fa8683",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_containment_v8.py",
+      "bytes": 14939,
+      "compressedBytes": 5322,
+      "crc32": "2693f3db",
+      "sha256": "c82f82ff5336875b8b5d79ed1bc7c7d71004fd68001987cf0192706296d43fb6",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_ducts_v8.py",
+      "bytes": 9130,
+      "compressedBytes": 3799,
+      "crc32": "0f47b92e",
+      "sha256": "5c1687fa46574969007947d2f22ad184dcbaa82f76384595dbafa26e72d83bbd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_investigations_v8.py",
+      "bytes": 13515,
+      "compressedBytes": 4666,
+      "crc32": "58fcb082",
+      "sha256": "ccdb1461f93a9650fd98b12298e081a1461a422c89e9ce1a86d232927734e933",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_sensors_v8.py",
+      "bytes": 13767,
+      "compressedBytes": 5040,
+      "crc32": "6364d07f",
+      "sha256": "db2ab41773776602459a2b20c2ebe35b4dcd2fdb8f5625d158448091b8a0ac2d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_services_v8.py",
+      "bytes": 13909,
+      "compressedBytes": 5103,
+      "crc32": "f32e806c",
+      "sha256": "f9ca74c56b0e146e997120e57f7350b8d759293255c491cc26bcb525b182d239",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_transport_v8.py",
+      "bytes": 1320,
+      "compressedBytes": 779,
+      "crc32": "08fe3662",
+      "sha256": "d94cb667191f93bd5faed5e03042123d52aba870dcce20c671c59f4d6779845f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/browser_v8.py",
+      "bytes": 17715,
+      "compressedBytes": 5733,
+      "crc32": "de13cb2e",
+      "sha256": "f4738c0ff9b30b51ab8628502acd7c846124f4cdee2c1867664c04daf379f936",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/campaign_v8.mjs",
+      "bytes": 17586,
+      "compressedBytes": 5801,
+      "crc32": "a2b84e9c",
+      "sha256": "01cfb94518beb851a3a8e57f0997c70e98f5b64b7f34610de14f365dfa1f7b84",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/containment-v5.test.mjs",
+      "bytes": 18101,
+      "compressedBytes": 5252,
+      "crc32": "d4d89087",
+      "sha256": "4eaa2e32ef917690a7e2cf766712d666a2f88ea44d6e144692cb40fef7e14c80",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/core.test.mjs",
+      "bytes": 9830,
+      "compressedBytes": 3370,
+      "crc32": "eb0c724b",
+      "sha256": "c5dc24661c40b5f44cab8f307582d114b1c8ab1cb09024768a3beb386e86d51f",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/ducts-v8.test.mjs",
+      "bytes": 15489,
+      "compressedBytes": 4932,
+      "crc32": "117eac1f",
+      "sha256": "6266576967e5dbcd89e289f5942064dd0c704f898420be66af2ccb82ddfff98a",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/installer.test.mjs",
+      "bytes": 4408,
+      "compressedBytes": 1275,
+      "crc32": "958af2eb",
+      "sha256": "6a8bea470adde8e5a1e722d85e10ac514d25b93892290552a160fa8baa1dffe3",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/investigations-v8.test.mjs",
+      "bytes": 11663,
+      "compressedBytes": 3707,
+      "crc32": "d0cbe000",
+      "sha256": "8c45ba755628aa59b6ee06e9c7b6890f33692c154609c22720ca83078c96d33d",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/medical_route_v8.mjs",
+      "bytes": 2608,
+      "compressedBytes": 1293,
+      "crc32": "f6d0c906",
+      "sha256": "572973dbd72e1afc413770892d2bed3b2e1455be8768a3b84a3363ff02232894",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/run_campaigns_v8.py",
+      "bytes": 993,
+      "compressedBytes": 595,
+      "crc32": "0d7b7f18",
+      "sha256": "bc7751ba873d736351a1f34f955515a63a1f3aa57fae6d59f09b4b17779c7cfd",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/sensors-v6.test.mjs",
+      "bytes": 22229,
+      "compressedBytes": 6272,
+      "crc32": "84d27868",
+      "sha256": "1e0db2dddc78d7558fb7df95e852c0e53ad3179fa5dbebdbe8b0903610c498f8",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/services-v4.test.mjs",
+      "bytes": 17949,
+      "compressedBytes": 5248,
+      "crc32": "f33c15d8",
+      "sha256": "4f6657b4fcb446064b3240606441f939f2704a1da7062934bf3fab58671e0fac",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/storage-v2.test.mjs",
+      "bytes": 2989,
+      "compressedBytes": 886,
+      "crc32": "94defef6",
+      "sha256": "e72176482589671aade5e634aea7af313eae13a35712d1543049e6c96fa44839",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/systems-v2.test.mjs",
+      "bytes": 13373,
+      "compressedBytes": 4117,
+      "crc32": "bad14e03",
+      "sha256": "53f9a0201acb07435104bd53944282b7d7164c8e9eb438c963b78617ac29da97",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/systems-v3.test.mjs",
+      "bytes": 16095,
+      "compressedBytes": 4778,
+      "crc32": "4471ab18",
+      "sha256": "4067644a98b649c89ec2082b33211ad48ff0b3d006af063d159555333f20d27c",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/verify_package_v8.py",
+      "bytes": 3184,
+      "compressedBytes": 1553,
+      "crc32": "0869de67",
+      "sha256": "15a9be74c9aaf0ef6aee236b1ec993020632bf704ff4773e95a771f2a4095d80",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/tests/verify_report_v8.py",
+      "bytes": 2074,
+      "compressedBytes": 1067,
+      "crc32": "e8ee4a42",
+      "sha256": "09de6d8fc20daf2619d782baf03186062a7ddada777850e6060a90dcff14f430",
+      "directory": false,
+      "unsafePath": false
+    },
+    {
+      "path": "ALIEN_EARTH_DLC_V8/MANIFEST_SHA256.json",
+      "bytes": 30981,
+      "compressedBytes": 10906,
+      "crc32": "919d9c4b",
+      "sha256": "199e89436ceb2e2a204137c22d0624d4bf3f43965ed97f7b15a5ff8d5398c370",
+      "directory": false,
+      "unsafePath": false
+    }
+  ]
+}

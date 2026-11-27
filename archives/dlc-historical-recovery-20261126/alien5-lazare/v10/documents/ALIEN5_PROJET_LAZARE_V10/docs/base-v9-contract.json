@@ -1,0 +1,10 @@
+{
+  "source": "DLC_ALIEN5_PROJET_LAZARE_V9_CANDIDAT.zip",
+  "sourceArchiveSha256": "f49adb8cb42b38e937aad15edcbbe3d9632f7b7df3706c0b045bfde4c988d5b3",
+  "embeddedBaselineSha256": "b973c74ec54a6031581284a928cead0c6cfecbc8ba318f3a7c923c438d4b5fd5",
+  "baselineRooms": 56,
+  "baselineLinks": 76,
+  "preservedRoomIds": true,
+  "preservedLinkIds": true,
+  "noNativeHostMerge": true
+}
