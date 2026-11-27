@@ -91,14 +91,16 @@ export function sampleXenoTrialsSpriteAtlasV189(atlas, fighter, options = {}) {
   let id, phase;
   const cue = options.cue, height = visibleHeight(atlas, options.metrics);
   if (atlas.kind === 'motion') {
-    if (fighter.hp <= 0 || fighter.attack && fighter.attack.kind !== XENO_TRIALS_AIR_HIT_V211 || fighter.guard || fighter.stun > 0 || fighter.hitFlash > 0
+    if (fighter.hp <= 0 || fighter.attack && fighter.attack.kind !== XENO_TRIALS_AIR_HIT_V211
+      || fighter.guard && !options.guardedRetreat || fighter.stun > 0 || fighter.hitFlash > 0
       || ['hurt', 'guard-break', 'recover', 'ko'].includes(cue?.state)) return null;
     if (fighter.y > 0) {
       if (!Number.isFinite(fighter.vy)) return null;
       id = fighter.vy > 0 ? 'air-rise' : 'air-fall'; phase = id;
     } else {
       if (!options.moving || !Number.isFinite(options.distance) || !positive(height)) return null;
-      const cycle = ((options.distance / (height * .66)) % 1 + 1) % 1;
+      const distance = options.reverseStep ? -options.distance : options.distance;
+      const cycle = ((distance / (height * .66)) % 1 + 1) % 1;
       id = `walk-${options.reducedMotion ? 0 : Math.min(7, Math.floor(cycle * 8))}`; phase = 'move';
     }
   } else {

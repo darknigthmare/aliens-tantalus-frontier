@@ -7,6 +7,7 @@ import { XENO_TRIALS_FINISHER_COPY_V209 } from './xeno-trials-finishers-v209.js'
 import { XENO_TRIALS_FINISHER_COPY_V210 } from './xeno-trials-finishers-v210.js';
 import { XENO_TRIALS_FINISHER_COPY_V211 } from './xeno-trials-finishers-v211.js';
 import { XENO_TRIALS_FINISHER_COPY_V212 } from './xeno-trials-finishers-v212.js';
+import { XENO_TRIALS_FINISHER_COPY_V213 } from './xeno-trials-finishers-v213.js';
 
 const cultist = 'dd-darwin-era-cultist';
 const commando = 'import-game-dd-wy-commando';
@@ -36,6 +37,7 @@ const copy = Object.freeze({
   ...XENO_TRIALS_FINISHER_COPY_V210,
   ...XENO_TRIALS_FINISHER_COPY_V211,
   ...XENO_TRIALS_FINISHER_COPY_V212,
+  ...XENO_TRIALS_FINISHER_COPY_V213,
   claw: Object.freeze({ button: 'F · VERROU FINAL', offered: 'Victoire confirmée. Verrou final disponible avec F.', playing: 'Verrou final en cours.' }),
   boot: Object.freeze({ button: 'F · APPUI DE CONTRÔLE', offered: 'Victoire confirmée. Appui de contrôle disponible avec F.', playing: 'Appui de contrôle en cours.' }),
   circuit: Object.freeze({ button: 'F · ISOLER LE CIRCUIT', offered: 'Victoire confirmée. Isolation du circuit disponible avec F.', playing: 'Isolation du circuit en cours.' })

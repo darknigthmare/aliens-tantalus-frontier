@@ -7,6 +7,15 @@ import { getXenoTrialsStageHazardViewV188 } from './xeno-trials-stage-hazards-v1
 export function drawXenoTrialsStageHazardsV188(ctx, match, arena, { plane = 'rear', reducedMotion = false } = {}) {
   const view = getXenoTrialsStageHazardViewV188(match);
   if (!view || !['rear', 'front'].includes(plane)) return view;
+  if (plane === 'front' && view.cargoInterlockV213) {
+    ctx.save();
+    ctx.lineWidth = 2;
+    for (const circuit of view.cargoInterlockV213.circuits) {
+      ctx.strokeStyle = circuit.armed ? '#91d7ed' : '#5c706d';
+      ctx.strokeRect(circuit.left, arena.floor + 1, circuit.right - circuit.left, 3);
+    }
+    ctx.restore();
+  }
   if (plane === 'front' && view.isolationV212?.isolated) {
     ctx.save();
     ctx.strokeStyle = '#8bc7a4';

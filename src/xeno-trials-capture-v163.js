@@ -292,6 +292,25 @@ export function getXenoTrialsGroundSupportLockV210(attacker, target, images, rig
  const lock = clawLock(pair, pair.layout.contacts.supportNear);
  return lock && { ...lock, motion: 'claw', revision: 210 };
 }
+export function getXenoTrialsGroundApproachLockV213(attacker, target, images, rig, profile, supportIndex, arena) {
+ const pair = getFloorPair(attacker, target, images, rig, supportIndex);
+ if (!pair || ![profile.contactKey, ...profile.supportKeys].every(key => rig.contacts[key])) return null;
+ const direction = attacker.facing;
+ const targetAnchor = pair.layout.contacts.supportNear;
+ const front = drawnAnchor(pair, pair.rest, profile.contactKey);
+ const ideal = direction * (targetAnchor[0] - front[0]);
+ const edge = direction === 1 ? pair.layout.bounds.left : pair.layout.bounds.right;
+ const planted = [...profile.supportKeys.map(key => drawnAnchor(pair, pair.rest, key)[0]), ...(profile.walkSupports || [])];
+ const room = Math.min(...planted.map(x => direction * (edge - x) - 2));
+ const boundary = Math.min(direction === 1 ? arena.right - attacker.x : attacker.x - arena.left,
+  direction * (target.x - attacker.x) - 4);
+ const distanceToContact = Math.min(ideal, room, boundary, 76);
+ if (!Number.isFinite(distanceToContact) || distanceToContact < 8) return null;
+ const offset = distanceToContact * direction;
+ const shifted = { ...pair, attacker: { ...attacker, x: attacker.x + offset } };
+ const lock = getSupportLock(shifted, profile, targetAnchor);
+ return lock && { ...lock, attacker, offset, contactX: shifted.attacker.x };
+}
 export function getXenoTrialsFixtureSupportLockV210(attacker, target, images, rig, profile, fixture) {
  const pair = getFloorPair(attacker, target, images, rig);
  if (!pair) return null;

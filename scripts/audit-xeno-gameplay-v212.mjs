@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoGameplayDigestV213, xenoGameplayRuntimeSourcesV213, verifyXenoGameplayV213 } from './audit-xeno-gameplay-v213.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -349,25 +350,29 @@ export const XENO_GAMEPLAY_DECLARATIONS_V212 = freeze({
 });
 
 export function reviewedXenoGameplayDigestV212(path, endpoint) {
-  if (!Object.hasOwn(XENO_GAMEPLAY_SUCCESSORS_V212, path)) return endpoint;
+  if (!Object.hasOwn(XENO_GAMEPLAY_SUCCESSORS_V212, path)) return reviewedXenoGameplayDigestV213(path, endpoint);
   const receipt = XENO_GAMEPLAY_SUCCESSORS_V212[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V211 endpoint for V212: ' + path);
-  return receipt.sha256;
+  return reviewedXenoGameplayDigestV213(path, receipt.sha256);
 }
 
 export function xenoGameplayRuntimeSourcesV212(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_SUCCESSORS_V212)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoGameplayDigestV212(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoGameplayDigestV213(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256 && result[path] !== current)
+      reviewedXenoGameplayDigestV212(path, result[path]);
+    result[path] = current;
   }
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_NEW_INPUTS_V212)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined) assert.equal(result[path], receipt.sha256, 'Incorrect V212 runtime input: ' + path);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoGameplayDigestV213(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256)
+      assert.equal(result[path], current, 'Incorrect V212 runtime input: ' + path);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoGameplayRuntimeSourcesV213(result);
 }
 
 export function verifyXenoGameplayV212(readSource = readRepository) {
@@ -383,7 +388,7 @@ export function verifyXenoGameplayV212(readSource = readRepository) {
     assert.ok(['runtime', 'asset', 'tooling', 'documentation'].includes(receipt.kind) && isHash(receipt.sha256), 'Invalid V212 receipt: ' + path);
     if (Object.hasOwn(receipt, 'previousSha256'))
       assert.ok(isHash(receipt.previousSha256) && receipt.previousSha256 !== receipt.sha256, 'Invalid V212 predecessor: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V212 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoGameplayDigestV213(path, receipt.sha256), 'Unreviewed V212 source bytes: ' + path);
   }
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_DECLARATIONS_V212)) {
     const source = readSource(path).toString();
@@ -392,6 +397,7 @@ export function verifyXenoGameplayV212(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V211 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V211 declarations changed: ' + path);
   }
+  verifyXenoGameplayV213(readSource);
   return Object.freeze({ baseline: XENO_GAMEPLAY_BASELINE_V212, successors: successors.length,
     addedInputs: inputs.length, historicalResultsTransferred: false });
 }

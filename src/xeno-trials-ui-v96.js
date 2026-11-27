@@ -1,7 +1,7 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V212 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V213 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
@@ -37,8 +37,8 @@ import { getEnemyImportAttackV109 } from './enemy-import-attacks-v109.js';
 import { getXenoTrialsRuntimeAnimationCoverage } from './xeno-trials-animation-coverage-v199.js';
 import { getXenoTrialsRuntimeActionAtlases } from './xeno-trials-action-atlas-v199.js';
 import { getXenoTrialsRosterPageV179, getXenoTrialsRosterProfileV179 } from './xeno-trials-roster-v179.js';
-import { XENO_TRIALS_HORDE_PROTOCOLS_V186 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
-import { XENO_TRIALS_OPERATION_BOARD_V212 as OPERATIONS } from './xeno-trials-operations-v188.js';
+import { XENO_TRIALS_HORDE_BOARD_V213 as HORDE_PROTOCOLS } from './xeno-trials-horde-v180.js';
+import { XENO_TRIALS_OPERATION_BOARD_V213 as OPERATIONS } from './xeno-trials-operations-v188.js';
 import { getXenoTrialsOperationBriefingV188, getXenoTrialsOperationHudV188 } from './xeno-trials-operation-presentation-v188.js';
 import { getXenoTrialsProgramPageV186 } from './xeno-trials-programs-v186.js';
 import { getXenoTrialsHordeBriefingV180, getXenoTrialsHordeViewV180, isXenoTrialsHordeActivityV180 } from './xeno-trials-horde-ui-v180.js';
@@ -533,8 +533,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V212.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V212.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V213.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V213.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -907,7 +907,9 @@ export class XenoTrialsUiV96 {
         ? `${hazard.phase === 'warning' ? 'DANGER ANNONCÉ' : 'DANGER ACTIF'} · ${hazard.label} · ${escapeHint}` : '';
       const isolation = hazard?.isolationV212;
       const isolationLabel = isolation ? `CIRCUITS ISOLÉS · ${isolation.isolated}/${isolation.circuits.length}` : '';
-      this.el('operation-hazard').textContent = hazardLabel || isolationLabel;
+      const cargoInterlock = hazard?.cargoInterlockV213;
+      const cargoLabel = cargoInterlock ? cargoInterlock.armed ? `RAMPE ARMÉE · ${cargoInterlock.armed}` : 'RAMPES HORS TENSION' : '';
+      this.el('operation-hazard').textContent = hazardLabel || isolationLabel || cargoLabel;
       this.el('operation-hazard').setAttribute('data-active', String(hazard?.phase === 'active'));
     }
     if (!horde || snapshot.phase === 'match-over')
@@ -975,7 +977,12 @@ export class XenoTrialsUiV96 {
           jump.setAttribute('aria-label', crossing ? 'Franchir au sol' : controlLabel.jump);
         }
         const hint = this.el('parry-status');
-        const notice = riposte.ready ? 'RIPOSTE · GARDE + SUPER' : parry.openingTicks > 0 ? 'OUVERTURE' : parry.active ? 'PARADE' : '';
+        const grapple = snapshot.grappleViewV153;
+        const counterLesson = !practice || practice.sandbox || practice.id === 'grab-counter';
+        const escape = counterLesson && !snapshot.paused && grapple?.target === 'player' ? grapple.escapeV213?.state : null;
+        const counter = escape === 'ready' ? 'CONTRE · GARDE + RAPIDE' : escape === 'committed' ? 'MAINTENEZ GARDE'
+          : escape === 'failed' ? 'GARDE · SORTIE STANDARD' : '';
+        const notice = counter || (riposte.ready ? 'RIPOSTE · GARDE + SUPER' : parry.openingTicks > 0 ? 'OUVERTURE' : parry.active ? 'PARADE' : '');
         if (this.lastParryNoticeV208 !== notice) {
           this.lastParryNoticeV208 = notice;
           hint.hidden = !notice;

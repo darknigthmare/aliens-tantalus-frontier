@@ -1,5 +1,6 @@
 import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153, canXenoTrialsGrappleV153, isXenoTrialsGrappledV153, startXenoTrialsGrappleV153, stepXenoTrialsGrappleV153, releaseXenoTrialsGrappleV153, clearXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsGroundGrabV212, XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
+import { beginXenoTrialsGroundBreakV213 } from './xeno-trials-grapple-v213.js';
 import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
@@ -19,6 +20,7 @@ import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 import { XENO_TRIALS_HORDE_LIMITS_V180 as HORDE_LIMITS, getXenoTrialsHordeProtocolV180,
   createXenoTrialsHordeStateV180, advanceXenoTrialsHordeDirectorV180 } from './xeno-trials-horde-v180.js';
 import { getXenoTrialsHordeSlotV186, getXenoTrialsHordeBossViewV186 } from './xeno-trials-horde-bosses-v186.js';
+import { getXenoTrialsHordeGateV213 } from './xeno-trials-horde-minigames-v213.js';
 import { getXenoTrialsOperationV188, createXenoTrialsOperationStateV188,
   stepXenoTrialsOperationV188, getXenoTrialsOperationReceiptV188 } from './xeno-trials-operations-v188.js';
 import { createXenoTrialsStageHazardsV188, stepXenoTrialsStageHazardsV188 } from './xeno-trials-stage-hazards-v188.js';
@@ -26,12 +28,13 @@ import { createXenoTrialsHordeCheckpointV186 } from './xeno-trials-horde-checkpo
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { XENO_TRIALS_MOVE_CONTROLS_V207, XENO_TRIALS_EVADE_V207, readXenoTrialsMovesetV207, gateXenoTrialsMovesetV207,
   releaseXenoTrialsMovesetV207, clearXenoTrialsMovePoseV207, getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207,
-  validXenoTrialsMovesetV207, hasXenoTrialsGroundTraversalV208 } from './xeno-trials-moveset-v207.js';
+  validXenoTrialsMovesetV207, hasXenoTrialsGroundTraversalV208, XENO_TRIALS_LOW_RETREAT_V213, XENO_TRIALS_GUARD_RETREAT_V213,
+  canXenoTrialsGuardRetreatV213, getXenoTrialsEvadeSpecV213 } from './xeno-trials-moveset-v207.js';
 import { clearXenoTrialsParryV208, gateXenoTrialsParryV208, isXenoTrialsParryingV208, releaseXenoTrialsParryV208,
   resolveXenoTrialsParryV208, stepXenoTrialsParryV208, validXenoTrialsParryStateV208, consumeXenoTrialsParryOpeningV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsAlternateSignatureV208 } from './xeno-trials-signature-kit-v208.js';
 import { XENO_TRIALS_GRAVITY_V210, bufferXenoTrialsLandingV210, clearXenoTrialsMovementV210, hasXenoTrialsGroundTurnV210,
-  stepXenoTrialsGroundTurnV210, takeXenoTrialsLandingV210, validXenoTrialsMovementV210 } from './xeno-trials-movement-v210.js';
+  hasXenoTrialsDefensiveTravelV213, stepXenoTrialsGroundTurnV210, takeXenoTrialsLandingV210, validXenoTrialsMovementV210 } from './xeno-trials-movement-v210.js';
 import { XENO_TRIALS_AIR_HIT_V211, XENO_TRIALS_GET_UP_V211, canStartXenoTrialsGroundRecoveryV212,
   clearXenoTrialsGroundRecoveryV211, getXenoTrialsAirHitV211, startXenoTrialsGroundRecoveryV211,
   stepXenoTrialsGroundRecoveryV211, validXenoTrialsAirAttackV211, validXenoTrialsGroundRecoveryV211 } from './xeno-trials-defense-v211.js';
@@ -205,9 +208,12 @@ export function releaseXenoTrialsControlsV150(match, side, controls = {}) {
 }
 function aiInput(pair, dt, match = pair, canEngage = true) {
   const before = pair.ai?.decisions;
+  const prior = pair.ai?.observation;
   const controls = stepXenoTrialsBrainV119(pair, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));
-  return canEngage ? chooseXenoTrialsHardTacticsV209(match, pair.fighters[1], pair.fighters[0], pair.ai,
-    XENO_TRIALS_ATTACKS_V96, controls, dt, pair.ai.decisions !== before) : controls;
+  if (!canEngage) return controls;
+  const tactics = chooseXenoTrialsHardTacticsV209(match, pair.fighters[1], pair.fighters[0], pair.ai,
+    XENO_TRIALS_ATTACKS_V96, controls, dt, pair.ai.decisions !== before, prior);
+  return tactics === controls ? controls : input(tactics);
 }
 function reactToLowStrikeV207(match, fighter, target, controls) {
   const attack = target.attack;
@@ -281,6 +287,8 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     if (fighter.y === 0) fighter.vy = 0;
   }
   if (isXenoTrialsGrappledV153(match, fighter)) {
+    if (match.grappleV153.grabIdV212) beginXenoTrialsGroundBreakV213(match, fighter, controls,
+      (type, details) => event(match, type, details));
     clearXenoTrialsMovePoseV207(fighter);
     clearXenoTrialsMovementV210(fighter);
     clearXenoTrialsGroundRecoveryV211(fighter);
@@ -291,7 +299,8 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   const onGround = fighter.y === 0 && fighter.stun <= 0;
   if (moveset) {
     if (!onGround) clearXenoTrialsMovePoseV207(fighter);
-    else moveset.low = !moveset.evade && (fighter.attack ? fighter.attack.kind === 'low' : moves.low);
+    else if (moveset.evade) moveset.low = moveset.evade.variantV213 === XENO_TRIALS_LOW_RETREAT_V213.id;
+    else moveset.low = fighter.attack ? fighter.attack.kind === 'low' : moves.low;
   }
   const canFace = !fighter.attack && !fighter.guard && !moveset?.evade && fighter.stun <= 0 && !isXenoTrialsParryingV208(match, fighter);
   const desiredFacing = enemy.x >= fighter.x ? 1 : -1;
@@ -311,32 +320,49 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   fighter.guard = controls.guard && onGround && !fighter.attack && !moveset?.evade && fighter.stamina > 1;
   if (fighter.guard && !moveset?.low && !parrying && !turning && !specialLocked && !match.hordeV180 && !controls.super
     && controls.heavy && !fighter.previousInput.heavy) launchGroundGrabV212(match, fighter, definition);
-  if (fighter.guard) fighter.stamina = Math.max(0, fighter.stamina - dt * 5);
+  if (fighter.guard) {
+    const before = fighter.x;
+    if (!moves.evade && canXenoTrialsGuardRetreatV213(fighter, definition, controls))
+      fighter.x = clamp(fighter.x + axis * definition.speed * XENO_TRIALS_GUARD_RETREAT_V213.speedRatio * dt,
+        XENO_TRIALS_ARENA_V96.left, XENO_TRIALS_ARENA_V96.right);
+    const movingDrain = fighter.x !== before ? XENO_TRIALS_GUARD_RETREAT_V213.additionalDrain : 0;
+    fighter.stamina = Math.max(0, fighter.stamina - dt * (5 + movingDrain));
+  }
   else if (!fighter.attack && !moveset?.evade && !parrying && fighter.stun <= 0) fighter.stamina = Math.min(definition.stamina, fighter.stamina + dt * 24);
   if (!parrying && fighter.guard && controls.super && !fighter.previousInput.super) launchRiposteV208(match, fighter, definition);
   if (fighter.stun <= 0 && !fighter.attack && !fighter.guard && !parrying && !turning) {
-    const evadeSpec = XENO_TRIALS_EVADE_V207;
     const jumpPressed = controls.jump && !fighter.previousInput.jump;
     const groundTraversal = hasXenoTrialsGroundTraversalV208(definition);
     const crossing = jumpPressed && groundTraversal && !moves.evade;
-    if ((moves.evade || crossing || landed) && onGround && !moveset?.low && !moveset?.evade && fighter.stamina >= evadeSpec.cost) {
+    const lowRetreat = moves.evade && moveset?.low && (axis === 0 || axis === -fighter.facing) && hasXenoTrialsDefensiveTravelV213(definition);
+    const requestedEvade = lowRetreat ? XENO_TRIALS_LOW_RETREAT_V213 : XENO_TRIALS_EVADE_V207;
+    if ((moves.evade || crossing || landed) && onGround && (lowRetreat || !moveset?.low) && !moveset?.evade
+      && fighter.stamina >= requestedEvade.cost) {
       moveset ??= fighter.movesetV207 = { held: 0, rearm: 0, low: false, evade: null };
-      fighter.stamina -= evadeSpec.cost;
+      fighter.stamina -= requestedEvade.cost;
       const fromLanding = !moves.evade && landed;
       moveset.evade = { direction: fromLanding ? landed.direction : axis || (crossing ? fighter.facing : -fighter.facing),
-        ticks: 0, origin: fighter.x };
+        ticks: 0, origin: fighter.x, ...(lowRetreat ? { variantV213: requestedEvade.id } : {}) };
       event(match, 'evade-v207', { side: fighter.side, direction: moveset.evade.direction,
+        ...(lowRetreat ? { variantV213: requestedEvade.id } : {}),
         ...(fromLanding ? { sourceV210: 'landing', startedTickV210: landed.tick } : {}),
-        ...(fromLanding && match.hordeV180 ? { targetInstanceV180: fighter.instanceIdV180 || 'player' } : {}) });
+        ...((fromLanding || lowRetreat) && match.hordeV180 ? { targetInstanceV180: fighter.instanceIdV180 || 'player' } : {}) });
     }
     const evade = moveset?.evade;
     let advance = false;
     if (evade) {
-      advance = evade.ticks < evadeSpec.travelTicks && evade.direction === fighter.facing
+      const evadeSpec = getXenoTrialsEvadeSpecV213(evade), short = evadeSpec === XENO_TRIALS_LOW_RETREAT_V213;
+      advance = !short && evade.ticks < evadeSpec.travelTicks && evade.direction === fighter.facing
         && (fighter.x - evade.origin) * evade.direction >= evadeSpec.advanceMinimum;
-      if (evade.ticks < evadeSpec.travelTicks) fighter.x += evade.direction * clamp(definition.speed * 2.15, 300, 510) * dt;
+      if (evade.ticks < evadeSpec.travelTicks) {
+        const speed = short ? clamp(definition.speed * 1.38, 170, 400) : clamp(definition.speed * 2.15, 300, 510);
+        fighter.x += evade.direction * speed * dt;
+      }
       evade.ticks++;
-      if (evade.ticks >= evadeSpec.travelTicks + evadeSpec.recoveryTicks) moveset.evade = null;
+      if (evade.ticks >= evadeSpec.travelTicks + evadeSpec.recoveryTicks) {
+        moveset.evade = null;
+        if (short) moveset.low = moves.low;
+      }
     } else {
       fighter.x += axis * definition.speed * (moveset?.low ? .55 : 1) * dt;
       if (jumpPressed && !groundTraversal && fighter.y === 0 && !moveset?.low) { fighter.vy = definition.jump; fighter.y = .001; }
@@ -578,13 +604,16 @@ function applyImpact(match, impact) {
 
 function makeHordeFighterV180(match, id, wave, serial, slotIndex) {
   const fighter = makeFighter('opponent', id);
-  const player = match.fighters[0], direction = serial % 2 ? 1 : -1;
-  const distance = 260 + rng(match) * 380;
-  fighter.x = clamp(player.x + direction * distance, XENO_TRIALS_ARENA_V96.left + 100, XENO_TRIALS_ARENA_V96.right - 100);
-  // At a boundary, place reinforcements on the open side rather than on top
-  // of the player. The visible grace period still applies to every spawn.
-  if (Math.abs(fighter.x - player.x) < 200)
-    fighter.x = clamp(player.x - direction * distance, XENO_TRIALS_ARENA_V96.left + 80, XENO_TRIALS_ARENA_V96.right - 80);
+  const player = match.fighters[0], gate = getXenoTrialsHordeGateV213(wave, slotIndex);
+  if (gate) fighter.x = gate.x;
+  else {
+    const direction = serial % 2 ? 1 : -1;
+    const distance = 260 + rng(match) * 380;
+    fighter.x = clamp(player.x + direction * distance, XENO_TRIALS_ARENA_V96.left + 100, XENO_TRIALS_ARENA_V96.right - 100);
+    // The historical free approach chooses the open side at a boundary.
+    if (Math.abs(fighter.x - player.x) < 200)
+      fighter.x = clamp(player.x - direction * distance, XENO_TRIALS_ARENA_V96.left + 80, XENO_TRIALS_ARENA_V96.right - 80);
+  }
   fighter.facing = player.x >= fighter.x ? 1 : -1;
   const slot = getXenoTrialsHordeSlotV186(wave, slotIndex);
   fighter.hp = slot?.hp ?? wave.hp; fighter.maxHpV180 = fighter.hp; fighter.instanceIdV180 = `horde-${serial}`;
@@ -602,7 +631,8 @@ function makeHordeFighterV180(match, id, wave, serial, slotIndex) {
     }
   }
   fighter.aiV180 = createXenoTrialsBrainV119();
-  event(match, 'horde-spawn-v180', { instanceId: fighter.instanceIdV180, fighterId: id, x: fighter.x, hp: fighter.hp });
+  event(match, 'horde-spawn-v180', { instanceId: fighter.instanceIdV180, fighterId: id, x: fighter.x, hp: fighter.hp,
+    ...(gate ? { gateV213: gate.side, wave: wave.index + 1, slotIndex } : {}) });
   if (slot?.rank === 'boss') event(match, 'horde-boss-spawn-v186', {
     instanceId: fighter.instanceIdV180, fighterId: id, hp: fighter.hp, wave: match.hordeV180.wave });
   return fighter;
@@ -925,7 +955,7 @@ export function restoreXenoTrialsHordeMatchV180(snapshot) {
       || fighter.x < XENO_TRIALS_ARENA_V96.left || fighter.x > XENO_TRIALS_ARENA_V96.right
       || fighter.y < 0 || fighter.stamina < 0 || fighter.stamina > getXenoTrialsFighterV96(fighter.id).stamina
       || fighter.attack?.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212
-      || !fighter.previousInput || !fighter.rearmControls || !fighter.stats || !validXenoTrialsMovesetV207(fighter)
+      || !fighter.previousInput || !fighter.rearmControls || !fighter.stats || !validXenoTrialsMovesetV207(fighter, value)
       || !validXenoTrialsMovementV210(value, fighter, getXenoTrialsFighterV96(fighter.id))
       || !validXenoTrialsGroundRecoveryV211(value, fighter, getXenoTrialsFighterV96(fighter.id))
       || fighter.attack?.kind === XENO_TRIALS_AIR_HIT_V211

@@ -1,6 +1,7 @@
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
 import { ARBITER_STAGE_HAZARDS_V191 } from './xeno-arbiter-protocols-v191.js';
 import { XENO_TRIALS_ISOLATION_HAZARDS_V212, applyXenoTrialsStageIsolationV212 } from './xeno-trials-stage-isolation-v212.js';
+import { XENO_TRIALS_CARGO_HAZARD_V213, applyXenoTrialsCargoInterlockV213 } from './xeno-trials-cargo-interlock-v213.js';
 
 /** Original physical machinery for the forty Tantalus operation settings.
  * The old duels and eighty horde protocols never enable this system. All times
@@ -53,7 +54,8 @@ export const XENO_TRIALS_STAGE_HAZARDS_V188 = freeze(XENO_TRIALS_BOSS_STAGES_V17
     hitIntervalTicks: limits.hitIntervalTicks, affectsCombat: true,
     canonExact: false, canonStatus: 'original-tantalus-simulation' };
 }));
-const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191, ...XENO_TRIALS_ISOLATION_HAZARDS_V212]
+const definitions = new Map([...XENO_TRIALS_STAGE_HAZARDS_V188, ...ARBITER_STAGE_HAZARDS_V191,
+  ...XENO_TRIALS_ISOLATION_HAZARDS_V212, XENO_TRIALS_CARGO_HAZARD_V213]
   .map(value => [value.stageId, value]));
 export function getXenoTrialsStageHazardV188(stageId, operationId = null) {
   const definition = definitions.get(stageId);
@@ -75,7 +77,7 @@ export function createXenoTrialsStageHazardsV188(stageId, seed = 1, startedTick 
 /** No geometry, damage tuning, cached visual phase or arbitrary object keys are
  * admitted from a save. They are always reconstructed from the authored stage.
  */
-export function validateXenoTrialsStageHazardsV188(state, { stageId, seed, tick, operationId } = {}) {
+export function validateXenoTrialsStageHazardsV188(state, { stageId, seed, tick, operationId, operationState } = {}) {
   const definition = getXenoTrialsStageHazardV188(stageId, operationId);
   if (!exactKeys(state, stateKeys) || state.revision !== 188 || !definition
     || state.stageId !== stageId || state.seed !== seed || !integer(seed, 0, 0xffffffff)
@@ -85,6 +87,8 @@ export function validateXenoTrialsStageHazardsV188(state, { stageId, seed, tick,
     || state.totalDamage > state.contacts * definition.damage
     || !Array.isArray(state.nextHits) || state.nextHits.length > limits.maximumActors
     || state.nextHits.length > state.contacts) return false;
+  if (definition === XENO_TRIALS_CARGO_HAZARD_V213 && (operationState?.operationId !== operationId
+    || !Array.isArray(operationState.completed) || state.contacts > 0 && !operationState.completed.includes(true))) return false;
   const upperBound = Math.ceil((state.lastTick - state.startedTick) / limits.hitIntervalTicks) * limits.maximumActors;
   if (state.contacts > upperBound) return false;
   const ids = new Set();
@@ -148,7 +152,9 @@ export function getXenoTrialsStageHazardViewV188(match) {
 
 function physicalView(match, tick) {
   const state = match.stageHazardsV188;
-  return applyXenoTrialsStageIsolationV212(viewAt(state, tick), definitions.get(state.stageId), match.operationV188, state);
+  const definition = definitions.get(state.stageId);
+  const view = applyXenoTrialsStageIsolationV212(viewAt(state, tick), definition, match.operationV188, state);
+  return applyXenoTrialsCargoInterlockV213(view, definition, match.operationV188);
 }
 
 /** The native engine calls once after movement/contact resolution. Environmental

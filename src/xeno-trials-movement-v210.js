@@ -22,6 +22,7 @@ const turnProfiles = new Map([
 ]);
 const matches = (profiles, definition) => definition?.profileId && profiles.get(definition.id) === definition.profileId;
 export const hasXenoTrialsGroundTurnV210 = definition => Boolean(matches(turnProfiles, definition));
+export const hasXenoTrialsDefensiveTravelV213 = definition => Boolean(matches(landingProfiles, definition));
 
 export function canBufferXenoTrialsLandingV210(fighter, definition, dt) {
   if (!matches(landingProfiles, definition) || !(fighter.y > 0) || !(fighter.vy < 0) || fighter.hp <= 0

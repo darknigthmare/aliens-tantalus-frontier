@@ -2,8 +2,9 @@ import { getXenoTrialsArtV96 } from './xeno-trials-data-v96.js';
 import { XENO_TRIALS_ARENA_V105, XENO_TRIALS_CONTACT_GAP_V105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsIsolationFixtureV211, getXenoTrialsMeasuredContactFinisherV211,
   XENO_TRIALS_ISOLATION_REACH_V211 } from './xeno-trials-finishers-v211.js';
-import { drawXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteAtlasV188 } from './xeno-trials-sprite-atlas-v188.js';
-import { drawXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteAtlasV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { drawXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteLayoutV188 } from './xeno-trials-sprite-atlas-v188.js';
+import { drawXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { drawXenoTrialsSpriteAtlasV191, getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteLayoutV191 } from './xeno-trials-sprite-atlas-v191.js';
 
 const { floor, left: arenaLeft, right: arenaRight } = XENO_TRIALS_ARENA_V105;
 const reach = XENO_TRIALS_ISOLATION_REACH_V211;
@@ -49,15 +50,21 @@ export function getXenoTrialsContactFinisherV212(attacker, target, images) {
   return getXenoTrialsMeasuredContactFinisherV211(attacker, target, images, supports.get(attacker.id), 212);
 }
 
-function gaitFor(fighter, images) {
+const gaitAtlases = [
+  [getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189],
+  [getXenoTrialsSpriteAtlasV188, drawXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteLayoutV188],
+  [getXenoTrialsRuntimeSpriteAtlas, drawXenoTrialsSpriteAtlasV191, getXenoTrialsSpriteLayoutV191]
+];
+
+export function getXenoTrialsFinisherGaitV212(fighter, images, includeV197 = false) {
   const art = getXenoTrialsArtV96(fighter.id, fighter.variant);
-  for (const [get, draw] of [[getXenoTrialsSpriteAtlasV189, drawXenoTrialsSpriteAtlasV189],
-    [getXenoTrialsSpriteAtlasV188, drawXenoTrialsSpriteAtlasV188]]) {
+  for (const [get, draw, layout] of (includeV197 ? gaitAtlases : gaitAtlases.slice(0, 2))) {
     const atlas = get(fighter, art);
     if (!atlas?.frames.some(frame => frame.id.startsWith('walk-'))) continue;
     const { path, width, height } = atlas.texture;
     const image = images?.get(path);
-    if (image?.complete && image.naturalWidth === width && image.naturalHeight === height) return { draw, art };
+    if (image?.complete && image.naturalWidth === width && image.naturalHeight === height)
+      return { draw, art, atlas, layout, includeV197 };
   }
   return null;
 }
@@ -77,7 +84,7 @@ export function getXenoTrialsIsolationApproachV212(match, attacker, target, imag
   const offset = (distance + 2) * direction, destination = attacker.x + offset;
   const gap = direction > 0 ? body.left - source.right : source.left - body.right;
   if (destination < arenaLeft || destination > arenaRight || gap - Math.abs(offset) < XENO_TRIALS_CONTACT_GAP_V105) return null;
-  const gait = gaitFor(attacker, images);
+  const gait = getXenoTrialsFinisherGaitV212(attacker, images);
   if (!gait) return null;
   const approachMs = Math.max(230, Math.round(Math.abs(offset) * 9));
   return { id: `${attacker.id}::fin2`, kind: 'isolation-approach', timing: { approachMs, holdMs: 650, retreatMs: approachMs },
@@ -90,15 +97,20 @@ export function drawXenoTrialsIsolationApproachV212(ctx, fighter, view, metrics,
   const { gait, offset } = lock.approachV212;
   const amount = view.gain * view.gain * (3 - 2 * view.gain);
   const position = fighter.x + offset * amount;
+  const drawn = drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images);
+  return drawn && { ...drawn, isolationApproachV212: { x: position, origin: fighter.x, destination: fighter.x + offset,
+    floor, stationary: view.contact, fixtureId: lock.fixture.id } };
+}
+
+export function drawXenoTrialsFinisherStepV212(ctx, fighter, position, gait, metrics, images) {
   const walking = { ...fighter, attack: null, guard: false, stun: 0, hitFlash: 0 };
   const body = getXenoTrialsBodyBoundsV105(fighter);
   ctx.fillStyle = '#0008';
   ctx.beginPath();
   ctx.ellipse(body.center + position - fighter.x, floor + 4, body.width * .68, 11, 0, 0, Math.PI * 2);
   ctx.fill();
-  const drawn = gait.draw(ctx, walking, gait.art, images, {
-    metrics, x: position, y: floor, facing: fighter.facing, moving: true, distance: Math.abs(position - fighter.x)
+  return gait.draw(ctx, walking, gait.art, images, {
+    metrics, x: position, y: floor, facing: fighter.facing, moving: true, distance: Math.abs(position - fighter.x),
+    includeV197: gait.includeV197
   });
-  return drawn && { ...drawn, isolationApproachV212: { x: position, origin: fighter.x, destination: fighter.x + offset,
-    floor, stationary: view.contact, fixtureId: lock.fixture.id } };
 }

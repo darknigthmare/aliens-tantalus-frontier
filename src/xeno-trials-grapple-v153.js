@@ -1,6 +1,7 @@
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
+import { getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsGroundGrabPairV212, hasXenoTrialsGroundGrabContactV212, XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
+import { getXenoTrialsGroundBreakViewV213, stepXenoTrialsGroundBreakV213, XENO_TRIALS_GROUND_BREAK_V213 } from './xeno-trials-grapple-v213.js';
 
 /** Prowler restraint: original 2D adaptation, not captured choreography.
  * The FTE capability is recorded with its limited provenance in V151. Target
@@ -76,17 +77,29 @@ export function releaseXenoTrialsGrappleV153(match, reason, emit = () => {}) {
   const hold = match.grappleV153;
   if (!hold) return false;
   const grab = activeContract(match, hold) || config;
+  const countered = reason === 'countered';
+  if (countered && (!hold.grabIdV212 || !hold.breakV213 || hold.breakV213.failedTick
+    || match.tick !== hold.breakV213.tick + XENO_TRIALS_GROUND_BREAK_V213.effortTicks)) return false;
   delete match.grappleV153;
   for (const fighter of match.fighters) if ([hold.attacker, hold.target].includes(fighter.side)) {
     fighter.attack = null; fighter.guard = false;
     fighter.rearmControls = Object.fromEntries(actions.map(key => [key,
       fighter.rearmControls?.[key] === true || fighter.previousInput?.[key] === true]));
-    if (fighter.hp > 0) fighter.stun = Math.max(fighter.stun, grab.recovery);
-    if (reason === 'escaped' && fighter.side === hold.target)
+    if (fighter.hp > 0) {
+      const recovery = countered ? (fighter.side === hold.attacker ? XENO_TRIALS_GROUND_BREAK_V213.captorRecovery
+        : XENO_TRIALS_GROUND_BREAK_V213.captiveRecovery) : grab.recovery;
+      fighter.stun = Math.max(fighter.stun, recovery);
+    }
+    if (countered && fighter.side === hold.attacker) {
+      const x = fighter.x - hold.facingV212 * XENO_TRIALS_GROUND_BREAK_V213.recoil;
+      fighter.x = Math.max(XENO_TRIALS_ARENA_V105.left, Math.min(XENO_TRIALS_ARENA_V105.right, x));
+    }
+    if ((reason === 'escaped' || countered) && fighter.side === hold.target)
       fighter.stats.grappleEscapesV153 = (fighter.stats.grappleEscapesV153 || 0) + 1;
   }
   emit('grapple-end-v153', { side: hold.target, attacker: hold.attacker, grappleId: hold.id, reason,
-    ...(hold.grabIdV212 ? { grabIdV212: hold.grabIdV212 } : {}) });
+    ...(hold.grabIdV212 ? { grabIdV212: hold.grabIdV212 } : {}),
+    ...(countered ? { breakStartV213: hold.breakV213.startId } : {}) });
   return true;
 }
 /** One bounded restraint per duel. Both actors keep their collision bodies;
@@ -110,6 +123,9 @@ export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
   }
   if (match.tick <= hold.bornTick) return;
   hold.escapeProgress = to.previousInput.guard && !to.rearmControls.guard ? hold.escapeProgress + 1 : 0;
+  if (hold.grabIdV212 && stepXenoTrialsGroundBreakV213(match, to, emit)) {
+    releaseXenoTrialsGrappleV153(match, 'countered', emit); return;
+  }
   if (hold.escapeProgress >= grab.escapeTicks) { releaseXenoTrialsGrappleV153(match, 'escaped', emit); return; }
   if (match.tick >= hold.expiresTick) { releaseXenoTrialsGrappleV153(match, 'timeout', emit); return; }
   if (match.tick >= hold.nextDamageTick) {
@@ -120,6 +136,9 @@ export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
 }
 function escapePrompt(match, hold, detailed = false) {
   if (hold.target === 'opponent' && match.opponentInputSourceV163 !== 'direct') return 'SAISIE · RÉSISTANCE ADVERSE';
+  const escape = getXenoTrialsGroundBreakViewV213(match);
+  if (escape?.state === 'ready') return 'DÉGAGEMENT RAPIDE · GARDE + J';
+  if (escape?.state === 'committed') return 'DÉGAGEMENT · MAINTENEZ GARDE';
   return detailed ? 'SAISIE · MAINTENIR GARDE POUR SE DÉGAGER' : 'SAISIE · GARDE POUR DÉGAGER';
 }
 export function getXenoTrialsGrappleViewV153(match) {
@@ -128,7 +147,7 @@ export function getXenoTrialsGrappleViewV153(match) {
   return grab ? { ...hold, remainingTicks: Math.max(0, hold.expiresTick - match.tick),
     escapeRatio: Math.min(1, hold.escapeProgress / grab.escapeTicks),
     label: escapePrompt(match, hold, true), canonExact: false,
-    animation: grab.animation } : null;
+    animation: grab.animation, ...(hold.grabIdV212 ? { escapeV213: getXenoTrialsGroundBreakViewV213(match) } : {}) } : null;
 }
 /** Read-only restraint indicators. Existing art and world scale are untouched.
  * No procedural bending is presented as an authored, articulated pin animation.

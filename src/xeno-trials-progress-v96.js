@@ -304,7 +304,7 @@ function validOperationResultV188(config, result) {
     || horde.kills < protocol.waves.slice(0, horde.wavesCleared).reduce((sum, wave) => sum + wave.total, 0)
     || !validateXenoTrialsOperationSnapshotV188(receipt.state, config, { tick: result.durationTicks })
     || !validateXenoTrialsStageHazardsV188(result.stageHazardsV188, { stageId: config.stageId, seed: config.seed,
-      tick: result.durationTicks, operationId: operation.id })) return false;
+      tick: result.durationTicks, operationId: operation.id, operationState: receipt.state })) return false;
   const { state, ...summary } = receipt;
   if (!equalJson(getXenoTrialsOperationReceiptV188(state, config), summary)) return false;
   if (result.winner === 'player') return result.reason === 'operation-complete' && state.status === 'completed'

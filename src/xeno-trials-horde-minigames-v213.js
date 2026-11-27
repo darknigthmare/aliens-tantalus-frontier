@@ -1,0 +1,57 @@
+const layouts = [
+  {
+    id: 'xth213-airlock-relay', title: 'BASCULE DES SAS', stageId: 'containment-deck',
+    description: 'Trois vagues faibles. Le sas ouest ouvre en premier, puis le sas est. La dernière vague entre par les deux côtés.',
+    orders: 'Profitez de la pause entre les vagues pour changer de position. Repliez-vous vers le centre quand les deux sas s’ouvrent.',
+    roundSeconds: 150, reward: 320,
+    waves: [
+      ['left', 'ÉCLAIREURS', ['runner', 'prowler'], 4, 3, 15, .23],
+      ['right', 'APPUI À DISTANCE', ['spitter', 'runner', 'warrior'], 5, 3, 18, .25],
+      ['split', 'PINCE', ['runner', 'warrior', 'prowler', 'spitter'], 5, 4, 20, .27]
+    ]
+  },
+  {
+    id: 'xth213-dock-crossfire', title: 'TENAILLE DU QUAI', stageId: 'tantalus-cargo',
+    description: 'Deux accès livrent des éclaireurs, puis l’accès est fournit des tireurs. L’assaut final vient de l’ouest.',
+    orders: 'Surveillez les deux accès au départ. Fermez la distance sur les tireurs à l’est avant de vous tourner vers la ligne ouest.',
+    roundSeconds: 165, reward: 360,
+    waves: [
+      ['split', 'ÉCLAIREURS', ['runner', 'prowler', 'runner'], 5, 4, 16, .24],
+      ['right', 'APPUI À DISTANCE', ['synth-sniper', 'synth-trooper', 'synth-guard'], 5, 3, 20, .27],
+      ['left', 'LIGNE D’ASSAUT', ['warrior', 'runner', 'armored-runner'], 6, 4, 24, .30]
+    ]
+  }
+];
+
+export const XENO_TRIALS_HORDE_MINIGAMES_V213 = Object.freeze(layouts.map(layout => {
+  const waves = Object.freeze(layout.waves.map(([ingress, label, opponentIds, total, concurrent, hp, damageScale], index) =>
+    Object.freeze({ index, label, opponentIds: Object.freeze(opponentIds), total, concurrent, hp, damageScale, ingressV213: ingress })));
+  return Object.freeze({ ...layout, label: layout.title, difficulty: 'easy', factionId: 'containment',
+    rules: Object.freeze({}), waves, opponentIds: Object.freeze([...new Set(waves.flatMap(wave => wave.opponentIds))]),
+    totalEnemies: waves.reduce((sum, wave) => sum + wave.total, 0),
+    canonExact: false, canonStatus: 'original-tantalus-simulation' });
+}));
+
+const byId = new Map(XENO_TRIALS_HORDE_MINIGAMES_V213.map(protocol => [protocol.id, protocol]));
+export const getXenoTrialsHordeMinigameV213 = id => byId.get(id) || null;
+
+const sides = Object.freeze({ left: 'SAS OUEST', right: 'SAS EST' });
+export function getXenoTrialsHordeGateV213(wave, slotIndex) {
+  if (!wave?.ingressV213 || !Number.isInteger(slotIndex) || slotIndex < 0 || slotIndex >= wave.total) return null;
+  const split = wave.ingressV213 === 'split';
+  const side = split ? slotIndex % 2 === 0 ? 'left' : 'right' : wave.ingressV213;
+  const laneSlot = split ? Math.floor(slotIndex / 2) : slotIndex;
+  const spacing = laneSlot % 3 * 96;
+  return { side, x: side === 'left' ? -220 - spacing : 1220 + spacing };
+}
+
+export function getXenoTrialsHordeGateCueV213(wave, startSlot, contacts) {
+  if (!wave?.ingressV213) return null;
+  const counts = { left: 0, right: 0 };
+  for (let index = startSlot; index < startSlot + contacts; index++) {
+    const gate = getXenoTrialsHordeGateV213(wave, index);
+    if (gate) counts[gate.side]++;
+  }
+  const gates = Object.keys(counts).filter(side => counts[side] > 0);
+  return { gateLabel: gates.length === 2 ? 'DEUX SAS' : sides[gates[0]], counts, waveRole: wave.label };
+}

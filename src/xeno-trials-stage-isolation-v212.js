@@ -55,7 +55,7 @@ export const XENO_TRIALS_ISOLATION_HAZARDS_V212 = freeze(layouts.map((layout, in
 // Reconstruct which physical circuits are isolated from the existing relay
 // receipt. The clock and contact ledger retain their original meanings.
 export function applyXenoTrialsStageIsolationV212(view, definition, operation, stageHazards) {
-  if (!view || !definition?.operationId || operation?.operationId !== definition.operationId) return view;
+  if (!view || !operations.has(definition?.operationId) || operation?.operationId !== definition.operationId) return view;
   const circuits = definition.anchors.map((anchor, index) => ({
     id: index === 0 ? 'A' : 'B', isolated: operation.completed[index] === true,
     left: anchor - definition.width / 2, right: anchor + definition.width / 2

@@ -60,7 +60,7 @@ test('exact runtime images can ship while production poses, documentation, audit
   const audit = 'scripts/audit-xeno-visual-assets-v205.mjs';
   assert.match(read(audit).toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.match(read('scripts/audit-xeno-production-assets-v206.mjs').toString(), /from '\.\/audit-xeno-standalone-v207\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-gameplay-v212.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read('scripts/audit-xeno-gameplay-v213.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-priorities-v204.mjs').toString(), /from '\.\/audit-xeno-visual-assets-v205\.mjs'/);
   for (const path of [audit, 'scripts/public-xeno-visual-admissions-v205.mjs',
     'scripts/verify-xeno-trials-visual-assets-v205.mjs', 'scripts/verify-xeno-visual-assets-audit-v205.mjs',

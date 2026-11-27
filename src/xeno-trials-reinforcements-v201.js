@@ -1,4 +1,5 @@
 import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 } from './xeno-trials-horde-v180.js';
+import { getXenoTrialsHordeGateCueV213 } from './xeno-trials-horde-minigames-v213.js';
 
 // The director's delays are the engine's fixed 120 Hz ticks. Keep this view
 // independent of the engine module, which itself imports the horde director.
@@ -30,11 +31,11 @@ export function getXenoTrialsReinforcementV201(match) {
   const lastSpawnTick = state.nextSpawnTick - reinforcementTicks;
   if (state.waveSpawned > state.concurrent && tick >= lastSpawnTick
     && tick < lastSpawnTick + replacementArrivalTicks) {
-    return cue('replacement', 'arrived', state.wave, state.waveCount, tick, lastSpawnTick, 1);
+    return replacementCue(state, tick, lastSpawnTick, 'arrived', state.waveSpawned - 1);
   }
   if (state.remaining > 0 && state.alive < state.concurrent && state.nextSpawnTick > tick
     && state.nextSpawnTick <= tick + reinforcementTicks) {
-    return cue('replacement', 'incoming', state.wave, state.waveCount, tick, state.nextSpawnTick, 1);
+    return replacementCue(state, tick, state.nextSpawnTick, 'incoming', state.waveSpawned);
   }
   return null;
 }
@@ -43,19 +44,27 @@ function waveCue(state, tick, wave, phase) {
   const protocol = getXenoTrialsHordeProtocolV180(state.protocolId);
   const entry = protocol?.waves[wave - 1];
   if (!entry) return null;
-  return cue('wave', phase, wave, state.waveCount, tick, state.nextWaveTick,
-    Math.min(entry.total, entry.concurrent), protocol.bossFinaleV186?.wave === wave);
+  const contacts = Math.min(entry.total, entry.concurrent);
+  return cue('wave', phase, wave, state.waveCount, tick, state.nextWaveTick, contacts,
+    protocol.bossFinaleV186?.wave === wave, getXenoTrialsHordeGateCueV213(entry, 0, contacts));
 }
 
-function cue(kind, phase, wave, waveCount, tick, arrivalTick, contacts, major = false) {
+function replacementCue(state, tick, arrivalTick, phase, slotIndex) {
+  const entry = getXenoTrialsHordeProtocolV180(state.protocolId)?.waves[state.wave - 1];
+  return cue('replacement', phase, state.wave, state.waveCount, tick, arrivalTick, 1, false,
+    getXenoTrialsHordeGateCueV213(entry, slotIndex, 1));
+}
+
+function cue(kind, phase, wave, waveCount, tick, arrivalTick, contacts, major = false, ingress = null) {
   const incoming = phase === 'incoming';
   const remainingTicks = Math.max(0, arrivalTick - tick);
   const seconds = Math.ceil(remainingTicks * 10 / tickRate) / 10;
   const signal = major ? incoming ? 'CONTACT MAJEUR EN APPROCHE' : 'CONTACT MAJEUR ACTIF'
     : incoming ? 'RENFORTS EN APPROCHE' : 'CONTACTS HOSTILES';
-  const label = [signal, kind === 'wave' && `VAGUE ${wave} / ${waveCount}`, incoming && `${seconds} s`]
+  const label = [signal, kind === 'wave' && `VAGUE ${wave} / ${waveCount}`, ingress?.gateLabel, incoming && `${seconds} s`]
     .filter(Boolean).join(' · ');
-  return Object.freeze({ kind, phase, wave, arrivalTick, remainingTicks, contacts, major, label });
+  return Object.freeze({ kind, phase, wave, arrivalTick, remainingTicks, contacts, major, label,
+    ...(ingress ? { gateLabel: ingress.gateLabel, gateContactsV213: Object.freeze(ingress.counts) } : {}) });
 }
 
 /** Twin confinement instruments on the rear plane. The lenses use a slower
@@ -81,6 +90,8 @@ export function drawXenoTrialsReinforcementV201(ctx, match, camera, reducedMotio
   const windows = Object.freeze([136, 864].map(anchor => anchor - cameraOffset * .12));
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, 1000, clipBottom); ctx.clip();
   for (const [index, x] of fixtures.entries()) {
+    const gateContacts = view.gateContactsV213 ? view.gateContactsV213[index === 0 ? 'left' : 'right'] : view.contacts;
+    if (!gateContacts) continue;
     const rearX = windows[index];
     ctx.fillStyle = color; ctx.globalAlpha = .11 * intensity;
     ctx.beginPath(); ctx.moveTo(rearX - 12, y + 20); ctx.lineTo(rearX + 12, y + 20);
@@ -93,7 +104,7 @@ export function drawXenoTrialsReinforcementV201(ctx, match, camera, reducedMotio
     ctx.fillStyle = '#203036'; ctx.globalAlpha = .91 * intensity;
     ctx.fillRect(x - 30, y + 8, shutter, 13); ctx.fillRect(x + 30 - shutter, y + 8, shutter, 13);
     ctx.fillStyle = color; ctx.globalAlpha = .72 * intensity;
-    for (let i = 0; i < view.contacts; i++) ctx.fillRect(x - (view.contacts * 7 - 2) / 2 + i * 7, y + 29, 5, 4);
+    for (let i = 0; i < gateContacts; i++) ctx.fillRect(x - (gateContacts * 7 - 2) / 2 + i * 7, y + 29, 5, 4);
   }
   ctx.restore();
   return Object.freeze({ ...view, clipBottom, fixtures, windows, opening, reducedMotion });

@@ -1,3 +1,4 @@
+import { createXenoTrialsPracticeGoalsV213, XENO_TRIALS_NEW_DRILLS_V213 } from './xeno-trials-practice-v213.js';
 import { createXenoTrialsPracticeGoalsV212, XENO_TRIALS_NEW_DRILLS_V212 } from './xeno-trials-practice-v212.js';
 import { createXenoTrialsPracticeGoalsV211, XENO_TRIALS_NEW_DRILLS_V211 } from './xeno-trials-practice-v211.js';
 import { XENO_TRIALS_NEW_DRILLS_V210 } from './xeno-trials-practice-v210.js';
@@ -46,9 +47,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V211 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V211.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V212 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V211,
   ...XENO_TRIALS_NEW_DRILLS_V212.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V212.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V213 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V212,
+  ...XENO_TRIALS_NEW_DRILLS_V213.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V213.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V212
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V213
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -89,12 +92,22 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
   const progress = { index: () => index, advance, retry: () => { if (state === 'active') state = 'retry'; } };
-  const goals = createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
+  const goalsV213 = createXenoTrialsPracticeGoalsV213(id, match, progress);
+  const goals = goalsV213 || createXenoTrialsPracticeGoalsV212(id, match, progress) || createXenoTrialsPracticeGoalsV211(id, match, progress);
+  let cueV213 = '';
+
+  function hasCueChangeV213() {
+    if (!goalsV213) return false;
+    const next = goalsV213.cue();
+    if (cueV213 === next) return false;
+    cueV213 = next;
+    return true;
+  }
 
   function opponentInput(playerInput = {}) {
     [player, opponent] = match.fighters;
-    goals?.beforeStep(playerInput);
-    const programmed = goals?.opponentInput();
+    goals?.beforeStep?.(playerInput);
+    const programmed = goals?.opponentInput?.();
     if (programmed !== undefined) return programmed;
     if (entry.behavior === 'mirror') return getMirroredXenoTrialsInputV208(playerInput);
     if (entry.behavior === 'cpu') return null;
@@ -248,7 +261,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
         : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
         : id === 'anti-air' && opponent.y > 0 ? 'CONTACT EN L’AIR' : '' };
   }
-  return { get active() { return state === 'active'; }, opponentInput, observe, view,
+  return { get active() { return state === 'active'; }, opponentInput, observe, view, hasCueChangeV213,
     showIntroV210: entry.showIntroV210 === true,
     canCloseOutroV211: () => goals?.terminalReady?.() === true,
     closedOutroV211: () => goals?.closeOutro?.() === true,

@@ -2,6 +2,7 @@ import { XENO_TRIALS_EVENTS_V179 } from './xeno-trials-events-v179.js';
 import { XENO_TRIALS_BOSS_STAGES_V179 } from './xeno-trials-boss-stages-v179.js';
 import { createXenoTrialsBossProtocolsV186, getXenoTrialsHordeSlotV186 } from './xeno-trials-horde-bosses-v186.js';
 import { getArbiterHordeProtocolV191 } from './xeno-arbiter-protocols-v191.js';
+import { XENO_TRIALS_HORDE_MINIGAMES_V213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
 
 /** Original simulation tuning, not canonical biology or animation evidence.
  * The director shares the native fighter, attacks and CPU with ordinary duels.
@@ -50,9 +51,13 @@ export const XENO_TRIALS_HORDE_BOSS_PROTOCOLS_V186 = createXenoTrialsBossProtoco
 export const XENO_TRIALS_HORDE_PROTOCOLS_V186 = Object.freeze([
   ...XENO_TRIALS_HORDE_PROTOCOLS_V180, ...XENO_TRIALS_HORDE_BOSS_PROTOCOLS_V186
 ]);
+export const XENO_TRIALS_HORDE_BOARD_V213 = Object.freeze([
+  ...XENO_TRIALS_HORDE_MINIGAMES_V213, ...XENO_TRIALS_HORDE_PROTOCOLS_V186
+]);
 
 export function getXenoTrialsHordeProtocolV180(id) {
-  return XENO_TRIALS_HORDE_PROTOCOLS_V186.find(protocol => protocol.id === id) || getArbiterHordeProtocolV191(id);
+  return getXenoTrialsHordeMinigameV213(id)
+    || XENO_TRIALS_HORDE_PROTOCOLS_V186.find(protocol => protocol.id === id) || getArbiterHordeProtocolV191(id);
 }
 
 export function createXenoTrialsHordeStateV180(id) {

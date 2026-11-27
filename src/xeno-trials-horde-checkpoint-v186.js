@@ -12,7 +12,7 @@ import { XENO_TRIALS_ARENA_V105 as ARENA } from './xeno-trials-geometry-v105.js'
 import { getXenoTrialsOperationV188, validateXenoTrialsOperationSnapshotV188,
   isXenoTrialsOperationForwardV188 } from './xeno-trials-operations-v188.js';
 import { validateXenoTrialsStageHazardsV188, isXenoTrialsStageHazardsForwardV188 } from './xeno-trials-stage-hazards-v188.js';
-import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
+import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsEvadeEventV213, validXenoTrialsMovesetV207, xenoTrialsMovePoseV207 } from './xeno-trials-moveset-v207.js';
 import { getXenoTrialsAlternateProjectileV211, validXenoTrialsAlternateProjectileV211, XENO_TRIALS_SIGNATURE_KINDS_V208, validXenoTrialsSignatureActionV208,
   validXenoTrialsSignatureEventV208 } from './xeno-trials-signature-kit-v208.js';
 import { validXenoTrialsParryEventV208, validXenoTrialsParryStateV208, xenoTrialsParryStateV208 } from './xeno-trials-defense-v208.js';
@@ -190,7 +190,8 @@ function admitSnapshot(snapshot, ticket) {
   if (operation) {
     if (!same(config.operationV188, { id: operation.id }) || raw.operationV188?.status !== 'active'
       || !validateXenoTrialsOperationSnapshotV188(raw.operationV188, ticket, raw)
-      || !validateXenoTrialsStageHazardsV188(raw.stageHazardsV188, { stageId: config.stageId, seed: config.seed, tick: raw.tick, operationId: operation.id })
+      || !validateXenoTrialsStageHazardsV188(raw.stageHazardsV188, { stageId: config.stageId, seed: config.seed,
+        tick: raw.tick, operationId: operation.id, operationState: raw.operationV188 })
       || raw.stageHazardsV188.startedTick !== 0
       || raw.stageHazardsV188.nextHits.some(row => row.actorId !== 'player'
         && Number(row.actorId.slice(6)) > raw.hordeV180?.serial)
@@ -228,7 +229,7 @@ function admitSnapshot(snapshot, ticket) {
       || !number(fighter.y, 0, 5000) || !number(fighter.vy, -5000, 5000) || !number(fighter.stun, 0, 5)
       || !number(fighter.specialCooldown, 0, 60) || !number(fighter.hitFlash, 0, 1)
       || typeof fighter.guard !== 'boolean' || !controls(fighter.previousInput) || !controls(fighter.rearmControls)
-      || !validXenoTrialsMovesetV207(fighter) || raw.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
+      || !validXenoTrialsMovesetV207(fighter, raw) || raw.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
       || !validXenoTrialsParryStateV208(raw, fighter)
       || !validXenoTrialsMovementV210(raw, fighter, definition)
       || !validXenoTrialsGroundRecoveryV211(raw, fighter, definition)
@@ -254,6 +255,7 @@ function admitSnapshot(snapshot, ticket) {
         : event.side === 'opponent' && protocol.waves.some(item => item.opponentIds.includes(id)
           || item.enemySlotsV186?.some(slot => slot.fighterId === id)))
       || !validXenoTrialsMovementEventV210(raw, event)
+      || !validXenoTrialsEvadeEventV213(raw, event)
       || event.type === 'get-up-v211' && !validXenoTrialsGetUpEventV211(raw, event)
       || event.type === 'parry-v208' && !validXenoTrialsParryEventV208(raw, event))) return null;
   const receivedDamage = horde.opponentStats.damage + raw.fighters.slice(1).reduce((sum, enemy) => sum + enemy.stats.damage, 0);

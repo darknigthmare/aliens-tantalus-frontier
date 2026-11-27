@@ -1,10 +1,13 @@
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105 } from './xeno-trials-geometry-v105.js';
-import { getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207 } from './xeno-trials-moveset-v207.js';
-import { getXenoTrialsParryViewV208 } from './xeno-trials-defense-v208.js';
+import { getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207, XENO_TRIALS_MOVE_CONTROLS_V207 } from './xeno-trials-moveset-v207.js';
+import { getXenoTrialsParryViewV208, isXenoTrialsParryingV208 } from './xeno-trials-defense-v208.js';
 import { getXenoTrialsRiposteReadinessV208, getXenoTrialsRiposteV208 } from './xeno-trials-ripostes-v208.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 } from './xeno-trials-signature-kit-v208.js';
+import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
+import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js';
+import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 
 const nonMeleeStyles = new Set(['acid', 'pulse', 'flame', 'detonation', 'ground-wave', 'acid-cluster', 'aimed-acid']);
 const signatureControls = { 'signature-2': 'signature2', 'signature-3': 'signature3' };
@@ -68,9 +71,91 @@ function signatureInput(match, cpu, target, definition, controls, brain) {
   return { ...controls, heavy: false, special: false, [signatureControls[move.kind]]: true };
 }
 
+function groundedContact(spec) {
+  return spec && !spec.detonationV210 && !spec.projectileStyleV211 && !spec.liftV208;
+}
+
+function freshSignature(cpu, move) {
+  const control = signatureControls[move?.kind];
+  if (!control || !groundedContact(move.spec) || cpu.stamina < move.spec.cost) return false;
+  const bit = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf(control);
+  return !((cpu.movesetV207?.held | cpu.movesetV207?.rearm) & bit);
+}
+
+function contactBefore(cpu, target, definition, spec, remaining, dt) {
+  if (spec.startup + dt <= remaining && inRange(cpu, target, spec, spec.reach * definition.reach, cpu.facing)) return true;
+  if (!spec.followThroughV210) return false;
+  const later = spec.startup + spec.followThroughV210.after;
+  const strike = getXenoTrialsActiveStrikeV210(spec, later);
+  return later + dt <= remaining && inRange(cpu, target, strike, strike.reach * definition.reach, cpu.facing);
+}
+
+function punishWhiff(match, cpu, target, definition, brain, prior, specs, signatures, dt) {
+  const attack = target.attack, sampled = prior?.attack;
+  if (!brain.observation.targetRecovering || !attack || sampled?.id !== attack.id || match.tick - prior.tick < 2
+    || attack.hit || attack.hitTargetsV180?.length || attack.emitted || target.y > 0) return null;
+  const other = getXenoTrialsFighterV96(target.id);
+  const spec = getXenoTrialsAttackV147(other, attack.kind, specs[attack.kind]);
+  if (!groundedContact(spec) || spec.retreatV208
+    || ['special', 'super'].includes(attack.kind) && nonMeleeStyles.has(getXenoTrialsAttackStyleV147(other, attack.kind))) return null;
+  const activeEnd = spec.startup + spec.active;
+  if (sampled.age >= activeEnd || attack.age < activeEnd) return null;
+  const remaining = activeEnd + spec.recovery - attack.age;
+  const superMove = getXenoTrialsPhysicalSuper(definition);
+  if (groundedContact(superMove?.spec) && !cpu.previousInput.super && !cpu.rearmControls.super
+    && getXenoTrialsSuperReadinessV148(match, cpu, definition).ready
+    && contactBefore(cpu, target, definition, superMove.spec, remaining, dt)) return 'super';
+  const counter = signatures.find(move => contactBefore(cpu, target, definition, move.spec, remaining, dt));
+  return counter ? signatureControls[counter.kind] : null;
+}
+
+function hasRepeatedBlocks(match, cpu, target, definition, specs, dt) {
+  let blocked = null, attempts = 0;
+  // Count distinct recent contact windows from this fighter, up to the last
+  // successful hit or round start. Horde allies cannot establish the pattern.
+  for (let index = match.events.length - 1; index >= 0; index--) {
+    const event = match.events[index];
+    if (event.type === 'fight' || (match.tick - event.tick) * dt > 4) break;
+    const ownInstance = !match.hordeV180 || event.attackerInstanceV180 === cpu.instanceIdV180;
+    if (!ownInstance) continue;
+    const sameTarget = event.side === target.side && event.attacker === cpu.side
+      && (!match.hordeV180 || event.targetInstanceV180 === (target.instanceIdV180 || target.side));
+    if (sameTarget && (event.type === 'hit' || event.type === 'guard-break')) break;
+    if (sameTarget && event.type === 'block') blocked = event;
+    if (event.type !== 'attack' || event.side !== cpu.side) continue;
+    if (blocked && (event.kind === 'light' || event.kind === 'heavy')) {
+      const spec = getXenoTrialsAttackV147(definition, event.kind, specs[event.kind]);
+      const age = (blocked.tick - event.tick + 1) * dt;
+      if (age + 1e-9 >= spec.startup && age < spec.startup + spec.active && ++attempts === 2) return true;
+    }
+    blocked = null;
+  }
+  return false;
+}
+
+function counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt) {
+  const rules = match.config.rulesV119;
+  const facing = target.x >= cpu.x ? 1 : -1;
+  if ((!controls.light && !controls.heavy) || controls.guard || controls.super || controls.special
+    || !prior || brain.observation.projectileThreat || cpu.facing !== facing || cpu.groundRecoveryV211
+    || isXenoTrialsParryingV208(match, cpu) || cpu.specialCooldown > 0 || rules?.noSpecial
+    || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0)) return null;
+  const standingGuard = target.guard && target.facing === -facing && !target.movesetV207?.low && target.y === 0;
+  if (!brain.observation.targetRecovering && !standingGuard) return null;
+  const signatures = XENO_TRIALS_SIGNATURE_KINDS_V208.map(kind => getXenoTrialsAlternateSignatureV208(definition, kind))
+    .filter(move => freshSignature(cpu, move)).sort((a, b) => a.spec.startup - b.spec.startup);
+  let action = punishWhiff(match, cpu, target, definition, brain, prior, specs, signatures, dt);
+  if (!action && standingGuard) {
+    const low = signatures.find(move => move.spec.contactBandV207 === 'low'
+      && inRange(cpu, target, move.spec, move.spec.reach * definition.reach, facing));
+    if (low && hasRepeatedBlocks(match, cpu, target, definition, specs, dt)) action = signatureControls[low.kind];
+  }
+  return action ? { ...controls, left: false, right: false, jump: false, light: false, heavy: false, [action]: true } : null;
+}
+
 /** Add techniques to an existing hard decision, without new saved brain state.
  * A horde caller also applies ordinary engagement and spawn grace first. */
-export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs, controls, dt, decided) {
+export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs, controls, dt, decided, prior) {
   if (match.config.difficulty !== 'hard' || match.hordeV180 && cpu.enemyRankV186 !== 'boss'
     || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.stun > 0 || cpu.movesetV207?.evade
     || match.grappleV153) return controls;
@@ -79,6 +164,7 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (!cpu.parryV208?.openingId && !decided) return controls;
   const definition = getXenoTrialsFighterV96(cpu.id);
   return riposteInput(match, cpu, target, definition)
+    || (decided && counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt))
     || (decided && signatureInput(match, cpu, target, definition, controls, brain))
     || controls;
 }

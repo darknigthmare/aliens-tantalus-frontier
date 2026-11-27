@@ -106,7 +106,7 @@ test('the complete source chain keeps archival defaults and admits only the exac
 });
 
 test('V191 relays to terminal V207, pins its V190 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v212.mjs', relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
+  const terminal = 'scripts/audit-xeno-gameplay-v213.mjs', relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-arbiter-protocols-v191\.mjs'/);
