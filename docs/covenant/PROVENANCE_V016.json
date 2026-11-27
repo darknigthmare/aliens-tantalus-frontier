@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.16.0",
+  "date": "2026-11-26",
+  "baselineCommit": "806a9c387477b5d972846df92016ac3537b3f402",
+  "pullRequest": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "verified1to1": false,
+  "fidelityPolicy": "Original generated PNGs preserved; film, official promotion, production concepts and game adaptation are distinguished. No image is certified 1:1.",
+  "coverage": {
+    "newPngs": 16,
+    "newRuntimePngs": 0,
+    "newCataloguePngs": 16,
+    "cumulativePngs": 119,
+    "runtimePngs": 72,
+    "cataloguePngs": 47,
+    "completeCycles": 5,
+    "completeCyclePhases": 40,
+    "incompleteDavidPoses": 5,
+    "certified1to1Images": 0,
+    "originalPngBytes": 196570946,
+    "newPngBytes": 27746475,
+    "transparentPngs": 115,
+    "opaqueWorldPngs": 4,
+    "productionBriefs": 257,
+    "bibleSummary": {
+      "referenceEntries": 315,
+      "characterProfiles": 23,
+      "humanIdentitiesInProfiles": 17,
+      "namedIdentitiesIncludingSeparateShawPortrait": 18,
+      "sourceCharacterEntries": 38,
+      "biologyReferenceEntries": 49,
+      "weaponFamilies": 7,
+      "playableWeapons": 4,
+      "propFamilies": 126,
+      "propInstances": 630,
+      "filmCandidatePropFamilies": 50,
+      "spatialRecords": 57,
+      "campaignRecords": 56,
+      "independentTableaux": 1,
+      "distinctPhysicalSiteKeysIncludingTableau": 55,
+      "connections": 67,
+      "thresholds": 134,
+      "terrainFamilies": 16,
+      "planetEntries": 3,
+      "transportRecordsIncludingComponentsAndUnresolvedGroups": 12,
+      "pngs": 119,
+      "newPngs": 16,
+      "runtimePngs": 72,
+      "catalogueOnlyPngs": 47,
+      "playerWalkCycles": 4,
+      "npcWalkCycles": 1,
+      "animationPhases": 40,
+      "movingNpcProfilesWithoutWalkPng": 15,
+      "unconsumedProfilesWithoutWalk": 3,
+      "playerProfilesWithoutRunPng": 4,
+      "certified1to1Images": 0,
+      "worldWorkItemsNotPngCount": 154,
+      "supplementalCandidates": 13,
+      "supplementalObjectCandidates": 10,
+      "incompleteCharacterSequencePngs": 5
+    }
+  },
+  "sourceManifests": [
+    {
+      "path": "assets/openai/sprites/alien-covenant-v011/manifest.json",
+      "sha256": "3bc1b0dc4c370ee39c6fd91ab500b236d2eab4b7e686279c131dd4b4451e4923",
+      "originalPngs": 49,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v012/manifest.json",
+      "sha256": "d29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3",
+      "originalPngs": 12,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v013/manifest.json",
+      "sha256": "5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788",
+      "originalPngs": 24,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v014/manifest.json",
+      "sha256": "1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482",
+      "originalPngs": 18,
+      "unchanged": true
+    },
+    {
+      "path": "assets/openai/sprites/alien-covenant-v016/manifest.json",
+      "sha256": "6e166985008494e08f2b528368d0ffa53ae299f59634f91a7b0e9941df607c6a",
+      "originalPngs": 16
+    }
+  ],
+  "runtime": {
+    "release": "0.14.0",
+    "unchanged": true,
+    "manifestSha256": "a557783867c4a15c7fc758a241c0b983778cdaabd3f940c83951d407ed7b3538",
+    "assets": 72,
+    "cycles": 5,
+    "phases": 40,
+    "newAdmissions": 0
+  },
+  "recovery": {
+    "source": "Tool-memory PNGs and recorded outputs; original detailed local report inaccessible after executor disconnection.",
+    "exactPromptsRecovered": 12,
+    "exactPromptsNotRecovered": [
+      "world-planet4-shore-rock",
+      "world-planet4-scorched-grass",
+      "vehicle-audi-lunar-quattro-front",
+      "vehicle-audi-lunar-quattro-patrol"
+    ],
+    "finalRuntimeChangesPublished": false,
+    "finalExcelProduced": false
+  },
+  "validation": {
+    "localCovenantTests": {
+      "passed": 59,
+      "failed": 0,
+      "command": "npm run test:covenant"
+    },
+    "localBundleCheck": {
+      "passed": true,
+      "sprites": 72,
+      "pngBytes": 114528521,
+      "htmlBytes": 1059292
+    },
+    "localRecoveryCheck": {
+      "passed": true,
+      "historicalOriginals": 103,
+      "newCataloguePngs": 16,
+      "allSourcePngs": 119,
+      "sha256AndGitBlobShaVerified": true,
+      "runtimeManifestByteIdentical": true
+    },
+    "bibleGeneration": {
+      "passed": true,
+      "draft": false,
+      "productionBriefs": 257,
+      "referenceEntries": 315,
+      "historicalIdsPreserved": true
+    },
+    "excel": {
+      "status": "passed",
+      "sheets": 16,
+      "filterableTables": 15,
+      "comparedCells": 16940,
+      "formulaErrors": 0,
+      "renderedAndInspectedViews": 23,
+      "engine": "ArtifactTool",
+      "scope": "All 16 sheets and 7 detail ranges inspected; cell values compared to canonical data."
+    },
+    "catalogue": {
+      "status": "awaiting-ci-browser-check",
+      "localPixelAndPackageValidation": "passed",
+      "localBrowserStatus": "blocked-environment",
+      "reason": "Chromium wrapper present but browser executable absent; no local page or image decode result claimed.",
+      "expectedOriginalImages": 119,
+      "expectedRuntimeImages": 72,
+      "expectedCatalogueImages": 47,
+      "expectedAnimationImages": 45,
+      "expectedCompleteCyclePhases": 40,
+      "expectedCycles": 5,
+      "bibleFiles": 4
+    },
+    "githubActions": {
+      "status": "success-for-published-recovery-commit",
+      "runtimeRunUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/actions/runs/45815480300",
+      "commit": "e6b10bdde54c3a4959b6d1d528f9a83c6309ccfd",
+      "contractsPassed": 59,
+      "historicalPilotsPassed": 15,
+      "browserChecksPassed": 69,
+      "runtimePngsDecoded": 72,
+      "sourceAndBuiltAdmissionPassed": true,
+      "historicalCatalogueV014ChecksPassed": 42,
+      "scope": "Runtime unchanged and initial V016 source recovery verified. New V016 bible/catalogue have separate local validation; this run is not a V016 catalogue proof.",
+      "artifactId": 15116421109
+    },
+    "pixelChecks": {
+      "passed": 119,
+      "failed": 0,
+      "newPngs": 16,
+      "alphaMeasuredAgain": true,
+      "allOriginalHashesVerified": true,
+      "transparentSprites": 115,
+      "explicitOpaqueWorldImages": 4
+    }
+  },
+  "limitations": [
+    "The whole corpus remains partially covered; technical tests are not a film-fidelity certificate.",
+    "Twelve exact prompts recovered; four world prompts not recovered after executor loss.",
+    "No incomplete character cycle or new scene geometry is published."
+  ],
+  "bibleDocuments": [
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V016.json",
+      "sha256": "c7160711a97a15c495db71d64d326ab7d7173395d83f136015a2aab4b2a8e5ad",
+      "bytes": 4675404
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V016.md",
+      "sha256": "6438ff038ee3be7a37a080274bc88838cbe96b56f40583399695a3bb1ed3a036",
+      "bytes": 1338449
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V016.html",
+      "sha256": "b21ee9f7a3f39565907475e92e990985db48d9578bcdd162e1f5fdd5b0c2e001",
+      "bytes": 4310871
+    },
+    {
+      "path": "docs/covenant/BIBLE_COVENANT_V016.xlsx",
+      "sha256": "c40a25f5e0404e3fa591d27f0c481d27657cf6b689f88e4f34b46f9b9ac9d85f",
+      "bytes": 290167
+    }
+  ]
+}

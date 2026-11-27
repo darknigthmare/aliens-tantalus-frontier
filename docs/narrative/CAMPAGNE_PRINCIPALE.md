@@ -5275,3 +5275,36 @@ Les 15 profils mobiles de PNJ sans marche intégrée restent ouverts ; 13 ne dis
 
 Les formats V015 livrés sont Markdown, HTML et JSON. Le dernier classeur XLSX finalisé reste V014 ; aucun XLSX ni pack ZIP V015 n’est inclus. Les bibles V014 et les PNG antérieurs restent inchangés. Les références de film, les concepts de production, les adaptations pour le jeu et l’admission dans le rendu gardent des statuts distincts. **La fidélité filmique 1:1 n’est pas certifiée.**
 
+
+
+## Continuation de production — DLC Alien: Covenant V0.16
+
+La [bible détaillée V016](../covenant/BIBLE_COVENANT_V016.md), sa [lecture HTML](../covenant/BIBLE_COVENANT_V016.html), son [classeur Excel](../covenant/BIBLE_COVENANT_V016.xlsx) et ses [données JSON](../covenant/BIBLE_COVENANT_V016.json) prolongent l’annexe historique. Elles ajoutent 257 contrats de production pour les personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes, en conservant les 315 références et les identifiants du jeu.
+
+Le lot apporte 16 PNG : 119 cumulés, 72 admissions runtime conservées et 47 images de catalogue. Les cinq poses de David restent une séquence incomplète de catalogue ; les cinq cycles antérieurs sont inchangés. Les images ne certifient pas une fidélité 1:1. Les manques, refus et limites de preuve restent explicites dans le [suivi V016](../covenant/SPRITES_V016_STATUS.md) et la [provenance](../covenant/PROVENANCE_V016.json).
+
+
+---
+
+## Continuation de production — DLC Alien: Covenant V0.17
+
+La continuation réunit les productions V015 et V016, soit **141 PNG de base**, puis ajoute **13 nouveaux originaux : huit phases de marche d’Upworth et cinq images de monde**. Le registre cumulatif contient **154 PNG, dont 81 admis au rendu du jeu et 73 réservés au catalogue**. La promotion du rocher V016 sur l’unique occurrence `landing-light2` ajoute une admission sans créer d’image ni modifier la géométrie.
+
+Le rendu conserve les quatre cycles joueurs et Walter, puis ajoute Upworth uniquement sur sa présence native `upworth-comms` dans `comms`. Ces **six cycles runtime comportent 48 phases**. Les cycles de Ricks et d’Oram restent au catalogue, soit **deux cycles et 16 phases**. Les **cinq poses David** demeurent incomplètes et exclues du lecteur de cycles. Le total documentaire est donc de 69 images d’animation, dont 64 phases appartenant à huit cycles complets.
+
+Les cinq images de monde couvrent quatre candidats : le siège vide de navigation du Juggernaut, l’iris de soute fermé et ouvert, une capsule de colon verticale et son support supérieur articulé. Elles restent au catalogue. L’iris conserve **trois états intermédiaires manquants** et deux cadrages statiques indépendants. Le siège documenté ne remplace pas l’estrade native ; la capsule verticale ne correspond pas à l’enveloppe horizontale actuelle de 200 × 84 unités.
+
+La bible V017 détaille **261 contrats de production** dans les huit domaines demandés : personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et planètes. Elle conserve **315 références, 67 liaisons, 134 seuils et 630 occurrences de props**, avec leurs identifiants historiques. Chaque contrat précise l’apparence, les états disponibles et manquants, le consommateur éventuel, les sources, les limites et la prochaine action. Ces vues documentaires se recoupent et ne s’additionnent pas en objets uniques.
+
+Documents de référence :
+
+- [Bible Covenant V017 — Markdown](../covenant/BIBLE_COVENANT_V017.md), [HTML](../covenant/BIBLE_COVENANT_V017.html), [JSON](../covenant/BIBLE_COVENANT_V017.json) et [Excel](../covenant/BIBLE_COVENANT_V017.xlsx).
+- [Suivi V017](../covenant/SPRITES_V017_STATUS.md), [journal de continuation](../covenant/CONTINUATION_V017.md) et [provenance et vérifications](../covenant/PROVENANCE_V017.json).
+- [Manifeste des treize nouveaux originaux](../../assets/openai/sprites/alien-covenant-v017/manifest.json).
+- [PR 79 — continuation Covenant](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79), rattachée à la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71).
+
+Les 141 PNG antérieurs, leurs six manifestes et les bibles historiques conservent leurs octets. La convergence de la branche cible conserve également son index général des DLC et ses ajouts préexistants. Le pack documentaire comprend les 154 originaux ; la distribution du jeu suit séparément les 81 admissions du registre. Les routes, collisions, seuils et sauvegardes gardent les définitions natives.
+
+Les résultats de vérification et leur portée sont consignés dans les documents liés et les reçus du commit publié. Les parcours réellement joués, les scènes préparées et les erreurs d’images injectées sont distingués. Un succès technique ne certifie pas la ressemblance avec le film.
+
+**Aucune fidélité filmique 1:1 n’est certifiée.** Film, prologue officiel, document de fabrication et adaptation du projet gardent leurs preuves propres. Les manquants d’armes, les séquences incomplètes et les refus antérieurs restent suivis. Planet 4, Origae-6 et la Terre conservent des rôles documentaires distincts ; aucune surface d’Origae-6 n’est présentée comme visitée.

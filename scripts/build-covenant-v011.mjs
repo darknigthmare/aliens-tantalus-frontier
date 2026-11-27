@@ -11,8 +11,10 @@ export const COVENANT_ASSETS_V011 = 'assets/openai/sprites/alien-covenant-v011';
 export const COVENANT_ASSETS_V012 = 'assets/openai/sprites/alien-covenant-v012';
 export const COVENANT_ASSETS_V013 = 'assets/openai/sprites/alien-covenant-v013';
 export const COVENANT_ASSETS_V014 = 'assets/openai/sprites/alien-covenant-v014';
-export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013, COVENANT_ASSETS_V014]);
-// V015 is preserved as source material only. Runtime roots and the served V014 bundle remain unchanged.
+export const COVENANT_ASSETS_V016 = 'assets/openai/sprites/alien-covenant-v016';
+export const COVENANT_ASSETS_V017 = 'assets/openai/sprites/alien-covenant-v017';
+export const COVENANT_ASSET_ROOTS = Object.freeze([COVENANT_ASSETS_V011, COVENANT_ASSETS_V012, COVENANT_ASSETS_V013, COVENANT_ASSETS_V014, COVENANT_ASSETS_V016, COVENANT_ASSETS_V017]);
+// V015 originals remain source-only; the cumulative served manifest controls runtime admission.
 export const COVENANT_SOURCE_ONLY_ASSETS_V015 = 'assets/openai/sprites/alien-covenant-v015';
 export const COVENANT_SOURCE_ONLY_PROVENANCE_V015 = COVENANT_SOURCE_ONLY_ASSETS_V015 + '/manifest.json';
 export const COVENANT_MANIFEST_V011 = COVENANT_PUBLIC_V011 + '/sprites-v011.json';
@@ -34,7 +36,29 @@ const REVIEWED_COVENANT_PROVENANCE_SHA256_V011 = '3bc1b0dc4c370ee39c6fd91ab500b2
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V012 = 'd29fb0343de8a7f7f5b97be995a3583d35c93e33df0272e92d42b38af97ef4e3';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V013 = '5154d1c63b0f70c49bf45aa3ac4d26f00e3962214f58e999fa290fe580843788';
 const REVIEWED_COVENANT_PROVENANCE_SHA256_V014 = '1fd31f3a6473e95fddb9e3e4dfc41a4938e7bde0454f072472b1f0a7f699e482';
+export const COVENANT_PROVENANCE_V016 = COVENANT_ASSETS_V016 + '/manifest.json';
+export const COVENANT_PROVENANCE_V017 = COVENANT_ASSETS_V017 + '/manifest.json';
 const REVIEWED_COVENANT_SOURCE_METADATA = new Map([
+  // Exact V018 prompts and primary-reference records remain outside all builds.
+  ['assets/openai/sprites/alien-covenant-v018/manifest.json', '071eed8d03b782e5cb5a379cf17229fd9869b2334b865c43a18c9925889962d4'],
+  ['docs/covenant/BIBLE_COVENANT_V018.json', 'a20cc90244d76e6a8c67a6e67a1f24b082cb224caeb1090283a7ae5ef89393ed'],
+  // Historical filenames and measured image records are preserved only at
+  // these exact reviewed bytes. The source path gate rejects both from builds.
+  ['docs/covenant/recovery-20261126/MANIFEST.json', 'ac1c505f0067a77efc3c917ad3207a11ebe243ce26cbaefcd5f10d52de72e41e'],
+  ['docs/covenant/recovery-20261126/qa/v015/recovered-png-qa.json', '9c625d54782981f95bfbc862870c85451fc053841ef2b830815b5119345075b2'],
+  // The current continuation is admitted by its exact reviewed bytes only.
+  [COVENANT_PROVENANCE_V017, 'a0a552042ae8c0cafaa77c2a9161ef46023a066e0d82391044ad4323276315a4'],
+  ['docs/covenant/BIBLE_COVENANT_V017.json', '433065ffd2f6fb3619396d70d9852e52784d57aab9f9cf88e634b0638274836b'],
+  ['docs/covenant/BIBLE_COVENANT_V017.md', 'a01be6dfbccd4e282cf98b2422d4fd0be8f6f06759dfd972b4f6fa6567d8586a'],
+  ['docs/covenant/BIBLE_COVENANT_V017.html', 'a3d1ae6f4d094d5bdd2e0353279dac5cd42bef5345db7368b9d2f77eca61a067'],
+  ['scripts/build-covenant-bible-v017.py', 'f17b1de7adbaaac168efc37910c8766fbc090416615612f05e7c562bb35cee63'],
+  ['scripts/build-covenant-bible-v017.mjs', 'ab7546312e9fbf769a3be8ffd10aea833b757e1144e8f85f56117722b0f39d20'],
+  ['docs/covenant/BIBLE_COVENANT_V016.json', 'c7160711a97a15c495db71d64d326ab7d7173395d83f136015a2aab4b2a8e5ad'],
+  ['docs/covenant/BIBLE_COVENANT_V016.md', '6438ff038ee3be7a37a080274bc88838cbe96b56f40583399695a3bb1ed3a036'],
+  ['docs/covenant/BIBLE_COVENANT_V016.html', 'b21ee9f7a3f39565907475e92e990985db48d9578bcdd162e1f5fdd5b0c2e001'],
+  [COVENANT_PROVENANCE_V016, '6e166985008494e08f2b528368d0ffa53ae299f59634f91a7b0e9941df607c6a'],
+  ['scripts/build-covenant-bible-v016.py', '63d1ac2e9ffaba7047759402cdd39f5bca2f8804d49c5bc804c5b6d80bf1d544'],
+  ['scripts/build-covenant-bible-v016.mjs', '148e0f2f1b8e7bba8b4d85d2aa46d8338c0eb1f41222cba944f2e8b5751eb076'],
   [COVENANT_PROVENANCE_V011, REVIEWED_COVENANT_PROVENANCE_SHA256_V011],
   [COVENANT_PROVENANCE_V012, REVIEWED_COVENANT_PROVENANCE_SHA256_V012],
   [COVENANT_PROVENANCE_V013, REVIEWED_COVENANT_PROVENANCE_SHA256_V013],

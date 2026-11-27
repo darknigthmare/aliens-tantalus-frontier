@@ -18,9 +18,13 @@ ASSETS = ROOT / 'assets/openai/sprites/alien-covenant-v011'
 ASSETS_V012 = ROOT / 'assets/openai/sprites/alien-covenant-v012'
 ASSETS_V013 = ROOT / 'assets/openai/sprites/alien-covenant-v013'
 ASSETS_V014 = ROOT / 'assets/openai/sprites/alien-covenant-v014'
+ASSETS_V016 = ROOT / 'assets/openai/sprites/alien-covenant-v016'
+ASSETS_V017 = ROOT / 'assets/openai/sprites/alien-covenant-v017'
 LEGACY_BINDINGS_SHA256 = '883270a99e8da81eced7bbd848d46133dd6647ac9fb3f46bb14ace4f2b3b8bc0'
 CUMULATIVE_BINDINGS_SHA256_V012 = '57ac46b9d02623da13d0064792af862189fac9da1698be5c6229ba2e4922383f'
 CUMULATIVE_BINDINGS_SHA256_V013 = '92e49e5dfb5b7ff435272af996d479d8482179ea27c94db7850ae386805061bf'
+CUMULATIVE_BINDINGS_SHA256_V014 = '4b8de98270f6ca3d6805a3f3e85b5a5e038a2ef30d6f8e0853ca90c252f0a9d2'
+CUMULATIVE_CYCLES_SHA256_V014 = '3a8b96d053d38e84dc8dd60aa211706769deba4364dde57106f75e58d3266226'
 INVENTORY = ROOT / 'docs/covenant/INVENTORY_V011.json'
 PROVENANCE = ASSETS / 'manifest.json'
 OVERRIDES = ROOT / 'docs/covenant/SPRITE_PROVENANCE_V011.json'
@@ -90,7 +94,7 @@ def continuation_assets(folder, version):
     admitted_profiles = ({'daniels-work'} if version == '0.12.0' else
                          {'daniels', 'daniels-eva', 'david-young'} if version == '0.13.0' else set())
     npc_consumers = {}
-    if version == '0.14.0':
+    if version in ('0.14.0', '0.17.0'):
         npc_consumers = json.loads(subprocess.run(['node', '-e',
             "const data=require('./modules/covenant/dlc/covenant/content.js');"
             "const {appearance}=require('./modules/covenant/dlc/covenant/fidelity.js');"
@@ -126,13 +130,20 @@ def continuation_assets(folder, version):
                 raise ValueError('Walk frame does not match the exact existing player consumer: ' + identity)
         elif admission == 'npc-cycle-frame':
             key, kind, state = row.get('rendererKey'), row.get('kind'), row.get('state')
-            native = npc_consumers.get('walter-cryo', {})
-            if (version != '0.14.0' or kind != 'human' or key != 'walter' or state != 'walk'
-                    or rooms != ['cryo'] or row.get('actors') != ['walter-cryo']
-                    or native.get('room') != 'cryo' or native.get('role') != 'walter'
-                    or native.get('speed') != 26
+            expected = {
+                '0.14.0': ('walter', 'walter-cryo', 'cryo', 26, [{'x': 450, 'z': .5}, {'x': 535, 'z': .5}]),
+                '0.17.0': ('upworth', 'upworth-comms', 'comms', 22, [{'x': 1050, 'z': .5}, {'x': 1120, 'z': .5}])
+            }.get(version)
+            if expected is None:
+                raise ValueError('Unreviewed NPC continuation version: ' + version)
+            profile_id, actor_id, room_id, speed, route = expected
+            native = npc_consumers.get(actor_id, {})
+            if (kind != 'human' or key != profile_id or state != 'walk'
+                    or rooms != [room_id] or row.get('actors') != [actor_id]
+                    or native.get('room') != room_id or native.get('role') != profile_id
+                    or native.get('speed') != speed
                     or native.get('profile', {}).get('id') != key or native.get('profile', {}).get('gun')
-                    or native.get('route') != [{'x': 450, 'z': .5}, {'x': 535, 'z': .5}]):
+                    or native.get('route') != route):
                 raise ValueError('NPC walk frame does not match its exact existing actor: ' + identity)
         elif admission == 'room-background':
             key, kind, state = row.get('rendererKey'), row.get('kind'), row.get('state')
@@ -146,6 +157,41 @@ def continuation_assets(folder, version):
         entries.append(measured_continuation(row, folder / (identity + '.png'), kind, key, state))
     cycles = source.get('cycles', [])
     return entries, cycles, True
+
+
+def reviewed_v017_promotions():
+    """Apply an explicit reviewed occurrence without editing its historical manifest."""
+    file = ASSETS_V017 / 'manifest.json'
+    if not file.exists():
+        return []
+    source = json.loads(file.read_text())
+    promotions = source.get('runtimePromotions', [])
+    if not isinstance(promotions, list) or len(promotions) > 1:
+        raise ValueError('Invalid V017 runtime promotions')
+    entries = []
+    for promotion in promotions:
+        if (promotion.get('assetId') != 'world-planet4-shore-rock'
+                or promotion.get('sourceManifest') != 'assets/openai/sprites/alien-covenant-v016/manifest.json'
+                or promotion.get('instance') != 'landing-light2' or promotion.get('rooms') != ['landing']
+                or promotion.get('runtimeAdmission') != 'instance-scoped'):
+            raise ValueError('Unreviewed V017 promotion target')
+        historical_bytes = (ASSETS_V016 / 'manifest.json').read_bytes()
+        if hashlib.sha256(historical_bytes).hexdigest() != '6e166985008494e08f2b528368d0ffa53ae299f59634f91a7b0e9941df607c6a':
+            raise ValueError('The V016 production manifest must remain byte-identical')
+        historical = json.loads(historical_bytes)
+        original = next(row for row in historical['assets'] if row['id'] == promotion['assetId'])
+        content = (ROOT / 'modules/covenant/dlc/covenant/content.js').read_text()
+        data = json.loads(content[len('(function(root){const data='):content.rfind(';if(typeof module')])
+        room = next(row for row in data['rooms'] if row['id'] == 'landing')
+        occurrence = next(row for row in room['props'] if row['id'] == 'landing-light2')
+        expected = {'id': 'landing-light2', 'kind': 'rock', 'x': 1750, 'z': .02, 'w': 110, 'h': 65}
+        if any(occurrence.get(key) != value for key, value in expected.items()) or occurrence.get('solid'):
+            raise ValueError('The reviewed shore occurrence changed')
+        reviewed = {**original, 'rooms': ['landing']}
+        entry = measured_continuation(reviewed, ASSETS_V016 / (original['id'] + '.png'), 'prop', 'landing-light2', 'idle')
+        entry['note'] = 'V017 promotion of the unchanged V016 shore rock; exact non-solid landing-light2 occurrence only. No film scale or 1:1 fidelity certified.'
+        entries.append(entry)
+    return entries
 
 
 def main():
@@ -234,7 +280,7 @@ def main():
     if hashlib.sha256(legacy).hexdigest() != LEGACY_BINDINGS_SHA256:
         raise ValueError('The 29 reviewed V011 bindings must remain byte-identical')
     cycles = []
-    for folder, version in [(ASSETS_V012, '0.12.0'), (ASSETS_V013, '0.13.0'), (ASSETS_V014, '0.14.0')]:
+    for folder, version in [(ASSETS_V012, '0.12.0'), (ASSETS_V013, '0.13.0'), (ASSETS_V014, '0.14.0'), (ASSETS_V017, '0.17.0')]:
         additions, new_cycles, continuation = continuation_assets(folder, version)
         if continuation:
             if version == '0.13.0':
@@ -245,6 +291,13 @@ def main():
                 previous = json.dumps(manifest['assets'], ensure_ascii=False, separators=(',', ':')).encode()
                 if hashlib.sha256(previous).hexdigest() != CUMULATIVE_BINDINGS_SHA256_V013:
                     raise ValueError('The 63 reviewed V013 bindings must remain byte-identical')
+            if version == '0.17.0':
+                previous = json.dumps(manifest['assets'], ensure_ascii=False, separators=(',', ':')).encode()
+                prior_cycles = json.dumps(cycles, ensure_ascii=False, separators=(',', ':')).encode()
+                if (hashlib.sha256(previous).hexdigest() != CUMULATIVE_BINDINGS_SHA256_V014
+                        or hashlib.sha256(prior_cycles).hexdigest() != CUMULATIVE_CYCLES_SHA256_V014):
+                    raise ValueError('The 72 reviewed V014 bindings and five cycles must remain byte-identical')
+                additions += reviewed_v017_promotions()
             manifest['release'] = version
             manifest['assets'] = manifest['assets'] + additions
             cycles += new_cycles

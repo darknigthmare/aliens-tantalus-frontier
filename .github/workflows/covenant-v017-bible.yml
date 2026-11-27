@@ -1,0 +1,89 @@
+name: Covenant V017 reference bible
+on:
+  pull_request:
+    paths:
+      - 'assets/openai/sprites/alien-covenant-v015/**'
+      - 'assets/openai/sprites/alien-covenant-v016/**'
+      - 'assets/openai/sprites/alien-covenant-v017/**'
+      - 'dlc/covenant/**'
+      - 'modules/covenant/**'
+      - 'docs/covenant/**'
+      - 'scripts/*covenant*'
+      - '.github/workflows/covenant-v017-bible.yml'
+permissions:
+  contents: read
+concurrency:
+  group: covenant-v017-bible-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  bible:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            docs/covenant
+            scripts
+            dlc/covenant
+            modules/covenant
+            assets/openai/sprites/alien-covenant-v011
+            assets/openai/sprites/alien-covenant-v012
+            assets/openai/sprites/alien-covenant-v013
+            assets/openai/sprites/alien-covenant-v014
+            assets/openai/sprites/alien-covenant-v015
+            assets/openai/sprites/alien-covenant-v016
+            assets/openai/sprites/alien-covenant-v017
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify all originals and the preserved historical runtime subset
+        run: node --test scripts/verify-covenant-v017-preservation.mjs
+      - name: Verify exact local recovery and exclude candidates from runtime
+        run: node scripts/verify-covenant-local-recovery-20261126.mjs
+      - name: Generate the detailed reference bible
+        run: python3 scripts/build-covenant-bible-v017.py --tables-out "${RUNNER_TEMP}/covenant-v017-tables.json"
+      - name: Validate generated documents and reproducibility
+        run: |
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path('docs/covenant')
+          d=json.loads((root/'BIBLE_COVENANT_V017.json').read_text())
+          assert d['summary']['pngs']==154
+          assert d['summary']['runtimePngs']==81
+          assert d['summary']['catalogueOnlyPngs']==73
+          assert d['summary']['referenceEntries']==315
+          assert d['summary']['animationPhases']==48
+          assert d['summary']['publishedWalkCycles']==8
+          assert d['summary']['publishedAnimationPhases']==64
+          assert d['summary']['availableUnintegratedNpcCycles']==2
+          assert d['summary']['certified1to1Images']==0
+          assert len(d['incompleteCharacterSequencesV017'])==1
+          assert d['continuationV017']['productionBriefCount']>=261
+          for ext in ('json','md','html','xlsx'):
+              path=root/('BIBLE_COVENANT_V017.'+ext)
+              raw=path.read_bytes()
+              print('DOCUMENT_SHA256 '+path.name+' '+hashlib.sha256(raw).hexdigest()+' '+str(len(raw)))
+          print('BIBLE_VALIDATED '+json.dumps(d['summary']))
+          PY
+          git diff --exit-code -- docs/covenant/BIBLE_COVENANT_V017.json docs/covenant/BIBLE_COVENANT_V017.md docs/covenant/BIBLE_COVENANT_V017.html
+      - name: Preserve generated bible and original image paths
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: covenant-v017-bible-and-originals
+          path: |
+            docs/covenant/BIBLE_COVENANT_V017.json
+            docs/covenant/BIBLE_COVENANT_V017.md
+            docs/covenant/BIBLE_COVENANT_V017.html
+            docs/covenant/BIBLE_COVENANT_V017.xlsx
+            assets/openai/sprites/alien-covenant-v011
+            assets/openai/sprites/alien-covenant-v012
+            assets/openai/sprites/alien-covenant-v013
+            assets/openai/sprites/alien-covenant-v014
+            assets/openai/sprites/alien-covenant-v015
+            assets/openai/sprites/alien-covenant-v016
+            assets/openai/sprites/alien-covenant-v017
+          retention-days: 30
+          if-no-files-found: error

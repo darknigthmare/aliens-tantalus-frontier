@@ -191,6 +191,24 @@ test('reviewed provenance and bible text are pinned to exact source paths and by
   }
 });
 
+test('recovered local metadata uses exact source pins and never bypasses the distribution boundary', async () => {
+  const paths = [
+    'docs/covenant/recovery-20261126/MANIFEST.json',
+    'docs/covenant/recovery-20261126/qa/v015/recovered-png-qa.json'
+  ];
+  for (const path of paths) {
+    const bytes = await readFile(join(root, path));
+    assert.equal(covenantSourceMetadataPathV011(path), true);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes), true);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, bytes, { built: true }), false);
+    assert.equal(admit(path), true);
+    assert.equal(admit(path, { built: true }), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(path, Buffer.concat([bytes, Buffer.from(' ')])), false);
+    assert.equal(reviewedCovenantSourceMetadataV011(paths.find(other => other !== path), bytes), false);
+    assert.equal(covenantSourceMetadataPathV011(path.replace('.json', '-unreviewed.json')), false);
+  }
+});
+
 test('cumulative runtime preserves all 29 V011 bindings and scopes every new prop to a real instance', async () => {
   const { manifest, compiled } = await covenantManifestV011(root);
   const legacy = manifest.assets.filter(row => row.path.startsWith('/assets/openai/sprites/alien-covenant-v011/'));
@@ -254,7 +272,7 @@ test('four unchanged player walk cycles follow the real costume scopes without i
   const { manifest, compiled } = await covenantManifestV011(root);
   const data = require('../modules/covenant/dlc/covenant/content.js');
   const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
-  assert.equal(manifest.release, '0.14.0');
+  assert.equal(manifest.release, '0.17.0');
   const playerCycles = compiled.cycles.filter(row => row.consumer !== 'npc');
   assert.deepEqual(playerCycles.map(row => row.key).sort(),
     ['daniels', 'daniels-eva', 'daniels-work', 'david-young']);
@@ -287,7 +305,7 @@ test('V014 preserves every V013 binding, all four cycle definitions and all 85 e
   assert.equal(previous.length, 63);
   assert.equal(digest(Buffer.from(JSON.stringify(previous))),
     'decaecb86b188ab40f117eecd91906cabe6095791e7dc8129d467e200050578e');
-  const cycles = manifest.cycles.filter(row => row.key !== 'walter');
+  const cycles = manifest.cycles.filter(row => row.consumer !== 'npc');
   assert.equal(cycles.length, 4);
   assert.equal(digest(Buffer.from(JSON.stringify(cycles))),
     'd16982f1ab4858f97f86dc1a6377e689ae6d21dac5e26c7a4eb52c30338d972a');
@@ -305,7 +323,13 @@ test('V014 preserves every V013 binding, all four cycle definitions and all 85 e
 });
 
 test('V014 extends rendering with only the actual unarmed cryo Walter and the landing sky', async () => {
-  const { compiled } = await covenantManifestV011(root);
+  const { manifest } = await covenantManifestV011(root);
+  const { compileManifest } = require('../modules/covenant/dlc/covenant/sprite-registry-v011.js');
+  // Recompile the frozen V014 subset to retain its original 72-image/five-cycle
+  // contract while the cumulative V017 release adds separately reviewed scopes.
+  const compiled = compileManifest({ ...manifest, release: '0.14.0',
+    assets: manifest.assets.filter(row => /\/alien-covenant-v01[1234]\//.test(row.path)),
+    cycles: manifest.cycles.filter(row => row.key !== 'upworth') });
   const data = require('../modules/covenant/dlc/covenant/content.js');
   const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
   const actorDefs = new Map(data.actors.map(actor => [actor.id, actor]));
@@ -391,11 +415,55 @@ test('V015 preservation keeps exactly 22 recovered original PNGs in source and n
     assert.equal(admit(row.path, { built: true }), false);
   }
   const { manifest, compiled } = await covenantManifestV011(root);
-  assert.equal(manifest.release, '0.14.0', 'Source preservation must not claim runtime integration');
-  assert.equal(compiled.entries.length, 72);
-  assert.equal(compiled.cycles.length, 5);
+  assert.equal(manifest.release, '0.17.0', 'The cumulative release must identify its actual runtime');
+  assert.equal(compiled.entries.length, 81);
+  assert.equal(compiled.cycles.length, 6);
   assert.equal(compiled.entries.some(row => row.path.startsWith('/' + COVENANT_SOURCE_ONLY_ASSETS_V015 + '/')), false);
   assert.equal(COVENANT_ASSET_ROOTS.includes(COVENANT_SOURCE_ONLY_ASSETS_V015), false);
+});
+
+test('V017 adds only the native unarmed Upworth patrol and the exact non-solid shore rock', async () => {
+  const { manifest, compiled } = await covenantManifestV011(root);
+  const data = require('../modules/covenant/dlc/covenant/content.js');
+  const { appearance } = require('../modules/covenant/dlc/covenant/fidelity.js');
+  const actorDefs = new Map(data.actors.map(actor => [actor.id, actor]));
+  assert.equal(manifest.release, '0.17.0');
+  assert.equal(compiled.entries.length, 81); assert.equal(compiled.cycles.length, 6);
+  const old = manifest.assets.filter(row => /\/alien-covenant-v01[1234]\//.test(row.path));
+  assert.equal(old.length, 72);
+  assert.equal(digest(Buffer.from(JSON.stringify(old))), 'caeb302977542137508ec28728ae78f34096a0c9074008f2fe1123ef47f053c9');
+  assert.equal(digest(Buffer.from(JSON.stringify(manifest.cycles.filter(row => row.key !== 'upworth')))),
+    '3a8b96d053d38e84dc8dd60aa211706769deba4364dde57106f75e58d3266226');
+  const upworth = compiled.cycles.find(row => row.key === 'upworth');
+  assert.equal(upworth.consumer, 'npc');
+  assert.deepEqual(upworth.actors, ['upworth-comms']); assert.deepEqual(upworth.rooms, ['comms']);
+  assert.equal(upworth.angularFrequency, 2.1); assert.equal(upworth.frames.length, 8);
+  const scale = upworth.frames[0].logicalHeight / (upworth.frames[0].alphaBounds[3] - upworth.frames[0].alphaBounds[1]);
+  for (const frame of upworth.frames) {
+    assert.equal(frame.anchor[1], frame.alphaBounds[3]);
+    assert.ok(Math.abs(frame.logicalHeight / (frame.alphaBounds[3] - frame.alphaBounds[1]) - scale) < 1e-10);
+  }
+  for (const actor of data.actors) {
+    const room = data.rooms.find(row => row.id === actor.room);
+    const profile = appearance({ data, room, actorDefs }, actor, actor.role);
+    const resolved = compiled.resolve('human', profile.id, 'walk', room.id, .1, actor.id);
+    assert.equal(!!resolved, ['walter-cryo', 'upworth-comms'].includes(actor.id), actor.id);
+    if (actor.id === 'upworth-comms') {
+      assert.equal(profile.id, 'upworth'); assert.equal(profile.gun, undefined);
+      assert.equal(actor.speed, 22);
+      assert.deepEqual(actor.route, [{ x: 1050, z: .5 }, { x: 1120, z: .5 }]);
+    }
+  }
+  const shore = compiled.entries.filter(row => row.path.includes('/alien-covenant-v016/'));
+  assert.equal(shore.length, 1); assert.equal(shore[0].id, 'world-planet4-shore-rock');
+  assert.equal(shore[0].key, 'landing-light2'); assert.deepEqual(shore[0].rooms, ['landing']);
+  const native = data.rooms.find(room => room.id === 'landing').props.find(row => row.id === 'landing-light2');
+  assert.deepEqual(native, { id: 'landing-light2', kind: 'rock', x: 1750, z: .02, w: 110, h: 65, solid: false });
+  for (const room of data.rooms) {
+    assert.equal(!!compiled.resolve('prop', 'landing-light2', 'idle', room.id), room.id === 'landing');
+    assert.equal(compiled.resolve('prop', 'rock', 'idle', room.id), null);
+  }
+  assert.equal(compiled.entries.filter(row => row.path.includes('/alien-covenant-v017/')).length, 8);
 });
 
 test('V015 source texts require exact reviewed bytes and stay outside the built runtime', async () => {

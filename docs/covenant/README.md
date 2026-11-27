@@ -1,91 +1,64 @@
-# Alien: Covenant — bible et conservation V0.15
+# Alien: Covenant — continuation V018
 
-## Suivi courant — sources V0.15, jeu V0.14
+La continuation ajoute **un sas latéral orange retenu au catalogue**. La grande porte terminale est conservée séparément comme **candidat documentaire à réviser** : son rapport de silhouette vaut 2,319:1 pour une cible indicative d’environ 2,8:1 (écart −17,17 %) et son graphisme rouge reste à reprendre. La famille de décor n’est pas déclarée terminée.
 
-La [bible détaillée V0.15](BIBLE_COVENANT_V015.md), son
-[inventaire structuré](BIBLE_COVENANT_V015.json) et sa
-[lecture HTML](BIBLE_COVENANT_V015.html) prolongent le suivi des personnages,
-lieux, armes, accessoires, véhicules, vaisseaux, terrains et planète.
-Ils distinguent les images conservées, les présences natives, les
-propositions de raccord et les manques encore ouverts.
+La production cumulée contient **155 PNG : 81 dans le rendu et 74 au catalogue**, auxquels s’ajoute un candidat hors production. Les 154 originaux précédents et 46 fichiers récupérés restent intacts. Aucun nouveau raccord de porte, déplacement, collision ou changement du moteur n’est introduit. Les deux PNG natifs conservent leurs pixels et leur alpha. **Aucune fidélité 1:1 n’est certifiée.**
 
-Cette passe conserve **22 nouveaux PNG originaux** : huit phases de marche
-de Ricks, huit d’Oram et six objets issus de planches de production documentées —
-sièges du Covenant et du Lander, consoles de leurs postes de pilotage,
-holotable du Covenant et table médicale. Avec les 103 originaux des
-passes précédentes, le dépôt contient **125 PNG : 72 admis au rendu
-V0.14 et 53 au catalogue**. Les 22 nouveaux fichiers restent tous au
-catalogue ; les phases de Ricks et d’Oram ne sont pas activées en jeu.
+- Annexe V018 : [Markdown](BIBLE_COVENANT_V018.md), [HTML avec fonds d’inspection](BIBLE_COVENANT_V018.html) et [JSON avec l’index courant des 155 PNG](BIBLE_COVENANT_V018.json).
+- [Manifeste et prompts](../../assets/openai/sprites/alien-covenant-v018/manifest.json), [provenance](PROVENANCE_V018.json), [contrôles](SPRITES_V018_STATUS.md) et [aperçu du catalogue](qa/v018/catalogue-desktop.png).
+- Les références primaires du sas latéral et de la grande porte sont distinguées ; le plan de Tony Drew concerne l’ouverture terminale, pas le sas circulaire orange.
 
-Le [manifeste V0.15](../../assets/openai/sprites/alien-covenant-v015/manifest.json),
-le [statut de production](SPRITES_V015_STATUS.md) et la
-[provenance](PROVENANCE_V015.json) identifient les octets conservés et
-les limites de cette publication. Les deux cycles sont décrits dans
-`catalogueCycles` ; le manifeste n’admet aucun nouveau cycle de jeu.
-Les originaux récupérés conservent leurs dimensions natives, y compris
-la phase Ricks05 en 1024 × 1535.
-
-Le jeu publié reste **V0.14 : cinq cycles et 40 phases**, avec le même
-registre, le même renderer, la même page distribuée et les mêmes règles
-de simulation et de sauvegarde. La présente passe ajoute des sources et
-leur documentation ; aucune nouvelle animation jouable n’est revendiquée.
-Les admissions V0.15 refusent tous ces nouveaux chemins dans la
-distribution du jeu.
-
-Le classeur et le pack complet de référence validés restent ceux de V0.14.
-Le statut de production précise les livrables disponibles, les contrôles
-de conservation, les résultats effectivement exécutés et ce qui reste
-à reprendre. La fidélité 1:1 reste un objectif
-de comparaison ; la génération et les contrôles techniques ne la certifient pas.
+La bible exhaustive V017 et ses quatre formats sont conservés. L’annexe V018 décrit les changements et les manques encore ouverts ; les comptes des sections historiques ci-dessous gardent le périmètre de leur publication.
 
 ---
 
-## Historique conservé — passe V0.14
+## Historique conservé — bible et production V017
 
-La [bible détaillée V0.14](BIBLE_COVENANT_V014.md) et son
-[inventaire structuré](BIBLE_COVENANT_V014.json) réunissent les manques en
-personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et
-planète. Les références et les consommateurs réels du moteur déterminent
-la portée de chaque entrée. Les archives non récupérées et les éléments
-encore sans comparaison visuelle restent signalés.
+La bible consolide les productions V015 et V016 puis ajoute **13 nouveaux PNG originaux : huit phases de marche d’Upworth et cinq accessoires de monde**. L’inventaire contient **154 images : 81 admises dans le rendu et 73 au catalogue**.
 
-La même bible est disponible en [lecture HTML](BIBLE_COVENANT_V014.html)
-et en [classeur Excel](BIBLE_COVENANT_V014.xlsx).
+Les **261 contrats de production** couvrent personnages, lieux, armes, accessoires, véhicules, vaisseaux, terrains et planètes. Les **315 références, 67 liaisons, 134 seuils et 630 occurrences de props** gardent leurs identifiants. Les fiches précisent les états disponibles, les manquants, les consommateurs, les sources et les critères de validation.
 
-La production V0.14 cumule **103 PNG originaux : 72 admis au rendu et
-31 au catalogue**, avec cinq cycles de huit phases. Le
-[manifeste V0.14](../../assets/openai/sprites/alien-covenant-v014/manifest.json)
-ajoute 18 images aux 85 originaux conservés. Le
-[suivi de cette passe](SPRITES_V014_STATUS.md) et sa
-[provenance](PROVENANCE_V014.json) précisent les sources et limites.
+- Bible V017 : [Markdown](BIBLE_COVENANT_V017.md), [HTML](BIBLE_COVENANT_V017.html), [JSON](BIBLE_COVENANT_V017.json), [Excel](BIBLE_COVENANT_V017.xlsx).
+- [Suivi et contrôles](SPRITES_V017_STATUS.md), [journal](CONTINUATION_V017.md), [manifeste](../../assets/openai/sprites/alien-covenant-v017/manifest.json) et [provenance](PROVENANCE_V017.json).
+- [PR 79 — continuation Covenant](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79), rattachée à la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71).
 
-Les nouveaux raccords de jeu sont la marche de Walter, limitée à sa
-présence `walter-cryo` dans `cryo` lorsque son déplacement est réellement
-observé, et le lac comme ciel distant de `landing`, avant les géométries
-natives. Les neuf autres images V0.14 restent au catalogue. La politique
-opaque concerne quatre images du monde ; les 99 autres PNG conservent
-un fond transparent.
+Le jeu utilise **six cycles complets et 48 phases**. Les cycles de Ricks et d’Oram restent au catalogue, avec 16 phases supplémentaires ; les cinq poses incomplètes de David restent exclues du lecteur de cycles. L’iris du Juggernaut possède deux vues statiques et trois états intermédiaires encore manquants. Les cinq nouveaux accessoires restent au catalogue ; le rocher V016 est limité à l’occurrence `landing-light2`.
 
-Le point de reprise publié est V0.13 : **85 PNG originaux, 63 admis au rendu,
-22 au catalogue et quatre cycles de marche jouables**. Le
-[suivi V0.13](SPRITES_V013_STATUS.md) et le
-[manifeste de ce lot](../../assets/openai/sprites/alien-covenant-v013/manifest.json)
-conservent les résultats et limites de cette version. Les 85 originaux
-restent immuables. Les images V0.14 disposent de leur propre provenance
-et de leur admission explicite ; leur présence dans la
-bible ne prouve pas un affichage en jeu.
+Les validations et leurs limites figurent dans les documents liés. Le catalogue hors ligne inclut tous les originaux ; seules les admissions du manifeste cumulatif alimentent la distribution du jeu. Les PNG, manifestes et bibles historiques sont préservés. **Aucune fidélité 1:1 n’est certifiée.** Les sections ci-dessous gardent les comptes propres à leur publication.
 
-La [bible principale des campagnes](../narrative/CAMPAGNE_PRINCIPALE.md)
-renvoie à cette annexe. La consolidation parallèle de PR68 conserve son
-[index épinglé](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/DLC_INDEX_20261126.md)
-et sa [fiche Covenant historique](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md).
-Leurs comptes datés gardent leur périmètre d’origine.
+---
 
-La version source du moteur reste V0.10.0. Les règles, les collisions,
-les liaisons, les identités de scène et le format de sauvegarde sont
-conservés. Les rendus procéduraux restent disponibles pour les états
-sans images validées. La fidélité 1:1 demeure un objectif de comparaison,
-pas une certification déduite de la génération ou des tests.
+## Texte historique intégral conservé
+
+# Alien: Covenant — convergence des productions V015 et V016
+
+## Suivi courant
+
+Les productions publiées en V015 et V016 sont réunies sans modifier leurs fichiers historiques. L’inventaire consolidé contient **141 PNG originaux : 72 admis au rendu et 69 au catalogue**. Les cinq cycles runtime restent distincts des deux séries de catalogue de Ricks et d’Oram ; les cinq poses de David restent incomplètes.
+
+- [Bible V015](BIBLE_COVENANT_V015.md) : 22 nouveaux originaux — Ricks, Oram et six équipements.
+- [Bible V016](BIBLE_COVENANT_V016.md), [HTML](BIBLE_COVENANT_V016.html), [JSON](BIBLE_COVENANT_V016.json) et [Excel](BIBLE_COVENANT_V016.xlsx) : 257 contrats détaillés et 16 autres originaux.
+- Les comptes des documents historiques gardent le périmètre de leur publication ; ils ne décrivent pas encore cet inventaire réuni.
+
+La nouvelle continuation utilise cet ensemble comme base. Les 315 références et les identifiants du jeu sont conservés. Aucune fidélité visuelle 1:1 n’est certifiée.
+
+## Historique conservé — passe V016
+
+La [bible détaillée V0.16](BIBLE_COVENANT_V016.md), son [inventaire JSON](BIBLE_COVENANT_V016.json), sa [lecture HTML](BIBLE_COVENANT_V016.html) et son [classeur Excel](BIBLE_COVENANT_V016.xlsx) relient les huit domaines demandés aux références et aux consommateurs réels du moteur.
+
+**257 contrats de production** détaillent personnages, lieux, armes, props, véhicules, vaisseaux, terrains et planètes. Le registre conserve 315 références, 23 profils, 57 entrées spatiales, 67 connexions, 134 seuils, 7 familles d’armes, 126 familles de props et 630 occurrences, 16 terrains et 3 planètes. Les identifiants historiques sont conservés ; les vues documentaires se recoupent et ne s’additionnent pas en objets uniques.
+
+La continuation ajoute **16 PNG**, soit **119 originaux cumulés : 72 admis au rendu et 47 au catalogue**. Les cinq cycles complets et leurs 40 phases restent inchangés. Les cinq poses de David sont des images de catalogue, sans nouveau cycle activé. Les autres nouveautés sont cinq accessoires de production, quatre terrains et deux vues du rover Audi.
+
+Le [manifeste V016](../../assets/openai/sprites/alien-covenant-v016/manifest.json), le [suivi de livraison](SPRITES_V016_STATUS.md) et la [provenance](PROVENANCE_V016.json) distinguent ce qui a été documenté, produit et vérifié. Les 16 nouveautés restent au catalogue ; un emplacement envisagé ne constitue pas une admission runtime.
+
+Aucune fidélité 1:1 n’est certifiée. Les références inspectées, parties reconstruites et manques sont conservés dans les fiches. Les refus antérieurs de génération ne sont pas relancés. Après la panne de l’environnement, toutes les images ont été récupérées ; douze prompts exacts sur seize ont pu être conservés. Les quatre autres sont explicitement marqués non récupérés.
+
+## Historique et rattachement
+
+La [bible principale](../narrative/CAMPAGNE_PRINCIPALE.md) renvoie à cette annexe. Le [suivi V014](SPRITES_V014_STATUS.md) conserve son périmètre de 103 PNG, 72 admissions et cinq cycles. Les fichiers V011–V014 gardent leurs octets. Au moment de la publication V016, le lot V015 n’était pas encore réuni à cette branche ; la section courante ci-dessus indique la convergence effective.
+
+La [PR 79](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79) complète la [PR 71](https://github.com/darknigthmare/aliens-tantalus-frontier/pull/71). La [consolidation de PR68](https://github.com/darknigthmare/aliens-tantalus-frontier/blob/16686e8681cc0370db3fa3df2967704ef1862155/docs/narrative/dlc/alien-covenant.md) garde son état historique épinglé. La simulation V0.10.0, les sauvegardes, collisions et connexions ne sont pas modifiées.
 
 ---
 

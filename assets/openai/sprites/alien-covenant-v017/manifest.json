@@ -1,0 +1,2369 @@
+{
+  "schemaVersion": 1,
+  "dlc": "Alien: Covenant",
+  "version": "0.17.0",
+  "date": "2026-11-26",
+  "documentationPullRequestUrl": "https://github.com/darknigthmare/aliens-tantalus-frontier/pull/79",
+  "baselineCommits": [
+    "2539d67020950b5ebcd269413729ec7acec7eb76",
+    "9ee21033a71fc0f965ef270fa560d13eaa89d813",
+    "6c2d610b7faf9ed88fc6c6977a98411ad1880940"
+  ],
+  "verified1to1": false,
+  "fidelityPolicy": "Fidélité aux références comme objectif. Sources filmiques, bonus, fabrication et adaptation restent distingués ; aucune image générée n’est certifiée 1:1.",
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "nativePngBytesPreserved": true,
+    "oneSelectedOriginalPerPoseOrState": true,
+    "exactPromptsForSelectedPngs": 13,
+    "referenceLocalPathsPublished": false,
+    "referenceIdentity": "Noms de fichiers et SHA256 conservés dans l’ordre des entrées ; liens publics attribués."
+  },
+  "assets": [
+    {
+      "id": "prop-colonist-cryopod-vertical",
+      "title": "Capsule de colon fermée, en position verticale — apparence du film",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v017/prop-colonist-cryopod-vertical.png",
+      "width": 724,
+      "height": 2172,
+      "bytes": 1589541,
+      "sha256": "563601aacf2598dffe1e971f15b65eade055318ea51267e589f79963113f0c45",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Create ONE isolated full-length CLOSED VERTICAL COLONIST CRYOPOD from Alien: Covenant, guided by the first attached finished-film still from its practical-fabrication contributor. Select the complete upright pod in the near left row whose front and right edge are visible; isolate its observed front casing and immediate built-in mounting hardware. Preserve the closed long pale grey metal body, rounded top corners, black-framed cyan rounded-triangular head window, small rectangular status display beneath the window, long vertical raised ribs down the lower front, the red recessed safety latch details, lower service recess and narrow black/yellow safety markings visible in the photograph. Use the second attached manufacturer drawing only to clarify the existing overall vertical silhouette and mounting joins, not to replace the film styling. Keep the pod upright, same slight front three-quarter viewpoint as the photograph, complete top to bottom, one module only. Use restrained cool neutral lighting with a cyan glow confined to the window; do not add a recognizable person, extra monitors, invented labels, an opening lid, extended hoses, laboratory scenery or the surrounding suspension wall. The rear unseen face should not be exposed. Clean high-detail cinematic prop cutout, not a line drawing. Entire object centered with generous transparent margin on a portrait canvas, true alpha background and transparent real gaps, no floor, no cast shadow outside the object, no scene, no captions, no watermark. This is the vertical colonist configuration, not the horizontal open crew bed.",
+      "promptSavedBeforeGeneration": true,
+      "sourcePages": [
+        "https://www.unorthodoxdesign.ca/movie-work",
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.unorthodoxdesign.ca/movie-work",
+        "https://www.tonydrew.com.au/film",
+        "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg",
+        "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce"
+      ],
+      "inputReferences": [
+        {
+          "file": "unorthodox-covenant-4.jpg",
+          "sha256": "d901f65b368f94bdf63707e541de183728b8b629ed8d29d6fa4bc7e98ee74739",
+          "width": 1683,
+          "height": 949,
+          "url": "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Capsule de colon fermée en position verticale, observée dans une image du film publiée par Unorthodox Design : coque gris clair haute et nervurée, fenêtre cyan aux angles arrondis dans un cadre noir, petit écran de statut, verrous rouges encastrés et repères jaunes/noirs près du logement de service inférieur. La fixation supérieure est éclairée par le dessin de fabrication Tony Drew. Cet état vertical se distingue du lit d’équipage ouvert et couché."
+        },
+        {
+          "file": "img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg.webp",
+          "sha256": "bd09eaeaee5692a070170e3185de0ace097a853fba33c5cfa4d77b2a13f514ff",
+          "width": 953,
+          "height": 674,
+          "url": "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Capsule de colon fermée en position verticale, observée dans une image du film publiée par Unorthodox Design : coque gris clair haute et nervurée, fenêtre cyan aux angles arrondis dans un cadre noir, petit écran de statut, verrous rouges encastrés et repères jaunes/noirs près du logement de service inférieur. La fixation supérieure est éclairée par le dessin de fabrication Tony Drew. Cet état vertical se distingue du lit d’équipage ouvert et couché."
+        }
+      ],
+      "sourceReferences": [
+        {
+          "file": "unorthodox-covenant-4.jpg",
+          "sha256": "d901f65b368f94bdf63707e541de183728b8b629ed8d29d6fa4bc7e98ee74739",
+          "width": 1683,
+          "height": 949,
+          "url": "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Capsule de colon fermée en position verticale, observée dans une image du film publiée par Unorthodox Design : coque gris clair haute et nervurée, fenêtre cyan aux angles arrondis dans un cadre noir, petit écran de statut, verrous rouges encastrés et repères jaunes/noirs près du logement de service inférieur. La fixation supérieure est éclairée par le dessin de fabrication Tony Drew. Cet état vertical se distingue du lit d’équipage ouvert et couché."
+        },
+        {
+          "file": "img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg.webp",
+          "sha256": "bd09eaeaee5692a070170e3185de0ace097a853fba33c5cfa4d77b2a13f514ff",
+          "width": 953,
+          "height": 674,
+          "url": "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Capsule de colon fermée en position verticale, observée dans une image du film publiée par Unorthodox Design : coque gris clair haute et nervurée, fenêtre cyan aux angles arrondis dans un cadre noir, petit écran de statut, verrous rouges encastrés et repères jaunes/noirs près du logement de service inférieur. La fixation supérieure est éclairée par le dessin de fabrication Tony Drew. Cet état vertical se distingue du lit d’équipage ouvert et couché."
+        }
+      ],
+      "sourceReferenceIds": [
+        "ACOV-025",
+        "ACOV-143"
+      ],
+      "bibleRecordIds": [
+        "ACOV-025",
+        "ACOV-143",
+        "colonistvault",
+        "cand-colonist-cryopod-vertical"
+      ],
+      "candidateId": "cand-colonist-cryopod-vertical",
+      "relatedPropFamilyIds": [
+        "cryopod"
+      ],
+      "scope": "Photogramme présenté par un participant à la fabrication, Unorthodox Design ; dessin de production complémentaire pour la suspension.",
+      "state": "closed-vertical",
+      "sourceState": "closed-vertical",
+      "availableStates": [
+        "closed-vertical"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "runtimeIntegrated": false,
+      "runtimeEligibleInstances": [],
+      "verified1to1": false,
+      "animationsVerified": false,
+      "imagePolicy": "transparent-sprite",
+      "doesNotCover": [
+        "Autres faces et état ouvert de cette capsule verticale.",
+        "Ensemble complet de la salle des colons et de ses fixations.",
+        "Adaptation des huit occurrences horizontales actuelles de 200 × 84 unités : leur silhouette est incompatible avec cette vue verticale.",
+        "Identité d’un éventuel occupant : l’intérieur de la fenêtre reste indistinct."
+      ],
+      "limitations": [
+        "Reconstitution générée d’après les références : formes, répétitions et matériaux ne sont pas certifiés identiques à 1:1.",
+        "Octets originaux du PNG conservés ; aucun recadrage, changement d’échelle, repeint ou traitement de l’alpha.",
+        "De faibles résidus alpha 1 sont présents aux bords ; aucun pixel de la silhouette au-dessus d’alpha 16 ne touche le bord."
+      ],
+      "nextAction": "Étudier une occurrence verticale et une implantation adaptée avant tout raccord au jeu ; les huit pods horizontaux de 200 × 84 restent conservés.",
+      "alphaQA": {
+        "status": "measured-on-original-bytes",
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 664607,
+        "nearOpaquePixelsAlpha240plus": 874197,
+        "nonZeroAlphaPixels": 907921,
+        "edgeAlphaMax": 1,
+        "edgeNonZero": 59,
+        "edgeAlphaAbove16": 0,
+        "alphaBBoxAbove16": [
+          88,
+          28,
+          612,
+          2126
+        ],
+        "centerAlpha": 253,
+        "pass": true
+      },
+      "inspection": {
+        "subjectSeparated": true,
+        "fullSubjectVisible": true,
+        "humanReview": "Reference and generated original visually inspected; shape/material approximation limits remain explicit."
+      },
+      "gitBlobSha": "68b9c72f0e3cde5876b6d5c77c03e13c729ba507",
+      "alphaBounds": [
+        88,
+        28,
+        612,
+        2126
+      ],
+      "alphaThreshold": 32,
+      "promptStatus": "exact-submitted-text-preserved"
+    },
+    {
+      "id": "prop-cryopod-hanging-yoke-production",
+      "title": "Support articulé supérieur de cryopod — détail de fabrication",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v017/prop-cryopod-hanging-yoke-production.png",
+      "width": 1374,
+      "height": 1145,
+      "bytes": 893243,
+      "sha256": "1380b06e3062cce42539e881876aa5c671df4aa6fa9481b98f5e02d15148e03e",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Create ONE isolated transparent-background asset of ONLY THE UPPER ARTICULATED CRYOPOD HANGING YOKE shown in the large upper-right isometric detail of the first attached Alien: Covenant working drawing. Carefully reproduce that observed support assembly: the vertical cast-metal wall bracket with rounded mounting lugs, the short paired articulated arms and small linked braces projecting forward, the circular yaw pivot at the end, and the shaped outer yoke arms that grip the pod near its upper sides. Retain their real connections and relative proportions exactly as visible. Show the same three-quarter angle as the drawing. OMIT the entire cryopod shell and cyan window beneath the gripping arms, and omit the wall and building structure so this is the independent mounting component only. The second film reference is context for the mounting position, not permission to add parts hidden by the pods. Neutral mid-grey cast-aluminium production-model appearance with soft diffuse illumination, no colored lights, no rust, no inventive cabling, no unsupported rear detail. One coherent object, no exploded view and no multiple variants. Fully contained on the canvas with transparent margin; all open spaces between arms and outside the object must be genuine alpha transparency. No drawing dimensions, arrows, numbers, text, people, ground, scene, border, watermark or shadow outside the object. Preserve the drawing's manufactured component rather than inventing a generic crane.",
+      "promptSavedBeforeGeneration": true,
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film",
+        "https://www.unorthodoxdesign.ca/movie-work"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film",
+        "https://www.unorthodoxdesign.ca/movie-work",
+        "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce",
+        "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg"
+      ],
+      "inputReferences": [
+        {
+          "file": "img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg.webp",
+          "sha256": "bd09eaeaee5692a070170e3185de0ace097a853fba33c5cfa4d77b2a13f514ff",
+          "width": 953,
+          "height": 674,
+          "url": "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Support supérieur articulé isolé du dessin de fabrication Tony Drew : platine murale à œillets arrondis, bras et biellettes courts, pivot circulaire et étrier extérieur tenant les flancs supérieurs du cryopod. La capsule, le mur et les rangées du cryovault sont exclus. L’apparence gris aluminium suit le document de construction, sans attester une matière éclairée à l’écran."
+        },
+        {
+          "file": "unorthodox-covenant-4.jpg",
+          "sha256": "d901f65b368f94bdf63707e541de183728b8b629ed8d29d6fa4bc7e98ee74739",
+          "width": 1683,
+          "height": 949,
+          "url": "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Support supérieur articulé isolé du dessin de fabrication Tony Drew : platine murale à œillets arrondis, bras et biellettes courts, pivot circulaire et étrier extérieur tenant les flancs supérieurs du cryopod. La capsule, le mur et les rangées du cryovault sont exclus. L’apparence gris aluminium suit le document de construction, sans attester une matière éclairée à l’écran."
+        }
+      ],
+      "sourceReferences": [
+        {
+          "file": "img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg.webp",
+          "sha256": "bd09eaeaee5692a070170e3185de0ace097a853fba33c5cfa4d77b2a13f514ff",
+          "width": 953,
+          "height": 674,
+          "url": "https://m1.22slides.com/tonydrew/img31int-covenant-hyper-sleep-podssht010hyper-sleep-pods-hanging-yoke-ga1-5a0reltd160330-copy-2115670.jpg?f=webp&w=953&s=4d37cc5e91912749c8ac2d153dc7f7ce",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Support supérieur articulé isolé du dessin de fabrication Tony Drew : platine murale à œillets arrondis, bras et biellettes courts, pivot circulaire et étrier extérieur tenant les flancs supérieurs du cryopod. La capsule, le mur et les rangées du cryovault sont exclus. L’apparence gris aluminium suit le document de construction, sans attester une matière éclairée à l’écran."
+        },
+        {
+          "file": "unorthodox-covenant-4.jpg",
+          "sha256": "d901f65b368f94bdf63707e541de183728b8b629ed8d29d6fa4bc7e98ee74739",
+          "width": 1683,
+          "height": 949,
+          "url": "https://static.wixstatic.com/media/e56cc4_3bb5da83844d46379cee4a6dbe1a467b~mv2.jpg",
+          "sourcePage": "https://www.unorthodoxdesign.ca/movie-work",
+          "visuallyInspected": true,
+          "sourceDescription": "Support supérieur articulé isolé du dessin de fabrication Tony Drew : platine murale à œillets arrondis, bras et biellettes courts, pivot circulaire et étrier extérieur tenant les flancs supérieurs du cryopod. La capsule, le mur et les rangées du cryovault sont exclus. L’apparence gris aluminium suit le document de construction, sans attester une matière éclairée à l’écran."
+        }
+      ],
+      "sourceReferenceIds": [
+        "ACOV-025",
+        "ACOV-143"
+      ],
+      "bibleRecordIds": [
+        "ACOV-025",
+        "ACOV-143",
+        "colonistvault",
+        "cand-cryopod-hanging-yoke-production"
+      ],
+      "candidateId": "cand-cryopod-hanging-yoke-production",
+      "relatedPropFamilyIds": [
+        "cryopod"
+      ],
+      "scope": "Dessin de fabrication du support articulé de cryostase, présenté par Tony Drew ; modèle isolé de catalogue.",
+      "state": "empty-support-assembly",
+      "sourceState": "empty-support-assembly",
+      "availableStates": [
+        "empty-support-assembly"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "runtimeIntegrated": false,
+      "runtimeEligibleInstances": [],
+      "verified1to1": false,
+      "animationsVerified": false,
+      "imagePolicy": "transparent-sprite",
+      "doesNotCover": [
+        "Assemblage complet de suspension et raccord au corps du cryopod.",
+        "Vérification des matériaux et de l’éclairage sur le plateau ou dans le film.",
+        "Placement dans un module de salle compatible.",
+        "Cotes d’ingénierie et capacités mécaniques non établies par cette image."
+      ],
+      "limitations": [
+        "Reconstitution générée d’après les références : formes, répétitions et matériaux ne sont pas certifiés identiques à 1:1.",
+        "Octets originaux du PNG conservés ; aucun recadrage, changement d’échelle, repeint ou traitement de l’alpha.",
+        "De faibles résidus alpha 1 sont présents aux bords ; aucun pixel de la silhouette au-dessus d’alpha 16 ne touche le bord."
+      ],
+      "nextAction": "Recouper l’assemblage complet sur une photographie de plateau dégagée avant de construire une travée modulaire.",
+      "alphaQA": {
+        "status": "measured-on-original-bytes",
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 1173121,
+        "nearOpaquePixelsAlpha240plus": 330857,
+        "nonZeroAlphaPixels": 400109,
+        "edgeAlphaMax": 1,
+        "edgeNonZero": 102,
+        "edgeAlphaAbove16": 0,
+        "alphaBBoxAbove16": [
+          126,
+          10,
+          1256,
+          1132
+        ],
+        "centerAlpha": 0,
+        "pass": true
+      },
+      "inspection": {
+        "subjectSeparated": true,
+        "fullSubjectVisible": true,
+        "humanReview": "Reference and generated original visually inspected; shape/material approximation limits remain explicit."
+      },
+      "gitBlobSha": "b007c687ab92803419873745d195cd40e8de152f",
+      "alphaBounds": [
+        126,
+        10,
+        1256,
+        1132
+      ],
+      "alphaThreshold": 32,
+      "promptStatus": "exact-submitted-text-preserved"
+    },
+    {
+      "id": "prop-juggernaut-bay-iris-closed",
+      "title": "Iris de soute du Juggernaut — état fermé du dessin final",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-bay-iris-closed.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1622081,
+      "sha256": "ae9b94016da39e404e61810d8aed8fd5284c0325e5e54e2af84fec6fd67b640a",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Create ONE isolated transparent-background catalogue game-art asset of the Juggernaut circular bay iris in STAGE 1 CLOSED, using ONLY the leftmost closed object in the attached five-stage Alien: Covenant production design sheet. Preserve that exact observed mechanical design: shallow circular outer ring seen from the same raised three-quarter angle, segmented thick outer rim with repeated ribbed housings, and the interlocking spiral blades completely meeting at the small central hub. Match the proportions, ring segmentation, blade overlap pattern and viewing angle of the leftmost source object. Use a clean neutral light-grey production-model material and softly shaded recesses so the mechanical layers remain readable. Do not infer film colors or add wear, lights, payload, pipes, contents, additional structures or a base beyond the depicted ring. This image contains ONE closed iris only; omit the other four stages and all lettering from the source. Entire rim visible, centered, generous transparent margins, square composition, no environment, no ground or drop shadow, no caption, no border or watermark. The exterior background must be genuine alpha transparency. The closed blade surface must be opaque. Preserve the source design rather than redesigning a generic camera shutter.",
+      "promptSavedBeforeGeneration": true,
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film",
+        "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95"
+      ],
+      "inputReferences": [
+        {
+          "file": "bombbaydoorsstages-2116311.jpg.webp",
+          "sha256": "c4dcdb58582b649cab0d648f8090191fa61d87475d4bdddfda7f0a72ca149171",
+          "width": 2000,
+          "height": 436,
+          "url": "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Iris circulaire de soute présenté par Tony Drew comme dessin final : couronne segmentée à reliefs réguliers et lames spiralées. Deux vues séparées suivent l’état 1 fermé et l’état 5 entièrement ouvert de la même planche. Elles documentent des silhouettes de fabrication ; le mécanisme de largage complet, sa matière dans le film et les trois états intermédiaires restent ouverts."
+        }
+      ],
+      "sourceReferences": [
+        {
+          "file": "bombbaydoorsstages-2116311.jpg.webp",
+          "sha256": "c4dcdb58582b649cab0d648f8090191fa61d87475d4bdddfda7f0a72ca149171",
+          "width": 2000,
+          "height": 436,
+          "url": "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Iris circulaire de soute présenté par Tony Drew comme dessin final : couronne segmentée à reliefs réguliers et lames spiralées. Deux vues séparées suivent l’état 1 fermé et l’état 5 entièrement ouvert de la même planche. Elles documentent des silhouettes de fabrication ; le mécanisme de largage complet, sa matière dans le film et les trois états intermédiaires restent ouverts."
+        }
+      ],
+      "sourceReferenceIds": [
+        "ACOV-107",
+        "ACOV-108"
+      ],
+      "bibleRecordIds": [
+        "ACOV-107",
+        "ACOV-108",
+        "urnplatform",
+        "juggernaut",
+        "cand-juggernaut-bay-iris"
+      ],
+      "candidateId": "cand-juggernaut-bay-iris",
+      "relatedPropFamilyIds": [
+        "urnplatform"
+      ],
+      "scope": "Design final de production présenté par Tony Drew ; deux vues statiques, fermée et ouverte, à cadrages indépendants.",
+      "state": "closed",
+      "sourceState": "stage-1-closed",
+      "availableStates": [
+        "closed"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "runtimeIntegrated": false,
+      "runtimeEligibleInstances": [],
+      "verified1to1": false,
+      "animationsVerified": false,
+      "imagePolicy": "transparent-sprite",
+      "doesNotCover": [
+        "Trois états intermédiaires de la planche de production : intermediate-2, intermediate-3 et intermediate-4.",
+        "Cadrage commun et raccords permettant une animation.",
+        "Mécanisme complet de largage et plateforme des urnes.",
+        "Matériaux et éclairage confirmés par le film."
+      ],
+      "limitations": [
+        "Reconstitution générée d’après les références : formes, répétitions et matériaux ne sont pas certifiés identiques à 1:1.",
+        "Octets originaux du PNG conservés ; aucun recadrage, changement d’échelle, repeint ou traitement de l’alpha.",
+        "De faibles résidus alpha 1 sont présents aux bords ; aucun pixel de la silhouette au-dessus d’alpha 16 ne touche le bord.",
+        "Les deux cadrages sont indépendants : ces états statiques ne constituent pas un cycle d’ouverture."
+      ],
+      "nextAction": "Documenter les trois étapes intermédiaires, puis produire des cadrages communs avant toute animation ; le mécanisme complet reste à traiter.",
+      "alphaQA": {
+        "status": "measured-on-original-bytes",
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 787447,
+        "nearOpaquePixelsAlpha240plus": 763031,
+        "nonZeroAlphaPixels": 785069,
+        "edgeAlphaMax": 1,
+        "edgeNonZero": 104,
+        "edgeAlphaAbove16": 0,
+        "alphaBBoxAbove16": [
+          96,
+          204,
+          1157,
+          1099
+        ],
+        "centerAlpha": 253,
+        "pass": true
+      },
+      "inspection": {
+        "subjectSeparated": true,
+        "fullSubjectVisible": true,
+        "humanReview": "Reference and generated original visually inspected; shape/material approximation limits remain explicit."
+      },
+      "gitBlobSha": "01bbbd98717f7a84d3fa21b88cd6f5cfbcb79d65",
+      "alphaBounds": [
+        97,
+        204,
+        1157,
+        1099
+      ],
+      "alphaThreshold": 32,
+      "promptStatus": "exact-submitted-text-preserved"
+    },
+    {
+      "id": "prop-juggernaut-bay-iris-open",
+      "title": "Iris de soute du Juggernaut — état ouvert du dessin final",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-bay-iris-open.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1146374,
+      "sha256": "a3252805283e86cd9947a9821d0f1fd0089faf1af720e11cd22d8e6a33c8c3b7",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Create ONE isolated transparent-background catalogue game-art asset of the Juggernaut circular bay iris in STAGE 5 FULLY OPEN, using ONLY the rightmost open object in the attached five-stage Alien: Covenant production design sheet. Preserve that exact observed mechanical design: shallow circular outer ring seen from the same raised three-quarter angle, segmented thick outer rim with repeated ribbed housings, and all iris blades retracted into the annular rim. The large central opening is genuinely empty and must be FULLY TRANSPARENT, not black or filled by a surface. Match the rightmost source object's silhouette, opening size, repeated rim structures, recessed inner edge and viewing angle. Use a clean neutral light-grey production-model material and softly shaded recesses matching the source; do not infer film colors or add wear, lights, payload, pipes, contents, additional structures or a base. This image contains ONE fully open iris only; omit the other four stages and every label. Entire ring visible, centered, generous transparent margins, square composition, no environment, no ground or cast shadow, no caption, no border or watermark. Both the background outside the ring and the central opening must be genuine alpha transparency. Preserve the supplied final production design rather than redesigning a generic camera shutter.",
+      "promptSavedBeforeGeneration": true,
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film",
+        "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95"
+      ],
+      "inputReferences": [
+        {
+          "file": "bombbaydoorsstages-2116311.jpg.webp",
+          "sha256": "c4dcdb58582b649cab0d648f8090191fa61d87475d4bdddfda7f0a72ca149171",
+          "width": 2000,
+          "height": 436,
+          "url": "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Iris circulaire de soute présenté par Tony Drew comme dessin final : couronne segmentée à reliefs réguliers et lames spiralées. Deux vues séparées suivent l’état 1 fermé et l’état 5 entièrement ouvert de la même planche. Elles documentent des silhouettes de fabrication ; le mécanisme de largage complet, sa matière dans le film et les trois états intermédiaires restent ouverts."
+        }
+      ],
+      "sourceReferences": [
+        {
+          "file": "bombbaydoorsstages-2116311.jpg.webp",
+          "sha256": "c4dcdb58582b649cab0d648f8090191fa61d87475d4bdddfda7f0a72ca149171",
+          "width": 2000,
+          "height": 436,
+          "url": "https://m1.22slides.com/tonydrew/bombbaydoorsstages-2116311.jpg?f=webp&w=2000&s=4659f2334efce439acfe9a4a0aa31e95",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Iris circulaire de soute présenté par Tony Drew comme dessin final : couronne segmentée à reliefs réguliers et lames spiralées. Deux vues séparées suivent l’état 1 fermé et l’état 5 entièrement ouvert de la même planche. Elles documentent des silhouettes de fabrication ; le mécanisme de largage complet, sa matière dans le film et les trois états intermédiaires restent ouverts."
+        }
+      ],
+      "sourceReferenceIds": [
+        "ACOV-107",
+        "ACOV-108"
+      ],
+      "bibleRecordIds": [
+        "ACOV-107",
+        "ACOV-108",
+        "urnplatform",
+        "juggernaut",
+        "cand-juggernaut-bay-iris"
+      ],
+      "candidateId": "cand-juggernaut-bay-iris",
+      "relatedPropFamilyIds": [
+        "urnplatform"
+      ],
+      "scope": "Design final de production présenté par Tony Drew ; deux vues statiques, fermée et ouverte, à cadrages indépendants.",
+      "state": "open",
+      "sourceState": "stage-5-open",
+      "availableStates": [
+        "open"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "runtimeIntegrated": false,
+      "runtimeEligibleInstances": [],
+      "verified1to1": false,
+      "animationsVerified": false,
+      "imagePolicy": "transparent-sprite",
+      "doesNotCover": [
+        "Trois états intermédiaires de la planche de production : intermediate-2, intermediate-3 et intermediate-4.",
+        "Cadrage commun et raccords permettant une animation.",
+        "Mécanisme complet de largage et plateforme des urnes.",
+        "Matériaux et éclairage confirmés par le film."
+      ],
+      "limitations": [
+        "Reconstitution générée d’après les références : formes, répétitions et matériaux ne sont pas certifiés identiques à 1:1.",
+        "Octets originaux du PNG conservés ; aucun recadrage, changement d’échelle, repeint ou traitement de l’alpha.",
+        "De faibles résidus alpha 1 sont présents aux bords ; aucun pixel de la silhouette au-dessus d’alpha 16 ne touche le bord.",
+        "Les deux cadrages sont indépendants : ces états statiques ne constituent pas un cycle d’ouverture."
+      ],
+      "nextAction": "Documenter les trois étapes intermédiaires, puis produire des cadrages communs avant toute animation ; le mécanisme complet reste à traiter.",
+      "alphaQA": {
+        "status": "measured-on-original-bytes",
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 1088885,
+        "nearOpaquePixelsAlpha240plus": 449112,
+        "nonZeroAlphaPixels": 483631,
+        "edgeAlphaMax": 1,
+        "edgeNonZero": 21,
+        "edgeAlphaAbove16": 0,
+        "alphaBBoxAbove16": [
+          39,
+          145,
+          1215,
+          1130
+        ],
+        "centerAlpha": 0,
+        "pass": true
+      },
+      "inspection": {
+        "subjectSeparated": true,
+        "fullSubjectVisible": true,
+        "humanReview": "Reference and generated original visually inspected; shape/material approximation limits remain explicit."
+      },
+      "gitBlobSha": "df2974690864949e804fa82e34d34530e823b37a",
+      "alphaBounds": [
+        39,
+        145,
+        1215,
+        1130
+      ],
+      "alphaThreshold": 32,
+      "promptStatus": "exact-submitted-text-preserved"
+    },
+    {
+      "id": "prop-juggernaut-pilot-chair-production",
+      "title": "Siège de navigation vide du Juggernaut — modèle de production",
+      "category": "prop",
+      "kind": "prop",
+      "path": "assets/openai/sprites/alien-covenant-v017/prop-juggernaut-pilot-chair-production.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1429337,
+      "sha256": "ea2066d41113e16a2c087a3e21536d8dad42108124c5a7a16e3eabc0fd355f1d",
+      "originalBytesPreserved": true,
+      "resized": false,
+      "generatorNativeDimensions": true,
+      "generationTool": "image_gen.imagegen",
+      "generationPrompt": "Create ONE isolated transparent-background game-art catalogue asset of the EMPTY Juggernaut pilot/navigation chair shown in the attached Alien: Covenant production references. This is the mechanical set component, with no occupant. Use the first reference's complete right-facing SIDE ELEVATION as the authoritative silhouette and camera; use the other two only to resolve the existing ribbing and base details. Preserve the chair's asymmetric reclining seat, horseshoe curved back support, long upward-sloping ribbed navigation assembly, circular side pivot, triangular structural supports, visible curling lower tubes, and low stepped circular turntable base in their observed proportions. Reproduce the neutral dark charcoal-grey clay-model appearance, with restrained diffuse light and legible moulded edges. Do not add film weathering, colored lights, screens, decoration, invented mechanisms, an occupant, or environment. Keep the entire base and the top tip comfortably inside the canvas with even transparent margins. One object, one view, no montage, no captions, no diagram lines, no watermark, no ground plane, no cast shadow outside the object. The background and all genuine gaps must be fully transparent. This is a reference-guided production-model cutout, not a certification of a final-film appearance.",
+      "promptSavedBeforeGeneration": true,
+      "sourcePages": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film",
+        "https://m1.22slides.com/tonydrew/elevation2-2115647.jpg?f=webp&w=1376&s=1c27a58ed23332655f7e94a289461431",
+        "https://m1.22slides.com/tonydrew/jockeyscreengrab-2115649.jpg?f=webp&w=1006&s=87855acdc47f2771ebeb075092c5add0",
+        "https://m1.22slides.com/tonydrew/iso2-2115648.jpg?f=webp&w=1376&s=79101a4d9b61b9554fabd8ada39301e4"
+      ],
+      "inputReferences": [
+        {
+          "file": "elevation2-2115647.jpg.webp",
+          "sha256": "ff0483526585a24e49b7e322febda46f073d17682466975451a185d8cae59077",
+          "width": 1376,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/elevation2-2115647.jpg?f=webp&w=1376&s=1c27a58ed23332655f7e94a289461431",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        },
+        {
+          "file": "jockeyscreengrab-2115649.jpg.webp",
+          "sha256": "55464f1dec4a0d21d7aa7a82c14fa94eb3f185374e86b9611f49838a97dcba0d",
+          "width": 1006,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/jockeyscreengrab-2115649.jpg?f=webp&w=1006&s=87855acdc47f2771ebeb075092c5add0",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        },
+        {
+          "file": "iso2-2115648.jpg.webp",
+          "sha256": "ee49a974669b89715323d17d89012e7568693f459ac7c7c81eeacf85eb2f25a7",
+          "width": 1376,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/iso2-2115648.jpg?f=webp&w=1376&s=79101a4d9b61b9554fabd8ada39301e4",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        }
+      ],
+      "sourceReferences": [
+        {
+          "file": "elevation2-2115647.jpg.webp",
+          "sha256": "ff0483526585a24e49b7e322febda46f073d17682466975451a185d8cae59077",
+          "width": 1376,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/elevation2-2115647.jpg?f=webp&w=1376&s=1c27a58ed23332655f7e94a289461431",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        },
+        {
+          "file": "jockeyscreengrab-2115649.jpg.webp",
+          "sha256": "55464f1dec4a0d21d7aa7a82c14fa94eb3f185374e86b9611f49838a97dcba0d",
+          "width": 1006,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/jockeyscreengrab-2115649.jpg?f=webp&w=1006&s=87855acdc47f2771ebeb075092c5add0",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        },
+        {
+          "file": "iso2-2115648.jpg.webp",
+          "sha256": "ee49a974669b89715323d17d89012e7568693f459ac7c7c81eeacf85eb2f25a7",
+          "width": 1376,
+          "height": 675,
+          "url": "https://m1.22slides.com/tonydrew/iso2-2115648.jpg?f=webp&w=1376&s=79101a4d9b61b9554fabd8ada39301e4",
+          "sourcePage": "https://www.tonydrew.com.au/film",
+          "visuallyInspected": true,
+          "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+        }
+      ],
+      "sourceReferenceIds": [
+        "ACOV-224"
+      ],
+      "bibleRecordIds": [
+        "pilot",
+        "ACOV-224",
+        "cand-juggernaut-pilot-chair-production"
+      ],
+      "candidateId": "cand-juggernaut-pilot-chair-production",
+      "relatedPropFamilyIds": [
+        "dais"
+      ],
+      "scope": "Modèle de fabrication de la chambre de navigation du Juggernaut ; l’asset initial de Prometheus est attribué à Ben Procter par Tony Drew. Présence et matériaux du plan final à recouper.",
+      "state": "empty-side-elevation",
+      "sourceState": "empty-side-elevation",
+      "availableStates": [
+        "empty-side-elevation"
+      ],
+      "runtimeAdmission": "catalogue-only",
+      "runtimeIntegrated": false,
+      "runtimeEligibleInstances": [],
+      "verified1to1": false,
+      "animationsVerified": false,
+      "imagePolicy": "transparent-sprite",
+      "doesNotCover": [
+        "Vérification dans un plan du film terminé.",
+        "Autres angles, matériaux et éclairage du décor final.",
+        "Chambre de navigation complète et animation du siège.",
+        "Consommateur distinct du socle procédural pilot-detail-1."
+      ],
+      "limitations": [
+        "Reconstitution générée d’après les références : formes, répétitions et matériaux ne sont pas certifiés identiques à 1:1.",
+        "Octets originaux du PNG conservés ; aucun recadrage, changement d’échelle, repeint ou traitement de l’alpha.",
+        "De faibles résidus alpha 1 sont présents aux bords ; aucun pixel de la silhouette au-dessus d’alpha 16 ne touche le bord."
+      ],
+      "nextAction": "Comparer le siège à un plan lisible du film et définir une occurrence distincte ; conserver le socle pilot-detail-1 et sa géométrie.",
+      "alphaQA": {
+        "status": "measured-on-original-bytes",
+        "mode": "RGBA",
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZeroPixels": 1144906,
+        "nearOpaquePixelsAlpha240plus": 401248,
+        "nonZeroAlphaPixels": 427958,
+        "edgeAlphaMax": 1,
+        "edgeNonZero": 66,
+        "edgeAlphaAbove16": 0,
+        "alphaBBoxAbove16": [
+          304,
+          29,
+          1383,
+          982
+        ],
+        "centerAlpha": 253,
+        "pass": true
+      },
+      "inspection": {
+        "subjectSeparated": true,
+        "fullSubjectVisible": true,
+        "humanReview": "Reference and generated original visually inspected; shape/material approximation limits remain explicit."
+      },
+      "gitBlobSha": "8bc88523e9216f15ec81e23de7519b5308192223",
+      "alphaBounds": [
+        304,
+        29,
+        1383,
+        982
+      ],
+      "alphaThreshold": 32,
+      "promptStatus": "exact-submitted-text-preserved"
+    },
+    {
+      "generationId": "upworth-walk-01",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1553050,
+      "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+      "gitBlobSha": "855712a51c52f9efd02cb1fb5d5101d08ce9fd88",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the established UPWORTH sprite: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1460, crown near y80 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 01 — Contact A. The near LEFT leg extends FORWARD to screen-right; left heel around x710,y1460 just touches down with toes slightly lifted. The far RIGHT leg stretches BACK to screen-left; its toe around x310,y1460 pushes off and heel is raised. Near LEFT arm swings BACK toward screen-left; far RIGHT arm swings slightly FORWARD. Upright torso, two separated complete boots. Follow input 3's contact limb arrangement.",
+      "inputReferences": [
+        {
+          "file": "upworth.png",
+          "sha256": "8dbd842fa67d55b880795390691cd2901a786fdd97990a5c35e07da6ea87517d",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v011/upworth.png",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Established game identity and reconstructed full costume."
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-01.png",
+          "sha256": "041afc1c15181d0594fd4388048dc06cc6b1dadab06d2861a1d7d14f7e5a6b9c",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-01.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1179785,
+        "alpha1to16": 19990,
+        "alpha17to31": 1754,
+        "alpha32to127": 5214,
+        "alpha128to239": 6110,
+        "alpha240to255": 360011,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 11,
+        "bboxAbove32": [
+          137,
+          24,
+          834,
+          1500
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-01",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, contact proche",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1500
+      ],
+      "logicalHeight": 122.00000000000001,
+      "cyclePhase": 0.0,
+      "phaseName": "contact-near",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        137,
+        24,
+        834,
+        1500
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Jambe proche en avant, bras proche en arrière ; contact initial du talon avant.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-01.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-02",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1569762,
+      "sha256": "80814221148810df99650071d6e5a79af6393a271ac01cac08f07dadfd83c8b6",
+      "gitBlobSha": "1923a3ddf9b97684f42d6a3279c895a7e6a651e9",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the accepted first UPWORTH walking frame and fixes her identity, body scale and camera for the whole cycle: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1500, crown near y24 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 02 — Down A, near LEFT foot supporting. The LEFT foot is flat FORWARD of the pelvis around x650,y1500; left knee bends gently to accept weight. The far RIGHT foot trails BEHIND toward x350, heel lifted and toes leaving support. Pelvis and head settle about 12 pixels lower than contact. Near LEFT arm remains modestly back and moves toward neutral; far RIGHT arm remains slightly forward. Match input 3's supporting versus trailing legs, with a modest stride.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-02.png",
+          "sha256": "5310d3d6985729ff12f895aa0a77e176f9a609fc213776b3a08ecb8abc152629",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-02.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1183083,
+        "alpha1to16": 20495,
+        "alpha17to31": 1450,
+        "alpha32to127": 4914,
+        "alpha128to239": 5841,
+        "alpha240to255": 357081,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          127,
+          26,
+          810,
+          1487
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-02",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, descente, appui proche",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1487
+      ],
+      "logicalHeight": 120.76016260162602,
+      "cyclePhase": 0.125,
+      "phaseName": "down-near",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        127,
+        26,
+        810,
+        1487
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Pied proche posé, genou fléchi ; jambe lointaine arrière en décharge.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-02.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-03",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1427213,
+      "sha256": "20d0ea4284bc9d6132adb42bd21be00d7dd1ee809914566bb4e84a07036bbd1d",
+      "gitBlobSha": "2dc0f0d3c8468c17aa55598754dd5c6234ad33b1",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the accepted first UPWORTH walking frame and fixes her identity, body scale and camera for the whole cycle: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1500, crown near y24 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 03 — Passing A. The near LEFT leg is the almost vertical SUPPORT leg beneath the pelvis with boot flat near x515,y1500. The far RIGHT knee bends and swings forward, with right boot raised near the supporting ankle and toes pointing slightly down; it passes BEHIND the near leg from the camera view. Both arms pass relaxed near-vertical neutral beside the hips, small elbow bend, hands not reaching. Pelvis slightly higher than contact. Match input 3's planted and lifted limb arrangement.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-03.png",
+          "sha256": "1fb34467c5b60abd79c8f142e05c9fbb67e202eb3a1929338639a22d4f29b86a",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-03.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1220318,
+        "alpha1to16": 18805,
+        "alpha17to31": 1701,
+        "alpha32to127": 4424,
+        "alpha128to239": 5319,
+        "alpha240to255": 322297,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          256,
+          23,
+          735,
+          1497
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-03",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, passage, appui proche",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1497
+      ],
+      "logicalHeight": 121.83468834688348,
+      "cyclePhase": 0.25,
+      "phaseName": "passing-near",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        256,
+        23,
+        735,
+        1497
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Jambe proche en appui vertical ; botte lointaine levée derrière, bras proches du neutre.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-03.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-04-v2",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1539659,
+      "sha256": "f6696bf5f84e27e4434474d19e83e45ac4e7dbd147145bcf68c9d84adf9f38e4",
+      "gitBlobSha": "c1c051fa0cd6fe74beedf5acd293ff3d81259e98",
+      "generationPrompt": "Use case: pose transfer with identity preservation. Create ONE full-body transparent walking sprite of UPWORTH, the adult woman in INPUT 2, using the PRECISE WALKING LIMB ARRANGEMENT of INPUT 1. INPUT 1 is the male pose guide only: replace his identity, proportions and clothes entirely with the woman of INPUT 2. INPUT 2 defines the exact face, high dark-brown messy bun and loose cheek strands, light warm skin, slim female build, black mock-neck soft top with sleeves just above elbows, tan woven utility belt with rectangular buckle, dark charcoal/olive work trousers, and worn dark work boots. INPUT 3 corroborates only her face, hair, top and belt. Keep INPUT 2's exact same slightly three-quarter side camera facing SCREEN RIGHT, facial angle, lighting, body scale and calm expression. Both hands are bare and empty. CRITICAL POSE: near camera-side LEFT shoulder connects to the LEFT arm swinging FORWARD ACROSS THE FRONT OF HER LOWER TORSO toward screen-right; the left hand is in front of the belt/upper thigh around x620,y840. The far RIGHT arm swings BACK and its hand appears on screen-left around x280,y880. The camera-side LEFT thigh angles DOWN-LEFT from hip x470,y740 to the trailing left knee around x300,y1120 and left boot behind at x250,y1465, left heel raised with TOE planted. The far RIGHT leg angles DOWN-RIGHT from the far hip and swings forward, boot heel around x720,y1435 with toe lifted, still airborne just before next contact. Copy the overlap of input1: near LEFT thigh is visibly the TRAILING thigh, near LEFT forearm is visibly the FORWARD forearm. This is UP A at 3/8 of a walking cycle. Do not repeat input2's opposite-leg stance. Do not mirror any image, her head or her costume. Slight pelvis rise, ordinary slow walk, no kick or running. Native1024x1536 portrait canvas, full bun and both soles visible with narrow margins, crown around y24, baseline y1500, pelvis center x512, same scale as input2. True transparent RGBA background, opacity only in the physical person; zero alpha outside body and within limb gaps, narrow antialiased silhouette, opaque body. No haze, halo, glow, floor, shadow, environment, checkerboard, text, weapons or props.",
+      "inputReferences": [
+        {
+          "file": "walter-walk-04.png",
+          "sha256": "11bd6fd106a6391b8a8b500a03a2f636cdda1f837da39fe5012d9a0e0dd177cd",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-04.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        },
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1182733,
+        "alpha1to16": 21172,
+        "alpha17to31": 2437,
+        "alpha32to127": 6470,
+        "alpha128to239": 6623,
+        "alpha240to255": 353429,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 2,
+        "bboxAbove32": [
+          112,
+          17,
+          960,
+          1482
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-04",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, montée, appui proche arrière",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1482
+      ],
+      "logicalHeight": 121.09078590785909,
+      "cyclePhase": 0.375,
+      "phaseName": "up-near",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        112,
+        17,
+        960,
+        1482
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Jambe proche arrière en appui ; jambe lointaine avant suspendue, bras proche devant.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-04.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-05-v2",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1509624,
+      "sha256": "85028f86ffc190073c650c5dec4885e1ef43f8665daa17f1d457466f61690604",
+      "gitBlobSha": "23e9b1439b3eb79818e839a397fabbd1c639d116",
+      "generationPrompt": "Use case: pose transfer with identity preservation. Create ONE full-body transparent walking sprite of UPWORTH, the adult woman in INPUT 2, using the PRECISE WALKING LIMB ARRANGEMENT of INPUT 1. INPUT 1 is the male pose guide only: replace his identity, proportions and clothes entirely with the woman of INPUT 2. INPUT 2 defines the exact face, high dark-brown messy bun and loose cheek strands, light warm skin, slim female build, black mock-neck soft top with sleeves just above elbows, tan woven utility belt with rectangular buckle, dark charcoal/olive work trousers, and worn dark work boots. INPUT 3 corroborates only her face, hair, top and belt. Keep INPUT 2's exact same slightly three-quarter side camera facing SCREEN RIGHT, facial angle, lighting, body scale and calm expression. Both hands are bare and empty. CRITICAL POSE: near camera-side LEFT shoulder connects to the LEFT arm swinging FORWARD ACROSS THE FRONT OF HER LOWER TORSO toward screen-right; the left hand is in front of the belt/upper thigh around x620,y840. The far RIGHT arm swings BACK and its hand appears on screen-left around x280,y880. The camera-side LEFT thigh angles DOWN-LEFT from hip x470,y740 to the trailing left knee around x300,y1120 and left boot behind at x250,y1490, left heel raised with TOE planted. The far RIGHT leg angles DOWN-RIGHT from the far hip and swings forward, boot heel around x720,y1490 TOUCHING the ground with toe slightly lifted at FIRST CONTACT. Copy the overlap of input1: near LEFT thigh is visibly the TRAILING thigh, near LEFT forearm is visibly the FORWARD forearm. This is CONTACT B at 4/8 of a walking cycle, both feet briefly touching the same ground level. Do not repeat input2's opposite-leg stance. Do not mirror any image, her head or her costume. Pelvis at neutral contact height, ordinary slow walk, no kick or running. Native1024x1536 portrait canvas, full bun and both soles visible with narrow margins, crown around y24, baseline y1500, pelvis center x512, same scale as input2. True transparent RGBA background, opacity only in the physical person; zero alpha outside body and within limb gaps, narrow antialiased silhouette, opaque body. No haze, halo, glow, floor, shadow, environment, checkerboard, text, weapons or props.",
+      "inputReferences": [
+        {
+          "file": "walter-walk-05.png",
+          "sha256": "ec49235e7e663bd5815ae18bf070cbba51a38ceb97effc9914d752ac3ce66251",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-05.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        },
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1194739,
+        "alpha1to16": 18151,
+        "alpha17to31": 1957,
+        "alpha32to127": 5688,
+        "alpha128to239": 6758,
+        "alpha240to255": 345571,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          114,
+          21,
+          911,
+          1473
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-05",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, contact lointain",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1473
+      ],
+      "logicalHeight": 120.01626016260164,
+      "cyclePhase": 0.5,
+      "phaseName": "contact-far",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        114,
+        21,
+        911,
+        1473
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Jambe lointaine en contact avant ; jambe proche arrière, bras proche devant.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-05.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-06-v2",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1529996,
+      "sha256": "8dc8e0182ffcaee9b8cd34c9fa0be9fc511b6b2612e4326b21ea22cdb1817be9",
+      "gitBlobSha": "6cfe27e8bf1b4b312660918e72e02ff9f813c149",
+      "generationPrompt": "Edit the single supplied UPWORTH sprite into the very NEXT walking phase with the SMALLEST necessary pose changes. This woman, exact face, hair, camera, costume, fabric colors, anatomy, boots, lighting and body scale must remain identical. Native1024x1536 transparent PNG, one full person, screen-right facing, no mirror. She currently has the camera-side LEFT LEG TRAILING BACK and the far RIGHT LEG FORWARD. KEEP THAT SAME THIGH OVERLAP: her near left thigh with its side seam and patch pocket must continue diagonally DOWN-LEFT to the trailing rear knee and rear boot, never switch it to the forward leg. This is DOWN B immediately after the supplied CONTACT B. Her far RIGHT front foot now rolls from its heel onto a FLAT SOLE on the ground. The FAR RIGHT front knee bends a little to take weight. The NEAR LEFT rear heel lifts a little farther and its toe just leaves the ground. Head and pelvis settle roughly12pixels lower relative to the ground. Arms keep their same opposing swing: near left arm remains forward across torso, far right arm remains back; reduce their swing only slightly toward neutral. BOTH hands bare and empty. Preserve the exact visible face and hair. All bodily edges remain inside the canvas. Entire background and gaps truly transparent alpha zero, no shadow, no floor, no halo or glow, no words, no environment or props.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-05-v2.png",
+          "sha256": "85028f86ffc190073c650c5dec4885e1ef43f8665daa17f1d457466f61690604",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1192566,
+        "alpha1to16": 28338,
+        "alpha17to31": 1738,
+        "alpha32to127": 5065,
+        "alpha128to239": 6390,
+        "alpha240to255": 338767,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 20,
+        "bboxAbove32": [
+          114,
+          34,
+          845,
+          1477
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-06",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, descente, appui lointain",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1477
+      ],
+      "logicalHeight": 119.27235772357724,
+      "cyclePhase": 0.625,
+      "phaseName": "down-far",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        114,
+        34,
+        845,
+        1477
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Appui lointain avant fléchi et pied plat ; jambe proche arrière en décharge.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-06.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-07",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1582785,
+      "sha256": "5a0f2286c6d0b62013adcdfa0635711aa84efb3c6d0a3b1a2de73c922852c8ab",
+      "gitBlobSha": "e1cd14ce5d6991d2fe6df6f636d902a24540afc8",
+      "generationPrompt": "Use case: pose transfer with identity preservation. Create ONE full-body transparent walking sprite of UPWORTH, the adult woman in INPUT 2, using the PRECISE WALKING LIMB ARRANGEMENT of INPUT 1. INPUT 1 is the male pose guide only: replace his identity, proportions and clothes entirely with the woman of INPUT 2. INPUT 2 defines the exact face, high dark-brown messy bun and loose cheek strands, light warm skin, slim female build, black mock-neck soft top with sleeves just above elbows, tan woven utility belt with rectangular buckle, dark charcoal/olive work trousers, and worn dark work boots. INPUT 3 corroborates only her face, hair, top and belt. Keep INPUT 2's exact same slightly three-quarter side camera facing SCREEN RIGHT, facial angle, lighting, body scale and calm expression. Both hands are bare and empty. CRITICAL POSE: phase07 PASSING B at 6/8 of a walking cycle. Follow input1's exact limb geometry. The far RIGHT leg supports the body nearly vertically beneath the pelvis, with right boot flat near x550,y1490. The camera-side LEFT knee bends and moves FORWARD toward screen-right, knee around x615,y1050, but the LEFT lower leg folds BACK toward screen-left and the left boot is LIFTED off the ground near x390,y1340. This bent left thigh and diagonal calf overlap IN FRONT of the nearly straight supporting right leg. The lifted boot is on screen-left of the grounded boot. Near LEFT arm and far RIGHT arm both pass naturally toward neutral beside the hips; relaxed mostly vertical arms, hands empty around thigh height, no reaching. Preserve anatomical left/right ordering and no mirrored face or costume. Small pelvis rise relative to contact, slow natural walking, no jogging. Native1024x1536 portrait canvas, full bun and both soles visible with narrow margins, crown around y24, baseline y1500, pelvis center x512, same scale as input2. True transparent RGBA background, opacity only in the physical person; zero alpha outside body and within limb gaps, narrow antialiased silhouette, opaque body. No haze, halo, glow, floor, shadow, environment, checkerboard, text, weapons or props.",
+      "inputReferences": [
+        {
+          "file": "walter-walk-07.png",
+          "sha256": "b8c901f142b53429a7fb48dfff25fcdf5fef24c8f8fe59f508f0e24f713aaec8",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-07.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        },
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1191703,
+        "alpha1to16": 19651,
+        "alpha17to31": 2102,
+        "alpha32to127": 6162,
+        "alpha128to239": 6610,
+        "alpha240to255": 346636,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          203,
+          14,
+          804,
+          1504
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-07",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, passage, appui lointain",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1504
+      ],
+      "logicalHeight": 123.15718157181573,
+      "cyclePhase": 0.75,
+      "phaseName": "passing-far",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        203,
+        14,
+        804,
+        1504
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Jambe lointaine en appui ; jambe proche levée et croisant devant, bras proches du neutre.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-07.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    },
+    {
+      "generationId": "upworth-walk-08-v2",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1613083,
+      "sha256": "611cfcc1e7f83301b28bd38b0d6ff58d1d3db5ba6093b217d23487835551ad18",
+      "gitBlobSha": "6e87f571f5ffc264de401a2e9ad8e65f80db7b21",
+      "generationPrompt": "Edit only this supplied UPWORTH walking sprite to refine the LAST airborne pre-contact phase. Preserve the exact woman, face, hair, camera angle, black top, tan belt, dark trousers, worn boots, empty hands, lighting, body scale, upper-body position and arm swing. She stays facing SCREEN RIGHT, with the camera-side LEFT arm swinging BACK and far RIGHT arm swinging FORWARD. The near LEFT leg is the FORWARD leg, and the far RIGHT leg is the REAR support leg. CRITICAL SMALL CHANGE: lift the forward LEFT boot about55pixels upward, bending the LEFT knee a little more and keeping the toe slightly raised. The LEFT heel must now be clearly ABOVE the rear RIGHT boot's toe contact level by around45pixels. Keep the far RIGHT boot planted at its TOE on the same ground line as the supplied rear boot; raise its heel slightly for push-off. The far rear foot is the sole ground support, the nearer front foot is entirely airborne approaching its next heel contact. Preserve all thigh overlap and do not exchange legs. Keep the torso upright. Exactly one complete person from bun to both boot soles, native1024x1536 portrait. Genuine transparent RGBA, alpha zero outside the physical body and inside limb gaps; no halo, haze, shadow, floor, background, text, props or weapon. Do not mirror, rescale, crop or add anything.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-08.png",
+          "sha256": "966a89250b15340b4531600a172c652951e332afcd48f965e985a3c34bb1e694",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1186414,
+        "alpha1to16": 22702,
+        "alpha17to31": 1211,
+        "alpha32to127": 4186,
+        "alpha128to239": 5746,
+        "alpha240to255": 352605,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          159,
+          23,
+          876,
+          1471
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "id": "upworth-walk-08",
+      "category": "character-animation",
+      "kind": "human",
+      "title": "Upworth — marche, montée, appui lointain arrière",
+      "scope": "Marche non armée d’Upworth, limitée à sa présence upworth-comms dans les communications.",
+      "rendererKey": "upworth",
+      "state": "walk",
+      "rooms": [
+        "comms"
+      ],
+      "actors": [
+        "upworth-comms"
+      ],
+      "runtimeAdmission": "npc-cycle-frame",
+      "runtimeAdmissionCondition": "Subject to root runtime integration QA; asset visual/alpha review completed.",
+      "sourceFacing": 1,
+      "anchor": [
+        512,
+        1471
+      ],
+      "logicalHeight": 119.68563685636857,
+      "cyclePhase": 0.875,
+      "phaseName": "up-far",
+      "availableStates": [
+        "walk"
+      ],
+      "alphaBounds": [
+        159,
+        23,
+        876,
+        1471
+      ],
+      "alphaThreshold": 32,
+      "imagePolicy": "transparent-sprite",
+      "sourceUrls": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "sourcePages": [
+        "https://www.youtube.com/watch?v=vQMH3N07RXs"
+      ],
+      "filmReferenceChain": [
+        {
+          "file": "upworth-onset-large.jpg",
+          "url": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "source": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "credit": "On-set Callie Hernandez interview, studio EPK footage republished by Random Flicks-Clips; face/hair, black top and belt evidence only"
+        }
+      ],
+      "inheritedSourceLimitations": [
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011."
+      ],
+      "limitations": [
+        "Pose de marche reconstruite pour le jeu ; aucun mouvement capturé du film et aucune fidélité1:1 certifiée.",
+        "La référence EPK établit le visage, la coiffure, le haut noir et la ceinture ; bas du pantalon, bottes et panneaux arrière héritent des reconstructions V011.",
+        "Variations résiduelles de plis, silhouette et projection des membres ; contact, cadence et mouvement restent approximatifs.",
+        "Cycle destiné seulement au déplacement de upworth-comms dans comms, au sol et mains vides.",
+        "Les contrôles de rendu en jeu et l’admission finale sont à effectuer par l’intégrateur ; ce reçu ne prétend pas les avoir exécutés."
+      ],
+      "animationsVerified": false,
+      "visualReview": "Appui lointain arrière ; botte proche avant clairement levée avant le retour au contact01.",
+      "path": "assets/openai/sprites/alien-covenant-v017/upworth-walk-08.png",
+      "promptStatus": "exact-submitted-text-preserved",
+      "bibleRecordIds": [
+        "upworth",
+        "ACOV-014",
+        "comms"
+      ]
+    }
+  ],
+  "cycles": [
+    {
+      "id": "upworth-walk",
+      "kind": "human",
+      "key": "upworth",
+      "state": "walk",
+      "consumer": "npc",
+      "actors": [
+        "upworth-comms"
+      ],
+      "rooms": [
+        "comms"
+      ],
+      "angularFrequency": 2.1,
+      "frames": [
+        "upworth-walk-01",
+        "upworth-walk-02",
+        "upworth-walk-03",
+        "upworth-walk-04",
+        "upworth-walk-05",
+        "upworth-walk-06",
+        "upworth-walk-07",
+        "upworth-walk-08"
+      ]
+    }
+  ],
+  "runtimePromotions": [
+    {
+      "assetId": "world-planet4-shore-rock",
+      "sourceManifest": "assets/openai/sprites/alien-covenant-v016/manifest.json",
+      "runtimeAdmission": "instance-scoped",
+      "instance": "landing-light2",
+      "rooms": [
+        "landing"
+      ],
+      "bibleRecordIds": [
+        "TERR-LAKE",
+        "rock",
+        "landing"
+      ],
+      "bibleOccurrenceIds": [
+        "landing-light2"
+      ],
+      "originalBytesPreserved": true,
+      "verified1to1": false,
+      "nativeGeometry": {
+        "x": 1750,
+        "z": 0.02,
+        "w": 110,
+        "h": 65,
+        "solid": false
+      },
+      "scope": "Seule cette occurrence du rivage reçoit le PNG V016. Le manifeste historique, les dimensions, les collisions et la simulation restent inchangés."
+    }
+  ],
+  "supplementalCandidates": [
+    {
+      "id": "cand-juggernaut-pilot-chair-production",
+      "name": "Siège de navigation vide du Juggernaut",
+      "category": "prop",
+      "neededStates": [
+        "empty-side-elevation"
+      ],
+      "availableStates": [
+        "empty-side-elevation"
+      ],
+      "assetIds": [
+        "prop-juggernaut-pilot-chair-production"
+      ],
+      "generatedAssetIds": [
+        "prop-juggernaut-pilot-chair-production"
+      ],
+      "bibleRecordIds": [
+        "pilot",
+        "ACOV-224"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "status": "generated-catalogue-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "doesNotCover": [
+        "Vérification dans un plan du film terminé.",
+        "Autres angles, matériaux et éclairage du décor final.",
+        "Chambre de navigation complète et animation du siège.",
+        "Consommateur distinct du socle procédural pilot-detail-1."
+      ],
+      "nextAction": "Comparer le siège à un plan lisible du film et définir une occurrence distincte ; conserver le socle pilot-detail-1 et sa géométrie.",
+      "scope": "Modèle de fabrication de la chambre de navigation du Juggernaut ; l’asset initial de Prometheus est attribué à Ben Procter par Tony Drew. Présence et matériaux du plan final à recouper.",
+      "sourceDescription": "Siège de navigation vide montré par Tony Drew pour la chambre du Juggernaut : base circulaire étagée, assise inclinée, dossier recourbé, supports latéraux et ensemble de navigation tubulaire montant en diagonale. Le rendu gris suit son modèle de fabrication ; Drew crédite un asset initial de Ben Procter pour Prometheus et précise que la scène Covenant a été réduite. Cette preuve de production ne certifie pas un plan du montage ou du prologue."
+    },
+    {
+      "id": "cand-juggernaut-bay-iris",
+      "name": "Iris de soute du Juggernaut — deux états statiques",
+      "category": "prop",
+      "neededStates": [
+        "closed",
+        "intermediate-2",
+        "intermediate-3",
+        "intermediate-4",
+        "open"
+      ],
+      "availableStates": [
+        "closed",
+        "open"
+      ],
+      "assetIds": [
+        "prop-juggernaut-bay-iris-closed",
+        "prop-juggernaut-bay-iris-open"
+      ],
+      "generatedAssetIds": [
+        "prop-juggernaut-bay-iris-closed",
+        "prop-juggernaut-bay-iris-open"
+      ],
+      "bibleRecordIds": [
+        "ACOV-107",
+        "ACOV-108",
+        "urnplatform",
+        "juggernaut"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film"
+      ],
+      "status": "generated-partial-catalogue-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "doesNotCover": [
+        "Trois états intermédiaires de la planche de production : intermediate-2, intermediate-3 et intermediate-4.",
+        "Cadrage commun et raccords permettant une animation.",
+        "Mécanisme complet de largage et plateforme des urnes.",
+        "Matériaux et éclairage confirmés par le film."
+      ],
+      "nextAction": "Documenter les trois étapes intermédiaires, puis produire des cadrages communs avant toute animation ; le mécanisme complet reste à traiter.",
+      "scope": "Design final de production présenté par Tony Drew ; deux vues statiques, fermée et ouverte, à cadrages indépendants.",
+      "sourceDescription": "Iris circulaire de soute présenté par Tony Drew comme dessin final : couronne segmentée à reliefs réguliers et lames spiralées. Deux vues séparées suivent l’état 1 fermé et l’état 5 entièrement ouvert de la même planche. Elles documentent des silhouettes de fabrication ; le mécanisme de largage complet, sa matière dans le film et les trois états intermédiaires restent ouverts."
+    },
+    {
+      "id": "cand-colonist-cryopod-vertical",
+      "name": "Capsule de colon fermée, en position verticale",
+      "category": "prop",
+      "neededStates": [
+        "closed-vertical"
+      ],
+      "availableStates": [
+        "closed-vertical"
+      ],
+      "assetIds": [
+        "prop-colonist-cryopod-vertical"
+      ],
+      "generatedAssetIds": [
+        "prop-colonist-cryopod-vertical"
+      ],
+      "bibleRecordIds": [
+        "ACOV-025",
+        "ACOV-143",
+        "colonistvault"
+      ],
+      "sourceUrls": [
+        "https://www.unorthodoxdesign.ca/movie-work",
+        "https://www.tonydrew.com.au/film"
+      ],
+      "status": "generated-catalogue-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "doesNotCover": [
+        "Autres faces et état ouvert de cette capsule verticale.",
+        "Ensemble complet de la salle des colons et de ses fixations.",
+        "Adaptation des huit occurrences horizontales actuelles de 200 × 84 unités : leur silhouette est incompatible avec cette vue verticale.",
+        "Identité d’un éventuel occupant : l’intérieur de la fenêtre reste indistinct."
+      ],
+      "nextAction": "Étudier une occurrence verticale et une implantation adaptée avant tout raccord au jeu ; les huit pods horizontaux de 200 × 84 restent conservés.",
+      "scope": "Photogramme présenté par un participant à la fabrication, Unorthodox Design ; dessin de production complémentaire pour la suspension.",
+      "sourceDescription": "Capsule de colon fermée en position verticale, observée dans une image du film publiée par Unorthodox Design : coque gris clair haute et nervurée, fenêtre cyan aux angles arrondis dans un cadre noir, petit écran de statut, verrous rouges encastrés et repères jaunes/noirs près du logement de service inférieur. La fixation supérieure est éclairée par le dessin de fabrication Tony Drew. Cet état vertical se distingue du lit d’équipage ouvert et couché."
+    },
+    {
+      "id": "cand-cryopod-hanging-yoke-production",
+      "name": "Support articulé supérieur de cryopod",
+      "category": "prop",
+      "neededStates": [
+        "empty-support-assembly"
+      ],
+      "availableStates": [
+        "empty-support-assembly"
+      ],
+      "assetIds": [
+        "prop-cryopod-hanging-yoke-production"
+      ],
+      "generatedAssetIds": [
+        "prop-cryopod-hanging-yoke-production"
+      ],
+      "bibleRecordIds": [
+        "ACOV-025",
+        "ACOV-143",
+        "colonistvault"
+      ],
+      "sourceUrls": [
+        "https://www.tonydrew.com.au/film",
+        "https://www.unorthodoxdesign.ca/movie-work"
+      ],
+      "status": "generated-catalogue-only",
+      "runtimeIntegrated": false,
+      "verified1to1": false,
+      "doesNotCover": [
+        "Assemblage complet de suspension et raccord au corps du cryopod.",
+        "Vérification des matériaux et de l’éclairage sur le plateau ou dans le film.",
+        "Placement dans un module de salle compatible.",
+        "Cotes d’ingénierie et capacités mécaniques non établies par cette image."
+      ],
+      "nextAction": "Recouper l’assemblage complet sur une photographie de plateau dégagée avant de construire une travée modulaire.",
+      "scope": "Dessin de fabrication du support articulé de cryostase, présenté par Tony Drew ; modèle isolé de catalogue.",
+      "sourceDescription": "Support supérieur articulé isolé du dessin de fabrication Tony Drew : platine murale à œillets arrondis, bras et biellettes courts, pivot circulaire et étrier extérieur tenant les flancs supérieurs du cryopod. La capsule, le mur et les rangées du cryovault sont exclus. L’apparence gris aluminium suit le document de construction, sans attester une matière éclairée à l’écran."
+    }
+  ],
+  "blockedCarriedForward": [
+    {
+      "id": "weapon-f90",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-beretta",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-ar15",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-eaa",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "weapon-shotgun",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "illicit"
+    },
+    {
+      "id": "xenomorph",
+      "status": "blocked-generation",
+      "reason": "Image generation tool rejected the first attempted output; no PNG created.",
+      "category": "other"
+    },
+    {
+      "id": "weapon-sl40",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-f90",
+      "reason": "Film prop is the same F90 fitted with the SL40; no alternate attempt after F90 rejection."
+    },
+    {
+      "id": "weapon-inox",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "weapon-beretta",
+      "reason": "Same Beretta92FSBrigadier family with different finish/accessory; no alternate attempt after black Beretta rejection."
+    },
+    {
+      "id": "xenomorph-attack",
+      "status": "not_attempted_after_related_subject_rejection",
+      "relatedId": "xenomorph",
+      "reason": "Alternate pose of the same Xenomorph subject; no attempt after neutral subject rejection."
+    },
+    {
+      "id": "prop-classicalstatue",
+      "status": "blocked-generation",
+      "reason": "Image tool refused output for the classical marble sculpture; no PNG created."
+    },
+    {
+      "id": "david-walk-03",
+      "status": "blocked-generation",
+      "reason": "Output rejected by the image generation service; no retry or alternative engine.",
+      "category": "other"
+    }
+  ],
+  "incompleteCharacterSequences": [],
+  "selectedPoseQA": {
+    "assetVisualReview": "pass with stated adaptation limits",
+    "transparentRGBAImages": 8,
+    "decodedImages": 8,
+    "nativeWidth": 1024,
+    "nativeHeight": 1536,
+    "alphaPassCount": 8,
+    "nativeBytePreservation": true,
+    "selectedDistinctSha256Count": 8,
+    "selectedAttempts": [
+      "01",
+      "02",
+      "03",
+      "04-v2",
+      "05-v2",
+      "06-v2",
+      "07",
+      "08-v2"
+    ],
+    "excludedAttemptCount": 4,
+    "contactSheet": "upworth-contact-sheet.png",
+    "faceSheet": "upworth-faces.png",
+    "playbackPreview": "upworth-cycle-preview.html",
+    "nativeRenderAndMovementQA": "pending root integration, not run by this agent",
+    "anatomyReview": "Opposite contact/support pairs01/05,02/06,03/07 and04/08 inspected; arms oppose legs and return through neutral; both hands empty in all selected frames.",
+    "identityReview": "Same adult woman, high bun, calm face angle, black top, tan belt, dark trousers and worn boots; EPK upper-body reference agrees.",
+    "alphaReview": "Light checkerboard composites inspected: raw-preview brown/grey RGB in fully transparent pixels does not create a visible background; no edge pixel exceeds alpha16.",
+    "loopReview": "Ordered eight-frame contact sheet inspected, including08-to01 pre-contact/contact transition. No claim of film motion capture or perfectly stationary planted feet.",
+    "geometryReview": {
+      "method": "Fixed common pixel scale; x origin512 for all phases; y origin at measured lowest alpha>=32 silhouette point, on a visible support sole. No resampling of source PNGs.",
+      "sharedPixelScale": 0.08265582655826559,
+      "scaleRationale": "Reference contact01 is1476px from crown to support sole and corresponds to logicalHeight122. Each phase logicalHeight equals its measured silhouette height times the same scale.",
+      "anchorX": 512,
+      "anchorYByPhase": [
+        1500,
+        1487,
+        1497,
+        1482,
+        1473,
+        1477,
+        1504,
+        1471
+      ],
+      "silhouetteHeightPixelsByPhase": [
+        1476,
+        1461,
+        1474,
+        1465,
+        1452,
+        1443,
+        1490,
+        1448
+      ],
+      "heightPixelRange": [
+        1443,
+        1490
+      ],
+      "logicalHeightRange": [
+        119.27235772357724,
+        123.15718157181573
+      ],
+      "residualVariation": "Silhouette height varies47px, about3.89 game units at common scale; includes different knee/leg posture and some generation variability. No per-frame stretch applied.",
+      "cadence": {
+        "angularFrequency": 2.1,
+        "secondsPerCycle": 2.9919930034188504,
+        "nativeActorSpeed": 22,
+        "worldDistancePerCycle": 65.8238460752147,
+        "rationale": "Parent coordination retained Walter cadence2.1rad/s for comparable character height and slow actor speed; full-game contact/sliding review remains integrator responsibility."
+      }
+    },
+    "bilan": "Huit PNG natifs sélectionnés après quatre corrections de pose par imagegen. Détourage, identité, tenue, mains libres et alternance des membres contrôlés. Admission limitée à upworth-comms/comms, sous réserve du contrôle moteur par intégrateur."
+  },
+  "excludedGenerationAttempts": [
+    {
+      "generationId": "upworth-walk-04",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1611425,
+      "sha256": "1c1e2a56397f71c046d993faf1d1eb7deacc3dff041bcec03acff741adffefab",
+      "gitBlobSha": "70e2467dd045bec3813de4622c8dd166e1c8d360",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the accepted first UPWORTH walking frame and fixes her identity, body scale and camera for the whole cycle: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1500, crown near y24 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 04 — Up A. The near LEFT support leg is BEHIND the pelvis toward screen-left, heel lifted, toe around x430,y1500. The far RIGHT knee and boot swing FORWARD to screen-right, right heel near x650,y1455 still airborne before contact. Near LEFT arm swings gently FORWARD, far RIGHT arm BACK. Small natural pelvis rise, no high kick. Follow input 3's exact limb ordering; the near leg is visibly the trailing leg.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-04.png",
+          "sha256": "11bd6fd106a6391b8a8b500a03a2f636cdda1f837da39fe5012d9a0e0dd177cd",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-04.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1180399,
+        "alpha1to16": 21627,
+        "alpha17to31": 1683,
+        "alpha32to127": 4838,
+        "alpha128to239": 5591,
+        "alpha240to255": 358726,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          142,
+          24,
+          838,
+          1484
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "status": "excluded-attempt",
+      "reason": "Initial result kept near leg forward and near arm back instead of the opposite support needed at phase04; replaced by04-v2.",
+      "runtimeAdmission": "none",
+      "selectedForManifest": false
+    },
+    {
+      "generationId": "upworth-walk-05",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1544631,
+      "sha256": "dde61939068e3681a36e4d7036225492e3a8a5fc320467bba41187eb4f82b08e",
+      "gitBlobSha": "3d21ef9cceb6a5b978e38e244ff7433740c6d120",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the corrected opposite-leg UPWORTH walking frame and fixes her identity, body scale and camera for the whole cycle: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1500, crown near y24 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 05 — Contact B, OPPOSITE LEGS from contact A. The far RIGHT leg extends FORWARD to screen-right, right heel around x710,y1500 just touches down, toes lifted. The near LEFT leg extends BACK to screen-left, left toe around x310,y1500 pushes off, heel raised. The camera-side LEFT thigh MUST angle down-left/back from the pelvis and overlap the far thigh near the hip. Near LEFT arm swings FORWARD to screen-right; far RIGHT arm BACK. Do not mirror the woman. Copy input 3's opposite-contact limb topology. Keep input1's near forearm passing forward across her lower torso and its near thigh trailing back. Set the far boot heel down to the ground line while its toe is slightly lifted, a contact pose rather than a high step. Match the overall stride span to around 500 pixels, smaller than input1's aerial swing span.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-04-v2.png",
+          "sha256": "f6696bf5f84e27e4434474d19e83e45ac4e7dbd147145bcf68c9d84adf9f38e4",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-05.png",
+          "sha256": "ec49235e7e663bd5815ae18bf070cbba51a38ceb97effc9914d752ac3ce66251",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-05.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1202663,
+        "alpha1to16": 16632,
+        "alpha17to31": 1494,
+        "alpha32to127": 4423,
+        "alpha128to239": 5688,
+        "alpha240to255": 341964,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 0,
+        "bboxAbove32": [
+          102,
+          22,
+          866,
+          1469
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "status": "excluded-attempt",
+      "reason": "Initial result changed near arm forward but retained near leg forward; ipsilateral arm/leg combination rejected, replaced by05-v2.",
+      "runtimeAdmission": "none",
+      "selectedForManifest": false
+    },
+    {
+      "generationId": "upworth-walk-06",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1583650,
+      "sha256": "0db2a61ea729954f3cd3eb0df4fb8641dd40ec49bff705a667a028e9025d1efb",
+      "gitBlobSha": "884caba32d6136e1fbc5aa2707e432c6e7ba6d6e",
+      "generationPrompt": "Use case: pose transfer with identity preservation. Create ONE full-body transparent walking sprite of UPWORTH, the adult woman in INPUT 2, using the PRECISE WALKING LIMB ARRANGEMENT of INPUT 1. INPUT 1 is the male pose guide only: replace his identity, proportions and clothes entirely with the woman of INPUT 2. INPUT 2 defines the exact face, high dark-brown messy bun and loose cheek strands, light warm skin, slim female build, black mock-neck soft top with sleeves just above elbows, tan woven utility belt with rectangular buckle, dark charcoal/olive work trousers, and worn dark work boots. INPUT 3 corroborates only her face, hair, top and belt. Keep INPUT 2's exact same slightly three-quarter side camera facing SCREEN RIGHT, facial angle, lighting, body scale and calm expression. Both hands are bare and empty. CRITICAL POSE: phase06 DOWN B at 5/8 of a walking cycle. Match input1's limb arrangement exactly: camera-side LEFT arm swings FORWARD across the front of the lower torso toward screen-right, left hand at x680,y820; far RIGHT arm is BACK with right hand around x250,y870. Camera-side LEFT thigh angles down-left BACKWARD from the hip to the trailing left knee and trailing left boot around x250,y1445; that boot's heel is raised and toes are just leaving the ground. The far RIGHT thigh and knee angle forward/right and carry her weight, with the RIGHT boot planted FLAT at x680,y1490. The near LEFT leg must remain the trailing leg, visibly crossing in front of the far thigh near the hip. The far supporting knee bends gently to absorb weight, and the pelvis lowers about12pixels compared with contact. Maintain a slow walk, a modest stride, both arms opposing the legs. Do not reproduce input2's opposite-leg stance. Do not mirror any image or the face or costume. Native1024x1536 portrait canvas, full bun and both soles visible with narrow margins, crown around y24, baseline y1500, pelvis center x512, same scale as input2. True transparent RGBA background, opacity only in the physical person; zero alpha outside body and within limb gaps, narrow antialiased silhouette, opaque body. No haze, halo, glow, floor, shadow, environment, checkerboard, text, weapons or props.",
+      "inputReferences": [
+        {
+          "file": "walter-walk-06.png",
+          "sha256": "78a5d853ce50efa27f7c2a52df76b975aac3f64007a4a46be68cdb0a8e7dab60",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-06.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        },
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1191837,
+        "alpha1to16": 19506,
+        "alpha17to31": 1586,
+        "alpha32to127": 5233,
+        "alpha128to239": 6376,
+        "alpha240to255": 348326,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 19,
+        "bboxAbove32": [
+          103,
+          18,
+          823,
+          1485
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "status": "excluded-attempt",
+      "reason": "Initial result retained near leg forward instead of far support; replaced by minimal-edit06-v2 from the corrected contact05-v2.",
+      "runtimeAdmission": "none",
+      "selectedForManifest": false
+    },
+    {
+      "generationId": "upworth-walk-08",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1580849,
+      "sha256": "966a89250b15340b4531600a172c652951e332afcd48f965e985a3c34bb1e694",
+      "gitBlobSha": "cf235a2a9a1ff155a0a05baabfd85b2427b4e6c8",
+      "generationPrompt": "Use case: identity-preserve. Asset type: ONE individual full-body transparent walking sprite for the Alien: Covenant (2017) game. Input 1 is the accepted first UPWORTH walking frame and fixes her identity, body scale and camera for the whole cycle: preserve this exact adult woman's face, high messy dark-brown bun with loose cheek strands, slim natural build, warm light skin, black soft mock-neck crew top with sleeves just above elbows, brown woven utility belt and rectangular buckle, straight dark charcoal/olive work trousers, and worn dark work boots. Both hands remain bare and empty. Input 2 is Callie Hernandez's on-set interview, evidence ONLY for face, hair, black top and belt; do not copy her seated pose, gesture, chair or background. Input 3 is a different character used ONLY as an anatomical walking-pose guide: follow the indicated near/far limb arrangement, never his face, body proportions, clothing or lighting. Exactly one Upworth, same slightly three-quarter SIDE camera facing SCREEN RIGHT, same face angle and calm neutral expression. Ordinary slow natural walking on a level deck, modest stride, small opposing arm swing, slight hip rise/fall; no running or posing. Use a 1024x1536 portrait canvas, entire bun to both boot soles inside generous transparent margin. Keep fixed camera distance, body scale, pelvis centered near x512, grounded foot line y1500, crown near y24 at contact with only slight natural phase-dependent vertical motion. Near means the camera-side LEFT arm and LEFT leg; far means RIGHT. Do not mirror the person or change costume sides. Preserve complete anatomy, exactly two legs and two hands, clean gaps and consistent garment seams. Change only the specified walking pose and physically necessary cloth folds. REMOVE ALL halo or grey/brown haze inherited from any reference: genuine transparent RGBA alpha zero outside the physical body and in limb gaps, visibly opaque person, narrow antialias edge. No environment, floor, cast shadow, glow, backdrop, checkerboard, text, labels, props or weapons. PHASE 08 — Up B. The far RIGHT support leg is BEHIND the pelvis toward screen-left, heel lifted and right toe around x430,y1500. The near LEFT knee and boot swing FORWARD toward screen-right, left heel near x650,y1455 still airborne before contact A. Near LEFT arm swings gently BACK; far RIGHT arm FORWARD. The near left leg is visible IN FRONT of the far trailing leg. Small natural pelvis rise, no high kick or running. Follow input 3's arrangement; retain the same right-facing identity and camera.",
+      "inputReferences": [
+        {
+          "file": "upworth-walk-01.png",
+          "sha256": "6652d6e8f5b9eb26e717a77949e0b83ea2b7759ab75b596d61d0de9d79a0aa6d",
+          "sourceURL": null,
+          "role": "Native generated Upworth identity/pose reference from this batch.",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs"
+        },
+        {
+          "file": "upworth-onset-large.jpg",
+          "sha256": "ac74dfc3f085c1df9825cd3a062e0f27fd546dcfd307bcb104660a044f0aec0d",
+          "sourceURL": "https://i.ytimg.com/vi/vQMH3N07RXs/maxresdefault.jpg",
+          "sourcePage": "https://www.youtube.com/watch?v=vQMH3N07RXs",
+          "role": "Face, hair, black top and tan belt evidence only; no lower-body evidence."
+        },
+        {
+          "file": "walter-walk-08.png",
+          "sha256": "42615904a13cb2d234614545dae3083c804cf56f438e4455507edb8a0f4d4ffb",
+          "sourceURL": "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/2539d67020950b5ebcd269413729ec7acec7eb76/assets/openai/sprites/alien-covenant-v014/walter-walk-08.png",
+          "role": "Limb topology guide only, no identity, costume or lighting transfer."
+        }
+      ],
+      "alphaQA": {
+        "width": 1024,
+        "height": 1536,
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZero": 1188209,
+        "alpha1to16": 21547,
+        "alpha17to31": 1670,
+        "alpha32to127": 4869,
+        "alpha128to239": 5663,
+        "alpha240to255": 350906,
+        "edgeAlphaAbove16": 0,
+        "edgeAlphaNonzero": 32,
+        "bboxAbove32": [
+          161,
+          25,
+          854,
+          1473
+        ],
+        "alphaThreshold": 32,
+        "alphaComparison": ">=",
+        "policy": "transparent-sprite",
+        "pass": true
+      },
+      "generationTool": "image_gen.imagegen",
+      "originalBytesPreserved": true,
+      "generatorNativeDimensions": true,
+      "resized": false,
+      "verified1to1": false,
+      "status": "excluded-attempt",
+      "reason": "Initial result placed forward boot too near the support level for the requested airborne pre-contact; replaced by08-v2.",
+      "runtimeAdmission": "none",
+      "selectedForManifest": false
+    }
+  ],
+  "summary": {
+    "newPngs": 13,
+    "newRuntimePngs": 8,
+    "newCataloguePngs": 5,
+    "previousCataloguePromotions": 1,
+    "historicalPngs": 141,
+    "cumulativePngs": 154,
+    "runtimePngs": 81,
+    "cataloguePngs": 73,
+    "completeCycles": 8,
+    "completeCyclePhases": 64,
+    "runtimeCycles": 6,
+    "runtimeCyclePhases": 48,
+    "catalogueCycles": 2,
+    "catalogueCyclePhases": 16,
+    "incompleteDavidPoses": 5,
+    "animationImages": 69,
+    "certified1to1Images": 0
+  }
+}

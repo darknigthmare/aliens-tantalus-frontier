@@ -1,9 +1,39 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { covenantArchitecturePathAdmissionV018 } from './public-covenant-architecture-v018.mjs';
+import { covenantLocalRecoveryAdmission } from './covenant-local-recovery-20261126.mjs';
 import { COVENANT_SOURCE_V011, COVENANT_PUBLIC_V011, COVENANT_ASSETS_V011,
   COVENANT_ASSET_ROOTS, COVENANT_MANIFEST_V011, COVENANT_RUNTIME_FILES_V011,
   COVENANT_SOURCE_ONLY_ASSETS_V015, COVENANT_SOURCE_ONLY_PROVENANCE_V015 } from './build-covenant-v011.mjs';
 
 const SOURCE_FILES = new Set([
+  'scripts/covenant-local-recovery-20261126.mjs',
+  'scripts/verify-covenant-local-recovery-20261126.mjs',
+  'scripts/package-covenant-sprites-v017.py',
+  'scripts/qa-covenant-catalogue-v017.py',
+  'scripts/build-covenant-bible-v017.py',
+  'scripts/build-covenant-bible-v017.mjs',
+  'scripts/verify-covenant-v017-preservation.mjs',
+  'docs/covenant/PROVENANCE_V017.json',
+  'docs/covenant/SPRITES_V017_STATUS.md',
+  'docs/covenant/CONTINUATION_V017.md',
+  'docs/covenant/BIBLE_COVENANT_V017.json',
+  'docs/covenant/BIBLE_COVENANT_V017.md',
+  'docs/covenant/BIBLE_COVENANT_V017.html',
+  'docs/covenant/BIBLE_COVENANT_V017.xlsx',
+  '.github/workflows/covenant-v017-bible.yml',
+  'scripts/package-covenant-sprites-v016.py',
+  'scripts/qa-covenant-catalogue-v016.py',
+  'docs/covenant/PROVENANCE_V016.json',
+  'docs/covenant/SPRITES_V016_STATUS.md',
+  'docs/covenant/BIBLE_COVENANT_V016.xlsx',
+
+  'scripts/build-covenant-bible-v016.py',
+  'scripts/build-covenant-bible-v016.mjs',
+  'scripts/verify-covenant-v016-recovery.mjs',
+  'docs/covenant/CONTINUATION_V016.md',
+  'docs/covenant/BIBLE_COVENANT_V016.json',
+  'docs/covenant/BIBLE_COVENANT_V016.md',
+  'docs/covenant/BIBLE_COVENANT_V016.html',
   ...COVENANT_RUNTIME_FILES_V011.map(name => COVENANT_SOURCE_V011 + '/' + name),
   COVENANT_SOURCE_V011 + '/bridge.js',
   'modules/covenant/AGENTS.md', 'modules/covenant/package.json', 'modules/covenant/.gitignore',
@@ -101,6 +131,10 @@ function admittedAssets(built) {
 export function publicCovenantPathAdmissionV011(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.startsWith('/') || path.includes('\\')
     || path.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  const architecture = covenantArchitecturePathAdmissionV018(path, { directory, built });
+  if (architecture !== null) return architecture;
+  const recovered = covenantLocalRecoveryAdmission(path, { directory, built });
+  if (recovered !== null) return recovered;
   // Intercept the entire V015 tree before the host's general image policy.
   // Its reviewed originals are archived in source; none may enter a built release.
   if (path === COVENANT_SOURCE_ONLY_ASSETS_V015) return !built && directory;

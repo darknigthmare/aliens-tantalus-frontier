@@ -621,6 +621,26 @@ export const COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126 = Object.freeze(Object.fr
 ));
 // END COVENANT AND DLC BIBLES MERGE RECEIPTS 20261126
 
+// BEGIN COVENANT V017 BIBLE HOST RECEIPTS 20261126
+// Append only the reviewed V016/V017 campaign documentation to the exact merge.
+// Historical receipts remain immutable; this source-only stage grants no
+// gameplay admission and transfers no previous artistic or runtime validation.
+export const COVENANT_V017_BIBLE_BASELINE_20261126 = '6c2d610b7faf9ed88fc6c6977a98411ad1880940';
+export const COVENANT_V017_BIBLE_SUCCESSORS_20261126 = Object.freeze(Object.fromEntries(
+  Object.entries({
+  "docs/narrative/CAMPAGNE_PRINCIPALE.md": {
+    "previousSha256": "7f318ee44a83d3cf0fd7a84b48aa94ae7d7a51d25253ae0c289a7e862a37a525",
+    "currentSha256": "e74a6c39b2e4e85f658680578b4e0d03963bc8a42d642638dae4551c302b837c"
+  }
+}).map(([path, receipt]) => [path, Object.freeze(receipt)])
+));
+// END COVENANT V017 BIBLE HOST RECEIPTS 20261126
+
+export function reviewedCovenantV017BibleDigest20261126(path, endpoint) {
+  return advanceReceipt(path, endpoint, COVENANT_V017_BIBLE_SUCCESSORS_20261126,
+    'Broken merged-bible-to-Covenant-V017 source chain: ');
+}
+
 export function reviewedCovenantDlcBibleMergeDigest20261126(path, endpoint) {
   if (!Object.hasOwn(COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126, path)) return endpoint;
   const receipt = COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126[path];
@@ -634,7 +654,8 @@ export function reviewedCovenantV012HostDigest20261126(path, endpoint) {
     'Broken Covenant-V011-to-V012 host source chain: ');
   return Object.hasOwn(AVP_COVENANT_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_COVENANT_V012_SUCCESSORS_20261126, path)
-    ? reviewedCovenantDlcBibleMergeDigest20261126(path, published) : published;
+    ? reviewedCovenantV017BibleDigest20261126(path,
+      reviewedCovenantDlcBibleMergeDigest20261126(path, published)) : published;
 }
 
 export function reviewedCovenantHostDigest20261126(path, endpoint) {
@@ -694,7 +715,8 @@ export function reviewedAvpProductionBibleHostDigest20261126(path, endpoint) {
   return Object.hasOwn(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, path)
     || Object.hasOwn(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126, path)
-    ? reviewedCovenantDlcBibleMergeDigest20261126(path, published) : published;
+    ? reviewedCovenantV017BibleDigest20261126(path,
+      reviewedCovenantDlcBibleMergeDigest20261126(path, published)) : published;
 }
 
 export function reviewedAvpHostDigest20261125(path, endpoint) {
@@ -717,7 +739,8 @@ const hostPaths = () => [...new Set([...Object.keys(AVP_HOST_SUCCESSORS_20261125
   ...Object.keys(AVP_FIORINA_V116_SUCCESSORS_20261125), ...Object.keys(AVP_COVENANT_SUCCESSORS_20261126),
   ...Object.keys(AVP_COVENANT_V012_SUCCESSORS_20261126), ...Object.keys(AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126),
   ...Object.keys(AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126), ...Object.keys(AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126),
-  ...Object.keys(COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126)])];
+  ...Object.keys(COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126),
+  ...Object.keys(COVENANT_V017_BIBLE_SUCCESSORS_20261126)])];
 
 function hostReceiptChains(path) {
   const common = [AVP_HOST_SUCCESSORS_20261125[path], AVP_FIORINA_JOIN_SUCCESSORS_20261125[path],
@@ -735,7 +758,8 @@ function hostReceiptChains(path) {
 }
 
 // Each branch retains its valid chain. Only exact recorded endpoints from either
-// parent and the reviewed merged endpoint may appear in a runtime source view.
+// parent, the reviewed merge and its exact documentary successor may appear in
+// a runtime source view. This does not admit the document to built gameplay.
 export function avpHostRuntimeSources20261125(view) {
   const result = { ...view };
   for (const path of hostPaths()) {
@@ -747,11 +771,18 @@ export function avpHostRuntimeSources20261125(view) {
     if (merge) {
       endpoints.add(merge.covenantSha256); endpoints.add(merge.targetSha256); endpoints.add(merge.currentSha256);
     }
+    const continuation = COVENANT_V017_BIBLE_SUCCESSORS_20261126[path];
+    if (continuation) {
+      assert.equal(continuation.previousSha256, merge?.currentSha256,
+        'Broken merged-bible-to-Covenant-V017 source chain: ' + path);
+      endpoints.add(continuation.previousSha256); endpoints.add(continuation.currentSha256);
+    }
     assert.ok(endpoints.has(result[path]), 'Incorrect AVP host runtime view predecessor: ' + path);
-    result[path] = merge ? merge.currentSha256
+    const mergedEndpoint = merge ? merge.currentSha256
       : (Object.hasOwn(AVP_COVENANT_SUCCESSORS_20261126, path)
         || Object.hasOwn(AVP_COVENANT_V012_SUCCESSORS_20261126, path))
         ? covenant.at(-1).currentSha256 : documents.at(-1).currentSha256;
+    result[path] = reviewedCovenantV017BibleDigest20261126(path, mergedEndpoint);
   }
   return Object.freeze(result);
 }
@@ -772,6 +803,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     'DLC bible bridge requires the exact published PR 68 document head');
   assert.equal(AVP_PRODUCTION_BIBLE_BASELINE_20261126, '268b1a517c60338899578a165e9784c5b7313dba',
     'AVP production documents require the exact corrected bible continuation base');
+  assert.equal(COVENANT_V017_BIBLE_BASELINE_20261126, '6c2d610b7faf9ed88fc6c6977a98411ad1880940',
+    'Covenant V017 documentation requires the exact published merged campaign base');
   assert.equal(AVP_FIORINA_JOIN_BASELINES_20261125.commonCommit, AVP_HOST_BASELINE_20261125);
   for (const commit of Object.values(AVP_FIORINA_JOIN_BASELINES_20261125)) assert.match(commit, /^[a-f0-9]{40}$/);
   assert.match(AVP_FIORINA_QA_BASELINE_20261125, /^[a-f0-9]{40}$/, 'Fiorina QA requires its exact combined baseline');
@@ -784,7 +817,8 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
     AVP_ALIENS_JOIN_SUCCESSORS_20261125, ALIENS_AVP_JOIN_SUCCESSORS_20261125, AVP_FIORINA_SPRITES_SUCCESSORS_20261125,
     AVP_FIORINA_V116_SUCCESSORS_20261125, AVP_COVENANT_SUCCESSORS_20261126,
     AVP_COVENANT_V012_SUCCESSORS_20261126, AVP_DLC_BIBLE_DOCUMENTS_SUCCESSORS_20261126,
-    AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126]) {
+    AVP_DLC_BIBLE_BRIDGE_SUCCESSORS_20261126, AVP_PRODUCTION_BIBLE_SUCCESSORS_20261126,
+    COVENANT_V017_BIBLE_SUCCESSORS_20261126]) {
     assert.equal(Object.hasOwn(receipts, ownPath), false, 'The AVP terminal cannot admit its own bytes');
     for (const [path, receipt] of Object.entries(receipts)) {
       assert.ok(/^[a-zA-Z0-9._/-]+$/.test(path) && !path.split('/').some(segment => !segment || segment === '.' || segment === '..'), 'Invalid AVP host source path: ' + path);
@@ -906,6 +940,15 @@ export function verifyAvpHostSources20261125(readSource = readRepository) {
       'Only the documented campaign append may lack an old Covenant host receipt');
     assert.equal(reviewedCovenantDlcBibleMergeDigest20261126(path, receipt.covenantSha256), receipt.currentSha256);
     assert.equal(reviewedCovenantDlcBibleMergeDigest20261126(path, receipt.targetSha256), receipt.currentSha256);
+  }
+  assert.deepEqual(Object.keys(COVENANT_V017_BIBLE_SUCCESSORS_20261126), ['docs/narrative/CAMPAGNE_PRINCIPALE.md'],
+    'Covenant V017 can advance only the exact reviewed campaign document');
+  assert.ok(Object.isFrozen(COVENANT_V017_BIBLE_SUCCESSORS_20261126));
+  for (const [path, receipt] of Object.entries(COVENANT_V017_BIBLE_SUCCESSORS_20261126)) {
+    assert.ok(Object.isFrozen(receipt));
+    assert.equal(receipt.previousSha256, COVENANT_DLC_BIBLE_MERGE_SOURCES_20261126[path].currentSha256,
+      'Covenant V017 must follow the exact historical bible merge: ' + path);
+    assert.equal(reviewedCovenantV017BibleDigest20261126(path, receipt.previousSha256), receipt.currentSha256);
   }
   const paths = hostPaths();
   for (const path of paths) {
