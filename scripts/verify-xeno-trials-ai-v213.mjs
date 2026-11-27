@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
-import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPausedV96,
+import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
@@ -151,5 +151,46 @@ test('duel checkpoints accept the exact hard CPU parry and riposte input edges',
     assert.equal(resumed.events.filter(event => event.kind === 'super-riposte').length, 1);
     advance(match, 80 - match.tick);
     assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+  }
+});
+
+for (const [opponentId, attackTick, hitTick] of [['runner', 65, 82], ['synth-guard', 64, 79]]) {
+  test(`hard ${opponentId} pays for a native anti-air against an observed descent with specials locked`, () => {
+    const { match, player, cpu, config } = fixture({ opponentId, gap: 58, rules: { noSpecial: true } });
+    advance(match, 1, { jump: true });
+    advance(match, attackTick - 2);
+    assert.equal(match.ai.observation.targetAirborne, true);
+    assert.ok(player.y > 0 && player.vy < 0);
+    assert.deepEqual(cpuAttacks(match), []);
+    const stamina = cpu.stamina;
+
+    advance(match, 1);
+    assert.equal(cpu.attack?.kind, 'anti-air');
+    assert.equal(cpu.stamina, stamina - XENO_TRIALS_ATTACKS_V96['anti-air'].cost);
+    assert.equal(cpu.superMeterV148, 100);
+    assert.equal(cpu.stats.specials, 0);
+    const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+    assert.ok(checkpoint);
+    const resumed = structuredClone(checkpoint.snapshot);
+    setXenoTrialsPausedV96(resumed, false);
+    for (const state of [match, resumed]) {
+      advance(state, 94 - state.tick);
+      assert.ok(state.fighters[0].y > 0);
+      assert.deepEqual(cpuAttacks(state).map(event => event.kind), ['anti-air']);
+      assert.deepEqual(state.events.filter(event => event.type === 'hit' && event.attacker === 'opponent')
+        .map(event => event.tick), [hitTick]);
+    }
+    assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+  });
+}
+
+test('the hard CPU saves anti-air for a reachable airborne target it can afford to hit', () => {
+  for (const options of [{ gap: 500 }, { difficulty: 'normal' }, { jump: false }, { stamina: 0 }]) {
+    const { match, cpu } = fixture({ opponentId: 'runner', gap: 58, rules: { noSpecial: true }, ...options });
+    advance(match, 1, { jump: options.jump !== false });
+    advance(match, 63);
+    if (options.stamina === 0) cpu.stamina = 0;
+    advance(match, 30);
+    assert.ok(cpuAttacks(match).every(event => event.kind !== 'anti-air'), JSON.stringify(options));
   }
 });

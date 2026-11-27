@@ -20,6 +20,18 @@ const layouts = [
       ['right', 'APPUI À DISTANCE', ['synth-sniper', 'synth-trooper', 'synth-guard'], 5, 3, 20, .27],
       ['left', 'LIGNE D’ASSAUT', ['warrior', 'runner', 'armored-runner'], 6, 4, 24, .30]
     ]
+  },
+  {
+    id: 'xth213-reactor-switchback', title: 'RELÈVE DU RÉACTEUR', stageId: 'reactor-ring',
+    description: 'Quatre vagues fragiles. Les unités de maintenance arrivent à l’est, puis le cordon se divise. Une meute surgit à l’ouest avant l’assaut sur les deux sas.',
+    orders: 'Éloignez-vous du sas est avant l’arrivée du cordon. Gardez de l’espace au centre pour éviter d’être pris entre les deux accès.',
+    roundSeconds: 180, reward: 420,
+    waves: [
+      ['right', 'UNITÉS DE MAINTENANCE', ['synth-trooper', 'synth-guard'], 4, 3, 15, .20],
+      ['split', 'CORDON DE QUARANTAINE', ['runner', 'synth-sniper', 'prowler'], 6, 4, 17, .22],
+      ['left', 'MEUTE DE CONFINEMENT', ['prowler', 'runner', 'warrior'], 5, 3, 19, .24],
+      ['split', 'RUPTURE DU CORDON', ['spitter', 'synth-trooper', 'armored-runner'], 6, 4, 23, .25]
+    ]
   }
 ];
 

@@ -20,7 +20,7 @@ import {
 } from './audit-xeno-priorities-v199.mjs';
 import { verifyStageClassificationV195 as verifyEarlier } from './audit-xeno-stage-classification-v195.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const git = args => execFileSync('git', args, { cwd: root, maxBuffer: 32 * 1024 * 1024 });
@@ -31,7 +31,7 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v199.mjs';
 const relay = 'scripts/audit-xeno-supers-v200.mjs';
 const successor = 'scripts/audit-xeno-priorities-v201.mjs';
-const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+const terminal = XENO_AUDIT_TERMINAL_PATH;
 const verifier = 'scripts/verify-xeno-supers-audit-v200.mjs';
 const report = 'docs/forge/xeno-trials/V200-SUPERS.md';
 const spritePrefix = 'assets/openai/sprites/xeno-trials-v200/';

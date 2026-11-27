@@ -1,3 +1,6 @@
+import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
+import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
+
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
 const profiles = [
@@ -28,6 +31,7 @@ const profilesByStage = new Map(XENO_TRIALS_STAGE_EVENT_PROFILES_V211.map(profil
 const contactTypes = new Set(['hit', 'block', 'guard-break']);
 const impactLifetime = 26;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+const gateTravelTicks = 24;
 
 function getScenePhase(match, presentation) {
   if (match.result || match.phase === 'match-over') return 'result';
@@ -48,9 +52,45 @@ function getContactSide(match, event, arena) {
   return null;
 }
 
+function getDirectedGates(protocol, match, phase, opening, reducedMotion) {
+  const firstWave = protocol.waves[0];
+  let contacts;
+  let openingFraction = 0;
+  let status = 'locked';
+  if (phase === 'introduction' && opening > 0) {
+    contacts = getXenoTrialsHordeGateCueV213(firstWave, 0, firstWave.concurrent)?.counts;
+    openingFraction = opening;
+    status = 'armed';
+  } else if (phase === 'combat' || phase === 'intermission') {
+    const cue = getXenoTrialsReinforcementV201(match);
+    const elapsed = match.tick - Math.ceil(match.config.introSeconds * 120);
+    if (cue?.phase === 'incoming') {
+      contacts = cue.gateContactsV213;
+      openingFraction = clamp(1 - cue.remainingTicks / gateTravelTicks, 0, 1);
+      status = 'armed';
+    } else {
+      // The first batch exists before the combat presentation. Later batches
+      // use the same saved director clocks as the other reinforcement cues.
+      const initial = match.hordeV180.wave === 1 && elapsed < gateTravelTicks;
+      const age = initial ? elapsed : match.tick - cue?.arrivalTick;
+      if (age >= 0 && age < gateTravelTicks) {
+        contacts = initial ? getXenoTrialsHordeGateCueV213(firstWave, 0, firstWave.concurrent)?.counts : cue?.gateContactsV213;
+        openingFraction = clamp(1 - (age - 6) / (gateTravelTicks - 6), 0, 1);
+        status = 'open';
+      }
+    }
+  }
+  const gate = side => contacts?.[side] > 0
+    ? { status, opening: reducedMotion ? 0 : openingFraction }
+    : { status: 'locked', opening: 0 };
+  return { left: gate('left'), right: gate('right') };
+}
+
 export function createXenoTrialsStageEventsV211(stageId, match, arena) {
   const profile = profilesByStage.get(stageId);
   if (!profile) return () => null;
+  const minigame = getXenoTrialsHordeMinigameV213(match.hordeV180?.protocolId);
+  const directedGates = minigame?.stageId === stageId;
   let round = match.round;
   let lastEventId = match.serial;
   let observedTick = match.tick;
@@ -84,7 +124,7 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     let opening = Number(phase === 'combat');
     if (phase === 'introduction' && presentation?.phase === 'countdown') {
       const progress = presentation.elapsedMs / presentation.durationMs;
-      if (Number.isFinite(progress)) opening = reducedMotion ? 0 : clamp((progress - .45) / .5, 0, 1);
+      if (Number.isFinite(progress)) opening = clamp((progress - .45) / .5, 0, 1);
     } else if (phase === 'intermission' && !reducedMotion && Number.isFinite(match.phaseTime) && !match.hordeV180) {
       opening = clamp(match.phaseTime / 1.8, 0, 1);
     }
@@ -92,8 +132,12 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
     const impact = phase === 'combat' && !reducedMotion && impactAge < impactLifetime
       ? { ...recentImpact, progress: impactAge / impactLifetime } : null;
     const moving = phase === 'combat' && !reducedMotion;
+    const gates = directedGates ? getDirectedGates(minigame, match, phase, opening, reducedMotion) : null;
+    if (gates) opening = Math.max(gates.left.opening, gates.right.opening);
+    if (reducedMotion && phase === 'introduction') opening = 0;
     return {
       ...profile, round, tick: observedTick, phase, opening, moving, impact,
+      ...(gates ? { gates } : {}),
       reducedMotion, affectsCombat: false,
       time: moving ? observedTick / 120 + (match.config.seed % 41) * .07 : 0,
       degraded: [...degraded]
@@ -102,7 +146,9 @@ export function createXenoTrialsStageEventsV211(stageId, match, arena) {
 }
 
 function drawFixture(ctx, view, stage, x, y, side) {
-  const { opening, time, machinery, atmosphere, moving } = view;
+  const { time, machinery, atmosphere, moving } = view;
+  const gate = view.gates?.[side];
+  const opening = gate?.opening ?? view.opening;
   const damaged = view.degraded.includes(side);
   const organic = view.gate === 'membrane';
   const floorLight = damaged ? '#d9a37a' : stage.accent;
@@ -136,9 +182,22 @@ function drawFixture(ctx, view, stage, x, y, side) {
   }
 
   // The opening's indicator also provides a static, steady result cue.
-  ctx.globalAlpha = damaged ? .16 : .21 + (moving ? Math.sin(time * .8) * .05 : 0);
+  const lightAlpha = damaged ? .16 : .21 + (moving ? Math.sin(time * .8) * .05 : 0);
+  ctx.globalAlpha = lightAlpha;
   ctx.fillStyle = floorLight;
   ctx.fillRect(x - 11, y - height - 9, 22, 3);
+  if (gate && gate.status !== 'locked') {
+    const admitting = gate.status === 'open';
+    const lampCount = admitting ? 3 : 2;
+    ctx.globalAlpha = .68;
+    ctx.fillStyle = admitting ? stage.accent : '#f5c078';
+    // Read the airlock state by the number of lamps as well as their colour.
+    for (let lamp = 0; lamp < lampCount; lamp++) {
+      ctx.fillRect(x - 9 + lamp * 7, y - height + 5, 4, 3);
+    }
+    ctx.fillStyle = floorLight;
+    ctx.globalAlpha = lightAlpha;
+  }
   const machineX = x + direction * (width / 2 + 10);
   ctx.strokeRect(machineX - 5, y - 12, 10, 8);
   if (moving) {

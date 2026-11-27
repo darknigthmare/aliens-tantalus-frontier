@@ -1,6 +1,7 @@
 // Static offline shell. The release builder verifies local imports and stamps this cache.
-const CACHE = 'atf-v143-xeno-trials-tablet-v216';
+const CACHE = 'atf-v143-xeno-trials-hud-v217';
 const SHELL = Object.freeze([
+  '/src/xeno-trials-practice-v217.js',
   '/src/xeno-trials-cargo-interlock-v213.js',
   '/src/xeno-trials-finishers-v213.js',
   '/src/xeno-trials-grapple-art-v213.js',

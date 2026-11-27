@@ -12,7 +12,10 @@ import { XENO_COMBAT_TABLET_BASELINE_V215, XENO_COMBAT_TABLET_DECLARATIONS_V215,
 import { XENO_TABLET_SPRITE_BASELINE_V216, XENO_TABLET_SPRITE_DECLARATIONS_V216, XENO_TABLET_SPRITE_SUCCESSORS_V216,
   XENO_TABLET_SPRITE_NEW_INPUTS_V216, reviewedXenoTabletSpriteDigestV216, xenoTabletSpriteRuntimeSourcesV216,
   verifyXenoTabletSpriteV216 } from './audit-xeno-tablet-sprite-v216.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { XENO_TRIALS_BASELINE_V217, XENO_TRIALS_DECLARATIONS_V217, XENO_TRIALS_SUCCESSORS_V217, XENO_TRIALS_NEW_INPUTS_V217,
+  reviewedXenoTrialsDigestV217, xenoTrialsRuntimeSourcesV217, verifyXenoTrialsV217 } from './audit-xeno-trials-v217.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
+import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 
 const root = new URL('..', import.meta.url);
 const read = path => readFileSync(new URL(path, root));
@@ -132,9 +135,10 @@ test('V216 preserves the V215 declarations and projects the exact sprite styles 
   assert.equal(runtime.historical, 'untouched');
   for (const [path, receipt] of Object.entries(XENO_TABLET_SPRITE_SUCCESSORS_V216)) {
     assert.equal(sha(git('show', `${XENO_TABLET_SPRITE_BASELINE_V216}:${path}`)), receipt.previousSha256, path);
+    assert.equal(sha(git('show', `${XENO_TRIALS_BASELINE_V217}:${path}`)), receipt.sha256, path);
     assert.equal(reviewedXenoTabletSpriteDigestV216(path, receipt.previousSha256), sha(read(path)), path);
     assert.throws(() => reviewedXenoTabletSpriteDigestV216(path, receipt.sha256), /Incorrect V215 endpoint for V216/);
-    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], reviewedXenoTrialsDigestV217(path, receipt.sha256), path);
   }
   assert.deepEqual(xenoTabletSpriteRuntimeSourcesV216(runtime), runtime);
   assert.equal(verifyXenoTabletSpriteV216().historicalResultsTransferred, false);
@@ -142,13 +146,13 @@ test('V216 preserves the V215 declarations and projects the exact sprite styles 
     error => error.message.includes(css) && error.message.includes('Unreviewed'));
 });
 
-test('V216 admits only exact public sprite assets and keeps its terminal audit out of the build', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
-  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
-  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_SUCCESSORS_V216, terminal));
-  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_NEW_INPUTS_V216, terminal));
-  assert.equal(isPublicDistributionPathV86(terminal), true);
-  assert.equal(isPublicDistributionPathV86(terminal, { built: true }), false);
+test('V216 admits only exact public sprite assets and keeps its audit out of the build', () => {
+  const path = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  assert.match(read(path).toString(), /from '\.\/audit-xeno-trials-v217\.mjs'/);
+  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_SUCCESSORS_V216, path));
+  assert.ok(!Object.hasOwn(XENO_TABLET_SPRITE_NEW_INPUTS_V216, path));
+  assert.equal(isPublicDistributionPathV86(path), true);
+  assert.equal(isPublicDistributionPathV86(path, { built: true }), false);
   assert.equal(isPublicDistributionPathV86('scripts/audit-xeno-unreviewed-v216.mjs'), false);
   const inputs = Object.entries(XENO_TABLET_SPRITE_NEW_INPUTS_V216);
   const directory = 'assets/openai/xeno-trials-v216';
@@ -171,12 +175,57 @@ test('V216 admits only exact public sprite assets and keeps its terminal audit o
 
 test('V216 connects the RGBA tablet sprite to the combat styles and offline shell', () => {
   const asset = 'assets/openai/xeno-trials-v216/tablet-chassis.png';
-  const png = read(asset);
+  const atV216 = path => git('show', `${XENO_TRIALS_BASELINE_V217}:${path}`);
+  const png = atV216(asset);
   assert.deepEqual(png.subarray(0, 8), Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
   assert.equal(png.subarray(12, 16).toString(), 'IHDR');
   assert.equal(png[24], 8);
   assert.equal(png[25], 6);
-  const css = read('xeno-trials-fullscreen-v119.css').toString();
+  const css = atV216('xeno-trials-fullscreen-v119.css').toString();
   assert.match(css, /border-image:\s*url\(['"]?assets\/openai\/xeno-trials-v216\/tablet-chassis\.png['"]?\)/);
-  assert.ok(read('sw.js').toString().includes("'/" + asset + "'"), 'The main shell precaches the tablet sprite');
+  assert.ok(atV216('sw.js').toString().includes("'/" + asset + "'"), 'The main shell precaches the tablet sprite');
+});
+
+test('V217 preserves the V216 declarations and verifies the exact gameplay and UI source revisions', () => {
+  assert.equal(XENO_TRIALS_BASELINE_V217, '55c98468250a409b5348a83165390af405f58170');
+  verifyHistoricalDeclarations(XENO_TRIALS_DECLARATIONS_V217, XENO_TRIALS_BASELINE_V217);
+  const css = 'xeno-trials-fullscreen-v119.css';
+  const ui = 'src/xeno-trials-ui-v96.js';
+  assert.equal(XENO_TRIALS_SUCCESSORS_V217[css]?.kind, 'runtime');
+  assert.equal(XENO_TRIALS_SUCCESSORS_V217[ui]?.kind, 'runtime');
+  const runtime = xenoGameplayRuntimeSourcesV213({ historical: 'untouched' });
+  assert.equal(runtime.historical, 'untouched');
+  for (const [path, receipt] of Object.entries(XENO_TRIALS_SUCCESSORS_V217)) {
+    assert.equal(sha(git('show', `${XENO_TRIALS_BASELINE_V217}:${path}`)), receipt.previousSha256, path);
+    assert.equal(reviewedXenoTrialsDigestV217(path, receipt.previousSha256), sha(read(path)), path);
+    assert.throws(() => reviewedXenoTrialsDigestV217(path, receipt.sha256), /Incorrect V216 endpoint for V217/);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+  }
+  assert.deepEqual(xenoTrialsRuntimeSourcesV217(runtime), runtime);
+  assert.equal(verifyXenoTrialsV217().historicalResultsTransferred, false);
+  assert.throws(() => verifyXenoTabletSpriteV216(path => path === css ? Buffer.from('unreviewed HUD styling') : read(path)),
+    error => error.message.includes(css) && error.message.includes('Unreviewed'));
+});
+
+test('V217 admits exact new sources and ships runtime inputs without bundling audit tools', () => {
+  const terminal = XENO_AUDIT_TERMINAL_PATH;
+  assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.ok(!Object.hasOwn(XENO_TRIALS_SUCCESSORS_V217, terminal));
+  assert.ok(!Object.hasOwn(XENO_TRIALS_NEW_INPUTS_V217, terminal));
+  assert.equal(isPublicDistributionPathV86(terminal), true);
+  assert.equal(isPublicDistributionPathV86(terminal, { built: true }), false);
+  assert.equal(isPublicDistributionPathV86('scripts/audit-xeno-unreviewed-v217.mjs'), false);
+  const baseline = new Set(git('ls-tree', '-r', '--name-only', XENO_TRIALS_BASELINE_V217).toString().split('\n'));
+  const runtime = xenoGameplayRuntimeSourcesV213({});
+  const practice = 'scripts/verify-xeno-trials-practice-v217.mjs';
+  assert.equal(XENO_TRIALS_NEW_INPUTS_V217[practice]?.kind, 'tooling');
+  assert.equal(collectReleaseTestsV143(JSON.parse(read('package.json')).scripts).filter(path => path === practice).length, 1);
+  for (const [path, receipt] of Object.entries(XENO_TRIALS_NEW_INPUTS_V217)) {
+    assert.equal(baseline.has(path), false, path);
+    assert.equal(isPublicDistributionPathV86(path), true, path);
+    assert.equal(isPublicDistributionPathV86(path, { built: true }), ['runtime', 'asset'].includes(receipt.kind), path);
+    if (receipt.kind === 'runtime') assert.equal(runtime[path], receipt.sha256, path);
+    assert.throws(() => verifyXenoTabletSpriteV216(candidate => candidate === path ? Buffer.from('unreviewed input') : read(candidate)),
+      error => error.message.split('\n', 1)[0] === 'Unreviewed V217 source bytes: ' + path);
+  }
 });

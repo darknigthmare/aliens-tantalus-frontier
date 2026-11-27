@@ -10,7 +10,7 @@ import { XENO_VISUAL_ASSETS_BASELINE_V205 as baseline, XENO_VISUAL_ASSETS_HISTOR
   xenoVisualAssetsRuntimeSourcesV205 as runtimeSources } from './audit-xeno-visual-assets-v205.mjs';
 import { verifyXenoPrioritiesV204 as priorVerify } from './audit-xeno-priorities-v204.mjs';
 import { reviewedXenoProductionAssetsDigestV206 as advanceToV206 } from './audit-xeno-production-assets-v206.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { verifyXenoVisualAdmissionsV205, publicXenoVisualPathAdmissionV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
@@ -60,7 +60,7 @@ test('exact runtime images can ship while production poses, documentation, audit
   const audit = 'scripts/audit-xeno-visual-assets-v205.mjs';
   assert.match(read(audit).toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.match(read('scripts/audit-xeno-production-assets-v206.mjs').toString(), /from '\.\/audit-xeno-standalone-v207\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-tablet-sprite-v216.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read(XENO_AUDIT_TERMINAL_PATH).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-priorities-v204.mjs').toString(), /from '\.\/audit-xeno-visual-assets-v205\.mjs'/);
   for (const path of [audit, 'scripts/public-xeno-visual-admissions-v205.mjs',
     'scripts/verify-xeno-trials-visual-assets-v205.mjs', 'scripts/verify-xeno-visual-assets-audit-v205.mjs',

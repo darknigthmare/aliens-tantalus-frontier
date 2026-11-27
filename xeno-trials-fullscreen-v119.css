@@ -154,65 +154,6 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
 @media(max-width:760px){.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188{font-size:9px;padding-top:6px}.xt-fullscreen-v119 .xt-operation-hud-v188>div>strong{font-size:9px}.xt-fullscreen-v119 .xt-operation-hud-v188 [data-xt="operation-hint"]{font-size:8px}}
 @media(max-height:520px){.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188{font-size:8px;gap:2px 8px;padding-top:4px}.xt-fullscreen-v119 [data-xt-step="combat"] .xt-operation-hud-v188 [data-xt="operation-hint"]{display:none}.xt-fullscreen-v119 [data-xt-step="combat"][data-xt-operation="true"] .xt-controls{gap:4px;bottom:60px}}
 
-/* A short landscape operation has its own instrument rail. The world gets a
-   real, separate viewport; controls never cover a body or the contact line. */
-@media(orientation:landscape) and (max-height:520px){
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]{
-    --xt-operation-rail:min(38vw,320px);
-    --xt-operation-control-height:44px;
-    --xt-operation-control-gap:4px;
-    --xt-operation-control-bottom:60px;
-    --xt-operation-controls:calc(4 * var(--xt-operation-control-height) + 3 * var(--xt-operation-control-gap));
-    height:100dvh;min-height:0;max-height:100dvh
-  }
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] :is(.xt-layout,.xt-main,[data-xt="combat-panel"]){min-height:0;max-height:100%;height:100%}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena{inset:0 var(--xt-operation-rail) 0 0;width:calc(100% - var(--xt-operation-rail));height:100%;min-height:0;max-height:100%}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena canvas{width:100%!important;height:100%!important;min-height:0;max-width:100%;max-height:100%!important;object-fit:contain;aspect-ratio:auto;margin:0}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-hud[data-horde="true"]{left:auto;right:6px;top:6px;width:calc(var(--xt-operation-rail) - 12px);box-sizing:border-box;max-height:calc(100dvh - var(--xt-operation-control-bottom) - var(--xt-operation-controls) - 12px);overflow:auto;overscroll-behavior:contain;pointer-events:auto;grid-template-columns:minmax(0,1fr) 48px;padding:6px;gap:4px 8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals{grid-template-rows:auto auto 6px auto 3px;gap:2px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>.xt-side{display:none}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>strong{font-size:10px;min-height:0;line-height:1.2}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vital-value{font-size:9px;line-height:1.2}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-clock [data-xt="clock"]{font-size:23px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-clock [data-xt="score"]{font-size:11px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-telemetry{grid-column:1/-1;grid-row:2;border:0;padding:0}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188{grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-hud-meta-v186{grid-row:4}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] :is(.xt-horde-link,.xt-horde-phase:not([data-reinforcement="true"]),.xt-horde-total,.xt-horde-progress){display:none}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row{justify-content:space-between;gap:8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row>div{display:flex;align-items:center;gap:6px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row strong{font-size:13px;line-height:1}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-horde-counter-row span{font-size:6px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div{flex-wrap:nowrap;font-size:8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>span{display:none}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188 [data-xt="operation-hazard"]{font-size:8px;line-height:1.25}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,var(--xt-operation-control-height));left:auto;right:6px;width:calc(var(--xt-operation-rail) - 12px);bottom:var(--xt-operation-control-bottom);gap:var(--xt-operation-control-gap)}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls button{min-height:var(--xt-operation-control-height);min-width:0;padding:5px 2px;font-size:8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="super"]{grid-column:3/span 2;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3;font-size:9px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-actions{left:auto;right:calc(var(--xt-operation-rail) - 64px);bottom:8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"]>.section-intro{right:6px;bottom:8px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"]>.section-intro>.button{min-height:44px;max-width:calc(var(--xt-operation-rail) - 84px);font-size:8px}
-}
-@media(max-width:760px) and (orientation:portrait){
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="super"]{grid-column:3/span 2;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
-}
-
-@media(max-width:760px) and (orientation:portrait), (max-height:520px) and (orientation:landscape){
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="crouch"]{grid-column:1;grid-row:4}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="evade"]{grid-column:2;grid-row:4}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="antiAir"]{grid-column:3;grid-row:4}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="parry"]{grid-column:4;grid-row:4}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="signature2"]:not([hidden]),[data-xeno-action="signature3"]:not([hidden])) [data-xeno-action="interact"]{grid-column:1;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="signature2"]:not([hidden]),[data-xeno-action="signature3"]:not([hidden])) [data-xeno-action="super"]{grid-column:2;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="signature2"]{grid-column:3;grid-row:3}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="signature3"]{grid-column:4;grid-row:3}
-}
-
 .xt-parry-status-v208{color:#f6d888;font:700 .65rem/1.2 ui-monospace,monospace;letter-spacing:.03em}
 
 /* Practice has its own interactive panel above the canvas and below the match HUD. */
@@ -952,8 +893,7 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
 
 #xeno-trials-v96[data-xt-step="combat"] [data-xt="combat-panel"] {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  align-items: stretch;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   box-sizing: border-box;
   padding: var(--xt-tablet-top) var(--xt-tablet-right) var(--xt-tablet-bottom) var(--xt-tablet-left);
 }
@@ -961,61 +901,199 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
 #xeno-trials-v96[data-xt-step="combat"] .xt-arena {
   position: relative;
   inset: auto;
-  grid-row: 2;
-  width: 100%;
-  min-height: 0;
+  display: grid;
+  grid-area: 1 / 1;
   align-self: stretch;
+  place-items: center;
+  min-height: 0;
+  width: 100%;
+  container-type: size;
   background: #090e11;
   box-shadow: 0 0 0 1px #596363;
 }
 
-#xeno-trials-v96[data-xt-step="combat"] .xt-arena canvas {
+/* Canvas and HUD share the 1000 × 560 picture, including when it letterboxes. */
+#xeno-trials-v96[data-xt-step="combat"] .xt-arena-screen {
+  position: relative;
+  width: min(100cqw, calc(100cqh * 25 / 14));
+  aspect-ratio: 25 / 14;
+  container-type: inline-size;
+  overflow: hidden;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-arena-screen > canvas {
+  position: absolute;
+  inset: 0;
   display: block;
+  width: 100%;
+  height: 100%;
   min-height: 0;
-  background: radial-gradient(ellipse at center, #162024, #090e11 78%);
+  object-fit: fill;
+  touch-action: none;
 }
 
 #xeno-trials-v96[data-xt-step="combat"] .xt-match-hud {
-  position: relative;
-  inset: auto;
+  inset: 0 0 auto;
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr) clamp(40px, 10cqw, 96px) minmax(0, 1fr);
+  gap: clamp(3px, .85cqw, 12px);
+  padding: clamp(5px, 1.35cqw, 18px) clamp(6px, 2.1cqw, 30px);
+  border: 0;
+  background: linear-gradient(#050b0eef, #071416c4 82%, #0815183d);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-match-hud[data-horde="true"] {
+  grid-template-columns: minmax(0, 1fr) clamp(40px, 12cqw, 112px) minmax(0, 1fr);
+  gap: clamp(3px, .85cqw, 12px);
+  padding: clamp(5px, 1.35cqw, 18px) clamp(6px, 2.1cqw, 30px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals {
+  grid-template: auto / minmax(0, 1fr) auto;
+  gap: 3px 6px;
+  align-items: center;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent {
+  grid-template-columns: auto minmax(0, 1fr);
+  text-align: right;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals > :is(.xt-side, .xt-hp-meter, .xt-parry-status-v208) {
+  grid-column: 1 / -1;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals > .xt-side {
   grid-row: 1;
-  border-color: #5e6a67;
-  background: linear-gradient(#172221f7, #10191ae6);
-  box-shadow: inset 0 -2px #101617, 0 3px 12px #0006;
-}
-
-#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent .xt-side {
-  color: #aadae7;
-}
-
-#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-player .xt-side {
   color: var(--xt-amber);
+  font-size: clamp(8px, .92cqw, 12px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent > .xt-side {
+  color: #b1e4ef;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals > :is(strong, [data-xt$="-hp-value"]) {
+  grid-row: 2;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals > strong {
+  font-size: clamp(10px, 2.1cqw, 25px);
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vital-value {
+  font-size: clamp(8px, 1.1cqw, 13px);
+  white-space: nowrap;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals .xt-hp-meter {
+  grid-row: 3;
+  height: clamp(6px, 1cqw, 13px);
+  border: 1px solid #829b996e;
+  background: #243538;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-hp-meter[data-low="false"]::-webkit-progress-value {
+  background: linear-gradient(#fff2ab, #d5a64b);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent .xt-hp-meter[data-low="false"]::-webkit-progress-value {
+  background: linear-gradient(#d2f9ff, #69a9bc);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-hp-meter[data-low="false"]::-moz-progress-bar {
+  background: linear-gradient(#fff2ab, #d5a64b);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent .xt-hp-meter[data-low="false"]::-moz-progress-bar {
+  background: linear-gradient(#d2f9ff, #69a9bc);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-stamina-meter, .xt-super-meter-v148) {
+  height: clamp(3px, .38cqw, 5px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-stamina-value, .xt-stamina-meter) {
+  grid-row: 4;
+  margin: 0;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-super-value-v148, .xt-super-meter-v148) {
+  grid-row: 5;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-parry-status-v208 {
+  grid-row: 6;
+  font-size: clamp(7px, .94cqw, 11px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-player :is(.xt-stamina-meter, .xt-super-meter-v148),
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent > .xt-vital-value {
+  grid-column: 1;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-player > .xt-vital-value,
+#xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent > :is(strong, .xt-stamina-meter, .xt-super-meter-v148) {
+  grid-column: 2;
 }
 
 #xeno-trials-v96[data-xt-step="combat"] .xt-match-clock {
+  align-self: start;
+  justify-content: start;
+  gap: 2px;
   border-inline: 1px solid #85908945;
   background: #0b1014b8;
+  font-size: clamp(7px, 1cqw, 12px);
 }
 
-#xeno-trials-v96[data-xt-step="combat"] .xt-controls {
-  position: relative;
-  inset: auto;
-  grid-row: 3;
-  padding: 5px 0;
-  background: #1b2224;
+#xeno-trials-v96[data-xt-step="combat"] .xt-match-clock [data-xt="clock"] {
+  font-size: clamp(19px, 4.5cqw, 60px);
 }
 
-#xeno-trials-v96[data-xt-step="combat"] .xt-controls button {
-  min-height: 44px;
-  border-color: #626f70;
-  background: linear-gradient(#263235, #151d20);
-  box-shadow: inset 0 -2px #0e1215;
+#xeno-trials-v96[data-xt-step="combat"] .xt-match-clock [data-xt="score"] {
+  margin: 0;
+  font-size: clamp(9px, 1.4cqw, 19px);
 }
 
-#xeno-trials-v96[data-xt-step="combat"] .xt-controls button:active {
-  color: #16110a;
-  border-color: var(--xt-amber);
-  background: var(--xt-amber);
+#xeno-trials-v96[data-xt-step="combat"] .xt-horde-telemetry {
+  min-width: 0;
+  padding-inline-start: clamp(3px, 1cqw, 13px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-horde-counter-row {
+  gap: clamp(3px, 1cqw, 12px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-horde-counter-row strong {
+  font-size: clamp(13px, 2.7cqw, 28px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] [data-xt="input-device"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-hud-meta-v186:not(:has([data-xt="retry-checkpoint"]:not([hidden]), [data-xt="checkpoint-status"]:not(:empty))) {
+  display: none;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-arena-screen > .xt-practice-hud-v207 {
+  inset: auto auto 6px 6px;
+  width: min(26rem, calc(100% - 12px));
+  max-height: 42%;
+  background: #0b1419ed;
+  border-color: #51696e;
 }
 
 #xeno-trials-v96[data-xt-step="combat"] > .xt-terminal-header {
@@ -1031,6 +1109,10 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
   bottom: var(--xt-tablet-dock);
 }
 
+#xeno-trials-v96[data-xt-step="combat"] .xt-actions [data-xt="taunt"] {
+  display: none;
+}
+
 #xeno-trials-v96[data-xt-step="combat"] :is(
   [data-xt="combat-panel"] > .xt-actions, .xt-terminal-header
 ) > .button {
@@ -1042,9 +1124,136 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
 #xeno-trials-v96[data-xt-step="combat"] .xt-pause-overlay-v119 {
   z-index: 13;
   inset: var(--xt-tablet-top) var(--xt-tablet-right) var(--xt-tablet-bottom) var(--xt-tablet-left);
+  display: grid;
+  justify-items: center;
+  align-content: safe center;
+  padding: clamp(8px, 2.8vw, 32px);
   border: 1px solid #646f6b;
   box-shadow: inset 0 0 0 3px #20292a;
-  background: #0b1316f5;
+  background: #0b1316f7;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] :is(.xt-pause-main, .xt-command-list) {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-pause-main {
+  width: min(100%, 380px);
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-pause-main > h2 {
+  margin: 0 0 8px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-list {
+  width: min(100%, 1050px);
+  text-align: start;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #596761;
+  padding-bottom: 7px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-heading h2 {
+  font-size: clamp(18px, 3vw, 30px);
+  margin: 0;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-columns > section {
+  min-width: 0;
+  padding: clamp(7px, 1.4vw, 16px);
+  border: 1px solid #4d5a5b;
+  background: #152022;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-list :is(h3, p, dl, dd) {
+  margin: 0;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-columns :is(h3, p) {
+  margin-bottom: 8px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-columns dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding-block: 4px;
+  border-bottom: 1px solid #6f81774b;
+  font-size: 11px;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-command-columns kbd {
+  padding: 2px 4px;
+  border: 1px solid #5f6d60;
+  color: #ffdf9c;
+  background: #0b1214;
+  font: 10px/1.8 monospace;
+  white-space: normal;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-touch-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 8px;
+  border: 1px solid #626e65;
+}
+
+#xeno-trials-v96[data-xt-step="combat"] .xt-touch-map span {
+  display: grid;
+  place-items: center;
+  min-height: 35px;
+  padding: 3px;
+  border: 1px solid #455956;
+  text-align: center;
+  color: #edebdf;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+@container (max-width: 530px) {
+  #xeno-trials-v96[data-xt-step="combat"] :is(.xt-side, .xt-clock-unit, .xt-stamina-value, .xt-super-value-v148, .xt-horde-link) {
+    display: none;
+  }
+
+  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-stamina-meter, .xt-super-meter-v148) {
+    grid-column: 1 / -1;
+  }
+
+  #xeno-trials-v96[data-xt-step="combat"] .xt-match-clock [data-xt="round"] {
+    font-size: 7px;
+  }
+
+  #xeno-trials-v96[data-xt-step="combat"] :is(.xt-horde-counter-row span, .xt-horde-phase, .xt-horde-total) {
+    font-size: 7px;
+    line-height: 1.1;
+  }
+
+  #xeno-trials-v96[data-xt-step="combat"] :is(.xt-operation-hud-v188, .xt-boss-hud-v186) {
+    margin: 0;
+    padding-top: 2px;
+    gap: 2px 5px;
+    font-size: 8px;
+  }
+
+  #xeno-trials-v96[data-xt-step="combat"] .xt-operation-hud-v188 [data-xt="operation-hint"] {
+    display: none;
+  }
 }
 
 @media (orientation: portrait) {
@@ -1076,89 +1285,9 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
   }
 }
 
-@media (min-width: 761px) and (min-height: 521px) {
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto;
-    gap: 4px 8px;
-    align-items: center;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals > :is(.xt-side, .xt-hp-meter, .xt-parry-status-v208) {
-    grid-column: 1 / -1;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals > .xt-side {
-    grid-row: 1;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals > :is(strong, [data-xt$="-hp-value"]) {
-    grid-row: 2;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-stamina-meter, .xt-super-meter-v148) {
-    height: 4px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals .xt-hp-meter {
-    grid-row: 3;
-    height: 8px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals .xt-stamina-value {
-    margin: 0;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-stamina-value, .xt-stamina-meter) {
-    grid-row: 4;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals :is(.xt-super-value-v148, .xt-super-meter-v148) {
-    grid-row: 5;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals .xt-parry-status-v208 {
-    grid-row: 6;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals-player :is(.xt-stamina-meter, .xt-super-meter-v148),
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent > .xt-vital-value {
-    grid-column: 1;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals-player > .xt-vital-value,
-  #xeno-trials-v96[data-xt-step="combat"] .xt-vitals-opponent > :is(strong, .xt-stamina-meter, .xt-super-meter-v148) {
-    grid-column: 2;
-  }
-}
-
-@media (min-width: 761px) and (max-width: 1240px) and (min-height: 521px) {
-  #xeno-trials-v96[data-xt-step="combat"] .xt-controls {
-    gap: 4px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-controls button {
-    padding: 6px;
-    font-size: 9px;
-  }
-}
-
-@media (orientation: portrait) and (max-width: 760px) {
-  #xeno-trials-v96[data-xt-step="combat"] .xt-controls {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    min-width: 0;
-    gap: 5px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"] .xt-controls button {
-    padding: 4px 2px;
-    min-width: 0;
-    font-size: 9px;
+@media (max-width: 760px) {
+  #xeno-trials-v96[data-xt-step="combat"] .xt-command-columns {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   #xeno-trials-v96[data-xt-step="combat"] [data-xt="combat-panel"] > .xt-actions {
@@ -1173,6 +1302,12 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
   }
 }
 
+@media (orientation: portrait) and (pointer: coarse) {
+  #xeno-trials-v96[data-xt-step="combat"] .xt-command-columns > section:last-child {
+    order: -1;
+  }
+}
+
 @media (orientation: portrait) and (max-width: 370px) {
   #xeno-trials-v96[data-xt-step="combat"] .xt-tablet-identity .xt-terminal-mark {
     display: none;
@@ -1182,139 +1317,5 @@ html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
 @media (orientation: landscape) and (max-height: 520px) {
   html.xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"] {
     --xt-bezel: clamp(16px, 2.7vw, 25px);
-  }
-
-  /* V188's objective and touch panel stays alongside the combat feed. */
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] [data-xt="combat-panel"] {
-    display: block;
-    padding: 0;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-tablet-rail {
-    right: calc(var(--xt-operation-rail) + var(--xt-tablet-right));
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-arena {
-    position: absolute;
-    left: var(--xt-tablet-left);
-    right: calc(var(--xt-operation-rail) + var(--xt-tablet-right));
-    top: var(--xt-tablet-top);
-    bottom: var(--xt-tablet-bottom);
-    width: auto;
-    height: auto;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] :is(.xt-match-hud, .xt-controls) {
-    position: absolute;
-    right: var(--xt-tablet-right);
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-match-hud[data-horde="true"] {
-    top: var(--xt-tablet-top);
-    right: var(--xt-tablet-right);
-    max-height: calc(100dvh - var(--xt-tablet-top) - var(--xt-tablet-bottom) - var(--xt-operation-controls) - 8px);
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-controls {
-    bottom: calc(var(--xt-tablet-bottom) + 4px);
-    padding: 0;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] > .xt-terminal-header {
-    right: var(--xt-tablet-right);
-    bottom: var(--xt-tablet-dock);
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] [data-xt="combat-panel"] > .xt-actions {
-    left: auto;
-    right: calc(var(--xt-operation-rail) - 64px);
-    bottom: var(--xt-tablet-dock);
-  }
-}
-
-@media (orientation: landscape) and (max-height: 520px) and (pointer: coarse) {
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) {
-    --xt-compact-deck: clamp(216px, 37vw, 322px);
-    --xt-compact-keys: 188px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) [data-xt="combat-panel"] {
-    grid-template-columns: minmax(0, 1fr) var(--xt-compact-deck);
-    grid-template-rows: minmax(0, 1fr) auto;
-    column-gap: 6px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-arena {
-    grid-area: 1 / 1 / -1 / 2;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-match-hud {
-    grid-area: 1 / 2;
-    grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
-    align-content: start;
-    min-height: 0;
-    padding: 5px;
-    gap: 4px;
-    overflow: auto;
-    overscroll-behavior: contain;
-    pointer-events: auto;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-match-clock {
-    justify-content: flex-start;
-    gap: 2px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-match-clock [data-xt="clock"] {
-    font-size: 24px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-controls {
-    grid-area: 2 / 2;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-auto-rows: 44px;
-    gap: 4px;
-    max-height: var(--xt-compact-keys);
-    padding: 0;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-controls button {
-    min-width: 0;
-    padding: 4px 2px;
-    font-size: 8px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-practice-hud-v207 {
-    width: min(calc(100% - var(--xt-compact-deck) - 26px), 24rem);
-  }
-}
-
-@media (orientation: landscape) and (min-width: 740px) and (max-height: 520px) {
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] {
-    --xt-operation-controls: calc(3 * var(--xt-operation-control-height) + 2 * var(--xt-operation-control-gap));
-  }
-
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-controls {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-template-rows: repeat(3, var(--xt-operation-control-height));
-  }
-
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"] .xt-controls > button[data-xeno-action] {
-    grid-area: auto;
-  }
-}
-
-@media (orientation: landscape) and (min-width: 650px) and (max-height: 520px) and (pointer: coarse) {
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) {
-    --xt-compact-keys: 140px;
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-controls {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  #xeno-trials-v96[data-xt-step="combat"]:not([data-xt-operation="true"]) .xt-controls > button {
-    grid-area: auto;
   }
 }

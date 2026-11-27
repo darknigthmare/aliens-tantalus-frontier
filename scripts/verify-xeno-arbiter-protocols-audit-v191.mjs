@@ -17,7 +17,7 @@ import { STAGE_OPERATIONS_SUCCESSORS_V188, STAGE_OPERATIONS_NEW_INPUTS_V188,
   STAGE_OPERATIONS_PRESERVED_PLATES_V188, verifyStageOperationsV188 } from './audit-xeno-stage-operations-v188.mjs';
 import { COMPLETION_SOURCES_V186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { reviewedFranchiseStagesDigestV192 as later } from './audit-xeno-franchise-stages-v192.mjs';
 
@@ -106,7 +106,7 @@ test('the complete source chain keeps archival defaults and admits only the exac
 });
 
 test('V191 relays to the terminal audit, pins its V190 relay and keeps tools, production records and mutable outcomes out of the game build', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs', relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH, relay = 'scripts/audit-xeno-arbiter-campaign-v190.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-arbiter-protocols-v191\.mjs'/);

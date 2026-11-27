@@ -122,3 +122,34 @@ test('intermission and terminal dressing closes steadily and never replays a res
   match.tick += 240;
   assert.deepEqual(paint(observe()), paint(result));
 });
+
+test('reactor horde opens the east shutter for the first wave and keeps a steady east-only reduced-motion cue', () => {
+  const stageId = 'reactor-ring';
+  const activityV119 = { branch: 'horde', id: 'xth213-reactor-switchback' };
+  const match = createXenoTrialsMatchV96({ activityV119, introSeconds: 0 });
+  const observe = createXenoTrialsStageEventsV211(stageId, match, arena);
+  const introduction = { phase: 'countdown', durationMs: 1000, elapsedMs: 750, blocksSimulation: true };
+  assert.deepEqual(observe({ presentation: introduction }).gates, {
+    left: { status: 'locked', opening: 0 }, right: { status: 'armed', opening: .6 }
+  });
+  assert.deepEqual(observe().gates, { left: { status: 'locked', opening: 0 }, right: { status: 'open', opening: 1 } });
+  assert.ok(match.events.filter(event => event.type === 'horde-spawn-v180').every(event => event.gateV213 === 'right'));
+
+  const stage = XENO_TRIALS_STAGES_V96.find(entry => entry.id === stageId);
+  const draw = (view, center) => {
+    const rectangles = [];
+    const ctx = new Proxy({ fillRect(x, y, width, height) { rectangles.push({ x, y, width, height }); } },
+      { get: (object, key) => object[key] ?? (() => {}) });
+    drawXenoTrialsStageEventsV211(ctx, stage, { center, floor: 450 }, view);
+    return rectangles;
+  };
+  const staticView = observe({ reducedMotion: true });
+  assert.deepEqual(staticView.gates, { left: { status: 'locked', opening: 0 }, right: { status: 'open', opening: 0 } });
+  const lamps = (rects, side) => rects.filter(rect => rect.width === 4 && rect.height === 3 && side(rect.x));
+  const reduced = draw(staticView, 500);
+  assert.equal(lamps(reduced, x => x < 500).length, 0);
+  assert.equal(lamps(reduced, x => x > 500).length, 3);
+  const shifted = draw(staticView, 650);
+  assert.deepEqual(lamps(shifted, x => x > 500).map(lamp => lamp.x), lamps(reduced, x => x > 500).map(lamp => lamp.x - 27));
+  assert.deepEqual(observe({ reducedMotion: true }), staticView);
+});

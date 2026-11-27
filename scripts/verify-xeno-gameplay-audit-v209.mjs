@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { XENO_GAMEPLAY_BASELINE_V209, XENO_GAMEPLAY_SUCCESSORS_V209, XENO_GAMEPLAY_NEW_INPUTS_V209,
   reviewedXenoGameplayDigestV209, xenoGameplayRuntimeSourcesV209, verifyXenoGameplayV209 } from './audit-xeno-gameplay-v209.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { XENO_GAMEPLAY_BASELINE_V210, reviewedXenoGameplayDigestV210 } from './audit-xeno-gameplay-v210.mjs';
 
 const root = new URL('..', import.meta.url);
@@ -26,7 +26,7 @@ test('V209 retains the released V208 endpoints and rejects a fabricated predeces
 });
 
 test('V209 admits only exact new runtime paths and checks changed bytes', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH;
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   const runtime = xenoGameplayRuntimeSourcesV209({ legacy: 'untouched' });
   assert.equal(runtime.legacy, 'untouched');

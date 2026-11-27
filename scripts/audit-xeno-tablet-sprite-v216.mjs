@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { reviewedXenoTrialsDigestV217, xenoTrialsRuntimeSourcesV217,
+  verifyXenoTrialsV217 } from './audit-xeno-trials-v217.mjs';
 
 const readRepository = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -165,20 +167,22 @@ export const XENO_TABLET_SPRITE_NEW_INPUTS_V216 = freeze({
 });
 
 export function reviewedXenoTabletSpriteDigestV216(path, endpoint) {
-  if (!Object.hasOwn(XENO_TABLET_SPRITE_SUCCESSORS_V216, path)) return endpoint;
+  if (!Object.hasOwn(XENO_TABLET_SPRITE_SUCCESSORS_V216, path)) return reviewedXenoTrialsDigestV217(path, endpoint);
   const receipt = XENO_TABLET_SPRITE_SUCCESSORS_V216[path];
   assert.equal(endpoint, receipt.previousSha256, 'Incorrect V215 endpoint for V216: ' + path);
-  return receipt.sha256;
+  return reviewedXenoTrialsDigestV217(path, receipt.sha256);
 }
 
 export function xenoTabletSpriteRuntimeSourcesV216(historical) {
   const result = { ...historical };
   for (const [path, receipt] of Object.entries(XENO_TABLET_SPRITE_SUCCESSORS_V216)) {
     if (receipt.kind !== 'runtime') continue;
-    if (result[path] !== undefined && result[path] !== receipt.sha256) reviewedXenoTabletSpriteDigestV216(path, result[path]);
-    result[path] = receipt.sha256;
+    const current = reviewedXenoTrialsDigestV217(path, receipt.sha256);
+    if (result[path] !== undefined && result[path] !== receipt.sha256 && result[path] !== current)
+      reviewedXenoTabletSpriteDigestV216(path, result[path]);
+    result[path] = current;
   }
-  return Object.freeze(result);
+  return xenoTrialsRuntimeSourcesV217(result);
 }
 
 export function verifyXenoTabletSpriteV216(readSource = readRepository) {
@@ -192,7 +196,7 @@ export function verifyXenoTabletSpriteV216(readSource = readRepository) {
     assert.ok(!paths.has(path), 'Duplicate or self-referencing V216 receipt: ' + path);
     paths.add(path);
     assert.ok(isHash(receipt.sha256), 'Invalid V216 receipt: ' + path);
-    assert.equal(sha(readSource(path)), receipt.sha256, 'Unreviewed V216 source bytes: ' + path);
+    assert.equal(sha(readSource(path)), reviewedXenoTrialsDigestV217(path, receipt.sha256), 'Unreviewed V216 source bytes: ' + path);
   }
   for (const [path, receipt] of successors) {
     assert.ok(['runtime', 'tooling'].includes(receipt.kind), 'Invalid V216 successor kind: ' + path);
@@ -209,6 +213,7 @@ export function verifyXenoTabletSpriteV216(readSource = readRepository) {
     assert.ok(start >= 0 && end > start, 'Missing V215 declaration boundaries: ' + path);
     assert.equal(sha(source.slice(start, end)), receipt.sha256, 'Historical V215 declarations changed: ' + path);
   }
+  verifyXenoTrialsV217(readSource);
   return Object.freeze({ baseline: XENO_TABLET_SPRITE_BASELINE_V216, successors: successors.length,
     addedInputs: inputs.length, historicalResultsTransferred: false });
 }

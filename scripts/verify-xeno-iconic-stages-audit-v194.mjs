@@ -23,7 +23,7 @@ import {
 import { reviewedStageClassificationDigestV195 as later } from './audit-xeno-stage-classification-v195.mjs';
 import { reviewedFranchiseStagesDigestV192 as advanceFromV191 } from './audit-xeno-franchise-stages-v192.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -110,7 +110,7 @@ test('the V194 audit and report are source-only and unrelated candidates stay ex
   assert.match(read(terminal).toString(), /from '\.\/audit-xeno-stage-classification-v195\.mjs'/);
   assert.match(read('scripts/audit-xeno-stage-classification-v195.mjs').toString(),
     /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-tablet-sprite-v216.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read(XENO_AUDIT_TERMINAL_PATH).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);
     assert.equal(isPublicDistributionPathV86(path, { built: true }), false, path);

@@ -20,7 +20,7 @@ import {
 } from './audit-xeno-iconic-stages-v194.mjs';
 import { XENO_TRIALS_ICONIC_STAGES_V194 as stages } from '../src/xeno-trials-iconic-stages-v194.js';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const git = args => execFileSync('git', args, { cwd: root, maxBuffer: 32 * 1024 * 1024 });
@@ -77,7 +77,7 @@ test('only the catalogue category changes for eight stages and the V194 relay ch
 
 test('audit tooling and the outcome report have exact source-only release admissions', () => {
   assert.match(read(terminal).toString(), /from '\.\/audit-xeno-referenced-film-stages-v196\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-tablet-sprite-v216.mjs').toString(),
+  assert.doesNotMatch(read(XENO_AUDIT_TERMINAL_PATH).toString(),
     /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   for (const path of [terminal, verifier, report]) {
     assert.equal(isPublicDistributionPathV86(path), true, path);

@@ -10,7 +10,7 @@ import { XENO_PRODUCTION_ASSETS_BASELINE_V206 as baseline, XENO_PRODUCTION_ASSET
 import { verifyXenoVisualAssetsV205 as verifyPrior, xenoVisualAssetsRuntimeSourcesV205 as runtimeSources } from './audit-xeno-visual-assets-v205.mjs';
 import { XENO_STANDALONE_PARENTS_V207, reviewedXenoStandaloneDigestV207 } from './audit-xeno-standalone-v207.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
-import { isPublicDistributionPathV86, isPublicDistributionTextV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, isPublicDistributionTextV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { createBuildAssetFilter } from './build-asset-filter.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -116,7 +116,7 @@ test('corrupt production bytes fail through the V205 relay without granting a ru
   assert.equal(Object.keys(runtime).some(path => path.includes('v206')), false);
   const audit = 'scripts/audit-xeno-production-assets-v206.mjs';
   assert.match(read(audit).toString(), /from '\.\/audit-xeno-standalone-v207\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-tablet-sprite-v216.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read(XENO_AUDIT_TERMINAL_PATH).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.equal(Object.hasOwn(inputs, audit), false); assert.equal(Object.hasOwn(successors, audit), false);
   const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);

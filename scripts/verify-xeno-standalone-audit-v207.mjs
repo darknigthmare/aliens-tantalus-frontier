@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { XENO_STANDALONE_PARENTS_V207, XENO_STANDALONE_SUCCESSORS_V207, XENO_STANDALONE_NEW_INPUTS_V207,
   reviewedXenoStandaloneDigestV207, verifyXenoStandaloneV207 } from './audit-xeno-standalone-v207.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { XENO_GAMEPLAY_BASELINE_V208, reviewedXenoGameplayDigestV208 } from './audit-xeno-gameplay-v208.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -31,7 +31,7 @@ test('V207 chains exact source bytes from the public main and V206 parents', () 
 });
 
 test('standalone admission rejects modified sources and connects the terminal review', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH;
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.ok(!Object.hasOwn(XENO_STANDALONE_SUCCESSORS_V207, terminal));
   assert.ok(!Object.hasOwn(XENO_STANDALONE_NEW_INPUTS_V207, terminal));

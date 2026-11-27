@@ -945,10 +945,14 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
   'scripts/verify-xeno-original-arenas-v193.mjs'
 ]);
 
+export const XENO_AUDIT_TERMINAL_PATH = 'scripts/audit-xeno-trials-v217.mjs';
+
 // Pure checks are exported so adversarial cases can be verified without placing
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (path === XENO_AUDIT_TERMINAL_PATH) return !built && !directory;
+  if (path === 'scripts/verify-xeno-trials-practice-v217.mjs') return !built && !directory;
   if (path === 'scripts/audit-xeno-tablet-sprite-v216.mjs') return !built && !directory;
   if (path === 'assets/openai/xeno-trials-v216') return directory;
   if (path.startsWith('assets/openai/xeno-trials-v216/'))

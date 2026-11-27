@@ -10,7 +10,7 @@ import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succes
 import { verifyI18nV185 } from './audit-i18n-v185.mjs';
 import { verifyI18nMaintenanceV186 } from './audit-i18n-maintenance-v186.mjs';
 import { verifyNativeQaResourcesV187 } from './audit-native-qa-resources-v187.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { reviewedStageOperationsDigestV188 } from './audit-xeno-stage-operations-v188.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -68,7 +68,7 @@ test('the complete legacy bridge validates the joined view while default metadat
 });
 
 test('the completion reaches the current source-only audit through the historical relays', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH;
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.match(read('scripts/audit-xeno-trials-completion-v186.mjs').toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);
   assert.equal(Object.hasOwn(COMPLETION_SOURCES_V186, terminal), false);

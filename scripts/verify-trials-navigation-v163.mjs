@@ -9,15 +9,20 @@ function target(props = {}) {
   const handlers = new Map();
   return Object.assign({ addEventListener(type, fn) { if (!handlers.has(type)) handlers.set(type, new Set()); handlers.get(type).add(fn); },
     removeEventListener(type, fn) { handlers.get(type)?.delete(fn); },
-    emit(type, event = {}) { for (const fn of [...handlers.get(type) || []]) fn({ preventDefault() {}, stopPropagation() {}, ...event }); } }, props);
+    emit(type, event = {}) {
+      const dispatched = { defaultPrevented: false, preventDefault() { this.defaultPrevented = true; }, stopPropagation() {}, ...event };
+      for (const fn of [...handlers.get(type) || []]) fn(dispatched);
+      return dispatched;
+    } }, props);
 }
 
-async function nativeExitHost({ exit = true, fullscreen = false } = {}) {
+async function nativeExitHost({ exit = true, fullscreen = false, touch = false } = {}) {
   const document = target({ hidden: false, hasFocus: () => true }), window = target();
   const gradient = { addColorStop() {} };
   const ctx = new Proxy({ measureText: t => ({ width: String(t).length * 7 }), createLinearGradient: () => gradient },
     { get: (value, key) => value[key] || (() => {}) });
   const canvas = target({ tagName: 'CANVAS', width: 1000, height: 560, setAttribute() {}, getContext: () => ctx,
+    getBoundingClientRect: () => ({ left: 30, top: 20, width: 1000, height: 560 }),
     closest: () => null, focus() { document.activeElement = this; document.emit('focusin', { target: this }); } });
   const queue = new Map(), results = [];
   let serial = 0, time = 0, ui, returned = 0;
@@ -28,7 +33,7 @@ async function nativeExitHost({ exit = true, fullscreen = false } = {}) {
   const started = beginXenoTrialsV96(progress, { playerId: 'import-game-dd-wy-commando', opponentId: 'prowler',
     difficulty: 'hard', roundSeconds: 30 });
   assert.equal(started.applied, true); progress = started.state;
-  const runtime = createXenoTrialsRuntimeV96({ canvas, window, document,
+  const runtime = createXenoTrialsRuntimeV96({ canvas, window, document, touchZonesV217: touch,
     config: { ...started.config, rulesV119: { initialHp: 1 } },
     loadImage: async path => {
       const rig = XENO_TRIALS_RIGS_V154.find(r => r.path === path);
@@ -40,6 +45,7 @@ async function nativeExitHost({ exit = true, fullscreen = false } = {}) {
     if (!elements.has(key)) elements.set(key, target({ tagName: 'BUTTON', hidden: false, disabled: false, dataset: { xt: key },
       setAttribute() {}, contains(node) { return node === this; },
       closest(selector) { return selector.split(',').some(s => s.trim() === `[data-xt="${key}"]`) ? this : null; },
+      click() { this.onclick?.({ target: this }); },
       focus() { document.activeElement = this; document.emit('focusin', { target: this }); } }));
     return elements.get(key);
   };
@@ -164,7 +170,7 @@ test('a paused unfinished ticket keeps its real abandonment action and both moda
   h.ui.close();
 });
 
-test('a paused completed outro offers no impossible abandonment and keeps Tab on the remaining resume action', async () => {
+test('a paused completed outro offers only applicable actions and keeps Tab inside the pause dialog', async () => {
   const h = await nativeExitHost(), settled = h.progress(), result = structuredClone(h.results);
   assert.equal(settled.pending, null); assert.equal(settled.ledger.length, 1);
   assert.notEqual(settled.ledger[0].winner, 'abandoned');
@@ -172,11 +178,11 @@ test('a paused completed outro offers no impossible abandonment and keeps Tab on
   const overlay = h.element('pause-overlay'), resume = h.element('resume-overlay'), abandon = h.element('abandon-overlay');
   assert.equal(overlay.hidden, false); assert.equal(abandon.hidden, true); assert.equal(abandon.disabled, true);
   const frozen = h.runtime.getState();
-  for (const shiftKey of [false, true]) {
-    let prevented = false;
-    overlay.emit('keydown', { code: 'Tab', shiftKey, preventDefault() { prevented = true; } });
-    assert.equal(prevented, true); assert.equal(h.document.activeElement, resume);
-  }
+  assert.equal(h.document.activeElement, resume);
+  assert.equal(overlay.emit('keydown', { code: 'Tab', shiftKey: true }).defaultPrevented, true);
+  assert.equal(h.document.activeElement, h.element('pause-commands'));
+  assert.equal(overlay.emit('keydown', { code: 'Tab' }).defaultPrevented, true);
+  assert.equal(h.document.activeElement, resume);
   // A previously queued handler cannot overwrite the completed result either.
   abandon.onclick();
   assert.equal(h.ui.runtime, h.runtime); assert.deepEqual(h.progress(), settled);
@@ -184,4 +190,65 @@ test('a paused completed outro offers no impossible abandonment and keeps Tab on
   resume.onclick(); h.frames(2);
   assert.equal(h.runtime.getState().paused, false); assert.deepEqual(h.progress(), settled);
   assert.deepEqual(h.results, result); h.ui.close();
+});
+
+test('the pause commands keep the fight frozen, trap Tab, and give Escape to their Back action', async () => {
+  const h = await nativeExitHost({ exit: false });
+  const overlay = h.element('pause-overlay'), page = h.element('controls'), main = h.element('pause-main');
+  const commands = h.element('pause-commands'), back = h.element('commands-back');
+  const attributes = new Map();
+  overlay.setAttribute = (key, value) => attributes.set(key, value);
+  h.runtime.pause();
+  const frozen = h.runtime.getState();
+  assert.equal(page.hidden, true);
+  assert.equal(main.hidden, false);
+  commands.click();
+  assert.equal(page.hidden, false);
+  assert.equal(main.hidden, true);
+  assert.equal(attributes.get('aria-labelledby'), 'xeno-trials-commands-title-v217');
+  assert.equal(h.document.activeElement, back);
+  for (const shiftKey of [false, true]) {
+    assert.equal(overlay.emit('keydown', { code: 'Tab', shiftKey, target: back }).defaultPrevented, true);
+    assert.equal(h.document.activeElement, back);
+  }
+  const escape = overlay.emit('keydown', { code: 'Escape', target: back });
+  assert.equal(escape.defaultPrevented, true);
+  h.window.emit('keydown', escape);
+  assert.equal(page.hidden, true);
+  assert.equal(main.hidden, false);
+  assert.equal(attributes.get('aria-labelledby'), 'xeno-trials-pause-title-v119');
+  assert.equal(h.document.activeElement, commands);
+  h.frames(6);
+  assert.deepEqual(h.runtime.getState(), frozen);
+  commands.click();
+  back.click();
+  assert.equal(h.document.activeElement, commands);
+  h.element('resume-overlay').click();
+  assert.equal(h.runtime.getState().paused, false);
+  assert.equal(h.document.activeElement, h.canvas);
+  h.ui.close();
+});
+
+test('arena touch zones keep mouse clicks inert and release held actions on drag, cancel, and pause', async () => {
+  const h = await nativeExitHost({ exit: false, touch: true });
+  const sample = { pointerId: 7, clientX: 405, clientY: 70 };
+  const input = () => h.runtime.getState().fighters[0].previousInput;
+  h.canvas.emit('pointerdown', { ...sample, pointerType: 'mouse' }); h.frames();
+  assert.equal(input().right, false);
+  const captured = [];
+  h.canvas.setPointerCapture = id => captured.push(id);
+  const touch = { ...sample, pointerType: 'touch' };
+  assert.equal(h.canvas.emit('pointerdown', touch).defaultPrevented, true);
+  assert.deepEqual(captured, [7]);
+  h.frames(); assert.equal(input().right, true);
+  h.canvas.emit('pointermove', { ...touch, clientX: 155 }); h.frames();
+  assert.equal(input().right, false); assert.equal(input().left, true);
+  h.canvas.emit('pointercancel', touch); h.frames();
+  assert.equal(input().left, false);
+  h.canvas.emit('pointerdown', touch); h.frames();
+  assert.equal(input().right, true);
+  h.runtime.pause(); h.runtime.resume();
+  h.canvas.emit('pointermove', touch); h.frames(2);
+  assert.equal(input().right, false);
+  h.ui.close();
 });

@@ -80,6 +80,12 @@ const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left'
   KeyV: 'parry', KeyH: 'signature2', KeyO: 'signature3',
   KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super', KeyE: 'interact' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
+export const XENO_TRIALS_TOUCH_ZONES_V217 = Object.freeze([
+  'left', 'right', 'light', 'heavy',
+  'jump', 'guard', 'special', 'special',
+  'crouch', 'evade', 'antiAir', 'super',
+  'parry', 'signature2', 'signature3', 'interact',
+]);
 const CHECKPOINT_MILESTONES = new Set(['round-end', 'round-start', 'wave-clear', 'wave-start', 'operation-objective', 'operation-delivery']);
 const CHECKPOINT_RETRY_DELAY = .5;
 const CHECKPOINT_RETRY_ATTEMPTS = 2;
@@ -804,7 +810,9 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.fillStyle = '#061019b8'; context.fillRect(150, 216, 700, 106);
       const heading = !loaded ? 'CHARGEMENT DES SPÉCIMENS' : assetFailure ? 'VISUEL INDISPONIBLE' : isPaused() ? 'SIMULATION EN PAUSE' : match.phase === 'intro' ? `MANCHE ${match.round}` : match.phase === 'round-over' ? match.roundWinner === 'draw' ? 'ÉGALITÉ' : match.roundWinner === 'player' ? 'MANCHE REMPORTÉE' : 'MANCHE PERDUE' : resultHeading;
       text(heading, 500, 255, 25, '#efe8cb', 'center');
-      text(assetFailure ? 'Rechargez le module pour réessayer.' : isPaused() ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • I super • S garde', 500, 290, 15, '#b6cbd2', 'center');
+      if (!options.htmlHud || assetFailure || match.phase === 'match-over') {
+        text(assetFailure ? 'Rechargez le module pour réessayer.' : isPaused() ? 'P / Échap ou bouton Reprendre' : match.phase === 'match-over' ? 'Résultat transmis au terminal.' : 'J frappe • K lourd • L spécial • I super • S garde', 500, 290, 15, '#b6cbd2', 'center');
+      }
     }
   }
   function pause() {
@@ -928,6 +936,31 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       pause();
     });
     listen(canvas, 'pointerdown', event => { void sound.unlock(event); canvas.focus?.({ preventScroll: true }); });
+    if (options.touchZonesV217) {
+      const aimTouch = event => {
+        const bounds = canvas.getBoundingClientRect();
+        if (!bounds.width || !bounds.height) return;
+        const column = clamp(Math.floor(4 * (event.clientX - bounds.left) / bounds.width), 0, 3);
+        const row = clamp(Math.floor(4 * (event.clientY - bounds.top) / bounds.height), 0, 3);
+        heldPointers.set(event.pointerId, XENO_TRIALS_TOUCH_ZONES_V217[row * 4 + column]);
+      };
+      listen(canvas, 'pointerdown', event => {
+        if (event.pointerType !== 'touch' || !acceptsControls()) return;
+        event.preventDefault();
+        aimTouch(event);
+        pointerOwners.set(event.pointerId, canvas);
+        try { canvas.setPointerCapture(event.pointerId); } catch {}
+      });
+      listen(canvas, 'pointermove', event => {
+        if (pointerOwners.get(event.pointerId) === canvas) aimTouch(event);
+      });
+      for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) listen(canvas, type, event => {
+        if (pointerOwners.get(event.pointerId) !== canvas) return;
+        heldPointers.delete(event.pointerId);
+        pointerOwners.delete(event.pointerId);
+        releaseXenoTrialsControlsV150(match, 'player', controls());
+      });
+    }
     const root = options.controlsRoot;
     listen(root, 'keydown', event => {
       if (!['Space', 'Enter'].includes(event.code) || event.ctrlKey || event.metaKey || event.altKey) return;

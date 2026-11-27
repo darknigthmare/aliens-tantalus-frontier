@@ -8,9 +8,17 @@ import { getXenoTrialsAlternateSignatureV208, XENO_TRIALS_SIGNATURE_KINDS_V208 }
 import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
+import { XENO_TRIALS_GRAVITY_V210 } from './xeno-trials-movement-v210.js';
 
 const nonMeleeStyles = new Set(['acid', 'pulse', 'flame', 'detonation', 'ground-wave', 'acid-cluster', 'aimed-acid']);
 const signatureControls = { 'signature-2': 'signature2', 'signature-3': 'signature3' };
+const antiAirControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('antiAir');
+const antiAirStates = new Set(['APPROACH', 'PRESSURE', 'PROBE', 'REPOSITION']);
+// Admit the close-range Runner and grounded Synth Guard by their combat profiles.
+const antiAirProfiles = new Map([
+  ['runner', 'castes-film_runner_alien3_1992'],
+  ['synth-guard', 'pose-v94-afe-synth-guard']
+]);
 
 function roll(match, cpu, serial, salt) {
   // A stable per-opportunity choice, independent of the shared AI RNG and
@@ -153,6 +161,31 @@ function counterObservedPattern(match, cpu, target, definition, controls, brain,
   return action ? { ...controls, left: false, right: false, jump: false, light: false, heavy: false, [action]: true } : null;
 }
 
+function antiAirInput(match, cpu, target, definition, brain, prior, controls, specs, dt) {
+  const profileId = antiAirProfiles.get(definition.id);
+  if (match.hordeV180 || !profileId || profileId !== definition.profileId
+    || !prior?.targetAirborne || target.y <= 0 || target.vy >= 0 || !antiAirStates.has(brain.state)
+    || brain.observation.projectileThreat || controls.guard || cpu.guard || cpu.groundRecoveryV211
+    || cpu.movementV210?.kind === 'ground-turn' || isXenoTrialsParryingV208(match, cpu)
+    || ((cpu.movesetV207?.held | cpu.movesetV207?.rearm) & antiAirControl)) return null;
+  const spec = getXenoTrialsAttackV147(definition, 'anti-air', specs['anti-air']);
+  if (!spec || cpu.stamina < spec.cost || cpu.facing !== (target.x >= cpu.x ? 1 : -1)
+    || getXenoTrialsBodyGapV105(cpu, target, cpu.facing) > spec.reach * definition.reach) return null;
+  const body = getXenoTrialsBodyBoundsV105(cpu), hurt = getXenoTrialsHurtBoundsV207(target);
+  if ((hurt.center - body.center) * cpu.facing < 0) return null;
+  const band = getXenoTrialsStrikeBandV207(body, spec);
+  // At commitment both fighters have already reached this tick's heights.
+  // Advance the observed descent to contact using the engine's gravity step.
+  let height = target.y, speed = target.vy;
+  for (let age = dt; age < spec.startup + spec.active && height > 0; age += dt) {
+    if (age >= spec.startup && height <= band.top && height + hurt.height >= band.bottom)
+      return { antiAir: true };
+    speed -= XENO_TRIALS_GRAVITY_V210 * dt;
+    height += speed * dt;
+  }
+  return null;
+}
+
 /** Add techniques to an existing hard decision, without new saved brain state.
  * A horde caller also applies ordinary engagement and spawn grace first. */
 export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs, controls, dt, decided, prior) {
@@ -164,6 +197,7 @@ export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs
   if (!cpu.parryV208?.openingId && !decided) return controls;
   const definition = getXenoTrialsFighterV96(cpu.id);
   return riposteInput(match, cpu, target, definition)
+    || (decided && antiAirInput(match, cpu, target, definition, brain, prior, controls, specs, dt))
     || (decided && counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt))
     || (decided && signatureInput(match, cpu, target, definition, controls, brain))
     || controls;

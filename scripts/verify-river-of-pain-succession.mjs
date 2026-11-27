@@ -9,6 +9,7 @@ import {
   OBSCURA_VERIFIER_SUCCESSOR_20261115,
   reviewedNativeQaResourcesDigestV187, reviewedObscuraDigest20261115,
 } from './audit-native-qa-resources-v187.mjs';
+import { XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -51,7 +52,7 @@ test('Fleuve rejects fabricated predecessors and unreviewed changes to every adm
 });
 
 test('the terminal audit retains its no-import and no-self-receipt invariants', () => {
-  const terminalPath = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  const terminalPath = XENO_AUDIT_TERMINAL_PATH;
   assert.doesNotMatch(read(terminalPath).toString(), /from\s+['\"][^'\"]*audit-/);
   assert.ok(!Object.hasOwn(RIVER_OF_PAIN_SUCCESSORS_20261125, terminalPath));
 });

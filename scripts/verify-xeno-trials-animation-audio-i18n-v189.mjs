@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {EN_CATALOG_V185 as C,EN_PATTERNS_V185 as P} from '../src/i18n-en-catalog-v185.js';
 import {autoTranslateV185 as translate,useCatalogV185} from '../src/i18n-auto-v185.js';
 import {setLanguageV185} from '../src/i18n-v185.js';
@@ -26,9 +27,13 @@ test('V189 is an append-only successor to all 6334 exact V188 translations and 4
  assert.equal(validateCatalogV186(regenerated).omittedPatternSlots,1);
 });
 
-test('every V189 translation comes from current product strings and uses the production translator',()=>{
+test('every reviewed V189 translation comes from its published product strings and uses the production translator',()=>{
+ const root=new URL('..',import.meta.url), published='3a6c1410f606b83a7be881f93b6e87f8d0008a98';
  const sourceFiles=new Map();for(const entry of review.exact){
-  assert.ok(entry.source.split('; ').some(path=>{if(!sourceFiles.has(path))sourceFiles.set(path,readFileSync(new URL('../'+path,import.meta.url),'utf8'));return sourceFiles.get(path).includes(entry.fr);}),entry.fr);
+  assert.ok(entry.source.split('; ').some(path=>{
+   if(!sourceFiles.has(path))sourceFiles.set(path,execFileSync('git',['show',`${published}:${path}`],{cwd:root,encoding:'utf8'}));
+   return sourceFiles.get(path).includes(entry.fr);
+  }),entry.fr);
  }
  english(()=>{for(const entry of review.exact)assert.equal(translate(entry.fr),entry.en,entry.fr);});
  for(const entry of review.exact)assert.equal(translate(entry.fr),entry.fr);
@@ -46,7 +51,15 @@ test('the real animation filter and both pause audio actions and their accessibl
  assert.match(ui,/<label>Animation<select data-xt="animation"><option value="all">Tous les gestes<\/option><option value="drawn">Gestes dessinés<\/option>/);
  assert.match(ui,/data-xt="audio-toggle" aria-label="Sons de Trials"/);
  const samples=[['Tous les gestes','All motions'],['Gestes dessinés','Drawn motions'],['COUPER LES SONS DE TRIALS','MUTE TRIALS SOUNDS'],
-  ['ACTIVER LES SONS DE TRIALS','ENABLE TRIALS SOUNDS'],['Sons de Trials','Trials sounds'],['Le volume des effets suit les réglages audio du profil.','Effect volume follows the profile’s audio settings.']];
+  ['ACTIVER LES SONS DE TRIALS','ENABLE TRIALS SOUNDS'],['Sons de Trials','Trials sounds']];
  english(()=>{for(const[fr,en]of samples){assert.ok(ui.includes(fr));assert.equal(translate(fr),en);}});
+ for(const[fr]of samples)assert.equal(translate(fr),fr);
+});
+
+test('the V217 pause commands and device headings are bilingual in the live product',()=>{
+ const ui=readFileSync(new URL('../src/xeno-trials-ui-v96.js',import.meta.url),'utf8');
+ const samples=[['COMMANDES','CONTROLS'],['Clavier','Keyboard'],['Manette','Gamepad'],['Tactile','Touch'],
+  ['← RETOUR À LA PAUSE','← BACK TO PAUSE'],['Carte des zones tactiles','Touch zone map']];
+ english(()=>{for(const[fr,en]of samples){assert.ok(ui.includes(fr),fr);assert.equal(translate(fr),en,fr);}});
  for(const[fr]of samples)assert.equal(translate(fr),fr);
 });

@@ -9,7 +9,7 @@ import { STAGE_OPERATIONS_BASELINE_V188 as baseline, STAGE_OPERATIONS_SUCCESSORS
   verifyStageOperationsV188 as verify } from './audit-xeno-stage-operations-v188.mjs';
 import { COMPLETION_SOURCES_V186, reviewedCompletionDigestV186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { reviewedAnimationAudioDigestV189 as later } from './audit-xeno-animation-audio-v189.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -63,7 +63,7 @@ test('full V163/Main/Trials/language/QA chain resolves the exact current runtime
 });
 
 test('V188 relays to the terminal audit, preserves its V186 admissions and keeps tooling and review inputs out of the build', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs', relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH, relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.match(read(relay).toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);

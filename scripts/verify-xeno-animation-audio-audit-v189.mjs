@@ -10,7 +10,7 @@ import { STAGE_OPERATIONS_SUCCESSORS_V188 as oldSuccessors, STAGE_OPERATIONS_NEW
   STAGE_OPERATIONS_PRESERVED_PLATES_V188 as oldPlates, verifyStageOperationsV188 } from './audit-xeno-stage-operations-v188.mjs';
 import { COMPLETION_SOURCES_V186, verifyCompletionV186 } from './audit-xeno-trials-completion-v186.mjs';
 import { loadAuditSuccessionV163, resolveAuditSourcesV163 } from './audit-succession-v163.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { reviewedArbiterCampaignDigestV190 as later } from './audit-xeno-arbiter-campaign-v190.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
@@ -62,7 +62,7 @@ test('the complete legacy chain retains its archival default and exposes four ex
 });
 
 test('V189 relays to V190 while pinning its changed V188 relay and keeps new tools and review inputs source-only with exact neighbours refused', () => {
-  const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs', relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
+  const terminal = XENO_AUDIT_TERMINAL_PATH, relay = 'scripts/audit-xeno-stage-operations-v188.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.ok(successors[relay]); assert.match(read(relay).toString(), /from '\.\/audit-xeno-animation-audio-v189\.mjs'/);

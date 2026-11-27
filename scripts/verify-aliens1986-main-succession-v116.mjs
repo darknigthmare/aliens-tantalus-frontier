@@ -8,6 +8,7 @@ import {
   RIVER_OF_PAIN_SUCCESSORS_20261125, reviewedRiverOfPainDigest20261125,
   verifyRiverOfPainSuccession20261125,
 } from './audit-native-qa-resources-v187.mjs';
+import { XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -46,7 +47,7 @@ test('the new succession rejects fabricated predecessors and changed source byte
 });
 
 test('the terminal audit remains independent of downstream audits and has no self receipt', () => {
-  const path = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+  const path = XENO_AUDIT_TERMINAL_PATH;
   assert.doesNotMatch(read(path).toString(), /from\s+['"][^'"]*audit-/);
   assert.equal(Object.hasOwn(ALIENS1986_MAIN_SUCCESSORS_V116, path), false);
   assert.equal(Object.hasOwn(RIVER_OF_PAIN_SUCCESSORS_20261125, path), false);

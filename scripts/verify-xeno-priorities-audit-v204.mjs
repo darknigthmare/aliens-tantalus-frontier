@@ -15,7 +15,7 @@ import {
 } from './audit-xeno-priorities-v204.mjs';
 import { verifyXenoPrioritiesV203 as verifyPrior, xenoPrioritiesRuntimeSourcesV203 as runtimeRelay } from './audit-xeno-priorities-v203.mjs';
 import { verifyXenoPrioritiesV202 as verifyEarlier } from './audit-xeno-priorities-v202.mjs';
-import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { isPublicDistributionPathV86, XENO_AUDIT_TERMINAL_PATH } from './verify-public-release-v86.mjs';
 import { collectReleaseTestsV143 } from './test-release-v143.mjs';
 import { reviewedXenoVisualAssetsDigestV205 as advanceToV205 } from './audit-xeno-visual-assets-v205.mjs';
 
@@ -26,7 +26,7 @@ const readPublished = path => git(['show', '2e784c74a8ad0779438d5f44e8184dd6f742
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const prior = 'scripts/audit-xeno-priorities-v203.mjs';
 const relay = 'scripts/audit-xeno-priorities-v204.mjs';
-const terminal = 'scripts/audit-xeno-tablet-sprite-v216.mjs';
+const terminal = XENO_AUDIT_TERMINAL_PATH;
 const verifier = 'scripts/verify-xeno-priorities-audit-v204.mjs';
 const report = 'docs/forge/xeno-trials/V204-PRIORITIES.md';
 
