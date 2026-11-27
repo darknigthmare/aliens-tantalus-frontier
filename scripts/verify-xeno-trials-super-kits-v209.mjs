@@ -7,7 +7,7 @@ import { getXenoTrialsFighterV96, XENO_TRIALS_FIGHTERS_V96 } from '../src/xeno-t
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
 import { getXenoTrialsSuperV148 } from '../src/xeno-trials-supers-v148.js';
 import { getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208 } from '../src/xeno-trials-ripostes-v208.js';
-import { XENO_TRIALS_SUPER_KITS_V209, getXenoTrialsSuperV209 } from '../src/xeno-trials-super-kits-v209.js';
+import { XENO_TRIALS_SUPER_KITS_V209, XENO_TRIALS_SUPER_KITS_V210, getXenoTrialsPhysicalSuper } from '../src/xeno-trials-super-kits-v209.js';
 import { getXenoTrialsAttackStyleV147, getXenoTrialsAttackV147 } from '../src/xeno-trials-signatures-v147.js';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsHordeCheckpointV186 } from '../src/xeno-trials-horde-checkpoint-v186.js';
@@ -45,8 +45,10 @@ test('the sixteen pairs bind both original supers to exact roster profiles and B
   const bible = JSON.parse(readFileSync(new URL('../docs/forge/xeno-trials/xeno-trials-plan-v146.json', import.meta.url), 'utf8'));
   const known = new Map(bible.tables['07_Supers'].rows.map(row => [row[0], row[1]]));
   assert.equal(XENO_TRIALS_SUPER_KITS_V209.length, 16);
-  assert.equal(XENO_TRIALS_FIGHTERS_V96.filter(getXenoTrialsSuperV148).length, 21);
-  assert.equal(XENO_TRIALS_FIGHTERS_V96.filter(getXenoTrialsRiposteV208).length, 20);
+  const addedLater = new Set(XENO_TRIALS_SUPER_KITS_V210.map(kit => kit.first.fighterId));
+  const original = XENO_TRIALS_FIGHTERS_V96.filter(fighter => !addedLater.has(fighter.id));
+  assert.equal(original.filter(getXenoTrialsSuperV148).length, 21);
+  assert.equal(original.filter(getXenoTrialsRiposteV208).length, 20);
   const records = XENO_TRIALS_SUPER_KITS_V209.flatMap(kit => [kit.first, kit.counter]);
   assert.equal(new Set(records.map(move => move.id)).size, 32);
   assert.equal(new Set(records.map(move => JSON.stringify(move.spec))).size, 32);
@@ -202,7 +204,7 @@ test('a true horde earns meter, limits a native sweep, and restores its active t
   const hitStart = player.stats.hits;
   ticks(match, 1, { super: true });
   assert.equal(player.attack?.kind, 'super');
-  const move = getXenoTrialsSuperV209(getXenoTrialsFighterV96(player.id));
+  const move = getXenoTrialsPhysicalSuper(getXenoTrialsFighterV96(player.id));
   // The fixture keeps all existing opponents in the measured sweep lane
   // during windup without changing their identities, health or ownership.
   for (let step = 0; step < Math.floor(move.spec.startup * 120); step++) {

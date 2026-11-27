@@ -1,4 +1,4 @@
-import { getXenoTrialsResearchFighterV209, getXenoTrialsResearchArtV209 } from './xeno-trials-research-v209.js';
+import { getXenoTrialsResearchFighterV210, getXenoTrialsResearchArtV210 } from './xeno-trials-research-v210.js';
 import { getEnemyStaticPoseV96 as getEnemyStaticPoseV95 } from './enemy-static-poses-v96.js';
 import { getEnemyDedicatedPoseV99 as getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v99.js';
 import { XENO_TRIALS_IMPORTS_V103 } from './enemy-user-imports-v103.js';
@@ -239,10 +239,10 @@ export const XENO_TRIALS_FIGHTERS_V96 = Object.freeze([
   })
 ]);
 const FIGHTERS = new Map(XENO_TRIALS_FIGHTERS_V96.map(entry => [entry.id, entry]));
-export function getXenoTrialsFighterV96(id) { return FIGHTERS.get(id) || getXenoTrialsResearchFighterV209(id); }
+export function getXenoTrialsFighterV96(id) { return FIGHTERS.get(id) || getXenoTrialsResearchFighterV210(id); }
 export function getXenoTrialsArtV96(id, variant) {
   const entry = getXenoTrialsFighterV96(id);
-  return entry ? getXenoTrialsResearchArtV209(id) || getEnemyStaticPoseV95(entry.profileId, entry.variants.includes(variant) ? variant : null)
+  return entry ? getXenoTrialsResearchArtV210(id) || getEnemyStaticPoseV95(entry.profileId, entry.variants.includes(variant) ? variant : null)
     || getEnemyDedicatedPoseV97(entry.profileId) : null;
 }
 

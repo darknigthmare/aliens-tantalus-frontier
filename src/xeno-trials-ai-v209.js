@@ -35,7 +35,7 @@ function parryInput(match, cpu, target, controls, brain, specs, dt) {
   const definition = getXenoTrialsFighterV96(target.id);
   if (['special', 'super'].includes(attack.kind) && nonMeleeStyles.has(getXenoTrialsAttackStyleV147(definition, attack.kind))) return null;
   const spec = getXenoTrialsAttackV147(definition, attack.kind, specs[attack.kind]);
-  if (!spec || spec.unblockableV151 || spec.startup < .15) return null;
+  if (!spec || spec.unblockableV151 || spec.detonationV210 || spec.startup < .15) return null;
   const remaining = spec.startup - attack.age;
   if (remaining < -dt * .5 || remaining > dt * 4 || roll(match, cpu, attack.id, 0x736fa51d) >= .38
     || !getXenoTrialsParryViewV208(match, cpu).ready
@@ -60,7 +60,8 @@ function signatureInput(match, cpu, target, definition, controls, brain) {
   const facing = target.x >= cpu.x ? 1 : -1;
   const highGuard = target.guard && !target.movesetV207?.low;
   const options = XENO_TRIALS_SIGNATURE_KINDS_V208.map(kind => getXenoTrialsAlternateSignatureV208(definition, kind))
-    .filter(move => move && cpu.stamina >= move.spec.cost && inRange(cpu, target, move.spec, move.spec.reach * definition.reach, facing));
+    .filter(move => move && !move.spec.detonationV210 && cpu.stamina >= move.spec.cost
+      && inRange(cpu, target, move.spec, move.spec.reach * definition.reach, facing));
   const move = (highGuard && options.find(candidate => candidate.spec.contactBandV207 === 'low'))
     || options[Math.floor(roll(match, cpu, brain.decisions, 0x4852a533) * options.length)];
   if (!move) return null;

@@ -1,3 +1,5 @@
+import { XENO_TRIALS_SUPER_RECIPES_V210 } from './xeno-trials-super-kits-v210.js';
+
 function move(fighterId, profileId, slot, label, labelEn, description, descriptionEn, spec) {
   return Object.freeze({
     id: `${fighterId}::super${slot}`, fighterId, profileId, label, labelEn, description, descriptionEn,
@@ -110,17 +112,18 @@ export const XENO_TRIALS_SUPER_KITS_V209 = Object.freeze([
       { cost: 39, damage: 47, reach: 101, startup: .22, active: .11, recovery: .77, stun: .35, push: 51, retreatV208: 99 }]),
 ]);
 
-const byFighter = new Map(XENO_TRIALS_SUPER_KITS_V209.map(kit => [kit.first.fighterId, kit]));
+export const XENO_TRIALS_SUPER_KITS_V210 = Object.freeze(XENO_TRIALS_SUPER_RECIPES_V210.map(args => pair(...args)));
+const byFighter = new Map([...XENO_TRIALS_SUPER_KITS_V209, ...XENO_TRIALS_SUPER_KITS_V210].map(kit => [kit.first.fighterId, kit]));
 function getKit(definition) {
   const kit = byFighter.get(definition?.id);
   return kit && kit.first.profileId === definition.profileId ? kit : null;
 }
 
-export const getXenoTrialsSuperV209 = definition => getKit(definition)?.first ?? null;
-export const getXenoTrialsCounterV209 = definition => getKit(definition)?.counter ?? null;
+export const getXenoTrialsPhysicalSuper = definition => getKit(definition)?.first ?? null;
+export const getXenoTrialsPhysicalCounter = definition => getKit(definition)?.counter ?? null;
 
-// A V208 save for these identities predates their gauge. Admit only the
-// absent legacy resource, then start earning from normal contact on resume.
+// Older saves for newly admitted identities predate their gauge. Admit the
+// absent resource, then start earning from normal contact on resume.
 export function hasLegacyXenoTrialsSuperMeterV209(fighter, definition) {
   return fighter.superMeterV148 === undefined && fighter.stats?.supersV148 === undefined
     && !['super', 'super-riposte'].includes(fighter.attack?.kind) && Boolean(getKit(definition));

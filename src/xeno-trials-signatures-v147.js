@@ -71,6 +71,7 @@ export function getXenoTrialsSpecialStyleV147(definition) {
   return getXenoTrialsSignatureV147(definition)?.style || definition?.special;
 }
 export function getXenoTrialsAttackStyleV147(definition, kind) {
+  if (getXenoTrialsAlternateSignatureV208(definition, kind)?.spec.detonationV210) return 'detonation';
   return (kind === 'super' ? getXenoTrialsSuperV148(definition)?.styleV209 : null)
     || getXenoTrialsSpecialStyleV147(definition);
 }

@@ -1,12 +1,12 @@
 import { XENO_TRIALS_RESEARCH_LABS_V209 } from './xeno-trials-research-lab-v209.js';
 import { createXenoTrialsResearchLabRuntimeV209 } from './xeno-trials-research-lab-ui-v209.js';
 import { normalizeXenoTrialsSandboxV208, XENO_TRIALS_SANDBOX_BEHAVIORS_V208, XENO_TRIALS_SANDBOX_ID_V208 } from './xeno-trials-practice-v208.js';
-import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V209 } from './xeno-trials-practice-v207.js';
+import { getXenoTrialsPracticeConfigV207, XENO_TRIALS_PRACTICE_DRILLS_V210 } from './xeno-trials-practice-v207.js';
 import { usesXenoTrialsIndependentProps } from './xeno-trials-franchise-stage-scenes-v192.js';
 import { renderArbiterTerminalDossierV190 } from './xeno-arbiter-ui-v190.js';
 import { ARBITER_PROGRAMS_V191, ARBITER_HORDE_PROTOCOLS_V191, getArbiterProgramV191 } from './xeno-arbiter-protocols-v191.js';
 import { getXenoTrialsArchiveAccessV207 } from './xeno-trials-archive-access-v207.js';
-import { XENO_TRIALS_RESEARCH_V209, getXenoTrialsResearchEvaluationV209 } from './xeno-trials-research-v209.js';
+import { XENO_TRIALS_RESEARCH_V210, getXenoTrialsResearchEvaluationV210 } from './xeno-trials-research-v210.js';
 import { currentLanguageV185 } from './i18n-v185.js';
 import { getXenoTrialsRigV154 } from './xeno-trials-rig-v154.js';
 import { getXenoTrialsSequenceV155 } from './xeno-trials-sequences-v155.js';
@@ -167,9 +167,12 @@ export class XenoTrialsUiV96 {
       </form></details><details data-xt="practice-labs" class="xt-practice-sandbox-v208" hidden><summary>LABORATOIRES MIRE</summary>
         <div data-xt="practice-lab-list" class="xt-activity-board-v119"></div></details><details data-xt="research-dossiers" class="xt-practice-sandbox-v208" hidden>
         <summary>DOSSIERS EXPÉRIMENTAUX MIRE</summary>
-        <div class="xt-activity-board-v119">${XENO_TRIALS_RESEARCH_V209.map(specimen => `<article class="xt-activity-v119">
+        <div class="xt-activity-board-v119">${XENO_TRIALS_RESEARCH_V210.map(specimen => `<article class="xt-activity-v119">
           <h3>${escapeHtml(specimen.label)}</h3><strong>${escapeHtml(specimen.source)}</strong><p>${escapeHtml(specimen.briefing)}</p>
-          ${specimen.editions ? `<ul>${specimen.editions.map(edition => `<li><b>${escapeHtml(edition.label)}</b> · ${escapeHtml(edition.note)}</li>`).join('')}</ul>` : ''}
+          ${specimen.originalModel ? '<small>MODÈLE ORIGINAL MIRE</small>' : ''}
+          ${specimen.editions ? `<ul class="xt-research-editions-v210">${specimen.editions.map(edition => `<li>
+            <button type="button" class="button" data-xt-research-bout="${edition.id}">${escapeHtml(edition.label)}</button>
+            <p>${escapeHtml(edition.briefing)}</p></li>`).join('')}</ul>` : ''}
           ${specimen.fighterId ? `<button type="button" class="button primary" data-xt-research-bout="${specimen.id}">${specimen.kind === 'asymmetric' ? 'LANCER L’ÉPREUVE ASYMÉTRIQUE' : 'ESSAYER LE SPÉCIMEN'}</button>`
           : specimen.kind === 'event' ? `<button type="button" class="button" data-xt-research-lab="${specimen.id}">OBJECTIF DE LABORATOIRE</button>`
             : '<small>MODÈLE À VALIDER</small>'}</article>`).join('')}</div>
@@ -529,8 +532,8 @@ export class XenoTrialsUiV96 {
       this.el('practice-lab-list').innerHTML = XENO_TRIALS_RESEARCH_LABS_V209.map(lab => `<article class="xt-activity-v119${state.practiceLabsClearedV209?.includes(lab.id) ? ' validated' : ''}">
         <h3>${escapeHtml(lab.title)}</h3><p>${escapeHtml(lab.instruction)}</p><button type="button" class="button primary" data-xt-lab="${lab.id}">
         ${state.practiceLabsClearedV209?.includes(lab.id) ? 'VALIDÉ · REJOUER' : 'OUVRIR LE LABORATOIRE'}</button></article>`).join('');
-      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V209.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
-      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V209.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
+      this.el('activity-count').innerHTML = `<span>${cleared.length} / ${XENO_TRIALS_PRACTICE_DRILLS_V210.length}</span> <span>ATELIERS VALIDÉS · SIMULATION SANS PRIME</span>`;
+      this.el('activity-board').innerHTML = XENO_TRIALS_PRACTICE_DRILLS_V210.map(entry => `<article class="xt-activity-v119${cleared.includes(entry.id) ? ' validated' : ''}">
         <h3>${escapeHtml(entry.title)}</h3><strong>${escapeHtml(FIGHTERS.find(fighter => fighter.id === entry.playerId).label)}</strong>
         <p>${escapeHtml(entry.briefing)}</p><button type="button" class="button primary" data-xt-practice="${entry.id}">${cleared.includes(entry.id) ? 'VALIDÉ · REJOUER' : 'LANCER L’ATELIER'}</button></article>`).join('');
       return;
@@ -691,7 +694,7 @@ export class XenoTrialsUiV96 {
   }
   startResearchEvaluationV209(id, gesture) {
     if (this.branchV119 !== 'practice' || this.selectionStep !== 'activities' || this.state().pending) return false;
-    const settings = getXenoTrialsResearchEvaluationV209(id);
+    const settings = getXenoTrialsResearchEvaluationV210(id);
     if (!settings) return false;
     this.researchEvaluationV209 = settings;
     return this.launch(getXenoTrialsPracticeConfigV207(XENO_TRIALS_SANDBOX_ID_V208, settings), gesture, XENO_TRIALS_SANDBOX_ID_V208, settings);
@@ -836,7 +839,9 @@ export class XenoTrialsUiV96 {
     this.el('practice-target').textContent = practice.sandbox ? (practice.result
       ? { player: 'BANC LIBRE · VICTOIRE', opponent: 'BANC LIBRE · DÉFAITE', draw: 'BANC LIBRE · ÉGALITÉ' }[practice.result] : '')
       : practice.state === 'complete' ? 'ATELIER VALIDÉ'
-      : practice.state === 'retry' ? 'EXERCICE INTERROMPU · REJOUER' : `${practice.objectives[practice.index]}${practice.cue ? ` · ${practice.cue}` : ''}`;
+      : practice.state === 'retry' ? practice.id === 'intro-rearm' && practice.index === 0
+        ? 'PRÉSENTATION TERMINÉE · REJOUER POUR LA PASSER' : 'EXERCICE INTERROMPU · REJOUER'
+        : `${practice.objectives[practice.index]}${practice.cue ? ` · ${practice.cue}` : ''}`;
     this.el('practice-actions').hidden = practice.state === 'active';
     this.el('practice-save').hidden = true;
     if (practice.state === 'complete') this.persistPracticeV207(practice);
@@ -997,12 +1002,20 @@ export class XenoTrialsUiV96 {
     const canActivateFinisher = Boolean(snapshot.canActivateFinisherV207 && !this.unsavedResult);
     const finisherButton = this.el('finisher');
     const alternativeButton = this.el('finisher-alternative');
-    const canChooseAlternative = canActivateFinisher && Boolean(snapshot.finisherV207?.alternatives?.length);
+    const alternative = snapshot.finisherV207?.alternatives?.[0];
+    const canChooseAlternative = canActivateFinisher && Boolean(alternative);
     const focused = this.root.ownerDocument?.activeElement;
     if (!snapshot.paused && (!canActivateFinisher && focused === finisherButton || !canChooseAlternative && focused === alternativeButton))
       this.el('canvas').focus({ preventScroll: true });
     finisherButton.hidden = finisherButton.disabled = !canActivateFinisher;
     alternativeButton.hidden = alternativeButton.disabled = !canChooseAlternative;
+    if (canChooseAlternative) {
+      const label = getXenoTrialsFinisherCopyV208(alternative.kind).button.slice('F · '.length);
+      if (this.lastFinisherAlternative !== label) {
+        this.lastFinisherAlternative = label;
+        alternativeButton.textContent = label;
+      }
+    }
     const finisherStatus = this.el('finisher-status');
     const finisherCopy = getXenoTrialsFinisherCopyV208(snapshot.finisherV207?.kind);
     if (this.lastFinisherButton !== finisherCopy.button) {

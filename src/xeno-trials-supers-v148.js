@@ -1,4 +1,4 @@
-import { getXenoTrialsSuperV209 } from './xeno-trials-super-kits-v209.js';
+import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
 
 /** Original versus extensions of referenced V147 capabilities, NOT canonical
  * supers, captured choreography or new character art. Exact identities only.
@@ -45,7 +45,7 @@ export const XENO_TRIALS_SUPERS_V148 = freeze([
 const byId = new Map(XENO_TRIALS_SUPERS_V148.map(item => [item.fighterId, item]));
 export function getXenoTrialsSuperV148(definition) {
   const value = byId.get(definition?.id);
-  return value && value.profileId === definition.profileId ? value : getXenoTrialsSuperV209(definition);
+  return value && value.profileId === definition.profileId ? value : getXenoTrialsPhysicalSuper(definition);
 }
 export function getXenoTrialsSuperMeterV148(fighter) {
   return Number.isFinite(fighter?.superMeterV148)

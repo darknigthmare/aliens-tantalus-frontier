@@ -1,3 +1,4 @@
+import { publicXenoResearchPathAdmissionV210, verifyXenoResearchAdmissionsV210 } from './public-xeno-research-admissions-v210.mjs';
 import { publicXenoPosePathAdmissionV209, verifyXenoPoseAdmissionsV209 } from './public-xeno-pose-admissions-v209.mjs';
 import { publicXenoProductionPathAdmissionV206, verifyXenoProductionAdmissionsV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -731,6 +732,19 @@ const PRIVATE_TEXT = [
   /['"]V\d+_(?:BATCH_\d+|[A-Z_]*IMAGEGEN)/
 ];
 
+const XENO_GAMEPLAY_SOURCE_ONLY_V210 = new Set([
+  'docs/forge/xeno-trials/V210-GAMEPLAY.md',
+  'scripts/audit-xeno-gameplay-v210.mjs',
+  'scripts/public-xeno-research-admissions-v210.mjs',
+  'scripts/verify-xeno-gameplay-audit-v210.mjs',
+  'scripts/verify-xeno-trials-finishers-v210.mjs',
+  'scripts/verify-xeno-trials-movement-v210.mjs',
+  'scripts/verify-xeno-trials-practice-v210.mjs',
+  'scripts/verify-xeno-trials-research-v210.mjs',
+  'scripts/verify-xeno-trials-signature-kit-v210.mjs',
+  'scripts/verify-xeno-trials-super-kits-v210.mjs'
+]);
+
 const XENO_GAMEPLAY_SOURCE_ONLY_V209 = new Set([
   'docs/forge/xeno-trials/V209-GAMEPLAY.md',
   'scripts/audit-xeno-gameplay-v209.mjs',
@@ -897,6 +911,9 @@ const XENO_ORIGINAL_ARENA_SOURCE_ONLY_V193 = new Set([
 // private fixtures anywhere inside the distribution tree.
 export function isPublicDistributionPathV86(path, { directory = false, built = false } = {}) {
   if (typeof path !== 'string' || !path || path.includes('\\') || path.startsWith('/')) return false;
+  if (XENO_GAMEPLAY_SOURCE_ONLY_V210.has(path)) return !built && !directory;
+  const researchAdmissionV210 = publicXenoResearchPathAdmissionV210(path, { directory });
+  if (researchAdmissionV210 !== null) return researchAdmissionV210;
   if (XENO_GAMEPLAY_SOURCE_ONLY_V209.has(path)) return !built && !directory;
   const poseAdmissionV209 = publicXenoPosePathAdmissionV209(path, { directory });
   if (poseAdmissionV209 !== null) return poseAdmissionV209;
@@ -1064,6 +1081,7 @@ export async function verifyPublicReleaseV86(root = process.cwd(), { built = bas
   await verifyXenoPriorityAdmissionsV204(root);
   await verifyXenoVisualAdmissionsV205(root);
   await verifyXenoPoseAdmissionsV209(root);
+  await verifyXenoResearchAdmissionsV210(root);
   if (!built) await verifyXenoProductionAdmissionsV206(root);
   await verifyXenoFranchiseStageAdmissionsV192(root);
   await verifyXenoOriginalArenaAdmissionsV193(root);

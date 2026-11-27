@@ -3,7 +3,7 @@ import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 as LIMITS
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSignatureV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
-import { getXenoTrialsSuperV209, validXenoTrialsPhysicalSuperV209 } from './xeno-trials-super-kits-v209.js';
+import { getXenoTrialsPhysicalSuper, validXenoTrialsPhysicalSuperV209 } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
@@ -15,6 +15,7 @@ import { XENO_TRIALS_MOVE_ATTACKS_V207, validXenoTrialsMovesetV207, xenoTrialsMo
 import { XENO_TRIALS_SIGNATURE_KINDS_V208, validXenoTrialsSignatureActionV208,
   validXenoTrialsSignatureEventV208 } from './xeno-trials-signature-kit-v208.js';
 import { validXenoTrialsParryEventV208, validXenoTrialsParryStateV208, xenoTrialsParryStateV208 } from './xeno-trials-defense-v208.js';
+import { validXenoTrialsMovementEventV210, validXenoTrialsMovementV210 } from './xeno-trials-movement-v210.js';
 
 export const XENO_TRIALS_CHECKPOINT_LIMITS_V186 = Object.freeze({ maxCharacters: 524288, maxNodes: 40000, maxDepth: 24 });
 const actions = ['left', 'right', 'jump', 'guard', 'light', 'heavy', 'special', 'super', 'interact'];
@@ -76,7 +77,7 @@ function validAttack(attack, fighter, match) {
     || !validXenoTrialsRiposteAttackV208(attack, fighter, match, getXenoTrialsRiposteV208(definition))) return false;
   if (attack.kind === 'super') {
     if (!(fighter.stats.supersV148 > 0) || fighter.superMeterV148 === undefined) return false;
-    const physicalSuper = getXenoTrialsSuperV209(definition);
+    const physicalSuper = getXenoTrialsPhysicalSuper(definition);
     if (physicalSuper && (match.config.rulesV119.noSpecial || !validXenoTrialsPhysicalSuperV209(attack, fighter, match, physicalSuper)))
       return false;
   }
@@ -114,7 +115,7 @@ function validProjectiles(match) {
     const owner = match.fighters.find(fighter => (fighter.instanceIdV180 || 'player') === projectile.ownerInstanceV180);
     const definition = getXenoTrialsFighterV96(owner?.id);
     const kind = projectile.superIdV148 ? 'super' : 'special';
-    if (kind === 'super' && getXenoTrialsSuperV209(definition)) return false;
+    if (kind === 'super' && getXenoTrialsPhysicalSuper(definition)) return false;
     const spec = definition && getXenoTrialsAttackV147(definition, kind, XENO_TRIALS_ATTACKS_V96[kind]);
     const style = definition && getXenoTrialsSpecialStyleV147(definition);
     if (!owner || !spec || projectile.owner !== owner.side || !same(projectile.spec, spec) || projectile.power !== definition.power
@@ -222,11 +223,12 @@ function admitSnapshot(snapshot, ticket) {
       || typeof fighter.guard !== 'boolean' || !controls(fighter.previousInput) || !controls(fighter.rearmControls)
       || !validXenoTrialsMovesetV207(fighter) || raw.phase !== 'active' && xenoTrialsMovePoseV207(fighter)
       || !validXenoTrialsParryStateV208(raw, fighter)
+      || !validXenoTrialsMovementV210(raw, fighter, definition)
       || !validStats(fighter.stats, raw.tick, index ? playerDefinition.hp : healthSpent) || !validAttack(fighter.attack, fighter, raw)) return null;
     if (fighter.superMeterV148 !== undefined && (!getXenoTrialsSuperV148(definition) || !number(fighter.superMeterV148, 0, 100)
       || fighter.superMeterV148 > Math.max(0, fighter.stats.damage * .6
         + ((index ? slot.hp : definition.hp) - fighter.hp) * .4 - (fighter.stats.supersV148 || 0) * 100) + .02)) return null;
-    if (fighter.superMeterV148 === undefined && fighter.stats.supersV148 !== undefined && getXenoTrialsSuperV209(definition)) return null;
+    if (fighter.superMeterV148 === undefined && fighter.stats.supersV148 !== undefined && getXenoTrialsPhysicalSuper(definition)) return null;
     if (fighter.contactReadyTickV180 !== undefined && !integer(fighter.contactReadyTickV180, 0, raw.tick + LIMITS.playerContactCooldownTicks)) return null;
     if (index) {
       if (!slot || fighter.id !== slot.id || fighter.maxHpV180 !== slot.hp || fighter.damageScaleV180 !== slot.damageScale
@@ -242,6 +244,7 @@ function admitSnapshot(snapshot, ticket) {
       || !validXenoTrialsSignatureEventV208(event, id => event.side === 'player' ? id === playerDefinition.id
         : event.side === 'opponent' && protocol.waves.some(item => item.opponentIds.includes(id)
           || item.enemySlotsV186?.some(slot => slot.fighterId === id)))
+      || !validXenoTrialsMovementEventV210(raw, event)
       || event.type === 'parry-v208' && !validXenoTrialsParryEventV208(raw, event))) return null;
   const receivedDamage = horde.opponentStats.damage + raw.fighters.slice(1).reduce((sum, enemy) => sum + enemy.stats.damage, 0);
   if (receivedDamage + (operation ? raw.stageHazardsV188.playerDamage : 0) !== playerDefinition.hp - raw.fighters[0].hp) return null;

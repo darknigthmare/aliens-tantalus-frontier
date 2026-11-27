@@ -1,3 +1,4 @@
+import { XENO_TRIALS_NEW_DRILLS_V210 } from './xeno-trials-practice-v210.js';
 import { createXenoTrialsPracticeObserverV209, XENO_TRIALS_NEW_DRILLS_V209 } from './xeno-trials-practice-v209.js';
 import { XENO_TRIALS_ACID_POOL_V152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_PARRY_V208 } from './xeno-trials-defense-v208.js';
@@ -37,9 +38,11 @@ export const XENO_TRIALS_PRACTICE_DRILLS_V208 = Object.freeze([...XENO_TRIALS_PR
   ...XENO_TRIALS_NEW_DRILLS_V208.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
 export const XENO_TRIALS_PRACTICE_DRILLS_V209 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V208,
   ...XENO_TRIALS_NEW_DRILLS_V209.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V209.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V210 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V209,
+  ...XENO_TRIALS_NEW_DRILLS_V210.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V210.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V209
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V210
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -72,7 +75,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   let index = 0, state = 'active', lastEvent = match.serial, due = null;
   let playerAttack = null, incomingAttack = null, targetWasGuarding = false;
   let armedBeforeStep = null, interruption = null, parryOpeningUntil = 0;
-  let acidContact = null;
+  let acidContact = null, standingGuardBeforeStep = false;
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
@@ -88,6 +91,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       return {};
     }
     const pressure = id === 'rounds' && match.round === 2 ? 'light' : entry.pressure;
+    if (id === 'low-defense') standingGuardBeforeStep = player.guard && !player.movesetV207?.low && playerInput.guard === true && playerInput.crouch !== true;
     if (id === 'interrupt') armedBeforeStep = opponent.attack?.kind === 'signature-2'
       ? { id: opponent.attack.id, age: opponent.attack.age } : null;
     if (entry.standingGuard) {
@@ -107,7 +111,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       return {};
     }
     if (match.tick < due || opponent.stun > 0 || opponent.attack || opponent.specialCooldown > 0) return {};
-    return { [pressure]: true };
+    return pressure === 'low' ? { crouch: true, light: true } : { [pressure]: true };
   }
 
   function observe(playerInput, activeTick = false) {
@@ -119,6 +123,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       if (match.result) { observer.stopRecording(); state = 'finished'; }
       return;
     }
+    if (id === 'intro-rearm' && index === 0 && activeTick) { state = 'retry'; return; }
+    if (id === 'landing-evasion' && index === 0 && player.y > .001 && player.vy > 0) advance();
     if (id === 'acid-floor' && index === 0 && match.acidPoolsV152?.some(pool => pool.owner === 'opponent')) advance();
     for (const action of match.events) {
       if (action.id <= lastEvent) continue;
@@ -146,6 +152,8 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
         parryOpeningUntil = action.tick + XENO_TRIALS_PARRY_V208.openingTicks;
         if (index === 0) advance();
       }
+      if (id === 'landing-evasion' && index === 1 && action.type === 'evade-v207' && action.side === 'player'
+        && action.sourceV210 === 'landing' && player.y === 0) advance();
       if (id === 'advance' && index === 0 && action.type === 'evade-v207' && action.side === 'player'
         && action.direction === player.facing) advance();
       if (hasAttack(action, 'player')) {
@@ -155,7 +163,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       }
       if (hasAttack(action, 'opponent')) {
         due = action.tick + 188;
-        incomingAttack = { contact: false, above: false, x: player.x };
+        incomingAttack = { kind: action.kind, contact: false, above: false, x: player.x };
         if (id === 'interrupt' && action.kind === 'signature-2' && opponentSignature) {
           incomingAttack.id = opponent.attack?.id;
           incomingAttack.closeTick = action.tick + Math.ceil((opponentSignature.startup + opponentSignature.active) * 120);
@@ -164,7 +172,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       }
       if (hasImpact(action, 'opponent') && action.attacker === 'player' && playerAttack) {
         playerAttack.contact = true;
-        if (['distance', 'legal-counter'].includes(id) && index === 1 && playerAttack.kind === 'light' && action.type === 'hit') advance();
+        if (['distance', 'legal-counter', 'intro-rearm'].includes(id) && index === 1 && playerAttack.kind === 'light' && action.type === 'hit') advance();
         if (id === 'rupture' && action.type === 'guard-break') advance();
         if (id === 'parry' && index === 1 && action.tick < parryOpeningUntil && action.type === 'hit') advance();
         if (id === 'interrupt' && action.type === 'hit' && incomingAttack?.id && armedBeforeStep?.id === incomingAttack.id
@@ -178,6 +186,10 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
       if (hasImpact(action, 'player') && action.attacker === 'opponent') {
         if (incomingAttack) incomingAttack.contact = true;
         if ((id === 'guard' || id === 'legal-counter' && index === 0) && action.type === 'block') advance();
+        if (id === 'low-defense' && incomingAttack?.kind === 'low') {
+          if (index === 0 && standingGuardBeforeStep && action.type === 'hit') advance();
+          else if (index === 1 && player.guard && player.movesetV207?.low && action.type === 'block') advance();
+        }
       }
       if (id === 'escape' && index === 0 && action.type === 'grapple-start-v153' && action.side === 'player') advance();
       if (id === 'escape' && index === 1 && action.type === 'grapple-end-v153' && action.reason === 'escaped') advance();
@@ -214,11 +226,15 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recordi
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
       ...(sandbox ? { sandbox: true, result: match.result?.winner || null, telemetryV209: observer.view() } : {}),
-      cue: id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
+      cue: id === 'low-defense' && opponent.attack?.kind === 'low' ? 'FRAPPE BASSE EN COURS'
+        : id === 'landing-evasion' && player.y > .001 && player.vy < 0 ? 'DESCENTE EN COURS'
+        : id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
         : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
         : id === 'anti-air' && opponent.y > 0 ? 'CONTACT EN L’AIR' : '' };
   }
   return { get active() { return state === 'active'; }, opponentInput, observe, view,
+    showIntroV210: entry.showIntroV210 === true,
+    skippedIntroV210() { if (entry.showIntroV210 && index === 0 && match.tick === 0) advance(); },
     recordingV209: observer ? { start: observer.startRecording, stop: observer.stopRecording,
       pending: observer.pendingRecording, acknowledge: observer.acknowledgeRecording } : null };
 

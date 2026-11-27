@@ -4,6 +4,9 @@
 import { XENO_TRIALS_CAPTURE_ATLASES_V163 } from './xeno-trials-capture-data-v163.js';
 import { getXenoTrialsFighterV96, getXenoTrialsArtV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsRenderMetricsV110 } from './xeno-trials-scale-v110.js';
+import { getXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteLayoutV188 } from './xeno-trials-sprite-atlas-v188.js';
+import { getXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189 } from './xeno-trials-sprite-atlas-v189.js';
+import { getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteLayoutV191 } from './xeno-trials-sprite-atlas-v191.js';
 import { getXenoTrialsRigV154, getXenoTrialsRigCueV154, getXenoTrialsRigMeshV154,
  sampleXenoTrialsRigV154, projectXenoTrialsMeshPointV157, xenoTrialsTriangleAreaV154 } from './xeno-trials-rig-v154.js';
 const freeze=v=>{if(v&&typeof v==='object'){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
@@ -204,19 +207,44 @@ export function getXenoTrialsCaptureReceiptV163(view,role){
   bounds:{...view.layout.bounds},floor:view.layout.ground,supportY:view.layout.frame.supportY,scale:view.layout.scale,
   engineBodiesUnchanged:true,referenceStatus:view.sourceStatus,statureMethod:view.layout.frame.statureMethod};
 }
-function getFloorPair(attacker, target, images, exactRig = null) {
+const groundAtlases = [[getXenoTrialsRuntimeSpriteAtlas, getXenoTrialsSpriteLayoutV191],
+ [getXenoTrialsSpriteAtlasV189, getXenoTrialsSpriteLayoutV189], [getXenoTrialsSpriteAtlasV188, getXenoTrialsSpriteLayoutV188]];
+function getGroundPlateV210(target, art, metrics, images, supportIndex) {
+ for (const [getAtlas, layoutAtlas] of groundAtlases) {
+  const source = getAtlas(target, art);
+  const frame = source?.frames.find(value => value.id === 'ko-ground');
+  if (!frame) continue;
+  const { path, sha256, width, height } = source.texture;
+  const atlas = { path, sourceSha256: sha256, sourceWidth: width, sourceHeight: height };
+  if (!ready(images?.get(path), atlas)) continue;
+  const placement = layoutAtlas(source, frame, metrics, { x: target.x, y: 450, facing: target.facing });
+  const support = placement?.supports[supportIndex];
+  if (!validPoint(support) || Math.abs(support[1] - 450) > 8 || Math.abs(placement.bounds.bottom - 450) > 2) continue;
+  return { atlas, groundPlate: true,
+   layout: { ...placement, frame, ground: 450, rootX: target.x, contacts: { supportNear: support } } };
+ }
+ return null;
+}
+function getFloorPair(attacker, target, images, exactRig = null, groundSupport = null) {
  const direction = Math.sign(target.x - attacker.x);
  if (!direction || attacker.facing !== direction) return null;
- const atlas = getXenoTrialsCaptureAtlasV163(getXenoTrialsFighterV96(target.id), getXenoTrialsArtV96(target.id, target.variant));
+ const targetArt = getXenoTrialsArtV96(target.id, target.variant);
  const rig = exactRig || getXenoTrialsRigV154(getXenoTrialsFighterV96(attacker.id), getXenoTrialsArtV96(attacker.id, attacker.variant));
- if (!atlas || !rig || !ready(images?.get(atlas.path), atlas) || !ready(images?.get(rig.path), rig)) return null;
+ if (!rig || !ready(images?.get(rig.path), rig)) return null;
  const attackerMetrics = getXenoTrialsRenderMetricsV110(attacker.id, attacker.variant);
  const targetMetrics = getXenoTrialsRenderMetricsV110(target.id, target.variant);
- const layout = frameLayout(atlas, 3, targetMetrics, target.x, direction, 450);
+ let plate;
+ if (Number.isInteger(groundSupport)) plate = getGroundPlateV210(target, targetArt, targetMetrics, images, groundSupport);
+ else {
+  const atlas = getXenoTrialsCaptureAtlasV163(getXenoTrialsFighterV96(target.id), targetArt);
+  if (!atlas || !ready(images?.get(atlas.path), atlas)) return null;
+  const layout = frameLayout(atlas, 3, targetMetrics, target.x, direction, 450);
+  if (layout.frame.fullFloorPin) plate = { atlas, layout };
+ }
  const clip = Object.hasOwn(rig.poses, 'release') ? 'release' : Object.hasOwn(rig.poses, 'recover') ? 'recover' : 'recovery';
  const rest = sampleXenoTrialsRigV154(rig, { clip, progress: 1, elapsed: .25, role: 'captor' });
- if (!rest || !layout.frame.fullFloorPin) return null;
- return { attacker, target, rig, atlas, attackerMetrics, layout, rest };
+ if (!rest || !plate) return null;
+ return { attacker, target, rig, attackerMetrics, rest, ...plate };
 }
 function drawnAnchor(pair, pose, key) {
  return worldPoint(pair.rig, pair.attackerMetrics, pair.attacker,
@@ -256,12 +284,29 @@ export function getXenoTrialsSupportLockV209(attacker, target, images, rig, prof
  const pair = getFloorPair(attacker, target, images, rig);
  return pair && getSupportLock(pair, profile);
 }
-function getSupportLock(pair, { contactKey, supportKeys, motion, liftHeight, range, revision }) {
- const { rig, layout, attackerMetrics, attacker, rest } = pair;
+export function getXenoTrialsGroundSupportLockV210(attacker, target, images, rig, profile, supportIndex) {
+ const pair = getFloorPair(attacker, target, images, rig, supportIndex);
+ if (!pair) return null;
+ if (profile.motion !== 'claw') return getSupportLock(pair, profile);
+ const lock = clawLock(pair, pair.layout.contacts.supportNear);
+ return lock && { ...lock, motion: 'claw', revision: 210 };
+}
+export function getXenoTrialsFixtureSupportLockV210(attacker, target, images, rig, profile, fixture) {
+ const pair = getFloorPair(attacker, target, images, rig);
+ if (!pair) return null;
+ const { hips, neck } = pair.layout.contacts;
+ if (hips[0] < fixture.left + 8 || hips[0] > fixture.right - 8 || neck[0] < fixture.left || neck[0] > fixture.right) return null;
+ const fromLeft = pair.layout.direction > 0;
+ if (fromLeft ? attacker.x >= fixture.left : attacker.x <= fixture.right) return null;
+ const anchor = fixture.pads[fromLeft ? 0 : 1];
+ const lock = getSupportLock(pair, { ...profile, motion: fixture.kind }, anchor);
+ return lock && lock.contactGap <= 5 ? { ...lock, fixture } : null;
+}
+function getSupportLock(pair, { contactKey, supportKeys, motion, liftHeight, range, revision }, targetAnchor = pair.layout.contacts.supportNear) {
+ const { rig, attackerMetrics, attacker, rest } = pair;
  const source = rig.contacts[contactKey]?.point;
  const supports = supportKeys.map(key => rig.contacts[key]?.point);
  if (!source || supports.some(value => !value)) return null;
- const targetAnchor = layout.contacts.supportNear;
  const shoe = drawnAnchor(pair, rest, contactKey);
  if (distance(shoe, targetAnchor) > range) return null;
  const mesh = getXenoTrialsRigMeshV154(rig);
@@ -307,9 +352,18 @@ function paintCaptureFrame(ctx, image, layout, alpha) {
 }
 export function drawXenoTrialsFloorLockTargetV207(ctx, image, lock, alpha) {
  if (!ready(image, lock.atlas) || typeof ctx?.drawImage !== 'function') return null;
- paintCaptureFrame(ctx, image, lock.layout, alpha);
+ if (lock.groundPlate) {
+  const { x, y, flip, scale, frame } = lock.layout;
+  ctx.save();
+  try {
+   ctx.globalAlpha *= alpha;
+   ctx.translate(x, y); ctx.scale(flip, 1);
+   ctx.drawImage(image, ...frame.rect, -frame.anchor[0] * scale, -frame.anchor[1] * scale, frame.rect[2] * scale, frame.rect[3] * scale);
+  } finally { ctx.restore(); }
+ } else paintCaptureFrame(ctx, image, lock.layout, alpha);
  return { drawn: alpha > 0, sourcePath: lock.atlas.path, sourceSha256: lock.atlas.sourceSha256,
-  frameId: lock.layout.frame.id, visualRoot: lock.layout.rootX, floor: lock.layout.ground };
+  frameId: lock.layout.frame.id, visualRoot: lock.layout.rootX, floor: lock.layout.ground,
+  ...(lock.groundPlate ? { groundPlate: true, facing: lock.target.facing } : {}) };
 }
 export function drawXenoTrialsCaptureTargetV163(ctx,image,view){
  if(!view||!ready(image,view.atlas)||typeof ctx?.drawImage!=='function')return null;

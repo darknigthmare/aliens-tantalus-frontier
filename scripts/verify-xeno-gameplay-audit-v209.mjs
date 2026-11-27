@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { XENO_GAMEPLAY_BASELINE_V209, XENO_GAMEPLAY_SUCCESSORS_V209, XENO_GAMEPLAY_NEW_INPUTS_V209,
   reviewedXenoGameplayDigestV209, xenoGameplayRuntimeSourcesV209, verifyXenoGameplayV209 } from './audit-xeno-gameplay-v209.mjs';
 import { isPublicDistributionPathV86 } from './verify-public-release-v86.mjs';
+import { XENO_GAMEPLAY_BASELINE_V210, reviewedXenoGameplayDigestV210 } from './audit-xeno-gameplay-v210.mjs';
 
 const root = new URL('..', import.meta.url);
 const read = path => readFileSync(new URL(path, root));
@@ -15,7 +16,8 @@ test('V209 retains the released V208 endpoints and rejects a fabricated predeces
   const git = (...args) => execFileSync('git', args, { cwd: root, maxBuffer: 8 * 1024 * 1024 });
   for (const [path, receipt] of Object.entries(XENO_GAMEPLAY_SUCCESSORS_V209)) {
     assert.equal(sha(git('show', XENO_GAMEPLAY_BASELINE_V209 + ':' + path)), receipt.previousSha256, path);
-    assert.equal(reviewedXenoGameplayDigestV209(path, receipt.previousSha256), receipt.sha256, path);
+    assert.equal(sha(git('show', XENO_GAMEPLAY_BASELINE_V210 + ':' + path)), receipt.sha256, path);
+    assert.equal(reviewedXenoGameplayDigestV209(path, receipt.previousSha256), reviewedXenoGameplayDigestV210(path, receipt.sha256), path);
     assert.throws(() => reviewedXenoGameplayDigestV209(path, '0'.repeat(64)), /Incorrect V208 endpoint for V209/);
   }
   const historical = git('ls-tree', '-r', '--name-only', XENO_GAMEPLAY_BASELINE_V209).toString().split('\n');
@@ -24,7 +26,7 @@ test('V209 retains the released V208 endpoints and rejects a fabricated predeces
 });
 
 test('V209 admits only exact new runtime paths and checks changed bytes', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v209.mjs';
+  const terminal = 'scripts/audit-xeno-gameplay-v210.mjs';
   assert.doesNotMatch(read(terminal).toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   const runtime = xenoGameplayRuntimeSourcesV209({ legacy: 'untouched' });
   assert.equal(runtime.legacy, 'untouched');

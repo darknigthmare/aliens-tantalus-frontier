@@ -1,4 +1,6 @@
 import { XENO_TRIALS_SIGNATURES_V209 } from './xeno-trials-signature-kit-v209.js';
+import { XENO_TRIALS_SIGNATURES_V210 } from './xeno-trials-signature-kit-v210.js';
+import { XENO_TRIALS_RESEARCH_SIGNATURES_V210 } from './xeno-trials-research-v210.js';
 
 export const XENO_TRIALS_SIGNATURE_KINDS_V208 = Object.freeze(['signature-2', 'signature-3']);
 
@@ -242,7 +244,10 @@ export const XENO_TRIALS_SIGNATURES_V208 = Object.freeze(authored.flatMap(([figh
     spec: Object.freeze({ groundedOnly: true, cooldown: 1.35, ...spec })
   }))));
 
-const byId = new Map([...XENO_TRIALS_SIGNATURES_V208, ...XENO_TRIALS_SIGNATURES_V209].map(move => [move.id, move]));
+const byId = new Map([
+  ...XENO_TRIALS_SIGNATURES_V208, ...XENO_TRIALS_SIGNATURES_V209, ...XENO_TRIALS_SIGNATURES_V210,
+  ...XENO_TRIALS_RESEARCH_SIGNATURES_V210,
+].map(move => [move.id, move]));
 
 export function getXenoTrialsAlternateSignatureV208(definition, kind) {
   if (!definition || !XENO_TRIALS_SIGNATURE_KINDS_V208.includes(kind)) return null;
@@ -255,11 +260,17 @@ export function validXenoTrialsSignatureActionV208(attack, spec, horde = false) 
   const launched = spec.liftV208 && attack.age >= spec.startup ? true : undefined;
   return attack.emitted === false && attack.launchedV147 === launched
     && (attack.age >= spec.startup || !attack.hit && !attack.hitTargetsV180?.length)
+    && (!spec.detonationV210 || attack.age < spec.startup + spec.chargeDuration
+      && !attack.hit && attack.hitTargetsV180 === undefined)
     && Object.keys(attack).every(key => ['kind', 'age', 'hit', 'emitted', 'facing', 'id', 'launchedV147'].includes(key)
       || horde && key === 'hitTargetsV180');
 }
 
 export function validXenoTrialsSignatureEventV208(event, hasFighter) {
+  if (['xeno-detonation', 'synth-detonation'].includes(event.type) && event.signatureIdV208 !== undefined) {
+    const move = byId.get(event.signatureIdV208);
+    return Boolean(move?.spec.detonationV210 && move.kind === event.kind && hasFighter(move.fighterId));
+  }
   if (event.type !== 'attack') return event.signatureIdV208 === undefined;
   if (event.signatureIdV208 === undefined && !XENO_TRIALS_SIGNATURE_KINDS_V208.includes(event.kind)) return true;
   const move = byId.get(event.signatureIdV208);

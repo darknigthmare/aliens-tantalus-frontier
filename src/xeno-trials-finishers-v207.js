@@ -3,6 +3,7 @@ import { getXenoTrialsFloorLockV207 } from './xeno-trials-capture-v163.js';
 import { hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsExtendedFinisherV208 } from './xeno-trials-finishers-v208.js';
 import { getXenoTrialsExtendedFinisherV209 } from './xeno-trials-finishers-v209.js';
+import { getXenoTrialsExtendedFinisherV210 } from './xeno-trials-finishers-v210.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -17,11 +18,12 @@ export function createXenoTrialsFinisherV207(match, images, reducedMotion = fals
     || match.fighters?.length !== 2) return null;
   const attacker = match.fighters.find(fighter => fighter.side === 'player');
   const target = match.fighters.find(fighter => fighter.side === 'opponent');
-  if (!attacker || !target || !isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(target.id))
+  if (!attacker || !target || match.result.playerId !== attacker.id || match.result.opponentId !== target.id
     || attacker.hp <= 0 || target.hp !== 0 || attacker.y !== 0 || target.y !== 0) return null;
-  const candidates = [getXenoTrialsExtendedFinisherV209(match, attacker, target, images)
-    || getXenoTrialsExtendedFinisherV208(match, attacker, target, images)].filter(Boolean);
-  if (hasXenoTrialsGrappleV153(getXenoTrialsFighterV96(attacker.id))) {
+  const legacyTarget = isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(target.id));
+  const candidates = [getXenoTrialsExtendedFinisherV210(match, attacker, target, images), legacyTarget
+    && (getXenoTrialsExtendedFinisherV209(match, attacker, target, images) || getXenoTrialsExtendedFinisherV208(match, attacker, target, images))].filter(Boolean);
+  if (legacyTarget && hasXenoTrialsGrappleV153(getXenoTrialsFighterV96(attacker.id))) {
     const lock = getXenoTrialsFloorLockV207(attacker, target, images);
     if (lock) candidates.push({ id: 'prowler::fin1', kind: 'claw', timing: clawTiming, lock });
   }

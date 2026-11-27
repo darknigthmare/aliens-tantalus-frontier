@@ -1,3 +1,4 @@
+import { publicXenoResearchPathAdmissionV210, PUBLIC_XENO_RESEARCH_DIRECTORIES_V210 } from './public-xeno-research-admissions-v210.mjs';
 import { publicXenoPosePathAdmissionV209, PUBLIC_XENO_POSE_DIRECTORIES_V209 } from './public-xeno-pose-admissions-v209.mjs';
 import { publicXenoProductionPathAdmissionV206 } from './public-xeno-production-admissions-v206.mjs';
 import { publicXenoVisualPathAdmissionV205, PUBLIC_XENO_VISUAL_DIRECTORIES_V205 } from './public-xeno-visual-admissions-v205.mjs';
@@ -255,6 +256,8 @@ export function createBuildAssetFilter(projectRoot, {
     // fs.cp also visits the source root (relative path ''). This is a container,
     // not a distributable filename; descend before applying file-path rules.
     if (sourcePath === '') return true;
+    const researchAdmission = publicXenoResearchPathAdmissionV210(sourcePath, { directory: PUBLIC_XENO_RESEARCH_DIRECTORIES_V210.includes(sourcePath) });
+    if (researchAdmission !== null) return researchAdmission;
     const poseAdmission = publicXenoPosePathAdmissionV209(sourcePath, { directory: PUBLIC_XENO_POSE_DIRECTORIES_V209.includes(sourcePath) });
     if (poseAdmission !== null) return poseAdmission;
     const productionAdmissionV206 = publicXenoProductionPathAdmissionV206(sourcePath, { built: true });
