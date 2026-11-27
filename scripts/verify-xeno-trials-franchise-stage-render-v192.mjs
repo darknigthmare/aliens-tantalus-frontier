@@ -343,7 +343,10 @@ test('real V194 runtime loads only the selected stage base and props and tolerat
 
 test('native next-round focus preserves the earned transition while an external focus still pauses', async () => {
   const { XENO_TRIALS_FRANCHISE_STAGES_V192: stages } = await import('../src/xeno-trials-franchise-stages-v192.js');
-  const h = await runtimeHost(stages.find(stage => stage.id === 'xt192-sevastopol-lorenz-systech').id, false, { playerId: 'queen', opponentId: 'boiler', roundsToWin: 2, seed: 96006, roundSeconds: 99, introSeconds: 0, holdRoundTransition: true });
+  const h = await runtimeHost(stages.find(stage => stage.id === 'xt192-sevastopol-lorenz-systech').id, false, {
+    playerId: 'queen', opponentId: 'boiler', roundsToWin: 2, seed: 96006, roundSeconds: 99, introSeconds: 0,
+    holdRoundTransition: true, rulesV119: { noSpecial: true },
+  });
   const { getXenoTrialsBodyGapV105: bodyGap } = await import('../src/xeno-trials-geometry-v105.js');
   let lastHeavy = -1000, lastLight = -1000;
   for (let frame = 0; frame < 18000 && h.runtime.getState().phase === 'active'; frame++) {

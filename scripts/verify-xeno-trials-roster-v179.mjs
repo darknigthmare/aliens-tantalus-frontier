@@ -93,7 +93,11 @@ test('exact capabilities stay bound to the admitted identity rather than a name 
   assert.equal(profile.specialLabel, signature.label);
   assert.equal(profile.specialDescription, signature.description);
   assert.equal(profile.superLabel, 'Barrage de contrôle');
-  assert.equal(getXenoTrialsRosterProfileV179(getXenoTrialsFighterV96('queen')).superLabel, null);
+  const queen = getXenoTrialsFighterV96('queen');
+  const alteredQueen = getXenoTrialsFighterV96('drive-v123-creature-aliens-queen-mobile');
+  assert.equal(getXenoTrialsRosterProfileV179(queen).superLabel, 'Balayage de la ruche');
+  assert.equal(getXenoTrialsRosterProfileV179({ ...alteredQueen, label: queen.label }).superLabel, null);
+  assert.equal(getXenoTrialsRosterProfileV179({ ...alteredQueen, profileId: queen.profileId }), null);
   assert.equal(getXenoTrialsRosterProfileV179({ ...warden, profileId: 'other' }), null);
   assert.equal(getXenoTrialsRosterProfileV179({ ...warden, id: 'unknown' }), null);
   assert.equal(getXenoTrialsRosterProfileV179(null), null);

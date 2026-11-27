@@ -159,10 +159,20 @@ export const XENO_GAMEPLAY_SUCCESSORS_V210 = freeze({
     "sha256": "91aaebb0178367d583ca27f12016991e10f22be2d25059de8c21cb6dc551e943",
     "previousSha256": "fe127c45dd26ff2e3612df3bdd45ebfa4990127f8b54a20fd2c21c16d65119e6"
   },
+  "scripts/verify-xeno-trials-franchise-stage-render-v192.mjs": {
+    "kind": "tooling",
+    "sha256": "1b1050c1c6eb0e8cbe756673849af4484a83edd613ea0d355601af3ab02a47f7",
+    "previousSha256": "db1309047c14fabcaeacfe70c07340b16400cc0761716d19343b1b9b2caccf38"
+  },
   "scripts/verify-xeno-trials-grapple-v153.mjs": {
     "kind": "tooling",
     "sha256": "ca64879779da758ff58bfdbe3b3288a6b4a47a94492eac27fc8e3ea7f4925c9a",
     "previousSha256": "e6f2a363da7c3d46287f92170763deecbf30540de1fb13a22afb5677564867be"
+  },
+  "scripts/verify-xeno-trials-roster-v179.mjs": {
+    "kind": "tooling",
+    "sha256": "cbc986297622323323658776c2270aed7b9ace697ad0ff30a803f11f042039b1",
+    "previousSha256": "9399d4156d69c03a86058a314d68738fd04ddfb8abba401ac8dfe070a5cc2989"
   },
   "scripts/verify-xeno-trials-super-kits-v209.mjs": {
     "kind": "tooling",
