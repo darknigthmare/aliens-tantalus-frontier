@@ -1,0 +1,1214 @@
+{
+  "schema": "aliens1986-generation-ledger-v118",
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "07ee99d56480780044c74d4f1eb11f31b07fef13",
+  "requested": 12,
+  "generated": 11,
+  "selected": 11,
+  "provenance": "Native reference edits of published project PNGs; byte-identical copies of the successful outputs. No pixel retouching, resizing, recompression or alpha manipulation.",
+  "publicReview": "All eleven source-resolution images inspected by the generating agent and the root reviewer. Geometry and hashes measured independently. Browser evidence is produced separately by the declared fixture and served gameplay journey.",
+  "filmFidelityValidated": false,
+  "assets": [
+    {
+      "id": "engineering-case-stocked",
+      "path": "assets/dlc/aliens-1986/v118/props/engineering-case-stocked.png",
+      "sha256": "f1a5d5f9f592d08d1be6b4b77c9a4ba52856e8ae09de2131356d3908c9b24cad",
+      "bytes": 2368689,
+      "referenceAssets": [
+        {
+          "role": "edit-reference",
+          "sha256": "af91a6299d2579b75643df843f8f81348015f2d09089b4634f207ee60e68c000",
+          "bytes": 2174847,
+          "width": 1536,
+          "height": 1024,
+          "bbox": [
+            26,
+            111,
+            1503,
+            964
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            764.5,
+            964
+          ],
+          "path": "assets/dlc/aliens-1986/v117/props/supply-case-ammo-empty.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "f1a5d5f9f592d08d1be6b4b77c9a4ba52856e8ae09de2131356d3908c9b24cad"
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent game prop sprite, engineering supply case stocked, Aliens (1986) DLC V118.\nInput image 1 is the edit target: the existing EMPTY worn grey-olive industrial supply case, with its lid folded low behind.\nChange ONLY the contents inside the open case: add EXACTLY THREE distinct flat rectangular steel reinforcement plates standing upright vertically in the case, arranged side by side with small visible gaps. Each plate is broad enough to count at small game size, with simple squared corners and subtle worn steel texture; their visible top parts project modestly above the rim, about one quarter of the case body's height. Show three readable plate faces, no fourth plate, no stacked pile and no little extra tools.\nPreserve the original case camera angle, footprint, size in frame, body, low folded-back lid, hinges, handle, two latches, ribs, seams, weathering and olive-grey material. Do not make the case taller, wider or deeper; the empty state uses the exact source image. The three plates are the only change to the object. No medical emblem, no ammunition, weapons or modern equipment. This is a functional project adaptation, not a certified screen-used prop replica.\nComposition: one complete case centered, same three-quarter view as input, whole case and low lid inside frame with transparent margins. True RGBA transparent background; no floor, opaque backdrop, glow, diffuse haze or external shadow. Keep realistic raster-sprite detail. No people, text, random glyphs, labels, watermark, inset or multiple states.",
+      "publicReferences": [],
+      "sourceResolutionVisualReview": {
+        "decision": "accepted",
+        "observations": [
+          "Exactement trois plaques métalliques verticales, distinctes et espacées, visibles dans le coffret.",
+          "Angle trois-quarts, poignée, deux verrous, nervures, matière gris-olive et couvercle replié bas cohérents avec la source vide V117.",
+          "Pas de texte, symbole médical, munitions, personne ou objet supplémentaire.",
+          "Le bbox de la caisse reste comparable à la source vide : 1480×857 contre 1477×853 pixels ; écart de génération mineur, sans transformation de pixels appliquée."
+        ],
+        "limitations": [
+          "Adaptation fonctionnelle du projet ; aucune validation de réplique 1:1 film.",
+          "Petites valeurs d'alpha résiduelles autour de l'objet ; pas de fond opaque."
+        ],
+        "pivotBasis": "Centre horizontal du bbox alpha128 et bord inférieur exclusif."
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          24,
+          108,
+          1504,
+          965
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          764.0,
+          965
+        ],
+        "pixelMode": "RGBA"
+      },
+      "pivotBasis": "Centre horizontal du bbox alpha128 et bord inférieur exclusif.",
+      "alphaEvidence": {
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZeroPixels": 574157,
+        "alphaCornerSamples": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "alphaOutsideBbox": {
+          "nonzeroPixels": 696,
+          "atLeast16Pixels": 61,
+          "atLeast64Pixels": 36,
+          "maximum": 109
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false
+    },
+    {
+      "id": "gateway-inquiry-display",
+      "path": "assets/dlc/aliens-1986/v118/props/gateway-inquiry-display.png",
+      "sha256": "0736d478db9c2cf2bbc54702b3725cb2edb589605332c611da14cde701a1b05c",
+      "bytes": 2362728,
+      "referenceAssets": [
+        {
+          "role": "style-reference",
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "bbox": [
+            15,
+            42,
+            1756,
+            860
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            885.5,
+            860
+          ],
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "role": "style-reference",
+          "sha256": "3c805c665b2a2509e033d323000cd84eaa2a31c56d5c8bc132951d04848b48b4",
+          "bytes": 2628706,
+          "width": 1536,
+          "height": 1024,
+          "bbox": [
+            87,
+            23,
+            1449,
+            1001
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            768.0,
+            1001
+          ],
+          "path": "assets/dlc/aliens-1986/v115/props/gateway-photo.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "0736d478db9c2cf2bbc54702b3725cb2edb589605332c611da14cde701a1b05c"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: one isolated wall-mounted display game sprite for the Gateway inquiry room, Aliens (1986) DLC V118.\nInput image 1 is a style and material reference only: the existing operations console's worn grey-metal casing, recessed curved CRT screens, physical bevels and restrained 1980s industrial detailing. Input image 2 is a screen-treatment reference only: cool cyan/blue and muted amber data-document colours and photographed scanline texture. Do not copy its face or any of its text.\nCreate one wide landscape wall display: a shallow rectangular grey-metal wall-mount housing surrounding a single broad dark inset CRT-like screen, substantial worn dark bevel, simple flush fasteners, a few tiny recessed physical controls along the lower edge. Show the whole panel in a nearly frontal, very slight three-quarter game-prop view so the slim housing thickness is readable. The screen is active with a restrained cyan document-layout glow: a few abstract rectangular panes, fine horizontal graphic rules and a simple small amber indicator, but ABSOLUTELY NO letters, numbers, readable or invented text, people, portraits or symbols resembling words. It must read as a quiet administrative/inquiry display, not a weapons targeting computer.\nThe display is designed to attach directly to a wall. NO floor-standing cabinet, desk, keyboard shelf, pedestal, legs, separate furniture, surrounding wall, room or supporting scenery. This specific display is a functional project adaptation for the existing V114 inquiry scene; it is not a certified 1:1 film replica.\nOne complete sprite only. Match the references' realistic raster asset materials and subdued film-era palette. True transparent RGBA outside the panel, including clean transparent margins on all sides. No ground plane, external shadow, halo, smoke, weapon, watermark or multiple views.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Oversized Gateway Station Set Backdrop Transparency",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/496/lot/192501/451-Oversized-Gateway-Station-Set-Backdrop-Transparency-ALIENS-1986",
+          "scope": "Documents backlit projections at Gateway; does not establish the precise inquiry-screen frame or content."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "decision": "accepted",
+        "observations": [
+          "Un seul panneau mural large, cadre gris usé et écran de style CRT légèrement en retrait.",
+          "Aucun meuble, pied, clavier, mur ou décor inclus.",
+          "Panes cyan abstraits et indicateurs ambre, sans portrait ni texte lisible ou inventé.",
+          "Volume peu profond en légère perspective ; silhouette du panneau entière dans l'image."
+        ],
+        "limitations": [
+          "Modèle d'écran inventé pour la scène d'enquête V114 ; références de style ne certifiant pas l'écran réel du film.",
+          "Alpha résiduel sur quelques bords et autour du panneau ; pas de fond opaque."
+        ],
+        "pivotBasis": "Centre du bord inférieur du panneau, pour une pose murale ; ce n'est pas un pied au sol."
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1774,
+        "height": 887,
+        "bbox": [
+          121,
+          79,
+          1650,
+          817
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          885.5,
+          817
+        ],
+        "pixelMode": "RGBA"
+      },
+      "pivotBasis": "Centre du bord inférieur du panneau, pour une pose murale ; ce n'est pas un pied au sol.",
+      "alphaEvidence": {
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "alphaZeroPixels": 433884,
+        "alphaCornerSamples": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "alphaOutsideBbox": {
+          "nonzeroPixels": 15833,
+          "atLeast16Pixels": 1001,
+          "atLeast64Pixels": 651,
+          "maximum": 114
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false
+    },
+    {
+      "id": "service-control-pedestal",
+      "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+      "sha256": "1b0be7132e27f1d2829bee04ade31a41cd4a7d1d5cc4e77828bf6cb7e4d4a3b5",
+      "bytes": 1276428,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "1b0be7132e27f1d2829bee04ade31a41cd4a7d1d5cc4e77828bf6cb7e4d4a3b5"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single narrow freestanding industrial service-control pedestal. This is a floor-standing control post, NOT a wide desk. A compact sloped control head contains one small recessed CRT, a short row of cream pushbuttons and two dark rotary controls. It sits on one sturdy narrow vented metal column ending in a low bolted rectangular footplate; all edges and feet are intact. Keep the head narrow enough to read as a column-mounted control. Proportions: overall height about 1.7 times the widest part, with the column and true floor foot clearly visible. Match the grey material and simple construction language of image 1; do not include its wide cabinet or multiple screens.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "One complete floor-standing control post: one recessed CRT, five blank pushbuttons and two rotary controls, a narrow vented column and a visible bolted footplate.",
+          "Grey matte finish and hardware match the two supplied DLC references; no environment, separate object or screen UI.",
+          "The generated column is slimmer than the approximate prompt ratio; at the proposed 44×74 contain box the visible sprite is 28.66×74. This remains a compact pedestal; renderer sizing can be reviewed in the real scene."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": false,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 963,
+        "height": 1633,
+        "bbox": [
+          192,
+          88,
+          764,
+          1565
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          463.0,
+          1565
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          478.0,
+          1565
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 941439,
+        "totalPixels": 1572579,
+        "alphaZeroFraction": 0.5986592724435466,
+        "alphaAtLeast128Fraction": 0.3885292885126916,
+        "edgeMaxAlpha": 0,
+        "edgePixelsAboveZeroIncludingCornersTwice": 0,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 192,
+          "top": 88,
+          "right": 199,
+          "bottom": 68
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 28.658090724441433,
+        "height": 74.0
+      }
+    },
+    {
+      "id": "medical-counter-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/medical-counter-terminal.png",
+      "sha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864",
+      "bytes": 2389765,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "524b3fddf9c01be30949e9d51413d50ddeb1baa9ee6b4095595bf3aa72776864"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single compact tabletop medical service terminal, only the electronics that sit on an existing counter. One box-shaped recessed CRT display in a slightly warm light-grey medical housing, a short integrated sloped control ledge with several cream keys and two simple switches, ventilation slots, and four short stable rubber feet. A low compact base only: absolutely no floor cabinet, no tall pedestal, no table or cart, no suitcase lid/handle. The object is wider than tall, about 1.6:1 visible width to height. The light-grey shell is modestly cleaner than industrial service equipment but still matches the references' matte worn game-art style. No diagnostic display or patient data; the CRT is inactive blank glass.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "Complete light-grey tabletop terminal with one CRT, a compact front keyboard/control ledge, rocker switches and short feet.",
+          "The floor cabinet is absent. The base rests on the existing medical counter; no cart, floor or supporting tabletop is included.",
+          "Blank CRT glass, unlabeled physical controls; subtle wear stays within the DLC reference style."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": true,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1586,
+        "height": 992,
+        "bbox": [
+          65,
+          62,
+          1523,
+          939
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          741.0,
+          939
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          794.0,
+          939
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 414603,
+        "totalPixels": 1573312,
+        "alphaZeroFraction": 0.263522429117683,
+        "alphaAtLeast128Fraction": 0.7262685341496156,
+        "edgeMaxAlpha": 1,
+        "edgePixelsAboveZeroIncludingCornersTwice": 24,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 65,
+          "top": 62,
+          "right": 63,
+          "bottom": 53
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 78.0,
+        "height": 46.91769547325103
+      }
+    },
+    {
+      "id": "optics-calibration-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/optics-calibration-terminal.png",
+      "sha256": "d4e18e908131198f0e501ed70a2a741b782a036b3e8c935b5e037432220c40a3",
+      "bytes": 2325558,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "d4e18e908131198f0e501ed70a2a741b782a036b3e8c935b5e037432220c40a3"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single compact tabletop optical-calibration instrument terminal, only the device resting on an existing workbench. A squat rectangular dark-grey metal housing contains one small square recessed CRT toward the left, three large ridged precision adjustment knobs on the right and a short bank of blank cream physical pushbuttons along the front. Subtle side ventilation and tiny fasteners, a shallow lower chassis and four short rubber feet. The whole object is about 1.7:1 width to height. No tall floor cabinet or pedestal, no bench, no suitcase, no separate optics, no detached accessories. Keep the controls tangible and period-appropriate; inactive CRT with no plotted data, text or UI.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "Complete compact calibration device with one left CRT, three rotary controls on the right, five blank front pushbuttons and short stable feet.",
+          "A shallow chassis replaces the reference floor cabinet; there is no bench or detached accessory.",
+          "Visible mechanical tick marks surround knobs, but no readable numerals, screen data, plotted UI or labels."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": true,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1635,
+        "height": 962,
+        "bbox": [
+          77,
+          43,
+          1554,
+          928
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          748.5,
+          928
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          815.5,
+          928
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 392628,
+        "totalPixels": 1572870,
+        "alphaZeroFraction": 0.24962520742337257,
+        "alphaAtLeast128Fraction": 0.7261979693172353,
+        "edgeMaxAlpha": 1,
+        "edgePixelsAboveZeroIncludingCornersTwice": 246,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 77,
+          "top": 43,
+          "right": 81,
+          "bottom": 34
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 83.44632768361582,
+        "height": 50.0
+      }
+    },
+    {
+      "id": "valve-indicator-panel",
+      "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+      "sha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d",
+      "bytes": 2386174,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single compact industrial valve-indicator panel that stands on an existing low plinth. A near-square shallow dark-grey instrument box on two very short broad mounting feet. Its face has one large circular recessed analog dial with a plain dark needle on a blank pale face, one smaller round blank indicator, two simple blank square buttons and one protected rotary switch. No numerals, graduations, letters or screen UI. A thin mounting base only, NOT the supporting plinth, a floor cabinet or a pipe assembly. Slightly wider than tall, around 1.1:1. The dial is a static physical prop, not a newly invented readable measurement. Preserve all mounting feet and lower contact edges.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "Complete near-square instrument panel with one large blank analog dial and fixed needle, a smaller dark circular indicator, two blank buttons and a guarded rotary switch.",
+          "Two short mounting feet are fully visible; neither the supporting plinth nor a pipe assembly is included.",
+          "The dial has no numeric scale and represents a static decorative instrument, not a new simulated pressure measurement."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": true,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1327,
+        "height": 1186,
+        "bbox": [
+          90,
+          78,
+          1230,
+          1115
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          646.5,
+          1115
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          660.0,
+          1115
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 432373,
+        "totalPixels": 1573822,
+        "alphaZeroFraction": 0.27472801879755143,
+        "alphaAtLeast128Fraction": 0.709460154960345,
+        "edgeMaxAlpha": 1,
+        "edgePixelsAboveZeroIncludingCornersTwice": 54,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 90,
+          "top": 78,
+          "right": 97,
+          "bottom": 71
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 52.76759884281582,
+        "height": 48.0
+      }
+    },
+    {
+      "id": "sulaco-briefing-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/sulaco-briefing-terminal.png",
+      "sha256": "0e08e812b8e85452ff30bb448483f966159088e728dca1cd3216488ddc1c1555",
+      "bytes": 2043852,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "0e08e812b8e85452ff30bb448483f966159088e728dca1cd3216488ddc1c1555"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single low wide tabletop briefing terminal for the Sulaco mess briefing table, only the apparatus on the table. One broad recessed inactive CRT in a low warm-grey housing, a shallow integrated cream physical keyboard in front, a narrow row of dark toggle switches on the right, tidy ventilation and four short feet. Overall visible width about 2 times height. Compact one-piece desktop equipment, NOT a full desk or cabinet, not a suitcase, not a laptop with a thin modern display, no standing pedestal and no extra separate pieces. Keep restrained 1986 practical electronics and the slightly cooler pale-grey shipboard finish of the same DLC references; no bright screens or briefing graphics.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "Complete low wide desktop terminal with one broad inactive CRT, cream keyboard, tactile switches and rotary controls on the right.",
+          "The shallow base and short feet are complete; no floor cabinet, table, modern thin laptop display or suitcase shell.",
+          "Matte light-grey worn metal matches the reference set; no briefing UI, map, letters or numerals are displayed."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": true,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1774,
+        "height": 887,
+        "bbox": [
+          98,
+          92,
+          1672,
+          820
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          839.5,
+          820
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          885.0,
+          820
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 532472,
+        "totalPixels": 1573538,
+        "alphaZeroFraction": 0.33839157363851396,
+        "alphaAtLeast128Fraction": 0.6492985870058429,
+        "edgeMaxAlpha": 1,
+        "edgePixelsAboveZeroIncludingCornersTwice": 22,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 98,
+          "top": 92,
+          "right": 102,
+          "bottom": 67
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 94.0,
+        "height": 43.47649301143583
+      }
+    },
+    {
+      "id": "operations-table-terminal",
+      "path": "assets/dlc/aliens-1986/v118/props/operations-table-terminal.png",
+      "sha256": "50adeba42a58b714a5048fc93556f2fa6708eb6a8f792c19c1d1d862a0cd868f",
+      "bytes": 2280782,
+      "referenceAssets": [
+        {
+          "sha256": "573f5ba81f6c3331b4263855919c75153394588aa96bf222d43c1c1929d627d4",
+          "bytes": 2449437,
+          "width": 1774,
+          "height": 887,
+          "role": "reference image 1; matte worn metal, CRT bezel, physical keys and knobs, existing DLC rendering style",
+          "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png"
+        },
+        {
+          "sha256": "c7df6bdee7daf8840a30bd293d1545ca54feb4ae00657df126c2660dbf28d5b5",
+          "bytes": 1985049,
+          "width": 1536,
+          "height": 1024,
+          "role": "reference image 2; compact 1986 electronics construction, materials, fasteners and keys; do not reproduce its distinctive suitcase as the new object",
+          "path": "assets/dlc/aliens-1986/v115/props/bishop-uplink.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "50adeba42a58b714a5048fc93556f2fa6708eb6a8f792c19c1d1d862a0cd868f"
+      },
+      "prompt": "Use case: style-transfer.\nAsset type: exactly ONE individual transparent RGBA prop sprite for the existing Aliens (1986) 2D game DLC.\nInput images: image 1 is operations-console.png, the authoritative visual-style and worn grey metal reference. Image 2 is bishop-uplink.png, a supporting reference for compact 1986 CRT electronics, fasteners, cream keycaps and physical switches. Use both as material/style references, not as objects to reproduce together. This is a functional prop adaptation for a game room, not a claim of a measured film replica.\nStyle and camera: match the references' detailed realistic matte 2D game-art finish exactly, muted charcoal/grey metal with restrained off-white controls, believable use wear and clean readable silhouette. One consistent very mild three-quarter front view with only a narrow right side and a small amount of top visible, nearly orthographic, no extreme perspective. Soft neutral lighting; avoid a glossy photographic studio render or a new art style.\nComposition: one complete object only, entirely visible, centered with at least 6 percent clear transparent margin on every side. Base/feet must be fully visible and level, with a definite lowest contact edge for a bottom-centre game pivot. No surface under the object, no floor, no wall, no cable trailing outside its silhouette, no shadow outside the object, no backdrop, no halo, no vignette, no checkerboard pattern. Genuine alpha transparency throughout the background.\nScreens and text: dark inactive green-grey CRT glass with subtle glass reflection only. No invented screen UI, graphs, readings, symbols, letters, numbers, labels, logo, watermark or captions; physical hardware and blank button caps only.\nSubject: a single tabletop situation terminal designed from the upper electronics of image 1, with its entire floor-standing cabinet removed. Retain a recognizably related pair of recessed square dark CRTs side by side and a shallow integrated sloping bank of chunky cream physical keys, with two dark rotary knobs and narrow ventilated side cheeks. Put this compact electronics assembly on a low stable chassis with short feet, suitable for resting on the existing Operations table. Overall width about 1.85 times its height. Absolutely no tall cabinet, no desk, no table, no chair and no suitcase shell. The two CRTs are inactive blank glass, with no tactical map or invented UI. Match the reference materials, control proportions and wear rather than introducing a different machine style.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Bishop’s screen-matched computer terminal",
+          "url": "https://propstoreauction.com/lot-details/index/catalog/525/lot/208688/7-Bishop-s-Lance-Henriksen-Screen-Matched-Light-Up-Computer-Terminal-ALIENS-1986",
+          "scope": "Production electronics construction reference; does not identify the new terminals as exact film props."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "status": "accepted-for-runtime-integration",
+        "inspected": true,
+        "inspectionSource": "Native output displayed with generatedImage(result); destination copy hash and bytes match native output.",
+        "observations": [
+          "Complete tabletop adaptation recognizably derived from the upper electronics of operations-console: two recessed CRTs, chunky keys, side ventilation and two rotary controls.",
+          "The tall reference floor cabinet is absent; the assembly rests on a shallow chassis with complete short feet.",
+          "The original controls/material language remains visible, with blank screens and no tactical map or invented UI."
+        ],
+        "wholeObjectVisible": true,
+        "noFloorCabinetForTabletop": true,
+        "fullTransparencyOutsideObject": true,
+        "alphaQualification": "Real RGBA alpha; any nonzero canvas-border samples are alpha 1/255 only and no alpha>=128 subject pixel touches the border. These native faint samples were preserved, not erased.",
+        "runtimeSceneInspected": false,
+        "filmFidelityValidated": false
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1706,
+        "height": 922,
+        "bbox": [
+          32,
+          70,
+          1665,
+          880
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          821.5,
+          880
+        ],
+        "pixelMode": "RGBA",
+        "silhouetteBottomCentrePivot": [
+          848.5,
+          880
+        ]
+      },
+      "pivotBasis": "Base-contact proposal: centre of alpha>=128 support envelope in bottom 6 percent of visible height, y at alpha128 bottom edge; verified against visible feet/footplate.",
+      "alphaEvidence": {
+        "threshold": 128,
+        "transparentPixelCount": 386237,
+        "totalPixels": 1572932,
+        "alphaZeroFraction": 0.24555225527867702,
+        "alphaAtLeast128Fraction": 0.7421681293279049,
+        "edgeMaxAlpha": 1,
+        "edgePixelsAboveZeroIncludingCornersTwice": 1,
+        "edgePixelsAtLeast128IncludingCornersTwice": 0,
+        "clearMarginsPx": {
+          "left": 32,
+          "top": 70,
+          "right": 41,
+          "bottom": 42
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "expectedContainedSizePx": {
+        "width": 96.0,
+        "height": 47.617881200244945
+      }
+    },
+    {
+      "id": "sentry-aim-front-right",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-front-right.png",
+      "sha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b",
+      "bytes": 2117622,
+      "referenceAssets": [
+        {
+          "role": "edit-reference",
+          "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+          "bytes": 2026614,
+          "width": 1536,
+          "height": 1024,
+          "bbox": [
+            47,
+            39,
+            1506,
+            998
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            776.5,
+            998
+          ],
+          "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "967f67f1dd0416c0ca227e27642c136ede0e1cca4ee798e3fa9f8c46a032408b"
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one complete isolated static game sprite, Aliens (1986) DLC V118.\nInput image 1 is the exact existing project UA 571-C sentry gun, the identity and construction reference. Preserve this specific gun: worn olive drab angular steel housing, long rectangular barrel jacket and dark perforated muzzle, small rectangular thermal-imager box, circular traverse/elevation assembly, corrugated black cables, compact rectangular ammunition/power pack connected to the gun, and complete three-foot folding tripod. Keep its proportions, mechanical layout, material, edge wear, muted palette and high-detail realistic raster-sprite treatment. This is an additional camera angle of the SAME assembly, not a new weapon design.\nOne sentry only, with all its connected parts, every tripod foot and the whole barrel inside frame. Slightly elevated game-sprite camera, consistent with reference, orthographic-like perspective, no dramatic lens distortion. Maintain the same physical gun height and tripod proportions as the reference; leave a clear transparent margin around the silhouette.\nBackdrop: true transparent RGBA, including transparent holes between the tripod legs. Remove the reference's diffuse surrounding haze: no backdrop, no ground plane, no baked floor shadow or glow.\nNo person, creature, firing, flash, smoke, flame, bullets in flight, motion blur, extra gun, detached spare parts, writing, labels, watermark or decorative scenery. Do not make a sheet or multiple views. A single static pose, not an animation.\nRequired orientation — FRONT-RIGHT at 45 degrees: the gun's firing axis points diagonally toward SCREEN RIGHT AND TOWARD THE VIEWER (positive world z). We see the muzzle opening in three-quarter perspective, and the barrel runs from the central receiver toward the lower-right foreground. The back end recedes toward the upper-left background. This must clearly differ from the source's side profile. Rotate the entire assembly consistently; do not simply bend the barrel or mirror the source. Retain the connected pack and all three grounded feet.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Hand-Drawn UA 571-C Automated Sentry Gun Blueprint",
+          "url": "https://propstore.com/product/aliens-1986/lot-18-hand-drawn-ua-571-c-automated-sentry-gun-blueprint",
+          "scope": "Production side-view drawing; not a complete 3D measurement or proof of generated hidden surfaces."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "decision": "accepted-with-calibration-note",
+        "observations": [
+          "Canon diagonal vers la droite et vers le spectateur ; ouverture du canon visible au premier plan.",
+          "Boîtier arrière recule vers la gauche ; l'angle diffère clairement du profil droit historique.",
+          "Trois jambes et leurs appuis sont visibles ; le canon, le pack relié et le trépied sont entièrement dans le cadre.",
+          "Matériaux olive usés, câbles, couronne et famille de capteurs cohérents avec la référence du projet."
+        ],
+        "limitations": [
+          "Angle visuel destiné au secteur 45°, sans calibration 3D exacte.",
+          "Détails des capteurs et connexions inférés par génération ; aucune validation de fidélité intégrale au prop du film.",
+          "Centre du bbox décalé par le canon ; ne pas le confondre avec l'axe mécanique de rotation."
+        ],
+        "pivotBasis": "Pivot géométrique exact fourni séparément de l'estimation de l'axe mécanique.",
+        "mechanicalAxisEstimate": {
+          "x": 702,
+          "uncertaintyPixels": 8,
+          "method": "visual-inspection",
+          "reference": "centre projeté de la couronne de rotation et de sa colonne, pas centre du canon",
+          "floorYNotCalibrated": true
+        }
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          214,
+          13,
+          1435,
+          1016
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          824.5,
+          1016
+        ],
+        "pixelMode": "RGBA"
+      },
+      "pivotBasis": "Pivot géométrique exact fourni séparément de l'estimation de l'axe mécanique.",
+      "alphaEvidence": {
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZeroPixels": 1031059,
+        "alphaCornerSamples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaOutsideBbox": {
+          "nonzeroPixels": 1051,
+          "atLeast16Pixels": 35,
+          "atLeast64Pixels": 8,
+          "maximum": 117
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false
+    },
+    {
+      "id": "sentry-aim-rear-right",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear-right.png",
+      "sha256": "ec994d07af32863311577b72628b0794fafc96a06653aa045f020d5305e60b9c",
+      "bytes": 2090613,
+      "referenceAssets": [
+        {
+          "role": "edit-reference",
+          "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+          "bytes": 2026614,
+          "width": 1536,
+          "height": 1024,
+          "bbox": [
+            47,
+            39,
+            1506,
+            998
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            776.5,
+            998
+          ],
+          "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "ec994d07af32863311577b72628b0794fafc96a06653aa045f020d5305e60b9c"
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one complete isolated static game sprite, Aliens (1986) DLC V118.\nInput image 1 is the exact existing project UA 571-C sentry gun, the identity and construction reference. Preserve this specific gun: worn olive drab angular steel housing, long rectangular barrel jacket and dark perforated muzzle, small rectangular thermal-imager box, circular traverse/elevation assembly, corrugated black cables, compact rectangular ammunition/power pack connected to the gun, and complete three-foot folding tripod. Keep its proportions, mechanical layout, material, edge wear, muted palette and high-detail realistic raster-sprite treatment. This is an additional camera angle of the SAME assembly, not a new weapon design.\nOne sentry only, with all its connected parts, every tripod foot and the whole barrel inside frame. Slightly elevated game-sprite camera, consistent with reference, orthographic-like perspective, no dramatic lens distortion. Maintain the same physical gun height and tripod proportions as the reference; leave a clear transparent margin around the silhouette.\nBackdrop: true transparent RGBA, including transparent holes between the tripod legs. Remove the reference's diffuse surrounding haze: no backdrop, no ground plane, no baked floor shadow or glow.\nNo person, creature, firing, flash, smoke, flame, bullets in flight, motion blur, extra gun, detached spare parts, writing, labels, watermark or decorative scenery. Do not make a sheet or multiple views. A single static pose, not an animation.\nRequired orientation — REAR-RIGHT at 45 degrees: the gun's firing axis points diagonally toward SCREEN RIGHT AND AWAY FROM THE VIEWER (negative world z). We see the rear and left-side housing prominently; the barrel recedes toward the upper-right background. The muzzle is seen from behind/side and its front circular opening must not face the viewer. This must clearly differ from both the source side profile and a front-right view. Rotate the entire assembly consistently; do not simply bend the barrel or mirror the source. Retain the connected pack and all three grounded feet.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Hand-Drawn UA 571-C Automated Sentry Gun Blueprint",
+          "url": "https://propstore.com/product/aliens-1986/lot-18-hand-drawn-ua-571-c-automated-sentry-gun-blueprint",
+          "scope": "Production side-view drawing; not a complete 3D measurement or proof of generated hidden surfaces."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "decision": "accepted-with-calibration-note",
+        "observations": [
+          "Canon diagonal vers la droite et loin du spectateur ; il remonte vers le fond de l'image.",
+          "Dos du boîtier au premier plan ; pas d'ouverture du canon dirigée vers le spectateur.",
+          "Trois appuis distincts visibles, dont le pied éloigné au centre ; pack et câbles complets.",
+          "Silhouette compatible avec la base UA571-C utilisée dans le projet."
+        ],
+        "limitations": [
+          "Angle visuel destiné au secteur 45°, sans calibration 3D exacte.",
+          "Petites différences génératives de panneaux, capteurs et écartement des jambes ; à contrôler lors des transitions de rendu.",
+          "Centre du bbox ne constitue pas un pivot mécanique calibré."
+        ],
+        "pivotBasis": "Pivot géométrique exact fourni séparément de l'estimation de l'axe mécanique.",
+        "mechanicalAxisEstimate": {
+          "x": 812,
+          "uncertaintyPixels": 8,
+          "method": "visual-inspection",
+          "reference": "centre projeté de la couronne de rotation et de sa colonne",
+          "floorYNotCalibrated": true
+        }
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          233,
+          18,
+          1330,
+          1000
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          781.5,
+          1000
+        ],
+        "pixelMode": "RGBA"
+      },
+      "pivotBasis": "Pivot géométrique exact fourni séparément de l'estimation de l'axe mécanique.",
+      "alphaEvidence": {
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZeroPixels": 980560,
+        "alphaCornerSamples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaOutsideBbox": {
+          "nonzeroPixels": 2154,
+          "atLeast16Pixels": 22,
+          "atLeast64Pixels": 0,
+          "maximum": 39
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false
+    },
+    {
+      "id": "sentry-aim-rear",
+      "path": "assets/dlc/aliens-1986/v118/equipment/sentry-aim-rear.png",
+      "sha256": "6ddcd2bd2bc99d2471a49e49e7ea851efa97010ca70e59e7003a5f10b77375b9",
+      "bytes": 1786024,
+      "referenceAssets": [
+        {
+          "role": "edit-reference",
+          "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+          "bytes": 2026614,
+          "width": 1536,
+          "height": 1024,
+          "bbox": [
+            47,
+            39,
+            1506,
+            998
+          ],
+          "bboxStatus": "alpha128-measured",
+          "pivot": [
+            776.5,
+            998
+          ],
+          "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png"
+        }
+      ],
+      "generation": {
+        "tool": "image_gen.imagegen",
+        "mode": "edit",
+        "transparentBackground": true,
+        "attempts": 1,
+        "copiedWithoutPixelEdits": true,
+        "nativeOutputSha256": "6ddcd2bd2bc99d2471a49e49e7ea851efa97010ca70e59e7003a5f10b77375b9"
+      },
+      "prompt": "Use case: precise-object-edit.\nAsset type: one complete isolated static game sprite, Aliens (1986) DLC V118.\nInput image 1 is the exact existing project UA 571-C sentry gun, the identity and construction reference. Preserve this specific gun: worn olive drab angular steel housing, long rectangular barrel jacket and dark perforated muzzle, small rectangular thermal-imager box, circular traverse/elevation assembly, corrugated black cables, compact rectangular ammunition/power pack connected to the gun, and complete three-foot folding tripod. Keep its proportions, mechanical layout, material, edge wear, muted palette and high-detail realistic raster-sprite treatment. This is an additional camera angle of the SAME assembly, not a new weapon design.\nOne sentry only, with all its connected parts, every tripod foot and the whole barrel inside frame. Slightly elevated game-sprite camera, consistent with reference, orthographic-like perspective, no dramatic lens distortion. Maintain the same physical gun height and tripod proportions as the reference; leave a clear transparent margin around the silhouette.\nBackdrop: true transparent RGBA, including transparent holes between the tripod legs. Remove the reference's diffuse surrounding haze: no backdrop, no ground plane, no baked floor shadow or glow.\nNo person, creature, firing, flash, smoke, flame, bullets in flight, motion blur, extra gun, detached spare parts, writing, labels, watermark or decorative scenery. Do not make a sheet or multiple views. A single static pose, not an animation.\nRequired orientation — STRAIGHT REAR: the gun's firing axis points directly AWAY FROM THE VIEWER (negative world z), with no left/right component. We look squarely at the REAR housing and its back panels and cable connections. The barrel points into the background, aligned with the image's vertical centerline and mostly occluded/foreshortened behind the rear receiver. NO muzzle opening facing the viewer. The rear gun housing is the dominant near surface. The tripod legs spread naturally beneath the centered assembly. The camera is slightly above gun height, showing enough top surface to understand the barrel pointing away. Keep the barrel horizontal in world space, not tipped up. This must be unambiguously different from the front angle. Retain the connected pack and all three grounded feet.",
+      "publicReferences": [
+        {
+          "title": "Propstore — Hand-Drawn UA 571-C Automated Sentry Gun Blueprint",
+          "url": "https://propstore.com/product/aliens-1986/lot-18-hand-drawn-ua-571-c-automated-sentry-gun-blueprint",
+          "scope": "Production side-view drawing; not a complete 3D measurement or proof of generated hidden surfaces."
+        }
+      ],
+      "sourceResolutionVisualReview": {
+        "decision": "accepted-with-occlusion-and-calibration-note",
+        "observations": [
+          "Vue arrière axiale : boîtier arrière, panneaux et connexion de câble dominent la surface proche.",
+          "Axe longitudinal centré et canon fortement raccourci vers le fond ; aucune bouche de canon faisant face au spectateur.",
+          "Deux pieds latéraux sont nettement visibles ; la partie centrale est masquée par le pack et sa patte basse, cohérente avec l'occlusion d'une vue axiale.",
+          "L'ensemble visible est contenu dans le cadre, sans tir, flamme ni personnage."
+        ],
+        "limitations": [
+          "Le troisième appui ne peut pas être confirmé indépendamment dans cette silhouette ; ne pas décrire les trois pieds comme tous lisibles.",
+          "Une face optique latérale reste visible côté spectateur ; la géométrie arrière du capteur est une inférence de génération, pas une reconstruction validée du prop film.",
+          "Projection et écartement des appuis non calibrés en 3D."
+        ],
+        "pivotBasis": "Centre horizontal du bbox et bord inférieur exclusif. Le bord inférieur correspond à la patte centrale du pack ; les deux pieds latéraux touchent plus haut dans la projection.",
+        "mechanicalAxisEstimate": {
+          "x": 768,
+          "uncertaintyPixels": 8,
+          "method": "visual-inspection",
+          "reference": "axe de symétrie du corps et de la couronne",
+          "floorYNotCalibrated": true
+        }
+      },
+      "rootVisualReview": {
+        "status": "inspected",
+        "filmFidelityValidated": false
+      },
+      "geometry": {
+        "width": 1536,
+        "height": 1024,
+        "bbox": [
+          228,
+          14,
+          1307,
+          1008
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          767.5,
+          1008
+        ],
+        "pixelMode": "RGBA"
+      },
+      "pivotBasis": "Centre horizontal du bbox et bord inférieur exclusif. Le bord inférieur correspond à la patte centrale du pack ; les deux pieds latéraux touchent plus haut dans la projection.",
+      "alphaEvidence": {
+        "alphaExtrema": [
+          0,
+          254
+        ],
+        "alphaZeroPixels": 1178696,
+        "alphaCornerSamples": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "alphaOutsideBbox": {
+          "nonzeroPixels": 1689,
+          "atLeast16Pixels": 10,
+          "atLeast64Pixels": 0,
+          "maximum": 29
+        }
+      },
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false
+    }
+  ],
+  "refusals": [
+    {
+      "id": "sentry-aim-front",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one complete isolated static game sprite, Aliens (1986) DLC V118.\nInput image 1 is the exact existing project UA 571-C sentry gun, the identity and construction reference. Preserve this specific gun: worn olive drab angular steel housing, long rectangular barrel jacket and dark perforated muzzle, small rectangular thermal-imager box, circular traverse/elevation assembly, corrugated black cables, compact rectangular ammunition/power pack connected to the gun, and complete three-foot folding tripod. Keep its proportions, mechanical layout, material, edge wear, muted palette and high-detail realistic raster-sprite treatment. This is an additional camera angle of the SAME assembly, not a new weapon design.\nOne sentry only, with all its connected parts, every tripod foot and the whole barrel inside frame. Slightly elevated game-sprite camera, consistent with reference, orthographic-like perspective, no dramatic lens distortion. Maintain the same physical gun height and tripod proportions as the reference; leave a clear transparent margin around the silhouette.\nBackdrop: true transparent RGBA, including transparent holes between the tripod legs. Remove the reference's diffuse surrounding haze: no backdrop, no ground plane, no baked floor shadow or glow.\nNo person, creature, firing, flash, smoke, flame, bullets in flight, motion blur, extra gun, detached spare parts, writing, labels, watermark or decorative scenery. Do not make a sheet or multiple views. A single static pose, not an animation.\nRequired orientation — STRAIGHT FRONT: the gun's firing axis points directly TOWARD THE VIEWER (positive world z), with no left/right component. We look into the central dark circular muzzle opening; the rectangular barrel jacket is strongly foreshortened, and the receiver and thermal imager sit directly behind it. The gun's longitudinal centerline is vertical in the image, not diagonal. The tripod legs spread naturally beneath the centered assembly. The camera is slightly above gun height as in the game, so some top surfaces are visible. Keep the barrel horizontal in world space, not tipped up. This is an actual front camera angle, not a side view. Retain the connected pack and all three grounded feet.",
+      "referenceAssets": [
+        {
+          "path": "assets/openai/equipment/v120-weapons/ua-571c-sentry-native-v120.png",
+          "role": "edit-reference",
+          "sha256": "f98ebde0c5ec65a2dc7b8c100cabb82d69d219f145d1ca17de2039e33a3df712",
+          "bytes": 2026614,
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "tool": "image_gen.imagegen",
+      "httpStatus": 400,
+      "outcome": "moderation_blocked",
+      "stage": "output",
+      "category": "illicit",
+      "outputReceived": false,
+      "retryAttempted": false,
+      "runtimeFallback": "original V114 procedural sentry at the frontal sector",
+      "toolMessageExcerpt": "Your request was rejected by the safety system. safety_violations=[illicit].",
+      "privateRequestIdOmitted": true
+    }
+  ],
+  "previousRefusalsNotRetried": [
+    "hicks-wounded",
+    "warrior-walk-right",
+    "facehugger-attack-right",
+    "facehugger-death-right"
+  ],
+  "recovery": {
+    "oldMissingPngs": 20,
+    "oldMissingDocuments": 53,
+    "oldMissingPoseSources": 19,
+    "recoveredInThisPass": 0,
+    "note": "The three sentry views address part of the missing orientation need; they are not a recovery of the lost original sheet."
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v107-service",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 10,
+    "loaded": 10,
+    "failed": 0,
+    "draws": 37,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 10,
+    "used": [
+      "armament-case-closed",
+      "door-leaf",
+      "engineering-case-stocked",
+      "hicks-idle-right",
+      "industrial-pipe",
+      "m41a-pulse-rifle",
+      "operations-console",
+      "ripley-idle-right",
+      "service-pump-unit",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        702,
+        111.63999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1058,
+        289.0799865722656
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        316,
+        299.3999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "service-pump-unit",
+      "path": "assets/dlc/aliens-1986/v121/furniture/service-pump-unit.png",
+      "source": [
+        105,
+        80,
+        981,
+        1166
+      ],
+      "destination": [
+        -74.99686106346485,
+        -178.28000000000003,
+        149.9937221269297,
+        178.28000000000003
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        350.5,
+        394.8599853515625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        140,
+        432.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        152,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1238,
+        459.3599853515625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        106,
+        481.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        118,
+        438.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "door-leaf",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "source": [
+        419.3952879581152,
+        38,
+        184.20942408376962,
+        1466
+      ],
+      "destination": [
+        612,
+        197.51999999999998,
+        36,
+        286.5
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        464,
+        529.02001953125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "engineering-case-stocked",
+      "path": "assets/dlc/aliens-1986/v118/props/engineering-case-stocked.png",
+      "source": [
+        24,
+        108,
+        1480,
+        857
+      ],
+      "destination": [
+        -26,
+        -30.11081081081081,
+        52,
+        30.11081081081081
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        837,
+        466.0400085449219
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "armament-case-closed",
+      "path": "assets/dlc/aliens-1986/v115/props/armament-case-closed.png",
+      "source": [
+        30,
+        67,
+        2110,
+        610
+      ],
+      "destination": [
+        -41.5,
+        -23.995260663507107,
+        83,
+        23.995260663507107
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        910,
+        466.8999938964844
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "service-north",
+      "x": 610,
+      "z": 0,
+      "w": 40,
+      "d": 132,
+      "h": 190
+    },
+    {
+      "id": "service-south",
+      "x": 610,
+      "z": 257,
+      "w": 40,
+      "d": 123,
+      "h": 164
+    },
+    {
+      "id": "pump-foundation",
+      "x": 275,
+      "z": 53,
+      "w": 151,
+      "d": 98,
+      "h": 94
+    },
+    {
+      "id": "transformer-plinth",
+      "x": 1000,
+      "z": 55,
+      "w": 138,
+      "d": 90,
+      "h": 141
+    },
+    {
+      "id": "cable-rack",
+      "x": 828,
+      "z": 275,
+      "w": 115,
+      "d": 72,
+      "h": 69
+    },
+    {
+      "id": "vestibule:service-to-ops:0",
+      "x": 0,
+      "z": 146,
+      "w": 80,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:service-to-ops:1",
+      "x": 0,
+      "z": 232,
+      "w": 80,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:service-to-medlab:0",
+      "x": 1334,
+      "z": 276,
+      "w": 106,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:service-to-medlab:1",
+      "x": 1334,
+      "z": 362,
+      "w": 106,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:service-to-reserve:0",
+      "x": 1251,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:service-to-reserve:1",
+      "x": 1337,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "relay-console",
+      "x": 1238,
+      "z": 226,
+      "support": "pied de l’armoire de relais",
+      "type": "console",
+      "circuit": "network"
+    },
+    {
+      "id": "service-console",
+      "x": 464,
+      "z": 307,
+      "support": "sol de maintenance",
+      "type": "console"
+    },
+    {
+      "id": "pump-pipes",
+      "x": 316,
+      "z": 40,
+      "support": "mur au-dessus du socle de pompage",
+      "type": "pipe"
+    },
+    {
+      "id": "service-lamp",
+      "x": 702,
+      "z": 24,
+      "support": "poutre nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "transformer-cable",
+      "x": 1058,
+      "z": 28,
+      "support": "mur au-dessus du transformateur",
+      "type": "pipe"
+    },
+    {
+      "id": "service-crate",
+      "x": 837,
+      "z": 314,
+      "support": "table basse de câblage",
+      "supportId": "cable-rack",
+      "elevation": 69,
+      "type": "crate"
+    },
+    {
+      "id": "v114-incinerator-case",
+      "x": 910,
+      "z": 315,
+      "supportId": "cable-rack",
+      "elevation": 69,
+      "support": "table de câblage · compartiment incinerator",
+      "type": "armament-case",
+      "arsenalId": "service-incinerator"
+    }
+  ],
+  "sourceImageCount": 10
+}

@@ -8,6 +8,12 @@ on:
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
+      - 'docs/development/aliens-1986-sprites-v118/**'
+      - 'docs/development/aliens-1986-sprites-v119/**'
+      - 'docs/development/aliens-1986-sprites-v120/**'
+      - 'docs/development/aliens-1986-sprites-v121/**'
+      - 'docs/development/aliens-1986-sprites-v122/**'
+      - 'docs/development/aliens-1986-sprites-v123/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -27,6 +33,12 @@ on:
       - 'assets/dlc/aliens-1986/**'
       - 'docs/development/aliens-1986-sprites-v116/**'
       - 'docs/development/aliens-1986-sprites-v117/**'
+      - 'docs/development/aliens-1986-sprites-v118/**'
+      - 'docs/development/aliens-1986-sprites-v119/**'
+      - 'docs/development/aliens-1986-sprites-v120/**'
+      - 'docs/development/aliens-1986-sprites-v121/**'
+      - 'docs/development/aliens-1986-sprites-v122/**'
+      - 'docs/development/aliens-1986-sprites-v123/**'
       - 'scripts/*aliens1986*'
       - 'scripts/build.mjs'
       - 'scripts/dev.mjs'
@@ -79,6 +91,30 @@ jobs:
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v117.py \
             --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v117"
+      - name: Inspect V118 supports and sentry directions with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-props-v118.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/props-v118"
+      - name: Inspect V119 furniture and supported props with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-furniture-v119.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/furniture-v119"
+      - name: Inspect V120 worktops, cabinets, reused rack and display bank
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-furniture-v120.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/furniture-v120"
+      - name: Inspect V121 generator, pump, exchangers and supported valve indicator
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-furniture-v121.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/furniture-v121"
+      - name: Inspect V122 fidelity atlas images on desktop and mobile
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-atlas-v122.py \
+            --root dist --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/atlas-v122"
+      - name: Inspect V123 sentry directions and routed Warrior with the real renderer
+        run: |
+          "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-directions-v123.py \
+            --source-root . --output "$RUNNER_TEMP/aliens1986-evidence/directions-v123"
       - name: Exercise served raster drawing, doors, saves and title navigation
         run: |
           "$RUNNER_TEMP/aliens1986-playwright/bin/python" -B scripts/qa-aliens1986-integration.py \

@@ -1,0 +1,164 @@
+{
+  "schema": "aliens1986-raster-supplement-v120",
+  "version": 120,
+  "presentationVersion": 120,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "168b6b489af1469bde620c108c8abed06d469f88",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v118/manifest.json",
+      "sha256": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+      "assetCount": 11
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/manifest.json",
+      "sha256": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0",
+      "assetCount": 6
+    }
+  ],
+  "counts": {
+    "base": 147,
+    "added": 4,
+    "total": 151
+  },
+  "addedBytes": 9483622,
+  "filmFidelityValidated": false,
+  "notes": [
+    "Four individual new furniture images plus the existing V119 operations-storage-rack cover six existing V114 scene bodies.",
+    "The utility-storage-cabinet image is shared by the reserve and optics cabinets; the reused V119 rack is not counted again.",
+    "Native PNG bytes and alpha are preserved; imagegen performed the two targeted revisions, with no pixel editing, resampling or alpha normalization outside imagegen.",
+    "Presentation and supported-prop ordering only; simulation geometry, actors, gameplay and save schema are preserved.",
+    "Production concepts and set photographs provide contextual references; film-exact fidelity remains unverified.",
+    "Small edge fringes can remain at high magnification. Integration results belong to the separate verification report.",
+    "Historical missing poses and sources remain open; the new images are not claimed as recovered historical bytes."
+  ],
+  "assets": [
+    {
+      "id": "reserve-medical-counter",
+      "path": "assets/dlc/aliens-1986/v120/furniture/reserve-medical-counter.png",
+      "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+      "bytes": 2189660,
+      "width": 1430,
+      "height": 1100,
+      "bbox": [
+        26,
+        73,
+        1403,
+        1042
+      ],
+      "pivot": [
+        714.5,
+        1042
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Réserve — comptoir médical",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "utility-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+      "sha256": "32dc32cb649abe861e3dc5de7ea8aa103d210f2e26b8fecb43394f0003f19a04",
+      "bytes": 2601946,
+      "width": 1181,
+      "height": 1332,
+      "bbox": [
+        12,
+        22,
+        1169,
+        1312
+      ],
+      "pivot": [
+        590.5,
+        1312
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Réserve et atelier — armoire utilitaire",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "optics-workbench",
+      "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+      "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+      "bytes": 1963841,
+      "width": 1457,
+      "height": 1080,
+      "bbox": [
+        78,
+        48,
+        1379,
+        1040
+      ],
+      "pivot": [
+        728.5,
+        1040
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Atelier — établi optique",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA"
+    },
+    {
+      "id": "operations-display-bank",
+      "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+      "sha256": "5797356b3f0265ee665a3baa936c124ffc24527a6aab5601487b83ef5de2c832",
+      "bytes": 2728175,
+      "width": 1274,
+      "height": 1235,
+      "bbox": [
+        15,
+        15,
+        1260,
+        1222
+      ],
+      "pivot": [
+        637.5,
+        1222
+      ],
+      "bboxStatus": "alpha128-measured",
+      "label": "Operations — banque d’affichage",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "frameCount": 1,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v120-native-imagegen-generation",
+      "pixelMode": "RGBA"
+    }
+  ]
+}

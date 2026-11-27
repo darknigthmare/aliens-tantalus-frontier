@@ -1,0 +1,523 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v106-medlab",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 10,
+    "loaded": 10,
+    "failed": 0,
+    "draws": 48,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 10,
+    "used": [
+      "door-leaf",
+      "hicks-idle-right",
+      "m41a-pulse-rifle",
+      "medlab-bed",
+      "medlab-storage-cabinet",
+      "newt-idle-right",
+      "operations-console",
+      "ripley-idle-right",
+      "specimen-jar",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        454,
+        121.0999984741211
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "specimen-jar",
+      "path": "assets/dlc/aliens-1986/v115/props/specimen-jar.png",
+      "source": [
+        132,
+        8,
+        831,
+        1518
+      ],
+      "destination": [
+        -27.5,
+        -100.46931407942239,
+        55,
+        100.46931407942239
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1132,
+        311.44000244140625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "specimen-jar",
+      "path": "assets/dlc/aliens-1986/v115/props/specimen-jar.png",
+      "source": [
+        132,
+        8,
+        831,
+        1518
+      ],
+      "destination": [
+        -27.5,
+        -100.46931407942239,
+        55,
+        100.46931407942239
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1245,
+        311.44000244140625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "medlab-storage-cabinet",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-storage-cabinet.png",
+      "source": [
+        33,
+        9,
+        842,
+        1712
+      ],
+      "destination": [
+        -47,
+        -191.12589073634203,
+        94,
+        191.12589073634203
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        952,
+        363.8999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "medlab-bed",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+      "source": [
+        27,
+        80,
+        1510,
+        850
+      ],
+      "destination": [
+        -80,
+        -90.06622516556291,
+        160,
+        90.06622516556291
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        420,
+        386.260009765625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        243,
+        437
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        255,
+        394
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        180,
+        450.760009765625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        192,
+        407.760009765625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "door-leaf",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "source": [
+        440.5997023809524,
+        38,
+        141.8005952380952,
+        1466
+      ],
+      "destination": [
+        692,
+        220.38,
+        26,
+        268.8
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "newt-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/newt-idle-right.png",
+      "source": [
+        270,
+        13,
+        394,
+        1519
+      ],
+      "destination": [
+        -8.559578670177748,
+        -66,
+        17.119157340355496,
+        66
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        175,
+        492.8999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        462,
+        527.2999877929688
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "medlab-bed",
+      "path": "assets/dlc/aliens-1986/v119/furniture/medlab-bed.png",
+      "source": [
+        27,
+        80,
+        1510,
+        850
+      ],
+      "destination": [
+        -72.5,
+        -81.6225165562914,
+        145,
+        81.6225165562914
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1137.5,
+        556.5399780273438
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "glass-north",
+      "x": 690,
+      "z": 0,
+      "w": 30,
+      "d": 133,
+      "h": 144,
+      "material": "glass",
+      "blocksSight": false
+    },
+    {
+      "id": "glass-south",
+      "x": 690,
+      "z": 263,
+      "w": 30,
+      "d": 117,
+      "h": 144,
+      "material": "glass",
+      "blocksSight": false
+    },
+    {
+      "id": "bed-west",
+      "x": 340,
+      "z": 67,
+      "w": 160,
+      "d": 74,
+      "h": 42,
+      "material": "medical"
+    },
+    {
+      "id": "med-cabinet",
+      "x": 905,
+      "z": 32,
+      "w": 94,
+      "d": 83,
+      "h": 124,
+      "material": "medical"
+    },
+    {
+      "id": "bed-east",
+      "x": 1065,
+      "z": 257,
+      "w": 145,
+      "d": 82,
+      "h": 42,
+      "material": "medical"
+    },
+    {
+      "id": "vestibule:medlab-to-ops:0",
+      "x": 0,
+      "z": 150,
+      "w": 80,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-ops:1",
+      "x": 0,
+      "z": 236,
+      "w": 80,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-service:0",
+      "x": 1271,
+      "z": 0,
+      "w": 12,
+      "d": 89,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-service:1",
+      "x": 1357,
+      "z": 0,
+      "w": 12,
+      "d": 89,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-conduit:0",
+      "x": 231,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-conduit:1",
+      "x": 317,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-drain:0",
+      "x": 811,
+      "z": 317,
+      "w": 12,
+      "d": 63,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:medlab-to-drain:1",
+      "x": 897,
+      "z": 317,
+      "w": 12,
+      "d": 63,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "med-console",
+      "x": 462,
+      "z": 305,
+      "support": "sol de la baie",
+      "type": "console"
+    },
+    {
+      "id": "med-lamp",
+      "x": 454,
+      "z": 35,
+      "support": "rail mural",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "tank-a",
+      "x": 1132,
+      "z": 54,
+      "support": "socle laboratoire",
+      "type": "tank"
+    },
+    {
+      "id": "tank-b",
+      "x": 1245,
+      "z": 54,
+      "support": "socle laboratoire",
+      "type": "tank"
+    }
+  ],
+  "sourceImageCount": 10
+}

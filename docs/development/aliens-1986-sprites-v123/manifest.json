@@ -1,0 +1,133 @@
+{
+  "schema": "aliens1986-raster-supplement-v123",
+  "version": 123,
+  "presentationVersion": 123,
+  "date": "2026-11-26",
+  "film": "Aliens (1986)",
+  "sourceCommit": "870a95c9f319f3caaa5f76498cbfb2e0f7be5dbf",
+  "baseManifests": [
+    {
+      "path": "docs/development/aliens-1986-sprites-v116/manifest.json",
+      "sha256": "b9213752445a01e293f44bccface374d3d3882e8ae071baefaa75bf04d589af6",
+      "assetCount": 123
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v117/manifest.json",
+      "sha256": "09df948f5ee55c2b9b2494924475b7113468edddfa4d803caaf1323ee4804a62",
+      "assetCount": 7
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v118/manifest.json",
+      "sha256": "ba671cbbd67b8d16fe7b1173fb0f61240e05d0379431589b35a7a81dec963d9e",
+      "assetCount": 11
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/manifest.json",
+      "sha256": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0",
+      "assetCount": 6
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v120/manifest.json",
+      "sha256": "a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437",
+      "assetCount": 4
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v121/manifest.json",
+      "sha256": "80424f4dd7a15fc56759c428d88917e7c2a5b713260c41244184fe6f62906f90",
+      "assetCount": 4
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v122/manifest.json",
+      "sha256": "6579c0f0bd346cb2849e7261b5edce061c495636e7119dd82352cbcfcf5ff780",
+      "assetCount": 9
+    }
+  ],
+  "counts": {
+    "base": 164,
+    "added": 2,
+    "total": 166
+  },
+  "addedBytes": 3419489,
+  "filmFidelityValidated": false,
+  "assets": [
+    {
+      "id": "sentry-aim-front",
+      "path": "assets/dlc/aliens-1986/v123/equipment/sentry-aim-front.png",
+      "sha256": "f32141090ca966b7644185878342a2d95f4eea05b472e9c44344a7cb779125f7",
+      "bytes": 1617328,
+      "width": 1536,
+      "height": 1024,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        335,
+        10,
+        1201,
+        1012
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        768,
+        1012
+      ],
+      "label": "Sentinelle UA 571-C — visée frontale",
+      "category": "equipment",
+      "pose": "front",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-v118-sentry-sector-2",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v123-native-imagegen-reference-edit",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "warrior-walk-right",
+      "path": "assets/dlc/aliens-1986/v123/creatures/warrior-walk-right.png",
+      "sha256": "7ba739ff6f7b6e78ed43306015cbb26cccf3f4d2ad5b48f0b4afc09494ddcdc2",
+      "bytes": 1802161,
+      "width": 1536,
+      "height": 1024,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        38,
+        33,
+        1494,
+        988
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        1090,
+        988
+      ],
+      "label": "Warrior — pose de marche vers la droite",
+      "category": "creatures",
+      "pose": "walk",
+      "runtimeEligible": true,
+      "runtimeUse": "existing-v116-creature-route-selector",
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v123-native-imagegen-reference-edit",
+      "nativeBytesPreserved": true,
+      "publicationOrigin": "new-generation-20261126",
+      "alphaRange": [
+        0,
+        254
+      ]
+    }
+  ],
+  "notes": [
+    "Native PNG bytes, dimensions, aspect ratio and alpha preserved. One asset per image.",
+    "The existing V118 sentry selector already names sentry-aim-front; V123 supplies that missing entry.",
+    "The existing V116 creature selector already names warrior-walk-right; this is one static contact pose, not a full animation cycle.",
+    "Native alpha maximum is 254 for both images; low-opacity fringe pixels are preserved without normalization.",
+    "Film-exact 1:1 fidelity remains unvalidated. Gameplay geometry, combat, campaign progression and saves are unchanged."
+  ]
+}

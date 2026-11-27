@@ -1,0 +1,1069 @@
+{
+  "schema": "aliens1986-furniture-verification-v120",
+  "timestampUtc": "2026-11-26T13:16:06.003863+00:00",
+  "baseCommit": "168b6b489af1469bde620c108c8abed06d469f88",
+  "scope": "Four new PNGs, six explicit furniture placements, two terminal supports; V114 gameplay and all previous raster image bytes preserved.",
+  "counts": {
+    "base": 147,
+    "added": 4,
+    "total": 151
+  },
+  "sourceHashes": {
+    "scripts/derive-aliens1986-raster-v116.mjs": "f89c27738cdf6dca374bb2f1b4aee9734199324c6c7f1e0242eda49d5b2af189",
+    "scripts/public-aliens1986-dlc-admissions.mjs": "77264295454115cec8bea73ac74c0b8e79b66d38f7ea77250c8dbeb25d7141b1",
+    "scripts/verify-aliens1986-dlc-integration.mjs": "4b7a2e671a82c804f4b4fb136729a008fb1a51f0be066ee371c72deab151d72a",
+    "scripts/verify-aliens1986-raster-presentation-v116.mjs": "25be4bff4db919c304b576c948f74630da05e0c28ac34862e37055aca2bd5093",
+    "scripts/verify-aliens1986-raster-furniture-v120.mjs": "467af697860b8e80afa302600b7b2698da9332cbcd312eecf1dd148d250945c9",
+    "scripts/qa-aliens1986-furniture-v120.py": "89f2ea99d5bc0a494e02f626183c3f79f47a4d7fa30ddaaa9cf39a503873adb3",
+    "modules/aliens-1986/v120/raster-furniture-v120.mjs": "c725d9f7e40ab4f1f86609d69ccacfd94a9b8e28d5e704db5f721668846aec4b",
+    "docs/development/aliens-1986-sprites-v120/manifest.json": "a9e47d98744b2ffe18199ef0e00bc9879379d66b442736d46031c6761ae89437"
+  },
+  "nodeTests": {
+    "command": "npm run test:dlc:aliens1986",
+    "exitCode": 0,
+    "historicalTests": {
+      "passed": 665,
+      "failed": 0
+    },
+    "runnerTests": {
+      "passed": 32,
+      "failed": 0
+    },
+    "presentationAssertions": {
+      "total": 162,
+      "v116": 31,
+      "v118": 35,
+      "v119": 42,
+      "v120": 54,
+      "includedInRunner": true
+    },
+    "logSha256": "f93d667575b51c54d13f39b9224beaae9bc70560411421412cece872117a4e4d"
+  },
+  "sourceAdmissions": {
+    "command": "npm run check:dlc:aliens1986",
+    "exitCode": 0,
+    "recoveredFiles": 1159,
+    "recoveredBytes": 135643835,
+    "rasterAssets": 151,
+    "logSha256": "0b6d930dbb51274d50c6e9aa8e879417c5c5f0f3300bfea961d86687762080dc"
+  },
+  "deterministicDerivative": {
+    "sha256": "a27d878a6317cc70a91efafc02f5c229e1f86365d0dcaa081961cdff5072af11",
+    "originalV114HtmlSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+    "assetRevision": 120,
+    "presentationExtensionRevision": 120,
+    "saveSchema": 114,
+    "twoIndependentBuildsEqual": true,
+    "includedInRunner": true
+  },
+  "nativeCanvas": {
+    "engine": "@napi-rs/canvas (Skia), Node; this is not Chromium",
+    "execution": "Node/Skia, with DOM and fetch doubles; original renderer and browser fixture assertions. Only caBX provenance chunks omitted from transient decoder buffers. Source PNG pixels and bytes unchanged. This is not Chromium.",
+    "checks": [
+      {
+        "name": "Six exact furniture placements use four new images and one reused rack",
+        "pass": true
+      },
+      {
+        "name": "Real decoded dimensions match source manifests",
+        "pass": true
+      },
+      {
+        "name": "Furniture uses one uniform scale within each native envelope",
+        "pass": true
+      },
+      {
+        "name": "Furniture keeps the native center/front-ground anchors",
+        "pass": true
+      },
+      {
+        "name": "No furniture PNG is clipped by a native room canvas",
+        "pass": true
+      },
+      {
+        "name": "Both terminals follow their own worktop exactly once",
+        "pass": true
+      },
+      {
+        "name": "Every measured prop contact lies inside the actual source tabletop polygon",
+        "pass": true
+      },
+      {
+        "name": "Every contact rests on opaque pixels of the original tabletop",
+        "pass": true
+      },
+      {
+        "name": "Supported prop pivots preserve physical x/z/elevation",
+        "pass": true
+      },
+      {
+        "name": "Native occlusion alpha applies to table and attached terminal",
+        "pass": true
+      },
+      {
+        "name": "No scene, collider, support, actor or save state changed during rendering",
+        "pass": true
+      },
+      {
+        "name": "Unavailable V120 furniture gives an exact baseline pixel fallback",
+        "pass": true
+      },
+      {
+        "name": "Six admitted bodies no longer draw their native box surface",
+        "pass": true
+      },
+      {
+        "name": "Unrelated structural boxes remain on the native renderer",
+        "pass": true
+      },
+      {
+        "name": "All requested images finish decoding without errors",
+        "pass": true
+      },
+      {
+        "name": "Actual V119 worktop-prop ordering defect is reproduced in the baseline",
+        "pass": true
+      }
+    ],
+    "placements": [
+      {
+        "room": "v109-reserve",
+        "body": {
+          "id": "medical-counter",
+          "x": 835,
+          "z": 65,
+          "w": 188,
+          "d": 90,
+          "h": 67
+        },
+        "asset": "reserve-medical-counter",
+        "label": "Réserve · comptoir médical",
+        "draw": {
+          "kind": "image",
+          "id": "reserve-medical-counter",
+          "path": "assets/dlc/aliens-1986/v120/furniture/reserve-medical-counter.png",
+          "naturalWidth": 1430,
+          "naturalHeight": 1100,
+          "source": [
+            26,
+            73,
+            1377,
+            969
+          ],
+          "destination": [
+            -94,
+            -132.2962962962963,
+            188,
+            132.2962962962963
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            929,
+            398.29998779296875
+          ],
+          "bounds": {
+            "left": 835,
+            "right": 1023,
+            "top": 266.00369149667245,
+            "bottom": 398.29998779296875
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 929,
+          "y": 398.3
+        },
+        "nativeEnvelope": {
+          "width": 188,
+          "height": 144.40000000000003
+        },
+        "imageFootprint": {
+          "width": 188,
+          "height": 132.2962962962963
+        },
+        "detailCrop": {
+          "x": 789,
+          "y": 193.3,
+          "w": 280,
+          "h": 220
+        }
+      },
+      {
+        "room": "v109-reserve",
+        "body": {
+          "id": "reserve-cabinet",
+          "x": 967,
+          "z": 282,
+          "w": 157,
+          "d": 67,
+          "h": 119
+        },
+        "asset": "utility-storage-cabinet",
+        "label": "Réserve · armoire",
+        "draw": {
+          "kind": "image",
+          "id": "utility-storage-cabinet",
+          "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+          "naturalWidth": 1181,
+          "naturalHeight": 1332,
+          "source": [
+            12,
+            22,
+            1157,
+            1290
+          ],
+          "destination": [
+            -78.5,
+            -175.04753673293,
+            157,
+            175.04753673293
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            1045.5,
+            565.1400146484375
+          ],
+          "bounds": {
+            "left": 967,
+            "right": 1124,
+            "top": 390.0924779155075,
+            "bottom": 565.1400146484375
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 1045.5,
+          "y": 565.14
+        },
+        "nativeEnvelope": {
+          "width": 157,
+          "height": 176.62
+        },
+        "imageFootprint": {
+          "width": 157,
+          "height": 175.04753673292998
+        },
+        "detailCrop": {
+          "x": 905.5,
+          "y": 360.14,
+          "w": 280,
+          "h": 220
+        }
+      },
+      {
+        "room": "v112-workshop",
+        "body": {
+          "id": "optics-bench",
+          "x": 308,
+          "z": 62,
+          "w": 184,
+          "d": 83,
+          "h": 65
+        },
+        "asset": "optics-workbench",
+        "label": "Atelier · établi optique",
+        "draw": {
+          "kind": "image",
+          "id": "optics-workbench",
+          "path": "assets/dlc/aliens-1986/v120/furniture/optics-workbench.png",
+          "naturalWidth": 1457,
+          "naturalHeight": 1080,
+          "source": [
+            78,
+            48,
+            1301,
+            992
+          ],
+          "destination": [
+            -89.43063508064516,
+            -136.38,
+            178.86127016129032,
+            136.38
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            400,
+            389.70001220703125
+          ],
+          "bounds": {
+            "left": 310.5693649193548,
+            "right": 489.4306350806452,
+            "top": 253.32001220703125,
+            "bottom": 389.70001220703125
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 400,
+          "y": 389.7
+        },
+        "nativeEnvelope": {
+          "width": 184,
+          "height": 136.38
+        },
+        "imageFootprint": {
+          "width": 178.86127016129035,
+          "height": 136.38
+        },
+        "detailCrop": {
+          "x": 260,
+          "y": 184.7,
+          "w": 280,
+          "h": 220
+        }
+      },
+      {
+        "room": "v112-workshop",
+        "body": {
+          "id": "optics-cabinet",
+          "x": 965,
+          "z": 288,
+          "w": 136,
+          "d": 65,
+          "h": 98
+        },
+        "asset": "utility-storage-cabinet",
+        "label": "Atelier · armoire",
+        "draw": {
+          "kind": "image",
+          "id": "utility-storage-cabinet",
+          "path": "assets/dlc/aliens-1986/v120/furniture/utility-storage-cabinet.png",
+          "naturalWidth": 1181,
+          "naturalHeight": 1332,
+          "source": [
+            12,
+            22,
+            1157,
+            1290
+          ],
+          "destination": [
+            -68,
+            -151.63353500432152,
+            136,
+            151.63353500432152
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            1033,
+            568.5800170898438
+          ],
+          "bounds": {
+            "left": 965,
+            "right": 1101,
+            "top": 416.94648208552223,
+            "bottom": 568.5800170898438
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 1033,
+          "y": 568.5799999999999
+        },
+        "nativeEnvelope": {
+          "width": 136,
+          "height": 153.89999999999986
+        },
+        "imageFootprint": {
+          "width": 136,
+          "height": 151.63353500432152
+        },
+        "detailCrop": {
+          "x": 893,
+          "y": 363.5799999999999,
+          "w": 280,
+          "h": 220
+        }
+      },
+      {
+        "room": "v106-hadley",
+        "body": {
+          "id": "service-rack",
+          "x": 1100,
+          "z": 40,
+          "w": 94,
+          "d": 62,
+          "h": 130
+        },
+        "asset": "operations-storage-rack",
+        "label": "Hadley · rangement de service (image V119)",
+        "draw": {
+          "kind": "image",
+          "id": "operations-storage-rack",
+          "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+          "naturalWidth": 948,
+          "naturalHeight": 1659,
+          "source": [
+            12,
+            9,
+            924,
+            1639
+          ],
+          "destination": [
+            -47,
+            -166.73809523809524,
+            94,
+            166.73809523809524
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            1147,
+            352.7200012207031
+          ],
+          "bounds": {
+            "left": 1100,
+            "right": 1194,
+            "top": 185.98190598260788,
+            "bottom": 352.7200012207031
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 1147,
+          "y": 352.72
+        },
+        "nativeEnvelope": {
+          "width": 94,
+          "height": 183.32000000000005
+        },
+        "imageFootprint": {
+          "width": 94,
+          "height": 166.73809523809524
+        },
+        "detailCrop": {
+          "x": 1007,
+          "y": 147.72000000000003,
+          "w": 280,
+          "h": 220
+        }
+      },
+      {
+        "room": "v107-operations",
+        "body": {
+          "id": "ops-display",
+          "x": 1054,
+          "z": 68,
+          "w": 174,
+          "d": 71,
+          "h": 103
+        },
+        "asset": "operations-display-bank",
+        "label": "Operations · bloc d’affichage",
+        "draw": {
+          "kind": "image",
+          "id": "operations-display-bank",
+          "path": "assets/dlc/aliens-1986/v120/furniture/operations-display-bank.png",
+          "naturalWidth": 1274,
+          "naturalHeight": 1235,
+          "source": [
+            15,
+            15,
+            1245,
+            1207
+          ],
+          "destination": [
+            -84.61255178127585,
+            -164.05999999999995,
+            169.2251035625517,
+            164.05999999999995
+          ],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            1141,
+            384.5400085449219
+          ],
+          "bounds": {
+            "left": 1056.387448218724,
+            "right": 1225.612551781276,
+            "top": 220.48000854492193,
+            "bottom": 384.5400085449219
+          },
+          "alpha": 1
+        },
+        "expectedGround": {
+          "x": 1141,
+          "y": 384.53999999999996
+        },
+        "nativeEnvelope": {
+          "width": 174,
+          "height": 164.05999999999995
+        },
+        "imageFootprint": {
+          "width": 169.2251035625518,
+          "height": 164.05999999999995
+        },
+        "detailCrop": {
+          "x": 1001,
+          "y": 179.53999999999996,
+          "w": 280,
+          "h": 220
+        }
+      }
+    ],
+    "contacts": [
+      {
+        "roomId": "v109-reserve",
+        "propId": "reserve-monitor",
+        "propAsset": "medical-counter-terminal",
+        "bodyId": "medical-counter",
+        "tableAsset": "reserve-medical-counter",
+        "propCoordinates": {
+          "x": 922,
+          "z": 111,
+          "elevation": 67
+        },
+        "nativeFoot": {
+          "x": 922,
+          "y": 293.46
+        },
+        "contacts": [
+          {
+            "propSource": [
+              133,
+              915
+            ],
+            "screen": [
+              889.4732510288065,
+              292.1760408377942
+            ],
+            "tableSource": [
+              424.987588652482,
+              264.69853746130116
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1269,
+              921
+            ],
+            "screen": [
+              950.2469135802469,
+              292.4970284921152
+            ],
+            "tableSource": [
+              870.1223404255318,
+              267.0496012910886
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1368,
+              914
+            ],
+            "screen": [
+              955.5432098765432,
+              292.1225428954074
+            ],
+            "tableSource": [
+              908.9148936170211,
+              264.30669348967024
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          }
+        ],
+        "order": {
+          "furnitureIndex": 6,
+          "propIndex": 7,
+          "propCount": 1
+        },
+        "sourceTopPlane": {
+          "sha256": "9712d15acb9a376c2700825db15081a70ec51823281f568bd3571328a8ebe973",
+          "polygon": [
+            [
+              165,
+              95
+            ],
+            [
+              1270,
+              95
+            ],
+            [
+              1355,
+              425
+            ],
+            [
+              75,
+              425
+            ]
+          ],
+          "frontApronBottomY": 493
+        },
+        "frontApron": {
+          "screen": [
+            929,
+            323.3457394269557
+          ],
+          "heightAboveGround": 74.95426057304434,
+          "nativeBodyHeight": 67,
+          "difference": 7.954260573044337
+        },
+        "method": "Left, median and right actual alpha>=128 pixels on the lower contour within the bottom 3% (at least 12 rows), mapped through real draw transforms into a reviewed tabletop polygon; tabletop pixels must also have alpha>=128. The front apron height is a separate diagnostic, not a support plane test."
+      },
+      {
+        "roomId": "v112-workshop",
+        "propId": "optics-console",
+        "propAsset": "optics-calibration-terminal",
+        "bodyId": "optics-bench",
+        "tableAsset": "optics-workbench",
+        "propCoordinates": {
+          "x": 398,
+          "z": 103,
+          "elevation": 65
+        },
+        "nativeFoot": {
+          "x": 398,
+          "y": 288.58
+        },
+        "contacts": [
+          {
+            "propSource": [
+              150,
+              906
+            ],
+            "screen": [
+              364.1864406779661,
+              287.3370487191583
+            ],
+            "tableSource": [
+              467.9995538388502,
+              295.43290966439383
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1245,
+              909
+            ],
+            "screen": [
+              426.0508474576271,
+              287.506540244582
+            ],
+            "tableSource": [
+              917.9884930192558,
+              296.6657560731073
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1358,
+              905
+            ],
+            "screen": [
+              432.43502824858757,
+              287.28055154401704
+            ],
+            "tableSource": [
+              964.425707747462,
+              295.0219608614893
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          }
+        ],
+        "order": {
+          "furnitureIndex": 5,
+          "propIndex": 6,
+          "propCount": 1
+        },
+        "sourceTopPlane": {
+          "sha256": "1889865deb25a364078db2264e9309efc579b14e4b3dc2f29ec0596842430c95",
+          "polygon": [
+            [
+              125,
+              100
+            ],
+            [
+              1325,
+              100
+            ],
+            [
+              1325,
+              500
+            ],
+            [
+              125,
+              500
+            ]
+          ],
+          "frontApronBottomY": 692
+        },
+        "frontApron": {
+          "screen": [
+            400,
+            341.85702833606354
+          ],
+          "heightAboveGround": 47.84297166393645,
+          "nativeBodyHeight": 65,
+          "difference": -17.157028336063547
+        },
+        "method": "Left, median and right actual alpha>=128 pixels on the lower contour within the bottom 3% (at least 12 rows), mapped through real draw transforms into a reviewed tabletop polygon; tabletop pixels must also have alpha>=128. The front apron height is a separate diagnostic, not a support plane test."
+      }
+    ],
+    "fallbackComparison": {
+      "channelsCompared": 3686400,
+      "differingChannels": 0
+    },
+    "fixtureStates": [
+      {
+        "id": "v109-reserve",
+        "roomId": "v109-reserve",
+        "preparedOcclusion": false,
+        "baseline": false,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 15,
+          "loaded": 15,
+          "failed": 0,
+          "draws": 58,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 15,
+          "used": [
+            "alarm-unit",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "medical-counter-terminal",
+            "reserve-medical-counter",
+            "reserve-service-locker",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "supply-case",
+            "supply-case-ammo-closed",
+            "utility-storage-cabinet",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "v112-workshop",
+        "roomId": "v112-workshop",
+        "preparedOcclusion": false,
+        "baseline": false,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 12,
+          "loaded": 12,
+          "failed": 0,
+          "draws": 50,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 12,
+          "used": [
+            "beacon-case-closed",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "optics-calibration-terminal",
+            "optics-workbench",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "utility-storage-cabinet",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "v106-hadley",
+        "roomId": "v106-hadley",
+        "preparedOcclusion": false,
+        "baseline": false,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 9,
+          "loaded": 9,
+          "failed": 0,
+          "draws": 42,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 9,
+          "used": [
+            "door-leaf",
+            "hicks-idle-right",
+            "hudson-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "operations-console",
+            "operations-storage-rack",
+            "ripley-idle-right",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "v107-operations",
+        "roomId": "v107-operations",
+        "preparedOcclusion": false,
+        "baseline": false,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 11,
+          "loaded": 11,
+          "failed": 0,
+          "draws": 48,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 11,
+          "used": [
+            "cargo-crate",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "operations-command-table",
+            "operations-console",
+            "operations-display-bank",
+            "operations-storage-rack",
+            "operations-table-terminal",
+            "ripley-idle-right",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "reserve-occlusion",
+        "roomId": "v109-reserve",
+        "preparedOcclusion": true,
+        "baseline": false,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 15,
+          "loaded": 15,
+          "failed": 0,
+          "draws": 56,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 15,
+          "used": [
+            "alarm-unit",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "medical-counter-terminal",
+            "reserve-medical-counter",
+            "reserve-service-locker",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "supply-case",
+            "supply-case-ammo-closed",
+            "utility-storage-cabinet",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "reserve-baseline",
+        "roomId": "v109-reserve",
+        "preparedOcclusion": false,
+        "baseline": true,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 13,
+          "loaded": 13,
+          "failed": 0,
+          "draws": 48,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 13,
+          "used": [
+            "alarm-unit",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "medical-counter-terminal",
+            "reserve-service-locker",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "supply-case",
+            "supply-case-ammo-closed",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "reserve-unavailable",
+        "roomId": "v109-reserve",
+        "preparedOcclusion": false,
+        "baseline": false,
+        "unavailable": true,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 13,
+          "loaded": 13,
+          "failed": 0,
+          "draws": 48,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 13,
+          "used": [
+            "alarm-unit",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "medical-counter-terminal",
+            "reserve-service-locker",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "supply-case",
+            "supply-case-ammo-closed",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      },
+      {
+        "id": "workshop-baseline",
+        "roomId": "v112-workshop",
+        "preparedOcclusion": false,
+        "baseline": true,
+        "unavailable": false,
+        "stateUnchanged": true,
+        "resourceStatus": {
+          "version": 116,
+          "requested": 10,
+          "loaded": 10,
+          "failed": 0,
+          "draws": 40,
+          "evicted": 0,
+          "measured": 2,
+          "decoded": 10,
+          "used": [
+            "beacon-case-closed",
+            "door-leaf",
+            "hicks-idle-right",
+            "industrial-pipe",
+            "m41a-pulse-rifle",
+            "optics-calibration-terminal",
+            "ripley-idle-right",
+            "service-control-pedestal",
+            "wall-light"
+          ],
+          "errors": {}
+        }
+      }
+    ],
+    "pngsVerifiedByPreflight": 151,
+    "contactPointCount": 6,
+    "contactAlphaValues": [
+      253
+    ],
+    "occlusionAlphaRequested": 0.23,
+    "occlusionAlphaStoredBySkia": 0.22745098039215686,
+    "artifacts": [
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v106-hadley.png",
+        "bytes": 207502,
+        "sha256": "108a448655528e4f8bbc48310f2ffd4a2bde3ddc835e30f9abb3b1d7490bb52c"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v106-hadley.json",
+        "bytes": 8127,
+        "sha256": "a5309cf8290a6320b36a5dd68baea56b4371dd98a258be653e3132cb4344f4a1"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v107-operations.png",
+        "bytes": 317107,
+        "sha256": "422d99c8de3c9ee183c937e3e610db22e54427115c523c4b22c168bd3868e5c0"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v107-operations.json",
+        "bytes": 10660,
+        "sha256": "4cdaf50cd6caa163a842bed6c69cc9f933ea5bd527e1d09a0a98f5d5d31ef6aa"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v109-reserve.png",
+        "bytes": 339528,
+        "sha256": "fe3474ff971f63d74cc52b876f9e4317184d176b91b96e5a4d9379a421cbde55"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v109-reserve.json",
+        "bytes": 11215,
+        "sha256": "c206d298953b4a32f6427aa50e4d9445bf9f41e83cd22ddf1d8755d815b2acab"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v112-workshop.png",
+        "bytes": 157001,
+        "sha256": "3e9135173f9148dc8d9371336e1e6dc9ae2d2a9231a3c66b6ebe4c02b15d3329"
+      },
+      {
+        "path": "docs/development/aliens-1986-sprites-v120/qa-canvas-v112-workshop.json",
+        "bytes": 9673,
+        "sha256": "d01fc8ab056ba792a5bf8b551046f4195a5d071572c6f634c207d23a8c4b15bc"
+      }
+    ],
+    "visualReview": "Four room captures and four selected source images inspected. No selected furniture is clipped by its room canvas; original workshop lighting remains dark."
+  },
+  "browser": {
+    "localStatus": "not-run",
+    "reason": "Chromium executable is unavailable in this local environment. No local browser success is claimed.",
+    "ciStatusAtReceipt": "not-yet-published",
+    "workflow": ".github/workflows/aliens1986-dlc.yml",
+    "command": "python -B scripts/qa-aliens1986-furniture-v120.py --source-root . --output \"$RUNNER_TEMP/aliens1986-evidence/furniture-v120\"",
+    "updates": "Later CI results belong to the PR and its exact commit; this pre-publication receipt is not rewritten to claim an earlier browser run."
+  },
+  "limits": [
+    "Prepared inspection rooms and one explicit occlusion pose are used; this is not a campaign journey.",
+    "The screenshots show the real full renderer at 1280x720; enlarged details copy those exact canvas pixels.",
+    "Tabletop polygons are manually reviewed against the exact pinned PNGs and describe their visible pixels, not film measurements.",
+    "Uniform fitting preserves source aspect ratios and leaves some native collision envelopes larger than the rendered silhouette.",
+    "The original semi-opaque generated alpha is preserved; this does not certify a perfect cutout.",
+    "No exact film fidelity or completed furniture interaction system is claimed.",
+    "Small edge fringes and mostly 252–253/255 solid alpha remain from native generation. No pixel cleanup, stretching or resampling was applied.",
+    "The rendered lower front rail is distinct from the top support surface: diagnostic differences +7.95 units for the medical counter and -17.16 units for the optical bench. Six sampled contact points remain on the actual top planes.",
+    "The inherited rack is reused in Hadley at 94 × 166.74 inside its 94 × 183.32 physical envelope; no new rack image is counted."
+  ],
+  "visualWarnings": [
+    "reserve-medical-counter: bord inférieur du tablier décalé de 7.95 unités par rapport à la hauteur du corps ; les appuis sont validés séparément sur le plateau réel.",
+    "optics-workbench: bord inférieur du tablier décalé de -17.16 unités par rapport à la hauteur du corps ; les appuis sont validés séparément sur le plateau réel."
+  ],
+  "filmFidelityValidated": false
+}

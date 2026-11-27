@@ -1,0 +1,542 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v112-conduit",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 11,
+    "loaded": 11,
+    "failed": 0,
+    "draws": 40,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 11,
+    "used": [
+      "conduit-heat-exchanger",
+      "conduit-valve-plinth",
+      "door-leaf",
+      "hicks-idle-right",
+      "industrial-pipe",
+      "m41a-pulse-rifle",
+      "ripley-idle-right",
+      "service-control-pedestal",
+      "valve-indicator-panel",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        306,
+        111.63999938964844
+      ],
+      "alpha": 0.4
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1140,
+        111.63999938964844
+      ],
+      "alpha": 0.4
+    },
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        404,
+        286.5
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1089,
+        286.5
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "conduit-heat-exchanger",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+      "source": [
+        57,
+        56,
+        1095,
+        1195
+      ],
+      "destination": [
+        -90.5,
+        -197.5296803652968,
+        181,
+        197.5296803652968
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        406.5,
+        383.67999267578125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "conduit-heat-exchanger",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+      "source": [
+        57,
+        56,
+        1095,
+        1195
+      ],
+      "destination": [
+        -93.70267782426782,
+        -204.5200000000001,
+        187.40535564853565,
+        204.5200000000001
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1092,
+        383.67999267578125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        140,
+        432.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        152,
+        389.70001220703125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        106,
+        481.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        118,
+        438.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "door-leaf",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "source": [
+        427.2713300775639,
+        38,
+        168.45733984487214,
+        1466
+      ],
+      "destination": [
+        674,
+        202.95999999999998,
+        32,
+        278.48
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "service-control-pedestal",
+      "path": "assets/dlc/aliens-1986/v118/props/service-control-pedestal.png",
+      "source": [
+        192,
+        88,
+        572,
+        1477
+      ],
+      "destination": [
+        -13.577522004062288,
+        -74,
+        28.658090724441433,
+        74
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        550,
+        505.79998779296875
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "conduit-valve-plinth",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-valve-plinth.png",
+      "source": [
+        68,
+        58,
+        1138,
+        1133
+      ],
+      "destination": [
+        -62.5,
+        -124.45079086115993,
+        125,
+        124.45079086115993
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        430.5,
+        566.8599853515625
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "valve-indicator-panel",
+      "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+      "source": [
+        90,
+        78,
+        1140,
+        1037
+      ],
+      "destination": [
+        -25.758919961427196,
+        -48,
+        52.76759884281582,
+        48
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        431,
+        463.760009765625
+      ],
+      "alpha": 1
+    },
+    {
+      "source": [
+        0,
+        0
+      ],
+      "destination": [],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "conduit-north",
+      "x": 672,
+      "z": 0,
+      "w": 36,
+      "d": 136,
+      "h": 189
+    },
+    {
+      "id": "conduit-south",
+      "x": 672,
+      "z": 254,
+      "w": 36,
+      "d": 126,
+      "h": 155
+    },
+    {
+      "id": "exchanger-west",
+      "x": 316,
+      "z": 54,
+      "w": 181,
+      "d": 84,
+      "h": 127
+    },
+    {
+      "id": "valve-plinth",
+      "x": 368,
+      "z": 286,
+      "w": 125,
+      "d": 65,
+      "h": 73
+    },
+    {
+      "id": "exchanger-east",
+      "x": 995,
+      "z": 56,
+      "w": 194,
+      "d": 82,
+      "h": 134
+    },
+    {
+      "id": "conduit-south-rack",
+      "x": 942,
+      "z": 284,
+      "w": 160,
+      "d": 68,
+      "h": 115
+    },
+    {
+      "id": "vestibule:conduit-to-optics:0",
+      "x": 0,
+      "z": 146,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:conduit-to-optics:1",
+      "x": 0,
+      "z": 232,
+      "w": 76,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:conduit-to-medlab:0",
+      "x": 1354,
+      "z": 146,
+      "w": 86,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:conduit-to-medlab:1",
+      "x": 1354,
+      "z": 232,
+      "w": 86,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "conduit-control",
+      "x": 550,
+      "z": 280,
+      "support": "colonne de service",
+      "type": "console"
+    },
+    {
+      "id": "valve-indicator",
+      "x": 431,
+      "z": 316,
+      "support": "socle de vanne",
+      "supportId": "valve-plinth",
+      "elevation": 73,
+      "type": "console"
+    },
+    {
+      "id": "conduit-lamp-a",
+      "x": 306,
+      "z": 24,
+      "support": "rail de maintenance nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "conduit-lamp-b",
+      "x": 1140,
+      "z": 24,
+      "support": "rail de maintenance nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "exchanger-pipe-a",
+      "x": 404,
+      "z": 25,
+      "support": "mur au-dessus de l’échangeur",
+      "type": "pipe"
+    },
+    {
+      "id": "exchanger-pipe-b",
+      "x": 1089,
+      "z": 25,
+      "support": "mur au-dessus de l’échangeur",
+      "type": "pipe"
+    }
+  ],
+  "sourceImageCount": 11
+}

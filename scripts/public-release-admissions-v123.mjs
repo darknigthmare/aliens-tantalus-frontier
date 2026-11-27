@@ -5,6 +5,7 @@ import { join, resolve } from 'node:path';
 import { ENEMY_DRIVE_IMPORTS_V123 } from '../src/enemy-drive-imports-v123.js';
 import { PERSONNEL_DRIVE_VISUALS_V123 } from '../src/personnel-drive-visuals-v123.js';
 import { auditWeaponPngV120 } from './audit-weapon-png-v120.mjs';
+import { ALIENS1986_RASTER_SOURCE_ONLY_FILES_V123, publicAliens1986DlcPathAdmission } from './public-aliens1986-dlc-admissions.mjs';
 
 // Reviewed byte identities are independent of the runtime's mutable admission data.
 // Original files stay unchanged; documentary plates never become combat sprites.
@@ -516,10 +517,16 @@ export const PUBLIC_MEDIA_DIRECTORIES_V123 = Object.freeze([
 const paths=new Set(PUBLIC_MEDIA_FILES_V123.map(file=>file.path));
 const directories=new Set(PUBLIC_MEDIA_DIRECTORIES_V123);
 const modules=new Set(PUBLIC_RUNTIME_MODULE_PATHS_V123);
+const aliensSources=new Set(ALIENS1986_RASTER_SOURCE_ONLY_FILES_V123);
+const aliensDocs='docs/development/aliens-1986-sprites-v123';
 
-export function publicReleasePathAdmissionV123(path,{directory=false}={}) {
+export function publicReleasePathAdmissionV123(path,{directory=false,built=false}={}) {
   if(typeof path!=='string' || !path || path.includes('\\') || path.startsWith('/')
     || path.split('/').some(part=>!part || part==='.' || part==='..')) return false;
+  // The DLC's V123 is an independent namespace. Its exact source-only list
+  // also governs the strict tree walk, before the main V123 naming guard.
+  if(path===aliensDocs || path.startsWith(aliensDocs+'/') || aliensSources.has(path))
+    return publicAliens1986DlcPathAdmission(path,{directory,built});
   if(/^assets\/user\/drive-v123(?:\/|$)/i.test(path))
     return directory ? directories.has(path) : paths.has(path);
   if(modules.has(path) || path==='scripts/public-release-admissions-v123.mjs') return !directory;
@@ -537,7 +544,25 @@ async function checkedBytes(root,filename) {
   }
   return readFile(current);
 }
-export async function verifyPublicAdmissionsV123(projectRoot,{strict=false}={}) {
+/** This is the same source-tree stage used by strict media verification. It
+ * can be exercised independently of the unrelated 62 original media files. */
+export async function verifyPublicSourceTreeV123(projectRoot,{built=false}={}) {
+  const root=resolve(projectRoot);
+  assert.equal((await lstat(root)).isSymbolicLink(),false);
+  async function checkPublicTree(folder) {
+    let entries; try { entries=await readdir(join(root,folder),{withFileTypes:true}); }
+    catch(error) { if(error.code==='ENOENT')return; throw error; }
+    for(const entry of entries) {
+      const path=`${folder}/${entry.name}`;
+      assert.equal(entry.isSymbolicLink(),false,path);
+      assert.notEqual(publicReleasePathAdmissionV123(path,{directory:entry.isDirectory(),built}),false,`Unapproved V123 source: ${path}`);
+      if(entry.isDirectory()) await checkPublicTree(path);
+    }
+  }
+  for(const folder of ['docs','src']) await checkPublicTree(folder);
+  return {ok:true};
+}
+export async function verifyPublicAdmissionsV123(projectRoot,{strict=false,built=false}={}) {
   const root=resolve(projectRoot);
   assert.equal((await lstat(root)).isSymbolicLink(),false);
   assert.equal(ENEMY_DRIVE_IMPORTS_V123.length,32,'A contract fixture is not shipping content');
@@ -588,17 +613,7 @@ export async function verifyPublicAdmissionsV123(projectRoot,{strict=false}={}) 
     }
     const top=await readdir(join(root,'assets/user/drive-v123'));
     assert.deepEqual(top.sort(),['enemies','personnel']);
-    async function checkPublicTree(folder) {
-      let entries; try { entries=await readdir(join(root,folder),{withFileTypes:true}); }
-      catch(error) { if(error.code==='ENOENT')return; throw error; }
-      for(const entry of entries) {
-        const path=`${folder}/${entry.name}`;
-        assert.equal(entry.isSymbolicLink(),false,path);
-        assert.notEqual(publicReleasePathAdmissionV123(path,{directory:entry.isDirectory()}),false,`Unapproved V123 source: ${path}`);
-        if(entry.isDirectory()) await checkPublicTree(path);
-      }
-    }
-    for(const folder of ['docs','src']) await checkPublicTree(folder);
+    await verifyPublicSourceTreeV123(root,{built});
   }
   return {ok:true,enemyStaticVariants:32,documentaryOriginals:30,animationsAdded:0,exactCertified:0};
 }

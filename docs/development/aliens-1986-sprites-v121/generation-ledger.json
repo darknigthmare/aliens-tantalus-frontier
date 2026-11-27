@@ -1,0 +1,935 @@
+{
+  "schema": "aliens1986-generation-ledger-v121",
+  "date": "2026-11-26",
+  "tool": "built-in-imagegen",
+  "oneObjectPerImage": true,
+  "nativeBytesPreserved": true,
+  "pixelEditingOutsideImagegen": false,
+  "externalResampling": false,
+  "alphaNormalization": false,
+  "filmFidelityValidated": false,
+  "newImageCount": 4,
+  "toolCallCount": 5,
+  "discardedAttemptCount": 1,
+  "assets": [
+    {
+      "id": "hadley-service-generator",
+      "path": "assets/dlc/aliens-1986/v121/furniture/hadley-service-generator.png",
+      "sha256": "8899ee95baf096ef06edc0fbb5f995f717fbbbe2958b90e3a1c856ff3b38066f",
+      "bytes": 2663142,
+      "width": 1071,
+      "height": 1469,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        52,
+        57,
+        1015,
+        1412
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        533.5,
+        1412
+      ],
+      "label": "Hadley — générateur de service",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation",
+      "selectedAttempt": 1,
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: a compact rectangular SERVICE GENERATOR in a squat closed industrial enclosure, not a storage cabinet or computer rack. One large circular ventilation grille centered on the front, protected by thin horizontal bars, with visible dark fan structure behind it; a narrow band of small louvres below, recessed mechanical service cover, four corner fasteners and a short integrated steel base. No CRT, screen or control desk. A thick bare rectangular top cap extends far upward in the elevated view. Any cable sockets are recessed into the front; no loose wires or pipes outside the silhouette.\nRequired overall silhouette width/height approximately0.73:1. Target projected geometry: width100, front body height84, visible upward top depth53.32. The top surface therefore occupies about39 percent of the total object's image height and the front occupies61 percent. Front enclosure stays square-on; the top has equal-width horizontal front and back edges.",
+      "nativeOutputAttemptId": "hadley-service-generator-attempt-1",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          39,
+          1053,
+          1469
+        ],
+        "zeroPixels": 289268,
+        "pixelsAtLeast128": 1262394,
+        "mostCommon": [
+          [
+            253,
+            1106006
+          ],
+          [
+            0,
+            289268
+          ],
+          [
+            252,
+            129748
+          ],
+          [
+            1,
+            10236
+          ],
+          [
+            251,
+            7733
+          ],
+          [
+            250,
+            3595
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Silhouette complète et face sans côté visible.",
+          "Le dessus garde une légère convergence et une profondeur visible inférieure à la consigne ; de fines franges natives subsistent autour du socle."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent"
+      }
+    },
+    {
+      "id": "service-pump-unit",
+      "path": "assets/dlc/aliens-1986/v121/furniture/service-pump-unit.png",
+      "sha256": "1193a040c1305535d36ded3869361dc717a35ca836363a53f2ab5f415639cf10",
+      "bytes": 2293428,
+      "width": 1191,
+      "height": 1321,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        105,
+        80,
+        1086,
+        1246
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        595.5,
+        1246
+      ],
+      "label": "Maintenance — unité de pompage",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation",
+      "selectedAttempt": 2,
+      "prompt": "Use case: precise-object-edit. Edit the supplied transparent double-pump game sprite, preserving the same single industrial machine and all its recognizable mechanical design: two round bolted pump-end housings, their short vertical pipes contained within the casing, the worn grey/olive metal, central front vent, service covers and integrated rectangular base.\nCorrect its physical proportions for the existing game body. The complete visible silhouette must have WIDTH / HEIGHT = approximately 0.847 (151 units wide and 178.28 units tall). The broad EMPTY TOP COVER must provide 84.28 units of projected depth, approximately 47.3 percent of the complete visible height; the front casing plus integrated base provides 94 units, approximately 52.7 percent. Deepen the top surface upward substantially while keeping the two front pump faces round and preserving their coherent spacing and bolted construction. Do not squash or stretch the circular front housings. The top is a bare cover, with only the existing ventilation slots; no control panel or additional machinery.\nCamera must remain a straight elevated FRONT view with parallel orthographic projection, zero yaw, no visible left or right side face, vertical front uprights and horizontal front rails. The back and front edges of the top cover must be equal width, with depth edges running straight upward parallel to the screen's vertical axis. No converging trapezoid and no three-quarter view. Both base corners and all ground contacts sit on one horizontal line.\nClean the thin red/yellow/white fringe and stray pixels below and around the base; preserve only subdued grey/olive metal edges against true transparent RGBA. Keep at least 5 percent clear transparent margin on all four sides and show the complete silhouette. No crop, no floor, no cast shadow outside the object, no text, labels, logos, numbers, people, tools, pipes outside the casing or separate objects. Preserve the photorealistic raster texture and native transparent background. One machine, one static image.",
+      "nativeOutputAttemptId": "service-pump-unit-attempt-2",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          76,
+          1138,
+          1321
+        ],
+        "zeroPixels": 428992,
+        "pixelsAtLeast128": 1129058,
+        "mostCommon": [
+          [
+            253,
+            1091521
+          ],
+          [
+            0,
+            428992
+          ],
+          [
+            252,
+            18380
+          ],
+          [
+            1,
+            6050
+          ],
+          [
+            254,
+            5220
+          ],
+          [
+            255,
+            2419
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Premier essai non retenu : silhouette trop large, dessus trop peu profond, frange rouge/jaune sous le socle.",
+          "Retouche sélectionnée : silhouette étroite conforme au ratio visé, grand dessus rectangulaire à bords parallèles, deux pompes frontales conservées et complètes.",
+          "Une fine frange rouge/jaune demeure sous certaines portions du socle à très fort agrandissement ; les pixels natifs ne sont pas retouchés hors imagegen."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent"
+      }
+    },
+    {
+      "id": "conduit-heat-exchanger",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-heat-exchanger.png",
+      "sha256": "34c50e1c2644a65a40dbdad83f3b232e4ace14191e35f05bfbec6155682eb304",
+      "bytes": 2411055,
+      "width": 1210,
+      "height": 1300,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        57,
+        56,
+        1152,
+        1251
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        604.5,
+        1251
+      ],
+      "label": "Conduites — échangeur thermique",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation",
+      "selectedAttempt": 1,
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: one self-contained freestanding industrial HEAT EXCHANGER MODULE. A broad upright rectangular grey/olive steel enclosure containing a dense central bank of closely spaced vertical metal cooling fins across most of the front, divided into two substantial rectangular service sections by a horizontal rail. Short closed rounded manifold end-caps are integrated at the lower left and right within the outline; every tube remains inside the silhouette. A small plain bolted inspection hatch below the fins, thick top cap and short sturdy floor feet. Industrial mechanical cooling equipment, no CRT screens, no computer console, no tall loose pipe columns, no cables outside, no surrounding machinery. Clearly distinct from a storage cabinet with drawers.\nRequired overall silhouette width/height approximately0.93:1. This image is shared by two close-sized machines, one projected181×199.24 and one194×204.52. Represent frontal body height about130 and upper visible depth about71, so the rectangular top occupies about35 percent of total visible height. Keep a nearly square but slightly taller silhouette. Equal-length horizontal front and back top edges, no side faces.",
+      "nativeOutputAttemptId": "conduit-heat-exchanger-attempt-1",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          0,
+          0,
+          1196,
+          1300
+        ],
+        "zeroPixels": 310394,
+        "pixelsAtLeast128": 1228976,
+        "mostCommon": [
+          [
+            253,
+            1040915
+          ],
+          [
+            0,
+            310394
+          ],
+          [
+            252,
+            158116
+          ],
+          [
+            1,
+            18709
+          ],
+          [
+            251,
+            11239
+          ],
+          [
+            250,
+            4532
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Un seul fichier est partagé par les échangeurs ouest et est, avec deux ajustements uniformes.",
+          "Le dessus garde une légère convergence et une profondeur plus faible que la consigne ; fines franges natives visibles à fort zoom."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent"
+      }
+    },
+    {
+      "id": "conduit-valve-plinth",
+      "path": "assets/dlc/aliens-1986/v121/furniture/conduit-valve-plinth.png",
+      "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+      "bytes": 2349034,
+      "width": 1275,
+      "height": 1234,
+      "pixelMode": "RGBA",
+      "frameCount": 1,
+      "bbox": [
+        68,
+        58,
+        1206,
+        1191
+      ],
+      "bboxStatus": "alpha128-measured",
+      "pivot": [
+        637.0,
+        1191
+      ],
+      "label": "Conduites — socle de commande des vannes",
+      "category": "furniture",
+      "pose": "static",
+      "runtimeEligible": true,
+      "heldWeapon": false,
+      "animated": false,
+      "filmFidelityValidated": false,
+      "origin": "v121-native-imagegen-generation",
+      "selectedAttempt": 1,
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: one EMPTY INDUSTRIAL VALVE CONTROL PLINTH, a low heavy box-shaped stand supporting a separate instrument panel that will be drawn later. The top MUST be completely bare and flat, no gauge, dial, wheel, monitor, panel, pipe, equipment or object integrated on the top. Thick rectangular grey metal tabletop/cap, broad smooth unobstructed central area, simple closed steel front with a small recessed maintenance hatch and two understated horizontal cooling-slot bands, low integrated base and tiny leveling feet. Its function is a sturdy service pedestal, not a full electronics cabinet.\nCRITICAL TOP CONTACT GEOMETRY: total silhouette width/height approximately0.97:1, almost square. Target width125, total visible height128.9, front body height73 and upper projected top depth55.9. The bare TOP SURFACE must occupy approximately43 percent of the complete image height: for a visible object roughly1200 wide and1240 high, the empty top alone is about537 high, extending straight upward above the front face. A later panel's feet will land about25.8 game units below the far/back edge of the top, well within this deep empty surface. Make the top a large RECTANGLE with its back and front edges equal width, no trapezoid or sideways perspective. Front face remains upright. Maintain 5percent transparent padding outside every edge.",
+      "nativeOutputAttemptId": "conduit-valve-plinth-attempt-1",
+      "alpha": {
+        "extrema": [
+          0,
+          255
+        ],
+        "nonzeroBounds": [
+          63,
+          0,
+          1212,
+          1234
+        ],
+        "zeroPixels": 327185,
+        "pixelsAtLeast128": 1224756,
+        "mostCommon": [
+          [
+            253,
+            1150695
+          ],
+          [
+            0,
+            327185
+          ],
+          [
+            252,
+            38811
+          ],
+          [
+            254,
+            17447
+          ],
+          [
+            1,
+            9786
+          ],
+          [
+            251,
+            5211
+          ]
+        ]
+      },
+      "inspection": {
+        "sourceImageReviewed": true,
+        "singleFurnitureObject": true,
+        "singleFrame": true,
+        "transparentBackground": true,
+        "boundsMeasured": true,
+        "nativeBytesMatch": true,
+        "gameScaleReview": "native-canvas-reviewed-no-clipping-observed",
+        "filmFidelityValidated": false,
+        "observedLimits": [
+          "Le dessus nu et profond accueille le panneau séparé ; les contacts doivent être mesurés dans les pixels réels.",
+          "Silhouette solide complète ; légère convergence du dessus et quelques pixels de bord colorés à fort agrandissement."
+        ],
+        "gameScaleEvidence": "verification.json",
+        "nativeCanvasReviewedBy": "root-agent",
+        "terminalSupportContacts": {
+          "passed": 3,
+          "total": 3,
+          "samplesPerTerminal": 3,
+          "sampleLocation": "lower terminal contour",
+          "insideVisibleTabletopPolygons": true,
+          "observedAlpha": 253
+        },
+        "sourceTopPlane": {
+          "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+          "polygon": [
+            [
+              130,
+              95
+            ],
+            [
+              1140,
+              95
+            ],
+            [
+              1170,
+              520
+            ],
+            [
+              105,
+              520
+            ]
+          ],
+          "frontApronBottomY": 611
+        },
+        "apronHeightDiagnostic": {
+          "heightAboveGround": 63.70827475388569,
+          "nativeBodyHeight": 73,
+          "difference": -9.29172524611431,
+          "meaning": "Visible lower front-apron edge, separate from the validated upper tabletop support contacts."
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "id": "hadley-service-generator-attempt-1",
+      "assetId": "hadley-service-generator",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: a compact rectangular SERVICE GENERATOR in a squat closed industrial enclosure, not a storage cabinet or computer rack. One large circular ventilation grille centered on the front, protected by thin horizontal bars, with visible dark fan structure behind it; a narrow band of small louvres below, recessed mechanical service cover, four corner fasteners and a short integrated steel base. No CRT, screen or control desk. A thick bare rectangular top cap extends far upward in the elevated view. Any cable sockets are recessed into the front; no loose wires or pipes outside the silhouette.\nRequired overall silhouette width/height approximately0.73:1. Target projected geometry: width100, front body height84, visible upward top depth53.32. The top surface therefore occupies about39 percent of the total object's image height and the front occupies61 percent. Front enclosure stays square-on; the top has equal-width horizontal front and back edges.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "artifactId": "hadley-service-generator-attempt-1-output",
+        "sha256": "8899ee95baf096ef06edc0fbb5f995f717fbbbe2958b90e3a1c856ff3b38066f",
+        "bytes": 2663142,
+        "width": 1071,
+        "height": 1469,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          52,
+          57,
+          1015,
+          1412
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          533.5,
+          1412
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            39,
+            1053,
+            1469
+          ],
+          "zeroPixels": 289268,
+          "pixelsAtLeast128": 1262394,
+          "mostCommon": [
+            [
+              253,
+              1106006
+            ],
+            [
+              0,
+              289268
+            ],
+            [
+              252,
+              129748
+            ],
+            [
+              1,
+              10236
+            ],
+            [
+              251,
+              7733
+            ],
+            [
+              250,
+              3595
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Sélection après inspection du PNG natif."
+    },
+    {
+      "id": "service-pump-unit-attempt-1",
+      "assetId": "service-pump-unit",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: one complete DOUBLE PUMP UNIT on its own integrated low rectangular steel base, a single machine. Two matching large round bolted pump-end housings mounted side by side across the FRONT of a wide closed rectangular casing. Each circular face has a dark recessed center and an orderly ring of bolts. Short thick vertical pipes rise from the two pump heads only as far as the upper casing, entirely inside the object's silhouette. A plain rectangular top cover connects the assembly; a modest dark recessed drain slot at the lower front. Worn grey-green metal, slightly brighter rings, no gauge lettering. No external wall pipe, separate control panel, tank, tool or second object. The two circular heads must remain truly round, not elliptical from sideways view.\nRequired overall silhouette width/height approximately0.847:1. Target geometry: width151, front height94, upper projected depth84.28. The deep top occupies approximately47 percent of the entire visible image height; the front panel and base occupy53 percent. All front bolts and circular heads face the camera straight-on, while depth is shown exclusively upward.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "artifactId": "service-pump-unit-attempt-1-output",
+        "sha256": "094299fc7ab9bab973db87ded94975370c0f7db1683db7cfd8f55ca7111df55f",
+        "bytes": 2552110,
+        "width": 1337,
+        "height": 1176,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          47,
+          55,
+          1289,
+          1119
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          668.0,
+          1119
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1321,
+            1176
+          ],
+          "zeroPixels": 271227,
+          "pixelsAtLeast128": 1269232,
+          "mostCommon": [
+            [
+              253,
+              1096784
+            ],
+            [
+              0,
+              271227
+            ],
+            [
+              252,
+              146080
+            ],
+            [
+              1,
+              15839
+            ],
+            [
+              251,
+              7889
+            ],
+            [
+              2,
+              5094
+            ]
+          ]
+        }
+      },
+      "selected": false,
+      "reason": "Silhouette trop large et dessus trop peu profond pour le volume existant ; frange colorée sous le socle."
+    },
+    {
+      "id": "service-pump-unit-attempt-2",
+      "assetId": "service-pump-unit",
+      "attempt": 2,
+      "mode": "edit",
+      "prompt": "Use case: precise-object-edit. Edit the supplied transparent double-pump game sprite, preserving the same single industrial machine and all its recognizable mechanical design: two round bolted pump-end housings, their short vertical pipes contained within the casing, the worn grey/olive metal, central front vent, service covers and integrated rectangular base.\nCorrect its physical proportions for the existing game body. The complete visible silhouette must have WIDTH / HEIGHT = approximately 0.847 (151 units wide and 178.28 units tall). The broad EMPTY TOP COVER must provide 84.28 units of projected depth, approximately 47.3 percent of the complete visible height; the front casing plus integrated base provides 94 units, approximately 52.7 percent. Deepen the top surface upward substantially while keeping the two front pump faces round and preserving their coherent spacing and bolted construction. Do not squash or stretch the circular front housings. The top is a bare cover, with only the existing ventilation slots; no control panel or additional machinery.\nCamera must remain a straight elevated FRONT view with parallel orthographic projection, zero yaw, no visible left or right side face, vertical front uprights and horizontal front rails. The back and front edges of the top cover must be equal width, with depth edges running straight upward parallel to the screen's vertical axis. No converging trapezoid and no three-quarter view. Both base corners and all ground contacts sit on one horizontal line.\nClean the thin red/yellow/white fringe and stray pixels below and around the base; preserve only subdued grey/olive metal edges against true transparent RGBA. Keep at least 5 percent clear transparent margin on all four sides and show the complete silhouette. No crop, no floor, no cast shadow outside the object, no text, labels, logos, numbers, people, tools, pipes outside the casing or separate objects. Preserve the photorealistic raster texture and native transparent background. One machine, one static image.",
+      "inputImages": [
+        {
+          "role": "edit-target",
+          "sourceAttemptId": "service-pump-unit-attempt-1",
+          "sha256": "094299fc7ab9bab973db87ded94975370c0f7db1683db7cfd8f55ca7111df55f"
+        }
+      ],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "artifactId": "service-pump-unit-attempt-2-output",
+        "sha256": "1193a040c1305535d36ded3869361dc717a35ca836363a53f2ab5f415639cf10",
+        "bytes": 2293428,
+        "width": 1191,
+        "height": 1321,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          105,
+          80,
+          1086,
+          1246
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          595.5,
+          1246
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            76,
+            1138,
+            1321
+          ],
+          "zeroPixels": 428992,
+          "pixelsAtLeast128": 1129058,
+          "mostCommon": [
+            [
+              253,
+              1091521
+            ],
+            [
+              0,
+              428992
+            ],
+            [
+              252,
+              18380
+            ],
+            [
+              1,
+              6050
+            ],
+            [
+              254,
+              5220
+            ],
+            [
+              255,
+              2419
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Retouche ciblée des proportions et des franges ; sortie native conservée sans modification de pixels."
+    },
+    {
+      "id": "conduit-heat-exchanger-attempt-1",
+      "assetId": "conduit-heat-exchanger",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: one self-contained freestanding industrial HEAT EXCHANGER MODULE. A broad upright rectangular grey/olive steel enclosure containing a dense central bank of closely spaced vertical metal cooling fins across most of the front, divided into two substantial rectangular service sections by a horizontal rail. Short closed rounded manifold end-caps are integrated at the lower left and right within the outline; every tube remains inside the silhouette. A small plain bolted inspection hatch below the fins, thick top cap and short sturdy floor feet. Industrial mechanical cooling equipment, no CRT screens, no computer console, no tall loose pipe columns, no cables outside, no surrounding machinery. Clearly distinct from a storage cabinet with drawers.\nRequired overall silhouette width/height approximately0.93:1. This image is shared by two close-sized machines, one projected181×199.24 and one194×204.52. Represent frontal body height about130 and upper visible depth about71, so the rectangular top occupies about35 percent of total visible height. Keep a nearly square but slightly taller silhouette. Equal-length horizontal front and back top edges, no side faces.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "artifactId": "conduit-heat-exchanger-attempt-1-output",
+        "sha256": "34c50e1c2644a65a40dbdad83f3b232e4ace14191e35f05bfbec6155682eb304",
+        "bytes": 2411055,
+        "width": 1210,
+        "height": 1300,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          57,
+          56,
+          1152,
+          1251
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          604.5,
+          1251
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            0,
+            0,
+            1196,
+            1300
+          ],
+          "zeroPixels": 310394,
+          "pixelsAtLeast128": 1228976,
+          "mostCommon": [
+            [
+              253,
+              1040915
+            ],
+            [
+              0,
+              310394
+            ],
+            [
+              252,
+              158116
+            ],
+            [
+              1,
+              18709
+            ],
+            [
+              251,
+              11239
+            ],
+            [
+              250,
+              4532
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Sélection après inspection du PNG natif."
+    },
+    {
+      "id": "conduit-valve-plinth-attempt-1",
+      "assetId": "conduit-valve-plinth",
+      "attempt": 1,
+      "mode": "generate",
+      "prompt": "Use case: product-mockup. Create ONE isolated high-resolution photorealistic raster game sprite, a practical industrial colony machine inspired by the production design of Aliens (1986). This is a game adaptation, not an exact replica of an identified film prop.\nCamera and geometry are essential: an elevated FRONT view with PARALLEL ORTHOGRAPHIC projection, zero yaw, zero sideways tilt, and absolutely no visible left or right side face. Front rails stay perfectly horizontal and front uprights perfectly vertical. Depth appears ONLY as the upper surface extending straight UP in the image. The back edge of the top is equal in length to its front edge; top side edges run parallel to the vertical screen axis. No trapezoid, perspective convergence or three-quarter angle. Ground contacts form one horizontal line. The whole object must fit the stated visible width-to-height ratio.\nMaterials: worn grey and subdued olive painted steel, bolted rectangular removable panels, practical vent slots, realistic modest scuffs and fine mechanical texture, restrained soft neutral studio lighting. Match the existing grounded, used 1980s film-set aesthetic. No modern glossy appliance, no neon, no vector artwork or cartoon.\nScene/background: genuine transparent RGBA only, with 5 percent clear margin on ALL four sides; no pixels of the object touching the canvas boundary. Full object entirely visible. Clean neutral edges: no red/yellow/white fringes, stray pixels, colored halos, floor or cast shadow outside the object. Exactly one self-contained object, one static view. No room, no wall, no pedestal separate from the object, no characters, no text, lettering, labels, emblems, logos, numbers or watermark.\nSubject: one EMPTY INDUSTRIAL VALVE CONTROL PLINTH, a low heavy box-shaped stand supporting a separate instrument panel that will be drawn later. The top MUST be completely bare and flat, no gauge, dial, wheel, monitor, panel, pipe, equipment or object integrated on the top. Thick rectangular grey metal tabletop/cap, broad smooth unobstructed central area, simple closed steel front with a small recessed maintenance hatch and two understated horizontal cooling-slot bands, low integrated base and tiny leveling feet. Its function is a sturdy service pedestal, not a full electronics cabinet.\nCRITICAL TOP CONTACT GEOMETRY: total silhouette width/height approximately0.97:1, almost square. Target width125, total visible height128.9, front body height73 and upper projected top depth55.9. The bare TOP SURFACE must occupy approximately43 percent of the complete image height: for a visible object roughly1200 wide and1240 high, the empty top alone is about537 high, extending straight upward above the front face. A later panel's feet will land about25.8 game units below the far/back edge of the top, well within this deep empty surface. Make the top a large RECTANGLE with its back and front edges equal width, no trapezoid or sideways perspective. Front face remains upright. Maintain 5percent transparent padding outside every edge.",
+      "inputImages": [],
+      "tool": "built-in-imagegen",
+      "transparentBackgroundRequested": true,
+      "output": {
+        "artifactId": "conduit-valve-plinth-attempt-1-output",
+        "sha256": "93d2d6ec1c727b96784672bf88bf32591c5287c27e53505a044af991a6e189ae",
+        "bytes": 2349034,
+        "width": 1275,
+        "height": 1234,
+        "pixelMode": "RGBA",
+        "frameCount": 1,
+        "bbox": [
+          68,
+          58,
+          1206,
+          1191
+        ],
+        "bboxStatus": "alpha128-measured",
+        "pivot": [
+          637.0,
+          1191
+        ],
+        "alpha": {
+          "extrema": [
+            0,
+            255
+          ],
+          "nonzeroBounds": [
+            63,
+            0,
+            1212,
+            1234
+          ],
+          "zeroPixels": 327185,
+          "pixelsAtLeast128": 1224756,
+          "mostCommon": [
+            [
+              253,
+              1150695
+            ],
+            [
+              0,
+              327185
+            ],
+            [
+              252,
+              38811
+            ],
+            [
+              254,
+              17447
+            ],
+            [
+              1,
+              9786
+            ],
+            [
+              251,
+              5211
+            ]
+          ]
+        }
+      },
+      "selected": true,
+      "reason": "Sélection après inspection du PNG natif."
+    }
+  ],
+  "referenceEvidence": [
+    {
+      "id": "atmosphere-processor-set-dressing",
+      "title": "Harry Harris Collection — Atmosphere Processor set dressing",
+      "url": "https://propstore.com/product/aliens-1986/lot-655-harry-harris-collection-atmosphere-processor-set-dressing/",
+      "imageUrl": "https://images.propstore.com/c988e899c8d6629afc513a07127de2e4-1.jpg",
+      "kind": "production-set-dressing-artifact",
+      "reviewDate": "2026-11-26",
+      "visualInspected": true,
+      "imageSha256": "0ab6c782728950862830a88a705e08a66c48b4cf9417800562c2cd07eab0f59d",
+      "imageBytes": 64141,
+      "observed": "Coque arrière de téléviseur en plastique, peinte gris clair, reliefs étagés, rangées de fentes de ventilation, petites fixations et usure de peinture. La notice identifie un élément de décor du processeur.",
+      "use": "Vocabulaire de construction pratique, panneaux gris et aérations des machines V121.",
+      "limits": "Ce panneau ne prouve ni l’existence dans le film ni la silhouette des quatre objets du jeu. Les dimensions de la fiche concernent cet accessoire précis. Les machines V121 et leurs matériaux métalliques restent des adaptations ; les marquages de la référence ne sont pas reproduits."
+    },
+    {
+      "id": "medlab-concept",
+      "title": "Ron Cobb — concept du Medlab",
+      "url": "https://propstore.com/product/aliens-1986/hand-drawn-ron-cobb-medlab-concept-sketch/",
+      "imageUrl": "https://images.propstore.com/f9a934af42ec346c322933253cea5576-1.jpg",
+      "kind": "production-concept-reproduction",
+      "reviewDate": "2026-11-26",
+      "visualInspected": true,
+      "observed": "Vue intérieure : boîtiers et consoles rectangulaires gris-vert, panneaux vissés, aérations, écrans CRT, câbles apparents et mobilier bas.",
+      "use": "Vocabulaire de matières et de construction des quatre adaptations V120.",
+      "limits": "Concept de production. Ni relevé coté des meubles ciblés ni preuve de leur présence exacte dans le montage final. Les dimensions de la fiche sont celles du dessin."
+    },
+    {
+      "id": "hadley-production-photos-80",
+      "title": "Hadley’s Hope — collection de 80 photographies de plateau",
+      "url": "https://ukm.propstoreauction.com/lot-details/index/catalog/232/lot/56648/Lot-119-Alien-Aliens-Collection-Auction-Photos-of-the-Hadley-s-Hope-Set",
+      "imageUrl": "https://propstoreauction.com/images/lot/3180/318076_xl.jpg?ts=1746136970",
+      "kind": "production-photograph-collection-record",
+      "reviewDate": "2026-11-26",
+      "visualInspected": true,
+      "observed": "Image de vente montrant des piles de tirages et quatre photographies déployées : machinerie, loader, équipe de tournage, porte de décor ; panneaux clairs et renforts sombres visibles.",
+      "use": "Contexte industriel des décors de la colonie.",
+      "limits": "Seule l’image de présentation est inspectée ; les 80 vues ne sont pas toutes lisibles. Aucun des quatre nouveaux meubles n’est identifié avec certitude. Les dimensions annoncées concernent les tirages."
+    }
+  ],
+  "localStyleReferences": [
+    {
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "sha256": "2651889919d7867af23dc18191b7e767b2142fa98ea3a436f6c6ed10c3414380",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    },
+    {
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-command-table.png",
+      "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    },
+    {
+      "path": "assets/dlc/aliens-1986/v118/props/valve-indicator-panel.png",
+      "sha256": "ec62b3d888dbcc81e7e8550cfdb15f76a5eda230c706e151bba4db7f74a35b2d",
+      "role": "visually-inspected-style-reference-not-film-proof",
+      "passedAsInputToInitialCalls": false
+    }
+  ],
+  "inspectionScope": "Native PNG inspection, SHA256 and alpha measurements. Runtime contacts, occlusion, fallback and scene captures are reported separately in verification.json. The discarded initial pump remains outside the final asset pack.",
+  "recoveryContinuity": {
+    "executorInterruptionDuringGeneration": true,
+    "allFourInitialNativeDataUrlsPreserved": true,
+    "allFourInitialGitBlobsPreserved": true,
+    "twoMissingLocalFilesRestoredFromNativeDataUrls": true,
+    "restoredSha256MatchedPreservedNativeOutputs": true,
+    "pixelReencodingDuringRecovery": false
+  },
+  "integrationEvidence": {
+    "evidenceReport": "docs/development/aliens-1986-sprites-v121/verification.json",
+    "reportMeaning": "frozen pre-publication receipt; later CI evidence belongs to the PR and its exact commit",
+    "execution": "Node/Skia, with DOM and fetch doubles; original renderer and browser fixture assertions. Only caBX provenance chunks omitted from transient decoder buffers. Source PNG pixels and bytes unchanged. This is not Chromium.",
+    "chromiumExecutedAtThisInspection": false,
+    "ciStatusAtReceipt": "pending",
+    "nativeCanvasChecks": {
+      "passed": 16,
+      "total": 16
+    },
+    "runtimeUnitTestsPassed": 62,
+    "presentationChecksTotal": 224,
+    "runtimeChecksIncludedInPresentationTotal": true,
+    "presentationChecksIncludedInRunner": true,
+    "cataloguePreflightImagesVerified": 155,
+    "historicalManifestsVerified": 5,
+    "decodesAcrossNativeFixtures": 69,
+    "furniturePlacementsInspected": 5,
+    "terminalContactPoints": {
+      "passed": 3,
+      "total": 3,
+      "samplesPerTerminal": 3,
+      "sampleLocation": "lower terminal contour",
+      "insideVisibleTabletopPolygons": true,
+      "observedAlpha": 253
+    },
+    "fallbackComparison": {
+      "sceneId": "v106-hadley",
+      "baseline": "V120",
+      "differentChannels": 0,
+      "channelsCompared": 3686400
+    },
+    "nativeSceneCapturesInspected": [
+      "v106-hadley",
+      "v107-service",
+      "v112-conduit"
+    ],
+    "nativeSceneCapturesReviewedBy": "root-agent",
+    "furnitureClippingObserved": false,
+    "occlusionAlphaVerified": true,
+    "sceneStateUnchanged": true,
+    "baselineOrderingDefectReproduced": true,
+    "nativeLighting": "Original conduit darkness outside the light cone preserved; no artificial brightening.",
+    "visualReview": "Four selected source PNGs and three complete room captures inspected. All five industrial placements are complete and remain within their canvases; the valve panel rests on the visible plinth top. Original conduit darkness outside the light cone is preserved. Small native source fringes remain discreet at room scale.",
+    "apronHeightDiagnostics": {
+      "conduit-valve-plinth": {
+        "heightAboveGround": 63.70827475388569,
+        "nativeBodyHeight": 73,
+        "difference": -9.29172524611431,
+        "meaning": "Visible lower front-apron edge, separate from the validated upper tabletop support contacts."
+      }
+    },
+    "deterministicDerivative": {
+      "sha256": "e213d7c3251966e7062082ec37676cf8b0dc72eb3468cd820ce16a78dd78b397",
+      "originalV114HtmlSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+      "assetRevision": 121,
+      "presentationExtensionRevision": 121,
+      "saveSchema": 114,
+      "twoIndependentBuildsEqual": true,
+      "includedInRunner": true
+    },
+    "limitations": [
+      "No local Chromium execution claimed",
+      "No complete playthrough claimed",
+      "No film-exact fidelity certification"
+    ],
+    "resultsReportedBy": "root-and-audit-agents-from-completed-native-QA",
+    "nodeTests": {
+      "command": "npm run test:dlc:aliens1986",
+      "exitCode": 0,
+      "historicalChecks": {
+        "passed": 665,
+        "total": 665
+      },
+      "runnerChecks": {
+        "passed": 35,
+        "total": 35
+      },
+      "presentationAssertions": 224,
+      "presentationAssertionsIncludedInRunner": true,
+      "v121RuntimeAssertions": 62,
+      "v121AssertionsIncludedInPresentation": true
+    },
+    "sourceAdmissions": {
+      "command": "npm run check:dlc:aliens1986",
+      "exitCode": 0,
+      "historicalFiles": 1159,
+      "historicalBytes": 135643835,
+      "cataloguePngs": 155,
+      "assetRevision": 121,
+      "presentationExtensionRevision": 121
+    }
+  }
+}

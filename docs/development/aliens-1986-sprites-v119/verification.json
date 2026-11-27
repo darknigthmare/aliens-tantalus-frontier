@@ -1,0 +1,635 @@
+{
+  "schema": "aliens1986-v119-verification",
+  "date": "2026-11-26T11:44:46.653407+00:00",
+  "baseCommit": "5ec98a99ea1bfea30159f11ab1a698b0106ae9de",
+  "scope": "Local targeted DLC validation and four native Canvas inspection rooms; full-repository CI and Chromium acceptance are separate.",
+  "catalog": {
+    "priorImages": 141,
+    "addedImages": 6,
+    "totalImages": 147,
+    "newFurniturePlacements": 7,
+    "newImageBytes": 13537246,
+    "oneObjectPerNewImage": true,
+    "nativePngBytesPreserved": true,
+    "filmFidelityValidated": false
+  },
+  "tests": {
+    "command": "npm run test:dlc:aliens1986",
+    "status": "passed",
+    "historicalModuleTests": {
+      "passed": 665,
+      "failed": 0
+    },
+    "nodeRunnerTests": {
+      "passed": 29,
+      "failed": 0,
+      "includesRasterPresentationWrapper": true
+    },
+    "rasterPresentationChecks": {
+      "passed": 108,
+      "v116": 31,
+      "v118": 35,
+      "v119": 42,
+      "countingNote": "These checks run inside the presentation wrapper already included in the Node runner tests; do not add them as independent test counts."
+    },
+    "deterministicDerivativeSha256": "e2a42f6f48e2fb599b208f141c7cd6fe71b6d66d2f88f3cddedd7d5fad13c45a",
+    "logSha256": "da7f59b3959999c81fefc91cd33bee7edbc644c29b2cdfea5a751777861621fc"
+  },
+  "admissions": {
+    "command": "npm run check:dlc:aliens1986",
+    "status": "passed",
+    "recoveredFiles": 1159,
+    "recoveredBytes": 135643835,
+    "recoveryManifestSha256": "5bfb37cc785657a11e62fe1ca0b92093e2b8b5bd0935fb0bf2cedd0f87da0acd",
+    "runtimeFiles": 2,
+    "runtimeBytes": 265773499,
+    "gameSha256": "9f1b902e7546dff18867d9b0d1cb638bc9d256863654be5e2e74bc5cb301548d",
+    "originalGameUnchanged": true,
+    "assetRevision": 119,
+    "presentationExtensionRevision": 119,
+    "saveSchema": 114,
+    "logSha256": "26c11f260999b9b9a4c151b7a027ebfbbf3672423c2a04902e279e5bbd34cea4"
+  },
+  "nativeCanvas": {
+    "kind": "native-canvas-evidence-not-chromium",
+    "ok": true,
+    "checks": {
+      "fourWorldsUnchanged": true,
+      "allRequestedImagesLoaded": true,
+      "sevenFurnitureAnchorsPreserved": true,
+      "sevenScalesUniform": true,
+      "sevenFurnitureWithinViewport": true,
+      "sevenFurnitureInsideEnvelope": true,
+      "allThreePropsAfterOwnTableExactlyOnce": true,
+      "allThreePhysicalPivotsPreserved": true,
+      "allNineContactSamplesWithinReviewedTabletop": true,
+      "allNineContactSamplesOnOpaqueTablePixels": true,
+      "reviewedTableSourceHashesMatch": true
+    },
+    "renderedRoomCount": 4,
+    "furniturePlacementCount": 7,
+    "supportCount": 3,
+    "contactSampleCount": 9,
+    "rooms": [
+      {
+        "id": "v106-medlab",
+        "screenshot": "qa-canvas-v106-medlab.png",
+        "drawLog": "qa-canvas-v106-medlab.json",
+        "loaded": 10,
+        "requested": 10,
+        "failed": 0,
+        "worldUnchanged": true,
+        "screenshotSha256": "fbd6d94ccefd70cbe1d454546172939a7b2c7b7def6311eae253365c41f57a8e",
+        "screenshotBytes": 274693,
+        "drawLogSha256": "0ba86149e594ad2ba94dd543e51a09ab2c8d1079c6a66097c666aba5ce1f6526",
+        "drawLogBytes": 9443
+      },
+      {
+        "id": "v109-reserve",
+        "screenshot": "qa-canvas-v109-reserve.png",
+        "drawLog": "qa-canvas-v109-reserve.json",
+        "loaded": 13,
+        "requested": 13,
+        "failed": 0,
+        "worldUnchanged": true,
+        "screenshotSha256": "314e140c5113ecd1f176d5882a7c7daeb4b3c2b4057f0abb016bcae27ac2da91",
+        "screenshotBytes": 250594,
+        "drawLogSha256": "026e2f64d78b959cf1aa25283001863b03085724227a690d11f7f7feab0ec7a8",
+        "drawLogBytes": 10210
+      },
+      {
+        "id": "v107-operations",
+        "screenshot": "qa-canvas-v107-operations.png",
+        "drawLog": "qa-canvas-v107-operations.json",
+        "loaded": 10,
+        "requested": 10,
+        "failed": 0,
+        "worldUnchanged": true,
+        "screenshotSha256": "b366e9350ea6e42f63adbb4f8c1359c993e720984b8f889ccb9f93ea4ae36950",
+        "screenshotBytes": 265893,
+        "drawLogSha256": "7f5bce860024c6f8ccd005984a2d2b23cb1270c83b64a268e39328855a7fc0ef",
+        "drawLogBytes": 10140
+      },
+      {
+        "id": "v114-sulaco-mess",
+        "screenshot": "qa-canvas-v114-sulaco-mess.png",
+        "drawLog": "qa-canvas-v114-sulaco-mess.json",
+        "loaded": 12,
+        "requested": 12,
+        "failed": 0,
+        "worldUnchanged": true,
+        "screenshotSha256": "55d7c24442dd3275c22811ce2d12b50d85fd2df0bae1241b9236e6bdce2ff752",
+        "screenshotBytes": 231872,
+        "drawLogSha256": "b88a770d5e6088df177023e50bde2fdf3c03a058d776476d027fdef2aea5857e",
+        "drawLogBytes": 10230
+      }
+    ],
+    "placements": [
+      {
+        "room": "v106-medlab",
+        "bodyId": "bed-west",
+        "assetId": "medlab-bed",
+        "screenBounds": [
+          340.0,
+          296.1937846000621,
+          500.0,
+          386.260009765625
+        ],
+        "nativeEnvelope": [
+          160,
+          105.64
+        ],
+        "visibleSize": [
+          160.0,
+          90.06622516556291
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          9.765625009094947e-06
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v106-medlab",
+        "bodyId": "bed-east",
+        "assetId": "medlab-bed",
+        "screenBounds": [
+          1065.0,
+          474.9174614710523,
+          1210.0,
+          556.5399780273438
+        ],
+        "nativeEnvelope": [
+          145,
+          112.52
+        ],
+        "visibleSize": [
+          145.0,
+          81.62251655629143
+        ],
+        "uniformScaleDifference": -1.3877787807814457e-17,
+        "groundAnchorError": [
+          0.0,
+          -2.1972656213620212e-05
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v106-medlab",
+        "bodyId": "med-cabinet",
+        "assetId": "medlab-storage-cabinet",
+        "screenBounds": [
+          905.0,
+          172.77410316014235,
+          999.0,
+          363.8999938964844
+        ],
+        "nativeEnvelope": [
+          94,
+          195.38
+        ],
+        "visibleSize": [
+          94.0,
+          191.12589073634203
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          -6.1035156022626325e-06
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v109-reserve",
+        "bodyId": "service-locker",
+        "assetId": "reserve-service-locker",
+        "screenBounds": [
+          287.8558598351001,
+          183.4400122070312,
+          394.1441401648999,
+          389.70001220703125
+        ],
+        "nativeEnvelope": [
+          110,
+          206.26
+        ],
+        "visibleSize": [
+          106.28828032979982,
+          206.26000000000005
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          1.2207031261368684e-05
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v107-operations",
+        "bodyId": "ops-rack",
+        "assetId": "operations-storage-rack",
+        "screenBounds": [
+          315.8020134228188,
+          374.6400146484375,
+          423.1979865771812,
+          565.1400146484375
+        ],
+        "nativeEnvelope": [
+          133,
+          190.5
+        ],
+        "visibleSize": [
+          107.39597315436242,
+          190.5
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          1.464843751364242e-05
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v107-operations",
+        "bodyId": "ops-table",
+        "assetId": "operations-command-table",
+        "screenBounds": [
+          430.0,
+          326.837323709277,
+          668.0,
+          430.9800109863281
+        ],
+        "nativeEnvelope": [
+          238,
+          128.98000000000002
+        ],
+        "visibleSize": [
+          238.0,
+          104.14268727705115
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          1.0986328106810106e-05
+        ],
+        "insideViewport": true
+      },
+      {
+        "room": "v114-sulaco-mess",
+        "bodyId": "v114-sulaco-mess-body-0",
+        "assetId": "sulaco-mess-table",
+        "screenBounds": [
+          312.0,
+          280.7265258215963,
+          550.0,
+          394.0
+        ],
+        "nativeEnvelope": [
+          238,
+          122.1
+        ],
+        "visibleSize": [
+          238.0,
+          113.27347417840372
+        ],
+        "uniformScaleDifference": 0.0,
+        "groundAnchorError": [
+          0.0,
+          0.0
+        ],
+        "insideViewport": true
+      }
+    ],
+    "contacts": [
+      {
+        "room": "v114-sulaco-mess",
+        "propId": "v114-sulaco-mess-prop-0",
+        "propAsset": "meal-tray-food",
+        "tableAsset": "sulaco-mess-table",
+        "sourceLowestOccupiedRow": 847,
+        "occupiedPixelsOnRow": 168,
+        "contacts": [
+          {
+            "propSource": [
+              186.5,
+              847.5
+            ],
+            "screen": [
+              376.7629076086956,
+              300.26980856190556
+            ],
+            "tableSource": [
+              485.68064943368626,
+              192.92333524994564
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              270.5,
+              847.5
+            ],
+            "screen": [
+              378.47486413043475,
+              300.26980856190556
+            ],
+            "tableSource": [
+              497.9376826817681,
+              192.92333524994564
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              391.5,
+              847.5
+            ],
+            "screen": [
+              380.94089673913044,
+              300.26980856190556
+            ],
+            "tableSource": [
+              515.5936472415053,
+              192.92333524994564
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          }
+        ],
+        "orderedAfterOwnTable": true,
+        "propDrawCount": 1,
+        "physicalPivotError": {
+          "x": 0,
+          "y": -1.220703097715159e-06
+        },
+        "frontApronHeightAboveGround": 55.86854460093895,
+        "nativeBodyHeight": 49,
+        "frontApronHeightDifference": 6.868544600938947,
+        "tableSha256MatchesReviewedSurface": true
+      },
+      {
+        "room": "v114-sulaco-mess",
+        "propId": "v114-sulaco-mess-prop-1",
+        "propAsset": "combat-knife",
+        "tableAsset": "sulaco-mess-table",
+        "sourceLowestOccupiedRow": 521,
+        "occupiedPixelsOnRow": 28,
+        "contacts": [
+          {
+            "propSource": [
+              935.5,
+              521.5
+            ],
+            "screen": [
+              477.64130434782606,
+              301.99216380182
+            ],
+            "tableSource": [
+              1207.936061381074,
+              205.25481982479542
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              949.5,
+              521.5
+            ],
+            "screen": [
+              477.86071789686554,
+              301.99216380182
+            ],
+            "tableSource": [
+              1209.5069886397434,
+              205.25481982479542
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              962.5,
+              521.5
+            ],
+            "screen": [
+              478.064459049545,
+              301.99216380182
+            ],
+            "tableSource": [
+              1210.9657068085073,
+              205.25481982479542
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          }
+        ],
+        "orderedAfterOwnTable": true,
+        "propDrawCount": 1,
+        "physicalPivotError": {
+          "x": 0,
+          "y": 0.0
+        },
+        "frontApronHeightAboveGround": 55.86854460093895,
+        "nativeBodyHeight": 49,
+        "frontApronHeightDifference": 6.868544600938947,
+        "tableSha256MatchesReviewedSurface": true
+      },
+      {
+        "room": "v107-operations",
+        "propId": "ops-screen",
+        "propAsset": "operations-table-terminal",
+        "tableAsset": "operations-command-table",
+        "sourceLowestOccupiedRow": 879,
+        "occupiedPixelsOnRow": 77,
+        "contacts": [
+          {
+            "propSource": [
+              1449.5,
+              879.5
+            ],
+            "screen": [
+              606.9185548071035,
+              338.0906013633602
+            ],
+            "tableSource": [
+              1262.3235680065045,
+              208.52946644608372
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1487.5,
+              879.5
+            ],
+            "screen": [
+              609.1524800979792,
+              338.0906013633602
+            ],
+            "tableSource": [
+              1278.1112248941215,
+              208.52946644608372
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          },
+          {
+            "propSource": [
+              1525.5,
+              879.5
+            ],
+            "screen": [
+              611.3864053888549,
+              338.0906013633602
+            ],
+            "tableSource": [
+              1293.898881781739,
+              208.52946644608372
+            ],
+            "insideTopPlane": true,
+            "tableAlpha": 253
+          }
+        ],
+        "orderedAfterOwnTable": true,
+        "propDrawCount": 1,
+        "physicalPivotError": {
+          "x": 0,
+          "y": -4.8828125045474735e-06
+        },
+        "frontApronHeightAboveGround": 47.401891510699215,
+        "nativeBodyHeight": 49,
+        "frontApronHeightDifference": -1.5981084893007846,
+        "tableSha256MatchesReviewedSurface": true
+      }
+    ],
+    "tabletopSurfaceDefinition": {
+      "sulaco-mess-table": {
+        "polygon": [
+          [
+            95,
+            65
+          ],
+          [
+            1650,
+            65
+          ],
+          [
+            1700,
+            390
+          ],
+          [
+            47,
+            390
+          ]
+        ],
+        "frontApronBottomY": 464,
+        "sha256": "f02e11b5d50e7104fd49a86164960aab3223412111737a889667d039cb17371b"
+      },
+      "operations-command-table": {
+        "polygon": [
+          [
+            120,
+            161
+          ],
+          [
+            1568,
+            161
+          ],
+          [
+            1630,
+            455
+          ],
+          [
+            61,
+            455
+          ]
+        ],
+        "frontApronBottomY": 530,
+        "sha256": "68876aa989b21a19f2461f295228fb1ee033af4ab64dd4a3fa9c0a24c0e33137"
+      }
+    },
+    "visualReview": {
+      "reviewedAllFourRoomScreenshots": true,
+      "blockingV119DefectObserved": false,
+      "observations": [
+        "All seven furniture placements are visible at native scale.",
+        "The three supported props are visible above their tables and their contacts lie on the reviewed top planes.",
+        "Uniform aspect fit leaves the operations rack narrower than the collision body and beds shallower than the projected envelope.",
+        "The generated source alpha, including semi-opaque edges, is preserved."
+      ]
+    },
+    "limits": [
+      "Native Skia Canvas rendering via @napi-rs/canvas is not Chromium/browser acceptance.",
+      "Prepared real inspection sessions were rendered, not a gameplay journey.",
+      "Three points on the lowest alpha>=128 source row were sampled per prop, and mapped through logged drawImage transforms.",
+      "Manual tabletop polygons were reviewed against the pinned source PNGs; these are not physical measurements from the film.",
+      "The native decoder ignored only caBX provenance metadata in transient memory; original PNGs and compressed pixel chunks remain unchanged.",
+      "No occlusion pose or fallback pixel comparison was executed in this native Canvas fallback; those remain in the existing browser QA and unit suite.",
+      "Browser launch unavailable locally; browser download returned 403."
+    ]
+  },
+  "browser": {
+    "status": "not-run-locally",
+    "preflight": "passed: all 147 source image hashes and reviewed modules",
+    "reason": "Chromium executable unavailable; official headless-shell download returned HTTP 403.",
+    "command": "python3 -B scripts/qa-aliens1986-furniture-v119.py --source-root . --output /tmp/aliens1986-furniture-v119",
+    "ciWorkflow": ".github/workflows/aliens1986-dlc.yml",
+    "unexecutedBrowserChecks": [
+      "Real browser PNG decode and complete 16-check fixture",
+      "Real browser occlusion pose",
+      "Pixel-exact fallback comparison",
+      "Whole-game navigation and campaign play"
+    ]
+  },
+  "sourceFiles": [
+    {
+      "path": "scripts/derive-aliens1986-raster-v116.mjs",
+      "sha256": "63175b7a507aa2409606da368b0f75935d107a06fe97c7f28f5d62b69463dddd"
+    },
+    {
+      "path": "scripts/public-aliens1986-dlc-admissions.mjs",
+      "sha256": "0b554e721bb83330bbbee0a5dd0112cbd14d2d2f587f471158150410020f68f4"
+    },
+    {
+      "path": "scripts/verify-aliens1986-dlc-integration.mjs",
+      "sha256": "248d800a12d689627c62207459f481a9923996b2e13947ae8abdfff0186b46d6"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-presentation-v116.mjs",
+      "sha256": "65d5b086e4cbe3846c58935f14525b0759cc764b1bf040fbf18c8a384126bf07"
+    },
+    {
+      "path": "scripts/verify-aliens1986-raster-furniture-v119.mjs",
+      "sha256": "56adebb7578dbdcaead248f2a9494485d3c06ed153945e7baac8051977185c26"
+    },
+    {
+      "path": "scripts/qa-aliens1986-furniture-v119.py",
+      "sha256": "16615b46c7f5897dacb82ad82de0d02097cdcf77ed965ac8453167bebbc13ba6"
+    },
+    {
+      "path": "modules/aliens-1986/v119/raster-furniture-v119.mjs",
+      "sha256": "c6adb36868509894beb75e1f350b884f573543e3c55e840db6015322d4c01176"
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/manifest.json",
+      "sha256": "ea0eac131e69262aafb1a08398013b941d0cb028c831892752dd6a9ca3c19fb0"
+    },
+    {
+      "path": "docs/development/aliens-1986-sprites-v119/bible.json",
+      "sha256": "04c7deb5cf4635573250d7573c2072226b715681b4085ab07e2feb3a17383968"
+    }
+  ],
+  "limits": [
+    "No exact 1:1 film fidelity is certified.",
+    "Static furniture rendering does not add new interactions, animations or gameplay.",
+    "Uniform aspect fitting leaves some physical collision envelopes larger than the visible furniture.",
+    "Native Canvas pixels are evidence for the four prepared rooms, not a substitute for Chromium acceptance.",
+    "Full-repository builds and CI are not claimed as locally completed.",
+    "Previous missing source files and refused poses remain recorded in the bible."
+  ]
+}

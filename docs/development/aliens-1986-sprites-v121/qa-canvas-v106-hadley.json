@@ -1,0 +1,477 @@
+{
+  "kind": "native-canvas-render-not-chromium",
+  "room": "v106-hadley",
+  "ok": true,
+  "worldUnchanged": true,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "resourceStatus": {
+    "version": 116,
+    "requested": 10,
+    "loaded": 10,
+    "failed": 0,
+    "draws": 36,
+    "evicted": 0,
+    "measured": 2,
+    "decoded": 10,
+    "used": [
+      "door-leaf",
+      "hadley-service-generator",
+      "hicks-idle-right",
+      "hudson-idle-right",
+      "industrial-pipe",
+      "m41a-pulse-rifle",
+      "operations-console",
+      "operations-storage-rack",
+      "ripley-idle-right",
+      "wall-light"
+    ],
+    "errors": {}
+  },
+  "calls": [
+    {
+      "id": "industrial-pipe",
+      "path": "assets/dlc/aliens-1986/v115/architecture/industrial-pipe.png",
+      "source": [
+        11,
+        10,
+        2150,
+        705
+      ],
+      "destination": [
+        -38,
+        -24.920930232558142,
+        76,
+        24.920930232558142
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        298,
+        280.4800109863281
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1050,
+        116.80000305175781
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "wall-light",
+      "path": "assets/dlc/aliens-1986/v115/architecture/wall-light.png",
+      "source": [
+        54,
+        135,
+        2064,
+        453
+      ],
+      "destination": [
+        -30,
+        -13.16860465116279,
+        60,
+        13.16860465116279
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        385,
+        118.5199966430664
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-storage-rack",
+      "path": "assets/dlc/aliens-1986/v119/furniture/operations-storage-rack.png",
+      "source": [
+        12,
+        9,
+        924,
+        1639
+      ],
+      "destination": [
+        -47,
+        -166.73809523809524,
+        94,
+        166.73809523809524
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        1147,
+        352.7200012207031
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hadley-service-generator",
+      "path": "assets/dlc/aliens-1986/v121/furniture/hadley-service-generator.png",
+      "source": [
+        52,
+        57,
+        963,
+        1355
+      ],
+      "destination": [
+        -48.79673800738007,
+        -137.32,
+        97.59347601476014,
+        137.32
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        398,
+        385.3999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "ripley-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/ripley-idle-right.png",
+      "source": [
+        295,
+        11,
+        405,
+        1515
+      ],
+      "destination": [
+        -13.5,
+        -101,
+        27,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        220,
+        435.2799987792969
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        232,
+        392.2799987792969
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hicks-idle-right",
+      "path": "assets/dlc/aliens-1986/v116/characters/hicks-idle-right.png",
+      "source": [
+        247,
+        33,
+        526,
+        1471
+      ],
+      "destination": [
+        -18.05778382053025,
+        -101,
+        36.1155676410605,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        165,
+        449.8999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        177,
+        406.8999938964844
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "door-leaf",
+      "path": "assets/dlc/aliens-1986/v115/architecture/door-leaf.png",
+      "source": [
+        401.40687894262544,
+        38,
+        220.18624211474918,
+        1466
+      ],
+      "destination": [
+        612,
+        211.68,
+        40,
+        266.32
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "hudson-idle-right",
+      "path": "assets/dlc/aliens-1986/v115/characters/hudson-idle-right.png",
+      "source": [
+        264,
+        7,
+        469,
+        1524
+      ],
+      "destination": [
+        -15.541010498687665,
+        -101,
+        31.08202099737533,
+        101
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        165,
+        508.3800048828125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "m41a-pulse-rifle",
+      "path": "assets/openai/equipment/v117-weapons/m41a-pulse-rifle-native-v117.png",
+      "source": [
+        60,
+        74,
+        1851,
+        668
+      ],
+      "destination": [
+        -17.080000000000005,
+        -13.868849270664507,
+        61.00000000000001,
+        22.01404646137223
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        177,
+        465.3800048828125
+      ],
+      "alpha": 1
+    },
+    {
+      "id": "operations-console",
+      "path": "assets/dlc/aliens-1986/v115/architecture/operations-console.png",
+      "source": [
+        15,
+        42,
+        1741,
+        818
+      ],
+      "destination": [
+        -52,
+        -48.86387133831131,
+        104,
+        48.86387133831131
+      ],
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        493,
+        517.8400268554688
+      ],
+      "alpha": 1
+    }
+  ],
+  "sourcePixelsUnchanged": true,
+  "decoderAdaptation": "Only caBX provenance metadata skipped in transient Skia input buffers; source PNG bytes and IDAT unchanged.",
+  "bounds": [
+    {
+      "id": "north-wall",
+      "x": 610,
+      "z": 0,
+      "w": 44,
+      "d": 138,
+      "h": 166
+    },
+    {
+      "id": "south-wall",
+      "x": 610,
+      "z": 250,
+      "w": 44,
+      "d": 130,
+      "h": 154
+    },
+    {
+      "id": "generator",
+      "x": 348,
+      "z": 78,
+      "w": 100,
+      "d": 62,
+      "h": 84
+    },
+    {
+      "id": "crate-east",
+      "x": 950,
+      "z": 253,
+      "w": 112,
+      "d": 80,
+      "h": 63
+    },
+    {
+      "id": "service-rack",
+      "x": 1100,
+      "z": 40,
+      "w": 94,
+      "d": 62,
+      "h": 130
+    },
+    {
+      "id": "vestibule:hadley-to-ops:0",
+      "x": 1348,
+      "z": 146,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:hadley-to-ops:1",
+      "x": 1348,
+      "z": 232,
+      "w": 92,
+      "d": 12,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:hadley-to-mess:0",
+      "x": 701,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    },
+    {
+      "id": "vestibule:hadley-to-mess:1",
+      "x": 787,
+      "z": 0,
+      "w": 12,
+      "d": 55,
+      "h": 119,
+      "material": "metal",
+      "visual": "vestibule-return"
+    }
+  ],
+  "props": [
+    {
+      "id": "console",
+      "x": 493,
+      "z": 294,
+      "support": "sol de la coursive",
+      "type": "console"
+    },
+    {
+      "id": "lamp-west",
+      "x": 385,
+      "z": 32,
+      "support": "mur nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "lamp-east",
+      "x": 1050,
+      "z": 30,
+      "support": "mur nord",
+      "type": "lamp",
+      "circuit": "service"
+    },
+    {
+      "id": "pipe",
+      "x": 298,
+      "z": 18,
+      "support": "mur nord",
+      "type": "pipe"
+    }
+  ],
+  "sourceImageCount": 10
+}
