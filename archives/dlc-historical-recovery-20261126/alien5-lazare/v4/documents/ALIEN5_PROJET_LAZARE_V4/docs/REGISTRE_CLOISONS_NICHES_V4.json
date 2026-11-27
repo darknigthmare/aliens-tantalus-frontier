@@ -1,0 +1,261 @@
+{
+  "bulkheads": [
+    {
+      "edge": "P09",
+      "code": "CF-01",
+      "name": "Chaîne / chaufferie",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P13",
+      "code": "CF-02",
+      "name": "Inspection / monte-charge",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P16",
+      "code": "CF-03",
+      "name": "Archives / atrium",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P23",
+      "code": "CF-04",
+      "name": "Bassin / vivarium",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P27",
+      "code": "CF-05",
+      "name": "Filtration / confinement",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P31",
+      "code": "CF-06",
+      "name": "Rétention / catalyse",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "P34",
+      "code": "CF-07",
+      "name": "Four / répartiteur",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    },
+    {
+      "edge": "S38B",
+      "code": "CF-08",
+      "name": "Échangeurs / retour d’eau",
+      "closedHP": 40,
+      "weldHP": 120,
+      "closeDuration": 0.75,
+      "openDuration": 0.7,
+      "weldDuration": 2.4,
+      "cutDuration": 2.0
+    }
+  ],
+  "hides": [
+    {
+      "id": "HIDE_05",
+      "room": "A5_05",
+      "x": 930,
+      "z": 0.2,
+      "label": "Dépôt de tabliers",
+      "style": "workshop",
+      "duration": 0.75,
+      "note": "Écarter les tabliers protège des regards, pas d’un poursuivant qui a vu où vous êtes entrée."
+    },
+    {
+      "id": "HIDE_10",
+      "room": "A5_10",
+      "x": 650,
+      "z": 0.5,
+      "label": "Niche d’inspection",
+      "style": "duct",
+      "duration": 0.75,
+      "note": "La trappe est au niveau de la coursive ; la vanne de vapeur reste accessible plus loin."
+    },
+    {
+      "id": "HIDE_13",
+      "room": "A5_13",
+      "x": 625,
+      "z": 0.5,
+      "label": "Alcôve des classeurs",
+      "style": "archive",
+      "duration": 0.75,
+      "note": "Les classeurs protègent la ligne du corps. Les agents peuvent inspecter cette alcôve."
+    },
+    {
+      "id": "HIDE_19",
+      "room": "A5_19",
+      "x": 1020,
+      "z": 0.23,
+      "label": "Armoire étanche",
+      "style": "laboratory",
+      "duration": 0.75,
+      "note": "Le logement est sur le chemin sec. Il ne dispense pas du drainage du bassin."
+    },
+    {
+      "id": "HIDE_24",
+      "room": "A5_24",
+      "x": 760,
+      "z": 0.5,
+      "label": "Niche des gaines",
+      "style": "duct",
+      "duration": 0.75,
+      "note": "Ce renfoncement reste étanche aux regards, pas aux bruits ni aux attaques de proximité."
+    },
+    {
+      "id": "HIDE_28",
+      "room": "A5_28",
+      "x": 960,
+      "z": 0.23,
+      "label": "Écran de maintenance",
+      "style": "furnace",
+      "duration": 0.75,
+      "note": "Le compartiment ne protège ni du compte à rebours ni d’une couronne qui cède."
+    },
+    {
+      "id": "HIDE_37",
+      "room": "A5_37",
+      "x": 555,
+      "z": 0.5,
+      "label": "Repli de service D2",
+      "style": "duct",
+      "duration": 0.75,
+      "note": "Le retour latéral est accessible sans traverser la bande de vapeur."
+    },
+    {
+      "id": "HIDE_41",
+      "room": "A5_41",
+      "x": 1040,
+      "z": 0.23,
+      "label": "Réserve de câbles",
+      "style": "cables",
+      "duration": 0.75,
+      "note": "Aucun raccord électrique actif ne traverse cette réserve désaffectée."
+    }
+  ],
+  "pursuitEdges": [
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P19",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30",
+    "P31",
+    "P32",
+    "P35",
+    "P36",
+    "P37",
+    "P38",
+    "P39",
+    "S37C",
+    "S38A",
+    "S38B",
+    "S39C",
+    "S40A",
+    "S40B"
+  ],
+  "pursuitSafeRooms": [
+    "A5_00",
+    "A5_01",
+    "A5_16",
+    "A5_29",
+    "A5_35",
+    "A5_36"
+  ],
+  "attackProfiles": {
+    "guard": {
+      "windup": 0.6,
+      "recovery": 1.15,
+      "label": "ACQUISITION",
+      "description": "Ligne de visée fixe pendant la préparation ; changer de plan rompt le tir."
+    },
+    "drone": {
+      "windup": 0.52,
+      "recovery": 1.35,
+      "label": "FRAPPE",
+      "description": "Attaque rapprochée sur le point acquis ; aucun saut instantané vers une autre cible."
+    },
+    "facehugger": {
+      "windup": 0.48,
+      "recovery": 1.25,
+      "label": "BOND",
+      "description": "Bond court vers la position acquise. Le dessin conserve l’emprise du contact."
+    },
+    "trematode": {
+      "windup": 0.7,
+      "recovery": 1.6,
+      "label": "PALPATION",
+      "description": "Organisme ancré : une préparation visible puis un temps de rétraction."
+    },
+    "fourarm": {
+      "windup": 0.9,
+      "recovery": 1.8,
+      "label": "FRAPPE LOURDE",
+      "description": "Les bras se referment sur une position acquise. La purge reste une résolution alternative."
+    },
+    "queen": {
+      "windup": 1.05,
+      "recovery": 1.8,
+      "label": "FRAPPE ROYALE",
+      "description": "Préparation lisible et récupération. Trois attaches puis rupture restent obligatoires."
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "archiveId": "alien5-lazare/v9",
+  "originalFilename": "DLC_ALIEN5_PROJET_LAZARE_V9_CANDIDAT.zip",
+  "bytes": 10684397,
+  "sha256": "f49adb8cb42b38e937aad15edcbbe3d9632f7b7df3706c0b045bfde4c988d5b3",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 375,
+  "pngOccurrences": 0,
+  "zipCrc32": "pass-all-members",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/DLC_ALIEN5_PROJET_LAZARE_V9_CANDIDAT.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "f8ad801e6658a1072f1249ae19c657bf35958c8d14c5f3294c6e93043f0c6ee9",
+      "gitBlobSha1": "d37060cb111299bb025ce2dcd64a969d780e1c7a"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/DLC_ALIEN5_PROJET_LAZARE_V9_CANDIDAT.zip.part002",
+      "offset": 10485760,
+      "bytes": 198637,
+      "sha256": "41099120d00647d3de06a9003756cd28202a2758dc269243eb211354aa909992",
+      "gitBlobSha1": "a9ae92623a18d1e6040fbf41204f13dac13a155f"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/MANIFEST.json",
+  "documents": [
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/CHANGELOG_V9.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/CHANGELOG_V9.md",
+      "bytes": 1600,
+      "sha256": "2763c3038f2f314ec657d2d18aebab68909a68bc95badc823779ce959a671f6c",
+      "gitBlobSha1": "d1134cb6fef63b0376fe6c8f5f7118f4e4617aea"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/LICENSE_NOTICE.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/LICENSE_NOTICE.md",
+      "bytes": 667,
+      "sha256": "0a0a802657b6c9823a0ebbcb2462c25958b26ec512fadb1f2cf044f3731077d2",
+      "gitBlobSha1": "015f0078a32ab032ab2f0f885dde9a6053b7a78b"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/README.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/README.md",
+      "bytes": 6174,
+      "sha256": "e3d15c2232d38d86b42e19fd98c0d5472f5f0ba1519dc30eb6da4431e753ed65",
+      "gitBlobSha1": "581ed84ee927aaa3188531621c753ccaf049a1ee"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/docs/CODEX_REGLES_V9.md",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/docs/CODEX_REGLES_V9.md",
+      "bytes": 55725,
+      "sha256": "f163ae3750bf21957446fb29562122229d4e86bdaa48097049aed70c45d87206",
+      "gitBlobSha1": "60c0966c484bf456af197e4d01cb089f958da386"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/docs/ROOMS_V9.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/docs/ROOMS_V9.json",
+      "bytes": 333020,
+      "sha256": "4e064c54ba43f2b75079950cc659d8f5bf40069303f39ac7ce6ab4414fc7bd4d",
+      "gitBlobSha1": "e3922a27a0b67d1081f04925ecc81eaac96d9dda"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/docs/base-v8-contract.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/docs/base-v8-contract.json",
+      "bytes": 1067,
+      "sha256": "8357e3a4f1a55d71739eaf4b7b4e19bdff86c93ed1d68075ce74bf420e6b32f3",
+      "gitBlobSha1": "7ab054cdba77db505555f5791aa84b71cb3e41bd"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/docs/rules-v9.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/docs/rules-v9.json",
+      "bytes": 57206,
+      "sha256": "3538c47c0a74294199cdb4a57b934b9e180e085cb3f19180d2d12e7c46506ba8",
+      "gitBlobSha1": "63b668e8695de81b3b07327f6d2f22f03cae0399"
+    },
+    {
+      "member": "ALIEN5_PROJET_LAZARE_V9/game/data.json",
+      "path": "archives/dlc-historical-recovery-20261126/alien5-lazare/v9/documents/ALIEN5_PROJET_LAZARE_V9/game/data.json",
+      "bytes": 391645,
+      "sha256": "b973c74ec54a6031581284a928cead0c6cfecbc8ba318f3a7c923c438d4b5fd5",
+      "gitBlobSha1": "e2450bdbfcab07e741644a241f1d7fe160329023"
+    }
+  ]
+}
