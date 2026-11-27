@@ -7,6 +7,7 @@ import { getXenoTrialsBodyBoundsV105 as body } from '../src/xeno-trials-geometry
 import { getXenoTrialsHurtBoundsV207 as hurt, XENO_TRIALS_GUARD_RETREAT_V213, XENO_TRIALS_LOW_RETREAT_V213 } from '../src/xeno-trials-moveset-v207.js';
 import { getXenoTrialsAttackV147 } from '../src/xeno-trials-signatures-v147.js';
 import { getXenoTrialsSpriteAtlasV189, sampleXenoTrialsSpriteAtlasV189 } from '../src/xeno-trials-sprite-atlas-v189.js';
+import { getXenoTrialsRuntimeSpriteAtlas, sampleXenoTrialsSpriteAtlasV191 } from '../src/xeno-trials-sprite-atlas-v191.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsHordeCheckpointV186 } from '../src/xeno-trials-horde-checkpoint-v186.js';
@@ -100,6 +101,30 @@ test('standing guard can retreat, pays its additional movement drain and continu
     const still = duel('warrior', 200), actor = still.fighters[0], x = actor.x;
     move(still, controls);
     assert.equal(actor.x, x);
+  }
+});
+
+test('six additional V218 profiles yield ground under frontal guard with their own reversed walk keys', () => {
+  for (const id of ['defender', 'chrysalis', 'smasher', 'user-brute', 'synth-trooper', 'synth-guard']) {
+    const match = duel(id, 4), [player, opponent] = match.fighters;
+    const definition = getXenoTrialsFighterV96(id), start = player.x, stamina = player.stamina;
+    move(match, guarded, { heavy: true });
+    assert.equal(player.guard, true, id);
+    assert.equal(player.x, start - definition.speed * XENO_TRIALS_GUARD_RETREAT_V213.speedRatio * dt, id);
+    assert.equal(player.stamina, stamina - (5 + XENO_TRIALS_GUARD_RETREAT_V213.additionalDrain) * dt, id);
+    const atlas = getXenoTrialsRuntimeSpriteAtlas(player, getXenoTrialsArtV96(id));
+    const metrics = { visibleHeight: body(player).height };
+    const moving = { metrics, distance: metrics.visibleHeight * .2, moving: true, guardedRetreat: true };
+    assert.equal(sampleXenoTrialsSpriteAtlasV191(atlas, player, moving).frame.id, 'walk-a', id);
+    assert.equal(sampleXenoTrialsSpriteAtlasV191(atlas, player, { ...moving, reverseStep: true }).frame.id, 'walk-b', id);
+    assert.equal(sampleXenoTrialsSpriteAtlasV191(atlas, player, { ...moving, reducedMotion: true }).frame.id, 'guard', id);
+    advance(match, 31, guarded);
+    assert.equal(player.stats.blocks, 1, id);
+    assert.equal(opponent.stats.hits, 1, id);
+    assert.equal(player.guard, true, id);
+    const before = player.x;
+    move(match, { ...guarded, crouch: true });
+    assert.equal(player.x, before, id);
   }
 });
 

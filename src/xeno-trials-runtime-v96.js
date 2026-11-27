@@ -1,7 +1,8 @@
 import { createXenoTrialsPracticeV207 } from './xeno-trials-practice-v207.js';
 import { canXenoTrialsGuardRetreatV213, getXenoTrialsEvadeSpecV213, getXenoTrialsLowScaleV207,
   getXenoTrialsStrikeBandV207, XENO_TRIALS_LOW_RETREAT_V213 } from './xeno-trials-moveset-v207.js';
-import { getXenoTrialsGroundRecoveryV211 } from './xeno-trials-defense-v211.js';
+import { getXenoTrialsGroundRecoveryHintV218, getXenoTrialsGroundRecoveryV211 } from './xeno-trials-defense-v211.js';
+import { hasXenoTrialsGuardedWalkV218 } from './xeno-trials-movement-v210.js';
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
  getXenoTrialsSequenceCueV155, sampleXenoTrialsSequenceV155, skipXenoTrialsIntroV155,
  createXenoTrialsTerminalV156, createXenoTrialsTauntV156, advanceXenoTrialsTauntV156, getXenoTrialsSequenceCueV156, createXenoTrialsExitV157, getXenoTrialsExitViewV157, createXenoTrialsLandingV157, getXenoTrialsLandingViewV157 } from './xeno-trials-sequences-v155.js';
@@ -235,7 +236,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const acceptsControls = () => running && loaded && !stopped && !assetFailure && !match.paused
     && match.phase === 'active' && windowAvailable() && !presentationView().blocksSimulation;
   let emittedResult = false, notifyElapsed = 0, lastStatus = '', assetFailure = false;
-  let lastGroundBreakState = null;
+  let lastGroundBreakState = null, lastGroundRecoveryHint = '';
   const originalSize = { width: canvas.width, height: canvas.height };
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   const observeStageV211 = createXenoTrialsStageEventsV211(stage.id, match, XENO_TRIALS_ARENA_V96);
@@ -345,8 +346,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   function notify(force = false) {
     sound.observeState(match, { active: loaded && running && !stopped && !isPaused() && !presentationView().blocksSimulation, focused: windowAvailable() });
     const groundBreakState = getXenoTrialsGroundBreakViewV213(match)?.state ?? null;
-    if (stopped || !force && groundBreakState === lastGroundBreakState && notifyElapsed < .12) return;
+    const groundRecoveryHint = getXenoTrialsGroundRecoveryHintV218(match, match.fighters[0]);
+    if (stopped || !force && groundBreakState === lastGroundBreakState && groundRecoveryHint === lastGroundRecoveryHint
+      && notifyElapsed < .12) return;
     lastGroundBreakState = groundBreakState;
+    lastGroundRecoveryHint = groundRecoveryHint;
     notifyElapsed = 0;
     const status = statusText();
     if (options.statusElement && status !== lastStatus) options.statusElement.textContent = status;
@@ -430,6 +434,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const evade = moveset?.evade, evadeSpec = getXenoTrialsEvadeSpecV213(evade);
     const guardedRetreat = displaced && match.phase === 'active' && canXenoTrialsGuardRetreatV213(fighter, definition, fighter.previousInput ?? {});
     const defensiveWalk = guardedRetreat || displaced && evadeSpec === XENO_TRIALS_LOW_RETREAT_V213 && evade.ticks <= evadeSpec.travelTicks;
+    const drawnGuardedWalk = guardedRetreat && hasXenoTrialsGuardedWalkV218(definition);
     const moving = displaced && !moveset?.evade && (Boolean(fighter.previousInput?.left) !== Boolean(fighter.previousInput?.right))
       && fighter.hp > 0 && !fighter.attack && !fighter.guard && fighter.stun <= 0
       && fighter.hitFlash <= 0 && fighter.y === 0 && match.phase === 'active';
@@ -501,7 +506,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       && getXenoTrialsSpriteAtlasV197(fighter, art);
     const drawnModernAtlas = (!ordinarySpritesBlocked && match.phase === 'active'
       && drawXenoTrialsRuntimeActionAtlas(context, fighter, art, images, spriteOptions))
-      || ((!ordinarySpritesBlocked && !defensiveWalk || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
+      || ((!ordinarySpritesBlocked && (!defensiveWalk || drawnGuardedWalk) || settledOnAtlas) && drawXenoTrialsSpriteAtlasV191(context,
         settledOnAtlas ? { ...fighter, y: 0 } : fighter, art, images, {
           ...spriteOptions, includeV197: true,
           ...(settledOnAtlas ? { cue: { state: 'ko', progress: 1 }, y: XENO_TRIALS_ARENA_V96.floor } : {})

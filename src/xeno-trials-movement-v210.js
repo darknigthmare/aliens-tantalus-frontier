@@ -20,9 +20,19 @@ const turnProfiles = new Map([
   ['chrysalis', 'castes-game_avp_capcom_chrysalis'],
   ['smasher', 'castes-game_avp_capcom_smasher']
 ]);
+// The V191 and V197 combat sheets provide both grounded walk keys and guard.
+const guardedWalkProfiles = new Map([
+  ['defender', 'pose-v95-user-xeno-defender'],
+  ['chrysalis', 'castes-game_avp_capcom_chrysalis'],
+  ['smasher', 'castes-game_avp_capcom_smasher'],
+  ['user-brute', 'pose-v95-user-xeno-brute'],
+  ['synth-trooper', 'pose-v94-afe-synth-trooper'],
+  ['synth-guard', 'pose-v94-afe-synth-guard']
+]);
 const matches = (profiles, definition) => definition?.profileId && profiles.get(definition.id) === definition.profileId;
 export const hasXenoTrialsGroundTurnV210 = definition => Boolean(matches(turnProfiles, definition));
 export const hasXenoTrialsDefensiveTravelV213 = definition => Boolean(matches(landingProfiles, definition));
+export const hasXenoTrialsGuardedWalkV218 = definition => Boolean(matches(guardedWalkProfiles, definition));
 
 export function canBufferXenoTrialsLandingV210(fighter, definition, dt) {
   if (!matches(landingProfiles, definition) || !(fighter.y > 0) || !(fighter.vy < 0) || fighter.hp <= 0

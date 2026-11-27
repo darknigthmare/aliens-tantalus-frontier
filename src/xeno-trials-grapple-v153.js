@@ -2,6 +2,7 @@ import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsGroundGrabPairV212, hasXenoTrialsGroundGrabContactV212, XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 import { getXenoTrialsGroundBreakViewV213, stepXenoTrialsGroundBreakV213, XENO_TRIALS_GROUND_BREAK_V213 } from './xeno-trials-grapple-v213.js';
+import { currentLanguageV185 } from './i18n-v185.js';
 
 /** Prowler restraint: original 2D adaptation, not captured choreography.
  * The FTE capability is recorded with its limited provenance in V151. Target
@@ -22,6 +23,9 @@ export const XENO_TRIALS_GRAPPLE_V153 = Object.freeze({
 });
 const config = XENO_TRIALS_GRAPPLE_V153;
 const actions = ['left','right','jump','guard','light','heavy','special','super'];
+export const XENO_TRIALS_GROUND_RELEASE_V218 = Object.freeze({
+  minimumHeldTicks: 12, separation: 12, captorRecovery: .24, captiveRecovery: .17,
+});
 export function hasXenoTrialsGrappleV153(definition) {
   return definition?.id === config.fighterId && definition.profileId === config.profileId;
 }
@@ -54,6 +58,24 @@ export function isXenoTrialsGrappledV153(match, fighter) {
   const hold = match?.grappleV153;
   return Boolean(hold && fighter && [hold.attacker, hold.target].includes(fighter.side));
 }
+
+function canReleaseGroundHold(match, fighter) {
+  const hold = match.grappleV153;
+  return Boolean(hold?.grabIdV212 && fighter?.side === hold.attacker
+    && (fighter.side === 'player' || match.opponentInputSourceV163 === 'direct')
+    && match.phase === 'active' && !match.paused && !match.config.rulesV119?.noSpecial
+    && match.tick - hold.bornTick >= XENO_TRIALS_GROUND_RELEASE_V218.minimumHeldTicks && match.tick < hold.expiresTick
+    && (!hold.breakV213 || hold.breakV213.failedTick) && fighter.hp > 0 && fighter.stun === 0
+    && fighter.y === 0 && fighter.vy === 0);
+}
+
+/** Pick up the fresh command before the actor stores this tick's input. The
+ * hold ID is used only in this fixed step, after interruption and escape. */
+export function readXenoTrialsGroundReleaseCommandV218(match, fighter, controls) {
+  if (!controls.guard || !controls.heavy || controls.super || fighter.previousInput.heavy
+    || !canReleaseGroundHold(match, fighter)) return null;
+  return match.grappleV153.id;
+}
 export function startXenoTrialsGrappleV153(match, from, to, attackId, emit) {
   if (match.phase !== 'active' || match.paused || match.hordeV180 || match.config.rulesV119?.noSpecial || match.grappleV153
     || from.hp <= 0 || to.hp <= 0 || from.stun > 0 || from.attack?.id !== attackId) return false;
@@ -78,20 +100,22 @@ export function releaseXenoTrialsGrappleV153(match, reason, emit = () => {}) {
   if (!hold) return false;
   const grab = activeContract(match, hold) || config;
   const countered = reason === 'countered';
+  const released = reason === 'released';
+  const holder = released && match.fighters.find(fighter => fighter.side === hold.attacker);
+  if (released && !canReleaseGroundHold(match, holder)) return false;
   if (countered && (!hold.grabIdV212 || !hold.breakV213 || hold.breakV213.failedTick
     || match.tick !== hold.breakV213.tick + XENO_TRIALS_GROUND_BREAK_V213.effortTicks)) return false;
+  const recovery = countered ? XENO_TRIALS_GROUND_BREAK_V213 : released ? XENO_TRIALS_GROUND_RELEASE_V218 : null;
   delete match.grappleV153;
   for (const fighter of match.fighters) if ([hold.attacker, hold.target].includes(fighter.side)) {
     fighter.attack = null; fighter.guard = false;
     fighter.rearmControls = Object.fromEntries(actions.map(key => [key,
       fighter.rearmControls?.[key] === true || fighter.previousInput?.[key] === true]));
-    if (fighter.hp > 0) {
-      const recovery = countered ? (fighter.side === hold.attacker ? XENO_TRIALS_GROUND_BREAK_V213.captorRecovery
-        : XENO_TRIALS_GROUND_BREAK_V213.captiveRecovery) : grab.recovery;
-      fighter.stun = Math.max(fighter.stun, recovery);
-    }
-    if (countered && fighter.side === hold.attacker) {
-      const x = fighter.x - hold.facingV212 * XENO_TRIALS_GROUND_BREAK_V213.recoil;
+    if (fighter.hp > 0) fighter.stun = Math.max(fighter.stun,
+      recovery ? recovery[fighter.side === hold.attacker ? 'captorRecovery' : 'captiveRecovery'] : grab.recovery);
+    if ((countered || released) && fighter.side === hold.attacker) {
+      const separation = countered ? XENO_TRIALS_GROUND_BREAK_V213.recoil : XENO_TRIALS_GROUND_RELEASE_V218.separation;
+      const x = fighter.x - hold.facingV212 * separation;
       fighter.x = Math.max(XENO_TRIALS_ARENA_V105.left, Math.min(XENO_TRIALS_ARENA_V105.right, x));
     }
     if ((reason === 'escaped' || countered) && fighter.side === hold.target)
@@ -99,14 +123,15 @@ export function releaseXenoTrialsGrappleV153(match, reason, emit = () => {}) {
   }
   emit('grapple-end-v153', { side: hold.target, attacker: hold.attacker, grappleId: hold.id, reason,
     ...(hold.grabIdV212 ? { grabIdV212: hold.grabIdV212 } : {}),
-    ...(countered ? { breakStartV213: hold.breakV213.startId } : {}) });
+    ...(countered ? { breakStartV213: hold.breakV213.startId } : {}),
+    ...(released ? { heldTicksV218: match.tick - hold.bornTick } : {}) });
   return true;
 }
 /** One bounded restraint per duel. Both actors keep their collision bodies;
  * gravity and existing projectiles/acids continue, ordinary actions do not.
  * Hold GUARD to escape; no button-mashing, random prompt or repeated costs.
  */
-export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
+export function stepXenoTrialsGrappleV153(match, bounds, impact, emit, releaseHoldId = null) {
   const hold = match.grappleV153;
   if (!hold || match.paused || match.phase !== 'active') return;
   const grab = activeContract(match, hold);
@@ -128,6 +153,7 @@ export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
   }
   if (hold.escapeProgress >= grab.escapeTicks) { releaseXenoTrialsGrappleV153(match, 'escaped', emit); return; }
   if (match.tick >= hold.expiresTick) { releaseXenoTrialsGrappleV153(match, 'timeout', emit); return; }
+  if (releaseHoldId === hold.id && releaseXenoTrialsGrappleV153(match, 'released', emit)) return;
   if (match.tick >= hold.nextDamageTick) {
     hold.nextDamageTick += grab.damageIntervalTicks;
     impact({ from, to, power: 1, direction: 0,
@@ -135,6 +161,11 @@ export function stepXenoTrialsGrappleV153(match, bounds, impact, emit) {
   }
 }
 function escapePrompt(match, hold, detailed = false) {
+  if (hold.grabIdV212 && hold.attacker === 'player' && hold.target === 'opponent' && match.opponentInputSourceV163 !== 'direct') {
+    const holder = match.fighters.find(fighter => fighter.side === hold.attacker);
+    if (canReleaseGroundHold(match, holder)) return currentLanguageV185() === 'en'
+      ? 'RELEASE HOLD · GUARD + HEAVY' : 'RELÂCHER LA PRISE · GARDE + LOURDE';
+  }
   if (hold.target === 'opponent' && match.opponentInputSourceV163 !== 'direct') return 'SAISIE · RÉSISTANCE ADVERSE';
   const escape = getXenoTrialsGroundBreakViewV213(match);
   if (escape?.state === 'ready') return 'DÉGAGEMENT RAPIDE · GARDE + J';

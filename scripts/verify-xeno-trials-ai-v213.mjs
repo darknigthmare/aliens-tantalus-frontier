@@ -3,6 +3,7 @@ import test from 'node:test';
 import { createXenoTrialsDuelCheckpointV197 } from '../src/xeno-trials-duel-checkpoint-v197.js';
 import { createXenoTrialsMatchV96, getXenoTrialsSnapshotV96, setXenoTrialsPausedV96, XENO_TRIALS_ATTACKS_V96,
   stepXenoTrialsMatchV96, XENO_TRIALS_STEP_V96 as dt } from '../src/xeno-trials-engine-v96.js';
+import { XENO_TRIALS_GET_UP_V211 } from '../src/xeno-trials-defense-v211.js';
 import { getXenoTrialsBodyBoundsV105 as bounds } from '../src/xeno-trials-geometry-v105.js';
 import { beginXenoTrialsV96, createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
 
@@ -193,4 +194,78 @@ test('the hard CPU saves anti-air for a reachable airborne target it can afford 
     advance(match, 30);
     assert.ok(cpuAttacks(match).every(event => event.kind !== 'anti-air'), JSON.stringify(options));
   }
+});
+
+test('Runner reads two standing blocks with a regular low strike while signatures are locked', () => {
+  for (const { rules, wait = 0, crouch = false, kind, contact } of [
+    { rules: { noSpecial: true }, kind: 'low', contact: 'hit' },
+    { rules: { specialLockSeconds: 20 }, kind: 'low', contact: 'hit' },
+    { rules: { specialLockSeconds: 20 }, wait: 20 * 120, kind: 'signature-2', contact: 'hit' },
+    { rules: { noSpecial: true }, crouch: true, kind: 'light', contact: 'block' }
+  ]) {
+    const { match, player, cpu, config } = fixture({ playerId: 'synth-guard', opponentId: 'runner',
+      gap: 3, seed: 4, meter: 0, rules });
+    // The opening inputs establish two real blocked contacts before native control resumes.
+    advance(match, wait, {}, {});
+    for (let attempt = 0; attempt < 2; attempt++) {
+      advance(match, 1, { guard: true }, { light: true });
+      advance(match, 44, { guard: true }, {});
+    }
+    assert.equal(player.stats.blocks, 2);
+    advance(match, 16, { guard: true, crouch });
+    assert.equal(cpu.attack, null);
+    const stamina = cpu.stamina;
+    const meter = cpu.superMeterV148;
+    advance(match, 1, { guard: true, crouch });
+    assert.equal(cpu.attack?.kind, kind);
+    if (kind === 'low') assert.ok(Math.abs(cpu.stamina - (stamina + dt * 24 - XENO_TRIALS_ATTACKS_V96.low.cost)) < 1e-8);
+    assert.equal(cpu.superMeterV148, meter);
+    assert.equal(cpu.stats.specials, Number(kind === 'signature-2'));
+    const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+    assert.ok(checkpoint);
+    const resumed = structuredClone(checkpoint.snapshot);
+    setXenoTrialsPausedV96(resumed, false);
+    for (const state of [match, resumed]) {
+      advance(state, 19, { guard: true, crouch });
+      assert.equal(state.events.at(-1).type, contact);
+    }
+    assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
+  }
+});
+
+test('hard Synth Guard releases guard after a genuine break and re-arms once during recovery', () => {
+  const { match, cpu, config } = fixture({ playerId: 'warrior', opponentId: 'synth-guard', gap: 3, seed: 2 });
+  advance(match, 1, { heavy: true });
+  advance(match, 26);
+  assert.equal(cpu.guard, true);
+  cpu.stamina = 12; // Arrange a break on the imminent native heavy contact.
+  advance(match, 1);
+  const broken = match.events.at(-1);
+  assert.equal(broken.type, 'guard-break');
+  assert.equal(broken.side, 'opponent');
+  assert.equal(cpu.previousInput.guard, true);
+  const hp = cpu.hp;
+  advance(match, XENO_TRIALS_GET_UP_V211.opensAt);
+  assert.equal(cpu.previousInput.guard, false);
+  assert.equal(cpu.groundRecoveryV211.assistedAt, 0);
+  const checkpoint = createXenoTrialsDuelCheckpointV197(getXenoTrialsSnapshotV96(match), config);
+  assert.ok(checkpoint);
+  const resumed = structuredClone(checkpoint.snapshot);
+  setXenoTrialsPausedV96(resumed, false);
+  for (const state of [match, resumed]) {
+    const guard = state.fighters[1];
+    advance(state, 7);
+    assert.equal(guard.groundRecoveryV211.assistedAt, 0);
+    advance(state, 1);
+    assert.equal(guard.previousInput.guard, true);
+    assert.equal(guard.groundRecoveryV211.assistedAt, state.tick);
+    assert.equal(guard.stun, XENO_TRIALS_GET_UP_V211.assistedTicks * dt);
+    const recovery = state.events.filter(event => event.type === 'get-up-v211');
+    assert.deepEqual(recovery.map(event => [event.side, event.breakIdV211]), [['opponent', broken.id]]);
+    assert.equal(guard.hp, hp);
+    advance(state, XENO_TRIALS_GET_UP_V211.assistedTicks);
+    assert.equal(guard.groundRecoveryV211, undefined);
+    assert.equal(guard.previousInput.guard, false);
+  }
+  assert.deepEqual(getXenoTrialsSnapshotV96(resumed), getXenoTrialsSnapshotV96(match));
 });

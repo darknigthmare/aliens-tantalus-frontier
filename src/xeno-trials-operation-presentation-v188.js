@@ -29,6 +29,10 @@ export function getXenoTrialsOperationHudV188(match) {
     } else {
       instruction = contact ? `${label} · MAINTENEZ INTERAGIR` : label;
       if (contact && view.isolationV212) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      if (view.relayPressureV218) {
+        if (target.contested) instruction = `${label} · PÉRIMÈTRE CONTESTÉ`;
+        else if (contact) instruction += ` · ${Math.floor(target.progress * 100 / target.requiredTicks)} %`;
+      }
       if (view.kind === 'extraction' || purgeV204) {
         const work = { id: target.id, kind: target.kind, contact, progress: target.progress,
           requiredTicks: target.requiredTicks, percent: Math.floor(target.progress * 100 / target.requiredTicks) };
@@ -74,17 +78,22 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
   for (const entity of view.entities) {
     if (!Number.isFinite(entity.x) || !Number.isFinite(entity.radius)) continue;
     if (entity.kind === 'supply' && (entity.carried || entity.delivered)) continue;
-    const color = entity.kind === 'beacon' ? beaconColor(entity) : entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
+    const color = entity.contested ? '#ed997c' : entity.kind === 'beacon' ? beaconColor(entity) : entity.completed ? '#91bd8c' : entity.active ? '#ecd08c' : '#8a9d98';
     const x = entity.x, width = entity.kind === 'cargo' ? 84 : entity.kind === 'depot' || entity.kind === 'exit' ? 100 : 42;
     ctx.strokeStyle = color; ctx.fillStyle = '#142124'; ctx.lineWidth = 2;
     if (plane === 'front') {
       ctx.globalAlpha = entity.active ? .95 : .55;
+      if (entity.active && entity.pressureRadius) {
+        const left = x - entity.pressureRadius, right = x + entity.pressureRadius;
+        ctx.beginPath(); ctx.moveTo(left, floor + 7); ctx.lineTo(left, floor + 3);
+        ctx.lineTo(right, floor + 3); ctx.lineTo(right, floor + 7); ctx.stroke();
+      }
       ctx.beginPath(); ctx.moveTo(x - entity.radius, floor + 9); ctx.lineTo(x + entity.radius, floor + 9); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(x, floor + 9); ctx.lineTo(x - 6, floor + 17); ctx.lineTo(x + 6, floor + 17); ctx.closePath();
       ctx.fillStyle = color; ctx.fill();
       if (entity.active) {
         ctx.font = 'bold 12px monospace'; ctx.textAlign = 'center';
-        ctx.fillText(entity.label, x, floor + 34, 210);
+        ctx.fillText(entity.contested ? `${entity.label} · CONTESTÉ` : entity.label, x, floor + 34, 210);
       }
       continue;
     }
@@ -99,7 +108,7 @@ export function drawXenoTrialsOperationV188(ctx, match, arena, { plane = 'rear',
       ctx.fillRect(x + width / 2 - 12, floor - height + 6, 5, height - 14);
     } else {
       ctx.fillRect(x - width / 2 + 7, floor - height + 8, width - 14, 9);
-      ctx.fillStyle = entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';
+      ctx.fillStyle = entity.contested || entity.windowOpen === false && !entity.completed ? '#bd7658' : '#a9d79b';
       ctx.fillRect(x - 4, floor - height + 27, 8, 8);
     }
     if (entity.requiredTicks > 0 && entity.progress > 0) {

@@ -40,9 +40,21 @@ export const XENO_TRIALS_OPERATIONS_V188=freeze(kinds.flatMap((kind,family)=>Arr
   objectives,canonStatus:'original-tantalus-simulation',canonExact:false,revision:188};
 })));
 const catalogue=new Map(XENO_TRIALS_OPERATIONS_V188.map(entry=>[entry.id,entry]));
+const relayOrders='Réarmez les trois relais dans l’ordre. Un contact hostile au sol dans le périmètre d’un relais bloque sa charge. Écartez-le ou neutralisez-le, puis reprenez la charge.';
+export const XENO_TRIALS_RELAY_OPERATION_V218=freeze({
+ id:'xto218-bridge-relays',kind:'relay',title:'RELAIS SOUS SIÈGE',label:'RELAIS SOUS SIÈGE',stageId:'xt179-bridge',
+ hordeProtocolId:'xth218-bridge-retake',difficulty:'easy',factionId:'containment',roundSeconds:150,reward:450,
+ instruction:relayOrders,description:relayOrders,startX:180,cargoStartX:180,cargoEndX:180,relayPressureV218:true,
+ objectives:[
+  {id:'bridge-relay-west',kind:'terminal',label:'Relais ouest',x:230,y:0,radius:98,pressureRadius:192,requiredTicks:300},
+  {id:'bridge-relay-central',kind:'terminal',label:'Relais central',x:650,y:0,radius:90,pressureRadius:184,requiredTicks:144},
+  {id:'bridge-relay-east',kind:'terminal',label:'Relais est',x:1130,y:0,radius:98,pressureRadius:192,requiredTicks:132}
+ ],canonExact:false,canonStatus:'original-tantalus-simulation',revision:218
+});
 export const XENO_TRIALS_OPERATION_BOARD_V212=Object.freeze([...XENO_TRIALS_ISOLATION_OPERATIONS_V212,...XENO_TRIALS_OPERATIONS_V188]);
-export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
-export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_CARGO_OPERATION_V213.id ? XENO_TRIALS_CARGO_OPERATION_V213
+export const XENO_TRIALS_OPERATION_BOARD_V213=Object.freeze([XENO_TRIALS_RELAY_OPERATION_V218,XENO_TRIALS_CARGO_OPERATION_V213,...XENO_TRIALS_OPERATION_BOARD_V212]);
+export const getXenoTrialsOperationV188=id=>id===XENO_TRIALS_RELAY_OPERATION_V218.id ? XENO_TRIALS_RELAY_OPERATION_V218
+ :id===XENO_TRIALS_CARGO_OPERATION_V213.id ? XENO_TRIALS_CARGO_OPERATION_V213
  :catalogue.get(id)||getArbiterOperationV191(id)||getXenoTrialsIsolationOperationV212(id);
 export const XENO_TRIALS_OPERATION_LIMITS_V188=freeze({schema:188,maxObjectives:3,ticksPerSecond:120,maxIntegrity:100,cargoPressureTicks:120,purgePressureTicks:240,purgeRegrowTicks:18});
 const stateKeys=['schema','operationId','matchId','seed','status','failureReason','elapsedTicks','startedTick','lastTick','completedTick','progress','completed','integrity','cargoTravelTicks','cargoX','carrying','delivered','depotTicks','exitTicks'];
@@ -64,6 +76,12 @@ function nearby(player,target){
  if(!player||player.hp<=0||player.y!==0||!Number.isFinite(player.x))return false;
  const body=getXenoTrialsBodyBoundsV105(player);
  return Number.isFinite(body?.left)&&Number.isFinite(body?.right)&&body.left<=target.x+target.radius&&body.right>=target.x-target.radius;
+}
+// Derive pressure from the current native actors. Paused and restored views
+// need no extra timers, event replay, or saved pressure flags.
+function relayContested(match,objective){
+ const perimeter={x:objective.x,radius:objective.pressureRadius};
+ return match.fighters?.some(fighter=>fighter.side==='opponent'&&nearby(fighter,perimeter))===true;
 }
 function windowOpen(objective,ticks){
  const phase=ticks%objective.periodTicks;
@@ -107,7 +125,12 @@ export function stepXenoTrialsOperationV188(state,match,dt,input={},emit=null){
   if(state.cargoTravelTicks===entry.objectives[0].requiredTicks)complete(0);
  }else if(entry.kind==='relay'){
   const index=state.completed.findIndex(value=>!value);
-  if(index>=0){state.progress[index]=charging(index)?state.progress[index]+1:Math.max(0,state.progress[index]-2);if(state.progress[index]>=entry.objectives[index].requiredTicks)complete(index);}
+  if(index>=0){
+   const objective=entry.objectives[index];
+   const canCharge=charging(index)&&(!entry.relayPressureV218||!relayContested(match,objective));
+   state.progress[index]=canCharge?state.progress[index]+1:Math.max(0,state.progress[index]-2);
+   if(state.progress[index]>=objective.requiredTicks)complete(index);
+  }
  }else if(entry.kind==='purge'){
   for(let index=0;index<entry.objectives.length;index++)if(!state.completed[index]){
    if(charging(index))state.progress[index]++;
@@ -209,8 +232,13 @@ export function isXenoTrialsOperationForwardV188(previous,next){
  * authoritative positions, interaction radii and charge windows come from here. */
 export function getXenoTrialsOperationViewV188(match){
  const state=match?.operationV188,entry=getXenoTrialsOperationV188(state?.operationId);if(!entry)return null;
- let entities=entry.objectives.map((objective,index)=>({...objective,active:!state.completed[index]&&(entry.kind!=='relay'||index===state.completed.findIndex(done=>!done)),completed:state.completed[index],progress:state.progress[index],
-  ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})}));
+ const nextRelay=entry.kind==='relay'?state.completed.findIndex(done=>!done):-1;
+ let entities=entry.objectives.map((objective,index)=>{
+  const active=!state.completed[index]&&(entry.kind!=='relay'||index===nextRelay);
+  return {...objective,active,completed:state.completed[index],progress:state.progress[index],
+   ...(entry.relayPressureV218?{contested:state.status==='active'&&active&&relayContested(match,objective)}:{}),
+   ...(entry.kind==='beacon'?beaconWindow(objective,state.elapsedTicks):{})};
+ });
  let target=entities.find(entity=>!entity.completed)||null;
  if(['beacon','purge'].includes(entry.kind)&&state.status==='active'){
   const touching=entities.filter(entity=>!entity.completed&&nearby(match.fighters?.[0],entity));
@@ -230,11 +258,14 @@ export function getXenoTrialsOperationViewV188(match){
  const failureLabel={'player-ko':'Spécimen neutralisé',time:'Temps écoulé','structure-destroyed':'Intégrité épuisée'}[state.failureReason]||'Évaluation interrompue';
  return{id:entry.id,title:entry.title,kind:entry.kind,status:state.status,phase:state.status==='active'?(state.carrying>=0?'carrying':'objective'):state.status,
   ...(entry.isolationV212?{isolationV212:true}:{}),
+  ...(entry.relayPressureV218?{relayPressureV218:true}:{}),
   instruction:entry.instruction,hint:state.status==='failed'?`Évaluation interrompue : ${failureLabel}.`:state.status==='completed'?'Objectifs validés.':
+   target?.contested?'Écartez ou neutralisez les contacts dans le périmètre balisé.':
    target?`${target.label} · maintenez E à proximité${target.windowOpen===false?' pendant la fenêtre verte':''}.`:'Rejoignez le sas.',
   progress:{done,total:entry.objectives.length,label:entry.kind==='extraction'?`${done}/${entry.objectives.length} caissons livrés`:`${done}/${entry.objectives.length} objectifs validés`},
   timeRemaining:Math.max(0,entry.roundSeconds-state.elapsedTicks/120),integrity:state.integrity,carrying:state.carrying,entities,
   target:target?{x:target.x,radius:target.radius,label:target.label,
    ...(entry.kind==='beacon'?{id:target.id,windowOpen:target.windowOpen,windowRemainingTicks:target.windowRemainingTicks}:{}),
-   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
+   ...(entry.relayPressureV218?{contested:target.contested}:{}),
+   ...(['extraction','purge'].includes(entry.kind)||entry.isolationV212||entry.relayPressureV218?{id:target.id,kind:target.kind,progress:target.progress,requiredTicks:target.requiredTicks}:{})}:null};
 }

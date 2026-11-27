@@ -32,6 +32,17 @@ const layouts = [
       ['left', 'MEUTE DE CONFINEMENT', ['prowler', 'runner', 'warrior'], 5, 3, 19, .24],
       ['split', 'RUPTURE DU CORDON', ['spitter', 'synth-trooper', 'armored-runner'], 6, 4, 23, .25]
     ]
+  },
+  {
+    id: 'xth218-bridge-retake', title: 'REPRISE DE LA PASSERELLE', stageId: 'xt179-bridge',
+    description: 'Des unités de sécurité entrent par l’ouest. Le détachement de relève prend le sas est avant un assaut des deux côtés.',
+    orders: 'Repoussez le premier détachement, puis quittez le sas est avant l’assaut final. Les unités de tir couvrent les accès au poste central.',
+    roundSeconds: 150, reward: 360,
+    waves: [
+      ['left', 'PATROUILLE DE SÉCURITÉ', ['synth-trooper', 'synth-guard', 'runner'], 4, 3, 15, .20],
+      ['right', 'DÉTACHEMENT DE RELÈVE', ['synth-sniper', 'synth-trooper', 'prowler'], 5, 3, 17, .22],
+      ['split', 'ASSAUT SUR LA PASSERELLE', ['synth-guard', 'runner', 'spitter'], 5, 4, 21, .24]
+    ]
   }
 ];
 

@@ -1,5 +1,6 @@
 import { getXenoTrialsHordeGateCueV213, getXenoTrialsHordeMinigameV213 } from './xeno-trials-horde-minigames-v213.js';
 import { getXenoTrialsReinforcementV201 } from './xeno-trials-reinforcements-v201.js';
+import { getXenoTrialsBossStageV179 } from './xeno-trials-boss-stages-v179.js';
 
 // The V146 proposed rows map to the stage that now represents each room.
 // These are scene fixtures drawn behind the fight, not colliders or hazards.
@@ -87,10 +88,12 @@ function getDirectedGates(protocol, match, phase, opening, reducedMotion) {
 }
 
 export function createXenoTrialsStageEventsV211(stageId, match, arena) {
-  const profile = profilesByStage.get(stageId);
-  if (!profile) return () => null;
   const minigame = getXenoTrialsHordeMinigameV213(match.hordeV180?.protocolId);
   const directedGates = minigame?.stageId === stageId;
+  const baseStageId = directedGates && getXenoTrialsBossStageV179(stageId)?.motionBaseStageId;
+  const baseProfile = profilesByStage.get(baseStageId);
+  const profile = profilesByStage.get(stageId) || (baseProfile && { ...baseProfile, stageId });
+  if (!profile) return () => null;
   let round = match.round;
   let lastEventId = match.serial;
   let observedTick = match.tick;

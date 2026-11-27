@@ -182,10 +182,12 @@ export function sampleXenoTrialsSpriteAtlasV191(atlas, fighter, options = {}) {
         || attack.age >= spec.startup + spec.active + spec.recovery) return null;
       phase = attack.age < spec.startup ? 'windup' : attack.age < spec.startup + spec.active ? 'contact' : 'recovery';
       id = { windup: 'attack-windup', contact: 'attack-impact', recovery: 'attack-recovery' }[phase];
-    } else if (fighter.guard) { id = 'guard'; phase = 'guard'; }
-    else if (options.moving && !options.reducedMotion) {
+    } else if (fighter.guard && !(options.guardedRetreat && options.moving && !options.reducedMotion)) {
+      id = 'guard'; phase = 'guard';
+    } else if (options.moving && !options.reducedMotion) {
       if (!Number.isFinite(options.distance) || !positive(height)) return null;
-      const step = ((options.distance / (height * .33)) % 2 + 2) % 2;
+      const distance = options.reverseStep ? -options.distance : options.distance;
+      const step = ((distance / (height * .33)) % 2 + 2) % 2;
       id = step < 1 ? 'walk-a' : 'walk-b'; phase = 'move';
     }
   }

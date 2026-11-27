@@ -106,6 +106,15 @@ export function getXenoTrialsGroundRecoveryV211(match, fighter) {
   return { state: 'down-v211', progress: 1, ready };
 }
 
+export function getXenoTrialsGroundRecoveryHintV218(match, fighter) {
+  if (match.phase !== 'active' || match.paused || !fighter) return '';
+  const recovery = getXenoTrialsGroundRecoveryV211(match, fighter);
+  if (!recovery) return '';
+  if (recovery.ready) return fighter.previousInput?.guard ? 'RELÂCHEZ GARDE' : 'GARDE · RELEVEZ-VOUS';
+  if (recovery.state === 'rise-v211') return fighter.groundRecoveryV211.assistedAt ? 'REDRESSEMENT ACCÉLÉRÉ' : 'REDRESSEMENT';
+  return 'AU SOL · ATTENDEZ LE SIGNAL';
+}
+
 /** Existing floor-supported keys, reused only for the living reaction cue. */
 export function getXenoTrialsGroundRecoveryFrameV211(cue, reducedMotion = false) {
   if (cue?.state === 'down-v211') return 'ko-ground';

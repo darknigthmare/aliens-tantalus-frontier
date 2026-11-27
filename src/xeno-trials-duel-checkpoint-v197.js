@@ -7,7 +7,8 @@ import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
 import { XENO_TRIALS_ARENA_V105 as ARENA, getXenoTrialsBodyBoundsV105, resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
-import { XENO_TRIALS_GRAPPLE_V153 as GRAPPLE, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
+import { XENO_TRIALS_GRAPPLE_V153 as GRAPPLE, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153,
+  XENO_TRIALS_GROUND_RELEASE_V218 as GROUND_RELEASE } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsGroundGrabPairV212, getXenoTrialsGroundGrabV212, hasXenoTrialsGroundGrabContactV212,
   XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 import { XENO_TRIALS_GROUND_BREAK_V213 as GROUND_BREAK, XENO_TRIALS_GROUND_BREAK_START_V213 as BREAK_START,
@@ -199,8 +200,10 @@ function sameGrip(left, right) {
 
 function validGrabEvent(event, definitions, match) {
   if (event.kind !== XENO_TRIALS_GROUND_GRAB_KIND_V212 && event.grabIdV212 === undefined
-    && ![BREAK_START, BREAK_FAIL].includes(event.type) && event.breakStartV213 === undefined && event.reason !== 'countered') return true;
+    && ![BREAK_START, BREAK_FAIL].includes(event.type) && event.breakStartV213 === undefined
+    && event.heldTicksV218 === undefined && !['countered', 'released'].includes(event.reason)) return true;
   if (match.config.rulesV119.noSpecial) return false;
+  if (event.reason === 'released' ? event.type !== 'grapple-end-v153' : event.heldTicksV218 !== undefined) return false;
   if (event.type === 'attack') {
     const grab = getXenoTrialsGroundGrabV212(definitions[sides.indexOf(event.side)]);
     return event.kind === XENO_TRIALS_GROUND_GRAB_KIND_V212 && Boolean(grab) && event.grabIdV212 === grab.id;
@@ -227,6 +230,13 @@ function validGrabEvent(event, definitions, match) {
     return boundedGrappleReceipt(match.events, event.breakStartV213, event.tick - (failed ? 0 : GROUND_BREAK.effortTicks), start =>
       start.type === BREAK_START && sameGrip(start, event)
       && integer(event.tick - start.tick, failed ? 0 : GROUND_BREAK.effortTicks, GROUND_BREAK.effortTicks));
+  }
+  if (event.reason === 'released') {
+    if (event.type !== 'grapple-end-v153' || event.breakStartV213 !== undefined || Object.keys(event).length !== 9
+      || !integer(event.heldTicksV218, GROUND_RELEASE.minimumHeldTicks, grab.durationTicks - 1)) return false;
+    const startTick = event.tick - event.heldTicksV218;
+    return startTick > 0 && boundedGrappleReceipt(match.events, event.grappleId + 1, startTick, start =>
+      start.type === 'grapple-start-v153' && sameGrip(start, event) && start.tick === startTick);
   }
   return event.breakStartV213 === undefined && ['escaped', 'timeout', 'separated', 'interrupted'].includes(event.reason);
 }

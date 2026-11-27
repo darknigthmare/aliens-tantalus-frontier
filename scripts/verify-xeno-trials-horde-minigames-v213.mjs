@@ -14,15 +14,18 @@ import { createXenoTrialsStageEventsV211 } from '../src/xeno-trials-stage-events
 const authoredEntrances = {
   'xth213-airlock-relay': ['LLLL', 'RRRRR', 'LRLRL'],
   'xth213-dock-crossfire': ['LRLRL', 'RRRRR', 'LLLLLL'],
-  'xth213-reactor-switchback': ['RRRR', 'LRLRLR', 'LLLLL', 'LRLRLR']
+  'xth213-reactor-switchback': ['RRRR', 'LRLRLR', 'LLLLL', 'LRLRLR'],
+  'xth218-bridge-retake': ['LLLL', 'RRRRR', 'LRLRL']
 };
 const firstForecasts = {
   'xth213-airlock-relay': [{ left: 0, right: 3 }, { left: 2, right: 2 }],
   'xth213-dock-crossfire': [{ left: 0, right: 3 }, { left: 4, right: 0 }],
-  'xth213-reactor-switchback': [{ left: 2, right: 2 }, { left: 3, right: 0 }, { left: 2, right: 2 }]
+  'xth213-reactor-switchback': [{ left: 2, right: 2 }, { left: 3, right: 0 }, { left: 2, right: 2 }],
+  'xth218-bridge-retake': [{ left: 0, right: 3 }, { left: 2, right: 2 }]
 };
 const expectedGates = (counts, status, opening) => Object.fromEntries(['left', 'right'].map(side =>
   [side, counts[side] ? { status, opening } : { status: 'locked', opening: 0 }]));
+const attackCadences = { 'xth213-reactor-switchback': 105, 'xth218-bridge-retake': 65 };
 
 function moveAndAttack(match, cadence) {
   const [player, ...contacts] = match.fighters;
@@ -31,7 +34,7 @@ function moveAndAttack(match, cadence) {
     heavy: match.tick % cadence === 0, light: match.tick % cadence === Math.floor(cadence / 2) });
 }
 
-test('the horde board includes all three authored programs and every historical protocol still resolves by its own ID', () => {
+test('the horde board includes all four authored programs and every historical protocol still resolves by its own ID', () => {
   assert.deepEqual(protocols.map(protocol => protocol.id), Object.keys(authoredEntrances));
   assert.deepEqual(XENO_TRIALS_HORDE_BOARD_V213.slice(0, protocols.length), protocols);
   assert.deepEqual(XENO_TRIALS_HORDE_BOARD_V213.slice(protocols.length), XENO_TRIALS_HORDE_PROTOCOLS_V186);
@@ -55,7 +58,7 @@ for (const protocol of protocols) {
     let progress = opened.state;
     const pendingForecasts = [];
     const spawns = new Map();
-    const attackCadence = protocol.id === 'xth213-reactor-switchback' ? 105 : 180;
+    const attackCadence = attackCadences[protocol.id] ?? 180;
     let verifiedReplacements = 0;
     assert.equal(observe().affectsCombat, false);
     assert.ok(protocol.waves.every(wave => wave.hp >= 15 && wave.hp <= 24));

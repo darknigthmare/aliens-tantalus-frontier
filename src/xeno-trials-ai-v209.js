@@ -9,15 +9,18 @@ import { getXenoTrialsPhysicalSuper } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsActiveStrikeV210 } from './xeno-trials-super-kits-v210.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
 import { XENO_TRIALS_GRAVITY_V210 } from './xeno-trials-movement-v210.js';
+import { getXenoTrialsGroundRecoveryV211, XENO_TRIALS_GET_UP_V211 } from './xeno-trials-defense-v211.js';
 
 const nonMeleeStyles = new Set(['acid', 'pulse', 'flame', 'detonation', 'ground-wave', 'acid-cluster', 'aimed-acid']);
 const signatureControls = { 'signature-2': 'signature2', 'signature-3': 'signature3' };
+const crouchControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('crouch');
 const antiAirControl = 1 << XENO_TRIALS_MOVE_CONTROLS_V207.indexOf('antiAir');
 const antiAirStates = new Set(['APPROACH', 'PRESSURE', 'PROBE', 'REPOSITION']);
+const runnerProfile = 'castes-film_runner_alien3_1992';
+const synthGuardProfile = 'pose-v94-afe-synth-guard';
 // Admit the close-range Runner and grounded Synth Guard by their combat profiles.
 const antiAirProfiles = new Map([
-  ['runner', 'castes-film_runner_alien3_1992'],
-  ['synth-guard', 'pose-v94-afe-synth-guard']
+  ['runner', runnerProfile], ['synth-guard', synthGuardProfile]
 ]);
 
 function roll(match, cpu, serial, salt) {
@@ -141,14 +144,25 @@ function hasRepeatedBlocks(match, cpu, target, definition, specs, dt) {
   return false;
 }
 
+function lockedLowInput(match, cpu, target, definition, specs, dt) {
+  if (match.hordeV180 || definition.id !== 'runner' || definition.profileId !== runnerProfile
+    || cpu.previousInput.light || cpu.rearmControls.light || (cpu.movesetV207?.rearm & crouchControl)) return null;
+  const spec = getXenoTrialsAttackV147(definition, 'low', specs.low);
+  if (!spec || cpu.stamina < spec.cost || !inRange(cpu, target, spec, spec.reach * definition.reach, cpu.facing)
+    || !hasRepeatedBlocks(match, cpu, target, definition, specs, dt)) return null;
+  return { crouch: true, light: true };
+}
+
 function counterObservedPattern(match, cpu, target, definition, controls, brain, prior, specs, dt) {
   const rules = match.config.rulesV119;
   const facing = target.x >= cpu.x ? 1 : -1;
   if ((!controls.light && !controls.heavy) || controls.guard || controls.super || controls.special
     || !prior || brain.observation.projectileThreat || cpu.facing !== facing || cpu.groundRecoveryV211
-    || isXenoTrialsParryingV208(match, cpu) || cpu.specialCooldown > 0 || rules?.noSpecial
-    || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0)) return null;
+    || isXenoTrialsParryingV208(match, cpu)) return null;
   const standingGuard = target.guard && target.facing === -facing && !target.movesetV207?.low && target.y === 0;
+  const specialLocked = rules?.noSpecial || match.config.roundSeconds - match.timeRemaining < (rules?.specialLockSeconds || 0);
+  if (specialLocked) return standingGuard ? lockedLowInput(match, cpu, target, definition, specs, dt) : null;
+  if (cpu.specialCooldown > 0) return null;
   if (!brain.observation.targetRecovering && !standingGuard) return null;
   const signatures = XENO_TRIALS_SIGNATURE_KINDS_V208.map(kind => getXenoTrialsAlternateSignatureV208(definition, kind))
     .filter(move => freshSignature(cpu, move)).sort((a, b) => a.spec.startup - b.spec.startup);
@@ -186,12 +200,21 @@ function antiAirInput(match, cpu, target, definition, brain, prior, controls, sp
   return null;
 }
 
+function groundRecoveryInput(match, cpu, definition) {
+  if (match.hordeV180 || definition.id !== 'synth-guard' || definition.profileId !== synthGuardProfile) return null;
+  const recovery = getXenoTrialsGroundRecoveryV211(match, cpu);
+  if (!recovery) return null;
+  const reactionTick = cpu.groundRecoveryV211.tick + XENO_TRIALS_GET_UP_V211.opensAt + 8;
+  return { guard: recovery.ready && match.tick >= reactionTick && !cpu.previousInput.guard && !cpu.rearmControls.guard };
+}
+
 /** Add techniques to an existing hard decision, without new saved brain state.
  * A horde caller also applies ordinary engagement and spawn grace first. */
 export function chooseXenoTrialsHardTacticsV209(match, cpu, target, brain, specs, controls, dt, decided, prior) {
   if (match.config.difficulty !== 'hard' || match.hordeV180 && cpu.enemyRankV186 !== 'boss'
-    || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.stun > 0 || cpu.movesetV207?.evade
+    || cpu.hp <= 0 || target.hp <= 0 || cpu.y !== 0 || cpu.attack || cpu.movesetV207?.evade
     || match.grappleV153) return controls;
+  if (cpu.stun > 0) return groundRecoveryInput(match, cpu, getXenoTrialsFighterV96(cpu.id)) || controls;
   const defense = parryInput(match, cpu, target, controls, brain, specs, dt);
   if (defense) return defense;
   if (!cpu.parryV208?.openingId && !decided) return controls;

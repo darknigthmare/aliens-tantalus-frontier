@@ -1,7 +1,7 @@
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105 } from './xeno-trials-geometry-v105.js';
 import { getXenoTrialsGroundHurtScaleV211 } from './xeno-trials-defense-v211.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
-import { hasXenoTrialsDefensiveTravelV213 } from './xeno-trials-movement-v210.js';
+import { hasXenoTrialsDefensiveTravelV213, hasXenoTrialsGuardedWalkV218 } from './xeno-trials-movement-v210.js';
 
 export const XENO_TRIALS_MOVE_CONTROLS_V207 = Object.freeze(['crouch', 'evade', 'antiAir', 'signature2', 'signature3']);
 export const XENO_TRIALS_MOVE_ATTACKS_V207 = Object.freeze(['low', 'anti-air', 'advance']);
@@ -30,7 +30,7 @@ export function canXenoTrialsGuardRetreatV213(fighter, definition, controls) {
   return Boolean(fighter.guard && fighter.y === 0 && !fighter.movesetV207?.low && !fighter.parryV208?.started
     && !controls.heavy && !controls.super && !controls.evade
     && Number(controls.right === true) - Number(controls.left === true) === -fighter.facing
-    && hasXenoTrialsDefensiveTravelV213(definition));
+    && (hasXenoTrialsDefensiveTravelV213(definition) || hasXenoTrialsGuardedWalkV218(definition)));
 }
 
 function readControls(controls) {

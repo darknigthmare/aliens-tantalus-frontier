@@ -1,4 +1,5 @@
-import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153, canXenoTrialsGrappleV153, isXenoTrialsGrappledV153, startXenoTrialsGrappleV153, stepXenoTrialsGrappleV153, releaseXenoTrialsGrappleV153, clearXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
+import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153, canXenoTrialsGrappleV153, isXenoTrialsGrappledV153, startXenoTrialsGrappleV153, stepXenoTrialsGrappleV153, releaseXenoTrialsGrappleV153, clearXenoTrialsGrappleV153,
+  readXenoTrialsGroundReleaseCommandV218 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsGroundGrabV212, XENO_TRIALS_GROUND_GRAB_KIND_V212 } from './xeno-trials-grapple-v212.js';
 import { beginXenoTrialsGroundBreakV213 } from './xeno-trials-grapple-v213.js';
 import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
@@ -287,6 +288,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     if (fighter.y === 0) fighter.vy = 0;
   }
   if (isXenoTrialsGrappledV153(match, fighter)) {
+    const releaseHoldId = readXenoTrialsGroundReleaseCommandV218(match, fighter, controls);
     if (match.grappleV153.grabIdV212) beginXenoTrialsGroundBreakV213(match, fighter, controls,
       (type, details) => event(match, type, details));
     clearXenoTrialsMovePoseV207(fighter);
@@ -294,7 +296,8 @@ function fighterStep(match, fighter, enemy, controls, dt) {
     clearXenoTrialsGroundRecoveryV211(fighter);
     clearXenoTrialsParryV208(fighter);
     stepXenoTrialsParryV208(match, fighter, heldParry, false);
-    fighter.guard = false; fighter.attack = null; fighter.previousInput = controls; return;
+    fighter.guard = false; fighter.attack = null; fighter.previousInput = controls;
+    return releaseHoldId;
   }
   const onGround = fighter.y === 0 && fighter.stun <= 0;
   if (moveset) {
@@ -828,8 +831,8 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   }
   const [a, b] = match.fighters;
   const order = a.x <= b.x ? 1 : -1;
-  fighterStep(match, a, b, playerControls, dt);
-  fighterStep(match, b, a, opponentControls || reactToLowStrikeV207(match, b, a, aiInput(match, dt)), dt);
+  const playerRelease = fighterStep(match, a, b, playerControls, dt);
+  const opponentRelease = fighterStep(match, b, a, opponentControls || reactToLowStrikeV207(match, b, a, aiInput(match, dt)), dt);
   resolveXenoTrialsBodiesV105(a, b, order);
   const impactOrder = a.x <= b.x ? 1 : -1;
   const livingAtStart = new Map(match.fighters.filter(f => f.hp > 0).map(f => [f, getXenoTrialsCasteV151(getXenoTrialsFighterV96(f.id))]));
@@ -869,7 +872,7 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   stepXenoTrialsAcidV152(match, dt, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   stepXenoTrialsGrappleV153(match, getXenoTrialsBodyBoundsV105,
-    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+    impact => applyImpact(match, impact), (type, details) => event(match, type, details), playerRelease ?? opponentRelease);
   collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
   resolveXenoTrialsBodiesV105(a, b, impactOrder);
