@@ -2,6 +2,7 @@ import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsFloorLockV207 } from './xeno-trials-capture-v163.js';
 import { hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsExtendedFinisherV208 } from './xeno-trials-finishers-v208.js';
+import { getXenoTrialsExtendedFinisherV209 } from './xeno-trials-finishers-v209.js';
 
 const offerMs = 3600;
 const clawTiming = Object.freeze({ approachMs: 240, holdMs: 420, retreatMs: 360 });
@@ -12,25 +13,30 @@ const smooth = progress => progress * progress * (3 - 2 * progress);
 export function createXenoTrialsFinisherV207(match, images, reducedMotion = false) {
   if (reducedMotion || match?.phase !== 'match-over' || match.hordeV180 || match.operationV188
     || !match.result?.completed || match.result.winner !== 'player' || match.result.reason !== 'ko'
+    || match.result.matchId !== match.config?.matchId || match.result.durationTicks !== match.tick
     || match.fighters?.length !== 2) return null;
   const attacker = match.fighters.find(fighter => fighter.side === 'player');
   const target = match.fighters.find(fighter => fighter.side === 'opponent');
   if (!attacker || !target || !isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(target.id))
     || attacker.hp <= 0 || target.hp !== 0 || attacker.y !== 0 || target.y !== 0) return null;
-  let candidate = getXenoTrialsExtendedFinisherV208(match, attacker, target, images);
-  if (!candidate && hasXenoTrialsGrappleV153(getXenoTrialsFighterV96(attacker.id))) {
+  const candidates = [getXenoTrialsExtendedFinisherV209(match, attacker, target, images)
+    || getXenoTrialsExtendedFinisherV208(match, attacker, target, images)].filter(Boolean);
+  if (hasXenoTrialsGrappleV153(getXenoTrialsFighterV96(attacker.id))) {
     const lock = getXenoTrialsFloorLockV207(attacker, target, images);
-    if (lock) candidate = { id: 'prowler::fin1', kind: 'claw', timing: clawTiming, lock };
+    if (lock) candidates.push({ id: 'prowler::fin1', kind: 'claw', timing: clawTiming, lock });
   }
+  const [candidate, ...alternatives] = candidates;
   if (!candidate) return null;
-  return { ...candidate, phase: 'offered', elapsedMs: 0, durationMs: offerMs, paused: false, skipped: false, activated: false };
+  return { ...candidate, alternatives, phase: 'offered', elapsedMs: 0, durationMs: offerMs, paused: false, skipped: false, activated: false };
 }
 
-export function activateXenoTrialsFinisherV207(sequence) {
+export function activateXenoTrialsFinisherV207(sequence, id = sequence?.id) {
   if (sequence?.phase !== 'offered' || sequence.paused) return sequence;
-  const { approachMs, holdMs, retreatMs } = sequence.timing;
+  const chosen = id === sequence.id ? sequence : sequence.alternatives.find(candidate => candidate.id === id);
+  if (!chosen) return sequence;
+  const { approachMs, holdMs, retreatMs } = chosen.timing;
   const durationMs = approachMs + holdMs + retreatMs;
-  return { ...sequence, phase: 'playing', activated: true, elapsedMs: 0, durationMs };
+  return { ...chosen, alternatives: [], phase: 'playing', paused: false, skipped: false, activated: true, elapsedMs: 0, durationMs };
 }
 
 export function pauseXenoTrialsFinisherV207(sequence, paused) {
@@ -62,5 +68,6 @@ export function getXenoTrialsFinisherStateV207(sequence) {
   if (!sequence) return null;
   const { id, kind, phase, elapsedMs, durationMs, paused, skipped, lock } = sequence;
   return { id, kind, phase, elapsedMs, durationMs, paused, skipped, targetId: lock.target.id,
+    ...(phase === 'offered' && sequence.alternatives.length ? { alternatives: sequence.alternatives.map(({ id, kind }) => ({ id, kind })) } : {}),
     ...(lock.fixture ? { fixtureId: lock.fixture.id } : {}) };
 }

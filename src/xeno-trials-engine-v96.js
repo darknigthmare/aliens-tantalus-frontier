@@ -2,15 +2,17 @@ import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrapple
 import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
 import { getXenoTrialsSuperV148, getXenoTrialsSuperMeterV148, getXenoTrialsSuperReadinessV148, awardXenoTrialsContactMeterV148 } from './xeno-trials-supers-v148.js';
+import { hasLegacyXenoTrialsSuperMeterV209 } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsRiposteV208, getXenoTrialsRiposteReadinessV208, isXenoTrialsRiposteTargetV208,
   XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
-import { getXenoTrialsAttackV147, getXenoTrialsSpecialStyleV147, getXenoTrialsSignatureV147,
+import { getXenoTrialsAttackV147, getXenoTrialsAttackStyleV147, getXenoTrialsSignatureV147,
   createXenoTrialsSignatureProjectilesV147, xenoTrialsSegmentContactV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsFighterV96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
 import { synthConeHitsV110 } from './synth-combat-v110.js';
 import { XENO_TRIALS_ARENA_V105, getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105,
   resolveXenoTrialsBodiesV105 } from './xeno-trials-geometry-v105.js';
 import { createXenoTrialsBrainV119, stepXenoTrialsBrainV119 } from './xeno-trials-ai-v119.js';
+import { chooseXenoTrialsHardTacticsV209 } from './xeno-trials-ai-v209.js';
 import { normalizeXenoTrialsRulesV119 } from './xeno-trials-modes-v119.js';
 import { XENO_TRIALS_HORDE_LIMITS_V180 as HORDE_LIMITS, getXenoTrialsHordeProtocolV180,
   createXenoTrialsHordeStateV180, advanceXenoTrialsHordeDirectorV180 } from './xeno-trials-horde-v180.js';
@@ -192,15 +194,18 @@ export function releaseXenoTrialsControlsV150(match, side, controls = {}) {
   releaseXenoTrialsParryV208(fighter, controls);
   return true;
 }
-function aiInput(match, dt) {
-  return stepXenoTrialsBrainV119(match, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));
+function aiInput(pair, dt, match = pair, canEngage = true) {
+  const before = pair.ai?.decisions;
+  const controls = stepXenoTrialsBrainV119(pair, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));
+  return canEngage ? chooseXenoTrialsHardTacticsV209(match, pair.fighters[1], pair.fighters[0], pair.ai,
+    XENO_TRIALS_ATTACKS_V96, controls, dt, pair.ai.decisions !== before) : controls;
 }
 function reactToLowStrikeV207(match, fighter, target, controls) {
   const attack = target.attack;
   if (match.config.difficulty === 'easy' || !controls.guard || !attack || attack.age < .08
     || (fighter.x - target.x) * attack.facing < 0) return controls;
   const definition = getXenoTrialsFighterV96(target.id);
-  const spec = attack.kind === 'low' ? XENO_TRIALS_ATTACKS_V96.low : getXenoTrialsAlternateSignatureV208(definition, attack.kind)?.spec;
+  const spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
   if (spec?.contactBandV207 !== 'low' || attack.age >= spec.startup + spec.active) return controls;
   return getXenoTrialsBodyGapV105(target, fighter, attack.facing) <= spec.reach * definition.reach
     ? { ...controls, crouch: true } : controls;
@@ -224,7 +229,8 @@ function launchRiposteV208(match, fighter, definition) {
     ...(match.hordeV180 ? { attackerInstanceV180: fighter.instanceIdV180 ?? fighter.side } : {}) });
 }
 function fighterStep(match, fighter, enemy, controls, dt) {
-  const definition = getXenoTrialsFighterV96(fighter.id), style = getXenoTrialsSpecialStyleV147(definition);
+  const definition = getXenoTrialsFighterV96(fighter.id);
+  if (hasLegacyXenoTrialsSuperMeterV209(fighter, definition)) fighter.superMeterV148 = 0;
   const moves = readXenoTrialsMovesetV207(fighter, controls);
   let moveset = fighter.movesetV207;
   const heldParry = controls.parry === true;
@@ -308,7 +314,8 @@ function fighterStep(match, fighter, enemy, controls, dt) {
       if (action === 'super') {
         fighter.superMeterV148 = 0; fighter.specialCooldown = spec.cooldown;
         fighter.stats.supersV148 = (fighter.stats.supersV148 || 0) + 1;
-        fighter.attack.targetBodyV148 = { ...getXenoTrialsBodyBoundsV105(enemy) };
+        if (getXenoTrialsAttackStyleV147(definition, action) !== 'physical')
+          fighter.attack.targetBodyV148 = { ...getXenoTrialsBodyBoundsV105(enemy) };
       }
       if (action === 'special' || signature) { fighter.specialCooldown = spec.cooldown || 1.6; fighter.stats.specials++; }
       event(match, 'attack', { side: fighter.side, kind: action,
@@ -320,6 +327,7 @@ function fighterStep(match, fighter, enemy, controls, dt) {
   }
   if (fighter.attack) {
     const attack = fighter.attack, spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
+    const style = getXenoTrialsAttackStyleV147(definition, attack.kind);
     attack.age += dt;
     const endOfContact = spec.startup + spec.active;
     if (spec.approachV208 && attack.age >= spec.startup && attack.age < endOfContact) {
@@ -350,11 +358,12 @@ function collectAttack(match, fighter, enemy, impacts) {
   const attack = fighter.attack;
   if (!attack) return;
   if (attack.kind === XENO_TRIALS_RIPOSTE_KIND_V208 && !isXenoTrialsRiposteTargetV208(attack, enemy)) return;
-  const definition = getXenoTrialsFighterV96(fighter.id), style = getXenoTrialsSpecialStyleV147(definition);
+  const definition = getXenoTrialsFighterV96(fighter.id), style = getXenoTrialsAttackStyleV147(definition, attack.kind);
   const spec = getXenoTrialsAttackV147(definition, attack.kind, XENO_TRIALS_ATTACKS_V96[attack.kind]);
   const hordeTarget = match.hordeV180 ? enemy.instanceIdV180 || enemy.side : null;
   if (attack.age < spec.startup || attack.age >= spec.startup + spec.active
     || (match.hordeV180 ? attack.hitTargetsV180?.includes(hordeTarget) : attack.hit)) return;
+  if (match.hordeV180 && spec.hordeTargetsV209 && (attack.hitTargetsV180?.length || 0) >= spec.hordeTargetsV209) return;
   if (['special', 'super'].includes(attack.kind) && ['ground-wave', 'acid-cluster', 'aimed-acid'].includes(style)) {
     const count = spec.volleyCount || 1, interval = spec.volleyInterval || 1;
     const due = Math.min(count, 1 + Math.floor((attack.age - spec.startup + 1e-9) / interval));
@@ -611,13 +620,14 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
   fighterStep(match, player, nearest, playerControls, dt);
   for (const enemy of enemies) {
     let controls = opponentControls;
+    const canEngage = engaged.includes(enemy) && match.tick >= enemy.spawnTickV180 + HORDE_LIMITS.spawnGraceTicks;
     if (!controls) {
       const pair = { ...match, fighters: [player, enemy], ai: enemy.aiV180 };
-      controls = stepXenoTrialsBrainV119(pair, dt, XENO_TRIALS_ATTACKS_V96, () => rng(match));
+      controls = aiInput(pair, dt, match, canEngage);
       enemy.aiV180 = pair.ai;
       controls = reactToLowStrikeV207(match, enemy, player, controls);
     }
-    if (!engaged.includes(enemy) || match.tick < enemy.spawnTickV180 + HORDE_LIMITS.spawnGraceTicks)
+    if (!canEngage)
       controls = { ...controls, light: false, heavy: false, special: false, super: false, antiAir: false,
         signature2: false, signature3: false };
     const previousAttackId = enemy.attack?.id;
@@ -625,7 +635,7 @@ function fixedHordeStepV180(match, playerControls, opponentControls, dt) {
     if (enemy.enemyRankV186 === 'boss' && enemy.attack && enemy.attack.id !== previousAttackId) {
       const definition = getXenoTrialsFighterV96(enemy.id), spec = getXenoTrialsAttackV147(definition, enemy.attack.kind, XENO_TRIALS_ATTACKS_V96[enemy.attack.kind]);
       event(match, 'horde-boss-telegraph-v186', { fighterId: enemy.id, instanceId: enemy.instanceIdV180,
-        attackId: enemy.attack.id, kind: enemy.attack.kind, style: getXenoTrialsSpecialStyleV147(definition), startupSeconds: spec.startup });
+        attackId: enemy.attack.id, kind: enemy.attack.kind, style: getXenoTrialsAttackStyleV147(definition, enemy.attack.kind), startupSeconds: spec.startup });
     }
   }
   // Soft separation among the crowd avoids a perfectly stacked sprite column.

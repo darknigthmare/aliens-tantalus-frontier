@@ -7,6 +7,7 @@ import { createXenoTrialsMatchV96 as create, stepXenoTrialsMatchV96 as step, nex
   setXenoTrialsPausedV96 as pause, XENO_TRIALS_ATTACKS_V96 as base } from '../src/xeno-trials-engine-v96.js';
 import { getXenoTrialsSignatureV147 as signature, getXenoTrialsAttackV147 as spec } from '../src/xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 as superProfile } from '../src/xeno-trials-supers-v148.js';
+import { XENO_TRIALS_SUPER_KITS_V209, getXenoTrialsSuperV209 } from '../src/xeno-trials-super-kits-v209.js';
 import { getXenoTrialsBodyBoundsV105 as bounds, resolveXenoTrialsBodiesV105 as resolve } from '../src/xeno-trials-geometry-v105.js';
 import { stepXenoTrialsBrainV119 as brain } from '../src/xeno-trials-ai-v119.js';
 import { readFileSync } from 'node:fs';
@@ -33,7 +34,8 @@ test('exact identity and three explicitly reviewed targets; no family/name inher
   for(const t of config.targets){assert.equal(def(t.id).profileId,t.profileId);assert.equal(target(def(t.id)),true);assert.equal(target({...def(t.id),profileId:'wrong'}),false);}
   for(const f of roster)if(!config.targets.some(t=>t.id===f.id))assert.equal(target(f),false,f.id);
   assert.equal(target(def('import-wy-apesuit')),false);
-  assert.equal(roster.filter(f=>signature(f)).length,9);assert.equal(roster.filter(f=>superProfile(f)).length,5);
+  assert.equal(roster.filter(f=>signature(f)).length,9);
+  assert.equal(roster.filter(f=>superProfile(f)).length,5 + XENO_TRIALS_SUPER_KITS_V209.length);
 });
 for(const t of config.targets)for(const side of [0,1])test(`${t.id} side ${side}: physical latch without relocation, extra cost or changed body scale`,()=>{
   const opts=side?{playerId:t.id,opponentId:'prowler'}:{opponentId:t.id};
@@ -242,7 +244,7 @@ test('a drawn paired floor pose removes only the legacy connector; static fallba
 test('existing historical attack numerics and super admission are not rewritten for the roster',()=>{
   assert.equal(spec(def('prowler'),'special',base.special).cost,34);assert.equal(spec(def('prowler'),'special',base.special).damage,30);
   for(const f of roster)for(const kind of ['light','heavy','special'])assert.ok(spec(f,kind,base[kind]));
-  assert.equal(superProfile(def('prowler')),null);assert.equal(superProfile(def(HUMAN)),null);
+  assert.equal(superProfile(def('prowler')),null);assert.equal(superProfile(def(HUMAN)),getXenoTrialsSuperV209(def(HUMAN)));
 });
 
 test('V153 workbook preserves all IDs, exact target selection, open art and source-only documents',async()=>{

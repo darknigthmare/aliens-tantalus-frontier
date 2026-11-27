@@ -27,7 +27,8 @@ export const XENO_TRIALS_SANDBOX_BEHAVIORS_V208 = Object.freeze([
   Object.freeze({ id: 'idle', label: 'Cible immobile' }),
   Object.freeze({ id: 'guard', label: 'Garde haute' }),
   Object.freeze({ id: 'jump', label: 'Sauts répétés' }),
-  Object.freeze({ id: 'mirror', label: 'Miroir de vos commandes' })
+  Object.freeze({ id: 'mirror', label: 'Miroir de vos commandes' }),
+  Object.freeze({ id: 'recording', label: 'Enregistrement en boucle' })
 ]);
 
 const stages = new Set(XENO_TRIALS_STAGES_V96.map(stage => stage.id));

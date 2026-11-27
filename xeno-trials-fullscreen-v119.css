@@ -214,3 +214,30 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
 }
 
 .xt-parry-status-v208{color:#f6d888;font:700 .65rem/1.2 ui-monospace,monospace;letter-spacing:.03em}
+
+/* Practice has its own interactive panel above the canvas and below the match HUD. */
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-practice-hud-v207{
+  --xt-practice-top:max(180px,calc(env(safe-area-inset-top) + 168px));
+  --xt-practice-bottom:max(150px,calc(env(safe-area-inset-bottom) + 150px));
+  position:absolute;z-index:8;pointer-events:auto;top:var(--xt-practice-top);
+  inset-inline-start:max(12px,env(safe-area-inset-left));width:min(26rem,calc(100% - 24px));
+  max-height:calc(100dvh - var(--xt-practice-top) - var(--xt-practice-bottom));
+  box-sizing:border-box;overflow:auto;overscroll-behavior:contain;
+}
+.xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="combat-panel"]:has(.xt-super-meter-v148:not([hidden])) .xt-practice-hud-v207{
+  --xt-practice-top:max(208px,calc(env(safe-area-inset-top) + 196px));
+}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-practice-hud-v207>.xt-actions{position:static;inset:auto;flex-wrap:wrap}
+.xt-fullscreen-v119 [data-xt-step="combat"] .xt-practice-telemetry-v209 summary{padding-block:.55rem;min-height:2.5rem}
+@media(max-width:760px) and (orientation:portrait){
+  .xt-fullscreen-v119 [data-xt-step="combat"] .xt-practice-hud-v207{--xt-practice-bottom:max(268px,calc(env(safe-area-inset-bottom) + 268px))}
+}
+@media(orientation:landscape) and (max-height:520px){
+  .xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="combat-panel"]:has(.xt-practice-hud-v207:not([hidden])) .xt-practice-hud-v207{
+    --xt-practice-top:max(124px,calc(env(safe-area-inset-top) + 116px));--xt-practice-bottom:60px;
+    width:min(42vw,24rem);padding:.5rem;
+  }
+  .xt-fullscreen-v119 [data-xt-step="combat"] [data-xt="combat-panel"]:has(.xt-practice-hud-v207:not([hidden])) .xt-controls{
+    inset-inline-start:46%;flex-wrap:wrap;
+  }
+}

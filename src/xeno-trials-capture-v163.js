@@ -204,16 +204,17 @@ export function getXenoTrialsCaptureReceiptV163(view,role){
   bounds:{...view.layout.bounds},floor:view.layout.ground,supportY:view.layout.frame.supportY,scale:view.layout.scale,
   engineBodiesUnchanged:true,referenceStatus:view.sourceStatus,statureMethod:view.layout.frame.statureMethod};
 }
-function getFloorPair(attacker, target, images) {
+function getFloorPair(attacker, target, images, exactRig = null) {
  const direction = Math.sign(target.x - attacker.x);
  if (!direction || attacker.facing !== direction) return null;
  const atlas = getXenoTrialsCaptureAtlasV163(getXenoTrialsFighterV96(target.id), getXenoTrialsArtV96(target.id, target.variant));
- const rig = getXenoTrialsRigV154(getXenoTrialsFighterV96(attacker.id), getXenoTrialsArtV96(attacker.id, attacker.variant));
+ const rig = exactRig || getXenoTrialsRigV154(getXenoTrialsFighterV96(attacker.id), getXenoTrialsArtV96(attacker.id, attacker.variant));
  if (!atlas || !rig || !ready(images?.get(atlas.path), atlas) || !ready(images?.get(rig.path), rig)) return null;
  const attackerMetrics = getXenoTrialsRenderMetricsV110(attacker.id, attacker.variant);
  const targetMetrics = getXenoTrialsRenderMetricsV110(target.id, target.variant);
  const layout = frameLayout(atlas, 3, targetMetrics, target.x, direction, 450);
- const rest = sampleXenoTrialsRigV154(rig, { clip: 'release', progress: 1, elapsed: .25, role: 'captor' });
+ const clip = Object.hasOwn(rig.poses, 'release') ? 'release' : Object.hasOwn(rig.poses, 'recover') ? 'recover' : 'recovery';
+ const rest = sampleXenoTrialsRigV154(rig, { clip, progress: 1, elapsed: .25, role: 'captor' });
  if (!rest || !layout.frame.fullFloorPin) return null;
  return { attacker, target, rig, atlas, attackerMetrics, layout, rest };
 }
@@ -244,21 +245,29 @@ export function getXenoTrialsCircuitLockV208(attacker, target, images, fixture) 
  const pad = fromLeft ? fixture.pads[0] : fixture.pads[1];
  if (fromLeft ? attacker.x >= fixture.left : attacker.x <= fixture.right) return null;
  const lock = clawLock(pair, pad);
- return lock && lock.contactGap <= 5 ? { ...lock, fixture, motion: 'circuit' } : null;
+ return lock && lock.contactGap <= 5 ? { ...lock, fixture, motion: fixture.kind || 'circuit' } : null;
 }
 export function getXenoTrialsBootLockV208(attacker, target, images, contactKey) {
  const pair = getFloorPair(attacker, target, images);
- if (!pair) return null;
- const { rig, layout, attackerMetrics, rest } = pair;
  const counterKey = contactKey === 'footNear' ? 'footFar' : 'footNear';
+ return pair && getSupportLock(pair, { contactKey, supportKeys: [counterKey], motion: 'boot', liftHeight: 6, range: 13, revision: 208 });
+}
+export function getXenoTrialsSupportLockV209(attacker, target, images, rig, profile) {
+ const pair = getFloorPair(attacker, target, images, rig);
+ return pair && getSupportLock(pair, profile);
+}
+function getSupportLock(pair, { contactKey, supportKeys, motion, liftHeight, range, revision }) {
+ const { rig, layout, attackerMetrics, attacker, rest } = pair;
+ const source = rig.contacts[contactKey]?.point;
+ const supports = supportKeys.map(key => rig.contacts[key]?.point);
+ if (!source || supports.some(value => !value)) return null;
  const targetAnchor = layout.contacts.supportNear;
  const shoe = drawnAnchor(pair, rest, contactKey);
- if (distance(shoe, targetAnchor) > 13) return null;
+ if (distance(shoe, targetAnchor) > range) return null;
  const mesh = getXenoTrialsRigMeshV154(rig);
- const source = rig.contacts[contactKey].point;
- const support = rig.contacts[counterKey].point;
  const weights = mesh.vertices.map(({ source: point }) => smooth((point[1] - source[1] + 320) / 200)
-  * smooth(distance(point, support) / 155) * Math.exp(-(((point[0] - source[0]) / 155) ** 2 + ((point[1] - source[1]) / 240) ** 2)));
+  * smooth(Math.min(...supports.map(support => distance(point, support))) / 155)
+  * Math.exp(-(((point[0] - source[0]) / 155) ** 2 + ((point[1] - source[1]) / 240) ** 2)));
  const field = { ...rest, vertices: weights.map(weight => [weight, 0]) };
  const response = projectXenoTrialsMeshPointV157(rig, field, source)?.[0];
  if (!response || response < .08) return null;
@@ -266,22 +275,22 @@ export function getXenoTrialsBootLockV208(attacker, target, images, contactKey) 
  const dy = (targetAnchor[1] - shoe[1]) * rig.sourceHeight / (attackerMetrics.height * response);
  const deform = (xOffset, yOffset) => ({ ...rest, vertices: rest.vertices.map(([x, y], id) => [x + xOffset * weights[id], y + yOffset * weights[id]]) });
  const hold = deform(dx, dy);
- const lift = deform(dx * .66, -6 * rig.sourceHeight / (attackerMetrics.height * response));
+ const lift = deform(dx * .66, -liftHeight * rig.sourceHeight / (attackerMetrics.height * response));
  const contactGap = distance(drawnAnchor(pair, hold, contactKey), targetAnchor);
- const stable = frame => distance(drawnAnchor(pair, rest, counterKey), drawnAnchor(pair, frame, counterKey)) <= 1.5;
+ const stable = frame => supportKeys.every(key => distance(drawnAnchor(pair, rest, key), drawnAnchor(pair, frame, key)) <= 1.5);
  if (!nonfolding(mesh, lift.vertices) || !nonfolding(mesh, hold.vertices) || !stable(lift) || !stable(hold)
   || ![lift, hold].every(frame => limbMeasures(rig, rest, frame, /^(thigh|shin|foot)/)) || contactGap > 8
   || drawnAnchor(pair, lift, contactKey)[1] >= shoe[1] - 2) return null;
- return { ...pair, hold, lift, targetAnchor, contactGap, contactKey, motion: 'boot' };
+ return { ...pair, hold, lift, targetAnchor, contactGap, contactKey, supportKeys, motion, revision };
 }
 export function sampleXenoTrialsFloorLockV207(lock, gain) {
- const { rig, rest, hold, lift, motion } = lock;
+ const { rig, rest, hold, lift, motion, revision = 208 } = lock;
  const afterLift = lift && gain >= .5;
  const from = afterLift ? lift : rest, to = lift && !afterLift ? lift : hold;
  const blend = smooth(lift ? gain * 2 - Number(afterLift) : gain);
  const vertices = from.vertices.map((point, index) => point.map((value, axis) => value * (1 - blend) + to.vertices[index][axis] * blend));
- const frame = { ...hold, clip: motion ? `${motion}-lock-v208` : 'floor-lock-v207', active: true, vertices,
-  animation: motion ? `original-native-${motion}-lock-v208` : 'original-native-floor-lock-v207' };
+ const frame = { ...hold, clip: motion ? `${motion}-lock-v${revision}` : 'floor-lock-v207', active: true, vertices,
+  animation: motion ? `original-native-${motion}-lock-v${revision}` : 'original-native-floor-lock-v207' };
  frame.contacts = projectContacts(rig, frame);
  return frame;
 }

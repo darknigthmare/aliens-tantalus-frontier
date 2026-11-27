@@ -46,7 +46,7 @@ test('the new succession rejects fabricated predecessors and changed source byte
 });
 
 test('the terminal audit remains independent of downstream audits and has no self receipt', () => {
-  const path = 'scripts/audit-xeno-gameplay-v208.mjs';
+  const path = 'scripts/audit-xeno-gameplay-v209.mjs';
   assert.doesNotMatch(read(path).toString(), /from\s+['"][^'"]*audit-/);
   assert.equal(Object.hasOwn(ALIENS1986_MAIN_SUCCESSORS_V116, path), false);
   assert.equal(Object.hasOwn(RIVER_OF_PAIN_SUCCESSORS_20261125, path), false);

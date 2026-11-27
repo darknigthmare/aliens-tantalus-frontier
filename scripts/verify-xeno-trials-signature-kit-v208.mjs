@@ -38,7 +38,7 @@ test('70 moves admit only the 60 exact profile IDs and rows authored against the
     assert.ok(!ids.has(move.id));
     ids.add(move.id);
   }
-  assert.equal(getXenoTrialsAlternateSignatureV208(getXenoTrialsFighterV96('runner'), 'signature-3'), null);
+  assert.equal(getXenoTrialsAlternateSignatureV208(getXenoTrialsFighterV96('xenoborg'), 'signature-2'), null);
 });
 
 test('all 70 signatures have an accepted native action and exactly one impact inside the contact window', () => {

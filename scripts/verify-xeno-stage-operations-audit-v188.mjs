@@ -63,7 +63,7 @@ test('full V163/Main/Trials/language/QA chain resolves the exact current runtime
 });
 
 test('V188 relays to terminal V207, preserves its V186 admissions and keeps tooling and review inputs out of the build', () => {
-  const terminal = 'scripts/audit-xeno-gameplay-v208.mjs', relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
+  const terminal = 'scripts/audit-xeno-gameplay-v209.mjs', relay = 'scripts/audit-xeno-trials-completion-v186.mjs';
   assert.equal(/(?:from\s*|import\s*\(?\s*)['"]\.\//.test(read(terminal).toString()), false);
   assert.equal(Object.hasOwn(successors, terminal) || Object.hasOwn(inputs, terminal), false);
   assert.match(read(relay).toString(), /from '\.\/audit-xeno-stage-operations-v188\.mjs'/);

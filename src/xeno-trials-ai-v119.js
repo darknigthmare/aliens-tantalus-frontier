@@ -1,6 +1,8 @@
 import { isXenoTrialsGrappledV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsAcidEscapeV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsSuperReadinessV148 } from './xeno-trials-supers-v148.js';
+import { getXenoTrialsSuperV209 } from './xeno-trials-super-kits-v209.js';
+import { getXenoTrialsHurtBoundsV207, getXenoTrialsStrikeBandV207 } from './xeno-trials-moveset-v207.js';
 import { resolveEnemyBehaviorV119 } from './enemy-behavior-registry-v119.js';
 import { getXenoTrialsFighterV96 } from './xeno-trials-data-v96.js';
 import { getXenoTrialsBodyBoundsV105, getXenoTrialsBodyGapV105, XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
@@ -121,6 +123,12 @@ export function stepXenoTrialsBrainV119(match, dt, specs, random) {
     const lock = match.config.rulesV119;
     const specialLocked = ['special', 'super'].includes(kind) && (lock?.noSpecial || match.config.roundSeconds - match.timeRemaining < (lock?.specialLockSeconds || 0));
     if (!spec || specialLocked || spec.groundedOnly && !view.grounded || cpu.stamina < spec.cost || (['special', 'super'].includes(kind) && cpu.specialCooldown > 0) || brain.input[kind]) return false;
+    if (kind === 'super' && getXenoTrialsSuperV209(definition)) {
+      const target = match.fighters[0], hurt = getXenoTrialsHurtBoundsV207(target);
+      const band = getXenoTrialsStrikeBandV207(body, spec);
+      if (view.gap > spec.reach * definition.reach + (spec.approachV208 || 0) * spec.active
+        || spec.groundedTargetV208 && target.y > 0 || band.bottom > hurt.top || hurt.bottom > band.top) return false;
+    }
     next[kind] = true; transition(brain, ['special', 'super'].includes(kind) ? 'SPECIAL_SETUP' : 'COMMIT_ATTACK'); return true;
   };
   const chooseSignature = () => getXenoTrialsSuperReadinessV148(match, cpu, definition).ready && choose('super') || choose('special');

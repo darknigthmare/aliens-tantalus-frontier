@@ -1,3 +1,5 @@
+import { XENO_TRIALS_SIGNATURES_V209 } from './xeno-trials-signature-kit-v209.js';
+
 export const XENO_TRIALS_SIGNATURE_KINDS_V208 = Object.freeze(['signature-2', 'signature-3']);
 
 // V146 candidate rows adapted to this arena. Timing, damage and displacement
@@ -240,7 +242,7 @@ export const XENO_TRIALS_SIGNATURES_V208 = Object.freeze(authored.flatMap(([figh
     spec: Object.freeze({ groundedOnly: true, cooldown: 1.35, ...spec })
   }))));
 
-const byId = new Map(XENO_TRIALS_SIGNATURES_V208.map(move => [move.id, move]));
+const byId = new Map([...XENO_TRIALS_SIGNATURES_V208, ...XENO_TRIALS_SIGNATURES_V209].map(move => [move.id, move]));
 
 export function getXenoTrialsAlternateSignatureV208(definition, kind) {
   if (!definition || !XENO_TRIALS_SIGNATURE_KINDS_V208.includes(kind)) return null;

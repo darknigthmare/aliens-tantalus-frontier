@@ -1,3 +1,5 @@
+import { getXenoTrialsSuperV209 } from './xeno-trials-super-kits-v209.js';
+
 /** Original versus extensions of referenced V147 capabilities, NOT canonical
  * supers, captured choreography or new character art. Exact identities only.
  * Meter is match-local and only earned by resolved contact, never by time,
@@ -43,7 +45,7 @@ export const XENO_TRIALS_SUPERS_V148 = freeze([
 const byId = new Map(XENO_TRIALS_SUPERS_V148.map(item => [item.fighterId, item]));
 export function getXenoTrialsSuperV148(definition) {
   const value = byId.get(definition?.id);
-  return value && value.profileId === definition.profileId ? value : null;
+  return value && value.profileId === definition.profileId ? value : getXenoTrialsSuperV209(definition);
 }
 export function getXenoTrialsSuperMeterV148(fighter) {
   return Number.isFinite(fighter?.superMeterV148)
@@ -64,6 +66,7 @@ export function awardXenoTrialsContactMeterV148(from, to, damage, guarded, super
 export function getXenoTrialsSuperReadinessV148(match, fighter, definition) {
   const value = getXenoTrialsSuperV148(definition), meter = getXenoTrialsSuperMeterV148(fighter);
   const answer = reason => ({ supported: Boolean(value), id: value?.id || null, label: value?.label || null,
+    ...(value?.labelEn ? { labelEn: value.labelEn, descriptionEn: value.descriptionEn } : {}),
     meter, maximum: 100, ready: reason === null, reason });
   if (!value) return answer('unavailable');
   if (!match || !fighter || match.paused || match.phase !== 'active' || match.presentation?.blocksSimulation || fighter.hp <= 0) return answer('inactive');

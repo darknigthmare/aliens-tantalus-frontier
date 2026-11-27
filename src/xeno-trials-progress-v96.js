@@ -1,3 +1,5 @@
+import { normalizeXenoTrialsResearchLabProgressV209 } from './xeno-trials-research-lab-v209.js';
+import { normalizeXenoTrialsRecordingV209 } from './xeno-trials-practice-v209.js';
 import { normalizeXenoTrialsSandboxV208 } from './xeno-trials-practice-v208.js';
 import { getXenoTrialsPracticeV207, normalizeXenoTrialsPracticeV207 } from './xeno-trials-practice-v207.js';
 import { XENO_TRIALS_FIGHTERS_V96, XENO_TRIALS_FACTIONS_V96, XENO_TRIALS_STAGES_V96 } from './xeno-trials-data-v96.js';
@@ -59,7 +61,14 @@ export function normalizeXenoTrialsProgressV96(value) {
   base.modesV119 = normalizeXenoTrialsModesProgressV119(value.modesV119);
   const practice = normalizeXenoTrialsPracticeV207(value.practiceClearedV207);
   if (practice.length) base.practiceClearedV207 = practice;
-  if (record(value.practiceSandboxV208)) base.practiceSandboxV208 = normalizeXenoTrialsSandboxV208(value.practiceSandboxV208);
+  const labs = normalizeXenoTrialsResearchLabProgressV209(value.practiceLabsClearedV209);
+  if (labs.length) base.practiceLabsClearedV209 = labs;
+  const recording = normalizeXenoTrialsRecordingV209(value.practiceRecordingV209);
+  if (recording) base.practiceRecordingV209 = recording;
+  if (record(value.practiceSandboxV208)) {
+    base.practiceSandboxV208 = normalizeXenoTrialsSandboxV208(value.practiceSandboxV208);
+    if (!recording && base.practiceSandboxV208.behavior === 'recording') base.practiceSandboxV208.behavior = 'cpu';
+  }
   if (base.modesV119.challengeRun && !base.unlocked.includes(base.modesV119.challengeRun.playerId)) base.modesV119.challengeRun = null;
   base.ledger = (Array.isArray(value.ledger) ? value.ledger : []).filter(e => record(e)
     && /^xt96-\d+$/.test(e.matchId) && ['player', 'opponent', 'draw', 'abandoned'].includes(e.winner))
@@ -112,8 +121,26 @@ export function configureXenoTrialsSandboxV208(value, settings) {
   const state = normalizeXenoTrialsProgressV96(value);
   if (state.pending) return { applied: false, state };
   const next = normalizeXenoTrialsSandboxV208(settings);
+  if (next.behavior === 'recording' && !state.practiceRecordingV209) return { applied: false, state };
   if (JSON.stringify(next) === JSON.stringify(state.practiceSandboxV208)) return { applied: false, unchanged: true, state };
   state.practiceSandboxV208 = next;
+  return { applied: true, state };
+}
+
+export function saveXenoTrialsRecordingV209(value, clip) {
+  const state = normalizeXenoTrialsProgressV96(value), recording = normalizeXenoTrialsRecordingV209(clip);
+  if (state.pending || !recording) return { applied: false, state };
+  if (JSON.stringify(recording) === JSON.stringify(state.practiceRecordingV209)) return { applied: false, unchanged: true, state };
+  state.practiceRecordingV209 = recording;
+  return { applied: true, state };
+}
+
+export function completeXenoTrialsResearchLabV209(value, id) {
+  const state = normalizeXenoTrialsProgressV96(value);
+  const labs = state.practiceLabsClearedV209 || [];
+  const next = normalizeXenoTrialsResearchLabProgressV209([...labs, id]);
+  if (state.pending || next.length === labs.length) return { applied: false, state };
+  state.practiceLabsClearedV209 = next;
   return { applied: true, state };
 }
 

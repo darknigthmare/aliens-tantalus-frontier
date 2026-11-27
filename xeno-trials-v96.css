@@ -199,3 +199,37 @@
 .xt-practice-sandbox-fields-v208 select{width:100%;min-width:0;color:#e0ebdb;background:#161f19;border:1px solid #697861;padding:.45rem}
 .xt-practice-sandbox-fields-v208 .xt-practice-checkbox{display:flex;align-items:center;gap:.45rem}
 .xt-practice-sandbox-v208 button[type="submit"]{justify-self:start}
+
+.xt-practice-telemetry-v209{border-top:1px solid #697861;padding-top:.55rem}
+.xt-practice-telemetry-v209[hidden],.xt-practice-telemetry-v209 progress[hidden]{display:none}
+.xt-practice-telemetry-v209 summary{cursor:pointer;color:#d9e6bc;font-weight:700}
+.xt-practice-telemetry-v209 table{width:100%;border-collapse:collapse;margin:.55rem 0}
+.xt-practice-telemetry-v209 th,.xt-practice-telemetry-v209 td{padding:.26rem .38rem;text-align:start;border-block-end:1px solid #3a4c3a}
+.xt-practice-telemetry-v209 p{margin:.45rem 0}
+
+.xt-lab-v209{display:grid;gap:.8rem;margin:1rem auto;max-width:68rem;padding:clamp(.7rem,2vw,1.4rem);border:1px solid #697861;background:#101713;outline:none}
+.xt-lab-v209 header{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.xt-lab-v209 :is(h2,p){margin:0}
+.xt-lab-v209 header span{min-width:3ch;font:700 1.6rem monospace;text-align:end;color:#e5d597}
+.xt-lab-track-v209{position:relative;min-height:clamp(9rem,33vw,15rem);overflow:hidden;border:1px solid #697861;background:linear-gradient(180deg,#25302a 0 60%,#16231b 60%);isolation:isolate}
+.xt-lab-track-v209::after{content:"";position:absolute;inset:67% 0 auto;border-top:2px solid #c9b67755;pointer-events:none}
+.xt-lab-zone-v209{position:absolute;inset:0 40.8%;background:#91be4935;border-inline:1px solid #b6ce66;z-index:-1}
+.xt-lab-specimen-v209{position:absolute;inset:3% auto 40% 50%;max-width:34%;max-height:52%;object-fit:contain;transform:translateX(-50%);pointer-events:none}
+/* The base Ovomorph asset is a 4-column atlas. Show only its first 256px cell. */
+.xt-lab-atlas-v209{position:absolute;inset:0 auto auto 50%;width:min(31%,9rem);aspect-ratio:1;overflow:hidden;transform:translateX(-50%);pointer-events:none}
+.xt-lab-atlas-v209 img{display:block;width:400%;max-width:none;height:auto}
+.xt-lab-specimen-v209[hidden],.xt-lab-atlas-v209 img[hidden],.xt-lab-readings-v209 [hidden]{display:none}
+.xt-lab-echo-v209,.xt-lab-operator-v209,.xt-lab-gate-v209,.xt-lab-site-v209{position:absolute;transform:translateX(-50%)}
+.xt-lab-operator-v209{top:61%;width:.85rem;height:.85rem;background:#cfe4a9;border:1px solid #142513;z-index:2}
+.xt-lab-echo-v209{top:48%;width:1rem;height:.47rem;background:#6bcdd4;border-radius:50%;box-shadow:0 0 .5rem #6bcdd4}
+.xt-lab-gate-v209{inset-block:21% 48%;border-inline-start:3px solid #d4a46d}
+.xt-lab-gate-v209[data-open="true"]{inset-block-end:56%;border-color:#8eb96c}
+.xt-lab-site-v209{inset-block-end:7%;display:grid;place-items:center;width:1.6rem;height:1.6rem;border:1px solid #6b8068;color:#b5c3ae;font:700 .9rem monospace}
+.xt-lab-site-v209[data-state="target"]{background:#dfca88;color:#16251b;border-color:#dfca88}
+.xt-lab-site-v209[data-state="done"]{background:#83a977;color:#111b15}
+.xt-lab-buttons-v209{display:flex;flex-wrap:wrap;gap:.5rem}
+.xt-lab-buttons-v209 [data-lab-input]{touch-action:none;user-select:none}
+.xt-lab-readings-v209{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.xt-lab-readings-v209 p{flex:1 1 100%;font-weight:700;color:#d9e6bc}
+.xt-lab-readings-v209 progress{accent-color:#b0c58f;width:min(100%,12rem)}
+[data-xt="practice-labs"] .xt-activity-board-v119{margin-top:.75rem}

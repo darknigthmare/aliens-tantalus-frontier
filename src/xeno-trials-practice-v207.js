@@ -1,3 +1,5 @@
+import { createXenoTrialsPracticeObserverV209, XENO_TRIALS_NEW_DRILLS_V209 } from './xeno-trials-practice-v209.js';
+import { XENO_TRIALS_ACID_POOL_V152 } from './xeno-trials-acid-pools-v152.js';
 import { XENO_TRIALS_PARRY_V208 } from './xeno-trials-defense-v208.js';
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsStrikeBandV207 } from './xeno-trials-moveset-v207.js';
@@ -33,9 +35,11 @@ export const XENO_TRIALS_PRACTICE_V207 = Object.freeze([
 
 export const XENO_TRIALS_PRACTICE_DRILLS_V208 = Object.freeze([...XENO_TRIALS_PRACTICE_V207,
   ...XENO_TRIALS_NEW_DRILLS_V208.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
-const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V208.map(entry => [entry.id, entry]));
+export const XENO_TRIALS_PRACTICE_DRILLS_V209 = Object.freeze([...XENO_TRIALS_PRACTICE_DRILLS_V208,
+  ...XENO_TRIALS_NEW_DRILLS_V209.map(({ id, title, briefing, objectives, ...options }) => lesson(id, title, briefing, objectives, options))]);
+const LESSONS = new Map(XENO_TRIALS_PRACTICE_DRILLS_V209.map(entry => [entry.id, entry]));
 export const getXenoTrialsPracticeV207 = id => LESSONS.get(id) || null;
-export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V208
+export const normalizeXenoTrialsPracticeV207 = value => XENO_TRIALS_PRACTICE_DRILLS_V209
   .filter(entry => Array.isArray(value) && value.includes(entry.id)).map(entry => entry.id);
 
 export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
@@ -44,12 +48,14 @@ export function getXenoTrialsPracticeConfigV207(id, sandboxSettings) {
   if (!entry) return null;
   return { playerId: entry.playerId, opponentId: entry.opponentId, stageId: 'containment-deck',
     factionId: 'containment', roundsToWin: entry.roundsToWin || 1, roundSeconds: entry.roundSeconds || 60, matchId: `practice-${entry.id}`,
-    ...(entry.singleHit ? { rulesV119: { initialHp: 1 } } : {}) };
+    ...(entry.difficulty ? { difficulty: entry.difficulty } : {}),
+    rulesV119: { ...(entry.singleHit ? { initialHp: 1 } : {}), ...(entry.noSpecial ? { noSpecial: true } : {}) } };
 }
 
 // This coach drives the same opponent controls and observes contacts from the same fixed-step fight as a duel.
-export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
+export function createXenoTrialsPracticeV207(id, match, sandboxSettings, recording) {
   const sandbox = id === XENO_TRIALS_SANDBOX_ID_V208 ? normalizeXenoTrialsSandboxV208(sandboxSettings) : null;
+  const observer = sandbox ? createXenoTrialsPracticeObserverV209(recording) : null;
   const entry = sandbox ? lesson(id, 'Banc libre', 'Essayez vos techniques dans les conditions sélectionnées.', [], sandbox) : getXenoTrialsPracticeV207(id);
   if (!entry) return null;
   let [player, opponent] = match.fighters;
@@ -66,6 +72,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
   let index = 0, state = 'active', lastEvent = match.serial, due = null;
   let playerAttack = null, incomingAttack = null, targetWasGuarding = false;
   let armedBeforeStep = null, interruption = null, parryOpeningUntil = 0;
+  let acidContact = null;
   const hasAttack = (action, side) => action.type === 'attack' && action.side === side;
   const hasImpact = (action, side) => ['hit', 'block', 'guard-break'].includes(action.type) && action.side === side;
   const advance = () => { if (++index === entry.targets.length) state = 'complete'; };
@@ -73,8 +80,9 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
   function opponentInput(playerInput = {}) {
     [player, opponent] = match.fighters;
     if (entry.behavior === 'mirror') return getMirroredXenoTrialsInputV208(playerInput);
+    if (entry.behavior === 'cpu') return null;
     if (sandbox) {
-      if (sandbox.behavior === 'cpu') return null;
+      if (sandbox.behavior === 'recording') return observer.playingInput(match.tick, match.round);
       if (sandbox.behavior === 'guard') return { guard: true };
       if (sandbox.behavior === 'jump') return { jump: opponent.y === 0 && !opponent.previousInput.jump };
       return {};
@@ -86,10 +94,10 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
       targetWasGuarding = opponent.guard;
       return { guard: true };
     }
-    if (!pressure || match.grappleV153) return {};
+    if (!pressure || match.grappleV153 || id === 'acid-floor' && index >= 1) return {};
     const gap = getXenoTrialsBodyGapV105(player, opponent);
     const approach = pressure === 'special' ? 6 : 26;
-    if (gap > approach) {
+    if (!entry.stationary && gap > approach) {
       due = null;
       return player.x < opponent.x ? { left: true } : { right: true };
     }
@@ -102,16 +110,24 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
     return { [pressure]: true };
   }
 
-  function observe() {
+  function observe(playerInput, activeTick = false) {
     if (state !== 'active') return;
     [player, opponent] = match.fighters;
     if (sandbox) {
-      if (match.result) state = 'finished';
+      observer.observe(match.events);
+      if (activeTick) observer.sample(playerInput);
+      if (match.result) { observer.stopRecording(); state = 'finished'; }
       return;
     }
+    if (id === 'acid-floor' && index === 0 && match.acidPoolsV152?.some(pool => pool.owner === 'opponent')) advance();
     for (const action of match.events) {
       if (action.id <= lastEvent) continue;
       lastEvent = action.id;
+      if (id === 'acid-floor' && index >= 1 && action.type === 'acid-contact-v152' && action.side === 'player') {
+        const pool = match.acidPoolsV152?.find(item => item.id === action.poolId);
+        if (pool) acidContact = { left: pool.left, right: pool.right, tick: action.tick };
+        if (index === 1) advance();
+      }
       if (action.type === 'round-start') {
         due = null;
         if (id === 'rounds' && index === 2 && action.round === 3 && player.hp === 1 && opponent.hp === 1) advance();
@@ -148,7 +164,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
       }
       if (hasImpact(action, 'opponent') && action.attacker === 'player' && playerAttack) {
         playerAttack.contact = true;
-        if (id === 'distance' && index === 1 && playerAttack.kind === 'light' && action.type === 'hit') advance();
+        if (['distance', 'legal-counter'].includes(id) && index === 1 && playerAttack.kind === 'light' && action.type === 'hit') advance();
         if (id === 'rupture' && action.type === 'guard-break') advance();
         if (id === 'parry' && index === 1 && action.tick < parryOpeningUntil && action.type === 'hit') advance();
         if (id === 'interrupt' && action.type === 'hit' && incomingAttack?.id && armedBeforeStep?.id === incomingAttack.id
@@ -161,7 +177,7 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
       }
       if (hasImpact(action, 'player') && action.attacker === 'opponent') {
         if (incomingAttack) incomingAttack.contact = true;
-        if (id === 'guard' && action.type === 'block') advance();
+        if ((id === 'guard' || id === 'legal-counter' && index === 0) && action.type === 'block') advance();
       }
       if (id === 'escape' && index === 0 && action.type === 'grapple-start-v153' && action.side === 'player') advance();
       if (id === 'escape' && index === 1 && action.type === 'grapple-end-v153' && action.reason === 'escaped') advance();
@@ -184,6 +200,11 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
         incomingAttack = null;
       }
     }
+    if (acidContact && index === 2 && match.tick >= acidContact.tick + XENO_TRIALS_ACID_POOL_V152.intervalTicks) {
+      const body = getXenoTrialsBodyBoundsV105(player);
+      const exposed = match.acidPoolsV152?.some(pool => pool.owner === 'opponent' && body.right > pool.left && body.left < pool.right);
+      if (!exposed && (body.right <= acidContact.left || body.left >= acidContact.right)) advance();
+    }
     if (interruption && !interruption.contact && match.tick >= interruption.closeTick) advance();
     if ((id === 'super' && index === 1 || id === 'riposte' && index === 2) && !player.attack
       && !match.projectiles.some(projectile => projectile.owner === 'player')) state = 'retry';
@@ -192,10 +213,13 @@ export function createXenoTrialsPracticeV207(id, match, sandboxSettings) {
 
   function view() {
     return { id, title: entry.title, briefing: entry.briefing, objectives: entry.targets, index, state,
-      ...(sandbox ? { sandbox: true, result: match.result?.winner || null } : {}),
+      ...(sandbox ? { sandbox: true, result: match.result?.winner || null, telemetryV209: observer.view() } : {}),
       cue: id === 'interrupt' && opponent.attack?.kind === 'signature-2' ? 'PERCUSSION EN COURS'
         : entry.pressure === 'heavy' && opponent.attack?.kind === 'heavy' ? 'FRAPPE LOURDE EN COURS'
         : id === 'anti-air' && opponent.y > 0 ? 'CONTACT EN L’AIR' : '' };
   }
-  return { get active() { return state === 'active'; }, opponentInput, observe, view };
+  return { get active() { return state === 'active'; }, opponentInput, observe, view,
+    recordingV209: observer ? { start: observer.startRecording, stop: observer.stopRecording,
+      pending: observer.pendingRecording, acknowledge: observer.acknowledgeRecording } : null };
+
 }

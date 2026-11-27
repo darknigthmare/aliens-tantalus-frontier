@@ -70,6 +70,10 @@ export function getXenoTrialsSignatureV147(definition) {
 export function getXenoTrialsSpecialStyleV147(definition) {
   return getXenoTrialsSignatureV147(definition)?.style || definition?.special;
 }
+export function getXenoTrialsAttackStyleV147(definition, kind) {
+  return (kind === 'super' ? getXenoTrialsSuperV148(definition)?.styleV209 : null)
+    || getXenoTrialsSpecialStyleV147(definition);
+}
 export function getXenoTrialsAttackV147(definition, kind, fallback) {
   if (kind === 'super') return getXenoTrialsSuperV148(definition)?.spec || null;
   if (kind === XENO_TRIALS_RIPOSTE_KIND_V208) return getXenoTrialsRiposteV208(definition)?.spec || null;

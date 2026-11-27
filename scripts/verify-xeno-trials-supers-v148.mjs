@@ -14,6 +14,7 @@ import { XENO_TRIALS_SUPERS_V148 as supers, getXenoTrialsSuperV148 as profile,
 import { createXenoTrialsRuntimeV96 } from '../src/xeno-trials-runtime-v96.js';
 import { XenoTrialsUiV96 } from '../src/xeno-trials-ui-v96.js';
 import { createXenoTrialsProgressV96 } from '../src/xeno-trials-progress-v96.js';
+import { XENO_TRIALS_SUPER_KITS_V209 } from '../src/xeno-trials-super-kits-v209.js';
 
 // Pure-engine boundary fixtures can set position, HP or meter to isolate a
 // contract. They are not represented as ordinary browser-playthrough evidence.
@@ -41,9 +42,11 @@ test('five immutable supers are original simulation extensions on exact fighter/
     assert.equal(spec(definition(s.fighterId),'super',null),s.spec);
   }
 });
-test('the other 184 fighters retain their admitted contracts (including V151) and gain no guessed super', () => {
-  const others = fighters.filter(f=>!profile(f));assert.equal(others.length,184);
+test('fighters outside the explicit V148 and V209 admissions retain their original attack contracts', () => {
+  const admitted = new Set([...supers.map(s => s.fighterId), ...XENO_TRIALS_SUPER_KITS_V209.map(kit => kit.first.fighterId)]);
+  const others = fighters.filter(f => !admitted.has(f.id)); assert.equal(others.length, 168);
   for(const f of others) {
+    assert.equal(profile(f),null);
     assert.equal(spec(f,'super',base.special),null);
     for(const kind of ['light','heavy','special']) {
       const caste = getXenoTrialsSignatureV147(f);

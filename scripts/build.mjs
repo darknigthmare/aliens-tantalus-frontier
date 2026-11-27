@@ -1,3 +1,4 @@
+import { verifyXenoPoseAdmissionsV209 } from './public-xeno-pose-admissions-v209.mjs';
 import { verifyXenoVisualAdmissionsV205 } from './public-xeno-visual-admissions-v205.mjs';
 import { verifyXenoPriorityAdmissionsV204 } from './public-xeno-priority-admissions-v204.mjs';
 import { verifyXenoPriorityAdmissionsV203 } from './public-xeno-priority-admissions-v203.mjs';
@@ -31,6 +32,7 @@ import { verifyPublicAdmissionsV122 } from './public-release-admissions-v122.mjs
 import { verifyPublicAdmissionsV123 } from './public-release-admissions-v123.mjs';
 
 const root = process.cwd();
+await verifyXenoPoseAdmissionsV209(root);
 await verifyPublicAdmissionsV163(root);
 await verifyXenoSpriteAdmissionsV188(root);
 await verifyXenoSpriteAdmissionsV189(root);
@@ -130,6 +132,7 @@ await verifyXenoPriorityAdmissionsV202(output);
 await verifyXenoPriorityAdmissionsV203(output);
 await verifyXenoPriorityAdmissionsV204(output);
 await verifyXenoVisualAdmissionsV205(output);
+await verifyXenoPoseAdmissionsV209(output);
 await verifyXenoFranchiseStageAdmissionsV192(output);
 await verifyXenoOriginalArenaAdmissionsV193(output);
 await verifyXenoIconicStageAdmissionsV194(output);

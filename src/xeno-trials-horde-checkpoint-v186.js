@@ -3,6 +3,7 @@ import { getXenoTrialsHordeProtocolV180, XENO_TRIALS_HORDE_LIMITS_V180 as LIMITS
 import { XENO_TRIALS_ATTACKS_V96 } from './xeno-trials-combat-contract-v186.js';
 import { getXenoTrialsAttackV147, getXenoTrialsSignatureV147, getXenoTrialsSpecialStyleV147 } from './xeno-trials-signatures-v147.js';
 import { getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
+import { getXenoTrialsSuperV209, validXenoTrialsPhysicalSuperV209 } from './xeno-trials-super-kits-v209.js';
 import { getXenoTrialsRiposteV208, validXenoTrialsRiposteAttackV208, XENO_TRIALS_RIPOSTE_KIND_V208 } from './xeno-trials-ripostes-v208.js';
 import { XENO_TRIALS_AI_STATES_V119 } from './xeno-trials-ai-v119.js';
 import { XENO_TRIALS_ACID_POOL_V152 as ACID, hasXenoTrialsAcidPoolsV152 } from './xeno-trials-acid-pools-v152.js';
@@ -73,7 +74,12 @@ function validAttack(attack, fighter, match) {
     || ![-1, 1].includes(attack.facing) || typeof attack.hit !== 'boolean' || typeof attack.emitted !== 'boolean'
     || match.config.rulesV119.noSpecial && attack.kind === XENO_TRIALS_RIPOSTE_KIND_V208
     || !validXenoTrialsRiposteAttackV208(attack, fighter, match, getXenoTrialsRiposteV208(definition))) return false;
-  if (attack.kind === 'super' && !(fighter.stats.supersV148 > 0)) return false;
+  if (attack.kind === 'super') {
+    if (!(fighter.stats.supersV148 > 0) || fighter.superMeterV148 === undefined) return false;
+    const physicalSuper = getXenoTrialsSuperV209(definition);
+    if (physicalSuper && (match.config.rulesV119.noSpecial || !validXenoTrialsPhysicalSuperV209(attack, fighter, match, physicalSuper)))
+      return false;
+  }
   if (XENO_TRIALS_SIGNATURE_KINDS_V208.includes(attack.kind) && (fighter.stats.specials < 1 || match.config.rulesV119.noSpecial
     || !validXenoTrialsSignatureActionV208(attack, spec, true))) return false;
   const historyLimit = Math.min(match.hordeV180.totalEnemies,
@@ -108,6 +114,7 @@ function validProjectiles(match) {
     const owner = match.fighters.find(fighter => (fighter.instanceIdV180 || 'player') === projectile.ownerInstanceV180);
     const definition = getXenoTrialsFighterV96(owner?.id);
     const kind = projectile.superIdV148 ? 'super' : 'special';
+    if (kind === 'super' && getXenoTrialsSuperV209(definition)) return false;
     const spec = definition && getXenoTrialsAttackV147(definition, kind, XENO_TRIALS_ATTACKS_V96[kind]);
     const style = definition && getXenoTrialsSpecialStyleV147(definition);
     if (!owner || !spec || projectile.owner !== owner.side || !same(projectile.spec, spec) || projectile.power !== definition.power
@@ -219,6 +226,7 @@ function admitSnapshot(snapshot, ticket) {
     if (fighter.superMeterV148 !== undefined && (!getXenoTrialsSuperV148(definition) || !number(fighter.superMeterV148, 0, 100)
       || fighter.superMeterV148 > Math.max(0, fighter.stats.damage * .6
         + ((index ? slot.hp : definition.hp) - fighter.hp) * .4 - (fighter.stats.supersV148 || 0) * 100) + .02)) return null;
+    if (fighter.superMeterV148 === undefined && fighter.stats.supersV148 !== undefined && getXenoTrialsSuperV209(definition)) return null;
     if (fighter.contactReadyTickV180 !== undefined && !integer(fighter.contactReadyTickV180, 0, raw.tick + LIMITS.playerContactCooldownTicks)) return null;
     if (index) {
       if (!slot || fighter.id !== slot.id || fighter.maxHpV180 !== slot.hp || fighter.damageScaleV180 !== slot.damageScale

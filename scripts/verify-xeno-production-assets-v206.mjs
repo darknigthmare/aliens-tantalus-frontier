@@ -116,7 +116,7 @@ test('corrupt production bytes fail through the V205 relay without granting a ru
   assert.equal(Object.keys(runtime).some(path => path.includes('v206')), false);
   const audit = 'scripts/audit-xeno-production-assets-v206.mjs';
   assert.match(read(audit).toString(), /from '\.\/audit-xeno-standalone-v207\.mjs'/);
-  assert.doesNotMatch(read('scripts/audit-xeno-gameplay-v208.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
+  assert.doesNotMatch(read('scripts/audit-xeno-gameplay-v209.mjs').toString(), /(?:from\s*|import\s*\(?\s*)['"]\.\//);
   assert.match(read('scripts/audit-xeno-visual-assets-v205.mjs').toString(), /from '\.\/audit-xeno-production-assets-v206\.mjs'/);
   assert.equal(Object.hasOwn(inputs, audit), false); assert.equal(Object.hasOwn(successors, audit), false);
   const tests = collectReleaseTestsV143(JSON.parse(read('package.json')).scripts);

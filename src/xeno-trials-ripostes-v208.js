@@ -1,5 +1,6 @@
 import { getXenoTrialsSuperMeterV148, getXenoTrialsSuperV148 } from './xeno-trials-supers-v148.js';
 import { XENO_TRIALS_PARRY_V208, getXenoTrialsParryOpeningV208, getXenoTrialsParryReceiptV208 } from './xeno-trials-defense-v208.js';
+import { getXenoTrialsCounterV209 } from './xeno-trials-super-kits-v209.js';
 
 export const XENO_TRIALS_RIPOSTE_KIND_V208 = 'super-riposte';
 
@@ -32,7 +33,7 @@ export const XENO_TRIALS_RIPOSTES_V208 = Object.freeze([
 const byFighter = new Map(XENO_TRIALS_RIPOSTES_V208.map(move => [move.fighterId, move]));
 
 export function getXenoTrialsRiposteV208(definition) {
-  return getXenoTrialsSuperV148(definition) ? byFighter.get(definition.id) ?? null : null;
+  return getXenoTrialsSuperV148(definition) ? byFighter.get(definition.id) ?? getXenoTrialsCounterV209(definition) : null;
 }
 
 export function getXenoTrialsRiposteReadinessV208(match, fighter, definition) {

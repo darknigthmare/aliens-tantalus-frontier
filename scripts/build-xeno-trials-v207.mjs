@@ -20,13 +20,16 @@ import { getXenoTrialsRuntimeActionAtlases } from '../src/xeno-trials-action-atl
 import { getEnemyImportAnimationV107 } from '../src/enemy-import-animation-v107.js';
 import { getEnemyImportAttackV109 } from '../src/enemy-import-attacks-v109.js';
 import { XENO_TRIALS_PROJECTILE_IMAGES_V205, XENO_TRIALS_EFFECT_IMAGES_V205 } from '../src/xeno-trials-visual-assets-v205.js';
+import { getXenoTrialsPoseAssetsV209 } from '../src/xeno-trials-poses-v209.js';
+import { XENO_TRIALS_RESEARCH_V209, getXenoTrialsResearchAssetsV209 } from '../src/xeno-trials-research-v209.js';
+import { getXenoTrialsResearchLabAssetsV209 } from '../src/xeno-trials-research-lab-v209.js';
 
 const manifestPath = 'xeno-trials.webmanifest';
 const entryModule = 'src/xeno-trials-standalone.js';
 const launchPage = 'xeno-trials.html';
 const digest = value => createHash('sha256').update(value).digest('hex');
 
-export const XENO_TRIALS_BUILD_REVISION = 208;
+export const XENO_TRIALS_BUILD_REVISION = 209;
 export const xenoTrialsCacheName = fingerprint => `atf-trials-v${XENO_TRIALS_BUILD_REVISION}-${fingerprint.slice(0, 24)}`;
 
 function fighterAssets(id, variant) {
@@ -81,7 +84,10 @@ export async function planXenoTrialsBuildV207(base, info) {
   const audio = normalizeAudioManifestV77(JSON.parse(await readFile(join(base, audioManifest), 'utf8')));
   const audioSources = Object.values(audio.tracks).flatMap(tracks => Object.values(tracks).flatMap(track => track.sources));
   const audioAssets = [audioManifest, ...audioSources.map(source => required(source.path.slice(1)))];
-  const assets = new Set([...bootstrapArt, ...audioAssets]);
+  const poseAssets = getXenoTrialsPoseAssetsV209().map(path => required(path.slice(1)));
+  const researchAssets = [...getXenoTrialsResearchAssetsV209(), ...getXenoTrialsResearchLabAssetsV209()]
+    .map(path => required(path.slice(1)));
+  const assets = new Set([...bootstrapArt, ...audioAssets, ...poseAssets, ...researchAssets]);
   for (const path of modules) {
     assert.notEqual(path, 'src/app.js', 'The Trials package cannot boot the campaign application.');
     const code = await readFile(join(base, path), 'utf8');
@@ -112,11 +118,13 @@ export async function planXenoTrialsBuildV207(base, info) {
     ...fighterAssets(starter.opponentId, starter.opponentVariant), ...stageAssets(starterStage),
     ...XENO_TRIALS_STARTERS_V96.map(id => getXenoTrialsArtV96(id).path)].map(path => path.slice(1));
   const copyPaths = [...new Set([...modules, ...css, ...assets, required('LICENSE_NOTICE.md')])].sort();
-  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt].map(path => '/' + path);
+  const shellPaths = [manifestPath, audioManifest, ...modules, ...css, ...bootstrapArt, ...starterArt, ...poseAssets].map(path => '/' + path);
   // AudioAssetBankV77 uses the stamped sound hash in the request URL.
   const audioUrls = audioSources.map(({ path, sha256 }) => `${path}?v=${sha256.slice(0, 16)}`);
   const shell = ['/', ...[...new Set([...shellPaths, ...audioUrls])].sort()];
-  return { html: pageWithWorker(html), copyPaths, shell, fighters: XENO_TRIALS_FIGHTERS_V96.length, stages: XENO_TRIALS_STAGES_V96.length };
+  const researchFighters = new Set(XENO_TRIALS_RESEARCH_V209.map(dossier => dossier.fighterId).filter(Boolean)).size;
+  return { html: pageWithWorker(html), copyPaths, shell, fighters: XENO_TRIALS_FIGHTERS_V96.length,
+    researchFighters, stages: XENO_TRIALS_STAGES_V96.length };
 }
 
 export function xenoTrialsWorkerV207(baseWorker, cacheName, shell) {
@@ -178,7 +186,8 @@ export async function buildXenoTrialsV207(root) {
   const files = await fileManifestV143(output);
   const { version, sourceCommit, buildId, builtAt, saveSchema } = info;
   const result = { product: 'xeno-trials', revision: XENO_TRIALS_BUILD_REVISION, version, sourceCommit, buildId, builtAt, cacheName, saveSchema,
-    baseManifestSha256: info.manifestSha256, manifestSha256: digest(JSON.stringify(files)), fighters: plan.fighters, stages: plan.stages, files };
+    baseManifestSha256: info.manifestSha256, manifestSha256: digest(JSON.stringify(files)), fighters: plan.fighters,
+    researchFighters: plan.researchFighters, stages: plan.stages, files };
   await writeFile(join(output, 'build-info.json'), JSON.stringify(result, null, 2) + '\n');
   return result;
 }

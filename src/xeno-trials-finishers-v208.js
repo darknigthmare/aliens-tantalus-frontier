@@ -3,6 +3,7 @@ import { getXenoTrialsBootLockV208, getXenoTrialsCircuitLockV208 } from './xeno-
 import { XENO_TRIALS_ARENA_V105 } from './xeno-trials-geometry-v105.js';
 import { hasXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { getXenoTrialsStageHazardV188 } from './xeno-trials-stage-hazards-v188.js';
+import { XENO_TRIALS_FINISHER_COPY_V209 } from './xeno-trials-finishers-v209.js';
 
 const cultist = 'dd-darwin-era-cultist';
 const commando = 'import-game-dd-wy-commando';
@@ -28,6 +29,7 @@ const empty = Object.freeze([]);
 const arcTiming = Object.freeze({ approachMs: 300, holdMs: 570, retreatMs: 440 });
 const bootTiming = Object.freeze({ approachMs: 320, holdMs: 300, retreatMs: 360 });
 const copy = Object.freeze({
+  ...XENO_TRIALS_FINISHER_COPY_V209,
   claw: Object.freeze({ button: 'F · VERROU FINAL', offered: 'Victoire confirmée. Verrou final disponible avec F.', playing: 'Verrou final en cours.' }),
   boot: Object.freeze({ button: 'F · APPUI DE CONTRÔLE', offered: 'Victoire confirmée. Appui de contrôle disponible avec F.', playing: 'Appui de contrôle en cours.' }),
   circuit: Object.freeze({ button: 'F · ISOLER LE CIRCUIT', offered: 'Victoire confirmée. Isolation du circuit disponible avec F.', playing: 'Isolation du circuit en cours.' })

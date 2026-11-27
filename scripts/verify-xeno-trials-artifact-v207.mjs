@@ -30,6 +30,7 @@ export async function verifyXenoTrialsArtifactV207(root) {
   const html = await readFile(join(output, 'index.html'), 'utf8');
   assert.equal(html, stampXenoTrialsHtmlV207(plan.html, release));
   assert.equal(info.fighters, plan.fighters);
+  assert.equal(info.researchFighters, plan.researchFighters);
   assert.equal(info.stages, plan.stages);
   const copied = new Set(plan.copyPaths.filter(path => path !== releasePath));
   assert.deepEqual(shipped.map(row => row.path), [...copied, releasePath, 'index.html', 'sw.js', 'xeno-trials.webmanifest'].sort());
@@ -60,7 +61,8 @@ export async function verifyXenoTrialsArtifactV207(root) {
   assert.equal(manifest.start_url, '/');
   assert.equal(manifest.scope, '/');
   for (const icon of manifest.icons) assert.ok(paths.has(icon.src), `Missing Trials install icon: ${icon.src}`);
-  return { ok: true, revision: info.revision, buildId: info.buildId, sourceCommit: info.sourceCommit, fighters: info.fighters, stages: info.stages,
+  return { ok: true, revision: info.revision, buildId: info.buildId, sourceCommit: info.sourceCommit, fighters: info.fighters,
+    researchFighters: info.researchFighters, stages: info.stages,
     files: shipped.length, bytes: shipped.reduce((sum, file) => sum + file.bytes, 0), shell: plan.shell.length, manifestSha256: info.manifestSha256 };
 }
 
