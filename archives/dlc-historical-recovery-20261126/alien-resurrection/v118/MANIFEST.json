@@ -1,0 +1,29 @@
+{
+  "archiveId": "alien-resurrection/v118",
+  "originalFilename": "ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip",
+  "bytes": 14115619,
+  "sha256": "345788c5e15b89272389fb983b2a30fbf76734c4cf508b04b7e6d95c8d470517",
+  "format": "zip",
+  "preservation": "exact-original-bytes",
+  "memberCount": 351,
+  "pngOccurrences": 304,
+  "zipCrc32": "pass-all-members",
+  "parts": [
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part001",
+      "offset": 0,
+      "bytes": 10485760,
+      "sha256": "33d382f24d779250c679a416051a137cded52e8e68de035b6797ffb95bd0d238",
+      "gitBlobSha1": "54af39ea29d5ad724661745203d8467acfdcf8af"
+    },
+    {
+      "path": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ALIEN_RESURRECTION_ASSETS_ANIMES_V118.zip.part002",
+      "offset": 10485760,
+      "bytes": 3629859,
+      "sha256": "55634ec19fdea11c07132bdbfff6bca0337131f501aa76b37b2d81409f486998",
+      "gitBlobSha1": "0e61d88c6d64d2eaad36a8e24aef2d03046ecbbe"
+    }
+  ],
+  "contents": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/ZIP_CONTENTS.json",
+  "manifest": "archives/dlc-historical-recovery-20261126/alien-resurrection/v118/MANIFEST.json"
+}

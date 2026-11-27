@@ -1,3 +1,4 @@
+import './verify-historical-archive-admissions-20261126.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -19,6 +20,8 @@ import { AVP_HOST_BASELINE_20261125 as baseline, AVP_HOST_SUCCESSORS_20261125 as
   AVP_DLC_ARCHIVE_SOURCE_BASELINE_20261126 as dlcArchiveSourceBaseline,
   AVP_DLC_ARCHIVE_SOURCE_SUCCESSORS_20261126 as dlcArchiveSourceSuccessors,
   reviewedDlcArchiveSourceHostDigest20261126 as advanceDlcArchiveSource,
+  reviewedHistoricalArchiveHostDigest20261126 as advanceHistoricalArchive,
+  AVP_HISTORICAL_ARCHIVE_SUCCESSORS_20261126 as historicalArchiveSuccessors,
   reviewedFiorinaV116HostDigest20261125 as advanceV116,
   reviewedFiorinaSpriteHostDigest20261125 as advanceSprites,
   reviewedAliensIncomingDigest20261125 as advanceAliens,
@@ -124,8 +127,8 @@ const expectedSpriteV116Paths = ['.github/workflows/fiorina-native-v114.yml',
 const verifiedPaths = [...new Set([...expectedPaths, ...expectedJoinPaths, ...expectedQualityPaths, ...Object.keys(aliensMerge), ...expectedSpritePaths, ...expectedSpriteV116Paths])];
 const firstEndpoint = path => (successors[path] || joinSuccessors[path] || qualitySuccessors[path] || aliensMerge[path] || spriteSuccessors[path]).previousSha256;
 const mergedEndpoint = path => (aliensMerge[path] || qualitySuccessors[path] || joinSuccessors[path] || successors[path])?.currentSha256;
-const finalEndpoint = path => dlcArchiveSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
-const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-source-archive) source chain/;
+const finalEndpoint = path => historicalArchiveSuccessors[path]?.currentSha256 || dlcArchiveSourceSuccessors[path]?.currentSha256 || spriteV116Successors[path]?.currentSha256 || spriteSuccessors[path]?.currentSha256 || mergedEndpoint(path);
+const brokenChain = /Broken (?:merged-Tantalus-to-AVP host|AVP-to-Fiorina host|joined-host-to-Fiorina-QA|published-AVP-to-Aliens-merge|published-merge-to-Fiorina-sprites|Fiorina-V115-to-V116|V116-to-DLC-source-archive|PR73-to-historical-archive) source chain/;
 
 test('AVP published receipts remain immutable while the exact Fiorina join verifies current bytes', () => {
   assert.equal(baseline, '001a20bdc0f9f1a3c835e84d8f3c9434bc159330');
@@ -348,12 +351,12 @@ test('DLC source archive advances only the exact public path verifier from the V
   assert.ok(Object.isFrozen(receipt));
   assert.deepEqual(Object.keys(receipt).sort(), ['currentSha256', 'previousSha256']);
   assert.equal(receipt.previousSha256, spriteSuccessors[path].currentSha256);
-  assert.equal(sha(read(path)), receipt.currentSha256);
-  assert.equal(advanceDlcArchiveSource(path, receipt.previousSha256), receipt.currentSha256);
+  assert.equal(sha(read(path)), advanceHistoricalArchive(path, receipt.currentSha256));
+  assert.equal(advanceDlcArchiveSource(path, receipt.previousSha256), advanceHistoricalArchive(path, receipt.currentSha256));
   for (const value of [receipt.currentSha256, '0'.repeat(64), undefined])
     assert.throws(() => advanceDlcArchiveSource(path, value), /Broken V116-to-DLC-source-archive source chain/);
   for (const value of [receipt.previousSha256, receipt.currentSha256])
-    assert.deepEqual(runtimeView({ [path]: value }), { [path]: receipt.currentSha256 });
+    assert.deepEqual(runtimeView({ [path]: value }), { [path]: advanceHistoricalArchive(path, receipt.currentSha256) });
   for (const path of ['src/unreviewed.js', '__proto__', 'constructor', audit])
     assert.equal(advanceDlcArchiveSource(path, 'unchanged'), 'unchanged', path);
   assert.equal(Object.hasOwn(dlcArchiveSourceSuccessors, audit), false);
