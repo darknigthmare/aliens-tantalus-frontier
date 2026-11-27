@@ -26,7 +26,8 @@ export function depositXenoTrialsAcidV152(match, projectile, ownerDefinition, x,
     || ![x, y].every(Number.isFinite) || x < arena.left || x > arena.right || y < 0) return false;
   projectile.residueV152 = true;
   const drop = { id: ++match.serial, owner: projectile.owner, x, y,
-    bornTick: match.tick, superV148: projectile.spec?.superV148 === true };
+    bornTick: match.tick, superV148: projectile.spec?.superV148 === true,
+    ...(projectile.ownerMemberV208 !== undefined ? { ownerMemberV208: projectile.ownerMemberV208 } : {}) };
   if (y === 0) settle(match, drop, arena);
   else {
     const drops = match.acidDropsV152 ||= [];
@@ -41,7 +42,8 @@ function settle(match, drop, arena) {
   pools.push({ id: drop.id, owner: drop.owner, x: drop.x,
     left: Math.max(arena.left, drop.x - tuning.radius), right: Math.min(arena.right, drop.x + tuning.radius),
     height: tuning.height, bornTick: match.tick, armedTick: match.tick + tuning.warmupTicks,
-    expiresTick: match.tick + tuning.lifetimeTicks, superV148: drop.superV148 });
+    expiresTick: match.tick + tuning.lifetimeTicks, superV148: drop.superV148,
+    ...(drop.ownerMemberV208 !== undefined ? { ownerMemberV208: drop.ownerMemberV208 } : {}) });
 }
 export function clearXenoTrialsAcidV152(match) {
   delete match.acidDropsV152; delete match.acidPoolsV152; delete match.acidNextHitV152;
@@ -49,7 +51,7 @@ export function clearXenoTrialsAcidV152(match) {
 /** One cadence per exposed actor, shared across overlapping pools. Leaving and
  * re-entering cannot reset it. Engine owns actual HP, stats, meter and verdict.
  * Impacts are collected together so both sides may die on the same fixed tick. */
-export function stepXenoTrialsAcidV152(match, dt, bounds, arena, impact, emit) {
+export function stepXenoTrialsAcidV152(match, dt, bounds, arena, impact, emit, actors = {}) {
   if (!active(match) || !Number.isFinite(dt) || dt <= 0) return;
   if (match.acidDropsV152) {
     const falling = [];
@@ -62,15 +64,17 @@ export function stepXenoTrialsAcidV152(match, dt, bounds, arena, impact, emit) {
   if (!match.acidPoolsV152) return;
   match.acidPoolsV152 = match.acidPoolsV152.filter(pool => match.tick < pool.expiresTick);
   const impacts = [];
-  for (const target of match.fighters) {
-    if (target.hp <= 0 || match.tick < (match.acidNextHitV152?.[target.side] || 0)) continue;
+  for (const target of actors.fighters || match.fighters) {
+    const actorKey = actors.actorKey?.(target) || target.side;
+    if (target.hp <= 0 || match.tick < (match.acidNextHitV152?.[actorKey] || 0)) continue;
     const box = bounds(target);
     const pool = match.acidPoolsV152.find(pool => pool.owner !== target.side && match.tick >= pool.armedTick
       && box.bottom < pool.height && box.top >= 0 && box.right > pool.left && box.left < pool.right);
     if (!pool) continue;
-    const owner = match.fighters.find(fighter => fighter.side === pool.owner);
+    const owner = [...match.fighters, ...Object.values(match.teamV208?.reserve || {})].find(fighter => fighter.side === pool.owner
+      && (pool.ownerMemberV208 === undefined || fighter.teamSlotV208 === pool.ownerMemberV208));
     if (!owner) continue;
-    (match.acidNextHitV152 ||= {})[target.side] = match.tick + tuning.intervalTicks;
+    (match.acidNextHitV152 ||= {})[actorKey] = match.tick + tuning.intervalTicks;
     impacts.push({ from: owner, to: target, power: 1, direction: 0,
       spec: { damage: tuning.damage, stun: 0, push: 0, unblockableV151: true,
         continuousV152: true, superV148: pool.superV148 }, poolIdV152: pool.id });
@@ -132,3 +136,4 @@ export function drawXenoTrialsAcidV152(ctx, match, arena, reducedMotion = false,
   }
   ctx.restore();
 }
+

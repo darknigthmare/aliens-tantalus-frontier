@@ -1,3 +1,6 @@
+import { XENO_TRIALS_TEAM_CONTROLS_V208, normalizeXenoTrialsTeamV208, attachXenoTrialsTeamV208,
+  gateXenoTrialsTeamV208, releaseXenoTrialsTeamV208, prepareXenoTrialsTeamV208,
+  stepXenoTrialsAssistsV208, getXenoTrialsAssistActorsV208, settleXenoTrialsTeamV208 } from './xeno-trials-team-v208.js';
 import { XENO_TRIALS_GRAPPLE_V153, hasXenoTrialsGrappleV153, isXenoTrialsGrappleTargetV153, canXenoTrialsGrappleV153, isXenoTrialsGrappledV153, startXenoTrialsGrappleV153, stepXenoTrialsGrappleV153, releaseXenoTrialsGrappleV153, clearXenoTrialsGrappleV153 } from './xeno-trials-grapple-v153.js';
 import { depositXenoTrialsAcidV152, stepXenoTrialsAcidV152, clearXenoTrialsAcidV152 } from './xeno-trials-acid-pools-v152.js';
 import { getXenoTrialsCasteV151, collectXenoTrialsDeathBurstsV151 } from './xeno-trials-castes-v151.js';
@@ -33,7 +36,7 @@ const emptyInput = () => Object.fromEntries(ACTIONS.map(key => [key, false]));
 const baseInput = (value, operation = false) => Object.fromEntries((operation ? [...ACTIONS, 'interact'] : ACTIONS).map(key => [key, value?.[key] === true]));
 function input(value, operation = false) {
   const normalized = baseInput(value, operation);
-  for (const name of XENO_TRIALS_MOVE_CONTROLS_V207) if (value?.[name] === true) normalized[name] = true;
+  for (const name of [...XENO_TRIALS_MOVE_CONTROLS_V207, ...XENO_TRIALS_TEAM_CONTROLS_V208]) if (value?.[name] === true) normalized[name] = true;
   return normalized;
 }
 // Preserve both physically held and already masked inputs across scene gates.
@@ -57,8 +60,11 @@ export function createXenoTrialsMatchV96(config = {}) {
   const operation = getXenoTrialsOperationV188(config.activityV119?.branch === 'operations' ? config.activityV119.id : config.operationV188?.id);
   const hordeProtocol = getXenoTrialsHordeProtocolV180(operation?.hordeProtocolId || (config.activityV119?.branch === 'horde'
     ? config.activityV119.id : config.hordeV180?.protocolId));
-  const playerId = getXenoTrialsFighterV96(config.playerId)?.id || 'warrior';
-  const opponentId = hordeProtocol?.opponentIds[0] || getXenoTrialsFighterV96(config.opponentId)?.id || 'arachnoid';
+  const team = config.teamV208 && normalizeXenoTrialsTeamV208(config.teamV208);
+  if (config.teamV208 && (!team || hordeProtocol || operation || config.activityV119))
+    throw new Error('Duo MIRE incompatible avec cette activité.');
+  const playerId = team?.playerIds[0] || getXenoTrialsFighterV96(config.playerId)?.id || 'warrior';
+  const opponentId = team?.opponentIds[0] || hordeProtocol?.opponentIds[0] || getXenoTrialsFighterV96(config.opponentId)?.id || 'arachnoid';
   const seed = (Math.trunc(finite(config.seed, 1969)) >>> 0) || 1969;
   const rulesV119 = normalizeXenoTrialsRulesV119(hordeProtocol ? hordeProtocol.rules : config.rulesV119);
   const playerVariants = getXenoTrialsFighterV96(playerId).variants, opponentVariants = getXenoTrialsFighterV96(opponentId).variants;
@@ -97,6 +103,7 @@ export function createXenoTrialsMatchV96(config = {}) {
     }
     advanceXenoTrialsHordeDirectorV180(match, (id, wave, serial, slot) => makeHordeFighterV180(match, id, wave, serial, slot));
   } else resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], 1);
+  if (team) attachXenoTrialsTeamV208(match, team, makeFighter);
   return match;
 }
 function event(match, type, extra = {}) {
@@ -158,6 +165,7 @@ export function setXenoTrialsPausedV96(match, paused) {
     if (fighter.side === 'player' || match.opponentInputSourceV163 === 'direct') {
       fighter.rearmControls = releaseGate(fighter);
       gateXenoTrialsMovesetV207(fighter);
+      gateXenoTrialsTeamV208(match, fighter.side);
     }
   }
   // Missing markers are legacy native-CPU matches. Also remove a gate written
@@ -178,6 +186,7 @@ export function releaseXenoTrialsControlsV150(match, side, controls = {}) {
     fighter.previousInput[action] = false;
   }
   releaseXenoTrialsMovesetV207(fighter, controls);
+  releaseXenoTrialsTeamV208(match, side, controls);
   return true;
 }
 function aiInput(match, dt) {
@@ -360,7 +369,7 @@ function collectAttack(match, fighter, enemy, impacts) {
   if ((other.center - body.center) * attack.facing < 0 || horizontal > spec.reach * definition.reach || !verticalOverlap) return;
   // Only an admitted human restraint changes the leap contact distance.
   // Other anatomies retain V151's ordinary hit, never a fake grab at range.
-  const wantsGrappleV153 = !match.hordeV180 && attack.kind === 'special' && hasXenoTrialsGrappleV153(definition)
+  const wantsGrappleV153 = !match.hordeV180 && !getXenoTrialsAssistActorsV208(match).includes(enemy) && attack.kind === 'special' && hasXenoTrialsGrappleV153(definition)
     && isXenoTrialsGrappleTargetV153(getXenoTrialsFighterV96(enemy.id)) && enemy.y === 0 && enemy.vy === 0;
   if (wantsGrappleV153 && horizontal > XENO_TRIALS_GRAPPLE_V153.contactGap) return;
   const grappleCandidateV153 = wantsGrappleV153 && canXenoTrialsGrappleV153(fighter, enemy, definition, getXenoTrialsFighterV96(enemy.id), getXenoTrialsBodyBoundsV105);
@@ -614,6 +623,8 @@ function fixedStep(match, playerControls, opponentControls, dt) {
     match.fighters[1].rearmControls = baseInput(opponentControls);
     gateXenoTrialsMovesetV207(match.fighters[0], playerControls);
     gateXenoTrialsMovesetV207(match.fighters[1], opponentControls || {});
+    gateXenoTrialsTeamV208(match, 'player', playerControls);
+    gateXenoTrialsTeamV208(match, 'opponent', opponentControls || {});
     if (match.phase === 'intro' || match.phase === 'round-over') {
       match.phaseTime -= dt;
       if (match.phaseTime <= 0) {
@@ -623,27 +634,48 @@ function fixedStep(match, playerControls, opponentControls, dt) {
     }
     return;
   }
+  prepareXenoTrialsTeamV208(match, playerControls, opponentControls, dt, event);
   const [a, b] = match.fighters;
   const order = a.x <= b.x ? 1 : -1;
   fighterStep(match, a, b, playerControls, dt);
   fighterStep(match, b, a, opponentControls || reactToLowStrikeV207(match, b, a, aiInput(match, dt)), dt);
   resolveXenoTrialsBodiesV105(a, b, order);
   const impactOrder = a.x <= b.x ? 1 : -1;
-  const livingAtStart = new Map(match.fighters.filter(f => f.hp > 0).map(f => [f, getXenoTrialsCasteV151(getXenoTrialsFighterV96(f.id))]));
+  stepXenoTrialsAssistsV208(match, dt, fighterStep);
+  const combatActors = [...match.fighters, ...getXenoTrialsAssistActorsV208(match)];
+  const livingAtStart = new Map(combatActors.filter(f => f.hp > 0).map(f => [f, getXenoTrialsCasteV151(getXenoTrialsFighterV96(f.id))]));
   const impacts = [];
-  // Capture both hit windows before applying damage: simultaneous KOs are legal.
-  collectAttack(match, a, b, impacts); collectAttack(match, b, a, impacts);
+  // Native contacts remain one-hit attacks. An exposed assist can be hit first.
+  if (match.teamV208) {
+    for (const attacker of combatActors) {
+      const beforeProjectiles = match.projectiles.length;
+      for (const target of combatActors.filter(f => f.side !== attacker.side)
+        .sort((left, right) => getXenoTrialsBodyGapV105(attacker, left) - getXenoTrialsBodyGapV105(attacker, right)))
+        collectAttack(match, attacker, target, impacts);
+      for (const projectile of match.projectiles.slice(beforeProjectiles)) projectile.ownerMemberV208 = attacker.teamSlotV208;
+    }
+  } else { collectAttack(match, a, b, impacts); collectAttack(match, b, a, impacts); }
   for (const projectile of match.projectiles) {
     const previous = { x: projectile.x, y: projectile.y };
     const travel = Math.min(dt, Math.max(0, projectile.life));
     projectile.x += (projectile.vx ?? projectile.direction * 560) * travel;
     projectile.y += (projectile.vy || 0) * travel; projectile.life -= dt;
-    const target = projectile.owner === 'player' ? b : a, owner = projectile.owner === 'player' ? a : b;
-    const body = getXenoTrialsHurtBoundsV207(target);
-    const contact = projectile.signatureIdV147
-      ? xenoTrialsSegmentContactV147(previous.x, previous.y, projectile.x, projectile.y, body, projectile.radiusV147)
-      : Math.max(previous.x, projectile.x) >= body.left - 9 && Math.min(previous.x, projectile.x) <= body.right + 9
-        && projectile.y >= body.bottom && projectile.y <= body.top ? 0 : null;
+    const activeOwner = projectile.owner === 'player' ? a : b;
+    const owner = match.teamV208 && projectile.ownerMemberV208 !== undefined
+      ? [activeOwner, match.teamV208.reserve[projectile.owner]].find(actor => actor.teamSlotV208 === projectile.ownerMemberV208) || activeOwner
+      : activeOwner;
+    const targets = combatActors.filter(fighter => fighter.side !== projectile.owner && fighter.hp > 0);
+    const hits = targets.map(target => {
+      const body = getXenoTrialsHurtBoundsV207(target);
+      const contact = projectile.signatureIdV147 || match.teamV208
+        ? xenoTrialsSegmentContactV147(previous.x, previous.y, projectile.x, projectile.y, body,
+          projectile.radiusV147 || 9)
+        : Math.max(previous.x, projectile.x) >= body.left - 9 && Math.min(previous.x, projectile.x) <= body.right + 9
+          && projectile.y >= body.bottom && projectile.y <= body.top ? 0 : null;
+      return { target, contact };
+    }).filter(hit => hit.contact !== null).sort((left, right) => left.contact - right.contact);
+    const target = hits[0]?.target || (projectile.owner === 'player' ? b : a);
+    const contact = hits[0]?.contact ?? null;
     // Signature trajectories cannot continue below the collision floor.
     const groundContact = projectile.y < 0 && previous.y >= 0 ? previous.y / (previous.y - projectile.y) : Infinity;
     if (travel > 0 && contact !== null && contact <= groundContact) {
@@ -664,13 +696,24 @@ function fixedStep(match, playerControls, opponentControls, dt) {
   match.projectiles = match.projectiles.filter(p => p.life > 0 && p.x > XENO_TRIALS_ARENA_V96.left - 200 && p.x < XENO_TRIALS_ARENA_V96.right + 200);
   for (const impact of impacts) applyImpact(match, impact);
   stepXenoTrialsAcidV152(match, dt, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96,
-    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+    impact => applyImpact(match, impact), (type, details) => event(match, type, details),
+    match.teamV208 ? { fighters: combatActors, actorKey: fighter => `${fighter.side}:${fighter.teamSlotV208}` } : undefined);
   stepXenoTrialsGrappleV153(match, getXenoTrialsBodyBoundsV105,
     impact => applyImpact(match, impact), (type, details) => event(match, type, details));
-  collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
-    impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+  // Death bursts include the real assisting bodies for this synchronous pass.
+  // The public active pair remains exactly two entries outside the helper.
+  const activePair = match.fighters;
+  try {
+    if (match.teamV208) match.fighters = combatActors;
+    collectXenoTrialsDeathBurstsV151(match, livingAtStart, getXenoTrialsBodyBoundsV105,
+      impact => applyImpact(match, impact), (type, details) => event(match, type, details));
+  } finally { match.fighters = activePair; }
   resolveXenoTrialsBodiesV105(a, b, impactOrder);
   match.timeRemaining = Math.max(0, match.timeRemaining - dt);
+  if (settleXenoTrialsTeamV208(match, playerControls, opponentControls, event,
+    value => { clearXenoTrialsAcidV152(value); clearXenoTrialsGrappleV153(value); })) {
+    resolveXenoTrialsBodiesV105(match.fighters[0], match.fighters[1], impactOrder); return;
+  }
   if (a.hp <= 0 || b.hp <= 0) finishRound(match, a.hp <= 0 && b.hp <= 0 ? 'double-ko' : 'ko');
   else if (match.timeRemaining <= 0) finishRound(match, 'time');
 }
@@ -770,3 +813,4 @@ export function restoreXenoTrialsHordeMatchV180(snapshot) {
   value.config = canonical.config;
   return value;
 }
+

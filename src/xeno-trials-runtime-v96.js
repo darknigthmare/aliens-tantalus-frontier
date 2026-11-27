@@ -1,3 +1,4 @@
+import { getXenoTrialsAssistActorsV208, getXenoTrialsTeamViewV208 } from './xeno-trials-team-v208.js';
 import { createXenoTrialsPracticeV207 } from './xeno-trials-practice-v207.js';
 import { getXenoTrialsLowScaleV207, getXenoTrialsStrikeBandV207, XENO_TRIALS_EVADE_V207 } from './xeno-trials-moveset-v207.js';
 import { createXenoTrialsOutroV155, advanceXenoTrialsOutroV155, skipXenoTrialsOutroV155,
@@ -57,7 +58,7 @@ import { createXenoTrialsOptionalImagesV205, drawXenoTrialsProjectileV205, drawX
 const KEY_ACTION = Object.freeze({ ArrowLeft: 'left', KeyQ: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right',
   ArrowUp: 'jump', KeyZ: 'jump', KeyW: 'jump', Space: 'jump', ArrowDown: 'guard', KeyS: 'guard',
   KeyC: 'crouch', ShiftLeft: 'evade', ShiftRight: 'evade', KeyU: 'antiAir',
-  KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super', KeyE: 'interact' });
+  KeyR: 'tag', KeyH: 'assist', KeyJ: 'light', KeyK: 'heavy', KeyL: 'special', KeyI: 'super', KeyE: 'interact' });
 const ACTIONS = new Set(Object.values(KEY_ACTION));
 const CHECKPOINT_MILESTONES = new Set(['round-end', 'round-start', 'wave-clear', 'wave-start', 'operation-objective', 'operation-delivery']);
 const CHECKPOINT_RETRY_DELAY = .5;
@@ -148,6 +149,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   let operationSceneV204 = null;
   const snapshot = () => ({ ...getXenoTrialsSnapshotV96(match), presentation: presentationView(),
     ...(practiceV207 ? { practiceV207: practiceV207.view() } : {}),
+    ...(match.teamV208 ? { teamViewV208: getXenoTrialsTeamViewV208(match) } : {}),
     audioV189: sound.getState(),
     stageSceneV190: { rear: stageSceneRearV190, front: stageSceneFrontV190 },
     stageSceneV192: { rear: stageSceneRearV192, front: stageSceneFrontV192 },
@@ -202,7 +204,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
   const stage = XENO_TRIALS_STAGES_V96.find(s => s.id === match.config.stageId);
   canvas.width = XENO_TRIALS_ARENA_V96.width; canvas.height = XENO_TRIALS_ARENA_V96.height;
   canvas.setAttribute?.('data-xeno-display-scale-v110', String(displayScale));
-  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Flèches pour se déplacer, J K L pour attaquer, I pour le super chargé, S pour la garde, T pour un défi de présentation, P pour la pause.');
+  canvas.tabIndex = 0; canvas.setAttribute?.('aria-label', 'Xeno Trials : duel 2D. Duo : R relève, H assistance. Flèches pour se déplacer, J K L pour attaquer, I pour le super chargé, S pour la garde, T pour un défi de présentation, P pour la pause.');
 
   function listen(target, type, handler, settings) {
     if (!target?.addEventListener) return;
@@ -227,7 +229,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     const saveablePhase = match.phase === 'active' || !hordeProtocol && match.phase === 'round-over';
     // Later round countdowns present an already committed combat transition.
     const waitingForFirstFight = presentationView().blocksSimulation && (hordeProtocol || match.round === 1);
-    if (practiceV207 || checkpointing || !loaded || assetFailure || stopped || match.result || !saveablePhase
+    if (practiceV207 || match.teamV208 || checkpointing || !loaded || assetFailure || stopped || match.result || !saveablePhase
       || waitingForFirstFight || typeof options.onCheckpoint !== 'function') return false;
     const retry = reason === 'periodic' && checkpointRetry?.delay <= 0 ? checkpointRetry : null;
     if (retry) reason = 'milestone-retry';
@@ -558,10 +560,11 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       context.save(); context.globalAlpha *= ghost.opacity; drawFighter(ghost.fighter, ghost.cue); context.restore();
     }
     const pairedAttacker = finisherViewV207?.lock.attacker ?? captureViewV163?.attacker;
-    for (const fighter of [...match.fighters].sort((a, b) => pairedAttacker
+    for (const fighter of [...match.fighters, ...getXenoTrialsAssistActorsV208(match)].sort((a, b) => pairedAttacker
       ? Number(a === pairedAttacker) - Number(b === pairedAttacker) : a.y - b.y)) {
       if (finisherViewV207) drawFinisherFighter(fighter);
       else drawFighter(fighter);
+      if (getXenoTrialsAssistActorsV208(match).includes(fighter)) text('APPUI', fighter.x, 450 - fighter.y - 36, 12, '#aee8d4', 'center');
     }
     if (!hordeProtocol) drawXenoTrialsGrappleV153(context, match, getXenoTrialsBodyBoundsV105, XENO_TRIALS_ARENA_V96.floor,
       {showLegacyContactLine:!Boolean(captureViewV163&&rigDrawsV154.get(captureViewV163.target.side)?.captureV163)});
@@ -889,7 +892,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
       if (!match.paused && match.phase === 'round-over' && match.phaseTime <= 0) nextXenoTrialsRoundV96(match);
       const roundStarted = match.round !== beforeRound;
       if (roundStarted) prepareRoundPresentation();
-      if (match.phase === 'match-over' && !hordeProtocol) {
+      if (match.phase === 'match-over' && !hordeProtocol && !match.teamV208) {
         const reducedMotion = reduceMotion();
         outroV155 = createXenoTrialsPilotOutroV197(match, createXenoTrialsOutroV155(match, reducedMotion), reducedMotion);
         terminalV156 = createXenoTrialsTerminalV156(match, 'draw', reducedMotion);
@@ -938,7 +941,7 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     loading = (async () => {
       render(); notify(true);
       if (stopped) return false;
-      const preloadFighters = hordeProtocol ? [match.fighters[0], ...hordeProtocol.opponentIds.map(id => ({ id }))] : match.fighters;
+      const preloadFighters = hordeProtocol ? [match.fighters[0], ...hordeProtocol.opponentIds.map(id => ({ id }))] : [...match.fighters, ...Object.values(match.teamV208?.reserve || {})];
       const paths = [...new Set(preloadFighters.map(f => getXenoTrialsArtV96(f.id, f.variant).path))];
       const allPaths = [...new Set([...paths,...(stage.backdrop?[stage.backdrop]:[]),...getXenoTrialsStageAssetsV180(stage.id),...getXenoTrialsStageAssetsV190(stage.id),
         ...getXenoTrialsFranchiseStageAssetsV192(stage.id),
@@ -1012,3 +1015,4 @@ export function createXenoTrialsRuntimeV96(options = {}) {
     }
   });
 }
+
