@@ -231,7 +231,7 @@ export const XENO_GAMEPLAY_SUCCESSORS_V208 = freeze({
   },
   "xeno-trials-fullscreen-v119.css": {
     "kind": "runtime",
-    "sha256": "5e465646d371cab8a067cf5ed2f261d830d43e85efec657330048ff6d0fd9a1e",
+    "sha256": "c01e7366288f8aec02fbea59d5109c26141c3d4aad7ff883af2688d4e7a86590",
     "previousSha256": "52b15b5c7f4220be07e7c99ac489511f716632e669a57ef78950d54da9987ef8"
   },
   "xeno-trials-v96.css": {

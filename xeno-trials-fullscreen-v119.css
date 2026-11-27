@@ -157,11 +157,18 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
 /* A short landscape operation has its own instrument rail. The world gets a
    real, separate viewport; controls never cover a body or the contact line. */
 @media(orientation:landscape) and (max-height:520px){
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]{--xt-operation-rail:min(38vw,320px);height:100dvh;min-height:0;max-height:100dvh}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-step="combat"][data-xt-operation="true"]{
+    --xt-operation-rail:min(38vw,320px);
+    --xt-operation-control-height:44px;
+    --xt-operation-control-gap:4px;
+    --xt-operation-control-bottom:60px;
+    --xt-operation-controls:calc(4 * var(--xt-operation-control-height) + 3 * var(--xt-operation-control-gap));
+    height:100dvh;min-height:0;max-height:100dvh
+  }
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] :is(.xt-layout,.xt-main,[data-xt="combat-panel"]){min-height:0;max-height:100%;height:100%}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena{inset:0 var(--xt-operation-rail) 0 0;width:calc(100% - var(--xt-operation-rail));height:100%;min-height:0;max-height:100%}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-arena canvas{width:100%!important;height:100%!important;min-height:0;max-width:100%;max-height:100%!important;object-fit:contain;aspect-ratio:auto;margin:0}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-hud[data-horde="true"]{left:auto;right:6px;top:6px;width:calc(var(--xt-operation-rail) - 12px);box-sizing:border-box;max-height:calc(100dvh - 204px);overflow:auto;overscroll-behavior:contain;pointer-events:auto;grid-template-columns:minmax(0,1fr) 48px;padding:6px;gap:4px 8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-match-hud[data-horde="true"]{left:auto;right:6px;top:6px;width:calc(var(--xt-operation-rail) - 12px);box-sizing:border-box;max-height:calc(100dvh - var(--xt-operation-control-bottom) - var(--xt-operation-controls) - 12px);overflow:auto;overscroll-behavior:contain;pointer-events:auto;grid-template-columns:minmax(0,1fr) 48px;padding:6px;gap:4px 8px}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals{grid-template-rows:auto auto 6px auto 3px;gap:2px}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>.xt-side{display:none}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-vitals>strong{font-size:10px;min-height:0;line-height:1.2}
@@ -180,8 +187,8 @@ html.xt-fullscreen-v119 #xeno-trials-v96.active{
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>span{display:none}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188>div>strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-operation-hud-v188 [data-xt="operation-hazard"]{font-size:8px;line-height:1.25}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));left:auto;right:6px;width:calc(var(--xt-operation-rail) - 12px);bottom:60px;gap:4px}
-  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls button{min-height:44px;min-width:0;padding:5px 2px;font-size:8px}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,var(--xt-operation-control-height));left:auto;right:6px;width:calc(var(--xt-operation-rail) - 12px);bottom:var(--xt-operation-control-bottom);gap:var(--xt-operation-control-gap)}
+  .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls button{min-height:var(--xt-operation-control-height);min-width:0;padding:5px 2px;font-size:8px}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="super"]{grid-column:3/span 2;grid-row:3}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls [data-xeno-action="interact"]{grid-column:1/span 2;grid-row:3;font-size:9px}
   .xt-fullscreen-v119 #xeno-trials-v96[data-xt-operation="true"] .xt-controls:has([data-xeno-action="super"][hidden]) [data-xeno-action="interact"]{grid-column:1/-1}
